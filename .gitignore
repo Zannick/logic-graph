@@ -6,5 +6,6 @@ __pycache__/
 .*.sw*
 *.o
 bin/
+generated/
 *.interp
 *.tokens

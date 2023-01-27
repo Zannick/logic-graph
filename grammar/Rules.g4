@@ -4,8 +4,8 @@ accessRule
     : '(' accessRule ')'
     | accessRule AND accessRule
     | accessRule OR accessRule
-    | meta
     | invoke
+    | meta
     | cond
     | cmp
     | item
@@ -30,19 +30,19 @@ cond    : IF '(' accessRule ')' '{' accessRule '}'
         | '(' accessRule IF accessRule ELSE accessRule ')'  # PyTernary
         ;
 
-cmp : value '==' int    # IntEq
+cmp : value '==' num    # IntEq
     | value '==' LIT    # LitEq
-    | value '!=' int    # IntNeq
+    | value '!=' num    # IntNeq
     | value '!=' LIT    # LitNeq
-    | value '>=' int    # Geq
-    | value '<=' int    # Leq
-    | value '<' int     # Lt
-    | value '>' int     # Gt
-    | value '&' int     # FlagMatch
+    | value '>=' num    # Geq
+    | value '<=' num    # Leq
+    | value '<' num     # Lt
+    | value '>' num     # Gt
+    | value '&' num     # FlagMatch
     | REF '==' ITEM     # RefEq
     ;
 
-int : INT | CONST ;
+num : INT | CONST ;
 
 value   : SETTING '[' LIT ']'   # SettingSubscript
         | SETTING               # Setting
