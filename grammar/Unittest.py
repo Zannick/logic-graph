@@ -16,29 +16,29 @@ from antlr4 import InputStream, CommonTokenStream
 
 class StringVisitor(RulesVisitor):
 
-    def visitAccessRule(self, ctx):
+    def visitBoolExpr(self, ctx):
         try:
             if ctx.OR():
-                return f'OR[ {self.visit(ctx.accessRule(0))} , {self.visit(ctx.accessRule(1))} ]'
+                return f'OR[ {self.visit(ctx.boolExpr(0))} , {self.visit(ctx.boolExpr(1))} ]'
             elif ctx.AND():
-                return f'AND[ {self.visit(ctx.accessRule(0))} , {self.visit(ctx.accessRule(1))} ]'
+                return f'AND[ {self.visit(ctx.boolExpr(0))} , {self.visit(ctx.boolExpr(1))} ]'
             elif ctx.TRUE():
                 return 'TRUE'
             elif ctx.FALSE():
                 return 'FALSE'
-            elif ctx.accessRule():
-                return self.visit(ctx.accessRule(0))
+            elif ctx.boolExpr():
+                return self.visit(ctx.boolExpr(0))
             else:
-                return super().visitAccessRule(ctx)
+                return super().visitBoolExpr(ctx)
         except AttributeError as e:
             raise AttributeError(str(e) + '; ' + ' '.join(
                 f'[{c.toStringTree(ruleNames = RulesParser.ruleNames)}]'
-                for c in ctx.accessRule()))
+                for c in ctx.boolExpr()))
 
     def visitMeta(self, ctx):
         lit = ctx.LIT()
         func = str(ctx.FUNC())[1:]
-        return f'Meta:{func}( {str(lit) + " , " if lit else ""}{self.visit(ctx.accessRule())} )'
+        return f'Meta:{func}( {str(lit) + " , " if lit else ""}{self.visit(ctx.boolExpr())} )'
 
     def visitInvoke(self, ctx):
         items = ctx.ITEM()
@@ -61,10 +61,10 @@ class StringVisitor(RulesVisitor):
         return p1 + f' ELSE{{ {self.visit(el)} }}'
 
     def visitIfThenElse(self, ctx):
-        return self._visitConditional(*ctx.accessRule())
+        return self._visitConditional(*ctx.boolExpr())
 
     def visitPyTernary(self, ctx):
-        return self._visitConditional(ctx.accessRule(1), ctx.accessRule(0), ctx.accessRule(2))
+        return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
         return f'{self.visit(ctx.value())} {ctx.getChild(1)} {ctx.LIT() or self.visit(ctx.num())}'
@@ -103,7 +103,7 @@ class StringVisitor(RulesVisitor):
     def visitOneArgument(self, ctx):
         return f'Arg:{str(ctx.REF())[1:]}'
 
-    def visitNum(self, ctx):
+    def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
         return f'Const:{ctx.CONST()}'
@@ -114,7 +114,7 @@ def parse(text):
     lexer = RulesLexer(ts)
     stream = CommonTokenStream(lexer)
     parser = RulesParser(stream)
-    tree = parser.accessRule()
+    tree = parser.boolExpr()
     return tree, parser
 
 
@@ -126,14 +126,14 @@ class TestGrammar(unittest.TestCase):
     def testMeta(self):
         text = '$here($can_use(Progressive_Hookshot)) or $is_child'
         t, p = parse(text)
-        exp = '(accessRule (accessRule (meta $here ( (accessRule (invoke $can_use ( Progressive_Hookshot ))) ))) or (accessRule (invoke $is_child)))'
+        exp = '(boolExpr (boolExpr (meta $here ( (boolExpr (invoke $can_use ( Progressive_Hookshot ))) ))) or (boolExpr (invoke $is_child)))'
         self.assertEqual(exp, t.toStringTree(recog=p))
 
     def testSetting(self):
         text = "deadly_bonks != 'ohko' or Fairy"
         t, p = parse(text)
         # toStringTree can only get rule names
-        exp = "(accessRule (accessRule (cmp (value deadly_bonks) != 'ohko')) or (accessRule (item Fairy)))"
+        exp = "(boolExpr (boolExpr (cmp (value deadly_bonks) != 'ohko')) or (boolExpr (item Fairy)))"
         self.assertEqual(exp, t.toStringTree(recog=p))
 
     def testMetaFuncVisit(self):
@@ -187,7 +187,7 @@ class TestOoTR(unittest.TestCase):
                 func = s
                 args = baseargs
             funcs.append(func)
-            r = re.sub(r'\b(' + '|'.join(args) + r')\b', r'@\1', rule)
+            r = re.sub(r'\b(' + '|'.join(args) + r')\b', r'^\1', rule)
             if r not in rules:
                 rules[r] = func
 
@@ -202,11 +202,11 @@ class TestOoTR(unittest.TestCase):
         for reg in regions:
             for loc, r in itertools.chain(reg.get("locations", {}).items(),
                                           reg.get("events", {}).items()):
-                r = ba.sub(r'@\1', r)
+                r = ba.sub(r'^\1', r)
                 if r not in rules:
                     rules[r] = loc
             for ex, r in reg.get("exits", {}).items():
-                r = ba.sub(r'@\1', r)
+                r = ba.sub(r'^\1', r)
                 if r not in rules:
                     rules[r] = f'{reg["region_name"]} -> {ex}'
 

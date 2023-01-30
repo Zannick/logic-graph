@@ -1,0 +1,187 @@
+name: Kokiri Forest
+# Or, the name is from the file itself?
+short: KF
+
+# The file is a region/dungeon and should be a list of Areas.
+# Areas have Spots. Spots have locations, actions, and exits.
+
+# TODO: warp point updates
+
+areas:
+- name: Link's House
+  spots:
+    - name: Start Point
+      coord: [0,0]
+      # For exits, generally we omit the other local spots and assume connectivity
+      # distance is calculated based on coordinates (and movement speed)
+    - name: Entry
+      coord: [0,2]
+      exits:
+        # names can be short-form to other local spots
+        # or expanded to specify a spot in another area or region
+        - to: Kokiri Village > Link's Porch
+          tags: [load, exterior]
+
+- name: Kokiri Village
+  spots:
+    - name: Link's Porch
+      coord: [12, 26]
+      exits:
+        - to: Link's House > Entry
+          tags: [load, interior]
+        # Generally we omit the other local spots and assume connectivity
+        # if it's not a straight shot, though, we can add a delay or intermediate points
+        - to: Know-it-all Porch
+          thru: [11, 20]
+        - to: Training Center
+          thru: [11, 20]
+        - to: Mido's Guardpost
+          thru: [13, 23]
+    - name: Mido's Porch
+      coord: [10, 18]
+      exits:
+        - to: Mido's House > Entry
+          tags: [load, interior]
+    - name: Know-it-all Porch
+      coord: [7, 21]
+      exits:
+        - to: Know-it-all House > Entry
+          tags: [load, interior]
+    - name: Training Center
+      coord: [8, 25]
+      exits:
+        - to: Boulder Maze > Entry
+          req: $is_child
+          time: 6
+    - name: Shop Porch
+      coord: [20, 18]
+      exits:
+        - to: Shop > Entry
+          tags: [load, interior]
+    - name: Mido's Guardpost
+      coord: [23, 20]
+      locations:
+        - name: Show Mido
+          # Permanent events can be written as locations that give items
+          # Anything toggleable or changeable needs to be a context value
+          item: Showed_Mido
+          req: $is_child and Kokiri_Sword and $Deku_Shield
+          tags: [event]
+      exits:
+        - to: Baba Corridor > Village Side
+          req: $is_adult or Showed_Mido
+
+- name: Boulder Maze
+  spots:
+    - name: Entry
+      coord: [8, 28]
+      exits:
+        - to: Kokiri Village > Training Center
+          req: $is_child
+          time: 6
+    - name: Reward
+      coord: [10, 31]
+      locations:
+        - name: Chest
+          item: Kokiri_Sword
+          tags: [big]
+
+- name: Baba Corridor
+  spots:
+    - name: Village Side
+      coord: [24, 20]
+      exits:
+        - to: Kokiri Village > Mido's Guardpost
+    - name: Deku Babas
+      coord: [28, 17]
+      locations:
+        - name: Sticks
+          item: Deku_Stick_Drop
+          req: $is_adult or Kokiri_Sword or Boomerang
+        - name: Nuts
+          item: Deku_Nut_Drop
+          req: $is_adult
+    - name: Tree Side
+      coord: [31, 14]
+      exits:
+        - to: Outside Deku Tree > Entry
+
+- name: Outside Deku Tree
+  spots:
+    - name: Entry
+      coord: [32, 14]
+      exits:
+        - to: Baba Corridor > Tree Side
+    - name: Left
+      coord: [39, 10]
+      locations:
+        - name: Gossip Stone
+          tags: [hint]
+    - name: Right
+      coord: [42, 17]
+      locations:
+        - name: Gossip Stone
+          tags: [hint]
+    - name: Mouth
+      coord: [39, 14]
+      exits:
+        - to: Deku Tree > Lobby > Entry
+          tags: [load, dungeon, interior]
+
+- name: Mido's House
+  spots:
+    - name: Entry
+      locations:
+      - name: Top Left Chest
+        item: Rupees_5
+      - name: Top Right Chest
+        item: Rupees_50  # just to make it easier
+      - name: Bottom Left Chest
+        item: Rupee_1
+      - name: Bottom Right Chest
+        item: Recovery_Heart
+      exits:
+        - to: Kokiri Village > Mido's Porch
+          tags: [load, exterior]
+
+- name: Know-it-all House
+  spots:
+    - name: Entry
+      exits:
+        - to: Kokiri Village > Know-it-all Porch
+          tags: [load, exterior]
+
+- name: Shop
+  spots:
+    - name: Entry
+      locations:
+        - name: Blue Rupee
+          item: Rupees_5
+          tags: [standing]
+        - name: Item 1
+          item: Buy_Deku_Shield
+          cost: 40
+        - name: Item 2
+          item: Buy_Deku_Nut_5
+          cost: 15
+        - name: Item 3
+          item: Buy_Deku_Nut_10
+          cost: 30
+        - name: Item 4
+          item: Buy_Deku_Stick_1
+          cost: 10
+        - name: Item 5
+          item: Buy_Deku_Seeds_30
+          cost: 30
+        - name: Item 6
+          item: Buy_Arrows_10
+          cost: 20
+        - name: Item 7
+          item: Buy_Arrows_30
+          cost: 60
+        - name: Item 8
+          item: Buy_Heart
+          cost: 10
+      exits:
+        - to: Kokiri Village > Shop Porch
+          tags: [load, exterior]

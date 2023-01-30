@@ -1,0 +1,319 @@
+name: Deku Tree
+here:
+  save: Lobby > Entry
+  death: Lobby > Entry
+
+areas:
+## 1st floor
+- name: Lobby
+  spots:
+    - name: Entry
+      # 3-dimensional coords?
+      coord: [0,0]
+    - name: Center
+      coord: [0,1]
+      locations:
+        - name: Deku Baba Sticks
+          item: Deku_Stick_Drop
+          req: $is_adult or Kokiri_Sword or Boomerang
+        - name: Deku Baby Nuts
+          item: Deku_Nut_Drop
+          req: $is_adult or Slingshot or $Sticks or Kokiri_Sword # there's more usually
+        - name: Web
+          tags: [event]
+          item: Deku_Lobby_Web  # awkward to have this in multiple places, eh?
+          req: False
+      exits:
+        - to: Basement 1 > Center
+          req: Deku_Lobby_Web
+          time: 2
+        - to: Basement Ledge > Block
+          req: Deku_Lobby_Web and logic_deku_b1_skip
+          time: 5
+    - name: Vines
+      coord: [0,2]
+      exits:
+        - to: Floor 2 > Lower
+          time: 4
+
+## 2nd floor
+- name: Floor 2
+  # Area-wide exit
+  exits:
+    - to: Lobby > Center
+  spots:
+    - name: Lower
+      coord: [0,2]
+      exits:
+        - to: Lobby > Vines
+    - name: Vines
+      coord: [1,1]
+      locations:
+        - name: Map Chest
+          item: Map_Deku_Tree
+          tags: [big]
+      exits:
+        # traversal can be made easier with different items
+        - to: Floor 3 > Climb
+          time: 16
+        - to: Floor 3 > Climb
+          req: $can_use(Slingshot)
+          time: 10
+        - to: Lobby > Vines
+        - to: Lobby > Entry
+    - name: Slingshot Door
+      coord: [0,0]
+      exits:
+        - to: Scrub Room > Entry
+        - to: Lobby > Entry
+
+- name: Scrub Room
+  spots:
+    - name: Entry
+      coord: [0,0]
+      locations:
+        - name: Scrub
+          item: Deku_Slingshot_Scrub
+          req: $has_shield
+          tags: [event]
+          time: 2
+    - name: Rear
+      coord: [0,2]
+      exits:
+        - to: Slingshot Room > Entry
+          req: Deku_Slingshot_Scrub
+
+- name: Slingshot Room
+  spots:
+    - name: Entry
+      coord: [0,0]
+      exits:
+        - to: Scrub Room > Rear
+    - name: Slingshot
+      coord: [0,1]
+      locations:
+        - name: Chest
+          item: Slingshot
+          tags: [big]
+      exits:
+        - to: Slingshot Upper > Ledge
+          time: 4
+
+- name: Slingshot Upper
+  spots:
+    - name: Ledge
+      locations:
+        - name: Chest
+          item: Recovery_Heart
+      exits:
+        - to: Slingshot Room > Slingshot
+
+## 3rd floor
+- name: Floor 3
+  spots:
+    - name: Climb
+      coord: [2,1]
+    - name: Door
+      coord: [0,1]
+      exits:
+        - to: Compass Room > Entry
+        - to: Lobby > Center
+          time: 3
+          req: $is_adult or $can_child_attack or $Nuts
+      hybrid:  # Hybrid are one-time locations/actions that occur by traversing an edge
+        - name: Break Web
+          item: Deku_Lobby_Web
+          req: $is_adult or $can_child_attack or $Nuts
+          time: 4
+          to: Basement 1 > Center
+          tags: [event]
+
+- name: Compass Room
+  enter:  # local context values set on entry
+    Torch: False
+  spots:
+    - name: Entry
+      coord: [2,0]
+      actions:
+        - name: Light Torch
+          req: $is_child and $Sticks
+          do: ^Torch = True
+      exits:
+        - to: Floor 3 > Door
+          req: ^Torch
+      hybrid:
+        - name: Burn Web
+          item: Deku_Lobby_Web
+          req: $is_child and $Sticks and $Nuts
+          time: 5
+          to: Lobby > Center
+          tags: [event]
+    - name: Compass
+      coord: [0,0]
+      locations:
+        - name: Chest
+          item: Compass_Deku_Tree
+          tags: [big]
+      exits:
+        - to: Ledge
+          thru: [2,0]
+    - name: Ledge
+      coord: [1,1]
+      locations:
+        - name: Chest
+          item: Recovery_Heart
+        - name: GS
+          item: Gold_Skulltula_Token
+          req: $is_adult or $can_child_attack
+      exits:
+        - to: Compass
+          thru: [2,0]
+
+## Basement 1
+- name: Basement 1
+  spots:
+    - name: Center
+      coord: [2,1]
+      locations:
+        - name: Vines GS
+          item: Gold_Skulltula_Token
+          req: 
+          time: 2
+      exits:
+        - to: Lobby > Center
+          time: 6
+    - name: Corner
+      coord: [2,0]
+      locations:
+        - name: Switch
+          item: Deku_Basement_Switch
+          tags: [event]
+        - name: Chest
+          item: Recovery Heart
+          req: Deku_Basement_Switch
+        - name: Gate GS
+          item: Gold_Skulltula_Token
+          req: $is_adult or $can_child_attack
+          time: 2
+      exits:
+        - to: Basement Ledge > Block
+          req: $is_adult or Deku_Basement_Block
+      hybrid:
+        - name: Burn Basement Web
+          item: Deku_Basement_Web
+          req: Deku_Basement_Block and $is_child and $Sticks
+          tags: [event]
+          time: 2
+          to: Basement Ledge > Web
+    - name: South Door
+      coord: [2,2]
+      exits:
+        - to: Back Room > South
+          time: 20  # just skip the side passage for now
+
+- name: Back Room
+  spots:
+    - name: South
+      coord: [1,2]
+    - name: Northwest
+      coord: [0,0]
+      locations:
+        - name: Burn Web
+          item: Deku_Back_Room_Web
+          req: $has_fire_source_with_torch or $can_use(Bow)
+          tags: [event]
+        - name: Break Wall
+          item: Deku_Back_Room_Wall
+          req: Deku_Back_Room_Web and $can_blast_or_smash
+          tags: [event]
+      exits:
+        - to: Skull Room > Entry
+          req: Deku_Back_Room_Web and Deku_Back_Rool_Wall
+    - name: East
+      coord: [2,1]
+      exits:
+        - to: Basement Ledge > Web
+          req: $is_child
+          time: 2
+
+- name: Skull Room
+  spots:
+    - name: Entry
+      locations:
+        - name: GS
+          item: Gold_Skulltula_Token
+          req: $can_use(Boomerang) or $can_use(Hookshot)
+      exits:
+        - to: Back Room > Northweest
+
+- name: Basement Ledge
+  spots:
+    - name: Block
+      coord: [0,0]
+      locations:
+        - name: Push Block
+          item: Deku_Basement_Block
+          tags: [event]
+          time: 4
+      exits:
+        - to: Basement 1 > Corner
+    - name: Web
+      coord: [0,1]
+      locations:
+        - name: Burn Web
+          item: Deku_Basement_Web
+          req: $has_fire_source
+          tags: [event]
+      exits:
+        - to: Basement 2 > Pool
+          req: $Deku_Basement_Web
+
+
+## Basement 2
+- name: Basement 2
+  spots:
+    - name: Pool
+      coord: [0,2]
+      exits:
+        - to: Basement Ledge > Web
+          time: 6
+    - name: Boss Door
+      coord: [0,0]
+      locations:
+        - name: Scrubs
+          item: Deku_Basement_Scrubs
+          req: $has_shield
+          tags: [event]
+          time: 4
+      exits:
+        - to: Boss Room > Entry
+          req: Deku_Basement_Scrubs
+          tags: [load, boss]
+
+## Boss
+- name: Boss Room
+  spots:
+    - name: Entry
+      coord: [0,0]
+    - name: Arena
+      coord: [0,1]
+      locations:
+        - name: Gohma
+          item: Defeat_Gohma
+          req: ($Nuts or $can_use(Slingshot)) and $can_jumpslash
+          time: 10
+          tags: [event]
+        - name: Gohma Quick Kill
+          item: Defeat_Gohma
+          req: $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
+          time: 4
+          tags: [event]
+        - name: Gohma Heart
+          item: Heart_Container
+          req: Defeat_Gohma
+      hybrid:
+        - name: Blue Warp
+          item: Kokiri_Emerald
+          req: Defeat_Gohma
+          tags: [bluewarp]
+          to: KF > Outside Deku Tree > Mouth
