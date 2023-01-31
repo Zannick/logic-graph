@@ -49,7 +49,10 @@ helpers:
   $Deku_Shield: Buy_Deku_Shield or Deku_Shield_Drop
   $Nuts: Buy_Deku_Nut_5 or Buy_Deku_Nut_10 or Deku_Nut_Drop
   $Sticks: Buy_Deku_Stick_1 or Deku_Stick_Drop
-  $wallet_max: PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
+
+  # If the helper is meant to return a number and not a bool, it must be prefixed
+  # with 'num:'
+  num:$wallet_max: PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
 
   $has_shield: ($is_adult and Hylian_Shield) or ($is_child and $Deku_Shield)
   $can_play(song): Ocarina and ^song
@@ -74,8 +77,8 @@ helpers:
 
 
 collect:
-  Rupee_1: ^rupee = $max(^ctx.rupee + 1, $wallet_max)
-  Rupee_5: ^rupee = $max(^ctx.rupee + 5, $wallet_max)
-  Rupee_10: ^rupee = $max(^ctx.rupee + 10, $wallet_max)
-  Rupee_20: ^rupee = $max(^ctx.rupee + 20, $wallet_max)
-  Rupee_50: ^rupee = $max(^ctx.rupee + 50, $wallet_max)
+  Rupee_1: ^rupee = $max(^rupee + 1, $wallet_max)
+  Rupee_5: ^rupee = $max(^rupee + 5, $wallet_max)
+  Rupee_10: ^rupee = $max(^rupee + 10, $wallet_max)
+  Rupee_20: ^rupee = $max(^rupee + 20, $wallet_max)
+  Rupee_50: ^rupee = $max(^rupee + 50, $wallet_max)

@@ -33,7 +33,7 @@ invoke  : NOT? FUNC '(' ITEM (',' ITEM)* ')'   // must be 1+ items, 0 handled be
         | NOT? FUNC '(' LIT ')'
         | NOT? FUNC '(' INT ')'
         | NOT? FUNC '(' FLOAT ')'
-        | NOT? FUNC '()'? // essentially a call with no arguments
+        | NOT? FUNC ('(' ')')? // essentially a call with no arguments
         ;
 
 cond    : IF '(' boolExpr ')' '{' boolExpr '}'
@@ -87,13 +87,14 @@ refEq : REF '==' ( ITEM | SETTING ) ;
 // Specifically where a function is expected to return an integer
 funcNum : FUNC '(' ITEM ')'
         | FUNC '(' num ( ',' num )* ')'
+        | FUNC ('(' ')')?
         ;
 
 mathNum : baseNum BINOP num ;
 
 num : baseNum | mathNum ;
 
-baseNum : INT | CONST | SETTING | value | switchNum | funcNum | condNum ;
+baseNum : INT | CONST | SETTING | REF | value | switchNum | funcNum | condNum ;
 
 value   : NOT? SETTING ('[' ( LIT | ITEM ) ']')?    # Setting
         | NOT? REF                                  # Argument

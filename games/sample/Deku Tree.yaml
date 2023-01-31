@@ -130,17 +130,17 @@ areas:
 
 - name: Compass Room
   enter:  # local context values set on entry
-    Torch: False
+    torch: False
   spots:
     - name: Entry
       coord: [2,0]
       actions:
         - name: Light Torch
           req: $is_child and $Sticks
-          do: ^Torch = True
+          do: ^torch = True
       exits:
         - to: Floor 3 > Door
-          req: ^Torch
+          req: ^torch
       hybrid:
         - name: Burn Web
           item: Deku_Lobby_Web
