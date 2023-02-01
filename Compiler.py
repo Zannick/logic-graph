@@ -1,12 +1,14 @@
 import argparse
 from collections import namedtuple
 import itertools
+import logging
 import os
+import re
 import yaml
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
 
-from grammar import parseRule, parseAction
+from grammar import parseRule, parseAction, StringVisitor
 
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'checks', 'start', 'load',
@@ -28,8 +30,7 @@ def load_regions_from_file(file):
     # TODO: validate fields
 
 
-def load_game_yaml(game):
-    game_dir = os.path.join(base_dir, 'games', game)
+def load_game_yaml(game_dir):
     yfiles = [file for file in os.listdir(game_dir) if file.endswith('.yaml')]
     game_file = os.path.join(game_dir, MAIN_FILENAME)
     if MAIN_FILENAME not in yfiles:
@@ -53,11 +54,18 @@ def _parseExpression(logic, name, category, sep=':'):
     return parseRule(rule, logic, name=f'{category}{sep}{name}')
 
 
+disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
+def construct_id(*args):
+    return '__'.join(disallowed_chars.sub('', a.replace(' ', '_')) for a in args)
+
+
 class GameLogic(object):
 
-    def __init__(self, gameinfo):
+    def __init__(self, game):
         self.errors = []
-        self._info = gameinfo
+        self.game = game
+        self.game_dir = os.path.join(base_dir, 'games', game)
+        self._info = gameinfo = load_game_yaml(self.game_dir)
         self.helpers = {name: _parseExpression(logic, name, 'helpers')
                         for name, logic in gameinfo['helpers'].items()}
         self.objectives = {name: _parseExpression(logic, name, 'objectives')
@@ -86,9 +94,16 @@ class GameLogic(object):
         self.regions = gameinfo['regions']
         for region in self.regions:
             rname = region.get('short', region['name'])
+            region['id'] = construct_id(rname)
             for area in region['areas']:
                 aname = area['name']
+                area['region'] = rname
+                area['id'] = construct_id(rname, aname)
+
                 for e in area.get('exits', ()):
+                    e['area'] = aname
+                    e['region'] = rname
+                    e['id'] = construct_id(rname, aname, 'ex', e['to'])
                     if 'req' in e:
                         e['pr'] = _parseExpression(
                                 e['req'], e['to'], f'{rname} > {aname}', ' ==> ')
@@ -96,19 +111,28 @@ class GameLogic(object):
 
                 for spot in area['spots']:
                     sname = spot['name']
+                    spot['area'] = aname
+                    spot['region'] = rname
+                    spot['id'] = construct_id(rname, aname, sname)
                     fullname = f'{rname} > {aname} > {sname}'
                     for loc in spot.get('locations', ()):
+                        loc['spot'] = sname
+                        loc['area'] = aname
+                        loc['region'] = rname
+                        loc['id'] = construct_id(rname, aname, sname, loc['name'])
                         if 'req' in loc:
                             loc['pr'] = _parseExpression(
                                     loc['req'], loc['name'], fullname, ' ')
                             self.errors.extend(loc['pr'].errors)
                     for eh in spot.get('exits', []) + spot.get('hybrid', []):
+                        eh['id'] = construct_id(rname, aname, sname, 'ex', eh['to'])
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
                                     eh['req'], eh['to'], fullname, ' ==> ')
                             self.errors.extend(eh['pr'].errors)
 
                     for act in spot.get('actions', ()):
+                        act['id'] = construct_id(rname, aname, sname, act['name'])
                         if 'req' in act:
                             act['pr'] = _parseExpression(
                                     act['req'], act['name'] + ' req', fullname, ' ')
@@ -118,7 +142,58 @@ class GameLogic(object):
                         self.errors.extend(act['act'].errors)
 
 
+    def areas(self):
+        return itertools.chain(r['areas'] for r in self.regions)
 
+
+    def graph_rules(self):
+        pass
+
+
+    def all_rules(self):
+        # We need to iterate over the rules, but with the ids
+        # The items we have:
+        # helpers, objectives, collect: {name -> ParseResult}
+        # movements, warps: {name -> {'pr' -> ParseResult}? }
+        # regions: it's complicated:
+        #   [{'areas' -> [{
+        #       'exits' -> [{'pr' -> ParseResult}]
+        #       'spots' -> [{
+        #           'locations'/'exits'/'hybrid' -> [{'pr' -> ParserResult}],
+        #           'actions': [{'pr'/'act' -> ParseResult}]
+        #       }]}]}]
+        return (pr.tree for pr in itertools.chain(
+            self.helpers.values(),
+            self.objectives.values(),
+            self.collect.values(),
+            (info['pr'] for info in self.movements.values() if 'pr' in info),
+            (info['pr'] for info in self.warps.values() if 'pr' in info),r))
+            
+
+    def emit_helpers(self):
+        with open(os.path.join(self.game_dir, 'src', 'helpers.rs'), 'w') as f:
+            f.write(f'//! AUTOGENERATED FOR {self.game} - DO NOT MODIFY\n'
+                    f'//!\n'
+                    f'//! Macro definitions for helpers.\n')
+            for name, pr in self.helpers.items():
+                args = []
+                if '(' in name:
+                    name, args = name.split('(', 1)
+                    args = args[:-1].split(',')
+                id = construct_id('helper', name)
+                f.write(f'\n/// {name}\n'
+                        f'/// {pr.text}\n'
+                        f'#[macro_export]\n'
+                        f'macro_rules! {id} {{\n'
+                        f'    ({", ". join("$" + a + ":expr" for a in args)}) => {{{{\n'
+                        f'        println!("{{}}", "{StringVisitor().visit(pr.tree)}");\n')
+                for a in args:
+                    f.write(f'        println!("{a} := {{}}", ${a});\n')
+                f.write(f'    }}}}\n'
+                        f'}}\n')
+
+
+        
 if __name__ == '__main__':
     cmd = argparse.ArgumentParser()
     cmd.add_argument('game', help='Which game to build the graph for')
@@ -127,10 +202,10 @@ if __name__ == '__main__':
     # Things we need to do:
     # load the game's yaml files
 
-    game = load_game_yaml(args.game)
-    gl = GameLogic(game)
+    gl = GameLogic(args.game)
     if gl.errors:
         print('\n'.join(gl.errors))
+    gl.emit_helpers()
 
     # Error checking:
     # - Check for unsupported info, bad indents, etc
