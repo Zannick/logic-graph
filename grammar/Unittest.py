@@ -8,125 +8,30 @@ import unittest
 from . import *
 
 
-class StringVisitor(RulesVisitor):
-
-    def visitBoolExpr(self, ctx):
-        try:
-            if ctx.OR():
-                return f'OR[ {self.visit(ctx.boolExpr(0))} , {self.visit(ctx.boolExpr(1))} ]'
-            elif ctx.AND():
-                return f'AND[ {self.visit(ctx.boolExpr(0))} , {self.visit(ctx.boolExpr(1))} ]'
-            elif ctx.TRUE():
-                return 'TRUE'
-            elif ctx.FALSE():
-                return 'FALSE'
-            elif ctx.boolExpr():
-                return self.visit(ctx.boolExpr(0))
-            else:
-                return super().visitBoolExpr(ctx)
-        except AttributeError as e:
-            raise AttributeError(str(e) + '; ' + ' '.join(
-                f'[{c.toStringTree(ruleNames = RulesParser.ruleNames)}]'
-                for c in ctx.boolExpr()))
-
-    def visitMeta(self, ctx):
-        lit = ctx.LIT()
-        func = str(ctx.FUNC())[1:]
-        return f'Meta:{func}( {str(lit) + " , " if lit else ""}{self.visit(ctx.boolExpr())} )'
-
-    def visitInvoke(self, ctx):
-        items = ctx.ITEM()
-        func = str(ctx.FUNC())[1:]
-        s = f'Func:{func}'
-        if items:
-            s += f'({" , ".join(map(str, items))})'
-        elif ctx.value():
-            s += f'({self.visit(ctx.value())})'
-        else:
-            s += f'({ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""})'
-        if ctx.NOT():
-            return f'NOT[ {s} ]'
-        return s
-
-    def _visitCond(self, cond, then, el=None):
-        p1 = f'IF( {self.visit(cond)} ) THEN{{ {self.visit(then)} }}'
-        if el is None:
-            return p1
-        return p1 + f' ELSE{{ {self.visit(el)} }}'
-
-    def visitIfThenElse(self, ctx):
-        return self._visitConditional(*ctx.boolExpr())
-
-    def visitPyTernary(self, ctx):
-        return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
-
-    def visitCmp(self, ctx):
-        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {ctx.LIT() or self.visit(ctx.num())}'
-
-    def visitFlagMatch(self, ctx):
-        num = f'{self.visit(ctx.num())}'
-        return f'({self.visit(ctx.value())} & {num}) == {num}'
-
-    def visitRefEq(self, ctx):
-        if ctx.ITEM():
-            return f'Arg:{str(ctx.REF())[1:]} == Item:{ctx.ITEM()}'
-        return f'Arg:{str(ctx.REF())[1:]} == Setting:{ctx.SETTING()}'
-
-    def visitSetting(self, ctx):
-        s = f'Setting:{ctx.SETTING()}'
-        if ctx.LIT():
-            s += f'[{ctx.LIT()}]'
-        if ctx.NOT():
-            return f'NOT[ {s} ]'
-        return s
-
-    def visitArgument(self, ctx):
-        return f'Arg:{str(ctx.REF())[1:]}'
-
-    def visitItemCount(self, ctx):
-        if ctx.INT():
-            return f'Items:{ctx.ITEM()}:{ctx.INT()}'
-        return f'Items:{ctx.ITEM()}:{{Setting:{ctx.SETTING}}}'
-
-    def visitOneItem(self, ctx):
-        return f'Item:{ctx.ITEM()}'
-
-    def visitOneLitItem(self, ctx):
-        return f'Item:{str(ctx.LIT())[1:-1].replace(" ", "_")}'
-
-    def visitOneArgument(self, ctx):
-        return f'Arg:{str(ctx.REF())[1:]}'
-
-    def visitBaseNum(self, ctx):
-        if ctx.INT():
-            return str(ctx.INT())
-        return f'Const:{ctx.CONST()}'
-
-
 class TestGrammar(unittest.TestCase):
 
     def testMeta(self):
         text = '$here($can_use(Progressive_Hookshot)) or $is_child'
-        t, p, e = parseBoolExpr(text)
+        _, t, p, e = parseBoolExpr(text)
         exp = '(boolExpr (boolExpr (meta $here ( (boolExpr (invoke $can_use ( Progressive_Hookshot ))) ))) or (boolExpr (invoke $is_child)))'
         self.assertEqual(exp, t.toStringTree(recog=p))
 
     def testSetting(self):
         text = "deadly_bonks != 'ohko' or Fairy"
-        t, p, e = parseBoolExpr(text)
+        _, t, p, e = parseBoolExpr(text)
         # toStringTree can only get rule names
         exp = "(boolExpr (boolExpr (cmp (value deadly_bonks) != 'ohko')) or (boolExpr (item Fairy)))"
         self.assertEqual(exp, t.toStringTree(recog=p))
 
     def testMetaFuncVisit(self):
         text = '$here($can_use(Progressive_Hookshot)) or $is_child'
-        t, p, e = parseBoolExpr(text)
+        _, t, p, e = parseBoolExpr(text)
         exp = 'OR[ Meta:here( Func:can_use(Progressive_Hookshot) ) , Func:is_child() ]'
         self.assertEqual(exp, StringVisitor().visit(t))
 
     def testSettingVisit(self):
         text = "deadly_bonks != 'ohko' or Fairy"
-        t, p, e = parseBoolExpr(text)
+        _, t, p, e = parseBoolExpr(text)
         exp = "OR[ Setting:deadly_bonks != 'ohko' , Item:Fairy ]"
         self.assertEqual(exp, StringVisitor().visit(t))
 
@@ -196,7 +101,7 @@ class TestOoTR(unittest.TestCase):
         for rule, name in rules.items():
             rule = fn.sub(r'$\1', rule)
             with self.subTest(name=name + '; ' + rule):
-                t, p, e = parseBoolExpr(rule)
+                _, t, p, e = parseBoolExpr(rule)
                 self.assertIsNotNone(t, f'No parse tree from rule: {rule}')
                 st = StringVisitor().visit(t)
                 self.assertIsNotNone(st, f'No visit string returned for rule: {rule}\n  -> {t.toStringTree(recog=p)}')

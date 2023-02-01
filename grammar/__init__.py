@@ -6,6 +6,7 @@ maybe_generate(False)
 from .generated.RulesLexer import RulesLexer
 from .generated.RulesParser import RulesParser
 from .generated.RulesVisitor import RulesVisitor
+from .StringVisitor import StringVisitor
 from antlr4 import InputStream, CommonTokenStream
 from antlr4.error.ErrorListener import ErrorListener
 
@@ -72,4 +73,4 @@ def parseRule(rule, text, name='', verbose=False):
 
 __all__ = ['RulesParser', 'RulesVisitor',
            'parseBoolExpr', 'parseNum', 'parseAction', 'parseRule',
-           'make_parser', 'ParseResult']
+           'make_parser', 'ParseResult', 'StringVisitor']
