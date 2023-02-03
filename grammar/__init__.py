@@ -25,7 +25,7 @@ class CollectErrorListener(ErrorListener):
         self.errors.append(err)
 
 
-ParseResult = namedtuple('ParseResult', ['text', 'tree', 'parser', 'errors'])
+ParseResult = namedtuple('ParseResult', ['name', 'text', 'tree', 'parser', 'errors'])
 
 def make_parser(text):
     ts = InputStream(str(text))
@@ -40,7 +40,7 @@ def parseBoolExpr(text, name='', verbose=False):
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.boolExpr()
-    return ParseResult(text, tree, p, errl.errors)
+    return ParseResult(name, text, tree, p, errl.errors)
 
 
 def parseNum(text, name='', verbose=False):
@@ -49,7 +49,7 @@ def parseNum(text, name='', verbose=False):
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.num()
-    return ParseResult(text, tree, p, errl.errors)
+    return ParseResult(name, text, tree, p, errl.errors)
 
 
 def parseAction(text, name='', verbose=False):
@@ -58,7 +58,7 @@ def parseAction(text, name='', verbose=False):
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.action()
-    return ParseResult(text, tree, p, errl.errors)
+    return ParseResult(name, text, tree, p, errl.errors)
 
 
 def parseRule(rule, text, name='', verbose=False):

@@ -177,7 +177,7 @@ areas:
       locations:
         - name: Vines GS
           item: Gold_Skulltula_Token
-          req: 
+          req: $is_adult or $Sticks or Kokiri_Sword
           time: 2
       exits:
         - to: Lobby > Center
@@ -189,7 +189,7 @@ areas:
           item: Deku_Basement_Switch
           tags: [event]
         - name: Chest
-          item: Recovery Heart
+          item: Recovery_Heart
           req: Deku_Basement_Switch
         - name: Gate GS
           item: Gold_Skulltula_Token
@@ -228,7 +228,7 @@ areas:
           tags: [event]
       exits:
         - to: Skull Room > Entry
-          req: Deku_Back_Room_Web and Deku_Back_Rool_Wall
+          req: Deku_Back_Room_Web and Deku_Back_Room_Wall
     - name: East
       coord: [2,1]
       exits:

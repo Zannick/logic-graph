@@ -63,7 +63,7 @@ helpers:
     ELSE IF ($_is_adult_item(^item)) { $is_adult and ^item }
     ELSE IF ($_is_magic_arrow(^item)) { $is_adult and ^item and Bow and Magic_Meter }
     ELSE IF ($_is_child_item(^item)) { $is_child and ^item }
-  $_is_magic_item(item): ^item IN [Dins_fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
+  $_is_magic_item(item): ^item IN [Dins_Fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
   $_is_adult_item(item): ^item IN [Bow, Megaton_Hammer, Iron_Boots, Hover_Boots,
     Hookshot, Goron_Tunic, Zora_Tunic, Mirror_Shield]
   $_is_child_item(item): ^item IN [Slingshot, Boomerang, Kokiri_Sword]

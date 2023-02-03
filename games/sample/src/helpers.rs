@@ -96,7 +96,7 @@ macro_rules! helper__can_use {
 }
 
 /// $_is_magic_item
-/// ^item IN [Dins_fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
+/// ^item IN [Dins_Fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
 #[macro_export]
 macro_rules! helper___is_magic_item {
     ($item:expr) => {{
