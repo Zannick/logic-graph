@@ -7,6 +7,7 @@
 
 #[derive(Debug)]
 pub enum Items {
+    Arrows_10,
     Biggoron_Sword,
     Blue_Fire_Arrows,
     Bombs,

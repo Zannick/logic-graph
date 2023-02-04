@@ -3,21 +3,21 @@
 //! Macro definitions for helpers.
 
 /// $is_child
-/// ^age == 'child'
+/// ^child
 #[macro_export]
 macro_rules! helper__is_child {
     () => {{
-        println!("{}", "Arg:age == 'child'");
-    }}
+        println!("{}", "Arg:child");
+    }};
 }
 
 /// $is_adult
-/// ^age == 'adult'
+/// NOT ^child
 #[macro_export]
 macro_rules! helper__is_adult {
     () => {{
-        println!("{}", "Arg:age == 'adult'");
-    }}
+        println!("{}", "Arg:child");
+    }};
 }
 
 /// $Deku_Shield
@@ -26,7 +26,7 @@ macro_rules! helper__is_adult {
 macro_rules! helper__Deku_Shield {
     () => {{
         println!("{}", "OR[ Item:Buy_Deku_Shield , Item:Deku_Shield_Drop ]");
-    }}
+    }};
 }
 
 /// $Nuts
@@ -34,8 +34,11 @@ macro_rules! helper__Deku_Shield {
 #[macro_export]
 macro_rules! helper__Nuts {
     () => {{
-        println!("{}", "OR[ OR[ Item:Buy_Deku_Nut_5 , Item:Buy_Deku_Nut_10 ] , Item:Deku_Nut_Drop ]");
-    }}
+        println!(
+            "{}",
+            "OR[ OR[ Item:Buy_Deku_Nut_5 , Item:Buy_Deku_Nut_10 ] , Item:Deku_Nut_Drop ]"
+        );
+    }};
 }
 
 /// $Sticks
@@ -44,7 +47,7 @@ macro_rules! helper__Nuts {
 macro_rules! helper__Sticks {
     () => {{
         println!("{}", "OR[ Item:Buy_Deku_Stick_1 , Item:Deku_Stick_Drop ]");
-    }}
+    }};
 }
 
 /// num:$wallet_max
@@ -53,7 +56,7 @@ macro_rules! helper__Sticks {
 macro_rules! helper__numwallet_max {
     () => {{
         println!("{}", "Const:None");
-    }}
+    }};
 }
 
 /// $has_shield
@@ -72,7 +75,7 @@ macro_rules! helper__can_play {
     ($song:expr) => {{
         println!("{}", "AND[ Item:Ocarina , Arg:song ]");
         println!("song := {}", $song);
-    }}
+    }};
 }
 
 /// $can_jumpslash
@@ -80,8 +83,11 @@ macro_rules! helper__can_play {
 #[macro_export]
 macro_rules! helper__can_jumpslash {
     () => {{
-        println!("{}", "OR[ OR[ Func:is_adult() , Func:Sticks() ] , Item:Kokiri_Sword ]");
-    }}
+        println!(
+            "{}",
+            "OR[ OR[ Func:is_adult() , Func:Sticks() ] , Item:Kokiri_Sword ]"
+        );
+    }};
 }
 
 /// $can_use
@@ -102,7 +108,7 @@ macro_rules! helper___is_magic_item {
     ($item:expr) => {{
         println!("{}", "None");
         println!("item := {}", $item);
-    }}
+    }};
 }
 
 /// $_is_adult_item
@@ -112,7 +118,7 @@ macro_rules! helper___is_adult_item {
     ($item:expr) => {{
         println!("{}", "None");
         println!("item := {}", $item);
-    }}
+    }};
 }
 
 /// $_is_child_item
@@ -122,7 +128,7 @@ macro_rules! helper___is_child_item {
     ($item:expr) => {{
         println!("{}", "None");
         println!("item := {}", $item);
-    }}
+    }};
 }
 
 /// $_is_magic_arrow
@@ -132,7 +138,7 @@ macro_rules! helper___is_magic_arrow {
     ($item:expr) => {{
         println!("{}", "None");
         println!("item := {}", $item);
-    }}
+    }};
 }
 
 /// $has_explosives
@@ -141,7 +147,7 @@ macro_rules! helper___is_magic_arrow {
 macro_rules! helper__has_explosives {
     () => {{
         println!("{}", "Item:Bombs");
-    }}
+    }};
 }
 
 /// $can_blast_or_smash
@@ -149,8 +155,11 @@ macro_rules! helper__has_explosives {
 #[macro_export]
 macro_rules! helper__can_blast_or_smash {
     () => {{
-        println!("{}", "OR[ Func:has_explosives() , Func:can_use(Megaton_Hammer) ]");
-    }}
+        println!(
+            "{}",
+            "OR[ Func:has_explosives() , Func:can_use(Megaton_Hammer) ]"
+        );
+    }};
 }
 
 /// $can_child_attack
@@ -167,8 +176,11 @@ macro_rules! helper__can_child_attack {
 #[macro_export]
 macro_rules! helper__has_fire_source {
     () => {{
-        println!("{}", "OR[ Func:can_use(Dins_Fire) , Func:can_use(Fire_Arrows) ]");
-    }}
+        println!(
+            "{}",
+            "OR[ Func:can_use(Dins_Fire) , Func:can_use(Fire_Arrows) ]"
+        );
+    }};
 }
 
 /// $has_fire_source_with_torch
@@ -176,6 +188,9 @@ macro_rules! helper__has_fire_source {
 #[macro_export]
 macro_rules! helper__has_fire_source_with_torch {
     () => {{
-        println!("{}", "OR[ Func:has_fire_source() , AND[ Func:is_child() , Func:Sticks() ] ]");
-    }}
+        println!(
+            "{}",
+            "OR[ Func:has_fire_source() , AND[ Func:is_child() , Func:Sticks() ] ]"
+        );
+    }};
 }

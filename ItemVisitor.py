@@ -1,0 +1,78 @@
+from collections import Counter, defaultdict
+import logging
+import re
+
+import Utils
+from Utils import construct_id
+
+from grammar import RulesVisitor
+
+
+class ItemVisitor(RulesVisitor):
+
+    def __init__(self):
+        self.item_uses = Counter()
+        self.item_max_counts = defaultdict(int)
+        self.name = ''
+
+    def visit(self, tree, name=''):
+        self.name = name
+        try:
+            ret = super().visit(tree)
+        finally:
+            self.name = ''
+        return ret
+
+    def _count_items(self, ctx):
+        for item in ctx.ITEM():
+            it = str(item)
+            self.item_uses[it] += 1
+            self.item_max_counts[it] = max(1, self.item_max_counts[it])
+        return self.visitChildren(ctx)
+
+    visitInvoke = visitRefInList = visitMatchRefBool = _count_items
+
+    def _switch_count(self, ctx):
+        it = str(ctx.ITEM())
+        self.item_uses[it] += 1
+        mc = max(int(str(x)) for x in ctx.INT())
+        self.item_max_counts[it] = max(mc, self.item_max_counts[it])
+        return self.visitChildren(ctx)
+
+    visitPerItemBool = visitPerItemNum = visitPerItemStr = _switch_count
+
+    # These will either need to check for the items used in the calls,
+    # or the rules could be removed. (Other rules using REF don't use count,
+    # so it's sufficient to count the provided item as 1 in the calling rule.)
+    def _switch_warn(self, ctx):
+        if ctx.REF() and ctx.INT():
+            logging.warning('Rule %r checks for count of ref: not supported', self.name)
+        return self.visitChildren(ctx)
+
+    visitPerSettingNum = visitPerSettingStr = _switch_warn
+
+    def _count_one(self, ctx):
+        if ctx.ITEM():
+            it = str(ctx.ITEM())
+            self.item_uses[it] += 1
+            self.item_max_counts[it] = max(1, self.item_max_counts[it])
+        return self.visitChildren(ctx)
+
+    visitRefEq = visitFuncNum = visitValue = visitOneItem = _count_one
+
+    def visitItemCount(self, ctx):
+        it = str(ctx.ITEM())
+        self.item_uses[it] += 1
+        if ctx.SETTING():
+            logging.getLogger('').warning('Rule %r looks at a setting value of item %s, setting max to 1024', self.name, it)
+            self.item_max_counts[it] = max(1024, self.item_max_counts[it])
+        else:
+            ct = int(str(ctx.INT()))
+            self.item_max_counts[it] = max(ct, self.item_max_counts[it])
+        return self.visitChildren(ctx)
+
+    def visitOneLitItem(self, ctx):
+        it = construct_id(ctx.LIT())
+        self.item_uses[it] += 1
+        self.item_max_counts[it] = max(1, self.item_max_counts[it])
+        return self.visitChildren(ctx)

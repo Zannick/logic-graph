@@ -1,7 +1,6 @@
 name: Deku Tree
 here:
   save: Lobby > Entry
-  death: Lobby > Entry
 
 areas:
 ## 1st floor
@@ -129,18 +128,18 @@ areas:
           tags: [event]
 
 - name: Compass Room
-  enter:  # local context values set on entry
-    torch: False
+  enter:  # local context values prefixed with _ set on entry
+    _torch: False
   spots:
     - name: Entry
       coord: [2,0]
       actions:
         - name: Light Torch
           req: $is_child and $Sticks
-          do: ^torch = True
+          do: ^_torch = True
       exits:
         - to: Floor 3 > Door
-          req: ^torch
+          req: ^_torch
       hybrid:
         - name: Burn Web
           item: Deku_Lobby_Web
@@ -266,7 +265,7 @@ areas:
           tags: [event]
       exits:
         - to: Basement 2 > Pool
-          req: $Deku_Basement_Web
+          req: Deku_Basement_Web
 
 
 ## Basement 2

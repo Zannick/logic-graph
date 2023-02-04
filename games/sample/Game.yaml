@@ -1,15 +1,13 @@
 # A simpler version of OoT for initial testing purposes
 name: sample
 
-start:  # default initial context
+start:  # default initial context, global context values
   position: KF > Link's House > Start Point
-  warps:
-    # where the player will warp to. Place names are formatted
-    # Region (name or short) > Area > Spot
-    save: KF > Link's House > Start Point
-    death: KF > Link's House > Start Point
+  # where the player will warp to. Place names are formatted
+  # Region (name or short) > Area > Spot
+  save: KF > Link's House > Start Point
   # game-specific stuff
-  age: child
+  child: True
   tod: day  # affected by realtime will be tough to handle
   rupees: 0
 
@@ -34,16 +32,15 @@ checks:
 warps:
   save:
     time: 8
-  death:
-    time: 11
+    to: ^save
   Minuet:
     time: 5
     req: $can_play(Minuet_of_Forest)
     to: KF > Kokiri Village > Shop Porch  # Sacred Forest Meadow > Temple Front > Warp Point
 
 helpers:
-  $is_child: ^age == 'child'
-  $is_adult: ^age == 'adult'
+  $is_child: ^child
+  $is_adult: NOT ^child
   # these are access rules and not traversal rules
   # so they assume the items are permanent after acquisition
   $Deku_Shield: Buy_Deku_Shield or Deku_Shield_Drop

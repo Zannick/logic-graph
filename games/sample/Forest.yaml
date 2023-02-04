@@ -58,6 +58,11 @@ areas:
       exits:
         - to: Shop > Entry
           tags: [load, interior]
+    - name: Saria's Porch
+      coord: [20, 22]
+      exits:
+        - to: Kak > Spider House > Entry
+          tags: [load, interior]
     - name: Mido's Guardpost
       coord: [23, 20]
       locations:

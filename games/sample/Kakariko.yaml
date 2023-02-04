@@ -1,0 +1,14 @@
+name: Kakariko Village
+short: Kak
+
+areas:
+  - name: Spider House
+    spots:
+    - name: Entry
+      locations:
+        - name: Skulls 10
+          req: Gold_Skulltula_Token{10}
+          item: Arrows_10
+      exits:
+        - to: KF > Kokiri Village > Saria's Porch
+          tags: [load, exterior]

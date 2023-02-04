@@ -52,23 +52,22 @@ condStr : IF '(' boolExpr ')' '{' str '}'
         ;
 
 
-// TODO: sub names?
 switch  : PER ITEM '{' ( INT '=>' boolExpr ';' )+
-                        '_' '=>' boolExpr ';'? '}'
+                        '_' '=>' boolExpr ';'? '}'      # PerItemBool
         | PER SETTING '{' ( ( INT | LIT ) '=>' boolExpr ';' )+
-                        '_' '=>' boolExpr ';'? '}'
+                        '_' '=>' boolExpr ';'? '}'      # PerSettingBool
         | MATCH REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ';' )+
-                            '_' '=>' boolExpr ';'? '}'
+                            '_' '=>' boolExpr ';'? '}'  # MatchRefBool
         // simpler match expression where all results are true/false
-        | REF IN '[' ITEM ( ',' ITEM )+ ']'
+        | REF IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
         ;
-switchNum   : PER ITEM '{' ( INT '=>' num ';' )+ '_' '=>' num ';'? '}'
+switchNum   : PER ITEM '{' ( INT '=>' num ';' )+ '_' '=>' num ';'? '}'  # PerItemInt
             | PER ( REF | SETTING ) '{' ( ( INT | LIT ) '=>' num ';' )+
-                                    '_' '=>' num ';'? '}'
+                                    '_' '=>' num ';'? '}'               # PerSettingInt
             ;
-switchStr   : PER ITEM '{' ( INT '=>' str ';' )+ '_' '=>' str ';'? '}'
+switchStr   : PER ITEM '{' ( INT '=>' str ';' )+ '_' '=>' str ';'? '}'  # PerItemStr
             | PER ( REF | SETTING ) '{' ( ( INT | LIT ) '=>' str ';' )+
-                                    '_' '=>' str ';'? '}'
+                                    '_' '=>' str ';'? '}'               # PerSettingStr
             ;
 
 cmp : value '==' num
