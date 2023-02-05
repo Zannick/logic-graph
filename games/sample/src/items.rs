@@ -2,11 +2,14 @@
 //!
 //! Collectibles.
 
-#![allow(dead_code)]
 #![allow(non_camel_case_types)]
 
-#[derive(Debug)]
-pub enum Items {
+use std::fmt;
+
+#[derive(Debug, PartialEq, Eq, enum_map::Enum, Default)]
+pub enum Item {
+    #[default]
+    None,
     Arrows_10,
     Biggoron_Sword,
     Blue_Fire_Arrows,
@@ -65,4 +68,69 @@ pub enum Items {
     Slingshot,
     Triforce_Piece,
     Zora_Tunic,
+}
+impl fmt::Display for Item {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Item::None => write!(f, "{}", "None"),
+            Item::Arrows_10 => write!(f, "{}", "Arrows_10"),
+            Item::Biggoron_Sword => write!(f, "{}", "Biggoron_Sword"),
+            Item::Blue_Fire_Arrows => write!(f, "{}", "Blue_Fire_Arrows"),
+            Item::Bombs => write!(f, "{}", "Bombs"),
+            Item::Boomerang => write!(f, "{}", "Boomerang"),
+            Item::Bow => write!(f, "{}", "Bow"),
+            Item::Buy_Arrows_10 => write!(f, "{}", "Buy_Arrows_10"),
+            Item::Buy_Arrows_30 => write!(f, "{}", "Buy_Arrows_30"),
+            Item::Buy_Deku_Nut_10 => write!(f, "{}", "Buy_Deku_Nut_10"),
+            Item::Buy_Deku_Nut_5 => write!(f, "{}", "Buy_Deku_Nut_5"),
+            Item::Buy_Deku_Seeds_30 => write!(f, "{}", "Buy_Deku_Seeds_30"),
+            Item::Buy_Deku_Shield => write!(f, "{}", "Buy_Deku_Shield"),
+            Item::Buy_Deku_Stick_1 => write!(f, "{}", "Buy_Deku_Stick_1"),
+            Item::Buy_Heart => write!(f, "{}", "Buy_Heart"),
+            Item::Compass_Deku_Tree => write!(f, "{}", "Compass_Deku_Tree"),
+            Item::Defeat_Ganon => write!(f, "{}", "Defeat_Ganon"),
+            Item::Defeat_Gohma => write!(f, "{}", "Defeat_Gohma"),
+            Item::Deku_Back_Room_Wall => write!(f, "{}", "Deku_Back_Room_Wall"),
+            Item::Deku_Back_Room_Web => write!(f, "{}", "Deku_Back_Room_Web"),
+            Item::Deku_Basement_Block => write!(f, "{}", "Deku_Basement_Block"),
+            Item::Deku_Basement_Scrubs => write!(f, "{}", "Deku_Basement_Scrubs"),
+            Item::Deku_Basement_Switch => write!(f, "{}", "Deku_Basement_Switch"),
+            Item::Deku_Basement_Web => write!(f, "{}", "Deku_Basement_Web"),
+            Item::Deku_Lobby_Web => write!(f, "{}", "Deku_Lobby_Web"),
+            Item::Deku_Nut_Drop => write!(f, "{}", "Deku_Nut_Drop"),
+            Item::Deku_Shield_Drop => write!(f, "{}", "Deku_Shield_Drop"),
+            Item::Deku_Slingshot_Scrub => write!(f, "{}", "Deku_Slingshot_Scrub"),
+            Item::Deku_Stick_Drop => write!(f, "{}", "Deku_Stick_Drop"),
+            Item::Dins_Fire => write!(f, "{}", "Dins_Fire"),
+            Item::Farores_Wind => write!(f, "{}", "Farores_Wind"),
+            Item::Fire_Arrows => write!(f, "{}", "Fire_Arrows"),
+            Item::Gold_Skulltula_Token => write!(f, "{}", "Gold_Skulltula_Token"),
+            Item::Goron_Tunic => write!(f, "{}", "Goron_Tunic"),
+            Item::Heart_Container => write!(f, "{}", "Heart_Container"),
+            Item::Hookshot => write!(f, "{}", "Hookshot"),
+            Item::Hover_Boots => write!(f, "{}", "Hover_Boots"),
+            Item::Hylian_Shield => write!(f, "{}", "Hylian_Shield"),
+            Item::Iron_Boots => write!(f, "{}", "Iron_Boots"),
+            Item::Kokiri_Emerald => write!(f, "{}", "Kokiri_Emerald"),
+            Item::Kokiri_Sword => write!(f, "{}", "Kokiri_Sword"),
+            Item::Lens_of_Truth => write!(f, "{}", "Lens_of_Truth"),
+            Item::Light_Arrows => write!(f, "{}", "Light_Arrows"),
+            Item::Magic_Meter => write!(f, "{}", "Magic_Meter"),
+            Item::Map_Deku_Tree => write!(f, "{}", "Map_Deku_Tree"),
+            Item::Megaton_Hammer => write!(f, "{}", "Megaton_Hammer"),
+            Item::Minuet_of_Forest => write!(f, "{}", "Minuet_of_Forest"),
+            Item::Mirror_Shield => write!(f, "{}", "Mirror_Shield"),
+            Item::Nayrus_Love => write!(f, "{}", "Nayrus_Love"),
+            Item::Ocarina => write!(f, "{}", "Ocarina"),
+            Item::Progressive_Wallet => write!(f, "{}", "Progressive_Wallet"),
+            Item::Recovery_Heart => write!(f, "{}", "Recovery_Heart"),
+            Item::Rupee_1 => write!(f, "{}", "Rupee_1"),
+            Item::Rupees_5 => write!(f, "{}", "Rupees_5"),
+            Item::Rupees_50 => write!(f, "{}", "Rupees_50"),
+            Item::Showed_Mido => write!(f, "{}", "Showed_Mido"),
+            Item::Slingshot => write!(f, "{}", "Slingshot"),
+            Item::Triforce_Piece => write!(f, "{}", "Triforce_Piece"),
+            Item::Zora_Tunic => write!(f, "{}", "Zora_Tunic"),
+        }
+    }
 }

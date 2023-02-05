@@ -50,12 +50,15 @@ macro_rules! helper__Sticks {
     }};
 }
 
-/// num:$wallet_max
+/// $wallet_max
 /// PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
 #[macro_export]
-macro_rules! helper__numwallet_max {
+macro_rules! helper__wallet_max {
     () => {{
-        println!("{}", "Const:None");
+        println!(
+            "{}",
+            "Item:Progressive_Wallet{3 => 999; 2 => 500; 1 => 200; _ => 99}"
+        );
     }};
 }
 
@@ -106,7 +109,10 @@ macro_rules! helper__can_use {
 #[macro_export]
 macro_rules! helper___is_magic_item {
     ($item:expr) => {{
-        println!("{}", "None");
+        println!(
+            "{}",
+            "(Arg:item IN [Dins_Fire|Farores_Wind|Nayrus_Love|Lens_of_Truth])"
+        );
         println!("item := {}", $item);
     }};
 }
@@ -116,9 +122,9 @@ macro_rules! helper___is_magic_item {
 #[macro_export]
 macro_rules! helper___is_adult_item {
     ($item:expr) => {{
-        println!("{}", "None");
+        println!("{}", "(Arg:item IN [Bow|Megaton_Hammer|Iron_Boots|Hover_Boots|Hookshot|Goron_Tunic|Zora_Tunic|Mirror_Shield])");
         println!("item := {}", $item);
-    }};
+    }}
 }
 
 /// $_is_child_item
@@ -126,7 +132,7 @@ macro_rules! helper___is_adult_item {
 #[macro_export]
 macro_rules! helper___is_child_item {
     ($item:expr) => {{
-        println!("{}", "None");
+        println!("{}", "(Arg:item IN [Slingshot|Boomerang|Kokiri_Sword])");
         println!("item := {}", $item);
     }};
 }
@@ -136,7 +142,10 @@ macro_rules! helper___is_child_item {
 #[macro_export]
 macro_rules! helper___is_magic_arrow {
     ($item:expr) => {{
-        println!("{}", "None");
+        println!(
+            "{}",
+            "(Arg:item IN [Fire_Arrows|Light_Arrows|Blue_Fire_Arrows])"
+        );
         println!("item := {}", $item);
     }};
 }

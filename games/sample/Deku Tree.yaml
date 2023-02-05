@@ -21,6 +21,7 @@ areas:
         - name: Web
           tags: [event]
           item: Deku_Lobby_Web  # awkward to have this in multiple places, eh?
+          canon: Deku_Lobby_Web
           req: False
       exits:
         - to: Basement 1 > Center
@@ -122,6 +123,7 @@ areas:
       hybrid:  # Hybrid are one-time locations/actions that occur by traversing an edge
         - name: Break Web
           item: Deku_Lobby_Web
+          canon: Deku_Lobby_Web
           req: $is_adult or $can_child_attack or $Nuts
           time: 4
           to: Basement 1 > Center
@@ -143,6 +145,7 @@ areas:
       hybrid:
         - name: Burn Web
           item: Deku_Lobby_Web
+          canon: Deku_Lobby_Web
           req: $is_child and $Sticks and $Nuts
           time: 5
           to: Lobby > Center
@@ -200,6 +203,7 @@ areas:
       hybrid:
         - name: Burn Basement Web
           item: Deku_Basement_Web
+          canon: Deku_Basement_Web
           req: Deku_Basement_Block and $is_child and $Sticks
           tags: [event]
           time: 2
@@ -261,6 +265,7 @@ areas:
       locations:
         - name: Burn Web
           item: Deku_Basement_Web
+          canon: Deku_Basement_Web
           req: $has_fire_source
           tags: [event]
       exits:

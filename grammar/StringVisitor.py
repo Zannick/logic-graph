@@ -96,5 +96,18 @@ class StringVisitor(RulesVisitor):
     def visitBaseNum(self, ctx):
         if ctx.INT():
             return str(ctx.INT())
-        return f'Const:{ctx.CONST()}'
+        if ctx.CONST():
+            return f'Const:{ctx.CONST()}'
+        if ctx.REF():
+            return f'Arg:{str(ctx.REF())[1:]}'
+        if ctx.SETTING():
+            return f'Setting:{ctx.SETTING()}'
+        return super().visitBaseNum(ctx)
 
+    def visitPerItemInt(self, ctx):
+        cases = list(map(str, ctx.INT())) + ["_"]
+        results = [str(self.visit(n)) for n in ctx.num()]
+        return f'Item:{ctx.ITEM()}{{' + '; '.join(f'{i} => {r}' for i,r in zip(cases, results)) + '}'
+
+    def visitRefInList(self, ctx):
+        return f'(Arg:{str(ctx.REF())[1:]} IN [{"|".join(map(str, ctx.ITEM()))}])'

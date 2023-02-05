@@ -10,3 +10,4 @@ generated/
 target/
 *.interp
 *.tokens
+*.lock

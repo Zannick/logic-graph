@@ -9,3 +9,6 @@ disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
 def construct_id(*args):
     return '__'.join(disallowed_chars.sub('', a.replace(' ', '_')) for a in args)
 
+def n1(tuples):
+    for a, *b in tuples:
+        yield a

@@ -1,10 +1,12 @@
 import argparse
-from collections import namedtuple
+from collections import namedtuple, Counter, defaultdict
 from functools import cache, cached_property
 import itertools
 import logging
 import os
 import re
+import subprocess
+import sys
 import yaml
 # TODO: pyspellchecker to check for issues with item names
 
@@ -12,7 +14,7 @@ logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelna
 
 from grammar import parseRule, parseAction, StringVisitor
 from ItemVisitor import ItemVisitor
-from Utils import base_dir, construct_id
+from Utils import base_dir, construct_id, n1
 
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'checks', 'start', 'load',
@@ -77,9 +79,32 @@ def get_func_name(helper_key):
 def typenameof(val):
     if isinstance(val, str):
         if '>' in val:
-            return 'point'
-        return 'str'
+            return 'Spot'
+        # arguably even anything that's a string could be an enum instead
+        # but we'd have to organize all the possible values
+        return "&'static str"
+    if isinstance(val, bool):
+        return 'bool'
+    if isinstance(val, int):
+        return 'i32'
+    # nothing should hit this and be valid
     return type(val).__name__
+
+
+def write_enum(file, ename, id_names, allow_none=False):
+    linefmt = ename + '::{} => write!(f, "{{}}", "{}"),'
+    lines = (linefmt.format(id, name) for id, name in id_names)
+    return file.write(f'#[derive(Debug, PartialEq, Eq, enum_map::Enum'
+                      f'{", Default" if allow_none else ""})]\n'
+                      f'pub enum {ename} {{\n'
+                      f'{"#[default] None, " if allow_none else ""}'
+                      f'{", ".join(map(str, n1(id_names)))},\n}}\n'
+                      f'impl fmt::Display for {ename} {{\n'
+                      'fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {\n'
+                      'match self {\n'
+                      f'{linefmt.format("None", "None") if allow_none else ""}\n'
+                      f'{" ".join(lines)}\n'
+                      '}\n}\n}\n\n')
 
 
 class GameLogic(object):
@@ -112,6 +137,7 @@ class GameLogic(object):
 
         # these are dicts {name: blah, req: blah} (at whatever level)
         self.regions = gameinfo['regions']
+        self.canon_places = defaultdict(list)
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
@@ -119,52 +145,79 @@ class GameLogic(object):
                 aname = area['name']
                 area['region'] = rname
                 area['id'] = construct_id(rname, aname)
+                area['fullname'] = f'{rname} > {aname}'
 
                 for e in area.get('exits', ()):
                     e['area'] = aname
                     e['region'] = rname
                     e['id'] = construct_id(rname, aname, 'ex', e['to'])
+                    e['fullname'] = f'{area["fullname"]} ==> {e["to"]}'
                     if 'req' in e:
                         e['pr'] = _parseExpression(
-                                e['req'], e['to'], f'{rname} > {aname}', ' ==> ')
+                                e['req'], e['to'], area['fullname'], ' ==> ')
 
                 for spot in area['spots']:
                     sname = spot['name']
                     spot['area'] = aname
                     spot['region'] = rname
                     spot['id'] = construct_id(rname, aname, sname)
-                    fullname = f'{rname} > {aname} > {sname}'
-                    for loc in spot.get('locations', ()):
+                    spot['fullname'] = f'{rname} > {aname} > {sname}'
+                    # hybrid spots are exits but have names
+                    for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         loc['spot'] = sname
                         loc['area'] = aname
                         loc['region'] = rname
                         loc['id'] = construct_id(rname, aname, sname, loc['name'])
+                        loc['fullname'] = f'{spot["fullname"]} {loc["name"]}'
+                        if 'canon' in loc:
+                            self.canon_places[loc['canon']].append(loc)
                         if 'req' in loc:
                             loc['pr'] = _parseExpression(
-                                    loc['req'], loc['name'], fullname, ' ')
-                    for eh in spot.get('exits', []) + spot.get('hybrid', []):
+                                    loc['req'], loc['name'], spot['fullname'], ' ')
+                    # We need a counter for exits in case of alternates
+                    ec = Counter()
+                    for eh in spot.get('exits', []):
                         eh['spot'] = sname
                         eh['area'] = aname
                         eh['region'] = rname
-                        eh['id'] = construct_id(rname, aname, sname, 'ex', eh['to'])
+                        ec[eh['to']] += 1
+                        eh['id'] = construct_id(rname, aname, sname, 'ex',
+                                                f'{eh["to"]}_{ec[eh["to"]]}')
+                        eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
-                                    eh['req'], eh['to'], fullname, ' ==> ')
-
+                                    eh['req'], eh['to'], spot['fullname'], ' ==> ')
                     for act in spot.get('actions', ()):
                         act['spot'] = sname
                         act['area'] = aname
                         act['region'] = rname
                         act['id'] = construct_id(rname, aname, sname, act['name'])
+                        act['fullname'] = f'{spot["fullname"]} {act["name"]}'
                         if 'req' in act:
                             act['pr'] = _parseExpression(
-                                    act['req'], act['name'] + ' req', fullname, ' ')
+                                    act['req'], act['name'] + ' req', spot['fullname'], ' ')
                         act['act'] = parseAction(
-                                act['do'], name=f'{fullname} {act["name"]}:do')
+                                act['do'], name=f'{act["fullname"]}:do')
 
 
     def areas(self):
-        return itertools.chain(r['areas'] for r in self.regions)
+        return itertools.chain.from_iterable(r['areas'] for r in self.regions)
+
+
+    def spots(self):
+        return itertools.chain.from_iterable(a['spots'] for a in self.areas())
+
+
+    def locations(self):
+        return itertools.chain.from_iterable(s.get('locations', []) for s in self.spots())
+
+
+    def exits(self):
+        return itertools.chain.from_iterable(s.get('exits', []) + s.get('hybrid', [])
+                                             for s in self.spots())
+
+    def actions(self):
+        return itertools.chain.from_iterable(s.get('actions', []) for s in self.spots())
 
 
     def all_points(self):
@@ -246,45 +299,67 @@ class GameLogic(object):
 
     @cached_property
     def context_values(self):
-        def _check_types(v1, v2, ctx, id):
+        def _check_types(v1, v2, ctx, *names):
             t1 = typenameof(v1)
             t2 = typenameof(v2)
             if t1 != t2:
                 self._misc_errors.append(
                     f'context value type mismatch: {ctx} defined as {v1} ({t1}) '
-                    'and reused in {id} as {v2} ({t2})')
+                    'and reused in {" > ".join(names)} as {v2} ({t2})')
 
         # gameinfo: start
         # regions/areas: here, start, enter
         gc = dict(self._info['start'])
+        def _handle_start(ctx, val, *names):
+            if ctx[0] == '_':
+                ctx = construct_id(*names, ctx[1:]).lower()
+            if ctx in gc:
+                self._misc_errors.append(
+                    f'Duplicate context parameter {ctx} in {" > ".join(names)}: '
+                    'not allowed in "start" section')
+            else:
+                gc[ctx] = val
+
+        def _handle_enter(ctx, val, *names):
+            if ctx[0] == '_':
+                ctx = construct_id(*names, ctx[1:]).lower()
+            if ctx in gc:
+                _check_types(gc[ctx], val, ctx, *names)
+            else:
+                gc[ctx] = val
+
+        def _handle_here(ctx, val, *names):
+            if ctx[0] == '_':
+                self._misc_errors.append(
+                    f'"here" overrides cannot be local: {" > ".join(names)} {ctx}')
+            elif ctx not in gc:
+                self._misc_errors.append(
+                    f'"here" overrides must be predefined: {" > ".join(names)} {ctx}')
+            else:
+                _check_types(gc[ctx], val, ctx, *names)
+
         for region in self.regions:
             for ctx, val in region.get('start', {}).items():
-                if ctx[0] == '_':
-                    ctx = construct_id(region[name], ctx[1:])
-                if ctx in gc:
-                    self._misc_errors.append(
-                        f'Duplicate context parameter {ctx} in {region["name"]}: '
-                        'not allowed in "start" section')
-                else:
-                    gc[ctx] = val
+                _handle_start(ctx, val, region['name'])
             for ctx, val in region.get('enter', {}).items():
-                if ctx[0] == '_':
-                    ctx = construct_id(region[name], ctx[1:])
-                if ctx in gc:
-                    _check_types(gc[ctx], val, ctx, region['id'])
-                else:
-                    gc[ctx] = val
+                _handle_enter(ctx, val, region['name'])
             for ctx, val in region.get('here', {}).items():
-                if ctx[0] == '_':
-                    self._misc_errors.append(
-                        f'"here" overrides cannot be local: {region["name"]} {ctx}')
-                elif ctx not in gc:
-                    self._misc_errors.append(
-                        f'"here" overrides must be predefined: {region["name"]} {ctx}')
-                else:
-                    _check_types(gc[ctx], val, ctx, region['id'])
-        # TODO: handle areas
+                _handle_here(ctx, val, region['name'])
+        for area in self.areas():
+            for ctx, val in area.get('start', {}).items():
+                _handle_start(ctx, val, area['region'], area['name'])
+            for ctx, val in area.get('enter', {}).items():
+                _handle_enter(ctx, val, area['region'], area['name'])
+            for ctx, val in area.get('here', {}).items():
+                _handle_here(ctx, val, area['region'], area['name'])
+
         return gc
+
+    @cached_property
+    def context_types(self):
+        d = {'position': 'Spot', 'elapsed': 'i32'}
+        d.update((ctx, typenameof(val)) for ctx, val in self.context_values.items())
+        return d
 
 
     def emit_helpers(self):
@@ -293,6 +368,7 @@ class GameLogic(object):
             f.write(f'//! Macro definitions for helpers.\n')
             for name, pr in self.helpers.items():
                 args = []
+                name = name[name.find('$'):]
                 if '(' in name:
                     name, args = name.split('(', 1)
                     args = args[:-1].split(',')
@@ -313,58 +389,72 @@ class GameLogic(object):
         with open(os.path.join(self.game_dir, 'src', 'items.rs'), 'w') as f:
             f.write(self.header)
             f.write('//! Collectibles.\n\n'
-                    '#![allow(dead_code)]\n'
                     '#![allow(non_camel_case_types)]\n\n'
-                    '#[derive(Debug)]\n'
-                    'pub enum Items {\n')
-            for item in sorted(self.vanilla_items | self.rule_items):
-                f.write(f'    {item},\n')
-            f.write('}\n')
+                    'use std::fmt;\n\n')
+            items = self.vanilla_items | self.rule_items
+            write_enum(f, 'Item', sorted(zip(items, items)), True)
+
+
+    def emit_graph(self):
+        with open(os.path.join(self.game_dir, 'src', 'graph.rs'), 'w') as f:
+            f.write(self.header)
+            f.write('//! Graph definitions.\n\n'
+                    '#![allow(non_camel_case_types)]\n\n'
+                    'use std::fmt;\n\n')
+            regions = sorted((r['id'], r['name']) for r in self.regions)
+            areas = sorted((a['id'], a['fullname']) for a in self.areas())
+            spots = sorted((s['id'], s['fullname']) for s in self.spots())
+            locations = sorted((l['id'], l['fullname']) for l in self.locations())
+            exits = sorted((e['id'], e['fullname']) for e in self.exits())
+            actions = sorted((a['id'], a['fullname']) for a in self.actions())
+            canons = sorted((construct_id(c), c) for c in self.canon_places)
+            write_enum(f, 'Region', regions)
+            write_enum(f, 'Area', areas)
+            write_enum(f, 'Spot', spots)
+            write_enum(f, 'Location', locations)
+            write_enum(f, 'Exit', exits)
+            write_enum(f, 'Action', actions)
+            write_enum(f, 'Canon', canons, True)
 
 
     def emit_context(self):
         with open(os.path.join(self.game_dir, 'src', 'context.rs'), 'w') as f:
             f.write(self.header)
             f.write('//! Context (game state).\n\n'
-                    'use crate::items::Items;\n\n'
-                    'pub struct Context {\n'
-                    '    position: u64,\n')
-            # TODO: other ctx values here
+                    '#![allow(non_snake_case)]\n\n'
+                    'use analyzer::context;\n'
+                    'use crate::items::Item;\nuse crate::graph::*;\n\n'
+                    'pub struct Context {\n')
+            for ctx, t in self.context_types.items():
+                f.write(f'{ctx}: {t},\n')
             itypes = [(item, get_item_type_for_max(ct))
                       for item, ct in sorted(self.item_max_counts().items())]
-            items_by_type = {}
             for item, itype in itypes:
-                if itype not in items_by_type:
-                    items_by_type[itype] = [item]
-                else:
-                    items_by_type[itype].append(item)
-            for itype in sorted(items_by_type):
-                for item in items_by_type[itype]:
-                    f.write(f'    {item.lower()}: {itype},\n')
+                f.write(f'{item.lower()}: {itype},\n')
             f.write('}\n\n'
-                    'impl Context {\n'
-                    '    fn has(&self, item: Items) -> bool {\n'
-                    '        match item {\n')
+                    'impl context::ItemContext<Item> for Context {\n'
+                    'fn has(&self, item: &Item) -> bool {\n'
+                    'match item {\n')
             # TODO: we may not need these... we could potentially reference the
             # properties directly in the given rules
-            for itype in sorted(items_by_type):
+            for item, itype in itypes:
                 if itype == 'bool':
-                    for item in items_by_type[itype]:
-                        f.write(f'            Items::{item} => self.{item.lower()},\n')
+                    f.write(f'Item::{item} => self.{item.lower()},\n')
                 else:
-                    for item in items_by_type[itype]:
-                        f.write(f'            Items::{item} => self.{item.lower()} >= 1,\n')
-            f.write('            _ => false,\n'
-                    '        }\n'
-                    '    }\n'
-                    '    fn count(&self, item: Items) -> i16 {\n'
-                    '        match item {\n')
+                    f.write(f'Item::{item} => self.{item.lower()} >= 1,\n')
+            f.write('_ => false,\n'
+                    '}\n}\n'
+                    'fn count(&self, item: &Item) -> i16 {\n'
+                    'match item {\n')
             for item in self.item_max_counts():
-                f.write(f'            Items::{item} => self.{item.lower()}.into(),\n')
-            f.write('            _ => 0,\n'
-                    '        }\n'
-                    '    }\n'
+                f.write(f'Item::{item} => self.{item.lower()}.into(),\n')
+            f.write('_ => 0,\n'
+                    '}\n}\n}\n\n'
+                    'impl context::PosContext<Spot> for Context {\n'
+                    'fn position(&self) -> &Spot { &self.position }\n'
+                    'fn set_position(&mut self, pos: Spot) { self.position = pos; }\n'
                     '}\n')
+
 
 
 
@@ -373,20 +463,16 @@ if __name__ == '__main__':
     cmd.add_argument('game', help='Which game to build the graph for')
     args = cmd.parse_args()
 
-    # Things we need to do:
-    # load the game's yaml files
-
     gl = GameLogic(args.game)
     if gl.errors:
         print('\n'.join(gl.errors))
+        sys.exit(1)
     gl.emit_helpers()
+    gl.emit_graph()
     gl.emit_items()
     gl.emit_context()
 
-    # Error checking:
-    # - Check for unsupported info, bad indents, etc
-    # - Parse all rules
-    # - Check functions called
-    # determine the list of all items in the game
-    # build context type
-    # build graph
+    srcdir = os.path.join(gl.game_dir, 'src')
+    files = os.listdir(srcdir)
+    cmd = ['rustfmt'] + [f for f in files if f.endswith('.rs')]
+    subprocess.run(cmd, cwd=srcdir)
