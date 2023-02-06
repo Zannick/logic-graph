@@ -12,9 +12,13 @@ import yaml
 
 logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelname}: {message}', style='{')
 
+import jinja2
+
 from grammar import parseRule, parseAction, StringVisitor
 from ItemVisitor import ItemVisitor
 from Utils import base_dir, construct_id, n1
+
+templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'checks', 'start', 'load',
@@ -75,6 +79,11 @@ def get_item_type_for_max(count):
 def get_func_name(helper_key):
     return helper_key[helper_key.find('$'):].split('(', 1)[0]
 
+def get_func_args(helper_key):
+    if '(' in helper_key:
+        return helper_key[:-1].split('(', 1)[1].split(',')
+    return []
+
 
 def typenameof(val):
     if isinstance(val, str):
@@ -106,6 +115,9 @@ def write_enum(file, ename, id_names, allow_none=False):
                       f'{" ".join(lines)}\n'
                       '}\n}\n}\n\n')
 
+def treeToString(tree):
+    return StringVisitor().visit(tree)
+
 
 class GameLogic(object):
 
@@ -116,9 +128,13 @@ class GameLogic(object):
         self._misc_errors = []
 
         self._info = gameinfo = load_game_yaml(self.game_dir)
-        self.helpers = {name: _parseExpression(logic, name, 'helpers')
-                        for name, logic in gameinfo['helpers'].items()}
-        self.allowed_funcs = {get_func_name(hname) for hname in self.helpers} | BUILTINS.keys()
+        self.helpers = {
+            (get_func_name(name), tuple(get_func_args(name))):
+                _parseExpression(logic, name, 'helpers')
+            for name, logic in gameinfo['helpers'].items()
+        }
+
+        self.allowed_funcs = set(n1(self.helpers.keys())) | BUILTINS.keys()
         self.objectives = {name: _parseExpression(logic, name, 'objectives')
                            for name, logic in gameinfo['objectives'].items()}
         self.collect = {name: parseAction(logic, name, 'collect')
@@ -255,7 +271,7 @@ class GameLogic(object):
                 e.append(f'Invalid item name {item!r} at {pt["id"]}; '
                          f'did you mean {construct_id(pt["item"])!r}?')
         # Check used functions
-        for func in BUILTINS.keys() & self.helpers.keys():
+        for func in BUILTINS.keys() & set(n1(self.helpers.keys())):
             e.append(f'Cannot use reserved name {func!r} as helper')
         for pr in self.all_parse_results():
             for t in pr.parser.getTokenStream().tokens:
@@ -279,6 +295,11 @@ class GameLogic(object):
                 for pr in self.all_parse_results()
                 for t in pr.parser.getTokenStream().tokens
                 if pr.parser.symbolicNames[t.type] == 'ITEM'}
+
+
+    @cached_property
+    def all_items(self):
+        return sorted(self.vanilla_items | self.rule_items)
 
 
     @cached_property
@@ -362,100 +383,21 @@ class GameLogic(object):
         return d
 
 
-    def emit_helpers(self):
-        with open(os.path.join(self.game_dir, 'src', 'helpers.rs'), 'w') as f:
-            f.write(self.header)
-            f.write(f'//! Macro definitions for helpers.\n')
-            for name, pr in self.helpers.items():
-                args = []
-                name = name[name.find('$'):]
-                if '(' in name:
-                    name, args = name.split('(', 1)
-                    args = args[:-1].split(',')
-                id = construct_id('helper', name)
-                f.write(f'\n/// {name}\n'
-                        f'/// {pr.text}\n'
-                        f'#[macro_export]\n'
-                        f'macro_rules! {id} {{\n'
-                        f'    ({", ". join("$" + a + ":expr" for a in args)}) => {{{{\n'
-                        f'        println!("{{}}", "{StringVisitor().visit(pr.tree)}");\n')
-                for a in args:
-                    f.write(f'        println!("{a} := {{}}", ${a});\n')
-                f.write(f'    }}}}\n'
-                        f'}}\n')
-
-
-    def emit_items(self):
-        with open(os.path.join(self.game_dir, 'src', 'items.rs'), 'w') as f:
-            f.write(self.header)
-            f.write('//! Collectibles.\n\n'
-                    '#![allow(non_camel_case_types)]\n\n'
-                    'use std::fmt;\n\n')
-            items = self.vanilla_items | self.rule_items
-            write_enum(f, 'Item', sorted(zip(items, items)), True)
-
-
-    def emit_graph(self):
-        with open(os.path.join(self.game_dir, 'src', 'graph.rs'), 'w') as f:
-            f.write(self.header)
-            f.write('//! Graph definitions.\n\n'
-                    '#![allow(non_camel_case_types)]\n\n'
-                    'use std::fmt;\n\n')
-            regions = sorted((r['id'], r['name']) for r in self.regions)
-            areas = sorted((a['id'], a['fullname']) for a in self.areas())
-            spots = sorted((s['id'], s['fullname']) for s in self.spots())
-            locations = sorted((l['id'], l['fullname']) for l in self.locations())
-            exits = sorted((e['id'], e['fullname']) for e in self.exits())
-            actions = sorted((a['id'], a['fullname']) for a in self.actions())
-            canons = sorted((construct_id(c), c) for c in self.canon_places)
-            write_enum(f, 'Region', regions)
-            write_enum(f, 'Area', areas)
-            write_enum(f, 'Spot', spots)
-            write_enum(f, 'Location', locations)
-            write_enum(f, 'Exit', exits)
-            write_enum(f, 'Action', actions)
-            write_enum(f, 'Canon', canons, True)
-
-
-    def emit_context(self):
-        with open(os.path.join(self.game_dir, 'src', 'context.rs'), 'w') as f:
-            f.write(self.header)
-            f.write('//! Context (game state).\n\n'
-                    '#![allow(non_snake_case)]\n\n'
-                    'use analyzer::context;\n'
-                    'use crate::items::Item;\nuse crate::graph::*;\n\n'
-                    'pub struct Context {\n')
-            for ctx, t in self.context_types.items():
-                f.write(f'{ctx}: {t},\n')
-            itypes = [(item, get_item_type_for_max(ct))
-                      for item, ct in sorted(self.item_max_counts().items())]
-            for item, itype in itypes:
-                f.write(f'{item.lower()}: {itype},\n')
-            f.write('}\n\n'
-                    'impl context::ItemContext<Item> for Context {\n'
-                    'fn has(&self, item: &Item) -> bool {\n'
-                    'match item {\n')
-            # TODO: we may not need these... we could potentially reference the
-            # properties directly in the given rules
-            for item, itype in itypes:
-                if itype == 'bool':
-                    f.write(f'Item::{item} => self.{item.lower()},\n')
-                else:
-                    f.write(f'Item::{item} => self.{item.lower()} >= 1,\n')
-            f.write('_ => false,\n'
-                    '}\n}\n'
-                    'fn count(&self, item: &Item) -> i16 {\n'
-                    'match item {\n')
-            for item in self.item_max_counts():
-                f.write(f'Item::{item} => self.{item.lower()}.into(),\n')
-            f.write('_ => 0,\n'
-                    '}\n}\n}\n\n'
-                    'impl context::PosContext<Spot> for Context {\n'
-                    'fn position(&self) -> &Spot { &self.position }\n'
-                    'fn set_position(&mut self, pos: Spot) { self.position = pos; }\n'
-                    '}\n')
-
-
+    def render(self):
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir),
+                                 line_statement_prefix='%%',
+                                 line_comment_prefix='%#')
+        env.filters['construct_id'] = construct_id
+        env.filters['treeToString'] = treeToString
+        env.filters['get_item_type_for_max'] = get_item_type_for_max
+        # Access cached_properties to ensure they're in the template vars
+        self.all_items
+        self.context_types
+        self.context_values
+        for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs']:
+            template = env.get_template(tname + '.jinja')
+            with open(os.path.join(self.game_dir, 'src', tname), 'w') as f:
+                f.write(template.render(gl=self, **self.__dict__))
 
 
 if __name__ == '__main__':
@@ -467,10 +409,7 @@ if __name__ == '__main__':
     if gl.errors:
         print('\n'.join(gl.errors))
         sys.exit(1)
-    gl.emit_helpers()
-    gl.emit_graph()
-    gl.emit_items()
-    gl.emit_context()
+    gl.render()
 
     srcdir = os.path.join(gl.game_dir, 'src')
     files = os.listdir(srcdir)

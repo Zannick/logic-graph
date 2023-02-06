@@ -15,6 +15,7 @@ trait TakesTime {
     fn time(&self) -> i8;
 }
 
+#[derive(Clone)]
 struct Location {
     id: graph::Location,
     item: Item,
@@ -24,7 +25,11 @@ struct Location {
     time: i8,
 }
 
-impl world::Location<graph::Location, Item> for Location {
+impl world::Location for Location {
+    type LocId = graph::Location;
+    type ItemId = Item;
+    type CanonId = graph::Canon;
+
     fn id(&self) -> &graph::Location {
         &self.id
     }
@@ -36,13 +41,19 @@ impl world::Location<graph::Location, Item> for Location {
     fn clear_item(&mut self) {
         self.item = Item::None;
     }
+
+    fn get_canon_id(&self) -> &graph::Canon {
+        &self.canonical
+    }
 }
 
+#[derive(Clone)]
 struct Exit {
     id: graph::Exit,
     time: i8,
 }
 
+#[derive(Clone)]
 struct Hybrid {
     id: graph::Exit,
     item: Item,
@@ -50,15 +61,12 @@ struct Hybrid {
     time: i8,
 }
 
-enum Place {
-    Location(Location),
-    Hybrid(Hybrid),
-}
-
+#[derive(Clone)]
 struct Node {
     id: graph::Spot,
-    points: Vec<Place>,
+    locations: Vec<Location>,
     exits: Vec<Exit>,
+    hybrids: Vec<Hybrid>,
 }
 
 struct World {

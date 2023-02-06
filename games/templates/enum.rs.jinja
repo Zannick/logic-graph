@@ -1,0 +1,25 @@
+%% macro enum(name, values, default=False)
+#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum{{ ", Default" if default }})]
+pub enum {{ name }} {
+%% if default
+    #[default] None,
+%% endif
+%% for v in values
+    {{ v.id or v|construct_id }},
+%% endfor
+}
+impl fmt::Display for {{ name }} {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+%% if default
+            {{ name }}::None => write!(f, "{}", "None"),
+%% endif
+%% for v in values
+            {{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
+%% endfor
+        }
+    }
+}
+
+%% endmacro
+
