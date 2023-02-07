@@ -162,31 +162,40 @@ areas:
       locations:
         - name: Blue Rupee
           item: Rupees_5
-          tags: [standing]
         - name: Item 1
           item: Buy_Deku_Shield
-          cost: 40
+          # A field "costs" specifies the currency.
+          # If omitted, defaults to the first numerical context item.
+          price: 40
+          tags: [visible]
         - name: Item 2
           item: Buy_Deku_Nut_5
-          cost: 15
+          price: 15
+          tags: [visible]
         - name: Item 3
           item: Buy_Deku_Nut_10
-          cost: 30
+          price: 30
+          tags: [visible]
         - name: Item 4
           item: Buy_Deku_Stick_1
-          cost: 10
+          price: 10
+          tags: [visible]
         - name: Item 5
           item: Buy_Deku_Seeds_30
-          cost: 30
+          price: 30
+          tags: [visible]
         - name: Item 6
           item: Buy_Arrows_10
-          cost: 20
+          price: 20
+          tags: [visible]
         - name: Item 7
           item: Buy_Arrows_30
-          cost: 60
+          price: 60
+          tags: [visible]
         - name: Item 8
           item: Buy_Heart
-          cost: 10
+          price: 10
+          tags: [visible]
       exits:
         - to: Kokiri Village > Shop Porch
           tags: [load, exterior]

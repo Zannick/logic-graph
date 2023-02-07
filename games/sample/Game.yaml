@@ -9,7 +9,7 @@ start:  # default initial context, global context values
   # game-specific stuff
   child: True
   tod: day  # affected by realtime will be tough to handle
-  rupees: 0
+  rupees: 0  # the first numerical context item is the default currency
 
 objectives:  # win conditions
   Ganon: Defeat_Ganon

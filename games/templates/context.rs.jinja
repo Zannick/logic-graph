@@ -8,9 +8,10 @@ use crate::graph::*;
 use crate::items::Item;
 use analyzer::context;
 
+#[derive(Copy, Clone, Debug)]
 pub struct Context {
 %% for ctx, t in context_types.items()
-    {{ ctx }}: {{ t }},
+    pub {{ ctx }}: {{ t }},
 %% endfor
 %% for item, ct in gl.item_max_counts().items()|sort
     {{ item|lower }}: {{ ct|get_item_type_for_max }},
@@ -19,7 +20,8 @@ pub struct Context {
 
 %# we might not need these, if we reference the parameter directly in rules
 %# or whatnot
-impl context::ItemContext<Item> for Context {
+impl context::ItemContext for Context {
+    type ItemId = Item;
     fn has(&self, item: &Item) -> bool {
         match item {
 %% for item, ct in gl.item_max_counts().items()|sort
@@ -36,13 +38,25 @@ impl context::ItemContext<Item> for Context {
             _ => 0,
         }
     }
+    fn collect(&mut self, item: &Item) {
+        match item {
+%% for item, ct in gl.item_max_counts().items()|sort
+            Item::{{ item }} => {
+                self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+%# there's special code for collect for specific items that may go here
+            },
+%% endfor
+            _ => (),
+        }
+    }
 }
 
-impl context::PosContext<Spot> for Context {
+impl context::PosContext for Context {
+    type SpotId = Spot;
     fn position(&self) -> &Spot {
         &self.position
     }
-    fn set_position(&mut self, pos: Spot) {
-        self.position = pos;
+    fn set_position(&mut self, pos: &Spot) {
+        self.position = *pos;
     }
 }

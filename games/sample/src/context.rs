@@ -8,14 +8,15 @@ use crate::graph::*;
 use crate::items::Item;
 use analyzer::context;
 
+#[derive(Copy, Clone, Debug)]
 pub struct Context {
-    position: Spot,
-    elapsed: i32,
-    save: Spot,
-    child: bool,
-    tod: &'static str,
-    rupees: i32,
-    deku_tree__compass_room__torch: bool,
+    pub position: Spot,
+    pub elapsed: i32,
+    pub save: Spot,
+    pub child: bool,
+    pub tod: &'static str,
+    pub rupees: i32,
+    pub deku_tree__compass_room__torch: bool,
     biggoron_sword: bool,
     blue_fire_arrows: bool,
     bombs: bool,
@@ -63,7 +64,8 @@ pub struct Context {
     zora_tunic: bool,
 }
 
-impl context::ItemContext<Item> for Context {
+impl context::ItemContext for Context {
+    type ItemId = Item;
     fn has(&self, item: &Item) -> bool {
         match item {
             Item::Biggoron_Sword => self.biggoron_sword,
@@ -164,13 +166,154 @@ impl context::ItemContext<Item> for Context {
             _ => 0,
         }
     }
+    fn collect(&mut self, item: &Item) {
+        match item {
+            Item::Biggoron_Sword => {
+                self.biggoron_sword = true;
+            }
+            Item::Blue_Fire_Arrows => {
+                self.blue_fire_arrows = true;
+            }
+            Item::Bombs => {
+                self.bombs = true;
+            }
+            Item::Boomerang => {
+                self.boomerang = true;
+            }
+            Item::Bow => {
+                self.bow = true;
+            }
+            Item::Buy_Deku_Nut_10 => {
+                self.buy_deku_nut_10 = true;
+            }
+            Item::Buy_Deku_Nut_5 => {
+                self.buy_deku_nut_5 = true;
+            }
+            Item::Buy_Deku_Shield => {
+                self.buy_deku_shield = true;
+            }
+            Item::Buy_Deku_Stick_1 => {
+                self.buy_deku_stick_1 = true;
+            }
+            Item::Defeat_Ganon => {
+                self.defeat_ganon = true;
+            }
+            Item::Defeat_Gohma => {
+                self.defeat_gohma = true;
+            }
+            Item::Deku_Back_Room_Wall => {
+                self.deku_back_room_wall = true;
+            }
+            Item::Deku_Back_Room_Web => {
+                self.deku_back_room_web = true;
+            }
+            Item::Deku_Basement_Block => {
+                self.deku_basement_block = true;
+            }
+            Item::Deku_Basement_Scrubs => {
+                self.deku_basement_scrubs = true;
+            }
+            Item::Deku_Basement_Switch => {
+                self.deku_basement_switch = true;
+            }
+            Item::Deku_Basement_Web => {
+                self.deku_basement_web = true;
+            }
+            Item::Deku_Lobby_Web => {
+                self.deku_lobby_web = true;
+            }
+            Item::Deku_Nut_Drop => {
+                self.deku_nut_drop = true;
+            }
+            Item::Deku_Shield_Drop => {
+                self.deku_shield_drop = true;
+            }
+            Item::Deku_Slingshot_Scrub => {
+                self.deku_slingshot_scrub = true;
+            }
+            Item::Deku_Stick_Drop => {
+                self.deku_stick_drop = true;
+            }
+            Item::Dins_Fire => {
+                self.dins_fire = true;
+            }
+            Item::Farores_Wind => {
+                self.farores_wind = true;
+            }
+            Item::Fire_Arrows => {
+                self.fire_arrows = true;
+            }
+            Item::Gold_Skulltula_Token => {
+                self.gold_skulltula_token += 1;
+            }
+            Item::Goron_Tunic => {
+                self.goron_tunic = true;
+            }
+            Item::Hookshot => {
+                self.hookshot = true;
+            }
+            Item::Hover_Boots => {
+                self.hover_boots = true;
+            }
+            Item::Hylian_Shield => {
+                self.hylian_shield = true;
+            }
+            Item::Iron_Boots => {
+                self.iron_boots = true;
+            }
+            Item::Kokiri_Emerald => {
+                self.kokiri_emerald = true;
+            }
+            Item::Kokiri_Sword => {
+                self.kokiri_sword = true;
+            }
+            Item::Lens_of_Truth => {
+                self.lens_of_truth = true;
+            }
+            Item::Light_Arrows => {
+                self.light_arrows = true;
+            }
+            Item::Magic_Meter => {
+                self.magic_meter = true;
+            }
+            Item::Megaton_Hammer => {
+                self.megaton_hammer = true;
+            }
+            Item::Minuet_of_Forest => {
+                self.minuet_of_forest = true;
+            }
+            Item::Mirror_Shield => {
+                self.mirror_shield = true;
+            }
+            Item::Nayrus_Love => {
+                self.nayrus_love = true;
+            }
+            Item::Ocarina => {
+                self.ocarina = true;
+            }
+            Item::Showed_Mido => {
+                self.showed_mido = true;
+            }
+            Item::Slingshot => {
+                self.slingshot = true;
+            }
+            Item::Triforce_Piece => {
+                self.triforce_piece += 1;
+            }
+            Item::Zora_Tunic => {
+                self.zora_tunic = true;
+            }
+            _ => (),
+        }
+    }
 }
 
-impl context::PosContext<Spot> for Context {
+impl context::PosContext for Context {
+    type SpotId = Spot;
     fn position(&self) -> &Spot {
         &self.position
     }
-    fn set_position(&mut self, pos: Spot) {
-        self.position = pos;
+    fn set_position(&mut self, pos: &Spot) {
+        self.position = *pos;
     }
 }
