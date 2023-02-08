@@ -6,66 +6,71 @@
 
 use crate::graph::*;
 use crate::items::Item;
+use crate::prices::Currency;
 use analyzer::context;
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Clone, Debug)]
 pub struct Context {
-    pub position: Spot,
+    pub position: SpotId,
     pub elapsed: i32,
-    pub save: Spot,
+    pub save: SpotId,
     pub child: bool,
     pub tod: &'static str,
     pub rupees: i32,
     pub deku_tree__compass_room__torch: bool,
-    biggoron_sword: bool,
-    blue_fire_arrows: bool,
-    bombs: bool,
-    boomerang: bool,
-    bow: bool,
-    buy_deku_nut_10: bool,
-    buy_deku_nut_5: bool,
-    buy_deku_shield: bool,
-    buy_deku_stick_1: bool,
-    defeat_ganon: bool,
-    defeat_gohma: bool,
-    deku_back_room_wall: bool,
-    deku_back_room_web: bool,
-    deku_basement_block: bool,
-    deku_basement_scrubs: bool,
-    deku_basement_switch: bool,
-    deku_basement_web: bool,
-    deku_lobby_web: bool,
-    deku_nut_drop: bool,
-    deku_shield_drop: bool,
-    deku_slingshot_scrub: bool,
-    deku_stick_drop: bool,
-    dins_fire: bool,
-    farores_wind: bool,
-    fire_arrows: bool,
-    gold_skulltula_token: i8,
-    goron_tunic: bool,
-    hookshot: bool,
-    hover_boots: bool,
-    hylian_shield: bool,
-    iron_boots: bool,
-    kokiri_emerald: bool,
-    kokiri_sword: bool,
-    lens_of_truth: bool,
-    light_arrows: bool,
-    magic_meter: bool,
-    megaton_hammer: bool,
-    minuet_of_forest: bool,
-    mirror_shield: bool,
-    nayrus_love: bool,
-    ocarina: bool,
-    showed_mido: bool,
-    slingshot: bool,
-    triforce_piece: i16,
-    zora_tunic: bool,
+    pub biggoron_sword: bool,
+    pub blue_fire_arrows: bool,
+    pub bombs: bool,
+    pub boomerang: bool,
+    pub bow: bool,
+    pub buy_deku_nut_10: bool,
+    pub buy_deku_nut_5: bool,
+    pub buy_deku_shield: bool,
+    pub buy_deku_stick_1: bool,
+    pub defeat_ganon: bool,
+    pub defeat_gohma: bool,
+    pub deku_back_room_wall: bool,
+    pub deku_back_room_web: bool,
+    pub deku_basement_block: bool,
+    pub deku_basement_scrubs: bool,
+    pub deku_basement_switch: bool,
+    pub deku_basement_web: bool,
+    pub deku_lobby_web: bool,
+    pub deku_nut_drop: bool,
+    pub deku_shield_drop: bool,
+    pub deku_slingshot_scrub: bool,
+    pub deku_stick_drop: bool,
+    pub dins_fire: bool,
+    pub farores_wind: bool,
+    pub fire_arrows: bool,
+    pub gold_skulltula_token: i8,
+    pub goron_tunic: bool,
+    pub hookshot: bool,
+    pub hover_boots: bool,
+    pub hylian_shield: bool,
+    pub iron_boots: bool,
+    pub kokiri_emerald: bool,
+    pub kokiri_sword: bool,
+    pub lens_of_truth: bool,
+    pub light_arrows: bool,
+    pub magic_meter: bool,
+    pub megaton_hammer: bool,
+    pub minuet_of_forest: bool,
+    pub mirror_shield: bool,
+    pub nayrus_love: bool,
+    pub ocarina: bool,
+    pub showed_mido: bool,
+    pub slingshot: bool,
+    pub triforce_piece: i16,
+    pub zora_tunic: bool,
+    history: Box<Vec<History>>,
 }
 
-impl context::ItemContext for Context {
+impl context::Ctx for Context {
     type ItemId = Item;
+    type SpotId = SpotId;
+    type Currency = Currency;
+
     fn has(&self, item: &Item) -> bool {
         match item {
             Item::Biggoron_Sword => self.biggoron_sword,
@@ -306,14 +311,24 @@ impl context::ItemContext for Context {
             _ => (),
         }
     }
-}
 
-impl context::PosContext for Context {
-    type SpotId = Spot;
-    fn position(&self) -> &Spot {
+    fn position(&self) -> &SpotId {
         &self.position
     }
-    fn set_position(&mut self, pos: &Spot) {
+    fn set_position(&mut self, pos: &SpotId) {
         self.position = *pos;
+    }
+
+    fn can_afford(&self, cost: &Currency) -> bool {
+        match cost {
+            Currency::Free => true,
+            Currency::Rupees(c) => self.rupees >= *c,
+        }
+    }
+    fn spend(&mut self, cost: &Currency) {
+        match cost {
+            Currency::Free => (),
+            Currency::Rupees(c) => self.rupees -= *c,
+        }
     }
 }

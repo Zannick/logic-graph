@@ -88,7 +88,7 @@ def get_func_args(helper_key):
 def typenameof(val):
     if isinstance(val, str):
         if '>' in val:
-            return 'Spot'
+            return 'SpotId'
         # arguably even anything that's a string could be an enum instead
         # but we'd have to organize all the possible values
         return "&'static str"
@@ -378,9 +378,15 @@ class GameLogic(object):
 
     @cached_property
     def context_types(self):
-        d = {'position': 'Spot', 'elapsed': 'i32'}
+        d = {'position': 'SpotId', 'elapsed': 'i32'}
         d.update((ctx, typenameof(val)) for ctx, val in self.context_values.items())
         return d
+
+    
+    @cached_property
+    def price_types(self):
+        return [ctx for ctx, val in self._info['start'].items()
+                if typenameof(val) == 'i32']
 
 
     def render(self):
@@ -394,7 +400,9 @@ class GameLogic(object):
         self.all_items
         self.context_types
         self.context_values
-        for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs']:
+        self.price_types
+        for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
+                      'prices.rs']:
             template = env.get_template(tname + '.jinja')
             with open(os.path.join(self.game_dir, 'src', tname), 'w') as f:
                 f.write(template.render(gl=self, **self.__dict__))

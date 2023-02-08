@@ -1,0 +1,10 @@
+%% include 'header.rs.jinja'
+
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
+pub enum Currency {
+    #[default] Free,
+%% for ptype in price_types
+    {{ ptype|capitalize }}(i32),
+%% endfor
+}
+
