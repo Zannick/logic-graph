@@ -1,47 +1,35 @@
 use crate::context::Ctx;
 
-pub trait Location {
+pub trait Accessible {
+    type Context: Ctx;
+    fn can_access(&self, ctx: &Self::Context) -> bool;
+}
+
+pub trait Location: Accessible {
     type LocId;
     type CanonId;
-    type Context: Ctx;
 
     fn id(&self) -> &Self::LocId;
     fn item(&self) -> &<Self::Context as Ctx>::ItemId;
-    fn clear_item(&mut self);
-    fn get_canon_id(&self) -> &Self::CanonId;
+    fn canon_id(&self) -> &Self::CanonId;
 
-    fn can_access(&self, ctx: &Self::Context) -> bool;
-    fn take(&mut self, ctx: &mut Self::Context);
+    // to be replaced with similar methods on Context
+    //fn take(&self, ctx: &mut Self::Context);
+    //fn skip(&self, ctx: &mut Self::Context);
 }
 
-pub trait Exit {
+pub trait Exit: Accessible {
     type ExitId;
     type SpotId;
-    type Context;
 
     fn id(&self) -> &Self::ExitId;
     fn dest(&self) -> &Self::SpotId;
     fn connect(&mut self, dest: &Self::SpotId);
-    fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
-pub trait Hybrid {
-    type ExitId;
-    type CanonId;
-    type Context: Ctx;
-
-    fn id(&self) -> &Self::ExitId;
-    fn item(&self) -> &<Self::Context as Ctx>::ItemId;
-    fn clear_item(&mut self);
-    fn get_canon_id(&self) -> &Self::CanonId;
-    fn can_access(&self, ctx: &Self::Context) -> bool;
-}
-
-pub trait Action {
+pub trait Action: Accessible {
     type ActionId;
-    type Context;
     fn id(&self) -> &Self::ActionId;
-    fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
 pub trait Spot {
@@ -49,23 +37,24 @@ pub trait Spot {
     type Location: Location;
     type Exit: Exit;
     type Action: Action;
-    type Hybrid: Hybrid;
 
     fn id(&self) -> &Self::SpotId;
-    fn get_coord(&self) -> (i16, i16);
-    fn get_locations(&self) -> &[Self::Location];
-    fn get_exits(&self) -> &[Self::Exit];
-    fn get_actions(&self) -> &[Self::Action];
-    fn get_hybrids(&self) -> &[Self::Hybrid];
+    // might not be necessary if we hardcode distances
+    //fn get_coord(&self) -> (i16, i16);
+    fn locations(&self) -> &[Self::Location];
+    fn exits(&self) -> &[Self::Exit];
+    fn actions(&self) -> &[Self::Action];
 }
 
+// This is necessary to handle movement calculations
 pub trait Area {
     type AreaId;
     type Spot;
     fn id(&self) -> &Self::AreaId;
-    fn get_spots(&self) -> &[Self::Spot];
+    fn spots(&self) -> &[Self::Spot];
 }
 
+// This one might not be necessary.
 pub trait Region {
     type RegionId;
     fn id(&self) -> &Self::RegionId;
@@ -74,16 +63,13 @@ pub trait Region {
 pub trait World {
     type Location: Location;
     type Exit: Exit;
-    //type Action: Action;
-    //type Hybrid: Hybrid;
-    type Spot; //: Spot;
-               //type Area: Area;
-               //type Region: Region;
-    type Context: Ctx;
+    type Action: Action;
+    type Spot: Spot;
+    //type Area: Area;
+    //type Region: Region;
 
-    fn get_location(&self, locid: &<Self::Location as Location>::LocId) -> &Self::Location;
-    fn get_location_mut(
-        &mut self,
-        locid: &<Self::Location as Location>::LocId,
-    ) -> &mut Self::Location;
+    fn get_location(&self, loc_id: &<Self::Location as Location>::LocId) -> &Self::Location;
+    fn get_exit(&self, ex_id: &<Self::Exit as Exit>::ExitId) -> &Self::Exit;
+    fn get_action(&self, act_id: &<Self::Action as Action>::ActionId) -> &Self::Action;
+    fn get_spot(&self, sp_id: &<Self::Spot as Spot>::SpotId) -> &Self::Spot;
 }

@@ -224,13 +224,18 @@ class GameLogic(object):
         return itertools.chain.from_iterable(a['spots'] for a in self.areas())
 
 
+    # Hybrids are both locations and exits, so they have to be returned here
+    # for both in order to create the appropriate ids. However, they should
+    # be created only as Exit objects later.
     def locations(self):
-        return itertools.chain.from_iterable(s.get('locations', []) for s in self.spots())
+        return itertools.chain.from_iterable(s.get('locations', []) + s.get('hybrid', [])
+                                             for s in self.spots())
 
 
     def exits(self):
         return itertools.chain.from_iterable(s.get('exits', []) + s.get('hybrid', [])
                                              for s in self.spots())
+
 
     def actions(self):
         return itertools.chain.from_iterable(s.get('actions', []) for s in self.spots())

@@ -263,6 +263,8 @@ pub enum LocationId {
     Deku_Tree__Scrub_Room__Entry__Scrub,
     Deku_Tree__Slingshot_Room__Slingshot__Chest,
     Deku_Tree__Slingshot_Upper__Ledge__Chest,
+    Deku_Tree__Floor_3__Door__Break_Web,
+    Deku_Tree__Compass_Room__Entry__Burn_Web,
     Deku_Tree__Compass_Room__Compass__Chest,
     Deku_Tree__Compass_Room__Ledge__Chest,
     Deku_Tree__Compass_Room__Ledge__GS,
@@ -270,6 +272,7 @@ pub enum LocationId {
     Deku_Tree__Basement_1__Corner__Switch,
     Deku_Tree__Basement_1__Corner__Chest,
     Deku_Tree__Basement_1__Corner__Gate_GS,
+    Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
     Deku_Tree__Back_Room__Northwest__Burn_Web,
     Deku_Tree__Back_Room__Northwest__Break_Wall,
     Deku_Tree__Skull_Room__Entry__GS,
@@ -279,6 +282,7 @@ pub enum LocationId {
     Deku_Tree__Boss_Room__Arena__Gohma,
     Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
     Deku_Tree__Boss_Room__Arena__Gohma_Heart,
+    Deku_Tree__Boss_Room__Arena__Blue_Warp,
     KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
     KF__Boulder_Maze__Reward__Chest,
     KF__Baba_Corridor__Deku_Babas__Sticks,
@@ -324,6 +328,12 @@ impl fmt::Display for LocationId {
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
                 write!(f, "{}", "Deku Tree > Slingshot Upper > Ledge Chest")
             }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                write!(f, "{}", "Deku Tree > Floor 3 > Door Break Web")
+            }
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                write!(f, "{}", "Deku Tree > Compass Room > Entry Burn Web")
+            }
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
                 write!(f, "{}", "Deku Tree > Compass Room > Compass Chest")
             }
@@ -344,6 +354,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
                 write!(f, "{}", "Deku Tree > Basement 1 > Corner Gate GS")
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                write!(f, "{}", "Deku Tree > Basement 1 > Corner Burn Basement Web")
             }
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
                 write!(f, "{}", "Deku Tree > Back Room > Northwest Burn Web")
@@ -371,6 +384,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
                 write!(f, "{}", "Deku Tree > Boss Room > Arena Gohma Heart")
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                write!(f, "{}", "Deku Tree > Boss Room > Arena Blue Warp")
             }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
                 write!(f, "{}", "KF > Kokiri Village > Mido's Guardpost Show Mido")
@@ -750,6 +766,7 @@ pub enum CanonId {
     None,
     Deku_Lobby_Web,
     Deku_Basement_Web,
+    Defeat_Gohma,
 }
 impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -757,6 +774,7 @@ impl fmt::Display for CanonId {
             CanonId::None => write!(f, "{}", "None"),
             CanonId::Deku_Lobby_Web => write!(f, "{}", "Deku_Lobby_Web"),
             CanonId::Deku_Basement_Web => write!(f, "{}", "Deku_Basement_Web"),
+            CanonId::Defeat_Gohma => write!(f, "{}", "Defeat_Gohma"),
         }
     }
 }
@@ -780,10 +798,16 @@ struct Location {
     access_rule: fn(&Context) -> bool,
 }
 
+impl world::Accessible for Location {
+    type Context = Context;
+    fn can_access(&self, ctx: &Context) -> bool {
+        ctx.can_afford(&self.price) && (self.access_rule)(ctx)
+    }
+}
+
 impl world::Location for Location {
     type LocId = LocationId;
     type CanonId = CanonId;
-    type Context = Context;
 
     fn id(&self) -> &LocationId {
         &self.id
@@ -791,23 +815,9 @@ impl world::Location for Location {
     fn item(&self) -> &Item {
         &self.item
     }
-    fn clear_item(&mut self) {
-        self.item = Item::None;
-    }
 
-    fn get_canon_id(&self) -> &CanonId {
+    fn canon_id(&self) -> &CanonId {
         &self.canonical
-    }
-
-    fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && (self.access_rule)(ctx)
-    }
-
-    fn take(&mut self, ctx: &mut Context) {
-        ctx.collect(&self.item);
-        ctx.spend(&self.price);
-        ctx.elapsed += self.time.into();
-        self.clear_item();
     }
 }
 
@@ -816,13 +826,26 @@ struct Exit {
     id: ExitId,
     time: i8,
     dest: SpotId,
+    price: Currency,
+
+    loc_id: LocationId,
+    item: Item,
+    canonical: CanonId,
+    item_time: i8,
+
     access_rule: fn(&Context) -> bool,
+}
+
+impl world::Accessible for Exit {
+    type Context = Context;
+    fn can_access(&self, ctx: &Context) -> bool {
+        ctx.can_afford(&self.price) && (self.access_rule)(ctx)
+    }
 }
 
 impl world::Exit for Exit {
     type ExitId = ExitId;
     type SpotId = SpotId;
-    type Context = Context;
 
     fn id(&self) -> &ExitId {
         &self.id
@@ -833,20 +856,22 @@ impl world::Exit for Exit {
     fn connect(&mut self, dest: &SpotId) {
         self.dest = *dest;
     }
-    fn can_access(&self, ctx: &Context) -> bool {
-        (self.access_rule)(ctx)
-    }
 }
 
-#[derive(Copy, Clone)]
-struct Hybrid {
-    id: ExitId,
-    item: Item,
-    canonical: CanonId,
-    time: i8,
-    price: Currency,
-    dest: SpotId,
-    access_rule: fn(&Context) -> bool,
+impl world::Location for Exit {
+    type LocId = LocationId;
+    type CanonId = CanonId;
+
+    fn id(&self) -> &LocationId {
+        &self.loc_id
+    }
+    fn item(&self) -> &Item {
+        &self.item
+    }
+
+    fn canon_id(&self) -> &CanonId {
+        &self.canonical
+    }
 }
 
 #[derive(Copy, Clone)]
@@ -857,18 +882,50 @@ struct Action {
     time: i8,
 }
 
+impl world::Accessible for Action {
+    type Context = Context;
+    fn can_access(&self, ctx: &Context) -> bool {
+        (self.access_rule)(ctx)
+    }
+}
+impl world::Action for Action {
+    type ActionId = ActionId;
+    fn id(&self) -> &ActionId {
+        &self.id
+    }
+}
+
 #[derive(Copy, Clone)]
 struct Spot<'a> {
     id: SpotId,
     // we can hold slices here to the real things held in World
     locations: &'a [Location],
     exits: &'a [Exit],
-    hybrids: &'a [Hybrid],
+    actions: &'a [Action],
 }
 
-#[derive(Copy, Clone)]
+impl<'a> world::Spot for Spot<'a> {
+    type SpotId = SpotId;
+    type Location = Location;
+    type Exit = Exit;
+    type Action = Action;
+
+    fn id(&self) -> &SpotId {
+        &self.id
+    }
+    fn locations(&self) -> &'a [Location] {
+        &self.locations
+    }
+    fn exits(&self) -> &'a [Exit] {
+        &self.exits
+    }
+    fn actions(&self) -> &'a [Action] {
+        &self.actions
+    }
+}
+
+#[derive(Clone)]
 struct World<'a> {
-    state: Context,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -877,19 +934,26 @@ struct World<'a> {
     // list: EnumArray<ObjType>,
     locations: EnumMap<LocationId, Location>,
     exits: EnumMap<ExitId, Exit>,
+    actions: EnumMap<ActionId, Action>,
     spots: EnumMap<SpotId, Spot<'a>>,
 }
 
 impl<'a> world::World for World<'a> {
     type Location = Location;
     type Exit = Exit;
+    type Action = Action;
     type Spot = Spot<'a>;
-    type Context = Context;
 
-    fn get_location(&self, locid: &LocationId) -> &Location {
-        &self.locations[*locid]
+    fn get_location(&self, loc_id: &LocationId) -> &Location {
+        &self.locations[*loc_id]
     }
-    fn get_location_mut(&mut self, locid: &LocationId) -> &mut Location {
-        &mut self.locations[*locid]
+    fn get_exit(&self, ex_id: &ExitId) -> &Exit {
+        &self.exits[*ex_id]
+    }
+    fn get_action(&self, act_id: &ActionId) -> &Action {
+        &self.actions[*act_id]
+    }
+    fn get_spot(&self, sp_id: &SpotId) -> &Spot<'a> {
+        &self.spots[*sp_id]
     }
 }

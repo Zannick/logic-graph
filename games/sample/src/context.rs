@@ -8,6 +8,15 @@ use crate::graph::*;
 use crate::items::Item;
 use crate::prices::Currency;
 use analyzer::context;
+use enum_map::EnumMap;
+
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
+enum Status {
+    #[default]
+    None,
+    Visited,
+    Skipped,
+}
 
 #[derive(Clone, Debug)]
 pub struct Context {
@@ -64,10 +73,12 @@ pub struct Context {
     pub triforce_piece: i16,
     pub zora_tunic: bool,
     history: Box<Vec<History>>,
+    status: EnumMap<LocationId, Status>,
 }
 
 impl context::Ctx for Context {
     type ItemId = Item;
+    type LocationId = LocationId;
     type SpotId = SpotId;
     type Currency = Currency;
 
@@ -330,5 +341,15 @@ impl context::Ctx for Context {
             Currency::Free => (),
             Currency::Rupees(c) => self.rupees -= *c,
         }
+    }
+
+    fn visit(&mut self, loc_id: &LocationId) {
+        self.status[*loc_id] = Status::Visited;
+    }
+    fn skip(&mut self, loc_id: &LocationId) {
+        self.status[*loc_id] = Status::Skipped;
+    }
+    fn elapse(&mut self, t: i32) {
+        self.elapsed += t;
     }
 }

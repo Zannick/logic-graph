@@ -126,6 +126,7 @@ areas:
           canon: Deku_Lobby_Web
           req: $is_adult or $can_child_attack or $Nuts
           time: 4
+          item_time: 0
           to: Basement 1 > Center
           tags: [event]
 
@@ -304,20 +305,24 @@ areas:
       locations:
         - name: Gohma
           item: Defeat_Gohma
+          canon: Defeat_Gohma
           req: ($Nuts or $can_use(Slingshot)) and $can_jumpslash
           time: 10
           tags: [event]
         - name: Gohma Quick Kill
           item: Defeat_Gohma
+          canon: Defeat_Gohma
           req: $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
           time: 4
           tags: [event]
         - name: Gohma Heart
           item: Heart_Container
           req: Defeat_Gohma
+          tags: [visible]
       hybrid:
         - name: Blue Warp
           item: Kokiri_Emerald
           req: Defeat_Gohma
           tags: [bluewarp]
           to: KF > Outside Deku Tree > Mouth
+          time: 8
