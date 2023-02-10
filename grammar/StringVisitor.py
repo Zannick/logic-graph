@@ -57,7 +57,10 @@ class StringVisitor(RulesVisitor):
         return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
-        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {ctx.LIT() or self.visit(ctx.num())}'
+        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {self.visit(ctx.num())}'
+
+    def visitCmpStr(self, ctx):
+        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {ctx.LIT()}'
 
     def visitFlagMatch(self, ctx):
         num = f'{self.visit(ctx.num())}'

@@ -20,6 +20,7 @@ pub enum Status {
 
 #[derive(Clone, Debug, Default)]
 pub struct Context {
+    // context vars
     pub position: SpotId,
     pub elapsed: i32,
     pub save: SpotId,
@@ -27,6 +28,10 @@ pub struct Context {
     pub tod: &'static str,
     pub rupees: i32,
     pub deku_tree__compass_room__ctx__torch: bool,
+    // settings
+    pub triforce_count: i16,
+    pub logic_deku_b1_skip: bool,
+    // items
     pub biggoron_sword: bool,
     pub blue_fire_arrows: bool,
     pub bombs: bool,
@@ -72,6 +77,7 @@ pub struct Context {
     pub slingshot: bool,
     pub triforce_piece: i16,
     pub zora_tunic: bool,
+    // other
     history: Box<Vec<History>>,
     pub status: EnumMap<LocationId, Status>,
 }

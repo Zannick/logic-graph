@@ -11,6 +11,7 @@ boolExpr
     | switch
     | cond
     | cmp
+    | cmpStr
     | flagMatch
     | refEq
     | item
@@ -54,31 +55,39 @@ condStr : IF '(' boolExpr ')' '{' str '}'
 
 switch  : PER ITEM '{' ( INT '=>' boolExpr ';' )+
                         '_' '=>' boolExpr ';'? '}'      # PerItemBool
-        | PER SETTING '{' ( ( INT | LIT ) '=>' boolExpr ';' )+
-                        '_' '=>' boolExpr ';'? '}'      # PerSettingBool
+        | PER SETTING '{' 
+            ( ( INT '=>' boolExpr ';' )+
+            | ( LIT '=>' boolExpr ';' )+ )
+            '_' '=>' boolExpr ';'? '}'                  # PerSettingBool
         | MATCH REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ';' )+
                             '_' '=>' boolExpr ';'? '}'  # MatchRefBool
         // simpler match expression where all results are true/false
         | REF IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
         ;
 switchNum   : PER ITEM '{' ( INT '=>' num ';' )+ '_' '=>' num ';'? '}'  # PerItemInt
-            | PER ( REF | SETTING ) '{' ( ( INT | LIT ) '=>' num ';' )+
-                                    '_' '=>' num ';'? '}'               # PerSettingInt
+            | PER ( REF | SETTING ) '{'
+                ( ( INT '=>' num ';' )+
+                | ( LIT '=>' num ';' )+ )
+                '_' '=>' num ';'? '}'                                   # PerSettingInt
             ;
 switchStr   : PER ITEM '{' ( INT '=>' str ';' )+ '_' '=>' str ';'? '}'  # PerItemStr
-            | PER ( REF | SETTING ) '{' ( ( INT | LIT ) '=>' str ';' )+
-                                    '_' '=>' str ';'? '}'               # PerSettingStr
+            | PER ( REF | SETTING ) '{'
+                ( ( INT '=>' str ';' )+
+                | ( LIT '=>' str ';' )+ )
+                '_' '=>' str ';'? '}'                                   # PerSettingStr
             ;
 
 cmp : value '==' num
-    | value '==' LIT
     | value '!=' num
-    | value '!=' LIT
     | value '>=' num
     | value '<=' num
     | value '<' num
     | value '>' num
     ;
+
+cmpStr  : value '==' LIT
+        | value '!=' LIT
+        ;
 
 flagMatch : value '&' num ;
 refEq : REF '==' ( ITEM | SETTING ) ;

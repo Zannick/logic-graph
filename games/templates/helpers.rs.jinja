@@ -1,12 +1,12 @@
 %% include 'header.rs.jinja'
 
-%% for (name, args), pr in helpers.items()
-/// {{ name }} ( {{ args|join(',') }} )
-/// {{ pr.text }}
+%% for name, info in helpers.items()
+/// {{ name }} ( {{ info.args|join(',') }} )
+/// {{ info.pr.text }}
 #[macro_export]
 macro_rules! helper__{{ name|construct_id }} {
-    ($ctx:expr{% for a in args %}, ${{ a }}:expr{% endfor %}) => {{ '{{' }}
-        {{ pr.tree|treeToRust({})|replace('ctx', '$ctx') }}
+    ($ctx:expr{% for a in info.args %}, ${{ a }}:expr{% endfor %}) => {{ '{{' }}
+        {{ info.pr.tree|treeToRust({})|replace('ctx', '$ctx') }}
     {{ '}}' }};
 }
 

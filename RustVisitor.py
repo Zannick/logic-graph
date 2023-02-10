@@ -7,6 +7,9 @@ class RustVisitor(RulesVisitor):
     def __init__(self, ctxdict):
         self.ctxdict = ctxdict
 
+    def _getRealRef(self, ref):
+        return f'ctx.{self.ctxdict[ref]}' if ref in self.ctxdict else f'${ref}'
+
     def visitBoolExpr(self, ctx):
         try:
             if ctx.OR():
@@ -61,14 +64,11 @@ class RustVisitor(RulesVisitor):
         return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
-        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {ctx.LIT() or self.visit(ctx.num())}'
+        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {self.visit(ctx.num())}'
 
     def visitFlagMatch(self, ctx):
         num = f'{self.visit(ctx.num())}'
         return f'({self.visit(ctx.value())} & {num}) == {num}'
-
-    def _getRealRef(self, ref):
-        return f'ctx.{self.ctxdict[ref]}' if ref in self.ctxdict else f'${ref}'
 
     def visitRefEq(self, ctx):
         ref = self._getRealRef(str(ctx.REF())[1:])

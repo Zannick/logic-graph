@@ -50,11 +50,12 @@ helpers:
   $Nuts: Buy_Deku_Nut_5 or Buy_Deku_Nut_10 or Deku_Nut_Drop
   $Sticks: Buy_Deku_Stick_1 or Deku_Stick_Drop
 
-  # If the helper is meant to return a number and not a bool, it must be prefixed
-  # with 'num:'
-  num:$wallet_max: PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
+  # If the helper is meant to return a number and not a bool, it must be noted
+  # with the rule (type, essentially) after the name:
+  $wallet_max:num: PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
 
   $has_shield: ($is_adult and Hylian_Shield) or ($is_child and $Deku_Shield)
+  # Argument types will be inferred based on usage.
   $can_play(song): Ocarina and ^song
   $can_jumpslash: $is_adult or $Sticks or Kokiri_Sword
 
@@ -82,3 +83,11 @@ collect:
   Rupee_10: ^rupee = $max(^rupee + 10, $wallet_max)
   Rupee_20: ^rupee = $max(^rupee + 20, $wallet_max)
   Rupee_50: ^rupee = $max(^rupee + 50, $wallet_max)
+
+
+settings:
+  triforce_count:
+    max: 1024
+  logic_deku_b1_skip:
+    type: bool
+

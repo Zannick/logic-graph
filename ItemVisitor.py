@@ -10,10 +10,12 @@ from grammar import RulesVisitor
 
 class ItemVisitor(RulesVisitor):
 
-    def __init__(self):
+    def __init__(self, settings):
         self.item_uses = Counter()
         self.item_max_counts = defaultdict(int)
+        self.settings = settings
         self.name = ''
+        self.errors = []
 
     def visit(self, tree, name=''):
         self.name = name
@@ -64,8 +66,17 @@ class ItemVisitor(RulesVisitor):
         it = str(ctx.ITEM())
         self.item_uses[it] += 1
         if ctx.SETTING():
-            logging.getLogger('').warning('Rule %r looks at a setting value of item %s, setting max to 1024', self.name, it)
-            self.item_max_counts[it] = max(1024, self.item_max_counts[it])
+            s = str(ctx.SETTING())
+            if sd := self.settings.get(s):
+                if sd['type'] != 'int':
+                    self.errors.append('Rule {self.name} uses setting {s} as int, but it is {sd["type"]}')
+                    return self.visitChildren(ctx)
+
+                m = sd.get('max', 1024)
+                if 'max' not in sd:
+                    logging.getLogger('').warning('Rule %r looks at a setting value of item %s, setting max to 1024', self.name, it)
+                self.item_max_counts[it] = max(m, self.item_max_counts[it])
+            # There would be an error added here but it is taken care of by SettingVisitor
         else:
             ct = int(str(ctx.INT()))
             self.item_max_counts[it] = max(ct, self.item_max_counts[it])

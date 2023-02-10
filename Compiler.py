@@ -17,17 +17,21 @@ import jinja2
 from grammar import parseRule, parseAction, StringVisitor
 from ItemVisitor import ItemVisitor
 from RustVisitor import RustVisitor
+from SettingVisitor import SettingVisitor
 from Utils import base_dir, construct_id, n1, BUILTINS
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'checks', 'start', 'load',
-               'helpers', 'collect'}
+               'helpers', 'collect', 'settings'}
 # To be validated later
 REGION_FIELDS = {'name', 'short', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid'}
+SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
+
+typed_name = re.compile(r'(?P<name>\$?\w+)(?::(?P<type>\w+))?')
 
 
 def load_regions_from_file(file):
@@ -59,21 +63,16 @@ def load_game_yaml(game_dir):
 def _parseExpression(logic, name, category, sep=':'):
     rule = 'boolExpr'
     # TODO: turn the whole thing into a regex
-    if ':' in name:
-        rule, name = name.split(':', 1)
+    if m := typed_name.match(name):
+        rule = m.group('type') or rule
+        name = m.group('name')
     return parseRule(rule, logic, name=f'{category}{sep}{name}')
 
 
-def get_item_type_for_max(count):
-    if count == 1:
-        return 'bool'
-    if count < 128:
-        return 'i8'
-    return 'i16'  # max 32767
-
-
 def get_func_name(helper_key):
-    return helper_key[helper_key.find('$'):].split('(', 1)[0]
+    if m := typed_name.match(helper_key):
+        return m.group('name')
+    return helper_key
 
 def get_func_args(helper_key):
     if '(' in helper_key:
@@ -81,19 +80,44 @@ def get_func_args(helper_key):
     return []
 
 
-def typenameof(val):
+def get_int_type_for_max(count):
+    if count == 1:
+        return 'bool'
+    if count < 128:
+        return 'i8'
+    if count < 32768:
+        return 'i16'
+    return 'i32'
+
+
+def config_type(val):
     if isinstance(val, str):
-        if '>' in val:
-            return 'SpotId'
-        # arguably even anything that's a string could be an enum instead
-        # but we'd have to organize all the possible values
-        return "&'static str"
+        depth = val.count('>')
+        # TODO: for support of Region, Area, Spot, or place ids as setting types
+        if depth:
+            return 'Id'
+        return 'str'
     if isinstance(val, bool):
         return 'bool'
     if isinstance(val, int):
-        return 'i32'
-    # nothing should hit this and be valid
+        return 'int'
+    if isinstance(val, float):
+        return 'float'
     return type(val).__name__
+
+
+ctx_types = {
+    'Id': 'SpotId',
+    # TODO: for enum support
+    # arguably even anything that's a string could be an enum instead
+    # but we'd have to organize all the possible values
+    'str': "&'static str",
+    'int': 'i32',
+    'float': 'f32',
+}
+def typenameof(val):
+    rname = config_type(val)
+    return ctx_types.get(rname, rname)
 
 
 def write_enum(file, ename, id_names, allow_none=False):
@@ -125,12 +149,14 @@ class GameLogic(object):
 
         self._info = gameinfo = load_game_yaml(self.game_dir)
         self.helpers = {
-            (get_func_name(name), tuple(get_func_args(name))):
-                _parseExpression(logic, name, 'helpers')
+            get_func_name(name): {
+                'args': get_func_args(name),
+                'pr': _parseExpression(logic, name, 'helpers'),
+            }
             for name, logic in gameinfo['helpers'].items()
         }
 
-        self.allowed_funcs = set(n1(self.helpers.keys())) | BUILTINS.keys()
+        self.allowed_funcs = self.helpers.keys() | BUILTINS.keys()
         self.access_funcs = {}
         self.action_funcs = {}
         self.objectives = {}
@@ -285,17 +311,57 @@ class GameLogic(object):
                     yield from spot.get('actions', ())
 
 
-    def all_parse_results(self):
-        yield from self.helpers.values()
+    def nonpoint_parse_results(self):
+        yield from (info['pr'] for info in self.helpers.values())
         yield from (info['pr'] for info in self.objectives.values())
         yield from (info['pr'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
+
+
+    def all_parse_results(self):
+        yield from self.nonpoint_parse_results()
         for pt in self.all_points():
             if 'pr' in pt:
                 yield pt['pr']
             if 'act' in pt:
                 yield pt['act']
+
+
+    @cached_property
+    def settings(self):
+        sd = self._info.get('settings', {})
+
+        def _apply_override(s, t, info, text):
+            if declared := info.get('type'):
+                if declared != t:
+                    logging.warning(f'Setting {s} type {declared} overridden by {text} ({t})')
+            info['type'] = t
+
+        for s, info in sd.items():
+            if disallowed := info.keys() - SETTING_FIELDS:
+                self._misc_errors.append(f'Unrecognized setting fields on setting {s}: {", ".join(disallowed)}')
+                continue
+            if m := info.get('max', 0):
+                t = config_type(m)
+                _apply_override(s, t, info, f'max: {m}')
+                if t == 'int':
+                    info['rust_type'] = get_int_type_for_max(m)
+            elif opts := info.get('opts', ()):
+                t, *types = {config_type(o) for o in opts}
+                if types:
+                    self._misc_errors.append(f'Setting {s} options are mixed types: {t}, {", ".join(types)}')
+                    continue
+                _apply_override(s, t, info, f'opts, e.g. {opts[0]}')
+                if t == 'int':
+                    info['rust_type'] = get_int_type_for_max(max(opts))
+            elif 'type' not in info:
+                self._misc_errors.append(f'Setting {s} must declare one of: type, max, opts')
+                continue
+            if 'rust_type' not in info:
+                info['rust_type'] = ctx_types.get(info['type'], info['type'])
+
+        return sd
 
 
     @cached_property
@@ -309,7 +375,7 @@ class GameLogic(object):
                 e.append(f'Invalid item name {item!r} at {pt["id"]}; '
                          f'did you mean {construct_id(pt["item"])!r}?')
         # Check used functions
-        for func in BUILTINS.keys() & set(n1(self.helpers.keys())):
+        for func in BUILTINS.keys() & self.helpers.keys():
             e.append(f'Cannot use reserved name {func!r} as helper')
         for pr in self.all_parse_results():
             for t in pr.parser.getTokenStream().tokens:
@@ -317,6 +383,23 @@ class GameLogic(object):
                     e.append(f'{pr.name}: Unrecognized function {t.text}')
         # Do things that will fill _misc_errors
         self.context_values
+
+        # Check settings
+        visitor = SettingVisitor(self.context_types, self.settings)
+        for pr in self.nonpoint_parse_results():
+            visitor.visit(pr.tree, pr.name, self.get_default_ctx())
+        for pt in self.all_points():
+            if 'pr' in pt:
+                visitor.visit(pt['pr'].tree, pt['pr'].name, self.get_local_ctx(pt))
+            if 'act' in pt:
+                visitor.visit(pt['act'].tree, pt['pr'].name, self.get_local_ctx(pt))
+        self.used_settings = visitor.setting_options
+        e.extend(visitor.errors)
+        for s in self.settings.keys() - self.used_settings.keys():
+            logging.warning(f'Did not find usage of setting {s}')
+
+        self.item_stats
+        e.extend(self._i_visitor.errors)
         e.extend(self._misc_errors)
         return e
 
@@ -342,7 +425,7 @@ class GameLogic(object):
 
     @cached_property
     def item_stats(self):
-        self._i_visitor = visitor = ItemVisitor()
+        self._i_visitor = visitor = ItemVisitor(self.settings)
         for pr in self.all_parse_results():
             visitor.visit(pr.tree, name=pr.name)
         return visitor.item_uses, visitor.item_max_counts
@@ -431,9 +514,11 @@ class GameLogic(object):
         d.update((ctx, typenameof(val)) for ctx, val in self.context_values.items())
         return d
 
+    def get_default_ctx(self):
+        return {c: c for c in self.context_values if '__ctx__' not in c}
 
     def get_local_ctx(self, info):
-        d = {c: c for c in self.context_values if '__ctx__' not in c}
+        d = self.get_default_ctx()
         if 'region' not in info:
             return d
 
@@ -466,7 +551,7 @@ class GameLogic(object):
         env.filters['construct_id'] = construct_id
         env.filters['treeToString'] = treeToString
         env.filters['treeToRust'] = self.treeToRust
-        env.filters['get_item_type_for_max'] = get_item_type_for_max
+        env.filters['get_int_type_for_max'] = get_int_type_for_max
         # Access cached_properties to ensure they're in the template vars
         self.all_items
         self.context_types

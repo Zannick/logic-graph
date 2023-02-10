@@ -17,12 +17,19 @@ pub enum Status {
 
 #[derive(Clone, Debug, Default)]
 pub struct Context {
+    // context vars
 %% for ctx, t in context_types.items()
     pub {{ ctx }}: {{ t }},
 %% endfor
-%% for item, ct in gl.item_max_counts().items()|sort
-    pub {{ item|lower }}: {{ ct|get_item_type_for_max }},
+    // settings
+%% for s, info in settings.items()
+    pub {{ s }}: {{ info.rust_type }},
 %% endfor
+    // items
+%% for item, ct in gl.item_max_counts().items()|sort
+    pub {{ item|lower }}: {{ ct|get_int_type_for_max }},
+%% endfor
+    // other
     history: Box<Vec<History>>,
     pub status: EnumMap<LocationId, Status>,
 }
