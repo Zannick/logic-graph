@@ -1,19 +1,20 @@
 %% include 'header.rs.jinja'
 
 #![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
 
-use crate::context::Context;
+use crate::context::*;
 use crate::items::Item;
 use crate::prices::Currency;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::EnumMap;
+use enum_map::{EnumMap, enum_map};
 use std::fmt;
 
 %% from 'enum.rs.jinja' import enum
 {{ enum('RegionId', regions) }}
 {{ enum('AreaId', gl.areas()|list) }}
-{{ enum('SpotId', gl.spots()|list) }}
+{{ enum('SpotId', gl.spots()|list, True) }}
 {{ enum('LocationId', gl.locations()|list) }}
 {{ enum('ExitId', gl.exits()|list) }}
 {{ enum('ActionId', gl.actions()|list) }}
@@ -31,14 +32,14 @@ pub enum History {
 %# with generics? But that kind of mostly negates the use of traits with
 %# associated types...
 #[derive(Copy, Clone)]
-struct Location {
+pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
     time: i8,
-    price: Currency,
+    pub price: Currency,
 
-    access_rule: fn(&Context) -> bool,
+    pub access_rule: fn(&Context) -> bool,
 }
 
 impl world::Accessible for Location {
@@ -56,8 +57,23 @@ impl world::Location for Location {
     fn item(&self) -> &Item { &self.item }
 
     fn canon_id(&self) -> &CanonId { &self.canonical }
-
 }
+
+impl Location {
+    pub fn access(&self, ctx: &Context) -> bool {
+        ctx.can_afford(&self.price) && match self.id {
+%% for loc in gl.locations()
+           LocationId::{{ loc.id }} =>  ctx.has(&Item::{{ all_items|random|construct_id }}),
+%% endfor
+        }
+    }
+}
+
+%% for loc in gl.locations()
+pub fn locaccess_{{ loc.id }}(ctx: &Context) -> bool {
+    ctx.has(&Item::{{ all_items|random|construct_id }})
+}
+%% endfor
 
 #[derive(Copy, Clone)]
 struct Exit {
@@ -172,3 +188,16 @@ impl<'a> world::World for World<'a> {
     fn get_spot(&self, sp_id: &SpotId) -> &Spot<'a> { &self.spots[*sp_id] }
 }
 
+pub fn build_locations() -> EnumMap<LocationId, Location> {
+    enum_map! {
+%% for loc in gl.locations()
+    LocationId::{{ loc.id }} => Location {
+        id: LocationId::{{ loc.id }},
+        access_rule: locaccess_{{ loc.id }},
+        canonical: CanonId::None,
+        item: Item::None,
+        price: Currency::Rupees(0),
+        time: 1,
+    },
+%% endfor
+} }

@@ -3,13 +3,14 @@
 //! Context (game state).
 
 #![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
 
-use crate::context::Context;
+use crate::context::*;
 use crate::items::Item;
 use crate::prices::Currency;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::EnumMap;
+use enum_map::{enum_map, EnumMap};
 use std::fmt;
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
@@ -82,8 +83,10 @@ impl fmt::Display for AreaId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum, Default)]
 pub enum SpotId {
+    #[default]
+    None,
     Deku_Tree__Lobby__Entry,
     Deku_Tree__Lobby__Center,
     Deku_Tree__Lobby__Vines,
@@ -139,6 +142,7 @@ pub enum SpotId {
 impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            SpotId::None => write!(f, "{}", "None"),
             SpotId::Deku_Tree__Lobby__Entry => write!(f, "{}", "Deku Tree > Lobby > Entry"),
             SpotId::Deku_Tree__Lobby__Center => write!(f, "{}", "Deku Tree > Lobby > Center"),
             SpotId::Deku_Tree__Lobby__Vines => write!(f, "{}", "Deku Tree > Lobby > Vines"),
@@ -788,14 +792,14 @@ pub enum History {
 }
 
 #[derive(Copy, Clone)]
-struct Location {
+pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
     time: i8,
-    price: Currency,
+    pub price: Currency,
 
-    access_rule: fn(&Context) -> bool,
+    pub access_rule: fn(&Context) -> bool,
 }
 
 impl world::Accessible for Location {
@@ -821,6 +825,236 @@ impl world::Location for Location {
     }
 }
 
+impl Location {
+    pub fn access(&self, ctx: &Context) -> bool {
+        ctx.can_afford(&self.price)
+            && match self.id {
+                LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                    ctx.has(&Item::Hover_Boots)
+                }
+                LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => ctx.has(&Item::Slingshot),
+                LocationId::Deku_Tree__Lobby__Center__Web => ctx.has(&Item::Hylian_Shield),
+                LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => ctx.has(&Item::Boomerang),
+                LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => ctx.has(&Item::Nayrus_Love),
+                LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                    ctx.has(&Item::Compass_Deku_Tree)
+                }
+                LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                    ctx.has(&Item::Heart_Container)
+                }
+                LocationId::Deku_Tree__Floor_3__Door__Break_Web => ctx.has(&Item::Dins_Fire),
+                LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => ctx.has(&Item::Rupees_50),
+                LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                    ctx.has(&Item::Deku_Nut_Drop)
+                }
+                LocationId::Deku_Tree__Compass_Room__Ledge__Chest => ctx.has(&Item::Farores_Wind),
+                LocationId::Deku_Tree__Compass_Room__Ledge__GS => ctx.has(&Item::Buy_Deku_Seeds_30),
+                LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                    ctx.has(&Item::Buy_Deku_Shield)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                    ctx.has(&Item::Gold_Skulltula_Token)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Chest => {
+                    ctx.has(&Item::Deku_Back_Room_Web)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => ctx.has(&Item::Hover_Boots),
+                LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                    ctx.has(&Item::Dins_Fire)
+                }
+                LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                    ctx.has(&Item::Buy_Deku_Stick_1)
+                }
+                LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                    ctx.has(&Item::Magic_Meter)
+                }
+                LocationId::Deku_Tree__Skull_Room__Entry__GS => ctx.has(&Item::Heart_Container),
+                LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                    ctx.has(&Item::Rupees_50)
+                }
+                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                    ctx.has(&Item::Buy_Arrows_10)
+                }
+                LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => ctx.has(&Item::Rupees_5),
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma => ctx.has(&Item::Farores_Wind),
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                    ctx.has(&Item::Deku_Shield_Drop)
+                }
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => ctx.has(&Item::Boomerang),
+                LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                    ctx.has(&Item::Deku_Back_Room_Wall)
+                }
+                LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                    ctx.has(&Item::Deku_Basement_Web)
+                }
+                LocationId::KF__Boulder_Maze__Reward__Chest => ctx.has(&Item::Rupees_50),
+                LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => ctx.has(&Item::Arrows_10),
+                LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => ctx.has(&Item::Deku_Shield_Drop),
+                LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                    ctx.has(&Item::Buy_Arrows_30)
+                }
+                LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => ctx.has(&Item::Rupee_1),
+                LocationId::KF__Midos_House__Entry__Top_Left_Chest => ctx.has(&Item::Bow),
+                LocationId::KF__Midos_House__Entry__Top_Right_Chest => ctx.has(&Item::Nayrus_Love),
+                LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => ctx.has(&Item::Ocarina),
+                LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
+                    ctx.has(&Item::Nayrus_Love)
+                }
+                LocationId::KF__Shop__Entry__Blue_Rupee => ctx.has(&Item::Defeat_Ganon),
+                LocationId::KF__Shop__Entry__Item_1 => ctx.has(&Item::Blue_Fire_Arrows),
+                LocationId::KF__Shop__Entry__Item_2 => ctx.has(&Item::Map_Deku_Tree),
+                LocationId::KF__Shop__Entry__Item_3 => ctx.has(&Item::Buy_Heart),
+                LocationId::KF__Shop__Entry__Item_4 => ctx.has(&Item::Blue_Fire_Arrows),
+                LocationId::KF__Shop__Entry__Item_5 => ctx.has(&Item::Buy_Arrows_10),
+                LocationId::KF__Shop__Entry__Item_6 => ctx.has(&Item::Showed_Mido),
+                LocationId::KF__Shop__Entry__Item_7 => ctx.has(&Item::Deku_Lobby_Web),
+                LocationId::KF__Shop__Entry__Item_8 => ctx.has(&Item::Zora_Tunic),
+                LocationId::Kak__Spider_House__Entry__Skulls_10 => ctx.has(&Item::Megaton_Hammer),
+            }
+    }
+}
+
+pub fn locaccess_Deku_Tree__Lobby__Center__Deku_Baba_Sticks(ctx: &Context) -> bool {
+    ctx.has(&Item::Showed_Mido)
+}
+pub fn locaccess_Deku_Tree__Lobby__Center__Deku_Baby_Nuts(ctx: &Context) -> bool {
+    ctx.has(&Item::Boomerang)
+}
+pub fn locaccess_Deku_Tree__Lobby__Center__Web(ctx: &Context) -> bool {
+    ctx.has(&Item::Rupee_1)
+}
+pub fn locaccess_Deku_Tree__Floor_2__Vines__Map_Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Buy_Deku_Stick_1)
+}
+pub fn locaccess_Deku_Tree__Scrub_Room__Entry__Scrub(ctx: &Context) -> bool {
+    ctx.has(&Item::Arrows_10)
+}
+pub fn locaccess_Deku_Tree__Slingshot_Room__Slingshot__Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Defeat_Ganon)
+}
+pub fn locaccess_Deku_Tree__Slingshot_Upper__Ledge__Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Stick_Drop)
+}
+pub fn locaccess_Deku_Tree__Floor_3__Door__Break_Web(ctx: &Context) -> bool {
+    ctx.has(&Item::Nayrus_Love)
+}
+pub fn locaccess_Deku_Tree__Compass_Room__Entry__Burn_Web(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Lobby_Web)
+}
+pub fn locaccess_Deku_Tree__Compass_Room__Compass__Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Mirror_Shield)
+}
+pub fn locaccess_Deku_Tree__Compass_Room__Ledge__Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Nut_Drop)
+}
+pub fn locaccess_Deku_Tree__Compass_Room__Ledge__GS(ctx: &Context) -> bool {
+    ctx.has(&Item::Rupees_5)
+}
+pub fn locaccess_Deku_Tree__Basement_1__Center__Vines_GS(ctx: &Context) -> bool {
+    ctx.has(&Item::Hover_Boots)
+}
+pub fn locaccess_Deku_Tree__Basement_1__Corner__Switch(ctx: &Context) -> bool {
+    ctx.has(&Item::Hylian_Shield)
+}
+pub fn locaccess_Deku_Tree__Basement_1__Corner__Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Goron_Tunic)
+}
+pub fn locaccess_Deku_Tree__Basement_1__Corner__Gate_GS(ctx: &Context) -> bool {
+    ctx.has(&Item::Compass_Deku_Tree)
+}
+pub fn locaccess_Deku_Tree__Basement_1__Corner__Burn_Basement_Web(ctx: &Context) -> bool {
+    ctx.has(&Item::Buy_Deku_Seeds_30)
+}
+pub fn locaccess_Deku_Tree__Back_Room__Northwest__Burn_Web(ctx: &Context) -> bool {
+    ctx.has(&Item::Rupee_1)
+}
+pub fn locaccess_Deku_Tree__Back_Room__Northwest__Break_Wall(ctx: &Context) -> bool {
+    ctx.has(&Item::Arrows_10)
+}
+pub fn locaccess_Deku_Tree__Skull_Room__Entry__GS(ctx: &Context) -> bool {
+    ctx.has(&Item::Gold_Skulltula_Token)
+}
+pub fn locaccess_Deku_Tree__Basement_Ledge__Block__Push_Block(ctx: &Context) -> bool {
+    ctx.has(&Item::Minuet_of_Forest)
+}
+pub fn locaccess_Deku_Tree__Basement_Ledge__Web__Burn_Web(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Lobby_Web)
+}
+pub fn locaccess_Deku_Tree__Basement_2__Boss_Door__Scrubs(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Basement_Switch)
+}
+pub fn locaccess_Deku_Tree__Boss_Room__Arena__Gohma(ctx: &Context) -> bool {
+    ctx.has(&Item::Hover_Boots)
+}
+pub fn locaccess_Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill(ctx: &Context) -> bool {
+    ctx.has(&Item::Zora_Tunic)
+}
+pub fn locaccess_Deku_Tree__Boss_Room__Arena__Gohma_Heart(ctx: &Context) -> bool {
+    ctx.has(&Item::Kokiri_Sword)
+}
+pub fn locaccess_Deku_Tree__Boss_Room__Arena__Blue_Warp(ctx: &Context) -> bool {
+    ctx.has(&Item::Magic_Meter)
+}
+pub fn locaccess_KF__Kokiri_Village__Midos_Guardpost__Show_Mido(ctx: &Context) -> bool {
+    ctx.has(&Item::Iron_Boots)
+}
+pub fn locaccess_KF__Boulder_Maze__Reward__Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Arrows_10)
+}
+pub fn locaccess_KF__Baba_Corridor__Deku_Babas__Sticks(ctx: &Context) -> bool {
+    ctx.has(&Item::Defeat_Ganon)
+}
+pub fn locaccess_KF__Baba_Corridor__Deku_Babas__Nuts(ctx: &Context) -> bool {
+    ctx.has(&Item::Buy_Arrows_10)
+}
+pub fn locaccess_KF__Outside_Deku_Tree__Left__Gossip_Stone(ctx: &Context) -> bool {
+    ctx.has(&Item::Heart_Container)
+}
+pub fn locaccess_KF__Outside_Deku_Tree__Right__Gossip_Stone(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Stick_Drop)
+}
+pub fn locaccess_KF__Midos_House__Entry__Top_Left_Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Gold_Skulltula_Token)
+}
+pub fn locaccess_KF__Midos_House__Entry__Top_Right_Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Dins_Fire)
+}
+pub fn locaccess_KF__Midos_House__Entry__Bottom_Left_Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Stick_Drop)
+}
+pub fn locaccess_KF__Midos_House__Entry__Bottom_Right_Chest(ctx: &Context) -> bool {
+    ctx.has(&Item::Bow)
+}
+pub fn locaccess_KF__Shop__Entry__Blue_Rupee(ctx: &Context) -> bool {
+    ctx.has(&Item::Biggoron_Sword)
+}
+pub fn locaccess_KF__Shop__Entry__Item_1(ctx: &Context) -> bool {
+    ctx.has(&Item::Lens_of_Truth)
+}
+pub fn locaccess_KF__Shop__Entry__Item_2(ctx: &Context) -> bool {
+    ctx.has(&Item::Kokiri_Sword)
+}
+pub fn locaccess_KF__Shop__Entry__Item_3(ctx: &Context) -> bool {
+    ctx.has(&Item::Kokiri_Emerald)
+}
+pub fn locaccess_KF__Shop__Entry__Item_4(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Basement_Web)
+}
+pub fn locaccess_KF__Shop__Entry__Item_5(ctx: &Context) -> bool {
+    ctx.has(&Item::Biggoron_Sword)
+}
+pub fn locaccess_KF__Shop__Entry__Item_6(ctx: &Context) -> bool {
+    ctx.has(&Item::Nayrus_Love)
+}
+pub fn locaccess_KF__Shop__Entry__Item_7(ctx: &Context) -> bool {
+    ctx.has(&Item::Buy_Deku_Nut_5)
+}
+pub fn locaccess_KF__Shop__Entry__Item_8(ctx: &Context) -> bool {
+    ctx.has(&Item::Triforce_Piece)
+}
+pub fn locaccess_Kak__Spider_House__Entry__Skulls_10(ctx: &Context) -> bool {
+    ctx.has(&Item::Deku_Basement_Block)
+}
 #[derive(Copy, Clone)]
 struct Exit {
     id: ExitId,
@@ -955,5 +1189,386 @@ impl<'a> world::World for World<'a> {
     }
     fn get_spot(&self, sp_id: &SpotId) -> &Spot<'a> {
         &self.spots[*sp_id]
+    }
+}
+
+pub fn build_locations() -> EnumMap<LocationId, Location> {
+    enum_map! {
+        LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => Location {
+            id: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
+            access_rule: locaccess_Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => Location {
+            id: LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts,
+            access_rule: locaccess_Deku_Tree__Lobby__Center__Deku_Baby_Nuts,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Lobby__Center__Web => Location {
+            id: LocationId::Deku_Tree__Lobby__Center__Web,
+            access_rule: locaccess_Deku_Tree__Lobby__Center__Web,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => Location {
+            id: LocationId::Deku_Tree__Floor_2__Vines__Map_Chest,
+            access_rule: locaccess_Deku_Tree__Floor_2__Vines__Map_Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => Location {
+            id: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub,
+            access_rule: locaccess_Deku_Tree__Scrub_Room__Entry__Scrub,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => Location {
+            id: LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest,
+            access_rule: locaccess_Deku_Tree__Slingshot_Room__Slingshot__Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => Location {
+            id: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest,
+            access_rule: locaccess_Deku_Tree__Slingshot_Upper__Ledge__Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Floor_3__Door__Break_Web => Location {
+            id: LocationId::Deku_Tree__Floor_3__Door__Break_Web,
+            access_rule: locaccess_Deku_Tree__Floor_3__Door__Break_Web,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => Location {
+            id: LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web,
+            access_rule: locaccess_Deku_Tree__Compass_Room__Entry__Burn_Web,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Compass_Room__Compass__Chest => Location {
+            id: LocationId::Deku_Tree__Compass_Room__Compass__Chest,
+            access_rule: locaccess_Deku_Tree__Compass_Room__Compass__Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Compass_Room__Ledge__Chest => Location {
+            id: LocationId::Deku_Tree__Compass_Room__Ledge__Chest,
+            access_rule: locaccess_Deku_Tree__Compass_Room__Ledge__Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Compass_Room__Ledge__GS => Location {
+            id: LocationId::Deku_Tree__Compass_Room__Ledge__GS,
+            access_rule: locaccess_Deku_Tree__Compass_Room__Ledge__GS,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_1__Center__Vines_GS => Location {
+            id: LocationId::Deku_Tree__Basement_1__Center__Vines_GS,
+            access_rule: locaccess_Deku_Tree__Basement_1__Center__Vines_GS,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_1__Corner__Switch => Location {
+            id: LocationId::Deku_Tree__Basement_1__Corner__Switch,
+            access_rule: locaccess_Deku_Tree__Basement_1__Corner__Switch,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_1__Corner__Chest => Location {
+            id: LocationId::Deku_Tree__Basement_1__Corner__Chest,
+            access_rule: locaccess_Deku_Tree__Basement_1__Corner__Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => Location {
+            id: LocationId::Deku_Tree__Basement_1__Corner__Gate_GS,
+            access_rule: locaccess_Deku_Tree__Basement_1__Corner__Gate_GS,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => Location {
+            id: LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
+            access_rule: locaccess_Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => Location {
+            id: LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web,
+            access_rule: locaccess_Deku_Tree__Back_Room__Northwest__Burn_Web,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => Location {
+            id: LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall,
+            access_rule: locaccess_Deku_Tree__Back_Room__Northwest__Break_Wall,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Skull_Room__Entry__GS => Location {
+            id: LocationId::Deku_Tree__Skull_Room__Entry__GS,
+            access_rule: locaccess_Deku_Tree__Skull_Room__Entry__GS,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => Location {
+            id: LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block,
+            access_rule: locaccess_Deku_Tree__Basement_Ledge__Block__Push_Block,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => Location {
+            id: LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web,
+            access_rule: locaccess_Deku_Tree__Basement_Ledge__Web__Burn_Web,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => Location {
+            id: LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs,
+            access_rule: locaccess_Deku_Tree__Basement_2__Boss_Door__Scrubs,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Boss_Room__Arena__Gohma => Location {
+            id: LocationId::Deku_Tree__Boss_Room__Arena__Gohma,
+            access_rule: locaccess_Deku_Tree__Boss_Room__Arena__Gohma,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => Location {
+            id: LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
+            access_rule: locaccess_Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => Location {
+            id: LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart,
+            access_rule: locaccess_Deku_Tree__Boss_Room__Arena__Gohma_Heart,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => Location {
+            id: LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp,
+            access_rule: locaccess_Deku_Tree__Boss_Room__Arena__Blue_Warp,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => Location {
+            id: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
+            access_rule: locaccess_KF__Kokiri_Village__Midos_Guardpost__Show_Mido,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Boulder_Maze__Reward__Chest => Location {
+            id: LocationId::KF__Boulder_Maze__Reward__Chest,
+            access_rule: locaccess_KF__Boulder_Maze__Reward__Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => Location {
+            id: LocationId::KF__Baba_Corridor__Deku_Babas__Sticks,
+            access_rule: locaccess_KF__Baba_Corridor__Deku_Babas__Sticks,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => Location {
+            id: LocationId::KF__Baba_Corridor__Deku_Babas__Nuts,
+            access_rule: locaccess_KF__Baba_Corridor__Deku_Babas__Nuts,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => Location {
+            id: LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone,
+            access_rule: locaccess_KF__Outside_Deku_Tree__Left__Gossip_Stone,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => Location {
+            id: LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone,
+            access_rule: locaccess_KF__Outside_Deku_Tree__Right__Gossip_Stone,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Midos_House__Entry__Top_Left_Chest => Location {
+            id: LocationId::KF__Midos_House__Entry__Top_Left_Chest,
+            access_rule: locaccess_KF__Midos_House__Entry__Top_Left_Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Midos_House__Entry__Top_Right_Chest => Location {
+            id: LocationId::KF__Midos_House__Entry__Top_Right_Chest,
+            access_rule: locaccess_KF__Midos_House__Entry__Top_Right_Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => Location {
+            id: LocationId::KF__Midos_House__Entry__Bottom_Left_Chest,
+            access_rule: locaccess_KF__Midos_House__Entry__Bottom_Left_Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => Location {
+            id: LocationId::KF__Midos_House__Entry__Bottom_Right_Chest,
+            access_rule: locaccess_KF__Midos_House__Entry__Bottom_Right_Chest,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Blue_Rupee => Location {
+            id: LocationId::KF__Shop__Entry__Blue_Rupee,
+            access_rule: locaccess_KF__Shop__Entry__Blue_Rupee,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_1 => Location {
+            id: LocationId::KF__Shop__Entry__Item_1,
+            access_rule: locaccess_KF__Shop__Entry__Item_1,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_2 => Location {
+            id: LocationId::KF__Shop__Entry__Item_2,
+            access_rule: locaccess_KF__Shop__Entry__Item_2,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_3 => Location {
+            id: LocationId::KF__Shop__Entry__Item_3,
+            access_rule: locaccess_KF__Shop__Entry__Item_3,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_4 => Location {
+            id: LocationId::KF__Shop__Entry__Item_4,
+            access_rule: locaccess_KF__Shop__Entry__Item_4,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_5 => Location {
+            id: LocationId::KF__Shop__Entry__Item_5,
+            access_rule: locaccess_KF__Shop__Entry__Item_5,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_6 => Location {
+            id: LocationId::KF__Shop__Entry__Item_6,
+            access_rule: locaccess_KF__Shop__Entry__Item_6,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_7 => Location {
+            id: LocationId::KF__Shop__Entry__Item_7,
+            access_rule: locaccess_KF__Shop__Entry__Item_7,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::KF__Shop__Entry__Item_8 => Location {
+            id: LocationId::KF__Shop__Entry__Item_8,
+            access_rule: locaccess_KF__Shop__Entry__Item_8,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
+        LocationId::Kak__Spider_House__Entry__Skulls_10 => Location {
+            id: LocationId::Kak__Spider_House__Entry__Skulls_10,
+            access_rule: locaccess_Kak__Spider_House__Entry__Skulls_10,
+            canonical: CanonId::None,
+            item: Item::None,
+            price: Currency::Rupees(0),
+            time: 1,
+        },
     }
 }

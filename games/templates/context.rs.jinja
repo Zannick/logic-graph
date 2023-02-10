@@ -9,13 +9,13 @@ use analyzer::context;
 use enum_map::EnumMap;
 
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
-enum Status {
+pub enum Status {
     #[default] None,
     Visited,
     Skipped,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct Context {
 %% for ctx, t in context_types.items()
     pub {{ ctx }}: {{ t }},
@@ -24,7 +24,7 @@ pub struct Context {
     pub {{ item|lower }}: {{ ct|get_item_type_for_max }},
 %% endfor
     history: Box<Vec<History>>,
-    status: EnumMap<LocationId, Status>,
+    pub status: EnumMap<LocationId, Status>,
 }
 
 impl context::Ctx for Context {

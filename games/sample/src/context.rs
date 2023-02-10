@@ -11,14 +11,14 @@ use analyzer::context;
 use enum_map::EnumMap;
 
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
-enum Status {
+pub enum Status {
     #[default]
     None,
     Visited,
     Skipped,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct Context {
     pub position: SpotId,
     pub elapsed: i32,
@@ -73,7 +73,7 @@ pub struct Context {
     pub triforce_piece: i16,
     pub zora_tunic: bool,
     history: Box<Vec<History>>,
-    status: EnumMap<LocationId, Status>,
+    pub status: EnumMap<LocationId, Status>,
 }
 
 impl context::Ctx for Context {
