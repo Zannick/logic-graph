@@ -15,7 +15,10 @@ objectives:  # win conditions
   Ganon: Defeat_Ganon
   Triforce Hunt: Triforce_Piece{triforce_count}
   Gohma: Kokiri_Emerald
-  Deku Full Clear: $all_checks('Deku Tree')
+  # This needs to be handled specially, since it has an arg of RegionId
+  # and we could support AreaId and SpotId as well. But it might be something
+  # we'll have in the main analyzer algorithm, so tbd
+  # Deku Full Clear: $all_checks('Deku Tree')
 
 movements:
   default:

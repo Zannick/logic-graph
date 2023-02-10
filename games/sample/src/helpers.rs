@@ -6,8 +6,8 @@
 /// ^child
 #[macro_export]
 macro_rules! helper__is_child {
-    () => {{
-        println!("{}", "Arg:child");
+    ($ctx:expr) => {{
+        $ctx.child
     }};
 }
 
@@ -15,8 +15,8 @@ macro_rules! helper__is_child {
 /// NOT ^child
 #[macro_export]
 macro_rules! helper__is_adult {
-    () => {{
-        println!("{}", "Arg:child");
+    ($ctx:expr) => {{
+        !$ctx.child
     }};
 }
 
@@ -24,8 +24,8 @@ macro_rules! helper__is_adult {
 /// Buy_Deku_Shield or Deku_Shield_Drop
 #[macro_export]
 macro_rules! helper__Deku_Shield {
-    () => {{
-        println!("{}", "OR[ Item:Buy_Deku_Shield , Item:Deku_Shield_Drop ]");
+    ($ctx:expr) => {{
+        ($ctx.has(&Item::Buy_Deku_Shield) || $ctx.has(&Item::Deku_Shield_Drop))
     }};
 }
 
@@ -33,11 +33,9 @@ macro_rules! helper__Deku_Shield {
 /// Buy_Deku_Nut_5 or Buy_Deku_Nut_10 or Deku_Nut_Drop
 #[macro_export]
 macro_rules! helper__Nuts {
-    () => {{
-        println!(
-            "{}",
-            "OR[ OR[ Item:Buy_Deku_Nut_5 , Item:Buy_Deku_Nut_10 ] , Item:Deku_Nut_Drop ]"
-        );
+    ($ctx:expr) => {{
+        (($ctx.has(&Item::Buy_Deku_Nut_5) || $ctx.has(&Item::Buy_Deku_Nut_10))
+            || $ctx.has(&Item::Deku_Nut_Drop))
     }};
 }
 
@@ -45,8 +43,8 @@ macro_rules! helper__Nuts {
 /// Buy_Deku_Stick_1 or Deku_Stick_Drop
 #[macro_export]
 macro_rules! helper__Sticks {
-    () => {{
-        println!("{}", "OR[ Item:Buy_Deku_Stick_1 , Item:Deku_Stick_Drop ]");
+    ($ctx:expr) => {{
+        ($ctx.has(&Item::Buy_Deku_Stick_1) || $ctx.has(&Item::Deku_Stick_Drop))
     }};
 }
 
@@ -54,11 +52,13 @@ macro_rules! helper__Sticks {
 /// PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
 #[macro_export]
 macro_rules! helper__wallet_max {
-    () => {{
-        println!(
-            "{}",
-            "Item:Progressive_Wallet{3 => 999; 2 => 500; 1 => 200; _ => 99}"
-        );
+    ($ctx:expr) => {{
+        match $ctx.count(&Item::Progressive_Wallet) {
+            3 => 999,
+            2 => 500,
+            1 => 200,
+            _ => 99,
+        }
     }};
 }
 
@@ -66,8 +66,9 @@ macro_rules! helper__wallet_max {
 /// ($is_adult and Hylian_Shield) or ($is_child and $Deku_Shield)
 #[macro_export]
 macro_rules! helper__has_shield {
-    () => {{
-        println!("{}", "OR[ AND[ Func:is_adult() , Item:Hylian_Shield ] , AND[ Func:is_child() , Func:Deku_Shield() ] ]");
+    ($ctx:expr) => {{
+        ((helper__is_adult!($ctx) && $ctx.has(&Item::Hylian_Shield))
+            || (helper__is_child!($ctx) && helper__Deku_Shield!($ctx)))
     }};
 }
 
@@ -75,9 +76,8 @@ macro_rules! helper__has_shield {
 /// Ocarina and ^song
 #[macro_export]
 macro_rules! helper__can_play {
-    ($song:expr) => {{
-        println!("{}", "AND[ Item:Ocarina , Arg:song ]");
-        println!("song = {}", $song);
+    ($ctx:expr, $song:expr) => {{
+        ($ctx.has(&Item::Ocarina) && $ctx.has(&$song))
     }};
 }
 
@@ -85,11 +85,8 @@ macro_rules! helper__can_play {
 /// $is_adult or $Sticks or Kokiri_Sword
 #[macro_export]
 macro_rules! helper__can_jumpslash {
-    () => {{
-        println!(
-            "{}",
-            "OR[ OR[ Func:is_adult() , Func:Sticks() ] , Item:Kokiri_Sword ]"
-        );
+    ($ctx:expr) => {{
+        ((helper__is_adult!($ctx) || helper__Sticks!($ctx)) || $ctx.has(&Item::Kokiri_Sword))
     }};
 }
 
@@ -98,9 +95,19 @@ macro_rules! helper__can_jumpslash {
 
 #[macro_export]
 macro_rules! helper__can_use {
-    ($item:expr) => {{
-        println!("{}", "IF( Func:_is_magic_item(Arg:item) ) THEN{ AND[ Arg:item , Item:Magic_Meter ] } ELSE IF( Func:_is_adult_item(Arg:item) ) THEN{ AND[ Func:is_adult() , Arg:item ] } ELSE IF( Func:_is_magic_arrow(Arg:item) ) THEN{ AND[ AND[ AND[ Func:is_adult() , Arg:item ] , Item:Bow ] , Item:Magic_Meter ] } ELSE IF( Func:_is_child_item(Arg:item) ) THEN{ AND[ Func:is_child() , Arg:item ] }");
-        println!("item = {}", $item);
+    ($ctx:expr, $item:expr) => {{
+        if helper___is_magic_item!($ctx, $item) {
+            ($ctx.has(&$item) && $ctx.has(&Item::Magic_Meter))
+        } else if helper___is_adult_item!($ctx, $item) {
+            (helper__is_adult!($ctx) && $ctx.has(&$item))
+        } else if helper___is_magic_arrow!($ctx, $item) {
+            (((helper__is_adult!($ctx) && $ctx.has(&$item)) && $ctx.has(&Item::Bow))
+                && $ctx.has(&Item::Magic_Meter))
+        } else if helper___is_child_item!($ctx, $item) {
+            (helper__is_child!($ctx) && $ctx.has(&$item))
+        } else {
+            false
+        }
     }};
 }
 
@@ -108,12 +115,11 @@ macro_rules! helper__can_use {
 /// ^item IN [Dins_Fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
 #[macro_export]
 macro_rules! helper___is_magic_item {
-    ($item:expr) => {{
-        println!(
-            "{}",
-            "(Arg:item IN [Dins_Fire|Farores_Wind|Nayrus_Love|Lens_of_Truth])"
-        );
-        println!("item = {}", $item);
+    ($ctx:expr, $item:expr) => {{
+        match $item {
+            Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth => true,
+            _ => false,
+        }
     }};
 }
 
@@ -121,9 +127,18 @@ macro_rules! helper___is_magic_item {
 /// ^item IN [Bow, Megaton_Hammer, Iron_Boots, Hover_Boots, Hookshot, Goron_Tunic, Zora_Tunic, Mirror_Shield]
 #[macro_export]
 macro_rules! helper___is_adult_item {
-    ($item:expr) => {{
-        println!("{}", "(Arg:item IN [Bow|Megaton_Hammer|Iron_Boots|Hover_Boots|Hookshot|Goron_Tunic|Zora_Tunic|Mirror_Shield])");
-        println!("item = {}", $item);
+    ($ctx:expr, $item:expr) => {{
+        match $item {
+            Item::Bow
+            | Item::Megaton_Hammer
+            | Item::Iron_Boots
+            | Item::Hover_Boots
+            | Item::Hookshot
+            | Item::Goron_Tunic
+            | Item::Zora_Tunic
+            | Item::Mirror_Shield => true,
+            _ => false,
+        }
     }};
 }
 
@@ -131,9 +146,11 @@ macro_rules! helper___is_adult_item {
 /// ^item IN [Slingshot, Boomerang, Kokiri_Sword]
 #[macro_export]
 macro_rules! helper___is_child_item {
-    ($item:expr) => {{
-        println!("{}", "(Arg:item IN [Slingshot|Boomerang|Kokiri_Sword])");
-        println!("item = {}", $item);
+    ($ctx:expr, $item:expr) => {{
+        match $item {
+            Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword => true,
+            _ => false,
+        }
     }};
 }
 
@@ -141,12 +158,11 @@ macro_rules! helper___is_child_item {
 /// ^item IN [Fire_Arrows, Light_Arrows, Blue_Fire_Arrows]
 #[macro_export]
 macro_rules! helper___is_magic_arrow {
-    ($item:expr) => {{
-        println!(
-            "{}",
-            "(Arg:item IN [Fire_Arrows|Light_Arrows|Blue_Fire_Arrows])"
-        );
-        println!("item = {}", $item);
+    ($ctx:expr, $item:expr) => {{
+        match $item {
+            Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows => true,
+            _ => false,
+        }
     }};
 }
 
@@ -154,8 +170,8 @@ macro_rules! helper___is_magic_arrow {
 /// Bombs
 #[macro_export]
 macro_rules! helper__has_explosives {
-    () => {{
-        println!("{}", "Item:Bombs");
+    ($ctx:expr) => {{
+        $ctx.has(&Item::Bombs)
     }};
 }
 
@@ -163,11 +179,8 @@ macro_rules! helper__has_explosives {
 /// $has_explosives or $can_use(Megaton_Hammer)
 #[macro_export]
 macro_rules! helper__can_blast_or_smash {
-    () => {{
-        println!(
-            "{}",
-            "OR[ Func:has_explosives() , Func:can_use(Megaton_Hammer) ]"
-        );
+    ($ctx:expr) => {{
+        (helper__has_explosives!($ctx) || helper__can_use!($ctx, Item::Megaton_Hammer))
     }};
 }
 
@@ -175,8 +188,11 @@ macro_rules! helper__can_blast_or_smash {
 /// $is_child and (Slingshot or Boomerang or $Sticks or Kokiri_Sword)
 #[macro_export]
 macro_rules! helper__can_child_attack {
-    () => {{
-        println!("{}", "AND[ Func:is_child() , OR[ OR[ OR[ Item:Slingshot , Item:Boomerang ] , Func:Sticks() ] , Item:Kokiri_Sword ] ]");
+    ($ctx:expr) => {{
+        (helper__is_child!($ctx)
+            && ((($ctx.has(&Item::Slingshot) || $ctx.has(&Item::Boomerang))
+                || helper__Sticks!($ctx))
+                || $ctx.has(&Item::Kokiri_Sword)))
     }};
 }
 
@@ -184,11 +200,8 @@ macro_rules! helper__can_child_attack {
 /// $can_use(Dins_Fire) or $can_use(Fire_Arrows)
 #[macro_export]
 macro_rules! helper__has_fire_source {
-    () => {{
-        println!(
-            "{}",
-            "OR[ Func:can_use(Dins_Fire) , Func:can_use(Fire_Arrows) ]"
-        );
+    ($ctx:expr) => {{
+        (helper__can_use!($ctx, Item::Dins_Fire) || helper__can_use!($ctx, Item::Fire_Arrows))
     }};
 }
 
@@ -196,10 +209,7 @@ macro_rules! helper__has_fire_source {
 /// $has_fire_source or ($is_child and $Sticks)
 #[macro_export]
 macro_rules! helper__has_fire_source_with_torch {
-    () => {{
-        println!(
-            "{}",
-            "OR[ Func:has_fire_source() , AND[ Func:is_child() , Func:Sticks() ] ]"
-        );
+    ($ctx:expr) => {{
+        (helper__has_fire_source!($ctx) || (helper__is_child!($ctx) && helper__Sticks!($ctx)))
     }};
 }

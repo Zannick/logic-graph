@@ -26,7 +26,7 @@ pub struct Context {
     pub child: bool,
     pub tod: &'static str,
     pub rupees: i32,
-    pub deku_tree__compass_room__torch: bool,
+    pub deku_tree__compass_room__ctx__torch: bool,
     pub biggoron_sword: bool,
     pub blue_fire_arrows: bool,
     pub bombs: bool,

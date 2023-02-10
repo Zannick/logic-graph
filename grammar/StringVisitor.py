@@ -47,7 +47,7 @@ class StringVisitor(RulesVisitor):
             cond, then, *args = args
             ret.append(f'IF( {self.visit(cond)} ) THEN{{ {self.visit(then)} }}')
         if args:
-            return ' ELSE '.join(ret) + f' ELSE{{ {self.visit(el)} }}'
+            return ' ELSE '.join(ret) + f' ELSE{{ {self.visit(args[0])} }}'
         return ' ELSE '.join(ret)
 
     def visitIfThenElse(self, ctx):
@@ -77,12 +77,15 @@ class StringVisitor(RulesVisitor):
         return s
 
     def visitArgument(self, ctx):
-        return f'Arg:{str(ctx.REF())[1:]}'
+        arg = f'Arg:{str(ctx.REF())[1:]}'
+        if ctx.NOT():
+            return f'NOT[ {arg} ]'
+        return arg
 
     def visitItemCount(self, ctx):
         if ctx.INT():
             return f'Items:{ctx.ITEM()}:{ctx.INT()}'
-        return f'Items:{ctx.ITEM()}:{{Setting:{ctx.SETTING}}}'
+        return f'Items:{ctx.ITEM()}:{{Setting:{ctx.SETTING()}}}'
 
     def visitOneItem(self, ctx):
         return f'Item:{ctx.ITEM()}'
@@ -91,7 +94,7 @@ class StringVisitor(RulesVisitor):
         return f'Item:{str(ctx.LIT())[1:-1].replace(" ", "_")}'
 
     def visitOneArgument(self, ctx):
-        return f'Arg:{str(ctx.REF())[1:]}'
+        return f'OneArg:{str(ctx.REF())[1:]}'
 
     def visitBaseNum(self, ctx):
         if ctx.INT():

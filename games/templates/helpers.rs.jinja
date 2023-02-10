@@ -5,12 +5,8 @@
 /// {{ pr.text }}
 #[macro_export]
 macro_rules! helper__{{ name|construct_id }} {
-%% set comma = joiner()
-    ({% for a in args %}${{ a }}:expr{{ comma() }}{% endfor %}) => {{ '{{' }}
-        println!("{}", "{{ pr.tree|treeToString }}");
-%% for a in args
-        println!("{{ a }} = {}", ${{ a }});
-%% endfor
+    ($ctx:expr{% for a in args %}, ${{ a }}:expr{% endfor %}) => {{ '{{' }}
+        {{ pr.tree|treeToRust({})|replace('ctx', '$ctx') }}
     {{ '}}' }};
 }
 

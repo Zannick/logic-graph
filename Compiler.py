@@ -16,7 +16,8 @@ import jinja2
 
 from grammar import parseRule, parseAction, StringVisitor
 from ItemVisitor import ItemVisitor
-from Utils import base_dir, construct_id, n1
+from RustVisitor import RustVisitor
+from Utils import base_dir, construct_id, n1, BUILTINS
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
@@ -28,12 +29,6 @@ REGION_FIELDS = {'name', 'short', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid'}
 
-# To be replaced with standard functions instead of helpers
-BUILTINS = {
-    '$max' : 'cmp::max',
-    '$min' : 'cmp::max',
-    '$all_checks' : 'undef::all_checks',
-}
 
 def load_regions_from_file(file):
     try:
@@ -63,6 +58,7 @@ def load_game_yaml(game_dir):
 
 def _parseExpression(logic, name, category, sep=':'):
     rule = 'boolExpr'
+    # TODO: turn the whole thing into a regex
     if ':' in name:
         rule, name = name.split(':', 1)
     return parseRule(rule, logic, name=f'{category}{sep}{name}')
@@ -135,25 +131,37 @@ class GameLogic(object):
         }
 
         self.allowed_funcs = set(n1(self.helpers.keys())) | BUILTINS.keys()
-        self.objectives = {name: _parseExpression(logic, name, 'objectives')
-                           for name, logic in gameinfo['objectives'].items()}
-        self.collect = {name: parseAction(logic, name, 'collect')
-                        for name, logic in gameinfo['collect'].items()}
+        self.access_funcs = {}
+        self.action_funcs = {}
+        self.objectives = {}
+        for name, logic in gameinfo['objectives'].items():
+            pr = _parseExpression(logic, name, 'objectives')
+            self.objectives[name] = {'pr': pr}
+            self.objectives[name]['access_id'] = self.make_funcid(self.objectives[name])
+
+        self.collect = {}
+        for name, logic in gameinfo['collect'].items():
+            pr = parseAction(logic, name, 'collect')
+            self.collect[name] = {'pr': pr}
+            self.collect[name]['action_id'] = self.make_funcid(self.collect[name])
 
         # these are {name: {...}} dicts
         self.movements = gameinfo['movements']
         for name, info in self.movements.items():
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'movements')
+                info['access_id'] = self.make_funcid(info)
 
         self.warps = gameinfo['warps']
         for name, info in self.warps.items():
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'warps')
+                info['access_id'] = self.make_funcid(info)
 
-        # these are dicts {name: blah, req: blah} (at whatever level)
-        self.regions = gameinfo['regions']
         self.canon_places = defaultdict(list)
+
+        # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
+        self.regions = gameinfo['regions']
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
@@ -171,6 +179,7 @@ class GameLogic(object):
                     if 'req' in e:
                         e['pr'] = _parseExpression(
                                 e['req'], e['to'], area['fullname'], ' ==> ')
+                        e['access_id'] = self.make_funcid(e)
 
                 for spot in area['spots']:
                     sname = spot['name']
@@ -190,6 +199,7 @@ class GameLogic(object):
                         if 'req' in loc:
                             loc['pr'] = _parseExpression(
                                     loc['req'], loc['name'], spot['fullname'], ' ')
+                            loc['access_id'] = self.make_funcid(loc)
                     # We need a counter for exits in case of alternates
                     ec = Counter()
                     for eh in spot.get('exits', []):
@@ -203,6 +213,7 @@ class GameLogic(object):
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
                                     eh['req'], eh['to'], spot['fullname'], ' ==> ')
+                            eh['access_id'] = self.make_funcid(eh)
                     for act in spot.get('actions', ()):
                         act['spot'] = sname
                         act['area'] = aname
@@ -212,8 +223,31 @@ class GameLogic(object):
                         if 'req' in act:
                             act['pr'] = _parseExpression(
                                     act['req'], act['name'] + ' req', spot['fullname'], ' ')
+                            act['access_id'] = self.make_funcid(act)
                         act['act'] = parseAction(
                                 act['do'], name=f'{act["fullname"]}:do')
+                        act['action_id'] = self.make_funcid(act, 'act')
+
+
+    def make_funcid(self, info, prkey='pr'):
+        pr = info[prkey]
+        d = self.action_funcs if pr.parser.ruleNames[pr.tree.getRuleIndex()] == 'action' else self.access_funcs
+        if '^_' in str(pr.text):
+            id = construct_id(str(pr.name))
+            assert id not in d
+            d[id] = info
+            return id
+
+        id = construct_id(str(pr.name) if '^_' in str(pr.text) else str(pr.text)).lower()
+        if id not in d:
+            d[id] = {'pr': info['pr']}
+            return id
+
+        if d[id]['pr'].text != pr.text:
+            id = id + sum(1 for k in d if k.startswith(id))
+            assert id not in d
+            d[id] = {'pr': info['pr']}
+        return id
 
 
     def areas(self):
@@ -225,8 +259,7 @@ class GameLogic(object):
 
 
     # Hybrids are both locations and exits, so they have to be returned here
-    # for both in order to create the appropriate ids. However, they should
-    # be created only as Exit objects later.
+    # for both in order to create the appropriate ids.
     def locations(self):
         return itertools.chain.from_iterable(s.get('locations', []) + s.get('hybrid', [])
                                              for s in self.spots())
@@ -254,8 +287,8 @@ class GameLogic(object):
 
     def all_parse_results(self):
         yield from self.helpers.values()
-        yield from self.objectives.values()
-        yield from self.collect.values()
+        yield from (info['pr'] for info in self.objectives.values())
+        yield from (info['pr'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
         for pt in self.all_points():
@@ -332,13 +365,22 @@ class GameLogic(object):
                 self._misc_errors.append(
                     f'context value type mismatch: {ctx} defined as {v1} ({t1}) '
                     'and reused in {" > ".join(names)} as {v2} ({t2})')
-
+        
         # gameinfo: start
         # regions/areas: here, start, enter
         gc = dict(self._info['start'])
+        def _check_shadow(ctx, *names):
+            if len(names) == 2:
+                pc = construct_id(names[0], 'ctx', ctx[1:]).lower()
+                if pc in gc:
+                    self._misc_errors.append(
+                        f'Context parameter {ctx} in {" > ".join(names)} hides '
+                        f'parameter {ctx} in {names[0]}')
+
         def _handle_start(ctx, val, *names):
             if ctx[0] == '_':
-                ctx = construct_id(*names, ctx[1:]).lower()
+                _check_shadow(ctx, *names)
+                ctx = construct_id(*names, 'ctx', ctx[1:]).lower()
             if ctx in gc:
                 self._misc_errors.append(
                     f'Duplicate context parameter {ctx} in {" > ".join(names)}: '
@@ -348,7 +390,8 @@ class GameLogic(object):
 
         def _handle_enter(ctx, val, *names):
             if ctx[0] == '_':
-                ctx = construct_id(*names, ctx[1:]).lower()
+                _check_shadow(ctx, *names)
+                ctx = construct_id(*names, 'ctx', ctx[1:]).lower()
             if ctx in gc:
                 _check_types(gc[ctx], val, ctx, *names)
             else:
@@ -371,6 +414,7 @@ class GameLogic(object):
                 _handle_enter(ctx, val, region['name'])
             for ctx, val in region.get('here', {}).items():
                 _handle_here(ctx, val, region['name'])
+        # Areas must be handled second to check for shadowing
         for area in self.areas():
             for ctx, val in area.get('start', {}).items():
                 _handle_start(ctx, val, area['region'], area['name'])
@@ -387,11 +431,32 @@ class GameLogic(object):
         d.update((ctx, typenameof(val)) for ctx, val in self.context_values.items())
         return d
 
+
+    def get_local_ctx(self, info):
+        d = {c: c for c in self.context_values if '__ctx__' not in c}
+        if 'region' not in info:
+            return d
+
+        levels = [construct_id(info['region']).lower(),
+                  construct_id(info['region'], info['area']).lower()]
+        for cname in self.context_values:
+            if '__ctx__' not in cname:
+                continue
+
+            pref, local = cname.split('__ctx_', 1)  # intentionally leave one _ in
+            if pref in levels:
+                d[local] = cname
+        return d
+
     
     @cached_property
     def price_types(self):
         return [ctx for ctx, val in self._info['start'].items()
                 if typenameof(val) == 'i32']
+
+
+    def treeToRust(self, tree, info):
+        return RustVisitor(self.get_local_ctx(info)).visit(tree)
 
 
     def render(self):
@@ -400,6 +465,7 @@ class GameLogic(object):
                                  line_comment_prefix='%#')
         env.filters['construct_id'] = construct_id
         env.filters['treeToString'] = treeToString
+        env.filters['treeToRust'] = self.treeToRust
         env.filters['get_item_type_for_max'] = get_item_type_for_max
         # Access cached_properties to ensure they're in the template vars
         self.all_items

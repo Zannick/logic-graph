@@ -2,13 +2,16 @@
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
+#![allow(unused_parens)]
 
+use crate::*;
 use crate::context::*;
 use crate::items::Item;
 use crate::prices::Currency;
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{EnumMap, enum_map};
+use std::cmp;
 use std::fmt;
 
 %% from 'enum.rs.jinja' import enum
@@ -45,7 +48,11 @@ pub struct Location {
 impl world::Accessible for Location {
     type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && (self.access_rule)(ctx)
+        ctx.can_afford(&self.price) && match self.id {
+%% for loc in gl.locations()
+           LocationId::{{ loc.id }} =>  ctx.has(&Item::{{ all_items|random|construct_id }}),
+%% endfor
+        }
     }
 }
 
@@ -59,19 +66,11 @@ impl world::Location for Location {
     fn canon_id(&self) -> &CanonId { &self.canonical }
 }
 
-impl Location {
-    pub fn access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-%% for loc in gl.locations()
-           LocationId::{{ loc.id }} =>  ctx.has(&Item::{{ all_items|random|construct_id }}),
-%% endfor
-        }
-    }
-}
+fn default_access(_ctx: &Context) -> bool { true }
 
-%% for loc in gl.locations()
-pub fn locaccess_{{ loc.id }}(ctx: &Context) -> bool {
-    ctx.has(&Item::{{ all_items|random|construct_id }})
+%% for id, info in access_funcs.items()
+fn access_{{ id }}(ctx: &Context) -> bool {
+    {{ info.pr.tree|treeToRust(info) }}
 }
 %% endfor
 
@@ -193,11 +192,15 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
 %% for loc in gl.locations()
     LocationId::{{ loc.id }} => Location {
         id: LocationId::{{ loc.id }},
-        access_rule: locaccess_{{ loc.id }},
-        canonical: CanonId::None,
-        item: Item::None,
-        price: Currency::Rupees(0),
-        time: 1,
+        access_rule: {% if loc.access_id %}access_{{ loc.access_id }}{% else %}default_access{% endif %},
+        canonical: CanonId::{{ loc.canon or 'None' }},
+        item: Item::{{ loc.item or 'None' }},
+        price: Currency::{% if loc.price and loc.price > 0 -%}
+            {{ (loc.costs or price_types[0])|capitalize }}({{ loc.price }})
+            {%- else %}Free{% endif %},
+        time: {% if loc.to is defined %}{# hybrid #}
+            {%- if loc.item_time is defined %}{{ loc.item_time }}{% else %}1{% endif %}
+            {%- elif loc.time is defined %}{{ loc.time }}{% else %}1{% endif %},
     },
 %% endfor
 } }

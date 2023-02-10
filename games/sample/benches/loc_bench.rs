@@ -41,5 +41,9 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("direct", |b| b.iter(|| check_access_direct(locmap.as_slice(), &ctx)));
 }
 
-criterion_group!(benches, criterion_benchmark);
+criterion_group!{
+    name = benches;
+    config = Criterion::default().sample_size(10000).measurement_time(std::time::Duration::new(10, 0));
+    targets = criterion_benchmark
+}
 criterion_main!(benches);
