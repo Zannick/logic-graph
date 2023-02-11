@@ -811,96 +811,98 @@ impl world::Accessible for Location {
         ctx.can_afford(&self.price)
             && match self.id {
                 LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
-                    ctx.has(&Item::Magic_Meter)
+                    ctx.has(&Item::Blue_Fire_Arrows)
                 }
                 LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => {
-                    ctx.has(&Item::Kokiri_Sword)
+                    ctx.has(&Item::Light_Arrows)
                 }
-                LocationId::Deku_Tree__Lobby__Center__Web => ctx.has(&Item::Slingshot),
-                LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
-                    ctx.has(&Item::Buy_Deku_Stick_1)
-                }
-                LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
-                    ctx.has(&Item::Deku_Back_Room_Web)
-                }
+                LocationId::Deku_Tree__Lobby__Center__Web => ctx.has(&Item::Bombs),
+                LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => ctx.has(&Item::Boomerang),
+                LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => ctx.has(&Item::Light_Arrows),
                 LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
-                    ctx.has(&Item::Buy_Deku_Stick_1)
+                    ctx.has(&Item::Iron_Boots)
                 }
                 LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
-                    ctx.has(&Item::Recovery_Heart)
-                }
-                LocationId::Deku_Tree__Floor_3__Door__Break_Web => ctx.has(&Item::Showed_Mido),
-                LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                    ctx.has(&Item::Buy_Deku_Seeds_30)
-                }
-                LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
-                    ctx.has(&Item::Lens_of_Truth)
-                }
-                LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
-                    ctx.has(&Item::Buy_Deku_Stick_1)
-                }
-                LocationId::Deku_Tree__Compass_Room__Ledge__GS => ctx.has(&Item::Kokiri_Sword),
-                LocationId::Deku_Tree__Basement_1__Center__Vines_GS => ctx.has(&Item::Hover_Boots),
-                LocationId::Deku_Tree__Basement_1__Corner__Switch => ctx.has(&Item::Mirror_Shield),
-                LocationId::Deku_Tree__Basement_1__Corner__Chest => ctx.has(&Item::Magic_Meter),
-                LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => ctx.has(&Item::Defeat_Gohma),
-                LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
-                    ctx.has(&Item::Biggoron_Sword)
-                }
-                LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
-                    ctx.has(&Item::Defeat_Gohma)
-                }
-                LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
-                    ctx.has(&Item::Deku_Back_Room_Web)
-                }
-                LocationId::Deku_Tree__Skull_Room__Entry__GS => ctx.has(&Item::Triforce_Piece),
-                LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
-                    ctx.has(&Item::Buy_Deku_Stick_1)
-                }
-                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
-                    ctx.has(&Item::Deku_Basement_Switch)
-                }
-                LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => ctx.has(&Item::Goron_Tunic),
-                LocationId::Deku_Tree__Boss_Room__Arena__Gohma => ctx.has(&Item::Fire_Arrows),
-                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
                     ctx.has(&Item::Buy_Arrows_30)
                 }
+                LocationId::Deku_Tree__Floor_3__Door__Break_Web => ctx.has(&Item::Rupee_1),
+                LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                    ctx.has(&Item::Biggoron_Sword)
+                }
+                LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                    ctx.has(&Item::Triforce_Piece)
+                }
+                LocationId::Deku_Tree__Compass_Room__Ledge__Chest => ctx.has(&Item::Bombs),
+                LocationId::Deku_Tree__Compass_Room__Ledge__GS => ctx.has(&Item::Hylian_Shield),
+                LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                    ctx.has(&Item::Buy_Deku_Shield)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                    ctx.has(&Item::Buy_Deku_Stick_1)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Chest => {
+                    ctx.has(&Item::Gold_Skulltula_Token)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
+                    ctx.has(&Item::Minuet_of_Forest)
+                }
+                LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                    ctx.has(&Item::Farores_Wind)
+                }
+                LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                    ctx.has(&Item::Deku_Back_Room_Wall)
+                }
+                LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                    ctx.has(&Item::Buy_Arrows_30)
+                }
+                LocationId::Deku_Tree__Skull_Room__Entry__GS => ctx.has(&Item::Megaton_Hammer),
+                LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                    ctx.has(&Item::Deku_Back_Room_Wall)
+                }
+                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => ctx.has(&Item::Fire_Arrows),
+                LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                    ctx.has(&Item::Deku_Shield_Drop)
+                }
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma => ctx.has(&Item::Heart_Container),
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                    ctx.has(&Item::Zora_Tunic)
+                }
                 LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
-                    ctx.has(&Item::Mirror_Shield)
+                    ctx.has(&Item::Buy_Arrows_10)
                 }
-                LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => ctx.has(&Item::Lens_of_Truth),
+                LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                    ctx.has(&Item::Buy_Deku_Nut_5)
+                }
                 LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
-                    ctx.has(&Item::Deku_Basement_Switch)
+                    ctx.has(&Item::Buy_Arrows_10)
                 }
-                LocationId::KF__Boulder_Maze__Reward__Chest => ctx.has(&Item::Deku_Basement_Web),
-                LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => ctx.has(&Item::Biggoron_Sword),
-                LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => ctx.has(&Item::Hookshot),
+                LocationId::KF__Boulder_Maze__Reward__Chest => ctx.has(&Item::Map_Deku_Tree),
+                LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => ctx.has(&Item::Rupees_5),
+                LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => ctx.has(&Item::Buy_Deku_Stick_1),
                 LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
-                    ctx.has(&Item::Magic_Meter)
+                    ctx.has(&Item::Buy_Deku_Nut_10)
                 }
                 LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
-                    ctx.has(&Item::Goron_Tunic)
-                }
-                LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
-                    ctx.has(&Item::Deku_Stick_Drop)
-                }
-                LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
-                    ctx.has(&Item::Lens_of_Truth)
-                }
-                LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
                     ctx.has(&Item::Nayrus_Love)
                 }
-                LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => ctx.has(&Item::Hookshot),
-                LocationId::KF__Shop__Entry__Blue_Rupee => ctx.has(&Item::Buy_Deku_Nut_10),
-                LocationId::KF__Shop__Entry__Item_1 => ctx.has(&Item::Deku_Basement_Web),
-                LocationId::KF__Shop__Entry__Item_2 => ctx.has(&Item::Bow),
-                LocationId::KF__Shop__Entry__Item_3 => ctx.has(&Item::Deku_Basement_Block),
-                LocationId::KF__Shop__Entry__Item_4 => ctx.has(&Item::Buy_Arrows_10),
-                LocationId::KF__Shop__Entry__Item_5 => ctx.has(&Item::Buy_Deku_Seeds_30),
-                LocationId::KF__Shop__Entry__Item_6 => ctx.has(&Item::Map_Deku_Tree),
-                LocationId::KF__Shop__Entry__Item_7 => ctx.has(&Item::Buy_Arrows_30),
-                LocationId::KF__Shop__Entry__Item_8 => ctx.has(&Item::Iron_Boots),
-                LocationId::Kak__Spider_House__Entry__Skulls_10 => ctx.has(&Item::Deku_Shield_Drop),
+                LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
+                    ctx.has(&Item::Deku_Back_Room_Web)
+                }
+                LocationId::KF__Midos_House__Entry__Top_Right_Chest => ctx.has(&Item::Farores_Wind),
+                LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => ctx.has(&Item::Rupee_1),
+                LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
+                    ctx.has(&Item::Kokiri_Emerald)
+                }
+                LocationId::KF__Shop__Entry__Blue_Rupee => ctx.has(&Item::Buy_Arrows_30),
+                LocationId::KF__Shop__Entry__Item_1 => ctx.has(&Item::Biggoron_Sword),
+                LocationId::KF__Shop__Entry__Item_2 => ctx.has(&Item::Zora_Tunic),
+                LocationId::KF__Shop__Entry__Item_3 => ctx.has(&Item::Deku_Shield_Drop),
+                LocationId::KF__Shop__Entry__Item_4 => ctx.has(&Item::Buy_Deku_Stick_1),
+                LocationId::KF__Shop__Entry__Item_5 => ctx.has(&Item::Defeat_Ganon),
+                LocationId::KF__Shop__Entry__Item_6 => ctx.has(&Item::Compass_Deku_Tree),
+                LocationId::KF__Shop__Entry__Item_7 => ctx.has(&Item::Hookshot),
+                LocationId::KF__Shop__Entry__Item_8 => ctx.has(&Item::Nayrus_Love),
+                LocationId::Kak__Spider_House__Entry__Skulls_10 => ctx.has(&Item::Farores_Wind),
             }
     }
 }

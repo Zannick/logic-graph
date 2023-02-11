@@ -13,7 +13,7 @@ BUILTINS = {
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
-def construct_id(*args):
+def construct_id(*args: list[str]) -> str:
     return '__'.join(disallowed_chars.sub('', a.replace(' ', '_')) for a in args)
 
 def n1(tuples):

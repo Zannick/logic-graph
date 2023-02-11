@@ -1,11 +1,10 @@
-from collections import Counter, defaultdict
+from collections import defaultdict
 import logging
-import re
 
 import Utils
 from Utils import construct_id
 
-from grammar import RulesParser, RulesVisitor
+from grammar import RulesVisitor
 
 
 class SettingVisitor(RulesVisitor):
@@ -13,20 +12,19 @@ class SettingVisitor(RulesVisitor):
     def __init__(self, context_types, settings):
         self.context_types = context_types
         self.settings = settings
-        self.setting_types = {}
         self.setting_options = defaultdict(set)
         self.name = ''
         self.ctxdict = {}
         self.errors = []
 
-    def _getFullRef(self, ref):
+    def _getFullRef(self, ref: str):
         return self.ctxdict.get(ref, '$' + ref)
 
-    def _checkSetting(self, s):
+    def _checkSetting(self, s: str):
         if s not in self.settings:
             self.errors.append(f'Unrecognized setting in rule {self.name}: {s}')
 
-    def visit(self, tree, name='', ctxdict=None):
+    def visit(self, tree, name:str ='', ctxdict=None):
         self.name = name
         self.ctxdict = ctxdict or {}
         try:
@@ -36,17 +34,16 @@ class SettingVisitor(RulesVisitor):
             self.ctxdict = {}
         return ret
 
-    def _checkType(self, setting, type):
-        self.setting_types.setdefault(setting, type)
-        if self.setting_types[setting] != type:
+    def _checkType(self, setting: str, type: str):
+        if self.settings[setting]['type'] != type:
             self.errors.append(f'Rule {self.name} uses {setting} as {type} '
-                               'but {setting} was previously used as {self.setting_types[setting]}')
+                               'but {setting} is defined as {self.settings[setting]["type"]}')
 
     def _perSetting(self, ctx):
         s = str(ctx.SETTING())
         self._checkSetting(s)
         if ctx.INT():
-            self._setType(s, 'i32')
+            self._checkType(s, 'int')
             self.setting_options[s] |= {int(str(i)) for i in ctx.INT()}
         elif ctx.LIT():
             self._setType(s, 'str')
@@ -83,6 +80,6 @@ class SettingVisitor(RulesVisitor):
         if ctx.SETTING():
             s = str(ctx.SETTING())
             self._checkSetting(s)
-            self._setType(s, 'i16')
+            self._checkType(s, 'int')
             self.setting_options[s].add('?')
         return self.visitChildren(ctx)

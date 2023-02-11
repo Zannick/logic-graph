@@ -7,15 +7,16 @@ from .generated.RulesLexer import RulesLexer
 from .generated.RulesParser import RulesParser
 from .generated.RulesVisitor import RulesVisitor
 from .StringVisitor import StringVisitor
+import antlr4
 from antlr4 import InputStream, CommonTokenStream
 from antlr4.error.ErrorListener import ErrorListener
 
 
 class CollectErrorListener(ErrorListener):
-    def __init__(self, name, verbose):
-        self.errors = []
-        self.name = name
-        self.verbose = verbose
+    def __init__(self, name: str, verbose: bool):
+        self.errors: list[str] = []
+        self.name: str = name
+        self.verbose: bool = verbose
 
     def syntaxError(self, recog, offendingSymbol, line, col, msg, e):
         err = f'{self.name}: at {line}:{col}: {msg}'
@@ -27,14 +28,14 @@ class CollectErrorListener(ErrorListener):
 
 ParseResult = namedtuple('ParseResult', ['name', 'text', 'tree', 'parser', 'errors'])
 
-def make_parser(text):
+def make_parser(text) -> antlr4.Parser:
     ts = InputStream(str(text))
     lexer = RulesLexer(ts)
     stream = CommonTokenStream(lexer)
     return RulesParser(stream)
 
 
-def parseBoolExpr(text, name='', verbose=False):
+def parseBoolExpr(text, name='', verbose=False) -> ParseResult:
     p = make_parser(text)
     errl = CollectErrorListener(name, verbose)
     p.removeErrorListeners()
@@ -43,7 +44,7 @@ def parseBoolExpr(text, name='', verbose=False):
     return ParseResult(name, text, tree, p, errl.errors)
 
 
-def parseNum(text, name='', verbose=False):
+def parseNum(text, name='', verbose=False) -> ParseResult:
     p = make_parser(text)
     errl = CollectErrorListener(name, verbose)
     p.removeErrorListeners()
@@ -52,7 +53,7 @@ def parseNum(text, name='', verbose=False):
     return ParseResult(name, text, tree, p, errl.errors)
 
 
-def parseAction(text, name='', verbose=False):
+def parseAction(text, name='', verbose=False) -> ParseResult:
     p = make_parser(text)
     errl = CollectErrorListener(name, verbose)
     p.removeErrorListeners()
@@ -61,7 +62,7 @@ def parseAction(text, name='', verbose=False):
     return ParseResult(name, text, tree, p, errl.errors)
 
 
-def parseRule(rule, text, name='', verbose=False):
+def parseRule(rule: str, text: str, name:str='', verbose:bool=False) -> ParseResult:
     if rule == 'boolExpr':
         return parseBoolExpr(text, name=name, verbose=verbose)
     if rule == 'num':

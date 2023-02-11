@@ -72,7 +72,7 @@ macro_rules! helper__has_shield {
     }};
 }
 
-/// $can_play ( song )
+/// $can_play ( TypedVar(name='song', type='Item') )
 /// Ocarina and ^song
 #[macro_export]
 macro_rules! helper__can_play {
@@ -90,7 +90,7 @@ macro_rules! helper__can_jumpslash {
     }};
 }
 
-/// $can_use ( item )
+/// $can_use ( TypedVar(name='item', type='Item') )
 /// IF ($_is_magic_item(^item)) { ^item and Magic_Meter } ELSE IF ($_is_adult_item(^item)) { $is_adult and ^item } ELSE IF ($_is_magic_arrow(^item)) { $is_adult and ^item and Bow and Magic_Meter } ELSE IF ($_is_child_item(^item)) { $is_child and ^item }
 
 #[macro_export]
@@ -111,7 +111,7 @@ macro_rules! helper__can_use {
     }};
 }
 
-/// $_is_magic_item ( item )
+/// $_is_magic_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Dins_Fire, Farores_Wind, Nayrus_Love, Lens_of_Truth]
 #[macro_export]
 macro_rules! helper___is_magic_item {
@@ -123,7 +123,7 @@ macro_rules! helper___is_magic_item {
     }};
 }
 
-/// $_is_adult_item ( item )
+/// $_is_adult_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Bow, Megaton_Hammer, Iron_Boots, Hover_Boots, Hookshot, Goron_Tunic, Zora_Tunic, Mirror_Shield]
 #[macro_export]
 macro_rules! helper___is_adult_item {
@@ -142,7 +142,7 @@ macro_rules! helper___is_adult_item {
     }};
 }
 
-/// $_is_child_item ( item )
+/// $_is_child_item ( TypedVar(name='item', type='Item') )
 /// ^item IN [Slingshot, Boomerang, Kokiri_Sword]
 #[macro_export]
 macro_rules! helper___is_child_item {
@@ -154,7 +154,7 @@ macro_rules! helper___is_child_item {
     }};
 }
 
-/// $_is_magic_arrow ( item )
+/// $_is_magic_arrow ( TypedVar(name='item', type='Item') )
 /// ^item IN [Fire_Arrows, Light_Arrows, Blue_Fire_Arrows]
 #[macro_export]
 macro_rules! helper___is_magic_arrow {
