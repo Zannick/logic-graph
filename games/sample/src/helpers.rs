@@ -7,6 +7,8 @@
 #[macro_export]
 macro_rules! helper__is_child {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         $ctx.child
     }};
 }
@@ -16,6 +18,8 @@ macro_rules! helper__is_child {
 #[macro_export]
 macro_rules! helper__is_adult {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         !$ctx.child
     }};
 }
@@ -25,6 +29,8 @@ macro_rules! helper__is_adult {
 #[macro_export]
 macro_rules! helper__Deku_Shield {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         ($ctx.has(&Item::Buy_Deku_Shield) || $ctx.has(&Item::Deku_Shield_Drop))
     }};
 }
@@ -34,6 +40,8 @@ macro_rules! helper__Deku_Shield {
 #[macro_export]
 macro_rules! helper__Nuts {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         (($ctx.has(&Item::Buy_Deku_Nut_5) || $ctx.has(&Item::Buy_Deku_Nut_10))
             || $ctx.has(&Item::Deku_Nut_Drop))
     }};
@@ -44,6 +52,8 @@ macro_rules! helper__Nuts {
 #[macro_export]
 macro_rules! helper__Sticks {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         ($ctx.has(&Item::Buy_Deku_Stick_1) || $ctx.has(&Item::Deku_Stick_Drop))
     }};
 }
@@ -53,6 +63,8 @@ macro_rules! helper__Sticks {
 #[macro_export]
 macro_rules! helper__wallet_max {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         match $ctx.count(&Item::Progressive_Wallet) {
             3 => 999,
             2 => 500,
@@ -67,6 +79,8 @@ macro_rules! helper__wallet_max {
 #[macro_export]
 macro_rules! helper__has_shield {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         ((helper__is_adult!($ctx) && $ctx.has(&Item::Hylian_Shield))
             || (helper__is_child!($ctx) && helper__Deku_Shield!($ctx)))
     }};
@@ -77,6 +91,8 @@ macro_rules! helper__has_shield {
 #[macro_export]
 macro_rules! helper__can_play {
     ($ctx:expr, $song:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         ($ctx.has(&Item::Ocarina) && $ctx.has(&$song))
     }};
 }
@@ -86,6 +102,8 @@ macro_rules! helper__can_play {
 #[macro_export]
 macro_rules! helper__can_jumpslash {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         ((helper__is_adult!($ctx) || helper__Sticks!($ctx)) || $ctx.has(&Item::Kokiri_Sword))
     }};
 }
@@ -96,6 +114,8 @@ macro_rules! helper__can_jumpslash {
 #[macro_export]
 macro_rules! helper__can_use {
     ($ctx:expr, $item:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         if helper___is_magic_item!($ctx, $item) {
             ($ctx.has(&$item) && $ctx.has(&Item::Magic_Meter))
         } else if helper___is_adult_item!($ctx, $item) {
@@ -116,6 +136,8 @@ macro_rules! helper__can_use {
 #[macro_export]
 macro_rules! helper___is_magic_item {
     ($ctx:expr, $item:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         match $item {
             Item::Dins_Fire | Item::Farores_Wind | Item::Nayrus_Love | Item::Lens_of_Truth => true,
             _ => false,
@@ -128,6 +150,8 @@ macro_rules! helper___is_magic_item {
 #[macro_export]
 macro_rules! helper___is_adult_item {
     ($ctx:expr, $item:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         match $item {
             Item::Bow
             | Item::Megaton_Hammer
@@ -147,6 +171,8 @@ macro_rules! helper___is_adult_item {
 #[macro_export]
 macro_rules! helper___is_child_item {
     ($ctx:expr, $item:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         match $item {
             Item::Slingshot | Item::Boomerang | Item::Kokiri_Sword => true,
             _ => false,
@@ -159,6 +185,8 @@ macro_rules! helper___is_child_item {
 #[macro_export]
 macro_rules! helper___is_magic_arrow {
     ($ctx:expr, $item:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         match $item {
             Item::Fire_Arrows | Item::Light_Arrows | Item::Blue_Fire_Arrows => true,
             _ => false,
@@ -171,6 +199,8 @@ macro_rules! helper___is_magic_arrow {
 #[macro_export]
 macro_rules! helper__has_explosives {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         $ctx.has(&Item::Bombs)
     }};
 }
@@ -180,6 +210,8 @@ macro_rules! helper__has_explosives {
 #[macro_export]
 macro_rules! helper__can_blast_or_smash {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         (helper__has_explosives!($ctx) || helper__can_use!($ctx, Item::Megaton_Hammer))
     }};
 }
@@ -189,6 +221,8 @@ macro_rules! helper__can_blast_or_smash {
 #[macro_export]
 macro_rules! helper__can_child_attack {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         (helper__is_child!($ctx)
             && ((($ctx.has(&Item::Slingshot) || $ctx.has(&Item::Boomerang))
                 || helper__Sticks!($ctx))
@@ -201,6 +235,8 @@ macro_rules! helper__can_child_attack {
 #[macro_export]
 macro_rules! helper__has_fire_source {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         (helper__can_use!($ctx, Item::Dins_Fire) || helper__can_use!($ctx, Item::Fire_Arrows))
     }};
 }
@@ -210,6 +246,8 @@ macro_rules! helper__has_fire_source {
 #[macro_export]
 macro_rules! helper__has_fire_source_with_torch {
     ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
         (helper__has_fire_source!($ctx) || (helper__is_child!($ctx) && helper__Sticks!($ctx)))
     }};
 }

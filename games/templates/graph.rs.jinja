@@ -2,6 +2,7 @@
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
+#![allow(unused_variables)]
 #![allow(unused_parens)]
 
 use crate::*;
@@ -11,7 +12,6 @@ use crate::prices::Currency;
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{EnumMap, enum_map};
-use std::cmp;
 use std::fmt;
 
 %% from 'enum.rs.jinja' import enum
@@ -50,7 +50,8 @@ impl world::Accessible for Location {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for loc in gl.locations()
-           LocationId::{{ loc.id }} =>  ctx.has(&Item::{{ all_items|random|construct_id }}),
+           LocationId::{{ loc.id }} => {% if loc.access_id %}access_{{ loc.access_id }}(&ctx)
+                {%- else %}true{% endif %},
 %% endfor
         }
     }

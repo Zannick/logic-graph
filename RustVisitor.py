@@ -74,19 +74,22 @@ class RustVisitor(RulesVisitor):
         ref = self._getRealRef(str(ctx.REF())[1:])
         if ctx.ITEM():
             return f'{ref} == Item::{ctx.ITEM()}'
-        # TODO: setting!
+        return f'{ref} == ctx.{ctx.SETTING()}'
 
     def visitSetting(self, ctx):
-        # TODO: settings!
-        return super().visitSetting(ctx)
+        # TODO: dict settings?
+        return f'{"!" if ctx.NOT() else ""}ctx.{ctx.SETTING()}'
 
     def visitArgument(self, ctx):
         ref = self._getRealRef(str(ctx.REF())[1:])
         return f'{"!" if ctx.NOT() else ""}{ref}'
 
     def visitItemCount(self, ctx):
-        # TODO: settings!
-        return f'ctx.count(&Item::{ctx.ITEM()}) >= {ctx.INT() or 500}'
+        if ctx.INT():
+            val = str(ctx.INT())
+        else:
+            val = f'ctx.{ctx.SETTING()}'
+        return f'ctx.count(&Item::{ctx.ITEM()}) >= {val}'
 
     def visitOneItem(self, ctx):
         return f'ctx.has(&Item::{ctx.ITEM()})'
@@ -102,8 +105,10 @@ class RustVisitor(RulesVisitor):
             return str(ctx.INT())
         if ctx.REF():
             return self._getRealRef(str(ctx.REF())[1:])
-        # TODO: settings, constants
-        return super().visitBaseNum(ctx)
+        if ctx.SETTING():
+            return f'ctx.{ctx::SETTING()}'
+        # TODO: constants
+        return self.visitChildren(ctx)
 
     def visitPerItemInt(self, ctx):
         cases = list(map(str, ctx.INT())) + ["_"]

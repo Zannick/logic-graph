@@ -1,6 +1,6 @@
 import argparse
 from collections import namedtuple, Counter, defaultdict
-from functools import cache, cached_property
+from functools import cache, cached_property, partial
 import itertools
 import logging
 import os
@@ -552,6 +552,7 @@ class GameLogic(object):
         env.filters['treeToString'] = treeToString
         env.filters['treeToRust'] = self.treeToRust
         env.filters['get_int_type_for_max'] = get_int_type_for_max
+        env.filters['escape_ctx'] = partial(re.compile(r'\bctx\b').sub, '$ctx')
         # Access cached_properties to ensure they're in the template vars
         self.all_items
         self.context_types

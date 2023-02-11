@@ -4,6 +4,7 @@
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
+#![allow(unused_variables)]
 #![allow(unused_parens)]
 
 use crate::context::*;
@@ -13,7 +14,6 @@ use crate::*;
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, EnumMap};
-use std::cmp;
 use std::fmt;
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
@@ -811,98 +811,88 @@ impl world::Accessible for Location {
         ctx.can_afford(&self.price)
             && match self.id {
                 LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
-                    ctx.has(&Item::Blue_Fire_Arrows)
+                    access_is_adult_or_kokiri_sword_or_boomerang(&ctx)
                 }
                 LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => {
-                    ctx.has(&Item::Light_Arrows)
+                    access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(&ctx)
                 }
-                LocationId::Deku_Tree__Lobby__Center__Web => ctx.has(&Item::Bombs),
-                LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => ctx.has(&Item::Boomerang),
-                LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => ctx.has(&Item::Light_Arrows),
-                LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
-                    ctx.has(&Item::Iron_Boots)
+                LocationId::Deku_Tree__Lobby__Center__Web => access_false(&ctx),
+                LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => true,
+                LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => access_has_shield(&ctx),
+                LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => true,
+                LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => true,
+                LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                    access_is_adult_or_can_child_attack_or_nuts(&ctx)
                 }
-                LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
-                    ctx.has(&Item::Buy_Arrows_30)
-                }
-                LocationId::Deku_Tree__Floor_3__Door__Break_Web => ctx.has(&Item::Rupee_1),
                 LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                    ctx.has(&Item::Biggoron_Sword)
+                    access_is_child_and_sticks_and_nuts(&ctx)
                 }
-                LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
-                    ctx.has(&Item::Triforce_Piece)
+                LocationId::Deku_Tree__Compass_Room__Compass__Chest => true,
+                LocationId::Deku_Tree__Compass_Room__Ledge__Chest => true,
+                LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
+                    access_is_adult_or_can_child_attack(&ctx)
                 }
-                LocationId::Deku_Tree__Compass_Room__Ledge__Chest => ctx.has(&Item::Bombs),
-                LocationId::Deku_Tree__Compass_Room__Ledge__GS => ctx.has(&Item::Hylian_Shield),
                 LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
-                    ctx.has(&Item::Buy_Deku_Shield)
+                    access_is_adult_or_sticks_or_kokiri_sword(&ctx)
                 }
-                LocationId::Deku_Tree__Basement_1__Corner__Switch => {
-                    ctx.has(&Item::Buy_Deku_Stick_1)
-                }
+                LocationId::Deku_Tree__Basement_1__Corner__Switch => true,
                 LocationId::Deku_Tree__Basement_1__Corner__Chest => {
-                    ctx.has(&Item::Gold_Skulltula_Token)
+                    access_deku_basement_switch(&ctx)
                 }
                 LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
-                    ctx.has(&Item::Minuet_of_Forest)
+                    access_is_adult_or_can_child_attack(&ctx)
                 }
                 LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
-                    ctx.has(&Item::Farores_Wind)
+                    access_deku_basement_block_and_is_child_and_sticks(&ctx)
                 }
                 LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
-                    ctx.has(&Item::Deku_Back_Room_Wall)
+                    access_has_fire_source_with_torch_or_can_usebow(&ctx)
                 }
                 LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
-                    ctx.has(&Item::Buy_Arrows_30)
+                    access_deku_back_room_web_and_can_blast_or_smash(&ctx)
                 }
-                LocationId::Deku_Tree__Skull_Room__Entry__GS => ctx.has(&Item::Megaton_Hammer),
-                LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
-                    ctx.has(&Item::Deku_Back_Room_Wall)
+                LocationId::Deku_Tree__Skull_Room__Entry__GS => {
+                    access_can_useboomerang_or_can_usehookshot(&ctx)
                 }
-                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => ctx.has(&Item::Fire_Arrows),
-                LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
-                    ctx.has(&Item::Deku_Shield_Drop)
+                LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => true,
+                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                    access_has_fire_source(&ctx)
                 }
-                LocationId::Deku_Tree__Boss_Room__Arena__Gohma => ctx.has(&Item::Heart_Container),
+                LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => access_has_shield(&ctx),
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
+                    access_nuts_or_can_useslingshot_and_can_jumpslash(&ctx)
+                }
                 LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
-                    ctx.has(&Item::Zora_Tunic)
+                    access_nuts_and_has_shield_and_if_is_child__sticks__else__biggoron_sword_(&ctx)
                 }
-                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
-                    ctx.has(&Item::Buy_Arrows_10)
-                }
-                LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
-                    ctx.has(&Item::Buy_Deku_Nut_5)
-                }
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => access_defeat_gohma(&ctx),
+                LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => access_defeat_gohma(&ctx),
                 LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
-                    ctx.has(&Item::Buy_Arrows_10)
+                    access_is_child_and_kokiri_sword_and_deku_shield(&ctx)
                 }
-                LocationId::KF__Boulder_Maze__Reward__Chest => ctx.has(&Item::Map_Deku_Tree),
-                LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => ctx.has(&Item::Rupees_5),
-                LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => ctx.has(&Item::Buy_Deku_Stick_1),
-                LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
-                    ctx.has(&Item::Buy_Deku_Nut_10)
+                LocationId::KF__Boulder_Maze__Reward__Chest => true,
+                LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
+                    access_is_adult_or_kokiri_sword_or_boomerang(&ctx)
                 }
-                LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
-                    ctx.has(&Item::Nayrus_Love)
+                LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => access_is_adult(&ctx),
+                LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => true,
+                LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => true,
+                LocationId::KF__Midos_House__Entry__Top_Left_Chest => true,
+                LocationId::KF__Midos_House__Entry__Top_Right_Chest => true,
+                LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => true,
+                LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => true,
+                LocationId::KF__Shop__Entry__Blue_Rupee => true,
+                LocationId::KF__Shop__Entry__Item_1 => true,
+                LocationId::KF__Shop__Entry__Item_2 => true,
+                LocationId::KF__Shop__Entry__Item_3 => true,
+                LocationId::KF__Shop__Entry__Item_4 => true,
+                LocationId::KF__Shop__Entry__Item_5 => true,
+                LocationId::KF__Shop__Entry__Item_6 => true,
+                LocationId::KF__Shop__Entry__Item_7 => true,
+                LocationId::KF__Shop__Entry__Item_8 => true,
+                LocationId::Kak__Spider_House__Entry__Skulls_10 => {
+                    access_gold_skulltula_token10(&ctx)
                 }
-                LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
-                    ctx.has(&Item::Deku_Back_Room_Web)
-                }
-                LocationId::KF__Midos_House__Entry__Top_Right_Chest => ctx.has(&Item::Farores_Wind),
-                LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => ctx.has(&Item::Rupee_1),
-                LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                    ctx.has(&Item::Kokiri_Emerald)
-                }
-                LocationId::KF__Shop__Entry__Blue_Rupee => ctx.has(&Item::Buy_Arrows_30),
-                LocationId::KF__Shop__Entry__Item_1 => ctx.has(&Item::Biggoron_Sword),
-                LocationId::KF__Shop__Entry__Item_2 => ctx.has(&Item::Zora_Tunic),
-                LocationId::KF__Shop__Entry__Item_3 => ctx.has(&Item::Deku_Shield_Drop),
-                LocationId::KF__Shop__Entry__Item_4 => ctx.has(&Item::Buy_Deku_Stick_1),
-                LocationId::KF__Shop__Entry__Item_5 => ctx.has(&Item::Defeat_Ganon),
-                LocationId::KF__Shop__Entry__Item_6 => ctx.has(&Item::Compass_Deku_Tree),
-                LocationId::KF__Shop__Entry__Item_7 => ctx.has(&Item::Hookshot),
-                LocationId::KF__Shop__Entry__Item_8 => ctx.has(&Item::Nayrus_Love),
-                LocationId::Kak__Spider_House__Entry__Skulls_10 => ctx.has(&Item::Farores_Wind),
             }
     }
 }
@@ -931,7 +921,7 @@ fn access_defeat_ganon(ctx: &Context) -> bool {
     ctx.has(&Item::Defeat_Ganon)
 }
 fn access_triforce_piecetriforce_count(ctx: &Context) -> bool {
-    ctx.count(&Item::Triforce_Piece) >= 500
+    ctx.count(&Item::Triforce_Piece) >= ctx.triforce_count
 }
 fn access_kokiri_emerald(ctx: &Context) -> bool {
     ctx.has(&Item::Kokiri_Emerald)
@@ -953,7 +943,7 @@ fn access_deku_lobby_web(ctx: &Context) -> bool {
     ctx.has(&Item::Deku_Lobby_Web)
 }
 fn access_deku_lobby_web_and_logic_deku_b1_skip(ctx: &Context) -> bool {
-    (ctx.has(&Item::Deku_Lobby_Web) && None)
+    (ctx.has(&Item::Deku_Lobby_Web) && ctx.logic_deku_b1_skip)
 }
 fn access_can_useslingshot(ctx: &Context) -> bool {
     helper__can_use!(ctx, Item::Slingshot)
