@@ -379,6 +379,12 @@ class GameLogic(object):
         for ex in self.exits():
             if get_exit_target(ex) not in spot_ids:
                 e.append(f'Unrecognized destination spot in exit {ex["fullname"]}')
+        for item in self.collect:
+            if item != construct_id(item):
+                e.append(f'Invalid item name {item!r} as collect rule; '
+                         f'did you mean {construct_id(item)!r}?')
+            elif item not in self.all_items:
+                e.append(f'Unrecognized item {item!r} as collect rule')
         # Do things that will fill _misc_errors
         self.context_values
 
@@ -589,6 +595,7 @@ if __name__ == '__main__':
     gl = GameLogic(args.game)
     if gl.errors:
         print('\n'.join(gl.errors))
+        print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
     gl.render()
 

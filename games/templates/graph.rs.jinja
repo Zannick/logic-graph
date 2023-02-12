@@ -11,12 +11,13 @@ use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{EnumMap, enum_map};
 use std::fmt;
+use std::option::Option;
 
 %% from 'enum.rs.jinja' import enum
 {{ enum('RegionId', regions) }}
 {{ enum('AreaId', gl.areas()|list) }}
 {{ enum('SpotId', gl.spots()|list, True) }}
-{{ enum('LocationId', gl.locations()|list, True) }}
+{{ enum('LocationId', gl.locations()|list) }}
 {{ enum('ExitId', gl.exits()|list) }}
 {{ enum('ActionId', gl.actions()|list) }}
 {{ enum('CanonId', canon_places, True) }}
@@ -31,23 +32,21 @@ pub enum History {
 
 %# All of this is going in unchanged--perhaps it should be a library type
 %# with generics? But that kind of mostly negates the use of traits with
-%# associated types...
+%# associated types... Maybe a macro...
 #[derive(Copy, Clone)]
 pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
     time: i8,
-    pub price: Currency,
-
-    pub access_rule: fn(&Context) -> bool,
+    exit_id: Option<ExitId>,
+    price: Currency,
 }
 
 impl world::Accessible for Location {
     type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-            LocationId::None => false,
 %% for loc in gl.locations()
             LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
                 {%- else %}true{% endif %},
@@ -59,11 +58,15 @@ impl world::Accessible for Location {
 impl world::Location for Location {
     type LocId = LocationId;
     type CanonId = CanonId;
+    type ExitId = ExitId;
+    type Currency = Currency;
 
     fn id(&self) -> &LocationId { &self.id }
     fn item(&self) -> &Item { &self.item }
-
     fn canon_id(&self) -> &CanonId { &self.canonical }
+    fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
+    fn time(&self) -> i8 { self.time }
+    fn price(&self) -> &Currency { &self.price }
 }
 
 #[derive(Copy, Clone)]
@@ -72,39 +75,31 @@ pub struct Exit {
     time: i8,
     dest: SpotId,
     price: Currency,
-
-    loc_id: LocationId,
-    item: Item,
-    canonical: CanonId,
-    item_time: i8,
-
-    access_rule: fn(&Context) -> bool,
+    loc_id: Option<LocationId>,
 }
 
 impl world::Accessible for Exit {
     type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && (self.access_rule)(ctx)
+        ctx.can_afford(&self.price) && match self.id {
+%% for ex in gl.exits()
+            ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(&ctx)
+                {%- else %}true{% endif %},
+%% endfor
+        }
     }
 }
 
 impl world::Exit for Exit {
     type ExitId = ExitId;
     type SpotId = SpotId;
+    type LocId = LocationId;
 
     fn id(&self) -> &ExitId { &self.id }
     fn dest(&self) -> &SpotId { &self.dest }
     fn connect(&mut self, dest: &SpotId) { self.dest = *dest; }
-}
-
-impl world::Location for Exit {
-    type LocId = LocationId;
-    type CanonId = CanonId;
-
-    fn id(&self) -> &LocationId { &self.loc_id }
-    fn item(&self) -> &Item { &self.item }
-
-    fn canon_id(&self) -> &CanonId { &self.canonical }
+    fn loc_id(&self) -> &Option<LocationId> { &self.loc_id }
+    fn time(&self) -> i8 { self.time }
 }
 
 #[derive(Copy, Clone)]
@@ -117,11 +112,26 @@ pub struct Action {
 
 impl world::Accessible for Action {
     type Context = Context;
-    fn can_access(&self, ctx: &Context) -> bool { (self.access_rule)(ctx) }
+    fn can_access(&self, ctx: &Context) -> bool {
+        match self.id {
+%% for act in gl.actions()
+            ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(&ctx)
+                {%- else %}true{% endif %},
+%% endfor
+        }
+    }
 }
 impl world::Action for Action {
     type ActionId = ActionId;
     fn id(&self) -> &ActionId { &self.id }
+    fn time(&self) -> i8 { self.time }
+    fn perform(&self, ctx: &mut Context) {
+        match self.id {
+%% for act in gl.actions()
+            ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx),
+%% endfor
+        }
+    }
 }
 
 #[derive(Copy, Clone)]
@@ -177,22 +187,22 @@ impl<'a> world::World for World<'a> {
     fn get_exit(&self, ex_id: &ExitId) -> &Exit { &self.exits[*ex_id] }
     fn get_action(&self, act_id: &ActionId) -> &Action { &self.actions[*act_id] }
     fn get_spot(&self, sp_id: &SpotId) -> &Spot<'a> { &self.spots[*sp_id] }
+
+    fn on_collect(&self, item_id: &Item, ctx: &mut Context) {
+        match item_id {
+%% for item, info in collect.items()
+            Item::{{ item }} => rules::action_{{ info.action_id }}(ctx),
+%% endfor
+            _ => (),
+        }
+    }
 }
 
 pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
-    LocationId::None => Location {
-        id: LocationId::None,
-        access_rule: |_| false,
-        canonical: CanonId::None,
-        item: Item::None,
-        price: Currency::Free,
-        time: 0,
-    },
 %% for loc in gl.locations()
     LocationId::{{ loc.id }} => Location {
         id: LocationId::{{ loc.id }},
-        access_rule: rules::access_{{ loc.access_id or 'default' }},
         canonical: CanonId::{{ loc.canon or 'None' }},
         item: Item::{{ loc.item or 'None' }},
         price: Currency::{% if loc.price and loc.price > 0 -%}
@@ -201,6 +211,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         time: {% if loc.to is defined %}{# hybrid #}
             {%- if loc.item_time is defined %}{{ loc.item_time }}{% else %}1{% endif %}
             {%- elif loc.time is defined %}{{ loc.time }}{% else %}1{% endif %},
+        exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
     },
 %% endfor
 } }
@@ -215,11 +226,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         price: Currency::{% if ex.price and ex.price > 0 -%}
             {{ (ex.costs or price_types[0])|capitalize }}({{ ex.price }})
             {%- else %}Free{% endif %},
-        loc_id: LocationId::{{ ex.id if ex.item is defined else 'None' }},
-        canonical: CanonId::{{ ex.canon or 'None' }},
-        item: Item::{{ ex.item or 'None' }},
-        item_time: {{ ex.item_time if ex.item_time is defined else 1 }},
-        access_rule: rules::access_{{ ex.access_id or 'default' }},
+        loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
     },
 %% endfor
 } }

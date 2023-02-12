@@ -14,14 +14,6 @@ fn check_access_call(locs: &[Location], ctx: &Context) -> i32 {
     i
 }
 
-fn check_access_direct(locs: &[Location], ctx: &Context) -> i32 {
-    let mut i = 0;
-    for loc in locs {
-        if ctx.can_afford(&loc.price) && (loc.access_rule)(ctx) { i += 1 }
-    }
-    i
-}
-
 pub fn criterion_benchmark(c: &mut Criterion) {
     let locmap = build_locations();
     let mut ctx = Context::default();
@@ -29,7 +21,6 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     ctx.collect(&Item::Buy_Deku_Stick_1);
 
     c.bench_function("call", |b| b.iter(|| check_access_call(locmap.as_slice(), &ctx)));
-    c.bench_function("direct", |b| b.iter(|| check_access_direct(locmap.as_slice(), &ctx)));
 }
 
 criterion_group!{
