@@ -9,7 +9,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::{EnumMap, enum_map};
+use enum_map::{Enum, EnumMap, enum_map};
 use std::fmt;
 use std::option::Option;
 
@@ -135,9 +135,9 @@ impl world::Action for Action {
 }
 
 #[derive(Copy, Clone)]
-struct Spot<'a> {
+pub struct Spot<'a> {
     id: SpotId,
-    // we can hold slices here to the real things held in World
+    // slices here to the real things held in World
     locations: &'a [Location],
     exits: &'a [Exit],
     actions: &'a [Action],
@@ -149,22 +149,29 @@ impl<'a> world::Spot for Spot<'a> {
     type Exit = Exit;
     type Action = Action;
 
-    fn id(&self) -> &SpotId {
-        &self.id
-    }
-    fn locations(&self) -> &'a [Location] {
-        &self.locations
-    }
-    fn exits(&self) -> &'a [Exit] {
-        &self.exits
-    }
-    fn actions(&self) -> &'a [Action] {
-        &self.actions
-    }
+    fn id(&self) -> &SpotId { &self.id }
+    fn locations(&self) -> &'a [Location] { &self.locations }
+    fn exits(&self) -> &'a [Exit] { &self.exits }
+    fn actions(&self) -> &'a [Action] { &self.actions }
+}
+
+#[derive(Copy, Clone)]
+pub struct Area<'a> {
+    id: AreaId,
+    spots: &'a [Spot<'a>],
+    exits: &'a [Exit],
+}
+
+impl<'a> world::Area for Area<'a> {
+    type AreaId = AreaId;
+    type Spot = Spot<'a>;
+    fn id(&self) -> &AreaId { &self.id }
+    fn spots(&self) -> &'a [Spot<'a>] { &self.spots }
+    fn exits(&self) -> &'a [Exit] { &self.exits }
 }
 
 #[derive(Clone)]
-struct World<'a> {
+pub struct World<'a> {
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -182,6 +189,7 @@ impl<'a> world::World for World<'a> {
     type Exit = Exit;
     type Action = Action;
     type Spot = Spot<'a>;
+    type Area = Area<'a>;
 
     fn get_location(&self, loc_id: &LocationId) -> &Location { &self.locations[*loc_id] }
     fn get_exit(&self, ex_id: &ExitId) -> &Exit { &self.exits[*ex_id] }
@@ -242,3 +250,25 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
     },
 %% endfor
 } }
+
+pub fn build_spots<'a>(
+        locs: &'a EnumMap<LocationId, Location>,
+        exits: &'a EnumMap<ExitId, Exit>,
+        actions: &'a EnumMap<ActionId, Action>) -> EnumMap<SpotId, Spot<'a>> {
+    enum_map! {
+        SpotId::None => Spot {
+            id: SpotId::None,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+%% for sp in gl.spots()
+        SpotId::{{ sp.id }} => Spot {
+            id: SpotId::{{ sp.id }},
+            locations: &locs.as_slice()[{% if sp.loc_ids %}LocationId::{{ sp.loc_ids|min }}.into_usize()..=LocationId::{{ sp.loc_ids|max }}.into_usize(){% else %}0..0{% endif %}],
+            exits: &exits.as_slice()[{% if sp.exit_ids %}ExitId::{{ sp.exit_ids|min }}.into_usize()..=ExitId::{{ sp.exit_ids|max }}.into_usize(){% else %}0..0{% endif %}],
+            actions: &actions.as_slice()[{% if sp.action_ids %}ActionId::{{ sp.action_ids|min }}.into_usize()..=ActionId::{{ sp.action_ids|max }}.into_usize(){% else %}0..0{% endif %}],
+        },
+%% endfor
+    }
+}

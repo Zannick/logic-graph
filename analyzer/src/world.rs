@@ -60,9 +60,10 @@ pub trait Spot {
 // This is necessary to handle movement calculations
 pub trait Area {
     type AreaId;
-    type Spot;
+    type Spot: Spot;
     fn id(&self) -> &Self::AreaId;
     fn spots(&self) -> &[Self::Spot];
+    fn exits(&self) -> &[<Self::Spot as Spot>::Exit];
 }
 
 // This one might not be necessary.
@@ -75,8 +76,8 @@ pub trait World {
     type Location: Location;
     type Exit: Exit;
     type Action: Action;
-    type Spot: Spot;
-    //type Area: Area;
+    type Spot: Spot<Location = Self::Location, Exit = Self::Exit>;
+    type Area: Area<Spot = Self::Spot>;
     //type Region: Region;
 
     fn get_location(&self, loc_id: &<Self::Location as Location>::LocId) -> &Self::Location;

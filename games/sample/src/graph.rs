@@ -11,7 +11,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::{enum_map, EnumMap};
+use enum_map::{enum_map, Enum, EnumMap};
 use std::fmt;
 use std::option::Option;
 
@@ -447,6 +447,7 @@ pub enum ExitId {
     Deku_Tree__Lobby__Center__ex__Basement_1__Center_1,
     Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1,
     Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1,
+    Deku_Tree__Floor_2__ex__Lobby__Center,
     Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1,
     Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1,
     Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2,
@@ -513,6 +514,9 @@ impl fmt::Display for ExitId {
             ),
             ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => {
                 write!(f, "{}", "Deku Tree > Lobby > Vines ==> Floor 2 > Lower (1)")
+            }
+            ExitId::Deku_Tree__Floor_2__ex__Lobby__Center => {
+                write!(f, "{}", "Deku Tree > Floor 2 ==> Lobby > Center")
             }
             ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => {
                 write!(f, "{}", "Deku Tree > Floor 2 > Lower ==> Lobby > Vines (1)")
@@ -950,6 +954,7 @@ impl world::Accessible for Exit {
                     rules::access_deku_lobby_web_and_logic_deku_b1_skip(&ctx)
                 }
                 ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => true,
+                ExitId::Deku_Tree__Floor_2__ex__Lobby__Center => true,
                 ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1 => true,
                 ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => {
@@ -1094,9 +1099,9 @@ impl world::Action for Action {
 }
 
 #[derive(Copy, Clone)]
-struct Spot<'a> {
+pub struct Spot<'a> {
     id: SpotId,
-    // we can hold slices here to the real things held in World
+    // slices here to the real things held in World
     locations: &'a [Location],
     exits: &'a [Exit],
     actions: &'a [Action],
@@ -1122,8 +1127,29 @@ impl<'a> world::Spot for Spot<'a> {
     }
 }
 
+#[derive(Copy, Clone)]
+pub struct Area<'a> {
+    id: AreaId,
+    spots: &'a [Spot<'a>],
+    exits: &'a [Exit],
+}
+
+impl<'a> world::Area for Area<'a> {
+    type AreaId = AreaId;
+    type Spot = Spot<'a>;
+    fn id(&self) -> &AreaId {
+        &self.id
+    }
+    fn spots(&self) -> &'a [Spot<'a>] {
+        &self.spots
+    }
+    fn exits(&self) -> &'a [Exit] {
+        &self.exits
+    }
+}
+
 #[derive(Clone)]
-struct World<'a> {
+pub struct World<'a> {
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -1141,6 +1167,7 @@ impl<'a> world::World for World<'a> {
     type Exit = Exit;
     type Action = Action;
     type Spot = Spot<'a>;
+    type Area = Area<'a>;
 
     fn get_location(&self, loc_id: &LocationId) -> &Location {
         &self.locations[*loc_id]
@@ -1569,6 +1596,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Deku_Tree__Floor_2__ex__Lobby__Center => Exit {
+            id: ExitId::Deku_Tree__Floor_2__ex__Lobby__Center,
+            time: 1,
+            dest: SpotId::Deku_Tree__Lobby__Center,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1,
             time: 1,
@@ -1929,6 +1963,327 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             access_rule: rules::access_is_child_and_sticks,
             activate: rules::action_deku_tree__compass_room__entry_light_torchdo,
             time: 1,
+        },
+    }
+}
+
+pub fn build_spots<'a>(
+    locs: &'a EnumMap<LocationId, Location>,
+    exits: &'a EnumMap<ExitId, Exit>,
+    actions: &'a EnumMap<ActionId, Action>,
+) -> EnumMap<SpotId, Spot<'a>> {
+    enum_map! {
+        SpotId::None => Spot {
+            id: SpotId::None,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Lobby__Entry => Spot {
+            id: SpotId::Deku_Tree__Lobby__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Lobby__Center => Spot {
+            id: SpotId::Deku_Tree__Lobby__Center,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks.into_usize()..=LocationId::Deku_Tree__Lobby__Center__Web.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1.into_usize()..=ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Lobby__Vines => Spot {
+            id: SpotId::Deku_Tree__Lobby__Vines,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1.into_usize()..=ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Floor_2__Lower => Spot {
+            id: SpotId::Deku_Tree__Floor_2__Lower,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1.into_usize()..=ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Floor_2__Vines => Spot {
+            id: SpotId::Deku_Tree__Floor_2__Vines,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Floor_2__Vines__Map_Chest.into_usize()..=LocationId::Deku_Tree__Floor_2__Vines__Map_Chest.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1.into_usize()..=ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Floor_2__Slingshot_Door => Spot {
+            id: SpotId::Deku_Tree__Floor_2__Slingshot_Door,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1.into_usize()..=ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Scrub_Room__Entry => Spot {
+            id: SpotId::Deku_Tree__Scrub_Room__Entry,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize()..=LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize()],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Scrub_Room__Rear => Spot {
+            id: SpotId::Deku_Tree__Scrub_Room__Rear,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1.into_usize()..=ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Slingshot_Room__Entry => Spot {
+            id: SpotId::Deku_Tree__Slingshot_Room__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1.into_usize()..=ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Slingshot_Room__Slingshot => Spot {
+            id: SpotId::Deku_Tree__Slingshot_Room__Slingshot,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest.into_usize()..=LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1.into_usize()..=ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Slingshot_Upper__Ledge => Spot {
+            id: SpotId::Deku_Tree__Slingshot_Upper__Ledge,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize()..=LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1.into_usize()..=ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Floor_3__Climb => Spot {
+            id: SpotId::Deku_Tree__Floor_3__Climb,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Floor_3__Door => Spot {
+            id: SpotId::Deku_Tree__Floor_3__Door,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Floor_3__Door__Break_Web.into_usize()..=LocationId::Deku_Tree__Floor_3__Door__Break_Web.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1.into_usize()..=ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Compass_Room__Entry => Spot {
+            id: SpotId::Deku_Tree__Compass_Room__Entry,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web.into_usize()..=LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1.into_usize()..=ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1.into_usize()],
+            actions: &actions.as_slice()[ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch.into_usize()..=ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch.into_usize()],
+        },
+        SpotId::Deku_Tree__Compass_Room__Compass => Spot {
+            id: SpotId::Deku_Tree__Compass_Room__Compass,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Compass_Room__Compass__Chest.into_usize()..=LocationId::Deku_Tree__Compass_Room__Compass__Chest.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1.into_usize()..=ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Compass_Room__Ledge => Spot {
+            id: SpotId::Deku_Tree__Compass_Room__Ledge,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Compass_Room__Ledge__Chest.into_usize()..=LocationId::Deku_Tree__Compass_Room__Ledge__GS.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1.into_usize()..=ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_1__Center => Spot {
+            id: SpotId::Deku_Tree__Basement_1__Center,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Basement_1__Center__Vines_GS.into_usize()..=LocationId::Deku_Tree__Basement_1__Center__Vines_GS.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1.into_usize()..=ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_1__Corner => Spot {
+            id: SpotId::Deku_Tree__Basement_1__Corner,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web.into_usize()..=LocationId::Deku_Tree__Basement_1__Corner__Switch.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1.into_usize()..=ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_1__South_Door => Spot {
+            id: SpotId::Deku_Tree__Basement_1__South_Door,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1.into_usize()..=ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Back_Room__South => Spot {
+            id: SpotId::Deku_Tree__Back_Room__South,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Back_Room__Northwest => Spot {
+            id: SpotId::Deku_Tree__Back_Room__Northwest,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall.into_usize()..=LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1.into_usize()..=ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Back_Room__East => Spot {
+            id: SpotId::Deku_Tree__Back_Room__East,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1.into_usize()..=ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Skull_Room__Entry => Spot {
+            id: SpotId::Deku_Tree__Skull_Room__Entry,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Skull_Room__Entry__GS.into_usize()..=LocationId::Deku_Tree__Skull_Room__Entry__GS.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1.into_usize()..=ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_Ledge__Block => Spot {
+            id: SpotId::Deku_Tree__Basement_Ledge__Block,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block.into_usize()..=LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1.into_usize()..=ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_Ledge__Web => Spot {
+            id: SpotId::Deku_Tree__Basement_Ledge__Web,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web.into_usize()..=LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1.into_usize()..=ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_2__Pool => Spot {
+            id: SpotId::Deku_Tree__Basement_2__Pool,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1.into_usize()..=ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Basement_2__Boss_Door => Spot {
+            id: SpotId::Deku_Tree__Basement_2__Boss_Door,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs.into_usize()..=LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs.into_usize()],
+            exits: &exits.as_slice()[ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1.into_usize()..=ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Boss_Room__Entry => Spot {
+            id: SpotId::Deku_Tree__Boss_Room__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Deku_Tree__Boss_Room__Arena => Spot {
+            id: SpotId::Deku_Tree__Boss_Room__Arena,
+            locations: &locs.as_slice()[LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp.into_usize()..=LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill.into_usize()],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Links_House__Start_Point => Spot {
+            id: SpotId::KF__Links_House__Start_Point,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Links_House__Entry => Spot {
+            id: SpotId::KF__Links_House__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1.into_usize()..=ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Links_Porch => Spot {
+            id: SpotId::KF__Kokiri_Village__Links_Porch,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1.into_usize()..=ExitId::KF__Kokiri_Village__Links_Porch__ex__Training_Center_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Midos_Porch => Spot {
+            id: SpotId::KF__Kokiri_Village__Midos_Porch,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1.into_usize()..=ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Knowitall_Porch => Spot {
+            id: SpotId::KF__Kokiri_Village__Knowitall_Porch,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1.into_usize()..=ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Training_Center => Spot {
+            id: SpotId::KF__Kokiri_Village__Training_Center,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1.into_usize()..=ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Shop_Porch => Spot {
+            id: SpotId::KF__Kokiri_Village__Shop_Porch,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1.into_usize()..=ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Sarias_Porch => Spot {
+            id: SpotId::KF__Kokiri_Village__Sarias_Porch,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1.into_usize()..=ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Kokiri_Village__Midos_Guardpost => Spot {
+            id: SpotId::KF__Kokiri_Village__Midos_Guardpost,
+            locations: &locs.as_slice()[LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido.into_usize()..=LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido.into_usize()],
+            exits: &exits.as_slice()[ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1.into_usize()..=ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Boulder_Maze__Entry => Spot {
+            id: SpotId::KF__Boulder_Maze__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1.into_usize()..=ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Boulder_Maze__Reward => Spot {
+            id: SpotId::KF__Boulder_Maze__Reward,
+            locations: &locs.as_slice()[LocationId::KF__Boulder_Maze__Reward__Chest.into_usize()..=LocationId::KF__Boulder_Maze__Reward__Chest.into_usize()],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Baba_Corridor__Village_Side => Spot {
+            id: SpotId::KF__Baba_Corridor__Village_Side,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1.into_usize()..=ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Baba_Corridor__Deku_Babas => Spot {
+            id: SpotId::KF__Baba_Corridor__Deku_Babas,
+            locations: &locs.as_slice()[LocationId::KF__Baba_Corridor__Deku_Babas__Nuts.into_usize()..=LocationId::KF__Baba_Corridor__Deku_Babas__Sticks.into_usize()],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Baba_Corridor__Tree_Side => Spot {
+            id: SpotId::KF__Baba_Corridor__Tree_Side,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1.into_usize()..=ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Outside_Deku_Tree__Entry => Spot {
+            id: SpotId::KF__Outside_Deku_Tree__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1.into_usize()..=ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Outside_Deku_Tree__Left => Spot {
+            id: SpotId::KF__Outside_Deku_Tree__Left,
+            locations: &locs.as_slice()[LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone.into_usize()..=LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone.into_usize()],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Outside_Deku_Tree__Right => Spot {
+            id: SpotId::KF__Outside_Deku_Tree__Right,
+            locations: &locs.as_slice()[LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone.into_usize()..=LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone.into_usize()],
+            exits: &exits.as_slice()[0..0],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Outside_Deku_Tree__Mouth => Spot {
+            id: SpotId::KF__Outside_Deku_Tree__Mouth,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1.into_usize()..=ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Midos_House__Entry => Spot {
+            id: SpotId::KF__Midos_House__Entry,
+            locations: &locs.as_slice()[LocationId::KF__Midos_House__Entry__Bottom_Left_Chest.into_usize()..=LocationId::KF__Midos_House__Entry__Top_Right_Chest.into_usize()],
+            exits: &exits.as_slice()[ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1.into_usize()..=ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Knowitall_House__Entry => Spot {
+            id: SpotId::KF__Knowitall_House__Entry,
+            locations: &locs.as_slice()[0..0],
+            exits: &exits.as_slice()[ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1.into_usize()..=ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::KF__Shop__Entry => Spot {
+            id: SpotId::KF__Shop__Entry,
+            locations: &locs.as_slice()[LocationId::KF__Shop__Entry__Blue_Rupee.into_usize()..=LocationId::KF__Shop__Entry__Item_8.into_usize()],
+            exits: &exits.as_slice()[ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1.into_usize()..=ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
+        },
+        SpotId::Kak__Spider_House__Entry => Spot {
+            id: SpotId::Kak__Spider_House__Entry,
+            locations: &locs.as_slice()[LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize()..=LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize()],
+            exits: &exits.as_slice()[ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1.into_usize()..=ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1.into_usize()],
+            actions: &actions.as_slice()[0..0],
         },
     }
 }

@@ -126,9 +126,13 @@ def treeToString(tree: antlr4.ParserRuleContext):
 
 
 def get_exit_target(ex):
-    local = [ex['region'], ex['area'], ex['spot']]
+    local = [ex['region'], ex['area']]
+    if 'spot' in ex:
+        local.append(ex['spot'])
     targ = ex['to'].split('>')
-    res = local[:-len(targ)] + [t.strip() for t in targ]
+    # targ length = 1 (just spot) => leave 2 (reg/area), 2 (spot+area) => leave 1 (region)
+    # 3 => 0.
+    res = local[:3 - len(targ)] + [t.strip() for t in targ]
     return construct_id(*res)
 
 
@@ -189,7 +193,8 @@ class GameLogic(object):
                 area['region'] = rname
                 area['id'] = construct_id(rname, aname)
                 area['fullname'] = f'{rname} > {aname}'
-
+                area['exit_ids'] = []
+                area['spot_ids'] = []
                 for e in area.get('exits', ()):
                     e['area'] = aname
                     e['region'] = rname
@@ -206,12 +211,16 @@ class GameLogic(object):
                     spot['region'] = rname
                     spot['id'] = construct_id(rname, aname, sname)
                     spot['fullname'] = f'{rname} > {aname} > {sname}'
+                    spot['loc_ids'] = []
+                    spot['exit_ids'] = []
+                    spot['action_ids'] = []
                     # hybrid spots are exits but have names
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         loc['spot'] = sname
                         loc['area'] = aname
                         loc['region'] = rname
                         loc['id'] = construct_id(rname, aname, sname, loc['name'])
+                        spot['loc_ids'].append(loc['id'])
                         loc['fullname'] = f'{spot["fullname"]} {loc["name"]}'
                         if 'canon' in loc:
                             self.canon_places[loc['canon']].append(loc)
@@ -228,6 +237,7 @@ class GameLogic(object):
                         ec[eh['to']] += 1
                         eh['id'] = construct_id(rname, aname, sname, 'ex',
                                                 f'{eh["to"]}_{ec[eh["to"]]}')
+                        spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
@@ -238,6 +248,7 @@ class GameLogic(object):
                         act['area'] = aname
                         act['region'] = rname
                         act['id'] = construct_id(rname, aname, sname, act['name'])
+                        spot['action_ids'].append(act['id'])
                         act['fullname'] = f'{spot["fullname"]} {act["name"]}'
                         if 'req' in act:
                             act['pr'] = _parseExpression(
@@ -285,8 +296,11 @@ class GameLogic(object):
 
 
     def exits(self):
-        return itertools.chain.from_iterable(s.get('exits', []) + s.get('hybrid', [])
-                                             for s in self.spots())
+        return itertools.chain.from_iterable(
+                itertools.chain(a.get('exits', []),
+                                *(s.get('exits', []) + s.get('hybrid', [])
+                                  for s in a['spots']))
+                for a in self.areas())
 
 
     def actions(self):
