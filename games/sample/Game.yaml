@@ -78,11 +78,11 @@ helpers:
 
 
 collect:
-  Rupee_1: ^rupee = $max(^rupee + 1, $wallet_max)
-  Rupee_5: ^rupee = $max(^rupee + 5, $wallet_max)
-  Rupee_10: ^rupee = $max(^rupee + 10, $wallet_max)
-  Rupee_20: ^rupee = $max(^rupee + 20, $wallet_max)
-  Rupee_50: ^rupee = $max(^rupee + 50, $wallet_max)
+  Rupee_1: ^rupees = $max(^rupees + 1, $wallet_max)
+  Rupee_5: ^rupees = $max(^rupees + 5, $wallet_max)
+  Rupee_10: ^rupees = $max(^rupees + 10, $wallet_max)
+  Rupee_20: ^rupees = $max(^rupees + 20, $wallet_max)
+  Rupee_50: ^rupees = $max(^rupees + 50, $wallet_max)
 
 
 settings:

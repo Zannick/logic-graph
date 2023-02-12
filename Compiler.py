@@ -21,6 +21,7 @@ from ItemVisitor import ItemVisitor
 from RustVisitor import RustVisitor
 from HelperVisitor import HelperVisitor
 from SettingVisitor import SettingVisitor
+from ContextVisitor import ContextVisitor
 from Utils import base_dir, construct_id, n1, BUILTINS
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
@@ -156,7 +157,7 @@ class GameLogic(object):
 
         self.collect = {}
         for name, logic in gameinfo['collect'].items():
-            pr = parseAction(logic, name, 'collect')
+            pr = parseAction(logic, 'collect:' + name)
             self.collect[name] = {'pr': pr}
             self.collect[name]['action_id'] = self.make_funcid(self.collect[name])
 
@@ -246,9 +247,9 @@ class GameLogic(object):
 
     def make_funcid(self, info, prkey:str='pr'):
         pr = info[prkey]
-        d = self.action_funcs if pr.parser.ruleNames[pr.tree.getRuleIndex()] == 'action' else self.access_funcs
+        d = self.action_funcs if pr.parser.ruleNames[pr.tree.getRuleIndex()] == 'actions' else self.access_funcs
         if '^_' in str(pr.text):
-            id = construct_id(str(pr.name))
+            id = construct_id(str(pr.name).lower())
             assert id not in d
             d[id] = info
             return id
@@ -395,6 +396,9 @@ class GameLogic(object):
         hv = HelperVisitor(self.helpers, self.context_types, self.settings)
         _visit(hv, True)
 
+        cv = ContextVisitor()
+        _visit(cv)
+
         for s in self.settings.keys() - self.used_settings.keys():
             logging.warning(f'Did not find usage of setting {s}')
 
@@ -540,8 +544,8 @@ class GameLogic(object):
                 if typenameof(val) == 'i32']
 
 
-    def treeToRust(self, tree, info):
-        return RustVisitor(self.get_local_ctx(info)).visit(tree)
+    def prToRust(self, pr, info):
+        return RustVisitor(self.get_local_ctx(info), pr.name).visit(pr.tree)
 
 
     def render(self):
@@ -550,7 +554,7 @@ class GameLogic(object):
                                  line_comment_prefix='%#')
         env.filters['construct_id'] = construct_id
         env.filters['treeToString'] = treeToString
-        env.filters['treeToRust'] = self.treeToRust
+        env.filters['prToRust'] = self.prToRust
         env.filters['get_int_type_for_max'] = get_int_type_for_max
         env.filters['escape_ctx'] = partial(re.compile(r'\bctx\b').sub, '$ctx')
         # Access cached_properties to ensure they're in the template vars
@@ -559,7 +563,7 @@ class GameLogic(object):
         self.context_values
         self.price_types
         for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
-                      'prices.rs']:
+                      'prices.rs', 'rules.rs']:
             template = env.get_template(tname + '.jinja')
             with open(os.path.join(self.game_dir, 'src', tname), 'w') as f:
                 f.write(template.render(gl=self, **self.__dict__))

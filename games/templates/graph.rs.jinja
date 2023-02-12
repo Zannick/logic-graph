@@ -2,13 +2,11 @@
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![allow(unused_variables)]
-#![allow(unused_parens)]
 
-use crate::*;
 use crate::context::*;
 use crate::items::Item;
 use crate::prices::Currency;
+use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{EnumMap, enum_map};
@@ -50,7 +48,7 @@ impl world::Accessible for Location {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for loc in gl.locations()
-           LocationId::{{ loc.id }} => {% if loc.access_id %}access_{{ loc.access_id }}(&ctx)
+           LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
                 {%- else %}true{% endif %},
 %% endfor
         }
@@ -66,14 +64,6 @@ impl world::Location for Location {
 
     fn canon_id(&self) -> &CanonId { &self.canonical }
 }
-
-fn default_access(_ctx: &Context) -> bool { true }
-
-%% for id, info in access_funcs.items()
-fn access_{{ id }}(ctx: &Context) -> bool {
-    {{ info.pr.tree|treeToRust(info) }}
-}
-%% endfor
 
 #[derive(Copy, Clone)]
 struct Exit {
@@ -193,7 +183,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
 %% for loc in gl.locations()
     LocationId::{{ loc.id }} => Location {
         id: LocationId::{{ loc.id }},
-        access_rule: {% if loc.access_id %}access_{{ loc.access_id }}{% else %}default_access{% endif %},
+        access_rule: rules::access_{{ loc.access_id or 'default' }},
         canonical: CanonId::{{ loc.canon or 'None' }},
         item: Item::{{ loc.item or 'None' }},
         price: Currency::{% if loc.price and loc.price > 0 -%}
@@ -205,3 +195,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
     },
 %% endfor
 } }
+
+%#pub fn build_actions() -> EnumMap<ActionId, Action> {
+%#    enum_map! {

@@ -20,8 +20,10 @@ boolExpr
     | FALSE
     ;
 
-action  : REF '=' ( str | num | TRUE | FALSE )
-        | REF BINOP '=' num
+actions : action (';' action)* ';'?;
+
+action  : REF '=' ( str | num | TRUE | FALSE )  # Set
+        | REF BINOP '=' num                     # Alter
         ;
 
 // might remove this as those rules need to be separate for a traversal graph anyway

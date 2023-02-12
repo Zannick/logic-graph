@@ -8,7 +8,7 @@ macro_rules! helper__{{ name|construct_id }} {
     ($ctx:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}) => {{ '{{' }}
         #[allow(unused_imports)]
         use $crate::items::Item;
-        {{ info.pr.tree|treeToRust({})|escape_ctx }}
+        {{ info.pr|prToRust({})|escape_ctx }}
     {{ '}}' }};
 }
 

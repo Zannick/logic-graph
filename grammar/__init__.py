@@ -58,7 +58,7 @@ def parseAction(text, name='', verbose=False) -> ParseResult:
     errl = CollectErrorListener(name, verbose)
     p.removeErrorListeners()
     p.addErrorListener(errl)
-    tree = p.action()
+    tree = p.actions()
     return ParseResult(name, text, tree, p, errl.errors)
 
 

@@ -4,11 +4,20 @@ from Utils import construct_id, BUILTINS
 
 class RustVisitor(RulesVisitor):
 
-    def __init__(self, ctxdict):
+    def __init__(self, ctxdict, name):
         self.ctxdict = ctxdict
+        self.name = name
 
     def _getRealRef(self, ref):
-        return f'ctx.{self.ctxdict[ref]}' if ref in self.ctxdict else f'${ref}'
+        if ref in self.ctxdict:
+            return f'ctx.{self.ctxdict[ref]}'
+        return BUILTINS.get(ref, '$' + ref)
+
+    def _getFuncAndArgs(self, func):
+        if func in BUILTINS:
+            return BUILTINS[func] + '('
+        else:
+            return f'helper__{construct_id(func[1:])}!(ctx, '
 
     def visitBoolExpr(self, ctx):
         try:
@@ -31,20 +40,16 @@ class RustVisitor(RulesVisitor):
 
     def visitInvoke(self, ctx):
         items = ctx.ITEM()
-        f = str(ctx.FUNC())
-        if f in BUILTINS:
-            func = BUILTINS[f]
-            c = ''
-        else:
-            func = 'helper__' + construct_id(f[1:]) + '!'
-            c = 'ctx'
+        func = self._getFuncAndArgs(str(ctx.FUNC()))
         if items:
             args = f'{", ".join("Item::" + str(item) for item in items)}'
         elif ctx.value():
             args = f'{self.visit(ctx.value())}'
         else:
             args = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
-        return f'{"!" if ctx.NOT() else ""}{func}({c}{", " if c and args else ""}{args})'
+            if not args:
+                func = func[:-2]
+        return f'{"!" if ctx.NOT() else ""}{func}{args})'
 
     def _visitConditional(self, *args):
         ret = []
@@ -121,3 +126,28 @@ class RustVisitor(RulesVisitor):
         return (f'match {self._getRealRef(str(ctx.REF())[1:])} {{ '
                 + '|'.join(f'Item::{i}' for i in ctx.ITEM())
                 + ' => true, _ => false, }')
+
+    ## Action-specific
+    def visitActions(self, ctx):
+        return ' '.join(self.visit(ch) for ch in ctx.action())
+
+    def visitSet(self, ctx):
+        if ctx.TRUE():
+            val = 'true'
+        elif ctx.FALSE():
+            val = 'false'
+        else:
+            val = self.visit(ctx.str_() or ctx.num())
+        return f'{self._getRealRef(str(ctx.REF())[1:])} = {val};'
+
+    def visitAlter(self, ctx):
+        return f'{self._getRealRef(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
+
+    def visitFuncNum(self, ctx):
+        func = self._getFuncAndArgs(str(ctx.FUNC()))
+        if ctx.ITEM():
+            return f'{func}Item::{ctx.Item()})'
+        elif ctx.num():
+            return f'{func}{", ".join(self.visit(n) for n in ctx.num())})'
+        else:
+            return func[:-2] + ')'
