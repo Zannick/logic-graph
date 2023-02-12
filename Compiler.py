@@ -16,12 +16,8 @@ logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelna
 import antlr4
 import jinja2
 
-from grammar import parseRule, parseAction, StringVisitor, ParseResult
-from ItemVisitor import ItemVisitor
-from RustVisitor import RustVisitor
-from HelperVisitor import HelperVisitor
-from SettingVisitor import SettingVisitor
-from ContextVisitor import ContextVisitor
+from grammar import parseRule, parseAction, ParseResult
+from grammar.visitors import *
 from Utils import base_dir, construct_id, n1, BUILTINS
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
@@ -127,6 +123,13 @@ def typenameof(val: Any) -> str:
 
 def treeToString(tree: antlr4.ParserRuleContext):
     return StringVisitor().visit(tree)
+
+
+def get_exit_target(ex):
+    local = [ex['region'], ex['area'], ex['spot']]
+    targ = ex['to'].split('>')
+    res = local[:-len(targ)] + [t.strip() for t in targ]
+    return construct_id(*res)
 
 
 class GameLogic(object):
@@ -371,6 +374,11 @@ class GameLogic(object):
             for t in pr.parser.getTokenStream().tokens:
                 if pr.parser.symbolicNames[t.type] == 'FUNC' and t.text not in self.allowed_funcs:
                     e.append(f'{pr.name}: Unrecognized function {t.text}')
+        # Check exits
+        spot_ids = {sp['id'] for sp in self.spots()}
+        for ex in self.exits():
+            if get_exit_target(ex) not in spot_ids:
+                e.append(f'Unrecognized destination spot in exit {ex["fullname"]}')
         # Do things that will fill _misc_errors
         self.context_values
 
@@ -512,6 +520,7 @@ class GameLogic(object):
 
         return gc
 
+
     @cached_property
     def context_types(self):
         d = {'position': 'SpotId', 'elapsed': 'i32'}
@@ -552,11 +561,14 @@ class GameLogic(object):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir),
                                  line_statement_prefix='%%',
                                  line_comment_prefix='%#')
-        env.filters['construct_id'] = construct_id
-        env.filters['treeToString'] = treeToString
-        env.filters['prToRust'] = self.prToRust
-        env.filters['get_int_type_for_max'] = get_int_type_for_max
-        env.filters['escape_ctx'] = partial(re.compile(r'\bctx\b').sub, '$ctx')
+        env.filters.update({
+            'construct_id': construct_id,
+            'treeToString': treeToString,
+            'prToRust': self.prToRust,
+            'get_int_type_for_max': get_int_type_for_max,
+            'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
+            'get_exit_target': get_exit_target,
+        })
         # Access cached_properties to ensure they're in the template vars
         self.all_items
         self.context_types

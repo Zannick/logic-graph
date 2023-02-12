@@ -16,7 +16,7 @@ use std::fmt;
 {{ enum('RegionId', regions) }}
 {{ enum('AreaId', gl.areas()|list) }}
 {{ enum('SpotId', gl.spots()|list, True) }}
-{{ enum('LocationId', gl.locations()|list) }}
+{{ enum('LocationId', gl.locations()|list, True) }}
 {{ enum('ExitId', gl.exits()|list) }}
 {{ enum('ActionId', gl.actions()|list) }}
 {{ enum('CanonId', canon_places, True) }}
@@ -47,8 +47,9 @@ impl world::Accessible for Location {
     type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
+            LocationId::None => false,
 %% for loc in gl.locations()
-           LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
+            LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
                 {%- else %}true{% endif %},
 %% endfor
         }
@@ -66,7 +67,7 @@ impl world::Location for Location {
 }
 
 #[derive(Copy, Clone)]
-struct Exit {
+pub struct Exit {
     id: ExitId,
     time: i8,
     dest: SpotId,
@@ -107,7 +108,7 @@ impl world::Location for Exit {
 }
 
 #[derive(Copy, Clone)]
-struct Action {
+pub struct Action {
     id: ActionId,
     access_rule: fn(&Context) -> bool,
     activate: fn(&mut Context),
@@ -180,6 +181,14 @@ impl<'a> world::World for World<'a> {
 
 pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
+    LocationId::None => Location {
+        id: LocationId::None,
+        access_rule: |_| false,
+        canonical: CanonId::None,
+        item: Item::None,
+        price: Currency::Free,
+        time: 0,
+    },
 %% for loc in gl.locations()
     LocationId::{{ loc.id }} => Location {
         id: LocationId::{{ loc.id }},
@@ -196,5 +205,33 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
 %% endfor
 } }
 
-%#pub fn build_actions() -> EnumMap<ActionId, Action> {
-%#    enum_map! {
+pub fn build_exits() -> EnumMap<ExitId, Exit> {
+    enum_map! {
+%% for ex in gl.exits()
+    ExitId::{{ ex.id }} => Exit {
+        id: ExitId::{{ ex.id }},
+        time: {{ ex.time if ex.time is defined else 1 }},
+        dest: SpotId::{{ ex|get_exit_target }},
+        price: Currency::{% if ex.price and ex.price > 0 -%}
+            {{ (ex.costs or price_types[0])|capitalize }}({{ ex.price }})
+            {%- else %}Free{% endif %},
+        loc_id: LocationId::{{ ex.id if ex.item is defined else 'None' }},
+        canonical: CanonId::{{ ex.canon or 'None' }},
+        item: Item::{{ ex.item or 'None' }},
+        item_time: {{ ex.item_time if ex.item_time is defined else 1 }},
+        access_rule: rules::access_{{ ex.access_id or 'default' }},
+    },
+%% endfor
+} }
+
+pub fn build_actions() -> EnumMap<ActionId, Action> {
+    enum_map! {
+%% for a in gl.actions()
+    ActionId::{{ a.id }} => Action {
+        id: ActionId::{{ a.id }},
+        access_rule: rules::access_{{ a.access_id }},
+        activate: rules::action_{{ a.action_id }},
+        time: {{ a.time if a.time is defined else 1 }},
+    },
+%% endfor
+} }

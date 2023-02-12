@@ -6,6 +6,7 @@ import re
 import unittest
 
 from . import *
+from .visitors import StringVisitor
 
 
 class TestGrammar(unittest.TestCase):

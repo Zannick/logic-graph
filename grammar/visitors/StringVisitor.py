@@ -1,4 +1,4 @@
-from . import RulesVisitor
+from grammar import RulesVisitor
 
 
 class StringVisitor(RulesVisitor):

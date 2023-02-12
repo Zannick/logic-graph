@@ -248,7 +248,7 @@ areas:
           item: Gold_Skulltula_Token
           req: $can_use(Boomerang) or $can_use(Hookshot)
       exits:
-        - to: Back Room > Northweest
+        - to: Back Room > Northwest
 
 - name: Basement Ledge
   spots:
