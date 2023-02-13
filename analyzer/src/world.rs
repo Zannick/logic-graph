@@ -63,7 +63,6 @@ pub trait Area {
     type Spot: Spot;
     fn id(&self) -> &Self::AreaId;
     fn spots(&self) -> &[Self::Spot];
-    fn exits(&self) -> &[<Self::Spot as Spot>::Exit];
 }
 
 // This one might not be necessary.
@@ -76,14 +75,22 @@ pub trait World {
     type Location: Location;
     type Exit: Exit;
     type Action: Action;
-    type Spot: Spot<Location = Self::Location, Exit = Self::Exit>;
-    type Area: Area<Spot = Self::Spot>;
+    type SpotId;
+    //type AreaId;
+    //type Spot: Spot<Location = Self::Location, Exit = Self::Exit>;
+    //type Area: Area<Spot = Self::Spot>;
     //type Region: Region;
 
     fn get_location(&self, loc_id: &<Self::Location as Location>::LocId) -> &Self::Location;
     fn get_exit(&self, ex_id: &<Self::Exit as Exit>::ExitId) -> &Self::Exit;
     fn get_action(&self, act_id: &<Self::Action as Action>::ActionId) -> &Self::Action;
-    fn get_spot(&self, sp_id: &<Self::Spot as Spot>::SpotId) -> &Self::Spot;
+    //fn get_spot(&self, sp_id: &<Self::Spot as Spot>::SpotId) -> &Self::Spot;
+    //fn get_area(&self, area_id: &<Self::Area as Area>::AreaId) -> &Self::Area;
+
+    fn get_spot_locations(&self, spot_id: &Self::SpotId) -> &[Self::Location];
+    fn get_spot_exits(&self, spot_id: &Self::SpotId) -> &[Self::Exit];
+    fn get_spot_actions(&self, spot_id: &Self::SpotId) -> &[Self::Action];
+    fn get_area_spots(&self, spot_id: &Self::SpotId) -> &[Self::SpotId];
 
     fn on_collect(&self, item: &<<Self::Location as Accessible>::Context as Ctx>::ItemId,
                   ctx: &mut <Self::Location as Accessible>::Context);

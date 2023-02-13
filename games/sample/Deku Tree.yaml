@@ -38,14 +38,12 @@ areas:
 
 ## 2nd floor
 - name: Floor 2
-  # Area-wide exit
-  exits:
-    - to: Lobby > Center
   spots:
     - name: Lower
       coord: [0,2]
       exits:
         - to: Lobby > Vines
+        - to: Lobby > Center
     - name: Vines
       coord: [1,1]
       locations:
@@ -61,11 +59,13 @@ areas:
           time: 10
         - to: Lobby > Vines
         - to: Lobby > Entry
+        - to: Lobby > Center
     - name: Slingshot Door
       coord: [0,0]
       exits:
         - to: Scrub Room > Entry
         - to: Lobby > Entry
+        - to: Lobby > Center
 
 - name: Scrub Room
   spots:

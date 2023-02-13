@@ -9,8 +9,9 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
 use analyzer::world;
-use enum_map::{Enum, EnumMap, enum_map};
+use enum_map::{enum_map, Enum, EnumMap};
 use std::fmt;
+use std::ops::Range;
 use std::option::Option;
 
 %% from 'enum.rs.jinja' import enum
@@ -33,7 +34,7 @@ pub enum History {
 %# All of this is going in unchanged--perhaps it should be a library type
 %# with generics? But that kind of mostly negates the use of traits with
 %# associated types... Maybe a macro...
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Location {
     id: LocationId,
     item: Item,
@@ -69,7 +70,7 @@ impl world::Location for Location {
     fn price(&self) -> &Currency { &self.price }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Exit {
     id: ExitId,
     time: i8,
@@ -102,11 +103,9 @@ impl world::Exit for Exit {
     fn time(&self) -> i8 { self.time }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
-    access_rule: fn(&Context) -> bool,
-    activate: fn(&mut Context),
     time: i8,
 }
 
@@ -134,44 +133,18 @@ impl world::Action for Action {
     }
 }
 
-#[derive(Copy, Clone)]
-pub struct Spot<'a> {
-    id: SpotId,
-    // slices here to the real things held in World
-    locations: &'a [Location],
-    exits: &'a [Exit],
-    actions: &'a [Action],
+#[derive(Clone, Debug, Default)]
+pub struct Spot {
+    pub id: SpotId,
+    pub locations: Range<usize>,
+    pub exits: Range<usize>,
+    pub actions: Range<usize>,
+    // spots don't reference their area, so we index these by spot
+    pub area_spots: Range<usize>,
 }
 
-impl<'a> world::Spot for Spot<'a> {
-    type SpotId = SpotId;
-    type Location = Location;
-    type Exit = Exit;
-    type Action = Action;
-
-    fn id(&self) -> &SpotId { &self.id }
-    fn locations(&self) -> &'a [Location] { &self.locations }
-    fn exits(&self) -> &'a [Exit] { &self.exits }
-    fn actions(&self) -> &'a [Action] { &self.actions }
-}
-
-#[derive(Copy, Clone)]
-pub struct Area<'a> {
-    id: AreaId,
-    spots: &'a [Spot<'a>],
-    exits: &'a [Exit],
-}
-
-impl<'a> world::Area for Area<'a> {
-    type AreaId = AreaId;
-    type Spot = Spot<'a>;
-    fn id(&self) -> &AreaId { &self.id }
-    fn spots(&self) -> &'a [Spot<'a>] { &self.spots }
-    fn exits(&self) -> &'a [Exit] { &self.exits }
-}
-
-#[derive(Clone)]
-pub struct World<'a> {
+#[derive(Clone, Debug)]
+pub struct World {
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
@@ -181,20 +154,30 @@ pub struct World<'a> {
     locations: EnumMap<LocationId, Location>,
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
-    spots: EnumMap<SpotId, Spot<'a>>,
+    raw_spots: [SpotId; {{ gl.spots()|list|length + 1 }}], %# +1 as long as we have a default
+    // Index ranges for slices into the above arrays
+    spots: EnumMap<SpotId, Spot>,
 }
 
-impl<'a> world::World for World<'a> {
+impl world::World for World {
     type Location = Location;
     type Exit = Exit;
     type Action = Action;
-    type Spot = Spot<'a>;
-    type Area = Area<'a>;
+    type SpotId = SpotId;
 
-    fn get_location(&self, loc_id: &LocationId) -> &Location { &self.locations[*loc_id] }
-    fn get_exit(&self, ex_id: &ExitId) -> &Exit { &self.exits[*ex_id] }
-    fn get_action(&self, act_id: &ActionId) -> &Action { &self.actions[*act_id] }
-    fn get_spot(&self, sp_id: &SpotId) -> &Spot<'a> { &self.spots[*sp_id] }
+%% for point in ['Location', 'Exit', 'Action']
+    fn get_{{ point|lower }}(&self, id: &{{ point }}Id)
+         -> &{{ point }} { &self.{{ point|lower }}s[*id] }
+    fn get_spot_{{ point|lower }}s(&self, spot_id: &SpotId) -> &[{{ point }}] {
+        let r = &self.spots[*spot_id].{{ point | lower }}s;
+        &self.{{ point|lower }}s.as_slice()[r.start..r.end]
+    }
+%% endfor
+
+    fn get_area_spots(&self, spot_id: &SpotId) -> &[SpotId] {
+        let r = &self.spots[*spot_id].area_spots;
+        &self.raw_spots[r.start..r.end]
+    }
 
     fn on_collect(&self, item_id: &Item, ctx: &mut Context) {
         match item_id {
@@ -206,69 +189,93 @@ impl<'a> world::World for World<'a> {
     }
 }
 
+impl World {
+    pub fn new() -> World {
+        World {
+            locations: build_locations(),
+            exits: build_exits(),
+            actions: build_actions(),
+            raw_spots: [SpotId::None, SpotId::{{ gl.spots()|map(attribute='id')|join(', SpotId::') }}],
+            spots: build_spots(),
+        }
+    }
+}
+
 pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
 %% for loc in gl.locations()
-    LocationId::{{ loc.id }} => Location {
-        id: LocationId::{{ loc.id }},
-        canonical: CanonId::{{ loc.canon or 'None' }},
-        item: Item::{{ loc.item or 'None' }},
-        price: Currency::{% if loc.price and loc.price > 0 -%}
-            {{ (loc.costs or price_types[0])|capitalize }}({{ loc.price }})
-            {%- else %}Free{% endif %},
-        time: {% if loc.to is defined %}{# hybrid #}
-            {%- if loc.item_time is defined %}{{ loc.item_time }}{% else %}1{% endif %}
-            {%- elif loc.time is defined %}{{ loc.time }}{% else %}1{% endif %},
-        exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
-    },
+        LocationId::{{ loc.id }} => Location {
+            id: LocationId::{{ loc.id }},
+            canonical: CanonId::{{ loc.canon or 'None' }},
+            item: Item::{{ loc.item or 'None' }},
+            price: Currency::{% if loc.price and loc.price > 0 -%}
+                {{ (loc.costs or price_types[0])|capitalize }}({{ loc.price }})
+                {%- else %}Free{% endif %},
+            time: {% if loc.to is defined %}{{ loc.item_time }}{% else %}{{ loc.time }}{% endif %},
+            exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
+        },
 %% endfor
-} }
+    }
+}
 
 pub fn build_exits() -> EnumMap<ExitId, Exit> {
     enum_map! {
 %% for ex in gl.exits()
-    ExitId::{{ ex.id }} => Exit {
-        id: ExitId::{{ ex.id }},
-        time: {{ ex.time if ex.time is defined else 1 }},
-        dest: SpotId::{{ ex|get_exit_target }},
-        price: Currency::{% if ex.price and ex.price > 0 -%}
-            {{ (ex.costs or price_types[0])|capitalize }}({{ ex.price }})
-            {%- else %}Free{% endif %},
-        loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
-    },
+        ExitId::{{ ex.id }} => Exit {
+            id: ExitId::{{ ex.id }},
+            time: {{ ex.time }},
+            dest: SpotId::{{ ex|get_exit_target }},
+            price: Currency::{% if ex.price and ex.price > 0 -%}
+                {{ (ex.costs or price_types[0])|capitalize }}({{ ex.price }})
+                {%- else %}Free{% endif %},
+            loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
+        },
 %% endfor
-} }
+    }
+}
 
 pub fn build_actions() -> EnumMap<ActionId, Action> {
     enum_map! {
 %% for a in gl.actions()
-    ActionId::{{ a.id }} => Action {
-        id: ActionId::{{ a.id }},
-        access_rule: rules::access_{{ a.access_id }},
-        activate: rules::action_{{ a.action_id }},
-        time: {{ a.time if a.time is defined else 1 }},
-    },
-%% endfor
-} }
-
-pub fn build_spots<'a>(
-        locs: &'a EnumMap<LocationId, Location>,
-        exits: &'a EnumMap<ExitId, Exit>,
-        actions: &'a EnumMap<ActionId, Action>) -> EnumMap<SpotId, Spot<'a>> {
-    enum_map! {
-        SpotId::None => Spot {
-            id: SpotId::None,
-            locations: &locs.as_slice()[0..0],
-            exits: &exits.as_slice()[0..0],
-            actions: &actions.as_slice()[0..0],
+        ActionId::{{ a.id }} => Action {
+            id: ActionId::{{ a.id }},
+            time: {{ a.time }},
         },
-%% for sp in gl.spots()
+%% endfor
+    }
+}
+
+pub fn build_spots() -> EnumMap<SpotId, Spot> {
+    enum_map! {
+        SpotId::None => Spot::default(),
+%% for area in gl.areas()
+%% for sp in area.spots
         SpotId::{{ sp.id }} => Spot {
             id: SpotId::{{ sp.id }},
-            locations: &locs.as_slice()[{% if sp.loc_ids %}LocationId::{{ sp.loc_ids|min }}.into_usize()..=LocationId::{{ sp.loc_ids|max }}.into_usize(){% else %}0..0{% endif %}],
-            exits: &exits.as_slice()[{% if sp.exit_ids %}ExitId::{{ sp.exit_ids|min }}.into_usize()..=ExitId::{{ sp.exit_ids|max }}.into_usize(){% else %}0..0{% endif %}],
-            actions: &actions.as_slice()[{% if sp.action_ids %}ActionId::{{ sp.action_ids|min }}.into_usize()..=ActionId::{{ sp.action_ids|max }}.into_usize(){% else %}0..0{% endif %}],
+            locations: Range {
+                {% if sp.loc_ids -%}
+                start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
+                end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            },
+            exits: Range {
+                {% if sp.exit_ids -%}
+                start: ExitId::{{ sp.exit_ids|min }}.into_usize(),
+                end: ExitId::{{ sp.exit_ids|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            },
+            actions: Range {
+                {% if sp.action_ids -%}
+                start: ActionId::{{ sp.action_ids|min }}.into_usize(),
+                end: ActionId::{{ sp.action_ids|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            },
+            area_spots: Range {
+                start: SpotId::{{ area.spots|map(attribute='id')|min }}.into_usize(),
+                end: SpotId::{{ area.spots|map(attribute='id')|max }}.into_usize() + 1,
+            },
         },
+%% endfor
 %% endfor
     }
 }

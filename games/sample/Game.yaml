@@ -21,16 +21,26 @@ objectives:  # win conditions
   # Deku Full Clear: $all_checks('Deku Tree')
 
 movements:
+  # Movement types:
+  #   free: move freely in 2d (3D games like OoT qualify)
+  #   xy: move orthogonally (at the same speed)
+  #   x: move L/R (separately from U/D)
+  #   y: move U/D (separately from L/R)
+  # Side-scrollers should mostly use x.
+  # In general, recommend using separate Areas instead of modeling jump/fall.
+  # Speed is based on the distance moveable in the unit time; even though you don't
+  # need to use the same coordinate system in each Area, the distances must match.
   default:
-    speed: 1
+    free: 1
+  # Movement types other than default need to have a req: rule
 
-checks:
-  default:
-    time: 1
-  big:
-    time: 3
-  bluewarp:
-    time: 6
+time:
+  # If time for a check or exit is unspecified, the time will be assumed
+  # based on the tags (at most one) or the default.
+  default: 1
+  big: 3
+  bluewarp: 6
+  load: 2
 
 warps:
   save:
