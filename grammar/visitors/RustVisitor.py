@@ -2,6 +2,8 @@ from grammar import RulesParser, RulesVisitor
 
 from Utils import construct_id, BUILTINS
 
+_placePrefix = ['RegionId', 'AreaId', 'SpotId']
+
 class RustVisitor(RulesVisitor):
 
     def __init__(self, ctxdict, name):
@@ -45,6 +47,9 @@ class RustVisitor(RulesVisitor):
             args = f'{", ".join("Item::" + str(item) for item in items)}'
         elif ctx.value():
             args = f'{self.visit(ctx.value())}'
+        elif ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            args = f'{_placePrefix[pl.count(">")]}::{construct_id(pl)}'
         else:
             args = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if not args:
@@ -94,16 +99,16 @@ class RustVisitor(RulesVisitor):
             val = str(ctx.INT())
         else:
             val = f'ctx.{ctx.SETTING()}'
-        return f'ctx.count(&Item::{ctx.ITEM()}) >= {val}'
+        return f'ctx.count(Item::{ctx.ITEM()}) >= {val}'
 
     def visitOneItem(self, ctx):
-        return f'ctx.has(&Item::{ctx.ITEM()})'
+        return f'ctx.has(Item::{ctx.ITEM()})'
 
     def visitOneArgument(self, ctx):
         ref = self._getRealRef(str(ctx.REF())[1:])
         if ref.startswith('ctx'):
             return ref
-        return f'ctx.has(&{ref})'
+        return f'ctx.has({ref})'
 
     def visitBaseNum(self, ctx):
         if ctx.INT():
@@ -118,7 +123,7 @@ class RustVisitor(RulesVisitor):
     def visitPerItemInt(self, ctx):
         cases = list(map(str, ctx.INT())) + ["_"]
         results = [str(self.visit(n)) for n in ctx.num()]
-        return (f'match ctx.count(&Item::{ctx.ITEM()}) {{ '
+        return (f'match ctx.count(Item::{ctx.ITEM()}) {{ '
                 + ', '.join(f'{i} => {r}' for i, r in zip(cases, results))
                 + '}')
 

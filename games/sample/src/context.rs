@@ -94,9 +94,11 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type LocationId = LocationId;
     type SpotId = SpotId;
+    type AreaId = AreaId;
+    type RegionId = RegionId;
     type Currency = Currency;
 
-    fn has(&self, item: &Item) -> bool {
+    fn has(&self, item: Item) -> bool {
         match item {
             Item::Biggoron_Sword => self.biggoron_sword,
             Item::Blue_Fire_Arrows => self.blue_fire_arrows,
@@ -146,7 +148,7 @@ impl context::Ctx for Context {
             _ => false,
         }
     }
-    fn count(&self, item: &Item) -> i16 {
+    fn count(&self, item: Item) -> i16 {
         match item {
             Item::Biggoron_Sword => self.biggoron_sword.into(),
             Item::Blue_Fire_Arrows => self.blue_fire_arrows.into(),
@@ -196,7 +198,7 @@ impl context::Ctx for Context {
             _ => 0,
         }
     }
-    fn collect(&mut self, item: &Item) {
+    fn collect(&mut self, item: Item) {
         match item {
             Item::Biggoron_Sword => {
                 self.biggoron_sword = true;
@@ -337,11 +339,11 @@ impl context::Ctx for Context {
         }
     }
 
-    fn position(&self) -> &SpotId {
-        &self.position
+    fn position(&self) -> SpotId {
+        self.position
     }
-    fn set_position(&mut self, pos: &SpotId) {
-        self.position = *pos;
+    fn set_position(&mut self, pos: SpotId) {
+        self.position = pos;
     }
 
     fn can_afford(&self, cost: &Currency) -> bool {
@@ -357,13 +359,32 @@ impl context::Ctx for Context {
         }
     }
 
-    fn visit(&mut self, loc_id: &LocationId) {
-        self.status[*loc_id] = Status::Visited;
+    fn visit(&mut self, loc_id: LocationId) {
+        self.status[loc_id] = Status::Visited;
     }
-    fn skip(&mut self, loc_id: &LocationId) {
-        self.status[*loc_id] = Status::Skipped;
+    fn skip(&mut self, loc_id: LocationId) {
+        self.status[loc_id] = Status::Skipped;
     }
     fn elapse(&mut self, t: f32) {
         self.elapsed += t;
+    }
+
+    fn all_spot_checks(&self, id: SpotId) -> bool {
+        let r = spot_locations(id);
+        self.status.as_slice()[r.start..r.end]
+            .iter()
+            .all(|&x| x == Status::Visited)
+    }
+    fn all_area_checks(&self, id: AreaId) -> bool {
+        let r = area_locations(id);
+        self.status.as_slice()[r.start..r.end]
+            .iter()
+            .all(|&x| x == Status::Visited)
+    }
+    fn all_region_checks(&self, id: RegionId) -> bool {
+        let r = region_locations(id);
+        self.status.as_slice()[r.start..r.end]
+            .iter()
+            .all(|&x| x == Status::Visited)
     }
 }

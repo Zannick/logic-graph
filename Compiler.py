@@ -33,7 +33,7 @@ SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'loca
 SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 
-typed_name = re.compile(r'(?P<name>\$?\w+)(?::(?P<type>\w+))?')
+typed_name = re.compile(r'(?P<name>\$?[\w\s]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
 
 
@@ -196,12 +196,14 @@ class GameLogic(object):
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
+            region['loc_ids'] = []
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
                 area['id'] = construct_id(rname, aname)
                 area['fullname'] = f'{rname} > {aname}'
                 area['spot_ids'] = []
+                area['loc_ids'] = []
 
                 for spot in area['spots']:
                     sname = spot['name']
@@ -220,6 +222,8 @@ class GameLogic(object):
                         loc['region'] = rname
                         loc['id'] = construct_id(rname, aname, sname, loc['name'])
                         spot['loc_ids'].append(loc['id'])
+                        area['loc_ids'].append(loc['id'])
+                        region['loc_ids'].append(loc['id'])
                         loc['fullname'] = f'{spot["fullname"]} {loc["name"]}'
                         if 'canon' in loc:
                             self.canon_places[loc['canon']].append(loc)

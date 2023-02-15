@@ -9,7 +9,9 @@ logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelna
 BUILTINS = {
     '$max': 'std::cmp::max',
     '$min': 'std::cmp::min',
-    '$all_checks': 'ctx.all_checks',
+    '$all_spot_checks': 'ctx.all_spot_checks',
+    '$all_area_checks': 'ctx.all_area_checks',
+    '$all_region_checks': 'ctx.all_region_checks',
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')

@@ -167,16 +167,16 @@ impl world::World for World {
     type SpotId = SpotId;
 
 %% for point in ['Location', 'Exit', 'Action']
-    fn get_{{ point|lower }}(&self, id: &{{ point }}Id)
-         -> &{{ point }} { &self.{{ point|lower }}s[*id] }
-    fn get_spot_{{ point|lower }}s(&self, spot_id: &SpotId) -> &[{{ point }}] {
-        let r = &self.spots[*spot_id].{{ point | lower }}s;
+    fn get_{{ point|lower }}(&self, id: {{ point }}Id)
+         -> &{{ point }} { &self.{{ point|lower }}s[id] }
+    fn get_spot_{{ point|lower }}s(&self, spot_id: SpotId) -> &[{{ point }}] {
+        let r = &self.spots[spot_id].{{ point | lower }}s;
         &self.{{ point|lower }}s.as_slice()[r.start..r.end]
     }
 %% endfor
 
-    fn get_area_spots(&self, spot_id: &SpotId) -> &[SpotId] {
-        let r = &self.spots[*spot_id].area_spots;
+    fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
+        let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
     }
 
@@ -277,6 +277,46 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
         },
 %% endfor
+%% endfor
+    }
+}
+
+pub fn spot_locations(id: SpotId) -> Range<usize> {
+    match id {
+        SpotId::None => Range { start: 0, end: 0, },
+%% for sp in gl.spots()
+        SpotId::{{ sp.id }} => Range {
+            {% if sp.loc_ids -%}
+            start: LocationId::{{ sp.loc_ids|min }}.into_usize(),
+            end: LocationId::{{ sp.loc_ids|max }}.into_usize() + 1,
+            {%- else %}start: 0, end: 0,{% endif %}
+        },
+%% endfor
+    }
+}
+
+pub fn area_locations(id: AreaId) -> Range<usize> {
+    match id {
+%% for a in gl.areas()
+        AreaId::{{ a.id }} => Range {
+            {% if a.loc_ids -%}
+            start: LocationId::{{ a.loc_ids|min }}.into_usize(),
+            end: LocationId::{{ a.loc_ids|max }}.into_usize(),
+            {%- else %}start: 0, end: 0,{% endif %}
+        },
+%% endfor
+    }
+}
+
+pub fn region_locations(id: RegionId) -> Range<usize> {
+    match id {
+%% for r in gl.regions
+        RegionId::{{ r.id }} => Range {
+            {% if r.loc_ids -%}
+            start: LocationId::{{ r.loc_ids|min }}.into_usize(),
+            end: LocationId::{{ r.loc_ids|max }}.into_usize(),
+            {%- else %}start: 0, end: 0,{% endif %}
+        },
 %% endfor
     }
 }

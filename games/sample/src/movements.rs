@@ -24,8 +24,8 @@ fn has_movement(ctx: &Context, m: Movement) -> bool {
     }
 }
 
-pub fn local_travel_time_to(ctx: &Context, dest: &SpotId) -> f32 {
-    match (ctx.position, dest) {
+pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> f32 {
+    match (src, dest) {
         (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Center) => 1.0,
         (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Vines) => 2.0,
         (SpotId::Deku_Tree__Lobby__Center, SpotId::Deku_Tree__Lobby__Entry) => 1.0,

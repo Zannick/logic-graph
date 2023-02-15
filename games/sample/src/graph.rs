@@ -1026,7 +1026,7 @@ impl world::Accessible for Exit {
                     rules::access_is_adult_or_can_child_attack_or_nuts(&ctx)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
-                    rules::access_deku_tree__compass_room__entry__floor(&ctx)
+                    rules::access_deku_tree__compass_room__entry__floor_3_(&ctx)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
                     rules::access_is_child_and_sticks_and_nuts(&ctx)
@@ -1171,29 +1171,29 @@ impl world::World for World {
     type Action = Action;
     type SpotId = SpotId;
 
-    fn get_location(&self, id: &LocationId) -> &Location {
-        &self.locations[*id]
+    fn get_location(&self, id: LocationId) -> &Location {
+        &self.locations[id]
     }
-    fn get_spot_locations(&self, spot_id: &SpotId) -> &[Location] {
-        let r = &self.spots[*spot_id].locations;
+    fn get_spot_locations(&self, spot_id: SpotId) -> &[Location] {
+        let r = &self.spots[spot_id].locations;
         &self.locations.as_slice()[r.start..r.end]
     }
-    fn get_exit(&self, id: &ExitId) -> &Exit {
-        &self.exits[*id]
+    fn get_exit(&self, id: ExitId) -> &Exit {
+        &self.exits[id]
     }
-    fn get_spot_exits(&self, spot_id: &SpotId) -> &[Exit] {
-        let r = &self.spots[*spot_id].exits;
+    fn get_spot_exits(&self, spot_id: SpotId) -> &[Exit] {
+        let r = &self.spots[spot_id].exits;
         &self.exits.as_slice()[r.start..r.end]
     }
-    fn get_action(&self, id: &ActionId) -> &Action {
-        &self.actions[*id]
+    fn get_action(&self, id: ActionId) -> &Action {
+        &self.actions[id]
     }
-    fn get_spot_actions(&self, spot_id: &SpotId) -> &[Action] {
-        let r = &self.spots[*spot_id].actions;
+    fn get_spot_actions(&self, spot_id: SpotId) -> &[Action] {
+        let r = &self.spots[spot_id].actions;
         &self.actions.as_slice()[r.start..r.end]
     }
-    fn get_area_spots(&self, spot_id: &SpotId) -> &[SpotId] {
-        let r = &self.spots[*spot_id].area_spots;
+    fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
+        let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
     }
 
@@ -2906,6 +2906,242 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: SpotId::Kak__Spider_House__Entry.into_usize(),
                 end: SpotId::Kak__Spider_House__Entry.into_usize() + 1,
             },
+        },
+    }
+}
+
+pub fn spot_locations(id: SpotId) -> Range<usize> {
+    match id {
+        SpotId::None => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Lobby__Entry => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Lobby__Center => Range {
+            start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks.into_usize(),
+            end: LocationId::Deku_Tree__Lobby__Center__Web.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Lobby__Vines => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Floor_2__Lower => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Floor_2__Vines => Range {
+            start: LocationId::Deku_Tree__Floor_2__Vines__Map_Chest.into_usize(),
+            end: LocationId::Deku_Tree__Floor_2__Vines__Map_Chest.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Floor_2__Slingshot_Door => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Scrub_Room__Entry => Range {
+            start: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize(),
+            end: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Scrub_Room__Rear => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Slingshot_Room__Entry => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Slingshot_Room__Slingshot => Range {
+            start: LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Slingshot_Upper__Ledge => Range {
+            start: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Floor_3__Climb => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Floor_3__Door => Range {
+            start: LocationId::Deku_Tree__Floor_3__Door__Break_Web.into_usize(),
+            end: LocationId::Deku_Tree__Floor_3__Door__Break_Web.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Compass_Room__Entry => Range {
+            start: LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web.into_usize(),
+            end: LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Compass_Room__Compass => Range {
+            start: LocationId::Deku_Tree__Compass_Room__Compass__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Compass_Room__Compass__Chest.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Compass_Room__Ledge => Range {
+            start: LocationId::Deku_Tree__Compass_Room__Ledge__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Compass_Room__Ledge__GS.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Basement_1__Center => Range {
+            start: LocationId::Deku_Tree__Basement_1__Center__Vines_GS.into_usize(),
+            end: LocationId::Deku_Tree__Basement_1__Center__Vines_GS.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Basement_1__Corner => Range {
+            start: LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web.into_usize(),
+            end: LocationId::Deku_Tree__Basement_1__Corner__Switch.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Basement_1__South_Door => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Back_Room__South => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Back_Room__Northwest => Range {
+            start: LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall.into_usize(),
+            end: LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Back_Room__East => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Skull_Room__Entry => Range {
+            start: LocationId::Deku_Tree__Skull_Room__Entry__GS.into_usize(),
+            end: LocationId::Deku_Tree__Skull_Room__Entry__GS.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Basement_Ledge__Block => Range {
+            start: LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block.into_usize(),
+            end: LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Basement_Ledge__Web => Range {
+            start: LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web.into_usize(),
+            end: LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Basement_2__Pool => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Basement_2__Boss_Door => Range {
+            start: LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs.into_usize(),
+            end: LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs.into_usize() + 1,
+        },
+        SpotId::Deku_Tree__Boss_Room__Entry => Range { start: 0, end: 0 },
+        SpotId::Deku_Tree__Boss_Room__Arena => Range {
+            start: LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp.into_usize(),
+            end: LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill.into_usize() + 1,
+        },
+        SpotId::KF__Links_House__Start_Point => Range { start: 0, end: 0 },
+        SpotId::KF__Links_House__Entry => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Links_Porch => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Midos_Porch => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Knowitall_Porch => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Training_Center => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Shop_Porch => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Sarias_Porch => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Midos_Guardpost => Range {
+            start: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido.into_usize(),
+            end: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido.into_usize() + 1,
+        },
+        SpotId::KF__Boulder_Maze__Entry => Range { start: 0, end: 0 },
+        SpotId::KF__Boulder_Maze__Reward => Range {
+            start: LocationId::KF__Boulder_Maze__Reward__Chest.into_usize(),
+            end: LocationId::KF__Boulder_Maze__Reward__Chest.into_usize() + 1,
+        },
+        SpotId::KF__Baba_Corridor__Village_Side => Range { start: 0, end: 0 },
+        SpotId::KF__Baba_Corridor__Deku_Babas => Range {
+            start: LocationId::KF__Baba_Corridor__Deku_Babas__Nuts.into_usize(),
+            end: LocationId::KF__Baba_Corridor__Deku_Babas__Sticks.into_usize() + 1,
+        },
+        SpotId::KF__Baba_Corridor__Tree_Side => Range { start: 0, end: 0 },
+        SpotId::KF__Outside_Deku_Tree__Entry => Range { start: 0, end: 0 },
+        SpotId::KF__Outside_Deku_Tree__Left => Range {
+            start: LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone.into_usize(),
+            end: LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone.into_usize() + 1,
+        },
+        SpotId::KF__Outside_Deku_Tree__Right => Range {
+            start: LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone.into_usize(),
+            end: LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone.into_usize() + 1,
+        },
+        SpotId::KF__Outside_Deku_Tree__Mouth => Range { start: 0, end: 0 },
+        SpotId::KF__Midos_House__Entry => Range {
+            start: LocationId::KF__Midos_House__Entry__Bottom_Left_Chest.into_usize(),
+            end: LocationId::KF__Midos_House__Entry__Top_Right_Chest.into_usize() + 1,
+        },
+        SpotId::KF__Knowitall_House__Entry => Range { start: 0, end: 0 },
+        SpotId::KF__Shop__Entry => Range {
+            start: LocationId::KF__Shop__Entry__Blue_Rupee.into_usize(),
+            end: LocationId::KF__Shop__Entry__Item_8.into_usize() + 1,
+        },
+        SpotId::Kak__Spider_House__Entry => Range {
+            start: LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize(),
+            end: LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize() + 1,
+        },
+    }
+}
+
+pub fn area_locations(id: AreaId) -> Range<usize> {
+    match id {
+        AreaId::Deku_Tree__Lobby => Range {
+            start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks.into_usize(),
+            end: LocationId::Deku_Tree__Lobby__Center__Web.into_usize(),
+        },
+        AreaId::Deku_Tree__Floor_2 => Range {
+            start: LocationId::Deku_Tree__Floor_2__Vines__Map_Chest.into_usize(),
+            end: LocationId::Deku_Tree__Floor_2__Vines__Map_Chest.into_usize(),
+        },
+        AreaId::Deku_Tree__Scrub_Room => Range {
+            start: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize(),
+            end: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize(),
+        },
+        AreaId::Deku_Tree__Slingshot_Room => Range {
+            start: LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest.into_usize(),
+        },
+        AreaId::Deku_Tree__Slingshot_Upper => Range {
+            start: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize(),
+        },
+        AreaId::Deku_Tree__Floor_3 => Range {
+            start: LocationId::Deku_Tree__Floor_3__Door__Break_Web.into_usize(),
+            end: LocationId::Deku_Tree__Floor_3__Door__Break_Web.into_usize(),
+        },
+        AreaId::Deku_Tree__Compass_Room => Range {
+            start: LocationId::Deku_Tree__Compass_Room__Compass__Chest.into_usize(),
+            end: LocationId::Deku_Tree__Compass_Room__Ledge__GS.into_usize(),
+        },
+        AreaId::Deku_Tree__Basement_1 => Range {
+            start: LocationId::Deku_Tree__Basement_1__Center__Vines_GS.into_usize(),
+            end: LocationId::Deku_Tree__Basement_1__Corner__Switch.into_usize(),
+        },
+        AreaId::Deku_Tree__Back_Room => Range {
+            start: LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall.into_usize(),
+            end: LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web.into_usize(),
+        },
+        AreaId::Deku_Tree__Skull_Room => Range {
+            start: LocationId::Deku_Tree__Skull_Room__Entry__GS.into_usize(),
+            end: LocationId::Deku_Tree__Skull_Room__Entry__GS.into_usize(),
+        },
+        AreaId::Deku_Tree__Basement_Ledge => Range {
+            start: LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block.into_usize(),
+            end: LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web.into_usize(),
+        },
+        AreaId::Deku_Tree__Basement_2 => Range {
+            start: LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs.into_usize(),
+            end: LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs.into_usize(),
+        },
+        AreaId::Deku_Tree__Boss_Room => Range {
+            start: LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp.into_usize(),
+            end: LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill.into_usize(),
+        },
+        AreaId::KF__Links_House => Range { start: 0, end: 0 },
+        AreaId::KF__Kokiri_Village => Range {
+            start: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido.into_usize(),
+            end: LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido.into_usize(),
+        },
+        AreaId::KF__Boulder_Maze => Range {
+            start: LocationId::KF__Boulder_Maze__Reward__Chest.into_usize(),
+            end: LocationId::KF__Boulder_Maze__Reward__Chest.into_usize(),
+        },
+        AreaId::KF__Baba_Corridor => Range {
+            start: LocationId::KF__Baba_Corridor__Deku_Babas__Nuts.into_usize(),
+            end: LocationId::KF__Baba_Corridor__Deku_Babas__Sticks.into_usize(),
+        },
+        AreaId::KF__Outside_Deku_Tree => Range {
+            start: LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone.into_usize(),
+            end: LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone.into_usize(),
+        },
+        AreaId::KF__Midos_House => Range {
+            start: LocationId::KF__Midos_House__Entry__Bottom_Left_Chest.into_usize(),
+            end: LocationId::KF__Midos_House__Entry__Top_Right_Chest.into_usize(),
+        },
+        AreaId::KF__Knowitall_House => Range { start: 0, end: 0 },
+        AreaId::KF__Shop => Range {
+            start: LocationId::KF__Shop__Entry__Blue_Rupee.into_usize(),
+            end: LocationId::KF__Shop__Entry__Item_8.into_usize(),
+        },
+        AreaId::Kak__Spider_House => Range {
+            start: LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize(),
+            end: LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize(),
+        },
+    }
+}
+
+pub fn region_locations(id: RegionId) -> Range<usize> {
+    match id {
+        RegionId::Deku_Tree => Range {
+            start: LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall.into_usize(),
+            end: LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest.into_usize(),
+        },
+        RegionId::KF => Range {
+            start: LocationId::KF__Baba_Corridor__Deku_Babas__Nuts.into_usize(),
+            end: LocationId::KF__Shop__Entry__Item_8.into_usize(),
+        },
+        RegionId::Kak => Range {
+            start: LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize(),
+            end: LocationId::Kak__Spider_House__Entry__Skulls_10.into_usize(),
         },
     }
 }
