@@ -157,7 +157,7 @@ areas:
         - name: Chest
           item: Compass_Deku_Tree
           tags: [big]
-      exits:
+      local:
         - to: Ledge
           thru: [2,0]
     - name: Ledge
@@ -168,7 +168,7 @@ areas:
         - name: GS
           item: Gold_Skulltula_Token
           req: $is_adult or $can_child_attack
-      exits:
+      local:
         - to: Compass
           thru: [2,0]
 

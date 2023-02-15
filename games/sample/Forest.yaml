@@ -29,6 +29,7 @@ areas:
       exits:
         - to: Link's House > Entry
           tags: [load, interior]
+      local:
         # Generally we omit the other local spots and assume connectivity
         # if it's not a straight shot, though, we can add a delay or intermediate points
         - to: Know-it-all Porch

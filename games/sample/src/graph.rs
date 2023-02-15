@@ -467,8 +467,6 @@ pub enum ExitId {
     Deku_Tree__Floor_3__Door__Break_Web,
     Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1,
     Deku_Tree__Compass_Room__Entry__Burn_Web,
-    Deku_Tree__Compass_Room__Compass__ex__Ledge_1,
-    Deku_Tree__Compass_Room__Ledge__ex__Compass_1,
     Deku_Tree__Basement_1__Center__ex__Lobby__Center_1,
     Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1,
     Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
@@ -483,9 +481,6 @@ pub enum ExitId {
     Deku_Tree__Boss_Room__Arena__Blue_Warp,
     KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1,
     KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1,
-    KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1,
-    KF__Kokiri_Village__Links_Porch__ex__Training_Center_1,
-    KF__Kokiri_Village__Links_Porch__ex__Midos_Guardpost_1,
     KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1,
     KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1,
     KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1,
@@ -601,12 +596,6 @@ impl fmt::Display for ExitId {
             ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
                 write!(f, "{}", "Deku Tree > Compass Room > Entry Burn Web")
             }
-            ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1 => {
-                write!(f, "{}", "Deku Tree > Compass Room > Compass ==> Ledge (1)")
-            }
-            ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1 => {
-                write!(f, "{}", "Deku Tree > Compass Room > Ledge ==> Compass (1)")
-            }
             ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => write!(
                 f,
                 "{}",
@@ -672,21 +661,6 @@ impl fmt::Display for ExitId {
                 f,
                 "{}",
                 "KF > Kokiri Village > Link's Porch ==> Link's House > Entry (1)"
-            ),
-            ExitId::KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1 => write!(
-                f,
-                "{}",
-                "KF > Kokiri Village > Link's Porch ==> Know-it-all Porch (1)"
-            ),
-            ExitId::KF__Kokiri_Village__Links_Porch__ex__Training_Center_1 => write!(
-                f,
-                "{}",
-                "KF > Kokiri Village > Link's Porch ==> Training Center (1)"
-            ),
-            ExitId::KF__Kokiri_Village__Links_Porch__ex__Midos_Guardpost_1 => write!(
-                f,
-                "{}",
-                "KF > Kokiri Village > Link's Porch ==> Mido's Guardpost (1)"
             ),
             ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => write!(
                 f,
@@ -1000,8 +974,6 @@ impl world::Accessible for Exit {
                 ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
                     rules::access_is_child_and_sticks_and_nuts(&ctx)
                 }
-                ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1 => true,
-                ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1 => true,
                 ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
                     rules::access_is_adult_or_deku_basement_block(&ctx)
@@ -1028,9 +1000,6 @@ impl world::Accessible for Exit {
                 ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => rules::access_defeat_gohma(&ctx),
                 ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => true,
                 ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => true,
-                ExitId::KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1 => true,
-                ExitId::KF__Kokiri_Village__Links_Porch__ex__Training_Center_1 => true,
-                ExitId::KF__Kokiri_Village__Links_Porch__ex__Midos_Guardpost_1 => true,
                 ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
@@ -1783,20 +1752,6 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: Some(LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web),
         },
-        ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1 => Exit {
-            id: ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1,
-            time: 1,
-            dest: SpotId::Deku_Tree__Compass_Room__Ledge,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1 => Exit {
-            id: ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1,
-            time: 1,
-            dest: SpotId::Deku_Tree__Compass_Room__Compass,
-            price: Currency::Free,
-            loc_id: None,
-        },
         ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => Exit {
             id: ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1,
             time: 6,
@@ -1892,27 +1847,6 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1,
             time: 2,
             dest: SpotId::KF__Links_House__Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1 => Exit {
-            id: ExitId::KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1,
-            time: 1,
-            dest: SpotId::KF__Kokiri_Village__Knowitall_Porch,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::KF__Kokiri_Village__Links_Porch__ex__Training_Center_1 => Exit {
-            id: ExitId::KF__Kokiri_Village__Links_Porch__ex__Training_Center_1,
-            time: 1,
-            dest: SpotId::KF__Kokiri_Village__Training_Center,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::KF__Kokiri_Village__Links_Porch__ex__Midos_Guardpost_1 => Exit {
-            id: ExitId::KF__Kokiri_Village__Links_Porch__ex__Midos_Guardpost_1,
-            time: 1,
-            dest: SpotId::KF__Kokiri_Village__Midos_Guardpost,
             price: Currency::Free,
             loc_id: None,
         },
@@ -2286,8 +2220,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: LocationId::Deku_Tree__Compass_Room__Compass__Chest.into_usize() + 1,
             },
             exits: Range {
-                start: ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1.into_usize(),
-                end: ExitId::Deku_Tree__Compass_Room__Compass__ex__Ledge_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -2304,8 +2237,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: LocationId::Deku_Tree__Compass_Room__Ledge__GS.into_usize() + 1,
             },
             exits: Range {
-                start: ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1.into_usize(),
-                end: ExitId::Deku_Tree__Compass_Room__Ledge__ex__Compass_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -2580,8 +2512,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::KF__Kokiri_Village__Links_Porch__ex__Knowitall_Porch_1.into_usize(),
-                end: ExitId::KF__Kokiri_Village__Links_Porch__ex__Training_Center_1.into_usize() + 1,
+                start: ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1.into_usize(),
+                end: ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

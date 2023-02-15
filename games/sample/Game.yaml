@@ -18,7 +18,8 @@ objectives:  # win conditions
   # This needs to be handled specially, since it has an arg of RegionId
   # and we could support AreaId and SpotId as well. But it might be something
   # we'll have in the main analyzer algorithm, so tbd
-  # Deku Full Clear: $all_checks('Deku Tree')
+  # we should pick a Place type format, like &'Deku Tree' or |Deku Tree|
+  # Deku Full Clear: $all_checks(&'Deku Tree')
 
 movements:
   # Movement types:
@@ -33,6 +34,8 @@ movements:
   default:
     free: 1
   # Movement types other than default need to have a req: rule
+  # Potentially something like areas: as well to limit it, until we can have a Place
+  # type we can write in a req: rule
 
 time:
   # If time for a check or exit is unspecified, the time will be assumed

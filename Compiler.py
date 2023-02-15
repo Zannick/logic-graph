@@ -3,6 +3,7 @@ from collections import namedtuple, Counter, defaultdict
 from functools import cache, cached_property, partial
 import itertools
 import logging
+import math
 import os
 import re
 import subprocess
@@ -28,8 +29,9 @@ GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'time', 'start', 'loa
 # To be validated later
 REGION_FIELDS = {'name', 'short', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots'}
-SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid'}
+SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local'}
 SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
+MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 
 typed_name = re.compile(r'(?P<name>\$?\w+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
@@ -187,6 +189,7 @@ class GameLogic(object):
         self.canon_places = defaultdict(list)
         # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
         self.regions = self._info['regions']
+        self.special_exits = []
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
@@ -262,6 +265,134 @@ class GameLogic(object):
                 point['item_time'] = max(
                         (v for k,v in self.time.items() if k in point.get('tags', [])),
                         default=self.time['default'])
+
+
+    @cached_property
+    def movements_by_type(self):
+        d = defaultdict(list)
+        for m, info in self.movements.items():
+            found = False
+            # 'x' and 'y' can be on the same movement
+            for mt in MOVEMENT_DIMS:
+                if mt in info:
+                    d[mt].append(m)
+                    found = True
+            if not found:
+                self._misc_errors.append(f'Movement {m} does not define a movement dimension: '
+                                         f'must be one of {", ".join(MOVEMENT_DIMS)}')
+        return d
+
+
+    def movement_time(self, mset, a, b):
+        times = []
+        xtimes = []
+        ytimes = []
+        for m in mset:
+            if s := self.movements[m].get('free'):
+                times.append(math.sqrt(a**2 + b**2) / s)
+                continue
+            if s := self.movements[m].get('xy'):
+                times.append((a + b) / s)
+                continue
+            if sx := self.movements[m].get('x'):
+                xtimes.append(a / sx)
+            # Not mutually exclusive
+            if sy := self.movements[m].get('y'):
+                ytimes.append(b / sy)
+        if xtimes and ytimes:
+            times.append(max(min(xtimes), min(ytimes)))
+        return min(times, default=None)
+
+
+    @cached_property
+    def movement_sets(self):
+        # Possible relevant movement sets:
+        # 1. any movement on its own
+        # 2. any 'x' or 'x+y' with any 'y' or 'x+y'
+        # -- free and xy are not compatible with x and y alone (could they be?)
+        # All movement sets:
+        # - any combination of available movements (2^n) only needs to consider these subsets
+        #   to find which is the best option for any travel between two points
+        # for a distance of (a,b):
+        # - free: sqrt(a**2 + b**2)/s
+        # - xy: (a+b)/s
+        # - x+y: max(a/s_x, b/s_y)
+        # But is it consistent for all travel?
+        # - obviously the fastest free is faster than other frees, etc.
+        # - if s_free > s_xy then free is always faster than xy. This should also be true
+        #   at lower s_free but it becomes dependent on (a,b); so the answer is no overall.
+        s = {(m['name'],) for m in self.movements}
+        for xm in self.movements_by_type.get('x', []):
+            for ym in self.movement_by_type.get('y', []):
+                s.add((xm, ym))
+        return s
+
+
+    @cached_property
+    def local_distances(self):
+        # create a distances table: (spot, spot) -> [(x, y), ...]
+        d = defaultdict(list)
+        for a in self.areas():
+            for sp1, sp2 in itertools.permutations(a['spots'], 2):
+                if 'coord' not in sp1 or 'coord' not in sp2:
+                    continue
+                coords = [sp1['coord'], sp2['coord']]
+                for lcl in sp1.get('local', []):
+                    if lcl['to'] == sp2['name']:
+                        if thru := lcl.get('thru', []):
+                            coords[1:1] = thru if isinstance(thru[0], list) else [thru]
+                        break
+                for (sx, sy), (cx, cy) in itertools.pairwise(coords):
+                    d[(sp1['id'], sp2['id'])].append(
+                            (abs(cx - sx), abs(cy - sy)))
+        return d
+
+
+    @cached_property
+    def movement_tables(self):
+        # create a movement table for each movement "combo"
+        # (generally we'll use only 1 free, or 1 xy, or 1x, or 1x+1y, at a time,
+        #  but we can't guarantee which is best for all situations.
+        #  It might be simplest to determine which movements we have available in
+        #  the area we're in, and then look up the travel time from that.)
+        table = {}
+        for m, info in self.movements.items():
+            if 'free' in info:
+                table[(m,)] = {
+                    k: sum(math.sqrt(a**2 + b**2) for a,b in dlist) / info['free']
+                    for k, dlist in self.local_distances.items()
+                }
+            elif 'xy' in info:
+                table[(m,)] = {
+                    k: sum(a + b for a,b in dlist) / info['xy']
+                    for k, dlist in self.local_distances.items()
+                }
+            elif 'x' in info and 'y' in info:
+                table[(m,)] = {
+                    k: sum(a/info['x'] + b/info['y'] for a,b in dlist)
+                    for k, dlist in self.local_distance.items()
+                }
+            elif 'x' in info:
+                table[(m,)] = {
+                    k: sum(a for a,_ in dlist) / info['x']
+                    for k, dlist in self.local_distance.items()
+                    if all(b == 0 for _,b in dlist)
+                }
+            else:  # y in info
+                table[(m,)] = {
+                    k: sum(b for _,b in dlist) / info['y']
+                    for k, dlist in self.local_distance.items()
+                    if all(a == 0 for a,_ in dlist)
+                }
+        for mset in itertools.chain.from_iterable(
+                itertools.combinations(self.movements, r)
+                for r in range(2, len(self.movements))):
+            table[tuple(sorted(mset))] = local_time = {}
+            for k, dlist in self.local_distance.items():
+                times = [self.movement_time(mset, a, b) for a,b in dlist]
+                if all(t is not None for t in times):
+                    local_time[k] = sum(times)
+        return table
 
 
     def make_funcid(self, info, prkey:str='pr'):
