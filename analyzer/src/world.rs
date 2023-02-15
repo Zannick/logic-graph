@@ -15,7 +15,7 @@ pub trait Location: Accessible {
     fn id(&self) -> &Self::LocId;
     fn item(&self) -> &<Self::Context as Ctx>::ItemId;
     fn canon_id(&self) -> &Self::CanonId;
-    fn time(&self) -> i8;
+    fn time(&self) -> f32;
     fn price(&self) -> &Self::Currency;
     fn exit_id(&self) -> &Option<Self::ExitId>;
 
@@ -32,14 +32,14 @@ pub trait Exit: Accessible {
     fn id(&self) -> &Self::ExitId;
     fn dest(&self) -> &Self::SpotId;
     fn connect(&mut self, dest: &Self::SpotId);
-    fn time(&self) -> i8;
+    fn time(&self) -> f32;
     fn loc_id(&self) -> &Option<Self::LocId>;
 }
 
 pub trait Action: Accessible {
     type ActionId;
     fn id(&self) -> &Self::ActionId;
-    fn time(&self) -> i8;
+    fn time(&self) -> f32;
     fn perform(&self, ctx: &mut Self::Context);
 }
 

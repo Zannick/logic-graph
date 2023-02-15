@@ -1,0 +1,43 @@
+%% include 'header.rs.jinja'
+
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(unused_imports)]
+#![allow(unused_variables)]
+
+use crate::context::Context;
+use crate::graph::SpotId;
+use crate::rules;
+use analyzer::context::Ctx;
+
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
+enum Movement {
+    #[default] Default,
+%% for m in non_default_movements
+    {{ m|capitalize }},
+%% endfor
+}
+
+fn has_movement(ctx: &Context, m: Movement) -> bool {
+    match m {
+        Movement::Default => true,
+%% for m in non_default_movements
+        Movement::{{ m|capitalize }} => rules::access_{{ movements[m].access_id }}(ctx),
+%% endfor
+    }
+}
+
+pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> f32 {
+    match (
+%%- for mtype in non_default_movements
+    has_movement(ctx, Movement::{{ mtype }}),
+%% endfor
+    src, dest) {
+%% for k, table in movement_tables.items()
+%% for (s, d), f in table.items()
+    ({% for m in k %}{{ m }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ f }},
+%% endfor
+%% endfor
+        _ => f32::INFINITY,
+    }
+}

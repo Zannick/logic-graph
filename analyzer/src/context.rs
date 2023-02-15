@@ -16,5 +16,5 @@ pub trait Ctx {
 
     fn visit(&mut self, loc_id: &Self::LocationId);
     fn skip(&mut self, loc_id: &Self::LocationId);
-    fn elapse(&mut self, t: i32);
+    fn elapse(&mut self, t: f32);
 }

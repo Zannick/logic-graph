@@ -778,12 +778,69 @@ impl fmt::Display for CanonId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
-pub enum History {
-    Warp(SpotId),
-    Get(LocationId),
-    Move(ExitId),
-    Activate(ActionId),
+pub fn get_area(spot: &SpotId) -> AreaId {
+    match spot {
+        SpotId::None => panic!("Spot not valid"),
+        SpotId::Deku_Tree__Lobby__Entry
+        | SpotId::Deku_Tree__Lobby__Center
+        | SpotId::Deku_Tree__Lobby__Vines => AreaId::Deku_Tree__Lobby,
+        SpotId::Deku_Tree__Floor_2__Lower
+        | SpotId::Deku_Tree__Floor_2__Vines
+        | SpotId::Deku_Tree__Floor_2__Slingshot_Door => AreaId::Deku_Tree__Floor_2,
+        SpotId::Deku_Tree__Scrub_Room__Entry | SpotId::Deku_Tree__Scrub_Room__Rear => {
+            AreaId::Deku_Tree__Scrub_Room
+        }
+        SpotId::Deku_Tree__Slingshot_Room__Entry | SpotId::Deku_Tree__Slingshot_Room__Slingshot => {
+            AreaId::Deku_Tree__Slingshot_Room
+        }
+        SpotId::Deku_Tree__Slingshot_Upper__Ledge => AreaId::Deku_Tree__Slingshot_Upper,
+        SpotId::Deku_Tree__Floor_3__Climb | SpotId::Deku_Tree__Floor_3__Door => {
+            AreaId::Deku_Tree__Floor_3
+        }
+        SpotId::Deku_Tree__Compass_Room__Entry
+        | SpotId::Deku_Tree__Compass_Room__Compass
+        | SpotId::Deku_Tree__Compass_Room__Ledge => AreaId::Deku_Tree__Compass_Room,
+        SpotId::Deku_Tree__Basement_1__Center
+        | SpotId::Deku_Tree__Basement_1__Corner
+        | SpotId::Deku_Tree__Basement_1__South_Door => AreaId::Deku_Tree__Basement_1,
+        SpotId::Deku_Tree__Back_Room__South
+        | SpotId::Deku_Tree__Back_Room__Northwest
+        | SpotId::Deku_Tree__Back_Room__East => AreaId::Deku_Tree__Back_Room,
+        SpotId::Deku_Tree__Skull_Room__Entry => AreaId::Deku_Tree__Skull_Room,
+        SpotId::Deku_Tree__Basement_Ledge__Block | SpotId::Deku_Tree__Basement_Ledge__Web => {
+            AreaId::Deku_Tree__Basement_Ledge
+        }
+        SpotId::Deku_Tree__Basement_2__Pool | SpotId::Deku_Tree__Basement_2__Boss_Door => {
+            AreaId::Deku_Tree__Basement_2
+        }
+        SpotId::Deku_Tree__Boss_Room__Entry | SpotId::Deku_Tree__Boss_Room__Arena => {
+            AreaId::Deku_Tree__Boss_Room
+        }
+        SpotId::KF__Links_House__Start_Point | SpotId::KF__Links_House__Entry => {
+            AreaId::KF__Links_House
+        }
+        SpotId::KF__Kokiri_Village__Links_Porch
+        | SpotId::KF__Kokiri_Village__Midos_Porch
+        | SpotId::KF__Kokiri_Village__Knowitall_Porch
+        | SpotId::KF__Kokiri_Village__Training_Center
+        | SpotId::KF__Kokiri_Village__Shop_Porch
+        | SpotId::KF__Kokiri_Village__Sarias_Porch
+        | SpotId::KF__Kokiri_Village__Midos_Guardpost => AreaId::KF__Kokiri_Village,
+        SpotId::KF__Boulder_Maze__Entry | SpotId::KF__Boulder_Maze__Reward => {
+            AreaId::KF__Boulder_Maze
+        }
+        SpotId::KF__Baba_Corridor__Village_Side
+        | SpotId::KF__Baba_Corridor__Deku_Babas
+        | SpotId::KF__Baba_Corridor__Tree_Side => AreaId::KF__Baba_Corridor,
+        SpotId::KF__Outside_Deku_Tree__Entry
+        | SpotId::KF__Outside_Deku_Tree__Left
+        | SpotId::KF__Outside_Deku_Tree__Right
+        | SpotId::KF__Outside_Deku_Tree__Mouth => AreaId::KF__Outside_Deku_Tree,
+        SpotId::KF__Midos_House__Entry => AreaId::KF__Midos_House,
+        SpotId::KF__Knowitall_House__Entry => AreaId::KF__Knowitall_House,
+        SpotId::KF__Shop__Entry => AreaId::KF__Shop,
+        SpotId::Kak__Spider_House__Entry => AreaId::Kak__Spider_House,
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -791,7 +848,7 @@ pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
-    time: i8,
+    time: f32,
     exit_id: Option<ExitId>,
     price: Currency,
 }
@@ -914,7 +971,7 @@ impl world::Location for Location {
     fn exit_id(&self) -> &Option<ExitId> {
         &self.exit_id
     }
-    fn time(&self) -> i8 {
+    fn time(&self) -> f32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -925,7 +982,7 @@ impl world::Location for Location {
 #[derive(Copy, Clone, Debug)]
 pub struct Exit {
     id: ExitId,
-    time: i8,
+    time: f32,
     dest: SpotId,
     price: Currency,
     loc_id: Option<LocationId>,
@@ -1044,7 +1101,7 @@ impl world::Exit for Exit {
     fn loc_id(&self) -> &Option<LocationId> {
         &self.loc_id
     }
-    fn time(&self) -> i8 {
+    fn time(&self) -> f32 {
         self.time
     }
 }
@@ -1052,7 +1109,7 @@ impl world::Exit for Exit {
 #[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
-    time: i8,
+    time: f32,
 }
 
 impl world::Accessible for Action {
@@ -1070,7 +1127,7 @@ impl world::Action for Action {
     fn id(&self) -> &ActionId {
         &self.id
     }
-    fn time(&self) -> i8 {
+    fn time(&self) -> f32 {
         self.time
     }
     fn perform(&self, ctx: &mut Context) {
@@ -1222,7 +1279,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Stick_Drop,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => Location {
@@ -1230,7 +1287,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Nut_Drop,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Lobby__Center__Web => Location {
@@ -1238,7 +1295,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Deku_Lobby_Web,
             item: Item::Deku_Lobby_Web,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => Location {
@@ -1246,7 +1303,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Map_Deku_Tree,
             price: Currency::Free,
-            time: 3,
+            time: 3.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => Location {
@@ -1254,7 +1311,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Slingshot_Scrub,
             price: Currency::Free,
-            time: 2,
+            time: 2.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => Location {
@@ -1262,7 +1319,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Slingshot,
             price: Currency::Free,
-            time: 3,
+            time: 3.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => Location {
@@ -1270,7 +1327,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Recovery_Heart,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Floor_3__Door__Break_Web => Location {
@@ -1278,7 +1335,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Deku_Lobby_Web,
             item: Item::Deku_Lobby_Web,
             price: Currency::Free,
-            time: 0,
+            time: 0.0,
             exit_id: Some(ExitId::Deku_Tree__Floor_3__Door__Break_Web),
         },
         LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => Location {
@@ -1286,7 +1343,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Deku_Lobby_Web,
             item: Item::Deku_Lobby_Web,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: Some(ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web),
         },
         LocationId::Deku_Tree__Compass_Room__Compass__Chest => Location {
@@ -1294,7 +1351,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Compass_Deku_Tree,
             price: Currency::Free,
-            time: 3,
+            time: 3.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Compass_Room__Ledge__Chest => Location {
@@ -1302,7 +1359,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Recovery_Heart,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Compass_Room__Ledge__GS => Location {
@@ -1310,7 +1367,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_1__Center__Vines_GS => Location {
@@ -1318,7 +1375,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
-            time: 2,
+            time: 2.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Switch => Location {
@@ -1326,7 +1383,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Basement_Switch,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Chest => Location {
@@ -1334,7 +1391,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Recovery_Heart,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => Location {
@@ -1342,7 +1399,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
-            time: 2,
+            time: 2.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => Location {
@@ -1350,7 +1407,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Deku_Basement_Web,
             item: Item::Deku_Basement_Web,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: Some(ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web),
         },
         LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => Location {
@@ -1358,7 +1415,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Back_Room_Web,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => Location {
@@ -1366,7 +1423,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Back_Room_Wall,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Skull_Room__Entry__GS => Location {
@@ -1374,7 +1431,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Gold_Skulltula_Token,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => Location {
@@ -1382,7 +1439,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Basement_Block,
             price: Currency::Free,
-            time: 4,
+            time: 4.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => Location {
@@ -1390,7 +1447,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Deku_Basement_Web,
             item: Item::Deku_Basement_Web,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => Location {
@@ -1398,7 +1455,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Basement_Scrubs,
             price: Currency::Free,
-            time: 4,
+            time: 4.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Gohma => Location {
@@ -1406,7 +1463,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Defeat_Gohma,
             item: Item::Defeat_Gohma,
             price: Currency::Free,
-            time: 10,
+            time: 10.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => Location {
@@ -1414,7 +1471,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::Defeat_Gohma,
             item: Item::Defeat_Gohma,
             price: Currency::Free,
-            time: 4,
+            time: 4.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => Location {
@@ -1422,7 +1479,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Heart_Container,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => Location {
@@ -1430,7 +1487,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Kokiri_Emerald,
             price: Currency::Free,
-            time: 6,
+            time: 6.0,
             exit_id: Some(ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp),
         },
         LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => Location {
@@ -1438,7 +1495,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Showed_Mido,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Boulder_Maze__Reward__Chest => Location {
@@ -1446,7 +1503,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Kokiri_Sword,
             price: Currency::Free,
-            time: 3,
+            time: 3.0,
             exit_id: None,
         },
         LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => Location {
@@ -1454,7 +1511,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Stick_Drop,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => Location {
@@ -1462,7 +1519,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Deku_Nut_Drop,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => Location {
@@ -1470,7 +1527,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::None,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => Location {
@@ -1478,7 +1535,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::None,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Midos_House__Entry__Top_Left_Chest => Location {
@@ -1486,7 +1543,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Rupees_5,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Midos_House__Entry__Top_Right_Chest => Location {
@@ -1494,7 +1551,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Rupees_50,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => Location {
@@ -1502,7 +1559,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Rupee_1,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => Location {
@@ -1510,7 +1567,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Recovery_Heart,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Blue_Rupee => Location {
@@ -1518,7 +1575,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Rupees_5,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_1 => Location {
@@ -1526,7 +1583,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Deku_Shield,
             price: Currency::Rupees(40),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_2 => Location {
@@ -1534,7 +1591,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Deku_Nut_5,
             price: Currency::Rupees(15),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_3 => Location {
@@ -1542,7 +1599,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Deku_Nut_10,
             price: Currency::Rupees(30),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_4 => Location {
@@ -1550,7 +1607,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Deku_Stick_1,
             price: Currency::Rupees(10),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_5 => Location {
@@ -1558,7 +1615,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Deku_Seeds_30,
             price: Currency::Rupees(30),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_6 => Location {
@@ -1566,7 +1623,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Arrows_10,
             price: Currency::Rupees(20),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_7 => Location {
@@ -1574,7 +1631,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Arrows_30,
             price: Currency::Rupees(60),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::KF__Shop__Entry__Item_8 => Location {
@@ -1582,7 +1639,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Buy_Heart,
             price: Currency::Rupees(10),
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
         LocationId::Kak__Spider_House__Entry__Skulls_10 => Location {
@@ -1590,7 +1647,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Arrows_10,
             price: Currency::Free,
-            time: 1,
+            time: 1.0,
             exit_id: None,
         },
     }
@@ -1600,357 +1657,357 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
     enum_map! {
         ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1 => Exit {
             id: ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::Deku_Tree__Basement_1__Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1 => Exit {
             id: ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1,
-            time: 5,
+            time: 5.0,
             dest: SpotId::Deku_Tree__Basement_Ledge__Block,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => Exit {
             id: ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1,
-            time: 4,
+            time: 4.0,
             dest: SpotId::Deku_Tree__Floor_2__Lower,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Vines,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1,
-            time: 16,
+            time: 16.0,
             dest: SpotId::Deku_Tree__Floor_3__Climb,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2,
-            time: 10,
+            time: 10.0,
             dest: SpotId::Deku_Tree__Floor_3__Climb,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Vines,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Scrub_Room__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1 => Exit {
             id: ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Lobby__Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Slingshot_Room__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1 => Exit {
             id: ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Scrub_Room__Rear,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1 => Exit {
             id: ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1,
-            time: 4,
+            time: 4.0,
             dest: SpotId::Deku_Tree__Slingshot_Upper__Ledge,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1 => Exit {
             id: ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Slingshot_Room__Slingshot,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Compass_Room__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => Exit {
             id: ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1,
-            time: 3,
+            time: 3.0,
             dest: SpotId::Deku_Tree__Lobby__Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Floor_3__Door__Break_Web => Exit {
             id: ExitId::Deku_Tree__Floor_3__Door__Break_Web,
-            time: 4,
+            time: 4.0,
             dest: SpotId::Deku_Tree__Basement_1__Center,
             price: Currency::Free,
             loc_id: Some(LocationId::Deku_Tree__Floor_3__Door__Break_Web),
         },
         ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => Exit {
             id: ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Floor_3__Door,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => Exit {
             id: ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web,
-            time: 5,
+            time: 5.0,
             dest: SpotId::Deku_Tree__Lobby__Center,
             price: Currency::Free,
             loc_id: Some(LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web),
         },
         ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => Exit {
             id: ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1,
-            time: 6,
+            time: 6.0,
             dest: SpotId::Deku_Tree__Lobby__Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => Exit {
             id: ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Basement_Ledge__Block,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => Exit {
             id: ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
-            time: 2,
+            time: 2.0,
             dest: SpotId::Deku_Tree__Basement_Ledge__Web,
             price: Currency::Free,
             loc_id: Some(LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web),
         },
         ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1 => Exit {
             id: ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1,
-            time: 20,
+            time: 20.0,
             dest: SpotId::Deku_Tree__Back_Room__South,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Skull_Room__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => Exit {
             id: ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::Deku_Tree__Basement_Ledge__Web,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1 => Exit {
             id: ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Back_Room__Northwest,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1 => Exit {
             id: ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Basement_1__Corner,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1 => Exit {
             id: ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::Deku_Tree__Basement_2__Pool,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1 => Exit {
             id: ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1,
-            time: 6,
+            time: 6.0,
             dest: SpotId::Deku_Tree__Basement_Ledge__Web,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::Deku_Tree__Boss_Room__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => Exit {
             id: ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp,
-            time: 8,
+            time: 8.0,
             dest: SpotId::KF__Outside_Deku_Tree__Mouth,
             price: Currency::Free,
             loc_id: Some(LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp),
         },
         ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => Exit {
             id: ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Kokiri_Village__Links_Porch,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Links_House__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Midos_House__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Knowitall_House__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1,
-            time: 6,
+            time: 6.0,
             dest: SpotId::KF__Boulder_Maze__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Shop__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::Kak__Spider_House__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => Exit {
             id: ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::KF__Baba_Corridor__Village_Side,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => Exit {
             id: ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1,
-            time: 6,
+            time: 6.0,
             dest: SpotId::KF__Kokiri_Village__Training_Center,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1 => Exit {
             id: ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::KF__Kokiri_Village__Midos_Guardpost,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1 => Exit {
             id: ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::KF__Outside_Deku_Tree__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1 => Exit {
             id: ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1,
-            time: 1,
+            time: 1.0,
             dest: SpotId::KF__Baba_Corridor__Tree_Side,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1 => Exit {
             id: ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::Deku_Tree__Lobby__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1 => Exit {
             id: ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Kokiri_Village__Midos_Porch,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1 => Exit {
             id: ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Kokiri_Village__Knowitall_Porch,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => Exit {
             id: ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Kokiri_Village__Shop_Porch,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1 => Exit {
             id: ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1,
-            time: 2,
+            time: 2.0,
             dest: SpotId::KF__Kokiri_Village__Sarias_Porch,
             price: Currency::Free,
             loc_id: None,
@@ -1962,7 +2019,7 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
     enum_map! {
         ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => Action {
             id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
-            time: 1,
+            time: 1.0,
         },
     }
 }

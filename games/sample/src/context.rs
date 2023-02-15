@@ -18,11 +18,19 @@ pub enum Status {
     Skipped,
 }
 
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum History {
+    Warp(SpotId),
+    Get(LocationId),
+    Move(ExitId),
+    Activate(ActionId),
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Context {
     // context vars
     pub position: SpotId,
-    pub elapsed: i32,
+    pub elapsed: f32,
     pub save: SpotId,
     pub child: bool,
     pub tod: &'static str,
@@ -355,7 +363,7 @@ impl context::Ctx for Context {
     fn skip(&mut self, loc_id: &LocationId) {
         self.status[*loc_id] = Status::Skipped;
     }
-    fn elapse(&mut self, t: i32) {
+    fn elapse(&mut self, t: f32) {
         self.elapsed += t;
     }
 }

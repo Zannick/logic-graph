@@ -6,5 +6,6 @@ pub mod context;
 pub mod graph;
 pub mod helpers;
 pub mod items;
+pub mod movements;
 pub mod prices;
 mod rules;
