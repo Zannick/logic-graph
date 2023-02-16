@@ -2,7 +2,7 @@
 //!
 //! Context (game state).
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash)]
 pub enum Currency {
     #[default]
     Free,

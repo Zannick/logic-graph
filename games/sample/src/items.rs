@@ -6,7 +6,7 @@
 
 use std::fmt;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum, Default)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
 pub enum Item {
     #[default]
     None,

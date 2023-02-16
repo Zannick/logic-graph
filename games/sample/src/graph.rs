@@ -16,7 +16,7 @@ use std::fmt;
 use std::ops::Range;
 use std::option::Option;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum RegionId {
     Deku_Tree,
     KF,
@@ -32,7 +32,7 @@ impl fmt::Display for RegionId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum AreaId {
     Deku_Tree__Lobby,
     Deku_Tree__Floor_2,
@@ -86,7 +86,7 @@ impl fmt::Display for AreaId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum, Default)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
 pub enum SpotId {
     #[default]
     None,
@@ -261,7 +261,7 @@ impl fmt::Display for SpotId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum LocationId {
     Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
     Deku_Tree__Lobby__Center__Deku_Baby_Nuts,
@@ -443,7 +443,7 @@ impl fmt::Display for LocationId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ExitId {
     Deku_Tree__Lobby__Center__ex__Basement_1__Center_1,
     Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1,
@@ -745,7 +745,7 @@ impl fmt::Display for ExitId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ActionId {
     Deku_Tree__Compass_Room__Entry__Light_Torch,
 }
@@ -759,7 +759,7 @@ impl fmt::Display for ActionId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, enum_map::Enum, Default)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
 pub enum CanonId {
     #[default]
     None,

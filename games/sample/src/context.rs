@@ -6,6 +6,7 @@
 
 use crate::graph::*;
 use crate::items::Item;
+use crate::movements;
 use crate::prices::Currency;
 use analyzer::context;
 use enum_map::EnumMap;
@@ -376,6 +377,9 @@ impl context::Ctx for Context {
         self.status.as_slice()[r.start..r.end]
             .iter()
             .all(|&x| x == Status::Visited)
+    }
+    fn local_travel_time_to(&self, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, self.position, dest)
     }
 }
 

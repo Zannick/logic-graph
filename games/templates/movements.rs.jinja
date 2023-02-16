@@ -18,7 +18,7 @@ enum Movement {
 %% endfor
 }
 
-fn has_movement(ctx: &Context, m: Movement) -> bool {
+fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
     match m {
         Movement::Default => true,
 %% for m in non_default_movements
@@ -27,10 +27,10 @@ fn has_movement(ctx: &Context, m: Movement) -> bool {
     }
 }
 
-pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> i32 {
+pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
     match (
 %%- for mtype in non_default_movements
-    has_movement(ctx, Movement::{{ mtype }}),
+    has_movement(ctx, Movement::{{ mtype }}, src),
 %% endfor
     src, dest) {
 %% for k, table in movement_tables.items()

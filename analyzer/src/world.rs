@@ -1,4 +1,6 @@
 use crate::context::Ctx;
+use std::fmt::Debug;
+use std::hash::Hash;
 use std::option::Option;
 
 pub trait Accessible {
@@ -6,11 +8,12 @@ pub trait Accessible {
     fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
+trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd {}
 pub trait Location: Accessible {
-    type LocId;
-    type CanonId;
-    type ExitId;
-    type Currency;
+    type LocId: Id;
+    type CanonId: Id;
+    type ExitId: Id;
+    type Currency: Id;
 
     fn id(&self) -> &Self::LocId;
     fn item(&self) -> &<Self::Context as Ctx>::ItemId;
@@ -25,9 +28,9 @@ pub trait Location: Accessible {
 }
 
 pub trait Exit: Accessible {
-    type ExitId;
-    type SpotId;
-    type LocId;
+    type ExitId: Id;
+    type SpotId: Id;
+    type LocId: Id;
 
     fn id(&self) -> &Self::ExitId;
     fn dest(&self) -> &Self::SpotId;
@@ -37,14 +40,14 @@ pub trait Exit: Accessible {
 }
 
 pub trait Action: Accessible {
-    type ActionId;
+    type ActionId: Id;
     fn id(&self) -> &Self::ActionId;
     fn time(&self) -> i32;
     fn perform(&self, ctx: &mut Self::Context);
 }
 
 pub trait Spot {
-    type SpotId;
+    type SpotId: Id;
     type Location: Location;
     type Exit: Exit;
     type Action: Action;
@@ -59,7 +62,7 @@ pub trait Spot {
 
 // This is necessary to handle movement calculations
 pub trait Area {
-    type AreaId;
+    type AreaId: Id;
     type Spot: Spot;
     fn id(&self) -> &Self::AreaId;
     fn spots(&self) -> &[Self::Spot];
@@ -72,10 +75,11 @@ pub trait Region {
 }
 
 pub trait World {
-    type Location: Location;
-    type Exit: Exit;
+    type Context: Ctx<SpotId = Self::SpotId, World = Self>;
+    type Location: Location + Accessible<Context = Self::Context>;
+    type Exit: Exit<SpotId = Self::SpotId> + Accessible<Context = Self::Context>;
     type Action: Action;
-    type SpotId;
+    type SpotId: Id;
     //type AreaId;
     //type Spot: Spot<Location = Self::Location, Exit = Self::Exit>;
     //type Area: Area<Spot = Self::Spot>;

@@ -18,13 +18,13 @@ enum Movement {
     Default,
 }
 
-fn has_movement(ctx: &Context, m: Movement) -> bool {
+fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
     match m {
         Movement::Default => true,
     }
 }
 
-pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> i32 {
+pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
     match (src, dest) {
         (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Center) => 1000,
         (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Vines) => 2000,

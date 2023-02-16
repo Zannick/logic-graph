@@ -1,6 +1,6 @@
 %% include 'header.rs.jinja'
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash)]
 pub enum Currency {
     #[default] Free,
 %% for ptype in price_types
