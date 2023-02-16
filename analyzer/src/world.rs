@@ -15,7 +15,7 @@ pub trait Location: Accessible {
     fn id(&self) -> &Self::LocId;
     fn item(&self) -> &<Self::Context as Ctx>::ItemId;
     fn canon_id(&self) -> &Self::CanonId;
-    fn time(&self) -> f32;
+    fn time(&self) -> i32;
     fn price(&self) -> &Self::Currency;
     fn exit_id(&self) -> &Option<Self::ExitId>;
 
@@ -32,14 +32,14 @@ pub trait Exit: Accessible {
     fn id(&self) -> &Self::ExitId;
     fn dest(&self) -> &Self::SpotId;
     fn connect(&mut self, dest: &Self::SpotId);
-    fn time(&self) -> f32;
+    fn time(&self) -> i32;
     fn loc_id(&self) -> &Option<Self::LocId>;
 }
 
 pub trait Action: Accessible {
     type ActionId;
     fn id(&self) -> &Self::ActionId;
-    fn time(&self) -> f32;
+    fn time(&self) -> i32;
     fn perform(&self, ctx: &mut Self::Context);
 }
 
@@ -92,6 +92,9 @@ pub trait World {
     fn get_spot_actions(&self, spot_id: Self::SpotId) -> &[Self::Action];
     fn get_area_spots(&self, spot_id: Self::SpotId) -> &[Self::SpotId];
 
-    fn on_collect(&self, item: &<<Self::Location as Accessible>::Context as Ctx>::ItemId,
-                  ctx: &mut <Self::Location as Accessible>::Context);
+    fn on_collect(
+        &self,
+        item: &<<Self::Location as Accessible>::Context as Ctx>::ItemId,
+        ctx: &mut <Self::Location as Accessible>::Context,
+    );
 }

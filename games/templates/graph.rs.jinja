@@ -40,7 +40,7 @@ pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
-    time: f32,
+    time: i32,
     exit_id: Option<ExitId>,
     price: Currency,
 }
@@ -67,14 +67,14 @@ impl world::Location for Location {
     fn item(&self) -> &Item { &self.item }
     fn canon_id(&self) -> &CanonId { &self.canonical }
     fn exit_id(&self) -> &Option<ExitId> { &self.exit_id }
-    fn time(&self) -> f32 { self.time }
+    fn time(&self) -> i32 { self.time }
     fn price(&self) -> &Currency { &self.price }
 }
 
 #[derive(Copy, Clone, Debug)]
 pub struct Exit {
     id: ExitId,
-    time: f32,
+    time: i32,
     dest: SpotId,
     price: Currency,
     loc_id: Option<LocationId>,
@@ -101,13 +101,13 @@ impl world::Exit for Exit {
     fn dest(&self) -> &SpotId { &self.dest }
     fn connect(&mut self, dest: &SpotId) { self.dest = *dest; }
     fn loc_id(&self) -> &Option<LocationId> { &self.loc_id }
-    fn time(&self) -> f32 { self.time }
+    fn time(&self) -> i32 { self.time }
 }
 
 #[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
-    time: f32,
+    time: i32,
 }
 
 impl world::Accessible for Action {
@@ -124,7 +124,7 @@ impl world::Accessible for Action {
 impl world::Action for Action {
     type ActionId = ActionId;
     fn id(&self) -> &ActionId { &self.id }
-    fn time(&self) -> f32 { self.time }
+    fn time(&self) -> i32 { self.time }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
 %% for act in gl.actions()
@@ -212,7 +212,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             price: Currency::{% if loc.price and loc.price > 0 -%}
                 {{ (loc.costs or price_types[0])|capitalize }}({{ loc.price }})
                 {%- else %}Free{% endif %},
-            time: {% if loc.to is defined %}{{ loc.item_time|float }}{% else %}{{ loc.time|float }}{% endif %},
+            time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
         },
 %% endfor
@@ -224,7 +224,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
 %% for ex in gl.exits()
         ExitId::{{ ex.id }} => Exit {
             id: ExitId::{{ ex.id }},
-            time: {{ ex.time|float }},
+            time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
             price: Currency::{% if ex.price and ex.price > 0 -%}
                 {{ (ex.costs or price_types[0])|capitalize }}({{ ex.price }})
@@ -240,7 +240,7 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
 %% for a in gl.actions()
         ActionId::{{ a.id }} => Action {
             id: ActionId::{{ a.id }},
-            time: {{ a.time|float }},
+            time: {{ (a.time * 1000)|int }},
         },
 %% endfor
     }

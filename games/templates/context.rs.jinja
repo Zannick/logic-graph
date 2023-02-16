@@ -15,15 +15,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum History {
-    Warp(SpotId),
-    Get(LocationId),
-    Move(ExitId),
-    Activate(ActionId),
-}
-
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, Eq, PartialEq)]
 pub struct Context {
     // context vars
 %% for ctx, t in context_types.items()
@@ -38,16 +30,18 @@ pub struct Context {
     pub {{ item|lower }}: {{ ct|get_int_type_for_max }},
 %% endfor
     // other
-    history: Box<Vec<History>>,
     pub status: EnumMap<LocationId, Status>,
 }
 
 impl context::Ctx for Context {
+    type World = World;
     type ItemId = Item;
     type LocationId = LocationId;
     type SpotId = SpotId;
     type AreaId = AreaId;
     type RegionId = RegionId;
+    type ActionId = ActionId;
+    type ExitId = ExitId;
     type Currency = Currency;
 
 %# we might not need has/count, if we reference the parameter directly in rules
@@ -106,7 +100,6 @@ impl context::Ctx for Context {
 
     fn visit(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::Visited; }
     fn skip(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::Skipped; }
-    fn elapse(&mut self, t: f32) { self.elapsed += t; }
 
 %% for ptype in ['Spot', 'Area', 'Region']
     fn all_{{ ptype|lower }}_checks(&self, id: {{ ptype }}Id) -> bool {
@@ -115,3 +108,10 @@ impl context::Ctx for Context {
     }
 %% endfor
 }
+
+impl Context {
+    pub fn new() -> Context {
+        Context { position: SpotId::{{ context_values.position|construct_id }}, ..Context::default() }
+    }
+}
+

@@ -18,19 +18,10 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum History {
-    Warp(SpotId),
-    Get(LocationId),
-    Move(ExitId),
-    Activate(ActionId),
-}
-
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, Eq, PartialEq)]
 pub struct Context {
     // context vars
     pub position: SpotId,
-    pub elapsed: f32,
     pub save: SpotId,
     pub child: bool,
     pub tod: &'static str,
@@ -86,16 +77,18 @@ pub struct Context {
     pub triforce_piece: i16,
     pub zora_tunic: bool,
     // other
-    history: Box<Vec<History>>,
     pub status: EnumMap<LocationId, Status>,
 }
 
 impl context::Ctx for Context {
+    type World = World;
     type ItemId = Item;
     type LocationId = LocationId;
     type SpotId = SpotId;
     type AreaId = AreaId;
     type RegionId = RegionId;
+    type ActionId = ActionId;
+    type ExitId = ExitId;
     type Currency = Currency;
 
     fn has(&self, item: Item) -> bool {
@@ -365,9 +358,6 @@ impl context::Ctx for Context {
     fn skip(&mut self, loc_id: LocationId) {
         self.status[loc_id] = Status::Skipped;
     }
-    fn elapse(&mut self, t: f32) {
-        self.elapsed += t;
-    }
 
     fn all_spot_checks(&self, id: SpotId) -> bool {
         let r = spot_locations(id);
@@ -386,5 +376,14 @@ impl context::Ctx for Context {
         self.status.as_slice()[r.start..r.end]
             .iter()
             .all(|&x| x == Status::Visited)
+    }
+}
+
+impl Context {
+    pub fn new() -> Context {
+        Context {
+            position: SpotId::KF__Links_House__Start_Point,
+            ..Context::default()
+        }
     }
 }

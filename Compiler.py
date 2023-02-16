@@ -664,7 +664,7 @@ class GameLogic(object):
 
     @cached_property
     def context_types(self):
-        d = {'position': 'SpotId', 'elapsed': 'f32'}
+        d = {'position': 'SpotId'}
         d.update((ctx, typenameof(val)) for ctx, val in self.context_values.items())
         return d
 

@@ -27,7 +27,7 @@ fn has_movement(ctx: &Context, m: Movement) -> bool {
     }
 }
 
-pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> f32 {
+pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> i32 {
     match (
 %%- for mtype in non_default_movements
     has_movement(ctx, Movement::{{ mtype }}),
@@ -35,9 +35,9 @@ pub fn local_travel_time_to(src: &SpotId, dest: &SpotId) -> f32 {
     src, dest) {
 %% for k, table in movement_tables.items()
 %% for (s, d), f in table.items()
-    ({% for m in k %}{{ m }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ f }},
+    ({% for m in k %}{{ m }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ (f*1000)|int }},
 %% endfor
 %% endfor
-        _ => f32::INFINITY,
+        _ => 1<<16,
     }
 }

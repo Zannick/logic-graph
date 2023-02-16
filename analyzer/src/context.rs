@@ -1,10 +1,20 @@
-pub trait Ctx {
-    type ItemId;
-    type SpotId;
-    type AreaId;
-    type RegionId;
-    type LocationId;
-    type Currency;
+
+use crate::world::World;
+use std::cmp::Ordering;
+use std::fmt::Debug;
+
+pub trait Ctx: Clone + Eq {
+    // This could be distilled way down into just, World: World.
+    // But that would require a lot of boilerplate typing in the functions below.
+    type World: World;
+    type ItemId: Copy + Clone + Debug + Eq;
+    type LocationId: Copy + Clone + Debug + Eq;
+    type SpotId: Copy + Clone + Debug + Eq;
+    type AreaId: Copy + Clone + Debug + Eq;
+    type RegionId: Copy + Clone + Debug + Eq;
+    type ActionId: Copy + Clone + Debug + Eq;
+    type ExitId: Copy + Clone + Debug + Eq;
+    type Currency: Copy + Clone + Debug + Eq;
 
     fn has(&self, item: Self::ItemId) -> bool;
     fn count(&self, item: Self::ItemId) -> i16;
@@ -18,9 +28,60 @@ pub trait Ctx {
 
     fn visit(&mut self, loc_id: Self::LocationId);
     fn skip(&mut self, loc_id: Self::LocationId);
-    fn elapse(&mut self, t: f32);
 
     fn all_spot_checks(&self, id: Self::SpotId) -> bool;
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
     fn all_region_checks(&self, id: Self::RegionId) -> bool;
+}
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum History<T>
+where
+    T: Ctx,
+{
+    Warp(<T as Ctx>::SpotId),
+    Get(<T as Ctx>::LocationId),
+    Move(<T as Ctx>::ExitId),
+    MoveLocal(<T as Ctx>::SpotId),
+    Activate(<T as Ctx>::ActionId),
+}
+
+#[derive(Clone, Eq)]
+pub struct ContextWrapper<T>
+where
+    T: Ctx,
+{
+    ctx: T,
+    elapsed: i32,
+    history: Box<Vec<History<T>>>,
+}
+
+impl<T: Ctx> ContextWrapper<T> {
+    pub fn new(ctx: T) -> ContextWrapper<T> {
+        ContextWrapper { ctx, elapsed: 0, history: Box::new(vec![]) }
+    }
+
+    pub fn elapse(&mut self, t: i32) {
+        self.elapsed += t;
+    }
+
+    pub fn elapsed(&self) -> i32 {
+        self.elapsed
+    }
+}
+
+impl<T: Ctx> Ord for ContextWrapper<T> {
+    fn cmp(&self, other: &Self) -> Ordering {
+        other.elapsed.cmp(&self.elapsed)
+    }
+}
+impl<T: Ctx> PartialOrd for ContextWrapper<T> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(&other))
+    }
+}
+impl<T: Ctx> PartialEq for ContextWrapper<T> {
+    fn eq(&self, other: &Self) -> bool {
+        self.elapsed == other.elapsed
+    }
 }
