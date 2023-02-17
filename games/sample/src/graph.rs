@@ -1173,11 +1173,9 @@ pub struct World {
 }
 
 impl world::World for World {
-    type Context = Context;
     type Location = Location;
     type Exit = Exit;
     type Action = Action;
-    type SpotId = SpotId;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]

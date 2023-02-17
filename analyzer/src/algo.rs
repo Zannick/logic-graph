@@ -3,24 +3,20 @@
 use crate::access::*;
 use crate::context::*;
 use crate::world::*;
+use core::cmp::Reverse;
 use std::collections::BinaryHeap;
 use std::fmt::Debug;
 
-pub fn explore<T, S, L, E>(
-    world: &impl World<
-        Context = T,
-        SpotId = S,
-        Exit = impl Exit<ExitId = E, SpotId = S> + Accessible<Context = T>,
-        Location = impl Location<LocId = L> + Accessible<Context = T>,
-    >,
+pub fn explore<W, T, L, E>(
+    world: &W,
     ctx: &ContextWrapper<T>,
-    heap: &mut BinaryHeap<ContextWrapper<T>>,
+    heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
 ) -> ()
 where
-    T: Ctx<SpotId = S, LocationId = L, ExitId = E> + Debug,
-    S: Id,
-    L: Id,
-    E: Id,
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     let spot_map = access(world, &ctx);
     //let new_spots = vec![];
@@ -36,26 +32,19 @@ where
     }
 }
 
-pub fn do_the_thing<T, S, L, E>(
-    world: &impl World<
-        Context = T,
-        SpotId = S,
-        Exit = impl Exit<ExitId = E, SpotId = S> + Accessible<Context = T>,
-        Location = impl Location<LocId = L> + Accessible<Context = T>,
-    >,
-    ctx: T,
-) where
-    T: Ctx<SpotId = S, LocationId = L, ExitId = E> + Debug,
-    S: Id,
-    L: Id,
-    E: Id,
+pub fn do_the_thing<W, T, L, E>(world: &W, ctx: T)
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     let mut heap = BinaryHeap::new();
     let ctx = ContextWrapper::new(ctx);
-    heap.push(ctx);
+    heap.push(Reverse(ctx));
 
     while !heap.is_empty() {
-        let ctx = heap.pop().unwrap();
+        let ctx = heap.pop().unwrap().0;
         match ctx.lastmode {
             Mode::None => {
                 let res = explore(world, &ctx, &mut heap);

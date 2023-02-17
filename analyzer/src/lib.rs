@@ -1,3 +1,5 @@
+extern crate sort_by_derive;
+
 pub mod access;
 pub mod algo;
 pub mod context;

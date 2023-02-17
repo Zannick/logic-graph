@@ -84,13 +84,8 @@ pub struct Context {
 impl context::Ctx for Context {
     type World = World;
     type ItemId = Item;
-    type LocationId = LocationId;
-    type SpotId = SpotId;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    type ActionId = ActionId;
-    type ExitId = ExitId;
-    type Currency = Currency;
 
     fn has(&self, item: Item) -> bool {
         match item {

@@ -1,59 +1,34 @@
 use crate::context::*;
 use crate::world::*;
-use std::cmp::Ordering;
+use sort_by_derive::SortBy;
+use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap};
 use std::fmt::Debug;
 
-#[derive(Clone, Eq, Debug)]
-pub struct SpotAccess<S, T>
+#[derive(Clone, Debug, SortBy)]
+pub struct SpotAccess<T, S>
 where
+    T: Ctx,
+    <T::World as World>::Exit: Exit<SpotId = S>,
     S: Id,
-    T: Ctx<SpotId = S>,
 {
+    #[sort_by]
     pub dist: i32,
     pub id: S,
     // this could store info about the path to the spot for better history
     pub path: Vec<History<T>>,
 }
-impl<S, T> Ord for SpotAccess<S, T>
-where
-    S: Id,
-    T: Ctx<SpotId = S>,
-{
-    fn cmp(&self, other: &Self) -> Ordering {
-        // reversed for min-heap
-        other.dist.cmp(&self.dist)
-    }
-}
-impl<S, T> PartialOrd for SpotAccess<S, T>
-where
-    S: Id,
-    T: Ctx<SpotId = S>,
-{
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-impl<S, T> PartialEq for SpotAccess<S, T>
-where
-    S: Id,
-    T: Ctx<SpotId = S>,
-{
-    fn eq(&self, other: &Self) -> bool {
-        self.dist == other.dist
-    }
-}
 
-pub fn expand<T, S, E>(
-    world: &impl World<Context = T, SpotId = S, Exit = impl Exit<ExitId = E, SpotId = S> + Accessible<Context = T>>,
+pub fn expand<W, T, E>(
+    world: &W,
     ctx: &T,
-    start: SpotAccess<S, T>,
-    dist_map: &HashMap<S, i32>,
-    spot_heap: &mut BinaryHeap<SpotAccess<S, T>>,
+    start: SpotAccess<T, E::SpotId>,
+    dist_map: &HashMap<E::SpotId, i32>,
+    spot_heap: &mut BinaryHeap<Reverse<SpotAccess<T, E::SpotId>>>,
 ) where
-    T: Ctx<SpotId = S, ExitId = E>,
-    S: Id,
-    E: Id,
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit + Accessible<Context = T>,
 {
     for spot in world.get_area_spots(start.id) {
         if !dist_map.contains_key(spot) {
@@ -66,12 +41,12 @@ pub fn expand<T, S, E>(
             }
             let mut path = start.path.clone();
             path.push(History::MoveLocal(*spot));
-            spot_heap.push(SpotAccess {
+            spot_heap.push(Reverse(SpotAccess {
                 id: *spot,
                 // if we use ctx.position for allowed movements we need to set it
                 dist: start.dist + ctx.local_travel_time(start.id, *spot),
                 path: path,
-            });
+            }));
         }
     }
 
@@ -79,25 +54,22 @@ pub fn expand<T, S, E>(
         if !dist_map.contains_key(&exit.dest()) && exit.can_access(ctx) {
             let mut path = start.path.clone();
             path.push(History::Move(exit.id()));
-            spot_heap.push(SpotAccess {
+            spot_heap.push(Reverse(SpotAccess {
                 id: exit.dest(),
                 dist: start.dist + exit.time(),
                 path: path,
-            });
+            }));
         }
     }
 
     // TODO: warps
 }
 
-pub fn access<T, S, E>(
-    world: &impl World<Context = T, SpotId = S, Exit = impl Exit<ExitId = E, SpotId = S> + Accessible<Context = T>>,
-    ctx: &ContextWrapper<T>,
-) -> HashMap<S, i32>
+pub fn access<W, T, E>(world: &W, ctx: &ContextWrapper<T>) -> HashMap<E::SpotId, i32>
 where
-    T: Ctx<SpotId = S, ExitId = E> + Debug,
-    S: Id,
-    E: Id,
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit + Accessible<Context = T>,
 {
     let mut spot_heap = BinaryHeap::new();
     let mut dist_map = HashMap::new();
@@ -117,7 +89,7 @@ where
     );
     println!("{:#?}", spot_heap);
     while !spot_heap.is_empty() {
-        let spot_found = spot_heap.pop().expect("nonempty");
+        let spot_found = spot_heap.pop().unwrap().0;
         if !dist_map.contains_key(&spot_found.id) {
             dist_map.insert(spot_found.id, spot_found.dist);
             // TODO: do we need to update ctx.position for can_access rules?

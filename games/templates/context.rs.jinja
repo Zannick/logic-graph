@@ -39,13 +39,8 @@ pub struct Context {
 impl context::Ctx for Context {
     type World = World;
     type ItemId = Item;
-    type LocationId = LocationId;
-    type SpotId = SpotId;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    type ActionId = ActionId;
-    type ExitId = ExitId;
-    type Currency = Currency;
 
 %# we might not need has/count, if we reference the parameter directly in rules
     fn has(&self, item: Item) -> bool {
