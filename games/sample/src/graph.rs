@@ -966,14 +966,14 @@ impl world::Location for Location {
     type ExitId = ExitId;
     type Currency = Currency;
 
-    fn id(&self) -> &LocationId {
-        &self.id
+    fn id(&self) -> LocationId {
+        self.id
     }
-    fn item(&self) -> &Item {
-        &self.item
+    fn item(&self) -> Item {
+        self.item
     }
-    fn canon_id(&self) -> &CanonId {
-        &self.canonical
+    fn canon_id(&self) -> CanonId {
+        self.canonical
     }
     fn exit_id(&self) -> &Option<ExitId> {
         &self.exit_id
@@ -1096,14 +1096,14 @@ impl world::Exit for Exit {
     type SpotId = SpotId;
     type LocId = LocationId;
 
-    fn id(&self) -> &ExitId {
-        &self.id
+    fn id(&self) -> ExitId {
+        self.id
     }
-    fn dest(&self) -> &SpotId {
-        &self.dest
+    fn dest(&self) -> SpotId {
+        self.dest
     }
-    fn connect(&mut self, dest: &SpotId) {
-        self.dest = *dest;
+    fn connect(&mut self, dest: SpotId) {
+        self.dest = dest;
     }
     fn loc_id(&self) -> &Option<LocationId> {
         &self.loc_id
@@ -1131,8 +1131,8 @@ impl world::Accessible for Action {
 }
 impl world::Action for Action {
     type ActionId = ActionId;
-    fn id(&self) -> &ActionId {
-        &self.id
+    fn id(&self) -> ActionId {
+        self.id
     }
     fn time(&self) -> i32 {
         self.time

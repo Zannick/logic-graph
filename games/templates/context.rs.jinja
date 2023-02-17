@@ -31,6 +31,8 @@ pub struct Context {
     pub {{ item|lower }}: {{ ct|get_int_type_for_max }},
 %% endfor
     // other
+%# I was not able to move this to analyzer due to the need to call enum derive for proper setup:
+%# EnumArray<Status>::Array not implementing Clone for some reason otherwise
     pub status: EnumMap<LocationId, Status>,
 }
 
@@ -101,6 +103,9 @@ impl context::Ctx for Context {
 
     fn visit(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::Visited; }
     fn skip(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::Skipped; }
+    fn todo(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::None }
+    fn visited(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::Visited }
+    fn skipped(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::Skipped }
 
 %% for ptype in ['Spot', 'Area', 'Region']
     fn all_{{ ptype|lower }}_checks(&self, id: {{ ptype }}Id) -> bool {

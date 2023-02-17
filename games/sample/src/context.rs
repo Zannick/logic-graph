@@ -359,6 +359,15 @@ impl context::Ctx for Context {
     fn skip(&mut self, loc_id: LocationId) {
         self.status[loc_id] = Status::Skipped;
     }
+    fn todo(&self, loc_id: LocationId) -> bool {
+        self.status[loc_id] == Status::None
+    }
+    fn visited(&self, loc_id: LocationId) -> bool {
+        self.status[loc_id] == Status::Visited
+    }
+    fn skipped(&self, loc_id: LocationId) -> bool {
+        self.status[loc_id] == Status::Skipped
+    }
 
     fn all_spot_checks(&self, id: SpotId) -> bool {
         let r = spot_locations(id);

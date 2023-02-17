@@ -27,6 +27,9 @@ pub trait Ctx: Clone + Eq {
 
     fn visit(&mut self, loc_id: Self::LocationId);
     fn skip(&mut self, loc_id: Self::LocationId);
+    fn todo(&self, loc_id: Self::LocationId) -> bool;
+    fn visited(&self, loc_id: Self::LocationId) -> bool;
+    fn skipped(&self, loc_id: Self::LocationId) -> bool;
 
     fn all_spot_checks(&self, id: Self::SpotId) -> bool;
     fn all_area_checks(&self, id: Self::AreaId) -> bool;

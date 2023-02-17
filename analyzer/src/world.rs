@@ -16,9 +16,9 @@ pub trait Location: Accessible {
     type ExitId: Id;
     type Currency: Id;
 
-    fn id(&self) -> &Self::LocId;
-    fn item(&self) -> &<Self::Context as Ctx>::ItemId;
-    fn canon_id(&self) -> &Self::CanonId;
+    fn id(&self) -> Self::LocId;
+    fn item(&self) -> <Self::Context as Ctx>::ItemId;
+    fn canon_id(&self) -> Self::CanonId;
     fn time(&self) -> i32;
     fn price(&self) -> &Self::Currency;
     fn exit_id(&self) -> &Option<Self::ExitId>;
@@ -33,16 +33,16 @@ pub trait Exit: Accessible {
     type SpotId: Id;
     type LocId: Id;
 
-    fn id(&self) -> &Self::ExitId;
-    fn dest(&self) -> &Self::SpotId;
-    fn connect(&mut self, dest: &Self::SpotId);
+    fn id(&self) -> Self::ExitId;
+    fn dest(&self) -> Self::SpotId;
+    fn connect(&mut self, dest: Self::SpotId);
     fn time(&self) -> i32;
     fn loc_id(&self) -> &Option<Self::LocId>;
 }
 
 pub trait Action: Accessible {
     type ActionId: Id;
-    fn id(&self) -> &Self::ActionId;
+    fn id(&self) -> Self::ActionId;
     fn time(&self) -> i32;
     fn perform(&self, ctx: &mut Self::Context);
 }
@@ -53,7 +53,7 @@ pub trait Spot {
     type Exit: Exit;
     type Action: Action;
 
-    fn id(&self) -> &Self::SpotId;
+    fn id(&self) -> Self::SpotId;
     // might not be necessary if we hardcode distances
     //fn get_coord(&self) -> (i16, i16);
     fn locations(&self) -> &[Self::Location];
@@ -65,14 +65,14 @@ pub trait Spot {
 pub trait Area {
     type AreaId: Id;
     type Spot: Spot;
-    fn id(&self) -> &Self::AreaId;
+    fn id(&self) -> Self::AreaId;
     fn spots(&self) -> &[Self::Spot];
 }
 
 // This one might not be necessary.
 pub trait Region {
     type RegionId;
-    fn id(&self) -> &Self::RegionId;
+    fn id(&self) -> Self::RegionId;
 }
 
 pub trait World {
