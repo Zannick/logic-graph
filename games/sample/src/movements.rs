@@ -208,6 +208,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::KF__Outside_Deku_Tree__Mouth, SpotId::KF__Outside_Deku_Tree__Entry) => 7000,
         (SpotId::KF__Outside_Deku_Tree__Mouth, SpotId::KF__Outside_Deku_Tree__Left) => 4000,
         (SpotId::KF__Outside_Deku_Tree__Mouth, SpotId::KF__Outside_Deku_Tree__Right) => 4242,
-        _ => 1 << 16,
+        _ => -1,
     }
 }

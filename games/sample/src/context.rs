@@ -378,8 +378,8 @@ impl context::Ctx for Context {
             .iter()
             .all(|&x| x == Status::Visited)
     }
-    fn local_travel_time_to(&self, dest: SpotId) -> i32 {
-        movements::local_travel_time(self, self.position, dest)
+    fn local_travel_time(&self, start: SpotId, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, start, dest)
     }
 }
 
@@ -387,6 +387,11 @@ impl Context {
     pub fn new() -> Context {
         Context {
             position: SpotId::KF__Links_House__Start_Point,
+            save: SpotId::KF__Links_House__Start_Point,
+            child: true,
+            tod: "day",
+            rupees: 0,
+            deku_tree__compass_room__ctx__torch: false,
             ..Context::default()
         }
     }

@@ -8,7 +8,8 @@ pub trait Accessible {
     fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
-trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd {}
+pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd {}
+
 pub trait Location: Accessible {
     type LocId: Id;
     type CanonId: Id;

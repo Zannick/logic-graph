@@ -134,3 +134,4 @@ impl fmt::Display for Item {
         }
     }
 }
+impl analyzer::world::Id for Item {}

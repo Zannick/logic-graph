@@ -38,6 +38,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
     ({% for m in k %}{{ m }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ (f*1000)|int }},
 %% endfor
 %% endfor
-        _ => 1<<16,
+        _ => -1,
     }
 }

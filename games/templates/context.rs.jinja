@@ -109,14 +109,19 @@ impl context::Ctx for Context {
     }
 %% endfor
 
-    fn local_travel_time_to(&self, dest: SpotId) -> i32 {
-        movements::local_travel_time(self, self.position, dest)
+    fn local_travel_time(&self, start: SpotId, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, start, dest)
     }
 }
 
 impl Context {
     pub fn new() -> Context {
-        Context { position: SpotId::{{ context_values.position|construct_id }}, ..Context::default() }
+        Context {
+%% for k, v in context_values.items()
+            {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
+%% endfor
+            ..Context::default()
+        }
     }
 }
 

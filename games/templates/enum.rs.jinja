@@ -4,7 +4,7 @@ pub enum {{ name }} {
 %% if default
     #[default] None,
 %% endif
-%% for v in values
+%% for v in values|sort(attribute='id')
     {{ v.id or v|construct_id }},
 %% endfor
 }
@@ -14,12 +14,12 @@ impl fmt::Display for {{ name }} {
 %% if default
             {{ name }}::None => write!(f, "{}", "None"),
 %% endif
-%% for v in values
+%% for v in values|sort(attribute='id')
             {{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
 %% endfor
         }
     }
 }
-
+impl analyzer::world::Id for {{ name }} {}
 %% endmacro
 

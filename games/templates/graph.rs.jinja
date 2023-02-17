@@ -161,6 +161,7 @@ pub struct World {
 }
 
 impl world::World for World {
+    type Context = Context;
     type Location = Location;
     type Exit = Exit;
     type Action = Action;
@@ -196,7 +197,7 @@ impl World {
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
-            raw_spots: [SpotId::None, SpotId::{{ gl.spots()|map(attribute='id')|join(', SpotId::') }}],
+            raw_spots: [SpotId::None, SpotId::{{ gl.spots()|map(attribute='id')|sort|join(', SpotId::') }}],
             spots: build_spots(),
         }
     }

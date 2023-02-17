@@ -123,6 +123,16 @@ def typenameof(val: Any) -> str:
     return ctx_types.get(rname, rname)
 
 
+def str_to_rusttype(val: str, t: str) -> str:
+    if 'Id' in t:
+        return f'{t}::{construct_id(val)}'
+    if t == "&'static str":
+        return f'"{val}"'
+    if t == 'bool':
+        return str(val).lower()
+    return val
+
+
 def treeToString(tree: antlr4.ParserRuleContext):
     return StringVisitor().visit(tree)
 
@@ -709,6 +719,7 @@ class GameLogic(object):
             'get_int_type_for_max': get_int_type_for_max,
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
             'get_exit_target': get_exit_target,
+            'str_to_rusttype': str_to_rusttype,
         })
         # Access cached_properties to ensure they're in the template vars
         self.all_items

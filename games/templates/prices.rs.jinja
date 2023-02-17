@@ -1,6 +1,6 @@
 %% include 'header.rs.jinja'
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd)]
 pub enum Currency {
     #[default] Free,
 %% for ptype in price_types
@@ -8,3 +8,4 @@ pub enum Currency {
 %% endfor
 }
 
+impl analyzer::world::Id for Currency {}

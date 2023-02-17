@@ -2,9 +2,11 @@
 //!
 //! Context (game state).
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd)]
 pub enum Currency {
     #[default]
     Free,
     Rupees(i32),
 }
+
+impl analyzer::world::Id for Currency {}

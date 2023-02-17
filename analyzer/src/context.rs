@@ -1,20 +1,19 @@
-use crate::world::World;
+use crate::world::{Id, World};
 use std::cmp::Ordering;
 use std::fmt::Debug;
-use std::hash::Hash;
 
 pub trait Ctx: Clone + Eq {
     // This could be distilled way down into just, World: World.
     // But that would require a lot of boilerplate typing in the functions below.
     type World: World<Context = Self, SpotId = Self::SpotId>;
-    type ItemId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type LocationId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type SpotId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type AreaId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type RegionId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type ActionId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type ExitId: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
-    type Currency: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd;
+    type ItemId: Id;
+    type LocationId: Id;
+    type SpotId: Id;
+    type AreaId: Id;
+    type RegionId: Id;
+    type ActionId: Id;
+    type ExitId: Id;
+    type Currency: Id;
 
     fn has(&self, item: Self::ItemId) -> bool;
     fn count(&self, item: Self::ItemId) -> i16;
@@ -33,7 +32,7 @@ pub trait Ctx: Clone + Eq {
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
     fn all_region_checks(&self, id: Self::RegionId) -> bool;
 
-    fn local_travel_time_to(&self, id: Self::SpotId) -> i32;
+    fn local_travel_time(&self, start: Self::SpotId, dest: Self::SpotId) -> i32;
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
