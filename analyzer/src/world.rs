@@ -53,6 +53,16 @@ pub trait Action: Accessible {
     fn perform(&self, ctx: &mut Self::Context);
 }
 
+pub trait Warp: Accessible {
+    type WarpId: Id;
+    type SpotId: Id;
+
+    fn id(&self) -> Self::WarpId;
+    fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
+    fn connect(&mut self, dest: Self::SpotId);
+    fn time(&self) -> i32;
+}
+
 pub trait World {
     type Location: Location;
     type Exit: Exit<
@@ -61,10 +71,15 @@ pub trait World {
         Context = <Self::Location as Accessible>::Context,
     >;
     type Action: Action<Context = <Self::Location as Accessible>::Context>;
+    type Warp: Warp<
+        Context = <Self::Location as Accessible>::Context,
+        SpotId = <Self::Exit as Exit>::SpotId,
+    >;
 
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;
     fn get_exit(&self, ex_id: <Self::Exit as Exit>::ExitId) -> &Self::Exit;
     fn get_action(&self, act_id: <Self::Action as Action>::ActionId) -> &Self::Action;
+    fn get_warp(&self, warp_id: <Self::Warp as Warp>::WarpId) -> &Self::Warp;
 
     fn get_spot_locations(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Location];
     fn get_spot_exits(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Exit];
@@ -73,6 +88,7 @@ pub trait World {
         &self,
         spot_id: <Self::Exit as Exit>::SpotId,
     ) -> &[<Self::Exit as Exit>::SpotId];
+    fn get_warps(&self) -> &[Self::Warp];
 
     fn on_collect(
         &self,

@@ -189,20 +189,15 @@ class GameLogic(object):
                 if name == 'default':
                     self._misc_errors.append(f'Cannot define req for default movement')
 
-        self.warps = self._info['warps']
-        for name, info in self.warps.items():
-            if 'req' in info:
-                info['pr'] = _parseExpression(info['req'], name, 'warps')
-                info['access_id'] = self.make_funcid(info)
-
         self.process_regions()
         self.process_times()
+        self.process_warps()
+
 
     def process_regions(self):
         self.canon_places = defaultdict(list)
         # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
         self.regions = self._info['regions']
-        self.special_exits = []
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
@@ -282,6 +277,28 @@ class GameLogic(object):
                 point['item_time'] = max(
                         (v for k,v in self.time.items() if k in point.get('tags', [])),
                         default=self.time['default'])
+
+
+    def process_warps(self):
+        self.warps = self._info['warps']
+        for name, info in self.warps.items():
+            info['name'] = name.capitalize()
+            info['id'] = construct_id(info['name'])
+            if info['to'].startswith('^'):
+                val = info['to'][1:]
+                if val not in self.context_types:
+                    self._misc_errors.append(f'Warp {name} goes to undefined ctx dest: ^{val}')
+                elif self.context_types[val] != 'SpotId':
+                    self._misc_errors.append(f'Warp {name} goes to invalid ctx dest: ^{val} (of type {self.context_types[val]})')
+                info['target_id'] = 'ctx.' + val
+            else:
+                id = construct_id(info['to'])
+                if not any(info['id'] == id for info in self.spots()):
+                    self._misc_errors.append(f'Warp {name} goes to unrecognized spot: {info["to"]}')
+                info['target_id'] = 'SpotId::' + id
+            if 'req' in info:
+                info['pr'] = _parseExpression(info['req'], name, 'warps')
+                info['access_id'] = self.make_funcid(info)
 
 
     @cached_property

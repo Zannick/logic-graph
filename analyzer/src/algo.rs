@@ -19,6 +19,7 @@ where
     E: Exit + Accessible<Context = T>,
 {
     let spot_map = access(world, &ctx);
+    println!("{:#?}", &spot_map);
     //let new_spots = vec![];
     for (spot_id, dist) in spot_map {
         // 1. Spot must have accessible locations with visited Status None

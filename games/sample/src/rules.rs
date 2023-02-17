@@ -36,10 +36,6 @@ pub fn access_all_region_checksdeku_tree(ctx: &Context) -> bool {
     // $all_region_checks(`Deku Tree`)
     ctx.all_region_checks(RegionId::Deku_Tree)
 }
-pub fn access_can_playminuet_of_forest(ctx: &Context) -> bool {
-    // $can_play(Minuet_of_Forest)
-    helper__can_play!(ctx, Item::Minuet_of_Forest)
-}
 pub fn access_is_adult_or_kokiri_sword_or_boomerang(ctx: &Context) -> bool {
     // $is_adult or Kokiri_Sword or Boomerang
     ((helper__is_adult!(ctx) || ctx.has(Item::Kokiri_Sword)) || ctx.has(Item::Boomerang))
@@ -175,6 +171,10 @@ pub fn access_is_adult(ctx: &Context) -> bool {
 pub fn access_gold_skulltula_token10(ctx: &Context) -> bool {
     // Gold_Skulltula_Token{10}
     ctx.count(Item::Gold_Skulltula_Token) >= 10
+}
+pub fn access_can_playminuet_of_forest(ctx: &Context) -> bool {
+    // $can_play(Minuet_of_Forest)
+    helper__can_play!(ctx, Item::Minuet_of_Forest)
 }
 pub fn action_rupees__maxrupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $max(^rupees + 1, $wallet_max)

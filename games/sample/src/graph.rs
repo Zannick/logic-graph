@@ -785,6 +785,21 @@ impl fmt::Display for CanonId {
 }
 impl analyzer::world::Id for CanonId {}
 
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+pub enum WarpId {
+    Minuet,
+    Save,
+}
+impl fmt::Display for WarpId {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            WarpId::Minuet => write!(f, "{}", "Minuet"),
+            WarpId::Save => write!(f, "{}", "Save"),
+        }
+    }
+}
+impl analyzer::world::Id for WarpId {}
+
 pub fn get_area(spot: &SpotId) -> AreaId {
     match spot {
         SpotId::None => panic!("Spot not valid"),
@@ -1146,6 +1161,46 @@ impl world::Action for Action {
     }
 }
 
+#[derive(Copy, Clone, Debug)]
+pub struct Warp {
+    id: WarpId,
+    dest: SpotId,
+    time: i32,
+}
+impl world::Accessible for Warp {
+    type Context = Context;
+    fn can_access(&self, ctx: &Context) -> bool {
+        match self.id {
+            WarpId::Save => true,
+            WarpId::Minuet => rules::access_can_playminuet_of_forest(&ctx),
+        }
+    }
+}
+impl world::Warp for Warp {
+    type WarpId = WarpId;
+    type SpotId = SpotId;
+
+    fn id(&self) -> WarpId {
+        self.id
+    }
+    fn dest(&self, ctx: &Context) -> SpotId {
+        if self.dest == SpotId::None {
+            match self.id {
+                WarpId::Minuet => SpotId::KF__Kokiri_Village__Shop_Porch,
+                WarpId::Save => ctx.save,
+            }
+        } else {
+            self.dest
+        }
+    }
+    fn connect(&mut self, dest: SpotId) {
+        self.dest = dest;
+    }
+    fn time(&self) -> i32 {
+        self.time
+    }
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Spot {
     pub id: SpotId,
@@ -1167,6 +1222,7 @@ pub struct World {
     locations: EnumMap<LocationId, Location>,
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
+    warps: EnumMap<WarpId, Warp>,
     raw_spots: [SpotId; 52],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
@@ -1176,6 +1232,7 @@ impl world::World for World {
     type Location = Location;
     type Exit = Exit;
     type Action = Action;
+    type Warp = Warp;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -1198,9 +1255,16 @@ impl world::World for World {
         let r = &self.spots[spot_id].actions;
         &self.actions.as_slice()[r.start..r.end]
     }
+    fn get_warp(&self, id: WarpId) -> &Warp {
+        &self.warps[id]
+    }
+
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
+    }
+    fn get_warps(&self) -> &[Warp] {
+        &self.warps.as_slice()
     }
 
     fn on_collect(&self, item_id: &Item, ctx: &mut Context) {
@@ -1219,6 +1283,7 @@ impl World {
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
+            warps: build_warps(),
             raw_spots: [
                 SpotId::None,
                 SpotId::Deku_Tree__Back_Room__East,
@@ -2912,6 +2977,21 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: SpotId::Kak__Spider_House__Entry.into_usize(),
                 end: SpotId::Kak__Spider_House__Entry.into_usize() + 1,
             },
+        },
+    }
+}
+
+pub fn build_warps() -> EnumMap<WarpId, Warp> {
+    enum_map! {
+        WarpId::Minuet => Warp {
+            id: WarpId::Minuet,
+            dest: SpotId::KF__Kokiri_Village__Shop_Porch,
+            time: 5000,
+        },
+        WarpId::Save => Warp {
+            id: WarpId::Save,
+            dest: SpotId::None,
+            time: 8000,
         },
     }
 }

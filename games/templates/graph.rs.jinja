@@ -22,6 +22,7 @@ use std::option::Option;
 {{ enum('ExitId', gl.exits()|list) }}
 {{ enum('ActionId', gl.actions()|list) }}
 {{ enum('CanonId', canon_places, True) }}
+{{ enum('WarpId', warps.values()|list) }}
 
 pub fn get_area(spot: &SpotId) -> AreaId {
     match spot {
@@ -134,6 +135,41 @@ impl world::Action for Action {
     }
 }
 
+#[derive(Copy, Clone, Debug)]
+pub struct Warp {
+    id: WarpId,
+    dest: SpotId,
+    time: i32,
+}
+impl world::Accessible for Warp {
+    type Context = Context;
+    fn can_access(&self, ctx: &Context) -> bool {
+        match self.id {
+%% for w in warps.values()
+            WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(&ctx)
+                {%- else %}true{% endif %},
+%% endfor
+        }
+    }
+}
+impl world::Warp for Warp {
+    type WarpId = WarpId;
+    type SpotId = SpotId;
+
+    fn id(&self) -> WarpId { self.id }
+    fn dest(&self, ctx: &Context) -> SpotId {
+        if self.dest == SpotId::None {
+            match self.id {
+%% for w in warps.values()|sort(attribute='id')
+                WarpId::{{ w.id }} => {{ w.target_id }},
+%% endfor
+            }
+        } else { self.dest }
+    }
+    fn connect(&mut self, dest: SpotId) { self.dest = dest; }
+    fn time(&self) -> i32 { self.time }
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Spot {
     pub id: SpotId,
@@ -155,6 +191,7 @@ pub struct World {
     locations: EnumMap<LocationId, Location>,
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
+    warps: EnumMap<WarpId, Warp>,
     raw_spots: [SpotId; {{ gl.spots()|list|length + 1 }}], %# +1 as long as we have a default
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
@@ -164,6 +201,7 @@ impl world::World for World {
     type Location = Location;
     type Exit = Exit;
     type Action = Action;
+    type Warp = Warp;
 
 %% for point in ['Location', 'Exit', 'Action']
     fn get_{{ point|lower }}(&self, id: {{ point }}Id)
@@ -173,11 +211,13 @@ impl world::World for World {
         &self.{{ point|lower }}s.as_slice()[r.start..r.end]
     }
 %% endfor
+    fn get_warp(&self, id: WarpId) -> &Warp { &self.warps[id] }
 
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
     }
+    fn get_warps(&self) -> &[Warp] { &self.warps.as_slice() }
 
     fn on_collect(&self, item_id: &Item, ctx: &mut Context) {
         match item_id {
@@ -195,6 +235,7 @@ impl World {
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
+            warps: build_warps(),
             raw_spots: [SpotId::None, SpotId::{{ gl.spots()|map(attribute='id')|sort|join(', SpotId::') }}],
             spots: build_spots(),
         }
@@ -276,6 +317,18 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
         },
 %% endfor
+%% endfor
+    }
+}
+
+pub fn build_warps() -> EnumMap<WarpId, Warp> {
+    enum_map! {
+%% for w in warps.values()|sort(attribute='id')
+        WarpId::{{ w.id }} => Warp {
+            id: WarpId::{{ w.id }},
+            dest: {% if w.target_id.startswith('ctx') %}SpotId::None{% else %}{{ w.target_id }}{% endif %},
+            time: {{ (w.time * 1000)|int }},
+        },
 %% endfor
     }
 }
