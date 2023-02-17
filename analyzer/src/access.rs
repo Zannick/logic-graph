@@ -28,7 +28,7 @@ pub fn expand<W, T, E>(
 ) where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit<Context = T>,
 {
     for spot in world.get_area_spots(start.id) {
         if !dist_map.contains_key(spot) {
@@ -69,7 +69,7 @@ pub fn access<W, T, E>(world: &W, ctx: &ContextWrapper<T>) -> HashMap<E::SpotId,
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit<Context = T>,
 {
     let mut spot_heap = BinaryHeap::new();
     let mut dist_map = HashMap::new();

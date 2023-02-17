@@ -56,10 +56,11 @@ pub trait Action: Accessible {
 pub trait World {
     type Location: Location;
     type Exit: Exit<
-            ExitId = <Self::Location as Location>::ExitId,
-            LocId = <Self::Location as Location>::LocId,
-        > + Accessible<Context = <Self::Location as Accessible>::Context>;
-    type Action: Action + Accessible<Context = <Self::Location as Accessible>::Context>;
+        ExitId = <Self::Location as Location>::ExitId,
+        LocId = <Self::Location as Location>::LocId,
+        Context = <Self::Location as Accessible>::Context,
+    >;
+    type Action: Action<Context = <Self::Location as Accessible>::Context>;
 
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;
     fn get_exit(&self, ex_id: <Self::Exit as Exit>::ExitId) -> &Self::Exit;
