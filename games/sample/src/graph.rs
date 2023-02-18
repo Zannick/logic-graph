@@ -800,7 +800,7 @@ impl fmt::Display for WarpId {
 }
 impl analyzer::world::Id for WarpId {}
 
-pub fn get_area(spot: &SpotId) -> AreaId {
+pub fn get_area(spot: SpotId) -> AreaId {
     match spot {
         SpotId::None => panic!("Spot not valid"),
         SpotId::Deku_Tree__Lobby__Entry
@@ -862,6 +862,64 @@ pub fn get_area(spot: &SpotId) -> AreaId {
         SpotId::KF__Knowitall_House__Entry => AreaId::KF__Knowitall_House,
         SpotId::KF__Shop__Entry => AreaId::KF__Shop,
         SpotId::Kak__Spider_House__Entry => AreaId::Kak__Spider_House,
+    }
+}
+pub fn get_region(spot: SpotId) -> RegionId {
+    match spot {
+        SpotId::None => panic!("Spot not valid"),
+        SpotId::Deku_Tree__Lobby__Entry
+        | SpotId::Deku_Tree__Lobby__Center
+        | SpotId::Deku_Tree__Lobby__Vines => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Floor_2__Lower
+        | SpotId::Deku_Tree__Floor_2__Vines
+        | SpotId::Deku_Tree__Floor_2__Slingshot_Door => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Scrub_Room__Entry | SpotId::Deku_Tree__Scrub_Room__Rear => {
+            RegionId::Deku_Tree
+        }
+        SpotId::Deku_Tree__Slingshot_Room__Entry | SpotId::Deku_Tree__Slingshot_Room__Slingshot => {
+            RegionId::Deku_Tree
+        }
+        SpotId::Deku_Tree__Slingshot_Upper__Ledge => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Floor_3__Climb | SpotId::Deku_Tree__Floor_3__Door => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Compass_Room__Entry
+        | SpotId::Deku_Tree__Compass_Room__Compass
+        | SpotId::Deku_Tree__Compass_Room__Ledge => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Basement_1__Center
+        | SpotId::Deku_Tree__Basement_1__Corner
+        | SpotId::Deku_Tree__Basement_1__South_Door => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Back_Room__South
+        | SpotId::Deku_Tree__Back_Room__Northwest
+        | SpotId::Deku_Tree__Back_Room__East => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Skull_Room__Entry => RegionId::Deku_Tree,
+        SpotId::Deku_Tree__Basement_Ledge__Block | SpotId::Deku_Tree__Basement_Ledge__Web => {
+            RegionId::Deku_Tree
+        }
+        SpotId::Deku_Tree__Basement_2__Pool | SpotId::Deku_Tree__Basement_2__Boss_Door => {
+            RegionId::Deku_Tree
+        }
+        SpotId::Deku_Tree__Boss_Room__Entry | SpotId::Deku_Tree__Boss_Room__Arena => {
+            RegionId::Deku_Tree
+        }
+        SpotId::KF__Links_House__Start_Point | SpotId::KF__Links_House__Entry => RegionId::KF,
+        SpotId::KF__Kokiri_Village__Links_Porch
+        | SpotId::KF__Kokiri_Village__Midos_Porch
+        | SpotId::KF__Kokiri_Village__Knowitall_Porch
+        | SpotId::KF__Kokiri_Village__Training_Center
+        | SpotId::KF__Kokiri_Village__Shop_Porch
+        | SpotId::KF__Kokiri_Village__Sarias_Porch
+        | SpotId::KF__Kokiri_Village__Midos_Guardpost => RegionId::KF,
+        SpotId::KF__Boulder_Maze__Entry | SpotId::KF__Boulder_Maze__Reward => RegionId::KF,
+        SpotId::KF__Baba_Corridor__Village_Side
+        | SpotId::KF__Baba_Corridor__Deku_Babas
+        | SpotId::KF__Baba_Corridor__Tree_Side => RegionId::KF,
+        SpotId::KF__Outside_Deku_Tree__Entry
+        | SpotId::KF__Outside_Deku_Tree__Left
+        | SpotId::KF__Outside_Deku_Tree__Right
+        | SpotId::KF__Outside_Deku_Tree__Mouth => RegionId::KF,
+        SpotId::KF__Midos_House__Entry => RegionId::KF,
+        SpotId::KF__Knowitall_House__Entry => RegionId::KF,
+        SpotId::KF__Shop__Entry => RegionId::KF,
+        SpotId::Kak__Spider_House__Entry => RegionId::Kak,
     }
 }
 

@@ -76,6 +76,20 @@ impl context::Ctx for Context {
         self.position
     }
     fn set_position(&mut self, pos: SpotId) {
+%% for pltype in ['Region', 'Area']
+%% if context_enter_rules[pltype|lower]
+        match get_{{ pltype|lower }}(pos) {
+%% for r, ctxs in context_enter_rules[pltype|lower].items()
+            {{ pltype }}Id::{{ r }} => {
+%% for c, val in ctxs.items()
+                self.{{ c }} = {{ val }};
+%% endfor
+            },
+%% endfor
+            _ => (),
+        }
+%% endif
+%% endfor
         self.position = pos;
     }
 
@@ -123,5 +137,6 @@ impl Context {
             ..Context::default()
         }
     }
+%# TODO: handle 'here' ctx overrides
 }
 

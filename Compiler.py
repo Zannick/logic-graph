@@ -702,9 +702,10 @@ class GameLogic(object):
         d = self.get_default_ctx()
         if 'region' not in info:
             return d
+        area = info.get('area') or info['name']
 
         levels = [construct_id(info['region']).lower(),
-                  construct_id(info['region'], info['area']).lower()]
+                  construct_id(info['region'], area).lower()]
         for cname in self.context_values:
             if '__ctx__' not in cname:
                 continue
@@ -712,6 +713,22 @@ class GameLogic(object):
             pref, local = cname.split('__ctx_', 1)  # intentionally leave one _ in
             if pref in levels:
                 d[local] = cname
+        return d
+
+
+    @cached_property
+    def context_enter_rules(self):
+        d = {'region': defaultdict(dict), 'area': defaultdict(dict)}
+        for r in self.regions:
+            localctx = self.get_local_ctx(r)
+            if e := r.get('enter'):
+                for k, v in e.items():
+                    d['region'][r['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
+        for a in self.areas():
+            localctx = self.get_local_ctx(a)
+            if e := a.get('enter'):
+                for k, v in e.items():
+                    d['area'][a['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
         return d
 
     
@@ -744,6 +761,7 @@ class GameLogic(object):
         self.context_values
         self.price_types
         self.movement_tables
+        self.context_enter_rules
         for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
                       'prices.rs', 'rules.rs', 'movements.rs']:
             template = env.get_template(tname + '.jinja')

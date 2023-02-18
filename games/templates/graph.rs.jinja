@@ -24,11 +24,21 @@ use std::option::Option;
 {{ enum('CanonId', canon_places, True) }}
 {{ enum('WarpId', warps.values()|list) }}
 
-pub fn get_area(spot: &SpotId) -> AreaId {
+pub fn get_area(spot: SpotId) -> AreaId {
     match spot {
         SpotId::None => panic!("Spot not valid"),
 %% for a in gl.areas()
         SpotId::{{ a.spots|map(attribute='id')|join(' | SpotId::') }} => AreaId::{{ a.id }},
+%% endfor
+    }
+}
+pub fn get_region(spot: SpotId) -> RegionId {
+    match spot {
+        SpotId::None => panic!("Spot not valid"),
+%% for r in regions
+%% for a in r.areas
+        SpotId::{{ a.spots|map(attribute='id')|join(' | SpotId::') }} => RegionId::{{ r.id }},
+%% endfor
 %% endfor
     }
 }
