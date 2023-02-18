@@ -388,8 +388,8 @@ impl context::Ctx for Context {
             .iter()
             .all(|&x| x == Status::Visited)
     }
-    fn local_travel_time(&self, start: SpotId, dest: SpotId) -> i32 {
-        movements::local_travel_time(self, start, dest)
+    fn local_travel_time(&self, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, self.position, dest)
     }
 }
 

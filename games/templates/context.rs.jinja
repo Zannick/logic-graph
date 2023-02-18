@@ -123,8 +123,8 @@ impl context::Ctx for Context {
     }
 %% endfor
 
-    fn local_travel_time(&self, start: SpotId, dest: SpotId) -> i32 {
-        movements::local_travel_time(self, start, dest)
+    fn local_travel_time(&self, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, self.position, dest)
     }
 }
 

@@ -30,7 +30,6 @@ pub trait Ctx: Clone + Eq + Debug {
 
     fn local_travel_time(
         &self,
-        start: <<Self::World as World>::Exit as Exit>::SpotId,
         dest: <<Self::World as World>::Exit as Exit>::SpotId,
     ) -> i32;
 }
