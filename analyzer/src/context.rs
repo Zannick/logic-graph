@@ -1,6 +1,6 @@
 use crate::world::*;
 use sort_by_derive::SortBy;
-use std::fmt::Debug;
+use std::fmt::{self, format, Debug, Display};
 
 pub trait Ctx: Clone + Eq + Debug {
     type World: World;
@@ -36,11 +36,29 @@ pub enum History<T>
 where
     T: Ctx,
 {
-    Warp(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
-    Get(<<<T as Ctx>::World as World>::Location as Location>::LocId),
+    Warp(<<<T as Ctx>::World as World>::Warp as Warp>::WarpId),
+    Get(
+        <T as Ctx>::ItemId,
+        <<<T as Ctx>::World as World>::Location as Location>::LocId,
+    ),
     Move(<<<T as Ctx>::World as World>::Exit as Exit>::ExitId),
     MoveLocal(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
     Activate(<<<T as Ctx>::World as World>::Action as Action>::ActionId),
+}
+
+impl<T> Display for History<T>
+where
+    T: Ctx,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            History::Warp(warp) => write!(f, "{}warp", warp),
+            History::Get(item, loc) => write!(f, "got {} from {}", item, loc),
+            History::Move(exit) => Display::fmt(&exit, f),
+            History::MoveLocal(spot) => write!(f, "move to {}", spot),
+            History::Activate(action) => write!(f, "do {}", action),
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
@@ -88,5 +106,20 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn get_mut(&mut self) -> &mut T {
         &mut self.ctx
+    }
+
+    pub fn info(&self) -> String {
+        format(format_args!(
+            "At {} after {}ms\n{} steps, last={}\nmode={:?}",
+            self.ctx.position(),
+            self.elapsed,
+            self.history.len(),
+            if let Some(val) = self.history.last() {
+                val.to_string()
+            } else {
+                String::from("None")
+            },
+            self.lastmode
+        ))
     }
 }

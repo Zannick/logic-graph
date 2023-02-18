@@ -1,5 +1,5 @@
 use crate::context::Ctx;
-use std::fmt::Debug;
+use std::fmt::{Debug, Display};
 use std::hash::Hash;
 use std::option::Option;
 
@@ -18,7 +18,7 @@ pub trait Accessible {
     fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
-pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd {}
+pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + Display {}
 
 pub trait Location: Accessible {
     type LocId: Id;

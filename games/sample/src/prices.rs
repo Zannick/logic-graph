@@ -2,6 +2,8 @@
 //!
 //! Context (game state).
 
+use std::fmt;
+
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd)]
 pub enum Currency {
     #[default]
@@ -10,3 +12,12 @@ pub enum Currency {
 }
 
 impl analyzer::world::Id for Currency {}
+
+impl fmt::Display for Currency {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Free => write!(f, "Free"),
+            Self::Rupees(i) => write!(f, "{}:{}", "Rupees", i),
+        }
+    }
+}
