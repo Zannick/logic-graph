@@ -15,8 +15,11 @@ BUILTINS = {
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
+nested = re.compile(r'[({\[:]')
 def construct_id(*args: list[str]) -> str:
-    return '__'.join(disallowed_chars.sub('', a.replace(' ', '_')) for a in args)
+    return '__'.join(disallowed_chars.sub('', s.replace(' ', '_'))
+                     for a in args
+                     for s in nested.split(a))
 
 def n1(tuples):
     for a, *b in tuples:

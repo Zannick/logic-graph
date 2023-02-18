@@ -95,4 +95,6 @@ pub trait World {
         item: &<<Self::Location as Accessible>::Context as Ctx>::ItemId,
         ctx: &mut <Self::Location as Accessible>::Context,
     );
+
+    fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
 }
