@@ -20,7 +20,8 @@ pub fn expand<W, T, E, Wp>(
             if local < 0 {
                 panic!(
                     "Could not travel within area: start={:?} dest={:?}",
-                    ctx.get().position(), spot
+                    ctx.get().position(),
+                    spot
                 );
             }
             // We're copying the whole context on every step, which is probably
@@ -50,16 +51,14 @@ pub fn expand<W, T, E, Wp>(
             let mut newctx = ctx.clone();
             newctx.get_mut().set_position(warp.dest(ctx.get()));
             newctx.history.push(History::Warp(warp.dest(ctx.get())));
+            newctx.elapse(warp.time());
             spot_heap.push(Reverse(newctx));
         }
     }
 }
 
 // At some point I should add counting of attempts
-pub fn access<W, T, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-) -> HashMap<E::SpotId, ContextWrapper<T>>
+pub fn access<W, T, E>(world: &W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -78,7 +77,6 @@ where
         let pos = spot_found.get().position();
         if !dist_map.contains_key(&pos) {
             dist_map.insert(pos, spot_found);
-            // We always have to update ctx.position
             expand(world, &dist_map[&pos], &dist_map, &mut spot_heap);
         }
     }

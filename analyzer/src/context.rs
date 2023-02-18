@@ -28,10 +28,7 @@ pub trait Ctx: Clone + Eq + Debug {
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
     fn all_region_checks(&self, id: Self::RegionId) -> bool;
 
-    fn local_travel_time(
-        &self,
-        dest: <<Self::World as World>::Exit as Exit>::SpotId,
-    ) -> i32;
+    fn local_travel_time(&self, dest: <<Self::World as World>::Exit as Exit>::SpotId) -> i32;
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]

@@ -21,17 +21,16 @@ where
     let spot_map = access(world, ctx);
     println!("{:#?}", &spot_map);
     //let new_spots = vec![];
-    for (spot_id, spot_data) in spot_map {
+    for (spot_id, mut spot_data) in spot_map {
         // 1. Spot must have accessible locations with visited Status None
-        if !world
+        if world
             .get_spot_locations(spot_id)
             .iter()
             .any(|loc| spot_data.get().todo(loc.id()) && loc.can_access(spot_data.get()))
         {
-            continue;
+            spot_data.lastmode = Mode::Explore;
+            heap.push(Reverse(spot_data));
         }
-        // 2. Add dist and path to the current ctx and add to the heap
-        //newctx.set
     }
 }
 
@@ -50,8 +49,12 @@ where
         let ctx = heap.pop().unwrap().0;
         match ctx.lastmode {
             Mode::None => {
-                let res = explore(world, ctx, &mut heap);
-            }
+                explore(world, ctx, &mut heap);
+            },
+            Mode::Explore => {
+                // TODO: better debug output for ContextWrapper
+                //println!("{:#?}", ctx);
+            },
             _ => (),
         }
     }
