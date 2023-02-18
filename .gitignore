@@ -5,7 +5,6 @@ __pycache__/
 
 .*.sw*
 *.o
-bin/
 generated/
 target/
 *.interp
