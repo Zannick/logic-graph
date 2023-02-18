@@ -334,7 +334,9 @@ impl context::Ctx for Context {
     fn set_position(&mut self, pos: SpotId) {
         match get_area(pos) {
             AreaId::Deku_Tree__Compass_Room => {
-                self.deku_tree__compass_room__ctx__torch = false;
+                if get_area(self.position) != AreaId::Deku_Tree__Compass_Room {
+                    self.deku_tree__compass_room__ctx__torch = false;
+                }
             }
             _ => (),
         }

@@ -81,9 +81,11 @@ impl context::Ctx for Context {
         match get_{{ pltype|lower }}(pos) {
 %% for r, ctxs in context_enter_rules[pltype|lower].items()
             {{ pltype }}Id::{{ r }} => {
+                if get_{{ pltype|lower }}(self.position) != {{ pltype }}Id::{{ r }} {
 %% for c, val in ctxs.items()
-                self.{{ c }} = {{ val }};
+                    self.{{ c }} = {{ val }};
 %% endfor
+                }
             },
 %% endfor
             _ => (),
