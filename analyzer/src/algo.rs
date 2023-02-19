@@ -14,7 +14,7 @@ pub fn explore<W, T, L, E>(
 ) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
     let spot_map = access(world, ctx);
@@ -22,18 +22,10 @@ pub fn explore<W, T, L, E>(
     //println!("{:#?}", &spot_map);
     for (spot_id, mut spot_data) in spot_map {
         // Spot must have accessible locations with visited Status None
-        if world
-            .get_spot_locations(spot_id)
-            .iter()
-            .any(|loc| spot_data.get().todo(loc.id()) && loc.can_access(spot_data.get()))
-        {
+        if spot_has_locations(world, spot_data.get(), spot_id) {
             spot_data.lastmode = Mode::Explore;
             tmp_heap.push(Reverse(spot_data));
-        } else if world
-            .get_spot_actions(spot_id)
-            .iter()
-            .any(|act| act.can_access(spot_data.get()))
-        {
+        } else if spot_has_actions(world, spot_data.get(), spot_id) {
             let mut actdata = spot_data.clone();
             actdata.elapse(1000);
             tmp_heap.push(Reverse(actdata));

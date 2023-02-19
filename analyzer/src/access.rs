@@ -4,6 +4,42 @@ use std::cmp::Reverse;
 use std::collections::VecDeque;
 use std::collections::{BinaryHeap, HashMap};
 
+pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    world
+        .get_spot_locations(spot)
+        .iter()
+        .any(|loc| ctx.todo(loc.id()) && loc.can_access(ctx))
+}
+
+pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    world
+        .get_spot_actions(spot)
+        .iter()
+        .any(|act| act.can_access(ctx))
+}
+
+pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    spot_has_locations(world, ctx, spot) || spot_has_actions(world, ctx, spot)
+}
+
 pub fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
@@ -49,7 +85,11 @@ pub fn expand<W, T, E, Wp>(
 
     for warp in world.get_warps() {
         if !dist_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
-            insert(warp.dest(ctx.get()), warp.time(), History::Warp(warp.id()));
+            insert(
+                warp.dest(ctx.get()),
+                warp.time(),
+                History::Warp(warp.id(), warp.dest(ctx.get())),
+            );
         }
     }
 }
@@ -119,6 +159,7 @@ where
         }
     }
 
+    // TODO: sort by distance
     dist_map
 }
 
@@ -148,6 +189,35 @@ where
     spot_map
 }
 
+pub fn visitable_locations<'a, W, T, L, E>(
+    world: &'a W,
+    ctx: &T,
+) -> (Vec<&'a L>, Option<(<L as Location>::LocId, E::ExitId)>)
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    let mut exit = None;
+    let locs: Vec<&L> = world
+        .get_spot_locations(ctx.position())
+        .iter()
+        .filter(|loc| {
+            if !ctx.todo(loc.id()) || !loc.can_access(ctx) {
+                return false;
+            } else if exit == None {
+                if let Some(e) = loc.exit_id() {
+                    exit = Some((loc.id(), *e));
+                    return false;
+                }
+            }
+            true
+        })
+        .collect();
+    (locs, exit)
+}
+
 pub fn visit_fanout<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
@@ -159,29 +229,13 @@ where
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    let mut exit = None;
     let mut ctx_list = vec![ctx];
     for act in world.get_spot_actions(ctx_list[0].get().position()) {
         if act.can_access(ctx_list[0].get()) {
-            act.perform(ctx_list[0].get_mut());
+            ctx_list[0].activate(act);
         }
     }
-
-    let locs: Vec<&L> = world
-        .get_spot_locations(ctx_list[0].get().position())
-        .iter()
-        .filter(|loc| {
-            if !ctx_list[0].get().todo(loc.id()) || !loc.can_access(ctx_list[0].get()) {
-                return false;
-            } else if exit == None {
-                if let Some(e) = loc.exit_id() {
-                    exit = Some((loc.id(), *e));
-                    return false;
-                }
-            }
-            true
-        })
-        .collect();
+    let (locs, exit) = visitable_locations(world, ctx_list[0].get());
 
     for loc in locs {
         let last_ctxs = ctx_list;
@@ -197,10 +251,7 @@ where
                 }
             }
             // Get the item and mark the location visited.
-            ctx.visit(world, loc.id());
-            ctx.get_mut().collect(loc.item());
-            ctx.elapse(loc.time());
-            ctx.history.push(History::Get(loc.item(), loc.id()));
+            ctx.visit(world, loc);
             ctx_list.push(ctx);
         }
     }
@@ -219,14 +270,8 @@ where
                     ctx_list.push(newctx);
                 }
             }
-            // Get the item and move along the exit, recording both.
-            ctx.visit(world, l);
-            ctx.get_mut().collect(loc.item());
-            ctx.elapse(loc.time());
-            ctx.get_mut().set_position(exit.dest());
-            ctx.elapse(exit.time());
-            ctx.history.push(History::Move(e));
-            ctx.history.push(History::Get(loc.item(), l));
+            // Get the item and move along the exit.
+            ctx.visit_exit(world, loc, exit);
             ctx_list.push(ctx);
         }
     }

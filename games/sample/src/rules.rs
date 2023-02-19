@@ -79,9 +79,9 @@ pub fn access_deku_tree__compass_room__entry__floor_3_(ctx: &Context) -> bool {
     // ^_torch
     ctx.deku_tree__compass_room__ctx__torch
 }
-pub fn access_is_child_and_sticks(ctx: &Context) -> bool {
-    // $is_child and $Sticks
-    (helper__is_child!(ctx) && helper__Sticks!(ctx))
+pub fn access_deku_tree__compass_room__entry_light_torch_req(ctx: &Context) -> bool {
+    // $is_child and $Sticks and not ^_torch
+    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch)
 }
 pub fn access_is_adult_or_can_child_attack(ctx: &Context) -> bool {
     // $is_adult or $can_child_attack

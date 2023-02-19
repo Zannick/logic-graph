@@ -96,3 +96,13 @@ pub trait World {
 
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
 }
+
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum Move<E>
+where
+    E: Exit,
+{
+    Local(E::SpotId),
+    Exit(E::ExitId),
+}

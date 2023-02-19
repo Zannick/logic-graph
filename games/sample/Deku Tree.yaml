@@ -138,7 +138,7 @@ areas:
       coord: [2,0]
       actions:
         - name: Light Torch
-          req: $is_child and $Sticks
+          req: $is_child and $Sticks and not ^_torch
           do: ^_torch = True
       exits:
         - to: Floor 3 > Door

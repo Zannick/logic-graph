@@ -1171,7 +1171,7 @@ impl world::Accessible for Action {
     fn can_access(&self, ctx: &Context) -> bool {
         match self.id {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                rules::access_is_child_and_sticks(&ctx)
+                rules::access_deku_tree__compass_room__entry_light_torch_req(&ctx)
             }
         }
     }
