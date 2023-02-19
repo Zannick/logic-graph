@@ -18,6 +18,7 @@ pub fn explore<W, T, L, E>(
     E: Exit + Accessible<Context = T>,
 {
     let spot_map = access(world, ctx);
+    let mut tmp_heap = BinaryHeap::new();
     //println!("{:#?}", &spot_map);
     for (spot_id, mut spot_data) in spot_map {
         // Spot must have accessible locations with visited Status None
@@ -27,9 +28,21 @@ pub fn explore<W, T, L, E>(
             .any(|loc| spot_data.get().todo(loc.id()) && loc.can_access(spot_data.get()))
         {
             spot_data.lastmode = Mode::Explore;
-            heap.push(Reverse(spot_data));
+            tmp_heap.push(Reverse(spot_data));
+        } else if world
+            .get_spot_actions(spot_id)
+            .iter()
+            .any(|act| act.can_access(spot_data.get()))
+        {
+            let mut actdata = spot_data.clone();
+            actdata.elapse(1000);
+            tmp_heap.push(Reverse(actdata));
+        }
+        if tmp_heap.len() > 3 {
+            break;
         }
     }
+    heap.append(&mut tmp_heap);
 }
 
 pub fn visit_locations<W, T, L, E>(
@@ -42,66 +55,7 @@ pub fn visit_locations<W, T, L, E>(
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    let mut exit = None;
-    let locs: Vec<&L> = world
-        .get_spot_locations(ctx.get().position())
-        .iter()
-        .filter(|loc| {
-            if !ctx.get().todo(loc.id()) || !loc.can_access(ctx.get()) {
-                return false;
-            } else if exit == None {
-                if let Some(e) = loc.exit_id() {
-                    exit = Some((loc.id(), *e));
-                    return false;
-                }
-            }
-            true
-        })
-        .collect();
-
-    let mut ctx_list = vec![ctx];
-    for loc in locs {
-        let last_ctxs = ctx_list;
-        ctx_list = Vec::new();
-        ctx_list.reserve(last_ctxs.len() * 2);
-        for mut ctx in last_ctxs {
-            let mut newctx = ctx.clone();
-            newctx.get_mut().skip(loc.id());
-            // TODO: Check if this loc is required. If it is, we can't skip it.
-            ctx_list.push(newctx);
-            // Get the item and mark the location visited.
-            ctx.get_mut().visit(loc.id());
-            ctx.get_mut().collect(loc.item());
-            ctx.elapse(loc.time());
-            ctx.history.push(History::Get(loc.item(), loc.id()));
-            ctx_list.push(ctx);
-        }
-    }
-
-    if let Some((l, e)) = exit {
-        let exit = world.get_exit(e);
-        let loc = world.get_location(l);
-        let last_ctxs = ctx_list;
-        ctx_list = Vec::new();
-        ctx_list.reserve(last_ctxs.len() * 2);
-        for mut ctx in last_ctxs {
-            let mut newctx = ctx.clone();
-            newctx.get_mut().skip(l);
-            // TODO: Check if this loc is required. If it is, we can't skip it.
-            ctx_list.push(newctx);
-            // Get the item and move along the exit, recording both.
-            ctx.get_mut().visit(l);
-            ctx.get_mut().collect(loc.item());
-            ctx.elapse(loc.time());
-            ctx.get_mut().set_position(exit.dest());
-            ctx.elapse(exit.time());
-            ctx.history.push(History::Move(e));
-            ctx.history.push(History::Get(loc.item(), l));
-            ctx_list.push(ctx);
-        }
-    }
-
-    heap.extend(ctx_list.into_iter().map(|mut c| {
+    heap.extend(visit_fanout(world, ctx, false).into_iter().map(|mut c| {
         c.lastmode = Mode::Check;
         Reverse(c)
     }));
@@ -122,11 +76,33 @@ where
     let mut heap = BinaryHeap::new();
     let ctx = ContextWrapper::new(ctx);
     heap.push(Reverse(ctx));
+    let mut attempts = 0;
 
     while !heap.is_empty() {
         let ctx = heap.pop().unwrap().0;
+        if world.won(ctx.get()) {
+            println!(
+                "Found winning path after {} attempts, in estimated {}ms, with {} remaining (of which {} are > {})",
+                attempts,
+                ctx.elapsed(),  heap.len(),
+                heap.iter().filter(|c| c.0.elapsed() > ctx.elapsed()+10000).count(),
+                ctx.elapsed()+10000
+            );
+            println!("{:?}", ctx.history);
+
+            return;
+        }
+        attempts += 1;
+        if attempts % 10000 == 0 {
+            println!(
+                "Attempt {} (heap size {}): {}",
+                attempts,
+                heap.len(),
+                ctx.info()
+            );
+        }
         match ctx.lastmode {
-            Mode::None => {
+            Mode::None | Mode::Check => {
                 explore(world, ctx, &mut heap);
             }
             Mode::Explore => {
@@ -135,4 +111,5 @@ where
             _ => println!("{}", ctx.info()),
         }
     }
+    println!("Did not find a winner after {} attempts", attempts);
 }

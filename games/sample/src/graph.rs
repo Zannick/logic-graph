@@ -1292,21 +1292,32 @@ impl world::World for World {
         &self.warps[id]
     }
 
+    fn get_canon_locations(&self, loc_id: LocationId) -> Vec<LocationId> {
+        let loc = self.get_location(loc_id);
+        match world::Location::canon_id(loc) {
+            CanonId::None => vec![],
+            CanonId::Deku_Lobby_Web => vec![
+                LocationId::Deku_Tree__Lobby__Center__Web,
+                LocationId::Deku_Tree__Floor_3__Door__Break_Web,
+                LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web,
+            ],
+            CanonId::Deku_Basement_Web => vec![
+                LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
+                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web,
+            ],
+            CanonId::Defeat_Gohma => vec![
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma,
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
+            ],
+        }
+    }
+
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
     }
     fn get_warps(&self) -> &[Warp] {
         &self.warps.as_slice()
-    }
-
-    fn on_collect(&self, item_id: &Item, ctx: &mut Context) {
-        match item_id {
-            Item::Rupee_1 => rules::action_rupees__max__rupees__1_wallet_max(ctx),
-            Item::Rupees_5 => rules::action_rupees__max__rupees__5_wallet_max(ctx),
-            Item::Rupees_50 => rules::action_rupees__max__rupees__50_wallet_max(ctx),
-            _ => (),
-        }
     }
 
     fn won(&self, ctx: &Context) -> bool {

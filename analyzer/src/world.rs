@@ -80,6 +80,10 @@ pub trait World {
     fn get_exit(&self, ex_id: <Self::Exit as Exit>::ExitId) -> &Self::Exit;
     fn get_action(&self, act_id: <Self::Action as Action>::ActionId) -> &Self::Action;
     fn get_warp(&self, warp_id: <Self::Warp as Warp>::WarpId) -> &Self::Warp;
+    fn get_canon_locations(
+        &self,
+        loc_id: <Self::Location as Location>::LocId,
+    ) -> Vec<<Self::Location as Location>::LocId>;
 
     fn get_spot_locations(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Location];
     fn get_spot_exits(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Exit];
@@ -89,12 +93,6 @@ pub trait World {
         spot_id: <Self::Exit as Exit>::SpotId,
     ) -> &[<Self::Exit as Exit>::SpotId];
     fn get_warps(&self) -> &[Self::Warp];
-
-    fn on_collect(
-        &self,
-        item: &<<Self::Location as Accessible>::Context as Ctx>::ItemId,
-        ctx: &mut <Self::Location as Accessible>::Context,
-    );
 
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
 }

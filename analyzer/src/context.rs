@@ -29,6 +29,9 @@ pub trait Ctx: Clone + Eq + Debug {
     fn all_region_checks(&self, id: Self::RegionId) -> bool;
 
     fn local_travel_time(&self, dest: <<Self::World as World>::Exit as Exit>::SpotId) -> i32;
+
+    fn count_visits(&self) -> usize;
+    fn count_skips(&self) -> usize;
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -108,18 +111,27 @@ impl<T: Ctx> ContextWrapper<T> {
         &mut self.ctx
     }
 
+    pub fn visit(&mut self, world: &T::World, loc_id: <<T::World as World>::Location as Location>::LocId) {
+        for canon_loc_id in world.get_canon_locations(loc_id) {
+            self.ctx.skip(canon_loc_id);
+        }
+        self.ctx.visit(loc_id);
+    }
+
     pub fn info(&self) -> String {
         format(format_args!(
-            "At {} after {}ms\n{} steps, last={}\nmode={:?}",
+            "At {} after {}ms\n{} steps, visited={}, skipped={}\nmode={:?} last={}",
             self.ctx.position(),
             self.elapsed,
             self.history.len(),
+            self.get().count_visits(),
+            self.get().count_skips(),
+            self.lastmode,
             if let Some(val) = self.history.last() {
                 val.to_string()
             } else {
                 String::from("None")
             },
-            self.lastmode
         ))
     }
 }

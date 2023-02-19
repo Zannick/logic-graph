@@ -4,8 +4,7 @@
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![allow(unused_imports)]
-#![allow(unused_variables)]
+#![allow(unused)]
 
 use crate::context::Context;
 use crate::graph::SpotId;

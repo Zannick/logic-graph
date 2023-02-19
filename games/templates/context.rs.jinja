@@ -6,6 +6,7 @@ use crate::graph::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
+use crate::rules;
 use analyzer::context;
 use enum_map::EnumMap;
 
@@ -65,8 +66,15 @@ impl context::Ctx for Context {
 %% for item, ct in gl.item_max_counts().items()|sort
             Item::{{ item }} => {
                 self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
-%# there's special code for collect for specific items that may go here
+%% if item in collect
+                rules::action_{{ collect[item].action_id }}(self);
+%% endif
             },
+%% endfor
+%% for item, info in collect.items()
+%% if item not in gl.item_max_counts()
+            Item::{{ item }} => rules::action_{{ info.action_id }}(self),
+%% endif
 %% endfor
             _ => (),
         }
@@ -128,6 +136,13 @@ impl context::Ctx for Context {
 
     fn local_travel_time(&self, dest: SpotId) -> i32 {
         movements::local_travel_time(self, self.position, dest)
+    }
+
+    fn count_visits(&self) -> usize {
+        self.status.values().filter(|&x| *x == Status::Visited).count()
+    }
+    fn count_skips(&self) -> usize {
+        self.status.values().filter(|&x| *x == Status::Skipped).count()
     }
 }
 

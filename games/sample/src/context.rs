@@ -8,6 +8,7 @@ use crate::graph::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
+use crate::rules;
 use analyzer::context;
 use enum_map::EnumMap;
 
@@ -324,6 +325,9 @@ impl context::Ctx for Context {
             Item::Zora_Tunic => {
                 self.zora_tunic = true;
             }
+            Item::Rupee_1 => rules::action_rupees__max__rupees__1_wallet_max(self),
+            Item::Rupees_5 => rules::action_rupees__max__rupees__5_wallet_max(self),
+            Item::Rupees_50 => rules::action_rupees__max__rupees__50_wallet_max(self),
             _ => (),
         }
     }
@@ -392,6 +396,19 @@ impl context::Ctx for Context {
     }
     fn local_travel_time(&self, dest: SpotId) -> i32 {
         movements::local_travel_time(self, self.position, dest)
+    }
+
+    fn count_visits(&self) -> usize {
+        self.status
+            .values()
+            .filter(|&x| *x == Status::Visited)
+            .count()
+    }
+    fn count_skips(&self) -> usize {
+        self.status
+            .values()
+            .filter(|&x| *x == Status::Skipped)
+            .count()
     }
 }
 
