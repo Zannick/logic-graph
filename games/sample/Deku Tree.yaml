@@ -77,6 +77,8 @@ areas:
           req: $has_shield
           tags: [event]
           time: 2
+      exits:
+        - to: Floor 2 > Slingshot Door
     - name: Rear
       coord: [0,2]
       exits:

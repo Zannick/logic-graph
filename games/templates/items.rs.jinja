@@ -6,3 +6,13 @@ use std::fmt;
 
 %% from 'enum.rs.jinja' import enum
 {{ enum('Item', all_items, True) }}
+
+pub fn unused_item(id: Item) -> bool {
+    match id {
+        Item::None => true,
+%% if unused_items
+        Item::{{ unused_items|join(' | Item::') }} => true,
+%% endif
+        _ => false,
+    }
+}

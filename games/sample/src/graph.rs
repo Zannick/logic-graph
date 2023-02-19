@@ -6,7 +6,7 @@
 #![allow(non_snake_case)]
 
 use crate::context::*;
-use crate::items::Item;
+use crate::items::*;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
@@ -478,6 +478,7 @@ pub enum ExitId {
     Deku_Tree__Lobby__Center__ex__Basement_1__Center_1,
     Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1,
     Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1,
+    Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1,
     Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1,
     Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1,
     Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1,
@@ -631,6 +632,11 @@ impl fmt::Display for ExitId {
             ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => {
                 write!(f, "{}", "Deku Tree > Lobby > Vines ==> Floor 2 > Lower (1)")
             }
+            ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => write!(
+                f,
+                "{}",
+                "Deku Tree > Scrub Room > Entry ==> Floor 2 > Slingshot Door (1)"
+            ),
             ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => write!(
                 f,
                 "{}",
@@ -1066,6 +1072,7 @@ impl world::Accessible for Exit {
                 ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1 => true,
                 ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1 => true,
+                ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => true,
                 ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => {
                     rules::access_deku_slingshot_scrub(&ctx)
                 }
@@ -1318,6 +1325,18 @@ impl world::World for World {
     }
     fn get_warps(&self) -> &[Warp] {
         &self.warps.as_slice()
+    }
+
+    fn get_all_locations(&self) -> &[Location] {
+        &self.locations.as_slice()
+    }
+
+    fn skip_unused_items(&self, ctx: &mut Context) {
+        for (id, loc) in &self.locations {
+            if unused_item(world::Location::item(loc)) {
+                ctx.skip(id);
+            }
+        }
     }
 
     fn won(&self, ctx: &Context) -> bool {
@@ -1871,6 +1890,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => Exit {
+            id: ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1,
+            time: 1000,
+            dest: SpotId::Deku_Tree__Floor_2__Slingshot_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => Exit {
             id: ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1,
             time: 1000,
@@ -2262,7 +2288,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: LocationId::Deku_Tree__Scrub_Room__Entry__Scrub.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1.into_usize(),
+                end: ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

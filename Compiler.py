@@ -620,6 +620,11 @@ class GameLogic(object):
 
 
     @cached_property
+    def unused_items(self):
+        return self.all_items - self.item_max_counts().keys() - self.collect.keys()
+
+
+    @cached_property
     def context_values(self):
         def _check_types(v1, v2, ctx, *names):
             t1 = typenameof(v1)
@@ -756,7 +761,7 @@ class GameLogic(object):
             'str_to_rusttype': str_to_rusttype,
         })
         # Access cached_properties to ensure they're in the template vars
-        self.all_items
+        self.unused_items
         self.context_types
         self.context_values
         self.price_types

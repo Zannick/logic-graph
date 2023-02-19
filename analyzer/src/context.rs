@@ -20,6 +20,7 @@ pub trait Ctx: Clone + Eq + Debug {
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn skip(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
+    fn reset(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn todo(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
     fn visited(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
     fn skipped(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
@@ -39,8 +40,10 @@ pub enum History<T>
 where
     T: Ctx,
 {
-    Warp(<<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
-        <<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
+    Warp(
+        <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
+        <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    ),
     Get(
         <T as Ctx>::ItemId,
         <<<T as Ctx>::World as World>::Location as Location>::LocId,
