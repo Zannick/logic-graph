@@ -20,7 +20,7 @@ fn main() {
         let fresh = context::Context::new();
         let m = minimize_playthrough(&world, &fresh, &ctx);
 
-        println!("Minimized to {}ms:", m.elapsed());
+        println!("Minimized to {}ms", m.elapsed());
         //println!("{}", m.history_str());
     } else {
         println!("Did not find a solution");

@@ -325,9 +325,9 @@ impl context::Ctx for Context {
             Item::Zora_Tunic => {
                 self.zora_tunic = true;
             }
-            Item::Rupee_1 => rules::action_rupees__max__rupees__1_wallet_max(self),
-            Item::Rupees_5 => rules::action_rupees__max__rupees__5_wallet_max(self),
-            Item::Rupees_50 => rules::action_rupees__max__rupees__50_wallet_max(self),
+            Item::Rupee_1 => rules::action_rupees__min__rupees__1_wallet_max(self),
+            Item::Rupees_5 => rules::action_rupees__min__rupees__5_wallet_max(self),
+            Item::Rupees_50 => rules::action_rupees__min__rupees__50_wallet_max(self),
             _ => (),
         }
     }

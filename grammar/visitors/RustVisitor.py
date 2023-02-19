@@ -120,6 +120,9 @@ class RustVisitor(RulesVisitor):
         # TODO: constants
         return self.visitChildren(ctx)
 
+    def visitMathNum(self, ctx):
+        return f'{self.visit(ctx.baseNum())} {ctx.BINOP()} {self.visit(ctx.num())}'
+
     def visitPerItemInt(self, ctx):
         cases = list(map(str, ctx.INT())) + ["_"]
         results = [str(self.visit(n)) for n in ctx.num()]

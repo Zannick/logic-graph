@@ -174,17 +174,17 @@ pub fn access_can_play__minuet_of_forest(ctx: &Context) -> bool {
     // $can_play(Minuet_of_Forest)
     helper__can_play!(ctx, Item::Minuet_of_Forest)
 }
-pub fn action_rupees__max__rupees__1_wallet_max(ctx: &mut Context) {
-    // ^rupees = $max(^rupees + 1, $wallet_max)
-    ctx.rupees = std::cmp::max(1, helper__wallet_max!(ctx));
+pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
+    // ^rupees = $min(^rupees + 1, $wallet_max)
+    ctx.rupees = std::cmp::min(ctx.rupees + 1, helper__wallet_max!(ctx));
 }
-pub fn action_rupees__max__rupees__5_wallet_max(ctx: &mut Context) {
-    // ^rupees = $max(^rupees + 5, $wallet_max)
-    ctx.rupees = std::cmp::max(5, helper__wallet_max!(ctx));
+pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context) {
+    // ^rupees = $min(^rupees + 5, $wallet_max)
+    ctx.rupees = std::cmp::min(ctx.rupees + 5, helper__wallet_max!(ctx));
 }
-pub fn action_rupees__max__rupees__50_wallet_max(ctx: &mut Context) {
-    // ^rupees = $max(^rupees + 50, $wallet_max)
-    ctx.rupees = std::cmp::max(50, helper__wallet_max!(ctx));
+pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context) {
+    // ^rupees = $min(^rupees + 50, $wallet_max)
+    ctx.rupees = std::cmp::min(ctx.rupees + 50, helper__wallet_max!(ctx));
 }
 pub fn action_deku_tree__compass_room__entry_light_torch__do(ctx: &mut Context) {
     // ^_torch = True

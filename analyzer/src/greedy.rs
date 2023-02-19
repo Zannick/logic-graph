@@ -19,7 +19,7 @@ where
     if let Some((_, ctx)) = spot_map
         .into_iter()
         .filter(|(s, ctx)| spot_has_locations_or_actions(world, ctx.get(), *s))
-        .min_by_key(|(_, c)| c.elapsed())
+        .min_by_key(|(s, c)| (c.elapsed(), *s))
     {
         Some(ctx)
     } else {
