@@ -143,3 +143,17 @@ where
     let ctx = ContextWrapper::new(ctx);
     greedy_search(world, &ctx).expect("Couldn't beat game after minimizing!")
 }
+
+pub fn minimal_greedy_playthrough<W, T, L, E>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+) -> ContextWrapper<T>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    let wonctx = greedy_search(world, ctx).expect("Didn't win with greedy search");
+    minimize_playthrough(world, ctx.get(), &wonctx)
+}
