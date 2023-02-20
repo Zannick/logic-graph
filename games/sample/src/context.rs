@@ -11,6 +11,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
 use enum_map::EnumMap;
+use std::borrow::Cow;
 
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub enum Status {
@@ -21,7 +22,19 @@ pub enum Status {
 }
 
 #[derive(Clone, Debug, Default, Eq, PartialEq)]
-pub struct Context {
+pub struct StateContext {
+    pub position: SpotId,
+    pub save: SpotId,
+    pub child: bool,
+    pub tod: &'static str,
+    pub rupees: i32,
+    pub deku_tree__compass_room__ctx__torch: bool,
+}
+
+#[derive(Clone, Debug, Default, Eq, PartialEq)]
+pub struct Context<'a> {
+    pub state: Cow<'a, StateContext>,
+
     // context vars
     pub position: SpotId,
     pub save: SpotId,
@@ -82,7 +95,7 @@ pub struct Context {
     pub status: EnumMap<LocationId, Status>,
 }
 
-impl context::Ctx for Context {
+impl<'a> context::Ctx for Context<'a> {
     type World = World;
     type ItemId = Item;
     type AreaId = AreaId;
@@ -416,9 +429,17 @@ impl context::Ctx for Context {
     }
 }
 
-impl Context {
-    pub fn new() -> Context {
-        Context {
+impl<'a> Context<'a> {
+    pub fn new() -> Self {
+        Self {
+            state: Cow::Owned(StateContext {
+                position: SpotId::KF__Links_House__Start_Point,
+                save: SpotId::KF__Links_House__Start_Point,
+                child: true,
+                tod: "day",
+                rupees: 0,
+                deku_tree__compass_room__ctx__torch: false,
+            }),
             position: SpotId::KF__Links_House__Start_Point,
             save: SpotId::KF__Links_House__Start_Point,
             child: true,

@@ -4,12 +4,12 @@ use std::cmp::Reverse;
 use std::collections::VecDeque;
 use std::collections::{BinaryHeap, HashMap};
 
-pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+pub fn spot_has_locations<'a, W, T, L, E>(world: &'a W, ctx: &T, spot: E::SpotId) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context<'a> = T>,
+    E: Exit<Context<'a> = T>,
 {
     world
         .get_spot_locations(spot)
@@ -17,12 +17,12 @@ where
         .any(|loc| ctx.todo(loc.id()) && loc.can_access(ctx))
 }
 
-pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+pub fn spot_has_actions<'a, W, T, L, E>(world: &'a W, ctx: &T, spot: E::SpotId) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context<'a> = T>,
+    E: Exit<Context<'a> = T>,
 {
     world
         .get_spot_actions(spot)
@@ -30,26 +30,26 @@ where
         .any(|act| act.can_access(ctx))
 }
 
-pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+pub fn spot_has_locations_or_actions<'a, W, T, L, E>(world: &'a W, ctx: &T, spot: E::SpotId) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context<'a> = T>,
+    E: Exit + Accessible<Context<'a> = T>,
 {
     spot_has_locations(world, ctx, spot) || spot_has_actions(world, ctx, spot)
 }
 
-pub fn expand<W, T, E, Wp>(
-    world: &W,
+pub fn expand<'a, W, T, E, Wp>(
+    world: &'a W,
     ctx: &ContextWrapper<T>,
     dist_map: &HashMap<E::SpotId, ContextWrapper<T>>,
     spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context<'a> = T>,
+    Wp: Warp<Context<'a> = T, SpotId = E::SpotId>,
 {
     let mut insert = |spot, time, hist| {
         // We're copying the whole context on every step, which is probably
@@ -96,7 +96,7 @@ pub fn expand<W, T, E, Wp>(
 
 /// Variant for expand which doesn't track history or time, ideal for beatability checks
 // (Is it possible to combine with the other without making it slower?)
-pub fn expand_simple<W, T, E, Wp>(
+pub fn expand_simple<'a, W, T, E, Wp>(
     world: &W,
     ctx: &T,
     spot_map: &HashMap<E::SpotId, T>,
@@ -104,8 +104,8 @@ pub fn expand_simple<W, T, E, Wp>(
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context<'a> = T>,
+    Wp: Warp<Context<'a> = T, SpotId = E::SpotId>,
 {
     let mut append = |spot| {
         // We're copying the whole context on every step, which is probably
@@ -136,12 +136,12 @@ pub fn expand_simple<W, T, E, Wp>(
 }
 
 // At some point I should add counting of attempts
-pub fn access<W, T, E>(world: &W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
+pub fn access<'a, W, T, E>(world: &'a W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context<'a> = T>,
+    W::Warp: Warp<Context<'a> = T, SpotId = E::SpotId>,
 {
     // return: spotid -> ctxwrapper
     let mut dist_map = HashMap::new();
@@ -164,12 +164,12 @@ where
 }
 
 /// Variant of `access` that does not write hist or time, ideal for beatability checks
-pub fn access_simple<W, T, E>(world: &W, ctx: &T) -> HashMap<<E as Exit>::SpotId, T>
+pub fn access_simple<'a, W, T, E>(world: &W, ctx: &T) -> HashMap<<E as Exit>::SpotId, T>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context<'a> = T>,
+    W::Warp: Warp<Context<'a> = T, SpotId = E::SpotId>,
 {
     let pos = ctx.position();
     let mut spot_map = HashMap::new();
@@ -196,8 +196,8 @@ pub fn visitable_locations<'a, W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context<'a> = T>,
+    E: Exit + Accessible<Context<'a> = T>,
 {
     let mut exit = None;
     let locs: Vec<&L> = world
@@ -226,8 +226,8 @@ pub fn visit_fanout<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId> + for<'a> Accessible<Context<'a> = T>,
+    E: Exit + for<'a> Accessible<Context<'a> = T>,
 {
     let mut ctx_list = vec![ctx];
     for act in world.get_spot_actions(ctx_list[0].get().position()) {
@@ -278,12 +278,12 @@ where
     ctx_list
 }
 
-pub fn visit_simple<W, T, L, E>(world: &W, ctx: &mut T) -> bool
+pub fn visit_simple<'a, W, T, L, E>(world: &'a W, ctx: &mut T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context<'a> = T> + 'a,
+    E: Exit<Context<'a> = T>,
 {
     let mut ret = false;
     for (spot_id, spot_ctx) in access_simple(world, &ctx) {
@@ -307,12 +307,12 @@ where
     ret
 }
 
-pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn can_win<'a, W, T, L, E>(world: &'a W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context<'a> = T> + 'a,
+    E: Exit<Context<'a> = T>,
 {
     let mut ctx = ctx.clone();
     let mut acts_only = 0;

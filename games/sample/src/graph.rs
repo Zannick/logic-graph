@@ -959,7 +959,7 @@ pub struct Location {
 }
 
 impl world::Accessible for Location {
-    type Context = Context;
+    type Context<'a> = Context<'a>;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(&ctx),
@@ -1049,7 +1049,7 @@ pub struct Exit {
 }
 
 impl world::Accessible for Exit {
-    type Context = Context;
+    type Context<'a> = Context<'a>;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
@@ -1174,7 +1174,7 @@ pub struct Action {
 }
 
 impl world::Accessible for Action {
-    type Context = Context;
+    type Context<'a> = Context<'a>;
     fn can_access(&self, ctx: &Context) -> bool {
         match self.id {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
@@ -1207,7 +1207,7 @@ pub struct Warp {
     time: i32,
 }
 impl world::Accessible for Warp {
-    type Context = Context;
+    type Context<'a> = Context<'a>;
     fn can_access(&self, ctx: &Context) -> bool {
         match self.id {
             WarpId::Save => true,
