@@ -15,7 +15,7 @@ areas:
         - name: Deku Baba Sticks
           item: Deku_Stick_Drop
           req: $is_adult or Kokiri_Sword or Boomerang
-        - name: Deku Baby Nuts
+        - name: Deku Baba Nuts
           item: Deku_Nut_Drop
           req: $is_adult or Slingshot or $Sticks or Kokiri_Sword # there's more usually
         - name: Web

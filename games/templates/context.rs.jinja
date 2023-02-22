@@ -167,7 +167,7 @@ impl context::Ctx for Context {
         if self.visits <= 0 {
             0
         } else {
-            self.visits * 1000 / (Self::World::NUM_LOCATIONS - self.skips)
+            self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
         }
     }
 }

@@ -286,8 +286,8 @@ pub enum LocationId {
     Deku_Tree__Compass_Room__Ledge__GS,
     Deku_Tree__Floor_2__Vines__Map_Chest,
     Deku_Tree__Floor_3__Door__Break_Web,
+    Deku_Tree__Lobby__Center__Deku_Baba_Nuts,
     Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
-    Deku_Tree__Lobby__Center__Deku_Baby_Nuts,
     Deku_Tree__Lobby__Center__Web,
     Deku_Tree__Scrub_Room__Entry__Scrub,
     Deku_Tree__Skull_Room__Entry__GS,
@@ -377,11 +377,11 @@ impl fmt::Display for LocationId {
             LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
                 write!(f, "{}", "Deku Tree > Floor 3 > Door Break Web")
             }
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                write!(f, "{}", "Deku Tree > Lobby > Center Deku Baba Nuts")
+            }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
                 write!(f, "{}", "Deku Tree > Lobby > Center Deku Baba Sticks")
-            }
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => {
-                write!(f, "{}", "Deku Tree > Lobby > Center Deku Baby Nuts")
             }
             LocationId::Deku_Tree__Lobby__Center__Web => {
                 write!(f, "{}", "Deku Tree > Lobby > Center Web")
@@ -963,7 +963,7 @@ impl world::Accessible for Location {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(&ctx),
-            LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => rules::access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(&ctx),
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => rules::access_is_adult_or_slingshot_or_sticks_or_kokiri_sword(&ctx),
             LocationId::Deku_Tree__Lobby__Center__Web => rules::access_false(&ctx),
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => true,
             LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => rules::access_has_shield(&ctx),
@@ -1427,8 +1427,8 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 1000,
             exit_id: None,
         },
-        LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts => Location {
-            id: LocationId::Deku_Tree__Lobby__Center__Deku_Baby_Nuts,
+        LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => Location {
+            id: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts,
             canonical: CanonId::None,
             item: Item::Deku_Nut_Drop,
             price: Currency::Free,
@@ -2198,7 +2198,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Deku_Tree__Lobby__Center => Spot {
             id: SpotId::Deku_Tree__Lobby__Center,
             locations: Range {
-                start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks.into_usize(),
+                start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts.into_usize(),
                 end: LocationId::Deku_Tree__Lobby__Center__Web.into_usize() + 1,
             },
             exits: Range {
@@ -3083,7 +3083,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::None => Range { start: 0, end: 0 },
         SpotId::Deku_Tree__Lobby__Entry => Range { start: 0, end: 0 },
         SpotId::Deku_Tree__Lobby__Center => Range {
-            start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks.into_usize(),
+            start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts.into_usize(),
             end: LocationId::Deku_Tree__Lobby__Center__Web.into_usize() + 1,
         },
         SpotId::Deku_Tree__Lobby__Vines => Range { start: 0, end: 0 },
@@ -3213,7 +3213,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
 pub fn area_locations(id: AreaId) -> Range<usize> {
     match id {
         AreaId::Deku_Tree__Lobby => Range {
-            start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks.into_usize(),
+            start: LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts.into_usize(),
             end: LocationId::Deku_Tree__Lobby__Center__Web.into_usize(),
         },
         AreaId::Deku_Tree__Floor_2 => Range {

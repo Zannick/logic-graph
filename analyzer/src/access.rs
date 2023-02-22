@@ -242,16 +242,19 @@ where
         ctx_list = Vec::new();
         ctx_list.reserve(last_ctxs.len() * 2);
         for mut ctx in last_ctxs {
-            if allow_skips {
-                let mut newctx = ctx.clone();
-                newctx.get_mut().skip(loc.id());
-                // TODO: Check if this loc is required. If it is, we can't skip it.
-                if can_win(world, newctx.get()) {
-                    ctx_list.push(newctx);
+            if ctx.get().todo(loc.id()) {
+                if allow_skips {
+                    let mut newctx = ctx.clone();
+                    newctx.get_mut().skip(loc.id());
+                    // TODO: Check if this loc is required. If it is, we can't skip it.
+                    if can_win(world, newctx.get()) {
+                        ctx_list.push(newctx);
+                    }
                 }
+
+                // Get the item and mark the location visited.
+                ctx.visit(world, loc);
             }
-            // Get the item and mark the location visited.
-            ctx.visit(world, loc);
             ctx_list.push(ctx);
         }
     }

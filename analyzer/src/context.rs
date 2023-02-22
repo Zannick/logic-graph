@@ -92,6 +92,7 @@ where
     ctx: T,
     #[sort_by]
     elapsed: i32,
+    penalty: i32,
     pub history: Box<Vec<History<T>>>,
     pub lastmode: Mode,
 }
@@ -101,6 +102,7 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed: 0,
+            penalty: 0,
             history: Box::new(vec![]),
             lastmode: Mode::None,
         }
@@ -112,6 +114,18 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn elapsed(&self) -> i32 {
         self.elapsed
+    }
+
+    pub fn penalize(&mut self, penalty: i32) {
+        self.penalty += penalty;
+    }
+
+    pub fn score(&self) -> i32 {
+        // We want to sort by elapsed time, low to high: (X - elapsed)
+        // with a bonus based on progress to prioritize states closer to the end:
+        //   + progress * progress [progress in range 0..100]
+        // penalty is added to states that
+        self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
     }
 
     pub fn get(&self) -> &T {
@@ -179,12 +193,14 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self) -> String {
         format(format_args!(
-            "At {} after {}ms\n{} steps, visited={}, skipped={}\nmode={:?} last={}",
+            "At {} after {}ms (score={})\n{} steps, visited={}, skipped={}, penalty={}, \nmode={:?} last={}",
             self.ctx.position(),
             self.elapsed,
+            self.score(),
             self.history.len(),
             self.get().count_visits(),
             self.get().count_skips(),
+            self.penalty,
             self.lastmode,
             if let Some(val) = self.history.last() {
                 val.to_string()

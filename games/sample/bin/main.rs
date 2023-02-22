@@ -15,15 +15,5 @@ fn main() {
     if !can_win(&world, &context) {
         panic!("Cannot win on default settings");
     }
-    let ctx = ContextWrapper::new(context);
-    if let Some(ctx) = greedy_search(&world, &ctx) {
-        println!("Found greedy solution of {}ms.", ctx.elapsed());
-        let fresh = context::Context::new();
-        let m = minimize_playthrough(&world, &fresh, &ctx);
-
-        println!("Minimized to {}ms", m.elapsed());
-        //println!("{}", m.history_str());
-    } else {
-        println!("Did not find a solution");
-    }
+    search(&world, context);
 }

@@ -1,8 +1,7 @@
-use std::collections::HashSet;
-
 use crate::access::*;
 use crate::context::*;
 use crate::world::*;
+use std::collections::HashSet;
 
 pub fn nearest_spot_with_stuff<W, T, E, L, Wp>(
     world: &W,
