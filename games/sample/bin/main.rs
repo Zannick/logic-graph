@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+#![allow(unused)]
 
 extern crate enum_map;
 
