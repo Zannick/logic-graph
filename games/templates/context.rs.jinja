@@ -9,7 +9,6 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
 use enum_map::EnumMap;
-use std::borrow::Cow;
 
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub enum Status {
@@ -19,15 +18,7 @@ pub enum Status {
 }
 
 #[derive(Clone, Debug, Default, Eq, PartialEq)]
-pub struct StateContext {
-%% for ctx, t in context_types.items()
-    pub {{ ctx }}: {{ t }},
-%% endfor
-}
-
-#[derive(Clone, Debug, Default, Eq, PartialEq)]
-pub struct Context<'a> {
-    pub state: Cow<'a, StateContext>,
+pub struct Context {
 %# TODO for perf: split into separate structs held in Cow, StateCtx, ItemCtx, SettingCtx, StatusCtx
     // context vars
 %% for ctx, t in context_types.items()
@@ -47,7 +38,7 @@ pub struct Context<'a> {
     pub status: EnumMap<LocationId, Status>,
 }
 
-impl<'a> context::Ctx for Context<'a> {
+impl context::Ctx for Context {
     type World = World;
     type ItemId = Item;
     type AreaId = AreaId;
@@ -133,7 +124,7 @@ impl<'a> context::Ctx for Context<'a> {
     fn visit(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::Visited; }
     fn skip(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::Skipped; }
     fn reset(&mut self, loc_id: LocationId) { self.status[loc_id] = Status::None; }
-
+    
     fn todo(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::None }
     fn visited(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::Visited }
     fn skipped(&self, loc_id: LocationId) -> bool { self.status[loc_id] == Status::Skipped }
@@ -157,14 +148,9 @@ impl<'a> context::Ctx for Context<'a> {
     }
 }
 
-impl<'a> Context<'a> {
-    pub fn new() -> Self {
-        Self {
-            state: Cow::Owned(StateContext {
-%% for k, v in context_values.items()
-                {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
-%% endfor
-            }),
+impl Context {
+    pub fn new() -> Context {
+        Context {
 %% for k, v in context_values.items()
             {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
 %% endfor

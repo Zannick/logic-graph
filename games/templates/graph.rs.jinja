@@ -58,7 +58,7 @@ pub struct Location {
 }
 
 impl world::Accessible for Location {
-    type Context<'a> = Context<'a>;
+    type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for loc in gl.locations()
@@ -93,7 +93,7 @@ pub struct Exit {
 }
 
 impl world::Accessible for Exit {
-    type Context<'a> = Context<'a>;
+    type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
 %% for ex in gl.exits()
@@ -123,7 +123,7 @@ pub struct Action {
 }
 
 impl world::Accessible for Action {
-    type Context<'a> = Context<'a>;
+    type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         match self.id {
 %% for act in gl.actions()
@@ -153,7 +153,7 @@ pub struct Warp {
     time: i32,
 }
 impl world::Accessible for Warp {
-    type Context<'a> = Context<'a>;
+    type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         match self.id {
 %% for w in warps.values()

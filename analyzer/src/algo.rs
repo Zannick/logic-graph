@@ -14,8 +14,8 @@ pub fn explore<W, T, L, E>(
 ) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + for<'a> Accessible<Context<'a> = T>,
-    E: Exit + for<'a> Accessible<Context<'a> = T>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     let spot_map = access(world, ctx);
     let mut tmp_heap = BinaryHeap::new();
@@ -44,8 +44,8 @@ pub fn visit_locations<W, T, L, E>(
 ) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + for<'a> Accessible<Context<'a> = T>,
-    E: Exit + for<'a> Accessible<Context<'a> = T>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     heap.extend(visit_fanout(world, ctx, false).into_iter().map(|mut c| {
         c.lastmode = Mode::Check;
@@ -57,8 +57,8 @@ pub fn do_the_thing<W, T, L, E>(world: &W, ctx: T)
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + for<'a> Accessible<Context<'a> = T>,
-    E: Exit + for<'a> Accessible<Context<'a> = T>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     // TODO: add 'time' property limit to heap wrapper to limit execution time
     // for benchmarking.

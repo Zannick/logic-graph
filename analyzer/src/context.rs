@@ -95,8 +95,8 @@ where
 }
 
 impl<T: Ctx> ContextWrapper<T> {
-    pub fn new(ctx: T) -> Self {
-        Self {
+    pub fn new(ctx: T) -> ContextWrapper<T> {
+        ContextWrapper {
             ctx,
             elapsed: 0,
             history: Box::new(vec![]),
@@ -120,11 +120,11 @@ impl<T: Ctx> ContextWrapper<T> {
         &mut self.ctx
     }
 
-    pub fn visit<'a, W, L>(&mut self, world: &W, loc: &'a L)
+    pub fn visit<W, L>(&mut self, world: &W, loc: &L)
     where
         W: World<Location = L>,
         T: Ctx<World = W>,
-        L: Location<Context<'a> = T>,
+        L: Location + Accessible<Context = T>,
     {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
@@ -135,23 +135,23 @@ impl<T: Ctx> ContextWrapper<T> {
         self.history.push(History::Get(loc.item(), loc.id()));
     }
 
-    pub fn exit<'a, W, E>(&mut self, exit: &'a E)
+    pub fn exit<W, E>(&mut self, exit: &E)
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
-        E: Exit<Context<'a> = T>,
+        E: Exit + Accessible<Context = T>,
     {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
         self.history.push(History::Move(exit.id()));
     }
 
-    pub fn visit_exit<'a, W, L, E>(&mut self, world: &W, loc: &'a L, exit: &'a E)
+    pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
     where
         W: World<Exit = E, Location = L>,
         T: Ctx<World = W>,
-        L: Location<Context<'a> = T>,
-        E: Exit<Context<'a> = T>,
+        L: Location + Accessible<Context = T>,
+        E: Exit + Accessible<Context = T>,
     {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
@@ -164,11 +164,11 @@ impl<T: Ctx> ContextWrapper<T> {
         self.history.push(History::MoveGet(loc.item(), exit.id()));
     }
 
-    pub fn activate<'a, W, A>(&mut self, action: &'a A)
+    pub fn activate<W, A>(&mut self, action: &A)
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
-        A: Action<Context<'a> = T>,
+        A: Action + Accessible<Context = T>,
     {
         action.perform(&mut self.ctx);
         self.elapse(action.time());

@@ -14,8 +14,8 @@ use std::option::Option;
 //       Accessible -> Context -> ItemId
 
 pub trait Accessible {
-    type Context<'a>: Ctx;
-    fn can_access(&self, ctx: &Self::Context<'_>) -> bool;
+    type Context: Ctx;
+    fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
 pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + Display {}
@@ -27,7 +27,7 @@ pub trait Location: Accessible {
     type Currency: Id;
 
     fn id(&self) -> Self::LocId;
-    fn item(&self) -> <Self::Context<'_> as Ctx>::ItemId;
+    fn item(&self) -> <Self::Context as Ctx>::ItemId;
     fn canon_id(&self) -> Self::CanonId;
     fn time(&self) -> i32;
     fn price(&self) -> &Self::Currency;
@@ -50,7 +50,7 @@ pub trait Action: Accessible {
     type ActionId: Id;
     fn id(&self) -> Self::ActionId;
     fn time(&self) -> i32;
-    fn perform(&self, ctx: &mut Self::Context<'_>);
+    fn perform(&self, ctx: &mut Self::Context);
 }
 
 pub trait Warp: Accessible {
@@ -58,21 +58,21 @@ pub trait Warp: Accessible {
     type SpotId: Id;
 
     fn id(&self) -> Self::WarpId;
-    fn dest(&self, ctx: &Self::Context<'_>) -> Self::SpotId;
+    fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
     fn connect(&mut self, dest: Self::SpotId);
     fn time(&self) -> i32;
 }
 
 pub trait World {
     type Location: Location;
-    type Exit: for<'a> Exit<
+    type Exit: Exit<
         ExitId = <Self::Location as Location>::ExitId,
         LocId = <Self::Location as Location>::LocId,
-        Context<'a> = <Self::Location as Accessible>::Context<'a>,
+        Context = <Self::Location as Accessible>::Context,
     >;
-    type Action: for<'a> Action<Context<'a> = <Self::Location as Accessible>::Context<'a>>;
-    type Warp: for<'a> Warp<
-        Context<'a> = <Self::Location as Accessible>::Context<'a>,
+    type Action: Action<Context = <Self::Location as Accessible>::Context>;
+    type Warp: Warp<
+        Context = <Self::Location as Accessible>::Context,
         SpotId = <Self::Exit as Exit>::SpotId,
     >;
 
@@ -95,8 +95,8 @@ pub trait World {
     fn get_warps(&self) -> &[Self::Warp];
     fn get_all_locations(&self) -> &[Self::Location];
 
-    fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context<'_>);
-    fn won(&self, ctx: &<Self::Location as Accessible>::Context<'_>) -> bool;
+    fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context);
+    fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]

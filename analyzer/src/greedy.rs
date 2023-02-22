@@ -4,16 +4,16 @@ use crate::access::*;
 use crate::context::*;
 use crate::world::*;
 
-pub fn nearest_spot_with_stuff<'a, W, T, E, L, Wp>(
-    world: &'a W,
+pub fn nearest_spot_with_stuff<W, T, E, L, Wp>(
+    world: &W,
     ctx: ContextWrapper<T>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Exit = E, Location = L, Warp = Wp>,
-    T: Ctx<World = W> ,
-    L: Location<ExitId = E::ExitId, Context<'a> = T>,
-    E: Exit<Context<'a> = T>,
-    Wp: Warp<Context<'a> = T, SpotId = E::SpotId>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit<Context = T> + Accessible<Context = T>,
+    Wp: Warp<Context = T, SpotId = E::SpotId>,
 {
     let spot_map = access(world, ctx);
     if let Some((_, ctx)) = spot_map
@@ -27,12 +27,12 @@ where
     }
 }
 
-pub fn do_and_grab_all<'a, W, T, L, E>(world: &'a W, ctx: &mut ContextWrapper<T>)
+pub fn do_and_grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
 where
     W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context<'a> = T> + 'a,
-    E: Exit<Context<'a> = T> + 'a,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit<Context = T> + Accessible<Context = T>,
 {
     for act in world.get_spot_actions(ctx.get().position()) {
         if act.can_access(ctx.get()) {
@@ -55,12 +55,12 @@ where
     }
 }
 
-pub fn greedy_search<'a, W, T, L, E>(world: &'a W, ctx: &ContextWrapper<T>) -> Option<ContextWrapper<T>>
+pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context<'a> = T> + 'a,
-    E: Exit + Accessible<Context<'a> = T> + 'a,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     let mut ctx = ctx.clone();
     world.skip_unused_items(ctx.get_mut());
@@ -75,16 +75,16 @@ where
     Some(ctx)
 }
 
-pub fn minimize_playthrough<'a, W, T, L, E>(
-    world: &'a W,
+pub fn minimize_playthrough<W, T, L, E>(
+    world: &W,
     startctx: &T,
     wonctx: &ContextWrapper<T>,
 ) -> ContextWrapper<T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context<'a> = T> + 'a,
-    E: Exit<Context<'a> = T> + 'a,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     let mut ctx = startctx.clone();
     let mut set = HashSet::new();
@@ -144,15 +144,15 @@ where
     greedy_search(world, &ctx).expect("Couldn't beat game after minimizing!")
 }
 
-pub fn minimal_greedy_playthrough<'a, W, T, L, E>(
-    world: &'a W,
+pub fn minimal_greedy_playthrough<W, T, L, E>(
+    world: &W,
     ctx: &ContextWrapper<T>,
 ) -> ContextWrapper<T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context<'a> = T> + 'a,
-    E: Exit<Context<'a> = T> + 'a,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
 {
     let wonctx = greedy_search(world, ctx).expect("Didn't win with greedy search");
     minimize_playthrough(world, ctx.get(), &wonctx)
