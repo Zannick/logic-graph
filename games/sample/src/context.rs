@@ -4,12 +4,13 @@
 
 #![allow(non_snake_case)]
 
-use crate::graph::*;
+use crate::graph::{self, *};
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
+use analyzer::world::World;
 use enum_map::EnumMap;
 
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
@@ -80,13 +81,16 @@ pub struct Context {
     pub zora_tunic: bool,
     // other
     pub status: EnumMap<LocationId, Status>,
+    visits: i32,
+    skips: i32,
 }
 
 impl context::Ctx for Context {
-    type World = World;
+    type World = graph::World;
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
+    const NUM_ITEMS: i32 = 45;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -362,11 +366,18 @@ impl context::Ctx for Context {
 
     fn visit(&mut self, loc_id: LocationId) {
         self.status[loc_id] = Status::Visited;
+        self.visits += 1;
     }
     fn skip(&mut self, loc_id: LocationId) {
         self.status[loc_id] = Status::Skipped;
+        self.skips += 1;
     }
     fn reset(&mut self, loc_id: LocationId) {
+        match self.status[loc_id] {
+            Status::Visited => self.visits -= 1,
+            Status::Skipped => self.skips -= 1,
+            _ => (),
+        }
         self.status[loc_id] = Status::None;
     }
 
@@ -402,17 +413,18 @@ impl context::Ctx for Context {
         movements::local_travel_time(self, self.position, dest)
     }
 
-    fn count_visits(&self) -> usize {
-        self.status
-            .values()
-            .filter(|&x| *x == Status::Visited)
-            .count()
+    fn count_visits(&self) -> i32 {
+        self.visits
     }
-    fn count_skips(&self) -> usize {
-        self.status
-            .values()
-            .filter(|&x| *x == Status::Skipped)
-            .count()
+    fn count_skips(&self) -> i32 {
+        self.skips
+    }
+    fn progress(&self) -> i32 {
+        if self.visits <= 0 {
+            0
+        } else {
+            self.visits * 1000 / (Self::World::NUM_LOCATIONS - self.skips)
+        }
     }
 }
 

@@ -214,6 +214,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
+    const NUM_LOCATIONS: i32 = {{ gl.locations()|list|count }};
 
 %% for point in ['Location', 'Exit', 'Action']
     fn get_{{ point|lower }}(&self, id: {{ point }}Id)

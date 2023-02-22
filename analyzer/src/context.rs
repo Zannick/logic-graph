@@ -7,6 +7,7 @@ pub trait Ctx: Clone + Eq + Debug {
     type ItemId: Id;
     type AreaId: Id;
     type RegionId: Id;
+    const NUM_ITEMS: i32;
 
     fn has(&self, item: Self::ItemId) -> bool;
     fn count(&self, item: Self::ItemId) -> i16;
@@ -31,8 +32,9 @@ pub trait Ctx: Clone + Eq + Debug {
 
     fn local_travel_time(&self, dest: <<Self::World as World>::Exit as Exit>::SpotId) -> i32;
 
-    fn count_visits(&self) -> usize;
-    fn count_skips(&self) -> usize;
+    fn count_visits(&self) -> i32;
+    fn count_skips(&self) -> i32;
+    fn progress(&self) -> i32;
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]

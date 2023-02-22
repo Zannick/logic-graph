@@ -75,6 +75,7 @@ pub trait World {
         Context = <Self::Location as Accessible>::Context,
         SpotId = <Self::Exit as Exit>::SpotId,
     >;
+    const NUM_LOCATIONS: i32;
 
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;
     fn get_exit(&self, ex_id: <Self::Exit as Exit>::ExitId) -> &Self::Exit;

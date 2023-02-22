@@ -1273,6 +1273,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
+    const NUM_LOCATIONS: i32 = 47;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
