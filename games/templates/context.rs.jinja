@@ -19,7 +19,7 @@ pub enum Status {
 
 #[derive(Clone, Debug, Default, Eq, PartialEq)]
 pub struct Context {
-%# TODO for perf: split into separate structs held in Cow, StateCtx, ItemCtx, SettingCtx, StatusCtx
+%# Splitting into separate Cow structs performs worse :(
     // context vars
 %% for ctx, t in context_types.items()
     pub {{ ctx }}: {{ t }},

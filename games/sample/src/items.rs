@@ -139,15 +139,15 @@ impl analyzer::world::Id for Item {}
 pub fn unused_item(id: Item) -> bool {
     match id {
         Item::None => true,
-        Item::Heart_Container
-        | Item::Buy_Heart
-        | Item::Map_Deku_Tree
-        | Item::Buy_Deku_Seeds_30
-        | Item::Arrows_10
-        | Item::Progressive_Wallet
-        | Item::Compass_Deku_Tree
-        | Item::Buy_Arrows_30
+        Item::Arrows_10
         | Item::Buy_Arrows_10
+        | Item::Buy_Arrows_30
+        | Item::Buy_Deku_Seeds_30
+        | Item::Buy_Heart
+        | Item::Compass_Deku_Tree
+        | Item::Heart_Container
+        | Item::Map_Deku_Tree
+        | Item::Progressive_Wallet
         | Item::Recovery_Heart => true,
         _ => false,
     }
