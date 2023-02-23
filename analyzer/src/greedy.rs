@@ -1,7 +1,6 @@
 use crate::access::*;
 use crate::context::*;
 use crate::world::*;
-use std::collections::HashSet;
 
 pub fn nearest_spot_with_stuff<W, T, E, L, Wp>(
     world: &W,
@@ -74,7 +73,7 @@ where
     Some(ctx)
 }
 
-pub fn minimize_playthrough<W, T, L, E>(
+pub fn minimize_greedy<W, T, L, E>(
     world: &W,
     startctx: &T,
     wonctx: &ContextWrapper<T>,
@@ -85,61 +84,7 @@ where
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    let mut ctx = startctx.clone();
-    let mut set = HashSet::new();
-    // Gather locations from the playthrough
-    for hist in wonctx.history.iter().rev() {
-        match hist {
-            History::Get(_, loc_id) => {
-                set.insert(*loc_id);
-            }
-            History::MoveGet(_, exit_id) => {
-                let ex = world.get_exit(*exit_id);
-                if let Some(loc_id) = ex.loc_id() {
-                    set.insert(*loc_id);
-                }
-            }
-            _ => (),
-        }
-    }
-    let set = set;
-
-    // skip all locations not in the playthrough
-    for loc in world.get_all_locations() {
-        if set.contains(&loc.id()) {
-            continue;
-        }
-        if ctx.todo(loc.id()) {
-            ctx.skip(loc.id());
-            if !can_win(world, &ctx) {
-                ctx.reset(loc.id());
-            }
-        }
-    }
-
-    // skip remaining visited locations from last to first
-    for hist in wonctx.history.iter().rev() {
-        match hist {
-            History::Get(_, loc_id) => {
-                ctx.skip(*loc_id);
-                if !can_win(world, &ctx) {
-                    ctx.reset(*loc_id);
-                }
-            }
-            History::MoveGet(_, exit_id) => {
-                let ex = world.get_exit(*exit_id);
-                if let Some(loc_id) = ex.loc_id() {
-                    ctx.skip(*loc_id);
-                    if !can_win(world, &ctx) {
-                        ctx.reset(*loc_id);
-                    }
-                }
-            }
-            _ => (),
-        }
-    }
-
-    let ctx = ContextWrapper::new(ctx);
+    let ctx = minimize(world, startctx, wonctx);
     greedy_search(world, &ctx).expect("Couldn't beat game after minimizing!")
 }
 
@@ -154,5 +99,5 @@ where
     E: Exit + Accessible<Context = T>,
 {
     let wonctx = greedy_search(world, ctx).expect("Didn't win with greedy search");
-    minimize_playthrough(world, ctx.get(), &wonctx)
+    minimize_greedy(world, ctx.get(), &wonctx)
 }

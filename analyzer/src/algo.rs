@@ -6,6 +6,8 @@ use crate::greedy::*;
 use crate::heap::LimitedHeap;
 use crate::world::*;
 use std::fmt::Debug;
+use std::fs::File;
+use std::io::Write;
 
 pub fn explore<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
 where
@@ -67,6 +69,52 @@ where
     }));
 }
 
+pub fn minimize_nongreedy<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    wonctx: &ContextWrapper<T>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    find_one(world, minimize(world, startctx, wonctx), wonctx.elapsed())
+}
+
+pub fn find_one<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    max_time: i32,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    let mut heap = LimitedHeap::new();
+    heap.set_max_time(max_time);
+    heap.push(ctx.clone());
+    while !heap.is_empty() {
+        let ctx = heap.pop().unwrap();
+        if world.won(ctx.get()) {
+            return Some(ctx);
+        }
+        match ctx.lastmode {
+            Mode::None | Mode::Check => {
+                explore(world, ctx, &mut heap);
+            }
+            Mode::Explore => {
+                visit_locations(world, ctx, &mut heap);
+            }
+            _ => (),
+        }
+    }
+    None
+}
+
 pub fn search<W, T, L, E>(world: &W, mut ctx: T)
 where
     W: World<Location = L, Exit = E>,
@@ -78,7 +126,7 @@ where
     let startctx = ContextWrapper::new(ctx);
     let wonctx = greedy_search(world, &startctx).expect("Did not find a solution");
 
-    let m = minimize_playthrough(world, startctx.get(), &wonctx);
+    let m = minimize_greedy(world, startctx.get(), &wonctx);
 
     println!(
         "Found greedy solution of {}ms, minimized to {}ms",
@@ -91,37 +139,45 @@ where
     heap.set_max_time(m.elapsed());
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
-    let mut attempts = 0;
-    let mut wins = 0;
-    while !heap.is_empty() {
-        let ctx = heap.pop().unwrap();
+    let mut iters = 0;
+    let mut winner = None;
+    while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
             println!(
-                "Found winning path after {} attempts, in estimated {}ms, with {} remaining (of which {} are > {})",
-                attempts,
-                ctx.elapsed(),  heap.len(),
-                heap.iter().filter(|c| c.elapsed() > ctx.elapsed()+10000).count(),
-                ctx.elapsed()+10000
+                "Found winning path after {} rounds, in estimated {}ms, with {} remaining in heap",
+                iters,
+                ctx.elapsed(),
+                heap.len()
             );
-            let m = minimize_playthrough(world, startctx.get(), &ctx);
-            println!("Minimized it to {}ms", m.elapsed());
-            println!("{}", m.history_str());
-
-            if wins < 2 {
-                wins += 1;
-                heap.set_max_time(ctx.elapsed());
+            heap.set_max_time(ctx.elapsed());
+            if let Some(m) = minimize_nongreedy(world, startctx.get(), &ctx) {
                 heap.set_max_time(m.elapsed());
-                println!("Max time to consider is now: {}ms", heap.max_time());
-                continue;
+                println!("Minimized it to {}ms", m.elapsed());
+                if m.elapsed() > ctx.elapsed() {
+                    println!("Weird, it got slower?");
+                    let mut orig = File::create("/tmp/orig").unwrap();
+                    orig.write(ctx.history_str().as_bytes()).unwrap();
+                    let mut min = File::create("/tmp/new").unwrap();
+                    min.write(m.history_str().as_bytes()).unwrap();
+                    return;
+                }
+                winner = Some(m);
+            } else {
+                winner = Some(ctx);
             }
-            return;
+
+            println!("Max time to consider is now: {}ms", heap.max_time());
+            continue;
         }
-        attempts += 1;
-        if attempts % 10000 == 0 {
+        iters += 1;
+        if iters % 10000 == 0 {
+            let (iskips, pskips) = heap.stats();
             println!(
-                "Attempt {} (heap size {}): {}",
-                attempts,
+                "Round {} (heap size {}, skipped {} pushes + {} pops):\n  {}",
+                iters,
                 heap.len(),
+                iskips,
+                pskips,
                 ctx.info()
             );
         }
@@ -135,7 +191,14 @@ where
             _ => println!("{}", ctx.info()),
         }
     }
-    if wins == 0 {
-        println!("Did not find a winner after {} attempts", attempts);
+    let (iskips, pskips) = heap.stats();
+    println!(
+        "Finished after {} rounds, skipped {} pushes + {} pops",
+        iters, iskips, pskips
+    );
+    if let Some(m) = winner {
+        println!("Final result: est. {}ms\n{}", m.elapsed(), m.history_str());
+    } else {
+        println!("Did not find a winner");
     }
 }

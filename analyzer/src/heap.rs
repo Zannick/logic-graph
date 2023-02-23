@@ -19,6 +19,8 @@ struct HeapElement<T: Ctx> {
 pub struct LimitedHeap<T: Ctx> {
     max_time: i32,
     heap: BinaryHeap<HeapElement<T>>,
+    iskips: i32,
+    pskips: i32,
 }
 
 impl<T: Ctx> LimitedHeap<T> {
@@ -26,13 +28,19 @@ impl<T: Ctx> LimitedHeap<T> {
         LimitedHeap {
             max_time: i32::MAX,
             heap: BinaryHeap::new(),
+            iskips: 0,
+            pskips: 0,
         }
     }
 
+    /// Returns the actual number of elements in the heap.
+    /// Iterating over the heap may not produce this many elements.
     pub fn len(&self) -> usize {
         self.heap.len()
     }
 
+    /// Returns whether the underlying heap is actually empty.
+    /// Attempting to peek or pop may produce None instead.
     pub fn is_empty(&self) -> bool {
         self.heap.is_empty()
     }
@@ -45,25 +53,35 @@ impl<T: Ctx> LimitedHeap<T> {
         self.max_time = core::cmp::min(self.max_time, max_time);
     }
 
+    /// Pushes an element into the heap.
+    /// If the element's elapsed time is greater than the allowed maximum, does nothing.
     pub fn push(&mut self, el: ContextWrapper<T>) {
         if el.elapsed() <= self.max_time {
             self.heap.push(HeapElement {
                 score: el.score(),
                 el,
             });
+        } else {
+            self.iskips += 1;
         }
     }
 
+    /// Returns the next element with the highest score, or None.
+    /// Will skip over any elements whose elapsed time is greater than the allowed maximum.
     pub fn pop(&mut self) -> Option<ContextWrapper<T>> {
         // Lazily clear when the max time is changed with elements in the heap
         while let Some(el) = self.heap.pop() {
             if el.el.elapsed() <= self.max_time {
                 return Some(el.el);
+            } else {
+                self.pskips += 1;
             }
         }
         None
     }
 
+    /// Produces the actual first element of the heap.
+    /// This may not be the element returned by pop().
     pub fn peek(&self) -> Option<&ContextWrapper<T>> {
         match self.heap.peek() {
             Some(el) => Some(&el.el),
@@ -82,6 +100,7 @@ impl<T: Ctx> LimitedHeap<T> {
                     el: c,
                 })
             } else {
+                self.iskips += 1;
                 None
             }
         }));
@@ -95,5 +114,9 @@ impl<T: Ctx> LimitedHeap<T> {
                 None
             }
         })
+    }
+
+    pub fn stats(&self) -> (i32, i32) {
+        (self.iskips, self.pskips)
     }
 }

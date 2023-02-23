@@ -67,7 +67,7 @@ where
         match self {
             History::Warp(warp, dest) => write!(f, "{}warp to {}", warp, dest),
             History::Get(item, loc) => write!(f, "Collect {} from {}", item, loc),
-            History::Move(exit) => Display::fmt(&exit, f),
+            History::Move(exit) => write!(f, "Take exit ==> {}", exit.to_string().split_once("==>").unwrap().1),
             History::MoveGet(item, exit) => write!(f, "{}, getting {}", exit, item),
             History::MoveLocal(spot) => write!(f, "Move to {}", spot),
             History::Activate(action) => write!(f, "Do {}", action),
@@ -193,7 +193,7 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self) -> String {
         format(format_args!(
-            "At {} after {}ms (score={})\n{} steps, visited={}, skipped={}, penalty={}, \nmode={:?} last={}",
+            "At {} after {}ms (score={}), {} steps, visited={}, skipped={}, penalty={}, mode={:?} last={}",
             self.ctx.position(),
             self.elapsed,
             self.score(),

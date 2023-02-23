@@ -229,12 +229,12 @@ class GameLogic(object):
                         spot['loc_ids'].append(loc['id'])
                         area['loc_ids'].append(loc['id'])
                         region['loc_ids'].append(loc['id'])
-                        loc['fullname'] = f'{spot["fullname"]} {loc["name"]}'
+                        loc['fullname'] = f'{spot["fullname"]}: {loc["name"]}'
                         if 'canon' in loc:
                             self.canon_places[loc['canon']].append(loc)
                         if 'req' in loc:
                             loc['pr'] = _parseExpression(
-                                    loc['req'], loc['name'], spot['fullname'], ' ')
+                                    loc['req'], loc['name'], spot['fullname'], ': ')
                             loc['access_id'] = self.make_funcid(loc)
                     # We need a counter for exits in case of alternates
                     ec = Counter()
@@ -257,10 +257,10 @@ class GameLogic(object):
                         act['region'] = rname
                         act['id'] = construct_id(rname, aname, sname, act['name'])
                         spot['action_ids'].append(act['id'])
-                        act['fullname'] = f'{spot["fullname"]} {act["name"]}'
+                        act['fullname'] = f'{spot["fullname"]}: {act["name"]}'
                         if 'req' in act:
                             act['pr'] = _parseExpression(
-                                    act['req'], act['name'] + ' req', spot['fullname'], ' ')
+                                    act['req'], act['name'] + ' req', spot['fullname'], ': ')
                             act['access_id'] = self.make_funcid(act)
                         act['act'] = parseAction(
                                 act['do'], name=f'{act["fullname"]}:do')
