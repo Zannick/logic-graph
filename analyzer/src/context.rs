@@ -67,8 +67,10 @@ where
         match self {
             History::Warp(warp, dest) => write!(f, "{}warp to {}", warp, dest),
             History::Get(item, loc) => write!(f, "Collect {} from {}", item, loc),
-            History::Move(exit) => write!(f, "Take exit ==> {}", exit.to_string().split_once("==>").unwrap().1),
-            History::MoveGet(item, exit) => write!(f, "{}, getting {}", exit, item),
+            History::Move(exit) => write!(f, "Take exit {}", exit),
+            History::MoveGet(item, exit) => {
+                write!(f, "Take hybrid exit {}, getting {}", exit, item)
+            }
             History::MoveLocal(spot) => write!(f, "Move to {}", spot),
             History::Activate(action) => write!(f, "Do {}", action),
         }
@@ -142,11 +144,14 @@ impl<T: Ctx> ContextWrapper<T> {
         T: Ctx<World = W>,
         L: Location + Accessible<Context = T>,
     {
-        for canon_loc_id in world.get_canon_locations(loc.id()) {
-            self.ctx.skip(canon_loc_id);
-        }
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item());
+        self.ctx.spend(loc.price());
+        for canon_loc_id in world.get_canon_locations(loc.id()) {
+            if self.ctx.todo(canon_loc_id) {
+                self.ctx.skip(canon_loc_id);
+            }
+        }
         self.elapse(loc.time());
         self.history.push(History::Get(loc.item(), loc.id()));
     }

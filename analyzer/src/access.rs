@@ -153,8 +153,7 @@ where
     dist_map.insert(pos, ctx);
 
     expand(world, &dist_map[&pos], &dist_map, &mut spot_heap);
-    while !spot_heap.is_empty() {
-        let spot_found = spot_heap.pop().unwrap().0;
+    while let Some(Reverse(spot_found)) = spot_heap.pop() {
         let pos = spot_found.get().position();
         if !dist_map.contains_key(&pos) {
             dist_map.insert(pos, spot_found);
@@ -245,11 +244,13 @@ where
         ctx_list = Vec::new();
         ctx_list.reserve(last_ctxs.len() * 2);
         for mut ctx in last_ctxs {
-            if ctx.get().todo(loc.id()) {
+            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
+                // TODO: Add a better way to prevent this from causing too wide a branching factor
+                // or remove.
                 if allow_skips {
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
-                    // TODO: Check if this loc is required. If it is, we can't skip it.
+                    // Check if this loc is required. If it is, we can't skip it.
                     if can_win(world, newctx.get()) {
                         ctx_list.push(newctx);
                     }
@@ -299,11 +300,15 @@ where
             }
         }
         for loc in world.get_spot_locations(spot_id) {
-            // If we can reach the spot with the location
-            if ctx.todo(loc.id()) && loc.can_access(&spot_ctx) {
+            // Check can_access at the local spot_ctx, but pick up items
+            // and perform other checks with the omnipresent context.
+            if ctx.todo(loc.id()) && loc.can_access(&spot_ctx) && ctx.can_afford(loc.price()) {
                 ctx.collect(loc.item());
+                ctx.spend(loc.price());
                 for canon_loc_id in world.get_canon_locations(loc.id()) {
-                    ctx.skip(canon_loc_id);
+                    if ctx.todo(canon_loc_id) {
+                        ctx.skip(canon_loc_id);
+                    }
                 }
                 ctx.visit(loc.id());
                 ret = true;

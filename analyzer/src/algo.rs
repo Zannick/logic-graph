@@ -94,14 +94,19 @@ where
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
+    if !can_win(world, ctx.get()) {
+        panic!("Trying to solve a minimized search that can't win");
+    }
     let mut heap = LimitedHeap::new();
-    heap.set_max_time(max_time);
-    heap.push(ctx.clone());
-    while !heap.is_empty() {
-        let ctx = heap.pop().unwrap();
+    heap.set_max_time(max_time + 1);
+    heap.push(ctx);
+    let mut iters = 0;
+    while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
+            println!("Minimized to {}ms", ctx.elapsed());
             return Some(ctx);
         }
+        iters += 1;
         match ctx.lastmode {
             Mode::None | Mode::Check => {
                 explore(world, ctx, &mut heap);
@@ -112,6 +117,7 @@ where
             _ => (),
         }
     }
+    println!("Failed to find minimized win after {} mini-rounds", iters);
     None
 }
 
