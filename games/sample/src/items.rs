@@ -135,6 +135,73 @@ impl fmt::Display for Item {
     }
 }
 impl analyzer::world::Id for Item {}
+impl std::str::FromStr for Item {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Arrows_10" => Ok(Item::Arrows_10),
+            "Biggoron_Sword" => Ok(Item::Biggoron_Sword),
+            "Blue_Fire_Arrows" => Ok(Item::Blue_Fire_Arrows),
+            "Bombs" => Ok(Item::Bombs),
+            "Boomerang" => Ok(Item::Boomerang),
+            "Bow" => Ok(Item::Bow),
+            "Buy_Arrows_10" => Ok(Item::Buy_Arrows_10),
+            "Buy_Arrows_30" => Ok(Item::Buy_Arrows_30),
+            "Buy_Deku_Nut_10" => Ok(Item::Buy_Deku_Nut_10),
+            "Buy_Deku_Nut_5" => Ok(Item::Buy_Deku_Nut_5),
+            "Buy_Deku_Seeds_30" => Ok(Item::Buy_Deku_Seeds_30),
+            "Buy_Deku_Shield" => Ok(Item::Buy_Deku_Shield),
+            "Buy_Deku_Stick_1" => Ok(Item::Buy_Deku_Stick_1),
+            "Buy_Heart" => Ok(Item::Buy_Heart),
+            "Compass_Deku_Tree" => Ok(Item::Compass_Deku_Tree),
+            "Defeat_Ganon" => Ok(Item::Defeat_Ganon),
+            "Defeat_Gohma" => Ok(Item::Defeat_Gohma),
+            "Deku_Back_Room_Wall" => Ok(Item::Deku_Back_Room_Wall),
+            "Deku_Back_Room_Web" => Ok(Item::Deku_Back_Room_Web),
+            "Deku_Basement_Block" => Ok(Item::Deku_Basement_Block),
+            "Deku_Basement_Scrubs" => Ok(Item::Deku_Basement_Scrubs),
+            "Deku_Basement_Switch" => Ok(Item::Deku_Basement_Switch),
+            "Deku_Basement_Web" => Ok(Item::Deku_Basement_Web),
+            "Deku_Lobby_Web" => Ok(Item::Deku_Lobby_Web),
+            "Deku_Nut_Drop" => Ok(Item::Deku_Nut_Drop),
+            "Deku_Shield_Drop" => Ok(Item::Deku_Shield_Drop),
+            "Deku_Slingshot_Scrub" => Ok(Item::Deku_Slingshot_Scrub),
+            "Deku_Stick_Drop" => Ok(Item::Deku_Stick_Drop),
+            "Dins_Fire" => Ok(Item::Dins_Fire),
+            "Farores_Wind" => Ok(Item::Farores_Wind),
+            "Fire_Arrows" => Ok(Item::Fire_Arrows),
+            "Gold_Skulltula_Token" => Ok(Item::Gold_Skulltula_Token),
+            "Goron_Tunic" => Ok(Item::Goron_Tunic),
+            "Heart_Container" => Ok(Item::Heart_Container),
+            "Hookshot" => Ok(Item::Hookshot),
+            "Hover_Boots" => Ok(Item::Hover_Boots),
+            "Hylian_Shield" => Ok(Item::Hylian_Shield),
+            "Iron_Boots" => Ok(Item::Iron_Boots),
+            "Kokiri_Emerald" => Ok(Item::Kokiri_Emerald),
+            "Kokiri_Sword" => Ok(Item::Kokiri_Sword),
+            "Lens_of_Truth" => Ok(Item::Lens_of_Truth),
+            "Light_Arrows" => Ok(Item::Light_Arrows),
+            "Magic_Meter" => Ok(Item::Magic_Meter),
+            "Map_Deku_Tree" => Ok(Item::Map_Deku_Tree),
+            "Megaton_Hammer" => Ok(Item::Megaton_Hammer),
+            "Minuet_of_Forest" => Ok(Item::Minuet_of_Forest),
+            "Mirror_Shield" => Ok(Item::Mirror_Shield),
+            "Nayrus_Love" => Ok(Item::Nayrus_Love),
+            "Ocarina" => Ok(Item::Ocarina),
+            "Progressive_Wallet" => Ok(Item::Progressive_Wallet),
+            "Recovery_Heart" => Ok(Item::Recovery_Heart),
+            "Rupee_1" => Ok(Item::Rupee_1),
+            "Rupees_5" => Ok(Item::Rupees_5),
+            "Rupees_50" => Ok(Item::Rupees_50),
+            "Showed_Mido" => Ok(Item::Showed_Mido),
+            "Slingshot" => Ok(Item::Slingshot),
+            "Triforce_Piece" => Ok(Item::Triforce_Piece),
+            "Zora_Tunic" => Ok(Item::Zora_Tunic),
+            _ => Err(format!("Could not recognize as a Item: {}", s)),
+        }
+    }
+}
 
 pub fn unused_item(id: Item) -> bool {
     match id {

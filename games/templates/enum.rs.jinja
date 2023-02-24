@@ -21,5 +21,17 @@ impl fmt::Display for {{ name }} {
     }
 }
 impl analyzer::world::Id for {{ name }} {}
+impl std::str::FromStr for {{ name }} {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+%% for v in values|sort(attribute='id')
+            "{{ v.fullname or v.name or v }}" => Ok({{ name }}::{{ v.id or v|construct_id }}),
+%% endfor
+            _ => Err(format!("Could not recognize as a {{ name }}: {}", s)),
+        }
+    }
+}
 %% endmacro
 

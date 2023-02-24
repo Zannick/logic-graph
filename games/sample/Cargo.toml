@@ -16,6 +16,7 @@ path = "bin/main.rs"
 [dependencies]
 analyzer = { path = "../../analyzer" }
 enum-map = "*"
+yaml-rust = "*"
 
 [dev-dependencies]
 criterion = "*"

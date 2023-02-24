@@ -32,6 +32,18 @@ impl fmt::Display for RegionId {
     }
 }
 impl analyzer::world::Id for RegionId {}
+impl std::str::FromStr for RegionId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku Tree" => Ok(RegionId::Deku_Tree),
+            "Kakariko Village" => Ok(RegionId::Kak),
+            "Kokiri Forest" => Ok(RegionId::KF),
+            _ => Err(format!("Could not recognize as a RegionId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum AreaId {
@@ -87,6 +99,37 @@ impl fmt::Display for AreaId {
     }
 }
 impl analyzer::world::Id for AreaId {}
+impl std::str::FromStr for AreaId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku Tree > Back Room" => Ok(AreaId::Deku_Tree__Back_Room),
+            "Deku Tree > Basement 1" => Ok(AreaId::Deku_Tree__Basement_1),
+            "Deku Tree > Basement 2" => Ok(AreaId::Deku_Tree__Basement_2),
+            "Deku Tree > Basement Ledge" => Ok(AreaId::Deku_Tree__Basement_Ledge),
+            "Deku Tree > Boss Room" => Ok(AreaId::Deku_Tree__Boss_Room),
+            "Deku Tree > Compass Room" => Ok(AreaId::Deku_Tree__Compass_Room),
+            "Deku Tree > Floor 2" => Ok(AreaId::Deku_Tree__Floor_2),
+            "Deku Tree > Floor 3" => Ok(AreaId::Deku_Tree__Floor_3),
+            "Deku Tree > Lobby" => Ok(AreaId::Deku_Tree__Lobby),
+            "Deku Tree > Scrub Room" => Ok(AreaId::Deku_Tree__Scrub_Room),
+            "Deku Tree > Skull Room" => Ok(AreaId::Deku_Tree__Skull_Room),
+            "Deku Tree > Slingshot Room" => Ok(AreaId::Deku_Tree__Slingshot_Room),
+            "Deku Tree > Slingshot Upper" => Ok(AreaId::Deku_Tree__Slingshot_Upper),
+            "Kak > Spider House" => Ok(AreaId::Kak__Spider_House),
+            "KF > Baba Corridor" => Ok(AreaId::KF__Baba_Corridor),
+            "KF > Boulder Maze" => Ok(AreaId::KF__Boulder_Maze),
+            "KF > Know-it-all House" => Ok(AreaId::KF__Knowitall_House),
+            "KF > Kokiri Village" => Ok(AreaId::KF__Kokiri_Village),
+            "KF > Link's House" => Ok(AreaId::KF__Links_House),
+            "KF > Mido's House" => Ok(AreaId::KF__Midos_House),
+            "KF > Outside Deku Tree" => Ok(AreaId::KF__Outside_Deku_Tree),
+            "KF > Shop" => Ok(AreaId::KF__Shop),
+            _ => Err(format!("Could not recognize as a AreaId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
 pub enum SpotId {
@@ -263,6 +306,76 @@ impl fmt::Display for SpotId {
     }
 }
 impl analyzer::world::Id for SpotId {}
+impl std::str::FromStr for SpotId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku Tree > Back Room > East" => Ok(SpotId::Deku_Tree__Back_Room__East),
+            "Deku Tree > Back Room > Northwest" => Ok(SpotId::Deku_Tree__Back_Room__Northwest),
+            "Deku Tree > Back Room > South" => Ok(SpotId::Deku_Tree__Back_Room__South),
+            "Deku Tree > Basement 1 > Center" => Ok(SpotId::Deku_Tree__Basement_1__Center),
+            "Deku Tree > Basement 1 > Corner" => Ok(SpotId::Deku_Tree__Basement_1__Corner),
+            "Deku Tree > Basement 1 > South Door" => Ok(SpotId::Deku_Tree__Basement_1__South_Door),
+            "Deku Tree > Basement 2 > Boss Door" => Ok(SpotId::Deku_Tree__Basement_2__Boss_Door),
+            "Deku Tree > Basement 2 > Pool" => Ok(SpotId::Deku_Tree__Basement_2__Pool),
+            "Deku Tree > Basement Ledge > Block" => Ok(SpotId::Deku_Tree__Basement_Ledge__Block),
+            "Deku Tree > Basement Ledge > Web" => Ok(SpotId::Deku_Tree__Basement_Ledge__Web),
+            "Deku Tree > Boss Room > Arena" => Ok(SpotId::Deku_Tree__Boss_Room__Arena),
+            "Deku Tree > Boss Room > Entry" => Ok(SpotId::Deku_Tree__Boss_Room__Entry),
+            "Deku Tree > Compass Room > Compass" => Ok(SpotId::Deku_Tree__Compass_Room__Compass),
+            "Deku Tree > Compass Room > Entry" => Ok(SpotId::Deku_Tree__Compass_Room__Entry),
+            "Deku Tree > Compass Room > Ledge" => Ok(SpotId::Deku_Tree__Compass_Room__Ledge),
+            "Deku Tree > Floor 2 > Lower" => Ok(SpotId::Deku_Tree__Floor_2__Lower),
+            "Deku Tree > Floor 2 > Slingshot Door" => {
+                Ok(SpotId::Deku_Tree__Floor_2__Slingshot_Door)
+            }
+            "Deku Tree > Floor 2 > Vines" => Ok(SpotId::Deku_Tree__Floor_2__Vines),
+            "Deku Tree > Floor 3 > Climb" => Ok(SpotId::Deku_Tree__Floor_3__Climb),
+            "Deku Tree > Floor 3 > Door" => Ok(SpotId::Deku_Tree__Floor_3__Door),
+            "Deku Tree > Lobby > Center" => Ok(SpotId::Deku_Tree__Lobby__Center),
+            "Deku Tree > Lobby > Entry" => Ok(SpotId::Deku_Tree__Lobby__Entry),
+            "Deku Tree > Lobby > Vines" => Ok(SpotId::Deku_Tree__Lobby__Vines),
+            "Deku Tree > Scrub Room > Entry" => Ok(SpotId::Deku_Tree__Scrub_Room__Entry),
+            "Deku Tree > Scrub Room > Rear" => Ok(SpotId::Deku_Tree__Scrub_Room__Rear),
+            "Deku Tree > Skull Room > Entry" => Ok(SpotId::Deku_Tree__Skull_Room__Entry),
+            "Deku Tree > Slingshot Room > Entry" => Ok(SpotId::Deku_Tree__Slingshot_Room__Entry),
+            "Deku Tree > Slingshot Room > Slingshot" => {
+                Ok(SpotId::Deku_Tree__Slingshot_Room__Slingshot)
+            }
+            "Deku Tree > Slingshot Upper > Ledge" => Ok(SpotId::Deku_Tree__Slingshot_Upper__Ledge),
+            "Kak > Spider House > Entry" => Ok(SpotId::Kak__Spider_House__Entry),
+            "KF > Baba Corridor > Deku Babas" => Ok(SpotId::KF__Baba_Corridor__Deku_Babas),
+            "KF > Baba Corridor > Tree Side" => Ok(SpotId::KF__Baba_Corridor__Tree_Side),
+            "KF > Baba Corridor > Village Side" => Ok(SpotId::KF__Baba_Corridor__Village_Side),
+            "KF > Boulder Maze > Entry" => Ok(SpotId::KF__Boulder_Maze__Entry),
+            "KF > Boulder Maze > Reward" => Ok(SpotId::KF__Boulder_Maze__Reward),
+            "KF > Know-it-all House > Entry" => Ok(SpotId::KF__Knowitall_House__Entry),
+            "KF > Kokiri Village > Know-it-all Porch" => {
+                Ok(SpotId::KF__Kokiri_Village__Knowitall_Porch)
+            }
+            "KF > Kokiri Village > Link's Porch" => Ok(SpotId::KF__Kokiri_Village__Links_Porch),
+            "KF > Kokiri Village > Mido's Guardpost" => {
+                Ok(SpotId::KF__Kokiri_Village__Midos_Guardpost)
+            }
+            "KF > Kokiri Village > Mido's Porch" => Ok(SpotId::KF__Kokiri_Village__Midos_Porch),
+            "KF > Kokiri Village > Saria's Porch" => Ok(SpotId::KF__Kokiri_Village__Sarias_Porch),
+            "KF > Kokiri Village > Shop Porch" => Ok(SpotId::KF__Kokiri_Village__Shop_Porch),
+            "KF > Kokiri Village > Training Center" => {
+                Ok(SpotId::KF__Kokiri_Village__Training_Center)
+            }
+            "KF > Link's House > Entry" => Ok(SpotId::KF__Links_House__Entry),
+            "KF > Link's House > Start Point" => Ok(SpotId::KF__Links_House__Start_Point),
+            "KF > Mido's House > Entry" => Ok(SpotId::KF__Midos_House__Entry),
+            "KF > Outside Deku Tree > Entry" => Ok(SpotId::KF__Outside_Deku_Tree__Entry),
+            "KF > Outside Deku Tree > Left" => Ok(SpotId::KF__Outside_Deku_Tree__Left),
+            "KF > Outside Deku Tree > Mouth" => Ok(SpotId::KF__Outside_Deku_Tree__Mouth),
+            "KF > Outside Deku Tree > Right" => Ok(SpotId::KF__Outside_Deku_Tree__Right),
+            "KF > Shop > Entry" => Ok(SpotId::KF__Shop__Entry),
+            _ => Err(format!("Could not recognize as a SpotId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum LocationId {
@@ -448,6 +561,134 @@ impl fmt::Display for LocationId {
     }
 }
 impl analyzer::world::Id for LocationId {}
+impl std::str::FromStr for LocationId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku Tree > Back Room > Northwest: Break Wall" => {
+                Ok(LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall)
+            }
+            "Deku Tree > Back Room > Northwest: Burn Web" => {
+                Ok(LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web)
+            }
+            "Deku Tree > Basement 1 > Center: Vines GS" => {
+                Ok(LocationId::Deku_Tree__Basement_1__Center__Vines_GS)
+            }
+            "Deku Tree > Basement 1 > Corner: Burn Basement Web" => {
+                Ok(LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web)
+            }
+            "Deku Tree > Basement 1 > Corner: Chest" => {
+                Ok(LocationId::Deku_Tree__Basement_1__Corner__Chest)
+            }
+            "Deku Tree > Basement 1 > Corner: Gate GS" => {
+                Ok(LocationId::Deku_Tree__Basement_1__Corner__Gate_GS)
+            }
+            "Deku Tree > Basement 1 > Corner: Switch" => {
+                Ok(LocationId::Deku_Tree__Basement_1__Corner__Switch)
+            }
+            "Deku Tree > Basement 2 > Boss Door: Scrubs" => {
+                Ok(LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs)
+            }
+            "Deku Tree > Basement Ledge > Block: Push Block" => {
+                Ok(LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block)
+            }
+            "Deku Tree > Basement Ledge > Web: Burn Web" => {
+                Ok(LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web)
+            }
+            "Deku Tree > Boss Room > Arena: Blue Warp" => {
+                Ok(LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp)
+            }
+            "Deku Tree > Boss Room > Arena: Gohma" => {
+                Ok(LocationId::Deku_Tree__Boss_Room__Arena__Gohma)
+            }
+            "Deku Tree > Boss Room > Arena: Gohma Heart" => {
+                Ok(LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart)
+            }
+            "Deku Tree > Boss Room > Arena: Gohma Quick Kill" => {
+                Ok(LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill)
+            }
+            "Deku Tree > Compass Room > Compass: Chest" => {
+                Ok(LocationId::Deku_Tree__Compass_Room__Compass__Chest)
+            }
+            "Deku Tree > Compass Room > Entry: Burn Web" => {
+                Ok(LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web)
+            }
+            "Deku Tree > Compass Room > Ledge: Chest" => {
+                Ok(LocationId::Deku_Tree__Compass_Room__Ledge__Chest)
+            }
+            "Deku Tree > Compass Room > Ledge: GS" => {
+                Ok(LocationId::Deku_Tree__Compass_Room__Ledge__GS)
+            }
+            "Deku Tree > Floor 2 > Vines: Map Chest" => {
+                Ok(LocationId::Deku_Tree__Floor_2__Vines__Map_Chest)
+            }
+            "Deku Tree > Floor 3 > Door: Break Web" => {
+                Ok(LocationId::Deku_Tree__Floor_3__Door__Break_Web)
+            }
+            "Deku Tree > Lobby > Center: Deku Baba Nuts" => {
+                Ok(LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts)
+            }
+            "Deku Tree > Lobby > Center: Deku Baba Sticks" => {
+                Ok(LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks)
+            }
+            "Deku Tree > Lobby > Center: Web" => Ok(LocationId::Deku_Tree__Lobby__Center__Web),
+            "Deku Tree > Scrub Room > Entry: Scrub" => {
+                Ok(LocationId::Deku_Tree__Scrub_Room__Entry__Scrub)
+            }
+            "Deku Tree > Skull Room > Entry: GS" => {
+                Ok(LocationId::Deku_Tree__Skull_Room__Entry__GS)
+            }
+            "Deku Tree > Slingshot Room > Slingshot: Chest" => {
+                Ok(LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest)
+            }
+            "Deku Tree > Slingshot Upper > Ledge: Chest" => {
+                Ok(LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest)
+            }
+            "Kak > Spider House > Entry: Skulls 10" => {
+                Ok(LocationId::Kak__Spider_House__Entry__Skulls_10)
+            }
+            "KF > Baba Corridor > Deku Babas: Nuts" => {
+                Ok(LocationId::KF__Baba_Corridor__Deku_Babas__Nuts)
+            }
+            "KF > Baba Corridor > Deku Babas: Sticks" => {
+                Ok(LocationId::KF__Baba_Corridor__Deku_Babas__Sticks)
+            }
+            "KF > Boulder Maze > Reward: Chest" => Ok(LocationId::KF__Boulder_Maze__Reward__Chest),
+            "KF > Kokiri Village > Mido's Guardpost: Show Mido" => {
+                Ok(LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido)
+            }
+            "KF > Mido's House > Entry: Bottom Left Chest" => {
+                Ok(LocationId::KF__Midos_House__Entry__Bottom_Left_Chest)
+            }
+            "KF > Mido's House > Entry: Bottom Right Chest" => {
+                Ok(LocationId::KF__Midos_House__Entry__Bottom_Right_Chest)
+            }
+            "KF > Mido's House > Entry: Top Left Chest" => {
+                Ok(LocationId::KF__Midos_House__Entry__Top_Left_Chest)
+            }
+            "KF > Mido's House > Entry: Top Right Chest" => {
+                Ok(LocationId::KF__Midos_House__Entry__Top_Right_Chest)
+            }
+            "KF > Outside Deku Tree > Left: Gossip Stone" => {
+                Ok(LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone)
+            }
+            "KF > Outside Deku Tree > Right: Gossip Stone" => {
+                Ok(LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone)
+            }
+            "KF > Shop > Entry: Blue Rupee" => Ok(LocationId::KF__Shop__Entry__Blue_Rupee),
+            "KF > Shop > Entry: Item 1" => Ok(LocationId::KF__Shop__Entry__Item_1),
+            "KF > Shop > Entry: Item 2" => Ok(LocationId::KF__Shop__Entry__Item_2),
+            "KF > Shop > Entry: Item 3" => Ok(LocationId::KF__Shop__Entry__Item_3),
+            "KF > Shop > Entry: Item 4" => Ok(LocationId::KF__Shop__Entry__Item_4),
+            "KF > Shop > Entry: Item 5" => Ok(LocationId::KF__Shop__Entry__Item_5),
+            "KF > Shop > Entry: Item 6" => Ok(LocationId::KF__Shop__Entry__Item_6),
+            "KF > Shop > Entry: Item 7" => Ok(LocationId::KF__Shop__Entry__Item_7),
+            "KF > Shop > Entry: Item 8" => Ok(LocationId::KF__Shop__Entry__Item_8),
+            _ => Err(format!("Could not recognize as a LocationId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ExitId {
@@ -759,6 +1000,171 @@ impl fmt::Display for ExitId {
     }
 }
 impl analyzer::world::Id for ExitId {}
+impl std::str::FromStr for ExitId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku Tree > Back Room > East ==> Basement Ledge > Web (1)" => {
+                Ok(ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1)
+            }
+            "Deku Tree > Back Room > Northwest ==> Skull Room > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1)
+            }
+            "Deku Tree > Basement 1 > Center ==> Lobby > Center (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1)
+            }
+            "Deku Tree > Basement 1 > Corner: Burn Basement Web" => {
+                Ok(ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web)
+            }
+            "Deku Tree > Basement 1 > Corner ==> Basement Ledge > Block (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1)
+            }
+            "Deku Tree > Basement 1 > South Door ==> Back Room > South (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1)
+            }
+            "Deku Tree > Basement 2 > Boss Door ==> Boss Room > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1)
+            }
+            "Deku Tree > Basement 2 > Pool ==> Basement Ledge > Web (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1)
+            }
+            "Deku Tree > Basement Ledge > Block ==> Basement 1 > Corner (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1)
+            }
+            "Deku Tree > Basement Ledge > Web ==> Basement 2 > Pool (1)" => {
+                Ok(ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1)
+            }
+            "Deku Tree > Boss Room > Arena: Blue Warp" => {
+                Ok(ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp)
+            }
+            "Deku Tree > Compass Room > Entry: Burn Web" => {
+                Ok(ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web)
+            }
+            "Deku Tree > Compass Room > Entry ==> Floor 3 > Door (1)" => {
+                Ok(ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1)
+            }
+            "Deku Tree > Floor 2 > Lower ==> Lobby > Center (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1)
+            }
+            "Deku Tree > Floor 2 > Lower ==> Lobby > Vines (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1)
+            }
+            "Deku Tree > Floor 2 > Slingshot Door ==> Lobby > Center (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1)
+            }
+            "Deku Tree > Floor 2 > Slingshot Door ==> Lobby > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1)
+            }
+            "Deku Tree > Floor 2 > Slingshot Door ==> Scrub Room > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1)
+            }
+            "Deku Tree > Floor 2 > Vines ==> Floor 3 > Climb (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1)
+            }
+            "Deku Tree > Floor 2 > Vines ==> Floor 3 > Climb (2)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2)
+            }
+            "Deku Tree > Floor 2 > Vines ==> Lobby > Center (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1)
+            }
+            "Deku Tree > Floor 2 > Vines ==> Lobby > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1)
+            }
+            "Deku Tree > Floor 2 > Vines ==> Lobby > Vines (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1)
+            }
+            "Deku Tree > Floor 3 > Door: Break Web" => {
+                Ok(ExitId::Deku_Tree__Floor_3__Door__Break_Web)
+            }
+            "Deku Tree > Floor 3 > Door ==> Compass Room > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1)
+            }
+            "Deku Tree > Floor 3 > Door ==> Lobby > Center (1)" => {
+                Ok(ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1)
+            }
+            "Deku Tree > Lobby > Center ==> Basement 1 > Center (1)" => {
+                Ok(ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1)
+            }
+            "Deku Tree > Lobby > Center ==> Basement Ledge > Block (1)" => {
+                Ok(ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1)
+            }
+            "Deku Tree > Lobby > Vines ==> Floor 2 > Lower (1)" => {
+                Ok(ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1)
+            }
+            "Deku Tree > Scrub Room > Entry ==> Floor 2 > Slingshot Door (1)" => {
+                Ok(ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1)
+            }
+            "Deku Tree > Scrub Room > Rear ==> Slingshot Room > Entry (1)" => {
+                Ok(ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1)
+            }
+            "Deku Tree > Skull Room > Entry ==> Back Room > Northwest (1)" => {
+                Ok(ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1)
+            }
+            "Deku Tree > Slingshot Room > Entry ==> Scrub Room > Rear (1)" => {
+                Ok(ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1)
+            }
+            "Deku Tree > Slingshot Room > Slingshot ==> Slingshot Upper > Ledge (1)" => {
+                Ok(ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1)
+            }
+            "Deku Tree > Slingshot Upper > Ledge ==> Slingshot Room > Slingshot (1)" => {
+                Ok(ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1)
+            }
+            "Kak > Spider House > Entry ==> KF > Kokiri Village > Saria's Porch (1)" => {
+                Ok(ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1)
+            }
+            "KF > Baba Corridor > Tree Side ==> Outside Deku Tree > Entry (1)" => {
+                Ok(ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1)
+            }
+            "KF > Baba Corridor > Village Side ==> Kokiri Village > Mido's Guardpost (1)" => {
+                Ok(ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1)
+            }
+            "KF > Boulder Maze > Entry ==> Kokiri Village > Training Center (1)" => {
+                Ok(ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1)
+            }
+            "KF > Know-it-all House > Entry ==> Kokiri Village > Know-it-all Porch (1)" => {
+                Ok(ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1)
+            }
+            "KF > Kokiri Village > Know-it-all Porch ==> Know-it-all House > Entry (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1)
+            }
+            "KF > Kokiri Village > Link's Porch ==> Link's House > Entry (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1)
+            }
+            "KF > Kokiri Village > Mido's Guardpost ==> Baba Corridor > Village Side (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1)
+            }
+            "KF > Kokiri Village > Mido's Porch ==> Mido's House > Entry (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1)
+            }
+            "KF > Kokiri Village > Saria's Porch ==> Kak > Spider House > Entry (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1)
+            }
+            "KF > Kokiri Village > Shop Porch ==> Shop > Entry (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1)
+            }
+            "KF > Kokiri Village > Training Center ==> Boulder Maze > Entry (1)" => {
+                Ok(ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1)
+            }
+            "KF > Link's House > Entry ==> Kokiri Village > Link's Porch (1)" => {
+                Ok(ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1)
+            }
+            "KF > Mido's House > Entry ==> Kokiri Village > Mido's Porch (1)" => {
+                Ok(ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1)
+            }
+            "KF > Outside Deku Tree > Entry ==> Baba Corridor > Tree Side (1)" => {
+                Ok(ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1)
+            }
+            "KF > Outside Deku Tree > Mouth ==> Deku Tree > Lobby > Entry (1)" => {
+                Ok(ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1)
+            }
+            "KF > Shop > Entry ==> Kokiri Village > Shop Porch (1)" => {
+                Ok(ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1)
+            }
+            _ => Err(format!("Could not recognize as a ExitId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ActionId {
@@ -774,6 +1180,18 @@ impl fmt::Display for ActionId {
     }
 }
 impl analyzer::world::Id for ActionId {}
+impl std::str::FromStr for ActionId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku Tree > Compass Room > Entry: Light Torch" => {
+                Ok(ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch)
+            }
+            _ => Err(format!("Could not recognize as a ActionId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
 pub enum CanonId {
@@ -794,6 +1212,18 @@ impl fmt::Display for CanonId {
     }
 }
 impl analyzer::world::Id for CanonId {}
+impl std::str::FromStr for CanonId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Deku_Lobby_Web" => Ok(CanonId::Deku_Lobby_Web),
+            "Deku_Basement_Web" => Ok(CanonId::Deku_Basement_Web),
+            "Defeat_Gohma" => Ok(CanonId::Defeat_Gohma),
+            _ => Err(format!("Could not recognize as a CanonId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum WarpId {
@@ -809,6 +1239,17 @@ impl fmt::Display for WarpId {
     }
 }
 impl analyzer::world::Id for WarpId {}
+impl std::str::FromStr for WarpId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Minuet" => Ok(WarpId::Minuet),
+            "Save" => Ok(WarpId::Save),
+            _ => Err(format!("Could not recognize as a WarpId: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum Objective {
@@ -828,6 +1269,19 @@ impl fmt::Display for Objective {
     }
 }
 impl analyzer::world::Id for Objective {}
+impl std::str::FromStr for Objective {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Ganon" => Ok(Objective::Ganon),
+            "Triforce Hunt" => Ok(Objective::Triforce_Hunt),
+            "Gohma" => Ok(Objective::Gohma),
+            "Deku Full Clear" => Ok(Objective::Deku_Full_Clear),
+            _ => Err(format!("Could not recognize as a Objective: {}", s)),
+        }
+    }
+}
 
 pub fn get_area(spot: SpotId) -> AreaId {
     match spot {
@@ -1256,7 +1710,7 @@ pub struct Spot {
 
 #[derive(Clone, Debug)]
 pub struct World {
-    objective: Objective,
+    pub objective: Objective,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.
