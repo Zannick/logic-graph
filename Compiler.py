@@ -800,7 +800,8 @@ class GameLogic(object):
         self.context_enter_rules
         self.context_here_overrides
         for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
-                      'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs']:
+                      'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs',
+                      'digraph.dot']:
             template = env.get_template(tname + '.jinja')
             with open(os.path.join(self.game_dir, 'src', tname), 'w') as f:
                 f.write(template.render(gl=self, **self.__dict__))

@@ -1,0 +1,24 @@
+digraph {{ game }} {
+    splines=line;
+    ranksep=1.0;
+%% for r in regions
+    subgraph cluster_{{ r.id }} {
+%% for a in r.areas
+        subgraph cluster_{{ a. id }} {
+%% for s in a.spots
+            {{ s.id }} [label = "{{ s.name }}"];
+%% endfor
+            label = "{{ a.name }}";
+            bgcolor = "white";
+        }
+%% endfor
+        label = "{{ r.name }}";
+        bgcolor = "lightgrey";
+    }
+%% endfor
+%% for s in gl.spots()
+%% for e in s.exits
+    {{ s.id }} -> {{ e|get_exit_target }};
+%% endfor
+%% endfor
+}

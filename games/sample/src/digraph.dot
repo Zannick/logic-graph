@@ -1,0 +1,203 @@
+digraph sample {
+    splines=line;
+    ranksep=1.0;
+    subgraph cluster_Deku_Tree {
+        subgraph cluster_Deku_Tree__Lobby {
+            Deku_Tree__Lobby__Entry [label = "Entry"];
+            Deku_Tree__Lobby__Center [label = "Center"];
+            Deku_Tree__Lobby__Vines [label = "Vines"];
+            label = "Lobby";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Floor_2 {
+            Deku_Tree__Floor_2__Lower [label = "Lower"];
+            Deku_Tree__Floor_2__Vines [label = "Vines"];
+            Deku_Tree__Floor_2__Slingshot_Door [label = "Slingshot Door"];
+            label = "Floor 2";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Scrub_Room {
+            Deku_Tree__Scrub_Room__Entry [label = "Entry"];
+            Deku_Tree__Scrub_Room__Rear [label = "Rear"];
+            label = "Scrub Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Slingshot_Room {
+            Deku_Tree__Slingshot_Room__Entry [label = "Entry"];
+            Deku_Tree__Slingshot_Room__Slingshot [label = "Slingshot"];
+            label = "Slingshot Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Slingshot_Upper {
+            Deku_Tree__Slingshot_Upper__Ledge [label = "Ledge"];
+            label = "Slingshot Upper";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Floor_3 {
+            Deku_Tree__Floor_3__Climb [label = "Climb"];
+            Deku_Tree__Floor_3__Door [label = "Door"];
+            label = "Floor 3";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Compass_Room {
+            Deku_Tree__Compass_Room__Entry [label = "Entry"];
+            Deku_Tree__Compass_Room__Compass [label = "Compass"];
+            Deku_Tree__Compass_Room__Ledge [label = "Ledge"];
+            label = "Compass Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Basement_1 {
+            Deku_Tree__Basement_1__Center [label = "Center"];
+            Deku_Tree__Basement_1__Corner [label = "Corner"];
+            Deku_Tree__Basement_1__South_Door [label = "South Door"];
+            label = "Basement 1";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Back_Room {
+            Deku_Tree__Back_Room__South [label = "South"];
+            Deku_Tree__Back_Room__Northwest [label = "Northwest"];
+            Deku_Tree__Back_Room__East [label = "East"];
+            label = "Back Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Skull_Room {
+            Deku_Tree__Skull_Room__Entry [label = "Entry"];
+            label = "Skull Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Basement_Ledge {
+            Deku_Tree__Basement_Ledge__Block [label = "Block"];
+            Deku_Tree__Basement_Ledge__Web [label = "Web"];
+            label = "Basement Ledge";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Basement_2 {
+            Deku_Tree__Basement_2__Pool [label = "Pool"];
+            Deku_Tree__Basement_2__Boss_Door [label = "Boss Door"];
+            label = "Basement 2";
+            bgcolor = "white";
+        }
+        subgraph cluster_Deku_Tree__Boss_Room {
+            Deku_Tree__Boss_Room__Entry [label = "Entry"];
+            Deku_Tree__Boss_Room__Arena [label = "Arena"];
+            label = "Boss Room";
+            bgcolor = "white";
+        }
+        label = "Deku Tree";
+        bgcolor = "lightgrey";
+    }
+    subgraph cluster_KF {
+        subgraph cluster_KF__Links_House {
+            KF__Links_House__Start_Point [label = "Start Point"];
+            KF__Links_House__Entry [label = "Entry"];
+            label = "Link's House";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Kokiri_Village {
+            KF__Kokiri_Village__Links_Porch [label = "Link's Porch"];
+            KF__Kokiri_Village__Midos_Porch [label = "Mido's Porch"];
+            KF__Kokiri_Village__Knowitall_Porch [label = "Know-it-all Porch"];
+            KF__Kokiri_Village__Training_Center [label = "Training Center"];
+            KF__Kokiri_Village__Shop_Porch [label = "Shop Porch"];
+            KF__Kokiri_Village__Sarias_Porch [label = "Saria's Porch"];
+            KF__Kokiri_Village__Midos_Guardpost [label = "Mido's Guardpost"];
+            label = "Kokiri Village";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Boulder_Maze {
+            KF__Boulder_Maze__Entry [label = "Entry"];
+            KF__Boulder_Maze__Reward [label = "Reward"];
+            label = "Boulder Maze";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Baba_Corridor {
+            KF__Baba_Corridor__Village_Side [label = "Village Side"];
+            KF__Baba_Corridor__Deku_Babas [label = "Deku Babas"];
+            KF__Baba_Corridor__Tree_Side [label = "Tree Side"];
+            label = "Baba Corridor";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Outside_Deku_Tree {
+            KF__Outside_Deku_Tree__Entry [label = "Entry"];
+            KF__Outside_Deku_Tree__Left [label = "Left"];
+            KF__Outside_Deku_Tree__Right [label = "Right"];
+            KF__Outside_Deku_Tree__Mouth [label = "Mouth"];
+            label = "Outside Deku Tree";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Midos_House {
+            KF__Midos_House__Entry [label = "Entry"];
+            label = "Mido's House";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Knowitall_House {
+            KF__Knowitall_House__Entry [label = "Entry"];
+            label = "Know-it-all House";
+            bgcolor = "white";
+        }
+        subgraph cluster_KF__Shop {
+            KF__Shop__Entry [label = "Entry"];
+            label = "Shop";
+            bgcolor = "white";
+        }
+        label = "Kokiri Forest";
+        bgcolor = "lightgrey";
+    }
+    subgraph cluster_Kak {
+        subgraph cluster_Kak__Spider_House {
+            Kak__Spider_House__Entry [label = "Entry"];
+            label = "Spider House";
+            bgcolor = "white";
+        }
+        label = "Kakariko Village";
+        bgcolor = "lightgrey";
+    }
+    Deku_Tree__Lobby__Center -> Deku_Tree__Basement_1__Center;
+    Deku_Tree__Lobby__Center -> Deku_Tree__Basement_Ledge__Block;
+    Deku_Tree__Lobby__Vines -> Deku_Tree__Floor_2__Lower;
+    Deku_Tree__Floor_2__Lower -> Deku_Tree__Lobby__Vines;
+    Deku_Tree__Floor_2__Lower -> Deku_Tree__Lobby__Center;
+    Deku_Tree__Floor_2__Vines -> Deku_Tree__Floor_3__Climb;
+    Deku_Tree__Floor_2__Vines -> Deku_Tree__Floor_3__Climb;
+    Deku_Tree__Floor_2__Vines -> Deku_Tree__Lobby__Vines;
+    Deku_Tree__Floor_2__Vines -> Deku_Tree__Lobby__Entry;
+    Deku_Tree__Floor_2__Vines -> Deku_Tree__Lobby__Center;
+    Deku_Tree__Floor_2__Slingshot_Door -> Deku_Tree__Scrub_Room__Entry;
+    Deku_Tree__Floor_2__Slingshot_Door -> Deku_Tree__Lobby__Entry;
+    Deku_Tree__Floor_2__Slingshot_Door -> Deku_Tree__Lobby__Center;
+    Deku_Tree__Scrub_Room__Entry -> Deku_Tree__Floor_2__Slingshot_Door;
+    Deku_Tree__Scrub_Room__Rear -> Deku_Tree__Slingshot_Room__Entry;
+    Deku_Tree__Slingshot_Room__Entry -> Deku_Tree__Scrub_Room__Rear;
+    Deku_Tree__Slingshot_Room__Slingshot -> Deku_Tree__Slingshot_Upper__Ledge;
+    Deku_Tree__Slingshot_Upper__Ledge -> Deku_Tree__Slingshot_Room__Slingshot;
+    Deku_Tree__Floor_3__Door -> Deku_Tree__Compass_Room__Entry;
+    Deku_Tree__Floor_3__Door -> Deku_Tree__Lobby__Center;
+    Deku_Tree__Compass_Room__Entry -> Deku_Tree__Floor_3__Door;
+    Deku_Tree__Basement_1__Center -> Deku_Tree__Lobby__Center;
+    Deku_Tree__Basement_1__Corner -> Deku_Tree__Basement_Ledge__Block;
+    Deku_Tree__Basement_1__South_Door -> Deku_Tree__Back_Room__South;
+    Deku_Tree__Back_Room__Northwest -> Deku_Tree__Skull_Room__Entry;
+    Deku_Tree__Back_Room__East -> Deku_Tree__Basement_Ledge__Web;
+    Deku_Tree__Skull_Room__Entry -> Deku_Tree__Back_Room__Northwest;
+    Deku_Tree__Basement_Ledge__Block -> Deku_Tree__Basement_1__Corner;
+    Deku_Tree__Basement_Ledge__Web -> Deku_Tree__Basement_2__Pool;
+    Deku_Tree__Basement_2__Pool -> Deku_Tree__Basement_Ledge__Web;
+    Deku_Tree__Basement_2__Boss_Door -> Deku_Tree__Boss_Room__Entry;
+    KF__Links_House__Entry -> KF__Kokiri_Village__Links_Porch;
+    KF__Kokiri_Village__Links_Porch -> KF__Links_House__Entry;
+    KF__Kokiri_Village__Midos_Porch -> KF__Midos_House__Entry;
+    KF__Kokiri_Village__Knowitall_Porch -> KF__Knowitall_House__Entry;
+    KF__Kokiri_Village__Training_Center -> KF__Boulder_Maze__Entry;
+    KF__Kokiri_Village__Shop_Porch -> KF__Shop__Entry;
+    KF__Kokiri_Village__Sarias_Porch -> Kak__Spider_House__Entry;
+    KF__Kokiri_Village__Midos_Guardpost -> KF__Baba_Corridor__Village_Side;
+    KF__Boulder_Maze__Entry -> KF__Kokiri_Village__Training_Center;
+    KF__Baba_Corridor__Village_Side -> KF__Kokiri_Village__Midos_Guardpost;
+    KF__Baba_Corridor__Tree_Side -> KF__Outside_Deku_Tree__Entry;
+    KF__Outside_Deku_Tree__Entry -> KF__Baba_Corridor__Tree_Side;
+    KF__Outside_Deku_Tree__Mouth -> Deku_Tree__Lobby__Entry;
+    KF__Midos_House__Entry -> KF__Kokiri_Village__Midos_Porch;
+    KF__Knowitall_House__Entry -> KF__Kokiri_Village__Knowitall_Porch;
+    KF__Shop__Entry -> KF__Kokiri_Village__Shop_Porch;
+    Kak__Spider_House__Entry -> KF__Kokiri_Village__Sarias_Porch;
+}
