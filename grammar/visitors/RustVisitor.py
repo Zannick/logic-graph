@@ -10,10 +10,13 @@ class RustVisitor(RulesVisitor):
         self.ctxdict = ctxdict
         self.name = name
 
-    def _getRealRef(self, ref):
+    def _getRefGetter(self, ref):
         if ref in self.ctxdict:
-            return f'ctx.{self.ctxdict[ref]}'
+            return f'ctx.{self.ctxdict[ref]}()'
         return BUILTINS.get(ref, '$' + ref)
+    
+    def _getRefSetter(self, ref):
+        return f'ctx.{self.ctxdict[ref]}'
 
     def _getFuncAndArgs(self, func):
         if func in BUILTINS:
@@ -81,7 +84,7 @@ class RustVisitor(RulesVisitor):
         return f'({self.visit(ctx.value())} & {num}) == {num}'
 
     def visitRefEq(self, ctx):
-        ref = self._getRealRef(str(ctx.REF())[1:])
+        ref = self._getRefGetter(str(ctx.REF())[1:])
         if ctx.ITEM():
             return f'{ref} == Item::{ctx.ITEM()}'
         return f'{ref} == ctx.{ctx.SETTING()}'
@@ -91,7 +94,7 @@ class RustVisitor(RulesVisitor):
         return f'{"!" if ctx.NOT() else ""}ctx.{ctx.SETTING()}'
 
     def visitArgument(self, ctx):
-        ref = self._getRealRef(str(ctx.REF())[1:])
+        ref = self._getRefGetter(str(ctx.REF())[1:])
         return f'{"!" if ctx.NOT() else ""}{ref}'
 
     def visitItemCount(self, ctx):
@@ -105,7 +108,7 @@ class RustVisitor(RulesVisitor):
         return f'ctx.has(Item::{ctx.ITEM()})'
 
     def visitOneArgument(self, ctx):
-        ref = self._getRealRef(str(ctx.REF())[1:])
+        ref = self._getRefGetter(str(ctx.REF())[1:])
         if ref.startswith('ctx'):
             return ref
         return f'ctx.has({ref})'
@@ -114,7 +117,7 @@ class RustVisitor(RulesVisitor):
         if ctx.INT():
             return str(ctx.INT())
         if ctx.REF():
-            return self._getRealRef(str(ctx.REF())[1:])
+            return self._getRefGetter(str(ctx.REF())[1:])
         if ctx.SETTING():
             return f'ctx.{ctx::SETTING()}'
         # TODO: constants
@@ -131,7 +134,7 @@ class RustVisitor(RulesVisitor):
                 + '}')
 
     def visitRefInList(self, ctx):
-        return (f'match {self._getRealRef(str(ctx.REF())[1:])} {{ '
+        return (f'match {self._getRefGetter(str(ctx.REF())[1:])} {{ '
                 + '|'.join(f'Item::{i}' for i in ctx.ITEM())
                 + ' => true, _ => false, }')
 
@@ -146,10 +149,10 @@ class RustVisitor(RulesVisitor):
             val = 'false'
         else:
             val = self.visit(ctx.str_() or ctx.num())
-        return f'{self._getRealRef(str(ctx.REF())[1:])} = {val};'
+        return f'{self._getRefSetter(str(ctx.REF())[1:])} = {val};'
 
     def visitAlter(self, ctx):
-        return f'{self._getRealRef(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
+        return f'{self._getRefSetter(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
 
     def visitFuncNum(self, ctx):
         func = self._getFuncAndArgs(str(ctx.FUNC()))

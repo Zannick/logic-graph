@@ -184,6 +184,22 @@ impl Context {
             ..Context::default()
         }
     }
-%# TODO: handle 'here' ctx overrides
+
+%% for ctx, t in context_types.items()
+    pub fn {{ ctx }}(&self) -> {{ t }} {
+%# Areas have priority over regions
+        match get_area(self.position) {
+%% for area, override in context_here_overrides[ctx]['area'].items()
+            AreaId::{{ area }} => {{ override }},
+%% endfor
+            _ => match get_region(self.position) {
+%% for region, override in context_here_overrides[ctx]['region'].items()
+                RegionId::{{ region }} => {{ override }},
+%% endfor
+                _ => self.{{ ctx }}
+            }
+        }
+    }
+%% endfor
 }
 

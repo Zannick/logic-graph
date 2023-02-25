@@ -449,4 +449,48 @@ impl Context {
             ..Context::default()
         }
     }
+
+    pub fn position(&self) -> SpotId {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.position,
+            },
+        }
+    }
+    pub fn save(&self) -> SpotId {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                RegionId::Deku_Tree => SpotId::Deku_Tree__Lobby__Entry,
+                _ => self.save,
+            },
+        }
+    }
+    pub fn child(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.child,
+            },
+        }
+    }
+    pub fn tod(&self) -> &'static str {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.tod,
+            },
+        }
+    }
+    pub fn rupees(&self) -> i32 {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.rupees,
+            },
+        }
+    }
+    pub fn deku_tree__compass_room__ctx__torch(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.deku_tree__compass_room__ctx__torch,
+            },
+        }
+    }
 }

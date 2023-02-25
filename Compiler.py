@@ -290,7 +290,7 @@ class GameLogic(object):
                     self._misc_errors.append(f'Warp {name} goes to undefined ctx dest: ^{val}')
                 elif self.context_types[val] != 'SpotId':
                     self._misc_errors.append(f'Warp {name} goes to invalid ctx dest: ^{val} (of type {self.context_types[val]})')
-                info['target_id'] = 'ctx.' + val
+                info['target_id'] = f'ctx.{val}()'
             else:
                 id = construct_id(info['to'])
                 if not any(info['id'] == id for info in self.spots()):
@@ -720,6 +720,27 @@ class GameLogic(object):
                 d[local] = cname
         return d
 
+    @cached_property
+    def context_here_overrides(self):
+        d = {c: {'region': defaultdict(dict), 'area': defaultdict(dict)}
+             for c in self.context_types}
+        for r in self.regions:
+            localctx = self.get_local_ctx(r)
+            if here := r.get('here'):
+                for k, v in here.items():
+                    t = self.context_types[localctx[k]]
+                    if t == 'SpotId':
+                        v = f'{r["name"]} > {v}'
+                    d[localctx[k]]['region'][r['id']] = str_to_rusttype(v, t)
+        for a in self.areas():
+            localctx = self.get_local_ctx(a)
+            if here := a.get('here'):
+                for k, v in here.items():
+                    t = self.context_types[localctx[k]]
+                    if t == 'SpotId':
+                        v = f'{a["fullname"]} > {v}'
+                    d[localctx[k]]['area'][a['id']] = str_to_rusttype(v, t)
+        return d
 
     @cached_property
     def context_enter_rules(self):
@@ -767,6 +788,7 @@ class GameLogic(object):
         self.price_types
         self.movement_tables
         self.context_enter_rules
+        self.context_here_overrides
         for tname in ['items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
                       'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs']:
             template = env.get_template(tname + '.jinja')

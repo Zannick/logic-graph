@@ -9,7 +9,7 @@ macro_rules! helper__is_child {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.child
+        $ctx.child()
     }};
 }
 
@@ -20,7 +20,7 @@ macro_rules! helper__is_adult {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        !$ctx.child
+        !$ctx.child()
     }};
 }
 

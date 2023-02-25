@@ -77,11 +77,11 @@ pub fn access_is_child_and_sticks_and_nuts(ctx: &Context) -> bool {
 }
 pub fn access_deku_tree__compass_room__entry__floor_3_(ctx: &Context) -> bool {
     // ^_torch
-    ctx.deku_tree__compass_room__ctx__torch
+    ctx.deku_tree__compass_room__ctx__torch()
 }
 pub fn access_deku_tree__compass_room__entry___light_torch_req(ctx: &Context) -> bool {
     // $is_child and $Sticks and not ^_torch
-    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch)
+    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch())
 }
 pub fn access_is_adult_or_can_child_attack(ctx: &Context) -> bool {
     // $is_adult or $can_child_attack
@@ -176,15 +176,15 @@ pub fn access_can_play__minuet_of_forest(ctx: &Context) -> bool {
 }
 pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
-    ctx.rupees = std::cmp::min(ctx.rupees + 1, helper__wallet_max!(ctx));
+    ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));
 }
 pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
-    ctx.rupees = std::cmp::min(ctx.rupees + 5, helper__wallet_max!(ctx));
+    ctx.rupees = std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx));
 }
 pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
-    ctx.rupees = std::cmp::min(ctx.rupees + 50, helper__wallet_max!(ctx));
+    ctx.rupees = std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx));
 }
 pub fn action_deku_tree__compass_room__entry___light_torch__do(ctx: &mut Context) {
     // ^_torch = True
