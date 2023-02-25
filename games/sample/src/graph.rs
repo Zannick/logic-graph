@@ -1664,6 +1664,16 @@ impl world::Action for Action {
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => rules::action_save__position(ctx),
         }
     }
+    fn has_effect(&self, ctx: &Context) -> bool {
+        match self.id {
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                rules::action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx)
+            }
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
+                rules::action_has_effect_save__position(ctx)
+            }
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]

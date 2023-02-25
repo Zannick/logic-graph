@@ -26,4 +26,7 @@ pub fn action_{{ id }}(ctx: &mut Context) {
     // {{ (info.act or info.pr).text }}
     {{ (info.act or info.pr)|prToRust(info) }}
 }
+pub fn action_has_effect_{{ id }}(ctx: &Context) -> bool {
+    {{ (info.act or info.pr)|actToHasEffect(info) }}
+}
 %% endfor

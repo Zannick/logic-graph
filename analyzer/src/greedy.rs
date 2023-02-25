@@ -80,7 +80,7 @@ where
     E: Exit<Context = T> + Accessible<Context = T>,
 {
     for act in world.get_spot_actions(ctx.get().position()) {
-        if act.can_access(ctx.get()) {
+        if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
             ctx.activate(act);
         }
     }

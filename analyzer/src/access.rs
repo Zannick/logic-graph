@@ -30,7 +30,7 @@ where
     world
         .get_spot_actions(spot)
         .iter()
-        .any(|act| act.can_access(ctx))
+        .any(|act| act.can_access(ctx) && act.has_effect(ctx))
 }
 
 pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
@@ -229,7 +229,7 @@ where
 {
     let mut ctx_list = Vec::new();
     for act in world.get_spot_actions(ctx.get().position()) {
-        if act.can_access(ctx.get()) {
+        if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
             ctx_list.push(c2);
@@ -309,7 +309,7 @@ where
     let mut ret = false;
     for (spot_id, spot_ctx) in access_simple(world, &ctx) {
         for act in world.get_spot_actions(spot_id) {
-            if act.can_access(&spot_ctx) {
+            if act.can_access(&spot_ctx) && act.has_effect(&spot_ctx) {
                 act.perform(ctx);
             }
         }

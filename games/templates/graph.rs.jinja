@@ -144,6 +144,13 @@ impl world::Action for Action {
 %% endfor
         }
     }
+    fn has_effect(&self, ctx: &Context) -> bool {
+        match self.id {
+%% for act in gl.actions()
+            ActionId::{{ act.id }} => rules::action_has_effect_{{ act.action_id }}(ctx),
+%% endfor
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]

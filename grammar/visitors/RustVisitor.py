@@ -168,3 +168,23 @@ class RustVisitor(RulesVisitor):
             return f'{func}{", ".join(self.visit(n) for n in ctx.num())})'
         else:
             return func[:-2] + ')'
+        
+
+class ActionHasEffectVisitor(RustVisitor):
+
+    def __init__(self, ctxdict, name):
+        self.ctxdict = ctxdict
+        self.name = name
+
+    def visitActions(self, ctx):
+        return ' && '.join(self.visit(ch) for ch in ctx.action())
+
+    def visitSet(self, ctx):
+        return super().visitSet(ctx)[:-1].replace(' = ', ' == ')
+    
+    def visitAlter(self, ctx):
+        op = str(ctx.BINOP())
+        if op in ('+', '-'):
+            return f'0 == {self.visit(ctx.num())}'
+        return f'1 == {self.visit(ctx.num())}'
+

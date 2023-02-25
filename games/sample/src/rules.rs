@@ -178,19 +178,34 @@ pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));
 }
+pub fn action_has_effect_rupees__min__rupees__1_wallet_max(ctx: &Context) -> bool {
+    ctx.rupees == std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx))
+}
 pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx));
+}
+pub fn action_has_effect_rupees__min__rupees__5_wallet_max(ctx: &Context) -> bool {
+    ctx.rupees == std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx))
 }
 pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx));
 }
+pub fn action_has_effect_rupees__min__rupees__50_wallet_max(ctx: &Context) -> bool {
+    ctx.rupees == std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx))
+}
 pub fn action_deku_tree__compass_room__entry___light_torch__do(ctx: &mut Context) {
     // ^_torch = True
     ctx.deku_tree__compass_room__ctx__torch = true;
 }
+pub fn action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx: &Context) -> bool {
+    ctx.deku_tree__compass_room__ctx__torch == true
+}
 pub fn action_save__position(ctx: &mut Context) {
     // ^save = ^position
     ctx.save = ctx.position();
+}
+pub fn action_has_effect_save__position(ctx: &Context) -> bool {
+    ctx.save == ctx.position()
 }

@@ -773,6 +773,10 @@ class GameLogic(object):
         return RustVisitor(self.get_local_ctx(info), pr.name).visit(pr.tree)
 
 
+    def actToHasEffect(self, pr, info):
+        return ActionHasEffectVisitor(self.get_local_ctx(info), pr.name).visit(pr.tree)
+
+
     def render(self):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir),
                                  line_statement_prefix='%%',
@@ -781,6 +785,7 @@ class GameLogic(object):
             'construct_id': construct_id,
             'treeToString': treeToString,
             'prToRust': self.prToRust,
+            'actToHasEffect': self.actToHasEffect,
             'get_int_type_for_max': get_int_type_for_max,
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
             'get_exit_target': get_exit_target,

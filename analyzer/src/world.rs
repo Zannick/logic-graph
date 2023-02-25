@@ -51,6 +51,7 @@ pub trait Action: Accessible {
     fn id(&self) -> Self::ActionId;
     fn time(&self) -> i32;
     fn perform(&self, ctx: &mut Self::Context);
+    fn has_effect(&self, ctx: &Self::Context) -> bool;
 }
 
 pub trait Warp: Accessible {
