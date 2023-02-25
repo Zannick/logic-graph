@@ -13,6 +13,34 @@ use analyzer::context;
 use analyzer::world::World;
 use enum_map::EnumMap;
 
+pub mod enums {
+    use std::fmt;
+    #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default)]
+    pub enum Tod {
+        #[default]
+        None,
+        Day,
+    }
+    impl fmt::Display for Tod {
+        fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+            match self {
+                Tod::None => write!(f, "{}", "None"),
+                Tod::Day => write!(f, "{}", "Day"),
+            }
+        }
+    }
+    impl std::str::FromStr for Tod {
+        type Err = String;
+
+        fn from_str(s: &str) -> Result<Self, Self::Err> {
+            match s {
+                "Day" => Ok(Tod::Day),
+                _ => Err(format!("Could not recognize as a Tod: {}", s)),
+            }
+        }
+    }
+}
+
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub enum Status {
     #[default]
@@ -27,7 +55,7 @@ pub struct Context {
     pub position: SpotId,
     pub save: SpotId,
     pub child: bool,
-    pub tod: &'static str,
+    pub tod: enums::Tod,
     pub rupees: i32,
     pub deku_tree__compass_room__ctx__torch: bool,
     // settings
@@ -443,7 +471,7 @@ impl Context {
             position: SpotId::KF__Links_House__Start_Point,
             save: SpotId::KF__Links_House__Start_Point,
             child: true,
-            tod: "day",
+            tod: enums::Tod::Day,
             rupees: 0,
             deku_tree__compass_room__ctx__torch: false,
             ..Context::default()
@@ -472,7 +500,7 @@ impl Context {
             },
         }
     }
-    pub fn tod(&self) -> &'static str {
+    pub fn tod(&self) -> enums::Tod {
         match get_area(self.position) {
             _ => match get_region(self.position) {
                 _ => self.tod,

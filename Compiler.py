@@ -111,10 +111,9 @@ def config_type(val: Any) -> str:
 
 ctx_types = {
     'Id': 'SpotId',
-    # TODO: for enum support
-    # arguably even anything that's a string could be an enum instead
-    # but we'd have to organize all the possible values
-    'str': "&'static str",
+    # arguably anything that's a string will be an enum instead
+    # but we have to organize all the possible values
+    'str': 'ENUM',
     'int': 'i32',
     'float': 'f32',
 }
@@ -124,10 +123,10 @@ def typenameof(val: Any) -> str:
 
 
 def str_to_rusttype(val: str, t: str) -> str:
+    if t.startswith('enums::'):
+        return f'{t}::{val.capitalize()}'
     if 'Id' in t:
         return f'{t}::{construct_id(val)}'
-    if t == "&'static str":
-        return f'"{val}"'
     if t == 'bool':
         return str(val).lower()
     return val
@@ -422,13 +421,13 @@ class GameLogic(object):
 
         id = construct_id(str(pr.name) if '^_' in str(pr.text) else str(pr.text)).lower()
         if id not in d:
-            d[id] = {'pr': info['pr']}
+            d[id] = {prkey: info[prkey]}
             return id
 
-        if d[id]['pr'].text != pr.text:
+        if d[id][prkey].text != pr.text:
             id = id + sum(1 for k in d if k.startswith(id))
             assert id not in d
-            d[id] = {'pr': info['pr']}
+            d[id] = {prkey: info[prkey]}
         return id
 
 
@@ -559,7 +558,7 @@ class GameLogic(object):
                 if 'pr' in pt:
                     visitor.visit(pt['pr'].tree, pt['pr'].name, self.get_local_ctx(pt))
                 if 'act' in pt:
-                    visitor.visit(pt['act'].tree, pt['pr'].name, self.get_local_ctx(pt))
+                    visitor.visit(pt['act'].tree, pt['act'].name, self.get_local_ctx(pt))
             if reverse:
                 for pr in self.nonpoint_parse_results():
                     visitor.visit(pr.tree, pr.name, self.get_default_ctx())
@@ -572,8 +571,10 @@ class GameLogic(object):
         hv = HelperVisitor(self.helpers, self.context_types, self.settings)
         _visit(hv, True)
 
-        cv = ContextVisitor()
+        cv = ContextVisitor(self.context_types, self.context_values)
         _visit(cv)
+        self.context_str_values = cv.values
+        
 
         for s in self.settings.keys() - self.used_settings.keys():
             logging.warning(f'Did not find usage of setting {s}')
@@ -697,7 +698,11 @@ class GameLogic(object):
     @cached_property
     def context_types(self):
         d = {'position': 'SpotId'}
-        d.update((ctx, typenameof(val)) for ctx, val in self.context_values.items())
+        for ctx, val in self.context_values.items():
+            t = typenameof(val)
+            if t == 'ENUM':
+                t = 'enums::' + ctx.capitalize()
+            d[ctx] = t
         return d
 
     def get_default_ctx(self):

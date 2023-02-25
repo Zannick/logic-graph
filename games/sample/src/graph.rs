@@ -1251,7 +1251,7 @@ impl std::str::FromStr for WarpId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd)]
 pub enum Objective {
     Ganon,
     Triforce_Hunt,
@@ -1268,7 +1268,6 @@ impl fmt::Display for Objective {
         }
     }
 }
-impl analyzer::world::Id for Objective {}
 impl std::str::FromStr for Objective {
     type Err = String;
 

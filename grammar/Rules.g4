@@ -8,7 +8,7 @@ boolExpr
     // Ordering is important!
     | invoke  // a FUNC on a primitive
     | meta  // a FUNC on an boolExpr
-    | switch
+    | switchBool
     | cond
     | cmp
     | cmpStr
@@ -22,8 +22,9 @@ boolExpr
 
 actions : action (';' action)* ';'?;
 
-action  : REF '=' ( str | num | TRUE | FALSE )  # Set
-        | REF BINOP '=' num                     # Alter
+// TODO? a "^here" builtin ref for the spot it's defined in
+action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
+        | REF BINOP '=' num                                     # Alter
         ;
 
 // might remove this as those rules need to be separate for a traversal graph anyway
@@ -56,7 +57,8 @@ condStr : IF '(' boolExpr ')' '{' str '}'
         ;
 
 
-switch  : PER ITEM '{' ( INT '=>' boolExpr ';' )+
+switchBool
+        : PER ITEM '{' ( INT '=>' boolExpr ';' )+
                         '_' '=>' boolExpr ';'? '}'      # PerItemBool
         | PER SETTING '{' 
             ( ( INT '=>' boolExpr ';' )+

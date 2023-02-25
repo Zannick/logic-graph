@@ -15,14 +15,14 @@ use std::ops::Range;
 use std::option::Option;
 
 %% from 'enum.rs.jinja' import enum
-{{ enum('RegionId', regions) }}
-{{ enum('AreaId', gl.areas()|list) }}
-{{ enum('SpotId', gl.spots()|list, True) }}
-{{ enum('LocationId', gl.locations()|list) }}
-{{ enum('ExitId', gl.exits()|list) }}
-{{ enum('ActionId', gl.actions()|list) }}
-{{ enum('CanonId', canon_places, True) }}
-{{ enum('WarpId', warps.values()|list) }}
+{{ enum('RegionId', regions, id=True) }}
+{{ enum('AreaId', gl.areas()|list, id=True) }}
+{{ enum('SpotId', gl.spots()|list, True, id=True) }}
+{{ enum('LocationId', gl.locations()|list, id=True) }}
+{{ enum('ExitId', gl.exits()|list, id=True) }}
+{{ enum('ActionId', gl.actions()|list, id=True) }}
+{{ enum('CanonId', canon_places, True, id=True) }}
+{{ enum('WarpId', warps.values()|list, id=True) }}
 {{ enum('Objective', objectives) }}
 
 pub fn get_area(spot: SpotId) -> AreaId {

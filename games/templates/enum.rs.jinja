@@ -1,5 +1,5 @@
-%% macro enum(name, values, default=False)
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum{{ ", Default" if default }})]
+%% macro enum(name, values, default=False, id=False)
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default %}, Default{% endif %})]
 pub enum {{ name }} {
 %% if default
     #[default] None,
@@ -20,7 +20,9 @@ impl fmt::Display for {{ name }} {
         }
     }
 }
+%% if id
 impl analyzer::world::Id for {{ name }} {}
+%% endif
 impl std::str::FromStr for {{ name }} {
     type Err = String;
 

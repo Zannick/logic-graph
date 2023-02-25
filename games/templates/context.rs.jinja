@@ -11,6 +11,14 @@ use analyzer::context;
 use analyzer::world::World;
 use enum_map::EnumMap;
 
+pub mod enums {
+use std::fmt;
+%% from 'enum.rs.jinja' import enum
+%% for etype, evars in context_str_values.items()
+{{ enum(etype|capitalize, evars|map('capitalize')|list, default=True) }}
+%% endfor
+}
+
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub enum Status {
     #[default] None,

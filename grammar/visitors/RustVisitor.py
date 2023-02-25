@@ -143,13 +143,19 @@ class RustVisitor(RulesVisitor):
         return ' '.join(self.visit(ch) for ch in ctx.action())
 
     def visitSet(self, ctx):
+        var = str(ctx.REF(0))[1:]
         if ctx.TRUE():
             val = 'true'
         elif ctx.FALSE():
             val = 'false'
+        elif len(ctx.REF()) > 1:
+            val = self._getRefGetter(str(ctx.REF(1))[1:])
+        elif ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            val = f'{_placePrefix[pl.count(">")]}::{construct_id(pl)}'
         else:
             val = self.visit(ctx.str_() or ctx.num())
-        return f'{self._getRefSetter(str(ctx.REF())[1:])} = {val};'
+        return f'{self._getRefSetter(var)} = {val};'
 
     def visitAlter(self, ctx):
         return f'{self._getRefSetter(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'

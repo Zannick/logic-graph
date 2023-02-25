@@ -5,7 +5,7 @@
 use std::fmt;
 
 %% from 'enum.rs.jinja' import enum
-{{ enum('Item', all_items, True) }}
+{{ enum('Item', all_items, True, id=True) }}
 
 pub fn unused_item(id: Item) -> bool {
     match id {

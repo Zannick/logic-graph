@@ -61,6 +61,9 @@ areas:
           tags: [load, interior]
     - name: Saria's Porch
       coord: [20, 22]
+      #actions:
+      #  - name: Save
+      #    do: ^save = ^position
       exits:
         - to: Kak > Spider House > Entry
           tags: [load, interior]
