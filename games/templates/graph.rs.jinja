@@ -193,7 +193,7 @@ pub struct Spot {
 
 #[derive(Clone, Debug)]
 pub struct World {
-    objective: Objective,
+    pub objective: Objective,
     // These are arrays that group the items together by their parent.
     // Using EnumMap for this ONLY WORKS if the keys are properly ordered to group
     // nearby things together.

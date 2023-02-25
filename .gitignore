@@ -11,3 +11,4 @@ target/
 *.interp
 *.tokens
 *.lock
+*.setting

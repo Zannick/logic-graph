@@ -1,0 +1,59 @@
+use crate::context::Context;
+use crate::graph::World;
+use analyzer::settings::*;
+use std::fs::File;
+use std::io::Read;
+use yaml_rust::{Yaml, YamlLoader};
+
+fn read_key_value(
+    world: &mut World,
+    ctx: &mut Context,
+    key: &Yaml,
+    val: &Yaml,
+) -> Result<(), String> {
+    match key.as_str() {
+        Some("objective") => {
+            world.objective = parse_str_into(key, val)?;
+        }
+        Some("triforce_count") => {
+            ctx.triforce_count = parse_int(key, val)?;
+        }
+        Some("logic_deku_b1_skip") => {
+            ctx.logic_deku_b1_skip = parse_bool(key, val)?;
+        }
+        _ => {
+            return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
+        }
+    }
+    Ok(())
+}
+
+pub fn load_settings(filename: Option<&str>) -> (World, Context) {
+    let mut world = World::new();
+    let mut ctx = Context::new();
+    if let Some(filename) = filename {
+        let mut file = File::open(filename)
+            .unwrap_or_else(|e| panic!("Couldn't open file \"{}\": {:?}", filename, e));
+        let mut settings = String::new();
+        file.read_to_string(&mut settings)
+            .unwrap_or_else(|e| panic!("Couldn't read from file \"{}\": {:?}", filename, e));
+        let yaml = YamlLoader::load_from_str(&settings).expect("YAML parse error");
+        let mut errs = Vec::new();
+        for (key, value) in yaml[0]
+            .as_hash()
+            .expect("YAML file should be a key-value map")
+        {
+            if let Err(e) = read_key_value(&mut world, &mut ctx, key, value) {
+                errs.push(e);
+            }
+        }
+        if !errs.is_empty() {
+            panic!(
+                "Errors reading YAML file: {}\n{} total errors",
+                errs.join("\n"),
+                errs.len()
+            );
+        }
+    }
+    (world, ctx)
+}

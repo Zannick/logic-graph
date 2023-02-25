@@ -149,7 +149,10 @@ impl context::Ctx for Context {
 %% for ptype in ['Spot', 'Area', 'Region']
     fn all_{{ ptype|lower }}_checks(&self, id: {{ ptype }}Id) -> bool {
         let r = {{ ptype|lower }}_locations(id);
-        self.status.as_slice()[r.start..r.end].iter().all(|&x| x == Status::Visited)
+        for status in self.status.as_slice()[r.start..r.end].iter() {
+            if status == &Status::None { return false; }
+        }
+        true
     }
 %% endfor
 

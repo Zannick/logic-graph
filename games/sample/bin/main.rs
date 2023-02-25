@@ -8,12 +8,21 @@ use analyzer::algo::*;
 use analyzer::context::*;
 use analyzer::greedy::*;
 use libsample::*;
+use std::env;
 
 fn main() {
-    let world = graph::World::new();
-    let context = context::Context::new();
+    let args: Vec<String> = env::args().collect();
+    let (world, context) =
+        settings::load_settings(if args.len() > 1 { Some(&args[1]) } else { None });
     if !can_win(&world, &context) {
-        panic!("Cannot win on default settings");
+        panic!(
+            "Cannot win on {} settings",
+            if args.len() > 1 {
+                "provided"
+            } else {
+                "default"
+            }
+        );
     }
     search(&world, context);
 }

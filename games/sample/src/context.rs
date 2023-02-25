@@ -393,21 +393,30 @@ impl context::Ctx for Context {
 
     fn all_spot_checks(&self, id: SpotId) -> bool {
         let r = spot_locations(id);
-        self.status.as_slice()[r.start..r.end]
-            .iter()
-            .all(|&x| x == Status::Visited)
+        for status in self.status.as_slice()[r.start..r.end].iter() {
+            if status == &Status::None {
+                return false;
+            }
+        }
+        true
     }
     fn all_area_checks(&self, id: AreaId) -> bool {
         let r = area_locations(id);
-        self.status.as_slice()[r.start..r.end]
-            .iter()
-            .all(|&x| x == Status::Visited)
+        for status in self.status.as_slice()[r.start..r.end].iter() {
+            if status == &Status::None {
+                return false;
+            }
+        }
+        true
     }
     fn all_region_checks(&self, id: RegionId) -> bool {
         let r = region_locations(id);
-        self.status.as_slice()[r.start..r.end]
-            .iter()
-            .all(|&x| x == Status::Visited)
+        for status in self.status.as_slice()[r.start..r.end].iter() {
+            if status == &Status::None {
+                return false;
+            }
+        }
+        true
     }
     fn local_travel_time(&self, dest: SpotId) -> i32 {
         movements::local_travel_time(self, self.position, dest)
