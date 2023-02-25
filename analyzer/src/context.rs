@@ -80,7 +80,6 @@ where
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub enum Mode {
     #[default]
-    None,
     Explore,
     Check,
     Activate,
@@ -96,7 +95,7 @@ where
     elapsed: i32,
     penalty: i32,
     pub history: Box<Vec<History<T>>>,
-    pub lastmode: Mode,
+    pub mode: Mode,
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -106,7 +105,7 @@ impl<T: Ctx> ContextWrapper<T> {
             elapsed: 0,
             penalty: 0,
             history: Box::new(vec![]),
-            lastmode: Mode::None,
+            mode: Mode::Explore,
         }
     }
 
@@ -206,7 +205,7 @@ impl<T: Ctx> ContextWrapper<T> {
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,
-            self.lastmode,
+            self.mode,
             if let Some(val) = self.history.last() {
                 val.to_string()
             } else {

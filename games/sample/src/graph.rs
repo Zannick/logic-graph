@@ -1169,12 +1169,16 @@ impl std::str::FromStr for ExitId {
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ActionId {
     Deku_Tree__Compass_Room__Entry__Light_Torch,
+    KF__Kokiri_Village__Sarias_Porch__Save,
 }
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 write!(f, "{}", "Deku Tree > Compass Room > Entry: Light Torch")
+            }
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
+                write!(f, "{}", "KF > Kokiri Village > Saria's Porch: Save")
             }
         }
     }
@@ -1187,6 +1191,9 @@ impl std::str::FromStr for ActionId {
         match s {
             "Deku Tree > Compass Room > Entry: Light Torch" => {
                 Ok(ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch)
+            }
+            "KF > Kokiri Village > Saria's Porch: Save" => {
+                Ok(ActionId::KF__Kokiri_Village__Sarias_Porch__Save)
             }
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
@@ -1637,6 +1644,7 @@ impl world::Accessible for Action {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::access_deku_tree__compass_room__entry___light_torch_req(&ctx)
             }
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
         }
     }
 }
@@ -1653,6 +1661,7 @@ impl world::Action for Action {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::action_deku_tree__compass_room__entry___light_torch__do(ctx)
             }
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => rules::action_save__position(ctx),
         }
     }
 }
@@ -2630,6 +2639,10 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
             time: 1000,
         },
+        ActionId::KF__Kokiri_Village__Sarias_Porch__Save => Action {
+            id: ActionId::KF__Kokiri_Village__Sarias_Porch__Save,
+            time: 1000,
+        },
     }
 }
 
@@ -3268,7 +3281,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1.into_usize() + 1,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::KF__Kokiri_Village__Sarias_Porch__Save.into_usize(),
+                end: ActionId::KF__Kokiri_Village__Sarias_Porch__Save.into_usize() + 1,
             },
             area_spots: Range {
                 start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),

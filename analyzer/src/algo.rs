@@ -22,11 +22,11 @@ where
     for (spot_id, mut spot_data) in spot_map {
         // Spot must have accessible locations with visited Status None
         if spot_has_locations(world, spot_data.get(), spot_id) {
-            spot_data.lastmode = Mode::Explore;
+            spot_data.mode = Mode::Check;
             vec.push(spot_data);
         } else if spot_has_actions(world, spot_data.get(), spot_id) {
             let mut actdata = spot_data.clone();
-            actdata.lastmode = Mode::Explore;
+            actdata.mode = Mode::Activate;
             actdata.penalize(1000);
             vec.push(actdata);
         }
@@ -64,7 +64,20 @@ where
     E: Exit + Accessible<Context = T>,
 {
     heap.extend(visit_fanout(world, ctx, false).into_iter().map(|mut c| {
-        c.lastmode = Mode::Check;
+        c.mode = Mode::Explore;
+        c
+    }));
+}
+
+pub fn activate_actions<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    heap.extend(activate_one(world, ctx).into_iter().map(|mut c| {
+        c.mode = Mode::Explore;
         c
     }));
 }
@@ -107,14 +120,16 @@ where
             return Some(ctx);
         }
         iters += 1;
-        match ctx.lastmode {
-            Mode::None | Mode::Check => {
+        match ctx.mode {
+            Mode::Explore => {
                 explore(world, ctx, &mut heap);
             }
-            Mode::Explore => {
+            Mode::Check => {
                 visit_locations(world, ctx, &mut heap);
             }
-            _ => (),
+            Mode::Activate => {
+                activate_actions(world, ctx, &mut heap);
+            }
         }
     }
     println!("Failed to find minimized win after {} mini-rounds", iters);
@@ -187,14 +202,16 @@ where
                 ctx.info()
             );
         }
-        match ctx.lastmode {
-            Mode::None | Mode::Check => {
+        match ctx.mode {
+            Mode::Explore => {
                 explore(world, ctx, &mut heap);
             }
-            Mode::Explore => {
+            Mode::Check => {
                 visit_locations(world, ctx, &mut heap);
             }
-            _ => println!("{}", ctx.info()),
+            Mode::Activate => {
+                activate_actions(world, ctx, &mut heap);
+            }
         }
     }
     let (iskips, pskips) = heap.stats();

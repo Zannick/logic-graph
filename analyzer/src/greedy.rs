@@ -1,10 +1,12 @@
+use std::collections::HashMap;
+
 use crate::access::*;
 use crate::context::*;
 use crate::world::*;
 
-pub fn nearest_spot_with_stuff<W, T, E, L, Wp>(
+pub fn nearest_spot_with_checks<W, T, E, L, Wp>(
     world: &W,
-    ctx: ContextWrapper<T>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Exit = E, Location = L, Warp = Wp>,
@@ -13,30 +15,47 @@ where
     E: Exit<Context = T> + Accessible<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId>,
 {
-    let spot_map = access(world, ctx);
     if let Some((_, ctx)) = spot_map
-        .into_iter()
-        .filter(|(s, ctx)| spot_has_locations_or_actions(world, ctx.get(), *s))
-        .min_by_key(|(s, c)| (c.elapsed(), *s))
+        .iter()
+        .filter(|(s, ctx)| spot_has_locations(world, ctx.get(), **s))
+        .min_by_key(|(s, c)| (c.elapsed(), **s))
     {
-        Some(ctx)
+        Some(ctx.clone())
     } else {
         None
     }
 }
 
-pub fn do_and_grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
+pub fn nearest_spot_with_actions<W, T, E, L, Wp>(
+    world: &W,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Exit = E, Location = L, Warp = Wp>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit<Context = T> + Accessible<Context = T>,
+    Wp: Warp<Context = T, SpotId = E::SpotId>,
+{
+    // TODO: avoid calling access twice.
+    if let Some((_, ctx)) = spot_map
+        .iter()
+        .filter(|(s, ctx)| spot_has_actions(world, ctx.get(), **s))
+        .min_by_key(|(s, c)| (c.elapsed(), **s))
+    {
+        Some(ctx.clone())
+    } else {
+        None
+    }
+}
+
+pub fn grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
 where
     W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit<Context = T> + Accessible<Context = T>,
 {
-    for act in world.get_spot_actions(ctx.get().position()) {
-        if act.can_access(ctx.get()) {
-            ctx.activate(act);
-        }
-    }
     let (locs, exit) = visitable_locations(world, ctx.get());
     for loc in locs {
         if ctx.get().todo(loc.id()) {
@@ -53,6 +72,20 @@ where
     }
 }
 
+pub fn do_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
+where
+    W: World<Exit = E, Location = L>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit<Context = T> + Accessible<Context = T>,
+{
+    for act in world.get_spot_actions(ctx.get().position()) {
+        if act.can_access(ctx.get()) {
+            ctx.activate(act);
+        }
+    }
+}
+
 pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -63,12 +96,16 @@ where
     let mut ctx = ctx.clone();
     world.skip_unused_items(ctx.get_mut());
     while !world.won(ctx.get()) {
-        if let Some(c) = nearest_spot_with_stuff(world, ctx) {
+        let spot_map = access(world, ctx);
+        if let Some(c) = nearest_spot_with_checks(world, &spot_map) {
             ctx = c;
+            grab_all(world, &mut ctx);
+        } else if let Some(c) = nearest_spot_with_actions(world, &spot_map) {
+            ctx = c;
+            do_all(world, &mut ctx);
         } else {
             return None;
         }
-        do_and_grab_all(world, &mut ctx);
     }
     Some(ctx)
 }

@@ -220,6 +220,24 @@ where
     (locs, exit)
 }
 
+pub fn activate_one<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    let mut ctx_list = Vec::new();
+    for act in world.get_spot_actions(ctx.get().position()) {
+        if act.can_access(ctx.get()) {
+            let mut c2 = ctx.clone();
+            c2.activate(act);
+            ctx_list.push(c2);
+        }
+    }
+    ctx_list
+}
+
 pub fn visit_fanout<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
@@ -232,11 +250,7 @@ where
     E: Exit + Accessible<Context = T>,
 {
     let mut ctx_list = vec![ctx];
-    for act in world.get_spot_actions(ctx_list[0].get().position()) {
-        if act.can_access(ctx_list[0].get()) {
-            ctx_list[0].activate(act);
-        }
-    }
+
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
     locs.sort_unstable_by_key(|loc| loc.time());
     for loc in locs {

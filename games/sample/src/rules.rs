@@ -190,3 +190,7 @@ pub fn action_deku_tree__compass_room__entry___light_torch__do(ctx: &mut Context
     // ^_torch = True
     ctx.deku_tree__compass_room__ctx__torch = true;
 }
+pub fn action_save__position(ctx: &mut Context) {
+    // ^save = ^position
+    ctx.save = ctx.position();
+}
