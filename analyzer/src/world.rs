@@ -90,6 +90,8 @@ pub trait World {
     fn get_spot_locations(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Location];
     fn get_spot_exits(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Exit];
     fn get_spot_actions(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Action];
+    fn get_global_actions(&self) -> &[Self::Action];
+
     fn get_area_spots(
         &self,
         spot_id: <Self::Exit as Exit>::SpotId,

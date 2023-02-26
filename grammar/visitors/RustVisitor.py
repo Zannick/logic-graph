@@ -192,6 +192,6 @@ class ActionHasEffectVisitor(RustVisitor):
     def visitAlter(self, ctx):
         op = str(ctx.BINOP())
         if op in ('+', '-'):
-            return f'0 == {self.visit(ctx.num())}'
-        return f'1 == {self.visit(ctx.num())}'
+            return f'0 != {self.visit(ctx.num())}'
+        return f'1 != {self.visit(ctx.num())}'
 

@@ -214,6 +214,7 @@ pub struct World {
     raw_spots: [SpotId; {{ gl.spots()|list|length + 1 }}], %# +1 as long as we have a default
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
+    global_actions: Range<usize>,
 }
 
 impl world::World for World {
@@ -231,6 +232,9 @@ impl world::World for World {
         &self.{{ point|lower }}s.as_slice()[r.start..r.end]
     }
 %% endfor
+    fn get_global_actions(&self) -> &[Action] {
+        &self.actions.as_slice()[self.global_actions.start..self.global_actions.end]
+    }
     fn get_warp(&self, id: WarpId) -> &Warp { &self.warps[id] }
 
     fn get_canon_locations(&self, loc_id: LocationId) -> Vec<LocationId> {
@@ -279,6 +283,12 @@ impl World {
             warps: build_warps(),
             raw_spots: [SpotId::None, SpotId::{{ gl.spots()|map(attribute='id')|sort|join(', SpotId::') }}],
             spots: build_spots(),
+            global_actions: Range {
+                {% if global_actions -%}
+                start: ActionId::{{ global_actions.values()|map(attribute='id')|min }}.into_usize(),
+                end: ActionId::{{ global_actions.values()|map(attribute='id')|max }}.into_usize() + 1,
+                {%- else %}start: 0, end: 0,{% endif %}
+            }
         }
     }
 }

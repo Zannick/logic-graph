@@ -1167,6 +1167,7 @@ impl std::str::FromStr for ExitId {
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ActionId {
     Deku_Tree__Compass_Room__Entry__Light_Torch,
+    Global__Waste_Money,
     KF__Kokiri_Village__Sarias_Porch__Save,
 }
 impl fmt::Display for ActionId {
@@ -1175,6 +1176,7 @@ impl fmt::Display for ActionId {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 write!(f, "{}", "Deku Tree > Compass Room > Entry: Light Torch")
             }
+            ActionId::Global__Waste_Money => write!(f, "{}", "Waste Money"),
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
                 write!(f, "{}", "KF > Kokiri Village > Saria's Porch: Save")
             }
@@ -1190,6 +1192,7 @@ impl std::str::FromStr for ActionId {
             "Deku Tree > Compass Room > Entry: Light Torch" => {
                 Ok(ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch)
             }
+            "Waste Money" => Ok(ActionId::Global__Waste_Money),
             "KF > Kokiri Village > Saria's Porch: Save" => {
                 Ok(ActionId::KF__Kokiri_Village__Sarias_Porch__Save)
             }
@@ -1639,6 +1642,7 @@ impl world::Accessible for Action {
     type Context = Context;
     fn can_access(&self, ctx: &Context) -> bool {
         match self.id {
+            ActionId::Global__Waste_Money => rules::access_rupees__10(&ctx),
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::access_deku_tree__compass_room__entry___light_torch_req(&ctx)
             }
@@ -1656,6 +1660,7 @@ impl world::Action for Action {
     }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
+            ActionId::Global__Waste_Money => rules::action_rupees__10(ctx),
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::action_deku_tree__compass_room__entry___light_torch__do(ctx)
             }
@@ -1664,6 +1669,7 @@ impl world::Action for Action {
     }
     fn has_effect(&self, ctx: &Context) -> bool {
         match self.id {
+            ActionId::Global__Waste_Money => rules::action_has_effect_rupees__10(ctx),
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx)
             }
@@ -1740,6 +1746,7 @@ pub struct World {
     raw_spots: [SpotId; 52],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
+    global_actions: Range<usize>,
 }
 
 impl world::World for World {
@@ -1769,6 +1776,9 @@ impl world::World for World {
     fn get_spot_actions(&self, spot_id: SpotId) -> &[Action] {
         let r = &self.spots[spot_id].actions;
         &self.actions.as_slice()[r.start..r.end]
+    }
+    fn get_global_actions(&self) -> &[Action] {
+        &self.actions.as_slice()[self.global_actions.start..self.global_actions.end]
     }
     fn get_warp(&self, id: WarpId) -> &Warp {
         &self.warps[id]
@@ -1887,6 +1897,10 @@ impl World {
                 SpotId::KF__Shop__Entry,
             ],
             spots: build_spots(),
+            global_actions: Range {
+                start: ActionId::Global__Waste_Money.into_usize(),
+                end: ActionId::Global__Waste_Money.into_usize() + 1,
+            },
         }
     }
 }
@@ -2643,6 +2657,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
 
 pub fn build_actions() -> EnumMap<ActionId, Action> {
     enum_map! {
+        ActionId::Global__Waste_Money => Action {
+            id: ActionId::Global__Waste_Money,
+            time: 2000,
+        },
         ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => Action {
             id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
             time: 1000,

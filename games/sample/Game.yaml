@@ -50,6 +50,12 @@ warps:
     req: $can_play(Minuet_of_Forest)
     to: KF > Kokiri Village > Shop Porch  # Sacred Forest Meadow > Temple Front > Warp Point
 
+actions:
+  Waste Money:
+    req: ^rupees >= 10
+    do: ^rupees -= 10
+    time: 2
+
 helpers:
   $is_child: ^child
   $is_adult: NOT ^child

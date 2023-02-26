@@ -190,6 +190,7 @@ class GameLogic(object):
         self.process_regions()
         self.process_times()
         self.process_warps()
+        self.process_global_actions()
 
 
     def process_regions(self):
@@ -297,6 +298,22 @@ class GameLogic(object):
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'warps')
                 info['access_id'] = self.make_funcid(info)
+
+
+    def process_global_actions(self):
+        self.global_actions = self._info.get('actions', {})
+        for name, act in self.global_actions.items():
+            act['name'] = name
+            act['id'] = construct_id('Global', name)
+            if 'req' not in act:
+                self._misc_errors.append(f'Global actions must have req: {name}')
+            else:
+                act['pr'] = _parseExpression(
+                        act['req'], name + ' req', 'actions', ': ')
+                act['access_id'] = self.make_funcid(act)
+            act['act'] = parseAction(
+                    act['do'], name=f'{name}:do')
+            act['action_id'] = self.make_funcid(act, 'act')
 
 
     @cached_property
@@ -451,7 +468,9 @@ class GameLogic(object):
 
 
     def actions(self):
-        return itertools.chain.from_iterable(s.get('actions', []) for s in self.spots())
+        return itertools.chain(
+            self.global_actions.values(),
+            itertools.chain.from_iterable(s.get('actions', []) for s in self.spots()))
 
 
     def all_points(self):

@@ -172,6 +172,10 @@ pub fn access_can_play__minuet_of_forest(ctx: &Context) -> bool {
     // $can_play(Minuet_of_Forest)
     helper__can_play!(ctx, Item::Minuet_of_Forest)
 }
+pub fn access_rupees__10(ctx: &Context) -> bool {
+    // ^rupees >= 10
+    ctx.rupees() >= 10
+}
 pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));
@@ -206,4 +210,11 @@ pub fn action_save__position(ctx: &mut Context) {
 }
 pub fn action_has_effect_save__position(ctx: &Context) -> bool {
     ctx.save == ctx.position()
+}
+pub fn action_rupees__10(ctx: &mut Context) {
+    // ^rupees -= 10
+    ctx.rupees -= 10;
+}
+pub fn action_has_effect_rupees__10(ctx: &Context) -> bool {
+    0 != 10
 }

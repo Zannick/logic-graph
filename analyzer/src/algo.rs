@@ -18,7 +18,7 @@ where
 {
     let spot_map = access(world, ctx);
     let mut vec = Vec::new();
-    //println!("{:#?}", &spot_map);
+
     for (spot_id, mut spot_data) in spot_map {
         // Spot must have accessible locations with visited Status None
         if spot_has_locations(world, spot_data.get(), spot_id) {
