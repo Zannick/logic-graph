@@ -53,6 +53,10 @@ impl<T: Ctx> LimitedHeap<T> {
         self.max_time = core::cmp::min(self.max_time, max_time);
     }
 
+    pub fn set_lenient_max_time(&mut self, max_time: i32) {
+        self.set_max_time(max_time + (max_time / 100))
+    }
+
     /// Pushes an element into the heap.
     /// If the element's elapsed time is greater than the allowed maximum, does nothing.
     pub fn push(&mut self, el: ContextWrapper<T>) {

@@ -18,13 +18,13 @@ pub trait Accessible {
     fn can_access(&self, ctx: &Self::Context) -> bool;
 }
 
-pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + Display {}
+pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display {}
 
 pub trait Location: Accessible {
     type LocId: Id;
     type CanonId: Id;
     type ExitId: Id;
-    type Currency: Id;
+    type Currency: Id + Default;
 
     fn id(&self) -> Self::LocId;
     fn item(&self) -> <Self::Context as Ctx>::ItemId;

@@ -9,30 +9,31 @@ use std::fmt::Debug;
 use std::fs::File;
 use std::io::Write;
 
-pub fn explore<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
+pub fn explore<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    heap: &mut LimitedHeap<T>,
+) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    let spot_map = access(world, ctx);
+    let spot_map = accessible_spots(world, ctx);
     let mut vec = Vec::new();
 
-    for (spot_id, mut spot_data) in spot_map {
+    for (spot_id, mut spot_data) in spot_map.into_iter() {
         // Spot must have accessible locations with visited Status None
-        if spot_has_locations(world, spot_data.get(), spot_id) {
-            spot_data.mode = Mode::Check;
+        if spot_has_locations(world, spot_data.get()) {
             vec.push(spot_data);
-        } else if spot_has_actions(world, spot_data.get(), spot_id) {
-            let mut actdata = spot_data.clone();
-            actdata.mode = Mode::Activate;
-            actdata.penalize(1000);
-            vec.push(actdata);
+        } else if spot_has_actions(world, spot_data.get()) {
+            spot_data.penalize(1000);
+            vec.push(spot_data);
         }
     }
     if vec.is_empty() {
-        return;
+        return vec;
     }
 
     vec.sort_unstable_by_key(|el| el.elapsed());
@@ -46,14 +47,14 @@ where
     // Fifth el: twice the last penalty + diff (10 + 10)
     // that's 0, 0, 2, 5, 10
     // penalties for 0, 1, 2, 3, 4, 5, 6: 0, 0, 1, 3, 7, 15, 31
-    for mut el in vec.into_iter() {
+    for el in vec.iter_mut() {
         if last > 0 {
             el.penalize(penalty);
             penalty += penalty + el.elapsed() - last;
         }
         last = el.elapsed();
-        heap.push(el);
     }
+    vec
 }
 
 pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
@@ -63,23 +64,93 @@ where
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    heap.extend(visit_fanout(world, ctx, false).into_iter().map(|mut c| {
-        c.mode = Mode::Explore;
-        c
-    }));
+    let mut ctx_list = vec![ctx];
+    let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
+    locs.sort_unstable_by_key(|loc| loc.time());
+    for loc in locs {
+        let last_ctxs = ctx_list;
+        ctx_list = Vec::new();
+        ctx_list.reserve(last_ctxs.len() * 2);
+        for mut ctx in last_ctxs {
+            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
+                // TODO: Add a better way to prevent this from causing too wide a branching factor
+                // or remove.
+                if *loc.price() != <L as Location>::Currency::default() {
+                    let mut newctx = ctx.clone();
+                    newctx.get_mut().skip(loc.id());
+                    // Check if this loc is required. If it is, we can't skip it.
+                    if can_win(world, newctx.get()) {
+                        ctx_list.push(newctx);
+                    }
+                }
+
+                // Get the item and mark the location visited.
+                ctx.visit(world, loc);
+            }
+            ctx_list.push(ctx);
+        }
+    }
+
+    if let Some((l, e)) = exit {
+        let exit = world.get_exit(e);
+        let loc = world.get_location(l);
+        for ctx in ctx_list.iter_mut() {
+            // Get the item and move along the exit.
+            ctx.visit_exit(world, loc, exit);
+        }
+    }
+    heap.extend(ctx_list);
 }
 
-pub fn activate_actions<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
-where
+pub fn activate_actions<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    penalty: i32,
+    heap: &mut LimitedHeap<T>,
+) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    heap.extend(activate_one(world, ctx).into_iter().map(|mut c| {
-        c.mode = Mode::Explore;
-        c
-    }));
+    for act in world
+        .get_global_actions()
+        .iter()
+        .chain(world.get_spot_actions(ctx.get().position()))
+    {
+        if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
+            let mut c2 = ctx.clone();
+            c2.activate(act);
+            if can_win(world, c2.get()) {
+                c2.penalize(penalty);
+                heap.push(c2);
+            }
+        }
+    }
+}
+
+fn search_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    // The process will look more like this:
+    // 1. explore -> vec of spot ctxs with penalties applied
+    // 2. get largest dist
+    // 3. (activate_actions) for each ctx, check for global actions and spot actions
+    // 4. (visit_locations) for each ctx, get all available locations
+    let spot_ctxs = explore(world, ctx, heap);
+    if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
+        let max_dist = f.elapsed() - s.elapsed();
+        for ctx in spot_ctxs.iter() {
+            activate_actions(world, ctx.clone(), max_dist, heap);
+        }
+        for ctx in spot_ctxs {
+            visit_locations(world, ctx, heap);
+        }
+    }
 }
 
 pub fn minimize_nongreedy<W, T, L, E>(
@@ -116,21 +187,10 @@ where
     let mut iters = 0;
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
-            println!("Minimized to {}ms", ctx.elapsed());
             return Some(ctx);
         }
         iters += 1;
-        match ctx.mode {
-            Mode::Explore => {
-                explore(world, ctx, &mut heap);
-            }
-            Mode::Check => {
-                visit_locations(world, ctx, &mut heap);
-            }
-            Mode::Activate => {
-                activate_actions(world, ctx, &mut heap);
-            }
-        }
+        search_step(world, ctx, &mut heap);
     }
     println!("Failed to find minimized win after {} mini-rounds", iters);
     None
@@ -156,8 +216,8 @@ where
     );
 
     let mut heap = LimitedHeap::new();
-    heap.set_max_time(wonctx.elapsed());
-    heap.set_max_time(m.elapsed());
+    heap.set_lenient_max_time(wonctx.elapsed());
+    heap.set_lenient_max_time(m.elapsed());
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
@@ -170,9 +230,9 @@ where
                 ctx.elapsed(),
                 heap.len()
             );
-            heap.set_max_time(ctx.elapsed());
+            heap.set_lenient_max_time(ctx.elapsed());
             if let Some(m) = minimize_nongreedy(world, startctx.get(), &ctx) {
-                heap.set_max_time(m.elapsed());
+                heap.set_lenient_max_time(m.elapsed());
                 println!("Minimized it to {}ms", m.elapsed());
                 if m.elapsed() > ctx.elapsed() {
                     println!("Weird, it got slower?");
@@ -202,17 +262,7 @@ where
                 ctx.info()
             );
         }
-        match ctx.mode {
-            Mode::Explore => {
-                explore(world, ctx, &mut heap);
-            }
-            Mode::Check => {
-                visit_locations(world, ctx, &mut heap);
-            }
-            Mode::Activate => {
-                activate_actions(world, ctx, &mut heap);
-            }
-        }
+        search_step(world, ctx, &mut heap);
     }
     let (iskips, pskips) = heap.stats();
     println!(

@@ -7,7 +7,8 @@ use std::collections::HashSet;
 use std::collections::VecDeque;
 use std::collections::{BinaryHeap, HashMap};
 
-pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+/// Check whether there are available locations at this position.
+pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -15,12 +16,13 @@ where
     E: Exit + Accessible<Context = T>,
 {
     world
-        .get_spot_locations(spot)
+        .get_spot_locations(ctx.position())
         .iter()
         .any(|loc| ctx.todo(loc.id()) && loc.can_access(ctx))
 }
 
-pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+/// Check whether there are available actions at this position, including global actions.
+pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -28,19 +30,20 @@ where
     E: Exit + Accessible<Context = T>,
 {
     world
-        .get_spot_actions(spot)
+        .get_global_actions()
         .iter()
+        .chain(world.get_spot_actions(ctx.position()))
         .any(|act| act.can_access(ctx) && act.has_effect(ctx))
 }
 
-pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &T, spot: E::SpotId) -> bool
+pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    spot_has_locations(world, ctx, spot) || spot_has_actions(world, ctx, spot)
+    spot_has_locations(world, ctx) || spot_has_actions(world, ctx)
 }
 
 pub fn expand<W, T, E, Wp>(
@@ -138,8 +141,8 @@ pub fn expand_simple<W, T, E, Wp>(
     }
 }
 
-// At some point I should add counting of attempts
-pub fn access<W, T, E>(world: &W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
+/// 
+pub fn accessible_spots<W, T, E>(world: &W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -218,85 +221,6 @@ where
         })
         .collect();
     (locs, exit)
-}
-
-pub fn activate_one<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
-{
-    let mut ctx_list = Vec::new();
-    for act in world.get_spot_actions(ctx.get().position()) {
-        if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
-            let mut c2 = ctx.clone();
-            c2.activate(act);
-            ctx_list.push(c2);
-        }
-    }
-    ctx_list
-}
-
-pub fn visit_fanout<W, T, L, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-    allow_skips: bool,
-) -> Vec<ContextWrapper<T>>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
-{
-    let mut ctx_list = vec![ctx];
-
-    let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
-    locs.sort_unstable_by_key(|loc| loc.time());
-    for loc in locs {
-        let last_ctxs = ctx_list;
-        ctx_list = Vec::new();
-        ctx_list.reserve(last_ctxs.len() * 2);
-        for mut ctx in last_ctxs {
-            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
-                // TODO: Add a better way to prevent this from causing too wide a branching factor
-                // or remove.
-                if allow_skips {
-                    let mut newctx = ctx.clone();
-                    newctx.get_mut().skip(loc.id());
-                    // Check if this loc is required. If it is, we can't skip it.
-                    if can_win(world, newctx.get()) {
-                        ctx_list.push(newctx);
-                    }
-                }
-
-                // Get the item and mark the location visited.
-                ctx.visit(world, loc);
-            }
-            ctx_list.push(ctx);
-        }
-    }
-
-    if let Some((l, e)) = exit {
-        let exit = world.get_exit(e);
-        let loc = world.get_location(l);
-        let last_ctxs = ctx_list;
-        ctx_list = Vec::new();
-        ctx_list.reserve(last_ctxs.len() * 2);
-        for mut ctx in last_ctxs {
-            if allow_skips {
-                let mut newctx = ctx.clone();
-                newctx.get_mut().skip(l);
-                if can_win(world, newctx.get()) {
-                    ctx_list.push(newctx);
-                }
-            }
-            // Get the item and move along the exit.
-            ctx.visit_exit(world, loc, exit);
-            ctx_list.push(ctx);
-        }
-    }
-    ctx_list
 }
 
 pub fn visit_simple<W, T, L, E>(world: &W, ctx: &mut T) -> bool

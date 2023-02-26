@@ -17,7 +17,7 @@ where
 {
     if let Some((_, ctx)) = spot_map
         .iter()
-        .filter(|(s, ctx)| spot_has_locations(world, ctx.get(), **s))
+        .filter(|(_, ctx)| spot_has_locations(world, ctx.get()))
         .min_by_key(|(s, c)| (c.elapsed(), **s))
     {
         Some(ctx.clone())
@@ -37,10 +37,9 @@ where
     E: Exit<Context = T> + Accessible<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId>,
 {
-    // TODO: avoid calling access twice.
     if let Some((_, ctx)) = spot_map
         .iter()
-        .filter(|(s, ctx)| spot_has_actions(world, ctx.get(), **s))
+        .filter(|(_, ctx)| spot_has_actions(world, ctx.get()))
         .min_by_key(|(s, c)| (c.elapsed(), **s))
     {
         Some(ctx.clone())
@@ -79,7 +78,11 @@ where
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit<Context = T> + Accessible<Context = T>,
 {
-    for act in world.get_spot_actions(ctx.get().position()) {
+    for act in world
+        .get_global_actions()
+        .iter()
+        .chain(world.get_spot_actions(ctx.get().position()))
+    {
         if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
             ctx.activate(act);
         }
@@ -96,12 +99,13 @@ where
     let mut ctx = ctx.clone();
     world.skip_unused_items(ctx.get_mut());
     while !world.won(ctx.get()) {
-        let spot_map = access(world, ctx);
+        let spot_map = accessible_spots(world, ctx);
         if let Some(c) = nearest_spot_with_checks(world, &spot_map) {
             ctx = c;
             grab_all(world, &mut ctx);
         } else if let Some(c) = nearest_spot_with_actions(world, &spot_map) {
             ctx = c;
+            // TODO: this probably shouldn't do all global actions, maybe we pick the fastest/cheapest?
             do_all(world, &mut ctx);
         } else {
             return None;

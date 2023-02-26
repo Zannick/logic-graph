@@ -94,8 +94,7 @@ where
     #[sort_by]
     elapsed: i32,
     penalty: i32,
-    pub history: Box<Vec<History<T>>>,
-    pub mode: Mode,
+    pub history: Box<Vec<History<T>>>
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -105,7 +104,6 @@ impl<T: Ctx> ContextWrapper<T> {
             elapsed: 0,
             penalty: 0,
             history: Box::new(vec![]),
-            mode: Mode::Explore,
         }
     }
 
@@ -197,7 +195,7 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self) -> String {
         format(format_args!(
-            "At {} after {}ms (score={}), {} steps, visited={}, skipped={}, penalty={}, mode={:?} last={}",
+            "At {} after {}ms (score={}), {} steps, visited={}, skipped={}, penalty={} last={}",
             self.ctx.position(),
             self.elapsed,
             self.score(),
@@ -205,7 +203,6 @@ impl<T: Ctx> ContextWrapper<T> {
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,
-            self.mode,
             if let Some(val) = self.history.last() {
                 val.to_string()
             } else {
