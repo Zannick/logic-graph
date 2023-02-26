@@ -22,7 +22,7 @@ boolExpr
 
 actions : action (';' action)* ';'?;
 
-// TODO? a "^here" builtin ref for the spot it's defined in
+// TODO? a "^here" builtin ref for the spot it's defined in, but is that just position?
 action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
         | REF BINOP '=' num                                     # Alter
         ;
@@ -64,19 +64,27 @@ switchBool
             ( ( INT '=>' boolExpr ';' )+
             | ( LIT '=>' boolExpr ';' )+ )
             '_' '=>' boolExpr ';'? '}'                  # PerSettingBool
-        | MATCH REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ';' )+
-                            '_' '=>' boolExpr ';'? '}'  # MatchRefBool
+        | PER REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ';' )+
+                        '_' '=>' boolExpr ';'? '}'      # MatchRefBool
         // simpler match expression where all results are true/false
         | REF IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
         ;
 switchNum   : PER ITEM '{' ( INT '=>' num ';' )+ '_' '=>' num ';'? '}'  # PerItemInt
-            | PER ( REF | SETTING ) '{'
+            | PER REF '{'
+                ( ( INT '=>' num ';' )+
+                | ( LIT '=>' num ';' )+ )
+                '_' '=>' num ';'? '}'                                   # PerRefInt
+            | PER SETTING '{'
                 ( ( INT '=>' num ';' )+
                 | ( LIT '=>' num ';' )+ )
                 '_' '=>' num ';'? '}'                                   # PerSettingInt
             ;
 switchStr   : PER ITEM '{' ( INT '=>' str ';' )+ '_' '=>' str ';'? '}'  # PerItemStr
-            | PER ( REF | SETTING ) '{'
+            | PER REF '{'
+                ( ( INT '=>' str ';' )+
+                | ( LIT '=>' str ';' )+ )
+                '_' '=>' str ';'? '}'                                   # PerRefStr
+            | PER SETTING '{'
                 ( ( INT '=>' str ';' )+
                 | ( LIT '=>' str ';' )+ )
                 '_' '=>' str ';'? '}'                                   # PerSettingStr
@@ -132,8 +140,7 @@ FALSE   : 'FALSE' | 'false' | 'False' ;
 IF      : 'IF' | 'if' ;
 ELSE    : 'ELSE' | 'else' ;
 IN      : 'IN' | 'in' ;
-PER     : 'PER' | 'per' ;
-MATCH   : 'MATCH' | 'match' ;
+PER     : 'PER' | 'per' | 'MATCH' | 'match' ;
 
 ITEM    : [A-Z][a-z][a-zA-Z_0-9]+ ;
 SETTING : [a-z][a-zA-Z_0-9]+ ;

@@ -47,11 +47,12 @@ class ItemVisitor(RulesVisitor):
     # or the rules could be removed. (Other rules using REF don't use count,
     # so it's sufficient to count the provided item as 1 in the calling rule.)
     def _switch_warn(self, ctx):
+        # TODO: check the type of REF, we don't need to warn if the type is not Item
         if ctx.REF() and ctx.INT():
             logging.warning('Rule %r checks for count of ref: not supported', self.name)
         return self.visitChildren(ctx)
 
-    visitPerSettingNum = visitPerSettingStr = _switch_warn
+    visitPerRefInt = visitPerRefStr = _switch_warn
 
     def _count_one(self, ctx):
         if ctx.ITEM():

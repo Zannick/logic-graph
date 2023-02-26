@@ -78,6 +78,11 @@ class RustVisitor(RulesVisitor):
 
     def visitCmp(self, ctx):
         return f'{self.visit(ctx.value())} {ctx.getChild(1)} {self.visit(ctx.num())}'
+    
+    # This could be easier if str enum values are required to be unique among all enums
+    # otherwise we have to get the appropriate ref/setting enum
+    #def visitCmpStr(self, ctx):
+    #    return f'{self.visit(ctx.value())} {ctx.getChild(1)} {self.visit(ctx.str_())}'
 
     def visitFlagMatch(self, ctx):
         num = f'{self.visit(ctx.num())}'
@@ -137,6 +142,8 @@ class RustVisitor(RulesVisitor):
         return (f'match {self._getRefGetter(str(ctx.REF())[1:])} {{ '
                 + '|'.join(f'Item::{i}' for i in ctx.ITEM())
                 + ' => true, _ => false, }')
+    
+    # TODO: other REF/SETTING rules
 
     ## Action-specific
     def visitActions(self, ctx):

@@ -24,11 +24,10 @@ from Utils import base_dir, construct_id, n1, BUILTINS
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
-GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'time', 'start', 'load',
-               'helpers', 'collect', 'settings'}
-# To be validated later
+GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time',
+               'start', 'load', 'helpers', 'collect', 'settings'}
 REGION_FIELDS = {'name', 'short', 'here'}
-AREA_FIELDS = {'name', 'enter', 'exits', 'spots'}
+AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'here'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local'}
 SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}

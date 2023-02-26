@@ -48,20 +48,8 @@ class SettingVisitor(RulesVisitor):
         elif ctx.LIT():
             self._setType(s, 'str')
             self.setting_options[s].update(map(str, ctx.LIT()))
-    
-    def visitPerSettingBool(self, ctx):
-        self._perSetting(ctx)
         return self.visitChildren(ctx)
-
-    def visitPerSettingNum(self, ctx):
-        if ctx.SETTING():
-            self._perSetting(ctx)
-        return self.visitChildren(ctx)
-
-    def visitPerSettingStr(self, ctx):
-        if ctx.SETTING():
-            self._perSetting(ctx)
-        return self.visitChildren(ctx)
+    visitPerSettingInt = visitPerSettingStr = visitPerSettingBool = _perSetting
 
     def visitRefEq(self, ctx):
         ref = self._getFullRef(str(ctx.REF())[1:])
