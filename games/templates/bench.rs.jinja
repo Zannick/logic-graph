@@ -1,3 +1,5 @@
+%% include 'header.rs.jinja'
+
 #![allow(unused)]
 
 use analyzer::access::*;
@@ -6,9 +8,9 @@ use analyzer::greedy::*;
 use analyzer::world::*;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use enum_map::EnumMap;
-use libsample::context::Context;
-use libsample::graph;
-use libsample::items::Item;
+use lib{{ game }}::context::Context;
+use lib{{ game }}::graph;
+use lib{{ game }}::items::Item;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let world = graph::World::new();
@@ -25,7 +27,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
 
 criterion_group! {
     name = benches;
-    config = Criterion::default().sample_size(1000);
+    config = Criterion::default().sample_size(250);
     targets = criterion_benchmark
 }
 criterion_main!(benches);
