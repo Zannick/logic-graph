@@ -26,11 +26,10 @@ class ContextVisitor(RulesVisitor):
         self.name = name
         self.ctxdict = ctxdict or {}
         try:
-            ret = super().visit(tree)
+            return super().visit(tree)
         finally:
             self.name = ''
             self.ctxdict = {}
-        return ret
 
     def _checkRef(self, ref):
         if ref not in self.ctxdict and not self.name.startswith('helpers'):
@@ -45,13 +44,18 @@ class ContextVisitor(RulesVisitor):
     # Anything that could return a str needs to be visited and return a collection of options
     # plus anything that compares a ref to a str should update that ref
 
+    def visitStr(self, ctx: RulesParser.StrContext):
+        if ctx.LIT():
+            return {str(ctx.LIT())[1:-1]}
+        return super().visitStr(ctx)
+
     def visitCmpStr(self, ctx: RulesParser.CmpStrContext):
         if not ctx.value().REF():
             return super().visitCmpStr(ctx)
         
         ref = str(ctx.value().REF())[1:]
         self._checkRef(ref)
-        self.values[ref].add(str(ctx.LIT()))
+        self.values[ref].add(str(ctx.LIT())[1:-1])
 
     # value is SETTING or REF -- TODO: multiple REFs or SETTING+REF with the same enum type
     
@@ -71,9 +75,9 @@ class ContextVisitor(RulesVisitor):
     
     def visitPerRefStr(self, ctx: RulesParser.PerRefStrContext):
         if ctx.LIT():
-            ref = str(ctx.REF(0))[1:]
+            ref = str(ctx.REF())[1:]
             self._checkRef(ref)
-            self.values[ref].update(map(str, ctx.LIT()))
+            self.values[ref].update(str(s)[1:-1] for s in ctx.LIT())
         return self._getAllStrReturns(ctx)
 
     def visitPerSettingStr(self, ctx: RulesParser.PerSettingStrContext):

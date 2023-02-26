@@ -1167,7 +1167,7 @@ impl std::str::FromStr for ExitId {
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ActionId {
     Deku_Tree__Compass_Room__Entry__Light_Torch,
-    Global__Waste_Money,
+    Global__Change_Time,
     KF__Kokiri_Village__Sarias_Porch__Save,
 }
 impl fmt::Display for ActionId {
@@ -1176,7 +1176,7 @@ impl fmt::Display for ActionId {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 write!(f, "{}", "Deku Tree > Compass Room > Entry: Light Torch")
             }
-            ActionId::Global__Waste_Money => write!(f, "{}", "Waste Money"),
+            ActionId::Global__Change_Time => write!(f, "{}", "Change Time"),
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
                 write!(f, "{}", "KF > Kokiri Village > Saria's Porch: Save")
             }
@@ -1192,7 +1192,7 @@ impl std::str::FromStr for ActionId {
             "Deku Tree > Compass Room > Entry: Light Torch" => {
                 Ok(ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch)
             }
-            "Waste Money" => Ok(ActionId::Global__Waste_Money),
+            "Change Time" => Ok(ActionId::Global__Change_Time),
             "KF > Kokiri Village > Saria's Porch: Save" => {
                 Ok(ActionId::KF__Kokiri_Village__Sarias_Porch__Save)
             }
@@ -1425,6 +1425,8 @@ pub struct Location {
 
 impl world::Accessible for Location {
     type Context = Context;
+    type Currency = Currency;
+
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => rules::access_is_adult_or_kokiri_sword_or_boomerang(&ctx),
@@ -1476,13 +1478,18 @@ impl world::Accessible for Location {
             LocationId::Kak__Spider_House__Entry__Skulls_10 => rules::access_gold_skulltula_token__10(&ctx),
         }
     }
+    fn time(&self) -> i32 {
+        self.time
+    }
+    fn price(&self) -> &Currency {
+        &self.price
+    }
 }
 
 impl world::Location for Location {
     type LocId = LocationId;
     type CanonId = CanonId;
     type ExitId = ExitId;
-    type Currency = Currency;
 
     fn id(&self) -> LocationId {
         self.id
@@ -1495,12 +1502,6 @@ impl world::Location for Location {
     }
     fn exit_id(&self) -> &Option<ExitId> {
         &self.exit_id
-    }
-    fn time(&self) -> i32 {
-        self.time
-    }
-    fn price(&self) -> &Currency {
-        &self.price
     }
 }
 
@@ -1515,6 +1516,7 @@ pub struct Exit {
 
 impl world::Accessible for Exit {
     type Context = Context;
+    type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
@@ -1608,6 +1610,12 @@ impl world::Accessible for Exit {
                 ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1 => true,
             }
     }
+    fn time(&self) -> i32 {
+        self.time
+    }
+    fn price(&self) -> &Currency {
+        &self.price
+    }
 }
 
 impl world::Exit for Exit {
@@ -1627,27 +1635,33 @@ impl world::Exit for Exit {
     fn loc_id(&self) -> &Option<LocationId> {
         &self.loc_id
     }
-    fn time(&self) -> i32 {
-        self.time
-    }
 }
 
 #[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
     time: i32,
+    price: Currency,
 }
 
 impl world::Accessible for Action {
     type Context = Context;
+    type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
-        match self.id {
-            ActionId::Global__Waste_Money => rules::access_rupees__10(&ctx),
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                rules::access_deku_tree__compass_room__entry___light_torch_req(&ctx)
+        ctx.can_afford(&self.price)
+            && match self.id {
+                ActionId::Global__Change_Time => true,
+                ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                    rules::access_deku_tree__compass_room__entry___light_torch_req(&ctx)
+                }
+                ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
             }
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
-        }
+    }
+    fn time(&self) -> i32 {
+        self.time
+    }
+    fn price(&self) -> &Currency {
+        &self.price
     }
 }
 impl world::Action for Action {
@@ -1655,12 +1669,11 @@ impl world::Action for Action {
     fn id(&self) -> ActionId {
         self.id
     }
-    fn time(&self) -> i32 {
-        self.time
-    }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
-            ActionId::Global__Waste_Money => rules::action_rupees__10(ctx),
+            ActionId::Global__Change_Time => {
+                rules::action_tod__match_tod____day__night_night__day____day_(ctx)
+            }
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::action_deku_tree__compass_room__entry___light_torch__do(ctx)
             }
@@ -1669,7 +1682,9 @@ impl world::Action for Action {
     }
     fn has_effect(&self, ctx: &Context) -> bool {
         match self.id {
-            ActionId::Global__Waste_Money => rules::action_has_effect_rupees__10(ctx),
+            ActionId::Global__Change_Time => {
+                rules::action_has_effect_tod__match_tod____day__night_night__day____day_(ctx)
+            }
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx)
             }
@@ -1685,14 +1700,24 @@ pub struct Warp {
     id: WarpId,
     dest: SpotId,
     time: i32,
+    price: Currency,
 }
 impl world::Accessible for Warp {
     type Context = Context;
+    type Currency = Currency;
+
     fn can_access(&self, ctx: &Context) -> bool {
-        match self.id {
-            WarpId::Save => true,
-            WarpId::Minuet => rules::access_can_play__minuet_of_forest(&ctx),
-        }
+        ctx.can_afford(&self.price)
+            && match self.id {
+                WarpId::Save => true,
+                WarpId::Minuet => rules::access_can_play__minuet_of_forest(&ctx),
+            }
+    }
+    fn time(&self) -> i32 {
+        self.time
+    }
+    fn price(&self) -> &Currency {
+        &self.price
     }
 }
 impl world::Warp for Warp {
@@ -1714,9 +1739,6 @@ impl world::Warp for Warp {
     }
     fn connect(&mut self, dest: SpotId) {
         self.dest = dest;
-    }
-    fn time(&self) -> i32 {
-        self.time
     }
 }
 
@@ -1898,8 +1920,8 @@ impl World {
             ],
             spots: build_spots(),
             global_actions: Range {
-                start: ActionId::Global__Waste_Money.into_usize(),
-                end: ActionId::Global__Waste_Money.into_usize() + 1,
+                start: ActionId::Global__Change_Time.into_usize(),
+                end: ActionId::Global__Change_Time.into_usize() + 1,
             },
         }
     }
@@ -2657,17 +2679,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
 
 pub fn build_actions() -> EnumMap<ActionId, Action> {
     enum_map! {
-        ActionId::Global__Waste_Money => Action {
-            id: ActionId::Global__Waste_Money,
+        ActionId::Global__Change_Time => Action {
+            id: ActionId::Global__Change_Time,
             time: 2000,
+            price: Currency::Rupees(10),
         },
         ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => Action {
             id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
             time: 1000,
+            price: Currency::Free,
         },
         ActionId::KF__Kokiri_Village__Sarias_Porch__Save => Action {
             id: ActionId::KF__Kokiri_Village__Sarias_Porch__Save,
             time: 1000,
+            price: Currency::Free,
         },
     }
 }
@@ -3566,11 +3591,13 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             id: WarpId::Minuet,
             dest: SpotId::KF__Kokiri_Village__Shop_Porch,
             time: 5000,
+            price: Currency::Free,
         },
         WarpId::Save => Warp {
             id: WarpId::Save,
             dest: SpotId::None,
             time: 8000,
+            price: Currency::Free,
         },
     }
 }

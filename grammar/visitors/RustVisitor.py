@@ -9,6 +9,7 @@ class RustVisitor(RulesVisitor):
     def __init__(self, ctxdict, name):
         self.ctxdict = ctxdict
         self.name = name
+        self.rettype = None
 
     def _getRefGetter(self, ref):
         if ref in self.ctxdict:
@@ -18,11 +19,22 @@ class RustVisitor(RulesVisitor):
     def _getRefSetter(self, ref):
         return f'ctx.{self.ctxdict[ref]}'
 
+    def _getRefEnum(self, ref):
+        return f'enums::{ref.capitalize()}'
+
     def _getFuncAndArgs(self, func):
         if func in BUILTINS:
             return BUILTINS[func] + '('
         else:
             return f'helper__{construct_id(func[1:])}!(ctx, '
+
+    def visit(self, tree, rettype=None):
+        last_rettype = self.rettype
+        self.rettype = rettype
+        try:
+            return super().visit(tree)
+        finally:
+            self.rettype = last_rettype
 
     def visitBoolExpr(self, ctx):
         try:
@@ -132,7 +144,7 @@ class RustVisitor(RulesVisitor):
         return f'{self.visit(ctx.baseNum())} {ctx.BINOP()} {self.visit(ctx.num())}'
 
     def visitPerItemInt(self, ctx):
-        cases = list(map(str, ctx.INT())) + ["_"]
+        cases = list(map(str, ctx.INT())) + ['_']
         results = [str(self.visit(n)) for n in ctx.num()]
         return (f'match ctx.count(Item::{ctx.ITEM()}) {{ '
                 + ', '.join(f'{i} => {r}' for i, r in zip(cases, results))
@@ -144,6 +156,20 @@ class RustVisitor(RulesVisitor):
                 + ' => true, _ => false, }')
     
     # TODO: other REF/SETTING rules
+
+    def visitStr(self, ctx):
+        if ctx.LIT() and self.rettype:
+            return f'{self.rettype}::{str(ctx.LIT())[1:-1].capitalize()}'
+        return super().visitStr(ctx)
+
+    def visitPerRefStr(self, ctx):
+        ref = str(ctx.REF())[1:]
+        enum = self._getRefEnum(ref)
+        cases = [f'{enum}::{str(c)[1:-1].capitalize()}' for c in ctx.LIT()] + [str(c) for c in ctx.INT()] + ['_']
+        results = [str(self.visit(s, self.rettype)) for s in ctx.str_()]
+        return (f'match {self._getRefGetter(ref)} {{ '
+                + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
+                + '}')
 
     ## Action-specific
     def visitActions(self, ctx):
@@ -160,8 +186,10 @@ class RustVisitor(RulesVisitor):
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
             val = f'{_placePrefix[pl.count(">")]}::{construct_id(pl)}'
+        elif ctx.num():
+            val = self.visit(ctx.num())
         else:
-            val = self.visit(ctx.str_() or ctx.num())
+            val = self.visit(ctx.str_(), self._getRefEnum(var))
         return f'{self._getRefSetter(var)} = {val};'
 
     def visitAlter(self, ctx):
@@ -180,15 +208,14 @@ class RustVisitor(RulesVisitor):
 class ActionHasEffectVisitor(RustVisitor):
 
     def __init__(self, ctxdict, name):
-        self.ctxdict = ctxdict
-        self.name = name
+        super().__init__(ctxdict, name)
 
     def visitActions(self, ctx):
         return ' && '.join(self.visit(ch) for ch in ctx.action())
 
     def visitSet(self, ctx):
-        return super().visitSet(ctx)[:-1].replace(' = ', ' == ')
-    
+        return super().visitSet(ctx)[:-1].replace(' = ', ' != ')
+
     def visitAlter(self, ctx):
         op = str(ctx.BINOP())
         if op in ('+', '-'):

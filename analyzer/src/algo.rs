@@ -62,7 +62,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     let mut ctx_list = vec![ctx];
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
@@ -75,7 +75,7 @@ where
             if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
                 // TODO: Add a better way to prevent this from causing too wide a branching factor
                 // or remove.
-                if *loc.price() != <L as Location>::Currency::default() {
+                if !loc.is_free() {
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
@@ -134,7 +134,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     // The process will look more like this:
     // 1. explore -> vec of spot ctxs with penalties applied
@@ -162,7 +162,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     find_one(world, minimize(world, startctx, wonctx), wonctx.elapsed())
 }
@@ -176,7 +176,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     if !can_win(world, ctx.get()) {
         panic!("Trying to solve a minimized search that can't win");
@@ -201,7 +201,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);

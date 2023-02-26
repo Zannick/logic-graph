@@ -172,49 +172,54 @@ pub fn access_can_play__minuet_of_forest(ctx: &Context) -> bool {
     // $can_play(Minuet_of_Forest)
     helper__can_play!(ctx, Item::Minuet_of_Forest)
 }
-pub fn access_rupees__10(ctx: &Context) -> bool {
-    // ^rupees >= 10
-    ctx.rupees() >= 10
-}
 pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));
 }
 pub fn action_has_effect_rupees__min__rupees__1_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees == std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx))
+    ctx.rupees != std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx))
 }
 pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx));
 }
 pub fn action_has_effect_rupees__min__rupees__5_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees == std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx))
+    ctx.rupees != std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx))
 }
 pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx));
 }
 pub fn action_has_effect_rupees__min__rupees__50_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees == std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx))
+    ctx.rupees != std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx))
 }
 pub fn action_deku_tree__compass_room__entry___light_torch__do(ctx: &mut Context) {
     // ^_torch = True
     ctx.deku_tree__compass_room__ctx__torch = true;
 }
 pub fn action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx: &Context) -> bool {
-    ctx.deku_tree__compass_room__ctx__torch == true
+    ctx.deku_tree__compass_room__ctx__torch != true
 }
 pub fn action_save__position(ctx: &mut Context) {
     // ^save = ^position
     ctx.save = ctx.position();
 }
 pub fn action_has_effect_save__position(ctx: &Context) -> bool {
-    ctx.save == ctx.position()
+    ctx.save != ctx.position()
 }
-pub fn action_rupees__10(ctx: &mut Context) {
-    // ^rupees -= 10
-    ctx.rupees -= 10;
+pub fn action_tod__match_tod____day__night_night__day____day_(ctx: &mut Context) {
+    // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
+    ctx.tod = match ctx.tod() {
+        enums::Tod::Day => enums::Tod::Night,
+        enums::Tod::Night => enums::Tod::Day,
+        _ => enums::Tod::Day,
+    };
 }
-pub fn action_has_effect_rupees__10(ctx: &Context) -> bool {
-    0 != 10
+pub fn action_has_effect_tod__match_tod____day__night_night__day____day_(ctx: &Context) -> bool {
+    ctx.tod
+        != match ctx.tod() {
+            enums::Tod::Day => enums::Tod::Night,
+            enums::Tod::Night => enums::Tod::Day,
+            _ => enums::Tod::Day,
+        }
 }

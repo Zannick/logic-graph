@@ -57,7 +57,7 @@ macro_rules! helper__Sticks {
 }
 
 /// $wallet_max (  )
-/// PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
+/// PER Progressive_Wallet { 3 => 999, 2 => 500, 1 => 200, _ => 99 }
 #[macro_export]
 macro_rules! helper__wallet_max {
     ($ctx:expr) => {{

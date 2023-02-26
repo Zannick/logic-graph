@@ -53,7 +53,7 @@ where
     W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit<Context = T> + Accessible<Context = T>,
+    E: Exit<Context = T> + Accessible<Context = T, Currency = L::Currency>,
 {
     let (locs, exit) = visitable_locations(world, ctx.get());
     for loc in locs {
@@ -76,7 +76,7 @@ where
     W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit<Context = T> + Accessible<Context = T>,
+    E: Exit<Context = T> + Accessible<Context = T, Currency = L::Currency>,
 {
     for act in world
         .get_global_actions()
@@ -94,7 +94,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     let mut ctx = ctx.clone();
     world.skip_unused_items(ctx.get_mut());
@@ -123,7 +123,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     let ctx = minimize(world, startctx, wonctx);
     greedy_search(world, &ctx).expect("Couldn't beat game after minimizing!")
@@ -137,7 +137,7 @@ where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     let wonctx = greedy_search(world, ctx).expect("Didn't win with greedy search");
     minimize_greedy(world, ctx.get(), &wonctx)

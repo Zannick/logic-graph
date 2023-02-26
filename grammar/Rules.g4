@@ -58,36 +58,36 @@ condStr : IF '(' boolExpr ')' '{' str '}'
 
 
 switchBool
-        : PER ITEM '{' ( INT '=>' boolExpr ';' )+
-                        '_' '=>' boolExpr ';'? '}'      # PerItemBool
+        : PER ITEM '{' ( INT '=>' boolExpr ',' )+
+                        '_' '=>' boolExpr ','? '}'      # PerItemBool
         | PER SETTING '{' 
-            ( ( INT '=>' boolExpr ';' )+
-            | ( LIT '=>' boolExpr ';' )+ )
-            '_' '=>' boolExpr ';'? '}'                  # PerSettingBool
-        | PER REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ';' )+
-                        '_' '=>' boolExpr ';'? '}'      # MatchRefBool
+            ( ( INT '=>' boolExpr ',' )+
+            | ( LIT '=>' boolExpr ',' )+ )
+            '_' '=>' boolExpr ','? '}'                  # PerSettingBool
+        | PER REF '{' ( ITEM ( '|' ITEM )* '=>' boolExpr ',' )+
+                        '_' '=>' boolExpr ','? '}'      # MatchRefBool
         // simpler match expression where all results are true/false
         | REF IN '[' ITEM ( ',' ITEM )+ ']'             # RefInList
         ;
-switchNum   : PER ITEM '{' ( INT '=>' num ';' )+ '_' '=>' num ';'? '}'  # PerItemInt
+switchNum   : PER ITEM '{' ( INT '=>' num ',' )+ '_' '=>' num ','? '}'  # PerItemInt
             | PER REF '{'
-                ( ( INT '=>' num ';' )+
-                | ( LIT '=>' num ';' )+ )
-                '_' '=>' num ';'? '}'                                   # PerRefInt
+                ( ( INT '=>' num ',' )+
+                | ( LIT '=>' num ',' )+ )
+                '_' '=>' num ','? '}'                                   # PerRefInt
             | PER SETTING '{'
-                ( ( INT '=>' num ';' )+
-                | ( LIT '=>' num ';' )+ )
-                '_' '=>' num ';'? '}'                                   # PerSettingInt
+                ( ( INT '=>' num ',' )+
+                | ( LIT '=>' num ',' )+ )
+                '_' '=>' num ','? '}'                                   # PerSettingInt
             ;
-switchStr   : PER ITEM '{' ( INT '=>' str ';' )+ '_' '=>' str ';'? '}'  # PerItemStr
+switchStr   : PER ITEM '{' ( INT '=>' str ',' )+ '_' '=>' str ','? '}'  # PerItemStr
             | PER REF '{'
-                ( ( INT '=>' str ';' )+
-                | ( LIT '=>' str ';' )+ )
-                '_' '=>' str ';'? '}'                                   # PerRefStr
+                ( ( INT '=>' str ',' )+
+                | ( LIT '=>' str ',' )+ )
+                '_' '=>' str ','? '}'                                   # PerRefStr
             | PER SETTING '{'
-                ( ( INT '=>' str ';' )+
-                | ( LIT '=>' str ';' )+ )
-                '_' '=>' str ';'? '}'                                   # PerSettingStr
+                ( ( INT '=>' str ',' )+
+                | ( LIT '=>' str ',' )+ )
+                '_' '=>' str ','? '}'                                   # PerSettingStr
             ;
 
 cmp : value '==' num

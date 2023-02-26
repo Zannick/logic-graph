@@ -18,12 +18,14 @@ pub mod enums {
         #[default]
         None,
         Day,
+        Night,
     }
     impl fmt::Display for Tod {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
             match self {
                 Tod::None => write!(f, "{}", "None"),
                 Tod::Day => write!(f, "{}", "Day"),
+                Tod::Night => write!(f, "{}", "Night"),
             }
         }
     }
@@ -33,6 +35,7 @@ pub mod enums {
         fn from_str(s: &str) -> Result<Self, Self::Err> {
             match s {
                 "Day" => Ok(Tod::Day),
+                "Night" => Ok(Tod::Night),
                 _ => Err(format!("Could not recognize as a Tod: {}", s)),
             }
         }

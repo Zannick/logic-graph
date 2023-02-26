@@ -51,10 +51,10 @@ warps:
     to: KF > Kokiri Village > Shop Porch  # Sacred Forest Meadow > Temple Front > Warp Point
 
 actions:
-  Waste Money:
-    req: ^rupees >= 10
-    do: ^rupees -= 10
+  Change Time:
     time: 2
+    price: 10
+    do: ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
 
 helpers:
   $is_child: ^child
@@ -67,7 +67,7 @@ helpers:
 
   # If the helper is meant to return a number and not a bool, it must be noted
   # with the rule (type, essentially) after the name:
-  $wallet_max:num: PER Progressive_Wallet { 3 => 999; 2 => 500; 1 => 200; _ => 99 }
+  $wallet_max:num: PER Progressive_Wallet { 3 => 999, 2 => 500, 1 => 200, _ => 99 }
 
   $has_shield: ($is_adult and Hylian_Shield) or ($is_child and $Deku_Shield)
   # Argument types will be inferred based on usage.

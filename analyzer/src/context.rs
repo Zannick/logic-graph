@@ -16,8 +16,8 @@ pub trait Ctx: Clone + Eq + Debug {
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
 
-    fn can_afford(&self, cost: &<<Self::World as World>::Location as Location>::Currency) -> bool;
-    fn spend(&mut self, cost: &<<Self::World as World>::Location as Location>::Currency);
+    fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency) -> bool;
+    fn spend(&mut self, cost: &<<Self::World as World>::Location as Accessible>::Currency);
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn skip(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
@@ -157,10 +157,11 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
-        E: Exit + Accessible<Context = T>,
+        E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
+        self.ctx.spend(exit.price());
         self.history.push(History::Move(exit.id()));
     }
 
@@ -169,14 +170,16 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Exit = E, Location = L>,
         T: Ctx<World = W>,
         L: Location + Accessible<Context = T>,
-        E: Exit + Accessible<Context = T>,
+        E: Exit + Accessible<Context = T, Currency = L::Currency>,
     {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
         }
         self.ctx.visit(loc.id());
+        self.ctx.spend(loc.price());
         self.ctx.collect(loc.item());
         self.elapse(loc.time());
+        self.ctx.spend(exit.price());
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
         self.history.push(History::MoveGet(loc.item(), exit.id()));

@@ -305,9 +305,9 @@ class GameLogic(object):
         for name, act in self.global_actions.items():
             act['name'] = name
             act['id'] = construct_id('Global', name)
-            if 'req' not in act:
-                self._misc_errors.append(f'Global actions must have req: {name}')
-            else:
+            if 'req' not in act and 'price' not in act:
+                self._misc_errors.append(f'Global actions must have req or price: {name}')
+            elif 'req' in act:
                 act['pr'] = _parseExpression(
                         act['req'], name + ' req', 'actions', ': ')
                 act['access_id'] = self.make_funcid(act)
@@ -489,6 +489,8 @@ class GameLogic(object):
         yield from (info['pr'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
+        yield from (info['pr'] for info in self.global_actions.values() if 'pr' in info)
+        yield from (info['act'] for info in self.global_actions.values())
 
 
     def all_parse_results(self):

@@ -15,7 +15,11 @@ use std::option::Option;
 
 pub trait Accessible {
     type Context: Ctx;
+    type Currency: Id + Default;
     fn can_access(&self, ctx: &Self::Context) -> bool;
+    fn time(&self) -> i32;
+    fn price(&self) -> &Self::Currency;
+    fn is_free(&self) -> bool { *self.price() == Self::Currency::default() }
 }
 
 pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display {}
@@ -24,13 +28,10 @@ pub trait Location: Accessible {
     type LocId: Id;
     type CanonId: Id;
     type ExitId: Id;
-    type Currency: Id + Default;
 
     fn id(&self) -> Self::LocId;
     fn item(&self) -> <Self::Context as Ctx>::ItemId;
     fn canon_id(&self) -> Self::CanonId;
-    fn time(&self) -> i32;
-    fn price(&self) -> &Self::Currency;
     fn exit_id(&self) -> &Option<Self::ExitId>;
 }
 
@@ -42,14 +43,12 @@ pub trait Exit: Accessible {
     fn id(&self) -> Self::ExitId;
     fn dest(&self) -> Self::SpotId;
     fn connect(&mut self, dest: Self::SpotId);
-    fn time(&self) -> i32;
     fn loc_id(&self) -> &Option<Self::LocId>;
 }
 
 pub trait Action: Accessible {
     type ActionId: Id;
     fn id(&self) -> Self::ActionId;
-    fn time(&self) -> i32;
     fn perform(&self, ctx: &mut Self::Context);
     fn has_effect(&self, ctx: &Self::Context) -> bool;
 }
@@ -61,7 +60,6 @@ pub trait Warp: Accessible {
     fn id(&self) -> Self::WarpId;
     fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
     fn connect(&mut self, dest: Self::SpotId);
-    fn time(&self) -> i32;
 }
 
 pub trait World {
@@ -70,11 +68,16 @@ pub trait World {
         ExitId = <Self::Location as Location>::ExitId,
         LocId = <Self::Location as Location>::LocId,
         Context = <Self::Location as Accessible>::Context,
+        Currency = <Self::Location as Accessible>::Currency,
     >;
-    type Action: Action<Context = <Self::Location as Accessible>::Context>;
+    type Action: Action<
+        Context = <Self::Location as Accessible>::Context,
+        Currency = <Self::Location as Accessible>::Currency,
+    >;
     type Warp: Warp<
         Context = <Self::Location as Accessible>::Context,
         SpotId = <Self::Exit as Exit>::SpotId,
+        Currency = <Self::Location as Accessible>::Currency,
     >;
     const NUM_LOCATIONS: i32;
 
