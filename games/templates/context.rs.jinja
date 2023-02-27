@@ -15,7 +15,7 @@ pub mod enums {
 use std::fmt;
 %% from 'enum.rs.jinja' import enum
 %% for etype, evars in context_str_values.items()
-{{ enum(etype|capitalize, evars|map('capitalize')|list, default=True) }}
+{{ enum(etype|capitalize, evars|map('capitalize')|list|sort, default=True) }}
 %% endfor
 }
 

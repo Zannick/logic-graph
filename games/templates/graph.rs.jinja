@@ -124,6 +124,7 @@ pub struct Action {
     id: ActionId,
     time: i32,
     price: Currency,
+    cycle: Option<i8>,
 }
 
 impl world::Accessible for Action {
@@ -157,6 +158,7 @@ impl world::Action for Action {
 %% endfor
         }
     }
+    fn cycle_length(&self) -> Option<i8> { self.cycle }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -345,6 +347,7 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             price: Currency::{% if a.price and a.price > 0 -%}
                 {{ (a.costs or price_types[0])|capitalize }}({{ a.price }})
                 {%- else %}Free{% endif %},
+            cycle: {% if a.cycle %}Some({{ a.cycle }}){% else %}None{% endif %},
         },
 %% endfor
     }

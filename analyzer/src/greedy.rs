@@ -39,7 +39,7 @@ where
 {
     if let Some((_, ctx)) = spot_map
         .iter()
-        .filter(|(_, ctx)| spot_has_actions(world, ctx.get()))
+        .filter(|(_, ctx)| spot_has_actions(world, ctx))
         .min_by_key(|(s, c)| (c.elapsed(), **s))
     {
         Some(ctx.clone())
@@ -83,7 +83,7 @@ where
         .iter()
         .chain(world.get_spot_actions(ctx.get().position()))
     {
-        if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
+        if act.can_access(ctx.get()) && ctx.is_useful(act) {
             ctx.activate(act);
         }
     }

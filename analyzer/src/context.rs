@@ -16,7 +16,8 @@ pub trait Ctx: Clone + Eq + Debug {
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
 
-    fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency) -> bool;
+    fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency)
+        -> bool;
     fn spend(&mut self, cost: &<<Self::World as World>::Location as Accessible>::Currency);
 
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
@@ -94,7 +95,7 @@ where
     #[sort_by]
     elapsed: i32,
     penalty: i32,
-    pub history: Box<Vec<History<T>>>
+    pub history: Box<Vec<History<T>>>,
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -189,11 +190,43 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
-        A: Action + Accessible<Context = T>,
+        A: Action + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         action.perform(&mut self.ctx);
         self.elapse(action.time());
+        self.ctx.spend(action.price());
         self.history.push(History::Activate(action.id()));
+    }
+
+    pub fn is_useful<W, A>(&self, action: &A) -> bool
+    where
+        W: World<Action = A>,
+        T: Ctx<World = W>,
+        A: Action + Accessible<Context = T>,
+    {
+        if !action.has_effect(&self.ctx) {
+            return false;
+        }
+        let mut prev = 1;
+        if let Some(cycle) = action.cycle_length() {
+            for last in self.history.iter().rev() {
+                match last {
+                    History::Activate(a) => {
+                        if *a == action.id() {
+                            prev += 1;
+                            if prev >= cycle {
+                                return false;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                    History::Get(_, _) | History::MoveGet(_, _) => break,
+                    _ => (),
+                }
+            }
+        }
+        true
     }
 
     pub fn info(&self) -> String {

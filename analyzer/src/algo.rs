@@ -27,7 +27,7 @@ where
         // Spot must have accessible locations with visited Status None
         if spot_has_locations(world, spot_data.get()) {
             vec.push(spot_data);
-        } else if spot_has_actions(world, spot_data.get()) {
+        } else if spot_has_actions(world, &spot_data) {
             spot_data.penalize(1000);
             vec.push(spot_data);
         }
@@ -118,7 +118,7 @@ pub fn activate_actions<W, T, L, E>(
         .iter()
         .chain(world.get_spot_actions(ctx.get().position()))
     {
-        if act.can_access(ctx.get()) && act.has_effect(ctx.get()) {
+        if act.can_access(ctx.get()) && ctx.is_useful(act) {
             let mut c2 = ctx.clone();
             c2.activate(act);
             if can_win(world, c2.get()) {

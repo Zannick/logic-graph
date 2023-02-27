@@ -22,7 +22,7 @@ where
 }
 
 /// Check whether there are available actions at this position, including global actions.
-pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -32,18 +32,18 @@ where
     world
         .get_global_actions()
         .iter()
-        .chain(world.get_spot_actions(ctx.position()))
-        .any(|act| act.can_access(ctx) && act.has_effect(ctx))
+        .chain(world.get_spot_actions(ctx.get().position()))
+        .any(|act| act.can_access(ctx.get()) && ctx.is_useful(act))
 }
 
-pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    spot_has_locations(world, ctx) || spot_has_actions(world, ctx)
+    spot_has_locations(world, ctx.get()) || spot_has_actions(world, ctx)
 }
 
 pub fn expand<W, T, E, Wp>(
@@ -141,7 +141,7 @@ pub fn expand_simple<W, T, E, Wp>(
     }
 }
 
-/// 
+/// Explores outward from the current position.
 pub fn accessible_spots<W, T, E>(world: &W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
 where
     W: World<Exit = E>,

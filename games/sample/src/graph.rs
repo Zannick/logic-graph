@@ -1642,6 +1642,7 @@ pub struct Action {
     id: ActionId,
     time: i32,
     price: Currency,
+    cycle: Option<i8>,
 }
 
 impl world::Accessible for Action {
@@ -1692,6 +1693,9 @@ impl world::Action for Action {
                 rules::action_has_effect_save__position(ctx)
             }
         }
+    }
+    fn cycle_length(&self) -> Option<i8> {
+        self.cycle
     }
 }
 
@@ -2683,16 +2687,19 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::Global__Change_Time,
             time: 2000,
             price: Currency::Rupees(10),
+            cycle: Some(2),
         },
         ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => Action {
             id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
             time: 1000,
             price: Currency::Free,
+            cycle: None,
         },
         ActionId::KF__Kokiri_Village__Sarias_Porch__Save => Action {
             id: ActionId::KF__Kokiri_Village__Sarias_Porch__Save,
             time: 1000,
             price: Currency::Free,
+            cycle: None,
         },
     }
 }

@@ -23,6 +23,7 @@ boolExpr
 actions : action (';' action)* ';'?;
 
 // TODO? a "^here" builtin ref for the spot it's defined in, but is that just position?
+// TODO: a "cycle" action for ints/enums
 action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
         | REF BINOP '=' num                                     # Alter
         ;
