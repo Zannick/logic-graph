@@ -37,22 +37,18 @@ where
     }
 
     vec.sort_unstable_by_key(|el| el.elapsed());
-    let mut penalty = 0;
-    let mut last: i32 = 0;
+    let shortest = vec[0].elapsed();
     // Suppose the distances to these spots are (delta from the first one) 0, 2, 3, 5, 10.
     // We want penalties to increase somewhat quadratically based on count (not just distance).
     // Penalties:
     // First el: 0. Second el: 0. Third el: 2nd-1st (2).
-    // Fourth el: (2nd-1st)*2 + 3rd-2nd, aka twice #3's penalty + diff (4+1)
-    // Fifth el: twice the last penalty + diff (10 + 10)
-    // that's 0, 0, 2, 5, 10
+    // Fourth el: (2nd-1st)*2 + 3rd-2nd = 3rd+2nd - 2*1st, (4+1)
+    // Fifth el: (3rd-1st)*2 + 4th-3rd = 4th+3rd - 2*1st, (6+2)
+    // that's 0, 0, 2, 5, 8
     // penalties for 0, 1, 2, 3, 4, 5, 6: 0, 0, 1, 3, 7, 15, 31
-    for el in vec.iter_mut() {
-        if last > 0 {
-            el.penalize(penalty);
-            penalty += penalty + el.elapsed() - last;
-        }
-        last = el.elapsed();
+    for i in 2..vec.len() {
+        let penalty = vec[i].elapsed() + vec[i-1].elapsed() - 2 * shortest;
+        vec[i].penalize(penalty);
     }
     vec
 }
@@ -66,6 +62,9 @@ where
 {
     let mut ctx_list = vec![ctx];
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
+    if locs.is_empty() && exit == None {
+        return;
+    }
     locs.sort_unstable_by_key(|loc| loc.time());
     for loc in locs {
         let last_ctxs = ctx_list;

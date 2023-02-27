@@ -63,9 +63,16 @@ pub fn expand<W, T, E, Wp>(
         // for connection checks. If we tracked the "context" state separately
         // from the item state, it might be less copying.
         let mut newctx = ctx.clone();
+        // TODO: replace with call to newctx.exit
         newctx.get_mut().set_position(spot);
         newctx.history.push(hist);
         newctx.elapse(time);
+
+        if newctx.history.len() > 2 {
+            if newctx.history[newctx.history.len() - 3] == newctx.history[newctx.history.len() - 1] {
+                panic!("Backtracked! {:#?}", newctx);
+            }
+        }
         spot_heap.push(Reverse(newctx));
     };
 
@@ -142,7 +149,10 @@ pub fn expand_simple<W, T, E, Wp>(
 }
 
 /// Explores outward from the current position.
-pub fn accessible_spots<W, T, E>(world: &W, ctx: ContextWrapper<T>) -> HashMap<E::SpotId, ContextWrapper<T>>
+pub fn accessible_spots<W, T, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+) -> HashMap<E::SpotId, ContextWrapper<T>>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
