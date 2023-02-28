@@ -250,6 +250,14 @@ where
             println!("Max time to consider is now: {}ms", heap.max_time());
             continue;
         }
+        if ctx.score() < -3 * heap.max_time() {
+            println!(
+                "Remaining items have low score: score={} vs max_time={}ms",
+                ctx.score(),
+                heap.max_time()
+            );
+            break;
+        }
         iters += 1;
         if iters % 10000 == 0 {
             let (iskips, pskips) = heap.stats();
