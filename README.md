@@ -62,3 +62,15 @@ The top-level game definition also includes:
 
 In [games/sample](games/sample) we've defined a small version of Ocarina of Time, based on the access graph logic from https://github.com/TestRunnerSRL/OoT-Randomizer.
 It is not meant to be an accurate representation; several liberties have been taken to ensure the sample graph covers most of the above concepts.
+
+## Requirements
+
+Python 3.10, Rust, Cargo.
+
+Run `pip install requirements.txt` to install necessary python libraries, including ANTLR4's Python3 runtime, which will also install ANTLR4 for you.
+
+## How to run
+
+To rebuild the grammar, run `python grammar/build.py --recompile`.
+
+To generate the Rust code specific to a game, place its `Game.yaml` and Region `yaml` files in a folder `games/GameName` and run `python Compiler.py GameName`. Then, from `games/GameName`, you can run the generated program via `cargo run` or `cargo run -r`, optionally providing a yaml-style settings file.
