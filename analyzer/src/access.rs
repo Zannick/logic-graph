@@ -49,7 +49,7 @@ where
 pub fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    dist_map: &HashMap<E::SpotId, ContextWrapper<T>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
     spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -58,7 +58,7 @@ pub fn expand<W, T, E, Wp>(
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     for spot in world.get_area_spots(ctx.get().position()) {
-        if !dist_map.contains_key(spot) {
+        if !spot_map.contains_key(spot) {
             let local = ctx.get().local_travel_time(*spot);
             if local < 0 {
                 panic!(
@@ -76,7 +76,7 @@ pub fn expand<W, T, E, Wp>(
     }
 
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if !dist_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
+        if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
             spot_heap.push(Reverse(newctx));
@@ -84,7 +84,7 @@ pub fn expand<W, T, E, Wp>(
     }
 
     for warp in world.get_warps() {
-        if !dist_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
+        if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
             spot_heap.push(Reverse(newctx));
@@ -142,25 +142,26 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
-    let mut dist_map = HashMap::new();
+    let mut spot_map = HashMap::new();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
-    dist_map.insert(pos, ctx);
+    spot_map.insert(pos, ctx);
 
-    expand(world, &dist_map[&pos], &dist_map, &mut spot_heap);
+    expand(world, &spot_map[&pos], &spot_map, &mut spot_heap);
     while let Some(Reverse(spot_found)) = spot_heap.pop() {
         let pos = spot_found.get().position();
-        if !dist_map.contains_key(&pos) {
-            dist_map.insert(pos, spot_found);
-            expand(world, &dist_map[&pos], &dist_map, &mut spot_heap);
+        if !spot_map.contains_key(&pos) {
+            spot_map.insert(pos, spot_found);
+            expand(world, &spot_map[&pos], &spot_map, &mut spot_heap);
         }
     }
 
     // TODO: sort by distance
-    dist_map
+    spot_map
 }
 
 /// Variant of `access` that does not write hist or time, ideal for beatability checks
