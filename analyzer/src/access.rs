@@ -190,6 +190,26 @@ where
     spot_map
 }
 
+pub fn all_visitable_locations<'a, W, T, L, E>(world: &'a W, ctx: &T) -> Vec<L::LocId>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    world
+        .get_spot_locations(ctx.position())
+        .iter()
+        .filter_map(|loc| {
+            if ctx.todo(loc.id()) && loc.can_access(ctx) {
+                Some(loc.id())
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+
 pub fn visitable_locations<'a, W, T, L, E>(
     world: &'a W,
     ctx: &T,
@@ -207,11 +227,11 @@ where
         .filter(|loc| {
             if !ctx.todo(loc.id()) || !loc.can_access(ctx) {
                 return false;
-            } else if exit == None {
-                if let Some(e) = loc.exit_id() {
+            } else if let Some(e) = loc.exit_id() {
+                if exit == None {
                     exit = Some((loc.id(), *e));
-                    return false;
                 }
+                return false;
             }
             true
         })

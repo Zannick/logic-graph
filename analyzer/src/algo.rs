@@ -22,17 +22,8 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx);
-    let mut vec = Vec::new();
+    let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
 
-    for (spot_id, mut spot_data) in spot_map.into_iter() {
-        // Spot must have accessible locations with visited Status None
-        if spot_has_locations(world, spot_data.get()) {
-            vec.push(spot_data);
-        } else if spot_has_actions(world, &spot_data) {
-            spot_data.penalize(1000);
-            vec.push(spot_data);
-        }
-    }
     if vec.is_empty() {
         return vec;
     }
@@ -48,7 +39,7 @@ where
     // that's 0, 0, 2, 5, 8
     // penalties for 0, 1, 2, 3, 4, 5, 6: 0, 0, 1, 3, 7, 15, 31
     for i in 2..vec.len() {
-        let penalty = vec[i].elapsed() + vec[i-1].elapsed() - 2 * shortest;
+        let penalty = vec[i].elapsed() + vec[i - 1].elapsed() - 2 * shortest;
         vec[i].penalize(penalty);
     }
     vec
@@ -102,16 +93,54 @@ where
     heap.extend(ctx_list);
 }
 
+pub fn action_unlocked_anything<W, T, L, E>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    act: &W::Action,
+    spot_ctxs: &Vec<ContextWrapper<T>>,
+) -> bool
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+{
+    // TODO: can this be cached for the next search step?
+    let new_spots = accessible_spots(world, ctx.clone());
+    if new_spots.len() > spot_ctxs.len() {
+        return true;
+    }
+    let mut missing = 0;
+    for spot_ctx in spot_ctxs {
+        if let Some(spot_again) = new_spots.get(&spot_ctx.get().position()) {
+            if spot_again.elapsed() < spot_ctx.elapsed() {
+                return true;
+            }
+            let new_locs = all_visitable_locations(world, spot_again.get());
+            let old_locs = all_visitable_locations(world, spot_ctx.get());
+            if new_locs.iter().any(|loc| !old_locs.contains(&loc)) {
+                return true;
+            }
+        } else {
+            missing += 1;
+            continue;
+        }
+    }
+    // The overlap is len() - missing, so if the new count is greater, we found new spots
+    new_spots.len() > spot_ctxs.len() - missing
+}
+
 pub fn activate_actions<W, T, L, E>(
     world: &W,
-    ctx: ContextWrapper<T>,
+    ctx: &ContextWrapper<T>,
     penalty: i32,
+    spot_ctxs: &Vec<ContextWrapper<T>>,
     heap: &mut LimitedHeap<T>,
 ) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     for act in world
         .get_global_actions()
@@ -121,7 +150,7 @@ pub fn activate_actions<W, T, L, E>(
         if act.can_access(ctx.get()) && ctx.is_useful(act) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            if can_win(world, c2.get()) {
+            if can_win(world, c2.get()) && action_unlocked_anything(world, &c2, act, spot_ctxs) {
                 c2.penalize(penalty);
                 heap.push(c2);
             }
@@ -142,13 +171,23 @@ where
     // 3. (activate_actions) for each ctx, check for global actions and spot actions
     // 4. (visit_locations) for each ctx, get all available locations
     let spot_ctxs = explore(world, ctx, heap);
+
     if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
         let max_dist = f.elapsed() - s.elapsed();
         for ctx in spot_ctxs.iter() {
-            activate_actions(world, ctx.clone(), max_dist, heap);
-        }
-        for ctx in spot_ctxs {
-            visit_locations(world, ctx, heap);
+            let has_locs = spot_has_locations(world, ctx.get());
+            if spot_has_actions(world, ctx) {
+                activate_actions(
+                    world,
+                    ctx,
+                    if !has_locs { max_dist + 1000 } else { max_dist },
+                    &spot_ctxs,
+                    heap,
+                );
+            }
+            if has_locs {
+                visit_locations(world, ctx.clone(), heap);
+            }
         }
     }
 }
