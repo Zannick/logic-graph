@@ -4,7 +4,7 @@ Tools for video game logic representation and analysis, particularly routing and
 
 ## Overview
 
-Most video game speedruns are optimization problems of the form, "what's the fastest route to accomplish this list of tasks under these constraints?", otherwise known as the Traveling Salesman Problem. While TSP is generally considered intractable in the general case, any given video game is a specific case with a finite number of traversable nodes, and any% speedruns search for ways to skip past as many nodes as possible.
+Most video game speedruns are optimization problems of the form, "what's the fastest route to accomplish this list of tasks under these constraints?", otherwise known as the [Traveling ~~Salesman~~ Adventurer Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem). While TSP is generally considered intractable in the general case, any given video game is a specific case with a finite number of traversable nodes, and any% speedruns search for ways to skip past as many nodes as possible.
 
 Randomizers produce repeatable challenges from a given video game where the items/tasks needed are found at random throughout the game world, and the difficulty of the challenge can usually be adjusted by adding or removing randomization from various elements. Routing is also a TSP problem, but one that has to be adjusted by speedrunners "on the fly" as items are discovered from the randomized locations and enable new access to other locations.
 
