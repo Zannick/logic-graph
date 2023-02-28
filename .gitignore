@@ -5,10 +5,7 @@ __pycache__/
 
 .*.sw*
 *.o
-generated/
 target/
 .antlr/
-*.interp
-*.tokens
 *.lock
 *.setting
