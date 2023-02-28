@@ -1,2 +1,5 @@
+games/*/*.dot       linguist-generated=true
+games/*/benches/*   linguist-generated=true
+games/*/bin/*       linguist-generated=true
 games/*/src/*       linguist-generated=true
 grammar/generated/* linguist-generated=true
