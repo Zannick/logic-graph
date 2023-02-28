@@ -168,6 +168,7 @@ class GameLogic(object):
             pr = _parseExpression(logic, name, 'objectives')
             self.objectives[name] = {'pr': pr}
             self.objectives[name]['access_id'] = self.make_funcid(self.objectives[name])
+        self.default_objective = list(self._info['objectives'].keys())[0]
 
         self.collect = {}
         for name, logic in self._info['collect'].items():

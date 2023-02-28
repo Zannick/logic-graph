@@ -1,11 +1,11 @@
-%% macro enum(name, values, default=False, id=False)
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default %}, Default{% endif %})]
+%% macro enum(name, values, default=False, id=False, default_value=None)
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default or default_value %}, Default{% endif %})]
 pub enum {{ name }} {
-%% if default
-    #[default] None,
+%% if default or default_value
+    #[default] {{ default_value }},
 %% endif
 %% for v in values|sort(attribute='id')
-    {{ v.id or v|construct_id }},
+    {% if (v.id or v|construct_id) != default_value %}{{ v.id or v|construct_id }},{% endif -%}
 %% endfor
 }
 impl fmt::Display for {{ name }} {

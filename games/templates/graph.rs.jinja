@@ -23,7 +23,7 @@ use std::option::Option;
 {{ enum('ActionId', gl.actions()|list, id=True) }}
 {{ enum('CanonId', canon_places, True, id=True) }}
 {{ enum('WarpId', warps.values()|list, id=True) }}
-{{ enum('Objective', objectives) }}
+{{ enum('Objective', objectives, default_value=default_objective) }}
 
 pub fn get_area(spot: SpotId) -> AreaId {
     match spot {
@@ -288,7 +288,7 @@ impl world::World for World {
 impl World {
     pub fn new() -> World {
         World {
-            objective: Objective::Gohma,
+            objective: Objective::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),

@@ -1259,19 +1259,20 @@ impl std::str::FromStr for WarpId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default)]
 pub enum Objective {
+    #[default]
+    Gohma,
     Ganon,
     Triforce_Hunt,
-    Gohma,
     Deku_Full_Clear,
 }
 impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            Objective::Gohma => write!(f, "{}", "Gohma"),
             Objective::Ganon => write!(f, "{}", "Ganon"),
             Objective::Triforce_Hunt => write!(f, "{}", "Triforce Hunt"),
-            Objective::Gohma => write!(f, "{}", "Gohma"),
             Objective::Deku_Full_Clear => write!(f, "{}", "Deku Full Clear"),
         }
     }
@@ -1281,9 +1282,9 @@ impl std::str::FromStr for Objective {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Gohma" => Ok(Objective::Gohma),
             "Ganon" => Ok(Objective::Ganon),
             "Triforce Hunt" => Ok(Objective::Triforce_Hunt),
-            "Gohma" => Ok(Objective::Gohma),
             "Deku Full Clear" => Ok(Objective::Deku_Full_Clear),
             _ => Err(format!("Could not recognize as a Objective: {}", s)),
         }
@@ -1852,9 +1853,9 @@ impl world::World for World {
 
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
+            Objective::Gohma => rules::access_kokiri_emerald(ctx),
             Objective::Ganon => rules::access_defeat_ganon(ctx),
             Objective::Triforce_Hunt => rules::access_triforce_piece__triforce_count(ctx),
-            Objective::Gohma => rules::access_kokiri_emerald(ctx),
             Objective::Deku_Full_Clear => rules::access_all_region_checks__deku_tree(ctx),
         }
     }
@@ -1863,7 +1864,7 @@ impl world::World for World {
 impl World {
     pub fn new() -> World {
         World {
-            objective: Objective::Gohma,
+            objective: Objective::default(),
             locations: build_locations(),
             exits: build_exits(),
             actions: build_actions(),
