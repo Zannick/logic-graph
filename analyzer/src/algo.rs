@@ -221,7 +221,11 @@ where
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
-    let mut winner = None;
+    let mut winner = if wonctx.elapsed() < m.elapsed() {
+        wonctx
+    } else {
+        m
+    };
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
             println!(
@@ -242,9 +246,9 @@ where
                     min.write(m.history_str().as_bytes()).unwrap();
                     return;
                 }
-                winner = Some(m);
+                winner = m;
             } else {
-                winner = Some(ctx);
+                winner = ctx;
             }
 
             println!("Max time to consider is now: {}ms", heap.max_time());
@@ -277,9 +281,5 @@ where
         "Finished after {} rounds, skipped {} pushes + {} pops",
         iters, iskips, pskips
     );
-    if let Some(m) = winner {
-        println!("Final result: est. {}ms\n{}", m.elapsed(), m.history_str());
-    } else {
-        println!("Did not find a winner");
-    }
+    println!("Final result: est. {}ms\n{}", winner.elapsed(), winner.history_str());
 }
