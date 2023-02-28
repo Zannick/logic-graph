@@ -54,28 +54,9 @@ pub fn expand<W, T, E, Wp>(
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let mut insert = |spot, time, hist| {
-        // We're copying the whole context on every step, which is probably
-        // super inefficient; we only really copy because position may be relevant
-        // for connection checks. If we tracked the "context" state separately
-        // from the item state, it might be less copying.
-        let mut newctx = ctx.clone();
-        // TODO: replace with call to newctx.exit
-        newctx.get_mut().set_position(spot);
-        newctx.history.push(hist);
-        newctx.elapse(time);
-
-        if newctx.history.len() > 2 {
-            if newctx.history[newctx.history.len() - 3] == newctx.history[newctx.history.len() - 1] {
-                panic!("Backtracked! {:#?}", newctx);
-            }
-        }
-        spot_heap.push(Reverse(newctx));
-    };
-
     for spot in world.get_area_spots(ctx.get().position()) {
         if !dist_map.contains_key(spot) {
             let local = ctx.get().local_travel_time(*spot);
@@ -86,23 +67,27 @@ pub fn expand<W, T, E, Wp>(
                     spot
                 );
             }
-            insert(*spot, local, History::MoveLocal(*spot));
+            let mut newctx = ctx.clone();
+            newctx.get_mut().set_position(*spot);
+            newctx.history.push(History::MoveLocal(*spot));
+            newctx.elapse(local);
+            spot_heap.push(Reverse(newctx));
         }
     }
 
     for exit in world.get_spot_exits(ctx.get().position()) {
         if !dist_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
-            insert(exit.dest(), exit.time(), History::Move(exit.id()));
+            let mut newctx = ctx.clone();
+            newctx.exit(exit);
+            spot_heap.push(Reverse(newctx));
         }
     }
 
     for warp in world.get_warps() {
         if !dist_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
-            insert(
-                warp.dest(ctx.get()),
-                warp.time(),
-                History::Warp(warp.id(), warp.dest(ctx.get())),
-            );
+            let mut newctx = ctx.clone();
+            newctx.warp(warp);
+            spot_heap.push(Reverse(newctx));
         }
     }
 }
@@ -156,8 +141,8 @@ pub fn accessible_spots<W, T, E>(
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
     let mut dist_map = HashMap::new();

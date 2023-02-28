@@ -17,8 +17,9 @@ pub fn explore<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<Context = T>,
+    E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx);
     let mut vec = Vec::new();

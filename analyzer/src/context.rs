@@ -166,6 +166,19 @@ impl<T: Ctx> ContextWrapper<T> {
         self.history.push(History::Move(exit.id()));
     }
 
+    pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
+    where
+        W: World<Exit = E, Warp = Wp>,
+        T: Ctx<World = W>,
+        E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId> + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    {
+        self.ctx.set_position(warp.dest(&self.ctx));
+        self.elapse(warp.time());
+        self.ctx.spend(warp.price());
+        self.history.push(History::Warp(warp.id(), warp.dest(&self.ctx)));
+    }
+
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
     where
         W: World<Exit = E, Location = L>,
