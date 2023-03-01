@@ -151,7 +151,8 @@ class GameLogic(object):
         self.game_dir = os.path.join(base_dir, 'games', game)
         self._misc_errors = []
 
-        self._info = self._info = load_game_yaml(self.game_dir)
+        self._info = load_game_yaml(self.game_dir)
+        self.game_name = self._info['name']
         self.helpers = {
             get_func_name(name): {
                 'args': [TypedVar(a, '') for a in get_func_args(name)],
