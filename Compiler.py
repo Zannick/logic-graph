@@ -15,6 +15,7 @@ import yaml
 logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelname}: {message}', style='{')
 
 import antlr4
+import inflection
 import jinja2
 
 from grammar import parseRule, parseAction, ParseResult
@@ -148,6 +149,7 @@ class GameLogic(object):
 
     def __init__(self, game: str):
         self.game = game
+        self.package = inflection.underscore(game)
         self.game_dir = os.path.join(base_dir, 'games', game)
         self._misc_errors = []
 
