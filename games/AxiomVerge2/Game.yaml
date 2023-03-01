@@ -1,0 +1,47 @@
+name: Axiom Verge 2
+
+start:
+  position: Antarctica > West > Helipad
+  save: Antarctica > West > Helipad
+  mode: Indra
+  indra: Antarctica > West > Helipad
+  energy: 0
+
+
+objectives:
+  Start: Freight_Elevator
+  Everything: Freight_Elevator && Notes_2053_02_27
+
+movements:
+  default:
+    # a grid line = 1 unit. each minimap pixel is about .1 unit
+    x: .285  # about 3.5s per grid x-unit
+    fall: .8
+    # y: .8  # assumes as moving freely, but should be a fall speed
+    # y = fall speed, about 1 level / 1.25s = .8
+
+time:
+  default: 1
+  xshift: 1.2
+  interior: 0.75
+  exterior: 0.75
+  note: 0
+
+warps:
+  save:
+    time: 5  # initial savewarp pre-amashi
+    to: ^save
+
+helpers:
+  $melee: Ice_Axe
+  $break_box: $melee
+
+actions:
+  - name: Placeholder
+    req: Placeholder
+    do: ^energy += 1
+    time: 1
+
+settings:
+  boomerang_steering:
+    type: bool

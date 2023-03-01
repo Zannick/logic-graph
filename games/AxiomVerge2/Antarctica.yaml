@@ -1,0 +1,165 @@
+name: Antarctica
+
+areas:
+- name: West
+  spots:
+    - name: Helipad
+      # start point is 38.5,2 on the AV2 map
+      # ~5s left to the shed at 37.25, ~7s right to blocks
+      coord: [38.5, 2]
+    - name: Shed Entry
+      coord: [37.25, 2]
+      exits:
+        - to: Shed > Interior
+          tags: [interior] # arguably the ext/int tags could be derived from area->area
+    - name: Boxes
+      coord: [40, 2] 
+      # technically the door is a little further right
+      # but there's no need to come back
+      exits:
+        - to: Building 1W > West Entry
+          req: $break_box
+          tags: [interior]
+          time: 2 # or 3
+
+- name: Shed
+  spots:
+    - name: Interior
+      locations:
+        - name: Shelf
+          item: Ice_Axe
+          time: 0.5
+      exits:
+        - to: West > Shed Entry
+          tags: [exterior]
+
+- name: Building 1W
+  spots:
+    - name: West Entry
+      coord: [40.25, 2]
+      # there's no need to go back, but...
+      exits:
+        - to: West > Boxes
+          tags: [exterior]
+    - name: Connector
+      coord: [41, 2]
+      exits:
+        - to: Building 1E > Connector
+          tags: [xshift]
+
+- name: Building 1E
+  spots:
+    - name: Connector
+      coord: [41, 2]
+    - name: East Entry
+      coord: [41.75, 2]
+      exits:
+        - to: East > Building 1 Entry
+          tags: [exterior]
+
+- name: East
+  enter:
+    save: Antarctica > East > Save Point
+  spots:
+    - name: Building 1 Entry
+      coord: [41.75, 2]
+      exits:
+        - to: Building 1E > East Entry
+          tags: [interior]
+    - name: Save Point
+      coord: [42, 2]
+    - name: Building 2 Entry
+      coord: [42.5, 2]
+      exits:
+        - to: Building 2L > Entry
+          tags: [interior]
+
+- name: Upper East
+  spots:
+    - name: Building 2 Upper
+      coord: [41.25, 1]
+      exits:
+        - to: Building 2U > Door
+          tags: [interior]
+        - to: Top > Power Entry
+          time: 3
+          tags: [xshift]
+        - to: East > Save Point
+          time: 1.5
+
+- name: Building 2L
+  spots:
+    - name: Entry
+      coord: [42.5, 2]
+      exits:
+        - to: Building 2U > Stairs
+          time: 4
+          # technically vertical-ish in same room
+        - to: Freight Elevator > Left
+          req: Station_Power
+          time: 3
+          tags: [xshift]
+
+# TODO: give Indra a jump up to the next level movement speed?
+- name: Building 2U
+  spots:
+    - name: Stairs
+      coord: [42.25, 1]
+      exits:
+        - to: Building 2U Corner > Behind Boxes
+          req: $break_box
+          time: 3
+    - name: Door
+      coord: [41.25, 1]
+      exits:
+        - to: Upper East > Building 2 Upper
+          tags: [exterior]
+
+- name: Building 2U Corner
+  spots:
+    - name: Behind Boxes
+      locations:
+        - name: Note
+          item: Notes_2053_02_27
+          canon: Notes_2053_02_27
+          tags: [note]  # Tag is on the item, not the location necessarily
+
+- name: Top
+  spots:
+    - name: Power Entry
+      coord: [40.70, 1]
+      exits:
+        - to: Power Room > Entry
+          tags: [interior]
+        - to: Upper East > Building 2 Upper
+          time: 3.5
+          tags: [xshift]
+
+- name: Power Room
+  spots:
+    - name: Entry
+      coord: [40.70, 1]
+      exits:
+        - to: Top > Power Entry
+          tags: [exterior]
+    - name: Switch
+      coord: [40.30, 1]
+      locations:
+        - name: Flip
+          item: Station_Power
+          time: 0
+          tags: [event]
+
+- name: Freight Elevator
+  spots:
+    - name: Left
+      coord: [43, 2]
+      exits:
+        - to: Building 2L > Entry
+          time: 3
+    - name: Controls
+      coord: [43.6, 2]
+      locations:
+        - name: Activate
+          item: Freight_Elevator
+          time: 16

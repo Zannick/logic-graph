@@ -1,0 +1,96 @@
+digraph AxiomVerge2 {
+    splines=line;
+    ranksep=1.0;
+    subgraph cluster_Antarctica {
+        subgraph cluster_Antarctica__West {
+            Antarctica__West__Helipad [label = "Helipad"];
+            Antarctica__West__Shed_Entry [label = "Shed Entry"];
+            Antarctica__West__Boxes [label = "Boxes"];
+            label = "West";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Shed {
+            Antarctica__Shed__Interior [label = "Interior"];
+            label = "Shed";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Building_1W {
+            Antarctica__Building_1W__West_Entry [label = "West Entry"];
+            Antarctica__Building_1W__Connector [label = "Connector"];
+            label = "Building 1W";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Building_1E {
+            Antarctica__Building_1E__Connector [label = "Connector"];
+            Antarctica__Building_1E__East_Entry [label = "East Entry"];
+            label = "Building 1E";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__East {
+            Antarctica__East__Building_1_Entry [label = "Building 1 Entry"];
+            Antarctica__East__Save_Point [label = "Save Point"];
+            Antarctica__East__Building_2_Entry [label = "Building 2 Entry"];
+            label = "East";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Upper_East {
+            Antarctica__Upper_East__Building_2_Upper [label = "Building 2 Upper"];
+            label = "Upper East";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Building_2L {
+            Antarctica__Building_2L__Entry [label = "Entry"];
+            label = "Building 2L";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Building_2U {
+            Antarctica__Building_2U__Stairs [label = "Stairs"];
+            Antarctica__Building_2U__Door [label = "Door"];
+            label = "Building 2U";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Building_2U_Corner {
+            Antarctica__Building_2U_Corner__Behind_Boxes [label = "Behind Boxes"];
+            label = "Building 2U Corner";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Top {
+            Antarctica__Top__Power_Entry [label = "Power Entry"];
+            label = "Top";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Power_Room {
+            Antarctica__Power_Room__Entry [label = "Entry"];
+            Antarctica__Power_Room__Switch [label = "Switch"];
+            label = "Power Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Antarctica__Freight_Elevator {
+            Antarctica__Freight_Elevator__Left [label = "Left"];
+            Antarctica__Freight_Elevator__Controls [label = "Controls"];
+            label = "Freight Elevator";
+            bgcolor = "white";
+        }
+        label = "Antarctica";
+        bgcolor = "lightgrey";
+    }
+    Antarctica__West__Shed_Entry -> Antarctica__Shed__Interior;
+    Antarctica__West__Boxes -> Antarctica__Building_1W__West_Entry;
+    Antarctica__Shed__Interior -> Antarctica__West__Shed_Entry;
+    Antarctica__Building_1W__West_Entry -> Antarctica__West__Boxes;
+    Antarctica__Building_1W__Connector -> Antarctica__Building_1E__Connector;
+    Antarctica__Building_1E__East_Entry -> Antarctica__East__Building_1_Entry;
+    Antarctica__East__Building_1_Entry -> Antarctica__Building_1E__East_Entry;
+    Antarctica__East__Building_2_Entry -> Antarctica__Building_2L__Entry;
+    Antarctica__Upper_East__Building_2_Upper -> Antarctica__Building_2U__Door;
+    Antarctica__Upper_East__Building_2_Upper -> Antarctica__Top__Power_Entry;
+    Antarctica__Upper_East__Building_2_Upper -> Antarctica__East__Save_Point;
+    Antarctica__Building_2L__Entry -> Antarctica__Building_2U__Stairs;
+    Antarctica__Building_2L__Entry -> Antarctica__Freight_Elevator__Left;
+    Antarctica__Building_2U__Stairs -> Antarctica__Building_2U_Corner__Behind_Boxes;
+    Antarctica__Building_2U__Door -> Antarctica__Upper_East__Building_2_Upper;
+    Antarctica__Top__Power_Entry -> Antarctica__Power_Room__Entry;
+    Antarctica__Top__Power_Entry -> Antarctica__Upper_East__Building_2_Upper;
+    Antarctica__Power_Room__Entry -> Antarctica__Top__Power_Entry;
+    Antarctica__Freight_Elevator__Left -> Antarctica__Building_2L__Entry;
+}
