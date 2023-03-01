@@ -2,6 +2,7 @@
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
+#![allow(unused)]
 
 use crate::context::*;
 use crate::items::*;
@@ -297,8 +298,8 @@ impl World {
             spots: build_spots(),
             global_actions: Range {
                 {% if global_actions -%}
-                start: ActionId::{{ global_actions.values()|map(attribute='id')|min }}.into_usize(),
-                end: ActionId::{{ global_actions.values()|map(attribute='id')|max }}.into_usize() + 1,
+                start: ActionId::{{ global_actions|map(attribute='id')|min }}.into_usize(),
+                end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
             }
         }

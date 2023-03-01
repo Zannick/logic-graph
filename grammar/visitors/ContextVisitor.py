@@ -96,7 +96,7 @@ class ContextVisitor(RulesVisitor):
             self.visitChildren(ctx)
 
     def visitAlter(self, ctx):
-        ref = str(ctx.REF(0))[1:]
+        ref = str(ctx.REF())[1:]
         self._checkRef(ref)
         self.visitChildren(ctx)
         # TODO: check that the var is an int type

@@ -171,7 +171,7 @@ class GameLogic(object):
         self.default_objective = list(self._info['objectives'].keys())[0]
 
         self.collect = {}
-        for name, logic in self._info['collect'].items():
+        for name, logic in self._info.get('collect', {}).items():
             pr = parseAction(logic, 'collect:' + name)
             self.collect[name] = {'pr': pr}
             self.collect[name]['action_id'] = self.make_funcid(self.collect[name])
@@ -302,9 +302,9 @@ class GameLogic(object):
 
 
     def process_global_actions(self):
-        self.global_actions = self._info.get('actions', {})
-        for name, act in self.global_actions.items():
-            act['name'] = name
+        self.global_actions = self._info.get('actions', [])
+        for act in self.global_actions:
+            name = act['name']
             act['id'] = construct_id('Global', name)
             if 'req' not in act and 'price' not in act:
                 self._misc_errors.append(f'Global actions must have req or price: {name}')
@@ -470,7 +470,7 @@ class GameLogic(object):
 
     def actions(self):
         return itertools.chain(
-            self.global_actions.values(),
+            self.global_actions,
             itertools.chain.from_iterable(s.get('actions', []) for s in self.spots()))
 
 
@@ -490,8 +490,8 @@ class GameLogic(object):
         yield from (info['pr'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
-        yield from (info['pr'] for info in self.global_actions.values() if 'pr' in info)
-        yield from (info['act'] for info in self.global_actions.values())
+        yield from (info['pr'] for info in self.global_actions if 'pr' in info)
+        yield from (info['act'] for info in self.global_actions)
 
 
     def all_parse_results(self):
@@ -828,6 +828,7 @@ class GameLogic(object):
             'bin': ['main.rs'],
         }
         for dirname, fnames in files.items():
+            os.makedirs(os.path.join(self.game_dir, dirname), exist_ok=True)
             for tname in fnames:
                 template = env.get_template(tname + '.jinja')
                 with open(os.path.join(self.game_dir, dirname, tname), 'w') as f:

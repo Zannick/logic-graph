@@ -41,7 +41,7 @@ time:
   bluewarp: 6
   load: 2
 
-warps:
+warps: # TODO: make this a list ("- name: Save" etc)
   save:
     time: 8
     to: ^save
@@ -51,7 +51,7 @@ warps:
     to: KF > Kokiri Village > Shop Porch  # Sacred Forest Meadow > Temple Front > Warp Point
 
 actions:
-  Change Time:
+  - name: Change Time
     time: 2
     price: 10
     do: ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
