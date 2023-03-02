@@ -23,8 +23,10 @@ movements:
   #   xy: move orthogonally (at the same speed)
   #   x: move L/R (separately from U/D)
   #   y: move U/D (separately from L/R)
-  # Side-scrollers should mostly use x.
-  # In general, recommend using separate Areas instead of modeling jump/fall.
+  #   fall: move D (same sign as y-coord change going down,
+  #         eg. if 0,0 is upper-left of map, fall is +. if 0,0 is lower-left, fall is -.)
+  # Side-scrollers should mostly use x, maybe fall and y.
+  # In general, recommend using separate Areas instead of modeling jump.
   # Speed is based on the distance moveable in the unit time; even though you don't
   # need to use the same coordinate system in each Area, the distances must match.
   default:

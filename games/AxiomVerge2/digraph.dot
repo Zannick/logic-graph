@@ -30,12 +30,8 @@ digraph AxiomVerge2 {
             Antarctica__East__Building_1_Entry [label = "Building 1 Entry"];
             Antarctica__East__Save_Point [label = "Save Point"];
             Antarctica__East__Building_2_Entry [label = "Building 2 Entry"];
+            Antarctica__East__Building_2_Upper [label = "Building 2 Upper"];
             label = "East";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Upper_East {
-            Antarctica__Upper_East__Building_2_Upper [label = "Building 2 Upper"];
-            label = "Upper East";
             bgcolor = "white";
         }
         subgraph cluster_Antarctica__Building_2L {
@@ -82,15 +78,15 @@ digraph AxiomVerge2 {
     Antarctica__Building_1E__East_Entry -> Antarctica__East__Building_1_Entry;
     Antarctica__East__Building_1_Entry -> Antarctica__Building_1E__East_Entry;
     Antarctica__East__Building_2_Entry -> Antarctica__Building_2L__Entry;
-    Antarctica__Upper_East__Building_2_Upper -> Antarctica__Building_2U__Door;
-    Antarctica__Upper_East__Building_2_Upper -> Antarctica__Top__Power_Entry;
-    Antarctica__Upper_East__Building_2_Upper -> Antarctica__East__Save_Point;
+    Antarctica__East__Building_2_Upper -> Antarctica__Building_2U__Door;
+    Antarctica__East__Building_2_Upper -> Antarctica__Top__Power_Entry;
     Antarctica__Building_2L__Entry -> Antarctica__Building_2U__Stairs;
     Antarctica__Building_2L__Entry -> Antarctica__Freight_Elevator__Left;
     Antarctica__Building_2U__Stairs -> Antarctica__Building_2U_Corner__Behind_Boxes;
-    Antarctica__Building_2U__Door -> Antarctica__Upper_East__Building_2_Upper;
+    Antarctica__Building_2U__Stairs -> Antarctica__Building_2L__Entry;
+    Antarctica__Building_2U__Door -> Antarctica__East__Building_2_Upper;
     Antarctica__Top__Power_Entry -> Antarctica__Power_Room__Entry;
-    Antarctica__Top__Power_Entry -> Antarctica__Upper_East__Building_2_Upper;
+    Antarctica__Top__Power_Entry -> Antarctica__East__Building_2_Upper;
     Antarctica__Power_Room__Entry -> Antarctica__Top__Power_Entry;
     Antarctica__Freight_Elevator__Left -> Antarctica__Building_2L__Entry;
 }

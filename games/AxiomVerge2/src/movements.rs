@@ -57,6 +57,15 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 2631,
         (SpotId::Antarctica__East__Building_2_Entry, SpotId::Antarctica__East__Save_Point) => 1754,
+        (
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Building_1_Entry,
+        ) => 1754,
+        (SpotId::Antarctica__East__Building_2_Upper, SpotId::Antarctica__East__Save_Point) => 2631,
+        (
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Building_2_Entry,
+        ) => 4385,
         (SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => 3508,
         (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => 3508,
         (SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => 1403,

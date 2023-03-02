@@ -73,9 +73,6 @@ areas:
       exits:
         - to: Building 2L > Entry
           tags: [interior]
-
-- name: Upper East
-  spots:
     - name: Building 2 Upper
       coord: [41.25, 1]
       exits:
@@ -84,8 +81,6 @@ areas:
         - to: Top > Power Entry
           time: 3
           tags: [xshift]
-        - to: East > Save Point
-          time: 1.5
 
 - name: Building 2L
   spots:
@@ -109,10 +104,12 @@ areas:
         - to: Building 2U Corner > Behind Boxes
           req: $break_box
           time: 3
+        - to: Building 2L > Entry
+          time: 2
     - name: Door
       coord: [41.25, 1]
       exits:
-        - to: Upper East > Building 2 Upper
+        - to: East > Building 2 Upper
           tags: [exterior]
 
 - name: Building 2U Corner
@@ -131,7 +128,7 @@ areas:
       exits:
         - to: Power Room > Entry
           tags: [interior]
-        - to: Upper East > Building 2 Upper
+        - to: East > Building 2 Upper
           time: 3.5
           tags: [xshift]
 

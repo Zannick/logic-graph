@@ -50,7 +50,6 @@ pub enum AreaId {
     Antarctica__Power_Room,
     Antarctica__Shed,
     Antarctica__Top,
-    Antarctica__Upper_East,
     Antarctica__West,
 }
 impl fmt::Display for AreaId {
@@ -70,7 +69,6 @@ impl fmt::Display for AreaId {
             AreaId::Antarctica__Power_Room => write!(f, "{}", "Antarctica > Power Room"),
             AreaId::Antarctica__Shed => write!(f, "{}", "Antarctica > Shed"),
             AreaId::Antarctica__Top => write!(f, "{}", "Antarctica > Top"),
-            AreaId::Antarctica__Upper_East => write!(f, "{}", "Antarctica > Upper East"),
             AreaId::Antarctica__West => write!(f, "{}", "Antarctica > West"),
         }
     }
@@ -91,7 +89,6 @@ impl std::str::FromStr for AreaId {
             "Antarctica > Power Room" => Ok(AreaId::Antarctica__Power_Room),
             "Antarctica > Shed" => Ok(AreaId::Antarctica__Shed),
             "Antarctica > Top" => Ok(AreaId::Antarctica__Top),
-            "Antarctica > Upper East" => Ok(AreaId::Antarctica__Upper_East),
             "Antarctica > West" => Ok(AreaId::Antarctica__West),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
         }
@@ -112,6 +109,7 @@ pub enum SpotId {
     Antarctica__Building_2U_Corner__Behind_Boxes,
     Antarctica__East__Building_1_Entry,
     Antarctica__East__Building_2_Entry,
+    Antarctica__East__Building_2_Upper,
     Antarctica__East__Save_Point,
     Antarctica__Freight_Elevator__Controls,
     Antarctica__Freight_Elevator__Left,
@@ -119,7 +117,6 @@ pub enum SpotId {
     Antarctica__Power_Room__Switch,
     Antarctica__Shed__Interior,
     Antarctica__Top__Power_Entry,
-    Antarctica__Upper_East__Building_2_Upper,
     Antarctica__West__Boxes,
     Antarctica__West__Helipad,
     Antarctica__West__Shed_Entry,
@@ -158,6 +155,9 @@ impl fmt::Display for SpotId {
             SpotId::Antarctica__East__Building_2_Entry => {
                 write!(f, "{}", "Antarctica > East > Building 2 Entry")
             }
+            SpotId::Antarctica__East__Building_2_Upper => {
+                write!(f, "{}", "Antarctica > East > Building 2 Upper")
+            }
             SpotId::Antarctica__East__Save_Point => {
                 write!(f, "{}", "Antarctica > East > Save Point")
             }
@@ -176,9 +176,6 @@ impl fmt::Display for SpotId {
             SpotId::Antarctica__Shed__Interior => write!(f, "{}", "Antarctica > Shed > Interior"),
             SpotId::Antarctica__Top__Power_Entry => {
                 write!(f, "{}", "Antarctica > Top > Power Entry")
-            }
-            SpotId::Antarctica__Upper_East__Building_2_Upper => {
-                write!(f, "{}", "Antarctica > Upper East > Building 2 Upper")
             }
             SpotId::Antarctica__West__Boxes => write!(f, "{}", "Antarctica > West > Boxes"),
             SpotId::Antarctica__West__Helipad => write!(f, "{}", "Antarctica > West > Helipad"),
@@ -218,6 +215,9 @@ impl std::str::FromStr for SpotId {
             "Antarctica > East > Building 2 Entry" => {
                 Ok(SpotId::Antarctica__East__Building_2_Entry)
             }
+            "Antarctica > East > Building 2 Upper" => {
+                Ok(SpotId::Antarctica__East__Building_2_Upper)
+            }
             "Antarctica > East > Save Point" => Ok(SpotId::Antarctica__East__Save_Point),
             "Antarctica > Freight Elevator > Controls" => {
                 Ok(SpotId::Antarctica__Freight_Elevator__Controls)
@@ -229,9 +229,6 @@ impl std::str::FromStr for SpotId {
             "Antarctica > Power Room > Switch" => Ok(SpotId::Antarctica__Power_Room__Switch),
             "Antarctica > Shed > Interior" => Ok(SpotId::Antarctica__Shed__Interior),
             "Antarctica > Top > Power Entry" => Ok(SpotId::Antarctica__Top__Power_Entry),
-            "Antarctica > Upper East > Building 2 Upper" => {
-                Ok(SpotId::Antarctica__Upper_East__Building_2_Upper)
-            }
             "Antarctica > West > Boxes" => Ok(SpotId::Antarctica__West__Boxes),
             "Antarctica > West > Helipad" => Ok(SpotId::Antarctica__West__Helipad),
             "Antarctica > West > Shed Entry" => Ok(SpotId::Antarctica__West__Shed_Entry),
@@ -299,18 +296,18 @@ pub enum ExitId {
     Antarctica__Building_1W__West_Entry__ex__West__Boxes_1,
     Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1,
     Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1,
-    Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1,
+    Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1,
+    Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1,
     Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1,
     Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1,
     Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1,
+    Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1,
+    Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1,
     Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1,
     Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1,
     Antarctica__Shed__Interior__ex__West__Shed_Entry_1,
+    Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1,
     Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1,
-    Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1,
-    Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1,
-    Antarctica__Upper_East__Building_2_Upper__ex__East__Save_Point_1,
-    Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1,
     Antarctica__West__Boxes__ex__Building_1W__West_Entry_1,
     Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
 }
@@ -342,10 +339,15 @@ impl fmt::Display for ExitId {
                 "{}",
                 "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"
             ),
-            ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1 => write!(
+            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(
                 f,
                 "{}",
-                "Antarctica > Building 2U > Door ==> Upper East > Building 2 Upper (1)"
+                "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"
+            ),
+            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(
+                f,
+                "{}",
+                "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"
             ),
             ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => {
                 write!(
@@ -364,6 +366,16 @@ impl fmt::Display for ExitId {
                 "{}",
                 "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"
             ),
+            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(
+                f,
+                "{}",
+                "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"
+            ),
+            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(
+                f,
+                "{}",
+                "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"
+            ),
             ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(
                 f,
                 "{}",
@@ -379,30 +391,15 @@ impl fmt::Display for ExitId {
                 "{}",
                 "Antarctica > Shed > Interior ==> West > Shed Entry (1)"
             ),
+            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(
+                f,
+                "{}",
+                "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"
+            ),
             ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(
                 f,
                 "{}",
                 "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"
-            ),
-            ExitId::Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1 => write!(
-                f,
-                "{}",
-                "Antarctica > Top > Power Entry ==> Upper East > Building 2 Upper (1)"
-            ),
-            ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1 => write!(
-                f,
-                "{}",
-                "Antarctica > Upper East > Building 2 Upper ==> Building 2U > Door (1)"
-            ),
-            ExitId::Antarctica__Upper_East__Building_2_Upper__ex__East__Save_Point_1 => write!(
-                f,
-                "{}",
-                "Antarctica > Upper East > Building 2 Upper ==> East > Save Point (1)"
-            ),
-            ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(
-                f,
-                "{}",
-                "Antarctica > Upper East > Building 2 Upper ==> Top > Power Entry (1)"
             ),
             ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(
                 f,
@@ -438,8 +435,11 @@ impl std::str::FromStr for ExitId {
             "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)" => {
                 Ok(ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1)
             }
-            "Antarctica > Building 2U > Door ==> Upper East > Building 2 Upper (1)" => {
-                Ok(ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1)
+            "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)" => {
+                Ok(ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1)
+            }
+            "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)" => {
+                Ok(ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1)
             }
             "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)" => {
                 Ok(ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1)
@@ -450,6 +450,12 @@ impl std::str::FromStr for ExitId {
             "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)" => {
                 Ok(ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1)
             }
+            "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)" => {
+                Ok(ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1)
+            }
+            "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)" => {
+                Ok(ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1)
+            }
             "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)" => {
                 Ok(ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1)
             }
@@ -459,20 +465,11 @@ impl std::str::FromStr for ExitId {
             "Antarctica > Shed > Interior ==> West > Shed Entry (1)" => {
                 Ok(ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1)
             }
+            "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)" => {
+                Ok(ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1)
+            }
             "Antarctica > Top > Power Entry ==> Power Room > Entry (1)" => {
                 Ok(ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1)
-            }
-            "Antarctica > Top > Power Entry ==> Upper East > Building 2 Upper (1)" => {
-                Ok(ExitId::Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1)
-            }
-            "Antarctica > Upper East > Building 2 Upper ==> Building 2U > Door (1)" => {
-                Ok(ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1)
-            }
-            "Antarctica > Upper East > Building 2 Upper ==> East > Save Point (1)" => {
-                Ok(ExitId::Antarctica__Upper_East__Building_2_Upper__ex__East__Save_Point_1)
-            }
-            "Antarctica > Upper East > Building 2 Upper ==> Top > Power Entry (1)" => {
-                Ok(ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1)
             }
             "Antarctica > West > Boxes ==> Building 1W > West Entry (1)" => {
                 Ok(ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1)
@@ -596,8 +593,8 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Antarctica__Building_1E__East_Entry => AreaId::Antarctica__Building_1E,
         SpotId::Antarctica__East__Building_1_Entry
         | SpotId::Antarctica__East__Save_Point
-        | SpotId::Antarctica__East__Building_2_Entry => AreaId::Antarctica__East,
-        SpotId::Antarctica__Upper_East__Building_2_Upper => AreaId::Antarctica__Upper_East,
+        | SpotId::Antarctica__East__Building_2_Entry
+        | SpotId::Antarctica__East__Building_2_Upper => AreaId::Antarctica__East,
         SpotId::Antarctica__Building_2L__Entry => AreaId::Antarctica__Building_2L,
         SpotId::Antarctica__Building_2U__Stairs | SpotId::Antarctica__Building_2U__Door => {
             AreaId::Antarctica__Building_2U
@@ -626,8 +623,8 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Antarctica__Building_1E__East_Entry => RegionId::Antarctica,
         SpotId::Antarctica__East__Building_1_Entry
         | SpotId::Antarctica__East__Save_Point
-        | SpotId::Antarctica__East__Building_2_Entry => RegionId::Antarctica,
-        SpotId::Antarctica__Upper_East__Building_2_Upper => RegionId::Antarctica,
+        | SpotId::Antarctica__East__Building_2_Entry
+        | SpotId::Antarctica__East__Building_2_Upper => RegionId::Antarctica,
         SpotId::Antarctica__Building_2L__Entry => RegionId::Antarctica,
         SpotId::Antarctica__Building_2U__Stairs | SpotId::Antarctica__Building_2U__Door => {
             RegionId::Antarctica
@@ -717,9 +714,8 @@ impl world::Accessible for Exit {
                 ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
                 ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => true,
                 ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => true,
-                ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1 => true,
-                ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1 => true,
-                ExitId::Antarctica__Upper_East__Building_2_Upper__ex__East__Save_Point_1 => true,
+                ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => true,
+                ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => true,
                 ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => true,
                 ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => {
                     rules::access_station_power(&ctx)
@@ -727,9 +723,10 @@ impl world::Accessible for Exit {
                 ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => {
                     rules::access_break_box(&ctx)
                 }
-                ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1 => true,
+                ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => true,
+                ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => true,
                 ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => true,
-                ExitId::Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1 => true,
+                ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => true,
                 ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => true,
                 ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => true,
             }
@@ -972,6 +969,7 @@ impl World {
                 SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
                 SpotId::Antarctica__East__Building_1_Entry,
                 SpotId::Antarctica__East__Building_2_Entry,
+                SpotId::Antarctica__East__Building_2_Upper,
                 SpotId::Antarctica__East__Save_Point,
                 SpotId::Antarctica__Freight_Elevator__Controls,
                 SpotId::Antarctica__Freight_Elevator__Left,
@@ -979,7 +977,6 @@ impl World {
                 SpotId::Antarctica__Power_Room__Switch,
                 SpotId::Antarctica__Shed__Interior,
                 SpotId::Antarctica__Top__Power_Entry,
-                SpotId::Antarctica__Upper_East__Building_2_Upper,
                 SpotId::Antarctica__West__Boxes,
                 SpotId::Antarctica__West__Helipad,
                 SpotId::Antarctica__West__Shed_Entry,
@@ -1088,24 +1085,17 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1 => Exit {
-            id: ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1,
+        ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => Exit {
+            id: ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1,
             time: 750,
             dest: SpotId::Antarctica__Building_2U__Door,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1 => Exit {
-            id: ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1,
+        ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => Exit {
+            id: ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1,
             time: 3000,
             dest: SpotId::Antarctica__Top__Power_Entry,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Antarctica__Upper_East__Building_2_Upper__ex__East__Save_Point_1 => Exit {
-            id: ExitId::Antarctica__Upper_East__Building_2_Upper__ex__East__Save_Point_1,
-            time: 1500,
-            dest: SpotId::Antarctica__East__Save_Point,
             price: Currency::Free,
             loc_id: None,
         },
@@ -1130,10 +1120,17 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1 => Exit {
-            id: ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1,
+        ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => Exit {
+            id: ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1,
+            time: 2000,
+            dest: SpotId::Antarctica__Building_2L__Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => Exit {
+            id: ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1,
             time: 750,
-            dest: SpotId::Antarctica__Upper_East__Building_2_Upper,
+            dest: SpotId::Antarctica__East__Building_2_Upper,
             price: Currency::Free,
             loc_id: None,
         },
@@ -1144,10 +1141,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1 => Exit {
-            id: ExitId::Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1,
+        ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => Exit {
+            id: ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1,
             time: 3500,
-            dest: SpotId::Antarctica__Upper_East__Building_2_Upper,
+            dest: SpotId::Antarctica__East__Building_2_Upper,
             price: Currency::Free,
             loc_id: None,
         },
@@ -1367,21 +1364,21 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
             },
         },
-        SpotId::Antarctica__Upper_East__Building_2_Upper => Spot {
-            id: SpotId::Antarctica__Upper_East__Building_2_Upper,
+        SpotId::Antarctica__East__Building_2_Upper => Spot {
+            id: SpotId::Antarctica__East__Building_2_Upper,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Building_2U__Door_1.into_usize(),
-                end: ExitId::Antarctica__Upper_East__Building_2_Upper__ex__Top__Power_Entry_1.into_usize() + 1,
+                start: ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1.into_usize(),
+                end: ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Antarctica__Upper_East__Building_2_Upper.into_usize(),
-                end: SpotId::Antarctica__Upper_East__Building_2_Upper.into_usize() + 1,
+                start: SpotId::Antarctica__East__Building_1_Entry.into_usize(),
+                end: SpotId::Antarctica__East__Save_Point.into_usize() + 1,
             },
         },
         SpotId::Antarctica__Building_2L__Entry => Spot {
@@ -1407,7 +1404,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1.into_usize(),
+                start: ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1.into_usize(),
                 end: ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1.into_usize() + 1,
             },
             actions: Range {
@@ -1424,8 +1421,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1.into_usize(),
-                end: ExitId::Antarctica__Building_2U__Door__ex__Upper_East__Building_2_Upper_1.into_usize() + 1,
+                start: ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1.into_usize(),
+                end: ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -1458,8 +1455,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1.into_usize(),
-                end: ExitId::Antarctica__Top__Power_Entry__ex__Upper_East__Building_2_Upper_1.into_usize() + 1,
+                start: ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1.into_usize(),
+                end: ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -1568,7 +1565,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Antarctica__East__Building_1_Entry => Range { start: 0, end: 0 },
         SpotId::Antarctica__East__Save_Point => Range { start: 0, end: 0 },
         SpotId::Antarctica__East__Building_2_Entry => Range { start: 0, end: 0 },
-        SpotId::Antarctica__Upper_East__Building_2_Upper => Range { start: 0, end: 0 },
+        SpotId::Antarctica__East__Building_2_Upper => Range { start: 0, end: 0 },
         SpotId::Antarctica__Building_2L__Entry => Range { start: 0, end: 0 },
         SpotId::Antarctica__Building_2U__Stairs => Range { start: 0, end: 0 },
         SpotId::Antarctica__Building_2U__Door => Range { start: 0, end: 0 },
@@ -1600,7 +1597,6 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Antarctica__Building_1W => Range { start: 0, end: 0 },
         AreaId::Antarctica__Building_1E => Range { start: 0, end: 0 },
         AreaId::Antarctica__East => Range { start: 0, end: 0 },
-        AreaId::Antarctica__Upper_East => Range { start: 0, end: 0 },
         AreaId::Antarctica__Building_2L => Range { start: 0, end: 0 },
         AreaId::Antarctica__Building_2U => Range { start: 0, end: 0 },
         AreaId::Antarctica__Building_2U_Corner => Range {

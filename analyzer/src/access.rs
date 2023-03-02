@@ -61,11 +61,8 @@ pub fn expand<W, T, E, Wp>(
         if !spot_map.contains_key(spot) {
             let local = ctx.get().local_travel_time(*spot);
             if local < 0 {
-                panic!(
-                    "Could not travel within area: start={:?} dest={:?}",
-                    ctx.get().position(),
-                    spot
-                );
+                // Can't move this way
+                continue;
             }
             let mut newctx = ctx.clone();
             newctx.get_mut().set_position(*spot);

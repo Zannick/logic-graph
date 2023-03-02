@@ -349,9 +349,13 @@ class GameLogic(object):
                 continue
             if sx := self.movements[m].get('x'):
                 xtimes.append(a / sx)
-            # Not mutually exclusive
+            # x, y, fall: not mutually exclusive
             if sy := self.movements[m].get('y'):
-                ytimes.append(b / sy)
+                ytimes.append(abs(b) / sy)
+            if sfall := self.movements[m].get('fall'):
+                # fall speed must be the same direction as "down"
+                if (t := b / sfall) > 0:
+                    ytimes.append(t)
         if xtimes and ytimes:
             times.append(max(min(xtimes), min(ytimes)))
         elif xtimes and b == 0:
@@ -406,7 +410,7 @@ class GameLogic(object):
                         break
                 for (sx, sy), (cx, cy) in itertools.pairwise(coords):
                     d[(sp1['id'], sp2['id'])].append(
-                            (abs(cx - sx), abs(cy - sy)))
+                            (abs(cx - sx), cy - sy))
         return d
 
 
