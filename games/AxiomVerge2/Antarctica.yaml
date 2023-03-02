@@ -156,7 +156,6 @@ areas:
           time: 3
     - name: Controls
       coord: [43.6, 2]
-      locations:
-        - name: Activate
-          item: Freight_Elevator
-          time: 16
+      exits:
+        - to: Glacier > Dock Elevator > Elevator
+          time: 15

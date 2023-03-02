@@ -6,6 +6,8 @@ start:
   mode: Indra
   indra: Antarctica > West > Helipad
   energy: 0
+  breach: false
+  flask: 0
 
 
 objectives:
@@ -22,7 +24,7 @@ movements:
 
 time:
   default: 1
-  xshift: 1.2
+  xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   interior: 0.75
   exterior: 0.75
   note: 0

@@ -1,0 +1,64 @@
+name: Glacier
+
+areas:
+- name: Dock Elevator
+  spots:
+    - name: Elevator
+      coord: [44.5, 9]
+    - name: Connector
+      coord: [44.0, 9]
+      exits:
+        - to: Dock Interior > Connector
+          tags: [xshift]
+
+- name: Dock Interior
+  spots:
+    - name: Connector
+      coord: [44.0, 9]
+      exits:
+        - to: Dock Elevator > Connector
+          tags: [xshift]
+    - name: Entry
+      coord: [43.4, 9]
+      exits:
+        - to: Dock Outside > Entry
+          tags: [exterior]
+
+- name: Dock Outside
+  spots:
+    - name: Entry
+      coord: [43.4, 9]
+      exits:
+        - to: Dock Interior > Entry
+          tags: [interior]
+    # the first time you reach here, this becomes the save point.
+    # however, this doesn't ever seem relevant
+    # and I'm not sure how to force it in the logic
+    #- name: Save Point
+    #  coord: [43.0, 9]
+    - name: Do Not Enter
+      coord: [42.0, 9]
+      exits:
+        - to: Grid 41,9 > East
+          tags: [xshift]
+
+- name: Grid 41,9
+  spots:
+    - name: East
+      coord: [42.0, 9]
+      exits:
+        - to: Dock Outside
+          tags: [xshift]
+    - name: Overhang
+      coord: [41.6, 9]
+      exits:
+        - to: Grid 41,10 > East
+          time: 2.75
+
+- name: Grid 41,10
+  spots:
+    - name: East
+      coord: [42.0, 10]
+      exits:
+        - to: Grid 41,9 > Overhang
+          time: 7
