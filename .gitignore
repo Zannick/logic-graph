@@ -9,3 +9,6 @@ target/
 .antlr/
 *.lock
 *.setting
+*.svg
+# Profile data from perf, e.g.
+*.data
