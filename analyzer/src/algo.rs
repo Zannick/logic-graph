@@ -4,10 +4,9 @@ use crate::access::*;
 use crate::context::*;
 use crate::greedy::*;
 use crate::heap::LimitedHeap;
+use crate::minimize::*;
 use crate::world::*;
 use std::fmt::Debug;
-use std::fs::File;
-use std::io::Write;
 
 pub fn explore<W, T, L, E>(
     world: &W,
@@ -66,7 +65,7 @@ where
             if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
                 // TODO: Add a better way to prevent this from causing too wide a branching factor
                 // or remove.
-                if !loc.is_free() {
+                if ctx.minimize || !loc.is_free() {
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
@@ -260,6 +259,7 @@ where
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
+    let mut m_iters = 0;
     let mut winner = if wonctx.elapsed() < m.elapsed() {
         wonctx
     } else {
@@ -268,25 +268,21 @@ where
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
             println!(
-                "Found winning path after {} rounds, in estimated {}ms, with {} remaining in heap",
+                "Found winning {}path after {} rounds, in estimated {}ms, with {} remaining in heap",
+                if ctx.minimize { "*minimized* " } else { "" },
                 iters,
                 ctx.elapsed(),
                 heap.len()
             );
             heap.set_lenient_max_time(ctx.elapsed());
-            if let Some(m) = minimize_nongreedy(world, startctx.get(), &ctx) {
-                heap.set_lenient_max_time(m.elapsed());
-                println!("Minimized it to {}ms", m.elapsed());
-                if m.elapsed() > ctx.elapsed() {
-                    println!("Weird, it got slower?");
-                    let mut orig = File::create("/tmp/orig").unwrap();
-                    orig.write(ctx.history_str().as_bytes()).unwrap();
-                    let mut min = File::create("/tmp/new").unwrap();
-                    min.write(m.history_str().as_bytes()).unwrap();
-                    return;
-                }
-                winner = m;
-            } else {
+            if !ctx.minimize {
+                let mut newctx =
+                    ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
+                newctx.minimize = true;
+                heap.push(newctx);
+            }
+
+            if ctx.elapsed() < winner.elapsed() {
                 winner = ctx;
             }
 
@@ -302,11 +298,15 @@ where
             break;
         }
         iters += 1;
+        if ctx.minimize {
+            m_iters += 1;
+        }
         if iters % 10000 == 0 {
             let (iskips, pskips) = heap.stats();
             println!(
-                "Round {} (heap size {}, skipped {} pushes + {} pops):\n  {}",
+                "Round {} (min: {}) (heap size {}, skipped {} pushes + {} pops):\n  {}",
                 iters,
+                m_iters,
                 heap.len(),
                 iskips,
                 pskips,
@@ -317,8 +317,12 @@ where
     }
     let (iskips, pskips) = heap.stats();
     println!(
-        "Finished after {} rounds, skipped {} pushes + {} pops",
-        iters, iskips, pskips
+        "Finished after {} rounds (w/ {} minimize rounds), skipped {} pushes + {} pops",
+        iters, m_iters, iskips, pskips
     );
-    println!("Final result: est. {}ms\n{}", winner.elapsed(), winner.history_str());
+    println!(
+        "Final result: est. {}ms\n{}",
+        winner.elapsed(),
+        winner.history_str()
+    );
 }

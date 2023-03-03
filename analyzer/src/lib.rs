@@ -6,5 +6,6 @@ pub mod algo;
 pub mod context;
 pub mod greedy;
 pub mod heap;
+pub mod minimize;
 pub mod settings;
 pub mod world;

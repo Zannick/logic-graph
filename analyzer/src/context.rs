@@ -96,6 +96,7 @@ where
     elapsed: i32,
     penalty: i32,
     pub history: Box<Vec<History<T>>>,
+    pub minimize: bool,
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -105,6 +106,7 @@ impl<T: Ctx> ContextWrapper<T> {
             elapsed: 0,
             penalty: 0,
             history: Box::new(vec![]),
+            minimize: false,
         }
     }
 

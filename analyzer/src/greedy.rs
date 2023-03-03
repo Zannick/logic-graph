@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use crate::access::*;
 use crate::context::*;
+use crate::minimize::*;
 use crate::world::*;
 
 pub fn nearest_spot_with_checks<W, T, E, L, Wp>(
