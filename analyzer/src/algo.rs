@@ -191,49 +191,6 @@ where
     }
 }
 
-pub fn minimize_nongreedy<W, T, L, E>(
-    world: &W,
-    startctx: &T,
-    wonctx: &ContextWrapper<T>,
-) -> Option<ContextWrapper<T>>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T, Currency = L::Currency>,
-{
-    find_one(world, minimize(world, startctx, wonctx), wonctx.elapsed())
-}
-
-pub fn find_one<W, T, L, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-    max_time: i32,
-) -> Option<ContextWrapper<T>>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T, Currency = L::Currency>,
-{
-    if !can_win(world, ctx.get()) {
-        panic!("Trying to solve a minimized search that can't win");
-    }
-    let mut heap = LimitedHeap::new();
-    heap.set_max_time(max_time + 1);
-    heap.push(ctx);
-    let mut iters = 0;
-    while let Some(ctx) = heap.pop() {
-        if world.won(ctx.get()) {
-            return Some(ctx);
-        }
-        iters += 1;
-        search_step(world, ctx, &mut heap);
-    }
-    println!("Failed to find minimized win after {} mini-rounds", iters);
-    None
-}
-
 pub fn search<W, T, L, E>(world: &W, mut ctx: T)
 where
     W: World<Location = L, Exit = E>,
