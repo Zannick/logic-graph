@@ -16,17 +16,21 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
+pub fn access_amashilama(ctx: &Context) -> bool {
+    // Amashilama
+    ctx.has(Item::Amashilama)
+}
+pub fn access_amashilama__notes_2053_02_27(ctx: &Context) -> bool {
+    // Amashilama && Notes_2053_02_27
+    (ctx.has(Item::Amashilama) && ctx.has(Item::Notes_2053_02_27))
+}
+pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
+    // Apocalypse_Bomb
+    ctx.has(Item::Apocalypse_Bomb)
+}
 pub fn access_break_box(ctx: &Context) -> bool {
     // $break_box
     helper__break_box!(ctx)
-}
-pub fn access_freight_elevator(ctx: &Context) -> bool {
-    // Freight_Elevator
-    ctx.has(Item::Freight_Elevator)
-}
-pub fn access_freight_elevator__notes_2053_02_27(ctx: &Context) -> bool {
-    // Freight_Elevator && Notes_2053_02_27
-    (ctx.has(Item::Freight_Elevator) && ctx.has(Item::Notes_2053_02_27))
 }
 pub fn access_placeholder(ctx: &Context) -> bool {
     // Placeholder
@@ -42,4 +46,24 @@ pub fn action_energy__1(ctx: &mut Context) {
 }
 pub fn action_has_effect_energy__1(ctx: &Context) -> bool {
     0 != 1
+}
+pub fn action_position__glacier__revival__save_point_save__glacier__revival__save_point(
+    ctx: &mut Context,
+) {
+    // ^position = `Glacier > Revival > Save Point`; ^save = `Glacier > Revival > Save Point`
+    ctx.position = SpotId::Glacier__Revival__Save_Point;
+    ctx.save = SpotId::Glacier__Revival__Save_Point;
+}
+pub fn action_has_effect_position__glacier__revival__save_point_save__glacier__revival__save_point(
+    ctx: &Context,
+) -> bool {
+    ctx.position != SpotId::Glacier__Revival__Save_Point
+        || ctx.save != SpotId::Glacier__Revival__Save_Point
+}
+pub fn action_save__position(ctx: &mut Context) {
+    // ^save = ^position
+    ctx.save = ctx.position();
+}
+pub fn action_has_effect_save__position(ctx: &Context) -> bool {
+    ctx.save != ctx.position()
 }

@@ -42,12 +42,12 @@ areas:
         - to: Grid 41,9 > East
           tags: [xshift]
 
-- name: Grid 41,9
+- name: Grid 41,9  # It sure is going to get difficult naming every grid square otherwise
   spots:
     - name: East
       coord: [42.0, 9]
       exits:
-        - to: Dock Outside
+        - to: Dock Outside > Do Not Enter
           tags: [xshift]
     - name: Overhang
       coord: [41.6, 9]
@@ -62,3 +62,99 @@ areas:
       exits:
         - to: Grid 41,9 > Overhang
           time: 7
+        - to: Grid 42,10 > West
+          tags: [xshift]
+
+- name: Grid 42,10
+  spots:
+    - name: West
+      coord: [42.0, 10]
+      exits:
+        - to: Grid 41,10 > East
+          tags: [xshift]
+    - name: East
+      coord: [43.0, 10]
+      exits:
+        - to: Grid 43,10-11 > Top
+          tags: [xshift]
+
+- name: Grid 43,10-11
+  spots:
+    - name: Top
+      coord: [43.0, 10]
+      exits:
+        - to: Grid 42,10 > East
+          tags: [xshift]
+    - name: East
+      coord: [44.0, 10]
+      exits:
+        - to: Apocalypse Entry > West
+          tags: [xshift]
+    - name: Lower
+      coord: [43.0, 11]
+      exits:  # TODO: could be local with dist overrides. or add other movement types exits
+        - to: Top
+          time: 5
+        - to: East
+          time: 3.5
+
+- name: Compass Room
+  spots:
+    - name: East
+      coord: [43.0, 11]
+      exits:
+        - to: Grid 43,10-11 > Lower
+          tags: [xshift]
+    - name: Center
+      coord: [42.5, 11]
+      locations:
+        - name: Table
+          item: Compass
+          time: 0
+    - name: West  # This is also an autosave location in the early game, also irrelevant.
+      coord: [42.0, 11]
+      exits:
+        - to: The Big Drop > East
+          tags: [xshift]
+
+- name: The Big Drop
+  spots:
+    - name: East
+      coord: [42.0, 11]
+      exits:
+        - to: Compass Room > West
+          tags: [xshift]
+    - name: Small Path
+      coord: [42.0, 13]
+    - name: Water Surface
+      coord: [41.0, 13]
+      locations:
+        - name: Drown  # This is technically the next grid over, but it's a cutscene really
+          item: Amashilama
+          time: 48.5
+
+- name: Revival
+  spots:
+    - name: Save Point
+      coord: [41.4, 8]
+      actions:
+        - name: Save
+          do: ^save = ^position
+          time: 1.2
+    - name: West
+      coord: [41.0, 8]
+
+- name: Apocalypse Entry
+  spots:
+    - name: West
+      coord: [44.0, 10]  # actually ever so slightly lower (i.e. > 10)
+      exits:
+        - to: Grid 43,10-11 > East
+          tags: [xshift]
+    - name: Terminal
+      coord: [44.6, 10]
+      locations:
+        - name: Escape
+          item: Escape
+          req: Apocalypse_Bomb
+    # TODO: the path to Apocalypse... whether in this area or another

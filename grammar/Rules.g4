@@ -147,7 +147,7 @@ ITEM    : [A-Z][a-z][a-zA-Z_0-9]+ ;
 SETTING : [a-z][a-zA-Z_0-9]+ ;
 REF     : '^' [a-z_][a-zA-Z_0-9.]+ ;
 FUNC    : '$' [A-Za-z_][A-Za-z_0-9]+ ;
-PLACE   : '`' [A-Z][A-Za-z_0-9' ]+ '`';
+PLACE   : '`' [A-Z][A-Za-z_0-9'> ]+ '`';
 LIT     : '\'' (~'\'' | '\\\'' )* '\'';
 CONST   : [A-Z][A-Z_0-9]+ ;
 INT     : '-'? [0-9]+ ;

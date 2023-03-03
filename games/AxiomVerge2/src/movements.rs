@@ -78,6 +78,48 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
         ) => 2105,
+        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
+            1754
+        }
+        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Elevator) => {
+            1754
+        }
+        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Entry) => 2105,
+        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Connector) => 2105,
+        (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => 4912,
+        (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => 4912,
+        (SpotId::Glacier__Grid_419__East, SpotId::Glacier__Grid_419__Overhang) => 1403,
+        (SpotId::Glacier__Grid_419__Overhang, SpotId::Glacier__Grid_419__East) => 1403,
+        (SpotId::Glacier__Grid_4210__West, SpotId::Glacier__Grid_4210__East) => 3508,
+        (SpotId::Glacier__Grid_4210__East, SpotId::Glacier__Grid_4210__West) => 3508,
+        (SpotId::Glacier__Grid_431011__Top, SpotId::Glacier__Grid_431011__East) => 3508,
+        (SpotId::Glacier__Grid_431011__Top, SpotId::Glacier__Grid_431011__Lower) => 1250,
+        (SpotId::Glacier__Grid_431011__East, SpotId::Glacier__Grid_431011__Top) => 3508,
+        (SpotId::Glacier__Grid_431011__East, SpotId::Glacier__Grid_431011__Lower) => 3508,
+        (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => 1754,
+        (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__West) => 3508,
+        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => 1754,
+        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => 1754,
+        (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__East) => 3508,
+        (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => 1754,
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => 2500,
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => 3508,
+        (
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+            SpotId::Glacier__The_Big_Drop__Water_Surface,
+        ) => 3508,
+        (
+            SpotId::Glacier__The_Big_Drop__Water_Surface,
+            SpotId::Glacier__The_Big_Drop__Small_Path,
+        ) => 3508,
+        (SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West) => 1403,
+        (SpotId::Glacier__Revival__West, SpotId::Glacier__Revival__Save_Point) => 1403,
+        (SpotId::Glacier__Apocalypse_Entry__West, SpotId::Glacier__Apocalypse_Entry__Terminal) => {
+            2105
+        }
+        (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
+            2105
+        }
         _ => -1,
     }
 }

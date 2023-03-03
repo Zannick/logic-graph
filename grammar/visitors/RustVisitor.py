@@ -211,7 +211,7 @@ class ActionHasEffectVisitor(RustVisitor):
         super().__init__(ctxdict, name)
 
     def visitActions(self, ctx):
-        return ' && '.join(self.visit(ch) for ch in ctx.action())
+        return ' || '.join(self.visit(ch) for ch in ctx.action())
 
     def visitSet(self, ctx):
         return super().visitSet(ctx)[:-1].replace(' = ', ' != ')

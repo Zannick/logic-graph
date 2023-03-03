@@ -10,5 +10,6 @@ target/
 *.lock
 *.setting
 *.svg
-# Profile data from perf, e.g.
+# Profile data
 *.data
+*.out.*

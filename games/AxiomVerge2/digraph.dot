@@ -70,6 +70,78 @@ digraph AxiomVerge2 {
         label = "Antarctica";
         bgcolor = "lightgrey";
     }
+    subgraph cluster_Glacier {
+        subgraph cluster_Glacier__Dock_Elevator {
+            Glacier__Dock_Elevator__Elevator [label = "Elevator"];
+            Glacier__Dock_Elevator__Connector [label = "Connector"];
+            label = "Dock Elevator";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Dock_Interior {
+            Glacier__Dock_Interior__Connector [label = "Connector"];
+            Glacier__Dock_Interior__Entry [label = "Entry"];
+            label = "Dock Interior";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Dock_Outside {
+            Glacier__Dock_Outside__Entry [label = "Entry"];
+            Glacier__Dock_Outside__Do_Not_Enter [label = "Do Not Enter"];
+            label = "Dock Outside";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Grid_419 {
+            Glacier__Grid_419__East [label = "East"];
+            Glacier__Grid_419__Overhang [label = "Overhang"];
+            label = "Grid 41,9";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Grid_4110 {
+            Glacier__Grid_4110__East [label = "East"];
+            label = "Grid 41,10";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Grid_4210 {
+            Glacier__Grid_4210__West [label = "West"];
+            Glacier__Grid_4210__East [label = "East"];
+            label = "Grid 42,10";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Grid_431011 {
+            Glacier__Grid_431011__Top [label = "Top"];
+            Glacier__Grid_431011__East [label = "East"];
+            Glacier__Grid_431011__Lower [label = "Lower"];
+            label = "Grid 43,10-11";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Compass_Room {
+            Glacier__Compass_Room__East [label = "East"];
+            Glacier__Compass_Room__Center [label = "Center"];
+            Glacier__Compass_Room__West [label = "West"];
+            label = "Compass Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__The_Big_Drop {
+            Glacier__The_Big_Drop__East [label = "East"];
+            Glacier__The_Big_Drop__Small_Path [label = "Small Path"];
+            Glacier__The_Big_Drop__Water_Surface [label = "Water Surface"];
+            label = "The Big Drop";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Revival {
+            Glacier__Revival__Save_Point [label = "Save Point"];
+            Glacier__Revival__West [label = "West"];
+            label = "Revival";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Apocalypse_Entry {
+            Glacier__Apocalypse_Entry__West [label = "West"];
+            Glacier__Apocalypse_Entry__Terminal [label = "Terminal"];
+            label = "Apocalypse Entry";
+            bgcolor = "white";
+        }
+        label = "Glacier";
+        bgcolor = "lightgrey";
+    }
     Antarctica__West__Shed_Entry -> Antarctica__Shed__Interior;
     Antarctica__West__Boxes -> Antarctica__Building_1W__West_Entry;
     Antarctica__Shed__Interior -> Antarctica__West__Shed_Entry;
@@ -89,4 +161,24 @@ digraph AxiomVerge2 {
     Antarctica__Top__Power_Entry -> Antarctica__East__Building_2_Upper;
     Antarctica__Power_Room__Entry -> Antarctica__Top__Power_Entry;
     Antarctica__Freight_Elevator__Left -> Antarctica__Building_2L__Entry;
+    Antarctica__Freight_Elevator__Controls -> Glacier__Dock_Elevator__Elevator;
+    Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
+    Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
+    Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;
+    Glacier__Dock_Outside__Entry -> Glacier__Dock_Interior__Entry;
+    Glacier__Dock_Outside__Do_Not_Enter -> Glacier__Grid_419__East;
+    Glacier__Grid_419__East -> Glacier__Dock_Outside__Do_Not_Enter;
+    Glacier__Grid_419__Overhang -> Glacier__Grid_4110__East;
+    Glacier__Grid_4110__East -> Glacier__Grid_419__Overhang;
+    Glacier__Grid_4110__East -> Glacier__Grid_4210__West;
+    Glacier__Grid_4210__West -> Glacier__Grid_4110__East;
+    Glacier__Grid_4210__East -> Glacier__Grid_431011__Top;
+    Glacier__Grid_431011__Top -> Glacier__Grid_4210__East;
+    Glacier__Grid_431011__East -> Glacier__Apocalypse_Entry__West;
+    Glacier__Grid_431011__Lower -> Glacier__Grid_431011__Top;
+    Glacier__Grid_431011__Lower -> Glacier__Grid_431011__East;
+    Glacier__Compass_Room__East -> Glacier__Grid_431011__Lower;
+    Glacier__Compass_Room__West -> Glacier__The_Big_Drop__East;
+    Glacier__The_Big_Drop__East -> Glacier__Compass_Room__West;
+    Glacier__Apocalypse_Entry__West -> Glacier__Grid_431011__East;
 }

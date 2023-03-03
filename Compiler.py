@@ -405,6 +405,7 @@ class GameLogic(object):
                 coords = [sp1['coord'], sp2['coord']]
                 for lcl in sp1.get('local', []):
                     if lcl['to'] == sp2['name']:
+                        # We could have more overrides here, like dist
                         if thru := lcl.get('thru', []):
                             coords[1:1] = thru if isinstance(thru[0], list) else [thru]
                         break

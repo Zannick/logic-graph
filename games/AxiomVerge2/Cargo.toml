@@ -23,3 +23,6 @@ criterion = "*"
 [[bench]]
 name = "bench"
 harness = false
+
+[profile.release]
+debug = true

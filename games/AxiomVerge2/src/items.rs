@@ -8,7 +8,10 @@ use std::fmt;
 pub enum Item {
     #[default]
     None,
-    Freight_Elevator,
+    Amashilama,
+    Apocalypse_Bomb,
+    Compass,
+    Escape,
     Ice_Axe,
     Notes_2053_02_27,
     Placeholder,
@@ -18,7 +21,10 @@ impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Item::None => write!(f, "{}", "None"),
-            Item::Freight_Elevator => write!(f, "{}", "Freight_Elevator"),
+            Item::Amashilama => write!(f, "{}", "Amashilama"),
+            Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
+            Item::Compass => write!(f, "{}", "Compass"),
+            Item::Escape => write!(f, "{}", "Escape"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
             Item::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             Item::Placeholder => write!(f, "{}", "Placeholder"),
@@ -32,7 +38,10 @@ impl std::str::FromStr for Item {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Freight_Elevator" => Ok(Item::Freight_Elevator),
+            "Amashilama" => Ok(Item::Amashilama),
+            "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
+            "Compass" => Ok(Item::Compass),
+            "Escape" => Ok(Item::Escape),
             "Ice_Axe" => Ok(Item::Ice_Axe),
             "Notes_2053_02_27" => Ok(Item::Notes_2053_02_27),
             "Placeholder" => Ok(Item::Placeholder),
@@ -45,6 +54,7 @@ impl std::str::FromStr for Item {
 pub fn unused_item(id: Item) -> bool {
     match id {
         Item::None => true,
+        Item::Compass | Item::Escape => true,
         _ => false,
     }
 }

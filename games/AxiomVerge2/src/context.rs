@@ -56,10 +56,13 @@ pub struct Context {
     pub mode: enums::Mode,
     pub indra: SpotId,
     pub energy: i32,
+    pub breach: bool,
+    pub flask: i32,
     // settings
     pub boomerang_steering: bool,
     // items
-    pub freight_elevator: bool,
+    pub amashilama: bool,
+    pub apocalypse_bomb: bool,
     pub ice_axe: bool,
     pub notes_2053_02_27: bool,
     pub placeholder: bool,
@@ -75,11 +78,12 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 5;
+    const NUM_ITEMS: i32 = 6;
 
     fn has(&self, item: Item) -> bool {
         match item {
-            Item::Freight_Elevator => self.freight_elevator,
+            Item::Amashilama => self.amashilama,
+            Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Ice_Axe => self.ice_axe,
             Item::Notes_2053_02_27 => self.notes_2053_02_27,
             Item::Placeholder => self.placeholder,
@@ -89,7 +93,8 @@ impl context::Ctx for Context {
     }
     fn count(&self, item: Item) -> i16 {
         match item {
-            Item::Freight_Elevator => self.freight_elevator.into(),
+            Item::Amashilama => self.amashilama.into(),
+            Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Ice_Axe => self.ice_axe.into(),
             Item::Notes_2053_02_27 => self.notes_2053_02_27.into(),
             Item::Placeholder => self.placeholder.into(),
@@ -99,8 +104,12 @@ impl context::Ctx for Context {
     }
     fn collect(&mut self, item: Item) {
         match item {
-            Item::Freight_Elevator => {
-                self.freight_elevator = true;
+            Item::Amashilama => {
+                self.amashilama = true;
+                rules::action_position__glacier__revival__save_point_save__glacier__revival__save_point(self);
+            }
+            Item::Apocalypse_Bomb => {
+                self.apocalypse_bomb = true;
             }
             Item::Ice_Axe => {
                 self.ice_axe = true;
@@ -137,12 +146,14 @@ impl context::Ctx for Context {
         match cost {
             Currency::Free => true,
             Currency::Energy(c) => self.energy >= *c,
+            Currency::Flask(c) => self.flask >= *c,
         }
     }
     fn spend(&mut self, cost: &Currency) {
         match cost {
             Currency::Free => (),
             Currency::Energy(c) => self.energy -= *c,
+            Currency::Flask(c) => self.flask -= *c,
         }
     }
 
@@ -227,6 +238,8 @@ impl Context {
             mode: enums::Mode::Indra,
             indra: SpotId::Antarctica__West__Helipad,
             energy: 0,
+            breach: false,
+            flask: 0,
             ..Context::default()
         }
     }
@@ -263,6 +276,20 @@ impl Context {
         match get_area(self.position) {
             _ => match get_region(self.position) {
                 _ => self.energy,
+            },
+        }
+    }
+    pub fn breach(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.breach,
+            },
+        }
+    }
+    pub fn flask(&self) -> i32 {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.flask,
             },
         }
     }
