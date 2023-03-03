@@ -12,4 +12,6 @@ target/
 *.svg
 # Profile data
 *.data
+*.data.*
+*.out
 *.out.*

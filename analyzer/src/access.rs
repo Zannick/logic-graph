@@ -340,6 +340,9 @@ where
         match hist {
             History::Get(_, loc_id) => {
                 ctx.skip(*loc_id);
+                // TODO: If this location can be replaced by an action, e.g. collect rupees,
+                // then it will be dropped, and if the action is slower, we fail to minimize
+                // to a shorter playthrough.
                 if !can_win(world, &ctx) {
                     ctx.reset(*loc_id);
                 }

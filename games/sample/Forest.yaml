@@ -40,6 +40,10 @@ areas:
           thru: [13, 23]
     - name: Mido's Porch
       coord: [10, 18]
+      actions:
+        - name: Gather Rupees
+          time: 20
+          do: ^rupees = $max(^rupees + 20, $wallet_max)
       exits:
         - to: Mido's House > Entry
           tags: [load, interior]

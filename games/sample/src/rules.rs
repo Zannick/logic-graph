@@ -179,6 +179,13 @@ pub fn action_deku_tree__compass_room__entry___light_torch__do(ctx: &mut Context
 pub fn action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx: &Context) -> bool {
     ctx.deku_tree__compass_room__ctx__torch != true
 }
+pub fn action_rupees__max__rupees__20_wallet_max(ctx: &mut Context) {
+    // ^rupees = $max(^rupees + 20, $wallet_max)
+    ctx.rupees = std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx));
+}
+pub fn action_has_effect_rupees__max__rupees__20_wallet_max(ctx: &Context) -> bool {
+    ctx.rupees != std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx))
+}
 pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));

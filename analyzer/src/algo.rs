@@ -150,7 +150,7 @@ pub fn activate_actions<W, T, L, E>(
         if act.can_access(ctx.get()) && ctx.is_useful(act) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            if can_win(world, c2.get()) && action_unlocked_anything(world, &c2, act, spot_ctxs) {
+            if action_unlocked_anything(world, &c2, act, spot_ctxs) {
                 c2.penalize(penalty);
                 heap.push(c2);
             }
