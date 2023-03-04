@@ -1,12 +1,8 @@
-#![allow(unused)]
-
 use crate::context::*;
 use crate::world::*;
 use indextree::Arena;
-use indextree::Node;
 use indextree::NodeId;
 use std::collections::HashMap;
-use std::hash::Hash;
 
 struct HistoryNode<T>
 where
@@ -48,9 +44,13 @@ where
         &self.arena.get(id).unwrap().get().ctx
     }
 
-    pub fn new_tree(&mut self, step: History<T>, ctx: ContextWrapper<T>) -> Option<NodeId> {
-        if self.trees.contains_key(&step) {
-            None
+    pub fn get_root(&self, step: History<T>) -> Option<&NodeId> {
+        self.trees.get(&step)
+    }
+
+    pub fn new_tree(&mut self, step: History<T>, ctx: ContextWrapper<T>) -> Result<NodeId, NodeId> {
+        if let Some(&id) = self.trees.get(&step) {
+            Err(id)
         } else {
             let node = HistoryNode {
                 ctx,
@@ -59,7 +59,35 @@ where
             };
             let id = self.arena.new_node(node);
             self.trees.insert(step, id);
-            Some(id)
+            Ok(id)
+        }
+    }
+
+    pub fn insert_tree<W, L, E, Wp>(
+        &mut self,
+        world: &W,
+        hist: &Vec<History<T>>,
+        startctx: &ContextWrapper<T>,
+    ) where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        let mut ctx = startctx.clone();
+        if let Some(first) = hist.first() {
+            ctx.replay(world, first);
+            let mut node = match self.new_tree(first.clone(), ctx.clone()) {
+                Ok(id) | Err(id) => id,
+            };
+            for step in hist.iter().skip(1) {
+                ctx.replay(world, step);
+                let child = match self.insert(node, step.clone(), ctx.clone()) {
+                    Ok(id) | Err(id) => id,
+                };
+                node = child;
+            }
         }
     }
 
@@ -68,10 +96,10 @@ where
         parent: NodeId,
         step: History<T>,
         ctx: ContextWrapper<T>,
-    ) -> Option<NodeId> {
+    ) -> Result<NodeId, NodeId> {
         let parent_node = self.arena.get(parent).unwrap().get();
-        if parent_node.children.contains_key(&step) {
-            None
+        if let Some(&id) = parent_node.children.get(&step) {
+            Err(id)
         } else {
             let id = self.arena.new_node(HistoryNode {
                 ctx,
@@ -81,7 +109,7 @@ where
             let parent_node = self.arena.get_mut(parent).unwrap().get_mut();
             parent_node.children.insert(step, id);
             parent.append(id, &mut self.arena);
-            Some(id)
+            Ok(id)
         }
     }
 

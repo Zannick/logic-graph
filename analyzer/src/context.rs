@@ -175,7 +175,7 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Location = L>,
         T: Ctx<World = W>,
-        L: Location + Accessible<Context = T>,
+        L: Location<Context = T>,
     {
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item());
@@ -193,7 +193,7 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
-        E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
@@ -201,13 +201,27 @@ impl<T: Ctx> ContextWrapper<T> {
         self.history.push(History::Move(exit.id()));
     }
 
+    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: i32)
+    where
+        W: World<Exit = E>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T>,
+    {
+        self.ctx.set_position(spot);
+        self.history.push(History::MoveLocal(spot));
+        self.elapse(time);
+    }
+
     pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
     where
         W: World<Exit = E, Warp = Wp>,
         T: Ctx<World = W>,
-        E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId>
-            + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        Wp: Warp<
+            SpotId = <E as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
@@ -220,8 +234,8 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Exit = E, Location = L>,
         T: Ctx<World = W>,
-        L: Location + Accessible<Context = T>,
-        E: Exit + Accessible<Context = T, Currency = L::Currency>,
+        L: Location<Context = T>,
+        E: Exit<Context = T, Currency = L::Currency>,
     {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
@@ -277,6 +291,56 @@ impl<T: Ctx> ContextWrapper<T> {
             }
         }
         true
+    }
+
+    pub fn replay<W, L, E, Wp>(&mut self, world: &W, step: &History<T>)
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        // In all cases, we skip checking validity ahead of time, i.e. can_access.
+        match step {
+            History::Warp(wp, dest) => {
+                self.warp(world.get_warp(*wp));
+                assert!(
+                    self.get().position() == *dest,
+                    "Invalid replay: warp {:?}",
+                    wp
+                );
+            }
+            History::Get(item, loc_id) => {
+                let loc = world.get_location(*loc_id);
+                self.visit(world, loc);
+                assert!(loc.item() == *item, "Invalid replay: visit {:?}", loc_id);
+            }
+            History::Move(exit_id) => {
+                let exit = world.get_exit(*exit_id);
+                self.exit(exit);
+            }
+            History::MoveGet(item, exit_id) => {
+                let exit = world.get_exit(*exit_id);
+                let loc =
+                    world.get_location(exit.loc_id().expect("MoveGet requires a hybrid exit"));
+                self.visit_exit(world, loc, exit);
+                assert!(
+                    loc.item() == *item,
+                    "Invalid replay: visit-exit {:?}",
+                    exit_id
+                )
+            }
+            History::MoveLocal(spot) => {
+                let time = self.ctx.local_travel_time(*spot);
+                assert!(time >= 0, "Invalid replay: move-local {:?}", spot);
+                self.move_local(*spot, time);
+            }
+            History::Activate(act_id) => {
+                let action = world.get_action(*act_id);
+                self.activate(action);
+            }
+        }
     }
 
     pub fn info(&self) -> String {
