@@ -1,6 +1,7 @@
 use crate::world::*;
 use sort_by_derive::SortBy;
 use std::fmt::{self, format, Debug, Display};
+use std::hash::Hash;
 
 pub trait Ctx: Clone + Eq + Debug {
     type World: World;
@@ -58,6 +59,38 @@ where
     ),
     MoveLocal(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
     Activate(<<<T as Ctx>::World as World>::Action as Action>::ActionId),
+}
+
+impl<T> Hash for History<T>
+where
+    T: Ctx,
+{
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        core::mem::discriminant(self).hash(state);
+        match self {
+            History::Warp(w, s) => {
+                w.hash(state);
+                s.hash(state);
+            }
+            History::Get(i, l) => {
+                i.hash(state);
+                l.hash(state);
+            }
+            History::Move(e) => {
+                e.hash(state);
+            }
+            History::MoveGet(i, e) => {
+                i.hash(state);
+                e.hash(state);
+            }
+            History::MoveLocal(s) => {
+                s.hash(state);
+            }
+            History::Activate(a) => {
+                a.hash(state);
+            }
+        }
+    }
 }
 
 impl<T> Display for History<T>
@@ -173,12 +206,14 @@ impl<T: Ctx> ContextWrapper<T> {
         W: World<Exit = E, Warp = Wp>,
         T: Ctx<World = W>,
         E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId> + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId>
+            + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
-        self.history.push(History::Warp(warp.id(), warp.dest(&self.ctx)));
+        self.history
+            .push(History::Warp(warp.id(), warp.dest(&self.ctx)));
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
