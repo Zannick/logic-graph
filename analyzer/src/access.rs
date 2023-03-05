@@ -1,6 +1,9 @@
 //! Functions related to access graphs, and accessing locations.
 
+use indextree::NodeId;
+
 use crate::context::*;
+use crate::history::HistoryTree;
 use crate::world::*;
 use std::cmp::Reverse;
 use std::collections::VecDeque;
@@ -21,7 +24,12 @@ where
 }
 
 /// Check whether there are available actions at this position, including global actions.
-pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
+pub fn spot_has_actions<W, T, L, E>(
+    world: &W,
+    tree: &HistoryTree<T>,
+    current: NodeId,
+    ctx: &ContextWrapper<T>,
+) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -32,30 +40,43 @@ where
         .get_global_actions()
         .iter()
         .chain(world.get_spot_actions(ctx.get().position()))
-        .any(|act| act.can_access(ctx.get()) && ctx.is_useful(act))
+        .any(|act| act.can_access(ctx.get()) && ctx.is_useful(tree, current, act))
 }
 
-pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
+pub fn spot_has_locations_or_actions<W, T, L, E>(
+    world: &W,
+    tree: &HistoryTree<T>,
+    current: NodeId,
+    ctx: &ContextWrapper<T>,
+) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T>,
 {
-    spot_has_locations(world, ctx.get()) || spot_has_actions(world, ctx)
+    spot_has_locations(world, ctx.get()) || spot_has_actions(world, tree, current, ctx)
 }
 
 pub fn expand<W, T, E, Wp>(
     world: &W,
+    tree: &mut HistoryTree<T>,
+    current: NodeId,
     ctx: &ContextWrapper<T>,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
-    spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
+    spot_map: &HashMap<E::SpotId, NodeId>,
+    spot_heap: &mut BinaryHeap<(Reverse<i32>, NodeId)>,
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
+    let add_to_heap = |step, newctx: ContextWrapper<T>| {
+        let elapsed = newctx.elapsed();
+        let id = tree.insert_and_get(current, step, newctx);
+        spot_heap.push((Reverse(elapsed), id));
+    };
+
     for spot in world.get_area_spots(ctx.get().position()) {
         if !spot_map.contains_key(spot) {
             let local = ctx.get().local_travel_time(*spot);
@@ -64,24 +85,24 @@ pub fn expand<W, T, E, Wp>(
                 continue;
             }
             let mut newctx = ctx.clone();
-            newctx.move_local(*spot, local);
-            spot_heap.push(Reverse(newctx));
+            let step = newctx.move_local(*spot, local);
+            add_to_heap(step, newctx);
         }
     }
 
     for exit in world.get_spot_exits(ctx.get().position()) {
         if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
-            newctx.exit(exit);
-            spot_heap.push(Reverse(newctx));
+            let step = newctx.exit(exit);
+            add_to_heap(step, newctx);
         }
     }
 
     for warp in world.get_warps() {
         if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
-            newctx.warp(warp);
-            spot_heap.push(Reverse(newctx));
+            let step = newctx.warp(warp);
+            add_to_heap(step, newctx);
         }
     }
 }
@@ -130,8 +151,9 @@ pub fn expand_simple<W, T, E, Wp>(
 /// Explores outward from the current position.
 pub fn accessible_spots<W, T, E>(
     world: &W,
-    ctx: ContextWrapper<T>,
-) -> HashMap<E::SpotId, ContextWrapper<T>>
+    tree: &mut HistoryTree<T>,
+    current: NodeId,
+) -> HashMap<E::SpotId, NodeId>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -142,19 +164,20 @@ where
     // return: spotid -> ctxwrapper
     let mut spot_map = HashMap::new();
     let mut spot_heap = BinaryHeap::new();
+    let ctx = tree.get(current);
     let pos = ctx.get().position();
-    spot_map.insert(pos, ctx);
+    spot_map.insert(pos, current);
 
-    expand(world, &spot_map[&pos], &spot_map, &mut spot_heap);
-    while let Some(Reverse(spot_found)) = spot_heap.pop() {
+    expand(world, tree, current, ctx, &spot_map, &mut spot_heap);
+    while let Some((_, node)) = spot_heap.pop() {
+        let spot_found = tree.get(node);
         let pos = spot_found.get().position();
         if !spot_map.contains_key(&pos) {
-            spot_map.insert(pos, spot_found);
-            expand(world, &spot_map[&pos], &spot_map, &mut spot_heap);
+            spot_map.insert(pos, node);
+            expand(world, tree, node, &spot_found, &spot_map, &mut spot_heap);
         }
     }
 
-    // TODO: sort by distance
     spot_map
 }
 

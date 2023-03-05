@@ -4,15 +4,18 @@ use crate::access::*;
 use crate::context::*;
 use crate::greedy::*;
 use crate::heap::LimitedHeap;
+use crate::history::HistoryTree;
 use crate::minimize::*;
 use crate::world::*;
+use indextree::NodeId;
 use std::fmt::Debug;
 
 pub fn explore<W, T, L, E>(
     world: &W,
-    ctx: ContextWrapper<T>,
+    tree: &mut HistoryTree<T>,
+    current: NodeId,
     heap: &mut LimitedHeap<T>,
-) -> Vec<ContextWrapper<T>>
+) -> Vec<NodeId>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -20,15 +23,17 @@ where
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
-    let spot_map = accessible_spots(world, ctx);
-    let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
+    let spot_map = accessible_spots(world, tree, current);
+    let mut vec: Vec<NodeId> = spot_map.into_values().collect();
 
     if vec.is_empty() {
         return vec;
     }
 
-    vec.sort_unstable_by_key(|el| el.elapsed());
-    let shortest = vec[0].elapsed();
+    let ctx_vec: Vec<&mut ContextWrapper<T>> =
+        vec.iter().filter_map(|&node| tree.get_mut(node)).collect();
+    ctx_vec.sort_unstable_by_key(|&el| el.elapsed());
+    let shortest = ctx_vec[0].elapsed();
     // Suppose the distances to these spots are (delta from the first one) 0, 2, 3, 5, 10.
     // We want penalties to increase somewhat quadratically based on count (not just distance).
     // Penalties:
@@ -38,30 +43,34 @@ where
     // that's 0, 0, 2, 5, 8
     // penalties for 0, 1, 2, 3, 4, 5, 6: 0, 0, 1, 3, 7, 15, 31
     for i in 2..vec.len() {
-        let penalty = vec[i].elapsed() + vec[i - 1].elapsed() - 2 * shortest;
-        vec[i].penalize(penalty);
+        let penalty = ctx_vec[i].elapsed() + ctx_vec[i - 1].elapsed() - 2 * shortest;
+        ctx_vec[i].penalize(penalty);
     }
     vec
 }
 
-pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
-where
+pub fn visit_locations<W, T, L, E>(
+    world: &W,
+    tree: &mut HistoryTree<T>,
+    current: NodeId,
+    heap: &mut LimitedHeap<T>,
+) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
     E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
-    let mut ctx_list = vec![ctx];
-    let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
+    let mut node_list = vec![(current, tree.get(current))];
+    let (mut locs, exit) = visitable_locations(world, tree.get(current).get());
     if locs.is_empty() && exit == None {
         return;
     }
     locs.sort_unstable_by_key(|loc| loc.time());
     for loc in locs {
-        let last_ctxs = ctx_list;
-        ctx_list = Vec::new();
-        ctx_list.reserve(last_ctxs.len() * 2);
-        for mut ctx in last_ctxs {
+        let last_ctxs = node_list;
+        node_list = Vec::new();
+        node_list.reserve(last_ctxs.len() * 2);
+        for (current, ctx) in last_ctxs {
             if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
                 // TODO: Add a better way to prevent this from causing too wide a branching factor
                 // or remove.
@@ -70,26 +79,39 @@ where
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
                     if can_win(world, newctx.get()) {
-                        ctx_list.push(newctx);
+                        node_list.push((current, &newctx));
                     }
                 }
 
                 // Get the item and mark the location visited.
-                ctx.visit(world, loc);
+                let mut newctx = ctx.clone();
+                let step = newctx.visit(world, loc);
+                if let Ok(id) = tree.insert(current, step, newctx) {
+                    node_list.push((id, tree.get(id)));
+                }
+            } else {
+                node_list.push((current, ctx));
             }
-            ctx_list.push(ctx);
         }
     }
 
     if let Some((l, e)) = exit {
         let exit = world.get_exit(e);
         let loc = world.get_location(l);
-        for ctx in ctx_list.iter_mut() {
+        let last_ctxs = node_list;
+        node_list = Vec::new();
+        node_list.reserve(last_ctxs.len());
+        for (current, ctx) in last_ctxs {
             // Get the item and move along the exit.
-            ctx.visit_exit(world, loc, exit);
+
+            let mut newctx = ctx.clone();
+            let step = newctx.visit_exit(world, loc, exit);
+            if let Ok(id) = tree.insert(current, step, newctx) {
+                node_list.push((id, tree.get(id)));
+            }
         }
     }
-    heap.extend(ctx_list);
+    heap.extend(node_list.iter().map(|(&n, _)| n));
 }
 
 pub fn action_unlocked_anything<W, T, L, E>(
@@ -199,29 +221,37 @@ where
     E: Exit + Accessible<Context = T, Currency = L::Currency>,
 {
     world.skip_unused_items(&mut ctx);
+    let mut tree = HistoryTree::new();
     let startctx = ContextWrapper::new(ctx);
-    let wonctx = greedy_search(world, &startctx).expect("Did not find a solution");
+    let start = tree.new_tree(startctx.last, startctx);
+    let won = greedy_search(world, &mut tree, start).expect("Did not find a solution");
 
-    let m = minimize_greedy(world, startctx.get(), &wonctx);
+    let m = minimize_greedy(world, &mut tree, startctx.get(), won);
+
+    let wctx = tree.get(won);
+    let mctx = tree.get(m);
 
     println!(
         "Found greedy solution of {}ms, minimized to {}ms",
-        wonctx.elapsed(),
-        m.elapsed()
+        wctx.elapsed(),
+        mctx.elapsed()
     );
+    let mut winner = if wctx.elapsed() < mctx.elapsed() {
+        won
+    } else {
+        m
+    };
+
+    tree.insert_tree_from(world, &tree.get_history(m), start);
 
     let mut heap = LimitedHeap::new();
-    heap.set_lenient_max_time(wonctx.elapsed());
-    heap.set_lenient_max_time(m.elapsed());
+    heap.set_lenient_max_time(wctx.elapsed());
+    heap.set_lenient_max_time(mctx.elapsed());
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
     let mut m_iters = 0;
-    let mut winner = if wonctx.elapsed() < m.elapsed() {
-        wonctx
-    } else {
-        m
-    };
+
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
             println!(

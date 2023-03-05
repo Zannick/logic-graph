@@ -18,7 +18,7 @@ where
     T: Ctx,
 {
     arena: Arena<HistoryNode<T>>,
-    trees: HashMap<History<T>, NodeId>,
+    trees: Vec<NodeId>,
 }
 
 impl<T> HistoryTree<T>
@@ -28,7 +28,7 @@ where
     pub fn new() -> HistoryTree<T> {
         HistoryTree {
             arena: Arena::new(),
-            trees: HashMap::new(),
+            trees: Vec::new(),
         }
     }
 
@@ -44,23 +44,24 @@ where
         &self.arena.get(id).unwrap().get().ctx
     }
 
-    pub fn get_root(&self, step: History<T>) -> Option<&NodeId> {
-        self.trees.get(&step)
+    // This is pretty dangerous to do on anything other than a leaf.
+    pub fn get_mut(&self, id: NodeId) -> Option<&mut ContextWrapper<T>> {
+        if id.children(&self.arena).next() == None {
+            None
+        } else {
+            Some(&mut self.arena.get_mut(id).unwrap().get_mut().ctx)
+        }
     }
 
-    pub fn new_tree(&mut self, step: History<T>, ctx: ContextWrapper<T>) -> Result<NodeId, NodeId> {
-        if let Some(&id) = self.trees.get(&step) {
-            Err(id)
-        } else {
-            let node = HistoryNode {
-                ctx,
-                entry: step.clone(),
-                children: HashMap::new(),
-            };
-            let id = self.arena.new_node(node);
-            self.trees.insert(step, id);
-            Ok(id)
-        }
+    pub fn new_tree(&mut self, step: History<T>, ctx: ContextWrapper<T>) -> NodeId {
+        let node = HistoryNode {
+            ctx,
+            entry: step,
+            children: HashMap::new(),
+        };
+        let id = self.arena.new_node(node);
+        self.trees.push(id);
+        id
     }
 
     pub fn insert_tree<W, L, E, Wp>(
@@ -68,7 +69,8 @@ where
         world: &W,
         hist: &Vec<History<T>>,
         startctx: &ContextWrapper<T>,
-    ) where
+    ) -> (NodeId, NodeId)
+    where
         W: World<Location = L, Exit = E, Warp = Wp>,
         L: Location<Context = T>,
         T: Ctx<World = W>,
@@ -76,19 +78,35 @@ where
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         let mut ctx = startctx.clone();
-        if let Some(first) = hist.first() {
-            ctx.replay(world, first);
-            let mut node = match self.new_tree(first.clone(), ctx.clone()) {
+        assert!(Some(&ctx.last) == hist.first());
+        let root = self.new_tree(ctx.last, ctx.clone());
+
+        (root, self.insert_tree_from(world, hist, root))
+    }
+
+    pub fn insert_tree_from<W, L, E, Wp>(
+        &mut self,
+        world: &W,
+        hist: &Vec<History<T>>,
+        root: NodeId,
+    ) -> NodeId
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        let mut ctx = self.get(root).clone();
+        let node = root;
+        for step in hist.iter().skip(1) {
+            ctx.replay(world, step);
+            let child = match self.insert(node, *step, ctx.clone()) {
                 Ok(id) | Err(id) => id,
             };
-            for step in hist.iter().skip(1) {
-                ctx.replay(world, step);
-                let child = match self.insert(node, step.clone(), ctx.clone()) {
-                    Ok(id) | Err(id) => id,
-                };
-                node = child;
-            }
+            node = child;
         }
+        node
     }
 
     pub fn insert(
@@ -103,7 +121,7 @@ where
         } else {
             let id = self.arena.new_node(HistoryNode {
                 ctx,
-                entry: step.clone(),
+                entry: step,
                 children: HashMap::new(),
             });
             let parent_node = self.arena.get_mut(parent).unwrap().get_mut();
@@ -113,10 +131,26 @@ where
         }
     }
 
-    pub fn get_history(&self, id: NodeId) -> Vec<&History<T>> {
-        let mut vec: Vec<&History<T>> = id
+    pub fn insert_and_get(
+        &mut self,
+        parent: NodeId,
+        step: History<T>,
+        ctx: ContextWrapper<T>,
+    ) -> NodeId {
+        match self.insert(parent, step, ctx) {
+            Ok(id) | Err(id) => id,
+        }
+    }
+
+    pub fn rev_history(&self, id: NodeId) -> impl Iterator<Item = History<T>> + '_ {
+        id.ancestors(&self.arena)
+            .map(|n| self.arena.get(n).unwrap().get().entry)
+    }
+
+    pub fn get_history(&self, id: NodeId) -> Vec<History<T>> {
+        let mut vec: Vec<History<T>> = id
             .ancestors(&self.arena)
-            .map(|n| &self.arena.get(n).unwrap().get().entry)
+            .map(|n| self.arena.get(n).unwrap().get().entry)
             .collect();
         vec.reverse();
         vec

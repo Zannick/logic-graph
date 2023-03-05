@@ -1,4 +1,6 @@
+use crate::history::HistoryTree;
 use crate::world::*;
+use indextree::NodeId;
 use sort_by_derive::SortBy;
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
@@ -39,11 +41,12 @@ pub trait Ctx: Clone + Eq + Debug {
     fn progress(&self) -> i32;
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum History<T>
 where
     T: Ctx,
 {
+    Start(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
     Warp(
         <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
         <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
@@ -60,6 +63,7 @@ where
     MoveLocal(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
     Activate(<<<T as Ctx>::World as World>::Action as Action>::ActionId),
 }
+impl<T> Copy for History<T> where T: Ctx {}
 
 impl<T> Hash for History<T>
 where
@@ -68,6 +72,9 @@ where
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         core::mem::discriminant(self).hash(state);
         match self {
+            History::Start(s) => {
+                s.hash(state);
+            }
             History::Warp(w, s) => {
                 w.hash(state);
                 s.hash(state);
@@ -99,6 +106,7 @@ where
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            History::Start(spot) => write!(f, "Start at {}", spot),
             History::Warp(warp, dest) => write!(f, "{}warp to {}", warp, dest),
             History::Get(item, loc) => write!(f, "Collect {} from {}", item, loc),
             History::Move(exit) => write!(f, "Take exit {}", exit),
@@ -128,8 +136,8 @@ where
     #[sort_by]
     elapsed: i32,
     penalty: i32,
-    pub history: Box<Vec<History<T>>>,
     pub minimize: bool,
+    pub last: History<T>,
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -138,8 +146,8 @@ impl<T: Ctx> ContextWrapper<T> {
             ctx,
             elapsed: 0,
             penalty: 0,
-            history: Box::new(vec![]),
             minimize: false,
+            last: History::Start(ctx.position()),
         }
     }
 
@@ -163,6 +171,11 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
     }
 
+    fn set_last_and_return(&mut self, step: History<T>) -> History<T> {
+        self.last = step;
+        step
+    }
+
     pub fn get(&self) -> &T {
         &self.ctx
     }
@@ -171,7 +184,7 @@ impl<T: Ctx> ContextWrapper<T> {
         &mut self.ctx
     }
 
-    pub fn visit<W, L>(&mut self, world: &W, loc: &L)
+    pub fn visit<W, L>(&mut self, world: &W, loc: &L) -> History<T>
     where
         W: World<Location = L>,
         T: Ctx<World = W>,
@@ -186,10 +199,10 @@ impl<T: Ctx> ContextWrapper<T> {
             }
         }
         self.elapse(loc.time());
-        self.history.push(History::Get(loc.item(), loc.id()));
+        self.set_last_and_return(History::Get(loc.item(), loc.id()))
     }
 
-    pub fn exit<W, E>(&mut self, exit: &E)
+    pub fn exit<W, E>(&mut self, exit: &E) -> History<T>
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
@@ -198,21 +211,21 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
         self.ctx.spend(exit.price());
-        self.history.push(History::Move(exit.id()));
+        self.set_last_and_return(History::Move(exit.id()))
     }
 
-    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: i32)
+    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: i32) -> History<T>
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
         E: Exit<Context = T>,
     {
         self.ctx.set_position(spot);
-        self.history.push(History::MoveLocal(spot));
         self.elapse(time);
+        self.set_last_and_return(History::MoveLocal(spot))
     }
 
-    pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
+    pub fn warp<W, E, Wp>(&mut self, warp: &Wp) -> History<T>
     where
         W: World<Exit = E, Warp = Wp>,
         T: Ctx<World = W>,
@@ -226,11 +239,10 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
-        self.history
-            .push(History::Warp(warp.id(), warp.dest(&self.ctx)));
+        self.set_last_and_return(History::Warp(warp.id(), warp.dest(&self.ctx)))
     }
 
-    pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
+    pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E) -> History<T>
     where
         W: World<Exit = E, Location = L>,
         T: Ctx<World = W>,
@@ -247,10 +259,10 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.spend(exit.price());
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
-        self.history.push(History::MoveGet(loc.item(), exit.id()));
+        self.set_last_and_return(History::MoveGet(loc.item(), exit.id()))
     }
 
-    pub fn activate<W, A>(&mut self, action: &A)
+    pub fn activate<W, A>(&mut self, action: &A) -> History<T>
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
@@ -259,24 +271,24 @@ impl<T: Ctx> ContextWrapper<T> {
         action.perform(&mut self.ctx);
         self.elapse(action.time());
         self.ctx.spend(action.price());
-        self.history.push(History::Activate(action.id()));
+        self.set_last_and_return(History::Activate(action.id()))
     }
 
-    pub fn is_useful<W, A>(&self, action: &A) -> bool
+    pub fn is_useful<W, A>(&self, tree: &HistoryTree<T>, current: NodeId, action: &A) -> bool
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
-        A: Action + Accessible<Context = T>,
+        A: Action<Context = T>,
     {
         if !action.has_effect(&self.ctx) {
             return false;
         }
         let mut prev = 1;
         if let Some(cycle) = action.cycle_length() {
-            for last in self.history.iter().rev() {
+            for last in tree.rev_history(current) {
                 match last {
                     History::Activate(a) => {
-                        if *a == action.id() {
+                        if a == action.id() {
                             prev += 1;
                             if prev >= cycle {
                                 return false;
@@ -302,70 +314,48 @@ impl<T: Ctx> ContextWrapper<T> {
         Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
     {
         // In all cases, we skip checking validity ahead of time, i.e. can_access.
-        match step {
-            History::Warp(wp, dest) => {
-                self.warp(world.get_warp(*wp));
-                assert!(
-                    self.get().position() == *dest,
-                    "Invalid replay: warp {:?}",
-                    wp
-                );
+        let res = match step {
+            History::Start(spot) => {
+                assert!(self.ctx.position() == *spot, "Invalid replay: {:?}", step);
+                return;
             }
-            History::Get(item, loc_id) => {
+            History::Warp(wp, _) => self.warp(world.get_warp(*wp)),
+            History::Get(_, loc_id) => {
                 let loc = world.get_location(*loc_id);
-                self.visit(world, loc);
-                assert!(loc.item() == *item, "Invalid replay: visit {:?}", loc_id);
+                self.visit(world, loc)
             }
             History::Move(exit_id) => {
                 let exit = world.get_exit(*exit_id);
-                self.exit(exit);
+                self.exit(exit)
             }
-            History::MoveGet(item, exit_id) => {
+            History::MoveGet(_, exit_id) => {
                 let exit = world.get_exit(*exit_id);
                 let loc =
                     world.get_location(exit.loc_id().expect("MoveGet requires a hybrid exit"));
-                self.visit_exit(world, loc, exit);
-                assert!(
-                    loc.item() == *item,
-                    "Invalid replay: visit-exit {:?}",
-                    exit_id
-                )
+                self.visit_exit(world, loc, exit)
             }
             History::MoveLocal(spot) => {
                 let time = self.ctx.local_travel_time(*spot);
-                assert!(time >= 0, "Invalid replay: move-local {:?}", spot);
-                self.move_local(*spot, time);
+                self.move_local(*spot, time)
             }
             History::Activate(act_id) => {
                 let action = world.get_action(*act_id);
-                self.activate(action);
+                self.activate(action)
             }
-        }
+        };
+        assert!(res == *step, "Invalid replay: {:?}", res);
     }
 
     pub fn info(&self) -> String {
         format(format_args!(
-            "At {} after {}ms (score={}), {} steps, visited={}, skipped={}, penalty={} last={}",
+            "At {} after {}ms (score={}), visited={}, skipped={}, penalty={} last={}",
             self.ctx.position(),
             self.elapsed,
             self.score(),
-            self.history.len(),
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,
-            if let Some(val) = self.history.last() {
-                val.to_string()
-            } else {
-                String::from("None")
-            },
+            self.last
         ))
-    }
-
-    pub fn history_str(&self) -> String {
-        self.history
-            .iter()
-            .map(|h| h.to_string())
-            .collect::<Vec<String>>()
-            .join("\n")
     }
 }
