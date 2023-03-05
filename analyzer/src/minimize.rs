@@ -17,13 +17,13 @@ where
     let mut ctx = startctx.clone();
     let mut set = HashSet::new();
     // Gather locations from the playthrough
-    for hist in wonctx.history.iter().rev() {
+    for hist in wonctx.history_rev() {
         match hist {
             History::Get(_, loc_id) => {
-                set.insert(*loc_id);
+                set.insert(loc_id);
             }
             History::MoveGet(_, exit_id) => {
-                let ex = world.get_exit(*exit_id);
+                let ex = world.get_exit(exit_id);
                 if let Some(loc_id) = ex.loc_id() {
                     set.insert(*loc_id);
                 }
@@ -62,19 +62,19 @@ where
     let mut ctx = remove_all_unvisited(world, startctx, wonctx);
 
     // skip remaining visited locations from last to first
-    for hist in wonctx.history.iter().rev() {
+    for hist in wonctx.history_rev() {
         match hist {
             History::Get(_, loc_id) => {
-                ctx.skip(*loc_id);
+                ctx.skip(loc_id);
                 // TODO: If this location can be replaced by an action, e.g. collect rupees,
                 // then it will be dropped, and if the action is slower, we fail to minimize
                 // to a shorter playthrough.
                 if !can_win(world, &ctx) {
-                    ctx.reset(*loc_id);
+                    ctx.reset(loc_id);
                 }
             }
             History::MoveGet(_, exit_id) => {
-                let ex = world.get_exit(*exit_id);
+                let ex = world.get_exit(exit_id);
                 if let Some(loc_id) = ex.loc_id() {
                     ctx.skip(*loc_id);
                     if !can_win(world, &ctx) {

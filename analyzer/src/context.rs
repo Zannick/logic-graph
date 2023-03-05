@@ -1,6 +1,7 @@
 use crate::world::*;
 use sort_by_derive::SortBy;
 use std::fmt::{self, format, Debug, Display};
+use std::rc::Rc;
 
 pub trait Ctx: Clone + Eq + Debug {
     type World: World;
@@ -79,6 +80,36 @@ where
     }
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct HistoryNode<T>
+where
+    T: Ctx,
+{
+    entry: History<T>,
+    prev: Option<Rc<HistoryNode<T>>>,
+}
+struct HistoryIterator<T>
+where
+    T: Ctx,
+{
+    next: Option<Rc<HistoryNode<T>>>,
+}
+impl<T> Iterator for HistoryIterator<T>
+where
+    T: Ctx,
+{
+    type Item = History<T>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if let Some(hist) = self.next.clone() {
+            self.next = hist.prev.clone();
+            Some(hist.entry)
+        } else {
+            None
+        }
+    }
+}
+
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub enum Mode {
     #[default]
@@ -96,7 +127,7 @@ where
     #[sort_by]
     elapsed: i32,
     penalty: i32,
-    pub history: Box<Vec<History<T>>>,
+    history: Option<Rc<HistoryNode<T>>>,
     pub minimize: bool,
 }
 
@@ -106,9 +137,20 @@ impl<T: Ctx> ContextWrapper<T> {
             ctx,
             elapsed: 0,
             penalty: 0,
-            history: Box::new(vec![]),
+            history: None,
             minimize: false,
         }
+    }
+
+    pub fn append_history(&mut self, step: History<T>) {
+        self.history = Some(Rc::new(HistoryNode {
+            entry: step,
+            prev: self.history.clone(),
+        }))
+    }
+
+    pub fn history_rev(&self) -> impl Iterator<Item = History<T>> {
+        HistoryIterator { next: self.history.clone() }
     }
 
     pub fn elapse(&mut self, t: i32) {
@@ -154,7 +196,7 @@ impl<T: Ctx> ContextWrapper<T> {
             }
         }
         self.elapse(loc.time());
-        self.history.push(History::Get(loc.item(), loc.id()));
+        self.append_history(History::Get(loc.item(), loc.id()));
     }
 
     pub fn exit<W, E>(&mut self, exit: &E)
@@ -166,7 +208,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
         self.ctx.spend(exit.price());
-        self.history.push(History::Move(exit.id()));
+        self.append_history(History::Move(exit.id()));
     }
 
     pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: i32)
@@ -177,7 +219,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.set_position(spot);
         self.elapse(time);
-        self.history.push(History::MoveLocal(spot))
+        self.append_history(History::MoveLocal(spot))
     }
 
     pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
@@ -194,8 +236,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
-        self.history
-            .push(History::Warp(warp.id(), warp.dest(&self.ctx)));
+        self.append_history(History::Warp(warp.id(), warp.dest(&self.ctx)));
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
@@ -215,7 +256,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.spend(exit.price());
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
-        self.history.push(History::MoveGet(loc.item(), exit.id()));
+        self.append_history(History::MoveGet(loc.item(), exit.id()));
     }
 
     pub fn activate<W, A>(&mut self, action: &A)
@@ -227,7 +268,7 @@ impl<T: Ctx> ContextWrapper<T> {
         action.perform(&mut self.ctx);
         self.elapse(action.time());
         self.ctx.spend(action.price());
-        self.history.push(History::Activate(action.id()));
+        self.append_history(History::Activate(action.id()));
     }
 
     pub fn is_useful<W, A>(&self, action: &A) -> bool
@@ -241,10 +282,10 @@ impl<T: Ctx> ContextWrapper<T> {
         }
         let mut prev = 1;
         if let Some(cycle) = action.cycle_length() {
-            for last in self.history.iter().rev() {
+            for last in self.history_rev() {
                 match last {
                     History::Activate(a) => {
-                        if *a == action.id() {
+                        if a == action.id() {
                             prev += 1;
                             if prev >= cycle {
                                 return false;
@@ -263,16 +304,15 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self) -> String {
         format(format_args!(
-            "At {} after {}ms (score={}), {} steps, visited={}, skipped={}, penalty={} last={}",
+            "At {} after {}ms (score={}), visited={}, skipped={}, penalty={} last={}",
             self.ctx.position(),
             self.elapsed,
             self.score(),
-            self.history.len(),
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,
-            if let Some(val) = self.history.last() {
-                val.to_string()
+            if let Some(val) = &self.history {
+                val.entry.to_string()
             } else {
                 String::from("None")
             },
@@ -280,10 +320,11 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 
     pub fn history_str(&self) -> String {
-        self.history
-            .iter()
+        let mut vec: Vec<String> = self
+            .history_rev()
             .map(|h| h.to_string())
-            .collect::<Vec<String>>()
-            .join("\n")
+            .collect::<Vec<String>>();
+        vec.reverse();
+        vec.join("\n")
     }
 }
