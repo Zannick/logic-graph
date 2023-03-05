@@ -6,7 +6,7 @@ areas:
     - name: Elevator
       coord: [44.5, 9]
     - name: Connector
-      coord: [44.0, 9]
+      coord: [44.05, 9]
       exits:
         - to: Dock Interior > Connector
           tags: [xshift]
@@ -14,7 +14,7 @@ areas:
 - name: Dock Interior
   spots:
     - name: Connector
-      coord: [44.0, 9]
+      coord: [43.95, 9]
       exits:
         - to: Dock Elevator > Connector
           tags: [xshift]
@@ -37,7 +37,7 @@ areas:
     #- name: Save Point
     #  coord: [43.0, 9]
     - name: Do Not Enter
-      coord: [42.0, 9]
+      coord: [42.05, 9]
       exits:
         - to: Grid 41,9-10 > East
           tags: [xshift]
@@ -46,7 +46,7 @@ areas:
 - name: Grid 41,9-10
   spots:
     - name: East
-      coord: [42.0, 9]
+      coord: [41.95, 9]
       exits:
         - to: Dock Outside > Do Not Enter
           tags: [xshift]
@@ -63,7 +63,7 @@ areas:
         - to: Lower East
           jumps_down: 3
     - name: Lower East
-      coord: [42.0, 10]
+      coord: [41.95, 10]
       local:
         - to: Ledge
           jumps: 8
@@ -74,12 +74,12 @@ areas:
 - name: Grid 42,10
   spots:
     - name: West
-      coord: [42.0, 10]
+      coord: [42.05, 10]
       exits:
         - to: Grid 41,9-10 > Lower East
           tags: [xshift]
     - name: East
-      coord: [43.0, 10]
+      coord: [42.95, 10]
       exits:
         - to: Grid 43,10-11 > Top
           tags: [xshift]
@@ -87,7 +87,7 @@ areas:
 - name: Grid 43,10-11
   spots:
     - name: Top
-      coord: [43.0, 10]
+      coord: [43.05, 10]
       local:
         - to: Lower
           thru: [43.3, 10.15]
@@ -95,7 +95,7 @@ areas:
         - to: Grid 42,10 > East
           tags: [xshift]
     - name: East
-      coord: [44.0, 10.3]
+      coord: [43.95, 10.3]
       local:
         - to: Top
           jumps: 3
@@ -103,7 +103,7 @@ areas:
         - to: Apocalypse Entry > West
           tags: [xshift]
     - name: Lower
-      coord: [43.0, 11]
+      coord: [43.05, 11]
       local:
         - to: Top
           thru: [[43.2, 10.7], [43.3, 10.5], [43.3, 10.3]]
@@ -118,7 +118,7 @@ areas:
 - name: Compass Room
   spots:
     - name: East
-      coord: [43.0, 11]
+      coord: [42.95, 11]
       exits:
         - to: Grid 43,10-11 > Lower
           tags: [xshift]
@@ -129,7 +129,7 @@ areas:
           item: Compass
           time: 0
     - name: West  # This is also an autosave location in the early game, also irrelevant.
-      coord: [42.0, 11]
+      coord: [42.05, 11]
       exits:
         - to: The Big Drop > East
           tags: [xshift]
@@ -137,14 +137,14 @@ areas:
 - name: The Big Drop
   spots:
     - name: East
-      coord: [42.0, 11]
+      coord: [41.95, 11]
       exits:
         - to: Compass Room > West
           tags: [xshift]
     - name: Small Path
-      coord: [42.0, 13]
+      coord: [41.95, 13]
     - name: Water Surface
-      coord: [41.0, 13]
+      coord: [41.05, 13]
       locations:
         - name: Drown  # This is technically the next grid over, but it's a cutscene really
           item: Amashilama
@@ -159,15 +159,14 @@ areas:
           do: ^save = ^position
           time: 1.2
     - name: West
-      coord: [41.0, 8]
+      coord: [41.05, 8]
 
 - name: Grid 39-40,7-9
-  # this is another place that would benefit from understanding jump
   spots:
     - name: Upper East
-      coord: [41.0, 8]
+      coord: [40.95, 8]
     - name: West
-      coord: [39.0, 9]
+      coord: [39.05, 9]
       local:
         - to: Upper East
           thru: [[40.0, 8.5], [40.0, 8.4]]
@@ -176,7 +175,7 @@ areas:
 - name: Apocalypse Entry
   spots:
     - name: West
-      coord: [44.0, 10.3]
+      coord: [44.05, 10.3]
       exits:
         - to: Grid 43,10-11 > East
           tags: [xshift]

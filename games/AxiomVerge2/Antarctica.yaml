@@ -161,6 +161,7 @@ areas:
       exits:
         - to: Building 2L > Entry
           time: 3
+          tags: [xshift]
     - name: Controls
       coord: [43.6, 2]
       exits:
