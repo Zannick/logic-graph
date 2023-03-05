@@ -89,15 +89,12 @@ digraph AxiomVerge2 {
             label = "Dock Outside";
             bgcolor = "white";
         }
-        subgraph cluster_Glacier__Grid_419 {
-            Glacier__Grid_419__East [label = "East"];
-            Glacier__Grid_419__Overhang [label = "Overhang"];
-            label = "Grid 41,9";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_4110 {
-            Glacier__Grid_4110__East [label = "East"];
-            label = "Grid 41,10";
+        subgraph cluster_Glacier__Grid_41910 {
+            Glacier__Grid_41910__East [label = "East"];
+            Glacier__Grid_41910__Overhang [label = "Overhang"];
+            Glacier__Grid_41910__Ledge [label = "Ledge"];
+            Glacier__Grid_41910__Lower_East [label = "Lower East"];
+            label = "Grid 41,9-10";
             bgcolor = "white";
         }
         subgraph cluster_Glacier__Grid_4210 {
@@ -133,6 +130,12 @@ digraph AxiomVerge2 {
             label = "Revival";
             bgcolor = "white";
         }
+        subgraph cluster_Glacier__Grid_394079 {
+            Glacier__Grid_394079__Upper_East [label = "Upper East"];
+            Glacier__Grid_394079__West [label = "West"];
+            label = "Grid 39-40,7-9";
+            bgcolor = "white";
+        }
         subgraph cluster_Glacier__Apocalypse_Entry {
             Glacier__Apocalypse_Entry__West [label = "West"];
             Glacier__Apocalypse_Entry__Terminal [label = "Terminal"];
@@ -147,16 +150,19 @@ digraph AxiomVerge2 {
     Antarctica__Shed__Interior -> Antarctica__West__Shed_Entry;
     Antarctica__Building_1W__West_Entry -> Antarctica__West__Boxes;
     Antarctica__Building_1W__Connector -> Antarctica__Building_1E__Connector;
+    Antarctica__Building_1E__Connector -> Antarctica__Building_1W__Connector;
     Antarctica__Building_1E__East_Entry -> Antarctica__East__Building_1_Entry;
     Antarctica__East__Building_1_Entry -> Antarctica__Building_1E__East_Entry;
     Antarctica__East__Building_2_Entry -> Antarctica__Building_2L__Entry;
     Antarctica__East__Building_2_Upper -> Antarctica__Building_2U__Door;
     Antarctica__East__Building_2_Upper -> Antarctica__Top__Power_Entry;
+    Antarctica__Building_2L__Entry -> Antarctica__East__Building_2_Entry;
     Antarctica__Building_2L__Entry -> Antarctica__Building_2U__Stairs;
     Antarctica__Building_2L__Entry -> Antarctica__Freight_Elevator__Left;
     Antarctica__Building_2U__Stairs -> Antarctica__Building_2U_Corner__Behind_Boxes;
     Antarctica__Building_2U__Stairs -> Antarctica__Building_2L__Entry;
     Antarctica__Building_2U__Door -> Antarctica__East__Building_2_Upper;
+    Antarctica__Building_2U_Corner__Behind_Boxes -> Antarctica__Building_2U__Stairs;
     Antarctica__Top__Power_Entry -> Antarctica__Power_Room__Entry;
     Antarctica__Top__Power_Entry -> Antarctica__East__Building_2_Upper;
     Antarctica__Power_Room__Entry -> Antarctica__Top__Power_Entry;
@@ -166,17 +172,14 @@ digraph AxiomVerge2 {
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;
     Glacier__Dock_Outside__Entry -> Glacier__Dock_Interior__Entry;
-    Glacier__Dock_Outside__Do_Not_Enter -> Glacier__Grid_419__East;
-    Glacier__Grid_419__East -> Glacier__Dock_Outside__Do_Not_Enter;
-    Glacier__Grid_419__Overhang -> Glacier__Grid_4110__East;
-    Glacier__Grid_4110__East -> Glacier__Grid_419__Overhang;
-    Glacier__Grid_4110__East -> Glacier__Grid_4210__West;
-    Glacier__Grid_4210__West -> Glacier__Grid_4110__East;
+    Glacier__Dock_Outside__Do_Not_Enter -> Glacier__Grid_41910__East;
+    Glacier__Grid_41910__East -> Glacier__Dock_Outside__Do_Not_Enter;
+    Glacier__Grid_41910__Lower_East -> Glacier__Grid_4210__West;
+    Glacier__Grid_4210__West -> Glacier__Grid_41910__Lower_East;
     Glacier__Grid_4210__East -> Glacier__Grid_431011__Top;
     Glacier__Grid_431011__Top -> Glacier__Grid_4210__East;
     Glacier__Grid_431011__East -> Glacier__Apocalypse_Entry__West;
-    Glacier__Grid_431011__Lower -> Glacier__Grid_431011__Top;
-    Glacier__Grid_431011__Lower -> Glacier__Grid_431011__East;
+    Glacier__Grid_431011__Lower -> Glacier__Compass_Room__East;
     Glacier__Compass_Room__East -> Glacier__Grid_431011__Lower;
     Glacier__Compass_Room__West -> Glacier__The_Big_Drop__East;
     Glacier__The_Big_Drop__East -> Glacier__Compass_Room__West;

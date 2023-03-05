@@ -51,6 +51,9 @@ areas:
   spots:
     - name: Connector
       coord: [41, 2]
+      exits:
+        - to: Building 1W > Connector
+          tags: [xshift]
     - name: East Entry
       coord: [41.75, 2]
       exits:
@@ -87,6 +90,8 @@ areas:
     - name: Entry
       coord: [42.5, 2]
       exits:
+        - to: East > Building 2 Entry
+          tags: [exterior]
         - to: Building 2U > Stairs
           time: 4
           # technically vertical-ish in same room
@@ -120,6 +125,8 @@ areas:
           item: Notes_2053_02_27
           canon: Notes_2053_02_27
           tags: [note]  # Tag is on the item, not the location necessarily
+      exits:
+        - to: Building 2U > Stairs
 
 - name: Top
   spots:

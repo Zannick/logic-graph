@@ -336,7 +336,7 @@ class GameLogic(object):
         return d
 
 
-    def movement_time(self, mset, a, b):
+    def movement_time(self, mset, a, b, jumps=0, jumps_down=0):
         times = []
         xtimes = []
         ytimes = []
@@ -355,7 +355,11 @@ class GameLogic(object):
             if sfall := self.movements[m].get('fall'):
                 # fall speed must be the same direction as "down"
                 if (t := b / sfall) > 0:
+                    t += jumps_down * self.movements[m].get('jump_down', 0)
                     ytimes.append(t)
+            if jumps and b < 0 and (sjump := self.movements[m].get('jump')):
+                # Direction is negative but jumps is just time taken
+                ytimes.append(jumps * sjump)
         if xtimes and ytimes:
             times.append(max(min(xtimes), min(ytimes)))
         elif xtimes and b == 0:
@@ -399,19 +403,74 @@ class GameLogic(object):
         # create a distances table: (spot, spot) -> [(x, y), ...]
         d = defaultdict(list)
         for a in self.areas():
+            errors = []
+            for sp in a['spots']:
+                if c := sp.get('coord'):
+                    if isinstance(c, str):
+                        errors.append(f'Invalid coord for {sp["name"]}: {c!r} '
+                                    f'(did you mean [{c}] ?)')
+                    elif not isinstance(c, (list, tuple)) or len(c) != 2:
+                        errors.append(f'Invalid coord for {sp["name"]}: {c}')
+            if errors:
+                self._misc_errors.extend(errors)
+                break
             for sp1, sp2 in itertools.permutations(a['spots'], 2):
                 if 'coord' not in sp1 or 'coord' not in sp2:
                     continue
                 coords = [sp1['coord'], sp2['coord']]
+                jumps = [0]
+                jumps_down = [0]
                 for lcl in sp1.get('local', []):
                     if lcl['to'] == sp2['name']:
                         # We could have more overrides here, like dist
-                        if thru := lcl.get('thru', []):
-                            coords[1:1] = thru if isinstance(thru[0], list) else [thru]
+                        if thru := lcl.get('thru'):
+                            if isinstance(thru, str):
+                                self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru!r} '
+                                                         f'(Did you mean [{thru}] ?)')
+                                break
+                            if not isinstance(thru, list) or not thru:
+                                self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru}')
+                                break
+                            if all(isinstance(t, list) for t in thru):
+                                coords[1:1] = thru
+                            elif len(thru) == 2 and all(isinstance(t, (int, float)) for t in thru):
+                                coords[1:1] = [thru]
+                            else:
+                                self._misc_errors.append(f'Mismatched length or types in thru '
+                                                         f'from {sp1["name"]} to {sp2["name"]}: {thru}')
+                                break
+                        if j := lcl.get('jumps'):
+                            if isinstance(j, str):
+                                self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
+                                                         f'(Did you mean [{j}] ?)')
+                                break
+                            if not isinstance(j, list):
+                                j = [j]
+                            if len(j) != len(coords) - 1:
+                                self._misc_errors.append(f'Jumps list from {sp1["name"]} to {sp2["name"]} '
+                                                         f'must match path length 1+thru = {len(coords) - 1} but was {len(j)}')
+                                break
+                            jumps = j
+                        else:
+                            jumps *= len(coords) - 1
+                        if j := lcl.get('jumps_down'):
+                            if isinstance(j, str):
+                                self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
+                                                         f'(Did you mean [{j}] ?)')
+                                break
+                            if not isinstance(j, list):
+                                j = [j]
+                            if len(j) != len(coords) - 1:
+                                self._misc_errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]}'
+                                                         f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
+                                break
+                            jumps_down = j
+                        else:
+                            jumps_down *= len(coords) - 1
                         break
-                for (sx, sy), (cx, cy) in itertools.pairwise(coords):
+                for ((sx, sy), (cx, cy)), j, jd in zip(itertools.pairwise(coords), jumps, jumps_down):
                     d[(sp1['id'], sp2['id'])].append(
-                            (abs(cx - sx), cy - sy))
+                            (abs(cx - sx), cy - sy, j, jd))
         return d
 
 
@@ -429,9 +488,9 @@ class GameLogic(object):
             key = tuple(m in mset for m in self.non_default_movements)
             table[key] = local_time = {}
             for k, dlist in self.local_distances.items():
-                times = [self.movement_time(mset, a, b) for a,b in dlist]
+                times = [self.movement_time(mset, a, b, j, jd) for a,b, j, jd in dlist]
                 if all(t is not None for t in times):
-                    local_time[k] = sum(times)
+                    local_time[k] = times
         return table
 
 
@@ -575,8 +634,13 @@ class GameLogic(object):
                          f'did you mean {construct_id(item)!r}?')
             elif item not in self.all_items:
                 e.append(f'Unrecognized item {item!r} as collect rule')
+                
         # Do things that will fill _misc_errors
         self.context_values
+        self.local_distances
+        for m in self.non_default_movements:
+            if 'req' not in self.movements[m]:
+                self._misc_errors.append(f'Movement {m} must have a req')
 
         # Check settings
         def _visit(visitor, reverse=False):

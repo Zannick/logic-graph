@@ -19,8 +19,15 @@ movements:
     # a grid line = 1 unit. each minimap pixel is about .1 unit
     x: .285  # about 3.5s per grid x-unit
     fall: .8
+    jump: .6  # can vary with jump height, so take a rough estimate of usual
+    jump_down: .1
     # y: .8  # assumes as moving freely, but should be a fall speed
     # y = fall speed, about 1 level / 1.25s = .8
+  # TODO: mist movement costs 30 energy/s
+  mist_upgraded:
+    req: Mist_Upgraded
+    xy: .225  # this is an estimate
+
 
 time:
   default: 1

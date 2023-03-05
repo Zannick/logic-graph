@@ -36,6 +36,10 @@ pub fn access_break_box(ctx: &Context) -> bool {
     // $break_box
     helper__break_box!(ctx)
 }
+pub fn access_mist(ctx: &Context) -> bool {
+    // Mist
+    ctx.has(Item::Mist)
+}
 pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone

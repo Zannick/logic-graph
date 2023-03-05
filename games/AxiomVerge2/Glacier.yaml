@@ -39,10 +39,11 @@ areas:
     - name: Do Not Enter
       coord: [42.0, 9]
       exits:
-        - to: Grid 41,9 > East
+        - to: Grid 41,9-10 > East
           tags: [xshift]
 
-- name: Grid 41,9  # It sure is going to get difficult naming every grid square otherwise
+# It sure is going to get difficult naming every grid square without generic names
+- name: Grid 41,9-10
   spots:
     - name: East
       coord: [42.0, 9]
@@ -51,17 +52,22 @@ areas:
           tags: [xshift]
     - name: Overhang
       coord: [41.6, 9]
-      exits:
-        - to: Grid 41,10 > East
-          time: 2.75
-
-- name: Grid 41,10
-  spots:
-    - name: East
+      local:
+        - to: Lower East
+          jumps_down: 2
+    - name: Ledge
+      coord: [41.3, 9.2]
+      local:
+        - to: Overhang
+          jumps: 2
+        - to: Lower East
+          jumps_down: 3
+    - name: Lower East
       coord: [42.0, 10]
+      local:
+        - to: Ledge
+          jumps: 8
       exits:
-        - to: Grid 41,9 > Overhang
-          time: 7
         - to: Grid 42,10 > West
           tags: [xshift]
 
@@ -70,7 +76,7 @@ areas:
     - name: West
       coord: [42.0, 10]
       exits:
-        - to: Grid 41,10 > East
+        - to: Grid 41,9-10 > Lower East
           tags: [xshift]
     - name: East
       coord: [43.0, 10]
@@ -82,21 +88,32 @@ areas:
   spots:
     - name: Top
       coord: [43.0, 10]
+      local:
+        - to: Lower
+          thru: [43.3, 10.15]
       exits:
         - to: Grid 42,10 > East
           tags: [xshift]
     - name: East
-      coord: [44.0, 10]
+      coord: [44.0, 10.3]
+      local:
+        - to: Top
+          jumps: 3
       exits:
         - to: Apocalypse Entry > West
           tags: [xshift]
     - name: Lower
       coord: [43.0, 11]
-      exits:  # TODO: could be local with dist overrides. or add other movement types exits
+      local:
         - to: Top
-          time: 5
+          thru: [[43.2, 10.7], [43.3, 10.5], [43.3, 10.3]]
+          jumps: [2, 3, 3, 1]
         - to: East
-          time: 3.5
+          thru: [[43.2, 10.7], [43.5, 10.4]]
+          jumps: [2, 4, 2]
+      exits:
+        - to: Compass Room > East
+          tags: [xshift]
 
 - name: Compass Room
   spots:
@@ -144,15 +161,27 @@ areas:
     - name: West
       coord: [41.0, 8]
 
+- name: Grid 39-40,7-9
+  # this is another place that would benefit from understanding jump
+  spots:
+    - name: Upper East
+      coord: [41.0, 8]
+    - name: West
+      coord: [39.0, 9]
+      local:
+        - to: Upper East
+          thru: [[40.0, 8.5], [40.0, 8.4]]
+          jumps: [2, 1, 2]
+
 - name: Apocalypse Entry
   spots:
     - name: West
-      coord: [44.0, 10]  # actually ever so slightly lower (i.e. > 10)
+      coord: [44.0, 10.3]
       exits:
         - to: Grid 43,10-11 > East
           tags: [xshift]
     - name: Terminal
-      coord: [44.6, 10]
+      coord: [44.6, 10.3]
       locations:
         - name: Escape
           item: Escape

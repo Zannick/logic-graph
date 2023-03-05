@@ -13,7 +13,7 @@ use analyzer::context::Ctx;
 enum Movement {
     #[default] Default,
 %% for m in non_default_movements
-    {{ m|capitalize }},
+    {{ m|camelize }},
 %% endfor
 }
 
@@ -21,7 +21,7 @@ fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
     match m {
         Movement::Default => true,
 %% for m in non_default_movements
-        Movement::{{ m|capitalize }} => rules::access_{{ movements[m].access_id }}(ctx),
+        Movement::{{ m|camelize }} => rules::access_{{ movements[m].access_id }}(ctx),
 %% endfor
     }
 }
@@ -29,12 +29,14 @@ fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
 pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
     match (
 %%- for mtype in non_default_movements
-    has_movement(ctx, Movement::{{ mtype }}, src),
+    has_movement(ctx, Movement::{{ mtype|camelize }}, src),
 %% endfor
     src, dest) {
 %% for k, table in movement_tables.items()
 %% for (s, d), f in table.items()
-    ({% for m in k %}{{ m }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ (f*1000)|int }},
+    {% if f|count > 1 %}// {{ f|map('round', 6)|list }}
+{% endif -%}
+    ({% for mflag in k %}{{ mflag }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
 %% endfor
 %% endfor
         _ => -1,

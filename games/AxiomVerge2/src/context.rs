@@ -67,6 +67,7 @@ pub struct Context {
     pub amashilama: bool,
     pub apocalypse_bomb: bool,
     pub ice_axe: bool,
+    pub mist: bool,
     pub notes_2053_02_27: bool,
     pub placeholder: bool,
     pub station_power: bool,
@@ -81,13 +82,14 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 6;
+    const NUM_ITEMS: i32 = 7;
 
     fn has(&self, item: Item) -> bool {
         match item {
             Item::Amashilama => self.amashilama,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Ice_Axe => self.ice_axe,
+            Item::Mist => self.mist,
             Item::Notes_2053_02_27 => self.notes_2053_02_27,
             Item::Placeholder => self.placeholder,
             Item::Station_Power => self.station_power,
@@ -99,6 +101,7 @@ impl context::Ctx for Context {
             Item::Amashilama => self.amashilama.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Ice_Axe => self.ice_axe.into(),
+            Item::Mist => self.mist.into(),
             Item::Notes_2053_02_27 => self.notes_2053_02_27.into(),
             Item::Placeholder => self.placeholder.into(),
             Item::Station_Power => self.station_power.into(),
@@ -116,6 +119,9 @@ impl context::Ctx for Context {
             }
             Item::Ice_Axe => {
                 self.ice_axe = true;
+            }
+            Item::Mist => {
+                self.mist = true;
             }
             Item::Notes_2053_02_27 => {
                 self.notes_2053_02_27 = true;
