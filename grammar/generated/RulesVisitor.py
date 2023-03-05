@@ -184,5 +184,10 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#somewhere.
+    def visitSomewhere(self, ctx:RulesParser.SomewhereContext):
+        return self.visitChildren(ctx)
+
+
 
 del RulesParser

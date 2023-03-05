@@ -1,8 +1,11 @@
-from grammar import RulesParser, RulesVisitor
+from collections import defaultdict
 
+from grammar import RulesParser, RulesVisitor
 from Utils import construct_id, BUILTINS
 
-_placePrefix = ['RegionId', 'AreaId', 'SpotId']
+import inflection
+
+_placeType = ['Region', 'Area', 'Spot']
 
 class RustVisitor(RulesVisitor):
 
@@ -28,6 +31,9 @@ class RustVisitor(RulesVisitor):
         else:
             return f'helper__{construct_id(func[1:])}!(ctx, '
 
+    def _getPlaceType(self, place):
+        return _placeType[place.count(">")]
+
     def visit(self, tree, rettype=None):
         last_rettype = self.rettype
         self.rettype = rettype
@@ -48,6 +54,8 @@ class RustVisitor(RulesVisitor):
                 return f'false'
             elif ctx.boolExpr():
                 return f'({self.visit(ctx.boolExpr(0))})'
+            elif ctx.NOT():
+                return '!' + super().visitBoolExpr(ctx)
             else:
                 return super().visitBoolExpr(ctx)
         except AttributeError as e:
@@ -64,7 +72,7 @@ class RustVisitor(RulesVisitor):
             args = f'{self.visit(ctx.value())}'
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
-            args = f'{_placePrefix[pl.count(">")]}::{construct_id(pl)}'
+            args = f'{self._getPlaceType(pl)}Id::{construct_id(pl)}'
         else:
             args = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if not args:
@@ -93,8 +101,10 @@ class RustVisitor(RulesVisitor):
     
     # This could be easier if str enum values are required to be unique among all enums
     # otherwise we have to get the appropriate ref/setting enum
-    #def visitCmpStr(self, ctx):
-    #    return f'{self.visit(ctx.value())} {ctx.getChild(1)} {self.visit(ctx.str_())}'
+    def visitCmpStr(self, ctx):
+        getter = self.visit(ctx.value())
+        rtype = inflection.camelize(getter[4:-2])
+        return f'{getter} {ctx.getChild(1)} enums::{rtype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
 
     def visitFlagMatch(self, ctx):
         num = f'{self.visit(ctx.num())}'
@@ -108,11 +118,10 @@ class RustVisitor(RulesVisitor):
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
-        return f'{"!" if ctx.NOT() else ""}ctx.{ctx.SETTING()}'
+        return f'ctx.{ctx.SETTING()}'
 
     def visitArgument(self, ctx):
-        ref = self._getRefGetter(str(ctx.REF())[1:])
-        return f'{"!" if ctx.NOT() else ""}{ref}'
+        return self._getRefGetter(str(ctx.REF())[1:])
 
     def visitItemCount(self, ctx):
         if ctx.INT():
@@ -159,7 +168,7 @@ class RustVisitor(RulesVisitor):
 
     def visitStr(self, ctx):
         if ctx.LIT() and self.rettype:
-            return f'{self.rettype}::{str(ctx.LIT())[1:-1].capitalize()}'
+            return f'{self.rettype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
         return super().visitStr(ctx)
 
     def visitPerRefStr(self, ctx):
@@ -170,6 +179,18 @@ class RustVisitor(RulesVisitor):
         return (f'match {self._getRefGetter(ref)} {{ '
                 + ', '.join(f'{c} => {r}' for c, r in zip(cases, results))
                 + '}')
+
+    def visitSomewhere(self, ctx):
+        places = defaultdict(list)
+        for pl in ctx.PLACE():
+            pl = str(pl)[1:-1]
+            places[self._getPlaceType(pl)].append(pl)
+        per_type = [f'(match get_{pt.lower()}(ctx.position()) {{'
+                    + ' | '.join(f'{pt}Id::{construct_id(pl)}' for pl in plist)
+                    + ' => true, _ => false })'
+                    for pt, plist in places.items()
+                    ]
+        return ' || '.join(per_type)
 
     ## Action-specific
     def visitActions(self, ctx):
@@ -185,7 +206,7 @@ class RustVisitor(RulesVisitor):
             val = self._getRefGetter(str(ctx.REF(1))[1:])
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
-            val = f'{_placePrefix[pl.count(">")]}::{construct_id(pl)}'
+            val = f'{self._getPlaceType(pl)}Id::{construct_id(pl)}'
         elif ctx.num():
             val = self.visit(ctx.num())
         else:

@@ -15,7 +15,8 @@ boolExpr
     | flagMatch
     | refEq
     | item
-    | value
+    | NOT? value
+    | somewhere
     | TRUE
     | FALSE
     ;
@@ -118,8 +119,8 @@ num : baseNum | mathNum ;
 
 baseNum : INT | CONST | SETTING | REF | value | switchNum | funcNum | condNum ;
 
-value   : NOT? SETTING ('[' ( LIT | ITEM ) ']')?    # Setting
-        | NOT? REF                                  # Argument
+value   : SETTING ('[' ( LIT | ITEM ) ']')?     # Setting
+        | REF                                   # Argument
         ;
 
 item    : ( ITEM '{' ( INT | SETTING ) '}'
@@ -132,6 +133,9 @@ item    : ( ITEM '{' ( INT | SETTING ) '}'
 
 str : LIT | value | condStr | switchStr ;
 
+somewhere : WITHIN PLACE
+          | WITHIN '(' PLACE (',' PLACE)* ')';
+
 /** Lexer rules (tokens) */
 AND     : 'AND' | 'and' | '&&' ;
 OR      : 'OR' | 'or' | '||' ;
@@ -142,6 +146,7 @@ IF      : 'IF' | 'if' ;
 ELSE    : 'ELSE' | 'else' ;
 IN      : 'IN' | 'in' ;
 PER     : 'PER' | 'per' | 'MATCH' | 'match' ;
+WITHIN  : 'WITHIN' | 'within' ;
 
 ITEM    : [A-Z][a-z][a-zA-Z_0-9]+ ;
 SETTING : [a-z][a-zA-Z_0-9]+ ;

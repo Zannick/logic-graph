@@ -18,12 +18,14 @@ pub mod enums {
     pub enum Mode {
         #[default]
         None,
+        Drone,
         Indra,
     }
     impl fmt::Display for Mode {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
             match self {
                 Mode::None => write!(f, "{}", "None"),
+                Mode::Drone => write!(f, "{}", "Drone"),
                 Mode::Indra => write!(f, "{}", "Indra"),
             }
         }
@@ -33,6 +35,7 @@ pub mod enums {
 
         fn from_str(s: &str) -> Result<Self, Self::Err> {
             match s {
+                "Drone" => Ok(Mode::Drone),
                 "Indra" => Ok(Mode::Indra),
                 _ => Err(format!("Could not recognize as a Mode: {}", s)),
             }

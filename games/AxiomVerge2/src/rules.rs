@@ -24,6 +24,10 @@ pub fn access_amashilama__notes_2053_02_27(ctx: &Context) -> bool {
     // Amashilama && Notes_2053_02_27
     (ctx.has(Item::Amashilama) && ctx.has(Item::Notes_2053_02_27))
 }
+pub fn access_amashilama_and_mode__drone(ctx: &Context) -> bool {
+    // Amashilama and ^mode != 'drone'
+    (ctx.has(Item::Amashilama) && ctx.mode() != enums::Mode::Drone)
+}
 pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
@@ -32,6 +36,10 @@ pub fn access_break_box(ctx: &Context) -> bool {
     // $break_box
     helper__break_box!(ctx)
 }
+pub fn access_mode__drone(ctx: &Context) -> bool {
+    // ^mode == 'drone'
+    ctx.mode() == enums::Mode::Drone
+}
 pub fn access_placeholder(ctx: &Context) -> bool {
     // Placeholder
     ctx.has(Item::Placeholder)
@@ -39,6 +47,13 @@ pub fn access_placeholder(ctx: &Context) -> bool {
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power
     ctx.has(Item::Station_Power)
+}
+pub fn access_within_antarctica(ctx: &Context) -> bool {
+    // WITHIN `Antarctica`
+    (match get_region(ctx.position()) {
+        RegionId::Antarctica => true,
+        _ => false,
+    })
 }
 pub fn action_energy__1(ctx: &mut Context) {
     // ^energy += 1

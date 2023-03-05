@@ -323,5 +323,14 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#somewhere.
+    def enterSomewhere(self, ctx:RulesParser.SomewhereContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#somewhere.
+    def exitSomewhere(self, ctx:RulesParser.SomewhereContext):
+        pass
+
+
 
 del RulesParser

@@ -30,8 +30,17 @@ time:
   note: 0
 
 warps:
-  save:
+  earth_save:
     time: 5  # initial savewarp pre-amashi
+    req: WITHIN `Antarctica`
+    to: ^save
+  indra_save:
+    time: 14.5
+    req: Amashilama and ^mode != 'drone'
+    to: ^save
+  drone_save:
+    time: 12
+    req: ^mode == 'drone'
     to: ^save
 
 helpers:

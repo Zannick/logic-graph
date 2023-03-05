@@ -638,12 +638,16 @@ impl std::str::FromStr for CanonId {
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum WarpId {
-    Save,
+    DroneSave,
+    EarthSave,
+    IndraSave,
 }
 impl fmt::Display for WarpId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            WarpId::Save => write!(f, "{}", "Save"),
+            WarpId::DroneSave => write!(f, "{}", "DroneSave"),
+            WarpId::EarthSave => write!(f, "{}", "EarthSave"),
+            WarpId::IndraSave => write!(f, "{}", "IndraSave"),
         }
     }
 }
@@ -653,7 +657,9 @@ impl std::str::FromStr for WarpId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Save" => Ok(WarpId::Save),
+            "DroneSave" => Ok(WarpId::DroneSave),
+            "EarthSave" => Ok(WarpId::EarthSave),
+            "IndraSave" => Ok(WarpId::IndraSave),
             _ => Err(format!("Could not recognize as a WarpId: {}", s)),
         }
     }
@@ -999,7 +1005,9 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::Save => true,
+                WarpId::DroneSave => rules::access_mode__drone(&ctx),
+                WarpId::EarthSave => rules::access_within_antarctica(&ctx),
+                WarpId::IndraSave => rules::access_amashilama_and_mode__drone(&ctx),
             }
     }
     fn time(&self) -> i32 {
@@ -1019,7 +1027,9 @@ impl world::Warp for Warp {
     fn dest(&self, ctx: &Context) -> SpotId {
         if self.dest == SpotId::None {
             match self.id {
-                WarpId::Save => ctx.save(),
+                WarpId::DroneSave => ctx.save(),
+                WarpId::EarthSave => ctx.save(),
+                WarpId::IndraSave => ctx.save(),
             }
         } else {
             self.dest
@@ -2313,10 +2323,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
 
 pub fn build_warps() -> EnumMap<WarpId, Warp> {
     enum_map! {
-        WarpId::Save => Warp {
-            id: WarpId::Save,
+        WarpId::DroneSave => Warp {
+            id: WarpId::DroneSave,
+            dest: SpotId::None,
+            time: 12000,
+            price: Currency::Free,
+        },
+        WarpId::EarthSave => Warp {
+            id: WarpId::EarthSave,
             dest: SpotId::None,
             time: 5000,
+            price: Currency::Free,
+        },
+        WarpId::IndraSave => Warp {
+            id: WarpId::IndraSave,
+            dest: SpotId::None,
+            time: 14500,
             price: Currency::Free,
         },
     }

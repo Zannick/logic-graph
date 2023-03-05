@@ -285,7 +285,7 @@ class GameLogic(object):
     def process_warps(self):
         self.warps = self._info['warps']
         for name, info in self.warps.items():
-            info['name'] = name.capitalize()
+            info['name'] = inflection.camelize(name)
             info['id'] = construct_id(info['name'])
             if info['to'].startswith('^'):
                 val = info['to'][1:]
@@ -555,7 +555,7 @@ class GameLogic(object):
             if 'item' in pt and pt['item'] is None:
                 e.append(f'{pt["id"]} specified with empty item')
             elif 'item' in pt and pt['item'] != construct_id(pt['item']):
-                e.append(f'Invalid item name {item!r} at {pt["id"]}; '
+                e.append(f'Invalid item name {pt["item"]!r} at {pt["id"]}; '
                          f'did you mean {construct_id(pt["item"])!r}?')
         # Check used functions
         for func in BUILTINS.keys() & self.helpers.keys():
@@ -819,6 +819,7 @@ class GameLogic(object):
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
             'get_exit_target': get_exit_target,
             'str_to_rusttype': str_to_rusttype,
+            'camelize': inflection.camelize,
         })
         # Access cached_properties to ensure they're in the template vars
         self.unused_items

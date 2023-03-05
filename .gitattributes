@@ -1,5 +1,16 @@
+* text=auto
+*.md    text
+*.txt   text
+*.dot   text eol=lf
+*.g4    text eol=lf
+*.jinja text eol=lf
+*.py    text eol=lf
+*.rs    text eol=lf
+*.toml  text eol=lf
+*.yaml  text eol=lf
+
 games/*/*.dot       linguist-generated=true
 games/*/benches/*   linguist-generated=true
 games/*/bin/*       linguist-generated=true
 games/*/src/*       linguist-generated=true
-grammar/generated/* linguist-generated=true
+grammar/generated/* -diff linguist-generated=true

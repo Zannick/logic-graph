@@ -175,7 +175,7 @@ impl world::Accessible for Warp {
 
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-%% for w in warps.values()
+%% for w in warps.values()|sort(attribute='id')
             WarpId::{{ w.id }} => {% if w.access_id %}rules::access_{{ w.access_id }}(&ctx)
                 {%- else %}true{% endif %},
 %% endfor
