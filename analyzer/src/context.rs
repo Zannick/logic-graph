@@ -38,7 +38,7 @@ pub trait Ctx: Clone + Eq + Debug {
     fn progress(&self) -> i32;
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum History<T>
 where
     T: Ctx,
@@ -59,6 +59,7 @@ where
     MoveLocal(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
     Activate(<<<T as Ctx>::World as World>::Action as Action>::ActionId),
 }
+impl<T> Copy for History<T> where T: Ctx {}
 
 impl<T> Display for History<T>
 where
@@ -142,7 +143,7 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Location = L>,
         T: Ctx<World = W>,
-        L: Location + Accessible<Context = T>,
+        L: Location<Context = T>,
     {
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item());
@@ -160,7 +161,7 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
-        E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
@@ -168,25 +169,41 @@ impl<T: Ctx> ContextWrapper<T> {
         self.history.push(History::Move(exit.id()));
     }
 
+    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: i32)
+    where
+        W: World<Exit = E>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T>,
+    {
+        self.ctx.set_position(spot);
+        self.elapse(time);
+        self.history.push(History::MoveLocal(spot))
+    }
+
     pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
     where
         W: World<Exit = E, Warp = Wp>,
         T: Ctx<World = W>,
-        E: Exit + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId> + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        Wp: Warp<
+            SpotId = <E as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
-        self.history.push(History::Warp(warp.id(), warp.dest(&self.ctx)));
+        self.history
+            .push(History::Warp(warp.id(), warp.dest(&self.ctx)));
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
     where
         W: World<Exit = E, Location = L>,
         T: Ctx<World = W>,
-        L: Location + Accessible<Context = T>,
-        E: Exit + Accessible<Context = T, Currency = L::Currency>,
+        L: Location<Context = T>,
+        E: Exit<Context = T, Currency = L::Currency>,
     {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
@@ -217,7 +234,7 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
-        A: Action + Accessible<Context = T>,
+        A: Action<Context = T>,
     {
         if !action.has_effect(&self.ctx) {
             return false;

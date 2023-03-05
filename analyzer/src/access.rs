@@ -64,9 +64,7 @@ pub fn expand<W, T, E, Wp>(
                 continue;
             }
             let mut newctx = ctx.clone();
-            newctx.get_mut().set_position(*spot);
-            newctx.history.push(History::MoveLocal(*spot));
-            newctx.elapse(local);
+            newctx.move_local(*spot, local);
             spot_heap.push(Reverse(newctx));
         }
     }
