@@ -64,7 +64,7 @@ impl world::Accessible for Location {
 
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-%% for loc in gl.locations()
+%% for loc in gl.locations()|sort(attribute='id')
             LocationId::{{ loc.id }} => {% if loc.access_id %}rules::access_{{ loc.access_id }}(&ctx)
                 {%- else %}true{% endif %},
 %% endfor
@@ -99,7 +99,7 @@ impl world::Accessible for Exit {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-%% for ex in gl.exits()
+%% for ex in gl.exits()|sort(attribute='id')
             ExitId::{{ ex.id }} => {% if ex.access_id %}rules::access_{{ ex.access_id }}(&ctx)
                 {%- else %}true{% endif %},
 %% endfor
@@ -133,7 +133,7 @@ impl world::Accessible for Action {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-%% for act in gl.actions()
+%% for act in gl.actions()|sort(attribute='id')
             ActionId::{{ act.id }} => {% if act.access_id %}rules::access_{{ act.access_id }}(&ctx)
                 {%- else %}true{% endif %},
 %% endfor

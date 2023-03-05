@@ -15,9 +15,10 @@ BUILTINS = {
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
+punct = re.compile(r'[,./| -]+')
 nested = re.compile(r'[({\[:]')
 def construct_id(*args: list[str]) -> str:
-    return '__'.join(disallowed_chars.sub('', s.replace(' ', '_'))
+    return '__'.join(disallowed_chars.sub('', punct.sub('_', s))
                      for a in args
                      for s in nested.split(a))
 

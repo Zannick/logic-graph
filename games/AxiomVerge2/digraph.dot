@@ -89,24 +89,24 @@ digraph AxiomVerge2 {
             label = "Dock Outside";
             bgcolor = "white";
         }
-        subgraph cluster_Glacier__Grid_41910 {
-            Glacier__Grid_41910__East [label = "East"];
-            Glacier__Grid_41910__Overhang [label = "Overhang"];
-            Glacier__Grid_41910__Ledge [label = "Ledge"];
-            Glacier__Grid_41910__Lower_East [label = "Lower East"];
+        subgraph cluster_Glacier__Grid_41_9_10 {
+            Glacier__Grid_41_9_10__East [label = "East"];
+            Glacier__Grid_41_9_10__Overhang [label = "Overhang"];
+            Glacier__Grid_41_9_10__Ledge [label = "Ledge"];
+            Glacier__Grid_41_9_10__Lower_East [label = "Lower East"];
             label = "Grid 41,9-10";
             bgcolor = "white";
         }
-        subgraph cluster_Glacier__Grid_4210 {
-            Glacier__Grid_4210__West [label = "West"];
-            Glacier__Grid_4210__East [label = "East"];
+        subgraph cluster_Glacier__Grid_42_10 {
+            Glacier__Grid_42_10__West [label = "West"];
+            Glacier__Grid_42_10__East [label = "East"];
             label = "Grid 42,10";
             bgcolor = "white";
         }
-        subgraph cluster_Glacier__Grid_431011 {
-            Glacier__Grid_431011__Top [label = "Top"];
-            Glacier__Grid_431011__East [label = "East"];
-            Glacier__Grid_431011__Lower [label = "Lower"];
+        subgraph cluster_Glacier__Grid_43_10_11 {
+            Glacier__Grid_43_10_11__Top [label = "Top"];
+            Glacier__Grid_43_10_11__East [label = "East"];
+            Glacier__Grid_43_10_11__Lower [label = "Lower"];
             label = "Grid 43,10-11";
             bgcolor = "white";
         }
@@ -130,9 +130,9 @@ digraph AxiomVerge2 {
             label = "Revival";
             bgcolor = "white";
         }
-        subgraph cluster_Glacier__Grid_394079 {
-            Glacier__Grid_394079__Upper_East [label = "Upper East"];
-            Glacier__Grid_394079__West [label = "West"];
+        subgraph cluster_Glacier__Grid_39_40_7_9 {
+            Glacier__Grid_39_40_7_9__Upper_East [label = "Upper East"];
+            Glacier__Grid_39_40_7_9__West [label = "West"];
             label = "Grid 39-40,7-9";
             bgcolor = "white";
         }
@@ -172,16 +172,16 @@ digraph AxiomVerge2 {
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;
     Glacier__Dock_Outside__Entry -> Glacier__Dock_Interior__Entry;
-    Glacier__Dock_Outside__Do_Not_Enter -> Glacier__Grid_41910__East;
-    Glacier__Grid_41910__East -> Glacier__Dock_Outside__Do_Not_Enter;
-    Glacier__Grid_41910__Lower_East -> Glacier__Grid_4210__West;
-    Glacier__Grid_4210__West -> Glacier__Grid_41910__Lower_East;
-    Glacier__Grid_4210__East -> Glacier__Grid_431011__Top;
-    Glacier__Grid_431011__Top -> Glacier__Grid_4210__East;
-    Glacier__Grid_431011__East -> Glacier__Apocalypse_Entry__West;
-    Glacier__Grid_431011__Lower -> Glacier__Compass_Room__East;
-    Glacier__Compass_Room__East -> Glacier__Grid_431011__Lower;
+    Glacier__Dock_Outside__Do_Not_Enter -> Glacier__Grid_41_9_10__East;
+    Glacier__Grid_41_9_10__East -> Glacier__Dock_Outside__Do_Not_Enter;
+    Glacier__Grid_41_9_10__Lower_East -> Glacier__Grid_42_10__West;
+    Glacier__Grid_42_10__West -> Glacier__Grid_41_9_10__Lower_East;
+    Glacier__Grid_42_10__East -> Glacier__Grid_43_10_11__Top;
+    Glacier__Grid_43_10_11__Top -> Glacier__Grid_42_10__East;
+    Glacier__Grid_43_10_11__East -> Glacier__Apocalypse_Entry__West;
+    Glacier__Grid_43_10_11__Lower -> Glacier__Compass_Room__East;
+    Glacier__Compass_Room__East -> Glacier__Grid_43_10_11__Lower;
     Glacier__Compass_Room__West -> Glacier__The_Big_Drop__East;
     Glacier__The_Big_Drop__East -> Glacier__Compass_Room__West;
-    Glacier__Apocalypse_Entry__West -> Glacier__Grid_431011__East;
+    Glacier__Apocalypse_Entry__West -> Glacier__Grid_43_10_11__East;
 }

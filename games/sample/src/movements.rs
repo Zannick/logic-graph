@@ -50,8 +50,10 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::Deku_Tree__Compass_Room__Entry, SpotId::Deku_Tree__Compass_Room__Compass) => 2000,
         (SpotId::Deku_Tree__Compass_Room__Entry, SpotId::Deku_Tree__Compass_Room__Ledge) => 1414,
         (SpotId::Deku_Tree__Compass_Room__Compass, SpotId::Deku_Tree__Compass_Room__Entry) => 2000,
+        // [2.0, 1.414214]
         (SpotId::Deku_Tree__Compass_Room__Compass, SpotId::Deku_Tree__Compass_Room__Ledge) => 3414,
         (SpotId::Deku_Tree__Compass_Room__Ledge, SpotId::Deku_Tree__Compass_Room__Entry) => 1414,
+        // [1.414214, 2.0]
         (SpotId::Deku_Tree__Compass_Room__Ledge, SpotId::Deku_Tree__Compass_Room__Compass) => 3414,
         (SpotId::Deku_Tree__Basement_1__Center, SpotId::Deku_Tree__Basement_1__Corner) => 1000,
         (SpotId::Deku_Tree__Basement_1__Center, SpotId::Deku_Tree__Basement_1__South_Door) => 1000,
@@ -74,14 +76,17 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::KF__Links_House__Start_Point, SpotId::KF__Links_House__Entry) => 2000,
         (SpotId::KF__Links_House__Entry, SpotId::KF__Links_House__Start_Point) => 2000,
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => 8246,
+        // [6.082763, 4.123106]
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Knowitall_Porch) => {
             10205
         }
+        // [6.082763, 5.830952]
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
             11913
         }
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => 11313,
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Sarias_Porch) => 8944,
+        // [3.162278, 10.440307]
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Midos_Guardpost) => {
             13602
         }

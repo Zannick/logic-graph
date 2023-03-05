@@ -9,7 +9,7 @@ pub enum Currency {
     #[default]
     Free,
     Energy(i32),
-    Flask(i32),
+    Flasks(i32),
 }
 
 impl analyzer::world::Id for Currency {}
@@ -19,7 +19,7 @@ impl fmt::Display for Currency {
         match self {
             Self::Free => write!(f, "Free"),
             Self::Energy(i) => write!(f, "{}:{}", "Energy", i),
-            Self::Flask(i) => write!(f, "{}:{}", "Flask", i),
+            Self::Flasks(i) => write!(f, "{}:{}", "Flasks", i),
         }
     }
 }
