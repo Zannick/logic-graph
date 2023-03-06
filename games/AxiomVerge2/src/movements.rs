@@ -25,1528 +25,1528 @@ fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
 
 pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
     match (has_movement(ctx, Movement::MistUpgraded, src), src, dest) {
-        (False, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
-        (False, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
-        (False, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
-        (False, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Boxes) => 9649,
-        (False, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
-        (False, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Shed_Entry) => 9649,
+        (false, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
+        (false, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
+        (false, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
+        (false, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Boxes) => 9649,
+        (false, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
+        (false, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Shed_Entry) => 9649,
         (
-            False,
+            false,
             SpotId::Antarctica__Building_1W__West_Entry,
             SpotId::Antarctica__Building_1W__Connector,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__Building_1W__Connector,
             SpotId::Antarctica__Building_1W__West_Entry,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__Building_1E__Connector,
             SpotId::Antarctica__Building_1E__East_Entry,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Save_Point,
         ) => 877,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Building_2_Entry,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 877,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_2_Entry,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Save_Point,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Save_Point,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_2_Entry,
         ) => 4385,
-        (False, SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => {
+        (false, SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => {
             3508
         }
-        (False, SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => {
+        (false, SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => {
             3508
         }
-        (False, SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => {
+        (false, SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => {
             1403
         }
-        (False, SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => {
+        (false, SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => {
             1403
         }
         (
-            False,
+            false,
             SpotId::Antarctica__Freight_Elevator__Left,
             SpotId::Antarctica__Freight_Elevator__Controls,
         ) => 2105,
         (
-            False,
+            false,
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
         ) => 2105,
         (
-            False,
+            false,
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Dock_Elevator__Connector,
             SpotId::Glacier__Dock_Elevator__Elevator,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Dock_Interior__Connector,
             SpotId::Glacier__Dock_Interior__Entry,
         ) => 1929,
         (
-            False,
+            false,
             SpotId::Glacier__Dock_Interior__Entry,
             SpotId::Glacier__Dock_Interior__Connector,
         ) => 1929,
         (
-            False,
+            false,
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 4736,
         (
-            False,
+            false,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 4736,
-        (False, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Overhang) => {
+        (false, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Overhang) => {
             1228
         }
-        (False, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Ledge) => 2280,
-        (False, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
+        (false, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Ledge) => 2280,
+        (false, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
             1000
         }
-        (False, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__East) => {
+        (false, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__East) => {
             1228
         }
-        (False, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__Ledge) => {
+        (false, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__Ledge) => {
             1052
         }
         (
-            False,
+            false,
             SpotId::Glacier__Grid_41_9_10__Overhang,
             SpotId::Glacier__Grid_41_9_10__Lower_East,
         ) => 1228,
-        (False, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Overhang) => {
+        (false, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Overhang) => {
             1200
         }
         (
-            False,
+            false,
             SpotId::Glacier__Grid_41_9_10__Ledge,
             SpotId::Glacier__Grid_41_9_10__Lower_East,
         ) => 2280,
         (
-            False,
+            false,
             SpotId::Glacier__Grid_41_9_10__Lower_East,
             SpotId::Glacier__Grid_41_9_10__Ledge,
         ) => 4800,
-        (False, SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
-        (False, SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__West) => 3157,
-        (False, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => 3157,
+        (false, SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
+        (false, SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__West) => 3157,
+        (false, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => 3157,
         // [0.877193, 0.877193]
-        (False, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => 1754,
-        (False, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => 3157,
-        (False, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => {
+        (false, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => 1754,
+        (false, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => 3157,
+        (false, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => {
             3157
         }
         // [1.2, 1.8, 1.8, 0.877193]
-        (False, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => 5677,
+        (false, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => 5677,
         // [1.2, 2.4, 1.578947]
-        (False, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => {
+        (false, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => {
             5178
         }
-        (False, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => 1578,
-        (False, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__West) => 3157,
-        (False, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => 1578,
-        (False, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => 1578,
-        (False, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__East) => 3157,
-        (False, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => 1578,
-        (False, SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
+        (false, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => 1578,
+        (false, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__West) => 3157,
+        (false, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => 1578,
+        (false, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => 1578,
+        (false, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__East) => 3157,
+        (false, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => 1578,
+        (false, SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
             2000
         }
         (
-            False,
+            false,
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__The_Big_Drop__Small_Path,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
             SpotId::Glacier__The_Big_Drop__Small_Path,
         ) => 3157,
-        (False, SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West) => 1228,
-        (False, SpotId::Glacier__Revival__West, SpotId::Glacier__Revival__Save_Point) => 1228,
+        (false, SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West) => 1228,
+        (false, SpotId::Glacier__Revival__West, SpotId::Glacier__Revival__Save_Point) => 1228,
         (
-            False,
+            false,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
         ) => 6666,
         // [3.333333, 0.6, 3.333333]
         (
-            False,
+            false,
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
         ) => 7266,
-        (False, SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
-        (False, SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
+        (false, SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
+        (false, SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 2600,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 2600,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2000,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 2500,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2000,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2400,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 8400,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 8400,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 1052,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 1929,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 1228,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 500,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 3000,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2500,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
         ) => 1100,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
         ) => 1700,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
         ) => 2105,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
         ) => 1300,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
         ) => 4200,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
         ) => 2280,
         (
-            False,
+            false,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
         ) => 2280,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         // [2.631579, 2.631579]
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 5263,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 500,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         // [3.333333, 3.333333]
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 6666,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1228,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 5087,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 1228,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 3859,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 2631,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 2456,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 5087,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 2456,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1200,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 701,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 1052,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 4385,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1052,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 2105,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 3333,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 3859,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 1228,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 5087,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 4385,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 3333,
         (
-            False,
+            false,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 1228,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Balcony__Column,
             SpotId::Glacier__Ledge_Grab_Balcony__East_9,
         ) => 1578,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Balcony__Column,
             SpotId::Glacier__Ledge_Grab_Balcony__Gate_Ledge,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Balcony__Gate_Ledge,
             SpotId::Glacier__Ledge_Grab_Balcony__East_9,
         ) => 3333,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 1929,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 1929,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 5087,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 3157,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 6842,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 4912,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 1754,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
         ) => 2807,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
         ) => 2807,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
         ) => 1403,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__West,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
         ) => 3508,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__West,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
         ) => 3859,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__West,
         ) => 3859,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
         ) => 600,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
             SpotId::Glacier__Ledge_Grab_Upper__West,
         ) => 5964,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
         ) => 2456,
         (
-            False,
+            false,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
         ) => 2105,
         (
-            False,
+            false,
             SpotId::Glacier__Apocalypse_Entry__West,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
         ) => 1929,
         (
-            False,
+            false,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
-        (True, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
-        (True, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
-        (True, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
-        (True, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Boxes) => 9649,
-        (True, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
-        (True, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Shed_Entry) => 9649,
+        (true, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
+        (true, SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
+        (true, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
+        (true, SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Boxes) => 9649,
+        (true, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
+        (true, SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Shed_Entry) => 9649,
         (
-            True,
+            true,
             SpotId::Antarctica__Building_1W__West_Entry,
             SpotId::Antarctica__Building_1W__Connector,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__Building_1W__Connector,
             SpotId::Antarctica__Building_1W__West_Entry,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__Building_1E__Connector,
             SpotId::Antarctica__Building_1E__East_Entry,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Save_Point,
         ) => 877,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Building_2_Entry,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Building_2_Upper,
         ) => 4969,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 877,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_2_Entry,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_2_Upper,
         ) => 5555,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Save_Point,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Building_2_Upper,
         ) => 7114,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_1_Entry,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Save_Point,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_2_Entry,
         ) => 4385,
-        (True, SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => {
+        (true, SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => {
             3508
         }
-        (True, SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => {
+        (true, SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => {
             3508
         }
-        (True, SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => {
+        (true, SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => {
             1403
         }
-        (True, SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => {
+        (true, SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => {
             1403
         }
         (
-            True,
+            true,
             SpotId::Antarctica__Freight_Elevator__Left,
             SpotId::Antarctica__Freight_Elevator__Controls,
         ) => 2105,
         (
-            True,
+            true,
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
         ) => 2105,
         (
-            True,
+            true,
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Dock_Elevator__Connector,
             SpotId::Glacier__Dock_Elevator__Elevator,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Dock_Interior__Connector,
             SpotId::Glacier__Dock_Interior__Entry,
         ) => 1929,
         (
-            True,
+            true,
             SpotId::Glacier__Dock_Interior__Entry,
             SpotId::Glacier__Dock_Interior__Connector,
         ) => 1929,
         (
-            True,
+            true,
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 4736,
         (
-            True,
+            true,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 4736,
-        (True, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Overhang) => {
+        (true, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Overhang) => {
             1228
         }
-        (True, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Ledge) => 2280,
-        (True, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
+        (true, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Ledge) => 2280,
+        (true, SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
             1000
         }
-        (True, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__East) => {
+        (true, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__East) => {
             1228
         }
-        (True, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__Ledge) => {
+        (true, SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__Ledge) => {
             1052
         }
         (
-            True,
+            true,
             SpotId::Glacier__Grid_41_9_10__Overhang,
             SpotId::Glacier__Grid_41_9_10__Lower_East,
         ) => 1228,
-        (True, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__East) => 3022,
-        (True, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Overhang) => {
+        (true, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__East) => 3022,
+        (true, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Overhang) => {
             1200
         }
-        (True, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
+        (true, SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
             2280
         }
-        (True, SpotId::Glacier__Grid_41_9_10__Lower_East, SpotId::Glacier__Grid_41_9_10__East) => {
+        (true, SpotId::Glacier__Grid_41_9_10__Lower_East, SpotId::Glacier__Grid_41_9_10__East) => {
             4444
         }
         (
-            True,
+            true,
             SpotId::Glacier__Grid_41_9_10__Lower_East,
             SpotId::Glacier__Grid_41_9_10__Overhang,
         ) => 4708,
-        (True, SpotId::Glacier__Grid_41_9_10__Lower_East, SpotId::Glacier__Grid_41_9_10__Ledge) => {
+        (true, SpotId::Glacier__Grid_41_9_10__Lower_East, SpotId::Glacier__Grid_41_9_10__Ledge) => {
             4581
         }
-        (True, SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
-        (True, SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__West) => 3157,
-        (True, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => 3157,
+        (true, SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
+        (true, SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__West) => 3157,
+        (true, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => 3157,
         // [0.877193, 0.877193]
-        (True, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => 1754,
-        (True, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => 3157,
-        (True, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => 3157,
+        (true, SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => 1754,
+        (true, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => 3157,
+        (true, SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => 3157,
         // [1.2, 0.993808, 0.888889, 0.877193]
-        (True, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => 3959,
+        (true, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => 3959,
         // [1.2, 1.885618, 1.578947]
-        (True, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => 4664,
-        (True, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => 1578,
-        (True, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__West) => 3157,
-        (True, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => 1578,
-        (True, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => 1578,
-        (True, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__East) => 3157,
-        (True, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => 1578,
-        (True, SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
+        (true, SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => 4664,
+        (true, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => 1578,
+        (true, SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__West) => 3157,
+        (true, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => 1578,
+        (true, SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => 1578,
+        (true, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__East) => 3157,
+        (true, SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => 1578,
+        (true, SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => {
             2000
         }
         (
-            True,
+            true,
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
         ) => 3157,
-        (True, SpotId::Glacier__The_Big_Drop__Small_Path, SpotId::Glacier__The_Big_Drop__East) => {
+        (true, SpotId::Glacier__The_Big_Drop__Small_Path, SpotId::Glacier__The_Big_Drop__East) => {
             8888
         }
         (
-            True,
+            true,
             SpotId::Glacier__The_Big_Drop__Small_Path,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
         ) => 3157,
         (
-            True,
+            true,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
             SpotId::Glacier__The_Big_Drop__East,
         ) => 9747,
         (
-            True,
+            true,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
             SpotId::Glacier__The_Big_Drop__Small_Path,
         ) => 3157,
-        (True, SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West) => 1228,
-        (True, SpotId::Glacier__Revival__West, SpotId::Glacier__Revival__Save_Point) => 1228,
+        (true, SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West) => 1228,
+        (true, SpotId::Glacier__Revival__West, SpotId::Glacier__Revival__Save_Point) => 1228,
         (
-            True,
+            true,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
         ) => 6666,
         // [3.333333, 0.444444, 3.333333]
         (
-            True,
+            true,
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
         ) => 7111,
-        (True, SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
-        (True, SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
+        (true, SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
+        (true, SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 3157,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 2600,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__East_9,
             SpotId::Glacier__Vertical_Room_Top__Peak,
         ) => 3303,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 3157,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 2600,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2000,
         // [1.578947, 2.266231]
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Peak,
         ) => 3845,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 2500,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2000,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
             SpotId::Glacier__Vertical_Room_Top__Peak,
         ) => 2266,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 11289,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 11289,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 11111,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2400,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
             SpotId::Glacier__Vertical_Room_Top__Peak,
         ) => 13340,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 9493,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 8400,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 8400,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 1052,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
             SpotId::Glacier__Vertical_Room_Top__Peak,
         ) => 11146,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__East_9,
         ) => 1929,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__West_9,
         ) => 1228,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__Mid_9,
         ) => 500,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__Mid_11,
         ) => 3000,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Top__Peak,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2500,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
         ) => 1100,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
         ) => 1700,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
         ) => 2105,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
         ) => 1300,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
         ) => 4097,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
         ) => 4097,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
         ) => 2280,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
         ) => 6960,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_12,
         ) => 5782,
         (
-            True,
+            true,
             SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
             SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
         ) => 2280,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 10758,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         // [2.631579, 2.631579]
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 5263,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 500,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         // [3.333333, 3.333333]
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 6666,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1228,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 3513,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 5087,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 1228,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 3859,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 2631,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 2456,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 5087,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 5013,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 2456,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1200,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 3142,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 5013,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 6816,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 701,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 1052,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 3157,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 4385,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1052,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 2105,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 3333,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 3859,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 4151,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 2888,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 1228,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 5087,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 4385,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 3333,
         (
-            True,
+            true,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 1228,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Balcony__East_9,
             SpotId::Glacier__Ledge_Grab_Balcony__Column,
         ) => 2403,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Balcony__East_9,
             SpotId::Glacier__Ledge_Grab_Balcony__Gate_Ledge,
         ) => 4314,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Balcony__Column,
             SpotId::Glacier__Ledge_Grab_Balcony__East_9,
         ) => 1578,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Balcony__Column,
             SpotId::Glacier__Ledge_Grab_Balcony__Gate_Ledge,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Balcony__Gate_Ledge,
             SpotId::Glacier__Ledge_Grab_Balcony__East_9,
         ) => 3333,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Balcony__Gate_Ledge,
             SpotId::Glacier__Ledge_Grab_Balcony__Column,
         ) => 2266,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 1929,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 6816,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 8847,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 1929,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 3157,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 6471,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 5087,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 3157,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 6842,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 4912,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 1754,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
         ) => 2807,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
             SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom,
         ) => 2807,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Area__Gate,
             SpotId::Glacier__Ledge_Grab_Area__Pedestal,
         ) => 1403,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__West,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
         ) => 3508,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__West,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
         ) => 3859,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__West,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
         ) => 8012,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__West,
         ) => 4640,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
         ) => 2703,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
         ) => 5067,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__West,
         ) => 3859,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
         ) => 600,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
         ) => 2981,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
             SpotId::Glacier__Ledge_Grab_Upper__West,
         ) => 5964,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
             SpotId::Glacier__Ledge_Grab_Upper__Lower_Platform,
         ) => 2456,
         (
-            True,
+            true,
             SpotId::Glacier__Ledge_Grab_Upper__Fork,
             SpotId::Glacier__Ledge_Grab_Upper__Upper_Platform,
         ) => 2105,
         (
-            True,
+            true,
             SpotId::Glacier__Apocalypse_Entry__West,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
         ) => 1929,
         (
-            True,
+            true,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,

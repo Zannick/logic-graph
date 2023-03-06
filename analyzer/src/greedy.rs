@@ -90,7 +90,7 @@ where
     }
 }
 
-pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Result<ContextWrapper<T>, ContextWrapper<T>>
+pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Result<ContextWrapper<T>, T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -109,8 +109,8 @@ where
             // TODO: this probably shouldn't do all global actions, maybe we pick the fastest/cheapest?
             do_all(world, &mut ctx);
         } else {
-            let ctx = spot_map.into_values().into_iter().next().expect("couldn't reach any spots!");
-            return Err(ctx);
+            let ctx = spot_map.into_values().into_iter().last().expect("couldn't reach any spots!");
+            return Err(ctx.get().clone());
         }
     }
     Ok(ctx)

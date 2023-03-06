@@ -36,7 +36,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
 %% for (s, d), f in table.items()
     {% if f|count > 1 %}// {{ f|map('round', 6)|list }}
 {% endif -%}
-    ({% for mflag in k %}{{ mflag }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
+    ({% for mflag in k %}{{ mflag|lower }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
 %% endfor
 %% endfor
         _ => -1,

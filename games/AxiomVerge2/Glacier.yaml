@@ -243,7 +243,7 @@ areas:
           jumps: 14
       locations:
         - name: Switch
-          items: Switch_36_11
+          item: Switch_36_11
           req: Boomerang
           tags: [event]
       exits:
@@ -269,11 +269,18 @@ areas:
           jumps_down: 2
         - to: East 13
           jumps_down: 2
+      exits:
+        - to: Vertical Room Top > Mid 11
+          tags: [overlap]
     - name: East 12
       coord: [36.9, 11.7]
       local:
         - to: Mid 11
           jumps: 2
+      exits:
+        - to: Boomerang Antechamber > West 12
+          req: $grab
+          tags: [xshift]
     - name: Lower West Corner
       coord: [36.3, 12.4]
       local:
@@ -284,6 +291,9 @@ areas:
       local:
         - to: Lower West Corner
           jumps: 3
+      exits:
+        - to: Boomerang Antechamber > West 13
+          tags: [xshift]
     # TODO: bottom spot and exit
 
 - name: Vertical Room Left

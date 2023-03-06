@@ -886,6 +886,9 @@ pub enum ExitId {
     Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1,
     Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1,
     Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Balcony__East_9_1,
+    Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1,
+    Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1,
+    Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1,
 }
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -973,6 +976,9 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Mid 9 (1)"),
             ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Vertical Room Left > Past Gate (1)"),
             ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Balcony__East_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 9 ==> Ledge Grab Balcony > East 9 (1)"),
+            ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > East 12 ==> Boomerang Antechamber > West 12 (1)"),
+            ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > East 13 ==> Boomerang Antechamber > West 13 (1)"),
+            ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > Mid 11 ==> Vertical Room Top > Mid 11 (1)"),
         }
     }
 }
@@ -1065,6 +1071,9 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room Top > Under Switch ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1),
             "Glacier > Vertical Room Top > Under Switch ==> Vertical Room Left > Past Gate (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1),
             "Glacier > Vertical Room Top > West 9 ==> Ledge Grab Balcony > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Balcony__East_9_1),
+            "Glacier > Vertical Room Upper Mid > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1),
+            "Glacier > Vertical Room Upper Mid > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1),
+            "Glacier > Vertical Room Upper Mid > Mid 11 ==> Vertical Room Top > Mid 11 (1)" => Ok(ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1),
             _ => Err(format!("Could not recognize as a ExitId: {}", s)),
         }
     }
@@ -1557,6 +1566,9 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => rules::access_switch_36_11(&ctx),
             ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Balcony__East_9_1 => true,
+            ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
+            ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1 => true,
         }
     }
     fn time(&self) -> i32 {
@@ -1944,7 +1956,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => Location {
             id: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch,
             canonical: CanonId::None,
-            item: Item::None,
+            item: Item::Switch_36_11,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
@@ -2356,6 +2368,27 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1,
             time: 100,
             dest: SpotId::Glacier__Vertical_Room_Left__Past_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1,
+            time: 0,
+            dest: SpotId::Glacier__Vertical_Room_Top__Mid_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1,
+            time: 1350,
+            dest: SpotId::Glacier__Boomerang_Antechamber__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1,
+            time: 1350,
+            dest: SpotId::Glacier__Boomerang_Antechamber__West_13,
             price: Currency::Free,
             loc_id: None,
         },
@@ -3527,7 +3560,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -3543,7 +3577,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -3575,7 +3610,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

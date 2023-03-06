@@ -280,6 +280,9 @@ digraph AxiomVerge2 {
     Glacier__Vertical_Room_Top__Mid_11 -> Glacier__Vertical_Room_Upper_Mid__Mid_11;
     Glacier__Vertical_Room_Top__Under_Switch -> Glacier__Vertical_Room_Top__Mid_9;
     Glacier__Vertical_Room_Top__Under_Switch -> Glacier__Vertical_Room_Left__Past_Gate;
+    Glacier__Vertical_Room_Upper_Mid__Mid_11 -> Glacier__Vertical_Room_Top__Mid_11;
+    Glacier__Vertical_Room_Upper_Mid__East_12 -> Glacier__Boomerang_Antechamber__West_12;
+    Glacier__Vertical_Room_Upper_Mid__East_13 -> Glacier__Boomerang_Antechamber__West_13;
     Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Vertical_Room_Top__Under_Switch;
     Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Ledge_Grab_Room__East_11;
     Glacier__Boomerang_Antechamber__West_13 -> Glacier__Vertical_Room_Upper_Mid__East_13;

@@ -200,7 +200,7 @@ where
 {
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);
-    let wonctx = greedy_search(world, &startctx).expect("Did not find a solution");
+    let wonctx = greedy_search(world, &startctx).expect("Did not find a greedy solution");
 
     let m = minimize_greedy(world, startctx.get(), &wonctx);
 
