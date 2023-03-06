@@ -12,8 +12,8 @@ pub fn nearest_spot_with_checks<W, T, E, L, Wp>(
 where
     W: World<Exit = E, Location = L, Warp = Wp>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit<Context = T> + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId>,
 {
     if let Some((_, ctx)) = spot_map
@@ -34,8 +34,8 @@ pub fn nearest_spot_with_actions<W, T, E, L, Wp>(
 where
     W: World<Exit = E, Location = L, Warp = Wp>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit<Context = T> + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId>,
 {
     if let Some((_, ctx)) = spot_map

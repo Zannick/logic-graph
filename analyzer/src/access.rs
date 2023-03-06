@@ -110,6 +110,11 @@ pub fn expand_simple<W, T, E, Wp>(
     };
     for spot in world.get_area_spots(ctx.position()) {
         if !spot_map.contains_key(spot) {
+            let local = ctx.local_travel_time(*spot);
+            if local < 0 {
+                // Can't move this way
+                continue;
+            }
             append(*spot);
         }
     }
@@ -288,4 +293,24 @@ where
     Ok(())
 }
 
-// TODO: move elsewhere?
+pub fn cant_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), T>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    E: Exit + Accessible<Context = T>,
+{
+    let mut ctx = ctx.clone();
+    let mut acts_only = 0;
+    while !world.won(&ctx) {
+        if !visit_simple(world, &mut ctx) {
+            acts_only += 1;
+        } else {
+            acts_only = 0;
+        }
+        if acts_only > 1 {
+            return Ok(());
+        }
+    }
+    Err(ctx)
+}
