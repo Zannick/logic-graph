@@ -62,7 +62,7 @@ pub enum AreaId {
     Kak__Spider_House,
     KF__Baba_Corridor,
     KF__Boulder_Maze,
-    KF__Knowitall_House,
+    KF__Know_it_all_House,
     KF__Kokiri_Village,
     KF__Links_House,
     KF__Midos_House,
@@ -88,7 +88,7 @@ impl fmt::Display for AreaId {
             AreaId::Kak__Spider_House => write!(f, "{}", "Kak > Spider House"),
             AreaId::KF__Baba_Corridor => write!(f, "{}", "KF > Baba Corridor"),
             AreaId::KF__Boulder_Maze => write!(f, "{}", "KF > Boulder Maze"),
-            AreaId::KF__Knowitall_House => write!(f, "{}", "KF > Know-it-all House"),
+            AreaId::KF__Know_it_all_House => write!(f, "{}", "KF > Know-it-all House"),
             AreaId::KF__Kokiri_Village => write!(f, "{}", "KF > Kokiri Village"),
             AreaId::KF__Links_House => write!(f, "{}", "KF > Link's House"),
             AreaId::KF__Midos_House => write!(f, "{}", "KF > Mido's House"),
@@ -119,7 +119,7 @@ impl std::str::FromStr for AreaId {
             "Kak > Spider House" => Ok(AreaId::Kak__Spider_House),
             "KF > Baba Corridor" => Ok(AreaId::KF__Baba_Corridor),
             "KF > Boulder Maze" => Ok(AreaId::KF__Boulder_Maze),
-            "KF > Know-it-all House" => Ok(AreaId::KF__Knowitall_House),
+            "KF > Know-it-all House" => Ok(AreaId::KF__Know_it_all_House),
             "KF > Kokiri Village" => Ok(AreaId::KF__Kokiri_Village),
             "KF > Link's House" => Ok(AreaId::KF__Links_House),
             "KF > Mido's House" => Ok(AreaId::KF__Midos_House),
@@ -169,8 +169,8 @@ pub enum SpotId {
     KF__Baba_Corridor__Village_Side,
     KF__Boulder_Maze__Entry,
     KF__Boulder_Maze__Reward,
-    KF__Knowitall_House__Entry,
-    KF__Kokiri_Village__Knowitall_Porch,
+    KF__Know_it_all_House__Entry,
+    KF__Kokiri_Village__Know_it_all_Porch,
     KF__Kokiri_Village__Links_Porch,
     KF__Kokiri_Village__Midos_Guardpost,
     KF__Kokiri_Village__Midos_Porch,
@@ -263,8 +263,10 @@ impl fmt::Display for SpotId {
             }
             SpotId::KF__Boulder_Maze__Entry => write!(f, "{}", "KF > Boulder Maze > Entry"),
             SpotId::KF__Boulder_Maze__Reward => write!(f, "{}", "KF > Boulder Maze > Reward"),
-            SpotId::KF__Knowitall_House__Entry => write!(f, "{}", "KF > Know-it-all House > Entry"),
-            SpotId::KF__Kokiri_Village__Knowitall_Porch => {
+            SpotId::KF__Know_it_all_House__Entry => {
+                write!(f, "{}", "KF > Know-it-all House > Entry")
+            }
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch => {
                 write!(f, "{}", "KF > Kokiri Village > Know-it-all Porch")
             }
             SpotId::KF__Kokiri_Village__Links_Porch => {
@@ -349,9 +351,9 @@ impl std::str::FromStr for SpotId {
             "KF > Baba Corridor > Village Side" => Ok(SpotId::KF__Baba_Corridor__Village_Side),
             "KF > Boulder Maze > Entry" => Ok(SpotId::KF__Boulder_Maze__Entry),
             "KF > Boulder Maze > Reward" => Ok(SpotId::KF__Boulder_Maze__Reward),
-            "KF > Know-it-all House > Entry" => Ok(SpotId::KF__Knowitall_House__Entry),
+            "KF > Know-it-all House > Entry" => Ok(SpotId::KF__Know_it_all_House__Entry),
             "KF > Kokiri Village > Know-it-all Porch" => {
-                Ok(SpotId::KF__Kokiri_Village__Knowitall_Porch)
+                Ok(SpotId::KF__Kokiri_Village__Know_it_all_Porch)
             }
             "KF > Kokiri Village > Link's Porch" => Ok(SpotId::KF__Kokiri_Village__Links_Porch),
             "KF > Kokiri Village > Mido's Guardpost" => {
@@ -730,8 +732,8 @@ pub enum ExitId {
     KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1,
     KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1,
     KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1,
-    KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1,
-    KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1,
+    KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1,
+    KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1,
     KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1,
     KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1,
     KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1,
@@ -928,16 +930,20 @@ impl fmt::Display for ExitId {
                 "{}",
                 "KF > Boulder Maze > Entry ==> Kokiri Village > Training Center (1)"
             ),
-            ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1 => write!(
-                f,
-                "{}",
-                "KF > Know-it-all House > Entry ==> Kokiri Village > Know-it-all Porch (1)"
-            ),
-            ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1 => write!(
-                f,
-                "{}",
-                "KF > Kokiri Village > Know-it-all Porch ==> Know-it-all House > Entry (1)"
-            ),
+            ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => {
+                write!(
+                    f,
+                    "{}",
+                    "KF > Know-it-all House > Entry ==> Kokiri Village > Know-it-all Porch (1)"
+                )
+            }
+            ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1 => {
+                write!(
+                    f,
+                    "{}",
+                    "KF > Kokiri Village > Know-it-all Porch ==> Know-it-all House > Entry (1)"
+                )
+            }
             ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => write!(
                 f,
                 "{}",
@@ -1122,10 +1128,10 @@ impl std::str::FromStr for ExitId {
                 Ok(ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1)
             }
             "KF > Know-it-all House > Entry ==> Kokiri Village > Know-it-all Porch (1)" => {
-                Ok(ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1)
+                Ok(ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1)
             }
             "KF > Kokiri Village > Know-it-all Porch ==> Know-it-all House > Entry (1)" => {
-                Ok(ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1)
+                Ok(ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1)
             }
             "KF > Kokiri Village > Link's Porch ==> Link's House > Entry (1)" => {
                 Ok(ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1)
@@ -1342,7 +1348,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         }
         SpotId::KF__Kokiri_Village__Links_Porch
         | SpotId::KF__Kokiri_Village__Midos_Porch
-        | SpotId::KF__Kokiri_Village__Knowitall_Porch
+        | SpotId::KF__Kokiri_Village__Know_it_all_Porch
         | SpotId::KF__Kokiri_Village__Training_Center
         | SpotId::KF__Kokiri_Village__Shop_Porch
         | SpotId::KF__Kokiri_Village__Sarias_Porch
@@ -1358,7 +1364,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::KF__Outside_Deku_Tree__Right
         | SpotId::KF__Outside_Deku_Tree__Mouth => AreaId::KF__Outside_Deku_Tree,
         SpotId::KF__Midos_House__Entry => AreaId::KF__Midos_House,
-        SpotId::KF__Knowitall_House__Entry => AreaId::KF__Knowitall_House,
+        SpotId::KF__Know_it_all_House__Entry => AreaId::KF__Know_it_all_House,
         SpotId::KF__Shop__Entry => AreaId::KF__Shop,
         SpotId::Kak__Spider_House__Entry => AreaId::Kak__Spider_House,
     }
@@ -1402,7 +1408,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::KF__Links_House__Start_Point | SpotId::KF__Links_House__Entry => RegionId::KF,
         SpotId::KF__Kokiri_Village__Links_Porch
         | SpotId::KF__Kokiri_Village__Midos_Porch
-        | SpotId::KF__Kokiri_Village__Knowitall_Porch
+        | SpotId::KF__Kokiri_Village__Know_it_all_Porch
         | SpotId::KF__Kokiri_Village__Training_Center
         | SpotId::KF__Kokiri_Village__Shop_Porch
         | SpotId::KF__Kokiri_Village__Sarias_Porch
@@ -1416,7 +1422,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::KF__Outside_Deku_Tree__Right
         | SpotId::KF__Outside_Deku_Tree__Mouth => RegionId::KF,
         SpotId::KF__Midos_House__Entry => RegionId::KF,
-        SpotId::KF__Knowitall_House__Entry => RegionId::KF,
+        SpotId::KF__Know_it_all_House__Entry => RegionId::KF,
         SpotId::KF__Shop__Entry => RegionId::KF,
         SpotId::Kak__Spider_House__Entry => RegionId::Kak,
     }
@@ -1600,8 +1606,12 @@ impl world::Accessible for Exit {
                 ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
                     rules::access_is_child(&ctx)
                 }
-                ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1 => true,
-                ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1 => true,
+                ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => {
+                    true
+                }
+                ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1 => {
+                    true
+                }
                 ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => true,
                 ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
                     rules::access_is_adult_or_showed_mido(&ctx)
@@ -1921,8 +1931,8 @@ impl World {
                 SpotId::KF__Baba_Corridor__Village_Side,
                 SpotId::KF__Boulder_Maze__Entry,
                 SpotId::KF__Boulder_Maze__Reward,
-                SpotId::KF__Knowitall_House__Entry,
-                SpotId::KF__Kokiri_Village__Knowitall_Porch,
+                SpotId::KF__Know_it_all_House__Entry,
+                SpotId::KF__Kokiri_Village__Know_it_all_Porch,
                 SpotId::KF__Kokiri_Village__Links_Porch,
                 SpotId::KF__Kokiri_Village__Midos_Guardpost,
                 SpotId::KF__Kokiri_Village__Midos_Porch,
@@ -2596,10 +2606,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1 => Exit {
-            id: ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1,
+        ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1 => Exit {
+            id: ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1,
             time: 2000,
-            dest: SpotId::KF__Knowitall_House__Entry,
+            dest: SpotId::KF__Know_it_all_House__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -2673,10 +2683,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1 => Exit {
-            id: ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1,
+        ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => Exit {
+            id: ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1,
             time: 2000,
-            dest: SpotId::KF__Kokiri_Village__Knowitall_Porch,
+            dest: SpotId::KF__Kokiri_Village__Know_it_all_Porch,
             price: Currency::Free,
             loc_id: None,
         },
@@ -3279,7 +3289,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
@@ -3297,24 +3307,24 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees.into_usize() + 1,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
-        SpotId::KF__Kokiri_Village__Knowitall_Porch => Spot {
-            id: SpotId::KF__Kokiri_Village__Knowitall_Porch,
+        SpotId::KF__Kokiri_Village__Know_it_all_Porch => Spot {
+            id: SpotId::KF__Kokiri_Village__Know_it_all_Porch,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1.into_usize(),
-                end: ExitId::KF__Kokiri_Village__Knowitall_Porch__ex__Knowitall_House__Entry_1.into_usize() + 1,
+                start: ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1.into_usize(),
+                end: ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
@@ -3331,7 +3341,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
@@ -3348,7 +3358,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
@@ -3366,7 +3376,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ActionId::KF__Kokiri_Village__Sarias_Porch__Save.into_usize() + 1,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
@@ -3384,7 +3394,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::KF__Kokiri_Village__Knowitall_Porch.into_usize(),
+                start: SpotId::KF__Kokiri_Village__Know_it_all_Porch.into_usize(),
                 end: SpotId::KF__Kokiri_Village__Training_Center.into_usize() + 1,
             },
         },
@@ -3559,21 +3569,21 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::KF__Midos_House__Entry.into_usize() + 1,
             },
         },
-        SpotId::KF__Knowitall_House__Entry => Spot {
-            id: SpotId::KF__Knowitall_House__Entry,
+        SpotId::KF__Know_it_all_House__Entry => Spot {
+            id: SpotId::KF__Know_it_all_House__Entry,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1.into_usize(),
-                end: ExitId::KF__Knowitall_House__Entry__ex__Kokiri_Village__Knowitall_Porch_1.into_usize() + 1,
+                start: ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1.into_usize(),
+                end: ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::KF__Knowitall_House__Entry.into_usize(),
-                end: SpotId::KF__Knowitall_House__Entry.into_usize() + 1,
+                start: SpotId::KF__Know_it_all_House__Entry.into_usize(),
+                end: SpotId::KF__Know_it_all_House__Entry.into_usize() + 1,
             },
         },
         SpotId::KF__Shop__Entry => Spot {
@@ -3719,7 +3729,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::KF__Links_House__Entry => Range { start: 0, end: 0 },
         SpotId::KF__Kokiri_Village__Links_Porch => Range { start: 0, end: 0 },
         SpotId::KF__Kokiri_Village__Midos_Porch => Range { start: 0, end: 0 },
-        SpotId::KF__Kokiri_Village__Knowitall_Porch => Range { start: 0, end: 0 },
+        SpotId::KF__Kokiri_Village__Know_it_all_Porch => Range { start: 0, end: 0 },
         SpotId::KF__Kokiri_Village__Training_Center => Range { start: 0, end: 0 },
         SpotId::KF__Kokiri_Village__Shop_Porch => Range { start: 0, end: 0 },
         SpotId::KF__Kokiri_Village__Sarias_Porch => Range { start: 0, end: 0 },
@@ -3752,7 +3762,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::KF__Midos_House__Entry__Bottom_Left_Chest.into_usize(),
             end: LocationId::KF__Midos_House__Entry__Top_Right_Chest.into_usize() + 1,
         },
-        SpotId::KF__Knowitall_House__Entry => Range { start: 0, end: 0 },
+        SpotId::KF__Know_it_all_House__Entry => Range { start: 0, end: 0 },
         SpotId::KF__Shop__Entry => Range {
             start: LocationId::KF__Shop__Entry__Blue_Rupee.into_usize(),
             end: LocationId::KF__Shop__Entry__Item_8.into_usize() + 1,
@@ -3839,7 +3849,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::KF__Midos_House__Entry__Bottom_Left_Chest.into_usize(),
             end: LocationId::KF__Midos_House__Entry__Top_Right_Chest.into_usize(),
         },
-        AreaId::KF__Knowitall_House => Range { start: 0, end: 0 },
+        AreaId::KF__Know_it_all_House => Range { start: 0, end: 0 },
         AreaId::KF__Shop => Range {
             start: LocationId::KF__Shop__Entry__Blue_Rupee.into_usize(),
             end: LocationId::KF__Shop__Entry__Item_8.into_usize(),

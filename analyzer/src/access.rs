@@ -266,7 +266,7 @@ where
     ret
 }
 
-pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -282,10 +282,10 @@ where
             acts_only = 0;
         }
         if acts_only > 1 {
-            return false;
+            return Err(ctx);
         }
     }
-    true
+    Ok(())
 }
 
 // TODO: move elsewhere?

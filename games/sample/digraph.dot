@@ -96,7 +96,7 @@ digraph sample {
         subgraph cluster_KF__Kokiri_Village {
             KF__Kokiri_Village__Links_Porch [label = "Link's Porch"];
             KF__Kokiri_Village__Midos_Porch [label = "Mido's Porch"];
-            KF__Kokiri_Village__Knowitall_Porch [label = "Know-it-all Porch"];
+            KF__Kokiri_Village__Know_it_all_Porch [label = "Know-it-all Porch"];
             KF__Kokiri_Village__Training_Center [label = "Training Center"];
             KF__Kokiri_Village__Shop_Porch [label = "Shop Porch"];
             KF__Kokiri_Village__Sarias_Porch [label = "Saria's Porch"];
@@ -130,8 +130,8 @@ digraph sample {
             label = "Mido's House";
             bgcolor = "white";
         }
-        subgraph cluster_KF__Knowitall_House {
-            KF__Knowitall_House__Entry [label = "Entry"];
+        subgraph cluster_KF__Know_it_all_House {
+            KF__Know_it_all_House__Entry [label = "Entry"];
             label = "Know-it-all House";
             bgcolor = "white";
         }
@@ -186,7 +186,7 @@ digraph sample {
     KF__Links_House__Entry -> KF__Kokiri_Village__Links_Porch;
     KF__Kokiri_Village__Links_Porch -> KF__Links_House__Entry;
     KF__Kokiri_Village__Midos_Porch -> KF__Midos_House__Entry;
-    KF__Kokiri_Village__Knowitall_Porch -> KF__Knowitall_House__Entry;
+    KF__Kokiri_Village__Know_it_all_Porch -> KF__Know_it_all_House__Entry;
     KF__Kokiri_Village__Training_Center -> KF__Boulder_Maze__Entry;
     KF__Kokiri_Village__Shop_Porch -> KF__Shop__Entry;
     KF__Kokiri_Village__Sarias_Porch -> Kak__Spider_House__Entry;
@@ -197,7 +197,7 @@ digraph sample {
     KF__Outside_Deku_Tree__Entry -> KF__Baba_Corridor__Tree_Side;
     KF__Outside_Deku_Tree__Mouth -> Deku_Tree__Lobby__Entry;
     KF__Midos_House__Entry -> KF__Kokiri_Village__Midos_Porch;
-    KF__Knowitall_House__Entry -> KF__Kokiri_Village__Knowitall_Porch;
+    KF__Know_it_all_House__Entry -> KF__Kokiri_Village__Know_it_all_Porch;
     KF__Shop__Entry -> KF__Kokiri_Village__Shop_Porch;
     Kak__Spider_House__Entry -> KF__Kokiri_Village__Sarias_Porch;
 }

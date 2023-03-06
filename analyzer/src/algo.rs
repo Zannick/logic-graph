@@ -69,7 +69,7 @@ where
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
-                    if can_win(world, newctx.get()) {
+                    if can_win(world, newctx.get()).is_ok() {
                         ctx_list.push(newctx);
                     }
                 }

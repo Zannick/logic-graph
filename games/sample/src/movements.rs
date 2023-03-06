@@ -77,9 +77,10 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::KF__Links_House__Entry, SpotId::KF__Links_House__Start_Point) => 2000,
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => 8246,
         // [6.082763, 4.123106]
-        (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Knowitall_Porch) => {
-            10205
-        }
+        (
+            SpotId::KF__Kokiri_Village__Links_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => 10205,
         // [6.082763, 5.830952]
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
             11913
@@ -91,9 +92,10 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             13602
         }
         (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Links_Porch) => 8246,
-        (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Knowitall_Porch) => {
-            4242
-        }
+        (
+            SpotId::KF__Kokiri_Village__Midos_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => 4242,
         (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
             7280
         }
@@ -104,24 +106,27 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Midos_Guardpost) => {
             13152
         }
-        (SpotId::KF__Kokiri_Village__Knowitall_Porch, SpotId::KF__Kokiri_Village__Links_Porch) => {
-            7071
-        }
-        (SpotId::KF__Kokiri_Village__Knowitall_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => {
-            4242
-        }
         (
-            SpotId::KF__Kokiri_Village__Knowitall_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Links_Porch,
+        ) => 7071,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Midos_Porch,
+        ) => 4242,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
             SpotId::KF__Kokiri_Village__Training_Center,
         ) => 4123,
-        (SpotId::KF__Kokiri_Village__Knowitall_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => {
+        (SpotId::KF__Kokiri_Village__Know_it_all_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => {
             13341
         }
-        (SpotId::KF__Kokiri_Village__Knowitall_Porch, SpotId::KF__Kokiri_Village__Sarias_Porch) => {
-            13038
-        }
         (
-            SpotId::KF__Kokiri_Village__Knowitall_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Sarias_Porch,
+        ) => 13038,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
             SpotId::KF__Kokiri_Village__Midos_Guardpost,
         ) => 16031,
         (SpotId::KF__Kokiri_Village__Training_Center, SpotId::KF__Kokiri_Village__Links_Porch) => {
@@ -132,7 +137,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         }
         (
             SpotId::KF__Kokiri_Village__Training_Center,
-            SpotId::KF__Kokiri_Village__Knowitall_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
         ) => 4123,
         (SpotId::KF__Kokiri_Village__Training_Center, SpotId::KF__Kokiri_Village__Shop_Porch) => {
             13892
@@ -146,7 +151,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         ) => 15811,
         (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Links_Porch) => 11313,
         (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => 10000,
-        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Knowitall_Porch) => {
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Know_it_all_Porch) => {
             13341
         }
         (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
@@ -160,9 +165,10 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => {
             10770
         }
-        (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Knowitall_Porch) => {
-            13038
-        }
+        (
+            SpotId::KF__Kokiri_Village__Sarias_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => 13038,
         (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
             12369
         }
@@ -178,7 +184,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         }
         (
             SpotId::KF__Kokiri_Village__Midos_Guardpost,
-            SpotId::KF__Kokiri_Village__Knowitall_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
         ) => 16031,
         (
             SpotId::KF__Kokiri_Village__Midos_Guardpost,

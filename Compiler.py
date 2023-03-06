@@ -345,10 +345,10 @@ class GameLogic(object):
                 times.append(math.sqrt(a**2 + b**2) / s)
                 continue
             if s := self.movements[m].get('xy'):
-                times.append((a + b) / s)
+                times.append((abs(a) + abs(b)) / s)
                 continue
             if sx := self.movements[m].get('x'):
-                xtimes.append(a / sx)
+                xtimes.append(abs(a) / sx)
             # x, y, fall: not mutually exclusive
             if sy := self.movements[m].get('y'):
                 ytimes.append(abs(b) / sy)
@@ -357,9 +357,9 @@ class GameLogic(object):
                 if (t := b / sfall) > 0:
                     t += jumps_down * self.movements[m].get('jump_down', 0)
                     ytimes.append(t)
-            if jumps and b < 0 and (sjump := self.movements[m].get('jump')):
-                # Direction is negative but jumps is just time taken
-                ytimes.append(jumps * sjump)
+                elif jumps and t < 0 and (sjump := self.movements[m].get('jump')):
+                    # Direction is negative but jumps is just time taken
+                    ytimes.append(jumps * sjump)
         if xtimes and ytimes:
             times.append(max(min(xtimes), min(ytimes)))
         elif xtimes and b == 0:
