@@ -20,6 +20,9 @@ fn read_key_value(
         Some("boomerang_steering") => {
             ctx.boomerang_steering = parse_bool(key, val)?;
         }
+        Some("major_glitches") => {
+            ctx.major_glitches = parse_bool(key, val)?;
+        }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
         }

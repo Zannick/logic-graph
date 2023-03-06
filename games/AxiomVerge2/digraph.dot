@@ -136,6 +136,90 @@ digraph AxiomVerge2 {
             label = "Grid 39-40,7-9";
             bgcolor = "white";
         }
+        subgraph cluster_Glacier__Grid_37_38_9 {
+            Glacier__Grid_37_38_9__East [label = "East"];
+            Glacier__Grid_37_38_9__West [label = "West"];
+            label = "Grid 37-38,9";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Vertical_Room_Top {
+            Glacier__Vertical_Room_Top__East_9 [label = "East 9"];
+            Glacier__Vertical_Room_Top__West_9 [label = "West 9"];
+            Glacier__Vertical_Room_Top__Mid_9 [label = "Mid 9"];
+            Glacier__Vertical_Room_Top__Mid_11 [label = "Mid 11"];
+            Glacier__Vertical_Room_Top__Under_Switch [label = "Under Switch"];
+            Glacier__Vertical_Room_Top__Peak [label = "Peak"];
+            label = "Vertical Room Top";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Vertical_Room_Upper_Mid {
+            Glacier__Vertical_Room_Upper_Mid__Mid_11 [label = "Mid 11"];
+            Glacier__Vertical_Room_Upper_Mid__East_12 [label = "East 12"];
+            Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner [label = "Lower West Corner"];
+            Glacier__Vertical_Room_Upper_Mid__East_13 [label = "East 13"];
+            label = "Vertical Room Upper Mid";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Vertical_Room_Left {
+            Glacier__Vertical_Room_Left__Past_Gate [label = "Past Gate"];
+            label = "Vertical Room Left";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Boomerang_Antechamber {
+            Glacier__Boomerang_Antechamber__West_13 [label = "West 13"];
+            Glacier__Boomerang_Antechamber__East_12 [label = "East 12"];
+            Glacier__Boomerang_Antechamber__Upper_East [label = "Upper East"];
+            Glacier__Boomerang_Antechamber__West_12 [label = "West 12"];
+            label = "Boomerang Antechamber";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Boomerang_Room {
+            Glacier__Boomerang_Room__West [label = "West"];
+            Glacier__Boomerang_Room__Platform [label = "Platform"];
+            Glacier__Boomerang_Room__Center_ish [label = "Center-ish"];
+            Glacier__Boomerang_Room__Pedestal [label = "Pedestal"];
+            label = "Boomerang Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Boomerang_Room_Switched {
+            Glacier__Boomerang_Room_Switched__Pedestal [label = "Pedestal"];
+            Glacier__Boomerang_Room_Switched__Upper_Gate_East [label = "Upper Gate East"];
+            Glacier__Boomerang_Room_Switched__Center_Ledge [label = "Center Ledge"];
+            Glacier__Boomerang_Room_Switched__Platform [label = "Platform"];
+            Glacier__Boomerang_Room_Switched__Upper_West [label = "Upper West"];
+            label = "Boomerang Room Switched";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Ledge_Grab_Balcony {
+            Glacier__Ledge_Grab_Balcony__East_9 [label = "East 9"];
+            Glacier__Ledge_Grab_Balcony__Column [label = "Column"];
+            Glacier__Ledge_Grab_Balcony__Gate_Ledge [label = "Gate Ledge"];
+            label = "Ledge Grab Balcony";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Ledge_Grab_Room {
+            Glacier__Ledge_Grab_Room__East_11 [label = "East 11"];
+            Glacier__Ledge_Grab_Room__Mid_35 [label = "Mid 35"];
+            Glacier__Ledge_Grab_Room__Mid_34 [label = "Mid 34"];
+            Glacier__Ledge_Grab_Room__Cliff [label = "Cliff"];
+            label = "Ledge Grab Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Ledge_Grab_Area {
+            Glacier__Ledge_Grab_Area__Cliff_Bottom [label = "Cliff Bottom"];
+            Glacier__Ledge_Grab_Area__Pedestal [label = "Pedestal"];
+            Glacier__Ledge_Grab_Area__Gate [label = "Gate"];
+            label = "Ledge Grab Area";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Ledge_Grab_Upper {
+            Glacier__Ledge_Grab_Upper__West [label = "West"];
+            Glacier__Ledge_Grab_Upper__Lower_Platform [label = "Lower Platform"];
+            Glacier__Ledge_Grab_Upper__Upper_Platform [label = "Upper Platform"];
+            Glacier__Ledge_Grab_Upper__Fork [label = "Fork"];
+            label = "Ledge Grab Upper";
+            bgcolor = "white";
+        }
         subgraph cluster_Glacier__Apocalypse_Entry {
             Glacier__Apocalypse_Entry__West [label = "West"];
             Glacier__Apocalypse_Entry__Terminal [label = "Terminal"];
@@ -183,5 +267,49 @@ digraph AxiomVerge2 {
     Glacier__Compass_Room__East -> Glacier__Grid_43_10_11__Lower;
     Glacier__Compass_Room__West -> Glacier__The_Big_Drop__East;
     Glacier__The_Big_Drop__East -> Glacier__Compass_Room__West;
+    Glacier__Revival__West -> Glacier__Grid_39_40_7_9__Upper_East;
+    Glacier__Grid_39_40_7_9__Upper_East -> Glacier__Revival__West;
+    Glacier__Grid_39_40_7_9__West -> Glacier__Grid_37_38_9__East;
+    Glacier__Grid_37_38_9__East -> Glacier__Grid_39_40_7_9__West;
+    Glacier__Grid_37_38_9__West -> Glacier__Vertical_Room_Top__East_9;
+    Glacier__Vertical_Room_Top__East_9 -> Glacier__Grid_37_38_9__West;
+    Glacier__Vertical_Room_Top__East_9 -> Glacier__Vertical_Room_Top__Peak;
+    Glacier__Vertical_Room_Top__West_9 -> Glacier__Ledge_Grab_Balcony__East_9;
+    Glacier__Vertical_Room_Top__Mid_9 -> Glacier__Vertical_Room_Top__Peak;
+    Glacier__Vertical_Room_Top__Mid_11 -> Glacier__Vertical_Room_Top__Mid_9;
+    Glacier__Vertical_Room_Top__Mid_11 -> Glacier__Vertical_Room_Upper_Mid__Mid_11;
+    Glacier__Vertical_Room_Top__Under_Switch -> Glacier__Vertical_Room_Top__Mid_9;
+    Glacier__Vertical_Room_Top__Under_Switch -> Glacier__Vertical_Room_Left__Past_Gate;
+    Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Vertical_Room_Top__Under_Switch;
+    Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Ledge_Grab_Room__East_11;
+    Glacier__Boomerang_Antechamber__West_13 -> Glacier__Vertical_Room_Upper_Mid__East_13;
+    Glacier__Boomerang_Antechamber__East_12 -> Glacier__Boomerang_Room__West;
+    Glacier__Boomerang_Antechamber__Upper_East -> Glacier__Boomerang_Room_Switched__Upper_West;
+    Glacier__Boomerang_Antechamber__West_12 -> Glacier__Vertical_Room_Upper_Mid__East_12;
+    Glacier__Boomerang_Room__West -> Glacier__Boomerang_Antechamber__East_12;
+    Glacier__Boomerang_Room__Platform -> Glacier__Boomerang_Room_Switched__Platform;
+    Glacier__Boomerang_Room__Center_ish -> Glacier__Boomerang_Room_Switched__Center_Ledge;
+    Glacier__Boomerang_Room__Pedestal -> Glacier__Boomerang_Room_Switched__Pedestal;
+    Glacier__Boomerang_Room_Switched__Pedestal -> Glacier__Boomerang_Room__Pedestal;
+    Glacier__Boomerang_Room_Switched__Platform -> Glacier__Boomerang_Room__Platform;
+    Glacier__Boomerang_Room_Switched__Upper_West -> Glacier__Boomerang_Antechamber__Upper_East;
+    Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Vertical_Room_Top__West_9;
+    Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Ledge_Grab_Balcony__Column;
+    Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Vertical_Room_Left__Past_Gate;
+    Glacier__Ledge_Grab_Balcony__Column -> Glacier__Ledge_Grab_Room__Mid_35;
+    Glacier__Ledge_Grab_Balcony__Gate_Ledge -> Glacier__Ledge_Grab_Balcony__Column;
+    Glacier__Ledge_Grab_Room__East_11 -> Glacier__Vertical_Room_Left__Past_Gate;
+    Glacier__Ledge_Grab_Room__Mid_35 -> Glacier__Ledge_Grab_Upper__Fork;
+    Glacier__Ledge_Grab_Room__Cliff -> Glacier__Ledge_Grab_Area__Cliff_Bottom;
+    Glacier__Ledge_Grab_Area__Cliff_Bottom -> Glacier__Ledge_Grab_Room__Cliff;
+    Glacier__Ledge_Grab_Area__Pedestal -> Glacier__Ledge_Grab_Upper__West;
+    Glacier__Ledge_Grab_Area__Gate -> Glacier__Ledge_Grab_Upper__West;
+    Glacier__Ledge_Grab_Upper__West -> Glacier__Ledge_Grab_Area__Gate;
+    Glacier__Ledge_Grab_Upper__West -> Glacier__Ledge_Grab_Area__Pedestal;
+    Glacier__Ledge_Grab_Upper__Lower_Platform -> Glacier__Ledge_Grab_Upper__Upper_Platform;
+    Glacier__Ledge_Grab_Upper__Upper_Platform -> Glacier__Ledge_Grab_Upper__Fork;
+    Glacier__Ledge_Grab_Upper__Fork -> Glacier__Ledge_Grab_Balcony__Column;
+    Glacier__Ledge_Grab_Upper__Fork -> Glacier__Ledge_Grab_Balcony__Gate_Ledge;
+    Glacier__Ledge_Grab_Upper__Fork -> Glacier__Ledge_Grab_Room__Mid_35;
     Glacier__Apocalypse_Entry__West -> Glacier__Grid_43_10_11__East;
 }

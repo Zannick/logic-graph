@@ -127,7 +127,7 @@ areas:
       locations:
         - name: Table
           item: Compass
-          time: 0
+          tags: [standing]
     - name: West  # This is also an autosave location in the early game, also irrelevant.
       coord: [42.05, 11]
       exits:
@@ -160,17 +160,370 @@ areas:
           time: 1.2
     - name: West
       coord: [41.05, 8]
+      exits:
+        - to: Grid 39-40,7-9 > Upper East
+          tags: [xshift]
 
 - name: Grid 39-40,7-9
   spots:
     - name: Upper East
       coord: [40.95, 8]
+      exits:
+        - to: Revival > West
+          tags: [xshift]
     - name: West
       coord: [39.05, 9]
       local:
         - to: Upper East
           thru: [[40.0, 8.5], [40.0, 8.4]]
-          jumps: [2, 1, 2]
+          jumps: [2, 1, 1]
+      exits:
+        - to: Grid 37-38,9 > East
+          tags: [xshift]
+
+- name: Grid 37-38,9
+  spots:
+    - name: East
+      coord: [38.95, 9]
+      exits:
+        - to: Grid 39-40,7-9 > West
+          tags: [xshift]
+    - name: West
+      coord: [37.05, 9]
+      exits:
+        - to: Vertical Room Top > East 9
+          tags: [xshift]
+
+- name: Vertical Room Top
+  spots:
+    - name: East 9
+      coord: [36.95, 9]
+      local:
+        - to: Mid 11
+          jumps_down: 1
+      exits:
+        - to: Grid 37-38,9 > West
+          tags: [xshift]
+        - to: Peak
+          req: $grab
+          time: 2.4
+    - name: West 9
+      coord: [36.05, 9]
+      local:
+        - to: Mid 11
+          jumps_down: 1
+        - to: Peak
+          thru: [36.5, 9]
+      exits:
+        - to: Ledge Grab Balcony > East 9
+          tags: [xshift]
+    - name: Mid 9
+      coord: [36.5, 9]
+      exits:
+        - to: Peak
+          req: $grab
+          time: 2
+    - name: Mid 11
+      coord: [36.5, 11.5]
+      local:
+        - to: Under Switch
+          jumps: 4
+      exits:
+        - to: Mid 9
+          req: $grab
+          time: 10
+        - to: Vertical Room Upper Mid > Mid 11
+          tags: [overlap]
+    - name: Under Switch
+      coord: [36.2, 11]
+      local:
+        - to: Mid 9
+          jumps: 14
+        - to: West 9
+          jumps: 14
+      locations:
+        - name: Switch
+          items: Switch_36_11
+          req: Boomerang
+          tags: [event]
+      exits:
+        - to: Mid 9
+          req: $grab
+          time: 7.5
+        - to: Vertical Room Left > Past Gate
+          req: Switch_36_11
+          time: 0.1
+    - name: Peak
+      coord: [36.4, 8.5]
+      locations:
+        - name: Flask
+          item: Flask
+          tags: [flask]
+
+- name: Vertical Room Upper Mid
+  spots:
+    - name: Mid 11  # This spot is in both areas, by way of a reversible instant exit
+      coord: [36.5, 11.5]
+      local:
+        - to: Lower West Corner
+          jumps_down: 2
+        - to: East 13
+          jumps_down: 2
+    - name: East 12
+      coord: [36.9, 11.7]
+      local:
+        - to: Mid 11
+          jumps: 2
+    - name: Lower West Corner
+      coord: [36.3, 12.4]
+      local:
+        - to: Mid 11
+          jumps: 7
+    - name: East 13
+      coord: [36.95, 13]
+      local:
+        - to: Lower West Corner
+          jumps: 3
+    # TODO: bottom spot and exit
+
+- name: Vertical Room Left
+  spots:
+    - name: Past Gate
+      coord: [36.05, 11]
+      exits:
+        - to: Vertical Room Top > Under Switch
+          req: Switch_36_11
+          time: 0.1
+        - to: Ledge Grab Room > East 11
+          tags: [xshift]
+
+- name: Boomerang Antechamber
+  spots:
+    - name: West 13
+      coord: [37.05, 13]
+      local:
+        - to: East 12
+          jumps: 9
+      exits:
+        - to: Vertical Room Upper Mid > East 13
+          tags: [xshift]
+    - name: East 12
+      coord: [38.95, 12]
+      local:
+        - to: Upper East
+          thru: [38.2, 11.6]
+          jumps: [1, 2]
+        - to: West 12
+          jumps: 2
+      exits:
+        - to: Boomerang Room > West
+          tags: [xshift]
+    - name: Upper East
+      coord: [38.95, 11.5]
+      exits:
+        - to: Boomerang Room Switched > Upper West
+          req: Switch_40_12
+          tags: [xshift]
+    - name: West 12
+      coord: [37.05, 11.5]
+      local:
+        - to: West 13
+          thru: [38, 12]
+      exits:
+        - to: Vertical Room Upper Mid > East 12
+          tags: [xshift]
+
+- name: Boomerang Room
+  spots:
+    - name: West
+      coord: [39.05, 12]
+      local:
+        - to: Platform
+          jumps: 2
+      exits:
+        - to: Boomerang Antechamber > East 12
+          tags: [xshift]
+    - name: Platform
+      coord: [39.4, 11.75]
+      exits:
+        - to: Boomerang Room Switched > Platform
+          req: Switch_40_12
+          tags: [overlap]
+    - name: Center-ish
+      coord: [39.8, 11.75]
+      exits:
+        - to: Boomerang Room Switched > Center Ledge
+          req: $grab and Switch_40_12
+    - name: Pedestal
+      coord: [40.5, 12]
+      local:
+        - to: Center-ish
+          jumps: 1
+      locations:
+        - name: Item
+          item: Boomerang
+          tags: [standing]
+        - name: Switch
+          item: Switch_40_12
+          req: Boomerang
+          tags: [event]
+      exits:
+        - to: Boomerang Room Switched > Pedestal
+          req: Switch_40_12
+          tags: [overlap]
+
+- name: Boomerang Room Switched
+  spots:
+    - name: Pedestal
+      coord: [40.5, 12]
+      local:
+        - to: Upper Gate East
+          jumps: 2
+      exits:
+        - to: Boomerang Room > Pedestal
+          tags: [overlap]
+    - name: Upper Gate East
+      coord: [40.3, 11.5]
+    - name: Center Ledge
+      coord: [40.0, 11.5]
+    - name: Platform
+      coord: [39.4, 11.75]
+      local:
+        - to: Upper West
+          jumps: 1
+      exits:
+        - to: Boomerang Room > Platform
+          tags: [overlap]
+    - name: Upper West
+      coord: [39.05, 11.5]
+      exits:
+        - to: Boomerang Antechamber > Upper East
+          tags: [xshift]
+
+- name: Ledge Grab Balcony
+  spots:
+    - name: East 9
+      coord: [35.95, 9]
+      exits:
+        - to: Vertical Room Top > West 9
+          tags: [xshift]
+        - to: Column
+          req: $grab
+          time: 2
+        - to: Vertical Room Left > Past Gate
+          req: $offset
+          time: 20
+          tags: [xshift, offset]
+    - name: Column
+      coord: [35.5, 8.7]
+      exits:
+        - to: Ledge Grab Room > Mid 35
+          time: 2.25s
+    - name: Gate Ledge
+      coord: [35.0, 8.8]
+      exits:
+        - to: Column
+          req: $grab
+          time: 2
+
+- name: Ledge Grab Room
+  spots:
+    - name: East 11
+      coord: [35.95, 11]
+      exits:
+        - to: Vertical Room Left > Past Gate
+          tags: [xshift]
+    - name: Mid 35
+      coord: [35.4, 11]
+      local:
+        - to: Mid 34
+          jumps: 3
+      exits:
+        - to: Ledge Grab Upper > Fork
+          req: $grab
+          time: 6.1
+    - name: Mid 34
+      coord: [34.5, 10.5]
+    - name: Cliff
+      coord: [34.0, 10.6]
+      local:
+        - to: Mid 34
+          jumps: 1
+      exits:
+        - to: Ledge Grab Area > Cliff Bottom
+          time: 0.6
+
+- name: Ledge Grab Area
+  spots:
+    - name: Cliff Bottom
+      coord: [33.9, 11]
+      local:
+        - to: Pedestal
+          jumps: 1
+      locations:
+        - name: Quick Grab
+          item: Ledge_Grab
+          canon: Ledge_Grab
+          time: 6
+          tags: [urn]
+      exits:
+        - to: Ledge Grab Room > Cliff
+          req: $grab
+    - name: Pedestal
+      coord: [33.5, 10.8]
+      locations:
+        - name: Item
+          item: Ledge_Grab
+          canon: Ledge_Grab
+          tags: [urn]
+      exits:
+        - to: Ledge Grab Upper > West
+          req: $grab
+          time: 4
+    - name: Gate
+      coord: [33.1, 11]
+      local:
+        - to: Pedestal
+          jumps: 1
+      exits:
+        - to: Ledge Grab Upper > West
+          req: $grab
+          time: 3.1
+
+- name: Ledge Grab Upper
+  spots:
+    - name: West
+      coord: [33.3, 10]
+      local:
+        - to: Upper Platform
+          jumps: 1
+      exits:
+        - to: Ledge Grab Area > Gate
+        - to: Ledge Grab Area > Pedestal
+    - name: Lower Platform
+      coord: [34.3, 10.3]
+      exits:
+        - to: Upper Platform
+          req: $grab
+          time: 2
+    - name: Upper Platform
+      coord: [34.4, 9.7]
+      exits:
+        - to: Fork
+          req: $grab
+          time: 2.4
+    - name: Fork
+      coord: [35, 9.4]
+      exits:
+        - to: Ledge Grab Balcony > Column
+          req: $grab
+          time: 2.4
+        - to: Ledge Grab Balcony > Gate Ledge
+          req: $grab
+          time: 2
+        - to: Ledge Grab Room > Mid 35
+          time: 2.5
+
 
 - name: Apocalypse Entry
   spots:

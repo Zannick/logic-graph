@@ -32,9 +32,25 @@ pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
 }
+pub fn access_boomerang(ctx: &Context) -> bool {
+    // Boomerang
+    ctx.has(Item::Boomerang)
+}
 pub fn access_break_box(ctx: &Context) -> bool {
     // $break_box
     helper__break_box!(ctx)
+}
+pub fn access_flask(ctx: &Context) -> bool {
+    // Flask
+    ctx.has(Item::Flask)
+}
+pub fn access_grab(ctx: &Context) -> bool {
+    // $grab
+    helper__grab!(ctx)
+}
+pub fn access_grab_and_switch_40_12(ctx: &Context) -> bool {
+    // $grab and Switch_40_12
+    (helper__grab!(ctx) && ctx.has(Item::Switch_40_12))
 }
 pub fn access_mist_upgraded(ctx: &Context) -> bool {
     // Mist_Upgraded
@@ -44,6 +60,10 @@ pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
+pub fn access_offset(ctx: &Context) -> bool {
+    // $offset
+    helper__offset!(ctx)
+}
 pub fn access_placeholder(ctx: &Context) -> bool {
     // Placeholder
     ctx.has(Item::Placeholder)
@@ -51,6 +71,14 @@ pub fn access_placeholder(ctx: &Context) -> bool {
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power
     ctx.has(Item::Station_Power)
+}
+pub fn access_switch_36_11(ctx: &Context) -> bool {
+    // Switch_36_11
+    ctx.has(Item::Switch_36_11)
+}
+pub fn access_switch_40_12(ctx: &Context) -> bool {
+    // Switch_40_12
+    ctx.has(Item::Switch_40_12)
 }
 pub fn access_within_antarctica(ctx: &Context) -> bool {
     // WITHIN `Antarctica`
@@ -64,6 +92,13 @@ pub fn action_energy__1(ctx: &mut Context) {
     ctx.energy += 1;
 }
 pub fn action_has_effect_energy__1(ctx: &Context) -> bool {
+    0 != 1
+}
+pub fn action_flasks__1(ctx: &mut Context) {
+    // ^flasks += 1
+    ctx.flasks += 1;
+}
+pub fn action_has_effect_flasks__1(ctx: &Context) -> bool {
     0 != 1
 }
 pub fn action_position__glacier__revival__save_point_save__glacier__revival__save_point(

@@ -21,3 +21,36 @@ macro_rules! helper__break_box {
         helper__melee!($ctx)
     }};
 }
+
+/// $grab (  )
+/// ^mode != 'drone' and Ledge_Grab
+#[macro_export]
+macro_rules! helper__grab {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Ledge_Grab))
+    }};
+}
+
+/// $hook (  )
+/// ^mode == 'drone' and Slingshot_Hook
+#[macro_export]
+macro_rules! helper__hook {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
+    }};
+}
+
+/// $offset (  )
+/// major_glitches and $melee
+#[macro_export]
+macro_rules! helper__offset {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.major_glitches && helper__melee!($ctx))
+    }};
+}

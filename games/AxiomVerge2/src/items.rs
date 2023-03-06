@@ -10,13 +10,19 @@ pub enum Item {
     None,
     Amashilama,
     Apocalypse_Bomb,
+    Boomerang,
     Compass,
     Escape,
+    Flask,
     Ice_Axe,
+    Ledge_Grab,
     Mist_Upgraded,
     Notes_2053_02_27,
     Placeholder,
+    Slingshot_Hook,
     Station_Power,
+    Switch_36_11,
+    Switch_40_12,
 }
 impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -24,13 +30,19 @@ impl fmt::Display for Item {
             Item::None => write!(f, "{}", "None"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
+            Item::Boomerang => write!(f, "{}", "Boomerang"),
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Escape => write!(f, "{}", "Escape"),
+            Item::Flask => write!(f, "{}", "Flask"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
+            Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             Item::Mist_Upgraded => write!(f, "{}", "Mist_Upgraded"),
             Item::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             Item::Placeholder => write!(f, "{}", "Placeholder"),
+            Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
+            Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
+            Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
         }
     }
 }
@@ -42,13 +54,19 @@ impl std::str::FromStr for Item {
         match s {
             "Amashilama" => Ok(Item::Amashilama),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
+            "Boomerang" => Ok(Item::Boomerang),
             "Compass" => Ok(Item::Compass),
             "Escape" => Ok(Item::Escape),
+            "Flask" => Ok(Item::Flask),
             "Ice_Axe" => Ok(Item::Ice_Axe),
+            "Ledge_Grab" => Ok(Item::Ledge_Grab),
             "Mist_Upgraded" => Ok(Item::Mist_Upgraded),
             "Notes_2053_02_27" => Ok(Item::Notes_2053_02_27),
             "Placeholder" => Ok(Item::Placeholder),
+            "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
             "Station_Power" => Ok(Item::Station_Power),
+            "Switch_36_11" => Ok(Item::Switch_36_11),
+            "Switch_40_12" => Ok(Item::Switch_40_12),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }
     }

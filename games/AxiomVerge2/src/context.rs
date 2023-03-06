@@ -63,14 +63,21 @@ pub struct Context {
     pub flasks: i32,
     // settings
     pub boomerang_steering: bool,
+    pub major_glitches: bool,
     // items
     pub amashilama: bool,
     pub apocalypse_bomb: bool,
+    pub boomerang: bool,
+    pub flask: bool,
     pub ice_axe: bool,
+    pub ledge_grab: bool,
     pub mist_upgraded: bool,
     pub notes_2053_02_27: bool,
     pub placeholder: bool,
+    pub slingshot_hook: bool,
     pub station_power: bool,
+    pub switch_36_11: bool,
+    pub switch_40_12: bool,
     // other
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
@@ -82,17 +89,23 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 7;
+    const NUM_ITEMS: i32 = 13;
 
     fn has(&self, item: Item) -> bool {
         match item {
             Item::Amashilama => self.amashilama,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
+            Item::Boomerang => self.boomerang,
+            Item::Flask => self.flask,
             Item::Ice_Axe => self.ice_axe,
+            Item::Ledge_Grab => self.ledge_grab,
             Item::Mist_Upgraded => self.mist_upgraded,
             Item::Notes_2053_02_27 => self.notes_2053_02_27,
             Item::Placeholder => self.placeholder,
+            Item::Slingshot_Hook => self.slingshot_hook,
             Item::Station_Power => self.station_power,
+            Item::Switch_36_11 => self.switch_36_11,
+            Item::Switch_40_12 => self.switch_40_12,
             _ => false,
         }
     }
@@ -100,11 +113,17 @@ impl context::Ctx for Context {
         match item {
             Item::Amashilama => self.amashilama.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
+            Item::Boomerang => self.boomerang.into(),
+            Item::Flask => self.flask.into(),
             Item::Ice_Axe => self.ice_axe.into(),
+            Item::Ledge_Grab => self.ledge_grab.into(),
             Item::Mist_Upgraded => self.mist_upgraded.into(),
             Item::Notes_2053_02_27 => self.notes_2053_02_27.into(),
             Item::Placeholder => self.placeholder.into(),
+            Item::Slingshot_Hook => self.slingshot_hook.into(),
             Item::Station_Power => self.station_power.into(),
+            Item::Switch_36_11 => self.switch_36_11.into(),
+            Item::Switch_40_12 => self.switch_40_12.into(),
             _ => 0,
         }
     }
@@ -117,8 +136,18 @@ impl context::Ctx for Context {
             Item::Apocalypse_Bomb => {
                 self.apocalypse_bomb = true;
             }
+            Item::Boomerang => {
+                self.boomerang = true;
+            }
+            Item::Flask => {
+                self.flask = true;
+                rules::action_flasks__1(self);
+            }
             Item::Ice_Axe => {
                 self.ice_axe = true;
+            }
+            Item::Ledge_Grab => {
+                self.ledge_grab = true;
             }
             Item::Mist_Upgraded => {
                 self.mist_upgraded = true;
@@ -129,8 +158,17 @@ impl context::Ctx for Context {
             Item::Placeholder => {
                 self.placeholder = true;
             }
+            Item::Slingshot_Hook => {
+                self.slingshot_hook = true;
+            }
             Item::Station_Power => {
                 self.station_power = true;
+            }
+            Item::Switch_36_11 => {
+                self.switch_36_11 = true;
+            }
+            Item::Switch_40_12 => {
+                self.switch_40_12 = true;
             }
             _ => (),
         }

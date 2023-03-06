@@ -124,7 +124,7 @@ areas:
         - name: Note
           item: Notes_2053_02_27
           canon: Notes_2053_02_27
-          tags: [note]  # Tag is on the item, not the location necessarily
+          tags: [standing]  # Tag is on the item, not the location necessarily
       exits:
         - to: Building 2U > Stairs
 
