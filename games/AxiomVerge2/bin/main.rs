@@ -6,7 +6,7 @@ use analyzer::algo::search;
 use libaxiom_verge2::*;
 use std::env;
 
-fn main() {
+fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
     let (world, context) =
         settings::load_settings(if args.len() > 1 { Some(&args[1]) } else { None });
@@ -16,5 +16,6 @@ fn main() {
         } else {
             "Cannot win on default settings"
         });
-    search(&world, context);
+    search(&world, context)?;
+    Ok(())
 }

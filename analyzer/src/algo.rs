@@ -7,6 +7,8 @@ use crate::heap::LimitedHeap;
 use crate::minimize::*;
 use crate::world::*;
 use std::fmt::Debug;
+use std::fs::File;
+use std::io::Write;
 
 pub fn explore<W, T, L, E>(
     world: &W,
@@ -191,7 +193,7 @@ where
     }
 }
 
-pub fn search<W, T, L, E>(world: &W, mut ctx: T)
+pub fn search<W, T, L, E>(world: &W, mut ctx: T) -> Result<(), std::io::Error>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -217,11 +219,19 @@ where
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
     let mut m_iters = 0;
+    let mut solution_count = 0;
     let mut winner = if wonctx.elapsed() < m.elapsed() {
         wonctx
     } else {
         m
     };
+
+    let mut file = File::create("data/solutions.txt")?;
+    writeln!(file, "Solution #{}, est. {}ms:", solution_count, winner.elapsed())?;
+    writeln!(file, "in short:\n{}", winner.history_preview())?;
+    writeln!(file, "full:\n{}\n\n", winner.history_str())?;
+    solution_count += 1;
+
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
             println!(
@@ -231,6 +241,12 @@ where
                 ctx.elapsed(),
                 heap.len()
             );
+
+            writeln!(file, "Solution #{}, est. {}ms:", solution_count, ctx.elapsed())?;
+            writeln!(file, "in short:\n{}", ctx.history_preview())?;
+            writeln!(file, "in full:\n{}\n\n", ctx.history_str())?;
+            solution_count += 1;
+
             heap.set_lenient_max_time(ctx.elapsed());
             if !ctx.minimize {
                 let mut newctx =
@@ -280,6 +296,7 @@ where
     println!(
         "Final result: est. {}ms\n{}",
         winner.elapsed(),
-        winner.history_str()
+        winner.history_preview()
     );
+    Ok(())
 }

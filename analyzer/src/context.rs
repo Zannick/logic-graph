@@ -68,14 +68,14 @@ where
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            History::Warp(warp, dest) => write!(f, "{}warp to {}", warp, dest),
-            History::Get(item, loc) => write!(f, "Collect {} from {}", item, loc),
-            History::Move(exit) => write!(f, "Take exit {}", exit),
+            History::Warp(warp, dest) => write!(f, "  {}warp to {}", warp, dest),
+            History::Get(item, loc) => write!(f, "* Collect {} from {}", item, loc),
+            History::Move(exit) => write!(f, "  Take exit {}", exit),
             History::MoveGet(item, exit) => {
-                write!(f, "Take hybrid exit {}, getting {}", exit, item)
+                write!(f, "* Take hybrid exit {}, getting {}", exit, item)
             }
-            History::MoveLocal(spot) => write!(f, "Move to {}", spot),
-            History::Activate(action) => write!(f, "Do {}", action),
+            History::MoveLocal(spot) => write!(f, "  Move to {}", spot),
+            History::Activate(action) => write!(f, "  Do {}", action),
         }
     }
 }
@@ -150,7 +150,9 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 
     pub fn history_rev(&self) -> impl Iterator<Item = History<T>> {
-        HistoryIterator { next: self.history.clone() }
+        HistoryIterator {
+            next: self.history.clone(),
+        }
     }
 
     pub fn elapse(&mut self, t: i32) {
@@ -323,6 +325,18 @@ impl<T: Ctx> ContextWrapper<T> {
         let mut vec: Vec<String> = self
             .history_rev()
             .map(|h| h.to_string())
+            .collect::<Vec<String>>();
+        vec.reverse();
+        vec.join("\n")
+    }
+
+    pub fn history_preview(&self) -> String {
+        let mut vec: Vec<String> = self
+            .history_rev()
+            .filter_map(|h| match h {
+                History::Get(..) | History::MoveGet(..) => Some(h.to_string()),
+                _ => None,
+            })
             .collect::<Vec<String>>();
         vec.reverse();
         vec.join("\n")

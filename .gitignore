@@ -15,3 +15,5 @@ target/
 *.data.*
 *.out
 *.out.*
+# Output
+data/
