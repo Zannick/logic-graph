@@ -581,6 +581,23 @@ class GameLogic(object):
     
 
     @cached_property
+    def adjacent_regions(self):
+        conns = set()
+        for r in self.regions:
+            for a in r['areas']:
+                for s in a['spots']:
+                    for ex in s.get('exits', ()):
+                        target = ex['to'].split('>')
+                        if len(target) == 3:
+                            t = target[0].strip()
+                            if r['id'] < t:
+                                conns.add((r['id'], t))
+                            else:
+                                conns.add((t, r['id']))
+        return conns
+
+
+    @cached_property
     def settings(self):
         sd = self._info.get('settings', {})
 
@@ -904,6 +921,7 @@ class GameLogic(object):
         self.context_enter_rules
         self.context_here_overrides
         self.all_connections
+        self.adjacent_regions
         files = {
             '.': ['Cargo.toml'],
             'data': ['digraph.dot', 'digraph.mmd'],
