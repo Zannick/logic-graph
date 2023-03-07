@@ -30,6 +30,7 @@ GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time',
 REGION_FIELDS = {'name', 'short', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'here'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local'}
+LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 
@@ -571,6 +572,15 @@ class GameLogic(object):
 
 
     @cached_property
+    def all_connections(self):
+        conns = set()
+        for spot in self.spots():
+            for ex in spot.get('exits', ()):
+                conns.add((spot['id'], get_exit_target(ex)))
+        return conns
+    
+
+    @cached_property
     def settings(self):
         sd = self._info.get('settings', {})
 
@@ -893,8 +903,10 @@ class GameLogic(object):
         self.movement_tables
         self.context_enter_rules
         self.context_here_overrides
+        self.all_connections
         files = {
-            '.': ['Cargo.toml', 'digraph.dot'],
+            '.': ['Cargo.toml'],
+            'data': ['digraph.dot', 'digraph.mmd'],
             'src': ['lib.rs', 'items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
                     'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs'],
             'benches': ['bench.rs'],

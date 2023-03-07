@@ -1,0 +1,22 @@
+{{ '%%{init: {"flowchart": {"htmlLabels": false}}}%%' }}
+graph LR
+
+%% for r in regions
+subgraph {{ r.id }}
+%% for a in r.areas
+    subgraph {{ a.id }}[{{ a.name }}]
+%% for s in a.spots
+        {{ s.id }}({{ s.name }});
+%% endfor
+    end
+%% endfor
+end
+%% endfor
+
+%% for a,b in all_connections
+%% if (b,a) not in all_connections
+{{ a }} --> {{ b }}
+%% elif a < b
+{{ a }} <--> {{ b }}
+%% endif
+%% endfor

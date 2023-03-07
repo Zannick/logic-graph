@@ -9,6 +9,7 @@ target/
 .antlr/
 *.lock
 *.setting
+*.png
 *.svg
 # Profile data
 *.data
@@ -16,4 +17,4 @@ target/
 *.out
 *.out.*
 # Output
-data/
+**/data/*.txt
