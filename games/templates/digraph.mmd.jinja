@@ -13,9 +13,6 @@ subgraph {{ r.id }}
 end
 %% endfor
 
-%% for r1, r2 in adjacent_regions|sort
-{{ r1 }} ~~~ {{ r2 }}
-%% endfor
 %% for a,b in all_connections|sort
 %% if (b,a) not in all_connections
 {{ a }} --> {{ b }}
