@@ -593,6 +593,8 @@ class GameLogic(object):
         for spot in self.spots():
             for ex in spot.get('exits', ()):
                 conns.add((spot['id'], get_exit_target(ex)))
+            for hybrid in spot.get('hybrid', ()):
+                conns.add((spot['id'], get_exit_target(hybrid)))
         return conns
     
 

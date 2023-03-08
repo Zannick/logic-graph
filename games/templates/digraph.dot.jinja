@@ -16,8 +16,11 @@ digraph {{ game }} {
     }
 %% endfor
 %% for s in gl.spots()
-%% for e in s.exits
+%% for e in s.exits|sort(attribute='id')
     {{ s.id }} -> {{ e|get_exit_target }};
+%% endfor
+%% for h in s.hybrid|sort(attribute='id')
+    {{ s.id }} -> {{ h|get_exit_target }};
 %% endfor
 %% endfor
 }

@@ -248,15 +248,15 @@ digraph AxiomVerge2 {
     Antarctica__East__Building_2_Entry -> Antarctica__Building_2L__Entry;
     Antarctica__East__Building_2_Upper -> Antarctica__Building_2U__Door;
     Antarctica__East__Building_2_Upper -> Antarctica__Top__Power_Entry;
-    Antarctica__Building_2L__Entry -> Antarctica__East__Building_2_Entry;
     Antarctica__Building_2L__Entry -> Antarctica__Building_2U__Stairs;
+    Antarctica__Building_2L__Entry -> Antarctica__East__Building_2_Entry;
     Antarctica__Building_2L__Entry -> Antarctica__Freight_Elevator__Left;
-    Antarctica__Building_2U__Stairs -> Antarctica__Building_2U_Corner__Behind_Boxes;
     Antarctica__Building_2U__Stairs -> Antarctica__Building_2L__Entry;
+    Antarctica__Building_2U__Stairs -> Antarctica__Building_2U_Corner__Behind_Boxes;
     Antarctica__Building_2U__Door -> Antarctica__East__Building_2_Upper;
     Antarctica__Building_2U_Corner__Behind_Boxes -> Antarctica__Building_2U__Stairs;
-    Antarctica__Top__Power_Entry -> Antarctica__Power_Room__Entry;
     Antarctica__Top__Power_Entry -> Antarctica__East__Building_2_Upper;
+    Antarctica__Top__Power_Entry -> Antarctica__Power_Room__Entry;
     Antarctica__Power_Room__Entry -> Antarctica__Top__Power_Entry;
     Antarctica__Freight_Elevator__Left -> Antarctica__Building_2L__Entry;
     Antarctica__Freight_Elevator__Controls -> Glacier__Dock_Elevator__Elevator;
@@ -275,6 +275,7 @@ digraph AxiomVerge2 {
     Glacier__Compass_Room__East -> Glacier__Grid_43_10_11__Lower;
     Glacier__Compass_Room__West -> Glacier__The_Big_Drop__East;
     Glacier__The_Big_Drop__East -> Glacier__Compass_Room__West;
+    Glacier__The_Big_Drop__Water_Surface -> Glacier__Revival__Save_Point;
     Glacier__Revival__West -> Glacier__Grid_39_40_7_9__Upper_East;
     Glacier__Grid_39_40_7_9__Upper_East -> Glacier__Revival__West;
     Glacier__Grid_39_40_7_9__West -> Glacier__Grid_37_38_9__East;
@@ -291,8 +292,8 @@ digraph AxiomVerge2 {
     Glacier__Vertical_Room_Upper_Mid__Mid_11 -> Glacier__Vertical_Room_Top__Mid_11;
     Glacier__Vertical_Room_Upper_Mid__East_12 -> Glacier__Boomerang_Antechamber__West_12;
     Glacier__Vertical_Room_Upper_Mid__East_13 -> Glacier__Boomerang_Antechamber__West_13;
-    Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Vertical_Room_Top__Under_Switch;
     Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Ledge_Grab_Room__East_11;
+    Glacier__Vertical_Room_Left__Past_Gate -> Glacier__Vertical_Room_Top__Under_Switch;
     Glacier__Boomerang_Antechamber__West_13 -> Glacier__Vertical_Room_Upper_Mid__East_13;
     Glacier__Boomerang_Antechamber__East_12 -> Glacier__Boomerang_Room__West;
     Glacier__Boomerang_Antechamber__Upper_East -> Glacier__Boomerang_Room_Switched__Upper_West;
@@ -304,9 +305,9 @@ digraph AxiomVerge2 {
     Glacier__Boomerang_Room_Switched__Pedestal -> Glacier__Boomerang_Room__Pedestal;
     Glacier__Boomerang_Room_Switched__Platform -> Glacier__Boomerang_Room__Platform;
     Glacier__Boomerang_Room_Switched__Upper_West -> Glacier__Boomerang_Antechamber__Upper_East;
-    Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Vertical_Room_Top__West_9;
     Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Ledge_Grab_Balcony__Column;
     Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Vertical_Room_Left__Past_Gate;
+    Glacier__Ledge_Grab_Balcony__East_9 -> Glacier__Vertical_Room_Top__West_9;
     Glacier__Ledge_Grab_Balcony__Column -> Glacier__Ledge_Grab_Room__Mid_35;
     Glacier__Ledge_Grab_Balcony__Gate_Ledge -> Glacier__Ledge_Grab_Balcony__Column;
     Glacier__Ledge_Grab_Room__East_11 -> Glacier__Vertical_Room_Left__Past_Gate;
