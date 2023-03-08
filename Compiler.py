@@ -298,6 +298,8 @@ class GameLogic(object):
         for name, info in self.warps.items():
             info['name'] = inflection.camelize(name)
             info['id'] = construct_id(info['name'])
+            if 'time' not in info:
+                self._misc_errors.append(f'Warp {name} requires explicit "time" setting')
             if info['to'].startswith('^'):
                 val = info['to'][1:]
                 if val not in self.context_types:
@@ -313,6 +315,10 @@ class GameLogic(object):
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'warps')
                 info['access_id'] = self.make_funcid(info)
+            if 'do' in info:
+                info['act'] = parseAction(
+                        info['do'], name=f'{info["name"]}:do')
+                info['action_id'] = self.make_funcid(info, 'act')
 
 
     def process_global_actions(self):

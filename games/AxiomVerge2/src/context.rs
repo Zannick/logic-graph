@@ -23,9 +23,8 @@ pub mod enums {
     impl fmt::Display for Mode {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
             match self {
-                Mode::None => write!(f, "{}", "None"),
-                Mode::Drone => write!(f, "{}", "Drone"),
                 Mode::Indra => write!(f, "{}", "Indra"),
+                Mode::Drone => write!(f, "{}", "Drone"),
             }
         }
     }
@@ -68,7 +67,7 @@ pub struct Context {
     pub amashilama: bool,
     pub apocalypse_bomb: bool,
     pub boomerang: bool,
-    pub flask: bool,
+    pub health_upgrade_1: bool,
     pub ice_axe: bool,
     pub ledge_grab: bool,
     pub mist_upgraded: bool,
@@ -96,7 +95,7 @@ impl context::Ctx for Context {
             Item::Amashilama => self.amashilama,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Boomerang => self.boomerang,
-            Item::Flask => self.flask,
+            Item::Health_Upgrade_1 => self.health_upgrade_1,
             Item::Ice_Axe => self.ice_axe,
             Item::Ledge_Grab => self.ledge_grab,
             Item::Mist_Upgraded => self.mist_upgraded,
@@ -114,7 +113,7 @@ impl context::Ctx for Context {
             Item::Amashilama => self.amashilama.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Boomerang => self.boomerang.into(),
-            Item::Flask => self.flask.into(),
+            Item::Health_Upgrade_1 => self.health_upgrade_1.into(),
             Item::Ice_Axe => self.ice_axe.into(),
             Item::Ledge_Grab => self.ledge_grab.into(),
             Item::Mist_Upgraded => self.mist_upgraded.into(),
@@ -139,9 +138,8 @@ impl context::Ctx for Context {
             Item::Boomerang => {
                 self.boomerang = true;
             }
-            Item::Flask => {
-                self.flask = true;
-                rules::action_flasks__1(self);
+            Item::Health_Upgrade_1 => {
+                self.health_upgrade_1 = true;
             }
             Item::Ice_Axe => {
                 self.ice_axe = true;
@@ -170,6 +168,7 @@ impl context::Ctx for Context {
             Item::Switch_40_12 => {
                 self.switch_40_12 = true;
             }
+            Item::Flask => rules::action_flasks__1(self),
             _ => (),
         }
     }
@@ -283,7 +282,7 @@ impl Context {
             position: SpotId::Antarctica__West__Helipad,
             save: SpotId::Antarctica__West__Helipad,
             mode: enums::Mode::Indra,
-            indra: SpotId::Antarctica__West__Helipad,
+            indra: SpotId::None,
             last: SpotId::None,
             energy: 0,
             breach: false,

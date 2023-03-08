@@ -11,11 +11,11 @@ pub enum {{ name }} {
 impl fmt::Display for {{ name }} {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-%% if default
-            {{ name }}::None => write!(f, "{}", "None"),
+%% if default or default_value
+            {{ name }}::{{ default_value }} => write!(f, "{}", "{{ default_value }}"),
 %% endif
 %% for v in values|sort(attribute='id')
-            {{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),
+            {% if (v.id or v|construct_id) != default_value %}{{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),{% endif -%}
 %% endfor
         }
     }

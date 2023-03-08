@@ -199,6 +199,16 @@ impl world::Warp for Warp {
         } else { self.dest }
     }
     fn connect(&mut self, dest: SpotId) { self.dest = dest; }
+    fn prewarp(&self, ctx: &mut Context) {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+%% if 'action_id' in w:
+            WarpId::{{ w.id }} => rules::action_{{ w.action_id }}(ctx),
+%% endif
+%% endfor
+            _ => (),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default)]
@@ -314,7 +324,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::{{ loc.canon or 'None' }},
             item: Item::{{ loc.item or 'None' }},
             price: Currency::{% if loc.price and loc.price > 0 -%}
-                {{ (loc.costs or price_types[0])|capitalize }}({{ loc.price }})
+                {{ (loc.costs or price_types[0])|camelize }}({{ loc.price }})
                 {%- else %}Free{% endif %},
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
@@ -331,7 +341,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
             price: Currency::{% if ex.price and ex.price > 0 -%}
-                {{ (ex.costs or price_types[0])|capitalize }}({{ ex.price }})
+                {{ (ex.costs or price_types[0])|camelize }}({{ ex.price }})
                 {%- else %}Free{% endif %},
             loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
         },
@@ -346,7 +356,7 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::{{ a.id }},
             time: {{ (a.time * 1000)|int }},
             price: Currency::{% if a.price and a.price > 0 -%}
-                {{ (a.costs or price_types[0])|capitalize }}({{ a.price }})
+                {{ (a.costs or price_types[0])|camelize }}({{ a.price }})
                 {%- else %}Free{% endif %},
             cycle: {% if a.cycle %}Some({{ a.cycle }}){% else %}None{% endif %},
         },
@@ -397,7 +407,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             dest: {% if w.target_id.startswith('ctx') %}SpotId::None{% else %}{{ w.target_id }}{% endif %},
             time: {{ (w.time * 1000)|int }},
             price: Currency::{% if w.price and w.price > 0 -%}
-                {{ (w.costs or price_types[0])|capitalize }}({{ w.price }})
+                {{ (w.costs or price_types[0])|camelize }}({{ w.price }})
                 {%- else %}Free{% endif %},
         },
 %% endfor

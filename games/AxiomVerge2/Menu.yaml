@@ -1,0 +1,11 @@
+name: Menu
+
+areas:
+- name: Upgrade Menu
+  spots:
+    - name: Upgrades
+      locations:
+        - name: Health_Upgrade_1
+          item: Health_Upgrade_1
+          price: 1
+          costs: flasks

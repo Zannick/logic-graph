@@ -40,10 +40,6 @@ pub fn access_break_box(ctx: &Context) -> bool {
     // $break_box
     helper__break_box!(ctx)
 }
-pub fn access_flask(ctx: &Context) -> bool {
-    // Flask
-    ctx.has(Item::Flask)
-}
 pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
@@ -52,6 +48,10 @@ pub fn access_grab_and_switch_40_12(ctx: &Context) -> bool {
     // $grab and Switch_40_12
     (helper__grab!(ctx) && ctx.has(Item::Switch_40_12))
 }
+pub fn access_health_upgrade_1(ctx: &Context) -> bool {
+    // Health_Upgrade_1
+    ctx.has(Item::Health_Upgrade_1)
+}
 pub fn access_mist_upgraded(ctx: &Context) -> bool {
     // Mist_Upgraded
     ctx.has(Item::Mist_Upgraded)
@@ -59,6 +59,13 @@ pub fn access_mist_upgraded(ctx: &Context) -> bool {
 pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
+}
+pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and ^flasks > 0
+    (!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && ctx.flasks() > 0)
 }
 pub fn access_offset(ctx: &Context) -> bool {
     // $offset
@@ -87,6 +94,13 @@ pub fn access_within_antarctica(ctx: &Context) -> bool {
         _ => false,
     })
 }
+pub fn access_within_menu(ctx: &Context) -> bool {
+    // WITHIN `Menu`
+    (match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    })
+}
 pub fn action_energy__1(ctx: &mut Context) {
     // ^energy += 1
     ctx.energy += 1;
@@ -100,6 +114,13 @@ pub fn action_flasks__1(ctx: &mut Context) {
 }
 pub fn action_has_effect_flasks__1(ctx: &Context) -> bool {
     0 != 1
+}
+pub fn action_last__position(ctx: &mut Context) {
+    // ^last = ^position
+    ctx.last = ctx.position();
+}
+pub fn action_has_effect_last__position(ctx: &Context) -> bool {
+    ctx.last != ctx.position()
 }
 pub fn action_position__glacier__revival__save_point_save__glacier__revival__save_point(
     ctx: &mut Context,

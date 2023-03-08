@@ -127,8 +127,10 @@ pub fn expand_simple<W, T, E, Wp>(
 
     for warp in world.get_warps() {
         if !spot_map.contains_key(&warp.dest(ctx)) && warp.can_access(ctx) {
-            append(warp.dest(ctx));
-        }
+            let mut newctx = ctx.clone();
+            warp.prewarp(&mut newctx);
+            newctx.set_position(warp.dest(&newctx));
+            ctx_queue.push_back(newctx);        }
     }
 }
 

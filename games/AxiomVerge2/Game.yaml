@@ -15,7 +15,7 @@ start:
 
 objectives:
   Start: Amashilama
-  Progress%: Flask
+  Progress%: Health_Upgrade_1
   Everything: Amashilama && Notes_2053_02_27
 
 movements:
@@ -59,6 +59,15 @@ warps:
     time: 12
     req: ^mode == 'drone'
     to: ^save
+  menu:
+    time: 1
+    req: NOT WITHIN `Menu` and ^flasks > 0
+    to: Menu > Upgrade Menu > Upgrades
+    do: ^last = ^position
+  exit_menu:
+    time: 0.2
+    req: WITHIN `Menu`
+    to: ^last
 
 helpers:
   $melee: Ice_Axe

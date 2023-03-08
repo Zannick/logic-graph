@@ -235,6 +235,7 @@ impl<T: Ctx> ContextWrapper<T> {
             Currency = <W::Location as Accessible>::Currency,
         >,
     {
+        warp.prewarp(&mut self.ctx);
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());

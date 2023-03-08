@@ -228,6 +228,15 @@ digraph AxiomVerge2 {
         label = "Glacier";
         bgcolor = "lightgrey";
     }
+    subgraph cluster_Menu {
+        subgraph cluster_Menu__Upgrade_Menu {
+            Menu__Upgrade_Menu__Upgrades [label = "Upgrades"];
+            label = "Upgrade Menu";
+            bgcolor = "white";
+        }
+        label = "Menu";
+        bgcolor = "lightgrey";
+    }
     Antarctica__West__Shed_Entry -> Antarctica__Shed__Interior;
     Antarctica__West__Boxes -> Antarctica__Building_1W__West_Entry;
     Antarctica__Shed__Interior -> Antarctica__West__Shed_Entry;
