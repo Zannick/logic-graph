@@ -130,7 +130,7 @@ impl context::Ctx for Context {
         match item {
             Item::Amashilama => {
                 self.amashilama = true;
-                rules::action_position__glacier__revival__save_point_save__glacier__revival__save_point(self);
+                rules::action_save__glacier__revival__save_point(self);
             }
             Item::Apocalypse_Bomb => {
                 self.apocalypse_bomb = true;

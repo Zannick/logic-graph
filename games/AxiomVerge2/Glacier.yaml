@@ -145,10 +145,13 @@ areas:
       coord: [41.95, 13]
     - name: Water Surface
       coord: [41.05, 13]
-      locations:
+      hybrid:
         - name: Drown  # This is technically the next grid over, but it's a cutscene really
+          to: Glacier > Revival > Save Point
+          req: NOT Amashilama
           item: Amashilama
           time: 48.5
+          item_time: 0
 
 - name: Revival
   spots:

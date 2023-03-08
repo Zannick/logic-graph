@@ -60,6 +60,10 @@ pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
+pub fn access_not_amashilama(ctx: &Context) -> bool {
+    // NOT Amashilama
+    !ctx.has(Item::Amashilama)
+}
 pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
     (!(match get_region(ctx.position()) {
@@ -122,18 +126,12 @@ pub fn action_last__position(ctx: &mut Context) {
 pub fn action_has_effect_last__position(ctx: &Context) -> bool {
     ctx.last != ctx.position()
 }
-pub fn action_position__glacier__revival__save_point_save__glacier__revival__save_point(
-    ctx: &mut Context,
-) {
-    // ^position = `Glacier > Revival > Save Point`; ^save = `Glacier > Revival > Save Point`
-    ctx.position = SpotId::Glacier__Revival__Save_Point;
+pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
+    // ^save = `Glacier > Revival > Save Point`
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 }
-pub fn action_has_effect_position__glacier__revival__save_point_save__glacier__revival__save_point(
-    ctx: &Context,
-) -> bool {
-    ctx.position != SpotId::Glacier__Revival__Save_Point
-        || ctx.save != SpotId::Glacier__Revival__Save_Point
+pub fn action_has_effect_save__glacier__revival__save_point(ctx: &Context) -> bool {
+    ctx.save != SpotId::Glacier__Revival__Save_Point
 }
 pub fn action_save__position(ctx: &mut Context) {
     // ^save = ^position

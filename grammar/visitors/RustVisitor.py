@@ -131,7 +131,7 @@ class RustVisitor(RulesVisitor):
         return f'ctx.count(Item::{ctx.ITEM()}) >= {val}'
 
     def visitOneItem(self, ctx):
-        return f'ctx.has(Item::{ctx.ITEM()})'
+        return ('!' if ctx.NOT() else '') + f'ctx.has(Item::{ctx.ITEM()})'
 
     def visitOneArgument(self, ctx):
         ref = self._getRefGetter(str(ctx.REF())[1:])

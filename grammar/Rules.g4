@@ -125,10 +125,10 @@ value   : SETTING ('[' ( LIT | ITEM ) ']')?     # Setting
 
 item    : ( ITEM '{' ( INT | SETTING ) '}'
           | '(' ITEM ',' ( INT | SETTING ) ')'
-          )     # ItemCount
-        | ITEM  # OneItem
-        | LIT   # OneLitItem  // I don't like it and I introduced it
-        | REF   # OneArgument
+          )             # ItemCount
+        | NOT? ITEM     # OneItem
+        | LIT           # OneLitItem  // I don't like it and I introduced it
+        | REF           # OneArgument
         ;
 
 str : LIT | value | condStr | switchStr ;

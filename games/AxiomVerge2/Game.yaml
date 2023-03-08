@@ -86,7 +86,7 @@ collect:
   # Any action that has multiple statements, and one relies on the other
   # (like if this said ^save = ^position after changing position)
   # will not write a correct has_effect
-  Amashilama: ^position = `Glacier > Revival > Save Point`; ^save = `Glacier > Revival > Save Point`
+  Amashilama: ^save = `Glacier > Revival > Save Point`
   Flask: ^flasks += 1
   #Big_Flask: ^flasks += 2
 
