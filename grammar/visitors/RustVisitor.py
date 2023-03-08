@@ -190,7 +190,7 @@ class RustVisitor(RulesVisitor):
                     + ' => true, _ => false })'
                     for pt, plist in places.items()
                     ]
-        return ' || '.join(per_type)
+        return ('!' if ctx.NOT() else '') + ' || '.join(per_type)
 
     ## Action-specific
     def visitActions(self, ctx):

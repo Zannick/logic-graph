@@ -133,8 +133,8 @@ item    : ( ITEM '{' ( INT | SETTING ) '}'
 
 str : LIT | value | condStr | switchStr ;
 
-somewhere : WITHIN PLACE
-          | WITHIN '(' PLACE (',' PLACE)* ')';
+somewhere : NOT? WITHIN PLACE
+          | NOT? WITHIN '(' PLACE (',' PLACE)* ')';
 
 /** Lexer rules (tokens) */
 AND     : 'AND' | 'and' | '&&' ;
