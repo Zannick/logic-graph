@@ -96,6 +96,8 @@ def get_int_type_for_max(count: int) -> str:
 
 def config_type(val: Any) -> str:
     if isinstance(val, str):
+        if '::' in val:
+            return val[:val.index('::')]
         depth = val.count('>')
         # TODO: for support of Region, Area, Spot, or place ids as setting types
         if depth:
@@ -108,6 +110,12 @@ def config_type(val: Any) -> str:
     if isinstance(val, float):
         return 'float'
     return type(val).__name__
+
+
+def trim_type_prefix(s: str) -> str:
+    if '::' in s:
+        return s[s.index('::') + 2:]
+    return s
 
 
 ctx_types = {
@@ -125,7 +133,9 @@ def typenameof(val: Any) -> str:
 
 def str_to_rusttype(val: str, t: str) -> str:
     if t.startswith('enums::'):
-        return f'{t}::{val.capitalize()}'
+        return f'{t}::{inflection.camelize(val)}'
+    if isinstance(val, str) and '::' in val:
+        return f'{t}::{trim_type_prefix(val)}'
     if 'Id' in t:
         return f'{t}::{construct_id(val)}'
     if t == 'bool':
@@ -911,6 +921,7 @@ class GameLogic(object):
             'get_exit_target': get_exit_target,
             'str_to_rusttype': str_to_rusttype,
             'camelize': inflection.camelize,
+            'trim_type_prefix': trim_type_prefix,
         })
         # Access cached_properties to ensure they're in the template vars
         self.unused_items

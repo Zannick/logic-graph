@@ -17,9 +17,8 @@ pub mod enums {
     #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default)]
     pub enum Mode {
         #[default]
-        None,
-        Drone,
         Indra,
+        Drone,
     }
     impl fmt::Display for Mode {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -58,6 +57,7 @@ pub struct Context {
     pub save: SpotId,
     pub mode: enums::Mode,
     pub indra: SpotId,
+    pub last: SpotId,
     pub energy: i32,
     pub breach: bool,
     pub flasks: i32,
@@ -284,6 +284,7 @@ impl Context {
             save: SpotId::Antarctica__West__Helipad,
             mode: enums::Mode::Indra,
             indra: SpotId::Antarctica__West__Helipad,
+            last: SpotId::None,
             energy: 0,
             breach: false,
             flasks: 0,
@@ -316,6 +317,13 @@ impl Context {
         match get_area(self.position) {
             _ => match get_region(self.position) {
                 _ => self.indra,
+            },
+        }
+    }
+    pub fn last(&self) -> SpotId {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.last,
             },
         }
     }

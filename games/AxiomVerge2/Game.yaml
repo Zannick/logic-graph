@@ -4,7 +4,10 @@ start:
   position: Antarctica > West > Helipad
   save: Antarctica > West > Helipad
   mode: Indra
-  indra: Antarctica > West > Helipad
+  # By itself 'None' would be interpreted as a string,
+  # which becomes its own independent per-variable enum type.
+  indra: SpotId::None
+  last: SpotId::None
   energy: 0
   breach: false
   flasks: 0
