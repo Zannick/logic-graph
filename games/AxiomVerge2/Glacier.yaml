@@ -262,6 +262,15 @@ areas:
         - name: Flask
           item: Flask
           tags: [flask]
+      exits:
+        - to: West 8
+          req: $grab
+          time: 2
+    - name: West 8
+      coord: [36.05, 8]
+      exits:
+        - to: Peak > East 8
+          tags: [xshift]
 
 - name: Vertical Room Upper Mid
   spots:
@@ -477,8 +486,8 @@ areas:
         - name: Quick Grab
           item: Ledge_Grab
           canon: Ledge_Grab
-          time: 6
-          tags: [urn]
+          req: Boomerang
+          tags: [remote_urn]
       exits:
         - to: Ledge Grab Room > Cliff
           req: $grab
@@ -537,6 +546,118 @@ areas:
         - to: Ledge Grab Room > Mid 35
           time: 2.5
 
+- name: Peak
+  spots:
+    - name: East 8
+      coord: [35.95, 8]
+      exits:
+        - to: Vertical Room Top > West 8
+          tags: [xshift]
+      exits:
+        - to: Top Platform East
+          req: $grab or $climb
+          time: 7
+    - name: Top Platform East
+      coord: [35.1, 6.3]
+      local:
+        - to: Top Rock
+          jumps: 1
+    - name: Top Rock
+      coord: [34.5, 6.2]
+    - name: Highest Platform
+      coord: [34.5, 5.6]
+    - name: West Cliff
+      coord: [33.7, 6.8]
+    - name: Under West Cliff
+      coord: [33.6, 7.4]
+      exits:
+        - to: West Cliff
+          req: $grab or $climb
+          time: 2
+    - name: West 8
+      coord: [33.05, 8]
+      local:
+        - to: Under West Cliff
+          jumps: 4
+      exits:
+        - to: Grid 32,7-10 > East 8
+          tags: [xshift]
+
+- name: Grid 32,7-10
+  spots:
+    - name: East 8
+      coord: [32.95, 8]
+      exits:
+        - to: Peak > West 8
+          tags: [xshift]
+    - name: Center Platform
+      coord: [32.5, 8]
+      local:
+        - to: Column
+          jumps_down: 1
+    - name: Column
+      coord: [32.5, 8.5]
+      local:
+        - to: Center Platform
+          jumps: 3
+        - to: East 8
+          jumps: 3
+    - name: Left Rock
+      coord: [32.3, 8.9]
+      exits:
+        - to: Column
+          req: $grab or $climb
+          time: 1.4
+    - name: West 9
+      coord: [32.05, 8.9]
+      local:
+        - to: West 10
+          jumps_down: 1
+      exits:
+        - to: Grid 31,9-12 > East 9
+          tags: [xshift]
+    - name: West 10
+      coord: [32.05, 9.5]
+      exits:
+        - to: Left Rock
+          req: $grab or $climb
+          time: 1.6
+
+- name: Grid 31,9-12
+  spots:
+    - name: East 9
+      coord: [31.95, 8.9]
+      exits:
+        - to: Grid 32,7-10 > West 9
+          tags: [xshift]
+    - name: East 10
+      coord: [31.95, 9.5]
+      exits:
+        - to: Grid 32,7-10 > West 10
+          tags: [xshift]
+    - name: Observation Tower
+      coord: [31.3, 10.6]
+      local:
+        - to: East 10
+          jumps: 7
+    - name: Observation Tower L4
+      coord: [31.2, 11]
+      local:
+        - to: Observation Tower
+          jumps: 2
+    - name: West 12
+      coord: [31.05, 12]
+      local:
+        - to: Observation Tower L4
+          jumps: 5
+      exits:
+        - to: Ebih > Base Camp > East 12
+          tags: [xshift]
+    - name: Midair
+      coord: [31.05, 10.6]
+      exits:
+        - to: Ebih > Base Camp > East 11
+          tags: [xshift]
 
 - name: Apocalypse Entry
   spots:

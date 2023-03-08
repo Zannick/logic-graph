@@ -1,0 +1,186 @@
+name: Mt Ebih
+short: Ebih
+
+areas:
+- name: Base Camp
+  spots:
+    - name: East 11
+      coord: [30.95, 10.6]
+      exits:
+        - to: Glacier > Grid 31,9-12 > Midair
+          tags: [xshift]
+    - name: East 12
+      coord: [30.95, 12]
+      exits:
+        - to: Glacier > Grid 31,9-12 > West 12
+          tags: [xshift]
+    - name: Staircase
+      coord: [30.4, 12.1]
+      local:
+        - to: East 12
+          jumps: 1
+        - to: Bunker Entry
+          jumps_down: 2
+    - name: Save Point
+      coord: [29.5, 13]
+      local:
+        - to: Staircase
+          jumps: 6
+      actions:
+        - name: Save
+          do: ^save = ^position
+          time: 1.3
+    - name: Bunker Entry
+      coord: [30.1, 13]
+      local:
+        - to: Staircase
+          jumps: 6
+      exits:
+        - to: Bunker Interior > Entry
+          tags: [interior]
+    - name: Lake Access
+      coord: [30.95, 13]
+    - name: Behind Vehicle
+      coord: [28.8, 13]
+      local:
+        - to: Building Entry
+          jumps: 2
+    - name: Building Entry
+      coord: [29, 12.4]  # verify 12.4 vs 12.3?
+      local:
+        - to: Behind Vehicle
+          jumps_down: 1
+        - to: Tent Entry
+          jumps_down: 2
+      exits:
+        - to: Building Interior > Entry
+          tags: [interior]
+    - name: Tent Entry
+      coord: [28.3, 13]
+      exits:
+        - to: Tent Interior > Entry
+          time: 0.5
+          tags: [interior, tent]
+    - name: West 13
+      coord: [28.05, 13]
+      exits:
+        - to: By Garage > East 13
+          tags: [xshift]
+
+- name: Bunker Interior
+  spots:
+    - name: Entry
+      coord: [30.1, 13]
+      exits:
+        - to: Base Camp > Bunker Entry
+          tags: [exterior]
+    - name: Desk
+      coord: [30.5, 13]
+      locations:
+        - name: Note
+          item: Dear_Ernest
+          tags: [standing]
+
+- name: Building Interior
+  spots:
+    - name: Entry
+      coord: [29, 12.4]
+      locations:
+        - name: Remote Urn
+          item: Melee_Charge
+          canon: Melee_Charge
+          req: Boomerang
+          tags: [remote_urn]
+      exits:
+        - to: Base Camp > Building Entry
+          tags: [exterior]
+    - name: Corner
+      coord: [28.5, 12.4]
+      locations:
+        - name: Urn
+          item: Melee_Charge
+          canon: Melee_Charge
+          tags: [urn]
+
+- name: Tent Interior
+  spots:
+    - name: Entry
+      coord: [28.3, 13]
+      exits:
+        - to: Base Camp > Tent Entry
+          time: 0.5
+          tags: [exterior, tent]
+    - name: Desk
+      coord: [28.4, 13]
+      locations:
+        - name: Note
+          item: Companies_Layoff
+          tags: [standing]
+
+- name: By Garage
+  spots:
+    - name: East 13
+      coord: [27.95, 13]
+      local:
+        - to: East Platform
+          jumps: 2
+      exits:
+        - to: Base Camp > West 13
+          tags: [xshift]
+    - name: East Platform
+      coord: [27.5, 12.3]
+      exits:
+        - to: Crawlspace Opening
+          req: $grab or $climb
+          time: 0.75
+        - to: Outcropping
+          req: $grab or $climb
+          time: 1.3
+    - name: Crawlspace Opening
+      coord: [27.4, 12.2]
+      local:
+        - to: Outcropping
+          jumps: 1
+      exits:
+        - to: Crawlspace
+          req: ^mode == 'drone'
+          time: 0.8
+    - name: Crawlspace
+      locations:
+        - name: Fragment
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Crawlspace Opening
+          req: ^mode == 'drone'
+          time: 0.8
+    - name: Outcropping
+      coord: [27.3, 12]
+    - name: East Bush
+      coord: [26.8, 12.1]
+      local:
+        - to: Outcropping
+          jumps: 3
+    - name: Lower Platform
+      coord: [26.3, 12.5]
+      exits:
+        - to: East Bush
+          req: $grab or $climb
+          time: 1.3
+        - to: West Bush
+          req: $grab or $climb
+          time: 1.8
+    - name: West Bush
+      coord: [26.1, 12.1]
+      local:
+        - to: West 12
+          jumps: 2
+    - name: West 12
+      coord: [26.05, 12]
+    - name: West 13
+      coord: [26.05, 13]
+      local:
+        - to: Lower Platform
+          jumps: 3
+    - name: Garage Entry
+      coord: [27.2, 13]

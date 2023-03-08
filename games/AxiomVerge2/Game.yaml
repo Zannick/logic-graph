@@ -37,10 +37,14 @@ time:
   default: 1
   urn: 5.5
   flask: 5.5
+  # when grabbing the urn/flask with the boomerang
+  remote_urn: 6.5
+  remote_flask: 6.5
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # Doors leading inside/outside
   interior: 0.75
   exterior: 0.75
+  tent: 0.5
   # item is freestanding -> can be picked up with no delay
   standing: 0
   # spots are technically the same, but in different areas to partition the area map
@@ -73,6 +77,7 @@ helpers:
   $melee: Ice_Axe
   $break_box: $melee
   $grab: ^mode != 'drone' and Ledge_Grab
+  $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
   $offset: major_glitches and $melee
 

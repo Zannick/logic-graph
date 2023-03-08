@@ -1,4 +1,4 @@
-%%{init: {"flowchart": {"deterministicIds": true, "defaultRenderer": "elk", "htmlLabels": false}}}%%
+%%{init: {"flowchart": {"deterministicIds": true, "defaultRenderer": "elk"}}}%%
 graph TB
 
 subgraph Antarctica
@@ -44,6 +44,45 @@ subgraph Antarctica
     subgraph Antarctica__Freight_Elevator[Freight Elevator]
         Antarctica__Freight_Elevator__Left(Left);
         Antarctica__Freight_Elevator__Controls(Controls);
+    end
+end
+subgraph Ebih
+    subgraph Ebih__Base_Camp[Base Camp]
+        Ebih__Base_Camp__East_11(East 11);
+        Ebih__Base_Camp__East_12(East 12);
+        Ebih__Base_Camp__Staircase(Staircase);
+        Ebih__Base_Camp__Save_Point(Save Point);
+        Ebih__Base_Camp__Bunker_Entry(Bunker Entry);
+        Ebih__Base_Camp__Lake_Access(Lake Access);
+        Ebih__Base_Camp__Behind_Vehicle(Behind Vehicle);
+        Ebih__Base_Camp__Building_Entry(Building Entry);
+        Ebih__Base_Camp__Tent_Entry(Tent Entry);
+        Ebih__Base_Camp__West_13(West 13);
+    end
+    subgraph Ebih__Bunker_Interior[Bunker Interior]
+        Ebih__Bunker_Interior__Entry(Entry);
+        Ebih__Bunker_Interior__Desk(Desk);
+    end
+    subgraph Ebih__Building_Interior[Building Interior]
+        Ebih__Building_Interior__Entry(Entry);
+        Ebih__Building_Interior__Corner(Corner);
+    end
+    subgraph Ebih__Tent_Interior[Tent Interior]
+        Ebih__Tent_Interior__Entry(Entry);
+        Ebih__Tent_Interior__Desk(Desk);
+    end
+    subgraph Ebih__By_Garage[By Garage]
+        Ebih__By_Garage__East_13(East 13);
+        Ebih__By_Garage__East_Platform(East Platform);
+        Ebih__By_Garage__Crawlspace_Opening(Crawlspace Opening);
+        Ebih__By_Garage__Crawlspace(Crawlspace);
+        Ebih__By_Garage__Outcropping(Outcropping);
+        Ebih__By_Garage__East_Bush(East Bush);
+        Ebih__By_Garage__Lower_Platform(Lower Platform);
+        Ebih__By_Garage__West_Bush(West Bush);
+        Ebih__By_Garage__West_12(West 12);
+        Ebih__By_Garage__West_13(West 13);
+        Ebih__By_Garage__Garage_Entry(Garage Entry);
     end
 end
 subgraph Glacier
@@ -103,6 +142,7 @@ subgraph Glacier
         Glacier__Vertical_Room_Top__Mid_11(Mid 11);
         Glacier__Vertical_Room_Top__Under_Switch(Under Switch);
         Glacier__Vertical_Room_Top__Peak(Peak);
+        Glacier__Vertical_Room_Top__West_8(West 8);
     end
     subgraph Glacier__Vertical_Room_Upper_Mid[Vertical Room Upper Mid]
         Glacier__Vertical_Room_Upper_Mid__Mid_11(Mid 11);
@@ -154,6 +194,31 @@ subgraph Glacier
         Glacier__Ledge_Grab_Upper__Upper_Platform(Upper Platform);
         Glacier__Ledge_Grab_Upper__Fork(Fork);
     end
+    subgraph Glacier__Peak[Peak]
+        Glacier__Peak__East_8(East 8);
+        Glacier__Peak__Top_Platform_East(Top Platform East);
+        Glacier__Peak__Top_Rock(Top Rock);
+        Glacier__Peak__Highest_Platform(Highest Platform);
+        Glacier__Peak__West_Cliff(West Cliff);
+        Glacier__Peak__Under_West_Cliff(Under West Cliff);
+        Glacier__Peak__West_8(West 8);
+    end
+    subgraph Glacier__Grid_32_7_10[Grid 32,7-10]
+        Glacier__Grid_32_7_10__East_8(East 8);
+        Glacier__Grid_32_7_10__Center_Platform(Center Platform);
+        Glacier__Grid_32_7_10__Column(Column);
+        Glacier__Grid_32_7_10__Left_Rock(Left Rock);
+        Glacier__Grid_32_7_10__West_9(West 9);
+        Glacier__Grid_32_7_10__West_10(West 10);
+    end
+    subgraph Glacier__Grid_31_9_12[Grid 31,9-12]
+        Glacier__Grid_31_9_12__East_9(East 9);
+        Glacier__Grid_31_9_12__East_10(East 10);
+        Glacier__Grid_31_9_12__Observation_Tower(Observation Tower);
+        Glacier__Grid_31_9_12__Observation_Tower_L4(Observation Tower L4);
+        Glacier__Grid_31_9_12__West_12(West 12);
+        Glacier__Grid_31_9_12__Midair(Midair);
+    end
     subgraph Glacier__Apocalypse_Entry[Apocalypse Entry]
         Glacier__Apocalypse_Entry__West(West);
         Glacier__Apocalypse_Entry__Terminal(Terminal);
@@ -165,6 +230,7 @@ subgraph Menu
     end
 end
 Antarctica ~~~ Glacier
+Ebih ~~~ Glacier
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
 Antarctica__Building_1W__West_Entry <--> Antarctica__West__Boxes
@@ -177,6 +243,17 @@ Antarctica__East__Building_2_Upper <--> Antarctica__Top__Power_Entry
 Antarctica__Freight_Elevator__Controls --> Glacier__Dock_Elevator__Elevator
 Antarctica__Power_Room__Entry <--> Antarctica__Top__Power_Entry
 Antarctica__Shed__Interior <--> Antarctica__West__Shed_Entry
+Ebih__Base_Camp__Building_Entry <--> Ebih__Building_Interior__Entry
+Ebih__Base_Camp__Bunker_Entry <--> Ebih__Bunker_Interior__Entry
+Ebih__Base_Camp__East_11 <--> Glacier__Grid_31_9_12__Midair
+Ebih__Base_Camp__East_12 <--> Glacier__Grid_31_9_12__West_12
+Ebih__Base_Camp__Tent_Entry <--> Ebih__Tent_Interior__Entry
+Ebih__Base_Camp__West_13 <--> Ebih__By_Garage__East_13
+Ebih__By_Garage__Crawlspace <--> Ebih__By_Garage__Crawlspace_Opening
+Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Crawlspace_Opening
+Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Outcropping
+Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__East_Bush
+Ebih__By_Garage__Lower_Platform --> Ebih__By_Garage__West_Bush
 Glacier__Apocalypse_Entry__West <--> Glacier__Grid_43_10_11__East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
 Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room_Switched__Upper_West
@@ -190,6 +267,11 @@ Glacier__Compass_Room__West <--> Glacier__The_Big_Drop__East
 Glacier__Dock_Elevator__Connector <--> Glacier__Dock_Interior__Connector
 Glacier__Dock_Interior__Entry <--> Glacier__Dock_Outside__Entry
 Glacier__Dock_Outside__Do_Not_Enter <--> Glacier__Grid_41_9_10__East
+Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
+Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
+Glacier__Grid_32_7_10__East_8 <--> Glacier__Peak__West_8
+Glacier__Grid_32_7_10__Left_Rock --> Glacier__Grid_32_7_10__Column
+Glacier__Grid_32_7_10__West_10 --> Glacier__Grid_32_7_10__Left_Rock
 Glacier__Grid_37_38_9__East <--> Glacier__Grid_39_40_7_9__West
 Glacier__Grid_37_38_9__West <--> Glacier__Vertical_Room_Top__East_9
 Glacier__Grid_39_40_7_9__Upper_East <--> Glacier__Revival__West
@@ -209,10 +291,14 @@ Glacier__Ledge_Grab_Upper__Fork --> Glacier__Ledge_Grab_Balcony__Column
 Glacier__Ledge_Grab_Upper__Fork --> Glacier__Ledge_Grab_Balcony__Gate_Ledge
 Glacier__Ledge_Grab_Upper__Lower_Platform --> Glacier__Ledge_Grab_Upper__Upper_Platform
 Glacier__Ledge_Grab_Upper__Upper_Platform --> Glacier__Ledge_Grab_Upper__Fork
+Glacier__Peak__East_8 --> Glacier__Peak__Top_Platform_East
+Glacier__Peak__Under_West_Cliff --> Glacier__Peak__West_Cliff
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Revival__Save_Point
 Glacier__Vertical_Room_Left__Past_Gate <--> Glacier__Vertical_Room_Top__Under_Switch
 Glacier__Vertical_Room_Top__East_9 --> Glacier__Vertical_Room_Top__Peak
 Glacier__Vertical_Room_Top__Mid_11 --> Glacier__Vertical_Room_Top__Mid_9
 Glacier__Vertical_Room_Top__Mid_11 <--> Glacier__Vertical_Room_Upper_Mid__Mid_11
 Glacier__Vertical_Room_Top__Mid_9 --> Glacier__Vertical_Room_Top__Peak
+Glacier__Vertical_Room_Top__Peak --> Glacier__Vertical_Room_Top__West_8
 Glacier__Vertical_Room_Top__Under_Switch --> Glacier__Vertical_Room_Top__Mid_9
+Glacier__Vertical_Room_Top__West_8 --> Glacier__Peak__East_8

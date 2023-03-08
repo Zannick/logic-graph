@@ -77,6 +77,7 @@ pub struct Context {
     pub station_power: bool,
     pub switch_36_11: bool,
     pub switch_40_12: bool,
+    pub wall_climb: bool,
     // other
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
@@ -88,7 +89,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 13;
+    const NUM_ITEMS: i32 = 14;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -105,6 +106,7 @@ impl context::Ctx for Context {
             Item::Station_Power => self.station_power,
             Item::Switch_36_11 => self.switch_36_11,
             Item::Switch_40_12 => self.switch_40_12,
+            Item::Wall_Climb => self.wall_climb,
             _ => false,
         }
     }
@@ -123,6 +125,7 @@ impl context::Ctx for Context {
             Item::Station_Power => self.station_power.into(),
             Item::Switch_36_11 => self.switch_36_11.into(),
             Item::Switch_40_12 => self.switch_40_12.into(),
+            Item::Wall_Climb => self.wall_climb.into(),
             _ => 0,
         }
     }
@@ -167,6 +170,9 @@ impl context::Ctx for Context {
             }
             Item::Switch_40_12 => {
                 self.switch_40_12 = true;
+            }
+            Item::Wall_Climb => {
+                self.wall_climb = true;
             }
             Item::Flask => rules::action_flasks__1(self),
             _ => (),

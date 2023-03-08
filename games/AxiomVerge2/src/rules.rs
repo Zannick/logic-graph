@@ -48,6 +48,10 @@ pub fn access_grab_and_switch_40_12(ctx: &Context) -> bool {
     // $grab and Switch_40_12
     (helper__grab!(ctx) && ctx.has(Item::Switch_40_12))
 }
+pub fn access_grab_or_climb(ctx: &Context) -> bool {
+    // $grab or $climb
+    (helper__grab!(ctx) || helper__climb!(ctx))
+}
 pub fn access_health_upgrade_1(ctx: &Context) -> bool {
     // Health_Upgrade_1
     ctx.has(Item::Health_Upgrade_1)

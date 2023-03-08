@@ -69,6 +69,57 @@ digraph AxiomVerge2 {
         label = "Antarctica";
         bgcolor = "lightgrey";
     }
+    subgraph cluster_Ebih {
+        subgraph cluster_Ebih__Base_Camp {
+            Ebih__Base_Camp__East_11 [label = "East 11"];
+            Ebih__Base_Camp__East_12 [label = "East 12"];
+            Ebih__Base_Camp__Staircase [label = "Staircase"];
+            Ebih__Base_Camp__Save_Point [label = "Save Point"];
+            Ebih__Base_Camp__Bunker_Entry [label = "Bunker Entry"];
+            Ebih__Base_Camp__Lake_Access [label = "Lake Access"];
+            Ebih__Base_Camp__Behind_Vehicle [label = "Behind Vehicle"];
+            Ebih__Base_Camp__Building_Entry [label = "Building Entry"];
+            Ebih__Base_Camp__Tent_Entry [label = "Tent Entry"];
+            Ebih__Base_Camp__West_13 [label = "West 13"];
+            label = "Base Camp";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Bunker_Interior {
+            Ebih__Bunker_Interior__Entry [label = "Entry"];
+            Ebih__Bunker_Interior__Desk [label = "Desk"];
+            label = "Bunker Interior";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Building_Interior {
+            Ebih__Building_Interior__Entry [label = "Entry"];
+            Ebih__Building_Interior__Corner [label = "Corner"];
+            label = "Building Interior";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Tent_Interior {
+            Ebih__Tent_Interior__Entry [label = "Entry"];
+            Ebih__Tent_Interior__Desk [label = "Desk"];
+            label = "Tent Interior";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__By_Garage {
+            Ebih__By_Garage__East_13 [label = "East 13"];
+            Ebih__By_Garage__East_Platform [label = "East Platform"];
+            Ebih__By_Garage__Crawlspace_Opening [label = "Crawlspace Opening"];
+            Ebih__By_Garage__Crawlspace [label = "Crawlspace"];
+            Ebih__By_Garage__Outcropping [label = "Outcropping"];
+            Ebih__By_Garage__East_Bush [label = "East Bush"];
+            Ebih__By_Garage__Lower_Platform [label = "Lower Platform"];
+            Ebih__By_Garage__West_Bush [label = "West Bush"];
+            Ebih__By_Garage__West_12 [label = "West 12"];
+            Ebih__By_Garage__West_13 [label = "West 13"];
+            Ebih__By_Garage__Garage_Entry [label = "Garage Entry"];
+            label = "By Garage";
+            bgcolor = "white";
+        }
+        label = "Mt Ebih";
+        bgcolor = "lightgrey";
+    }
     subgraph cluster_Glacier {
         subgraph cluster_Glacier__Dock_Elevator {
             Glacier__Dock_Elevator__Elevator [label = "Elevator"];
@@ -148,6 +199,7 @@ digraph AxiomVerge2 {
             Glacier__Vertical_Room_Top__Mid_11 [label = "Mid 11"];
             Glacier__Vertical_Room_Top__Under_Switch [label = "Under Switch"];
             Glacier__Vertical_Room_Top__Peak [label = "Peak"];
+            Glacier__Vertical_Room_Top__West_8 [label = "West 8"];
             label = "Vertical Room Top";
             bgcolor = "white";
         }
@@ -219,6 +271,37 @@ digraph AxiomVerge2 {
             label = "Ledge Grab Upper";
             bgcolor = "white";
         }
+        subgraph cluster_Glacier__Peak {
+            Glacier__Peak__East_8 [label = "East 8"];
+            Glacier__Peak__Top_Platform_East [label = "Top Platform East"];
+            Glacier__Peak__Top_Rock [label = "Top Rock"];
+            Glacier__Peak__Highest_Platform [label = "Highest Platform"];
+            Glacier__Peak__West_Cliff [label = "West Cliff"];
+            Glacier__Peak__Under_West_Cliff [label = "Under West Cliff"];
+            Glacier__Peak__West_8 [label = "West 8"];
+            label = "Peak";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Grid_32_7_10 {
+            Glacier__Grid_32_7_10__East_8 [label = "East 8"];
+            Glacier__Grid_32_7_10__Center_Platform [label = "Center Platform"];
+            Glacier__Grid_32_7_10__Column [label = "Column"];
+            Glacier__Grid_32_7_10__Left_Rock [label = "Left Rock"];
+            Glacier__Grid_32_7_10__West_9 [label = "West 9"];
+            Glacier__Grid_32_7_10__West_10 [label = "West 10"];
+            label = "Grid 32,7-10";
+            bgcolor = "white";
+        }
+        subgraph cluster_Glacier__Grid_31_9_12 {
+            Glacier__Grid_31_9_12__East_9 [label = "East 9"];
+            Glacier__Grid_31_9_12__East_10 [label = "East 10"];
+            Glacier__Grid_31_9_12__Observation_Tower [label = "Observation Tower"];
+            Glacier__Grid_31_9_12__Observation_Tower_L4 [label = "Observation Tower L4"];
+            Glacier__Grid_31_9_12__West_12 [label = "West 12"];
+            Glacier__Grid_31_9_12__Midair [label = "Midair"];
+            label = "Grid 31,9-12";
+            bgcolor = "white";
+        }
         subgraph cluster_Glacier__Apocalypse_Entry {
             Glacier__Apocalypse_Entry__West [label = "West"];
             Glacier__Apocalypse_Entry__Terminal [label = "Terminal"];
@@ -260,6 +343,22 @@ digraph AxiomVerge2 {
     Antarctica__Power_Room__Entry -> Antarctica__Top__Power_Entry;
     Antarctica__Freight_Elevator__Left -> Antarctica__Building_2L__Entry;
     Antarctica__Freight_Elevator__Controls -> Glacier__Dock_Elevator__Elevator;
+    Ebih__Base_Camp__East_11 -> Glacier__Grid_31_9_12__Midair;
+    Ebih__Base_Camp__East_12 -> Glacier__Grid_31_9_12__West_12;
+    Ebih__Base_Camp__Bunker_Entry -> Ebih__Bunker_Interior__Entry;
+    Ebih__Base_Camp__Building_Entry -> Ebih__Building_Interior__Entry;
+    Ebih__Base_Camp__Tent_Entry -> Ebih__Tent_Interior__Entry;
+    Ebih__Base_Camp__West_13 -> Ebih__By_Garage__East_13;
+    Ebih__Bunker_Interior__Entry -> Ebih__Base_Camp__Bunker_Entry;
+    Ebih__Building_Interior__Entry -> Ebih__Base_Camp__Building_Entry;
+    Ebih__Tent_Interior__Entry -> Ebih__Base_Camp__Tent_Entry;
+    Ebih__By_Garage__East_13 -> Ebih__Base_Camp__West_13;
+    Ebih__By_Garage__East_Platform -> Ebih__By_Garage__Crawlspace_Opening;
+    Ebih__By_Garage__East_Platform -> Ebih__By_Garage__Outcropping;
+    Ebih__By_Garage__Crawlspace_Opening -> Ebih__By_Garage__Crawlspace;
+    Ebih__By_Garage__Crawlspace -> Ebih__By_Garage__Crawlspace_Opening;
+    Ebih__By_Garage__Lower_Platform -> Ebih__By_Garage__East_Bush;
+    Ebih__By_Garage__Lower_Platform -> Ebih__By_Garage__West_Bush;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;
@@ -289,6 +388,8 @@ digraph AxiomVerge2 {
     Glacier__Vertical_Room_Top__Mid_11 -> Glacier__Vertical_Room_Upper_Mid__Mid_11;
     Glacier__Vertical_Room_Top__Under_Switch -> Glacier__Vertical_Room_Top__Mid_9;
     Glacier__Vertical_Room_Top__Under_Switch -> Glacier__Vertical_Room_Left__Past_Gate;
+    Glacier__Vertical_Room_Top__Peak -> Glacier__Vertical_Room_Top__West_8;
+    Glacier__Vertical_Room_Top__West_8 -> Glacier__Peak__East_8;
     Glacier__Vertical_Room_Upper_Mid__Mid_11 -> Glacier__Vertical_Room_Top__Mid_11;
     Glacier__Vertical_Room_Upper_Mid__East_12 -> Glacier__Boomerang_Antechamber__West_12;
     Glacier__Vertical_Room_Upper_Mid__East_13 -> Glacier__Boomerang_Antechamber__West_13;
@@ -323,5 +424,16 @@ digraph AxiomVerge2 {
     Glacier__Ledge_Grab_Upper__Fork -> Glacier__Ledge_Grab_Balcony__Column;
     Glacier__Ledge_Grab_Upper__Fork -> Glacier__Ledge_Grab_Balcony__Gate_Ledge;
     Glacier__Ledge_Grab_Upper__Fork -> Glacier__Ledge_Grab_Room__Mid_35;
+    Glacier__Peak__East_8 -> Glacier__Peak__Top_Platform_East;
+    Glacier__Peak__Under_West_Cliff -> Glacier__Peak__West_Cliff;
+    Glacier__Peak__West_8 -> Glacier__Grid_32_7_10__East_8;
+    Glacier__Grid_32_7_10__East_8 -> Glacier__Peak__West_8;
+    Glacier__Grid_32_7_10__Left_Rock -> Glacier__Grid_32_7_10__Column;
+    Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_31_9_12__East_9;
+    Glacier__Grid_32_7_10__West_10 -> Glacier__Grid_32_7_10__Left_Rock;
+    Glacier__Grid_31_9_12__East_9 -> Glacier__Grid_32_7_10__West_9;
+    Glacier__Grid_31_9_12__East_10 -> Glacier__Grid_32_7_10__West_10;
+    Glacier__Grid_31_9_12__West_12 -> Ebih__Base_Camp__East_12;
+    Glacier__Grid_31_9_12__Midair -> Ebih__Base_Camp__East_11;
     Glacier__Apocalypse_Entry__West -> Glacier__Grid_43_10_11__East;
 }

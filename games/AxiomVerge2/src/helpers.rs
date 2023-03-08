@@ -33,6 +33,17 @@ macro_rules! helper__grab {
     }};
 }
 
+/// $climb (  )
+/// ^mode != 'drone' and Wall_Climb
+#[macro_export]
+macro_rules! helper__climb {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Wall_Climb))
+    }};
+}
+
 /// $hook (  )
 /// ^mode == 'drone' and Slingshot_Hook
 #[macro_export]

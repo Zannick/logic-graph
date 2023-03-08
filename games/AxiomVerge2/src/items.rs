@@ -11,12 +11,16 @@ pub enum Item {
     Amashilama,
     Apocalypse_Bomb,
     Boomerang,
+    Companies_Layoff,
     Compass,
+    Dear_Ernest,
     Escape,
     Flask,
+    Health_Fragment,
     Health_Upgrade_1,
     Ice_Axe,
     Ledge_Grab,
+    Melee_Charge,
     Mist_Upgraded,
     Notes_2053_02_27,
     Placeholder,
@@ -24,6 +28,7 @@ pub enum Item {
     Station_Power,
     Switch_36_11,
     Switch_40_12,
+    Wall_Climb,
 }
 impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -32,12 +37,16 @@ impl fmt::Display for Item {
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             Item::Boomerang => write!(f, "{}", "Boomerang"),
+            Item::Companies_Layoff => write!(f, "{}", "Companies_Layoff"),
             Item::Compass => write!(f, "{}", "Compass"),
+            Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Flask => write!(f, "{}", "Flask"),
+            Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
             Item::Health_Upgrade_1 => write!(f, "{}", "Health_Upgrade_1"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
             Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
+            Item::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             Item::Mist_Upgraded => write!(f, "{}", "Mist_Upgraded"),
             Item::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             Item::Placeholder => write!(f, "{}", "Placeholder"),
@@ -45,6 +54,7 @@ impl fmt::Display for Item {
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
+            Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
         }
     }
 }
@@ -57,12 +67,16 @@ impl std::str::FromStr for Item {
             "Amashilama" => Ok(Item::Amashilama),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
             "Boomerang" => Ok(Item::Boomerang),
+            "Companies_Layoff" => Ok(Item::Companies_Layoff),
             "Compass" => Ok(Item::Compass),
+            "Dear_Ernest" => Ok(Item::Dear_Ernest),
             "Escape" => Ok(Item::Escape),
             "Flask" => Ok(Item::Flask),
+            "Health_Fragment" => Ok(Item::Health_Fragment),
             "Health_Upgrade_1" => Ok(Item::Health_Upgrade_1),
             "Ice_Axe" => Ok(Item::Ice_Axe),
             "Ledge_Grab" => Ok(Item::Ledge_Grab),
+            "Melee_Charge" => Ok(Item::Melee_Charge),
             "Mist_Upgraded" => Ok(Item::Mist_Upgraded),
             "Notes_2053_02_27" => Ok(Item::Notes_2053_02_27),
             "Placeholder" => Ok(Item::Placeholder),
@@ -70,6 +84,7 @@ impl std::str::FromStr for Item {
             "Station_Power" => Ok(Item::Station_Power),
             "Switch_36_11" => Ok(Item::Switch_36_11),
             "Switch_40_12" => Ok(Item::Switch_40_12),
+            "Wall_Climb" => Ok(Item::Wall_Climb),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }
     }
@@ -78,7 +93,12 @@ impl std::str::FromStr for Item {
 pub fn unused_item(id: Item) -> bool {
     match id {
         Item::None => true,
-        Item::Compass | Item::Escape => true,
+        Item::Companies_Layoff
+        | Item::Compass
+        | Item::Dear_Ernest
+        | Item::Escape
+        | Item::Health_Fragment
+        | Item::Melee_Charge => true,
         _ => false,
     }
 }
