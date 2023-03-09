@@ -307,7 +307,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         }
         (false, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => 2456,
         (false, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_13) => 2631,
-        (false, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Garage_Entry) => 1403,
         (false, SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => 5789,
         (false, SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__West_13) => 877,
         (false, SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
@@ -327,10 +326,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Garage_Entry) => 3859,
         (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__East_13) => 6666,
         (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__East_Platform) => 5087,
-        (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
-            4736
-        }
-        (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Outcropping) => 4385,
         (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__East_Bush) => 2631,
         (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Lower_Platform) => 877,
         (false, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 175,
@@ -1488,7 +1483,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => 2456,
         (true, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_12) => 3362,
         (true, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_13) => 2631,
-        (true, SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Garage_Entry) => 1403,
         (true, SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => 5789,
         (true, SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_Platform) => {
             5406
@@ -1521,10 +1515,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Garage_Entry) => 3859,
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__East_13) => 6666,
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__East_Platform) => 5087,
-        (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
-            4736
-        }
-        (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Outcropping) => 4385,
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__East_Bush) => 2631,
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Lower_Platform) => 877,
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 175,
@@ -1532,10 +1522,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__East_13) => 6666,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__East_Platform) => 7156,
-        (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
-            6974
-        }
-        (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Outcropping) => 7114,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__East_Bush) => 5206,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => 1799,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__West_Bush) => 4006,
@@ -1732,12 +1718,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Vertical_Room_Top__West_9,
             SpotId::Glacier__Vertical_Room_Top__Under_Switch,
         ) => 2000,
-        // [1.578947, 2.266231]
-        (
-            true,
-            SpotId::Glacier__Vertical_Room_Top__West_9,
-            SpotId::Glacier__Vertical_Room_Top__Peak,
-        ) => 3845,
         (
             true,
             SpotId::Glacier__Vertical_Room_Top__West_9,

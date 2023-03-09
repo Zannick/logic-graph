@@ -215,8 +215,7 @@ areas:
       local:
         - to: Mid 11
           jumps_down: 1
-        - to: Peak
-          thru: [36.5, 9]
+        - exc: Peak
       exits:
         - to: Ledge Grab Balcony > East 9
           tags: [xshift]

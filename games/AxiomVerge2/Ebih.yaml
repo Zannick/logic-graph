@@ -161,8 +161,12 @@ areas:
       local:
         - to: Outcropping
           jumps: 3
+        - exc: Garage Entry
     - name: Lower Platform
       coord: [26.3, 12.5]
+      local:
+        - to: Garage Entry
+          jumps_down: 1
       exits:
         - to: East Bush
           req: $grab or $climb
@@ -177,10 +181,15 @@ areas:
           jumps: 2
     - name: West 12
       coord: [26.05, 12]
+      local:
+        - exc: Outcropping
+        - exc: Crawlspace Opening
     - name: West 13
       coord: [26.05, 13]
       local:
         - to: Lower Platform
           jumps: 3
+        - exc: Outcropping
+        - exc: Crawlspace Opening
     - name: Garage Entry
       coord: [27.2, 13]

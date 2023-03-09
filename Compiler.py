@@ -415,6 +415,65 @@ class GameLogic(object):
         return sorted(m for m in self.movements if m != 'default')
 
 
+    def spot_distance(self, sp1, sp2):
+        coords = [sp1['coord'], sp2['coord']]
+        jumps = [0]
+        jumps_down = [0]
+        for lcl in sp1.get('local', []):
+            if lcl.get('to') == sp2['name']:
+                # We could have more overrides here, like dist
+                if thru := lcl.get('thru'):
+                    if isinstance(thru, str):
+                        self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru!r} '
+                                                    f'(Did you mean [{thru}] ?)')
+                        break
+                    if not isinstance(thru, list) or not thru:
+                        self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru}')
+                        break
+                    if all(isinstance(t, list) for t in thru):
+                        coords[1:1] = thru
+                    elif len(thru) == 2 and all(isinstance(t, (int, float)) for t in thru):
+                        coords[1:1] = [thru]
+                    else:
+                        self._misc_errors.append(f'Mismatched length or types in thru '
+                                                    f'from {sp1["name"]} to {sp2["name"]}: {thru}')
+                        break
+                if j := lcl.get('jumps'):
+                    if isinstance(j, str):
+                        self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
+                                                    f'(Did you mean [{j}] ?)')
+                        break
+                    if not isinstance(j, list):
+                        j = [j]
+                    if len(j) != len(coords) - 1:
+                        self._misc_errors.append(f'Jumps list from {sp1["name"]} to {sp2["name"]} '
+                                                    f'must match path length 1+thru = {len(coords) - 1} but was {len(j)}')
+                        break
+                    jumps[:] = j
+                else:
+                    jumps *= len(coords) - 1
+                if j := lcl.get('jumps_down'):
+                    if isinstance(j, str):
+                        self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
+                                                    f'(Did you mean [{j}] ?)')
+                        break
+                    if not isinstance(j, list):
+                        j = [j]
+                    if len(j) != len(coords) - 1:
+                        self._misc_errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]}'
+                                                    f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
+                        break
+                    jumps_down[:] = j
+                else:
+                    jumps_down *= len(coords) - 1
+                break
+            
+            if lcl.get('exc') == sp2['name']:
+                return ([], [], [])
+        
+        return (coords, jumps, jumps_down)
+        
+
     @cached_property
     def local_distances(self):
         # create a distances table: (spot, spot) -> [(x, y), ...]
@@ -434,57 +493,9 @@ class GameLogic(object):
             for sp1, sp2 in itertools.permutations(a['spots'], 2):
                 if 'coord' not in sp1 or 'coord' not in sp2:
                     continue
-                coords = [sp1['coord'], sp2['coord']]
-                jumps = [0]
-                jumps_down = [0]
-                for lcl in sp1.get('local', []):
-                    if lcl['to'] == sp2['name']:
-                        # We could have more overrides here, like dist
-                        if thru := lcl.get('thru'):
-                            if isinstance(thru, str):
-                                self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru!r} '
-                                                         f'(Did you mean [{thru}] ?)')
-                                break
-                            if not isinstance(thru, list) or not thru:
-                                self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru}')
-                                break
-                            if all(isinstance(t, list) for t in thru):
-                                coords[1:1] = thru
-                            elif len(thru) == 2 and all(isinstance(t, (int, float)) for t in thru):
-                                coords[1:1] = [thru]
-                            else:
-                                self._misc_errors.append(f'Mismatched length or types in thru '
-                                                         f'from {sp1["name"]} to {sp2["name"]}: {thru}')
-                                break
-                        if j := lcl.get('jumps'):
-                            if isinstance(j, str):
-                                self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
-                                                         f'(Did you mean [{j}] ?)')
-                                break
-                            if not isinstance(j, list):
-                                j = [j]
-                            if len(j) != len(coords) - 1:
-                                self._misc_errors.append(f'Jumps list from {sp1["name"]} to {sp2["name"]} '
-                                                         f'must match path length 1+thru = {len(coords) - 1} but was {len(j)}')
-                                break
-                            jumps = j
-                        else:
-                            jumps *= len(coords) - 1
-                        if j := lcl.get('jumps_down'):
-                            if isinstance(j, str):
-                                self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
-                                                         f'(Did you mean [{j}] ?)')
-                                break
-                            if not isinstance(j, list):
-                                j = [j]
-                            if len(j) != len(coords) - 1:
-                                self._misc_errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]}'
-                                                         f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
-                                break
-                            jumps_down = j
-                        else:
-                            jumps_down *= len(coords) - 1
-                        break
+                coords, jumps, jumps_down = self.spot_distance(sp1, sp2)
+                if not coords:
+                    continue
                 for ((sx, sy), (cx, cy)), j, jd in zip(itertools.pairwise(coords), jumps, jumps_down):
                     d[(sp1['id'], sp2['id'])].append(
                             (abs(cx - sx), cy - sy, j, jd))
