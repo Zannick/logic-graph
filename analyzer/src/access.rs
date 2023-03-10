@@ -11,8 +11,8 @@ pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     world
         .get_spot_locations(ctx.position())
@@ -25,8 +25,8 @@ pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     world
         .get_global_actions()
@@ -39,8 +39,8 @@ pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     spot_has_locations(world, ctx.get()) || spot_has_actions(world, ctx)
 }
@@ -130,7 +130,8 @@ pub fn expand_simple<W, T, E, Wp>(
             let mut newctx = ctx.clone();
             warp.prewarp(&mut newctx);
             newctx.set_position(warp.dest(&newctx));
-            ctx_queue.push_back(newctx);        }
+            ctx_queue.push_back(newctx);
+        }
     }
 }
 
@@ -195,8 +196,8 @@ pub fn all_visitable_locations<'a, W, T, L, E>(world: &'a W, ctx: &T) -> Vec<L::
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     world
         .get_spot_locations(ctx.position())
@@ -218,8 +219,8 @@ pub fn visitable_locations<'a, W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     let mut exit = None;
     let locs: Vec<&L> = world
@@ -244,8 +245,8 @@ pub fn visit_simple<W, T, L, E>(world: &W, ctx: &mut T) -> bool
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     let mut ret = false;
     for (spot_id, spot_ctx) in access_simple(world, &ctx) {
@@ -277,8 +278,8 @@ pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     let mut ctx = ctx.clone();
     let mut acts_only = 0;
@@ -299,8 +300,8 @@ pub fn cant_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), T>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
+    E: Exit<Context = T>,
 {
     let mut ctx = ctx.clone();
     let mut acts_only = 0;
@@ -315,4 +316,39 @@ where
         }
     }
     Err(ctx)
+}
+
+pub fn find_unused_links<W, T, E>(
+    world: &W,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
+) -> String
+where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+{
+    let mut accessible: Vec<ContextWrapper<T>> = spot_map.clone().into_values().collect();
+    accessible.sort_unstable_by_key(|el| el.elapsed());
+    let mut vec = Vec::new();
+    for ctx in accessible {
+        for spot in world.get_area_spots(ctx.get().position()) {
+            if !spot_map.contains_key(spot) {
+                vec.push(format!("{} -> {}: movement not available", ctx.get().position(), spot));
+            }
+        }
+
+        for exit in world.get_spot_exits(ctx.get().position()) {
+            if !spot_map.contains_key(&exit.dest()) {
+                vec.push(format!("{}: exit not usable", exit.id()));
+            }
+        }
+
+        for warp in world.get_warps() {
+            if !spot_map.contains_key(&warp.dest(ctx.get())) {
+                vec.push(format!("{}: warp {} not usable", ctx.get().position(), warp.id()));
+            }
+        }
+    }
+    vec.join("\n")
 }
