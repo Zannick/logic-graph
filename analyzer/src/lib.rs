@@ -100,7 +100,8 @@ pub mod testlib {
     macro_rules! expect_obtainable {
         ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
             $ctx.set_position($start);
-            let locations: Vec<LocationId> = $world
+
+            let locations: Vec<_> = $world
                 .get_all_locations()
                 .iter()
                 .filter_map(|loc| {
@@ -137,6 +138,98 @@ pub mod testlib {
                 $item,
                 errors.join("\n")
             );
+        }};
+    }
+
+    #[macro_export]
+    macro_rules! expect_not_obtainable {
+        ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
+            $ctx.set_position($start);
+
+            let locations: Vec<_> = $world
+                .get_all_locations()
+                .iter()
+                .filter_map(|loc| {
+                    if loc.item() == $item && $ctx.todo(loc.id()) {
+                        Some(loc.id())
+                    } else {
+                        None
+                    }
+                })
+                .collect();
+            assert!(
+                !locations.is_empty(),
+                "Test not meaningful: No unvisited locations have item {}",
+                $item
+            );
+            let spot_map = $crate::access::accessible_spots(
+                $world,
+                $crate::context::ContextWrapper::new($ctx),
+            );
+            for loc in locations {
+                let spot = $world.get_location_spot(loc);
+                if let Some(ctx) = spot_map.get(&spot) {
+                    assert!(
+                        !$world.get_location(loc).can_access(ctx.get()),
+                        "Able to access location {}:\n{}\n",
+                        loc,
+                        ctx.history_str()
+                    );
+                }
+            }
+        }};
+    }
+
+    #[macro_export]
+    macro_rules! expect_eventually {
+        ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
+            $ctx.set_position($start);
+
+            let mut heap = $crate::heap::LimitedHeap::new();
+            heap.push($crate::context::ContextWrapper::new($ctx));
+            let mut count = 1000;
+            while let Some(ctx) = heap.pop() {
+                if ctx.get().has($item) {
+                    return;
+                }
+                if count == 0 {
+                    panic!("Did not find {} in the iteration limit", $item);
+                }
+                $crate::algo::search_step($world, ctx, &mut heap);
+                count -= 1;
+            }
+            panic!("Dead-ended without finding {}", $item);
+        }};
+    }
+
+    #[macro_export]
+    macro_rules! expect_eventually_requires {
+        ($world:expr, $ctx:expr, $start:expr, $item:expr, $req:expr) => {{
+            $ctx.set_position($start);
+
+            let mut heap = $crate::heap::LimitedHeap::new();
+            heap.push($crate::context::ContextWrapper::new($ctx));
+            let mut count = 1000;
+            let mut success = false;
+            while let Some(ctx) = heap.pop() {
+                if ctx.get().has($item) {
+                    assert!(
+                        ctx.get().has($req),
+                        "Unexpectedly able to find {} without {}:\n{}\n",
+                        $item,
+                        $req,
+                        ctx.history_str(),
+                    );
+                    success = true;
+                }
+                if count == 0 {
+                    assert!(success, "Did not find {} in the iteration limit", $item);
+                    return;
+                }
+                $crate::algo::search_step($world, ctx, &mut heap);
+                count -= 1;
+            }
+            assert!(success, "Dead-ended without finding {}", $item);
         }};
     }
 }

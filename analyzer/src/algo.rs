@@ -50,8 +50,8 @@ pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T, Currency = L::Currency>,
+    L: Location<Context = T>,
+    E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
 {
     let mut ctx_list = vec![ctx];
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
@@ -103,7 +103,7 @@ pub fn action_unlocked_anything<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     // TODO: can this be cached for the next search step?
@@ -140,7 +140,7 @@ pub fn activate_actions<W, T, L, E>(
 ) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId> + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     for act in world
@@ -159,12 +159,12 @@ pub fn activate_actions<W, T, L, E>(
     }
 }
 
-fn search_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
+pub fn search_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T, Currency = L::Currency>,
+    L: Location<Context = T>,
+    E: Exit<ExitId = L::ExitId, LocId = L::LocId, Context = T, Currency = L::Currency>,
 {
     // The process will look more like this:
     // 1. explore -> vec of spot ctxs with penalties applied
@@ -197,8 +197,8 @@ pub fn search<W, T, L, E>(world: &W, mut ctx: T) -> Result<(), std::io::Error>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T, Currency = L::Currency>,
+    L: Location<Context = T>,
+    E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);
