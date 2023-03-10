@@ -1,13 +1,15 @@
 #![allow(unused)]
 
 use analyzer::context::Ctx;
+use analyzer::world::*;
 use analyzer::*;
 use libaxiom_verge2::context::Context;
-use libaxiom_verge2::graph::*;
+use libaxiom_verge2::graph::{self, *};
+use libaxiom_verge2::items::Item;
 
 #[test]
 fn test_name() {
-    let mut world = World::new();
+    let mut world = graph::World::new();
     let mut ctx = Context::new();
 
     ctx.energy = 30;
@@ -21,4 +23,42 @@ fn test_name() {
         SpotId::Glacier__Vertical_Room_Top__East_9,
         SpotId::Glacier__Vertical_Room_Top__Peak
     );
+}
+
+#[test]
+fn test_route() {
+    let mut world = graph::World::new();
+    let mut ctx = Context::new();
+
+    ctx.energy = 30;
+    ctx.flasks = 1;
+    ctx.amashilama = true;
+    ctx.ledge_grab = true;
+    ctx.save = SpotId::Glacier__Revival__Save_Point;
+
+    expect_this_route!(
+        &world,
+        ctx,
+        SpotId::Glacier__Vertical_Room_Top__Mid_9,
+        vec![
+            SpotId::Glacier__Vertical_Room_Top__East_9,
+            SpotId::Glacier__Vertical_Room_Top__Mid_9,
+            SpotId::Glacier__Vertical_Room_Top__Peak,
+        ]
+    );
+}
+
+#[test]
+fn test_obtain() {
+    let mut world = graph::World::new();
+    let mut ctx = Context::new();
+
+    ctx.energy = 30;
+    ctx.flasks = 1;
+    ctx.amashilama = true;
+    ctx.ice_axe = true;
+    ctx.major_glitches = true;
+    ctx.save = SpotId::Glacier__Revival__Save_Point;
+
+    expect_obtainable!(&world, ctx, SpotId::Glacier__Revival__Save_Point, Item::Ledge_Grab);
 }

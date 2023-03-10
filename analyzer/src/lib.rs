@@ -49,4 +49,94 @@ pub mod testlib {
             );
         }};
     }
+
+    #[macro_export]
+    macro_rules! expect_this_route {
+        ($world:expr, $ctx:expr, $start:expr, $spot_vec:expr) => {{
+            $ctx.set_position($start);
+            let mut errors = Vec::new();
+
+            'spots: for next_spot in $spot_vec {
+                errors.clear();
+                if $world.get_area_spots($ctx.position()).contains(&next_spot) {
+                    if $ctx.local_travel_time(next_spot) > 0 {
+                        $ctx.set_position(next_spot);
+                        continue;
+                    } else {
+                        errors.push(String::from("local travel not available"));
+                    }
+                }
+                for exit in $world.get_spot_exits($ctx.position()) {
+                    if exit.dest() == next_spot {
+                        if exit.can_access(&$ctx) {
+                            $ctx.set_position(next_spot);
+                            continue 'spots;
+                        } else {
+                            errors.push(format!("cannot use exit {}", exit.id()));
+                        }
+                    }
+                }
+                for warp in $world.get_warps() {
+                    if warp.dest(&$ctx) == next_spot {
+                        if warp.can_access(&$ctx) {
+                            $ctx.set_position(next_spot);
+                            continue 'spots;
+                        } else {
+                            errors.push(format!("cannot use warp {}", warp.id()));
+                        }
+                    }
+                }
+                panic!(
+                    "Path breaks at {}: cannot get to {}:\n{}\n",
+                    $ctx.position(),
+                    next_spot,
+                    errors.join("\n")
+                );
+            }
+        }};
+    }
+
+    #[macro_export]
+    macro_rules! expect_obtainable {
+        ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
+            $ctx.set_position($start);
+            let locations: Vec<LocationId> = $world
+                .get_all_locations()
+                .iter()
+                .filter_map(|loc| {
+                    if loc.item() == $item && $ctx.todo(loc.id()) {
+                        Some(loc.id())
+                    } else {
+                        None
+                    }
+                })
+                .collect();
+            assert!(
+                !locations.is_empty(),
+                "No unvisited locations have item {}",
+                $item
+            );
+            let spot_map = $crate::access::accessible_spots(
+                $world,
+                $crate::context::ContextWrapper::new($ctx),
+            );
+            let mut errors = Vec::new();
+            for loc in locations {
+                let spot = $world.get_location_spot(loc);
+                if let Some(ctx) = spot_map.get(&spot) {
+                    if $world.get_location(loc).can_access(ctx.get()) {
+                        return;
+                    }
+                    errors.push(format!("Unable to access location {}", loc));
+                } else {
+                    errors.push(format!("Unable to reach spot {}", spot));
+                }
+            }
+            panic!(
+                "Unable to reach any unvisited location with {}:\n{}\n",
+                $item,
+                errors.join("\n")
+            );
+        }};
+    }
 }

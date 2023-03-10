@@ -1770,6 +1770,11 @@ impl world::Warp for Warp {
     fn connect(&mut self, dest: SpotId) {
         self.dest = dest;
     }
+    fn prewarp(&self, ctx: &mut Context) {
+        match self.id {
+            _ => (),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default)]
@@ -1866,6 +1871,94 @@ impl world::World for World {
 
     fn get_all_locations(&self) -> &[Location] {
         &self.locations.as_slice()
+    }
+
+    fn get_location_spot(&self, loc_id: LocationId) -> SpotId {
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts
+            | LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks
+            | LocationId::Deku_Tree__Lobby__Center__Web => SpotId::Deku_Tree__Lobby__Center,
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => SpotId::Deku_Tree__Floor_2__Vines,
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => SpotId::Deku_Tree__Scrub_Room__Entry,
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                SpotId::Deku_Tree__Slingshot_Room__Slingshot
+            }
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                SpotId::Deku_Tree__Slingshot_Upper__Ledge
+            }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => SpotId::Deku_Tree__Floor_3__Door,
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                SpotId::Deku_Tree__Compass_Room__Entry
+            }
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                SpotId::Deku_Tree__Compass_Room__Compass
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest
+            | LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
+                SpotId::Deku_Tree__Compass_Room__Ledge
+            }
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                SpotId::Deku_Tree__Basement_1__Center
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Chest
+            | LocationId::Deku_Tree__Basement_1__Corner__Gate_GS
+            | LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                SpotId::Deku_Tree__Basement_1__Corner
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                SpotId::Deku_Tree__Basement_1__Corner
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall
+            | LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                SpotId::Deku_Tree__Back_Room__Northwest
+            }
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => SpotId::Deku_Tree__Skull_Room__Entry,
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                SpotId::Deku_Tree__Basement_Ledge__Block
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                SpotId::Deku_Tree__Basement_Ledge__Web
+            }
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                SpotId::Deku_Tree__Basement_2__Boss_Door
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma
+            | LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart
+            | LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                SpotId::Deku_Tree__Boss_Room__Arena
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                SpotId::Deku_Tree__Boss_Room__Arena
+            }
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                SpotId::KF__Kokiri_Village__Midos_Guardpost
+            }
+            LocationId::KF__Boulder_Maze__Reward__Chest => SpotId::KF__Boulder_Maze__Reward,
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts
+            | LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
+                SpotId::KF__Baba_Corridor__Deku_Babas
+            }
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                SpotId::KF__Outside_Deku_Tree__Left
+            }
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                SpotId::KF__Outside_Deku_Tree__Right
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest
+            | LocationId::KF__Midos_House__Entry__Bottom_Right_Chest
+            | LocationId::KF__Midos_House__Entry__Top_Left_Chest
+            | LocationId::KF__Midos_House__Entry__Top_Right_Chest => SpotId::KF__Midos_House__Entry,
+            LocationId::KF__Shop__Entry__Blue_Rupee
+            | LocationId::KF__Shop__Entry__Item_1
+            | LocationId::KF__Shop__Entry__Item_2
+            | LocationId::KF__Shop__Entry__Item_3
+            | LocationId::KF__Shop__Entry__Item_4
+            | LocationId::KF__Shop__Entry__Item_5
+            | LocationId::KF__Shop__Entry__Item_6
+            | LocationId::KF__Shop__Entry__Item_7
+            | LocationId::KF__Shop__Entry__Item_8 => SpotId::KF__Shop__Entry,
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => SpotId::Kak__Spider_House__Entry,
+        }
     }
 
     fn skip_unused_items(&self, ctx: &mut Context) {

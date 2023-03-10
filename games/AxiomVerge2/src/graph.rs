@@ -2222,6 +2222,57 @@ impl world::World for World {
         &self.locations.as_slice()
     }
 
+    fn get_location_spot(&self, loc_id: LocationId) -> SpotId {
+        match loc_id {
+            LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
+            LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => {
+                SpotId::Antarctica__Building_2U_Corner__Behind_Boxes
+            }
+            LocationId::Antarctica__Power_Room__Switch__Flip => {
+                SpotId::Antarctica__Power_Room__Switch
+            }
+            LocationId::Ebih__Bunker_Interior__Desk__Note => SpotId::Ebih__Bunker_Interior__Desk,
+            LocationId::Ebih__Building_Interior__Entry__Remote_Urn => {
+                SpotId::Ebih__Building_Interior__Entry
+            }
+            LocationId::Ebih__Building_Interior__Corner__Urn => {
+                SpotId::Ebih__Building_Interior__Corner
+            }
+            LocationId::Ebih__Tent_Interior__Desk__Note => SpotId::Ebih__Tent_Interior__Desk,
+            LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
+                SpotId::Ebih__By_Garage__Crawlspace
+            }
+            LocationId::Glacier__Compass_Room__Center__Table => {
+                SpotId::Glacier__Compass_Room__Center
+            }
+            LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
+                SpotId::Glacier__The_Big_Drop__Water_Surface
+            }
+            LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => {
+                SpotId::Glacier__Vertical_Room_Top__Under_Switch
+            }
+            LocationId::Glacier__Vertical_Room_Top__Peak__Flask => {
+                SpotId::Glacier__Vertical_Room_Top__Peak
+            }
+            LocationId::Glacier__Boomerang_Room__Pedestal__Item
+            | LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
+                SpotId::Glacier__Boomerang_Room__Pedestal
+            }
+            LocationId::Glacier__Ledge_Grab_Area__Cliff_Bottom__Quick_Grab => {
+                SpotId::Glacier__Ledge_Grab_Area__Cliff_Bottom
+            }
+            LocationId::Glacier__Ledge_Grab_Area__Pedestal__Item => {
+                SpotId::Glacier__Ledge_Grab_Area__Pedestal
+            }
+            LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
+                SpotId::Glacier__Apocalypse_Entry__Terminal
+            }
+            LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1 => {
+                SpotId::Menu__Upgrade_Menu__Upgrades
+            }
+        }
+    }
+
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
             if unused_item(world::Location::item(loc)) {

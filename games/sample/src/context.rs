@@ -17,14 +17,12 @@ pub mod enums {
     #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default)]
     pub enum Tod {
         #[default]
-        None,
         Day,
         Night,
     }
     impl fmt::Display for Tod {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
             match self {
-                Tod::None => write!(f, "{}", "None"),
                 Tod::Day => write!(f, "{}", "Day"),
                 Tod::Night => write!(f, "{}", "Night"),
             }
