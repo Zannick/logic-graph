@@ -226,7 +226,10 @@ subgraph Glacier
 end
 subgraph Menu
     subgraph Menu__Upgrade_Menu[Upgrade Menu]
-        Menu__Upgrade_Menu__Upgrades(Upgrades);
+        Menu__Upgrade_Menu__Physiology(Physiology);
+        Menu__Upgrade_Menu__Combat(Combat);
+        Menu__Upgrade_Menu__Infection(Infection);
+        Menu__Upgrade_Menu__Drone(Drone);
     end
 end
 Antarctica ~~~ Glacier
@@ -302,3 +305,9 @@ Glacier__Vertical_Room_Top__Mid_9 --> Glacier__Vertical_Room_Top__Peak
 Glacier__Vertical_Room_Top__Peak --> Glacier__Vertical_Room_Top__West_8
 Glacier__Vertical_Room_Top__Under_Switch --> Glacier__Vertical_Room_Top__Mid_9
 Glacier__Vertical_Room_Top__West_8 --> Glacier__Peak__East_8
+Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
+Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
+Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
+Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
+Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
+Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology

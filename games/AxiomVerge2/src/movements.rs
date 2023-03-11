@@ -19,7 +19,7 @@ enum Movement {
 fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
     match m {
         Movement::Default => true,
-        Movement::MistUpgraded => rules::access_mist_upgraded(ctx),
+        Movement::MistUpgraded => rules::access_mist_upgrade(ctx),
     }
 }
 

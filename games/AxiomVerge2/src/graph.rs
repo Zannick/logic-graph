@@ -342,7 +342,10 @@ pub enum SpotId {
     Glacier__Vertical_Room_Upper_Mid__East_13,
     Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
     Glacier__Vertical_Room_Upper_Mid__Mid_11,
-    Menu__Upgrade_Menu__Upgrades,
+    Menu__Upgrade_Menu__Combat,
+    Menu__Upgrade_Menu__Drone,
+    Menu__Upgrade_Menu__Infection,
+    Menu__Upgrade_Menu__Physiology,
 }
 impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -693,8 +696,13 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11 => {
                 write!(f, "{}", "Glacier > Vertical Room Upper Mid > Mid 11")
             }
-            SpotId::Menu__Upgrade_Menu__Upgrades => {
-                write!(f, "{}", "Menu > Upgrade Menu > Upgrades")
+            SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
+            SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
+            SpotId::Menu__Upgrade_Menu__Infection => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection")
+            }
+            SpotId::Menu__Upgrade_Menu__Physiology => {
+                write!(f, "{}", "Menu > Upgrade Menu > Physiology")
             }
         }
     }
@@ -930,7 +938,10 @@ impl std::str::FromStr for SpotId {
             "Glacier > Vertical Room Upper Mid > Mid 11" => {
                 Ok(SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11)
             }
-            "Menu > Upgrade Menu > Upgrades" => Ok(SpotId::Menu__Upgrade_Menu__Upgrades),
+            "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
+            "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
+            "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
+            "Menu > Upgrade Menu > Physiology" => Ok(SpotId::Menu__Upgrade_Menu__Physiology),
             _ => Err(format!("Could not recognize as a SpotId: {}", s)),
         }
     }
@@ -955,7 +966,41 @@ pub enum LocationId {
     Glacier__The_Big_Drop__Water_Surface__Drown,
     Glacier__Vertical_Room_Top__Peak__Flask,
     Glacier__Vertical_Room_Top__Under_Switch__Switch,
-    Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1,
+    Menu__Upgrade_Menu__Combat__Melee_Damage_1,
+    Menu__Upgrade_Menu__Combat__Melee_Damage_2,
+    Menu__Upgrade_Menu__Combat__Melee_Damage_3,
+    Menu__Upgrade_Menu__Combat__Melee_Speed_1,
+    Menu__Upgrade_Menu__Combat__Melee_Speed_2,
+    Menu__Upgrade_Menu__Combat__Melee_Speed_3,
+    Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
+    Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
+    Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
+    Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
+    Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
+    Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
+    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
+    Menu__Upgrade_Menu__Infection__Infection_Level_1,
+    Menu__Upgrade_Menu__Infection__Infection_Level_2,
+    Menu__Upgrade_Menu__Infection__Infection_Level_3,
+    Menu__Upgrade_Menu__Infection__Infection_Range_1,
+    Menu__Upgrade_Menu__Infection__Infection_Range_2,
+    Menu__Upgrade_Menu__Infection__Infection_Range_3,
+    Menu__Upgrade_Menu__Infection__Infection_Speed_1,
+    Menu__Upgrade_Menu__Infection__Infection_Speed_2,
+    Menu__Upgrade_Menu__Infection__Nano_Points_1,
+    Menu__Upgrade_Menu__Infection__Nano_Points_2,
+    Menu__Upgrade_Menu__Infection__Nano_Points_3,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
+    Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
+    Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
 }
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -1017,8 +1062,136 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Glacier > Vertical Room Top > Under Switch: Switch"
             ),
-            LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Upgrades: Health_Upgrade_1")
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Level_1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Level_2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Level_3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Range_1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Range_2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Range_3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Speed_1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Infection: Infection_Speed_2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_1")
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_2")
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_3")
+            }
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology: Health_Upgrade_1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology: Health_Upgrade_2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology: Health_Upgrade_3"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology: Health_Upgrade_4"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Physiology: Health_Upgrade_5"
+            ),
+            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                write!(f, "{}", "Menu > Upgrade Menu > Physiology: Mist_Upgrade")
             }
         }
     }
@@ -1078,8 +1251,110 @@ impl std::str::FromStr for LocationId {
             "Glacier > Vertical Room Top > Under Switch: Switch" => {
                 Ok(LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch)
             }
-            "Menu > Upgrade Menu > Upgrades: Health_Upgrade_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1)
+            "Menu > Upgrade Menu > Combat: Melee_Damage_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
+            }
+            "Menu > Upgrade Menu > Combat: Melee_Damage_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2)
+            }
+            "Menu > Upgrade Menu > Combat: Melee_Damage_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3)
+            }
+            "Menu > Upgrade Menu > Combat: Melee_Speed_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1)
+            }
+            "Menu > Upgrade Menu > Combat: Melee_Speed_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2)
+            }
+            "Menu > Upgrade Menu > Combat: Melee_Speed_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3)
+            }
+            "Menu > Upgrade Menu > Combat: Ranged_Damage_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
+            }
+            "Menu > Upgrade Menu > Combat: Ranged_Damage_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
+            }
+            "Menu > Upgrade Menu > Combat: Ranged_Damage_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
+            }
+            "Menu > Upgrade Menu > Combat: Ranged_Speed_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
+            }
+            "Menu > Upgrade Menu > Combat: Ranged_Speed_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
+            }
+            "Menu > Upgrade Menu > Combat: Ranged_Speed_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
+            }
+            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
+            }
+            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
+            }
+            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
+            }
+            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
+            }
+            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
+            }
+            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Level_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Level_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Level_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Range_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Range_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Range_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Speed_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1)
+            }
+            "Menu > Upgrade Menu > Infection: Infection_Speed_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2)
+            }
+            "Menu > Upgrade Menu > Infection: Nano_Points_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1)
+            }
+            "Menu > Upgrade Menu > Infection: Nano_Points_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2)
+            }
+            "Menu > Upgrade Menu > Infection: Nano_Points_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3)
+            }
+            "Menu > Upgrade Menu > Physiology: Health_Upgrade_1" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
+            }
+            "Menu > Upgrade Menu > Physiology: Health_Upgrade_2" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
+            }
+            "Menu > Upgrade Menu > Physiology: Health_Upgrade_3" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
+            }
+            "Menu > Upgrade Menu > Physiology: Health_Upgrade_4" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
+            }
+            "Menu > Upgrade Menu > Physiology: Health_Upgrade_5" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
+            }
+            "Menu > Upgrade Menu > Physiology: Mist_Upgrade" => {
+                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
             }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
         }
@@ -1204,11 +1479,23 @@ pub enum ExitId {
     Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1,
     Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1,
     Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1,
+    Menu__Upgrade_Menu__Combat__ex__Drone_1,
+    Menu__Upgrade_Menu__Combat__ex__Infection_1,
+    Menu__Upgrade_Menu__Combat__ex__Physiology_1,
+    Menu__Upgrade_Menu__Drone__ex__Combat_1,
+    Menu__Upgrade_Menu__Drone__ex__Infection_1,
+    Menu__Upgrade_Menu__Drone__ex__Physiology_1,
+    Menu__Upgrade_Menu__Infection__ex__Combat_1,
+    Menu__Upgrade_Menu__Infection__ex__Drone_1,
+    Menu__Upgrade_Menu__Infection__ex__Physiology_1,
+    Menu__Upgrade_Menu__Physiology__ex__Combat_1,
+    Menu__Upgrade_Menu__Physiology__ex__Drone_1,
+    Menu__Upgrade_Menu__Physiology__ex__Infection_1,
 }
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),            ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),            ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => write!(f, "{}", "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)"),            ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => write!(f, "{}", "Antarctica > Building 1W > West Entry ==> West > Boxes (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> East > Building 2 Entry (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"),            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)"),            ExitId::Antarctica__Building_2U_Corner__Behind_Boxes__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2U Corner > Behind Boxes ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => write!(f, "{}", "Antarctica > East > Building 1 Entry ==> Building 1E > East Entry (1)"),            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),            ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),            ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"),            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),            ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),            ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),            ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),            ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Upper_Mid__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room Upper Mid > East 12 (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Upper_Mid__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room Upper Mid > East 13 (1)"),            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => write!(f, "{}", "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)"),            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)"),            ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Pedestal__ex__Boomerang_Room__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Pedestal ==> Boomerang Room > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Platform__ex__Boomerang_Room__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Platform ==> Boomerang Room > Platform (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Upper West ==> Boomerang Antechamber > Upper East (1)"),            ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),            ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Grid 41,9-10 > East (1)"),            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),            ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),            ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),            ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),            ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),            ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),            ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),            ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room Top > East 9 (1)"),            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West (1)"),            ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),            ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Grid 41,9-10 > East ==> Dock Outside > Do Not Enter (1)"),            ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Grid 41,9-10 > Lower East ==> Grid 42,10 > West (1)"),            ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),            ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Grid 41,9-10 > Lower East (1)"),            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),            ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),            ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),            ExitId::Glacier__Ledge_Grab_Area__Cliff_Bottom__ex__Ledge_Grab_Room__Cliff_1 => write!(f, "{}", "Glacier > Ledge Grab Area > Cliff Bottom ==> Ledge Grab Room > Cliff (1)"),            ExitId::Glacier__Ledge_Grab_Area__Gate__ex__Ledge_Grab_Upper__West_1 => write!(f, "{}", "Glacier > Ledge Grab Area > Gate ==> Ledge Grab Upper > West (1)"),            ExitId::Glacier__Ledge_Grab_Area__Pedestal__ex__Ledge_Grab_Upper__West_1 => write!(f, "{}", "Glacier > Ledge Grab Area > Pedestal ==> Ledge Grab Upper > West (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__Column__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > Column ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__East_9__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > East 9 ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__East_9__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > East 9 ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__East_9__ex__Vertical_Room_Top__West_9_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > East 9 ==> Vertical Room Top > West 9 (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__Gate_Ledge__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > Gate Ledge ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Ledge_Grab_Area__Cliff_Bottom_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff ==> Ledge Grab Area > Cliff Bottom (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11 ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Ledge_Grab_Upper__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Ledge Grab Upper > Fork (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Fork__ex__Ledge_Grab_Balcony__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Fork ==> Ledge Grab Balcony > Column (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Fork__ex__Ledge_Grab_Balcony__Gate_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Fork ==> Ledge Grab Balcony > Gate Ledge (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Fork__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Fork ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Lower_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Lower Platform ==> Upper Platform (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Upper Platform ==> Fork (1)"),            ExitId::Glacier__Ledge_Grab_Upper__West__ex__Ledge_Grab_Area__Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > West ==> Ledge Grab Area > Gate (1)"),            ExitId::Glacier__Ledge_Grab_Upper__West__ex__Ledge_Grab_Area__Pedestal_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > West ==> Ledge Grab Area > Pedestal (1)"),            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),            ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),            ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West ==> Grid 39-40,7-9 > Upper East (1)"),            ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room Left > Past Gate ==> Ledge Grab Room > East 11 (1)"),            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room Left > Past Gate ==> Vertical Room Top > Under Switch (1)"),            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 9 ==> Grid 37-38,9 > West (1)"),            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 11 ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Vertical_Room_Upper_Mid__Mid_11_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 11 ==> Vertical Room Upper Mid > Mid 11 (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room Top > Peak ==> West 8 (1)"),            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 8 ==> Peak > East 8 (1)"),            ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Balcony__East_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 9 ==> Ledge Grab Balcony > East 9 (1)"),            ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > East 12 ==> Boomerang Antechamber > West 12 (1)"),            ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > East 13 ==> Boomerang Antechamber > West 13 (1)"),            ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > Mid 11 ==> Vertical Room Top > Mid 11 (1)"),        }
+            ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),            ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),            ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => write!(f, "{}", "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)"),            ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => write!(f, "{}", "Antarctica > Building 1W > West Entry ==> West > Boxes (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> East > Building 2 Entry (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"),            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)"),            ExitId::Antarctica__Building_2U_Corner__Behind_Boxes__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2U Corner > Behind Boxes ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => write!(f, "{}", "Antarctica > East > Building 1 Entry ==> Building 1E > East Entry (1)"),            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),            ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),            ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"),            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),            ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),            ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),            ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),            ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Upper_Mid__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room Upper Mid > East 12 (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Upper_Mid__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room Upper Mid > East 13 (1)"),            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => write!(f, "{}", "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)"),            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)"),            ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Pedestal__ex__Boomerang_Room__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Pedestal ==> Boomerang Room > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Platform__ex__Boomerang_Room__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Platform ==> Boomerang Room > Platform (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Upper West ==> Boomerang Antechamber > Upper East (1)"),            ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),            ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Grid 41,9-10 > East (1)"),            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),            ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),            ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),            ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),            ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),            ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),            ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),            ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room Top > East 9 (1)"),            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West (1)"),            ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),            ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Grid 41,9-10 > East ==> Dock Outside > Do Not Enter (1)"),            ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Grid 41,9-10 > Lower East ==> Grid 42,10 > West (1)"),            ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),            ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Grid 41,9-10 > Lower East (1)"),            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),            ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),            ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),            ExitId::Glacier__Ledge_Grab_Area__Cliff_Bottom__ex__Ledge_Grab_Room__Cliff_1 => write!(f, "{}", "Glacier > Ledge Grab Area > Cliff Bottom ==> Ledge Grab Room > Cliff (1)"),            ExitId::Glacier__Ledge_Grab_Area__Gate__ex__Ledge_Grab_Upper__West_1 => write!(f, "{}", "Glacier > Ledge Grab Area > Gate ==> Ledge Grab Upper > West (1)"),            ExitId::Glacier__Ledge_Grab_Area__Pedestal__ex__Ledge_Grab_Upper__West_1 => write!(f, "{}", "Glacier > Ledge Grab Area > Pedestal ==> Ledge Grab Upper > West (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__Column__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > Column ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__East_9__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > East 9 ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__East_9__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > East 9 ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__East_9__ex__Vertical_Room_Top__West_9_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > East 9 ==> Vertical Room Top > West 9 (1)"),            ExitId::Glacier__Ledge_Grab_Balcony__Gate_Ledge__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Balcony > Gate Ledge ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Ledge_Grab_Area__Cliff_Bottom_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff ==> Ledge Grab Area > Cliff Bottom (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11 ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Ledge_Grab_Upper__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Ledge Grab Upper > Fork (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Fork__ex__Ledge_Grab_Balcony__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Fork ==> Ledge Grab Balcony > Column (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Fork__ex__Ledge_Grab_Balcony__Gate_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Fork ==> Ledge Grab Balcony > Gate Ledge (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Fork__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Fork ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Lower_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Lower Platform ==> Upper Platform (1)"),            ExitId::Glacier__Ledge_Grab_Upper__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > Upper Platform ==> Fork (1)"),            ExitId::Glacier__Ledge_Grab_Upper__West__ex__Ledge_Grab_Area__Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > West ==> Ledge Grab Area > Gate (1)"),            ExitId::Glacier__Ledge_Grab_Upper__West__ex__Ledge_Grab_Area__Pedestal_1 => write!(f, "{}", "Glacier > Ledge Grab Upper > West ==> Ledge Grab Area > Pedestal (1)"),            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),            ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),            ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West ==> Grid 39-40,7-9 > Upper East (1)"),            ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room Left > Past Gate ==> Ledge Grab Room > East 11 (1)"),            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room Left > Past Gate ==> Vertical Room Top > Under Switch (1)"),            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 9 ==> Grid 37-38,9 > West (1)"),            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 11 ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Vertical_Room_Upper_Mid__Mid_11_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 11 ==> Vertical Room Upper Mid > Mid 11 (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room Top > Peak ==> West 8 (1)"),            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 8 ==> Peak > East 8 (1)"),            ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Balcony__East_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 9 ==> Ledge Grab Balcony > East 9 (1)"),            ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > East 12 ==> Boomerang Antechamber > West 12 (1)"),            ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > East 13 ==> Boomerang Antechamber > West 13 (1)"),            ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1 => write!(f, "{}", "Glacier > Vertical Room Upper Mid > Mid 11 ==> Vertical Room Top > Mid 11 (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),        }
     }
 }
 impl analyzer::world::Id for ExitId {}
@@ -1333,6 +1620,18 @@ impl std::str::FromStr for ExitId {
             "Glacier > Vertical Room Upper Mid > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1),
             "Glacier > Vertical Room Upper Mid > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1),
             "Glacier > Vertical Room Upper Mid > Mid 11 ==> Vertical Room Top > Mid 11 (1)" => Ok(ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1),
+            "Menu > Upgrade Menu > Combat ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1),
+            "Menu > Upgrade Menu > Combat ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1),
+            "Menu > Upgrade Menu > Combat ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1),
+            "Menu > Upgrade Menu > Drone ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1),
+            "Menu > Upgrade Menu > Drone ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1),
+            "Menu > Upgrade Menu > Drone ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1),
+            "Menu > Upgrade Menu > Infection ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1),
+            "Menu > Upgrade Menu > Infection ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1),
+            "Menu > Upgrade Menu > Infection ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1),
+            "Menu > Upgrade Menu > Physiology ==> Combat (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1),
+            "Menu > Upgrade Menu > Physiology ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1),
+            "Menu > Upgrade Menu > Physiology ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1),
             _ => Err(format!("Could not recognize as a ExitId: {}", s)),
         }
     }
@@ -1628,7 +1927,10 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             AreaId::Glacier__Apocalypse_Entry
         }
-        SpotId::Menu__Upgrade_Menu__Upgrades => AreaId::Menu__Upgrade_Menu,
+        SpotId::Menu__Upgrade_Menu__Physiology
+        | SpotId::Menu__Upgrade_Menu__Combat
+        | SpotId::Menu__Upgrade_Menu__Infection
+        | SpotId::Menu__Upgrade_Menu__Drone => AreaId::Menu__Upgrade_Menu,
     }
 }
 pub fn get_region(spot: SpotId) -> RegionId {
@@ -1776,7 +2078,10 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             RegionId::Glacier
         }
-        SpotId::Menu__Upgrade_Menu__Upgrades => RegionId::Menu,
+        SpotId::Menu__Upgrade_Menu__Physiology
+        | SpotId::Menu__Upgrade_Menu__Combat
+        | SpotId::Menu__Upgrade_Menu__Infection
+        | SpotId::Menu__Upgrade_Menu__Drone => RegionId::Menu,
     }
 }
 
@@ -1826,7 +2131,89 @@ impl world::Accessible for Location {
                 LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => {
                     rules::access_boomerang(&ctx)
                 }
-                LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1 => true,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => true,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
+                    rules::access_melee_damage(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
+                    rules::access_melee_damage__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => true,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
+                    rules::access_melee_speed(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
+                    rules::access_melee_speed__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => true,
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
+                    rules::access_ranged_damage(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
+                    rules::access_ranged_damage__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => true,
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
+                    rules::access_ranged_speed(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                    rules::access_ranged_speed__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => true,
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
+                    rules::access_drone_melee_damage(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
+                    rules::access_drone_melee_damage__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => true,
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
+                    rules::access_drone_melee_speed(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                    rules::access_drone_melee_speed__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => true,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
+                    rules::access_infection_level(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
+                    rules::access_infection_level__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => true,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
+                    rules::access_infection_range(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
+                    rules::access_infection_range__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => true,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
+                    rules::access_infection_speed(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => true,
+                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
+                    rules::access_nano_points(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                    rules::access_nano_points__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => true,
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
+                    rules::access_health_upgrade(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
+                    rules::access_health_upgrade__2(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
+                    rules::access_health_upgrade__3(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
+                    rules::access_health_upgrade__4(&ctx)
+                }
+                LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                    rules::access_nanite_mist(&ctx)
+                }
             }
     }
     fn time(&self) -> i32 {
@@ -1986,6 +2373,18 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room_Upper_Mid__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Vertical_Room_Upper_Mid__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
             ExitId::Glacier__Vertical_Room_Upper_Mid__Mid_11__ex__Vertical_Room_Top__Mid_11_1 => true,
+            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => true,
+            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => true,
+            ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
+            ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => true,
+            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => true,
+            ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => true,
+            ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => true,
+            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => true,
+            ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => true,
+            ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
+            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => true,
+            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => true,
         }
     }
     fn time(&self) -> i32 {
@@ -2111,7 +2510,7 @@ impl world::Warp for Warp {
                 WarpId::EarthSave => ctx.save(),
                 WarpId::ExitMenu => ctx.last(),
                 WarpId::IndraSave => ctx.save(),
-                WarpId::Menu => SpotId::Menu__Upgrade_Menu__Upgrades,
+                WarpId::Menu => SpotId::Menu__Upgrade_Menu__Physiology,
             }
         } else {
             self.dest
@@ -2151,7 +2550,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 137],
+    raw_spots: [SpotId; 140],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -2162,7 +2561,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 18;
+    const NUM_LOCATIONS: i32 = 52;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -2267,8 +2666,48 @@ impl world::World for World {
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Terminal
             }
-            LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1 => {
-                SpotId::Menu__Upgrade_Menu__Upgrades
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4
+            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5
+            | LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+                SpotId::Menu__Upgrade_Menu__Physiology
+            }
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+                SpotId::Menu__Upgrade_Menu__Combat
+            }
+            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1
+            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2
+            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
+                SpotId::Menu__Upgrade_Menu__Infection
+            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2
+            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
+                SpotId::Menu__Upgrade_Menu__Drone
             }
         }
     }
@@ -2284,7 +2723,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access_amashilama(ctx),
-            Objective::Progress => rules::access_health_upgrade_1(ctx),
+            Objective::Progress => rules::access_health_upgrade(ctx),
             Objective::Everything => rules::access_amashilama__notes_2053_02_27(ctx),
         }
     }
@@ -2435,7 +2874,10 @@ impl World {
                 SpotId::Glacier__Vertical_Room_Upper_Mid__East_13,
                 SpotId::Glacier__Vertical_Room_Upper_Mid__Lower_West_Corner,
                 SpotId::Glacier__Vertical_Room_Upper_Mid__Mid_11,
-                SpotId::Menu__Upgrade_Menu__Upgrades,
+                SpotId::Menu__Upgrade_Menu__Combat,
+                SpotId::Menu__Upgrade_Menu__Drone,
+                SpotId::Menu__Upgrade_Menu__Infection,
+                SpotId::Menu__Upgrade_Menu__Physiology,
             ],
             spots: build_spots(),
             global_actions: Range {
@@ -2584,11 +3026,283 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 1000,
             exit_id: None,
         },
-        LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1,
+        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
             canonical: CanonId::None,
-            item: Item::Health_Upgrade_1,
+            item: Item::Health_Upgrade,
             price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
+            canonical: CanonId::None,
+            item: Item::Health_Upgrade,
+            price: Currency::Flasks(2),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
+            canonical: CanonId::None,
+            item: Item::Health_Upgrade,
+            price: Currency::Flasks(4),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
+            canonical: CanonId::None,
+            item: Item::Health_Upgrade,
+            price: Currency::Flasks(4),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
+            canonical: CanonId::None,
+            item: Item::Health_Upgrade,
+            price: Currency::Flasks(6),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => Location {
+            id: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
+            canonical: CanonId::None,
+            item: Item::Mist_Upgrade,
+            price: Currency::Flasks(5),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1,
+            canonical: CanonId::None,
+            item: Item::Melee_Damage,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
+            canonical: CanonId::None,
+            item: Item::Melee_Damage,
+            price: Currency::Flasks(4),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
+            canonical: CanonId::None,
+            item: Item::Melee_Damage,
+            price: Currency::Flasks(6),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1,
+            canonical: CanonId::None,
+            item: Item::Melee_Speed,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
+            canonical: CanonId::None,
+            item: Item::Melee_Speed,
+            price: Currency::Flasks(4),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
+            canonical: CanonId::None,
+            item: Item::Melee_Speed,
+            price: Currency::Flasks(6),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
+            canonical: CanonId::None,
+            item: Item::Ranged_Damage,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
+            canonical: CanonId::None,
+            item: Item::Ranged_Damage,
+            price: Currency::Flasks(4),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
+            canonical: CanonId::None,
+            item: Item::Ranged_Damage,
+            price: Currency::Flasks(6),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
+            canonical: CanonId::None,
+            item: Item::Ranged_Speed,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
+            canonical: CanonId::None,
+            item: Item::Ranged_Speed,
+            price: Currency::Flasks(3),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
+            canonical: CanonId::None,
+            item: Item::Ranged_Speed,
+            price: Currency::Flasks(5),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
+            canonical: CanonId::None,
+            item: Item::Infection_Level,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
+            canonical: CanonId::None,
+            item: Item::Infection_Level,
+            price: Currency::Flasks(3),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
+            canonical: CanonId::None,
+            item: Item::Infection_Level,
+            price: Currency::Flasks(4),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1,
+            canonical: CanonId::None,
+            item: Item::Nano_Points,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
+            canonical: CanonId::None,
+            item: Item::Nano_Points,
+            price: Currency::Flasks(3),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
+            canonical: CanonId::None,
+            item: Item::Nano_Points,
+            price: Currency::Flasks(5),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1,
+            canonical: CanonId::None,
+            item: Item::Infection_Speed,
+            price: Currency::Flasks(2),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
+            canonical: CanonId::None,
+            item: Item::Infection_Speed,
+            price: Currency::Flasks(5),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1,
+            canonical: CanonId::None,
+            item: Item::Infection_Range,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
+            canonical: CanonId::None,
+            item: Item::Infection_Range,
+            price: Currency::Flasks(3),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
+            canonical: CanonId::None,
+            item: Item::Infection_Range,
+            price: Currency::Flasks(5),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
+            canonical: CanonId::None,
+            item: Item::Drone_Melee_Damage,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
+            canonical: CanonId::None,
+            item: Item::Drone_Melee_Damage,
+            price: Currency::Flasks(3),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
+            canonical: CanonId::None,
+            item: Item::Drone_Melee_Damage,
+            price: Currency::Flasks(5),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
+            canonical: CanonId::None,
+            item: Item::Drone_Melee_Speed,
+            price: Currency::Flasks(1),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
+            canonical: CanonId::None,
+            item: Item::Drone_Melee_Speed,
+            price: Currency::Flasks(3),
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => Location {
+            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
+            canonical: CanonId::None,
+            item: Item::Drone_Melee_Speed,
+            price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
         },
@@ -3406,6 +4120,90 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
             time: 1350,
             dest: SpotId::Glacier__Grid_43_10_11__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Combat,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Infection,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Drone,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Physiology,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Infection,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Drone,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Physiology,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Combat,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Drone,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Physiology,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Combat,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => Exit {
+            id: ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1,
+            time: 100,
+            dest: SpotId::Menu__Upgrade_Menu__Infection,
             price: Currency::Free,
             loc_id: None,
         },
@@ -5715,21 +6513,76 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
             },
         },
-        SpotId::Menu__Upgrade_Menu__Upgrades => Spot {
-            id: SpotId::Menu__Upgrade_Menu__Upgrades,
+        SpotId::Menu__Upgrade_Menu__Physiology => Spot {
+            id: SpotId::Menu__Upgrade_Menu__Physiology,
             locations: Range {
-                start: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize(),
-                end: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize() + 1,
+                start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Menu__Upgrade_Menu__Upgrades.into_usize(),
-                end: SpotId::Menu__Upgrade_Menu__Upgrades.into_usize() + 1,
+                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+        SpotId::Menu__Upgrade_Menu__Combat => Spot {
+            id: SpotId::Menu__Upgrade_Menu__Combat,
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+        SpotId::Menu__Upgrade_Menu__Infection => Spot {
+            id: SpotId::Menu__Upgrade_Menu__Infection,
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
+            },
+        },
+        SpotId::Menu__Upgrade_Menu__Drone => Spot {
+            id: SpotId::Menu__Upgrade_Menu__Drone,
+            locations: Range {
+                start: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1.into_usize(),
+                end: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1.into_usize(),
+                end: ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Menu__Upgrade_Menu__Combat.into_usize(),
+                end: SpotId::Menu__Upgrade_Menu__Physiology.into_usize() + 1,
             },
         },
     }
@@ -5763,7 +6616,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::Menu => Warp {
             id: WarpId::Menu,
-            dest: SpotId::Menu__Upgrade_Menu__Upgrades,
+            dest: SpotId::Menu__Upgrade_Menu__Physiology,
             time: 1000,
             price: Currency::Free,
         },
@@ -5956,9 +6809,21 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize() + 1,
         },
-        SpotId::Menu__Upgrade_Menu__Upgrades => Range {
-            start: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize() + 1,
+        SpotId::Menu__Upgrade_Menu__Physiology => Range {
+            start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
+        },
+        SpotId::Menu__Upgrade_Menu__Combat => Range {
+            start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3.into_usize() + 1,
+        },
+        SpotId::Menu__Upgrade_Menu__Infection => Range {
+            start: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3.into_usize() + 1,
+        },
+        SpotId::Menu__Upgrade_Menu__Drone => Range {
+            start: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3.into_usize() + 1,
         },
     }
 }
@@ -6046,8 +6911,8 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
         },
         AreaId::Menu__Upgrade_Menu => Range {
-            start: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize(),
+            start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
         },
     }
 }
@@ -6067,8 +6932,8 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             end: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize(),
         },
         RegionId::Menu => Range {
-            start: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Upgrades__Health_Upgrade_1.into_usize(),
+            start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
         },
     }
 }

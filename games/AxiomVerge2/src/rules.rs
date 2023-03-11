@@ -40,6 +40,22 @@ pub fn access_break_box(ctx: &Context) -> bool {
     // $break_box
     helper__break_box!(ctx)
 }
+pub fn access_drone_melee_damage(ctx: &Context) -> bool {
+    // Drone_Melee_Damage
+    ctx.has(Item::Drone_Melee_Damage)
+}
+pub fn access_drone_melee_damage__2(ctx: &Context) -> bool {
+    // Drone_Melee_Damage{2}
+    ctx.count(Item::Drone_Melee_Damage) >= 2
+}
+pub fn access_drone_melee_speed(ctx: &Context) -> bool {
+    // Drone_Melee_Speed
+    ctx.has(Item::Drone_Melee_Speed)
+}
+pub fn access_drone_melee_speed__2(ctx: &Context) -> bool {
+    // Drone_Melee_Speed{2}
+    ctx.count(Item::Drone_Melee_Speed) >= 2
+}
 pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
@@ -52,17 +68,77 @@ pub fn access_grab_or_climb(ctx: &Context) -> bool {
     // $grab or $climb
     (helper__grab!(ctx) || helper__climb!(ctx))
 }
-pub fn access_health_upgrade_1(ctx: &Context) -> bool {
-    // Health_Upgrade_1
-    ctx.has(Item::Health_Upgrade_1)
+pub fn access_health_upgrade(ctx: &Context) -> bool {
+    // Health_Upgrade
+    ctx.has(Item::Health_Upgrade)
 }
-pub fn access_mist_upgraded(ctx: &Context) -> bool {
-    // Mist_Upgraded
-    ctx.has(Item::Mist_Upgraded)
+pub fn access_health_upgrade__2(ctx: &Context) -> bool {
+    // Health_Upgrade{2}
+    ctx.count(Item::Health_Upgrade) >= 2
+}
+pub fn access_health_upgrade__3(ctx: &Context) -> bool {
+    // Health_Upgrade{3}
+    ctx.count(Item::Health_Upgrade) >= 3
+}
+pub fn access_health_upgrade__4(ctx: &Context) -> bool {
+    // Health_Upgrade{4}
+    ctx.count(Item::Health_Upgrade) >= 4
+}
+pub fn access_infection_level(ctx: &Context) -> bool {
+    // Infection_Level
+    ctx.has(Item::Infection_Level)
+}
+pub fn access_infection_level__2(ctx: &Context) -> bool {
+    // Infection_Level{2}
+    ctx.count(Item::Infection_Level) >= 2
+}
+pub fn access_infection_range(ctx: &Context) -> bool {
+    // Infection_Range
+    ctx.has(Item::Infection_Range)
+}
+pub fn access_infection_range__2(ctx: &Context) -> bool {
+    // Infection_Range{2}
+    ctx.count(Item::Infection_Range) >= 2
+}
+pub fn access_infection_speed(ctx: &Context) -> bool {
+    // Infection_Speed
+    ctx.has(Item::Infection_Speed)
+}
+pub fn access_melee_damage(ctx: &Context) -> bool {
+    // Melee_Damage
+    ctx.has(Item::Melee_Damage)
+}
+pub fn access_melee_damage__2(ctx: &Context) -> bool {
+    // Melee_Damage{2}
+    ctx.count(Item::Melee_Damage) >= 2
+}
+pub fn access_melee_speed(ctx: &Context) -> bool {
+    // Melee_Speed
+    ctx.has(Item::Melee_Speed)
+}
+pub fn access_melee_speed__2(ctx: &Context) -> bool {
+    // Melee_Speed{2}
+    ctx.count(Item::Melee_Speed) >= 2
+}
+pub fn access_mist_upgrade(ctx: &Context) -> bool {
+    // Mist_Upgrade
+    ctx.has(Item::Mist_Upgrade)
 }
 pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
+}
+pub fn access_nanite_mist(ctx: &Context) -> bool {
+    // Nanite_Mist
+    ctx.has(Item::Nanite_Mist)
+}
+pub fn access_nano_points(ctx: &Context) -> bool {
+    // Nano_Points
+    ctx.has(Item::Nano_Points)
+}
+pub fn access_nano_points__2(ctx: &Context) -> bool {
+    // Nano_Points{2}
+    ctx.count(Item::Nano_Points) >= 2
 }
 pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
@@ -82,6 +158,22 @@ pub fn access_offset(ctx: &Context) -> bool {
 pub fn access_placeholder(ctx: &Context) -> bool {
     // Placeholder
     ctx.has(Item::Placeholder)
+}
+pub fn access_ranged_damage(ctx: &Context) -> bool {
+    // Ranged_Damage
+    ctx.has(Item::Ranged_Damage)
+}
+pub fn access_ranged_damage__2(ctx: &Context) -> bool {
+    // Ranged_Damage{2}
+    ctx.count(Item::Ranged_Damage) >= 2
+}
+pub fn access_ranged_speed(ctx: &Context) -> bool {
+    // Ranged_Speed
+    ctx.has(Item::Ranged_Speed)
+}
+pub fn access_ranged_speed__2(ctx: &Context) -> bool {
+    // Ranged_Speed{2}
+    ctx.count(Item::Ranged_Speed) >= 2
 }
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power

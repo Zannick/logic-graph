@@ -15,7 +15,7 @@ start:
 
 objectives:
   Start: Amashilama
-  Progress%: Health_Upgrade_1
+  Progress%: Health_Upgrade
   Everything: Amashilama && Notes_2053_02_27
 
 movements:
@@ -29,7 +29,7 @@ movements:
     # y = fall speed, about 1 level / 1.25s = .8
   # TODO: mist movement costs 30 energy/s
   mist_upgraded:
-    req: Mist_Upgraded
+    req: Mist_Upgrade
     free: .225  # this is an estimate
 
 
@@ -66,7 +66,7 @@ warps:
   menu:
     time: 1
     req: NOT WITHIN `Menu` and ^flasks > 0
-    to: Menu > Upgrade Menu > Upgrades
+    to: Menu > Upgrade Menu > Physiology
     do: ^last = ^position
   exit_menu:
     time: 0.2
@@ -79,6 +79,7 @@ helpers:
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
+  $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
   $offset: major_glitches and $melee
 
 actions:

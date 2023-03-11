@@ -55,6 +55,22 @@ macro_rules! helper__hook {
     }};
 }
 
+/// $max_energy (  )
+/// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
+#[macro_export]
+macro_rules! helper__max_energy {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        match $ctx.count(Item::Nano_Points) {
+            3 => 450,
+            2 => 400,
+            1 => 350,
+            _ => 300,
+        }
+    }};
+}
+
 /// $offset (  )
 /// major_glitches and $melee
 #[macro_export]

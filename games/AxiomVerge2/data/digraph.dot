@@ -313,7 +313,10 @@ digraph AxiomVerge2 {
     }
     subgraph cluster_Menu {
         subgraph cluster_Menu__Upgrade_Menu {
-            Menu__Upgrade_Menu__Upgrades [label = "Upgrades"];
+            Menu__Upgrade_Menu__Physiology [label = "Physiology"];
+            Menu__Upgrade_Menu__Combat [label = "Combat"];
+            Menu__Upgrade_Menu__Infection [label = "Infection"];
+            Menu__Upgrade_Menu__Drone [label = "Drone"];
             label = "Upgrade Menu";
             bgcolor = "white";
         }
@@ -436,4 +439,16 @@ digraph AxiomVerge2 {
     Glacier__Grid_31_9_12__West_12 -> Ebih__Base_Camp__East_12;
     Glacier__Grid_31_9_12__Midair -> Ebih__Base_Camp__East_11;
     Glacier__Apocalypse_Entry__West -> Glacier__Grid_43_10_11__East;
+    Menu__Upgrade_Menu__Physiology -> Menu__Upgrade_Menu__Combat;
+    Menu__Upgrade_Menu__Physiology -> Menu__Upgrade_Menu__Drone;
+    Menu__Upgrade_Menu__Physiology -> Menu__Upgrade_Menu__Infection;
+    Menu__Upgrade_Menu__Combat -> Menu__Upgrade_Menu__Drone;
+    Menu__Upgrade_Menu__Combat -> Menu__Upgrade_Menu__Infection;
+    Menu__Upgrade_Menu__Combat -> Menu__Upgrade_Menu__Physiology;
+    Menu__Upgrade_Menu__Infection -> Menu__Upgrade_Menu__Combat;
+    Menu__Upgrade_Menu__Infection -> Menu__Upgrade_Menu__Drone;
+    Menu__Upgrade_Menu__Infection -> Menu__Upgrade_Menu__Physiology;
+    Menu__Upgrade_Menu__Drone -> Menu__Upgrade_Menu__Combat;
+    Menu__Upgrade_Menu__Drone -> Menu__Upgrade_Menu__Infection;
+    Menu__Upgrade_Menu__Drone -> Menu__Upgrade_Menu__Physiology;
 }

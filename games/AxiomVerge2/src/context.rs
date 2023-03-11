@@ -67,12 +67,23 @@ pub struct Context {
     pub amashilama: bool,
     pub apocalypse_bomb: bool,
     pub boomerang: bool,
-    pub health_upgrade_1: bool,
+    pub drone_melee_damage: i8,
+    pub drone_melee_speed: i8,
+    pub health_upgrade: i8,
     pub ice_axe: bool,
+    pub infection_level: i8,
+    pub infection_range: i8,
+    pub infection_speed: bool,
     pub ledge_grab: bool,
-    pub mist_upgraded: bool,
+    pub melee_damage: i8,
+    pub melee_speed: i8,
+    pub mist_upgrade: bool,
+    pub nanite_mist: bool,
+    pub nano_points: i8,
     pub notes_2053_02_27: bool,
     pub placeholder: bool,
+    pub ranged_damage: i8,
+    pub ranged_speed: i8,
     pub slingshot_hook: bool,
     pub station_power: bool,
     pub switch_36_11: bool,
@@ -89,19 +100,30 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 14;
+    const NUM_ITEMS: i32 = 25;
 
     fn has(&self, item: Item) -> bool {
         match item {
             Item::Amashilama => self.amashilama,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Boomerang => self.boomerang,
-            Item::Health_Upgrade_1 => self.health_upgrade_1,
+            Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
+            Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
+            Item::Health_Upgrade => self.health_upgrade >= 1,
             Item::Ice_Axe => self.ice_axe,
+            Item::Infection_Level => self.infection_level >= 1,
+            Item::Infection_Range => self.infection_range >= 1,
+            Item::Infection_Speed => self.infection_speed,
             Item::Ledge_Grab => self.ledge_grab,
-            Item::Mist_Upgraded => self.mist_upgraded,
+            Item::Melee_Damage => self.melee_damage >= 1,
+            Item::Melee_Speed => self.melee_speed >= 1,
+            Item::Mist_Upgrade => self.mist_upgrade,
+            Item::Nanite_Mist => self.nanite_mist,
+            Item::Nano_Points => self.nano_points >= 1,
             Item::Notes_2053_02_27 => self.notes_2053_02_27,
             Item::Placeholder => self.placeholder,
+            Item::Ranged_Damage => self.ranged_damage >= 1,
+            Item::Ranged_Speed => self.ranged_speed >= 1,
             Item::Slingshot_Hook => self.slingshot_hook,
             Item::Station_Power => self.station_power,
             Item::Switch_36_11 => self.switch_36_11,
@@ -115,12 +137,23 @@ impl context::Ctx for Context {
             Item::Amashilama => self.amashilama.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Boomerang => self.boomerang.into(),
-            Item::Health_Upgrade_1 => self.health_upgrade_1.into(),
+            Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
+            Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
+            Item::Health_Upgrade => self.health_upgrade.into(),
             Item::Ice_Axe => self.ice_axe.into(),
+            Item::Infection_Level => self.infection_level.into(),
+            Item::Infection_Range => self.infection_range.into(),
+            Item::Infection_Speed => self.infection_speed.into(),
             Item::Ledge_Grab => self.ledge_grab.into(),
-            Item::Mist_Upgraded => self.mist_upgraded.into(),
+            Item::Melee_Damage => self.melee_damage.into(),
+            Item::Melee_Speed => self.melee_speed.into(),
+            Item::Mist_Upgrade => self.mist_upgrade.into(),
+            Item::Nanite_Mist => self.nanite_mist.into(),
+            Item::Nano_Points => self.nano_points.into(),
             Item::Notes_2053_02_27 => self.notes_2053_02_27.into(),
             Item::Placeholder => self.placeholder.into(),
+            Item::Ranged_Damage => self.ranged_damage.into(),
+            Item::Ranged_Speed => self.ranged_speed.into(),
             Item::Slingshot_Hook => self.slingshot_hook.into(),
             Item::Station_Power => self.station_power.into(),
             Item::Switch_36_11 => self.switch_36_11.into(),
@@ -141,23 +174,56 @@ impl context::Ctx for Context {
             Item::Boomerang => {
                 self.boomerang = true;
             }
-            Item::Health_Upgrade_1 => {
-                self.health_upgrade_1 = true;
+            Item::Drone_Melee_Damage => {
+                self.drone_melee_damage += 1;
+            }
+            Item::Drone_Melee_Speed => {
+                self.drone_melee_speed += 1;
+            }
+            Item::Health_Upgrade => {
+                self.health_upgrade += 1;
             }
             Item::Ice_Axe => {
                 self.ice_axe = true;
             }
+            Item::Infection_Level => {
+                self.infection_level += 1;
+            }
+            Item::Infection_Range => {
+                self.infection_range += 1;
+            }
+            Item::Infection_Speed => {
+                self.infection_speed = true;
+            }
             Item::Ledge_Grab => {
                 self.ledge_grab = true;
             }
-            Item::Mist_Upgraded => {
-                self.mist_upgraded = true;
+            Item::Melee_Damage => {
+                self.melee_damage += 1;
+            }
+            Item::Melee_Speed => {
+                self.melee_speed += 1;
+            }
+            Item::Mist_Upgrade => {
+                self.mist_upgrade = true;
+            }
+            Item::Nanite_Mist => {
+                self.nanite_mist = true;
+            }
+            Item::Nano_Points => {
+                self.nano_points += 1;
             }
             Item::Notes_2053_02_27 => {
                 self.notes_2053_02_27 = true;
             }
             Item::Placeholder => {
                 self.placeholder = true;
+            }
+            Item::Ranged_Damage => {
+                self.ranged_damage += 1;
+            }
+            Item::Ranged_Speed => {
+                self.ranged_speed += 1;
             }
             Item::Slingshot_Hook => {
                 self.slingshot_hook = true;
