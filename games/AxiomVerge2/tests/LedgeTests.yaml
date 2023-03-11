@@ -1,0 +1,69 @@
+# Shared setup for all tests in this document
+name: LedgeTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+  context:
+    save: Glacier > Revival > Save Point
+  visited:
+    - Glacier > The Big Drop > Water Surface > Drown
+  skipped:
+    - Glacier > Compass Room > Center > Table
+  start: Glacier > Vertical Room Top > East 9
+
+tests:
+  # can/cannot_obtain:
+  #   Checks for immediate accessability of an unvisited, unskipped location with the given item
+  #   "immediate" means: doable without performing actions or collecting items
+  - cannot_obtain: Ledge_Grab
+  - with:
+      - Switch_36_11
+    can_obtain: Ledge_Grab
+  
+  # can/cannot_reach:
+  #   Checks for immediate reachability of the given spot
+  #   "immediate" means: doable without performing actions or collecting items
+  - can_reach: Glacier > Revival > Save Point
+  - cannot_reach: Glacier > Vertical Room Top > Peak
+
+  # eventually_gets:
+  #   Repeats the search algorithm for a fixed number of attempts to find the given item.
+  #   TODO: might use the greedy algorithm instead
+  - with: 
+      - Boomerang
+    eventually_gets: Ledge_Grab
+  - settings:
+      major_glitches: true
+    eventually_gets: Ledge_Grab
+  - eventually_gets: Ledge_Grab
+
+  # path:
+  #   Attempts to follow the list of spots as a path, failing if any step doesn't work.
+  - name: switch_opens_gate
+    with:
+      - Switch_36_11
+    path:
+      - Glacier > Vertical Room Top > Mid 9
+      - Glacier > Vertical Room Top > Under Switch
+      - Glacier > Vertical Room Left > Past Gate
+
+  ## Requires tests
+  # "requires" lets you add a second setup, and then tests both 1) without those additional
+  # settings, the goal is not completable, 2) with those settings, it is.
+  # The tests correspond:
+  #    to_reach -> cannot_reach/can_reach
+  #    to_obtain -> cannot_obtain/can_obtain
+  - requires:
+      with: 
+        - Ledge_Grab
+      to_reach: Glacier > Vertical Room Top > Peak
+
+  # eventually_requires:
+  #   Similar to requires and eventually_gets, runs the search algorithm a fixed number of steps
+  #   to find the goal item, and fails if any route got the goal item but not the requirement(s).
+  #   (Also fails if it never found the goal item.)
+  - eventually_requires:
+      with: 
+        - Boomerang
+      to_obtain: Ledge_Grab

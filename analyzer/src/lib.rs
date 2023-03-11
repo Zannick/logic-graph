@@ -180,6 +180,7 @@ pub mod testlib {
         }};
     }
 
+    // TODO: should eventually be using greedy search instead?
     #[macro_export]
     macro_rules! expect_eventually {
         ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
@@ -204,20 +205,21 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_eventually_requires {
-        ($world:expr, $ctx:expr, $start:expr, $item:expr, $req:expr) => {{
+        ($world:expr, $ctx:expr, $start:expr, $item:expr, $verify_req:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
-            let mut count = 1000;
+            let mut count = 200;
             let mut success = false;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().has($item) {
+                    let result = ($verify_req)(ctx.get());
                     assert!(
-                        ctx.get().has($req),
-                        "Unexpectedly able to find {} without {}:\n{}\n",
+                        result.is_ok(),
+                        "Unexpectedly able to find {} without requirements:\n{}\n{}\n",
                         $item,
-                        $req,
+                        result.unwrap_err(),
                         ctx.history_str(),
                     );
                     success = true;

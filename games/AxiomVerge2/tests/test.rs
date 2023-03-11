@@ -103,12 +103,19 @@ fn search() {
     ctx.amashilama = true;
     ctx.ice_axe = true;
     ctx.save = SpotId::Glacier__Revival__Save_Point;
+    let verify = |ctx: &Context| {
+        if ctx.has(Item::Boomerang) {
+            Ok(())
+        } else {
+            Err("No boomerang")
+        }
+    };
 
     expect_eventually_requires!(
         &world,
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,
         Item::Ledge_Grab,
-        Item::Boomerang
+        verify
     );
 }

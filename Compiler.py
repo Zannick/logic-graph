@@ -20,7 +20,7 @@ import jinja2
 
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
-from Utils import base_dir, construct_id, n1, BUILTINS
+from Utils import base_dir, construct_id, construct_test_name, BUILTINS
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
@@ -38,7 +38,7 @@ typed_name = re.compile(r'(?P<name>\$?[\w\s]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
 
 
-def load_regions_from_file(file: str):
+def load_data_from_file(file: str):
     try:
         with open(file) as f:
             return list(yaml.safe_load_all(f))
@@ -48,7 +48,8 @@ def load_regions_from_file(file: str):
 
 
 def load_game_yaml(game_dir: str):
-    yfiles = [file for file in os.listdir(game_dir) if file.endswith('.yaml')]
+    yfiles = [file for file in os.listdir(game_dir)
+              if file.endswith('.yaml')]
     game_file = os.path.join(game_dir, MAIN_FILENAME)
     if MAIN_FILENAME not in yfiles:
         raise Exception(f'Game not found: expecting {game_file}')
@@ -59,10 +60,15 @@ def load_game_yaml(game_dir: str):
     if unexp:
         raise Exception(f'Unexpected top-level fields in {game_file}: {", ".join(sorted(unexp))}')
     game['regions'] = list(itertools.chain.from_iterable(
-        load_regions_from_file(os.path.join(game_dir, file))
+        load_data_from_file(os.path.join(game_dir, file))
         for file in sorted(yfiles)))
+    test_dir = os.path.join(game_dir, 'tests')
+    testfiles = [file for file in os.listdir(test_dir)
+                 if file.endswith('.yaml')]
+    game['tests'] = list(itertools.chain.from_iterable(
+        load_data_from_file(os.path.join(test_dir, file))
+        for file in sorted(testfiles)))
     return game
-
 
 def _parseExpression(logic: str, name: str, category: str, sep:str=':') -> ParseResult:
     rule = 'boolExpr'
@@ -165,6 +171,7 @@ class GameLogic(object):
         self._misc_errors = []
 
         self._info = load_game_yaml(self.game_dir)
+        self.tests = self._info['tests']
         self.game_name = self._info['name']
         self.helpers = {
             get_func_name(name): {
@@ -931,15 +938,16 @@ class GameLogic(object):
                                  line_statement_prefix='%%',
                                  line_comment_prefix='%#')
         env.filters.update({
-            'construct_id': construct_id,
-            'treeToString': treeToString,
-            'prToRust': self.prToRust,
             'actToHasEffect': self.actToHasEffect,
-            'get_int_type_for_max': get_int_type_for_max,
+            'camelize': inflection.camelize,
+            'construct_id': construct_id,
+            'construct_test_name': construct_test_name,
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
             'get_exit_target': get_exit_target,
+            'get_int_type_for_max': get_int_type_for_max,
+            'prToRust': self.prToRust,
             'str_to_rusttype': str_to_rusttype,
-            'camelize': inflection.camelize,
+            'treeToString': treeToString,
             'trim_type_prefix': trim_type_prefix,
         })
         # Access cached_properties to ensure they're in the template vars
@@ -960,12 +968,26 @@ class GameLogic(object):
             'benches': ['bench.rs'],
             'bin': ['main.rs'],
         }
+        rustfiles = []
         for dirname, fnames in files.items():
             os.makedirs(os.path.join(self.game_dir, dirname), exist_ok=True)
             for tname in fnames:
                 template = env.get_template(tname + '.jinja')
-                with open(os.path.join(self.game_dir, dirname, tname), 'w') as f:
+                name = os.path.join(self.game_dir, dirname, tname)
+                if name.endswith('.rs'):
+                    rustfiles.append(name)
+                with open(name, 'w') as f:
                     f.write(template.render(gl=self, **self.__dict__))
+
+        test_template = env.get_template('tests.rs.jinja')
+        for test in self.tests:
+            name = os.path.join(self.game_dir, 'tests', inflection.underscore(test['name']) + '.rs')
+            rustfiles.append(name)
+            with open(name, 'w') as f:
+                f.write(test_template.render(gl=self, test_file=test, **self.__dict__))
+
+        cmd = ['rustfmt'] + rustfiles
+        subprocess.run(cmd)
 
 
 if __name__ == '__main__':
@@ -979,8 +1001,3 @@ if __name__ == '__main__':
         print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
     gl.render()
-
-    srcdir = os.path.join(gl.game_dir, 'src')
-    files = os.listdir(srcdir)
-    cmd = ['rustfmt'] + [f for f in files if f.endswith('.rs')]
-    subprocess.run(cmd, cwd=srcdir)

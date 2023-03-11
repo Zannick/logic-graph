@@ -22,6 +22,17 @@ def construct_id(*args: list[str]) -> str:
                      for a in args
                      for s in nested.split(a))
 
+def construct_test_name(test_dict):
+    if 'name' in test_dict:
+        return test_dict['name']
+    return '_'.join(
+        construct_id(k) + '_' + (construct_test_name(v) if isinstance(v, dict)
+                                 else construct_id(*v) if isinstance(v, (list, tuple))
+                                 else construct_id(str(v)))
+        for k, v in test_dict.items()
+    )
+
+
 def n1(tuples):
     for a, *b in tuples:
         yield a
