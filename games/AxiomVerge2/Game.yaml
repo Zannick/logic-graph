@@ -75,7 +75,7 @@ warps:
 
 helpers:
   $melee: Ice_Axe
-  $break_box: $melee
+  $break_box: $melee or Boomerang
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
