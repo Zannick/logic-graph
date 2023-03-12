@@ -56,6 +56,22 @@ pub fn access_drone_melee_speed__2(ctx: &Context) -> bool {
     // Drone_Melee_Speed{2}
     ctx.count(Item::Drone_Melee_Speed) >= 2
 }
+pub fn access_ebih__ebih_east__dispenser___activate_lift_req(ctx: &Context) -> bool {
+    // Infect and ^_platform2_moved
+    (ctx.has(Item::Infect) && ctx.ebih__ebih_east__ctx__platform2_moved())
+}
+pub fn access_ebih__ebih_east__lower_moving_platform___activate_lift_req(ctx: &Context) -> bool {
+    // Infect and $grab and not ^_platform2_moved
+    ((ctx.has(Item::Infect) && helper__grab!(ctx)) && !ctx.ebih__ebih_east__ctx__platform2_moved())
+}
+pub fn access_ebih__ebih_east__lower_moving_platform___activate_ride_req(ctx: &Context) -> bool {
+    // Infect and not ^_platform2_moved
+    (ctx.has(Item::Infect) && !ctx.ebih__ebih_east__ctx__platform2_moved())
+}
+pub fn access_ebih__ebih_east__moving_platform___activate_ride_req(ctx: &Context) -> bool {
+    // Infect and $grab and not ^_platform1_moved
+    ((ctx.has(Item::Infect) && helper__grab!(ctx)) && !ctx.ebih__ebih_east__ctx__platform1_moved())
+}
 pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
@@ -83,6 +99,10 @@ pub fn access_health_upgrade__3(ctx: &Context) -> bool {
 pub fn access_health_upgrade__4(ctx: &Context) -> bool {
     // Health_Upgrade{4}
     ctx.count(Item::Health_Upgrade) >= 4
+}
+pub fn access_infect(ctx: &Context) -> bool {
+    // Infect
+    ctx.has(Item::Infect)
 }
 pub fn access_infection_level(ctx: &Context) -> bool {
     // Infection_Level
@@ -200,6 +220,48 @@ pub fn access_within_menu(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     })
+}
+pub fn action_ebih__ebih_east__dispenser___activate_lift__do(ctx: &mut Context) {
+    // ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
+    ctx.ebih__ebih_east__ctx__platform2_moved = false;
+    ctx.position = SpotId::Ebih__Ebih_East__Ledge_End;
+}
+pub fn action_has_effect_ebih__ebih_east__dispenser___activate_lift__do(ctx: &Context) -> bool {
+    ctx.ebih__ebih_east__ctx__platform2_moved != false
+        || ctx.position != SpotId::Ebih__Ebih_East__Ledge_End
+}
+pub fn action_ebih__ebih_east__lower_moving_platform___activate_lift__do(ctx: &mut Context) {
+    // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
+    ctx.ebih__ebih_east__ctx__platform2_moved = true;
+    ctx.position = SpotId::Ebih__Ebih_East__Ledge_End;
+}
+pub fn action_has_effect_ebih__ebih_east__lower_moving_platform___activate_lift__do(
+    ctx: &Context,
+) -> bool {
+    ctx.ebih__ebih_east__ctx__platform2_moved != true
+        || ctx.position != SpotId::Ebih__Ebih_East__Ledge_End
+}
+pub fn action_ebih__ebih_east__lower_moving_platform___activate_ride__do(ctx: &mut Context) {
+    // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Dispenser`
+    ctx.ebih__ebih_east__ctx__platform2_moved = true;
+    ctx.position = SpotId::Ebih__Ebih_East__Dispenser;
+}
+pub fn action_has_effect_ebih__ebih_east__lower_moving_platform___activate_ride__do(
+    ctx: &Context,
+) -> bool {
+    ctx.ebih__ebih_east__ctx__platform2_moved != true
+        || ctx.position != SpotId::Ebih__Ebih_East__Dispenser
+}
+pub fn action_ebih__ebih_east__moving_platform___activate_ride__do(ctx: &mut Context) {
+    // ^_platform1_moved = true; ^position = `Ebih > Ebih East > Middle Platform`
+    ctx.ebih__ebih_east__ctx__platform1_moved = true;
+    ctx.position = SpotId::Ebih__Ebih_East__Middle_Platform;
+}
+pub fn action_has_effect_ebih__ebih_east__moving_platform___activate_ride__do(
+    ctx: &Context,
+) -> bool {
+    ctx.ebih__ebih_east__ctx__platform1_moved != true
+        || ctx.position != SpotId::Ebih__Ebih_East__Middle_Platform
 }
 pub fn action_energy__1(ctx: &mut Context) {
     // ^energy += 1

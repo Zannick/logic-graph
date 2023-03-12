@@ -60,6 +60,10 @@ pub struct Context {
     pub energy: i32,
     pub breach: bool,
     pub flasks: i32,
+    pub ebih__waterfall__ctx__left_block: bool,
+    pub ebih__waterfall__ctx__right_block: bool,
+    pub ebih__ebih_east__ctx__platform1_moved: bool,
+    pub ebih__ebih_east__ctx__platform2_moved: bool,
     // settings
     pub boomerang_steering: bool,
     pub major_glitches: bool,
@@ -71,6 +75,7 @@ pub struct Context {
     pub drone_melee_speed: i8,
     pub health_upgrade: i8,
     pub ice_axe: bool,
+    pub infect: bool,
     pub infection_level: i8,
     pub infection_range: i8,
     pub infection_speed: bool,
@@ -100,7 +105,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 25;
+    const NUM_ITEMS: i32 = 26;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -111,6 +116,7 @@ impl context::Ctx for Context {
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
             Item::Health_Upgrade => self.health_upgrade >= 1,
             Item::Ice_Axe => self.ice_axe,
+            Item::Infect => self.infect,
             Item::Infection_Level => self.infection_level >= 1,
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.infection_speed,
@@ -141,6 +147,7 @@ impl context::Ctx for Context {
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
             Item::Ice_Axe => self.ice_axe.into(),
+            Item::Infect => self.infect.into(),
             Item::Infection_Level => self.infection_level.into(),
             Item::Infection_Range => self.infection_range.into(),
             Item::Infection_Speed => self.infection_speed.into(),
@@ -185,6 +192,9 @@ impl context::Ctx for Context {
             }
             Item::Ice_Axe => {
                 self.ice_axe = true;
+            }
+            Item::Infect => {
+                self.infect = true;
             }
             Item::Infection_Level => {
                 self.infection_level += 1;
@@ -359,6 +369,10 @@ impl Context {
             energy: 0,
             breach: false,
             flasks: 0,
+            ebih__waterfall__ctx__left_block: false,
+            ebih__waterfall__ctx__right_block: false,
+            ebih__ebih_east__ctx__platform1_moved: false,
+            ebih__ebih_east__ctx__platform2_moved: false,
             ..Context::default()
         }
     }
@@ -416,6 +430,34 @@ impl Context {
         match get_area(self.position) {
             _ => match get_region(self.position) {
                 _ => self.flasks,
+            },
+        }
+    }
+    pub fn ebih__waterfall__ctx__left_block(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.ebih__waterfall__ctx__left_block,
+            },
+        }
+    }
+    pub fn ebih__waterfall__ctx__right_block(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.ebih__waterfall__ctx__right_block,
+            },
+        }
+    }
+    pub fn ebih__ebih_east__ctx__platform1_moved(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.ebih__ebih_east__ctx__platform1_moved,
+            },
+        }
+    }
+    pub fn ebih__ebih_east__ctx__platform2_moved(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.ebih__ebih_east__ctx__platform2_moved,
             },
         }
     }

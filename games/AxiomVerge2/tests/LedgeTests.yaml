@@ -84,6 +84,7 @@ tests:
   # The tests correspond:
   #    to_reach -> cannot_reach/can_reach
   #    to_obtain -> cannot_obtain/can_obtain
+  # Again, these tests perform no actions and visit no locations
   - requires:
       with: 
         - Ledge_Grab

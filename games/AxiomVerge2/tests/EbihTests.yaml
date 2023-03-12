@@ -1,0 +1,15 @@
+name: EbihTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+    - Boomerang
+    - Ledge_Grab
+  context:
+    save: Ebih > Base Camp > Save Point
+  start: Ebih > Base Camp > Save Point
+
+tests:
+  - can_reach: Ebih > Ebih East > Corner
+
+  - can_obtain: Infect

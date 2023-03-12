@@ -310,29 +310,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         ) => 1578,
         (
             false,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
-        (
-            false,
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
         ) => 1578,
-        (
-            false,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 400,
-        (
-            false,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
-        (
-            false,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2631,
         (
             false,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -470,6 +450,20 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => 701,
         (false, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
         (false, SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
+        (false, SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 7719,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Top_Waterfall,
+            SpotId::Ebih__Waterfall__West_Main_Path,
+        ) => 6491,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Top_Waterfall,
+            SpotId::Ebih__Waterfall__Center_Main_Path,
+        ) => 2982,
+        (false, SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
+        (false, SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
+        (false, SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
         (false, SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
         (false, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1929,
         (false, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
@@ -492,6 +486,91 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         ) => 1052,
         (false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 1000,
         (false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
+        (false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Upper_Save) => 1578,
+        (false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1299,
+        (false, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
+            3200
+        }
+        (false, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => 3157,
+        (false, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__East_7) => 1578,
+        (false, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__High_Platform) => {
+            2400
+        }
+        (false, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__East_8) => 1578,
+        (
+            false,
+            SpotId::Ebih__Ebih_West__High_Platform,
+            SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        ) => 3800,
+        (false, SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            3399
+        }
+        (false, SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => 699,
+        (false, SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 799,
+        (false, SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => 701,
+        (false, SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
+        (false, SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
+        (false, SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => 1052,
+        (false, SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => 1052,
+        (false, SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
+            2280
+        }
+        (false, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            2280
+        }
+        (
+            false,
+            SpotId::Ebih__Ebih_East__Ledge_End,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 700,
+        (false, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => 1403,
+        (
+            false,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+            SpotId::Ebih__Ebih_East__Corner,
+        ) => 877,
+        (false, SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            5964
+        }
+        (false, SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 3684,
+        (
+            false,
+            SpotId::Ebih__Ebih_East__East_Ledge,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 3157,
+        (false, SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            1200
+        }
+        (
+            false,
+            SpotId::Ebih__Ebih_East__Middle_Platform,
+            SpotId::Ebih__Ebih_East__Moving_Platform,
+        ) => 5263,
+        (
+            false,
+            SpotId::Ebih__Ebih_East__Middle_Platform,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 2456,
+        (false, SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => {
+            701
+        }
+        (false, SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
+            2400
+        }
+        (false, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => 4736,
+        (false, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            3684
+        }
+        (false, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 1403,
+        (false, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            1578
+        }
+        (false, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => 1228,
+        (false, SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => 1228,
+        (false, SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 1578,
+        (false, SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => 1578,
+        (false, SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => 1578,
+        (false, SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 1578,
         (
             false,
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -1414,34 +1493,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Alcove_Right) => {
             1578
         }
-        (
-            true,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
         (true, SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => {
             1578
         }
-        (
-            true,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1832,
-        (
-            true,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 400,
-        (
-            true,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
-        (
-            true,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2631,
         (
             true,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -1632,6 +1686,18 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => 701,
         (true, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
         (true, SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
+        (true, SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 7719,
+        (true, SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_Main_Path) => {
+            6491
+        }
+        (
+            true,
+            SpotId::Ebih__Waterfall__Top_Waterfall,
+            SpotId::Ebih__Waterfall__Center_Main_Path,
+        ) => 2982,
+        (true, SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
+        (true, SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
+        (true, SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
         (true, SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
         (true, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1929,
         (true, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 1754,
@@ -1656,6 +1722,133 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
             2403
         }
+        (true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Upper_Save) => 1578,
+        (true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1299,
+        (true, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
+            3200
+        }
+        (true, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => 3157,
+        (true, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__East_7) => 1578,
+        (true, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__High_Platform) => 2400,
+        (true, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__High_Ledge) => 3583,
+        (true, SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__East_8) => 1578,
+        (
+            true,
+            SpotId::Ebih__Ebih_West__High_Platform,
+            SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        ) => 3800,
+        (true, SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            3399
+        }
+        (true, SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => 699,
+        (true, SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__High_Ledge) => 1257,
+        (true, SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 799,
+        (true, SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => 701,
+        (true, SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
+        (true, SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
+        (true, SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__East_7) => 4888,
+        (true, SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => 1052,
+        (true, SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => 1052,
+        (true, SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
+            2280
+        }
+        (true, SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => {
+            7672
+        }
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Moving_Platform,
+            SpotId::Ebih__Ebih_East__Middle_Platform,
+        ) => 7027,
+        (true, SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
+            6444
+        }
+        (true, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            2280
+        }
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Ledge_End,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 700,
+        (true, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => 1403,
+        (true, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__East_Ledge) => 5168,
+        (true, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            4893
+        }
+        (true, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Upper_Ledge) => 5621,
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+            SpotId::Ebih__Ebih_East__Ledge_End,
+        ) => 3181,
+        (true, SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Corner) => {
+            877
+        }
+        // [3.022549, 1.052632]
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+            SpotId::Ebih__Ebih_East__Dispenser,
+        ) => 4075,
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+            SpotId::Ebih__Ebih_East__East_Ledge,
+        ) => 6666,
+        (true, SpotId::Ebih__Ebih_East__Corner, SpotId::Ebih__Ebih_East__Ledge_End) => 3975,
+        (true, SpotId::Ebih__Ebih_East__Corner, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
+            1196
+        }
+        (true, SpotId::Ebih__Ebih_East__Dispenser, SpotId::Ebih__Ebih_East__Ledge_End) => 4192,
+        // [1.885618, 2.280702]
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Dispenser,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 4166,
+        (true, SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            5964
+        }
+        (true, SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 3684,
+        (
+            true,
+            SpotId::Ebih__Ebih_East__East_Ledge,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 3157,
+        (true, SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            1200
+        }
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Middle_Platform,
+            SpotId::Ebih__Ebih_East__Moving_Platform,
+        ) => 5263,
+        (
+            true,
+            SpotId::Ebih__Ebih_East__Middle_Platform,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 2456,
+        (true, SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => {
+            701
+        }
+        (true, SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
+            2400
+        }
+        (true, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => 4736,
+        (true, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            3684
+        }
+        (true, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 1403,
+        (true, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            1578
+        }
+        (true, SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => 1228,
+        (true, SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => 1228,
+        (true, SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 1578,
+        (true, SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => 1578,
+        (true, SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => 1578,
+        (true, SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 1578,
         (
             true,
             SpotId::Glacier__Dock_Elevator__Elevator,

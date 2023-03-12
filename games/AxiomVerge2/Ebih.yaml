@@ -371,17 +371,27 @@ areas:
       local:
         - to: Top Platform
         - to: Gate Left
+      exits:
+        - to: Waterfall > East 10
+          tags: [xshift]
 
 - name: Waterfall
+  start:
+    _left_block: false
+    _right_block: false
   spots:
     - name: East 10
       coord: [24.95, 9.9]
       local: 
         - to: East Ledge
+      exits:
+        - to: Grid 25,10-12 > West 10
+          tags: [xshift]
     - name: East Ledge
       coord: [24.75, 10.2]
       local:
         - to: East 10
+          jumps: 1
         - to: East 11
         - to: Near East Tree
     - name: East 11
@@ -414,8 +424,7 @@ areas:
         - to: Waterfall Right
           jumps: 1
         - to: Waterfall Center Right  # you can't do this with ledge grab thanks to the enemy
-    - name: Waterfall Center Right
-      coord: [23.25, 10.5]
+    - name: Waterfall Center Right5
       local:
         - to: Waterfall Center Left
         - to: Alcove Right
@@ -440,6 +449,12 @@ areas:
         - to: Waterfall Center Left
           req: $grab
           time: 1.25
+    - name: Alcove
+      coord: [23, 10.9]
+      locations:
+        - name: Pedestal
+          item: Bronze_Axe
+          tags: [standing]
     - name: Under Waterfall
       coord: [22.25, 11]
       local:
@@ -489,11 +504,17 @@ areas:
       coord: [21.05, 9.9]
       local:
         - to: West Lower Path
+      exits:
+        - to: Ebih West > East 10
+          tags: [xshift]
 
     - name: West 9
       coord: [21.05, 9]
       local:
         - to: West Climb
+      exits:
+        - to: Ebih West > East 9
+          tags: [xshift]
     - name: West Climb
       coord: [21.7, 9]
       local:
@@ -569,6 +590,33 @@ areas:
       coord: [24.95, 8]
       local:
         - to: Platform
+      exits:
+        - to: Ebih East > West 8
+          tags: [xshift]
+    # Waterfall Upper
+    - name: East 7
+      coord: [25.95, 7]
+      local:
+        - to: Top Waterfall
+      exits:
+        - to: Ebih East > West 7
+          tags: [xshift]
+    - name: Top Waterfall
+      coord: [23.75, 7.2]
+      local:
+        - to: East 7
+          jumps: 2
+        - to: West 7
+          jumps: 2
+        - to: West Main Path
+        - to: Center Main Path
+    - name: West 7
+      coord: [22.05, 7]
+      local:
+        - to: Top Waterfall
+      exits:
+        - to: Ebih West > East 7
+          tags: [xshift]
 
 - name: Ebih West
   spots:
@@ -577,6 +625,9 @@ areas:
       local:
         - to: Mid Save
           jumps: 2
+      exits:
+        - to: Waterfall > West 10
+          tags: [xshift]
     - name: Mid Save
       coord: [20.4, 9.7]
       local:
@@ -620,6 +671,9 @@ areas:
         - to: East 10
           jumps_down: 1
         - to: Mid Save
+      exits:
+        - to: Waterfall > West 9
+          tags: [xshift]
     - name: Block Left
       coord: [20.35, 10.3]
       local:
@@ -631,6 +685,56 @@ areas:
           time: 2
         - to: Alcove Entrance
           time: 2.3
+    # Upper half
+    - name: East 7
+      coord: [20.95, 7]
+      local:
+        - to: Upper Save
+          jumps: 1
+        - to: East 8
+          jumps_down: 2
+      exits:
+        - to: Waterfall > West 7
+          tags: [xshift]
+    - name: Upper Save
+      coord: [20.5, 6.8]
+      local:
+        - to: East 7
+        - to: East 8
+        - to: High Platform
+          jumps: 4
+        - to: High Ledge
+        - to: Alcove Entrance
+        - to: Above Alcove
+    - name: High Platform
+      coord: [20.4, 6.2]
+      local:
+        - to: Upper Save
+          jumps_down: 1
+        - to: High Ledge
+        - to: Alcove Entrance
+        - to: Above Alcove
+      exits:
+        - to: High Ledge
+          req: $grab
+    - name: High Ledge
+      coord: [20.6, 6]
+      local:
+        - to: High Platform
+        - to: Upper Save
+        - to: East 6
+          jumps: 2
+    - name: East 6
+      coord: [20.95, 5.8]
+      local:
+        - to: High Ledge
+      exits:
+        - to: Grid 21,1-5 > West 6
+    # Middle-ish
+    - name: East 8
+      coord: [20.95, 8.1]
+      local:
+        - to: East 7
 
 - name: Cave
   spots:
@@ -643,3 +747,141 @@ areas:
       exits:
         - to: Waterfall > Cave Entrance
           tags: [exterior]
+
+- name: Ebih East
+  start:  # TODO: make these 'load' rules? I.e. set on start+savewarp.
+    _platform1_moved: false
+    _platform2_moved: false
+  spots:
+    - name: West 8
+      coord: [25.05, 8]
+      local:
+        - to: Moving Platform
+      exits:
+        - to: Waterfall > East 8
+          tags: [xshift]
+    - name: Moving Platform
+      coord: [25.35, 8]
+      local:
+        - to: West 8
+        - to: Upper Ledge
+        - to: Middle Platform
+        - to: East Ledge
+        - to: Ledge End
+      actions:
+        # Indra's much faster, so we won't add an action that waits till the end
+        # just to get to East Ledge first
+        - name: Activate Ride
+          req: Infect and $grab and not ^_platform1_moved
+          do: ^_platform1_moved = true; ^position = `Ebih > Ebih East > Middle Platform`
+          time: 3.7
+    - name: Ledge End
+      coord: [26, 8.2]
+      local:
+        - to: Moving Platform
+          jumps: 2
+        - to: Upper Ledge
+        - to: Middle Platform
+        - to: East Ledge
+        - to: Lower Moving Platform
+        - to: Corner
+    - name: Lower Moving Platform
+      coord: [26.15, 8.9]
+      local:
+        - to: Ledge End
+        - to: Corner
+        - to: Dispenser
+          thru: [26.8, 8.7]
+        - to: East Ledge
+      locations:
+        - name: Remote Urn
+          item: Infect
+          canon: Infect
+          req: Boomerang
+          tags: [urn]
+      actions:
+        - name: Activate Ride
+          req: Infect and not ^_platform2_moved
+          do: ^_platform2_moved = true; ^position = `Ebih > Ebih East > Dispenser`
+          time: 4.5
+        - name: Activate Lift
+          req: Infect and $grab and not ^_platform2_moved
+          do: ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
+    - name: Corner
+      coord: [26.4, 9]
+      local:
+        - to: Lower Moving Platform
+        - to: Ledge End
+      locations:
+        - name: Urn
+          item: Infect
+          canon: Infect
+          tags: [urn]
+    - name: Dispenser
+      coord: [26.5, 9]
+      local:
+        - to: Lower Moving Platform
+          thru: [26.8, 8.7]
+        - to: Ledge End
+      locations:
+        - name: Vend
+          item: Health_Fragment
+          req: Infect
+          time: 3.5
+      actions:
+        - name: Activate Lift
+          req: Infect and ^_platform2_moved
+          do: ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
+          time: 5
+    - name: East Ledge
+      coord: [27.05, 7.7]
+      local:
+        - to: Moving Platform
+        - to: Middle Platform
+          jumps: 2
+        - to: Ledge End
+        - to: Lower Moving Platform
+    - name: Middle Platform
+      coord: [26.85, 7.5]
+      local:
+        - to: Upper Ledge
+          jumps: 4
+        - to: East Ledge
+          jumps_down: 2
+        - to: Moving Platform
+        - to: Lower Moving Platform
+    - name: Upper Ledge
+      coord: [26.4, 7]
+      local:
+        - to: West 7
+        - to: West 8
+        - to: Moving Platform
+        - to: Ledge End
+        - to: Middle Platform
+    - name: West 7
+      coord: [26.05, 7]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Waterfall > East 7
+          tags: [xshift]
+
+- name: Grid 21,1-5
+  spots:
+    - name: West 6
+      coord: [21.05, 5.8]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Ebih West > East 6
+          tags: [xshift]
+    - name: Portal Stand
+      coord: [21.5, 5.9]
+      local:
+        - to: West 6
+          jumps: 1
+        - to: East 6
+    - name: East 6
+      coord: [21.95, 5.9]
+      local:
+        - to: Portal Stand

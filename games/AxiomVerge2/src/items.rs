@@ -11,6 +11,7 @@ pub enum Item {
     Amashilama,
     Apocalypse_Bomb,
     Boomerang,
+    Bronze_Axe,
     Companies_Layoff,
     Compass,
     Dear_Ernest,
@@ -23,6 +24,7 @@ pub enum Item {
     Health_Upgrade,
     Heretics_Tablet,
     Ice_Axe,
+    Infect,
     Infection_Level,
     Infection_Range,
     Infection_Speed,
@@ -51,6 +53,7 @@ impl fmt::Display for Item {
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             Item::Boomerang => write!(f, "{}", "Boomerang"),
+            Item::Bronze_Axe => write!(f, "{}", "Bronze_Axe"),
             Item::Companies_Layoff => write!(f, "{}", "Companies_Layoff"),
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
@@ -63,6 +66,7 @@ impl fmt::Display for Item {
             Item::Health_Upgrade => write!(f, "{}", "Health_Upgrade"),
             Item::Heretics_Tablet => write!(f, "{}", "Heretics_Tablet"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
+            Item::Infect => write!(f, "{}", "Infect"),
             Item::Infection_Level => write!(f, "{}", "Infection_Level"),
             Item::Infection_Range => write!(f, "{}", "Infection_Range"),
             Item::Infection_Speed => write!(f, "{}", "Infection_Speed"),
@@ -95,6 +99,7 @@ impl std::str::FromStr for Item {
             "Amashilama" => Ok(Item::Amashilama),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
             "Boomerang" => Ok(Item::Boomerang),
+            "Bronze_Axe" => Ok(Item::Bronze_Axe),
             "Companies_Layoff" => Ok(Item::Companies_Layoff),
             "Compass" => Ok(Item::Compass),
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
@@ -107,6 +112,7 @@ impl std::str::FromStr for Item {
             "Health_Upgrade" => Ok(Item::Health_Upgrade),
             "Heretics_Tablet" => Ok(Item::Heretics_Tablet),
             "Ice_Axe" => Ok(Item::Ice_Axe),
+            "Infect" => Ok(Item::Infect),
             "Infection_Level" => Ok(Item::Infection_Level),
             "Infection_Range" => Ok(Item::Infection_Range),
             "Infection_Speed" => Ok(Item::Infection_Speed),
@@ -135,7 +141,8 @@ impl std::str::FromStr for Item {
 pub fn unused_item(id: Item) -> bool {
     match id {
         Item::None => true,
-        Item::Companies_Layoff
+        Item::Bronze_Axe
+        | Item::Companies_Layoff
         | Item::Compass
         | Item::Dear_Ernest
         | Item::Escape

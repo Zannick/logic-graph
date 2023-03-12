@@ -143,9 +143,10 @@ digraph AxiomVerge2 {
             Ebih__Waterfall__Near_East_Tree [label = "Near East Tree"];
             Ebih__Waterfall__Waterfall_Right [label = "Waterfall Right"];
             Ebih__Waterfall__Alcove_Right [label = "Alcove Right"];
-            Ebih__Waterfall__Waterfall_Center_Right [label = "Waterfall Center Right"];
+            Ebih__Waterfall__Waterfall_Center_Right5 [label = "Waterfall Center Right5"];
             Ebih__Waterfall__Waterfall_Center_Left [label = "Waterfall Center Left"];
             Ebih__Waterfall__Alcove_Left [label = "Alcove Left"];
+            Ebih__Waterfall__Alcove [label = "Alcove"];
             Ebih__Waterfall__Under_Waterfall [label = "Under Waterfall"];
             Ebih__Waterfall__Waterfall_Left [label = "Waterfall Left"];
             Ebih__Waterfall__Wall_Right [label = "Wall Right"];
@@ -162,6 +163,9 @@ digraph AxiomVerge2 {
             Ebih__Waterfall__Below_Tree [label = "Below Tree"];
             Ebih__Waterfall__Platform [label = "Platform"];
             Ebih__Waterfall__East_8 [label = "East 8"];
+            Ebih__Waterfall__East_7 [label = "East 7"];
+            Ebih__Waterfall__Top_Waterfall [label = "Top Waterfall"];
+            Ebih__Waterfall__West_7 [label = "West 7"];
             label = "Waterfall";
             bgcolor = "white";
         }
@@ -173,12 +177,39 @@ digraph AxiomVerge2 {
             Ebih__Ebih_West__Above_Alcove [label = "Above Alcove"];
             Ebih__Ebih_West__East_9 [label = "East 9"];
             Ebih__Ebih_West__Block_Left [label = "Block Left"];
+            Ebih__Ebih_West__East_7 [label = "East 7"];
+            Ebih__Ebih_West__Upper_Save [label = "Upper Save"];
+            Ebih__Ebih_West__High_Platform [label = "High Platform"];
+            Ebih__Ebih_West__High_Ledge [label = "High Ledge"];
+            Ebih__Ebih_West__East_6 [label = "East 6"];
+            Ebih__Ebih_West__East_8 [label = "East 8"];
             label = "Ebih West";
             bgcolor = "white";
         }
         subgraph cluster_Ebih__Cave {
             Ebih__Cave__Entry [label = "Entry"];
             label = "Cave";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Ebih_East {
+            Ebih__Ebih_East__West_8 [label = "West 8"];
+            Ebih__Ebih_East__Moving_Platform [label = "Moving Platform"];
+            Ebih__Ebih_East__Ledge_End [label = "Ledge End"];
+            Ebih__Ebih_East__Lower_Moving_Platform [label = "Lower Moving Platform"];
+            Ebih__Ebih_East__Corner [label = "Corner"];
+            Ebih__Ebih_East__Dispenser [label = "Dispenser"];
+            Ebih__Ebih_East__East_Ledge [label = "East Ledge"];
+            Ebih__Ebih_East__Middle_Platform [label = "Middle Platform"];
+            Ebih__Ebih_East__Upper_Ledge [label = "Upper Ledge"];
+            Ebih__Ebih_East__West_7 [label = "West 7"];
+            label = "Ebih East";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Grid_21_1_5 {
+            Ebih__Grid_21_1_5__West_6 [label = "West 6"];
+            Ebih__Grid_21_1_5__Portal_Stand [label = "Portal Stand"];
+            Ebih__Grid_21_1_5__East_6 [label = "East 6"];
+            label = "Grid 21,1-5";
             bgcolor = "white";
         }
         label = "Mt Ebih";
@@ -418,19 +449,34 @@ digraph AxiomVerge2 {
     Ebih__Grid_25_10_12__Mid_Ledge -> Ebih__Grid_25_10_12__West_11;
     Ebih__Grid_25_10_12__Top_Platform -> Ebih__Grid_25_10_12__West_10;
     Ebih__Grid_25_10_12__West_11 -> Ebih__Waterfall__East_11;
+    Ebih__Grid_25_10_12__West_10 -> Ebih__Waterfall__East_10;
+    Ebih__Waterfall__East_10 -> Ebih__Grid_25_10_12__West_10;
     Ebih__Waterfall__East_11 -> Ebih__Grid_25_10_12__West_11;
     Ebih__Waterfall__Alcove_Left -> Ebih__Waterfall__Waterfall_Center_Left;
     Ebih__Waterfall__Under_Waterfall -> Ebih__Waterfall__Waterfall_Left;
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__West_Lower_Path;
+    Ebih__Waterfall__West_10 -> Ebih__Ebih_West__East_10;
+    Ebih__Waterfall__West_9 -> Ebih__Ebih_West__East_9;
     Ebih__Waterfall__West_Climb -> Ebih__Waterfall__Middle_West_Tree;
     Ebih__Waterfall__Middle_West_Tree -> Ebih__Waterfall__West_Main_Path;
     Ebih__Waterfall__Cave_Entrance -> Ebih__Cave__Entry;
     Ebih__Waterfall__Below_Tree -> Ebih__Waterfall__Big_Tree;
     Ebih__Waterfall__Platform -> Ebih__Waterfall__Big_Tree;
+    Ebih__Waterfall__East_8 -> Ebih__Ebih_East__West_8;
+    Ebih__Waterfall__East_7 -> Ebih__Ebih_East__West_7;
+    Ebih__Waterfall__West_7 -> Ebih__Ebih_West__East_7;
+    Ebih__Ebih_West__East_10 -> Ebih__Waterfall__West_10;
     Ebih__Ebih_West__Alcove_Entrance -> Ebih__Ebih_West__Above_Alcove;
+    Ebih__Ebih_West__East_9 -> Ebih__Waterfall__West_9;
     Ebih__Ebih_West__Block_Left -> Ebih__Ebih_West__Alcove_Entrance;
     Ebih__Ebih_West__Block_Left -> Ebih__Ebih_West__Mid_Save;
+    Ebih__Ebih_West__East_7 -> Ebih__Waterfall__West_7;
+    Ebih__Ebih_West__High_Platform -> Ebih__Ebih_West__High_Ledge;
+    Ebih__Ebih_West__East_6 -> Ebih__Grid_21_1_5__West_6;
     Ebih__Cave__Entry -> Ebih__Waterfall__Cave_Entrance;
+    Ebih__Ebih_East__West_8 -> Ebih__Waterfall__East_8;
+    Ebih__Ebih_East__West_7 -> Ebih__Waterfall__East_7;
+    Ebih__Grid_21_1_5__West_6 -> Ebih__Ebih_West__East_6;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;
