@@ -287,6 +287,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1228,
         (false, SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => 701,
+        (false, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
         (false, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
         (false, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
             1929
@@ -310,9 +311,34 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         ) => 1578,
         (
             false,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 1929,
+        (
+            false,
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
         ) => 1578,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => 1929,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Alcove_Right,
+        ) => 500,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => 2631,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 2631,
         (
             false,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -401,6 +427,11 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (
             false,
             SpotId::Ebih__Waterfall__West_Main_Path,
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+        ) => 526,
+        (
+            false,
+            SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
         ) => 2456,
         (
@@ -408,6 +439,11 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Center_Main_Path,
         ) => 3508,
+        (
+            false,
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__Near_East_Tree,
+        ) => 5614,
         (
             false,
             SpotId::Ebih__Waterfall__Cave_Entrance,
@@ -478,6 +514,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => {
             1578
         }
+        (false, SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2807,
         (false, SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 2807,
         (
             false,
@@ -1391,6 +1428,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 877,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => 1799,
         (true, SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
+        (true, SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_13) => 3449,
         (true, SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Platform) => {
             3384
         }
@@ -1466,7 +1504,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             1228
         }
         (true, SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => 701,
-        (true, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 1602,
+        (true, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
         (true, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
         (true, SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
             1929
@@ -1493,9 +1531,39 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Alcove_Right) => {
             1578
         }
+        (
+            true,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 1929,
         (true, SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => {
             1578
         }
+        (
+            true,
+            SpotId::Ebih__Waterfall__Alcove_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 2266,
+        (
+            true,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => 1929,
+        (
+            true,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Alcove_Right,
+        ) => 500,
+        (
+            true,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => 2631,
+        (
+            true,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 2631,
         (
             true,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -1627,6 +1695,11 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             1000
         }
+        (
+            true,
+            SpotId::Ebih__Waterfall__West_Main_Path,
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+        ) => 526,
         (true, SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => {
             2456
         }
@@ -1635,6 +1708,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Center_Main_Path,
         ) => 3508,
+        (true, SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Near_East_Tree) => {
+            5614
+        }
         (
             true,
             SpotId::Ebih__Waterfall__Cave_Entrance,
@@ -1712,6 +1788,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => {
             1578
         }
+        (true, SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2807,
         (true, SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 2807,
         (true, SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
             1052
@@ -2628,5 +2705,886 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
         _ => -1,
+    }
+}
+
+pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
+    match (src, dest) {
+        (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
+        (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
+        (SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => true,
+        (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => true,
+        (
+            SpotId::Antarctica__Building_1W__West_Entry,
+            SpotId::Antarctica__Building_1W__Connector,
+        ) => true,
+        (
+            SpotId::Antarctica__Building_1W__Connector,
+            SpotId::Antarctica__Building_1W__West_Entry,
+        ) => true,
+        (
+            SpotId::Antarctica__Building_1E__Connector,
+            SpotId::Antarctica__Building_1E__East_Entry,
+        ) => true,
+        (
+            SpotId::Antarctica__Building_1E__East_Entry,
+            SpotId::Antarctica__Building_1E__Connector,
+        ) => true,
+        (SpotId::Antarctica__East__Building_1_Entry, SpotId::Antarctica__East__Save_Point) => true,
+        (
+            SpotId::Antarctica__East__Building_1_Entry,
+            SpotId::Antarctica__East__Building_2_Upper,
+        ) => true,
+        (SpotId::Antarctica__East__Save_Point, SpotId::Antarctica__East__Building_1_Entry) => true,
+        (SpotId::Antarctica__East__Save_Point, SpotId::Antarctica__East__Building_2_Entry) => true,
+        (SpotId::Antarctica__East__Save_Point, SpotId::Antarctica__East__Building_2_Upper) => true,
+        (SpotId::Antarctica__East__Building_2_Entry, SpotId::Antarctica__East__Save_Point) => true,
+        (
+            SpotId::Antarctica__East__Building_2_Entry,
+            SpotId::Antarctica__East__Building_2_Upper,
+        ) => true,
+        (
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Building_1_Entry,
+        ) => true,
+        (SpotId::Antarctica__East__Building_2_Upper, SpotId::Antarctica__East__Save_Point) => true,
+        (
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Building_2_Entry,
+        ) => true,
+        (SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => true,
+        (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => true,
+        (SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => true,
+        (SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => true,
+        (
+            SpotId::Antarctica__Freight_Elevator__Left,
+            SpotId::Antarctica__Freight_Elevator__Controls,
+        ) => true,
+        (
+            SpotId::Antarctica__Freight_Elevator__Controls,
+            SpotId::Antarctica__Freight_Elevator__Left,
+        ) => true,
+        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => true,
+        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => true,
+        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => true,
+        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => true,
+        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => true,
+        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => true,
+        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => true,
+        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => true,
+        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => true,
+        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => true,
+        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Building_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => true,
+        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => true,
+        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => true,
+        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Staircase) => true,
+        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Building_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => true,
+        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => true,
+        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => true,
+        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => true,
+        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Building_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => true,
+        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => true,
+        (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => true,
+        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => true,
+        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Desk) => true,
+        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => true,
+        (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => true,
+        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => true,
+        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => true,
+        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => true,
+        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => true,
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Outcropping) => true,
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
+            true
+        }
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__Outcropping) => true,
+        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_Platform) => {
+            true
+        }
+        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => true,
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__Crawlspace_Opening) => true,
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => true,
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => true,
+        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => true,
+        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => true,
+        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => true,
+        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_Bush) => true,
+        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__West_Bush) => true,
+        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => true,
+        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => true,
+        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => true,
+        (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => true,
+        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => true,
+        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => true,
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => true,
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__Lower_Platform) => true,
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Platform) => true,
+        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => true,
+        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => true,
+        (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => true,
+        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => true,
+        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => true,
+        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__West_11) => true,
+        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__West_11) => true,
+        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
+        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
+            true
+        }
+        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__West_11) => true,
+        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => true,
+        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => true,
+        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => true,
+        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => true,
+        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => true,
+        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__East_Ledge) => true,
+        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_Ledge) => true,
+        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => true,
+        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__Waterfall_Right) => true,
+        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
+        (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Near_East_Tree) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Alcove_Right) => true,
+        (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => true,
+        (
+            SpotId::Ebih__Waterfall__Alcove_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Alcove_Right,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Waterfall_Center_Left, SpotId::Ebih__Waterfall__Alcove_Left) => {
+            true
+        }
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Under_Waterfall,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Waterfall_Center_Left) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => true,
+        (SpotId::Ebih__Waterfall__Under_Waterfall, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
+        (
+            SpotId::Ebih__Waterfall__Under_Waterfall,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => true,
+        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
+        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
+        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
+        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__West_Lower_Path) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => true,
+        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
+        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Under_Waterfall) => {
+            true
+        }
+        (
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
+        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__West_10) => true,
+        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Lower_West_Tree) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => true,
+        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
+        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
+        (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => true,
+        (SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => true,
+        (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => true,
+        (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__Middle_West_Tree) => true,
+        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Main_Path) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Climb) => true,
+        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => true,
+        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Center_Main_Path) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
+        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Main_Path) => true,
+        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Center_Main_Path) => true,
+        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Lower_Path) => true,
+        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
+        (
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => true,
+        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Waterfall_Right) => true,
+        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Near_East_Tree) => true,
+        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__West_Main_Path) => {
+            true
+        }
+        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
+        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => true,
+        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Center_Main_Path) => true,
+        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => true,
+        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => true,
+        (SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Big_Tree) => true,
+        (SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => true,
+        (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => true,
+        (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => true,
+        (SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => true,
+        (SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => true,
+        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => true,
+        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => true,
+        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_Main_Path) => true,
+        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__Center_Main_Path) => true,
+        (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => true,
+        (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => true,
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => true,
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => true,
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => true,
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
+        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => true,
+        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
+        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => true,
+        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => true,
+        (SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
+        (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
+        (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => true,
+        (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => true,
+        (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => true,
+        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Mid_Save) => true,
+        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
+        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Upper_Save) => true,
+        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => true,
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__East_7) => true,
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__East_8) => true,
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__High_Platform) => true,
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__High_Ledge) => true,
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
+        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => true,
+        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__High_Ledge) => true,
+        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
+        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
+        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => true,
+        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => true,
+        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => true,
+        (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => true,
+        (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__East_7) => true,
+        (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
+        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => true,
+        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
+        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => true,
+        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => true,
+        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
+        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
+        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Middle_Platform) => true,
+        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__East_Ledge) => true,
+        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => true,
+        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Corner) => true,
+        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Dispenser) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Corner, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => true,
+        (SpotId::Ebih__Ebih_East__Corner, SpotId::Ebih__Ebih_East__Ledge_End) => true,
+        (SpotId::Ebih__Ebih_East__Dispenser, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Dispenser, SpotId::Ebih__Ebih_East__Ledge_End) => true,
+        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
+        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => true,
+        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => true,
+        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
+        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => true,
+        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            true
+        }
+        (
+            SpotId::Ebih__Ebih_East__Middle_Platform,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => true,
+        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => true,
+        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => true,
+        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
+        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => true,
+        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => true,
+        (SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
+        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => true,
+        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => true,
+        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => true,
+        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => true,
+        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
+            true
+        }
+        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Elevator) => {
+            true
+        }
+        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Entry) => true,
+        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Connector) => true,
+        (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => true,
+        (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => true,
+        (SpotId::Glacier__Grid_41_9_10__East, SpotId::Glacier__Grid_41_9_10__Overhang) => true,
+        (SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__Ledge) => true,
+        (SpotId::Glacier__Grid_41_9_10__Overhang, SpotId::Glacier__Grid_41_9_10__Lower_East) => {
+            true
+        }
+        (SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Overhang) => true,
+        (SpotId::Glacier__Grid_41_9_10__Ledge, SpotId::Glacier__Grid_41_9_10__Lower_East) => true,
+        (SpotId::Glacier__Grid_41_9_10__Lower_East, SpotId::Glacier__Grid_41_9_10__Ledge) => true,
+        (SpotId::Glacier__Grid_41_9_10__Lower_East, SpotId::Glacier__Grid_41_9_10__Overhang) => {
+            true
+        }
+        (SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => true,
+        (SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__West) => true,
+        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => true,
+        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => true,
+        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => true,
+        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => true,
+        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => true,
+        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => true,
+        (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => true,
+        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => true,
+        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => true,
+        (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => true,
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => true,
+        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => true,
+        (SpotId::Glacier__The_Big_Drop__Small_Path, SpotId::Glacier__The_Big_Drop__East) => true,
+        (SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West) => true,
+        (SpotId::Glacier__Revival__West, SpotId::Glacier__Revival__Save_Point) => true,
+        (SpotId::Glacier__Grid_39_40_7_9__Upper_East, SpotId::Glacier__Grid_39_40_7_9__West) => {
+            true
+        }
+        (SpotId::Glacier__Grid_39_40_7_9__West, SpotId::Glacier__Grid_39_40_7_9__Upper_East) => {
+            true
+        }
+        (SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => true,
+        (SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_9,
+            SpotId::Glacier__Vertical_Room_Top__West_9,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room_Top__East_9, SpotId::Glacier__Vertical_Room_Top__Mid_9) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_9,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room_Top__East_9, SpotId::Glacier__Vertical_Room_Top__Peak) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__West_9, SpotId::Glacier__Vertical_Room_Top__Mid_9) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room_Top__West_9,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__West_9,
+            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room_Top__Mid_9, SpotId::Glacier__Vertical_Room_Top__West_9) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__Mid_9, SpotId::Glacier__Vertical_Room_Top__East_9) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__Mid_9, SpotId::Glacier__Vertical_Room_Top__Peak) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__Mid_9, SpotId::Glacier__Vertical_Room_Top__Mid_11) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room_Top__Mid_9,
+            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room_Top__Mid_11, SpotId::Glacier__Vertical_Room_Top__Mid_9) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+            SpotId::Glacier__Vertical_Room_Top__West_9,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+            SpotId::Glacier__Vertical_Room_Top__Mid_9,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+            SpotId::Glacier__Vertical_Room_Top__West_9,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        ) => true,
+        (SpotId::Glacier__Vertical_Room_Top__Peak, SpotId::Glacier__Vertical_Room_Top__West_8) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__Peak, SpotId::Glacier__Vertical_Room_Top__Mid_9) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__Peak, SpotId::Glacier__Vertical_Room_Top__East_9) => {
+            true
+        }
+        (SpotId::Glacier__Vertical_Room_Top__West_8, SpotId::Glacier__Vertical_Room_Top__Peak) => {
+            true
+        }
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_12,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_12,
+            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_12,
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room_Top__East_12,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        ) => true,
+        (
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+            SpotId::Glacier__Vertical_Room_Top__East_12,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Antechamber__West_12,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+        ) => true,
+        (SpotId::Glacier__Boomerang_Room__West, SpotId::Glacier__Boomerang_Room__Platform) => true,
+        (SpotId::Glacier__Boomerang_Room__Platform, SpotId::Glacier__Boomerang_Room__West) => true,
+        (
+            SpotId::Glacier__Boomerang_Room__Platform,
+            SpotId::Glacier__Boomerang_Room__Center_ish,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room__Center_ish,
+            SpotId::Glacier__Boomerang_Room__Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room__Center_ish,
+            SpotId::Glacier__Boomerang_Room__Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room__Pedestal,
+            SpotId::Glacier__Boomerang_Room__Center_ish,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
+            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
+            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
+            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
+            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
+            SpotId::Glacier__Boomerang_Room_Switched__Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Platform,
+            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
+        ) => true,
+        (
+            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
+            SpotId::Glacier__Boomerang_Room_Switched__Platform,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__East_9, SpotId::Glacier__Ledge_Grab_Room__Column) => {
+            true
+        }
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Column,
+            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Glacier__Ledge_Grab_Room__Fork) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Glacier__Ledge_Grab_Room__East_9) => {
+            true
+        }
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
+            SpotId::Glacier__Ledge_Grab_Room__Column,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge, SpotId::Glacier__Ledge_Grab_Room__Fork) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__East_11, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__East_11, SpotId::Glacier__Ledge_Grab_Room__Fork) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__East_11) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__Fork) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Mid_34, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__Mid_34, SpotId::Glacier__Ledge_Grab_Room__Cliff) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Cliff, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Cliff,
+            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+            SpotId::Glacier__Ledge_Grab_Room__Cliff,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Pedestal, SpotId::Glacier__Ledge_Grab_Room__West) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__Pedestal, SpotId::Glacier__Ledge_Grab_Room__Gate) => {
+            true
+        }
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
+            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Gate, SpotId::Glacier__Ledge_Grab_Room__Pedestal) => {
+            true
+        }
+        (SpotId::Glacier__Ledge_Grab_Room__Gate, SpotId::Glacier__Ledge_Grab_Room__West) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__West,
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__West,
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__West, SpotId::Glacier__Ledge_Grab_Room__Gate) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__West, SpotId::Glacier__Ledge_Grab_Room__Pedestal) => {
+            true
+        }
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Cliff,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__West,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__West,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Cliff,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Fork,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
+        ) => true,
+        (
+            SpotId::Glacier__Ledge_Grab_Room__Fork,
+            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
+        ) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__East_11) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Column) => true,
+        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge) => {
+            true
+        }
+        (SpotId::Glacier__Peak__East_8, SpotId::Glacier__Peak__Top_Platform_East) => true,
+        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__Top_Rock) => true,
+        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__Highest_Platform) => true,
+        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__East_8) => true,
+        (SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__Highest_Platform) => true,
+        (SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => true,
+        (SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__Top_Platform_East) => true,
+        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Top_Rock) => true,
+        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__West_Cliff) => true,
+        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Top_Platform_East) => true,
+        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Highest_Platform) => true,
+        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => true,
+        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Under_West_Cliff) => true,
+        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => true,
+        (SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_Cliff) => true,
+        (SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => true,
+        (SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => true,
+        (SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__West_Cliff) => true,
+        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__Center_Platform) => {
+            true
+        }
+        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__Column) => true,
+        (SpotId::Glacier__Grid_32_7_10__Center_Platform, SpotId::Glacier__Grid_32_7_10__East_8) => {
+            true
+        }
+        (SpotId::Glacier__Grid_32_7_10__Center_Platform, SpotId::Glacier__Grid_32_7_10__Column) => {
+            true
+        }
+        (SpotId::Glacier__Grid_32_7_10__Center_Platform, SpotId::Glacier__Grid_32_7_10__West_9) => {
+            true
+        }
+        (
+            SpotId::Glacier__Grid_32_7_10__Center_Platform,
+            SpotId::Glacier__Grid_32_7_10__Left_Rock,
+        ) => true,
+        (SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__Center_Platform) => {
+            true
+        }
+        (SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__East_8) => true,
+        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__West_9) => true,
+        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__West_10) => true,
+        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__Column) => true,
+        (
+            SpotId::Glacier__Grid_32_7_10__Left_Rock,
+            SpotId::Glacier__Grid_32_7_10__Center_Platform,
+        ) => true,
+        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__West_10) => true,
+        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__Left_Rock) => true,
+        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__Center_Platform) => {
+            true
+        }
+        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__Column) => true,
+        (SpotId::Glacier__Grid_32_7_10__West_10, SpotId::Glacier__Grid_32_7_10__West_9) => true,
+        (SpotId::Glacier__Grid_32_7_10__West_10, SpotId::Glacier__Grid_32_7_10__Left_Rock) => true,
+        (SpotId::Glacier__Grid_32_7_10__West_10, SpotId::Glacier__Grid_32_7_10__Column) => true,
+        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__East_10) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__East_9,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+        ) => true,
+        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__Midair) => true,
+        (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__East_9) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__East_10,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+        ) => true,
+        (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+            SpotId::Glacier__Grid_31_9_12__East_10,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+            SpotId::Glacier__Grid_31_9_12__East_9,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+            SpotId::Glacier__Grid_31_9_12__Midair,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+            SpotId::Glacier__Grid_31_9_12__West_12,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+            SpotId::Glacier__Grid_31_9_12__West_12,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+            SpotId::Glacier__Grid_31_9_12__Midair,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__West_12,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Midair,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
+        ) => true,
+        (
+            SpotId::Glacier__Grid_31_9_12__Midair,
+            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+        ) => true,
+        (SpotId::Glacier__Grid_31_9_12__Midair, SpotId::Glacier__Grid_31_9_12__East_9) => true,
+        (SpotId::Glacier__Grid_31_9_12__Midair, SpotId::Glacier__Grid_31_9_12__East_10) => true,
+        (SpotId::Glacier__Apocalypse_Entry__West, SpotId::Glacier__Apocalypse_Entry__Terminal) => {
+            true
+        }
+        (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
+            true
+        }
+        _ => false,
     }
 }

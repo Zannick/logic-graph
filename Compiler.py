@@ -154,14 +154,17 @@ def treeToString(tree: antlr4.ParserRuleContext):
     return StringVisitor().visit(tree)
 
 
-def get_exit_target(ex):
-    local = [ex['region'], ex['area'], ex['spot']]
-    targ = ex['to'].split('>')
+def get_spot_reference(target, source):
+    local = [source['region'], source['area'],
+             source.get('spot') or source.get('name')]
+    targ = target.split('>')
     # targ length = 1 (just spot) => leave 2 (reg/area), 2 (spot+area) => leave 1 (region)
     # 3 => 0.
     res = local[:-len(targ)] + [t.strip() for t in targ]
     return construct_id(*res)
 
+def get_exit_target(ex):
+    return get_spot_reference(ex['to'], ex)
 
 class GameLogic(object):
 
@@ -492,15 +495,23 @@ class GameLogic(object):
             for sp in a['spots']:
                 if c := sp.get('coord'):
                     if isinstance(c, str):
-                        errors.append(f'Invalid coord for {sp["name"]}: {c!r} '
-                                    f'(did you mean [{c}] ?)')
+                        errors.append(f'Invalid coord for {sp["fullname"]}: {c!r} '
+                                      f'(did you mean [{c}] ?)')
                     elif not isinstance(c, (list, tuple)) or len(c) != 2:
-                        errors.append(f'Invalid coord for {sp["name"]}: {c}')
+                        errors.append(f'Invalid coord for {sp["fullname"]}: {c}')
+                elif sp.get('local'):
+                    errors.append(f'Expected coord for spot {sp["fullname"]} with local rules')
             if errors:
                 self._misc_errors.extend(errors)
                 break
+            spot_errors = set()
             for sp1, sp2 in itertools.permutations(a['spots'], 2):
-                if 'coord' not in sp1 or 'coord' not in sp2:
+                if 'coord' not in sp1 or 'local' not in sp1:
+                    continue
+                if 'coord' not in sp2:
+                    if sp2['name'] not in spot_errors and any(link["to"] == sp2['name'] for link in sp1['local']):
+                        spot_errors.add(sp2['name'])
+                        self._misc_errors.append(f'Expected coord for spot {sp["fullname"]} used in local rules')
                     continue
                 coords, jumps, jumps_down = self.spot_distance(sp1, sp2)
                 if not coords:
@@ -947,6 +958,7 @@ class GameLogic(object):
             'escape_ctx': partial(re.compile(r'\bctx\b').sub, '$ctx'),
             'get_exit_target': get_exit_target,
             'get_int_type_for_max': get_int_type_for_max,
+            'get_spot_reference': get_spot_reference,
             'prToRust': self.prToRust,
             'str_to_rusttype': str_to_rusttype,
             'treeToString': treeToString,

@@ -6,6 +6,7 @@
 
 use crate::context::*;
 use crate::items::*;
+use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
@@ -306,6 +307,10 @@ impl world::World for World {
             Objective::{{ o|construct_id }} => rules::access_{{ info.access_id }}(ctx),
 %% endfor
         }
+    }
+
+    fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
+        movements::are_spots_connected(sp1, sp2)
     }
 }
 

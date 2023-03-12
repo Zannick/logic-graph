@@ -6,6 +6,7 @@
 
 use crate::context::*;
 use crate::items::*;
+use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
@@ -320,7 +321,7 @@ pub enum SpotId {
     Ebih__Waterfall__Under_Waterfall,
     Ebih__Waterfall__Wall_Right,
     Ebih__Waterfall__Waterfall_Center_Left,
-    Ebih__Waterfall__Waterfall_Center_Right5,
+    Ebih__Waterfall__Waterfall_Center_Right,
     Ebih__Waterfall__Waterfall_Left,
     Ebih__Waterfall__Waterfall_Right,
     Ebih__Waterfall__West_10,
@@ -642,8 +643,8 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Waterfall__Waterfall_Center_Left => {
                 write!(f, "{}", "Ebih > Waterfall > Waterfall Center Left")
             }
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right5 => {
-                write!(f, "{}", "Ebih > Waterfall > Waterfall Center Right5")
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Center Right")
             }
             SpotId::Ebih__Waterfall__Waterfall_Left => {
                 write!(f, "{}", "Ebih > Waterfall > Waterfall Left")
@@ -1042,8 +1043,8 @@ impl std::str::FromStr for SpotId {
             "Ebih > Waterfall > Waterfall Center Left" => {
                 Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Left)
             }
-            "Ebih > Waterfall > Waterfall Center Right5" => {
-                Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Right5)
+            "Ebih > Waterfall > Waterfall Center Right" => {
+                Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Right)
             }
             "Ebih > Waterfall > Waterfall Left" => Ok(SpotId::Ebih__Waterfall__Waterfall_Left),
             "Ebih > Waterfall > Waterfall Right" => Ok(SpotId::Ebih__Waterfall__Waterfall_Right),
@@ -2253,7 +2254,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Waterfall__Near_East_Tree
         | SpotId::Ebih__Waterfall__Waterfall_Right
         | SpotId::Ebih__Waterfall__Alcove_Right
-        | SpotId::Ebih__Waterfall__Waterfall_Center_Right5
+        | SpotId::Ebih__Waterfall__Waterfall_Center_Right
         | SpotId::Ebih__Waterfall__Waterfall_Center_Left
         | SpotId::Ebih__Waterfall__Alcove_Left
         | SpotId::Ebih__Waterfall__Alcove
@@ -2475,7 +2476,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Waterfall__Near_East_Tree
         | SpotId::Ebih__Waterfall__Waterfall_Right
         | SpotId::Ebih__Waterfall__Alcove_Right
-        | SpotId::Ebih__Waterfall__Waterfall_Center_Right5
+        | SpotId::Ebih__Waterfall__Waterfall_Center_Right
         | SpotId::Ebih__Waterfall__Waterfall_Center_Left
         | SpotId::Ebih__Waterfall__Alcove_Left
         | SpotId::Ebih__Waterfall__Alcove
@@ -3360,6 +3361,10 @@ impl world::World for World {
             Objective::Everything => rules::access_amashilama__notes_2053_02_27(ctx),
         }
     }
+
+    fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
+        movements::are_spots_connected(sp1, sp2)
+    }
 }
 
 impl World {
@@ -3478,7 +3483,7 @@ impl World {
                 SpotId::Ebih__Waterfall__Under_Waterfall,
                 SpotId::Ebih__Waterfall__Wall_Right,
                 SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-                SpotId::Ebih__Waterfall__Waterfall_Center_Right5,
+                SpotId::Ebih__Waterfall__Waterfall_Center_Right,
                 SpotId::Ebih__Waterfall__Waterfall_Left,
                 SpotId::Ebih__Waterfall__Waterfall_Right,
                 SpotId::Ebih__Waterfall__West_10,
@@ -6347,8 +6352,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
             },
         },
-        SpotId::Ebih__Waterfall__Waterfall_Center_Right5 => Spot {
-            id: SpotId::Ebih__Waterfall__Waterfall_Center_Right5,
+        SpotId::Ebih__Waterfall__Waterfall_Center_Right => Spot {
+            id: SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -8836,7 +8841,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Waterfall__Near_East_Tree => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Waterfall_Right => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Alcove_Right => Range { start: 0, end: 0 },
-        SpotId::Ebih__Waterfall__Waterfall_Center_Right5 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Waterfall__Waterfall_Center_Right => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Waterfall_Center_Left => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Alcove_Left => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Alcove => Range {

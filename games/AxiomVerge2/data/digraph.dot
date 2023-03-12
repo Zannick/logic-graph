@@ -143,7 +143,7 @@ digraph AxiomVerge2 {
             Ebih__Waterfall__Near_East_Tree [label = "Near East Tree"];
             Ebih__Waterfall__Waterfall_Right [label = "Waterfall Right"];
             Ebih__Waterfall__Alcove_Right [label = "Alcove Right"];
-            Ebih__Waterfall__Waterfall_Center_Right5 [label = "Waterfall Center Right5"];
+            Ebih__Waterfall__Waterfall_Center_Right [label = "Waterfall Center Right"];
             Ebih__Waterfall__Waterfall_Center_Left [label = "Waterfall Center Left"];
             Ebih__Waterfall__Alcove_Left [label = "Alcove Left"];
             Ebih__Waterfall__Alcove [label = "Alcove"];

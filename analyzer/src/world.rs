@@ -19,7 +19,9 @@ pub trait Accessible {
     fn can_access(&self, ctx: &Self::Context) -> bool;
     fn time(&self) -> i32;
     fn price(&self) -> &Self::Currency;
-    fn is_free(&self) -> bool { *self.price() == Self::Currency::default() }
+    fn is_free(&self) -> bool {
+        *self.price() == Self::Currency::default()
+    }
 }
 
 pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display {}
@@ -103,10 +105,19 @@ pub trait World {
     ) -> &[<Self::Exit as Exit>::SpotId];
     fn get_warps(&self) -> &[Self::Warp];
     fn get_all_locations(&self) -> &[Self::Location];
-    fn get_location_spot(&self, loc_id: <Self::Location as Location>::LocId) -> <Self::Exit as Exit>::SpotId;
+    fn get_location_spot(
+        &self,
+        loc_id: <Self::Location as Location>::LocId,
+    ) -> <Self::Exit as Exit>::SpotId;
 
     fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context);
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
+
+    fn are_spots_connected(
+        &self,
+        sp1: <Self::Exit as Exit>::SpotId,
+        sp1: <Self::Exit as Exit>::SpotId,
+    ) -> bool;
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]

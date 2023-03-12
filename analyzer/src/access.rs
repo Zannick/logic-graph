@@ -333,7 +333,7 @@ where
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if !spot_map.contains_key(spot) {
+            if !spot_map.contains_key(spot) && world.are_spots_connected(ctx.get().position(), *spot) {
                 vec.push(format!("{} -> {}: movement not available", ctx.get().position(), spot));
             }
         }

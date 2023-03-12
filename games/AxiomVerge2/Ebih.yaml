@@ -262,7 +262,7 @@ areas:
       local:
         - to: West 13
         - to: Lower Platform
-        - to: East 12
+        - to: East 13
         - to: East Platform
       exits:
         - to: Garage > Entry
@@ -419,16 +419,17 @@ areas:
           jumps: 2
         - to: Alcove Right
     - name: Alcove Right
-      coord: [23.35, 10.9]
+      coord: [23.35, 11]
       local:
         - to: Waterfall Right
           jumps: 1
         - to: Waterfall Center Right  # you can't do this with ledge grab thanks to the enemy
-    - name: Waterfall Center Right5
+    - name: Waterfall Center Right
+      coord: [23.25, 10.5]
       local:
         - to: Waterfall Center Left
         - to: Alcove Right
-        - to: Waterfall 
+        - to: Waterfall Right
     - name: Waterfall Center Left
       coord: [22.5, 10.7]
       local:
@@ -536,7 +537,7 @@ areas:
     - name: West Main Path
       coord: [21.9, 8]
       local:
-        - to: West Tree
+        - to: Middle West Tree
         - to: West Climb
         - to: Center Main Path
           jumps: 2
@@ -550,7 +551,7 @@ areas:
         - to: Lower West Tree
         - to: Waterfall Center Left
         - to: Waterfall Right
-        - to: East Tree
+        - to: Near East Tree
       exits:
         - to: Cave > Entry
           tags: [interior]
@@ -658,8 +659,6 @@ areas:
         - name: Tablet
           item: Heretics_Tablet
           tags: [standing]
-      local:
-        - only: Alcove Entrance
     - name: Above Alcove
       coord: [19.6, 9.6]
       local:
