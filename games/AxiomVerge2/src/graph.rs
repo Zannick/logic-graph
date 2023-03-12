@@ -2019,8 +2019,9 @@ pub enum ActionId {
     Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift,
     Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride,
     Ebih__Ebih_East__Moving_Platform__Activate_Ride,
+    Ebih__Ebih_West__Mid_Save__Save,
+    Ebih__Ebih_West__Upper_Save__Save,
     Glacier__Revival__Save_Point__Save,
-    Global__Placeholder,
 }
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -2044,10 +2045,15 @@ impl fmt::Display for ActionId {
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
                 write!(f, "{}", "Ebih > Ebih East > Moving Platform: Activate Ride")
             }
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => {
+                write!(f, "{}", "Ebih > Ebih West > Mid Save: Save")
+            }
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => {
+                write!(f, "{}", "Ebih > Ebih West > Upper Save: Save")
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point: Save")
             }
-            ActionId::Global__Placeholder => write!(f, "{}", "Placeholder"),
         }
     }
 }
@@ -2072,10 +2078,13 @@ impl std::str::FromStr for ActionId {
             "Ebih > Ebih East > Moving Platform: Activate Ride" => {
                 Ok(ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride)
             }
+            "Ebih > Ebih West > Mid Save: Save" => Ok(ActionId::Ebih__Ebih_West__Mid_Save__Save),
+            "Ebih > Ebih West > Upper Save: Save" => {
+                Ok(ActionId::Ebih__Ebih_West__Upper_Save__Save)
+            }
             "Glacier > Revival > Save Point: Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
             }
-            "Placeholder" => Ok(ActionId::Global__Placeholder),
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
     }
@@ -2156,14 +2165,12 @@ pub enum Objective {
     #[default]
     Start,
     Progress,
-    Everything,
 }
 impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Objective::Start => write!(f, "{}", "Start"),
             Objective::Progress => write!(f, "{}", "Progress%"),
-            Objective::Everything => write!(f, "{}", "Everything"),
         }
     }
 }
@@ -2174,7 +2181,6 @@ impl std::str::FromStr for Objective {
         match s {
             "Start" => Ok(Objective::Start),
             "Progress%" => Ok(Objective::Progress),
-            "Everything" => Ok(Objective::Everything),
             _ => Err(format!("Could not recognize as a Objective: {}", s)),
         }
     }
@@ -3022,8 +3028,9 @@ impl world::Accessible for Action {
                 ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
                     rules::access_ebih__ebih_east__moving_platform___activate_ride_req(&ctx)
                 }
+                ActionId::Ebih__Ebih_West__Mid_Save__Save => true,
+                ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
                 ActionId::Glacier__Revival__Save_Point__Save => true,
-                ActionId::Global__Placeholder => rules::access_placeholder(&ctx),
             }
     }
     fn time(&self) -> i32 {
@@ -3040,8 +3047,9 @@ impl world::Action for Action {
     }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
-            ActionId::Global__Placeholder => rules::action_energy__1(ctx),
-            ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save__position(ctx),
+            ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
                 rules::action_ebih__ebih_east__moving_platform___activate_ride__do(ctx)
             }
@@ -3054,15 +3062,14 @@ impl world::Action for Action {
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
                 rules::action_ebih__ebih_east__dispenser___activate_lift__do(ctx)
             }
-            ActionId::Glacier__Revival__Save_Point__Save => rules::action_save__position(ctx),
+            ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
         }
     }
     fn has_effect(&self, ctx: &Context) -> bool {
         match self.id {
-            ActionId::Global__Placeholder => rules::action_has_effect_energy__1(ctx),
-            ActionId::Ebih__Base_Camp__Save_Point__Save => {
-                rules::action_has_effect_save__position(ctx)
-            }
+            ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_has_effect_save(ctx),
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_has_effect_save(ctx),
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_has_effect_save(ctx),
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
                 rules::action_has_effect_ebih__ebih_east__moving_platform___activate_ride__do(ctx)
             }
@@ -3079,9 +3086,7 @@ impl world::Action for Action {
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
                 rules::action_has_effect_ebih__ebih_east__dispenser___activate_lift__do(ctx)
             }
-            ActionId::Glacier__Revival__Save_Point__Save => {
-                rules::action_has_effect_save__position(ctx)
-            }
+            ActionId::Glacier__Revival__Save_Point__Save => rules::action_has_effect_save(ctx),
         }
     }
     fn cycle_length(&self) -> Option<i8> {
@@ -3142,6 +3147,8 @@ impl world::Warp for Warp {
     }
     fn prewarp(&self, ctx: &mut Context) {
         match self.id {
+            WarpId::DroneSave => rules::action_energy__max_energy(ctx),
+            WarpId::IndraSave => rules::action_energy__max_energy(ctx),
             WarpId::Menu => rules::action_last__position(ctx),
             _ => (),
         }
@@ -3357,8 +3364,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access_amashilama(ctx),
-            Objective::Progress => rules::access_health_upgrade(ctx),
-            Objective::Everything => rules::access_amashilama__notes_2053_02_27(ctx),
+            Objective::Progress => rules::access_infect(ctx),
         }
     }
 
@@ -3584,10 +3590,7 @@ impl World {
                 SpotId::Menu__Upgrade_Menu__Physiology,
             ],
             spots: build_spots(),
-            global_actions: Range {
-                start: ActionId::Global__Placeholder.into_usize(),
-                end: ActionId::Global__Placeholder.into_usize() + 1,
-            },
+            global_actions: Range { start: 0, end: 0 },
         }
     }
 }
@@ -5210,14 +5213,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
 
 pub fn build_actions() -> EnumMap<ActionId, Action> {
     enum_map! {
-        ActionId::Global__Placeholder => Action {
-            id: ActionId::Global__Placeholder,
-            time: 1000,
+        ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
+            id: ActionId::Ebih__Base_Camp__Save_Point__Save,
+            time: 1300,
             price: Currency::Free,
             cycle: None,
         },
-        ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
-            id: ActionId::Ebih__Base_Camp__Save_Point__Save,
+        ActionId::Ebih__Ebih_West__Mid_Save__Save => Action {
+            id: ActionId::Ebih__Ebih_West__Mid_Save__Save,
+            time: 1300,
+            price: Currency::Free,
+            cycle: None,
+        },
+        ActionId::Ebih__Ebih_West__Upper_Save__Save => Action {
+            id: ActionId::Ebih__Ebih_West__Upper_Save__Save,
             time: 1300,
             price: Currency::Free,
             cycle: None,
@@ -6760,7 +6769,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Ebih__Ebih_West__Mid_Save__Save.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Mid_Save__Save.into_usize() + 1,
             },
             area_spots: Range {
                 start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),
@@ -6877,7 +6887,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Ebih__Ebih_West__Upper_Save__Save.into_usize(),
+                end: ActionId::Ebih__Ebih_West__Upper_Save__Save.into_usize() + 1,
             },
             area_spots: Range {
                 start: SpotId::Ebih__Ebih_West__Above_Alcove.into_usize(),

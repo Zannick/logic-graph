@@ -23,6 +23,9 @@ fn read_key_value(
         Some("major_glitches") => {
             ctx.major_glitches = parse_bool(key, val)?;
         }
+        Some("minor_glitches") => {
+            ctx.minor_glitches = parse_bool(key, val)?;
+        }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
         }

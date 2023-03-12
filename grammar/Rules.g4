@@ -27,6 +27,7 @@ actions : action (';' action)* ';'?;
 // TODO: a "cycle" action for ints/enums
 action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
         | REF BINOP '=' num                                     # Alter
+        | invoke                                                # ActionHelper
         ;
 
 // might remove this as those rules need to be separate for a traversal graph anyway

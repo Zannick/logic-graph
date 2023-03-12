@@ -196,7 +196,7 @@ areas:
         - to: West
       actions:
         - name: Save
-          do: ^save = ^position
+          do: $save
           time: 1.2
     - name: West
       coord: [41.05, 8]

@@ -10,7 +10,6 @@ macro_rules! helper__melee {
         $ctx.has(Item::Ice_Axe)
     }};
 }
-
 /// $break_box (  )
 /// $melee or Boomerang
 #[macro_export]
@@ -21,7 +20,6 @@ macro_rules! helper__break_box {
         (helper__melee!($ctx) || $ctx.has(Item::Boomerang))
     }};
 }
-
 /// $grab (  )
 /// ^mode != 'drone' and Ledge_Grab
 #[macro_export]
@@ -32,7 +30,6 @@ macro_rules! helper__grab {
         ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Ledge_Grab))
     }};
 }
-
 /// $climb (  )
 /// ^mode != 'drone' and Wall_Climb
 #[macro_export]
@@ -43,7 +40,6 @@ macro_rules! helper__climb {
         ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Wall_Climb))
     }};
 }
-
 /// $hook (  )
 /// ^mode == 'drone' and Slingshot_Hook
 #[macro_export]
@@ -54,7 +50,6 @@ macro_rules! helper__hook {
         ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Slingshot_Hook))
     }};
 }
-
 /// $max_energy (  )
 /// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 #[macro_export]
@@ -70,7 +65,6 @@ macro_rules! helper__max_energy {
         }
     }};
 }
-
 /// $offset (  )
 /// major_glitches and $melee
 #[macro_export]
@@ -79,5 +73,44 @@ macro_rules! helper__offset {
         #[allow(unused_imports)]
         use $crate::items::Item;
         ($ctx.major_glitches && helper__melee!($ctx))
+    }};
+}
+/// $block_clip (  )
+/// minor_glitches and ^mode == 'drone'
+#[macro_export]
+macro_rules! helper__block_clip {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.minor_glitches && $ctx.mode() == enums::Mode::Drone)
+    }};
+}
+/// $block_clip_escape (  )
+/// minor_glitches and $hook
+#[macro_export]
+macro_rules! helper__block_clip_escape {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.minor_glitches && helper__hook!($ctx))
+    }};
+}
+/// $save (  )
+/// ^save = ^position; ^energy = $max_energy
+#[macro_export]
+macro_rules! helper__save {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.save = $ctx.position();
+        $ctx.energy = helper__max_energy!($ctx);
+    }};
+}
+#[macro_export]
+macro_rules! helper_has_effect__save {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.save != $ctx.position() || $ctx.energy != helper__max_energy!($ctx)
     }};
 }

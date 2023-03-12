@@ -12,4 +12,15 @@ macro_rules! helper__{{ name|construct_id }} {
     {{ '}}' }};
 }
 
+%% if info.rule == 'action'
+#[macro_export]
+macro_rules! helper_has_effect__{{ name|construct_id }} {
+    ($ctx:expr{% for a in info.args %}, ${{ a.name }}:expr{% endfor %}) => {{ '{{' }}
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        {{ info.pr|actToHasEffect({})|escape_ctx }}
+    {{ '}}' }};
+}
+%% endif
+
 %% endfor

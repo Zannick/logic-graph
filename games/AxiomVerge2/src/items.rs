@@ -36,7 +36,6 @@ pub enum Item {
     Nanite_Mist,
     Nano_Points,
     Notes_2053_02_27,
-    Placeholder,
     Ranged_Damage,
     Ranged_Speed,
     Record_Losses,
@@ -78,7 +77,6 @@ impl fmt::Display for Item {
             Item::Nanite_Mist => write!(f, "{}", "Nanite_Mist"),
             Item::Nano_Points => write!(f, "{}", "Nano_Points"),
             Item::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
-            Item::Placeholder => write!(f, "{}", "Placeholder"),
             Item::Ranged_Damage => write!(f, "{}", "Ranged_Damage"),
             Item::Ranged_Speed => write!(f, "{}", "Ranged_Speed"),
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
@@ -124,7 +122,6 @@ impl std::str::FromStr for Item {
             "Nanite_Mist" => Ok(Item::Nanite_Mist),
             "Nano_Points" => Ok(Item::Nano_Points),
             "Notes_2053_02_27" => Ok(Item::Notes_2053_02_27),
-            "Placeholder" => Ok(Item::Placeholder),
             "Ranged_Damage" => Ok(Item::Ranged_Damage),
             "Ranged_Speed" => Ok(Item::Ranged_Speed),
             "Record_Losses" => Ok(Item::Record_Losses),
@@ -150,6 +147,7 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Health_Fragment
         | Item::Heretics_Tablet
         | Item::Melee_Charge
+        | Item::Notes_2053_02_27
         | Item::Record_Losses => true,
         _ => false,
     }

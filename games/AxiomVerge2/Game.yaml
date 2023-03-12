@@ -15,8 +15,7 @@ start:
 
 objectives:
   Start: Amashilama
-  Progress%: Health_Upgrade
-  Everything: Amashilama && Notes_2053_02_27
+  Progress%: Infect
 
 movements:
   default:
@@ -59,10 +58,12 @@ warps:
     time: 14.5
     req: Amashilama and ^mode != 'drone'
     to: ^save
+    do: ^energy = $max_energy
   drone_save:
     time: 12
     req: ^mode == 'drone'
     to: ^save
+    do: ^energy = $max_energy
   menu:
     time: 1
     req: NOT WITHIN `Menu` and ^flasks > 0
@@ -80,13 +81,13 @@ helpers:
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
-  $offset: major_glitches and $melee
 
-actions:
-  - name: Placeholder
-    req: Placeholder
-    do: ^energy += 1
-    time: 1
+  $offset: major_glitches and $melee
+  $block_clip: minor_glitches and ^mode == 'drone'
+  $block_clip_escape: minor_glitches and $hook
+
+  $save:action: ^save = ^position; ^energy = $max_energy
+
 
 collect:
   # Any action that has multiple statements, and one relies on the other
@@ -95,9 +96,12 @@ collect:
   Amashilama: ^save = `Glacier > Revival > Save Point`
   Flask: ^flasks += 1
   #Big_Flask: ^flasks += 2
+  Infect: ^energy = $max_energy
 
 settings:
   boomerang_steering:
     type: bool
   major_glitches:
+    type: bool
+  minor_glitches:
     type: bool

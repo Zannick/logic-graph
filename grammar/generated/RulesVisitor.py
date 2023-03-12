@@ -29,6 +29,11 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#ActionHelper.
+    def visitActionHelper(self, ctx:RulesParser.ActionHelperContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RulesParser#meta.
     def visitMeta(self, ctx:RulesParser.MetaContext):
         return self.visitChildren(ctx)

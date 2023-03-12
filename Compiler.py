@@ -80,6 +80,12 @@ def _parseExpression(logic: str, name: str, category: str, sep:str=':') -> Parse
     return parseRule(rule, logic, name=f'{category}{sep}{name}')
 
 
+def get_func_rule(helper_key:str) -> str:
+    if m := typed_name.match(helper_key):
+        return m.group('type') or 'boolExpr'
+    return 'boolExpr'
+
+
 def get_func_name(helper_key: str) -> str:
     if m := typed_name.match(helper_key):
         return m.group('name')
@@ -181,6 +187,7 @@ class GameLogic(object):
             get_func_name(name): {
                 'args': [TypedVar(a, '') for a in get_func_args(name)],
                 'pr': _parseExpression(logic, name, 'helpers'),
+                'rule': get_func_rule(name),
             }
             for name, logic in self._info['helpers'].items()
         }
@@ -198,8 +205,8 @@ class GameLogic(object):
         self.collect = {}
         for name, logic in self._info.get('collect', {}).items():
             pr = parseAction(logic, 'collect:' + name)
-            self.collect[name] = {'pr': pr}
-            self.collect[name]['action_id'] = self.make_funcid(self.collect[name])
+            self.collect[name] = {'act': pr}
+            self.collect[name]['action_id'] = self.make_funcid(self.collect[name], 'act')
 
         # these are {name: {...}} dicts
         self.movements = self._info['movements']
@@ -556,6 +563,8 @@ class GameLogic(object):
             d[id] = {prkey: info[prkey]}
             return id
 
+        if prkey not in d[id]:
+            print(id, d[id])
         if d[id][prkey].text != pr.text:
             id = id + sum(1 for k in d if k.startswith(id))
             assert id not in d
@@ -602,7 +611,7 @@ class GameLogic(object):
     def nonpoint_parse_results(self):
         yield from (info['pr'] for info in self.helpers.values())
         yield from (info['pr'] for info in self.objectives.values())
-        yield from (info['pr'] for info in self.collect.values())
+        yield from (info['act'] for info in self.collect.values())
         yield from (info['pr'] for info in self.movements.values() if 'pr' in info)
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
         yield from (info['pr'] for info in self.global_actions if 'pr' in info)

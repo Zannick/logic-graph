@@ -67,6 +67,7 @@ pub struct Context {
     // settings
     pub boomerang_steering: bool,
     pub major_glitches: bool,
+    pub minor_glitches: bool,
     // items
     pub amashilama: bool,
     pub apocalypse_bomb: bool,
@@ -85,8 +86,6 @@ pub struct Context {
     pub mist_upgrade: bool,
     pub nanite_mist: bool,
     pub nano_points: i8,
-    pub notes_2053_02_27: bool,
-    pub placeholder: bool,
     pub ranged_damage: i8,
     pub ranged_speed: i8,
     pub slingshot_hook: bool,
@@ -105,7 +104,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 26;
+    const NUM_ITEMS: i32 = 24;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -126,8 +125,6 @@ impl context::Ctx for Context {
             Item::Mist_Upgrade => self.mist_upgrade,
             Item::Nanite_Mist => self.nanite_mist,
             Item::Nano_Points => self.nano_points >= 1,
-            Item::Notes_2053_02_27 => self.notes_2053_02_27,
-            Item::Placeholder => self.placeholder,
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
             Item::Slingshot_Hook => self.slingshot_hook,
@@ -157,8 +154,6 @@ impl context::Ctx for Context {
             Item::Mist_Upgrade => self.mist_upgrade.into(),
             Item::Nanite_Mist => self.nanite_mist.into(),
             Item::Nano_Points => self.nano_points.into(),
-            Item::Notes_2053_02_27 => self.notes_2053_02_27.into(),
-            Item::Placeholder => self.placeholder.into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
             Item::Slingshot_Hook => self.slingshot_hook.into(),
@@ -195,6 +190,7 @@ impl context::Ctx for Context {
             }
             Item::Infect => {
                 self.infect = true;
+                rules::action_energy__max_energy(self);
             }
             Item::Infection_Level => {
                 self.infection_level += 1;
@@ -222,12 +218,6 @@ impl context::Ctx for Context {
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
-            }
-            Item::Notes_2053_02_27 => {
-                self.notes_2053_02_27 = true;
-            }
-            Item::Placeholder => {
-                self.placeholder = true;
             }
             Item::Ranged_Damage => {
                 self.ranged_damage += 1;

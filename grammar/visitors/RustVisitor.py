@@ -243,3 +243,6 @@ class ActionHasEffectVisitor(RustVisitor):
             return f'0 != {self.visit(ctx.num())}'
         return f'1 != {self.visit(ctx.num())}'
 
+    def visitActionHelper(self, ctx: RulesParser.ActionHelperContext):
+        assert str(ctx.invoke().FUNC()) not in BUILTINS
+        return self.visit(ctx.invoke()).replace('helper', 'helper_has_effect')

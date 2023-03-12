@@ -20,10 +20,6 @@ pub fn access_amashilama(ctx: &Context) -> bool {
     // Amashilama
     ctx.has(Item::Amashilama)
 }
-pub fn access_amashilama__notes_2053_02_27(ctx: &Context) -> bool {
-    // Amashilama && Notes_2053_02_27
-    (ctx.has(Item::Amashilama) && ctx.has(Item::Notes_2053_02_27))
-}
 pub fn access_amashilama_and_mode__drone(ctx: &Context) -> bool {
     // Amashilama and ^mode != 'drone'
     (ctx.has(Item::Amashilama) && ctx.mode() != enums::Mode::Drone)
@@ -175,10 +171,6 @@ pub fn access_offset(ctx: &Context) -> bool {
     // $offset
     helper__offset!(ctx)
 }
-pub fn access_placeholder(ctx: &Context) -> bool {
-    // Placeholder
-    ctx.has(Item::Placeholder)
-}
 pub fn access_ranged_damage(ctx: &Context) -> bool {
     // Ranged_Damage
     ctx.has(Item::Ranged_Damage)
@@ -263,12 +255,12 @@ pub fn action_has_effect_ebih__ebih_east__moving_platform___activate_ride__do(
     ctx.ebih__ebih_east__ctx__platform1_moved != true
         || ctx.position != SpotId::Ebih__Ebih_East__Middle_Platform
 }
-pub fn action_energy__1(ctx: &mut Context) {
-    // ^energy += 1
-    ctx.energy += 1;
+pub fn action_energy__max_energy(ctx: &mut Context) {
+    // ^energy = $max_energy
+    ctx.energy = helper__max_energy!(ctx);
 }
-pub fn action_has_effect_energy__1(ctx: &Context) -> bool {
-    0 != 1
+pub fn action_has_effect_energy__max_energy(ctx: &Context) -> bool {
+    ctx.energy != helper__max_energy!(ctx)
 }
 pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
@@ -284,17 +276,17 @@ pub fn action_last__position(ctx: &mut Context) {
 pub fn action_has_effect_last__position(ctx: &Context) -> bool {
     ctx.last != ctx.position()
 }
+pub fn action_save(ctx: &mut Context) {
+    // $save
+    helper__save!(ctx)
+}
+pub fn action_has_effect_save(ctx: &Context) -> bool {
+    helper_has_effect__save!(ctx)
+}
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 }
 pub fn action_has_effect_save__glacier__revival__save_point(ctx: &Context) -> bool {
     ctx.save != SpotId::Glacier__Revival__Save_Point
-}
-pub fn action_save__position(ctx: &mut Context) {
-    // ^save = ^position
-    ctx.save = ctx.position();
-}
-pub fn action_has_effect_save__position(ctx: &Context) -> bool {
-    ctx.save != ctx.position()
 }

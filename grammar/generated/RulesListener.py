@@ -44,6 +44,15 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#ActionHelper.
+    def enterActionHelper(self, ctx:RulesParser.ActionHelperContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#ActionHelper.
+    def exitActionHelper(self, ctx:RulesParser.ActionHelperContext):
+        pass
+
+
     # Enter a parse tree produced by RulesParser#meta.
     def enterMeta(self, ctx:RulesParser.MetaContext):
         pass
