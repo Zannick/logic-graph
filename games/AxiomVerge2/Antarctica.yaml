@@ -25,7 +25,7 @@ areas:
         - to: Helipad
       exits:
         - to: Building 1W > West Entry
-          req: $break_box
+          req: $can_damage
           tags: [interior]
           time: 2 # or 3
 
@@ -141,7 +141,7 @@ areas:
         - to: Door
       exits:
         - to: Building 2U Corner > Behind Boxes
-          req: $break_box
+          req: $can_damage
           time: 3
         - to: Building 2L > Entry
           time: 2

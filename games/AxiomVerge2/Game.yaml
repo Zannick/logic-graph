@@ -75,8 +75,8 @@ warps:
     to: ^last
 
 helpers:
-  $melee: Ice_Axe
-  $break_box: $melee or Boomerang
+  $melee: Ice_Axe or ^mode == 'drone'
+  $can_damage: $melee or Boomerang
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
@@ -97,6 +97,7 @@ collect:
   Flask: ^flasks += 1
   #Big_Flask: ^flasks += 2
   Infect: ^energy = $max_energy
+  Health_Node: ^energy = $max_energy
 
 settings:
   boomerang_steering:

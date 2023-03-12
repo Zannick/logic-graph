@@ -284,7 +284,7 @@ areas:
       locations:
         - name: Under Boxes
           item: Record_Losses
-          req: $break_box
+          req: $can_damage
           time: 2
           tag: [standing]
 
@@ -892,3 +892,117 @@ areas:
       coord: [21.95, 5.9]
       local:
         - to: Portal Stand
+      exits:
+        - to: Boss Room > West 6
+          tags: [xshift]
+
+- name: Boss Room
+  spots:
+    - name: West 6
+      coord: [22.05, 5.9]
+      local:
+        - to: Boss
+          jumps: 4
+        - to: Past Boss
+        - to: West 5
+      exits:
+        - to: Grid 21,1-5 > East 6
+          tags: [xshift]
+    - name: Boss
+      coord: [22.8, 5.1]
+      local:
+        - to: West 6
+          jumps_down: 1
+        - to: Past Boss
+        - to: Lower Tree
+        - to: Upper Tree
+        - to: High Platform
+        - to: West 5
+      locations:
+        - name: Hack Alu
+          item: Defeat_Ebih_Alu
+          canon: Defeat_Ebih_Alu
+          req: Infect and ($melee or Boomerang)
+          price: 280  # Overheat (100) x2 + Overload (80)
+          time: 25  # can be split across fetching the health node, too
+        - name: Fight Alu
+          item: Defeat_Ebih_Alu
+          canon: Defeat_Ebih_Alu
+          req: $melee or Boomerang
+          time: 50  # an estimate... includes risk of taking too much damage, I guess?
+
+    - name: Past Boss
+      coord: [23.1, 5.9]
+      local:
+        - to: West 6
+        - to: Boss
+          jumps: 3
+        - to: Lower Tree
+        - to: Upper Tree
+    - name: Lower Tree
+      coord: [23.5, 5.4]
+      local:
+        - to: Past Boss
+        - to: Boss
+          jumps: 4
+        - to: Upper Tree
+        - to: Lower Ledge
+      exits:
+        - to: Lower Ledge
+          req: $climb
+          time: 1
+    - name: Lower Ledge
+      coord: [23.7, 5.2]
+      local:
+        - to: Lower Tree
+        - to: East 6
+        - to: East Ledge
+        - to: Upper Tree
+    - name: East 6
+      coord: [23.95, 5.2]
+      local:
+        - to: Lower Ledge
+    - name: East 4
+      coord: [23.95, 4]
+      local:
+        - to: Upper Tree
+        - to: High Platform
+    - name: East Ledge
+      coord: [23.8, 4.7]
+      local:
+        - to: Upper Tree
+          jumps: 1
+        - to: Lower Ledge
+      locations:
+        - name: Item
+          item: Health_Node
+          tags: [standing]
+    - name: Upper Tree
+      coord: [23.55, 4.5]
+      local:
+        - to: High Platform
+          jumps: 2
+        - to: Boss
+        - to: Past Boss
+        - to: Lower Tree
+          jumps_down: 1
+        - to: East Ledge
+        - to: East 4
+    - name: High Platform
+      coord: [23.1, 4.3]
+      local:
+        - to: West 5
+          jumps: 2
+        - to: Boss
+          jumps_down: 2
+        - to: Upper Tree
+        - to: East 4
+    - name: West 5
+      coord: [22.05, 4.5]
+      local:
+        - to: West 6
+          jumps_down: 1
+        - to: Boss
+        - to: High Platform
+          jumps: 2
+          
