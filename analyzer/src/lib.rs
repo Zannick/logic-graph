@@ -205,12 +205,12 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_eventually_requires {
-        ($world:expr, $ctx:expr, $start:expr, $item:expr, $verify_req:expr) => {{
+        ($world:expr, $ctx:expr, $start:expr, $item:expr, $verify_req:expr, $limit:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
-            let mut count = 200;
+            let mut count = $limit;
             let mut success = false;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().has($item) {
@@ -225,7 +225,7 @@ pub mod testlib {
                     success = true;
                 }
                 if count == 0 {
-                    assert!(success, "Did not find {} in the iteration limit", $item);
+                    assert!(success, "Did not find {} in the iteration limit of {}", $item, $limit);
                     return;
                 }
                 $crate::algo::search_step($world, ctx, &mut heap);

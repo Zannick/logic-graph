@@ -48,6 +48,36 @@ tests:
       - Glacier > Vertical Room Top > Under Switch
       - Glacier > Vertical Room Left > Past Gate
 
+  - name: get_boomerang
+    start: Glacier > Revival > Save Point
+    path:
+      - Glacier > Revival > West
+      - Glacier > Grid 39-40,7-9 > Upper East
+      - Glacier > Grid 39-40,7-9 > West
+      - Glacier > Grid 37-38,9 > East
+      - Glacier > Grid 37-38,9 > West
+      - Glacier > Vertical Room Top > East 9
+      - Glacier > Vertical Room Top > Mid 9
+      - Glacier > Vertical Room Top > Mid 11
+      - Glacier > Vertical Room Top > East 13
+      - Glacier > Boomerang Antechamber > West 13
+      - Glacier > Boomerang Antechamber > East 12
+      - Glacier > Boomerang Room > West
+      - Glacier > Boomerang Room > Platform
+      - Glacier > Boomerang Room > Center-ish
+      - Glacier > Boomerang Room > Pedestal
+
+  - start: Glacier > Boomerang Room > Pedestal
+    with:
+      - Boomerang
+    can_obtain: Switch_36_11
+  
+  - start: Glacier > Vertical Room Top > Under Switch
+    with:
+      - Boomerang
+      - Switch_36_11
+    can_obtain: Ledge_Grab
+
   ## Requires tests
   # "requires" lets you add a second setup, and then tests both 1) without those additional
   # settings, the goal is not completable, 2) with those settings, it is.
@@ -67,3 +97,4 @@ tests:
       with: 
         - Boomerang
       to_obtain: Ledge_Grab
+      iteration_limit: 500

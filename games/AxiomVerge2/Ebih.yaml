@@ -6,11 +6,23 @@ areas:
   spots:
     - name: East 11
       coord: [30.95, 10.6]
+      local:
+        - to: East 12
+        - to: Staircase
+        - to: Lake Access
+          thru: [30.7, 12]
       exits:
         - to: Glacier > Grid 31,9-12 > Midair
           tags: [xshift]
     - name: East 12
       coord: [30.95, 12]
+      local:
+        - to: Staircase
+        - to: Lake Access
+          thru: [30.7, 12]
+        - to: Bunker Entry
+          thru: [30.7, 12]
+          jumps_down: [0, 1]
       exits:
         - to: Glacier > Grid 31,9-12 > West 12
           tags: [xshift]
@@ -21,30 +33,44 @@ areas:
           jumps: 1
         - to: Bunker Entry
           jumps_down: 2
+        - to: Save Point
+        - to: Lake Access
     - name: Save Point
-      coord: [29.5, 13]
+      coord: [29.5, 12.8]
       local:
         - to: Staircase
           jumps: 6
+        - to: Bunker Entry
+        - to: Behind Vehicle
+        - to: Building Entry
       actions:
         - name: Save
           do: ^save = ^position
           time: 1.3
     - name: Bunker Entry
-      coord: [30.1, 13]
+      coord: [30.2, 12.9]
       local:
         - to: Staircase
           jumps: 6
+        - to: Save Point
+          jumps: 1
+        - to: Lake Access
       exits:
         - to: Bunker Interior > Entry
           tags: [interior]
     - name: Lake Access
-      coord: [30.95, 13]
+      coord: [30.95, 12.9]
+      local:
+        - to: Bunker Entry
+        - to: Staircase
     - name: Behind Vehicle
-      coord: [28.8, 13]
+      coord: [28.8, 12.9]
       local:
         - to: Building Entry
           jumps: 2
+        - to: Save Point
+          jumps: 1
+        - to: Tent Entry
     - name: Building Entry
       coord: [29, 12.4]  # verify 12.4 vs 12.3?
       local:
@@ -52,17 +78,26 @@ areas:
           jumps_down: 1
         - to: Tent Entry
           jumps_down: 2
+        - to: Save Point
+        - to: West 13
       exits:
         - to: Building Interior > Entry
           tags: [interior]
     - name: Tent Entry
-      coord: [28.3, 13]
+      coord: [28.3, 12.9]
+      local:
+        - to: Building Entry
+        - to: Behind Vehicle
+        - to: West 13
+          jumps: 1
       exits:
         - to: Tent Interior > Entry
           time: 0.5
           tags: [interior, tent]
     - name: West 13
-      coord: [28.05, 13]
+      coord: [28.05, 12.8]
+      local:
+        - to: Tent Entry
       exits:
         - to: By Garage > East 13
           tags: [xshift]
@@ -71,11 +106,15 @@ areas:
   spots:
     - name: Entry
       coord: [30.1, 13]
+      local:
+        - to: Desk
       exits:
         - to: Base Camp > Bunker Entry
           tags: [exterior]
     - name: Desk
       coord: [30.5, 13]
+      local:
+        - to: Desk
       locations:
         - name: Note
           item: Dear_Ernest
@@ -85,6 +124,8 @@ areas:
   spots:
     - name: Entry
       coord: [29, 12.4]
+      local:
+        - to: Corner
       locations:
         - name: Remote Urn
           item: Melee_Charge
@@ -96,6 +137,8 @@ areas:
           tags: [exterior]
     - name: Corner
       coord: [28.5, 12.4]
+      local:
+        - to: Entry
       locations:
         - name: Urn
           item: Melee_Charge
@@ -106,12 +149,16 @@ areas:
   spots:
     - name: Entry
       coord: [28.3, 13]
+      local:
+        - to: Desk
       exits:
         - to: Base Camp > Tent Entry
           time: 0.5
           tags: [exterior, tent]
     - name: Desk
       coord: [28.4, 13]
+      local:
+        - to: Entry
       locations:
         - name: Note
           item: Companies_Layoff
@@ -120,15 +167,20 @@ areas:
 - name: By Garage
   spots:
     - name: East 13
-      coord: [27.95, 13]
+      coord: [27.95, 12.8]
       local:
         - to: East Platform
           jumps: 2
+        - to: Garage Entry
       exits:
         - to: Base Camp > West 13
           tags: [xshift]
     - name: East Platform
       coord: [27.5, 12.3]
+      local:
+        - to: Outcropping
+        - to: Crawlspace Opening
+        - to: East 13
       exits:
         - to: Crawlspace Opening
           req: $grab or $climb
@@ -141,6 +193,8 @@ areas:
       local:
         - to: Outcropping
           jumps: 1
+        - to: East Platform
+        - to: East 13
       exits:
         - to: Crawlspace
           req: ^mode == 'drone'
@@ -156,17 +210,26 @@ areas:
           time: 0.8
     - name: Outcropping
       coord: [27.3, 12]
+      local:
+        - to: East Bush
+        - to: Crawlspace Opening
+        - to: East Platform
+        - to: East 13
     - name: East Bush
       coord: [26.8, 12.1]
       local:
         - to: Outcropping
           jumps: 3
-        - exc: Garage Entry
+        - to: West Bush
+        - to: Lower Platform
     - name: Lower Platform
-      coord: [26.3, 12.5]
+      coord: [26.4, 12.5]
       local:
         - to: Garage Entry
           jumps_down: 1
+        - to: East 13
+        - to: East Bush
+        - to: West Bush
       exits:
         - to: East Bush
           req: $grab or $climb
@@ -175,15 +238,16 @@ areas:
           req: $grab or $climb
           time: 1.8
     - name: West Bush
-      coord: [26.1, 12.1]
+      coord: [26.3, 12.1]
       local:
         - to: West 12
           jumps: 2
+        - to: East Bush
+        - to: Lower Platform
     - name: West 12
       coord: [26.05, 12]
       local:
-        - exc: Outcropping
-        - exc: Crawlspace Opening
+        - to: West Bush
       exits:
         - to: Grid 25,10-12 > East 12
           tags: [xshift]
@@ -192,10 +256,14 @@ areas:
       local:
         - to: Lower Platform
           jumps: 3
-        - exc: Outcropping
-        - exc: Crawlspace Opening
+        - to: Garage Entry
     - name: Garage Entry
       coord: [27.2, 13]
+      local:
+        - to: West 13
+        - to: Lower Platform
+        - to: East 12
+        - to: East Platform
       exits:
         - to: Garage > Entry
           tags: [interior]
@@ -204,11 +272,15 @@ areas:
   spots:
     - name: Entry
       coord: [27.2, 13]
+      local:
+        - to: Boxes
       exits:
         - to: By Garage > Garage Entry
           tags: [exterior]
     - name: Boxes
       coord: [26.8, 13]
+      local:
+        - to: Entry
       locations:
         - name: Under Boxes
           item: Record_Losses
@@ -228,24 +300,36 @@ areas:
           tags: [xshift]
     - name: Bush
       coord: [25.6, 11.7]
-    - name: West 12
-      coord: [25.05, 12.1]
       local:
-        - exc: East 12
+        - to: East 12
+        - to: Mid-Ledge
+        - to: Below Bush
       exits:
         - to: Mid-Ledge
           req: $grab
           time: 1.5
-    - name: Below Bush
-      coord: [25.3, 12.1]
+    - name: West 12
+      coord: [25.05, 12.1]
       local:
-        - exc: East 12
+        - to: Below Bush
+    - name: Below Bush
+      coord: [25.4, 12.1]
+      local:
+        - to: West 12
+        - to: Bush
+        - to: Gate Left
       exits:
         - to: Bush
           req: $grab
           time: 0.75
     - name: Mid-Ledge
       coord: [25.2, 11.4]
+      local:
+        - to: West 11
+        - to: Gate Left
+          jumps: 2
+        - to: Bush
+        - to: Below Bush
       exits:
         - to: West 11
           req: $grab
@@ -253,114 +337,243 @@ areas:
     - name: Gate Left
       coord: [25.6, 11]
       local:
-        - exc: East 12
+        - to: West 11
+          jumps: 2
+        - to: Bush
+        - to: Below Bush
+        - to: Top Platform
+          jumps: 2
     - name: Top Platform
-      coord: [25.4, 10.8]
+      coord: [25.4, 10.7]
       local:
         - to: Bush
           jumps_down: 2
+        - to: Below Bush
+          jumps_down: 2
+        - to: West 11
+        - to: Gate Left
       exits:
         - to: West 10
           req: $grab
           time: 3.2
     - name: West 11
-      coord: [25.05, 11]
+      coord: [25.05, 10.9]
       local:
         - to: Top Platform
           jumps: 2
-        - exc: West 10
-        - exc: West 12
+        - to: Mid-Ledge
+        - to: Gate Left
       exits:
         - to: Waterfall > East 11
           tags: [xshift]
     - name: West 10
-      coord: [25.05, 10]
+      coord: [25.05, 9.9]
       local:
-        - exc: West 11
-        - exc: West 12
-        - exc: East 12
+        - to: Top Platform
+        - to: Gate Left
 
-- name: Waterfall Lower
+- name: Waterfall
   spots:
     - name: East 10
-      coord: [24.95, 10]
+      coord: [24.95, 9.9]
       local: 
-        - exc: East 11
+        - to: East Ledge
     - name: East Ledge
-      coord: [24.8, 10.2]
+      coord: [24.75, 10.2]
+      local:
+        - to: East 10
+        - to: East 11
+        - to: Near East Tree
     - name: East 11
-      coord: [24.95, 11]
+      coord: [24.95, 10.9]
       local:
         - to: Near East Tree
           jumps: 3
+        - to: East Ledge
       exits:
         - to: Grid 25,10-12 > West 11
           tags: [xshift]
     - name: Near East Tree
-      coord: [24.2, 10.5]
+      coord: [24.2, 10.4]
+      local:
+        - to: East Ledge
+        - to: East 11
+        - to: Waterfall Right
+        - to: Cave Entrance
     - name: Waterfall Right
-      coord: [23.8, 10.9]
+      coord: [23.8, 10.8]
       local:
         - to: Near East Tree
           jumps: 3
-        - to: Waterfall Center
+        - to: Waterfall Center Right
           jumps: 2
+        - to: Alcove Right
     - name: Alcove Right
-      coord: [23.1, 11]
+      coord: [23.35, 10.9]
       local:
         - to: Waterfall Right
           jumps: 1
+        - to: Waterfall Center Right  # you can't do this with ledge grab thanks to the enemy
     - name: Waterfall Center Right
-      coord: [23.2, 10.5]
+      coord: [23.25, 10.5]
+      local:
+        - to: Waterfall Center Left
+        - to: Alcove Right
+        - to: Waterfall 
     - name: Waterfall Center Left
-      coord: [22.5, 10.8]
+      coord: [22.5, 10.7]
       local:
         - to: Waterfall Center Right
           jumps: 3
+        - to: Alcove Left
+        - to: Under Waterfall
+        - to: Waterfall Left
+        - to: Cave Entrance
+        - to: Lower West Tree
+          jumps: 4
     - name: Alcove Left
-      coord: [22.6, 11]
+      coord: [22.55, 11]
+      local:
+        - to: Waterfall Center Left
+        - to: Under Waterfall
       exits:
         - to: Waterfall Center Left
           req: $grab
           time: 1.25
     - name: Under Waterfall
-      coord: [22.3, 11]
+      coord: [22.25, 11]
+      local:
+        - to: Waterfall Left
+        - to: Waterfall Center Left
       exits:
         - to: Waterfall Left
           req: $grab
           time: 1.1
     - name: Waterfall Left
-      coord: [22.0, 10.8]
+      coord: [22.0, 10.7]
+      local:
+        - to: Wall Right
+        - to: Under Waterfall
+        - to: Waterfall Center Left
+        - to: Lower West Tree
+          jumps: 3
     - name: Wall Right
-      coord: [21.4, 11]
+      coord: [21.4, 10.9]
       local:
         - to: Waterfall Left
           jumps: 3
-    - name: Tree Left
+        - to: Lower West Tree
+    - name: Lower West Tree
       coord: [21.9, 10.1]
+      local:
+        - to: West Lower Path
+        - to: Wall Right
+        - to: Waterfall Left
+          jumps_down: 2
+        - to: Under Waterfall
+        - to: Waterfall Center Left
+        - to: Cave Entrance
       exits:
-        - to: West Middle
+        - to: West Lower Path
           req: $grab
           time: 1
-    - name: West Middle
-      coord: [21.6, 10]
-    - name: West 10
-      coord: [21.05, 10]
+    - name: West Lower Path
+      coord: [21.7, 9.9]
       local:
-        - only: West Middle
-    
+        - to: West 10
+        - to: Lower West Tree
+        - to: Wall Right
+        - to: Waterfall Left
+        - to: Cave Entrance
+    - name: West 10
+      coord: [21.05, 9.9]
+      local:
+        - to: West Lower Path
+
+    - name: West 9
+      coord: [21.05, 9]
+      local:
+        - to: West Climb
+    - name: West Climb
+      coord: [21.7, 9]
+      local:
+        - to: West 9
+        - to: Middle West Tree
+      exits:
+        - to: Middle West Tree
+          req: $grab
+          time: 3
+    - name: Middle West Tree
+      coord: [21.75, 8.3]
+      local:
+        - to: West Main Path
+        - to: West Climb
+      exits:
+        - to: West Main Path
+          req: $grab
+          time: 1
+    - name: West Main Path
+      coord: [21.9, 8]
+      local:
+        - to: West Tree
+        - to: West Climb
+        - to: Center Main Path
+          jumps: 2
+        - to: Cave Entrance
     - name: Cave Entrance
       coord: [22.6, 8.5]
+      local:
+        - to: West Main Path
+        - to: Center Main Path
+        - to: West Lower Path
+        - to: Lower West Tree
+        - to: Waterfall Center Left
+        - to: Waterfall Right
+        - to: East Tree
       exits:
-        - to: Waterfall Middle > Cave Entrance
-          tags: [overlap]
         - to: Cave > Entry
           tags: [interior]
+    - name: Center Main Path
+      coord: [22.9, 8]
+      local:
+        - to: West Main Path
+        - to: Cave Entrance
+        - to: Big Tree
+    - name: Big Tree
+      coord: [23.6, 8.1]
+      local:
+        - to: Center Main Path
+          jumps: 2
+        - to: Below Tree
+        - to: Platform
+    - name: Below Tree
+      coord: [23.8, 8.5]
+      local:
+        - to: Big Tree
+        - to: Platform
+      exits:
+        - to: Big Tree
+          req: $grab
+          time: 1.2
+    - name: Platform
+      coord: [24.0, 8.5]
+      local:
+        - to: Below Tree
+        - to: East 8
+          jumps: 4
+      exits:
+        - to: Big Tree
+          req: $grab
+          time: 1.5
+    - name: East 8
+      coord: [24.95, 8]
+      local:
+        - to: Platform
 
 - name: Ebih West
   spots:
     - name: East 10
-      coord: [20.95, 10]
+      coord: [20.95, 9.9]
       local:
         - to: Mid Save
           jumps: 2
@@ -371,14 +584,25 @@ areas:
           jumps: 4
         - to: Block Left
           jumps_down: 2
+        - to: East 10
+        - to: Alcove Entrance
+        - to: Above Alcove
     - name: Alcove Entrance
       coord: [19.9, 10]
+      local:
+        - to: Alcove
+        - to: Above Alcove
+        - to: Mid Save
+          jumps: 2
+        - to: Block Left
       exits:
         - to: Above Alcove
           req: $grab
           time: 1
     - name: Alcove
       coord: [19.1, 10]
+      local:
+        - to: Alcove Entrance
       locations:
         - name: Tablet
           item: Heretics_Tablet
@@ -386,78 +610,27 @@ areas:
       local:
         - only: Alcove Entrance
     - name: Above Alcove
-      coord: [19.6, 9.7]
+      coord: [19.6, 9.6]
+      local:
+        - to: Alcove Entrance
+        - to: Mid Save
     - name: East 9
       coord: [20.95, 9]
       local:
         - to: East 10
           jumps_down: 1
+        - to: Mid Save
     - name: Block Left
-      coord: [20.3, 10.3]
+      coord: [20.35, 10.3]
       local:
-        - only: Mid Save
-        - only: Alcove Entrance
+        - to: Mid Save
+        - to: Alcove Entrance
       exits:
         - to: Mid Save
           req: $grab
           time: 2
         - to: Alcove Entrance
           time: 2.3
-
-- name: Waterfall Middle
-  spots:
-    - name: West 9
-      coord: [21.05, 9]
-      local:
-        - only: West Drop
-    - name: West Drop
-      coord: [21.7, 9]
-      exits:
-        - to: West Tree
-          req: $grab
-          time: 3
-    - name: West Tree
-      coord: [21.8, 8.3]
-      exits:
-        - to: West Main Path
-          req: $grab
-          time: 1
-    - name: West Main Path
-      coord: [21.9, 8.1]
-      local:
-        - to: Center Main Path
-          jumps: 2
-    - name: Cave Entrance
-      coord: [22.6, 8.5]
-      local:
-        - only: West Main Path
-        - only: Center Main Path
-      exits:
-        - to: Waterfall Lower > Cave Entrance
-          tags: [overlap]
-        - to: Cave > Entry
-          tags: [interior]
-    - name: Center Main Path
-      coord: [22.9, 8]
-    - name: Big Tree
-      coord: [23.6, 8.2]
-      local:
-        - to: Center Main Path
-          jumps: 2
-    - name: Below Tree
-      coord: [23.8, 8.5]
-      exits:
-        - to: Big Tree
-          req: $grab
-          time: 1.2
-    - name: Platform
-      coord: [24.0, 8.5]
-      exits:
-        - to: Big Tree
-          req: $grab
-          time: 1.5
-    - name: East 8
-      coord: [24.95, 8]
 
 - name: Cave
   spots:
@@ -468,7 +641,5 @@ areas:
           time: 0.5
           tags: [standing]
       exits:
-        - to: Waterfall Lower > Cave Entrance
-          tags: [exterior]
-        - to: Waterfall Middle > Cave Entrance
+        - to: Waterfall > Cave Entrance
           tags: [exterior]

@@ -18,8 +18,10 @@ pub enum Item {
     Drone_Melee_Speed,
     Escape,
     Flask,
+    Health,
     Health_Fragment,
     Health_Upgrade,
+    Heretics_Tablet,
     Ice_Axe,
     Infection_Level,
     Infection_Range,
@@ -35,6 +37,7 @@ pub enum Item {
     Placeholder,
     Ranged_Damage,
     Ranged_Speed,
+    Record_Losses,
     Slingshot_Hook,
     Station_Power,
     Switch_36_11,
@@ -55,8 +58,10 @@ impl fmt::Display for Item {
             Item::Drone_Melee_Speed => write!(f, "{}", "Drone_Melee_Speed"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Flask => write!(f, "{}", "Flask"),
+            Item::Health => write!(f, "{}", "Health"),
             Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
             Item::Health_Upgrade => write!(f, "{}", "Health_Upgrade"),
+            Item::Heretics_Tablet => write!(f, "{}", "Heretics_Tablet"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
             Item::Infection_Level => write!(f, "{}", "Infection_Level"),
             Item::Infection_Range => write!(f, "{}", "Infection_Range"),
@@ -72,6 +77,7 @@ impl fmt::Display for Item {
             Item::Placeholder => write!(f, "{}", "Placeholder"),
             Item::Ranged_Damage => write!(f, "{}", "Ranged_Damage"),
             Item::Ranged_Speed => write!(f, "{}", "Ranged_Speed"),
+            Item::Record_Losses => write!(f, "{}", "Record_Losses"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
@@ -96,8 +102,10 @@ impl std::str::FromStr for Item {
             "Drone_Melee_Speed" => Ok(Item::Drone_Melee_Speed),
             "Escape" => Ok(Item::Escape),
             "Flask" => Ok(Item::Flask),
+            "Health" => Ok(Item::Health),
             "Health_Fragment" => Ok(Item::Health_Fragment),
             "Health_Upgrade" => Ok(Item::Health_Upgrade),
+            "Heretics_Tablet" => Ok(Item::Heretics_Tablet),
             "Ice_Axe" => Ok(Item::Ice_Axe),
             "Infection_Level" => Ok(Item::Infection_Level),
             "Infection_Range" => Ok(Item::Infection_Range),
@@ -113,6 +121,7 @@ impl std::str::FromStr for Item {
             "Placeholder" => Ok(Item::Placeholder),
             "Ranged_Damage" => Ok(Item::Ranged_Damage),
             "Ranged_Speed" => Ok(Item::Ranged_Speed),
+            "Record_Losses" => Ok(Item::Record_Losses),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
             "Station_Power" => Ok(Item::Station_Power),
             "Switch_36_11" => Ok(Item::Switch_36_11),
@@ -130,8 +139,11 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Compass
         | Item::Dear_Ernest
         | Item::Escape
+        | Item::Health
         | Item::Health_Fragment
-        | Item::Melee_Charge => true,
+        | Item::Heretics_Tablet
+        | Item::Melee_Charge
+        | Item::Record_Losses => true,
         _ => false,
     }
 }

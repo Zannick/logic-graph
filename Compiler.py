@@ -63,11 +63,12 @@ def load_game_yaml(game_dir: str):
         load_data_from_file(os.path.join(game_dir, file))
         for file in sorted(yfiles)))
     test_dir = os.path.join(game_dir, 'tests')
-    testfiles = [file for file in os.listdir(test_dir)
-                 if file.endswith('.yaml')]
-    game['tests'] = list(itertools.chain.from_iterable(
-        load_data_from_file(os.path.join(test_dir, file))
-        for file in sorted(testfiles)))
+    if os.path.exists(test_dir):
+        testfiles = [file for file in os.listdir(test_dir)
+                     if file.endswith('.yaml')]
+        game['tests'] = list(itertools.chain.from_iterable(
+            load_data_from_file(os.path.join(test_dir, file))
+            for file in sorted(testfiles)))
     return game
 
 def _parseExpression(logic: str, name: str, category: str, sep:str=':') -> ParseResult:
@@ -171,7 +172,7 @@ class GameLogic(object):
         self._misc_errors = []
 
         self._info = load_game_yaml(self.game_dir)
-        self.tests = self._info['tests']
+        self.tests = self._info.get('tests', [])
         self.game_name = self._info['name']
         self.helpers = {
             get_func_name(name): {
@@ -467,7 +468,7 @@ class GameLogic(object):
                     if not isinstance(j, list):
                         j = [j]
                     if len(j) != len(coords) - 1:
-                        self._misc_errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]}'
+                        self._misc_errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]} '
                                                     f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
                         break
                     jumps_down[:] = j
@@ -475,8 +476,9 @@ class GameLogic(object):
                     jumps_down *= len(coords) - 1
                 break
             
-            if lcl.get('exc') == sp2['name']:
-                return ([], [], [])
+        else:
+            # spots must explicitly declare connections
+            return ([], [], [])
         
         return (coords, jumps, jumps_down)
         

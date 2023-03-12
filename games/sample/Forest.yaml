@@ -12,10 +12,14 @@ areas:
   spots:
     - name: Start Point
       coord: [0,0]
-      # For exits, generally we omit the other local spots and assume connectivity
+      # For local spots (spots in the same area),
       # distance is calculated based on coordinates (and movement speed)
+      local:
+        - to: Entry
     - name: Entry
       coord: [0,2]
+      local:
+        - to: Start Point
       exits:
         # names can be short-form to other local spots
         # or expanded to specify a spot in another area or region
@@ -38,8 +42,18 @@ areas:
           thru: [11, 20]
         - to: Mido's Guardpost
           thru: [13, 23]
+        - to: Mido's Porch
+        - to: Shop Porch
+        - to: Saria's Porch
     - name: Mido's Porch
       coord: [10, 18]
+      local:
+        - to: Know-it-all Porch
+        - to: Training Center
+        - to: Mido's Guardpost
+        - to: Link's Porch
+        - to: Shop Porch
+        - to: Saria's Porch
       actions:
         - name: Gather Rupees
           time: 20
@@ -49,22 +63,50 @@ areas:
           tags: [load, interior]
     - name: Know-it-all Porch
       coord: [7, 21]
+      local:
+        - to: Training Center
+        - to: Mido's Guardpost
+        - to: Mido's Porch
+        - to: Link's Porch
+        - to: Shop Porch
+        - to: Saria's Porch
       exits:
         - to: Know-it-all House > Entry
           tags: [load, interior]
     - name: Training Center
       coord: [8, 25]
+      local:
+        - to: Know-it-all Porch
+        - to: Mido's Guardpost
+        - to: Mido's Porch
+        - to: Link's Porch
+        - to: Shop Porch
+        - to: Saria's Porch
       exits:
         - to: Boulder Maze > Entry
           req: $is_child
           time: 6
     - name: Shop Porch
       coord: [20, 18]
+      local:
+        - to: Know-it-all Porch
+        - to: Training Center
+        - to: Mido's Guardpost
+        - to: Mido's Porch
+        - to: Link's Porch
+        - to: Saria's Porch
       exits:
         - to: Shop > Entry
           tags: [load, interior]
     - name: Saria's Porch
       coord: [20, 22]
+      local:
+        - to: Know-it-all Porch
+        - to: Training Center
+        - to: Mido's Guardpost
+        - to: Mido's Porch
+        - to: Link's Porch
+        - to: Shop Porch
       actions:
         - name: Save
           do: ^save = ^position
@@ -73,6 +115,13 @@ areas:
           tags: [load, interior]
     - name: Mido's Guardpost
       coord: [23, 20]
+      local:
+        - to: Know-it-all Porch
+        - to: Training Center
+        - to: Mido's Porch
+        - to: Link's Porch
+        - to: Shop Porch
+        - to: Saria's Porch
       locations:
         - name: Show Mido
           # Permanent events can be written as locations that give items
@@ -88,12 +137,16 @@ areas:
   spots:
     - name: Entry
       coord: [8, 28]
+      local:
+        - to: Reward
       exits:
         - to: Kokiri Village > Training Center
           req: $is_child
           time: 6
     - name: Reward
       coord: [10, 31]
+      local:
+        - to: Entry
       locations:
         - name: Chest
           item: Kokiri_Sword
@@ -103,10 +156,15 @@ areas:
   spots:
     - name: Village Side
       coord: [24, 20]
+      local:
+        - to: Deku Babas
       exits:
         - to: Kokiri Village > Mido's Guardpost
     - name: Deku Babas
       coord: [28, 17]
+      local:
+        - to: Village Side
+        - to: Tree Side
       locations:
         - name: Sticks
           item: Deku_Stick_Drop
@@ -116,6 +174,8 @@ areas:
           req: $is_adult
     - name: Tree Side
       coord: [31, 14]
+      local:
+        - to: Deku Babas
       exits:
         - to: Outside Deku Tree > Entry
 
@@ -123,20 +183,36 @@ areas:
   spots:
     - name: Entry
       coord: [32, 14]
+      local:
+        - to: Left
+        - to: Right
+        - to: Mouth
       exits:
         - to: Baba Corridor > Tree Side
     - name: Left
       coord: [39, 10]
+      local:
+        - to: Entry
+        - to: Right
+        - to: Mouth
       locations:
         - name: Gossip Stone
           tags: [hint]
     - name: Right
       coord: [42, 17]
+      local:
+        - to: Entry
+        - to: Left
+        - to: Mouth
       locations:
         - name: Gossip Stone
           tags: [hint]
     - name: Mouth
       coord: [39, 14]
+      local:
+        - to: Entry
+        - to: Left
+        - to: Right
       exits:
         - to: Deku Tree > Lobby > Entry
           tags: [load, dungeon, interior]

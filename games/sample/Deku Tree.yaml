@@ -9,8 +9,13 @@ areas:
     - name: Entry
       # 3-dimensional coords?
       coord: [0,0]
+      local:
+        - to: Center
     - name: Center
       coord: [0,1]
+      local:
+        - to: Entry
+        - to: Vines
       locations:
         - name: Deku Baba Sticks
           item: Deku_Stick_Drop
@@ -32,6 +37,8 @@ areas:
           time: 5
     - name: Vines
       coord: [0,2]
+      local:
+        - to: Center
       exits:
         - to: Floor 2 > Lower
           time: 4
@@ -41,11 +48,17 @@ areas:
   spots:
     - name: Lower
       coord: [0,2]
+      local:
+        - to: Vines
+        - to: Slingshot Door
       exits:
         - to: Lobby > Vines
         - to: Lobby > Center
     - name: Vines
       coord: [1,1]
+      local:
+        - to: Lower
+        - to: Slingshot Door
       locations:
         - name: Map Chest
           item: Map_Deku_Tree
@@ -62,6 +75,9 @@ areas:
         - to: Lobby > Center
     - name: Slingshot Door
       coord: [0,0]
+      local:
+        - to: Vines
+        - to: Lower
       exits:
         - to: Scrub Room > Entry
         - to: Lobby > Entry
@@ -71,6 +87,8 @@ areas:
   spots:
     - name: Entry
       coord: [0,0]
+      local:
+        - to: Rear
       locations:
         - name: Scrub
           item: Deku_Slingshot_Scrub
@@ -81,6 +99,8 @@ areas:
         - to: Floor 2 > Slingshot Door
     - name: Rear
       coord: [0,2]
+      local:
+        - to: Entry
       exits:
         - to: Slingshot Room > Entry
           req: Deku_Slingshot_Scrub
@@ -89,10 +109,14 @@ areas:
   spots:
     - name: Entry
       coord: [0,0]
+      local:
+        - to: Slingshot
       exits:
         - to: Scrub Room > Rear
     - name: Slingshot
       coord: [0,1]
+      local:
+        - to: Entry
       locations:
         - name: Chest
           item: Slingshot
@@ -115,8 +139,12 @@ areas:
   spots:
     - name: Climb
       coord: [2,1]
+      local:
+        - to: Door
     - name: Door
       coord: [0,1]
+      local:
+        - to: Climb
       exits:
         - to: Compass Room > Entry
         - to: Lobby > Center
@@ -138,6 +166,9 @@ areas:
   spots:
     - name: Entry
       coord: [2,0]
+      local:
+        - to: Compass
+        - to: Ledge
       actions:
         - name: Light Torch
           req: $is_child and $Sticks and not ^_torch
@@ -155,30 +186,31 @@ areas:
           tags: [event]
     - name: Compass
       coord: [0,0]
+      local:
+        - to: Entry
       locations:
         - name: Chest
           item: Compass_Deku_Tree
           tags: [big]
-      local:
-        - to: Ledge
-          thru: [2,0]
     - name: Ledge
       coord: [1,1]
+      local:
+        - to: Entry
       locations:
         - name: Chest
           item: Recovery_Heart
         - name: GS
           item: Gold_Skulltula_Token
           req: $is_adult or $can_child_attack
-      local:
-        - to: Compass
-          thru: [2,0]
 
 ## Basement 1
 - name: Basement 1
   spots:
     - name: Center
       coord: [2,1]
+      local:
+        - to: Corner
+        - to: South Door
       locations:
         - name: Vines GS
           item: Gold_Skulltula_Token
@@ -189,6 +221,9 @@ areas:
           time: 6
     - name: Corner
       coord: [2,0]
+      local:
+        - to: Center
+        - to: South Door
       locations:
         - name: Switch
           item: Deku_Basement_Switch
@@ -213,6 +248,9 @@ areas:
           to: Basement Ledge > Web
     - name: South Door
       coord: [2,2]
+      local:
+        - to: Center
+        - to: Corner
       exits:
         - to: Back Room > South
           time: 20  # just skip the side passage for now
@@ -221,8 +259,14 @@ areas:
   spots:
     - name: South
       coord: [1,2]
+      local:
+        - to: Northwest
+        - to: East
     - name: Northwest
       coord: [0,0]
+      local:
+        - to: South
+        - to: East
       locations:
         - name: Burn Web
           item: Deku_Back_Room_Web
@@ -237,6 +281,9 @@ areas:
           req: Deku_Back_Room_Web and Deku_Back_Room_Wall
     - name: East
       coord: [2,1]
+      local:
+        - to: South
+        - to: Northwest
       exits:
         - to: Basement Ledge > Web
           req: $is_child
@@ -256,6 +303,8 @@ areas:
   spots:
     - name: Block
       coord: [0,0]
+      local:
+        - to: Web
       locations:
         - name: Push Block
           item: Deku_Basement_Block
@@ -265,6 +314,8 @@ areas:
         - to: Basement 1 > Corner
     - name: Web
       coord: [0,1]
+      local:
+        - to: Block
       locations:
         - name: Burn Web
           item: Deku_Basement_Web
@@ -281,11 +332,15 @@ areas:
   spots:
     - name: Pool
       coord: [0,2]
+      local:
+        - to: Boss Door
       exits:
         - to: Basement Ledge > Web
           time: 6
     - name: Boss Door
       coord: [0,0]
+      local:
+        - to: Pool
       locations:
         - name: Scrubs
           item: Deku_Basement_Scrubs
@@ -302,6 +357,8 @@ areas:
   spots:
     - name: Entry
       coord: [0,0]
+      local:
+        - to: Arena
     - name: Arena
       coord: [0,1]
       locations:

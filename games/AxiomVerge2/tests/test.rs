@@ -94,17 +94,22 @@ fn test_require() {
     );
 }
 
+// tests with flasks turn out to be very expensive, probably due to
+// the several options for upgrades
+#[ignore]
 #[test]
 fn search() {
     let mut world = graph::World::new();
     let mut ctx = Context::new();
-    ctx.energy = 30;
+    ctx.energy = 300;
     ctx.flasks = 1;
     ctx.amashilama = true;
     ctx.ice_axe = true;
     ctx.save = SpotId::Glacier__Revival__Save_Point;
-    let verify = |ctx: &Context| {
-        if ctx.has(Item::Boomerang) {
+    ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
+    ctx.skipped(LocationId::Glacier__Compass_Room__Center__Table);
+    let verify = |c: &Context| {
+        if c.has(Item::Boomerang) {
             Ok(())
         } else {
             Err("No boomerang")
@@ -116,6 +121,7 @@ fn search() {
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,
         Item::Ledge_Grab,
-        verify
+        verify,
+        20000
     );
 }

@@ -7,8 +7,13 @@ areas:
       # start point is 38.5,2 on the AV2 map
       # ~5s left to the shed at 37.25, ~7s right to blocks
       coord: [38.5, 2]
+      local:
+        - to: Shed Entry
+        - to: Boxes
     - name: Shed Entry
       coord: [37.25, 2]
+      local:
+        - to: Helipad
       exits:
         - to: Shed > Interior
           tags: [interior] # arguably the ext/int tags could be derived from area->area
@@ -16,6 +21,8 @@ areas:
       coord: [40, 2] 
       # technically the door is a little further right
       # but there's no need to come back
+      local:
+        - to: Helipad
       exits:
         - to: Building 1W > West Entry
           req: $break_box
@@ -29,6 +36,7 @@ areas:
         - name: Shelf
           item: Ice_Axe
           time: 0.5
+          tags: [standing]
       exits:
         - to: West > Shed Entry
           tags: [exterior]
@@ -38,11 +46,15 @@ areas:
     - name: West Entry
       coord: [40.25, 2]
       # there's no need to go back, but...
+      local:
+        - to: Connector
       exits:
         - to: West > Boxes
           tags: [exterior]
     - name: Connector
       coord: [41, 2]
+      local:
+        - to: West Entry
       exits:
         - to: Building 1E > Connector
           tags: [xshift]
@@ -51,11 +63,15 @@ areas:
   spots:
     - name: Connector
       coord: [41, 2]
+      local:
+        - to: East Entry
       exits:
         - to: Building 1W > Connector
           tags: [xshift]
     - name: East Entry
       coord: [41.75, 2]
+      local:
+        - to: Connector
       exits:
         - to: East > Building 1 Entry
           tags: [exterior]
@@ -66,18 +82,34 @@ areas:
   spots:
     - name: Building 1 Entry
       coord: [41.75, 2]
+      local:
+        - to: Save Point
+        - to: Building 2 Upper
       exits:
         - to: Building 1E > East Entry
           tags: [interior]
     - name: Save Point
       coord: [42, 2]
+      local:
+        - to: Building 1 Entry
+        - to: Building 2 Entry
+        - to: Building 2 Upper  # unrealistic, but possible with mist
     - name: Building 2 Entry
       coord: [42.5, 2]
+      local:
+        - to: Save Point
+        - to: Building 2 Upper
       exits:
         - to: Building 2L > Entry
           tags: [interior]
     - name: Building 2 Upper
       coord: [41.25, 1]
+      local:
+        - to: Building 1 Entry
+          jumps_down: 1
+        - to: Save Point
+          jumps_down: 1
+        - to: Building 2 Entry
       exits:
         - to: Building 2U > Door
           tags: [interior]
@@ -105,6 +137,8 @@ areas:
   spots:
     - name: Stairs
       coord: [42.25, 1]
+      local:
+        - to: Door
       exits:
         - to: Building 2U Corner > Behind Boxes
           req: $break_box
@@ -113,6 +147,8 @@ areas:
           time: 2
     - name: Door
       coord: [41.25, 1]
+      local:
+        - to: Stairs
       exits:
         - to: East > Building 2 Upper
           tags: [exterior]
@@ -143,11 +179,15 @@ areas:
   spots:
     - name: Entry
       coord: [40.70, 1]
+      local:
+        - to: Switch
       exits:
         - to: Top > Power Entry
           tags: [exterior]
     - name: Switch
       coord: [40.30, 1]
+      local:
+        - to: Entry
       locations:
         - name: Flip
           item: Station_Power
@@ -158,12 +198,16 @@ areas:
   spots:
     - name: Left
       coord: [43, 2]
+      local:
+        - to: Controls
       exits:
         - to: Building 2L > Entry
           time: 3
           tags: [xshift]
     - name: Controls
       coord: [43.6, 2]
+      local:
+        - to: Left
       exits:
         - to: Glacier > Dock Elevator > Elevator
           time: 15

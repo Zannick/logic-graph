@@ -12,13 +12,13 @@ macro_rules! helper__melee {
 }
 
 /// $break_box (  )
-/// $melee
+/// $melee or Boomerang
 #[macro_export]
 macro_rules! helper__break_box {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        helper__melee!($ctx)
+        (helper__melee!($ctx) || $ctx.has(Item::Boomerang))
     }};
 }
 

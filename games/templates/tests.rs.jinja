@@ -122,7 +122,7 @@ fn {{ test_case|construct_test_name }}() {
     {%- endif %}
 %% elif test_case.eventually_requires
     let verify = {{ verify_func(test_case.eventually_requires) }};
-    expect_eventually_requires!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_requires.to_obtain }}, verify);
+    expect_eventually_requires!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_requires.to_obtain }}, verify, {{ test_case.iteration_limit or 1000 }});
 %% endif
 }
 %% endfor

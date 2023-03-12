@@ -24,10 +24,8 @@ fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
 pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
     match (src, dest) {
         (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Center) => 1000,
-        (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Vines) => 2000,
         (SpotId::Deku_Tree__Lobby__Center, SpotId::Deku_Tree__Lobby__Entry) => 1000,
         (SpotId::Deku_Tree__Lobby__Center, SpotId::Deku_Tree__Lobby__Vines) => 1000,
-        (SpotId::Deku_Tree__Lobby__Vines, SpotId::Deku_Tree__Lobby__Entry) => 2000,
         (SpotId::Deku_Tree__Lobby__Vines, SpotId::Deku_Tree__Lobby__Center) => 1000,
         (SpotId::Deku_Tree__Floor_2__Lower, SpotId::Deku_Tree__Floor_2__Vines) => 1414,
         (SpotId::Deku_Tree__Floor_2__Lower, SpotId::Deku_Tree__Floor_2__Slingshot_Door) => 2000,
@@ -50,11 +48,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::Deku_Tree__Compass_Room__Entry, SpotId::Deku_Tree__Compass_Room__Compass) => 2000,
         (SpotId::Deku_Tree__Compass_Room__Entry, SpotId::Deku_Tree__Compass_Room__Ledge) => 1414,
         (SpotId::Deku_Tree__Compass_Room__Compass, SpotId::Deku_Tree__Compass_Room__Entry) => 2000,
-        // [2.0, 1.414214]
-        (SpotId::Deku_Tree__Compass_Room__Compass, SpotId::Deku_Tree__Compass_Room__Ledge) => 3414,
         (SpotId::Deku_Tree__Compass_Room__Ledge, SpotId::Deku_Tree__Compass_Room__Entry) => 1414,
-        // [1.414214, 2.0]
-        (SpotId::Deku_Tree__Compass_Room__Ledge, SpotId::Deku_Tree__Compass_Room__Compass) => 3414,
         (SpotId::Deku_Tree__Basement_1__Center, SpotId::Deku_Tree__Basement_1__Corner) => 1000,
         (SpotId::Deku_Tree__Basement_1__Center, SpotId::Deku_Tree__Basement_1__South_Door) => 1000,
         (SpotId::Deku_Tree__Basement_1__Corner, SpotId::Deku_Tree__Basement_1__Center) => 1000,
@@ -72,7 +66,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::Deku_Tree__Basement_2__Pool, SpotId::Deku_Tree__Basement_2__Boss_Door) => 2000,
         (SpotId::Deku_Tree__Basement_2__Boss_Door, SpotId::Deku_Tree__Basement_2__Pool) => 2000,
         (SpotId::Deku_Tree__Boss_Room__Entry, SpotId::Deku_Tree__Boss_Room__Arena) => 1000,
-        (SpotId::Deku_Tree__Boss_Room__Arena, SpotId::Deku_Tree__Boss_Room__Entry) => 1000,
         (SpotId::KF__Links_House__Start_Point, SpotId::KF__Links_House__Entry) => 2000,
         (SpotId::KF__Links_House__Entry, SpotId::KF__Links_House__Start_Point) => 2000,
         (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => 8246,
@@ -199,10 +192,8 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (SpotId::KF__Boulder_Maze__Entry, SpotId::KF__Boulder_Maze__Reward) => 3605,
         (SpotId::KF__Boulder_Maze__Reward, SpotId::KF__Boulder_Maze__Entry) => 3605,
         (SpotId::KF__Baba_Corridor__Village_Side, SpotId::KF__Baba_Corridor__Deku_Babas) => 5000,
-        (SpotId::KF__Baba_Corridor__Village_Side, SpotId::KF__Baba_Corridor__Tree_Side) => 9219,
         (SpotId::KF__Baba_Corridor__Deku_Babas, SpotId::KF__Baba_Corridor__Village_Side) => 5000,
         (SpotId::KF__Baba_Corridor__Deku_Babas, SpotId::KF__Baba_Corridor__Tree_Side) => 4242,
-        (SpotId::KF__Baba_Corridor__Tree_Side, SpotId::KF__Baba_Corridor__Village_Side) => 9219,
         (SpotId::KF__Baba_Corridor__Tree_Side, SpotId::KF__Baba_Corridor__Deku_Babas) => 4242,
         (SpotId::KF__Outside_Deku_Tree__Entry, SpotId::KF__Outside_Deku_Tree__Left) => 8062,
         (SpotId::KF__Outside_Deku_Tree__Entry, SpotId::KF__Outside_Deku_Tree__Right) => 10440,

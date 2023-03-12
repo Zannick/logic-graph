@@ -119,6 +119,59 @@ fn switch_opens_gate() {
     );
 }
 #[test]
+fn get_boomerang() {
+    let (mut world, mut ctx) = shared_setup();
+
+    expect_this_route!(
+        &world,
+        ctx,
+        SpotId::Glacier__Revival__Save_Point,
+        vec![
+            SpotId::Glacier__Revival__West,
+            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
+            SpotId::Glacier__Grid_39_40_7_9__West,
+            SpotId::Glacier__Grid_37_38_9__East,
+            SpotId::Glacier__Grid_37_38_9__West,
+            SpotId::Glacier__Vertical_Room_Top__East_9,
+            SpotId::Glacier__Vertical_Room_Top__Mid_9,
+            SpotId::Glacier__Vertical_Room_Top__Mid_11,
+            SpotId::Glacier__Vertical_Room_Top__East_13,
+            SpotId::Glacier__Boomerang_Antechamber__West_13,
+            SpotId::Glacier__Boomerang_Antechamber__East_12,
+            SpotId::Glacier__Boomerang_Room__West,
+            SpotId::Glacier__Boomerang_Room__Platform,
+            SpotId::Glacier__Boomerang_Room__Center_ish,
+            SpotId::Glacier__Boomerang_Room__Pedestal,
+        ]
+    );
+}
+#[test]
+fn start_Glacier__Boomerang_Room__Pedestal_with_Boomerang_can_obtain_Switch_36_11() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.boomerang = true;
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Glacier__Boomerang_Room__Pedestal,
+        Item::Switch_36_11
+    );
+}
+#[test]
+fn start_Glacier__Vertical_Room_Top__Under_Switch_with_Boomerang__Switch_36_11_can_obtain_Ledge_Grab(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.boomerang = true;
+    ctx.switch_36_11 = true;
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+        Item::Ledge_Grab
+    );
+}
+#[test]
 fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room_Top__Peak() {
     let (mut world, mut ctx) = shared_setup();
 
@@ -139,7 +192,7 @@ fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room_Top__Peak() {
     );
 }
 #[test]
-fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab() {
+fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab_iteration_limit_500() {
     let (mut world, mut ctx) = shared_setup();
 
     let verify = |ctx: &Context| {
@@ -161,6 +214,7 @@ fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab() {
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,
         Item::Ledge_Grab,
-        verify
+        verify,
+        1000
     );
 }
