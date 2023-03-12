@@ -12,5 +12,7 @@
 games/*/*.dot       linguist-generated=true
 games/*/benches/*   linguist-generated=true
 games/*/bin/*       linguist-generated=true
+games/*/data/*      linguist-generated=true
 games/*/src/*       linguist-generated=true
+games/*/tests/*.rs  linguist-generated=true
 grammar/generated/* -diff linguist-generated=true
