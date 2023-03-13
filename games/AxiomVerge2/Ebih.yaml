@@ -756,7 +756,7 @@ areas:
           tags: [exterior]
 
 - name: Ebih East
-  start:  # TODO: make these 'load' rules? I.e. set on start+savewarp.
+  reset:
     _platform1_moved: false
     _platform2_moved: false
   spots:
@@ -1005,4 +1005,3 @@ areas:
         - to: Boss
         - to: High Platform
           jumps: 2
-          

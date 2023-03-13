@@ -33,6 +33,7 @@ SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'loca
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
+TRIGGER_RULES = {'enter', 'load', 'reset'}
 
 typed_name = re.compile(r'(?P<name>\$?[\w\s]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
@@ -220,6 +221,7 @@ class GameLogic(object):
                 if name == 'default':
                     self._misc_errors.append(f'Cannot define req for default movement')
 
+        self.id_lookup = {}
         self.process_regions()
         self.process_times()
         self.process_warps()
@@ -233,11 +235,13 @@ class GameLogic(object):
         for region in self.regions:
             rname = region.get('short', region['name'])
             region['id'] = construct_id(rname)
+            self.id_lookup[region['id']] = region
             region['loc_ids'] = []
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
                 area['id'] = construct_id(rname, aname)
+                self.id_lookup[area['id']] = area
                 area['fullname'] = f'{rname} > {aname}'
                 area['spot_ids'] = []
                 area['loc_ids'] = []
@@ -247,6 +251,7 @@ class GameLogic(object):
                     spot['area'] = aname
                     spot['region'] = rname
                     spot['id'] = construct_id(rname, aname, sname)
+                    self.id_lookup[spot['id']] = spot
                     spot['fullname'] = f'{rname} > {aname} > {sname}'
                     area['spot_ids'].append(spot['id'])
                     spot['loc_ids'] = []
@@ -258,6 +263,7 @@ class GameLogic(object):
                         loc['area'] = aname
                         loc['region'] = rname
                         loc['id'] = construct_id(rname, aname, sname, loc['name'])
+                        self.id_lookup[loc['id']] = loc
                         spot['loc_ids'].append(loc['id'])
                         area['loc_ids'].append(loc['id'])
                         region['loc_ids'].append(loc['id'])
@@ -277,6 +283,7 @@ class GameLogic(object):
                         ec[eh['to']] += 1
                         eh['id'] = construct_id(rname, aname, sname, 'ex',
                                                 f'{eh["to"]}_{ec[eh["to"]]}')
+                        self.id_lookup[eh['id']] = eh
                         spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
                         if 'req' in eh:
@@ -288,6 +295,7 @@ class GameLogic(object):
                         act['area'] = aname
                         act['region'] = rname
                         act['id'] = construct_id(rname, aname, sname, act['name'])
+                        self.id_lookup[act['id']] = act
                         spot['action_ids'].append(act['id'])
                         act['fullname'] = f'{spot["fullname"]}: {act["name"]}'
                         if 'req' in act:
@@ -723,6 +731,7 @@ class GameLogic(object):
         # Do things that will fill _misc_errors
         self.context_values
         self.local_distances
+        self.context_resetters
         for m in self.non_default_movements:
             if 'req' not in self.movements[m]:
                 self._misc_errors.append(f'Movement {m} must have a req')
@@ -835,7 +844,7 @@ class GameLogic(object):
             else:
                 gc[ctx] = val
 
-        def _handle_enter(ctx, val, *names):
+        def _handle_triggers(ctx, val, *names):
             if ctx[0] == '_':
                 _check_shadow(ctx, *names)
                 ctx = construct_id(*names, 'ctx', ctx[1:]).lower()
@@ -857,16 +866,20 @@ class GameLogic(object):
         for region in self.regions:
             for ctx, val in region.get('start', {}).items():
                 _handle_start(ctx, val, region['name'])
-            for ctx, val in region.get('enter', {}).items():
-                _handle_enter(ctx, val, region['name'])
+            for ctx, val in itertools.chain.from_iterable(
+                    region.get(trigger, {}).items()
+                    for trigger in TRIGGER_RULES):
+                _handle_triggers(ctx, val, region['name'])
             for ctx, val in region.get('here', {}).items():
                 _handle_here(ctx, val, region['name'])
         # Areas must be handled second to check for shadowing
         for area in self.areas():
             for ctx, val in area.get('start', {}).items():
                 _handle_start(ctx, val, area['region'], area['name'])
-            for ctx, val in area.get('enter', {}).items():
-                _handle_enter(ctx, val, area['region'], area['name'])
+            for ctx, val in itertools.chain.from_iterable(
+                    area.get(trigger, {}).items()
+                    for trigger in TRIGGER_RULES):
+                _handle_triggers(ctx, val, area['region'], area['name'])
             for ctx, val in area.get('here', {}).items():
                 _handle_here(ctx, val, area['region'], area['name'])
 
@@ -926,18 +939,65 @@ class GameLogic(object):
         return d
 
     @cached_property
-    def context_enter_rules(self):
-        d = {'region': defaultdict(dict), 'area': defaultdict(dict)}
+    def context_trigger_rules(self):
+        d = {trigger: {'region': defaultdict(dict), 'area': defaultdict(dict)}
+             for trigger in TRIGGER_RULES}
         for r in self.regions:
             localctx = self.get_local_ctx(r)
-            if e := r.get('enter'):
-                for k, v in e.items():
-                    d['region'][r['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
+            for trigger in TRIGGER_RULES:
+                if e := r.get(trigger):
+                    for k, v in e.items():
+                        d[trigger]['region'][r['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
         for a in self.areas():
             localctx = self.get_local_ctx(a)
-            if e := a.get('enter'):
-                for k, v in e.items():
-                    d['area'][a['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
+            for trigger in TRIGGER_RULES:
+                if e := a.get(trigger):
+                    for k, v in e.items():
+                        d[trigger]['area'][a['id']][localctx[k]] = str_to_rusttype(v, self.context_types[localctx[k]])
+        return d
+
+
+    @cached_property
+    def context_resetters(self):
+        d = {'region': defaultdict(list), 'area': defaultdict(list)}
+        for r in self.regions:
+            for other_name in r.get('resets', ()):
+                if '>' in other_name:
+                    self._misc_errors.append(f'Region {r["name"]} may only reset other regions: {other_name!r}')
+                    break
+                if other_name == r['name']:
+                    self._misc_errors.append(f'Use "enter" rule instead of a self-reset in region {r["name"]}')
+                    break
+                other = construct_id(other_name)
+                if other not in self.id_lookup:
+                    self._misc_errors.append(f'Unrecognized region in {r["name"]} resets: {other_name!r}')
+                d['region'][r['id']].append(other)
+        for a in self.areas():
+            for other_name in a.get('resets', ()):
+                if other_name.count('>') > 1:
+                    self._misc_errors.append(f'Area {a["name"]} cannot reset non-Areas: {other_name!r}')
+                    break
+                if '>' not in other_name:
+                    other = construct_id(a['region'], other_name)
+                    if other not in self.id_lookup and construct_id(other_name) in self.id_lookup:
+                        self._misc_errors.append(f'Area {a["name"]} cannot reset Regions: {other_name!r} '
+                                                 f'(would be interpreted as \'{a["region"]} > {other_name}\' if it exists)')
+                        break
+                else:
+                    other = construct_id(other_name)
+                if other not in self.id_lookup:
+                    self._misc_errors.append(f'Unrecognized area in {a["name"]} resets: {other_name!r}')
+                    break
+                d['area'][a['id']].append(other)
+        return d
+
+    @cached_property
+    def context_position_watchers(self):
+        d = {'region': set(), 'area': set()}
+        d['region'].update(self.context_trigger_rules['enter']['region'].keys())
+        d['area'].update(self.context_trigger_rules['enter']['area'].keys())
+        d['region'].update(self.context_resetters['region'].keys())
+        d['area'].update(self.context_resetters['area'].keys())
         return d
 
     
@@ -979,7 +1039,8 @@ class GameLogic(object):
         self.context_values
         self.price_types
         self.movement_tables
-        self.context_enter_rules
+        self.context_trigger_rules
+        self.context_position_watchers
         self.context_here_overrides
         self.all_connections
         self.adjacent_regions

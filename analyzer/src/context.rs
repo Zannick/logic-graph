@@ -16,6 +16,8 @@ pub trait Ctx: Clone + Eq + Debug {
 
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
+    fn reload_game(&mut self);
+    fn reset_all(&mut self);
 
     fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency)
         -> bool;
@@ -239,6 +241,9 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
+        if warp.should_reload() {
+            self.ctx.reload_game();
+        }
         self.append_history(History::Warp(warp.id(), warp.dest(&self.ctx)));
     }
 

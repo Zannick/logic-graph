@@ -54,11 +54,13 @@ warps:
     time: 5  # initial savewarp pre-amashi
     req: WITHIN `Antarctica`
     to: ^save
+    loads: true
   indra_save:
     time: 14.5
     req: Amashilama and ^mode != 'drone'
     to: ^save
     do: ^energy = $max_energy
+    loads: true
   drone_save:
     time: 12
     req: ^mode == 'drone'

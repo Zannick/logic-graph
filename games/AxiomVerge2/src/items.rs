@@ -15,12 +15,14 @@ pub enum Item {
     Companies_Layoff,
     Compass,
     Dear_Ernest,
+    Defeat_Ebih_Alu,
     Drone_Melee_Damage,
     Drone_Melee_Speed,
     Escape,
     Flask,
     Health,
     Health_Fragment,
+    Health_Node,
     Health_Upgrade,
     Heretics_Tablet,
     Ice_Axe,
@@ -56,12 +58,14 @@ impl fmt::Display for Item {
             Item::Companies_Layoff => write!(f, "{}", "Companies_Layoff"),
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
+            Item::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
             Item::Drone_Melee_Damage => write!(f, "{}", "Drone_Melee_Damage"),
             Item::Drone_Melee_Speed => write!(f, "{}", "Drone_Melee_Speed"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Flask => write!(f, "{}", "Flask"),
             Item::Health => write!(f, "{}", "Health"),
             Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
+            Item::Health_Node => write!(f, "{}", "Health_Node"),
             Item::Health_Upgrade => write!(f, "{}", "Health_Upgrade"),
             Item::Heretics_Tablet => write!(f, "{}", "Heretics_Tablet"),
             Item::Ice_Axe => write!(f, "{}", "Ice_Axe"),
@@ -101,12 +105,14 @@ impl std::str::FromStr for Item {
             "Companies_Layoff" => Ok(Item::Companies_Layoff),
             "Compass" => Ok(Item::Compass),
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
+            "Defeat_Ebih_Alu" => Ok(Item::Defeat_Ebih_Alu),
             "Drone_Melee_Damage" => Ok(Item::Drone_Melee_Damage),
             "Drone_Melee_Speed" => Ok(Item::Drone_Melee_Speed),
             "Escape" => Ok(Item::Escape),
             "Flask" => Ok(Item::Flask),
             "Health" => Ok(Item::Health),
             "Health_Fragment" => Ok(Item::Health_Fragment),
+            "Health_Node" => Ok(Item::Health_Node),
             "Health_Upgrade" => Ok(Item::Health_Upgrade),
             "Heretics_Tablet" => Ok(Item::Heretics_Tablet),
             "Ice_Axe" => Ok(Item::Ice_Axe),
@@ -142,6 +148,7 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Companies_Layoff
         | Item::Compass
         | Item::Dear_Ernest
+        | Item::Defeat_Ebih_Alu
         | Item::Escape
         | Item::Health
         | Item::Health_Fragment

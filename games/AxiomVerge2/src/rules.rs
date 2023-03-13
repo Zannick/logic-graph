@@ -32,9 +32,13 @@ pub fn access_boomerang(ctx: &Context) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
-pub fn access_break_box(ctx: &Context) -> bool {
-    // $break_box
-    helper__break_box!(ctx)
+pub fn access_can_damage(ctx: &Context) -> bool {
+    // $can_damage
+    helper__can_damage!(ctx)
+}
+pub fn access_climb(ctx: &Context) -> bool {
+    // $climb
+    helper__climb!(ctx)
 }
 pub fn access_drone_melee_damage(ctx: &Context) -> bool {
     // Drone_Melee_Damage
@@ -100,6 +104,10 @@ pub fn access_infect(ctx: &Context) -> bool {
     // Infect
     ctx.has(Item::Infect)
 }
+pub fn access_infect_and___melee_or_boomerang(ctx: &Context) -> bool {
+    // Infect and ($melee or Boomerang)
+    (ctx.has(Item::Infect) && (helper__melee!(ctx) || ctx.has(Item::Boomerang)))
+}
 pub fn access_infection_level(ctx: &Context) -> bool {
     // Infection_Level
     ctx.has(Item::Infection_Level)
@@ -127,6 +135,10 @@ pub fn access_melee_damage(ctx: &Context) -> bool {
 pub fn access_melee_damage__2(ctx: &Context) -> bool {
     // Melee_Damage{2}
     ctx.count(Item::Melee_Damage) >= 2
+}
+pub fn access_melee_or_boomerang(ctx: &Context) -> bool {
+    // $melee or Boomerang
+    (helper__melee!(ctx) || ctx.has(Item::Boomerang))
 }
 pub fn access_melee_speed(ctx: &Context) -> bool {
     // Melee_Speed

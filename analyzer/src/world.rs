@@ -64,6 +64,7 @@ pub trait Warp: Accessible {
     fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
     fn connect(&mut self, dest: Self::SpotId);
     fn prewarp(&self, ctx: &mut Self::Context);
+    fn should_reload(&self) -> bool;
 }
 
 pub trait World {

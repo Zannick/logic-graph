@@ -6,6 +6,7 @@
 
 use crate::context::*;
 use crate::items::*;
+use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
 use analyzer::context::Ctx;
@@ -1775,6 +1776,12 @@ impl world::Warp for Warp {
             _ => (),
         }
     }
+    fn should_reload(&self) -> bool {
+        match self.id {
+            WarpId::Minuet => false,
+            WarpId::Save => false,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default)]
@@ -1976,6 +1983,10 @@ impl world::World for World {
             Objective::Triforce_Hunt => rules::access_triforce_piece__triforce_count(ctx),
             Objective::Deku_Full_Clear => rules::access_all_region_checks__deku_tree(ctx),
         }
+    }
+
+    fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
+        movements::are_spots_connected(sp1, sp2)
     }
 }
 

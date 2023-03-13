@@ -210,3 +210,186 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         _ => -1,
     }
 }
+
+pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
+    match (src, dest) {
+        (SpotId::Deku_Tree__Lobby__Entry, SpotId::Deku_Tree__Lobby__Center) => true,
+        (SpotId::Deku_Tree__Lobby__Center, SpotId::Deku_Tree__Lobby__Entry) => true,
+        (SpotId::Deku_Tree__Lobby__Center, SpotId::Deku_Tree__Lobby__Vines) => true,
+        (SpotId::Deku_Tree__Lobby__Vines, SpotId::Deku_Tree__Lobby__Center) => true,
+        (SpotId::Deku_Tree__Floor_2__Lower, SpotId::Deku_Tree__Floor_2__Vines) => true,
+        (SpotId::Deku_Tree__Floor_2__Lower, SpotId::Deku_Tree__Floor_2__Slingshot_Door) => true,
+        (SpotId::Deku_Tree__Floor_2__Vines, SpotId::Deku_Tree__Floor_2__Lower) => true,
+        (SpotId::Deku_Tree__Floor_2__Vines, SpotId::Deku_Tree__Floor_2__Slingshot_Door) => true,
+        (SpotId::Deku_Tree__Floor_2__Slingshot_Door, SpotId::Deku_Tree__Floor_2__Vines) => true,
+        (SpotId::Deku_Tree__Floor_2__Slingshot_Door, SpotId::Deku_Tree__Floor_2__Lower) => true,
+        (SpotId::Deku_Tree__Scrub_Room__Entry, SpotId::Deku_Tree__Scrub_Room__Rear) => true,
+        (SpotId::Deku_Tree__Scrub_Room__Rear, SpotId::Deku_Tree__Scrub_Room__Entry) => true,
+        (
+            SpotId::Deku_Tree__Slingshot_Room__Entry,
+            SpotId::Deku_Tree__Slingshot_Room__Slingshot,
+        ) => true,
+        (
+            SpotId::Deku_Tree__Slingshot_Room__Slingshot,
+            SpotId::Deku_Tree__Slingshot_Room__Entry,
+        ) => true,
+        (SpotId::Deku_Tree__Floor_3__Climb, SpotId::Deku_Tree__Floor_3__Door) => true,
+        (SpotId::Deku_Tree__Floor_3__Door, SpotId::Deku_Tree__Floor_3__Climb) => true,
+        (SpotId::Deku_Tree__Compass_Room__Entry, SpotId::Deku_Tree__Compass_Room__Compass) => true,
+        (SpotId::Deku_Tree__Compass_Room__Entry, SpotId::Deku_Tree__Compass_Room__Ledge) => true,
+        (SpotId::Deku_Tree__Compass_Room__Compass, SpotId::Deku_Tree__Compass_Room__Entry) => true,
+        (SpotId::Deku_Tree__Compass_Room__Ledge, SpotId::Deku_Tree__Compass_Room__Entry) => true,
+        (SpotId::Deku_Tree__Basement_1__Center, SpotId::Deku_Tree__Basement_1__Corner) => true,
+        (SpotId::Deku_Tree__Basement_1__Center, SpotId::Deku_Tree__Basement_1__South_Door) => true,
+        (SpotId::Deku_Tree__Basement_1__Corner, SpotId::Deku_Tree__Basement_1__Center) => true,
+        (SpotId::Deku_Tree__Basement_1__Corner, SpotId::Deku_Tree__Basement_1__South_Door) => true,
+        (SpotId::Deku_Tree__Basement_1__South_Door, SpotId::Deku_Tree__Basement_1__Center) => true,
+        (SpotId::Deku_Tree__Basement_1__South_Door, SpotId::Deku_Tree__Basement_1__Corner) => true,
+        (SpotId::Deku_Tree__Back_Room__South, SpotId::Deku_Tree__Back_Room__Northwest) => true,
+        (SpotId::Deku_Tree__Back_Room__South, SpotId::Deku_Tree__Back_Room__East) => true,
+        (SpotId::Deku_Tree__Back_Room__Northwest, SpotId::Deku_Tree__Back_Room__South) => true,
+        (SpotId::Deku_Tree__Back_Room__Northwest, SpotId::Deku_Tree__Back_Room__East) => true,
+        (SpotId::Deku_Tree__Back_Room__East, SpotId::Deku_Tree__Back_Room__South) => true,
+        (SpotId::Deku_Tree__Back_Room__East, SpotId::Deku_Tree__Back_Room__Northwest) => true,
+        (SpotId::Deku_Tree__Basement_Ledge__Block, SpotId::Deku_Tree__Basement_Ledge__Web) => true,
+        (SpotId::Deku_Tree__Basement_Ledge__Web, SpotId::Deku_Tree__Basement_Ledge__Block) => true,
+        (SpotId::Deku_Tree__Basement_2__Pool, SpotId::Deku_Tree__Basement_2__Boss_Door) => true,
+        (SpotId::Deku_Tree__Basement_2__Boss_Door, SpotId::Deku_Tree__Basement_2__Pool) => true,
+        (SpotId::Deku_Tree__Boss_Room__Entry, SpotId::Deku_Tree__Boss_Room__Arena) => true,
+        (SpotId::KF__Links_House__Start_Point, SpotId::KF__Links_House__Entry) => true,
+        (SpotId::KF__Links_House__Entry, SpotId::KF__Links_House__Start_Point) => true,
+        (
+            SpotId::KF__Kokiri_Village__Links_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => true,
+        (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Midos_Guardpost) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Links_Porch, SpotId::KF__Kokiri_Village__Sarias_Porch) => true,
+        (
+            SpotId::KF__Kokiri_Village__Midos_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => true,
+        (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Midos_Guardpost) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Links_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Midos_Porch, SpotId::KF__Kokiri_Village__Sarias_Porch) => true,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Training_Center,
+        ) => true,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Midos_Guardpost,
+        ) => true,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Midos_Porch,
+        ) => true,
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Links_Porch,
+        ) => true,
+        (SpotId::KF__Kokiri_Village__Know_it_all_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => {
+            true
+        }
+        (
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+            SpotId::KF__Kokiri_Village__Sarias_Porch,
+        ) => true,
+        (
+            SpotId::KF__Kokiri_Village__Training_Center,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => true,
+        (
+            SpotId::KF__Kokiri_Village__Training_Center,
+            SpotId::KF__Kokiri_Village__Midos_Guardpost,
+        ) => true,
+        (SpotId::KF__Kokiri_Village__Training_Center, SpotId::KF__Kokiri_Village__Midos_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Training_Center, SpotId::KF__Kokiri_Village__Links_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Training_Center, SpotId::KF__Kokiri_Village__Shop_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Training_Center, SpotId::KF__Kokiri_Village__Sarias_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Know_it_all_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Midos_Guardpost) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Links_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Shop_Porch, SpotId::KF__Kokiri_Village__Sarias_Porch) => true,
+        (
+            SpotId::KF__Kokiri_Village__Sarias_Porch,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => true,
+        (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Training_Center) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Midos_Guardpost) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Midos_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Links_Porch) => true,
+        (SpotId::KF__Kokiri_Village__Sarias_Porch, SpotId::KF__Kokiri_Village__Shop_Porch) => true,
+        (
+            SpotId::KF__Kokiri_Village__Midos_Guardpost,
+            SpotId::KF__Kokiri_Village__Know_it_all_Porch,
+        ) => true,
+        (
+            SpotId::KF__Kokiri_Village__Midos_Guardpost,
+            SpotId::KF__Kokiri_Village__Training_Center,
+        ) => true,
+        (SpotId::KF__Kokiri_Village__Midos_Guardpost, SpotId::KF__Kokiri_Village__Midos_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Midos_Guardpost, SpotId::KF__Kokiri_Village__Links_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Midos_Guardpost, SpotId::KF__Kokiri_Village__Shop_Porch) => {
+            true
+        }
+        (SpotId::KF__Kokiri_Village__Midos_Guardpost, SpotId::KF__Kokiri_Village__Sarias_Porch) => {
+            true
+        }
+        (SpotId::KF__Boulder_Maze__Entry, SpotId::KF__Boulder_Maze__Reward) => true,
+        (SpotId::KF__Boulder_Maze__Reward, SpotId::KF__Boulder_Maze__Entry) => true,
+        (SpotId::KF__Baba_Corridor__Village_Side, SpotId::KF__Baba_Corridor__Deku_Babas) => true,
+        (SpotId::KF__Baba_Corridor__Deku_Babas, SpotId::KF__Baba_Corridor__Village_Side) => true,
+        (SpotId::KF__Baba_Corridor__Deku_Babas, SpotId::KF__Baba_Corridor__Tree_Side) => true,
+        (SpotId::KF__Baba_Corridor__Tree_Side, SpotId::KF__Baba_Corridor__Deku_Babas) => true,
+        (SpotId::KF__Outside_Deku_Tree__Entry, SpotId::KF__Outside_Deku_Tree__Left) => true,
+        (SpotId::KF__Outside_Deku_Tree__Entry, SpotId::KF__Outside_Deku_Tree__Right) => true,
+        (SpotId::KF__Outside_Deku_Tree__Entry, SpotId::KF__Outside_Deku_Tree__Mouth) => true,
+        (SpotId::KF__Outside_Deku_Tree__Left, SpotId::KF__Outside_Deku_Tree__Entry) => true,
+        (SpotId::KF__Outside_Deku_Tree__Left, SpotId::KF__Outside_Deku_Tree__Right) => true,
+        (SpotId::KF__Outside_Deku_Tree__Left, SpotId::KF__Outside_Deku_Tree__Mouth) => true,
+        (SpotId::KF__Outside_Deku_Tree__Right, SpotId::KF__Outside_Deku_Tree__Entry) => true,
+        (SpotId::KF__Outside_Deku_Tree__Right, SpotId::KF__Outside_Deku_Tree__Left) => true,
+        (SpotId::KF__Outside_Deku_Tree__Right, SpotId::KF__Outside_Deku_Tree__Mouth) => true,
+        (SpotId::KF__Outside_Deku_Tree__Mouth, SpotId::KF__Outside_Deku_Tree__Entry) => true,
+        (SpotId::KF__Outside_Deku_Tree__Mouth, SpotId::KF__Outside_Deku_Tree__Left) => true,
+        (SpotId::KF__Outside_Deku_Tree__Mouth, SpotId::KF__Outside_Deku_Tree__Right) => true,
+        _ => false,
+    }
+}

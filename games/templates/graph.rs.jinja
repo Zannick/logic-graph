@@ -210,6 +210,13 @@ impl world::Warp for Warp {
             _ => (),
         }
     }
+    fn should_reload(&self) -> bool {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+            WarpId::{{ w.id }} => {{ 'true' if w.loads else 'false' }},
+%% endfor
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default)]

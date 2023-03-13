@@ -99,13 +99,18 @@ impl context::Ctx for Context {
     }
     fn set_position(&mut self, pos: SpotId) {
 %% for pltype in ['Region', 'Area']
-%% if context_enter_rules[pltype|lower]
+%% if context_trigger_rules.enter[pltype|lower] or context_trigger_rules.reset[pltype|lower]
         match get_{{ pltype|lower }}(pos) {
-%% for r, ctxs in context_enter_rules[pltype|lower].items()
+%% for r in context_position_watchers[pltype|lower]
             {{ pltype }}Id::{{ r }} => {
                 if get_{{ pltype|lower }}(self.position) != {{ pltype }}Id::{{ r }} {
-%% for c, val in ctxs.items()
+%% for c, val in context_trigger_rules.enter[pltype|lower].get(r, {}).items()
                     self.{{ c }} = {{ val }};
+%% endfor
+%% for other_region in context_resetters[pltype|lower].get(r, ())
+%% for c, val in context_trigger_rules.reset[pltype|lower][other_region].items()
+                    self.{{ c }} = {{ val }};
+%% endfor
 %% endfor
                 }
             },
@@ -115,6 +120,27 @@ impl context::Ctx for Context {
 %% endif
 %% endfor
         self.position = pos;
+    }
+
+    fn reload_game(&mut self) {
+        self.reset_all();
+%% for pltype in ['Region', 'Area']
+%% for ctxs in context_trigger_rules.load[pltype|lower].values()
+%% for c, val in ctxs.items()
+        self.{{ c }} = {{ val }};
+%% endfor
+%% endfor
+%% endfor
+    }
+
+    fn reset_all(&mut self) {
+%% for pltype in ['Region', 'Area']
+%% for ctxs in context_trigger_rules.reset[pltype|lower].values()
+%% for c, val in ctxs.items()
+        self.{{ c }} = {{ val }};
+%% endfor
+%% endfor
+%% endfor
     }
 
     fn can_afford(&self, cost: &Currency) -> bool {

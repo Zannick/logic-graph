@@ -241,6 +241,7 @@ impl context::Ctx for Context {
                 self.wall_climb = true;
             }
             Item::Flask => rules::action_flasks__1(self),
+            Item::Health_Node => rules::action_energy__max_energy(self),
             _ => (),
         }
     }
@@ -258,6 +259,15 @@ impl context::Ctx for Context {
             _ => (),
         }
         self.position = pos;
+    }
+
+    fn reload_game(&mut self) {
+        self.reset_all();
+    }
+
+    fn reset_all(&mut self) {
+        self.ebih__ebih_east__ctx__platform1_moved = false;
+        self.ebih__ebih_east__ctx__platform2_moved = false;
     }
 
     fn can_afford(&self, cost: &Currency) -> bool {

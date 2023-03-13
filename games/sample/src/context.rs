@@ -379,6 +379,12 @@ impl context::Ctx for Context {
         self.position = pos;
     }
 
+    fn reload_game(&mut self) {
+        self.reset_all();
+    }
+
+    fn reset_all(&mut self) {}
+
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
             Currency::Free => true,

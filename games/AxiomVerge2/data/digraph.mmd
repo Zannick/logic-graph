@@ -165,6 +165,19 @@ subgraph Ebih
         Ebih__Grid_21_1_5__Portal_Stand(Portal Stand);
         Ebih__Grid_21_1_5__East_6(East 6);
     end
+    subgraph Ebih__Boss_Room[Boss Room]
+        Ebih__Boss_Room__West_6(West 6);
+        Ebih__Boss_Room__Boss(Boss);
+        Ebih__Boss_Room__Past_Boss(Past Boss);
+        Ebih__Boss_Room__Lower_Tree(Lower Tree);
+        Ebih__Boss_Room__Lower_Ledge(Lower Ledge);
+        Ebih__Boss_Room__East_6(East 6);
+        Ebih__Boss_Room__East_4(East 4);
+        Ebih__Boss_Room__East_Ledge(East Ledge);
+        Ebih__Boss_Room__Upper_Tree(Upper Tree);
+        Ebih__Boss_Room__High_Platform(High Platform);
+        Ebih__Boss_Room__West_5(West 5);
+    end
 end
 subgraph Glacier
     subgraph Glacier__Dock_Elevator[Dock Elevator]
@@ -324,6 +337,8 @@ Ebih__Base_Camp__East_11 <--> Glacier__Grid_31_9_12__Midair
 Ebih__Base_Camp__East_12 <--> Glacier__Grid_31_9_12__West_12
 Ebih__Base_Camp__Tent_Entry <--> Ebih__Tent_Interior__Entry
 Ebih__Base_Camp__West_13 <--> Ebih__By_Garage__East_13
+Ebih__Boss_Room__Lower_Tree --> Ebih__Boss_Room__Lower_Ledge
+Ebih__Boss_Room__West_6 <--> Ebih__Grid_21_1_5__East_6
 Ebih__By_Garage__Crawlspace <--> Ebih__By_Garage__Crawlspace_Opening
 Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Crawlspace_Opening
 Ebih__By_Garage__East_Platform --> Ebih__By_Garage__Outcropping
