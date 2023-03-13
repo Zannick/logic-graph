@@ -108,7 +108,6 @@ macro_rules! helper__can_jumpslash {
 
 /// $can_use ( TypedVar(name='item', type='Item') )
 /// IF ($_is_magic_item(^item)) { ^item and Magic_Meter } ELSE IF ($_is_adult_item(^item)) { $is_adult and ^item } ELSE IF ($_is_magic_arrow(^item)) { $is_adult and ^item and Bow and Magic_Meter } ELSE IF ($_is_child_item(^item)) { $is_child and ^item }
-
 #[macro_export]
 macro_rules! helper__can_use {
     ($ctx:expr, $item:expr) => {{

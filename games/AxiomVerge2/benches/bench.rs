@@ -14,11 +14,11 @@ use libaxiom_verge2::items::Item;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
     world.skip_unused_items(&mut ctx);
     c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&world, &ctx)));
 
-    let ctx = ContextWrapper::new(Context::new());
+    let ctx = ContextWrapper::new(Context::default());
     c.bench_function("greedy search", |b| b.iter(|| greedy_search(&world, &ctx)));
     c.bench_function("minimal playthrough", |b| {
         b.iter(|| minimal_greedy_playthrough(&world, &ctx))

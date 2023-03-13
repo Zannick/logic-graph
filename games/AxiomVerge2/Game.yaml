@@ -8,6 +8,8 @@ start:
   # which becomes its own independent per-variable enum type.
   indra: SpotId::None
   last: SpotId::None
+  # This should be a load effect? prev_area = $get_area(^position) ?
+  prev_area: Antarctica > West
   energy: 0
   breach: false
   flasks: 0
@@ -89,6 +91,12 @@ helpers:
   $block_clip_escape: minor_glitches and $hook
 
   $save:action: ^save = ^position; ^energy = $max_energy
+  $reset_old_area:action(newpos:SpotId): >
+    IF (^newpos NOT WITHIN ^prev_area
+        AND ^position NOT WITHIN ^prev_area
+        AND ^newpos NOT WITHIN $get_area(^position)) {
+           $reset_area(^prev_area); ^prev_area = $get_area(^position);
+    }
 
 
 collect:

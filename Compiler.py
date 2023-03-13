@@ -35,6 +35,8 @@ SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 TRIGGER_RULES = {'enter', 'load', 'reset'}
 
+ON_ENTRY_ARGS = {'newpos': 'SpotId'}
+
 typed_name = re.compile(r'(?P<name>\$?[\w\s]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
 
@@ -92,9 +94,14 @@ def get_func_name(helper_key: str) -> str:
         return m.group('name')
     return helper_key
 
+def get_arg_with_type(arg: str) -> str:
+    if m := typed_name.match(arg):
+        return TypedVar(m.group('name'), m.group('type'))
+    return TypedVar(arg, '')
+
 def get_func_args(helper_key: str) -> list[str]:
     if '(' in helper_key:
-        return helper_key[:-1].split('(', 1)[1].split(',')
+        return [get_arg_with_type(arg) for arg in helper_key[:-1].split('(', 1)[1].split(',')]
     return []
 
 
@@ -113,9 +120,10 @@ def config_type(val: Any) -> str:
         if '::' in val:
             return val[:val.index('::')]
         depth = val.count('>')
-        # TODO: for support of Region, Area, Spot, or place ids as setting types
-        if depth:
-            return 'Id'
+        if depth == 1:
+            return 'AreaId'
+        if depth == 2:
+            return 'SpotId'
         return 'str'
     if isinstance(val, bool):
         return 'bool'
@@ -186,7 +194,7 @@ class GameLogic(object):
         self.game_name = self._info['name']
         self.helpers = {
             get_func_name(name): {
-                'args': [TypedVar(a, '') for a in get_func_args(name)],
+                'args': get_func_args(name),
                 'pr': _parseExpression(logic, name, 'helpers'),
                 'rule': get_func_rule(name),
             }
@@ -237,6 +245,10 @@ class GameLogic(object):
             region['id'] = construct_id(rname)
             self.id_lookup[region['id']] = region
             region['loc_ids'] = []
+            if 'on_entry' in region:
+                region['act'] = parseAction(
+                        region['on_entry'], name=f'{region["fullname"]}:on_entry')
+                region['action_id'] = self.make_funcid(region, 'act', ON_ENTRY_ARGS)
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
@@ -245,6 +257,10 @@ class GameLogic(object):
                 area['fullname'] = f'{rname} > {aname}'
                 area['spot_ids'] = []
                 area['loc_ids'] = []
+                if 'on_entry' in area:
+                    area['act'] = parseAction(
+                            area['on_entry'], name=f'{area["fullname"]}:on_entry')
+                    area['action_id'] = self.make_funcid(area, 'act', ON_ENTRY_ARGS)
 
                 for spot in area['spots']:
                     sname = spot['name']
@@ -557,26 +573,30 @@ class GameLogic(object):
         return table
 
 
-    def make_funcid(self, info, prkey:str='pr'):
+    def make_funcid(self, info, prkey:str='pr', extra_fields=None):
         pr = info[prkey]
         d = self.action_funcs if pr.parser.ruleNames[pr.tree.getRuleIndex()] == 'actions' else self.access_funcs
         if '^_' in str(pr.text):
             id = construct_id(str(pr.name).lower())
             assert id not in d
             d[id] = info
+            if extra_fields:
+                d[id]['args'] = extra_fields
             return id
 
         id = construct_id(str(pr.name) if '^_' in str(pr.text) else str(pr.text)).lower()
         if id not in d:
             d[id] = {prkey: info[prkey]}
+            if extra_fields:
+                d[id]['args'] = extra_fields
             return id
 
-        if prkey not in d[id]:
-            print(id, d[id])
         if d[id][prkey].text != pr.text:
             id = id + sum(1 for k in d if k.startswith(id))
             assert id not in d
             d[id] = {prkey: info[prkey]}
+            if extra_fields:
+                d[id]['args'] = extra_fields
         return id
 
 
@@ -814,13 +834,19 @@ class GameLogic(object):
 
     @cached_property
     def context_values(self):
-        def _check_types(v1, v2, ctx, *names):
+        def _check_types(v1, v2, ctx, *names, here=False):
             t1 = typenameof(v1)
             t2 = typenameof(v2)
+            # here overrides may look like a higher-order place type
+            if here:
+                if t1 == 'SpotId' and t2 in ('AreaId', 'RegionId'):
+                    return
+                if len(names) == 1 and t1 == 'AreaId' and t2 == 'RegionId':
+                    return
             if t1 != t2:
                 self._misc_errors.append(
                     f'context value type mismatch: {ctx} defined as {v1} ({t1}) '
-                    'and reused in {" > ".join(names)} as {v2} ({t2})')
+                    f'and reused in {" > ".join(names)} as {v2} ({t2})')
         
         # self._info: start
         # regions/areas: here, start, enter
@@ -861,7 +887,7 @@ class GameLogic(object):
                 self._misc_errors.append(
                     f'"here" overrides must be predefined: {" > ".join(names)} {ctx}')
             else:
-                _check_types(gc[ctx], val, ctx, *names)
+                _check_types(gc[ctx], val, ctx, *names, here=True)
 
         for region in self.regions:
             for ctx, val in region.get('start', {}).items():
@@ -998,6 +1024,8 @@ class GameLogic(object):
         d['area'].update(self.context_trigger_rules['enter']['area'].keys())
         d['region'].update(self.context_resetters['region'].keys())
         d['area'].update(self.context_resetters['area'].keys())
+        d['region'].update(r['id'] for r in self.regions if 'act' in r)
+        d['area'].update(a['id'] for a in self.areas() if 'act' in a)
         return d
 
     
@@ -1007,12 +1035,18 @@ class GameLogic(object):
                 if typenameof(val) == 'i32']
 
 
-    def prToRust(self, pr, info):
-        return RustVisitor(self.get_local_ctx(info), pr.name).visit(pr.tree)
+    def prToRust(self, pr, info, id=None):
+        return RustVisitor(self.context_types,
+                           self.action_funcs,
+                           self.get_local_ctx(info),
+                           id or pr.name).visit(pr.tree)
 
 
-    def actToHasEffect(self, pr, info):
-        return ActionHasEffectVisitor(self.get_local_ctx(info), pr.name).visit(pr.tree)
+    def actToHasEffect(self, pr, info, id=None):
+        return ActionHasEffectVisitor(self.context_types,
+                                      self.action_funcs,
+                                      self.get_local_ctx(info),
+                                      id or pr.name).visit(pr.tree)
 
 
     def render(self):

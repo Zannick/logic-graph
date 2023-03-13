@@ -34,6 +34,11 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#CondAction.
+    def visitCondAction(self, ctx:RulesParser.CondActionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RulesParser#meta.
     def visitMeta(self, ctx:RulesParser.MetaContext):
         return self.visitChildren(ctx)
@@ -191,6 +196,21 @@ class RulesVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by RulesParser#somewhere.
     def visitSomewhere(self, ctx:RulesParser.SomewhereContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RulesParser#RefInPlaceRef.
+    def visitRefInPlaceRef(self, ctx:RulesParser.RefInPlaceRefContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RulesParser#RefInPlaceName.
+    def visitRefInPlaceName(self, ctx:RulesParser.RefInPlaceNameContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RulesParser#RefInFunc.
+    def visitRefInFunc(self, ctx:RulesParser.RefInFuncContext):
         return self.visitChildren(ctx)
 
 

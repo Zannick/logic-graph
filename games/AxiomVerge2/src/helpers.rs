@@ -124,3 +124,34 @@ macro_rules! helper_has_effect__save {
         $ctx.save != $ctx.position() || $ctx.energy != helper__max_energy!($ctx)
     }};
 }
+/// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
+/// IF (^newpos NOT WITHIN ^prev_area     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {        $reset_area(^prev_area); ^prev_area = $get_area(^position); }
+#[macro_export]
+macro_rules! helper__reset_old_area {
+    ($ctx:expr, $newpos:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        if ((get_area($newpos) != $ctx.prev_area()
+            && get_area($ctx.position()) != $ctx.prev_area())
+            && get_area($newpos) != get_area($ctx.position()))
+        {
+            $ctx.reset_area($ctx.prev_area());
+            $ctx.prev_area = get_area($ctx.position());
+        }
+    }};
+}
+
+#[macro_export]
+macro_rules! helper_has_effect__reset_old_area {
+    ($ctx:expr, $newpos:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        if ((get_area($newpos) != $ctx.prev_area()
+            && get_area($ctx.position()) != $ctx.prev_area())
+            && get_area($newpos) != get_area($ctx.position()))
+        {
+            panic!("builtin action shouldn't be checked for an effect!")
+                || $ctx.prev_area != get_area($ctx.position())
+        }
+    }};
+}

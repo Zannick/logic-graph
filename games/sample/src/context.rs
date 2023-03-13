@@ -49,7 +49,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Clone, Debug, Default, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Context {
     // context vars
     pub position: SpotId,
@@ -111,6 +111,72 @@ pub struct Context {
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
     skips: i32,
+}
+
+impl Default for Context {
+    fn default() -> Context {
+        Context {
+            position: SpotId::KF__Links_House__Start_Point,
+            save: SpotId::KF__Links_House__Start_Point,
+            child: true,
+            tod: enums::Tod::Day,
+            rupees: 0,
+            deku_tree__compass_room__ctx__torch: false,
+            // settings
+            triforce_count: Default::default(),
+            logic_deku_b1_skip: Default::default(),
+            // items
+            biggoron_sword: Default::default(),
+            blue_fire_arrows: Default::default(),
+            bombs: Default::default(),
+            boomerang: Default::default(),
+            bow: Default::default(),
+            buy_deku_nut_10: Default::default(),
+            buy_deku_nut_5: Default::default(),
+            buy_deku_shield: Default::default(),
+            buy_deku_stick_1: Default::default(),
+            defeat_ganon: Default::default(),
+            defeat_gohma: Default::default(),
+            deku_back_room_wall: Default::default(),
+            deku_back_room_web: Default::default(),
+            deku_basement_block: Default::default(),
+            deku_basement_scrubs: Default::default(),
+            deku_basement_switch: Default::default(),
+            deku_basement_web: Default::default(),
+            deku_lobby_web: Default::default(),
+            deku_nut_drop: Default::default(),
+            deku_shield_drop: Default::default(),
+            deku_slingshot_scrub: Default::default(),
+            deku_stick_drop: Default::default(),
+            dins_fire: Default::default(),
+            farores_wind: Default::default(),
+            fire_arrows: Default::default(),
+            gold_skulltula_token: Default::default(),
+            goron_tunic: Default::default(),
+            hookshot: Default::default(),
+            hover_boots: Default::default(),
+            hylian_shield: Default::default(),
+            iron_boots: Default::default(),
+            kokiri_emerald: Default::default(),
+            kokiri_sword: Default::default(),
+            lens_of_truth: Default::default(),
+            light_arrows: Default::default(),
+            magic_meter: Default::default(),
+            megaton_hammer: Default::default(),
+            minuet_of_forest: Default::default(),
+            mirror_shield: Default::default(),
+            nayrus_love: Default::default(),
+            ocarina: Default::default(),
+            showed_mido: Default::default(),
+            slingshot: Default::default(),
+            triforce_piece: Default::default(),
+            zora_tunic: Default::default(),
+            // other
+            status: Default::default(),
+            visits: Default::default(),
+            skips: Default::default(),
+        }
+    }
 }
 
 impl context::Ctx for Context {
@@ -385,6 +451,8 @@ impl context::Ctx for Context {
 
     fn reset_all(&mut self) {}
 
+    fn reset_region(&mut self, region_id: RegionId) {}
+    fn reset_area(&mut self, area_id: AreaId) {}
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
             Currency::Free => true,
@@ -472,18 +540,6 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    pub fn new() -> Context {
-        Context {
-            position: SpotId::KF__Links_House__Start_Point,
-            save: SpotId::KF__Links_House__Start_Point,
-            child: true,
-            tod: enums::Tod::Day,
-            rupees: 0,
-            deku_tree__compass_room__ctx__torch: false,
-            ..Context::default()
-        }
-    }
-
     pub fn position(&self) -> SpotId {
         match get_area(self.position) {
             _ => match get_region(self.position) {

@@ -80,7 +80,7 @@ SpotId::{{ (test_case.start or shared.start)|construct_id }}
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
 %% if test_file.all
 {{ setup(test_file.all) }}
 %% endif

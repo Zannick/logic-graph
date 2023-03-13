@@ -53,6 +53,15 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#CondAction.
+    def enterCondAction(self, ctx:RulesParser.CondActionContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#CondAction.
+    def exitCondAction(self, ctx:RulesParser.CondActionContext):
+        pass
+
+
     # Enter a parse tree produced by RulesParser#meta.
     def enterMeta(self, ctx:RulesParser.MetaContext):
         pass
@@ -338,6 +347,33 @@ class RulesListener(ParseTreeListener):
 
     # Exit a parse tree produced by RulesParser#somewhere.
     def exitSomewhere(self, ctx:RulesParser.SomewhereContext):
+        pass
+
+
+    # Enter a parse tree produced by RulesParser#RefInPlaceRef.
+    def enterRefInPlaceRef(self, ctx:RulesParser.RefInPlaceRefContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#RefInPlaceRef.
+    def exitRefInPlaceRef(self, ctx:RulesParser.RefInPlaceRefContext):
+        pass
+
+
+    # Enter a parse tree produced by RulesParser#RefInPlaceName.
+    def enterRefInPlaceName(self, ctx:RulesParser.RefInPlaceNameContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#RefInPlaceName.
+    def exitRefInPlaceName(self, ctx:RulesParser.RefInPlaceNameContext):
+        pass
+
+
+    # Enter a parse tree produced by RulesParser#RefInFunc.
+    def enterRefInFunc(self, ctx:RulesParser.RefInFuncContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#RefInFunc.
+    def exitRefInFunc(self, ctx:RulesParser.RefInFuncContext):
         pass
 
 

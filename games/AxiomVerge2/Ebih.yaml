@@ -3,6 +3,7 @@ short: Ebih
 
 areas:
 - name: Base Camp
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 11
       coord: [30.95, 10.6]
@@ -103,6 +104,7 @@ areas:
           tags: [xshift]
 
 - name: Bunker Interior
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
       coord: [30.1, 13]
@@ -121,6 +123,7 @@ areas:
           tags: [standing]
 
 - name: Building Interior
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
       coord: [29, 12.4]
@@ -146,6 +149,7 @@ areas:
           tags: [urn]
 
 - name: Tent Interior
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
       coord: [28.3, 13]
@@ -165,6 +169,7 @@ areas:
           tags: [standing]
 
 - name: By Garage
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 13
       coord: [27.95, 12.8]
@@ -269,6 +274,7 @@ areas:
           tags: [interior]
 
 - name: Garage
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
       coord: [27.2, 13]
@@ -289,6 +295,7 @@ areas:
           tag: [standing]
 
 - name: Grid 25,10-12
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 12
       coord: [25.95, 12]
@@ -376,6 +383,7 @@ areas:
           tags: [xshift]
 
 - name: Waterfall
+  on_entry: $reset_old_area(^newpos)
   start:
     _left_block: false
     _right_block: false
@@ -620,6 +628,7 @@ areas:
           tags: [xshift]
 
 - name: Ebih West
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 10
       coord: [20.95, 9.9]
@@ -744,6 +753,7 @@ areas:
         - to: East 7
 
 - name: Cave
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
       locations:
@@ -756,6 +766,7 @@ areas:
           tags: [exterior]
 
 - name: Ebih East
+  on_entry: $reset_old_area(^newpos)
   reset:
     _platform1_moved: false
     _platform2_moved: false
@@ -874,6 +885,7 @@ areas:
           tags: [xshift]
 
 - name: Grid 21,1-5
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
       coord: [21.05, 5.8]
@@ -897,6 +909,7 @@ areas:
           tags: [xshift]
 
 - name: Boss Room
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
       coord: [22.05, 5.9]

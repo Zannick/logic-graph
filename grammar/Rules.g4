@@ -17,6 +17,7 @@ boolExpr
     | item
     | NOT? value
     | somewhere
+    | refSomewhere
     | TRUE
     | FALSE
     ;
@@ -28,6 +29,9 @@ actions : action (';' action)* ';'?;
 action  : REF '=' ( TRUE | FALSE | PLACE | REF | str | num )    # Set
         | REF BINOP '=' num                                     # Alter
         | invoke                                                # ActionHelper
+        | IF '(' boolExpr ')' '{' actions '}'
+          ( ELSE IF '(' boolExpr ')' '{' actions '}' )*
+          ( ELSE '{' actions '}' )?                             # CondAction
         ;
 
 // might remove this as those rules need to be separate for a traversal graph anyway
@@ -41,6 +45,7 @@ invoke  : NOT? FUNC '(' ITEM (',' ITEM)* ')'   // must be 1+ items, 0 handled be
         | NOT? FUNC '(' INT ')'
         | NOT? FUNC '(' FLOAT ')'
         | NOT? FUNC '(' PLACE ')'
+        | NOT? FUNC '(' REF ')'
         | NOT? FUNC ('(' ')')? // essentially a call with no arguments
         ;
 
@@ -136,6 +141,11 @@ str : LIT | value | condStr | switchStr ;
 
 somewhere : NOT? WITHIN PLACE
           | NOT? WITHIN '(' PLACE (',' PLACE)* ')';
+
+refSomewhere : REF NOT? WITHIN REF      # RefInPlaceRef
+             | REF NOT? WITHIN PLACE    # RefInPlaceName
+             | REF NOT? WITHIN invoke   # RefInFunc
+             ;
 
 /** Lexer rules (tokens) */
 AND     : 'AND' | 'and' | '&&' ;

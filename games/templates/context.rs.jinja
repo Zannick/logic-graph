@@ -27,7 +27,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Clone, Debug, Default, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Context {
 %# Splitting into separate Cow structs performs worse :(
     // context vars
@@ -48,6 +48,28 @@ pub struct Context {
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
     skips: i32,
+}
+
+impl Default for Context {
+    fn default() -> Context {
+        Context {
+%% for k, v in context_values.items()
+            {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
+%% endfor
+            // settings
+%% for s, info in settings.items()
+            {{ s }}: Default::default(),
+%% endfor
+            // items
+%% for item, ct in gl.item_max_counts().items()|sort
+            {{ item|lower }}: Default::default(),
+%% endfor
+            // other
+            status: Default::default(),
+            visits: Default::default(),
+            skips: Default::default(),
+        }
+    }
 }
 
 impl context::Ctx for Context {
@@ -99,11 +121,12 @@ impl context::Ctx for Context {
     }
     fn set_position(&mut self, pos: SpotId) {
 %% for pltype in ['Region', 'Area']
-%% if context_trigger_rules.enter[pltype|lower] or context_trigger_rules.reset[pltype|lower]
-        match get_{{ pltype|lower }}(pos) {
+%% if context_position_watchers[pltype|lower]
+        let area = get_{{ pltype|lower }}(pos);
+        match area {
 %% for r in context_position_watchers[pltype|lower]
             {{ pltype }}Id::{{ r }} => {
-                if get_{{ pltype|lower }}(self.position) != {{ pltype }}Id::{{ r }} {
+                if get_{{ pltype|lower }}(self.position) != area {
 %% for c, val in context_trigger_rules.enter[pltype|lower].get(r, {}).items()
                     self.{{ c }} = {{ val }};
 %% endfor
@@ -112,6 +135,9 @@ impl context::Ctx for Context {
                     self.{{ c }} = {{ val }};
 %% endfor
 %% endfor
+%% if id_lookup[r].action_id
+                    rules::action_{{ id_lookup[r].action_id }}(self, pos);
+%% endif
                 }
             },
 %% endfor
@@ -142,6 +168,23 @@ impl context::Ctx for Context {
 %% endfor
 %% endfor
     }
+
+%% for pltype in ['Region', 'Area']
+    fn reset_{{ pltype|lower }}(&mut self, {{ pltype|lower }}_id: {{ pltype }}Id) {
+%% if context_trigger_rules.reset[pltype|lower]
+        match {{ pltype|lower }}_id {
+%% for r, ctxs in context_trigger_rules.reset[pltype|lower].items()
+            {{ pltype }}Id::{{ r }} => {
+%% for c, val in ctxs.items()
+                    self.{{ c }} = {{ val }};
+%% endfor
+            }
+%% endfor
+            _ => (),
+        }
+%% endif
+    }
+%% endfor
 
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
@@ -211,15 +254,6 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    pub fn new() -> Context {
-        Context {
-%% for k, v in context_values.items()
-            {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
-%% endfor
-            ..Context::default()
-        }
-    }
-
 %% for ctx, t in context_types.items()
     pub fn {{ ctx }}(&self) -> {{ t }} {
 %# Areas have priority over regions

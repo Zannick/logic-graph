@@ -288,9 +288,13 @@ pub fn action_last__position(ctx: &mut Context) {
 pub fn action_has_effect_last__position(ctx: &Context) -> bool {
     ctx.last != ctx.position()
 }
+pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos)
+    helper__reset_old_area!(ctx, newpos);
+}
 pub fn action_save(ctx: &mut Context) {
     // $save
-    helper__save!(ctx)
+    helper__save!(ctx);
 }
 pub fn action_has_effect_save(ctx: &Context) -> bool {
     helper_has_effect__save!(ctx)

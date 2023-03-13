@@ -10,7 +10,7 @@ use libaxiom_verge2::items::Item;
 #[test]
 fn test_name() {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
 
     ctx.energy = 30;
     ctx.flasks = 1;
@@ -28,7 +28,7 @@ fn test_name() {
 #[test]
 fn test_route() {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
 
     ctx.energy = 30;
     ctx.flasks = 1;
@@ -51,7 +51,7 @@ fn test_route() {
 #[test]
 fn test_obtain() {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
 
     ctx.energy = 30;
     ctx.flasks = 1;
@@ -71,7 +71,7 @@ fn test_obtain() {
 #[test]
 fn test_require() {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
     ctx.energy = 30;
     ctx.flasks = 1;
     ctx.amashilama = true;
@@ -100,7 +100,7 @@ fn test_require() {
 #[test]
 fn search() {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
     ctx.energy = 300;
     ctx.flasks = 1;
     ctx.amashilama = true;

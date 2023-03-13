@@ -22,11 +22,13 @@ pub fn access_{{ id }}(ctx: &Context) -> bool {
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
-pub fn action_{{ id }}(ctx: &mut Context) {
+pub fn action_{{ id }}(ctx: &mut Context{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
     // {{ (info.act or info.pr).text }}
-    {{ (info.act or info.pr)|prToRust(info) }}
+    {{ (info.act or info.pr)|prToRust(info, id) }}
 }
+%% if not (info.act or info.pr).name.endswith('on_entry')
 pub fn action_has_effect_{{ id }}(ctx: &Context) -> bool {
-    {{ (info.act or info.pr)|actToHasEffect(info) }}
+    {{ (info.act or info.pr)|actToHasEffect(info, id) }}
 }
+%% endif
 %% endfor

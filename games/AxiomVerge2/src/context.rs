@@ -49,7 +49,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Clone, Debug, Default, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Context {
     // context vars
     pub position: SpotId,
@@ -57,6 +57,7 @@ pub struct Context {
     pub mode: enums::Mode,
     pub indra: SpotId,
     pub last: SpotId,
+    pub prev_area: AreaId,
     pub energy: i32,
     pub breach: bool,
     pub flasks: i32,
@@ -97,6 +98,59 @@ pub struct Context {
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
     skips: i32,
+}
+
+impl Default for Context {
+    fn default() -> Context {
+        Context {
+            position: SpotId::Antarctica__West__Helipad,
+            save: SpotId::Antarctica__West__Helipad,
+            mode: enums::Mode::Indra,
+            indra: SpotId::None,
+            last: SpotId::None,
+            prev_area: AreaId::Antarctica__West,
+            energy: 0,
+            breach: false,
+            flasks: 0,
+            ebih__waterfall__ctx__left_block: false,
+            ebih__waterfall__ctx__right_block: false,
+            ebih__ebih_east__ctx__platform1_moved: false,
+            ebih__ebih_east__ctx__platform2_moved: false,
+            // settings
+            boomerang_steering: Default::default(),
+            major_glitches: Default::default(),
+            minor_glitches: Default::default(),
+            // items
+            amashilama: Default::default(),
+            apocalypse_bomb: Default::default(),
+            boomerang: Default::default(),
+            drone_melee_damage: Default::default(),
+            drone_melee_speed: Default::default(),
+            health_upgrade: Default::default(),
+            ice_axe: Default::default(),
+            infect: Default::default(),
+            infection_level: Default::default(),
+            infection_range: Default::default(),
+            infection_speed: Default::default(),
+            ledge_grab: Default::default(),
+            melee_damage: Default::default(),
+            melee_speed: Default::default(),
+            mist_upgrade: Default::default(),
+            nanite_mist: Default::default(),
+            nano_points: Default::default(),
+            ranged_damage: Default::default(),
+            ranged_speed: Default::default(),
+            slingshot_hook: Default::default(),
+            station_power: Default::default(),
+            switch_36_11: Default::default(),
+            switch_40_12: Default::default(),
+            wall_climb: Default::default(),
+            // other
+            status: Default::default(),
+            visits: Default::default(),
+            skips: Default::default(),
+        }
+    }
 }
 
 impl context::Ctx for Context {
@@ -250,10 +304,76 @@ impl context::Ctx for Context {
         self.position
     }
     fn set_position(&mut self, pos: SpotId) {
-        match get_area(pos) {
+        let area = get_area(pos);
+        match area {
+            AreaId::Ebih__Building_Interior => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__By_Garage => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Base_Camp => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Cave => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Boss_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Waterfall => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Grid_25_10_12 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Ebih_West => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Garage => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Antarctica__East => {
-                if get_area(self.position) != AreaId::Antarctica__East {
+                if get_area(self.position) != area {
                     self.save = SpotId::Antarctica__East__Save_Point;
+                }
+            }
+            AreaId::Ebih__Bunker_Interior => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Grid_21_1_5 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Tent_Interior => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Ebih_East => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             _ => (),
@@ -270,6 +390,16 @@ impl context::Ctx for Context {
         self.ebih__ebih_east__ctx__platform2_moved = false;
     }
 
+    fn reset_region(&mut self, region_id: RegionId) {}
+    fn reset_area(&mut self, area_id: AreaId) {
+        match area_id {
+            AreaId::Ebih__Ebih_East => {
+                self.ebih__ebih_east__ctx__platform1_moved = false;
+                self.ebih__ebih_east__ctx__platform2_moved = false;
+            }
+            _ => (),
+        }
+    }
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
             Currency::Free => true,
@@ -359,24 +489,6 @@ impl context::Ctx for Context {
 }
 
 impl Context {
-    pub fn new() -> Context {
-        Context {
-            position: SpotId::Antarctica__West__Helipad,
-            save: SpotId::Antarctica__West__Helipad,
-            mode: enums::Mode::Indra,
-            indra: SpotId::None,
-            last: SpotId::None,
-            energy: 0,
-            breach: false,
-            flasks: 0,
-            ebih__waterfall__ctx__left_block: false,
-            ebih__waterfall__ctx__right_block: false,
-            ebih__ebih_east__ctx__platform1_moved: false,
-            ebih__ebih_east__ctx__platform2_moved: false,
-            ..Context::default()
-        }
-    }
-
     pub fn position(&self) -> SpotId {
         match get_area(self.position) {
             _ => match get_region(self.position) {
@@ -409,6 +521,13 @@ impl Context {
         match get_area(self.position) {
             _ => match get_region(self.position) {
                 _ => self.last,
+            },
+        }
+    }
+    pub fn prev_area(&self) -> AreaId {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.prev_area,
             },
         }
     }

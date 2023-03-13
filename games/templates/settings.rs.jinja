@@ -31,7 +31,7 @@ fn read_key_value(
 
 pub fn load_settings(filename: Option<&str>) -> (World, Context) {
     let mut world = World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
     if let Some(filename) = filename {
         let mut file = File::open(filename).unwrap_or_else(|e| panic!("Couldn't open file \"{}\": {:?}", filename, e));
         let mut settings = String::new();

@@ -12,6 +12,10 @@ BUILTINS = {
     '$all_spot_checks': 'ctx.all_spot_checks',
     '$all_area_checks': 'ctx.all_area_checks',
     '$all_region_checks': 'ctx.all_region_checks',
+    '$reset_region': 'ctx.reset_region',
+    '$reset_area': 'ctx.reset_area',
+    '$get_region': 'get_region',
+    '$get_area': 'get_area',
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')

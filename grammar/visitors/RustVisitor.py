@@ -1,4 +1,5 @@
 from collections import defaultdict
+from itertools import chain
 
 from grammar import RulesParser, RulesVisitor
 from Utils import construct_id, BUILTINS
@@ -9,7 +10,9 @@ _placeType = ['Region', 'Area', 'Spot']
 
 class RustVisitor(RulesVisitor):
 
-    def __init__(self, ctxdict, name):
+    def __init__(self, context_types, action_funcs, ctxdict, name):
+        self.context_types = context_types
+        self.action_funcs = action_funcs
         self.ctxdict = ctxdict
         self.name = name
         self.rettype = None
@@ -17,6 +20,9 @@ class RustVisitor(RulesVisitor):
     def _getRefGetter(self, ref):
         if ref in self.ctxdict:
             return f'ctx.{self.ctxdict[ref]}()'
+        if func := self.action_funcs.get(self.name):
+            if ref in func.get('args', {}):
+                return ref
         return BUILTINS.get(ref, '$' + ref)
     
     def _getRefSetter(self, ref):
@@ -73,20 +79,22 @@ class RustVisitor(RulesVisitor):
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
             args = f'{self._getPlaceType(pl)}Id::{construct_id(pl)}'
+        elif ctx.REF():
+            args = self._getRefGetter(str(ctx.REF())[1:])
         else:
             args = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if not args:
                 func = func[:-2]
         return f'{"!" if ctx.NOT() else ""}{func}{args})'
 
-    def _visitConditional(self, *args):
+    def _visitConditional(self, *args, else_case=True):
         ret = []
         while len(args) > 1:
             cond, then, *args = args
             ret.append(f'if {self.visit(cond)} {{ {self.visit(then)} }}')
         if args:
             ret.append(f'{{ {self.visit(args[0])} }}')
-        else:
+        elif else_case:
             ret.append('{ false }')
         return ' else '.join(ret)
 
@@ -194,7 +202,7 @@ class RustVisitor(RulesVisitor):
 
     ## Action-specific
     def visitActions(self, ctx):
-        return ' '.join(self.visit(ch) for ch in ctx.action())
+        return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
 
     def visitSet(self, ctx):
         var = str(ctx.REF(0))[1:]
@@ -225,11 +233,36 @@ class RustVisitor(RulesVisitor):
         else:
             return func[:-2] + ')'
         
+    def visitActionHelper(self, ctx):
+        return self.visit(ctx.invoke()) + ';'
+        
+    def visitCondAction(self, ctx):
+        return self._visitConditional(*chain(*zip(ctx.boolExpr(), ctx.actions())), else_case=False)
+
+    def visitRefInPlaceRef(self, ctx):
+        ptype = self.context_types[str(ctx.REF(1))[1:]]
+        eq = '!' if ctx.NOT() else '='
+        return (f'get_{ptype[:-2].lower()}({self._getRefGetter(str(ctx.REF(0))[1:])}) '
+                f'{eq}= {self._getRefGetter(str(ctx.REF(1))[1:])}')
+    
+    def visitRefInPlaceName(self, ctx):
+        pl = str(ctx.PLACE())[1:-1]
+        ptype = self._getPlaceType(pl)
+        eq = '!' if ctx.NOT() else '='
+        return (f'get_{ptype.lower()}({self._getRefGetter(str(ctx.REF())[1:])}) '
+                f'{eq}= {ptype}Id::{construct_id(pl)}')
+
+    def visitRefInFunc(self, ctx):
+        func = str(ctx.invoke().FUNC())[1:]
+        assert func in ('get_area', 'get_region')
+        eq = '!' if ctx.NOT() else '='
+        return (f'{func}({self._getRefGetter(str(ctx.REF())[1:])}) '
+                f'{eq}= {self.visit(ctx.invoke())}')
 
 class ActionHasEffectVisitor(RustVisitor):
 
-    def __init__(self, ctxdict, name):
-        super().__init__(ctxdict, name)
+    def __init__(self, *args):
+        super().__init__(*args)
 
     def visitActions(self, ctx):
         return ' || '.join(self.visit(ch) for ch in ctx.action())
@@ -244,5 +277,7 @@ class ActionHasEffectVisitor(RustVisitor):
         return f'1 != {self.visit(ctx.num())}'
 
     def visitActionHelper(self, ctx: RulesParser.ActionHelperContext):
-        assert str(ctx.invoke().FUNC()) not in BUILTINS
+        # This should not be used
+        if str(ctx.invoke().FUNC()) in BUILTINS:
+            return 'panic!("builtin action shouldn\'t be checked for an effect!")'
         return self.visit(ctx.invoke()).replace('helper', 'helper_has_effect')

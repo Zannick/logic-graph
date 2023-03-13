@@ -12,7 +12,7 @@ use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
-    let mut ctx = Context::new();
+    let mut ctx = Context::default();
     ctx.ice_axe = true;
     ctx.amashilama = true;
     ctx.save = SpotId::Glacier__Revival__Save_Point;

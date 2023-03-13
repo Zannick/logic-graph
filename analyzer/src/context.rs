@@ -18,6 +18,8 @@ pub trait Ctx: Clone + Eq + Debug {
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
     fn reload_game(&mut self);
     fn reset_all(&mut self);
+    fn reset_region(&mut self, region_id: Self::RegionId);
+    fn reset_area(&mut self, area_id: Self::AreaId);
 
     fn can_afford(&self, cost: &<<Self::World as World>::Location as Accessible>::Currency)
         -> bool;
