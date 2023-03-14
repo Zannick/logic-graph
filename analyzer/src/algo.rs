@@ -235,15 +235,20 @@ where
 
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
-            println!(
-                "Found winning {}path after {} rounds, in estimated {}ms, with {} remaining in heap",
-                if ctx.minimize { "*minimized* " } else { "" },
-                iters,
-                ctx.elapsed(),
-                heap.len()
-            );
-
+            let old_time = heap.max_time();
             heap.set_lenient_max_time(ctx.elapsed());
+
+            if heap.max_time() < old_time {
+                println!(
+                    "Found winning {}path after {} rounds, in estimated {}ms, with {} remaining in heap",
+                    if ctx.minimize { "*minimized* " } else { "" },
+                    iters,
+                    ctx.elapsed(),
+                    heap.len()
+                );
+                println!("Max time to consider is now: {}ms", heap.max_time());
+            }
+
             if !ctx.minimize {
                 let mut newctx =
                     ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
@@ -253,7 +258,6 @@ where
 
             solutions.insert(ctx);
 
-            println!("Max time to consider is now: {}ms", heap.max_time());
             continue;
         }
         if ctx.score() < -3 * heap.max_time() {
@@ -271,12 +275,13 @@ where
         if iters % 10000 == 0 {
             let (iskips, pskips) = heap.stats();
             println!(
-                "Round {} (min: {}) (heap size {}, skipped {} pushes + {} pops):\n  {}",
+                "Round {} (min: {}) (heap size {}, skipped {} pushes + {} pops, unique solutions: {}):\n  {}",
                 iters,
                 m_iters,
                 heap.len(),
                 iskips,
                 pskips,
+                solutions.unique(),
                 ctx.info()
             );
         }

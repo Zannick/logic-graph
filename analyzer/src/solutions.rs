@@ -26,6 +26,7 @@ where
     map: HashMap<Vec<History<T>>, Vec<ContextWrapper<T>>>,
     path: &'static str,
     file: File,
+    count: usize,
 }
 
 impl<T> SolutionCollector<T>
@@ -37,7 +38,16 @@ where
             map: HashMap::new(),
             path,
             file: File::create(path)?,
+            count: 0,
         })
+    }
+
+    pub fn len(&self) -> usize {
+        self.count
+    }
+
+    pub fn unique(&self) -> usize {
+        self.map.len()
     }
 
     pub fn insert(&mut self, ctx: ContextWrapper<T>) {
@@ -53,6 +63,7 @@ where
         } else {
             self.map.insert(loc_history, vec![ctx]);
         }
+        self.count += 1;
     }
 
     fn write_one(
@@ -60,13 +71,16 @@ where
         num: usize,
         minor_num: usize,
         ctx: &ContextWrapper<T>,
+        comp: i32,
     ) -> io::Result<()> {
+        let diff = ctx.elapsed() - comp;
         writeln!(
             file,
-            "Solution #{}-{}, est. {}ms:",
+            "Solution #{}-{}, est. {}ms{}:",
             num,
             minor_num,
-            ctx.elapsed()
+            ctx.elapsed(),
+            if diff > 0 { format!(" (+{}ms)", diff) } else { "".to_string() }
         )?;
         writeln!(file, "in short:\n{}", ctx.history_preview())?;
         writeln!(file, "in full:\n{}\n\n", ctx.history_str())
@@ -80,9 +94,10 @@ where
         }
         vecs.sort_by_key(|v| v[0].elapsed());
         let mut total = 0;
+        let fastest = vecs[0][0].elapsed();
         for (i, vec) in vecs.iter().enumerate() {
             let mut minor = 0;
-            Self::write_one(&mut file, i, minor, vec.first().unwrap())?;
+            Self::write_one(&mut file, i, minor, vec.first().unwrap(), fastest)?;
             total += 1;
             for (j, similar) in vec.iter().enumerate().skip(1) {
                 if vec[..j]
@@ -93,10 +108,10 @@ where
                 }
                 minor += 1;
                 total += 1;
-                Self::write_one(&mut file, i, minor, similar)?;
+                Self::write_one(&mut file, i, minor, similar, fastest)?;
             }
         }
-        println!("Wrote {} solutions ({} types) to {}", total, vecs.len(), self.path);
+        println!("Wrote {} solutions ({} types, reduced from {} total) to {}", total, vecs.len(), self.count, self.path);
         Ok(())
     }
 }
