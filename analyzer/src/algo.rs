@@ -202,35 +202,51 @@ where
 {
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);
-    let wonctx = greedy_search(world, &startctx).expect("Did not find a greedy solution");
-
-    let m = minimize_greedy(world, startctx.get(), &wonctx);
-
-    println!(
-        "Found greedy solution of {}ms, minimized to {}ms",
-        wonctx.elapsed(),
-        m.elapsed()
-    );
-
     let mut heap = LimitedHeap::new();
-    heap.set_lenient_max_time(wonctx.elapsed());
-    heap.set_lenient_max_time(m.elapsed());
+
+    let mut winner = match greedy_search(world, &startctx) {
+        Ok(wonctx) => {
+            let m = minimize_greedy(world, startctx.get(), &wonctx);
+            println!(
+                "Found greedy solution of {}ms, minimized to {}ms",
+                wonctx.elapsed(),
+                m.elapsed()
+            );
+            heap.set_lenient_max_time(wonctx.elapsed());
+            heap.set_lenient_max_time(m.elapsed());
+            if wonctx.elapsed() < m.elapsed() {
+                wonctx
+            } else {
+                m
+            }
+        }
+        Err(ctx) => {
+            println!(
+                "Found no greedy solution, maximal attempt reached dead-end after {}ms",
+                ctx.elapsed()
+            );
+            heap.set_lenient_max_time(ctx.elapsed() * 2);
+            ctx
+        }
+    };
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
     let mut m_iters = 0;
     let mut solution_count = 0;
-    let mut winner = if wonctx.elapsed() < m.elapsed() {
-        wonctx
-    } else {
-        m
-    };
 
     let mut file = File::create("data/solutions.txt")?;
-    writeln!(file, "Solution #{}, est. {}ms:", solution_count, winner.elapsed())?;
-    writeln!(file, "in short:\n{}", winner.history_preview())?;
-    writeln!(file, "full:\n{}\n\n", winner.history_str())?;
-    solution_count += 1;
+    if world.won(winner.get()) {
+        writeln!(
+            file,
+            "Solution #{}, est. {}ms:",
+            solution_count,
+            winner.elapsed()
+        )?;
+        writeln!(file, "in short:\n{}", winner.history_preview())?;
+        writeln!(file, "full:\n{}\n\n", winner.history_str())?;
+        solution_count += 1;
+    }
 
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
@@ -242,7 +258,12 @@ where
                 heap.len()
             );
 
-            writeln!(file, "Solution #{}, est. {}ms:", solution_count, ctx.elapsed())?;
+            writeln!(
+                file,
+                "Solution #{}, est. {}ms:",
+                solution_count,
+                ctx.elapsed()
+            )?;
             writeln!(file, "in short:\n{}", ctx.history_preview())?;
             writeln!(file, "in full:\n{}\n\n", ctx.history_str())?;
             solution_count += 1;

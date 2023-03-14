@@ -1,9 +1,9 @@
 //! Functions related to access graphs, and accessing locations.
 
 use crate::context::*;
+use crate::greedy::greedy_search_from;
 use crate::world::*;
 use std::cmp::Reverse;
-use std::collections::VecDeque;
 use std::collections::{BinaryHeap, HashMap};
 
 /// Check whether there are available locations at this position.
@@ -86,55 +86,6 @@ pub fn expand<W, T, E, Wp>(
     }
 }
 
-/// Variant for expand which doesn't track history or time, ideal for beatability checks
-// (Is it possible to combine with the other without making it slower?)
-pub fn expand_simple<W, T, E, Wp>(
-    world: &W,
-    ctx: &T,
-    spot_map: &HashMap<E::SpotId, T>,
-    ctx_queue: &mut VecDeque<T>,
-) where
-    W: World<Exit = E, Warp = Wp>,
-    T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
-{
-    let mut append = |spot| {
-        // We're copying the whole context on every step, which is probably
-        // super inefficient; we only really copy because position may be relevant
-        // for connection checks. If we tracked the "context" state separately
-        // from the item state, it might be less copying.
-        let mut newctx = ctx.clone();
-        newctx.set_position(spot);
-        ctx_queue.push_back(newctx);
-    };
-    for spot in world.get_area_spots(ctx.position()) {
-        if !spot_map.contains_key(spot) {
-            let local = ctx.local_travel_time(*spot);
-            if local < 0 {
-                // Can't move this way
-                continue;
-            }
-            append(*spot);
-        }
-    }
-
-    for exit in world.get_spot_exits(ctx.position()) {
-        if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx) {
-            append(exit.dest());
-        }
-    }
-
-    for warp in world.get_warps() {
-        if !spot_map.contains_key(&warp.dest(ctx)) && warp.can_access(ctx) {
-            let mut newctx = ctx.clone();
-            warp.prewarp(&mut newctx);
-            newctx.set_position(warp.dest(&newctx));
-            ctx_queue.push_back(newctx);
-        }
-    }
-}
-
 /// Explores outward from the current position.
 pub fn accessible_spots<W, T, E>(
     world: &W,
@@ -163,32 +114,6 @@ where
     }
 
     // TODO: sort by distance
-    spot_map
-}
-
-/// Variant of `access` that does not write hist or time, ideal for beatability checks
-pub fn access_simple<W, T, E>(world: &W, ctx: &T) -> HashMap<<E as Exit>::SpotId, T>
-where
-    W: World<Exit = E>,
-    T: Ctx<World = W>,
-    E: Exit<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId>,
-{
-    let pos = ctx.position();
-    let mut spot_map = HashMap::new();
-    let mut ctx_queue = VecDeque::new();
-    spot_map.insert(pos, ctx.clone());
-
-    expand_simple(world, &spot_map[&pos], &spot_map, &mut ctx_queue);
-    while !ctx_queue.is_empty() {
-        let spot_found = ctx_queue.pop_front().unwrap();
-        let pos = spot_found.position();
-        if !spot_map.contains_key(&pos) {
-            spot_map.insert(pos, spot_found);
-            expand_simple(world, &spot_map[&pos], &spot_map, &mut ctx_queue);
-        }
-    }
-
     spot_map
 }
 
@@ -241,81 +166,18 @@ where
     (locs, exit)
 }
 
-pub fn visit_simple<W, T, L, E>(world: &W, ctx: &mut T) -> bool
+pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut ret = false;
-    for (spot_id, spot_ctx) in access_simple(world, &ctx) {
-        for act in world.get_spot_actions(spot_id) {
-            if act.can_access(&spot_ctx) && act.has_effect(&spot_ctx) {
-                act.perform(ctx);
-            }
-        }
-        for loc in world.get_spot_locations(spot_id) {
-            // Check can_access at the local spot_ctx, but pick up items
-            // and perform other checks with the omnipresent context.
-            if ctx.todo(loc.id()) && loc.can_access(&spot_ctx) && ctx.can_afford(loc.price()) {
-                ctx.collect(loc.item());
-                ctx.spend(loc.price());
-                for canon_loc_id in world.get_canon_locations(loc.id()) {
-                    if ctx.todo(canon_loc_id) {
-                        ctx.skip(canon_loc_id);
-                    }
-                }
-                ctx.visit(loc.id());
-                ret = true;
-            }
-        }
+    let res = greedy_search_from(world, ctx);
+    match res {
+        Ok(_) => Ok(()),
+        Err(c) => Err(c),
     }
-    ret
-}
-
-pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), T>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T>,
-{
-    let mut ctx = ctx.clone();
-    let mut acts_only = 0;
-    while !world.won(&ctx) {
-        if !visit_simple(world, &mut ctx) {
-            acts_only += 1;
-        } else {
-            acts_only = 0;
-        }
-        if acts_only > 1 {
-            return Err(ctx);
-        }
-    }
-    Ok(())
-}
-
-pub fn cant_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), T>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T>,
-{
-    let mut ctx = ctx.clone();
-    let mut acts_only = 0;
-    while !world.won(&ctx) {
-        if !visit_simple(world, &mut ctx) {
-            acts_only += 1;
-        } else {
-            acts_only = 0;
-        }
-        if acts_only > 1 {
-            return Ok(());
-        }
-    }
-    Err(ctx)
 }
 
 pub fn find_unused_links<W, T, E>(
@@ -326,15 +188,22 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp:
+        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     let mut accessible: Vec<ContextWrapper<T>> = spot_map.clone().into_values().collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if !spot_map.contains_key(spot) && world.are_spots_connected(ctx.get().position(), *spot) {
-                vec.push(format!("{} -> {}: movement not available", ctx.get().position(), spot));
+            if !spot_map.contains_key(spot)
+                && world.are_spots_connected(ctx.get().position(), *spot)
+            {
+                vec.push(format!(
+                    "{} -> {}: movement not available",
+                    ctx.get().position(),
+                    spot
+                ));
             }
         }
 
@@ -346,7 +215,11 @@ where
 
         for warp in world.get_warps() {
             if !spot_map.contains_key(&warp.dest(ctx.get())) {
-                vec.push(format!("{}: warp {} not usable", ctx.get().position(), warp.id()));
+                vec.push(format!(
+                    "{}: warp {} not usable",
+                    ctx.get().position(),
+                    warp.id()
+                ));
             }
         }
     }

@@ -44,3 +44,15 @@ fn can_obtain_Infect() {
         Item::Infect
     );
 }
+#[test]
+fn context_flasks_1_can_obtain_Melee_Damage() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.flasks = 1;
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Ebih__Base_Camp__Save_Point,
+        Item::Melee_Damage
+    );
+}

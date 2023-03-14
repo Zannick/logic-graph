@@ -11,8 +11,8 @@ pub fn remove_all_unvisited<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
 {
     let mut ctx = startctx.clone();
     let mut set = HashSet::new();
@@ -56,8 +56,8 @@ pub fn minimize<W, T, L, E>(
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, LocId = E::LocId> + Accessible<Context = T>,
-    E: Exit + Accessible<Context = T>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
 {
     let mut ctx = remove_all_unvisited(world, startctx, wonctx);
 

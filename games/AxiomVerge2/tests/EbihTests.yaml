@@ -13,3 +13,7 @@ tests:
   - can_reach: Ebih > Ebih East > Corner
 
   - can_obtain: Infect
+
+  - context:
+      flasks: 1
+    can_obtain: Melee_Damage

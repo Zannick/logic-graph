@@ -306,27 +306,22 @@ impl context::Ctx for Context {
     fn set_position(&mut self, pos: SpotId) {
         let area = get_area(pos);
         match area {
-            AreaId::Ebih__Building_Interior => {
+            AreaId::Ebih__Grid_21_1_5 => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Ebih__By_Garage => {
+            AreaId::Ebih__Tent_Interior => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Ebih__Base_Camp => {
+            AreaId::Ebih__Ebih_West => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Ebih__Cave => {
-                if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
-                }
-            }
-            AreaId::Ebih__Boss_Room => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -341,12 +336,7 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Ebih__Ebih_West => {
-                if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos(self, pos);
-                }
-            }
-            AreaId::Ebih__Garage => {
+            AreaId::Ebih__Base_Camp => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -361,12 +351,22 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Ebih__Grid_21_1_5 => {
+            AreaId::Ebih__Garage => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Ebih__Tent_Interior => {
+            AreaId::Ebih__Building_Interior => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Boss_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__By_Garage => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }

@@ -108,6 +108,10 @@ pub fn access_infect_and___melee_or_boomerang(ctx: &Context) -> bool {
     // Infect and ($melee or Boomerang)
     (ctx.has(Item::Infect) && (helper__melee!(ctx) || ctx.has(Item::Boomerang)))
 }
+pub fn access_infect_and_melee_damage(ctx: &Context) -> bool {
+    // Infect and Melee_Damage
+    (ctx.has(Item::Infect) && ctx.has(Item::Melee_Damage))
+}
 pub fn access_infection_level(ctx: &Context) -> bool {
     // Infection_Level
     ctx.has(Item::Infection_Level)

@@ -90,30 +90,67 @@ where
     }
 }
 
-pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Result<ContextWrapper<T>, T>
+fn greedy_internal<W, T, L, E>(
+    world: &W,
+    mut ctx: ContextWrapper<T>,
+) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut ctx = ctx.clone();
     world.skip_unused_items(ctx.get_mut());
+    let mut actions = 0;
     while !world.won(ctx.get()) {
         let spot_map = accessible_spots(world, ctx);
         if let Some(c) = nearest_spot_with_checks(world, &spot_map) {
             ctx = c;
             grab_all(world, &mut ctx);
+            actions = 0;
         } else if let Some(c) = nearest_spot_with_actions(world, &spot_map) {
             ctx = c;
             // TODO: this probably shouldn't do all global actions, maybe we pick the fastest/cheapest?
             do_all(world, &mut ctx);
+            actions += 1;
         } else {
-            let ctx = spot_map.into_values().into_iter().last().expect("couldn't reach any spots!");
-            return Err(ctx.get().clone());
+            let ctx = spot_map
+                .into_values()
+                .into_iter()
+                .last()
+                .expect("couldn't reach any spots!");
+            return Err(ctx);
+        }
+        if actions > 2 {
+            let ctx = spot_map
+                .into_values()
+                .into_iter()
+                .last()
+                .expect("couldn't reach any spots!");
+            return Err(ctx);
         }
     }
     Ok(ctx)
+}
+
+pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Result<ContextWrapper<T>, ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    greedy_internal(world, ctx.clone())
+}
+
+pub fn greedy_search_from<W, T, L, E>(world: &W, ctx: &T) -> Result<ContextWrapper<T>, ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    greedy_internal(world, ContextWrapper::new(ctx.clone()))
 }
 
 pub fn minimize_greedy<W, T, L, E>(
