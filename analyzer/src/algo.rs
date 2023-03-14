@@ -64,9 +64,12 @@ where
         ctx_list.reserve(last_ctxs.len() * 2);
         for mut ctx in last_ctxs {
             if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
-                // TODO: Add a better way to prevent this from causing too wide a branching factor
-                // or remove.
-                if ctx.minimize || !loc.is_free() {
+                // Major branching factor: sometimes we can try skipping a location:
+                // 1. If location has a cost, we might not want it.
+                // 2. Otherwise, if we're in minimize mode, any location is potentially skippable.
+                //    But it's not worth skipping locations that are free in time and money;
+                //    they come along for free with other locations, or we route differently.
+                if (ctx.minimize && loc.time() > 0) || !loc.is_free() {
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
