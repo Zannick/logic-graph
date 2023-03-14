@@ -1,6 +1,7 @@
 use crate::world::*;
 use sort_by_derive::SortBy;
 use std::fmt::{self, format, Debug, Display};
+use std::hash::Hash;
 use std::rc::Rc;
 
 pub trait Ctx: Clone + Eq + Debug {
@@ -76,10 +77,41 @@ where
             History::Get(item, loc) => write!(f, "* Collect {} from {}", item, loc),
             History::Move(exit) => write!(f, "  Take exit {}", exit),
             History::MoveGet(item, exit) => {
-                write!(f, "* Take hybrid exit {}, getting {}", exit, item)
+                write!(f, "* Take hybrid exit {}, collecting {}", exit, item)
             }
             History::MoveLocal(spot) => write!(f, "  Move to {}", spot),
-            History::Activate(action) => write!(f, "  Do {}", action),
+            History::Activate(action) => write!(f, "= Do {}", action),
+        }
+    }
+}
+impl<T> Hash for History<T>
+where
+    T: Ctx,
+{
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        core::mem::discriminant(self).hash(state);
+        match self {
+            History::Warp(warp, dest) => {
+                warp.hash(state);
+                dest.hash(state);
+            }
+            History::Get(item, loc) => {
+                item.hash(state);
+                loc.hash(state);
+            }
+            History::Move(exit) => {
+                exit.hash(state);
+            }
+            History::MoveGet(item, exit) => {
+                item.hash(state);
+                exit.hash(state);
+            }
+            History::MoveLocal(spot) => {
+                spot.hash(state);
+            }
+            History::Activate(action) => {
+                action.hash(state);
+            }
         }
     }
 }
@@ -92,6 +124,7 @@ where
     entry: History<T>,
     prev: Option<Rc<HistoryNode<T>>>,
 }
+
 struct HistoryIterator<T>
 where
     T: Ctx,

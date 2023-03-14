@@ -5,10 +5,9 @@ use crate::context::*;
 use crate::greedy::*;
 use crate::heap::LimitedHeap;
 use crate::minimize::*;
+use crate::solutions::SolutionCollector;
 use crate::world::*;
 use std::fmt::Debug;
-use std::fs::File;
-use std::io::Write;
 
 pub fn explore<W, T, L, E>(
     world: &W,
@@ -203,8 +202,9 @@ where
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);
     let mut heap = LimitedHeap::new();
+    let mut solutions = SolutionCollector::<T>::new("data/solutions.txt").unwrap();
 
-    let mut winner = match greedy_search(world, &startctx) {
+    match greedy_search(world, &startctx) {
         Ok(wonctx) => {
             let m = minimize_greedy(world, startctx.get(), &wonctx);
             println!(
@@ -214,11 +214,8 @@ where
             );
             heap.set_lenient_max_time(wonctx.elapsed());
             heap.set_lenient_max_time(m.elapsed());
-            if wonctx.elapsed() < m.elapsed() {
-                wonctx
-            } else {
-                m
-            }
+            solutions.insert(wonctx);
+            solutions.insert(m);
         }
         Err(ctx) => {
             println!(
@@ -226,27 +223,12 @@ where
                 ctx.elapsed()
             );
             heap.set_lenient_max_time(ctx.elapsed() * 2);
-            ctx
         }
     };
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
     let mut m_iters = 0;
-    let mut solution_count = 0;
-
-    let mut file = File::create("data/solutions.txt")?;
-    if world.won(winner.get()) {
-        writeln!(
-            file,
-            "Solution #{}, est. {}ms:",
-            solution_count,
-            winner.elapsed()
-        )?;
-        writeln!(file, "in short:\n{}", winner.history_preview())?;
-        writeln!(file, "full:\n{}\n\n", winner.history_str())?;
-        solution_count += 1;
-    }
 
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
@@ -258,16 +240,6 @@ where
                 heap.len()
             );
 
-            writeln!(
-                file,
-                "Solution #{}, est. {}ms:",
-                solution_count,
-                ctx.elapsed()
-            )?;
-            writeln!(file, "in short:\n{}", ctx.history_preview())?;
-            writeln!(file, "in full:\n{}\n\n", ctx.history_str())?;
-            solution_count += 1;
-
             heap.set_lenient_max_time(ctx.elapsed());
             if !ctx.minimize {
                 let mut newctx =
@@ -276,9 +248,7 @@ where
                 heap.push(newctx);
             }
 
-            if ctx.elapsed() < winner.elapsed() {
-                winner = ctx;
-            }
+            solutions.insert(ctx);
 
             println!("Max time to consider is now: {}ms", heap.max_time());
             continue;
@@ -314,10 +284,5 @@ where
         "Finished after {} rounds (w/ {} minimize rounds), skipped {} pushes + {} pops",
         iters, m_iters, iskips, pskips
     );
-    println!(
-        "Final result: est. {}ms\n{}",
-        winner.elapsed(),
-        winner.history_preview()
-    );
-    Ok(())
+    solutions.export()
 }

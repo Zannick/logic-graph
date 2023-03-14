@@ -8,6 +8,7 @@ pub mod greedy;
 pub mod heap;
 pub mod minimize;
 pub mod settings;
+pub mod solutions;
 pub mod world;
 
 pub mod testlib {
