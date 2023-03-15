@@ -240,12 +240,13 @@ where
 
             if heap.max_time() < old_time {
                 println!(
-                    "Found winning {}path after {} rounds, in estimated {}ms, with {} remaining in heap",
+                    "Found new shortest winning {}path after {} rounds, in estimated {}ms, with {} remaining in heap",
                     if ctx.minimize { "*minimized* " } else { "" },
                     iters,
                     ctx.elapsed(),
                     heap.len()
                 );
+                println!("{}", ctx.history_preview());
                 println!("Max time to consider is now: {}ms", heap.max_time());
             }
 
