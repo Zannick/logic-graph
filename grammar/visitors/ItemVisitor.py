@@ -10,26 +10,34 @@ from grammar import RulesVisitor
 
 class ItemVisitor(RulesVisitor):
 
-    def __init__(self, settings):
+    def __init__(self, settings, vanilla_items):
         self.item_uses = Counter()
         self.item_max_counts = defaultdict(int)
         self.settings = settings
+        self.vanilla_items = vanilla_items
         self.name = ''
         self.errors = []
 
     def visit(self, tree, name=''):
         self.name = name
         try:
-            ret = super().visit(tree)
+            return super().visit(tree)
         finally:
             self.name = ''
-        return ret
 
     def _count_items(self, ctx):
-        for item in ctx.ITEM():
-            it = str(item)
-            self.item_uses[it] += 1
-            self.item_max_counts[it] = max(1, self.item_max_counts[it])
+        if self.name.startswith('objectives'):
+            for item in ctx.ITEM():
+                it = str(item)
+                if it not in self.vanilla_items:
+                    logging.warning("%s references undefined item %r and may be impossible", self.name, it)
+                self.item_uses[it] += 1
+                self.item_max_counts[it] = max(1, self.item_max_counts[it])
+        else:
+            for item in ctx.ITEM():
+                it = str(item)
+                self.item_uses[it] += 1
+                self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
     visitInvoke = visitRefInList = visitMatchRefBool = _count_items
@@ -70,7 +78,7 @@ class ItemVisitor(RulesVisitor):
             s = str(ctx.SETTING())
             if sd := self.settings.get(s):
                 if sd['type'] != 'int':
-                    self.errors.append('Rule {self.name} uses setting {s} as int, but it is {sd["type"]}')
+                    self.errors.append(f'Rule {self.name} uses setting {s} as int, but it is {sd["type"]}')
                     return self.visitChildren(ctx)
 
                 m = sd.get('max', 1024)

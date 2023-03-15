@@ -122,11 +122,11 @@ impl context::Ctx for Context {
     fn set_position(&mut self, pos: SpotId) {
 %% for pltype in ['Region', 'Area']
 %% if context_position_watchers[pltype|lower]
-        let area = get_{{ pltype|lower }}(pos);
-        match area {
-%% for r in context_position_watchers[pltype|lower]
+        let {{ pltype|lower }} = get_{{ pltype|lower }}(pos);
+        match {{ pltype|lower }} {
+%% for r in context_position_watchers[pltype|lower]|sort
             {{ pltype }}Id::{{ r }} => {
-                if get_{{ pltype|lower }}(self.position) != area {
+                if get_{{ pltype|lower }}(self.position) != {{ pltype|lower }} {
 %% for c, val in context_trigger_rules.enter[pltype|lower].get(r, {}).items()
                     self.{{ c }} = {{ val }};
 %% endfor

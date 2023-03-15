@@ -8,7 +8,6 @@ import os
 import re
 import subprocess
 import sys
-from typing import Any
 import yaml
 # TODO: pyspellchecker to check for issues with item names
 
@@ -20,13 +19,14 @@ import jinja2
 
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
-from Utils import base_dir, construct_id, construct_test_name, BUILTINS
+from TestProcessor import TestProcessor
+from Utils import *
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time',
-               'start', 'load', 'helpers', 'collect', 'settings'}
+               'start', 'load', 'helpers', 'collect', 'settings', '_filename'}
 REGION_FIELDS = {'name', 'short', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'here'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local'}
@@ -44,10 +44,12 @@ TypedVar = namedtuple('TypedVar', ['name', 'type'])
 def load_data_from_file(file: str):
     try:
         with open(file) as f:
-            return list(yaml.safe_load_all(f))
+            res = list(yaml.safe_load_all(f))
+            for r in res:
+                r['_filename'] = os.path.basename(file)
+            return res
     except Exception as e:
         raise Exception(f'Error reading from {file}') from e
-    # TODO: validate fields
 
 
 def load_game_yaml(game_dir: str):
@@ -115,42 +117,10 @@ def get_int_type_for_max(count: int) -> str:
     return 'i32'
 
 
-def config_type(val: Any) -> str:
-    if isinstance(val, str):
-        if '::' in val:
-            return val[:val.index('::')]
-        depth = val.count('>')
-        if depth == 1:
-            return 'AreaId'
-        if depth == 2:
-            return 'SpotId'
-        return 'str'
-    if isinstance(val, bool):
-        return 'bool'
-    if isinstance(val, int):
-        return 'int'
-    if isinstance(val, float):
-        return 'float'
-    return type(val).__name__
-
-
 def trim_type_prefix(s: str) -> str:
     if '::' in s:
         return s[s.index('::') + 2:]
     return s
-
-
-ctx_types = {
-    'Id': 'SpotId',
-    # arguably anything that's a string will be an enum instead
-    # but we have to organize all the possible values
-    'str': 'ENUM',
-    'int': 'i32',
-    'float': 'f32',
-}
-def typenameof(val: Any) -> str:
-    rname = config_type(val)
-    return ctx_types.get(rname, rname)
 
 
 def str_to_rusttype(val: str, t: str) -> str:
@@ -187,7 +157,7 @@ class GameLogic(object):
         self.game = game
         self.package = inflection.underscore(game)
         self.game_dir = os.path.join(base_dir, 'games', game)
-        self._misc_errors = []
+        self._errors = []
 
         self._info = load_game_yaml(self.game_dir)
         self.tests = self._info.get('tests', [])
@@ -221,19 +191,23 @@ class GameLogic(object):
         self.movements = self._info['movements']
         self.time = self._info['time']
         if 'default' not in self.movements:
-            self._misc_errors.append(f'No default movement defined')
+            self._errors.append(f'No default movement defined')
         for name, info in self.movements.items():
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'movements')
                 info['access_id'] = self.make_funcid(info)
                 if name == 'default':
-                    self._misc_errors.append(f'Cannot define req for default movement')
+                    self._errors.append(f'Cannot define req for default movement')
 
         self.id_lookup = {}
         self.process_regions()
-        self.process_times()
         self.process_warps()
         self.process_global_actions()
+        self._errors.extend(itertools.chain.from_iterable(pr.errors for pr in self.all_parse_results()))
+
+        self.process_times()
+        self.process_settings()
+        self.process_tests()
 
 
     def process_regions(self):
@@ -341,18 +315,18 @@ class GameLogic(object):
             info['name'] = inflection.camelize(name)
             info['id'] = construct_id(info['name'])
             if 'time' not in info:
-                self._misc_errors.append(f'Warp {name} requires explicit "time" setting')
+                self._errors.append(f'Warp {name} requires explicit "time" setting')
             if info['to'].startswith('^'):
                 val = info['to'][1:]
                 if val not in self.context_types:
-                    self._misc_errors.append(f'Warp {name} goes to undefined ctx dest: ^{val}')
+                    self._errors.append(f'Warp {name} goes to undefined ctx dest: ^{val}')
                 elif self.context_types[val] != 'SpotId':
-                    self._misc_errors.append(f'Warp {name} goes to invalid ctx dest: ^{val} (of type {self.context_types[val]})')
+                    self._errors.append(f'Warp {name} goes to invalid ctx dest: ^{val} (of type {self.context_types[val]})')
                 info['target_id'] = f'ctx.{val}()'
             else:
                 id = construct_id(info['to'])
                 if not any(info['id'] == id for info in self.spots()):
-                    self._misc_errors.append(f'Warp {name} goes to unrecognized spot: {info["to"]}')
+                    self._errors.append(f'Warp {name} goes to unrecognized spot: {info["to"]}')
                 info['target_id'] = 'SpotId::' + id
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'warps')
@@ -369,7 +343,7 @@ class GameLogic(object):
             name = act['name']
             act['id'] = construct_id('Global', name)
             if 'req' not in act and 'price' not in act:
-                self._misc_errors.append(f'Global actions must have req or price: {name}')
+                self._errors.append(f'Global actions must have req or price: {name}')
             elif 'req' in act:
                 act['pr'] = _parseExpression(
                         act['req'], name + ' req', 'actions', ': ')
@@ -377,6 +351,42 @@ class GameLogic(object):
             act['act'] = parseAction(
                     act['do'], name=f'{name}:do')
             act['action_id'] = self.make_funcid(act, 'act')
+
+
+    def process_settings(self):
+        # Check settings
+        def _visit(visitor, reverse=False):
+            if not reverse:
+                for pr in self.nonpoint_parse_results():
+                    visitor.visit(pr.tree, pr.name, self.get_default_ctx())
+            for pt in self.all_points():
+                if 'pr' in pt:
+                    visitor.visit(pt['pr'].tree, pt['pr'].name, self.get_local_ctx(pt))
+                if 'act' in pt:
+                    visitor.visit(pt['act'].tree, pt['act'].name, self.get_local_ctx(pt))
+            if reverse:
+                for pr in self.nonpoint_parse_results():
+                    visitor.visit(pr.tree, pr.name, self.get_default_ctx())
+            self._errors.extend(visitor.errors)
+
+        sv = SettingVisitor(self.context_types, self.settings)
+        _visit(sv)
+        self.used_settings = sv.setting_options
+
+        for s in self.settings.keys() - self.used_settings.keys():
+            logging.warning(f'Did not find usage of setting {s}')
+
+        hv = HelperVisitor(self.helpers, self.context_types, self.settings)
+        _visit(hv, True)
+
+        cv = ContextVisitor(self.context_types, self.context_values)
+        _visit(cv)
+        self.context_str_values = cv.values
+
+    def process_tests(self):
+        tp = TestProcessor(self.all_items, self.context_types, self.context_str_values,
+                           self.settings, self.id_lookup)
+        self._errors.extend(tp.process_tests(self.tests))
 
 
     @cached_property
@@ -390,8 +400,11 @@ class GameLogic(object):
                     d[mt].append(m)
                     found = True
             if not found:
-                self._misc_errors.append(f'Movement {m} does not define a movement dimension: '
+                self._errors.append(f'Movement {m} does not define a movement dimension: '
                                          f'must be one of {", ".join(MOVEMENT_DIMS)}')
+
+            if m != 'default' and 'req' not in info:
+                self._errors.append(f'Movement {m} must have a req')
         return d
 
 
@@ -466,29 +479,29 @@ class GameLogic(object):
                 # We could have more overrides here, like dist
                 if thru := lcl.get('thru'):
                     if isinstance(thru, str):
-                        self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru!r} '
+                        self._errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru!r} '
                                                     f'(Did you mean [{thru}] ?)')
                         break
                     if not isinstance(thru, list) or not thru:
-                        self._misc_errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru}')
+                        self._errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru}')
                         break
                     if all(isinstance(t, list) for t in thru):
                         coords[1:1] = thru
                     elif len(thru) == 2 and all(isinstance(t, (int, float)) for t in thru):
                         coords[1:1] = [thru]
                     else:
-                        self._misc_errors.append(f'Mismatched length or types in thru '
+                        self._errors.append(f'Mismatched length or types in thru '
                                                     f'from {sp1["name"]} to {sp2["name"]}: {thru}')
                         break
                 if j := lcl.get('jumps'):
                     if isinstance(j, str):
-                        self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
+                        self._errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
                                                     f'(Did you mean [{j}] ?)')
                         break
                     if not isinstance(j, list):
                         j = [j]
                     if len(j) != len(coords) - 1:
-                        self._misc_errors.append(f'Jumps list from {sp1["name"]} to {sp2["name"]} '
+                        self._errors.append(f'Jumps list from {sp1["name"]} to {sp2["name"]} '
                                                     f'must match path length 1+thru = {len(coords) - 1} but was {len(j)}')
                         break
                     jumps[:] = j
@@ -496,13 +509,13 @@ class GameLogic(object):
                     jumps *= len(coords) - 1
                 if j := lcl.get('jumps_down'):
                     if isinstance(j, str):
-                        self._misc_errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
+                        self._errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
                                                     f'(Did you mean [{j}] ?)')
                         break
                     if not isinstance(j, list):
                         j = [j]
                     if len(j) != len(coords) - 1:
-                        self._misc_errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]} '
+                        self._errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]} '
                                                     f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
                         break
                     jumps_down[:] = j
@@ -533,7 +546,7 @@ class GameLogic(object):
                 elif sp.get('local'):
                     errors.append(f'Expected coord for spot {sp["fullname"]} with local rules')
             if errors:
-                self._misc_errors.extend(errors)
+                self._errors.extend(errors)
                 break
             spot_errors = set()
             for sp1, sp2 in itertools.permutations(a['spots'], 2):
@@ -542,7 +555,7 @@ class GameLogic(object):
                 if 'coord' not in sp2:
                     if sp2['name'] not in spot_errors and any(link["to"] == sp2['name'] for link in sp1['local']):
                         spot_errors.add(sp2['name'])
-                        self._misc_errors.append(f'Expected coord for spot {sp["fullname"]} used in local rules')
+                        self._errors.append(f'Expected coord for spot {sp["fullname"]} used in local rules')
                     continue
                 coords, jumps, jumps_down = self.spot_distance(sp1, sp2)
                 if not coords:
@@ -695,7 +708,7 @@ class GameLogic(object):
 
         for s, info in sd.items():
             if disallowed := info.keys() - SETTING_FIELDS:
-                self._misc_errors.append(f'Unrecognized setting fields on setting {s}: {", ".join(disallowed)}')
+                self._errors.append(f'Unrecognized setting fields on setting {s}: {", ".join(disallowed)}')
                 continue
             if m := info.get('max', 0):
                 t = config_type(m)
@@ -705,13 +718,13 @@ class GameLogic(object):
             elif opts := info.get('opts', ()):
                 t, *types = {config_type(o) for o in opts}
                 if types:
-                    self._misc_errors.append(f'Setting {s} options are mixed types: {t}, {", ".join(types)}')
+                    self._errors.append(f'Setting {s} options are mixed types: {t}, {", ".join(types)}')
                     continue
                 _apply_override(s, t, info, f'opts, e.g. {opts[0]}')
                 if t == 'int':
                     info['rust_type'] = get_int_type_for_max(max(opts))
             elif 'type' not in info:
-                self._misc_errors.append(f'Setting {s} must declare one of: type, max, opts')
+                self._errors.append(f'Setting {s} must declare one of: type, max, opts')
                 continue
             if 'rust_type' not in info:
                 info['rust_type'] = ctx_types.get(info['type'], info['type'])
@@ -719,77 +732,43 @@ class GameLogic(object):
         return sd
 
 
-    @cached_property
-    def errors(self):
-        e = list(itertools.chain.from_iterable(pr.errors for pr in self.all_parse_results()))
+    def check_all(self):
         # Check vanilla items
         for pt in self.all_points():
             if 'item' in pt and pt['item'] is None:
-                e.append(f'{pt["id"]} specified with empty item')
+                self._errors.append(f'{pt["id"]} specified with empty item')
             elif 'item' in pt and pt['item'] != construct_id(pt['item']):
-                e.append(f'Invalid item name {pt["item"]!r} at {pt["id"]}; '
+                self._errors.append(f'Invalid item name {pt["item"]!r} at {pt["id"]}; '
                          f'did you mean {construct_id(pt["item"])!r}?')
         # Check used functions
         for func in BUILTINS.keys() & self.helpers.keys():
-            e.append(f'Cannot use reserved name {func!r} as helper')
+            self._errors.append(f'Cannot use reserved name {func!r} as helper')
         for pr in self.all_parse_results():
             for t in pr.parser.getTokenStream().tokens:
                 if pr.parser.symbolicNames[t.type] == 'FUNC' and t.text not in self.allowed_funcs:
-                    e.append(f'{pr.name}: Unrecognized function {t.text}')
+                    self._errors.append(f'{pr.name}: Unrecognized function {t.text}')
         # Check exits
         spot_ids = {sp['id'] for sp in self.spots()}
         for ex in self.exits():
             if get_exit_target(ex) not in spot_ids:
-                e.append(f'Unrecognized destination spot in exit {ex["fullname"]}')
+                self._errors.append(f'Unrecognized destination spot in exit {ex["fullname"]}')
         for item in self.collect:
             if item != construct_id(item):
-                e.append(f'Invalid item name {item!r} as collect rule; '
+                self._errors.append(f'Invalid item name {item!r} as collect rule; '
                          f'did you mean {construct_id(item)!r}?')
             elif item not in self.all_items:
-                e.append(f'Unrecognized item {item!r} as collect rule')
-                
-        # Do things that will fill _misc_errors
+                self._errors.append(f'Unrecognized item {item!r} as collect rule')
+
+    @cached_property
+    def errors(self):
+        # Do things that will fill _errors
+        self.check_all()
         self.context_values
         self.local_distances
         self.context_resetters
-        for m in self.non_default_movements:
-            if 'req' not in self.movements[m]:
-                self._misc_errors.append(f'Movement {m} must have a req')
-
-        # Check settings
-        def _visit(visitor, reverse=False):
-            if not reverse:
-                for pr in self.nonpoint_parse_results():
-                    visitor.visit(pr.tree, pr.name, self.get_default_ctx())
-            for pt in self.all_points():
-                if 'pr' in pt:
-                    visitor.visit(pt['pr'].tree, pt['pr'].name, self.get_local_ctx(pt))
-                if 'act' in pt:
-                    visitor.visit(pt['act'].tree, pt['act'].name, self.get_local_ctx(pt))
-            if reverse:
-                for pr in self.nonpoint_parse_results():
-                    visitor.visit(pr.tree, pr.name, self.get_default_ctx())
-            e.extend(visitor.errors)
-
-        sv = SettingVisitor(self.context_types, self.settings)
-        _visit(sv)
-        self.used_settings = sv.setting_options
-        
-        hv = HelperVisitor(self.helpers, self.context_types, self.settings)
-        _visit(hv, True)
-
-        cv = ContextVisitor(self.context_types, self.context_values)
-        _visit(cv)
-        self.context_str_values = cv.values
-        
-
-        for s in self.settings.keys() - self.used_settings.keys():
-            logging.warning(f'Did not find usage of setting {s}')
-
         self.item_stats
-        e.extend(self._i_visitor.errors)
-        e.extend(self._misc_errors)
-        return e
+
+        return self._errors
 
 
     @cached_property
@@ -813,9 +792,10 @@ class GameLogic(object):
 
     @cached_property
     def item_stats(self):
-        self._i_visitor = visitor = ItemVisitor(self.settings)
+        visitor = ItemVisitor(self.settings, self.vanilla_items)
         for pr in self.all_parse_results():
             visitor.visit(pr.tree, name=pr.name)
+        self._errors.extend(visitor.errors)
         return visitor.item_uses, visitor.item_max_counts
 
 
@@ -844,7 +824,7 @@ class GameLogic(object):
                 if len(names) == 1 and t1 == 'AreaId' and t2 == 'RegionId':
                     return
             if t1 != t2:
-                self._misc_errors.append(
+                self._errors.append(
                     f'context value type mismatch: {ctx} defined as {v1} ({t1}) '
                     f'and reused in {" > ".join(names)} as {v2} ({t2})')
         
@@ -855,7 +835,7 @@ class GameLogic(object):
             if len(names) == 2:
                 pc = construct_id(names[0], 'ctx', ctx[1:]).lower()
                 if pc in gc:
-                    self._misc_errors.append(
+                    self._errors.append(
                         f'Context parameter {ctx} in {" > ".join(names)} hides '
                         f'parameter {ctx} in {names[0]}')
 
@@ -864,7 +844,7 @@ class GameLogic(object):
                 _check_shadow(ctx, *names)
                 ctx = construct_id(*names, 'ctx', ctx[1:]).lower()
             if ctx in gc:
-                self._misc_errors.append(
+                self._errors.append(
                     f'Duplicate context parameter {ctx} in {" > ".join(names)}: '
                     'not allowed in "start" section')
             else:
@@ -881,10 +861,10 @@ class GameLogic(object):
 
         def _handle_here(ctx, val, *names):
             if ctx[0] == '_':
-                self._misc_errors.append(
+                self._errors.append(
                     f'"here" overrides cannot be local: {" > ".join(names)} {ctx}')
             elif ctx not in gc:
-                self._misc_errors.append(
+                self._errors.append(
                     f'"here" overrides must be predefined: {" > ".join(names)} {ctx}')
             else:
                 _check_types(gc[ctx], val, ctx, *names, here=True)
@@ -989,30 +969,30 @@ class GameLogic(object):
         for r in self.regions:
             for other_name in r.get('resets', ()):
                 if '>' in other_name:
-                    self._misc_errors.append(f'Region {r["name"]} may only reset other regions: {other_name!r}')
+                    self._errors.append(f'Region {r["name"]} may only reset other regions: {other_name!r}')
                     break
                 if other_name == r['name']:
-                    self._misc_errors.append(f'Use "enter" rule instead of a self-reset in region {r["name"]}')
+                    self._errors.append(f'Use "enter" rule instead of a self-reset in region {r["name"]}')
                     break
                 other = construct_id(other_name)
                 if other not in self.id_lookup:
-                    self._misc_errors.append(f'Unrecognized region in {r["name"]} resets: {other_name!r}')
+                    self._errors.append(f'Unrecognized region in {r["name"]} resets: {other_name!r}')
                 d['region'][r['id']].append(other)
         for a in self.areas():
             for other_name in a.get('resets', ()):
                 if other_name.count('>') > 1:
-                    self._misc_errors.append(f'Area {a["name"]} cannot reset non-Areas: {other_name!r}')
+                    self._errors.append(f'Area {a["name"]} cannot reset non-Areas: {other_name!r}')
                     break
                 if '>' not in other_name:
                     other = construct_id(a['region'], other_name)
                     if other not in self.id_lookup and construct_id(other_name) in self.id_lookup:
-                        self._misc_errors.append(f'Area {a["name"]} cannot reset Regions: {other_name!r} '
+                        self._errors.append(f'Area {a["name"]} cannot reset Regions: {other_name!r} '
                                                  f'(would be interpreted as \'{a["region"]} > {other_name}\' if it exists)')
                         break
                 else:
                     other = construct_id(other_name)
                 if other not in self.id_lookup:
-                    self._misc_errors.append(f'Unrecognized area in {a["name"]} resets: {other_name!r}')
+                    self._errors.append(f'Unrecognized area in {a["name"]} resets: {other_name!r}')
                     break
                 d['area'][a['id']].append(other)
         return d
