@@ -227,6 +227,27 @@ digraph AxiomVerge2 {
             label = "Boss Room";
             bgcolor = "white";
         }
+        subgraph cluster_Ebih__Drone_Room {
+            Ebih__Drone_Room__West_6 [label = "West 6"];
+            Ebih__Drone_Room__West_4 [label = "West 4"];
+            Ebih__Drone_Room__Pit_Left [label = "Pit Left"];
+            Ebih__Drone_Room__Portal [label = "Portal"];
+            Ebih__Drone_Room__Item [label = "Item"];
+            Ebih__Drone_Room__Middle_Platform [label = "Middle Platform"];
+            Ebih__Drone_Room__Portal_Exit [label = "Portal Exit"];
+            Ebih__Drone_Room__Moving_Platform [label = "Moving Platform"];
+            Ebih__Drone_Room__Left_Platform [label = "Left Platform"];
+            Ebih__Drone_Room__Tree [label = "Tree"];
+            Ebih__Drone_Room__East_4 [label = "East 4"];
+            label = "Drone Room";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Grid_25_2_6 {
+            Ebih__Grid_25_2_6__West_4 [label = "West 4"];
+            Ebih__Grid_25_2_6__Pit [label = "Pit"];
+            label = "Grid 25,2-6";
+            bgcolor = "white";
+        }
         label = "Mt Ebih";
         bgcolor = "lightgrey";
     }
@@ -495,6 +516,18 @@ digraph AxiomVerge2 {
     Ebih__Grid_21_1_5__East_6 -> Ebih__Boss_Room__West_6;
     Ebih__Boss_Room__West_6 -> Ebih__Grid_21_1_5__East_6;
     Ebih__Boss_Room__Lower_Tree -> Ebih__Boss_Room__Lower_Ledge;
+    Ebih__Boss_Room__East_6 -> Ebih__Drone_Room__West_6;
+    Ebih__Boss_Room__East_4 -> Ebih__Drone_Room__West_4;
+    Ebih__Drone_Room__West_6 -> Ebih__Boss_Room__East_6;
+    Ebih__Drone_Room__West_4 -> Ebih__Boss_Room__East_4;
+    Ebih__Drone_Room__Pit_Left -> Ebih__Drone_Room__West_6;
+    Ebih__Drone_Room__Item -> Ebih__Drone_Room__Portal_Exit;
+    Ebih__Drone_Room__Middle_Platform -> Ebih__Drone_Room__Portal_Exit;
+    Ebih__Drone_Room__Middle_Platform -> Ebih__Drone_Room__Portal;
+    Ebih__Drone_Room__Portal_Exit -> Ebih__Drone_Room__Moving_Platform;
+    Ebih__Drone_Room__East_4 -> Ebih__Grid_25_2_6__West_4;
+    Ebih__Grid_25_2_6__West_4 -> Ebih__Drone_Room__East_4;
+    Ebih__Grid_25_2_6__West_4 -> Ebih__Grid_25_2_6__Pit;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;

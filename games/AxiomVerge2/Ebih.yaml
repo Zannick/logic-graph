@@ -962,7 +962,7 @@ areas:
         - to: Lower Ledge
       exits:
         - to: Lower Ledge
-          req: $climb
+          req: $grab
           time: 1
     - name: Lower Ledge
       coord: [23.7, 5.2]
@@ -975,11 +975,15 @@ areas:
       coord: [23.95, 5.2]
       local:
         - to: Lower Ledge
+      exits:
+        - to: Drone Room > West 6
     - name: East 4
       coord: [23.95, 4]
       local:
         - to: Upper Tree
         - to: High Platform
+      exits:
+        - to: Drone Room > West 4
     - name: East Ledge
       coord: [23.8, 4.7]
       local:
@@ -1018,3 +1022,188 @@ areas:
         - to: Boss
         - to: High Platform
           jumps: 2
+
+- name: Drone Room
+  on_entry: $reset_old_area(^newpos)
+  reset:
+    _platform_moved: false
+  spots:
+    - name: West 6
+      coord: [24.05, 5.2]
+      local:
+        - to: Pit Left
+        - to: Middle Platform
+        - to: Left Platform
+          thru: [24.25, 4.9]
+        - to: Portal Exit
+          thru: [24.25, 4.9]
+      exits:
+        - to: Boss Room > East 6
+    - name: West 4
+      coord: [24.05, 4]
+      local:
+        - to: Left Platform
+        - to: Middle Platform
+          jumps_down: 1
+        - to: West 6
+          thru: [24.25, 4.9]
+          jumps_down: [1, 0]
+        - to: Pit Left
+          thru: [24.25, 4.9]
+      exits:
+        - to: Boss Room > East 4
+    - name: Pit Left
+      coord: [24.2, 5.6]
+      local:
+        - to: Portal
+        - to: West 6
+        - to: Middle Platform
+        - to: Left Platform
+      exits:
+        - to: West 6
+          req: $climb
+      actions:
+        - name: Activate Lift
+          req: Infect and ^_platform_moved
+          do: ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
+          time: 7
+        - name: Activate Lift But Get Off Early
+          req: Infect and ^_platform_moved
+          do: ^_platform_moved = false; ^position = `Ebih > Drone Room > West 6`
+          time: 1.4
+    - name: Portal
+      coord: [24.5, 5.8]
+      local:
+        - to: Pit Left
+          jumps: 2
+        - to: Item
+        - to: Middle Platform
+    - name: Item
+      coord: [24.7, 5.9]
+      local:
+        - to: Portal
+          jumps: 1
+        - to: Middle Platform
+      locations:
+        - name: Urn
+          item: Remote_Drone
+          canon: Remote_Drone
+          tags: [urn]
+      exits:
+        - to: Portal Exit
+          req: ^mode == 'drone'
+          time: 300
+    - name: Middle Platform
+      coord: [24.4, 5.3]
+      local:
+        - to: West 6
+          jumps: 1
+        - to: Pit Left
+          jumps_down: 1
+        - to: Portal
+          jumps_down: 1
+        - to: Item
+          jumps_down: 1
+        - to: Left Platform
+        - to: West 4
+      exits:
+        - to: Portal Exit
+          req: $grab
+          time: 2.5
+      hybrid:
+        - name: Urn Quick Grab
+          item: Remote_Drone
+          canon: Remote_Drone
+          to: Portal
+          req: Boomerang
+          time: 1
+          item_time: 5.5
+          tags: [urn]
+    - name: Portal Exit
+      coord: [24.5, 4.65]
+      local:
+        - to: West 6
+          thru: [24.25, 4.9]
+        - to: Left Platform
+        - to: Middle Platform
+          thru: [24.25, 4.9]
+        - to: Tree
+        - to: Moving Platform
+      actions:
+        - name: Activate Platform
+          req: Infect and not ^_platform_moved
+          do: ^_platform_moved = true
+          # Takes about 1 second to perform, then ~6.5 to reach the useful point below
+          # (not counting the urn pickup time!)
+          # I have to wait maybe 2-3 seconds total if getting Drone after this
+          # if the drone is retrieving it for indra, would probably involve more waiting
+          time: 4
+      exits:
+        # double-activate the platform to get on top of it?
+        - to: Moving Platform
+          req: Infect and not ^_platform_moved
+          time: 5
+        # It might be possible to get to the East 4 spot as drone with mist float
+        # TODO: Can Indra-mist fit in drone spaces? Can drone-mist?
+    - name: Moving Platform
+      coord: [24.5, 4.2]
+      local:
+        - to: Left Platform
+        - to: Portal Exit
+        - to: Tree
+        - to: West 6
+        - to: Pit Left
+      actions:
+        - name: Throw Drone
+          req: $can_deploy
+          do: ^mode = 'drone'; ^indra = `Ebih > Drone Room > Tree`; ^position = `Ebih > Drone Room > East 4`
+          time: 1.5
+    - name: Left Platform
+      coord: [24.3, 4.2]
+      local:
+        - to: West 4
+          jumps: 1
+        - to: Pit Left
+          jumps_down: 1
+        - to: West 6
+          thru: [24.25, 4.9]
+          jumps_down: [1, 0]
+        - to: Middle Platform
+          thru: [24.25, 4.9]
+          jumps_down: [1, 0]
+    - name: Tree
+      coord: [24.7, 4.8]
+      local:
+        - to: Portal Exit
+          jumps: 1
+        - to: Moving Platform
+    - name: East 4
+      coord: [24.95, 4]
+      local:
+        - to: Moving Platform
+        - to: Portal Exit
+        - to: Tree
+      exits:
+        - to: Grid 25,2-6 > West 4
+          req: ^mode == 'drone'
+          tags: [xshift]
+
+- name: Grid 25,2-6
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 4
+      coord: [25.05, 4]
+      exits:
+        - to: Pit
+          req: ^mode == 'drone'
+          time: 6.25
+        - to: Drone Room > East 4
+          req: ^mode == 'drone'
+          tags: [xshift]
+    - name: Pit
+      coord: [25.3, 5.9]
+      locations:
+        - name: Item
+          item: Special_Flask
+          tags: [flask]
+      # Exit back up may be possible with slingshot?

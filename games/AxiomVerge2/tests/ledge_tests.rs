@@ -6,7 +6,7 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use libaxiom_verge2::context::{Context, Status};
+use libaxiom_verge2::context::{enums, Context, Status};
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
 

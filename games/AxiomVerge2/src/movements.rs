@@ -639,6 +639,74 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1500,
         (false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => 3684,
+        (false, SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => 526,
+        (false, SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1228
+        }
+        // [1.0, 0.701754]
+        (false, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1701,
+        // [0.9, 0.7]
+        (false, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1599,
+        (false, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1400
+        }
+        (false, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
+        (false, SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
+        (false, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => 1200,
+        (false, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
+        (false, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
+        (false, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1228
+        }
+        (false, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            701
+        }
+        (false, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal) => 600,
+        (false, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Item) => 1052,
+        // [0.877193, 0.701754]
+        (false, SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => 1578,
+        // [0.877193, 0.526316]
+        (
+            false,
+            SpotId::Ebih__Drone_Room__Portal_Exit,
+            SpotId::Ebih__Drone_Room__Middle_Platform,
+        ) => 1403,
+        (false, SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => 701,
+        (false, SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1578
+        }
+        (false, SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            1399
+        }
+        (
+            false,
+            SpotId::Ebih__Drone_Room__Moving_Platform,
+            SpotId::Ebih__Drone_Room__Portal_Exit,
+        ) => 450,
+        (
+            false,
+            SpotId::Ebih__Drone_Room__Moving_Platform,
+            SpotId::Ebih__Drone_Room__Left_Platform,
+        ) => 701,
+        (false, SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Tree) => 701,
+        // [0.8, 0.701754]
+        (false, SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_6) => 1501,
+        (false, SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_4) => 877,
+        (false, SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            1499
+        }
+        // [0.8, 0.526316]
+        (
+            false,
+            SpotId::Ebih__Drone_Room__Left_Platform,
+            SpotId::Ebih__Drone_Room__Middle_Platform,
+        ) => 1326,
+        (false, SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => 701,
+        (false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => 1578,
+        (false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => {
+            1578
+        }
+        (false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
         (
             false,
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -1996,6 +2064,88 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1500,
         (true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => 3684,
+        (true, SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => 526,
+        (true, SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => 1228,
+        // [1.602467, 1.571348]
+        (true, SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Portal_Exit) => 3173,
+        // [1.602467, 3.119038]
+        (true, SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Left_Platform) => 4721,
+        // [1.0, 0.701754]
+        (true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1701,
+        // [0.9, 0.7]
+        (true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1599,
+        (true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => 1400,
+        (true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
+        (true, SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__West_6) => 1898,
+        (true, SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
+        (true, SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1602
+        }
+        (true, SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Left_Platform) => 6238,
+        (true, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => 1200,
+        (true, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
+        (true, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Middle_Platform) => 2266,
+        (true, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
+        (true, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Middle_Platform) => 2981,
+        (true, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_6) => 1228,
+        (true, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_4) => 5983,
+        (true, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            701
+        }
+        (true, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal) => 600,
+        (true, SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Item) => 1052,
+        (
+            true,
+            SpotId::Ebih__Drone_Room__Middle_Platform,
+            SpotId::Ebih__Drone_Room__Left_Platform,
+        ) => 4909,
+        // [0.877193, 0.701754]
+        (true, SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => 1578,
+        // [0.877193, 0.526316]
+        (
+            true,
+            SpotId::Ebih__Drone_Room__Portal_Exit,
+            SpotId::Ebih__Drone_Room__Middle_Platform,
+        ) => 1403,
+        (
+            true,
+            SpotId::Ebih__Drone_Room__Portal_Exit,
+            SpotId::Ebih__Drone_Room__Moving_Platform,
+        ) => 2000,
+        (true, SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Left_Platform) => {
+            2188
+        }
+        (true, SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => 701,
+        (true, SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__West_6) => 1578,
+        (true, SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            1399
+        }
+        (
+            true,
+            SpotId::Ebih__Drone_Room__Moving_Platform,
+            SpotId::Ebih__Drone_Room__Portal_Exit,
+        ) => 450,
+        (
+            true,
+            SpotId::Ebih__Drone_Room__Moving_Platform,
+            SpotId::Ebih__Drone_Room__Left_Platform,
+        ) => 701,
+        (true, SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Tree) => 701,
+        // [0.8, 0.701754]
+        (true, SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_6) => 1501,
+        (true, SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_4) => 877,
+        (true, SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => 1499,
+        // [0.8, 0.526316]
+        (
+            true,
+            SpotId::Ebih__Drone_Room__Left_Platform,
+            SpotId::Ebih__Drone_Room__Middle_Platform,
+        ) => 1326,
+        (true, SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => 701,
+        (true, SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Moving_Platform) => 2810,
+        (true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => 1578,
+        (true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => 1578,
+        (true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
         (
             true,
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -3201,6 +3351,54 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => true,
         (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => true,
         (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => true,
+        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => true,
+        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => true,
+        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Left_Platform) => true,
+        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Portal_Exit) => true,
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => true,
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => true,
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => true,
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => true,
+        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => true,
+        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__West_6) => true,
+        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Middle_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Left_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => true,
+        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => true,
+        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Middle_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => true,
+        (SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Middle_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_6) => true,
+        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => true,
+        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal) => true,
+        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Item) => true,
+        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Left_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_4) => true,
+        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => true,
+        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Left_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Middle_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => true,
+        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Moving_Platform) => true,
+        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Left_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Portal_Exit) => true,
+        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Tree) => true,
+        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__West_6) => true,
+        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => true,
+        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_4) => true,
+        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => true,
+        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_6) => true,
+        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => true,
+        (SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Moving_Platform) => true,
+        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => true,
+        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => true,
+        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }

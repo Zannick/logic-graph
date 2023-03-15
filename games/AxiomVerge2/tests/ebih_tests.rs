@@ -6,7 +6,7 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use libaxiom_verge2::context::{Context, Status};
+use libaxiom_verge2::context::{enums, Context, Status};
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
 
@@ -54,5 +54,59 @@ fn context_flasks_1_can_obtain_Melee_Damage() {
         ctx,
         SpotId::Ebih__Base_Camp__Save_Point,
         Item::Melee_Damage
+    );
+}
+#[test]
+fn start_Ebih__Ebih_East__East_Ledge_can_obtain_Remote_Drone() {
+    let (mut world, mut ctx) = shared_setup();
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Ebih__Ebih_East__East_Ledge,
+        Item::Remote_Drone
+    );
+}
+#[test]
+fn start_Ebih__Drone_Room__East_4_context_mode_drone_indra_Ebih__Drone_Room__Tree_can_reach_Ebih__Grid_25_2_6__Pit(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.mode = enums::Mode::Drone;
+    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
+
+    expect_any_route!(
+        &world,
+        ctx,
+        SpotId::Ebih__Drone_Room__East_4,
+        SpotId::Ebih__Grid_25_2_6__Pit
+    );
+}
+#[test]
+fn start_Ebih__Drone_Room__East_4_context_mode_drone_indra_Ebih__Drone_Room__Tree_can_obtain_Special_Flask(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.mode = enums::Mode::Drone;
+    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Ebih__Drone_Room__East_4,
+        Item::Special_Flask
+    );
+}
+#[test]
+fn start_Ebih__Drone_Room__East_4_with_Remote_Drone_context_mode_drone_indra_Ebih__Drone_Room__Tree_eventually_gets_Special_Flask(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.remote_drone = true;
+    ctx.mode = enums::Mode::Drone;
+    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
+
+    expect_eventually!(
+        &world,
+        ctx,
+        SpotId::Ebih__Drone_Room__East_4,
+        Item::Special_Flask
     );
 }

@@ -9,6 +9,7 @@ pub enum Item {
     #[default]
     None,
     Amashilama,
+    Anuman,
     Apocalypse_Bomb,
     Boomerang,
     Bronze_Axe,
@@ -41,7 +42,9 @@ pub enum Item {
     Ranged_Damage,
     Ranged_Speed,
     Record_Losses,
+    Remote_Drone,
     Slingshot_Hook,
+    Special_Flask,
     Station_Power,
     Switch_36_11,
     Switch_40_12,
@@ -52,6 +55,7 @@ impl fmt::Display for Item {
         match self {
             Item::None => write!(f, "{}", "None"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
+            Item::Anuman => write!(f, "{}", "Anuman"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             Item::Boomerang => write!(f, "{}", "Boomerang"),
             Item::Bronze_Axe => write!(f, "{}", "Bronze_Axe"),
@@ -84,7 +88,9 @@ impl fmt::Display for Item {
             Item::Ranged_Damage => write!(f, "{}", "Ranged_Damage"),
             Item::Ranged_Speed => write!(f, "{}", "Ranged_Speed"),
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
+            Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
+            Item::Special_Flask => write!(f, "{}", "Special_Flask"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
@@ -99,6 +105,7 @@ impl std::str::FromStr for Item {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Amashilama" => Ok(Item::Amashilama),
+            "Anuman" => Ok(Item::Anuman),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
             "Boomerang" => Ok(Item::Boomerang),
             "Bronze_Axe" => Ok(Item::Bronze_Axe),
@@ -131,7 +138,9 @@ impl std::str::FromStr for Item {
             "Ranged_Damage" => Ok(Item::Ranged_Damage),
             "Ranged_Speed" => Ok(Item::Ranged_Speed),
             "Record_Losses" => Ok(Item::Record_Losses),
+            "Remote_Drone" => Ok(Item::Remote_Drone),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
+            "Special_Flask" => Ok(Item::Special_Flask),
             "Station_Power" => Ok(Item::Station_Power),
             "Switch_36_11" => Ok(Item::Switch_36_11),
             "Switch_40_12" => Ok(Item::Switch_40_12),
@@ -148,14 +157,14 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Companies_Layoff
         | Item::Compass
         | Item::Dear_Ernest
-        | Item::Defeat_Ebih_Alu
         | Item::Escape
         | Item::Health
         | Item::Health_Fragment
         | Item::Heretics_Tablet
         | Item::Melee_Charge
         | Item::Notes_2053_02_27
-        | Item::Record_Losses => true,
+        | Item::Record_Losses
+        | Item::Special_Flask => true,
         _ => false,
     }
 }

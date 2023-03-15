@@ -36,6 +36,14 @@ pub fn access_can_damage(ctx: &Context) -> bool {
     // $can_damage
     helper__can_damage!(ctx)
 }
+pub fn access_can_deploy(ctx: &Context) -> bool {
+    // $can_deploy
+    helper__can_deploy!(ctx)
+}
+pub fn access_can_recall(ctx: &Context) -> bool {
+    // $can_recall
+    helper__can_recall!(ctx)
+}
 pub fn access_climb(ctx: &Context) -> bool {
     // $climb
     helper__climb!(ctx)
@@ -55,6 +63,24 @@ pub fn access_drone_melee_speed(ctx: &Context) -> bool {
 pub fn access_drone_melee_speed__2(ctx: &Context) -> bool {
     // Drone_Melee_Speed{2}
     ctx.count(Item::Drone_Melee_Speed) >= 2
+}
+pub fn access_ebih__drone_room__pit_left___activate_lift_but_get_off_early_req(
+    ctx: &Context,
+) -> bool {
+    // Infect and ^_platform_moved
+    (ctx.has(Item::Infect) && ctx.ebih__drone_room__ctx__platform_moved())
+}
+pub fn access_ebih__drone_room__pit_left___activate_lift_req(ctx: &Context) -> bool {
+    // Infect and ^_platform_moved
+    (ctx.has(Item::Infect) && ctx.ebih__drone_room__ctx__platform_moved())
+}
+pub fn access_ebih__drone_room__portal_exit___activate_platform_req(ctx: &Context) -> bool {
+    // Infect and not ^_platform_moved
+    (ctx.has(Item::Infect) && !ctx.ebih__drone_room__ctx__platform_moved())
+}
+pub fn access_ebih__drone_room__portal_exit__moving_platform(ctx: &Context) -> bool {
+    // Infect and not ^_platform_moved
+    (ctx.has(Item::Infect) && !ctx.ebih__drone_room__ctx__platform_moved())
 }
 pub fn access_ebih__ebih_east__dispenser___activate_lift_req(ctx: &Context) -> bool {
     // Infect and ^_platform2_moved
@@ -108,9 +134,9 @@ pub fn access_infect_and___melee_or_boomerang(ctx: &Context) -> bool {
     // Infect and ($melee or Boomerang)
     (ctx.has(Item::Infect) && (helper__melee!(ctx) || ctx.has(Item::Boomerang)))
 }
-pub fn access_infect_and_melee_damage(ctx: &Context) -> bool {
-    // Infect and Melee_Damage
-    (ctx.has(Item::Infect) && ctx.has(Item::Melee_Damage))
+pub fn access_infect_and_defeat_ebih_alu(ctx: &Context) -> bool {
+    // Infect and Defeat_Ebih_Alu
+    (ctx.has(Item::Infect) && ctx.has(Item::Defeat_Ebih_Alu))
 }
 pub fn access_infection_level(ctx: &Context) -> bool {
     // Infection_Level
@@ -203,6 +229,10 @@ pub fn access_ranged_speed__2(ctx: &Context) -> bool {
     // Ranged_Speed{2}
     ctx.count(Item::Ranged_Speed) >= 2
 }
+pub fn access_remote_drone(ctx: &Context) -> bool {
+    // Remote_Drone
+    ctx.has(Item::Remote_Drone)
+}
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power
     ctx.has(Item::Station_Power)
@@ -228,6 +258,35 @@ pub fn access_within_menu(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     })
+}
+pub fn action_ebih__drone_room__pit_left___activate_lift__do(ctx: &mut Context) {
+    // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
+    ctx.ebih__drone_room__ctx__platform_moved = false;
+    ctx.position = SpotId::Ebih__Drone_Room__Moving_Platform;
+}
+pub fn action_has_effect_ebih__drone_room__pit_left___activate_lift__do(ctx: &Context) -> bool {
+    ctx.ebih__drone_room__ctx__platform_moved != false
+        || ctx.position != SpotId::Ebih__Drone_Room__Moving_Platform
+}
+pub fn action_ebih__drone_room__pit_left___activate_lift_but_get_off_early__do(ctx: &mut Context) {
+    // ^_platform_moved = false; ^position = `Ebih > Drone Room > West 6`
+    ctx.ebih__drone_room__ctx__platform_moved = false;
+    ctx.position = SpotId::Ebih__Drone_Room__West_6;
+}
+pub fn action_has_effect_ebih__drone_room__pit_left___activate_lift_but_get_off_early__do(
+    ctx: &Context,
+) -> bool {
+    ctx.ebih__drone_room__ctx__platform_moved != false
+        || ctx.position != SpotId::Ebih__Drone_Room__West_6
+}
+pub fn action_ebih__drone_room__portal_exit___activate_platform__do(ctx: &mut Context) {
+    // ^_platform_moved = true
+    ctx.ebih__drone_room__ctx__platform_moved = true;
+}
+pub fn action_has_effect_ebih__drone_room__portal_exit___activate_platform__do(
+    ctx: &Context,
+) -> bool {
+    ctx.ebih__drone_room__ctx__platform_moved != true
 }
 pub fn action_ebih__ebih_east__dispenser___activate_lift__do(ctx: &mut Context) {
     // ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
@@ -291,6 +350,37 @@ pub fn action_last__position(ctx: &mut Context) {
 }
 pub fn action_has_effect_last__position(ctx: &Context) -> bool {
     ctx.last != ctx.position()
+}
+pub fn action_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(
+    ctx: &mut Context,
+) {
+    // ^mode = 'drone'; ^indra = `Ebih > Drone Room > Tree`; ^position = `Ebih > Drone Room > East 4`
+    ctx.mode = enums::Mode::Drone;
+    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
+    ctx.position = SpotId::Ebih__Drone_Room__East_4;
+}
+pub fn action_has_effect_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(
+    ctx: &Context,
+) -> bool {
+    ctx.mode != enums::Mode::Drone
+        || ctx.indra != SpotId::Ebih__Drone_Room__Tree
+        || ctx.position != SpotId::Ebih__Drone_Room__East_4
+}
+pub fn action_mode__drone_indra__position(ctx: &mut Context) {
+    // ^mode = 'drone'; ^indra = ^position
+    ctx.mode = enums::Mode::Drone;
+    ctx.indra = ctx.position();
+}
+pub fn action_has_effect_mode__drone_indra__position(ctx: &Context) -> bool {
+    ctx.mode != enums::Mode::Drone || ctx.indra != ctx.position()
+}
+pub fn action_mode__indra_position__indra(ctx: &mut Context) {
+    // ^mode = 'Indra'; ^position = ^indra
+    ctx.mode = enums::Mode::Indra;
+    ctx.position = ctx.indra();
+}
+pub fn action_has_effect_mode__indra_position__indra(ctx: &Context) -> bool {
+    ctx.mode != enums::Mode::Indra || ctx.position != ctx.indra()
 }
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)

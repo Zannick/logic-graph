@@ -87,6 +87,10 @@ where
     }
 
     pub fn export(self) -> io::Result<()> {
+        if self.count == 0 {
+            println!("No solutions");
+            return Ok(());
+        }
         let mut vecs: Vec<Vec<ContextWrapper<T>>> = self.map.into_values().collect();
         let mut file = self.file;
         for vec in vecs.iter_mut() {

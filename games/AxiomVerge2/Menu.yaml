@@ -41,6 +41,7 @@ areas:
         - to: Infection
           time: 0.1
         - to: Drone
+          req: Remote_Drone
           time: 0.1
     - name: Combat
       locations:
@@ -106,6 +107,7 @@ areas:
         - to: Infection
           time: 0.1
         - to: Drone
+          req: Remote_Drone
           time: 0.1
     - name: Infection
       locations:
@@ -166,6 +168,7 @@ areas:
         - to: Combat
           time: 0.1
         - to: Drone
+          req: Remote_Drone
           time: 0.1
     - name: Drone
       locations:

@@ -20,7 +20,7 @@ objectives:
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: Infect and Melee_Damage
+  Progress%: Infect and Defeat_Ebih_Alu
 
 movements:
   default:
@@ -81,12 +81,26 @@ warps:
     req: WITHIN `Menu`
     to: ^last
 
+actions:
+  - name: Recall Drone
+    req: $can_recall
+    do: ^mode = 'Indra'; ^position = ^indra
+    # Can open the menu during this time
+    time: 3
+  - name: Deploy Drone
+    req: $can_deploy
+    do: ^mode = 'drone'; ^indra = ^position
+    time: 0.5
+
 helpers:
   $melee: Ice_Axe or ^mode == 'drone'
   $can_damage: $melee or Boomerang
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
+  $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
+  $can_recall: ^mode == 'drone' and not Anuman
+
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
   $offset: major_glitches and $melee

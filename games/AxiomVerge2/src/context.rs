@@ -65,14 +65,17 @@ pub struct Context {
     pub ebih__waterfall__ctx__right_block: bool,
     pub ebih__ebih_east__ctx__platform1_moved: bool,
     pub ebih__ebih_east__ctx__platform2_moved: bool,
+    pub ebih__drone_room__ctx__platform_moved: bool,
     // settings
     pub boomerang_steering: bool,
     pub major_glitches: bool,
     pub minor_glitches: bool,
     // items
     pub amashilama: bool,
+    pub anuman: bool,
     pub apocalypse_bomb: bool,
     pub boomerang: bool,
+    pub defeat_ebih_alu: bool,
     pub drone_melee_damage: i8,
     pub drone_melee_speed: i8,
     pub health_upgrade: i8,
@@ -89,6 +92,7 @@ pub struct Context {
     pub nano_points: i8,
     pub ranged_damage: i8,
     pub ranged_speed: i8,
+    pub remote_drone: bool,
     pub slingshot_hook: bool,
     pub station_power: bool,
     pub switch_36_11: bool,
@@ -116,14 +120,17 @@ impl Default for Context {
             ebih__waterfall__ctx__right_block: false,
             ebih__ebih_east__ctx__platform1_moved: false,
             ebih__ebih_east__ctx__platform2_moved: false,
+            ebih__drone_room__ctx__platform_moved: false,
             // settings
             boomerang_steering: Default::default(),
             major_glitches: Default::default(),
             minor_glitches: Default::default(),
             // items
             amashilama: Default::default(),
+            anuman: Default::default(),
             apocalypse_bomb: Default::default(),
             boomerang: Default::default(),
+            defeat_ebih_alu: Default::default(),
             drone_melee_damage: Default::default(),
             drone_melee_speed: Default::default(),
             health_upgrade: Default::default(),
@@ -140,6 +147,7 @@ impl Default for Context {
             nano_points: Default::default(),
             ranged_damage: Default::default(),
             ranged_speed: Default::default(),
+            remote_drone: Default::default(),
             slingshot_hook: Default::default(),
             station_power: Default::default(),
             switch_36_11: Default::default(),
@@ -158,13 +166,15 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 24;
+    const NUM_ITEMS: i32 = 27;
 
     fn has(&self, item: Item) -> bool {
         match item {
             Item::Amashilama => self.amashilama,
+            Item::Anuman => self.anuman,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Boomerang => self.boomerang,
+            Item::Defeat_Ebih_Alu => self.defeat_ebih_alu,
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
             Item::Health_Upgrade => self.health_upgrade >= 1,
@@ -181,6 +191,7 @@ impl context::Ctx for Context {
             Item::Nano_Points => self.nano_points >= 1,
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
+            Item::Remote_Drone => self.remote_drone,
             Item::Slingshot_Hook => self.slingshot_hook,
             Item::Station_Power => self.station_power,
             Item::Switch_36_11 => self.switch_36_11,
@@ -192,8 +203,10 @@ impl context::Ctx for Context {
     fn count(&self, item: Item) -> i16 {
         match item {
             Item::Amashilama => self.amashilama.into(),
+            Item::Anuman => self.anuman.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Boomerang => self.boomerang.into(),
+            Item::Defeat_Ebih_Alu => self.defeat_ebih_alu.into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
@@ -210,6 +223,7 @@ impl context::Ctx for Context {
             Item::Nano_Points => self.nano_points.into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
+            Item::Remote_Drone => self.remote_drone.into(),
             Item::Slingshot_Hook => self.slingshot_hook.into(),
             Item::Station_Power => self.station_power.into(),
             Item::Switch_36_11 => self.switch_36_11.into(),
@@ -224,11 +238,17 @@ impl context::Ctx for Context {
                 self.amashilama = true;
                 rules::action_save__glacier__revival__save_point(self);
             }
+            Item::Anuman => {
+                self.anuman = true;
+            }
             Item::Apocalypse_Bomb => {
                 self.apocalypse_bomb = true;
             }
             Item::Boomerang => {
                 self.boomerang = true;
+            }
+            Item::Defeat_Ebih_Alu => {
+                self.defeat_ebih_alu = true;
             }
             Item::Drone_Melee_Damage => {
                 self.drone_melee_damage += 1;
@@ -278,6 +298,9 @@ impl context::Ctx for Context {
             }
             Item::Ranged_Speed => {
                 self.ranged_speed += 1;
+            }
+            Item::Remote_Drone => {
+                self.remote_drone = true;
             }
             Item::Slingshot_Hook => {
                 self.slingshot_hook = true;
@@ -341,6 +364,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Ebih__Drone_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Ebih__Ebih_East => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -362,6 +390,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Ebih__Grid_25_10_12 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Grid_25_2_6 => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -388,6 +421,7 @@ impl context::Ctx for Context {
     fn reset_all(&mut self) {
         self.ebih__ebih_east__ctx__platform1_moved = false;
         self.ebih__ebih_east__ctx__platform2_moved = false;
+        self.ebih__drone_room__ctx__platform_moved = false;
     }
 
     fn reset_region(&mut self, region_id: RegionId) {}
@@ -396,6 +430,9 @@ impl context::Ctx for Context {
             AreaId::Ebih__Ebih_East => {
                 self.ebih__ebih_east__ctx__platform1_moved = false;
                 self.ebih__ebih_east__ctx__platform2_moved = false;
+            }
+            AreaId::Ebih__Drone_Room => {
+                self.ebih__drone_room__ctx__platform_moved = false;
             }
             _ => (),
         }
@@ -577,6 +614,13 @@ impl Context {
         match get_area(self.position) {
             _ => match get_region(self.position) {
                 _ => self.ebih__ebih_east__ctx__platform2_moved,
+            },
+        }
+    }
+    pub fn ebih__drone_room__ctx__platform_moved(&self) -> bool {
+        match get_area(self.position) {
+            _ => match get_region(self.position) {
+                _ => self.ebih__drone_room__ctx__platform_moved,
             },
         }
     }

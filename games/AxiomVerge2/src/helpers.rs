@@ -55,6 +55,29 @@ macro_rules! helper__hook {
     }};
 }
 
+/// $can_deploy (  )
+/// Remote_Drone and ^mode != 'drone' and not Anuman
+#[macro_export]
+macro_rules! helper__can_deploy {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        (($ctx.has(Item::Remote_Drone) && $ctx.mode() != enums::Mode::Drone)
+            && !$ctx.has(Item::Anuman))
+    }};
+}
+
+/// $can_recall (  )
+/// ^mode == 'drone' and not Anuman
+#[macro_export]
+macro_rules! helper__can_recall {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() == enums::Mode::Drone && !$ctx.has(Item::Anuman))
+    }};
+}
+
 /// $max_energy (  )
 /// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 #[macro_export]
