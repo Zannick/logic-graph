@@ -72,7 +72,7 @@ fn with_Boomerang_eventually_gets_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
     ctx.boomerang = true;
 
-    expect_eventually!(
+    expect_eventually_gets!(
         &world,
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,
@@ -84,7 +84,7 @@ fn settings_major_glitches_True_eventually_gets_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
     ctx.major_glitches = true;
 
-    expect_eventually!(
+    expect_eventually_gets!(
         &world,
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,
@@ -95,7 +95,7 @@ fn settings_major_glitches_True_eventually_gets_Ledge_Grab() {
 fn eventually_gets_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
 
-    expect_eventually!(
+    expect_eventually_gets!(
         &world,
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,
@@ -209,7 +209,7 @@ fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab_iteration_limit_500()
             Err(vec.join("\n"))
         }
     };
-    expect_eventually_requires!(
+    expect_eventually_requires_to_obtain!(
         &world,
         ctx,
         SpotId::Glacier__Vertical_Room_Top__East_9,

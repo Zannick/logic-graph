@@ -39,7 +39,7 @@ pub trait Location: Accessible {
 
 pub trait Exit: Accessible {
     type ExitId: Id;
-    type SpotId: Id;
+    type SpotId: Id + Default;
     type LocId: Id;
 
     fn id(&self) -> Self::ExitId;
@@ -58,7 +58,7 @@ pub trait Action: Accessible {
 
 pub trait Warp: Accessible {
     type WarpId: Id;
-    type SpotId: Id;
+    type SpotId: Id + Default;
 
     fn id(&self) -> Self::WarpId;
     fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
@@ -110,6 +110,13 @@ pub trait World {
         &self,
         loc_id: <Self::Location as Location>::LocId,
     ) -> <Self::Exit as Exit>::SpotId;
+    fn get_action_spot(
+        &self,
+        act_id: <Self::Action as Action>::ActionId,
+    ) -> <Self::Exit as Exit>::SpotId;
+    fn is_global_action(&self, act_id: <Self::Action as Action>::ActionId) -> bool {
+        self.get_action_spot(act_id) == <Self::Exit as Exit>::SpotId::default()
+    }
 
     fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context);
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;

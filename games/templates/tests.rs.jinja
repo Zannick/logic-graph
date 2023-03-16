@@ -102,14 +102,20 @@ fn {{ test_case|construct_test_name }}() {
     expect_any_route!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.can_reach|construct_id }});
 %% elif test_case.cannot_reach
     expect_no_route!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.cannot_reach|construct_id }});
+%% elif test_case.can_access
+    expect_accessible!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.can_access|construct_id }});
+%% elif test_case.cannot_access
+    expect_inaccessible!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.cannot_access|construct_id }});
+%% elif test_case.can_activate
+    expect_action_accessible!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.can_activate|construct_id }});
+%% elif test_case.cannot_activate
+    expect_action_inaccessible!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.cannot_activate|construct_id }});
 %% elif test_case.path
     expect_this_route!(&world, ctx, {{ start(test_case, test_file.all) }}, vec![
 %% for spot in test_case.path
         SpotId::{{ spot|construct_id }},
 %% endfor
     ]);
-%% elif test_case.eventually_gets
-    expect_eventually!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_gets }});
 %% elif test_case.requires
     let mut ctx2 = ctx.clone();
     {{ setup(test_case.requires, ctx='ctx2') }}
@@ -119,10 +125,32 @@ fn {{ test_case|construct_test_name }}() {
     {%- elif test_case.requires.to_reach -%}
     expect_no_route!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.requires.to_reach|construct_id }});
     expect_any_route!(&world, ctx2, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.requires.to_reach|construct_id }});
+    {%- elif test_case.requires.to_access -%}
+    expect_inaccessible!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.requires.to_access|construct_id }});
+    expect_accessible!(&world, ctx2, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.requires.to_access|construct_id }});
+    {%- elif test_case.requires.to_activate -%}
+    expect_action_inaccessible!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.requires.to_activate|construct_id }});
+    expect_action_accessible!(&world, ctx2, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.requires.to_activate|construct_id }});
     {%- endif %}
+%% elif test_case.eventually_gets
+    expect_eventually_gets!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_gets|construct_id }});
+%% elif test_case.eventually_reaches
+    expect_eventually_reaches!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.eventually_reaches|construct_id }});
+%% elif test_case.eventually_accesses
+    expect_eventually_accesses!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.eventually_accesses|construct_id }});
+%% elif test_case.eventually_activates
+    expect_eventually_activates!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.eventually_activates|construct_id }});
 %% elif test_case.eventually_requires
     let verify = {{ verify_func(test_case.eventually_requires) }};
-    expect_eventually_requires!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_requires.to_obtain }}, verify, {{ test_case.iteration_limit or 1000 }});
+    {% if test_case.eventually_requires.to_obtain -%}
+    expect_eventually_requires_to_obtain!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_requires.to_obtain|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    {%- elif test_case.eventually_requires.to_reach -%}
+    expect_eventually_requires_to_reach!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.eventually_requires.to_reach|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    {%- elif test_case.eventually_requires.to_access -%}
+    expect_eventually_requires_to_access!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.eventually_requires.to_access|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    {%- elif test_case.eventually_requires.to_activate -%}
+    expect_eventually_requires_to_activate!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.eventually_requires.to_activate|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    {%- endif %}
 %% endif
 }
 %% endfor

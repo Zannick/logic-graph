@@ -3666,6 +3666,36 @@ impl world::World for World {
         }
     }
 
+    fn get_action_spot(&self, act_id: ActionId) -> SpotId {
+        match act_id {
+            ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
+            ActionId::Ebih__Ebih_West__Mid_Save__Save => SpotId::Ebih__Ebih_West__Mid_Save,
+            ActionId::Ebih__Ebih_West__Upper_Save__Save => SpotId::Ebih__Ebih_West__Upper_Save,
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                SpotId::Ebih__Ebih_East__Moving_Platform
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift
+            | ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                SpotId::Ebih__Ebih_East__Lower_Moving_Platform
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                SpotId::Ebih__Ebih_East__Dispenser
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift
+            | ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                SpotId::Ebih__Drone_Room__Pit_Left
+            }
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                SpotId::Ebih__Drone_Room__Portal_Exit
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                SpotId::Ebih__Drone_Room__Moving_Platform
+            }
+            ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
+            _ => SpotId::None,
+        }
+    }
+
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
             if unused_item(world::Location::item(loc)) {
@@ -4100,7 +4130,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Ebih__Grid_25_2_6__Pit__Item => Location {
             id: LocationId::Ebih__Grid_25_2_6__Pit__Item,
             canonical: CanonId::None,
-            item: Item::Special_Flask,
+            item: Item::Flask,
             price: Currency::Free,
             time: 5500,
             exit_id: None,

@@ -6,8 +6,11 @@ from Utils import *
 TEST_FILE_FIELDS = {'name', 'all', 'tests', '_filename'}
 TEST_SETUP_FIELDS = {'name', 'with', 'context', 'settings', 'visited', 'skipped', 'start'}
 TEST_TYPES = {'can_obtain', 'cannot_obtain', 'can_reach', 'cannot_reach',
-               'eventually_gets', 'path', 'requires', 'eventually_requires'}
-TEST_REQUIRES_TYPES = {'to_reach', 'to_obtain'}
+              'can_access', 'cannot_access', 'can_activate', 'cannot_activate',
+              'eventually_gets', 'eventually_reaches', 'eventually_accesses',
+              'eventually_activates', 'path',
+              'requires', 'eventually_requires'}
+TEST_REQUIRES_TYPES = {'to_reach', 'to_obtain', 'to_access', 'to_activate'}
 TEST_EV_REQUIRES_FIELDS = {'iteration_limit'}
 
 class TestProcessor(object):
@@ -80,8 +83,12 @@ class TestProcessor(object):
     def _check_test(self, testtype: str, testval: Any, src: str):
         if testtype in ('can_obtain', 'cannot_obtain', 'eventually_gets'):
             self._check_item(testval, src)
-        elif testtype in ('can_reach', 'cannot_reach'):
+        elif testtype in ('can_reach', 'cannot_reach', 'eventually_reaches'):
             self._check_spot(testval, src)
+        elif testtype in ('can_access', 'cannot_access', 'eventually_accesses'):
+            self._check_leaf('location', testval, src)
+        elif testtype in ('can_activate', 'cannot_activate', 'eventually_activates'):
+            self._check_leaf('action', testval, src)
         elif testtype == 'path':
             if not isinstance(testval, (tuple, list)):
                 self.errors.append(f'Invalid path in {src}: expected list but got {type(testval)}')
@@ -107,8 +114,14 @@ class TestProcessor(object):
                     subtype = types.pop()
                     if subtype == 'to_obtain':
                         self._check_item(testval[subtype], src + '.' + subtype)
-                    else:
+                    elif subtype == 'to_reach':
                         self._check_spot(testval[subtype], src + '.' + subtype)
+                    elif subtype == 'to_access':
+                        self._check_leaf('location', testval[subtype], src + '.' + subtype)
+                    elif subtype == 'to_activate':
+                        self._check_leaf('action', testval[subtype], src + '.' + subtype)
+                    else:
+                        self.errors.append(f'Somehow missed a {testtype} subtype found in {src}: {subtype}')
 
     def _check_item(self, item: str, src: str):
         if item not in self.all_items:

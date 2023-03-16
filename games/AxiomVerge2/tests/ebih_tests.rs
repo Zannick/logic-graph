@@ -82,31 +82,42 @@ fn start_Ebih__Drone_Room__East_4_context_mode_drone_indra_Ebih__Drone_Room__Tre
     );
 }
 #[test]
-fn start_Ebih__Drone_Room__East_4_context_mode_drone_indra_Ebih__Drone_Room__Tree_can_obtain_Special_Flask(
+fn start_Ebih__Drone_Room__West_6_with_Infect__Remote_Drone_can_activate_Ebih__Drone_Room__Moving_Platform__Throw_Drone(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.mode = enums::Mode::Drone;
-    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
+    ctx.infect = true;
+    ctx.remote_drone = true;
 
-    expect_obtainable!(
+    expect_action_accessible!(
         &world,
         ctx,
-        SpotId::Ebih__Drone_Room__East_4,
-        Item::Special_Flask
+        SpotId::Ebih__Drone_Room__West_6,
+        ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone
     );
 }
 #[test]
-fn start_Ebih__Drone_Room__East_4_with_Remote_Drone_context_mode_drone_indra_Ebih__Drone_Room__Tree_eventually_gets_Special_Flask(
+fn start_Ebih__Ebih_East__Corner_with_Infect_can_activate_Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.remote_drone = true;
-    ctx.mode = enums::Mode::Drone;
-    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
+    ctx.infect = true;
 
-    expect_eventually!(
+    expect_action_accessible!(
         &world,
         ctx,
-        SpotId::Ebih__Drone_Room__East_4,
-        Item::Special_Flask
+        SpotId::Ebih__Ebih_East__Corner,
+        ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift
+    );
+}
+#[test]
+fn start_Ebih__Ebih_East__West_8_with_Infect_can_activate_Ebih__Ebih_East__Moving_Platform__Activate_Ride(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.infect = true;
+
+    expect_action_accessible!(
+        &world,
+        ctx,
+        SpotId::Ebih__Ebih_East__West_8,
+        ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride
     );
 }

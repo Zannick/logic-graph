@@ -192,6 +192,14 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
+    pub fn last_step(&self) -> Option<History<T>> {
+        if let Some(node) = &self.history {
+            Some(node.entry)
+        } else {
+            None
+        }
+    }
+
     pub fn elapse(&mut self, t: i32) {
         self.elapsed += t;
     }
@@ -306,7 +314,7 @@ impl<T: Ctx> ContextWrapper<T> {
     where
         W: World<Action = A>,
         T: Ctx<World = W>,
-        A: Action + Accessible<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        A: Action<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         action.perform(&mut self.ctx);
         self.elapse(action.time());

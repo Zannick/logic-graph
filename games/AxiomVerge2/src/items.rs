@@ -44,7 +44,6 @@ pub enum Item {
     Record_Losses,
     Remote_Drone,
     Slingshot_Hook,
-    Special_Flask,
     Station_Power,
     Switch_36_11,
     Switch_40_12,
@@ -90,7 +89,6 @@ impl fmt::Display for Item {
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
-            Item::Special_Flask => write!(f, "{}", "Special_Flask"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
@@ -140,7 +138,6 @@ impl std::str::FromStr for Item {
             "Record_Losses" => Ok(Item::Record_Losses),
             "Remote_Drone" => Ok(Item::Remote_Drone),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
-            "Special_Flask" => Ok(Item::Special_Flask),
             "Station_Power" => Ok(Item::Station_Power),
             "Switch_36_11" => Ok(Item::Switch_36_11),
             "Switch_40_12" => Ok(Item::Switch_40_12),
@@ -163,8 +160,7 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Heretics_Tablet
         | Item::Melee_Charge
         | Item::Notes_2053_02_27
-        | Item::Record_Losses
-        | Item::Special_Flask => true,
+        | Item::Record_Losses => true,
         _ => false,
     }
 }

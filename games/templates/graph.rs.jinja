@@ -300,6 +300,17 @@ impl world::World for World {
         }
     }
 
+    fn get_action_spot(&self, act_id: ActionId) -> SpotId {
+        match act_id {
+%% for spot in gl.spots()
+%% if spot.actions
+            ActionId::{{ spot.actions|map(attribute='id')|sort|join(' | ActionId::') }} => SpotId::{{ spot.id }},
+%% endif
+%% endfor
+            _ => SpotId::None,
+        }
+    }
+
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
             if unused_item(world::Location::item(loc)) {

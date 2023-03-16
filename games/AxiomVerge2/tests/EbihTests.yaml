@@ -26,3 +26,24 @@ tests:
       mode: drone
       indra: Ebih > Drone Room > Tree
     can_reach: Ebih > Grid 25,2-6 > Pit
+
+  - start: Ebih > Drone Room > West 6
+    with:
+      - Infect
+      - Remote_Drone
+    can_activate: Ebih > Drone Room > Moving Platform > Throw Drone
+
+  - start: Ebih > Ebih East > Corner
+    with:
+      - Infect
+    can_activate: Ebih > Ebih East > Lower Moving Platform > Activate Lift
+
+  - start: Ebih > Ebih East > West 8
+    with:
+      - Infect
+    can_activate: Ebih > Ebih East > Moving Platform > Activate Ride
+
+  - start: Ebih > Ebih East > West 8
+    with:
+      - Infect
+    eventually_reaches: Ebih > Ebih East > East Ledge
