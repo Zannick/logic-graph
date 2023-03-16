@@ -1309,6 +1309,7 @@ pub enum LocationId {
     Antarctica__Building_2U_Corner__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
     Antarctica__Shed__Interior__Shelf,
+    Ebih__Boss_Room__Boss__Boss_Reward,
     Ebih__Boss_Room__Boss__Fight_Alu,
     Ebih__Boss_Room__Boss__Hack_Alu,
     Ebih__Boss_Room__East_Ledge__Item,
@@ -1385,6 +1386,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Antarctica__Shed__Interior__Shelf => {
                 write!(f, "{}", "Antarctica > Shed > Interior: Shelf")
+            }
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
+                write!(f, "{}", "Ebih > Boss Room > Boss: Boss Reward")
             }
             LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
                 write!(f, "{}", "Ebih > Boss Room > Boss: Fight Alu")
@@ -1621,6 +1625,9 @@ impl std::str::FromStr for LocationId {
             }
             "Antarctica > Shed > Interior: Shelf" => {
                 Ok(LocationId::Antarctica__Shed__Interior__Shelf)
+            }
+            "Ebih > Boss Room > Boss: Boss Reward" => {
+                Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward)
             }
             "Ebih > Boss Room > Boss: Fight Alu" => {
                 Ok(LocationId::Ebih__Boss_Room__Boss__Fight_Alu)
@@ -2902,6 +2909,9 @@ impl world::Accessible for Location {
                 LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => true,
                 LocationId::Antarctica__Power_Room__Switch__Flip => true,
                 LocationId::Antarctica__Shed__Interior__Shelf => true,
+                LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
+                    rules::access_defeat_ebih_alu(&ctx)
+                }
                 LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
                     rules::access_melee_or_boomerang(&ctx)
                 }
@@ -3325,8 +3335,12 @@ impl world::Accessible for Action {
                 ActionId::Ebih__Ebih_West__Mid_Save__Save => true,
                 ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
                 ActionId::Glacier__Revival__Save_Point__Save => true,
-                ActionId::Global__Deploy_Drone => rules::access_can_deploy(&ctx),
-                ActionId::Global__Recall_Drone => rules::access_can_recall(&ctx),
+                ActionId::Global__Deploy_Drone => {
+                    rules::access_not_within_menu_and_can_deploy(&ctx)
+                }
+                ActionId::Global__Recall_Drone => {
+                    rules::access_not_within_menu_and_can_recall(&ctx)
+                }
             }
     }
     fn time(&self) -> i32 {
@@ -3587,7 +3601,8 @@ impl world::World for World {
             }
             LocationId::Ebih__Ebih_East__Corner__Urn => SpotId::Ebih__Ebih_East__Corner,
             LocationId::Ebih__Ebih_East__Dispenser__Vend => SpotId::Ebih__Ebih_East__Dispenser,
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu
+            LocationId::Ebih__Boss_Room__Boss__Boss_Reward
+            | LocationId::Ebih__Boss_Room__Boss__Fight_Alu
             | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => SpotId::Ebih__Boss_Room__Boss,
             LocationId::Ebih__Boss_Room__East_Ledge__Item => SpotId::Ebih__Boss_Room__East_Ledge,
             LocationId::Ebih__Drone_Room__Item__Urn => SpotId::Ebih__Drone_Room__Item,
@@ -4101,6 +4116,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Defeat_Ebih_Alu,
             price: Currency::Free,
             time: 50000,
+            exit_id: None,
+        },
+        LocationId::Ebih__Boss_Room__Boss__Boss_Reward => Location {
+            id: LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Ebih__Boss_Room__East_Ledge__Item => Location {
@@ -7776,7 +7799,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Boss_Room__Boss => Spot {
             id: SpotId::Ebih__Boss_Room__Boss,
             locations: Range {
-                start: LocationId::Ebih__Boss_Room__Boss__Fight_Alu.into_usize(),
+                start: LocationId::Ebih__Boss_Room__Boss__Boss_Reward.into_usize(),
                 end: LocationId::Ebih__Boss_Room__Boss__Hack_Alu.into_usize() + 1,
             },
             exits: Range {
@@ -9886,7 +9909,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Grid_21_1_5__East_6 => Range { start: 0, end: 0 },
         SpotId::Ebih__Boss_Room__West_6 => Range { start: 0, end: 0 },
         SpotId::Ebih__Boss_Room__Boss => Range {
-            start: LocationId::Ebih__Boss_Room__Boss__Fight_Alu.into_usize(),
+            start: LocationId::Ebih__Boss_Room__Boss__Boss_Reward.into_usize(),
             end: LocationId::Ebih__Boss_Room__Boss__Hack_Alu.into_usize() + 1,
         },
         SpotId::Ebih__Boss_Room__Past_Boss => Range { start: 0, end: 0 },
@@ -10114,7 +10137,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         },
         AreaId::Ebih__Grid_21_1_5 => Range { start: 0, end: 0 },
         AreaId::Ebih__Boss_Room => Range {
-            start: LocationId::Ebih__Boss_Room__Boss__Fight_Alu.into_usize(),
+            start: LocationId::Ebih__Boss_Room__Boss__Boss_Reward.into_usize(),
             end: LocationId::Ebih__Boss_Room__East_Ledge__Item.into_usize(),
         },
         AreaId::Ebih__Drone_Room => Range {
@@ -10178,7 +10201,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             end: LocationId::Antarctica__Shed__Interior__Shelf.into_usize(),
         },
         RegionId::Ebih => Range {
-            start: LocationId::Ebih__Boss_Room__Boss__Fight_Alu.into_usize(),
+            start: LocationId::Ebih__Boss_Room__Boss__Boss_Reward.into_usize(),
             end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
         },
         RegionId::Glacier => Range {

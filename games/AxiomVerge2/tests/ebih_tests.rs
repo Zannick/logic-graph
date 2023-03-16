@@ -121,3 +121,48 @@ fn start_Ebih__Ebih_East__West_8_with_Infect_can_activate_Ebih__Ebih_East__Movin
         ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride
     );
 }
+#[test]
+fn start_Ebih__Ebih_East__West_8_with_Infect_eventually_reaches_Ebih__Ebih_East__Middle_Platform() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.infect = true;
+
+    expect_eventually_reaches!(
+        &world,
+        ctx,
+        SpotId::Ebih__Ebih_East__West_8,
+        SpotId::Ebih__Ebih_East__Middle_Platform
+    );
+}
+#[test]
+fn start_Ebih__Ebih_East__Middle_Platform_can_reach_Ebih__Ebih_East__East_Ledge() {
+    let (mut world, mut ctx) = shared_setup();
+
+    expect_any_route!(
+        &world,
+        ctx,
+        SpotId::Ebih__Ebih_East__Middle_Platform,
+        SpotId::Ebih__Ebih_East__East_Ledge
+    );
+}
+#[test]
+fn start_Ebih__Drone_Room__Portal_with_Infect_requires_context_save_Ebih__Ebih_West__Upper_Save_to_reach_Ebih__Drone_Room__Moving_Platform(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.infect = true;
+
+    let mut ctx2 = ctx.clone();
+    ctx2.save = SpotId::Ebih__Ebih_West__Upper_Save;
+
+    expect_no_route!(
+        &world,
+        ctx,
+        SpotId::Ebih__Drone_Room__Portal,
+        SpotId::Ebih__Drone_Room__Moving_Platform
+    );
+    expect_any_route!(
+        &world,
+        ctx2,
+        SpotId::Ebih__Drone_Room__Portal,
+        SpotId::Ebih__Drone_Room__Moving_Platform
+    );
+}

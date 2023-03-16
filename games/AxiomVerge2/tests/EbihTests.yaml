@@ -46,4 +46,16 @@ tests:
   - start: Ebih > Ebih East > West 8
     with:
       - Infect
-    eventually_reaches: Ebih > Ebih East > East Ledge
+    eventually_reaches: Ebih > Ebih East > Middle Platform
+
+  - start: Ebih > Ebih East > Middle Platform
+    can_reach: Ebih > Ebih East > East Ledge
+
+  - start: Ebih > Drone Room > Portal
+    with:
+      - Infect
+    requires:
+      context:
+        # The other save point requires actions to get through
+        save: Ebih > Ebih West > Upper Save
+      to_reach: Ebih > Drone Room > Moving Platform

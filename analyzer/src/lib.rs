@@ -358,7 +358,7 @@ pub mod testlib {
 
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
-            let mut count = 2000;
+            let mut count = 1000;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().todo($loc_id) {
                     if count == 0 {

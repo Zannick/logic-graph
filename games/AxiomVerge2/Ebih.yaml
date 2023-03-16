@@ -943,6 +943,10 @@ areas:
           canon: Defeat_Ebih_Alu
           req: $melee or Boomerang
           time: 50  # an estimate... includes risk of taking too much damage, I guess?
+        - name: Boss Reward
+          item: Flask
+          req: Defeat_Ebih_Alu
+          tags: [flask]
 
     - name: Past Boss
       coord: [23.1, 5.9]

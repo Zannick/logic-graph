@@ -180,6 +180,50 @@ where
     }
 }
 
+pub fn can_win_just_items<W, T, L, E>(world: &W, ctx: &T) -> bool
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut ctx = ctx.clone();
+    world.skip_unused_items(&mut ctx);
+    for loc in world.get_all_locations() {
+        if ctx.todo(loc.id()) {
+            ctx.visit(loc.id());
+            ctx.collect(loc.item());
+        }
+    }
+    world.won(&ctx)
+}
+
+pub fn can_win_just_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut ctx = ctx.clone();
+    world.skip_unused_items(&mut ctx);
+    let mut found = true;
+    while found {
+        found = false;
+        for loc in world.get_all_locations() {
+            if ctx.todo(loc.id()) && loc.can_access(&ctx) {
+                ctx.visit(loc.id());
+                ctx.collect(loc.item());
+                found = true;
+            }
+        }
+        if world.won(&ctx) {
+            return true;
+        }
+    }
+    false
+}
+
 pub fn find_unused_links<W, T, E>(
     world: &W,
     spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,

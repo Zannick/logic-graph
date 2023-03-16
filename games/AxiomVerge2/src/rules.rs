@@ -64,6 +64,10 @@ pub fn access_drone_melee_speed__2(ctx: &Context) -> bool {
     // Drone_Melee_Speed{2}
     ctx.count(Item::Drone_Melee_Speed) >= 2
 }
+pub fn access_defeat_ebih_alu(ctx: &Context) -> bool {
+    // Defeat_Ebih_Alu
+    ctx.has(Item::Defeat_Ebih_Alu)
+}
 pub fn access_ebih__drone_room__pit_left___activate_lift_but_get_off_early_req(
     ctx: &Context,
 ) -> bool {
