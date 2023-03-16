@@ -187,11 +187,17 @@ pub mod testlib {
         ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
             $ctx.set_position($start);
 
+            let item_locs: Vec<_> = $world.get_all_locations().iter().filter_map(
+                |loc| if loc.item() == $item { Some(loc.id()) } else { None }
+            ).collect();
+
+            assert!(item_locs.len() > 0, "Found no locations with {}", $item);
+
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = 1000;
             while let Some(ctx) = heap.pop() {
-                if ctx.get().has($item) {
+                if item_locs.iter().any(|loc_id| ctx.get().visited(*loc_id)) {
                     return;
                 }
                 if count == 0 {

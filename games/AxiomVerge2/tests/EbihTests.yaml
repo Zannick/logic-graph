@@ -26,17 +26,3 @@ tests:
       mode: drone
       indra: Ebih > Drone Room > Tree
     can_reach: Ebih > Grid 25,2-6 > Pit
-
-  - start: Ebih > Drone Room > East 4
-    context:
-      mode: drone
-      indra: Ebih > Drone Room > Tree
-    can_obtain: Special_Flask
-
-  - start: Ebih > Drone Room > East 4
-    with:
-      - Remote_Drone
-    context:
-      mode: drone
-      indra: Ebih > Drone Room > Tree
-    eventually_gets: Special_Flask

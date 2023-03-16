@@ -1204,6 +1204,6 @@ areas:
       coord: [25.3, 5.9]
       locations:
         - name: Item
-          item: Special_Flask
+          item: Flask
           tags: [flask]
       # Exit back up may be possible with slingshot?
