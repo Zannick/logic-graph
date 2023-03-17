@@ -215,8 +215,9 @@ impl<T: Ctx> ContextWrapper<T> {
     pub fn score(&self) -> i32 {
         // We want to sort by elapsed time, low to high: (X - elapsed)
         // with a bonus based on progress to prioritize states closer to the end:
-        //   + progress * progress [progress in range 0..100]
+        //   + 1000 * progress [progress in range 0..100]
         // penalty is added to states that do really inefficient things
+        // and to deprioritize actions
         1000 * self.ctx.progress() - self.elapsed - self.penalty
     }
 

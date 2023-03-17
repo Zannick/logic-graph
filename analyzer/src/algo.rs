@@ -28,8 +28,12 @@ where
     vec
 }
 
-pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>, penalty: i32)
-where
+pub fn visit_locations<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    heap: &mut LimitedHeap<T>,
+    penalty: i32,
+) where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
@@ -57,7 +61,7 @@ where
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
-                    if can_win(world, newctx.get()).is_ok() {
+                    if can_win_just_locations(world, newctx.get()) {
                         ctx_list.push(newctx);
                     }
                 }
@@ -211,6 +215,7 @@ where
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
     let mut m_iters = 0;
+    let mut deadends = 0;
 
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
@@ -240,7 +245,10 @@ where
 
             continue;
         }
-        if ctx.score() < -3 * heap.max_time() / 2 {
+        // without penalties or progress, score is about -heap.max_time()
+        // progress goes from 0 to 100000
+        // cut off when penalties are high enough to exceed ~137.5% of max time
+        if ctx.score() < -11 * heap.max_time() / 8 {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
                 ctx.score(),
@@ -255,12 +263,13 @@ where
         if iters % 10000 == 0 {
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
-                "--- Round {} (minimize rounds: {}, unique solutions: {}) ---\n\
+                "--- Round {} (minimize rounds: {}, unique solutions: {}, dead-ends: {}) ---\n\
                 Heap stats: count={}; push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
                 m_iters,
                 solutions.unique(),
+                deadends,
                 heap.len(),
                 iskips,
                 dskips,
@@ -269,12 +278,16 @@ where
                 ctx.info()
             );
         }
-        search_step(world, ctx, &mut heap);
+        if ctx.get().count_visits() + ctx.get().count_skips() < W::NUM_LOCATIONS {
+            search_step(world, ctx, &mut heap);
+        } else {
+            deadends += 1;
+        }
     }
     let (iskips, pskips, dskips, dpskips) = heap.stats();
     println!(
-        "Finished after {} rounds (w/ {} minimize rounds), skipped {}+{} pushes + {}+{} pops",
-        iters, m_iters, iskips, dskips, pskips, dpskips
+        "Finished after {} rounds ({} minimize rounds, {} dead-ends), skipped {}+{} pushes + {}+{} pops",
+        iters, m_iters, deadends, iskips, dskips, pskips, dpskips
     );
     solutions.export()
 }

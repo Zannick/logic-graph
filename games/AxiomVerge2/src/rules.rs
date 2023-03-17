@@ -16,10 +16,6 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
-pub fn access_amashilama(ctx: &Context) -> bool {
-    // Amashilama
-    ctx.has(Item::Amashilama)
-}
 pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)

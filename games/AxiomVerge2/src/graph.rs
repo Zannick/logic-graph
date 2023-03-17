@@ -3350,7 +3350,7 @@ impl world::World for World {
 
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
-            Objective::Start => rules::access_amashilama(ctx),
+            Objective::Start => rules::access_remote_drone(ctx),
             Objective::Progress => rules::access_infect_and_flask__3(ctx),
         }
     }
