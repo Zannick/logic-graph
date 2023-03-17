@@ -217,7 +217,7 @@ impl<T: Ctx> ContextWrapper<T> {
         // with a bonus based on progress to prioritize states closer to the end:
         //   + progress * progress [progress in range 0..100]
         // penalty is added to states that do really inefficient things
-        100 * self.ctx.progress() - self.elapsed - self.penalty
+        1000 * self.ctx.progress() - self.elapsed - self.penalty
     }
 
     pub fn get(&self) -> &T {
@@ -298,7 +298,9 @@ impl<T: Ctx> ContextWrapper<T> {
         E: Exit<Context = T, Currency = L::Currency>,
     {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
-            self.ctx.skip(canon_loc_id);
+            if self.ctx.todo(canon_loc_id) {
+                self.ctx.skip(canon_loc_id);
+            }
         }
         self.ctx.visit(loc.id());
         self.ctx.spend(loc.price());

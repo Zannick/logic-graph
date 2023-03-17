@@ -24,33 +24,11 @@ where
     let spot_map = accessible_spots(world, ctx);
     let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
 
-    if vec.len() < 2 {
-        return vec;
-    }
-
     vec.sort_unstable_by_key(|el| el.elapsed());
-    if vec.len() < 5 {
-        return vec;
-    }
-    let shortest = vec[2].elapsed();
-    // Suppose the distances to these spots are (delta from the first one) 0, 2, 3, 5, 10.
-    // We want penalties to increase somewhat quadratically based on count (not just distance).
-    // Penalties:
-    // First el: 0. Second el: 0. Third el: 2nd-1st (2).
-    // Fourth el: (2nd-1st)*2 + 3rd-2nd = 3rd+2nd - 2*1st, (4+1)
-    // Fifth el: (3rd-1st)*2 + 4th-3rd = 4th+3rd - 2*1st, (6+2)
-    // that's 0, 0, 2, 5, 8
-    // penalties for 0, 1, 2, 3, 4, 5, 6: 0, 0, 1, 3, 7, 15, 31
-    // We should maybe reduce penalties for a few more of the early ones, since
-    // #0 is our current spot, #1 and #2 are probably the path forward
-    for i in 4..vec.len() {
-        let penalty = vec[i].elapsed() + vec[i - 3].elapsed() - 2 * shortest;
-        vec[i].penalize(penalty);
-    }
     vec
 }
 
-pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
+pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>, penalty: i32)
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -58,6 +36,7 @@ where
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
 {
     let mut ctx_list = vec![ctx];
+    ctx_list[0].penalize(penalty);
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
     if locs.is_empty() && exit == None {
         return;
@@ -153,10 +132,8 @@ pub fn activate_actions<W, T, L, E>(
         if act.can_access(ctx.get()) && ctx.is_useful(act) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            if c2.get().position() != ctx.get().position() || action_unlocked_anything(world, &c2, act, spot_ctxs) {
-                c2.penalize(penalty);
-                heap.push(c2);
-            }
+            c2.penalize(penalty);
+            heap.push(c2);
         }
     }
 }
@@ -174,6 +151,7 @@ where
     // 3. (activate_actions) for each ctx, check for global actions and spot actions
     // 4. (visit_locations) for each ctx, get all available locations
     let spot_ctxs = explore(world, ctx, heap);
+    let mut with_locs = 0;
 
     if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
         let max_dist = f.elapsed() - s.elapsed();
@@ -183,13 +161,14 @@ where
                 activate_actions(
                     world,
                     ctx,
-                    if !has_locs { max_dist + 1000 } else { max_dist },
+                    if !has_locs { max_dist / 2 + 1000 } else { 1000 },
                     &spot_ctxs,
                     heap,
                 );
             }
             if has_locs {
-                visit_locations(world, ctx.clone(), heap);
+                visit_locations(world, ctx.clone(), heap, with_locs * (with_locs - 1));
+                with_locs += 1;
             }
         }
     }
@@ -261,7 +240,7 @@ where
 
             continue;
         }
-        if ctx.score() < -3 * heap.max_time() {
+        if ctx.score() < -3 * heap.max_time() / 2 {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
                 ctx.score(),
@@ -277,7 +256,7 @@ where
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
                 "--- Round {} (minimize rounds: {}, unique solutions: {}) ---\n\
-                Heap stats: count={}; push_skips={} time, {} dups; pop_skips={} time, {} dups\n\
+                Heap stats: count={}; push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
                 m_iters,
