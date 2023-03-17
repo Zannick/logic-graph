@@ -29,7 +29,7 @@ fn cannot_obtain_Ledge_Grab() {
     expect_not_obtainable!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
 }
@@ -41,7 +41,7 @@ fn with_Switch_36_11_can_obtain_Ledge_Grab() {
     expect_obtainable!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
 }
@@ -52,19 +52,19 @@ fn can_reach_Glacier__Revival__Save_Point() {
     expect_any_route!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         SpotId::Glacier__Revival__Save_Point
     );
 }
 #[test]
-fn cannot_reach_Glacier__Vertical_Room_Top__Peak() {
+fn cannot_reach_Glacier__Vertical_Room__Peak() {
     let (mut world, mut ctx) = shared_setup();
 
     expect_no_route!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
-        SpotId::Glacier__Vertical_Room_Top__Peak
+        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier__Vertical_Room__Peak
     );
 }
 #[test]
@@ -75,7 +75,7 @@ fn with_Boomerang_eventually_gets_Ledge_Grab() {
     expect_eventually_gets!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
 }
@@ -87,7 +87,7 @@ fn settings_major_glitches_True_eventually_gets_Ledge_Grab() {
     expect_eventually_gets!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
 }
@@ -98,7 +98,7 @@ fn eventually_gets_Ledge_Grab() {
     expect_eventually_gets!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
 }
@@ -110,11 +110,11 @@ fn switch_opens_gate() {
     expect_this_route!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         vec![
-            SpotId::Glacier__Vertical_Room_Top__Mid_9,
-            SpotId::Glacier__Vertical_Room_Top__Under_Switch,
-            SpotId::Glacier__Vertical_Room_Left__Past_Gate,
+            SpotId::Glacier__Vertical_Room__Mid_9,
+            SpotId::Glacier__Vertical_Room__Under_Switch,
+            SpotId::Glacier__Vertical_Room__Past_Gate,
         ]
     );
 }
@@ -127,15 +127,15 @@ fn get_boomerang() {
         ctx,
         SpotId::Glacier__Revival__Save_Point,
         vec![
-            SpotId::Glacier__Revival__West,
+            SpotId::Glacier__Revival__West_8,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_37_38_9__East,
             SpotId::Glacier__Grid_37_38_9__West,
-            SpotId::Glacier__Vertical_Room_Top__East_9,
-            SpotId::Glacier__Vertical_Room_Top__Mid_9,
-            SpotId::Glacier__Vertical_Room_Top__Mid_11,
-            SpotId::Glacier__Vertical_Room_Top__East_13,
+            SpotId::Glacier__Vertical_Room__East_9,
+            SpotId::Glacier__Vertical_Room__Mid_9,
+            SpotId::Glacier__Vertical_Room__Mid_11,
+            SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Room__West,
@@ -158,8 +158,7 @@ fn start_Glacier__Boomerang_Room__Pedestal_with_Boomerang_can_obtain_Switch_36_1
     );
 }
 #[test]
-fn start_Glacier__Vertical_Room_Top__Under_Switch_with_Boomerang__Switch_36_11_can_obtain_Ledge_Grab(
-) {
+fn start_Glacier__Vertical_Room__Under_Switch_with_Boomerang__Switch_36_11_can_obtain_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
     ctx.boomerang = true;
     ctx.switch_36_11 = true;
@@ -167,12 +166,12 @@ fn start_Glacier__Vertical_Room_Top__Under_Switch_with_Boomerang__Switch_36_11_c
     expect_obtainable!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+        SpotId::Glacier__Vertical_Room__Under_Switch,
         Item::Ledge_Grab
     );
 }
 #[test]
-fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room_Top__Peak() {
+fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room__Peak() {
     let (mut world, mut ctx) = shared_setup();
 
     let mut ctx2 = ctx.clone();
@@ -181,14 +180,14 @@ fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room_Top__Peak() {
     expect_no_route!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
-        SpotId::Glacier__Vertical_Room_Top__Peak
+        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier__Vertical_Room__Peak
     );
     expect_any_route!(
         &world,
         ctx2,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
-        SpotId::Glacier__Vertical_Room_Top__Peak
+        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier__Vertical_Room__Peak
     );
 }
 #[test]
@@ -212,7 +211,7 @@ fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab_iteration_limit_500()
     expect_eventually_requires_to_obtain!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab,
         verify,
         1000

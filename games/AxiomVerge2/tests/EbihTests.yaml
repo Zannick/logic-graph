@@ -60,21 +60,21 @@ tests:
         save: Ebih > Ebih West > Upper Save
       to_reach: Ebih > Drone Room > Moving Platform
 
-  - start: Glacier > Vertical Room Top > Peak
-    can_access: Glacier > Vertical Room Top > Peak > Flask
+  - start: Glacier > Vertical Room > Peak
+    can_access: Glacier > Vertical Room > Peak > Flask
 
   - start: Menu > Upgrade Menu > Physiology
     context:
       last: Ebih > Ebih East > West 8
     visited:
-      - Glacier > Vertical Room Top > Peak > Flask
+      - Glacier > Vertical Room > Peak > Flask
     can_reach: Ebih > Ebih East > Corner
 
-  - start: Glacier > Vertical Room Top > Peak
+  - start: Glacier > Vertical Room > Peak
     with:
       - Flask
     context:
       flasks: 1
     visited:
-      - Glacier > Vertical Room Top > Peak > Flask
+      - Glacier > Vertical Room > Peak > Flask
     can_access: Menu > Upgrade Menu > Physiology > Health Upgrade 1

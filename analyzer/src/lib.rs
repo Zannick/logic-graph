@@ -409,7 +409,7 @@ pub mod testlib {
             let mut count = $limit;
             let mut success = false;
             while let Some(ctx) = heap.pop() {
-                if ($test_req)(ctx) {
+                if ($test_req)(ctx.get()) {
                     let result = ($verify_req)(ctx.get());
                     assert!(
                         result.is_ok(),
@@ -440,58 +440,146 @@ pub mod testlib {
     #[macro_export]
     macro_rules! expect_eventually_requires_to_obtain {
         ($world:expr, $ctx:expr, $start:expr, $item:expr, $verify_req:expr, $limit:expr) => {{
-            expect_eventually_requires!(
-                $world,
-                $ctx,
-                $start,
-                |ctx| ctx.get().has($item),
-                $verify_req,
-                format!("find {}", $item),
-                |_| true,
-            );
+            $ctx.set_position($start);
+
+            let mut heap = $crate::heap::LimitedHeap::new();
+            heap.push($crate::context::ContextWrapper::new($ctx));
+            let mut count = $limit;
+            let mut success = false;
+            while let Some(ctx) = heap.pop() {
+                if ctx.get().has($item) {
+                    let result = ($verify_req)(ctx.get());
+                    assert!(
+                        result.is_ok(),
+                        "Unexpectedly able to find {} without requirements:\n{}\n{}\n",
+                        $item,
+                        result.unwrap_err(),
+                        ctx.history_str(),
+                    );
+                    success = true;
+                }
+                if count == 0 {
+                    assert!(
+                        success,
+                        "Did not find {} in the iteration limit of {}",
+                        $item, $limit
+                    );
+                    return;
+                }
+                $crate::algo::search_step($world, ctx, &mut heap);
+                count -= 1;
+            }
+            assert!(success, "Dead-ended: did not find {}", $item);
         }};
     }
 
     #[macro_export]
     macro_rules! expect_eventually_requires_to_reach {
         ($world:expr, $ctx:expr, $start:expr, $spot:expr, $verify_req:expr, $limit:expr) => {{
-            expect_eventually_requires!(
-                $world,
-                $ctx,
-                $start,
-                |ctx| ctx.position() == $spot,
-                $verify_req,
-                format!("reach {}", $spot),
-                |_| true,
-            );
+            $ctx.set_position($start);
+
+            let mut heap = $crate::heap::LimitedHeap::new();
+            heap.push($crate::context::ContextWrapper::new($ctx));
+            let mut count = $limit;
+            let mut success = false;
+            while let Some(ctx) = heap.pop() {
+                if ctx.get().position() == $spot {
+                    let result = ($verify_req)(ctx.get());
+                    assert!(
+                        result.is_ok(),
+                        "Unexpectedly able to reach {} without requirements:\n{}\n{}\n",
+                        $spot,
+                        result.unwrap_err(),
+                        ctx.history_str(),
+                    );
+                    success = true;
+                }
+                if count == 0 {
+                    assert!(
+                        success,
+                        "Did not reach {} in the iteration limit of {}",
+                        $spot, $limit
+                    );
+                    return;
+                }
+                $crate::algo::search_step($world, ctx, &mut heap);
+                count -= 1;
+            }
+            assert!(success, "Dead-ended: did not reach {}", $spot);
         }};
     }
     #[macro_export]
     macro_rules! expect_eventually_requires_to_access {
         ($world:expr, $ctx:expr, $start:expr, $loc_id:expr, $verify_req:expr, $limit:expr) => {{
-            expect_eventually_requires!(
-                $world,
-                $ctx,
-                $start,
-                |ctx| ctx.get().visited($loc_id),
-                $verify_req,
-                format!("visit {}", $loc_id),
-                |ctx| ctx.get().todo($loc_id),
-            );
+            $ctx.set_position($start);
+
+            let mut heap = $crate::heap::LimitedHeap::new();
+            heap.push($crate::context::ContextWrapper::new($ctx));
+            let mut count = $limit;
+            let mut success = false;
+            while let Some(ctx) = heap.pop() {
+                if ctx.get().visited($loc_id) {
+                    let result = ($verify_req)(ctx.get());
+                    assert!(
+                        result.is_ok(),
+                        "Unexpectedly able to visit {} without requirements:\n{}\n{}\n",
+                        $loc_id,
+                        result.unwrap_err(),
+                        ctx.history_str(),
+                    );
+                    success = true;
+                }
+                if ctx.get().todo($loc_id) {
+                    if count == 0 {
+                        assert!(
+                            success,
+                            "Did not visit {} in the iteration limit of {}",
+                            $loc_id, $limit
+                        );
+                        return;
+                    }
+                    $crate::algo::search_step($world, ctx, &mut heap);
+                    count -= 1;
+                }
+            }
+            assert!(success, "Dead-ended: did not visit {}", $loc_id);
         }};
     }
     #[macro_export]
     macro_rules! expect_eventually_requires_to_activate {
         ($world:expr, $ctx:expr, $start:expr, $act_id:expr, $verify_req:expr, $limit:expr) => {{
-            expect_eventually_requires!(
-                $world,
-                $ctx,
-                $start,
-                |ctx| ctx.get().has($act_id),
-                $verify_req,
-                format!("activate {}", $act_id),
-                |_| true,
-            );
+            $ctx.set_position($start);
+
+            let mut heap = $crate::heap::LimitedHeap::new();
+            heap.push($crate::context::ContextWrapper::new($ctx));
+            let mut count = $limit;
+            let mut success = false;
+            while let Some(ctx) = heap.pop() {
+                if let Some($crate::context::History::Activate(a)) = ctx.last_step() {
+                    if a == $act_id {
+                        let result = ($verify_req)(ctx.get());
+                        assert!(
+                            result.is_ok(),
+                            "Unexpectedly able to activate {} without requirements:\n{}\n{}\n",
+                            $act_id,
+                            result.unwrap_err(),
+                            ctx.history_str(),
+                        );
+                        success = true;
+                    }
+                }
+                if count == 0 {
+                    assert!(
+                        success,
+                        "Did not activate {} in the iteration limit of {}",
+                        $act_id, $limit
+                    );
+                    return;
+                }
+                $crate::algo::search_step($world, ctx, &mut heap);
+                count -= 1;
+            }
+            assert!(success, "Dead-ended: did not activate {}", $act_id);
         }};
     }
 }

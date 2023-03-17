@@ -256,16 +256,21 @@ impl context::Ctx for Context {
 impl Context {
 %% for ctx, t in context_types.items()
     pub fn {{ ctx }}(&self) -> {{ t }} {
-%# Areas have priority over regions
-        match get_area(self.position) {
+%# Spots have priority over areas which have priority over regions
+        match self.position {
+%% for spot, override in context_here_overrides[ctx]['spot'].items()
+            SpotId::{{ spot }} => {{ override }},
+%% endfor
+            _ => match get_area(self.position) {
 %% for area, override in context_here_overrides[ctx]['area'].items()
-            AreaId::{{ area }} => {{ override }},
+                AreaId::{{ area }} => {{ override }},
 %% endfor
-            _ => match get_region(self.position) {
+                _ => match get_region(self.position) {
 %% for region, override in context_here_overrides[ctx]['region'].items()
-                RegionId::{{ region }} => {{ override }},
+                    RegionId::{{ region }} => {{ override }},
 %% endfor
-                _ => self.{{ ctx }}
+                    _ => self.{{ ctx }}
+                }
             }
         }
     }

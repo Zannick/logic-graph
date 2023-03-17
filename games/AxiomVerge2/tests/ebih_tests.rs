@@ -167,22 +167,22 @@ fn start_Ebih__Drone_Room__Portal_with_Infect_requires_context_save_Ebih__Ebih_W
     );
 }
 #[test]
-fn start_Glacier__Vertical_Room_Top__Peak_can_access_Glacier__Vertical_Room_Top__Peak__Flask() {
+fn start_Glacier__Vertical_Room__Peak_can_access_Glacier__Vertical_Room__Peak__Flask() {
     let (mut world, mut ctx) = shared_setup();
 
     expect_accessible!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__Peak,
-        LocationId::Glacier__Vertical_Room_Top__Peak__Flask
+        SpotId::Glacier__Vertical_Room__Peak,
+        LocationId::Glacier__Vertical_Room__Peak__Flask
     );
 }
 #[test]
-fn start_Menu__Upgrade_Menu__Physiology_context_last_Ebih__Ebih_East__West_8_visited_Glacier__Vertical_Room_Top__Peak__Flask_can_reach_Ebih__Ebih_East__Corner(
+fn start_Menu__Upgrade_Menu__Physiology_context_last_Ebih__Ebih_East__West_8_visited_Glacier__Vertical_Room__Peak__Flask_can_reach_Ebih__Ebih_East__Corner(
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.last = SpotId::Ebih__Ebih_East__West_8;
-    ctx.visit(LocationId::Glacier__Vertical_Room_Top__Peak__Flask);
+    ctx.visit(LocationId::Glacier__Vertical_Room__Peak__Flask);
 
     expect_any_route!(
         &world,
@@ -192,17 +192,17 @@ fn start_Menu__Upgrade_Menu__Physiology_context_last_Ebih__Ebih_East__West_8_vis
     );
 }
 #[test]
-fn start_Glacier__Vertical_Room_Top__Peak_with_Flask_context_flasks_1_visited_Glacier__Vertical_Room_Top__Peak__Flask_can_access_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1(
+fn start_Glacier__Vertical_Room__Peak_with_Flask_context_flasks_1_visited_Glacier__Vertical_Room__Peak__Flask_can_access_Menu__Upgrade_Menu__Physiology__Health_Upgrade_1(
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.flask = 1;
     ctx.flasks = 1;
-    ctx.visit(LocationId::Glacier__Vertical_Room_Top__Peak__Flask);
+    ctx.visit(LocationId::Glacier__Vertical_Room__Peak__Flask);
 
     expect_accessible!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__Peak,
+        SpotId::Glacier__Vertical_Room__Peak,
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
     );
 }

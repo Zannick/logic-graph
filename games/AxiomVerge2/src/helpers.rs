@@ -11,6 +11,17 @@ macro_rules! helper__melee {
     }};
 }
 
+/// $boomerang (  )
+/// ^mode != 'drone' and Boomerang
+#[macro_export]
+macro_rules! helper__boomerang {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Boomerang))
+    }};
+}
+
 /// $can_damage (  )
 /// $melee or Boomerang
 #[macro_export]

@@ -20,8 +20,8 @@ fn test_name() {
     expect_no_route!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
-        SpotId::Glacier__Vertical_Room_Top__Peak
+        SpotId::Glacier__Vertical_Room__East_9,
+        SpotId::Glacier__Vertical_Room__Peak
     );
 }
 
@@ -39,11 +39,11 @@ fn test_route() {
     expect_this_route!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__Mid_9,
+        SpotId::Glacier__Vertical_Room__Mid_9,
         vec![
-            SpotId::Glacier__Vertical_Room_Top__East_9,
-            SpotId::Glacier__Vertical_Room_Top__Mid_9,
-            SpotId::Glacier__Vertical_Room_Top__Peak,
+            SpotId::Glacier__Vertical_Room__East_9,
+            SpotId::Glacier__Vertical_Room__Mid_9,
+            SpotId::Glacier__Vertical_Room__Peak,
         ]
     );
 }
@@ -83,20 +83,17 @@ fn test_require() {
     expect_not_obtainable!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
     expect_obtainable!(
         &world,
         ctx2,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
 }
 
-// tests with flasks turn out to be very expensive, probably due to
-// the several options for upgrades
-#[ignore]
 #[test]
 fn search() {
     let mut world = graph::World::new();
@@ -116,12 +113,12 @@ fn search() {
         }
     };
 
-    expect_eventually_requires!(
+    expect_eventually_requires_to_obtain!(
         &world,
         ctx,
-        SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab,
         verify,
-        20000
+        1000
     );
 }

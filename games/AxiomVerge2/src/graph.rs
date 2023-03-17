@@ -88,15 +88,14 @@ pub enum AreaId {
     Glacier__Grid_32_7_10,
     Glacier__Grid_37_38_9,
     Glacier__Grid_39_40_7_9,
-    Glacier__Grid_41_9_10,
     Glacier__Grid_42_10,
     Glacier__Grid_43_10_11,
+    Glacier__Lake_Main_Entrance,
     Glacier__Ledge_Grab_Room,
     Glacier__Peak,
     Glacier__Revival,
     Glacier__The_Big_Drop,
-    Glacier__Vertical_Room_Left,
-    Glacier__Vertical_Room_Top,
+    Glacier__Vertical_Room,
     Menu__Upgrade_Menu,
 }
 impl fmt::Display for AreaId {
@@ -148,15 +147,14 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Grid_32_7_10 => write!(f, "{}", "Glacier > Grid 32,7-10"),
             AreaId::Glacier__Grid_37_38_9 => write!(f, "{}", "Glacier > Grid 37-38,9"),
             AreaId::Glacier__Grid_39_40_7_9 => write!(f, "{}", "Glacier > Grid 39-40,7-9"),
-            AreaId::Glacier__Grid_41_9_10 => write!(f, "{}", "Glacier > Grid 41,9-10"),
             AreaId::Glacier__Grid_42_10 => write!(f, "{}", "Glacier > Grid 42,10"),
             AreaId::Glacier__Grid_43_10_11 => write!(f, "{}", "Glacier > Grid 43,10-11"),
+            AreaId::Glacier__Lake_Main_Entrance => write!(f, "{}", "Glacier > Lake Main Entrance"),
             AreaId::Glacier__Ledge_Grab_Room => write!(f, "{}", "Glacier > Ledge Grab Room"),
             AreaId::Glacier__Peak => write!(f, "{}", "Glacier > Peak"),
             AreaId::Glacier__Revival => write!(f, "{}", "Glacier > Revival"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
-            AreaId::Glacier__Vertical_Room_Left => write!(f, "{}", "Glacier > Vertical Room Left"),
-            AreaId::Glacier__Vertical_Room_Top => write!(f, "{}", "Glacier > Vertical Room Top"),
+            AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
         }
     }
@@ -205,15 +203,14 @@ impl std::str::FromStr for AreaId {
             "Glacier > Grid 32,7-10" => Ok(AreaId::Glacier__Grid_32_7_10),
             "Glacier > Grid 37-38,9" => Ok(AreaId::Glacier__Grid_37_38_9),
             "Glacier > Grid 39-40,7-9" => Ok(AreaId::Glacier__Grid_39_40_7_9),
-            "Glacier > Grid 41,9-10" => Ok(AreaId::Glacier__Grid_41_9_10),
             "Glacier > Grid 42,10" => Ok(AreaId::Glacier__Grid_42_10),
             "Glacier > Grid 43,10-11" => Ok(AreaId::Glacier__Grid_43_10_11),
+            "Glacier > Lake Main Entrance" => Ok(AreaId::Glacier__Lake_Main_Entrance),
             "Glacier > Ledge Grab Room" => Ok(AreaId::Glacier__Ledge_Grab_Room),
             "Glacier > Peak" => Ok(AreaId::Glacier__Peak),
             "Glacier > Revival" => Ok(AreaId::Glacier__Revival),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
-            "Glacier > Vertical Room Left" => Ok(AreaId::Glacier__Vertical_Room_Left),
-            "Glacier > Vertical Room Top" => Ok(AreaId::Glacier__Vertical_Room_Top),
+            "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
         }
@@ -403,15 +400,21 @@ pub enum SpotId {
     Glacier__Grid_37_38_9__West,
     Glacier__Grid_39_40_7_9__Upper_East,
     Glacier__Grid_39_40_7_9__West,
-    Glacier__Grid_41_9_10__East,
-    Glacier__Grid_41_9_10__Ledge,
-    Glacier__Grid_41_9_10__Lower_East,
-    Glacier__Grid_41_9_10__Overhang,
     Glacier__Grid_42_10__East,
     Glacier__Grid_42_10__West,
     Glacier__Grid_43_10_11__East,
     Glacier__Grid_43_10_11__Lower,
     Glacier__Grid_43_10_11__Top,
+    Glacier__Lake_Main_Entrance__Bottom,
+    Glacier__Lake_Main_Entrance__Ebih_Access,
+    Glacier__Lake_Main_Entrance__Hill,
+    Glacier__Lake_Main_Entrance__Lake_Access,
+    Glacier__Lake_Main_Entrance__Ledge,
+    Glacier__Lake_Main_Entrance__Lower_Platform,
+    Glacier__Lake_Main_Entrance__Side,
+    Glacier__Lake_Main_Entrance__Side_Jump,
+    Glacier__Lake_Main_Entrance__Upper,
+    Glacier__Lake_Main_Entrance__Upper_Platform,
     Glacier__Ledge_Grab_Room__Cliff,
     Glacier__Ledge_Grab_Room__Cliff_Bottom,
     Glacier__Ledge_Grab_Room__Column,
@@ -433,22 +436,26 @@ pub enum SpotId {
     Glacier__Peak__Under_West_Cliff,
     Glacier__Peak__West_8,
     Glacier__Peak__West_Cliff,
+    Glacier__Revival__East_9,
+    Glacier__Revival__Ledge,
+    Glacier__Revival__Lower_East,
+    Glacier__Revival__Overhang,
     Glacier__Revival__Save_Point,
-    Glacier__Revival__West,
+    Glacier__Revival__West_8,
     Glacier__The_Big_Drop__East,
     Glacier__The_Big_Drop__Small_Path,
     Glacier__The_Big_Drop__Water_Surface,
-    Glacier__Vertical_Room_Left__Past_Gate,
-    Glacier__Vertical_Room_Top__East_12,
-    Glacier__Vertical_Room_Top__East_13,
-    Glacier__Vertical_Room_Top__East_9,
-    Glacier__Vertical_Room_Top__Lower_West_Corner,
-    Glacier__Vertical_Room_Top__Mid_11,
-    Glacier__Vertical_Room_Top__Mid_9,
-    Glacier__Vertical_Room_Top__Peak,
-    Glacier__Vertical_Room_Top__Under_Switch,
-    Glacier__Vertical_Room_Top__West_8,
-    Glacier__Vertical_Room_Top__West_9,
+    Glacier__Vertical_Room__East_12,
+    Glacier__Vertical_Room__East_13,
+    Glacier__Vertical_Room__East_9,
+    Glacier__Vertical_Room__Lower_West_Corner,
+    Glacier__Vertical_Room__Mid_11,
+    Glacier__Vertical_Room__Mid_9,
+    Glacier__Vertical_Room__Past_Gate,
+    Glacier__Vertical_Room__Peak,
+    Glacier__Vertical_Room__Under_Switch,
+    Glacier__Vertical_Room__West_8,
+    Glacier__Vertical_Room__West_9,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -845,16 +852,6 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Grid_39_40_7_9__West => {
                 write!(f, "{}", "Glacier > Grid 39-40,7-9 > West")
             }
-            SpotId::Glacier__Grid_41_9_10__East => write!(f, "{}", "Glacier > Grid 41,9-10 > East"),
-            SpotId::Glacier__Grid_41_9_10__Ledge => {
-                write!(f, "{}", "Glacier > Grid 41,9-10 > Ledge")
-            }
-            SpotId::Glacier__Grid_41_9_10__Lower_East => {
-                write!(f, "{}", "Glacier > Grid 41,9-10 > Lower East")
-            }
-            SpotId::Glacier__Grid_41_9_10__Overhang => {
-                write!(f, "{}", "Glacier > Grid 41,9-10 > Overhang")
-            }
             SpotId::Glacier__Grid_42_10__East => write!(f, "{}", "Glacier > Grid 42,10 > East"),
             SpotId::Glacier__Grid_42_10__West => write!(f, "{}", "Glacier > Grid 42,10 > West"),
             SpotId::Glacier__Grid_43_10_11__East => {
@@ -864,6 +861,36 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Glacier > Grid 43,10-11 > Lower")
             }
             SpotId::Glacier__Grid_43_10_11__Top => write!(f, "{}", "Glacier > Grid 43,10-11 > Top"),
+            SpotId::Glacier__Lake_Main_Entrance__Bottom => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Bottom")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Hill => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Hill")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Lake Access")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Ledge => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Ledge")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Lower Platform")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Side => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Side")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Side Jump")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Upper => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Upper")
+            }
+            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => {
+                write!(f, "{}", "Glacier > Lake Main Entrance > Upper Platform")
+            }
             SpotId::Glacier__Ledge_Grab_Room__Cliff => {
                 write!(f, "{}", "Glacier > Ledge Grab Room > Cliff")
             }
@@ -919,10 +946,16 @@ impl fmt::Display for SpotId {
             }
             SpotId::Glacier__Peak__West_8 => write!(f, "{}", "Glacier > Peak > West 8"),
             SpotId::Glacier__Peak__West_Cliff => write!(f, "{}", "Glacier > Peak > West Cliff"),
+            SpotId::Glacier__Revival__East_9 => write!(f, "{}", "Glacier > Revival > East 9"),
+            SpotId::Glacier__Revival__Ledge => write!(f, "{}", "Glacier > Revival > Ledge"),
+            SpotId::Glacier__Revival__Lower_East => {
+                write!(f, "{}", "Glacier > Revival > Lower East")
+            }
+            SpotId::Glacier__Revival__Overhang => write!(f, "{}", "Glacier > Revival > Overhang"),
             SpotId::Glacier__Revival__Save_Point => {
                 write!(f, "{}", "Glacier > Revival > Save Point")
             }
-            SpotId::Glacier__Revival__West => write!(f, "{}", "Glacier > Revival > West"),
+            SpotId::Glacier__Revival__West_8 => write!(f, "{}", "Glacier > Revival > West 8"),
             SpotId::Glacier__The_Big_Drop__East => write!(f, "{}", "Glacier > The Big Drop > East"),
             SpotId::Glacier__The_Big_Drop__Small_Path => {
                 write!(f, "{}", "Glacier > The Big Drop > Small Path")
@@ -930,38 +963,38 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__The_Big_Drop__Water_Surface => {
                 write!(f, "{}", "Glacier > The Big Drop > Water Surface")
             }
-            SpotId::Glacier__Vertical_Room_Left__Past_Gate => {
-                write!(f, "{}", "Glacier > Vertical Room Left > Past Gate")
+            SpotId::Glacier__Vertical_Room__East_12 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 12")
             }
-            SpotId::Glacier__Vertical_Room_Top__East_12 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > East 12")
+            SpotId::Glacier__Vertical_Room__East_13 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 13")
             }
-            SpotId::Glacier__Vertical_Room_Top__East_13 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > East 13")
+            SpotId::Glacier__Vertical_Room__East_9 => {
+                write!(f, "{}", "Glacier > Vertical Room > East 9")
             }
-            SpotId::Glacier__Vertical_Room_Top__East_9 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > East 9")
+            SpotId::Glacier__Vertical_Room__Lower_West_Corner => {
+                write!(f, "{}", "Glacier > Vertical Room > Lower West Corner")
             }
-            SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner => {
-                write!(f, "{}", "Glacier > Vertical Room Top > Lower West Corner")
+            SpotId::Glacier__Vertical_Room__Mid_11 => {
+                write!(f, "{}", "Glacier > Vertical Room > Mid 11")
             }
-            SpotId::Glacier__Vertical_Room_Top__Mid_11 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > Mid 11")
+            SpotId::Glacier__Vertical_Room__Mid_9 => {
+                write!(f, "{}", "Glacier > Vertical Room > Mid 9")
             }
-            SpotId::Glacier__Vertical_Room_Top__Mid_9 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > Mid 9")
+            SpotId::Glacier__Vertical_Room__Past_Gate => {
+                write!(f, "{}", "Glacier > Vertical Room > Past Gate")
             }
-            SpotId::Glacier__Vertical_Room_Top__Peak => {
-                write!(f, "{}", "Glacier > Vertical Room Top > Peak")
+            SpotId::Glacier__Vertical_Room__Peak => {
+                write!(f, "{}", "Glacier > Vertical Room > Peak")
             }
-            SpotId::Glacier__Vertical_Room_Top__Under_Switch => {
-                write!(f, "{}", "Glacier > Vertical Room Top > Under Switch")
+            SpotId::Glacier__Vertical_Room__Under_Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Under Switch")
             }
-            SpotId::Glacier__Vertical_Room_Top__West_8 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > West 8")
+            SpotId::Glacier__Vertical_Room__West_8 => {
+                write!(f, "{}", "Glacier > Vertical Room > West 8")
             }
-            SpotId::Glacier__Vertical_Room_Top__West_9 => {
-                write!(f, "{}", "Glacier > Vertical Room Top > West 9")
+            SpotId::Glacier__Vertical_Room__West_9 => {
+                write!(f, "{}", "Glacier > Vertical Room > West 9")
             }
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
@@ -1219,15 +1252,37 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Glacier__Grid_39_40_7_9__Upper_East)
             }
             "Glacier > Grid 39-40,7-9 > West" => Ok(SpotId::Glacier__Grid_39_40_7_9__West),
-            "Glacier > Grid 41,9-10 > East" => Ok(SpotId::Glacier__Grid_41_9_10__East),
-            "Glacier > Grid 41,9-10 > Ledge" => Ok(SpotId::Glacier__Grid_41_9_10__Ledge),
-            "Glacier > Grid 41,9-10 > Lower East" => Ok(SpotId::Glacier__Grid_41_9_10__Lower_East),
-            "Glacier > Grid 41,9-10 > Overhang" => Ok(SpotId::Glacier__Grid_41_9_10__Overhang),
             "Glacier > Grid 42,10 > East" => Ok(SpotId::Glacier__Grid_42_10__East),
             "Glacier > Grid 42,10 > West" => Ok(SpotId::Glacier__Grid_42_10__West),
             "Glacier > Grid 43,10-11 > East" => Ok(SpotId::Glacier__Grid_43_10_11__East),
             "Glacier > Grid 43,10-11 > Lower" => Ok(SpotId::Glacier__Grid_43_10_11__Lower),
             "Glacier > Grid 43,10-11 > Top" => Ok(SpotId::Glacier__Grid_43_10_11__Top),
+            "Glacier > Lake Main Entrance > Bottom" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Bottom)
+            }
+            "Glacier > Lake Main Entrance > Ebih Access" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Ebih_Access)
+            }
+            "Glacier > Lake Main Entrance > Hill" => Ok(SpotId::Glacier__Lake_Main_Entrance__Hill),
+            "Glacier > Lake Main Entrance > Lake Access" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Lake_Access)
+            }
+            "Glacier > Lake Main Entrance > Ledge" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Ledge)
+            }
+            "Glacier > Lake Main Entrance > Lower Platform" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Lower_Platform)
+            }
+            "Glacier > Lake Main Entrance > Side" => Ok(SpotId::Glacier__Lake_Main_Entrance__Side),
+            "Glacier > Lake Main Entrance > Side Jump" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Side_Jump)
+            }
+            "Glacier > Lake Main Entrance > Upper" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Upper)
+            }
+            "Glacier > Lake Main Entrance > Upper Platform" => {
+                Ok(SpotId::Glacier__Lake_Main_Entrance__Upper_Platform)
+            }
             "Glacier > Ledge Grab Room > Cliff" => Ok(SpotId::Glacier__Ledge_Grab_Room__Cliff),
             "Glacier > Ledge Grab Room > Cliff Bottom" => {
                 Ok(SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom)
@@ -1259,42 +1314,32 @@ impl std::str::FromStr for SpotId {
             "Glacier > Peak > Under West Cliff" => Ok(SpotId::Glacier__Peak__Under_West_Cliff),
             "Glacier > Peak > West 8" => Ok(SpotId::Glacier__Peak__West_8),
             "Glacier > Peak > West Cliff" => Ok(SpotId::Glacier__Peak__West_Cliff),
+            "Glacier > Revival > East 9" => Ok(SpotId::Glacier__Revival__East_9),
+            "Glacier > Revival > Ledge" => Ok(SpotId::Glacier__Revival__Ledge),
+            "Glacier > Revival > Lower East" => Ok(SpotId::Glacier__Revival__Lower_East),
+            "Glacier > Revival > Overhang" => Ok(SpotId::Glacier__Revival__Overhang),
             "Glacier > Revival > Save Point" => Ok(SpotId::Glacier__Revival__Save_Point),
-            "Glacier > Revival > West" => Ok(SpotId::Glacier__Revival__West),
+            "Glacier > Revival > West 8" => Ok(SpotId::Glacier__Revival__West_8),
             "Glacier > The Big Drop > East" => Ok(SpotId::Glacier__The_Big_Drop__East),
             "Glacier > The Big Drop > Small Path" => Ok(SpotId::Glacier__The_Big_Drop__Small_Path),
             "Glacier > The Big Drop > Water Surface" => {
                 Ok(SpotId::Glacier__The_Big_Drop__Water_Surface)
             }
-            "Glacier > Vertical Room Left > Past Gate" => {
-                Ok(SpotId::Glacier__Vertical_Room_Left__Past_Gate)
+            "Glacier > Vertical Room > East 12" => Ok(SpotId::Glacier__Vertical_Room__East_12),
+            "Glacier > Vertical Room > East 13" => Ok(SpotId::Glacier__Vertical_Room__East_13),
+            "Glacier > Vertical Room > East 9" => Ok(SpotId::Glacier__Vertical_Room__East_9),
+            "Glacier > Vertical Room > Lower West Corner" => {
+                Ok(SpotId::Glacier__Vertical_Room__Lower_West_Corner)
             }
-            "Glacier > Vertical Room Top > East 12" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__East_12)
+            "Glacier > Vertical Room > Mid 11" => Ok(SpotId::Glacier__Vertical_Room__Mid_11),
+            "Glacier > Vertical Room > Mid 9" => Ok(SpotId::Glacier__Vertical_Room__Mid_9),
+            "Glacier > Vertical Room > Past Gate" => Ok(SpotId::Glacier__Vertical_Room__Past_Gate),
+            "Glacier > Vertical Room > Peak" => Ok(SpotId::Glacier__Vertical_Room__Peak),
+            "Glacier > Vertical Room > Under Switch" => {
+                Ok(SpotId::Glacier__Vertical_Room__Under_Switch)
             }
-            "Glacier > Vertical Room Top > East 13" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__East_13)
-            }
-            "Glacier > Vertical Room Top > East 9" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__East_9)
-            }
-            "Glacier > Vertical Room Top > Lower West Corner" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner)
-            }
-            "Glacier > Vertical Room Top > Mid 11" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__Mid_11)
-            }
-            "Glacier > Vertical Room Top > Mid 9" => Ok(SpotId::Glacier__Vertical_Room_Top__Mid_9),
-            "Glacier > Vertical Room Top > Peak" => Ok(SpotId::Glacier__Vertical_Room_Top__Peak),
-            "Glacier > Vertical Room Top > Under Switch" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__Under_Switch)
-            }
-            "Glacier > Vertical Room Top > West 8" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__West_8)
-            }
-            "Glacier > Vertical Room Top > West 9" => {
-                Ok(SpotId::Glacier__Vertical_Room_Top__West_9)
-            }
+            "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
+            "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
@@ -1322,6 +1367,7 @@ pub enum LocationId {
     Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
     Ebih__Ebih_East__Corner__Urn,
     Ebih__Ebih_East__Dispenser__Vend,
+    Ebih__Ebih_East__East_Ledge__Note,
     Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
     Ebih__Ebih_West__Alcove__Tablet,
     Ebih__Garage__Boxes__Under_Boxes,
@@ -1335,8 +1381,8 @@ pub enum LocationId {
     Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
     Glacier__Ledge_Grab_Room__Pedestal__Item,
     Glacier__The_Big_Drop__Water_Surface__Drown,
-    Glacier__Vertical_Room_Top__Peak__Flask,
-    Glacier__Vertical_Room_Top__Under_Switch__Switch,
+    Glacier__Vertical_Room__Peak__Flask,
+    Glacier__Vertical_Room__Under_Switch__Switch,
     Menu__Upgrade_Menu__Combat__Melee_Damage_1,
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
 }
@@ -1393,6 +1439,9 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Ebih_East__Dispenser__Vend => {
                 write!(f, "{}", "Ebih > Ebih East > Dispenser: Vend")
             }
+            LocationId::Ebih__Ebih_East__East_Ledge__Note => {
+                write!(f, "{}", "Ebih > Ebih East > East Ledge: Note")
+            }
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => write!(
                 f,
                 "{}",
@@ -1436,14 +1485,12 @@ impl fmt::Display for LocationId {
             LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
                 write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown")
             }
-            LocationId::Glacier__Vertical_Room_Top__Peak__Flask => {
-                write!(f, "{}", "Glacier > Vertical Room Top > Peak: Flask")
+            LocationId::Glacier__Vertical_Room__Peak__Flask => {
+                write!(f, "{}", "Glacier > Vertical Room > Peak: Flask")
             }
-            LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => write!(
-                f,
-                "{}",
-                "Glacier > Vertical Room Top > Under Switch: Switch"
-            ),
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
+                write!(f, "{}", "Glacier > Vertical Room > Under Switch: Switch")
+            }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
                 write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee Damage 1")
             }
@@ -1501,6 +1548,9 @@ impl std::str::FromStr for LocationId {
             "Ebih > Ebih East > Dispenser: Vend" => {
                 Ok(LocationId::Ebih__Ebih_East__Dispenser__Vend)
             }
+            "Ebih > Ebih East > East Ledge: Note" => {
+                Ok(LocationId::Ebih__Ebih_East__East_Ledge__Note)
+            }
             "Ebih > Ebih East > Lower Moving Platform: Remote Urn" => {
                 Ok(LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn)
             }
@@ -1534,11 +1584,11 @@ impl std::str::FromStr for LocationId {
             "Glacier > The Big Drop > Water Surface: Drown" => {
                 Ok(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown)
             }
-            "Glacier > Vertical Room Top > Peak: Flask" => {
-                Ok(LocationId::Glacier__Vertical_Room_Top__Peak__Flask)
+            "Glacier > Vertical Room > Peak: Flask" => {
+                Ok(LocationId::Glacier__Vertical_Room__Peak__Flask)
             }
-            "Glacier > Vertical Room Top > Under Switch: Switch" => {
-                Ok(LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch)
+            "Glacier > Vertical Room > Under Switch: Switch" => {
+                Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
             }
             "Menu > Upgrade Menu > Combat: Melee Damage 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
@@ -1580,6 +1630,7 @@ pub enum ExitId {
     Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
     Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1,
     Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1,
+    Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1,
     Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1,
     Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1,
     Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1,
@@ -1647,8 +1698,8 @@ pub enum ExitId {
     Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
     Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1,
     Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1,
-    Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1,
-    Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1,
+    Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,
+    Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1,
     Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1,
     Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1,
     Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1,
@@ -1661,7 +1712,7 @@ pub enum ExitId {
     Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
     Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1,
     Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1,
-    Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1,
+    Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
     Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1,
     Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1,
     Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1,
@@ -1672,23 +1723,25 @@ pub enum ExitId {
     Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1,
     Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1,
     Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1,
-    Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1,
-    Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1,
+    Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1,
+    Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1,
     Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,
-    Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1,
-    Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1,
     Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1,
-    Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1,
+    Glacier__Grid_42_10__West__ex__Revival__Lower_East_1,
     Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1,
     Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1,
     Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1,
+    Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,
+    Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,
+    Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1,
+    Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1,
     Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1,
     Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1,
     Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1,
-    Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1,
+    Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1,
     Glacier__Ledge_Grab_Room__East_9__ex__Column_1,
-    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Left__Past_Gate_1,
-    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1,
+    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1,
+    Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1,
     Glacier__Ledge_Grab_Room__Fork__ex__Column_1,
     Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1,
     Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1,
@@ -1702,22 +1755,24 @@ pub enum ExitId {
     Glacier__Peak__East_8__ex__Top_Platform_East_1,
     Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,
     Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1,
-    Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1,
+    Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
+    Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
+    Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,
     Glacier__The_Big_Drop__East__ex__Compass_Room__West_1,
     Glacier__The_Big_Drop__Water_Surface__Drown,
-    Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1,
-    Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1,
-    Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1,
-    Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1,
-    Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1,
-    Glacier__Vertical_Room_Top__East_9__ex__Peak_1,
-    Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1,
-    Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1,
-    Glacier__Vertical_Room_Top__Peak__ex__West_8_1,
-    Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1,
-    Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1,
-    Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1,
-    Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1,
+    Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1,
+    Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1,
+    Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,
+    Glacier__Vertical_Room__East_9__ex__Peak_1,
+    Glacier__Vertical_Room__Mid_11__ex__Mid_9_1,
+    Glacier__Vertical_Room__Mid_9__ex__Peak_1,
+    Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1,
+    Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1,
+    Glacier__Vertical_Room__Peak__ex__West_8_1,
+    Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1,
+    Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,
+    Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
+    Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
     Menu__Upgrade_Menu__Combat__ex__Drone_1,
     Menu__Upgrade_Menu__Combat__ex__Infection_1,
     Menu__Upgrade_Menu__Combat__ex__Physiology_1,
@@ -1734,7 +1789,7 @@ pub enum ExitId {
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),            ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),            ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => write!(f, "{}", "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)"),            ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => write!(f, "{}", "Antarctica > Building 1W > West Entry ==> West > Boxes (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> East > Building 2 Entry (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"),            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)"),            ExitId::Antarctica__Building_2U_Corner__Behind_Boxes__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2U Corner > Behind Boxes ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => write!(f, "{}", "Antarctica > East > Building 1 Entry ==> Building 1E > East Entry (1)"),            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),            ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),            ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"),            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),            ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),            ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),            ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => write!(f, "{}", "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)"),            ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => write!(f, "{}", "Ebih > Boss Room > East 6 ==> Drone Room > West 6 (1)"),            ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => write!(f, "{}", "Ebih > Boss Room > Lower Tree ==> Lower Ledge (1)"),            ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_1_5__East_6_1 => write!(f, "{}", "Ebih > Boss Room > West 6 ==> Grid 21,1-5 > East 6 (1)"),            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),            ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => write!(f, "{}", "Ebih > By Garage > Garage Entry ==> Garage > Entry (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),            ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)"),            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),            ExitId::Ebih__Drone_Room__Item__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Item ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform: Urn Quick Grab"),            ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> West 6 (1)"),            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)"),            ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => write!(f, "{}", "Ebih > Drone Room > West 4 ==> Boss Room > East 4 (1)"),            ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => write!(f, "{}", "Ebih > Drone Room > West 6 ==> Boss Room > East 6 (1)"),            ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => write!(f, "{}", "Ebih > Ebih East > West 7 ==> Waterfall > East 7 (1)"),            ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => write!(f, "{}", "Ebih > Ebih East > West 8 ==> Waterfall > East 8 (1)"),            ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => write!(f, "{}", "Ebih > Ebih West > Alcove Entrance ==> Above Alcove (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Alcove Entrance (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Mid Save (1)"),            ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1 => write!(f, "{}", "Ebih > Ebih West > East 10 ==> Waterfall > West 10 (1)"),            ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_1_5__West_6_1 => write!(f, "{}", "Ebih > Ebih West > East 6 ==> Grid 21,1-5 > West 6 (1)"),            ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1 => write!(f, "{}", "Ebih > Ebih West > East 7 ==> Waterfall > West 7 (1)"),            ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1 => write!(f, "{}", "Ebih > Ebih West > East 9 ==> Waterfall > West 9 (1)"),            ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => write!(f, "{}", "Ebih > Ebih West > High Platform ==> High Ledge (1)"),            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => write!(f, "{}", "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)"),            ExitId::Ebih__Grid_21_1_5__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > East 6 ==> Boss Room > West 6 (1)"),            ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > West 6 ==> Ebih West > East 6 (1)"),            ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),            ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)"),            ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)"),            ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge ==> West 11 (1)"),            ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)"),            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),            ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)"),            ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)"),            ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => write!(f, "{}", "Ebih > Waterfall > East 10 ==> Grid 25,10-12 > West 10 (1)"),            ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => write!(f, "{}", "Ebih > Waterfall > East 11 ==> Grid 25,10-12 > West 11 (1)"),            ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => write!(f, "{}", "Ebih > Waterfall > East 7 ==> Ebih East > West 7 (1)"),            ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1 => write!(f, "{}", "Ebih > Waterfall > East 8 ==> Ebih East > West 8 (1)"),            ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => write!(f, "{}", "Ebih > Waterfall > Lower West Tree ==> West Lower Path (1)"),            ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => write!(f, "{}", "Ebih > Waterfall > Middle West Tree ==> West Main Path (1)"),            ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Platform ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => write!(f, "{}", "Ebih > Waterfall > Under Waterfall ==> Waterfall Left (1)"),            ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => write!(f, "{}", "Ebih > Waterfall > West 10 ==> Ebih West > East 10 (1)"),            ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => write!(f, "{}", "Ebih > Waterfall > West 7 ==> Ebih West > East 7 (1)"),            ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => write!(f, "{}", "Ebih > Waterfall > West 9 ==> Ebih West > East 9 (1)"),            ExitId::Ebih__Waterfall__West_Climb__ex__Middle_West_Tree_1 => write!(f, "{}", "Ebih > Waterfall > West Climb ==> Middle West Tree (1)"),            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),            ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room Top > East 12 (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room Top > East 13 (1)"),            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => write!(f, "{}", "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)"),            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)"),            ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Pedestal__ex__Boomerang_Room__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Pedestal ==> Boomerang Room > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Platform__ex__Boomerang_Room__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Platform ==> Boomerang Room > Platform (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Upper West ==> Boomerang Antechamber > Upper East (1)"),            ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),            ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Grid 41,9-10 > East (1)"),            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),            ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),            ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),            ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),            ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),            ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),            ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),            ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room Top > East 9 (1)"),            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West (1)"),            ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),            ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Grid 41,9-10 > East ==> Dock Outside > Do Not Enter (1)"),            ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Grid 41,9-10 > Lower East ==> Grid 42,10 > West (1)"),            ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),            ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Grid 41,9-10 > Lower East (1)"),            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),            ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),            ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom ==> Cliff (1)"),            ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Column ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11 ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room Top > West 9 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Gate Ledge (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate Ledge ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Lower Platform ==> Upper Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Fork (1)"),            ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform ==> Fork (1)"),            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),            ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),            ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West ==> Grid 39-40,7-9 > Upper East (1)"),            ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room Left > Past Gate ==> Ledge Grab Room > East 11 (1)"),            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room Left > Past Gate ==> Vertical Room Top > Under Switch (1)"),            ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 12 ==> Boomerang Antechamber > West 12 (1)"),            ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 13 ==> Boomerang Antechamber > West 13 (1)"),            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 9 ==> Grid 37-38,9 > West (1)"),            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room Top > East 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 11 ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room Top > Mid 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room Top > Peak ==> West 8 (1)"),            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room Top > Under Switch ==> Vertical Room Left > Past Gate (1)"),            ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 8 ==> Peak > East 8 (1)"),            ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room Top > West 9 ==> Ledge Grab Room > East 9 (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),        }
+            ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),            ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),            ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => write!(f, "{}", "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)"),            ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => write!(f, "{}", "Antarctica > Building 1W > West Entry ==> West > Boxes (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> East > Building 2 Entry (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"),            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)"),            ExitId::Antarctica__Building_2U_Corner__Behind_Boxes__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2U Corner > Behind Boxes ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => write!(f, "{}", "Antarctica > East > Building 1 Entry ==> Building 1E > East Entry (1)"),            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),            ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),            ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"),            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),            ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),            ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),            ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => write!(f, "{}", "Ebih > Base Camp > Lake Access ==> Glacier > Lake Main Entrance > Ebih Access (1)"),            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),            ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => write!(f, "{}", "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)"),            ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => write!(f, "{}", "Ebih > Boss Room > East 6 ==> Drone Room > West 6 (1)"),            ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => write!(f, "{}", "Ebih > Boss Room > Lower Tree ==> Lower Ledge (1)"),            ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_1_5__East_6_1 => write!(f, "{}", "Ebih > Boss Room > West 6 ==> Grid 21,1-5 > East 6 (1)"),            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),            ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => write!(f, "{}", "Ebih > By Garage > Garage Entry ==> Garage > Entry (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),            ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)"),            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),            ExitId::Ebih__Drone_Room__Item__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Item ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform: Urn Quick Grab"),            ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> West 6 (1)"),            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)"),            ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => write!(f, "{}", "Ebih > Drone Room > West 4 ==> Boss Room > East 4 (1)"),            ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => write!(f, "{}", "Ebih > Drone Room > West 6 ==> Boss Room > East 6 (1)"),            ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => write!(f, "{}", "Ebih > Ebih East > West 7 ==> Waterfall > East 7 (1)"),            ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => write!(f, "{}", "Ebih > Ebih East > West 8 ==> Waterfall > East 8 (1)"),            ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => write!(f, "{}", "Ebih > Ebih West > Alcove Entrance ==> Above Alcove (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Alcove Entrance (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Mid Save (1)"),            ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1 => write!(f, "{}", "Ebih > Ebih West > East 10 ==> Waterfall > West 10 (1)"),            ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_1_5__West_6_1 => write!(f, "{}", "Ebih > Ebih West > East 6 ==> Grid 21,1-5 > West 6 (1)"),            ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1 => write!(f, "{}", "Ebih > Ebih West > East 7 ==> Waterfall > West 7 (1)"),            ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1 => write!(f, "{}", "Ebih > Ebih West > East 9 ==> Waterfall > West 9 (1)"),            ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => write!(f, "{}", "Ebih > Ebih West > High Platform ==> High Ledge (1)"),            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => write!(f, "{}", "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)"),            ExitId::Ebih__Grid_21_1_5__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > East 6 ==> Boss Room > West 6 (1)"),            ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > West 6 ==> Ebih West > East 6 (1)"),            ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),            ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)"),            ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)"),            ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge ==> West 11 (1)"),            ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)"),            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),            ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)"),            ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)"),            ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => write!(f, "{}", "Ebih > Waterfall > East 10 ==> Grid 25,10-12 > West 10 (1)"),            ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => write!(f, "{}", "Ebih > Waterfall > East 11 ==> Grid 25,10-12 > West 11 (1)"),            ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => write!(f, "{}", "Ebih > Waterfall > East 7 ==> Ebih East > West 7 (1)"),            ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1 => write!(f, "{}", "Ebih > Waterfall > East 8 ==> Ebih East > West 8 (1)"),            ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => write!(f, "{}", "Ebih > Waterfall > Lower West Tree ==> West Lower Path (1)"),            ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => write!(f, "{}", "Ebih > Waterfall > Middle West Tree ==> West Main Path (1)"),            ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Platform ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => write!(f, "{}", "Ebih > Waterfall > Under Waterfall ==> Waterfall Left (1)"),            ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => write!(f, "{}", "Ebih > Waterfall > West 10 ==> Ebih West > East 10 (1)"),            ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => write!(f, "{}", "Ebih > Waterfall > West 7 ==> Ebih West > East 7 (1)"),            ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => write!(f, "{}", "Ebih > Waterfall > West 9 ==> Ebih West > East 9 (1)"),            ExitId::Ebih__Waterfall__West_Climb__ex__Middle_West_Tree_1 => write!(f, "{}", "Ebih > Waterfall > West Climb ==> Middle West Tree (1)"),            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),            ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room > East 13 (1)"),            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => write!(f, "{}", "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)"),            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)"),            ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Pedestal__ex__Boomerang_Room__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Pedestal ==> Boomerang Room > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Platform__ex__Boomerang_Room__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Platform ==> Boomerang Room > Platform (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Upper West ==> Boomerang Antechamber > Upper East (1)"),            ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),            ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),            ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),            ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),            ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),            ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),            ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),            ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),            ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room > East 9 (1)"),            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West 8 (1)"),            ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),            ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),            ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Revival > Lower East (1)"),            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),            ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),            ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),            ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)"),            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ledge ==> Upper (1)"),            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Lower Platform ==> Ledge (1)"),            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Upper Platform ==> Upper (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom ==> Cliff (1)"),            ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Column ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11 ==> Vertical Room > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > West 9 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Gate Ledge (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate Ledge ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Lower Platform ==> Upper Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Fork (1)"),            ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform ==> Fork (1)"),            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),            ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),            ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),            ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),            ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)"),            ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),            ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)"),            ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)"),            ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 11 ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Ledge Grab Room > East 11 (1)"),            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Under Switch (1)"),            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room > Peak ==> West 8 (1)"),            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Past Gate (1)"),            ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),            ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),        }
     }
 }
 impl analyzer::world::Id for ExitId {}
@@ -1770,6 +1825,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1),
             "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)" => Ok(ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1),
             "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)" => Ok(ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1),
+            "Ebih > Base Camp > Lake Access ==> Glacier > Lake Main Entrance > Ebih Access (1)" => Ok(ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1),
             "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1),
             "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)" => Ok(ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1),
             "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)" => Ok(ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1),
@@ -1837,8 +1893,8 @@ impl std::str::FromStr for ExitId {
             "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1),
             "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1),
             "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1),
-            "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room Top > East 12 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1),
-            "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room Top > East 13 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1),
+            "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1),
+            "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room > East 13 (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1),
             "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)" => Ok(ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1),
             "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)" => Ok(ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1),
             "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)" => Ok(ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1),
@@ -1851,7 +1907,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)" => Ok(ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1),
             "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)" => Ok(ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1),
             "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)" => Ok(ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1),
-            "Glacier > Dock Outside > Do Not Enter ==> Grid 41,9-10 > East (1)" => Ok(ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1),
+            "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)" => Ok(ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1),
             "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)" => Ok(ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1),
             "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1),
             "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)" => Ok(ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1),
@@ -1862,23 +1918,25 @@ impl std::str::FromStr for ExitId {
             "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)" => Ok(ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1),
             "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)" => Ok(ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1),
             "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)" => Ok(ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1),
-            "Glacier > Grid 37-38,9 > West ==> Vertical Room Top > East 9 (1)" => Ok(ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1),
-            "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1),
+            "Glacier > Grid 37-38,9 > West ==> Vertical Room > East 9 (1)" => Ok(ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1),
+            "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West 8 (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1),
             "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)" => Ok(ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1),
-            "Glacier > Grid 41,9-10 > East ==> Dock Outside > Do Not Enter (1)" => Ok(ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1),
-            "Glacier > Grid 41,9-10 > Lower East ==> Grid 42,10 > West (1)" => Ok(ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1),
             "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)" => Ok(ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1),
-            "Glacier > Grid 42,10 > West ==> Grid 41,9-10 > Lower East (1)" => Ok(ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1),
+            "Glacier > Grid 42,10 > West ==> Revival > Lower East (1)" => Ok(ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1),
             "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)" => Ok(ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1),
             "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1),
             "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1),
+            "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1),
+            "Glacier > Lake Main Entrance > Ledge ==> Upper (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1),
+            "Glacier > Lake Main Entrance > Lower Platform ==> Ledge (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1),
+            "Glacier > Lake Main Entrance > Upper Platform ==> Upper (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1),
             "Glacier > Ledge Grab Room > Cliff ==> Lower Platform (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1),
             "Glacier > Ledge Grab Room > Cliff Bottom ==> Cliff (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1),
             "Glacier > Ledge Grab Room > Column ==> Ledge Grab Room > Mid 35 (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1),
-            "Glacier > Ledge Grab Room > East 11 ==> Vertical Room Left > Past Gate (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1),
+            "Glacier > Ledge Grab Room > East 11 ==> Vertical Room > Past Gate (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1),
             "Glacier > Ledge Grab Room > East 9 ==> Column (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1),
-            "Glacier > Ledge Grab Room > East 9 ==> Vertical Room Left > Past Gate (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Left__Past_Gate_1),
-            "Glacier > Ledge Grab Room > East 9 ==> Vertical Room Top > West 9 (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1),
+            "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > Past Gate (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1),
+            "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > West 9 (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1),
             "Glacier > Ledge Grab Room > Fork ==> Column (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1),
             "Glacier > Ledge Grab Room > Fork ==> Gate Ledge (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1),
             "Glacier > Ledge Grab Room > Fork ==> Mid 35 (1)" => Ok(ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1),
@@ -1892,22 +1950,24 @@ impl std::str::FromStr for ExitId {
             "Glacier > Peak > East 8 ==> Top Platform East (1)" => Ok(ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1),
             "Glacier > Peak > Under West Cliff ==> West Cliff (1)" => Ok(ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1),
             "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)" => Ok(ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1),
-            "Glacier > Revival > West ==> Grid 39-40,7-9 > Upper East (1)" => Ok(ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1),
+            "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)" => Ok(ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1),
+            "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)" => Ok(ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1),
+            "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)" => Ok(ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1),
             "Glacier > The Big Drop > East ==> Compass Room > West (1)" => Ok(ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1),
             "Glacier > The Big Drop > Water Surface: Drown" => Ok(ExitId::Glacier__The_Big_Drop__Water_Surface__Drown),
-            "Glacier > Vertical Room Left > Past Gate ==> Ledge Grab Room > East 11 (1)" => Ok(ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1),
-            "Glacier > Vertical Room Left > Past Gate ==> Vertical Room Top > Under Switch (1)" => Ok(ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1),
-            "Glacier > Vertical Room Top > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1),
-            "Glacier > Vertical Room Top > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1),
-            "Glacier > Vertical Room Top > East 9 ==> Grid 37-38,9 > West (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1),
-            "Glacier > Vertical Room Top > East 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1),
-            "Glacier > Vertical Room Top > Mid 11 ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1),
-            "Glacier > Vertical Room Top > Mid 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1),
-            "Glacier > Vertical Room Top > Peak ==> West 8 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1),
-            "Glacier > Vertical Room Top > Under Switch ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1),
-            "Glacier > Vertical Room Top > Under Switch ==> Vertical Room Left > Past Gate (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1),
-            "Glacier > Vertical Room Top > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1),
-            "Glacier > Vertical Room Top > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1),
+            "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1),
+            "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1),
+            "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1),
+            "Glacier > Vertical Room > East 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1),
+            "Glacier > Vertical Room > Mid 11 ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1),
+            "Glacier > Vertical Room > Mid 9 ==> Peak (1)" => Ok(ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1),
+            "Glacier > Vertical Room > Past Gate ==> Ledge Grab Room > East 11 (1)" => Ok(ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1),
+            "Glacier > Vertical Room > Past Gate ==> Under Switch (1)" => Ok(ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1),
+            "Glacier > Vertical Room > Peak ==> West 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1),
+            "Glacier > Vertical Room > Under Switch ==> Mid 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1),
+            "Glacier > Vertical Room > Under Switch ==> Past Gate (1)" => Ok(ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1),
+            "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1),
+            "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)" => Ok(ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1),
             "Menu > Upgrade Menu > Combat ==> Drone (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1),
             "Menu > Upgrade Menu > Combat ==> Infection (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1),
             "Menu > Upgrade Menu > Combat ==> Physiology (1)" => Ok(ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1),
@@ -2301,10 +2361,12 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             AreaId::Glacier__Dock_Outside
         }
-        SpotId::Glacier__Grid_41_9_10__East
-        | SpotId::Glacier__Grid_41_9_10__Overhang
-        | SpotId::Glacier__Grid_41_9_10__Ledge
-        | SpotId::Glacier__Grid_41_9_10__Lower_East => AreaId::Glacier__Grid_41_9_10,
+        SpotId::Glacier__Revival__East_9
+        | SpotId::Glacier__Revival__Overhang
+        | SpotId::Glacier__Revival__Ledge
+        | SpotId::Glacier__Revival__Lower_East
+        | SpotId::Glacier__Revival__Save_Point
+        | SpotId::Glacier__Revival__West_8 => AreaId::Glacier__Revival,
         SpotId::Glacier__Grid_42_10__West | SpotId::Glacier__Grid_42_10__East => {
             AreaId::Glacier__Grid_42_10
         }
@@ -2317,26 +2379,23 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__The_Big_Drop__East
         | SpotId::Glacier__The_Big_Drop__Small_Path
         | SpotId::Glacier__The_Big_Drop__Water_Surface => AreaId::Glacier__The_Big_Drop,
-        SpotId::Glacier__Revival__Save_Point | SpotId::Glacier__Revival__West => {
-            AreaId::Glacier__Revival
-        }
         SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
             AreaId::Glacier__Grid_39_40_7_9
         }
         SpotId::Glacier__Grid_37_38_9__East | SpotId::Glacier__Grid_37_38_9__West => {
             AreaId::Glacier__Grid_37_38_9
         }
-        SpotId::Glacier__Vertical_Room_Top__East_9
-        | SpotId::Glacier__Vertical_Room_Top__West_9
-        | SpotId::Glacier__Vertical_Room_Top__Mid_9
-        | SpotId::Glacier__Vertical_Room_Top__Mid_11
-        | SpotId::Glacier__Vertical_Room_Top__Under_Switch
-        | SpotId::Glacier__Vertical_Room_Top__Peak
-        | SpotId::Glacier__Vertical_Room_Top__West_8
-        | SpotId::Glacier__Vertical_Room_Top__East_12
-        | SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner
-        | SpotId::Glacier__Vertical_Room_Top__East_13 => AreaId::Glacier__Vertical_Room_Top,
-        SpotId::Glacier__Vertical_Room_Left__Past_Gate => AreaId::Glacier__Vertical_Room_Left,
+        SpotId::Glacier__Vertical_Room__East_9
+        | SpotId::Glacier__Vertical_Room__West_9
+        | SpotId::Glacier__Vertical_Room__Mid_9
+        | SpotId::Glacier__Vertical_Room__Mid_11
+        | SpotId::Glacier__Vertical_Room__Under_Switch
+        | SpotId::Glacier__Vertical_Room__Past_Gate
+        | SpotId::Glacier__Vertical_Room__Peak
+        | SpotId::Glacier__Vertical_Room__West_8
+        | SpotId::Glacier__Vertical_Room__East_12
+        | SpotId::Glacier__Vertical_Room__Lower_West_Corner
+        | SpotId::Glacier__Vertical_Room__East_13 => AreaId::Glacier__Vertical_Room,
         SpotId::Glacier__Boomerang_Antechamber__West_13
         | SpotId::Glacier__Boomerang_Antechamber__East_12
         | SpotId::Glacier__Boomerang_Antechamber__Upper_East
@@ -2385,6 +2444,16 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4
         | SpotId::Glacier__Grid_31_9_12__West_12
         | SpotId::Glacier__Grid_31_9_12__Midair => AreaId::Glacier__Grid_31_9_12,
+        SpotId::Glacier__Lake_Main_Entrance__Ebih_Access
+        | SpotId::Glacier__Lake_Main_Entrance__Upper
+        | SpotId::Glacier__Lake_Main_Entrance__Upper_Platform
+        | SpotId::Glacier__Lake_Main_Entrance__Ledge
+        | SpotId::Glacier__Lake_Main_Entrance__Lower_Platform
+        | SpotId::Glacier__Lake_Main_Entrance__Hill
+        | SpotId::Glacier__Lake_Main_Entrance__Bottom
+        | SpotId::Glacier__Lake_Main_Entrance__Side_Jump
+        | SpotId::Glacier__Lake_Main_Entrance__Side
+        | SpotId::Glacier__Lake_Main_Entrance__Lake_Access => AreaId::Glacier__Lake_Main_Entrance,
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             AreaId::Glacier__Apocalypse_Entry
         }
@@ -2546,10 +2615,12 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__Dock_Outside__Entry | SpotId::Glacier__Dock_Outside__Do_Not_Enter => {
             RegionId::Glacier
         }
-        SpotId::Glacier__Grid_41_9_10__East
-        | SpotId::Glacier__Grid_41_9_10__Overhang
-        | SpotId::Glacier__Grid_41_9_10__Ledge
-        | SpotId::Glacier__Grid_41_9_10__Lower_East => RegionId::Glacier,
+        SpotId::Glacier__Revival__East_9
+        | SpotId::Glacier__Revival__Overhang
+        | SpotId::Glacier__Revival__Ledge
+        | SpotId::Glacier__Revival__Lower_East
+        | SpotId::Glacier__Revival__Save_Point
+        | SpotId::Glacier__Revival__West_8 => RegionId::Glacier,
         SpotId::Glacier__Grid_42_10__West | SpotId::Glacier__Grid_42_10__East => RegionId::Glacier,
         SpotId::Glacier__Grid_43_10_11__Top
         | SpotId::Glacier__Grid_43_10_11__East
@@ -2560,24 +2631,23 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__The_Big_Drop__East
         | SpotId::Glacier__The_Big_Drop__Small_Path
         | SpotId::Glacier__The_Big_Drop__Water_Surface => RegionId::Glacier,
-        SpotId::Glacier__Revival__Save_Point | SpotId::Glacier__Revival__West => RegionId::Glacier,
         SpotId::Glacier__Grid_39_40_7_9__Upper_East | SpotId::Glacier__Grid_39_40_7_9__West => {
             RegionId::Glacier
         }
         SpotId::Glacier__Grid_37_38_9__East | SpotId::Glacier__Grid_37_38_9__West => {
             RegionId::Glacier
         }
-        SpotId::Glacier__Vertical_Room_Top__East_9
-        | SpotId::Glacier__Vertical_Room_Top__West_9
-        | SpotId::Glacier__Vertical_Room_Top__Mid_9
-        | SpotId::Glacier__Vertical_Room_Top__Mid_11
-        | SpotId::Glacier__Vertical_Room_Top__Under_Switch
-        | SpotId::Glacier__Vertical_Room_Top__Peak
-        | SpotId::Glacier__Vertical_Room_Top__West_8
-        | SpotId::Glacier__Vertical_Room_Top__East_12
-        | SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner
-        | SpotId::Glacier__Vertical_Room_Top__East_13 => RegionId::Glacier,
-        SpotId::Glacier__Vertical_Room_Left__Past_Gate => RegionId::Glacier,
+        SpotId::Glacier__Vertical_Room__East_9
+        | SpotId::Glacier__Vertical_Room__West_9
+        | SpotId::Glacier__Vertical_Room__Mid_9
+        | SpotId::Glacier__Vertical_Room__Mid_11
+        | SpotId::Glacier__Vertical_Room__Under_Switch
+        | SpotId::Glacier__Vertical_Room__Past_Gate
+        | SpotId::Glacier__Vertical_Room__Peak
+        | SpotId::Glacier__Vertical_Room__West_8
+        | SpotId::Glacier__Vertical_Room__East_12
+        | SpotId::Glacier__Vertical_Room__Lower_West_Corner
+        | SpotId::Glacier__Vertical_Room__East_13 => RegionId::Glacier,
         SpotId::Glacier__Boomerang_Antechamber__West_13
         | SpotId::Glacier__Boomerang_Antechamber__East_12
         | SpotId::Glacier__Boomerang_Antechamber__Upper_East
@@ -2624,6 +2694,16 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4
         | SpotId::Glacier__Grid_31_9_12__West_12
         | SpotId::Glacier__Grid_31_9_12__Midair => RegionId::Glacier,
+        SpotId::Glacier__Lake_Main_Entrance__Ebih_Access
+        | SpotId::Glacier__Lake_Main_Entrance__Upper
+        | SpotId::Glacier__Lake_Main_Entrance__Upper_Platform
+        | SpotId::Glacier__Lake_Main_Entrance__Ledge
+        | SpotId::Glacier__Lake_Main_Entrance__Lower_Platform
+        | SpotId::Glacier__Lake_Main_Entrance__Hill
+        | SpotId::Glacier__Lake_Main_Entrance__Bottom
+        | SpotId::Glacier__Lake_Main_Entrance__Side_Jump
+        | SpotId::Glacier__Lake_Main_Entrance__Side
+        | SpotId::Glacier__Lake_Main_Entrance__Lake_Access => RegionId::Glacier,
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             RegionId::Glacier
         }
@@ -2677,6 +2757,7 @@ impl world::Accessible for Location {
                 }
                 LocationId::Ebih__Ebih_East__Corner__Urn => true,
                 LocationId::Ebih__Ebih_East__Dispenser__Vend => rules::access_infect(&ctx),
+                LocationId::Ebih__Ebih_East__East_Ledge__Note => true,
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
                     rules::access_boomerang(&ctx)
                 }
@@ -2700,8 +2781,8 @@ impl world::Accessible for Location {
                 LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
                     rules::access_not_amashilama(&ctx)
                 }
-                LocationId::Glacier__Vertical_Room_Top__Peak__Flask => true,
-                LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => {
+                LocationId::Glacier__Vertical_Room__Peak__Flask => true,
+                LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
                     rules::access_boomerang(&ctx)
                 }
                 LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => true,
@@ -2776,6 +2857,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => true,
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => true,
+            ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => true,
             ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => true,
             ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => true,
@@ -2843,8 +2925,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => rules::access_switch_40_12(&ctx),
-            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1 => true,
-            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1 => true,
+            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => true,
+            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => true,
             ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => rules::access_grab_and_switch_40_12(&ctx),
             ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => rules::access_switch_40_12(&ctx),
             ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => rules::access_switch_40_12(&ctx),
@@ -2857,7 +2939,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => true,
             ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => true,
             ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => true,
-            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1 => true,
+            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
@@ -2868,23 +2950,25 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => true,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => true,
-            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1 => true,
-            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1 => true,
+            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => true,
-            ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1 => true,
-            ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1 => true,
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => true,
-            ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1 => true,
+            ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => true,
             ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => true,
             ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => true,
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => true,
+            ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => true,
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::access_climb_and_grab(&ctx),
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => true,
-            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Left__Past_Gate_1 => rules::access_offset(&ctx),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => rules::access_offset(&ctx),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1 => true,
@@ -2898,22 +2982,24 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
-            ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1 => true,
+            ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
+            ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
+            ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => true,
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => true,
             ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => rules::access_not_amashilama(&ctx),
-            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
-            ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1 => rules::access_switch_36_11(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
-            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1 => true,
-            ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => rules::access_grab(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => rules::access_switch_36_11(&ctx),
-            ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1 => true,
-            ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
+            ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
+            ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => true,
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
+            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::access_switch_36_11(&ctx),
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => rules::access_grab(&ctx),
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::access_switch_36_11(&ctx),
+            ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
+            ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => rules::access_remote_drone(&ctx),
             ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
@@ -3155,7 +3241,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 230],
+    raw_spots: [SpotId; 240],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -3166,7 +3252,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 33;
+    const NUM_LOCATIONS: i32 = 34;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -3267,6 +3353,7 @@ impl world::World for World {
             }
             LocationId::Ebih__Ebih_East__Corner__Urn => SpotId::Ebih__Ebih_East__Corner,
             LocationId::Ebih__Ebih_East__Dispenser__Vend => SpotId::Ebih__Ebih_East__Dispenser,
+            LocationId::Ebih__Ebih_East__East_Ledge__Note => SpotId::Ebih__Ebih_East__East_Ledge,
             LocationId::Ebih__Boss_Room__Boss__Boss_Reward
             | LocationId::Ebih__Boss_Room__Boss__Fight_Alu
             | LocationId::Ebih__Boss_Room__Boss__Hack_Alu => SpotId::Ebih__Boss_Room__Boss,
@@ -3282,12 +3369,10 @@ impl world::World for World {
             LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
                 SpotId::Glacier__The_Big_Drop__Water_Surface
             }
-            LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => {
-                SpotId::Glacier__Vertical_Room_Top__Under_Switch
+            LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
+                SpotId::Glacier__Vertical_Room__Under_Switch
             }
-            LocationId::Glacier__Vertical_Room_Top__Peak__Flask => {
-                SpotId::Glacier__Vertical_Room_Top__Peak
-            }
+            LocationId::Glacier__Vertical_Room__Peak__Flask => SpotId::Glacier__Vertical_Room__Peak,
             LocationId::Glacier__Boomerang_Room__Pedestal__Item
             | LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
                 SpotId::Glacier__Boomerang_Room__Pedestal
@@ -3549,15 +3634,21 @@ impl World {
                 SpotId::Glacier__Grid_37_38_9__West,
                 SpotId::Glacier__Grid_39_40_7_9__Upper_East,
                 SpotId::Glacier__Grid_39_40_7_9__West,
-                SpotId::Glacier__Grid_41_9_10__East,
-                SpotId::Glacier__Grid_41_9_10__Ledge,
-                SpotId::Glacier__Grid_41_9_10__Lower_East,
-                SpotId::Glacier__Grid_41_9_10__Overhang,
                 SpotId::Glacier__Grid_42_10__East,
                 SpotId::Glacier__Grid_42_10__West,
                 SpotId::Glacier__Grid_43_10_11__East,
                 SpotId::Glacier__Grid_43_10_11__Lower,
                 SpotId::Glacier__Grid_43_10_11__Top,
+                SpotId::Glacier__Lake_Main_Entrance__Bottom,
+                SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
+                SpotId::Glacier__Lake_Main_Entrance__Hill,
+                SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
+                SpotId::Glacier__Lake_Main_Entrance__Ledge,
+                SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
+                SpotId::Glacier__Lake_Main_Entrance__Side,
+                SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
+                SpotId::Glacier__Lake_Main_Entrance__Upper,
+                SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
                 SpotId::Glacier__Ledge_Grab_Room__Cliff,
                 SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
                 SpotId::Glacier__Ledge_Grab_Room__Column,
@@ -3579,22 +3670,26 @@ impl World {
                 SpotId::Glacier__Peak__Under_West_Cliff,
                 SpotId::Glacier__Peak__West_8,
                 SpotId::Glacier__Peak__West_Cliff,
+                SpotId::Glacier__Revival__East_9,
+                SpotId::Glacier__Revival__Ledge,
+                SpotId::Glacier__Revival__Lower_East,
+                SpotId::Glacier__Revival__Overhang,
                 SpotId::Glacier__Revival__Save_Point,
-                SpotId::Glacier__Revival__West,
+                SpotId::Glacier__Revival__West_8,
                 SpotId::Glacier__The_Big_Drop__East,
                 SpotId::Glacier__The_Big_Drop__Small_Path,
                 SpotId::Glacier__The_Big_Drop__Water_Surface,
-                SpotId::Glacier__Vertical_Room_Left__Past_Gate,
-                SpotId::Glacier__Vertical_Room_Top__East_12,
-                SpotId::Glacier__Vertical_Room_Top__East_13,
-                SpotId::Glacier__Vertical_Room_Top__East_9,
-                SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
-                SpotId::Glacier__Vertical_Room_Top__Mid_11,
-                SpotId::Glacier__Vertical_Room_Top__Mid_9,
-                SpotId::Glacier__Vertical_Room_Top__Peak,
-                SpotId::Glacier__Vertical_Room_Top__Under_Switch,
-                SpotId::Glacier__Vertical_Room_Top__West_8,
-                SpotId::Glacier__Vertical_Room_Top__West_9,
+                SpotId::Glacier__Vertical_Room__East_12,
+                SpotId::Glacier__Vertical_Room__East_13,
+                SpotId::Glacier__Vertical_Room__East_9,
+                SpotId::Glacier__Vertical_Room__Lower_West_Corner,
+                SpotId::Glacier__Vertical_Room__Mid_11,
+                SpotId::Glacier__Vertical_Room__Mid_9,
+                SpotId::Glacier__Vertical_Room__Past_Gate,
+                SpotId::Glacier__Vertical_Room__Peak,
+                SpotId::Glacier__Vertical_Room__Under_Switch,
+                SpotId::Glacier__Vertical_Room__West_8,
+                SpotId::Glacier__Vertical_Room__West_9,
                 SpotId::Menu__Upgrade_Menu__Combat,
                 SpotId::Menu__Upgrade_Menu__Drone,
                 SpotId::Menu__Upgrade_Menu__Infection,
@@ -3731,6 +3826,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 3500,
             exit_id: None,
         },
+        LocationId::Ebih__Ebih_East__East_Ledge__Note => Location {
+            id: LocationId::Ebih__Ebih_East__East_Ledge__Note,
+            canonical: CanonId::None,
+            item: Item::Under_Siege,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
         LocationId::Ebih__Boss_Room__Boss__Hack_Alu => Location {
             id: LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
             canonical: CanonId::Defeat_Ebih_Alu,
@@ -3803,16 +3906,16 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: Some(ExitId::Glacier__The_Big_Drop__Water_Surface__Drown),
         },
-        LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch => Location {
-            id: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch,
+        LocationId::Glacier__Vertical_Room__Under_Switch__Switch => Location {
+            id: LocationId::Glacier__Vertical_Room__Under_Switch__Switch,
             canonical: CanonId::None,
             item: Item::Switch_36_11,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
         },
-        LocationId::Glacier__Vertical_Room_Top__Peak__Flask => Location {
-            id: LocationId::Glacier__Vertical_Room_Top__Peak__Flask,
+        LocationId::Glacier__Vertical_Room__Peak__Flask => Location {
+            id: LocationId::Glacier__Vertical_Room__Peak__Flask,
             canonical: CanonId::None,
             item: Item::Flask,
             price: Currency::Free,
@@ -4059,6 +4162,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
             time: 750,
             dest: SpotId::Ebih__Bunker_Interior__Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1,
+            time: 1350,
+            dest: SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4545,31 +4655,38 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1 => Exit {
-            id: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1,
+        ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => Exit {
+            id: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1,
             time: 1350,
-            dest: SpotId::Glacier__Grid_41_9_10__East,
+            dest: SpotId::Glacier__Revival__East_9,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1 => Exit {
-            id: ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1,
+        ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => Exit {
+            id: ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1,
             time: 1350,
             dest: SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1 => Exit {
-            id: ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1,
+        ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => Exit {
+            id: ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1,
             time: 1350,
             dest: SpotId::Glacier__Grid_42_10__West,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1 => Exit {
-            id: ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1,
+        ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => Exit {
+            id: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1,
             time: 1350,
-            dest: SpotId::Glacier__Grid_41_9_10__Lower_East,
+            dest: SpotId::Glacier__Grid_39_40_7_9__Upper_East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => Exit {
+            id: ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1,
+            time: 1350,
+            dest: SpotId::Glacier__Revival__Lower_East,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4629,17 +4746,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: Some(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown),
         },
-        ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1 => Exit {
-            id: ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1,
+        ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => Exit {
+            id: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1,
             time: 1350,
-            dest: SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1 => Exit {
-            id: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1,
-            time: 1350,
-            dest: SpotId::Glacier__Revival__West,
+            dest: SpotId::Glacier__Revival__West_8,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4657,108 +4767,108 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1 => Exit {
-            id: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1,
+        ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => Exit {
+            id: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1,
             time: 1350,
-            dest: SpotId::Glacier__Vertical_Room_Top__East_9,
+            dest: SpotId::Glacier__Vertical_Room__East_9,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1,
+        ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1,
             time: 1350,
             dest: SpotId::Glacier__Grid_37_38_9__West,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1,
+        ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1,
             time: 2400,
-            dest: SpotId::Glacier__Vertical_Room_Top__Peak,
+            dest: SpotId::Glacier__Vertical_Room__Peak,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1,
+        ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1,
             time: 1350,
             dest: SpotId::Glacier__Ledge_Grab_Room__East_9,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1,
+        ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1,
             time: 2000,
-            dest: SpotId::Glacier__Vertical_Room_Top__Peak,
+            dest: SpotId::Glacier__Vertical_Room__Peak,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1,
+        ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1,
             time: 10000,
-            dest: SpotId::Glacier__Vertical_Room_Top__Mid_9,
+            dest: SpotId::Glacier__Vertical_Room__Mid_9,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1,
+        ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1,
             time: 7500,
-            dest: SpotId::Glacier__Vertical_Room_Top__Mid_9,
+            dest: SpotId::Glacier__Vertical_Room__Mid_9,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1,
+        ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1,
             time: 100,
-            dest: SpotId::Glacier__Vertical_Room_Left__Past_Gate,
+            dest: SpotId::Glacier__Vertical_Room__Past_Gate,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1,
-            time: 2000,
-            dest: SpotId::Glacier__Vertical_Room_Top__West_8,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1,
-            time: 1350,
-            dest: SpotId::Glacier__Peak__East_8,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1,
-            time: 1350,
-            dest: SpotId::Glacier__Boomerang_Antechamber__West_12,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1,
-            time: 1350,
-            dest: SpotId::Glacier__Boomerang_Antechamber__West_13,
-            price: Currency::Free,
-            loc_id: None,
-        },
-        ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1,
+        ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1,
             time: 100,
-            dest: SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+            dest: SpotId::Glacier__Vertical_Room__Under_Switch,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => Exit {
-            id: ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1,
+        ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1,
             time: 1350,
             dest: SpotId::Glacier__Ledge_Grab_Room__East_11,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1 => Exit {
-            id: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1,
+        ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1,
+            time: 2000,
+            dest: SpotId::Glacier__Vertical_Room__West_8,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1,
             time: 1350,
-            dest: SpotId::Glacier__Vertical_Room_Top__East_13,
+            dest: SpotId::Glacier__Peak__East_8,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1,
+            time: 1350,
+            dest: SpotId::Glacier__Boomerang_Antechamber__West_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => Exit {
+            id: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1,
+            time: 1350,
+            dest: SpotId::Glacier__Boomerang_Antechamber__West_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => Exit {
+            id: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1,
+            time: 1350,
+            dest: SpotId::Glacier__Vertical_Room__East_13,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4776,10 +4886,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1 => Exit {
-            id: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1,
+        ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => Exit {
+            id: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1,
             time: 1350,
-            dest: SpotId::Glacier__Vertical_Room_Top__East_12,
+            dest: SpotId::Glacier__Vertical_Room__East_12,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4832,10 +4942,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1 => Exit {
-            id: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1,
+        ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => Exit {
+            id: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1,
             time: 1350,
-            dest: SpotId::Glacier__Vertical_Room_Top__West_9,
+            dest: SpotId::Glacier__Vertical_Room__West_9,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4846,10 +4956,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Left__Past_Gate_1 => Exit {
-            id: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Left__Past_Gate_1,
+        ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => Exit {
+            id: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1,
             time: 20000,
-            dest: SpotId::Glacier__Vertical_Room_Left__Past_Gate,
+            dest: SpotId::Glacier__Vertical_Room__Past_Gate,
             price: Currency::Free,
             loc_id: None,
         },
@@ -4867,10 +4977,10 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1 => Exit {
-            id: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1,
+        ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => Exit {
+            id: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1,
             time: 1350,
-            dest: SpotId::Glacier__Vertical_Room_Left__Past_Gate,
+            dest: SpotId::Glacier__Vertical_Room__Past_Gate,
             price: Currency::Free,
             loc_id: None,
         },
@@ -5025,6 +5135,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1,
             time: 1350,
             dest: SpotId::Ebih__Base_Camp__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => Exit {
+            id: ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,
+            time: 1350,
+            dest: SpotId::Ebih__Base_Camp__Lake_Access,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => Exit {
+            id: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1,
+            time: 1850,
+            dest: SpotId::Glacier__Lake_Main_Entrance__Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => Exit {
+            id: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,
+            time: 2000,
+            dest: SpotId::Glacier__Lake_Main_Entrance__Upper,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => Exit {
+            id: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1,
+            time: 1000,
+            dest: SpotId::Glacier__Lake_Main_Entrance__Ledge,
             price: Currency::Free,
             loc_id: None,
         },
@@ -5661,7 +5799,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -7032,7 +7171,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Ebih_East__East_Ledge => Spot {
             id: SpotId::Ebih__Ebih_East__East_Ledge,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Ebih__Ebih_East__East_Ledge__Note.into_usize(),
+                end: LocationId::Ebih__Ebih_East__East_Ledge__Note.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -7638,8 +7778,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1.into_usize(),
-                end: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Grid_41_9_10__East_1.into_usize() + 1,
+                start: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1.into_usize(),
+                end: ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -7649,25 +7789,25 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__Dock_Outside__Entry.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Grid_41_9_10__East => Spot {
-            id: SpotId::Glacier__Grid_41_9_10__East,
+        SpotId::Glacier__Revival__East_9 => Spot {
+            id: SpotId::Glacier__Revival__East_9,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1.into_usize(),
-                end: ExitId::Glacier__Grid_41_9_10__East__ex__Dock_Outside__Do_Not_Enter_1.into_usize() + 1,
+                start: ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1.into_usize(),
+                end: ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Grid_41_9_10__East.into_usize(),
-                end: SpotId::Glacier__Grid_41_9_10__Overhang.into_usize() + 1,
+                start: SpotId::Glacier__Revival__East_9.into_usize(),
+                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Grid_41_9_10__Overhang => Spot {
-            id: SpotId::Glacier__Grid_41_9_10__Overhang,
+        SpotId::Glacier__Revival__Overhang => Spot {
+            id: SpotId::Glacier__Revival__Overhang,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -7678,12 +7818,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Grid_41_9_10__East.into_usize(),
-                end: SpotId::Glacier__Grid_41_9_10__Overhang.into_usize() + 1,
+                start: SpotId::Glacier__Revival__East_9.into_usize(),
+                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Grid_41_9_10__Ledge => Spot {
-            id: SpotId::Glacier__Grid_41_9_10__Ledge,
+        SpotId::Glacier__Revival__Ledge => Spot {
+            id: SpotId::Glacier__Revival__Ledge,
             locations: Range {
                 start: 0, end: 0,
             },
@@ -7694,25 +7834,59 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Grid_41_9_10__East.into_usize(),
-                end: SpotId::Glacier__Grid_41_9_10__Overhang.into_usize() + 1,
+                start: SpotId::Glacier__Revival__East_9.into_usize(),
+                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Grid_41_9_10__Lower_East => Spot {
-            id: SpotId::Glacier__Grid_41_9_10__Lower_East,
+        SpotId::Glacier__Revival__Lower_East => Spot {
+            id: SpotId::Glacier__Revival__Lower_East,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1.into_usize(),
-                end: ExitId::Glacier__Grid_41_9_10__Lower_East__ex__Grid_42_10__West_1.into_usize() + 1,
+                start: ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1.into_usize(),
+                end: ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Grid_41_9_10__East.into_usize(),
-                end: SpotId::Glacier__Grid_41_9_10__Overhang.into_usize() + 1,
+                start: SpotId::Glacier__Revival__East_9.into_usize(),
+                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Revival__Save_Point => Spot {
+            id: SpotId::Glacier__Revival__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Glacier__Revival__Save_Point__Save.into_usize(),
+                end: ActionId::Glacier__Revival__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Revival__East_9.into_usize(),
+                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Revival__West_8 => Spot {
+            id: SpotId::Glacier__Revival__West_8,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1.into_usize(),
+                end: ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Revival__East_9.into_usize(),
+                end: SpotId::Glacier__Revival__West_8.into_usize() + 1,
             },
         },
         SpotId::Glacier__Grid_42_10__West => Spot {
@@ -7721,8 +7895,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1.into_usize(),
-                end: ExitId::Glacier__Grid_42_10__West__ex__Grid_41_9_10__Lower_East_1.into_usize() + 1,
+                start: ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1.into_usize(),
+                end: ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -7901,48 +8075,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__The_Big_Drop__Water_Surface.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Revival__Save_Point => Spot {
-            id: SpotId::Glacier__Revival__Save_Point,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: 0, end: 0,
-            },
-            actions: Range {
-                start: ActionId::Glacier__Revival__Save_Point__Save.into_usize(),
-                end: ActionId::Glacier__Revival__Save_Point__Save.into_usize() + 1,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__Save_Point.into_usize(),
-                end: SpotId::Glacier__Revival__West.into_usize() + 1,
-            },
-        },
-        SpotId::Glacier__Revival__West => Spot {
-            id: SpotId::Glacier__Revival__West,
-            locations: Range {
-                start: 0, end: 0,
-            },
-            exits: Range {
-                start: ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1.into_usize(),
-                end: ExitId::Glacier__Revival__West__ex__Grid_39_40_7_9__Upper_East_1.into_usize() + 1,
-            },
-            actions: Range {
-                start: 0, end: 0,
-            },
-            area_spots: Range {
-                start: SpotId::Glacier__Revival__Save_Point.into_usize(),
-                end: SpotId::Glacier__Revival__West.into_usize() + 1,
-            },
-        },
         SpotId::Glacier__Grid_39_40_7_9__Upper_East => Spot {
             id: SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1.into_usize(),
-                end: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_1.into_usize() + 1,
+                start: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1.into_usize(),
+                end: ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -7992,8 +8132,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1.into_usize(),
-                end: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room_Top__East_9_1.into_usize() + 1,
+                start: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1.into_usize(),
+                end: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -8003,192 +8143,192 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__Grid_37_38_9__West.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__East_9 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__East_9,
+        SpotId::Glacier__Vertical_Room__East_9 => Spot {
+            id: SpotId::Glacier__Vertical_Room__East_9,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__East_9__ex__Grid_37_38_9__West_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__East_9__ex__Peak_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__West_9 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__West_9,
+        SpotId::Glacier__Vertical_Room__West_9 => Spot {
+            id: SpotId::Glacier__Vertical_Room__West_9,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__West_9__ex__Ledge_Grab_Room__East_9_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__Mid_9 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__Mid_9,
+        SpotId::Glacier__Vertical_Room__Mid_9 => Spot {
+            id: SpotId::Glacier__Vertical_Room__Mid_9,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__Mid_9__ex__Peak_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__Mid_11 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__Mid_11,
+        SpotId::Glacier__Vertical_Room__Mid_11 => Spot {
+            id: SpotId::Glacier__Vertical_Room__Mid_11,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__Mid_11__ex__Mid_9_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__Under_Switch => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__Under_Switch,
+        SpotId::Glacier__Vertical_Room__Under_Switch => Spot {
+            id: SpotId::Glacier__Vertical_Room__Under_Switch,
             locations: Range {
-                start: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize(),
-                end: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize() + 1,
+                start: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
+                end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize() + 1,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Mid_9_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__Under_Switch__ex__Vertical_Room_Left__Past_Gate_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__Peak => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__Peak,
+        SpotId::Glacier__Vertical_Room__Past_Gate => Spot {
+            id: SpotId::Glacier__Vertical_Room__Past_Gate,
             locations: Range {
-                start: LocationId::Glacier__Vertical_Room_Top__Peak__Flask.into_usize(),
-                end: LocationId::Glacier__Vertical_Room_Top__Peak__Flask.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__Peak__ex__West_8_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__West_8 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__West_8,
+        SpotId::Glacier__Vertical_Room__Peak => Spot {
+            id: SpotId::Glacier__Vertical_Room__Peak,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize(),
+                end: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize() + 1,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__West_8__ex__Peak__East_8_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__East_12 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__East_12,
+        SpotId::Glacier__Vertical_Room__West_8 => Spot {
+            id: SpotId::Glacier__Vertical_Room__West_8,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner,
+        SpotId::Glacier__Vertical_Room__East_12 => Spot {
+            id: SpotId::Glacier__Vertical_Room__East_12,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Top__East_13 => Spot {
-            id: SpotId::Glacier__Vertical_Room_Top__East_13,
+        SpotId::Glacier__Vertical_Room__Lower_West_Corner => Spot {
+            id: SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Top__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize() + 1,
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Top__East_12.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Top__West_9.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
-        SpotId::Glacier__Vertical_Room_Left__Past_Gate => Spot {
-            id: SpotId::Glacier__Vertical_Room_Left__Past_Gate,
+        SpotId::Glacier__Vertical_Room__East_13 => Spot {
+            id: SpotId::Glacier__Vertical_Room__East_13,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Ledge_Grab_Room__East_11_1.into_usize(),
-                end: ExitId::Glacier__Vertical_Room_Left__Past_Gate__ex__Vertical_Room_Top__Under_Switch_1.into_usize() + 1,
+                start: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize(),
+                end: ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Glacier__Vertical_Room_Left__Past_Gate.into_usize(),
-                end: SpotId::Glacier__Vertical_Room_Left__Past_Gate.into_usize() + 1,
+                start: SpotId::Glacier__Vertical_Room__East_12.into_usize(),
+                end: SpotId::Glacier__Vertical_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Glacier__Boomerang_Antechamber__West_13 => Spot {
@@ -8197,8 +8337,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1.into_usize(),
-                end: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room_Top__East_13_1.into_usize() + 1,
+                start: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -8248,8 +8388,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1.into_usize(),
-                end: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room_Top__East_12_1.into_usize() + 1,
+                start: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1.into_usize(),
+                end: ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -8418,7 +8558,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1.into_usize(),
-                end: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room_Top__West_9_1.into_usize() + 1,
+                end: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -8468,8 +8608,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1.into_usize(),
-                end: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room_Left__Past_Gate_1.into_usize() + 1,
+                start: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1.into_usize(),
+                end: ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -8965,6 +9105,170 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__Grid_31_9_12__West_12.into_usize() + 1,
             },
         },
+        SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Upper => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Upper,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Ledge => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Hill => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Bottom => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Side_Jump => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Side => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Side,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
+        SpotId::Glacier__Lake_Main_Entrance__Lake_Access => Spot {
+            id: SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Glacier__Lake_Main_Entrance__Bottom.into_usize(),
+                end: SpotId::Glacier__Lake_Main_Entrance__Upper_Platform.into_usize() + 1,
+            },
+        },
         SpotId::Glacier__Apocalypse_Entry__West => Spot {
             id: SpotId::Glacier__Apocalypse_Entry__West,
             locations: Range {
@@ -9263,7 +9567,10 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Ebih__Ebih_East__Dispenser__Vend.into_usize(),
             end: LocationId::Ebih__Ebih_East__Dispenser__Vend.into_usize() + 1,
         },
-        SpotId::Ebih__Ebih_East__East_Ledge => Range { start: 0, end: 0 },
+        SpotId::Ebih__Ebih_East__East_Ledge => Range {
+            start: LocationId::Ebih__Ebih_East__East_Ledge__Note.into_usize(),
+            end: LocationId::Ebih__Ebih_East__East_Ledge__Note.into_usize() + 1,
+        },
         SpotId::Ebih__Ebih_East__Middle_Platform => Range { start: 0, end: 0 },
         SpotId::Ebih__Ebih_East__Upper_Ledge => Range { start: 0, end: 0 },
         SpotId::Ebih__Ebih_East__West_7 => Range { start: 0, end: 0 },
@@ -9315,10 +9622,12 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Glacier__Dock_Interior__Entry => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Outside__Entry => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Outside__Do_Not_Enter => Range { start: 0, end: 0 },
-        SpotId::Glacier__Grid_41_9_10__East => Range { start: 0, end: 0 },
-        SpotId::Glacier__Grid_41_9_10__Overhang => Range { start: 0, end: 0 },
-        SpotId::Glacier__Grid_41_9_10__Ledge => Range { start: 0, end: 0 },
-        SpotId::Glacier__Grid_41_9_10__Lower_East => Range { start: 0, end: 0 },
+        SpotId::Glacier__Revival__East_9 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Revival__Overhang => Range { start: 0, end: 0 },
+        SpotId::Glacier__Revival__Ledge => Range { start: 0, end: 0 },
+        SpotId::Glacier__Revival__Lower_East => Range { start: 0, end: 0 },
+        SpotId::Glacier__Revival__Save_Point => Range { start: 0, end: 0 },
+        SpotId::Glacier__Revival__West_8 => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_42_10__West => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_42_10__East => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_43_10_11__Top => Range { start: 0, end: 0 },
@@ -9336,29 +9645,27 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize(),
             end: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize() + 1,
         },
-        SpotId::Glacier__Revival__Save_Point => Range { start: 0, end: 0 },
-        SpotId::Glacier__Revival__West => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_39_40_7_9__Upper_East => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_39_40_7_9__West => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_37_38_9__East => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_37_38_9__West => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__East_9 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__West_9 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__Mid_9 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__Mid_11 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__Under_Switch => Range {
-            start: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize(),
-            end: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize() + 1,
+        SpotId::Glacier__Vertical_Room__East_9 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__West_9 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__Mid_9 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__Mid_11 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__Under_Switch => Range {
+            start: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
+            end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize() + 1,
         },
-        SpotId::Glacier__Vertical_Room_Top__Peak => Range {
-            start: LocationId::Glacier__Vertical_Room_Top__Peak__Flask.into_usize(),
-            end: LocationId::Glacier__Vertical_Room_Top__Peak__Flask.into_usize() + 1,
+        SpotId::Glacier__Vertical_Room__Past_Gate => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__Peak => Range {
+            start: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize(),
+            end: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize() + 1,
         },
-        SpotId::Glacier__Vertical_Room_Top__West_8 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__East_12 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__Lower_West_Corner => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Top__East_13 => Range { start: 0, end: 0 },
-        SpotId::Glacier__Vertical_Room_Left__Past_Gate => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__West_8 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__East_12 => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__Lower_West_Corner => Range { start: 0, end: 0 },
+        SpotId::Glacier__Vertical_Room__East_13 => Range { start: 0, end: 0 },
         SpotId::Glacier__Boomerang_Antechamber__West_13 => Range { start: 0, end: 0 },
         SpotId::Glacier__Boomerang_Antechamber__East_12 => Range { start: 0, end: 0 },
         SpotId::Glacier__Boomerang_Antechamber__Upper_East => Range { start: 0, end: 0 },
@@ -9414,6 +9721,16 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_31_9_12__West_12 => Range { start: 0, end: 0 },
         SpotId::Glacier__Grid_31_9_12__Midair => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Upper => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Ledge => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Hill => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Bottom => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Side_Jump => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Side => Range { start: 0, end: 0 },
+        SpotId::Glacier__Lake_Main_Entrance__Lake_Access => Range { start: 0, end: 0 },
         SpotId::Glacier__Apocalypse_Entry__West => Range { start: 0, end: 0 },
         SpotId::Glacier__Apocalypse_Entry__Terminal => Range {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
@@ -9508,7 +9825,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Glacier__Dock_Elevator => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Interior => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Outside => Range { start: 0, end: 0 },
-        AreaId::Glacier__Grid_41_9_10 => Range { start: 0, end: 0 },
+        AreaId::Glacier__Revival => Range { start: 0, end: 0 },
         AreaId::Glacier__Grid_42_10 => Range { start: 0, end: 0 },
         AreaId::Glacier__Grid_43_10_11 => Range { start: 0, end: 0 },
         AreaId::Glacier__Compass_Room => Range {
@@ -9519,14 +9836,12 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize(),
             end: LocationId::Glacier__The_Big_Drop__Water_Surface__Drown.into_usize(),
         },
-        AreaId::Glacier__Revival => Range { start: 0, end: 0 },
         AreaId::Glacier__Grid_39_40_7_9 => Range { start: 0, end: 0 },
         AreaId::Glacier__Grid_37_38_9 => Range { start: 0, end: 0 },
-        AreaId::Glacier__Vertical_Room_Top => Range {
-            start: LocationId::Glacier__Vertical_Room_Top__Peak__Flask.into_usize(),
-            end: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize(),
+        AreaId::Glacier__Vertical_Room => Range {
+            start: LocationId::Glacier__Vertical_Room__Peak__Flask.into_usize(),
+            end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
         },
-        AreaId::Glacier__Vertical_Room_Left => Range { start: 0, end: 0 },
         AreaId::Glacier__Boomerang_Antechamber => Range { start: 0, end: 0 },
         AreaId::Glacier__Boomerang_Room => Range {
             start: LocationId::Glacier__Boomerang_Room__Pedestal__Item.into_usize(),
@@ -9540,6 +9855,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Glacier__Peak => Range { start: 0, end: 0 },
         AreaId::Glacier__Grid_32_7_10 => Range { start: 0, end: 0 },
         AreaId::Glacier__Grid_31_9_12 => Range { start: 0, end: 0 },
+        AreaId::Glacier__Lake_Main_Entrance => Range { start: 0, end: 0 },
         AreaId::Glacier__Apocalypse_Entry => Range {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
@@ -9563,7 +9879,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
         },
         RegionId::Glacier => Range {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
-            end: LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch.into_usize(),
+            end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
         },
         RegionId::Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),

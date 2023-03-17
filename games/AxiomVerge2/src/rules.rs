@@ -36,6 +36,10 @@ pub fn access_climb(ctx: &Context) -> bool {
     // $climb
     helper__climb!(ctx)
 }
+pub fn access_climb_and_grab(ctx: &Context) -> bool {
+    // $climb and $grab
+    (helper__climb!(ctx) && helper__grab!(ctx))
+}
 pub fn access_defeat_ebih_alu(ctx: &Context) -> bool {
     // Defeat_Ebih_Alu
     ctx.has(Item::Defeat_Ebih_Alu)
@@ -98,6 +102,10 @@ pub fn access_infect_and_flask__3(ctx: &Context) -> bool {
     // Infect and Flask{3}
     (ctx.has(Item::Infect) && ctx.count(Item::Flask) >= 3)
 }
+pub fn access_liru(ctx: &Context) -> bool {
+    // Liru
+    ctx.has(Item::Liru)
+}
 pub fn access_melee_or_boomerang(ctx: &Context) -> bool {
     // $melee or Boomerang
     (helper__melee!(ctx) || ctx.has(Item::Boomerang))
@@ -113,6 +121,10 @@ pub fn access_mode__drone(ctx: &Context) -> bool {
 pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
+}
+pub fn access_not_water(ctx: &Context) -> bool {
+    // not ^water
+    !ctx.water()
 }
 pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'

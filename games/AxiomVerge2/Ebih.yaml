@@ -64,6 +64,9 @@ areas:
       local:
         - to: Bunker Entry
         - to: Staircase
+      exits:
+        - to: Glacier > Lake Main Entrance > Ebih Access
+          tags: [xshift]
     - name: Behind Vehicle
       coord: [28.8, 12.9]
       local:
@@ -859,6 +862,10 @@ areas:
           jumps: 2
         - to: Ledge End
         - to: Lower Moving Platform
+      locations:
+        - name: Note
+          item: Under_Siege
+          tags: [standing]
     - name: Middle Platform
       coord: [26.85, 7.5]
       local:

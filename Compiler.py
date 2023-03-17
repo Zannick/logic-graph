@@ -924,7 +924,8 @@ class GameLogic(object):
 
     @cached_property
     def context_here_overrides(self):
-        d = {c: {'region': defaultdict(dict), 'area': defaultdict(dict)}
+        d = {c: {'region': defaultdict(dict), 'area': defaultdict(dict),
+                 'spot': defaultdict(dict)}
              for c in self.context_types}
         for r in self.regions:
             localctx = self.get_local_ctx(r)
@@ -942,6 +943,14 @@ class GameLogic(object):
                     if t == 'SpotId':
                         v = f'{a["fullname"]} > {v}'
                     d[localctx[k]]['area'][a['id']] = str_to_rusttype(v, t)
+        for s in self.spots():
+            localctx = self.get_local_ctx(s)
+            if here := s.get('here'):
+                for k, v in here.items():
+                    t = self.context_types[localctx[k]]
+                    if t == 'SpotId':
+                        v = f'{s["region"]} > {s["area"]} > {v}'
+                    d[localctx[k]]['spot'][a['id']] = str_to_rusttype(v, t)
         return d
 
     @cached_property

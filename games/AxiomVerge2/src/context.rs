@@ -59,8 +59,9 @@ pub struct Context {
     pub last: SpotId,
     pub prev_area: AreaId,
     pub energy: i32,
-    pub breach: bool,
     pub flasks: i32,
+    pub breach: bool,
+    pub water: bool,
     pub ebih__waterfall__ctx__left_block: bool,
     pub ebih__waterfall__ctx__right_block: bool,
     pub ebih__ebih_east__ctx__platform1_moved: bool,
@@ -80,6 +81,7 @@ pub struct Context {
     pub ice_axe: bool,
     pub infect: bool,
     pub ledge_grab: bool,
+    pub liru: bool,
     pub mist_upgrade: bool,
     pub remote_drone: bool,
     pub slingshot_hook: bool,
@@ -103,8 +105,9 @@ impl Default for Context {
             last: SpotId::None,
             prev_area: AreaId::Antarctica__West,
             energy: 0,
-            breach: false,
             flasks: 0,
+            breach: false,
+            water: false,
             ebih__waterfall__ctx__left_block: false,
             ebih__waterfall__ctx__right_block: false,
             ebih__ebih_east__ctx__platform1_moved: false,
@@ -124,6 +127,7 @@ impl Default for Context {
             ice_axe: Default::default(),
             infect: Default::default(),
             ledge_grab: Default::default(),
+            liru: Default::default(),
             mist_upgrade: Default::default(),
             remote_drone: Default::default(),
             slingshot_hook: Default::default(),
@@ -144,7 +148,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 16;
+    const NUM_ITEMS: i32 = 17;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -157,6 +161,7 @@ impl context::Ctx for Context {
             Item::Ice_Axe => self.ice_axe,
             Item::Infect => self.infect,
             Item::Ledge_Grab => self.ledge_grab,
+            Item::Liru => self.liru,
             Item::Mist_Upgrade => self.mist_upgrade,
             Item::Remote_Drone => self.remote_drone,
             Item::Slingshot_Hook => self.slingshot_hook,
@@ -178,6 +183,7 @@ impl context::Ctx for Context {
             Item::Ice_Axe => self.ice_axe.into(),
             Item::Infect => self.infect.into(),
             Item::Ledge_Grab => self.ledge_grab.into(),
+            Item::Liru => self.liru.into(),
             Item::Mist_Upgrade => self.mist_upgrade.into(),
             Item::Remote_Drone => self.remote_drone.into(),
             Item::Slingshot_Hook => self.slingshot_hook.into(),
@@ -219,6 +225,9 @@ impl context::Ctx for Context {
             }
             Item::Ledge_Grab => {
                 self.ledge_grab = true;
+            }
+            Item::Liru => {
+                self.liru = true;
             }
             Item::Mist_Upgrade => {
                 self.mist_upgrade = true;
@@ -328,6 +337,91 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Ebih__Waterfall => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Apocalypse_Entry => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Boomerang_Antechamber => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Boomerang_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Compass_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Dock_Outside => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Grid_31_9_12 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Grid_32_7_10 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Grid_37_38_9 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Grid_39_40_7_9 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Grid_42_10 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Grid_43_10_11 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Lake_Main_Entrance => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Ledge_Grab_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Peak => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Revival => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__The_Big_Drop => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Glacier__Vertical_Room => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -450,100 +544,137 @@ impl context::Ctx for Context {
 
 impl Context {
     pub fn position(&self) -> SpotId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.position,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.position,
+                },
             },
         }
     }
     pub fn save(&self) -> SpotId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.save,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.save,
+                },
             },
         }
     }
     pub fn mode(&self) -> enums::Mode {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.mode,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.mode,
+                },
             },
         }
     }
     pub fn indra(&self) -> SpotId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.indra,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.indra,
+                },
             },
         }
     }
     pub fn last(&self) -> SpotId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.last,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.last,
+                },
             },
         }
     }
     pub fn prev_area(&self) -> AreaId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.prev_area,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.prev_area,
+                },
             },
         }
     }
     pub fn energy(&self) -> i32 {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.energy,
-            },
-        }
-    }
-    pub fn breach(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.breach,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.energy,
+                },
             },
         }
     }
     pub fn flasks(&self) -> i32 {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.flasks,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.flasks,
+                },
+            },
+        }
+    }
+    pub fn breach(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.breach,
+                },
+            },
+        }
+    }
+    pub fn water(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.water,
+                },
             },
         }
     }
     pub fn ebih__waterfall__ctx__left_block(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.ebih__waterfall__ctx__left_block,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__waterfall__ctx__left_block,
+                },
             },
         }
     }
     pub fn ebih__waterfall__ctx__right_block(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.ebih__waterfall__ctx__right_block,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__waterfall__ctx__right_block,
+                },
             },
         }
     }
     pub fn ebih__ebih_east__ctx__platform1_moved(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.ebih__ebih_east__ctx__platform1_moved,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__ebih_east__ctx__platform1_moved,
+                },
             },
         }
     }
     pub fn ebih__ebih_east__ctx__platform2_moved(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.ebih__ebih_east__ctx__platform2_moved,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__ebih_east__ctx__platform2_moved,
+                },
             },
         }
     }
     pub fn ebih__drone_room__ctx__platform_moved(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.ebih__drone_room__ctx__platform_moved,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__drone_room__ctx__platform_moved,
+                },
             },
         }
     }
