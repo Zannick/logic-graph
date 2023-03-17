@@ -1338,40 +1338,7 @@ pub enum LocationId {
     Glacier__Vertical_Room_Top__Peak__Flask,
     Glacier__Vertical_Room_Top__Under_Switch__Switch,
     Menu__Upgrade_Menu__Combat__Melee_Damage_1,
-    Menu__Upgrade_Menu__Combat__Melee_Damage_2,
-    Menu__Upgrade_Menu__Combat__Melee_Damage_3,
-    Menu__Upgrade_Menu__Combat__Melee_Speed_1,
-    Menu__Upgrade_Menu__Combat__Melee_Speed_2,
-    Menu__Upgrade_Menu__Combat__Melee_Speed_3,
-    Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
-    Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
-    Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
-    Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
-    Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
-    Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
-    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
-    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
-    Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
-    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
-    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
-    Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
-    Menu__Upgrade_Menu__Infection__Infection_Level_1,
-    Menu__Upgrade_Menu__Infection__Infection_Level_2,
-    Menu__Upgrade_Menu__Infection__Infection_Level_3,
-    Menu__Upgrade_Menu__Infection__Infection_Range_1,
-    Menu__Upgrade_Menu__Infection__Infection_Range_2,
-    Menu__Upgrade_Menu__Infection__Infection_Range_3,
-    Menu__Upgrade_Menu__Infection__Infection_Speed_1,
-    Menu__Upgrade_Menu__Infection__Infection_Speed_2,
-    Menu__Upgrade_Menu__Infection__Nano_Points_1,
-    Menu__Upgrade_Menu__Infection__Nano_Points_2,
-    Menu__Upgrade_Menu__Infection__Nano_Points_3,
     Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
-    Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
-    Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
-    Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
-    Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
-    Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
 }
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -1480,134 +1447,11 @@ impl fmt::Display for LocationId {
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
                 write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_1")
             }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_3")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_3")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_3")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_3")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_3")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_3")
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Level_1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Level_2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Level_3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Range_1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Range_2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Range_3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Speed_1"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Speed_2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_3")
-            }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
                 f,
                 "{}",
                 "Menu > Upgrade Menu > Physiology: Health_Upgrade_1"
             ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_2"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_3"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_4"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
-                f,
-                "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_5"
-            ),
-            LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                write!(f, "{}", "Menu > Upgrade Menu > Physiology: Mist_Upgrade")
-            }
         }
     }
 }
@@ -1699,107 +1543,8 @@ impl std::str::FromStr for LocationId {
             "Menu > Upgrade Menu > Combat: Melee_Damage_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Damage_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2)
-            }
-            "Menu > Upgrade Menu > Combat: Melee_Damage_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3)
-            }
-            "Menu > Upgrade Menu > Combat: Melee_Speed_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1)
-            }
-            "Menu > Upgrade Menu > Combat: Melee_Speed_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2)
-            }
-            "Menu > Upgrade Menu > Combat: Melee_Speed_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3)
-            }
-            "Menu > Upgrade Menu > Combat: Ranged_Damage_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
-            }
-            "Menu > Upgrade Menu > Combat: Ranged_Damage_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
-            }
-            "Menu > Upgrade Menu > Combat: Ranged_Damage_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
-            }
-            "Menu > Upgrade Menu > Combat: Ranged_Speed_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
-            }
-            "Menu > Upgrade Menu > Combat: Ranged_Speed_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
-            }
-            "Menu > Upgrade Menu > Combat: Ranged_Speed_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
-            }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
-            }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
-            }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
-            }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
-            }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
-            }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Level_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Level_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Level_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Range_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Range_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Range_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Speed_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1)
-            }
-            "Menu > Upgrade Menu > Infection: Infection_Speed_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2)
-            }
-            "Menu > Upgrade Menu > Infection: Nano_Points_1" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1)
-            }
-            "Menu > Upgrade Menu > Infection: Nano_Points_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2)
-            }
-            "Menu > Upgrade Menu > Infection: Nano_Points_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3)
-            }
             "Menu > Upgrade Menu > Physiology: Health_Upgrade_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
-            }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_2" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
-            }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_3" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
-            }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_4" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
-            }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_5" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
-            }
-            "Menu > Upgrade Menu > Physiology: Mist_Upgrade" => {
-                Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
             }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
         }
@@ -2960,88 +2705,7 @@ impl world::Accessible for Location {
                     rules::access_boomerang(&ctx)
                 }
                 LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => true,
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                    rules::access_melee_damage(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                    rules::access_melee_damage__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => true,
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                    rules::access_melee_speed(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                    rules::access_melee_speed__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => true,
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                    rules::access_ranged_damage(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                    rules::access_ranged_damage__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => true,
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                    rules::access_ranged_speed(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                    rules::access_ranged_speed__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => true,
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
-                    rules::access_drone_melee_damage(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                    rules::access_drone_melee_damage__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => true,
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                    rules::access_drone_melee_speed(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                    rules::access_drone_melee_speed__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => true,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                    rules::access_infection_level(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                    rules::access_infection_level__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => true,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                    rules::access_infection_range(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                    rules::access_infection_range__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => true,
-                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => {
-                    rules::access_infection_speed(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => true,
-                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                    rules::access_nano_points(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                    rules::access_nano_points__2(&ctx)
-                }
                 LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => true,
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => {
-                    rules::access_health_upgrade(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => {
-                    rules::access_health_upgrade__2(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => {
-                    rules::access_health_upgrade__3(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => {
-                    rules::access_health_upgrade__4(&ctx)
-                }
-                LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                    rules::access_nanite_mist(&ctx)
-                }
             }
     }
     fn time(&self) -> i32 {
@@ -3500,7 +3164,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 65;
+    const NUM_LOCATIONS: i32 = 33;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -3635,48 +3299,11 @@ impl world::World for World {
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 SpotId::Glacier__Apocalypse_Entry__Terminal
             }
-            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4
-            | LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5
-            | LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
+            LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => {
                 SpotId::Menu__Upgrade_Menu__Physiology
             }
-            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
+            LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
                 SpotId::Menu__Upgrade_Menu__Combat
-            }
-            LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1
-            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2
-            | LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                SpotId::Menu__Upgrade_Menu__Infection
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2
-            | LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                SpotId::Menu__Upgrade_Menu__Drone
             }
         }
     }
@@ -3722,7 +3349,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access_amashilama(ctx),
-            Objective::Progress => rules::access_infect_and_defeat_ebih_alu(ctx),
+            Objective::Progress => rules::access_infect_and_flask__3(ctx),
         }
     }
 
@@ -4238,275 +3865,11 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 1000,
             exit_id: None,
         },
-        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
-            canonical: CanonId::None,
-            item: Item::Health_Upgrade,
-            price: Currency::Flasks(2),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
-            canonical: CanonId::None,
-            item: Item::Health_Upgrade,
-            price: Currency::Flasks(4),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
-            canonical: CanonId::None,
-            item: Item::Health_Upgrade,
-            price: Currency::Flasks(4),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
-            canonical: CanonId::None,
-            item: Item::Health_Upgrade,
-            price: Currency::Flasks(6),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => Location {
-            id: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade,
-            canonical: CanonId::None,
-            item: Item::Mist_Upgrade,
-            price: Currency::Flasks(5),
-            time: 1000,
-            exit_id: None,
-        },
         LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => Location {
             id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1,
             canonical: CanonId::None,
             item: Item::Melee_Damage,
             price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
-            canonical: CanonId::None,
-            item: Item::Melee_Damage,
-            price: Currency::Flasks(4),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
-            canonical: CanonId::None,
-            item: Item::Melee_Damage,
-            price: Currency::Flasks(6),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1,
-            canonical: CanonId::None,
-            item: Item::Melee_Speed,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
-            canonical: CanonId::None,
-            item: Item::Melee_Speed,
-            price: Currency::Flasks(4),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
-            canonical: CanonId::None,
-            item: Item::Melee_Speed,
-            price: Currency::Flasks(6),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
-            canonical: CanonId::None,
-            item: Item::Ranged_Damage,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
-            canonical: CanonId::None,
-            item: Item::Ranged_Damage,
-            price: Currency::Flasks(4),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
-            canonical: CanonId::None,
-            item: Item::Ranged_Damage,
-            price: Currency::Flasks(6),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
-            canonical: CanonId::None,
-            item: Item::Ranged_Speed,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
-            canonical: CanonId::None,
-            item: Item::Ranged_Speed,
-            price: Currency::Flasks(3),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
-            canonical: CanonId::None,
-            item: Item::Ranged_Speed,
-            price: Currency::Flasks(5),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
-            canonical: CanonId::None,
-            item: Item::Infection_Level,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
-            canonical: CanonId::None,
-            item: Item::Infection_Level,
-            price: Currency::Flasks(3),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
-            canonical: CanonId::None,
-            item: Item::Infection_Level,
-            price: Currency::Flasks(4),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1,
-            canonical: CanonId::None,
-            item: Item::Nano_Points,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
-            canonical: CanonId::None,
-            item: Item::Nano_Points,
-            price: Currency::Flasks(3),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
-            canonical: CanonId::None,
-            item: Item::Nano_Points,
-            price: Currency::Flasks(5),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1,
-            canonical: CanonId::None,
-            item: Item::Infection_Speed,
-            price: Currency::Flasks(2),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
-            canonical: CanonId::None,
-            item: Item::Infection_Speed,
-            price: Currency::Flasks(5),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1,
-            canonical: CanonId::None,
-            item: Item::Infection_Range,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
-            canonical: CanonId::None,
-            item: Item::Infection_Range,
-            price: Currency::Flasks(3),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
-            canonical: CanonId::None,
-            item: Item::Infection_Range,
-            price: Currency::Flasks(5),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
-            canonical: CanonId::None,
-            item: Item::Drone_Melee_Damage,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
-            canonical: CanonId::None,
-            item: Item::Drone_Melee_Damage,
-            price: Currency::Flasks(3),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
-            canonical: CanonId::None,
-            item: Item::Drone_Melee_Damage,
-            price: Currency::Flasks(5),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
-            canonical: CanonId::None,
-            item: Item::Drone_Melee_Speed,
-            price: Currency::Flasks(1),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
-            canonical: CanonId::None,
-            item: Item::Drone_Melee_Speed,
-            price: Currency::Flasks(3),
-            time: 1000,
-            exit_id: None,
-        },
-        LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => Location {
-            id: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
-            canonical: CanonId::None,
-            item: Item::Drone_Melee_Speed,
-            price: Currency::Flasks(5),
             time: 1000,
             exit_id: None,
         },
@@ -9638,7 +9001,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Menu__Upgrade_Menu__Physiology,
             locations: Range {
                 start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
-                end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
+                end: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1.into_usize(),
@@ -9656,7 +9019,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Menu__Upgrade_Menu__Combat,
             locations: Range {
                 start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
-                end: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3.into_usize() + 1,
+                end: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1.into_usize(),
@@ -9673,8 +9036,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Menu__Upgrade_Menu__Infection => Spot {
             id: SpotId::Menu__Upgrade_Menu__Infection,
             locations: Range {
-                start: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1.into_usize(),
-                end: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1.into_usize(),
@@ -9691,8 +9053,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Menu__Upgrade_Menu__Drone => Spot {
             id: SpotId::Menu__Upgrade_Menu__Drone,
             locations: Range {
-                start: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1.into_usize(),
-                end: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1.into_usize(),
@@ -10058,20 +9419,14 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
+            end: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize() + 1,
         },
         SpotId::Menu__Upgrade_Menu__Combat => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3.into_usize() + 1,
+            end: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize() + 1,
         },
-        SpotId::Menu__Upgrade_Menu__Infection => Range {
-            start: LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3.into_usize() + 1,
-        },
-        SpotId::Menu__Upgrade_Menu__Drone => Range {
-            start: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3.into_usize() + 1,
-        },
+        SpotId::Menu__Upgrade_Menu__Infection => Range { start: 0, end: 0 },
+        SpotId::Menu__Upgrade_Menu__Drone => Range { start: 0, end: 0 },
     }
 }
 
@@ -10189,7 +9544,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
         },
     }
 }
@@ -10210,7 +9565,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
         },
         RegionId::Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
-            end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
+            end: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
         },
     }
 }
