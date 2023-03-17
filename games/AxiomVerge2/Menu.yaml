@@ -5,7 +5,7 @@ areas:
   spots:
     - name: Physiology
       locations:
-        - name: Health_Upgrade_1
+        - name: Health Upgrade 1
           item: Health_Upgrade
           price: 1
           costs: flasks
@@ -19,7 +19,7 @@ areas:
           time: 0.1
     - name: Combat
       locations:
-        - name: Melee_Damage_1
+        - name: Melee Damage 1
           item: Melee_Damage
           price: 1
           costs: flasks

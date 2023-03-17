@@ -274,24 +274,28 @@ where
             m_iters += 1;
         }
         if iters % 10000 == 0 {
-            let (iskips, pskips) = heap.stats();
+            let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
-                "Round {} (min: {}) (heap size {}, skipped {} pushes + {} pops, unique solutions: {}):\n  {}",
+                "--- Round {} (minimize rounds: {}, unique solutions: {}) ---\n\
+                Heap stats: count={}; push_skips={} time, {} dups; pop_skips={} time, {} dups\n\
+                {}",
                 iters,
                 m_iters,
+                solutions.unique(),
                 heap.len(),
                 iskips,
+                dskips,
                 pskips,
-                solutions.unique(),
+                dpskips,
                 ctx.info()
             );
         }
         search_step(world, ctx, &mut heap);
     }
-    let (iskips, pskips) = heap.stats();
+    let (iskips, pskips, dskips, dpskips) = heap.stats();
     println!(
-        "Finished after {} rounds (w/ {} minimize rounds), skipped {} pushes + {} pops",
-        iters, m_iters, iskips, pskips
+        "Finished after {} rounds (w/ {} minimize rounds), skipped {}+{} pushes + {}+{} pops",
+        iters, m_iters, iskips, dskips, pskips, dpskips
     );
     solutions.export()
 }

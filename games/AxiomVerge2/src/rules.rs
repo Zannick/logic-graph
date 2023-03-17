@@ -20,10 +20,6 @@ pub fn access_amashilama(ctx: &Context) -> bool {
     // Amashilama
     ctx.has(Item::Amashilama)
 }
-pub fn access_amashilama_and_mode__drone(ctx: &Context) -> bool {
-    // Amashilama and ^mode != 'drone'
-    (ctx.has(Item::Amashilama) && ctx.mode() != enums::Mode::Drone)
-}
 pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
@@ -122,6 +118,14 @@ pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
 }
+pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
+    ((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && ctx.has(Item::Amashilama))
+        && ctx.mode() != enums::Mode::Drone)
+}
 pub fn access_not_within_menu_and_can_deploy(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and $can_deploy
     (!(match get_region(ctx.position()) {
@@ -142,6 +146,13 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     }) && ctx.flasks() > 0)
+}
+pub fn access_not_within_menu_and_mode__drone(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and ^mode == 'drone'
+    (!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && ctx.mode() == enums::Mode::Drone)
 }
 pub fn access_offset(ctx: &Context) -> bool {
     // $offset

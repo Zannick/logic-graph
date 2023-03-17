@@ -62,13 +62,13 @@ warps:
     loads: true
   indra_save:
     time: 14.5
-    req: Amashilama and ^mode != 'drone'
+    req: NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
     to: ^save
     do: ^energy = $max_energy
     loads: true
   drone_save:
     time: 12
-    req: ^mode == 'drone'
+    req: NOT WITHIN `Menu` and ^mode == 'drone'
     to: ^save
     do: ^energy = $max_energy
   menu:

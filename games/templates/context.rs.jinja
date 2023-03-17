@@ -20,14 +20,14 @@ use std::fmt;
 %% endfor
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Status {
     #[default] None,
     Visited,
     Skipped,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Context {
 %# Splitting into separate Cow structs performs worse :(
     // context vars

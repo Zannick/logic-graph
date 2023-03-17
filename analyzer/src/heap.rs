@@ -1,6 +1,6 @@
 use crate::context::*;
 use sort_by_derive::SortBy;
-use std::collections::BinaryHeap;
+use std::collections::{BinaryHeap, HashMap};
 use std::fmt::Debug;
 
 #[derive(Debug, SortBy)]
@@ -15,12 +15,14 @@ struct HeapElement<T: Ctx> {
 ///   (controlled by the ContextWrapper object)
 /// * a threshold of elapsed time can be set to make the heap ignore
 ///   items that have surpassed the elapsed time.
-#[derive(Debug)]
 pub struct LimitedHeap<T: Ctx> {
     max_time: i32,
     heap: BinaryHeap<HeapElement<T>>,
+    states_seen: HashMap<T, i32>,
     iskips: i32,
     pskips: i32,
+    dup_skips: i32,
+    dup_pskips: i32,
 }
 
 impl<T: Ctx> LimitedHeap<T> {
@@ -28,8 +30,11 @@ impl<T: Ctx> LimitedHeap<T> {
         LimitedHeap {
             max_time: i32::MAX,
             heap: BinaryHeap::new(),
+            states_seen: HashMap::new(),
             iskips: 0,
             pskips: 0,
+            dup_skips: 0,
+            dup_pskips: 0,
         }
     }
 
@@ -58,8 +63,19 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 
     /// Pushes an element into the heap.
-    /// If the element's elapsed time is greater than the allowed maximum, does nothing.
+    /// If the element's elapsed time is greater than the allowed maximum,
+    /// or, the state has been previously seen with a lower elapsed time, does nothing.
     pub fn push(&mut self, el: ContextWrapper<T>) {
+        if let Some(min) = self.states_seen.get_mut(el.get()) {
+            if el.elapsed() < *min {
+                *min = el.elapsed();
+            } else {
+                self.dup_skips += 1;
+                return;
+            }
+        } else {
+            self.states_seen.insert(el.get().clone(), el.elapsed());
+        }
         if el.elapsed() <= self.max_time {
             self.heap.push(HeapElement {
                 score: el.score(),
@@ -71,12 +87,17 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 
     /// Returns the next element with the highest score, or None.
-    /// Will skip over any elements whose elapsed time is greater than the allowed maximum.
+    /// Will skip over any elements whose elapsed time is greater than the allowed maximum,
+    /// or whose elapsed time is greater than the minimum seen for that state.
     pub fn pop(&mut self) -> Option<ContextWrapper<T>> {
         // Lazily clear when the max time is changed with elements in the heap
         while let Some(el) = self.heap.pop() {
             if el.el.elapsed() <= self.max_time {
-                return Some(el.el);
+                if el.el.elapsed() <= *self.states_seen.get(el.el.get()).unwrap() {
+                    return Some(el.el);
+                } else {
+                    self.dup_pskips += 1;
+                }
             } else {
                 self.pskips += 1;
             }
@@ -98,6 +119,16 @@ impl<T: Ctx> LimitedHeap<T> {
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
         self.heap.extend(iter.into_iter().filter_map(|c| {
+            if let Some(min) = self.states_seen.get_mut(c.get()) {
+                if c.elapsed() < *min {
+                    *min = c.elapsed();
+                } else {
+                    self.dup_skips += 1;
+                    return None;
+                }
+            } else {
+                self.states_seen.insert(c.get().clone(), c.elapsed());
+            }
             if c.elapsed() <= self.max_time {
                 Some(HeapElement {
                     score: c.score(),
@@ -113,14 +144,18 @@ impl<T: Ctx> LimitedHeap<T> {
     pub fn iter(&self) -> impl Iterator<Item = &ContextWrapper<T>> + '_ {
         self.heap.iter().filter_map(|e| {
             if e.el.elapsed() <= self.max_time {
-                Some(&e.el)
+                if e.el.elapsed() <= *self.states_seen.get(e.el.get()).unwrap() {
+                    Some(&e.el)
+                } else {
+                    None
+                }
             } else {
                 None
             }
         })
     }
 
-    pub fn stats(&self) -> (i32, i32) {
-        (self.iskips, self.pskips)
+    pub fn stats(&self) -> (i32, i32, i32, i32) {
+        (self.iskips, self.pskips, self.dup_skips, self.dup_pskips)
     }
 }

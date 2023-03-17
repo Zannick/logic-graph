@@ -41,7 +41,7 @@ pub mod enums {
     }
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Status {
     #[default]
     None,
@@ -49,7 +49,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Context {
     // context vars
     pub position: SpotId,

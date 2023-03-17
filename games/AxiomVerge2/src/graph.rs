@@ -1445,12 +1445,12 @@ impl fmt::Display for LocationId {
                 "Glacier > Vertical Room Top > Under Switch: Switch"
             ),
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee Damage 1")
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_1"
+                "Menu > Upgrade Menu > Physiology: Health Upgrade 1"
             ),
         }
     }
@@ -1540,10 +1540,10 @@ impl std::str::FromStr for LocationId {
             "Glacier > Vertical Room Top > Under Switch: Switch" => {
                 Ok(LocationId::Glacier__Vertical_Room_Top__Under_Switch__Switch)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Damage_1" => {
+            "Menu > Upgrade Menu > Combat: Melee Damage 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
             }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_1" => {
+            "Menu > Upgrade Menu > Physiology: Health Upgrade 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
             }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
@@ -3074,10 +3074,12 @@ impl world::Accessible for Warp {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
-                WarpId::DroneSave => rules::access_mode__drone(&ctx),
+                WarpId::DroneSave => rules::access_not_within_menu_and_mode__drone(&ctx),
                 WarpId::EarthSave => rules::access_within_antarctica(&ctx),
                 WarpId::ExitMenu => rules::access_within_menu(&ctx),
-                WarpId::IndraSave => rules::access_amashilama_and_mode__drone(&ctx),
+                WarpId::IndraSave => {
+                    rules::access_not_within_menu_and_amashilama_and_mode__drone(&ctx)
+                }
                 WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx),
             }
     }

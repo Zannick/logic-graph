@@ -4,7 +4,7 @@ use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::rc::Rc;
 
-pub trait Ctx: Clone + Eq + Debug {
+pub trait Ctx: Clone + Eq + Debug + Hash {
     type World: World;
     type ItemId: Id;
     type AreaId: Id;
