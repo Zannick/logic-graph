@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use crate::access::*;
+use crate::algo::action_unlocked_anything;
 use crate::context::*;
 use crate::minimize::*;
 use crate::world::*;
@@ -49,6 +50,35 @@ where
     }
 }
 
+pub fn one_useful_action<W, T, E, L, Wp>(
+    world: &W,
+    spot_vec: &Vec<ContextWrapper<T>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Exit = E, Location = L, Warp = Wp>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+    Wp: Warp<Context = T, SpotId = E::SpotId>,
+{
+    for ctx in spot_vec {
+        for act in world
+            .get_global_actions()
+            .iter()
+            .chain(world.get_spot_actions(ctx.get().position()))
+        {
+            if act.can_access(ctx.get()) {
+                let mut newctx = ctx.clone();
+                newctx.activate(act);
+                if action_unlocked_anything(world, &newctx, act, &spot_vec) {
+                    return Some(newctx);
+                }
+            }
+        }
+    }
+    None
+}
+
 pub fn grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
 where
     W: World<Exit = E, Location = L>,
@@ -72,24 +102,6 @@ where
     }
 }
 
-pub fn do_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
-where
-    W: World<Exit = E, Location = L>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
-{
-    for act in world
-        .get_global_actions()
-        .iter()
-        .chain(world.get_spot_actions(ctx.get().position()))
-    {
-        if act.can_access(ctx.get()) && ctx.is_useful(act) {
-            ctx.activate(act);
-        }
-    }
-}
-
 fn greedy_internal<W, T, L, E>(
     world: &W,
     mut ctx: ContextWrapper<T>,
@@ -108,32 +120,35 @@ where
             ctx = c;
             grab_all(world, &mut ctx);
             actions = 0;
-        } else if let Some(c) = nearest_spot_with_actions(world, &spot_map) {
-            ctx = c;
-            // TODO: this probably shouldn't do all global actions, maybe we pick the fastest/cheapest?
-            do_all(world, &mut ctx);
-            actions += 1;
         } else {
-            let ctx = spot_map
-                .into_values()
-                .into_iter()
-                .last()
-                .expect("couldn't reach any spots!");
-            return Err(ctx);
-        }
-        if actions > 2 {
-            let ctx = spot_map
-                .into_values()
-                .into_iter()
-                .last()
-                .expect("couldn't reach any spots!");
-            return Err(ctx);
+            let mut spot_vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
+            spot_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
+            if let Some(c) = one_useful_action(world, &spot_vec) {
+                ctx = c;
+                actions += 1;
+            } else {
+                let ctx = spot_vec
+                    .into_iter()
+                    .last()
+                    .expect("couldn't reach any spots!");
+                return Err(ctx);
+            }
+            if actions > 2 {
+                let ctx = spot_vec
+                    .into_iter()
+                    .last()
+                    .expect("couldn't reach any spots!");
+                return Err(ctx);
+            }
         }
     }
     Ok(ctx)
 }
 
-pub fn greedy_search<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Result<ContextWrapper<T>, ContextWrapper<T>>
+pub fn greedy_search<W, T, L, E>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -143,7 +158,10 @@ where
     greedy_internal(world, ctx.clone())
 }
 
-pub fn greedy_search_from<W, T, L, E>(world: &W, ctx: &T) -> Result<ContextWrapper<T>, ContextWrapper<T>>
+pub fn greedy_search_from<W, T, L, E>(
+    world: &W,
+    ctx: &T,
+) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,

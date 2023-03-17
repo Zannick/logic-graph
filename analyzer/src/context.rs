@@ -216,8 +216,8 @@ impl<T: Ctx> ContextWrapper<T> {
         // We want to sort by elapsed time, low to high: (X - elapsed)
         // with a bonus based on progress to prioritize states closer to the end:
         //   + progress * progress [progress in range 0..100]
-        // penalty is added to states that
-        self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
+        // penalty is added to states that do really inefficient things
+        100 * self.ctx.progress() - self.elapsed - self.penalty
     }
 
     pub fn get(&self) -> &T {
@@ -338,7 +338,8 @@ impl<T: Ctx> ContextWrapper<T> {
                     History::Activate(a) => {
                         if a == action.id() {
                             prev += 1;
-                            if prev >= cycle {
+                            // In case it is useful to switch once and back for movement
+                            if prev > cycle {
                                 return false;
                             }
                         } else {

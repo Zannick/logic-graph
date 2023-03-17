@@ -24,12 +24,15 @@ where
     let spot_map = accessible_spots(world, ctx);
     let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
 
-    if vec.is_empty() {
+    if vec.len() < 2 {
         return vec;
     }
 
     vec.sort_unstable_by_key(|el| el.elapsed());
-    let shortest = vec[0].elapsed();
+    if vec.len() < 5 {
+        return vec;
+    }
+    let shortest = vec[2].elapsed();
     // Suppose the distances to these spots are (delta from the first one) 0, 2, 3, 5, 10.
     // We want penalties to increase somewhat quadratically based on count (not just distance).
     // Penalties:
@@ -38,8 +41,10 @@ where
     // Fifth el: (3rd-1st)*2 + 4th-3rd = 4th+3rd - 2*1st, (6+2)
     // that's 0, 0, 2, 5, 8
     // penalties for 0, 1, 2, 3, 4, 5, 6: 0, 0, 1, 3, 7, 15, 31
-    for i in 2..vec.len() {
-        let penalty = vec[i].elapsed() + vec[i - 1].elapsed() - 2 * shortest;
+    // We should maybe reduce penalties for a few more of the early ones, since
+    // #0 is our current spot, #1 and #2 are probably the path forward
+    for i in 4..vec.len() {
+        let penalty = vec[i].elapsed() + vec[i - 3].elapsed() - 2 * shortest;
         vec[i].penalize(penalty);
     }
     vec
@@ -110,15 +115,10 @@ where
 {
     // TODO: can this be cached for the next search step?
     let new_spots = accessible_spots(world, ctx.clone());
-    if new_spots.len() > spot_ctxs.len() {
-        return true;
-    }
+
     let mut missing = 0;
     for spot_ctx in spot_ctxs {
         if let Some(spot_again) = new_spots.get(&spot_ctx.get().position()) {
-            if spot_again.elapsed() < spot_ctx.elapsed() {
-                return true;
-            }
             let new_locs = all_visitable_locations(world, spot_again.get());
             let old_locs = all_visitable_locations(world, spot_ctx.get());
             if new_locs.iter().any(|loc| !old_locs.contains(&loc)) {
@@ -130,7 +130,7 @@ where
         }
     }
     // The overlap is len() - missing, so if the new count is greater, we found new spots
-    new_spots.len() > spot_ctxs.len() - missing
+    false //new_spots.len() > spot_ctxs.len() - missing
 }
 
 pub fn activate_actions<W, T, L, E>(
@@ -153,7 +153,7 @@ pub fn activate_actions<W, T, L, E>(
         if act.can_access(ctx.get()) && ctx.is_useful(act) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            if action_unlocked_anything(world, &c2, act, spot_ctxs) {
+            if c2.get().position() != ctx.get().position() || action_unlocked_anything(world, &c2, act, spot_ctxs) {
                 c2.penalize(penalty);
                 heap.push(c2);
             }
