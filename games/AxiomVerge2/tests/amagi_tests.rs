@@ -19,6 +19,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.remote_drone = true;
     ctx.infect = true;
     ctx.mode = enums::Mode::Indra;
+    ctx.save = SpotId::Ebih__Base_Camp__Save_Point;
 
     (world, ctx)
 }
@@ -97,4 +98,18 @@ fn context_mode_drone_indra_Amagi__Main_Area__East_19_can_obtain_Liru() {
     ctx.indra = SpotId::Amagi__Main_Area__East_19;
 
     expect_obtainable!(&world, ctx, SpotId::Ebih__Base_Camp__Save_Point, Item::Liru);
+}
+#[test]
+fn start_Amagi__Main_Area__Save_Point_with_Liru_context_save_Amagi__Main_Area__Save_Point_can_reach_Ebih__Base_Camp__Save_Point(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.liru = true;
+    ctx.save = SpotId::Amagi__Main_Area__Save_Point;
+
+    expect_any_route!(
+        &world,
+        ctx,
+        SpotId::Amagi__Main_Area__Save_Point,
+        SpotId::Ebih__Base_Camp__Save_Point
+    );
 }

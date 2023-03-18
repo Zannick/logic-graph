@@ -602,8 +602,8 @@ class GameLogic(object):
         pr = info[prkey]
         d = self.action_funcs if pr.parser.ruleNames[pr.tree.getRuleIndex()] == 'actions' else self.access_funcs
         if '^_' in str(pr.text):
-            id = construct_id(str(pr.name).lower())
-            assert id not in d
+            id = construct_id(info['id'].lower(), info['req'])
+            assert id not in d, f"trying to generate multiple functions named {id}: {info}"
             d[id] = info
             if extra_fields:
                 d[id]['args'] = extra_fields

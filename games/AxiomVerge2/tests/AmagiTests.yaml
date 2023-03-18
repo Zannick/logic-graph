@@ -9,6 +9,7 @@ all:
     - Infect
   context:
     mode: Indra
+    save: Ebih > Base Camp > Save Point
 
 tests:
   - can_reach: Amagi > Main Area > Save Point
@@ -30,3 +31,10 @@ tests:
       mode: drone
       indra: Amagi > Main Area > East 19
     can_obtain: Liru
+
+  - start: Amagi > Main Area > Save Point
+    with:
+      - Liru
+    context:
+      save: Amagi > Main Area > Save Point
+    can_reach: Ebih > Base Camp > Save Point

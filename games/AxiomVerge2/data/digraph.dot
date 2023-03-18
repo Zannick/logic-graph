@@ -507,6 +507,7 @@ digraph AxiomVerge2 {
         label = "Menu";
         bgcolor = "lightgrey";
     }
+    Amagi__Main_Area__East_15 -> Glacier__Lake_Main_Entrance__Lake_Access;
     Amagi__Main_Area__Shallow_End -> Amagi__Main_Area__Waters_Edge;
     Amagi__Main_Area__West_Side -> Amagi__Main_Area__Carving;
     Amagi__Main_Area__West_Side -> Amagi__Main_Area__Carving;

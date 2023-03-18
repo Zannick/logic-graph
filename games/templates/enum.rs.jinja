@@ -15,7 +15,7 @@ impl fmt::Display for {{ name }} {
             {{ name }}::{{ default_value }} => write!(f, "{}", "{{ default_value }}"),
 %% endif
 %% for v in values|sort(attribute='id')
-            {% if (v.id or v|construct_id) != default_value %}{{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),{% endif -%}
+            {% if (v.id or v|construct_id) != default_value %}{{ name }}::{{ v.id or v|construct_id }} => write!(f, "{}", "{{ v.fullname or v.name or v }}"),{% endif %}
 %% endfor
         }
     }

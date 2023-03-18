@@ -15,6 +15,9 @@ areas:
         - to: Water's Edge
       here:
         water: false
+      exits:
+        - to: Glacier > Lake Main Entrance > Lake Access
+          tags: [xshift]
     - name: Water's Edge
       coord: [29.8, 15]
       local:
@@ -105,10 +108,10 @@ areas:
           time: 1.75
       exits:
         - to: Secret Outcropping
-          req: $grab or $climb
+          req: ^_combo and ($grab or $climb)
           time: 1.75
         - to: Secret Outcropping
-          req: $hook
+          req: ^_combo and $hook
           time: 1.6
     - name: West 15
       coord: [27.05, 15]
