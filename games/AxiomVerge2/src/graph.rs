@@ -18,6 +18,7 @@ use std::option::Option;
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum RegionId {
+    Amagi,
     Antarctica,
     Ebih,
     Glacier,
@@ -26,6 +27,7 @@ pub enum RegionId {
 impl fmt::Display for RegionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            RegionId::Amagi => write!(f, "{}", "Lake Amagi"),
             RegionId::Antarctica => write!(f, "{}", "Antarctica"),
             RegionId::Ebih => write!(f, "{}", "Mt Ebih"),
             RegionId::Glacier => write!(f, "{}", "Glacier"),
@@ -39,6 +41,7 @@ impl std::str::FromStr for RegionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Lake Amagi" => Ok(RegionId::Amagi),
             "Antarctica" => Ok(RegionId::Antarctica),
             "Mt Ebih" => Ok(RegionId::Ebih),
             "Glacier" => Ok(RegionId::Glacier),
@@ -50,6 +53,10 @@ impl std::str::FromStr for RegionId {
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum AreaId {
+    Amagi__Cave_Behind_Waterfall,
+    Amagi__Grid_31_19,
+    Amagi__Liru_Room,
+    Amagi__Main_Area,
     Antarctica__Building_1E,
     Antarctica__Building_1W,
     Antarctica__Building_2L,
@@ -101,6 +108,12 @@ pub enum AreaId {
 impl fmt::Display for AreaId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            AreaId::Amagi__Cave_Behind_Waterfall => {
+                write!(f, "{}", "Amagi > Cave Behind Waterfall")
+            }
+            AreaId::Amagi__Grid_31_19 => write!(f, "{}", "Amagi > Grid 31,19"),
+            AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
+            AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
             AreaId::Antarctica__Building_1E => write!(f, "{}", "Antarctica > Building 1E"),
             AreaId::Antarctica__Building_1W => write!(f, "{}", "Antarctica > Building 1W"),
             AreaId::Antarctica__Building_2L => write!(f, "{}", "Antarctica > Building 2L"),
@@ -165,6 +178,10 @@ impl std::str::FromStr for AreaId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > Cave Behind Waterfall" => Ok(AreaId::Amagi__Cave_Behind_Waterfall),
+            "Amagi > Grid 31,19" => Ok(AreaId::Amagi__Grid_31_19),
+            "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
+            "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
             "Antarctica > Building 1E" => Ok(AreaId::Antarctica__Building_1E),
             "Antarctica > Building 1W" => Ok(AreaId::Antarctica__Building_1W),
             "Antarctica > Building 2L" => Ok(AreaId::Antarctica__Building_2L),
@@ -221,6 +238,50 @@ impl std::str::FromStr for AreaId {
 pub enum SpotId {
     #[default]
     None,
+    Amagi__Cave_Behind_Waterfall__Bottom,
+    Amagi__Cave_Behind_Waterfall__Middle,
+    Amagi__Cave_Behind_Waterfall__Top,
+    Amagi__Grid_31_19__East,
+    Amagi__Grid_31_19__West,
+    Amagi__Liru_Room__Bottom,
+    Amagi__Liru_Room__East_Passage,
+    Amagi__Liru_Room__Hidden_Enemies,
+    Amagi__Liru_Room__Hidden_Exit,
+    Amagi__Liru_Room__Platform_1_Left,
+    Amagi__Liru_Room__Platform_1_Right,
+    Amagi__Liru_Room__Platform_2_Left,
+    Amagi__Liru_Room__Platform_2_Right,
+    Amagi__Liru_Room__Platform_3_Left,
+    Amagi__Liru_Room__Platform_3_Right,
+    Amagi__Liru_Room__Platform_4_Left,
+    Amagi__Liru_Room__Platform_4_Right,
+    Amagi__Liru_Room__Shrine,
+    Amagi__Liru_Room__West_19,
+    Amagi__Liru_Room__West_20,
+    Amagi__Main_Area__Broken_Wall,
+    Amagi__Main_Area__Carving,
+    Amagi__Main_Area__Catwalk_Broken_Part,
+    Amagi__Main_Area__Catwalk_Center,
+    Amagi__Main_Area__Catwalk_East_Edge,
+    Amagi__Main_Area__Cliff,
+    Amagi__Main_Area__East_15,
+    Amagi__Main_Area__East_19,
+    Amagi__Main_Area__East_Ledge,
+    Amagi__Main_Area__Enemy_Side,
+    Amagi__Main_Area__Platform_2,
+    Amagi__Main_Area__Platform_3,
+    Amagi__Main_Area__Save_Point,
+    Amagi__Main_Area__Secret_Outcropping,
+    Amagi__Main_Area__Secret_Waterfall,
+    Amagi__Main_Area__Shallow_End,
+    Amagi__Main_Area__Small_Cliff,
+    Amagi__Main_Area__Upper_Platform,
+    Amagi__Main_Area__Wall_Stuck_Spot,
+    Amagi__Main_Area__Waters_Edge,
+    Amagi__Main_Area__Way_Off_To_The_Side,
+    Amagi__Main_Area__West_15,
+    Amagi__Main_Area__West_Shelf,
+    Amagi__Main_Area__West_Side,
     Antarctica__Building_1E__Connector,
     Antarctica__Building_1E__East_Entry,
     Antarctica__Building_1W__Connector,
@@ -465,6 +526,114 @@ impl fmt::Display for SpotId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             SpotId::None => write!(f, "{}", "None"),
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => {
+                write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom")
+            }
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle => {
+                write!(f, "{}", "Amagi > Cave Behind Waterfall > Middle")
+            }
+            SpotId::Amagi__Cave_Behind_Waterfall__Top => {
+                write!(f, "{}", "Amagi > Cave Behind Waterfall > Top")
+            }
+            SpotId::Amagi__Grid_31_19__East => write!(f, "{}", "Amagi > Grid 31,19 > East"),
+            SpotId::Amagi__Grid_31_19__West => write!(f, "{}", "Amagi > Grid 31,19 > West"),
+            SpotId::Amagi__Liru_Room__Bottom => write!(f, "{}", "Amagi > Liru Room > Bottom"),
+            SpotId::Amagi__Liru_Room__East_Passage => {
+                write!(f, "{}", "Amagi > Liru Room > East Passage")
+            }
+            SpotId::Amagi__Liru_Room__Hidden_Enemies => {
+                write!(f, "{}", "Amagi > Liru Room > Hidden Enemies")
+            }
+            SpotId::Amagi__Liru_Room__Hidden_Exit => {
+                write!(f, "{}", "Amagi > Liru Room > Hidden Exit")
+            }
+            SpotId::Amagi__Liru_Room__Platform_1_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 1 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_1_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 1 Right")
+            }
+            SpotId::Amagi__Liru_Room__Platform_2_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 2 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_2_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 2 Right")
+            }
+            SpotId::Amagi__Liru_Room__Platform_3_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 3 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_3_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 3 Right")
+            }
+            SpotId::Amagi__Liru_Room__Platform_4_Left => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 4 Left")
+            }
+            SpotId::Amagi__Liru_Room__Platform_4_Right => {
+                write!(f, "{}", "Amagi > Liru Room > Platform 4 Right")
+            }
+            SpotId::Amagi__Liru_Room__Shrine => write!(f, "{}", "Amagi > Liru Room > Shrine"),
+            SpotId::Amagi__Liru_Room__West_19 => write!(f, "{}", "Amagi > Liru Room > West 19"),
+            SpotId::Amagi__Liru_Room__West_20 => write!(f, "{}", "Amagi > Liru Room > West 20"),
+            SpotId::Amagi__Main_Area__Broken_Wall => {
+                write!(f, "{}", "Amagi > Main Area > Broken Wall")
+            }
+            SpotId::Amagi__Main_Area__Carving => write!(f, "{}", "Amagi > Main Area > Carving"),
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => {
+                write!(f, "{}", "Amagi > Main Area > Catwalk Broken Part")
+            }
+            SpotId::Amagi__Main_Area__Catwalk_Center => {
+                write!(f, "{}", "Amagi > Main Area > Catwalk Center")
+            }
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge => {
+                write!(f, "{}", "Amagi > Main Area > Catwalk East Edge")
+            }
+            SpotId::Amagi__Main_Area__Cliff => write!(f, "{}", "Amagi > Main Area > Cliff"),
+            SpotId::Amagi__Main_Area__East_15 => write!(f, "{}", "Amagi > Main Area > East 15"),
+            SpotId::Amagi__Main_Area__East_19 => write!(f, "{}", "Amagi > Main Area > East 19"),
+            SpotId::Amagi__Main_Area__East_Ledge => {
+                write!(f, "{}", "Amagi > Main Area > East Ledge")
+            }
+            SpotId::Amagi__Main_Area__Enemy_Side => {
+                write!(f, "{}", "Amagi > Main Area > Enemy Side")
+            }
+            SpotId::Amagi__Main_Area__Platform_2 => {
+                write!(f, "{}", "Amagi > Main Area > Platform 2")
+            }
+            SpotId::Amagi__Main_Area__Platform_3 => {
+                write!(f, "{}", "Amagi > Main Area > Platform 3")
+            }
+            SpotId::Amagi__Main_Area__Save_Point => {
+                write!(f, "{}", "Amagi > Main Area > Save Point")
+            }
+            SpotId::Amagi__Main_Area__Secret_Outcropping => {
+                write!(f, "{}", "Amagi > Main Area > Secret Outcropping")
+            }
+            SpotId::Amagi__Main_Area__Secret_Waterfall => {
+                write!(f, "{}", "Amagi > Main Area > Secret Waterfall")
+            }
+            SpotId::Amagi__Main_Area__Shallow_End => {
+                write!(f, "{}", "Amagi > Main Area > Shallow End")
+            }
+            SpotId::Amagi__Main_Area__Small_Cliff => {
+                write!(f, "{}", "Amagi > Main Area > Small Cliff")
+            }
+            SpotId::Amagi__Main_Area__Upper_Platform => {
+                write!(f, "{}", "Amagi > Main Area > Upper Platform")
+            }
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => {
+                write!(f, "{}", "Amagi > Main Area > Wall Stuck Spot")
+            }
+            SpotId::Amagi__Main_Area__Waters_Edge => {
+                write!(f, "{}", "Amagi > Main Area > Water's Edge")
+            }
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => {
+                write!(f, "{}", "Amagi > Main Area > Way Off To The Side")
+            }
+            SpotId::Amagi__Main_Area__West_15 => write!(f, "{}", "Amagi > Main Area > West 15"),
+            SpotId::Amagi__Main_Area__West_Shelf => {
+                write!(f, "{}", "Amagi > Main Area > West Shelf")
+            }
+            SpotId::Amagi__Main_Area__West_Side => write!(f, "{}", "Amagi > Main Area > West Side"),
             SpotId::Antarctica__Building_1E__Connector => {
                 write!(f, "{}", "Antarctica > Building 1E > Connector")
             }
@@ -1013,6 +1182,72 @@ impl std::str::FromStr for SpotId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > Cave Behind Waterfall > Bottom" => {
+                Ok(SpotId::Amagi__Cave_Behind_Waterfall__Bottom)
+            }
+            "Amagi > Cave Behind Waterfall > Middle" => {
+                Ok(SpotId::Amagi__Cave_Behind_Waterfall__Middle)
+            }
+            "Amagi > Cave Behind Waterfall > Top" => Ok(SpotId::Amagi__Cave_Behind_Waterfall__Top),
+            "Amagi > Grid 31,19 > East" => Ok(SpotId::Amagi__Grid_31_19__East),
+            "Amagi > Grid 31,19 > West" => Ok(SpotId::Amagi__Grid_31_19__West),
+            "Amagi > Liru Room > Bottom" => Ok(SpotId::Amagi__Liru_Room__Bottom),
+            "Amagi > Liru Room > East Passage" => Ok(SpotId::Amagi__Liru_Room__East_Passage),
+            "Amagi > Liru Room > Hidden Enemies" => Ok(SpotId::Amagi__Liru_Room__Hidden_Enemies),
+            "Amagi > Liru Room > Hidden Exit" => Ok(SpotId::Amagi__Liru_Room__Hidden_Exit),
+            "Amagi > Liru Room > Platform 1 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_1_Left),
+            "Amagi > Liru Room > Platform 1 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_1_Right)
+            }
+            "Amagi > Liru Room > Platform 2 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_2_Left),
+            "Amagi > Liru Room > Platform 2 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_2_Right)
+            }
+            "Amagi > Liru Room > Platform 3 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_3_Left),
+            "Amagi > Liru Room > Platform 3 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_3_Right)
+            }
+            "Amagi > Liru Room > Platform 4 Left" => Ok(SpotId::Amagi__Liru_Room__Platform_4_Left),
+            "Amagi > Liru Room > Platform 4 Right" => {
+                Ok(SpotId::Amagi__Liru_Room__Platform_4_Right)
+            }
+            "Amagi > Liru Room > Shrine" => Ok(SpotId::Amagi__Liru_Room__Shrine),
+            "Amagi > Liru Room > West 19" => Ok(SpotId::Amagi__Liru_Room__West_19),
+            "Amagi > Liru Room > West 20" => Ok(SpotId::Amagi__Liru_Room__West_20),
+            "Amagi > Main Area > Broken Wall" => Ok(SpotId::Amagi__Main_Area__Broken_Wall),
+            "Amagi > Main Area > Carving" => Ok(SpotId::Amagi__Main_Area__Carving),
+            "Amagi > Main Area > Catwalk Broken Part" => {
+                Ok(SpotId::Amagi__Main_Area__Catwalk_Broken_Part)
+            }
+            "Amagi > Main Area > Catwalk Center" => Ok(SpotId::Amagi__Main_Area__Catwalk_Center),
+            "Amagi > Main Area > Catwalk East Edge" => {
+                Ok(SpotId::Amagi__Main_Area__Catwalk_East_Edge)
+            }
+            "Amagi > Main Area > Cliff" => Ok(SpotId::Amagi__Main_Area__Cliff),
+            "Amagi > Main Area > East 15" => Ok(SpotId::Amagi__Main_Area__East_15),
+            "Amagi > Main Area > East 19" => Ok(SpotId::Amagi__Main_Area__East_19),
+            "Amagi > Main Area > East Ledge" => Ok(SpotId::Amagi__Main_Area__East_Ledge),
+            "Amagi > Main Area > Enemy Side" => Ok(SpotId::Amagi__Main_Area__Enemy_Side),
+            "Amagi > Main Area > Platform 2" => Ok(SpotId::Amagi__Main_Area__Platform_2),
+            "Amagi > Main Area > Platform 3" => Ok(SpotId::Amagi__Main_Area__Platform_3),
+            "Amagi > Main Area > Save Point" => Ok(SpotId::Amagi__Main_Area__Save_Point),
+            "Amagi > Main Area > Secret Outcropping" => {
+                Ok(SpotId::Amagi__Main_Area__Secret_Outcropping)
+            }
+            "Amagi > Main Area > Secret Waterfall" => {
+                Ok(SpotId::Amagi__Main_Area__Secret_Waterfall)
+            }
+            "Amagi > Main Area > Shallow End" => Ok(SpotId::Amagi__Main_Area__Shallow_End),
+            "Amagi > Main Area > Small Cliff" => Ok(SpotId::Amagi__Main_Area__Small_Cliff),
+            "Amagi > Main Area > Upper Platform" => Ok(SpotId::Amagi__Main_Area__Upper_Platform),
+            "Amagi > Main Area > Wall Stuck Spot" => Ok(SpotId::Amagi__Main_Area__Wall_Stuck_Spot),
+            "Amagi > Main Area > Water's Edge" => Ok(SpotId::Amagi__Main_Area__Waters_Edge),
+            "Amagi > Main Area > Way Off To The Side" => {
+                Ok(SpotId::Amagi__Main_Area__Way_Off_To_The_Side)
+            }
+            "Amagi > Main Area > West 15" => Ok(SpotId::Amagi__Main_Area__West_15),
+            "Amagi > Main Area > West Shelf" => Ok(SpotId::Amagi__Main_Area__West_Shelf),
+            "Amagi > Main Area > West Side" => Ok(SpotId::Amagi__Main_Area__West_Side),
             "Antarctica > Building 1E > Connector" => {
                 Ok(SpotId::Antarctica__Building_1E__Connector)
             }
@@ -1351,6 +1586,8 @@ impl std::str::FromStr for SpotId {
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum LocationId {
+    Amagi__Liru_Room__Shrine__Item,
+    Amagi__Main_Area__Way_Off_To_The_Side__Item,
     Antarctica__Building_2U_Corner__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
     Antarctica__Shed__Interior__Shelf,
@@ -1389,6 +1626,12 @@ pub enum LocationId {
 impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            LocationId::Amagi__Liru_Room__Shrine__Item => {
+                write!(f, "{}", "Amagi > Liru Room > Shrine: Item")
+            }
+            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
+                write!(f, "{}", "Amagi > Main Area > Way Off To The Side: Item")
+            }
             LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => write!(
                 f,
                 "{}",
@@ -1508,6 +1751,10 @@ impl std::str::FromStr for LocationId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > Liru Room > Shrine: Item" => Ok(LocationId::Amagi__Liru_Room__Shrine__Item),
+            "Amagi > Main Area > Way Off To The Side: Item" => {
+                Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item)
+            }
             "Antarctica > Building 2U Corner > Behind Boxes: Note" => {
                 Ok(LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note)
             }
@@ -1603,6 +1850,30 @@ impl std::str::FromStr for LocationId {
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ExitId {
+    Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1,
+    Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
+    Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1,
+    Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1,
+    Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1,
+    Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,
+    Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,
+    Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,
+    Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1,
+    Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1,
+    Amagi__Liru_Room__West_20__ex__Platform_4_Left_1,
+    Amagi__Liru_Room__West_20__ex__Platform_4_Right_1,
+    Amagi__Liru_Room__West_20__ex__Shrine_1,
+    Amagi__Main_Area__Carving__ex__Secret_Outcropping_1,
+    Amagi__Main_Area__Carving__ex__Secret_Outcropping_2,
+    Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1,
+    Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1,
+    Amagi__Main_Area__East_19__ex__Grid_31_19__West_1,
+    Amagi__Main_Area__Platform_2__ex__West_Shelf_1,
+    Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1,
+    Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1,
+    Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1,
+    Amagi__Main_Area__West_Side__ex__Carving_1,
+    Amagi__Main_Area__West_Side__ex__Carving_2,
     Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1,
     Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
     Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1,
@@ -1732,6 +2003,7 @@ pub enum ExitId {
     Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1,
     Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1,
     Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1,
+    Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1,
     Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,
     Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1,
     Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1,
@@ -1789,7 +2061,7 @@ pub enum ExitId {
 impl fmt::Display for ExitId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),            ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),            ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => write!(f, "{}", "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)"),            ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => write!(f, "{}", "Antarctica > Building 1W > West Entry ==> West > Boxes (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> East > Building 2 Entry (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"),            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)"),            ExitId::Antarctica__Building_2U_Corner__Behind_Boxes__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2U Corner > Behind Boxes ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => write!(f, "{}", "Antarctica > East > Building 1 Entry ==> Building 1E > East Entry (1)"),            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),            ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),            ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"),            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),            ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),            ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),            ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => write!(f, "{}", "Ebih > Base Camp > Lake Access ==> Glacier > Lake Main Entrance > Ebih Access (1)"),            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),            ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => write!(f, "{}", "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)"),            ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => write!(f, "{}", "Ebih > Boss Room > East 6 ==> Drone Room > West 6 (1)"),            ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => write!(f, "{}", "Ebih > Boss Room > Lower Tree ==> Lower Ledge (1)"),            ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_1_5__East_6_1 => write!(f, "{}", "Ebih > Boss Room > West 6 ==> Grid 21,1-5 > East 6 (1)"),            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),            ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => write!(f, "{}", "Ebih > By Garage > Garage Entry ==> Garage > Entry (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),            ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)"),            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),            ExitId::Ebih__Drone_Room__Item__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Item ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform: Urn Quick Grab"),            ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> West 6 (1)"),            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)"),            ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => write!(f, "{}", "Ebih > Drone Room > West 4 ==> Boss Room > East 4 (1)"),            ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => write!(f, "{}", "Ebih > Drone Room > West 6 ==> Boss Room > East 6 (1)"),            ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => write!(f, "{}", "Ebih > Ebih East > West 7 ==> Waterfall > East 7 (1)"),            ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => write!(f, "{}", "Ebih > Ebih East > West 8 ==> Waterfall > East 8 (1)"),            ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => write!(f, "{}", "Ebih > Ebih West > Alcove Entrance ==> Above Alcove (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Alcove Entrance (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Mid Save (1)"),            ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1 => write!(f, "{}", "Ebih > Ebih West > East 10 ==> Waterfall > West 10 (1)"),            ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_1_5__West_6_1 => write!(f, "{}", "Ebih > Ebih West > East 6 ==> Grid 21,1-5 > West 6 (1)"),            ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1 => write!(f, "{}", "Ebih > Ebih West > East 7 ==> Waterfall > West 7 (1)"),            ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1 => write!(f, "{}", "Ebih > Ebih West > East 9 ==> Waterfall > West 9 (1)"),            ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => write!(f, "{}", "Ebih > Ebih West > High Platform ==> High Ledge (1)"),            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => write!(f, "{}", "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)"),            ExitId::Ebih__Grid_21_1_5__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > East 6 ==> Boss Room > West 6 (1)"),            ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > West 6 ==> Ebih West > East 6 (1)"),            ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),            ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)"),            ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)"),            ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge ==> West 11 (1)"),            ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)"),            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),            ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)"),            ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)"),            ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => write!(f, "{}", "Ebih > Waterfall > East 10 ==> Grid 25,10-12 > West 10 (1)"),            ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => write!(f, "{}", "Ebih > Waterfall > East 11 ==> Grid 25,10-12 > West 11 (1)"),            ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => write!(f, "{}", "Ebih > Waterfall > East 7 ==> Ebih East > West 7 (1)"),            ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1 => write!(f, "{}", "Ebih > Waterfall > East 8 ==> Ebih East > West 8 (1)"),            ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => write!(f, "{}", "Ebih > Waterfall > Lower West Tree ==> West Lower Path (1)"),            ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => write!(f, "{}", "Ebih > Waterfall > Middle West Tree ==> West Main Path (1)"),            ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Platform ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => write!(f, "{}", "Ebih > Waterfall > Under Waterfall ==> Waterfall Left (1)"),            ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => write!(f, "{}", "Ebih > Waterfall > West 10 ==> Ebih West > East 10 (1)"),            ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => write!(f, "{}", "Ebih > Waterfall > West 7 ==> Ebih West > East 7 (1)"),            ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => write!(f, "{}", "Ebih > Waterfall > West 9 ==> Ebih West > East 9 (1)"),            ExitId::Ebih__Waterfall__West_Climb__ex__Middle_West_Tree_1 => write!(f, "{}", "Ebih > Waterfall > West Climb ==> Middle West Tree (1)"),            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),            ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room > East 13 (1)"),            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => write!(f, "{}", "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)"),            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)"),            ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Pedestal__ex__Boomerang_Room__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Pedestal ==> Boomerang Room > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Platform__ex__Boomerang_Room__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Platform ==> Boomerang Room > Platform (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Upper West ==> Boomerang Antechamber > Upper East (1)"),            ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),            ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),            ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),            ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),            ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),            ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),            ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),            ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),            ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room > East 9 (1)"),            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West 8 (1)"),            ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),            ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),            ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Revival > Lower East (1)"),            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),            ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),            ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),            ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)"),            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ledge ==> Upper (1)"),            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Lower Platform ==> Ledge (1)"),            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Upper Platform ==> Upper (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom ==> Cliff (1)"),            ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Column ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11 ==> Vertical Room > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > West 9 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Gate Ledge (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate Ledge ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Lower Platform ==> Upper Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Fork (1)"),            ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform ==> Fork (1)"),            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),            ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),            ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),            ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),            ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)"),            ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),            ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)"),            ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)"),            ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 11 ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Ledge Grab Room > East 11 (1)"),            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Under Switch (1)"),            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room > Peak ==> West 8 (1)"),            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Past Gate (1)"),            ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),            ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),        }
+            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom ==> Main Area > Secret Outcropping (1)"),            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom ==> Middle (1)"),            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Bottom ==> Top (1)"),            ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Middle ==> Top (1)"),            ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => write!(f, "{}", "Amagi > Cave Behind Waterfall > Top ==> Main Area > Secret Waterfall (1)"),            ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)"),            ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => write!(f, "{}", "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)"),            ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => write!(f, "{}", "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)"),            ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => write!(f, "{}", "Amagi > Liru Room > Platform 4 Right ==> East Passage (1)"),            ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => write!(f, "{}", "Amagi > Liru Room > West 19 ==> Grid 31,19 > East (1)"),            ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => write!(f, "{}", "Amagi > Liru Room > West 20 ==> Platform 4 Left (1)"),            ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => write!(f, "{}", "Amagi > Liru Room > West 20 ==> Platform 4 Right (1)"),            ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => write!(f, "{}", "Amagi > Liru Room > West 20 ==> Shrine (1)"),            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => write!(f, "{}", "Amagi > Main Area > Carving ==> Secret Outcropping (1)"),            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => write!(f, "{}", "Amagi > Main Area > Carving ==> Secret Outcropping (2)"),            ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => write!(f, "{}", "Amagi > Main Area > Catwalk Center ==> East Ledge (1)"),            ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => write!(f, "{}", "Amagi > Main Area > Catwalk Center ==> Platform 3 (1)"),            ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => write!(f, "{}", "Amagi > Main Area > East 19 ==> Grid 31,19 > West (1)"),            ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => write!(f, "{}", "Amagi > Main Area > Platform 2 ==> West Shelf (1)"),            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => write!(f, "{}", "Amagi > Main Area > Secret Outcropping ==> Cave Behind Waterfall > Bottom (1)"),            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => write!(f, "{}", "Amagi > Main Area > Secret Waterfall ==> Cave Behind Waterfall > Top (1)"),            ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => write!(f, "{}", "Amagi > Main Area > Shallow End ==> Water's Edge (1)"),            ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => write!(f, "{}", "Amagi > Main Area > West Side ==> Carving (1)"),            ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => write!(f, "{}", "Amagi > Main Area > West Side ==> Carving (2)"),            ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => write!(f, "{}", "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)"),            ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => write!(f, "{}", "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)"),            ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => write!(f, "{}", "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)"),            ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => write!(f, "{}", "Antarctica > Building 1W > West Entry ==> West > Boxes (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> East > Building 2 Entry (1)"),            ExitId::Antarctica__Building_2L__Entry__ex__Freight_Elevator__Left_1 => write!(f, "{}", "Antarctica > Building 2L > Entry ==> Freight Elevator > Left (1)"),            ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Building 2U > Door ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Building_2U__Stairs__ex__Building_2U_Corner__Behind_Boxes_1 => write!(f, "{}", "Antarctica > Building 2U > Stairs ==> Building 2U Corner > Behind Boxes (1)"),            ExitId::Antarctica__Building_2U_Corner__Behind_Boxes__ex__Building_2U__Stairs_1 => write!(f, "{}", "Antarctica > Building 2U Corner > Behind Boxes ==> Building 2U > Stairs (1)"),            ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => write!(f, "{}", "Antarctica > East > Building 1 Entry ==> Building 1E > East Entry (1)"),            ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Entry ==> Building 2L > Entry (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Building 2U > Door (1)"),            ExitId::Antarctica__East__Building_2_Upper__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > East > Building 2 Upper ==> Top > Power Entry (1)"),            ExitId::Antarctica__Freight_Elevator__Controls__ex__Glacier__Dock_Elevator__Elevator_1 => write!(f, "{}", "Antarctica > Freight Elevator > Controls ==> Glacier > Dock Elevator > Elevator (1)"),            ExitId::Antarctica__Freight_Elevator__Left__ex__Building_2L__Entry_1 => write!(f, "{}", "Antarctica > Freight Elevator > Left ==> Building 2L > Entry (1)"),            ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => write!(f, "{}", "Antarctica > Power Room > Entry ==> Top > Power Entry (1)"),            ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => write!(f, "{}", "Antarctica > Shed > Interior ==> West > Shed Entry (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__East__Building_2_Upper_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> East > Building 2 Upper (1)"),            ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => write!(f, "{}", "Antarctica > Top > Power Entry ==> Power Room > Entry (1)"),            ExitId::Antarctica__West__Boxes__ex__Building_1W__West_Entry_1 => write!(f, "{}", "Antarctica > West > Boxes ==> Building 1W > West Entry (1)"),            ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => write!(f, "{}", "Antarctica > West > Shed Entry ==> Shed > Interior (1)"),            ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),            ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),            ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => write!(f, "{}", "Ebih > Base Camp > Lake Access ==> Glacier > Lake Main Entrance > Ebih Access (1)"),            ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),            ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),            ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => write!(f, "{}", "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)"),            ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => write!(f, "{}", "Ebih > Boss Room > East 6 ==> Drone Room > West 6 (1)"),            ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => write!(f, "{}", "Ebih > Boss Room > Lower Tree ==> Lower Ledge (1)"),            ExitId::Ebih__Boss_Room__West_6__ex__Grid_21_1_5__East_6_1 => write!(f, "{}", "Ebih > Boss Room > West 6 ==> Grid 21,1-5 > East 6 (1)"),            ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => write!(f, "{}", "Ebih > Building Interior > Entry ==> Base Camp > Building Entry (1)"),            ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => write!(f, "{}", "Ebih > Bunker Interior > Entry ==> Base Camp > Bunker Entry (1)"),            ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => write!(f, "{}", "Ebih > By Garage > Crawlspace Opening ==> Crawlspace (1)"),            ExitId::Ebih__By_Garage__East_13__ex__Base_Camp__West_13_1 => write!(f, "{}", "Ebih > By Garage > East 13 ==> Base Camp > West 13 (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Crawlspace Opening (1)"),            ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => write!(f, "{}", "Ebih > By Garage > East Platform ==> Outcropping (1)"),            ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => write!(f, "{}", "Ebih > By Garage > Garage Entry ==> Garage > Entry (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> East Bush (1)"),            ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => write!(f, "{}", "Ebih > By Garage > Lower Platform ==> West Bush (1)"),            ExitId::Ebih__By_Garage__West_12__ex__Grid_25_10_12__East_12_1 => write!(f, "{}", "Ebih > By Garage > West 12 ==> Grid 25,10-12 > East 12 (1)"),            ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)"),            ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),            ExitId::Ebih__Drone_Room__Item__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Item ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform: Urn Quick Grab"),            ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> West 6 (1)"),            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)"),            ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => write!(f, "{}", "Ebih > Drone Room > West 4 ==> Boss Room > East 4 (1)"),            ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => write!(f, "{}", "Ebih > Drone Room > West 6 ==> Boss Room > East 6 (1)"),            ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => write!(f, "{}", "Ebih > Ebih East > West 7 ==> Waterfall > East 7 (1)"),            ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => write!(f, "{}", "Ebih > Ebih East > West 8 ==> Waterfall > East 8 (1)"),            ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => write!(f, "{}", "Ebih > Ebih West > Alcove Entrance ==> Above Alcove (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Alcove Entrance (1)"),            ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 => write!(f, "{}", "Ebih > Ebih West > Block Left ==> Mid Save (1)"),            ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1 => write!(f, "{}", "Ebih > Ebih West > East 10 ==> Waterfall > West 10 (1)"),            ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_1_5__West_6_1 => write!(f, "{}", "Ebih > Ebih West > East 6 ==> Grid 21,1-5 > West 6 (1)"),            ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1 => write!(f, "{}", "Ebih > Ebih West > East 7 ==> Waterfall > West 7 (1)"),            ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1 => write!(f, "{}", "Ebih > Ebih West > East 9 ==> Waterfall > West 9 (1)"),            ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => write!(f, "{}", "Ebih > Ebih West > High Platform ==> High Ledge (1)"),            ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => write!(f, "{}", "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)"),            ExitId::Ebih__Grid_21_1_5__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > East 6 ==> Boss Room > West 6 (1)"),            ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > West 6 ==> Ebih West > East 6 (1)"),            ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),            ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)"),            ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)"),            ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge ==> West 11 (1)"),            ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)"),            ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)"),            ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)"),            ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),            ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)"),            ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)"),            ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => write!(f, "{}", "Ebih > Waterfall > East 10 ==> Grid 25,10-12 > West 10 (1)"),            ExitId::Ebih__Waterfall__East_11__ex__Grid_25_10_12__West_11_1 => write!(f, "{}", "Ebih > Waterfall > East 11 ==> Grid 25,10-12 > West 11 (1)"),            ExitId::Ebih__Waterfall__East_7__ex__Ebih_East__West_7_1 => write!(f, "{}", "Ebih > Waterfall > East 7 ==> Ebih East > West 7 (1)"),            ExitId::Ebih__Waterfall__East_8__ex__Ebih_East__West_8_1 => write!(f, "{}", "Ebih > Waterfall > East 8 ==> Ebih East > West 8 (1)"),            ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => write!(f, "{}", "Ebih > Waterfall > Lower West Tree ==> West Lower Path (1)"),            ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => write!(f, "{}", "Ebih > Waterfall > Middle West Tree ==> West Main Path (1)"),            ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Platform ==> Big Tree (1)"),            ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => write!(f, "{}", "Ebih > Waterfall > Under Waterfall ==> Waterfall Left (1)"),            ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => write!(f, "{}", "Ebih > Waterfall > West 10 ==> Ebih West > East 10 (1)"),            ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => write!(f, "{}", "Ebih > Waterfall > West 7 ==> Ebih West > East 7 (1)"),            ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => write!(f, "{}", "Ebih > Waterfall > West 9 ==> Ebih West > East 9 (1)"),            ExitId::Ebih__Waterfall__West_Climb__ex__Middle_West_Tree_1 => write!(f, "{}", "Ebih > Waterfall > West Climb ==> Middle West Tree (1)"),            ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),            ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),            ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 12 ==> Vertical Room > East 12 (1)"),            ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > West 13 ==> Vertical Room > East 13 (1)"),            ExitId::Glacier__Boomerang_Room__Center_ish__ex__Boomerang_Room_Switched__Center_Ledge_1 => write!(f, "{}", "Glacier > Boomerang Room > Center-ish ==> Boomerang Room Switched > Center Ledge (1)"),            ExitId::Glacier__Boomerang_Room__Pedestal__ex__Boomerang_Room_Switched__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room > Pedestal ==> Boomerang Room Switched > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room__Platform__ex__Boomerang_Room_Switched__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room > Platform ==> Boomerang Room Switched > Platform (1)"),            ExitId::Glacier__Boomerang_Room__West__ex__Boomerang_Antechamber__East_12_1 => write!(f, "{}", "Glacier > Boomerang Room > West ==> Boomerang Antechamber > East 12 (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Pedestal__ex__Boomerang_Room__Pedestal_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Pedestal ==> Boomerang Room > Pedestal (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Platform__ex__Boomerang_Room__Platform_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Platform ==> Boomerang Room > Platform (1)"),            ExitId::Glacier__Boomerang_Room_Switched__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => write!(f, "{}", "Glacier > Boomerang Room Switched > Upper West ==> Boomerang Antechamber > Upper East (1)"),            ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => write!(f, "{}", "Glacier > Compass Room > East ==> Grid 43,10-11 > Lower (1)"),            ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => write!(f, "{}", "Glacier > Compass Room > West ==> The Big Drop > East (1)"),            ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => write!(f, "{}", "Glacier > Dock Elevator > Connector ==> Dock Interior > Connector (1)"),            ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => write!(f, "{}", "Glacier > Dock Interior > Connector ==> Dock Elevator > Connector (1)"),            ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => write!(f, "{}", "Glacier > Dock Interior > Entry ==> Dock Outside > Entry (1)"),            ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => write!(f, "{}", "Glacier > Dock Outside > Do Not Enter ==> Revival > East 9 (1)"),            ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => write!(f, "{}", "Glacier > Dock Outside > Entry ==> Dock Interior > Entry (1)"),            ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 10 ==> Grid 32,7-10 > West 10 (1)"),            ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > East 9 ==> Grid 32,7-10 > West 9 (1)"),            ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > Midair ==> Ebih > Base Camp > East 11 (1)"),            ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => write!(f, "{}", "Glacier > Grid 31,9-12 > West 12 ==> Ebih > Base Camp > East 12 (1)"),            ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > East 8 ==> Peak > West 8 (1)"),            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > Left Rock ==> Column (1)"),            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 10 ==> Left Rock (1)"),            ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => write!(f, "{}", "Glacier > Grid 32,7-10 > West 9 ==> Grid 31,9-12 > East 9 (1)"),            ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > East ==> Grid 39-40,7-9 > West (1)"),            ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => write!(f, "{}", "Glacier > Grid 37-38,9 > West ==> Vertical Room > East 9 (1)"),            ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > Upper East ==> Revival > West 8 (1)"),            ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => write!(f, "{}", "Glacier > Grid 39-40,7-9 > West ==> Grid 37-38,9 > East (1)"),            ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => write!(f, "{}", "Glacier > Grid 42,10 > East ==> Grid 43,10-11 > Top (1)"),            ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => write!(f, "{}", "Glacier > Grid 42,10 > West ==> Revival > Lower East (1)"),            ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > East ==> Apocalypse Entry > West (1)"),            ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)"),            ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => write!(f, "{}", "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)"),            ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)"),            ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Lake Access ==> Amagi > Main Area > East 15 (1)"),            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Ledge ==> Upper (1)"),            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Lower Platform ==> Ledge (1)"),            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => write!(f, "{}", "Glacier > Lake Main Entrance > Upper Platform ==> Upper (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Cliff Bottom ==> Cliff (1)"),            ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Column ==> Ledge Grab Room > Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 11 ==> Vertical Room > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > Past Gate (1)"),            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => write!(f, "{}", "Glacier > Ledge Grab Room > East 9 ==> Vertical Room > West 9 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Gate Ledge (1)"),            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Mid_35_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Fork ==> Mid 35 (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Gate Ledge ==> Column (1)"),            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Lower Platform ==> Upper Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 34 ==> Lower Platform (1)"),            ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Mid 35 ==> Fork (1)"),            ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal ==> West (1)"),            ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => write!(f, "{}", "Glacier > Ledge Grab Room > Upper Platform ==> Fork (1)"),            ExitId::Glacier__Peak__East_8__ex__Top_Platform_East_1 => write!(f, "{}", "Glacier > Peak > East 8 ==> Top Platform East (1)"),            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => write!(f, "{}", "Glacier > Peak > Under West Cliff ==> West Cliff (1)"),            ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => write!(f, "{}", "Glacier > Peak > West 8 ==> Grid 32,7-10 > East 8 (1)"),            ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => write!(f, "{}", "Glacier > Revival > East 9 ==> Dock Outside > Do Not Enter (1)"),            ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),            ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)"),            ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),            ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)"),            ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)"),            ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 11 ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => write!(f, "{}", "Glacier > Vertical Room > Mid 9 ==> Peak (1)"),            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Ledge Grab Room > East 11 (1)"),            ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => write!(f, "{}", "Glacier > Vertical Room > Past Gate ==> Under Switch (1)"),            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => write!(f, "{}", "Glacier > Vertical Room > Peak ==> West 8 (1)"),            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Mid 9 (1)"),            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => write!(f, "{}", "Glacier > Vertical Room > Under Switch ==> Past Gate (1)"),            ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => write!(f, "{}", "Glacier > Vertical Room > West 8 ==> Peak > East 8 (1)"),            ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 => write!(f, "{}", "Glacier > Vertical Room > West 9 ==> Ledge Grab Room > East 9 (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Combat ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Infection (1)"),            ExitId::Menu__Upgrade_Menu__Drone__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Drone ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Infection__ex__Physiology_1 => write!(f, "{}", "Menu > Upgrade Menu > Infection ==> Physiology (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Combat (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Drone (1)"),            ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => write!(f, "{}", "Menu > Upgrade Menu > Physiology ==> Infection (1)"),        }
     }
 }
 impl analyzer::world::Id for ExitId {}
@@ -1798,6 +2070,30 @@ impl std::str::FromStr for ExitId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > Cave Behind Waterfall > Bottom ==> Main Area > Secret Outcropping (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1),
+            "Amagi > Cave Behind Waterfall > Bottom ==> Middle (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1),
+            "Amagi > Cave Behind Waterfall > Bottom ==> Top (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1),
+            "Amagi > Cave Behind Waterfall > Middle ==> Top (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1),
+            "Amagi > Cave Behind Waterfall > Top ==> Main Area > Secret Waterfall (1)" => Ok(ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1),
+            "Amagi > Grid 31,19 > East ==> Liru Room > West 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1),
+            "Amagi > Grid 31,19 > West ==> Main Area > East 19 (1)" => Ok(ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1),
+            "Amagi > Liru Room > Platform 4 Left ==> West 20 (1)" => Ok(ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1),
+            "Amagi > Liru Room > Platform 4 Right ==> East Passage (1)" => Ok(ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1),
+            "Amagi > Liru Room > West 19 ==> Grid 31,19 > East (1)" => Ok(ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1),
+            "Amagi > Liru Room > West 20 ==> Platform 4 Left (1)" => Ok(ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1),
+            "Amagi > Liru Room > West 20 ==> Platform 4 Right (1)" => Ok(ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1),
+            "Amagi > Liru Room > West 20 ==> Shrine (1)" => Ok(ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1),
+            "Amagi > Main Area > Carving ==> Secret Outcropping (1)" => Ok(ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1),
+            "Amagi > Main Area > Carving ==> Secret Outcropping (2)" => Ok(ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2),
+            "Amagi > Main Area > Catwalk Center ==> East Ledge (1)" => Ok(ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1),
+            "Amagi > Main Area > Catwalk Center ==> Platform 3 (1)" => Ok(ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1),
+            "Amagi > Main Area > East 19 ==> Grid 31,19 > West (1)" => Ok(ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1),
+            "Amagi > Main Area > Platform 2 ==> West Shelf (1)" => Ok(ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1),
+            "Amagi > Main Area > Secret Outcropping ==> Cave Behind Waterfall > Bottom (1)" => Ok(ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1),
+            "Amagi > Main Area > Secret Waterfall ==> Cave Behind Waterfall > Top (1)" => Ok(ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1),
+            "Amagi > Main Area > Shallow End ==> Water's Edge (1)" => Ok(ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1),
+            "Amagi > Main Area > West Side ==> Carving (1)" => Ok(ExitId::Amagi__Main_Area__West_Side__ex__Carving_1),
+            "Amagi > Main Area > West Side ==> Carving (2)" => Ok(ExitId::Amagi__Main_Area__West_Side__ex__Carving_2),
             "Antarctica > Building 1E > Connector ==> Building 1W > Connector (1)" => Ok(ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1),
             "Antarctica > Building 1E > East Entry ==> East > Building 1 Entry (1)" => Ok(ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1),
             "Antarctica > Building 1W > Connector ==> Building 1E > Connector (1)" => Ok(ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1),
@@ -1927,6 +2223,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Grid 43,10-11 > Lower ==> Compass Room > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1),
             "Glacier > Grid 43,10-11 > Top ==> Grid 42,10 > East (1)" => Ok(ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1),
             "Glacier > Lake Main Entrance > Ebih Access ==> Ebih > Base Camp > Lake Access (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1),
+            "Glacier > Lake Main Entrance > Lake Access ==> Amagi > Main Area > East 15 (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1),
             "Glacier > Lake Main Entrance > Ledge ==> Upper (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1),
             "Glacier > Lake Main Entrance > Lower Platform ==> Ledge (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1),
             "Glacier > Lake Main Entrance > Upper Platform ==> Upper (1)" => Ok(ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1),
@@ -1987,6 +2284,9 @@ impl std::str::FromStr for ExitId {
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
 pub enum ActionId {
+    Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
+    Amagi__Main_Area__Carving__Key_Combo,
+    Amagi__Main_Area__Save_Point__Save,
     Ebih__Base_Camp__Save_Point__Save,
     Ebih__Drone_Room__Moving_Platform__Throw_Drone,
     Ebih__Drone_Room__Pit_Left__Activate_Lift,
@@ -2005,6 +2305,17 @@ pub enum ActionId {
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(
+                f,
+                "{}",
+                "Amagi > Cave Behind Waterfall > Middle: Throw Drone"
+            ),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                write!(f, "{}", "Amagi > Main Area > Carving: Key Combo")
+            }
+            ActionId::Amagi__Main_Area__Save_Point__Save => {
+                write!(f, "{}", "Amagi > Main Area > Save Point: Save")
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => {
                 write!(f, "{}", "Ebih > Base Camp > Save Point: Save")
             }
@@ -2060,6 +2371,15 @@ impl std::str::FromStr for ActionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi > Cave Behind Waterfall > Middle: Throw Drone" => {
+                Ok(ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone)
+            }
+            "Amagi > Main Area > Carving: Key Combo" => {
+                Ok(ActionId::Amagi__Main_Area__Carving__Key_Combo)
+            }
+            "Amagi > Main Area > Save Point: Save" => {
+                Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
+            }
             "Ebih > Base Camp > Save Point: Save" => {
                 Ok(ActionId::Ebih__Base_Camp__Save_Point__Save)
             }
@@ -2206,6 +2526,51 @@ impl std::str::FromStr for Objective {
 pub fn get_area(spot: SpotId) -> AreaId {
     match spot {
         SpotId::None => panic!("Spot not valid"),
+        SpotId::Amagi__Main_Area__East_15
+        | SpotId::Amagi__Main_Area__Waters_Edge
+        | SpotId::Amagi__Main_Area__Shallow_End
+        | SpotId::Amagi__Main_Area__Cliff
+        | SpotId::Amagi__Main_Area__Upper_Platform
+        | SpotId::Amagi__Main_Area__West_Shelf
+        | SpotId::Amagi__Main_Area__West_Side
+        | SpotId::Amagi__Main_Area__Platform_2
+        | SpotId::Amagi__Main_Area__East_Ledge
+        | SpotId::Amagi__Main_Area__Carving
+        | SpotId::Amagi__Main_Area__West_15
+        | SpotId::Amagi__Main_Area__Secret_Outcropping
+        | SpotId::Amagi__Main_Area__Platform_3
+        | SpotId::Amagi__Main_Area__Catwalk_Center
+        | SpotId::Amagi__Main_Area__Catwalk_Broken_Part
+        | SpotId::Amagi__Main_Area__Catwalk_East_Edge
+        | SpotId::Amagi__Main_Area__Save_Point
+        | SpotId::Amagi__Main_Area__Enemy_Side
+        | SpotId::Amagi__Main_Area__Small_Cliff
+        | SpotId::Amagi__Main_Area__East_19
+        | SpotId::Amagi__Main_Area__Broken_Wall
+        | SpotId::Amagi__Main_Area__Wall_Stuck_Spot
+        | SpotId::Amagi__Main_Area__Secret_Waterfall
+        | SpotId::Amagi__Main_Area__Way_Off_To_The_Side => AreaId::Amagi__Main_Area,
+        SpotId::Amagi__Cave_Behind_Waterfall__Bottom
+        | SpotId::Amagi__Cave_Behind_Waterfall__Middle
+        | SpotId::Amagi__Cave_Behind_Waterfall__Top => AreaId::Amagi__Cave_Behind_Waterfall,
+        SpotId::Amagi__Grid_31_19__West | SpotId::Amagi__Grid_31_19__East => {
+            AreaId::Amagi__Grid_31_19
+        }
+        SpotId::Amagi__Liru_Room__West_19
+        | SpotId::Amagi__Liru_Room__Hidden_Enemies
+        | SpotId::Amagi__Liru_Room__Platform_1_Left
+        | SpotId::Amagi__Liru_Room__Platform_1_Right
+        | SpotId::Amagi__Liru_Room__Platform_2_Left
+        | SpotId::Amagi__Liru_Room__Platform_2_Right
+        | SpotId::Amagi__Liru_Room__Platform_3_Left
+        | SpotId::Amagi__Liru_Room__Platform_3_Right
+        | SpotId::Amagi__Liru_Room__Platform_4_Left
+        | SpotId::Amagi__Liru_Room__Platform_4_Right
+        | SpotId::Amagi__Liru_Room__Bottom
+        | SpotId::Amagi__Liru_Room__Shrine
+        | SpotId::Amagi__Liru_Room__West_20
+        | SpotId::Amagi__Liru_Room__East_Passage
+        | SpotId::Amagi__Liru_Room__Hidden_Exit => AreaId::Amagi__Liru_Room,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -2466,6 +2831,49 @@ pub fn get_area(spot: SpotId) -> AreaId {
 pub fn get_region(spot: SpotId) -> RegionId {
     match spot {
         SpotId::None => panic!("Spot not valid"),
+        SpotId::Amagi__Main_Area__East_15
+        | SpotId::Amagi__Main_Area__Waters_Edge
+        | SpotId::Amagi__Main_Area__Shallow_End
+        | SpotId::Amagi__Main_Area__Cliff
+        | SpotId::Amagi__Main_Area__Upper_Platform
+        | SpotId::Amagi__Main_Area__West_Shelf
+        | SpotId::Amagi__Main_Area__West_Side
+        | SpotId::Amagi__Main_Area__Platform_2
+        | SpotId::Amagi__Main_Area__East_Ledge
+        | SpotId::Amagi__Main_Area__Carving
+        | SpotId::Amagi__Main_Area__West_15
+        | SpotId::Amagi__Main_Area__Secret_Outcropping
+        | SpotId::Amagi__Main_Area__Platform_3
+        | SpotId::Amagi__Main_Area__Catwalk_Center
+        | SpotId::Amagi__Main_Area__Catwalk_Broken_Part
+        | SpotId::Amagi__Main_Area__Catwalk_East_Edge
+        | SpotId::Amagi__Main_Area__Save_Point
+        | SpotId::Amagi__Main_Area__Enemy_Side
+        | SpotId::Amagi__Main_Area__Small_Cliff
+        | SpotId::Amagi__Main_Area__East_19
+        | SpotId::Amagi__Main_Area__Broken_Wall
+        | SpotId::Amagi__Main_Area__Wall_Stuck_Spot
+        | SpotId::Amagi__Main_Area__Secret_Waterfall
+        | SpotId::Amagi__Main_Area__Way_Off_To_The_Side => RegionId::Amagi,
+        SpotId::Amagi__Cave_Behind_Waterfall__Bottom
+        | SpotId::Amagi__Cave_Behind_Waterfall__Middle
+        | SpotId::Amagi__Cave_Behind_Waterfall__Top => RegionId::Amagi,
+        SpotId::Amagi__Grid_31_19__West | SpotId::Amagi__Grid_31_19__East => RegionId::Amagi,
+        SpotId::Amagi__Liru_Room__West_19
+        | SpotId::Amagi__Liru_Room__Hidden_Enemies
+        | SpotId::Amagi__Liru_Room__Platform_1_Left
+        | SpotId::Amagi__Liru_Room__Platform_1_Right
+        | SpotId::Amagi__Liru_Room__Platform_2_Left
+        | SpotId::Amagi__Liru_Room__Platform_2_Right
+        | SpotId::Amagi__Liru_Room__Platform_3_Left
+        | SpotId::Amagi__Liru_Room__Platform_3_Right
+        | SpotId::Amagi__Liru_Room__Platform_4_Left
+        | SpotId::Amagi__Liru_Room__Platform_4_Right
+        | SpotId::Amagi__Liru_Room__Bottom
+        | SpotId::Amagi__Liru_Room__Shrine
+        | SpotId::Amagi__Liru_Room__West_20
+        | SpotId::Amagi__Liru_Room__East_Passage
+        | SpotId::Amagi__Liru_Room__Hidden_Exit => RegionId::Amagi,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -2731,6 +3139,8 @@ impl world::Accessible for Location {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
+                LocationId::Amagi__Liru_Room__Shrine__Item => true,
+                LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => true,
                 LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => true,
                 LocationId::Antarctica__Power_Room__Switch__Flip => true,
                 LocationId::Antarctica__Shed__Interior__Shelf => true,
@@ -2830,6 +3240,30 @@ impl world::Accessible for Exit {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price) && match self.id {
+            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => true,
+            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::access_hook(&ctx),
+            ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => true,
+            ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
+            ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
+            ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::access_hook_and_hover_and_liru(&ctx),
+            ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::access_hook_and_liru(&ctx),
+            ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
+            ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::access_hover(&ctx),
+            ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => rules::access_hook(&ctx),
+            ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => rules::access_hook_and_hover(&ctx),
+            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => rules::access_hook(&ctx),
+            ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => rules::access_liru_and___grab_or_climb(&ctx),
+            ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => rules::access_liru(&ctx),
+            ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => true,
+            ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => rules::access_grab_or_climb_or_hook(&ctx),
+            ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => true,
+            ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => true,
+            ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::access_grab_or_liru(&ctx),
+            ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::access_liru_and___grab_or_climb(&ctx),
+            ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::access_liru_and_hook(&ctx),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
             ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => true,
@@ -2959,6 +3393,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_43_10_11__Lower__ex__Compass_Room__East_1 => true,
             ExitId::Glacier__Grid_43_10_11__Top__ex__Grid_42_10__East_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => true,
+            ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::access_climb_and_grab(&ctx),
             ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::access_grab(&ctx),
             ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::access_grab(&ctx),
@@ -3055,6 +3490,13 @@ impl world::Accessible for Action {
     fn can_access(&self, ctx: &Context) -> bool {
         ctx.can_afford(&self.price)
             && match self.id {
+                ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                    rules::access_can_deploy(&ctx)
+                }
+                ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                    rules::access_amagi__main_area__carving___key_combo_req(&ctx)
+                }
+                ActionId::Amagi__Main_Area__Save_Point__Save => true,
                 ActionId::Ebih__Base_Camp__Save_Point__Save => true,
                 ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                     rules::access_can_deploy(&ctx)
@@ -3109,6 +3551,9 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode__indra_position__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving___key_combo__do(ctx),
+            ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx),
@@ -3127,6 +3572,9 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_has_effect_mode__indra_position__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_has_effect_mode__drone_indra__position(ctx),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_has_effect_amagi__main_area__carving___key_combo__do(ctx),
+            ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_has_effect_save(ctx),
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_has_effect_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_has_effect_save(ctx),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_has_effect_save(ctx),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_has_effect_save(ctx),
@@ -3241,7 +3689,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 240],
+    raw_spots: [SpotId; 284],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -3252,7 +3700,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 34;
+    const NUM_LOCATIONS: i32 = 36;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -3326,6 +3774,10 @@ impl world::World for World {
 
     fn get_location_spot(&self, loc_id: LocationId) -> SpotId {
         match loc_id {
+            LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
+                SpotId::Amagi__Main_Area__Way_Off_To_The_Side
+            }
+            LocationId::Amagi__Liru_Room__Shrine__Item => SpotId::Amagi__Liru_Room__Shrine,
             LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
             LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => {
                 SpotId::Antarctica__Building_2U_Corner__Behind_Boxes
@@ -3397,6 +3849,11 @@ impl world::World for World {
 
     fn get_action_spot(&self, act_id: ActionId) -> SpotId {
         match act_id {
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => SpotId::Amagi__Main_Area__Carving,
+            ActionId::Amagi__Main_Area__Save_Point__Save => SpotId::Amagi__Main_Area__Save_Point,
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                SpotId::Amagi__Cave_Behind_Waterfall__Middle
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
             ActionId::Ebih__Ebih_West__Mid_Save__Save => SpotId::Ebih__Ebih_West__Mid_Save,
             ActionId::Ebih__Ebih_West__Upper_Save__Save => SpotId::Ebih__Ebih_West__Upper_Save,
@@ -3436,7 +3893,9 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access_remote_drone(ctx),
-            Objective::Progress => rules::access_infect_and_flask__3(ctx),
+            Objective::Progress => {
+                rules::access_remote_drone_and_dear_ernest_and_liru_and_flask__4(ctx)
+            }
         }
     }
 
@@ -3455,6 +3914,50 @@ impl World {
             warps: build_warps(),
             raw_spots: [
                 SpotId::None,
+                SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+                SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+                SpotId::Amagi__Cave_Behind_Waterfall__Top,
+                SpotId::Amagi__Grid_31_19__East,
+                SpotId::Amagi__Grid_31_19__West,
+                SpotId::Amagi__Liru_Room__Bottom,
+                SpotId::Amagi__Liru_Room__East_Passage,
+                SpotId::Amagi__Liru_Room__Hidden_Enemies,
+                SpotId::Amagi__Liru_Room__Hidden_Exit,
+                SpotId::Amagi__Liru_Room__Platform_1_Left,
+                SpotId::Amagi__Liru_Room__Platform_1_Right,
+                SpotId::Amagi__Liru_Room__Platform_2_Left,
+                SpotId::Amagi__Liru_Room__Platform_2_Right,
+                SpotId::Amagi__Liru_Room__Platform_3_Left,
+                SpotId::Amagi__Liru_Room__Platform_3_Right,
+                SpotId::Amagi__Liru_Room__Platform_4_Left,
+                SpotId::Amagi__Liru_Room__Platform_4_Right,
+                SpotId::Amagi__Liru_Room__Shrine,
+                SpotId::Amagi__Liru_Room__West_19,
+                SpotId::Amagi__Liru_Room__West_20,
+                SpotId::Amagi__Main_Area__Broken_Wall,
+                SpotId::Amagi__Main_Area__Carving,
+                SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+                SpotId::Amagi__Main_Area__Catwalk_Center,
+                SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+                SpotId::Amagi__Main_Area__Cliff,
+                SpotId::Amagi__Main_Area__East_15,
+                SpotId::Amagi__Main_Area__East_19,
+                SpotId::Amagi__Main_Area__East_Ledge,
+                SpotId::Amagi__Main_Area__Enemy_Side,
+                SpotId::Amagi__Main_Area__Platform_2,
+                SpotId::Amagi__Main_Area__Platform_3,
+                SpotId::Amagi__Main_Area__Save_Point,
+                SpotId::Amagi__Main_Area__Secret_Outcropping,
+                SpotId::Amagi__Main_Area__Secret_Waterfall,
+                SpotId::Amagi__Main_Area__Shallow_End,
+                SpotId::Amagi__Main_Area__Small_Cliff,
+                SpotId::Amagi__Main_Area__Upper_Platform,
+                SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+                SpotId::Amagi__Main_Area__Waters_Edge,
+                SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+                SpotId::Amagi__Main_Area__West_15,
+                SpotId::Amagi__Main_Area__West_Shelf,
+                SpotId::Amagi__Main_Area__West_Side,
                 SpotId::Antarctica__Building_1E__Connector,
                 SpotId::Antarctica__Building_1E__East_Entry,
                 SpotId::Antarctica__Building_1W__Connector,
@@ -3706,6 +4209,22 @@ impl World {
 
 pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
+        LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => Location {
+            id: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Amagi__Liru_Room__Shrine__Item => Location {
+            id: LocationId::Amagi__Liru_Room__Shrine__Item,
+            canonical: CanonId::None,
+            item: Item::Liru,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
         LocationId::Antarctica__Shed__Interior__Shelf => Location {
             id: LocationId::Antarctica__Shed__Interior__Shelf,
             canonical: CanonId::None,
@@ -3983,9 +4502,177 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
 
 pub fn build_exits() -> EnumMap<ExitId, Exit> {
     enum_map! {
+        ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1,
+            time: 1000,
+            dest: SpotId::Amagi__Main_Area__Waters_Edge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => Exit {
+            id: ExitId::Amagi__Main_Area__West_Side__ex__Carving_1,
+            time: 2400,
+            dest: SpotId::Amagi__Main_Area__Carving,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => Exit {
+            id: ExitId::Amagi__Main_Area__West_Side__ex__Carving_2,
+            time: 2300,
+            dest: SpotId::Amagi__Main_Area__Carving,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1,
+            time: 1000,
+            dest: SpotId::Amagi__Main_Area__West_Shelf,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1,
+            time: 1750,
+            dest: SpotId::Amagi__Main_Area__Secret_Outcropping,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => Exit {
+            id: ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2,
+            time: 1600,
+            dest: SpotId::Amagi__Main_Area__Secret_Outcropping,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1,
+            time: 250,
+            dest: SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1,
+            time: 2000,
+            dest: SpotId::Amagi__Main_Area__East_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1,
+            time: 1400,
+            dest: SpotId::Amagi__Main_Area__Platform_3,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => Exit {
+            id: ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1,
+            time: 1350,
+            dest: SpotId::Amagi__Grid_31_19__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => Exit {
+            id: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1,
+            time: 250,
+            dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => Exit {
+            id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1,
+            time: 250,
+            dest: SpotId::Amagi__Main_Area__Secret_Outcropping,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1 => Exit {
+            id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
+            time: 2000,
+            dest: SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1 => Exit {
+            id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1,
+            time: 1800,
+            dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1 => Exit {
+            id: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1,
+            time: 1000,
+            dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => Exit {
+            id: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1,
+            time: 250,
+            dest: SpotId::Amagi__Main_Area__Secret_Waterfall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => Exit {
+            id: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1,
+            time: 1350,
+            dest: SpotId::Amagi__Main_Area__East_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => Exit {
+            id: ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1,
+            time: 1350,
+            dest: SpotId::Amagi__Liru_Room__West_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1,
+            time: 1350,
+            dest: SpotId::Amagi__Grid_31_19__East,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1,
+            time: 1000,
+            dest: SpotId::Amagi__Liru_Room__West_20,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1,
+            time: 1000,
+            dest: SpotId::Amagi__Liru_Room__East_Passage,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1,
+            time: 1000,
+            dest: SpotId::Amagi__Liru_Room__Platform_4_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1,
+            time: 1000,
+            dest: SpotId::Amagi__Liru_Room__Platform_4_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => Exit {
+            id: ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1,
+            time: 3500,
+            dest: SpotId::Amagi__Liru_Room__Shrine,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => Exit {
             id: ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__Shed__Interior,
             price: Currency::Free,
             loc_id: None,
@@ -3999,14 +4686,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => Exit {
             id: ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__West__Shed_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => Exit {
             id: ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__West__Boxes,
             price: Currency::Free,
             loc_id: None,
@@ -4027,28 +4714,28 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => Exit {
             id: ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__East__Building_1_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => Exit {
             id: ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__Building_1E__East_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => Exit {
             id: ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__Building_2L__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => Exit {
             id: ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__Building_2U__Door,
             price: Currency::Free,
             loc_id: None,
@@ -4062,7 +4749,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => Exit {
             id: ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__East__Building_2_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4097,7 +4784,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => Exit {
             id: ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__East__Building_2_Upper,
             price: Currency::Free,
             loc_id: None,
@@ -4111,7 +4798,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => Exit {
             id: ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__Power_Room__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4125,7 +4812,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => Exit {
             id: ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Antarctica__Top__Power_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4160,7 +4847,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => Exit {
             id: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Bunker_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4174,7 +4861,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => Exit {
             id: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Building_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4195,14 +4882,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => Exit {
             id: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Base_Camp__Bunker_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => Exit {
             id: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Base_Camp__Building_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4272,14 +4959,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => Exit {
             id: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Garage__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => Exit {
             id: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__By_Garage__Garage_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4398,7 +5085,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => Exit {
             id: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Cave__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -4496,7 +5183,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => Exit {
             id: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Ebih__Waterfall__Cave_Entrance,
             price: Currency::Free,
             loc_id: None,
@@ -4643,14 +5330,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => Exit {
             id: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Glacier__Dock_Outside__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => Exit {
             id: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1,
-            time: 750,
+            time: 250,
             dest: SpotId::Glacier__Dock_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -5166,6 +5853,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => Exit {
+            id: ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1,
+            time: 1000,
+            dest: SpotId::Amagi__Main_Area__East_15,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => Exit {
             id: ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
             time: 1350,
@@ -5274,6 +5968,24 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             price: Currency::Free,
             cycle: None,
         },
+        ActionId::Amagi__Main_Area__Carving__Key_Combo => Action {
+            id: ActionId::Amagi__Main_Area__Carving__Key_Combo,
+            time: 1750,
+            price: Currency::Free,
+            cycle: None,
+        },
+        ActionId::Amagi__Main_Area__Save_Point__Save => Action {
+            id: ActionId::Amagi__Main_Area__Save_Point__Save,
+            time: 1200,
+            price: Currency::Free,
+            cycle: None,
+        },
+        ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => Action {
+            id: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
+            time: 1100,
+            price: Currency::Free,
+            cycle: None,
+        },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
@@ -5352,6 +6064,732 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
 pub fn build_spots() -> EnumMap<SpotId, Spot> {
     enum_map! {
         SpotId::None => Spot::default(),
+        SpotId::Amagi__Main_Area__East_15 => Spot {
+            id: SpotId::Amagi__Main_Area__East_15,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Waters_Edge => Spot {
+            id: SpotId::Amagi__Main_Area__Waters_Edge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Shallow_End => Spot {
+            id: SpotId::Amagi__Main_Area__Shallow_End,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Cliff => Spot {
+            id: SpotId::Amagi__Main_Area__Cliff,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Upper_Platform => Spot {
+            id: SpotId::Amagi__Main_Area__Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__West_Shelf => Spot {
+            id: SpotId::Amagi__Main_Area__West_Shelf,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__West_Side => Spot {
+            id: SpotId::Amagi__Main_Area__West_Side,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__West_Side__ex__Carving_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__West_Side__ex__Carving_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Platform_2 => Spot {
+            id: SpotId::Amagi__Main_Area__Platform_2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__East_Ledge => Spot {
+            id: SpotId::Amagi__Main_Area__East_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Carving => Spot {
+            id: SpotId::Amagi__Main_Area__Carving,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__Main_Area__Carving__Key_Combo.into_usize(),
+                end: ActionId::Amagi__Main_Area__Carving__Key_Combo.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__West_15 => Spot {
+            id: SpotId::Amagi__Main_Area__West_15,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Secret_Outcropping => Spot {
+            id: SpotId::Amagi__Main_Area__Secret_Outcropping,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Platform_3 => Spot {
+            id: SpotId::Amagi__Main_Area__Platform_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Catwalk_Center => Spot {
+            id: SpotId::Amagi__Main_Area__Catwalk_Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Catwalk_Broken_Part => Spot {
+            id: SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Catwalk_East_Edge => Spot {
+            id: SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Save_Point => Spot {
+            id: SpotId::Amagi__Main_Area__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Amagi__Main_Area__Save_Point__Save.into_usize(),
+                end: ActionId::Amagi__Main_Area__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Enemy_Side => Spot {
+            id: SpotId::Amagi__Main_Area__Enemy_Side,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Small_Cliff => Spot {
+            id: SpotId::Amagi__Main_Area__Small_Cliff,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__East_19 => Spot {
+            id: SpotId::Amagi__Main_Area__East_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Broken_Wall => Spot {
+            id: SpotId::Amagi__Main_Area__Broken_Wall,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Wall_Stuck_Spot => Spot {
+            id: SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Secret_Waterfall => Spot {
+            id: SpotId::Amagi__Main_Area__Secret_Waterfall,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1.into_usize(),
+                end: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Main_Area__Way_Off_To_The_Side => Spot {
+            id: SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            locations: Range {
+                start: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize(),
+                end: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Main_Area__Broken_Wall.into_usize(),
+                end: SpotId::Amagi__Main_Area__West_Side.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Cave_Behind_Waterfall__Bottom => Spot {
+            id: SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1.into_usize(),
+                end: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+                end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Cave_Behind_Waterfall__Middle => Spot {
+            id: SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize(),
+                end: ExitId::Amagi__Cave_Behind_Waterfall__Middle__ex__Top_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize(),
+                end: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+                end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Cave_Behind_Waterfall__Top => Spot {
+            id: SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1.into_usize(),
+                end: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Cave_Behind_Waterfall__Bottom.into_usize(),
+                end: SpotId::Amagi__Cave_Behind_Waterfall__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Grid_31_19__West => Spot {
+            id: SpotId::Amagi__Grid_31_19__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1.into_usize(),
+                end: ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Grid_31_19__East.into_usize(),
+                end: SpotId::Amagi__Grid_31_19__West.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Grid_31_19__East => Spot {
+            id: SpotId::Amagi__Grid_31_19__East,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1.into_usize(),
+                end: ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Grid_31_19__East.into_usize(),
+                end: SpotId::Amagi__Grid_31_19__West.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__West_19 => Spot {
+            id: SpotId::Amagi__Liru_Room__West_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Hidden_Enemies => Spot {
+            id: SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_1_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_1_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_1_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_1_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_2_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_2_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_2_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_2_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_3_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_3_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_3_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_3_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_4_Left => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_4_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Platform_4_Right => Spot {
+            id: SpotId::Amagi__Liru_Room__Platform_4_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Bottom => Spot {
+            id: SpotId::Amagi__Liru_Room__Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Shrine => Spot {
+            id: SpotId::Amagi__Liru_Room__Shrine,
+            locations: Range {
+                start: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
+                end: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__West_20 => Spot {
+            id: SpotId::Amagi__Liru_Room__West_20,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1.into_usize(),
+                end: ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__East_Passage => Spot {
+            id: SpotId::Amagi__Liru_Room__East_Passage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
+        SpotId::Amagi__Liru_Room__Hidden_Exit => Spot {
+            id: SpotId::Amagi__Liru_Room__Hidden_Exit,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__Liru_Room__Bottom.into_usize(),
+                end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
+            },
+        },
         SpotId::Antarctica__West__Helipad => Spot {
             id: SpotId::Antarctica__West__Helipad,
             locations: Range {
@@ -9259,7 +10697,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1.into_usize(),
+                end: ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -9414,6 +10853,56 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
 pub fn spot_locations(id: SpotId) -> Range<usize> {
     match id {
         SpotId::None => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__East_15 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Waters_Edge => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Shallow_End => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Cliff => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Upper_Platform => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__West_Shelf => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__West_Side => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Platform_2 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__East_Ledge => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Carving => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__West_15 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Secret_Outcropping => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Platform_3 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Catwalk_Center => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Catwalk_Broken_Part => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Catwalk_East_Edge => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Save_Point => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Enemy_Side => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Small_Cliff => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__East_19 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Broken_Wall => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Wall_Stuck_Spot => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Secret_Waterfall => Range { start: 0, end: 0 },
+        SpotId::Amagi__Main_Area__Way_Off_To_The_Side => Range {
+            start: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize(),
+            end: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize() + 1,
+        },
+        SpotId::Amagi__Cave_Behind_Waterfall__Bottom => Range { start: 0, end: 0 },
+        SpotId::Amagi__Cave_Behind_Waterfall__Middle => Range { start: 0, end: 0 },
+        SpotId::Amagi__Cave_Behind_Waterfall__Top => Range { start: 0, end: 0 },
+        SpotId::Amagi__Grid_31_19__West => Range { start: 0, end: 0 },
+        SpotId::Amagi__Grid_31_19__East => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__West_19 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Hidden_Enemies => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_1_Left => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_1_Right => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_2_Left => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_2_Right => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_3_Left => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_3_Right => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_4_Left => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Platform_4_Right => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Bottom => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Shrine => Range {
+            start: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
+            end: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize() + 1,
+        },
+        SpotId::Amagi__Liru_Room__West_20 => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__East_Passage => Range { start: 0, end: 0 },
+        SpotId::Amagi__Liru_Room__Hidden_Exit => Range { start: 0, end: 0 },
         SpotId::Antarctica__West__Helipad => Range { start: 0, end: 0 },
         SpotId::Antarctica__West__Shed_Entry => Range { start: 0, end: 0 },
         SpotId::Antarctica__West__Boxes => Range { start: 0, end: 0 },
@@ -9751,6 +11240,16 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
 
 pub fn area_locations(id: AreaId) -> Range<usize> {
     match id {
+        AreaId::Amagi__Main_Area => Range {
+            start: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize(),
+            end: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize(),
+        },
+        AreaId::Amagi__Cave_Behind_Waterfall => Range { start: 0, end: 0 },
+        AreaId::Amagi__Grid_31_19 => Range { start: 0, end: 0 },
+        AreaId::Amagi__Liru_Room => Range {
+            start: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
+            end: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
+        },
         AreaId::Antarctica__West => Range { start: 0, end: 0 },
         AreaId::Antarctica__Shed => Range {
             start: LocationId::Antarctica__Shed__Interior__Shelf.into_usize(),
@@ -9869,6 +11368,10 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
 
 pub fn region_locations(id: RegionId) -> Range<usize> {
     match id {
+        RegionId::Amagi => Range {
+            start: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
+            end: LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item.into_usize(),
+        },
         RegionId::Antarctica => Range {
             start: LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note.into_usize(),
             end: LocationId::Antarctica__Shed__Interior__Shelf.into_usize(),

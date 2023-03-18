@@ -66,6 +66,17 @@ macro_rules! helper__hook {
     }};
 }
 
+/// $hover (  )
+/// ^mode == 'drone' and Drone_Hover
+#[macro_export]
+macro_rules! helper__hover {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() == enums::Mode::Drone && $ctx.has(Item::Drone_Hover))
+    }};
+}
+
 /// $can_deploy (  )
 /// Remote_Drone and ^mode != 'drone' and not Anuman
 #[macro_export]

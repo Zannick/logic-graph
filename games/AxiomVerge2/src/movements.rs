@@ -39,6 +39,623 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             false,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 5180,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 5180,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 5180,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 699,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 675,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 600,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 225,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 9234,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 3153,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 3000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 3153,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 450,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 3153,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 2252,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2702,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2702,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 2477,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2477,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 4954,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 13513,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 13513,
+        // [0.225225, 0.4]
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 625,
+        // [0.900901, 0.4]
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1300,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 675,
+        (false, false, false, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            4054
+        }
+        (false, false, false, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            4054
+        }
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 500,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 675,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 499,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 499,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1299,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Shrine,
+        ) => 2252,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Shrine,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 2252,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 2000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 4279,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1100,
+        (
+            false,
+            false,
+            false,
             SpotId::Antarctica__West__Helipad,
             SpotId::Antarctica__West__Shed_Entry,
         ) => 5630,
@@ -3096,6 +3713,623 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             false,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 4035,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 4035,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 599,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 526,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 500,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 175,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 600,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 7192,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2456,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 1799,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 350,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1754,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2105,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2105,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 1929,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 1929,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 600,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 3859,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 600,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        (true, false, false, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3157
+        }
+        (true, false, false, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3157
+        }
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1300,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1199,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Shrine,
+        ) => 1754,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__Shrine,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1754,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 3333,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1000,
+        (
+            true,
+            false,
+            false,
             SpotId::Antarctica__West__Helipad,
             SpotId::Antarctica__West__Shed_Entry,
         ) => 4385,
@@ -3304,7 +4538,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 800,
         (
             true,
             false,
@@ -3318,7 +4552,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
+        ) => 3599,
         (
             true,
             false,
@@ -3339,7 +4573,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
+        ) => 3599,
         (
             true,
             false,
@@ -3374,7 +4608,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -3423,7 +4657,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__West_13,
-        ) => 1000,
+        ) => 877,
         (
             true,
             false,
@@ -3472,7 +4706,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__East_13,
             SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             false,
@@ -3507,7 +4741,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -3542,7 +4776,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__East_Bush,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -3591,7 +4825,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__West_Bush,
             SpotId::Ebih__By_Garage__West_12,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -3605,7 +4839,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__West_13,
             SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -3677,7 +4911,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
-        ) => 2000,
+        ) => 1403,
         (
             true,
             false,
@@ -3698,28 +4932,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1200,
+        ) => 1000,
         (
             true,
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1600,
+        ) => 1400,
         (
             true,
             false,
@@ -3754,7 +4988,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__West_11,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -3782,7 +5016,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__East_Ledge,
             SpotId::Ebih__Waterfall__East_10,
-        ) => 1000,
+        ) => 701,
         (
             true,
             false,
@@ -3803,7 +5037,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__East_11,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             false,
@@ -3824,7 +5058,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -3838,7 +5072,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             false,
@@ -3873,7 +5107,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             false,
@@ -3901,7 +5135,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -3936,14 +5170,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
             false,
             SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 3000,
+        ) => 2105,
         (
             true,
             false,
@@ -3964,7 +5198,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 599,
         (
             true,
             false,
@@ -4153,7 +5387,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Platform,
             SpotId::Ebih__Waterfall__East_8,
-        ) => 4000,
+        ) => 3333,
         (
             true,
             false,
@@ -4209,7 +5443,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__East_10,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             false,
@@ -4230,21 +5464,21 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__East_9,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 600,
         (
             true,
             false,
             false,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1754,
         (
             true,
             false,
@@ -4281,7 +5515,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, false, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            900
         }
         (
             true,
@@ -4298,7 +5532,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 1578,
         (true, false, false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1099
         }
         (
             true,
@@ -4327,7 +5561,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -4355,7 +5589,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
+        ) => 599,
         (
             true,
             false,
@@ -4376,7 +5610,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__East_6,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -4460,7 +5694,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -4488,7 +5722,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Upper_Ledge,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -4560,7 +5794,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
         ) => 1578,
         (true, false, false, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => {
-            4000
+            2631
         }
         (
             true,
@@ -4590,7 +5824,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_6,
         ) => 3684,
         (true, false, false, SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => {
-            3000
+            1799
         }
         (
             true,
@@ -4598,7 +5832,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__Lower_Tree,
             SpotId::Ebih__Boss_Room__Boss,
-        ) => 4000,
+        ) => 2456,
         (
             true,
             false,
@@ -4654,7 +5888,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1000,
+        ) => 877,
         (
             true,
             false,
@@ -4675,7 +5909,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
+        ) => 900,
         (
             true,
             false,
@@ -4689,7 +5923,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             false,
@@ -4712,7 +5946,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_5,
         ) => 3684,
         (true, false, false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => {
-            1500
+            1400
         }
         (true, false, false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => {
             2631
@@ -4738,14 +5972,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1228,
-        // [1.0, 0.701754]
+        // [0.9, 0.701754]
         (
             true,
             false,
             false,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1701,
+        ) => 1601,
         // [0.9, 0.7]
         (
             true,
@@ -4760,7 +5994,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1400,
+        ) => 1299,
         (
             true,
             false,
@@ -4781,12 +6015,12 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 2000,
+        ) => 1200,
         (true, false, false, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => {
             701
         }
         (true, false, false, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => {
-            1000
+            701
         }
         (
             true,
@@ -4808,7 +6042,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
+        ) => 500,
         (
             true,
             false,
@@ -4874,43 +6108,43 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 701,
-        // [0.8, 0.701754]
+        // [0.7, 0.701754]
         (
             true,
             false,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1501,
+        ) => 1401,
         (
             true,
             false,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_4,
-        ) => 1000,
+        ) => 877,
         (
             true,
             false,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
-        // [0.8, 0.526316]
+        ) => 1399,
+        // [0.7, 0.526316]
         (
             true,
             false,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1326,
+        ) => 1226,
         (
             true,
             false,
             false,
             SpotId::Ebih__Drone_Room__Tree,
             SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 1000,
+        ) => 701,
         (
             true,
             false,
@@ -5004,7 +6238,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Revival__Ledge,
             SpotId::Glacier__Revival__Overhang,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -5018,7 +6252,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Revival__Lower_East,
             SpotId::Glacier__Revival__Ledge,
-        ) => 8000,
+        ) => 4800,
         (
             true,
             false,
@@ -5076,22 +6310,22 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Grid_43_10_11__East,
             SpotId::Glacier__Grid_43_10_11__Lower,
         ) => 3157,
-        // [2, 3, 3, 1]
+        // [1.2, 1.8, 1.8, 0.877193]
         (
             true,
             false,
             false,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 9000,
-        // [2, 4, 2]
+        ) => 5677,
+        // [1.2, 2.4, 1.578947]
         (
             true,
             false,
             false,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__East,
-        ) => 8000,
+        ) => 5178,
         (
             true,
             false,
@@ -5141,14 +6375,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
         ) => 6666,
-        // [3.333333, 1, 3.333333]
+        // [3.333333, 0.6, 3.333333]
         (
             true,
             false,
             false,
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-        ) => 7666,
+        ) => 7266,
         (
             true,
             false,
@@ -5183,7 +6417,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             false,
@@ -5197,7 +6431,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             false,
@@ -5239,35 +6473,35 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
             false,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
+        ) => 1099,
         (
             true,
             false,
             false,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1700,
+        ) => 1578,
         (
             true,
             false,
             false,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
-        ) => 14000,
+        ) => 8400,
         (
             true,
             false,
             false,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 14000,
+        ) => 8400,
         (
             true,
             false,
@@ -5302,7 +6536,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -5316,7 +6550,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 7000,
+        ) => 4200,
         (
             true,
             false,
@@ -5330,14 +6564,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 3000,
+        ) => 2280,
         (
             true,
             false,
             false,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 9000,
+        ) => 6666,
         (
             true,
             false,
@@ -5403,7 +6637,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -5445,7 +6679,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -5725,7 +6959,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 199,
         (
             true,
             false,
@@ -5739,7 +6973,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__West_Cliff,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 7000,
+        ) => 4200,
         (
             true,
             false,
@@ -5763,7 +6997,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__West_8,
             SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -5791,7 +7025,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
+        ) => 500,
         (
             true,
             false,
@@ -5812,14 +7046,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
             false,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -5847,7 +7081,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 599,
         (
             true,
             false,
@@ -5889,7 +7123,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 7000,
+        ) => 4200,
         (
             true,
             false,
@@ -5917,7 +7151,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -5931,7 +7165,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 5000,
+        ) => 3000,
         (
             true,
             false,
@@ -5959,7 +7193,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -5987,14 +7221,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 399,
+        ) => 350,
         (
             true,
             false,
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1199,
         (
             true,
             false,
@@ -6015,7 +7249,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -6059,7 +7293,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -6080,7 +7314,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -6115,7 +7349,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -6137,6 +7371,749 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 5111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 5111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 900,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 1602,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 5180,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 5282,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 900,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 1000,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 900,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 699,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1791,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1801,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 675,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1801,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 5202,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2393,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1490,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 900,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 600,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 993,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1801,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 225,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 496,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 9234,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 3153,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 2027,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 2233,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 2096,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 2591,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 3111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 450,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 3111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1999,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 2252,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1999,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1333,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 7568,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1333,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2702,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2702,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 2477,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2477,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 993,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 4954,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1000,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 13340,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 13340,
+        // [0.225225, 0.4]
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 625,
+        // [0.900901, 0.4]
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1300,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 675,
+        (false, true, false, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3999
+        }
+        (false, true, false, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3999
+        }
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1555,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1555,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 2222,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 500,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 675,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1777,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1777,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 499,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1898,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1777,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 499,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1299,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 900,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1777,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1333,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1555,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 2222,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1832,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1333,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1602,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1832,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 1111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1791,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 1111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 2096,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Shrine,
+        ) => 2252,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Shrine,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 2252,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 2000,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1555,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 4279,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1100,
         (
             false,
             true,
@@ -10100,6 +12077,735 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             true,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 4035,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 4035,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 599,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 526,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 500,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 175,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 7192,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2456,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 1500,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 3000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 350,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1754,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 4000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2105,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2105,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 1929,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 1929,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 3859,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        (false, false, true, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3157
+        }
+        (false, false, true, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3157
+        }
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1300,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1200,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1199,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Shrine,
+        ) => 1754,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Shrine,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1754,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 2000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 3333,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
             SpotId::Antarctica__West__Helipad,
             SpotId::Antarctica__West__Shed_Entry,
         ) => 4385,
@@ -10308,7 +13014,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 800,
         (
             false,
             false,
@@ -10716,14 +13422,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1200,
+        ) => 1000,
         (
             false,
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1600,
+        ) => 1400,
         (
             false,
             false,
@@ -10968,7 +13674,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 599,
         (
             false,
             false,
@@ -11241,7 +13947,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 600,
         (
             false,
             false,
@@ -11285,7 +13991,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (false, false, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            900
         }
         (
             false,
@@ -11302,7 +14008,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 1578,
         (false, false, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1099
         }
         (
             false,
@@ -11359,7 +14065,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
+        ) => 599,
         (
             false,
             false,
@@ -11679,7 +14385,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
+        ) => 900,
         (
             false,
             false,
@@ -11716,7 +14422,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_5,
         ) => 3684,
         (false, false, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => {
-            1500
+            1400
         }
         (false, false, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => {
             2631
@@ -11742,14 +14448,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1228,
-        // [1.0, 0.701754]
+        // [0.9, 0.701754]
         (
             false,
             false,
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1701,
+        ) => 1601,
         // [0.9, 0.7]
         (
             false,
@@ -11764,7 +14470,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1400,
+        ) => 1299,
         (
             false,
             false,
@@ -11812,7 +14518,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
+        ) => 500,
         (
             false,
             false,
@@ -11878,14 +14584,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 701,
-        // [0.8, 0.701754]
+        // [0.7, 0.701754]
         (
             false,
             false,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1501,
+        ) => 1401,
         (
             false,
             false,
@@ -11899,15 +14605,15 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
-        // [0.8, 0.526316]
+        ) => 1399,
+        // [0.7, 0.526316]
         (
             false,
             false,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1326,
+        ) => 1226,
         (
             false,
             false,
@@ -12187,7 +14893,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             false,
             false,
@@ -12201,7 +14907,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             false,
             false,
@@ -12250,14 +14956,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
+        ) => 1099,
         (
             false,
             false,
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1700,
+        ) => 1578,
         (
             false,
             false,
@@ -12729,7 +15435,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 199,
         (
             false,
             false,
@@ -12795,7 +15501,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
+        ) => 500,
         (
             false,
             false,
@@ -12851,7 +15557,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 599,
         (
             false,
             false,
@@ -12991,14 +15697,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 399,
+        ) => 350,
         (
             false,
             false,
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1199,
         (
             false,
             false,
@@ -13141,6 +15847,741 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 4035,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 4035,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 1602,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 5282,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 599,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 526,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 5202,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2393,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1490,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 500,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 175,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 496,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 7192,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2456,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 2233,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 2096,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 1799,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 350,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1754,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 7568,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2105,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2105,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 1929,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 1929,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 600,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 3859,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 600,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        (true, true, false, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3157
+        }
+        (true, true, false, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3157
+        }
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1300,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 2222,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1777,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1898,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1199,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1777,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 2222,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1832,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1602,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1832,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1791,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 2096,
+        (true, true, false, SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => {
+            1754
+        }
+        (true, true, false, SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => {
+            1754
+        }
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 3333,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1000,
         (
             true,
             true,
@@ -13362,7 +16803,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 800,
         (
             true,
             true,
@@ -13376,7 +16817,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 5067,
+        ) => 3599,
         (
             true,
             true,
@@ -13404,7 +16845,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3664,
+        ) => 3599,
         (
             true,
             true,
@@ -13446,7 +16887,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             true,
@@ -13502,7 +16943,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__West_13,
-        ) => 1000,
+        ) => 877,
         (
             true,
             true,
@@ -13551,7 +16992,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__East_13,
             SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             true,
@@ -13600,7 +17041,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 993,
+        ) => 600,
         (
             true,
             true,
@@ -13635,7 +17076,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__East_Bush,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 2266,
+        ) => 1799,
         (
             true,
             true,
@@ -13712,7 +17153,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__By_Garage__West_13,
             SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 2712,
+        ) => 1799,
         (
             true,
             true,
@@ -13826,7 +17267,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
-        ) => 2000,
+        ) => 1403,
         (
             true,
             true,
@@ -13854,28 +17295,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1602,
+        ) => 1200,
         (
             true,
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1200,
+        ) => 1000,
         (
             true,
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1600,
+        ) => 1400,
         (
             true,
             true,
@@ -13910,7 +17351,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__West_11,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1791,
+        ) => 1228,
         (
             true,
             true,
@@ -13938,7 +17379,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__East_Ledge,
             SpotId::Ebih__Waterfall__East_10,
-        ) => 1000,
+        ) => 701,
         (
             true,
             true,
@@ -13966,7 +17407,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__East_11,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             true,
@@ -14001,7 +17442,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 2514,
+        ) => 1799,
         (
             true,
             true,
@@ -14015,7 +17456,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             true,
@@ -14057,7 +17498,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             true,
@@ -14085,7 +17526,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3771,
+        ) => 2400,
         (
             true,
             true,
@@ -14148,14 +17589,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2703,
+        ) => 1799,
         (
             true,
             true,
             false,
             SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 2810,
+        ) => 2105,
         (
             true,
             true,
@@ -14183,7 +17624,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 599,
         (
             true,
             true,
@@ -14423,7 +17864,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Waterfall__Below_Tree,
         ) => 701,
         (true, true, false, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => {
-            4000
+            3333
         }
         (true, true, false, SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => {
             3333
@@ -14476,7 +17917,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__East_10,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             true,
@@ -14499,7 +17940,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Alcove,
         ) => 3583,
         (true, true, false, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => {
-            3956
+            2400
         }
         (
             true,
@@ -14507,14 +17948,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 600,
         (
             true,
             true,
             false,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1754,
         (
             true,
             true,
@@ -14558,7 +17999,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, true, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            900
         }
         (true, true, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -14585,7 +18026,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 1578,
         (true, true, false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1099
         }
         (
             true,
@@ -14614,7 +18055,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 2703,
+        ) => 2400,
         (
             true,
             true,
@@ -14649,7 +18090,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
+        ) => 599,
         (
             true,
             true,
@@ -14677,7 +18118,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__East_6,
-        ) => 1791,
+        ) => 1228,
         (
             true,
             true,
@@ -14857,7 +18298,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 1257,
+        ) => 1200,
         (
             true,
             true,
@@ -14885,7 +18326,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Upper_Ledge,
-        ) => 2989,
+        ) => 2400,
         (
             true,
             true,
@@ -14956,7 +18397,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Grid_21_1_5__East_6,
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
         ) => 1578,
-        (true, true, false, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 4000,
+        (true, true, false, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (
             true,
             true,
@@ -14993,7 +18434,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_6,
         ) => 3684,
         (true, true, false, SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => {
-            3000
+            1799
         }
         (
             true,
@@ -15010,7 +18451,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__Upper_Tree,
         ) => 6535,
         (true, true, false, SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => {
-            3384
+            2456
         }
         (
             true,
@@ -15095,7 +18536,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1000,
+        ) => 877,
         (true, true, false, SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => {
             2631
         }
@@ -15112,7 +18553,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
+        ) => 900,
         (
             true,
             true,
@@ -15133,7 +18574,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             true,
@@ -15163,7 +18604,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_5,
         ) => 3684,
         (true, true, false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => {
-            1500
+            1400
         }
         (true, true, false, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (
@@ -15203,9 +18644,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Left_Platform,
         ) => 4721,
-        // [1.0, 0.701754]
+        // [0.9, 0.701754]
         (true, true, false, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => {
-            1701
+            1601
         }
         // [0.9, 0.7]
         (
@@ -15221,7 +18662,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1400,
+        ) => 1299,
         (
             true,
             true,
@@ -15263,7 +18704,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1602,
+        ) => 1200,
         (true, true, false, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => {
             701
         }
@@ -15275,7 +18716,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 2266,
         (true, true, false, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => {
-            993
+            701
         }
         (
             true,
@@ -15311,7 +18752,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
+        ) => 500,
         (
             true,
             true,
@@ -15398,43 +18839,43 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 701,
-        // [0.8, 0.701754]
+        // [0.7, 0.701754]
         (
             true,
             true,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1501,
+        ) => 1401,
         (
             true,
             true,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_4,
-        ) => 1000,
+        ) => 877,
         (
             true,
             true,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
-        // [0.8, 0.526316]
+        ) => 1399,
+        // [0.7, 0.526316]
         (
             true,
             true,
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1326,
+        ) => 1226,
         (
             true,
             true,
             false,
             SpotId::Ebih__Drone_Room__Tree,
             SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 1000,
+        ) => 701,
         (
             true,
             true,
@@ -15535,7 +18976,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Revival__Ledge,
             SpotId::Glacier__Revival__Overhang,
-        ) => 1602,
+        ) => 1200,
         (
             true,
             true,
@@ -15614,22 +19055,22 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Grid_43_10_11__East,
             SpotId::Glacier__Grid_43_10_11__Lower,
         ) => 3157,
-        // [1.490712, 0.993808, 0.888889, 1]
+        // [1.2, 0.993808, 0.888889, 0.877193]
         (
             true,
             true,
             false,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 4373,
-        // [1.490712, 1.885618, 2]
+        ) => 3959,
+        // [1.2, 1.885618, 1.578947]
         (
             true,
             true,
             false,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__East,
-        ) => 5376,
+        ) => 4664,
         (
             true,
             true,
@@ -15728,7 +19169,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             true,
@@ -15749,7 +19190,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             true,
@@ -15812,35 +19253,35 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 2591,
+        ) => 2400,
         (
             true,
             true,
             false,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
+        ) => 1099,
         (
             true,
             true,
             false,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1700,
+        ) => 1578,
         (
             true,
             true,
             false,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
-        ) => 8913,
+        ) => 8400,
         (
             true,
             true,
             false,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 8988,
+        ) => 8400,
         (
             true,
             true,
@@ -15882,7 +19323,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 1791,
+        ) => 1228,
         (
             true,
             true,
@@ -15904,7 +19345,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 4969,
+        ) => 4200,
         (
             true,
             true,
@@ -15940,14 +19381,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 3000,
+        ) => 2280,
         (
             true,
             true,
             false,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 9000,
+        ) => 6666,
         (
             true,
             true,
@@ -16020,7 +19461,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 1911,
+        ) => 1228,
         (
             true,
             true,
@@ -16062,7 +19503,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             true,
@@ -16450,7 +19891,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 199,
         (
             true,
             true,
@@ -16459,7 +19900,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Peak__West_Cliff,
         ) => 3157,
         (true, true, false, SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => {
-            5067
+            4200
         }
         (
             true,
@@ -16501,7 +19942,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__West_8,
             SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 3617,
+        ) => 2400,
         (
             true,
             true,
@@ -16529,7 +19970,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
+        ) => 500,
         (
             true,
             true,
@@ -16550,14 +19991,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 2712,
+        ) => 1799,
         (
             true,
             true,
             false,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 2222,
+        ) => 1799,
         (
             true,
             true,
@@ -16613,7 +20054,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 599,
         (
             true,
             true,
@@ -16690,7 +20131,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 5678,
+        ) => 4200,
         (
             true,
             true,
@@ -16718,7 +20159,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 1832,
+        ) => 1200,
         (
             true,
             true,
@@ -16739,7 +20180,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 4494,
+        ) => 3000,
         (
             true,
             true,
@@ -16781,7 +20222,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             true,
@@ -16816,14 +20257,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 399,
+        ) => 350,
         (
             true,
             true,
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1199,
         (
             true,
             true,
@@ -16851,7 +20292,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 628,
+        ) => 600,
         (
             true,
             true,
@@ -16909,7 +20350,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 993,
+        ) => 600,
         (
             true,
             true,
@@ -16951,7 +20392,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 3583,
+        ) => 2400,
         (
             true,
             true,
@@ -17000,7 +20441,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 888,
+        ) => 600,
         (
             true,
             true,
@@ -17036,6 +20477,727 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 4035,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 4035,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 599,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 526,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 500,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 175,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 600,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 7192,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2456,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 1500,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 1799,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 350,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1754,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 4000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2105,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2105,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 1929,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 1929,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 600,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 3859,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 600,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        (true, false, true, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3157
+        }
+        (true, false, true, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3157
+        }
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1300,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1200,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1199,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1000,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 1000,
+        (true, false, true, SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => {
+            1754
+        }
+        (true, false, true, SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => {
+            1754
+        }
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 3333,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1000,
         (
             true,
             false,
@@ -17236,7 +21398,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 800,
         (
             true,
             false,
@@ -17250,7 +21412,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
+        ) => 3599,
         (
             true,
             false,
@@ -17271,7 +21433,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
+        ) => 3599,
         (
             true,
             false,
@@ -17306,7 +21468,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -17355,7 +21517,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__West_13,
-        ) => 1000,
+        ) => 877,
         (
             true,
             false,
@@ -17404,7 +21566,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__East_13,
             SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             false,
@@ -17439,7 +21601,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -17474,7 +21636,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__East_Bush,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -17523,7 +21685,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__West_Bush,
             SpotId::Ebih__By_Garage__West_12,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -17537,7 +21699,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__West_13,
             SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -17609,7 +21771,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
-        ) => 2000,
+        ) => 1403,
         (
             true,
             false,
@@ -17630,28 +21792,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1200,
+        ) => 1000,
         (
             true,
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1600,
+        ) => 1400,
         (
             true,
             false,
@@ -17686,7 +21848,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__West_11,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -17714,7 +21876,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__East_Ledge,
             SpotId::Ebih__Waterfall__East_10,
-        ) => 1000,
+        ) => 701,
         (
             true,
             false,
@@ -17735,7 +21897,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__East_11,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             false,
@@ -17756,7 +21918,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -17770,7 +21932,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             false,
@@ -17805,7 +21967,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             false,
@@ -17833,7 +21995,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -17868,14 +22030,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
             true,
             SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 3000,
+        ) => 2105,
         (
             true,
             false,
@@ -17896,7 +22058,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 599,
         (
             true,
             false,
@@ -18080,7 +22242,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Waterfall__Below_Tree,
         ) => 701,
         (true, false, true, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => {
-            4000
+            3333
         }
         (true, false, true, SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => {
             3333
@@ -18133,7 +22295,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__East_10,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             false,
@@ -18149,7 +22311,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1754,
         (true, false, true, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => {
-            4000
+            2400
         }
         (
             true,
@@ -18157,14 +22319,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 600,
         (
             true,
             false,
             true,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1754,
         (
             true,
             false,
@@ -18201,7 +22363,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, false, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            900
         }
         (true, false, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -18214,7 +22376,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 1578,
         (true, false, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1099
         }
         (
             true,
@@ -18243,7 +22405,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -18271,7 +22433,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
+        ) => 599,
         (
             true,
             false,
@@ -18292,7 +22454,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__East_6,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -18376,7 +22538,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -18404,7 +22566,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Upper_Ledge,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -18475,7 +22637,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Grid_21_1_5__East_6,
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
         ) => 1578,
-        (true, false, true, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 4000,
+        (true, false, true, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (
             true,
             false,
@@ -18498,10 +22660,10 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_6,
         ) => 3684,
         (true, false, true, SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => {
-            3000
+            1799
         }
         (true, false, true, SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => {
-            4000
+            2456
         }
         (
             true,
@@ -18558,7 +22720,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1000,
+        ) => 877,
         (true, false, true, SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => {
             2631
         }
@@ -18575,7 +22737,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
+        ) => 900,
         (
             true,
             false,
@@ -18589,7 +22751,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             false,
@@ -18612,7 +22774,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_5,
         ) => 3684,
         (true, false, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => {
-            1500
+            1400
         }
         (true, false, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (
@@ -18636,9 +22798,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1228,
-        // [1.0, 0.701754]
+        // [0.9, 0.701754]
         (true, false, true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => {
-            1701
+            1601
         }
         // [0.9, 0.7]
         (
@@ -18654,7 +22816,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1400,
+        ) => 1299,
         (
             true,
             false,
@@ -18675,12 +22837,12 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 2000,
+        ) => 1200,
         (true, false, true, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => {
             701
         }
         (true, false, true, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => {
-            1000
+            701
         }
         (
             true,
@@ -18702,7 +22864,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
+        ) => 500,
         (
             true,
             false,
@@ -18768,43 +22930,43 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 701,
-        // [0.8, 0.701754]
+        // [0.7, 0.701754]
         (
             true,
             false,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1501,
+        ) => 1401,
         (
             true,
             false,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_4,
-        ) => 1000,
+        ) => 877,
         (
             true,
             false,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
-        // [0.8, 0.526316]
+        ) => 1399,
+        // [0.7, 0.526316]
         (
             true,
             false,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1326,
+        ) => 1226,
         (
             true,
             false,
             true,
             SpotId::Ebih__Drone_Room__Tree,
             SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 1000,
+        ) => 701,
         (
             true,
             false,
@@ -18898,7 +23060,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Revival__Ledge,
             SpotId::Glacier__Revival__Overhang,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -18912,7 +23074,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Revival__Lower_East,
             SpotId::Glacier__Revival__Ledge,
-        ) => 8000,
+        ) => 4800,
         (
             true,
             false,
@@ -18970,22 +23132,22 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Grid_43_10_11__East,
             SpotId::Glacier__Grid_43_10_11__Lower,
         ) => 3157,
-        // [2, 3, 3, 1]
+        // [1.2, 1.8, 1.8, 0.877193]
         (
             true,
             false,
             true,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 9000,
-        // [2, 4, 2]
+        ) => 5677,
+        // [1.2, 2.4, 1.578947]
         (
             true,
             false,
             true,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__East,
-        ) => 8000,
+        ) => 5178,
         (
             true,
             false,
@@ -19035,14 +23197,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
         ) => 6666,
-        // [3.333333, 1, 3.333333]
+        // [3.333333, 0.6, 3.333333]
         (
             true,
             false,
             true,
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-        ) => 7666,
+        ) => 7266,
         (
             true,
             false,
@@ -19077,7 +23239,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             false,
@@ -19091,7 +23253,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             false,
@@ -19133,35 +23295,35 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
+        ) => 1099,
         (
             true,
             false,
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1700,
+        ) => 1578,
         (
             true,
             false,
             true,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
-        ) => 14000,
+        ) => 8400,
         (
             true,
             false,
             true,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 14000,
+        ) => 8400,
         (
             true,
             false,
@@ -19196,7 +23358,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -19210,7 +23372,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 7000,
+        ) => 4200,
         (
             true,
             false,
@@ -19224,14 +23386,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 3000,
+        ) => 2280,
         (
             true,
             false,
             true,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 9000,
+        ) => 6666,
         (
             true,
             false,
@@ -19297,7 +23459,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 2000,
+        ) => 1228,
         (
             true,
             false,
@@ -19339,7 +23501,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -19615,7 +23777,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 199,
         (
             true,
             false,
@@ -19624,7 +23786,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Peak__West_Cliff,
         ) => 3157,
         (true, false, true, SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => {
-            7000
+            4200
         }
         (
             true,
@@ -19649,7 +23811,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__West_8,
             SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -19677,7 +23839,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
+        ) => 500,
         (
             true,
             false,
@@ -19698,14 +23860,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
             true,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 3000,
+        ) => 1799,
         (
             true,
             false,
@@ -19733,7 +23895,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 599,
         (
             true,
             false,
@@ -19775,7 +23937,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 7000,
+        ) => 4200,
         (
             true,
             false,
@@ -19803,7 +23965,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -19817,7 +23979,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 5000,
+        ) => 3000,
         (
             true,
             false,
@@ -19845,7 +24007,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             false,
@@ -19873,14 +24035,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 399,
+        ) => 350,
         (
             true,
             false,
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1199,
         (
             true,
             false,
@@ -19901,7 +24063,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -19945,7 +24107,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -19966,7 +24128,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 4000,
+        ) => 2400,
         (
             true,
             false,
@@ -20001,7 +24163,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1000,
+        ) => 600,
         (
             true,
             false,
@@ -20023,6 +24185,741 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 4035,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 4035,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 5282,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 599,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1791,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 526,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 5202,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 500,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 993,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 175,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 496,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 7192,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2456,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 1500,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 2591,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 350,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1754,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 4000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2105,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2105,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 1929,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 1929,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 993,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 3859,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        (false, true, true, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3157
+        }
+        (false, true, true, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3157
+        }
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1300,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1200,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1199,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 1000,
+        (false, true, true, SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => {
+            1754
+        }
+        (false, true, true, SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => {
+            1754
+        }
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 2000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 3333,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1000,
         (
             false,
             true,
@@ -20244,7 +25141,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 800,
         (
             false,
             true,
@@ -20750,14 +25647,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1200,
+        ) => 1000,
         (
             false,
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1600,
+        ) => 1400,
         (
             false,
             true,
@@ -21065,7 +25962,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 599,
         (
             false,
             true,
@@ -21389,7 +26286,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 600,
         (
             false,
             true,
@@ -21440,7 +26337,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (false, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            900
         }
         (false, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -21467,7 +26364,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 1578,
         (false, true, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1099
         }
         (
             false,
@@ -21531,7 +26428,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
+        ) => 599,
         (
             false,
             true,
@@ -21994,7 +26891,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
+        ) => 900,
         (
             false,
             true,
@@ -22045,7 +26942,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_5,
         ) => 3684,
         (false, true, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => {
-            1500
+            1400
         }
         (false, true, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (
@@ -22085,9 +26982,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Left_Platform,
         ) => 4721,
-        // [1.0, 0.701754]
+        // [0.9, 0.701754]
         (false, true, true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => {
-            1701
+            1601
         }
         // [0.9, 0.7]
         (
@@ -22103,7 +27000,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1400,
+        ) => 1299,
         (
             false,
             true,
@@ -22193,7 +27090,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
+        ) => 500,
         (
             false,
             true,
@@ -22280,14 +27177,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 701,
-        // [0.8, 0.701754]
+        // [0.7, 0.701754]
         (
             false,
             true,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1501,
+        ) => 1401,
         (
             false,
             true,
@@ -22301,15 +27198,15 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
-        // [0.8, 0.526316]
+        ) => 1399,
+        // [0.7, 0.526316]
         (
             false,
             true,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1326,
+        ) => 1226,
         (
             false,
             true,
@@ -22610,7 +27507,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             false,
             true,
@@ -22631,7 +27528,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             false,
             true,
@@ -22701,14 +27598,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
+        ) => 1099,
         (
             false,
             true,
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1700,
+        ) => 1578,
         (
             false,
             true,
@@ -23332,7 +28229,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 199,
         (
             false,
             true,
@@ -23411,7 +28308,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
+        ) => 500,
         (
             false,
             true,
@@ -23495,7 +28392,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 599,
         (
             false,
             true,
@@ -23698,14 +28595,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 399,
+        ) => 350,
         (
             false,
             true,
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1199,
         (
             false,
             true,
@@ -23918,6 +28815,737 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_15,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 4035,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__East_15,
+        ) => 4035,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Waters_Edge,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Shallow_End,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 5282,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Cliff,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 599,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Shelf,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 526,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_Side,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 5202,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 500,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_2,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_Ledge,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 899,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_Side,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Carving,
+            SpotId::Amagi__Main_Area__West_15,
+        ) => 175,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__West_15,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 496,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 7192,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => 2456,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__West_Shelf,
+        ) => 1700,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Carving,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Platform_2,
+        ) => 1500,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__East_Ledge,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 1799,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 350,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 700,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1754,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Save_Point,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 4000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 2105,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 2105,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+            SpotId::Amagi__Main_Area__East_19,
+        ) => 1929,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__East_19,
+            SpotId::Amagi__Main_Area__Small_Cliff,
+        ) => 1929,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 600,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 3859,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 600,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        (true, true, true, SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => {
+            3157
+        }
+        (true, true, true, SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
+            3157
+        }
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_19,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_19,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1300,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+        ) => 1200,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1199,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__West_20,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 400,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1000,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__Bottom,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 1000,
+        (true, true, true, SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => {
+            1754
+        }
+        (true, true, true, SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => {
+            1754
+        }
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__West_20,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1228,
+        (true, true, true, SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => {
+            3333
+        }
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Bottom,
+        ) => 1000,
         (
             true,
             true,
@@ -24139,7 +29767,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 800,
         (
             true,
             true,
@@ -24153,7 +29781,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 5067,
+        ) => 3599,
         (
             true,
             true,
@@ -24181,7 +29809,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3664,
+        ) => 3599,
         (
             true,
             true,
@@ -24223,7 +29851,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             true,
@@ -24279,7 +29907,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__West_13,
-        ) => 1000,
+        ) => 877,
         (
             true,
             true,
@@ -24328,7 +29956,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__East_13,
             SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             true,
@@ -24377,7 +30005,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 993,
+        ) => 600,
         (
             true,
             true,
@@ -24412,7 +30040,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__East_Bush,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 2266,
+        ) => 1799,
         (
             true,
             true,
@@ -24489,7 +30117,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__By_Garage__West_13,
             SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 2712,
+        ) => 1799,
         (
             true,
             true,
@@ -24603,7 +30231,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
-        ) => 2000,
+        ) => 1403,
         (
             true,
             true,
@@ -24631,28 +30259,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1602,
+        ) => 1200,
         (
             true,
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Gate_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1200,
+        ) => 1000,
         (
             true,
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1600,
+        ) => 1400,
         (
             true,
             true,
@@ -24687,7 +30315,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__West_11,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1791,
+        ) => 1228,
         (
             true,
             true,
@@ -24715,7 +30343,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__East_Ledge,
             SpotId::Ebih__Waterfall__East_10,
-        ) => 1000,
+        ) => 701,
         (
             true,
             true,
@@ -24743,7 +30371,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__East_11,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             true,
@@ -24778,7 +30406,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 2514,
+        ) => 1799,
         (
             true,
             true,
@@ -24792,7 +30420,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2000,
+        ) => 1929,
         (
             true,
             true,
@@ -24834,7 +30462,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3000,
+        ) => 2631,
         (
             true,
             true,
@@ -24862,7 +30490,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3771,
+        ) => 2400,
         (
             true,
             true,
@@ -24925,14 +30553,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2703,
+        ) => 1799,
         (
             true,
             true,
             true,
             SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 2810,
+        ) => 2105,
         (
             true,
             true,
@@ -24960,7 +30588,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 599,
         (
             true,
             true,
@@ -25200,7 +30828,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Waterfall__Below_Tree,
         ) => 701,
         (true, true, true, SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => {
-            4000
+            3333
         }
         (true, true, true, SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => {
             3333
@@ -25248,7 +30876,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Waterfall__Top_Waterfall,
         ) => 5964,
         (true, true, true, SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            2000
+            1929
         }
         (true, true, true, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => {
             1929
@@ -25268,7 +30896,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Alcove,
         ) => 3583,
         (true, true, true, SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => {
-            3956
+            2400
         }
         (
             true,
@@ -25276,14 +30904,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 600,
         (
             true,
             true,
             true,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
+        ) => 1754,
         (
             true,
             true,
@@ -25327,7 +30955,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            900
         }
         (true, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -25354,7 +30982,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 1578,
         (true, true, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1099
         }
         (
             true,
@@ -25383,7 +31011,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 2703,
+        ) => 2400,
         (
             true,
             true,
@@ -25418,7 +31046,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
+        ) => 599,
         (
             true,
             true,
@@ -25446,7 +31074,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__East_6,
-        ) => 1791,
+        ) => 1228,
         (
             true,
             true,
@@ -25618,7 +31246,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 1257,
+        ) => 1200,
         (
             true,
             true,
@@ -25646,7 +31274,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Upper_Ledge,
-        ) => 2989,
+        ) => 2400,
         (
             true,
             true,
@@ -25717,7 +31345,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Grid_21_1_5__East_6,
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
         ) => 1578,
-        (true, true, true, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 4000,
+        (true, true, true, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (true, true, true, SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => {
             3684
         }
@@ -25746,7 +31374,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             3684
         }
         (true, true, true, SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => {
-            3000
+            1799
         }
         (
             true,
@@ -25763,7 +31391,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__Upper_Tree,
         ) => 6535,
         (true, true, true, SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => {
-            3384
+            2456
         }
         (
             true,
@@ -25848,7 +31476,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1000,
+        ) => 877,
         (true, true, true, SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => {
             2631
         }
@@ -25865,7 +31493,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
+        ) => 900,
         (
             true,
             true,
@@ -25886,7 +31514,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2000,
+        ) => 1578,
         (
             true,
             true,
@@ -25916,7 +31544,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Boss_Room__West_5,
         ) => 3684,
         (true, true, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => {
-            1500
+            1400
         }
         (true, true, true, SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
         (
@@ -25956,9 +31584,9 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Drone_Room__Left_Platform,
         ) => 4721,
-        // [1.0, 0.701754]
+        // [0.9, 0.701754]
         (true, true, true, SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => {
-            1701
+            1601
         }
         // [0.9, 0.7]
         (
@@ -25974,7 +31602,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1400,
+        ) => 1299,
         (
             true,
             true,
@@ -26016,7 +31644,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1602,
+        ) => 1200,
         (true, true, true, SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
         (
             true,
@@ -26025,7 +31653,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 2266,
-        (true, true, true, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 993,
+        (true, true, true, SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
         (
             true,
             true,
@@ -26060,7 +31688,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
+        ) => 500,
         (
             true,
             true,
@@ -26147,43 +31775,43 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 701,
-        // [0.8, 0.701754]
+        // [0.7, 0.701754]
         (
             true,
             true,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_6,
-        ) => 1501,
+        ) => 1401,
         (
             true,
             true,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__West_4,
-        ) => 1000,
+        ) => 877,
         (
             true,
             true,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
-        // [0.8, 0.526316]
+        ) => 1399,
+        // [0.7, 0.526316]
         (
             true,
             true,
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1326,
+        ) => 1226,
         (
             true,
             true,
             true,
             SpotId::Ebih__Drone_Room__Tree,
             SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 1000,
+        ) => 701,
         (
             true,
             true,
@@ -26273,7 +31901,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Revival__Lower_East,
         ) => 1228,
         (true, true, true, SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => {
-            1602
+            1200
         }
         (
             true,
@@ -26353,22 +31981,22 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Grid_43_10_11__East,
             SpotId::Glacier__Grid_43_10_11__Lower,
         ) => 3157,
-        // [1.490712, 0.993808, 0.888889, 1]
+        // [1.2, 0.993808, 0.888889, 0.877193]
         (
             true,
             true,
             true,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 4373,
-        // [1.490712, 1.885618, 2]
+        ) => 3959,
+        // [1.2, 1.885618, 1.578947]
         (
             true,
             true,
             true,
             SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Grid_43_10_11__East,
-        ) => 5376,
+        ) => 4664,
         (
             true,
             true,
@@ -26467,7 +32095,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             true,
@@ -26488,7 +32116,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
+        ) => 2500,
         (
             true,
             true,
@@ -26551,35 +32179,35 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 2591,
+        ) => 2400,
         (
             true,
             true,
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
+        ) => 1099,
         (
             true,
             true,
             true,
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1700,
+        ) => 1578,
         (
             true,
             true,
             true,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
-        ) => 8913,
+        ) => 8400,
         (
             true,
             true,
             true,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 8988,
+        ) => 8400,
         (
             true,
             true,
@@ -26621,7 +32249,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 1791,
+        ) => 1228,
         (
             true,
             true,
@@ -26643,7 +32271,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 4969,
+        ) => 4200,
         (
             true,
             true,
@@ -26679,14 +32307,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 3000,
+        ) => 2280,
         (
             true,
             true,
             true,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 9000,
+        ) => 6666,
         (
             true,
             true,
@@ -26759,7 +32387,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 1911,
+        ) => 1228,
         (
             true,
             true,
@@ -26801,7 +32429,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             true,
@@ -27189,7 +32817,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 199,
         (
             true,
             true,
@@ -27198,7 +32826,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Glacier__Peak__West_Cliff,
         ) => 3157,
         (true, true, true, SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => {
-            5067
+            4200
         }
         (
             true,
@@ -27240,7 +32868,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__West_8,
             SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 3617,
+        ) => 2400,
         (
             true,
             true,
@@ -27268,7 +32896,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
+        ) => 500,
         (
             true,
             true,
@@ -27289,14 +32917,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 2712,
+        ) => 1799,
         (
             true,
             true,
             true,
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 2222,
+        ) => 1799,
         (
             true,
             true,
@@ -27352,7 +32980,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 599,
         (
             true,
             true,
@@ -27429,7 +33057,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 5678,
+        ) => 4200,
         (
             true,
             true,
@@ -27457,7 +33085,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 1832,
+        ) => 1200,
         (
             true,
             true,
@@ -27478,7 +33106,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 4494,
+        ) => 3000,
         (
             true,
             true,
@@ -27520,7 +33148,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 2000,
+        ) => 1200,
         (
             true,
             true,
@@ -27555,14 +33183,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 399,
+        ) => 350,
         (
             true,
             true,
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1199,
         (
             true,
             true,
@@ -27590,7 +33218,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 628,
+        ) => 600,
         (
             true,
             true,
@@ -27648,7 +33276,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 993,
+        ) => 600,
         (
             true,
             true,
@@ -27690,7 +33318,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 3583,
+        ) => 2400,
         (
             true,
             true,
@@ -27739,7 +33367,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 888,
+        ) => 600,
         (
             true,
             true,
@@ -27781,6 +33409,215 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
 
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
+        (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => true,
+        (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__East_15) => true,
+        (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Shallow_End) => true,
+        (SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Waters_Edge) => true,
+        (SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => true,
+        (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => true,
+        (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Upper_Platform) => true,
+        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => true,
+        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__West_Shelf) => true,
+        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Platform_2) => true,
+        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__East_Ledge) => true,
+        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Side) => true,
+        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Platform_2) => true,
+        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Upper_Platform) => true,
+        (SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__Carving) => true,
+        (SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__West_Shelf) => true,
+        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__West_Shelf) => true,
+        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Upper_Platform) => true,
+        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => true,
+        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => true,
+        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Catwalk_Center) => true,
+        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => true,
+        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_3) => true,
+        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Catwalk_Center) => true,
+        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => true,
+        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => true,
+        (SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => true,
+        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Carving) => true,
+        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__West_Shelf) => {
+            true
+        }
+        (
+            SpotId::Amagi__Main_Area__Secret_Outcropping,
+            SpotId::Amagi__Main_Area__Upper_Platform,
+        ) => true,
+        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Shallow_End) => {
+            true
+        }
+        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_2) => true,
+        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__East_Ledge) => true,
+        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Catwalk_Center) => true,
+        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Platform_3) => true,
+        (
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => true,
+        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Broken_Wall) => true,
+        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => {
+            true
+        }
+        (
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => true,
+        (SpotId::Amagi__Main_Area__Catwalk_Broken_Part, SpotId::Amagi__Main_Area__Save_Point) => {
+            true
+        }
+        (
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => true,
+        (
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => true,
+        (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Save_Point) => true,
+        (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Enemy_Side) => true,
+        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Broken_Wall) => true,
+        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => true,
+        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => true,
+        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => true,
+        (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__Enemy_Side) => true,
+        (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__East_19) => true,
+        (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__Small_Cliff) => true,
+        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Catwalk_Center) => true,
+        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => true,
+        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => true,
+        (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Broken_Wall) => true,
+        (
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => true,
+        (
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => true,
+        (
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => true,
+        (
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => true,
+        (
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => true,
+        (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => true,
+        (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => true,
+        (SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => true,
+        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_19) => true,
+        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__Platform_1_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__Platform_1_Right) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_20) => true,
+        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Hidden_Enemies) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__West_20) => true,
+        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Platform_1_Right) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_1_Right, SpotId::Amagi__Liru_Room__Platform_1_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_1_Right, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            true
+        }
+        (
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => true,
+        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_1_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__West_20) => true,
+        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_2_Right) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
+            true
+        }
+        (
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => true,
+        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__East_Passage) => {
+            true
+        }
+        (
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => true,
+        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__Bottom) => true,
+        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__West_20) => true,
+        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            true
+        }
+        (
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => true,
+        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__East_Passage) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
+            true
+        }
+        (
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => true,
+        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Bottom) => true,
+        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Amagi__Liru_Room__Platform_4_Right) => {
+            true
+        }
+        (
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => true,
+        (SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__Platform_4_Left) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__Bottom) => true,
+        (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => true,
+        (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => true,
+        (SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => true,
+        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_2_Left) => true,
+        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_3_Left) => true,
+        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => true,
+        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_2_Right) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
+            true
+        }
+        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Bottom) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => true,

@@ -1,0 +1,432 @@
+name: Lake Amagi
+short: Amagi
+here:
+  water: true
+
+# TODO: Needs to be routed without Liru to determine accessibility
+areas:
+- name: Main Area
+  load:
+    _combo: false
+  spots:
+    - name: East 15
+      coord: [30.95, 15]
+      local:
+        - to: Water's Edge
+      here:
+        water: false
+    - name: Water's Edge
+      coord: [29.8, 15]
+      local:
+        - to: East 15
+        - to: Shallow End
+      here:
+        water: false
+    - name: Shallow End
+      coord: [29.6, 15.3]
+      local:
+        - to: Water's Edge
+          jumps: 1
+          jump_movement: water
+        - to: Cliff
+      exits:
+        - to: Water's Edge
+          req: $grab or Liru
+    - name: Cliff
+      coord: [28.45, 15.6]
+      local:
+        - to: Shallow End
+        - to: Upper Platform
+    - name: Upper Platform
+      coord: [28.25, 15.9]
+      local:
+        - to: Cliff
+          jumps: 1
+          jump_mvmt: water
+        - to: West Shelf
+        - to: Platform 2
+        - to: East Ledge
+          jumps_down: 1
+    - name: West Shelf
+      coord: [27.9, 16.1]
+      local:
+        - to: West Side
+          jumps: 1
+        - to: Platform 2
+        - to: Upper Platform
+          jumps: 2
+    - name: West Side
+      coord: [27.5, 16]
+      local:
+        - to: Carving
+        - to: West Shelf
+      exits:
+        - to: Carving
+          req: Liru and ($grab or $climb)
+          time: 2.4
+        - to: Carving
+          req: Liru and $hook
+          time: 2.3
+    - name: Platform 2
+      coord: [28.05, 16.4]
+      local:
+        - to: West Shelf
+          jumps: 1
+          jump_movement: water
+        - to: Upper Platform
+          jumps: 1
+          jump_movement: water
+        - to: East Ledge
+        - to: Platform 3
+          jumps_down: 1
+        - to: Catwalk Center
+      exits:
+        - to: West Shelf
+          req: $grab or $climb or $hook
+    - name: East Ledge
+      coord: [28.25, 16.5]
+      local:
+        - to: Platform 2
+          jumps: 1
+        - to: Platform 3
+        - to: Catwalk Center
+
+    - name: Carving
+      coord: [27.1, 14.9]
+      here:
+        water: false
+      local:
+        - to: West 15
+        - to: West Side
+      actions:
+        - name: Key Combo
+          req: not ^_combo
+          do: ^_combo = true
+          time: 1.75
+      exits:
+        - to: Secret Outcropping
+          req: $grab or $climb
+          time: 1.75
+        - to: Secret Outcropping
+          req: $hook
+          time: 1.6
+    - name: West 15
+      coord: [27.05, 15]
+      here:
+        water: false
+      local:
+        - to: Carving
+          jumps: 1
+    - name: Secret Outcropping
+      coord: [27.55, 14.4]
+      here:
+        water: false
+      local:
+        - to: Carving
+        - to: West Shelf
+        - to: Upper Platform
+        - to: Shallow End
+      exits:
+        - to: Cave Behind Waterfall > Bottom
+          tags: [interior]
+
+    - name: Platform 3
+      coord: [28, 16.9]
+      local:
+        - to: Platform 2
+          jumps: 1.5
+          jump_movement: water
+        - to: East Ledge
+          jumps: 1
+          jump_movement: water
+        - to: Catwalk Center
+    - name: Catwalk Center
+      coord: [28.3, 17.4]
+      local:
+        - to: Platform 3
+          jumps: 3  # but one with water movement!
+        - to: Catwalk Broken Part
+        - to: Broken Wall
+        - to: Wall Stuck Spot
+      exits:
+        - to: East Ledge
+          req: Liru and ($grab or $climb)
+          time: 2
+        - to: Platform 3  # simulate the liru movement
+          req: Liru
+          time: 1.4  
+    - name: Catwalk Broken Part
+      coord: [29, 17.4]
+      local:
+        - to: Catwalk Center
+        - to: Save Point
+        - to: Catwalk East Edge
+    - name: Catwalk East Edge
+      coord: [29.45, 17.4]
+      local:
+        - to: Catwalk Broken Part
+        - to: Save Point
+        - to: Enemy Side
+    - name: Save Point
+      coord: [29.5, 18.9]
+      local:
+        - to: Broken Wall
+          jumps: 4
+          jump_movement: water
+        - to: Enemy Side
+      actions:
+        - name: Save
+          do: $save
+          time: 1.2
+    - name: Enemy Side
+      coord: [29.8, 18.9]
+      local:
+        - to: Save Point
+        - to: Small Cliff
+          jumps: 1
+    - name: Small Cliff
+      coord: [30.4, 18.8]
+      local:
+        - to: Enemy Side
+        - to: East 19
+    - name: East 19
+      coord: [30.95, 18.9]
+      local:
+        - to: Small Cliff
+          jumps: 1
+      exits:
+        - to: Grid 31,19 > West
+          tags: [xshift]
+
+    - name: Broken Wall
+      coord: [28.4, 17.6]
+      local:
+        - to: Catwalk Center
+          jumps: 1
+        - to: Wall Stuck Spot
+        - to: Save Point
+    - name: Wall Stuck Spot
+      coord: [28.35, 18.1]
+      local:
+        - to: Broken Wall
+          jumps: 1
+
+    - name: Secret Waterfall
+      coord: [27.4, 13.6]
+      here:
+        water: false
+      local:
+        - to: Way Off To The Side
+          jumps: 1
+      exits:
+        - to: Cave Behind Waterfall > Top
+          tags: [interior]
+    - name: Way Off To The Side
+      coord: [30.4, 13.5]
+      here:
+        water: false
+      local:
+        - to: Secret Waterfall
+      locations:
+        - name: Item
+          item: Flask
+          tags: [flask]
+
+- name: Cave Behind Waterfall
+  here:
+    water: false
+  spots:
+    - name: Bottom
+      coord: [27.55, 14.4]
+      exits:
+        - to: Main Area > Secret Outcropping
+          tags: [exterior]
+        - to: Middle
+          req: $grab or $climb
+          time: 2
+        - to: Top
+          req: $hook
+          time: 1.8
+    - name: Middle
+      coord: [27.55, 13.9]
+      local:
+        - to: Bottom
+          thru: [27.6, 14]
+      exits:
+        - to: Top
+          req: $grab or $climb
+      actions:
+        - name: Throw Drone
+          req: $can_deploy
+          do: ^indra = ^position; ^mode = 'drone'; ^position = `Amagi > Cave Behind Waterfall > Top`
+          time: 1.1
+    - name: Top
+      coord: [27.4, 13.6]
+      local:
+        - to: Middle
+        - to: Bottom
+          thru: [27.6, 14]
+      exits:
+        - to: Main Area > Secret Waterfall
+          tags: [exterior]
+
+- name: Grid 31,19
+  spots:
+    - name: West
+      coord: [31.05, 18.9]
+      local:
+        - to: East
+      exits:
+        - to: Main Area > East 19
+          tags: [xshift]
+    - name: East
+      coord: [31.95, 18.9]
+      local:
+        - to: West
+      exits:
+        - to: Liru Room > West 19
+          tags: [xshift]
+
+- name: Liru Room
+  spots:
+    - name: West 19
+      coord: [32.05, 18.9]
+      local:
+        - to: Hidden Enemies
+      exits:
+        - to: Grid 31,19 > East
+          tags: [xshift]
+    - name: Hidden Enemies
+      coord: [32.4, 18.9]
+      local:
+        - to: West 19
+        - to: Platform 1 Left
+        - to: Platform 1 Right
+        - to: West 20
+    - name: Platform 1 Left
+      coord: [32.4, 19.4]
+      local:
+        - to: Hidden Enemies
+          jumps: 1.2
+          jump_movement: water
+        - to: West 20
+        - to: Platform 1 Right
+        - to: Platform 2 Left
+          jumps_down: 1
+    - name: Platform 1 Right
+      coord: [32.65, 19.4]
+      local:
+        - to: Platform 1 Left
+        - to: Platform 2 Left
+          jumps_down: 1
+        - to: Platform 2 Right
+    - name: Platform 2 Left
+      coord: [32.4, 19.8]
+      local:
+        - to: Platform 1 Left
+          jumps: 1
+          jump_movement: water
+        - to: West 20
+        - to: Platform 2 Right
+        - to: Platform 3 Left
+          jumps_down: 1
+        - to: Platform 3 Right
+          jumps_down: 1
+    - name: Platform 2 Right
+      coord: [32.8, 19.8]
+      local:
+        - to: Platform 1 Right
+          jumps: 1
+          jump_movement: water
+        - to: Platform 2 Left
+        - to: East Passage
+        - to: Platform 3 Right
+          jumps_down: 1
+        - to: Bottom
+          jumps_down: 1
+    - name: Platform 3 Left
+      coord: [32.4, 20.2]
+      local:
+        - to: Platform 2 Left
+          jumps: 1
+          jump_movement: water
+        - to: West 20
+        - to: Platform 3 Right
+    - name: Platform 3 Right
+      coord: [32.7, 20.2]
+      local:
+        - to: Platform 2 Left
+          jumps: 1
+          jump_movement: water
+        - to: Platform 2 Right
+          jumps: 1
+          jump_movement: water
+        - to: East Passage
+          jumps: 1
+          jump_movement: water
+        - to: Platform 3 Left
+        - to: Platform 4 Right
+        - to: Bottom
+    - name: Platform 4 Left
+      coord: [32.5, 20.6]
+      local:
+        - to: Platform 3 Left
+          jumps: 1
+          jump_movement: water
+        - to: Platform 4 Right
+      exits:
+        - to: West 20
+          req: $hook and $hover and Liru
+    - name: Platform 4 Right
+      coord: [32.75, 20.6]
+      local:
+        - to: Platform 3 Right
+          jumps: 1
+          jump_movement: water
+        - to: Platform 4 Left
+        - to: Bottom
+      exits:
+        - to: East Passage
+          req: $hook and Liru
+    - name: Bottom
+      coord: [33, 21]
+      local:
+        - to: Platform 4 Right
+          jumps: 1
+          jump_movement: water
+        - to: Shrine
+          jumps: 1
+    - name: Shrine
+      coord: [33.5, 20.6]
+      local:
+        - to: Bottom
+      locations:
+        - name: Item
+          item: Liru
+          tags: [urn]
+    - name: West 20
+      coord: [32.05, 20.2]
+      local:
+        - to: Platform 2 Left
+          jumps: 2
+        - to: Platform 3 Left
+        - to: Bottom
+      exits:
+        - to: Platform 4 Right
+          req: $hook
+        - to: Platform 4 Left
+          req: $hover
+        - to: Shrine
+          req: $hook and $hover
+          time: 3.5
+
+    - name: East Passage
+      coord: [33, 20]
+      local:
+        - to: Platform 2 Right
+          jumps: 1
+        - to: Platform 3 Right
+          jumps_down: 1
+        - to: Bottom
+          jumps_down: 1
+    - name: Hidden Exit

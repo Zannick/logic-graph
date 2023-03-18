@@ -21,7 +21,7 @@ objectives:
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: Infect and Flask{3}
+  Progress%: Remote_Drone and Dear_Ernest and Liru and Flask{4}
 
 movements:
   default:  # the slowest movement is in water
@@ -44,6 +44,11 @@ movements:
   mist_upgraded:
     req: Mist_Upgrade
     free: .225  # this is an estimate
+  # TODO: drone slingshot+hover is faster x movement but is pretty circumstantial
+  # *and* limited
+  # But with just throw + hover, can cover about 2.5 in ~6s / 1 in 2.5s
+  # aka ~.4-.416 speed in one direction for around 6s max
+  # TODO: anuman "movement" of constantly changing form?
 
 
 time:
@@ -55,8 +60,8 @@ time:
   remote_flask: 6.5
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # Doors leading inside/outside
-  interior: 0.75
-  exterior: 0.75
+  interior: 0.25
+  exterior: 0.25
   tent: 0.5
   # item is freestanding -> can be picked up with no delay
   standing: 0
@@ -108,6 +113,7 @@ helpers:
   $grab: ^mode != 'drone' and Ledge_Grab
   $climb: ^mode != 'drone' and Wall_Climb
   $hook: ^mode == 'drone' and Slingshot_Hook
+  $hover: ^mode == 'drone' and Drone_Hover
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
   $can_recall: ^mode == 'drone' and not Anuman
 

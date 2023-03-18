@@ -1,0 +1,32 @@
+name: AmagiTests
+all:
+  start: Ebih > Base Camp > Save Point
+  with:
+    - Amashilama
+    - Ledge_Grab
+    - Boomerang
+    - Remote_Drone
+    - Infect
+  context:
+    mode: Indra
+
+tests:
+  - can_reach: Amagi > Main Area > Save Point
+  - can_reach: Amagi > Liru Room > Shrine
+  - can_reach: Amagi > Main Area > West Side
+
+  - start: Amagi > Main Area > West Side
+    requires:
+      with:
+        - Liru
+      to_activate: Amagi > Main Area > Carving > Key Combo
+
+  - start: Amagi > Main Area > Carving
+    context:
+      amagi__main_area__ctx__combo: true
+    can_access: Amagi > Main Area > Way Off To The Side > Item
+
+  - context:
+      mode: drone
+      indra: Amagi > Main Area > East 19
+    can_obtain: Liru

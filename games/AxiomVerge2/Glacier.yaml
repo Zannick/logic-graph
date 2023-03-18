@@ -954,6 +954,8 @@ areas:
         - to: Ledge
         - to: Upper Platform
         - to: Bottom
+      exits:
+        - to: Amagi > Main Area > East 15
 
 - name: Apocalypse Entry
   on_entry: $reset_old_area(^newpos)

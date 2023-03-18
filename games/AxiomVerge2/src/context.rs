@@ -62,6 +62,7 @@ pub struct Context {
     pub flasks: i32,
     pub breach: bool,
     pub water: bool,
+    pub amagi__main_area__ctx__combo: bool,
     pub ebih__waterfall__ctx__left_block: bool,
     pub ebih__waterfall__ctx__right_block: bool,
     pub ebih__ebih_east__ctx__platform1_moved: bool,
@@ -76,7 +77,9 @@ pub struct Context {
     pub anuman: bool,
     pub apocalypse_bomb: bool,
     pub boomerang: bool,
+    pub dear_ernest: bool,
     pub defeat_ebih_alu: bool,
+    pub drone_hover: bool,
     pub flask: i8,
     pub ice_axe: bool,
     pub infect: bool,
@@ -108,6 +111,7 @@ impl Default for Context {
             flasks: 0,
             breach: false,
             water: false,
+            amagi__main_area__ctx__combo: false,
             ebih__waterfall__ctx__left_block: false,
             ebih__waterfall__ctx__right_block: false,
             ebih__ebih_east__ctx__platform1_moved: false,
@@ -122,7 +126,9 @@ impl Default for Context {
             anuman: Default::default(),
             apocalypse_bomb: Default::default(),
             boomerang: Default::default(),
+            dear_ernest: Default::default(),
             defeat_ebih_alu: Default::default(),
+            drone_hover: Default::default(),
             flask: Default::default(),
             ice_axe: Default::default(),
             infect: Default::default(),
@@ -148,7 +154,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 17;
+    const NUM_ITEMS: i32 = 19;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -156,7 +162,9 @@ impl context::Ctx for Context {
             Item::Anuman => self.anuman,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Boomerang => self.boomerang,
+            Item::Dear_Ernest => self.dear_ernest,
             Item::Defeat_Ebih_Alu => self.defeat_ebih_alu,
+            Item::Drone_Hover => self.drone_hover,
             Item::Flask => self.flask >= 1,
             Item::Ice_Axe => self.ice_axe,
             Item::Infect => self.infect,
@@ -178,7 +186,9 @@ impl context::Ctx for Context {
             Item::Anuman => self.anuman.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Boomerang => self.boomerang.into(),
+            Item::Dear_Ernest => self.dear_ernest.into(),
             Item::Defeat_Ebih_Alu => self.defeat_ebih_alu.into(),
+            Item::Drone_Hover => self.drone_hover.into(),
             Item::Flask => self.flask.into(),
             Item::Ice_Axe => self.ice_axe.into(),
             Item::Infect => self.infect.into(),
@@ -209,8 +219,14 @@ impl context::Ctx for Context {
             Item::Boomerang => {
                 self.boomerang = true;
             }
+            Item::Dear_Ernest => {
+                self.dear_ernest = true;
+            }
             Item::Defeat_Ebih_Alu => {
                 self.defeat_ebih_alu = true;
+            }
+            Item::Drone_Hover => {
+                self.drone_hover = true;
             }
             Item::Flask => {
                 self.flask += 1;
@@ -433,6 +449,7 @@ impl context::Ctx for Context {
 
     fn reload_game(&mut self) {
         self.reset_all();
+        self.amagi__main_area__ctx__combo = false;
     }
 
     fn reset_all(&mut self) {
@@ -626,9 +643,27 @@ impl Context {
     }
     pub fn water(&self) -> bool {
         match self.position {
+            SpotId::Amagi__Main_Area__East_15 => false,
+            SpotId::Amagi__Main_Area__Waters_Edge => false,
+            SpotId::Amagi__Main_Area__Carving => false,
+            SpotId::Amagi__Main_Area__West_15 => false,
+            SpotId::Amagi__Main_Area__Secret_Outcropping => false,
+            SpotId::Amagi__Main_Area__Secret_Waterfall => false,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => false,
+            _ => match get_area(self.position) {
+                AreaId::Amagi__Cave_Behind_Waterfall => false,
+                _ => match get_region(self.position) {
+                    RegionId::Amagi => true,
+                    _ => self.water,
+                },
+            },
+        }
+    }
+    pub fn amagi__main_area__ctx__combo(&self) -> bool {
+        match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.water,
+                    _ => self.amagi__main_area__ctx__combo,
                 },
             },
         }

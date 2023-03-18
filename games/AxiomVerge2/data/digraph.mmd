@@ -1,6 +1,60 @@
 %%{init: {"flowchart": {"deterministicIds": true, "defaultRenderer": "elk"}}}%%
 graph TB
 
+subgraph Amagi
+    subgraph Amagi__Main_Area[Main Area]
+        Amagi__Main_Area__East_15(East 15);
+        Amagi__Main_Area__Waters_Edge(Water's Edge);
+        Amagi__Main_Area__Shallow_End(Shallow End);
+        Amagi__Main_Area__Cliff(Cliff);
+        Amagi__Main_Area__Upper_Platform(Upper Platform);
+        Amagi__Main_Area__West_Shelf(West Shelf);
+        Amagi__Main_Area__West_Side(West Side);
+        Amagi__Main_Area__Platform_2(Platform 2);
+        Amagi__Main_Area__East_Ledge(East Ledge);
+        Amagi__Main_Area__Carving(Carving);
+        Amagi__Main_Area__West_15(West 15);
+        Amagi__Main_Area__Secret_Outcropping(Secret Outcropping);
+        Amagi__Main_Area__Platform_3(Platform 3);
+        Amagi__Main_Area__Catwalk_Center(Catwalk Center);
+        Amagi__Main_Area__Catwalk_Broken_Part(Catwalk Broken Part);
+        Amagi__Main_Area__Catwalk_East_Edge(Catwalk East Edge);
+        Amagi__Main_Area__Save_Point(Save Point);
+        Amagi__Main_Area__Enemy_Side(Enemy Side);
+        Amagi__Main_Area__Small_Cliff(Small Cliff);
+        Amagi__Main_Area__East_19(East 19);
+        Amagi__Main_Area__Broken_Wall(Broken Wall);
+        Amagi__Main_Area__Wall_Stuck_Spot(Wall Stuck Spot);
+        Amagi__Main_Area__Secret_Waterfall(Secret Waterfall);
+        Amagi__Main_Area__Way_Off_To_The_Side(Way Off To The Side);
+    end
+    subgraph Amagi__Cave_Behind_Waterfall[Cave Behind Waterfall]
+        Amagi__Cave_Behind_Waterfall__Bottom(Bottom);
+        Amagi__Cave_Behind_Waterfall__Middle(Middle);
+        Amagi__Cave_Behind_Waterfall__Top(Top);
+    end
+    subgraph Amagi__Grid_31_19[Grid 31,19]
+        Amagi__Grid_31_19__West(West);
+        Amagi__Grid_31_19__East(East);
+    end
+    subgraph Amagi__Liru_Room[Liru Room]
+        Amagi__Liru_Room__West_19(West 19);
+        Amagi__Liru_Room__Hidden_Enemies(Hidden Enemies);
+        Amagi__Liru_Room__Platform_1_Left(Platform 1 Left);
+        Amagi__Liru_Room__Platform_1_Right(Platform 1 Right);
+        Amagi__Liru_Room__Platform_2_Left(Platform 2 Left);
+        Amagi__Liru_Room__Platform_2_Right(Platform 2 Right);
+        Amagi__Liru_Room__Platform_3_Left(Platform 3 Left);
+        Amagi__Liru_Room__Platform_3_Right(Platform 3 Right);
+        Amagi__Liru_Room__Platform_4_Left(Platform 4 Left);
+        Amagi__Liru_Room__Platform_4_Right(Platform 4 Right);
+        Amagi__Liru_Room__Bottom(Bottom);
+        Amagi__Liru_Room__Shrine(Shrine);
+        Amagi__Liru_Room__West_20(West 20);
+        Amagi__Liru_Room__East_Passage(East Passage);
+        Amagi__Liru_Room__Hidden_Exit(Hidden Exit);
+    end
+end
 subgraph Antarctica
     subgraph Antarctica__West[West]
         Antarctica__West__Helipad(Helipad);
@@ -342,8 +396,26 @@ subgraph Menu
         Menu__Upgrade_Menu__Drone(Drone);
     end
 end
+Amagi ~~~ Glacier
 Antarctica ~~~ Glacier
 Ebih ~~~ Glacier
+Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Middle
+Amagi__Cave_Behind_Waterfall__Bottom --> Amagi__Cave_Behind_Waterfall__Top
+Amagi__Cave_Behind_Waterfall__Bottom <--> Amagi__Main_Area__Secret_Outcropping
+Amagi__Cave_Behind_Waterfall__Middle --> Amagi__Cave_Behind_Waterfall__Top
+Amagi__Cave_Behind_Waterfall__Top <--> Amagi__Main_Area__Secret_Waterfall
+Amagi__Grid_31_19__East <--> Amagi__Liru_Room__West_19
+Amagi__Grid_31_19__West <--> Amagi__Main_Area__East_19
+Amagi__Liru_Room__Platform_4_Left <--> Amagi__Liru_Room__West_20
+Amagi__Liru_Room__Platform_4_Right --> Amagi__Liru_Room__East_Passage
+Amagi__Liru_Room__West_20 --> Amagi__Liru_Room__Platform_4_Right
+Amagi__Liru_Room__West_20 --> Amagi__Liru_Room__Shrine
+Amagi__Main_Area__Carving --> Amagi__Main_Area__Secret_Outcropping
+Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__East_Ledge
+Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__Platform_3
+Amagi__Main_Area__Platform_2 --> Amagi__Main_Area__West_Shelf
+Amagi__Main_Area__Shallow_End --> Amagi__Main_Area__Waters_Edge
+Amagi__Main_Area__West_Side --> Amagi__Main_Area__Carving
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
 Antarctica__Building_1W__West_Entry <--> Antarctica__West__Boxes
@@ -428,6 +500,7 @@ Glacier__Grid_37_38_9__West <--> Glacier__Vertical_Room__East_9
 Glacier__Grid_39_40_7_9__Upper_East <--> Glacier__Revival__West_8
 Glacier__Grid_42_10__East <--> Glacier__Grid_43_10_11__Top
 Glacier__Grid_42_10__West <--> Glacier__Revival__Lower_East
+Glacier__Lake_Main_Entrance__Lake_Access --> Amagi__Main_Area__East_15
 Glacier__Lake_Main_Entrance__Ledge --> Glacier__Lake_Main_Entrance__Upper
 Glacier__Lake_Main_Entrance__Lower_Platform --> Glacier__Lake_Main_Entrance__Ledge
 Glacier__Lake_Main_Entrance__Upper_Platform --> Glacier__Lake_Main_Entrance__Upper

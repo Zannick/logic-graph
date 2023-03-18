@@ -16,6 +16,10 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
+pub fn access_amagi__main_area__carving___key_combo_req(ctx: &Context) -> bool {
+    // not ^_combo
+    !ctx.amagi__main_area__ctx__combo()
+}
 pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
@@ -90,6 +94,34 @@ pub fn access_grab_or_climb(ctx: &Context) -> bool {
     // $grab or $climb
     (helper__grab!(ctx) || helper__climb!(ctx))
 }
+pub fn access_grab_or_climb_or_hook(ctx: &Context) -> bool {
+    // $grab or $climb or $hook
+    ((helper__grab!(ctx) || helper__climb!(ctx)) || helper__hook!(ctx))
+}
+pub fn access_grab_or_liru(ctx: &Context) -> bool {
+    // $grab or Liru
+    (helper__grab!(ctx) || ctx.has(Item::Liru))
+}
+pub fn access_hook(ctx: &Context) -> bool {
+    // $hook
+    helper__hook!(ctx)
+}
+pub fn access_hook_and_hover(ctx: &Context) -> bool {
+    // $hook and $hover
+    (helper__hook!(ctx) && helper__hover!(ctx))
+}
+pub fn access_hook_and_hover_and_liru(ctx: &Context) -> bool {
+    // $hook and $hover and Liru
+    ((helper__hook!(ctx) && helper__hover!(ctx)) && ctx.has(Item::Liru))
+}
+pub fn access_hook_and_liru(ctx: &Context) -> bool {
+    // $hook and Liru
+    (helper__hook!(ctx) && ctx.has(Item::Liru))
+}
+pub fn access_hover(ctx: &Context) -> bool {
+    // $hover
+    helper__hover!(ctx)
+}
 pub fn access_infect(ctx: &Context) -> bool {
     // Infect
     ctx.has(Item::Infect)
@@ -98,13 +130,17 @@ pub fn access_infect_and___melee_or_boomerang(ctx: &Context) -> bool {
     // Infect and ($melee or Boomerang)
     (ctx.has(Item::Infect) && (helper__melee!(ctx) || ctx.has(Item::Boomerang)))
 }
-pub fn access_infect_and_flask__3(ctx: &Context) -> bool {
-    // Infect and Flask{3}
-    (ctx.has(Item::Infect) && ctx.count(Item::Flask) >= 3)
-}
 pub fn access_liru(ctx: &Context) -> bool {
     // Liru
     ctx.has(Item::Liru)
+}
+pub fn access_liru_and___grab_or_climb(ctx: &Context) -> bool {
+    // Liru and ($grab or $climb)
+    (ctx.has(Item::Liru) && (helper__grab!(ctx) || helper__climb!(ctx)))
+}
+pub fn access_liru_and_hook(ctx: &Context) -> bool {
+    // Liru and $hook
+    (ctx.has(Item::Liru) && helper__hook!(ctx))
 }
 pub fn access_melee_or_boomerang(ctx: &Context) -> bool {
     // $melee or Boomerang
@@ -170,6 +206,11 @@ pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
+pub fn access_remote_drone_and_dear_ernest_and_liru_and_flask__4(ctx: &Context) -> bool {
+    // Remote_Drone and Dear_Ernest and Liru and Flask{4}
+    (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Dear_Ernest)) && ctx.has(Item::Liru))
+        && ctx.count(Item::Flask) >= 4)
+}
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power
     ctx.has(Item::Station_Power)
@@ -195,6 +236,13 @@ pub fn access_within_menu(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     })
+}
+pub fn action_amagi__main_area__carving___key_combo__do(ctx: &mut Context) {
+    // ^_combo = true
+    ctx.amagi__main_area__ctx__combo = true;
+}
+pub fn action_has_effect_amagi__main_area__carving___key_combo__do(ctx: &Context) -> bool {
+    ctx.amagi__main_area__ctx__combo != true
 }
 pub fn action_ebih__drone_room__pit_left___activate_lift__do(ctx: &mut Context) {
     // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
@@ -280,6 +328,21 @@ pub fn action_flasks__1(ctx: &mut Context) {
 }
 pub fn action_has_effect_flasks__1(ctx: &Context) -> bool {
     0 != 1
+}
+pub fn action_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(
+    ctx: &mut Context,
+) {
+    // ^indra = ^position; ^mode = 'drone'; ^position = `Amagi > Cave Behind Waterfall > Top`
+    ctx.indra = ctx.position();
+    ctx.mode = enums::Mode::Drone;
+    ctx.position = SpotId::Amagi__Cave_Behind_Waterfall__Top;
+}
+pub fn action_has_effect_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(
+    ctx: &Context,
+) -> bool {
+    ctx.indra != ctx.position()
+        || ctx.mode != enums::Mode::Drone
+        || ctx.position != SpotId::Amagi__Cave_Behind_Waterfall__Top
 }
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position

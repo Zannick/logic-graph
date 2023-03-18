@@ -17,6 +17,7 @@ pub enum Item {
     Compass,
     Dear_Ernest,
     Defeat_Ebih_Alu,
+    Drone_Hover,
     Escape,
     Flask,
     Health,
@@ -55,6 +56,7 @@ impl fmt::Display for Item {
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
             Item::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
+            Item::Drone_Hover => write!(f, "{}", "Drone_Hover"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Flask => write!(f, "{}", "Flask"),
             Item::Health => write!(f, "{}", "Health"),
@@ -97,6 +99,7 @@ impl std::str::FromStr for Item {
             "Compass" => Ok(Item::Compass),
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
             "Defeat_Ebih_Alu" => Ok(Item::Defeat_Ebih_Alu),
+            "Drone_Hover" => Ok(Item::Drone_Hover),
             "Escape" => Ok(Item::Escape),
             "Flask" => Ok(Item::Flask),
             "Health" => Ok(Item::Health),
@@ -132,7 +135,6 @@ pub fn unused_item(id: Item) -> bool {
         Item::Bronze_Axe
         | Item::Companies_Layoff
         | Item::Compass
-        | Item::Dear_Ernest
         | Item::Escape
         | Item::Health
         | Item::Health_Fragment
