@@ -408,11 +408,15 @@ class GameLogic(object):
         return d
 
 
-    def movement_time(self, mset, a, b, jumps=0, jumps_down=0):
+    def movement_time(self, mset, a, b, jumps=0, jumps_down=0, jmvmt=None):
         times = []
         xtimes = []
         ytimes = []
+        defallt = self.movements['default'].get('fall')
+        dejumpt = self.movements['default'].get('jump')
         for m in mset + ('default',):
+            # TODO: This is all cacheable (per pair of spots, per movement type, per pair of points)
+            # instead of calculating the times lists for a,b for m, once per powerset of movements
             if s := self.movements[m].get('free'):
                 times.append(math.sqrt(a**2 + b**2) / s)
                 continue
@@ -424,12 +428,13 @@ class GameLogic(object):
             # x, y, fall: not mutually exclusive
             if sy := self.movements[m].get('y'):
                 ytimes.append(abs(b) / sy)
-            if sfall := self.movements[m].get('fall'):
+            if sfall := self.movements[m].get('fall', defallt):
                 # fall speed must be the same direction as "down"
                 if (t := b / sfall) > 0:
                     t += jumps_down * self.movements[m].get('jump_down', 0)
                     ytimes.append(t)
-                elif jumps and t < 0 and (sjump := self.movements[m].get('jump')):
+                elif (jumps and t < 0 and (jmvmt is None or m == jmvmt)
+                        and (sjump := self.movements[m].get('jump', dejumpt))):
                     # Direction is negative but jumps is just time taken
                     ytimes.append(jumps * sjump)
         if xtimes and ytimes:
@@ -474,6 +479,7 @@ class GameLogic(object):
         coords = [sp1['coord'], sp2['coord']]
         jumps = [0]
         jumps_down = [0]
+        jump_mvmt = None
         for lcl in sp1.get('local', []):
             if lcl.get('to') == sp2['name']:
                 # We could have more overrides here, like dist
@@ -521,13 +527,19 @@ class GameLogic(object):
                     jumps_down[:] = j
                 else:
                     jumps_down *= len(coords) - 1
+                # TODO: It might be more reasonable to just have a list of allowed movement types?
+                if m := lcl.get('jump_movement'):
+                    if m not in self.movements:
+                        self._errors.append(f'Unrecognized movement type from {sp1["name"]} to {sp2["name"]}: {m}')
+                        break
+                    jump_mvmt = m
                 break
             
         else:
             # spots must explicitly declare connections
-            return ([], [], [])
+            return ([], [], [], None)
         
-        return (coords, jumps, jumps_down)
+        return (coords, jumps, jumps_down, jump_mvmt)
         
 
     @cached_property
@@ -557,12 +569,12 @@ class GameLogic(object):
                         spot_errors.add(sp2['name'])
                         self._errors.append(f'Expected coord for spot {sp["fullname"]} used in local rules')
                     continue
-                coords, jumps, jumps_down = self.spot_distance(sp1, sp2)
+                coords, jumps, jumps_down, jmvmt = self.spot_distance(sp1, sp2)
                 if not coords:
                     continue
                 for ((sx, sy), (cx, cy)), j, jd in zip(itertools.pairwise(coords), jumps, jumps_down):
                     d[(sp1['id'], sp2['id'])].append(
-                            (abs(cx - sx), cy - sy, j, jd))
+                            (abs(cx - sx), cy - sy, j, jd, jmvmt))
         return d
 
 
@@ -580,7 +592,7 @@ class GameLogic(object):
             key = tuple(m in mset for m in self.non_default_movements)
             table[key] = local_time = {}
             for k, dlist in self.local_distances.items():
-                times = [self.movement_time(mset, a, b, j, jd) for a,b, j, jd in dlist]
+                times = [self.movement_time(mset, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
                 if all(t is not None for t in times):
                     local_time[k] = times
         return table
@@ -950,7 +962,7 @@ class GameLogic(object):
                     t = self.context_types[localctx[k]]
                     if t == 'SpotId':
                         v = f'{s["region"]} > {s["area"]} > {v}'
-                    d[localctx[k]]['spot'][a['id']] = str_to_rusttype(v, t)
+                    d[localctx[k]]['spot'][s['id']] = str_to_rusttype(v, t)
         return d
 
     @cached_property
