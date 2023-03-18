@@ -267,21 +267,12 @@ pub fn action_amagi__main_area__carving__key_combo__not__combo(ctx: &mut Context
     // ^_combo = true
     ctx.amagi__main_area__ctx__combo = true;
 }
-pub fn action_has_effect_amagi__main_area__carving__key_combo__not__combo(ctx: &Context) -> bool {
-    ctx.amagi__main_area__ctx__combo != true
-}
 pub fn action_ebih__drone_room__pit_left__activate_lift__Infect_and__platform_moved(
     ctx: &mut Context,
 ) {
     // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
     ctx.ebih__drone_room__ctx__platform_moved = false;
     ctx.position = SpotId::Ebih__Drone_Room__Moving_Platform;
-}
-pub fn action_has_effect_ebih__drone_room__pit_left__activate_lift__Infect_and__platform_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__drone_room__ctx__platform_moved != false
-        || ctx.position != SpotId::Ebih__Drone_Room__Moving_Platform
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__Infect_and__platform_moved(
     ctx: &mut Context,
@@ -290,22 +281,11 @@ pub fn action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__Infec
     ctx.ebih__drone_room__ctx__platform_moved = false;
     ctx.position = SpotId::Ebih__Drone_Room__West_6;
 }
-pub fn action_has_effect_ebih__drone_room__pit_left__activate_lift_but_get_off_early__Infect_and__platform_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__drone_room__ctx__platform_moved != false
-        || ctx.position != SpotId::Ebih__Drone_Room__West_6
-}
 pub fn action_ebih__drone_room__portal_exit__activate_platform__Infect_and_not__platform_moved(
     ctx: &mut Context,
 ) {
     // ^_platform_moved = true
     ctx.ebih__drone_room__ctx__platform_moved = true;
-}
-pub fn action_has_effect_ebih__drone_room__portal_exit__activate_platform__Infect_and_not__platform_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__drone_room__ctx__platform_moved != true
 }
 pub fn action_ebih__ebih_east__dispenser__activate_lift__Infect_and__platform2_moved(
     ctx: &mut Context,
@@ -314,24 +294,12 @@ pub fn action_ebih__ebih_east__dispenser__activate_lift__Infect_and__platform2_m
     ctx.ebih__ebih_east__ctx__platform2_moved = false;
     ctx.position = SpotId::Ebih__Ebih_East__Ledge_End;
 }
-pub fn action_has_effect_ebih__ebih_east__dispenser__activate_lift__Infect_and__platform2_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__ebih_east__ctx__platform2_moved != false
-        || ctx.position != SpotId::Ebih__Ebih_East__Ledge_End
-}
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_lift__Infect_and_grab_and_not__platform2_moved(
     ctx: &mut Context,
 ) {
     // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
     ctx.ebih__ebih_east__ctx__platform2_moved = true;
     ctx.position = SpotId::Ebih__Ebih_East__Ledge_End;
-}
-pub fn action_has_effect_ebih__ebih_east__lower_moving_platform__activate_lift__Infect_and_grab_and_not__platform2_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__ebih_east__ctx__platform2_moved != true
-        || ctx.position != SpotId::Ebih__Ebih_East__Ledge_End
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_ride__Infect_and_not__platform2_moved(
     ctx: &mut Context,
@@ -340,12 +308,6 @@ pub fn action_ebih__ebih_east__lower_moving_platform__activate_ride__Infect_and_
     ctx.ebih__ebih_east__ctx__platform2_moved = true;
     ctx.position = SpotId::Ebih__Ebih_East__Dispenser;
 }
-pub fn action_has_effect_ebih__ebih_east__lower_moving_platform__activate_ride__Infect_and_not__platform2_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__ebih_east__ctx__platform2_moved != true
-        || ctx.position != SpotId::Ebih__Ebih_East__Dispenser
-}
 pub fn action_ebih__ebih_east__moving_platform__activate_ride__Infect_and_grab_and_not__platform1_moved(
     ctx: &mut Context,
 ) {
@@ -353,25 +315,13 @@ pub fn action_ebih__ebih_east__moving_platform__activate_ride__Infect_and_grab_a
     ctx.ebih__ebih_east__ctx__platform1_moved = true;
     ctx.position = SpotId::Ebih__Ebih_East__Middle_Platform;
 }
-pub fn action_has_effect_ebih__ebih_east__moving_platform__activate_ride__Infect_and_grab_and_not__platform1_moved(
-    ctx: &Context,
-) -> bool {
-    ctx.ebih__ebih_east__ctx__platform1_moved != true
-        || ctx.position != SpotId::Ebih__Ebih_East__Middle_Platform
-}
 pub fn action_energy__max_energy(ctx: &mut Context) {
     // ^energy = $max_energy
     ctx.energy = helper__max_energy!(ctx);
 }
-pub fn action_has_effect_energy__max_energy(ctx: &Context) -> bool {
-    ctx.energy != helper__max_energy!(ctx)
-}
 pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
     ctx.flasks += 1;
-}
-pub fn action_has_effect_flasks__1(ctx: &Context) -> bool {
-    0 != 1
 }
 pub fn action_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(
     ctx: &mut Context,
@@ -381,19 +331,9 @@ pub fn action_indra__position_mode__drone_position__amagi__cave_behind_waterfall
     ctx.mode = enums::Mode::Drone;
     ctx.position = SpotId::Amagi__Cave_Behind_Waterfall__Top;
 }
-pub fn action_has_effect_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(
-    ctx: &Context,
-) -> bool {
-    ctx.indra != ctx.position()
-        || ctx.mode != enums::Mode::Drone
-        || ctx.position != SpotId::Amagi__Cave_Behind_Waterfall__Top
-}
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
     ctx.last = ctx.position();
-}
-pub fn action_has_effect_last__position(ctx: &Context) -> bool {
-    ctx.last != ctx.position()
 }
 pub fn action_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(
     ctx: &mut Context,
@@ -403,28 +343,15 @@ pub fn action_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_ro
     ctx.indra = SpotId::Ebih__Drone_Room__Tree;
     ctx.position = SpotId::Ebih__Drone_Room__East_4;
 }
-pub fn action_has_effect_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(
-    ctx: &Context,
-) -> bool {
-    ctx.mode != enums::Mode::Drone
-        || ctx.indra != SpotId::Ebih__Drone_Room__Tree
-        || ctx.position != SpotId::Ebih__Drone_Room__East_4
-}
 pub fn action_mode__drone_indra__position(ctx: &mut Context) {
     // ^mode = 'drone'; ^indra = ^position
     ctx.mode = enums::Mode::Drone;
     ctx.indra = ctx.position();
 }
-pub fn action_has_effect_mode__drone_indra__position(ctx: &Context) -> bool {
-    ctx.mode != enums::Mode::Drone || ctx.indra != ctx.position()
-}
 pub fn action_mode__indra_position__indra(ctx: &mut Context) {
     // ^mode = 'Indra'; ^position = ^indra
     ctx.mode = enums::Mode::Indra;
     ctx.position = ctx.indra();
-}
-pub fn action_has_effect_mode__indra_position__indra(ctx: &Context) -> bool {
-    ctx.mode != enums::Mode::Indra || ctx.position != ctx.indra()
 }
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
@@ -434,13 +361,7 @@ pub fn action_save(ctx: &mut Context) {
     // $save
     helper__save!(ctx);
 }
-pub fn action_has_effect_save(ctx: &Context) -> bool {
-    helper_has_effect__save!(ctx)
-}
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.save = SpotId::Glacier__Revival__Save_Point;
-}
-pub fn action_has_effect_save__glacier__revival__save_point(ctx: &Context) -> bool {
-    ctx.save != SpotId::Glacier__Revival__Save_Point
 }

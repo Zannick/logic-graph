@@ -130,12 +130,16 @@ pub fn activate_actions<W, T, L, E>(
     L: Location<ExitId = E::ExitId, Context = T>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
-    for act in world
-        .get_global_actions()
-        .iter()
-        .chain(world.get_spot_actions(ctx.get().position()))
-    {
-        if act.can_access(ctx.get()) && ctx.is_useful(act) {
+    for act in world.get_global_actions() {
+        if act.can_access(ctx.get()) {
+            let mut c2 = ctx.clone();
+            c2.activate(act);
+            c2.penalize(penalty * 4);
+            heap.push(c2);
+        }
+    }
+    for act in world.get_spot_actions(ctx.get().position()) {
+        if act.can_access(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
             c2.penalize(penalty);
@@ -163,12 +167,18 @@ where
         let max_diff = f.elapsed() - s.elapsed();
         for ctx in spot_ctxs.iter() {
             let has_locs = spot_has_locations(world, ctx.get());
-            let spot_penalty = 10 * with_locs * (with_locs - 1);
+            // somewhat quadratic penalties
+            let spot_penalty = 10 * with_locs * (with_locs - 1) * max_diff
+                / <usize as TryInto<i32>>::try_into(spot_ctxs.len()).unwrap();
             if spot_has_actions(world, ctx) {
                 activate_actions(
                     world,
                     ctx,
-                    if !has_locs { max_diff / 2 + spot_penalty } else { spot_penalty },
+                    if !has_locs {
+                        2 * spot_penalty + 1000
+                    } else {
+                        spot_penalty + 100
+                    },
                     &spot_ctxs,
                     heap,
                 );
@@ -224,7 +234,7 @@ where
             let old_time = heap.max_time();
             heap.set_lenient_max_time(ctx.elapsed());
 
-            if heap.max_time() < old_time {
+            if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
                 println!(
                     "Found new shortest winning path after {} rounds, in estimated {}ms, with {} remaining in heap",
                     iters,
@@ -247,7 +257,9 @@ where
         // without penalties or progress, score is about -heap.max_time()
         // progress goes from 0 to 1,000,000
         // cut off when penalties are high enough
-        if ctx.score() < -heap.max_time() {
+        // progressively raise the score threshold as the heap size increases
+        let heapsize_adjustment: i32 = (heap.len() / 64).try_into().unwrap();
+        if ctx.score() < heapsize_adjustment - heap.max_time() {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
                 ctx.score(),
@@ -255,18 +267,32 @@ where
             );
             break;
         }
+        if heap.len() > 18_000_000 {
+            println!(
+                "Too many items in heap! score={} vs adjusted={}",
+                ctx.score(),
+                heapsize_adjustment - heap.max_time()
+            );
+            break;
+        }
         iters += 1;
         if iters % 10000 == 0 {
+            if iters > 10_000_000 && solutions.unique() > 4 {
+                heap.set_max_time(solutions.best());
+            }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
-                "--- Round {} (unique solutions: {}, dead-ends: {}, current limit: {}) ---\n\
-                Heap stats: count={}; push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+                "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}) ---\n\
+                Heap stats: count={}; seen={}; current limit: {}ms\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
+                solutions.len(),
                 solutions.unique(),
                 deadends,
-                heap.max_time(),
+                heapsize_adjustment - heap.max_time(),
                 heap.len(),
+                heap.seen(),
+                heap.max_time(),
                 iskips,
                 dskips,
                 pskips,

@@ -39,6 +39,7 @@ areas:
       coord: [28.45, 15.6]
       local:
         - to: Shallow End
+          jumps: 2
         - to: Upper Platform
     - name: Upper Platform
       coord: [28.25, 15.9]

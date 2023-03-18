@@ -213,8 +213,8 @@ impl<T: Ctx> ContextWrapper<T> {
     pub fn score(&self) -> i32 {
         // We want to sort by elapsed time, low to high: (X - elapsed)
         // with a bonus based on progress to prioritize states closer to the end:
-        //   + 40 * progress * progress [progress in range 0..100]
-        //   i.e. 0 to 400,000
+        //   + 50 * progress * progress [progress in range 0..100]
+        //   i.e. 0 to 500,000
         // (on the order of the real max time seems good)
         // penalty is added to states that do really inefficient things
         // and to deprioritize actions
@@ -324,38 +324,6 @@ impl<T: Ctx> ContextWrapper<T> {
         self.elapse(action.time());
         self.ctx.spend(action.price());
         self.append_history(History::Activate(action.id()));
-    }
-
-    pub fn is_useful<W, A>(&self, action: &A) -> bool
-    where
-        W: World<Action = A>,
-        T: Ctx<World = W>,
-        A: Action<Context = T>,
-    {
-        if !action.has_effect(&self.ctx) {
-            return false;
-        }
-        let mut prev = 1;
-        if let Some(cycle) = action.cycle_length() {
-            for last in self.history_rev() {
-                match last {
-                    History::Activate(a) => {
-                        if a == action.id() {
-                            prev += 1;
-                            // In case it is useful to switch once and back for movement
-                            if prev > cycle {
-                                return false;
-                            }
-                        } else {
-                            break;
-                        }
-                    }
-                    History::Get(_, _) | History::MoveGet(_, _) => break,
-                    _ => (),
-                }
-            }
-        }
-        true
     }
 
     pub fn info(&self) -> String {

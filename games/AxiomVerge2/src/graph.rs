@@ -3693,7 +3693,6 @@ pub struct Action {
     id: ActionId,
     time: i32,
     price: Currency,
-    cycle: Option<i8>,
 }
 
 impl world::Accessible for Action {
@@ -3752,30 +3751,6 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(ctx),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
         }
-    }
-    fn has_effect(&self, ctx: &Context) -> bool {
-        match self.id {
-            ActionId::Global__Recall_Drone => rules::action_has_effect_mode__indra_position__indra(ctx),
-            ActionId::Global__Deploy_Drone => rules::action_has_effect_mode__drone_indra__position(ctx),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_has_effect_amagi__main_area__carving__key_combo__not__combo(ctx),
-            ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_has_effect_save(ctx),
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_has_effect_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(ctx),
-            ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_has_effect_save(ctx),
-            ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_has_effect_save(ctx),
-            ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_has_effect_save(ctx),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_has_effect_ebih__ebih_east__moving_platform__activate_ride__Infect_and_grab_and_not__platform1_moved(ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_has_effect_ebih__ebih_east__lower_moving_platform__activate_ride__Infect_and_not__platform2_moved(ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_has_effect_ebih__ebih_east__lower_moving_platform__activate_lift__Infect_and_grab_and_not__platform2_moved(ctx),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_has_effect_ebih__ebih_east__dispenser__activate_lift__Infect_and__platform2_moved(ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_has_effect_ebih__drone_room__pit_left__activate_lift__Infect_and__platform_moved(ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_has_effect_ebih__drone_room__pit_left__activate_lift_but_get_off_early__Infect_and__platform_moved(ctx),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_has_effect_ebih__drone_room__portal_exit__activate_platform__Infect_and_not__platform_moved(ctx),
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_has_effect_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(ctx),
-            ActionId::Glacier__Revival__Save_Point__Save => rules::action_has_effect_save(ctx),
-        }
-    }
-    fn cycle_length(&self) -> Option<i8> {
-        self.cycle
     }
 }
 
@@ -6152,103 +6127,86 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::Global__Recall_Drone,
             time: 3000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Global__Deploy_Drone => Action {
             id: ActionId::Global__Deploy_Drone,
             time: 500,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Amagi__Main_Area__Carving__Key_Combo => Action {
             id: ActionId::Amagi__Main_Area__Carving__Key_Combo,
             time: 1750,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Amagi__Main_Area__Save_Point__Save => Action {
             id: ActionId::Amagi__Main_Area__Save_Point__Save,
             time: 1200,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => Action {
             id: ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
             time: 1100,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Ebih_West__Mid_Save__Save => Action {
             id: ActionId::Ebih__Ebih_West__Mid_Save__Save,
             time: 1300,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Ebih_West__Upper_Save__Save => Action {
             id: ActionId::Ebih__Ebih_West__Upper_Save__Save,
             time: 1300,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => Action {
             id: ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride,
             time: 3700,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => Action {
             id: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride,
             time: 4500,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => Action {
             id: ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift,
             time: 1000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => Action {
             id: ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift,
             time: 5000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => Action {
             id: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift,
             time: 7000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => Action {
             id: ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early,
             time: 1400,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => Action {
             id: ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform,
             time: 4000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => Action {
             id: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone,
             time: 1500,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::Glacier__Revival__Save_Point__Save => Action {
             id: ActionId::Glacier__Revival__Save_Point__Save,
             time: 1200,
             price: Currency::Free,
-            cycle: None,
         },
     }
 }

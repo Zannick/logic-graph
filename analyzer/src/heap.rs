@@ -21,7 +21,7 @@ pub struct LimitedHeap<T: Ctx> {
     states_seen: HashMap<T, i32>,
     iskips: i32,
     pskips: i32,
-    dup_skips: i32,
+    dup_skips: u32,
     dup_pskips: i32,
 }
 
@@ -42,6 +42,10 @@ impl<T: Ctx> LimitedHeap<T> {
     /// Iterating over the heap may not produce this many elements.
     pub fn len(&self) -> usize {
         self.heap.len()
+    }
+
+    pub fn seen(&self) -> usize {
+        self.states_seen.len()
     }
 
     /// Returns whether the underlying heap is actually empty.
@@ -155,7 +159,7 @@ impl<T: Ctx> LimitedHeap<T> {
         })
     }
 
-    pub fn stats(&self) -> (i32, i32, i32, i32) {
+    pub fn stats(&self) -> (i32, i32, u32, i32) {
         (self.iskips, self.pskips, self.dup_skips, self.dup_pskips)
     }
 }

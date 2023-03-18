@@ -57,7 +57,6 @@ actions:
     time: 2
     price: 10
     do: ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
-    cycle: 2  # This is here as a placeholder until we implement CYCLE
 
 helpers:
   $is_child: ^child

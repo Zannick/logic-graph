@@ -1286,6 +1286,7 @@ impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Objective::Gohma => write!(f, "{}", "Gohma"),
+
             Objective::Ganon => write!(f, "{}", "Ganon"),
             Objective::Triforce_Hunt => write!(f, "{}", "Triforce Hunt"),
             Objective::Deku_Full_Clear => write!(f, "{}", "Deku Full Clear"),
@@ -1563,7 +1564,7 @@ impl world::Accessible for Exit {
                     rules::access_is_child_and_sticks_and_nuts(&ctx)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
-                    rules::access_deku_tree__compass_room__entry__floor_3_(&ctx)
+                    rules::access_deku_tree__compass_room__entry__ex__floor_3__door_1___torch(&ctx)
                 }
                 ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => true,
@@ -1662,22 +1663,18 @@ pub struct Action {
     id: ActionId,
     time: i32,
     price: Currency,
-    cycle: Option<i8>,
 }
 
 impl world::Accessible for Action {
     type Context = Context;
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price)
-            && match self.id {
-                ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                    rules::access_deku_tree__compass_room__entry___light_torch_req(&ctx)
-                }
-                ActionId::Global__Change_Time => true,
-                ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
-                ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
-            }
+        ctx.can_afford(&self.price) && match self.id {
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::access_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(&ctx),
+            ActionId::Global__Change_Time => true,
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
+        }
     }
     fn time(&self) -> i32 {
         self.time
@@ -1693,36 +1690,11 @@ impl world::Action for Action {
     }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
-            ActionId::Global__Change_Time => {
-                rules::action_tod__match_tod____day__night_night__day____day_(ctx)
-            }
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                rules::action_deku_tree__compass_room__entry___light_torch__do(ctx)
-            }
-            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                rules::action_rupees__max__rupees__20_wallet_max(ctx)
-            }
+            ActionId::Global__Change_Time => rules::action_tod__match_tod____day__night_night__day____day_(ctx),
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::action_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(ctx),
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => rules::action_rupees__max__rupees__20_wallet_max(ctx),
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => rules::action_save__position(ctx),
         }
-    }
-    fn has_effect(&self, ctx: &Context) -> bool {
-        match self.id {
-            ActionId::Global__Change_Time => {
-                rules::action_has_effect_tod__match_tod____day__night_night__day____day_(ctx)
-            }
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                rules::action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx)
-            }
-            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                rules::action_has_effect_rupees__max__rupees__20_wallet_max(ctx)
-            }
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
-                rules::action_has_effect_save__position(ctx)
-            }
-        }
-    }
-    fn cycle_length(&self) -> Option<i8> {
-        self.cycle
     }
 }
 
@@ -1965,6 +1937,21 @@ impl world::World for World {
             | LocationId::KF__Shop__Entry__Item_7
             | LocationId::KF__Shop__Entry__Item_8 => SpotId::KF__Shop__Entry,
             LocationId::Kak__Spider_House__Entry__Skulls_10 => SpotId::Kak__Spider_House__Entry,
+        }
+    }
+
+    fn get_action_spot(&self, act_id: ActionId) -> SpotId {
+        match act_id {
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                SpotId::Deku_Tree__Compass_Room__Entry
+            }
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
+                SpotId::KF__Kokiri_Village__Midos_Porch
+            }
+            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
+                SpotId::KF__Kokiri_Village__Sarias_Porch
+            }
+            _ => SpotId::None,
         }
     }
 
@@ -2817,25 +2804,21 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::Global__Change_Time,
             time: 2000,
             price: Currency::Rupees(10),
-            cycle: Some(2),
         },
         ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => Action {
             id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
             time: 1000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => Action {
             id: ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees,
             time: 20000,
             price: Currency::Free,
-            cycle: None,
         },
         ActionId::KF__Kokiri_Village__Sarias_Porch__Save => Action {
             id: ActionId::KF__Kokiri_Village__Sarias_Porch__Save,
             time: 1000,
             price: Currency::Free,
-            cycle: None,
         },
     }
 }

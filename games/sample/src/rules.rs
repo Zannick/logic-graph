@@ -80,13 +80,15 @@ pub fn access_deku_slingshot_scrub(ctx: &Context) -> bool {
     // Deku_Slingshot_Scrub
     ctx.has(Item::Deku_Slingshot_Scrub)
 }
-pub fn access_deku_tree__compass_room__entry___light_torch_req(ctx: &Context) -> bool {
-    // $is_child and $Sticks and not ^_torch
-    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch())
-}
-pub fn access_deku_tree__compass_room__entry__floor_3_(ctx: &Context) -> bool {
+pub fn access_deku_tree__compass_room__entry__ex__floor_3__door_1___torch(ctx: &Context) -> bool {
     // ^_torch
     ctx.deku_tree__compass_room__ctx__torch()
+}
+pub fn access_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(
+    ctx: &Context,
+) -> bool {
+    // $is_child and $Sticks and not ^_torch
+    ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch())
 }
 pub fn access_false(ctx: &Context) -> bool {
     // False
@@ -172,47 +174,31 @@ pub fn access_triforce_piece__triforce_count(ctx: &Context) -> bool {
     // Triforce_Piece{triforce_count}
     ctx.count(Item::Triforce_Piece) >= ctx.triforce_count
 }
-pub fn action_deku_tree__compass_room__entry___light_torch__do(ctx: &mut Context) {
+pub fn action_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(
+    ctx: &mut Context,
+) {
     // ^_torch = True
     ctx.deku_tree__compass_room__ctx__torch = true;
-}
-pub fn action_has_effect_deku_tree__compass_room__entry___light_torch__do(ctx: &Context) -> bool {
-    ctx.deku_tree__compass_room__ctx__torch != true
 }
 pub fn action_rupees__max__rupees__20_wallet_max(ctx: &mut Context) {
     // ^rupees = $max(^rupees + 20, $wallet_max)
     ctx.rupees = std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx));
 }
-pub fn action_has_effect_rupees__max__rupees__20_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees != std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx))
-}
 pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));
-}
-pub fn action_has_effect_rupees__min__rupees__1_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees != std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx))
 }
 pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx));
 }
-pub fn action_has_effect_rupees__min__rupees__50_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees != std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx))
-}
 pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
     ctx.rupees = std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx));
 }
-pub fn action_has_effect_rupees__min__rupees__5_wallet_max(ctx: &Context) -> bool {
-    ctx.rupees != std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx))
-}
 pub fn action_save__position(ctx: &mut Context) {
     // ^save = ^position
     ctx.save = ctx.position();
-}
-pub fn action_has_effect_save__position(ctx: &Context) -> bool {
-    ctx.save != ctx.position()
 }
 pub fn action_tod__match_tod____day__night_night__day____day_(ctx: &mut Context) {
     // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
@@ -221,12 +207,4 @@ pub fn action_tod__match_tod____day__night_night__day____day_(ctx: &mut Context)
         enums::Tod::Night => enums::Tod::Day,
         _ => enums::Tod::Day,
     };
-}
-pub fn action_has_effect_tod__match_tod____day__night_night__day____day_(ctx: &Context) -> bool {
-    ctx.tod
-        != match ctx.tod() {
-            enums::Tod::Day => enums::Tod::Night,
-            enums::Tod::Night => enums::Tod::Day,
-            _ => enums::Tod::Day,
-        }
 }

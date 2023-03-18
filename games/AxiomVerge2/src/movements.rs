@@ -68,6 +68,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 5180,
+        (
+            false,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => 900,
         (
@@ -3736,6 +3743,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Shallow_End,
             SpotId::Amagi__Main_Area__Cliff,
+        ) => 4035,
+        (
+            true,
+            false,
+            false,
+            SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
         ) => 4035,
         (
             true,
@@ -7412,7 +7426,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 5282,
+        ) => 5180,
         (
             false,
             true,
@@ -12113,6 +12127,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 4035,
+        (
+            false,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => 701,
         (
@@ -15888,7 +15909,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 5282,
+        ) => 4035,
         (
             true,
             true,
@@ -20517,6 +20538,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Amagi__Main_Area__Cliff,
+            SpotId::Amagi__Main_Area__Shallow_End,
+        ) => 4035,
+        (
+            true,
+            false,
+            true,
+            SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => 701,
         (
@@ -24226,7 +24254,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 5282,
+        ) => 4035,
         (
             false,
             true,
@@ -28856,7 +28884,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 5282,
+        ) => 4035,
         (
             true,
             true,

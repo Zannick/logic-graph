@@ -32,7 +32,7 @@ where
         .get_global_actions()
         .iter()
         .chain(world.get_spot_actions(ctx.get().position()))
-        .any(|act| act.can_access(ctx.get()) && ctx.is_useful(act))
+        .any(|act| act.can_access(ctx.get()))
 }
 
 pub fn spot_has_locations_or_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> bool

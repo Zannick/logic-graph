@@ -27,6 +27,7 @@ where
     path: &'static str,
     file: File,
     count: usize,
+    best: i32,
 }
 
 impl<T> SolutionCollector<T>
@@ -39,6 +40,7 @@ where
             path,
             file: File::create(path)?,
             count: 0,
+            best: 0,
         })
     }
 
@@ -50,6 +52,10 @@ where
         self.map.len()
     }
 
+    pub fn best(&self) -> i32 {
+        self.best
+    }
+
     pub fn insert(&mut self, ctx: ContextWrapper<T>) {
         let loc_history: Vec<History<T>> = ctx
             .history_rev()
@@ -58,6 +64,9 @@ where
                 _ => false,
             })
             .collect();
+        if self.count == 0 || ctx.elapsed() < self.best {
+            self.best = ctx.elapsed();
+        }
         if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(ctx);
         } else {
@@ -99,6 +108,7 @@ where
         vecs.sort_by_key(|v| v[0].elapsed());
         let mut total = 0;
         let fastest = vecs[0][0].elapsed();
+        // TODO: add a cutoff of some percentage of the fastest?
         for (i, vec) in vecs.iter().enumerate() {
             let mut minor = 0;
             Self::write_one(&mut file, i, minor, vec.first().unwrap(), fastest)?;

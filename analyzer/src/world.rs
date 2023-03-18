@@ -52,8 +52,6 @@ pub trait Action: Accessible {
     type ActionId: Id;
     fn id(&self) -> Self::ActionId;
     fn perform(&self, ctx: &mut Self::Context);
-    fn has_effect(&self, ctx: &Self::Context) -> bool;
-    fn cycle_length(&self) -> Option<i8>;
 }
 
 pub trait Warp: Accessible {

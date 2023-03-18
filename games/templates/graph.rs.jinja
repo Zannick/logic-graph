@@ -126,7 +126,6 @@ pub struct Action {
     id: ActionId,
     time: i32,
     price: Currency,
-    cycle: Option<i8>,
 }
 
 impl world::Accessible for Action {
@@ -153,14 +152,6 @@ impl world::Action for Action {
 %% endfor
         }
     }
-    fn has_effect(&self, ctx: &Context) -> bool {
-        match self.id {
-%% for act in gl.actions()
-            ActionId::{{ act.id }} => rules::action_has_effect_{{ act.action_id }}(ctx),
-%% endfor
-        }
-    }
-    fn cycle_length(&self) -> Option<i8> { self.cycle }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -394,7 +385,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             price: Currency::{% if a.price and a.price > 0 -%}
                 {{ (a.costs or price_types[0])|camelize }}({{ a.price }})
                 {%- else %}Free{% endif %},
-            cycle: {% if a.cycle %}Some({{ a.cycle }}){% else %}None{% endif %},
         },
 %% endfor
     }

@@ -24,6 +24,7 @@ pub mod enums {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
             match self {
                 Tod::Day => write!(f, "{}", "Day"),
+
                 Tod::Night => write!(f, "{}", "Night"),
             }
         }
@@ -41,7 +42,7 @@ pub mod enums {
     }
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Status {
     #[default]
     None,
@@ -49,7 +50,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Context {
     // context vars
     pub position: SpotId,
@@ -542,45 +543,57 @@ impl context::Ctx for Context {
 
 impl Context {
     pub fn position(&self) -> SpotId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.position,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.position,
+                },
             },
         }
     }
     pub fn save(&self) -> SpotId {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                RegionId::Deku_Tree => SpotId::Deku_Tree__Lobby__Entry,
-                _ => self.save,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    RegionId::Deku_Tree => SpotId::Deku_Tree__Lobby__Entry,
+                    _ => self.save,
+                },
             },
         }
     }
     pub fn child(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.child,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.child,
+                },
             },
         }
     }
     pub fn tod(&self) -> enums::Tod {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.tod,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.tod,
+                },
             },
         }
     }
     pub fn rupees(&self) -> i32 {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.rupees,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.rupees,
+                },
             },
         }
     }
     pub fn deku_tree__compass_room__ctx__torch(&self) -> bool {
-        match get_area(self.position) {
-            _ => match get_region(self.position) {
-                _ => self.deku_tree__compass_room__ctx__torch,
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.deku_tree__compass_room__ctx__torch,
+                },
             },
         }
     }

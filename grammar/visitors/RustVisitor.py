@@ -258,26 +258,3 @@ class RustVisitor(RulesVisitor):
         eq = '!' if ctx.NOT() else '='
         return (f'{func}({self._getRefGetter(str(ctx.REF())[1:])}) '
                 f'{eq}= {self.visit(ctx.invoke())}')
-
-class ActionHasEffectVisitor(RustVisitor):
-
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def visitActions(self, ctx):
-        return ' || '.join(self.visit(ch) for ch in ctx.action())
-
-    def visitSet(self, ctx):
-        return super().visitSet(ctx)[:-1].replace(' = ', ' != ')
-
-    def visitAlter(self, ctx):
-        op = str(ctx.BINOP())
-        if op in ('+', '-'):
-            return f'0 != {self.visit(ctx.num())}'
-        return f'1 != {self.visit(ctx.num())}'
-
-    def visitActionHelper(self, ctx: RulesParser.ActionHelperContext):
-        # This should not be used
-        if str(ctx.invoke().FUNC()) in BUILTINS:
-            return 'panic!("builtin action shouldn\'t be checked for an effect!")'
-        return self.visit(ctx.invoke()).replace('helper', 'helper_has_effect')

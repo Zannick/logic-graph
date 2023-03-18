@@ -1043,19 +1043,11 @@ class GameLogic(object):
                            id or pr.name).visit(pr.tree)
 
 
-    def actToHasEffect(self, pr, info, id=None):
-        return ActionHasEffectVisitor(self.context_types,
-                                      self.action_funcs,
-                                      self.get_local_ctx(info),
-                                      id or pr.name).visit(pr.tree)
-
-
     def render(self):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir),
                                  line_statement_prefix='%%',
                                  line_comment_prefix='%#')
         env.filters.update({
-            'actToHasEffect': self.actToHasEffect,
             'camelize': inflection.camelize,
             'construct_id': construct_id,
             'construct_test_name': construct_test_name,
