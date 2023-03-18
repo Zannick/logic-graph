@@ -40,9 +40,6 @@ where
         }
         if ctx.todo(loc.id()) {
             ctx.skip(loc.id());
-            if !can_win(world, &ctx).is_ok() {
-                ctx.reset(loc.id());
-            }
         }
     }
     ctx

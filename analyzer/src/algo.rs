@@ -54,10 +54,10 @@ pub fn visit_locations<W, T, L, E>(
             if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
                 // Major branching factor: sometimes we can try skipping a location:
                 // 1. If location has a cost, we might not want it.
-                // 2. Otherwise, if we're in minimize mode, any location is potentially skippable.
+                // 2. Otherwise, any location is potentially skippable.
                 //    But it's not worth skipping locations that are free in time and money;
                 //    they come along for free with other locations, or we route differently.
-                if (ctx.minimize && loc.time() > 0) || !loc.is_free() {
+                if loc.time() > 0 || !loc.is_free() {
                     let mut newctx = ctx.clone();
                     newctx.get_mut().skip(loc.id());
                     // Check if this loc is required. If it is, we can't skip it.
@@ -77,8 +77,10 @@ pub fn visit_locations<W, T, L, E>(
         let exit = world.get_exit(e);
         let loc = world.get_location(l);
         for ctx in ctx_list.iter_mut() {
-            // Get the item and move along the exit.
-            ctx.visit_exit(world, loc, exit);
+            if ctx.get().todo(l) {
+                // Get the item and move along the exit.
+                ctx.visit_exit(world, loc, exit);
+            }
         }
     }
     heap.extend(ctx_list);
@@ -158,20 +160,21 @@ where
     let mut with_locs = 0;
 
     if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
-        let max_dist = f.elapsed() - s.elapsed();
+        let max_diff = f.elapsed() - s.elapsed();
         for ctx in spot_ctxs.iter() {
             let has_locs = spot_has_locations(world, ctx.get());
+            let spot_penalty = 10 * with_locs * (with_locs - 1);
             if spot_has_actions(world, ctx) {
                 activate_actions(
                     world,
                     ctx,
-                    if !has_locs { max_dist / 2 + 1000 } else { 1000 },
+                    if !has_locs { max_diff / 2 + spot_penalty } else { spot_penalty },
                     &spot_ctxs,
                     heap,
                 );
             }
             if has_locs {
-                visit_locations(world, ctx.clone(), heap, with_locs * (with_locs - 1));
+                visit_locations(world, ctx.clone(), heap, spot_penalty);
                 with_locs += 1;
             }
         }
@@ -214,7 +217,6 @@ where
     heap.push(startctx.clone());
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
-    let mut m_iters = 0;
     let mut deadends = 0;
 
     while let Some(ctx) = heap.pop() {
@@ -224,8 +226,7 @@ where
 
             if heap.max_time() < old_time {
                 println!(
-                    "Found new shortest winning {}path after {} rounds, in estimated {}ms, with {} remaining in heap",
-                    if ctx.minimize { "*minimized* " } else { "" },
+                    "Found new shortest winning path after {} rounds, in estimated {}ms, with {} remaining in heap",
                     iters,
                     ctx.elapsed(),
                     heap.len()
@@ -234,21 +235,19 @@ where
                 println!("Max time to consider is now: {}ms", heap.max_time());
             }
 
-            if !ctx.minimize {
-                let mut newctx =
-                    ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
-                newctx.minimize = true;
-                heap.push(newctx);
-            }
+            // If there were locations we skipped mid-route, skip them from the start,
+            // in case that changes the routing.
+            let newctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
+            heap.push(newctx);
 
             solutions.insert(ctx);
 
             continue;
         }
         // without penalties or progress, score is about -heap.max_time()
-        // progress goes from 0 to 100000
-        // cut off when penalties are high enough to exceed ~137.5% of max time
-        if ctx.score() < -11 * heap.max_time() / 8 {
+        // progress goes from 0 to 1,000,000
+        // cut off when penalties are high enough
+        if ctx.score() < -heap.max_time() {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
                 ctx.score(),
@@ -257,19 +256,16 @@ where
             break;
         }
         iters += 1;
-        if ctx.minimize {
-            m_iters += 1;
-        }
         if iters % 10000 == 0 {
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
-                "--- Round {} (minimize rounds: {}, unique solutions: {}, dead-ends: {}) ---\n\
+                "--- Round {} (unique solutions: {}, dead-ends: {}, current limit: {}) ---\n\
                 Heap stats: count={}; push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
-                m_iters,
                 solutions.unique(),
                 deadends,
+                heap.max_time(),
                 heap.len(),
                 iskips,
                 dskips,
@@ -286,8 +282,8 @@ where
     }
     let (iskips, pskips, dskips, dpskips) = heap.stats();
     println!(
-        "Finished after {} rounds ({} minimize rounds, {} dead-ends), skipped {}+{} pushes + {}+{} pops",
-        iters, m_iters, deadends, iskips, dskips, pskips, dpskips
+        "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops",
+        iters, deadends, iskips, dskips, pskips, dpskips
     );
     solutions.export()
 }

@@ -165,7 +165,6 @@ where
     elapsed: i32,
     penalty: i32,
     history: Option<Rc<HistoryNode<T>>>,
-    pub minimize: bool,
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -175,7 +174,6 @@ impl<T: Ctx> ContextWrapper<T> {
             elapsed: 0,
             penalty: 0,
             history: None,
-            minimize: false,
         }
     }
 
@@ -215,10 +213,12 @@ impl<T: Ctx> ContextWrapper<T> {
     pub fn score(&self) -> i32 {
         // We want to sort by elapsed time, low to high: (X - elapsed)
         // with a bonus based on progress to prioritize states closer to the end:
-        //   + 1000 * progress [progress in range 0..100]
+        //   + 40 * progress * progress [progress in range 0..100]
+        //   i.e. 0 to 400,000
+        // (on the order of the real max time seems good)
         // penalty is added to states that do really inefficient things
         // and to deprioritize actions
-        1000 * self.ctx.progress() - self.elapsed - self.penalty
+        50 * self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
     }
 
     pub fn get(&self) -> &T {
@@ -298,11 +298,6 @@ impl<T: Ctx> ContextWrapper<T> {
         L: Location<Context = T>,
         E: Exit<Context = T, Currency = L::Currency>,
     {
-        for canon_loc_id in world.get_canon_locations(loc.id()) {
-            if self.ctx.todo(canon_loc_id) {
-                self.ctx.skip(canon_loc_id);
-            }
-        }
         self.ctx.visit(loc.id());
         self.ctx.spend(loc.price());
         self.ctx.collect(loc.item());
@@ -310,6 +305,12 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.spend(exit.price());
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
+
+        for canon_loc_id in world.get_canon_locations(loc.id()) {
+            if self.ctx.todo(canon_loc_id) {
+                self.ctx.skip(canon_loc_id);
+            }
+        }
         self.append_history(History::MoveGet(loc.item(), exit.id()));
     }
 
