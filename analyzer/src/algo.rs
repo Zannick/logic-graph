@@ -201,7 +201,8 @@ where
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);
     let mut heap = LimitedHeap::new();
-    let mut solutions = SolutionCollector::<T>::new("data/solutions.txt").unwrap();
+    let mut solutions = SolutionCollector::<T>::new(
+        "data/solutions.txt", "data/previews.txt")?;
 
     match greedy_search(world, &startctx) {
         Ok(wonctx) => {
@@ -220,8 +221,10 @@ where
         }
         Err(ctx) => {
             println!(
-                "Found no greedy solution, maximal attempt reached dead-end after {}ms",
-                ctx.elapsed()
+                "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{:#?}\n{}",
+                ctx.elapsed(),
+                ctx.get(),
+                ctx.history_str()
             );
             // Push it anyway, maybe it'll find something!
             heap.push(ctx);
@@ -235,7 +238,11 @@ where
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
             let old_time = heap.max_time();
-            heap.set_lenient_max_time(ctx.elapsed());
+            if iters > 10_000_000 && solutions.unique() > 4 {
+                heap.set_max_time(ctx.elapsed());
+            } else {
+                heap.set_lenient_max_time(ctx.elapsed());
+            }
 
             if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
                 println!(
@@ -270,7 +277,7 @@ where
             );
             break;
         }
-        if heap.len() > 18_000_000 {
+        if heap.len() > 18_000_000 || heap.len() + heap.seen() > 60_000_000 {
             println!(
                 "Too many items in heap! score={} vs adjusted={}",
                 ctx.score(),
@@ -282,6 +289,9 @@ where
         if iters % 10000 == 0 {
             if iters > 10_000_000 && solutions.unique() > 4 {
                 heap.set_max_time(solutions.best());
+            }
+            if iters % 1_000_000 == 0 && solutions.unique() > 1 && heap.len() > 4_000_000 {
+                heap.clean();
             }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(

@@ -25,6 +25,7 @@ where
 {
     map: HashMap<Vec<History<T>>, Vec<ContextWrapper<T>>>,
     path: &'static str,
+    previews: &'static str,
     file: File,
     count: usize,
     best: i32,
@@ -34,11 +35,15 @@ impl<T> SolutionCollector<T>
 where
     T: Ctx,
 {
-    pub fn new(path: &'static str) -> io::Result<SolutionCollector<T>> {
+    pub fn new(
+        sols_file: &'static str,
+        previews_file: &'static str,
+    ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: HashMap::new(),
-            path,
-            file: File::create(path)?,
+            file: File::create(sols_file)?,
+            path: sols_file,
+            previews: previews_file,
             count: 0,
             best: 0,
         })
@@ -71,6 +76,7 @@ where
             vec.push(ctx);
         } else {
             self.map.insert(loc_history, vec![ctx]);
+            self.write_previews().unwrap();
         }
         self.count += 1;
     }
@@ -89,10 +95,49 @@ where
             num,
             minor_num,
             ctx.elapsed(),
-            if diff > 0 { format!(" (+{}ms)", diff) } else { "".to_string() }
+            if diff > 0 {
+                format!(" (+{}ms)", diff)
+            } else {
+                "".to_string()
+            }
         )?;
-        writeln!(file, "in short:\n{}", ctx.history_preview())?;
+        writeln!(file, "in short:\n{}", ctx.history_preview_actions())?;
         writeln!(file, "in full:\n{}\n\n", ctx.history_str())
+    }
+
+    fn write_one_preview(
+        file: &mut File,
+        num: usize,
+        ctx: &ContextWrapper<T>,
+        comp: i32,
+    ) -> io::Result<()> {
+        let diff = ctx.elapsed() - comp;
+        writeln!(
+            file,
+            "Solution #{}, est. {}ms{}:",
+            num,
+            ctx.elapsed(),
+            if diff > 0 {
+                format!(" (+{}ms)", diff)
+            } else {
+                "".to_string()
+            }
+        )?;
+        writeln!(file, "{}\n\n", ctx.history_preview_actions())
+    }
+
+    pub fn write_previews(&self) -> io::Result<()> {
+        let mut file = File::create(self.previews)?;
+        let mut vec: Vec<&ContextWrapper<T>> = self
+            .map
+            .values()
+            .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
+            .collect();
+        vec.sort_by_key(|c| c.elapsed());
+        for (i, c) in vec.iter().enumerate() {
+            Self::write_one_preview(&mut file, i, c, self.best)?
+        }
+        Ok(())
     }
 
     pub fn export(self) -> io::Result<()> {
@@ -125,7 +170,13 @@ where
                 Self::write_one(&mut file, i, minor, similar, fastest)?;
             }
         }
-        println!("Wrote {} solutions ({} types, reduced from {} total) to {}", total, vecs.len(), self.count, self.path);
+        println!(
+            "Wrote {} solutions ({} types, reduced from {} total) to {}",
+            total,
+            vecs.len(),
+            self.count,
+            self.path
+        );
         Ok(())
     }
 }

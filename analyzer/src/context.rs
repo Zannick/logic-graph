@@ -363,4 +363,18 @@ impl<T: Ctx> ContextWrapper<T> {
         vec.reverse();
         vec.join("\n")
     }
+
+    pub fn history_preview_actions(&self) -> String {
+        let mut vec: Vec<String> = self
+            .history_rev()
+            .filter_map(|h| match h {
+                History::Get(..) | History::MoveGet(..) | History::Activate(..) => {
+                    Some(h.to_string())
+                }
+                _ => None,
+            })
+            .collect::<Vec<String>>();
+        vec.reverse();
+        vec.join("\n")
+    }
 }

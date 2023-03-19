@@ -29,7 +29,11 @@ impl<T: Ctx> LimitedHeap<T> {
     pub fn new() -> LimitedHeap<T> {
         LimitedHeap {
             max_time: i32::MAX,
-            heap: BinaryHeap::new(),
+            heap: {
+                let mut h = BinaryHeap::new();
+                h.reserve(1048576);
+                h
+            },
             states_seen: HashMap::new(),
             iskips: 0,
             pskips: 0,
@@ -116,6 +120,26 @@ impl<T: Ctx> LimitedHeap<T> {
             Some(el) => Some(&el.el),
             None => None,
         }
+    }
+
+    pub fn clean(&mut self) {
+        print!("Cleaning... {} -> ", self.heap.len());
+        let mut theap = BinaryHeap::new();
+        self.heap.shrink_to_fit();
+        theap.reserve(1048576);
+        for el in self.heap.drain() {
+            if el.el.elapsed() <= self.max_time {
+                if el.el.elapsed() <= *self.states_seen.get(el.el.get()).unwrap() {
+                    theap.push(el);
+                } else {
+                    self.dup_pskips += 1;
+                }
+            } else {
+                self.pskips += 1;
+            }
+        }
+        self.heap = theap;
+        println!("{}. done", self.heap.len());
     }
 
     pub fn extend<I>(&mut self, iter: I)
