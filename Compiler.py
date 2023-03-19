@@ -103,7 +103,7 @@ def get_arg_with_type(arg: str) -> str:
 
 def get_func_args(helper_key: str) -> list[str]:
     if '(' in helper_key:
-        return [get_arg_with_type(arg) for arg in helper_key[:-1].split('(', 1)[1].split(',')]
+        return [get_arg_with_type(arg.strip()) for arg in helper_key[:-1].split('(', 1)[1].split(',')]
     return []
 
 

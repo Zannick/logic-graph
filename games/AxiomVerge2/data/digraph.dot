@@ -219,6 +219,12 @@ digraph AxiomVerge2 {
             Ebih__Waterfall__West_10 [label = "West 10"];
             Ebih__Waterfall__West_9 [label = "West 9"];
             Ebih__Waterfall__West_Climb [label = "West Climb"];
+            Ebih__Waterfall__Ledge_Below_Hole [label = "Ledge Below Hole"];
+            Ebih__Waterfall__Below_Left_Switch [label = "Below Left Switch"];
+            Ebih__Waterfall__West_8 [label = "West 8"];
+            Ebih__Waterfall__West_Door_Left [label = "West Door Left"];
+            Ebih__Waterfall__West_Door [label = "West Door"];
+            Ebih__Waterfall__West_Door_Right [label = "West Door Right"];
             Ebih__Waterfall__Middle_West_Tree [label = "Middle West Tree"];
             Ebih__Waterfall__West_Main_Path [label = "West Main Path"];
             Ebih__Waterfall__Cave_Entrance [label = "Cave Entrance"];
@@ -242,11 +248,15 @@ digraph AxiomVerge2 {
             Ebih__Ebih_West__East_9 [label = "East 9"];
             Ebih__Ebih_West__Block_Left [label = "Block Left"];
             Ebih__Ebih_West__East_7 [label = "East 7"];
+            Ebih__Ebih_West__Above_Chute [label = "Above Chute"];
             Ebih__Ebih_West__Upper_Save [label = "Upper Save"];
+            Ebih__Ebih_West__Medium_High_Platform [label = "Medium High Platform"];
             Ebih__Ebih_West__High_Platform [label = "High Platform"];
             Ebih__Ebih_West__High_Ledge [label = "High Ledge"];
             Ebih__Ebih_West__East_6 [label = "East 6"];
             Ebih__Ebih_West__East_8 [label = "East 8"];
+            Ebih__Ebih_West__Middle_Middle [label = "Middle Middle"];
+            Ebih__Ebih_West__Middle_Cliff [label = "Middle Cliff"];
             label = "Ebih West";
             bgcolor = "white";
         }
@@ -313,6 +323,15 @@ digraph AxiomVerge2 {
             bgcolor = "white";
         }
         label = "Mt Ebih";
+        bgcolor = "lightgrey";
+    }
+    subgraph cluster_Giguna {
+        subgraph cluster_Giguna__Giguna_Northeast {
+            Giguna__Giguna_Northeast__Inner_Wall [label = "Inner Wall"];
+            label = "Giguna Northeast";
+            bgcolor = "white";
+        }
+        label = "Giguna Steppes";
         bgcolor = "lightgrey";
     }
     subgraph cluster_Glacier {
@@ -589,7 +608,15 @@ digraph AxiomVerge2 {
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__West_Lower_Path;
     Ebih__Waterfall__West_10 -> Ebih__Ebih_West__East_10;
     Ebih__Waterfall__West_9 -> Ebih__Ebih_West__East_9;
-    Ebih__Waterfall__West_Climb -> Ebih__Waterfall__Middle_West_Tree;
+    Ebih__Waterfall__West_Climb -> Ebih__Waterfall__Ledge_Below_Hole;
+    Ebih__Waterfall__Ledge_Below_Hole -> Ebih__Waterfall__Below_Left_Switch;
+    Ebih__Waterfall__Ledge_Below_Hole -> Ebih__Waterfall__Middle_West_Tree;
+    Ebih__Waterfall__Below_Left_Switch -> Ebih__Waterfall__Ledge_Below_Hole;
+    Ebih__Waterfall__West_8 -> Ebih__Ebih_West__East_8;
+    Ebih__Waterfall__West_Door_Left -> Ebih__Waterfall__West_Door;
+    Ebih__Waterfall__West_Door -> Ebih__Waterfall__West_Door_Left;
+    Ebih__Waterfall__West_Door -> Ebih__Waterfall__West_Door_Right;
+    Ebih__Waterfall__West_Door_Right -> Ebih__Waterfall__West_Door;
     Ebih__Waterfall__Middle_West_Tree -> Ebih__Waterfall__West_Main_Path;
     Ebih__Waterfall__Cave_Entrance -> Ebih__Cave__Entry;
     Ebih__Waterfall__Below_Tree -> Ebih__Waterfall__Big_Tree;
@@ -605,6 +632,9 @@ digraph AxiomVerge2 {
     Ebih__Ebih_West__East_7 -> Ebih__Waterfall__West_7;
     Ebih__Ebih_West__High_Platform -> Ebih__Ebih_West__High_Ledge;
     Ebih__Ebih_West__East_6 -> Ebih__Grid_21_1_5__West_6;
+    Ebih__Ebih_West__East_8 -> Ebih__Waterfall__West_8;
+    Ebih__Ebih_West__Middle_Middle -> Ebih__Ebih_West__Above_Chute;
+    Ebih__Ebih_West__Middle_Middle -> Ebih__Ebih_West__East_7;
     Ebih__Cave__Entry -> Ebih__Waterfall__Cave_Entrance;
     Ebih__Ebih_East__West_8 -> Ebih__Waterfall__East_8;
     Ebih__Ebih_East__West_7 -> Ebih__Waterfall__East_7;

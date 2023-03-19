@@ -264,7 +264,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy
-          do: ^indra = ^position; ^mode = 'drone'; ^position = `Amagi > Cave Behind Waterfall > Top`
+          do: $deploy_drone(`Amagi > Cave Behind Waterfall > Top`)
           time: 1.1
     - name: Top
       coord: [27.4, 13.6]

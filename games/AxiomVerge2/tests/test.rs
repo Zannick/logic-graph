@@ -119,6 +119,6 @@ fn search() {
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab,
         verify,
-        1000
+        2000
     );
 }

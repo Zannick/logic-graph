@@ -1,8 +1,6 @@
-from collections import defaultdict
 import logging
 
-import Utils
-from Utils import construct_id, BUILTINS
+from Utils import BUILTINS, PLACE_TYPES, config_type, getPlaceType
 
 from grammar import RulesParser, RulesVisitor
 
@@ -61,16 +59,41 @@ class HelperVisitor(RulesVisitor):
             elif ctx.LIT(): t = 'str'
             elif ctx.INT(): t = 'int'
             elif ctx.FLOAT(): t = 'float'
+            elif ctx.PLACE():
+                if len(ctx.PLACE()) != len(args):
+                    self.errors.append(f'Rule {self.name} calls function {func} with incorrect number '
+                                       f'of args, expected {len(args)}, got {len(ctx.PLACE())}')
+                    return
+                for i, (a, p) in enumerate(zip(args, ctx.PLACE())):
+                    if not a.type:
+                        self.errors.append(f'Function {func} must define arg {i} type in order to be called '
+                                           f'with Places: rule {self.name}')
+                    elif a.type not in PLACE_TYPES:
+                        self.errors.append(f'Rule {self.name} calls function {func} with arg {i} PlaceId but '
+                                           f'we saw other usage/definition with {a.type}')
+                    else:
+                        maxgt = PLACE_TYPES.index(a.type)
+                        p = str(p)[1:-1]
+                        t = config_type(p)
+                        if t not in ['str', 'AreaId', 'SpotId']:
+                            self.errors.append(f'Rule {self.name} calls function {func} with arg {i} as {t} '
+                                               f'but we expected {a.type}')
+                        elif p.count('>') != maxgt:
+                            self.errors.append(f'Rule {self.name} calls function {func} with arg {i} as '
+                                               f'invalid {a.type}: {p}')
+                return
             elif ctx.value():
                 t = self._getValueType(ctx.value())
                 if not t:
                     return self.visitChildren(ctx)
             else:
-                self.errors.append(f'Rule {self.name} calls function {func} with no args but args are expected')
+                self.errors.append(f'Rule {self.name} calls function {func} with no/unrecognized args '
+                                   'but args are expected')
                 return self.visitChildren(ctx)
 
             if args[0].type and args[0].type != t:
-                self.errors.append(f'Rule {self.name} calls function {func} with args of type {t} but we saw other usage with type {args[0].type}')
+                self.errors.append(f'Rule {self.name} calls function {func} with args of type {t} '
+                                   f'but we saw other usage/definition with {args[0].type}')
             else:
                 for i, a in enumerate(args):
                     args[i] = a._replace(type=t)

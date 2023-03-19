@@ -122,6 +122,13 @@ helpers:
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
   $can_recall: ^mode == 'drone' and not Anuman
 
+  $open: Infect
+  $overheat: Infect{2}
+  $allegiance1: Infect{2}
+  $allegiance2: Infect{3}
+  $unlock2: Infect{3}
+  $unlock3: Infect{4}
+
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
   $offset: major_glitches and $melee
@@ -138,6 +145,10 @@ helpers:
             };
             ^prev_area = $get_area(^position);
     }
+  $deploy_drone:action(newpos:SpotId): >
+    ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
+  $deploy_drone_and_move:action(dronepos:SpotId, indrapos:SpotId): >
+    ^mode = 'drone'; ^indra = ^indrapos; ^position = ^dronepos;
 
 
 collect:

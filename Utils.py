@@ -43,7 +43,6 @@ def n1(tuples):
         yield a
 
 
-
 def config_type(val: Any) -> str:
     if isinstance(val, str):
         if '::' in val:
@@ -62,6 +61,10 @@ def config_type(val: Any) -> str:
         return 'float'
     return type(val).__name__
 
+
+PLACE_TYPES = ['RegionId', 'AreaId', 'SpotId']
+def getPlaceType(place):
+    return PLACE_TYPES[place.count(">")]
 
 ctx_types = {
     'Id': 'SpotId',

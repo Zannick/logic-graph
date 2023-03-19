@@ -106,6 +106,22 @@ pub fn access_ebih__ebih_east__moving_platform__activate_ride__req(ctx: &Context
     // Infect and $grab and not ^_platform1_moved
     ((ctx.has(Item::Infect) && helper__grab!(ctx)) && !ctx.ebih__ebih_east__ctx__platform1_moved())
 }
+pub fn access_ebih__waterfall__west_door__ex__west_door_left_1__req(ctx: &Context) -> bool {
+    // ^_west_door_open
+    ctx.ebih__waterfall__ctx__west_door_open()
+}
+pub fn access_ebih__waterfall__west_door__ex__west_door_right_1__req(ctx: &Context) -> bool {
+    // ^_west_door_open
+    ctx.ebih__waterfall__ctx__west_door_open()
+}
+pub fn access_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx: &Context) -> bool {
+    // ^_west_door_open
+    ctx.ebih__waterfall__ctx__west_door_open()
+}
+pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx: &Context) -> bool {
+    // ^_west_door_open
+    ctx.ebih__waterfall__ctx__west_door_open()
+}
 pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
@@ -290,6 +306,10 @@ pub fn access_offset(ctx: &Context) -> bool {
     // $offset
     helper__offset!(ctx)
 }
+pub fn access_open(ctx: &Context) -> bool {
+    // $open
+    helper__open!(ctx)
+}
 pub fn access_ranged_damage(ctx: &Context) -> bool {
     // Ranged_Damage
     ctx.has(Item::Ranged_Damage)
@@ -345,6 +365,34 @@ pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context) {
     // ^_combo = true
     ctx.amagi__main_area__ctx__combo = true;
 }
+pub fn action_deploy_drone__amagi__cave_behind_waterfall__top(ctx: &mut Context) {
+    // $deploy_drone(`Amagi > Cave Behind Waterfall > Top`)
+    helper__deploy_drone!(ctx, SpotId::Amagi__Cave_Behind_Waterfall__Top);
+}
+pub fn action_deploy_drone__ebih__waterfall__below_left_switch(ctx: &mut Context) {
+    // $deploy_drone(`Ebih > Waterfall > Below Left Switch`)
+    helper__deploy_drone!(ctx, SpotId::Ebih__Waterfall__Below_Left_Switch);
+}
+pub fn action_deploy_drone_and_move__ebih__drone_room__east_4_ebih__drone_room__tree(
+    ctx: &mut Context,
+) {
+    // $deploy_drone_and_move(`Ebih > Drone Room > East 4`, `Ebih > Drone Room > Tree`)
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Ebih__Drone_Room__East_4,
+        SpotId::Ebih__Drone_Room__Tree
+    );
+}
+pub fn action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__ebih_west__alcove_entrance(
+    ctx: &mut Context,
+) {
+    // $deploy_drone_and_move(`Giguna > Giguna Northeast > Inner Wall`, `Ebih > Ebih West > Alcove Entrance`)
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+        SpotId::Ebih__Ebih_West__Alcove_Entrance
+    );
+}
 pub fn action_ebih__drone_room__pit_left__activate_lift__do(ctx: &mut Context) {
     // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
     ctx.ebih__drone_room__ctx__platform_moved = false;
@@ -379,6 +427,10 @@ pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(ctx: &mut Cont
     ctx.ebih__ebih_east__ctx__platform1_moved = true;
     ctx.set_position(SpotId::Ebih__Ebih_East__Middle_Platform);
 }
+pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Context) {
+    // ^_west_door_open = true
+    ctx.ebih__waterfall__ctx__west_door_open = true;
+}
 pub fn action_energy__max_energy(ctx: &mut Context) {
     // ^energy = $max_energy
     ctx.energy = helper__max_energy!(ctx);
@@ -387,25 +439,9 @@ pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
     ctx.flasks += 1;
 }
-pub fn action_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(
-    ctx: &mut Context,
-) {
-    // ^indra = ^position; ^mode = 'drone'; ^position = `Amagi > Cave Behind Waterfall > Top`
-    ctx.indra = ctx.position();
-    ctx.mode = enums::Mode::Drone;
-    ctx.set_position(SpotId::Amagi__Cave_Behind_Waterfall__Top);
-}
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
     ctx.last = ctx.position();
-}
-pub fn action_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(
-    ctx: &mut Context,
-) {
-    // ^mode = 'drone'; ^indra = `Ebih > Drone Room > Tree`; ^position = `Ebih > Drone Room > East 4`
-    ctx.mode = enums::Mode::Drone;
-    ctx.indra = SpotId::Ebih__Drone_Room__Tree;
-    ctx.set_position(SpotId::Ebih__Drone_Room__East_4);
 }
 pub fn action_mode__drone_indra__position(ctx: &mut Context) {
     // ^mode = 'drone'; ^indra = ^position

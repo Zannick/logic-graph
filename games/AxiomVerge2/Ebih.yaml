@@ -390,6 +390,7 @@ areas:
   start:
     _left_block: false
     _right_block: false
+    _west_door_open: false
   spots:
     - name: East 10
       coord: [24.95, 9.9]
@@ -533,9 +534,78 @@ areas:
         - to: West 9
         - to: Middle West Tree
       exits:
+        - to: Ledge Below Hole
+          req: $grab
+          time: 2
+    - name: Ledge Below Hole
+      coord: [21.65, 8.5]
+      local:
+        - to: West Climb
+      exits:
         - to: Middle West Tree
           req: $grab
-          time: 3
+          time: 1
+        - to: Below Left Switch
+          req: ^mode == 'drone'
+          time: 1.5
+      actions:
+        - name: Throw Drone
+          req: $can_deploy
+          do: $deploy_drone(`Ebih > Waterfall > Below Left Switch`)
+          time: 2
+    - name: Below Left Switch
+      coord: [21.25, 8.4]
+      local:
+        - to: West 8
+          jumps: 1
+        - to: West Door Left
+          jumps: 1
+      exits:
+        - to: Ledge Below Hole
+          req: ^mode == 'drone'
+          time: 1.4
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_west_door_open = true
+    - name: West 8
+      coord: [21.05, 8.1]
+      local:
+        - to: Below Left Switch
+        - to: West Door Left
+      exits:
+        - to: Ebih West > East 8
+          tags: [xshift]
+    - name: West Door Left
+      coord: [21.3, 8.1]
+      local:
+        - to: West 8
+        - to: Below Left Switch
+      exits:
+        - to: West Door
+          req: ^_west_door_open
+          time: 0.5
+    - name: West Door
+      coord: [21.55, 8.1]
+      exits:
+        - to: West Door Left
+          req: ^_west_door_open
+          time: 0.5
+        - to: West Door Right
+          req: ^_west_door_open
+          time: 0.5
+    - name: West Door Right
+      coord: [21.7, 8.1]
+      local:
+        - to: West Main Path
+          jumps: 1  # TODO: double-check this is doable
+        - to: Middle West Tree
+        - to: Ledge Below Hole
+        - to: West Climb
+      exits:
+        - to: West Door
+          req: ^_west_door_open
+          time: 0.5
     - name: Middle West Tree
       coord: [21.75, 8.3]
       local:
@@ -545,6 +615,7 @@ areas:
         - to: West Main Path
           req: $grab
           time: 1
+
     - name: West Main Path
       coord: [21.9, 8]
       local:
@@ -704,35 +775,60 @@ areas:
     - name: East 7
       coord: [20.95, 7]
       local:
-        - to: Upper Save
-          jumps: 1
+        - to: Above Chute
         - to: East 8
           jumps_down: 2
+        - to: Middle Middle
+          jumps_down: 1
       exits:
         - to: Waterfall > West 7
           tags: [xshift]
+    - name: Above Chute
+      coord: [20.8, 7]
+      local:
+        - to: East 7
+        - to: Upper Save
+          jumps: 1
+        - to: Middle Middle
+          jumps_down: 1
+        - to: East 8
+          jumps_down: 2
     - name: Upper Save
       coord: [20.5, 6.8]
       local:
-        - to: East 7
-        - to: East 8
+        - to: Above Chute
+        - to: Medium High Platform
+          jumps: 2
         - to: High Platform
-          jumps: 4
         - to: High Ledge
+        - to: Middle Cliff
         - to: Alcove Entrance
         - to: Above Alcove
       actions:
         - name: Save
           do: $save
           time: 1.3
-    - name: High Platform
-      coord: [20.4, 6.2]
+    - name: Medium High Platform
+      coord: [20.3, 6.5]
       local:
         - to: Upper Save
           jumps_down: 1
-        - to: High Ledge
+        - to: High Platform
+          jumps: 2
         - to: Alcove Entrance
         - to: Above Alcove
+      actions:
+        - name: Throw Drone Long
+          req: $can_deploy
+          do: $deploy_drone_and_move(`Giguna > Giguna Northeast > Inner Wall`, `Ebih > Ebih West > Alcove Entrance`)
+          time: 5.3
+    - name: High Platform
+      coord: [20.4, 6.2]
+      local:
+        - to: Medium High Platform
+        - to: Upper Save
+          jumps_down: 1
+        - to: High Ledge
       exits:
         - to: High Ledge
           req: $grab
@@ -754,6 +850,31 @@ areas:
       coord: [20.95, 8.1]
       local:
         - to: East 7
+        - to: Above Chute
+        - to: Middle Middle
+          jumps: 1
+      exits:
+        - to: Waterfall > West 8
+          tags: [xshift]
+    - name: Middle Middle
+      coord: [20.7, 8.0]
+      local:
+        - to: East 8
+        - to: Middle Cliff
+      exits:
+        - to: East 7
+          req: $grab or $climb
+          time: 3.5
+        - to: Above Chute
+          req: $grab or $climb
+          time: 3.5
+    - name: Middle Cliff
+      coord: [20.1, 8.2]
+      local:
+        - to: Middle Middle
+          jumps: 2
+        - to: Alcove Entrance
+        - to: Above Alcove
 
 - name: Cave
   on_entry: $reset_old_area(^newpos)
@@ -1167,7 +1288,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy
-          do: ^mode = 'drone'; ^indra = `Ebih > Drone Room > Tree`; ^position = `Ebih > Drone Room > East 4`
+          do: $deploy_drone_and_move(`Ebih > Drone Room > East 4`, `Ebih > Drone Room > Tree`)
           time: 1.5
     - name: Left Platform
       coord: [24.3, 4.2]

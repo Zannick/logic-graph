@@ -2,11 +2,10 @@ from collections import defaultdict
 from itertools import chain
 
 from grammar import RulesParser, RulesVisitor
-from Utils import construct_id, BUILTINS
+from Utils import construct_id, getPlaceType, BUILTINS
 
 import inflection
 
-_placeType = ['Region', 'Area', 'Spot']
 
 class RustVisitor(RulesVisitor):
 
@@ -36,9 +35,6 @@ class RustVisitor(RulesVisitor):
             return BUILTINS[func] + '('
         else:
             return f'helper__{construct_id(func[1:])}!(ctx, '
-
-    def _getPlaceType(self, place):
-        return _placeType[place.count(">")]
 
     def visit(self, tree, rettype=None):
         last_rettype = self.rettype
@@ -77,8 +73,8 @@ class RustVisitor(RulesVisitor):
         elif ctx.value():
             args = f'{self.visit(ctx.value())}'
         elif ctx.PLACE():
-            pl = str(ctx.PLACE())[1:-1]
-            args = f'{self._getPlaceType(pl)}Id::{construct_id(pl)}'
+            places = [str(p)[1:-1] for p in ctx.PLACE()]
+            args = ', '.join(f'{getPlaceType(pl)}::{construct_id(pl)}' for pl in places)
         elif ctx.REF():
             args = self._getRefGetter(str(ctx.REF())[1:])
         else:
@@ -192,9 +188,9 @@ class RustVisitor(RulesVisitor):
         places = defaultdict(list)
         for pl in ctx.PLACE():
             pl = str(pl)[1:-1]
-            places[self._getPlaceType(pl)].append(pl)
-        per_type = [f'(match get_{pt.lower()}(ctx.position()) {{'
-                    + ' | '.join(f'{pt}Id::{construct_id(pl)}' for pl in plist)
+            places[getPlaceType(pl)].append(pl)
+        per_type = [f'(match get_{pt.lower()[:-2]}(ctx.position()) {{'
+                    + ' | '.join(f'{pt}::{construct_id(pl)}' for pl in plist)
                     + ' => true, _ => false })'
                     for pt, plist in places.items()
                     ]
@@ -214,7 +210,7 @@ class RustVisitor(RulesVisitor):
             val = self._getRefGetter(str(ctx.REF(1))[1:])
         elif ctx.PLACE():
             pl = str(ctx.PLACE())[1:-1]
-            val = f'{self._getPlaceType(pl)}Id::{construct_id(pl)}'
+            val = f'{getPlaceType(pl)}::{construct_id(pl)}'
         elif ctx.num():
             val = self.visit(ctx.num())
         else:
@@ -249,10 +245,10 @@ class RustVisitor(RulesVisitor):
     
     def visitRefInPlaceName(self, ctx):
         pl = str(ctx.PLACE())[1:-1]
-        ptype = self._getPlaceType(pl)
+        ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        return (f'get_{ptype.lower()}({self._getRefGetter(str(ctx.REF())[1:])}) '
-                f'{eq}= {ptype}Id::{construct_id(pl)}')
+        return (f'get_{ptype[:-2].lower()}({self._getRefGetter(str(ctx.REF())[1:])}) '
+                f'{eq}= {ptype}::{construct_id(pl)}')
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]

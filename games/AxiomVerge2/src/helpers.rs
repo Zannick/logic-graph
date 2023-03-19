@@ -100,6 +100,72 @@ macro_rules! helper__can_recall {
     }};
 }
 
+/// $open (  )
+/// Infect
+#[macro_export]
+macro_rules! helper__open {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Infect)
+    }};
+}
+
+/// $overheat (  )
+/// Infect{2}
+#[macro_export]
+macro_rules! helper__overheat {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.count(Item::Infect) >= 2
+    }};
+}
+
+/// $allegiance1 (  )
+/// Infect{2}
+#[macro_export]
+macro_rules! helper__allegiance1 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.count(Item::Infect) >= 2
+    }};
+}
+
+/// $allegiance2 (  )
+/// Infect{3}
+#[macro_export]
+macro_rules! helper__allegiance2 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.count(Item::Infect) >= 3
+    }};
+}
+
+/// $unlock2 (  )
+/// Infect{3}
+#[macro_export]
+macro_rules! helper__unlock2 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.count(Item::Infect) >= 3
+    }};
+}
+
+/// $unlock3 (  )
+/// Infect{4}
+#[macro_export]
+macro_rules! helper__unlock3 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.count(Item::Infect) >= 4
+    }};
+}
+
 /// $max_energy (  )
 /// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 #[macro_export]
@@ -177,5 +243,31 @@ macro_rules! helper__reset_old_area {
             }
             $ctx.prev_area = get_area($ctx.position());
         }
+    }};
+}
+
+/// $deploy_drone ( TypedVar(name='newpos', type='SpotId') )
+/// ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
+#[macro_export]
+macro_rules! helper__deploy_drone {
+    ($ctx:expr, $newpos:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.mode = enums::Mode::Drone;
+        $ctx.indra = $ctx.position();
+        $ctx.set_position($newpos);
+    }};
+}
+
+/// $deploy_drone_and_move ( TypedVar(name='dronepos', type='SpotId'),TypedVar(name='indrapos', type='SpotId') )
+/// ^mode = 'drone'; ^indra = ^indrapos; ^position = ^dronepos;
+#[macro_export]
+macro_rules! helper__deploy_drone_and_move {
+    ($ctx:expr, $dronepos:expr, $indrapos:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.mode = enums::Mode::Drone;
+        $ctx.indra = $indrapos;
+        $ctx.set_position($dronepos);
     }};
 }

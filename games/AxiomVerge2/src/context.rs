@@ -65,6 +65,7 @@ pub struct Context {
     pub amagi__main_area__ctx__combo: bool,
     pub ebih__waterfall__ctx__left_block: bool,
     pub ebih__waterfall__ctx__right_block: bool,
+    pub ebih__waterfall__ctx__west_door_open: bool,
     pub ebih__ebih_east__ctx__platform1_moved: bool,
     pub ebih__ebih_east__ctx__platform2_moved: bool,
     pub ebih__drone_room__ctx__platform_moved: bool,
@@ -125,6 +126,7 @@ impl Default for Context {
             amagi__main_area__ctx__combo: false,
             ebih__waterfall__ctx__left_block: false,
             ebih__waterfall__ctx__right_block: false,
+            ebih__waterfall__ctx__west_door_open: false,
             ebih__ebih_east__ctx__platform1_moved: false,
             ebih__ebih_east__ctx__platform2_moved: false,
             ebih__drone_room__ctx__platform_moved: false,
@@ -779,6 +781,15 @@ impl Context {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
                     _ => self.ebih__waterfall__ctx__right_block,
+                },
+            },
+        }
+    }
+    pub fn ebih__waterfall__ctx__west_door_open(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__waterfall__ctx__west_door_open,
                 },
             },
         }

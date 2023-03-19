@@ -1,0 +1,8 @@
+name: Giguna Steppes
+short: Giguna
+
+areas:
+- name: Giguna Northeast
+  spots:
+    - name: Inner Wall
+      coord: [18.7, 9.2]

@@ -44,7 +44,7 @@ invoke  : NOT? FUNC '(' ITEM (',' ITEM)* ')'   // must be 1+ items, 0 handled be
         | NOT? FUNC '(' LIT ')'
         | NOT? FUNC '(' INT ')'
         | NOT? FUNC '(' FLOAT ')'
-        | NOT? FUNC '(' PLACE ')'
+        | NOT? FUNC '(' PLACE (',' PLACE)* ')'
         | NOT? FUNC '(' REF ')'
         | NOT? FUNC ('(' ')')? // essentially a call with no arguments
         ;
