@@ -16,6 +16,10 @@ start:
   water: false
 
 
+# TODO: the win condition should be an item Victory,
+# whose requirement is $objective corresponding to the current objective.
+# otherwise it gets weird, thinking we can beat the final boss and escape and then go get
+# the last items? This way simulates requiring the Victory item be last.
 objectives:
   Start: Remote_Drone
   # Greedy search will have a problem with purchases if there are insufficient funds;

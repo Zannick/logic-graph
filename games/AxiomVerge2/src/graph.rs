@@ -3800,8 +3800,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::access_hover(&ctx),
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => rules::access_hook(&ctx),
             ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => rules::access_hook_and_hover(&ctx),
-            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => rules::access_amagi__main_area__carving__ex__secret_outcropping_1___combo_and___grab_or_climb(&ctx),
-            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => rules::access_amagi__main_area__carving__ex__secret_outcropping_2___combo_and_hook(&ctx),
+            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => rules::access_amagi__main_area__carving__ex__secret_outcropping_1__req(&ctx),
+            ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => rules::access_amagi__main_area__carving__ex__secret_outcropping_2__req(&ctx),
             ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => rules::access_liru_and___grab_or_climb(&ctx),
             ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => rules::access_liru(&ctx),
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => true,
@@ -3863,7 +3863,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => rules::access_boomerang(&ctx),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => rules::access_climb(&ctx),
             ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => rules::access_mode__drone(&ctx),
-            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => rules::access_ebih__drone_room__portal_exit__ex__moving_platform_1__Infect_and_not__platform_moved(&ctx),
+            ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => rules::access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(&ctx),
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => true,
             ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => true,
@@ -4035,25 +4035,52 @@ impl world::Accessible for Action {
     type Context = Context;
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::access_can_deploy(&ctx),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_amagi__main_area__carving__key_combo__not__combo(&ctx),
-            ActionId::Amagi__Main_Area__Save_Point__Save => true,
-            ActionId::Ebih__Base_Camp__Save_Point__Save => true,
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::access_can_deploy(&ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::access_ebih__drone_room__pit_left__activate_lift__Infect_and__platform_moved(&ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__Infect_and__platform_moved(&ctx),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::access_ebih__drone_room__portal_exit__activate_platform__Infect_and_not__platform_moved(&ctx),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::access_ebih__ebih_east__dispenser__activate_lift__Infect_and__platform2_moved(&ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::access_ebih__ebih_east__lower_moving_platform__activate_lift__Infect_and_grab_and_not__platform2_moved(&ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::access_ebih__ebih_east__lower_moving_platform__activate_ride__Infect_and_not__platform2_moved(&ctx),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::access_ebih__ebih_east__moving_platform__activate_ride__Infect_and_grab_and_not__platform1_moved(&ctx),
-            ActionId::Ebih__Ebih_West__Mid_Save__Save => true,
-            ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
-            ActionId::Glacier__Revival__Save_Point__Save => true,
-            ActionId::Global__Deploy_Drone => rules::access_not_within_menu_and_can_deploy(&ctx),
-            ActionId::Global__Recall_Drone => rules::access_not_within_menu_and_can_recall(&ctx),
-        }
+        ctx.can_afford(&self.price)
+            && match self.id {
+                ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                    rules::access_can_deploy(&ctx)
+                }
+                ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                    rules::access_amagi__main_area__carving__key_combo__req(&ctx)
+                }
+                ActionId::Amagi__Main_Area__Save_Point__Save => true,
+                ActionId::Ebih__Base_Camp__Save_Point__Save => true,
+                ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                    rules::access_can_deploy(&ctx)
+                }
+                ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                    rules::access_ebih__drone_room__pit_left__activate_lift__req(&ctx)
+                }
+                ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                    rules::access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(
+                        &ctx,
+                    )
+                }
+                ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                    rules::access_ebih__drone_room__portal_exit__activate_platform__req(&ctx)
+                }
+                ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                    rules::access_ebih__ebih_east__dispenser__activate_lift__req(&ctx)
+                }
+                ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
+                    rules::access_ebih__ebih_east__lower_moving_platform__activate_lift__req(&ctx)
+                }
+                ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                    rules::access_ebih__ebih_east__lower_moving_platform__activate_ride__req(&ctx)
+                }
+                ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                    rules::access_ebih__ebih_east__moving_platform__activate_ride__req(&ctx)
+                }
+                ActionId::Ebih__Ebih_West__Mid_Save__Save => true,
+                ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
+                ActionId::Glacier__Revival__Save_Point__Save => true,
+                ActionId::Global__Deploy_Drone => {
+                    rules::access_not_within_menu_and_can_deploy(&ctx)
+                }
+                ActionId::Global__Recall_Drone => {
+                    rules::access_not_within_menu_and_can_recall(&ctx)
+                }
+            }
     }
     fn time(&self) -> i32 {
         self.time
@@ -4071,19 +4098,19 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode__indra_position__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__not__combo(ctx),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
             ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_indra__position_mode__drone_position__amagi__cave_behind_waterfall__top(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__moving_platform__activate_ride__Infect_and_grab_and_not__platform1_moved(ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__Infect_and_not__platform2_moved(ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__Infect_and_grab_and_not__platform2_moved(ctx),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__dispenser__activate_lift__Infect_and__platform2_moved(ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__Infect_and__platform_moved(ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__Infect_and__platform_moved(ctx),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__Infect_and_not__platform_moved(ctx),
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__moving_platform__activate_ride__do(ctx),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx),
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx),
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_mode__drone_indra__ebih__drone_room__tree_position__ebih__drone_room__east_4(ctx),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
         }

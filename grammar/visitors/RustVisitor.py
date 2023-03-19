@@ -219,6 +219,8 @@ class RustVisitor(RulesVisitor):
             val = self.visit(ctx.num())
         else:
             val = self.visit(ctx.str_(), self._getRefEnum(var))
+        if var == 'position':
+            return f'ctx.set_position({val});'
         return f'{self._getRefSetter(var)} = {val};'
 
     def visitAlter(self, ctx):

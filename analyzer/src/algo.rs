@@ -252,7 +252,6 @@ where
                     ctx.elapsed(),
                     heap.len()
                 );
-                println!("{}", ctx.history_preview());
                 println!("Max time to consider is now: {}ms", heap.max_time());
             }
 

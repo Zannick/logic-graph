@@ -600,9 +600,10 @@ class GameLogic(object):
 
     def make_funcid(self, info, prkey:str='pr', extra_fields=None):
         pr = info[prkey]
-        d = self.action_funcs if pr.parser.ruleNames[pr.tree.getRuleIndex()] == 'actions' else self.access_funcs
+        ruletype = pr.parser.ruleNames[pr.tree.getRuleIndex()]
+        d = self.action_funcs if ruletype == 'actions' else self.access_funcs
         if '^_' in str(pr.text):
-            id = construct_id(info['id'].lower(), info['req'])
+            id = construct_id(info['id'].lower(), 'do' if ruletype == 'actions' else 'req')
             assert id not in d, f"trying to generate multiple functions named {id}: {info}"
             d[id] = info
             if extra_fields:
