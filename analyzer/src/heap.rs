@@ -124,7 +124,7 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 
     pub fn clean(&mut self) {
-        print!("Cleaning... {} -> ", self.heap.len());
+        println!("Cleaning... {}", self.heap.len());
         let start = Instant::now();
         let mut theap = BinaryHeap::new();
         self.heap.shrink_to_fit();
@@ -142,7 +142,7 @@ impl<T: Ctx> LimitedHeap<T> {
         }
         self.heap = theap;
         let done = start.elapsed();
-        println!("{}. Done in {:?}.", self.heap.len(), done);
+        println!("... -> {}. Done in {:?}.", self.heap.len(), done);
     }
 
     pub fn extend<I>(&mut self, iter: I)

@@ -234,6 +234,7 @@ where
     println!("Max time to consider is now: {}ms", heap.max_time());
     let mut iters = 0;
     let mut deadends = 0;
+    let mut last_clean = heap.max_time();
 
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
@@ -264,11 +265,9 @@ where
 
             continue;
         }
-        // without penalties or progress, score is about -heap.max_time()
-        // progress goes from 0 to 1,000,000
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
-        let heapsize_adjustment: i32 = (heap.len() / 64).try_into().unwrap();
+        let heapsize_adjustment: i32 = (heap.len() / 32).try_into().unwrap();
         if ctx.score() < heapsize_adjustment - heap.max_time() {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
@@ -277,7 +276,7 @@ where
             );
             break;
         }
-        if heap.len() > 18_000_000 || heap.len() + heap.seen() > 60_000_000 {
+        if heap.len() > 15_000_000 || heap.len() + heap.seen() > 50_000_000 {
             println!(
                 "Too many items in heap! score={} vs adjusted={}",
                 ctx.score(),
@@ -290,8 +289,9 @@ where
             if iters > 10_000_000 && solutions.unique() > 4 {
                 heap.set_max_time(solutions.best());
             }
-            if iters % 1_000_000 == 0 && solutions.unique() > 1 && heap.len() > 4_000_000 {
+            if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
                 heap.clean();
+                last_clean = heap.max_time();
             }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
