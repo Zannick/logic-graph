@@ -61,12 +61,20 @@ where
     E: Exit<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId>,
 {
+    // Try any spot action before any global action
     for ctx in spot_vec {
-        for act in world
-            .get_global_actions()
-            .iter()
-            .chain(world.get_spot_actions(ctx.get().position()))
-        {
+        for act in world.get_spot_actions(ctx.get().position()) {
+            if act.can_access(ctx.get()) {
+                let mut newctx = ctx.clone();
+                newctx.activate(act);
+                if action_unlocked_anything(world, &newctx, act, &spot_vec) {
+                    return Some(newctx);
+                }
+            }
+        }
+    }
+    for ctx in spot_vec {
+        for act in world.get_global_actions() {
             if act.can_access(ctx.get()) {
                 let mut newctx = ctx.clone();
                 newctx.activate(act);
@@ -88,7 +96,7 @@ where
 {
     let (locs, exit) = visitable_locations(world, ctx.get());
     for loc in locs {
-        if ctx.get().todo(loc.id()) {
+        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
             ctx.visit(world, loc);
         }
     }
@@ -97,7 +105,9 @@ where
         if ctx.get().todo(l) {
             let exit = world.get_exit(e);
             let loc = world.get_location(l);
-            ctx.visit_exit(world, loc, exit);
+            if loc.can_access(ctx.get()) && exit.can_access(ctx.get()) {
+                ctx.visit_exit(world, loc, exit);
+            }
         }
     }
 }
@@ -129,14 +139,14 @@ where
             } else {
                 let ctx = spot_vec
                     .into_iter()
-                    .last()
+                    .next()
                     .expect("couldn't reach any spots!");
                 return Err(ctx);
             }
-            if actions > 2 {
+            if actions > 3 {
                 let ctx = spot_vec
                     .into_iter()
-                    .last()
+                    .next()
                     .expect("couldn't reach any spots!");
                 return Err(ctx);
             }

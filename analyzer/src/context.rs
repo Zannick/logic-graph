@@ -80,7 +80,7 @@ where
                 write!(f, "* Take hybrid exit {}, collecting {}", exit, item)
             }
             History::MoveLocal(spot) => write!(f, "  Move to {}", spot),
-            History::Activate(action) => write!(f, "= Do {}", action),
+            History::Activate(action) => write!(f, "! Do {}", action),
         }
     }
 }

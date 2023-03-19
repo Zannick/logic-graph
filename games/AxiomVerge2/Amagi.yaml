@@ -6,6 +6,7 @@ here:
 # TODO: Needs to be routed without Liru to determine accessibility
 areas:
 - name: Main Area
+  on_entry: $reset_old_area(^newpos)
   load:
     _combo: false
   spots:
@@ -237,6 +238,7 @@ areas:
           tags: [flask]
 
 - name: Cave Behind Waterfall
+  on_entry: $reset_old_area(^newpos)
   here:
     water: false
   spots:
@@ -275,6 +277,7 @@ areas:
           tags: [exterior]
 
 - name: Grid 31,19
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
       coord: [31.05, 18.9]
@@ -292,6 +295,7 @@ areas:
           tags: [xshift]
 
 - name: Liru Room
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 19
       coord: [32.05, 18.9]

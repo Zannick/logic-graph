@@ -115,7 +115,7 @@ where
         }
     }
     // The overlap is len() - missing, so if the new count is greater, we found new spots
-    false //new_spots.len() > spot_ctxs.len() - missing
+    new_spots.len() > spot_ctxs.len() - missing
 }
 
 pub fn activate_actions<W, T, L, E>(
@@ -168,16 +168,16 @@ where
         for ctx in spot_ctxs.iter() {
             let has_locs = spot_has_locations(world, ctx.get());
             // somewhat quadratic penalties
-            let spot_penalty = 10 * with_locs * (with_locs - 1) * max_diff
+            let spot_penalty = with_locs * (with_locs - 1) * max_diff
                 / <usize as TryInto<i32>>::try_into(spot_ctxs.len()).unwrap();
             if spot_has_actions(world, ctx) {
                 activate_actions(
                     world,
                     ctx,
                     if !has_locs {
-                        2 * spot_penalty + 1000
+                        6 * spot_penalty + 1000
                     } else {
-                        spot_penalty + 100
+                        3 * spot_penalty + 500
                     },
                     &spot_ctxs,
                     heap,
@@ -213,6 +213,8 @@ where
             );
             heap.set_lenient_max_time(wonctx.elapsed());
             heap.set_lenient_max_time(m.elapsed());
+            heap.push(ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m)));
+
             solutions.insert(wonctx);
             solutions.insert(m);
         }
@@ -221,7 +223,8 @@ where
                 "Found no greedy solution, maximal attempt reached dead-end after {}ms",
                 ctx.elapsed()
             );
-            heap.set_lenient_max_time(ctx.elapsed() * 2);
+            // Push it anyway, maybe it'll find something!
+            heap.push(ctx);
         }
     };
     heap.push(startctx.clone());

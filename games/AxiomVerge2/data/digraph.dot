@@ -617,7 +617,7 @@ digraph AxiomVerge2 {
     Ebih__Drone_Room__West_6 -> Ebih__Boss_Room__East_6;
     Ebih__Drone_Room__West_4 -> Ebih__Boss_Room__East_4;
     Ebih__Drone_Room__Pit_Left -> Ebih__Drone_Room__West_6;
-    Ebih__Drone_Room__Item -> Ebih__Drone_Room__Portal_Exit;
+    Ebih__Drone_Room__Portal -> Ebih__Drone_Room__Portal_Exit;
     Ebih__Drone_Room__Middle_Platform -> Ebih__Drone_Room__Portal_Exit;
     Ebih__Drone_Room__Middle_Platform -> Ebih__Drone_Room__Portal;
     Ebih__Drone_Room__Portal_Exit -> Ebih__Drone_Room__Moving_Platform;

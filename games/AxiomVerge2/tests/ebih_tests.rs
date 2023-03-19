@@ -85,7 +85,7 @@ fn start_Ebih__Drone_Room__East_4_context_mode_drone_indra_Ebih__Drone_Room__Tre
 fn start_Ebih__Drone_Room__West_6_with_Infect__Remote_Drone_can_activate_Ebih__Drone_Room__Moving_Platform__Throw_Drone(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.infect = true;
+    ctx.infect = 1;
     ctx.remote_drone = true;
 
     expect_action_accessible!(
@@ -99,7 +99,7 @@ fn start_Ebih__Drone_Room__West_6_with_Infect__Remote_Drone_can_activate_Ebih__D
 fn start_Ebih__Ebih_East__Corner_with_Infect_can_activate_Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.infect = true;
+    ctx.infect = 1;
 
     expect_action_accessible!(
         &world,
@@ -112,7 +112,7 @@ fn start_Ebih__Ebih_East__Corner_with_Infect_can_activate_Ebih__Ebih_East__Lower
 fn start_Ebih__Ebih_East__West_8_with_Infect_can_activate_Ebih__Ebih_East__Moving_Platform__Activate_Ride(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.infect = true;
+    ctx.infect = 1;
 
     expect_action_accessible!(
         &world,
@@ -124,7 +124,7 @@ fn start_Ebih__Ebih_East__West_8_with_Infect_can_activate_Ebih__Ebih_East__Movin
 #[test]
 fn start_Ebih__Ebih_East__West_8_with_Infect_eventually_reaches_Ebih__Ebih_East__Middle_Platform() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.infect = true;
+    ctx.infect = 1;
 
     expect_eventually_reaches!(
         &world,
@@ -148,7 +148,7 @@ fn start_Ebih__Ebih_East__Middle_Platform_can_reach_Ebih__Ebih_East__East_Ledge(
 fn start_Ebih__Drone_Room__Portal_with_Infect_requires_context_save_Ebih__Ebih_West__Upper_Save_to_reach_Ebih__Drone_Room__Moving_Platform(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.infect = true;
+    ctx.infect = 1;
 
     let mut ctx2 = ctx.clone();
     ctx2.save = SpotId::Ebih__Ebih_West__Upper_Save;

@@ -1,0 +1,19 @@
+name: GreedyTests
+
+all:
+  context:
+    save: Glacier > Revival > Save Point
+  with:
+    - Amashilama
+    - Boomerang
+    - Dear_Ernest
+    - Defeat_Ebih_Alu
+    - Ice_Axe
+    - Infect
+    - Liru
+    - Ledge_Grab
+    - Remote_Drone
+    - Switch_36_11
+    - Switch_40_12
+
+

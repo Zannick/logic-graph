@@ -216,8 +216,9 @@ pub mod testlib {
             if let Some(ctx) = spot_map.get(&spot) {
                 assert!(
                     !$world.get_location($loc_id).can_access(ctx.get()),
-                    "Expected location {} to be inaccessible",
-                    $loc_id
+                    "Expected location {} to be inaccessible:\n{}",
+                    $loc_id,
+                    ctx.history_str()
                 );
             }
         }};

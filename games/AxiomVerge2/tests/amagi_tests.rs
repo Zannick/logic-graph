@@ -17,7 +17,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.ledge_grab = true;
     ctx.boomerang = true;
     ctx.remote_drone = true;
-    ctx.infect = true;
+    ctx.infect = 1;
     ctx.mode = enums::Mode::Indra;
     ctx.save = SpotId::Ebih__Base_Camp__Save_Point;
 

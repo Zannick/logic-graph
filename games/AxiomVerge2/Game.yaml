@@ -85,6 +85,7 @@ warps:
     req: NOT WITHIN `Menu` and ^mode == 'drone'
     to: ^save
     do: ^energy = $max_energy
+    loads: true
   menu:
     time: 1
     req: NOT WITHIN `Menu` and ^flasks > 0
@@ -125,10 +126,13 @@ helpers:
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $reset_old_area:action(newpos:SpotId): >
-    IF (^newpos NOT WITHIN ^prev_area
-        AND ^position NOT WITHIN ^prev_area
+    IF (^position NOT WITHIN ^prev_area
+        AND ^position NOT WITHIN `Menu`
         AND ^newpos NOT WITHIN $get_area(^position)) {
-           $reset_area(^prev_area); ^prev_area = $get_area(^position);
+            IF (^newpos NOT WITHIN ^prev_area) {
+                $reset_area(^prev_area);
+            };
+            ^prev_area = $get_area(^position);
     }
 
 
