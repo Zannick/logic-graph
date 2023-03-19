@@ -135,6 +135,9 @@ where
             .collect();
         vec.sort_by_key(|c| c.elapsed());
         for (i, c) in vec.iter().enumerate() {
+            if c.elapsed() - self.best > self.best / 10 {
+                break;
+            }
             Self::write_one_preview(&mut file, i, c, self.best)?
         }
         Ok(())
@@ -152,11 +155,14 @@ where
         }
         vecs.sort_by_key(|v| v[0].elapsed());
         let mut total = 0;
-        let fastest = vecs[0][0].elapsed();
         // TODO: add a cutoff of some percentage of the fastest?
         for (i, vec) in vecs.iter().enumerate() {
             let mut minor = 0;
-            Self::write_one(&mut file, i, minor, vec.first().unwrap(), fastest)?;
+            let first = vec.first().unwrap();
+            if first.elapsed() - self.best > self.best / 10 {
+                break;
+            }
+            Self::write_one(&mut file, i, minor, first, self.best)?;
             total += 1;
             for (j, similar) in vec.iter().enumerate().skip(1) {
                 if vec[..j]
@@ -167,7 +173,7 @@ where
                 }
                 minor += 1;
                 total += 1;
-                Self::write_one(&mut file, i, minor, similar, fastest)?;
+                Self::write_one(&mut file, i, minor, similar, self.best)?;
             }
         }
         println!(
