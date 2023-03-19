@@ -101,7 +101,7 @@ where
                 "".to_string()
             }
         )?;
-        writeln!(file, "in short:\n{}", ctx.history_preview_actions())?;
+        writeln!(file, "in short:\n{}", ctx.history_summary())?;
         writeln!(file, "in full:\n{}\n\n", ctx.history_str())
     }
 
@@ -123,7 +123,7 @@ where
                 "".to_string()
             }
         )?;
-        writeln!(file, "{}\n\n", ctx.history_preview_actions())
+        writeln!(file, "{}\n\n", ctx.history_summary())
     }
 
     pub fn write_previews(&self) -> io::Result<()> {

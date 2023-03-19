@@ -2,6 +2,7 @@ use crate::context::*;
 use sort_by_derive::SortBy;
 use std::collections::{BinaryHeap, HashMap};
 use std::fmt::Debug;
+use std::time::Instant;
 
 #[derive(Debug, SortBy)]
 struct HeapElement<T: Ctx> {
@@ -124,6 +125,7 @@ impl<T: Ctx> LimitedHeap<T> {
 
     pub fn clean(&mut self) {
         print!("Cleaning... {} -> ", self.heap.len());
+        let start = Instant::now();
         let mut theap = BinaryHeap::new();
         self.heap.shrink_to_fit();
         theap.reserve(1048576);
@@ -139,7 +141,8 @@ impl<T: Ctx> LimitedHeap<T> {
             }
         }
         self.heap = theap;
-        println!("{}. done", self.heap.len());
+        let done = start.elapsed();
+        println!("{}. Done in {:?}.", self.heap.len(), done);
     }
 
     pub fn extend<I>(&mut self, iter: I)

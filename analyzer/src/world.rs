@@ -122,7 +122,7 @@ pub trait World {
     fn are_spots_connected(
         &self,
         sp1: <Self::Exit as Exit>::SpotId,
-        sp1: <Self::Exit as Exit>::SpotId,
+        sp2: <Self::Exit as Exit>::SpotId,
     ) -> bool;
 }
 

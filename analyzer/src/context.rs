@@ -364,16 +364,32 @@ impl<T: Ctx> ContextWrapper<T> {
         vec.join("\n")
     }
 
-    pub fn history_preview_actions(&self) -> String {
+    pub fn history_summary(&self) -> String {
         let mut vec: Vec<String> = self
             .history_rev()
-            .filter_map(|h| match h {
-                History::Get(..) | History::MoveGet(..) | History::Activate(..) => {
-                    Some(h.to_string())
-                }
-                _ => None,
+            .fold(Vec::new(), |mut v, h| {
+                if let Some(lh) = v.last() {
+                    match (*lh, h) {
+                        (
+                            History::Move(..) | History::Warp(..) | History::MoveLocal(..),
+                            History::Move(..) | History::Warp(..) | History::MoveLocal(..),
+                        ) => (),
+                        _ => v.push(h),
+                    }
+                } else {
+                    v.push(h);
+                };
+                v
             })
-            .collect::<Vec<String>>();
+            .into_iter()
+            .map(|h| match h {
+                History::Get(..) | History::MoveGet(..) | History::Activate(..) => h.to_string(),
+                History::Move(e) => format!("  Move... to {}", e),
+                History::Warp(_, s) | History::MoveLocal(s) => {
+                    format!("  Move... to {}", s)
+                }
+            })
+            .collect();
         vec.reverse();
         vec.join("\n")
     }
