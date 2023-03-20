@@ -6,29 +6,29 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 11
-      coord: [30.95, 10.6]
+      coord: [30.95, 10.4]
       local:
         - to: East 12
         - to: Staircase
         - to: Lake Access
-          thru: [30.7, 12]
+          thru: [30.7, 11.8]
       exits:
         - to: Glacier > Grid 31,9-12 > Midair
           tags: [xshift]
     - name: East 12
-      coord: [30.95, 12]
+      coord: [30.95, 11.8]
       local:
         - to: Staircase
         - to: Lake Access
-          thru: [30.7, 12]
+          thru: [30.7, 11.8]
         - to: Bunker Entry
-          thru: [30.7, 12]
+          thru: [30.7, 11.8]
           jumps_down: [0, 1]
       exits:
         - to: Glacier > Grid 31,9-12 > West 12
           tags: [xshift]
     - name: Staircase
-      coord: [30.4, 12.1]
+      coord: [30.4, 11.9]
       local:
         - to: East 12
           jumps: 1
@@ -37,7 +37,7 @@ areas:
         - to: Save Point
         - to: Lake Access
     - name: Save Point
-      coord: [29.5, 12.8]
+      coord: [29.5, 12.6]
       local:
         - to: Staircase
           jumps: 6
@@ -49,7 +49,7 @@ areas:
           do: $save
           time: 1.3
     - name: Bunker Entry
-      coord: [30.2, 12.9]
+      coord: [30.2, 12.7]
       local:
         - to: Staircase
           jumps: 6
@@ -60,7 +60,7 @@ areas:
         - to: Bunker Interior > Entry
           tags: [interior]
     - name: Lake Access
-      coord: [30.95, 12.9]
+      coord: [30.95, 12.7]
       local:
         - to: Bunker Entry
         - to: Staircase
@@ -68,7 +68,7 @@ areas:
         - to: Glacier > Lake Main Entrance > Ebih Access
           tags: [xshift]
     - name: Behind Vehicle
-      coord: [28.8, 12.9]
+      coord: [28.8, 12.7]
       local:
         - to: Building Entry
           jumps: 2
@@ -76,7 +76,7 @@ areas:
           jumps: 1
         - to: Tent Entry
     - name: Building Entry
-      coord: [29, 12.4]  # verify 12.4 vs 12.3?
+      coord: [29, 12.2]  # verify 12.2 vs 12.1?
       local:
         - to: Behind Vehicle
           jumps_down: 1
@@ -88,7 +88,7 @@ areas:
         - to: Building Interior > Entry
           tags: [interior]
     - name: Tent Entry
-      coord: [28.3, 12.9]
+      coord: [28.3, 12.7]
       local:
         - to: Building Entry
         - to: Behind Vehicle
@@ -99,7 +99,7 @@ areas:
           time: 0.5
           tags: [interior, tent]
     - name: West 13
-      coord: [28.05, 12.8]
+      coord: [28.05, 12.6]
       local:
         - to: Tent Entry
       exits:
@@ -110,14 +110,14 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
-      coord: [30.1, 13]
+      coord: [30.1, 12.8]
       local:
         - to: Desk
       exits:
         - to: Base Camp > Bunker Entry
           tags: [exterior]
     - name: Desk
-      coord: [30.5, 13]
+      coord: [30.5, 12.8]
       local:
         - to: Entry
       locations:
@@ -129,7 +129,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
-      coord: [29, 12.4]
+      coord: [29, 12.2]
       local:
         - to: Corner
       locations:
@@ -142,7 +142,7 @@ areas:
         - to: Base Camp > Building Entry
           tags: [exterior]
     - name: Corner
-      coord: [28.5, 12.4]
+      coord: [28.5, 12.2]
       local:
         - to: Entry
       locations:
@@ -155,7 +155,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
-      coord: [28.3, 13]
+      coord: [28.3, 12.8]
       local:
         - to: Desk
       exits:
@@ -163,7 +163,7 @@ areas:
           time: 0.5
           tags: [exterior, tent]
     - name: Desk
-      coord: [28.4, 13]
+      coord: [28.4, 12.8]
       local:
         - to: Entry
       locations:
@@ -175,7 +175,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 13
-      coord: [27.95, 12.8]
+      coord: [27.95, 12.6]
       local:
         - to: East Platform
           jumps: 2
@@ -184,7 +184,7 @@ areas:
         - to: Base Camp > West 13
           tags: [xshift]
     - name: East Platform
-      coord: [27.5, 12.3]
+      coord: [27.5, 12.1]
       local:
         - to: Outcropping
         - to: Crawlspace Opening
@@ -197,7 +197,7 @@ areas:
           req: $grab or $climb
           time: 1.3
     - name: Crawlspace Opening
-      coord: [27.4, 12.2]
+      coord: [27.4, 12.0]
       local:
         - to: Outcropping
           jumps: 1
@@ -217,21 +217,21 @@ areas:
           req: ^mode == 'drone'
           time: 0.8
     - name: Outcropping
-      coord: [27.3, 12]
+      coord: [27.3, 11.8]
       local:
         - to: East Bush
         - to: Crawlspace Opening
         - to: East Platform
         - to: East 13
     - name: East Bush
-      coord: [26.8, 12.1]
+      coord: [26.8, 11.9]
       local:
         - to: Outcropping
           jumps: 3
         - to: West Bush
         - to: Lower Platform
     - name: Lower Platform
-      coord: [26.4, 12.5]
+      coord: [26.4, 12.3]
       local:
         - to: Garage Entry
           jumps_down: 1
@@ -246,27 +246,27 @@ areas:
           req: $grab or $climb
           time: 1.8
     - name: West Bush
-      coord: [26.3, 12.1]
+      coord: [26.3, 11.9]
       local:
         - to: West 12
           jumps: 2
         - to: East Bush
         - to: Lower Platform
     - name: West 12
-      coord: [26.05, 12]
+      coord: [26.05, 11.8]
       local:
         - to: West Bush
       exits:
         - to: Grid 25,10-12 > East 12
           tags: [xshift]
     - name: West 13
-      coord: [26.05, 13]
+      coord: [26.05, 12.8]
       local:
         - to: Lower Platform
           jumps: 3
         - to: Garage Entry
     - name: Garage Entry
-      coord: [27.2, 13]
+      coord: [27.2, 12.8]
       local:
         - to: West 13
         - to: Lower Platform
@@ -280,14 +280,14 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
-      coord: [27.2, 13]
+      coord: [27.2, 12.8]
       local:
         - to: Boxes
       exits:
         - to: By Garage > Garage Entry
           tags: [exterior]
     - name: Boxes
-      coord: [26.8, 13]
+      coord: [26.8, 12.8]
       local:
         - to: Entry
       locations:
@@ -303,7 +303,7 @@ areas:
     _door_open: false
   spots:
     - name: East 12
-      coord: [25.95, 12]
+      coord: [25.95, 11.8]
       local:
         - to: Bush
           jumps: 1
@@ -311,7 +311,7 @@ areas:
         - to: By Garage > West 12
           tags: [xshift]
     - name: Bush
-      coord: [25.6, 11.7]
+      coord: [25.6, 11.5]
       local:
         - to: East 12
         - to: Mid-Ledge
@@ -321,11 +321,11 @@ areas:
           req: $grab
           time: 1.5
     - name: West 12
-      coord: [25.05, 11.9]
+      coord: [25.05, 11.7]
       local:
         - to: Below Bush
     - name: Below Bush
-      coord: [25.4, 11.9]
+      coord: [25.4, 11.7]
       local:
         - to: West 12
         - to: Bush
@@ -335,7 +335,7 @@ areas:
           req: $grab
           time: 0.75
     - name: Mid-Ledge
-      coord: [25.3, 11.3]
+      coord: [25.3, 11.1]
       local:
         - to: West 11
         - to: Door Left
@@ -347,7 +347,7 @@ areas:
           req: $grab
           time: 1.5
     - name: Door Left
-      coord: [25.6, 10.9]
+      coord: [25.6, 10.7]
       local:
         - to: West 11
           jumps: 2
@@ -360,7 +360,7 @@ areas:
           req: ^_door_open
           time: 0.7
     - name: Top Platform
-      coord: [25.4, 10.7]
+      coord: [25.4, 10.5]
       local:
         - to: Bush
           jumps_down: 2
@@ -373,7 +373,7 @@ areas:
           req: $grab
           time: 3.2
     - name: West 11
-      coord: [25.05, 10.9]
+      coord: [25.05, 10.7]
       local:
         - to: Top Platform
           jumps: 2
@@ -383,7 +383,7 @@ areas:
         - to: Waterfall > East 11
           tags: [xshift]
     - name: West 10
-      coord: [25.05, 9.9]
+      coord: [25.05, 9.7]
       local:
         - to: Top Platform
         - to: Door Left
@@ -391,7 +391,7 @@ areas:
         - to: Waterfall > East 10
           tags: [xshift]
     - name: Door
-      coord: [25.8, 10.9]
+      coord: [25.8, 10.7]
       exits:
         - to: Door Left
           req: ^_door_open
@@ -400,14 +400,14 @@ areas:
           req: ^_door_open
           time: 0.5
     - name: East 11
-      coord: [25.95, 10.9]
+      coord: [25.95, 10.7]
       exits:
         - to: Door
           req: ^_door_open
         - to: Grid 26,10-11 > West 11
           tags: [xshift]
     - name: East 10
-      coord: [25.95, 9.9]
+      coord: [25.95, 9.7]
       local:
         - to: Hidden Bush
       locations:
@@ -417,7 +417,7 @@ areas:
           time: 6
           tags: [flask]
     - name: Hidden Bush
-      coord: [25.85, 10.15]
+      coord: [25.85, 9.95]
       local:
         - to: East 10
           jumps: 2
@@ -442,21 +442,21 @@ areas:
     _west_door_open: false
   spots:
     - name: East 10
-      coord: [24.95, 9.9]
+      coord: [24.95, 9.7]
       local: 
         - to: East Ledge
       exits:
         - to: Grid 25,10-12 > West 10
           tags: [xshift]
     - name: East Ledge
-      coord: [24.75, 10.2]
+      coord: [24.75, 10.0]
       local:
         - to: East 10
           jumps: 1
         - to: East 11
         - to: Near East Tree
     - name: East 11
-      coord: [24.95, 10.9]
+      coord: [24.95, 10.7]
       local:
         - to: Near East Tree
           jumps: 3
@@ -465,14 +465,14 @@ areas:
         - to: Grid 25,10-12 > West 11
           tags: [xshift]
     - name: Near East Tree
-      coord: [24.2, 10.4]
+      coord: [24.2, 10.2]
       local:
         - to: East Ledge
         - to: East 11
         - to: Waterfall Right
         - to: Cave Entrance
     - name: Waterfall Right
-      coord: [23.8, 10.8]
+      coord: [23.8, 10.6]
       local:
         - to: Near East Tree
           jumps: 3
@@ -480,19 +480,19 @@ areas:
           jumps: 2
         - to: Alcove Right
     - name: Alcove Right
-      coord: [23.35, 11]
+      coord: [23.35, 10.8]
       local:
         - to: Waterfall Right
           jumps: 1
         - to: Waterfall Center Right  # you can't do this with ledge grab thanks to the enemy
     - name: Waterfall Center Right
-      coord: [23.25, 10.5]
+      coord: [23.25, 10.3]
       local:
         - to: Waterfall Center Left
         - to: Alcove Right
         - to: Waterfall Right
     - name: Waterfall Center Left
-      coord: [22.5, 10.7]
+      coord: [22.5, 10.5]
       local:
         - to: Waterfall Center Right
           jumps: 3
@@ -503,7 +503,7 @@ areas:
         - to: Lower West Tree
           jumps: 4
     - name: Alcove Left
-      coord: [22.55, 11]
+      coord: [22.55, 10.8]
       local:
         - to: Waterfall Center Left
         - to: Under Waterfall
@@ -512,13 +512,13 @@ areas:
           req: $grab
           time: 1.25
     - name: Alcove
-      coord: [23, 10.9]
+      coord: [23, 10.7]
       locations:
         - name: Pedestal
           item: Bronze_Axe
           tags: [standing]
     - name: Under Waterfall
-      coord: [22.25, 11]
+      coord: [22.25, 10.8]
       local:
         - to: Waterfall Left
         - to: Waterfall Center Left
@@ -527,7 +527,7 @@ areas:
           req: $grab
           time: 1.1
     - name: Waterfall Left
-      coord: [22.0, 10.7]
+      coord: [22.0, 10.5]
       local:
         - to: Wall Right
         - to: Under Waterfall
@@ -535,13 +535,13 @@ areas:
         - to: Lower West Tree
           jumps: 3
     - name: Wall Right
-      coord: [21.4, 10.9]
+      coord: [21.4, 10.7]
       local:
         - to: Waterfall Left
           jumps: 3
         - to: Lower West Tree
     - name: Lower West Tree
-      coord: [21.9, 10.1]
+      coord: [21.9, 9.9]
       local:
         - to: West Lower Path
         - to: Wall Right
@@ -555,7 +555,7 @@ areas:
           req: $grab
           time: 1
     - name: West Lower Path
-      coord: [21.7, 9.9]
+      coord: [21.7, 9.7]
       local:
         - to: West 10
         - to: Lower West Tree
@@ -563,7 +563,7 @@ areas:
         - to: Waterfall Left
         - to: Cave Entrance
     - name: West 10
-      coord: [21.05, 9.9]
+      coord: [21.05, 9.7]
       local:
         - to: West Lower Path
       exits:
@@ -571,14 +571,14 @@ areas:
           tags: [xshift]
 
     - name: West 9
-      coord: [21.05, 9]
+      coord: [21.05, 8.8]
       local:
         - to: West Climb
       exits:
         - to: Ebih West > East 9
           tags: [xshift]
     - name: West Climb
-      coord: [21.7, 9]
+      coord: [21.7, 8.8]
       local:
         - to: West 9
         - to: Middle West Tree
@@ -587,7 +587,7 @@ areas:
           req: $grab
           time: 2
     - name: Ledge Below Hole
-      coord: [21.65, 8.5]
+      coord: [21.65, 8.3]
       local:
         - to: West Climb
       exits:
@@ -603,7 +603,7 @@ areas:
           do: $deploy_drone(`Ebih > Waterfall > Below Left Switch`)
           time: 2
     - name: Below Left Switch
-      coord: [21.25, 8.4]
+      coord: [21.25, 8.2]
       local:
         - to: West 8
           jumps: 1
@@ -618,7 +618,7 @@ areas:
           req: $open
           do: ^_west_door_open = true
     - name: West 8
-      coord: [21.05, 8.1]
+      coord: [21.05, 7.9]
       local:
         - to: Below Left Switch
         - to: West Door Left
@@ -626,7 +626,7 @@ areas:
         - to: Ebih West > East 8
           tags: [xshift]
     - name: West Door Left
-      coord: [21.3, 8.1]
+      coord: [21.3, 7.9]
       local:
         - to: West 8
         - to: Below Left Switch
@@ -635,7 +635,7 @@ areas:
           req: ^_west_door_open
           time: 0.5
     - name: West Door
-      coord: [21.55, 8.1]
+      coord: [21.55, 7.9]
       exits:
         - to: West Door Left
           req: ^_west_door_open
@@ -644,7 +644,7 @@ areas:
           req: ^_west_door_open
           time: 0.5
     - name: West Door Right
-      coord: [21.7, 8.1]
+      coord: [21.7, 7.9]
       local:
         - to: West Main Path
           jumps: 1  # TODO: double-check this is doable
@@ -656,7 +656,7 @@ areas:
           req: ^_west_door_open
           time: 0.5
     - name: Middle West Tree
-      coord: [21.75, 8.3]
+      coord: [21.75, 8.1]
       local:
         - to: West Main Path
         - to: West Climb
@@ -666,7 +666,7 @@ areas:
           time: 1
 
     - name: West Main Path
-      coord: [21.9, 8]
+      coord: [21.9, 7.8]
       local:
         - to: Middle West Tree
         - to: West Climb
@@ -674,7 +674,7 @@ areas:
           jumps: 2
         - to: Cave Entrance
     - name: Cave Entrance
-      coord: [22.6, 8.5]
+      coord: [22.6, 8.3]
       local:
         - to: West Main Path
         - to: Center Main Path
@@ -687,20 +687,20 @@ areas:
         - to: Cave > Entry
           tags: [cave]
     - name: Center Main Path
-      coord: [22.9, 8]
+      coord: [22.9, 7.8]
       local:
         - to: West Main Path
         - to: Cave Entrance
         - to: Big Tree
     - name: Big Tree
-      coord: [23.6, 8.1]
+      coord: [23.6, 7.9]
       local:
         - to: Center Main Path
           jumps: 2
         - to: Below Tree
         - to: Platform
     - name: Below Tree
-      coord: [23.8, 8.5]
+      coord: [23.8, 8.3]
       local:
         - to: Big Tree
         - to: Platform
@@ -709,7 +709,7 @@ areas:
           req: $grab
           time: 1.2
     - name: Platform
-      coord: [24.0, 8.5]
+      coord: [24.0, 8.3]
       local:
         - to: Below Tree
         - to: East 8
@@ -719,7 +719,7 @@ areas:
           req: $grab
           time: 1.5
     - name: East 8
-      coord: [24.95, 8]
+      coord: [24.95, 7.8]
       local:
         - to: Platform
       exits:
@@ -727,14 +727,14 @@ areas:
           tags: [xshift]
     # Waterfall Upper
     - name: East 7
-      coord: [25.95, 7]
+      coord: [25.95, 6.8]
       local:
         - to: Top Waterfall
       exits:
         - to: Ebih East > West 7
           tags: [xshift]
     - name: Top Waterfall
-      coord: [23.75, 7.2]
+      coord: [23.75, 7.0]
       local:
         - to: East 7
           jumps: 2
@@ -743,7 +743,7 @@ areas:
         - to: West Main Path
         - to: Center Main Path
     - name: West 7
-      coord: [22.05, 7]
+      coord: [22.05, 6.8]
       local:
         - to: Top Waterfall
       exits:
@@ -754,7 +754,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 10
-      coord: [20.95, 9.9]
+      coord: [20.95, 9.7]
       local:
         - to: Mid Save
           jumps: 2
@@ -762,7 +762,7 @@ areas:
         - to: Waterfall > West 10
           tags: [xshift]
     - name: Mid Save
-      coord: [20.4, 9.7]
+      coord: [20.4, 9.5]
       local:
         - to: East 9
           jumps: 4
@@ -776,7 +776,7 @@ areas:
           do: $save
           time: 1.3
     - name: Alcove Entrance
-      coord: [19.9, 10]
+      coord: [19.9, 9.8]
       local:
         - to: Alcove
         - to: Above Alcove
@@ -788,7 +788,7 @@ areas:
           req: $grab
           time: 1
     - name: Alcove
-      coord: [19.1, 10]
+      coord: [19.1, 9.8]
       local:
         - to: Alcove Entrance
       locations:
@@ -796,12 +796,12 @@ areas:
           item: Heretics_Tablet
           tags: [standing]
     - name: Above Alcove
-      coord: [19.6, 9.6]
+      coord: [19.6, 9.4]
       local:
         - to: Alcove Entrance
         - to: Mid Save
     - name: East 9
-      coord: [20.95, 9]
+      coord: [20.95, 8.8]
       local:
         - to: East 10
           jumps_down: 1
@@ -810,7 +810,7 @@ areas:
         - to: Waterfall > West 9
           tags: [xshift]
     - name: Block Left
-      coord: [20.35, 10.3]
+      coord: [20.35, 10.1]
       local:
         - to: Mid Save
         - to: Alcove Entrance
@@ -822,7 +822,7 @@ areas:
           time: 2.3
     # Upper half
     - name: East 7
-      coord: [20.95, 7]
+      coord: [20.95, 6.8]
       local:
         - to: Above Chute
         - to: East 8
@@ -833,7 +833,7 @@ areas:
         - to: Waterfall > West 7
           tags: [xshift]
     - name: Above Chute
-      coord: [20.8, 7]
+      coord: [20.8, 6.8]
       local:
         - to: East 7
         - to: Upper Save
@@ -843,7 +843,7 @@ areas:
         - to: East 8
           jumps_down: 2
     - name: Upper Save
-      coord: [20.5, 6.8]
+      coord: [20.5, 6.6]
       local:
         - to: Above Chute
         - to: Medium High Platform
@@ -858,7 +858,7 @@ areas:
           do: $save
           time: 1.3
     - name: Medium High Platform
-      coord: [20.3, 6.5]
+      coord: [20.3, 6.3]
       local:
         - to: Upper Save
           jumps_down: 1
@@ -872,7 +872,7 @@ areas:
           do: $deploy_drone_and_move(`Giguna > Giguna Northeast > Inner Wall`, `Ebih > Ebih West > Alcove Entrance`)
           time: 5.3
     - name: High Platform
-      coord: [20.4, 6.2]
+      coord: [20.4, 6.0]
       local:
         - to: Medium High Platform
         - to: Upper Save
@@ -882,21 +882,21 @@ areas:
         - to: High Ledge
           req: $grab
     - name: High Ledge
-      coord: [20.6, 6]
+      coord: [20.6, 5.8]
       local:
         - to: High Platform
         - to: Upper Save
         - to: East 6
           jumps: 2
     - name: East 6
-      coord: [20.95, 5.8]
+      coord: [20.95, 5.6]
       local:
         - to: High Ledge
       exits:
         - to: Grid 21,1-5 > West 6
     # Middle-ish
     - name: East 8
-      coord: [20.95, 8.1]
+      coord: [20.95, 7.9]
       local:
         - to: East 7
         - to: Above Chute
@@ -906,7 +906,7 @@ areas:
         - to: Waterfall > West 8
           tags: [xshift]
     - name: Middle Middle
-      coord: [20.7, 8.0]
+      coord: [20.7, 7.8]
       local:
         - to: East 8
         - to: Middle Cliff
@@ -918,7 +918,7 @@ areas:
           req: $grab or $climb
           time: 3.5
     - name: Middle Cliff
-      coord: [20.1, 8.2]
+      coord: [20.1, 8.0]
       local:
         - to: Middle Middle
           jumps: 2
@@ -945,14 +945,14 @@ areas:
     _platform2_moved: false
   spots:
     - name: West 8
-      coord: [25.05, 8]
+      coord: [25.05, 7.8]
       local:
         - to: Moving Platform
       exits:
         - to: Waterfall > East 8
           tags: [xshift]
     - name: Moving Platform
-      coord: [25.35, 8]
+      coord: [25.35, 7.8]
       local:
         - to: West 8
         - to: Upper Ledge
@@ -967,7 +967,7 @@ areas:
           do: ^_platform1_moved = true; ^position = `Ebih > Ebih East > Middle Platform`
           time: 3.7
     - name: Ledge End
-      coord: [26, 8.2]
+      coord: [26, 8.0]
       local:
         - to: Moving Platform
           jumps: 2
@@ -977,12 +977,12 @@ areas:
         - to: Lower Moving Platform
         - to: Corner
     - name: Lower Moving Platform
-      coord: [26.15, 8.9]
+      coord: [26.15, 8.7]
       local:
         - to: Ledge End
         - to: Corner
         - to: Dispenser
-          thru: [26.8, 8.7]
+          thru: [26.8, 8.5]
         - to: East Ledge
       locations:
         - name: Remote Urn
@@ -999,7 +999,7 @@ areas:
           req: Infect and $grab and not ^_platform2_moved
           do: ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
     - name: Corner
-      coord: [26.4, 9]
+      coord: [26.4, 8.8]
       local:
         - to: Lower Moving Platform
         - to: Ledge End
@@ -1009,10 +1009,10 @@ areas:
           canon: Infect
           tags: [urn]
     - name: Dispenser
-      coord: [26.5, 9]
+      coord: [26.5, 8.8]
       local:
         - to: Lower Moving Platform
-          thru: [26.8, 8.7]
+          thru: [26.8, 8.5]
         - to: Ledge End
       locations:
         - name: Vend
@@ -1025,7 +1025,7 @@ areas:
           do: ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
           time: 5
     - name: East Ledge
-      coord: [27.1, 7.9]
+      coord: [27.1, 7.7]
       local:
         - to: Moving Platform
         - to: Middle Platform
@@ -1039,7 +1039,7 @@ areas:
           item: Under_Siege
           tags: [standing]
     - name: Middle Platform
-      coord: [26.85, 7.5]
+      coord: [26.85, 7.3]
       local:
         - to: Upper Ledge
           jumps: 4
@@ -1049,7 +1049,7 @@ areas:
         - to: Lower Moving Platform
         - to: East Hill
     - name: Upper Ledge
-      coord: [26.4, 7]
+      coord: [26.4, 6.8]
       local:
         - to: West 7
         - to: West 8
@@ -1057,7 +1057,7 @@ areas:
         - to: Ledge End
         - to: Middle Platform
     - name: West 7
-      coord: [26.05, 7]
+      coord: [26.05, 6.8]
       local:
         - to: Upper Ledge
       exits:
@@ -1065,14 +1065,14 @@ areas:
           tags: [xshift]
 
     - name: East Hill
-      coord: [26.5, 7.8]
+      coord: [26.5, 7.6]
       local:
         - to: Middle Platform
           jumps: 2
         - to: East Ledge
         - to: East 9
     - name: East 9
-      coord: [26.95, 8.5]
+      coord: [26.95, 8.3]
       exits:
         - to: East Hill
           req: $grab or $climb
@@ -1082,20 +1082,20 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
-      coord: [21.05, 5.8]
+      coord: [21.05, 5.6]
       local:
         - to: Portal Stand
       exits:
         - to: Ebih West > East 6
           tags: [xshift]
     - name: Portal Stand
-      coord: [21.5, 5.9]
+      coord: [21.5, 5.7]
       local:
         - to: West 6
           jumps: 1
         - to: East 6
     - name: East 6
-      coord: [21.95, 5.9]
+      coord: [21.95, 5.7]
       local:
         - to: Portal Stand
       exits:
@@ -1106,7 +1106,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
-      coord: [22.05, 5.9]
+      coord: [22.05, 5.7]
       local:
         - to: Boss
           jumps: 4
@@ -1116,7 +1116,7 @@ areas:
         - to: Grid 21,1-5 > East 6
           tags: [xshift]
     - name: Boss
-      coord: [22.8, 5.1]
+      coord: [22.8, 4.9]
       local:
         - to: West 6
           jumps_down: 1
@@ -1143,7 +1143,7 @@ areas:
           tags: [flask]
 
     - name: Past Boss
-      coord: [23.1, 5.9]
+      coord: [23.1, 5.7]
       local:
         - to: West 6
         - to: Boss
@@ -1151,7 +1151,7 @@ areas:
         - to: Lower Tree
         - to: Upper Tree
     - name: Lower Tree
-      coord: [23.5, 5.4]
+      coord: [23.5, 5.2]
       local:
         - to: Past Boss
         - to: Boss
@@ -1163,27 +1163,27 @@ areas:
           req: $grab
           time: 1
     - name: Lower Ledge
-      coord: [23.7, 5.2]
+      coord: [23.7, 5.0]
       local:
         - to: Lower Tree
         - to: East 6
         - to: East Ledge
         - to: Upper Tree
     - name: East 6
-      coord: [23.95, 5.2]
+      coord: [23.95, 5.0]
       local:
         - to: Lower Ledge
       exits:
         - to: Drone Room > West 6
     - name: East 4
-      coord: [23.95, 4]
+      coord: [23.95, 3.8]
       local:
         - to: Upper Tree
         - to: High Platform
       exits:
         - to: Drone Room > West 4
     - name: East Ledge
-      coord: [23.8, 4.7]
+      coord: [23.8, 4.5]
       local:
         - to: Upper Tree
           jumps: 1
@@ -1193,7 +1193,7 @@ areas:
           item: Health_Node
           tags: [standing]
     - name: Upper Tree
-      coord: [23.55, 4.5]
+      coord: [23.55, 4.3]
       local:
         - to: High Platform
           jumps: 2
@@ -1204,7 +1204,7 @@ areas:
         - to: East Ledge
         - to: East 4
     - name: High Platform
-      coord: [23.1, 4.3]
+      coord: [23.1, 4.1]
       local:
         - to: West 5
           jumps: 2
@@ -1213,7 +1213,7 @@ areas:
         - to: Upper Tree
         - to: East 4
     - name: West 5
-      coord: [22.05, 4.5]
+      coord: [22.05, 4.3]
       local:
         - to: West 6
           jumps_down: 1
@@ -1227,31 +1227,31 @@ areas:
     _platform_moved: false
   spots:
     - name: West 6
-      coord: [24.05, 5.2]
+      coord: [24.05, 5.0]
       local:
         - to: Pit Left
         - to: Middle Platform
         - to: Left Platform
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
         - to: Portal Exit
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
       exits:
         - to: Boss Room > East 6
     - name: West 4
-      coord: [24.05, 4]
+      coord: [24.05, 3.8]
       local:
         - to: Left Platform
         - to: Middle Platform
           jumps_down: 1
         - to: West 6
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
           jumps_down: [1, 0]
         - to: Pit Left
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
       exits:
         - to: Boss Room > East 4
     - name: Pit Left
-      coord: [24.2, 5.6]
+      coord: [24.2, 5.4]
       local:
         - to: Portal
         - to: West 6
@@ -1270,7 +1270,7 @@ areas:
           do: ^_platform_moved = false; ^position = `Ebih > Drone Room > West 6`
           time: 1.4
     - name: Portal
-      coord: [24.5, 5.8]
+      coord: [24.5, 5.6]
       local:
         - to: Pit Left
           jumps: 2
@@ -1281,7 +1281,7 @@ areas:
           req: ^mode == 'drone'
           time: 300
     - name: Item
-      coord: [24.7, 5.9]
+      coord: [24.7, 5.7]
       local:
         - to: Portal
           jumps: 1
@@ -1292,7 +1292,7 @@ areas:
           canon: Remote_Drone
           tags: [urn]
     - name: Middle Platform
-      coord: [24.4, 5.3]
+      coord: [24.4, 5.1]
       local:
         - to: West 6
           jumps: 1
@@ -1318,13 +1318,13 @@ areas:
           item_time: 5.5
           tags: [urn]
     - name: Portal Exit
-      coord: [24.5, 4.65]
+      coord: [24.5, 4.45]
       local:
         - to: West 6
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
         - to: Left Platform
         - to: Middle Platform
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
         - to: Tree
         - to: Moving Platform
       actions:
@@ -1344,7 +1344,7 @@ areas:
         # It might be possible to get to the East 4 spot as drone with mist float
         # TODO: Can Indra-mist fit in drone spaces? Can drone-mist?
     - name: Moving Platform
-      coord: [24.5, 4.2]
+      coord: [24.5, 4.0]
       local:
         - to: Left Platform
         - to: Portal Exit
@@ -1357,26 +1357,26 @@ areas:
           do: $deploy_drone_and_move(`Ebih > Drone Room > East 4`, `Ebih > Drone Room > Tree`)
           time: 1.5
     - name: Left Platform
-      coord: [24.3, 4.2]
+      coord: [24.3, 4.0]
       local:
         - to: West 4
           jumps: 1
         - to: Pit Left
           jumps_down: 1
         - to: West 6
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
           jumps_down: [1, 0]
         - to: Middle Platform
-          thru: [24.25, 4.9]
+          thru: [24.25, 4.7]
           jumps_down: [1, 0]
     - name: Tree
-      coord: [24.7, 4.8]
+      coord: [24.7, 4.6]
       local:
         - to: Portal Exit
           jumps: 1
         - to: Moving Platform
     - name: East 4
-      coord: [24.95, 4]
+      coord: [24.95, 3.8]
       local:
         - to: Moving Platform
         - to: Portal Exit
@@ -1390,7 +1390,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 4
-      coord: [25.05, 4]
+      coord: [25.05, 3.8]
       exits:
         - to: Pit
           req: ^mode == 'drone'
@@ -1399,7 +1399,7 @@ areas:
           req: ^mode == 'drone'
           tags: [xshift]
     - name: Pit
-      coord: [25.3, 5.9]
+      coord: [25.3, 5.7]
       locations:
         - name: Item
           item: Flask
@@ -1409,12 +1409,12 @@ areas:
 - name: Grid 26,10-11
   spots:
     - name: West 11
-      coord: [26.05, 10.9]
+      coord: [26.05, 10.7]
       local:
         - to: Middle Bottom
         - to: Middle Platform
     - name: Middle Bottom
-      coord: [26.4, 10.8]
+      coord: [26.4, 10.6]
       local:
         - to: West 11
         - to: Under Ledge
@@ -1423,7 +1423,7 @@ areas:
         - to: Middle Platform
           req: $hover
     - name: Under Ledge
-      coord: [26.6, 10.8]
+      coord: [26.6, 10.6]
       local:
         - to: Middle Bottom
         - to: Ledge
@@ -1434,7 +1434,7 @@ areas:
           req: $hook
           time: 0.8
     - name: Ledge
-      coord: [26.7, 10.6]
+      coord: [26.7, 10.4]
       local:
         - to: Middle Platform
         - to: Middle Bottom
@@ -1445,7 +1445,7 @@ areas:
           item: Terminal_Breakthrough_1
           tags: [standing]
     - name: Middle Platform
-      coord: [26.4, 10.6]
+      coord: [26.4, 10.4]
       local:
         - to: West 11
         - to: Upper Platform
@@ -1456,7 +1456,7 @@ areas:
           req: $grab
           time: 2.8
     - name: Upper Platform
-      coord: [26.45, 10.3]
+      coord: [26.45, 10.1]
       local:
         - to: West 10
         - to: Cliff
@@ -1470,20 +1470,20 @@ areas:
           req: $grab
           time: 1.15
     - name: West 10
-      coord: [26.05, 9.9]
+      coord: [26.05, 9.7]
       local:
         - to: Upper Platform
         - to: West 11
-          thru: [26.2, 9.9]
+          thru: [26.2, 9.7]
       exits:
         - to: Grid 25,10-12 > East 10
           tags: [xshift]
     - name: Cliff
-      coord: [26.6, 10]
+      coord: [26.6, 9.8]
       local:
         - to: Upper Platform
         - to: East 10
     - name: East 10
-      coord: [26.95, 10]
+      coord: [26.95, 9.8]
       local:
         - to: East 10
