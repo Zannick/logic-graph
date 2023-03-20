@@ -32,7 +32,6 @@ pub enum Item {
     Infection_Range,
     Infection_Speed,
     Ledge_Grab,
-    Liru,
     Melee_Charge,
     Melee_Damage,
     Melee_Speed,
@@ -50,6 +49,7 @@ pub enum Item {
     Switch_40_12,
     Terminal_Breakthrough_1,
     Under_Siege,
+    Underwater_Movement,
     Wall_Climb,
 }
 impl fmt::Display for Item {
@@ -80,7 +80,6 @@ impl fmt::Display for Item {
             Item::Infection_Range => write!(f, "{}", "Infection_Range"),
             Item::Infection_Speed => write!(f, "{}", "Infection_Speed"),
             Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
-            Item::Liru => write!(f, "{}", "Liru"),
             Item::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             Item::Melee_Damage => write!(f, "{}", "Melee_Damage"),
             Item::Melee_Speed => write!(f, "{}", "Melee_Speed"),
@@ -98,6 +97,7 @@ impl fmt::Display for Item {
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
             Item::Terminal_Breakthrough_1 => write!(f, "{}", "Terminal_Breakthrough_1"),
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
+            Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
         }
     }
@@ -132,7 +132,6 @@ impl std::str::FromStr for Item {
             "Infection_Range" => Ok(Item::Infection_Range),
             "Infection_Speed" => Ok(Item::Infection_Speed),
             "Ledge_Grab" => Ok(Item::Ledge_Grab),
-            "Liru" => Ok(Item::Liru),
             "Melee_Charge" => Ok(Item::Melee_Charge),
             "Melee_Damage" => Ok(Item::Melee_Damage),
             "Melee_Speed" => Ok(Item::Melee_Speed),
@@ -150,6 +149,7 @@ impl std::str::FromStr for Item {
             "Switch_40_12" => Ok(Item::Switch_40_12),
             "Terminal_Breakthrough_1" => Ok(Item::Terminal_Breakthrough_1),
             "Under_Siege" => Ok(Item::Under_Siege),
+            "Underwater_Movement" => Ok(Item::Underwater_Movement),
             "Wall_Climb" => Ok(Item::Wall_Climb),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }

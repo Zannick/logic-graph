@@ -19,7 +19,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.defeat_ebih_alu = true;
     ctx.ice_axe = true;
     ctx.infect = 1;
-    ctx.liru = true;
+    ctx.underwater_movement = true;
     ctx.ledge_grab = true;
     ctx.remote_drone = true;
     ctx.switch_36_11 = true;

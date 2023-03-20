@@ -185,9 +185,9 @@ pub fn access_grab_or_climb_or_hook(ctx: &Context) -> bool {
     // $grab or $climb or $hook
     ((helper__grab!(ctx) || helper__climb!(ctx)) || helper__hook!(ctx))
 }
-pub fn access_grab_or_liru(ctx: &Context) -> bool {
-    // $grab or Liru
-    (helper__grab!(ctx) || ctx.has(Item::Liru))
+pub fn access_grab_or_underwater_movement(ctx: &Context) -> bool {
+    // $grab or Underwater_Movement
+    (helper__grab!(ctx) || ctx.has(Item::Underwater_Movement))
 }
 pub fn access_health_upgrade(ctx: &Context) -> bool {
     // Health_Upgrade
@@ -213,13 +213,13 @@ pub fn access_hook_and_hover(ctx: &Context) -> bool {
     // $hook and $hover
     (helper__hook!(ctx) && helper__hover!(ctx))
 }
-pub fn access_hook_and_hover_and_liru(ctx: &Context) -> bool {
-    // $hook and $hover and Liru
-    ((helper__hook!(ctx) && helper__hover!(ctx)) && ctx.has(Item::Liru))
+pub fn access_hook_and_hover_and_underwater_movement(ctx: &Context) -> bool {
+    // $hook and $hover and Underwater_Movement
+    ((helper__hook!(ctx) && helper__hover!(ctx)) && ctx.has(Item::Underwater_Movement))
 }
-pub fn access_hook_and_liru(ctx: &Context) -> bool {
-    // $hook and Liru
-    (helper__hook!(ctx) && ctx.has(Item::Liru))
+pub fn access_hook_and_underwater_movement(ctx: &Context) -> bool {
+    // $hook and Underwater_Movement
+    (helper__hook!(ctx) && ctx.has(Item::Underwater_Movement))
 }
 pub fn access_hover(ctx: &Context) -> bool {
     // $hover
@@ -256,18 +256,6 @@ pub fn access_infection_range__2(ctx: &Context) -> bool {
 pub fn access_infection_speed(ctx: &Context) -> bool {
     // Infection_Speed
     ctx.has(Item::Infection_Speed)
-}
-pub fn access_liru(ctx: &Context) -> bool {
-    // Liru
-    ctx.has(Item::Liru)
-}
-pub fn access_liru_and___grab_or_climb(ctx: &Context) -> bool {
-    // Liru and ($grab or $climb)
-    (ctx.has(Item::Liru) && (helper__grab!(ctx) || helper__climb!(ctx)))
-}
-pub fn access_liru_and_hook(ctx: &Context) -> bool {
-    // Liru and $hook
-    (ctx.has(Item::Liru) && helper__hook!(ctx))
 }
 pub fn access_melee_damage(ctx: &Context) -> bool {
     // Melee_Damage
@@ -385,9 +373,12 @@ pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
-pub fn access_remote_drone_and_dear_ernest_and_liru_and_flask__4(ctx: &Context) -> bool {
-    // Remote_Drone and Dear_Ernest and Liru and Flask{4}
-    (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Dear_Ernest)) && ctx.has(Item::Liru))
+pub fn access_remote_drone_and_dear_ernest_and_underwater_movement_and_flask__4(
+    ctx: &Context,
+) -> bool {
+    // Remote_Drone and Dear_Ernest and Underwater_Movement and Flask{4}
+    (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Dear_Ernest))
+        && ctx.has(Item::Underwater_Movement))
         && ctx.count(Item::Flask) >= 4)
 }
 pub fn access_station_power(ctx: &Context) -> bool {
@@ -401,6 +392,18 @@ pub fn access_switch_36_11(ctx: &Context) -> bool {
 pub fn access_switch_40_12(ctx: &Context) -> bool {
     // Switch_40_12
     ctx.has(Item::Switch_40_12)
+}
+pub fn access_underwater_movement(ctx: &Context) -> bool {
+    // Underwater_Movement
+    ctx.has(Item::Underwater_Movement)
+}
+pub fn access_underwater_movement_and___grab_or_climb(ctx: &Context) -> bool {
+    // Underwater_Movement and ($grab or $climb)
+    (ctx.has(Item::Underwater_Movement) && (helper__grab!(ctx) || helper__climb!(ctx)))
+}
+pub fn access_underwater_movement_and_hook(ctx: &Context) -> bool {
+    // Underwater_Movement and $hook
+    (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx))
 }
 pub fn access_within_antarctica(ctx: &Context) -> bool {
     // WITHIN `Antarctica`

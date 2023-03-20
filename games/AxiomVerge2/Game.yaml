@@ -25,7 +25,7 @@ objectives:
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: Remote_Drone and Dear_Ernest and Liru and Flask{4}
+  Progress%: Remote_Drone and Dear_Ernest and Underwater_Movement and Flask{4}
 
 movements:
   default:  # the slowest movement is in water
@@ -43,7 +43,7 @@ movements:
     req: not ^water
   water:
     x: .285
-    req: Liru
+    req: Underwater_Movement
   # TODO: mist movement costs 30 energy/s
   mist_upgraded:
     req: Mist_Upgrade

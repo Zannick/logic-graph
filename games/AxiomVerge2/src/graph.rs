@@ -4304,24 +4304,24 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => true,
             ExitId::Amagi__Grid_31_19__East__ex__Liru_Room__West_19_1 => true,
             ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1 => true,
-            ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::access_hook_and_hover_and_liru(&ctx),
-            ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::access_hook_and_liru(&ctx),
+            ExitId::Amagi__Liru_Room__Platform_4_Left__ex__West_20_1 => rules::access_hook_and_hover_and_underwater_movement(&ctx),
+            ExitId::Amagi__Liru_Room__Platform_4_Right__ex__East_Passage_1 => rules::access_hook_and_underwater_movement(&ctx),
             ExitId::Amagi__Liru_Room__West_19__ex__Grid_31_19__East_1 => true,
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Left_1 => rules::access_hover(&ctx),
             ExitId::Amagi__Liru_Room__West_20__ex__Platform_4_Right_1 => rules::access_hook(&ctx),
             ExitId::Amagi__Liru_Room__West_20__ex__Shrine_1 => rules::access_hook_and_hover(&ctx),
             ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => rules::access_amagi__main_area__carving__ex__secret_outcropping_1__req(&ctx),
             ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_2 => rules::access_amagi__main_area__carving__ex__secret_outcropping_2__req(&ctx),
-            ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => rules::access_liru_and___grab_or_climb(&ctx),
-            ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => rules::access_liru(&ctx),
+            ExitId::Amagi__Main_Area__Catwalk_Center__ex__East_Ledge_1 => rules::access_underwater_movement_and___grab_or_climb(&ctx),
+            ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => rules::access_underwater_movement(&ctx),
             ExitId::Amagi__Main_Area__East_15__ex__Glacier__Lake_Main_Entrance__Lake_Access_1 => true,
             ExitId::Amagi__Main_Area__East_19__ex__Grid_31_19__West_1 => true,
             ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => rules::access_grab_or_climb_or_hook(&ctx),
             ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => true,
             ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => true,
-            ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::access_grab_or_liru(&ctx),
-            ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::access_liru_and___grab_or_climb(&ctx),
-            ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::access_liru_and_hook(&ctx),
+            ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => rules::access_grab_or_underwater_movement(&ctx),
+            ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => rules::access_underwater_movement_and___grab_or_climb(&ctx),
+            ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => rules::access_underwater_movement_and_hook(&ctx),
             ExitId::Antarctica__Building_1E__Connector__ex__Building_1W__Connector_1 => true,
             ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => true,
             ExitId::Antarctica__Building_1W__Connector__ex__Building_1E__Connector_1 => true,
@@ -5060,7 +5060,7 @@ impl world::World for World {
         match self.objective {
             Objective::Start => rules::access_remote_drone(ctx),
             Objective::Progress => {
-                rules::access_remote_drone_and_dear_ernest_and_liru_and_flask__4(ctx)
+                rules::access_remote_drone_and_dear_ernest_and_underwater_movement_and_flask__4(ctx)
             }
         }
     }
@@ -5426,7 +5426,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Amagi__Liru_Room__Shrine__Item => Location {
             id: LocationId::Amagi__Liru_Room__Shrine__Item,
             canonical: CanonId::None,
-            item: Item::Liru,
+            item: Item::Underwater_Movement,
             price: Currency::Free,
             time: 5500,
             exit_id: None,

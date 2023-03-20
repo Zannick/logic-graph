@@ -3,7 +3,7 @@ short: Amagi
 here:
   water: true
 
-# TODO: Needs to be routed without Liru to determine accessibility
+# TODO: Needs to be routed without Underwater_Movement to determine accessibility
 areas:
 - name: Main Area
   on_entry: $reset_old_area(^newpos)
@@ -35,7 +35,7 @@ areas:
         - to: Cliff
       exits:
         - to: Water's Edge
-          req: $grab or Liru
+          req: $grab or Underwater_Movement
     - name: Cliff
       coord: [28.45, 15.4]
       local:
@@ -67,10 +67,10 @@ areas:
         - to: West Shelf
       exits:
         - to: Carving
-          req: Liru and ($grab or $climb)
+          req: Underwater_Movement and ($grab or $climb)
           time: 2.4
         - to: Carving
-          req: Liru and $hook
+          req: Underwater_Movement and $hook
           time: 2.3
     - name: Platform 2
       coord: [28.05, 16.2]
@@ -155,10 +155,10 @@ areas:
         - to: Wall Stuck Spot
       exits:
         - to: East Ledge
-          req: Liru and ($grab or $climb)
+          req: Underwater_Movement and ($grab or $climb)
           time: 2
-        - to: Platform 3  # simulate the liru movement
-          req: Liru
+        - to: Platform 3  # simulate the Liru movement
+          req: Underwater_Movement
           time: 1.4  
     - name: Catwalk Broken Part
       coord: [29, 17.2]
@@ -384,7 +384,7 @@ areas:
         - to: Platform 4 Right
       exits:
         - to: West 20
-          req: $hook and $hover and Liru
+          req: $hook and $hover and Underwater_Movement
     - name: Platform 4 Right
       coord: [32.75, 20.4]
       local:
@@ -395,7 +395,7 @@ areas:
         - to: Bottom
       exits:
         - to: East Passage
-          req: $hook and Liru
+          req: $hook and Underwater_Movement
     - name: Bottom
       coord: [33, 20.8]
       local:
@@ -410,7 +410,7 @@ areas:
         - to: Bottom
       locations:
         - name: Item
-          item: Liru
+          item: Underwater_Movement
           tags: [urn]
     - name: West 20
       coord: [32.05, 20.0]

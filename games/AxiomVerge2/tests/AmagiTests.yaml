@@ -19,7 +19,7 @@ tests:
   - start: Amagi > Main Area > West Side
     requires:
       with:
-        - Liru
+        - Underwater_Movement
       to_activate: Amagi > Main Area > Carving > Key Combo
 
   - start: Amagi > Main Area > Carving
@@ -30,11 +30,11 @@ tests:
   - context:
       mode: drone
       indra: Amagi > Main Area > East 19
-    can_obtain: Liru
+    can_obtain: Underwater_Movement
 
   - start: Amagi > Main Area > Save Point
     with:
-      - Liru
+      - Underwater_Movement
     context:
       save: Amagi > Main Area > Save Point
     can_reach: Ebih > Base Camp > Save Point

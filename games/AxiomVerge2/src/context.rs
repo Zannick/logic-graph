@@ -92,7 +92,6 @@ pub struct Context {
     pub infection_range: i8,
     pub infection_speed: bool,
     pub ledge_grab: bool,
-    pub liru: bool,
     pub melee_damage: i8,
     pub melee_speed: i8,
     pub mist_upgrade: bool,
@@ -105,6 +104,7 @@ pub struct Context {
     pub station_power: bool,
     pub switch_36_11: bool,
     pub switch_40_12: bool,
+    pub underwater_movement: bool,
     pub wall_climb: bool,
     // other
     pub status: EnumMap<LocationId, Status>,
@@ -155,7 +155,6 @@ impl Default for Context {
             infection_range: Default::default(),
             infection_speed: Default::default(),
             ledge_grab: Default::default(),
-            liru: Default::default(),
             melee_damage: Default::default(),
             melee_speed: Default::default(),
             mist_upgrade: Default::default(),
@@ -168,6 +167,7 @@ impl Default for Context {
             station_power: Default::default(),
             switch_36_11: Default::default(),
             switch_40_12: Default::default(),
+            underwater_movement: Default::default(),
             wall_climb: Default::default(),
             // other
             status: Default::default(),
@@ -202,7 +202,6 @@ impl context::Ctx for Context {
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.infection_speed,
             Item::Ledge_Grab => self.ledge_grab,
-            Item::Liru => self.liru,
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
             Item::Mist_Upgrade => self.mist_upgrade,
@@ -215,6 +214,7 @@ impl context::Ctx for Context {
             Item::Station_Power => self.station_power,
             Item::Switch_36_11 => self.switch_36_11,
             Item::Switch_40_12 => self.switch_40_12,
+            Item::Underwater_Movement => self.underwater_movement,
             Item::Wall_Climb => self.wall_climb,
             _ => false,
         }
@@ -237,7 +237,6 @@ impl context::Ctx for Context {
             Item::Infection_Range => self.infection_range.into(),
             Item::Infection_Speed => self.infection_speed.into(),
             Item::Ledge_Grab => self.ledge_grab.into(),
-            Item::Liru => self.liru.into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
             Item::Mist_Upgrade => self.mist_upgrade.into(),
@@ -250,6 +249,7 @@ impl context::Ctx for Context {
             Item::Station_Power => self.station_power.into(),
             Item::Switch_36_11 => self.switch_36_11.into(),
             Item::Switch_40_12 => self.switch_40_12.into(),
+            Item::Underwater_Movement => self.underwater_movement.into(),
             Item::Wall_Climb => self.wall_climb.into(),
             _ => 0,
         }
@@ -307,9 +307,6 @@ impl context::Ctx for Context {
             Item::Ledge_Grab => {
                 self.ledge_grab = true;
             }
-            Item::Liru => {
-                self.liru = true;
-            }
             Item::Melee_Damage => {
                 self.melee_damage += 1;
             }
@@ -345,6 +342,9 @@ impl context::Ctx for Context {
             }
             Item::Switch_40_12 => {
                 self.switch_40_12 = true;
+            }
+            Item::Underwater_Movement => {
+                self.underwater_movement = true;
             }
             Item::Wall_Climb => {
                 self.wall_climb = true;

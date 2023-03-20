@@ -58,12 +58,12 @@ fn can_reach_Amagi__Main_Area__West_Side() {
     );
 }
 #[test]
-fn start_Amagi__Main_Area__West_Side_requires_with_Liru_to_activate_Amagi__Main_Area__Carving__Key_Combo(
+fn start_Amagi__Main_Area__West_Side_requires_with_Underwater_Movement_to_activate_Amagi__Main_Area__Carving__Key_Combo(
 ) {
     let (mut world, mut ctx) = shared_setup();
 
     let mut ctx2 = ctx.clone();
-    ctx2.liru = true;
+    ctx2.underwater_movement = true;
 
     expect_action_inaccessible!(
         &world,
@@ -92,18 +92,23 @@ fn start_Amagi__Main_Area__Carving_context_amagi__main_area__ctx__combo_True_can
     );
 }
 #[test]
-fn context_mode_drone_indra_Amagi__Main_Area__East_19_can_obtain_Liru() {
+fn context_mode_drone_indra_Amagi__Main_Area__East_19_can_obtain_Underwater_Movement() {
     let (mut world, mut ctx) = shared_setup();
     ctx.mode = enums::Mode::Drone;
     ctx.indra = SpotId::Amagi__Main_Area__East_19;
 
-    expect_obtainable!(&world, ctx, SpotId::Ebih__Base_Camp__Save_Point, Item::Liru);
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Ebih__Base_Camp__Save_Point,
+        Item::Underwater_Movement
+    );
 }
 #[test]
-fn start_Amagi__Main_Area__Save_Point_with_Liru_context_save_Amagi__Main_Area__Save_Point_can_reach_Ebih__Base_Camp__Save_Point(
+fn start_Amagi__Main_Area__Save_Point_with_Underwater_Movement_context_save_Amagi__Main_Area__Save_Point_can_reach_Ebih__Base_Camp__Save_Point(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.liru = true;
+    ctx.underwater_movement = true;
     ctx.save = SpotId::Amagi__Main_Area__Save_Point;
 
     expect_any_route!(

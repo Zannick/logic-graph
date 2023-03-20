@@ -23,7 +23,7 @@ fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
         Movement::Default => true,
         Movement::General => rules::access_not_water(ctx),
         Movement::MistUpgraded => rules::access_mist_upgrade(ctx),
-        Movement::Water => rules::access_liru(ctx),
+        Movement::Water => rules::access_underwater_movement(ctx),
     }
 }
 
