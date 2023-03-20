@@ -100,6 +100,17 @@ macro_rules! helper__can_recall {
     }};
 }
 
+/// $shockwave (  )
+/// ^mode != 'drone' and Shockwave
+#[macro_export]
+macro_rules! helper__shockwave {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.mode() != enums::Mode::Drone && $ctx.has(Item::Shockwave))
+    }};
+}
+
 /// $open (  )
 /// Infect
 #[macro_export]

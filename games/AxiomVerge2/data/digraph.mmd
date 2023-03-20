@@ -55,7 +55,51 @@ subgraph Amagi
         Amagi__Liru_Room__Hidden_Exit(Hidden Exit);
     end
     subgraph Amagi__West_Lake[West Lake]
-        Amagi__West_Lake__Nobody(Nobody);
+        Amagi__West_Lake__East_15(East 15);
+        Amagi__West_Lake__East_Shore(East Shore);
+        Amagi__West_Lake__East_Bank(East Bank);
+        Amagi__West_Lake__Northeast_Platform(Northeast Platform);
+        Amagi__West_Lake__Northwest_Platform(Northwest Platform);
+        Amagi__West_Lake__Upper_Center_Platform(Upper Center Platform);
+        Amagi__West_Lake__East_Platform(East Platform);
+        Amagi__West_Lake__East_18(East 18);
+        Amagi__West_Lake__Pillar(Pillar);
+        Amagi__West_Lake__Pillar_Platform(Pillar Platform);
+        Amagi__West_Lake__East_19(East 19);
+        Amagi__West_Lake__Somewhat_Central_Platform(Somewhat Central Platform);
+        Amagi__West_Lake__West_Platform(West Platform);
+        Amagi__West_Lake__Cavern_Front_Teeth(Cavern Front Teeth);
+        Amagi__West_Lake__Cavern_Back_Teeth(Cavern Back Teeth);
+        Amagi__West_Lake__Cavern_Jaw(Cavern Jaw);
+        Amagi__West_Lake__Cavern_Neck(Cavern Neck);
+        Amagi__West_Lake__Cavern_Chin(Cavern Chin);
+        Amagi__West_Lake__Cavern_Refill_Station(Cavern Refill Station);
+        Amagi__West_Lake__Cavern_Tear_Duct(Cavern Tear Duct);
+        Amagi__West_Lake__Cavern_Eye(Cavern Eye);
+        Amagi__West_Lake__Cavern_Front_Pillar(Cavern Front Pillar);
+        Amagi__West_Lake__Cavern_Middle_Pillar(Cavern Middle Pillar);
+        Amagi__West_Lake__Cavern_Rear_Pillar(Cavern Rear Pillar);
+        Amagi__West_Lake__Cavern_Lower_Trachea(Cavern Lower Trachea);
+        Amagi__West_Lake__Stronghold_Top(Stronghold Top);
+        Amagi__West_Lake__Stronghold_Item(Stronghold Item);
+        Amagi__West_Lake__Stronghold_Rear_Wall(Stronghold Rear Wall);
+        Amagi__West_Lake__Stronghold_Middle_Column(Stronghold Middle Column);
+        Amagi__West_Lake__Stronghold_Ceiling_Left(Stronghold Ceiling Left);
+        Amagi__West_Lake__Stronghold_Ceiling_Right(Stronghold Ceiling Right);
+        Amagi__West_Lake__Stronghold_Front_Room(Stronghold Front Room);
+        Amagi__West_Lake__Stronghold_Front_Door(Stronghold Front Door);
+        Amagi__West_Lake__Some_Rock(Some Rock);
+        Amagi__West_Lake__Small_Hill(Small Hill);
+        Amagi__West_Lake__Tentacle_Gap(Tentacle Gap);
+        Amagi__West_Lake__Left_of_Enemy(Left of Enemy);
+        Amagi__West_Lake__East_20(East 20);
+        Amagi__West_Lake__West_Cliff(West Cliff);
+        Amagi__West_Lake__West_Bank(West Bank);
+        Amagi__West_Lake__Water_Surface(Water Surface);
+        Amagi__West_Lake__West_Shore(West Shore);
+        Amagi__West_Lake__Surface_Wall_Right(Surface Wall Right);
+        Amagi__West_Lake__Surface_Wall_Left(Surface Wall Left);
+        Amagi__West_Lake__West_15(West 15);
     end
 end
 subgraph Antarctica
@@ -464,6 +508,9 @@ Amagi__Main_Area__East_15 <--> Glacier__Lake_Main_Entrance__Lake_Access
 Amagi__Main_Area__Platform_2 --> Amagi__Main_Area__West_Shelf
 Amagi__Main_Area__Shallow_End --> Amagi__Main_Area__Waters_Edge
 Amagi__Main_Area__West_Side --> Amagi__Main_Area__Carving
+Amagi__West_Lake__Cavern_Refill_Station --> Amagi__West_Lake__Cavern_Rear_Pillar
+Amagi__West_Lake__Northwest_Platform --> Amagi__West_Lake__West_Cliff
+Amagi__West_Lake__Surface_Wall_Right --> Amagi__West_Lake__Surface_Wall_Left
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
 Antarctica__Building_1W__West_Entry <--> Antarctica__West__Boxes

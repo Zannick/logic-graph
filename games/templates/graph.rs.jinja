@@ -348,7 +348,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
 %% for loc in gl.locations()
         LocationId::{{ loc.id }} => Location {
             id: LocationId::{{ loc.id }},
-            canonical: CanonId::{{ loc.canon or 'None' }},
+            canonical: CanonId::{{ (loc.canon or 'None')|construct_id }},
             item: Item::{{ loc.item or 'None' }},
             price: Currency::{% if loc.price and loc.price > 0 -%}
                 {{ (loc.costs or price_types[0])|camelize }}({{ loc.price }})

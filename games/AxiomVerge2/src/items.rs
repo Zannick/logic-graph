@@ -8,6 +8,8 @@ use std::fmt;
 pub enum Item {
     #[default]
     None,
+    Amagi_Dragon_Eye_Passage,
+    Amagi_West_Lake_Surface_Wall,
     Amashilama,
     Anuman,
     Apocalypse_Bomb,
@@ -17,6 +19,7 @@ pub enum Item {
     Compass,
     Dear_Ernest,
     Defeat_Ebih_Alu,
+    Defeat_MUS_A_M20,
     Drone_Hover,
     Drone_Melee_Damage,
     Drone_Melee_Speed,
@@ -43,6 +46,7 @@ pub enum Item {
     Ranged_Speed,
     Record_Losses,
     Remote_Drone,
+    Shockwave,
     Slingshot_Hook,
     Station_Power,
     Switch_36_11,
@@ -56,6 +60,8 @@ impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Item::None => write!(f, "{}", "None"),
+            Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
+            Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Anuman => write!(f, "{}", "Anuman"),
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
@@ -65,6 +71,7 @@ impl fmt::Display for Item {
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
             Item::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
+            Item::Defeat_MUS_A_M20 => write!(f, "{}", "Defeat_MUS_A_M20"),
             Item::Drone_Hover => write!(f, "{}", "Drone_Hover"),
             Item::Drone_Melee_Damage => write!(f, "{}", "Drone_Melee_Damage"),
             Item::Drone_Melee_Speed => write!(f, "{}", "Drone_Melee_Speed"),
@@ -91,6 +98,7 @@ impl fmt::Display for Item {
             Item::Ranged_Speed => write!(f, "{}", "Ranged_Speed"),
             Item::Record_Losses => write!(f, "{}", "Record_Losses"),
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
+            Item::Shockwave => write!(f, "{}", "Shockwave"),
             Item::Slingshot_Hook => write!(f, "{}", "Slingshot_Hook"),
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
@@ -108,6 +116,8 @@ impl std::str::FromStr for Item {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Amagi_Dragon_Eye_Passage" => Ok(Item::Amagi_Dragon_Eye_Passage),
+            "Amagi_West_Lake_Surface_Wall" => Ok(Item::Amagi_West_Lake_Surface_Wall),
             "Amashilama" => Ok(Item::Amashilama),
             "Anuman" => Ok(Item::Anuman),
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
@@ -117,6 +127,7 @@ impl std::str::FromStr for Item {
             "Compass" => Ok(Item::Compass),
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
             "Defeat_Ebih_Alu" => Ok(Item::Defeat_Ebih_Alu),
+            "Defeat_MUS_A_M20" => Ok(Item::Defeat_MUS_A_M20),
             "Drone_Hover" => Ok(Item::Drone_Hover),
             "Drone_Melee_Damage" => Ok(Item::Drone_Melee_Damage),
             "Drone_Melee_Speed" => Ok(Item::Drone_Melee_Speed),
@@ -143,6 +154,7 @@ impl std::str::FromStr for Item {
             "Ranged_Speed" => Ok(Item::Ranged_Speed),
             "Record_Losses" => Ok(Item::Record_Losses),
             "Remote_Drone" => Ok(Item::Remote_Drone),
+            "Shockwave" => Ok(Item::Shockwave),
             "Slingshot_Hook" => Ok(Item::Slingshot_Hook),
             "Station_Power" => Ok(Item::Station_Power),
             "Switch_36_11" => Ok(Item::Switch_36_11),
@@ -159,7 +171,8 @@ impl std::str::FromStr for Item {
 pub fn unused_item(id: Item) -> bool {
     match id {
         Item::None => true,
-        Item::Bronze_Axe
+        Item::Amagi_Dragon_Eye_Passage
+        | Item::Bronze_Axe
         | Item::Companies_Layoff
         | Item::Compass
         | Item::Escape

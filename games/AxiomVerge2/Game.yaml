@@ -64,6 +64,7 @@ time:
   # so there's little difference
   remote_urn: 6.5
   remote_flask: 6.5
+  shockwave: 3.5  # even when shockwaving flasks and urns? at least 1
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # Doors leading inside/outside
   interior: 0.75
@@ -127,6 +128,7 @@ helpers:
   $hover: ^mode == 'drone' and Drone_Hover
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
   $can_recall: ^mode == 'drone' and not Anuman
+  $shockwave: ^mode != 'drone' and Shockwave
 
   $open: Infect
   $activate: Infect

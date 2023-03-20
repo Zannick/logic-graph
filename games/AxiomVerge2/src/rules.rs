@@ -28,6 +28,10 @@ pub fn access_amagi__main_area__carving__key_combo__req(ctx: &Context) -> bool {
     // not ^_combo
     !ctx.amagi__main_area__ctx__combo()
 }
+pub fn access_amagi_west_lake_surface_wall(ctx: &Context) -> bool {
+    // Amagi_West_Lake_Surface_Wall
+    ctx.has(Item::Amagi_West_Lake_Surface_Wall)
+}
 pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
@@ -59,6 +63,10 @@ pub fn access_climb_and_grab(ctx: &Context) -> bool {
 pub fn access_defeat_ebih_alu(ctx: &Context) -> bool {
     // Defeat_Ebih_Alu
     ctx.has(Item::Defeat_Ebih_Alu)
+}
+pub fn access_defeat_mus_a_m20(ctx: &Context) -> bool {
+    // Defeat_MUS_A_M20
+    ctx.has(Item::Defeat_MUS_A_M20)
 }
 pub fn access_drone_melee_damage(ctx: &Context) -> bool {
     // Drone_Melee_Damage
@@ -380,6 +388,14 @@ pub fn access_remote_drone_and_dear_ernest_and_underwater_movement_and_flask__4(
     (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Dear_Ernest))
         && ctx.has(Item::Underwater_Movement))
         && ctx.count(Item::Flask) >= 4)
+}
+pub fn access_shockwave(ctx: &Context) -> bool {
+    // $shockwave
+    helper__shockwave!(ctx)
+}
+pub fn access_shockwave_and_not_defeat_mus_a_m20(ctx: &Context) -> bool {
+    // $shockwave and not Defeat_MUS_A_M20
+    (helper__shockwave!(ctx) && !ctx.has(Item::Defeat_MUS_A_M20))
 }
 pub fn access_station_power(ctx: &Context) -> bool {
     // Station_Power

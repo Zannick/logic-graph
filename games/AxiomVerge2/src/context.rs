@@ -76,12 +76,14 @@ pub struct Context {
     pub major_glitches: bool,
     pub minor_glitches: bool,
     // items
+    pub amagi_west_lake_surface_wall: bool,
     pub amashilama: bool,
     pub anuman: bool,
     pub apocalypse_bomb: bool,
     pub boomerang: bool,
     pub dear_ernest: bool,
     pub defeat_ebih_alu: bool,
+    pub defeat_mus_a_m20: bool,
     pub drone_hover: bool,
     pub drone_melee_damage: i8,
     pub drone_melee_speed: i8,
@@ -100,6 +102,7 @@ pub struct Context {
     pub ranged_damage: i8,
     pub ranged_speed: i8,
     pub remote_drone: bool,
+    pub shockwave: bool,
     pub slingshot_hook: bool,
     pub station_power: bool,
     pub switch_36_11: bool,
@@ -139,12 +142,14 @@ impl Default for Context {
             major_glitches: Default::default(),
             minor_glitches: Default::default(),
             // items
+            amagi_west_lake_surface_wall: Default::default(),
             amashilama: Default::default(),
             anuman: Default::default(),
             apocalypse_bomb: Default::default(),
             boomerang: Default::default(),
             dear_ernest: Default::default(),
             defeat_ebih_alu: Default::default(),
+            defeat_mus_a_m20: Default::default(),
             drone_hover: Default::default(),
             drone_melee_damage: Default::default(),
             drone_melee_speed: Default::default(),
@@ -163,6 +168,7 @@ impl Default for Context {
             ranged_damage: Default::default(),
             ranged_speed: Default::default(),
             remote_drone: Default::default(),
+            shockwave: Default::default(),
             slingshot_hook: Default::default(),
             station_power: Default::default(),
             switch_36_11: Default::default(),
@@ -182,16 +188,18 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
-    const NUM_ITEMS: i32 = 30;
+    const NUM_ITEMS: i32 = 33;
 
     fn has(&self, item: Item) -> bool {
         match item {
+            Item::Amagi_West_Lake_Surface_Wall => self.amagi_west_lake_surface_wall,
             Item::Amashilama => self.amashilama,
             Item::Anuman => self.anuman,
             Item::Apocalypse_Bomb => self.apocalypse_bomb,
             Item::Boomerang => self.boomerang,
             Item::Dear_Ernest => self.dear_ernest,
             Item::Defeat_Ebih_Alu => self.defeat_ebih_alu,
+            Item::Defeat_MUS_A_M20 => self.defeat_mus_a_m20,
             Item::Drone_Hover => self.drone_hover,
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
@@ -210,6 +218,7 @@ impl context::Ctx for Context {
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
             Item::Remote_Drone => self.remote_drone,
+            Item::Shockwave => self.shockwave,
             Item::Slingshot_Hook => self.slingshot_hook,
             Item::Station_Power => self.station_power,
             Item::Switch_36_11 => self.switch_36_11,
@@ -221,12 +230,14 @@ impl context::Ctx for Context {
     }
     fn count(&self, item: Item) -> i16 {
         match item {
+            Item::Amagi_West_Lake_Surface_Wall => self.amagi_west_lake_surface_wall.into(),
             Item::Amashilama => self.amashilama.into(),
             Item::Anuman => self.anuman.into(),
             Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
             Item::Boomerang => self.boomerang.into(),
             Item::Dear_Ernest => self.dear_ernest.into(),
             Item::Defeat_Ebih_Alu => self.defeat_ebih_alu.into(),
+            Item::Defeat_MUS_A_M20 => self.defeat_mus_a_m20.into(),
             Item::Drone_Hover => self.drone_hover.into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
@@ -245,6 +256,7 @@ impl context::Ctx for Context {
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
             Item::Remote_Drone => self.remote_drone.into(),
+            Item::Shockwave => self.shockwave.into(),
             Item::Slingshot_Hook => self.slingshot_hook.into(),
             Item::Station_Power => self.station_power.into(),
             Item::Switch_36_11 => self.switch_36_11.into(),
@@ -256,6 +268,9 @@ impl context::Ctx for Context {
     }
     fn collect(&mut self, item: Item) {
         match item {
+            Item::Amagi_West_Lake_Surface_Wall => {
+                self.amagi_west_lake_surface_wall = true;
+            }
             Item::Amashilama => {
                 self.amashilama = true;
                 rules::action_save__glacier__revival__save_point(self);
@@ -274,6 +289,9 @@ impl context::Ctx for Context {
             }
             Item::Defeat_Ebih_Alu => {
                 self.defeat_ebih_alu = true;
+            }
+            Item::Defeat_MUS_A_M20 => {
+                self.defeat_mus_a_m20 = true;
             }
             Item::Drone_Hover => {
                 self.drone_hover = true;
@@ -330,6 +348,9 @@ impl context::Ctx for Context {
             }
             Item::Remote_Drone => {
                 self.remote_drone = true;
+            }
+            Item::Shockwave => {
+                self.shockwave = true;
             }
             Item::Slingshot_Hook => {
                 self.slingshot_hook = true;
@@ -777,6 +798,13 @@ impl Context {
             SpotId::Amagi__Main_Area__Secret_Outcropping => false,
             SpotId::Amagi__Main_Area__Secret_Waterfall => false,
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side => false,
+            SpotId::Amagi__West_Lake__East_15 => false,
+            SpotId::Amagi__West_Lake__East_Shore => false,
+            SpotId::Amagi__West_Lake__Water_Surface => false,
+            SpotId::Amagi__West_Lake__West_Shore => false,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right => false,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left => false,
+            SpotId::Amagi__West_Lake__West_15 => false,
             _ => match get_area(self.position) {
                 AreaId::Amagi__Cave_Behind_Waterfall => false,
                 _ => match get_region(self.position) {
