@@ -3,6 +3,7 @@ short: Giguna
 
 areas:
 - name: Giguna Northeast
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Inner Wall
       coord: [18.7, 9.0]

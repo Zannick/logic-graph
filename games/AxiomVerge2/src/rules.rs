@@ -76,6 +76,33 @@ pub fn access_drone_melee_speed__2(ctx: &Context) -> bool {
     // Drone_Melee_Speed{2}
     ctx.count(Item::Drone_Melee_Speed) >= 2
 }
+pub fn access_ebih__base_camp__left_platform__move_left_platform__req(ctx: &Context) -> bool {
+    // $activate and not ^_left_platform_moved
+    (helper__activate!(ctx) && !ctx.ebih__base_camp__ctx__left_platform_moved())
+}
+pub fn access_ebih__base_camp__left_platform_moved__reset_left_platform__req(
+    ctx: &Context,
+) -> bool {
+    // $activate and ^_left_platform_moved
+    (helper__activate!(ctx) && ctx.ebih__base_camp__ctx__left_platform_moved())
+}
+pub fn access_ebih__base_camp__top_platform__ex__left_platform_1__req(ctx: &Context) -> bool {
+    // $hover and not ^_left_platform_moved
+    (helper__hover!(ctx) && !ctx.ebih__base_camp__ctx__left_platform_moved())
+}
+pub fn access_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(ctx: &Context) -> bool {
+    // ^_left_platform_moved
+    ctx.ebih__base_camp__ctx__left_platform_moved()
+}
+pub fn access_ebih__base_camp__west_11__ex__left_platform_1__req(ctx: &Context) -> bool {
+    // $platform and $hook and not ^_left_platform_moved
+    ((helper__platform!(ctx) && helper__hook!(ctx))
+        && !ctx.ebih__base_camp__ctx__left_platform_moved())
+}
+pub fn access_ebih__base_camp__west_11__ex__left_platform_2__req(ctx: &Context) -> bool {
+    // $hover and not ^_left_platform_moved
+    (helper__hover!(ctx) && !ctx.ebih__base_camp__ctx__left_platform_moved())
+}
 pub fn access_ebih__drone_room__pit_left__activate_lift__req(ctx: &Context) -> bool {
     // Infect and ^_platform_moved
     (ctx.has(Item::Infect) && ctx.ebih__drone_room__ctx__platform_moved())
@@ -109,6 +136,22 @@ pub fn access_ebih__ebih_east__lower_moving_platform__activate_ride__req(ctx: &C
 pub fn access_ebih__ebih_east__moving_platform__activate_ride__req(ctx: &Context) -> bool {
     // Infect and $grab and not ^_platform1_moved
     ((ctx.has(Item::Infect) && helper__grab!(ctx)) && !ctx.ebih__ebih_east__ctx__platform1_moved())
+}
+pub fn access_ebih__grid_25_10_12__door__ex__door_left_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__grid_25_10_12__ctx__door_open()
+}
+pub fn access_ebih__grid_25_10_12__door__ex__east_11_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__grid_25_10_12__ctx__door_open()
+}
+pub fn access_ebih__grid_25_10_12__door_left__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__grid_25_10_12__ctx__door_open()
+}
+pub fn access_ebih__grid_25_10_12__east_11__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__grid_25_10_12__ctx__door_open()
 }
 pub fn access_ebih__waterfall__west_door__ex__west_door_left_1__req(ctx: &Context) -> bool {
     // ^_west_door_open
@@ -181,6 +224,10 @@ pub fn access_hook_and_liru(ctx: &Context) -> bool {
 pub fn access_hover(ctx: &Context) -> bool {
     // $hover
     helper__hover!(ctx)
+}
+pub fn access_hover_and_hook(ctx: &Context) -> bool {
+    // $hover and $hook
+    (helper__hover!(ctx) && helper__hook!(ctx))
 }
 pub fn access_infect(ctx: &Context) -> bool {
     // Infect
@@ -314,6 +361,10 @@ pub fn access_open(ctx: &Context) -> bool {
     // $open
     helper__open!(ctx)
 }
+pub fn access_platform_and_hook_and_hover(ctx: &Context) -> bool {
+    // $platform and $hook and $hover
+    ((helper__platform!(ctx) && helper__hook!(ctx)) && helper__hover!(ctx))
+}
 pub fn access_ranged_damage(ctx: &Context) -> bool {
     // Ranged_Damage
     ctx.has(Item::Ranged_Damage)
@@ -396,6 +447,16 @@ pub fn action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__
         SpotId::Giguna__Giguna_Northeast__Inner_Wall,
         SpotId::Ebih__Ebih_West__Alcove_Entrance
     );
+}
+pub fn action_ebih__base_camp__left_platform__move_left_platform__do(ctx: &mut Context) {
+    // ^_left_platform_moved = true; ^position = `Ebih > Base Camp > Left Platform Moved`;
+    ctx.ebih__base_camp__ctx__left_platform_moved = true;
+    ctx.set_position(SpotId::Ebih__Base_Camp__Left_Platform_Moved);
+}
+pub fn action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx: &mut Context) {
+    // ^_left_platform_moved = false; ^position = `Ebih > Base Camp > Left Platform`;
+    ctx.ebih__base_camp__ctx__left_platform_moved = false;
+    ctx.set_position(SpotId::Ebih__Base_Camp__Left_Platform);
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift__do(ctx: &mut Context) {
     // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`

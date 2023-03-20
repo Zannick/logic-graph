@@ -111,6 +111,28 @@ macro_rules! helper__open {
     }};
 }
 
+/// $activate (  )
+/// Infect
+#[macro_export]
+macro_rules! helper__activate {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Infect)
+    }};
+}
+
+/// $platform (  )
+/// Infect
+#[macro_export]
+macro_rules! helper__platform {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Infect)
+    }};
+}
+
 /// $overheat (  )
 /// Infect{2}
 #[macro_export]

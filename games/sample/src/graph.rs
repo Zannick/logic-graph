@@ -1564,7 +1564,7 @@ impl world::Accessible for Exit {
                     rules::access_is_child_and_sticks_and_nuts(&ctx)
                 }
                 ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
-                    rules::access_deku_tree__compass_room__entry__ex__floor_3__door_1___torch(&ctx)
+                    rules::access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(&ctx)
                 }
                 ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => true,
                 ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => true,
@@ -1669,12 +1669,15 @@ impl world::Accessible for Action {
     type Context = Context;
     type Currency = Currency;
     fn can_access(&self, ctx: &Context) -> bool {
-        ctx.can_afford(&self.price) && match self.id {
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::access_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(&ctx),
-            ActionId::Global__Change_Time => true,
-            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
-        }
+        ctx.can_afford(&self.price)
+            && match self.id {
+                ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                    rules::access_deku_tree__compass_room__entry__light_torch__req(&ctx)
+                }
+                ActionId::Global__Change_Time => true,
+                ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
+                ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
+            }
     }
     fn time(&self) -> i32 {
         self.time
@@ -1690,9 +1693,15 @@ impl world::Action for Action {
     }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
-            ActionId::Global__Change_Time => rules::action_tod__match_tod____day__night_night__day____day_(ctx),
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::action_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(ctx),
-            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => rules::action_rupees__max__rupees__20_wallet_max(ctx),
+            ActionId::Global__Change_Time => {
+                rules::action_tod__match_tod____day__night_night__day____day_(ctx)
+            }
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
+                rules::action_deku_tree__compass_room__entry__light_torch__do(ctx)
+            }
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
+                rules::action_rupees__max__rupees__20_wallet_max(ctx)
+            }
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => rules::action_save__position(ctx),
         }
     }

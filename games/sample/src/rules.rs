@@ -80,13 +80,11 @@ pub fn access_deku_slingshot_scrub(ctx: &Context) -> bool {
     // Deku_Slingshot_Scrub
     ctx.has(Item::Deku_Slingshot_Scrub)
 }
-pub fn access_deku_tree__compass_room__entry__ex__floor_3__door_1___torch(ctx: &Context) -> bool {
+pub fn access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(ctx: &Context) -> bool {
     // ^_torch
     ctx.deku_tree__compass_room__ctx__torch()
 }
-pub fn access_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(
-    ctx: &Context,
-) -> bool {
+pub fn access_deku_tree__compass_room__entry__light_torch__req(ctx: &Context) -> bool {
     // $is_child and $Sticks and not ^_torch
     ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && !ctx.deku_tree__compass_room__ctx__torch())
 }
@@ -174,9 +172,7 @@ pub fn access_triforce_piece__triforce_count(ctx: &Context) -> bool {
     // Triforce_Piece{triforce_count}
     ctx.count(Item::Triforce_Piece) >= ctx.triforce_count
 }
-pub fn action_deku_tree__compass_room__entry__light_torch__is_child_and_Sticks_and_not__torch(
-    ctx: &mut Context,
-) {
+pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context) {
     // ^_torch = True
     ctx.deku_tree__compass_room__ctx__torch = true;
 }

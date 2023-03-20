@@ -48,6 +48,7 @@ pub enum Item {
     Station_Power,
     Switch_36_11,
     Switch_40_12,
+    Terminal_Breakthrough_1,
     Under_Siege,
     Wall_Climb,
 }
@@ -95,6 +96,7 @@ impl fmt::Display for Item {
             Item::Station_Power => write!(f, "{}", "Station_Power"),
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
+            Item::Terminal_Breakthrough_1 => write!(f, "{}", "Terminal_Breakthrough_1"),
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
         }
@@ -146,6 +148,7 @@ impl std::str::FromStr for Item {
             "Station_Power" => Ok(Item::Station_Power),
             "Switch_36_11" => Ok(Item::Switch_36_11),
             "Switch_40_12" => Ok(Item::Switch_40_12),
+            "Terminal_Breakthrough_1" => Ok(Item::Terminal_Breakthrough_1),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Wall_Climb" => Ok(Item::Wall_Climb),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
@@ -166,6 +169,7 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Melee_Charge
         | Item::Notes_2053_02_27
         | Item::Record_Losses
+        | Item::Terminal_Breakthrough_1
         | Item::Under_Siege => true,
         _ => false,
     }

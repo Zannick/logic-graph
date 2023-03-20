@@ -104,7 +104,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 699,
+        ) => 700,
         (
             false,
             false,
@@ -258,7 +258,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             false,
             false,
@@ -363,7 +363,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             false,
             false,
@@ -574,7 +574,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             false,
             false,
@@ -871,7 +871,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 999,
         (
             false,
             false,
@@ -998,6 +998,76 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 1126,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2927,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2927,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 4054,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 3153,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2252,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 5405,
         (
             false,
             false,
@@ -1194,6 +1264,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 5180,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 2027,
         (false, false, false, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1801,
         (false, false, false, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1801,
         (
@@ -1250,34 +1327,34 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2000,
         (
             false,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             false,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             false,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 2000,
         (
             false,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 2477,
         (
@@ -1293,13 +1370,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1400,
+        ) => 1399,
         (
             false,
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 900,
         (
             false,
@@ -1320,7 +1397,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2477,
         (
             false,
@@ -1334,7 +1411,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2477,
         (
             false,
@@ -1650,7 +1727,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             false,
             false,
@@ -1692,7 +1769,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             false,
             false,
@@ -1902,7 +1979,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 799,
         (
             false,
             false,
@@ -1951,7 +2028,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__East_9,
             SpotId::Ebih__Ebih_West__East_10,
-        ) => 1000,
+        ) => 999,
         (
             false,
             false,
@@ -1967,7 +2044,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 675,
         (false, false, false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1300
         }
         (
             false,
@@ -1996,7 +2073,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1299,
+        ) => 1300,
         (
             false,
             false,
@@ -2185,7 +2262,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             false,
             false,
@@ -2662,7 +2739,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             false,
             false,
@@ -2705,7 +2782,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
+        ) => 1500,
         // [0.8, 0.675676]
         (
             false,
@@ -2738,6 +2815,190 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, false, false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             1126
         }
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 900,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 450,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 2000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 1126,
+        // [0.675676, 1.0]
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1675,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1801,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 675,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1576,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 2027,
+        // [1.576577, 1.576577]
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 3153,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 6000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1000,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2702,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1351,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 2027,
+        (
+            false,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2702,
         (
             false,
             false,
@@ -2849,13 +3110,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_42_10__West,
             SpotId::Glacier__Grid_42_10__East,
-        ) => 4054,
-        (
-            false,
-            false,
-            false,
-            SpotId::Glacier__Grid_42_10__East,
-            SpotId::Glacier__Grid_42_10__West,
         ) => 4054,
         (
             false,
@@ -3472,7 +3726,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             false,
             false,
@@ -3535,7 +3789,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 300,
         (
             false,
             false,
@@ -3657,14 +3911,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 700,
         (
             false,
             false,
             false,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             false,
             false,
@@ -3804,7 +4058,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1300,
         (
             false,
             false,
@@ -3904,7 +4158,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             false,
             false,
@@ -4016,7 +4270,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 599,
+        ) => 600,
         (
             true,
             false,
@@ -4170,7 +4424,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             true,
             false,
@@ -4275,7 +4529,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             true,
             false,
@@ -4486,7 +4740,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             true,
             false,
@@ -4739,7 +4993,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2300,
+        ) => 2299,
         (
             true,
             false,
@@ -4783,7 +5037,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 800,
+        ) => 799,
         (
             true,
             false,
@@ -4910,6 +5164,76 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 877,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2280,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2280,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 3157,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 2456,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 4210,
         (
             true,
             false,
@@ -5106,6 +5430,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 4035,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 1578,
         (true, false, false, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
         (true, false, false, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
         (
@@ -5162,34 +5493,34 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1200,
         (
             true,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             true,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             true,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1200,
         (
             true,
             false,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 1929,
         (
@@ -5205,13 +5536,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1200,
+        ) => 1199,
         (
             true,
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 701,
         (
             true,
@@ -5232,7 +5563,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -5246,7 +5577,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             false,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -5562,7 +5893,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             true,
             false,
@@ -5590,7 +5921,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 200,
+        ) => 199,
         (
             true,
             false,
@@ -5604,7 +5935,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             true,
             false,
@@ -5814,7 +6145,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 600,
+        ) => 599,
         (
             true,
             false,
@@ -5858,7 +6189,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, false, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            900
+            899
         }
         (
             true,
@@ -5875,7 +6206,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 526,
         (true, false, false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1099
+            1100
         }
         (
             true,
@@ -5904,7 +6235,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1099,
+        ) => 1100,
         (
             true,
             false,
@@ -5960,7 +6291,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3099,
+        ) => 3100,
         (
             true,
             false,
@@ -6093,7 +6424,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             true,
             false,
@@ -6463,7 +6794,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1599,
+        ) => 1600,
         (
             true,
             false,
@@ -6562,7 +6893,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             true,
             false,
@@ -6605,7 +6936,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         // [0.7, 0.526316]
         (
             true,
@@ -6638,6 +6969,190 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, false, false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             877
         }
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 350,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1200,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 877,
+        // [0.526316, 1.0]
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1526,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1403,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 526,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1228,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 1578,
+        // [1.22807, 1.22807]
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2456,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1799,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 3599,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 600,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2105,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1052,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1578,
+        (
+            true,
+            false,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2105,
         (
             true,
             false,
@@ -6749,13 +7264,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_42_10__West,
             SpotId::Glacier__Grid_42_10__East,
-        ) => 3157,
-        (
-            true,
-            false,
-            false,
-            SpotId::Glacier__Grid_42_10__East,
-            SpotId::Glacier__Grid_42_10__West,
         ) => 3157,
         (
             true,
@@ -7309,7 +7817,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 800,
+        ) => 799,
         (
             true,
             false,
@@ -7372,7 +7880,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             true,
             false,
@@ -7435,7 +7943,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 199,
+        ) => 200,
         (
             true,
             false,
@@ -7557,14 +8065,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             false,
             false,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             false,
@@ -7704,7 +8212,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1199,
+        ) => 1200,
         (
             true,
             false,
@@ -7804,7 +8312,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             true,
             false,
@@ -7923,7 +8431,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 699,
+        ) => 700,
         (
             false,
             true,
@@ -8112,7 +8620,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             false,
             true,
@@ -8224,7 +8732,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             false,
             true,
@@ -8477,7 +8985,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             false,
             true,
@@ -8823,7 +9331,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 1000,
+        ) => 999,
         (
             false,
             true,
@@ -8859,6 +9367,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Building_Entry,
         ) => 2845,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Save_Point,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 4888,
         (
             false,
             true,
@@ -8971,6 +9486,90 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2927,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2927,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 3797,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 1405,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 4054,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 3153,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2252,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 5405,
         (
             false,
             true,
@@ -9216,6 +9815,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 5111,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 2027,
         (false, true, false, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1777,
         (false, true, false, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1777,
         (
@@ -9272,7 +9878,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 4532,
         (
             false,
@@ -9293,7 +9899,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2000,
         (
             false,
@@ -9306,28 +9912,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             false,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             false,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1257,
         (
             false,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 2444,
         (
@@ -9343,13 +9949,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1400,
+        ) => 1399,
         (
             false,
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 900,
         (
             false,
@@ -9370,7 +9976,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2444,
         (
             false,
@@ -9384,7 +9990,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2477,
         (
             false,
@@ -9791,7 +10397,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             false,
             true,
@@ -9833,7 +10439,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             false,
             true,
@@ -10078,7 +10684,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 800,
+        ) => 799,
         (
             false,
             true,
@@ -10129,7 +10735,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1351,
         (false, true, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            1000
+            999
         }
         (
             false,
@@ -10160,7 +10766,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 666,
         (false, true, false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1299
+            1300
         }
         (
             false,
@@ -10189,7 +10795,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1299,
+        ) => 1300,
         (
             false,
             true,
@@ -10430,7 +11036,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             false,
             true,
@@ -11126,7 +11732,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             false,
             true,
@@ -11169,7 +11775,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1499,
+        ) => 1500,
         // [0.8, 0.675676]
         (
             false,
@@ -11209,6 +11815,260 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, true, false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             1126
         }
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1617,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 2048,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 888,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 888,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 888,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 993,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 450,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1333,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1735,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1576,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 3478,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1801,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 1126,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 2514,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+        ) => 1490,
+        // [0.666667, 1.0]
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1666,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1801,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 675,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1555,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 2027,
+        // [1.576577, 1.576577]
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 3153,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+        ) => 3333,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2027,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 2027,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 4444,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2027,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 2027,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1000,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2702,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1351,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 2027,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2702,
+        (
+            false,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2981,
         (
             false,
             true,
@@ -11327,14 +12187,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_42_10__West,
             SpotId::Glacier__Grid_42_10__East,
-        ) => 4000,
+        ) => 4054,
         (
             false,
             true,
             false,
             SpotId::Glacier__Grid_42_10__East,
             SpotId::Glacier__Grid_42_10__West,
-        ) => 4000,
+        ) => 4097,
         (
             false,
             true,
@@ -12099,7 +12959,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             false,
             true,
@@ -12204,7 +13064,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 299,
+        ) => 300,
         (
             false,
             true,
@@ -12371,7 +13231,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 699,
+        ) => 700,
         (
             false,
             true,
@@ -12399,7 +13259,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             false,
             true,
@@ -12581,7 +13441,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1299,
+        ) => 1300,
         (
             false,
             true,
@@ -12730,7 +13590,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             false,
             true,
@@ -12870,7 +13730,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 599,
+        ) => 600,
         (
             false,
             false,
@@ -13052,7 +13912,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             false,
             false,
@@ -13164,7 +14024,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             false,
             false,
@@ -13417,7 +14277,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             false,
             false,
@@ -13698,7 +14558,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2300,
+        ) => 2299,
         (
             false,
             false,
@@ -13742,7 +14602,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 800,
+        ) => 799,
         (
             false,
             false,
@@ -13869,6 +14729,76 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 877,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2280,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2280,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 3157,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 2456,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 4210,
         (
             false,
             false,
@@ -14065,6 +14995,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 4035,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 1578,
         (false, false, true, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
         (false, false, true, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
         (
@@ -14121,34 +15058,34 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2000,
         (
             false,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             false,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             false,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 2000,
         (
             false,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 1929,
         (
@@ -14164,13 +15101,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1200,
+        ) => 1199,
         (
             false,
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 701,
         (
             false,
@@ -14191,7 +15128,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             false,
@@ -14205,7 +15142,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             false,
@@ -14521,7 +15458,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             false,
             false,
@@ -14549,7 +15486,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 200,
+        ) => 199,
         (
             false,
             false,
@@ -14563,7 +15500,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             false,
             false,
@@ -14773,7 +15710,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 600,
+        ) => 599,
         (
             false,
             false,
@@ -14817,7 +15754,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (false, false, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            900
+            899
         }
         (
             false,
@@ -14834,7 +15771,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 526,
         (false, false, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1099
+            1100
         }
         (
             false,
@@ -14863,7 +15800,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1099,
+        ) => 1100,
         (
             false,
             false,
@@ -14919,7 +15856,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3099,
+        ) => 3100,
         (
             false,
             false,
@@ -15052,7 +15989,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             false,
             false,
@@ -15422,7 +16359,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1599,
+        ) => 1600,
         (
             false,
             false,
@@ -15521,7 +16458,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             false,
             false,
@@ -15564,7 +16501,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         // [0.7, 0.526316]
         (
             false,
@@ -15597,6 +16534,190 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, false, true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             877
         }
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 350,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 2000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 877,
+        // [0.526316, 1.0]
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1526,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1403,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 526,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1228,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 1578,
+        // [1.22807, 1.22807]
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2456,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1799,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 6000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1000,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2105,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1052,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1578,
+        (
+            false,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2105,
         (
             false,
             false,
@@ -15708,13 +16829,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_42_10__West,
             SpotId::Glacier__Grid_42_10__East,
-        ) => 3157,
-        (
-            false,
-            false,
-            true,
-            SpotId::Glacier__Grid_42_10__East,
-            SpotId::Glacier__Grid_42_10__West,
         ) => 3157,
         (
             false,
@@ -16268,7 +17382,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 800,
+        ) => 799,
         (
             false,
             false,
@@ -16331,7 +17445,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             false,
             false,
@@ -16394,7 +17508,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 199,
+        ) => 200,
         (
             false,
             false,
@@ -16516,14 +17630,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 599,
+        ) => 600,
         (
             false,
             false,
             true,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             false,
             false,
@@ -16663,7 +17777,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1199,
+        ) => 1200,
         (
             false,
             false,
@@ -16763,7 +17877,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             false,
             false,
@@ -16882,7 +17996,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 599,
+        ) => 600,
         (
             true,
             true,
@@ -17071,7 +18185,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             true,
             true,
@@ -17183,7 +18297,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             true,
             true,
@@ -17436,7 +18550,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             true,
             true,
@@ -17718,7 +18832,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2300,
+        ) => 2299,
         (
             true,
             true,
@@ -17762,7 +18876,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 800,
+        ) => 799,
         (
             true,
             true,
@@ -17798,6 +18912,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Building_Entry,
         ) => 2845,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Save_Point,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 4888,
         (
             true,
             true,
@@ -17910,6 +19031,90 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2280,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2280,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 3797,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 1405,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 3157,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 2456,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 4210,
         (
             true,
             true,
@@ -18155,6 +19360,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 4035,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 1578,
         (true, true, false, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
         (true, true, false, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
         (
@@ -18211,7 +19423,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 4532,
         (
             true,
@@ -18232,7 +19444,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1200,
         (
             true,
@@ -18245,28 +19457,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             true,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             true,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1200,
         (
             true,
             true,
             false,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 1929,
         (
@@ -18282,13 +19494,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1200,
+        ) => 1199,
         (
             true,
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 701,
         (
             true,
@@ -18309,7 +19521,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -18323,7 +19535,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             false,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -18730,7 +19942,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             true,
             true,
@@ -18758,7 +19970,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 200,
+        ) => 199,
         (
             true,
             true,
@@ -18772,7 +19984,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             true,
             true,
@@ -19005,7 +20217,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 600,
+        ) => 599,
         (
             true,
             true,
@@ -19056,7 +20268,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, true, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            900
+            899
         }
         (true, true, false, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -19083,7 +20295,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 526,
         (true, true, false, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1099
+            1100
         }
         (
             true,
@@ -19112,7 +20324,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1099,
+        ) => 1100,
         (
             true,
             true,
@@ -19182,7 +20394,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3099,
+        ) => 3100,
         (
             true,
             true,
@@ -19353,7 +20565,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             true,
             true,
@@ -19859,7 +21071,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1599,
+        ) => 1600,
         (
             true,
             true,
@@ -20021,7 +21233,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             true,
             true,
@@ -20064,7 +21276,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         // [0.7, 0.526316]
         (
             true,
@@ -20104,6 +21316,260 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, true, false, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             877
         }
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1617,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 2048,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 888,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 993,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 350,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1735,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1200,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 3478,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 877,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 2514,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+        ) => 1490,
+        // [0.526316, 1.0]
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1526,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1403,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 526,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1228,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 1578,
+        // [1.22807, 1.22807]
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2456,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+        ) => 3333,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1799,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 3599,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 600,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2105,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1052,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1578,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2105,
+        (
+            true,
+            true,
+            false,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2981,
         (
             true,
             true,
@@ -20229,7 +21695,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_42_10__East,
             SpotId::Glacier__Grid_42_10__West,
-        ) => 3157,
+        ) => 4097,
         (
             true,
             true,
@@ -20917,7 +22383,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 800,
+        ) => 799,
         (
             true,
             true,
@@ -20994,7 +22460,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             true,
             true,
@@ -21095,7 +22561,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 199,
+        ) => 200,
         (
             true,
             true,
@@ -21258,7 +22724,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             true,
@@ -21286,7 +22752,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             true,
@@ -21468,7 +22934,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1199,
+        ) => 1200,
         (
             true,
             true,
@@ -21617,7 +23083,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             true,
             true,
@@ -21757,7 +23223,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 599,
+        ) => 600,
         (
             true,
             false,
@@ -21939,7 +23405,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             true,
             false,
@@ -22051,7 +23517,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             true,
             false,
@@ -22304,7 +23770,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             true,
             false,
@@ -22565,7 +24031,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2300,
+        ) => 2299,
         (
             true,
             false,
@@ -22609,7 +24075,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 800,
+        ) => 799,
         (
             true,
             false,
@@ -22736,6 +24202,76 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 877,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2280,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2280,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 3157,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 2456,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 4210,
         (
             true,
             false,
@@ -22932,6 +24468,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 4035,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 1578,
         (true, false, true, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
         (true, false, true, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
         (
@@ -22988,34 +24531,34 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1200,
         (
             true,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             true,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             true,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1200,
         (
             true,
             false,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 1929,
         (
@@ -23031,13 +24574,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1200,
+        ) => 1199,
         (
             true,
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 701,
         (
             true,
@@ -23058,7 +24601,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -23072,7 +24615,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -23388,7 +24931,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             true,
             false,
@@ -23416,7 +24959,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 200,
+        ) => 199,
         (
             true,
             false,
@@ -23430,7 +24973,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             true,
             false,
@@ -23628,7 +25171,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 600,
+        ) => 599,
         (
             true,
             false,
@@ -23672,7 +25215,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, false, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            900
+            899
         }
         (true, false, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -23685,7 +25228,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 526,
         (true, false, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1099
+            1100
         }
         (
             true,
@@ -23714,7 +25257,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1099,
+        ) => 1100,
         (
             true,
             false,
@@ -23770,7 +25313,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3099,
+        ) => 3100,
         (
             true,
             false,
@@ -23903,7 +25446,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             true,
             false,
@@ -24251,7 +25794,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1599,
+        ) => 1600,
         (
             true,
             false,
@@ -24350,7 +25893,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             true,
             false,
@@ -24393,7 +25936,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         // [0.7, 0.526316]
         (
             true,
@@ -24426,6 +25969,190 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (true, false, true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             877
         }
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 350,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1200,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 877,
+        // [0.526316, 1.0]
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1526,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1403,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 526,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1228,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 1578,
+        // [1.22807, 1.22807]
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2456,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1799,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 3599,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 600,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2105,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1052,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1578,
+        (
+            true,
+            false,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2105,
         (
             true,
             false,
@@ -24537,13 +26264,6 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_42_10__West,
             SpotId::Glacier__Grid_42_10__East,
-        ) => 3157,
-        (
-            true,
-            false,
-            true,
-            SpotId::Glacier__Grid_42_10__East,
-            SpotId::Glacier__Grid_42_10__West,
         ) => 3157,
         (
             true,
@@ -25097,7 +26817,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 800,
+        ) => 799,
         (
             true,
             false,
@@ -25160,7 +26880,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             true,
             false,
@@ -25219,7 +26939,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 199,
+        ) => 200,
         (
             true,
             false,
@@ -25337,14 +27057,14 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             false,
             true,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             false,
@@ -25484,7 +27204,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1199,
+        ) => 1200,
         (
             true,
             false,
@@ -25584,7 +27304,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             true,
             false,
@@ -25703,7 +27423,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 599,
+        ) => 600,
         (
             false,
             true,
@@ -25892,7 +27612,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             false,
             true,
@@ -26004,7 +27724,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             false,
             true,
@@ -26257,7 +27977,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             false,
             true,
@@ -26539,7 +28259,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2300,
+        ) => 2299,
         (
             false,
             true,
@@ -26583,7 +28303,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 800,
+        ) => 799,
         (
             false,
             true,
@@ -26619,6 +28339,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Building_Entry,
         ) => 2845,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Save_Point,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 4888,
         (
             false,
             true,
@@ -26731,6 +28458,90 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2280,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2280,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 3797,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 1405,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 3157,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 2456,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 4210,
         (
             false,
             true,
@@ -26976,6 +28787,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 4035,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 1578,
         (false, true, true, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
         (false, true, true, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
         (
@@ -27032,7 +28850,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 4532,
         (
             false,
@@ -27053,7 +28871,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 2000,
         (
             false,
@@ -27066,28 +28884,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             false,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             false,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             false,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1257,
         (
             false,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 1929,
         (
@@ -27103,13 +28921,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1200,
+        ) => 1199,
         (
             false,
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 701,
         (
             false,
@@ -27130,7 +28948,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             false,
@@ -27144,7 +28962,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             false,
@@ -27551,7 +29369,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             false,
             true,
@@ -27579,7 +29397,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 200,
+        ) => 199,
         (
             false,
             true,
@@ -27593,7 +29411,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             false,
             true,
@@ -27826,7 +29644,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 600,
+        ) => 599,
         (
             false,
             true,
@@ -27877,7 +29695,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (false, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            900
+            899
         }
         (false, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -27904,7 +29722,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 526,
         (false, true, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1099
+            1100
         }
         (
             false,
@@ -27933,7 +29751,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1099,
+        ) => 1100,
         (
             false,
             true,
@@ -28003,7 +29821,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3099,
+        ) => 3100,
         (
             false,
             true,
@@ -28174,7 +29992,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (
             false,
             true,
@@ -28680,7 +30498,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1599,
+        ) => 1600,
         (
             false,
             true,
@@ -28842,7 +30660,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             false,
             true,
@@ -28885,7 +30703,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         // [0.7, 0.526316]
         (
             false,
@@ -28925,6 +30743,260 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
         (false, true, true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             877
         }
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1617,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 2048,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 888,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 993,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 350,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1735,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1351,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 3478,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 877,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 2514,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+        ) => 1490,
+        // [0.526316, 1.0]
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1526,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1403,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 526,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1228,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 1578,
+        // [1.22807, 1.22807]
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2456,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+        ) => 3333,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1799,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 4444,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1000,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2105,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1052,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1578,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2105,
+        (
+            false,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2981,
         (
             false,
             true,
@@ -29050,7 +31122,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_42_10__East,
             SpotId::Glacier__Grid_42_10__West,
-        ) => 3157,
+        ) => 4097,
         (
             false,
             true,
@@ -29738,7 +31810,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 800,
+        ) => 799,
         (
             false,
             true,
@@ -29815,7 +31887,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             false,
             true,
@@ -29916,7 +31988,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 199,
+        ) => 200,
         (
             false,
             true,
@@ -30079,7 +32151,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 599,
+        ) => 600,
         (
             false,
             true,
@@ -30107,7 +32179,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             false,
             true,
@@ -30289,7 +32361,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1199,
+        ) => 1200,
         (
             false,
             true,
@@ -30438,7 +32510,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             false,
             true,
@@ -30578,7 +32650,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 599,
+        ) => 600,
         (
             true,
             true,
@@ -30767,7 +32839,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 900,
         (
             true,
             true,
@@ -30879,7 +32951,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 700,
         (
             true,
             true,
@@ -31132,7 +33204,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 400,
+        ) => 399,
         (
             true,
             true,
@@ -31410,7 +33482,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2300,
+        ) => 2299,
         (
             true,
             true,
@@ -31454,7 +33526,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 800,
+        ) => 799,
         (
             true,
             true,
@@ -31490,6 +33562,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Building_Entry,
         ) => 2845,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Save_Point,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 4888,
         (
             true,
             true,
@@ -31602,6 +33681,90 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
         ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__West_Midair,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+        ) => 2280,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 2280,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 1699,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__West_Midair,
+            SpotId::Ebih__Base_Camp__West_12,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Left_Platform,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 3797,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+        ) => 1405,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Staircase,
+        ) => 3157,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Save_Point,
+        ) => 1099,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Bunker_Entry,
+        ) => 2456,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Tent_Entry,
+        ) => 4210,
         (
             true,
             true,
@@ -31847,6 +34010,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
         ) => 4035,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__By_Garage__East_12,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 1578,
         (true, true, true, SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
         (true, true, true, SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
         (
@@ -31903,7 +34073,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 4532,
         (
             true,
@@ -31924,7 +34094,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1200,
         (
             true,
@@ -31937,28 +34107,28 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 799,
+        ) => 800,
         (
             true,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
             true,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
         ) => 1200,
         (
             true,
             true,
             true,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__West_11,
         ) => 1929,
         (
@@ -31974,13 +34144,13 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1200,
+        ) => 1199,
         (
             true,
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 701,
         (
             true,
@@ -32001,7 +34171,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -32015,7 +34185,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             true,
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Gate_Left,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
         ) => 1929,
         (
             true,
@@ -32422,7 +34592,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 300,
+        ) => 299,
         (
             true,
             true,
@@ -32450,7 +34620,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 200,
+        ) => 199,
         (
             true,
             true,
@@ -32464,7 +34634,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 699,
+        ) => 700,
         (
             true,
             true,
@@ -32689,7 +34859,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 600,
+        ) => 599,
         (
             true,
             true,
@@ -32740,7 +34910,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
         (true, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => {
-            900
+            899
         }
         (true, true, true, SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
             1929
@@ -32767,7 +34937,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Ebih_West__Above_Chute,
         ) => 526,
         (true, true, true, SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => {
-            1099
+            1100
         }
         (
             true,
@@ -32796,7 +34966,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-        ) => 1099,
+        ) => 1100,
         (
             true,
             true,
@@ -32866,7 +35036,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3099,
+        ) => 3100,
         (
             true,
             true,
@@ -33037,7 +35207,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 700,
+        ) => 699,
         (true, true, true, SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => {
             1403
         }
@@ -33523,7 +35693,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1599,
+        ) => 1600,
         (
             true,
             true,
@@ -33681,7 +35851,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         (
             true,
             true,
@@ -33724,7 +35894,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1399,
+        ) => 1400,
         // [0.7, 0.526316]
         (
             true,
@@ -33762,6 +35932,260 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             SpotId::Ebih__Drone_Room__Moving_Platform,
         ) => 1578,
         (true, true, true, SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1617,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 2048,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 888,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 993,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 350,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1735,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1200,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 3478,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+        ) => 877,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+        ) => 2514,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+        ) => 1490,
+        // [0.526316, 1.0]
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1526,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 1403,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => 526,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Grid_26_10_11__Cliff,
+            SpotId::Ebih__Grid_26_10_11__East_10,
+        ) => 1228,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 1578,
+        // [1.22807, 1.22807]
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2456,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+        ) => 3333,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1799,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => 3599,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 600,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => 2105,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => 1052,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => 1578,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2105,
+        (
+            true,
+            true,
+            true,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => 2981,
         (
             true,
             true,
@@ -33879,7 +36303,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_42_10__East,
             SpotId::Glacier__Grid_42_10__West,
-        ) => 3157,
+        ) => 4097,
         (
             true,
             true,
@@ -34567,7 +36991,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 800,
+        ) => 799,
         (
             true,
             true,
@@ -34644,7 +37068,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 600,
+        ) => 599,
         (
             true,
             true,
@@ -34745,7 +37169,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Rock,
-        ) => 199,
+        ) => 200,
         (
             true,
             true,
@@ -34908,7 +37332,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             true,
@@ -34936,7 +37360,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 599,
+        ) => 600,
         (
             true,
             true,
@@ -35118,7 +37542,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1199,
+        ) => 1200,
         (
             true,
             true,
@@ -35267,7 +37691,7 @@ pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
             true,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 200,
+        ) => 199,
         (
             true,
             true,
@@ -35614,6 +38038,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => true,
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Building_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Top_Platform) => true,
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => true,
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => true,
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => true,
@@ -35630,6 +38055,20 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => true,
         (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => true,
         (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => true,
+        (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => true,
+        (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => true,
+        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => true,
+        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Building_Entry) => true,
+        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Left_Platform, SpotId::Ebih__Base_Camp__Top_Platform) => true,
+        (SpotId::Ebih__Base_Camp__Left_Platform_Moved, SpotId::Ebih__Base_Camp__Top_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Building_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => true,
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => true,
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => true,
         (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => true,
         (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => true,
         (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => true,
@@ -35669,6 +38108,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__Lower_Platform) => true,
         (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_13) => true,
         (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Platform) => true,
+        (SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => true,
         (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => true,
         (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => true,
         (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => true,
@@ -35678,26 +38118,26 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => true,
         (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Bush) => true,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__West_11) => true,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
-        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__West_11) => true,
-        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__Bush) => true,
-        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
-        (SpotId::Ebih__Grid_25_10_12__Gate_Left, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
+        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__West_11) => true,
+        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
+        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
             true
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__West_11) => true,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
         (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => true,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Top_Platform) => true,
-        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Gate_Left) => true,
+        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__East_10, SpotId::Ebih__Grid_25_10_12__Hidden_Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Hidden_Bush, SpotId::Ebih__Grid_25_10_12__East_10) => true,
         (SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => true,
@@ -36070,6 +38510,101 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => true,
         (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => true,
         (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => true,
+        (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => true,
+        (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_26_10_11__Middle_Platform) => {
+            true
+        }
+        (SpotId::Ebih__Grid_26_10_11__Middle_Bottom, SpotId::Ebih__Grid_26_10_11__West_11) => true,
+        (SpotId::Ebih__Grid_26_10_11__Middle_Bottom, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => {
+            true
+        }
+        (
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+        ) => true,
+        (SpotId::Ebih__Grid_26_10_11__Under_Ledge, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => {
+            true
+        }
+        (SpotId::Ebih__Grid_26_10_11__Under_Ledge, SpotId::Ebih__Grid_26_10_11__Ledge) => true,
+        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Middle_Platform) => true,
+        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => true,
+        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => true,
+        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Upper_Platform) => true,
+        (SpotId::Ebih__Grid_26_10_11__Middle_Platform, SpotId::Ebih__Grid_26_10_11__West_11) => {
+            true
+        }
+        (
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+        ) => true,
+        (SpotId::Ebih__Grid_26_10_11__Middle_Platform, SpotId::Ebih__Grid_26_10_11__West_10) => {
+            true
+        }
+        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__West_10) => true,
+        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__Cliff) => true,
+        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__West_11) => true,
+        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__Ledge) => true,
+        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__Upper_Platform) => true,
+        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => true,
+        (SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__Upper_Platform) => true,
+        (SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__East_10) => true,
+        (SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Ebih__Grid_26_10_11__East_10) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_9,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__West_10,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => true,
+        (
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+            SpotId::Ebih__Observation_Tower_Room__Cliff,
+        ) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }

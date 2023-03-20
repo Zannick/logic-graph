@@ -129,6 +129,8 @@ helpers:
   $can_recall: ^mode == 'drone' and not Anuman
 
   $open: Infect
+  $activate: Infect
+  $platform: Infect
   $overheat: Infect{2}
   $allegiance1: Infect{2}
   $allegiance2: Infect{3}

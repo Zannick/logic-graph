@@ -85,6 +85,8 @@ pub enum AreaId {
     Ebih__Grid_21_1_5,
     Ebih__Grid_25_10_12,
     Ebih__Grid_25_2_6,
+    Ebih__Grid_26_10_11,
+    Ebih__Observation_Tower_Room,
     Ebih__Tent_Interior,
     Ebih__Waterfall,
     Giguna__Giguna_Northeast,
@@ -148,6 +150,10 @@ impl fmt::Display for AreaId {
             AreaId::Ebih__Grid_21_1_5 => write!(f, "{}", "Ebih > Grid 21,1-5"),
             AreaId::Ebih__Grid_25_10_12 => write!(f, "{}", "Ebih > Grid 25,10-12"),
             AreaId::Ebih__Grid_25_2_6 => write!(f, "{}", "Ebih > Grid 25,2-6"),
+            AreaId::Ebih__Grid_26_10_11 => write!(f, "{}", "Ebih > Grid 26,10-11"),
+            AreaId::Ebih__Observation_Tower_Room => {
+                write!(f, "{}", "Ebih > Observation Tower Room")
+            }
             AreaId::Ebih__Tent_Interior => write!(f, "{}", "Ebih > Tent Interior"),
             AreaId::Ebih__Waterfall => write!(f, "{}", "Ebih > Waterfall"),
             AreaId::Giguna__Giguna_Northeast => write!(f, "{}", "Giguna > Giguna Northeast"),
@@ -214,6 +220,8 @@ impl std::str::FromStr for AreaId {
             "Ebih > Grid 21,1-5" => Ok(AreaId::Ebih__Grid_21_1_5),
             "Ebih > Grid 25,10-12" => Ok(AreaId::Ebih__Grid_25_10_12),
             "Ebih > Grid 25,2-6" => Ok(AreaId::Ebih__Grid_25_2_6),
+            "Ebih > Grid 26,10-11" => Ok(AreaId::Ebih__Grid_26_10_11),
+            "Ebih > Observation Tower Room" => Ok(AreaId::Ebih__Observation_Tower_Room),
             "Ebih > Tent Interior" => Ok(AreaId::Ebih__Tent_Interior),
             "Ebih > Waterfall" => Ok(AreaId::Ebih__Waterfall),
             "Giguna > Giguna Northeast" => Ok(AreaId::Giguna__Giguna_Northeast),
@@ -319,10 +327,16 @@ pub enum SpotId {
     Ebih__Base_Camp__East_11,
     Ebih__Base_Camp__East_12,
     Ebih__Base_Camp__Lake_Access,
+    Ebih__Base_Camp__Left_Platform,
+    Ebih__Base_Camp__Left_Platform_Moved,
     Ebih__Base_Camp__Save_Point,
     Ebih__Base_Camp__Staircase,
     Ebih__Base_Camp__Tent_Entry,
+    Ebih__Base_Camp__Top_Platform,
+    Ebih__Base_Camp__West_11,
+    Ebih__Base_Camp__West_12,
     Ebih__Base_Camp__West_13,
+    Ebih__Base_Camp__West_Midair,
     Ebih__Boss_Room__Boss,
     Ebih__Boss_Room__East_4,
     Ebih__Boss_Room__East_6,
@@ -340,6 +354,7 @@ pub enum SpotId {
     Ebih__Bunker_Interior__Entry,
     Ebih__By_Garage__Crawlspace,
     Ebih__By_Garage__Crawlspace_Opening,
+    Ebih__By_Garage__East_12,
     Ebih__By_Garage__East_13,
     Ebih__By_Garage__East_Bush,
     Ebih__By_Garage__East_Platform,
@@ -398,10 +413,10 @@ pub enum SpotId {
     Ebih__Grid_25_10_12__Below_Bush,
     Ebih__Grid_25_10_12__Bush,
     Ebih__Grid_25_10_12__Door,
+    Ebih__Grid_25_10_12__Door_Left,
     Ebih__Grid_25_10_12__East_10,
     Ebih__Grid_25_10_12__East_11,
     Ebih__Grid_25_10_12__East_12,
-    Ebih__Grid_25_10_12__Gate_Left,
     Ebih__Grid_25_10_12__Hidden_Bush,
     Ebih__Grid_25_10_12__Mid_Ledge,
     Ebih__Grid_25_10_12__Top_Platform,
@@ -410,6 +425,21 @@ pub enum SpotId {
     Ebih__Grid_25_10_12__West_12,
     Ebih__Grid_25_2_6__Pit,
     Ebih__Grid_25_2_6__West_4,
+    Ebih__Grid_26_10_11__Cliff,
+    Ebih__Grid_26_10_11__East_10,
+    Ebih__Grid_26_10_11__Ledge,
+    Ebih__Grid_26_10_11__Middle_Bottom,
+    Ebih__Grid_26_10_11__Middle_Platform,
+    Ebih__Grid_26_10_11__Under_Ledge,
+    Ebih__Grid_26_10_11__Upper_Platform,
+    Ebih__Grid_26_10_11__West_10,
+    Ebih__Grid_26_10_11__West_11,
+    Ebih__Observation_Tower_Room__Cliff,
+    Ebih__Observation_Tower_Room__East_11,
+    Ebih__Observation_Tower_Room__Tower_Bottom,
+    Ebih__Observation_Tower_Room__Tower_Top,
+    Ebih__Observation_Tower_Room__West_10,
+    Ebih__Observation_Tower_Room__West_9,
     Ebih__Tent_Interior__Desk,
     Ebih__Tent_Interior__Entry,
     Ebih__Waterfall__Alcove,
@@ -733,10 +763,24 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Base_Camp__Lake_Access => {
                 write!(f, "{}", "Ebih > Base Camp > Lake Access")
             }
+            SpotId::Ebih__Base_Camp__Left_Platform => {
+                write!(f, "{}", "Ebih > Base Camp > Left Platform")
+            }
+            SpotId::Ebih__Base_Camp__Left_Platform_Moved => {
+                write!(f, "{}", "Ebih > Base Camp > Left Platform Moved")
+            }
             SpotId::Ebih__Base_Camp__Save_Point => write!(f, "{}", "Ebih > Base Camp > Save Point"),
             SpotId::Ebih__Base_Camp__Staircase => write!(f, "{}", "Ebih > Base Camp > Staircase"),
             SpotId::Ebih__Base_Camp__Tent_Entry => write!(f, "{}", "Ebih > Base Camp > Tent Entry"),
+            SpotId::Ebih__Base_Camp__Top_Platform => {
+                write!(f, "{}", "Ebih > Base Camp > Top Platform")
+            }
+            SpotId::Ebih__Base_Camp__West_11 => write!(f, "{}", "Ebih > Base Camp > West 11"),
+            SpotId::Ebih__Base_Camp__West_12 => write!(f, "{}", "Ebih > Base Camp > West 12"),
             SpotId::Ebih__Base_Camp__West_13 => write!(f, "{}", "Ebih > Base Camp > West 13"),
+            SpotId::Ebih__Base_Camp__West_Midair => {
+                write!(f, "{}", "Ebih > Base Camp > West Midair")
+            }
             SpotId::Ebih__Boss_Room__Boss => write!(f, "{}", "Ebih > Boss Room > Boss"),
             SpotId::Ebih__Boss_Room__East_4 => write!(f, "{}", "Ebih > Boss Room > East 4"),
             SpotId::Ebih__Boss_Room__East_6 => write!(f, "{}", "Ebih > Boss Room > East 6"),
@@ -766,6 +810,7 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__By_Garage__Crawlspace_Opening => {
                 write!(f, "{}", "Ebih > By Garage > Crawlspace Opening")
             }
+            SpotId::Ebih__By_Garage__East_12 => write!(f, "{}", "Ebih > By Garage > East 12"),
             SpotId::Ebih__By_Garage__East_13 => write!(f, "{}", "Ebih > By Garage > East 13"),
             SpotId::Ebih__By_Garage__East_Bush => write!(f, "{}", "Ebih > By Garage > East Bush"),
             SpotId::Ebih__By_Garage__East_Platform => {
@@ -866,6 +911,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Ebih__Grid_25_10_12__Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush"),
             SpotId::Ebih__Grid_25_10_12__Door => write!(f, "{}", "Ebih > Grid 25,10-12 > Door"),
+            SpotId::Ebih__Grid_25_10_12__Door_Left => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left")
+            }
             SpotId::Ebih__Grid_25_10_12__East_10 => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > East 10")
             }
@@ -874,9 +922,6 @@ impl fmt::Display for SpotId {
             }
             SpotId::Ebih__Grid_25_10_12__East_12 => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > East 12")
-            }
-            SpotId::Ebih__Grid_25_10_12__Gate_Left => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > Gate Left")
             }
             SpotId::Ebih__Grid_25_10_12__Hidden_Bush => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush")
@@ -898,6 +943,47 @@ impl fmt::Display for SpotId {
             }
             SpotId::Ebih__Grid_25_2_6__Pit => write!(f, "{}", "Ebih > Grid 25,2-6 > Pit"),
             SpotId::Ebih__Grid_25_2_6__West_4 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4"),
+            SpotId::Ebih__Grid_26_10_11__Cliff => write!(f, "{}", "Ebih > Grid 26,10-11 > Cliff"),
+            SpotId::Ebih__Grid_26_10_11__East_10 => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > East 10")
+            }
+            SpotId::Ebih__Grid_26_10_11__Ledge => write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge"),
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Bottom")
+            }
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Platform")
+            }
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Under Ledge")
+            }
+            SpotId::Ebih__Grid_26_10_11__Upper_Platform => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Upper Platform")
+            }
+            SpotId::Ebih__Grid_26_10_11__West_10 => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > West 10")
+            }
+            SpotId::Ebih__Grid_26_10_11__West_11 => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > West 11")
+            }
+            SpotId::Ebih__Observation_Tower_Room__Cliff => {
+                write!(f, "{}", "Ebih > Observation Tower Room > Cliff")
+            }
+            SpotId::Ebih__Observation_Tower_Room__East_11 => {
+                write!(f, "{}", "Ebih > Observation Tower Room > East 11")
+            }
+            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => {
+                write!(f, "{}", "Ebih > Observation Tower Room > Tower Bottom")
+            }
+            SpotId::Ebih__Observation_Tower_Room__Tower_Top => {
+                write!(f, "{}", "Ebih > Observation Tower Room > Tower Top")
+            }
+            SpotId::Ebih__Observation_Tower_Room__West_10 => {
+                write!(f, "{}", "Ebih > Observation Tower Room > West 10")
+            }
+            SpotId::Ebih__Observation_Tower_Room__West_9 => {
+                write!(f, "{}", "Ebih > Observation Tower Room > West 9")
+            }
             SpotId::Ebih__Tent_Interior__Desk => write!(f, "{}", "Ebih > Tent Interior > Desk"),
             SpotId::Ebih__Tent_Interior__Entry => write!(f, "{}", "Ebih > Tent Interior > Entry"),
             SpotId::Ebih__Waterfall__Alcove => write!(f, "{}", "Ebih > Waterfall > Alcove"),
@@ -1365,10 +1451,18 @@ impl std::str::FromStr for SpotId {
             "Ebih > Base Camp > East 11" => Ok(SpotId::Ebih__Base_Camp__East_11),
             "Ebih > Base Camp > East 12" => Ok(SpotId::Ebih__Base_Camp__East_12),
             "Ebih > Base Camp > Lake Access" => Ok(SpotId::Ebih__Base_Camp__Lake_Access),
+            "Ebih > Base Camp > Left Platform" => Ok(SpotId::Ebih__Base_Camp__Left_Platform),
+            "Ebih > Base Camp > Left Platform Moved" => {
+                Ok(SpotId::Ebih__Base_Camp__Left_Platform_Moved)
+            }
             "Ebih > Base Camp > Save Point" => Ok(SpotId::Ebih__Base_Camp__Save_Point),
             "Ebih > Base Camp > Staircase" => Ok(SpotId::Ebih__Base_Camp__Staircase),
             "Ebih > Base Camp > Tent Entry" => Ok(SpotId::Ebih__Base_Camp__Tent_Entry),
+            "Ebih > Base Camp > Top Platform" => Ok(SpotId::Ebih__Base_Camp__Top_Platform),
+            "Ebih > Base Camp > West 11" => Ok(SpotId::Ebih__Base_Camp__West_11),
+            "Ebih > Base Camp > West 12" => Ok(SpotId::Ebih__Base_Camp__West_12),
             "Ebih > Base Camp > West 13" => Ok(SpotId::Ebih__Base_Camp__West_13),
+            "Ebih > Base Camp > West Midair" => Ok(SpotId::Ebih__Base_Camp__West_Midair),
             "Ebih > Boss Room > Boss" => Ok(SpotId::Ebih__Boss_Room__Boss),
             "Ebih > Boss Room > East 4" => Ok(SpotId::Ebih__Boss_Room__East_4),
             "Ebih > Boss Room > East 6" => Ok(SpotId::Ebih__Boss_Room__East_6),
@@ -1388,6 +1482,7 @@ impl std::str::FromStr for SpotId {
             "Ebih > By Garage > Crawlspace Opening" => {
                 Ok(SpotId::Ebih__By_Garage__Crawlspace_Opening)
             }
+            "Ebih > By Garage > East 12" => Ok(SpotId::Ebih__By_Garage__East_12),
             "Ebih > By Garage > East 13" => Ok(SpotId::Ebih__By_Garage__East_13),
             "Ebih > By Garage > East Bush" => Ok(SpotId::Ebih__By_Garage__East_Bush),
             "Ebih > By Garage > East Platform" => Ok(SpotId::Ebih__By_Garage__East_Platform),
@@ -1450,10 +1545,10 @@ impl std::str::FromStr for SpotId {
             "Ebih > Grid 25,10-12 > Below Bush" => Ok(SpotId::Ebih__Grid_25_10_12__Below_Bush),
             "Ebih > Grid 25,10-12 > Bush" => Ok(SpotId::Ebih__Grid_25_10_12__Bush),
             "Ebih > Grid 25,10-12 > Door" => Ok(SpotId::Ebih__Grid_25_10_12__Door),
+            "Ebih > Grid 25,10-12 > Door Left" => Ok(SpotId::Ebih__Grid_25_10_12__Door_Left),
             "Ebih > Grid 25,10-12 > East 10" => Ok(SpotId::Ebih__Grid_25_10_12__East_10),
             "Ebih > Grid 25,10-12 > East 11" => Ok(SpotId::Ebih__Grid_25_10_12__East_11),
             "Ebih > Grid 25,10-12 > East 12" => Ok(SpotId::Ebih__Grid_25_10_12__East_12),
-            "Ebih > Grid 25,10-12 > Gate Left" => Ok(SpotId::Ebih__Grid_25_10_12__Gate_Left),
             "Ebih > Grid 25,10-12 > Hidden Bush" => Ok(SpotId::Ebih__Grid_25_10_12__Hidden_Bush),
             "Ebih > Grid 25,10-12 > Mid-Ledge" => Ok(SpotId::Ebih__Grid_25_10_12__Mid_Ledge),
             "Ebih > Grid 25,10-12 > Top Platform" => Ok(SpotId::Ebih__Grid_25_10_12__Top_Platform),
@@ -1462,6 +1557,39 @@ impl std::str::FromStr for SpotId {
             "Ebih > Grid 25,10-12 > West 12" => Ok(SpotId::Ebih__Grid_25_10_12__West_12),
             "Ebih > Grid 25,2-6 > Pit" => Ok(SpotId::Ebih__Grid_25_2_6__Pit),
             "Ebih > Grid 25,2-6 > West 4" => Ok(SpotId::Ebih__Grid_25_2_6__West_4),
+            "Ebih > Grid 26,10-11 > Cliff" => Ok(SpotId::Ebih__Grid_26_10_11__Cliff),
+            "Ebih > Grid 26,10-11 > East 10" => Ok(SpotId::Ebih__Grid_26_10_11__East_10),
+            "Ebih > Grid 26,10-11 > Ledge" => Ok(SpotId::Ebih__Grid_26_10_11__Ledge),
+            "Ebih > Grid 26,10-11 > Middle Bottom" => {
+                Ok(SpotId::Ebih__Grid_26_10_11__Middle_Bottom)
+            }
+            "Ebih > Grid 26,10-11 > Middle Platform" => {
+                Ok(SpotId::Ebih__Grid_26_10_11__Middle_Platform)
+            }
+            "Ebih > Grid 26,10-11 > Under Ledge" => Ok(SpotId::Ebih__Grid_26_10_11__Under_Ledge),
+            "Ebih > Grid 26,10-11 > Upper Platform" => {
+                Ok(SpotId::Ebih__Grid_26_10_11__Upper_Platform)
+            }
+            "Ebih > Grid 26,10-11 > West 10" => Ok(SpotId::Ebih__Grid_26_10_11__West_10),
+            "Ebih > Grid 26,10-11 > West 11" => Ok(SpotId::Ebih__Grid_26_10_11__West_11),
+            "Ebih > Observation Tower Room > Cliff" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__Cliff)
+            }
+            "Ebih > Observation Tower Room > East 11" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__East_11)
+            }
+            "Ebih > Observation Tower Room > Tower Bottom" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__Tower_Bottom)
+            }
+            "Ebih > Observation Tower Room > Tower Top" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__Tower_Top)
+            }
+            "Ebih > Observation Tower Room > West 10" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__West_10)
+            }
+            "Ebih > Observation Tower Room > West 9" => {
+                Ok(SpotId::Ebih__Observation_Tower_Room__West_9)
+            }
             "Ebih > Tent Interior > Desk" => Ok(SpotId::Ebih__Tent_Interior__Desk),
             "Ebih > Tent Interior > Entry" => Ok(SpotId::Ebih__Tent_Interior__Entry),
             "Ebih > Waterfall > Alcove" => Ok(SpotId::Ebih__Waterfall__Alcove),
@@ -1684,6 +1812,8 @@ pub enum LocationId {
     Antarctica__Building_2U_Corner__Behind_Boxes__Note,
     Antarctica__Power_Room__Switch__Flip,
     Antarctica__Shed__Interior__Shelf,
+    Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
+    Ebih__Base_Camp__Top_Platform__Item,
     Ebih__Boss_Room__Boss__Boss_Reward,
     Ebih__Boss_Room__Boss__Fight_Alu,
     Ebih__Boss_Room__Boss__Hack_Alu,
@@ -1704,6 +1834,7 @@ pub enum LocationId {
     Ebih__Grid_25_10_12__East_10__Remote_Bush,
     Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
     Ebih__Grid_25_2_6__Pit__Item,
+    Ebih__Grid_26_10_11__Ledge__Note,
     Ebih__Tent_Interior__Desk__Note,
     Ebih__Waterfall__Alcove__Pedestal,
     Glacier__Apocalypse_Entry__Terminal__Escape,
@@ -1771,6 +1902,14 @@ impl fmt::Display for LocationId {
             LocationId::Antarctica__Shed__Interior__Shelf => {
                 write!(f, "{}", "Antarctica > Shed > Interior: Shelf")
             }
+            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => write!(
+                f,
+                "{}",
+                "Ebih > Base Camp > Left Platform Moved: Item From The Side"
+            ),
+            LocationId::Ebih__Base_Camp__Top_Platform__Item => {
+                write!(f, "{}", "Ebih > Base Camp > Top Platform: Item")
+            }
             LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
                 write!(f, "{}", "Ebih > Boss Room > Boss: Boss Reward")
             }
@@ -1832,6 +1971,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Ebih__Grid_25_2_6__Pit__Item => {
                 write!(f, "{}", "Ebih > Grid 25,2-6 > Pit: Item")
+            }
+            LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge: Note")
             }
             LocationId::Ebih__Tent_Interior__Desk__Note => {
                 write!(f, "{}", "Ebih > Tent Interior > Desk: Note")
@@ -2021,6 +2163,12 @@ impl std::str::FromStr for LocationId {
             "Antarctica > Shed > Interior: Shelf" => {
                 Ok(LocationId::Antarctica__Shed__Interior__Shelf)
             }
+            "Ebih > Base Camp > Left Platform Moved: Item From The Side" => {
+                Ok(LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side)
+            }
+            "Ebih > Base Camp > Top Platform: Item" => {
+                Ok(LocationId::Ebih__Base_Camp__Top_Platform__Item)
+            }
             "Ebih > Boss Room > Boss: Boss Reward" => {
                 Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward)
             }
@@ -2069,6 +2217,9 @@ impl std::str::FromStr for LocationId {
                 Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush)
             }
             "Ebih > Grid 25,2-6 > Pit: Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
+            "Ebih > Grid 26,10-11 > Ledge: Note" => {
+                Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
+            }
             "Ebih > Tent Interior > Desk: Note" => Ok(LocationId::Ebih__Tent_Interior__Desk__Note),
             "Ebih > Waterfall > Alcove: Pedestal" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal)
@@ -2263,9 +2414,18 @@ pub enum ExitId {
     Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1,
     Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
     Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1,
+    Ebih__Base_Camp__East_11__ex__Top_Platform_1,
     Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1,
     Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1,
+    Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1,
+    Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1,
+    Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2,
     Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1,
+    Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1,
+    Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1,
+    Ebih__Base_Camp__West_11__ex__Left_Platform_1,
+    Ebih__Base_Camp__West_11__ex__Left_Platform_2,
+    Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1,
     Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1,
     Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1,
     Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1,
@@ -2310,6 +2470,11 @@ pub enum ExitId {
     Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1,
     Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1,
     Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1,
+    Ebih__Grid_25_10_12__Door__ex__Door_Left_1,
+    Ebih__Grid_25_10_12__Door__ex__East_11_1,
+    Ebih__Grid_25_10_12__Door_Left__ex__Door_1,
+    Ebih__Grid_25_10_12__East_11__ex__Door_1,
+    Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1,
     Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1,
     Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1,
     Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2,
@@ -2319,6 +2484,18 @@ pub enum ExitId {
     Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1,
     Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1,
     Ebih__Grid_25_2_6__West_4__ex__Pit_1,
+    Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1,
+    Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1,
+    Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1,
+    Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2,
+    Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1,
+    Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1,
+    Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1,
+    Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1,
+    Ebih__Observation_Tower_Room__East_11__ex__Cliff_1,
+    Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1,
+    Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,
+    Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,
     Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1,
     Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1,
     Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1,
@@ -2489,9 +2666,18 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)"),
             ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)"),
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)"),
+            ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1 => write!(f, "{}", "Ebih > Base Camp > East 11 ==> Top Platform (1)"),
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => write!(f, "{}", "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)"),
             ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => write!(f, "{}", "Ebih > Base Camp > Lake Access ==> Glacier > Lake Main Entrance > Ebih Access (1)"),
+            ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1 => write!(f, "{}", "Ebih > Base Camp > Left Platform ==> Top Platform (1)"),
+            ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved ==> Top Platform (1)"),
+            ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => write!(f, "{}", "Ebih > Base Camp > Left Platform Moved ==> Top Platform (2)"),
             ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => write!(f, "{}", "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)"),
+            ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 => write!(f, "{}", "Ebih > Base Camp > Top Platform ==> Left Platform (1)"),
+            ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => write!(f, "{}", "Ebih > Base Camp > Top Platform ==> Left Platform Moved (1)"),
+            ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => write!(f, "{}", "Ebih > Base Camp > West 11 ==> Left Platform (1)"),
+            ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2 => write!(f, "{}", "Ebih > Base Camp > West 11 ==> Left Platform (2)"),
+            ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1 => write!(f, "{}", "Ebih > Base Camp > West 12 ==> By Garage > East 12 (1)"),
             ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => write!(f, "{}", "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)"),
             ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => write!(f, "{}", "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)"),
             ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => write!(f, "{}", "Ebih > Boss Room > East 6 ==> Drone Room > West 6 (1)"),
@@ -2536,6 +2722,11 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,1-5 > West 6 ==> Ebih West > East 6 (1)"),
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)"),
+            ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Door ==> Door Left (1)"),
+            ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Door ==> East 11 (1)"),
+            ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left ==> Door (1)"),
+            ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 11 ==> Door (1)"),
+            ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 11 ==> Grid 26,10-11 > West 11 (1)"),
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)"),
             ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (1)"),
             ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2 => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (2)"),
@@ -2545,6 +2736,18 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)"),
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)"),
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => write!(f, "{}", "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)"),
+            ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Bottom ==> Middle Platform (1)"),
+            ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > Middle Platform ==> West 10 (1)"),
+            ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > Under Ledge ==> Ledge (1)"),
+            ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2 => write!(f, "{}", "Ebih > Grid 26,10-11 > Under Ledge ==> Ledge (2)"),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > Upper Platform ==> Cliff (1)"),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > Upper Platform ==> West 10 (1)"),
+            ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => write!(f, "{}", "Ebih > Grid 26,10-11 > West 10 ==> Grid 25,10-12 > East 10 (1)"),
+            ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => write!(f, "{}", "Ebih > Observation Tower Room > East 11 ==> Base Camp > West 11 (1)"),
+            ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => write!(f, "{}", "Ebih > Observation Tower Room > East 11 ==> Cliff (1)"),
+            ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => write!(f, "{}", "Ebih > Observation Tower Room > Tower Top ==> West 9 (1)"),
+            ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)"),
+            ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)"),
             ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)"),
             ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => write!(f, "{}", "Ebih > Waterfall > Below Left Switch ==> Ledge Below Hole (1)"),
@@ -2720,9 +2923,18 @@ impl std::str::FromStr for ExitId {
             "Ebih > Base Camp > Building Entry ==> Building Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1),
             "Ebih > Base Camp > Bunker Entry ==> Bunker Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1),
             "Ebih > Base Camp > East 11 ==> Glacier > Grid 31,9-12 > Midair (1)" => Ok(ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1),
+            "Ebih > Base Camp > East 11 ==> Top Platform (1)" => Ok(ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1),
             "Ebih > Base Camp > East 12 ==> Glacier > Grid 31,9-12 > West 12 (1)" => Ok(ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1),
             "Ebih > Base Camp > Lake Access ==> Glacier > Lake Main Entrance > Ebih Access (1)" => Ok(ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1),
+            "Ebih > Base Camp > Left Platform ==> Top Platform (1)" => Ok(ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1),
+            "Ebih > Base Camp > Left Platform Moved ==> Top Platform (1)" => Ok(ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1),
+            "Ebih > Base Camp > Left Platform Moved ==> Top Platform (2)" => Ok(ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2),
             "Ebih > Base Camp > Tent Entry ==> Tent Interior > Entry (1)" => Ok(ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1),
+            "Ebih > Base Camp > Top Platform ==> Left Platform (1)" => Ok(ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1),
+            "Ebih > Base Camp > Top Platform ==> Left Platform Moved (1)" => Ok(ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1),
+            "Ebih > Base Camp > West 11 ==> Left Platform (1)" => Ok(ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1),
+            "Ebih > Base Camp > West 11 ==> Left Platform (2)" => Ok(ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2),
+            "Ebih > Base Camp > West 12 ==> By Garage > East 12 (1)" => Ok(ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1),
             "Ebih > Base Camp > West 13 ==> By Garage > East 13 (1)" => Ok(ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1),
             "Ebih > Boss Room > East 4 ==> Drone Room > West 4 (1)" => Ok(ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1),
             "Ebih > Boss Room > East 6 ==> Drone Room > West 6 (1)" => Ok(ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1),
@@ -2767,6 +2979,11 @@ impl std::str::FromStr for ExitId {
             "Ebih > Grid 21,1-5 > West 6 ==> Ebih West > East 6 (1)" => Ok(ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1),
             "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1),
             "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1),
+            "Ebih > Grid 25,10-12 > Door ==> Door Left (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1),
+            "Ebih > Grid 25,10-12 > Door ==> East 11 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1),
+            "Ebih > Grid 25,10-12 > Door Left ==> Door (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1),
+            "Ebih > Grid 25,10-12 > East 11 ==> Door (1)" => Ok(ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1),
+            "Ebih > Grid 25,10-12 > East 11 ==> Grid 26,10-11 > West 11 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1),
             "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1),
             "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1),
             "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (2)" => Ok(ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2),
@@ -2776,6 +2993,18 @@ impl std::str::FromStr for ExitId {
             "Ebih > Grid 25,10-12 > West 11 ==> Waterfall > East 11 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1),
             "Ebih > Grid 25,2-6 > West 4 ==> Drone Room > East 4 (1)" => Ok(ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1),
             "Ebih > Grid 25,2-6 > West 4 ==> Pit (1)" => Ok(ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1),
+            "Ebih > Grid 26,10-11 > Middle Bottom ==> Middle Platform (1)" => Ok(ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1),
+            "Ebih > Grid 26,10-11 > Middle Platform ==> West 10 (1)" => Ok(ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1),
+            "Ebih > Grid 26,10-11 > Under Ledge ==> Ledge (1)" => Ok(ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1),
+            "Ebih > Grid 26,10-11 > Under Ledge ==> Ledge (2)" => Ok(ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2),
+            "Ebih > Grid 26,10-11 > Upper Platform ==> Cliff (1)" => Ok(ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1),
+            "Ebih > Grid 26,10-11 > Upper Platform ==> West 10 (1)" => Ok(ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1),
+            "Ebih > Grid 26,10-11 > West 10 ==> Grid 25,10-12 > East 10 (1)" => Ok(ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1),
+            "Ebih > Observation Tower Room > East 11 ==> Base Camp > West 11 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1),
+            "Ebih > Observation Tower Room > East 11 ==> Cliff (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1),
+            "Ebih > Observation Tower Room > Tower Top ==> West 9 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1),
+            "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1),
+            "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1),
             "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)" => Ok(ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1),
             "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)" => Ok(ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1),
             "Ebih > Waterfall > Below Left Switch ==> Ledge Below Hole (1)" => Ok(ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1),
@@ -2901,6 +3130,8 @@ pub enum ActionId {
     Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Amagi__Main_Area__Carving__Key_Combo,
     Amagi__Main_Area__Save_Point__Save,
+    Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
+    Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
     Ebih__Base_Camp__Save_Point__Save,
     Ebih__Drone_Room__Moving_Platform__Throw_Drone,
     Ebih__Drone_Room__Pit_Left__Activate_Lift,
@@ -2933,6 +3164,16 @@ impl fmt::Display for ActionId {
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 write!(f, "{}", "Amagi > Main Area > Save Point: Save")
             }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => write!(
+                f,
+                "{}",
+                "Ebih > Base Camp > Left Platform: Move Left Platform"
+            ),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => write!(
+                f,
+                "{}",
+                "Ebih > Base Camp > Left Platform Moved: Reset Left Platform"
+            ),
             ActionId::Ebih__Base_Camp__Save_Point__Save => {
                 write!(f, "{}", "Ebih > Base Camp > Save Point: Save")
             }
@@ -3008,6 +3249,12 @@ impl std::str::FromStr for ActionId {
             "Amagi > Main Area > Save Point: Save" => {
                 Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
             }
+            "Ebih > Base Camp > Left Platform: Move Left Platform" => {
+                Ok(ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform)
+            }
+            "Ebih > Base Camp > Left Platform Moved: Reset Left Platform" => {
+                Ok(ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform)
+            }
             "Ebih > Base Camp > Save Point: Save" => {
                 Ok(ActionId::Ebih__Base_Camp__Save_Point__Save)
             }
@@ -3063,6 +3310,7 @@ pub enum CanonId {
     #[default]
     None,
     Notes_2053_02_27,
+    Base_Camp_Node,
     Melee_Charge,
     Ebih_Bush_Flask,
     Infect,
@@ -3075,6 +3323,7 @@ impl fmt::Display for CanonId {
         match self {
             CanonId::None => write!(f, "{}", "None"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
+            CanonId::Base_Camp_Node => write!(f, "{}", "Base Camp Node"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
             CanonId::Infect => write!(f, "{}", "Infect"),
@@ -3091,6 +3340,7 @@ impl std::str::FromStr for CanonId {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
+            "Base Camp Node" => Ok(CanonId::Base_Camp_Node),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Infect" => Ok(CanonId::Infect),
@@ -3247,7 +3497,13 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Base_Camp__Behind_Vehicle
         | SpotId::Ebih__Base_Camp__Building_Entry
         | SpotId::Ebih__Base_Camp__Tent_Entry
-        | SpotId::Ebih__Base_Camp__West_13 => AreaId::Ebih__Base_Camp,
+        | SpotId::Ebih__Base_Camp__West_13
+        | SpotId::Ebih__Base_Camp__West_11
+        | SpotId::Ebih__Base_Camp__West_Midair
+        | SpotId::Ebih__Base_Camp__West_12
+        | SpotId::Ebih__Base_Camp__Left_Platform
+        | SpotId::Ebih__Base_Camp__Left_Platform_Moved
+        | SpotId::Ebih__Base_Camp__Top_Platform => AreaId::Ebih__Base_Camp,
         SpotId::Ebih__Bunker_Interior__Entry | SpotId::Ebih__Bunker_Interior__Desk => {
             AreaId::Ebih__Bunker_Interior
         }
@@ -3267,14 +3523,15 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__By_Garage__West_Bush
         | SpotId::Ebih__By_Garage__West_12
         | SpotId::Ebih__By_Garage__West_13
-        | SpotId::Ebih__By_Garage__Garage_Entry => AreaId::Ebih__By_Garage,
+        | SpotId::Ebih__By_Garage__Garage_Entry
+        | SpotId::Ebih__By_Garage__East_12 => AreaId::Ebih__By_Garage,
         SpotId::Ebih__Garage__Entry | SpotId::Ebih__Garage__Boxes => AreaId::Ebih__Garage,
         SpotId::Ebih__Grid_25_10_12__East_12
         | SpotId::Ebih__Grid_25_10_12__Bush
         | SpotId::Ebih__Grid_25_10_12__West_12
         | SpotId::Ebih__Grid_25_10_12__Below_Bush
         | SpotId::Ebih__Grid_25_10_12__Mid_Ledge
-        | SpotId::Ebih__Grid_25_10_12__Gate_Left
+        | SpotId::Ebih__Grid_25_10_12__Door_Left
         | SpotId::Ebih__Grid_25_10_12__Top_Platform
         | SpotId::Ebih__Grid_25_10_12__West_11
         | SpotId::Ebih__Grid_25_10_12__West_10
@@ -3375,6 +3632,21 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Ebih__Grid_25_2_6__West_4 | SpotId::Ebih__Grid_25_2_6__Pit => {
             AreaId::Ebih__Grid_25_2_6
         }
+        SpotId::Ebih__Grid_26_10_11__West_11
+        | SpotId::Ebih__Grid_26_10_11__Middle_Bottom
+        | SpotId::Ebih__Grid_26_10_11__Under_Ledge
+        | SpotId::Ebih__Grid_26_10_11__Ledge
+        | SpotId::Ebih__Grid_26_10_11__Middle_Platform
+        | SpotId::Ebih__Grid_26_10_11__Upper_Platform
+        | SpotId::Ebih__Grid_26_10_11__West_10
+        | SpotId::Ebih__Grid_26_10_11__Cliff
+        | SpotId::Ebih__Grid_26_10_11__East_10 => AreaId::Ebih__Grid_26_10_11,
+        SpotId::Ebih__Observation_Tower_Room__West_9
+        | SpotId::Ebih__Observation_Tower_Room__Tower_Top
+        | SpotId::Ebih__Observation_Tower_Room__Tower_Bottom
+        | SpotId::Ebih__Observation_Tower_Room__Cliff
+        | SpotId::Ebih__Observation_Tower_Room__West_10
+        | SpotId::Ebih__Observation_Tower_Room__East_11 => AreaId::Ebih__Observation_Tower_Room,
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => AreaId::Giguna__Giguna_Northeast,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             AreaId::Glacier__Dock_Elevator
@@ -3566,7 +3838,13 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Base_Camp__Behind_Vehicle
         | SpotId::Ebih__Base_Camp__Building_Entry
         | SpotId::Ebih__Base_Camp__Tent_Entry
-        | SpotId::Ebih__Base_Camp__West_13 => RegionId::Ebih,
+        | SpotId::Ebih__Base_Camp__West_13
+        | SpotId::Ebih__Base_Camp__West_11
+        | SpotId::Ebih__Base_Camp__West_Midair
+        | SpotId::Ebih__Base_Camp__West_12
+        | SpotId::Ebih__Base_Camp__Left_Platform
+        | SpotId::Ebih__Base_Camp__Left_Platform_Moved
+        | SpotId::Ebih__Base_Camp__Top_Platform => RegionId::Ebih,
         SpotId::Ebih__Bunker_Interior__Entry | SpotId::Ebih__Bunker_Interior__Desk => {
             RegionId::Ebih
         }
@@ -3584,14 +3862,15 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__By_Garage__West_Bush
         | SpotId::Ebih__By_Garage__West_12
         | SpotId::Ebih__By_Garage__West_13
-        | SpotId::Ebih__By_Garage__Garage_Entry => RegionId::Ebih,
+        | SpotId::Ebih__By_Garage__Garage_Entry
+        | SpotId::Ebih__By_Garage__East_12 => RegionId::Ebih,
         SpotId::Ebih__Garage__Entry | SpotId::Ebih__Garage__Boxes => RegionId::Ebih,
         SpotId::Ebih__Grid_25_10_12__East_12
         | SpotId::Ebih__Grid_25_10_12__Bush
         | SpotId::Ebih__Grid_25_10_12__West_12
         | SpotId::Ebih__Grid_25_10_12__Below_Bush
         | SpotId::Ebih__Grid_25_10_12__Mid_Ledge
-        | SpotId::Ebih__Grid_25_10_12__Gate_Left
+        | SpotId::Ebih__Grid_25_10_12__Door_Left
         | SpotId::Ebih__Grid_25_10_12__Top_Platform
         | SpotId::Ebih__Grid_25_10_12__West_11
         | SpotId::Ebih__Grid_25_10_12__West_10
@@ -3690,6 +3969,21 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Drone_Room__Tree
         | SpotId::Ebih__Drone_Room__East_4 => RegionId::Ebih,
         SpotId::Ebih__Grid_25_2_6__West_4 | SpotId::Ebih__Grid_25_2_6__Pit => RegionId::Ebih,
+        SpotId::Ebih__Grid_26_10_11__West_11
+        | SpotId::Ebih__Grid_26_10_11__Middle_Bottom
+        | SpotId::Ebih__Grid_26_10_11__Under_Ledge
+        | SpotId::Ebih__Grid_26_10_11__Ledge
+        | SpotId::Ebih__Grid_26_10_11__Middle_Platform
+        | SpotId::Ebih__Grid_26_10_11__Upper_Platform
+        | SpotId::Ebih__Grid_26_10_11__West_10
+        | SpotId::Ebih__Grid_26_10_11__Cliff
+        | SpotId::Ebih__Grid_26_10_11__East_10 => RegionId::Ebih,
+        SpotId::Ebih__Observation_Tower_Room__West_9
+        | SpotId::Ebih__Observation_Tower_Room__Tower_Top
+        | SpotId::Ebih__Observation_Tower_Room__Tower_Bottom
+        | SpotId::Ebih__Observation_Tower_Room__Cliff
+        | SpotId::Ebih__Observation_Tower_Room__West_10
+        | SpotId::Ebih__Observation_Tower_Room__East_11 => RegionId::Ebih,
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => RegionId::Giguna,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             RegionId::Glacier
@@ -3821,6 +4115,8 @@ impl world::Accessible for Location {
                 LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => true,
                 LocationId::Antarctica__Power_Room__Switch__Flip => true,
                 LocationId::Antarctica__Shed__Interior__Shelf => true,
+                LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => true,
+                LocationId::Ebih__Base_Camp__Top_Platform__Item => true,
                 LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
                     rules::access_defeat_ebih_alu(&ctx)
                 }
@@ -3853,6 +4149,7 @@ impl world::Accessible for Location {
                 LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::access_bs(&ctx),
                 LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
                 LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
+                LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
                 LocationId::Ebih__Tent_Interior__Desk__Note => true,
                 LocationId::Ebih__Waterfall__Alcove__Pedestal => true,
                 LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
@@ -4051,9 +4348,18 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => true,
             ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1 => true,
+            ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1 => rules::access_platform_and_hook_and_hover(&ctx),
             ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => true,
             ExitId::Ebih__Base_Camp__Lake_Access__ex__Glacier__Lake_Main_Entrance__Ebih_Access_1 => true,
+            ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1 => rules::access_hover_and_hook(&ctx),
+            ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => rules::access_hook(&ctx),
             ExitId::Ebih__Base_Camp__Tent_Entry__ex__Tent_Interior__Entry_1 => true,
+            ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 => rules::access_ebih__base_camp__top_platform__ex__left_platform_1__req(&ctx),
+            ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => rules::access_ebih__base_camp__top_platform__ex__left_platform_moved_1__req(&ctx),
+            ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => rules::access_ebih__base_camp__west_11__ex__left_platform_1__req(&ctx),
+            ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2 => rules::access_ebih__base_camp__west_11__ex__left_platform_2__req(&ctx),
+            ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1 => true,
             ExitId::Ebih__Base_Camp__West_13__ex__By_Garage__East_13_1 => true,
             ExitId::Ebih__Boss_Room__East_4__ex__Drone_Room__West_4_1 => true,
             ExitId::Ebih__Boss_Room__East_6__ex__Drone_Room__West_6_1 => true,
@@ -4098,6 +4404,11 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_21_1_5__West_6__ex__Ebih_West__East_6_1 => true,
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1 => rules::access_ebih__grid_25_10_12__door__ex__door_left_1__req(&ctx),
+            ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1 => rules::access_ebih__grid_25_10_12__door__ex__east_11_1__req(&ctx),
+            ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1 => rules::access_ebih__grid_25_10_12__door_left__ex__door_1__req(&ctx),
+            ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1 => rules::access_ebih__grid_25_10_12__east_11__ex__door_1__req(&ctx),
+            ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1 => true,
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => true,
             ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2 => rules::access_hook(&ctx),
@@ -4107,6 +4418,18 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_25_10_12__West_11__ex__Waterfall__East_11_1 => true,
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Drone_Room__East_4_1 => rules::access_mode__drone(&ctx),
             ExitId::Ebih__Grid_25_2_6__West_4__ex__Pit_1 => rules::access_mode__drone(&ctx),
+            ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1 => rules::access_hover(&ctx),
+            ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2 => rules::access_hook(&ctx),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => true,
+            ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => true,
+            ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
+            ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
             ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => true,
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => rules::access_mode__drone(&ctx),
@@ -4271,6 +4594,14 @@ impl world::Accessible for Action {
                     rules::access_amagi__main_area__carving__key_combo__req(&ctx)
                 }
                 ActionId::Amagi__Main_Area__Save_Point__Save => true,
+                ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                    rules::access_ebih__base_camp__left_platform__move_left_platform__req(&ctx)
+                }
+                ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                    rules::access_ebih__base_camp__left_platform_moved__reset_left_platform__req(
+                        &ctx,
+                    )
+                }
                 ActionId::Ebih__Base_Camp__Save_Point__Save => true,
                 ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                     rules::access_can_deploy(&ctx)
@@ -4336,6 +4667,8 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
             ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone__amagi__cave_behind_waterfall__top(ctx),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_deploy_drone__ebih__waterfall__below_left_switch(ctx),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
@@ -4449,7 +4782,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 302],
+    raw_spots: [SpotId; 324],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -4460,7 +4793,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 71;
+    const NUM_LOCATIONS: i32 = 74;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -4497,6 +4830,10 @@ impl world::World for World {
             CanonId::Notes_2053_02_27 => {
                 vec![LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note]
             }
+            CanonId::Base_Camp_Node => vec![
+                LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
+                LocationId::Ebih__Base_Camp__Top_Platform__Item,
+            ],
             CanonId::Melee_Charge => vec![
                 LocationId::Ebih__Building_Interior__Entry__Remote_Urn,
                 LocationId::Ebih__Building_Interior__Corner__Urn,
@@ -4549,6 +4886,12 @@ impl world::World for World {
             LocationId::Antarctica__Power_Room__Switch__Flip => {
                 SpotId::Antarctica__Power_Room__Switch
             }
+            LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => {
+                SpotId::Ebih__Base_Camp__Left_Platform_Moved
+            }
+            LocationId::Ebih__Base_Camp__Top_Platform__Item => {
+                SpotId::Ebih__Base_Camp__Top_Platform
+            }
             LocationId::Ebih__Bunker_Interior__Desk__Note => SpotId::Ebih__Bunker_Interior__Desk,
             LocationId::Ebih__Building_Interior__Entry__Remote_Urn => {
                 SpotId::Ebih__Building_Interior__Entry
@@ -4585,6 +4928,7 @@ impl world::World for World {
                 SpotId::Ebih__Drone_Room__Middle_Platform
             }
             LocationId::Ebih__Grid_25_2_6__Pit__Item => SpotId::Ebih__Grid_25_2_6__Pit,
+            LocationId::Ebih__Grid_26_10_11__Ledge__Note => SpotId::Ebih__Grid_26_10_11__Ledge,
             LocationId::Glacier__Compass_Room__Center__Table => {
                 SpotId::Glacier__Compass_Room__Center
             }
@@ -4662,6 +5006,12 @@ impl world::World for World {
                 SpotId::Amagi__Cave_Behind_Waterfall__Middle
             }
             ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                SpotId::Ebih__Base_Camp__Left_Platform
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                SpotId::Ebih__Base_Camp__Left_Platform_Moved
+            }
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
                 SpotId::Ebih__Waterfall__Ledge_Below_Hole
             }
@@ -4802,10 +5152,16 @@ impl World {
                 SpotId::Ebih__Base_Camp__East_11,
                 SpotId::Ebih__Base_Camp__East_12,
                 SpotId::Ebih__Base_Camp__Lake_Access,
+                SpotId::Ebih__Base_Camp__Left_Platform,
+                SpotId::Ebih__Base_Camp__Left_Platform_Moved,
                 SpotId::Ebih__Base_Camp__Save_Point,
                 SpotId::Ebih__Base_Camp__Staircase,
                 SpotId::Ebih__Base_Camp__Tent_Entry,
+                SpotId::Ebih__Base_Camp__Top_Platform,
+                SpotId::Ebih__Base_Camp__West_11,
+                SpotId::Ebih__Base_Camp__West_12,
                 SpotId::Ebih__Base_Camp__West_13,
+                SpotId::Ebih__Base_Camp__West_Midair,
                 SpotId::Ebih__Boss_Room__Boss,
                 SpotId::Ebih__Boss_Room__East_4,
                 SpotId::Ebih__Boss_Room__East_6,
@@ -4823,6 +5179,7 @@ impl World {
                 SpotId::Ebih__Bunker_Interior__Entry,
                 SpotId::Ebih__By_Garage__Crawlspace,
                 SpotId::Ebih__By_Garage__Crawlspace_Opening,
+                SpotId::Ebih__By_Garage__East_12,
                 SpotId::Ebih__By_Garage__East_13,
                 SpotId::Ebih__By_Garage__East_Bush,
                 SpotId::Ebih__By_Garage__East_Platform,
@@ -4881,10 +5238,10 @@ impl World {
                 SpotId::Ebih__Grid_25_10_12__Below_Bush,
                 SpotId::Ebih__Grid_25_10_12__Bush,
                 SpotId::Ebih__Grid_25_10_12__Door,
+                SpotId::Ebih__Grid_25_10_12__Door_Left,
                 SpotId::Ebih__Grid_25_10_12__East_10,
                 SpotId::Ebih__Grid_25_10_12__East_11,
                 SpotId::Ebih__Grid_25_10_12__East_12,
-                SpotId::Ebih__Grid_25_10_12__Gate_Left,
                 SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
                 SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
                 SpotId::Ebih__Grid_25_10_12__Top_Platform,
@@ -4893,6 +5250,21 @@ impl World {
                 SpotId::Ebih__Grid_25_10_12__West_12,
                 SpotId::Ebih__Grid_25_2_6__Pit,
                 SpotId::Ebih__Grid_25_2_6__West_4,
+                SpotId::Ebih__Grid_26_10_11__Cliff,
+                SpotId::Ebih__Grid_26_10_11__East_10,
+                SpotId::Ebih__Grid_26_10_11__Ledge,
+                SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+                SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+                SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+                SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+                SpotId::Ebih__Grid_26_10_11__West_10,
+                SpotId::Ebih__Grid_26_10_11__West_11,
+                SpotId::Ebih__Observation_Tower_Room__Cliff,
+                SpotId::Ebih__Observation_Tower_Room__East_11,
+                SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+                SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+                SpotId::Ebih__Observation_Tower_Room__West_10,
+                SpotId::Ebih__Observation_Tower_Room__West_9,
                 SpotId::Ebih__Tent_Interior__Desk,
                 SpotId::Ebih__Tent_Interior__Entry,
                 SpotId::Ebih__Waterfall__Alcove,
@@ -5083,6 +5455,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 0,
             exit_id: None,
         },
+        LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => Location {
+            id: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
+            canonical: CanonId::Base Camp Node,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 1000,
+            exit_id: None,
+        },
+        LocationId::Ebih__Base_Camp__Top_Platform__Item => Location {
+            id: LocationId::Ebih__Base_Camp__Top_Platform__Item,
+            canonical: CanonId::Base Camp Node,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
         LocationId::Ebih__Bunker_Interior__Desk__Note => Location {
             id: LocationId::Ebih__Bunker_Interior__Desk__Note,
             canonical: CanonId::None,
@@ -5257,6 +5645,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Flask,
             price: Currency::Free,
             time: 5500,
+            exit_id: None,
+        },
+        LocationId::Ebih__Grid_26_10_11__Ledge__Note => Location {
+            id: LocationId::Ebih__Grid_26_10_11__Ledge__Note,
+            canonical: CanonId::None,
+            item: Item::Terminal_Breakthrough_1,
+            price: Currency::Free,
+            time: 0,
             exit_id: None,
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
@@ -5667,7 +6063,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1 => Exit {
             id: ExitId::Amagi__Main_Area__Secret_Outcropping__ex__Cave_Behind_Waterfall__Bottom_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
             price: Currency::Free,
             loc_id: None,
@@ -5695,14 +6091,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1 => Exit {
             id: ExitId::Amagi__Main_Area__Secret_Waterfall__ex__Cave_Behind_Waterfall__Top_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Amagi__Cave_Behind_Waterfall__Top,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1 => Exit {
             id: ExitId::Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Amagi__Main_Area__Secret_Outcropping,
             price: Currency::Free,
             loc_id: None,
@@ -5730,7 +6126,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1 => Exit {
             id: ExitId::Amagi__Cave_Behind_Waterfall__Top__ex__Main_Area__Secret_Waterfall_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Amagi__Main_Area__Secret_Waterfall,
             price: Currency::Free,
             loc_id: None,
@@ -5793,7 +6189,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1 => Exit {
             id: ExitId::Antarctica__West__Shed_Entry__ex__Shed__Interior_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__Shed__Interior,
             price: Currency::Free,
             loc_id: None,
@@ -5807,14 +6203,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1 => Exit {
             id: ExitId::Antarctica__Shed__Interior__ex__West__Shed_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__West__Shed_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1 => Exit {
             id: ExitId::Antarctica__Building_1W__West_Entry__ex__West__Boxes_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__West__Boxes,
             price: Currency::Free,
             loc_id: None,
@@ -5835,28 +6231,28 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1 => Exit {
             id: ExitId::Antarctica__Building_1E__East_Entry__ex__East__Building_1_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__East__Building_1_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1 => Exit {
             id: ExitId::Antarctica__East__Building_1_Entry__ex__Building_1E__East_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__Building_1E__East_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1 => Exit {
             id: ExitId::Antarctica__East__Building_2_Entry__ex__Building_2L__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__Building_2L__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1 => Exit {
             id: ExitId::Antarctica__East__Building_2_Upper__ex__Building_2U__Door_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__Building_2U__Door,
             price: Currency::Free,
             loc_id: None,
@@ -5870,7 +6266,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1 => Exit {
             id: ExitId::Antarctica__Building_2L__Entry__ex__East__Building_2_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__East__Building_2_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -5905,7 +6301,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1 => Exit {
             id: ExitId::Antarctica__Building_2U__Door__ex__East__Building_2_Upper_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__East__Building_2_Upper,
             price: Currency::Free,
             loc_id: None,
@@ -5919,7 +6315,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1 => Exit {
             id: ExitId::Antarctica__Top__Power_Entry__ex__Power_Room__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__Power_Room__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -5933,7 +6329,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1 => Exit {
             id: ExitId::Antarctica__Power_Room__Entry__ex__Top__Power_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Antarctica__Top__Power_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -5959,6 +6355,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Top_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1 => Exit {
             id: ExitId::Ebih__Base_Camp__East_12__ex__Glacier__Grid_31_9_12__West_12_1,
             time: 1350,
@@ -5968,7 +6371,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1 => Exit {
             id: ExitId::Ebih__Base_Camp__Bunker_Entry__ex__Bunker_Interior__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Bunker_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -5982,7 +6385,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1 => Exit {
             id: ExitId::Ebih__Base_Camp__Building_Entry__ex__Building_Interior__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Building_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -6001,16 +6404,72 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Left_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2 => Exit {
+            id: ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Left_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1,
+            time: 1350,
+            dest: SpotId::Ebih__By_Garage__East_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Top_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Top_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2 => Exit {
+            id: ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Top_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Left_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1 => Exit {
+            id: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1 => Exit {
             id: ExitId::Ebih__Bunker_Interior__Entry__ex__Base_Camp__Bunker_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Base_Camp__Bunker_Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1 => Exit {
             id: ExitId::Ebih__Building_Interior__Entry__ex__Base_Camp__Building_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Base_Camp__Building_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -6080,14 +6539,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1 => Exit {
             id: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Garage__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => Exit {
             id: ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__By_Garage__Garage_Entry,
             price: Currency::Free,
             loc_id: None,
@@ -6120,6 +6579,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1,
+            time: 700,
+            dest: SpotId::Ebih__Grid_25_10_12__Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => Exit {
             id: ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1,
             time: 3200,
@@ -6138,6 +6604,34 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1,
             time: 1350,
             dest: SpotId::Ebih__Waterfall__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1,
+            time: 700,
+            dest: SpotId::Ebih__Grid_25_10_12__Door_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1,
+            time: 500,
+            dest: SpotId::Ebih__Grid_25_10_12__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1,
+            time: 1000,
+            dest: SpotId::Ebih__Grid_25_10_12__Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1,
+            time: 1350,
+            dest: SpotId::Ebih__Grid_26_10_11__West_11,
             price: Currency::Free,
             loc_id: None,
         },
@@ -6533,6 +7027,90 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1,
+            time: 1000,
+            dest: SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1,
+            time: 1000,
+            dest: SpotId::Ebih__Grid_26_10_11__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2,
+            time: 800,
+            dest: SpotId::Ebih__Grid_26_10_11__Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1,
+            time: 2800,
+            dest: SpotId::Ebih__Grid_26_10_11__West_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1,
+            time: 2000,
+            dest: SpotId::Ebih__Grid_26_10_11__West_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1,
+            time: 1150,
+            dest: SpotId::Ebih__Grid_26_10_11__Cliff,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1 => Exit {
+            id: ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1,
+            time: 1350,
+            dest: SpotId::Ebih__Grid_25_10_12__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => Exit {
+            id: ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,
+            time: 1350,
+            dest: SpotId::Ebih__Ebih_East__East_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => Exit {
+            id: ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1,
+            time: 3000,
+            dest: SpotId::Ebih__Observation_Tower_Room__West_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => Exit {
+            id: ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,
+            time: 1350,
+            dest: SpotId::Ebih__Grid_26_10_11__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => Exit {
+            id: ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1,
+            time: 2000,
+            dest: SpotId::Ebih__Observation_Tower_Room__Cliff,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => Exit {
+            id: ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1,
+            time: 1000,
+            dest: SpotId::Ebih__Base_Camp__West_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => Exit {
             id: ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1,
             time: 1350,
@@ -6549,14 +7127,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => Exit {
             id: ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Glacier__Dock_Outside__Entry,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1 => Exit {
             id: ExitId::Glacier__Dock_Outside__Entry__ex__Dock_Interior__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Glacier__Dock_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -7203,6 +7781,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Ebih__Base_Camp__Save_Point__Save => Action {
             id: ActionId::Ebih__Base_Camp__Save_Point__Save,
             time: 1300,
+            price: Currency::Free,
+        },
+        ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => Action {
+            id: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
+            time: 1000,
+            price: Currency::Free,
+        },
+        ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => Action {
+            id: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
+            time: 1000,
             price: Currency::Free,
         },
         ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => Action {
@@ -8388,14 +8976,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             exits: Range {
                 start: ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1.into_usize(),
-                end: ExitId::Ebih__Base_Camp__East_11__ex__Glacier__Grid_31_9_12__Midair_1.into_usize() + 1,
+                end: ExitId::Ebih__Base_Camp__East_11__ex__Top_Platform_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__East_12 => Spot {
@@ -8412,7 +9000,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Staircase => Spot {
@@ -8428,7 +9016,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Save_Point => Spot {
@@ -8445,7 +9033,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Bunker_Entry => Spot {
@@ -8462,7 +9050,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Lake_Access => Spot {
@@ -8479,7 +9067,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Behind_Vehicle => Spot {
@@ -8495,7 +9083,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Building_Entry => Spot {
@@ -8512,7 +9100,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__Tent_Entry => Spot {
@@ -8529,7 +9117,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Base_Camp__West_13 => Spot {
@@ -8546,7 +9134,112 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
-                end: SpotId::Ebih__Base_Camp__West_13.into_usize() + 1,
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Base_Camp__West_11 => Spot {
+            id: SpotId::Ebih__Base_Camp__West_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Base_Camp__West_Midair => Spot {
+            id: SpotId::Ebih__Base_Camp__West_Midair,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Base_Camp__West_12 => Spot {
+            id: SpotId::Ebih__Base_Camp__West_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__West_12__ex__By_Garage__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Base_Camp__Left_Platform => Spot {
+            id: SpotId::Ebih__Base_Camp__Left_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Left_Platform__ex__Top_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform.into_usize(),
+                end: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Base_Camp__Left_Platform_Moved => Spot {
+            id: SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+            locations: Range {
+                start: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side.into_usize(),
+                end: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform.into_usize(),
+                end: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Base_Camp__Top_Platform => Spot {
+            id: SpotId::Ebih__Base_Camp__Top_Platform,
+            locations: Range {
+                start: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize(),
+                end: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1.into_usize(),
+                end: ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Base_Camp__Behind_Vehicle.into_usize(),
+                end: SpotId::Ebih__Base_Camp__West_Midair.into_usize() + 1,
             },
         },
         SpotId::Ebih__Bunker_Interior__Entry => Spot {
@@ -8836,6 +9529,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
+        SpotId::Ebih__By_Garage__East_12 => Spot {
+            id: SpotId::Ebih__By_Garage__East_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
         SpotId::Ebih__Garage__Entry => Spot {
             id: SpotId::Ebih__Garage__Entry,
             locations: Range {
@@ -8954,13 +9663,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
             },
         },
-        SpotId::Ebih__Grid_25_10_12__Gate_Left => Spot {
-            id: SpotId::Ebih__Grid_25_10_12__Gate_Left,
+        SpotId::Ebih__Grid_25_10_12__Door_Left => Spot {
+            id: SpotId::Ebih__Grid_25_10_12__Door_Left,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Door_Left__ex__Door_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -9027,7 +9737,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Grid_25_10_12__Door__ex__Door_Left_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Door__ex__East_11_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -9043,7 +9754,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Grid_25_10_12__East_11__ex__Door_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__East_11__ex__Grid_26_10_11__West_11_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -10629,6 +11341,256 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             area_spots: Range {
                 start: SpotId::Ebih__Grid_25_2_6__Pit.into_usize(),
                 end: SpotId::Ebih__Grid_25_2_6__West_4.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__West_11 => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__West_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__Middle_Bottom => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__Under_Ledge => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__Ledge => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__Ledge,
+            locations: Range {
+                start: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize(),
+                end: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__Middle_Platform => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__Upper_Platform => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__Upper_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__West_10 => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__West_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_26_10_11__West_10__ex__Grid_25_10_12__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__Cliff => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__Cliff,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_26_10_11__East_10 => Spot {
+            id: SpotId::Ebih__Grid_26_10_11__East_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_26_10_11__Cliff.into_usize(),
+                end: SpotId::Ebih__Grid_26_10_11__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Observation_Tower_Room__West_9 => Spot {
+            id: SpotId::Ebih__Observation_Tower_Room__West_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Observation_Tower_Room__Tower_Top => Spot {
+            id: SpotId::Ebih__Observation_Tower_Room__Tower_Top,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => Spot {
+            id: SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Observation_Tower_Room__Cliff => Spot {
+            id: SpotId::Ebih__Observation_Tower_Room__Cliff,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Observation_Tower_Room__West_10 => Spot {
+            id: SpotId::Ebih__Observation_Tower_Room__West_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Observation_Tower_Room__East_11 => Spot {
+            id: SpotId::Ebih__Observation_Tower_Room__East_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1.into_usize(),
+                end: ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Observation_Tower_Room__Cliff.into_usize(),
+                end: SpotId::Ebih__Observation_Tower_Room__West_9.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => Spot {
@@ -12467,6 +13429,20 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Base_Camp__Building_Entry => Range { start: 0, end: 0 },
         SpotId::Ebih__Base_Camp__Tent_Entry => Range { start: 0, end: 0 },
         SpotId::Ebih__Base_Camp__West_13 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Base_Camp__West_11 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Base_Camp__West_Midair => Range { start: 0, end: 0 },
+        SpotId::Ebih__Base_Camp__West_12 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Base_Camp__Left_Platform => Range { start: 0, end: 0 },
+        SpotId::Ebih__Base_Camp__Left_Platform_Moved => Range {
+            start: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side
+                .into_usize(),
+            end: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side.into_usize()
+                + 1,
+        },
+        SpotId::Ebih__Base_Camp__Top_Platform => Range {
+            start: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize(),
+            end: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize() + 1,
+        },
         SpotId::Ebih__Bunker_Interior__Entry => Range { start: 0, end: 0 },
         SpotId::Ebih__Bunker_Interior__Desk => Range {
             start: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize(),
@@ -12499,6 +13475,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__By_Garage__West_12 => Range { start: 0, end: 0 },
         SpotId::Ebih__By_Garage__West_13 => Range { start: 0, end: 0 },
         SpotId::Ebih__By_Garage__Garage_Entry => Range { start: 0, end: 0 },
+        SpotId::Ebih__By_Garage__East_12 => Range { start: 0, end: 0 },
         SpotId::Ebih__Garage__Entry => Range { start: 0, end: 0 },
         SpotId::Ebih__Garage__Boxes => Range {
             start: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize(),
@@ -12509,7 +13486,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Grid_25_10_12__West_12 => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__Below_Bush => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__Mid_Ledge => Range { start: 0, end: 0 },
-        SpotId::Ebih__Grid_25_10_12__Gate_Left => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_25_10_12__Door_Left => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__Top_Platform => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__West_11 => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__West_10 => Range { start: 0, end: 0 },
@@ -12651,6 +13628,24 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize(),
             end: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize() + 1,
         },
+        SpotId::Ebih__Grid_26_10_11__West_11 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__Middle_Bottom => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__Under_Ledge => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__Ledge => Range {
+            start: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize(),
+            end: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize() + 1,
+        },
+        SpotId::Ebih__Grid_26_10_11__Middle_Platform => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__Upper_Platform => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__West_10 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__Cliff => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_26_10_11__East_10 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Observation_Tower_Room__West_9 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Observation_Tower_Room__Tower_Top => Range { start: 0, end: 0 },
+        SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => Range { start: 0, end: 0 },
+        SpotId::Ebih__Observation_Tower_Room__Cliff => Range { start: 0, end: 0 },
+        SpotId::Ebih__Observation_Tower_Room__West_10 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Observation_Tower_Room__East_11 => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Elevator => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Connector => Range { start: 0, end: 0 },
@@ -12824,7 +13819,11 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             end: LocationId::Antarctica__Power_Room__Switch__Flip.into_usize(),
         },
         AreaId::Antarctica__Freight_Elevator => Range { start: 0, end: 0 },
-        AreaId::Ebih__Base_Camp => Range { start: 0, end: 0 },
+        AreaId::Ebih__Base_Camp => Range {
+            start: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side
+                .into_usize(),
+            end: LocationId::Ebih__Base_Camp__Top_Platform__Item.into_usize(),
+        },
         AreaId::Ebih__Bunker_Interior => Range {
             start: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize(),
             end: LocationId::Ebih__Bunker_Interior__Desk__Note.into_usize(),
@@ -12878,6 +13877,11 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize(),
             end: LocationId::Ebih__Grid_25_2_6__Pit__Item.into_usize(),
         },
+        AreaId::Ebih__Grid_26_10_11 => Range {
+            start: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize(),
+            end: LocationId::Ebih__Grid_26_10_11__Ledge__Note.into_usize(),
+        },
+        AreaId::Ebih__Observation_Tower_Room => Range { start: 0, end: 0 },
         AreaId::Giguna__Giguna_Northeast => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Elevator => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Interior => Range { start: 0, end: 0 },
@@ -12935,7 +13939,8 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             end: LocationId::Antarctica__Shed__Interior__Shelf.into_usize(),
         },
         RegionId::Ebih => Range {
-            start: LocationId::Ebih__Boss_Room__Boss__Boss_Reward.into_usize(),
+            start: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side
+                .into_usize(),
             end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
         },
         RegionId::Giguna => Range { start: 0, end: 0 },

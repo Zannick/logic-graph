@@ -440,6 +440,7 @@ areas:
     - name: Hidden Exit
 
 - name: West Lake
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: Nobody
 

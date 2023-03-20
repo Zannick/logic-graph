@@ -63,6 +63,8 @@ pub struct Context {
     pub breach: bool,
     pub water: bool,
     pub amagi__main_area__ctx__combo: bool,
+    pub ebih__base_camp__ctx__left_platform_moved: bool,
+    pub ebih__grid_25_10_12__ctx__door_open: bool,
     pub ebih__waterfall__ctx__left_block: bool,
     pub ebih__waterfall__ctx__right_block: bool,
     pub ebih__waterfall__ctx__west_door_open: bool,
@@ -124,6 +126,8 @@ impl Default for Context {
             breach: false,
             water: false,
             amagi__main_area__ctx__combo: false,
+            ebih__base_camp__ctx__left_platform_moved: false,
+            ebih__grid_25_10_12__ctx__door_open: false,
             ebih__waterfall__ctx__left_block: false,
             ebih__waterfall__ctx__right_block: false,
             ebih__waterfall__ctx__west_door_open: false,
@@ -376,6 +380,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Amagi__West_Lake => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Antarctica__East => {
                 if get_area(self.position) != area {
                     self.save = SpotId::Antarctica__East__Save_Point;
@@ -446,12 +455,27 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Ebih__Grid_26_10_11 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Ebih__Observation_Tower_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Ebih__Tent_Interior => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
             AreaId::Ebih__Waterfall => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Giguna_Northeast => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -552,6 +576,7 @@ impl context::Ctx for Context {
     }
 
     fn reset_all(&mut self) {
+        self.ebih__base_camp__ctx__left_platform_moved = false;
         self.ebih__ebih_east__ctx__platform1_moved = false;
         self.ebih__ebih_east__ctx__platform2_moved = false;
         self.ebih__drone_room__ctx__platform_moved = false;
@@ -560,6 +585,9 @@ impl context::Ctx for Context {
     fn reset_region(&mut self, region_id: RegionId) {}
     fn reset_area(&mut self, area_id: AreaId) {
         match area_id {
+            AreaId::Ebih__Base_Camp => {
+                self.ebih__base_camp__ctx__left_platform_moved = false;
+            }
             AreaId::Ebih__Ebih_East => {
                 self.ebih__ebih_east__ctx__platform1_moved = false;
                 self.ebih__ebih_east__ctx__platform2_moved = false;
@@ -763,6 +791,24 @@ impl Context {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
                     _ => self.amagi__main_area__ctx__combo,
+                },
+            },
+        }
+    }
+    pub fn ebih__base_camp__ctx__left_platform_moved(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__base_camp__ctx__left_platform_moved,
+                },
+            },
+        }
+    }
+    pub fn ebih__grid_25_10_12__ctx__door_open(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.ebih__grid_25_10_12__ctx__door_open,
                 },
             },
         }

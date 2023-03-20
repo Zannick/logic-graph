@@ -150,6 +150,12 @@ digraph AxiomVerge2 {
             Ebih__Base_Camp__Building_Entry [label = "Building Entry"];
             Ebih__Base_Camp__Tent_Entry [label = "Tent Entry"];
             Ebih__Base_Camp__West_13 [label = "West 13"];
+            Ebih__Base_Camp__West_11 [label = "West 11"];
+            Ebih__Base_Camp__West_Midair [label = "West Midair"];
+            Ebih__Base_Camp__West_12 [label = "West 12"];
+            Ebih__Base_Camp__Left_Platform [label = "Left Platform"];
+            Ebih__Base_Camp__Left_Platform_Moved [label = "Left Platform Moved"];
+            Ebih__Base_Camp__Top_Platform [label = "Top Platform"];
             label = "Base Camp";
             bgcolor = "white";
         }
@@ -183,6 +189,7 @@ digraph AxiomVerge2 {
             Ebih__By_Garage__West_12 [label = "West 12"];
             Ebih__By_Garage__West_13 [label = "West 13"];
             Ebih__By_Garage__Garage_Entry [label = "Garage Entry"];
+            Ebih__By_Garage__East_12 [label = "East 12"];
             label = "By Garage";
             bgcolor = "white";
         }
@@ -198,7 +205,7 @@ digraph AxiomVerge2 {
             Ebih__Grid_25_10_12__West_12 [label = "West 12"];
             Ebih__Grid_25_10_12__Below_Bush [label = "Below Bush"];
             Ebih__Grid_25_10_12__Mid_Ledge [label = "Mid-Ledge"];
-            Ebih__Grid_25_10_12__Gate_Left [label = "Gate Left"];
+            Ebih__Grid_25_10_12__Door_Left [label = "Door Left"];
             Ebih__Grid_25_10_12__Top_Platform [label = "Top Platform"];
             Ebih__Grid_25_10_12__West_11 [label = "West 11"];
             Ebih__Grid_25_10_12__West_10 [label = "West 10"];
@@ -331,6 +338,29 @@ digraph AxiomVerge2 {
             Ebih__Grid_25_2_6__West_4 [label = "West 4"];
             Ebih__Grid_25_2_6__Pit [label = "Pit"];
             label = "Grid 25,2-6";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Grid_26_10_11 {
+            Ebih__Grid_26_10_11__West_11 [label = "West 11"];
+            Ebih__Grid_26_10_11__Middle_Bottom [label = "Middle Bottom"];
+            Ebih__Grid_26_10_11__Under_Ledge [label = "Under Ledge"];
+            Ebih__Grid_26_10_11__Ledge [label = "Ledge"];
+            Ebih__Grid_26_10_11__Middle_Platform [label = "Middle Platform"];
+            Ebih__Grid_26_10_11__Upper_Platform [label = "Upper Platform"];
+            Ebih__Grid_26_10_11__West_10 [label = "West 10"];
+            Ebih__Grid_26_10_11__Cliff [label = "Cliff"];
+            Ebih__Grid_26_10_11__East_10 [label = "East 10"];
+            label = "Grid 26,10-11";
+            bgcolor = "white";
+        }
+        subgraph cluster_Ebih__Observation_Tower_Room {
+            Ebih__Observation_Tower_Room__West_9 [label = "West 9"];
+            Ebih__Observation_Tower_Room__Tower_Top [label = "Tower Top"];
+            Ebih__Observation_Tower_Room__Tower_Bottom [label = "Tower Bottom"];
+            Ebih__Observation_Tower_Room__Cliff [label = "Cliff"];
+            Ebih__Observation_Tower_Room__West_10 [label = "West 10"];
+            Ebih__Observation_Tower_Room__East_11 [label = "East 11"];
+            label = "Observation Tower Room";
             bgcolor = "white";
         }
         label = "Mt Ebih";
@@ -586,12 +616,21 @@ digraph AxiomVerge2 {
     Antarctica__Freight_Elevator__Left -> Antarctica__Building_2L__Entry;
     Antarctica__Freight_Elevator__Controls -> Glacier__Dock_Elevator__Elevator;
     Ebih__Base_Camp__East_11 -> Glacier__Grid_31_9_12__Midair;
+    Ebih__Base_Camp__East_11 -> Ebih__Base_Camp__Top_Platform;
     Ebih__Base_Camp__East_12 -> Glacier__Grid_31_9_12__West_12;
     Ebih__Base_Camp__Bunker_Entry -> Ebih__Bunker_Interior__Entry;
     Ebih__Base_Camp__Lake_Access -> Glacier__Lake_Main_Entrance__Ebih_Access;
     Ebih__Base_Camp__Building_Entry -> Ebih__Building_Interior__Entry;
     Ebih__Base_Camp__Tent_Entry -> Ebih__Tent_Interior__Entry;
     Ebih__Base_Camp__West_13 -> Ebih__By_Garage__East_13;
+    Ebih__Base_Camp__West_11 -> Ebih__Base_Camp__Left_Platform;
+    Ebih__Base_Camp__West_11 -> Ebih__Base_Camp__Left_Platform;
+    Ebih__Base_Camp__West_12 -> Ebih__By_Garage__East_12;
+    Ebih__Base_Camp__Left_Platform -> Ebih__Base_Camp__Top_Platform;
+    Ebih__Base_Camp__Left_Platform_Moved -> Ebih__Base_Camp__Top_Platform;
+    Ebih__Base_Camp__Left_Platform_Moved -> Ebih__Base_Camp__Top_Platform;
+    Ebih__Base_Camp__Top_Platform -> Ebih__Base_Camp__Left_Platform;
+    Ebih__Base_Camp__Top_Platform -> Ebih__Base_Camp__Left_Platform_Moved;
     Ebih__Bunker_Interior__Entry -> Ebih__Base_Camp__Bunker_Entry;
     Ebih__Building_Interior__Entry -> Ebih__Base_Camp__Building_Entry;
     Ebih__Tent_Interior__Entry -> Ebih__Base_Camp__Tent_Entry;
@@ -609,9 +648,14 @@ digraph AxiomVerge2 {
     Ebih__Grid_25_10_12__Bush -> Ebih__Grid_25_10_12__Mid_Ledge;
     Ebih__Grid_25_10_12__Below_Bush -> Ebih__Grid_25_10_12__Bush;
     Ebih__Grid_25_10_12__Mid_Ledge -> Ebih__Grid_25_10_12__West_11;
+    Ebih__Grid_25_10_12__Door_Left -> Ebih__Grid_25_10_12__Door;
     Ebih__Grid_25_10_12__Top_Platform -> Ebih__Grid_25_10_12__West_10;
     Ebih__Grid_25_10_12__West_11 -> Ebih__Waterfall__East_11;
     Ebih__Grid_25_10_12__West_10 -> Ebih__Waterfall__East_10;
+    Ebih__Grid_25_10_12__Door -> Ebih__Grid_25_10_12__Door_Left;
+    Ebih__Grid_25_10_12__Door -> Ebih__Grid_25_10_12__East_11;
+    Ebih__Grid_25_10_12__East_11 -> Ebih__Grid_25_10_12__Door;
+    Ebih__Grid_25_10_12__East_11 -> Ebih__Grid_26_10_11__West_11;
     Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
     Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
     Ebih__Waterfall__East_10 -> Ebih__Grid_25_10_12__West_10;
@@ -668,6 +712,18 @@ digraph AxiomVerge2 {
     Ebih__Drone_Room__East_4 -> Ebih__Grid_25_2_6__West_4;
     Ebih__Grid_25_2_6__West_4 -> Ebih__Drone_Room__East_4;
     Ebih__Grid_25_2_6__West_4 -> Ebih__Grid_25_2_6__Pit;
+    Ebih__Grid_26_10_11__Middle_Bottom -> Ebih__Grid_26_10_11__Middle_Platform;
+    Ebih__Grid_26_10_11__Under_Ledge -> Ebih__Grid_26_10_11__Ledge;
+    Ebih__Grid_26_10_11__Under_Ledge -> Ebih__Grid_26_10_11__Ledge;
+    Ebih__Grid_26_10_11__Middle_Platform -> Ebih__Grid_26_10_11__West_10;
+    Ebih__Grid_26_10_11__Upper_Platform -> Ebih__Grid_26_10_11__Cliff;
+    Ebih__Grid_26_10_11__Upper_Platform -> Ebih__Grid_26_10_11__West_10;
+    Ebih__Grid_26_10_11__West_10 -> Ebih__Grid_25_10_12__East_10;
+    Ebih__Observation_Tower_Room__West_9 -> Ebih__Ebih_East__East_9;
+    Ebih__Observation_Tower_Room__Tower_Top -> Ebih__Observation_Tower_Room__West_9;
+    Ebih__Observation_Tower_Room__West_10 -> Ebih__Grid_26_10_11__East_10;
+    Ebih__Observation_Tower_Room__East_11 -> Ebih__Base_Camp__West_11;
+    Ebih__Observation_Tower_Room__East_11 -> Ebih__Observation_Tower_Room__Cliff;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;

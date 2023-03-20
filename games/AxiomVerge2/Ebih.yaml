@@ -3,6 +3,8 @@ short: Ebih
 
 areas:
 - name: Base Camp
+  reset:
+    _left_platform_moved: false
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 11
@@ -15,6 +17,9 @@ areas:
       exits:
         - to: Glacier > Grid 31,9-12 > Midair
           tags: [xshift]
+        - to: Top Platform
+          req: $platform and $hook and $hover
+          # TODO: time
     - name: East 12
       coord: [30.95, 11.8]
       local:
@@ -44,6 +49,7 @@ areas:
         - to: Bunker Entry
         - to: Behind Vehicle
         - to: Building Entry
+        - to: Top Platform
       actions:
         - name: Save
           do: $save
@@ -105,6 +111,75 @@ areas:
       exits:
         - to: By Garage > East 13
           tags: [xshift]
+
+    - name: West 11
+      coord: [28.05, 10.6]
+      local:
+        - to: West Midair
+        - to: Left Platform
+      exits:
+        - to: Left Platform
+          req: $platform and $hook and not ^_left_platform_moved
+        - to: Left Platform
+          req: $hover and not ^_left_platform_moved
+    - name: West Midair
+      coord: [28.35, 11]
+      local:
+        - to: West 12
+        - to: Building Entry
+        - to: Tent Entry
+    # TODO: times needed
+    - name: West 12
+      coord: [28.05, 11.5]
+      exits:
+        - to: By Garage > East 12
+          tags: [xshift]
+    - name: Left Platform
+      coord: [28.7, 11.8]
+      local:
+        - to: Top Platform
+      exits:
+        - to: Top Platform
+          req: $hover and $hook
+      actions:
+        - name: Move Left Platform
+          req: $activate and not ^_left_platform_moved
+          do: ^_left_platform_moved = true; ^position = `Ebih > Base Camp > Left Platform Moved`;
+    - name: Left Platform Moved
+      coord: [29.4, 11.8]
+      local:
+        - to: Top Platform
+      locations:
+        - name: Item From The Side
+          item: Health_Fragment
+          canon: Base Camp Node
+      exits:
+        - to: Top Platform
+          req: $grab
+        - to: Top Platform
+          req: $hook
+      actions:
+        - name: Reset Left Platform
+          req: $activate and ^_left_platform_moved
+          do: ^_left_platform_moved = false; ^position = `Ebih > Base Camp > Left Platform`;
+    - name: Top Platform
+      coord: [29.5, 11.5]
+      local:
+        - to: Tent Entry
+        - to: Building Entry
+        - to: Save Point
+        - to: Bunker Entry
+        - to: Staircase
+      locations:
+        - name: Item
+          item: Health_Fragment
+          canon: Base Camp Node
+          tags: [standing]
+      exits:
+        - to: Left Platform
+          req: $hover and not ^_left_platform_moved
+        - to: Left Platform Moved
+          req: ^_left_platform_moved
 
 - name: Bunker Interior
   on_entry: $reset_old_area(^newpos)
@@ -275,6 +350,10 @@ areas:
       exits:
         - to: Garage > Entry
           tags: [interior]
+    - name: East 12
+      coord: [27.95, 11.5]
+      local:
+        - to: East Platform
 
 - name: Garage
   on_entry: $reset_old_area(^newpos)
@@ -1407,6 +1486,7 @@ areas:
       # Exit back up may be possible with slingshot?
 
 - name: Grid 26,10-11
+  on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 11
       coord: [26.05, 10.7]
@@ -1487,3 +1567,59 @@ areas:
       coord: [26.95, 9.8]
       local:
         - to: East 10
+
+- name: Observation Tower Room
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 9
+      coord: [27.05, 8.3]
+      local:
+        - to: Tower Top
+        - to: West 10
+          thru: [27.4, 9]
+      exits:
+        - to: Ebih East > East 9
+          tags: [xshift]
+    - name: Tower Top
+      coord: [27.5, 8.9]
+      local:
+        - to: West 9
+        - to: West 10
+        - to: East 11
+      exits:
+        - to: West 9
+          req: $grab or $climb
+          time: 3
+    - name: Tower Bottom
+      coord: [27.5, 9.9]
+      local:
+        - to: West 10
+          jumps: 1
+        - to: Tower Top
+          jumps: 6
+        - to: East 11
+    - name: Cliff
+      coord: [27.65, 10.1]
+      local:
+        - to: West 10
+          jumps: 2
+        - to: Tower Bottom
+          jumps: 1
+        - to: East 11
+    - name: West 10
+      coord: [27.05, 9.8]
+      local:
+        - to: Tower Bottom
+        - to: Cliff
+      exits:
+        - to: Grid 26,10-11 > East 10
+          tags: [xshift]
+    - name: East 11
+      coord: [27.95, 10.7]
+      local:
+        - to: Cliff
+      exits:
+        - to: Cliff
+          req: $grab or $climb
+          time: 2  # ?
+        - to: Base Camp > West 11
