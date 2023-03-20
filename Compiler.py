@@ -1113,3 +1113,9 @@ if __name__ == '__main__':
         print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
     gl.render()
+    logging.info(f'Rendered {args.game} graph: {len(list(gl.spots()))} spots, '
+                 f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
+                 f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
+                 f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
+                 f'{len(gl.warps)} warps, {len(gl.objectives)} objectives, '
+                 f'{sum(len(t.get("tests", ())) for t in gl.tests)} test cases')
