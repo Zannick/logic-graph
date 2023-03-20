@@ -61,6 +61,11 @@ digraph AxiomVerge2 {
             label = "Liru Room";
             bgcolor = "white";
         }
+        subgraph cluster_Amagi__West_Lake {
+            Amagi__West_Lake__Nobody [label = "Nobody"];
+            label = "West Lake";
+            bgcolor = "white";
+        }
         label = "Lake Amagi";
         bgcolor = "lightgrey";
     }
@@ -197,6 +202,10 @@ digraph AxiomVerge2 {
             Ebih__Grid_25_10_12__Top_Platform [label = "Top Platform"];
             Ebih__Grid_25_10_12__West_11 [label = "West 11"];
             Ebih__Grid_25_10_12__West_10 [label = "West 10"];
+            Ebih__Grid_25_10_12__Door [label = "Door"];
+            Ebih__Grid_25_10_12__East_11 [label = "East 11"];
+            Ebih__Grid_25_10_12__East_10 [label = "East 10"];
+            Ebih__Grid_25_10_12__Hidden_Bush [label = "Hidden Bush"];
             label = "Grid 25,10-12";
             bgcolor = "white";
         }
@@ -276,6 +285,8 @@ digraph AxiomVerge2 {
             Ebih__Ebih_East__Middle_Platform [label = "Middle Platform"];
             Ebih__Ebih_East__Upper_Ledge [label = "Upper Ledge"];
             Ebih__Ebih_East__West_7 [label = "West 7"];
+            Ebih__Ebih_East__East_Hill [label = "East Hill"];
+            Ebih__Ebih_East__East_9 [label = "East 9"];
             label = "Ebih East";
             bgcolor = "white";
         }
@@ -601,6 +612,8 @@ digraph AxiomVerge2 {
     Ebih__Grid_25_10_12__Top_Platform -> Ebih__Grid_25_10_12__West_10;
     Ebih__Grid_25_10_12__West_11 -> Ebih__Waterfall__East_11;
     Ebih__Grid_25_10_12__West_10 -> Ebih__Waterfall__East_10;
+    Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
+    Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
     Ebih__Waterfall__East_10 -> Ebih__Grid_25_10_12__West_10;
     Ebih__Waterfall__East_11 -> Ebih__Grid_25_10_12__West_11;
     Ebih__Waterfall__Alcove_Left -> Ebih__Waterfall__Waterfall_Center_Left;
@@ -638,6 +651,7 @@ digraph AxiomVerge2 {
     Ebih__Cave__Entry -> Ebih__Waterfall__Cave_Entrance;
     Ebih__Ebih_East__West_8 -> Ebih__Waterfall__East_8;
     Ebih__Ebih_East__West_7 -> Ebih__Waterfall__East_7;
+    Ebih__Ebih_East__East_9 -> Ebih__Ebih_East__East_Hill;
     Ebih__Grid_21_1_5__West_6 -> Ebih__Ebih_West__East_6;
     Ebih__Grid_21_1_5__East_6 -> Ebih__Boss_Room__West_6;
     Ebih__Boss_Room__West_6 -> Ebih__Grid_21_1_5__East_6;

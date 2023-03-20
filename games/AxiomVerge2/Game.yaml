@@ -60,13 +60,16 @@ time:
   urn: 5.5
   flask: 5.5
   # when grabbing the urn/flask with the boomerang
+  # the upgraded boomerang has a longer reach but approximately the same speed as indra
+  # so there's little difference
   remote_urn: 6.5
   remote_flask: 6.5
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # Doors leading inside/outside
-  interior: 0.25
-  exterior: 0.25
-  tent: 0.5
+  interior: 0.75
+  exterior: 0.75
+  tent: 0.25
+  cave: 0.25
   # item is freestanding -> can be picked up with no delay
   standing: 0
   # spots are technically the same, but in different areas to partition the area map
@@ -100,6 +103,9 @@ warps:
     req: WITHIN `Menu`
     to: ^last
 
+# TODO: under some conditions, fast travel indra can appear standing up
+# 7s. I think it's immediately after savewarping.
+
 actions:
   - name: Recall Drone
     req: NOT WITHIN `Menu` and $can_recall
@@ -131,6 +137,7 @@ helpers:
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
+  $bs: boomerang_steering and $boomerang
   $offset: major_glitches and $melee
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook

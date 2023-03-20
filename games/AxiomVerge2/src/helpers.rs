@@ -182,6 +182,17 @@ macro_rules! helper__max_energy {
     }};
 }
 
+/// $bs (  )
+/// boomerang_steering and $boomerang
+#[macro_export]
+macro_rules! helper__bs {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.boomerang_steering && helper__boomerang!($ctx))
+    }};
+}
+
 /// $offset (  )
 /// major_glitches and $melee
 #[macro_export]

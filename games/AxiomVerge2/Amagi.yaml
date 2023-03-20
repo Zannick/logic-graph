@@ -438,3 +438,10 @@ areas:
         - to: Bottom
           jumps_down: 1
     - name: Hidden Exit
+
+- name: West Lake
+  spots:
+    - name: Nobody
+
+# MUS A M20 : 56s
+# shockwave: 4-4.5s

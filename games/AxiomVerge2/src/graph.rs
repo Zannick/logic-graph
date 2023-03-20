@@ -60,6 +60,7 @@ pub enum AreaId {
     Amagi__Grid_31_19,
     Amagi__Liru_Room,
     Amagi__Main_Area,
+    Amagi__West_Lake,
     Antarctica__Building_1E,
     Antarctica__Building_1W,
     Antarctica__Building_2L,
@@ -118,6 +119,7 @@ impl fmt::Display for AreaId {
             AreaId::Amagi__Grid_31_19 => write!(f, "{}", "Amagi > Grid 31,19"),
             AreaId::Amagi__Liru_Room => write!(f, "{}", "Amagi > Liru Room"),
             AreaId::Amagi__Main_Area => write!(f, "{}", "Amagi > Main Area"),
+            AreaId::Amagi__West_Lake => write!(f, "{}", "Amagi > West Lake"),
             AreaId::Antarctica__Building_1E => write!(f, "{}", "Antarctica > Building 1E"),
             AreaId::Antarctica__Building_1W => write!(f, "{}", "Antarctica > Building 1W"),
             AreaId::Antarctica__Building_2L => write!(f, "{}", "Antarctica > Building 2L"),
@@ -187,6 +189,7 @@ impl std::str::FromStr for AreaId {
             "Amagi > Grid 31,19" => Ok(AreaId::Amagi__Grid_31_19),
             "Amagi > Liru Room" => Ok(AreaId::Amagi__Liru_Room),
             "Amagi > Main Area" => Ok(AreaId::Amagi__Main_Area),
+            "Amagi > West Lake" => Ok(AreaId::Amagi__West_Lake),
             "Antarctica > Building 1E" => Ok(AreaId::Antarctica__Building_1E),
             "Antarctica > Building 1W" => Ok(AreaId::Antarctica__Building_1W),
             "Antarctica > Building 2L" => Ok(AreaId::Antarctica__Building_2L),
@@ -288,6 +291,7 @@ pub enum SpotId {
     Amagi__Main_Area__West_15,
     Amagi__Main_Area__West_Shelf,
     Amagi__Main_Area__West_Side,
+    Amagi__West_Lake__Nobody,
     Antarctica__Building_1E__Connector,
     Antarctica__Building_1E__East_Entry,
     Antarctica__Building_1W__Connector,
@@ -359,6 +363,8 @@ pub enum SpotId {
     Ebih__Drone_Room__West_6,
     Ebih__Ebih_East__Corner,
     Ebih__Ebih_East__Dispenser,
+    Ebih__Ebih_East__East_9,
+    Ebih__Ebih_East__East_Hill,
     Ebih__Ebih_East__East_Ledge,
     Ebih__Ebih_East__Ledge_End,
     Ebih__Ebih_East__Lower_Moving_Platform,
@@ -391,8 +397,12 @@ pub enum SpotId {
     Ebih__Grid_21_1_5__West_6,
     Ebih__Grid_25_10_12__Below_Bush,
     Ebih__Grid_25_10_12__Bush,
+    Ebih__Grid_25_10_12__Door,
+    Ebih__Grid_25_10_12__East_10,
+    Ebih__Grid_25_10_12__East_11,
     Ebih__Grid_25_10_12__East_12,
     Ebih__Grid_25_10_12__Gate_Left,
+    Ebih__Grid_25_10_12__Hidden_Bush,
     Ebih__Grid_25_10_12__Mid_Ledge,
     Ebih__Grid_25_10_12__Top_Platform,
     Ebih__Grid_25_10_12__West_10,
@@ -651,6 +661,7 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Amagi > Main Area > West Shelf")
             }
             SpotId::Amagi__Main_Area__West_Side => write!(f, "{}", "Amagi > Main Area > West Side"),
+            SpotId::Amagi__West_Lake__Nobody => write!(f, "{}", "Amagi > West Lake > Nobody"),
             SpotId::Antarctica__Building_1E__Connector => {
                 write!(f, "{}", "Antarctica > Building 1E > Connector")
             }
@@ -794,6 +805,8 @@ impl fmt::Display for SpotId {
             SpotId::Ebih__Drone_Room__West_6 => write!(f, "{}", "Ebih > Drone Room > West 6"),
             SpotId::Ebih__Ebih_East__Corner => write!(f, "{}", "Ebih > Ebih East > Corner"),
             SpotId::Ebih__Ebih_East__Dispenser => write!(f, "{}", "Ebih > Ebih East > Dispenser"),
+            SpotId::Ebih__Ebih_East__East_9 => write!(f, "{}", "Ebih > Ebih East > East 9"),
+            SpotId::Ebih__Ebih_East__East_Hill => write!(f, "{}", "Ebih > Ebih East > East Hill"),
             SpotId::Ebih__Ebih_East__East_Ledge => write!(f, "{}", "Ebih > Ebih East > East Ledge"),
             SpotId::Ebih__Ebih_East__Ledge_End => write!(f, "{}", "Ebih > Ebih East > Ledge End"),
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform => {
@@ -852,11 +865,21 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush")
             }
             SpotId::Ebih__Grid_25_10_12__Bush => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush"),
+            SpotId::Ebih__Grid_25_10_12__Door => write!(f, "{}", "Ebih > Grid 25,10-12 > Door"),
+            SpotId::Ebih__Grid_25_10_12__East_10 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10")
+            }
+            SpotId::Ebih__Grid_25_10_12__East_11 => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 11")
+            }
             SpotId::Ebih__Grid_25_10_12__East_12 => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > East 12")
             }
             SpotId::Ebih__Grid_25_10_12__Gate_Left => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > Gate Left")
+            }
+            SpotId::Ebih__Grid_25_10_12__Hidden_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush")
             }
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge => {
                 write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge")
@@ -1294,6 +1317,7 @@ impl std::str::FromStr for SpotId {
             "Amagi > Main Area > West 15" => Ok(SpotId::Amagi__Main_Area__West_15),
             "Amagi > Main Area > West Shelf" => Ok(SpotId::Amagi__Main_Area__West_Shelf),
             "Amagi > Main Area > West Side" => Ok(SpotId::Amagi__Main_Area__West_Side),
+            "Amagi > West Lake > Nobody" => Ok(SpotId::Amagi__West_Lake__Nobody),
             "Antarctica > Building 1E > Connector" => {
                 Ok(SpotId::Antarctica__Building_1E__Connector)
             }
@@ -1387,6 +1411,8 @@ impl std::str::FromStr for SpotId {
             "Ebih > Drone Room > West 6" => Ok(SpotId::Ebih__Drone_Room__West_6),
             "Ebih > Ebih East > Corner" => Ok(SpotId::Ebih__Ebih_East__Corner),
             "Ebih > Ebih East > Dispenser" => Ok(SpotId::Ebih__Ebih_East__Dispenser),
+            "Ebih > Ebih East > East 9" => Ok(SpotId::Ebih__Ebih_East__East_9),
+            "Ebih > Ebih East > East Hill" => Ok(SpotId::Ebih__Ebih_East__East_Hill),
             "Ebih > Ebih East > East Ledge" => Ok(SpotId::Ebih__Ebih_East__East_Ledge),
             "Ebih > Ebih East > Ledge End" => Ok(SpotId::Ebih__Ebih_East__Ledge_End),
             "Ebih > Ebih East > Lower Moving Platform" => {
@@ -1423,8 +1449,12 @@ impl std::str::FromStr for SpotId {
             "Ebih > Grid 21,1-5 > West 6" => Ok(SpotId::Ebih__Grid_21_1_5__West_6),
             "Ebih > Grid 25,10-12 > Below Bush" => Ok(SpotId::Ebih__Grid_25_10_12__Below_Bush),
             "Ebih > Grid 25,10-12 > Bush" => Ok(SpotId::Ebih__Grid_25_10_12__Bush),
+            "Ebih > Grid 25,10-12 > Door" => Ok(SpotId::Ebih__Grid_25_10_12__Door),
+            "Ebih > Grid 25,10-12 > East 10" => Ok(SpotId::Ebih__Grid_25_10_12__East_10),
+            "Ebih > Grid 25,10-12 > East 11" => Ok(SpotId::Ebih__Grid_25_10_12__East_11),
             "Ebih > Grid 25,10-12 > East 12" => Ok(SpotId::Ebih__Grid_25_10_12__East_12),
             "Ebih > Grid 25,10-12 > Gate Left" => Ok(SpotId::Ebih__Grid_25_10_12__Gate_Left),
+            "Ebih > Grid 25,10-12 > Hidden Bush" => Ok(SpotId::Ebih__Grid_25_10_12__Hidden_Bush),
             "Ebih > Grid 25,10-12 > Mid-Ledge" => Ok(SpotId::Ebih__Grid_25_10_12__Mid_Ledge),
             "Ebih > Grid 25,10-12 > Top Platform" => Ok(SpotId::Ebih__Grid_25_10_12__Top_Platform),
             "Ebih > Grid 25,10-12 > West 10" => Ok(SpotId::Ebih__Grid_25_10_12__West_10),
@@ -1671,6 +1701,8 @@ pub enum LocationId {
     Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
     Ebih__Ebih_West__Alcove__Tablet,
     Ebih__Garage__Boxes__Under_Boxes,
+    Ebih__Grid_25_10_12__East_10__Remote_Bush,
+    Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
     Ebih__Grid_25_2_6__Pit__Item,
     Ebih__Tent_Interior__Desk__Note,
     Ebih__Waterfall__Alcove__Pedestal,
@@ -1791,6 +1823,12 @@ impl fmt::Display for LocationId {
             }
             LocationId::Ebih__Garage__Boxes__Under_Boxes => {
                 write!(f, "{}", "Ebih > Garage > Boxes: Under Boxes")
+            }
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10: Remote Bush")
+            }
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush: Behind Bush")
             }
             LocationId::Ebih__Grid_25_2_6__Pit__Item => {
                 write!(f, "{}", "Ebih > Grid 25,2-6 > Pit: Item")
@@ -2024,6 +2062,12 @@ impl std::str::FromStr for LocationId {
             "Ebih > Garage > Boxes: Under Boxes" => {
                 Ok(LocationId::Ebih__Garage__Boxes__Under_Boxes)
             }
+            "Ebih > Grid 25,10-12 > East 10: Remote Bush" => {
+                Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush)
+            }
+            "Ebih > Grid 25,10-12 > Hidden Bush: Behind Bush" => {
+                Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush)
+            }
             "Ebih > Grid 25,2-6 > Pit: Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
             "Ebih > Tent Interior > Desk: Note" => Ok(LocationId::Ebih__Tent_Interior__Desk__Note),
             "Ebih > Waterfall > Alcove: Pedestal" => {
@@ -2247,6 +2291,7 @@ pub enum ExitId {
     Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1,
     Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1,
     Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1,
+    Ebih__Ebih_East__East_9__ex__East_Hill_1,
     Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1,
     Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1,
     Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1,
@@ -2266,6 +2311,8 @@ pub enum ExitId {
     Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1,
     Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1,
     Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1,
+    Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1,
+    Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2,
     Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1,
     Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1,
     Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1,
@@ -2470,6 +2517,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)"),
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => write!(f, "{}", "Ebih > Drone Room > West 4 ==> Boss Room > East 4 (1)"),
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => write!(f, "{}", "Ebih > Drone Room > West 6 ==> Boss Room > East 6 (1)"),
+            ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1 => write!(f, "{}", "Ebih > Ebih East > East 9 ==> East Hill (1)"),
             ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => write!(f, "{}", "Ebih > Ebih East > West 7 ==> Waterfall > East 7 (1)"),
             ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => write!(f, "{}", "Ebih > Ebih East > West 8 ==> Waterfall > East 8 (1)"),
             ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => write!(f, "{}", "Ebih > Ebih West > Alcove Entrance ==> Above Alcove (1)"),
@@ -2489,6 +2537,8 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)"),
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)"),
+            ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (1)"),
+            ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2 => write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (2)"),
             ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Mid-Ledge ==> West 11 (1)"),
             ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)"),
             ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)"),
@@ -2698,6 +2748,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)" => Ok(ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1),
             "Ebih > Drone Room > West 4 ==> Boss Room > East 4 (1)" => Ok(ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1),
             "Ebih > Drone Room > West 6 ==> Boss Room > East 6 (1)" => Ok(ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1),
+            "Ebih > Ebih East > East 9 ==> East Hill (1)" => Ok(ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1),
             "Ebih > Ebih East > West 7 ==> Waterfall > East 7 (1)" => Ok(ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1),
             "Ebih > Ebih East > West 8 ==> Waterfall > East 8 (1)" => Ok(ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1),
             "Ebih > Ebih West > Alcove Entrance ==> Above Alcove (1)" => Ok(ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1),
@@ -2717,6 +2768,8 @@ impl std::str::FromStr for ExitId {
             "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1),
             "Ebih > Grid 25,10-12 > Bush ==> Mid-Ledge (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1),
             "Ebih > Grid 25,10-12 > East 12 ==> By Garage > West 12 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1),
+            "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1),
+            "Ebih > Grid 25,10-12 > Hidden Bush ==> East 10 (2)" => Ok(ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2),
             "Ebih > Grid 25,10-12 > Mid-Ledge ==> West 11 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1),
             "Ebih > Grid 25,10-12 > Top Platform ==> West 10 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1),
             "Ebih > Grid 25,10-12 > West 10 ==> Waterfall > East 10 (1)" => Ok(ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1),
@@ -3011,6 +3064,7 @@ pub enum CanonId {
     None,
     Notes_2053_02_27,
     Melee_Charge,
+    Ebih_Bush_Flask,
     Infect,
     Defeat_Ebih_Alu,
     Remote_Drone,
@@ -3022,6 +3076,7 @@ impl fmt::Display for CanonId {
             CanonId::None => write!(f, "{}", "None"),
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
+            CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
             CanonId::Infect => write!(f, "{}", "Infect"),
             CanonId::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
@@ -3037,6 +3092,7 @@ impl std::str::FromStr for CanonId {
         match s {
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
+            "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Infect" => Ok(CanonId::Infect),
             "Defeat_Ebih_Alu" => Ok(CanonId::Defeat_Ebih_Alu),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
@@ -3156,6 +3212,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Amagi__Liru_Room__West_20
         | SpotId::Amagi__Liru_Room__East_Passage
         | SpotId::Amagi__Liru_Room__Hidden_Exit => AreaId::Amagi__Liru_Room,
+        SpotId::Amagi__West_Lake__Nobody => AreaId::Amagi__West_Lake,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => AreaId::Antarctica__West,
@@ -3220,7 +3277,11 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Grid_25_10_12__Gate_Left
         | SpotId::Ebih__Grid_25_10_12__Top_Platform
         | SpotId::Ebih__Grid_25_10_12__West_11
-        | SpotId::Ebih__Grid_25_10_12__West_10 => AreaId::Ebih__Grid_25_10_12,
+        | SpotId::Ebih__Grid_25_10_12__West_10
+        | SpotId::Ebih__Grid_25_10_12__Door
+        | SpotId::Ebih__Grid_25_10_12__East_11
+        | SpotId::Ebih__Grid_25_10_12__East_10
+        | SpotId::Ebih__Grid_25_10_12__Hidden_Bush => AreaId::Ebih__Grid_25_10_12,
         SpotId::Ebih__Waterfall__East_10
         | SpotId::Ebih__Waterfall__East_Ledge
         | SpotId::Ebih__Waterfall__East_11
@@ -3283,7 +3344,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Ebih_East__East_Ledge
         | SpotId::Ebih__Ebih_East__Middle_Platform
         | SpotId::Ebih__Ebih_East__Upper_Ledge
-        | SpotId::Ebih__Ebih_East__West_7 => AreaId::Ebih__Ebih_East,
+        | SpotId::Ebih__Ebih_East__West_7
+        | SpotId::Ebih__Ebih_East__East_Hill
+        | SpotId::Ebih__Ebih_East__East_9 => AreaId::Ebih__Ebih_East,
         SpotId::Ebih__Grid_21_1_5__West_6
         | SpotId::Ebih__Grid_21_1_5__Portal_Stand
         | SpotId::Ebih__Grid_21_1_5__East_6 => AreaId::Ebih__Grid_21_1_5,
@@ -3470,6 +3533,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Amagi__Liru_Room__West_20
         | SpotId::Amagi__Liru_Room__East_Passage
         | SpotId::Amagi__Liru_Room__Hidden_Exit => RegionId::Amagi,
+        SpotId::Amagi__West_Lake__Nobody => RegionId::Amagi,
         SpotId::Antarctica__West__Helipad
         | SpotId::Antarctica__West__Shed_Entry
         | SpotId::Antarctica__West__Boxes => RegionId::Antarctica,
@@ -3530,7 +3594,11 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Grid_25_10_12__Gate_Left
         | SpotId::Ebih__Grid_25_10_12__Top_Platform
         | SpotId::Ebih__Grid_25_10_12__West_11
-        | SpotId::Ebih__Grid_25_10_12__West_10 => RegionId::Ebih,
+        | SpotId::Ebih__Grid_25_10_12__West_10
+        | SpotId::Ebih__Grid_25_10_12__Door
+        | SpotId::Ebih__Grid_25_10_12__East_11
+        | SpotId::Ebih__Grid_25_10_12__East_10
+        | SpotId::Ebih__Grid_25_10_12__Hidden_Bush => RegionId::Ebih,
         SpotId::Ebih__Waterfall__East_10
         | SpotId::Ebih__Waterfall__East_Ledge
         | SpotId::Ebih__Waterfall__East_11
@@ -3593,7 +3661,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Ebih_East__East_Ledge
         | SpotId::Ebih__Ebih_East__Middle_Platform
         | SpotId::Ebih__Ebih_East__Upper_Ledge
-        | SpotId::Ebih__Ebih_East__West_7 => RegionId::Ebih,
+        | SpotId::Ebih__Ebih_East__West_7
+        | SpotId::Ebih__Ebih_East__East_Hill
+        | SpotId::Ebih__Ebih_East__East_9 => RegionId::Ebih,
         SpotId::Ebih__Grid_21_1_5__West_6
         | SpotId::Ebih__Grid_21_1_5__Portal_Stand
         | SpotId::Ebih__Grid_21_1_5__East_6 => RegionId::Ebih,
@@ -3780,6 +3850,8 @@ impl world::Accessible for Location {
                 }
                 LocationId::Ebih__Ebih_West__Alcove__Tablet => true,
                 LocationId::Ebih__Garage__Boxes__Under_Boxes => rules::access_can_damage(&ctx),
+                LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::access_bs(&ctx),
+                LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
                 LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
                 LocationId::Ebih__Tent_Interior__Desk__Note => true,
                 LocationId::Ebih__Waterfall__Alcove__Pedestal => true,
@@ -4007,6 +4079,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => rules::access_ebih__drone_room__portal_exit__ex__moving_platform_1__req(&ctx),
             ExitId::Ebih__Drone_Room__West_4__ex__Boss_Room__East_4_1 => true,
             ExitId::Ebih__Drone_Room__West_6__ex__Boss_Room__East_6_1 => true,
+            ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => true,
             ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => true,
             ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => rules::access_grab(&ctx),
@@ -4026,6 +4099,8 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Grid_25_10_12__East_12__ex__By_Garage__West_12_1 => true,
+            ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2 => rules::access_hook(&ctx),
             ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Grid_25_10_12__Top_Platform__ex__West_10_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1 => true,
@@ -4374,7 +4449,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 295],
+    raw_spots: [SpotId; 302],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -4385,7 +4460,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 69;
+    const NUM_LOCATIONS: i32 = 71;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -4425,6 +4500,10 @@ impl world::World for World {
             CanonId::Melee_Charge => vec![
                 LocationId::Ebih__Building_Interior__Entry__Remote_Urn,
                 LocationId::Ebih__Building_Interior__Corner__Urn,
+            ],
+            CanonId::Ebih_Bush_Flask => vec![
+                LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
+                LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
             ],
             CanonId::Infect => vec![
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
@@ -4482,6 +4561,12 @@ impl world::World for World {
                 SpotId::Ebih__By_Garage__Crawlspace
             }
             LocationId::Ebih__Garage__Boxes__Under_Boxes => SpotId::Ebih__Garage__Boxes,
+            LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
+                SpotId::Ebih__Grid_25_10_12__East_10
+            }
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
+                SpotId::Ebih__Grid_25_10_12__Hidden_Bush
+            }
             LocationId::Ebih__Waterfall__Alcove__Pedestal => SpotId::Ebih__Waterfall__Alcove,
             LocationId::Ebih__Ebih_West__Alcove__Tablet => SpotId::Ebih__Ebih_West__Alcove,
             LocationId::Ebih__Cave__Entry__Health => SpotId::Ebih__Cave__Entry,
@@ -4689,6 +4774,7 @@ impl World {
                 SpotId::Amagi__Main_Area__West_15,
                 SpotId::Amagi__Main_Area__West_Shelf,
                 SpotId::Amagi__Main_Area__West_Side,
+                SpotId::Amagi__West_Lake__Nobody,
                 SpotId::Antarctica__Building_1E__Connector,
                 SpotId::Antarctica__Building_1E__East_Entry,
                 SpotId::Antarctica__Building_1W__Connector,
@@ -4760,6 +4846,8 @@ impl World {
                 SpotId::Ebih__Drone_Room__West_6,
                 SpotId::Ebih__Ebih_East__Corner,
                 SpotId::Ebih__Ebih_East__Dispenser,
+                SpotId::Ebih__Ebih_East__East_9,
+                SpotId::Ebih__Ebih_East__East_Hill,
                 SpotId::Ebih__Ebih_East__East_Ledge,
                 SpotId::Ebih__Ebih_East__Ledge_End,
                 SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
@@ -4792,8 +4880,12 @@ impl World {
                 SpotId::Ebih__Grid_21_1_5__West_6,
                 SpotId::Ebih__Grid_25_10_12__Below_Bush,
                 SpotId::Ebih__Grid_25_10_12__Bush,
+                SpotId::Ebih__Grid_25_10_12__Door,
+                SpotId::Ebih__Grid_25_10_12__East_10,
+                SpotId::Ebih__Grid_25_10_12__East_11,
                 SpotId::Ebih__Grid_25_10_12__East_12,
                 SpotId::Ebih__Grid_25_10_12__Gate_Left,
+                SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
                 SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
                 SpotId::Ebih__Grid_25_10_12__Top_Platform,
                 SpotId::Ebih__Grid_25_10_12__West_10,
@@ -5037,6 +5129,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Record_Losses,
             price: Currency::Free,
             time: 2000,
+            exit_id: None,
+        },
+        LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => Location {
+            id: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
+            canonical: CanonId::Ebih Bush Flask,
+            item: Item::None,
+            price: Currency::Free,
+            time: 6000,
+            exit_id: None,
+        },
+        LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => Location {
+            id: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
+            canonical: CanonId::Ebih Bush Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Ebih__Waterfall__Alcove__Pedestal => Location {
@@ -6033,6 +6141,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1,
+            time: 1000,
+            dest: SpotId::Ebih__Grid_25_10_12__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2 => Exit {
+            id: ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2,
+            time: 900,
+            dest: SpotId::Ebih__Grid_25_10_12__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1 => Exit {
             id: ExitId::Ebih__Waterfall__East_10__ex__Grid_25_10_12__West_10_1,
             time: 1350,
@@ -6289,6 +6411,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1,
             time: 1350,
             dest: SpotId::Ebih__Waterfall__East_7,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1 => Exit {
+            id: ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1,
+            time: 2000,
+            dest: SpotId::Ebih__Ebih_East__East_Hill,
             price: Currency::Free,
             loc_id: None,
         },
@@ -7879,6 +8008,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Amagi__Liru_Room__West_20.into_usize() + 1,
             },
         },
+        SpotId::Amagi__West_Lake__Nobody => Spot {
+            id: SpotId::Amagi__West_Lake__Nobody,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Amagi__West_Lake__Nobody.into_usize(),
+                end: SpotId::Amagi__West_Lake__Nobody.into_usize() + 1,
+            },
+        },
         SpotId::Antarctica__West__Helipad => Spot {
             id: SpotId::Antarctica__West__Helipad,
             locations: Range {
@@ -8867,6 +9012,73 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1.into_usize(),
                 end: ExitId::Ebih__Grid_25_10_12__West_10__ex__Waterfall__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_25_10_12__Door => Spot {
+            id: SpotId::Ebih__Grid_25_10_12__Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_25_10_12__East_11 => Spot {
+            id: SpotId::Ebih__Grid_25_10_12__East_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_25_10_12__East_10 => Spot {
+            id: SpotId::Ebih__Grid_25_10_12__East_10,
+            locations: Range {
+                start: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize(),
+                end: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Grid_25_10_12__Below_Bush.into_usize(),
+                end: SpotId::Ebih__Grid_25_10_12__West_12.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Grid_25_10_12__Hidden_Bush => Spot {
+            id: SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+            locations: Range {
+                start: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize(),
+                end: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1.into_usize(),
+                end: ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -9923,6 +10135,39 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1.into_usize(),
                 end: ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Ebih_East__East_Hill => Spot {
+            id: SpotId::Ebih__Ebih_East__East_Hill,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Ebih_East__Corner.into_usize(),
+                end: SpotId::Ebih__Ebih_East__West_8.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Ebih_East__East_9 => Spot {
+            id: SpotId::Ebih__Ebih_East__East_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1.into_usize(),
+                end: ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -12181,6 +12426,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Amagi__Liru_Room__West_20 => Range { start: 0, end: 0 },
         SpotId::Amagi__Liru_Room__East_Passage => Range { start: 0, end: 0 },
         SpotId::Amagi__Liru_Room__Hidden_Exit => Range { start: 0, end: 0 },
+        SpotId::Amagi__West_Lake__Nobody => Range { start: 0, end: 0 },
         SpotId::Antarctica__West__Helipad => Range { start: 0, end: 0 },
         SpotId::Antarctica__West__Shed_Entry => Range { start: 0, end: 0 },
         SpotId::Antarctica__West__Boxes => Range { start: 0, end: 0 },
@@ -12267,6 +12513,16 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Grid_25_10_12__Top_Platform => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__West_11 => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_25_10_12__West_10 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_25_10_12__Door => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_25_10_12__East_11 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Grid_25_10_12__East_10 => Range {
+            start: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize(),
+            end: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize() + 1,
+        },
+        SpotId::Ebih__Grid_25_10_12__Hidden_Bush => Range {
+            start: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize(),
+            end: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize() + 1,
+        },
         SpotId::Ebih__Waterfall__East_10 => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__East_Ledge => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__East_11 => Range { start: 0, end: 0 },
@@ -12351,6 +12607,8 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Ebih_East__Middle_Platform => Range { start: 0, end: 0 },
         SpotId::Ebih__Ebih_East__Upper_Ledge => Range { start: 0, end: 0 },
         SpotId::Ebih__Ebih_East__West_7 => Range { start: 0, end: 0 },
+        SpotId::Ebih__Ebih_East__East_Hill => Range { start: 0, end: 0 },
+        SpotId::Ebih__Ebih_East__East_9 => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_21_1_5__West_6 => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_21_1_5__Portal_Stand => Range { start: 0, end: 0 },
         SpotId::Ebih__Grid_21_1_5__East_6 => Range { start: 0, end: 0 },
@@ -12545,6 +12803,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
             end: LocationId::Amagi__Liru_Room__Shrine__Item.into_usize(),
         },
+        AreaId::Amagi__West_Lake => Range { start: 0, end: 0 },
         AreaId::Antarctica__West => Range { start: 0, end: 0 },
         AreaId::Antarctica__Shed => Range {
             start: LocationId::Antarctica__Shed__Interior__Shelf.into_usize(),
@@ -12586,7 +12845,10 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize(),
             end: LocationId::Ebih__Garage__Boxes__Under_Boxes.into_usize(),
         },
-        AreaId::Ebih__Grid_25_10_12 => Range { start: 0, end: 0 },
+        AreaId::Ebih__Grid_25_10_12 => Range {
+            start: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush.into_usize(),
+            end: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize(),
+        },
         AreaId::Ebih__Waterfall => Range {
             start: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
             end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),

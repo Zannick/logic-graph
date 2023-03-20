@@ -299,6 +299,8 @@ areas:
 
 - name: Grid 25,10-12
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door_open: false
   spots:
     - name: East 12
       coord: [25.95, 12]
@@ -319,24 +321,24 @@ areas:
           req: $grab
           time: 1.5
     - name: West 12
-      coord: [25.05, 12.1]
+      coord: [25.05, 11.9]
       local:
         - to: Below Bush
     - name: Below Bush
-      coord: [25.4, 12.1]
+      coord: [25.4, 11.9]
       local:
         - to: West 12
         - to: Bush
-        - to: Gate Left
+        - to: Door Left
       exits:
         - to: Bush
           req: $grab
           time: 0.75
     - name: Mid-Ledge
-      coord: [25.2, 11.4]
+      coord: [25.3, 11.3]
       local:
         - to: West 11
-        - to: Gate Left
+        - to: Door Left
           jumps: 2
         - to: Bush
         - to: Below Bush
@@ -344,8 +346,8 @@ areas:
         - to: West 11
           req: $grab
           time: 1.5
-    - name: Gate Left
-      coord: [25.6, 11]
+    - name: Door Left
+      coord: [25.6, 10.9]
       local:
         - to: West 11
           jumps: 2
@@ -353,6 +355,10 @@ areas:
         - to: Below Bush
         - to: Top Platform
           jumps: 2
+      exits:
+        - to: Door
+          req: ^_door_open
+          time: 0.7
     - name: Top Platform
       coord: [25.4, 10.7]
       local:
@@ -361,7 +367,7 @@ areas:
         - to: Below Bush
           jumps_down: 2
         - to: West 11
-        - to: Gate Left
+        - to: Door Left
       exits:
         - to: West 10
           req: $grab
@@ -372,7 +378,7 @@ areas:
         - to: Top Platform
           jumps: 2
         - to: Mid-Ledge
-        - to: Gate Left
+        - to: Door Left
       exits:
         - to: Waterfall > East 11
           tags: [xshift]
@@ -380,10 +386,53 @@ areas:
       coord: [25.05, 9.9]
       local:
         - to: Top Platform
-        - to: Gate Left
+        - to: Door Left
       exits:
         - to: Waterfall > East 10
           tags: [xshift]
+    - name: Door
+      coord: [25.8, 10.9]
+      exits:
+        - to: Door Left
+          req: ^_door_open
+          time: 0.7
+        - to: East 11
+          req: ^_door_open
+          time: 0.5
+    - name: East 11
+      coord: [25.95, 10.9]
+      exits:
+        - to: Door
+          req: ^_door_open
+        - to: Grid 26,10-11 > West 11
+          tags: [xshift]
+    - name: East 10
+      coord: [25.95, 9.9]
+      local:
+        - to: Hidden Bush
+      locations:
+        - name: Remote Bush
+          canon: Ebih Bush Flask
+          req: $bs
+          time: 6
+          tags: [flask]
+    - name: Hidden Bush
+      coord: [25.85, 10.15]
+      local:
+        - to: East 10
+          jumps: 2
+      locations:
+        - name: Behind Bush
+          canon: Ebih Bush Flask
+          item: Flask
+          tags: [flask]
+      exits:
+        - to: East 10
+          req: $grab
+          time: 1
+        - to: East 10
+          req: $hook
+          time: 0.9
 
 - name: Waterfall
   on_entry: $reset_old_area(^newpos)
@@ -636,7 +685,7 @@ areas:
         - to: Near East Tree
       exits:
         - to: Cave > Entry
-          tags: [interior]
+          tags: [cave]
     - name: Center Main Path
       coord: [22.9, 8]
       local:
@@ -887,7 +936,7 @@ areas:
           tags: [standing]
       exits:
         - to: Waterfall > Cave Entrance
-          tags: [exterior]
+          tags: [cave]
 
 - name: Ebih East
   on_entry: $reset_old_area(^newpos)
@@ -976,13 +1025,15 @@ areas:
           do: ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
           time: 5
     - name: East Ledge
-      coord: [27.05, 7.7]
+      coord: [27.1, 7.9]
       local:
         - to: Moving Platform
         - to: Middle Platform
           jumps: 2
         - to: Ledge End
         - to: Lower Moving Platform
+        - to: East Hill
+          jumps: 1
       locations:
         - name: Note
           item: Under_Siege
@@ -996,6 +1047,7 @@ areas:
           jumps_down: 2
         - to: Moving Platform
         - to: Lower Moving Platform
+        - to: East Hill
     - name: Upper Ledge
       coord: [26.4, 7]
       local:
@@ -1011,6 +1063,20 @@ areas:
       exits:
         - to: Waterfall > East 7
           tags: [xshift]
+
+    - name: East Hill
+      coord: [26.5, 7.8]
+      local:
+        - to: Middle Platform
+          jumps: 2
+        - to: East Ledge
+        - to: East 9
+    - name: East 9
+      coord: [26.95, 8.5]
+      exits:
+        - to: East Hill
+          req: $grab or $climb
+          time: 2
 
 - name: Grid 21,1-5
   on_entry: $reset_old_area(^newpos)
@@ -1339,3 +1405,85 @@ areas:
           item: Flask
           tags: [flask]
       # Exit back up may be possible with slingshot?
+
+- name: Grid 26,10-11
+  spots:
+    - name: West 11
+      coord: [26.05, 10.9]
+      local:
+        - to: Middle Bottom
+        - to: Middle Platform
+    - name: Middle Bottom
+      coord: [26.4, 10.8]
+      local:
+        - to: West 11
+        - to: Under Ledge
+        - to: Middle Platform
+      exits:
+        - to: Middle Platform
+          req: $hover
+    - name: Under Ledge
+      coord: [26.6, 10.8]
+      local:
+        - to: Middle Bottom
+        - to: Ledge
+      exits:
+        - to: Ledge
+          req: $grab
+        - to: Ledge
+          req: $hook
+          time: 0.8
+    - name: Ledge
+      coord: [26.7, 10.6]
+      local:
+        - to: Middle Platform
+        - to: Middle Bottom
+        - to: Under Ledge
+        - to: Upper Platform
+      locations:
+        - name: Note
+          item: Terminal_Breakthrough_1
+          tags: [standing]
+    - name: Middle Platform
+      coord: [26.4, 10.6]
+      local:
+        - to: West 11
+        - to: Upper Platform
+          jumps: 2
+        - to: West 10
+      exits:
+        - to: West 10
+          req: $grab
+          time: 2.8
+    - name: Upper Platform
+      coord: [26.45, 10.3]
+      local:
+        - to: West 10
+        - to: Cliff
+        - to: West 11
+        - to: Ledge
+      exits:
+        - to: West 10
+          req: $grab
+          time: 2
+        - to: Cliff
+          req: $grab
+          time: 1.15
+    - name: West 10
+      coord: [26.05, 9.9]
+      local:
+        - to: Upper Platform
+        - to: West 11
+          thru: [26.2, 9.9]
+      exits:
+        - to: Grid 25,10-12 > East 10
+          tags: [xshift]
+    - name: Cliff
+      coord: [26.6, 10]
+      local:
+        - to: Upper Platform
+        - to: East 10
+    - name: East 10
+      coord: [26.95, 10]
+      local:
+        - to: East 10

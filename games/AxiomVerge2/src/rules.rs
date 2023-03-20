@@ -36,6 +36,10 @@ pub fn access_boomerang(ctx: &Context) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
+pub fn access_bs(ctx: &Context) -> bool {
+    // $bs
+    helper__bs!(ctx)
+}
 pub fn access_can_damage(ctx: &Context) -> bool {
     // $can_damage
     helper__can_damage!(ctx)

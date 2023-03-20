@@ -54,6 +54,9 @@ subgraph Amagi
         Amagi__Liru_Room__East_Passage(East Passage);
         Amagi__Liru_Room__Hidden_Exit(Hidden Exit);
     end
+    subgraph Amagi__West_Lake[West Lake]
+        Amagi__West_Lake__Nobody(Nobody);
+    end
 end
 subgraph Antarctica
     subgraph Antarctica__West[West]
@@ -152,6 +155,10 @@ subgraph Ebih
         Ebih__Grid_25_10_12__Top_Platform(Top Platform);
         Ebih__Grid_25_10_12__West_11(West 11);
         Ebih__Grid_25_10_12__West_10(West 10);
+        Ebih__Grid_25_10_12__Door(Door);
+        Ebih__Grid_25_10_12__East_11(East 11);
+        Ebih__Grid_25_10_12__East_10(East 10);
+        Ebih__Grid_25_10_12__Hidden_Bush(Hidden Bush);
     end
     subgraph Ebih__Waterfall[Waterfall]
         Ebih__Waterfall__East_10(East 10);
@@ -223,6 +230,8 @@ subgraph Ebih
         Ebih__Ebih_East__Middle_Platform(Middle Platform);
         Ebih__Ebih_East__Upper_Ledge(Upper Ledge);
         Ebih__Ebih_East__West_7(West 7);
+        Ebih__Ebih_East__East_Hill(East Hill);
+        Ebih__Ebih_East__East_9(East 9);
     end
     subgraph Ebih__Grid_21_1_5[Grid 21,1-5]
         Ebih__Grid_21_1_5__West_6(West 6);
@@ -469,6 +478,7 @@ Ebih__Drone_Room__Middle_Platform --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Pit_Left --> Ebih__Drone_Room__West_6
 Ebih__Drone_Room__Portal --> Ebih__Drone_Room__Portal_Exit
 Ebih__Drone_Room__Portal_Exit --> Ebih__Drone_Room__Moving_Platform
+Ebih__Ebih_East__East_9 --> Ebih__Ebih_East__East_Hill
 Ebih__Ebih_East__West_7 <--> Ebih__Waterfall__East_7
 Ebih__Ebih_East__West_8 <--> Ebih__Waterfall__East_8
 Ebih__Ebih_West__Alcove_Entrance --> Ebih__Ebih_West__Above_Alcove
@@ -484,6 +494,7 @@ Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__Above_Chute
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__East_7
 Ebih__Grid_25_10_12__Below_Bush --> Ebih__Grid_25_10_12__Bush
 Ebih__Grid_25_10_12__Bush --> Ebih__Grid_25_10_12__Mid_Ledge
+Ebih__Grid_25_10_12__Hidden_Bush --> Ebih__Grid_25_10_12__East_10
 Ebih__Grid_25_10_12__Mid_Ledge --> Ebih__Grid_25_10_12__West_11
 Ebih__Grid_25_10_12__Top_Platform --> Ebih__Grid_25_10_12__West_10
 Ebih__Grid_25_10_12__West_10 <--> Ebih__Waterfall__East_10
