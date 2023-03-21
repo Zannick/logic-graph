@@ -17,7 +17,7 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx);
-    let orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
+    let orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().flatten().collect();
     if let Some(ctx) = orig_vec
         .iter()
         .filter(|ctx| spot_has_locations(world, ctx.get()))
@@ -45,7 +45,7 @@ where
     {
         let mut newctx = min_spot.clone();
         newctx.activate(action);
-        for nextctx in accessible_spots(world, newctx).into_values() {
+        for nextctx in accessible_spots(world, newctx).into_values().flatten() {
             if spot_has_locations(world, nextctx.get()) {
                 useful_spots.push(nextctx);
             } else {
@@ -68,7 +68,7 @@ where
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
-                for nextctx in accessible_spots(world, newctx).into_values() {
+                for nextctx in accessible_spots(world, newctx).into_values().flatten() {
                     if spot_has_locations(world, nextctx.get()) {
                         if depth > 0 {
                             return Ok(nextctx);
@@ -92,7 +92,7 @@ where
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
-                for nextctx in accessible_spots(world, newctx).into_values() {
+                for nextctx in accessible_spots(world, newctx).into_values().flatten() {
                     if spot_has_locations(world, nextctx.get()) {
                         return Ok(nextctx);
                     }

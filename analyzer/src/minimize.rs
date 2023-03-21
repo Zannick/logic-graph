@@ -1,6 +1,7 @@
+use enum_map::EnumMap;
+
 use crate::access::*;
 use crate::context::*;
-use crate::new_hashset;
 use crate::world::*;
 
 pub fn remove_all_unvisited<W, T, L, E>(
@@ -15,17 +16,17 @@ where
     E: Exit<Context = T>,
 {
     let mut ctx = startctx.clone();
-    let mut set = new_hashset();
+    let mut set: EnumMap<E::LocId, bool> = EnumMap::default();
     // Gather locations from the playthrough
     for hist in wonctx.history_rev() {
         match hist {
             History::Get(_, loc_id) => {
-                set.insert(loc_id);
+                set[loc_id] = true;
             }
             History::MoveGet(_, exit_id) => {
                 let ex = world.get_exit(exit_id);
                 if let Some(loc_id) = ex.loc_id() {
-                    set.insert(*loc_id);
+                    set[*loc_id] = true;
                 }
             }
             _ => (),
@@ -35,7 +36,7 @@ where
 
     // skip all locations not in the playthrough
     for loc in world.get_all_locations() {
-        if set.contains(&loc.id()) {
+        if set[loc.id()] {
             continue;
         }
         if ctx.todo(loc.id()) {

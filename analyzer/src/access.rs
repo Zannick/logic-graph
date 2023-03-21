@@ -1,11 +1,12 @@
 //! Functions related to access graphs, and accessing locations.
 
+use enum_map::EnumMap;
+
 use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::world::*;
-use crate::{new_hashmap, CommonHasher};
 use std::cmp::Reverse;
-use std::collections::{BinaryHeap, HashMap};
+use std::collections::BinaryHeap;
 
 /// Check whether there are available locations at this position.
 pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
@@ -49,7 +50,7 @@ where
 pub fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
+    spot_map: &EnumMap<E::SpotId, Option<ContextWrapper<T>>>,
     spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -58,7 +59,7 @@ pub fn expand<W, T, E, Wp>(
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     for spot in world.get_area_spots(ctx.get().position()) {
-        if !spot_map.contains_key(spot) {
+        if spot_map[*spot] == None {
             let local = ctx.get().local_travel_time(*spot);
             if local < 0 {
                 // Can't move this way
@@ -71,7 +72,7 @@ pub fn expand<W, T, E, Wp>(
     }
 
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if !spot_map.contains_key(&exit.dest()) && exit.can_access(ctx.get()) {
+        if spot_map[exit.dest()] == None && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
             spot_heap.push(Reverse(newctx));
@@ -79,7 +80,7 @@ pub fn expand<W, T, E, Wp>(
     }
 
     for warp in world.get_warps() {
-        if !spot_map.contains_key(&warp.dest(ctx.get())) && warp.can_access(ctx.get()) {
+        if spot_map[warp.dest(ctx.get())] == None && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
             spot_heap.push(Reverse(newctx));
@@ -91,7 +92,7 @@ pub fn expand<W, T, E, Wp>(
 pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-) -> HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>
+) -> EnumMap<E::SpotId, Option<ContextWrapper<T>>>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -100,22 +101,31 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
-    let mut spot_map = new_hashmap();
+    let mut spot_enum_map: EnumMap<E::SpotId, Option<ContextWrapper<T>>> = EnumMap::default();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
-    spot_map.insert(pos, ctx);
+    spot_enum_map[pos] = Some(ctx);
 
-    expand(world, &spot_map[&pos], &spot_map, &mut spot_heap);
+    expand(
+        world,
+        spot_enum_map[pos].as_ref().unwrap(),
+        &spot_enum_map,
+        &mut spot_heap,
+    );
     while let Some(Reverse(spot_found)) = spot_heap.pop() {
         let pos = spot_found.get().position();
-        if !spot_map.contains_key(&pos) {
-            spot_map.insert(pos, spot_found);
-            expand(world, &spot_map[&pos], &spot_map, &mut spot_heap);
+        if spot_enum_map[pos] == None {
+            spot_enum_map[pos] = Some(spot_found);
+            expand(
+                world,
+                spot_enum_map[pos].as_ref().unwrap(),
+                &spot_enum_map,
+                &mut spot_heap,
+            );
         }
     }
 
-    // TODO: sort by distance
-    spot_map
+    spot_enum_map
 }
 
 pub fn all_visitable_locations<'a, W, T, L, E>(world: &'a W, ctx: &T) -> Vec<L::LocId>
@@ -227,7 +237,7 @@ where
 
 pub fn find_unused_links<W, T, E>(
     world: &W,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
+    spot_map: &EnumMap<E::SpotId, Option<ContextWrapper<T>>>,
 ) -> String
 where
     W: World<Exit = E>,
@@ -236,14 +246,15 @@ where
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let mut accessible: Vec<ContextWrapper<T>> = spot_map.values().map(Clone::clone).collect();
+    let mut accessible: Vec<ContextWrapper<T>> = spot_map
+        .values()
+        .filter_map(Clone::clone)
+        .collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if !spot_map.contains_key(spot)
-                && world.are_spots_connected(ctx.get().position(), *spot)
-            {
+            if spot_map[*spot] == None && world.are_spots_connected(ctx.get().position(), *spot) {
                 vec.push(format!(
                     "{} -> {}: movement not available",
                     ctx.get().position(),
@@ -253,13 +264,13 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.get().position()) {
-            if !spot_map.contains_key(&exit.dest()) {
+            if spot_map[exit.dest()] == None {
                 vec.push(format!("{}: exit not usable", exit.id()));
             }
         }
 
         for warp in world.get_warps() {
-            if !spot_map.contains_key(&warp.dest(ctx.get())) {
+            if spot_map[warp.dest(ctx.get())] == None {
                 vec.push(format!(
                     "{}: warp {} not usable",
                     ctx.get().position(),

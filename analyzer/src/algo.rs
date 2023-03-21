@@ -23,7 +23,10 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx);
-    let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
+    let mut vec: Vec<ContextWrapper<T>> = spot_map
+        .values()
+        .filter_map(Clone::clone)
+        .collect();
 
     vec.sort_unstable_by_key(|el| el.elapsed());
     vec
@@ -104,7 +107,7 @@ where
 
     let mut missing = 0;
     for spot_ctx in spot_ctxs {
-        if let Some(spot_again) = new_spots.get(&spot_ctx.get().position()) {
+        if let Some(spot_again) = &new_spots[spot_ctx.get().position()] {
             let new_locs = all_visitable_locations(world, spot_again.get());
             let old_locs = all_visitable_locations(world, spot_ctx.get());
             if new_locs.iter().any(|loc| !old_locs.contains(&loc)) {
@@ -202,8 +205,7 @@ where
     world.skip_unused_items(&mut ctx);
     let startctx = ContextWrapper::new(ctx);
     let mut heap = LimitedHeap::new();
-    let mut solutions = SolutionCollector::<T>::new(
-        "data/solutions.txt", "data/previews.txt")?;
+    let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
     let start = Instant::now();
     match greedy_search(world, &startctx) {
         Ok(wonctx) => {
@@ -218,7 +220,11 @@ where
             );
             heap.set_lenient_max_time(wonctx.elapsed());
             heap.set_lenient_max_time(m.elapsed());
-            heap.push(ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m)));
+            heap.push(ContextWrapper::new(remove_all_unvisited(
+                world,
+                startctx.get(),
+                &m,
+            )));
 
             solutions.insert(wonctx);
             solutions.insert(m);

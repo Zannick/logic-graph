@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# enum-map = "*"
+enum-map = "*"
 rustc-hash = "*"
 sort_by_derive = "0.1.10"
 yaml-rust = "*"

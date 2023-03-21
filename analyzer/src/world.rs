@@ -1,4 +1,4 @@
-use crate::context::Ctx;
+use crate::context::{ContextWrapper, Ctx};
 use std::fmt::{Debug, Display};
 use std::hash::Hash;
 use std::option::Option;
@@ -27,7 +27,7 @@ pub trait Accessible {
 pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display {}
 
 pub trait Location: Accessible {
-    type LocId: Id;
+    type LocId: Id + enum_map::EnumArray<bool>;
     type CanonId: Id;
     type ExitId: Id;
 
@@ -39,8 +39,8 @@ pub trait Location: Accessible {
 
 pub trait Exit: Accessible {
     type ExitId: Id;
-    type SpotId: Id + Default;
-    type LocId: Id;
+    type SpotId: Id + Default + enum_map::EnumArray<Option<ContextWrapper<Self::Context>>>;
+    type LocId: Id + enum_map::EnumArray<bool>;
 
     fn id(&self) -> Self::ExitId;
     fn dest(&self) -> Self::SpotId;
