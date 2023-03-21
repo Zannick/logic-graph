@@ -8,6 +8,7 @@ use crate::minimize::*;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use std::fmt::Debug;
+use std::time::Instant;
 
 pub fn explore<W, T, L, E>(
     world: &W,
@@ -203,10 +204,13 @@ where
     let mut heap = LimitedHeap::new();
     let mut solutions = SolutionCollector::<T>::new(
         "data/solutions.txt", "data/previews.txt")?;
-
+    let start = Instant::now();
     match greedy_search(world, &startctx) {
         Ok(wonctx) => {
+            println!("Finished greedy search in {:?}", start.elapsed());
+            let start = Instant::now();
             let m = minimize_greedy(world, startctx.get(), &wonctx);
+            println!("Minimized in {:?}", start.elapsed());
             println!(
                 "Found greedy solution of {}ms, minimized to {}ms",
                 wonctx.elapsed(),
@@ -221,10 +225,8 @@ where
         }
         Err(ctx) => {
             println!(
-                "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{:#?}\n{}",
-                ctx.elapsed(),
-                ctx.get(),
-                ctx.history_str()
+                "Found no greedy solution, maximal attempt reached dead-end after {}ms",
+                ctx.elapsed()
             );
             // Push it anyway, maybe it'll find something!
             heap.push(ctx);

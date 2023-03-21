@@ -1,90 +1,117 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 use crate::access::*;
-use crate::algo::action_unlocked_anything;
 use crate::context::*;
 use crate::minimize::*;
 use crate::world::*;
 
-pub fn nearest_spot_with_checks<W, T, E, L, Wp>(
+pub fn first_spot_with_locations_after_actions<W, T, L, E>(
     world: &W,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
-) -> Option<ContextWrapper<T>>
+    ctx: ContextWrapper<T>,
+    max_depth: i8,
+) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
-    W: World<Exit = E, Location = L, Warp = Wp>,
+    W: World<Exit = E, Location = L>,
     T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
+    E: Exit<Context = T, Currency = L::Currency, ExitId = L::ExitId>,
+    L: Location<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
-    if let Some((_, ctx)) = spot_map
+    let spot_map = accessible_spots(world, ctx);
+    let orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
+    if let Some(ctx) = orig_vec
         .iter()
-        .filter(|(_, ctx)| spot_has_locations(world, ctx.get()))
-        .min_by_key(|(s, c)| (c.elapsed(), **s))
+        .filter(|ctx| spot_has_locations(world, ctx.get()))
+        .min_by_key(|ctx| ctx.elapsed())
     {
-        Some(ctx.clone())
-    } else {
-        None
+        return Ok(ctx.clone());
     }
-}
-
-pub fn nearest_spot_with_actions<W, T, E, L, Wp>(
-    world: &W,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
-) -> Option<ContextWrapper<T>>
-where
-    W: World<Exit = E, Location = L, Warp = Wp>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
-{
-    if let Some((_, ctx)) = spot_map
+    let min_spot = orig_vec
         .iter()
-        .filter(|(_, ctx)| spot_has_actions(world, ctx))
-        .min_by_key(|(s, c)| (c.elapsed(), **s))
-    {
-        Some(ctx.clone())
-    } else {
-        None
-    }
-}
+        .min_by_key(|ctx| ctx.elapsed())
+        .expect("couldn't reach any spots!")
+        .clone();
 
-pub fn one_useful_action<W, T, E, L, Wp>(
-    world: &W,
-    spot_vec: &Vec<ContextWrapper<T>>,
-) -> Option<ContextWrapper<T>>
-where
-    W: World<Exit = E, Location = L, Warp = Wp>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId>,
-{
-    // Try any spot action before any global action
-    for ctx in spot_vec {
-        for act in world.get_spot_actions(ctx.get().position()) {
-            if act.can_access(ctx.get()) {
-                let mut newctx = ctx.clone();
-                newctx.activate(act);
-                if action_unlocked_anything(world, &newctx, act, &spot_vec) {
-                    return Some(newctx);
+    let mut useful_spots = Vec::new();
+    let mut seen = HashSet::new();
+    let mut to_process = orig_vec.clone();
+    seen.extend(to_process.iter().map(|ctx| ctx.get().clone()));
+
+    // Only allow global actions at the start position, or as the last action.
+    // This avoids extreme fanout.
+    for action in world
+        .get_global_actions()
+        .iter()
+        .filter(|a| a.can_access(min_spot.get()))
+    {
+        let mut newctx = min_spot.clone();
+        newctx.activate(action);
+        for nextctx in accessible_spots(world, newctx).into_values() {
+            if spot_has_locations(world, nextctx.get()) {
+                useful_spots.push(nextctx);
+            } else {
+                if !seen.contains(nextctx.get()) {
+                    seen.insert(nextctx.get().clone());
+                    to_process.push(nextctx);
                 }
             }
         }
     }
-    for ctx in spot_vec {
-        for act in world.get_global_actions() {
-            if act.can_access(ctx.get()) {
-                let mut newctx = ctx.clone();
-                newctx.activate(act);
-                if action_unlocked_anything(world, &newctx, act, &spot_vec) {
-                    return Some(newctx);
+
+    let mut depth = 0;
+    while depth < max_depth {
+        let mut next_process = Vec::new();
+        for spot_ctx in to_process.iter().filter(|ctx| spot_has_actions(world, ctx)) {
+            for action in world
+                .get_spot_actions(spot_ctx.get().position())
+                .iter()
+                .filter(|a| a.can_access(spot_ctx.get()))
+            {
+                let mut newctx = spot_ctx.clone();
+                newctx.activate(action);
+                for nextctx in accessible_spots(world, newctx).into_values() {
+                    if spot_has_locations(world, nextctx.get()) {
+                        if depth > 0 {
+                            return Ok(nextctx);
+                        } else {
+                            useful_spots.push(nextctx);
+                        }
+                    } else {
+                        if !seen.contains(nextctx.get()) {
+                            seen.insert(nextctx.get().clone());
+                            next_process.push(nextctx);
+                        }
+                    }
+                }
+            }
+
+            // Only allow global actions at the start position, or as the last action.
+            for action in world
+                .get_global_actions()
+                .iter()
+                .filter(|a| a.can_access(spot_ctx.get()))
+            {
+                let mut newctx = spot_ctx.clone();
+                newctx.activate(action);
+                for nextctx in accessible_spots(world, newctx).into_values() {
+                    if spot_has_locations(world, nextctx.get()) {
+                        return Ok(nextctx);
+                    }
                 }
             }
         }
+        if !useful_spots.is_empty() {
+            break;
+        }
+        to_process = next_process;
+        to_process.sort_unstable_by_key(|ctx| ctx.elapsed());
+        depth += 1;
     }
-    None
+
+    useful_spots
+        .into_iter()
+        .min_by_key(|ctx| ctx.elapsed())
+        .ok_or(min_spot)
 }
 
 pub fn grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
@@ -123,33 +150,13 @@ where
     E: Exit<Context = T>,
 {
     world.skip_unused_items(ctx.get_mut());
-    let mut actions = 0;
     while !world.won(ctx.get()) {
-        let spot_map = accessible_spots(world, ctx);
-        if let Some(c) = nearest_spot_with_checks(world, &spot_map) {
-            ctx = c;
-            grab_all(world, &mut ctx);
-            actions = 0;
-        } else {
-            let mut spot_vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
-            spot_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
-            if let Some(c) = one_useful_action(world, &spot_vec) {
+        match first_spot_with_locations_after_actions(world, ctx, 2) {
+            Ok(c) => {
                 ctx = c;
-                actions += 1;
-            } else {
-                let ctx = spot_vec
-                    .into_iter()
-                    .next()
-                    .expect("couldn't reach any spots!");
-                return Err(ctx);
+                grab_all(world, &mut ctx);
             }
-            if actions > 3 {
-                let ctx = spot_vec
-                    .into_iter()
-                    .next()
-                    .expect("couldn't reach any spots!");
-                return Err(ctx);
-            }
+            Err(c) => return Err(c),
         }
     }
     Ok(ctx)
