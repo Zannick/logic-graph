@@ -3,6 +3,7 @@
 use crate::context::*;
 use crate::greedy::greedy_search_from;
 use crate::world::*;
+use crate::{new_hashmap, CommonHasher};
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap};
 
@@ -48,7 +49,7 @@ where
 pub fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
     spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -90,7 +91,7 @@ pub fn expand<W, T, E, Wp>(
 pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-) -> HashMap<E::SpotId, ContextWrapper<T>>
+) -> HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -99,7 +100,7 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
-    let mut spot_map = HashMap::new();
+    let mut spot_map = new_hashmap();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
     spot_map.insert(pos, ctx);
@@ -226,7 +227,7 @@ where
 
 pub fn find_unused_links<W, T, E>(
     world: &W,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>>,
+    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
 ) -> String
 where
     W: World<Exit = E>,
@@ -235,7 +236,7 @@ where
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let mut accessible: Vec<ContextWrapper<T>> = spot_map.clone().into_values().collect();
+    let mut accessible: Vec<ContextWrapper<T>> = spot_map.values().map(Clone::clone).collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
     let mut vec = Vec::new();
     for ctx in accessible {

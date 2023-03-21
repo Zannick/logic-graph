@@ -1,3 +1,4 @@
+extern crate rustc_hash;
 extern crate sort_by_derive;
 extern crate yaml_rust;
 
@@ -10,6 +11,14 @@ pub mod minimize;
 pub mod settings;
 pub mod solutions;
 pub mod world;
+
+pub(crate) type CommonHasher = std::hash::BuildHasherDefault<rustc_hash::FxHasher>;
+pub(crate) fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHasher> {
+    rustc_hash::FxHashMap::default()
+}
+pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {
+    rustc_hash::FxHashSet::default()
+}
 
 pub mod testlib {
     #[macro_export]

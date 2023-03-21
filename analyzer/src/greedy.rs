@@ -1,8 +1,7 @@
-use std::collections::HashSet;
-
 use crate::access::*;
 use crate::context::*;
 use crate::minimize::*;
+use crate::new_hashset;
 use crate::world::*;
 
 pub fn first_spot_with_locations_after_actions<W, T, L, E>(
@@ -33,7 +32,7 @@ where
         .clone();
 
     let mut useful_spots = Vec::new();
-    let mut seen = HashSet::new();
+    let mut seen = new_hashset();
     let mut to_process = orig_vec.clone();
     seen.extend(to_process.iter().map(|ctx| ctx.get().clone()));
 

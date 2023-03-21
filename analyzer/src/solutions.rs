@@ -1,4 +1,5 @@
 use crate::context::*;
+use crate::{CommonHasher, new_hashmap};
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
@@ -23,7 +24,7 @@ pub struct SolutionCollector<T>
 where
     T: Ctx,
 {
-    map: HashMap<Vec<History<T>>, Vec<ContextWrapper<T>>>,
+    map: HashMap<Vec<History<T>>, Vec<ContextWrapper<T>>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
     file: File,
@@ -40,7 +41,7 @@ where
         previews_file: &'static str,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
-            map: HashMap::new(),
+            map: new_hashmap(),
             file: File::create(sols_file)?,
             path: sols_file,
             previews: previews_file,

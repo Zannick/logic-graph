@@ -1,7 +1,7 @@
 use crate::access::*;
 use crate::context::*;
+use crate::new_hashset;
 use crate::world::*;
-use std::collections::HashSet;
 
 pub fn remove_all_unvisited<W, T, L, E>(
     world: &W,
@@ -15,7 +15,7 @@ where
     E: Exit<Context = T>,
 {
     let mut ctx = startctx.clone();
-    let mut set = HashSet::new();
+    let mut set = new_hashset();
     // Gather locations from the playthrough
     for hist in wonctx.history_rev() {
         match hist {

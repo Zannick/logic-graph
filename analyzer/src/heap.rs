@@ -1,4 +1,5 @@
 use crate::context::*;
+use crate::{CommonHasher, new_hashmap};
 use sort_by_derive::SortBy;
 use std::collections::{BinaryHeap, HashMap};
 use std::fmt::Debug;
@@ -22,7 +23,7 @@ pub struct LimitedHeap<T: Ctx> {
     // TODO: replace with a faster hash
     // TODO: improve memory usage by condensing bool elements of the context
     // into bitflags. and/or use an LRU cache with a BIG size
-    states_seen: HashMap<T, i32>,
+    states_seen: HashMap<T, i32, CommonHasher>,
     iskips: i32,
     pskips: i32,
     dup_skips: u32,
@@ -38,7 +39,7 @@ impl<T: Ctx> LimitedHeap<T> {
                 h.reserve(1048576);
                 h
             },
-            states_seen: HashMap::new(),
+            states_seen: new_hashmap(),
             iskips: 0,
             pskips: 0,
             dup_skips: 0,
