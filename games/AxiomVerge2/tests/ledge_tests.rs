@@ -6,15 +6,15 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use libaxiom_verge2::context::{enums, Context, Status};
+use libaxiom_verge2::context::{enums, flags, Context, Status};
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
-    ctx.ice_axe = true;
-    ctx.amashilama = true;
+    ctx.cbits1.insert(flags::ContextBits1::ICE_AXE);
+    ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
     ctx.skipped(LocationId::Glacier__Compass_Room__Center__Table);
@@ -36,7 +36,7 @@ fn cannot_obtain_Ledge_Grab() {
 #[test]
 fn with_Switch_36_11_can_obtain_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.switch_36_11 = true;
+    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
 
     expect_obtainable!(
         &world,
@@ -70,7 +70,7 @@ fn cannot_reach_Glacier__Vertical_Room__Peak() {
 #[test]
 fn with_Boomerang_eventually_gets_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.boomerang = true;
+    ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
 
     expect_eventually_gets!(
         &world,
@@ -82,7 +82,7 @@ fn with_Boomerang_eventually_gets_Ledge_Grab() {
 #[test]
 fn settings_major_glitches_True_eventually_gets_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.major_glitches = true;
+    ctx.cbits1.insert(flags::ContextBits1::MAJOR_GLITCHES);
 
     expect_eventually_gets!(
         &world,
@@ -105,7 +105,7 @@ fn eventually_gets_Ledge_Grab() {
 #[test]
 fn switch_opens_gate() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.switch_36_11 = true;
+    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
 
     expect_this_route!(
         &world,
@@ -148,7 +148,7 @@ fn get_boomerang() {
 #[test]
 fn start_Glacier__Boomerang_Room__Pedestal_with_Boomerang_can_obtain_Switch_36_11() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.boomerang = true;
+    ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
 
     expect_obtainable!(
         &world,
@@ -160,8 +160,8 @@ fn start_Glacier__Boomerang_Room__Pedestal_with_Boomerang_can_obtain_Switch_36_1
 #[test]
 fn start_Glacier__Vertical_Room__Under_Switch_with_Boomerang__Switch_36_11_can_obtain_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.boomerang = true;
-    ctx.switch_36_11 = true;
+    ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
+    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
 
     expect_obtainable!(
         &world,
@@ -175,7 +175,7 @@ fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room__Peak() {
     let (mut world, mut ctx) = shared_setup();
 
     let mut ctx2 = ctx.clone();
-    ctx2.ledge_grab = true;
+    ctx2.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
 
     expect_no_route!(
         &world,
@@ -196,10 +196,10 @@ fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab_iteration_limit_500()
 
     let verify = |ctx: &Context| {
         let mut vec = Vec::new();
-        if ctx.boomerang != true {
+        if ctx.count(Item::Boomerang) != 1 {
             vec.push(format!(
                 "did not collect required items Boomerang: {}",
-                ctx.boomerang
+                ctx.count(Item::Boomerang)
             ));
         }
         if vec.is_empty() {

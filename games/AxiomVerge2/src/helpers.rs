@@ -222,7 +222,7 @@ macro_rules! helper__bs {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.boomerang_steering && helper__boomerang!($ctx))
+        ($ctx.boomerang_steering() && helper__boomerang!($ctx))
     }};
 }
 
@@ -233,7 +233,7 @@ macro_rules! helper__offset {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.major_glitches && helper__melee!($ctx))
+        ($ctx.major_glitches() && helper__melee!($ctx))
     }};
 }
 
@@ -244,7 +244,7 @@ macro_rules! helper__block_clip {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.minor_glitches && $ctx.mode() == enums::Mode::Drone)
+        ($ctx.minor_glitches() && $ctx.mode() == enums::Mode::Drone)
     }};
 }
 
@@ -255,7 +255,7 @@ macro_rules! helper__block_clip_escape {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.minor_glitches && helper__hook!($ctx))
+        ($ctx.minor_glitches() && helper__hook!($ctx))
     }};
 }
 
@@ -266,8 +266,8 @@ macro_rules! helper__save {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.save = $ctx.position();
-        $ctx.energy = helper__max_energy!($ctx);
+        $ctx.set_save($ctx.position());
+        $ctx.set_energy(helper__max_energy!($ctx));
     }};
 }
 
@@ -285,7 +285,7 @@ macro_rules! helper__reset_old_area {
             if get_area($newpos) != $ctx.prev_area() {
                 $ctx.reset_area($ctx.prev_area());
             }
-            $ctx.prev_area = get_area($ctx.position());
+            $ctx.set_prev_area(get_area($ctx.position()));
         }
     }};
 }
@@ -297,8 +297,8 @@ macro_rules! helper__deploy_drone {
     ($ctx:expr, $newpos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.mode = enums::Mode::Drone;
-        $ctx.indra = $ctx.position();
+        $ctx.set_mode(enums::Mode::Drone);
+        $ctx.set_indra($ctx.position());
         $ctx.set_position($newpos);
     }};
 }
@@ -310,8 +310,8 @@ macro_rules! helper__deploy_drone_and_move {
     ($ctx:expr, $dronepos:expr, $indrapos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.mode = enums::Mode::Drone;
-        $ctx.indra = $indrapos;
+        $ctx.set_mode(enums::Mode::Drone);
+        $ctx.set_indra($indrapos);
         $ctx.set_position($dronepos);
     }};
 }

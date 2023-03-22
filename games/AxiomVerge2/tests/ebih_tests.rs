@@ -6,17 +6,17 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use libaxiom_verge2::context::{enums, Context, Status};
+use libaxiom_verge2::context::{enums, flags, Context, Status};
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
-    ctx.ice_axe = true;
-    ctx.amashilama = true;
-    ctx.boomerang = true;
-    ctx.ledge_grab = true;
+    ctx.cbits1.insert(flags::ContextBits1::ICE_AXE);
+    ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
+    ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
+    ctx.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
     ctx.save = SpotId::Ebih__Base_Camp__Save_Point;
 
     (world, ctx)
@@ -86,7 +86,7 @@ fn start_Ebih__Drone_Room__West_6_with_Infect__Remote_Drone_can_activate_Ebih__D
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.infect = 1;
-    ctx.remote_drone = true;
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
 
     expect_action_accessible!(
         &world,

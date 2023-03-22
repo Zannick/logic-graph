@@ -28,11 +28,10 @@ class SettingVisitor(RulesVisitor):
         self.name = name
         self.ctxdict = ctxdict or {}
         try:
-            ret = super().visit(tree)
+            return super().visit(tree)
         finally:
             self.name = ''
             self.ctxdict = {}
-        return ret
 
     def _checkType(self, setting: str, type: str):
         if self.settings[setting]['type'] != type:

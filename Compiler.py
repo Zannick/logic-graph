@@ -19,6 +19,7 @@ import jinja2
 
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
+from FlagProcessor import BitFlagProcessor
 from TestProcessor import TestProcessor
 from Utils import *
 
@@ -208,6 +209,7 @@ class GameLogic(object):
         self.process_times()
         self.process_settings()
         self.process_tests()
+        self.process_bitflags()
 
 
     def process_regions(self):
@@ -388,6 +390,9 @@ class GameLogic(object):
                            self.settings, self.id_lookup)
         self._errors.extend(tp.process_tests(self.tests))
 
+    def process_bitflags(self):
+        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts())
+        self.bfp.process()
 
     @cached_property
     def movements_by_type(self):

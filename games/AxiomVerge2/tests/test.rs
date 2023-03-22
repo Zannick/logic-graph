@@ -14,7 +14,7 @@ fn test_name() {
 
     ctx.energy = 30;
     ctx.flasks = 1;
-    ctx.amashilama = true;
+    ctx.add_item(Item::Amashilama);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_no_route!(
@@ -32,8 +32,8 @@ fn test_route() {
 
     ctx.energy = 30;
     ctx.flasks = 1;
-    ctx.amashilama = true;
-    ctx.ledge_grab = true;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ledge_Grab);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_this_route!(
@@ -55,9 +55,9 @@ fn test_obtain() {
 
     ctx.energy = 30;
     ctx.flasks = 1;
-    ctx.amashilama = true;
-    ctx.ice_axe = true;
-    ctx.major_glitches = true;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
+    ctx.set_major_glitches(true);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_obtainable!(
@@ -74,12 +74,12 @@ fn test_require() {
     let mut ctx = Context::default();
     ctx.energy = 30;
     ctx.flasks = 1;
-    ctx.amashilama = true;
-    ctx.ice_axe = true;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     let mut ctx2 = ctx.clone();
-    ctx2.major_glitches = true;
+    ctx2.set_major_glitches(true);
     expect_not_obtainable!(
         &world,
         ctx,
@@ -100,8 +100,8 @@ fn search() {
     let mut ctx = Context::default();
     ctx.energy = 300;
     ctx.flasks = 1;
-    ctx.amashilama = true;
-    ctx.ice_axe = true;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
     ctx.skipped(LocationId::Glacier__Compass_Room__Center__Table);

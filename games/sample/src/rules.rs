@@ -74,7 +74,7 @@ pub fn access_deku_lobby_web(ctx: &Context) -> bool {
 }
 pub fn access_deku_lobby_web_and_logic_deku_b1_skip(ctx: &Context) -> bool {
     // Deku_Lobby_Web and logic_deku_b1_skip
-    (ctx.has(Item::Deku_Lobby_Web) && ctx.logic_deku_b1_skip)
+    (ctx.has(Item::Deku_Lobby_Web) && ctx.logic_deku_b1_skip())
 }
 pub fn access_deku_slingshot_scrub(ctx: &Context) -> bool {
     // Deku_Slingshot_Scrub
@@ -170,37 +170,37 @@ pub fn access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_
 }
 pub fn access_triforce_piece__triforce_count(ctx: &Context) -> bool {
     // Triforce_Piece{triforce_count}
-    ctx.count(Item::Triforce_Piece) >= ctx.triforce_count
+    ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
 }
 pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context) {
     // ^_torch = True
-    ctx.deku_tree__compass_room__ctx__torch = true;
+    ctx.set_deku_tree__compass_room__ctx__torch(true);
 }
 pub fn action_rupees__max__rupees__20_wallet_max(ctx: &mut Context) {
     // ^rupees = $max(^rupees + 20, $wallet_max)
-    ctx.rupees = std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx));
+    ctx.set_rupees(std::cmp::max(ctx.rupees() + 20, helper__wallet_max!(ctx)));
 }
 pub fn action_rupees__min__rupees__1_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
-    ctx.rupees = std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx));
+    ctx.set_rupees(std::cmp::min(ctx.rupees() + 1, helper__wallet_max!(ctx)));
 }
 pub fn action_rupees__min__rupees__50_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
-    ctx.rupees = std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx));
+    ctx.set_rupees(std::cmp::min(ctx.rupees() + 50, helper__wallet_max!(ctx)));
 }
 pub fn action_rupees__min__rupees__5_wallet_max(ctx: &mut Context) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
-    ctx.rupees = std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx));
+    ctx.set_rupees(std::cmp::min(ctx.rupees() + 5, helper__wallet_max!(ctx)));
 }
 pub fn action_save__position(ctx: &mut Context) {
     // ^save = ^position
-    ctx.save = ctx.position();
+    ctx.set_save(ctx.position());
 }
 pub fn action_tod__match_tod____day__night_night__day____day_(ctx: &mut Context) {
     // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
-    ctx.tod = match ctx.tod() {
+    ctx.set_tod(match ctx.tod() {
         enums::Tod::Day => enums::Tod::Night,
         enums::Tod::Night => enums::Tod::Day,
         _ => enums::Tod::Day,
-    };
+    });
 }

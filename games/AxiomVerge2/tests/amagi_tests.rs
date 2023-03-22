@@ -6,17 +6,17 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use libaxiom_verge2::context::{enums, Context, Status};
+use libaxiom_verge2::context::{enums, flags, Context, Status};
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
-    ctx.amashilama = true;
-    ctx.ledge_grab = true;
-    ctx.boomerang = true;
-    ctx.remote_drone = true;
+    ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
+    ctx.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
+    ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
     ctx.infect = 1;
     ctx.mode = enums::Mode::Indra;
     ctx.save = SpotId::Ebih__Base_Camp__Save_Point;
@@ -63,7 +63,7 @@ fn start_Amagi__Main_Area__West_Side_requires_with_Underwater_Movement_to_activa
     let (mut world, mut ctx) = shared_setup();
 
     let mut ctx2 = ctx.clone();
-    ctx2.underwater_movement = true;
+    ctx2.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
 
     expect_action_inaccessible!(
         &world,
@@ -82,7 +82,8 @@ fn start_Amagi__Main_Area__West_Side_requires_with_Underwater_Movement_to_activa
 fn start_Amagi__Main_Area__Carving_context_amagi__main_area__ctx__combo_True_can_access_Amagi__Main_Area__Way_Off_To_The_Side__Item(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.amagi__main_area__ctx__combo = true;
+    ctx.cbits1
+        .insert(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
 
     expect_accessible!(
         &world,
@@ -108,7 +109,7 @@ fn context_mode_drone_indra_Amagi__Main_Area__East_19_can_obtain_Underwater_Move
 fn start_Amagi__Main_Area__Save_Point_with_Underwater_Movement_context_save_Amagi__Main_Area__Save_Point_can_reach_Ebih__Base_Camp__Save_Point(
 ) {
     let (mut world, mut ctx) = shared_setup();
-    ctx.underwater_movement = true;
+    ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
     ctx.save = SpotId::Amagi__Main_Area__Save_Point;
 
     expect_any_route!(

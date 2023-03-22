@@ -2,6 +2,7 @@
 
 #![allow(dead_code)]
 
+extern crate bitflags;
 extern crate enum_map;
 extern crate yaml_rust;
 

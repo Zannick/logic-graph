@@ -20,6 +20,28 @@ use std::fmt;
 %% endfor
 }
 
+pub mod flags {
+use bitflags::bitflags;
+
+%% for size, vars, defaults in bfp.flag_groups
+bitflags!{
+    #[derive(Copy, Clone, Debug, {% if not defaults %}Default, {% endif %}PartialEq, Eq, Hash)]
+    pub struct ContextBits{{ loop.index }} : u{{ size }} {
+%% for v in vars
+        const {{ v|upper }} = 1 << {{ loop.index0 }};
+%% endfor
+    }
+}
+%% if defaults
+impl Default for ContextBits{{ loop.index }} {
+    fn default() -> ContextBits{{ loop.index }} {
+        ContextBits{{ loop.index }}::{{ defaults|map('upper')|join(' | ContextBits' + (loop.index|string) + '::') }}
+    }
+}
+%% endif
+%% endfor
+}
+
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Status {
     #[default] None,
@@ -31,16 +53,20 @@ pub enum Status {
 pub struct Context {
 %# Splitting into separate Cow structs performs worse :(
     // context vars
-%% for ctx, t in context_types.items()
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
     pub {{ ctx }}: {{ t }},
 %% endfor
     // settings
-%% for s, info in settings.items()
+%% for s, info in settings.items() if s not in bfp.varmap
     pub {{ s }}: {{ info.rust_type }},
 %% endfor
     // items
-%% for item, ct in gl.item_max_counts().items()|sort
+%% for item, ct in gl.item_max_counts().items()|sort if item not in bfp.varmap
     pub {{ item|lower }}: {{ ct|get_int_type_for_max }},
+%% endfor
+    // bitflags
+%% for group in bfp.flag_groups
+    pub cbits{{ loop.index }}: flags::ContextBits{{ loop.index }},
 %% endfor
     // other
 %# I was not able to move this to analyzer due to the need to call enum derive for proper setup:
@@ -53,16 +79,20 @@ pub struct Context {
 impl Default for Context {
     fn default() -> Context {
         Context {
-%% for k, v in context_values.items()
+%% for k, v in context_values.items() if k not in bfp.varmap
             {{ k }}: {{ v|str_to_rusttype(context_types[k]) }},
 %% endfor
             // settings
-%% for s, info in settings.items()
+%% for s, info in settings.items() if s not in bfp.varmap
             {{ s }}: Default::default(),
 %% endfor
             // items
-%% for item, ct in gl.item_max_counts().items()|sort
+%% for item, ct in gl.item_max_counts().items()|sort if item not in bfp.varmap
             {{ item|lower }}: Default::default(),
+%% endfor
+            // bitflags
+%% for group in bfp.flag_groups
+            cbits{{ loop.index }}: Default::default(),
 %% endfor
             // other
             status: Default::default(),
@@ -83,7 +113,11 @@ impl context::Ctx for Context {
     fn has(&self, item: Item) -> bool {
         match item {
 %% for item, ct in gl.item_max_counts().items()|sort
+%% if item in bfp.varmap
+            Item::{{ item }} => self.cbits{{ bfp.varmap[item] }}.contains(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }}),
+%% else
             Item::{{ item }} => self.{{ item|lower }}{% if ct > 1 %} >= 1{% endif %},
+%% endif
 %% endfor
             _ => false,
         }
@@ -91,7 +125,11 @@ impl context::Ctx for Context {
     fn count(&self, item: Item) -> i16 {
         match item {
 %% for item, ct in gl.item_max_counts().items()|sort
+%% if item in bfp.varmap
+            Item::{{ item }} => self.cbits{{ bfp.varmap[item] }}.contains(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }}).into(),
+%% else
             Item::{{ item }} => self.{{ item|lower }}.into(),
+%% endif
 %% endfor
             _ => 0,
         }
@@ -100,7 +138,11 @@ impl context::Ctx for Context {
         match item {
 %% for item, ct in gl.item_max_counts().items()|sort
             Item::{{ item }} => {
+%% if item in bfp.varmap
+                self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+%% else
                 self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+%% endif
 %% if item in collect
                 rules::action_{{ collect[item].action_id }}(self);
 %% endif
@@ -128,11 +170,19 @@ impl context::Ctx for Context {
             {{ pltype }}Id::{{ r }} => {
                 if get_{{ pltype|lower }}(self.position) != {{ pltype|lower }} {
 %% for c, val in context_trigger_rules.enter[pltype|lower].get(r, {}).items()
+%% if c in bfp.varmap
+                    self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
                     self.{{ c }} = {{ val }};
+%% endif
 %% endfor
 %% for other_region in context_resetters[pltype|lower].get(r, ())
 %% for c, val in context_trigger_rules.reset[pltype|lower][other_region].items()
+%% if c in bfp.varmap
+                    self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
                     self.{{ c }} = {{ val }};
+%% endif
 %% endfor
 %% endfor
 %% if id_lookup[r].action_id
@@ -153,7 +203,11 @@ impl context::Ctx for Context {
 %% for pltype in ['Region', 'Area']
 %% for ctxs in context_trigger_rules.load[pltype|lower].values()
 %% for c, val in ctxs.items()
+%% if c in bfp.varmap
+        self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
         self.{{ c }} = {{ val }};
+%% endif
 %% endfor
 %% endfor
 %% endfor
@@ -163,7 +217,11 @@ impl context::Ctx for Context {
 %% for pltype in ['Region', 'Area']
 %% for ctxs in context_trigger_rules.reset[pltype|lower].values()
 %% for c, val in ctxs.items()
+%% if c in bfp.varmap
+        self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
         self.{{ c }} = {{ val }};
+%% endif
 %% endfor
 %% endfor
 %% endfor
@@ -176,7 +234,11 @@ impl context::Ctx for Context {
 %% for r, ctxs in context_trigger_rules.reset[pltype|lower].items()
             {{ pltype }}Id::{{ r }} => {
 %% for c, val in ctxs.items()
-                    self.{{ c }} = {{ val }};
+%% if c in bfp.varmap
+                self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
+%% else
+                self.{{ c }} = {{ val }};
+%% endif
 %% endfor
             }
 %% endfor
@@ -254,9 +316,28 @@ impl context::Ctx for Context {
 }
 
 impl Context {
+    // settings
+%% for s, info in settings.items()
+    pub fn {{ s }}(&self) -> {{ info.rust_type }} {
+%% if s in bfp.varmap
+        self.cbits{{ bfp.varmap[s] }}.contains(flags::ContextBits{{ bfp.varmap[s] }}::{{ s|upper }})
+%% else
+        self.{{ s }}
+%% endif
+    }
+    pub fn set_{{ s }}(&mut self, val: {{ info.rust_type }}) {
+%% if s in bfp.varmap
+        self.cbits{{ bfp.varmap[s] }}.set(flags::ContextBits{{ bfp.varmap[s] }}::{{ s|upper }}, val);
+%% else
+        self.{{ s }} = val;
+%% endif
+    }
+%% endfor
+
+    // context
 %% for ctx, t in context_types.items()
     pub fn {{ ctx }}(&self) -> {{ t }} {
-%# Spots have priority over areas which have priority over regions
+%#- Spots have priority over areas which have priority over regions
         match self.position {
 %% for spot, override in context_here_overrides[ctx]['spot'].items()
             SpotId::{{ spot }} => {{ override }},
@@ -269,11 +350,40 @@ impl Context {
 %% for region, override in context_here_overrides[ctx]['region'].items()
                     RegionId::{{ region }} => {{ override }},
 %% endfor
+%% if ctx in bfp.varmap
+                    _ => self.cbits{{ bfp.varmap[ctx] }}.contains(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }})
+%% else
                     _ => self.{{ ctx }}
+%% endif
                 }
             }
         }
     }
+%% if ctx != 'position'
+    pub fn set_{{ ctx }}(&mut self, val: {{ t }}) {
+%% if ctx in bfp.varmap
+        self.cbits{{ bfp.varmap[ctx] }}.set(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }}, val);
+%% else
+        self.{{ ctx }} = val;
+%% endif
+    }
+%% endif
 %% endfor
+
+    // test helper for items
+    pub fn add_item(&mut self, item: Item) {
+        match item {
+%% for item, ct in gl.item_max_counts().items()|sort
+            Item::{{ item }} => {
+%% if item in bfp.varmap
+                self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+%% else
+                self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+%% endif
+            },
+%% endfor
+            _ => ()
+        }
+    }
 }
 

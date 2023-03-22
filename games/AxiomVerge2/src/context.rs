@@ -41,6 +41,57 @@ pub mod enums {
     }
 }
 
+pub mod flags {
+    use bitflags::bitflags;
+
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+        pub struct ContextBits1 : u32 {
+            const BREACH = 1 << 0;
+            const WATER = 1 << 1;
+            const AMAGI__MAIN_AREA__CTX__COMBO = 1 << 2;
+            const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 1 << 3;
+            const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 1 << 4;
+            const EBIH__WATERFALL__CTX__LEFT_BLOCK = 1 << 5;
+            const EBIH__WATERFALL__CTX__RIGHT_BLOCK = 1 << 6;
+            const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 1 << 7;
+            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 8;
+            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 9;
+            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 10;
+            const BOOMERANG_STEERING = 1 << 11;
+            const MAJOR_GLITCHES = 1 << 12;
+            const MINOR_GLITCHES = 1 << 13;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 14;
+            const AMASHILAMA = 1 << 15;
+            const ANUMAN = 1 << 16;
+            const APOCALYPSE_BOMB = 1 << 17;
+            const BOOMERANG = 1 << 18;
+            const DEAR_ERNEST = 1 << 19;
+            const DEFEAT_EBIH_ALU = 1 << 20;
+            const DEFEAT_MUS_A_M20 = 1 << 21;
+            const DRONE_HOVER = 1 << 22;
+            const ICE_AXE = 1 << 23;
+            const INFECTION_SPEED = 1 << 24;
+            const LEDGE_GRAB = 1 << 25;
+            const MIST_UPGRADE = 1 << 26;
+            const NANITE_MIST = 1 << 27;
+            const REMOTE_DRONE = 1 << 28;
+            const SHOCKWAVE = 1 << 29;
+            const SLINGSHOT_HOOK = 1 << 30;
+            const STATION_POWER = 1 << 31;
+        }
+    }
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+        pub struct ContextBits2 : u8 {
+            const SWITCH_36_11 = 1 << 0;
+            const SWITCH_40_12 = 1 << 1;
+            const UNDERWATER_MOVEMENT = 1 << 2;
+            const WALL_CLIMB = 1 << 3;
+        }
+    }
+}
+
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Status {
     #[default]
@@ -60,55 +111,22 @@ pub struct Context {
     pub prev_area: AreaId,
     pub energy: i32,
     pub flasks: i32,
-    pub breach: bool,
-    pub water: bool,
-    pub amagi__main_area__ctx__combo: bool,
-    pub ebih__base_camp__ctx__left_platform_moved: bool,
-    pub ebih__grid_25_10_12__ctx__door_open: bool,
-    pub ebih__waterfall__ctx__left_block: bool,
-    pub ebih__waterfall__ctx__right_block: bool,
-    pub ebih__waterfall__ctx__west_door_open: bool,
-    pub ebih__ebih_east__ctx__platform1_moved: bool,
-    pub ebih__ebih_east__ctx__platform2_moved: bool,
-    pub ebih__drone_room__ctx__platform_moved: bool,
     // settings
-    pub boomerang_steering: bool,
-    pub major_glitches: bool,
-    pub minor_glitches: bool,
     // items
-    pub amagi_west_lake_surface_wall: bool,
-    pub amashilama: bool,
-    pub anuman: bool,
-    pub apocalypse_bomb: bool,
-    pub boomerang: bool,
-    pub dear_ernest: bool,
-    pub defeat_ebih_alu: bool,
-    pub defeat_mus_a_m20: bool,
-    pub drone_hover: bool,
     pub drone_melee_damage: i8,
     pub drone_melee_speed: i8,
     pub flask: i8,
     pub health_upgrade: i8,
-    pub ice_axe: bool,
     pub infect: i8,
     pub infection_range: i8,
-    pub infection_speed: bool,
-    pub ledge_grab: bool,
     pub melee_damage: i8,
     pub melee_speed: i8,
-    pub mist_upgrade: bool,
-    pub nanite_mist: bool,
     pub nano_points: i8,
     pub ranged_damage: i8,
     pub ranged_speed: i8,
-    pub remote_drone: bool,
-    pub shockwave: bool,
-    pub slingshot_hook: bool,
-    pub station_power: bool,
-    pub switch_36_11: bool,
-    pub switch_40_12: bool,
-    pub underwater_movement: bool,
-    pub wall_climb: bool,
+    // bitflags
+    pub cbits1: flags::ContextBits1,
+    pub cbits2: flags::ContextBits2,
     // other
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
@@ -126,55 +144,22 @@ impl Default for Context {
             prev_area: AreaId::Antarctica__West,
             energy: 0,
             flasks: 0,
-            breach: false,
-            water: false,
-            amagi__main_area__ctx__combo: false,
-            ebih__base_camp__ctx__left_platform_moved: false,
-            ebih__grid_25_10_12__ctx__door_open: false,
-            ebih__waterfall__ctx__left_block: false,
-            ebih__waterfall__ctx__right_block: false,
-            ebih__waterfall__ctx__west_door_open: false,
-            ebih__ebih_east__ctx__platform1_moved: false,
-            ebih__ebih_east__ctx__platform2_moved: false,
-            ebih__drone_room__ctx__platform_moved: false,
             // settings
-            boomerang_steering: Default::default(),
-            major_glitches: Default::default(),
-            minor_glitches: Default::default(),
             // items
-            amagi_west_lake_surface_wall: Default::default(),
-            amashilama: Default::default(),
-            anuman: Default::default(),
-            apocalypse_bomb: Default::default(),
-            boomerang: Default::default(),
-            dear_ernest: Default::default(),
-            defeat_ebih_alu: Default::default(),
-            defeat_mus_a_m20: Default::default(),
-            drone_hover: Default::default(),
             drone_melee_damage: Default::default(),
             drone_melee_speed: Default::default(),
             flask: Default::default(),
             health_upgrade: Default::default(),
-            ice_axe: Default::default(),
             infect: Default::default(),
             infection_range: Default::default(),
-            infection_speed: Default::default(),
-            ledge_grab: Default::default(),
             melee_damage: Default::default(),
             melee_speed: Default::default(),
-            mist_upgrade: Default::default(),
-            nanite_mist: Default::default(),
             nano_points: Default::default(),
             ranged_damage: Default::default(),
             ranged_speed: Default::default(),
-            remote_drone: Default::default(),
-            shockwave: Default::default(),
-            slingshot_hook: Default::default(),
-            station_power: Default::default(),
-            switch_36_11: Default::default(),
-            switch_40_12: Default::default(),
-            underwater_movement: Default::default(),
-            wall_climb: Default::default(),
+            // bitflags
+            cbits1: Default::default(),
+            cbits2: Default::default(),
             // other
             status: Default::default(),
             visits: Default::default(),
@@ -192,109 +177,159 @@ impl context::Ctx for Context {
 
     fn has(&self, item: Item) -> bool {
         match item {
-            Item::Amagi_West_Lake_Surface_Wall => self.amagi_west_lake_surface_wall,
-            Item::Amashilama => self.amashilama,
-            Item::Anuman => self.anuman,
-            Item::Apocalypse_Bomb => self.apocalypse_bomb,
-            Item::Boomerang => self.boomerang,
-            Item::Dear_Ernest => self.dear_ernest,
-            Item::Defeat_Ebih_Alu => self.defeat_ebih_alu,
-            Item::Defeat_MUS_A_M20 => self.defeat_mus_a_m20,
-            Item::Drone_Hover => self.drone_hover,
+            Item::Amagi_West_Lake_Surface_Wall => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL),
+            Item::Amashilama => self.cbits1.contains(flags::ContextBits1::AMASHILAMA),
+            Item::Anuman => self.cbits1.contains(flags::ContextBits1::ANUMAN),
+            Item::Apocalypse_Bomb => self.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB),
+            Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
+            Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
+            Item::Defeat_Ebih_Alu => self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU),
+            Item::Defeat_MUS_A_M20 => self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20),
+            Item::Drone_Hover => self.cbits1.contains(flags::ContextBits1::DRONE_HOVER),
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
             Item::Flask => self.flask >= 1,
             Item::Health_Upgrade => self.health_upgrade >= 1,
-            Item::Ice_Axe => self.ice_axe,
+            Item::Ice_Axe => self.cbits1.contains(flags::ContextBits1::ICE_AXE),
             Item::Infect => self.infect >= 1,
             Item::Infection_Range => self.infection_range >= 1,
-            Item::Infection_Speed => self.infection_speed,
-            Item::Ledge_Grab => self.ledge_grab,
+            Item::Infection_Speed => self.cbits1.contains(flags::ContextBits1::INFECTION_SPEED),
+            Item::Ledge_Grab => self.cbits1.contains(flags::ContextBits1::LEDGE_GRAB),
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
-            Item::Mist_Upgrade => self.mist_upgrade,
-            Item::Nanite_Mist => self.nanite_mist,
+            Item::Mist_Upgrade => self.cbits1.contains(flags::ContextBits1::MIST_UPGRADE),
+            Item::Nanite_Mist => self.cbits1.contains(flags::ContextBits1::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
-            Item::Remote_Drone => self.remote_drone,
-            Item::Shockwave => self.shockwave,
-            Item::Slingshot_Hook => self.slingshot_hook,
-            Item::Station_Power => self.station_power,
-            Item::Switch_36_11 => self.switch_36_11,
-            Item::Switch_40_12 => self.switch_40_12,
-            Item::Underwater_Movement => self.underwater_movement,
-            Item::Wall_Climb => self.wall_climb,
+            Item::Remote_Drone => self.cbits1.contains(flags::ContextBits1::REMOTE_DRONE),
+            Item::Shockwave => self.cbits1.contains(flags::ContextBits1::SHOCKWAVE),
+            Item::Slingshot_Hook => self.cbits1.contains(flags::ContextBits1::SLINGSHOT_HOOK),
+            Item::Station_Power => self.cbits1.contains(flags::ContextBits1::STATION_POWER),
+            Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
+            Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
+            Item::Underwater_Movement => self
+                .cbits2
+                .contains(flags::ContextBits2::UNDERWATER_MOVEMENT),
+            Item::Wall_Climb => self.cbits2.contains(flags::ContextBits2::WALL_CLIMB),
             _ => false,
         }
     }
     fn count(&self, item: Item) -> i16 {
         match item {
-            Item::Amagi_West_Lake_Surface_Wall => self.amagi_west_lake_surface_wall.into(),
-            Item::Amashilama => self.amashilama.into(),
-            Item::Anuman => self.anuman.into(),
-            Item::Apocalypse_Bomb => self.apocalypse_bomb.into(),
-            Item::Boomerang => self.boomerang.into(),
-            Item::Dear_Ernest => self.dear_ernest.into(),
-            Item::Defeat_Ebih_Alu => self.defeat_ebih_alu.into(),
-            Item::Defeat_MUS_A_M20 => self.defeat_mus_a_m20.into(),
-            Item::Drone_Hover => self.drone_hover.into(),
+            Item::Amagi_West_Lake_Surface_Wall => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL)
+                .into(),
+            Item::Amashilama => self.cbits1.contains(flags::ContextBits1::AMASHILAMA).into(),
+            Item::Anuman => self.cbits1.contains(flags::ContextBits1::ANUMAN).into(),
+            Item::Apocalypse_Bomb => self
+                .cbits1
+                .contains(flags::ContextBits1::APOCALYPSE_BOMB)
+                .into(),
+            Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG).into(),
+            Item::Dear_Ernest => self
+                .cbits1
+                .contains(flags::ContextBits1::DEAR_ERNEST)
+                .into(),
+            Item::Defeat_Ebih_Alu => self
+                .cbits1
+                .contains(flags::ContextBits1::DEFEAT_EBIH_ALU)
+                .into(),
+            Item::Defeat_MUS_A_M20 => self
+                .cbits1
+                .contains(flags::ContextBits1::DEFEAT_MUS_A_M20)
+                .into(),
+            Item::Drone_Hover => self
+                .cbits1
+                .contains(flags::ContextBits1::DRONE_HOVER)
+                .into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
             Item::Flask => self.flask.into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
-            Item::Ice_Axe => self.ice_axe.into(),
+            Item::Ice_Axe => self.cbits1.contains(flags::ContextBits1::ICE_AXE).into(),
             Item::Infect => self.infect.into(),
             Item::Infection_Range => self.infection_range.into(),
-            Item::Infection_Speed => self.infection_speed.into(),
-            Item::Ledge_Grab => self.ledge_grab.into(),
+            Item::Infection_Speed => self
+                .cbits1
+                .contains(flags::ContextBits1::INFECTION_SPEED)
+                .into(),
+            Item::Ledge_Grab => self.cbits1.contains(flags::ContextBits1::LEDGE_GRAB).into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
-            Item::Mist_Upgrade => self.mist_upgrade.into(),
-            Item::Nanite_Mist => self.nanite_mist.into(),
+            Item::Mist_Upgrade => self
+                .cbits1
+                .contains(flags::ContextBits1::MIST_UPGRADE)
+                .into(),
+            Item::Nanite_Mist => self
+                .cbits1
+                .contains(flags::ContextBits1::NANITE_MIST)
+                .into(),
             Item::Nano_Points => self.nano_points.into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
-            Item::Remote_Drone => self.remote_drone.into(),
-            Item::Shockwave => self.shockwave.into(),
-            Item::Slingshot_Hook => self.slingshot_hook.into(),
-            Item::Station_Power => self.station_power.into(),
-            Item::Switch_36_11 => self.switch_36_11.into(),
-            Item::Switch_40_12 => self.switch_40_12.into(),
-            Item::Underwater_Movement => self.underwater_movement.into(),
-            Item::Wall_Climb => self.wall_climb.into(),
+            Item::Remote_Drone => self
+                .cbits1
+                .contains(flags::ContextBits1::REMOTE_DRONE)
+                .into(),
+            Item::Shockwave => self.cbits1.contains(flags::ContextBits1::SHOCKWAVE).into(),
+            Item::Slingshot_Hook => self
+                .cbits1
+                .contains(flags::ContextBits1::SLINGSHOT_HOOK)
+                .into(),
+            Item::Station_Power => self
+                .cbits1
+                .contains(flags::ContextBits1::STATION_POWER)
+                .into(),
+            Item::Switch_36_11 => self
+                .cbits2
+                .contains(flags::ContextBits2::SWITCH_36_11)
+                .into(),
+            Item::Switch_40_12 => self
+                .cbits2
+                .contains(flags::ContextBits2::SWITCH_40_12)
+                .into(),
+            Item::Underwater_Movement => self
+                .cbits2
+                .contains(flags::ContextBits2::UNDERWATER_MOVEMENT)
+                .into(),
+            Item::Wall_Climb => self.cbits2.contains(flags::ContextBits2::WALL_CLIMB).into(),
             _ => 0,
         }
     }
     fn collect(&mut self, item: Item) {
         match item {
             Item::Amagi_West_Lake_Surface_Wall => {
-                self.amagi_west_lake_surface_wall = true;
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL);
             }
             Item::Amashilama => {
-                self.amashilama = true;
+                self.cbits1.insert(flags::ContextBits1::AMASHILAMA);
                 rules::action_save__glacier__revival__save_point(self);
             }
             Item::Anuman => {
-                self.anuman = true;
+                self.cbits1.insert(flags::ContextBits1::ANUMAN);
             }
             Item::Apocalypse_Bomb => {
-                self.apocalypse_bomb = true;
+                self.cbits1.insert(flags::ContextBits1::APOCALYPSE_BOMB);
             }
             Item::Boomerang => {
-                self.boomerang = true;
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             }
             Item::Dear_Ernest => {
-                self.dear_ernest = true;
+                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
             }
             Item::Defeat_Ebih_Alu => {
-                self.defeat_ebih_alu = true;
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             }
             Item::Defeat_MUS_A_M20 => {
-                self.defeat_mus_a_m20 = true;
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_MUS_A_M20);
             }
             Item::Drone_Hover => {
-                self.drone_hover = true;
+                self.cbits1.insert(flags::ContextBits1::DRONE_HOVER);
             }
             Item::Drone_Melee_Damage => {
                 self.drone_melee_damage += 1;
@@ -310,7 +345,7 @@ impl context::Ctx for Context {
                 self.health_upgrade += 1;
             }
             Item::Ice_Axe => {
-                self.ice_axe = true;
+                self.cbits1.insert(flags::ContextBits1::ICE_AXE);
             }
             Item::Infect => {
                 self.infect += 1;
@@ -320,10 +355,10 @@ impl context::Ctx for Context {
                 self.infection_range += 1;
             }
             Item::Infection_Speed => {
-                self.infection_speed = true;
+                self.cbits1.insert(flags::ContextBits1::INFECTION_SPEED);
             }
             Item::Ledge_Grab => {
-                self.ledge_grab = true;
+                self.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
             }
             Item::Melee_Damage => {
                 self.melee_damage += 1;
@@ -332,10 +367,10 @@ impl context::Ctx for Context {
                 self.melee_speed += 1;
             }
             Item::Mist_Upgrade => {
-                self.mist_upgrade = true;
+                self.cbits1.insert(flags::ContextBits1::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
-                self.nanite_mist = true;
+                self.cbits1.insert(flags::ContextBits1::NANITE_MIST);
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
@@ -347,28 +382,28 @@ impl context::Ctx for Context {
                 self.ranged_speed += 1;
             }
             Item::Remote_Drone => {
-                self.remote_drone = true;
+                self.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
             }
             Item::Shockwave => {
-                self.shockwave = true;
+                self.cbits1.insert(flags::ContextBits1::SHOCKWAVE);
             }
             Item::Slingshot_Hook => {
-                self.slingshot_hook = true;
+                self.cbits1.insert(flags::ContextBits1::SLINGSHOT_HOOK);
             }
             Item::Station_Power => {
-                self.station_power = true;
+                self.cbits1.insert(flags::ContextBits1::STATION_POWER);
             }
             Item::Switch_36_11 => {
-                self.switch_36_11 = true;
+                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.switch_40_12 = true;
+                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             }
             Item::Underwater_Movement => {
-                self.underwater_movement = true;
+                self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
             }
             Item::Wall_Climb => {
-                self.wall_climb = true;
+                self.cbits2.insert(flags::ContextBits2::WALL_CLIMB);
             }
             Item::Health_Node => rules::action_energy__max_energy(self),
             _ => (),
@@ -593,28 +628,37 @@ impl context::Ctx for Context {
 
     fn reload_game(&mut self) {
         self.reset_all();
-        self.amagi__main_area__ctx__combo = false;
+        self.cbits1
+            .remove(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
     }
 
     fn reset_all(&mut self) {
-        self.ebih__base_camp__ctx__left_platform_moved = false;
-        self.ebih__ebih_east__ctx__platform1_moved = false;
-        self.ebih__ebih_east__ctx__platform2_moved = false;
-        self.ebih__drone_room__ctx__platform_moved = false;
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
+        self.cbits1
+            .remove(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
     }
 
     fn reset_region(&mut self, region_id: RegionId) {}
     fn reset_area(&mut self, area_id: AreaId) {
         match area_id {
             AreaId::Ebih__Base_Camp => {
-                self.ebih__base_camp__ctx__left_platform_moved = false;
+                self.cbits1
+                    .remove(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
             }
             AreaId::Ebih__Ebih_East => {
-                self.ebih__ebih_east__ctx__platform1_moved = false;
-                self.ebih__ebih_east__ctx__platform2_moved = false;
+                self.cbits1
+                    .remove(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
+                self.cbits1
+                    .remove(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
             }
             AreaId::Ebih__Drone_Room => {
-                self.ebih__drone_room__ctx__platform_moved = false;
+                self.cbits1
+                    .remove(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
             }
             _ => (),
         }
@@ -708,6 +752,28 @@ impl context::Ctx for Context {
 }
 
 impl Context {
+    // settings
+    pub fn boomerang_steering(&self) -> bool {
+        self.cbits1
+            .contains(flags::ContextBits1::BOOMERANG_STEERING)
+    }
+    pub fn set_boomerang_steering(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::BOOMERANG_STEERING, val);
+    }
+    pub fn major_glitches(&self) -> bool {
+        self.cbits1.contains(flags::ContextBits1::MAJOR_GLITCHES)
+    }
+    pub fn set_major_glitches(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::MAJOR_GLITCHES, val);
+    }
+    pub fn minor_glitches(&self) -> bool {
+        self.cbits1.contains(flags::ContextBits1::MINOR_GLITCHES)
+    }
+    pub fn set_minor_glitches(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::MINOR_GLITCHES, val);
+    }
+    // context
     pub fn position(&self) -> SpotId {
         match self.position {
             _ => match get_area(self.position) {
@@ -726,6 +792,9 @@ impl Context {
             },
         }
     }
+    pub fn set_save(&mut self, val: SpotId) {
+        self.save = val;
+    }
     pub fn mode(&self) -> enums::Mode {
         match self.position {
             _ => match get_area(self.position) {
@@ -734,6 +803,9 @@ impl Context {
                 },
             },
         }
+    }
+    pub fn set_mode(&mut self, val: enums::Mode) {
+        self.mode = val;
     }
     pub fn indra(&self) -> SpotId {
         match self.position {
@@ -744,6 +816,9 @@ impl Context {
             },
         }
     }
+    pub fn set_indra(&mut self, val: SpotId) {
+        self.indra = val;
+    }
     pub fn last(&self) -> SpotId {
         match self.position {
             _ => match get_area(self.position) {
@@ -752,6 +827,9 @@ impl Context {
                 },
             },
         }
+    }
+    pub fn set_last(&mut self, val: SpotId) {
+        self.last = val;
     }
     pub fn prev_area(&self) -> AreaId {
         match self.position {
@@ -762,6 +840,9 @@ impl Context {
             },
         }
     }
+    pub fn set_prev_area(&mut self, val: AreaId) {
+        self.prev_area = val;
+    }
     pub fn energy(&self) -> i32 {
         match self.position {
             _ => match get_area(self.position) {
@@ -770,6 +851,9 @@ impl Context {
                 },
             },
         }
+    }
+    pub fn set_energy(&mut self, val: i32) {
+        self.energy = val;
     }
     pub fn flasks(&self) -> i32 {
         match self.position {
@@ -780,14 +864,20 @@ impl Context {
             },
         }
     }
+    pub fn set_flasks(&mut self, val: i32) {
+        self.flasks = val;
+    }
     pub fn breach(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.breach,
+                    _ => self.cbits1.contains(flags::ContextBits1::BREACH),
                 },
             },
         }
+    }
+    pub fn set_breach(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::BREACH, val);
     }
     pub fn water(&self) -> bool {
         match self.position {
@@ -809,90 +899,265 @@ impl Context {
                 AreaId::Amagi__Cave_Behind_Waterfall => false,
                 _ => match get_region(self.position) {
                     RegionId::Amagi => true,
-                    _ => self.water,
+                    _ => self.cbits1.contains(flags::ContextBits1::WATER),
                 },
             },
         }
+    }
+    pub fn set_water(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::WATER, val);
     }
     pub fn amagi__main_area__ctx__combo(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.amagi__main_area__ctx__combo,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO),
                 },
             },
         }
+    }
+    pub fn set_amagi__main_area__ctx__combo(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO, val);
     }
     pub fn ebih__base_camp__ctx__left_platform_moved(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__base_camp__ctx__left_platform_moved,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED),
                 },
             },
         }
+    }
+    pub fn set_ebih__base_camp__ctx__left_platform_moved(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED,
+            val,
+        );
     }
     pub fn ebih__grid_25_10_12__ctx__door_open(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__grid_25_10_12__ctx__door_open,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN),
                 },
             },
         }
+    }
+    pub fn set_ebih__grid_25_10_12__ctx__door_open(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN,
+            val,
+        );
     }
     pub fn ebih__waterfall__ctx__left_block(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__waterfall__ctx__left_block,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__LEFT_BLOCK),
                 },
             },
         }
+    }
+    pub fn set_ebih__waterfall__ctx__left_block(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::EBIH__WATERFALL__CTX__LEFT_BLOCK, val);
     }
     pub fn ebih__waterfall__ctx__right_block(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__waterfall__ctx__right_block,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__RIGHT_BLOCK),
                 },
             },
         }
+    }
+    pub fn set_ebih__waterfall__ctx__right_block(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::EBIH__WATERFALL__CTX__RIGHT_BLOCK, val);
     }
     pub fn ebih__waterfall__ctx__west_door_open(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__waterfall__ctx__west_door_open,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN),
                 },
             },
         }
+    }
+    pub fn set_ebih__waterfall__ctx__west_door_open(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN,
+            val,
+        );
     }
     pub fn ebih__ebih_east__ctx__platform1_moved(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__ebih_east__ctx__platform1_moved,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED),
                 },
             },
         }
+    }
+    pub fn set_ebih__ebih_east__ctx__platform1_moved(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED,
+            val,
+        );
     }
     pub fn ebih__ebih_east__ctx__platform2_moved(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__ebih_east__ctx__platform2_moved,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED),
                 },
             },
         }
+    }
+    pub fn set_ebih__ebih_east__ctx__platform2_moved(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED,
+            val,
+        );
     }
     pub fn ebih__drone_room__ctx__platform_moved(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.ebih__drone_room__ctx__platform_moved,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED),
                 },
             },
+        }
+    }
+    pub fn set_ebih__drone_room__ctx__platform_moved(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED,
+            val,
+        );
+    }
+    // test helper for items
+    pub fn add_item(&mut self, item: Item) {
+        match item {
+            Item::Amagi_West_Lake_Surface_Wall => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL);
+            }
+            Item::Amashilama => {
+                self.cbits1.insert(flags::ContextBits1::AMASHILAMA);
+            }
+            Item::Anuman => {
+                self.cbits1.insert(flags::ContextBits1::ANUMAN);
+            }
+            Item::Apocalypse_Bomb => {
+                self.cbits1.insert(flags::ContextBits1::APOCALYPSE_BOMB);
+            }
+            Item::Boomerang => {
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+            }
+            Item::Dear_Ernest => {
+                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
+            }
+            Item::Defeat_Ebih_Alu => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
+            }
+            Item::Defeat_MUS_A_M20 => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_MUS_A_M20);
+            }
+            Item::Drone_Hover => {
+                self.cbits1.insert(flags::ContextBits1::DRONE_HOVER);
+            }
+            Item::Drone_Melee_Damage => {
+                self.drone_melee_damage += 1;
+            }
+            Item::Drone_Melee_Speed => {
+                self.drone_melee_speed += 1;
+            }
+            Item::Flask => {
+                self.flask += 1;
+            }
+            Item::Health_Upgrade => {
+                self.health_upgrade += 1;
+            }
+            Item::Ice_Axe => {
+                self.cbits1.insert(flags::ContextBits1::ICE_AXE);
+            }
+            Item::Infect => {
+                self.infect += 1;
+            }
+            Item::Infection_Range => {
+                self.infection_range += 1;
+            }
+            Item::Infection_Speed => {
+                self.cbits1.insert(flags::ContextBits1::INFECTION_SPEED);
+            }
+            Item::Ledge_Grab => {
+                self.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
+            }
+            Item::Melee_Damage => {
+                self.melee_damage += 1;
+            }
+            Item::Melee_Speed => {
+                self.melee_speed += 1;
+            }
+            Item::Mist_Upgrade => {
+                self.cbits1.insert(flags::ContextBits1::MIST_UPGRADE);
+            }
+            Item::Nanite_Mist => {
+                self.cbits1.insert(flags::ContextBits1::NANITE_MIST);
+            }
+            Item::Nano_Points => {
+                self.nano_points += 1;
+            }
+            Item::Ranged_Damage => {
+                self.ranged_damage += 1;
+            }
+            Item::Ranged_Speed => {
+                self.ranged_speed += 1;
+            }
+            Item::Remote_Drone => {
+                self.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+            }
+            Item::Shockwave => {
+                self.cbits1.insert(flags::ContextBits1::SHOCKWAVE);
+            }
+            Item::Slingshot_Hook => {
+                self.cbits1.insert(flags::ContextBits1::SLINGSHOT_HOOK);
+            }
+            Item::Station_Power => {
+                self.cbits1.insert(flags::ContextBits1::STATION_POWER);
+            }
+            Item::Switch_36_11 => {
+                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+            }
+            Item::Switch_40_12 => {
+                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+            }
+            Item::Underwater_Movement => {
+                self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+            }
+            Item::Wall_Climb => {
+                self.cbits2.insert(flags::ContextBits2::WALL_CLIMB);
+            }
+            _ => (),
         }
     }
 }

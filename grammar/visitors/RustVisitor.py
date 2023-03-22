@@ -24,8 +24,11 @@ class RustVisitor(RulesVisitor):
                 return ref
         return BUILTINS.get(ref, '$' + ref)
     
-    def _getRefSetter(self, ref):
+    def _getRefRaw(self, ref):
         return f'ctx.{self.ctxdict[ref]}'
+    
+    def _getRefSetter(self, ref):
+        return f'ctx.set_{self.ctxdict[ref]}'
 
     def _getRefEnum(self, ref):
         return f'enums::{ref.capitalize()}'
@@ -118,11 +121,11 @@ class RustVisitor(RulesVisitor):
         ref = self._getRefGetter(str(ctx.REF())[1:])
         if ctx.ITEM():
             return f'{ref} == Item::{ctx.ITEM()}'
-        return f'{ref} == ctx.{ctx.SETTING()}'
+        return f'{ref} == ctx.{ctx.SETTING()}()'
 
     def visitSetting(self, ctx):
         # TODO: dict settings?
-        return f'ctx.{ctx.SETTING()}'
+        return f'ctx.{ctx.SETTING()}()'
 
     def visitArgument(self, ctx):
         return self._getRefGetter(str(ctx.REF())[1:])
@@ -131,7 +134,7 @@ class RustVisitor(RulesVisitor):
         if ctx.INT():
             val = str(ctx.INT())
         else:
-            val = f'ctx.{ctx.SETTING()}'
+            val = f'ctx.{ctx.SETTING()}()'
         return f'ctx.count(Item::{ctx.ITEM()}) >= {val}'
 
     def visitOneItem(self, ctx):
@@ -149,7 +152,7 @@ class RustVisitor(RulesVisitor):
         if ctx.REF():
             return self._getRefGetter(str(ctx.REF())[1:])
         if ctx.SETTING():
-            return f'ctx.{ctx::SETTING()}'
+            return f'ctx.{ctx::SETTING()}()'
         # TODO: constants
         return self.visitChildren(ctx)
 
@@ -215,12 +218,10 @@ class RustVisitor(RulesVisitor):
             val = self.visit(ctx.num())
         else:
             val = self.visit(ctx.str_(), self._getRefEnum(var))
-        if var == 'position':
-            return f'ctx.set_position({val});'
-        return f'{self._getRefSetter(var)} = {val};'
+        return f'{self._getRefSetter(var)}({val});'
 
     def visitAlter(self, ctx):
-        return f'{self._getRefSetter(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
+        return f'{self._getRefRaw(str(ctx.REF())[1:])} {ctx.BINOP()}= {self.visit(ctx.num())};'
 
     def visitFuncNum(self, ctx):
         func = self._getFuncAndArgs(str(ctx.FUNC()))

@@ -6,23 +6,37 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use lib{{ package }}::context::{enums, Context, Status};
+use lib{{ package }}::context::{enums, flags, Context, Status};
 use lib{{ package }}::graph::{self, *};
 use lib{{ package }}::items::Item;
 
 %% macro setup(setup, ctx='ctx')
 %% for item in setup.with
+%% if item in bfp.varmap
+    {{ ctx }}.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+%% else
     {{ ctx }}.{{ item.split('{', 1)[0]|lower }} =
     {%- if '{' in item %} {{ item[item.index('{') + 1:-1] }}{% elif gl.item_max_counts()[item] > 1 %} 1{% else %} true{% endif %};
+%% endif
 %% endfor
 %% if setup.context
 %% for key, val in setup.context.items()
+%% if key in bfp.varmap
+    {{ ctx }}.cbits{{ bfp.varmap[key] }}.{% if val %}insert{% else %}remove{% endif %}(
+        flags::ContextBits{{ bfp.varmap[key] }}::{{ key|upper }});
+%% else
     {{ ctx }}.{{ key }} = {{ val|str_to_rusttype(context_types[key]) }};
+%% endif
 %% endfor
 %% endif
 %% if setup.settings
 %% for key, val in setup.settings.items()
+%% if key in bfp.varmap
+    {{ ctx }}.cbits{{ bfp.varmap[key] }}.{% if val %}insert{% else %}remove{% endif %}(
+        flags::ContextBits{{ bfp.varmap[key] }}::{{ key|upper }});
+%% else
     {{ ctx }}.{{ key }} = {{ val|str_to_rusttype(settings[key].rust_type) }};
+%% endif
 %% endfor
 %% endif
 %% for loc in setup.visited
@@ -37,22 +51,22 @@ use lib{{ package }}::items::Item;
 |ctx: &Context| {
     let mut vec = Vec::new();
 %% for item in setup.with
-    if ctx.{{ item.split('{', 1)[0]|lower }} !=
-    {%- if '{' in item %} {{ item[item.index('{') + 1:-1] }}{% elif gl.item_max_counts()[item] > 1 %} 1{% else %} true{% endif %} {
-        vec.push(format!("did not collect required items {{ item }}: {}", ctx.{{ item.split('{', 1)[0]|lower }}));
+    if ctx.count(Item::{{ item.split('{', 1)[0] }}) !=
+    {%- if '{' in item %} {{ item[item.index('{') + 1:-1] }}{% else %} 1{% endif %} {
+        vec.push(format!("did not collect required items {{ item }}: {}", ctx.count(Item::{{ item.split('{', 1)[0] }})));
     }
 %% endfor
 %% if setup.context
 %% for key, val in setup.context.items()
-    if ctx.{{ key }} != {{ val|str_to_rusttype(context_types[key]) }} {
-        vec.push(format!("did not match required context {{ key }}={{ val }}: {}", ctx.{{ key }}));
+    if ctx.{{ key }}() != {{ val|str_to_rusttype(context_types[key]) }} {
+        vec.push(format!("did not match required context {{ key }}={{ val }}: {}", ctx.{{ key }}()));
     }
 %% endfor
 %% endif
 %% if setup.settings
 %% for key, val in setup.settings.items()
-    if ctx.{{ key }} != {{ val|str_to_rusttype(settings[key].rust_type) }} {
-        vec.push(format!("did not match required setting {{ key }}={{ val }}: {}", ctx.{{ key }}));
+    if ctx.{{ key }}() != {{ val|str_to_rusttype(settings[key].rust_type) }} {
+        vec.push(format!("did not match required setting {{ key }}={{ val }}: {}", ctx.{{ key }}()));
     }
 %% endfor
 %% endif

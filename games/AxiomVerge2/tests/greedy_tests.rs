@@ -6,24 +6,24 @@
 use analyzer::context::Ctx;
 use analyzer::world::*;
 use analyzer::*;
-use libaxiom_verge2::context::{enums, Context, Status};
+use libaxiom_verge2::context::{enums, flags, Context, Status};
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
-    ctx.amashilama = true;
-    ctx.boomerang = true;
-    ctx.dear_ernest = true;
-    ctx.defeat_ebih_alu = true;
-    ctx.ice_axe = true;
+    ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
+    ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
+    ctx.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
+    ctx.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
+    ctx.cbits1.insert(flags::ContextBits1::ICE_AXE);
     ctx.infect = 1;
-    ctx.underwater_movement = true;
-    ctx.ledge_grab = true;
-    ctx.remote_drone = true;
-    ctx.switch_36_11 = true;
-    ctx.switch_40_12 = true;
+    ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+    ctx.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+    ctx.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     (world, ctx)

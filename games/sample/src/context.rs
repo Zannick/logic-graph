@@ -42,6 +42,72 @@ pub mod enums {
     }
 }
 
+pub mod flags {
+    use bitflags::bitflags;
+
+    bitflags! {
+        #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
+        pub struct ContextBits1 : u32 {
+            const CHILD = 1 << 0;
+            const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 1 << 1;
+            const LOGIC_DEKU_B1_SKIP = 1 << 2;
+            const BIGGORON_SWORD = 1 << 3;
+            const BLUE_FIRE_ARROWS = 1 << 4;
+            const BOMBS = 1 << 5;
+            const BOOMERANG = 1 << 6;
+            const BOW = 1 << 7;
+            const BUY_DEKU_NUT_10 = 1 << 8;
+            const BUY_DEKU_NUT_5 = 1 << 9;
+            const BUY_DEKU_SHIELD = 1 << 10;
+            const BUY_DEKU_STICK_1 = 1 << 11;
+            const DEFEAT_GANON = 1 << 12;
+            const DEFEAT_GOHMA = 1 << 13;
+            const DEKU_BACK_ROOM_WALL = 1 << 14;
+            const DEKU_BACK_ROOM_WEB = 1 << 15;
+            const DEKU_BASEMENT_BLOCK = 1 << 16;
+            const DEKU_BASEMENT_SCRUBS = 1 << 17;
+            const DEKU_BASEMENT_SWITCH = 1 << 18;
+            const DEKU_BASEMENT_WEB = 1 << 19;
+            const DEKU_LOBBY_WEB = 1 << 20;
+            const DEKU_NUT_DROP = 1 << 21;
+            const DEKU_SHIELD_DROP = 1 << 22;
+            const DEKU_SLINGSHOT_SCRUB = 1 << 23;
+            const DEKU_STICK_DROP = 1 << 24;
+            const DINS_FIRE = 1 << 25;
+            const FARORES_WIND = 1 << 26;
+            const FIRE_ARROWS = 1 << 27;
+            const GORON_TUNIC = 1 << 28;
+            const HOOKSHOT = 1 << 29;
+            const HOVER_BOOTS = 1 << 30;
+            const HYLIAN_SHIELD = 1 << 31;
+        }
+    }
+    impl Default for ContextBits1 {
+        fn default() -> ContextBits1 {
+            ContextBits1::CHILD
+        }
+    }
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+        pub struct ContextBits2 : u16 {
+            const IRON_BOOTS = 1 << 0;
+            const KOKIRI_EMERALD = 1 << 1;
+            const KOKIRI_SWORD = 1 << 2;
+            const LENS_OF_TRUTH = 1 << 3;
+            const LIGHT_ARROWS = 1 << 4;
+            const MAGIC_METER = 1 << 5;
+            const MEGATON_HAMMER = 1 << 6;
+            const MINUET_OF_FOREST = 1 << 7;
+            const MIRROR_SHIELD = 1 << 8;
+            const NAYRUS_LOVE = 1 << 9;
+            const OCARINA = 1 << 10;
+            const SHOWED_MIDO = 1 << 11;
+            const SLINGSHOT = 1 << 12;
+            const ZORA_TUNIC = 1 << 13;
+        }
+    }
+}
+
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Status {
     #[default]
@@ -55,59 +121,16 @@ pub struct Context {
     // context vars
     pub position: SpotId,
     pub save: SpotId,
-    pub child: bool,
     pub tod: enums::Tod,
     pub rupees: i32,
-    pub deku_tree__compass_room__ctx__torch: bool,
     // settings
     pub triforce_count: i16,
-    pub logic_deku_b1_skip: bool,
     // items
-    pub biggoron_sword: bool,
-    pub blue_fire_arrows: bool,
-    pub bombs: bool,
-    pub boomerang: bool,
-    pub bow: bool,
-    pub buy_deku_nut_10: bool,
-    pub buy_deku_nut_5: bool,
-    pub buy_deku_shield: bool,
-    pub buy_deku_stick_1: bool,
-    pub defeat_ganon: bool,
-    pub defeat_gohma: bool,
-    pub deku_back_room_wall: bool,
-    pub deku_back_room_web: bool,
-    pub deku_basement_block: bool,
-    pub deku_basement_scrubs: bool,
-    pub deku_basement_switch: bool,
-    pub deku_basement_web: bool,
-    pub deku_lobby_web: bool,
-    pub deku_nut_drop: bool,
-    pub deku_shield_drop: bool,
-    pub deku_slingshot_scrub: bool,
-    pub deku_stick_drop: bool,
-    pub dins_fire: bool,
-    pub farores_wind: bool,
-    pub fire_arrows: bool,
     pub gold_skulltula_token: i8,
-    pub goron_tunic: bool,
-    pub hookshot: bool,
-    pub hover_boots: bool,
-    pub hylian_shield: bool,
-    pub iron_boots: bool,
-    pub kokiri_emerald: bool,
-    pub kokiri_sword: bool,
-    pub lens_of_truth: bool,
-    pub light_arrows: bool,
-    pub magic_meter: bool,
-    pub megaton_hammer: bool,
-    pub minuet_of_forest: bool,
-    pub mirror_shield: bool,
-    pub nayrus_love: bool,
-    pub ocarina: bool,
-    pub showed_mido: bool,
-    pub slingshot: bool,
     pub triforce_piece: i16,
-    pub zora_tunic: bool,
+    // bitflags
+    pub cbits1: flags::ContextBits1,
+    pub cbits2: flags::ContextBits2,
     // other
     pub status: EnumMap<LocationId, Status>,
     visits: i32,
@@ -119,59 +142,16 @@ impl Default for Context {
         Context {
             position: SpotId::KF__Links_House__Start_Point,
             save: SpotId::KF__Links_House__Start_Point,
-            child: true,
             tod: enums::Tod::Day,
             rupees: 0,
-            deku_tree__compass_room__ctx__torch: false,
             // settings
             triforce_count: Default::default(),
-            logic_deku_b1_skip: Default::default(),
             // items
-            biggoron_sword: Default::default(),
-            blue_fire_arrows: Default::default(),
-            bombs: Default::default(),
-            boomerang: Default::default(),
-            bow: Default::default(),
-            buy_deku_nut_10: Default::default(),
-            buy_deku_nut_5: Default::default(),
-            buy_deku_shield: Default::default(),
-            buy_deku_stick_1: Default::default(),
-            defeat_ganon: Default::default(),
-            defeat_gohma: Default::default(),
-            deku_back_room_wall: Default::default(),
-            deku_back_room_web: Default::default(),
-            deku_basement_block: Default::default(),
-            deku_basement_scrubs: Default::default(),
-            deku_basement_switch: Default::default(),
-            deku_basement_web: Default::default(),
-            deku_lobby_web: Default::default(),
-            deku_nut_drop: Default::default(),
-            deku_shield_drop: Default::default(),
-            deku_slingshot_scrub: Default::default(),
-            deku_stick_drop: Default::default(),
-            dins_fire: Default::default(),
-            farores_wind: Default::default(),
-            fire_arrows: Default::default(),
             gold_skulltula_token: Default::default(),
-            goron_tunic: Default::default(),
-            hookshot: Default::default(),
-            hover_boots: Default::default(),
-            hylian_shield: Default::default(),
-            iron_boots: Default::default(),
-            kokiri_emerald: Default::default(),
-            kokiri_sword: Default::default(),
-            lens_of_truth: Default::default(),
-            light_arrows: Default::default(),
-            magic_meter: Default::default(),
-            megaton_hammer: Default::default(),
-            minuet_of_forest: Default::default(),
-            mirror_shield: Default::default(),
-            nayrus_love: Default::default(),
-            ocarina: Default::default(),
-            showed_mido: Default::default(),
-            slingshot: Default::default(),
             triforce_piece: Default::default(),
-            zora_tunic: Default::default(),
+            // bitflags
+            cbits1: Default::default(),
+            cbits2: Default::default(),
             // other
             status: Default::default(),
             visits: Default::default(),
@@ -189,240 +169,357 @@ impl context::Ctx for Context {
 
     fn has(&self, item: Item) -> bool {
         match item {
-            Item::Biggoron_Sword => self.biggoron_sword,
-            Item::Blue_Fire_Arrows => self.blue_fire_arrows,
-            Item::Bombs => self.bombs,
-            Item::Boomerang => self.boomerang,
-            Item::Bow => self.bow,
-            Item::Buy_Deku_Nut_10 => self.buy_deku_nut_10,
-            Item::Buy_Deku_Nut_5 => self.buy_deku_nut_5,
-            Item::Buy_Deku_Shield => self.buy_deku_shield,
-            Item::Buy_Deku_Stick_1 => self.buy_deku_stick_1,
-            Item::Defeat_Ganon => self.defeat_ganon,
-            Item::Defeat_Gohma => self.defeat_gohma,
-            Item::Deku_Back_Room_Wall => self.deku_back_room_wall,
-            Item::Deku_Back_Room_Web => self.deku_back_room_web,
-            Item::Deku_Basement_Block => self.deku_basement_block,
-            Item::Deku_Basement_Scrubs => self.deku_basement_scrubs,
-            Item::Deku_Basement_Switch => self.deku_basement_switch,
-            Item::Deku_Basement_Web => self.deku_basement_web,
-            Item::Deku_Lobby_Web => self.deku_lobby_web,
-            Item::Deku_Nut_Drop => self.deku_nut_drop,
-            Item::Deku_Shield_Drop => self.deku_shield_drop,
-            Item::Deku_Slingshot_Scrub => self.deku_slingshot_scrub,
-            Item::Deku_Stick_Drop => self.deku_stick_drop,
-            Item::Dins_Fire => self.dins_fire,
-            Item::Farores_Wind => self.farores_wind,
-            Item::Fire_Arrows => self.fire_arrows,
+            Item::Biggoron_Sword => self.cbits1.contains(flags::ContextBits1::BIGGORON_SWORD),
+            Item::Blue_Fire_Arrows => self.cbits1.contains(flags::ContextBits1::BLUE_FIRE_ARROWS),
+            Item::Bombs => self.cbits1.contains(flags::ContextBits1::BOMBS),
+            Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
+            Item::Bow => self.cbits1.contains(flags::ContextBits1::BOW),
+            Item::Buy_Deku_Nut_10 => self.cbits1.contains(flags::ContextBits1::BUY_DEKU_NUT_10),
+            Item::Buy_Deku_Nut_5 => self.cbits1.contains(flags::ContextBits1::BUY_DEKU_NUT_5),
+            Item::Buy_Deku_Shield => self.cbits1.contains(flags::ContextBits1::BUY_DEKU_SHIELD),
+            Item::Buy_Deku_Stick_1 => self.cbits1.contains(flags::ContextBits1::BUY_DEKU_STICK_1),
+            Item::Defeat_Ganon => self.cbits1.contains(flags::ContextBits1::DEFEAT_GANON),
+            Item::Defeat_Gohma => self.cbits1.contains(flags::ContextBits1::DEFEAT_GOHMA),
+            Item::Deku_Back_Room_Wall => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BACK_ROOM_WALL),
+            Item::Deku_Back_Room_Web => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BACK_ROOM_WEB),
+            Item::Deku_Basement_Block => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_BLOCK),
+            Item::Deku_Basement_Scrubs => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_SCRUBS),
+            Item::Deku_Basement_Switch => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_SWITCH),
+            Item::Deku_Basement_Web => self.cbits1.contains(flags::ContextBits1::DEKU_BASEMENT_WEB),
+            Item::Deku_Lobby_Web => self.cbits1.contains(flags::ContextBits1::DEKU_LOBBY_WEB),
+            Item::Deku_Nut_Drop => self.cbits1.contains(flags::ContextBits1::DEKU_NUT_DROP),
+            Item::Deku_Shield_Drop => self.cbits1.contains(flags::ContextBits1::DEKU_SHIELD_DROP),
+            Item::Deku_Slingshot_Scrub => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB),
+            Item::Deku_Stick_Drop => self.cbits1.contains(flags::ContextBits1::DEKU_STICK_DROP),
+            Item::Dins_Fire => self.cbits1.contains(flags::ContextBits1::DINS_FIRE),
+            Item::Farores_Wind => self.cbits1.contains(flags::ContextBits1::FARORES_WIND),
+            Item::Fire_Arrows => self.cbits1.contains(flags::ContextBits1::FIRE_ARROWS),
             Item::Gold_Skulltula_Token => self.gold_skulltula_token >= 1,
-            Item::Goron_Tunic => self.goron_tunic,
-            Item::Hookshot => self.hookshot,
-            Item::Hover_Boots => self.hover_boots,
-            Item::Hylian_Shield => self.hylian_shield,
-            Item::Iron_Boots => self.iron_boots,
-            Item::Kokiri_Emerald => self.kokiri_emerald,
-            Item::Kokiri_Sword => self.kokiri_sword,
-            Item::Lens_of_Truth => self.lens_of_truth,
-            Item::Light_Arrows => self.light_arrows,
-            Item::Magic_Meter => self.magic_meter,
-            Item::Megaton_Hammer => self.megaton_hammer,
-            Item::Minuet_of_Forest => self.minuet_of_forest,
-            Item::Mirror_Shield => self.mirror_shield,
-            Item::Nayrus_Love => self.nayrus_love,
-            Item::Ocarina => self.ocarina,
-            Item::Showed_Mido => self.showed_mido,
-            Item::Slingshot => self.slingshot,
+            Item::Goron_Tunic => self.cbits1.contains(flags::ContextBits1::GORON_TUNIC),
+            Item::Hookshot => self.cbits1.contains(flags::ContextBits1::HOOKSHOT),
+            Item::Hover_Boots => self.cbits1.contains(flags::ContextBits1::HOVER_BOOTS),
+            Item::Hylian_Shield => self.cbits1.contains(flags::ContextBits1::HYLIAN_SHIELD),
+            Item::Iron_Boots => self.cbits2.contains(flags::ContextBits2::IRON_BOOTS),
+            Item::Kokiri_Emerald => self.cbits2.contains(flags::ContextBits2::KOKIRI_EMERALD),
+            Item::Kokiri_Sword => self.cbits2.contains(flags::ContextBits2::KOKIRI_SWORD),
+            Item::Lens_of_Truth => self.cbits2.contains(flags::ContextBits2::LENS_OF_TRUTH),
+            Item::Light_Arrows => self.cbits2.contains(flags::ContextBits2::LIGHT_ARROWS),
+            Item::Magic_Meter => self.cbits2.contains(flags::ContextBits2::MAGIC_METER),
+            Item::Megaton_Hammer => self.cbits2.contains(flags::ContextBits2::MEGATON_HAMMER),
+            Item::Minuet_of_Forest => self.cbits2.contains(flags::ContextBits2::MINUET_OF_FOREST),
+            Item::Mirror_Shield => self.cbits2.contains(flags::ContextBits2::MIRROR_SHIELD),
+            Item::Nayrus_Love => self.cbits2.contains(flags::ContextBits2::NAYRUS_LOVE),
+            Item::Ocarina => self.cbits2.contains(flags::ContextBits2::OCARINA),
+            Item::Showed_Mido => self.cbits2.contains(flags::ContextBits2::SHOWED_MIDO),
+            Item::Slingshot => self.cbits2.contains(flags::ContextBits2::SLINGSHOT),
             Item::Triforce_Piece => self.triforce_piece >= 1,
-            Item::Zora_Tunic => self.zora_tunic,
+            Item::Zora_Tunic => self.cbits2.contains(flags::ContextBits2::ZORA_TUNIC),
             _ => false,
         }
     }
     fn count(&self, item: Item) -> i16 {
         match item {
-            Item::Biggoron_Sword => self.biggoron_sword.into(),
-            Item::Blue_Fire_Arrows => self.blue_fire_arrows.into(),
-            Item::Bombs => self.bombs.into(),
-            Item::Boomerang => self.boomerang.into(),
-            Item::Bow => self.bow.into(),
-            Item::Buy_Deku_Nut_10 => self.buy_deku_nut_10.into(),
-            Item::Buy_Deku_Nut_5 => self.buy_deku_nut_5.into(),
-            Item::Buy_Deku_Shield => self.buy_deku_shield.into(),
-            Item::Buy_Deku_Stick_1 => self.buy_deku_stick_1.into(),
-            Item::Defeat_Ganon => self.defeat_ganon.into(),
-            Item::Defeat_Gohma => self.defeat_gohma.into(),
-            Item::Deku_Back_Room_Wall => self.deku_back_room_wall.into(),
-            Item::Deku_Back_Room_Web => self.deku_back_room_web.into(),
-            Item::Deku_Basement_Block => self.deku_basement_block.into(),
-            Item::Deku_Basement_Scrubs => self.deku_basement_scrubs.into(),
-            Item::Deku_Basement_Switch => self.deku_basement_switch.into(),
-            Item::Deku_Basement_Web => self.deku_basement_web.into(),
-            Item::Deku_Lobby_Web => self.deku_lobby_web.into(),
-            Item::Deku_Nut_Drop => self.deku_nut_drop.into(),
-            Item::Deku_Shield_Drop => self.deku_shield_drop.into(),
-            Item::Deku_Slingshot_Scrub => self.deku_slingshot_scrub.into(),
-            Item::Deku_Stick_Drop => self.deku_stick_drop.into(),
-            Item::Dins_Fire => self.dins_fire.into(),
-            Item::Farores_Wind => self.farores_wind.into(),
-            Item::Fire_Arrows => self.fire_arrows.into(),
+            Item::Biggoron_Sword => self
+                .cbits1
+                .contains(flags::ContextBits1::BIGGORON_SWORD)
+                .into(),
+            Item::Blue_Fire_Arrows => self
+                .cbits1
+                .contains(flags::ContextBits1::BLUE_FIRE_ARROWS)
+                .into(),
+            Item::Bombs => self.cbits1.contains(flags::ContextBits1::BOMBS).into(),
+            Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG).into(),
+            Item::Bow => self.cbits1.contains(flags::ContextBits1::BOW).into(),
+            Item::Buy_Deku_Nut_10 => self
+                .cbits1
+                .contains(flags::ContextBits1::BUY_DEKU_NUT_10)
+                .into(),
+            Item::Buy_Deku_Nut_5 => self
+                .cbits1
+                .contains(flags::ContextBits1::BUY_DEKU_NUT_5)
+                .into(),
+            Item::Buy_Deku_Shield => self
+                .cbits1
+                .contains(flags::ContextBits1::BUY_DEKU_SHIELD)
+                .into(),
+            Item::Buy_Deku_Stick_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::BUY_DEKU_STICK_1)
+                .into(),
+            Item::Defeat_Ganon => self
+                .cbits1
+                .contains(flags::ContextBits1::DEFEAT_GANON)
+                .into(),
+            Item::Defeat_Gohma => self
+                .cbits1
+                .contains(flags::ContextBits1::DEFEAT_GOHMA)
+                .into(),
+            Item::Deku_Back_Room_Wall => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BACK_ROOM_WALL)
+                .into(),
+            Item::Deku_Back_Room_Web => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BACK_ROOM_WEB)
+                .into(),
+            Item::Deku_Basement_Block => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_BLOCK)
+                .into(),
+            Item::Deku_Basement_Scrubs => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_SCRUBS)
+                .into(),
+            Item::Deku_Basement_Switch => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_SWITCH)
+                .into(),
+            Item::Deku_Basement_Web => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_BASEMENT_WEB)
+                .into(),
+            Item::Deku_Lobby_Web => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_LOBBY_WEB)
+                .into(),
+            Item::Deku_Nut_Drop => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_NUT_DROP)
+                .into(),
+            Item::Deku_Shield_Drop => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_SHIELD_DROP)
+                .into(),
+            Item::Deku_Slingshot_Scrub => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB)
+                .into(),
+            Item::Deku_Stick_Drop => self
+                .cbits1
+                .contains(flags::ContextBits1::DEKU_STICK_DROP)
+                .into(),
+            Item::Dins_Fire => self.cbits1.contains(flags::ContextBits1::DINS_FIRE).into(),
+            Item::Farores_Wind => self
+                .cbits1
+                .contains(flags::ContextBits1::FARORES_WIND)
+                .into(),
+            Item::Fire_Arrows => self
+                .cbits1
+                .contains(flags::ContextBits1::FIRE_ARROWS)
+                .into(),
             Item::Gold_Skulltula_Token => self.gold_skulltula_token.into(),
-            Item::Goron_Tunic => self.goron_tunic.into(),
-            Item::Hookshot => self.hookshot.into(),
-            Item::Hover_Boots => self.hover_boots.into(),
-            Item::Hylian_Shield => self.hylian_shield.into(),
-            Item::Iron_Boots => self.iron_boots.into(),
-            Item::Kokiri_Emerald => self.kokiri_emerald.into(),
-            Item::Kokiri_Sword => self.kokiri_sword.into(),
-            Item::Lens_of_Truth => self.lens_of_truth.into(),
-            Item::Light_Arrows => self.light_arrows.into(),
-            Item::Magic_Meter => self.magic_meter.into(),
-            Item::Megaton_Hammer => self.megaton_hammer.into(),
-            Item::Minuet_of_Forest => self.minuet_of_forest.into(),
-            Item::Mirror_Shield => self.mirror_shield.into(),
-            Item::Nayrus_Love => self.nayrus_love.into(),
-            Item::Ocarina => self.ocarina.into(),
-            Item::Showed_Mido => self.showed_mido.into(),
-            Item::Slingshot => self.slingshot.into(),
+            Item::Goron_Tunic => self
+                .cbits1
+                .contains(flags::ContextBits1::GORON_TUNIC)
+                .into(),
+            Item::Hookshot => self.cbits1.contains(flags::ContextBits1::HOOKSHOT).into(),
+            Item::Hover_Boots => self
+                .cbits1
+                .contains(flags::ContextBits1::HOVER_BOOTS)
+                .into(),
+            Item::Hylian_Shield => self
+                .cbits1
+                .contains(flags::ContextBits1::HYLIAN_SHIELD)
+                .into(),
+            Item::Iron_Boots => self.cbits2.contains(flags::ContextBits2::IRON_BOOTS).into(),
+            Item::Kokiri_Emerald => self
+                .cbits2
+                .contains(flags::ContextBits2::KOKIRI_EMERALD)
+                .into(),
+            Item::Kokiri_Sword => self
+                .cbits2
+                .contains(flags::ContextBits2::KOKIRI_SWORD)
+                .into(),
+            Item::Lens_of_Truth => self
+                .cbits2
+                .contains(flags::ContextBits2::LENS_OF_TRUTH)
+                .into(),
+            Item::Light_Arrows => self
+                .cbits2
+                .contains(flags::ContextBits2::LIGHT_ARROWS)
+                .into(),
+            Item::Magic_Meter => self
+                .cbits2
+                .contains(flags::ContextBits2::MAGIC_METER)
+                .into(),
+            Item::Megaton_Hammer => self
+                .cbits2
+                .contains(flags::ContextBits2::MEGATON_HAMMER)
+                .into(),
+            Item::Minuet_of_Forest => self
+                .cbits2
+                .contains(flags::ContextBits2::MINUET_OF_FOREST)
+                .into(),
+            Item::Mirror_Shield => self
+                .cbits2
+                .contains(flags::ContextBits2::MIRROR_SHIELD)
+                .into(),
+            Item::Nayrus_Love => self
+                .cbits2
+                .contains(flags::ContextBits2::NAYRUS_LOVE)
+                .into(),
+            Item::Ocarina => self.cbits2.contains(flags::ContextBits2::OCARINA).into(),
+            Item::Showed_Mido => self
+                .cbits2
+                .contains(flags::ContextBits2::SHOWED_MIDO)
+                .into(),
+            Item::Slingshot => self.cbits2.contains(flags::ContextBits2::SLINGSHOT).into(),
             Item::Triforce_Piece => self.triforce_piece.into(),
-            Item::Zora_Tunic => self.zora_tunic.into(),
+            Item::Zora_Tunic => self.cbits2.contains(flags::ContextBits2::ZORA_TUNIC).into(),
             _ => 0,
         }
     }
     fn collect(&mut self, item: Item) {
         match item {
             Item::Biggoron_Sword => {
-                self.biggoron_sword = true;
+                self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
             }
             Item::Blue_Fire_Arrows => {
-                self.blue_fire_arrows = true;
+                self.cbits1.insert(flags::ContextBits1::BLUE_FIRE_ARROWS);
             }
             Item::Bombs => {
-                self.bombs = true;
+                self.cbits1.insert(flags::ContextBits1::BOMBS);
             }
             Item::Boomerang => {
-                self.boomerang = true;
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             }
             Item::Bow => {
-                self.bow = true;
+                self.cbits1.insert(flags::ContextBits1::BOW);
             }
             Item::Buy_Deku_Nut_10 => {
-                self.buy_deku_nut_10 = true;
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
             }
             Item::Buy_Deku_Nut_5 => {
-                self.buy_deku_nut_5 = true;
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
             }
             Item::Buy_Deku_Shield => {
-                self.buy_deku_shield = true;
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
             }
             Item::Buy_Deku_Stick_1 => {
-                self.buy_deku_stick_1 = true;
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
             }
             Item::Defeat_Ganon => {
-                self.defeat_ganon = true;
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
             }
             Item::Defeat_Gohma => {
-                self.defeat_gohma = true;
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
             }
             Item::Deku_Back_Room_Wall => {
-                self.deku_back_room_wall = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
             }
             Item::Deku_Back_Room_Web => {
-                self.deku_back_room_web = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
             }
             Item::Deku_Basement_Block => {
-                self.deku_basement_block = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
             }
             Item::Deku_Basement_Scrubs => {
-                self.deku_basement_scrubs = true;
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
             }
             Item::Deku_Basement_Switch => {
-                self.deku_basement_switch = true;
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
             }
             Item::Deku_Basement_Web => {
-                self.deku_basement_web = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
             }
             Item::Deku_Lobby_Web => {
-                self.deku_lobby_web = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
             }
             Item::Deku_Nut_Drop => {
-                self.deku_nut_drop = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
             }
             Item::Deku_Shield_Drop => {
-                self.deku_shield_drop = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
             }
             Item::Deku_Slingshot_Scrub => {
-                self.deku_slingshot_scrub = true;
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
             }
             Item::Deku_Stick_Drop => {
-                self.deku_stick_drop = true;
+                self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
             }
             Item::Dins_Fire => {
-                self.dins_fire = true;
+                self.cbits1.insert(flags::ContextBits1::DINS_FIRE);
             }
             Item::Farores_Wind => {
-                self.farores_wind = true;
+                self.cbits1.insert(flags::ContextBits1::FARORES_WIND);
             }
             Item::Fire_Arrows => {
-                self.fire_arrows = true;
+                self.cbits1.insert(flags::ContextBits1::FIRE_ARROWS);
             }
             Item::Gold_Skulltula_Token => {
                 self.gold_skulltula_token += 1;
             }
             Item::Goron_Tunic => {
-                self.goron_tunic = true;
+                self.cbits1.insert(flags::ContextBits1::GORON_TUNIC);
             }
             Item::Hookshot => {
-                self.hookshot = true;
+                self.cbits1.insert(flags::ContextBits1::HOOKSHOT);
             }
             Item::Hover_Boots => {
-                self.hover_boots = true;
+                self.cbits1.insert(flags::ContextBits1::HOVER_BOOTS);
             }
             Item::Hylian_Shield => {
-                self.hylian_shield = true;
+                self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
             }
             Item::Iron_Boots => {
-                self.iron_boots = true;
+                self.cbits2.insert(flags::ContextBits2::IRON_BOOTS);
             }
             Item::Kokiri_Emerald => {
-                self.kokiri_emerald = true;
+                self.cbits2.insert(flags::ContextBits2::KOKIRI_EMERALD);
             }
             Item::Kokiri_Sword => {
-                self.kokiri_sword = true;
+                self.cbits2.insert(flags::ContextBits2::KOKIRI_SWORD);
             }
             Item::Lens_of_Truth => {
-                self.lens_of_truth = true;
+                self.cbits2.insert(flags::ContextBits2::LENS_OF_TRUTH);
             }
             Item::Light_Arrows => {
-                self.light_arrows = true;
+                self.cbits2.insert(flags::ContextBits2::LIGHT_ARROWS);
             }
             Item::Magic_Meter => {
-                self.magic_meter = true;
+                self.cbits2.insert(flags::ContextBits2::MAGIC_METER);
             }
             Item::Megaton_Hammer => {
-                self.megaton_hammer = true;
+                self.cbits2.insert(flags::ContextBits2::MEGATON_HAMMER);
             }
             Item::Minuet_of_Forest => {
-                self.minuet_of_forest = true;
+                self.cbits2.insert(flags::ContextBits2::MINUET_OF_FOREST);
             }
             Item::Mirror_Shield => {
-                self.mirror_shield = true;
+                self.cbits2.insert(flags::ContextBits2::MIRROR_SHIELD);
             }
             Item::Nayrus_Love => {
-                self.nayrus_love = true;
+                self.cbits2.insert(flags::ContextBits2::NAYRUS_LOVE);
             }
             Item::Ocarina => {
-                self.ocarina = true;
+                self.cbits2.insert(flags::ContextBits2::OCARINA);
             }
             Item::Showed_Mido => {
-                self.showed_mido = true;
+                self.cbits2.insert(flags::ContextBits2::SHOWED_MIDO);
             }
             Item::Slingshot => {
-                self.slingshot = true;
+                self.cbits2.insert(flags::ContextBits2::SLINGSHOT);
             }
             Item::Triforce_Piece => {
                 self.triforce_piece += 1;
             }
             Item::Zora_Tunic => {
-                self.zora_tunic = true;
+                self.cbits2.insert(flags::ContextBits2::ZORA_TUNIC);
             }
             Item::Rupee_1 => rules::action_rupees__min__rupees__1_wallet_max(self),
             Item::Rupees_5 => rules::action_rupees__min__rupees__5_wallet_max(self),
@@ -439,7 +536,8 @@ impl context::Ctx for Context {
         match area {
             AreaId::Deku_Tree__Compass_Room => {
                 if get_area(self.position) != area {
-                    self.deku_tree__compass_room__ctx__torch = false;
+                    self.cbits1
+                        .remove(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
                 }
             }
             _ => (),
@@ -542,6 +640,22 @@ impl context::Ctx for Context {
 }
 
 impl Context {
+    // settings
+    pub fn triforce_count(&self) -> i16 {
+        self.triforce_count
+    }
+    pub fn set_triforce_count(&mut self, val: i16) {
+        self.triforce_count = val;
+    }
+    pub fn logic_deku_b1_skip(&self) -> bool {
+        self.cbits1
+            .contains(flags::ContextBits1::LOGIC_DEKU_B1_SKIP)
+    }
+    pub fn set_logic_deku_b1_skip(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::LOGIC_DEKU_B1_SKIP, val);
+    }
+    // context
     pub fn position(&self) -> SpotId {
         match self.position {
             _ => match get_area(self.position) {
@@ -561,14 +675,20 @@ impl Context {
             },
         }
     }
+    pub fn set_save(&mut self, val: SpotId) {
+        self.save = val;
+    }
     pub fn child(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.child,
+                    _ => self.cbits1.contains(flags::ContextBits1::CHILD),
                 },
             },
         }
+    }
+    pub fn set_child(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::CHILD, val);
     }
     pub fn tod(&self) -> enums::Tod {
         match self.position {
@@ -579,6 +699,9 @@ impl Context {
             },
         }
     }
+    pub fn set_tod(&mut self, val: enums::Tod) {
+        self.tod = val;
+    }
     pub fn rupees(&self) -> i32 {
         match self.position {
             _ => match get_area(self.position) {
@@ -588,13 +711,168 @@ impl Context {
             },
         }
     }
+    pub fn set_rupees(&mut self, val: i32) {
+        self.rupees = val;
+    }
     pub fn deku_tree__compass_room__ctx__torch(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.deku_tree__compass_room__ctx__torch,
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH),
                 },
             },
+        }
+    }
+    pub fn set_deku_tree__compass_room__ctx__torch(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH,
+            val,
+        );
+    }
+    // test helper for items
+    pub fn add_item(&mut self, item: Item) {
+        match item {
+            Item::Biggoron_Sword => {
+                self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
+            }
+            Item::Blue_Fire_Arrows => {
+                self.cbits1.insert(flags::ContextBits1::BLUE_FIRE_ARROWS);
+            }
+            Item::Bombs => {
+                self.cbits1.insert(flags::ContextBits1::BOMBS);
+            }
+            Item::Boomerang => {
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+            }
+            Item::Bow => {
+                self.cbits1.insert(flags::ContextBits1::BOW);
+            }
+            Item::Buy_Deku_Nut_10 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
+            }
+            Item::Buy_Deku_Nut_5 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
+            }
+            Item::Buy_Deku_Shield => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
+            }
+            Item::Buy_Deku_Stick_1 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
+            }
+            Item::Defeat_Ganon => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
+            }
+            Item::Defeat_Gohma => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
+            }
+            Item::Deku_Back_Room_Wall => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+            }
+            Item::Deku_Back_Room_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+            }
+            Item::Deku_Basement_Block => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+            }
+            Item::Deku_Basement_Scrubs => {
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+            }
+            Item::Deku_Basement_Switch => {
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+            }
+            Item::Deku_Basement_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
+            }
+            Item::Deku_Lobby_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
+            }
+            Item::Deku_Nut_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
+            }
+            Item::Deku_Shield_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
+            }
+            Item::Deku_Slingshot_Scrub => {
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+            }
+            Item::Deku_Stick_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
+            }
+            Item::Dins_Fire => {
+                self.cbits1.insert(flags::ContextBits1::DINS_FIRE);
+            }
+            Item::Farores_Wind => {
+                self.cbits1.insert(flags::ContextBits1::FARORES_WIND);
+            }
+            Item::Fire_Arrows => {
+                self.cbits1.insert(flags::ContextBits1::FIRE_ARROWS);
+            }
+            Item::Gold_Skulltula_Token => {
+                self.gold_skulltula_token += 1;
+            }
+            Item::Goron_Tunic => {
+                self.cbits1.insert(flags::ContextBits1::GORON_TUNIC);
+            }
+            Item::Hookshot => {
+                self.cbits1.insert(flags::ContextBits1::HOOKSHOT);
+            }
+            Item::Hover_Boots => {
+                self.cbits1.insert(flags::ContextBits1::HOVER_BOOTS);
+            }
+            Item::Hylian_Shield => {
+                self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
+            }
+            Item::Iron_Boots => {
+                self.cbits2.insert(flags::ContextBits2::IRON_BOOTS);
+            }
+            Item::Kokiri_Emerald => {
+                self.cbits2.insert(flags::ContextBits2::KOKIRI_EMERALD);
+            }
+            Item::Kokiri_Sword => {
+                self.cbits2.insert(flags::ContextBits2::KOKIRI_SWORD);
+            }
+            Item::Lens_of_Truth => {
+                self.cbits2.insert(flags::ContextBits2::LENS_OF_TRUTH);
+            }
+            Item::Light_Arrows => {
+                self.cbits2.insert(flags::ContextBits2::LIGHT_ARROWS);
+            }
+            Item::Magic_Meter => {
+                self.cbits2.insert(flags::ContextBits2::MAGIC_METER);
+            }
+            Item::Megaton_Hammer => {
+                self.cbits2.insert(flags::ContextBits2::MEGATON_HAMMER);
+            }
+            Item::Minuet_of_Forest => {
+                self.cbits2.insert(flags::ContextBits2::MINUET_OF_FOREST);
+            }
+            Item::Mirror_Shield => {
+                self.cbits2.insert(flags::ContextBits2::MIRROR_SHIELD);
+            }
+            Item::Nayrus_Love => {
+                self.cbits2.insert(flags::ContextBits2::NAYRUS_LOVE);
+            }
+            Item::Ocarina => {
+                self.cbits2.insert(flags::ContextBits2::OCARINA);
+            }
+            Item::Showed_Mido => {
+                self.cbits2.insert(flags::ContextBits2::SHOWED_MIDO);
+            }
+            Item::Slingshot => {
+                self.cbits2.insert(flags::ContextBits2::SLINGSHOT);
+            }
+            Item::Triforce_Piece => {
+                self.triforce_piece += 1;
+            }
+            Item::Zora_Tunic => {
+                self.cbits2.insert(flags::ContextBits2::ZORA_TUNIC);
+            }
+            _ => (),
         }
     }
 }

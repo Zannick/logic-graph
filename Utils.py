@@ -39,8 +39,12 @@ def construct_test_name(test_dict):
 
 
 def n1(tuples):
-    for a, *b in tuples:
+    for a, *_ in tuples:
         yield a
+
+def n2(tuples):
+    for _, b, *_ in tuples:
+        yield b
 
 
 def config_type(val: Any) -> str:

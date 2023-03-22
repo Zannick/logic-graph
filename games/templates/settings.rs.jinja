@@ -1,6 +1,6 @@
 %% include 'header.rs.jinja'
 
-use crate::context::Context;
+use crate::context::{flags, Context};
 use crate::graph::World;
 use analyzer::settings::*;
 use std::fs::File;
@@ -19,7 +19,13 @@ fn read_key_value(
         }
 %% for s, info in settings.items()
         Some("{{ s }}") => {
+%% if s in bfp.varmap
+            ctx.cbits{{ bfp.varmap[s] }}.set(flags::ContextBits{{ bfp.varmap[s] }}::{{ s|upper }},
+                parse_bool(key, val)?
+            );
+%% else
             ctx.{{ s }} = parse_{% if info['type'] in ('bool', 'int') %}{{ info['type'] }}{% else %}str_into{% endif %}(key, val)?;
+%% endif
         }
 %% endfor
         _ => {

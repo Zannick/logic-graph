@@ -437,7 +437,7 @@ pub fn access_within_menu(ctx: &Context) -> bool {
 }
 pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context) {
     // ^_combo = true
-    ctx.amagi__main_area__ctx__combo = true;
+    ctx.set_amagi__main_area__ctx__combo(true);
 }
 pub fn action_deploy_drone__amagi__cave_behind_waterfall__top(ctx: &mut Context) {
     // $deploy_drone(`Amagi > Cave Behind Waterfall > Top`)
@@ -469,55 +469,55 @@ pub fn action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__
 }
 pub fn action_ebih__base_camp__left_platform__move_left_platform__do(ctx: &mut Context) {
     // ^_left_platform_moved = true; ^position = `Ebih > Base Camp > Left Platform Moved`;
-    ctx.ebih__base_camp__ctx__left_platform_moved = true;
+    ctx.set_ebih__base_camp__ctx__left_platform_moved(true);
     ctx.set_position(SpotId::Ebih__Base_Camp__Left_Platform_Moved);
 }
 pub fn action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx: &mut Context) {
     // ^_left_platform_moved = false; ^position = `Ebih > Base Camp > Left Platform`;
-    ctx.ebih__base_camp__ctx__left_platform_moved = false;
+    ctx.set_ebih__base_camp__ctx__left_platform_moved(false);
     ctx.set_position(SpotId::Ebih__Base_Camp__Left_Platform);
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift__do(ctx: &mut Context) {
     // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
-    ctx.ebih__drone_room__ctx__platform_moved = false;
+    ctx.set_ebih__drone_room__ctx__platform_moved(false);
     ctx.set_position(SpotId::Ebih__Drone_Room__Moving_Platform);
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx: &mut Context) {
     // ^_platform_moved = false; ^position = `Ebih > Drone Room > West 6`
-    ctx.ebih__drone_room__ctx__platform_moved = false;
+    ctx.set_ebih__drone_room__ctx__platform_moved(false);
     ctx.set_position(SpotId::Ebih__Drone_Room__West_6);
 }
 pub fn action_ebih__drone_room__portal_exit__activate_platform__do(ctx: &mut Context) {
     // ^_platform_moved = true
-    ctx.ebih__drone_room__ctx__platform_moved = true;
+    ctx.set_ebih__drone_room__ctx__platform_moved(true);
 }
 pub fn action_ebih__ebih_east__dispenser__activate_lift__do(ctx: &mut Context) {
     // ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
-    ctx.ebih__ebih_east__ctx__platform2_moved = false;
+    ctx.set_ebih__ebih_east__ctx__platform2_moved(false);
     ctx.set_position(SpotId::Ebih__Ebih_East__Ledge_End);
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx: &mut Context) {
     // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
-    ctx.ebih__ebih_east__ctx__platform2_moved = true;
+    ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
     ctx.set_position(SpotId::Ebih__Ebih_East__Ledge_End);
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx: &mut Context) {
     // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Dispenser`
-    ctx.ebih__ebih_east__ctx__platform2_moved = true;
+    ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
     ctx.set_position(SpotId::Ebih__Ebih_East__Dispenser);
 }
 pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(ctx: &mut Context) {
     // ^_platform1_moved = true; ^position = `Ebih > Ebih East > Middle Platform`
-    ctx.ebih__ebih_east__ctx__platform1_moved = true;
+    ctx.set_ebih__ebih_east__ctx__platform1_moved(true);
     ctx.set_position(SpotId::Ebih__Ebih_East__Middle_Platform);
 }
 pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Context) {
     // ^_west_door_open = true
-    ctx.ebih__waterfall__ctx__west_door_open = true;
+    ctx.set_ebih__waterfall__ctx__west_door_open(true);
 }
 pub fn action_energy__max_energy(ctx: &mut Context) {
     // ^energy = $max_energy
-    ctx.energy = helper__max_energy!(ctx);
+    ctx.set_energy(helper__max_energy!(ctx));
 }
 pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
@@ -525,16 +525,16 @@ pub fn action_flasks__1(ctx: &mut Context) {
 }
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
-    ctx.last = ctx.position();
+    ctx.set_last(ctx.position());
 }
 pub fn action_mode__drone_indra__position(ctx: &mut Context) {
     // ^mode = 'drone'; ^indra = ^position
-    ctx.mode = enums::Mode::Drone;
-    ctx.indra = ctx.position();
+    ctx.set_mode(enums::Mode::Drone);
+    ctx.set_indra(ctx.position());
 }
 pub fn action_mode__indra_position__indra(ctx: &mut Context) {
     // ^mode = 'Indra'; ^position = ^indra
-    ctx.mode = enums::Mode::Indra;
+    ctx.set_mode(enums::Mode::Indra);
     ctx.set_position(ctx.indra());
 }
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
@@ -547,5 +547,5 @@ pub fn action_save(ctx: &mut Context) {
 }
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
-    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
