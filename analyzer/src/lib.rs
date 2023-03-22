@@ -31,7 +31,7 @@ pub mod testlib {
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
             );
-            if let Some(ctx) = spot_map.get(&$end) {
+            if let Some(ctx) = &spot_map[$end] {
                 panic!(
                     "Found unexpected route from {} to {}:\n{}\n",
                     $start,
@@ -52,7 +52,7 @@ pub mod testlib {
                 $crate::context::ContextWrapper::new($ctx),
             );
             assert!(
-                spot_map.contains_key(&$end),
+                spot_map[$end] != None,
                 "Found no route from {} to {}:\n{}\n",
                 $start,
                 $end,
@@ -135,7 +135,7 @@ pub mod testlib {
             let mut errors = Vec::new();
             for loc in locations {
                 let spot = $world.get_location_spot(loc);
-                if let Some(ctx) = spot_map.get(&spot) {
+                if let Some(ctx) = &spot_map[spot] {
                     if $world.get_location(loc).can_access(ctx.get()) {
                         return;
                     }
@@ -179,7 +179,7 @@ pub mod testlib {
             );
             for loc in locations {
                 let spot = $world.get_location_spot(loc);
-                if let Some(ctx) = spot_map.get(&spot) {
+                if let Some(ctx) = &spot_map[spot] {
                     assert!(
                         !$world.get_location(loc).can_access(ctx.get()),
                         "Able to access location {}:\n{}\n",
@@ -201,7 +201,7 @@ pub mod testlib {
                 $crate::context::ContextWrapper::new($ctx),
             );
             let spot = $world.get_location_spot($loc_id);
-            if let Some(ctx) = spot_map.get(&spot) {
+            if let Some(ctx) = &spot_map[spot] {
                 assert!(
                     $world.get_location($loc_id).can_access(ctx.get()),
                     "Expected location {} to be accessible",
@@ -223,7 +223,7 @@ pub mod testlib {
                 $crate::context::ContextWrapper::new($ctx),
             );
             let spot = $world.get_location_spot($loc_id);
-            if let Some(ctx) = spot_map.get(&spot) {
+            if let Some(ctx) = &spot_map[spot] {
                 assert!(
                     !$world.get_location($loc_id).can_access(ctx.get()),
                     "Expected location {} to be inaccessible:\n{}",
@@ -252,8 +252,7 @@ pub mod testlib {
                 $crate::context::ContextWrapper::new($ctx),
             );
             let spot = $world.get_action_spot($act_id);
-            let spot = $world.get_action_spot($act_id);
-            if let Some(ctx) = spot_map.get(&spot) {
+            if let Some(ctx) = &spot_map[spot] {
                 assert!(
                     $world.get_action($act_id).can_access(ctx.get()),
                     "Expected action {} to be accessible",
@@ -283,8 +282,7 @@ pub mod testlib {
                 $crate::context::ContextWrapper::new($ctx),
             );
             let spot = $world.get_action_spot($act_id);
-            let spot = $world.get_action_spot($act_id);
-            if let Some(ctx) = spot_map.get(&spot) {
+            if let Some(ctx) = &spot_map[spot] {
                 assert!(
                     !$world.get_action($act_id).can_access(ctx.get()),
                     "Expected action {} to be inaccessible",
