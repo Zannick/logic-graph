@@ -848,14 +848,14 @@ class GameLogic(object):
 
         def _check_data(ctx, val, category, *names, data=False):
             if data:
-                if ctx in self._info['data']:
+                if ctx in self._info.get('data', {}):
                     _check_types(self._info['data'][ctx], val, ctx, category, *names, local=True)
                 else:
                     self._errors.append(
                         f'context data field {ctx} used in {" > ".join(names)} in '
                         f'"{category}" section must have a global default value set')
             else:
-                if ctx in self._info['data']:
+                if ctx in self._info.get('data', {}):
                     self._errors.append(
                         f'context category mismatch: {ctx} defined as data but used in '
                         f'{" > ".join(names)} in "{category}" section')
@@ -928,7 +928,7 @@ class GameLogic(object):
                 _handle_here(ctx, val, 'here', area['region'], area['name'])
 
         self.context_values = gc
-        self.data_defaults = self._info["data"]
+        self.data_defaults = self._info.get("data", {})
 
 
     @cached_property
