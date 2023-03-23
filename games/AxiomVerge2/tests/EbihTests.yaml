@@ -78,3 +78,15 @@ tests:
     visited:
       - Glacier > Vertical Room > Peak > Flask
     can_access: Menu > Upgrade Menu > Physiology > Health Upgrade 1
+
+  - start: Ebih > Ebih East > Middle Platform
+    with:
+      - Infect
+      - Remote_Drone
+    can_access: Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
+
+  - start: Ebih > Grid 25,10-12 > East 12
+    with:
+      - Infect
+      - Remote_Drone
+    eventually_accesses: Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush

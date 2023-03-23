@@ -703,6 +703,7 @@ digraph AxiomVerge2 {
     Ebih__Grid_25_10_12__Door -> Ebih__Grid_25_10_12__East_11;
     Ebih__Grid_25_10_12__East_11 -> Ebih__Grid_25_10_12__Door;
     Ebih__Grid_25_10_12__East_11 -> Ebih__Grid_26_10_11__West_11;
+    Ebih__Grid_25_10_12__East_10 -> Ebih__Grid_26_10_11__West_10;
     Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
     Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
     Ebih__Waterfall__East_10 -> Ebih__Grid_25_10_12__West_10;
@@ -743,6 +744,7 @@ digraph AxiomVerge2 {
     Ebih__Ebih_East__West_8 -> Ebih__Waterfall__East_8;
     Ebih__Ebih_East__West_7 -> Ebih__Waterfall__East_7;
     Ebih__Ebih_East__East_9 -> Ebih__Ebih_East__East_Hill;
+    Ebih__Ebih_East__East_9 -> Ebih__Observation_Tower_Room__West_9;
     Ebih__Grid_21_1_5__West_6 -> Ebih__Ebih_West__East_6;
     Ebih__Grid_21_1_5__East_6 -> Ebih__Boss_Room__West_6;
     Ebih__Boss_Room__West_6 -> Ebih__Grid_21_1_5__East_6;
@@ -759,6 +761,7 @@ digraph AxiomVerge2 {
     Ebih__Drone_Room__East_4 -> Ebih__Grid_25_2_6__West_4;
     Ebih__Grid_25_2_6__West_4 -> Ebih__Drone_Room__East_4;
     Ebih__Grid_25_2_6__West_4 -> Ebih__Grid_25_2_6__Pit;
+    Ebih__Grid_26_10_11__West_11 -> Ebih__Grid_25_10_12__East_11;
     Ebih__Grid_26_10_11__Middle_Bottom -> Ebih__Grid_26_10_11__Middle_Platform;
     Ebih__Grid_26_10_11__Under_Ledge -> Ebih__Grid_26_10_11__Ledge;
     Ebih__Grid_26_10_11__Under_Ledge -> Ebih__Grid_26_10_11__Ledge;
@@ -766,6 +769,7 @@ digraph AxiomVerge2 {
     Ebih__Grid_26_10_11__Upper_Platform -> Ebih__Grid_26_10_11__Cliff;
     Ebih__Grid_26_10_11__Upper_Platform -> Ebih__Grid_26_10_11__West_10;
     Ebih__Grid_26_10_11__West_10 -> Ebih__Grid_25_10_12__East_10;
+    Ebih__Grid_26_10_11__East_10 -> Ebih__Observation_Tower_Room__West_10;
     Ebih__Observation_Tower_Room__West_9 -> Ebih__Ebih_East__East_9;
     Ebih__Observation_Tower_Room__Tower_Top -> Ebih__Observation_Tower_Room__West_9;
     Ebih__Observation_Tower_Room__West_10 -> Ebih__Grid_26_10_11__East_10;

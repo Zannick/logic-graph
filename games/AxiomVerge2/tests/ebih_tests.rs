@@ -206,3 +206,31 @@ fn start_Glacier__Vertical_Room__Peak_with_Flask_context_flasks_1_visited_Glacie
         LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1
     );
 }
+#[test]
+fn start_Ebih__Ebih_East__Middle_Platform_with_Infect__Remote_Drone_can_access_Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.infect = 1;
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+
+    expect_accessible!(
+        &world,
+        ctx,
+        SpotId::Ebih__Ebih_East__Middle_Platform,
+        LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush
+    );
+}
+#[test]
+fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_eventually_accesses_Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.infect = 1;
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+
+    expect_eventually_accesses!(
+        &world,
+        ctx,
+        SpotId::Ebih__Grid_25_10_12__East_12,
+        LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush
+    );
+}

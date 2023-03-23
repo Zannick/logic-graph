@@ -511,6 +511,14 @@ pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(ctx: &mut Cont
     ctx.set_ebih__ebih_east__ctx__platform1_moved(true);
     ctx.set_position(SpotId::Ebih__Ebih_East__Middle_Platform);
 }
+pub fn action_ebih__grid_25_10_12__door_left__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
+}
+pub fn action_ebih__grid_25_10_12__east_11__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
+}
 pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Context) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);

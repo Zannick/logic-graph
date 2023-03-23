@@ -438,6 +438,10 @@ areas:
         - to: Door
           req: ^_door_open
           time: 0.7
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_door_open = true
     - name: Top Platform
       coord: [25.4, 10.5]
       local:
@@ -485,6 +489,10 @@ areas:
           req: ^_door_open
         - to: Grid 26,10-11 > West 11
           tags: [xshift]
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_door_open = true
     - name: East 10
       coord: [25.95, 9.7]
       local:
@@ -495,6 +503,9 @@ areas:
           req: $bs
           time: 6
           tags: [flask]
+      exits:
+        - to: Grid 26,10-11 > West 10
+          tags: [xshift]
     - name: Hidden Bush
       coord: [25.85, 9.95]
       local:
@@ -1156,6 +1167,8 @@ areas:
         - to: East Hill
           req: $grab or $climb
           time: 2
+        - to: Observation Tower Room > West 9
+          tags: [xshift]
 
 - name: Grid 21,1-5
   on_entry: $reset_old_area(^newpos)
@@ -1208,7 +1221,7 @@ areas:
         - name: Hack Alu
           item: Defeat_Ebih_Alu
           canon: Defeat_Ebih_Alu
-          req: Infect{2} and ($melee or $boomerang)
+          req: $overheat and ($melee or $boomerang)
           price: 280  # Overheat (100) x2 + Overload (80)
           time: 25  # can be split across fetching the health node, too
         - name: Fight Alu
@@ -1493,6 +1506,9 @@ areas:
       local:
         - to: Middle Bottom
         - to: Middle Platform
+      exits:
+        - to: Grid 25,10-12 > East 11
+          tags: [xshift]
     - name: Middle Bottom
       coord: [26.4, 10.6]
       local:
@@ -1566,7 +1582,10 @@ areas:
     - name: East 10
       coord: [26.95, 9.8]
       local:
-        - to: East 10
+        - to: Cliff
+      exits:
+        - to: Observation Tower Room > West 10
+          tags: [xshift]
 
 - name: Observation Tower Room
   on_entry: $reset_old_area(^newpos)

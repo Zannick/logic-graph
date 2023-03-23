@@ -133,11 +133,11 @@ helpers:
   $open: Infect
   $activate: Infect
   $platform: Infect
-  $overheat: Infect{2}
-  $allegiance1: Infect{2}
-  $allegiance2: Infect{3}
-  $unlock2: Infect{3}
-  $unlock3: Infect{4}
+  $overheat: Infect
+  $allegiance1: Infect
+  $allegiance2: Infect{2}
+  $unlock2: Infect{2}
+  $unlock3: Infect{3}
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
