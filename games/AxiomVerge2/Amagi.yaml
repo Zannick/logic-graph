@@ -1,6 +1,6 @@
 name: Lake Amagi
 short: Amagi
-here:
+data:
   water: true
 
 # TODO: Needs to be routed without Underwater_Movement to determine accessibility
@@ -14,7 +14,7 @@ areas:
       coord: [30.95, 14.8]
       local:
         - to: Water's Edge
-      here:
+      data:
         water: false
       exits:
         - to: Glacier > Lake Main Entrance > Lake Access
@@ -24,7 +24,7 @@ areas:
       local:
         - to: East 15
         - to: Shallow End
-      here:
+      data:
         water: false
     - name: Shallow End
       coord: [29.6, 15.1]
@@ -98,7 +98,7 @@ areas:
 
     - name: Carving
       coord: [27.1, 14.7]
-      here:
+      data:
         water: false
       local:
         - to: West 15
@@ -117,14 +117,14 @@ areas:
           time: 1.6
     - name: West 15
       coord: [27.05, 14.8]
-      here:
+      data:
         water: false
       local:
         - to: Carving
           jumps: 1
     - name: Secret Outcropping
       coord: [27.55, 14.2]
-      here:
+      data:
         water: false
       local:
         - to: Carving
@@ -218,7 +218,7 @@ areas:
 
     - name: Secret Waterfall
       coord: [27.4, 13.4]
-      here:
+      data:
         water: false
       local:
         - to: Way Off To The Side
@@ -228,7 +228,7 @@ areas:
           tags: [interior]
     - name: Way Off To The Side
       coord: [30.4, 13.3]
-      here:
+      data:
         water: false
       local:
         - to: Secret Waterfall
@@ -239,7 +239,7 @@ areas:
 
 - name: Cave Behind Waterfall
   on_entry: $reset_old_area(^newpos)
-  here:
+  data:
     water: false
   spots:
     - name: Bottom
@@ -446,13 +446,13 @@ areas:
   spots:
     - name: East 15
       coord: [26.95, 14.8]
-      here:
+      data:
         water: false
       local:
         - to: East Shore
     - name: East Shore
       coord: [26.8, 14.8]
-      here:
+      data:
         water: false
       local:
         - to: East Shore
@@ -699,15 +699,15 @@ areas:
       coord: [25.05, 15.4]
     - name: Water Surface
       coord: [25.05, 14.9]
-      here:
+      data:
         water: false
     - name: West Shore
       coord: [24.55, 14.8]
-      here:
+      data:
         water: false
     - name: Surface Wall Right
       coord: [23.1, 14.8]
-      here:
+      data:
         water: false
       locations:
         - name: Break Wall
@@ -721,11 +721,11 @@ areas:
           req: Amagi_West_Lake_Surface_Wall
     - name: Surface Wall Left
       coord: [22.85, 14.8]
-      here:
+      data:
         water: false
     - name: West 15
       coord: [22.05, 14.7]
-      here:
+      data:
         water: false
 
 # MUS A M20 : 56s

@@ -41,53 +41,156 @@ pub mod enums {
     }
 }
 
+pub mod data {
+    #[allow(unused_imports)]
+    use crate::context::enums;
+    use crate::graph::*;
+    pub fn breach(spot_id: SpotId) -> bool {
+        match spot_id {
+            _ => false,
+        }
+    }
+    pub fn water(spot_id: SpotId) -> bool {
+        match spot_id {
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle => false,
+            SpotId::Amagi__Cave_Behind_Waterfall__Top => false,
+            SpotId::Amagi__Grid_31_19__East => true,
+            SpotId::Amagi__Grid_31_19__West => true,
+            SpotId::Amagi__Liru_Room__Bottom => true,
+            SpotId::Amagi__Liru_Room__East_Passage => true,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies => true,
+            SpotId::Amagi__Liru_Room__Hidden_Exit => true,
+            SpotId::Amagi__Liru_Room__Platform_1_Left => true,
+            SpotId::Amagi__Liru_Room__Platform_1_Right => true,
+            SpotId::Amagi__Liru_Room__Platform_2_Left => true,
+            SpotId::Amagi__Liru_Room__Platform_2_Right => true,
+            SpotId::Amagi__Liru_Room__Platform_3_Left => true,
+            SpotId::Amagi__Liru_Room__Platform_3_Right => true,
+            SpotId::Amagi__Liru_Room__Platform_4_Left => true,
+            SpotId::Amagi__Liru_Room__Platform_4_Right => true,
+            SpotId::Amagi__Liru_Room__Shrine => true,
+            SpotId::Amagi__Liru_Room__West_19 => true,
+            SpotId::Amagi__Liru_Room__West_20 => true,
+            SpotId::Amagi__Main_Area__Broken_Wall => true,
+            SpotId::Amagi__Main_Area__Carving => false,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => true,
+            SpotId::Amagi__Main_Area__Catwalk_Center => true,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge => true,
+            SpotId::Amagi__Main_Area__Cliff => true,
+            SpotId::Amagi__Main_Area__East_15 => false,
+            SpotId::Amagi__Main_Area__East_19 => true,
+            SpotId::Amagi__Main_Area__East_Ledge => true,
+            SpotId::Amagi__Main_Area__Enemy_Side => true,
+            SpotId::Amagi__Main_Area__Platform_2 => true,
+            SpotId::Amagi__Main_Area__Platform_3 => true,
+            SpotId::Amagi__Main_Area__Save_Point => true,
+            SpotId::Amagi__Main_Area__Secret_Outcropping => false,
+            SpotId::Amagi__Main_Area__Secret_Waterfall => false,
+            SpotId::Amagi__Main_Area__Shallow_End => true,
+            SpotId::Amagi__Main_Area__Small_Cliff => true,
+            SpotId::Amagi__Main_Area__Upper_Platform => true,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => true,
+            SpotId::Amagi__Main_Area__Waters_Edge => false,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => false,
+            SpotId::Amagi__Main_Area__West_15 => false,
+            SpotId::Amagi__Main_Area__West_Shelf => true,
+            SpotId::Amagi__Main_Area__West_Side => true,
+            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => true,
+            SpotId::Amagi__West_Lake__Cavern_Chin => true,
+            SpotId::Amagi__West_Lake__Cavern_Eye => true,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => true,
+            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => true,
+            SpotId::Amagi__West_Lake__Cavern_Jaw => true,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => true,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => true,
+            SpotId::Amagi__West_Lake__Cavern_Neck => true,
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => true,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station => true,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => true,
+            SpotId::Amagi__West_Lake__East_15 => false,
+            SpotId::Amagi__West_Lake__East_18 => true,
+            SpotId::Amagi__West_Lake__East_19 => true,
+            SpotId::Amagi__West_Lake__East_20 => true,
+            SpotId::Amagi__West_Lake__East_Bank => true,
+            SpotId::Amagi__West_Lake__East_Platform => true,
+            SpotId::Amagi__West_Lake__East_Shore => false,
+            SpotId::Amagi__West_Lake__Left_of_Enemy => true,
+            SpotId::Amagi__West_Lake__Northeast_Platform => true,
+            SpotId::Amagi__West_Lake__Northwest_Platform => true,
+            SpotId::Amagi__West_Lake__Pillar => true,
+            SpotId::Amagi__West_Lake__Pillar_Platform => true,
+            SpotId::Amagi__West_Lake__Small_Hill => true,
+            SpotId::Amagi__West_Lake__Some_Rock => true,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => true,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => true,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => true,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door => true,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Room => true,
+            SpotId::Amagi__West_Lake__Stronghold_Item => true,
+            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => true,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => true,
+            SpotId::Amagi__West_Lake__Stronghold_Top => true,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left => false,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right => false,
+            SpotId::Amagi__West_Lake__Tentacle_Gap => true,
+            SpotId::Amagi__West_Lake__Upper_Center_Platform => true,
+            SpotId::Amagi__West_Lake__Water_Surface => false,
+            SpotId::Amagi__West_Lake__West_15 => false,
+            SpotId::Amagi__West_Lake__West_Bank => true,
+            SpotId::Amagi__West_Lake__West_Cliff => true,
+            SpotId::Amagi__West_Lake__West_Platform => true,
+            SpotId::Amagi__West_Lake__West_Shore => false,
+            _ => false,
+        }
+    }
+}
+
 pub mod flags {
     use bitflags::bitflags;
 
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
         pub struct ContextBits1 : u32 {
-            const BREACH = 1 << 0;
-            const WATER = 1 << 1;
-            const AMAGI__MAIN_AREA__CTX__COMBO = 1 << 2;
-            const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 1 << 3;
-            const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 1 << 4;
-            const EBIH__WATERFALL__CTX__LEFT_BLOCK = 1 << 5;
-            const EBIH__WATERFALL__CTX__RIGHT_BLOCK = 1 << 6;
-            const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 1 << 7;
-            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 8;
-            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 9;
-            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 10;
-            const BOOMERANG_STEERING = 1 << 11;
-            const MAJOR_GLITCHES = 1 << 12;
-            const MINOR_GLITCHES = 1 << 13;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 14;
-            const AMASHILAMA = 1 << 15;
-            const ANUMAN = 1 << 16;
-            const APOCALYPSE_BOMB = 1 << 17;
-            const BOOMERANG = 1 << 18;
-            const DEAR_ERNEST = 1 << 19;
-            const DEFEAT_EBIH_ALU = 1 << 20;
-            const DEFEAT_MUS_A_M20 = 1 << 21;
-            const DRONE_HOVER = 1 << 22;
-            const ICE_AXE = 1 << 23;
-            const INFECTION_SPEED = 1 << 24;
-            const LEDGE_GRAB = 1 << 25;
-            const MIST_UPGRADE = 1 << 26;
-            const NANITE_MIST = 1 << 27;
-            const REMOTE_DRONE = 1 << 28;
-            const SHOCKWAVE = 1 << 29;
-            const SLINGSHOT_HOOK = 1 << 30;
-            const STATION_POWER = 1 << 31;
+            const AMAGI__MAIN_AREA__CTX__COMBO = 1 << 0;
+            const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 1 << 1;
+            const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 1 << 2;
+            const EBIH__WATERFALL__CTX__LEFT_BLOCK = 1 << 3;
+            const EBIH__WATERFALL__CTX__RIGHT_BLOCK = 1 << 4;
+            const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 1 << 5;
+            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 6;
+            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 7;
+            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 8;
+            const BOOMERANG_STEERING = 1 << 9;
+            const MAJOR_GLITCHES = 1 << 10;
+            const MINOR_GLITCHES = 1 << 11;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 12;
+            const AMASHILAMA = 1 << 13;
+            const ANUMAN = 1 << 14;
+            const APOCALYPSE_BOMB = 1 << 15;
+            const BOOMERANG = 1 << 16;
+            const DEAR_ERNEST = 1 << 17;
+            const DEFEAT_EBIH_ALU = 1 << 18;
+            const DEFEAT_MUS_A_M20 = 1 << 19;
+            const DRONE_HOVER = 1 << 20;
+            const ICE_AXE = 1 << 21;
+            const INFECTION_SPEED = 1 << 22;
+            const LEDGE_GRAB = 1 << 23;
+            const MIST_UPGRADE = 1 << 24;
+            const NANITE_MIST = 1 << 25;
+            const REMOTE_DRONE = 1 << 26;
+            const SHOCKWAVE = 1 << 27;
+            const SLINGSHOT_HOOK = 1 << 28;
+            const STATION_POWER = 1 << 29;
+            const SWITCH_36_11 = 1 << 30;
+            const SWITCH_40_12 = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
         pub struct ContextBits2 : u8 {
-            const SWITCH_36_11 = 1 << 0;
-            const SWITCH_40_12 = 1 << 1;
-            const UNDERWATER_MOVEMENT = 1 << 2;
-            const WALL_CLIMB = 1 << 3;
+            const UNDERWATER_MOVEMENT = 1 << 0;
+            const WALL_CLIMB = 1 << 1;
         }
     }
 }
@@ -208,8 +311,8 @@ impl context::Ctx for Context {
             Item::Shockwave => self.cbits1.contains(flags::ContextBits1::SHOCKWAVE),
             Item::Slingshot_Hook => self.cbits1.contains(flags::ContextBits1::SLINGSHOT_HOOK),
             Item::Station_Power => self.cbits1.contains(flags::ContextBits1::STATION_POWER),
-            Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
-            Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
+            Item::Switch_36_11 => self.cbits1.contains(flags::ContextBits1::SWITCH_36_11),
+            Item::Switch_40_12 => self.cbits1.contains(flags::ContextBits1::SWITCH_40_12),
             Item::Underwater_Movement => self
                 .cbits2
                 .contains(flags::ContextBits2::UNDERWATER_MOVEMENT),
@@ -285,12 +388,12 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::STATION_POWER)
                 .into(),
             Item::Switch_36_11 => self
-                .cbits2
-                .contains(flags::ContextBits2::SWITCH_36_11)
+                .cbits1
+                .contains(flags::ContextBits1::SWITCH_36_11)
                 .into(),
             Item::Switch_40_12 => self
-                .cbits2
-                .contains(flags::ContextBits2::SWITCH_40_12)
+                .cbits1
+                .contains(flags::ContextBits1::SWITCH_40_12)
                 .into(),
             Item::Underwater_Movement => self
                 .cbits2
@@ -394,10 +497,10 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::STATION_POWER);
             }
             Item::Switch_36_11 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+                self.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+                self.cbits1.insert(flags::ContextBits1::SWITCH_40_12);
             }
             Item::Underwater_Movement => {
                 self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
@@ -867,46 +970,6 @@ impl Context {
     pub fn set_flasks(&mut self, val: i32) {
         self.flasks = val;
     }
-    pub fn breach(&self) -> bool {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self.cbits1.contains(flags::ContextBits1::BREACH),
-                },
-            },
-        }
-    }
-    pub fn set_breach(&mut self, val: bool) {
-        self.cbits1.set(flags::ContextBits1::BREACH, val);
-    }
-    pub fn water(&self) -> bool {
-        match self.position {
-            SpotId::Amagi__Main_Area__East_15 => false,
-            SpotId::Amagi__Main_Area__Waters_Edge => false,
-            SpotId::Amagi__Main_Area__Carving => false,
-            SpotId::Amagi__Main_Area__West_15 => false,
-            SpotId::Amagi__Main_Area__Secret_Outcropping => false,
-            SpotId::Amagi__Main_Area__Secret_Waterfall => false,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => false,
-            SpotId::Amagi__West_Lake__East_15 => false,
-            SpotId::Amagi__West_Lake__East_Shore => false,
-            SpotId::Amagi__West_Lake__Water_Surface => false,
-            SpotId::Amagi__West_Lake__West_Shore => false,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => false,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => false,
-            SpotId::Amagi__West_Lake__West_15 => false,
-            _ => match get_area(self.position) {
-                AreaId::Amagi__Cave_Behind_Waterfall => false,
-                _ => match get_region(self.position) {
-                    RegionId::Amagi => true,
-                    _ => self.cbits1.contains(flags::ContextBits1::WATER),
-                },
-            },
-        }
-    }
-    pub fn set_water(&mut self, val: bool) {
-        self.cbits1.set(flags::ContextBits1::WATER, val);
-    }
     pub fn amagi__main_area__ctx__combo(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
@@ -1146,10 +1209,10 @@ impl Context {
                 self.cbits1.insert(flags::ContextBits1::STATION_POWER);
             }
             Item::Switch_36_11 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+                self.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+                self.cbits1.insert(flags::ContextBits1::SWITCH_40_12);
             }
             Item::Underwater_Movement => {
                 self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);

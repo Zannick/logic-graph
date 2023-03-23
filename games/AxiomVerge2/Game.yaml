@@ -12,6 +12,8 @@ start:
   prev_area: Antarctica > West
   energy: 0
   flasks: 0
+
+data:
   breach: false
   water: false
 
@@ -109,7 +111,7 @@ warps:
 
 actions:
   - name: Recall Drone
-    req: NOT WITHIN `Menu` and $can_recall
+    req: NOT WITHIN `Menu` and not ^breach and $can_recall
     do: ^mode = 'Indra'; ^position = ^indra
     # Can open the menu during this time
     time: 3

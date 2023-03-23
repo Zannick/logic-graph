@@ -5075,7 +5075,7 @@ impl world::Accessible for Action {
                     rules::access_not_within_menu_and_can_deploy(&ctx)
                 }
                 ActionId::Global__Recall_Drone => {
-                    rules::access_not_within_menu_and_can_recall(&ctx)
+                    rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
                 }
             }
     }

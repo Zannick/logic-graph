@@ -20,6 +20,22 @@ use std::fmt;
 %% endfor
 }
 
+pub mod data {
+    #[allow(unused_imports)]
+    use crate::context::enums;
+    use crate::graph::*;
+%% for c, overrides in data_values.items()
+pub fn {{ c }}(spot_id: SpotId) -> {{ data_types[c] }} {
+    match spot_id {
+%% for sp, val in overrides.items()|sort
+        SpotId::{{ sp }} => {{ val|str_to_rusttype(data_types[c]) }},
+%% endfor
+        _ => {{ data_defaults[c]|str_to_rusttype(data_types[c]) }}
+    }
+}
+%% endfor
+}
+
 pub mod flags {
 use bitflags::bitflags;
 

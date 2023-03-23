@@ -27,10 +27,10 @@ templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time',
-               'start', 'load', 'helpers', 'collect', 'settings', '_filename'}
-REGION_FIELDS = {'name', 'short', 'here'}
-AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'here'}
-SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local'}
+               'start', 'load', 'data', 'helpers', 'collect', 'settings', '_filename'}
+REGION_FIELDS = {'name', 'short', 'data', 'here'}
+AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here'}
+SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here'}
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
@@ -202,6 +202,7 @@ class GameLogic(object):
 
         self.id_lookup = {}
         self.process_regions()
+        self.process_context()
         self.process_warps()
         self.process_global_actions()
         self._errors.extend(itertools.chain.from_iterable(pr.errors for pr in self.all_parse_results()))
@@ -381,7 +382,7 @@ class GameLogic(object):
         hv = HelperVisitor(self.helpers, self.context_types, self.settings)
         _visit(hv, True)
 
-        cv = ContextVisitor(self.context_types, self.context_values)
+        cv = ContextVisitor(self.context_types, self.context_values, self.data_types, self.data_defaults)
         _visit(cv)
         self.context_str_values = cv.values
 
@@ -830,13 +831,12 @@ class GameLogic(object):
         return self.all_items - self.item_max_counts().keys() - self.collect.keys()
 
 
-    @cached_property
-    def context_values(self):
-        def _check_types(v1, v2, ctx, *names, here=False):
+    def process_context(self):
+        def _check_types(v1, v2, ctx, category, *names, local=False):
             t1 = typenameof(v1)
             t2 = typenameof(v2)
             # here overrides may look like a higher-order place type
-            if here:
+            if local:
                 if t1 == 'SpotId' and t2 in ('AreaId', 'RegionId'):
                     return
                 if len(names) == 1 and t1 == 'AreaId' and t2 == 'RegionId':
@@ -844,40 +844,58 @@ class GameLogic(object):
             if t1 != t2:
                 self._errors.append(
                     f'context value type mismatch: {ctx} defined as {v1} ({t1}) '
-                    f'and reused in {" > ".join(names)} as {v2} ({t2})')
-        
-        # self._info: start
-        # regions/areas: here, start, enter
+                    f'and reused in {" > ".join(names)} in "{category}" section as {v2} ({t2})')
+
+        def _check_data(ctx, val, category, *names, data=False):
+            if data:
+                if ctx in self._info['data']:
+                    _check_types(self._info['data'][ctx], val, ctx, category, *names, local=True)
+                else:
+                    self._errors.append(
+                        f'context data field {ctx} used in {" > ".join(names)} in '
+                        f'"{category}" section must have a global default value set')
+            else:
+                if ctx in self._info['data']:
+                    self._errors.append(
+                        f'context category mismatch: {ctx} defined as data but used in '
+                        f'{" > ".join(names)} in "{category}" section')
+
+        # self._info: start, data
+        # regions/areas: here, start, enter, data
         gc = dict(self._info['start'])
-        def _check_shadow(ctx, *names):
+        def _check_shadow(ctx, category, *names):
+            _check_data(ctx, val, category, *names)
             if len(names) == 2:
                 pc = construct_id(names[0], 'ctx', ctx[1:]).lower()
                 if pc in gc:
                     self._errors.append(
-                        f'Context parameter {ctx} in {" > ".join(names)} hides '
+                        f'Context parameter {ctx} in {" > ".join(names)} "{category}" hides '
                         f'parameter {ctx} in {names[0]}')
 
-        def _handle_start(ctx, val, *names):
+        def _handle_start(ctx, val, category, *names):
+            _check_data(ctx, val, category, *names)
             if ctx[0] == '_':
                 _check_shadow(ctx, *names)
                 ctx = construct_id(*names, 'ctx', ctx[1:]).lower()
             if ctx in gc:
                 self._errors.append(
                     f'Duplicate context parameter {ctx} in {" > ".join(names)}: '
-                    'not allowed in "start" section')
+                    f'not allowed in "{category}" section')
             else:
                 gc[ctx] = val
 
-        def _handle_triggers(ctx, val, *names):
+        def _handle_triggers(ctx, val, category, *names):
+            _check_data(ctx, val, category, *names)
             if ctx[0] == '_':
                 _check_shadow(ctx, *names)
                 ctx = construct_id(*names, 'ctx', ctx[1:]).lower()
             if ctx in gc:
-                _check_types(gc[ctx], val, ctx, *names)
+                _check_types(gc[ctx], val, ctx, category, *names)
             else:
                 gc[ctx] = val
 
-        def _handle_here(ctx, val, *names):
+        def _handle_here(ctx, val, category, *names):
+            _check_data(ctx, val, category, *names)
             if ctx[0] == '_':
                 self._errors.append(
                     f'"here" overrides cannot be local: {" > ".join(names)} {ctx}')
@@ -885,29 +903,32 @@ class GameLogic(object):
                 self._errors.append(
                     f'"here" overrides must be predefined: {" > ".join(names)} {ctx}')
             else:
-                _check_types(gc[ctx], val, ctx, *names, here=True)
+                _check_types(gc[ctx], val, ctx, category, *names, local=True)
 
         for region in self.regions:
             for ctx, val in region.get('start', {}).items():
-                _handle_start(ctx, val, region['name'])
-            for ctx, val in itertools.chain.from_iterable(
-                    region.get(trigger, {}).items()
-                    for trigger in TRIGGER_RULES):
-                _handle_triggers(ctx, val, region['name'])
+                _handle_start(ctx, val, 'start', region['name'])
+            for trigger in TRIGGER_RULES:
+                for ctx, val in region.get(trigger, {}).items():
+                    _handle_triggers(ctx, val, trigger, region['name'])
+            for ctx, val in region.get('data', {}).items():
+                _check_data(ctx, val, 'data', region['name'], data=True)
             for ctx, val in region.get('here', {}).items():
-                _handle_here(ctx, val, region['name'])
+                _handle_here(ctx, val, 'here', region['name'])
         # Areas must be handled second to check for shadowing
         for area in self.areas():
             for ctx, val in area.get('start', {}).items():
-                _handle_start(ctx, val, area['region'], area['name'])
-            for ctx, val in itertools.chain.from_iterable(
-                    area.get(trigger, {}).items()
-                    for trigger in TRIGGER_RULES):
-                _handle_triggers(ctx, val, area['region'], area['name'])
+                _handle_start(ctx, val, 'start', area['region'], area['name'])
+            for trigger in TRIGGER_RULES:
+                for ctx, val in area.get(trigger, {}).items():
+                    _handle_triggers(ctx, val, trigger, area['region'], area['name'])
+            for ctx, val in area.get('data', {}).items():
+                _check_data(ctx, val, 'data', area['region'], area['name'], data=True)
             for ctx, val in area.get('here', {}).items():
-                _handle_here(ctx, val, area['region'], area['name'])
+                _handle_here(ctx, val, 'here', area['region'], area['name'])
 
-        return gc
+        self.context_values = gc
+        self.data_defaults = self._info["data"]
 
 
     @cached_property
@@ -920,8 +941,19 @@ class GameLogic(object):
             d[ctx] = t
         return d
 
+    @cached_property
+    def data_types(self):
+        d = {}
+        for ctx, val in self.data_defaults.items():
+            t = typenameof(val)
+            if t == 'ENUM':
+                t = 'enums::' + ctx.capitalize()
+            d[ctx] = t
+        return d
+
     def get_default_ctx(self):
-        return {c: c for c in self.context_values if '__ctx__' not in c}
+        return {c: c for c in itertools.chain(self.context_values, self.data_defaults)
+                if '__ctx__' not in c}
 
     def get_local_ctx(self, info):
         d = self.get_default_ctx()
@@ -969,6 +1001,21 @@ class GameLogic(object):
                     if t == 'SpotId':
                         v = f'{s["region"]} > {s["area"]} > {v}'
                     d[localctx[k]]['spot'][s['id']] = str_to_rusttype(v, t)
+        return d
+
+    @cached_property
+    def data_values(self):
+        d = {c: {} for c in self.data_defaults}
+        for r in self.regions:
+            for a in r['areas']:
+                for s in a['spots']:
+                    for c, cdict in d.items():
+                        if c in s.get('data', {}):
+                            cdict[s['id']] = s['data'][c]
+                        elif c in a.get('data', {}):
+                            cdict[s['id']] = a['data'][c]
+                        elif c in r.get('data', {}):
+                            cdict[s['id']] = r['data'][c]
         return d
 
     @cached_property
@@ -1046,6 +1093,7 @@ class GameLogic(object):
         return RustVisitor(self.context_types,
                            self.action_funcs,
                            self.get_local_ctx(info),
+                           self.data_defaults.keys(),
                            id or pr.name).visit(pr.tree)
 
 
@@ -1069,7 +1117,7 @@ class GameLogic(object):
         # Access cached_properties to ensure they're in the template vars
         self.unused_items
         self.context_types
-        self.context_values
+        self.data_values
         self.price_types
         self.movement_tables
         self.context_trigger_rules

@@ -9,14 +9,17 @@ import inflection
 
 class RustVisitor(RulesVisitor):
 
-    def __init__(self, context_types, action_funcs, ctxdict, name):
+    def __init__(self, context_types, action_funcs, ctxdict, data_keys, name):
         self.context_types = context_types
         self.action_funcs = action_funcs
         self.ctxdict = ctxdict
+        self.data_keys = data_keys
         self.name = name
         self.rettype = None
 
     def _getRefGetter(self, ref):
+        if ref in self.data_keys:
+            return f'data::{ref}(ctx.position())'
         if ref in self.ctxdict:
             return f'ctx.{self.ctxdict[ref]}()'
         if func := self.action_funcs.get(self.name):

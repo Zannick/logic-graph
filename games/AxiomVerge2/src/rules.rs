@@ -307,7 +307,7 @@ pub fn access_not_amashilama(ctx: &Context) -> bool {
 }
 pub fn access_not_water(ctx: &Context) -> bool {
     // not ^water
-    !ctx.water()
+    !data::water(ctx.position())
 }
 pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
@@ -324,13 +324,6 @@ pub fn access_not_within_menu_and_can_deploy(ctx: &Context) -> bool {
         _ => false,
     }) && helper__can_deploy!(ctx))
 }
-pub fn access_not_within_menu_and_can_recall(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and $can_recall
-    (!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && helper__can_recall!(ctx))
-}
 pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
     (!(match get_region(ctx.position()) {
@@ -344,6 +337,14 @@ pub fn access_not_within_menu_and_mode__drone(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     }) && ctx.mode() == enums::Mode::Drone)
+}
+pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and not ^breach and $can_recall
+    ((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && !data::breach(ctx.position()))
+        && helper__can_recall!(ctx))
 }
 pub fn access_offset(ctx: &Context) -> bool {
     // $offset

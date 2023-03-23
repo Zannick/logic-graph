@@ -36,7 +36,7 @@ fn cannot_obtain_Ledge_Grab() {
 #[test]
 fn with_Switch_36_11_can_obtain_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+    ctx.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
 
     expect_obtainable!(
         &world,
@@ -105,7 +105,7 @@ fn eventually_gets_Ledge_Grab() {
 #[test]
 fn switch_opens_gate() {
     let (mut world, mut ctx) = shared_setup();
-    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+    ctx.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
 
     expect_this_route!(
         &world,
@@ -161,7 +161,7 @@ fn start_Glacier__Boomerang_Room__Pedestal_with_Boomerang_can_obtain_Switch_36_1
 fn start_Glacier__Vertical_Room__Under_Switch_with_Boomerang__Switch_36_11_can_obtain_Ledge_Grab() {
     let (mut world, mut ctx) = shared_setup();
     ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
-    ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+    ctx.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
 
     expect_obtainable!(
         &world,
