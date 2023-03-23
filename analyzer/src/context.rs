@@ -9,6 +9,7 @@ pub trait Ctx: Clone + Eq + Debug + Hash {
     type ItemId: Id;
     type AreaId: Id;
     type RegionId: Id;
+    type MovementState: Copy + Clone + Eq + Debug + Hash;
     const NUM_ITEMS: i32;
 
     fn has(&self, item: Self::ItemId) -> bool;
@@ -37,7 +38,12 @@ pub trait Ctx: Clone + Eq + Debug + Hash {
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
     fn all_region_checks(&self, id: Self::RegionId) -> bool;
 
-    fn local_travel_time(&self, dest: <<Self::World as World>::Exit as Exit>::SpotId) -> i32;
+    fn get_movement_state(&self) -> Self::MovementState;
+    fn local_travel_time(
+        &self,
+        movement_state: Self::MovementState,
+        dest: <<Self::World as World>::Exit as Exit>::SpotId,
+    ) -> i32;
 
     fn count_visits(&self) -> i32;
     fn count_skips(&self) -> i32;

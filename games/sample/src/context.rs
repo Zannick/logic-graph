@@ -42,6 +42,12 @@ pub mod enums {
     }
 }
 
+pub mod data {
+    #[allow(unused_imports)]
+    use crate::context::enums;
+    use crate::graph::*;
+}
+
 pub mod flags {
     use bitflags::bitflags;
 
@@ -165,6 +171,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
+    type MovementState = movements::MovementState;
     const NUM_ITEMS: i32 = 45;
 
     fn has(&self, item: Item) -> bool {
@@ -620,8 +627,12 @@ impl context::Ctx for Context {
         }
         true
     }
-    fn local_travel_time(&self, dest: SpotId) -> i32 {
-        movements::local_travel_time(self, self.position, dest)
+    fn get_movement_state(&self) -> movements::MovementState {
+        movements::get_movement_state(self)
+    }
+
+    fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, movement_state, self.position, dest)
     }
 
     fn count_visits(&self) -> i32 {

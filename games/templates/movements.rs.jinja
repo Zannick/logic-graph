@@ -17,7 +17,7 @@ enum Movement {
 %% endfor
 }
 
-fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
+fn has_movement(ctx: &Context, m: Movement) -> bool {
     match m {
         Movement::Default => true,
 %% for m in non_default_movements
@@ -26,17 +26,23 @@ fn has_movement(ctx: &Context, m: Movement, spot: SpotId) -> bool {
     }
 }
 
-pub fn local_travel_time(ctx: &Context, src: SpotId, dest: SpotId) -> i32 {
-    match (
-%%- for mtype in non_default_movements
-    has_movement(ctx, Movement::{{ mtype|camelize }}, src),
+pub type MovementState = [bool; {{ non_default_movements|count }}];
+
+pub fn get_movement_state(ctx: &Context) -> MovementState {
+    [
+%% for mtype in non_default_movements
+        has_movement(ctx, Movement::{{ mtype|camelize }}),
 %% endfor
-    src, dest) {
+    ]
+}
+
+pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: SpotId, dest: SpotId) -> i32 {
+    match (movement_state, src, dest) {
 %% for k, table in movement_tables.items()
 %% for (s, d), f in table.items()
     {% if f|count > 1 %}// {{ f|map('round', 6)|list }}
 {% endif -%}
-    ({% for mflag in k %}{{ mflag|lower }}, {% endfor %}SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
+    ([{{ k|map('lower')|join(', ') }}], SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
 %% endfor
 %% endfor
         _ => -1,

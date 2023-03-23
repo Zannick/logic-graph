@@ -58,9 +58,10 @@ pub fn expand<W, T, E, Wp>(
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
+    let movement_state = ctx.get().get_movement_state();
     for spot in world.get_area_spots(ctx.get().position()) {
         if spot_map[*spot] == None {
-            let local = ctx.get().local_travel_time(*spot);
+            let local = ctx.get().local_travel_time(movement_state, *spot);
             if local < 0 {
                 // Can't move this way
                 continue;

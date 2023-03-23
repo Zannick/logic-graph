@@ -123,6 +123,7 @@ impl context::Ctx for Context {
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
+    type MovementState = movements::MovementState;
     const NUM_ITEMS: i32 = {{ gl.item_max_counts()|count }};
 
 %# we might not need has/count, if we reference the parameter directly in rules
@@ -312,8 +313,12 @@ impl context::Ctx for Context {
     }
 %% endfor
 
-    fn local_travel_time(&self, dest: SpotId) -> i32 {
-        movements::local_travel_time(self, self.position, dest)
+    fn get_movement_state(&self) -> movements::MovementState {
+        movements::get_movement_state(self)
+    }
+
+    fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> i32 {
+        movements::local_travel_time(self, movement_state, self.position, dest)
     }
 
     fn count_visits(&self) -> i32 {
