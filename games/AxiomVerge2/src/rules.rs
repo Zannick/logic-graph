@@ -245,10 +245,6 @@ pub fn access_infect__2(ctx: &Context) -> bool {
     // Infect{2}
     ctx.count(Item::Infect) >= 2
 }
-pub fn access_infect__2_and___melee_or_boomerang(ctx: &Context) -> bool {
-    // Infect{2} and ($melee or $boomerang)
-    (ctx.count(Item::Infect) >= 2 && (helper__melee!(ctx) || helper__boomerang!(ctx)))
-}
 pub fn access_infect__3(ctx: &Context) -> bool {
     // Infect{3}
     ctx.count(Item::Infect) >= 3
@@ -356,6 +352,10 @@ pub fn access_offset(ctx: &Context) -> bool {
 pub fn access_open(ctx: &Context) -> bool {
     // $open
     helper__open!(ctx)
+}
+pub fn access_overheat_and___melee_or_boomerang(ctx: &Context) -> bool {
+    // $overheat and ($melee or $boomerang)
+    (helper__overheat!(ctx) && (helper__melee!(ctx) || helper__boomerang!(ctx)))
 }
 pub fn access_platform_and_hook_and_hover(ctx: &Context) -> bool {
     // $platform and $hook and $hover

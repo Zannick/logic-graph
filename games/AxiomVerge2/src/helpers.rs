@@ -145,57 +145,57 @@ macro_rules! helper__platform {
 }
 
 /// $overheat (  )
-/// Infect{2}
+/// Infect
 #[macro_export]
 macro_rules! helper__overheat {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 2
+        $ctx.has(Item::Infect)
     }};
 }
 
 /// $allegiance1 (  )
-/// Infect{2}
+/// Infect
 #[macro_export]
 macro_rules! helper__allegiance1 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 2
+        $ctx.has(Item::Infect)
     }};
 }
 
 /// $allegiance2 (  )
-/// Infect{3}
+/// Infect{2}
 #[macro_export]
 macro_rules! helper__allegiance2 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 3
+        $ctx.count(Item::Infect) >= 2
     }};
 }
 
 /// $unlock2 (  )
-/// Infect{3}
+/// Infect{2}
 #[macro_export]
 macro_rules! helper__unlock2 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 3
+        $ctx.count(Item::Infect) >= 2
     }};
 }
 
 /// $unlock3 (  )
-/// Infect{4}
+/// Infect{3}
 #[macro_export]
 macro_rules! helper__unlock3 {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Infect) >= 4
+        $ctx.count(Item::Infect) >= 3
     }};
 }
 

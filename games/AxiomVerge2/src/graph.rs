@@ -4547,7 +4547,7 @@ impl world::Accessible for Location {
                     rules::access_melee_or_boomerang(&ctx)
                 }
                 LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                    rules::access_infect__2_and___melee_or_boomerang(&ctx)
+                    rules::access_overheat_and___melee_or_boomerang(&ctx)
                 }
                 LocationId::Ebih__Boss_Room__East_Ledge__Item => true,
                 LocationId::Ebih__Building_Interior__Corner__Urn => true,
