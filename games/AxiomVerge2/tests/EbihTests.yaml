@@ -89,4 +89,19 @@ tests:
     with:
       - Infect
       - Remote_Drone
-    eventually_accesses: Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
+    context:
+      ebih__grid_25_10_12__ctx__door_open: true
+    path:
+      - Ebih > Grid 25,10-12 > Bush
+      - Ebih > Grid 25,10-12 > Mid-Ledge
+      - Ebih > Grid 25,10-12 > Door Left
+      - Ebih > Grid 25,10-12 > Door
+      - Ebih > Grid 25,10-12 > East 11
+      - Ebih > Grid 26,10-11 > West 11
+      - Ebih > Grid 26,10-11 > Middle Bottom
+      - Ebih > Grid 26,10-11 > Under Ledge
+      - Ebih > Grid 26,10-11 > Ledge
+      - Ebih > Grid 26,10-11 > Middle Platform
+      - Ebih > Grid 26,10-11 > West 10
+      - Ebih > Grid 25,10-12 > East 10
+      - Ebih > Grid 25,10-12 > Hidden Bush

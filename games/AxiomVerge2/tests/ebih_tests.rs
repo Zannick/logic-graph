@@ -221,16 +221,32 @@ fn start_Ebih__Ebih_East__Middle_Platform_with_Infect__Remote_Drone_can_access_E
     );
 }
 #[test]
-fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_eventually_accesses_Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush(
+fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_context_ebih__grid_25_10_12__ctx__door_open_True_path_Ebih__Grid_25_10_12__Bush__Ebih__Grid_25_10_12__Mid_Ledge__Ebih__Grid_25_10_12__Door_Left__Ebih__Grid_25_10_12__Door__Ebih__Grid_25_10_12__East_11__Ebih__Grid_26_10_11__West_11__Ebih__Grid_26_10_11__Middle_Bottom__Ebih__Grid_26_10_11__Under_Ledge__Ebih__Grid_26_10_11__Ledge__Ebih__Grid_26_10_11__Middle_Platform__Ebih__Grid_26_10_11__West_10__Ebih__Grid_25_10_12__East_10__Ebih__Grid_25_10_12__Hidden_Bush(
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.infect = 1;
     ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+    ctx.cbits1
+        .insert(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
 
-    expect_eventually_accesses!(
+    expect_this_route!(
         &world,
         ctx,
         SpotId::Ebih__Grid_25_10_12__East_12,
-        LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush
+        vec![
+            SpotId::Ebih__Grid_25_10_12__Bush,
+            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
+            SpotId::Ebih__Grid_25_10_12__Door,
+            SpotId::Ebih__Grid_25_10_12__East_11,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
+            SpotId::Ebih__Grid_26_10_11__West_10,
+            SpotId::Ebih__Grid_25_10_12__East_10,
+            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+        ]
     );
 }

@@ -1505,6 +1505,7 @@ areas:
       coord: [26.05, 10.7]
       local:
         - to: Middle Bottom
+          jumps: 1
         - to: Middle Platform
       exits:
         - to: Grid 25,10-12 > East 11

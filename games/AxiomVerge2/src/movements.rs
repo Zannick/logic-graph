@@ -2233,6 +2233,11 @@ pub fn local_travel_time(
         ) => 1126,
         (
             [false, false, false],
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1576,
+        (
+            [false, false, false],
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
             SpotId::Ebih__Grid_26_10_11__West_11,
         ) => 1576,
@@ -5419,6 +5424,11 @@ pub fn local_travel_time(
             SpotId::Ebih__Drone_Room__East_4,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 877,
+        (
+            [true, false, false],
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1228,
         (
             [true, false, false],
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
@@ -9228,7 +9238,7 @@ pub fn local_travel_time(
             [false, true, false],
             SpotId::Ebih__Grid_26_10_11__West_11,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1617,
+        ) => 1576,
         (
             [false, true, false],
             SpotId::Ebih__Grid_26_10_11__West_11,
@@ -12919,6 +12929,11 @@ pub fn local_travel_time(
             SpotId::Ebih__Drone_Room__East_4,
             SpotId::Ebih__Drone_Room__Tree,
         ) => 877,
+        (
+            [false, false, true],
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1228,
         (
             [false, false, true],
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
@@ -16710,7 +16725,7 @@ pub fn local_travel_time(
             [true, true, false],
             SpotId::Ebih__Grid_26_10_11__West_11,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1617,
+        ) => 1228,
         (
             [true, true, false],
             SpotId::Ebih__Grid_26_10_11__West_11,
@@ -20383,6 +20398,11 @@ pub fn local_travel_time(
         ([true, false, true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => {
             877
         }
+        (
+            [true, false, true],
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1228,
         (
             [true, false, true],
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
@@ -24172,7 +24192,7 @@ pub fn local_travel_time(
             [false, true, true],
             SpotId::Ebih__Grid_26_10_11__West_11,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1617,
+        ) => 1228,
         (
             [false, true, true],
             SpotId::Ebih__Grid_26_10_11__West_11,
@@ -28276,7 +28296,7 @@ pub fn local_travel_time(
             [true, true, true],
             SpotId::Ebih__Grid_26_10_11__West_11,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1617,
+        ) => 1228,
         (
             [true, true, true],
             SpotId::Ebih__Grid_26_10_11__West_11,
