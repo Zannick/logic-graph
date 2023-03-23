@@ -156,6 +156,7 @@ where
         }
         vecs.sort_by_key(|v| v[0].elapsed());
         let mut total = 0;
+        let mut types = 0;
         // TODO: add a cutoff of some percentage of the fastest?
         for (i, vec) in vecs.iter().enumerate() {
             let mut minor = 0;
@@ -165,6 +166,7 @@ where
             }
             Self::write_one(&mut file, i, minor, first, self.best)?;
             total += 1;
+            types += 1;
             for (j, similar) in vec.iter().enumerate().skip(1) {
                 if vec[..j]
                     .iter()
@@ -178,10 +180,11 @@ where
             }
         }
         println!(
-            "Wrote {} solutions ({} types, reduced from {} total) to {}",
+            "Wrote {} solutions ({} types, reduced from {} total/{} types) to {}",
             total,
-            vecs.len(),
+            types,
             self.count,
+            vecs.len(),
             self.path
         );
         Ok(())
