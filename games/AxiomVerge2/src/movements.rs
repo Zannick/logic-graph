@@ -1510,13 +1510,23 @@ pub fn local_travel_time(
         (
             [false, false, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 3378,
+        ) => 2252,
         (
             [false, false, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3378,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 3000,
         (
             [false, false, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -4919,13 +4929,23 @@ pub fn local_travel_time(
         (
             [true, false, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
+        ) => 1754,
         (
             [true, false, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2631,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1799,
         (
             [true, false, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -8729,13 +8749,23 @@ pub fn local_travel_time(
         (
             [false, true, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1111,
+        (
+            [false, true, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 1111,
+        (
+            [false, true, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 3378,
+        ) => 2252,
         (
             [false, true, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3378,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 2393,
         (
             [false, true, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -13003,12 +13033,22 @@ pub fn local_travel_time(
         (
             [false, false, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
+        ) => 1754,
         (
             [false, false, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
         ) => 3000,
         (
             [false, false, true],
@@ -16809,13 +16849,23 @@ pub fn local_travel_time(
         (
             [true, true, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
+        ) => 1754,
         (
             [true, true, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2631,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1799,
         (
             [true, true, false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -21061,13 +21111,23 @@ pub fn local_travel_time(
         (
             [true, false, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
+        ) => 1754,
         (
             [true, false, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2631,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1799,
         (
             [true, false, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -24855,13 +24915,23 @@ pub fn local_travel_time(
         (
             [false, true, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
+        ) => 1754,
         (
             [false, true, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 3000,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 2393,
         (
             [false, true, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -29262,13 +29332,23 @@ pub fn local_travel_time(
         (
             [true, true, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2631,
+        ) => 1754,
         (
             [true, true, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2631,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1799,
         (
             [true, true, true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -32469,7 +32549,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
         ) => true,
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
@@ -32480,8 +32560,16 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Ebih__Waterfall__Waterfall_Right,
         ) => true,
         (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => true,
+        (
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
         ) => true,
         (SpotId::Ebih__Waterfall__Waterfall_Center_Left, SpotId::Ebih__Waterfall__Alcove_Left) => {
             true

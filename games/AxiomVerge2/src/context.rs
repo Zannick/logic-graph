@@ -160,28 +160,28 @@ pub mod flags {
             const AMAGI__MAIN_AREA__CTX__COMBO = 1 << 0;
             const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 1 << 1;
             const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 1 << 2;
-            const EBIH__WATERFALL__CTX__LEFT_BLOCK = 1 << 3;
-            const EBIH__WATERFALL__CTX__RIGHT_BLOCK = 1 << 4;
-            const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 1 << 5;
-            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 6;
-            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 7;
-            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 8;
-            const BOOMERANG_STEERING = 1 << 9;
-            const MAJOR_GLITCHES = 1 << 10;
-            const MINOR_GLITCHES = 1 << 11;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 12;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 13;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 14;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 15;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 16;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 17;
-            const AMASHILAMA = 1 << 18;
-            const ANUMAN = 1 << 19;
-            const APOCALYPSE_BOMB = 1 << 20;
-            const BOOMERANG = 1 << 21;
-            const DEFEAT_EBIH_ALU = 1 << 22;
-            const DEFEAT_MUS_A_M20 = 1 << 23;
-            const DRONE_HOVER = 1 << 24;
+            const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 1 << 3;
+            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 4;
+            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 5;
+            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 6;
+            const BOOMERANG_STEERING = 1 << 7;
+            const MAJOR_GLITCHES = 1 << 8;
+            const MINOR_GLITCHES = 1 << 9;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 10;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 11;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 12;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 13;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 14;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 15;
+            const AMASHILAMA = 1 << 16;
+            const ANUMAN = 1 << 17;
+            const APOCALYPSE_BOMB = 1 << 18;
+            const BOOMERANG = 1 << 19;
+            const DEFEAT_EBIH_ALU = 1 << 20;
+            const DEFEAT_MUS_A_M20 = 1 << 21;
+            const DRONE_HOVER = 1 << 22;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 23;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 24;
             const ICE_AXE = 1 << 25;
             const INFECTION_SPEED = 1 << 26;
             const LEDGE_GRAB = 1 << 27;
@@ -286,7 +286,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = 37;
+    const NUM_ITEMS: i32 = 39;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -317,6 +317,12 @@ impl context::Ctx for Context {
             Item::Drone_Hover => self.cbits1.contains(flags::ContextBits1::DRONE_HOVER),
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
+            Item::Ebih_Waterfall_Block_Left => self
+                .cbits1
+                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT),
+            Item::Ebih_Waterfall_Block_Right => self
+                .cbits1
+                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT),
             Item::Flask => self.flask >= 1,
             Item::Health_Upgrade => self.health_upgrade >= 1,
             Item::Ice_Axe => self.cbits1.contains(flags::ContextBits1::ICE_AXE),
@@ -391,6 +397,14 @@ impl context::Ctx for Context {
                 .into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
+            Item::Ebih_Waterfall_Block_Left => self
+                .cbits1
+                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT)
+                .into(),
+            Item::Ebih_Waterfall_Block_Right => self
+                .cbits1
+                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT)
+                .into(),
             Item::Flask => self.flask.into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
             Item::Ice_Axe => self.cbits1.contains(flags::ContextBits1::ICE_AXE).into(),
@@ -491,6 +505,12 @@ impl context::Ctx for Context {
             Item::Drone_Melee_Speed => {
                 self.drone_melee_speed += 1;
             },
+            Item::Ebih_Waterfall_Block_Left => {
+                self.cbits1.insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+            },
+            Item::Ebih_Waterfall_Block_Right => {
+                self.cbits1.insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+            },
             Item::Flask => {
                 self.flask += 1;
                 rules::action_flasks__1(self);
@@ -562,6 +582,7 @@ impl context::Ctx for Context {
             Item::Health_Node => rules::action_energy__max_energy(self),
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self),
+            Item::Ebih_Waterfall_Both_Blocks => rules::action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(self),
             _ => (),
         }
     }
@@ -1078,36 +1099,6 @@ impl Context {
             val,
         );
     }
-    pub fn ebih__waterfall__ctx__left_block(&self) -> bool {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self
-                        .cbits1
-                        .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__LEFT_BLOCK),
-                },
-            },
-        }
-    }
-    pub fn set_ebih__waterfall__ctx__left_block(&mut self, val: bool) {
-        self.cbits1
-            .set(flags::ContextBits1::EBIH__WATERFALL__CTX__LEFT_BLOCK, val);
-    }
-    pub fn ebih__waterfall__ctx__right_block(&self) -> bool {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self
-                        .cbits1
-                        .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__RIGHT_BLOCK),
-                },
-            },
-        }
-    }
-    pub fn set_ebih__waterfall__ctx__right_block(&mut self, val: bool) {
-        self.cbits1
-            .set(flags::ContextBits1::EBIH__WATERFALL__CTX__RIGHT_BLOCK, val);
-    }
     pub fn ebih__waterfall__ctx__west_door_open(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
@@ -1229,6 +1220,14 @@ impl Context {
             }
             Item::Drone_Melee_Speed => {
                 self.drone_melee_speed += 1;
+            }
+            Item::Ebih_Waterfall_Block_Left => {
+                self.cbits1
+                    .insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+            }
+            Item::Ebih_Waterfall_Block_Right => {
+                self.cbits1
+                    .insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
             }
             Item::Flask => {
                 self.flask += 1;

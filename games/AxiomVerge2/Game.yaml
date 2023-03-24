@@ -182,6 +182,13 @@ collect:
     $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`);
     $add_item(Amagi_Stronghold_Wall_2);
     $add_item(Amagi_Stronghold_Boulder_2);
+  Ebih_Waterfall_Both_Blocks: >
+    $skip(`Ebih > Waterfall > Alcove > Block Left`);
+    $skip(`Ebih > Waterfall > Alcove > Block Right`);
+    $skip(`Ebih > Waterfall > Alcove Left > Block Left`);
+    $skip(`Ebih > Waterfall > Alcove Right > Block Right`);
+    $add_item(Ebih_Waterfall_Block_Right);
+    $add_item(Ebih_Waterfall_Block_Left);
 
 settings:
   boomerang_steering:

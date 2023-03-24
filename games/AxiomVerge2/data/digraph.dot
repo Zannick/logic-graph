@@ -273,6 +273,7 @@ digraph AxiomVerge2 {
             Ebih__Waterfall__Waterfall_Right [label = "Waterfall Right"];
             Ebih__Waterfall__Alcove_Right [label = "Alcove Right"];
             Ebih__Waterfall__Waterfall_Center_Right [label = "Waterfall Center Right"];
+            Ebih__Waterfall__Waterfall_Center_Center [label = "Waterfall Center Center"];
             Ebih__Waterfall__Waterfall_Center_Left [label = "Waterfall Center Left"];
             Ebih__Waterfall__Alcove_Left [label = "Alcove Left"];
             Ebih__Waterfall__Alcove [label = "Alcove"];
@@ -732,7 +733,15 @@ digraph AxiomVerge2 {
     Ebih__Grid_25_10_12__Hidden_Bush -> Ebih__Grid_25_10_12__East_10;
     Ebih__Waterfall__East_10 -> Ebih__Grid_25_10_12__West_10;
     Ebih__Waterfall__East_11 -> Ebih__Grid_25_10_12__West_11;
+    Ebih__Waterfall__Alcove_Right -> Ebih__Waterfall__Alcove;
+    Ebih__Waterfall__Alcove_Right -> Ebih__Waterfall__Alcove;
+    Ebih__Waterfall__Alcove_Left -> Ebih__Waterfall__Alcove;
+    Ebih__Waterfall__Alcove_Left -> Ebih__Waterfall__Alcove;
     Ebih__Waterfall__Alcove_Left -> Ebih__Waterfall__Waterfall_Center_Left;
+    Ebih__Waterfall__Alcove -> Ebih__Waterfall__Alcove_Left;
+    Ebih__Waterfall__Alcove -> Ebih__Waterfall__Alcove_Left;
+    Ebih__Waterfall__Alcove -> Ebih__Waterfall__Alcove_Right;
+    Ebih__Waterfall__Alcove -> Ebih__Waterfall__Alcove_Right;
     Ebih__Waterfall__Under_Waterfall -> Ebih__Waterfall__Waterfall_Left;
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__West_Lower_Path;
     Ebih__Waterfall__West_10 -> Ebih__Ebih_West__East_10;

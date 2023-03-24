@@ -224,6 +224,7 @@ subgraph Ebih
         Ebih__Waterfall__Waterfall_Right(Waterfall Right);
         Ebih__Waterfall__Alcove_Right(Alcove Right);
         Ebih__Waterfall__Waterfall_Center_Right(Waterfall Center Right);
+        Ebih__Waterfall__Waterfall_Center_Center(Waterfall Center Center);
         Ebih__Waterfall__Waterfall_Center_Left(Waterfall Center Left);
         Ebih__Waterfall__Alcove_Left(Alcove Left);
         Ebih__Waterfall__Alcove(Alcove);
@@ -604,6 +605,8 @@ Ebih__Grid_26_10_11__Upper_Platform --> Ebih__Grid_26_10_11__West_10
 Ebih__Observation_Tower_Room__East_11 --> Ebih__Base_Camp__West_11
 Ebih__Observation_Tower_Room__East_11 --> Ebih__Observation_Tower_Room__Cliff
 Ebih__Observation_Tower_Room__Tower_Top --> Ebih__Observation_Tower_Room__West_9
+Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Left
+Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Right
 Ebih__Waterfall__Alcove_Left --> Ebih__Waterfall__Waterfall_Center_Left
 Ebih__Waterfall__Below_Left_Switch <--> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__Below_Tree --> Ebih__Waterfall__Big_Tree

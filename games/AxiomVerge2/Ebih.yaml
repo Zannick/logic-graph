@@ -526,8 +526,6 @@ areas:
 - name: Waterfall
   on_entry: $reset_old_area(^newpos)
   start:
-    _left_block: false
-    _right_block: false
     _west_door_open: false
   spots:
     - name: East 10
@@ -574,16 +572,40 @@ areas:
         - to: Waterfall Right
           jumps: 1
         - to: Waterfall Center Right  # you can't do this with ledge grab thanks to the enemy
+      locations:
+        - name: Block Right
+          item: Ebih_Waterfall_Block_Right
+          canon: Ebih_Waterfall_Block_Right
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Alcove
+          req: ^mode == 'drone' and Ebih_Waterfall_Block_Right
+        - to: Alcove
+          req: $block_clip and not Ebih_Waterfall_Block_Right
+          time: 2
     - name: Waterfall Center Right
       coord: [23.25, 10.3]
       local:
-        - to: Waterfall Center Left
+        - to: Waterfall Center Center
         - to: Alcove Right
         - to: Waterfall Right
+    - name: Waterfall Center Center
+      coord: [23, 10.3]
+      local:
+        - to: Waterfall Center Right
+        - to: Waterfall Center Left
+      locations:
+        - name: Both Blocks
+          item: Ebih_Waterfall_Both_Blocks
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
     - name: Waterfall Center Left
       coord: [22.5, 10.5]
       local:
-        - to: Waterfall Center Right
+        - to: Waterfall Center Center
           jumps: 3
         - to: Alcove Left
         - to: Under Waterfall
@@ -596,16 +618,53 @@ areas:
       local:
         - to: Waterfall Center Left
         - to: Under Waterfall
+      locations:
+        - name: Block Left
+          item: Ebih_Waterfall_Block_Left
+          canon: Ebih_Waterfall_Block_Left
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
       exits:
         - to: Waterfall Center Left
           req: $grab
           time: 1.25
+        - to: Alcove
+          req: ^mode == 'drone' and Ebih_Waterfall_Block_Left
+        - to: Alcove
+          req: $block_clip and not Ebih_Waterfall_Block_Left
+          time: 2
     - name: Alcove
       coord: [23, 10.7]
       locations:
         - name: Pedestal
           item: Bronze_Axe
           tags: [standing]
+        - name: Block Right
+          item: Ebih_Waterfall_Block_Right
+          canon: Ebih_Waterfall_Block_Right
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Block Left
+          item: Ebih_Waterfall_Block_Left
+          canon: Ebih_Waterfall_Block_Left
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Alcove Left
+          req: ^mode == 'drone' and Ebih_Waterfall_Block_Left
+          time: 1.25
+        - to: Alcove Right
+          req: ^mode == 'drone' and Ebih_Waterfall_Block_Right
+          time: 1.25
+        - to: Alcove Right
+          req: $hook and not Ebih_Waterfall_Block_Right
+          time: 1.5
+        - to: Alcove Left
+          req: $hook and not Ebih_Waterfall_Block_Left
+          time: 5  # extra difficult
     - name: Under Waterfall
       coord: [22.25, 10.8]
       local:

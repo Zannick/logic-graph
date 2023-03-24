@@ -67,6 +67,14 @@ pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
 }
+pub fn access_block_clip_and_not_ebih_waterfall_block_left(ctx: &Context) -> bool {
+    // $block_clip and not Ebih_Waterfall_Block_Left
+    (helper__block_clip!(ctx) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
+}
+pub fn access_block_clip_and_not_ebih_waterfall_block_right(ctx: &Context) -> bool {
+    // $block_clip and not Ebih_Waterfall_Block_Right
+    (helper__block_clip!(ctx) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
+}
 pub fn access_boomerang(ctx: &Context) -> bool {
     // $boomerang
     helper__boomerang!(ctx)
@@ -276,6 +284,14 @@ pub fn access_hook_and_hover_and_underwater_movement(ctx: &Context) -> bool {
     // $hook and $hover and Underwater_Movement
     ((helper__hook!(ctx) && helper__hover!(ctx)) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_hook_and_not_ebih_waterfall_block_left(ctx: &Context) -> bool {
+    // $hook and not Ebih_Waterfall_Block_Left
+    (helper__hook!(ctx) && !ctx.has(Item::Ebih_Waterfall_Block_Left))
+}
+pub fn access_hook_and_not_ebih_waterfall_block_right(ctx: &Context) -> bool {
+    // $hook and not Ebih_Waterfall_Block_Right
+    (helper__hook!(ctx) && !ctx.has(Item::Ebih_Waterfall_Block_Right))
+}
 pub fn access_hook_and_underwater_movement(ctx: &Context) -> bool {
     // $hook and Underwater_Movement
     (helper__hook!(ctx) && ctx.has(Item::Underwater_Movement))
@@ -339,6 +355,14 @@ pub fn access_mist_upgrade(ctx: &Context) -> bool {
 pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
+}
+pub fn access_mode__drone_and_ebih_waterfall_block_left(ctx: &Context) -> bool {
+    // ^mode == 'drone' and Ebih_Waterfall_Block_Left
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Left))
+}
+pub fn access_mode__drone_and_ebih_waterfall_block_right(ctx: &Context) -> bool {
+    // ^mode == 'drone' and Ebih_Waterfall_Block_Right
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
 pub fn access_nanite_mist(ctx: &Context) -> bool {
     // Nanite_Mist
@@ -624,4 +648,15 @@ pub fn action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right
     ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
     ctx.add_item(Item::Amagi_Stronghold_Wall_2);
     ctx.add_item(Item::Amagi_Stronghold_Boulder_2);
+}
+pub fn action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(
+    ctx: &mut Context,
+) {
+    // $skip(`Ebih > Waterfall > Alcove > Block Left`); $skip(`Ebih > Waterfall > Alcove > Block Right`); $skip(`Ebih > Waterfall > Alcove Left > Block Left`); $skip(`Ebih > Waterfall > Alcove Right > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Left);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove__Block_Right);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left);
+    ctx.skip(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right);
+    ctx.add_item(Item::Ebih_Waterfall_Block_Right);
+    ctx.add_item(Item::Ebih_Waterfall_Block_Left);
 }

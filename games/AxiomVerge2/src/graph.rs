@@ -512,6 +512,7 @@ pub enum SpotId {
     Ebih__Waterfall__Top_Waterfall,
     Ebih__Waterfall__Under_Waterfall,
     Ebih__Waterfall__Wall_Right,
+    Ebih__Waterfall__Waterfall_Center_Center,
     Ebih__Waterfall__Waterfall_Center_Left,
     Ebih__Waterfall__Waterfall_Center_Right,
     Ebih__Waterfall__Waterfall_Left,
@@ -1203,6 +1204,9 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Ebih > Waterfall > Under Waterfall")
             }
             SpotId::Ebih__Waterfall__Wall_Right => write!(f, "{}", "Ebih > Waterfall > Wall Right"),
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center => {
+                write!(f, "{}", "Ebih > Waterfall > Waterfall Center Center")
+            }
             SpotId::Ebih__Waterfall__Waterfall_Center_Left => {
                 write!(f, "{}", "Ebih > Waterfall > Waterfall Center Left")
             }
@@ -1878,6 +1882,9 @@ impl std::str::FromStr for SpotId {
             "Ebih > Waterfall > Top Waterfall" => Ok(SpotId::Ebih__Waterfall__Top_Waterfall),
             "Ebih > Waterfall > Under Waterfall" => Ok(SpotId::Ebih__Waterfall__Under_Waterfall),
             "Ebih > Waterfall > Wall Right" => Ok(SpotId::Ebih__Waterfall__Wall_Right),
+            "Ebih > Waterfall > Waterfall Center Center" => {
+                Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Center)
+            }
             "Ebih > Waterfall > Waterfall Center Left" => {
                 Ok(SpotId::Ebih__Waterfall__Waterfall_Center_Left)
             }
@@ -2116,7 +2123,12 @@ pub enum LocationId {
     Ebih__Grid_25_2_6__Pit__Item,
     Ebih__Grid_26_10_11__Ledge__Note,
     Ebih__Tent_Interior__Desk__Note,
+    Ebih__Waterfall__Alcove__Block_Left,
+    Ebih__Waterfall__Alcove__Block_Right,
     Ebih__Waterfall__Alcove__Pedestal,
+    Ebih__Waterfall__Alcove_Left__Block_Left,
+    Ebih__Waterfall__Alcove_Right__Block_Right,
+    Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
     Glacier__Apocalypse_Entry__Terminal__Escape,
     Glacier__Boomerang_Room__Pedestal__Item,
     Glacier__Boomerang_Room__Pedestal__Switch,
@@ -2337,9 +2349,26 @@ impl fmt::Display for LocationId {
             LocationId::Ebih__Tent_Interior__Desk__Note => {
                 write!(f, "{}", "Ebih > Tent Interior > Desk: Note")
             }
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove: Block Left")
+            }
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove: Block Right")
+            }
             LocationId::Ebih__Waterfall__Alcove__Pedestal => {
                 write!(f, "{}", "Ebih > Waterfall > Alcove: Pedestal")
             }
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove Left: Block Left")
+            }
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
+                write!(f, "{}", "Ebih > Waterfall > Alcove Right: Block Right")
+            }
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(
+                f,
+                "{}",
+                "Ebih > Waterfall > Waterfall Center Center: Both Blocks"
+            ),
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 write!(f, "{}", "Glacier > Apocalypse Entry > Terminal: Escape")
             }
@@ -2631,8 +2660,23 @@ impl std::str::FromStr for LocationId {
                 Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
             }
             "Ebih > Tent Interior > Desk: Note" => Ok(LocationId::Ebih__Tent_Interior__Desk__Note),
+            "Ebih > Waterfall > Alcove: Block Left" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left)
+            }
+            "Ebih > Waterfall > Alcove: Block Right" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right)
+            }
             "Ebih > Waterfall > Alcove: Pedestal" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal)
+            }
+            "Ebih > Waterfall > Alcove Left: Block Left" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left)
+            }
+            "Ebih > Waterfall > Alcove Right: Block Right" => {
+                Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right)
+            }
+            "Ebih > Waterfall > Waterfall Center Center: Both Blocks" => {
+                Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
             }
             "Glacier > Apocalypse Entry > Terminal: Escape" => {
                 Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape)
@@ -2933,7 +2977,15 @@ pub enum ExitId {
     Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1,
     Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1,
     Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1,
+    Ebih__Waterfall__Alcove__ex__Alcove_Left_1,
+    Ebih__Waterfall__Alcove__ex__Alcove_Left_2,
+    Ebih__Waterfall__Alcove__ex__Alcove_Right_1,
+    Ebih__Waterfall__Alcove__ex__Alcove_Right_2,
+    Ebih__Waterfall__Alcove_Left__ex__Alcove_1,
+    Ebih__Waterfall__Alcove_Left__ex__Alcove_2,
     Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1,
+    Ebih__Waterfall__Alcove_Right__ex__Alcove_1,
+    Ebih__Waterfall__Alcove_Right__ex__Alcove_2,
     Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1,
     Ebih__Waterfall__Below_Tree__ex__Big_Tree_1,
     Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1,
@@ -3211,7 +3263,15 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)"),
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => write!(f, "{}", "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)"),
             ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => write!(f, "{}", "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)"),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Left (1)"),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Left (2)"),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Right (1)"),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2 => write!(f, "{}", "Ebih > Waterfall > Alcove ==> Alcove Right (2)"),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Alcove (1)"),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Alcove (2)"),
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)"),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => write!(f, "{}", "Ebih > Waterfall > Alcove Right ==> Alcove (1)"),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2 => write!(f, "{}", "Ebih > Waterfall > Alcove Right ==> Alcove (2)"),
             ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => write!(f, "{}", "Ebih > Waterfall > Below Left Switch ==> Ledge Below Hole (1)"),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Below Tree ==> Big Tree (1)"),
             ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => write!(f, "{}", "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)"),
@@ -3494,7 +3554,15 @@ impl std::str::FromStr for ExitId {
             "Ebih > Observation Tower Room > West 10 ==> Grid 26,10-11 > East 10 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1),
             "Ebih > Observation Tower Room > West 9 ==> Ebih East > East 9 (1)" => Ok(ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1),
             "Ebih > Tent Interior > Entry ==> Base Camp > Tent Entry (1)" => Ok(ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1),
+            "Ebih > Waterfall > Alcove ==> Alcove Left (1)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1),
+            "Ebih > Waterfall > Alcove ==> Alcove Left (2)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2),
+            "Ebih > Waterfall > Alcove ==> Alcove Right (1)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1),
+            "Ebih > Waterfall > Alcove ==> Alcove Right (2)" => Ok(ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2),
+            "Ebih > Waterfall > Alcove Left ==> Alcove (1)" => Ok(ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1),
+            "Ebih > Waterfall > Alcove Left ==> Alcove (2)" => Ok(ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2),
             "Ebih > Waterfall > Alcove Left ==> Waterfall Center Left (1)" => Ok(ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1),
+            "Ebih > Waterfall > Alcove Right ==> Alcove (1)" => Ok(ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1),
+            "Ebih > Waterfall > Alcove Right ==> Alcove (2)" => Ok(ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2),
             "Ebih > Waterfall > Below Left Switch ==> Ledge Below Hole (1)" => Ok(ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1),
             "Ebih > Waterfall > Below Tree ==> Big Tree (1)" => Ok(ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1),
             "Ebih > Waterfall > Cave Entrance ==> Cave > Entry (1)" => Ok(ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1),
@@ -3823,6 +3891,8 @@ pub enum CanonId {
     Base_Camp_Node,
     Melee_Charge,
     Ebih_Bush_Flask,
+    Ebih_Waterfall_Block_Right,
+    Ebih_Waterfall_Block_Left,
     Infect,
     Defeat_Ebih_Alu,
     Remote_Drone,
@@ -3846,6 +3916,8 @@ impl fmt::Display for CanonId {
             CanonId::Base_Camp_Node => write!(f, "{}", "Base Camp Node"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
+            CanonId::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
+            CanonId::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
             CanonId::Infect => write!(f, "{}", "Infect"),
             CanonId::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
@@ -3871,6 +3943,8 @@ impl std::str::FromStr for CanonId {
             "Base Camp Node" => Ok(CanonId::Base_Camp_Node),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
+            "Ebih_Waterfall_Block_Right" => Ok(CanonId::Ebih_Waterfall_Block_Right),
+            "Ebih_Waterfall_Block_Left" => Ok(CanonId::Ebih_Waterfall_Block_Left),
             "Infect" => Ok(CanonId::Infect),
             "Defeat_Ebih_Alu" => Ok(CanonId::Defeat_Ebih_Alu),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
@@ -4123,6 +4197,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Waterfall__Waterfall_Right
         | SpotId::Ebih__Waterfall__Alcove_Right
         | SpotId::Ebih__Waterfall__Waterfall_Center_Right
+        | SpotId::Ebih__Waterfall__Waterfall_Center_Center
         | SpotId::Ebih__Waterfall__Waterfall_Center_Left
         | SpotId::Ebih__Waterfall__Alcove_Left
         | SpotId::Ebih__Waterfall__Alcove
@@ -4511,6 +4586,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Waterfall__Waterfall_Right
         | SpotId::Ebih__Waterfall__Alcove_Right
         | SpotId::Ebih__Waterfall__Waterfall_Center_Right
+        | SpotId::Ebih__Waterfall__Waterfall_Center_Center
         | SpotId::Ebih__Waterfall__Waterfall_Center_Left
         | SpotId::Ebih__Waterfall__Alcove_Left
         | SpotId::Ebih__Waterfall__Alcove
@@ -4817,7 +4893,14 @@ impl world::Accessible for Location {
             LocationId::Ebih__Grid_25_2_6__Pit__Item => true,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
             LocationId::Ebih__Tent_Interior__Desk__Note => true,
+            LocationId::Ebih__Waterfall__Alcove__Block_Left => rules::access_shockwave(&ctx),
+            LocationId::Ebih__Waterfall__Alcove__Block_Right => rules::access_shockwave(&ctx),
             LocationId::Ebih__Waterfall__Alcove__Pedestal => true,
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::access_shockwave(&ctx),
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => rules::access_shockwave(&ctx),
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
+                rules::access_shockwave(&ctx)
+            }
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 rules::access_apocalypse_bomb(&ctx)
             }
@@ -5121,7 +5204,15 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
             ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => true,
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => rules::access_mode__drone_and_ebih_waterfall_block_left(&ctx),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => rules::access_hook_and_not_ebih_waterfall_block_left(&ctx),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => rules::access_mode__drone_and_ebih_waterfall_block_right(&ctx),
+            ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2 => rules::access_hook_and_not_ebih_waterfall_block_right(&ctx),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => rules::access_mode__drone_and_ebih_waterfall_block_left(&ctx),
+            ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2 => rules::access_block_clip_and_not_ebih_waterfall_block_left(&ctx),
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => rules::access_mode__drone_and_ebih_waterfall_block_right(&ctx),
+            ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2 => rules::access_block_clip_and_not_ebih_waterfall_block_right(&ctx),
             ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => rules::access_mode__drone(&ctx),
             ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => true,
@@ -5476,7 +5567,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 373],
+    raw_spots: [SpotId; 374],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -5487,7 +5578,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 91;
+    const NUM_LOCATIONS: i32 = 96;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -5565,6 +5656,14 @@ impl world::World for World {
             CanonId::Ebih_Bush_Flask => vec![
                 LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
                 LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
+            ],
+            CanonId::Ebih_Waterfall_Block_Right => vec![
+                LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
+                LocationId::Ebih__Waterfall__Alcove__Block_Right,
+            ],
+            CanonId::Ebih_Waterfall_Block_Left => vec![
+                LocationId::Ebih__Waterfall__Alcove_Left__Block_Left,
+                LocationId::Ebih__Waterfall__Alcove__Block_Left,
             ],
             CanonId::Infect => vec![
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
@@ -5679,7 +5778,18 @@ impl world::World for World {
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
                 SpotId::Ebih__Grid_25_10_12__Hidden_Bush
             }
-            LocationId::Ebih__Waterfall__Alcove__Pedestal => SpotId::Ebih__Waterfall__Alcove,
+            LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
+                SpotId::Ebih__Waterfall__Alcove_Right
+            }
+            LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
+                SpotId::Ebih__Waterfall__Waterfall_Center_Center
+            }
+            LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
+                SpotId::Ebih__Waterfall__Alcove_Left
+            }
+            LocationId::Ebih__Waterfall__Alcove__Block_Left
+            | LocationId::Ebih__Waterfall__Alcove__Block_Right
+            | LocationId::Ebih__Waterfall__Alcove__Pedestal => SpotId::Ebih__Waterfall__Alcove,
             LocationId::Ebih__Ebih_West__Alcove__Tablet => SpotId::Ebih__Ebih_West__Alcove,
             LocationId::Ebih__Cave__Entry__Health => SpotId::Ebih__Cave__Entry,
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
@@ -6112,6 +6222,7 @@ impl World {
                 SpotId::Ebih__Waterfall__Top_Waterfall,
                 SpotId::Ebih__Waterfall__Under_Waterfall,
                 SpotId::Ebih__Waterfall__Wall_Right,
+                SpotId::Ebih__Waterfall__Waterfall_Center_Center,
                 SpotId::Ebih__Waterfall__Waterfall_Center_Left,
                 SpotId::Ebih__Waterfall__Waterfall_Center_Right,
                 SpotId::Ebih__Waterfall__Waterfall_Left,
@@ -6495,12 +6606,52 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 5500,
             exit_id: None,
         },
+        LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => Location {
+            id: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
+            canonical: CanonId::Ebih_Waterfall_Block_Right,
+            item: Item::Ebih_Waterfall_Block_Right,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => Location {
+            id: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
+            canonical: CanonId::None,
+            item: Item::Ebih_Waterfall_Both_Blocks,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => Location {
+            id: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left,
+            canonical: CanonId::Ebih_Waterfall_Block_Left,
+            item: Item::Ebih_Waterfall_Block_Left,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
         LocationId::Ebih__Waterfall__Alcove__Pedestal => Location {
             id: LocationId::Ebih__Waterfall__Alcove__Pedestal,
             canonical: CanonId::None,
             item: Item::Bronze_Axe,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Ebih__Waterfall__Alcove__Block_Right => Location {
+            id: LocationId::Ebih__Waterfall__Alcove__Block_Right,
+            canonical: CanonId::Ebih_Waterfall_Block_Right,
+            item: Item::Ebih_Waterfall_Block_Right,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Ebih__Waterfall__Alcove__Block_Left => Location {
+            id: LocationId::Ebih__Waterfall__Alcove__Block_Left,
+            canonical: CanonId::Ebih_Waterfall_Block_Left,
+            item: Item::Ebih_Waterfall_Block_Left,
+            price: Currency::Energy(100),
+            time: 3500,
             exit_id: None,
         },
         LocationId::Ebih__Ebih_West__Alcove__Tablet => Location {
@@ -7784,10 +7935,66 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1,
+            time: 1000,
+            dest: SpotId::Ebih__Waterfall__Alcove,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2,
+            time: 1200,
+            dest: SpotId::Ebih__Waterfall__Alcove,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1,
             time: 1250,
             dest: SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1,
+            time: 1000,
+            dest: SpotId::Ebih__Waterfall__Alcove,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_2,
+            time: 2000,
+            dest: SpotId::Ebih__Waterfall__Alcove,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1,
+            time: 1250,
+            dest: SpotId::Ebih__Waterfall__Alcove_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1,
+            time: 1250,
+            dest: SpotId::Ebih__Waterfall__Alcove_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2,
+            time: 1500,
+            dest: SpotId::Ebih__Waterfall__Alcove_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => Exit {
+            id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_2,
+            time: 5000,
+            dest: SpotId::Ebih__Waterfall__Alcove_Left,
             price: Currency::Free,
             loc_id: None,
         },
@@ -11856,10 +12063,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Waterfall__Alcove_Right => Spot {
             id: SpotId::Ebih__Waterfall__Alcove_Right,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right.into_usize(),
+                end: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -11873,6 +12082,23 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             locations: Range {
                 start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
+                end: SpotId::Ebih__Waterfall__West_Main_Path.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Waterfall__Waterfall_Center_Center => Spot {
+            id: SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            locations: Range {
+                start: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize(),
+                end: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -11904,10 +12130,11 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Waterfall__Alcove_Left => Spot {
             id: SpotId::Ebih__Waterfall__Alcove_Left,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left.into_usize(),
+                end: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left.into_usize() + 1,
             },
             exits: Range {
-                start: ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1.into_usize(),
+                start: ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1.into_usize(),
                 end: ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1.into_usize() + 1,
             },
             actions: Range {
@@ -11921,11 +12148,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Waterfall__Alcove => Spot {
             id: SpotId::Ebih__Waterfall__Alcove,
             locations: Range {
-                start: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
+                start: LocationId::Ebih__Waterfall__Alcove__Block_Left.into_usize(),
                 end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -15578,12 +15806,22 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Waterfall__East_11 => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Near_East_Tree => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Waterfall_Right => Range { start: 0, end: 0 },
-        SpotId::Ebih__Waterfall__Alcove_Right => Range { start: 0, end: 0 },
+        SpotId::Ebih__Waterfall__Alcove_Right => Range {
+            start: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right.into_usize(),
+            end: LocationId::Ebih__Waterfall__Alcove_Right__Block_Right.into_usize() + 1,
+        },
         SpotId::Ebih__Waterfall__Waterfall_Center_Right => Range { start: 0, end: 0 },
+        SpotId::Ebih__Waterfall__Waterfall_Center_Center => Range {
+            start: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize(),
+            end: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize() + 1,
+        },
         SpotId::Ebih__Waterfall__Waterfall_Center_Left => Range { start: 0, end: 0 },
-        SpotId::Ebih__Waterfall__Alcove_Left => Range { start: 0, end: 0 },
+        SpotId::Ebih__Waterfall__Alcove_Left => Range {
+            start: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left.into_usize(),
+            end: LocationId::Ebih__Waterfall__Alcove_Left__Block_Left.into_usize() + 1,
+        },
         SpotId::Ebih__Waterfall__Alcove => Range {
-            start: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
+            start: LocationId::Ebih__Waterfall__Alcove__Block_Left.into_usize(),
             end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize() + 1,
         },
         SpotId::Ebih__Waterfall__Under_Waterfall => Range { start: 0, end: 0 },
@@ -15925,8 +16163,8 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             end: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush.into_usize(),
         },
         AreaId::Ebih__Waterfall => Range {
-            start: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
-            end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
+            start: LocationId::Ebih__Waterfall__Alcove__Block_Left.into_usize(),
+            end: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize(),
         },
         AreaId::Ebih__Ebih_West => Range {
             start: LocationId::Ebih__Ebih_West__Alcove__Tablet.into_usize(),
@@ -16017,7 +16255,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
         RegionId::Ebih => Range {
             start: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side
                 .into_usize(),
-            end: LocationId::Ebih__Waterfall__Alcove__Pedestal.into_usize(),
+            end: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize(),
         },
         RegionId::Giguna => Range { start: 0, end: 0 },
         RegionId::Glacier => Range {
