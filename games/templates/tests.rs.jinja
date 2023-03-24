@@ -14,7 +14,7 @@ use lib{{ package }}::items::Item;
 %% for item in setup.with
 %% if item in bfp.varmap
     {{ ctx }}.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
-%% else
+%% elif item not in unused_items
     {{ ctx }}.{{ item.split('{', 1)[0]|lower }} =
     {%- if '{' in item %} {{ item[item.index('{') + 1:-1] }}{% elif gl.item_max_counts()[item] > 1 %} 1{% else %} true{% endif %};
 %% endif

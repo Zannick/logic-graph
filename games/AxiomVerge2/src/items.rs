@@ -200,6 +200,7 @@ pub fn unused_item(id: Item) -> bool {
         | Item::Bronze_Axe
         | Item::Companies_Layoff
         | Item::Compass
+        | Item::Dear_Ernest
         | Item::Escape
         | Item::Health
         | Item::Health_Fragment

@@ -181,28 +181,27 @@ pub mod flags {
             const ANUMAN = 1 << 21;
             const APOCALYPSE_BOMB = 1 << 22;
             const BOOMERANG = 1 << 23;
-            const DEAR_ERNEST = 1 << 24;
-            const DEFEAT_EBIH_ALU = 1 << 25;
-            const DEFEAT_MUS_A_M20 = 1 << 26;
-            const DRONE_HOVER = 1 << 27;
-            const ICE_AXE = 1 << 28;
-            const INFECTION_SPEED = 1 << 29;
-            const LEDGE_GRAB = 1 << 30;
-            const MIST_UPGRADE = 1 << 31;
+            const DEFEAT_EBIH_ALU = 1 << 24;
+            const DEFEAT_MUS_A_M20 = 1 << 25;
+            const DRONE_HOVER = 1 << 26;
+            const ICE_AXE = 1 << 27;
+            const INFECTION_SPEED = 1 << 28;
+            const LEDGE_GRAB = 1 << 29;
+            const MIST_UPGRADE = 1 << 30;
+            const NANITE_MIST = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
-        pub struct ContextBits2 : u16 {
-            const NANITE_MIST = 1 << 0;
-            const REMOTE_DRONE = 1 << 1;
-            const SHOCKWAVE = 1 << 2;
-            const SLINGSHOT_HOOK = 1 << 3;
-            const STATION_POWER = 1 << 4;
-            const SWITCH_36_11 = 1 << 5;
-            const SWITCH_40_12 = 1 << 6;
-            const UNDERWATER_MOVEMENT = 1 << 7;
-            const WALL_CLIMB = 1 << 8;
+        pub struct ContextBits2 : u8 {
+            const REMOTE_DRONE = 1 << 0;
+            const SHOCKWAVE = 1 << 1;
+            const SLINGSHOT_HOOK = 1 << 2;
+            const STATION_POWER = 1 << 3;
+            const SWITCH_36_11 = 1 << 4;
+            const SWITCH_40_12 = 1 << 5;
+            const UNDERWATER_MOVEMENT = 1 << 6;
+            const WALL_CLIMB = 1 << 7;
         }
     }
 }
@@ -289,7 +288,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = 40;
+    const NUM_ITEMS: i32 = 39;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -321,7 +320,6 @@ impl context::Ctx for Context {
             Item::Anuman => self.cbits1.contains(flags::ContextBits1::ANUMAN),
             Item::Apocalypse_Bomb => self.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
-            Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU),
             Item::Defeat_MUS_A_M20 => self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20),
             Item::Drone_Hover => self.cbits1.contains(flags::ContextBits1::DRONE_HOVER),
@@ -337,7 +335,7 @@ impl context::Ctx for Context {
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
             Item::Mist_Upgrade => self.cbits1.contains(flags::ContextBits1::MIST_UPGRADE),
-            Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
+            Item::Nanite_Mist => self.cbits1.contains(flags::ContextBits1::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
@@ -395,10 +393,6 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::APOCALYPSE_BOMB)
                 .into(),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG).into(),
-            Item::Dear_Ernest => self
-                .cbits1
-                .contains(flags::ContextBits1::DEAR_ERNEST)
-                .into(),
             Item::Defeat_Ebih_Alu => self
                 .cbits1
                 .contains(flags::ContextBits1::DEFEAT_EBIH_ALU)
@@ -430,8 +424,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::MIST_UPGRADE)
                 .into(),
             Item::Nanite_Mist => self
-                .cbits2
-                .contains(flags::ContextBits2::NANITE_MIST)
+                .cbits1
+                .contains(flags::ContextBits1::NANITE_MIST)
                 .into(),
             Item::Nano_Points => self.nano_points.into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
@@ -512,9 +506,6 @@ impl context::Ctx for Context {
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             }
-            Item::Dear_Ernest => {
-                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
-            }
             Item::Defeat_Ebih_Alu => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             }
@@ -563,7 +554,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
-                self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
+                self.cbits1.insert(flags::ContextBits1::NANITE_MIST);
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
@@ -1258,9 +1249,6 @@ impl Context {
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             }
-            Item::Dear_Ernest => {
-                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
-            }
             Item::Defeat_Ebih_Alu => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             }
@@ -1307,7 +1295,7 @@ impl Context {
                 self.cbits1.insert(flags::ContextBits1::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
-                self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
+                self.cbits1.insert(flags::ContextBits1::NANITE_MIST);
             }
             Item::Nano_Points => {
                 self.nano_points += 1;

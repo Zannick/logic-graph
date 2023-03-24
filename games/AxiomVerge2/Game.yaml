@@ -144,7 +144,6 @@ helpers:
   $unlock2: Infect{2}
   $unlock3: Infect{3}
 
-  $all_notes: Dear_Ernest
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
