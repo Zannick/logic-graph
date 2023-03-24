@@ -211,7 +211,7 @@ areas:
         - name: Remote Urn
           item: Melee_Charge
           canon: Melee_Charge
-          req: Boomerang
+          req: $boomerang
           tags: [remote_urn]
       exits:
         - to: Base Camp > Building Entry
@@ -501,8 +501,7 @@ areas:
         - name: Remote Bush
           canon: Ebih Bush Flask
           req: $bs
-          time: 6
-          tags: [flask]
+          tags: [nearby_flask]
       exits:
         - to: Grid 26,10-11 > West 10
           tags: [xshift]
@@ -1079,7 +1078,7 @@ areas:
           item: Infect
           canon: Infect
           req: Boomerang
-          tags: [urn]
+          tags: [nearby_urn]
       actions:
         - name: Activate Ride
           req: Infect and not ^_platform2_moved
@@ -1407,8 +1406,8 @@ areas:
           to: Portal
           req: Boomerang
           time: 1
-          item_time: 5.5
-          tags: [urn]
+          item_time: 6
+          tags: [nearby_urn]
     - name: Portal Exit
       coord: [24.5, 4.45]
       local:

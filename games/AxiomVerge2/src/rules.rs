@@ -16,6 +16,36 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
+pub fn access___amagi_stronghold_boulder_1_or_amagi_stronghold_wall_and_boulder_1(
+    ctx: &Context,
+) -> bool {
+    // (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1)
+    (ctx.has(Item::Amagi_Stronghold_Boulder_1)
+        || ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1))
+}
+pub fn access___amagi_stronghold_boulder_1_or_amagi_stronghold_wall_and_boulder_1_and_underwater_movement_and___grab_or_climb(
+    ctx: &Context,
+) -> bool {
+    // (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1) and Underwater_Movement and ($grab or $climb)
+    (((ctx.has(Item::Amagi_Stronghold_Boulder_1)
+        || ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1))
+        && ctx.has(Item::Underwater_Movement))
+        && (helper__grab!(ctx) || helper__climb!(ctx)))
+}
+pub fn access___amagi_stronghold_boulder_2_or_amagi_stronghold_boulder_and_wall_2_and_grab(
+    ctx: &Context,
+) -> bool {
+    // (Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2) and $grab
+    ((ctx.has(Item::Amagi_Stronghold_Boulder_2)
+        || ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2))
+        && helper__grab!(ctx))
+}
+pub fn access___amagi_stronghold_wall_2_or_amagi_stronghold_boulder_and_wall_2(
+    ctx: &Context,
+) -> bool {
+    // (Amagi_Stronghold_Wall_2 or Amagi_Stronghold_Boulder_And_Wall_2)
+    (ctx.has(Item::Amagi_Stronghold_Wall_2) || ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2))
+}
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(ctx: &Context) -> bool {
     // ^_combo and ($grab or $climb)
     (ctx.amagi__main_area__ctx__combo() && (helper__grab!(ctx) || helper__climb!(ctx)))
@@ -28,6 +58,31 @@ pub fn access_amagi__main_area__carving__key_combo__req(ctx: &Context) -> bool {
     // not ^_combo
     !ctx.amagi__main_area__ctx__combo()
 }
+pub fn access_amagi_dragon_eye_passage(ctx: &Context) -> bool {
+    // Amagi_Dragon_Eye_Passage
+    ctx.has(Item::Amagi_Dragon_Eye_Passage)
+}
+pub fn access_amagi_stronghold_boulder_2_or_amagi_stronghold_boulder_and_wall_2(
+    ctx: &Context,
+) -> bool {
+    // Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2
+    (ctx.has(Item::Amagi_Stronghold_Boulder_2)
+        || ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2))
+}
+pub fn access_amagi_stronghold_boulder_and_wall_2(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Boulder_And_Wall_2
+    ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2)
+}
+pub fn access_amagi_stronghold_wall_1_or_amagi_stronghold_wall_and_boulder_1(
+    ctx: &Context,
+) -> bool {
+    // Amagi_Stronghold_Wall_1 or Amagi_Stronghold_Wall_And_Boulder_1
+    (ctx.has(Item::Amagi_Stronghold_Wall_1) || ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1))
+}
+pub fn access_amagi_stronghold_wall_and_boulder_1(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Wall_And_Boulder_1
+    ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1)
+}
 pub fn access_amagi_west_lake_surface_wall(ctx: &Context) -> bool {
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
@@ -37,6 +92,26 @@ pub fn access_apocalypse_bomb(ctx: &Context) -> bool {
     ctx.has(Item::Apocalypse_Bomb)
 }
 pub fn access_boomerang(ctx: &Context) -> bool {
+    // $boomerang
+    helper__boomerang!(ctx)
+}
+pub fn access_boomerang1(ctx: &Context) -> bool {
+    // Boomerang
+    ctx.has(Item::Boomerang)
+}
+pub fn access_boomerang2(ctx: &Context) -> bool {
+    // Boomerang
+    ctx.has(Item::Boomerang)
+}
+pub fn access_boomerang3(ctx: &Context) -> bool {
+    // Boomerang
+    ctx.has(Item::Boomerang)
+}
+pub fn access_boomerang4(ctx: &Context) -> bool {
+    // Boomerang
+    ctx.has(Item::Boomerang)
+}
+pub fn access_boomerang5(ctx: &Context) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
@@ -382,13 +457,13 @@ pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
-pub fn access_remote_drone_and_dear_ernest_and_underwater_movement_and_flask__4(
+pub fn access_remote_drone_and_shockwave_and_underwater_movement_and_flask__5(
     ctx: &Context,
 ) -> bool {
-    // Remote_Drone and Dear_Ernest and Underwater_Movement and Flask{4}
-    (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Dear_Ernest))
+    // Remote_Drone and Shockwave and Underwater_Movement and Flask{5}
+    (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Shockwave))
         && ctx.has(Item::Underwater_Movement))
-        && ctx.count(Item::Flask) >= 4)
+        && ctx.count(Item::Flask) >= 5)
 }
 pub fn access_shockwave(ctx: &Context) -> bool {
     // $shockwave

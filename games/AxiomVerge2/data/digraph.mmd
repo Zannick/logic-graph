@@ -25,6 +25,11 @@ subgraph Amagi
         Amagi__Main_Area__East_19(East 19);
         Amagi__Main_Area__Broken_Wall(Broken Wall);
         Amagi__Main_Area__Wall_Stuck_Spot(Wall Stuck Spot);
+        Amagi__Main_Area__Half_Pillar(Half Pillar);
+        Amagi__Main_Area__Flat_Ruin(Flat Ruin);
+        Amagi__Main_Area__West_Mini_Hill(West Mini-Hill);
+        Amagi__Main_Area__West_18(West 18);
+        Amagi__Main_Area__West_19(West 19);
         Amagi__Main_Area__Secret_Waterfall(Secret Waterfall);
         Amagi__Main_Area__Way_Off_To_The_Side(Way Off To The Side);
     end
@@ -507,10 +512,20 @@ Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__Platform_3
 Amagi__Main_Area__East_15 <--> Glacier__Lake_Main_Entrance__Lake_Access
 Amagi__Main_Area__Platform_2 --> Amagi__Main_Area__West_Shelf
 Amagi__Main_Area__Shallow_End --> Amagi__Main_Area__Waters_Edge
+Amagi__Main_Area__West_15 <--> Amagi__West_Lake__East_15
+Amagi__Main_Area__West_18 <--> Amagi__West_Lake__East_18
+Amagi__Main_Area__West_19 <--> Amagi__West_Lake__East_19
 Amagi__Main_Area__West_Side --> Amagi__Main_Area__Carving
 Amagi__West_Lake__Cavern_Refill_Station --> Amagi__West_Lake__Cavern_Rear_Pillar
+Amagi__West_Lake__Cavern_Refill_Station <--> Amagi__West_Lake__Cavern_Tear_Duct
 Amagi__West_Lake__Northwest_Platform --> Amagi__West_Lake__West_Cliff
-Amagi__West_Lake__Surface_Wall_Right --> Amagi__West_Lake__Surface_Wall_Left
+Amagi__West_Lake__Stronghold_Ceiling_Left <--> Amagi__West_Lake__Stronghold_Middle_Column
+Amagi__West_Lake__Stronghold_Ceiling_Right <--> Amagi__West_Lake__Stronghold_Front_Room
+Amagi__West_Lake__Stronghold_Front_Door <--> Amagi__West_Lake__Stronghold_Front_Room
+Amagi__West_Lake__Stronghold_Item <--> Amagi__West_Lake__Stronghold_Middle_Column
+Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
+Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
+Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
 Antarctica__Building_1W__West_Entry <--> Antarctica__West__Boxes

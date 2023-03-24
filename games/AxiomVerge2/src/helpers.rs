@@ -199,6 +199,17 @@ macro_rules! helper__unlock3 {
     }};
 }
 
+/// $all_notes (  )
+/// Dear_Ernest
+#[macro_export]
+macro_rules! helper__all_notes {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Dear_Ernest)
+    }};
+}
+
 /// $max_energy (  )
 /// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 #[macro_export]

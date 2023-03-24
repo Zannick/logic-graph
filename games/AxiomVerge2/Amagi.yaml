@@ -122,6 +122,9 @@ areas:
       local:
         - to: Carving
           jumps: 1
+      exits:
+        - to: West Lake > East 15
+          tags: [xshift]
     - name: Secret Outcropping
       coord: [27.55, 14.2]
       data:
@@ -145,6 +148,8 @@ areas:
           jumps: 1
           jump_movement: water
         - to: Catwalk Center
+        - to: West 18
+        - to: Flat Ruin
     - name: Catwalk Center
       coord: [28.3, 17.2]
       local:
@@ -211,10 +216,48 @@ areas:
         - to: Wall Stuck Spot
         - to: Save Point
     - name: Wall Stuck Spot
-      coord: [28.35, 18.1]
+      coord: [28.35, 17.9]
       local:
         - to: Broken Wall
           jumps: 1
+    - name: Half Pillar
+      coord: [28, 18.2]
+      local:
+        - to: Broken Wall
+          jumps: 2
+        - to: Flat Ruin
+        - to: West Mini-Hill
+    - name: Flat Ruin
+      coord: [27.5, 18.2]
+      local:
+        - to: West 18
+          jumps: 2
+          jump_movement: water
+        - to: West 19
+        - to: Half Pillar
+        - to: West Mini-Hill
+    - name: West Mini-Hill
+      coord: [27.8, 18.5]
+      local:
+        - to: West 18
+        - to: Flat Ruin
+          jumps: 1
+        - to: Half Pillar
+          jumps: 1
+    - name: West 18
+      coord: [27.05, 17.4]
+      local:
+        - to: Flat Ruin
+      exits:
+        - to: West Lake > East 18
+          tags: [xshift]
+    - name: West 19
+      coord: [27.05, 18.7]
+      local:
+        - to: West Mini-Hill
+      exits:
+        - to: West Lake > East 19
+          tags: [xshift]
 
     - name: Secret Waterfall
       coord: [27.4, 13.4]
@@ -450,6 +493,9 @@ areas:
         water: false
       local:
         - to: East Shore
+      exits:
+        - to: Main Area > West 15
+          tags: [xshift]
     - name: East Shore
       coord: [26.8, 14.8]
       data:
@@ -518,6 +564,9 @@ areas:
           jumps: 1
           jump_movement: water
         - to: Pillar
+      exits:
+        - to: Main Area > West 18
+          tags: [xshift]
     - name: Pillar
       coord: [26.6, 17.9]
       local:
@@ -542,6 +591,9 @@ areas:
           jumps: 1
           jump_movement: water
       # this could probably be done with wall climb... if it mattered
+      exits:
+        - to: Main Area > West 19
+          tags: [xshift]
 
     - name: Somewhat Central Platform
       coord: [25.35, 17.9]
@@ -619,17 +671,17 @@ areas:
         - to: Cavern Jaw
         - to: Cavern Front Pillar
       locations:
-        - name: Break Wall
-          item: Amagi_Dragon_Eye_Passage
-          canon: Amagi_Dragon_Eye_Passage
-          req: $shockwave
-          price: 100
-          tags: [shockwave]
         - name: Free Broken Wall
           item: Amagi_Dragon_Eye_Passage
           canon: Amagi_Dragon_Eye_Passage
           req: Defeat_MUS_A_M20
           time: 0
+        - name: Break Wall
+          item: Amagi_Dragon_Eye_Passage
+          canon: Amagi_Dragon_Eye_Passage
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
       hybrid:
         - name: Defeat MUS A M20
           to: Cavern Rear Pillar
@@ -639,72 +691,287 @@ areas:
           # when the time is subsumed by boss movement
           price: 300
           time: 56
-          tags: [shockwave]
+          tags: [shockwave, event]
+      exits:
+        - to: Cavern Tear Duct
+          req: Amagi_Dragon_Eye_Passage
+          time: 2.8
     - name: Cavern Tear Duct
       coord: [24.4, 16.2]
+      local:
+        - to: Cavern Eye
+      locations:
+        - name: Remote Flask
+          item: Flask
+          canon: Amagi Dragon Eye Flask
+          req: $boomerang
+          tags: [nearby_flask]
+      exits:
+        - to: Cavern Refill Station
+          req: Amagi_Dragon_Eye_Passage
+          time: 2.8
     - name: Cavern Eye
       coord: [24.6, 16.4]
+      local:
+        - to: Cavern Tear Duct
+          jumps: 1
+      locations:
+        - name: Item
+          item: Flask
+          canon: Amagi Dragon Eye Flask
+          tags: [flask]
 
     - name: Cavern Front Pillar
       coord: [23.3, 16.2]
+      local:
+        - to: Cavern Refill Station
+        - to: Cavern Middle Pillar
+        - to: Cavern Jaw
     - name: Cavern Middle Pillar
       coord: [23.05, 16.5]
+      local:
+        - to: Cavern Lower Trachea
+          thru: [22.5, 17.5]
+        - to: Cavern Rear Pillar
+        - to: Cavern Front Pillar
+          jumps: 1
+          jump_movement: water
     - name: Cavern Rear Pillar
       coord: [22.7, 15.9]
+      local:
+        - to: Cavern Middle Pillar
+      locations:
+        - name: Boss Reward
+          item: Flask
+          req: Defeat_MUS_A_M20
+          tags: [flask]
 
-    # This might not be relevant!
-    #- name: Cavern East Trachea
-    #  coord: [22.5, 17.5]
-    #- name: Cavern West Trachea
-    #  coord: [22.2, 17.3]
     - name: Cavern Lower Trachea
       coord: [22.4, 18.2]
       local:
         - to: Cavern Middle Pillar
-          jumps: 5
+          thru: [22.5, 17.5]
+          jumps: [2, 3]
           jump_movement: water
         - to: Stronghold Top
 
     - name: Stronghold Top
       coord: [23.3, 19.1]
+      local:
+        - to: Cavern Lower Trachea
+          jumps: 3
+          jump_movement: water
+        - to: Stronghold Item
+      hybrid:
+        - name: Remote Urn
+          to: Stronghold Item
+          item: Shockwave
+          canon: Shockwave
+          req: $boomerang
+          time: 1
+          item_time: 5.5
+          tags: [nearby_urn]
     - name: Stronghold Item
       coord: [23.4, 19.8]
+      local:
+        - to: Stronghold Rear Wall
+          jumps: 1
+      locations:
+        - name: Item
+          item: Shockwave
+          canon: Shockwave
+          tags: [urn]
+        - name: Break Wall
+          item: Amagi_Stronghold_Wall_And_Boulder_1
+          canon: Amagi Stronghold Wall 1
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Stronghold Middle Column
+          req: Amagi_Stronghold_Wall_1 or Amagi_Stronghold_Wall_And_Boulder_1
     - name: Stronghold Rear Wall
       coord: [23.1, 19.6]
+      local:
+        - to: Stronghold Item
+      locations:
+        - name: Break Left Wall
+          item: Amagi_Stronghold_Left_Wall
+          canon: Amagi Stronghold Left Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
     - name: Stronghold Middle Column
       coord: [23.7, 19.7]
+      locations:
+        - name: Break Wall
+          item: Amagi_Stronghold_Wall_1
+          canon: Amagi Stronghold Wall 1
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Stronghold Item
+          req: Amagi_Stronghold_Wall_1 or Amagi_Stronghold_Wall_And_Boulder_1
+        - to: Stronghold Ceiling Left
+          req: (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1) and Underwater_Movement and ($grab or $climb)
     - name: Stronghold Ceiling Left
       coord: [23.9, 19.1]
+      local:
+        - to: Stronghold Ceiling Right
+      locations:
+        - name: Free Boulder
+          item: Amagi_Stronghold_Boulder_1
+          canon: Amagi Stronghold Boulder 1
+          req: Amagi_Stronghold_Wall_And_Boulder_1
+          time: 0
+          tags: [event]
+        - name: Knock Down Left Boulder
+          item: Amagi_Stronghold_Boulder_1
+          canon: Amagi Stronghold Boulder 1
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Stronghold Middle Column
+          req: (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1)
+          time: .8
     - name: Stronghold Ceiling Right
       coord: [24.1, 19.1]
+      local:
+        - to: Stronghold Ceiling Left
+      locations:
+        - name: Free Boulder
+          item: Amagi_Stronghold_Boulder_2
+          canon: Amagi Stronghold Boulder 2
+          req: Amagi_Stronghold_Boulder_And_Wall_2
+          time: 0
+          tags: [event]
+        - name: Knock Down Right Boulder
+          item: Amagi_Stronghold_Boulder_2
+          canon: Amagi Stronghold Boulder 2
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Stronghold Front Room
+          req: Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2
     - name: Stronghold Front Room
       coord: [24.4, 19.7]
+      locations:
+        - name: Break Wall
+          item: Amagi_Stronghold_Wall_2
+          canon: Amagi Stronghold Wall 2
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Stronghold Ceiling Right
+          req: (Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2) and $grab
+        - to: Stronghold Front Door
+          req: (Amagi_Stronghold_Wall_2 or Amagi_Stronghold_Boulder_And_Wall_2)
     - name: Stronghold Front Door
       coord: [24.7, 19.8]
+      local:
+        - to: Some Rock
+          jumps: 2
+          jump_movement: water
+        - to: Small Hill
+          jumps: 2
+      locations:
+        - name: Break Wall
+          item: Amagi_Stronghold_Boulder_And_Wall_2
+          canon: Amagi Stronghold Wall 2
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Stronghold Front Room
+          req: (Amagi_Stronghold_Wall_2 or Amagi_Stronghold_Boulder_And_Wall_2)
 
     - name: Some Rock
       coord: [25, 19]
+      local:
+        - to: Cavern Chin
+          jumps: 2
+          jump_movement: water
+        - to: Somewhat Central Platform
+          jumps: 3
+          jump_movement: water
+        - to: Stronghold Front Door
+        - to: Small Hill
+        - to: Tentacle Gap
+          jumps: 2
+          jump_movement: water
     - name: Small Hill
       coord: [25.35, 19.4]
+      local:
+        - to: Stronghold Front Door
+        - to: Some Rock
+          jumps: 2
+          jump_movement: water
+        - to: Tentacle Gap
+          jumps: 3
+          jump_movement: water
+        - to: Left of Enemy
     - name: Tentacle Gap
       coord: [26.2, 18.7]
+      local:
+        - to: Some Rock
+        - to: Pillar
+          jumps: 2
+          jump_movement: water
+        - to: Left of Enemy
+        - to: East 20
     - name: Left of Enemy
       coord: [26.1, 19.8]
+      local:
+        - to: Small Hill
+          jumps: 2
+          jump_movement: water
+        - to: East 20
     - name: East 20
       coord: [26.95, 19.8]
+      local:
+        - to: Left of Enemy
+      # TODO: exits
 
     - name: West Cliff
       coord: [25.6, 15.8]
+      local:
+        - to: Northeast Platform
+        - to: Northwest Platform
+        - to: West Bank
+          jumps: 2
     - name: West Bank
       coord: [25.05, 15.4]
+      local:
+        - to: Water Surface
+          jumps: 1
+          jump_movement: water
+        - to: West Cliff
+        - to: West Shore
+          jumps: 2
+          jump_movement: water
+      exits:
+        - to: West Shore
+          req: $grab or $climb
+          time: 3
     - name: Water Surface
       coord: [25.05, 14.9]
       data:
         water: false
+      local:
+        - to: West Bank
+        - to: West Cliff
     - name: West Shore
       coord: [24.55, 14.8]
       data:
         water: false
+      local:
+        - to: West Bank
+        - to: Water Surface
+        - to: Surface Wall Right
     - name: Surface Wall Right
       coord: [23.1, 14.8]
       data:
@@ -715,7 +982,7 @@ areas:
           canon: Amagi_West_Lake_Surface_Wall
           req: $shockwave
           price: 100
-          tags: [shockwave]
+          tags: [shockwave, event]
       exits:
         - to: Surface Wall Left
           req: Amagi_West_Lake_Surface_Wall
@@ -723,10 +990,23 @@ areas:
       coord: [22.85, 14.8]
       data:
         water: false
+      locations:
+        - name: Break Wall
+          item: Amagi_West_Lake_Surface_Wall
+          canon: Amagi_West_Lake_Surface_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Surface Wall Right
+          req: Amagi_West_Lake_Surface_Wall
     - name: West 15
       coord: [22.05, 14.7]
       data:
         water: false
+      local:
+        - to: Surface Wall Left
+      # TODO: exits
 
 # MUS A M20 : 56s
 # TODO: try defeating MUS without grabbing the flask in between

@@ -186,6 +186,16 @@ pub fn local_travel_time(
         ) => 1351,
         (
             [false, false, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 4279,
+        (
+            [false, false, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 3000,
@@ -203,7 +213,7 @@ pub fn local_travel_time(
             [false, false, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [false, false, false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -278,12 +288,57 @@ pub fn local_travel_time(
             [false, false, false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [false, false, false],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 2000,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 2027,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 2027,
         (
             [false, false, false],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -668,9 +723,170 @@ pub fn local_travel_time(
         ) => 1351,
         (
             [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1801,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1126,
+        // [2.477477, 0.7]
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3177,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1576,
+        (
+            [false, false, false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 4054,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2927,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1576,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2927,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 3378,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 5405,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 3378,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 3828,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 3828,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 2477,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 2477,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 2477,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 6531,
+        (
+            [false, false, false],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 3603,
         (
             [false, false, false],
             SpotId::Antarctica__West__Helipad,
@@ -3379,6 +3595,16 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, false, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 3333,
+        (
+            [true, false, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 1799,
@@ -3396,7 +3622,7 @@ pub fn local_travel_time(
             [true, false, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [true, false, false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -3471,12 +3697,57 @@ pub fn local_travel_time(
             [true, false, false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [true, false, false],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 600,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1403,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 1578,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1578,
         (
             [true, false, false],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -3861,9 +4132,170 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        // [1.929825, 0.7]
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        (
+            [true, false, false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 3157,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1228,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2631,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 4210,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2631,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2982,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2982,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1929,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [true, false, false],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
         (
             [true, false, false],
             SpotId::Antarctica__West__Helipad,
@@ -6602,6 +7034,16 @@ pub fn local_travel_time(
         ) => 1351,
         (
             [false, true, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 2252,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 4279,
+        (
+            [false, true, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 2591,
@@ -6619,7 +7061,7 @@ pub fn local_travel_time(
             [false, true, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [false, true, false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -6699,12 +7141,72 @@ pub fn local_travel_time(
             [false, true, false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [false, true, false],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 1000,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 2000,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 2222,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 900,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 2222,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 4079,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 2027,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1000,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 5917,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 2027,
+        (
+            [false, true, false],
+            SpotId::Amagi__Main_Area__West_19,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 3449,
         (
             [false, true, false],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -7249,14 +7751,241 @@ pub fn local_travel_time(
         ) => 1333,
         (
             [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 900,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 1000,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1801,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1333,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1735,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+        ) => 3087,
+        // [2.477477, 0.7]
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3177,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1576,
+        // [3.142697, 5.072317]
+        (
+            [false, true, false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 8089,
+        ) => 8215,
         (
             [false, true, false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 4054,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 5656,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 888,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 888,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 3797,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2927,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 5130,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 3823,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1576,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 5497,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2927,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2362,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 4893,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 3378,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 3975,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 5405,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 3378,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 3777,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 3777,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 3777,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 2252,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 900,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 2477,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 2477,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 2222,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 3471,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 2477,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 2252,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 2252,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 6444,
+        (
+            [false, true, false],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 3583,
         (
             [false, true, false],
             SpotId::Antarctica__West__Helipad,
@@ -10729,6 +11458,16 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [false, false, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 3333,
+        (
+            [false, false, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 3000,
@@ -10746,7 +11485,7 @@ pub fn local_travel_time(
             [false, false, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [false, false, true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -10826,12 +11565,62 @@ pub fn local_travel_time(
             [false, false, true],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [false, false, true],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1754,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 1578,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1578,
         (
             [false, false, true],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -11361,6 +12150,48 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1000,
+        // [1.929825, 0.7]
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        // [2, 3]
+        (
+            [false, false, true],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 5000,
@@ -11369,6 +12200,186 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 3157,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3157,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 3000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1228,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 4210,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 3000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2631,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 4210,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2631,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2631,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2982,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2982,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1754,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1754,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [false, false, true],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
         (
             [false, false, true],
             SpotId::Antarctica__West__Helipad,
@@ -14107,6 +15118,16 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, true, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 3333,
+        (
+            [true, true, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 1799,
@@ -14124,7 +15145,7 @@ pub fn local_travel_time(
             [true, true, false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [true, true, false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -14204,12 +15225,72 @@ pub fn local_travel_time(
             [true, true, false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [true, true, false],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 600,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1403,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 4079,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 1578,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 5917,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1578,
+        (
+            [true, true, false],
+            SpotId::Amagi__Main_Area__West_19,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 3449,
         (
             [true, true, false],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -14750,14 +15831,241 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1735,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+        ) => 3087,
+        // [1.929825, 0.7]
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        // [3.142697, 5.072317]
+        (
+            [true, true, false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 8089,
+        ) => 8215,
         (
             [true, true, false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 3157,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 5656,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 3797,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 5130,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 3823,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1228,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 5497,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2362,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 4893,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2631,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 3975,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 4210,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2631,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 3777,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2982,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2982,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1929,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 2222,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 3471,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [true, true, false],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
         (
             [true, true, false],
             SpotId::Antarctica__West__Helipad,
@@ -18212,6 +19520,16 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, false, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 3333,
+        (
+            [true, false, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 1799,
@@ -18229,7 +19547,7 @@ pub fn local_travel_time(
             [true, false, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [true, false, true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -18309,12 +19627,62 @@ pub fn local_travel_time(
             [true, false, true],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [true, false, true],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 600,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1403,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 2000,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 1578,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1578,
         (
             [true, false, true],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -18840,6 +20208,48 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1000,
+        // [1.929825, 0.7]
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        // [2, 3]
+        (
+            [true, false, true],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 5000,
@@ -18848,6 +20258,186 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 3157,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3157,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 3000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 2000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1228,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 4210,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 3000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2631,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 2000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 4210,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2631,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2631,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2982,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2982,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1929,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 2000,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [true, false, true],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
         (
             [true, false, true],
             SpotId::Antarctica__West__Helipad,
@@ -21574,6 +23164,16 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [false, true, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 3333,
+        (
+            [false, true, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 2591,
@@ -21591,7 +23191,7 @@ pub fn local_travel_time(
             [false, true, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [false, true, true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -21671,12 +23271,72 @@ pub fn local_travel_time(
             [false, true, true],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [false, true, true],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1754,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 1578,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 5917,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1578,
+        (
+            [false, true, true],
+            SpotId::Amagi__Main_Area__West_19,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 3449,
         (
             [false, true, true],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -22217,6 +23877,53 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+        ) => 3087,
+        // [1.929825, 0.7]
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        // [2, 3]
+        (
+            [false, true, true],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 5000,
@@ -22225,6 +23932,186 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 3157,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3157,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 3000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1228,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 4210,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 3000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2631,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 4210,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2631,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2631,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2982,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2982,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1754,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1754,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [false, true, true],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
         (
             [false, true, true],
             SpotId::Antarctica__West__Helipad,
@@ -25684,6 +27571,16 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, true, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 3333,
+        (
+            [true, true, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 1799,
@@ -25701,7 +27598,7 @@ pub fn local_travel_time(
             [true, true, true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 900,
+        ) => 699,
         (
             [true, true, true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -25781,12 +27678,72 @@ pub fn local_travel_time(
             [true, true, true],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 700,
+        ) => 500,
         (
             [true, true, true],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 600,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1403,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 2000,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+            SpotId::Amagi__Main_Area__West_19,
+        ) => 1578,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__West_18,
+        ) => 5917,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__West_18,
+            SpotId::Amagi__Main_Area__Flat_Ruin,
+        ) => 1578,
+        (
+            [true, true, true],
+            SpotId::Amagi__Main_Area__West_19,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 3449,
         (
             [true, true, true],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -26327,6 +28284,53 @@ pub fn local_travel_time(
         ) => 1052,
         (
             [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+        ) => 3087,
+        // [1.929825, 0.7]
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        // [2, 3]
+        (
+            [true, true, true],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 5000,
@@ -26335,6 +28339,186 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 3157,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3157,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 3000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 2000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 1228,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 4210,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 3000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2631,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 2000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 4210,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2631,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2631,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+            SpotId::Amagi__West_Lake__East_20,
+        ) => 2982,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__East_20,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 2982,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1929,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Bank,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 2000,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1929,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__Water_Surface,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 500,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__West_Bank,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Water_Surface,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [true, true, true],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
         (
             [true, true, true],
             SpotId::Antarctica__West__Helipad,
@@ -29663,6 +31847,8 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_2) => true,
         (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__East_Ledge) => true,
         (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Catwalk_Center) => true,
+        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__West_18) => true,
+        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Flat_Ruin) => true,
         (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Platform_3) => true,
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
@@ -29700,6 +31886,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => true,
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => true,
         (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Broken_Wall) => true,
+        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Broken_Wall) => true,
+        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Flat_Ruin) => true,
+        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__West_Mini_Hill) => true,
+        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => true,
+        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => true,
+        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__Half_Pillar) => true,
+        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_Mini_Hill) => true,
+        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__West_18) => true,
+        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Flat_Ruin) => true,
+        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Half_Pillar) => true,
+        (SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => true,
+        (SpotId::Amagi__Main_Area__West_19, SpotId::Amagi__Main_Area__West_Mini_Hill) => true,
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
@@ -29971,6 +32169,35 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
         ) => true,
+        (SpotId::Amagi__West_Lake__Cavern_Tear_Duct, SpotId::Amagi__West_Lake__Cavern_Eye) => true,
+        (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Amagi__West_Lake__Cavern_Tear_Duct) => true,
+        (
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => true,
+        (SpotId::Amagi__West_Lake__Cavern_Front_Pillar, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
+            true
+        }
+        (
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => true,
         (
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
@@ -29979,6 +32206,76 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => true,
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => true,
+        (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Item) => {
+            true
+        }
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => true,
+        (
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => true,
+        (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Some_Rock) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Small_Hill) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Cavern_Chin) => true,
+        (
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => true,
+        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Stronghold_Front_Door) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => true,
+        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Tentacle_Gap) => true,
+        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Stronghold_Front_Door) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Some_Rock) => true,
+        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Tentacle_Gap) => true,
+        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Left_of_Enemy) => true,
+        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => true,
+        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Pillar) => true,
+        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Left_of_Enemy) => true,
+        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => true,
+        (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__Small_Hill) => true,
+        (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__East_20) => true,
+        (SpotId::Amagi__West_Lake__East_20, SpotId::Amagi__West_Lake__Left_of_Enemy) => true,
+        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__Northeast_Platform) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__Northwest_Platform) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Bank) => true,
+        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__Water_Surface) => true,
+        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Cliff) => true,
+        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Shore) => true,
+        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => true,
+        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Cliff) => true,
+        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => true,
+        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Water_Surface) => true,
+        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Surface_Wall_Right) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
         (SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => true,

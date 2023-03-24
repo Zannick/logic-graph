@@ -27,7 +27,7 @@ objectives:
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: Remote_Drone and Dear_Ernest and Underwater_Movement and Flask{4}
+  Progress%: Remote_Drone and Shockwave and Underwater_Movement and Flask{5}
 
 movements:
   default:  # the slowest movement is in water
@@ -61,11 +61,14 @@ time:
   default: 1
   urn: 5.5
   flask: 5.5
-  # when grabbing the urn/flask with the boomerang
+  # when grabbing the urn/flask with the boomerang over x distance
   # the upgraded boomerang has a longer reach but approximately the same speed as indra
   # so there's little difference
   remote_urn: 6.5
   remote_flask: 6.5
+  # when grabbing the urn/flask with the boomerang while falling or otherwise closer
+  nearby_urn: 6
+  nearby_flask: 6
   shockwave: 3.5  # even when shockwaving flasks and urns? at least 1
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # Doors leading inside/outside
@@ -140,6 +143,8 @@ helpers:
   $allegiance2: Infect{2}
   $unlock2: Infect{2}
   $unlock3: Infect{3}
+
+  $all_notes: Dear_Ernest
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 

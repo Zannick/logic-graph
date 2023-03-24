@@ -38,3 +38,20 @@ tests:
     context:
       save: Amagi > Main Area > Save Point
     can_reach: Ebih > Base Camp > Save Point
+
+  - with:
+      - Underwater_Movement
+    can_obtain: Shockwave
+
+  - with:
+      - Underwater_Movement
+    can_reach: Amagi > West Lake > Cavern Refill Station
+
+  - start: Amagi > West Lake > Cavern Refill Station
+    with:
+      - Underwater_Movement
+      - Shockwave
+    context:
+      energy: 300
+    can_obtain: Defeat_MUS_A_M20
+    

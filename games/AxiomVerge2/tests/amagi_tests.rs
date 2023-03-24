@@ -16,7 +16,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
     ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
-    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
     ctx.infect = 1;
     ctx.mode = enums::Mode::Indra;
     ctx.save = SpotId::Ebih__Base_Camp__Save_Point;
@@ -117,5 +117,44 @@ fn start_Amagi__Main_Area__Save_Point_with_Underwater_Movement_context_save_Amag
         ctx,
         SpotId::Amagi__Main_Area__Save_Point,
         SpotId::Ebih__Base_Camp__Save_Point
+    );
+}
+#[test]
+fn with_Underwater_Movement_can_obtain_Shockwave() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Ebih__Base_Camp__Save_Point,
+        Item::Shockwave
+    );
+}
+#[test]
+fn with_Underwater_Movement_can_reach_Amagi__West_Lake__Cavern_Refill_Station() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+
+    expect_any_route!(
+        &world,
+        ctx,
+        SpotId::Ebih__Base_Camp__Save_Point,
+        SpotId::Amagi__West_Lake__Cavern_Refill_Station
+    );
+}
+#[test]
+fn start_Amagi__West_Lake__Cavern_Refill_Station_with_Underwater_Movement__Shockwave_context_energy_300_can_obtain_Defeat_MUS_A_M20(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+    ctx.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
+    ctx.energy = 300;
+
+    expect_obtainable!(
+        &world,
+        ctx,
+        SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        Item::Defeat_MUS_A_M20
     );
 }

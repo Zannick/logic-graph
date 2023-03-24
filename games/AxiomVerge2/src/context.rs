@@ -82,6 +82,8 @@ pub mod data {
             SpotId::Amagi__Main_Area__East_19 => true,
             SpotId::Amagi__Main_Area__East_Ledge => true,
             SpotId::Amagi__Main_Area__Enemy_Side => true,
+            SpotId::Amagi__Main_Area__Flat_Ruin => true,
+            SpotId::Amagi__Main_Area__Half_Pillar => true,
             SpotId::Amagi__Main_Area__Platform_2 => true,
             SpotId::Amagi__Main_Area__Platform_3 => true,
             SpotId::Amagi__Main_Area__Save_Point => true,
@@ -94,6 +96,9 @@ pub mod data {
             SpotId::Amagi__Main_Area__Waters_Edge => false,
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side => false,
             SpotId::Amagi__Main_Area__West_15 => false,
+            SpotId::Amagi__Main_Area__West_18 => true,
+            SpotId::Amagi__Main_Area__West_19 => true,
+            SpotId::Amagi__Main_Area__West_Mini_Hill => true,
             SpotId::Amagi__Main_Area__West_Shelf => true,
             SpotId::Amagi__Main_Area__West_Side => true,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth => true,
@@ -164,33 +169,40 @@ pub mod flags {
             const BOOMERANG_STEERING = 1 << 9;
             const MAJOR_GLITCHES = 1 << 10;
             const MINOR_GLITCHES = 1 << 11;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 12;
-            const AMASHILAMA = 1 << 13;
-            const ANUMAN = 1 << 14;
-            const APOCALYPSE_BOMB = 1 << 15;
-            const BOOMERANG = 1 << 16;
-            const DEAR_ERNEST = 1 << 17;
-            const DEFEAT_EBIH_ALU = 1 << 18;
-            const DEFEAT_MUS_A_M20 = 1 << 19;
-            const DRONE_HOVER = 1 << 20;
-            const ICE_AXE = 1 << 21;
-            const INFECTION_SPEED = 1 << 22;
-            const LEDGE_GRAB = 1 << 23;
-            const MIST_UPGRADE = 1 << 24;
-            const NANITE_MIST = 1 << 25;
-            const REMOTE_DRONE = 1 << 26;
-            const SHOCKWAVE = 1 << 27;
-            const SLINGSHOT_HOOK = 1 << 28;
-            const STATION_POWER = 1 << 29;
-            const SWITCH_36_11 = 1 << 30;
-            const SWITCH_40_12 = 1 << 31;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 12;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 13;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 14;
+            const AMAGI_STRONGHOLD_BOULDER_AND_WALL_2 = 1 << 15;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 16;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 17;
+            const AMAGI_STRONGHOLD_WALL_AND_BOULDER_1 = 1 << 18;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 19;
+            const AMASHILAMA = 1 << 20;
+            const ANUMAN = 1 << 21;
+            const APOCALYPSE_BOMB = 1 << 22;
+            const BOOMERANG = 1 << 23;
+            const DEAR_ERNEST = 1 << 24;
+            const DEFEAT_EBIH_ALU = 1 << 25;
+            const DEFEAT_MUS_A_M20 = 1 << 26;
+            const DRONE_HOVER = 1 << 27;
+            const ICE_AXE = 1 << 28;
+            const INFECTION_SPEED = 1 << 29;
+            const LEDGE_GRAB = 1 << 30;
+            const MIST_UPGRADE = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
-        pub struct ContextBits2 : u8 {
-            const UNDERWATER_MOVEMENT = 1 << 0;
-            const WALL_CLIMB = 1 << 1;
+        pub struct ContextBits2 : u16 {
+            const NANITE_MIST = 1 << 0;
+            const REMOTE_DRONE = 1 << 1;
+            const SHOCKWAVE = 1 << 2;
+            const SLINGSHOT_HOOK = 1 << 3;
+            const STATION_POWER = 1 << 4;
+            const SWITCH_36_11 = 1 << 5;
+            const SWITCH_40_12 = 1 << 6;
+            const UNDERWATER_MOVEMENT = 1 << 7;
+            const WALL_CLIMB = 1 << 8;
         }
     }
 }
@@ -277,10 +289,31 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = 33;
+    const NUM_ITEMS: i32 = 40;
 
     fn has(&self, item: Item) -> bool {
         match item {
+            Item::Amagi_Dragon_Eye_Passage => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE),
+            Item::Amagi_Stronghold_Boulder_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1),
+            Item::Amagi_Stronghold_Boulder_2 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_AND_WALL_2),
+            Item::Amagi_Stronghold_Wall_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1),
+            Item::Amagi_Stronghold_Wall_2 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_AND_BOULDER_1),
             Item::Amagi_West_Lake_Surface_Wall => self
                 .cbits1
                 .contains(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL),
@@ -304,16 +337,16 @@ impl context::Ctx for Context {
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
             Item::Mist_Upgrade => self.cbits1.contains(flags::ContextBits1::MIST_UPGRADE),
-            Item::Nanite_Mist => self.cbits1.contains(flags::ContextBits1::NANITE_MIST),
+            Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
-            Item::Remote_Drone => self.cbits1.contains(flags::ContextBits1::REMOTE_DRONE),
-            Item::Shockwave => self.cbits1.contains(flags::ContextBits1::SHOCKWAVE),
-            Item::Slingshot_Hook => self.cbits1.contains(flags::ContextBits1::SLINGSHOT_HOOK),
-            Item::Station_Power => self.cbits1.contains(flags::ContextBits1::STATION_POWER),
-            Item::Switch_36_11 => self.cbits1.contains(flags::ContextBits1::SWITCH_36_11),
-            Item::Switch_40_12 => self.cbits1.contains(flags::ContextBits1::SWITCH_40_12),
+            Item::Remote_Drone => self.cbits2.contains(flags::ContextBits2::REMOTE_DRONE),
+            Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE),
+            Item::Slingshot_Hook => self.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK),
+            Item::Station_Power => self.cbits2.contains(flags::ContextBits2::STATION_POWER),
+            Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
+            Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
             Item::Underwater_Movement => self
                 .cbits2
                 .contains(flags::ContextBits2::UNDERWATER_MOVEMENT),
@@ -323,6 +356,34 @@ impl context::Ctx for Context {
     }
     fn count(&self, item: Item) -> i16 {
         match item {
+            Item::Amagi_Dragon_Eye_Passage => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE)
+                .into(),
+            Item::Amagi_Stronghold_Boulder_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1)
+                .into(),
+            Item::Amagi_Stronghold_Boulder_2 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2)
+                .into(),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_AND_WALL_2)
+                .into(),
+            Item::Amagi_Stronghold_Wall_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1)
+                .into(),
+            Item::Amagi_Stronghold_Wall_2 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2)
+                .into(),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => self
+                .cbits1
+                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_AND_BOULDER_1)
+                .into(),
             Item::Amagi_West_Lake_Surface_Wall => self
                 .cbits1
                 .contains(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL)
@@ -369,32 +430,32 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::MIST_UPGRADE)
                 .into(),
             Item::Nanite_Mist => self
-                .cbits1
-                .contains(flags::ContextBits1::NANITE_MIST)
+                .cbits2
+                .contains(flags::ContextBits2::NANITE_MIST)
                 .into(),
             Item::Nano_Points => self.nano_points.into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
             Item::Remote_Drone => self
-                .cbits1
-                .contains(flags::ContextBits1::REMOTE_DRONE)
+                .cbits2
+                .contains(flags::ContextBits2::REMOTE_DRONE)
                 .into(),
-            Item::Shockwave => self.cbits1.contains(flags::ContextBits1::SHOCKWAVE).into(),
+            Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE).into(),
             Item::Slingshot_Hook => self
-                .cbits1
-                .contains(flags::ContextBits1::SLINGSHOT_HOOK)
+                .cbits2
+                .contains(flags::ContextBits2::SLINGSHOT_HOOK)
                 .into(),
             Item::Station_Power => self
-                .cbits1
-                .contains(flags::ContextBits1::STATION_POWER)
+                .cbits2
+                .contains(flags::ContextBits2::STATION_POWER)
                 .into(),
             Item::Switch_36_11 => self
-                .cbits1
-                .contains(flags::ContextBits1::SWITCH_36_11)
+                .cbits2
+                .contains(flags::ContextBits2::SWITCH_36_11)
                 .into(),
             Item::Switch_40_12 => self
-                .cbits1
-                .contains(flags::ContextBits1::SWITCH_40_12)
+                .cbits2
+                .contains(flags::ContextBits2::SWITCH_40_12)
                 .into(),
             Item::Underwater_Movement => self
                 .cbits2
@@ -406,6 +467,34 @@ impl context::Ctx for Context {
     }
     fn collect(&mut self, item: Item) {
         match item {
+            Item::Amagi_Dragon_Eye_Passage => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
+            }
+            Item::Amagi_Stronghold_Boulder_1 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
+            }
+            Item::Amagi_Stronghold_Boulder_2 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2);
+            }
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_AND_WALL_2);
+            }
+            Item::Amagi_Stronghold_Wall_1 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
+            }
+            Item::Amagi_Stronghold_Wall_2 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+            }
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_AND_BOULDER_1);
+            }
             Item::Amagi_West_Lake_Surface_Wall => {
                 self.cbits1
                     .insert(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL);
@@ -474,7 +563,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
-                self.cbits1.insert(flags::ContextBits1::NANITE_MIST);
+                self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
@@ -486,22 +575,22 @@ impl context::Ctx for Context {
                 self.ranged_speed += 1;
             }
             Item::Remote_Drone => {
-                self.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+                self.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
             }
             Item::Shockwave => {
-                self.cbits1.insert(flags::ContextBits1::SHOCKWAVE);
+                self.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
             }
             Item::Slingshot_Hook => {
-                self.cbits1.insert(flags::ContextBits1::SLINGSHOT_HOOK);
+                self.cbits2.insert(flags::ContextBits2::SLINGSHOT_HOOK);
             }
             Item::Station_Power => {
-                self.cbits1.insert(flags::ContextBits1::STATION_POWER);
+                self.cbits2.insert(flags::ContextBits2::STATION_POWER);
             }
             Item::Switch_36_11 => {
-                self.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
+                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.cbits1.insert(flags::ContextBits1::SWITCH_40_12);
+                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             }
             Item::Underwater_Movement => {
                 self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
@@ -1125,6 +1214,34 @@ impl Context {
     // test helper for items
     pub fn add_item(&mut self, item: Item) {
         match item {
+            Item::Amagi_Dragon_Eye_Passage => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
+            }
+            Item::Amagi_Stronghold_Boulder_1 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
+            }
+            Item::Amagi_Stronghold_Boulder_2 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2);
+            }
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_AND_WALL_2);
+            }
+            Item::Amagi_Stronghold_Wall_1 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
+            }
+            Item::Amagi_Stronghold_Wall_2 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+            }
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
+                self.cbits1
+                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_AND_BOULDER_1);
+            }
             Item::Amagi_West_Lake_Surface_Wall => {
                 self.cbits1
                     .insert(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL);
@@ -1190,7 +1307,7 @@ impl Context {
                 self.cbits1.insert(flags::ContextBits1::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
-                self.cbits1.insert(flags::ContextBits1::NANITE_MIST);
+                self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
@@ -1202,22 +1319,22 @@ impl Context {
                 self.ranged_speed += 1;
             }
             Item::Remote_Drone => {
-                self.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+                self.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
             }
             Item::Shockwave => {
-                self.cbits1.insert(flags::ContextBits1::SHOCKWAVE);
+                self.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
             }
             Item::Slingshot_Hook => {
-                self.cbits1.insert(flags::ContextBits1::SLINGSHOT_HOOK);
+                self.cbits2.insert(flags::ContextBits2::SLINGSHOT_HOOK);
             }
             Item::Station_Power => {
-                self.cbits1.insert(flags::ContextBits1::STATION_POWER);
+                self.cbits2.insert(flags::ContextBits2::STATION_POWER);
             }
             Item::Switch_36_11 => {
-                self.cbits1.insert(flags::ContextBits1::SWITCH_36_11);
+                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.cbits1.insert(flags::ContextBits1::SWITCH_40_12);
+                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             }
             Item::Underwater_Movement => {
                 self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);

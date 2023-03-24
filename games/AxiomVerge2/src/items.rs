@@ -9,6 +9,13 @@ pub enum Item {
     #[default]
     None,
     Amagi_Dragon_Eye_Passage,
+    Amagi_Stronghold_Boulder_1,
+    Amagi_Stronghold_Boulder_2,
+    Amagi_Stronghold_Boulder_And_Wall_2,
+    Amagi_Stronghold_Left_Wall,
+    Amagi_Stronghold_Wall_1,
+    Amagi_Stronghold_Wall_2,
+    Amagi_Stronghold_Wall_And_Boulder_1,
     Amagi_West_Lake_Surface_Wall,
     Amashilama,
     Anuman,
@@ -61,6 +68,17 @@ impl fmt::Display for Item {
         match self {
             Item::None => write!(f, "{}", "None"),
             Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
+            Item::Amagi_Stronghold_Boulder_1 => write!(f, "{}", "Amagi_Stronghold_Boulder_1"),
+            Item::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi_Stronghold_Boulder_2"),
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
+                write!(f, "{}", "Amagi_Stronghold_Boulder_And_Wall_2")
+            }
+            Item::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi_Stronghold_Left_Wall"),
+            Item::Amagi_Stronghold_Wall_1 => write!(f, "{}", "Amagi_Stronghold_Wall_1"),
+            Item::Amagi_Stronghold_Wall_2 => write!(f, "{}", "Amagi_Stronghold_Wall_2"),
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
+                write!(f, "{}", "Amagi_Stronghold_Wall_And_Boulder_1")
+            }
             Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Anuman => write!(f, "{}", "Anuman"),
@@ -117,6 +135,13 @@ impl std::str::FromStr for Item {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Amagi_Dragon_Eye_Passage" => Ok(Item::Amagi_Dragon_Eye_Passage),
+            "Amagi_Stronghold_Boulder_1" => Ok(Item::Amagi_Stronghold_Boulder_1),
+            "Amagi_Stronghold_Boulder_2" => Ok(Item::Amagi_Stronghold_Boulder_2),
+            "Amagi_Stronghold_Boulder_And_Wall_2" => Ok(Item::Amagi_Stronghold_Boulder_And_Wall_2),
+            "Amagi_Stronghold_Left_Wall" => Ok(Item::Amagi_Stronghold_Left_Wall),
+            "Amagi_Stronghold_Wall_1" => Ok(Item::Amagi_Stronghold_Wall_1),
+            "Amagi_Stronghold_Wall_2" => Ok(Item::Amagi_Stronghold_Wall_2),
+            "Amagi_Stronghold_Wall_And_Boulder_1" => Ok(Item::Amagi_Stronghold_Wall_And_Boulder_1),
             "Amagi_West_Lake_Surface_Wall" => Ok(Item::Amagi_West_Lake_Surface_Wall),
             "Amashilama" => Ok(Item::Amashilama),
             "Anuman" => Ok(Item::Anuman),
@@ -171,7 +196,7 @@ impl std::str::FromStr for Item {
 pub fn unused_item(id: Item) -> bool {
     match id {
         Item::None => true,
-        Item::Amagi_Dragon_Eye_Passage
+        Item::Amagi_Stronghold_Left_Wall
         | Item::Bronze_Axe
         | Item::Companies_Layoff
         | Item::Compass
