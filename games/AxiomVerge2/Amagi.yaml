@@ -783,13 +783,13 @@ areas:
           tags: [urn]
         - name: Break Wall
           item: Amagi_Stronghold_Wall_And_Boulder_1
-          canon: Amagi Stronghold Wall 1
+          canon: Amagi_Stronghold_Wall_1
           req: $shockwave
           price: 100
           tags: [shockwave, event]
       exits:
         - to: Stronghold Middle Column
-          req: Amagi_Stronghold_Wall_1 or Amagi_Stronghold_Wall_And_Boulder_1
+          req: Amagi_Stronghold_Wall_1
     - name: Stronghold Rear Wall
       coord: [23.1, 19.6]
       local:
@@ -806,47 +806,34 @@ areas:
       locations:
         - name: Break Wall
           item: Amagi_Stronghold_Wall_1
-          canon: Amagi Stronghold Wall 1
+          canon: Amagi_Stronghold_Wall_1
           req: $shockwave
           price: 100
           tags: [shockwave, event]
       exits:
         - to: Stronghold Item
-          req: Amagi_Stronghold_Wall_1 or Amagi_Stronghold_Wall_And_Boulder_1
+          req: Amagi_Stronghold_Wall_1
         - to: Stronghold Ceiling Left
-          req: (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1) and Underwater_Movement and ($grab or $climb)
+          req: Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
     - name: Stronghold Ceiling Left
       coord: [23.9, 19.1]
       local:
         - to: Stronghold Ceiling Right
       locations:
-        - name: Free Boulder
-          item: Amagi_Stronghold_Boulder_1
-          canon: Amagi Stronghold Boulder 1
-          req: Amagi_Stronghold_Wall_And_Boulder_1
-          time: 0
-          tags: [event]
         - name: Knock Down Left Boulder
           item: Amagi_Stronghold_Boulder_1
-          canon: Amagi Stronghold Boulder 1
           req: $shockwave
           price: 100
           tags: [shockwave, event]
       exits:
         - to: Stronghold Middle Column
-          req: (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1)
+          req: Amagi_Stronghold_Boulder_1
           time: .8
     - name: Stronghold Ceiling Right
       coord: [24.1, 19.1]
       local:
         - to: Stronghold Ceiling Left
       locations:
-        - name: Free Boulder
-          item: Amagi_Stronghold_Boulder_2
-          canon: Amagi Stronghold Boulder 2
-          req: Amagi_Stronghold_Boulder_And_Wall_2
-          time: 0
-          tags: [event]
         - name: Knock Down Right Boulder
           item: Amagi_Stronghold_Boulder_2
           canon: Amagi Stronghold Boulder 2
@@ -855,7 +842,7 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Stronghold Front Room
-          req: Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2
+          req: Amagi_Stronghold_Boulder_2
     - name: Stronghold Front Room
       coord: [24.4, 19.7]
       locations:
@@ -867,9 +854,9 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Stronghold Ceiling Right
-          req: (Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2) and $grab
+          req: Amagi_Stronghold_Boulder_2 and $grab
         - to: Stronghold Front Door
-          req: (Amagi_Stronghold_Wall_2 or Amagi_Stronghold_Boulder_And_Wall_2)
+          req: Amagi_Stronghold_Wall_2
     - name: Stronghold Front Door
       coord: [24.7, 19.8]
       local:
@@ -887,7 +874,7 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Stronghold Front Room
-          req: (Amagi_Stronghold_Wall_2 or Amagi_Stronghold_Boulder_And_Wall_2)
+          req: Amagi_Stronghold_Wall_2
 
     - name: Some Rock
       coord: [25, 19]

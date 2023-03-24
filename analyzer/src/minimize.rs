@@ -4,11 +4,7 @@ use crate::access::*;
 use crate::context::*;
 use crate::world::*;
 
-pub fn remove_all_unvisited<W, T, L, E>(
-    world: &W,
-    startctx: &T,
-    wonctx: &ContextWrapper<T>,
-) -> T
+pub fn remove_all_unvisited<W, T, L, E>(world: &W, startctx: &T, wonctx: &ContextWrapper<T>) -> T
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -39,9 +35,7 @@ where
         if set[loc.id()] {
             continue;
         }
-        if ctx.todo(loc.id()) {
-            ctx.skip(loc.id());
-        }
+        ctx.skip(loc.id());
     }
     ctx
 }

@@ -16,14 +16,14 @@ pub fn access_default(_ctx: &Context) -> bool { true }
 
 %% for id, info in access_funcs.items()|sort
 pub fn access_{{ id }}(ctx: &Context) -> bool {
-    // {{ info.pr.text }}
+    // {{ info.pr.text.strip() }}
     {{ info.pr|prToRust(info) }}
 }
 %% endfor
 
 %% for id, info in action_funcs.items()|sort
 pub fn action_{{ id }}(ctx: &mut Context{% for k, t in (info.args or {}).items() %}, {{ k }}: {{ t }}{% endfor %}) {
-    // {{ (info.act or info.pr).text }}
+    // {{ (info.act or info.pr).text.strip() }}
     {{ (info.act or info.pr)|prToRust(info, id) }}
 }
 %% endfor

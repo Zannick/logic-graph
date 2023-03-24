@@ -17,6 +17,8 @@ BUILTINS = {
     '$reset_area': 'ctx.reset_area',
     '$get_region': 'get_region',
     '$get_area': 'get_area',
+    '$skip': 'ctx.skip',
+    '$add_item': 'ctx.add_item',
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
@@ -66,7 +68,7 @@ def config_type(val: Any) -> str:
     return type(val).__name__
 
 
-PLACE_TYPES = ['RegionId', 'AreaId', 'SpotId']
+PLACE_TYPES = ['RegionId', 'AreaId', 'SpotId', 'LocationId']
 def getPlaceType(place):
     return PLACE_TYPES[place.count(">")]
 

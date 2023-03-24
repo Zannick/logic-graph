@@ -2078,9 +2078,7 @@ pub enum LocationId {
     Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
     Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall,
     Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
-    Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder,
     Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
-    Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder,
     Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
     Amagi__West_Lake__Stronghold_Front_Door__Break_Wall,
     Amagi__West_Lake__Stronghold_Front_Room__Break_Wall,
@@ -2201,11 +2199,6 @@ impl fmt::Display for LocationId {
                 "{}",
                 "Amagi > West Lake > Cavern Tear Duct: Remote Flask"
             ),
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Stronghold Ceiling Left: Free Boulder"
-            ),
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
                 write!(
                     f,
@@ -2213,11 +2206,6 @@ impl fmt::Display for LocationId {
                     "Amagi > West Lake > Stronghold Ceiling Left: Knock Down Left Boulder"
                 )
             }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Stronghold Ceiling Right: Free Boulder"
-            ),
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
                 write!(
                     f,
@@ -2543,14 +2531,8 @@ impl std::str::FromStr for LocationId {
             "Amagi > West Lake > Cavern Tear Duct: Remote Flask" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask)
             }
-            "Amagi > West Lake > Stronghold Ceiling Left: Free Boulder" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder)
-            }
             "Amagi > West Lake > Stronghold Ceiling Left: Knock Down Left Boulder" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder)
-            }
-            "Amagi > West Lake > Stronghold Ceiling Right: Free Boulder" => {
-                Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder)
             }
             "Amagi > West Lake > Stronghold Ceiling Right: Knock Down Right Boulder" => Ok(
                 LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
@@ -3834,7 +3816,6 @@ pub enum CanonId {
     Shockwave,
     Amagi_Stronghold_Wall_1,
     Amagi_Stronghold_Left_Wall,
-    Amagi_Stronghold_Boulder_1,
     Amagi_Stronghold_Boulder_2,
     Amagi_Stronghold_Wall_2,
     Amagi_West_Lake_Surface_Wall,
@@ -3854,9 +3835,8 @@ impl fmt::Display for CanonId {
             CanonId::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
             CanonId::Amagi_Dragon_Eye_Flask => write!(f, "{}", "Amagi Dragon Eye Flask"),
             CanonId::Shockwave => write!(f, "{}", "Shockwave"),
-            CanonId::Amagi_Stronghold_Wall_1 => write!(f, "{}", "Amagi Stronghold Wall 1"),
+            CanonId::Amagi_Stronghold_Wall_1 => write!(f, "{}", "Amagi_Stronghold_Wall_1"),
             CanonId::Amagi_Stronghold_Left_Wall => write!(f, "{}", "Amagi Stronghold Left Wall"),
-            CanonId::Amagi_Stronghold_Boulder_1 => write!(f, "{}", "Amagi Stronghold Boulder 1"),
             CanonId::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi Stronghold Boulder 2"),
             CanonId::Amagi_Stronghold_Wall_2 => write!(f, "{}", "Amagi Stronghold Wall 2"),
             CanonId::Amagi_West_Lake_Surface_Wall => {
@@ -3882,9 +3862,8 @@ impl std::str::FromStr for CanonId {
             "Amagi_Dragon_Eye_Passage" => Ok(CanonId::Amagi_Dragon_Eye_Passage),
             "Amagi Dragon Eye Flask" => Ok(CanonId::Amagi_Dragon_Eye_Flask),
             "Shockwave" => Ok(CanonId::Shockwave),
-            "Amagi Stronghold Wall 1" => Ok(CanonId::Amagi_Stronghold_Wall_1),
+            "Amagi_Stronghold_Wall_1" => Ok(CanonId::Amagi_Stronghold_Wall_1),
             "Amagi Stronghold Left Wall" => Ok(CanonId::Amagi_Stronghold_Left_Wall),
-            "Amagi Stronghold Boulder 1" => Ok(CanonId::Amagi_Stronghold_Boulder_1),
             "Amagi Stronghold Boulder 2" => Ok(CanonId::Amagi_Stronghold_Boulder_2),
             "Amagi Stronghold Wall 2" => Ok(CanonId::Amagi_Stronghold_Wall_2),
             "Amagi_West_Lake_Surface_Wall" => Ok(CanonId::Amagi_West_Lake_Surface_Wall),
@@ -4774,14 +4753,8 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
                 rules::access_boomerang(&ctx)
             }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder => {
-                rules::access_amagi_stronghold_wall_and_boulder_1(&ctx)
-            }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
                 rules::access_shockwave(&ctx)
-            }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder => {
-                rules::access_amagi_stronghold_boulder_and_wall_2(&ctx)
             }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
                 rules::access_shockwave(&ctx)
@@ -5023,14 +4996,14 @@ impl world::Accessible for Exit {
             ExitId::Amagi__West_Lake__East_18__ex__Main_Area__West_18_1 => true,
             ExitId::Amagi__West_Lake__East_19__ex__Main_Area__West_19_1 => true,
             ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1 => rules::access_grab(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1 => rules::access___amagi_stronghold_boulder_1_or_amagi_stronghold_wall_and_boulder_1(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1 => rules::access_amagi_stronghold_boulder_2_or_amagi_stronghold_boulder_and_wall_2(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1 => rules::access___amagi_stronghold_wall_2_or_amagi_stronghold_boulder_and_wall_2(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Ceiling_Right_1 => rules::access___amagi_stronghold_boulder_2_or_amagi_stronghold_boulder_and_wall_2_and_grab(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Front_Door_1 => rules::access___amagi_stronghold_wall_2_or_amagi_stronghold_boulder_and_wall_2(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1 => rules::access_amagi_stronghold_wall_1_or_amagi_stronghold_wall_and_boulder_1(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1 => rules::access___amagi_stronghold_boulder_1_or_amagi_stronghold_wall_and_boulder_1_and_underwater_movement_and___grab_or_climb(&ctx),
-            ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 => rules::access_amagi_stronghold_wall_1_or_amagi_stronghold_wall_and_boulder_1(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Ceiling_Left__ex__Stronghold_Middle_Column_1 => rules::access_amagi_stronghold_boulder_1(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Ceiling_Right__ex__Stronghold_Front_Room_1 => rules::access_amagi_stronghold_boulder_2(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Front_Door__ex__Stronghold_Front_Room_1 => rules::access_amagi_stronghold_wall_2(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Ceiling_Right_1 => rules::access_amagi_stronghold_boulder_2_and_grab(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Front_Room__ex__Stronghold_Front_Door_1 => rules::access_amagi_stronghold_wall_2(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1 => rules::access_amagi_stronghold_wall_1(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1 => rules::access_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(&ctx),
+            ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 => rules::access_amagi_stronghold_wall_1(&ctx),
             ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => rules::access_boomerang(&ctx),
             ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => rules::access_amagi_west_lake_surface_wall(&ctx),
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => rules::access_amagi_west_lake_surface_wall(&ctx),
@@ -5514,7 +5487,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 93;
+    const NUM_LOCATIONS: i32 = 91;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -5567,12 +5540,7 @@ impl world::World for World {
             CanonId::Amagi_Stronghold_Left_Wall => {
                 vec![LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall]
             }
-            CanonId::Amagi_Stronghold_Boulder_1 => vec![
-                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder,
-                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
-            ],
             CanonId::Amagi_Stronghold_Boulder_2 => vec![
-                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder,
                 LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
             ],
             CanonId::Amagi_Stronghold_Wall_2 => vec![
@@ -5662,12 +5630,10 @@ impl world::World for World {
             LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
                 SpotId::Amagi__West_Lake__Stronghold_Middle_Column
             }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder
-            | LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
                 SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left
             }
-            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder
-            | LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
+            LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
                 SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right
             }
             LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => {
@@ -6377,28 +6343,12 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 3500,
             exit_id: None,
         },
-        LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder => Location {
-            id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder,
-            canonical: CanonId::Amagi_Stronghold_Boulder_1,
-            item: Item::Amagi_Stronghold_Boulder_1,
-            price: Currency::Free,
-            time: 0,
-            exit_id: None,
-        },
         LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => Location {
             id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
-            canonical: CanonId::Amagi_Stronghold_Boulder_1,
+            canonical: CanonId::None,
             item: Item::Amagi_Stronghold_Boulder_1,
             price: Currency::Energy(100),
             time: 3500,
-            exit_id: None,
-        },
-        LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder => Location {
-            id: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder,
-            canonical: CanonId::Amagi_Stronghold_Boulder_2,
-            item: Item::Amagi_Stronghold_Boulder_2,
-            price: Currency::Free,
-            time: 0,
             exit_id: None,
         },
         LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => Location {
@@ -10364,7 +10314,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => Spot {
             id: SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
             locations: Range {
-                start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder.into_usize(),
+                start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder.into_usize(),
                 end: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder.into_usize() + 1,
             },
             exits: Range {
@@ -10382,7 +10332,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => Spot {
             id: SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
             locations: Range {
-                start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder.into_usize(),
+                start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder.into_usize(),
                 end: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder.into_usize() + 1,
             },
             exits: Range {
@@ -15473,13 +15423,14 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
                 + 1,
         },
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => Range {
-            start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Free_Boulder.into_usize(),
+            start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder
+                .into_usize(),
             end: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder
                 .into_usize()
                 + 1,
         },
         SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => Range {
-            start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Free_Boulder
+            start: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder
                 .into_usize(),
             end: LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder
                 .into_usize()

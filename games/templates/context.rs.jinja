@@ -287,8 +287,10 @@ impl context::Ctx for Context {
         self.visits += 1;
     }
     fn skip(&mut self, loc_id: LocationId) {
-        self.status[loc_id] = Status::Skipped;
-        self.skips += 1;
+        if self.status[loc_id] == Status::None {
+            self.status[loc_id] = Status::Skipped;
+            self.skips += 1;
+        }
     }
     fn reset(&mut self, loc_id: LocationId) {
         match self.status[loc_id] {

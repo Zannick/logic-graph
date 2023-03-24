@@ -20,7 +20,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.infect = 1;
     ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
     ctx.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
-    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
     ctx.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
     ctx.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
     ctx.save = SpotId::Glacier__Revival__Save_Point;

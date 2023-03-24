@@ -174,6 +174,14 @@ collect:
   #Big_Flask: ^flasks += 2
   Infect: ^energy = $max_energy
   Health_Node: ^energy = $max_energy
+  Amagi_Stronghold_Wall_And_Boulder_1: >
+    $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`);
+    $add_item(Amagi_Stronghold_Wall_1);
+    $add_item(Amagi_Stronghold_Boulder_1);
+  Amagi_Stronghold_Boulder_And_Wall_2: >
+    $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`);
+    $add_item(Amagi_Stronghold_Wall_2);
+    $add_item(Amagi_Stronghold_Boulder_2);
 
 settings:
   boomerang_steering:

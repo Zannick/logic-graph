@@ -86,7 +86,7 @@ fn start_Ebih__Drone_Room__West_6_with_Infect__Remote_Drone_can_activate_Ebih__D
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.infect = 1;
-    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
 
     expect_action_accessible!(
         &world,
@@ -211,7 +211,7 @@ fn start_Ebih__Ebih_East__Middle_Platform_with_Infect__Remote_Drone_can_access_E
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.infect = 1;
-    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
 
     expect_accessible!(
         &world,
@@ -225,7 +225,7 @@ fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_context_ebih__gr
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.infect = 1;
-    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
     ctx.cbits1
         .insert(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
 

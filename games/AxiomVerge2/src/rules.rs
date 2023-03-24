@@ -16,36 +16,6 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
-pub fn access___amagi_stronghold_boulder_1_or_amagi_stronghold_wall_and_boulder_1(
-    ctx: &Context,
-) -> bool {
-    // (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1)
-    (ctx.has(Item::Amagi_Stronghold_Boulder_1)
-        || ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1))
-}
-pub fn access___amagi_stronghold_boulder_1_or_amagi_stronghold_wall_and_boulder_1_and_underwater_movement_and___grab_or_climb(
-    ctx: &Context,
-) -> bool {
-    // (Amagi_Stronghold_Boulder_1 or Amagi_Stronghold_Wall_And_Boulder_1) and Underwater_Movement and ($grab or $climb)
-    (((ctx.has(Item::Amagi_Stronghold_Boulder_1)
-        || ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1))
-        && ctx.has(Item::Underwater_Movement))
-        && (helper__grab!(ctx) || helper__climb!(ctx)))
-}
-pub fn access___amagi_stronghold_boulder_2_or_amagi_stronghold_boulder_and_wall_2_and_grab(
-    ctx: &Context,
-) -> bool {
-    // (Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2) and $grab
-    ((ctx.has(Item::Amagi_Stronghold_Boulder_2)
-        || ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2))
-        && helper__grab!(ctx))
-}
-pub fn access___amagi_stronghold_wall_2_or_amagi_stronghold_boulder_and_wall_2(
-    ctx: &Context,
-) -> bool {
-    // (Amagi_Stronghold_Wall_2 or Amagi_Stronghold_Boulder_And_Wall_2)
-    (ctx.has(Item::Amagi_Stronghold_Wall_2) || ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2))
-}
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(ctx: &Context) -> bool {
     // ^_combo and ($grab or $climb)
     (ctx.amagi__main_area__ctx__combo() && (helper__grab!(ctx) || helper__climb!(ctx)))
@@ -62,26 +32,32 @@ pub fn access_amagi_dragon_eye_passage(ctx: &Context) -> bool {
     // Amagi_Dragon_Eye_Passage
     ctx.has(Item::Amagi_Dragon_Eye_Passage)
 }
-pub fn access_amagi_stronghold_boulder_2_or_amagi_stronghold_boulder_and_wall_2(
+pub fn access_amagi_stronghold_boulder_1(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Boulder_1
+    ctx.has(Item::Amagi_Stronghold_Boulder_1)
+}
+pub fn access_amagi_stronghold_boulder_1_and_underwater_movement_and___grab_or_climb(
     ctx: &Context,
 ) -> bool {
-    // Amagi_Stronghold_Boulder_2 or Amagi_Stronghold_Boulder_And_Wall_2
-    (ctx.has(Item::Amagi_Stronghold_Boulder_2)
-        || ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2))
+    // Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
+    ((ctx.has(Item::Amagi_Stronghold_Boulder_1) && ctx.has(Item::Underwater_Movement))
+        && (helper__grab!(ctx) || helper__climb!(ctx)))
 }
-pub fn access_amagi_stronghold_boulder_and_wall_2(ctx: &Context) -> bool {
-    // Amagi_Stronghold_Boulder_And_Wall_2
-    ctx.has(Item::Amagi_Stronghold_Boulder_And_Wall_2)
+pub fn access_amagi_stronghold_boulder_2(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Boulder_2
+    ctx.has(Item::Amagi_Stronghold_Boulder_2)
 }
-pub fn access_amagi_stronghold_wall_1_or_amagi_stronghold_wall_and_boulder_1(
-    ctx: &Context,
-) -> bool {
-    // Amagi_Stronghold_Wall_1 or Amagi_Stronghold_Wall_And_Boulder_1
-    (ctx.has(Item::Amagi_Stronghold_Wall_1) || ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1))
+pub fn access_amagi_stronghold_boulder_2_and_grab(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Boulder_2 and $grab
+    (ctx.has(Item::Amagi_Stronghold_Boulder_2) && helper__grab!(ctx))
 }
-pub fn access_amagi_stronghold_wall_and_boulder_1(ctx: &Context) -> bool {
-    // Amagi_Stronghold_Wall_And_Boulder_1
-    ctx.has(Item::Amagi_Stronghold_Wall_And_Boulder_1)
+pub fn access_amagi_stronghold_wall_1(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Wall_1
+    ctx.has(Item::Amagi_Stronghold_Wall_1)
+}
+pub fn access_amagi_stronghold_wall_2(ctx: &Context) -> bool {
+    // Amagi_Stronghold_Wall_2
+    ctx.has(Item::Amagi_Stronghold_Wall_2)
 }
 pub fn access_amagi_west_lake_surface_wall(ctx: &Context) -> bool {
     // Amagi_West_Lake_Surface_Wall
@@ -632,4 +608,20 @@ pub fn action_save(ctx: &mut Context) {
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
+}
+pub fn action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
+    ctx: &mut Context,
+) {
+    // $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
+    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder);
+    ctx.add_item(Item::Amagi_Stronghold_Wall_1);
+    ctx.add_item(Item::Amagi_Stronghold_Boulder_1);
+}
+pub fn action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(
+    ctx: &mut Context,
+) {
+    // $skip(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
+    ctx.skip(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder);
+    ctx.add_item(Item::Amagi_Stronghold_Wall_2);
+    ctx.add_item(Item::Amagi_Stronghold_Boulder_2);
 }
