@@ -624,7 +624,7 @@ class GameLogic(object):
             return id
 
         if d[id][prkey].text != pr.text:
-            id = id + sum(1 for k in d if k.startswith(id))
+            id = id + str(sum(1 for k in d if k.startswith(id)))
             assert id not in d
             d[id] = {prkey: info[prkey]}
             if extra_fields:
@@ -769,7 +769,9 @@ class GameLogic(object):
         # Check exits
         spot_ids = {sp['id'] for sp in self.spots()}
         for ex in self.exits():
-            if get_exit_target(ex) not in spot_ids:
+            if 'to' not in ex:
+                self._errors.append(f'No destination defined for {ex["fullname"]}')
+            elif get_exit_target(ex) not in spot_ids:
                 self._errors.append(f'Unrecognized destination spot in exit {ex["fullname"]}')
         for item in self.collect:
             if item != construct_id(item):
