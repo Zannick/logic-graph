@@ -19,6 +19,8 @@ BUILTINS = {
     '$get_area': 'get_area',
     '$skip': 'ctx.skip',
     '$add_item': 'ctx.add_item',
+    # warning: be careful not to introduce infinite loops in collect rules!
+    '$collect': 'ctx.collect',
 }
 
 disallowed_chars = re.compile(r'[^A-Za-z_0-9]')
