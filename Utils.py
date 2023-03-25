@@ -18,6 +18,7 @@ BUILTINS = {
     '$get_region': 'get_region',
     '$get_area': 'get_area',
     '$skip': 'ctx.skip',
+    '$count': 'ctx.count',
     '$add_item': 'ctx.add_item',
     # warning: be careful not to introduce infinite loops in collect rules!
     '$collect': 'ctx.collect',

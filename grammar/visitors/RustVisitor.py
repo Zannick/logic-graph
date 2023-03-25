@@ -229,7 +229,7 @@ class RustVisitor(RulesVisitor):
     def visitFuncNum(self, ctx):
         func = self._getFuncAndArgs(str(ctx.FUNC()))
         if ctx.ITEM():
-            return f'{func}Item::{ctx.Item()})'
+            return f'{func}Item::{ctx.ITEM()}).into()'
         elif ctx.num():
             return f'{func}{", ".join(self.visit(n) for n in ctx.num())})'
         else:

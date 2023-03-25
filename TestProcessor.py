@@ -124,6 +124,8 @@ class TestProcessor(object):
                         self.errors.append(f'Somehow missed a {testtype} subtype found in {src}: {subtype}')
 
     def _check_item(self, item: str, src: str):
+        if '{' in item:
+            item = item[:item.index('{')]
         if item not in self.all_items:
             self.errors.append(f'Unrecognized item in {src}: {item}')
 
