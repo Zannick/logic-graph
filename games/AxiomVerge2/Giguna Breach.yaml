@@ -1,0 +1,11 @@
+name: Giguna Breach
+data:
+  breach: true
+
+areas:
+- name: Peak
+  on_entry: $reset_old_area(^newpos); $breach_entry(`Giguna Breach > Peak > Save Point`);
+  spots:
+    - name: Save Point
+      coord: [15.5, 6.5]
+

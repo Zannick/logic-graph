@@ -16,7 +16,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
     ctx.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
-    ctx.cbits1.insert(flags::ContextBits1::ICE_AXE);
+    ctx.cbits2.insert(flags::ContextBits2::ICE_AXE);
     ctx.infect = 1;
     ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
     ctx.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);

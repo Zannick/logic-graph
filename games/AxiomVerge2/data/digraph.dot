@@ -418,6 +418,15 @@ digraph AxiomVerge2 {
         label = "Mt Ebih";
         bgcolor = "lightgrey";
     }
+    subgraph cluster_Giguna_Breach {
+        subgraph cluster_Giguna_Breach__Peak {
+            Giguna_Breach__Peak__Save_Point [label = "Save Point"];
+            label = "Peak";
+            bgcolor = "white";
+        }
+        label = "Giguna Breach";
+        bgcolor = "lightgrey";
+    }
     subgraph cluster_Giguna {
         subgraph cluster_Giguna__Giguna_Northeast {
             Giguna__Giguna_Northeast__East_9 [label = "East 9"];
@@ -452,8 +461,66 @@ digraph AxiomVerge2 {
             Giguna__Carnelian__Lower_Susar [label = "Lower Susar"];
             Giguna__Carnelian__Upper_Path [label = "Upper Path"];
             Giguna__Carnelian__West_Ledge [label = "West Ledge"];
-            Giguna__Carnelian__East_10 [label = "East 10"];
+            Giguna__Carnelian__West_10 [label = "West 10"];
             label = "Carnelian";
+            bgcolor = "white";
+        }
+        subgraph cluster_Giguna__West_Caverns {
+            Giguna__West_Caverns__East_10 [label = "East 10"];
+            Giguna__West_Caverns__East_Platform [label = "East Platform"];
+            Giguna__West_Caverns__Tunnel_Entrance [label = "Tunnel Entrance"];
+            Giguna__West_Caverns__Small_Platform [label = "Small Platform"];
+            Giguna__West_Caverns__Higher_Ledge [label = "Higher Ledge"];
+            Giguna__West_Caverns__Column_2_Top [label = "Column 2 Top"];
+            Giguna__West_Caverns__Top_Gap_Right [label = "Top Gap Right"];
+            Giguna__West_Caverns__Top_Gap_Left [label = "Top Gap Left"];
+            Giguna__West_Caverns__Column_1_Top_Right [label = "Column 1 Top Right"];
+            Giguna__West_Caverns__Column_1_Top_Left [label = "Column 1 Top Left"];
+            Giguna__West_Caverns__Cache [label = "Cache"];
+            Giguna__West_Caverns__Bush [label = "Bush"];
+            Giguna__West_Caverns__Tunnel_Bottom [label = "Tunnel Bottom"];
+            Giguna__West_Caverns__Tunnel_Fork [label = "Tunnel Fork"];
+            Giguna__West_Caverns__East_Susar [label = "East Susar"];
+            Giguna__West_Caverns__East_12 [label = "East 12"];
+            Giguna__West_Caverns__East_13 [label = "East 13"];
+            label = "West Caverns";
+            bgcolor = "white";
+        }
+        subgraph cluster_Giguna__Wasteland {
+            Giguna__Wasteland__West_12 [label = "West 12"];
+            Giguna__Wasteland__Upper_Cliff [label = "Upper Cliff"];
+            Giguna__Wasteland__West_13 [label = "West 13"];
+            Giguna__Wasteland__Middle_Path [label = "Middle Path"];
+            Giguna__Wasteland__Middle_Cliff [label = "Middle Cliff"];
+            Giguna__Wasteland__Lower_Path_Right [label = "Lower Path Right"];
+            Giguna__Wasteland__Lower_Path_Left [label = "Lower Path Left"];
+            Giguna__Wasteland__Lower_Cliff [label = "Lower Cliff"];
+            Giguna__Wasteland__West_14 [label = "West 14"];
+            label = "Wasteland";
+            bgcolor = "white";
+        }
+        subgraph cluster_Giguna__Giguna_Base {
+            Giguna__Giguna_Base__East_14 [label = "East 14"];
+            Giguna__Giguna_Base__Stone_Knob [label = "Stone Knob"];
+            Giguna__Giguna_Base__Upper_Cliff [label = "Upper Cliff"];
+            Giguna__Giguna_Base__Right_Pillar [label = "Right Pillar"];
+            Giguna__Giguna_Base__Left_Pillar [label = "Left Pillar"];
+            Giguna__Giguna_Base__Ruin [label = "Ruin"];
+            Giguna__Giguna_Base__Middle_Platform [label = "Middle Platform"];
+            Giguna__Giguna_Base__Kari [label = "Kari"];
+            Giguna__Giguna_Base__Building_Entry [label = "Building Entry"];
+            Giguna__Giguna_Base__West_Grate [label = "West Grate"];
+            Giguna__Giguna_Base__Staircase_Bottom [label = "Staircase Bottom"];
+            Giguna__Giguna_Base__Table [label = "Table"];
+            Giguna__Giguna_Base__Save_Point [label = "Save Point"];
+            Giguna__Giguna_Base__West_16 [label = "West 16"];
+            label = "Giguna Base";
+            bgcolor = "white";
+        }
+        subgraph cluster_Giguna__Building_Interior {
+            Giguna__Building_Interior__Entry [label = "Entry"];
+            Giguna__Building_Interior__Bookshelf [label = "Bookshelf"];
+            label = "Building Interior";
             bgcolor = "white";
         }
         label = "Giguna Steppes";
@@ -854,6 +921,7 @@ digraph AxiomVerge2 {
     Giguna__Giguna_Northeast__West_10 -> Giguna__Carnelian__East_10;
     Giguna__Giguna_Northeast__Gate_Left -> Giguna__Giguna_Northeast__Gate_Button;
     Giguna__Giguna_Northeast__Gate_Button -> Giguna__Giguna_Northeast__Gate_Left;
+    Giguna__Giguna_Northeast__East_11 -> Ebih__Ebih_West__Alcove;
     Giguna__Giguna_Northeast__Right_Column -> Giguna__Giguna_Northeast__Door;
     Giguna__Giguna_Northeast__Switch -> Giguna__Giguna_Northeast__Door;
     Giguna__Giguna_Northeast__Switch -> Giguna__Giguna_Northeast__Right_Column;
@@ -871,7 +939,38 @@ digraph AxiomVerge2 {
     Giguna__Carnelian__Lower_Susar -> Giguna__Carnelian__Rock;
     Giguna__Carnelian__Lower_Susar -> Giguna__Carnelian__West_Ledge;
     Giguna__Carnelian__Lower_Susar -> Giguna__Carnelian__West_Ledge;
-    Giguna__Carnelian__West_Ledge -> Giguna__Carnelian__East_10;
+    Giguna__Carnelian__West_Ledge -> Giguna__Carnelian__West_10;
+    Giguna__Carnelian__West_10 -> Giguna__West_Caverns__East_10;
+    Giguna__West_Caverns__East_10 -> Giguna__Carnelian__West_10;
+    Giguna__West_Caverns__East_10 -> Giguna__West_Caverns__Column_2_Top;
+    Giguna__West_Caverns__Tunnel_Bottom -> Giguna__West_Caverns__Tunnel_Entrance;
+    Giguna__West_Caverns__Tunnel_Fork -> Giguna__West_Caverns__Tunnel_Bottom;
+    Giguna__West_Caverns__Tunnel_Fork -> Giguna__West_Caverns__Tunnel_Entrance;
+    Giguna__West_Caverns__East_Susar -> Giguna__West_Caverns__East_12;
+    Giguna__West_Caverns__East_Susar -> Giguna__West_Caverns__Tunnel_Fork;
+    Giguna__West_Caverns__East_12 -> Giguna__Wasteland__West_12;
+    Giguna__West_Caverns__East_13 -> Giguna__Wasteland__West_13;
+    Giguna__Wasteland__West_12 -> Giguna__West_Caverns__East_12;
+    Giguna__Wasteland__West_13 -> Giguna__West_Caverns__East_13;
+    Giguna__Wasteland__Lower_Path_Right -> Giguna__Wasteland__Lower_Cliff;
+    Giguna__Wasteland__Lower_Cliff -> Giguna__Wasteland__Middle_Cliff;
+    Giguna__Wasteland__Lower_Cliff -> Giguna__Wasteland__Middle_Cliff;
+    Giguna__Wasteland__West_14 -> Giguna__Giguna_Base__East_14;
+    Giguna__Giguna_Base__East_14 -> Giguna__Wasteland__West_14;
+    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Upper_Cliff;
+    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Upper_Cliff;
+    Giguna__Giguna_Base__Right_Pillar -> Giguna__Giguna_Base__Left_Pillar;
+    Giguna__Giguna_Base__Left_Pillar -> Giguna__Giguna_Base__Right_Pillar;
+    Giguna__Giguna_Base__Ruin -> Giguna__Giguna_Base__Left_Pillar;
+    Giguna__Giguna_Base__Ruin -> Giguna__Giguna_Base__Right_Pillar;
+    Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Stone_Knob;
+    Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Stone_Knob;
+    Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__West_Grate;
+    Giguna__Giguna_Base__West_Grate -> Giguna__Giguna_Base__Left_Pillar;
+    Giguna__Giguna_Base__West_Grate -> Giguna__Giguna_Base__Left_Pillar;
+    Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
+    Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
+    Giguna__Building_Interior__Entry -> Giguna__Giguna_Base__Building_Entry;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;

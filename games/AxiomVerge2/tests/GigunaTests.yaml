@@ -1,0 +1,41 @@
+name: GigunaTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+    - Boomerang
+    - Ledge_Grab
+    - Infect{3}
+    - Remote_Drone
+    - Shockwave
+    - Underwater_Movement
+  context:
+    energy: 300
+    save: Giguna > Giguna Northeast > Save Point
+
+tests:
+  - start: Giguna > Giguna Northeast > Save Point
+    can_reach: Giguna > Carnelian > Upper Susar
+
+  - start: Giguna > Carnelian > Upper Susar
+    context:
+      giguna__carnelian__ctx__upper_susar: true
+    can_reach: Giguna > West Caverns > East Susar
+
+  - start: Giguna > Carnelian > Upper Susar
+    context:
+      giguna__carnelian__ctx__upper_susar: true
+    can_obtain: Wall_Climb
+
+  - start: Giguna > West Caverns > East Susar
+    context:
+      giguna__west_caverns__ctx__east_susar: true
+    can_obtain: Wall_Climb
+
+  - start: Giguna > Giguna Northeast > Save Point
+    can_activate: Giguna > Carnelian > Switch > Open Door
+
+  - start: Giguna > Carnelian > Switch
+    context:
+      giguna__carnelian__ctx__door_opened: true
+    can_access: Giguna > Carnelian > Vault > Item

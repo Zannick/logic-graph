@@ -105,3 +105,8 @@ tests:
       - Ebih > Grid 26,10-11 > West 10
       - Ebih > Grid 25,10-12 > East 10
       - Ebih > Grid 25,10-12 > Hidden Bush
+
+  - start: Ebih > Ebih West > Upper Save
+    with:
+      - Remote_Drone
+    eventually_reaches: Giguna > Giguna Northeast > Inner Wall

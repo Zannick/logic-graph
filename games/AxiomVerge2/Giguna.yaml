@@ -34,10 +34,20 @@ areas:
           jumps: 1
         - to: Gate Left
         - to: Crow Eating
+      locations:
+        - name: Seen
+          item: Map_17_10
+          time: 0
+          tags: [map]
       actions:
         - name: Save
           do: $save
           time: 1.3
+        # Stopgap for greedy search not able to do a global Recall
+        - name: Save and Bring Indra
+          req: ^mode == 'drone'
+          do: $save; ^mode = 'Indra';
+          time: 18.5
       exits:
         - to: Gate Vent
           req: $hover and $hook
@@ -127,6 +137,10 @@ areas:
       local:
         - to: Shaft Bottom
           jumps: 1
+      exits:
+        # TODO: replace fake way back with real way back
+        - to: Ebih > Ebih West > Alcove
+          time: 2
     - name: Right Column
       coord: [17.9, 10.5]
       local:
@@ -196,6 +210,8 @@ areas:
           jumps: 2
         - to: Upper Susar
           jumps: 2
+        - to: Middle Platforms
+        - to: Switch
     - name: Upper Susar
       coord: [15.85, 9.6]
       exits:
@@ -285,6 +301,7 @@ areas:
         - name: Hack
           req: not ^_lower_susar and $allegiance1
           do: ^_lower_susar = true
+          price: 100
           time: 0.5
     - name: Upper Path
       coord: [15.6, 9.6]
@@ -295,12 +312,435 @@ areas:
       coord: [15.3, 10.1]
       local:
         - to: Lower Susar
-        - to: East 10
+        - to: West 10
         - to: Upper Path
       exits:
-        - to: East 10
+        - to: West 10
           req: $grab
-    - name: East 10
+    - name: West 10
       coord: [15.05, 9.7]
       local:
         - to: West Ledge
+      exits:
+        - to: West Caverns > East 10
+          tags: [xshift]
+
+- name: West Caverns
+  on_entry: $reset_old_area(^newpos)
+  reset:
+    _east_susar: false
+  spots:
+    - name: East 10
+      coord: [14.95, 9.7]
+      local:
+        - to: East Platform
+        - to: Tunnel Entrance
+      exits:
+        - to: Carnelian > West 10
+          tags: [xshift]
+        - to: Column 2 Top
+          req: $hover
+          time: 6
+    - name: East Platform
+      coord: [14.5, 10.1]
+      local:
+        - to: Tunnel Entrance
+          jumps_down: 1
+        - to: Small Platform
+    - name: Tunnel Entrance
+      coord: [14.55, 10.7]
+      local:
+        - to: Small Platform
+          jumps: 3
+        - to: Tunnel Bottom
+      # TODO: exit to East 10 with wall climb?
+    - name: Small Platform
+      coord: [14.2, 10.2]
+      local:
+        - to: Higher Ledge
+      actions:
+        - name: Throw Drone Up
+          req: $can_deploy
+          do: $deploy_drone(`Giguna > West Caverns > Higher Ledge`)
+          time: 1.5
+    - name: Higher Ledge
+      coord: [14.1, 9.9]
+      local:
+        - to: Column 2 Top
+          jumps: 4
+        - to: Small Platform
+        - to: East Platform
+        - to: Tunnel Entrance
+    - name: Column 2 Top
+      coord: [14, 9.3]
+      local:
+        - to: Higher Ledge
+        - to: East Platform
+        - to: Top Gap Right
+    - name: Top Gap Right
+      coord: [13.6, 9.5]
+      local:
+        - to: Column 2 Top
+        - to: Top Gap Left
+    - name: Top Gap Left
+      coord: [13.4, 9.6]
+      local:
+        - to: Top Gap Right
+        - to: Column 1 Top Right
+          jumps: 1
+    - name: Column 1 Top Right
+      coord: [13.35, 9.3]
+      local:
+        - to: Top Gap Left
+        - to: Top Gap Right
+        - to: Column 1 Top Left
+    - name: Column 1 Top Left
+      coord: [13, 9.3]
+      local:
+        - to: Column 1 Top Right
+        - to: Cache
+        - to: Bush
+    - name: Cache
+      coord: [13.1, 9.8]
+      local:
+        - to: Bush
+        - to: Column 1 Top Left
+          thru: [12.8, 9.5]
+          jumps: [2, 1]
+      locations:
+        - name: Item
+          item: Power_Matrix
+          tags: [standing]
+    - name: Bush
+      coord: [12.5, 9.8]
+      local:
+        - to: Cache
+        - to: Column 1 Top Left
+          thru: [12.8, 9.5]
+          jumps: [2, 1]
+      locations:
+        - name: Item
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+
+    - name: Tunnel Bottom
+      coord: [14.8, 11.4]
+      local:
+        - to: Tunnel Fork
+        - to: Tunnel Entrance
+      exits:
+        - to: Tunnel Entrance
+          req: $grab
+          time: 2.25
+    - name: Tunnel Fork
+      coord: [14.7, 11.7]
+      local:
+        - to: East Susar
+        - to: East 13
+          thru: [14.5, 11.7]
+      exits:
+        - to: Tunnel Bottom
+          req: $grab
+          time: 0.85
+        - to: Tunnel Entrance
+          req: $hook
+          time: 2.25
+    - name: East Susar
+      coord: [14.8, 11.7]
+      exits:
+        - to: Tunnel Fork
+          req: ^_east_susar
+          time: 0.35
+        - to: East 12
+          req: ^_east_susar
+          time: 0.5
+      actions:
+        - name: Caught
+          req: not ^_east_susar
+          do: ^_east_susar = true
+          time: 3
+        - name: Hack
+          req: not ^_east_susar and $allegiance1
+          do: ^_east_susar = true
+          price: 100
+          time: 0.5
+    - name: East 12
+      coord: [14.95, 11.7]
+      local:
+        - to: East Susar
+      exits:
+        - to: Wasteland > West 12
+          tags: [xshift]
+    - name: East 13
+      coord: [14.95, 12.7]
+      exits:
+        - to: Wasteland > West 13
+          tags: [xshift]
+
+- name: Wasteland
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 12
+      coord: [15.05, 11.7]
+      local:
+        - to: Upper Cliff
+      exits:
+        - to: West Caverns > East 12
+          tags: [xshift]
+    - name: Upper Cliff
+      coord: [15.3, 11.9]
+      local:
+        - to: West 12
+          jumps: 1
+        - to: West 13
+          thru: [15.4, 12.2]
+        - to: Lower Cliff
+    - name: West 13
+      coord: [15.05, 12.7]
+      local:
+        - to: Middle Path
+          jumps: 1
+      exits:
+        - to: West Caverns > East 13
+          tags: [xshift]
+    - name: Middle Path
+      coord: [15.4, 12.6]
+      local:
+        - to: West 13
+        - to: Middle Cliff
+          jumps: 2
+    - name: Middle Cliff
+      coord: [15.7, 12.4]
+      local:
+        - to: Upper Cliff
+        - to: Middle Path
+        - to: Lower Cliff
+        - to: Lower Path Right
+      actions:
+        - name: Throw Drone
+          req: $can_deploy and Slingshot_Hook
+          do: $deploy_drone_and_move(`Giguna > Wasteland > West 12`, `Giguna > Wasteland > Middle Path`)
+          time: 3.5
+    - name: Lower Path Right
+      coord: [15.65, 13.3]
+      local:
+        - to: Lower Path Left
+      exits:
+        - to: Lower Cliff
+          req: $climb
+          time: 1.5
+    - name: Lower Path Left
+      coord: [15.4, 13.3]
+      local:
+        - to: Lower Path Right
+        - to: West 14
+    - name: Lower Cliff
+      coord: [15.8, 12.8]
+      local:
+        - to: Lower Path Left
+      exits:
+        - to: Middle Cliff
+          req: $climb
+        - to: Middle Cliff
+          req: $grab
+          time: 0.85
+    - name: West 14
+      coord: [15.05, 13.7]
+      local:
+        - to: Lower Path Left
+          jumps: 2
+      exits:
+        - to: Giguna Base > East 14
+          tags: [xshift]
+
+- name: Giguna Base
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 14
+      coord: [14.95, 13.7]
+      local:
+        - to: Stone Knob
+      exits:
+        - to: Wasteland > West 14
+          tags: [xshift]
+    - name: Stone Knob
+      coord: [14.5, 13.9]
+      local:
+        - to: Upper Cliff
+        - to: Kari
+          thru: [14.35, 14.1]
+        - to: Middle Platform
+          thru: [14.35, 14.1]
+      exits:
+        - to: Upper Cliff
+          req: $climb
+          time: 1.5
+        - to: Upper Cliff
+          req: $hook
+          time: 1
+      actions:
+        - name: Throw Drone
+          req: $can_deploy
+          do: $deploy_drone_and_move(`Giguna > Giguna Base > Upper Cliff`, `Giguna > Giguna Base > Kari`)
+    - name: Upper Cliff
+      coord: [14.2, 13.6]
+      local:
+        - to: Stone Knob
+        - to: Kari
+          thru: [14.35, 14.1]
+        - to: Middle Platform
+          thru: [14.35, 14.1]
+        - to: Right Pillar
+    - name: Right Pillar
+      coord: [13.95, 13.6]
+      local:
+        - to: Ruin
+      exits:
+        - to: Left Pillar
+          req: $grab
+          time: 1.5
+    - name: Left Pillar
+      coord: [13.5, 13.6]
+      local:
+        - to: Ruin
+      exits:
+        - to: Right Pillar
+          req: $grab
+          time: 1.5
+    - name: Ruin
+      coord: [13.75, 14]
+      locations:
+        - name: Item
+          item: Wall_Climb
+          tags: [urn]
+      exits:
+        - to: Right Pillar
+          req: $climb
+          time: 1.5
+        - to: Left Pillar
+          req: $grab and $climb
+          time: 1.5
+    - name: Middle Platform
+      coord: [14.5, 14.7]
+      local:
+        - to: Kari
+        - to: Building Entry
+      exits:
+        - to: Stone Knob
+          req: $grab
+          time: 2.35
+        - to: Stone Knob
+          req: $hook
+          time: 1.5
+        - to: West Grate
+          req: $hover
+          time: 4.2
+    - name: Kari
+      coord: [14.4, 15.5]
+      local:
+        - to: Middle Platform
+          jumps: 5
+        - to: Building Entry
+          jumps: 1
+        - to: Table
+          jumps_down: 1
+    - name: Building Entry
+      coord: [14.1, 15.5]
+      local:
+        - to: Staircase Bottom
+        - to: Save Point
+          jumps_down: 1
+        - to: Table
+          jumps_down: 1
+        - to: Kari
+    - name: West Grate
+      coord: [13.2, 14.8]
+      local:
+        - to: Staircase Bottom
+          jumps_down: 2
+        - to: Table
+          jumps_down: 4
+        - to: Save Point
+          jumps_down: 3
+        - to: Building Entry
+      exits:
+        - to: Left Pillar
+          req: $grab
+          time: 4
+        - to: Left Pillar
+          req: $hook
+          time: 3.5
+        # TODO: next area
+    - name: Staircase Bottom
+      coord: [13.2, 15.7]
+      local:
+        - to: West Grate
+          jumps: 5
+        - to: Save Point
+          jumps_down: 1
+        - to: West 16
+        - to: Building Entry
+          jumps: 1
+    - name: Table
+      coord: [13.7, 16]
+      local:
+        - to: Kari
+          thru: [14, 15.9]
+          jumps: [1, 2]
+        - to: Building Entry
+          thru: [14, 15.9]
+          jumps: [1, 2]
+        - to: Save Point
+          jumps: 1
+      locations:
+        - name: News
+          item: Researchers_Missing
+          tags: [standing]
+    - name: Save Point
+      coord: [13.5, 15.8]
+      local:
+        - to: Staircase Bottom
+          jumps: 1
+        - to: Building Entry
+          jumps: 2
+        - to: Table
+        - to: West 16
+      actions:
+        - name: Save
+          do: $save
+          time: 1.3
+    - name: West 16
+      coord: [13.05, 15.8]
+      local:
+        - to: Staircase Bottom
+          jumps: 1
+        - to: Save Point
+      # todo: next area
+
+- name: Building Interior
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Entry
+      coord: [14.1, 15.5]
+      local:
+        - to: Bookshelf
+          jumps: 3
+      exits:
+        - to: Bookshelf
+          req: $grab or $climb
+          time: 1.35
+        - to: Bookshelf
+          req: $hook
+          time: 1
+        - to: Giguna Base > Building Entry
+          tags: [exterior]
+    - name: Bookshelf
+      coord: [13.9, 15.1]
+      local:
+        - to: Entry
+          jumps_down: 2
+      locations:
+        - name: Note
+          item: Letter_from_Trace
+          tags: [standing]

@@ -12,10 +12,12 @@ start:
   prev_area: Antarctica > West
   energy: 0
   flasks: 0
+  refills: 0
 
 data:
   breach: false
   water: false
+  flipside: SpotId::None
 
 
 # TODO: the win condition should be an item Victory,
@@ -27,7 +29,7 @@ objectives:
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: Remote_Drone and Shockwave and Underwater_Movement and Flask{5}
+  Progress%: Remote_Drone and Shockwave and Power_Matrix and Wall_Climb and Flask{5}
 
 movements:
   default:  # the slowest movement is in water
@@ -108,6 +110,11 @@ warps:
     time: 0.2
     req: WITHIN `Menu`
     to: ^last
+  fast_travel_17_10:
+    time: 12
+    req: NOT WITHIN `Menu` and Map_17_10 and Fast_Travel
+    to: Giguna > Giguna Northeast > Save Point
+    do: ^energy = $max_energy
 
 # TODO: under some conditions, fast travel indra can appear standing up
 # 7s. I think it's immediately after savewarping.
@@ -144,6 +151,7 @@ helpers:
   $unlock2: Infect{2}
   $unlock3: Infect{3}
 
+  $more_refills: ^refills < $count(Power_Matrix)
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 
@@ -153,6 +161,13 @@ helpers:
   $block_clip_escape: minor_glitches and $hook
 
   $save:action: ^save = ^position; ^energy = $max_energy
+  $deploy_drone:action(newpos:SpotId): >
+    ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
+  $deploy_drone_and_move:action(dronepos:SpotId, indrapos:SpotId): >
+    ^mode = 'drone'; ^indra = ^indrapos; ^position = ^dronepos;
+
+  # entry rules
+  # ^position is the old value
   $reset_old_area:action(newpos:SpotId): >
     IF (^position NOT WITHIN ^prev_area
         AND ^position NOT WITHIN `Menu`
@@ -162,10 +177,8 @@ helpers:
             };
             ^prev_area = $get_area(^position);
     }
-  $deploy_drone:action(newpos:SpotId): >
-    ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
-  $deploy_drone_and_move:action(dronepos:SpotId, indrapos:SpotId): >
-    ^mode = 'drone'; ^indra = ^indrapos; ^position = ^dronepos;
+  $breach_entry:action(newsave:SpotId): >
+    IF (NOT ^breach) { ^save = ^newsave; }
 
 
 collect:
@@ -174,6 +187,7 @@ collect:
   #Big_Flask: ^flasks += 2
   Infect: ^energy = $max_energy
   Health_Node: ^energy = $max_energy
+  Power_Core: ^refills += 1
   Amagi_Stronghold_Wall_And_Boulder_1: >
     $skip(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`);
     $add_item(Amagi_Stronghold_Wall_1);

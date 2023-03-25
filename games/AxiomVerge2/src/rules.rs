@@ -327,6 +327,22 @@ pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(ctx: &Context) ->
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
+pub fn access_giguna__west_caverns__east_susar__caught__req(ctx: &Context) -> bool {
+    // not ^_east_susar
+    !ctx.giguna__west_caverns__ctx__east_susar()
+}
+pub fn access_giguna__west_caverns__east_susar__ex__east_12_1__req(ctx: &Context) -> bool {
+    // ^_east_susar
+    ctx.giguna__west_caverns__ctx__east_susar()
+}
+pub fn access_giguna__west_caverns__east_susar__ex__tunnel_fork_1__req(ctx: &Context) -> bool {
+    // ^_east_susar
+    ctx.giguna__west_caverns__ctx__east_susar()
+}
+pub fn access_giguna__west_caverns__east_susar__hack__req(ctx: &Context) -> bool {
+    // not ^_east_susar and $allegiance1
+    (!ctx.giguna__west_caverns__ctx__east_susar() && helper__allegiance1!(ctx))
+}
 pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
@@ -334,6 +350,10 @@ pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
 pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
+}
+pub fn access_grab_and_climb(ctx: &Context) -> bool {
+    // $grab and $climb
+    (helper__grab!(ctx) && helper__climb!(ctx))
 }
 pub fn access_grab_and_switch_40_12(ctx: &Context) -> bool {
     // $grab and Switch_40_12
@@ -463,6 +483,10 @@ pub fn access_mode__drone_and_ebih_waterfall_block_right(ctx: &Context) -> bool 
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
 }
+pub fn access_more_refills(ctx: &Context) -> bool {
+    // $more_refills
+    helper__more_refills!(ctx)
+}
 pub fn access_nanite_mist(ctx: &Context) -> bool {
     // Nanite_Mist
     ctx.has(Item::Nanite_Mist)
@@ -504,6 +528,14 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
         RegionId::Menu => true,
         _ => false,
     }) && ctx.flasks() > 0)
+}
+pub fn access_not_within_menu_and_map_17_10_and_fast_travel(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and Map_17_10 and Fast_Travel
+    ((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && ctx.has(Item::Map_17_10))
+        && ctx.has(Item::Fast_Travel))
 }
 pub fn access_not_within_menu_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and ^mode == 'drone'
@@ -556,12 +588,12 @@ pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
-pub fn access_remote_drone_and_shockwave_and_underwater_movement_and_flask__5(
+pub fn access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5(
     ctx: &Context,
 ) -> bool {
-    // Remote_Drone and Shockwave and Underwater_Movement and Flask{5}
-    (((ctx.has(Item::Remote_Drone) && ctx.has(Item::Shockwave))
-        && ctx.has(Item::Underwater_Movement))
+    // Remote_Drone and Shockwave and Power_Matrix and Wall_Climb and Flask{5}
+    ((((ctx.has(Item::Remote_Drone) && ctx.has(Item::Shockwave)) && ctx.has(Item::Power_Matrix))
+        && ctx.has(Item::Wall_Climb))
         && ctx.count(Item::Flask) >= 5)
 }
 pub fn access_shockwave(ctx: &Context) -> bool {
@@ -626,6 +658,10 @@ pub fn action_deploy_drone__giguna__giguna_northeast__gate_vent(ctx: &mut Contex
     // $deploy_drone(`Giguna > Giguna Northeast > Gate Vent`)
     helper__deploy_drone!(ctx, SpotId::Giguna__Giguna_Northeast__Gate_Vent);
 }
+pub fn action_deploy_drone__giguna__west_caverns__higher_ledge(ctx: &mut Context) {
+    // $deploy_drone(`Giguna > West Caverns > Higher Ledge`)
+    helper__deploy_drone!(ctx, SpotId::Giguna__West_Caverns__Higher_Ledge);
+}
 pub fn action_deploy_drone_and_move__ebih__drone_room__east_4_ebih__drone_room__tree(
     ctx: &mut Context,
 ) {
@@ -636,6 +672,16 @@ pub fn action_deploy_drone_and_move__ebih__drone_room__east_4_ebih__drone_room__
         SpotId::Ebih__Drone_Room__Tree
     );
 }
+pub fn action_deploy_drone_and_move__giguna__giguna_base__upper_cliff_giguna__giguna_base__kari(
+    ctx: &mut Context,
+) {
+    // $deploy_drone_and_move(`Giguna > Giguna Base > Upper Cliff`, `Giguna > Giguna Base > Kari`)
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Giguna__Giguna_Base__Upper_Cliff,
+        SpotId::Giguna__Giguna_Base__Kari
+    );
+}
 pub fn action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__ebih_west__alcove_entrance(
     ctx: &mut Context,
 ) {
@@ -644,6 +690,16 @@ pub fn action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__
         ctx,
         SpotId::Giguna__Giguna_Northeast__Inner_Wall,
         SpotId::Ebih__Ebih_West__Alcove_Entrance
+    );
+}
+pub fn action_deploy_drone_and_move__giguna__wasteland__west_12_giguna__wasteland__middle_path(
+    ctx: &mut Context,
+) {
+    // $deploy_drone_and_move(`Giguna > Wasteland > West 12`, `Giguna > Wasteland > Middle Path`)
+    helper__deploy_drone_and_move!(
+        ctx,
+        SpotId::Giguna__Wasteland__West_12,
+        SpotId::Giguna__Wasteland__Middle_Path
     );
 }
 pub fn action_ebih__base_camp__left_platform__move_left_platform__do(ctx: &mut Context) {
@@ -738,6 +794,14 @@ pub fn action_giguna__giguna_northeast__switch__open_door__do(ctx: &mut Context)
     // ^_door_opened = true
     ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
 }
+pub fn action_giguna__west_caverns__east_susar__caught__do(ctx: &mut Context) {
+    // ^_east_susar = true
+    ctx.set_giguna__west_caverns__ctx__east_susar(true);
+}
+pub fn action_giguna__west_caverns__east_susar__hack__do(ctx: &mut Context) {
+    // ^_east_susar = true
+    ctx.set_giguna__west_caverns__ctx__east_susar(true);
+}
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
     ctx.set_last(ctx.position());
@@ -752,9 +816,21 @@ pub fn action_mode__indra_position__indra(ctx: &mut Context) {
     ctx.set_mode(enums::Mode::Indra);
     ctx.set_position(ctx.indra());
 }
+pub fn action_refills__1(ctx: &mut Context) {
+    // ^refills += 1
+    ctx.refills += 1;
+}
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
     helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos_breach_entry__giguna_breach__peak__save_point(
+    ctx: &mut Context,
+    newpos: SpotId,
+) {
+    // $reset_old_area(^newpos); $breach_entry(`Giguna Breach > Peak > Save Point`);
+    helper__reset_old_area!(ctx, newpos);
+    helper__breach_entry!(ctx, SpotId::Giguna_Breach__Peak__Save_Point);
 }
 pub fn action_save(ctx: &mut Context) {
     // $save
@@ -763,6 +839,11 @@ pub fn action_save(ctx: &mut Context) {
 pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
+}
+pub fn action_save_mode__indra(ctx: &mut Context) {
+    // $save; ^mode = 'Indra';
+    helper__save!(ctx);
+    ctx.set_mode(enums::Mode::Indra);
 }
 pub fn action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
     ctx: &mut Context,

@@ -47,6 +47,7 @@ pub mod data {
     use crate::graph::*;
     pub fn breach(spot_id: SpotId) -> bool {
         match spot_id {
+            SpotId::Giguna_Breach__Peak__Save_Point => true,
             _ => false,
         }
     }
@@ -149,6 +150,11 @@ pub mod data {
             _ => false,
         }
     }
+    pub fn flipside(spot_id: SpotId) -> SpotId {
+        match spot_id {
+            _ => SpotId::None,
+        }
+    }
 }
 
 pub mod flags {
@@ -168,43 +174,47 @@ pub mod flags {
             const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 8;
             const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 9;
             const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 10;
-            const BOOMERANG_STEERING = 1 << 11;
-            const MAJOR_GLITCHES = 1 << 12;
-            const MINOR_GLITCHES = 1 << 13;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 14;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 15;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 16;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 17;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 18;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 19;
-            const AMASHILAMA = 1 << 20;
-            const ANUMAN = 1 << 21;
-            const APOCALYPSE_BOMB = 1 << 22;
-            const BOOMERANG = 1 << 23;
-            const DEFEAT_EBIH_ALU = 1 << 24;
-            const DEFEAT_MUS_A_M20 = 1 << 25;
-            const DRONE_HOVER = 1 << 26;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 27;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 28;
-            const GIGUNA_NORTHEAST_GATE = 1 << 29;
-            const ICE_AXE = 1 << 30;
-            const INFECTION_SPEED = 1 << 31;
+            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 11;
+            const BOOMERANG_STEERING = 1 << 12;
+            const MAJOR_GLITCHES = 1 << 13;
+            const MINOR_GLITCHES = 1 << 14;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 15;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 16;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 17;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 18;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 19;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 20;
+            const AMASHILAMA = 1 << 21;
+            const ANUMAN = 1 << 22;
+            const APOCALYPSE_BOMB = 1 << 23;
+            const BOOMERANG = 1 << 24;
+            const DEFEAT_EBIH_ALU = 1 << 25;
+            const DEFEAT_MUS_A_M20 = 1 << 26;
+            const DRONE_HOVER = 1 << 27;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 28;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 29;
+            const FAST_TRAVEL = 1 << 30;
+            const GIGUNA_NORTHEAST_GATE = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
         pub struct ContextBits2 : u16 {
-            const LEDGE_GRAB = 1 << 0;
-            const MIST_UPGRADE = 1 << 1;
-            const NANITE_MIST = 1 << 2;
-            const REMOTE_DRONE = 1 << 3;
-            const SHOCKWAVE = 1 << 4;
-            const SLINGSHOT_HOOK = 1 << 5;
-            const STATION_POWER = 1 << 6;
-            const SWITCH_36_11 = 1 << 7;
-            const SWITCH_40_12 = 1 << 8;
-            const UNDERWATER_MOVEMENT = 1 << 9;
-            const WALL_CLIMB = 1 << 10;
+            const ICE_AXE = 1 << 0;
+            const INFECTION_SPEED = 1 << 1;
+            const LEDGE_GRAB = 1 << 2;
+            const MAP_17_10 = 1 << 3;
+            const MIST_UPGRADE = 1 << 4;
+            const NANITE_MIST = 1 << 5;
+            const POWER_MATRIX = 1 << 6;
+            const REMOTE_DRONE = 1 << 7;
+            const SHOCKWAVE = 1 << 8;
+            const SLINGSHOT_HOOK = 1 << 9;
+            const STATION_POWER = 1 << 10;
+            const SWITCH_36_11 = 1 << 11;
+            const SWITCH_40_12 = 1 << 12;
+            const UNDERWATER_MOVEMENT = 1 << 13;
+            const WALL_CLIMB = 1 << 14;
         }
     }
 }
@@ -228,6 +238,7 @@ pub struct Context {
     pub prev_area: AreaId,
     pub energy: i32,
     pub flasks: i32,
+    pub refills: i32,
     // settings
     // items
     pub drone_melee_damage: i8,
@@ -261,6 +272,7 @@ impl Default for Context {
             prev_area: AreaId::Antarctica__West,
             energy: 0,
             flasks: 0,
+            refills: 0,
             // settings
             // items
             drone_melee_damage: Default::default(),
@@ -291,7 +303,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = 40;
+    const NUM_ITEMS: i32 = 43;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -328,21 +340,24 @@ impl context::Ctx for Context {
             Item::Ebih_Waterfall_Block_Right => self
                 .cbits1
                 .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT),
+            Item::Fast_Travel => self.cbits1.contains(flags::ContextBits1::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
             Item::Giguna_Northeast_Gate => self
                 .cbits1
                 .contains(flags::ContextBits1::GIGUNA_NORTHEAST_GATE),
             Item::Health_Upgrade => self.health_upgrade >= 1,
-            Item::Ice_Axe => self.cbits1.contains(flags::ContextBits1::ICE_AXE),
+            Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE),
             Item::Infect => self.infect >= 1,
             Item::Infection_Range => self.infection_range >= 1,
-            Item::Infection_Speed => self.cbits1.contains(flags::ContextBits1::INFECTION_SPEED),
+            Item::Infection_Speed => self.cbits2.contains(flags::ContextBits2::INFECTION_SPEED),
             Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB),
+            Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10),
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
             Item::Mist_Upgrade => self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE),
             Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
+            Item::Power_Matrix => self.cbits2.contains(flags::ContextBits2::POWER_MATRIX),
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
             Item::Remote_Drone => self.cbits2.contains(flags::ContextBits2::REMOTE_DRONE),
@@ -413,20 +428,25 @@ impl context::Ctx for Context {
                 .cbits1
                 .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT)
                 .into(),
+            Item::Fast_Travel => self
+                .cbits1
+                .contains(flags::ContextBits1::FAST_TRAVEL)
+                .into(),
             Item::Flask => self.flask.into(),
             Item::Giguna_Northeast_Gate => self
                 .cbits1
                 .contains(flags::ContextBits1::GIGUNA_NORTHEAST_GATE)
                 .into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
-            Item::Ice_Axe => self.cbits1.contains(flags::ContextBits1::ICE_AXE).into(),
+            Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE).into(),
             Item::Infect => self.infect.into(),
             Item::Infection_Range => self.infection_range.into(),
             Item::Infection_Speed => self
-                .cbits1
-                .contains(flags::ContextBits1::INFECTION_SPEED)
+                .cbits2
+                .contains(flags::ContextBits2::INFECTION_SPEED)
                 .into(),
             Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB).into(),
+            Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10).into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
             Item::Mist_Upgrade => self
@@ -438,6 +458,10 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::NANITE_MIST)
                 .into(),
             Item::Nano_Points => self.nano_points.into(),
+            Item::Power_Matrix => self
+                .cbits2
+                .contains(flags::ContextBits2::POWER_MATRIX)
+                .into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
             Item::Remote_Drone => self
@@ -523,6 +547,9 @@ impl context::Ctx for Context {
             Item::Ebih_Waterfall_Block_Right => {
                 self.cbits1.insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
             },
+            Item::Fast_Travel => {
+                self.cbits1.insert(flags::ContextBits1::FAST_TRAVEL);
+            },
             Item::Flask => {
                 self.flask += 1;
                 rules::action_flasks__1(self);
@@ -534,7 +561,7 @@ impl context::Ctx for Context {
                 self.health_upgrade += 1;
             },
             Item::Ice_Axe => {
-                self.cbits1.insert(flags::ContextBits1::ICE_AXE);
+                self.cbits2.insert(flags::ContextBits2::ICE_AXE);
             },
             Item::Infect => {
                 self.infect += 1;
@@ -544,10 +571,13 @@ impl context::Ctx for Context {
                 self.infection_range += 1;
             },
             Item::Infection_Speed => {
-                self.cbits1.insert(flags::ContextBits1::INFECTION_SPEED);
+                self.cbits2.insert(flags::ContextBits2::INFECTION_SPEED);
             },
             Item::Ledge_Grab => {
                 self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
+            },
+            Item::Map_17_10 => {
+                self.cbits2.insert(flags::ContextBits2::MAP_17_10);
             },
             Item::Melee_Damage => {
                 self.melee_damage += 1;
@@ -563,6 +593,9 @@ impl context::Ctx for Context {
             },
             Item::Nano_Points => {
                 self.nano_points += 1;
+            },
+            Item::Power_Matrix => {
+                self.cbits2.insert(flags::ContextBits2::POWER_MATRIX);
             },
             Item::Ranged_Damage => {
                 self.ranged_damage += 1;
@@ -595,6 +628,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::WALL_CLIMB);
             },
             Item::Health_Node => rules::action_energy__max_energy(self),
+            Item::Power_Core => rules::action_refills__1(self),
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self),
             Item::Ebih_Waterfall_Both_Blocks => rules::action_skip__ebih__waterfall__alcove__block_left_skip__ebih__waterfall__alcove__block_right_skip__ebih__waterfall__alcove_left__block_left_skip__ebih__waterfall__alcove_right__block_right_add_item__ebih_waterfall_block_right_add_item__ebih_waterfall_block_left(self),
@@ -723,7 +757,17 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Building_Interior => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Carnelian => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Giguna_Base => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -731,6 +775,21 @@ impl context::Ctx for Context {
             AreaId::Giguna__Giguna_Northeast => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Wasteland => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__West_Caverns => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Peak => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos_breach_entry__giguna_breach__peak__save_point(self, pos);
                 }
             }
             AreaId::Glacier__Apocalypse_Entry => {
@@ -842,6 +901,8 @@ impl context::Ctx for Context {
             .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
         self.cbits1
             .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
     }
 
     fn reset_region(&mut self, region_id: RegionId) {}
@@ -867,6 +928,10 @@ impl context::Ctx for Context {
                 self.cbits1
                     .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
             }
+            AreaId::Giguna__West_Caverns => {
+                self.cbits1
+                    .remove(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+            }
             _ => (),
         }
     }
@@ -875,6 +940,7 @@ impl context::Ctx for Context {
             Currency::Free => true,
             Currency::Energy(c) => self.energy >= *c,
             Currency::Flasks(c) => self.flasks >= *c,
+            Currency::Refills(c) => self.refills >= *c,
         }
     }
     fn spend(&mut self, cost: &Currency) {
@@ -882,6 +948,7 @@ impl context::Ctx for Context {
             Currency::Free => (),
             Currency::Energy(c) => self.energy -= *c,
             Currency::Flasks(c) => self.flasks -= *c,
+            Currency::Refills(c) => self.refills -= *c,
         }
     }
 
@@ -1080,6 +1147,18 @@ impl Context {
     pub fn set_flasks(&mut self, val: i32) {
         self.flasks = val;
     }
+    pub fn refills(&self) -> i32 {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.refills,
+                },
+            },
+        }
+    }
+    pub fn set_refills(&mut self, val: i32) {
+        self.refills = val;
+    }
     pub fn amagi__main_area__ctx__combo(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
@@ -1265,6 +1344,23 @@ impl Context {
             val,
         );
     }
+    pub fn giguna__west_caverns__ctx__east_susar(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__west_caverns__ctx__east_susar(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR,
+            val,
+        );
+    }
     // test helper for items
     pub fn add_item(&mut self, item: Item) {
         match item {
@@ -1327,6 +1423,9 @@ impl Context {
                 self.cbits1
                     .insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
             }
+            Item::Fast_Travel => {
+                self.cbits1.insert(flags::ContextBits1::FAST_TRAVEL);
+            }
             Item::Flask => {
                 self.flask += 1;
             }
@@ -1338,7 +1437,7 @@ impl Context {
                 self.health_upgrade += 1;
             }
             Item::Ice_Axe => {
-                self.cbits1.insert(flags::ContextBits1::ICE_AXE);
+                self.cbits2.insert(flags::ContextBits2::ICE_AXE);
             }
             Item::Infect => {
                 self.infect += 1;
@@ -1347,10 +1446,13 @@ impl Context {
                 self.infection_range += 1;
             }
             Item::Infection_Speed => {
-                self.cbits1.insert(flags::ContextBits1::INFECTION_SPEED);
+                self.cbits2.insert(flags::ContextBits2::INFECTION_SPEED);
             }
             Item::Ledge_Grab => {
                 self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
+            }
+            Item::Map_17_10 => {
+                self.cbits2.insert(flags::ContextBits2::MAP_17_10);
             }
             Item::Melee_Damage => {
                 self.melee_damage += 1;
@@ -1366,6 +1468,9 @@ impl Context {
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
+            }
+            Item::Power_Matrix => {
+                self.cbits2.insert(flags::ContextBits2::POWER_MATRIX);
             }
             Item::Ranged_Damage => {
                 self.ranged_damage += 1;

@@ -13,7 +13,7 @@ use libaxiom_verge2::items::Item;
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
-    ctx.cbits1.insert(flags::ContextBits1::ICE_AXE);
+    ctx.cbits2.insert(flags::ContextBits2::ICE_AXE);
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
     ctx.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
@@ -248,5 +248,18 @@ fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_context_ebih__gr
             SpotId::Ebih__Grid_25_10_12__East_10,
             SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
         ]
+    );
+}
+#[test]
+fn start_Ebih__Ebih_West__Upper_Save_with_Remote_Drone_eventually_reaches_Giguna__Giguna_Northeast__Inner_Wall(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+
+    expect_eventually_reaches!(
+        &world,
+        ctx,
+        SpotId::Ebih__Ebih_West__Upper_Save,
+        SpotId::Giguna__Giguna_Northeast__Inner_Wall
     );
 }

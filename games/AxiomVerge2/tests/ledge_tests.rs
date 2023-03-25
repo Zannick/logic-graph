@@ -13,7 +13,7 @@ use libaxiom_verge2::items::Item;
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
-    ctx.cbits1.insert(flags::ContextBits1::ICE_AXE);
+    ctx.cbits2.insert(flags::ContextBits2::ICE_AXE);
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);

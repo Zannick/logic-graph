@@ -10,6 +10,7 @@ pub enum Currency {
     Free,
     Energy(i32),
     Flasks(i32),
+    Refills(i32),
 }
 
 impl analyzer::world::Id for Currency {}
@@ -20,6 +21,7 @@ impl fmt::Display for Currency {
             Self::Free => write!(f, "Free"),
             Self::Energy(i) => write!(f, "{}:{}", "Energy", i),
             Self::Flasks(i) => write!(f, "{}:{}", "Flasks", i),
+            Self::Refills(i) => write!(f, "{}:{}", "Refills", i),
         }
     }
 }

@@ -199,6 +199,17 @@ macro_rules! helper__unlock3 {
     }};
 }
 
+/// $more_refills (  )
+/// ^refills < $count(Power_Matrix)
+#[macro_export]
+macro_rules! helper__more_refills {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.refills() < $ctx.count(Item::Power_Matrix).into()
+    }};
+}
+
 /// $max_energy (  )
 /// PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
 #[macro_export]
@@ -271,25 +282,6 @@ macro_rules! helper__save {
     }};
 }
 
-/// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
-/// IF (^position NOT WITHIN ^prev_area     AND ^position NOT WITHIN `Menu`     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); }
-#[macro_export]
-macro_rules! helper__reset_old_area {
-    ($ctx:expr, $newpos:expr) => {{
-        #[allow(unused_imports)]
-        use $crate::items::Item;
-        if ((get_area($ctx.position()) != $ctx.prev_area()
-            && get_region($ctx.position()) != RegionId::Menu)
-            && get_area($newpos) != get_area($ctx.position()))
-        {
-            if get_area($newpos) != $ctx.prev_area() {
-                $ctx.reset_area($ctx.prev_area());
-            }
-            $ctx.set_prev_area(get_area($ctx.position()));
-        }
-    }};
-}
-
 /// $deploy_drone ( TypedVar(name='newpos', type='SpotId') )
 /// ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
 #[macro_export]
@@ -313,5 +305,37 @@ macro_rules! helper__deploy_drone_and_move {
         $ctx.set_mode(enums::Mode::Drone);
         $ctx.set_indra($indrapos);
         $ctx.set_position($dronepos);
+    }};
+}
+
+/// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
+/// IF (^position NOT WITHIN ^prev_area     AND ^position NOT WITHIN `Menu`     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);         };         ^prev_area = $get_area(^position); }
+#[macro_export]
+macro_rules! helper__reset_old_area {
+    ($ctx:expr, $newpos:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        if ((get_area($ctx.position()) != $ctx.prev_area()
+            && get_region($ctx.position()) != RegionId::Menu)
+            && get_area($newpos) != get_area($ctx.position()))
+        {
+            if get_area($newpos) != $ctx.prev_area() {
+                $ctx.reset_area($ctx.prev_area());
+            }
+            $ctx.set_prev_area(get_area($ctx.position()));
+        }
+    }};
+}
+
+/// $breach_entry ( TypedVar(name='newsave', type='SpotId') )
+/// IF (NOT ^breach) { ^save = ^newsave; }
+#[macro_export]
+macro_rules! helper__breach_entry {
+    ($ctx:expr, $newsave:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        if !data::breach($ctx.position()) {
+            $ctx.set_save($newsave);
+        }
     }};
 }
