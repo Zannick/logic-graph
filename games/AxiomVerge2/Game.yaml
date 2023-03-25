@@ -1,18 +1,25 @@
 name: Axiom Verge 2
 
+context:
+  energy:
+    max: 450
+  flasks:
+    max: 100
+  refills:
+    max: 4
+  mode:
+    opts: [Indra, drone]
+    default: Indra
+
 start:
   position: Antarctica > West > Helipad
   save: Antarctica > West > Helipad
-  mode: Indra
   # By itself 'None' would be interpreted as a string,
   # which becomes its own independent per-variable enum type.
   indra: SpotId::None
   last: SpotId::None
   # This should be a load effect? prev_area = $get_area(^position) ?
   prev_area: Antarctica > West
-  energy: 0
-  flasks: 0
-  refills: 0
 
 data:
   breach: false

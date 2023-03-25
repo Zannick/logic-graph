@@ -206,7 +206,7 @@ macro_rules! helper__more_refills {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.refills() < $ctx.count(Item::Power_Matrix).into()
+        Into::<i32>::into($ctx.refills()) < $ctx.count(Item::Power_Matrix).into()
     }};
 }
 

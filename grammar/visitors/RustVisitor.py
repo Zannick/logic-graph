@@ -107,7 +107,7 @@ class RustVisitor(RulesVisitor):
         return self._visitConditional(ctx.boolExpr(1), ctx.boolExpr(0), ctx.boolExpr(2))
 
     def visitCmp(self, ctx):
-        return f'{self.visit(ctx.value())} {ctx.getChild(1)} {self.visit(ctx.num())}'
+        return f'Into::<i32>::into({self.visit(ctx.value())}) {ctx.getChild(1)} {self.visit(ctx.num())}.into()'
     
     # This could be easier if str enum values are required to be unique among all enums
     # otherwise we have to get the appropriate ref/setting enum
@@ -229,7 +229,7 @@ class RustVisitor(RulesVisitor):
     def visitFuncNum(self, ctx):
         func = self._getFuncAndArgs(str(ctx.FUNC()))
         if ctx.ITEM():
-            return f'{func}Item::{ctx.ITEM()}).into()'
+            return f'{func}Item::{ctx.ITEM()})'
         elif ctx.num():
             return f'{func}{", ".join(self.visit(n) for n in ctx.num())})'
         else:

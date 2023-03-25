@@ -26,13 +26,13 @@ from Utils import *
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
-GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time',
-               'start', 'load', 'data', 'helpers', 'collect', 'settings', '_filename'}
+GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time', 'context',
+               'start', 'load', 'data', 'helpers', 'collect', 'settings', 'special', '_filename'}
 REGION_FIELDS = {'name', 'short', 'data', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here'}
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
-SETTING_FIELDS = {'type', 'max', 'opts', 'default'}
+TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 TRIGGER_RULES = {'enter', 'load', 'reset'}
 
@@ -201,6 +201,7 @@ class GameLogic(object):
                     self._errors.append(f'Cannot define req for default movement')
 
         self.id_lookup = {}
+        self.special = self._info.get('special', {})
         self.process_regions()
         self.process_context()
         self.process_warps()
@@ -715,19 +716,16 @@ class GameLogic(object):
         return conns
 
 
-    @cached_property
-    def settings(self):
-        sd = self._info.get('settings', {})
-
+    def handle_typehint_config(self, category, d):
         def _apply_override(s, t, info, text):
             if declared := info.get('type'):
                 if declared != t:
-                    logging.warning(f'Setting {s} type {declared} overridden by {text} ({t})')
+                    logging.warning(f'{category} {s} type {declared} overridden by {text} ({t})')
             info['type'] = t
 
-        for s, info in sd.items():
-            if disallowed := info.keys() - SETTING_FIELDS:
-                self._errors.append(f'Unrecognized setting fields on setting {s}: {", ".join(disallowed)}')
+        for s, info in d.items():
+            if disallowed := info.keys() - TYPEHINT_FIELDS:
+                self._errors.append(f'Unrecognized fields on {category} {s}: {", ".join(disallowed)}')
                 continue
             if m := info.get('max', 0):
                 t = config_type(m)
@@ -737,18 +735,24 @@ class GameLogic(object):
             elif opts := info.get('opts', ()):
                 t, *types = {config_type(o) for o in opts}
                 if types:
-                    self._errors.append(f'Setting {s} options are mixed types: {t}, {", ".join(types)}')
+                    self._errors.append(f'{category} {s} options are mixed types: {t}, {", ".join(types)}')
                     continue
                 _apply_override(s, t, info, f'opts, e.g. {opts[0]}')
                 if t == 'int':
                     info['rust_type'] = get_int_type_for_max(max(opts))
             elif 'type' not in info:
-                self._errors.append(f'Setting {s} must declare one of: type, max, opts')
+                self._errors.append(f'{category} {s} must declare one of: type, max, opts')
                 continue
             if 'rust_type' not in info:
                 info['rust_type'] = ctx_types.get(info['type'], info['type'])
 
-        return sd
+        return d
+
+    @cached_property
+    def settings(self):
+        sd = self._info.get('settings', {})
+
+        return self.handle_typehint_config('Setting', sd)
 
 
     def check_all(self):
@@ -865,6 +869,14 @@ class GameLogic(object):
         # self._info: start, data
         # regions/areas: here, start, enter, data
         gc = dict(self._info['start'])
+        for ctx, hints in self.context_type_hints.items():
+            if d := hints.get('default'):
+                gc[ctx] = d
+            elif hints['type'] == 'int':
+                gc[ctx] = 0
+            elif hints['type'] == 'bool':
+                gc[ctx] = False
+
         def _check_shadow(ctx, category, *names):
             _check_data(ctx, val, category, *names)
             if len(names) == 2:
@@ -934,13 +946,23 @@ class GameLogic(object):
 
 
     @cached_property
+    def context_type_hints(self):
+        return self.handle_typehint_config('Context', self._info.get('context', {}))
+
+    @cached_property
     def context_types(self):
         d = {'position': 'SpotId'}
-        for ctx, val in self.context_values.items():
-            t = typenameof(val)
+        for ctx, hints in self.context_type_hints.items():
+            t = hints['rust_type']
             if t == 'ENUM':
                 t = 'enums::' + ctx.capitalize()
             d[ctx] = t
+        for ctx, val in self.context_values.items():
+            if ctx not in d:
+                t = typenameof(val)
+                if t == 'ENUM':
+                    t = 'enums::' + ctx.capitalize()
+                d[ctx] = t
         return d
 
     @cached_property
@@ -1086,9 +1108,22 @@ class GameLogic(object):
 
     
     @cached_property
+    def default_price_type(self):
+        for ctx, hints in self.context_type_hints.items():
+            if hints['type'] == 'int':
+                return ctx
+        for ctx, val in self._info['start'].items():
+            if typenameof(val) == 'i32':
+                return ctx
+
+
+    @cached_property
     def price_types(self):
-        return [ctx for ctx, val in self._info['start'].items()
-                if typenameof(val) == 'i32']
+        ints = {ctx: hints['rust_type'] for ctx, hints in self.context_type_hints.items()
+                if hints['type'] == 'int'}
+        starts = {ctx: 'i32' for ctx, val in self._info['start'].items()
+                  if typenameof(val) == 'i32' and ctx not in ints}
+        return ints | starts
 
 
     def prToRust(self, pr, info, id=None):
@@ -1120,6 +1155,7 @@ class GameLogic(object):
         self.unused_items
         self.context_types
         self.data_values
+        self.default_price_type
         self.price_types
         self.movement_tables
         self.context_trigger_rules

@@ -527,7 +527,7 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
     (!(match get_region(ctx.position()) {
         RegionId::Menu => true,
         _ => false,
-    }) && ctx.flasks() > 0)
+    }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
 pub fn access_not_within_menu_and_map_17_10_and_fast_travel(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Map_17_10 and Fast_Travel

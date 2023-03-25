@@ -231,14 +231,14 @@ pub enum Status {
 pub struct Context {
     // context vars
     pub position: SpotId,
-    pub save: SpotId,
+    pub energy: i16,
+    pub flasks: i8,
+    pub refills: i8,
     pub mode: enums::Mode,
+    pub save: SpotId,
     pub indra: SpotId,
     pub last: SpotId,
     pub prev_area: AreaId,
-    pub energy: i32,
-    pub flasks: i32,
-    pub refills: i32,
     // settings
     // items
     pub drone_melee_damage: i8,
@@ -266,13 +266,13 @@ impl Default for Context {
         Context {
             position: SpotId::Antarctica__West__Helipad,
             save: SpotId::Antarctica__West__Helipad,
-            mode: enums::Mode::Indra,
             indra: SpotId::None,
             last: SpotId::None,
             prev_area: AreaId::Antarctica__West,
             energy: 0,
             flasks: 0,
             refills: 0,
+            mode: enums::Mode::Indra,
             // settings
             // items
             drone_melee_damage: Default::default(),
@@ -1063,17 +1063,41 @@ impl Context {
             },
         }
     }
-    pub fn save(&self) -> SpotId {
+    pub fn energy(&self) -> i16 {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
-                    _ => self.save,
+                    _ => self.energy,
                 },
             },
         }
     }
-    pub fn set_save(&mut self, val: SpotId) {
-        self.save = val;
+    pub fn set_energy(&mut self, val: i16) {
+        self.energy = val;
+    }
+    pub fn flasks(&self) -> i8 {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.flasks,
+                },
+            },
+        }
+    }
+    pub fn set_flasks(&mut self, val: i8) {
+        self.flasks = val;
+    }
+    pub fn refills(&self) -> i8 {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.refills,
+                },
+            },
+        }
+    }
+    pub fn set_refills(&mut self, val: i8) {
+        self.refills = val;
     }
     pub fn mode(&self) -> enums::Mode {
         match self.position {
@@ -1086,6 +1110,18 @@ impl Context {
     }
     pub fn set_mode(&mut self, val: enums::Mode) {
         self.mode = val;
+    }
+    pub fn save(&self) -> SpotId {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self.save,
+                },
+            },
+        }
+    }
+    pub fn set_save(&mut self, val: SpotId) {
+        self.save = val;
     }
     pub fn indra(&self) -> SpotId {
         match self.position {
@@ -1122,42 +1158,6 @@ impl Context {
     }
     pub fn set_prev_area(&mut self, val: AreaId) {
         self.prev_area = val;
-    }
-    pub fn energy(&self) -> i32 {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self.energy,
-                },
-            },
-        }
-    }
-    pub fn set_energy(&mut self, val: i32) {
-        self.energy = val;
-    }
-    pub fn flasks(&self) -> i32 {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self.flasks,
-                },
-            },
-        }
-    }
-    pub fn set_flasks(&mut self, val: i32) {
-        self.flasks = val;
-    }
-    pub fn refills(&self) -> i32 {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self.refills,
-                },
-            },
-        }
-    }
-    pub fn set_refills(&mut self, val: i32) {
-        self.refills = val;
     }
     pub fn amagi__main_area__ctx__combo(&self) -> bool {
         match self.position {

@@ -36,7 +36,7 @@ class SettingVisitor(RulesVisitor):
     def _checkType(self, setting: str, type: str):
         if self.settings[setting]['type'] != type:
             self.errors.append(f'Rule {self.name} uses {setting} as {type} '
-                               'but {setting} is defined as {self.settings[setting]["type"]}')
+                               f'but {setting} is defined as {self.settings[setting]["type"]}')
 
     def _perSetting(self, ctx):
         s = str(ctx.SETTING())

@@ -137,7 +137,8 @@ class TestProcessor(object):
             if cval not in self.context_str_values[ckey]:
                 self.errors.append(f'Invalid context enum value in {src}: {ckey}: {cval}')
         else:
-            if typenameof(cval) != ctype:
+            t = typenameof(cval)
+            if t != ctype and not fits_in_expected_int(ctype, t):
                 self.errors.append(f'Invalid context value in {src}: {ckey} expects {ctype} but {cval} is {typenameof(cval)}')
 
     def _check_setting(self, setting: str, val: Any, src: str):

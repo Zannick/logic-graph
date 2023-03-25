@@ -8,9 +8,9 @@ use std::fmt;
 pub enum Currency {
     #[default]
     Free,
-    Energy(i32),
-    Flasks(i32),
-    Refills(i32),
+    Energy(i16),
+    Flasks(i8),
+    Refills(i8),
 }
 
 impl analyzer::world::Id for Currency {}

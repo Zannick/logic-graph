@@ -351,7 +351,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::{{ (loc.canon or 'None')|construct_id }},
             item: Item::{{ loc.item or 'None' }},
             price: Currency::{% if loc.price and loc.price > 0 -%}
-                {{ (loc.costs or price_types[0])|camelize }}({{ loc.price }})
+                {{ (loc.costs or default_price_type)|camelize }}({{ loc.price }})
                 {%- else %}Free{% endif %},
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
@@ -368,7 +368,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
             price: Currency::{% if ex.price and ex.price > 0 -%}
-                {{ (ex.costs or price_types[0])|camelize }}({{ ex.price }})
+                {{ (ex.costs or default_price_type)|camelize }}({{ ex.price }})
                 {%- else %}Free{% endif %},
             loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
         },
@@ -383,7 +383,7 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             id: ActionId::{{ a.id }},
             time: {{ (a.time * 1000)|int }},
             price: Currency::{% if a.price and a.price > 0 -%}
-                {{ (a.costs or price_types[0])|camelize }}({{ a.price }})
+                {{ (a.costs or default_price_type)|camelize }}({{ a.price }})
                 {%- else %}Free{% endif %},
         },
 %% endfor
@@ -433,7 +433,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             dest: {% if w.target_id.startswith('ctx') %}SpotId::None{% else %}{{ w.target_id }}{% endif %},
             time: {{ (w.time * 1000)|int }},
             price: Currency::{% if w.price and w.price > 0 -%}
-                {{ (w.costs or price_types[0])|camelize }}({{ w.price }})
+                {{ (w.costs or default_price_type)|camelize }}({{ w.price }})
                 {%- else %}Free{% endif %},
         },
 %% endfor
