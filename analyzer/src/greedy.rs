@@ -17,17 +17,16 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx);
-    let orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().flatten().collect();
+    let mut orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().flatten().collect();
+    orig_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
     if let Some(ctx) = orig_vec
         .iter()
-        .filter(|ctx| spot_has_locations(world, ctx.get()))
-        .min_by_key(|ctx| ctx.elapsed())
+        .find(|ctx| spot_has_locations(world, ctx.get()))
     {
         return Ok(ctx.clone());
     }
     let min_spot = orig_vec
-        .iter()
-        .min_by_key(|ctx| ctx.elapsed())
+        .first()
         .expect("couldn't reach any spots!")
         .clone();
 
@@ -36,29 +35,27 @@ where
     let mut to_process = orig_vec.clone();
     seen.extend(to_process.iter().map(|ctx| ctx.get().clone()));
 
-    // Only allow global actions at the start position, or as the last action.
+    // Only allow global actions as the first action (in the first available spot), or as the last action.
     // This avoids extreme fanout.
-    for action in world
-        .get_global_actions()
-        .iter()
-        .filter(|a| a.can_access(min_spot.get()))
-    {
-        let mut newctx = min_spot.clone();
-        newctx.activate(action);
-        for nextctx in accessible_spots(world, newctx).into_values().flatten() {
-            if spot_has_locations(world, nextctx.get()) {
-                useful_spots.push(nextctx);
-            } else {
-                if !seen.contains(nextctx.get()) {
-                    seen.insert(nextctx.get().clone());
-                    to_process.push(nextctx);
+    for action in world.get_global_actions() {
+        if let Some(spot) = orig_vec.iter().find(|s| action.can_access(s.get())) {
+            let mut newctx = spot.clone();
+            newctx.activate(action);
+            for nextctx in accessible_spots(world, newctx).into_values().flatten() {
+                if spot_has_locations(world, nextctx.get()) {
+                    useful_spots.push(nextctx);
+                } else {
+                    if !seen.contains(nextctx.get()) {
+                        seen.insert(nextctx.get().clone());
+                        to_process.push(nextctx);
+                    }
                 }
             }
         }
     }
 
     let mut depth = 0;
-    while depth < max_depth {
+    while depth < max_depth && !to_process.is_empty() {
         let mut next_process = Vec::new();
         for spot_ctx in to_process.iter().filter(|ctx| spot_has_actions(world, ctx)) {
             for action in world

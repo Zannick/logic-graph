@@ -230,12 +230,13 @@ where
             solutions.insert(m);
         }
         Err(ctx) => {
-            println!(
-                "Found no greedy solution, maximal attempt reached dead-end after {}ms",
-                ctx.elapsed()
+            panic!(
+                "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}",
+                ctx.elapsed(),
+                ctx.history_summary()
             );
             // Push it anyway, maybe it'll find something!
-            heap.push(ctx);
+            //heap.push(ctx);
         }
     };
     heap.push(startctx.clone());
