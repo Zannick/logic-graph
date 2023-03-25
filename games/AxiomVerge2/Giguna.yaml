@@ -4,6 +4,303 @@ short: Giguna
 areas:
 - name: Giguna Northeast
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door_opened: false
   spots:
+    - name: East 9
+      coord: [18.95, 8.8]
+      exits:
+        - to: Ebih > Ebih West > West 9
+          tags: [xshift]
     - name: Inner Wall
       coord: [18.7, 9.0]
+      local:
+        - to: East 9
+          jumps: 2
+        - to: Crow Eating
+          jumps: 4
+    - name: Crow Eating
+      coord: [17.9, 8.9]
+      local:
+        - to: Save Point
+        - to: Gate Left
+      exits:
+        - to: Gate Vent
+          req: $hover
+    - name: Save Point
+      coord: [17.5, 9.5]
+      local:
+        - to: Step
+          jumps: 1
+        - to: Gate Left
+        - to: Crow Eating
+      actions:
+        - name: Save
+          do: $save
+          time: 1.3
+      exits:
+        - to: Gate Vent
+          req: $hover and $hook
+          time: 2
+    - name: Step
+      coord: [17.3, 9.4]
+      local:
+        - to: West 10
+        - to: Save Point
+      exits:
+        - to: West 9
+          req: $climb or $hook
+          time: 1.7
+        - to: West 9
+          req: $grab
+          time: 1.9
+        - to: Gate Vent
+          req: $hover
+          time: 2.3
+    - name: West 10
+      coord: [17.05, 9.5]
+      local:
+        - to: Step
+          jumps: 1
+      exits:
+        - to: Carnelian > East 10
+          tags: [xshift]
+    - name: West 9
+      coord: [17.05, 8.8]
+      local:
+        - to: Step
+    - name: Gate Left
+      coord: [17.8, 9.6]
+      local:
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Gate Button
+          req: Giguna_Northeast_Gate
+          time: 2.5
+      actions:
+        - name: Throw Drone
+          req: $can_deploy and Slingshot_Hook
+          do: $deploy_drone(`Giguna > Giguna Northeast > Gate Vent`)
+          time: 1.25
+
+    - name: Gate Vent
+      coord: [18, 9.1]
+      local:
+        - to: Gate Button
+          thru: [18.35, 9.1]
+        - to: Save Point
+    - name: Gate Button
+      coord: [18.5, 9.8]
+      local:
+        - to: Gate Right
+          jumps: 1
+      locations:
+        - name: Open Gate
+          item: Giguna_Northeast_Gate
+          canon: Giguna_Northeast_Gate
+          time: 0.5
+      exits:
+        - to: Gate Left
+          req: Giguna_Northeast_Gate
+          time: 2.5
+    - name: Gate Right
+      coord: [18.75, 9.6]
+      local:
+        - to: Gate Button
+        - to: Shaft Bottom
+      locations:
+        - name: Remote Button
+          item: Giguna_Northeast_Gate
+          canon: Giguna_Northeast_Gate
+          req: $boomerang
+
+    - name: Shaft Bottom
+      coord: [18.8, 10.6]
+      local:
+        - to: East 11
+        - to: Right Column
+          jumps: 1
+      # TODO: measure time going back up
+    - name: East 11
+      coord: [18.95, 10.7]
+      local:
+        - to: Shaft Bottom
+          jumps: 1
+    - name: Right Column
+      coord: [17.9, 10.5]
+      local:
+        - to: Switch
+        - to: Shaft Bottom
+      actions:
+        - name: Open Door From Afar
+          req: $unlock3 and Infection_Range{3} and not ^_door_opened
+          do: ^_door_opened = true
+          time: 0.5
+      exits:
+        - to: Door
+          req: ^_door_opened
+          time: 1.25
+    - name: Switch
+      coord: [17.7, 10.8]
+      exits:
+        - to: Door
+          req: ^_door_opened and ($grab or $hook)
+        - to: Right Column
+          req: $grab or $hook
+      actions:
+        - name: Open Door
+          req: $unlock3 and not ^_door_opened
+          do: ^_door_opened = true
+    - name: Door
+      coord: [17.5, 10.5]
+      local:
+        - to: Right Column
+        - to: Vault
+      locations:
+        - name: Remote Flask
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          req: $boomerang
+          tags: [remote_flask]
+    - name: Vault
+      coord: [17.2, 10.8]
+      locations:
+        - name: Item
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          tags: [flask]
+      exits:
+        - to: Door
+          req: ^_door_opened
+
+- name: Carnelian
+  on_entry: $reset_old_area(^newpos)
+  start:
+    _door_opened: false
+  reset:
+    _upper_susar: false
+    _lower_susar: false
+  spots:
+    - name: East 10
+      coord: [16.95, 9.5]
+      local:
+        - to: East Cliff
+      exits:
+        - to: Giguna Northeast > West 10
+          tags: [xshift]
+    - name: East Cliff
+      coord: [16.35, 9.7]
+      local:
+        - to: East 10
+          jumps: 2
+        - to: Upper Susar
+          jumps: 2
+    - name: Upper Susar
+      coord: [15.85, 9.6]
+      exits:
+        - to: Upper Path
+          req: ^_upper_susar
+        - to: Middle Platforms
+          req: ^_upper_susar
+        - to: East Cliff
+          req: ^_upper_susar
+          time: 2
+      actions:
+        - name: Caught
+          req: not ^_upper_susar
+          do: ^_upper_susar = true
+          time: 3
+        - name: Hack
+          req: not ^_upper_susar and $allegiance1
+          price: 100
+          do: ^_upper_susar = true
+          time: 0.5
+    - name: Middle Platforms
+      coord: [16.1, 10]
+      local:
+        - to: Rock
+        - to: Switch
+      exits:
+        - to: Upper Susar
+          req: $climb
+          time: 1.75  # TODO: better than a guess
+        - to: East Cliff
+          req: $grab
+          time: 1.5
+    - name: Switch
+      coord: [16.2, 10.7]
+      local:
+        - to: Rock
+          jumps: 1
+      exits:
+        - to: Door
+          req: ^_door_opened
+          time: 0.75
+      actions:
+        - name: Open Door
+          req: $unlock3 and not ^_door_opened
+          do: ^_door_opened = true
+          time: 0.5
+    - name: Door
+      coord: [16.4, 10.7]
+      exits:
+        - to: Switch
+          req: ^_door_opened
+          time: 0.75
+        - to: Vault
+          req: ^_door_opened
+    - name: Vault
+      coord: [16.7, 10.6]
+      locations:
+        - name: Item
+          item: Carnelian_Ring
+          tags: [standing]
+      exits:
+        - to: Door
+          req: ^_door_opened
+    - name: Rock
+      coord: [16, 10.4]
+      local:
+        - to: Lower Susar
+        - to: Middle Platforms
+          jumps: 2
+        - to: Switch
+    - name: Lower Susar
+      coord: [15.6, 10.5]
+      exits:
+        - to: West Ledge
+          req: ^_lower_susar and $grab
+          time: 1.25
+        - to: West Ledge
+          req: ^_lower_susar and $hook
+        - to: Rock
+          req: ^_lower_susar
+          time: 1.3
+      actions:
+        - name: Caught
+          req: not ^_lower_susar
+          do: ^_lower_susar = true
+          time: 3
+        - name: Hack
+          req: not ^_lower_susar and $allegiance1
+          do: ^_lower_susar = true
+          time: 0.5
+    - name: Upper Path
+      coord: [15.6, 9.6]
+      local:
+        - to: Upper Susar
+        - to: West Ledge
+    - name: West Ledge
+      coord: [15.3, 10.1]
+      local:
+        - to: Lower Susar
+        - to: East 10
+        - to: Upper Path
+      exits:
+        - to: East 10
+          req: $grab
+    - name: East 10
+      coord: [15.05, 9.7]
+      local:
+        - to: West Ledge

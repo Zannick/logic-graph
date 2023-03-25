@@ -2024,6 +2024,11 @@ pub fn local_travel_time(
         ) => 2702,
         (
             [false, false, false],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1576,
+        (
+            [false, false, false],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1351,
@@ -2599,6 +2604,188 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2702,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 2000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 4000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1801,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 2252,
+        // [1.576577, 0.7]
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 2276,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 675,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 4054,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 4054,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1801,
+        (
+            [false, false, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2702,
+        // [2.702703, 5.855856]
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 8558,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 2252,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 450,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 1000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 2000,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 900,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1801,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1351,
+        (
+            [false, false, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1126,
         (
             [false, false, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -5443,6 +5630,11 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [true, false, false],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1228,
+        (
+            [true, false, false],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1052,
@@ -6018,6 +6210,188 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 1200,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 2807,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1403,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1754,
+        // [1.22807, 0.7]
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1928,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 526,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 3157,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 600,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 3157,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1403,
+        (
+            [true, false, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2105,
+        // [2.105263, 4.561404]
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 6666,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 1754,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 400,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 1200,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 701,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1403,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1052,
+        (
+            [true, false, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 877,
         (
             [true, false, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -9373,6 +9747,11 @@ pub fn local_travel_time(
         ) => 2702,
         (
             [false, true, false],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1576,
+        (
+            [false, true, false],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1333,
@@ -10180,6 +10559,204 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2981,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 1422,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 3583,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1801,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 3204,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 993,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 900,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 2252,
+        // [1.555556, 0.7]
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 2255,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 675,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 4024,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 801,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 4024,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 900,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1777,
+        (
+            [false, true, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2702,
+        // [2.702703, 5.777778]
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 8480,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 2252,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 450,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 1000,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 1832,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 900,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1801,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 1111,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1351,
+        // [7.803133, 2.09644]
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 9899,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1351,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Upper_Path,
+        ) => 2591,
+        (
+            [false, true, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1126,
         (
             [false, true, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -13547,6 +14124,11 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [false, false, true],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1228,
+        (
+            [false, false, true],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1052,
@@ -14122,6 +14704,188 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 4000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1403,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1754,
+        // [1.22807, 0.7]
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1928,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 526,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 3157,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 3157,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1403,
+        (
+            [false, false, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2105,
+        // [2.105263, 4.561404]
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 6666,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 400,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 2000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 701,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1403,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1052,
+        (
+            [false, false, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 877,
         (
             [false, false, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -17469,6 +18233,11 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [true, true, false],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1228,
+        (
+            [true, true, false],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1052,
@@ -18266,6 +19035,204 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2981,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 1200,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 2807,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1403,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 3204,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1754,
+        // [1.22807, 0.7]
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1928,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 526,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 3157,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 600,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 3157,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1403,
+        (
+            [true, true, false],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2105,
+        // [2.105263, 4.561404]
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 6666,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 1754,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 400,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 1200,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 701,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1403,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1052,
+        // [7.803133, 2.09644]
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 9899,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1052,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Upper_Path,
+        ) => 2591,
+        (
+            [true, true, false],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 877,
         (
             [true, true, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -21623,6 +22590,11 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [true, false, true],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1228,
+        (
+            [true, false, true],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1052,
@@ -22190,6 +23162,188 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 1200,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 2807,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1403,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1754,
+        // [1.22807, 0.7]
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1928,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 526,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 3157,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 600,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 3157,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1403,
+        (
+            [true, false, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2105,
+        // [2.105263, 4.561404]
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 6666,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 1754,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 400,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 1200,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 701,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1403,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1052,
+        (
+            [true, false, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 877,
         (
             [true, false, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -25535,6 +26689,11 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [false, true, true],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1228,
+        (
+            [false, true, true],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1052,
@@ -26332,6 +27491,204 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2981,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 1422,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 3583,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1403,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 3204,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 993,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1754,
+        // [1.22807, 0.7]
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1928,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 526,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 3157,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 801,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 3157,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1403,
+        (
+            [false, true, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2105,
+        // [2.105263, 4.561404]
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 6666,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 2000,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 400,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 1832,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 701,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1403,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1052,
+        // [7.803133, 2.09644]
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 9899,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1052,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Upper_Path,
+        ) => 2591,
+        (
+            [false, true, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 877,
         (
             [false, true, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -29950,6 +31307,11 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [true, true, true],
+            SpotId::Ebih__Ebih_West__Giguna_Pillar,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 1228,
+        (
+            [true, true, true],
             SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 1052,
@@ -30743,6 +32105,204 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2981,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => 1200,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 2807,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1403,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 699,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => 3204,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Step,
+            SpotId::Giguna__Giguna_Northeast__West_10,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__West_10,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            SpotId::Giguna__Giguna_Northeast__Step,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => 1754,
+        // [1.22807, 0.7]
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 1928,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 1000,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => 526,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 3157,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 600,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => 3157,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => 1403,
+        (
+            [true, true, true],
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Vault,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__East_Cliff,
+        ) => 2105,
+        // [2.105263, 4.561404]
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 6666,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__East_Cliff,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 1754,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 699,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 400,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Switch,
+            SpotId::Giguna__Carnelian__Rock,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Middle_Platforms,
+        ) => 1200,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Switch,
+        ) => 701,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Rock,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1403,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__Upper_Susar,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__Upper_Path,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 1052,
+        // [7.803133, 2.09644]
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__East_10,
+        ) => 9899,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Lower_Susar,
+        ) => 1052,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__West_Ledge,
+            SpotId::Giguna__Carnelian__Upper_Path,
+        ) => 2591,
+        (
+            [true, true, true],
+            SpotId::Giguna__Carnelian__East_10,
+            SpotId::Giguna__Carnelian__West_Ledge,
+        ) => 877,
         (
             [true, true, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -32755,6 +34315,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Middle) => true,
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
+        (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
         (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
         (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => true,
         (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
@@ -32999,6 +34560,103 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__East_9,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => true,
+        (SpotId::Giguna__Giguna_Northeast__Save_Point, SpotId::Giguna__Giguna_Northeast__Step) => {
+            true
+        }
+        (
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
+        ) => true,
+        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__West_10) => true,
+        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__Save_Point) => {
+            true
+        }
+        (SpotId::Giguna__Giguna_Northeast__West_10, SpotId::Giguna__Giguna_Northeast__Step) => true,
+        (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Left,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
+            SpotId::Giguna__Giguna_Northeast__Save_Point,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Gate_Button,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Gate_Right,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Switch,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Northeast__Door,
+            SpotId::Giguna__Giguna_Northeast__Right_Column,
+        ) => true,
+        (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Giguna__Giguna_Northeast__Vault) => true,
+        (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => true,
+        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_10) => true,
+        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Upper_Susar) => true,
+        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Rock) => true,
+        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Switch) => true,
+        (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => true,
+        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Lower_Susar) => true,
+        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Middle_Platforms) => true,
+        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => true,
+        (SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__Upper_Susar) => true,
+        (SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__West_Ledge) => true,
+        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => true,
+        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__East_10) => true,
+        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Upper_Path) => true,
+        (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__West_Ledge) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }

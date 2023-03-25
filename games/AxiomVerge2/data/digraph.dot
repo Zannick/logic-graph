@@ -323,6 +323,8 @@ digraph AxiomVerge2 {
             Ebih__Ebih_West__East_8 [label = "East 8"];
             Ebih__Ebih_West__Middle_Middle [label = "Middle Middle"];
             Ebih__Ebih_West__Middle_Cliff [label = "Middle Cliff"];
+            Ebih__Ebih_West__Giguna_Pillar [label = "Giguna Pillar"];
+            Ebih__Ebih_West__West_9 [label = "West 9"];
             label = "Ebih West";
             bgcolor = "white";
         }
@@ -418,8 +420,40 @@ digraph AxiomVerge2 {
     }
     subgraph cluster_Giguna {
         subgraph cluster_Giguna__Giguna_Northeast {
+            Giguna__Giguna_Northeast__East_9 [label = "East 9"];
             Giguna__Giguna_Northeast__Inner_Wall [label = "Inner Wall"];
+            Giguna__Giguna_Northeast__Crow_Eating [label = "Crow Eating"];
+            Giguna__Giguna_Northeast__Save_Point [label = "Save Point"];
+            Giguna__Giguna_Northeast__Step [label = "Step"];
+            Giguna__Giguna_Northeast__West_10 [label = "West 10"];
+            Giguna__Giguna_Northeast__West_9 [label = "West 9"];
+            Giguna__Giguna_Northeast__Gate_Left [label = "Gate Left"];
+            Giguna__Giguna_Northeast__Gate_Vent [label = "Gate Vent"];
+            Giguna__Giguna_Northeast__Gate_Button [label = "Gate Button"];
+            Giguna__Giguna_Northeast__Gate_Right [label = "Gate Right"];
+            Giguna__Giguna_Northeast__Shaft_Bottom [label = "Shaft Bottom"];
+            Giguna__Giguna_Northeast__East_11 [label = "East 11"];
+            Giguna__Giguna_Northeast__Right_Column [label = "Right Column"];
+            Giguna__Giguna_Northeast__Switch [label = "Switch"];
+            Giguna__Giguna_Northeast__Door [label = "Door"];
+            Giguna__Giguna_Northeast__Vault [label = "Vault"];
             label = "Giguna Northeast";
+            bgcolor = "white";
+        }
+        subgraph cluster_Giguna__Carnelian {
+            Giguna__Carnelian__East_10 [label = "East 10"];
+            Giguna__Carnelian__East_Cliff [label = "East Cliff"];
+            Giguna__Carnelian__Upper_Susar [label = "Upper Susar"];
+            Giguna__Carnelian__Middle_Platforms [label = "Middle Platforms"];
+            Giguna__Carnelian__Switch [label = "Switch"];
+            Giguna__Carnelian__Door [label = "Door"];
+            Giguna__Carnelian__Vault [label = "Vault"];
+            Giguna__Carnelian__Rock [label = "Rock"];
+            Giguna__Carnelian__Lower_Susar [label = "Lower Susar"];
+            Giguna__Carnelian__Upper_Path [label = "Upper Path"];
+            Giguna__Carnelian__West_Ledge [label = "West Ledge"];
+            Giguna__Carnelian__East_10 [label = "East 10"];
+            label = "Carnelian";
             bgcolor = "white";
         }
         label = "Giguna Steppes";
@@ -773,6 +807,9 @@ digraph AxiomVerge2 {
     Ebih__Ebih_West__East_8 -> Ebih__Waterfall__West_8;
     Ebih__Ebih_West__Middle_Middle -> Ebih__Ebih_West__Above_Chute;
     Ebih__Ebih_West__Middle_Middle -> Ebih__Ebih_West__East_7;
+    Ebih__Ebih_West__Giguna_Pillar -> Giguna__Giguna_Northeast__Inner_Wall;
+    Ebih__Ebih_West__West_9 -> Giguna__Giguna_Northeast__East_9;
+    Ebih__Ebih_West__West_9 -> Ebih__Ebih_West__Giguna_Pillar;
     Ebih__Cave__Entry -> Ebih__Waterfall__Cave_Entrance;
     Ebih__Ebih_East__West_8 -> Ebih__Waterfall__East_8;
     Ebih__Ebih_East__West_7 -> Ebih__Waterfall__East_7;
@@ -808,6 +845,33 @@ digraph AxiomVerge2 {
     Ebih__Observation_Tower_Room__West_10 -> Ebih__Grid_26_10_11__East_10;
     Ebih__Observation_Tower_Room__East_11 -> Ebih__Base_Camp__West_11;
     Ebih__Observation_Tower_Room__East_11 -> Ebih__Observation_Tower_Room__Cliff;
+    Giguna__Giguna_Northeast__East_9 -> Ebih__Ebih_West__West_9;
+    Giguna__Giguna_Northeast__Crow_Eating -> Giguna__Giguna_Northeast__Gate_Vent;
+    Giguna__Giguna_Northeast__Save_Point -> Giguna__Giguna_Northeast__Gate_Vent;
+    Giguna__Giguna_Northeast__Step -> Giguna__Giguna_Northeast__Gate_Vent;
+    Giguna__Giguna_Northeast__Step -> Giguna__Giguna_Northeast__West_9;
+    Giguna__Giguna_Northeast__Step -> Giguna__Giguna_Northeast__West_9;
+    Giguna__Giguna_Northeast__West_10 -> Giguna__Carnelian__East_10;
+    Giguna__Giguna_Northeast__Gate_Left -> Giguna__Giguna_Northeast__Gate_Button;
+    Giguna__Giguna_Northeast__Gate_Button -> Giguna__Giguna_Northeast__Gate_Left;
+    Giguna__Giguna_Northeast__Right_Column -> Giguna__Giguna_Northeast__Door;
+    Giguna__Giguna_Northeast__Switch -> Giguna__Giguna_Northeast__Door;
+    Giguna__Giguna_Northeast__Switch -> Giguna__Giguna_Northeast__Right_Column;
+    Giguna__Giguna_Northeast__Vault -> Giguna__Giguna_Northeast__Door;
+    Giguna__Carnelian__East_10 -> Giguna__Giguna_Northeast__West_10;
+    Giguna__Carnelian__Upper_Susar -> Giguna__Carnelian__East_Cliff;
+    Giguna__Carnelian__Upper_Susar -> Giguna__Carnelian__Middle_Platforms;
+    Giguna__Carnelian__Upper_Susar -> Giguna__Carnelian__Upper_Path;
+    Giguna__Carnelian__Middle_Platforms -> Giguna__Carnelian__East_Cliff;
+    Giguna__Carnelian__Middle_Platforms -> Giguna__Carnelian__Upper_Susar;
+    Giguna__Carnelian__Switch -> Giguna__Carnelian__Door;
+    Giguna__Carnelian__Door -> Giguna__Carnelian__Switch;
+    Giguna__Carnelian__Door -> Giguna__Carnelian__Vault;
+    Giguna__Carnelian__Vault -> Giguna__Carnelian__Door;
+    Giguna__Carnelian__Lower_Susar -> Giguna__Carnelian__Rock;
+    Giguna__Carnelian__Lower_Susar -> Giguna__Carnelian__West_Ledge;
+    Giguna__Carnelian__Lower_Susar -> Giguna__Carnelian__West_Ledge;
+    Giguna__Carnelian__West_Ledge -> Giguna__Carnelian__East_10;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;

@@ -117,7 +117,7 @@ actions:
     req: NOT WITHIN `Menu` and not ^breach and $can_recall
     do: ^mode = 'Indra'; ^position = ^indra
     # Can open the menu during this time
-    time: 3
+    time: 3  # it's slightly less in-area
   - name: Deploy Drone
     req: NOT WITHIN `Menu` and $can_deploy
     do: ^mode = 'drone'; ^indra = ^position

@@ -22,6 +22,7 @@ pub enum Item {
     Apocalypse_Bomb,
     Boomerang,
     Bronze_Axe,
+    Carnelian_Ring,
     Companies_Layoff,
     Compass,
     Dear_Ernest,
@@ -35,6 +36,7 @@ pub enum Item {
     Ebih_Waterfall_Both_Blocks,
     Escape,
     Flask,
+    Giguna_Northeast_Gate,
     Health,
     Health_Fragment,
     Health_Node,
@@ -88,6 +90,7 @@ impl fmt::Display for Item {
             Item::Apocalypse_Bomb => write!(f, "{}", "Apocalypse_Bomb"),
             Item::Boomerang => write!(f, "{}", "Boomerang"),
             Item::Bronze_Axe => write!(f, "{}", "Bronze_Axe"),
+            Item::Carnelian_Ring => write!(f, "{}", "Carnelian_Ring"),
             Item::Companies_Layoff => write!(f, "{}", "Companies_Layoff"),
             Item::Compass => write!(f, "{}", "Compass"),
             Item::Dear_Ernest => write!(f, "{}", "Dear_Ernest"),
@@ -101,6 +104,7 @@ impl fmt::Display for Item {
             Item::Ebih_Waterfall_Both_Blocks => write!(f, "{}", "Ebih_Waterfall_Both_Blocks"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Flask => write!(f, "{}", "Flask"),
+            Item::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
             Item::Health => write!(f, "{}", "Health"),
             Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
             Item::Health_Node => write!(f, "{}", "Health_Node"),
@@ -154,6 +158,7 @@ impl std::str::FromStr for Item {
             "Apocalypse_Bomb" => Ok(Item::Apocalypse_Bomb),
             "Boomerang" => Ok(Item::Boomerang),
             "Bronze_Axe" => Ok(Item::Bronze_Axe),
+            "Carnelian_Ring" => Ok(Item::Carnelian_Ring),
             "Companies_Layoff" => Ok(Item::Companies_Layoff),
             "Compass" => Ok(Item::Compass),
             "Dear_Ernest" => Ok(Item::Dear_Ernest),
@@ -167,6 +172,7 @@ impl std::str::FromStr for Item {
             "Ebih_Waterfall_Both_Blocks" => Ok(Item::Ebih_Waterfall_Both_Blocks),
             "Escape" => Ok(Item::Escape),
             "Flask" => Ok(Item::Flask),
+            "Giguna_Northeast_Gate" => Ok(Item::Giguna_Northeast_Gate),
             "Health" => Ok(Item::Health),
             "Health_Fragment" => Ok(Item::Health_Fragment),
             "Health_Node" => Ok(Item::Health_Node),
@@ -207,6 +213,7 @@ pub fn unused_item(id: Item) -> bool {
         Item::None => true,
         Item::Amagi_Stronghold_Left_Wall
         | Item::Bronze_Axe
+        | Item::Carnelian_Ring
         | Item::Companies_Layoff
         | Item::Compass
         | Item::Dear_Ernest

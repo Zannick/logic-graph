@@ -175,7 +175,7 @@ fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room__Peak() {
     let (mut world, mut ctx) = shared_setup();
 
     let mut ctx2 = ctx.clone();
-    ctx2.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
+    ctx2.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
 
     expect_no_route!(
         &world,

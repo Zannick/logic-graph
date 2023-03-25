@@ -14,9 +14,9 @@ fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
     let mut ctx = Context::default();
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
-    ctx.cbits1.insert(flags::ContextBits1::LEDGE_GRAB);
+    ctx.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
     ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
-    ctx.cbits1.insert(flags::ContextBits1::REMOTE_DRONE);
+    ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
     ctx.infect = 1;
     ctx.mode = enums::Mode::Indra;
     ctx.save = SpotId::Ebih__Base_Camp__Save_Point;
@@ -148,7 +148,7 @@ fn start_Amagi__West_Lake__Cavern_Refill_Station_with_Underwater_Movement__Shock
 ) {
     let (mut world, mut ctx) = shared_setup();
     ctx.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
-    ctx.cbits1.insert(flags::ContextBits1::SHOCKWAVE);
+    ctx.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
     ctx.energy = 300;
 
     expect_obtainable!(

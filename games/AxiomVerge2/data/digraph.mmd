@@ -272,6 +272,8 @@ subgraph Ebih
         Ebih__Ebih_West__East_8(East 8);
         Ebih__Ebih_West__Middle_Middle(Middle Middle);
         Ebih__Ebih_West__Middle_Cliff(Middle Cliff);
+        Ebih__Ebih_West__Giguna_Pillar(Giguna Pillar);
+        Ebih__Ebih_West__West_9(West 9);
     end
     subgraph Ebih__Cave[Cave]
         Ebih__Cave__Entry(Entry);
@@ -347,7 +349,37 @@ subgraph Ebih
 end
 subgraph Giguna
     subgraph Giguna__Giguna_Northeast[Giguna Northeast]
+        Giguna__Giguna_Northeast__East_9(East 9);
         Giguna__Giguna_Northeast__Inner_Wall(Inner Wall);
+        Giguna__Giguna_Northeast__Crow_Eating(Crow Eating);
+        Giguna__Giguna_Northeast__Save_Point(Save Point);
+        Giguna__Giguna_Northeast__Step(Step);
+        Giguna__Giguna_Northeast__West_10(West 10);
+        Giguna__Giguna_Northeast__West_9(West 9);
+        Giguna__Giguna_Northeast__Gate_Left(Gate Left);
+        Giguna__Giguna_Northeast__Gate_Vent(Gate Vent);
+        Giguna__Giguna_Northeast__Gate_Button(Gate Button);
+        Giguna__Giguna_Northeast__Gate_Right(Gate Right);
+        Giguna__Giguna_Northeast__Shaft_Bottom(Shaft Bottom);
+        Giguna__Giguna_Northeast__East_11(East 11);
+        Giguna__Giguna_Northeast__Right_Column(Right Column);
+        Giguna__Giguna_Northeast__Switch(Switch);
+        Giguna__Giguna_Northeast__Door(Door);
+        Giguna__Giguna_Northeast__Vault(Vault);
+    end
+    subgraph Giguna__Carnelian[Carnelian]
+        Giguna__Carnelian__East_10(East 10);
+        Giguna__Carnelian__East_Cliff(East Cliff);
+        Giguna__Carnelian__Upper_Susar(Upper Susar);
+        Giguna__Carnelian__Middle_Platforms(Middle Platforms);
+        Giguna__Carnelian__Switch(Switch);
+        Giguna__Carnelian__Door(Door);
+        Giguna__Carnelian__Vault(Vault);
+        Giguna__Carnelian__Rock(Rock);
+        Giguna__Carnelian__Lower_Susar(Lower Susar);
+        Giguna__Carnelian__Upper_Path(Upper Path);
+        Giguna__Carnelian__West_Ledge(West Ledge);
+        Giguna__Carnelian__East_10(East 10);
     end
 end
 subgraph Glacier
@@ -581,9 +613,12 @@ Ebih__Ebih_West__East_6 <--> Ebih__Grid_21_1_5__West_6
 Ebih__Ebih_West__East_7 <--> Ebih__Waterfall__West_7
 Ebih__Ebih_West__East_8 <--> Ebih__Waterfall__West_8
 Ebih__Ebih_West__East_9 <--> Ebih__Waterfall__West_9
+Ebih__Ebih_West__Giguna_Pillar --> Giguna__Giguna_Northeast__Inner_Wall
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__High_Ledge
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__Above_Chute
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__East_7
+Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
+Ebih__Ebih_West__West_9 <--> Giguna__Giguna_Northeast__East_9
 Ebih__Grid_25_10_12__Below_Bush --> Ebih__Grid_25_10_12__Bush
 Ebih__Grid_25_10_12__Bush --> Ebih__Grid_25_10_12__Mid_Ledge
 Ebih__Grid_25_10_12__Door <--> Ebih__Grid_25_10_12__Door_Left
@@ -618,6 +653,25 @@ Ebih__Waterfall__Under_Waterfall --> Ebih__Waterfall__Waterfall_Left
 Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
+Giguna__Carnelian__Door <--> Giguna__Carnelian__Switch
+Giguna__Carnelian__Door <--> Giguna__Carnelian__Vault
+Giguna__Carnelian__East_10 <--> Giguna__Giguna_Northeast__West_10
+Giguna__Carnelian__Lower_Susar --> Giguna__Carnelian__Rock
+Giguna__Carnelian__Lower_Susar --> Giguna__Carnelian__West_Ledge
+Giguna__Carnelian__Middle_Platforms --> Giguna__Carnelian__East_Cliff
+Giguna__Carnelian__Middle_Platforms <--> Giguna__Carnelian__Upper_Susar
+Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__East_Cliff
+Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__Upper_Path
+Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__East_10
+Giguna__Giguna_Northeast__Crow_Eating --> Giguna__Giguna_Northeast__Gate_Vent
+Giguna__Giguna_Northeast__Gate_Button <--> Giguna__Giguna_Northeast__Gate_Left
+Giguna__Giguna_Northeast__Right_Column --> Giguna__Giguna_Northeast__Door
+Giguna__Giguna_Northeast__Save_Point --> Giguna__Giguna_Northeast__Gate_Vent
+Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__Gate_Vent
+Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__West_9
+Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Door
+Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Right_Column
+Giguna__Giguna_Northeast__Vault --> Giguna__Giguna_Northeast__Door
 Glacier__Apocalypse_Entry__West <--> Glacier__Grid_43_10_11__East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
 Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room_Switched__Upper_West

@@ -111,6 +111,10 @@ pub fn access_can_deploy(ctx: &Context) -> bool {
     // $can_deploy
     helper__can_deploy!(ctx)
 }
+pub fn access_can_deploy_and_slingshot_hook(ctx: &Context) -> bool {
+    // $can_deploy and Slingshot_Hook
+    (helper__can_deploy!(ctx) && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_climb(ctx: &Context) -> bool {
     // $climb
     helper__climb!(ctx)
@@ -118,6 +122,10 @@ pub fn access_climb(ctx: &Context) -> bool {
 pub fn access_climb_and_grab(ctx: &Context) -> bool {
     // $climb and $grab
     (helper__climb!(ctx) && helper__grab!(ctx))
+}
+pub fn access_climb_or_hook(ctx: &Context) -> bool {
+    // $climb or $hook
+    (helper__climb!(ctx) || helper__hook!(ctx))
 }
 pub fn access_defeat_ebih_alu(ctx: &Context) -> bool {
     // Defeat_Ebih_Alu
@@ -236,6 +244,93 @@ pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx: &Conte
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
 }
+pub fn access_giguna__carnelian__door__ex__switch_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__carnelian__ctx__door_opened()
+}
+pub fn access_giguna__carnelian__door__ex__vault_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__carnelian__ctx__door_opened()
+}
+pub fn access_giguna__carnelian__lower_susar__caught__req(ctx: &Context) -> bool {
+    // not ^_lower_susar
+    !ctx.giguna__carnelian__ctx__lower_susar()
+}
+pub fn access_giguna__carnelian__lower_susar__ex__rock_1__req(ctx: &Context) -> bool {
+    // ^_lower_susar
+    ctx.giguna__carnelian__ctx__lower_susar()
+}
+pub fn access_giguna__carnelian__lower_susar__ex__west_ledge_1__req(ctx: &Context) -> bool {
+    // ^_lower_susar and $grab
+    (ctx.giguna__carnelian__ctx__lower_susar() && helper__grab!(ctx))
+}
+pub fn access_giguna__carnelian__lower_susar__ex__west_ledge_2__req(ctx: &Context) -> bool {
+    // ^_lower_susar and $hook
+    (ctx.giguna__carnelian__ctx__lower_susar() && helper__hook!(ctx))
+}
+pub fn access_giguna__carnelian__lower_susar__hack__req(ctx: &Context) -> bool {
+    // not ^_lower_susar and $allegiance1
+    (!ctx.giguna__carnelian__ctx__lower_susar() && helper__allegiance1!(ctx))
+}
+pub fn access_giguna__carnelian__switch__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__carnelian__ctx__door_opened()
+}
+pub fn access_giguna__carnelian__switch__open_door__req(ctx: &Context) -> bool {
+    // $unlock3 and not ^_door_opened
+    (helper__unlock3!(ctx) && !ctx.giguna__carnelian__ctx__door_opened())
+}
+pub fn access_giguna__carnelian__upper_susar__caught__req(ctx: &Context) -> bool {
+    // not ^_upper_susar
+    !ctx.giguna__carnelian__ctx__upper_susar()
+}
+pub fn access_giguna__carnelian__upper_susar__ex__east_cliff_1__req(ctx: &Context) -> bool {
+    // ^_upper_susar
+    ctx.giguna__carnelian__ctx__upper_susar()
+}
+pub fn access_giguna__carnelian__upper_susar__ex__middle_platforms_1__req(ctx: &Context) -> bool {
+    // ^_upper_susar
+    ctx.giguna__carnelian__ctx__upper_susar()
+}
+pub fn access_giguna__carnelian__upper_susar__ex__upper_path_1__req(ctx: &Context) -> bool {
+    // ^_upper_susar
+    ctx.giguna__carnelian__ctx__upper_susar()
+}
+pub fn access_giguna__carnelian__upper_susar__hack__req(ctx: &Context) -> bool {
+    // not ^_upper_susar and $allegiance1
+    (!ctx.giguna__carnelian__ctx__upper_susar() && helper__allegiance1!(ctx))
+}
+pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__carnelian__ctx__door_opened()
+}
+pub fn access_giguna__giguna_northeast__right_column__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__giguna_northeast__ctx__door_opened()
+}
+pub fn access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
+    ctx: &Context,
+) -> bool {
+    // $unlock3 and Infection_Range{3} and not ^_door_opened
+    ((helper__unlock3!(ctx) && ctx.count(Item::Infection_Range) >= 3)
+        && !ctx.giguna__giguna_northeast__ctx__door_opened())
+}
+pub fn access_giguna__giguna_northeast__switch__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened and ($grab or $hook)
+    (ctx.giguna__giguna_northeast__ctx__door_opened() && (helper__grab!(ctx) || helper__hook!(ctx)))
+}
+pub fn access_giguna__giguna_northeast__switch__open_door__req(ctx: &Context) -> bool {
+    // $unlock3 and not ^_door_opened
+    (helper__unlock3!(ctx) && !ctx.giguna__giguna_northeast__ctx__door_opened())
+}
+pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__giguna_northeast__ctx__door_opened()
+}
+pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
+    // Giguna_Northeast_Gate
+    ctx.has(Item::Giguna_Northeast_Gate)
+}
 pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
@@ -251,6 +346,10 @@ pub fn access_grab_or_climb(ctx: &Context) -> bool {
 pub fn access_grab_or_climb_or_hook(ctx: &Context) -> bool {
     // $grab or $climb or $hook
     ((helper__grab!(ctx) || helper__climb!(ctx)) || helper__hook!(ctx))
+}
+pub fn access_grab_or_hook(ctx: &Context) -> bool {
+    // $grab or $hook
+    (helper__grab!(ctx) || helper__hook!(ctx))
 }
 pub fn access_grab_or_underwater_movement(ctx: &Context) -> bool {
     // $grab or Underwater_Movement
@@ -523,6 +622,10 @@ pub fn action_deploy_drone__ebih__waterfall__below_left_switch(ctx: &mut Context
     // $deploy_drone(`Ebih > Waterfall > Below Left Switch`)
     helper__deploy_drone!(ctx, SpotId::Ebih__Waterfall__Below_Left_Switch);
 }
+pub fn action_deploy_drone__giguna__giguna_northeast__gate_vent(ctx: &mut Context) {
+    // $deploy_drone(`Giguna > Giguna Northeast > Gate Vent`)
+    helper__deploy_drone!(ctx, SpotId::Giguna__Giguna_Northeast__Gate_Vent);
+}
 pub fn action_deploy_drone_and_move__ebih__drone_room__east_4_ebih__drone_room__tree(
     ctx: &mut Context,
 ) {
@@ -606,6 +709,34 @@ pub fn action_energy__max_energy(ctx: &mut Context) {
 pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
     ctx.flasks += 1;
+}
+pub fn action_giguna__carnelian__lower_susar__caught__do(ctx: &mut Context) {
+    // ^_lower_susar = true
+    ctx.set_giguna__carnelian__ctx__lower_susar(true);
+}
+pub fn action_giguna__carnelian__lower_susar__hack__do(ctx: &mut Context) {
+    // ^_lower_susar = true
+    ctx.set_giguna__carnelian__ctx__lower_susar(true);
+}
+pub fn action_giguna__carnelian__switch__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__carnelian__ctx__door_opened(true);
+}
+pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context) {
+    // ^_upper_susar = true
+    ctx.set_giguna__carnelian__ctx__upper_susar(true);
+}
+pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context) {
+    // ^_upper_susar = true
+    ctx.set_giguna__carnelian__ctx__upper_susar(true);
+}
+pub fn action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
+}
+pub fn action_giguna__giguna_northeast__switch__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
 }
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position

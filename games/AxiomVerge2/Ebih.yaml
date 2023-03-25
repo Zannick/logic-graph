@@ -1073,6 +1073,21 @@ areas:
         - to: Alcove Entrance
         - to: Above Alcove
 
+    - name: Giguna Pillar
+      coord: [19.25, 8.5]
+      local:
+        - to: Above Alcove
+      exits:
+        - to: Giguna > Giguna Northeast > Inner Wall
+          time: 3.3
+    - name: West 9
+      coord: [19.05, 8.8]
+      exits:
+        - to: Giguna > Giguna Northeast > East 9
+          tags: [xshift]
+        - to: Giguna Pillar
+          req: $grab or $climb
+
 - name: Cave
   on_entry: $reset_old_area(^newpos)
   spots:
