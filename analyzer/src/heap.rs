@@ -26,6 +26,7 @@ pub struct LimitedHeap<T: Ctx> {
     // TODO: improve memory usage by condensing bool elements of the context
     // into bitflags. and/or use an LRU cache with a BIG size
     states_seen: LruCache<T, i32, CommonHasher>,
+    scale_factor: i32,
     iskips: i32,
     pskips: i32,
     dup_skips: u32,
@@ -45,6 +46,7 @@ impl<T: Ctx> LimitedHeap<T> {
                 NonZeroUsize::new(1 << 23).unwrap(),
                 CommonHasher::default(),
             ),
+            scale_factor: 50,
             iskips: 0,
             pskips: 0,
             dup_skips: 0,
@@ -62,6 +64,18 @@ impl<T: Ctx> LimitedHeap<T> {
         self.states_seen.len()
     }
 
+    pub fn scale_factor(&self) -> i32 {
+        self.scale_factor
+    }
+
+    pub fn set_scale_factor(&mut self, factor: i32) {
+        self.scale_factor = factor;
+        if !self.heap.is_empty() {
+            println!("Recalculating scores");
+            self.clean();
+        }
+    }
+
     /// Returns whether the underlying heap is actually empty.
     /// Attempting to peek or pop may produce None instead.
     pub fn is_empty(&self) -> bool {
@@ -77,7 +91,7 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 
     pub fn set_lenient_max_time(&mut self, max_time: i32) {
-        self.set_max_time(max_time + (max_time / 100))
+        self.set_max_time(max_time + (max_time / 128))
     }
 
     /// Pushes an element into the heap.
@@ -96,7 +110,7 @@ impl<T: Ctx> LimitedHeap<T> {
         }
         if el.elapsed() <= self.max_time {
             self.heap.push(HeapElement {
-                score: el.score(),
+                score: el.score(self.scale_factor),
                 el,
             });
         } else {
@@ -141,17 +155,23 @@ impl<T: Ctx> LimitedHeap<T> {
         let start = Instant::now();
         let mut theap = BinaryHeap::new();
         self.heap.shrink_to_fit();
-        theap.reserve(1048576);
+        theap.reserve(std::cmp::min(1048576, self.heap.len()));
         for el in self.heap.drain() {
             if el.el.elapsed() <= self.max_time {
                 if let Some(&time) = self.states_seen.get(el.el.get()) {
                     if el.el.elapsed() <= time {
-                        theap.push(el);
+                        theap.push(HeapElement {
+                            score: el.el.score(self.scale_factor),
+                            el: el.el,
+                        });
                     } else {
                         self.dup_pskips += 1;
                     }
                 } else {
-                    theap.push(el);
+                    theap.push(HeapElement {
+                        score: el.el.score(self.scale_factor),
+                        el: el.el,
+                    });
                 }
             } else {
                 self.pskips += 1;
@@ -179,7 +199,7 @@ impl<T: Ctx> LimitedHeap<T> {
             }
             if c.elapsed() <= self.max_time {
                 Some(HeapElement {
-                    score: c.score(),
+                    score: c.score(self.scale_factor),
                     el: c,
                 })
             } else {

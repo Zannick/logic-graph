@@ -216,7 +216,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.penalty += penalty;
     }
 
-    pub fn score(&self) -> i32 {
+    pub fn score(&self, scale_factor: i32) -> i32 {
         // We want to sort by elapsed time, low to high: (X - elapsed)
         // with a bonus based on progress to prioritize states closer to the end:
         //   + 50 * progress * progress [progress in range 0..100]
@@ -224,7 +224,7 @@ impl<T: Ctx> ContextWrapper<T> {
         // (on the order of the real max time seems good)
         // penalty is added to states that do really inefficient things
         // and to deprioritize actions
-        50 * self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
+        scale_factor * self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
     }
 
     pub fn get(&self) -> &T {
@@ -328,12 +328,12 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::Activate(action.id()));
     }
 
-    pub fn info(&self) -> String {
+    pub fn info(&self, scale_factor: i32) -> String {
         format(format_args!(
             "At {} after {}ms (score={}), visited={}, skipped={}, penalty={} last={}",
             self.ctx.position(),
             self.elapsed,
-            self.score(),
+            self.score(scale_factor),
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,

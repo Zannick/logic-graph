@@ -23,10 +23,7 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx);
-    let mut vec: Vec<ContextWrapper<T>> = spot_map
-        .values()
-        .filter_map(Clone::clone)
-        .collect();
+    let mut vec: Vec<ContextWrapper<T>> = spot_map.values().filter_map(Clone::clone).collect();
 
     vec.sort_unstable_by_key(|el| el.elapsed());
     vec
@@ -220,6 +217,7 @@ where
             );
             heap.set_lenient_max_time(wonctx.elapsed());
             heap.set_lenient_max_time(m.elapsed());
+            heap.set_scale_factor(heap.max_time() / 16284);
             heap.push(ContextWrapper::new(remove_all_unvisited(
                 world,
                 startctx.get(),
@@ -262,6 +260,12 @@ where
                     heap.len()
                 );
                 println!("Max time to consider is now: {}ms", heap.max_time());
+
+                // If we dropped to 80% of the previous max time
+                if ctx.elapsed() * 10 < old_time * 8 {
+                    heap.clean();
+                    last_clean = heap.max_time();
+                }
             }
 
             // If there were locations we skipped mid-route, skip them from the start,
@@ -276,10 +280,10 @@ where
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
         let heapsize_adjustment: i32 = (heap.len() / 32).try_into().unwrap();
-        if ctx.score() < heapsize_adjustment - heap.max_time() {
+        if ctx.score(heap.scale_factor()) < heapsize_adjustment - heap.max_time() {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
-                ctx.score(),
+                ctx.score(heap.scale_factor()),
                 heap.max_time()
             );
             break;
@@ -287,7 +291,7 @@ where
         if heap.len() > 15_000_000 || heap.len() + heap.seen() > 50_000_000 {
             println!(
                 "Too many items in heap! score={} vs adjusted={}",
-                ctx.score(),
+                ctx.score(heap.scale_factor()),
                 heapsize_adjustment - heap.max_time()
             );
             break;
@@ -304,7 +308,7 @@ where
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
                 "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}) ---\n\
-                Heap stats: count={}; seen={}; current limit: {}ms\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+                Heap stats: count={}; seen={}; current limit: {}ms, score scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
                 solutions.len(),
@@ -314,11 +318,12 @@ where
                 heap.len(),
                 heap.seen(),
                 heap.max_time(),
+                heap.scale_factor(),
                 iskips,
                 dskips,
                 pskips,
                 dpskips,
-                ctx.info()
+                ctx.info(heap.scale_factor())
             );
         }
         if ctx.get().count_visits() + ctx.get().count_skips() < W::NUM_LOCATIONS {
