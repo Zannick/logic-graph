@@ -96,7 +96,7 @@ impl<T: Ctx> LimitedHeap<T> {
 
     /// Pushes an element into the heap.
     /// If the element's elapsed time is greater than the allowed maximum,
-    /// or, the state has been previously seen with a lower elapsed time, does nothing.
+    /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
     pub fn push(&mut self, el: ContextWrapper<T>) {
         if let Some(min) = self.states_seen.get_mut(el.get()) {
             if el.elapsed() < *min {

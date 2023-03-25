@@ -10,11 +10,7 @@ use crate::world::*;
 use std::fmt::Debug;
 use std::time::Instant;
 
-pub fn explore<W, T, L, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-    heap: &mut LimitedHeap<T>,
-) -> Vec<ContextWrapper<T>>
+pub fn explore<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -32,9 +28,9 @@ where
 pub fn visit_locations<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-    heap: &mut LimitedHeap<T>,
     penalty: i32,
-) where
+) -> Vec<ContextWrapper<T>>
+where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
@@ -44,7 +40,7 @@ pub fn visit_locations<W, T, L, E>(
     ctx_list[0].penalize(penalty);
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
     if locs.is_empty() && exit == None {
-        return;
+        return Vec::new();
     }
     locs.sort_unstable_by_key(|loc| loc.time());
     for loc in locs {
@@ -84,7 +80,7 @@ pub fn visit_locations<W, T, L, E>(
             }
         }
     }
-    heap.extend(ctx_list);
+    ctx_list
 }
 
 pub fn action_unlocked_anything<W, T, L, E>(
@@ -135,7 +131,7 @@ pub fn activate_actions<W, T, L, E>(
         if act.can_access(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            c2.penalize(penalty * 4);
+            c2.penalize(penalty * 2);
             heap.push(c2);
         }
     }
@@ -161,7 +157,7 @@ where
     // 2. get largest dist
     // 3. (activate_actions) for each ctx, check for global actions and spot actions
     // 4. (visit_locations) for each ctx, get all available locations
-    let spot_ctxs = explore(world, ctx, heap);
+    let spot_ctxs = explore(world, ctx);
     let mut with_locs = 0;
 
     if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
@@ -185,7 +181,7 @@ where
                 );
             }
             if has_locs {
-                visit_locations(world, ctx.clone(), heap, spot_penalty);
+                heap.extend(visit_locations(world, ctx.clone(), spot_penalty));
                 with_locs += 1;
             }
         }
@@ -242,6 +238,9 @@ where
     let mut iters = 0;
     let mut deadends = 0;
     let mut last_clean = heap.max_time();
+    let mut last_solve = 0;
+    let mut rescore_plus = false;
+    let mut dist_for_rescoring = 1_000_000;
 
     while let Some(ctx) = heap.pop() {
         if world.won(ctx.get()) {
@@ -274,6 +273,8 @@ where
             heap.push(newctx);
 
             solutions.insert(ctx);
+            dist_for_rescoring = 1_000_000;
+            last_solve = iters;
 
             continue;
         }
@@ -300,6 +301,19 @@ where
         if iters % 10000 == 0 {
             if iters > 10_000_000 && solutions.unique() > 4 {
                 heap.set_max_time(solutions.best());
+            }
+            if iters > 2_000_000 && iters - last_solve > dist_for_rescoring {
+                println!("Solutions are stale, rescoring.");
+                if rescore_plus {
+                    heap.set_scale_factor(7 * heap.scale_factor() / 4);
+                    rescore_plus = false;
+                    dist_for_rescoring += 1_000_000;
+                } else {
+                    heap.set_scale_factor(4 * heap.scale_factor() / 5);
+                    rescore_plus = true;
+                }
+                last_clean = heap.max_time();
+                last_solve = iters;
             }
             if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
                 heap.clean();
