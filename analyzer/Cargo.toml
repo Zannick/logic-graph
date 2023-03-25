@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 enum-map = "*"
+lru = "*"
 rustc-hash = "*"
 sort_by_derive = "0.1.10"
 yaml-rust = "*"

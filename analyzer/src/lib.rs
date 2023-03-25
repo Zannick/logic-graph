@@ -1,4 +1,5 @@
 extern crate enum_map;
+extern crate lru;
 extern crate rustc_hash;
 extern crate sort_by_derive;
 extern crate yaml_rust;

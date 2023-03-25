@@ -236,21 +236,18 @@ where
     false
 }
 
-pub fn find_unused_links<W, T, E>(
+pub fn find_unused_links<W, T, E, Wp>(
     world: &W,
     spot_map: &EnumMap<E::SpotId, Option<ContextWrapper<T>>>,
 ) -> String
 where
-    W: World<Exit = E>,
+    W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let mut accessible: Vec<ContextWrapper<T>> = spot_map
-        .values()
-        .filter_map(Clone::clone)
-        .collect();
+    let mut accessible: Vec<ContextWrapper<T>> =
+        spot_map.values().filter_map(Clone::clone).collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
     let mut vec = Vec::new();
     for ctx in accessible {

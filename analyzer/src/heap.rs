@@ -1,8 +1,10 @@
 use crate::context::*;
-use crate::{CommonHasher, new_hashmap};
+use crate::CommonHasher;
+use lru::LruCache;
 use sort_by_derive::SortBy;
-use std::collections::{BinaryHeap, HashMap};
+use std::collections::BinaryHeap;
 use std::fmt::Debug;
+use std::num::NonZeroUsize;
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
@@ -23,7 +25,7 @@ pub struct LimitedHeap<T: Ctx> {
     // TODO: replace with a faster hash
     // TODO: improve memory usage by condensing bool elements of the context
     // into bitflags. and/or use an LRU cache with a BIG size
-    states_seen: HashMap<T, i32, CommonHasher>,
+    states_seen: LruCache<T, i32, CommonHasher>,
     iskips: i32,
     pskips: i32,
     dup_skips: u32,
@@ -39,7 +41,10 @@ impl<T: Ctx> LimitedHeap<T> {
                 h.reserve(1048576);
                 h
             },
-            states_seen: new_hashmap(),
+            states_seen: LruCache::with_hasher(
+                NonZeroUsize::new(1 << 23).unwrap(),
+                CommonHasher::default(),
+            ),
             iskips: 0,
             pskips: 0,
             dup_skips: 0,
@@ -87,7 +92,7 @@ impl<T: Ctx> LimitedHeap<T> {
                 return;
             }
         } else {
-            self.states_seen.insert(el.get().clone(), el.elapsed());
+            self.states_seen.push(el.get().clone(), el.elapsed());
         }
         if el.elapsed() <= self.max_time {
             self.heap.push(HeapElement {
@@ -106,10 +111,14 @@ impl<T: Ctx> LimitedHeap<T> {
         // Lazily clear when the max time is changed with elements in the heap
         while let Some(el) = self.heap.pop() {
             if el.el.elapsed() <= self.max_time {
-                if el.el.elapsed() <= *self.states_seen.get(el.el.get()).unwrap() {
-                    return Some(el.el);
+                if let Some(&time) = self.states_seen.get(el.el.get()) {
+                    if el.el.elapsed() <= time {
+                        return Some(el.el);
+                    } else {
+                        self.dup_pskips += 1;
+                    }
                 } else {
-                    self.dup_pskips += 1;
+                    return Some(el.el);
                 }
             } else {
                 self.pskips += 1;
@@ -135,10 +144,14 @@ impl<T: Ctx> LimitedHeap<T> {
         theap.reserve(1048576);
         for el in self.heap.drain() {
             if el.el.elapsed() <= self.max_time {
-                if el.el.elapsed() <= *self.states_seen.get(el.el.get()).unwrap() {
-                    theap.push(el);
+                if let Some(&time) = self.states_seen.get(el.el.get()) {
+                    if el.el.elapsed() <= time {
+                        theap.push(el);
+                    } else {
+                        self.dup_pskips += 1;
+                    }
                 } else {
-                    self.dup_pskips += 1;
+                    theap.push(el);
                 }
             } else {
                 self.pskips += 1;
@@ -162,7 +175,7 @@ impl<T: Ctx> LimitedHeap<T> {
                     return None;
                 }
             } else {
-                self.states_seen.insert(c.get().clone(), c.elapsed());
+                self.states_seen.push(c.get().clone(), c.elapsed());
             }
             if c.elapsed() <= self.max_time {
                 Some(HeapElement {
@@ -179,10 +192,14 @@ impl<T: Ctx> LimitedHeap<T> {
     pub fn iter(&self) -> impl Iterator<Item = &ContextWrapper<T>> + '_ {
         self.heap.iter().filter_map(|e| {
             if e.el.elapsed() <= self.max_time {
-                if e.el.elapsed() <= *self.states_seen.get(e.el.get()).unwrap() {
-                    Some(&e.el)
+                if let Some(&time) = self.states_seen.peek(e.el.get()) {
+                    if e.el.elapsed() <= time {
+                        Some(&e.el)
+                    } else {
+                        None
+                    }
                 } else {
-                    None
+                    Some(&e.el)
                 }
             } else {
                 None
