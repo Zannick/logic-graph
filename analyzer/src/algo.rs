@@ -78,7 +78,7 @@ pub fn visit_locations<W, T, L, E>(
         let exit = world.get_exit(e);
         let loc = world.get_location(l);
         for ctx in ctx_list.iter_mut() {
-            if ctx.get().todo(l) {
+            if ctx.get().todo(l) && loc.can_access(ctx.get()) && exit.can_access(ctx.get()) {
                 // Get the item and move along the exit.
                 ctx.visit_exit(world, loc, exit);
             }

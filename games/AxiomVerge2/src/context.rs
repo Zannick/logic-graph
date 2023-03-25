@@ -531,6 +531,7 @@ impl context::Ctx for Context {
             },
             Item::Defeat_MUS_A_M20 => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_MUS_A_M20);
+                rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self);
             },
             Item::Drone_Hover => {
                 self.cbits1.insert(flags::ContextBits1::DRONE_HOVER);

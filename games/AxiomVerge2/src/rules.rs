@@ -845,6 +845,13 @@ pub fn action_save_mode__indra(ctx: &mut Context) {
     helper__save!(ctx);
     ctx.set_mode(enums::Mode::Indra);
 }
+pub fn action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(
+    ctx: &mut Context,
+) {
+    // $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
+    ctx.skip(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall);
+    ctx.add_item(Item::Amagi_Dragon_Eye_Passage);
+}
 pub fn action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(
     ctx: &mut Context,
 ) {

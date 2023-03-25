@@ -671,14 +671,8 @@ areas:
         - to: Cavern Jaw
         - to: Cavern Front Pillar
       locations:
-        - name: Free Broken Wall
-          item: Amagi_Dragon_Eye_Passage
-          canon: Amagi_Dragon_Eye_Passage
-          req: Defeat_MUS_A_M20
-          time: 0
         - name: Break Wall
           item: Amagi_Dragon_Eye_Passage
-          canon: Amagi_Dragon_Eye_Passage
           req: $shockwave
           price: 100
           tags: [shockwave, event]

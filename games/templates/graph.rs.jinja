@@ -343,6 +343,12 @@ impl World {
     }
 }
 
+%% macro price(price, costs)
+price: Currency::{% if price and price > 0 -%}
+    {{ (costs or default_price_type)|camelize }}({{ price }})
+    {%- else %}Free{% endif %},
+%%- endmacro
+
 pub fn build_locations() -> EnumMap<LocationId, Location> {
     enum_map! {
 %% for loc in gl.locations()
@@ -350,9 +356,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::{{ loc.id }},
             canonical: CanonId::{{ (loc.canon or 'None')|construct_id }},
             item: Item::{{ loc.item or 'None' }},
-            price: Currency::{% if loc.price and loc.price > 0 -%}
-                {{ (loc.costs or default_price_type)|camelize }}({{ loc.price }})
-                {%- else %}Free{% endif %},
+            {{ price(loc.price, loc.costs) }}
             time: {% if loc.to is defined %}{{ (loc.item_time * 1000)|int }}{% else %}{{ (loc.time * 1000)|int }}{% endif %},
             exit_id: {% if loc.to is defined %}Some(ExitId::{{ loc.id }}){% else %}None{% endif %},
         },
@@ -367,9 +371,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::{{ ex.id }},
             time: {{ (ex.time * 1000)|int }},
             dest: SpotId::{{ ex|get_exit_target }},
-            price: Currency::{% if ex.price and ex.price > 0 -%}
-                {{ (ex.costs or default_price_type)|camelize }}({{ ex.price }})
-                {%- else %}Free{% endif %},
+            {% if ex.item %}{{ price(ex.exit_price, ex.exit_costs) }}{% else %}{{ price(ex.price, ex.costs) }}{% endif %}
             loc_id: {% if ex.item is defined %}Some(LocationId::{{ ex.id }}){% else %}None{% endif %},
         },
 %% endfor

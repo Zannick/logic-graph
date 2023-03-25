@@ -2489,7 +2489,6 @@ pub enum LocationId {
     Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
     Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
     Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
-    Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall,
     Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
     Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
     Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
@@ -2617,11 +2616,6 @@ impl fmt::Display for LocationId {
                 f,
                 "{}",
                 "Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20"
-            ),
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall => write!(
-                f,
-                "{}",
-                "Amagi > West Lake > Cavern Refill Station: Free Broken Wall"
             ),
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => write!(
                 f,
@@ -3007,9 +3001,6 @@ impl std::str::FromStr for LocationId {
             }
             "Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20)
-            }
-            "Amagi > West Lake > Cavern Refill Station: Free Broken Wall" => {
-                Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall)
             }
             "Amagi > West Lake > Cavern Tear Duct: Remote Flask" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask)
@@ -4668,7 +4659,6 @@ impl std::str::FromStr for ActionId {
 pub enum CanonId {
     #[default]
     None,
-    Amagi_Dragon_Eye_Passage,
     Amagi_Dragon_Eye_Flask,
     Shockwave,
     Amagi_Stronghold_Wall_1,
@@ -4693,7 +4683,6 @@ impl fmt::Display for CanonId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             CanonId::None => write!(f, "{}", "None"),
-            CanonId::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
             CanonId::Amagi_Dragon_Eye_Flask => write!(f, "{}", "Amagi Dragon Eye Flask"),
             CanonId::Shockwave => write!(f, "{}", "Shockwave"),
             CanonId::Amagi_Stronghold_Wall_1 => write!(f, "{}", "Amagi_Stronghold_Wall_1"),
@@ -4724,7 +4713,6 @@ impl std::str::FromStr for CanonId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi_Dragon_Eye_Passage" => Ok(CanonId::Amagi_Dragon_Eye_Passage),
             "Amagi Dragon Eye Flask" => Ok(CanonId::Amagi_Dragon_Eye_Flask),
             "Shockwave" => Ok(CanonId::Shockwave),
             "Amagi_Stronghold_Wall_1" => Ok(CanonId::Amagi_Stronghold_Wall_1),
@@ -5769,9 +5757,6 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
                 rules::access_shockwave_and_not_defeat_mus_a_m20(&ctx)
             }
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall => {
-                rules::access_defeat_mus_a_m20(&ctx)
-            }
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => {
                 rules::access_boomerang(&ctx)
             }
@@ -6669,7 +6654,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 107;
+    const NUM_LOCATIONS: i32 = 106;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -6703,10 +6688,6 @@ impl world::World for World {
         let loc = self.get_location(loc_id);
         match world::Location::canon_id(loc) {
             CanonId::None => vec![],
-            CanonId::Amagi_Dragon_Eye_Passage => vec![
-                LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall,
-                LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
-            ],
             CanonId::Amagi_Dragon_Eye_Flask => vec![
                 LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
                 LocationId::Amagi__West_Lake__Cavern_Eye__Item,
@@ -6801,8 +6782,7 @@ impl world::World for World {
                 SpotId::Amagi__Main_Area__Way_Off_To_The_Side
             }
             LocationId::Amagi__Liru_Room__Shrine__Item => SpotId::Amagi__Liru_Room__Shrine,
-            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall
-            | LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall => {
+            LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
                 SpotId::Amagi__West_Lake__Cavern_Refill_Station
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
@@ -7597,17 +7577,9 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 5500,
             exit_id: None,
         },
-        LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall => Location {
-            id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall,
-            canonical: CanonId::Amagi_Dragon_Eye_Passage,
-            item: Item::Amagi_Dragon_Eye_Passage,
-            price: Currency::Free,
-            time: 0,
-            exit_id: None,
-        },
         LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => Location {
             id: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
-            canonical: CanonId::Amagi_Dragon_Eye_Passage,
+            canonical: CanonId::None,
             item: Item::Amagi_Dragon_Eye_Passage,
             price: Currency::Energy(100),
             time: 3500,
@@ -8677,7 +8649,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20,
             time: 56000,
             dest: SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            price: Currency::Energy(300),
+            price: Currency::Free,
             loc_id: Some(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
         },
         ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => Exit {
@@ -12167,7 +12139,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             id: SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             locations: Range {
                 start: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall.into_usize(),
-                end: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall.into_usize() + 1,
+                end: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1.into_usize(),
@@ -18685,7 +18657,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Amagi__West_Lake__Cavern_Chin => Range { start: 0, end: 0 },
         SpotId::Amagi__West_Lake__Cavern_Refill_Station => Range {
             start: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall.into_usize(),
-            end: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Free_Broken_Wall.into_usize()
+            end: LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20.into_usize()
                 + 1,
         },
         SpotId::Amagi__West_Lake__Cavern_Tear_Duct => Range {

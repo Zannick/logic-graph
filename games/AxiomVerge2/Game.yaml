@@ -210,6 +210,9 @@ collect:
     $skip(`Ebih > Waterfall > Alcove Right > Block Right`);
     $add_item(Ebih_Waterfall_Block_Right);
     $add_item(Ebih_Waterfall_Block_Left);
+  Defeat_MUS_A_M20:
+    $skip(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
+    $add_item(Amagi_Dragon_Eye_Passage);
 
 settings:
   boomerang_steering:
