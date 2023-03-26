@@ -31,6 +31,7 @@ pub struct LimitedHeap<T: Ctx> {
     pskips: i32,
     dup_skips: u32,
     dup_pskips: i32,
+    last_clean: i32,
 }
 
 impl<T: Ctx> LimitedHeap<T> {
@@ -51,6 +52,7 @@ impl<T: Ctx> LimitedHeap<T> {
             pskips: 0,
             dup_skips: 0,
             dup_pskips: 0,
+            last_clean: 0,
         }
     }
 
@@ -118,6 +120,21 @@ impl<T: Ctx> LimitedHeap<T> {
         }
     }
 
+    pub fn see(&mut self, el: &ContextWrapper<T>) -> bool {
+        if let Some(min) = self.states_seen.get_mut(el.get()) {
+            if el.elapsed() < *min {
+                *min = el.elapsed();
+                true
+            } else {
+                self.dup_skips += 1;
+                false
+            }
+        } else {
+            self.states_seen.push(el.get().clone(), el.elapsed());
+            true
+        }
+    }
+
     /// Returns the next element with the highest score, or None.
     /// Will skip over any elements whose elapsed time is greater than the allowed maximum,
     /// or whose elapsed time is greater than the minimum seen for that state.
@@ -180,6 +197,7 @@ impl<T: Ctx> LimitedHeap<T> {
         self.heap = theap;
         let done = start.elapsed();
         println!("... -> {}. Done in {:?}.", self.heap.len(), done);
+        self.last_clean = self.max_time;
     }
 
     pub fn extend<I>(&mut self, iter: I)

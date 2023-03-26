@@ -1,5 +1,3 @@
-#![allow(unused_variables)]
-
 use crate::access::*;
 use crate::context::*;
 use crate::greedy::*;
@@ -9,6 +7,13 @@ use crate::solutions::SolutionCollector;
 use crate::world::*;
 use std::fmt::Debug;
 use std::time::Instant;
+
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+enum SearchMode {
+    Classic,
+    Depth(u8),
+    Greedy,
+}
 
 pub fn explore<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
@@ -83,56 +88,24 @@ where
     ctx_list
 }
 
-pub fn action_unlocked_anything<W, T, L, E>(
+pub fn activate_actions<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    act: &W::Action,
-    spot_ctxs: &Vec<ContextWrapper<T>>,
-) -> bool
+    penalty: i32,
+) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<ExitId = E::ExitId, Context = T>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
-    // TODO: can this be cached for the next search step?
-    let new_spots = accessible_spots(world, ctx.clone());
-
-    let mut missing = 0;
-    for spot_ctx in spot_ctxs {
-        if let Some(spot_again) = &new_spots[spot_ctx.get().position()] {
-            let new_locs = all_visitable_locations(world, spot_again.get());
-            let old_locs = all_visitable_locations(world, spot_ctx.get());
-            if new_locs.iter().any(|loc| !old_locs.contains(&loc)) {
-                return true;
-            }
-        } else {
-            missing += 1;
-            continue;
-        }
-    }
-    // The overlap is len() - missing, so if the new count is greater, we found new spots
-    new_spots.len() > spot_ctxs.len() - missing
-}
-
-pub fn activate_actions<W, T, L, E>(
-    world: &W,
-    ctx: &ContextWrapper<T>,
-    penalty: i32,
-    spot_ctxs: &Vec<ContextWrapper<T>>,
-    heap: &mut LimitedHeap<T>,
-) where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W> + Debug,
-    L: Location<ExitId = E::ExitId, Context = T>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-{
+    let mut result = Vec::new();
     for act in world.get_global_actions() {
         if act.can_access(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
             c2.penalize(penalty * 2);
-            heap.push(c2);
+            result.push(c2);
         }
     }
     for act in world.get_spot_actions(ctx.get().position()) {
@@ -140,12 +113,13 @@ pub fn activate_actions<W, T, L, E>(
             let mut c2 = ctx.clone();
             c2.activate(act);
             c2.penalize(penalty);
-            heap.push(c2);
+            result.push(c2);
         }
     }
+    result
 }
 
-pub fn search_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, heap: &mut LimitedHeap<T>)
+pub fn classic_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -159,6 +133,7 @@ where
     // 4. (visit_locations) for each ctx, get all available locations
     let spot_ctxs = explore(world, ctx);
     let mut with_locs = 0;
+    let mut result = Vec::new();
 
     if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
         let max_diff = f.elapsed() - s.elapsed();
@@ -168,7 +143,7 @@ where
             let spot_penalty = with_locs * (with_locs - 1) * max_diff
                 / <usize as TryInto<i32>>::try_into(spot_ctxs.len()).unwrap();
             if spot_has_actions(world, ctx) {
-                activate_actions(
+                result.extend(activate_actions(
                     world,
                     ctx,
                     if !has_locs {
@@ -176,16 +151,89 @@ where
                     } else {
                         3 * spot_penalty + 500
                     },
-                    &spot_ctxs,
-                    heap,
-                );
+                ));
             }
             if has_locs {
-                heap.extend(visit_locations(world, ctx.clone(), spot_penalty));
+                result.extend(visit_locations(world, ctx.clone(), spot_penalty));
                 with_locs += 1;
             }
         }
     }
+    result
+}
+
+pub fn search_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<Context = T>,
+    E: Exit<ExitId = L::ExitId, LocId = L::LocId, Context = T, Currency = L::Currency>,
+{
+    classic_step(world, ctx)
+}
+
+fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, heap: &LimitedHeap<T>) -> SearchMode
+where
+    T: Ctx,
+{
+    if iters < 2_000_000 {
+        SearchMode::Classic
+    } else if iters % 100 != 0 {
+        SearchMode::Classic
+    } else if iters % 1000 == 0 {
+        SearchMode::Greedy
+    } else if ctx.elapsed() * 3 < heap.max_time() {
+        SearchMode::Depth(3)
+    } else if ctx.get().progress() > 70 {
+        SearchMode::Depth(4)
+    } else {
+        SearchMode::Classic
+    }
+}
+
+fn handle_solution<T, W, L, E>(
+    ctx: ContextWrapper<T>,
+    heap: &mut LimitedHeap<T>,
+    solutions: &mut SolutionCollector<T>,
+    world: &W,
+    startctx: &ContextWrapper<T>,
+    iters: i32,
+    mode: SearchMode,
+) where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<Context = T>,
+    E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
+{
+    let old_time = heap.max_time();
+    if iters > 10_000_000 && solutions.unique() > 4 {
+        heap.set_max_time(ctx.elapsed());
+    } else {
+        heap.set_lenient_max_time(ctx.elapsed());
+    }
+
+    if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
+        println!(
+            "{:?} found new shortest winning path after {} rounds: estimated {}ms (heap max was: {}ms)",
+            mode,
+            iters,
+            ctx.elapsed(),
+            old_time
+        );
+        println!("Max time to consider is now: {}ms", heap.max_time());
+
+        // If we dropped to 80% of the previous max time
+        if ctx.elapsed() * 10 < old_time * 8 {
+            heap.clean();
+        }
+    }
+
+    // If there were locations we skipped mid-route, skip them from the start,
+    // in case that changes the routing.
+    let newctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
+    heap.push(newctx);
+
+    solutions.insert(ctx);
 }
 
 pub fn search<W, T, L, E>(world: &W, mut ctx: T) -> Result<(), std::io::Error>
@@ -241,43 +289,9 @@ where
     let mut last_solve = 0;
     let mut rescore_plus = false;
     let mut dist_for_rescoring = 1_000_000;
+    let mut rescore_factor = 5;
 
     while let Some(ctx) = heap.pop() {
-        if world.won(ctx.get()) {
-            let old_time = heap.max_time();
-            if iters > 10_000_000 && solutions.unique() > 4 {
-                heap.set_max_time(ctx.elapsed());
-            } else {
-                heap.set_lenient_max_time(ctx.elapsed());
-            }
-
-            if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
-                println!(
-                    "Found new shortest winning path after {} rounds, in estimated {}ms, with {} remaining in heap",
-                    iters,
-                    ctx.elapsed(),
-                    heap.len()
-                );
-                println!("Max time to consider is now: {}ms", heap.max_time());
-
-                // If we dropped to 80% of the previous max time
-                if ctx.elapsed() * 10 < old_time * 8 {
-                    heap.clean();
-                    last_clean = heap.max_time();
-                }
-            }
-
-            // If there were locations we skipped mid-route, skip them from the start,
-            // in case that changes the routing.
-            let newctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
-            heap.push(newctx);
-
-            solutions.insert(ctx);
-            dist_for_rescoring = 1_000_000;
-            last_solve = iters;
-
-            continue;
-        }
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
         let heapsize_adjustment: i32 = (heap.len() / 32).try_into().unwrap();
@@ -297,6 +311,11 @@ where
             );
             break;
         }
+        if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
+            deadends += 1;
+            continue;
+        }
+
         iters += 1;
         if iters % 10000 == 0 {
             if iters > 10_000_000 && solutions.unique() > 4 {
@@ -305,13 +324,14 @@ where
             if iters > 2_000_000 && iters - last_solve > dist_for_rescoring {
                 println!("Solutions are stale, rescoring.");
                 if rescore_plus {
-                    heap.set_scale_factor(7 * heap.scale_factor() / 4);
+                    heap.set_scale_factor(rescore_factor * heap.scale_factor() / 4);
                     rescore_plus = false;
                     dist_for_rescoring += 1_000_000;
                 } else {
-                    heap.set_scale_factor(4 * heap.scale_factor() / 5);
+                    heap.set_scale_factor(4 * heap.scale_factor() / rescore_factor);
                     rescore_plus = true;
                 }
+                rescore_factor += 1;
                 last_clean = heap.max_time();
                 last_solve = iters;
             }
@@ -340,10 +360,81 @@ where
                 ctx.info(heap.scale_factor())
             );
         }
-        if ctx.get().count_visits() + ctx.get().count_skips() < W::NUM_LOCATIONS {
-            search_step(world, ctx, &mut heap);
-        } else {
-            deadends += 1;
+
+        let mode = choose_mode(iters, &ctx, &heap);
+        match mode {
+            SearchMode::Depth(mut d) if d > 1 => {
+                let mut next = Vec::new();
+                for ctx in search_step(world, ctx) {
+                    if world.won(ctx.get()) {
+                        handle_solution(
+                            ctx,
+                            &mut heap,
+                            &mut solutions,
+                            world,
+                            &startctx,
+                            iters,
+                            mode,
+                        );
+                        dist_for_rescoring = 1_000_000;
+                        last_solve = iters;
+                    } else {
+                        next.push(ctx);
+                    }
+                }
+                d -= 1;
+                next.sort_unstable_by_key(|c| -c.score(heap.scale_factor()));
+                while let Some(ctx) = next.pop() {
+                    if !heap.see(&ctx) {
+                        continue;
+                    }
+
+                    heap.extend(next);
+                    next = search_step(world, ctx);
+                    d -= 1;
+                    if d == 0 {
+                        heap.extend(next);
+                        break;
+                    }
+                }
+            }
+            SearchMode::Greedy => {
+                if let Ok(win) = greedy_search(world, &ctx) {
+                    if win.elapsed() <= heap.max_time() {
+                        handle_solution(
+                            win,
+                            &mut heap,
+                            &mut solutions,
+                            world,
+                            &startctx,
+                            iters,
+                            mode,
+                        );
+                        dist_for_rescoring = 1_000_000;
+                        last_solve = iters;
+                    }
+                }
+                heap.push(ctx);
+            }
+            _ => {
+                for ctx in search_step(world, ctx) {
+                    if world.won(ctx.get()) {
+                        handle_solution(
+                            ctx,
+                            &mut heap,
+                            &mut solutions,
+                            world,
+                            &startctx,
+                            iters,
+                            SearchMode::Classic,
+                        );
+                        dist_for_rescoring = 1_000_000;
+                        last_solve = iters;
+                    } else {
+                        heap.push(ctx);
+                    }
+                }
+            }
         }
     }
     let (iskips, pskips, dskips, dpskips) = heap.stats();
