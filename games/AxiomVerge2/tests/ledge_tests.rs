@@ -17,7 +17,7 @@ fn shared_setup() -> (graph::World, Context) {
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
-    ctx.skipped(LocationId::Glacier__Compass_Room__Center__Table);
+    ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
 
     (world, ctx)
 }

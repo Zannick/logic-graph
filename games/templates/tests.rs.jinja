@@ -43,7 +43,7 @@ use lib{{ package }}::items::Item;
     {{ ctx }}.visit(LocationId::{{ loc|construct_id }});
 %% endfor
 %% for loc in setup.skipped
-    {{ ctx }}.skipped(LocationId::{{ loc|construct_id }});
+    {{ ctx }}.skip(LocationId::{{ loc|construct_id }});
 %% endfor
 %% endmacro
 

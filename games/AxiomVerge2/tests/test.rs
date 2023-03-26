@@ -1,11 +1,13 @@
 #![allow(unused)]
 
-use analyzer::context::Ctx;
+use analyzer::context::{ContextWrapper, Ctx, History};
 use analyzer::world::*;
 use analyzer::*;
 use libaxiom_verge2::context::Context;
 use libaxiom_verge2::graph::{self, *};
 use libaxiom_verge2::items::Item;
+use rmp_serde::{Deserializer, Serializer};
+use serde::{Deserialize, Serialize};
 
 #[test]
 fn test_name() {
@@ -104,7 +106,7 @@ fn search() {
     ctx.add_item(Item::Ice_Axe);
     ctx.save = SpotId::Glacier__Revival__Save_Point;
     ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
-    ctx.skipped(LocationId::Glacier__Compass_Room__Center__Table);
+    ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
     let verify = |c: &Context| {
         if c.has(Item::Boomerang) {
             Ok(())
@@ -121,4 +123,29 @@ fn search() {
         verify,
         2000
     );
+}
+
+fn serde_pass<T: Ctx>(ctx: &ContextWrapper<T>) -> ContextWrapper<T> {
+    let mut buf = Vec::new();
+    ctx.serialize(&mut Serializer::new(&mut buf)).unwrap();
+    rmp_serde::from_slice(&buf).unwrap()
+}
+
+#[test]
+fn asserde_true() {
+
+    let mut world = graph::World::new();
+    let mut ctx = Context::default();
+    ctx.energy = 300;
+    ctx.flasks = 1;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
+    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.visit(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown);
+    ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
+
+    let mut ctx = ContextWrapper::new(ctx);
+    ctx.append_history(History::Get(Item::Amashilama, LocationId::Glacier__The_Big_Drop__Water_Surface__Drown));
+
+    assert!(ctx == serde_pass(&ctx))
 }
