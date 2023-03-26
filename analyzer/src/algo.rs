@@ -13,6 +13,7 @@ enum SearchMode {
     Classic,
     Depth(u8),
     Greedy,
+    PickDepth(u8),
 }
 
 pub fn explore<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
@@ -178,14 +179,14 @@ where
 {
     if iters < 1_000_000 {
         SearchMode::Classic
-    } else if iters % 1000 != 0 {
+    } else if iters % 1024 != 0 {
         SearchMode::Classic
     } else if ctx.elapsed() * 3 < heap.max_time() {
-        SearchMode::Depth(3)
-    } else if ctx.get().progress() > 70 {
+        SearchMode::Depth(4)
+    } else if ctx.get().progress() > 60 {
         SearchMode::Greedy
     } else {
-        SearchMode::Classic
+        SearchMode::PickDepth(3)
     }
 }
 
@@ -213,7 +214,7 @@ where
 
     if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
         println!(
-            "{:?} found new shortest winning path after {} rounds: estimated {}ms (heap max was: {}ms)",
+            "{:?} mode found new shortest winning path after {} rounds: estimated {}ms (heap max was: {}ms)",
             mode,
             iters,
             ctx.elapsed(),
@@ -272,9 +273,10 @@ where
         }
         Err(ctx) => {
             panic!(
-                "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}",
+                "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}",
                 ctx.elapsed(),
-                ctx.history_summary()
+                ctx.history_summary(),
+                ctx.get()
             );
             // Push it anyway, maybe it'll find something!
             //heap.push(ctx);
@@ -289,12 +291,21 @@ where
     let mut rescore_plus = false;
     let mut dist_for_rescoring = 1_000_000;
     let mut rescore_factor = 5;
+    let mut last_heap_size = 0;
 
     while let Some(ctx) = heap.pop() {
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
         let heapsize_adjustment: i32 = (heap.len() / 32).try_into().unwrap();
-        if ctx.score(heap.scale_factor()) < heapsize_adjustment - heap.max_time() {
+        let solutions_adjustment: i32 = solutions.len().try_into().unwrap();
+        let score_cutoff: i32 = heapsize_adjustment - heap.max_time()
+            + solutions_adjustment
+            + if iters > 10_000_000 {
+                (iters - 10_000_000) / 1_024
+            } else {
+                0
+            };
+        if ctx.score(heap.scale_factor()) < score_cutoff {
             println!(
                 "Remaining items have low score: score={} vs max_time={}ms",
                 ctx.score(heap.scale_factor()),
@@ -320,12 +331,22 @@ where
             if iters > 10_000_000 && solutions.unique() > 4 {
                 heap.set_max_time(solutions.best());
             }
-            if iters > 2_000_000 && iters - last_solve > dist_for_rescoring {
-                println!("Solutions are stale, rescoring.");
-                if rescore_plus {
+            if iters > 2_000_000
+                && (iters - last_solve > dist_for_rescoring
+                    || (!rescore_plus
+                        && iters - last_solve > 500_000
+                        && heap.len() > 1_000_000 + last_heap_size)
+                    || (rescore_plus
+                        && heap.len() > 2_000_000 + last_heap_size
+                        && heap.len() > 5_000_000))
+            {
+                println!("Rescoring.");
+                if heap.len() > 5_000_000 || rescore_plus {
                     heap.set_scale_factor(rescore_factor * heap.scale_factor() / 4);
+                    if iters - last_solve > dist_for_rescoring {
+                        dist_for_rescoring += 1_500_000;
+                    }
                     rescore_plus = false;
-                    dist_for_rescoring += 1_000_000;
                 } else {
                     heap.set_scale_factor(4 * heap.scale_factor() / rescore_factor);
                     rescore_plus = true;
@@ -333,6 +354,7 @@ where
                 rescore_factor += 1;
                 last_clean = heap.max_time();
                 last_solve = iters;
+                last_heap_size = heap.len();
             }
             if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
                 heap.clean();
@@ -362,41 +384,19 @@ where
 
         let mode = choose_mode(iters, &ctx, &heap);
         match mode {
-            SearchMode::Depth(mut d) if d > 1 => {
-                let mut next = Vec::new();
-                for ctx in search_step(world, ctx) {
-                    if world.won(ctx.get()) {
-                        if handle_solution(
-                            ctx,
-                            &mut heap,
-                            &mut solutions,
-                            world,
-                            &startctx,
-                            iters,
-                            mode,
-                        ) {
-                            dist_for_rescoring = 1_000_000;
-                            last_solve = iters;
-                        }
-                    } else {
-                        next.push(ctx);
-                    }
-                }
-                d -= 1;
-                next.sort_unstable_by_key(|c| -c.score(heap.scale_factor()));
-                while let Some(ctx) = next.pop() {
-                    if !heap.see(&ctx) {
-                        continue;
-                    }
-
-                    heap.extend(next);
-                    next = search_step(world, ctx);
-                    d -= 1;
-                    if d == 0 {
-                        heap.extend(next);
-                        break;
-                    }
-                }
+            SearchMode::Depth(d) if d > 1 => {
+                depth_step(
+                    world,
+                    ctx,
+                    &mut heap,
+                    &mut solutions,
+                    &startctx,
+                    iters,
+                    mode,
+                    &mut dist_for_rescoring,
+                    &mut last_solve,
+                    d,
+                );
             }
             SearchMode::Greedy => {
                 if let Ok(win) = greedy_search(world, &ctx, heap.max_time()) {
@@ -410,12 +410,35 @@ where
                             iters,
                             mode,
                         ) {
-                            dist_for_rescoring = 1_000_000;
+                            dist_for_rescoring = 1_500_000;
                             last_solve = iters;
                         }
                     }
                 }
                 heap.push(ctx);
+            }
+            SearchMode::PickDepth(d) if d > 1 => {
+                let mut this_round = vec![ctx];
+                while let Some(c) = heap.pop() {
+                    this_round.push(c);
+                    if this_round.len() > 9 {
+                        break;
+                    }
+                }
+                this_round.sort_unstable_by_key(|c| c.elapsed() - c.penalty());
+                depth_step(
+                    world,
+                    this_round.pop().unwrap(),
+                    &mut heap,
+                    &mut solutions,
+                    &startctx,
+                    iters,
+                    mode,
+                    &mut dist_for_rescoring,
+                    &mut last_solve,
+                    d,
+                );
+                heap.extend(this_round);
             }
             _ => {
                 for ctx in search_step(world, ctx) {
@@ -429,7 +452,7 @@ where
                             iters,
                             SearchMode::Classic,
                         ) {
-                            dist_for_rescoring = 1_000_000;
+                            dist_for_rescoring = 1_500_000;
                             last_solve = iters;
                         }
                     } else {
@@ -445,4 +468,59 @@ where
         iters, deadends, iskips, dskips, pskips, dpskips
     );
     solutions.export()
+}
+
+fn depth_step<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    heap: &mut LimitedHeap<T>,
+    solutions: &mut SolutionCollector<T>,
+    startctx: &ContextWrapper<T>,
+    iters: i32,
+    mode: SearchMode,
+    dist_for_rescoring: &mut i32,
+    last_solve: &mut i32,
+    mut d: u8,
+) where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<Context = T>,
+    E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
+{
+    let mut next = Vec::new();
+    for ctx in search_step(world, ctx) {
+        if world.won(ctx.get()) {
+            if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
+                *dist_for_rescoring = 1_500_000;
+                *last_solve = iters;
+            }
+        } else {
+            next.push(ctx);
+        }
+    }
+    d -= 1;
+    next.sort_unstable_by_key(|c| (c.get().progress(), -c.elapsed()));
+    while let Some(ctx) = next.pop() {
+        if !heap.see(&ctx) {
+            continue;
+        }
+
+        heap.extend(next);
+        next = Vec::new();
+        for ctx in search_step(world, ctx) {
+            if world.won(ctx.get()) {
+                if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
+                    *dist_for_rescoring = 1_500_000;
+                    *last_solve = iters;
+                }
+            } else {
+                next.push(ctx);
+            }
+        }
+        d -= 1;
+        if d == 0 {
+            heap.extend(next);
+            break;
+        }
+    }
 }

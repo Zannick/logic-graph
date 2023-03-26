@@ -216,6 +216,10 @@ impl<T: Ctx> ContextWrapper<T> {
         self.penalty += penalty;
     }
 
+    pub fn penalty(&self) -> i32 {
+        self.penalty
+    }
+
     pub fn score(&self, scale_factor: i32) -> i32 {
         // We want to sort by elapsed time, low to high: (X - elapsed)
         // with a bonus based on progress to prioritize states closer to the end:
@@ -373,8 +377,8 @@ impl<T: Ctx> ContextWrapper<T> {
                 if let Some(lh) = v.last() {
                     match (*lh, h) {
                         (
-                            History::Move(..) | History::Warp(..) | History::MoveLocal(..),
-                            History::Move(..) | History::Warp(..) | History::MoveLocal(..),
+                            History::Move(..) | History::MoveLocal(..),
+                            History::Move(..) | History::MoveLocal(..),
                         ) => (),
                         _ => v.push(h),
                     }
@@ -387,8 +391,11 @@ impl<T: Ctx> ContextWrapper<T> {
             .map(|h| match h {
                 History::Get(..) | History::MoveGet(..) | History::Activate(..) => h.to_string(),
                 History::Move(e) => format!("  Move... to {}", e),
-                History::Warp(_, s) | History::MoveLocal(s) => {
+                History::MoveLocal(s) => {
                     format!("  Move... to {}", s)
+                }
+                History::Warp(w, s) => {
+                    format!("  {}warp to {}", w, s)
                 }
             })
             .collect();

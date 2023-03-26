@@ -178,14 +178,14 @@ where
     (locs, exit)
 }
 
-pub fn can_win<W, T, L, E>(world: &W, ctx: &T) -> Result<(), ContextWrapper<T>>
+pub fn can_win<W, T, L, E>(world: &W, ctx: &T, max_time: i32) -> Result<(), ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let res = greedy_search_from(world, ctx, i32::MAX);
+    let res = greedy_search_from(world, ctx, max_time);
     match res {
         Ok(_) => Ok(()),
         Err(c) => Err(c),

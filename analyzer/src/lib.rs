@@ -324,7 +324,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not find {} in the iteration limit", $item);
                 }
-                $crate::algo::search_step($world, ctx, &mut heap);
+                heap.extend($crate::algo::classic_step($world, ctx));
                 count -= 1;
             }
             panic!("Dead-ended without finding {}", $item);
@@ -346,7 +346,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not reach {} in the iteration limit", $spot);
                 }
-                $crate::algo::search_step($world, ctx, &mut heap);
+                heap.extend($crate::algo::classic_step($world, ctx));
                 count -= 1;
             }
             panic!("Dead-ended without reaching {}", $spot);
@@ -375,7 +375,7 @@ pub mod testlib {
                     if count == 0 {
                         panic!("Did not visit {} in the iteration limit", $loc_id);
                     }
-                    $crate::algo::search_step($world, ctx, &mut heap);
+                    heap.extend($crate::algo::classic_step($world, ctx));
                     count -= 1;
                 } else if ctx.get().visited($loc_id) {
                     return;
@@ -403,7 +403,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not activate {} in the iteration limit", $act_id);
                 }
-                $crate::algo::search_step($world, ctx, &mut heap);
+                heap.extend($crate::algo::classic_step($world, ctx));
                 count -= 1;
             }
             panic!("Dead-ended without activating {}", $act_id);
@@ -440,7 +440,7 @@ pub mod testlib {
                         );
                         return;
                     }
-                    $crate::algo::search_step($world, ctx, &mut heap);
+                    heap.extend($crate::algo::classic_step($world, ctx));
                     count -= 1;
                 }
             }
@@ -477,7 +477,7 @@ pub mod testlib {
                     );
                     return;
                 }
-                $crate::algo::search_step($world, ctx, &mut heap);
+                heap.extend($crate::algo::classic_step($world, ctx));
                 count -= 1;
             }
             assert!(success, "Dead-ended: did not find {}", $item);
@@ -513,7 +513,7 @@ pub mod testlib {
                     );
                     return;
                 }
-                $crate::algo::search_step($world, ctx, &mut heap);
+                heap.extend($crate::algo::classic_step($world, ctx));
                 count -= 1;
             }
             assert!(success, "Dead-ended: did not reach {}", $spot);
@@ -549,7 +549,7 @@ pub mod testlib {
                         );
                         return;
                     }
-                    $crate::algo::search_step($world, ctx, &mut heap);
+                    heap.extend($crate::algo::classic_step($world, ctx));
                     count -= 1;
                 }
             }
@@ -587,7 +587,7 @@ pub mod testlib {
                     );
                     return;
                 }
-                $crate::algo::search_step($world, ctx, &mut heap);
+                heap.extend($crate::algo::classic_step($world, ctx));
                 count -= 1;
             }
             assert!(success, "Dead-ended: did not activate {}", $act_id);

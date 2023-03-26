@@ -139,6 +139,7 @@ fn greedy_internal<W, T, L, E>(
     world: &W,
     mut ctx: ContextWrapper<T>,
     max_time: i32,
+    max_depth: i8,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -151,7 +152,7 @@ where
         if ctx.elapsed() > max_time {
             return Err(ctx);
         }
-        match first_spot_with_locations_after_actions(world, ctx, 2) {
+        match first_spot_with_locations_after_actions(world, ctx, max_depth) {
             Ok(c) => {
                 ctx = c;
                 grab_all(world, &mut ctx);
@@ -173,7 +174,7 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    greedy_internal(world, ctx.clone(), max_time)
+    greedy_internal(world, ctx.clone(), max_time, 9)
 }
 
 pub fn greedy_search_from<W, T, L, E>(
@@ -187,7 +188,7 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    greedy_internal(world, ContextWrapper::new(ctx.clone()), max_time)
+    greedy_internal(world, ContextWrapper::new(ctx.clone()), max_time, 2)
 }
 
 pub fn minimize_greedy<W, T, L, E>(

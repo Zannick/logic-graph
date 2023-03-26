@@ -61,7 +61,7 @@ where
                 // TODO: If this location can be replaced by an action, e.g. collect rupees,
                 // then it will be dropped, and if the action is slower, we fail to minimize
                 // to a shorter playthrough.
-                if !can_win(world, &ctx).is_ok() {
+                if !can_win(world, &ctx, wonctx.elapsed()).is_ok() {
                     ctx.reset(loc_id);
                 }
             }
@@ -69,7 +69,7 @@ where
                 let ex = world.get_exit(exit_id);
                 if let Some(loc_id) = ex.loc_id() {
                     ctx.skip(*loc_id);
-                    if !can_win(world, &ctx).is_ok() {
+                    if !can_win(world, &ctx, wonctx.elapsed()).is_ok() {
                         ctx.reset(*loc_id);
                     }
                 }
