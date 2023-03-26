@@ -30,9 +30,6 @@ struct HeapElement<T: Ctx> {
 pub struct LimitedHeap<T: Ctx> {
     max_time: i32,
     heap: BinaryHeap<HeapElement<T>>,
-    // TODO: replace with a faster hash
-    // TODO: improve memory usage by condensing bool elements of the context
-    // into bitflags. and/or use an LRU cache with a BIG size
     states_seen: LruCache<T, i32, CommonHasher>,
     scale_factor: i32,
     iskips: i32,
