@@ -16,7 +16,11 @@ enum SearchMode {
     PickDepth(u8),
 }
 
-pub fn explore<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
+pub fn explore<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    max_time: i32,
+) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -24,7 +28,7 @@ where
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
-    let spot_map = accessible_spots(world, ctx);
+    let spot_map = accessible_spots(world, ctx, max_time);
     let mut vec: Vec<ContextWrapper<T>> = spot_map.values().filter_map(Clone::clone).collect();
 
     vec.sort_unstable_by_key(|el| el.elapsed());
@@ -120,7 +124,7 @@ where
     result
 }
 
-pub fn classic_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
+pub fn classic_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, max_time: i32) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -132,7 +136,7 @@ where
     // 2. get largest dist
     // 3. (activate_actions) for each ctx, check for global actions and spot actions
     // 4. (visit_locations) for each ctx, get all available locations
-    let spot_ctxs = explore(world, ctx);
+    let spot_ctxs = explore(world, ctx, max_time);
     let mut with_locs = 0;
     let mut result = Vec::new();
 
@@ -161,16 +165,6 @@ where
         }
     }
     result
-}
-
-pub fn search_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W> + Debug,
-    L: Location<Context = T>,
-    E: Exit<ExitId = L::ExitId, LocId = L::LocId, Context = T, Currency = L::Currency>,
-{
-    classic_step(world, ctx)
 }
 
 fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, heap: &LimitedHeap<T>) -> SearchMode
@@ -261,7 +255,7 @@ where
             );
             heap.set_lenient_max_time(wonctx.elapsed());
             heap.set_lenient_max_time(m.elapsed());
-            heap.set_scale_factor(heap.max_time() / 16284);
+            heap.set_scale_factor(heap.max_time() / 18000);
             heap.push(ContextWrapper::new(remove_all_unvisited(
                 world,
                 startctx.get(),
@@ -288,10 +282,9 @@ where
     let mut deadends = 0;
     let mut last_clean = heap.max_time();
     let mut last_solve = 0;
-    let mut rescore_plus = false;
+    let mut rescore_plus = true;
     let mut dist_for_rescoring = 1_000_000;
     let mut rescore_factor = 5;
-    let mut last_heap_size = 0;
 
     while let Some(ctx) = heap.pop() {
         // cut off when penalties are high enough
@@ -331,18 +324,15 @@ where
             if iters > 10_000_000 && solutions.unique() > 4 {
                 heap.set_max_time(solutions.best());
             }
-            if iters > 2_000_000
-                && (iters - last_solve > dist_for_rescoring
-                    || (!rescore_plus
-                        && iters - last_solve > 500_000
-                        && heap.len() > 1_000_000 + last_heap_size)
-                    || (rescore_plus
-                        && heap.len() > 2_000_000 + last_heap_size
-                        && heap.len() > 5_000_000))
-            {
+            if iters > 2_000_000 && iters - last_solve > dist_for_rescoring {
                 println!("Rescoring.");
-                if heap.len() > 5_000_000 || rescore_plus {
-                    heap.set_scale_factor(rescore_factor * heap.scale_factor() / 4);
+                if rescore_plus && heap.len() > 2_000_000 {
+                    let new_factor = rescore_factor * heap.scale_factor() / 4;
+                    if new_factor > 1_000_000 {
+                        println!("Scale factor too high!");
+                        break;
+                    }
+                    heap.set_scale_factor(new_factor);
                     if iters - last_solve > dist_for_rescoring {
                         dist_for_rescoring += 1_500_000;
                     }
@@ -354,7 +344,6 @@ where
                 rescore_factor += 1;
                 last_clean = heap.max_time();
                 last_solve = iters;
-                last_heap_size = heap.len();
             }
             if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
                 heap.clean();
@@ -410,12 +399,29 @@ where
                             iters,
                             mode,
                         ) {
-                            dist_for_rescoring = 1_500_000;
+                            dist_for_rescoring = 1_000_000;
                             last_solve = iters;
                         }
                     }
                 }
-                heap.push(ctx);
+                for ctx in classic_step(world, ctx, heap.max_time()) {
+                    if world.won(ctx.get()) {
+                        if handle_solution(
+                            ctx,
+                            &mut heap,
+                            &mut solutions,
+                            world,
+                            &startctx,
+                            iters,
+                            SearchMode::Classic,
+                        ) {
+                            dist_for_rescoring = 1_500_000;
+                            last_solve = iters;
+                        }
+                    } else {
+                        heap.push(ctx);
+                    }
+                }
             }
             SearchMode::PickDepth(d) if d > 1 => {
                 let mut this_round = vec![ctx];
@@ -441,7 +447,7 @@ where
                 heap.extend(this_round);
             }
             _ => {
-                for ctx in search_step(world, ctx) {
+                for ctx in classic_step(world, ctx, heap.max_time()) {
                     if world.won(ctx.get()) {
                         if handle_solution(
                             ctx,
@@ -488,7 +494,7 @@ fn depth_step<W, T, L, E>(
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
     let mut next = Vec::new();
-    for ctx in search_step(world, ctx) {
+    for ctx in classic_step(world, ctx, heap.max_time()) {
         if world.won(ctx.get()) {
             if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
                 *dist_for_rescoring = 1_500_000;
@@ -507,7 +513,7 @@ fn depth_step<W, T, L, E>(
 
         heap.extend(next);
         next = Vec::new();
-        for ctx in search_step(world, ctx) {
+        for ctx in classic_step(world, ctx, heap.max_time()) {
             if world.won(ctx.get()) {
                 if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
                     *dist_for_rescoring = 1_500_000;

@@ -8,6 +8,7 @@ pub fn first_spot_with_locations_after_actions<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_depth: i8,
+    max_time: i32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Exit = E, Location = L>,
@@ -16,7 +17,7 @@ where
     L: Location<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
-    let spot_map = accessible_spots(world, ctx);
+    let spot_map = accessible_spots(world, ctx, max_time);
     let mut orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().flatten().collect();
     orig_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
     if let Some(ctx) = orig_vec
@@ -25,10 +26,7 @@ where
     {
         return Ok(ctx.clone());
     }
-    let min_spot = orig_vec
-        .first()
-        .expect("couldn't reach any spots!")
-        .clone();
+    let min_spot = orig_vec.first().expect("couldn't reach any spots!").clone();
 
     let mut useful_spots = Vec::new();
     let mut seen = new_hashset();
@@ -41,7 +39,10 @@ where
         if let Some(spot) = orig_vec.iter().find(|s| action.can_access(s.get())) {
             let mut newctx = spot.clone();
             newctx.activate(action);
-            for nextctx in accessible_spots(world, newctx).into_values().flatten() {
+            for nextctx in accessible_spots(world, newctx, max_time)
+                .into_values()
+                .flatten()
+            {
                 if spot_has_locations(world, nextctx.get()) {
                     useful_spots.push(nextctx);
                 } else {
@@ -65,7 +66,10 @@ where
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
-                for nextctx in accessible_spots(world, newctx).into_values().flatten() {
+                for nextctx in accessible_spots(world, newctx, max_time)
+                    .into_values()
+                    .flatten()
+                {
                     if spot_has_locations(world, nextctx.get()) {
                         if depth > 0 {
                             return Ok(nextctx);
@@ -89,7 +93,10 @@ where
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
-                for nextctx in accessible_spots(world, newctx).into_values().flatten() {
+                for nextctx in accessible_spots(world, newctx, max_time)
+                    .into_values()
+                    .flatten()
+                {
                     if spot_has_locations(world, nextctx.get()) {
                         return Ok(nextctx);
                     }
@@ -152,7 +159,7 @@ where
         if ctx.elapsed() > max_time {
             return Err(ctx);
         }
-        match first_spot_with_locations_after_actions(world, ctx, max_depth) {
+        match first_spot_with_locations_after_actions(world, ctx, max_depth, max_time) {
             Ok(c) => {
                 ctx = c;
                 grab_all(world, &mut ctx);

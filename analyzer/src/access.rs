@@ -51,6 +51,7 @@ pub fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
     spot_map: &EnumMap<E::SpotId, Option<ContextWrapper<T>>>,
+    max_time: i32,
     spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -68,7 +69,9 @@ pub fn expand<W, T, E, Wp>(
             }
             let mut newctx = ctx.clone();
             newctx.move_local(*spot, local);
-            spot_heap.push(Reverse(newctx));
+            if newctx.elapsed() <= max_time {
+                spot_heap.push(Reverse(newctx));
+            }
         }
     }
 
@@ -76,7 +79,9 @@ pub fn expand<W, T, E, Wp>(
         if spot_map[exit.dest()] == None && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
-            spot_heap.push(Reverse(newctx));
+            if newctx.elapsed() <= max_time {
+                spot_heap.push(Reverse(newctx));
+            }
         }
     }
 
@@ -84,7 +89,9 @@ pub fn expand<W, T, E, Wp>(
         if spot_map[warp.dest(ctx.get())] == None && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
-            spot_heap.push(Reverse(newctx));
+            if newctx.elapsed() <= max_time {
+                spot_heap.push(Reverse(newctx));
+            }
         }
     }
 }
@@ -93,6 +100,7 @@ pub fn expand<W, T, E, Wp>(
 pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
+    max_time: i32,
 ) -> EnumMap<E::SpotId, Option<ContextWrapper<T>>>
 where
     W: World<Exit = E>,
@@ -111,6 +119,7 @@ where
         world,
         spot_enum_map[pos].as_ref().unwrap(),
         &spot_enum_map,
+        max_time,
         &mut spot_heap,
     );
     while let Some(Reverse(spot_found)) = spot_heap.pop() {
@@ -121,6 +130,7 @@ where
                 world,
                 spot_enum_map[pos].as_ref().unwrap(),
                 &spot_enum_map,
+                max_time,
                 &mut spot_heap,
             );
         }

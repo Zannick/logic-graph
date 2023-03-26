@@ -31,6 +31,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             if let Some(ctx) = &spot_map[$end] {
                 panic!(
@@ -51,6 +52,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             assert!(
                 spot_map[$end] != None,
@@ -133,6 +135,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             let mut errors = Vec::new();
             for loc in locations {
@@ -178,6 +181,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             for loc in locations {
                 let spot = $world.get_location_spot(loc);
@@ -201,6 +205,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             let spot = $world.get_location_spot($loc_id);
             if let Some(ctx) = &spot_map[spot] {
@@ -223,6 +228,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             let spot = $world.get_location_spot($loc_id);
             if let Some(ctx) = &spot_map[spot] {
@@ -252,6 +258,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             let spot = $world.get_action_spot($act_id);
             if let Some(ctx) = &spot_map[spot] {
@@ -282,6 +289,7 @@ pub mod testlib {
             let spot_map = $crate::access::accessible_spots(
                 $world,
                 $crate::context::ContextWrapper::new($ctx),
+                i32::MAX,
             );
             let spot = $world.get_action_spot($act_id);
             if let Some(ctx) = &spot_map[spot] {
@@ -324,7 +332,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not find {} in the iteration limit", $item);
                 }
-                heap.extend($crate::algo::classic_step($world, ctx));
+                heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                 count -= 1;
             }
             panic!("Dead-ended without finding {}", $item);
@@ -346,7 +354,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not reach {} in the iteration limit", $spot);
                 }
-                heap.extend($crate::algo::classic_step($world, ctx));
+                heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                 count -= 1;
             }
             panic!("Dead-ended without reaching {}", $spot);
@@ -375,7 +383,7 @@ pub mod testlib {
                     if count == 0 {
                         panic!("Did not visit {} in the iteration limit", $loc_id);
                     }
-                    heap.extend($crate::algo::classic_step($world, ctx));
+                    heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                     count -= 1;
                 } else if ctx.get().visited($loc_id) {
                     return;
@@ -403,7 +411,7 @@ pub mod testlib {
                 if count == 0 {
                     panic!("Did not activate {} in the iteration limit", $act_id);
                 }
-                heap.extend($crate::algo::classic_step($world, ctx));
+                heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                 count -= 1;
             }
             panic!("Dead-ended without activating {}", $act_id);
@@ -440,7 +448,7 @@ pub mod testlib {
                         );
                         return;
                     }
-                    heap.extend($crate::algo::classic_step($world, ctx));
+                    heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                     count -= 1;
                 }
             }
@@ -477,7 +485,7 @@ pub mod testlib {
                     );
                     return;
                 }
-                heap.extend($crate::algo::classic_step($world, ctx));
+                heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                 count -= 1;
             }
             assert!(success, "Dead-ended: did not find {}", $item);
@@ -513,7 +521,7 @@ pub mod testlib {
                     );
                     return;
                 }
-                heap.extend($crate::algo::classic_step($world, ctx));
+                heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                 count -= 1;
             }
             assert!(success, "Dead-ended: did not reach {}", $spot);
@@ -549,7 +557,7 @@ pub mod testlib {
                         );
                         return;
                     }
-                    heap.extend($crate::algo::classic_step($world, ctx));
+                    heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                     count -= 1;
                 }
             }
@@ -587,7 +595,7 @@ pub mod testlib {
                     );
                     return;
                 }
-                heap.extend($crate::algo::classic_step($world, ctx));
+                heap.extend($crate::algo::classic_step($world, ctx, i32::MAX));
                 count -= 1;
             }
             assert!(success, "Dead-ended: did not activate {}", $act_id);
