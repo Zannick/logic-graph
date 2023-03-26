@@ -124,7 +124,11 @@ where
     result
 }
 
-pub fn classic_step<W, T, L, E>(world: &W, ctx: ContextWrapper<T>, max_time: i32) -> Vec<ContextWrapper<T>>
+pub fn classic_step<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    max_time: i32,
+) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -379,9 +383,12 @@ where
             if iters > 10_000_000 && solutions.unique() > 4 {
                 heap.set_max_time(solutions.best());
             }
-            if iters > 2_000_000 && iters - last_solve > dist_for_rescoring {
+            if iters > 2_000_000
+                && (iters - last_solve > dist_for_rescoring
+                    || iters - last_solve > 1_000_000 && heap.len() > 10_000_000)
+            {
                 println!("Rescoring.");
-                if rescore_plus && heap.len() > 2_000_000 {
+                if (rescore_plus && heap.len() > 2_000_000) || heap.len() > 10_000_000 {
                     let new_factor = rescore_factor * heap.scale_factor() / 4;
                     if new_factor > 1_000_000 {
                         println!("Scale factor too high!");
