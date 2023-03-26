@@ -62,7 +62,9 @@ where
         self.best
     }
 
-    pub fn insert(&mut self, ctx: ContextWrapper<T>) {
+    /// Inserts a solution into the collection and returns whether this solution
+    /// is unique compared to the prior solutions.
+    pub fn insert(&mut self, ctx: ContextWrapper<T>) -> bool {
         let loc_history: Vec<History<T>> = ctx
             .history_rev()
             .filter(|h| match h {
@@ -73,13 +75,15 @@ where
         if self.count == 0 || ctx.elapsed() < self.best {
             self.best = ctx.elapsed();
         }
+        self.count += 1;
         if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(ctx);
+            false
         } else {
             self.map.insert(loc_history, vec![ctx]);
             self.write_previews().unwrap();
+            true
         }
-        self.count += 1;
     }
 
     fn write_one(

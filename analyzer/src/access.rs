@@ -185,7 +185,7 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let res = greedy_search_from(world, ctx);
+    let res = greedy_search_from(world, ctx, i32::MAX);
     match res {
         Ok(_) => Ok(()),
         Err(c) => Err(c),

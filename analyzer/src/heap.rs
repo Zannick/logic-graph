@@ -100,17 +100,17 @@ impl<T: Ctx> LimitedHeap<T> {
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
     pub fn push(&mut self, el: ContextWrapper<T>) {
-        if let Some(min) = self.states_seen.get_mut(el.get()) {
-            if el.elapsed() < *min {
-                *min = el.elapsed();
-            } else {
-                self.dup_skips += 1;
-                return;
-            }
-        } else {
-            self.states_seen.push(el.get().clone(), el.elapsed());
-        }
         if el.elapsed() <= self.max_time {
+            if let Some(min) = self.states_seen.get_mut(el.get()) {
+                if el.elapsed() < *min {
+                    *min = el.elapsed();
+                } else {
+                    self.dup_skips += 1;
+                    return;
+                }
+            } else {
+                self.states_seen.push(el.get().clone(), el.elapsed());
+            }
             self.heap.push(HeapElement {
                 score: el.score(self.scale_factor),
                 el,
@@ -121,17 +121,22 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 
     pub fn see(&mut self, el: &ContextWrapper<T>) -> bool {
-        if let Some(min) = self.states_seen.get_mut(el.get()) {
-            if el.elapsed() < *min {
-                *min = el.elapsed();
-                true
+        if el.elapsed() <= self.max_time {
+            if let Some(min) = self.states_seen.get_mut(el.get()) {
+                if el.elapsed() < *min {
+                    *min = el.elapsed();
+                    true
+                } else {
+                    self.dup_skips += 1;
+                    false
+                }
             } else {
-                self.dup_skips += 1;
-                false
+                self.states_seen.push(el.get().clone(), el.elapsed());
+                true
             }
         } else {
-            self.states_seen.push(el.get().clone(), el.elapsed());
-            true
+            self.iskips += 1;
+            false
         }
     }
 

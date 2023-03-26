@@ -16,7 +16,7 @@ pub fn access_default(_ctx: &Context) -> bool { true }
 
 %% for id, info in access_funcs.items()|sort
 pub fn access_{{ id }}(ctx: &Context) -> bool {
-    // {{ info.pr.text.strip() }}
+    // {{ info.pr.text|string|trim }}
     {{ info.pr|prToRust(info) }}
 }
 %% endfor

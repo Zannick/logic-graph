@@ -176,16 +176,14 @@ fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, heap: &LimitedHeap<T>) ->
 where
     T: Ctx,
 {
-    if iters < 2_000_000 {
+    if iters < 1_000_000 {
         SearchMode::Classic
-    } else if iters % 100 != 0 {
+    } else if iters % 1000 != 0 {
         SearchMode::Classic
-    } else if iters % 1000 == 0 {
-        SearchMode::Greedy
     } else if ctx.elapsed() * 3 < heap.max_time() {
         SearchMode::Depth(3)
     } else if ctx.get().progress() > 70 {
-        SearchMode::Depth(4)
+        SearchMode::Greedy
     } else {
         SearchMode::Classic
     }
@@ -199,7 +197,8 @@ fn handle_solution<T, W, L, E>(
     startctx: &ContextWrapper<T>,
     iters: i32,
     mode: SearchMode,
-) where
+) -> bool
+where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
@@ -233,7 +232,7 @@ fn handle_solution<T, W, L, E>(
     let newctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
     heap.push(newctx);
 
-    solutions.insert(ctx);
+    solutions.insert(ctx)
 }
 
 pub fn search<W, T, L, E>(world: &W, mut ctx: T) -> Result<(), std::io::Error>
@@ -248,11 +247,11 @@ where
     let mut heap = LimitedHeap::new();
     let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
     let start = Instant::now();
-    match greedy_search(world, &startctx) {
+    match greedy_search(world, &startctx, i32::MAX) {
         Ok(wonctx) => {
             println!("Finished greedy search in {:?}", start.elapsed());
             let start = Instant::now();
-            let m = minimize_greedy(world, startctx.get(), &wonctx);
+            let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed());
             println!("Minimized in {:?}", start.elapsed());
             println!(
                 "Found greedy solution of {}ms, minimized to {}ms",
@@ -367,7 +366,7 @@ where
                 let mut next = Vec::new();
                 for ctx in search_step(world, ctx) {
                     if world.won(ctx.get()) {
-                        handle_solution(
+                        if handle_solution(
                             ctx,
                             &mut heap,
                             &mut solutions,
@@ -375,9 +374,10 @@ where
                             &startctx,
                             iters,
                             mode,
-                        );
-                        dist_for_rescoring = 1_000_000;
-                        last_solve = iters;
+                        ) {
+                            dist_for_rescoring = 1_000_000;
+                            last_solve = iters;
+                        }
                     } else {
                         next.push(ctx);
                     }
@@ -399,9 +399,9 @@ where
                 }
             }
             SearchMode::Greedy => {
-                if let Ok(win) = greedy_search(world, &ctx) {
+                if let Ok(win) = greedy_search(world, &ctx, heap.max_time()) {
                     if win.elapsed() <= heap.max_time() {
-                        handle_solution(
+                        if handle_solution(
                             win,
                             &mut heap,
                             &mut solutions,
@@ -409,9 +409,10 @@ where
                             &startctx,
                             iters,
                             mode,
-                        );
-                        dist_for_rescoring = 1_000_000;
-                        last_solve = iters;
+                        ) {
+                            dist_for_rescoring = 1_000_000;
+                            last_solve = iters;
+                        }
                     }
                 }
                 heap.push(ctx);
@@ -419,7 +420,7 @@ where
             _ => {
                 for ctx in search_step(world, ctx) {
                     if world.won(ctx.get()) {
-                        handle_solution(
+                        if handle_solution(
                             ctx,
                             &mut heap,
                             &mut solutions,
@@ -427,9 +428,10 @@ where
                             &startctx,
                             iters,
                             SearchMode::Classic,
-                        );
-                        dist_for_rescoring = 1_000_000;
-                        last_solve = iters;
+                        ) {
+                            dist_for_rescoring = 1_000_000;
+                            last_solve = iters;
+                        }
                     } else {
                         heap.push(ctx);
                     }

@@ -19,9 +19,11 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&world, &ctx)));
 
     let ctx = ContextWrapper::new(Context::default());
-    c.bench_function("greedy search", |b| b.iter(|| greedy_search(&world, &ctx)));
+    c.bench_function("greedy search", |b| {
+        b.iter(|| greedy_search(&world, &ctx, i32::MAX))
+    });
     c.bench_function("minimal playthrough", |b| {
-        b.iter(|| minimal_greedy_playthrough(&world, &ctx))
+        b.iter(|| minimal_greedy_playthrough(&world, &ctx, i32::MAX))
     });
 }
 

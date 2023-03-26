@@ -138,6 +138,7 @@ where
 fn greedy_internal<W, T, L, E>(
     world: &W,
     mut ctx: ContextWrapper<T>,
+    max_time: i32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -147,6 +148,9 @@ where
 {
     world.skip_unused_items(ctx.get_mut());
     while !world.won(ctx.get()) {
+        if ctx.elapsed() > max_time {
+            return Err(ctx);
+        }
         match first_spot_with_locations_after_actions(world, ctx, 2) {
             Ok(c) => {
                 ctx = c;
@@ -161,6 +165,7 @@ where
 pub fn greedy_search<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
+    max_time: i32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -168,12 +173,13 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    greedy_internal(world, ctx.clone())
+    greedy_internal(world, ctx.clone(), max_time)
 }
 
 pub fn greedy_search_from<W, T, L, E>(
     world: &W,
     ctx: &T,
+    max_time: i32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -181,13 +187,14 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    greedy_internal(world, ContextWrapper::new(ctx.clone()))
+    greedy_internal(world, ContextWrapper::new(ctx.clone()), max_time)
 }
 
 pub fn minimize_greedy<W, T, L, E>(
     world: &W,
     startctx: &T,
     wonctx: &ContextWrapper<T>,
+    max_time: i32,
 ) -> ContextWrapper<T>
 where
     W: World<Location = L, Exit = E>,
@@ -196,12 +203,13 @@ where
     E: Exit<Context = T>,
 {
     let ctx = minimize(world, startctx, wonctx);
-    greedy_search(world, &ctx).expect("Couldn't beat game after minimizing!")
+    greedy_search(world, &ctx, max_time).expect("Couldn't beat game after minimizing!")
 }
 
 pub fn minimal_greedy_playthrough<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
+    max_time: i32,
 ) -> ContextWrapper<T>
 where
     W: World<Location = L, Exit = E>,
@@ -209,6 +217,6 @@ where
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let wonctx = greedy_search(world, ctx).expect("Didn't win with greedy search");
-    minimize_greedy(world, ctx.get(), &wonctx)
+    let wonctx = greedy_search(world, ctx, max_time).expect("Didn't win with greedy search");
+    minimize_greedy(world, ctx.get(), &wonctx, max_time)
 }
