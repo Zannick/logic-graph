@@ -24,7 +24,7 @@ pub struct SolutionCollector<T>
 where
     T: Ctx,
 {
-    map: HashMap<Vec<History<T>>, Vec<ContextWrapper<T>>, CommonHasher>,
+    map: HashMap<Vec<HistoryAlias<T>>, Vec<ContextWrapper<T>>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
     file: File,
@@ -65,7 +65,7 @@ where
     /// Inserts a solution into the collection and returns whether this solution
     /// is unique compared to the prior solutions.
     pub fn insert(&mut self, ctx: ContextWrapper<T>) -> bool {
-        let loc_history: Vec<History<T>> = ctx
+        let loc_history: Vec<HistoryAlias<T>> = ctx
             .history_rev()
             .filter(|h| match h {
                 History::Get(_, _) | History::MoveGet(_, _) => true,

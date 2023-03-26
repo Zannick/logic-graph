@@ -1,5 +1,5 @@
 %% macro enum(name, values, default=False, id=False, default_value=None)
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default or default_value %}, Default{% endif %})]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default or default_value %}, Default{% endif %}, serde::Serialize, serde::Deserialize)]
 pub enum {{ name }} {
 %% if default or default_value
     #[default] {{ default_value }},

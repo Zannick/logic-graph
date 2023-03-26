@@ -365,7 +365,7 @@ where
             );
             break;
         }
-        if heap.len() > 15_000_000 || heap.len() + heap.seen() > 50_000_000 {
+        if heap.len() > 13_000_000 || heap.len() + heap.seen() > 25_000_000 {
             println!(
                 "Too many items in heap! score={} vs adjusted={}",
                 ctx.score(heap.scale_factor()),

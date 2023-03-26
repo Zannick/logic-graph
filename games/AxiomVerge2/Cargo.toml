@@ -14,8 +14,9 @@ path = "bin/main.rs"
 
 [dependencies]
 analyzer = { path = "../../analyzer" }
-bitflags = "2.*"
-enum-map = "*"
+bitflags = { version = "2.*", features = ["serde"] }
+enum-map = { version = "2.5", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
 yaml-rust = "*"
 
 [dev-dependencies]

@@ -1,10 +1,11 @@
 use crate::world::*;
+use serde::{Deserialize, Serialize};
 use sort_by_derive::SortBy;
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::rc::Rc;
 
-pub trait Ctx: Clone + Eq + Debug + Hash {
+pub trait Ctx: Clone + Eq + Debug + Hash + Serialize + for<'a> Deserialize<'a> {
     type World: World;
     type ItemId: Id;
     type AreaId: Id;
@@ -50,32 +51,35 @@ pub trait Ctx: Clone + Eq + Debug + Hash {
     fn progress(&self) -> i32;
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub enum History<T>
-where
-    T: Ctx,
-{
-    Warp(
-        <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
-        <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
-    ),
-    Get(
-        <T as Ctx>::ItemId,
-        <<<T as Ctx>::World as World>::Location as Location>::LocId,
-    ),
-    Move(<<<T as Ctx>::World as World>::Exit as Exit>::ExitId),
-    MoveGet(
-        <T as Ctx>::ItemId,
-        <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
-    ),
-    MoveLocal(<<<T as Ctx>::World as World>::Exit as Exit>::SpotId),
-    Activate(<<<T as Ctx>::World as World>::Action as Action>::ActionId),
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
+    Warp(WarpId, SpotId),
+    Get(ItemId, LocId),
+    Move(ExitId),
+    MoveGet(ItemId, ExitId),
+    MoveLocal(SpotId),
+    Activate(ActionId),
 }
-impl<T> Copy for History<T> where T: Ctx {}
 
-impl<T> Display for History<T>
+impl<I, S, L, E, A, Wp> Copy for History<I, S, L, E, A, Wp>
 where
-    T: Ctx,
+    I: Id,
+    S: Id,
+    L: Id,
+    E: Id,
+    A: Id,
+    Wp: Id,
+{
+}
+
+impl<I, S, L, E, A, Wp> Display for History<I, S, L, E, A, Wp>
+where
+    I: Id,
+    S: Id,
+    L: Id,
+    E: Id,
+    A: Id,
+    Wp: Id,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
@@ -90,9 +94,14 @@ where
         }
     }
 }
-impl<T> Hash for History<T>
+impl<I, S, L, E, A, Wp> Hash for History<I, S, L, E, A, Wp>
 where
-    T: Ctx,
+    I: Id,
+    S: Id,
+    L: Id,
+    E: Id,
+    A: Id,
+    Wp: Id,
 {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         core::mem::discriminant(self).hash(state);
@@ -122,26 +131,41 @@ where
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
-struct HistoryNode<T>
-where
-    T: Ctx,
-{
-    entry: History<T>,
-    prev: Option<Rc<HistoryNode<T>>>,
+pub type HistoryAlias<T> = History<
+    <T as Ctx>::ItemId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    <<<T as Ctx>::World as World>::Location as Location>::LocId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
+    <<<T as Ctx>::World as World>::Action as Action>::ActionId,
+    <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
+>;
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+struct HistoryNode<I, S, L, E, A, Wp> {
+    entry: History<I, S, L, E, A, Wp>,
+    prev: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
+
+type HistoryNodeAlias<T> = HistoryNode<
+    <T as Ctx>::ItemId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    <<<T as Ctx>::World as World>::Location as Location>::LocId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
+    <<<T as Ctx>::World as World>::Action as Action>::ActionId,
+    <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
+>;
 
 struct HistoryIterator<T>
 where
     T: Ctx,
 {
-    next: Option<Rc<HistoryNode<T>>>,
+    next: Option<Rc<HistoryNodeAlias<T>>>,
 }
 impl<T> Iterator for HistoryIterator<T>
 where
     T: Ctx,
 {
-    type Item = History<T>;
+    type Item = HistoryAlias<T>;
 
     fn next(&mut self) -> Option<Self::Item> {
         if let Some(hist) = self.next.clone() {
@@ -153,25 +177,24 @@ where
     }
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
-pub enum Mode {
-    #[default]
-    Explore,
-    Check,
-    Activate,
-}
-
-#[derive(Clone, Debug, SortBy)]
-pub struct ContextWrapper<T>
-where
-    T: Ctx,
-{
+#[derive(Clone, Debug, SortBy, Serialize, Deserialize)]
+pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     #[sort_by]
     elapsed: i32,
     penalty: i32,
-    history: Option<Rc<HistoryNode<T>>>,
+    history: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
+
+pub type ContextWrapper<T> = BaseContextWrapper<
+    T,
+    <T as Ctx>::ItemId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    <<<T as Ctx>::World as World>::Location as Location>::LocId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
+    <<<T as Ctx>::World as World>::Action as Action>::ActionId,
+    <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
+>;
 
 impl<T: Ctx> ContextWrapper<T> {
     pub fn new(ctx: T) -> ContextWrapper<T> {
@@ -183,20 +206,20 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn append_history(&mut self, step: History<T>) {
+    pub fn append_history(&mut self, step: HistoryAlias<T>) {
         self.history = Some(Rc::new(HistoryNode {
             entry: step,
             prev: self.history.clone(),
         }))
     }
 
-    pub fn history_rev(&self) -> impl Iterator<Item = History<T>> {
-        HistoryIterator {
+    pub fn history_rev(&self) -> impl Iterator<Item = HistoryAlias<T>> {
+        HistoryIterator::<T> {
             next: self.history.clone(),
         }
     }
 
-    pub fn last_step(&self) -> Option<History<T>> {
+    pub fn last_step(&self) -> Option<HistoryAlias<T>> {
         if let Some(node) = &self.history {
             Some(node.entry)
         } else {

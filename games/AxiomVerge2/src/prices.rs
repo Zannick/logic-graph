@@ -2,9 +2,12 @@
 
 #![allow(non_camel_case_types)]
 
+use serde::{Deserialize, Serialize};
 use std::fmt;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd)]
+#[derive(
+    Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd, Serialize, Deserialize,
+)]
 pub enum Currency {
     #[default]
     Free,

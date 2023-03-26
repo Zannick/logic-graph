@@ -4,6 +4,7 @@
 
 extern crate bitflags;
 extern crate enum_map;
+extern crate serde;
 extern crate yaml_rust;
 
 pub mod context;

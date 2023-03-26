@@ -16,7 +16,9 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let world = graph::World::new();
     let mut ctx = Context::default();
     world.skip_unused_items(&mut ctx);
-    c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&world, &ctx)));
+    c.bench_function("can_win_from_scratch", |b| {
+        b.iter(|| can_win(&world, &ctx, i32::MAX))
+    });
 
     let ctx = ContextWrapper::new(Context::default());
     c.bench_function("greedy search", |b| {

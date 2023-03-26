@@ -11,6 +11,7 @@ use crate::rules;
 use analyzer::context;
 use analyzer::world::World;
 use enum_map::EnumMap;
+use serde::{Serialize, Deserialize};
 
 pub mod enums {
 use std::fmt;
@@ -38,10 +39,12 @@ pub fn {{ c }}(spot_id: SpotId) -> {{ data_types[c] }} {
 
 pub mod flags {
 use bitflags::bitflags;
+use serde::{self, Serialize, Deserialize};
 
 %% for size, vars, defaults in bfp.flag_groups
 bitflags!{
-    #[derive(Copy, Clone, Debug, {% if not defaults %}Default, {% endif %}PartialEq, Eq, Hash)]
+    #[derive(Copy, Clone, Debug, {% if not defaults %}Default, {% endif %}PartialEq, Eq, Hash, Serialize, Deserialize)]
+    #[serde(transparent)]
     pub struct ContextBits{{ loop.index }} : u{{ size }} {
 %% for v in vars
         const {{ v|upper }} = 1 << {{ loop.index0 }};
@@ -58,14 +61,14 @@ impl Default for ContextBits{{ loop.index }} {
 %% endfor
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Status {
     #[default] None,
     Visited,
     Skipped,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Context {
 %# Splitting into separate Cow structs performs worse :(
     // context vars
@@ -85,9 +88,9 @@ pub struct Context {
     pub cbits{{ loop.index }}: flags::ContextBits{{ loop.index }},
 %% endfor
     // other
-%# I was not able to move this to analyzer due to the need to call enum derive for proper setup:
-%# EnumArray<Status>::Array not implementing Clone for some reason otherwise
+%# This is part of the core state, should be included when deduplicating
     pub status: EnumMap<LocationId, Status>,
+%# Shrinking these to fit NUM_LOCATIONS only might make sense.
     visits: i32,
     skips: i32,
 }
