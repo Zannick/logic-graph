@@ -588,13 +588,14 @@ pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
-pub fn access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5(
+pub fn access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5_and_all_notes(
     ctx: &Context,
 ) -> bool {
-    // Remote_Drone and Shockwave and Power_Matrix and Wall_Climb and Flask{5}
-    ((((ctx.has(Item::Remote_Drone) && ctx.has(Item::Shockwave)) && ctx.has(Item::Power_Matrix))
+    // Remote_Drone and Shockwave and Power_Matrix and Wall_Climb and Flask{5} and $all_notes
+    (((((ctx.has(Item::Remote_Drone) && ctx.has(Item::Shockwave)) && ctx.has(Item::Power_Matrix))
         && ctx.has(Item::Wall_Climb))
         && ctx.count(Item::Flask) >= 5)
+        && helper__all_notes!(ctx))
 }
 pub fn access_shockwave(ctx: &Context) -> bool {
     // $shockwave

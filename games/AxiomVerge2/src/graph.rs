@@ -3503,6 +3503,7 @@ pub enum ExitId {
     Giguna__Carnelian__Vault__ex__Door_1,
     Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1,
     Giguna__Carnelian__West_Ledge__ex__West_10_1,
+    Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1,
     Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1,
     Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1,
     Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1,
@@ -3851,6 +3852,7 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Carnelian__Vault__ex__Door_1 => write!(f, "{}", "Giguna > Carnelian > Vault ==> Door (1)"),
             ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1 => write!(f, "{}", "Giguna > Carnelian > West 10 ==> West Caverns > East 10 (1)"),
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => write!(f, "{}", "Giguna > Carnelian > West Ledge ==> West 10 (1)"),
+            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Giguna > Giguna Base > Building Entry ==> Building Interior > Entry (1)"),
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => write!(f, "{}", "Giguna > Giguna Base > East 14 ==> Wasteland > West 14 (1)"),
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => write!(f, "{}", "Giguna > Giguna Base > Left Pillar ==> Right Pillar (1)"),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => write!(f, "{}", "Giguna > Giguna Base > Middle Platform ==> Stone Knob (1)"),
@@ -4204,6 +4206,7 @@ impl std::str::FromStr for ExitId {
             "Giguna > Carnelian > Vault ==> Door (1)" => Ok(ExitId::Giguna__Carnelian__Vault__ex__Door_1),
             "Giguna > Carnelian > West 10 ==> West Caverns > East 10 (1)" => Ok(ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1),
             "Giguna > Carnelian > West Ledge ==> West 10 (1)" => Ok(ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1),
+            "Giguna > Giguna Base > Building Entry ==> Building Interior > Entry (1)" => Ok(ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1),
             "Giguna > Giguna Base > East 14 ==> Wasteland > West 14 (1)" => Ok(ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1),
             "Giguna > Giguna Base > Left Pillar ==> Right Pillar (1)" => Ok(ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1),
             "Giguna > Giguna Base > Middle Platform ==> Stone Knob (1)" => Ok(ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1),
@@ -6202,6 +6205,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Carnelian__Vault__ex__Door_1 => rules::access_giguna__carnelian__vault__ex__door_1__req(&ctx),
             ExitId::Giguna__Carnelian__West_10__ex__West_Caverns__East_10_1 => true,
             ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => rules::access_grab(&ctx),
+            ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => true,
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => true,
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => rules::access_grab(&ctx),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => rules::access_grab(&ctx),
@@ -7084,7 +7088,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access_remote_drone(ctx),
-            Objective::Progress => rules::access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5(ctx),
+            Objective::Progress => rules::access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5_and_all_notes(ctx),
         }
     }
 
@@ -10147,6 +10151,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__West_Grate_1,
             time: 4200,
             dest: SpotId::Giguna__Giguna_Base__West_Grate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1,
+            time: 750,
+            dest: SpotId::Giguna__Building_Interior__Entry,
             price: Currency::Free,
             loc_id: None,
         },
@@ -16720,7 +16731,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

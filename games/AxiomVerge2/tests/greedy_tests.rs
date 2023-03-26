@@ -15,6 +15,7 @@ fn shared_setup() -> (graph::World, Context) {
     let mut ctx = Context::default();
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
     ctx.cbits1.insert(flags::ContextBits1::BOOMERANG);
+    ctx.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
     ctx.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
     ctx.cbits2.insert(flags::ContextBits2::ICE_AXE);
     ctx.infect = 1;

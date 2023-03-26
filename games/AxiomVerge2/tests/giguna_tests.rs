@@ -105,3 +105,14 @@ fn start_Giguna__Carnelian__Switch_context_giguna__carnelian__ctx__door_opened_T
         LocationId::Giguna__Carnelian__Vault__Item
     );
 }
+#[test]
+fn start_Giguna__Giguna_Base__Save_Point_can_access_Giguna__Building_Interior__Bookshelf__Note() {
+    let (mut world, mut ctx) = shared_setup();
+
+    expect_accessible!(
+        &world,
+        ctx,
+        SpotId::Giguna__Giguna_Base__Save_Point,
+        LocationId::Giguna__Building_Interior__Bookshelf__Note
+    );
+}

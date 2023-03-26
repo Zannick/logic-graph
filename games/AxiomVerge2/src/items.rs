@@ -232,20 +232,12 @@ pub fn unused_item(id: Item) -> bool {
         Item::Amagi_Stronghold_Left_Wall
         | Item::Bronze_Axe
         | Item::Carnelian_Ring
-        | Item::Companies_Layoff
         | Item::Compass
-        | Item::Dear_Ernest
         | Item::Escape
         | Item::Health
         | Item::Health_Fragment
-        | Item::Heretics_Tablet
-        | Item::Letter_from_Trace
         | Item::Melee_Charge
-        | Item::Notes_2053_02_27
-        | Item::Record_Losses
-        | Item::Researchers_Missing
-        | Item::Terminal_Breakthrough_1
-        | Item::Under_Siege => true,
+        | Item::Notes_2053_02_27 => true,
         _ => false,
     }
 }

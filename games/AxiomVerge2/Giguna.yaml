@@ -654,6 +654,9 @@ areas:
         - to: Table
           jumps_down: 1
         - to: Kari
+      exits:
+        - to: Building Interior > Entry
+          tags: [interior]
     - name: West Grate
       coord: [13.2, 14.8]
       local:

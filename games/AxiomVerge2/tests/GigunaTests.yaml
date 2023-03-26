@@ -39,3 +39,6 @@ tests:
     context:
       giguna__carnelian__ctx__door_opened: true
     can_access: Giguna > Carnelian > Vault > Item
+
+  - start: Giguna > Giguna Base > Save Point
+    can_access: Giguna > Building Interior > Bookshelf > Note

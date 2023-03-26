@@ -966,6 +966,7 @@ digraph AxiomVerge2 {
     Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Stone_Knob;
     Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Stone_Knob;
     Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__West_Grate;
+    Giguna__Giguna_Base__Building_Entry -> Giguna__Building_Interior__Entry;
     Giguna__Giguna_Base__West_Grate -> Giguna__Giguna_Base__Left_Pillar;
     Giguna__Giguna_Base__West_Grate -> Giguna__Giguna_Base__Left_Pillar;
     Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;

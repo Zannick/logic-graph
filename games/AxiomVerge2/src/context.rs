@@ -188,33 +188,41 @@ pub mod flags {
             const ANUMAN = 1 << 22;
             const APOCALYPSE_BOMB = 1 << 23;
             const BOOMERANG = 1 << 24;
-            const DEFEAT_EBIH_ALU = 1 << 25;
-            const DEFEAT_MUS_A_M20 = 1 << 26;
-            const DRONE_HOVER = 1 << 27;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 28;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 29;
-            const FAST_TRAVEL = 1 << 30;
-            const GIGUNA_NORTHEAST_GATE = 1 << 31;
+            const COMPANIES_LAYOFF = 1 << 25;
+            const DEAR_ERNEST = 1 << 26;
+            const DEFEAT_EBIH_ALU = 1 << 27;
+            const DEFEAT_MUS_A_M20 = 1 << 28;
+            const DRONE_HOVER = 1 << 29;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 30;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
-        pub struct ContextBits2 : u16 {
-            const ICE_AXE = 1 << 0;
-            const INFECTION_SPEED = 1 << 1;
-            const LEDGE_GRAB = 1 << 2;
-            const MAP_17_10 = 1 << 3;
-            const MIST_UPGRADE = 1 << 4;
-            const NANITE_MIST = 1 << 5;
-            const POWER_MATRIX = 1 << 6;
-            const REMOTE_DRONE = 1 << 7;
-            const SHOCKWAVE = 1 << 8;
-            const SLINGSHOT_HOOK = 1 << 9;
-            const STATION_POWER = 1 << 10;
-            const SWITCH_36_11 = 1 << 11;
-            const SWITCH_40_12 = 1 << 12;
-            const UNDERWATER_MOVEMENT = 1 << 13;
-            const WALL_CLIMB = 1 << 14;
+        pub struct ContextBits2 : u32 {
+            const FAST_TRAVEL = 1 << 0;
+            const GIGUNA_NORTHEAST_GATE = 1 << 1;
+            const HERETICS_TABLET = 1 << 2;
+            const ICE_AXE = 1 << 3;
+            const INFECTION_SPEED = 1 << 4;
+            const LEDGE_GRAB = 1 << 5;
+            const LETTER_FROM_TRACE = 1 << 6;
+            const MAP_17_10 = 1 << 7;
+            const MIST_UPGRADE = 1 << 8;
+            const NANITE_MIST = 1 << 9;
+            const POWER_MATRIX = 1 << 10;
+            const RECORD_LOSSES = 1 << 11;
+            const REMOTE_DRONE = 1 << 12;
+            const RESEARCHERS_MISSING = 1 << 13;
+            const SHOCKWAVE = 1 << 14;
+            const SLINGSHOT_HOOK = 1 << 15;
+            const STATION_POWER = 1 << 16;
+            const SWITCH_36_11 = 1 << 17;
+            const SWITCH_40_12 = 1 << 18;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 19;
+            const UNDER_SIEGE = 1 << 20;
+            const UNDERWATER_MOVEMENT = 1 << 21;
+            const WALL_CLIMB = 1 << 22;
         }
     }
 }
@@ -303,7 +311,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = 43;
+    const NUM_ITEMS: i32 = 51;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -329,6 +337,8 @@ impl context::Ctx for Context {
             Item::Anuman => self.cbits1.contains(flags::ContextBits1::ANUMAN),
             Item::Apocalypse_Bomb => self.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
+            Item::Companies_Layoff => self.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF),
+            Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU),
             Item::Defeat_MUS_A_M20 => self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20),
             Item::Drone_Hover => self.cbits1.contains(flags::ContextBits1::DRONE_HOVER),
@@ -340,17 +350,19 @@ impl context::Ctx for Context {
             Item::Ebih_Waterfall_Block_Right => self
                 .cbits1
                 .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT),
-            Item::Fast_Travel => self.cbits1.contains(flags::ContextBits1::FAST_TRAVEL),
+            Item::Fast_Travel => self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
             Item::Giguna_Northeast_Gate => self
-                .cbits1
-                .contains(flags::ContextBits1::GIGUNA_NORTHEAST_GATE),
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE),
             Item::Health_Upgrade => self.health_upgrade >= 1,
+            Item::Heretics_Tablet => self.cbits2.contains(flags::ContextBits2::HERETICS_TABLET),
             Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE),
             Item::Infect => self.infect >= 1,
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.cbits2.contains(flags::ContextBits2::INFECTION_SPEED),
             Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB),
+            Item::Letter_from_Trace => self.cbits2.contains(flags::ContextBits2::LETTER_FROM_TRACE),
             Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10),
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
@@ -360,12 +372,20 @@ impl context::Ctx for Context {
             Item::Power_Matrix => self.cbits2.contains(flags::ContextBits2::POWER_MATRIX),
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
+            Item::Record_Losses => self.cbits2.contains(flags::ContextBits2::RECORD_LOSSES),
             Item::Remote_Drone => self.cbits2.contains(flags::ContextBits2::REMOTE_DRONE),
+            Item::Researchers_Missing => self
+                .cbits2
+                .contains(flags::ContextBits2::RESEARCHERS_MISSING),
             Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE),
             Item::Slingshot_Hook => self.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK),
             Item::Station_Power => self.cbits2.contains(flags::ContextBits2::STATION_POWER),
             Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
             Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
+            Item::Terminal_Breakthrough_1 => self
+                .cbits2
+                .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1),
+            Item::Under_Siege => self.cbits2.contains(flags::ContextBits2::UNDER_SIEGE),
             Item::Underwater_Movement => self
                 .cbits2
                 .contains(flags::ContextBits2::UNDERWATER_MOVEMENT),
@@ -406,6 +426,14 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::APOCALYPSE_BOMB)
                 .into(),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG).into(),
+            Item::Companies_Layoff => self
+                .cbits1
+                .contains(flags::ContextBits1::COMPANIES_LAYOFF)
+                .into(),
+            Item::Dear_Ernest => self
+                .cbits1
+                .contains(flags::ContextBits1::DEAR_ERNEST)
+                .into(),
             Item::Defeat_Ebih_Alu => self
                 .cbits1
                 .contains(flags::ContextBits1::DEFEAT_EBIH_ALU)
@@ -429,15 +457,19 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT)
                 .into(),
             Item::Fast_Travel => self
-                .cbits1
-                .contains(flags::ContextBits1::FAST_TRAVEL)
+                .cbits2
+                .contains(flags::ContextBits2::FAST_TRAVEL)
                 .into(),
             Item::Flask => self.flask.into(),
             Item::Giguna_Northeast_Gate => self
-                .cbits1
-                .contains(flags::ContextBits1::GIGUNA_NORTHEAST_GATE)
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE)
                 .into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
+            Item::Heretics_Tablet => self
+                .cbits2
+                .contains(flags::ContextBits2::HERETICS_TABLET)
+                .into(),
             Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE).into(),
             Item::Infect => self.infect.into(),
             Item::Infection_Range => self.infection_range.into(),
@@ -446,6 +478,10 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::INFECTION_SPEED)
                 .into(),
             Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB).into(),
+            Item::Letter_from_Trace => self
+                .cbits2
+                .contains(flags::ContextBits2::LETTER_FROM_TRACE)
+                .into(),
             Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10).into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
@@ -464,9 +500,17 @@ impl context::Ctx for Context {
                 .into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
+            Item::Record_Losses => self
+                .cbits2
+                .contains(flags::ContextBits2::RECORD_LOSSES)
+                .into(),
             Item::Remote_Drone => self
                 .cbits2
                 .contains(flags::ContextBits2::REMOTE_DRONE)
+                .into(),
+            Item::Researchers_Missing => self
+                .cbits2
+                .contains(flags::ContextBits2::RESEARCHERS_MISSING)
                 .into(),
             Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE).into(),
             Item::Slingshot_Hook => self
@@ -484,6 +528,14 @@ impl context::Ctx for Context {
             Item::Switch_40_12 => self
                 .cbits2
                 .contains(flags::ContextBits2::SWITCH_40_12)
+                .into(),
+            Item::Terminal_Breakthrough_1 => self
+                .cbits2
+                .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1)
+                .into(),
+            Item::Under_Siege => self
+                .cbits2
+                .contains(flags::ContextBits2::UNDER_SIEGE)
                 .into(),
             Item::Underwater_Movement => self
                 .cbits2
@@ -526,6 +578,12 @@ impl context::Ctx for Context {
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             },
+            Item::Companies_Layoff => {
+                self.cbits1.insert(flags::ContextBits1::COMPANIES_LAYOFF);
+            },
+            Item::Dear_Ernest => {
+                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
+            },
             Item::Defeat_Ebih_Alu => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             },
@@ -549,17 +607,20 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
             },
             Item::Fast_Travel => {
-                self.cbits1.insert(flags::ContextBits1::FAST_TRAVEL);
+                self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
             },
             Item::Flask => {
                 self.flask += 1;
                 rules::action_flasks__1(self);
             },
             Item::Giguna_Northeast_Gate => {
-                self.cbits1.insert(flags::ContextBits1::GIGUNA_NORTHEAST_GATE);
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
             },
             Item::Health_Upgrade => {
                 self.health_upgrade += 1;
+            },
+            Item::Heretics_Tablet => {
+                self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
             },
             Item::Ice_Axe => {
                 self.cbits2.insert(flags::ContextBits2::ICE_AXE);
@@ -576,6 +637,9 @@ impl context::Ctx for Context {
             },
             Item::Ledge_Grab => {
                 self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
+            },
+            Item::Letter_from_Trace => {
+                self.cbits2.insert(flags::ContextBits2::LETTER_FROM_TRACE);
             },
             Item::Map_17_10 => {
                 self.cbits2.insert(flags::ContextBits2::MAP_17_10);
@@ -604,8 +668,14 @@ impl context::Ctx for Context {
             Item::Ranged_Speed => {
                 self.ranged_speed += 1;
             },
+            Item::Record_Losses => {
+                self.cbits2.insert(flags::ContextBits2::RECORD_LOSSES);
+            },
             Item::Remote_Drone => {
                 self.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+            },
+            Item::Researchers_Missing => {
+                self.cbits2.insert(flags::ContextBits2::RESEARCHERS_MISSING);
             },
             Item::Shockwave => {
                 self.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
@@ -621,6 +691,12 @@ impl context::Ctx for Context {
             },
             Item::Switch_40_12 => {
                 self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+            },
+            Item::Terminal_Breakthrough_1 => {
+                self.cbits2.insert(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+            },
+            Item::Under_Siege => {
+                self.cbits2.insert(flags::ContextBits2::UNDER_SIEGE);
             },
             Item::Underwater_Movement => {
                 self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
@@ -1401,6 +1477,12 @@ impl Context {
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             }
+            Item::Companies_Layoff => {
+                self.cbits1.insert(flags::ContextBits1::COMPANIES_LAYOFF);
+            }
+            Item::Dear_Ernest => {
+                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
+            }
             Item::Defeat_Ebih_Alu => {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             }
@@ -1425,17 +1507,20 @@ impl Context {
                     .insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
             }
             Item::Fast_Travel => {
-                self.cbits1.insert(flags::ContextBits1::FAST_TRAVEL);
+                self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
             }
             Item::Flask => {
                 self.flask += 1;
             }
             Item::Giguna_Northeast_Gate => {
-                self.cbits1
-                    .insert(flags::ContextBits1::GIGUNA_NORTHEAST_GATE);
+                self.cbits2
+                    .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
             }
             Item::Health_Upgrade => {
                 self.health_upgrade += 1;
+            }
+            Item::Heretics_Tablet => {
+                self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
             }
             Item::Ice_Axe => {
                 self.cbits2.insert(flags::ContextBits2::ICE_AXE);
@@ -1451,6 +1536,9 @@ impl Context {
             }
             Item::Ledge_Grab => {
                 self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
+            }
+            Item::Letter_from_Trace => {
+                self.cbits2.insert(flags::ContextBits2::LETTER_FROM_TRACE);
             }
             Item::Map_17_10 => {
                 self.cbits2.insert(flags::ContextBits2::MAP_17_10);
@@ -1479,8 +1567,14 @@ impl Context {
             Item::Ranged_Speed => {
                 self.ranged_speed += 1;
             }
+            Item::Record_Losses => {
+                self.cbits2.insert(flags::ContextBits2::RECORD_LOSSES);
+            }
             Item::Remote_Drone => {
                 self.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
+            }
+            Item::Researchers_Missing => {
+                self.cbits2.insert(flags::ContextBits2::RESEARCHERS_MISSING);
             }
             Item::Shockwave => {
                 self.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
@@ -1496,6 +1590,13 @@ impl Context {
             }
             Item::Switch_40_12 => {
                 self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+            }
+            Item::Terminal_Breakthrough_1 => {
+                self.cbits2
+                    .insert(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+            }
+            Item::Under_Siege => {
+                self.cbits2.insert(flags::ContextBits2::UNDER_SIEGE);
             }
             Item::Underwater_Movement => {
                 self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
