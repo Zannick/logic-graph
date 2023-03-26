@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 enum-map = "*"
 lru = "*"
+plotlib = "0.5.1"
 rustc-hash = "*"
 sort_by_derive = "0.1.10"
 yaml-rust = "*"

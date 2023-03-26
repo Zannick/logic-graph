@@ -109,7 +109,7 @@ where
         if act.can_access(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            c2.penalize(penalty * 2);
+            c2.penalize(penalty * 4);
             result.push(c2);
         }
     }
@@ -165,6 +165,61 @@ where
         }
     }
     result
+}
+
+fn depth_step<W, T, L, E>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    heap: &mut LimitedHeap<T>,
+    solutions: &mut SolutionCollector<T>,
+    startctx: &ContextWrapper<T>,
+    iters: i32,
+    mode: SearchMode,
+    dist_for_rescoring: &mut i32,
+    last_solve: &mut i32,
+    mut d: u8,
+) where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W> + Debug,
+    L: Location<Context = T>,
+    E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
+{
+    let mut next = Vec::new();
+    for ctx in classic_step(world, ctx, heap.max_time()) {
+        if world.won(ctx.get()) {
+            if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
+                *dist_for_rescoring = 1_500_000;
+                *last_solve = iters;
+            }
+        } else {
+            next.push(ctx);
+        }
+    }
+    d -= 1;
+    next.sort_unstable_by_key(|c| (c.get().progress(), -c.elapsed()));
+    while let Some(ctx) = next.pop() {
+        if !heap.see(&ctx) {
+            continue;
+        }
+
+        heap.extend(next);
+        next = Vec::new();
+        for ctx in classic_step(world, ctx, heap.max_time()) {
+            if world.won(ctx.get()) {
+                if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
+                    *dist_for_rescoring = 1_500_000;
+                    *last_solve = iters;
+                }
+            } else {
+                next.push(ctx);
+            }
+        }
+        d -= 1;
+        if d == 0 {
+            heap.extend(next);
+            break;
+        }
+    }
 }
 
 fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, heap: &LimitedHeap<T>) -> SearchMode
@@ -348,6 +403,8 @@ where
             if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
                 heap.clean();
                 last_clean = heap.max_time();
+            } else if iters == 1_000_000 {
+                heap.print_histogram();
             }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
@@ -474,59 +531,4 @@ where
         iters, deadends, iskips, dskips, pskips, dpskips
     );
     solutions.export()
-}
-
-fn depth_step<W, T, L, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-    heap: &mut LimitedHeap<T>,
-    solutions: &mut SolutionCollector<T>,
-    startctx: &ContextWrapper<T>,
-    iters: i32,
-    mode: SearchMode,
-    dist_for_rescoring: &mut i32,
-    last_solve: &mut i32,
-    mut d: u8,
-) where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W> + Debug,
-    L: Location<Context = T>,
-    E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
-{
-    let mut next = Vec::new();
-    for ctx in classic_step(world, ctx, heap.max_time()) {
-        if world.won(ctx.get()) {
-            if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
-                *dist_for_rescoring = 1_500_000;
-                *last_solve = iters;
-            }
-        } else {
-            next.push(ctx);
-        }
-    }
-    d -= 1;
-    next.sort_unstable_by_key(|c| (c.get().progress(), -c.elapsed()));
-    while let Some(ctx) = next.pop() {
-        if !heap.see(&ctx) {
-            continue;
-        }
-
-        heap.extend(next);
-        next = Vec::new();
-        for ctx in classic_step(world, ctx, heap.max_time()) {
-            if world.won(ctx.get()) {
-                if handle_solution(ctx, heap, solutions, world, &startctx, iters, mode) {
-                    *dist_for_rescoring = 1_500_000;
-                    *last_solve = iters;
-                }
-            } else {
-                next.push(ctx);
-            }
-        }
-        d -= 1;
-        if d == 0 {
-            heap.extend(next);
-            break;
-        }
-    }
 }

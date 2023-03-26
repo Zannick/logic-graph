@@ -1,6 +1,14 @@
+extern crate plotlib;
+
 use crate::context::*;
 use crate::CommonHasher;
 use lru::LruCache;
+use plotlib::page::Page;
+use plotlib::repr::Plot;
+use plotlib::repr::{Histogram, HistogramBins};
+use plotlib::style::PointMarker;
+use plotlib::style::PointStyle;
+use plotlib::view::ContinuousView;
 use sort_by_derive::SortBy;
 use std::collections::BinaryHeap;
 use std::fmt::Debug;
@@ -203,6 +211,7 @@ impl<T: Ctx> LimitedHeap<T> {
         let done = start.elapsed();
         println!("... -> {}. Done in {:?}.", self.heap.len(), done);
         self.last_clean = self.max_time;
+        self.print_histogram();
     }
 
     pub fn extend<I>(&mut self, iter: I)
@@ -252,5 +261,33 @@ impl<T: Ctx> LimitedHeap<T> {
 
     pub fn stats(&self) -> (i32, i32, u32, i32) {
         (self.iskips, self.pskips, self.dup_skips, self.dup_pskips)
+    }
+
+    pub fn print_histogram(&self) {
+        let times: Vec<f64> = self.heap.iter().map(|c| c.el.elapsed().into()).collect();
+        let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));
+        let v = ContinuousView::new()
+            .add(h)
+            .x_label("elapsed time")
+            .x_range(0., self.max_time.into());
+        println!(
+            "Current heap contents:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+        let times: Vec<(f64, f64)> = self
+            .heap
+            .iter()
+            .map(|c| (c.el.elapsed().into(), c.el.score(self.scale_factor).into()))
+            .collect();
+        let p = Plot::new(times).point_style(PointStyle::new().marker(PointMarker::Circle));
+        let v = ContinuousView::new()
+            .add(p)
+            .x_label("elapsed time")
+            .y_label("score")
+            .x_range(0., self.max_time.into());
+        println!(
+            "Heap scores by time:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
     }
 }
