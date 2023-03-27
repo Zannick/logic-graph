@@ -329,21 +329,21 @@ impl<T: Ctx> LimitedHeap<T> {
         println!("Backing up... {}", self.heap.len());
         let start = Instant::now();
         let mut theap = BinaryHeap::new();
-        let mut vec = Vec::new();
         self.heap.shrink_to_fit();
         theap.reserve(std::cmp::min(1048576, self.heap.len()));
         let factor = self.scale_factor;
-        let drain = self.drain().into_iter();
+        let mut vec: Vec<ContextWrapper<T>> = Iterator::collect(self.drain().into_iter());
+        vec.reverse();
         // This is an arbitrary order based on heap internal ordering.
         // TODO: select items to keep with a better heuristic.
-        for (i, el) in drain.enumerate() {
-            if i < desired_capacity {
+        while theap.len() < desired_capacity {
+            if let Some(el) = vec.pop() {
                 theap.push(HeapElement {
                     score: el.score(factor),
                     el,
                 });
             } else {
-                vec.push(el);
+                break;
             }
         }
         self.heap = theap;
@@ -356,6 +356,8 @@ impl<T: Ctx> LimitedHeap<T> {
             return Ok(());
         }
 
+        // As this is IO, it would be great to do asynchronously.
+        // Somehow we'd have to guard the backups list/the file handle
         let mut zcmprsr = Encoder::new(&mut file, 6)?;
         vec.serialize(&mut Serializer::new(&mut zcmprsr)).unwrap();
         zcmprsr.finish()?;
@@ -388,7 +390,6 @@ impl<T: Ctx> LimitedHeap<T> {
                 self.extend(vec);
             } else {
                 // The file is in an arbitrary order based on heap internals.
-                vec.reverse();
                 while self.heap.len() < desired_capacity {
                     if let Some(el) = vec.pop() {
                         self.push(el);
