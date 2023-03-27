@@ -409,29 +409,15 @@ where
             if iters % 1_000_000 == 0 {
                 if iters == 1_000_000 {
                     heap.print_histogram();
-                    if let Some(e) = heap.backup(500_000).err() {
-                        println!("Error backing up: {:?}", e);
-                        break;
-                    }
                 } else if heap.len() > 4_000_000 && heap.max_time() < last_clean {
-                    if let Some(e) = heap.backup(2_000_000).err() {
-                        println!("Error backing up: {:?}", e);
-                        break;
-                    }
+                    heap.clean();
                     last_clean = heap.max_time();
-                } else if heap.len() < 1_000_000 {
-                    if heap.backups() > 0 {
-                        if let Some(e) = heap.restore_one(3_000_000).err() {
-                            println!("Error restoring: {:?}", e);
-                            break;
-                        }
-                    }
                 }
             }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
                 "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}) ---\n\
-                Heap stats: count={}; seen={}; backed up: {}; current limit: {}ms, scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+                Heap stats: count={}; seen={}; current limit: {}ms, scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
                 solutions.len(),
@@ -440,7 +426,6 @@ where
                 heapsize_adjustment - heap.max_time(),
                 heap.len(),
                 heap.seen(),
-                heap.backups_count(),
                 heap.max_time(),
                 heap.scale_factor(),
                 iskips,
