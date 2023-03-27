@@ -12,6 +12,7 @@ use analyzer::context;
 use analyzer::world::World;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 pub mod enums {
     use std::fmt;
@@ -25,9 +26,10 @@ pub mod enums {
         Ord,
         PartialOrd,
         Default,
-        serde::Serialize,
-        serde::Deserialize,
+        serde_repr::Serialize_repr,
+        serde_repr::Deserialize_repr,
     )]
+    #[repr(u8)]
     pub enum Mode {
         #[default]
         Indra,
@@ -176,7 +178,6 @@ pub mod flags {
 
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-        #[serde(transparent)]
         pub struct ContextBits1 : u32 {
             const AMAGI__MAIN_AREA__CTX__COMBO = 1 << 0;
             const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 1 << 1;
@@ -214,7 +215,6 @@ pub mod flags {
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-        #[serde(transparent)]
         pub struct ContextBits2 : u32 {
             const FAST_TRAVEL = 1 << 0;
             const GIGUNA_NORTHEAST_GATE = 1 << 1;
@@ -243,7 +243,8 @@ pub mod flags {
     }
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize_repr, Deserialize_repr)]
+#[repr(u8)]
 pub enum Status {
     #[default]
     None,

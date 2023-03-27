@@ -26,9 +26,10 @@ use std::option::Option;
     Ord,
     PartialOrd,
     enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum RegionId {
     Amagi,
     Antarctica,
@@ -79,9 +80,10 @@ impl std::str::FromStr for RegionId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum AreaId {
     Amagi__Cave_Behind_Waterfall,
     Amagi__Grid_31_19,
@@ -307,9 +309,10 @@ impl std::str::FromStr for AreaId {
     PartialOrd,
     enum_map::Enum,
     Default,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u16)]
 pub enum SpotId {
     #[default]
     None,
@@ -2528,9 +2531,10 @@ impl std::str::FromStr for SpotId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum LocationId {
     Amagi__Liru_Room__Shrine__Item,
     Amagi__Main_Area__Way_Off_To_The_Side__Item,
@@ -3348,9 +3352,10 @@ impl std::str::FromStr for LocationId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u16)]
 pub enum ExitId {
     Amagi__Cave_Behind_Waterfall__Bottom__ex__Main_Area__Secret_Outcropping_1,
     Amagi__Cave_Behind_Waterfall__Bottom__ex__Middle_1,
@@ -4415,9 +4420,10 @@ impl std::str::FromStr for ExitId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum ActionId {
     Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone,
     Amagi__Main_Area__Carving__Key_Combo,
@@ -4742,9 +4748,10 @@ impl std::str::FromStr for ActionId {
     PartialOrd,
     enum_map::Enum,
     Default,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum CanonId {
     #[default]
     None,
@@ -4836,9 +4843,10 @@ impl std::str::FromStr for CanonId {
     Ord,
     PartialOrd,
     enum_map::Enum,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum WarpId {
     DroneSave,
     EarthSave,
@@ -4886,9 +4894,10 @@ impl std::str::FromStr for WarpId {
     Ord,
     PartialOrd,
     Default,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum Objective {
     #[default]
     Start,

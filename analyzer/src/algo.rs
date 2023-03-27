@@ -408,10 +408,17 @@ where
                 last_solve = iters;
             }
             if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
-                heap.clean();
+                if let Some(e) = heap.backup().err() {
+                    println!("Error backing up: {:?}", e);
+                    break;
+                }
                 last_clean = heap.max_time();
             } else if iters == 1_000_000 {
                 heap.print_histogram();
+                if let Some(e) = heap.backup().err() {
+                    println!("Error backing up: {:?}", e);
+                    break;
+                }
             }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(

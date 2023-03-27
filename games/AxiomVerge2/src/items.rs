@@ -15,9 +15,10 @@ use std::fmt;
     PartialOrd,
     enum_map::Enum,
     Default,
-    serde::Serialize,
-    serde::Deserialize,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
 )]
+#[repr(u8)]
 pub enum Item {
     #[default]
     None,

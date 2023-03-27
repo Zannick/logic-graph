@@ -9,11 +9,17 @@ use plotlib::repr::{Histogram, HistogramBins};
 use plotlib::style::PointMarker;
 use plotlib::style::PointStyle;
 use plotlib::view::ContinuousView;
+use rmp_serde::{Deserializer, Serializer};
+use serde::{Deserialize, Serialize};
 use sort_by_derive::SortBy;
 use std::collections::BinaryHeap;
 use std::fmt::Debug;
+use std::fs::File;
+use std::io;
+use std::io::Seek;
 use std::num::NonZeroUsize;
 use std::time::Instant;
+use tempfile::tempfile;
 
 #[derive(Debug, SortBy)]
 struct HeapElement<T: Ctx> {
@@ -37,6 +43,7 @@ pub struct LimitedHeap<T: Ctx> {
     dup_skips: u32,
     dup_pskips: i32,
     last_clean: i32,
+    backups: Vec<File>,
 }
 
 impl<T: Ctx> LimitedHeap<T> {
@@ -58,6 +65,7 @@ impl<T: Ctx> LimitedHeap<T> {
             dup_skips: 0,
             dup_pskips: 0,
             last_clean: 0,
+            backups: Vec::new(),
         }
     }
 
@@ -177,32 +185,38 @@ impl<T: Ctx> LimitedHeap<T> {
         }
     }
 
+    fn drain(&mut self) -> impl IntoIterator<Item = ContextWrapper<T>> + '_ {
+        self.heap.drain().filter_map(|el| {
+            if el.el.elapsed() <= self.max_time {
+                if let Some(&time) = self.states_seen.get(el.el.get()) {
+                    if el.el.elapsed() <= time {
+                        Some(el.el)
+                    } else {
+                        self.dup_pskips += 1;
+                        None
+                    }
+                } else {
+                    Some(el.el)
+                }
+            } else {
+                self.pskips += 1;
+                None
+            }
+        })
+    }
+
     pub fn clean(&mut self) {
         println!("Cleaning... {}", self.heap.len());
         let start = Instant::now();
         let mut theap = BinaryHeap::new();
         self.heap.shrink_to_fit();
         theap.reserve(std::cmp::min(1048576, self.heap.len()));
-        for el in self.heap.drain() {
-            if el.el.elapsed() <= self.max_time {
-                if let Some(&time) = self.states_seen.get(el.el.get()) {
-                    if el.el.elapsed() <= time {
-                        theap.push(HeapElement {
-                            score: el.el.score(self.scale_factor),
-                            el: el.el,
-                        });
-                    } else {
-                        self.dup_pskips += 1;
-                    }
-                } else {
-                    theap.push(HeapElement {
-                        score: el.el.score(self.scale_factor),
-                        el: el.el,
-                    });
-                }
-            } else {
-                self.pskips += 1;
-            }
+        let factor = self.scale_factor;
+        for el in self.drain() {
+            theap.push(HeapElement {
+                score: el.score(factor),
+                el,
+            });
         }
         self.heap = theap;
         let done = start.elapsed();
@@ -286,5 +300,48 @@ impl<T: Ctx> LimitedHeap<T> {
             "Heap scores by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
+    }
+
+    pub fn backup(&mut self) -> io::Result<()> {
+        let mut file = tempfile()?;
+        println!("Backing up... {}", self.heap.len());
+        let start = Instant::now();
+        let mut theap = BinaryHeap::new();
+        let mut vec = Vec::new();
+        self.heap.shrink_to_fit();
+        theap.reserve(std::cmp::min(1048576, self.heap.len()));
+        let factor = self.scale_factor;
+        let drain = self.drain().into_iter();
+        for (i, el) in drain.enumerate() {
+            if i < 500_000 {
+                theap.push(HeapElement {
+                    score: el.score(factor),
+                    el,
+                });
+            } else {
+                vec.push(el);
+            }
+        }
+        self.heap = theap;
+        if vec.is_empty() {
+            println!(
+                "Took {:?} and resulted in no data to back up: {} left",
+                start.elapsed(),
+                self.heap.len()
+            );
+            return Ok(());
+        }
+        
+        vec.serialize(&mut Serializer::new(&mut file)).unwrap();
+        let wrote = file.stream_position().unwrap();
+        self.backups.push(file);
+        println!(
+            "Backed up file #{} with {} elements ({} bytes) in {:?}",
+            self.backups.len(),
+            vec.len(),
+            wrote,
+            start.elapsed()
+        );
+        Ok(())
     }
 }
