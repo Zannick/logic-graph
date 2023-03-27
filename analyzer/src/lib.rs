@@ -6,6 +6,7 @@ extern crate serde;
 extern crate sort_by_derive;
 extern crate tempfile;
 extern crate yaml_rust;
+extern crate zstd;
 
 pub mod access;
 pub mod algo;

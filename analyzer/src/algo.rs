@@ -232,7 +232,7 @@ where
 {
     if iters < 1_000_000 {
         SearchMode::Classic
-    } else if iters % 1024 != 0 {
+    } else if iters % 2048 != 0 {
         SearchMode::Classic
     } else if ctx.elapsed() * 3 < heap.max_time() {
         SearchMode::Depth(4)
@@ -387,7 +387,6 @@ where
                 && (iters - last_solve > dist_for_rescoring
                     || iters - last_solve > 1_000_000 && heap.len() > 10_000_000)
             {
-                println!("Rescoring.");
                 if (rescore_plus && heap.len() > 2_000_000) || heap.len() > 10_000_000 {
                     let new_factor = rescore_factor * heap.scale_factor() / 4;
                     if new_factor > 1_000_000 {
@@ -407,23 +406,32 @@ where
                 last_clean = heap.max_time();
                 last_solve = iters;
             }
-            if iters % 1_000_000 == 0 && heap.len() > 4_000_000 && heap.max_time() < last_clean {
-                if let Some(e) = heap.backup().err() {
-                    println!("Error backing up: {:?}", e);
-                    break;
-                }
-                last_clean = heap.max_time();
-            } else if iters == 1_000_000 {
-                heap.print_histogram();
-                if let Some(e) = heap.backup().err() {
-                    println!("Error backing up: {:?}", e);
-                    break;
+            if iters % 1_000_000 == 0 {
+                if iters == 1_000_000 {
+                    heap.print_histogram();
+                    if let Some(e) = heap.backup(500_000).err() {
+                        println!("Error backing up: {:?}", e);
+                        break;
+                    }
+                } else if heap.len() > 4_000_000 && heap.max_time() < last_clean {
+                    if let Some(e) = heap.backup(2_000_000).err() {
+                        println!("Error backing up: {:?}", e);
+                        break;
+                    }
+                    last_clean = heap.max_time();
+                } else if heap.len() < 1_000_000 {
+                    if heap.backups() > 0 {
+                        if let Some(e) = heap.restore_one(3_000_000).err() {
+                            println!("Error restoring: {:?}", e);
+                            break;
+                        }
+                    }
                 }
             }
             let (iskips, pskips, dskips, dpskips) = heap.stats();
             println!(
                 "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}) ---\n\
-                Heap stats: count={}; seen={}; current limit: {}ms, score scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+                Heap stats: count={}; seen={}; backed up: {}; current limit: {}ms, scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
                 solutions.len(),
@@ -432,6 +440,7 @@ where
                 heapsize_adjustment - heap.max_time(),
                 heap.len(),
                 heap.seen(),
+                heap.backups_count(),
                 heap.max_time(),
                 heap.scale_factor(),
                 iskips,

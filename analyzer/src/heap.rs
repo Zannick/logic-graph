@@ -4,22 +4,22 @@ use crate::context::*;
 use crate::CommonHasher;
 use lru::LruCache;
 use plotlib::page::Page;
-use plotlib::repr::Plot;
-use plotlib::repr::{Histogram, HistogramBins};
-use plotlib::style::PointMarker;
-use plotlib::style::PointStyle;
+use plotlib::repr::{Histogram, HistogramBins, Plot};
+use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
-use rmp_serde::{Deserializer, Serializer};
-use serde::{Deserialize, Serialize};
+use rmp_serde::Serializer;
+use serde::Serialize;
 use sort_by_derive::SortBy;
 use std::collections::BinaryHeap;
+use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::fs::File;
-use std::io;
-use std::io::Seek;
+use std::io::{self, Seek};
 use std::num::NonZeroUsize;
 use std::time::Instant;
 use tempfile::tempfile;
+use zstd::stream::read::Decoder;
+use zstd::stream::write::Encoder;
 
 #[derive(Debug, SortBy)]
 struct HeapElement<T: Ctx> {
@@ -43,7 +43,7 @@ pub struct LimitedHeap<T: Ctx> {
     dup_skips: u32,
     dup_pskips: i32,
     last_clean: i32,
-    backups: Vec<File>,
+    backups: VecDeque<(File, usize)>,
 }
 
 impl<T: Ctx> LimitedHeap<T> {
@@ -65,7 +65,7 @@ impl<T: Ctx> LimitedHeap<T> {
             dup_skips: 0,
             dup_pskips: 0,
             last_clean: 0,
-            backups: Vec::new(),
+            backups: VecDeque::new(),
         }
     }
 
@@ -79,6 +79,14 @@ impl<T: Ctx> LimitedHeap<T> {
         self.states_seen.len()
     }
 
+    pub fn backups(&self) -> usize {
+        self.backups.len()
+    }
+
+    pub fn backups_count(&self) -> usize {
+        self.backups.iter().map(|(_, n)| n).sum()
+    }
+
     pub fn scale_factor(&self) -> i32 {
         self.scale_factor
     }
@@ -87,7 +95,13 @@ impl<T: Ctx> LimitedHeap<T> {
         self.scale_factor = factor;
         if !self.heap.is_empty() {
             println!("Recalculating scores");
-            self.clean();
+            if self.backups.is_empty() {
+                self.clean()
+            } else {
+                self.backup(self.heap.len() / 2).unwrap();
+                self.restore_one(self.heap.len() * 2).unwrap();
+                self.print_histogram();
+            }
         }
     }
 
@@ -173,7 +187,12 @@ impl<T: Ctx> LimitedHeap<T> {
                 self.pskips += 1;
             }
         }
-        None
+        if !self.backups.is_empty() {
+            self.restore_one(self.backups[0].1).unwrap();
+            self.pop()
+        } else {
+            None
+        }
     }
 
     /// Produces the actual first element of the heap.
@@ -302,7 +321,10 @@ impl<T: Ctx> LimitedHeap<T> {
         );
     }
 
-    pub fn backup(&mut self) -> io::Result<()> {
+    pub fn backup(&mut self, desired_capacity: usize) -> io::Result<()> {
+        if self.heap.len() <= desired_capacity {
+            return Ok(());
+        }
         let mut file = tempfile()?;
         println!("Backing up... {}", self.heap.len());
         let start = Instant::now();
@@ -312,8 +334,10 @@ impl<T: Ctx> LimitedHeap<T> {
         theap.reserve(std::cmp::min(1048576, self.heap.len()));
         let factor = self.scale_factor;
         let drain = self.drain().into_iter();
+        // This is an arbitrary order based on heap internal ordering.
+        // TODO: select items to keep with a better heuristic.
         for (i, el) in drain.enumerate() {
-            if i < 500_000 {
+            if i < desired_capacity {
                 theap.push(HeapElement {
                     score: el.score(factor),
                     el,
@@ -331,17 +355,68 @@ impl<T: Ctx> LimitedHeap<T> {
             );
             return Ok(());
         }
-        
-        vec.serialize(&mut Serializer::new(&mut file)).unwrap();
+
+        let mut zcmprsr = Encoder::new(&mut file, 6)?;
+        vec.serialize(&mut Serializer::new(&mut zcmprsr)).unwrap();
+        zcmprsr.finish()?;
         let wrote = file.stream_position().unwrap();
-        self.backups.push(file);
+        self.backups.push_back((file, vec.len()));
         println!(
-            "Backed up file #{} with {} elements ({} bytes) in {:?}",
-            self.backups.len(),
+            "Backed up file with {} elements ({} bytes) in {:?}",
             vec.len(),
             wrote,
             start.elapsed()
         );
+        Ok(())
+    }
+
+    pub fn restore_one(&mut self, desired_capacity: usize) -> io::Result<()> {
+        if self.heap.len() >= desired_capacity {
+            return Ok(());
+        }
+        println!(
+            "Restoring from one file... currently have {}",
+            self.heap.len()
+        );
+        let start = Instant::now();
+        if let Some((mut file, _)) = self.backups.pop_front() {
+            file.seek(std::io::SeekFrom::Start(0))?;
+            let zdcmprsr = Decoder::new(&mut file)?;
+            let mut vec: Vec<ContextWrapper<T>> = rmp_serde::decode::from_read(zdcmprsr).unwrap();
+            println!("Restored {} from file", vec.len());
+            if self.heap.len() + vec.len() < desired_capacity {
+                self.extend(vec);
+            } else {
+                // The file is in an arbitrary order based on heap internals.
+                vec.reverse();
+                while self.heap.len() < desired_capacity {
+                    if let Some(el) = vec.pop() {
+                        self.push(el);
+                    }
+                }
+                println!("Restored up to {}", self.heap.len());
+                if !vec.is_empty() {
+                    let mut file = tempfile()?;
+                    let mut zcmprsr = Encoder::new(&mut file, 6)?;
+                    vec.serialize(&mut Serializer::new(&mut zcmprsr)).unwrap();
+                    zcmprsr.finish()?;
+                    let wrote = file.stream_position().unwrap();
+                    self.backups.push_back((file, vec.len()));
+                    println!(
+                        "Backed up remainder with {} elements ({} bytes)",
+                        vec.len(),
+                        wrote
+                    );
+                }
+            }
+            println!(
+                "Finished in {:?}, now have {} and {} backups with a total of {}",
+                start.elapsed(),
+                self.heap.len(),
+                self.backups.len(),
+                self.backups_count()
+            );
+        }
         Ok(())
     }
 }

@@ -170,7 +170,7 @@ fn asserde_true() {
     for i in 1..=21 {
         let vec = Vec::new();
         let mut zcmprsr = Encoder::new(vec, i).unwrap();
-        zcmprsr.write(&buf);
+        zcmprsr.write(&buf).unwrap();
         cmp.push(zcmprsr.finish().unwrap().len());
     }
 
