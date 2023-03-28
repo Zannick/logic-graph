@@ -18,3 +18,4 @@ target/
 *.out.*
 # Output
 **/data/*.txt
+.db/

@@ -156,8 +156,16 @@ fn asserde_true() {
     let buf = serde_pass(&ctx);
     let json = serde_json::to_string(&ctx).unwrap();
 
+    let mut buf2 = Vec::new();
+    ctx.get().serialize(&mut Serializer::new(&mut buf2)).unwrap();
     println!(
-        "Serialized ctx ({} bytes) as json: {}\n as mp {} bytes: {:?}",
+        "Serialized Context ({} bytes) as mp: {} bytes",
+        std::mem::size_of::<Context>(),
+        buf2.len()
+    );
+
+    println!(
+        "Serialized ctxwrapper ({} bytes) as json: {}\n as mp {} bytes: {:?}",
         std::mem::size_of::<ContextWrapper<Context>>(),
         json,
         buf.len(),
