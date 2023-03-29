@@ -9,7 +9,6 @@ use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
-use rand::{thread_rng, Rng};
 use rmp_serde::Serializer;
 use rocksdb::{
     BlockBasedOptions, Cache, CuckooTableOptions, IteratorMode, MemtableFactory, MergeOperands,
@@ -67,6 +66,7 @@ impl Drop for HeapDBOptions {
     }
 }
 
+#[derive(Debug)]
 pub struct Error {
     pub message: String,
 }
@@ -119,7 +119,7 @@ impl<T> HeapDB<T>
 where
     T: Ctx,
 {
-    pub fn open<P>(p: P, scale_factor: i32) -> Result<HeapDB<T>, String>
+    pub fn open<P>(p: P, initial_max_time: i32) -> Result<HeapDB<T>, String>
     where
         P: AsRef<Path>,
     {
@@ -177,8 +177,8 @@ where
                 path: path2,
             },
             write_opts,
-            max_time: i32::MAX.into(),
-            scale_factor,
+            max_time: initial_max_time.into(),
+            scale_factor: initial_max_time / 16284,
             seq: 0.into(),
             size: 0.into(),
             seen: 0.into(),
@@ -219,11 +219,11 @@ where
         self.max_time.load(Ordering::Acquire)
     }
 
-    pub fn set_max_time(&mut self, max_time: i32) {
+    pub fn set_max_time(&self, max_time: i32) {
         self.max_time.fetch_min(max_time, Ordering::Release);
     }
 
-    pub fn set_lenient_max_time(&mut self, max_time: i32) {
+    pub fn set_lenient_max_time(&self, max_time: i32) {
         self.set_max_time(max_time + (max_time / 128))
     }
 
@@ -237,6 +237,7 @@ where
     /// a sequence number (8 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
+        // FIXME: lexicographic ordering of negative numbers (2s complement) is backwards!!
         key[0..4].copy_from_slice(&el.score(self.scale_factor).to_be_bytes());
         key[4..8].copy_from_slice(&el.elapsed().to_be_bytes());
         key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
@@ -305,6 +306,7 @@ where
         }
         let key = self.get_heap_key(&el);
         let val = self.get_heap_value(&el);
+        //println!("Push {:?}: score={} elapsed={}", key, el.score(self.scale_factor), el.elapsed());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
@@ -316,6 +318,7 @@ where
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
         for item in iter {
             let (key, value) = item?;
+            let k = key.clone();
 
             // Ignore error
             let _ = self.db.delete_opt(key, &self.write_opts);
@@ -334,6 +337,7 @@ where
                     continue;
                 }
             }
+            //println!("Pop {:?}: score={} elapsed={}", k, el.score(self.scale_factor), el.elapsed());
             return Ok(Some(el));
         }
 
@@ -376,6 +380,7 @@ where
             let key = self.get_heap_key(&el);
             let val = self.get_heap_value(&el);
             batch.put(key, val);
+            //println!("Push-batch {:?}: score={} elapsed={}", key, el.score(self.scale_factor), el.elapsed());
         }
         let new = batch.len();
         let new_seen = seen_batch.len();
@@ -390,5 +395,39 @@ where
         Ok(())
     }
 
-    // TODO: data dashboard
+    pub fn print_graphs(&self) -> Result<(), Error> {
+        let size = self.size.load(Ordering::Acquire);
+        let max_time = self.max_time.load(Ordering::Acquire);
+        let mut times: Vec<f64> = Vec::with_capacity(size);
+        let mut time_scores: Vec<(f64, f64)> = Vec::with_capacity(size);
+        let iter = self.db.full_iterator(IteratorMode::Start);
+        for item in iter {
+            let (_, value) = item?;
+            let el = self.from_heap_value(&value)?;
+            times.push(el.elapsed().into());
+            time_scores.push((el.elapsed().into(), el.score(self.scale_factor).into()));
+        }
+
+        let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));
+        let v = ContinuousView::new()
+            .add(h)
+            .x_label("elapsed time")
+            .x_range(0., max_time.into());
+        println!(
+            "Current heap contents:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+        let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
+        let v = ContinuousView::new()
+            .add(p)
+            .x_label("elapsed time")
+            .y_label("score")
+            .x_range(0., max_time.into());
+        println!(
+            "Heap scores by time:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+
+        Ok(())
+    }
 }

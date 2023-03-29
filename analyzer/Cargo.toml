@@ -9,7 +9,6 @@ edition = "2021"
 enum-map = "*"
 lru = "*"
 plotlib = "0.5.1"
-rand = "*"
 rocksdb = { version = "*", default-features = false, features = ["snappy", "zstd"] }
 rmp-serde = "*"
 rustc-hash = "*"
