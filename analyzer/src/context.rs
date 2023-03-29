@@ -5,7 +5,7 @@ use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::rc::Rc;
 
-pub trait Ctx: Clone + Eq + Debug + Hash + Serialize + for<'a> Deserialize<'a> {
+pub trait Ctx: Clone + Eq + Debug + Hash + Sync + Serialize + for<'a> Deserialize<'a> {
     type World: World;
     type ItemId: Id;
     type AreaId: Id;
@@ -183,6 +183,8 @@ pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     #[sort_by]
     elapsed: i32,
     penalty: i32,
+    // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
+    // or make a type for ContextWrapper to convert into
     history: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
 

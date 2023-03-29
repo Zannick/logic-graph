@@ -10,7 +10,7 @@ enum-map = "*"
 lru = "*"
 plotlib = "0.5.1"
 rand = "*"
-rocksdb = "*"
+rocksdb = { version = "*", default-features = false, features = ["snappy", "zstd"] }
 rmp-serde = "*"
 rustc-hash = "*"
 serde = { version = "1.0", features = ["derive", "rc"] }
