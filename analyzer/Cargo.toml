@@ -8,7 +8,9 @@ edition = "2021"
 [dependencies]
 enum-map = "*"
 lru = "*"
-plotlib = "0.5.1"
+plotlib = "0.5"
+priority-queue = "*"
+rayon = "*"
 rocksdb = { version = "*", default-features = false, features = ["snappy", "zstd"] }
 rmp-serde = "*"
 rustc-hash = "*"

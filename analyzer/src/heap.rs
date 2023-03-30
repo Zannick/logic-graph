@@ -1,16 +1,21 @@
 extern crate plotlib;
 
 use crate::context::*;
+use crate::db::HeapDB;
 use crate::CommonHasher;
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
+use priority_queue::DoublePriorityQueue;
 use sort_by_derive::SortBy;
 use std::collections::BinaryHeap;
 use std::fmt::Debug;
 use std::num::NonZeroUsize;
+use std::path::Path;
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
@@ -290,5 +295,152 @@ impl<T: Ctx> LimitedHeap<T> {
             "Heap scores by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
+    }
+}
+
+pub struct RocksBackedQueue<T: Ctx> {
+    queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
+    db: HeapDB<T>,
+    capacity: AtomicUsize,
+    iskips: AtomicUsize,
+    pskips: AtomicUsize,
+    // TODO: min db score as well for popping purposes?
+    min_evictions: usize,
+}
+
+impl<T: Ctx> RocksBackedQueue<T> {
+    pub fn new<P>(
+        db_path: P,
+        initial_max_time: i32,
+        max_capacity: usize,
+        min_evictions: usize,
+    ) -> Result<RocksBackedQueue<T>, String>
+    where
+        P: AsRef<Path>,
+    {
+        Ok(RocksBackedQueue {
+            queue: Mutex::new(DoublePriorityQueue::with_capacity_and_hasher(
+                max_capacity,
+                CommonHasher::default(),
+            )),
+            db: HeapDB::open(db_path, initial_max_time)?,
+            capacity: max_capacity.into(),
+            iskips: 0.into(),
+            pskips: 0.into(),
+            min_evictions,
+        })
+    }
+
+    pub fn heap_len(&self) -> usize {
+        self.queue.lock().unwrap().len()
+    }
+
+    pub fn len(&self) -> usize {
+        self.queue.lock().unwrap().len() + self.db.len()
+    }
+
+    /// Returns whether the underlying queue and db are actually empty.
+    /// Even if this returns false, attempting to peek or pop may produce None.
+    pub fn is_empty(&self) -> bool {
+        self.queue.lock().unwrap().is_empty() && self.db.len() == 0
+    }
+
+    pub fn max_time(&self) -> i32 {
+        self.db.max_time()
+    }
+
+    pub fn set_max_time(&self, max_time: i32) {
+        self.db.set_max_time(max_time);
+    }
+
+    pub fn set_lenient_max_time(&self, max_time: i32) {
+        self.db.set_lenient_max_time(max_time);
+    }
+
+    /// Pushes an element into the heap.
+    /// If the element's elapsed time is greater than the allowed maximum,
+    /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
+    pub fn push(&self, el: ContextWrapper<T>) -> Result<(), String> {
+        if el.elapsed() > self.db.max_time() {
+            self.iskips.fetch_add(1, Ordering::Release);
+            return Ok(());
+        }
+        if !self.db.remember_push(&el)? {
+            return Ok(());
+        }
+
+        let priority = el.score(self.db.scale_factor());
+        let mut evicted = None;
+        {
+            let mut queue = self.queue.lock().unwrap();
+
+            if queue.len() == self.capacity.load(Ordering::Acquire) {
+                let (ctx, &p_min) = queue
+                    .peek_min()
+                    .ok_or("queue at capacity with no elements")?;
+                if priority < p_min || (priority == p_min && el.elapsed() >= ctx.elapsed()) {
+                    // Lower priority (or equal but later), evict the new item immediately
+                    self.db.push(el)?;
+                } else {
+                    let max_evictions = queue.len() / 2;
+                    // New item is better, evict some old_items.
+                    evicted = Some(Self::evict_until(
+                        &mut queue,
+                        priority,
+                        self.min_evictions,
+                        max_evictions,
+                    )?);
+                    queue.push(el, priority);
+                }
+            } else {
+                queue.push(el, priority);
+            }
+        }
+        // Without the lock (but still blocking the push op in this thread)
+        if let Some(ev) = evicted {
+            self.db.extend(ev)?;
+        }
+
+        Ok(())
+    }
+
+    /// Removes elements from the min end of the queue until we reach any of:
+    /// an element above the given priority (it is kept in the queue),
+    /// the other end of the queue, or a total of `max_evictions` elements.
+    /// You may also specify a `min_evictions` to ensure that a certain amount of space is
+    /// always cleared.
+    fn evict_until(
+        queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
+        priority: i32,
+        min_evictions: usize,
+        max_evictions: usize,
+    ) -> Result<Vec<ContextWrapper<T>>, String> {
+        let mut evicted = Vec::new();
+        while evicted.len() < max_evictions {
+            if let Some((_, &prio)) = queue.peek_min() {
+                if prio <= priority || evicted.len() < min_evictions {
+                    evicted.push(queue.pop_min().unwrap().0);
+                    continue;
+                }
+            }
+            break;
+        }
+        Ok(evicted)
+    }
+
+    pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
+        let mut queue = self.queue.lock().unwrap();
+        while let Some((ctx, _)) = queue.pop_max() {
+            if ctx.elapsed() > self.db.max_time() {
+                self.pskips.fetch_add(1, Ordering::Release);
+                continue;
+            }
+            if !self.db.remember_pop(&ctx)? {
+                continue;
+            }
+            return Ok(Some(ctx));
+        }
+        // Retrieve some from db
+        Ok(None)
     }
 }

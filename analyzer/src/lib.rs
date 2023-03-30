@@ -1,5 +1,6 @@
 extern crate enum_map;
 extern crate lru;
+extern crate rayon;
 extern crate rmp_serde;
 extern crate rustc_hash;
 extern crate serde;

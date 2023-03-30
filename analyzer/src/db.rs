@@ -299,24 +299,8 @@ where
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        let seen_key = self.get_seen_key(el.get());
-
-        let should_write = match self.get_seen_value(&seen_key)? {
-            Some(stored) => {
-                if stored < el.elapsed() {
-                    self.dup_iskips.fetch_add(1, Ordering::Release);
-                    return Ok(());
-                }
-                stored > el.elapsed()
-            }
-            None => true,
-        };
-        // If the value seen is also what we have, we still want to put it into the heap,
-        // but we don't have to write the value again as it's a maximum.
-        if should_write {
-            self.seendb
-                .merge_opt(&seen_key, el.elapsed().to_be_bytes(), &self.write_opts);
-            self.seen.fetch_add(1, Ordering::Release);
+        if !self.remember_push(&el)? {
+            return Ok(());
         }
         let key = self.get_heap_key(&el);
         let val = self.get_heap_value(&el);
@@ -354,7 +338,9 @@ where
             if npops % 20000 == 0 {
                 let start = Instant::now();
                 let max_deleted = self.delete.swap(0, Ordering::Acquire);
-                let _ = self.db.compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
+                let _ = self
+                    .db
+                    .compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
                 println!("Compacting took {:?}", start.elapsed());
             }
 
@@ -427,6 +413,40 @@ where
         self.seen.fetch_add(new_seen, Ordering::Release);
 
         Ok(())
+    }
+
+    /// Stores the underlying Ctx in the seen db with the best known elapsed time,
+    /// and returns whether this context had that best time.
+    /// A `false` value means the state should be skipped.
+    fn remember(&self, el: &ContextWrapper<T>, skip_count: &AtomicUsize) -> Result<bool, Error> {
+        let seen_key = self.get_seen_key(el.get());
+
+        let should_write = match self.get_seen_value(&seen_key)? {
+            Some(stored) => {
+                if stored < el.elapsed() {
+                    self.dup_iskips.fetch_add(1, Ordering::Release);
+                    return Ok(false);
+                }
+                stored > el.elapsed()
+            }
+            None => true,
+        };
+        // If the value seen is also what we have, we still want to put it into the heap,
+        // but we don't have to write the value again as it's a maximum.
+        if should_write {
+            self.seendb
+                .merge_opt(&seen_key, el.elapsed().to_be_bytes(), &self.write_opts);
+            self.seen.fetch_add(1, Ordering::Release);
+        }
+        Ok(true)
+    }
+
+    pub fn remember_push(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
+        self.remember(el, &self.dup_iskips)
+    }
+
+    pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
+        self.remember(el, &self.dup_pskips)
     }
 
     pub fn print_graphs(&self) -> Result<(), Error> {
