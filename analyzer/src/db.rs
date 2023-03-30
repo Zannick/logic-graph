@@ -18,6 +18,7 @@ use serde::Serialize;
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicI32, AtomicU64, AtomicUsize, Ordering};
+use std::time::Instant;
 
 // We need the following in this wrapper impl:
 // 1. The contextwrapper db is mainly iterated over, via either
@@ -54,6 +55,9 @@ pub struct HeapDB<T> {
     pskips: AtomicUsize,
     dup_iskips: AtomicUsize,
     dup_pskips: AtomicUsize,
+
+    pops: AtomicUsize,
+    delete: AtomicU64,
 
     phantom: PhantomData<T>,
 }
@@ -186,6 +190,8 @@ where
             pskips: 0.into(),
             dup_iskips: 0.into(),
             dup_pskips: 0.into(),
+            pops: 0.into(),
+            delete: 0.into(),
             phantom: PhantomData,
         })
     }
@@ -237,11 +243,19 @@ where
     /// a sequence number (8 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        // FIXME: lexicographic ordering of negative numbers (2s complement) is backwards!!
-        key[0..4].copy_from_slice(&el.score(self.scale_factor).to_be_bytes());
+        key[0..4].copy_from_slice(&self.get_heap_prefix(el.score(self.scale_factor)));
         key[4..8].copy_from_slice(&el.elapsed().to_be_bytes());
         key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
+    }
+
+    fn get_heap_prefix(&self, score: i32) -> [u8; 4] {
+        // Lexicographic ordering of signed ints looks like:
+        // 0 ... MAX MIN ... -1
+        // We want:
+        // MAX ... 0 -1 ... MIN
+        // which we get simply by XORing by MAX
+        (score ^ i32::MAX).to_be_bytes()
     }
 
     /// The key for a T (Ctx) in the seendb is... itself!
@@ -312,17 +326,37 @@ where
         Ok(())
     }
 
-    pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, Error> {
+    pub fn pop(&self, score_hint: Option<i32>) -> Result<Option<ContextWrapper<T>>, Error> {
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
+        let prefix: [u8; 4];
+        let mode = match score_hint {
+            None => IteratorMode::Start,
+            Some(score) => {
+                prefix = self.get_heap_prefix(score);
+                IteratorMode::From(&prefix, rocksdb::Direction::Forward)
+            }
+        };
+        let mut iter = self.db.iterator_opt(mode, tail_opts);
         for item in iter {
             let (key, value) = item?;
-            let k = key.clone();
+            let npops = self.pops.fetch_add(1, Ordering::Acquire) + 1;
+            let mut k = Vec::with_capacity(17);
+            (*key).clone_into(&mut k);
+            k.push(u8::MAX);
 
+            let raw = u64::from_be_bytes(key[0..8].as_ref().try_into().unwrap()) + 1;
             // Ignore error
             let _ = self.db.delete_opt(key, &self.write_opts);
+            self.delete.fetch_max(raw, Ordering::Release);
             self.size.fetch_sub(1, Ordering::Release);
+
+            if npops % 20000 == 0 {
+                let start = Instant::now();
+                let max_deleted = self.delete.swap(0, Ordering::Acquire);
+                let _ = self.db.compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
+                println!("Compacting took {:?}", start.elapsed());
+            }
 
             let el = self.from_heap_value(&value)?;
             if el.elapsed() > self.max_time() {
@@ -400,7 +434,9 @@ where
         let max_time = self.max_time.load(Ordering::Acquire);
         let mut times: Vec<f64> = Vec::with_capacity(size);
         let mut time_scores: Vec<(f64, f64)> = Vec::with_capacity(size);
-        let iter = self.db.full_iterator(IteratorMode::Start);
+        let mut read_opts = ReadOptions::default();
+        read_opts.fill_cache(false);
+        let iter = self.db.iterator_opt(IteratorMode::Start, read_opts);
         for item in iter {
             let (_, value) = item?;
             let el = self.from_heap_value(&value)?;

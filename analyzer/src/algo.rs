@@ -180,17 +180,23 @@ fn depth_step<W, T, L, E>(
     iters: i32,
     mode: SearchMode,
     mut d: u8,
-) where
+) -> Option<i32>
+where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
     let mut next = Vec::new();
+    let mut min_score = Some(ctx.score(db.scale_factor()));
     for ctx in classic_step(world, ctx, db.max_time()) {
         if world.won(ctx.get()) {
             handle_solution(ctx, db, solutions, world, &startctx, iters, mode);
+            min_score = None;
         } else {
+            if let Some(c) = min_score {
+                min_score = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
+            }
             next.push(ctx);
         }
     }
@@ -202,7 +208,11 @@ fn depth_step<W, T, L, E>(
         for ctx in classic_step(world, ctx, db.max_time()) {
             if world.won(ctx.get()) {
                 handle_solution(ctx, db, solutions, world, &startctx, iters, mode);
+                min_score = None;
             } else {
+                if let Some(c) = min_score {
+                    min_score = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
+                }
                 next.push(ctx);
             }
         }
@@ -212,6 +222,7 @@ fn depth_step<W, T, L, E>(
             break;
         }
     }
+    min_score
 }
 
 fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, db: &HeapDB<T>) -> SearchMode
@@ -319,8 +330,12 @@ where
     println!("Max time to consider is now: {}ms", db.max_time());
     let mut iters = 0;
     let mut deadends = 0;
+    let pc = rocksdb::perf::PerfContext::default();
 
-    while let Ok(Some(ctx)) = db.pop() {
+    let mut start = Instant::now();
+    let mut score_hint = None;
+    while let Ok(Some(ctx)) = db.pop(score_hint) {
+        score_hint = Some(ctx.score(db.scale_factor()));
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
         let heapsize_adjustment: i32 = (db.len() / 32).try_into().unwrap();
@@ -350,6 +365,19 @@ where
         }
 
         iters += 1;
+        if iters % 100 == 0 {
+            println!(
+                "Pop {} took {:?}: size={} stats={:?}",
+                iters,
+                start.elapsed(),
+                db.len(),
+                db.skip_stats()
+            );
+        }
+        if iters == 50000 {
+            println!("{}", pc.report(true));
+            break;
+        }
         if iters % 10000 == 0 {
             if iters > 10_000_000 && solutions.unique() > 4 {
                 db.set_max_time(solutions.best());
@@ -385,40 +413,49 @@ where
         let mode = choose_mode(iters, &ctx, &db);
         match mode {
             SearchMode::Depth(d) if d > 1 => {
-                depth_step(world, ctx, &db, &mut solutions, &startctx, iters, mode, d);
+                score_hint = depth_step(world, ctx, &db, &mut solutions, &startctx, iters, mode, d);
             }
             SearchMode::Greedy => {
                 if let Ok(win) = greedy_search(world, &ctx, db.max_time()) {
                     if win.elapsed() <= db.max_time() {
                         handle_solution(win, &db, &mut solutions, world, &startctx, iters, mode);
+                        score_hint = None;
                     }
                 }
-                for ctx in classic_step(world, ctx, db.max_time()) {
-                    if world.won(ctx.get()) {
-                        handle_solution(
-                            ctx,
-                            &db,
-                            &mut solutions,
-                            world,
-                            &startctx,
-                            iters,
-                            SearchMode::Classic,
-                        );
-                    } else {
-                        db.push(ctx).unwrap();
-                    }
-                }
+                let next = classic_step(world, ctx, db.max_time())
+                    .into_iter()
+                    .filter_map(|ctx| {
+                        if world.won(ctx.get()) {
+                            handle_solution(
+                                ctx,
+                                &db,
+                                &mut solutions,
+                                world,
+                                &startctx,
+                                iters,
+                                SearchMode::Classic,
+                            );
+                            score_hint = None;
+                            None
+                        } else {
+                            if let Some(c) = score_hint {
+                                score_hint = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
+                            }
+                            Some(ctx)
+                        }
+                    });
+                db.extend(next).unwrap();
             }
             SearchMode::PickDepth(d) if d > 1 => {
                 let mut this_round = vec![ctx];
-                while let Some(c) = db.pop().unwrap() {
+                while let Some(c) = db.pop(score_hint).unwrap() {
                     this_round.push(c);
                     if this_round.len() > 9 {
                         break;
                     }
                 }
                 this_round.sort_unstable_by_key(|c| c.elapsed() - c.penalty());
-                depth_step(
+                score_hint = depth_step(
                     world,
                     this_round.pop().unwrap(),
                     &db,
@@ -431,23 +468,32 @@ where
                 db.extend(this_round).unwrap();
             }
             _ => {
-                for ctx in classic_step(world, ctx, db.max_time()) {
-                    if world.won(ctx.get()) {
-                        handle_solution(
-                            ctx,
-                            &db,
-                            &mut solutions,
-                            world,
-                            &startctx,
-                            iters,
-                            SearchMode::Classic,
-                        );
-                    } else {
-                        db.push(ctx).unwrap();
-                    }
-                }
+                let next = classic_step(world, ctx, db.max_time())
+                    .into_iter()
+                    .filter_map(|ctx| {
+                        if world.won(ctx.get()) {
+                            handle_solution(
+                                ctx,
+                                &db,
+                                &mut solutions,
+                                world,
+                                &startctx,
+                                iters,
+                                SearchMode::Classic,
+                            );
+                            score_hint = None;
+                            None
+                        } else {
+                            if let Some(c) = score_hint {
+                                score_hint = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
+                            }
+                            Some(ctx)
+                        }
+                    });
+                db.extend(next).unwrap();
             }
         }
+        start = Instant::now();
     }
     let (iskips, pskips, dskips, dpskips) = db.skip_stats();
     println!(
