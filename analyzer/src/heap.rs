@@ -306,6 +306,7 @@ pub struct RocksBackedQueue<T: Ctx> {
     pskips: AtomicUsize,
     max_db_priority: AtomicI32,
     min_evictions: usize,
+    min_reshuffle: usize,
 }
 
 impl<T: Ctx> RocksBackedQueue<T> {
@@ -314,6 +315,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         initial_max_time: i32,
         max_capacity: usize,
         min_evictions: usize,
+        min_reshuffle: usize,
     ) -> Result<RocksBackedQueue<T>, String>
     where
         P: AsRef<Path>,
@@ -329,6 +331,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             pskips: 0.into(),
             max_db_priority: i32::MIN.into(),
             min_evictions,
+            min_reshuffle,
         })
     }
 
@@ -378,6 +381,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
     pub fn push(&self, el: ContextWrapper<T>) -> Result<(), String> {
+        let start = Instant::now();
         if el.elapsed() > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
@@ -400,7 +404,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     self.db.push(el)?;
                     self.max_db_priority.fetch_max(priority, Ordering::Release);
                 } else {
-                    let max_evictions = queue.len() / 2;
+                    let max_evictions = (queue.len() / 4) * 3;
                     // New item is better, evict some old_items.
                     evicted = Some(Self::evict_until(
                         &mut queue,
@@ -428,6 +432,8 @@ impl<T: Ctx> RocksBackedQueue<T> {
         }
         // Without the lock (but still blocking the push op in this thread)
         if let Some(ev) = evicted {
+            println!("push+evict took {:?} with the lock", start.elapsed());
+            let start = Instant::now();
             if !ev.is_empty() {
                 let best = ev
                     .iter()
@@ -436,6 +442,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     .unwrap();
                 self.db.extend(ev, true)?;
                 self.max_db_priority.fetch_max(best, Ordering::Release);
+                println!("evict to db took {:?}", start.elapsed());
             }
         }
 
@@ -466,10 +473,59 @@ impl<T: Ctx> RocksBackedQueue<T> {
         evicted
     }
 
+    /// Retrieves up to the given number of elements from the db and puts them in the queue.
+    fn retrieve(
+        queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
+        db: &HeapDB<T>,
+        max_db_priority: &AtomicI32,
+        num: usize,
+    ) -> Result<(), String> {
+        let start = Instant::now();
+        queue.extend(db.retrieve(num)?.into_iter().map(|el| {
+            let score = el.score(db.scale_factor());
+            (el, score)
+        }));
+        println!("Retrieve from db took {:?}", start.elapsed());
+        // the max priority in the db is probably now the min of this queue
+        // or thereabouts
+        max_db_priority.store(*queue.peek_min().unwrap().1, Ordering::Release);
+        Ok(())
+    }
+
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
         while queue.len() > 0 || self.db.len() > 0 {
-            while let Some((ctx, prio)) = queue.pop_max() {
+            while let Some((_, &prio)) = queue.peek_max() {
+                let db_prio = self.max_db_priority.load(Ordering::Acquire);
+                // Only when we go a decent bit over
+                if prio < db_prio * 101 / 100 {
+                    let start = Instant::now();
+                    let cap = self.capacity.load(Ordering::Acquire);
+                    // Get a decent amount to refill
+                    let num_to_restore = std::cmp::min(self.min_reshuffle, (cap - queue.len()) / 2);
+                    let len = queue.len();
+                    if cap - len < num_to_restore {
+                        let evicted = Self::evict_until(
+                            &mut queue,
+                            prio,
+                            self.min_evictions,
+                            len + 2 * num_to_restore - cap,
+                        );
+
+                        let best = evicted
+                            .iter()
+                            .map(|ctx| ctx.score(self.db.scale_factor()))
+                            .max()
+                            .unwrap();
+                        self.db.extend(evicted, true)?;
+                        self.max_db_priority.fetch_max(best, Ordering::Release);
+                    };
+
+                    Self::retrieve(&mut queue, &self.db, &self.max_db_priority, num_to_restore)?;
+                    println!("Reshuffle during pop took {:?}", start.elapsed());
+                    assert!(!queue.is_empty(), "Queue should have data after retrieve");
+                }
+                let (ctx, prio) = queue.pop_max().unwrap();
                 debug_assert!(
                     prio == ctx.score(self.db.scale_factor()),
                     "priority {} didn't match score {}",
@@ -486,19 +542,12 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 return Ok(Some(ctx));
             }
             // Retrieve some from db
-            queue.extend(
-                self.db
-                    .retrieve(self.capacity.load(Ordering::Acquire) / 2)?
-                    .into_iter()
-                    .map(|el| {
-                        let score = el.score(self.db.scale_factor());
-                        (el, score)
-                    }),
-            );
-            // the max priority in the db is probably now the min of this queue
-            // or thereabouts
-            self.max_db_priority
-                .store(*queue.peek_min().unwrap().1, Ordering::Release);
+            Self::retrieve(
+                &mut queue,
+                &self.db,
+                &self.max_db_priority,
+                self.capacity.load(Ordering::Acquire) / 2,
+            )?;
         }
         Ok(None)
     }
@@ -545,7 +594,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             let cap = self.capacity.load(Ordering::Acquire);
             let len = queue.len();
             if len + vec.len() > cap {
-                let max_evictions = len / 2;
+                let max_evictions = (len / 4) * 3;
                 let priority = vec.iter().max_by_key(|(_, p)| p).unwrap().1;
                 evicted = Some(Self::evict_until(
                     &mut queue,

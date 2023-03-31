@@ -324,7 +324,8 @@ where
         }
     };
 
-    let queue = RocksBackedQueue::new(".db", max_time + max_time / 10, 500_000, 100).unwrap();
+    let queue =
+        RocksBackedQueue::new(".db", max_time + max_time / 10, 400_000, 100, 100_000).unwrap();
     queue.push(startctx.clone()).unwrap();
     queue.push(clean_ctx).unwrap();
     println!("Max time to consider is now: {}ms", queue.max_time());
@@ -368,10 +369,7 @@ where
                 queue.set_max_time(solutions.best());
             }
             if iters % 1_000_000 == 0 {
-                if iters == 1_000_000 {
-                    //queue.print_graphs().unwrap();
-                    println!("{}", pc.report(true));
-                }
+                queue.print_queue_histogram();
             }
             let (iskips, pskips, dskips, dpskips) = queue.skip_stats();
             let max_time = queue.max_time();

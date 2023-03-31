@@ -132,8 +132,8 @@ where
         // For now, the db should be deleted.
         opts.set_error_if_exists(true);
         // change compression options?
-        // 4 write buffers at 256 MiB = 1 GiB
-        opts.set_write_buffer_size(256 * 1024 * 1024);
+        // 4 write buffers at 512 MiB = 2 GiB
+        opts.set_write_buffer_size(512 * 1024 * 1024);
         opts.set_max_write_buffer_number(4);
         opts.increase_parallelism(2);
 
@@ -152,7 +152,7 @@ where
         path.push("states");
         path2.push("seen");
 
-        // 1 + 3 = 4 GiB roughly for this db
+        // 2 + 3 = 5 GiB roughly for this db
         let db = DB::open_cf(&opts, &path, vec!["default"])?;
 
         let cache3 = Cache::new_lru_cache(2 * 1024 * 1024 * 1024)?;
@@ -163,7 +163,7 @@ where
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_merge_operator_associative("min", min_merge);
 
-        // 1 GiB blocks + 2 GiB row cache = 3 GiB for this one?
+        // 2 GiB blocks + 2 GiB row cache = 4 GiB for this one?
         let seendb = DB::open(&opts2, &path2)?;
 
         let mut write_opts = WriteOptions::default();
@@ -182,7 +182,7 @@ where
             },
             write_opts,
             max_time: initial_max_time.into(),
-            scale_factor: initial_max_time / 16284,
+            scale_factor: initial_max_time / 18000,
             seq: 0.into(),
             size: 0.into(),
             seen: 0.into(),
@@ -488,6 +488,8 @@ where
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
+        min.reserve(16);
+        max.reserve(16);
         min.copy_from_slice(&key);
         max.copy_from_slice(&key);
 
