@@ -16,7 +16,20 @@ use std::fmt;
 use std::ops::Range;
 use std::option::Option;
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum RegionId {
     Deku_Tree,
     Kak,
@@ -45,7 +58,20 @@ impl std::str::FromStr for RegionId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum AreaId {
     Deku_Tree__Back_Room,
     Deku_Tree__Basement_1,
@@ -131,7 +157,21 @@ impl std::str::FromStr for AreaId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum SpotId {
     #[default]
     None,
@@ -379,7 +419,20 @@ impl std::str::FromStr for SpotId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum LocationId {
     Deku_Tree__Back_Room__Northwest__Break_Wall,
     Deku_Tree__Back_Room__Northwest__Burn_Web,
@@ -692,7 +745,20 @@ impl std::str::FromStr for LocationId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum ExitId {
     Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1,
     Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1,
@@ -1172,7 +1238,20 @@ impl std::str::FromStr for ExitId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum ActionId {
     Deku_Tree__Compass_Room__Entry__Light_Torch,
     Global__Change_Time,
@@ -1216,7 +1295,21 @@ impl std::str::FromStr for ActionId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum, Default)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum CanonId {
     #[default]
     None,
@@ -1248,7 +1341,20 @@ impl std::str::FromStr for CanonId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, enum_map::Enum)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    enum_map::Enum,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum WarpId {
     Minuet,
     Save,
@@ -1274,7 +1380,20 @@ impl std::str::FromStr for WarpId {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default)]
+#[derive(
+    Debug,
+    PartialEq,
+    Eq,
+    Copy,
+    Clone,
+    Hash,
+    Ord,
+    PartialOrd,
+    Default,
+    serde_repr::Serialize_repr,
+    serde_repr::Deserialize_repr,
+)]
+#[repr(u8)]
 pub enum Objective {
     #[default]
     Gohma,

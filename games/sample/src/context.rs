@@ -11,10 +11,25 @@ use crate::rules;
 use analyzer::context;
 use analyzer::world::World;
 use enum_map::EnumMap;
+use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 pub mod enums {
     use std::fmt;
-    #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd, Default)]
+    #[derive(
+        Debug,
+        PartialEq,
+        Eq,
+        Copy,
+        Clone,
+        Hash,
+        Ord,
+        PartialOrd,
+        Default,
+        serde_repr::Serialize_repr,
+        serde_repr::Deserialize_repr,
+    )]
+    #[repr(u8)]
     pub enum Tod {
         #[default]
         Day,
@@ -50,9 +65,10 @@ pub mod data {
 
 pub mod flags {
     use bitflags::bitflags;
+    use serde::{self, Deserialize, Serialize};
 
     bitflags! {
-        #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
+        #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits1 : u32 {
             const CHILD = 1 << 0;
             const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 1 << 1;
@@ -94,7 +110,7 @@ pub mod flags {
         }
     }
     bitflags! {
-        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u16 {
             const IRON_BOOTS = 1 << 0;
             const KOKIRI_EMERALD = 1 << 1;
@@ -114,7 +130,8 @@ pub mod flags {
     }
 }
 
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash)]
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize_repr, Deserialize_repr)]
+#[repr(u8)]
 pub enum Status {
     #[default]
     None,
@@ -122,7 +139,7 @@ pub enum Status {
     Skipped,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Context {
     // context vars
     pub position: SpotId,
@@ -139,6 +156,7 @@ pub struct Context {
     pub cbits2: flags::ContextBits2,
     // other
     pub status: EnumMap<LocationId, Status>,
+
     visits: i32,
     skips: i32,
 }
