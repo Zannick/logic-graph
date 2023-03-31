@@ -1,7 +1,7 @@
 use crate::access::*;
 use crate::context::*;
-use crate::db::HeapDB;
 use crate::greedy::*;
+use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
@@ -174,7 +174,7 @@ where
 fn depth_step<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-    db: &HeapDB<T>,
+    queue: &RocksBackedQueue<T>,
     solutions: &mut SolutionCollector<T>,
     startctx: &ContextWrapper<T>,
     iters: i32,
@@ -188,14 +188,14 @@ where
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
     let mut next = Vec::new();
-    let mut min_score = Some(ctx.score(db.scale_factor()));
-    for ctx in classic_step(world, ctx, db.max_time()) {
+    let mut min_score = Some(ctx.score(queue.scale_factor()));
+    for ctx in classic_step(world, ctx, queue.max_time()) {
         if world.won(ctx.get()) {
-            handle_solution(ctx, db, solutions, world, &startctx, iters, mode);
+            handle_solution(ctx, queue, solutions, world, &startctx, iters, mode);
             min_score = None;
         } else {
             if let Some(c) = min_score {
-                min_score = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
+                min_score = Some(std::cmp::max(c, ctx.score(queue.scale_factor())));
             }
             next.push(ctx);
         }
@@ -203,29 +203,29 @@ where
     d -= 1;
     next.sort_unstable_by_key(|c| (c.get().progress(), -c.elapsed()));
     while let Some(ctx) = next.pop() {
-        db.extend(next).unwrap();
+        queue.extend(next).unwrap();
         next = Vec::new();
-        for ctx in classic_step(world, ctx, db.max_time()) {
+        for ctx in classic_step(world, ctx, queue.max_time()) {
             if world.won(ctx.get()) {
-                handle_solution(ctx, db, solutions, world, &startctx, iters, mode);
+                handle_solution(ctx, queue, solutions, world, &startctx, iters, mode);
                 min_score = None;
             } else {
                 if let Some(c) = min_score {
-                    min_score = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
+                    min_score = Some(std::cmp::max(c, ctx.score(queue.scale_factor())));
                 }
                 next.push(ctx);
             }
         }
         d -= 1;
         if d == 0 {
-            db.extend(next).unwrap();
+            queue.extend(next).unwrap();
             break;
         }
     }
     min_score
 }
 
-fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, db: &HeapDB<T>) -> SearchMode
+fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, queue: &RocksBackedQueue<T>) -> SearchMode
 where
     T: Ctx,
 {
@@ -233,7 +233,7 @@ where
         SearchMode::Classic
     } else if iters % 2048 != 0 {
         SearchMode::Classic
-    } else if ctx.elapsed() * 3 < db.max_time() {
+    } else if ctx.elapsed() * 3 < queue.max_time() {
         SearchMode::Depth(4)
     } else if ctx.get().progress() > 60 {
         SearchMode::Greedy
@@ -244,7 +244,7 @@ where
 
 fn handle_solution<T, W, L, E>(
     ctx: ContextWrapper<T>,
-    db: &HeapDB<T>,
+    queue: &RocksBackedQueue<T>,
     solutions: &mut SolutionCollector<T>,
     world: &W,
     startctx: &ContextWrapper<T>,
@@ -257,11 +257,11 @@ where
     L: Location<Context = T>,
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
-    let old_time = db.max_time();
+    let old_time = queue.max_time();
     if iters > 10_000_000 && solutions.unique() > 4 {
-        db.set_max_time(ctx.elapsed());
+        queue.set_max_time(ctx.elapsed());
     } else {
-        db.set_lenient_max_time(ctx.elapsed());
+        queue.set_lenient_max_time(ctx.elapsed());
     }
 
     if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
@@ -272,13 +272,13 @@ where
             ctx.elapsed(),
             old_time
         );
-        println!("Max time to consider is now: {}ms", db.max_time());
+        println!("Max time to consider is now: {}ms", queue.max_time());
     }
 
     // If there were locations we skipped mid-route, skip them from the start,
     // in case that changes the routing.
     let newctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &ctx));
-    db.push(newctx).unwrap();
+    queue.push(newctx).unwrap();
 
     solutions.insert(ctx)
 }
@@ -323,39 +323,37 @@ where
             //heap.push(ctx);
         }
     };
-    //
-    let db = crate::db::HeapDB::<T>::open(".db", max_time + max_time / 10).unwrap();
-    db.push(startctx.clone()).unwrap();
-    db.push(clean_ctx).unwrap();
-    println!("Max time to consider is now: {}ms", db.max_time());
+
+    let queue = RocksBackedQueue::new(".db", max_time + max_time / 10, 10_000_000, 100).unwrap();
+    queue.push(startctx.clone()).unwrap();
+    queue.push(clean_ctx).unwrap();
+    println!("Max time to consider is now: {}ms", queue.max_time());
     let mut iters = 0;
     let mut deadends = 0;
     let pc = rocksdb::perf::PerfContext::default();
 
     let mut start = Instant::now();
-    let mut score_hint = None;
-    while let Ok(Some(ctx)) = db.pop(score_hint) {
-        score_hint = Some(ctx.score(db.scale_factor()));
+    while let Ok(Some(ctx)) = queue.pop() {
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
-        let heapsize_adjustment: i32 = (db.len() / 32).try_into().unwrap();
+        let heapsize_adjustment: i32 = (queue.len() / 32).try_into().unwrap();
         let solutions_adjustment: i32 = solutions.len().try_into().unwrap();
-        let score_cutoff: i32 = heapsize_adjustment - db.max_time()
+        let score_cutoff: i32 = heapsize_adjustment - queue.max_time()
             + solutions_adjustment
             + if iters > 10_000_000 {
                 (iters - 10_000_000) / 1_024
             } else {
                 0
             };
-        if ctx.score(db.scale_factor()) < score_cutoff {
+        if ctx.score(queue.scale_factor()) < score_cutoff {
             println!(
                 "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
-                ctx.score(db.scale_factor()),
+                ctx.score(queue.scale_factor()),
                 ctx.elapsed(),
                 ctx.penalty(),
-                db.scale_factor(),
-                db.max_time(),
-                ctx.info(db.scale_factor())
+                queue.scale_factor(),
+                queue.max_time(),
+                ctx.info(queue.scale_factor())
             );
             break;
         }
@@ -365,30 +363,27 @@ where
         }
 
         iters += 1;
-        if iters % 100 == 0 {
+        if iters % 1000 == 0 {
             println!(
                 "Pop {} took {:?}: size={} stats={:?}",
                 iters,
                 start.elapsed(),
-                db.len(),
-                db.skip_stats()
+                queue.len(),
+                queue.skip_stats()
             );
-        }
-        if iters == 50000 {
-            println!("{}", pc.report(true));
-            break;
         }
         if iters % 10000 == 0 {
             if iters > 10_000_000 && solutions.unique() > 4 {
-                db.set_max_time(solutions.best());
+                queue.set_max_time(solutions.best());
             }
             if iters % 1_000_000 == 0 {
                 if iters == 1_000_000 {
-                    db.print_graphs().unwrap();
+                    //queue.print_graphs().unwrap();
+                    println!("{}", pc.report(true));
                 }
             }
-            let (iskips, pskips, dskips, dpskips) = db.skip_stats();
-            let max_time = db.max_time();
+            let (iskips, pskips, dskips, dpskips) = queue.skip_stats();
+            let max_time = queue.max_time();
             println!(
                 "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}) ---\n\
                 Heap stats: count={}; seen={}; current limit: {}ms, scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
@@ -398,104 +393,104 @@ where
                 solutions.unique(),
                 deadends,
                 heapsize_adjustment - max_time,
-                db.len(),
-                db.seen(),
+                queue.len(),
+                queue.seen(),
                 max_time,
-                db.scale_factor(),
+                queue.scale_factor(),
                 iskips,
                 dskips,
                 pskips,
                 dpskips,
-                ctx.info(db.scale_factor())
+                ctx.info(queue.scale_factor())
             );
         }
 
-        let mode = choose_mode(iters, &ctx, &db);
+        let mode = choose_mode(iters, &ctx, &queue);
         match mode {
             SearchMode::Depth(d) if d > 1 => {
-                score_hint = depth_step(world, ctx, &db, &mut solutions, &startctx, iters, mode, d);
-            }
-            SearchMode::Greedy => {
-                if let Ok(win) = greedy_search(world, &ctx, db.max_time()) {
-                    if win.elapsed() <= db.max_time() {
-                        handle_solution(win, &db, &mut solutions, world, &startctx, iters, mode);
-                        score_hint = None;
-                    }
-                }
-                let next = classic_step(world, ctx, db.max_time())
-                    .into_iter()
-                    .filter_map(|ctx| {
-                        if world.won(ctx.get()) {
-                            handle_solution(
-                                ctx,
-                                &db,
-                                &mut solutions,
-                                world,
-                                &startctx,
-                                iters,
-                                SearchMode::Classic,
-                            );
-                            score_hint = None;
-                            None
-                        } else {
-                            if let Some(c) = score_hint {
-                                score_hint = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
-                            }
-                            Some(ctx)
-                        }
-                    });
-                db.extend(next).unwrap();
-            }
-            SearchMode::PickDepth(d) if d > 1 => {
-                let mut this_round = vec![ctx];
-                while let Some(c) = db.pop(score_hint).unwrap() {
-                    this_round.push(c);
-                    if this_round.len() > 9 {
-                        break;
-                    }
-                }
-                this_round.sort_unstable_by_key(|c| c.elapsed() - c.penalty());
-                score_hint = depth_step(
+                depth_step(
                     world,
-                    this_round.pop().unwrap(),
-                    &db,
+                    ctx,
+                    &queue,
                     &mut solutions,
                     &startctx,
                     iters,
                     mode,
                     d,
                 );
-                db.extend(this_round).unwrap();
             }
-            _ => {
-                let next = classic_step(world, ctx, db.max_time())
+            SearchMode::Greedy => {
+                if let Ok(win) = greedy_search(world, &ctx, queue.max_time()) {
+                    if win.elapsed() <= queue.max_time() {
+                        handle_solution(win, &queue, &mut solutions, world, &startctx, iters, mode);
+                    }
+                }
+                let next = classic_step(world, ctx, queue.max_time())
                     .into_iter()
                     .filter_map(|ctx| {
                         if world.won(ctx.get()) {
                             handle_solution(
                                 ctx,
-                                &db,
+                                &queue,
                                 &mut solutions,
                                 world,
                                 &startctx,
                                 iters,
                                 SearchMode::Classic,
                             );
-                            score_hint = None;
                             None
                         } else {
-                            if let Some(c) = score_hint {
-                                score_hint = Some(std::cmp::max(c, ctx.score(db.scale_factor())));
-                            }
                             Some(ctx)
                         }
                     });
-                db.extend(next).unwrap();
+                queue.extend(next).unwrap();
+            }
+            SearchMode::PickDepth(d) if d > 1 => {
+                let mut this_round = vec![ctx];
+                while let Some(c) = queue.pop().unwrap() {
+                    this_round.push(c);
+                    if this_round.len() > 9 {
+                        break;
+                    }
+                }
+                this_round.sort_unstable_by_key(|c| c.elapsed() - c.penalty());
+                depth_step(
+                    world,
+                    this_round.pop().unwrap(),
+                    &queue,
+                    &mut solutions,
+                    &startctx,
+                    iters,
+                    mode,
+                    d,
+                );
+                queue.extend(this_round).unwrap();
+            }
+            _ => {
+                let next = classic_step(world, ctx, queue.max_time())
+                    .into_iter()
+                    .filter_map(|ctx| {
+                        if world.won(ctx.get()) {
+                            handle_solution(
+                                ctx,
+                                &queue,
+                                &mut solutions,
+                                world,
+                                &startctx,
+                                iters,
+                                SearchMode::Classic,
+                            );
+                            None
+                        } else {
+                            Some(ctx)
+                        }
+                    });
+                queue.extend(next).unwrap();
             }
         }
         start = Instant::now();
     }
-    let (iskips, pskips, dskips, dpskips) = db.skip_stats();
+    let (iskips, pskips, dskips, dpskips) = queue.skip_stats();
     println!(
         "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops",
         iters, deadends, iskips, dskips, pskips, dpskips

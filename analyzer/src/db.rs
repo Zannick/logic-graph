@@ -556,9 +556,6 @@ where
         Ok(tmp.into_iter().map(|(el, _)| el).collect())
     }
 
-    /// Stores the underlying Ctx in the seen db with the best known elapsed time,
-    /// and returns whether this context had that best time.
-    /// A `false` value means the state should be skipped.
     fn remember(&self, el: &ContextWrapper<T>, skip_count: &AtomicUsize) -> Result<bool, Error> {
         let seen_key = self.get_seen_key(el.get());
 
@@ -581,13 +578,66 @@ where
         }
         Ok(true)
     }
-
+    /// Stores the underlying Ctx in the seen db with the best known elapsed time,
+    /// and returns whether this context had that best time.
+    /// A `false` value means the state should be skipped.
     pub fn remember_push(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
         self.remember(el, &self.dup_iskips)
     }
 
+    /// Stores the underlying Ctx in the seen db with the best known elapsed time,
+    /// and returns whether this context had that best time.
+    /// A `false` value means the state should be skipped.
     pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
         self.remember(el, &self.dup_pskips)
+    }
+
+    /// Stores the underlying Ctx entries in the seen db with the respective best known elapsed times,
+    /// and returns whether each context had that best time.
+    /// A `false` value for a context means the state should be skipped.
+    pub fn remember_which(&self, vec: &Vec<ContextWrapper<T>>) -> Result<Vec<bool>, Error> {
+        let mut seen_batch = WriteBatchWithTransaction::<false>::default();
+        let mut dups = 0;
+
+        let seeing: Vec<_> = vec
+            .iter()
+            .map(|el| {
+                let seen_key = self.get_seen_key(el.get());
+                (el, seen_key)
+            })
+            .collect();
+
+        let seen_values = self.get_seen_values(seeing.iter().map(|(_, k)| k))?;
+
+        let mut res = Vec::with_capacity(vec.len());
+
+        for ((el, seen_key), seen_val) in seeing.into_iter().zip(seen_values.into_iter()) {
+            let should_write = match seen_val {
+                Some(stored) => {
+                    if stored < el.elapsed() {
+                        dups += 1;
+                        res.push(false);
+                        continue;
+                    } else {
+                        res.push(true);
+                    }
+                    stored > el.elapsed()
+                }
+                None => {
+                    res.push(true);
+                    true
+                }
+            };
+            if should_write {
+                seen_batch.merge(&seen_key, el.elapsed().to_be_bytes());
+            }
+        }
+        let new_seen = seen_batch.len();
+        self.seendb.write_opt(seen_batch, &self.write_opts)?;
+
+        self.dup_iskips.fetch_add(dups, Ordering::Release);
+        self.seen.fetch_add(new_seen, Ordering::Release);
+        Ok(res)
     }
 
     pub fn print_graphs(&self) -> Result<(), Error> {

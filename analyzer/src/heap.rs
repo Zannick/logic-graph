@@ -339,6 +339,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
         self.queue.lock().unwrap().len() + self.db.len()
     }
 
+    pub fn seen(&self) -> usize {
+        self.db.seen()
+    }
+
     /// Returns whether the underlying queue and db are actually empty.
     /// Even if this returns false, attempting to peek or pop may produce None.
     pub fn is_empty(&self) -> bool {
@@ -357,7 +361,11 @@ impl<T: Ctx> RocksBackedQueue<T> {
         self.db.set_lenient_max_time(max_time);
     }
 
-    /// Pushes an element into the heap.
+    pub fn scale_factor(&self) -> i32 {
+        self.db.scale_factor()
+    }
+
+    /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
     pub fn push(&self, el: ContextWrapper<T>) -> Result<(), String> {
@@ -389,7 +397,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                         priority,
                         self.min_evictions,
                         max_evictions,
-                    )?);
+                    ));
                     queue.push(el, priority);
                 }
             } else {
@@ -414,7 +422,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         priority: i32,
         min_evictions: usize,
         max_evictions: usize,
-    ) -> Result<Vec<ContextWrapper<T>>, String> {
+    ) -> Vec<ContextWrapper<T>> {
         let mut evicted = Vec::new();
         while evicted.len() < max_evictions {
             if let Some((_, &prio)) = queue.peek_min() {
@@ -425,7 +433,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             }
             break;
         }
-        Ok(evicted)
+        evicted
     }
 
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
@@ -455,7 +463,66 @@ impl<T: Ctx> RocksBackedQueue<T> {
         Ok(None)
     }
 
-    pub fn stats(&self) -> (usize, usize, usize, usize) {
+    /// Adds all the given elements to the queue, except for any
+    /// elements with elapsed time greater than the allowed maximum
+    /// or having been seen before with a smaller elapsed time.
+    pub fn extend<I>(&self, iter: I) -> Result<(), String>
+    where
+        I: IntoIterator<Item = ContextWrapper<T>>,
+    {
+        let mut iskips = 0;
+        let vec: Vec<ContextWrapper<T>> = iter
+            .into_iter()
+            .filter(|el| {
+                if el.elapsed() > self.db.max_time() {
+                    iskips += 1;
+                    false
+                } else {
+                    true
+                }
+            })
+            .collect();
+
+        let dups = self.db.remember_which(&vec)?;
+        let vec: Vec<(ContextWrapper<T>, i32)> = vec
+            .into_iter()
+            .zip(dups.into_iter())
+            .filter_map(|(el, keep)| {
+                if keep {
+                    let priority = el.score(self.db.scale_factor());
+                    Some((el, priority))
+                } else {
+                    None
+                }
+            })
+            .collect();
+
+        let mut evicted = None;
+        {
+            let mut queue = self.queue.lock().unwrap();
+            let cap = self.capacity.load(Ordering::Acquire);
+            let len = queue.len();
+            if len + vec.len() > cap {
+                let max_evictions = len / 2;
+                let priority = vec.iter().min_by_key(|(_, p)| p).unwrap().1;
+                evicted = Some(Self::evict_until(
+                    &mut queue,
+                    priority,
+                    std::cmp::max(len + vec.len() - cap, self.min_evictions),
+                    max_evictions,
+                ));
+            }
+            queue.extend(vec);
+        }
+        // Without the lock (but still blocking the extend op in this thread)
+        if let Some(ev) = evicted {
+            self.db.extend(ev)?;
+        }
+
+        Ok(())
+    }
+
+    pub fn skip_stats(&self) -> (usize, usize, usize, usize) {
         let (iskips, pskips, dup_iskips, dup_pskips) = self.db.skip_stats();
         (
             self.iskips.load(Ordering::Acquire) + iskips,
