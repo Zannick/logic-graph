@@ -49,7 +49,7 @@ where
     let mut ctx_list = vec![ctx];
     ctx_list[0].penalize(penalty);
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
-    if locs.is_empty() && exit == None {
+    if locs.is_empty() && exit.is_none() {
         return Vec::new();
     }
     locs.sort_unstable_by_key(|loc| loc.time());
@@ -80,7 +80,7 @@ where
         }
     }
 
-    if let Some((l, e)) = exit {
+    if let Some(ExitWithLoc(l, e)) = exit {
         let exit = world.get_exit(e);
         let loc = world.get_location(l);
         for ctx in ctx_list.iter_mut() {
@@ -191,7 +191,7 @@ where
     let mut min_score = Some(ctx.score(queue.scale_factor()));
     for ctx in classic_step(world, ctx, queue.max_time()) {
         if world.won(ctx.get()) {
-            handle_solution(ctx, queue, solutions, world, &startctx, iters, mode);
+            handle_solution(ctx, queue, solutions, world, startctx, iters, mode);
             min_score = None;
         } else {
             if let Some(c) = min_score {
@@ -207,7 +207,7 @@ where
         next = Vec::new();
         for ctx in classic_step(world, ctx, queue.max_time()) {
             if world.won(ctx.get()) {
-                handle_solution(ctx, queue, solutions, world, &startctx, iters, mode);
+                handle_solution(ctx, queue, solutions, world, startctx, iters, mode);
                 min_score = None;
             } else {
                 if let Some(c) = min_score {
@@ -229,9 +229,7 @@ fn choose_mode<T>(iters: i32, ctx: &ContextWrapper<T>, queue: &RocksBackedQueue<
 where
     T: Ctx,
 {
-    if iters < 1_000_000 {
-        SearchMode::Classic
-    } else if iters % 2048 != 0 {
+    if iters < 1_000_000 || iters % 2048 != 0 {
         SearchMode::Classic
     } else if ctx.elapsed() * 3 < queue.max_time() {
         SearchMode::Depth(4)
@@ -264,7 +262,7 @@ where
         queue.set_lenient_max_time(ctx.elapsed());
     }
 
-    if solutions.len() == 0 || ctx.elapsed() < solutions.best() {
+    if solutions.is_empty() || ctx.elapsed() < solutions.best() {
         println!(
             "{:?} mode found new shortest winning path after {} rounds: estimated {}ms (heap max was: {}ms)",
             mode,

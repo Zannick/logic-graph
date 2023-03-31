@@ -42,6 +42,12 @@ pub struct LimitedHeap<T: Ctx> {
     last_clean: i32,
 }
 
+impl<T: Ctx> Default for LimitedHeap<T> {
+    fn default() -> LimitedHeap<T> {
+        LimitedHeap::new()
+    }
+}
+
 impl<T: Ctx> LimitedHeap<T> {
     pub fn new() -> LimitedHeap<T> {
         LimitedHeap {
@@ -494,7 +500,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
 
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
-        while queue.len() > 0 || self.db.len() > 0 {
+        while !queue.is_empty() || !self.db.is_empty() {
             while let Some((_, &prio)) = queue.peek_max() {
                 let db_prio = self.max_db_priority.load(Ordering::Acquire);
                 // Only when we go a decent bit over

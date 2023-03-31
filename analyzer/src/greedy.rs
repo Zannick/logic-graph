@@ -45,11 +45,9 @@ where
             {
                 if spot_has_locations(world, nextctx.get()) {
                     useful_spots.push(nextctx);
-                } else {
-                    if !seen.contains(nextctx.get()) {
-                        seen.insert(nextctx.get().clone());
-                        to_process.push(nextctx);
-                    }
+                } else if !seen.contains(nextctx.get()) {
+                    seen.insert(nextctx.get().clone());
+                    to_process.push(nextctx);
                 }
             }
         }
@@ -76,11 +74,9 @@ where
                         } else {
                             useful_spots.push(nextctx);
                         }
-                    } else {
-                        if !seen.contains(nextctx.get()) {
-                            seen.insert(nextctx.get().clone());
-                            next_process.push(nextctx);
-                        }
+                    } else if !seen.contains(nextctx.get()) {
+                        seen.insert(nextctx.get().clone());
+                        next_process.push(nextctx);
                     }
                 }
             }
@@ -131,7 +127,7 @@ where
         }
     }
 
-    if let Some((l, e)) = exit {
+    if let Some(ExitWithLoc(l, e)) = exit {
         if ctx.get().todo(l) {
             let exit = world.get_exit(e);
             let loc = world.get_location(l);

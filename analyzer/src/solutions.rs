@@ -1,5 +1,5 @@
 use crate::context::*;
-use crate::{CommonHasher, new_hashmap};
+use crate::{new_hashmap, CommonHasher};
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
@@ -9,8 +9,8 @@ where
     T: Eq,
     Iter: Iterator<Item = T>,
 {
-    'eq: while let Some(n) = subset.next() {
-        while let Some(v) = superset.next() {
+    'eq: for n in subset.by_ref() {
+        for v in superset.by_ref() {
             if n == v {
                 continue 'eq;
             }
@@ -54,6 +54,10 @@ where
         self.count
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.count == 0
+    }
+
     pub fn unique(&self) -> usize {
         self.map.len()
     }
@@ -67,10 +71,7 @@ where
     pub fn insert(&mut self, ctx: ContextWrapper<T>) -> bool {
         let loc_history: Vec<HistoryAlias<T>> = ctx
             .history_rev()
-            .filter(|h| match h {
-                History::Get(_, _) | History::MoveGet(_, _) => true,
-                _ => false,
-            })
+            .filter(|h| matches!(h, History::Get(_, _) | History::MoveGet(_, _)))
             .collect();
         if self.count == 0 || ctx.elapsed() < self.best {
             self.best = ctx.elapsed();

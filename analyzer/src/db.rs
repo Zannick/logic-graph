@@ -1,18 +1,15 @@
 //! Wrapper around rocksdb with logic-graph specific features.
-#![allow(unused)]
 extern crate rocksdb;
 
 use crate::context::*;
-use crate::CommonHasher;
-use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
-    BlockBasedOptions, Cache, CuckooTableOptions, IteratorMode, MemtableFactory, MergeOperands,
-    Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
+    BlockBasedOptions, Cache, CuckooTableOptions, IteratorMode, MergeOperands, Options,
+    ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::Serialize;
 use std::marker::PhantomData;
@@ -38,11 +35,11 @@ struct HeapDBOptions {
 pub struct HeapDB<T> {
     db: DB,
     seendb: DB,
-    cache_uncompressed: Cache,
-    cache_cmprsd: Cache,
-    row_cache: Cache,
-    opts: HeapDBOptions,
-    seen_opts: HeapDBOptions,
+    _cache_uncompressed: Cache,
+    _cache_cmprsd: Cache,
+    _row_cache: Cache,
+    _opts: HeapDBOptions,
+    _seen_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
     max_time: AtomicI32,
@@ -98,7 +95,7 @@ impl From<Error> for String {
 }
 
 fn min_merge(
-    new_key: &[u8],
+    _new_key: &[u8],
     existing_val: Option<&[u8]>,
     operands: &MergeOperands,
 ) -> Option<Vec<u8>> {
@@ -112,12 +109,13 @@ fn min_merge(
         } else {
             Some(res.into())
         }
-    } else if let Some(v) = existing_val {
-        Some(v.into())
     } else {
-        None
+        existing_val.map(|v| v.into())
     }
 }
+
+const MB: usize = 1 << 20;
+const GB: usize = 1 << 30;
 
 impl<T> HeapDB<T>
 where
@@ -133,7 +131,7 @@ where
         opts.set_error_if_exists(true);
         // change compression options?
         // 4 write buffers at 512 MiB = 2 GiB
-        opts.set_write_buffer_size(512 * 1024 * 1024);
+        opts.set_write_buffer_size(512 * MB);
         opts.set_max_write_buffer_number(4);
         opts.increase_parallelism(2);
 
@@ -141,8 +139,8 @@ where
 
         let mut block_opts = BlockBasedOptions::default();
         // blockdb caches = 3 GiB
-        let cache = Cache::new_lru_cache(2 * 1024 * 1024 * 1024)?;
-        let cache2 = Cache::new_lru_cache(1 * 1024 * 1024 * 1024)?;
+        let cache = Cache::new_lru_cache(2 * GB)?;
+        let cache2 = Cache::new_lru_cache(GB)?;
         block_opts.set_block_cache(&cache);
         block_opts.set_block_cache_compressed(&cache2);
         opts.set_block_based_table_factory(&block_opts);
@@ -155,7 +153,7 @@ where
         // 2 + 3 = 5 GiB roughly for this db
         let db = DB::open_cf(&opts, &path, vec!["default"])?;
 
-        let cache3 = Cache::new_lru_cache(2 * 1024 * 1024 * 1024)?;
+        let cache3 = Cache::new_lru_cache(2 * GB)?;
         opts2.set_row_cache(&cache3);
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
@@ -172,11 +170,11 @@ where
         Ok(HeapDB {
             db,
             seendb,
-            cache_uncompressed: cache,
-            cache_cmprsd: cache2,
-            row_cache: cache3,
-            opts: HeapDBOptions { opts, path },
-            seen_opts: HeapDBOptions {
+            _cache_uncompressed: cache,
+            _cache_cmprsd: cache2,
+            _row_cache: cache3,
+            _opts: HeapDBOptions { opts, path },
+            _seen_opts: HeapDBOptions {
                 opts: opts2,
                 path: path2,
             },
@@ -199,6 +197,10 @@ where
     /// Returns the number of elements in the heap (tracked separately from the db).
     pub fn len(&self) -> usize {
         self.size.load(Ordering::Acquire)
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.size.load(Ordering::Acquire) == 0
     }
 
     /// Returns the number of unique states we've seen so far (tracked separately from the db).
@@ -243,13 +245,13 @@ where
     /// a sequence number (8 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        key[0..4].copy_from_slice(&self.get_heap_prefix(el.score(self.scale_factor)));
+        key[0..4].copy_from_slice(&Self::get_heap_prefix(el.score(self.scale_factor)));
         key[4..8].copy_from_slice(&el.elapsed().to_be_bytes());
         key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
 
-    fn get_heap_prefix(&self, score: i32) -> [u8; 4] {
+    fn get_heap_prefix(score: i32) -> [u8; 4] {
         // Lexicographic ordering of signed ints looks like:
         // 0 ... MAX MIN ... -1
         // We want:
@@ -259,7 +261,7 @@ where
     }
 
     /// The key for a T (Ctx) in the seendb is... itself!
-    fn get_seen_key(&self, el: &T) -> Vec<u8> {
+    fn get_seen_key(el: &T) -> Vec<u8> {
         let mut key = Vec::with_capacity(std::mem::size_of::<T>());
         el.serialize(&mut Serializer::new(&mut key)).unwrap();
         key
@@ -267,18 +269,18 @@ where
 
     /// The value for a ContextWrapper<T> in the heap is... itself!
     /// Unfortunately this is serializing the T (Ctx) a second time if we already got the seen key.
-    fn get_heap_value(&self, el: &ContextWrapper<T>) -> Vec<u8> {
+    fn get_heap_value(el: &ContextWrapper<T>) -> Vec<u8> {
         let mut val = Vec::new();
         el.serialize(&mut Serializer::new(&mut val)).unwrap();
         val
     }
 
-    fn from_heap_value(&self, buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
+    fn get_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
         Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
 
     fn get_seen_value(&self, seen_key: &[u8]) -> Result<Option<i32>, Error> {
-        match self.seendb.get_pinned(&seen_key)? {
+        match self.seendb.get_pinned(seen_key)? {
             Some(slice) => {
                 if slice.len() != 4 {
                     return Err(Error {
@@ -340,7 +342,7 @@ where
             return Ok(());
         }
         let key = self.get_heap_key(&el);
-        let val = self.get_heap_value(&el);
+        let val = Self::get_heap_value(&el);
         //println!("Push {:?}: score={} elapsed={}", key, el.score(self.scale_factor), el.elapsed());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
@@ -354,11 +356,11 @@ where
         let mode = match score_hint {
             None => IteratorMode::Start,
             Some(score) => {
-                prefix = self.get_heap_prefix(score);
+                prefix = Self::get_heap_prefix(score);
                 IteratorMode::From(&prefix, rocksdb::Direction::Forward)
             }
         };
-        let mut iter = self.db.iterator_opt(mode, tail_opts);
+        let iter = self.db.iterator_opt(mode, tail_opts);
         for item in iter {
             let (key, value) = item?;
             let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
@@ -375,19 +377,18 @@ where
             if ndeletes % 20000 == 0 {
                 let start = Instant::now();
                 let max_deleted = self.delete.swap(0, Ordering::Acquire);
-                let _ = self
-                    .db
+                self.db
                     .compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
                 println!("Compacting took {:?}", start.elapsed());
             }
 
-            let el = self.from_heap_value(&value)?;
+            let el = Self::get_obj_from_heap_value(&value)?;
             if el.elapsed() > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
             }
 
-            let seen_key = self.get_seen_key(el.get());
+            let seen_key = Self::get_seen_key(el.get());
             if let Some(stored) = self.get_seen_value(&seen_key)? {
                 if el.elapsed() > stored {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
@@ -417,7 +418,7 @@ where
                 if el.elapsed() > max_time {
                     None
                 } else {
-                    let seen_key = self.get_seen_key(el.get());
+                    let seen_key = Self::get_seen_key(el.get());
                     Some((el, seen_key))
                 }
             })
@@ -447,7 +448,7 @@ where
                 seen_batch.merge(&seen_key, el.elapsed().to_be_bytes());
             }
             let key = self.get_heap_key(&el);
-            let val = self.get_heap_value(&el);
+            let val = Self::get_heap_value(&el);
             batch.put(key, val);
             //println!("Push-batch {:?}: score={} elapsed={}", key, el.score(self.scale_factor), el.elapsed());
         }
@@ -482,7 +483,7 @@ where
         let mut pskips = 0;
         let mut dup_pskips = 0;
 
-        let (key, value) = match iter.nth(0) {
+        let (key, value) = match iter.next() {
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
@@ -491,11 +492,11 @@ where
         min.copy_from_slice(&key);
         max.copy_from_slice(&key);
 
-        let el = self.from_heap_value(&value)?;
+        let el = Self::get_obj_from_heap_value(&value)?;
         if el.elapsed() > self.max_time() {
             pskips += 1;
         } else {
-            let seen_key = self.get_seen_key(el.get());
+            let seen_key = Self::get_seen_key(el.get());
             tmp.push((el, seen_key));
         }
 
@@ -505,14 +506,15 @@ where
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
                     max.copy_from_slice(&key);
+                    pops += 1;
 
-                    let el = self.from_heap_value(&value)?;
+                    let el = Self::get_obj_from_heap_value(&value)?;
                     if el.elapsed() > self.max_time() {
                         pskips += 1;
                         continue;
                     }
 
-                    let seen_key = self.get_seen_key(el.get());
+                    let seen_key = Self::get_seen_key(el.get());
                     tmp.push((el, seen_key));
                     if tmp.len() == res.len() - count {
                         break;
@@ -539,7 +541,7 @@ where
                     None => Some(el),
                 },
             ));
-            if (done) {
+            if done {
                 break;
             }
             tmp = Vec::with_capacity(count - res.len());
@@ -557,8 +559,7 @@ where
         if ndeletes % 20000 == 0 {
             let start = Instant::now();
             let max_deleted = self.delete.swap(0, Ordering::Acquire);
-            let _ = self
-                .db
+            self.db
                 .compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
             println!("Compacting took {:?}", start.elapsed());
         }
@@ -570,12 +571,12 @@ where
     }
 
     fn remember(&self, el: &ContextWrapper<T>, skip_count: &AtomicUsize) -> Result<bool, Error> {
-        let seen_key = self.get_seen_key(el.get());
+        let seen_key = Self::get_seen_key(el.get());
 
         let should_write = match self.get_seen_value(&seen_key)? {
             Some(stored) => {
                 if stored < el.elapsed() {
-                    self.dup_iskips.fetch_add(1, Ordering::Release);
+                    skip_count.fetch_add(1, Ordering::Release);
                     return Ok(false);
                 }
                 stored > el.elapsed()
@@ -586,7 +587,7 @@ where
         // but we don't have to write the value again as it's a maximum.
         if should_write {
             self.seendb
-                .merge_opt(&seen_key, el.elapsed().to_be_bytes(), &self.write_opts);
+                .merge_opt(&seen_key, el.elapsed().to_be_bytes(), &self.write_opts)?;
             self.seen.fetch_add(1, Ordering::Release);
         }
         Ok(true)
@@ -612,7 +613,7 @@ where
         let mut seen_batch = WriteBatchWithTransaction::<false>::default();
         let mut dups = 0;
 
-        let seeing: Vec<_> = vec.iter().map(|el| self.get_seen_key(el.get())).collect();
+        let seeing: Vec<_> = vec.iter().map(|el| Self::get_seen_key(el.get())).collect();
 
         let seen_values = self.get_seen_values(seeing.iter())?;
 
@@ -661,7 +662,7 @@ where
         let iter = self.db.iterator_opt(IteratorMode::Start, read_opts);
         for item in iter {
             let (_, value) = item?;
-            let el = self.from_heap_value(&value)?;
+            let el = Self::get_obj_from_heap_value(&value)?;
             times.push(el.elapsed().into());
             time_scores.push((el.elapsed().into(), el.score(self.scale_factor).into()));
         }

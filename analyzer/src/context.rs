@@ -142,6 +142,7 @@ pub type HistoryAlias<T> = History<
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 struct HistoryNode<I, S, L, E, A, Wp> {
     entry: History<I, S, L, E, A, Wp>,
+    #[allow(clippy::type_complexity)]
     prev: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
 
@@ -183,6 +184,7 @@ pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     penalty: i32,
     // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
     // or make a type for ContextWrapper to convert into
+    #[allow(clippy::type_complexity)]
     history: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
 
@@ -220,11 +222,7 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 
     pub fn last_step(&self) -> Option<HistoryAlias<T>> {
-        if let Some(node) = &self.history {
-            Some(node.entry)
-        } else {
-            None
-        }
+        self.history.as_ref().map(|node| node.entry)
     }
 
     pub fn elapse(&mut self, t: i32) {

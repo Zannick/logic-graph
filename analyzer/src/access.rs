@@ -62,7 +62,7 @@ fn expand<W, T, E, Wp>(
 {
     let movement_state = ctx.get().get_movement_state();
     for spot in world.get_area_spots(ctx.get().position()) {
-        if spot_map[*spot] == None {
+        if spot_map[*spot].is_none() {
             let local = ctx.get().local_travel_time(movement_state, *spot);
             if local < 0 {
                 // Can't move this way
@@ -81,7 +81,7 @@ fn expand<W, T, E, Wp>(
     }
 
     for exit in world.get_spot_exits(ctx.get().position()) {
-        if spot_map[exit.dest()] == None && exit.can_access(ctx.get()) {
+        if spot_map[exit.dest()].is_none() && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
             let elapsed = newctx.elapsed();
@@ -95,7 +95,7 @@ fn expand<W, T, E, Wp>(
     }
 
     for warp in world.get_warps() {
-        if spot_map[warp.dest(ctx.get())] == None && warp.can_access(ctx.get()) {
+        if spot_map[warp.dest(ctx.get())].is_none() && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
             let elapsed = newctx.elapsed();
@@ -138,7 +138,7 @@ where
     while let Some(Reverse(el)) = spot_heap.pop() {
         let spot_found = el.el;
         let pos = spot_found.get().position();
-        if spot_enum_map[pos] == None {
+        if spot_enum_map[pos].is_none() {
             spot_enum_map[pos] = Some(spot_found);
             expand(
                 world,
@@ -153,7 +153,7 @@ where
     spot_enum_map
 }
 
-pub fn all_visitable_locations<'a, W, T, L, E>(world: &'a W, ctx: &T) -> Vec<L::LocId>
+pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -173,10 +173,11 @@ where
         .collect()
 }
 
+pub struct ExitWithLoc<L: Location, E: Exit>(pub <L as Location>::LocId, pub <E as Exit>::ExitId);
 pub fn visitable_locations<'a, W, T, L, E>(
     world: &'a W,
     ctx: &T,
-) -> (Vec<&'a L>, Option<(<L as Location>::LocId, E::ExitId)>)
+) -> (Vec<&'a L>, Option<ExitWithLoc<L, E>>)
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -191,8 +192,8 @@ where
             if !ctx.todo(loc.id()) || !loc.can_access(ctx) {
                 return false;
             } else if let Some(e) = loc.exit_id() {
-                if exit == None {
-                    exit = Some((loc.id(), *e));
+                if exit.is_none() {
+                    exit = Some(ExitWithLoc(loc.id(), *e));
                 }
                 return false;
             }
@@ -276,7 +277,7 @@ where
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if spot_map[*spot] == None && world.are_spots_connected(ctx.get().position(), *spot) {
+            if spot_map[*spot].is_none() && world.are_spots_connected(ctx.get().position(), *spot) {
                 vec.push(format!(
                     "{} -> {}: movement not available",
                     ctx.get().position(),
@@ -286,13 +287,13 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.get().position()) {
-            if spot_map[exit.dest()] == None {
+            if spot_map[exit.dest()].is_none() {
                 vec.push(format!("{}: exit not usable", exit.id()));
             }
         }
 
         for warp in world.get_warps() {
-            if spot_map[warp.dest(ctx.get())] == None {
+            if spot_map[warp.dest(ctx.get())].is_none() {
                 vec.push(format!(
                     "{}: warp {} not usable",
                     ctx.get().position(),
