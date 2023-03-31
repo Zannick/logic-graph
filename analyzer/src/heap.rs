@@ -511,6 +511,8 @@ impl<T: Ctx> RocksBackedQueue<T> {
                             self.min_evictions,
                             len + 2 * num_to_restore - cap,
                         );
+                        println!("reshuffle:evict took {:?}", start.elapsed());
+                        let s2 = Instant::now();
 
                         let best = evicted
                             .iter()
@@ -519,10 +521,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
                             .unwrap();
                         self.db.extend(evicted, true)?;
                         self.max_db_priority.fetch_max(best, Ordering::Release);
+                        println!("reshuffle:evict to db took {:?}", s2.elapsed());
                     };
-
                     Self::retrieve(&mut queue, &self.db, &self.max_db_priority, num_to_restore)?;
-                    println!("Reshuffle during pop took {:?}", start.elapsed());
+                    println!("Reshuffle took total {:?}", start.elapsed());
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
                 }
                 let (ctx, prio) = queue.pop_max().unwrap();

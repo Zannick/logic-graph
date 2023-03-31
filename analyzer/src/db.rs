@@ -478,8 +478,6 @@ where
         tail_opts.set_tailing(true);
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
-        let mut min = Vec::new();
-        let mut max = Vec::new();
         let mut pops = 1;
         let mut pskips = 0;
         let mut dup_pskips = 0;
@@ -488,8 +486,8 @@ where
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
-        min.reserve(16);
-        max.reserve(16);
+        let mut min = vec![0; 16];
+        let mut max = vec![0; 16];
         min.copy_from_slice(&key);
         max.copy_from_slice(&key);
 
@@ -501,20 +499,26 @@ where
             tmp.push((el, seen_key));
         }
 
+        let mut done = false;
         while res.len() < count {
-            while let Some(item) = iter.next() {
-                let (key, value) = item.unwrap();
-                max.copy_from_slice(&key);
+            loop {
+                if let Some(item) = iter.next() {
+                    let (key, value) = item.unwrap();
+                    max.copy_from_slice(&key);
 
-                let el = self.from_heap_value(&value)?;
-                if el.elapsed() > self.max_time() {
-                    pskips += 1;
-                    continue;
-                }
+                    let el = self.from_heap_value(&value)?;
+                    if el.elapsed() > self.max_time() {
+                        pskips += 1;
+                        continue;
+                    }
 
-                let seen_key = self.get_seen_key(el.get());
-                tmp.push((el, seen_key));
-                if tmp.len() == res.len() - count {
+                    let seen_key = self.get_seen_key(el.get());
+                    tmp.push((el, seen_key));
+                    if tmp.len() == res.len() - count {
+                        break;
+                    }
+                } else {
+                    done = true;
                     break;
                 }
             }
@@ -535,6 +539,9 @@ where
                     None => Some(el),
                 },
             ));
+            if (done) {
+                break;
+            }
             tmp = Vec::with_capacity(count - res.len());
         }
         max.push(u8::MAX);
@@ -546,7 +553,7 @@ where
             .unwrap();
 
         // It's only one delete for the purposes of when do we need to compact.
-        let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire);
+        let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
         if ndeletes % 20000 == 0 {
             let start = Instant::now();
             let max_deleted = self.delete.swap(0, Ordering::Acquire);
@@ -559,7 +566,7 @@ where
         self.size.fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
         self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
-        Ok(tmp.into_iter().map(|(el, _)| el).collect())
+        Ok(res)
     }
 
     fn remember(&self, el: &ContextWrapper<T>, skip_count: &AtomicUsize) -> Result<bool, Error> {
