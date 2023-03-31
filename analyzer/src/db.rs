@@ -401,7 +401,7 @@ where
         Ok(None)
     }
 
-    pub fn extend<I>(&self, iter: I) -> Result<(), Error>
+    pub fn extend<I>(&self, iter: I, as_pop: bool) -> Result<(), Error>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
@@ -457,7 +457,11 @@ where
         self.seendb.write_opt(seen_batch, &self.write_opts)?;
 
         self.iskips.fetch_add(skips, Ordering::Release);
-        self.dup_iskips.fetch_add(dups, Ordering::Release);
+        if as_pop {
+            self.dup_pskips.fetch_add(dups, Ordering::Release);
+        } else {
+            self.dup_iskips.fetch_add(dups, Ordering::Release);
+        }
         self.size.fetch_add(new, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
 
@@ -599,19 +603,17 @@ where
         let mut seen_batch = WriteBatchWithTransaction::<false>::default();
         let mut dups = 0;
 
-        let seeing: Vec<_> = vec
-            .iter()
-            .map(|el| {
-                let seen_key = self.get_seen_key(el.get());
-                (el, seen_key)
-            })
-            .collect();
+        let seeing: Vec<_> = vec.iter().map(|el| self.get_seen_key(el.get())).collect();
 
-        let seen_values = self.get_seen_values(seeing.iter().map(|(_, k)| k))?;
+        let seen_values = self.get_seen_values(seeing.iter())?;
 
         let mut res = Vec::with_capacity(vec.len());
 
-        for ((el, seen_key), seen_val) in seeing.into_iter().zip(seen_values.into_iter()) {
+        for ((el, seen_key), seen_val) in vec
+            .iter()
+            .zip(seeing.into_iter())
+            .zip(seen_values.into_iter())
+        {
             let should_write = match seen_val {
                 Some(stored) => {
                     if stored < el.elapsed() {

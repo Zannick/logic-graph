@@ -14,15 +14,15 @@ use std::collections::BinaryHeap;
 use std::fmt::Debug;
 use std::num::NonZeroUsize;
 use std::path::Path;
-use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
 use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
-struct HeapElement<T: Ctx> {
+pub(crate) struct HeapElement<T: Ctx> {
     #[sort_by]
-    score: i32,
-    el: ContextWrapper<T>,
+    pub(crate) score: i32,
+    pub(crate) el: ContextWrapper<T>,
 }
 
 /// A wrapper around a BinaryHeap of ContextWrapper<T> wherein:
@@ -48,7 +48,7 @@ impl<T: Ctx> LimitedHeap<T> {
             max_time: i32::MAX,
             heap: {
                 let mut h = BinaryHeap::new();
-                h.reserve(1048576);
+                h.reserve(2048);
                 h
             },
             states_seen: LruCache::with_hasher(
@@ -304,7 +304,7 @@ pub struct RocksBackedQueue<T: Ctx> {
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
-    // TODO: min db score as well for popping purposes?
+    max_db_priority: AtomicI32,
     min_evictions: usize,
 }
 
@@ -327,6 +327,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             capacity: max_capacity.into(),
             iskips: 0.into(),
             pskips: 0.into(),
+            max_db_priority: i32::MIN.into(),
             min_evictions,
         })
     }
@@ -339,8 +340,16 @@ impl<T: Ctx> RocksBackedQueue<T> {
         self.queue.lock().unwrap().len() + self.db.len()
     }
 
+    pub fn db_len(&self) -> usize {
+        self.db.len()
+    }
+
     pub fn seen(&self) -> usize {
         self.db.seen()
+    }
+
+    pub fn db_best(&self) -> i32 {
+        self.max_db_priority.load(Ordering::Acquire)
     }
 
     /// Returns whether the underlying queue and db are actually empty.
@@ -389,6 +398,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 if priority < p_min || (priority == p_min && el.elapsed() >= ctx.elapsed()) {
                     // Lower priority (or equal but later), evict the new item immediately
                     self.db.push(el)?;
+                    self.max_db_priority.fetch_max(priority, Ordering::Release);
                 } else {
                     let max_evictions = queue.len() / 2;
                     // New item is better, evict some old_items.
@@ -398,15 +408,35 @@ impl<T: Ctx> RocksBackedQueue<T> {
                         self.min_evictions,
                         max_evictions,
                     ));
+                    debug_assert!(
+                        priority == el.score(self.db.scale_factor()),
+                        "priority {} didn't match score {}",
+                        priority,
+                        el.score(self.db.scale_factor())
+                    );
                     queue.push(el, priority);
                 }
             } else {
+                debug_assert!(
+                    priority == el.score(self.db.scale_factor()),
+                    "priority {} didn't match score {}",
+                    priority,
+                    el.score(self.db.scale_factor())
+                );
                 queue.push(el, priority);
             }
         }
         // Without the lock (but still blocking the push op in this thread)
         if let Some(ev) = evicted {
-            self.db.extend(ev)?;
+            if !ev.is_empty() {
+                let best = ev
+                    .iter()
+                    .map(|ctx| ctx.score(self.db.scale_factor()))
+                    .max()
+                    .unwrap();
+                self.db.extend(ev, true)?;
+                self.max_db_priority.fetch_max(best, Ordering::Release);
+            }
         }
 
         Ok(())
@@ -439,7 +469,13 @@ impl<T: Ctx> RocksBackedQueue<T> {
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
         while queue.len() > 0 || self.db.len() > 0 {
-            while let Some((ctx, _)) = queue.pop_max() {
+            while let Some((ctx, prio)) = queue.pop_max() {
+                debug_assert!(
+                    prio == ctx.score(self.db.scale_factor()),
+                    "priority {} didn't match score {}",
+                    prio,
+                    ctx.score(self.db.scale_factor())
+                );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
@@ -459,6 +495,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
                         (el, score)
                     }),
             );
+            // the max priority in the db is probably now the min of this queue
+            // or thereabouts
+            self.max_db_priority
+                .store(*queue.peek_min().unwrap().1, Ordering::Release);
         }
         Ok(None)
     }
@@ -471,6 +511,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
         let mut iskips = 0;
+        let start = Instant::now();
         let vec: Vec<ContextWrapper<T>> = iter
             .into_iter()
             .filter(|el| {
@@ -483,10 +524,11 @@ impl<T: Ctx> RocksBackedQueue<T> {
             })
             .collect();
 
-        let dups = self.db.remember_which(&vec)?;
+        let keeps = self.db.remember_which(&vec)?;
+        debug_assert!(vec.len() == keeps.len());
         let vec: Vec<(ContextWrapper<T>, i32)> = vec
             .into_iter()
-            .zip(dups.into_iter())
+            .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if keep {
                     let priority = el.score(self.db.scale_factor());
@@ -504,7 +546,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             let len = queue.len();
             if len + vec.len() > cap {
                 let max_evictions = len / 2;
-                let priority = vec.iter().min_by_key(|(_, p)| p).unwrap().1;
+                let priority = vec.iter().max_by_key(|(_, p)| p).unwrap().1;
                 evicted = Some(Self::evict_until(
                     &mut queue,
                     priority,
@@ -516,7 +558,18 @@ impl<T: Ctx> RocksBackedQueue<T> {
         }
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {
-            self.db.extend(ev)?;
+            println!("extend+evict took {:?} with the lock", start.elapsed());
+            let start = Instant::now();
+            if !ev.is_empty() {
+                let best = ev
+                    .iter()
+                    .map(|ctx| ctx.score(self.db.scale_factor()))
+                    .max()
+                    .unwrap();
+                self.db.extend(ev, true)?;
+                self.max_db_priority.fetch_max(best, Ordering::Release);
+                println!("evict to db took {:?}", start.elapsed());
+            }
         }
 
         Ok(())
@@ -530,5 +583,41 @@ impl<T: Ctx> RocksBackedQueue<T> {
             dup_iskips,
             dup_pskips,
         )
+    }
+
+    pub fn print_queue_histogram(&self) {
+        let queue = self.queue.lock().unwrap();
+        let times: Vec<f64> = queue.iter().map(|c| c.0.elapsed().into()).collect();
+        let time_scores: Vec<(f64, f64)> = queue
+            .iter()
+            .map(|c| {
+                (
+                    c.0.elapsed().into(),
+                    c.0.score(self.db.scale_factor()).into(),
+                )
+            })
+            .collect();
+        // unlock
+        drop(queue);
+
+        let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));
+        let v = ContinuousView::new()
+            .add(h)
+            .x_label("elapsed time")
+            .x_range(0., self.db.max_time().into());
+        println!(
+            "Current heap contents:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+        let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
+        let v = ContinuousView::new()
+            .add(p)
+            .x_label("elapsed time")
+            .y_label("score")
+            .x_range(0., self.db.max_time().into());
+        println!(
+            "Heap scores by time:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
     }
 }

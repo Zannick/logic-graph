@@ -156,7 +156,7 @@ where
         let mut vecs: Vec<Vec<ContextWrapper<T>>> = self.map.into_values().collect();
         let mut file = self.file;
         for vec in vecs.iter_mut() {
-            vec.sort();
+            vec.sort_unstable_by_key(|el| el.elapsed());
         }
         vecs.sort_by_key(|v| v[0].elapsed());
         let mut total = 0;

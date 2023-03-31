@@ -324,7 +324,7 @@ where
         }
     };
 
-    let queue = RocksBackedQueue::new(".db", max_time + max_time / 10, 10_000_000, 100).unwrap();
+    let queue = RocksBackedQueue::new(".db", max_time + max_time / 10, 500_000, 100).unwrap();
     queue.push(startctx.clone()).unwrap();
     queue.push(clean_ctx).unwrap();
     println!("Max time to consider is now: {}ms", queue.max_time());
@@ -332,7 +332,6 @@ where
     let mut deadends = 0;
     let pc = rocksdb::perf::PerfContext::default();
 
-    let mut start = Instant::now();
     while let Ok(Some(ctx)) = queue.pop() {
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
@@ -355,6 +354,7 @@ where
                 queue.max_time(),
                 ctx.info(queue.scale_factor())
             );
+            queue.print_queue_histogram();
             break;
         }
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
@@ -363,15 +363,6 @@ where
         }
 
         iters += 1;
-        if iters % 1000 == 0 {
-            println!(
-                "Pop {} took {:?}: size={} stats={:?}",
-                iters,
-                start.elapsed(),
-                queue.len(),
-                queue.skip_stats()
-            );
-        }
         if iters % 10000 == 0 {
             if iters > 10_000_000 && solutions.unique() > 4 {
                 queue.set_max_time(solutions.best());
@@ -385,18 +376,21 @@ where
             let (iskips, pskips, dskips, dpskips) = queue.skip_stats();
             let max_time = queue.max_time();
             println!(
-                "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}) ---\n\
-                Heap stats: count={}; seen={}; current limit: {}ms, scale factor: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+                "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
+                Queue stats: heap={}; db={}; total={}; seen={}; current limit: {}ms; db best: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
                 iters,
                 solutions.len(),
                 solutions.unique(),
                 deadends,
                 heapsize_adjustment - max_time,
+                queue.scale_factor(),
+                queue.heap_len(),
+                queue.db_len(),
                 queue.len(),
                 queue.seen(),
                 max_time,
-                queue.scale_factor(),
+                queue.db_best(),
                 iskips,
                 dskips,
                 pskips,
@@ -488,12 +482,12 @@ where
                 queue.extend(next).unwrap();
             }
         }
-        start = Instant::now();
     }
     let (iskips, pskips, dskips, dpskips) = queue.skip_stats();
     println!(
         "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops",
         iters, deadends, iskips, dskips, pskips, dpskips
     );
+    println!("{}", pc.report(true));
     solutions.export()
 }

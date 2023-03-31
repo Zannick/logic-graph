@@ -1,5 +1,6 @@
 extern crate enum_map;
 extern crate lru;
+extern crate priority_queue;
 extern crate rayon;
 extern crate rmp_serde;
 extern crate rustc_hash;
@@ -10,9 +11,9 @@ extern crate yaml_rust;
 pub mod access;
 pub mod algo;
 pub mod context;
+pub mod db;
 pub mod greedy;
 pub mod heap;
-pub mod db;
 pub mod minimize;
 pub mod settings;
 pub mod solutions;

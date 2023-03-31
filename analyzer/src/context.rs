@@ -1,6 +1,5 @@
 use crate::world::*;
 use serde::{Deserialize, Serialize};
-use sort_by_derive::SortBy;
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::rc::Rc;
@@ -96,12 +95,12 @@ where
 }
 impl<I, S, L, E, A, Wp> Hash for History<I, S, L, E, A, Wp>
 where
-    I: Id,
-    S: Id,
-    L: Id,
-    E: Id,
-    A: Id,
-    Wp: Id,
+    I: Hash,
+    S: Hash,
+    L: Hash,
+    E: Hash,
+    A: Hash,
+    Wp: Hash,
 {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         core::mem::discriminant(self).hash(state);
@@ -140,7 +139,7 @@ pub type HistoryAlias<T> = History<
     <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
 >;
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 struct HistoryNode<I, S, L, E, A, Wp> {
     entry: History<I, S, L, E, A, Wp>,
     prev: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
@@ -177,10 +176,9 @@ where
     }
 }
 
-#[derive(Clone, Debug, SortBy, Serialize, Deserialize)]
+#[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
-    #[sort_by]
     elapsed: i32,
     penalty: i32,
     // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc

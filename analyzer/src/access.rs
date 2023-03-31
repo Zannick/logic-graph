@@ -4,6 +4,7 @@ use enum_map::EnumMap;
 
 use crate::context::*;
 use crate::greedy::greedy_search_from;
+use crate::heap::HeapElement;
 use crate::world::*;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
@@ -47,12 +48,12 @@ where
     spot_has_locations(world, ctx.get()) || spot_has_actions(world, ctx)
 }
 
-pub fn expand<W, T, E, Wp>(
+fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
     spot_map: &EnumMap<E::SpotId, Option<ContextWrapper<T>>>,
     max_time: i32,
-    spot_heap: &mut BinaryHeap<Reverse<ContextWrapper<T>>>,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
@@ -69,8 +70,12 @@ pub fn expand<W, T, E, Wp>(
             }
             let mut newctx = ctx.clone();
             newctx.move_local(*spot, local);
-            if newctx.elapsed() <= max_time {
-                spot_heap.push(Reverse(newctx));
+            let elapsed = newctx.elapsed();
+            if elapsed <= max_time {
+                spot_heap.push(Reverse(HeapElement {
+                    score: elapsed,
+                    el: newctx,
+                }));
             }
         }
     }
@@ -79,8 +84,12 @@ pub fn expand<W, T, E, Wp>(
         if spot_map[exit.dest()] == None && exit.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.exit(exit);
-            if newctx.elapsed() <= max_time {
-                spot_heap.push(Reverse(newctx));
+            let elapsed = newctx.elapsed();
+            if elapsed <= max_time {
+                spot_heap.push(Reverse(HeapElement {
+                    score: elapsed,
+                    el: newctx,
+                }));
             }
         }
     }
@@ -89,8 +98,12 @@ pub fn expand<W, T, E, Wp>(
         if spot_map[warp.dest(ctx.get())] == None && warp.can_access(ctx.get()) {
             let mut newctx = ctx.clone();
             newctx.warp(warp);
-            if newctx.elapsed() <= max_time {
-                spot_heap.push(Reverse(newctx));
+            let elapsed = newctx.elapsed();
+            if elapsed <= max_time {
+                spot_heap.push(Reverse(HeapElement {
+                    score: elapsed,
+                    el: newctx,
+                }));
             }
         }
     }
@@ -122,7 +135,8 @@ where
         max_time,
         &mut spot_heap,
     );
-    while let Some(Reverse(spot_found)) = spot_heap.pop() {
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let spot_found = el.el;
         let pos = spot_found.get().position();
         if spot_enum_map[pos] == None {
             spot_enum_map[pos] = Some(spot_found);
