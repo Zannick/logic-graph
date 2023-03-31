@@ -240,7 +240,7 @@ where
                 // somewhat quadratic penalties
                 let spot_penalty = with_locs * (with_locs - 1) * max_diff
                     / <usize as TryInto<i32>>::try_into(spot_ctxs.len()).unwrap();
-                if spot_has_actions(self.world, ctx) {
+                if spot_has_actions(self.world, ctx.get()) {
                     result.extend(activate_actions(
                         self.world,
                         ctx,
