@@ -430,17 +430,38 @@ impl<T: Ctx> RocksBackedQueue<T> {
 
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
-        while let Some((ctx, _)) = queue.pop_max() {
-            if ctx.elapsed() > self.db.max_time() {
-                self.pskips.fetch_add(1, Ordering::Release);
-                continue;
+        while queue.len() > 0 || self.db.len() > 0 {
+            while let Some((ctx, _)) = queue.pop_max() {
+                if ctx.elapsed() > self.db.max_time() {
+                    self.pskips.fetch_add(1, Ordering::Release);
+                    continue;
+                }
+                if !self.db.remember_pop(&ctx)? {
+                    continue;
+                }
+                return Ok(Some(ctx));
             }
-            if !self.db.remember_pop(&ctx)? {
-                continue;
-            }
-            return Ok(Some(ctx));
+            // Retrieve some from db
+            queue.extend(
+                self.db
+                    .retrieve(self.capacity.load(Ordering::Acquire) / 2)?
+                    .into_iter()
+                    .map(|el| {
+                        let score = el.score(self.db.scale_factor());
+                        (el, score)
+                    }),
+            );
         }
-        // Retrieve some from db
         Ok(None)
+    }
+
+    pub fn stats(&self) -> (usize, usize, usize, usize) {
+        let (iskips, pskips, dup_iskips, dup_pskips) = self.db.skip_stats();
+        (
+            self.iskips.load(Ordering::Acquire) + iskips,
+            self.pskips.load(Ordering::Relaxed) + pskips,
+            dup_iskips,
+            dup_pskips,
+        )
     }
 }
