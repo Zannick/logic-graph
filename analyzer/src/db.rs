@@ -291,6 +291,43 @@ where
         }
     }
 
+    fn get_seen_values<'a, I>(&self, seen_keys: I) -> Result<Vec<Option<i32>>, Error>
+    where
+        I: Iterator<Item = &'a Vec<u8>>,
+    {
+        let results = self.seendb.multi_get(seen_keys);
+
+        let parsed: Vec<Result<Option<i32>, String>> = results
+            .into_iter()
+            .map(|res| match res {
+                Err(e) => Err(e.to_string()),
+                Ok(None) => Ok(None),
+                Ok(Some(slice)) => {
+                    if slice.len() != 4 {
+                        Err(format!("Invalid seen elapsed time length: {}", slice.len()))
+                    } else {
+                        Ok(Some(i32::from_be_bytes(slice.try_into().unwrap())))
+                    }
+                }
+            })
+            .collect();
+
+        let error: Vec<String> = parsed
+            .iter()
+            .filter_map(|res| match res {
+                Err(s) => Some(s.to_string()),
+                Ok(_) => None,
+            })
+            .collect();
+        if !error.is_empty() {
+            Err(Error {
+                message: error.join("; "),
+            })
+        } else {
+            Ok(parsed.into_iter().map(|res| res.unwrap()).collect())
+        }
+    }
+
     /// Pushes an element into the heap.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
@@ -374,15 +411,27 @@ where
         let mut skips = 0;
         let mut dups = 0;
 
-        for el in iter {
+        let to_add: Vec<_> = iter
+            .into_iter()
+            .filter_map(|el| {
+                if el.elapsed() > max_time {
+                    None
+                } else {
+                    let seen_key = self.get_seen_key(el.get());
+                    Some((el, seen_key))
+                }
+            })
+            .collect();
+
+        let seen_values = self.get_seen_values(to_add.iter().map(|(_, k)| k))?;
+
+        for ((el, seen_key), seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
             if el.elapsed() > max_time {
                 skips += 1;
                 continue;
             }
-            let seen_key = self.get_seen_key(el.get());
 
-            // TODO: Use multi_get instead of get in a loop.
-            let should_write = match self.get_seen_value(&seen_key)? {
+            let should_write = match seen_val {
                 Some(stored) => {
                     if stored < el.elapsed() {
                         dups += 1;
