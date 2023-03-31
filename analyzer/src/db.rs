@@ -56,7 +56,7 @@ pub struct HeapDB<T> {
     dup_iskips: AtomicUsize,
     dup_pskips: AtomicUsize,
 
-    pops: AtomicUsize,
+    deletes: AtomicUsize,
     delete: AtomicU64,
 
     phantom: PhantomData<T>,
@@ -153,7 +153,7 @@ where
         path2.push("seen");
 
         // 1 + 3 = 4 GiB roughly for this db
-        let db = DB::open(&opts, &path)?;
+        let db = DB::open_cf(&opts, &path, vec!["default"])?;
 
         let cache3 = Cache::new_lru_cache(2 * 1024 * 1024 * 1024)?;
         opts2.set_row_cache(&cache3);
@@ -190,7 +190,7 @@ where
             pskips: 0.into(),
             dup_iskips: 0.into(),
             dup_pskips: 0.into(),
-            pops: 0.into(),
+            deletes: 0.into(),
             delete: 0.into(),
             phantom: PhantomData,
         })
@@ -361,7 +361,7 @@ where
         let mut iter = self.db.iterator_opt(mode, tail_opts);
         for item in iter {
             let (key, value) = item?;
-            let npops = self.pops.fetch_add(1, Ordering::Acquire) + 1;
+            let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
             let mut k = Vec::with_capacity(17);
             (*key).clone_into(&mut k);
             k.push(u8::MAX);
@@ -372,7 +372,7 @@ where
             self.delete.fetch_max(raw, Ordering::Release);
             self.size.fetch_sub(1, Ordering::Release);
 
-            if npops % 20000 == 0 {
+            if ndeletes % 20000 == 0 {
                 let start = Instant::now();
                 let max_deleted = self.delete.swap(0, Ordering::Acquire);
                 let _ = self
@@ -462,6 +462,98 @@ where
         self.seen.fetch_add(new_seen, Ordering::Release);
 
         Ok(())
+    }
+
+    /// Retrieves up to `count` elements from the database, removing them.
+    /// This is not safe to perform at the same time as other operations since it will
+    /// delete the range of elements iterated through.
+    pub fn retrieve(&self, count: usize) -> Result<Vec<ContextWrapper<T>>, Error> {
+        let mut res = Vec::with_capacity(count);
+        let mut tmp = Vec::with_capacity(count);
+        let mut tail_opts = ReadOptions::default();
+        tail_opts.set_tailing(true);
+        let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
+
+        let mut min = Vec::new();
+        let mut max = Vec::new();
+        let mut pops = 1;
+        let mut pskips = 0;
+        let mut dup_pskips = 0;
+
+        let (key, value) = match iter.nth(0) {
+            None => return Ok(Vec::new()),
+            Some(el) => el?,
+        };
+        min.copy_from_slice(&key);
+        max.copy_from_slice(&key);
+
+        let el = self.from_heap_value(&value)?;
+        if el.elapsed() > self.max_time() {
+            pskips += 1;
+        } else {
+            let seen_key = self.get_seen_key(el.get());
+            tmp.push((el, seen_key));
+        }
+
+        while res.len() < count {
+            while let Some(item) = iter.next() {
+                let (key, value) = item.unwrap();
+                max.copy_from_slice(&key);
+
+                let el = self.from_heap_value(&value)?;
+                if el.elapsed() > self.max_time() {
+                    pskips += 1;
+                    continue;
+                }
+
+                let seen_key = self.get_seen_key(el.get());
+                tmp.push((el, seen_key));
+                if tmp.len() == res.len() - count {
+                    break;
+                }
+            }
+
+            // Grab all the seen values in one request.
+            let seen_values = self.get_seen_values(tmp.iter().map(|(_, k)| k))?;
+            res.extend(tmp.into_iter().zip(seen_values.into_iter()).filter_map(
+                |((el, _), seen_val)| match seen_val {
+                    Some(stored) => {
+                        if stored < el.elapsed() {
+                            dup_pskips += 1;
+                            None
+                        } else {
+                            Some(el)
+                        }
+                    }
+                    // There should always be a value, but if somehow there isn't, return it for sure.
+                    None => Some(el),
+                },
+            ));
+            tmp = Vec::with_capacity(count - res.len());
+        }
+        max.push(u8::MAX);
+        let cf = self.db.cf_handle("default").unwrap();
+
+        // Ignore errors once we start deleting.
+        self.db
+            .delete_range_cf_opt(cf, min, max, &self.write_opts)
+            .unwrap();
+
+        // It's only one delete for the purposes of when do we need to compact.
+        let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire);
+        if ndeletes % 20000 == 0 {
+            let start = Instant::now();
+            let max_deleted = self.delete.swap(0, Ordering::Acquire);
+            let _ = self
+                .db
+                .compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
+            println!("Compacting took {:?}", start.elapsed());
+        }
+
+        self.size.fetch_sub(pops, Ordering::Release);
+        self.pskips.fetch_add(pskips, Ordering::Release);
+        self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
+        Ok(tmp.into_iter().map(|(el, _)| el).collect())
     }
 
     /// Stores the underlying Ctx in the seen db with the best known elapsed time,
