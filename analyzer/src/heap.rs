@@ -312,7 +312,10 @@ pub struct RocksBackedQueue<T: Ctx> {
     pskips: AtomicUsize,
     max_db_priority: AtomicI32,
     min_evictions: usize,
+    max_evictions: usize,
     min_reshuffle: usize,
+    evictions: AtomicUsize,
+    retrievals: AtomicUsize,
 }
 
 impl<T: Ctx> RocksBackedQueue<T> {
@@ -321,6 +324,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         initial_max_time: i32,
         max_capacity: usize,
         min_evictions: usize,
+        max_evictions: usize,
         min_reshuffle: usize,
     ) -> Result<RocksBackedQueue<T>, String>
     where
@@ -337,7 +341,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
             pskips: 0.into(),
             max_db_priority: i32::MIN.into(),
             min_evictions,
+            max_evictions,
             min_reshuffle,
+            evictions: 0.into(),
+            retrievals: 0.into(),
         })
     }
 
@@ -383,6 +390,14 @@ impl<T: Ctx> RocksBackedQueue<T> {
         self.db.scale_factor()
     }
 
+    pub fn evictions(&self) -> usize {
+        self.evictions.load(Ordering::Acquire)
+    }
+
+    pub fn retrievals(&self) -> usize {
+        self.retrievals.load(Ordering::Acquire)
+    }
+
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
@@ -410,7 +425,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     self.db.push(el)?;
                     self.max_db_priority.fetch_max(priority, Ordering::Release);
                 } else {
-                    let max_evictions = (queue.len() / 4) * 3;
+                    let max_evictions = std::cmp::min(self.max_evictions, (queue.len() / 4) * 3);
                     // New item is better, evict some old_items.
                     evicted = Some(Self::evict_until(
                         &mut queue,
@@ -448,6 +463,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     .unwrap();
                 self.db.extend(ev, true)?;
                 self.max_db_priority.fetch_max(best, Ordering::Release);
+                self.evictions.fetch_add(1, Ordering::Release);
                 println!("evict to db took {:?}", start.elapsed());
             }
         }
@@ -527,9 +543,11 @@ impl<T: Ctx> RocksBackedQueue<T> {
                             .unwrap();
                         self.db.extend(evicted, true)?;
                         self.max_db_priority.fetch_max(best, Ordering::Release);
+                        self.evictions.fetch_add(1, Ordering::Release);
                         println!("reshuffle:evict to db took {:?}", s2.elapsed());
                     };
                     Self::retrieve(&mut queue, &self.db, &self.max_db_priority, num_to_restore)?;
+                    self.retrievals.fetch_add(1, Ordering::Release);
                     println!("Reshuffle took total {:?}", start.elapsed());
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
                 }
@@ -550,12 +568,15 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 return Ok(Some(ctx));
             }
             // Retrieve some from db
+            let start = Instant::now();
             Self::retrieve(
                 &mut queue,
                 &self.db,
                 &self.max_db_priority,
                 self.capacity.load(Ordering::Acquire) / 2,
             )?;
+            self.retrievals.fetch_add(1, Ordering::Release);
+            println!("Retrieval took total {:?}", start.elapsed());
         }
         Ok(None)
     }
@@ -602,7 +623,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             let cap = self.capacity.load(Ordering::Acquire);
             let len = queue.len();
             if len + vec.len() > cap {
-                let max_evictions = (len / 4) * 3;
+                let max_evictions = std::cmp::min(self.max_evictions, (len / 4) * 3);
                 let priority = vec.iter().max_by_key(|(_, p)| p).unwrap().1;
                 evicted = Some(Self::evict_until(
                     &mut queue,
@@ -625,6 +646,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     .unwrap();
                 self.db.extend(ev, true)?;
                 self.max_db_priority.fetch_max(best, Ordering::Release);
+                self.evictions.fetch_add(1, Ordering::Release);
                 println!("evict to db took {:?}", start.elapsed());
             }
         }

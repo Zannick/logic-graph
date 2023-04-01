@@ -183,8 +183,15 @@ where
             }
         };
 
-        let queue =
-            RocksBackedQueue::new(".db", max_time + max_time / 10, 400_000, 100, 100_000).unwrap();
+        let queue = RocksBackedQueue::new(
+            ".db",
+            max_time + max_time / 10,
+            1_048_576,
+            1_024,
+            131_072,
+            32_768,
+        )
+        .unwrap();
         queue.push(startctx.clone()).unwrap();
         queue.push(clean_ctx).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
@@ -306,7 +313,11 @@ where
 
     fn choose_mode(&self, ctx: &ContextWrapper<T>) -> SearchMode {
         let iters = self.iters.load(Ordering::Acquire);
-        if iters < 1_000_000 || iters % 2048 != 0 {
+        if iters < 100_000 {
+            SearchMode::Classic
+        } else if let Some(3) = rayon::current_thread_index() {
+            SearchMode::Greedy
+        } else if iters % 2048 != 0 {
             SearchMode::Classic
         } else if ctx.elapsed() * 3 < self.queue.max_time() {
             SearchMode::Depth(4)
@@ -331,17 +342,12 @@ where
                 self.q.pop().unwrap()
             }
         }
-        // TODO: this should probably just be join or scope
-        while self.queue.heap_len() < 8 {
-            let c1 = self.queue.pop().unwrap().unwrap();
-            self.queue.extend(self.classic_step(c1)).unwrap();
-        }
-        let iter = Iter { q: &self.queue };
-        let res = iter.par_bridge().try_for_each(|ctx| {
+        let process_one = |ctx: ContextWrapper<T>| {
             // cut off when penalties are high enough
             // progressively raise the score threshold as the heap size increases
             let heapsize_adjustment: i32 = (self.queue.len() / 32).try_into().unwrap();
-            let solutions_adjustment: i32 = self.solutions.lock().unwrap().len().try_into().unwrap();
+            let solutions_adjustment: i32 =
+                self.solutions.lock().unwrap().len().try_into().unwrap();
             let iters = self.iters.fetch_add(1, Ordering::AcqRel);
             let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
                 + solutions_adjustment
@@ -369,12 +375,11 @@ where
             }
 
             let iters = iters + 1;
-            if iters % 2000 == 0 {
-                let mut s = start.lock().unwrap();
-                println!("2000 iters took {:?}", s.elapsed());
-                *s = Instant::now();
-            }
             if iters % 10000 == 0 {
+                let mut s = start.lock().unwrap();
+                println!("10000 iters took {:?}", s.elapsed());
+                *s = Instant::now();
+
                 let sols = self.solutions.lock().unwrap();
                 if iters > 10_000_000 && sols.unique() > 4 {
                     self.queue.set_max_time(sols.best());
@@ -385,27 +390,30 @@ where
                 let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
                 let max_time = self.queue.max_time();
                 println!(
-                "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
-                Queue stats: heap={}; db={}; total={}; seen={}; current limit: {}ms; db best: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
-                {}",
-                iters,
-                sols.len(),
-                sols.unique(),
-                self.deadends.load(Ordering::Acquire),
-                heapsize_adjustment - max_time,
-                self.queue.scale_factor(),
-                self.queue.heap_len(),
-                self.queue.db_len(),
-                self.queue.len(),
-                self.queue.seen(),
-                max_time,
-                self.queue.db_best(),
-                iskips,
-                dskips,
-                pskips,
-                dpskips,
-                ctx.info(self.queue.scale_factor())
-            );
+                    "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
+                    Queue stats: heap={}; db={}; total={}; seen={}; limit: {}ms; db best: {}\n\
+                    push_skips={} time + {} dups; pop_skips={} time + {} dups; evictions: {}; retrievals: {}\n\
+                    {}",
+                    iters,
+                    sols.len(),
+                    sols.unique(),
+                    self.deadends.load(Ordering::Acquire),
+                    heapsize_adjustment - max_time,
+                    self.queue.scale_factor(),
+                    self.queue.heap_len(),
+                    self.queue.db_len(),
+                    self.queue.len(),
+                    self.queue.seen(),
+                    max_time,
+                    self.queue.db_best(),
+                    iskips,
+                    dskips,
+                    pskips,
+                    dpskips,
+                    self.queue.evictions(),
+                    self.queue.retrievals(),
+                    ctx.info(self.queue.scale_factor())
+                );
             }
 
             let mode = self.choose_mode(&ctx);
@@ -462,7 +470,13 @@ where
                 }
             }
             Ok(())
-        });
+        };
+
+        let mut res = Ok(());
+        while res.is_ok() && !self.queue.is_empty() {
+            let iter = Iter { q: &self.queue };
+            res = iter.par_bridge().try_for_each(process_one);
+        }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         println!(
             "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops: {}",

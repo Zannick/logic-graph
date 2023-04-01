@@ -355,13 +355,13 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self, scale_factor: i32) -> String {
         format(format_args!(
-            "At {} after {}ms (score={}), visited={}, skipped={}, penalty={} last={}",
-            self.ctx.position(),
+            "At {}ms (score={}), visited={}, skipped={}, penalty={}\nNow: {} after {}",
             self.elapsed,
             self.score(scale_factor),
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,
+            self.ctx.position(),
             if let Some(val) = &self.history {
                 val.entry.to_string()
             } else {

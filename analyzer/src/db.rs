@@ -130,16 +130,16 @@ where
         // For now, the db should be deleted.
         opts.set_error_if_exists(true);
         // change compression options?
-        // 4 write buffers at 512 MiB = 2 GiB
-        opts.set_write_buffer_size(512 * MB);
+        // 4 write buffers at 256 MiB = 1 GiB
+        opts.set_write_buffer_size(256 * MB);
         opts.set_max_write_buffer_number(4);
         opts.increase_parallelism(2);
 
         let mut opts2 = opts.clone();
 
         let mut block_opts = BlockBasedOptions::default();
-        // blockdb caches = 3 GiB
-        let cache = Cache::new_lru_cache(2 * GB)?;
+        // blockdb caches = 2 GiB
+        let cache = Cache::new_lru_cache(GB)?;
         let cache2 = Cache::new_lru_cache(GB)?;
         block_opts.set_block_cache(&cache);
         block_opts.set_block_cache_compressed(&cache2);
@@ -150,7 +150,7 @@ where
         path.push("states");
         path2.push("seen");
 
-        // 2 + 3 = 5 GiB roughly for this db
+        // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
         let db = DB::open_cf(&opts, &path, vec!["default"])?;
 
