@@ -1,5 +1,5 @@
 use crate::context::{ContextWrapper, Ctx};
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display};
 use std::hash::Hash;
 use std::option::Option;
@@ -25,7 +25,22 @@ pub trait Accessible: Sync {
     }
 }
 
-pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display + Send + Sync + Serialize + for<'a> Deserialize<'a> {}
+pub trait Id:
+    Copy
+    + Clone
+    + Debug
+    + Eq
+    + Hash
+    + Ord
+    + PartialOrd
+    + PartialEq
+    + Display
+    + Send
+    + Sync
+    + Serialize
+    + for<'a> Deserialize<'a>
+{
+}
 
 pub trait Location: Accessible {
     type LocId: Id + enum_map::EnumArray<bool>;

@@ -5,7 +5,10 @@ use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
+use rayon::prelude::*;
 use std::fmt::Debug;
+use std::sync::atomic::{AtomicI32, AtomicU32, Ordering};
+use std::sync::Mutex;
 use std::time::Instant;
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
@@ -31,7 +34,7 @@ where
     let spot_map = accessible_spots(world, ctx, max_time);
     let mut vec: Vec<ContextWrapper<T>> = spot_map.values().filter_map(Clone::clone).collect();
 
-    vec.sort_unstable_by_key(|el| el.elapsed());
+    vec.par_sort_unstable_by_key(|el| el.elapsed());
     vec
 }
 
@@ -131,10 +134,10 @@ where
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
-    solutions: SolutionCollector<T>,
+    solutions: Mutex<SolutionCollector<T>>,
     queue: RocksBackedQueue<T>,
-    iters: i32,
-    deadends: u32,
+    iters: AtomicI32,
+    deadends: AtomicU32,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -188,26 +191,28 @@ where
         Ok(Search {
             world,
             startctx,
-            solutions,
+            solutions: Mutex::new(solutions),
             queue,
-            iters: 0,
-            deadends: 0,
+            iters: 0.into(),
+            deadends: 0.into(),
         })
     }
 
-    fn handle_solution(&mut self, ctx: ContextWrapper<T>, mode: SearchMode) -> bool {
+    fn handle_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) -> bool {
         let old_time = self.queue.max_time();
-        if self.iters > 10_000_000 && self.solutions.unique() > 4 {
+        let iters = self.iters.load(Ordering::Acquire);
+        let mut sols = self.solutions.lock().unwrap();
+        if iters > 10_000_000 && sols.unique() > 4 {
             self.queue.set_max_time(ctx.elapsed());
         } else {
             self.queue.set_lenient_max_time(ctx.elapsed());
         }
 
-        if self.solutions.is_empty() || ctx.elapsed() < self.solutions.best() {
+        if sols.is_empty() || ctx.elapsed() < sols.best() {
             println!(
                 "{:?} mode found new shortest winning path after {} rounds: estimated {}ms (heap max was: {}ms)",
                 mode,
-                self.iters,
+                iters,
                 ctx.elapsed(),
                 old_time
             );
@@ -220,10 +225,10 @@ where
             ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
         self.queue.push(newctx).unwrap();
 
-        self.solutions.insert(ctx)
+        sols.insert(ctx)
     }
 
-    fn classic_step(&mut self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
+    fn classic_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
         // The process will look more like this:
         // 1. explore -> vec of spot ctxs with penalties applied
         // 2. get largest dist
@@ -260,7 +265,7 @@ where
         result
     }
 
-    fn depth_step(&mut self, ctx: ContextWrapper<T>, mode: SearchMode, mut d: u8) -> Option<i32> {
+    fn depth_step(&self, ctx: ContextWrapper<T>, mode: SearchMode, mut d: u8) -> Option<i32> {
         let mut next = Vec::new();
         let mut min_score = Some(ctx.score(self.queue.scale_factor()));
         for ctx in self.classic_step(ctx) {
@@ -300,7 +305,8 @@ where
     }
 
     fn choose_mode(&self, ctx: &ContextWrapper<T>) -> SearchMode {
-        if self.iters < 1_000_000 || self.iters % 2048 != 0 {
+        let iters = self.iters.load(Ordering::Acquire);
+        if iters < 1_000_000 || iters % 2048 != 0 {
             SearchMode::Classic
         } else if ctx.elapsed() * 3 < self.queue.max_time() {
             SearchMode::Depth(4)
@@ -311,18 +317,36 @@ where
         }
     }
 
-    pub fn search(mut self) -> Result<(), std::io::Error> {
+    pub fn search(self) -> Result<(), std::io::Error> {
         let pc = rocksdb::perf::PerfContext::default();
+        let start = Mutex::new(Instant::now());
 
-        while let Ok(Some(ctx)) = self.queue.pop() {
+        struct Iter<'a, T: Ctx> {
+            q: &'a RocksBackedQueue<T>,
+        }
+        impl<'a, T: Ctx> Iterator for Iter<'a, T> {
+            type Item = ContextWrapper<T>;
+
+            fn next(&mut self) -> Option<Self::Item> {
+                self.q.pop().unwrap()
+            }
+        }
+        // TODO: this should probably just be join or scope
+        while self.queue.heap_len() < 8 {
+            let c1 = self.queue.pop().unwrap().unwrap();
+            self.queue.extend(self.classic_step(c1)).unwrap();
+        }
+        let iter = Iter { q: &self.queue };
+        let res = iter.par_bridge().try_for_each(|ctx| {
             // cut off when penalties are high enough
             // progressively raise the score threshold as the heap size increases
             let heapsize_adjustment: i32 = (self.queue.len() / 32).try_into().unwrap();
-            let solutions_adjustment: i32 = self.solutions.len().try_into().unwrap();
+            let solutions_adjustment: i32 = self.solutions.lock().unwrap().len().try_into().unwrap();
+            let iters = self.iters.fetch_add(1, Ordering::AcqRel);
             let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
                 + solutions_adjustment
-                + if self.iters > 10_000_000 {
-                    (self.iters - 10_000_000) / 1_024
+                + if iters > 10_000_000 {
+                    (iters - 10_000_000) / 1_024
                 } else {
                     0
                 };
@@ -337,19 +361,25 @@ where
                 ctx.info(self.queue.scale_factor())
             );
                 self.queue.print_queue_histogram();
-                break;
+                return Err("done");
             }
             if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
-                self.deadends += 1;
-                continue;
+                self.deadends.fetch_add(1, Ordering::Release);
+                return Ok(());
             }
 
-            self.iters += 1;
-            if self.iters % 10000 == 0 {
-                if self.iters > 10_000_000 && self.solutions.unique() > 4 {
-                    self.queue.set_max_time(self.solutions.best());
+            let iters = iters + 1;
+            if iters % 2000 == 0 {
+                let mut s = start.lock().unwrap();
+                println!("2000 iters took {:?}", s.elapsed());
+                *s = Instant::now();
+            }
+            if iters % 10000 == 0 {
+                let sols = self.solutions.lock().unwrap();
+                if iters > 10_000_000 && sols.unique() > 4 {
+                    self.queue.set_max_time(sols.best());
                 }
-                if self.iters % 1_000_000 == 0 {
+                if iters % 1_000_000 == 0 {
                     self.queue.print_queue_histogram();
                 }
                 let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
@@ -358,10 +388,10 @@ where
                 "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
                 Queue stats: heap={}; db={}; total={}; seen={}; current limit: {}ms; db best: {}\npush_skips={} time + {} dups; pop_skips={} time + {} dups\n\
                 {}",
-                self.iters,
-                self.solutions.len(),
-                self.solutions.unique(),
-                self.deadends,
+                iters,
+                sols.len(),
+                sols.unique(),
+                self.deadends.load(Ordering::Acquire),
                 heapsize_adjustment - max_time,
                 self.queue.scale_factor(),
                 self.queue.heap_len(),
@@ -431,13 +461,23 @@ where
                     self.queue.extend(next).unwrap();
                 }
             }
-        }
+            Ok(())
+        });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         println!(
-            "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops",
-            self.iters, self.deadends, iskips, dskips, pskips, dpskips
+            "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops: {}",
+            self.iters.load(Ordering::Acquire),
+            self.deadends.load(Ordering::Acquire),
+            iskips,
+            dskips,
+            pskips,
+            dpskips,
+            match res {
+                Ok(_) => "emptied queue",
+                Err(s) => s,
+            }
         );
         println!("{}", pc.report(true));
-        self.solutions.export()
+        self.solutions.into_inner().unwrap().export()
     }
 }
