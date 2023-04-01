@@ -151,6 +151,7 @@ where
         path2.push("seen");
 
         // 2 + 3 = 5 GiB roughly for this db
+        let _ = DB::destroy(&opts, &path);
         let db = DB::open_cf(&opts, &path, vec!["default"])?;
 
         let cache3 = Cache::new_lru_cache(2 * GB)?;
@@ -162,6 +163,7 @@ where
         opts2.set_merge_operator_associative("min", min_merge);
 
         // 2 GiB blocks + 2 GiB row cache = 4 GiB for this one?
+        let _ = DB::destroy(&opts2, &path2);
         let seendb = DB::open(&opts2, &path2)?;
 
         let mut write_opts = WriteOptions::default();
