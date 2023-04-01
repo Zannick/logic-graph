@@ -2,9 +2,9 @@ use crate::world::*;
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
-use std::rc::Rc;
+use std::sync::Arc;
 
-pub trait Ctx: Clone + Eq + Debug + Hash + Sync + Serialize + for<'a> Deserialize<'a> {
+pub trait Ctx: Clone + Eq + Debug + Hash + Send + Sync + Serialize + for<'a> Deserialize<'a> {
     type World: World;
     type ItemId: Id;
     type AreaId: Id;
@@ -143,7 +143,7 @@ pub type HistoryAlias<T> = History<
 struct HistoryNode<I, S, L, E, A, Wp> {
     entry: History<I, S, L, E, A, Wp>,
     #[allow(clippy::type_complexity)]
-    prev: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
+    prev: Option<Arc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
 
 type HistoryNodeAlias<T> = HistoryNode<
@@ -159,7 +159,7 @@ struct HistoryIterator<T>
 where
     T: Ctx,
 {
-    next: Option<Rc<HistoryNodeAlias<T>>>,
+    next: Option<Arc<HistoryNodeAlias<T>>>,
 }
 impl<T> Iterator for HistoryIterator<T>
 where
@@ -185,7 +185,7 @@ pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
     // or make a type for ContextWrapper to convert into
     #[allow(clippy::type_complexity)]
-    history: Option<Rc<HistoryNode<I, S, L, E, A, Wp>>>,
+    history: Option<Arc<HistoryNode<I, S, L, E, A, Wp>>>,
 }
 
 pub type ContextWrapper<T> = BaseContextWrapper<
@@ -209,7 +209,7 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 
     pub fn append_history(&mut self, step: HistoryAlias<T>) {
-        self.history = Some(Rc::new(HistoryNode {
+        self.history = Some(Arc::new(HistoryNode {
             entry: step,
             prev: self.history.clone(),
         }))
