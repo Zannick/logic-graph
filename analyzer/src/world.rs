@@ -14,7 +14,7 @@ use std::option::Option;
 //    -> Action -> ActionId
 //       Accessible -> Context -> ItemId
 
-pub trait Accessible {
+pub trait Accessible: Sync {
     type Context: Ctx;
     type Currency: Id + Default;
     fn can_access(&self, ctx: &Self::Context) -> bool;
@@ -25,7 +25,7 @@ pub trait Accessible {
     }
 }
 
-pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display + Serialize + for<'a> Deserialize<'a> {}
+pub trait Id: Copy + Clone + Debug + Eq + Hash + Ord + PartialOrd + PartialEq + Display + Send + Sync + Serialize + for<'a> Deserialize<'a> {}
 
 pub trait Location: Accessible {
     type LocId: Id + enum_map::EnumArray<bool>;
@@ -66,7 +66,7 @@ pub trait Warp: Accessible {
     fn should_reload(&self) -> bool;
 }
 
-pub trait World {
+pub trait World: Sync {
     type Location: Location;
     type Exit: Exit<
         ExitId = <Self::Location as Location>::ExitId,
