@@ -498,28 +498,35 @@ impl<T: Ctx> RocksBackedQueue<T> {
         evicted
     }
 
-    /// Retrieves up to the given number of elements from the db and puts them in the queue.
+    /// Retrieves up to the given number of elements from the db.
     fn retrieve(
-        queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
         db: &HeapDB<T>,
         max_db_priority: &AtomicI32,
         num: usize,
-    ) -> Result<(), String> {
+    ) -> Result<Vec<(ContextWrapper<T>, i32)>, String> {
         println!(
             "Beginning retrieve of {} entries, we have {} in the db",
             num,
             db.len()
         );
         let start = Instant::now();
-        queue.extend(db.retrieve(num)?.into_iter().map(|el| {
-            let score = el.score(db.scale_factor());
-            (el, score)
-        }));
+        let res: Vec<_> = db
+            .retrieve(num)?
+            .into_iter()
+            .map(|el| {
+                let score = el.score(db.scale_factor());
+                (el, score)
+            })
+            .collect();
         println!("Retrieve from db took {:?}", start.elapsed());
-        // the max priority in the db is probably now the min of this queue
-        // or thereabouts
-        max_db_priority.store(*queue.peek_min().unwrap().1, Ordering::Release);
-        Ok(())
+        // the max priority in the db is probably now the min of this result, or thereabouts
+        // which should be the last element
+        if let Some(el) = res.last() {
+            max_db_priority.store(el.1, Ordering::Release);
+        } else {
+            max_db_priority.store(i32::MIN, Ordering::Release);
+        }
+        Ok(res)
     }
 
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
@@ -545,6 +552,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                             len + 2 * num_to_restore - cap,
                         );
                         println!("reshuffle:evict took {:?}", start.elapsed());
+                        drop(queue);
                         let s2 = Instant::now();
 
                         let best = evicted
@@ -556,10 +564,14 @@ impl<T: Ctx> RocksBackedQueue<T> {
                         self.max_db_priority.fetch_max(best, Ordering::Release);
                         self.evictions.fetch_add(1, Ordering::Release);
                         println!("reshuffle:evict to db took {:?}", s2.elapsed());
-                    };
-                    Self::retrieve(&mut queue, &self.db, &self.max_db_priority, num_to_restore)?;
+                    } else {
+                        drop(queue);
+                    }
+                    let res = Self::retrieve(&self.db, &self.max_db_priority, num_to_restore)?;
                     self.retrievals.fetch_add(1, Ordering::Release);
                     println!("Reshuffle took total {:?}", start.elapsed());
+                    queue = self.queue.lock().unwrap();
+                    queue.extend(res);
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
                 }
                 let (ctx, prio) = queue.pop_max().unwrap();
@@ -587,8 +599,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     (self.capacity.load(Ordering::Acquire) - queue.len()) / 2,
                 ),
             );
-
-            Self::retrieve(&mut queue, &self.db, &self.max_db_priority, num_to_restore)?;
+            drop(queue);
+            let res = Self::retrieve(&self.db, &self.max_db_priority, num_to_restore)?;
+            queue = self.queue.lock().unwrap();
+            queue.extend(res);
             self.retrievals.fetch_add(1, Ordering::Release);
             println!("Retrieval took total {:?}", start.elapsed());
         }

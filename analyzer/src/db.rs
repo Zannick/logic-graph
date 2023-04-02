@@ -152,7 +152,7 @@ where
 
         // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
-        let db = DB::open_cf(&opts, &path, vec!["default"])?;
+        let db = DB::open(&opts, &path)?;
 
         let cache3 = Cache::new_lru_cache(4 * GB)?;
         opts2.set_row_cache(&cache3);
@@ -472,14 +472,14 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
-    /// This is not safe to perform at the same time as other operations since it will
-    /// delete the range of elements iterated through.
     pub fn retrieve(&self, count: usize) -> Result<Vec<ContextWrapper<T>>, Error> {
         let mut res = Vec::with_capacity(count);
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
+
+        let mut batch = WriteBatchWithTransaction::<false>::default();
 
         let mut pops = 1;
         let mut pskips = 0;
@@ -493,6 +493,7 @@ where
         let mut max = vec![0; 16];
         min.copy_from_slice(&key);
         max.copy_from_slice(&key);
+        batch.delete(key);
 
         let el = Self::get_obj_from_heap_value(&value)?;
         if el.elapsed() > self.max_time() {
@@ -509,6 +510,7 @@ where
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
                     max.copy_from_slice(&key);
+                    batch.delete(key);
                     pops += 1;
 
                     let el = Self::get_obj_from_heap_value(&value)?;
@@ -527,7 +529,6 @@ where
                     break;
                 }
             }
-            println!("Found {} values in this loop, done={}", tmp.len(), done);
 
             // Grab all the seen values in one request.
             let seen_values = self.get_seen_values(tmp.iter().map(|(_, k)| k))?;
@@ -557,29 +558,32 @@ where
             start.elapsed(),
             pops
         );
-        let cf = self.db.cf_handle("default").unwrap();
-
         // Ignore/assert errors once we start deleting.
-        println!("Beginning deletion of range...");
+        println!("Beginning point deletion of iterated elements...");
         let start = Instant::now();
-        self.db
-            .delete_range_cf_opt(cf, min, max, &self.write_opts)
-            .unwrap();
-        println!("Range delete complete in {:?}", start.elapsed());
-
-        // It's only one delete for the purposes of when do we need to compact.
-        let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
-        if ndeletes % 20000 == 0 {
-            let start = Instant::now();
-            let max_deleted = self.delete.swap(0, Ordering::Acquire);
-            self.db
-                .compact_range(None::<&[u8]>, Some(&max_deleted.to_be_bytes()));
-            println!("Compacting took {:?}", start.elapsed());
-        }
+        self.db.write_opt(batch, &self.write_opts).unwrap();
+        println!("Deletes completed in {:?}", start.elapsed());
 
         self.size.fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
         self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
+
+        // Immediately compact the range.
+        let start = Instant::now();
+        let max_deleted = self.delete.swap(0, Ordering::AcqRel);
+        if max_deleted
+            .to_be_bytes()
+            .iter()
+            .zip(max.iter())
+            .any(|(a, b)| a > b)
+        {
+            self.db
+                .compact_range(None::<&[u8]>, Some(max_deleted.to_be_bytes()));
+        } else {
+            self.db.compact_range(None::<&[u8]>, Some(max));
+        }
+        println!("Compacting took {:?}", start.elapsed());
+
         Ok(res)
     }
 
