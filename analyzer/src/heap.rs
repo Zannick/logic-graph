@@ -314,6 +314,7 @@ pub struct RocksBackedQueue<T: Ctx> {
     min_evictions: usize,
     max_evictions: usize,
     min_reshuffle: usize,
+    max_reshuffle: usize,
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
 }
@@ -326,6 +327,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         min_evictions: usize,
         max_evictions: usize,
         min_reshuffle: usize,
+        max_reshuffle: usize,
     ) -> Result<RocksBackedQueue<T>, String>
     where
         P: AsRef<Path>,
@@ -343,6 +345,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             min_evictions,
             max_evictions,
             min_reshuffle,
+            max_reshuffle,
             evictions: 0.into(),
             retrievals: 0.into(),
         })
@@ -502,6 +505,11 @@ impl<T: Ctx> RocksBackedQueue<T> {
         max_db_priority: &AtomicI32,
         num: usize,
     ) -> Result<(), String> {
+        println!(
+            "Beginning retrieve of {} entries, we have {} in the db",
+            num,
+            db.len()
+        );
         let start = Instant::now();
         queue.extend(db.retrieve(num)?.into_iter().map(|el| {
             let score = el.score(db.scale_factor());
@@ -520,11 +528,14 @@ impl<T: Ctx> RocksBackedQueue<T> {
             while let Some((_, &prio)) = queue.peek_max() {
                 let db_prio = self.max_db_priority.load(Ordering::Acquire);
                 // Only when we go a decent bit over
-                if prio < db_prio * 101 / 100 {
+                if !self.db.is_empty() && prio < db_prio * 101 / 100 {
                     let start = Instant::now();
                     let cap = self.capacity.load(Ordering::Acquire);
                     // Get a decent amount to refill
-                    let num_to_restore = std::cmp::min(self.min_reshuffle, (cap - queue.len()) / 2);
+                    let num_to_restore = std::cmp::max(
+                        self.min_reshuffle,
+                        std::cmp::min(self.max_reshuffle, (cap - queue.len()) / 2),
+                    );
                     let len = queue.len();
                     if cap - len < num_to_restore {
                         let evicted = Self::evict_until(
@@ -569,12 +580,15 @@ impl<T: Ctx> RocksBackedQueue<T> {
             }
             // Retrieve some from db
             let start = Instant::now();
-            Self::retrieve(
-                &mut queue,
-                &self.db,
-                &self.max_db_priority,
-                self.capacity.load(Ordering::Acquire) / 2,
-            )?;
+            let num_to_restore = std::cmp::max(
+                self.min_reshuffle,
+                std::cmp::min(
+                    self.max_reshuffle,
+                    (self.capacity.load(Ordering::Acquire) - queue.len()) / 2,
+                ),
+            );
+
+            Self::retrieve(&mut queue, &self.db, &self.max_db_priority, num_to_restore)?;
             self.retrievals.fetch_add(1, Ordering::Release);
             println!("Retrieval took total {:?}", start.elapsed());
         }
@@ -601,6 +615,9 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 }
             })
             .collect();
+        if vec.is_empty() {
+            return Ok(());
+        }
 
         let keeps = self.db.remember_which(&vec)?;
         debug_assert!(vec.len() == keeps.len());

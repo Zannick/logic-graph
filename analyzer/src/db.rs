@@ -154,7 +154,7 @@ where
         let _ = DB::destroy(&opts, &path);
         let db = DB::open_cf(&opts, &path, vec!["default"])?;
 
-        let cache3 = Cache::new_lru_cache(2 * GB)?;
+        let cache3 = Cache::new_lru_cache(4 * GB)?;
         opts2.set_row_cache(&cache3);
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
@@ -162,7 +162,7 @@ where
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_merge_operator_associative("min", min_merge);
 
-        // 2 GiB blocks + 2 GiB row cache = 4 GiB for this one?
+        // 1 GiB write buffers + 4 GiB row cache = 5GiB for this one?
         let _ = DB::destroy(&opts2, &path2);
         let seendb = DB::open(&opts2, &path2)?;
 
@@ -502,6 +502,7 @@ where
             tmp.push((el, seen_key));
         }
 
+        let start = Instant::now();
         let mut done = false;
         while res.len() < count {
             loop {
@@ -518,7 +519,7 @@ where
 
                     let seen_key = Self::get_seen_key(el.get());
                     tmp.push((el, seen_key));
-                    if tmp.len() == res.len() - count {
+                    if tmp.len() == count - res.len() {
                         break;
                     }
                 } else {
@@ -526,6 +527,7 @@ where
                     break;
                 }
             }
+            println!("Found {} values in this loop, done={}", tmp.len(), done);
 
             // Grab all the seen values in one request.
             let seen_values = self.get_seen_values(tmp.iter().map(|(_, k)| k))?;
@@ -549,12 +551,21 @@ where
             tmp = Vec::with_capacity(count - res.len());
         }
         max.push(u8::MAX);
+        println!(
+            "We got {} results in {:?}, having iterated through {} elements",
+            res.len(),
+            start.elapsed(),
+            pops
+        );
         let cf = self.db.cf_handle("default").unwrap();
 
-        // Ignore errors once we start deleting.
+        // Ignore/assert errors once we start deleting.
+        println!("Beginning deletion of range...");
+        let start = Instant::now();
         self.db
             .delete_range_cf_opt(cf, min, max, &self.write_opts)
             .unwrap();
+        println!("Range delete complete in {:?}", start.elapsed());
 
         // It's only one delete for the purposes of when do we need to compact.
         let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;

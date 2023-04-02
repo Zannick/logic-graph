@@ -189,7 +189,8 @@ where
             1_048_576,
             1_024,
             131_072,
-            32_768,
+            1_024,
+            8_096,
         )
         .unwrap();
         queue.push(startctx.clone()).unwrap();
