@@ -2,13 +2,14 @@
 extern crate rocksdb;
 
 use crate::context::*;
+use humansize::{SizeFormatter, BINARY};
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
-    BlockBasedOptions, Cache, CuckooTableOptions, IteratorMode, MergeOperands, Options,
+    perf, BlockBasedOptions, Cache, CuckooTableOptions, IteratorMode, MergeOperands, Options,
     ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::Serialize;
@@ -705,5 +706,27 @@ where
         );
 
         Ok(())
+    }
+
+    pub fn get_memory_usage_stats(&self) -> Result<String, Error> {
+        let dbstats = perf::get_memory_usage_stats(
+            Some(&[&self.db]),
+            Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
+        )?;
+        let seenstats =
+            perf::get_memory_usage_stats(Some(&[&self.seendb]), Some(&[&self._row_cache]))?;
+
+        Ok(format!(
+            "db: total={}, unflushed={}, readers={}, caches={}\n\
+             seendb: total={}, unflushed={}, readers={}, caches={}",
+            SizeFormatter::new(dbstats.mem_table_total, BINARY),
+            SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
+            SizeFormatter::new(dbstats.mem_table_readers_total, BINARY),
+            SizeFormatter::new(dbstats.cache_total, BINARY),
+            SizeFormatter::new(seenstats.mem_table_total, BINARY),
+            SizeFormatter::new(seenstats.mem_table_unflushed, BINARY),
+            SizeFormatter::new(seenstats.mem_table_readers_total, BINARY),
+            SizeFormatter::new(seenstats.cache_total, BINARY),
+        ))
     }
 }

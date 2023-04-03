@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 enum-map = "*"
+humansize = { version = "2.1", features = ["no_alloc"] }
 lru = "*"
 plotlib = "0.5"
 priority-queue = "*"

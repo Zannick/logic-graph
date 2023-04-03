@@ -14,7 +14,7 @@ use std::collections::BinaryHeap;
 use std::fmt::Debug;
 use std::num::NonZeroUsize;
 use std::path::Path;
-use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicI32, AtomicUsize, Ordering};
 use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
@@ -317,6 +317,7 @@ pub struct RocksBackedQueue<T: Ctx> {
     max_reshuffle: usize,
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
+    retrieving: AtomicBool,
 }
 
 impl<T: Ctx> RocksBackedQueue<T> {
@@ -348,6 +349,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             max_reshuffle,
             evictions: 0.into(),
             retrievals: 0.into(),
+            retrieving: false.into(),
         })
     }
 
@@ -468,6 +470,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 self.max_db_priority.fetch_max(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
                 println!("evict to db took {:?}", start.elapsed());
+                println!("{}", self.db.get_memory_usage_stats().unwrap());
             }
         }
 
@@ -519,6 +522,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             })
             .collect();
         println!("Retrieve from db took {:?}", start.elapsed());
+        println!("{}", db.get_memory_usage_stats().unwrap());
         // the max priority in the db is probably now the min of this result, or thereabouts
         // which should be the last element
         if let Some(el) = res.last() {
@@ -535,7 +539,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             while let Some((_, &prio)) = queue.peek_max() {
                 let db_prio = self.max_db_priority.load(Ordering::Acquire);
                 // Only when we go a decent bit over
-                if !self.db.is_empty() && prio < db_prio * 101 / 100 {
+                if !self.db.is_empty() && prio < db_prio * 101 / 100 && self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     let start = Instant::now();
                     let cap = self.capacity.load(Ordering::Acquire);
                     // Get a decent amount to refill
@@ -573,6 +577,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                     queue = self.queue.lock().unwrap();
                     queue.extend(res);
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
+                    self.retrieving.store(false, Ordering::Release);
                 }
                 let (ctx, prio) = queue.pop_max().unwrap();
                 debug_assert!(
@@ -679,6 +684,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 self.max_db_priority.fetch_max(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
                 println!("evict to db took {:?}", start.elapsed());
+                println!("{}", self.db.get_memory_usage_stats().unwrap());
             }
         }
 
