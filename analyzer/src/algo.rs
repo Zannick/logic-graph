@@ -112,16 +112,20 @@ where
         if act.can_access(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            c2.penalize(penalty * 4);
-            result.push(c2);
+            if c2.get() != ctx.get() {
+                c2.penalize(penalty * 4);
+                result.push(c2);
+            }
         }
     }
     for act in world.get_spot_actions(ctx.get().position()) {
         if act.can_access(ctx.get()) {
             let mut c2 = ctx.clone();
             c2.activate(act);
-            c2.penalize(penalty);
-            result.push(c2);
+            if c2.get() != ctx.get() {
+                c2.penalize(penalty);
+                result.push(c2);
+            }
         }
     }
     result
