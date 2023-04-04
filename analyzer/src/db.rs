@@ -143,6 +143,9 @@ where
         let cache2 = Cache::new_lru_cache(GB)?;
         block_opts.set_block_cache(&cache);
         block_opts.set_block_cache_compressed(&cache2);
+        block_opts.set_block_size(1024);
+        opts.set_max_background_jobs(4);
+        opts.set_max_open_files(-1);
         opts.set_block_based_table_factory(&block_opts);
 
         let mut path = p.as_ref().to_owned();
@@ -159,6 +162,10 @@ where
         cuckoo_opts.set_use_module_hash(false);
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_merge_operator_associative("min", min_merge);
+        opts2.set_compression_type(rocksdb::DBCompressionType::None);
+        opts2.set_allow_mmap_reads(true);
+        opts2.set_allow_mmap_writes(true);
+        opts2.set_memtable_whole_key_filtering(true);
 
         // 1 GiB write buffers + 4 GiB row cache = 5GiB for this one?
         let _ = DB::destroy(&opts2, &path2);
