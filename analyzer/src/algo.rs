@@ -334,7 +334,6 @@ where
     }
 
     pub fn search(self) -> Result<(), std::io::Error> {
-        let pc = rocksdb::perf::PerfContext::default();
         let start = Mutex::new(Instant::now());
 
         struct Iter<'a, T: Ctx> {
@@ -350,28 +349,29 @@ where
         let process_one = |ctx: ContextWrapper<T>| {
             // cut off when penalties are high enough
             // progressively raise the score threshold as the heap size increases
-            let heapsize_adjustment: i32 = (self.queue.len() / 32).try_into().unwrap();
+            let heapsize_adjustment: i32 = (self.queue.len() / 1024).try_into().unwrap();
             let solutions_adjustment: i32 =
                 self.solutions.lock().unwrap().len().try_into().unwrap();
             let iters = self.iters.fetch_add(1, Ordering::AcqRel);
             let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
                 + solutions_adjustment
-                + if iters > 10_000_000 {
-                    (iters - 10_000_000) / 1_024
+                + if iters > 25_000_000 {
+                    (iters - 25_000_000) / 1_024
                 } else {
                     0
                 };
             if ctx.score(self.queue.scale_factor()) < score_cutoff {
                 println!(
-                "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
-                ctx.score(self.queue.scale_factor()),
-                ctx.elapsed(),
-                ctx.penalty(),
-                self.queue.scale_factor(),
-                self.queue.max_time(),
-                ctx.info(self.queue.scale_factor())
-            );
-                self.queue.print_queue_histogram();
+                    "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
+                    ctx.score(self.queue.scale_factor()),
+                    ctx.elapsed(),
+                    ctx.penalty(),
+                    self.queue.scale_factor(),
+                    self.queue.max_time(),
+                    ctx.info(self.queue.scale_factor())
+                );
+                let pc = rocksdb::perf::PerfContext::default();
+                println!("{}", pc.report(true));
                 return Err("done");
             }
             if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
@@ -496,7 +496,7 @@ where
                 Err(s) => s,
             }
         );
-        println!("{}", pc.report(true));
+        self.queue.print_queue_histogram();
         self.solutions.into_inner().unwrap().export()
     }
 }

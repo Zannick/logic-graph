@@ -539,7 +539,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
             while let Some((_, &prio)) = queue.peek_max() {
                 let db_prio = self.max_db_priority.load(Ordering::Acquire);
                 // Only when we go a decent bit over
-                if !self.db.is_empty() && prio < db_prio * 101 / 100 && self.retrieving.fetch_or(true, Ordering::AcqRel) {
+                if !self.db.is_empty()
+                    && prio < db_prio * 101 / 100
+                    && self.retrieving.fetch_or(true, Ordering::AcqRel)
+                {
                     let start = Instant::now();
                     let cap = self.capacity.load(Ordering::Acquire);
                     // Get a decent amount to refill
@@ -704,15 +707,15 @@ impl<T: Ctx> RocksBackedQueue<T> {
     pub fn print_queue_histogram(&self) {
         let queue = self.queue.lock().unwrap();
         let times: Vec<f64> = queue.iter().map(|c| c.0.elapsed().into()).collect();
-        let time_scores: Vec<(f64, f64)> = queue
-            .iter()
-            .map(|c| {
-                (
-                    c.0.elapsed().into(),
-                    c.0.score(self.db.scale_factor()).into(),
-                )
-            })
-            .collect();
+        let mut time_scores = Vec::new();
+        let mut time_progress = Vec::new();
+        for c in queue.iter() {
+            let elapsed: f64 = c.0.elapsed().into();
+            let score: f64 = c.0.score(self.db.scale_factor()).into();
+            let progress: f64 = c.0.get().progress().into();
+            time_scores.push((elapsed, score));
+            time_progress.push((elapsed, progress));
+        }
         // unlock
         drop(queue);
 
@@ -733,6 +736,17 @@ impl<T: Ctx> RocksBackedQueue<T> {
             .x_range(0., self.db.max_time().into());
         println!(
             "Heap scores by time:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+        let p = Plot::new(time_progress).point_style(PointStyle::new().marker(PointMarker::Square));
+        let v = ContinuousView::new()
+            .add(p)
+            .x_label("elapsed time")
+            .y_label("progress")
+            .x_range(0., self.db.max_time().into())
+            .y_range(0., 100.);
+        println!(
+            "Heap progress by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
     }

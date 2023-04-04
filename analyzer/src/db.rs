@@ -38,7 +38,6 @@ pub struct HeapDB<T> {
     seendb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
-    _row_cache: Cache,
     _opts: HeapDBOptions,
     _seen_opts: HeapDBOptions,
     write_opts: WriteOptions,
@@ -155,8 +154,6 @@ where
         let _ = DB::destroy(&opts, &path);
         let db = DB::open(&opts, &path)?;
 
-        let cache3 = Cache::new_lru_cache(4 * GB)?;
-        opts2.set_row_cache(&cache3);
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
         cuckoo_opts.set_use_module_hash(false);
@@ -175,7 +172,6 @@ where
             seendb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
-            _row_cache: cache3,
             _opts: HeapDBOptions { opts, path },
             _seen_opts: HeapDBOptions {
                 opts: opts2,
@@ -714,11 +710,12 @@ where
             Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
         )?;
         let seenstats =
-            perf::get_memory_usage_stats(Some(&[&self.seendb]), Some(&[&self._row_cache]))?;
+            perf::get_memory_usage_stats(Some(&[&self.seendb]), None)?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}\n\
-             seendb: total={}, unflushed={}, readers={}, caches={}",
+             seendb: total={}, unflushed={}, readers={}, caches={}\n\
+             uncompressed={}, compressed={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
             SizeFormatter::new(dbstats.mem_table_readers_total, BINARY),
@@ -727,6 +724,8 @@ where
             SizeFormatter::new(seenstats.mem_table_unflushed, BINARY),
             SizeFormatter::new(seenstats.mem_table_readers_total, BINARY),
             SizeFormatter::new(seenstats.cache_total, BINARY),
+            SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
+            SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
         ))
     }
 }
