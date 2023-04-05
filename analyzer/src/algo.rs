@@ -318,9 +318,10 @@ where
 
     fn choose_mode(&self, ctx: &ContextWrapper<T>) -> SearchMode {
         let iters = self.iters.load(Ordering::Acquire);
+        let index = rayon::current_thread_index().unwrap_or(0);
         if iters < 100_000 {
             SearchMode::Classic
-        } else if let Some(3) = rayon::current_thread_index() {
+        } else if index % 4 == 3 {
             SearchMode::Greedy
         } else if iters % 2048 != 0 {
             SearchMode::Classic
@@ -335,6 +336,10 @@ where
 
     pub fn search(self) -> Result<(), std::io::Error> {
         let start = Mutex::new(Instant::now());
+        println!(
+            "Starting search with {} threads",
+            rayon::current_num_threads()
+        );
 
         struct Iter<'a, T: Ctx> {
             q: &'a RocksBackedQueue<T>,
@@ -454,7 +459,7 @@ where
                             break;
                         }
                     }
-                    this_round.sort_unstable_by_key(|c| c.elapsed() - c.penalty());
+                    this_round.sort_unstable_by_key(|c| -c.elapsed() - c.penalty());
                     self.depth_step(this_round.pop().unwrap(), mode, d);
                     self.queue.extend(this_round).unwrap();
                 }

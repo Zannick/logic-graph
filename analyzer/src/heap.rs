@@ -514,7 +514,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         );
         let start = Instant::now();
         let res: Vec<_> = db
-            .retrieve(num)?
+            .retrieve(max_db_priority.load(Ordering::Acquire), num)?
             .into_iter()
             .map(|el| {
                 let score = el.score(db.scale_factor());

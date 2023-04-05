@@ -145,7 +145,6 @@ where
         block_opts.set_block_cache_compressed(&cache2);
         block_opts.set_block_size(1024);
         opts.set_max_background_jobs(4);
-        opts.set_max_open_files(-1);
         opts.set_block_based_table_factory(&block_opts);
 
         let mut path = p.as_ref().to_owned();
@@ -476,11 +475,12 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
-    pub fn retrieve(&self, count: usize) -> Result<Vec<ContextWrapper<T>>, Error> {
+    pub fn retrieve(&self, start_priority: i32, count: usize) -> Result<Vec<ContextWrapper<T>>, Error> {
         let mut res = Vec::with_capacity(count);
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
+        tail_opts.set_iterate_lower_bound(Self::get_heap_prefix(start_priority));
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
         let mut batch = WriteBatchWithTransaction::<false>::default();
@@ -571,22 +571,6 @@ where
         self.size.fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
         self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
-
-        // Immediately compact the range.
-        let start = Instant::now();
-        let max_deleted = self.delete.swap(0, Ordering::AcqRel);
-        if max_deleted
-            .to_be_bytes()
-            .iter()
-            .zip(max.iter())
-            .any(|(a, b)| a > b)
-        {
-            self.db
-                .compact_range(None::<&[u8]>, Some(max_deleted.to_be_bytes()));
-        } else {
-            self.db.compact_range(None::<&[u8]>, Some(max));
-        }
-        println!("Compacting took {:?}", start.elapsed());
 
         Ok(res)
     }
