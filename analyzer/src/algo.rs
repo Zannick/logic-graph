@@ -17,6 +17,19 @@ enum SearchMode {
     Depth(u8),
     Greedy,
     PickDepth(u8),
+    PickMin,
+    Dependent,
+}
+
+fn mode_by_index(index: usize) -> SearchMode {
+    match index % 16 {
+        1 | 6 | 10 | 14 => SearchMode::Dependent,
+        2 | 7 | 11 | 15 => SearchMode::Greedy,
+        4 => SearchMode::Depth(3),
+        8 => SearchMode::PickDepth(3),
+        12 => SearchMode::PickDepth(8),
+        _ => SearchMode::Classic,
+    }
 }
 
 pub fn explore<W, T, L, E>(
@@ -240,6 +253,24 @@ where
         sols.insert(ctx)
     }
 
+    fn extract_solutions(
+        &self,
+        states: Vec<ContextWrapper<T>>,
+        mode: SearchMode,
+    ) -> Vec<ContextWrapper<T>> {
+        states
+            .into_iter()
+            .filter_map(|ctx| {
+                if self.world.won(ctx.get()) {
+                    self.handle_solution(ctx, mode);
+                    None
+                } else {
+                    Some(ctx)
+                }
+            })
+            .collect()
+    }
+
     fn classic_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
         // The process will look more like this:
         // 1. explore -> vec of spot ctxs with penalties applied
@@ -291,8 +322,12 @@ where
                 next.push(ctx);
             }
         }
+        if next.is_empty() {
+            return min_score;
+        }
         d -= 1;
-        next.sort_unstable_by_key(|c| (c.get().progress(), -c.elapsed()));
+        // No need to sort, when we only want to pop the max element by (progress, elapsed).
+        crate::swap_max_to_end(&mut next, |c| (c.get().progress(), -c.elapsed()));
         while let Some(ctx) = next.pop() {
             self.queue.extend(next).unwrap();
             next = Vec::new();
@@ -312,23 +347,19 @@ where
                 self.queue.extend(next).unwrap();
                 break;
             }
+
+            crate::swap_max_to_end(&mut next, |c| (c.get().progress(), -c.elapsed()));
         }
         min_score
     }
 
-    fn choose_mode(&self, ctx: &ContextWrapper<T>) -> SearchMode {
-        let iters = self.iters.load(Ordering::Acquire);
-        let index = rayon::current_thread_index().unwrap_or(0);
-        if iters < 100_000 {
+    fn choose_mode(&self, iters: i32, ctx: &ContextWrapper<T>) -> SearchMode {
+        if iters % 2048 != 0 {
             SearchMode::Classic
-        } else if index % 4 == 3 {
-            SearchMode::Greedy
-        } else if iters % 2048 != 0 {
-            SearchMode::Classic
+        } else if iters % 4096 == 0 {
+            SearchMode::PickMin
         } else if ctx.elapsed() * 3 < self.queue.max_time() {
             SearchMode::Depth(4)
-        } else if ctx.get().progress() > 60 {
-            SearchMode::Greedy
         } else {
             SearchMode::PickDepth(3)
         }
@@ -351,13 +382,13 @@ where
                 self.q.pop().unwrap()
             }
         }
-        let process_one = |ctx: ContextWrapper<T>| {
+        let process_one = |ctx: ContextWrapper<T>, mode: SearchMode| {
             // cut off when penalties are high enough
             // progressively raise the score threshold as the heap size increases
             let heapsize_adjustment: i32 = (self.queue.len() / 1024).try_into().unwrap();
             let solutions_adjustment: i32 =
                 self.solutions.lock().unwrap().len().try_into().unwrap();
-            let iters = self.iters.fetch_add(1, Ordering::AcqRel);
+            let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
             let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
                 + solutions_adjustment
                 + if iters > 25_000_000 {
@@ -384,7 +415,6 @@ where
                 return Ok(());
             }
 
-            let iters = iters + 1;
             if iters % 10000 == 0 {
                 let mut s = start.lock().unwrap();
                 println!("10000 iters took {:?}", s.elapsed());
@@ -426,29 +456,33 @@ where
                 );
             }
 
-            let mode = self.choose_mode(&ctx);
-            match mode {
+            let current_mode = if iters < 1_000_000 {
+                SearchMode::Classic
+            } else if mode == SearchMode::Dependent {
+                self.choose_mode(iters, &ctx)
+            } else {
+                mode
+            };
+            match current_mode {
                 SearchMode::Depth(d) if d > 1 => {
                     self.depth_step(ctx, mode, d);
                 }
                 SearchMode::Greedy => {
-                    if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
-                        if win.elapsed() <= self.queue.max_time() {
-                            self.handle_solution(win, mode);
+                    // Run a classic step on the given state and handle any solutions
+                    let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
+                    // Pick a state greedily: max progress, min elapsed, and do a greedy search.
+                    if let Some(ctx) = next
+                        .iter()
+                        .max_by_key(|ctx| (ctx.get().progress(), -ctx.elapsed()))
+                    {
+                        if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
+                            if win.elapsed() <= self.queue.max_time() {
+                                self.handle_solution(win, mode);
+                            }
                         }
                     }
-                    let next: Vec<ContextWrapper<T>> = self
-                        .classic_step(ctx)
-                        .into_iter()
-                        .filter_map(|ctx| {
-                            if self.world.won(ctx.get()) {
-                                self.handle_solution(ctx, SearchMode::Classic);
-                                None
-                            } else {
-                                Some(ctx)
-                            }
-                        })
-                        .collect();
+
+                    // All the classic states are still pushed to the queue, even the one we used
                     self.queue.extend(next).unwrap();
                 }
                 SearchMode::PickDepth(d) if d > 1 => {
@@ -459,23 +493,28 @@ where
                             break;
                         }
                     }
-                    this_round.sort_unstable_by_key(|c| -c.elapsed() - c.penalty());
+                    crate::swap_min_to_end(&mut this_round, |c| (c.elapsed(), c.penalty()));
                     self.depth_step(this_round.pop().unwrap(), mode, d);
                     self.queue.extend(this_round).unwrap();
                 }
+                SearchMode::PickMin => {
+                    if let Some(minctx) = self.queue.pop_min_elapsed().unwrap() {
+                        if ctx.elapsed() < minctx.elapsed() {
+                            let mut next = self.extract_solutions(self.classic_step(ctx), mode);
+                            next.push(minctx);
+                            self.queue.extend(next).unwrap();
+                        } else {
+                            let mut next = self.extract_solutions(self.classic_step(minctx), mode);
+                            next.push(ctx);
+                            self.queue.extend(next).unwrap();
+                        }
+                    } else {
+                        let next = self.extract_solutions(self.classic_step(ctx), mode);
+                        self.queue.extend(next).unwrap();
+                    }
+                }
                 _ => {
-                    let next: Vec<ContextWrapper<T>> = self
-                        .classic_step(ctx)
-                        .into_iter()
-                        .filter_map(|ctx| {
-                            if self.world.won(ctx.get()) {
-                                self.handle_solution(ctx, SearchMode::Classic);
-                                None
-                            } else {
-                                Some(ctx)
-                            }
-                        })
-                        .collect();
+                    let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
                     self.queue.extend(next).unwrap();
                 }
             }
@@ -485,7 +524,12 @@ where
         let mut res = Ok(());
         while res.is_ok() && !self.queue.is_empty() {
             let iter = Iter { q: &self.queue };
-            res = iter.par_bridge().try_for_each(process_one);
+            res = iter.par_bridge().try_for_each(|item| {
+                process_one(
+                    item,
+                    mode_by_index(rayon::current_thread_index().unwrap_or_default()),
+                )
+            });
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         println!(

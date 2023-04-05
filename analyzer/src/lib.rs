@@ -27,6 +27,32 @@ pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {
     rustc_hash::FxHashSet::default()
 }
 
+pub(crate) fn swap_min_to_end<T, B, F>(slice: &mut [T], f: F)
+where
+    F: FnMut(&&T) -> B,
+    T: Eq,
+    B: Ord,
+{
+    if let Some(min) = slice.iter().min_by_key(f) {
+        let index = Iterator::position(&mut slice.iter(), |ctx| ctx == min).unwrap();
+        let last = slice.len() - 1;
+        slice.swap(index, last);
+    }
+}
+
+pub(crate) fn swap_max_to_end<T, B, F>(slice: &mut [T], f: F)
+where
+    F: FnMut(&&T) -> B,
+    T: Eq,
+    B: Ord,
+{
+    if let Some(max) = slice.iter().max_by_key(f) {
+        let index = Iterator::position(&mut slice.iter(), |ctx| ctx == max).unwrap();
+        let last = slice.len() - 1;
+        slice.swap(index, last);
+    }
+}
+
 pub mod testlib {
     #[macro_export]
     macro_rules! expect_no_route {
