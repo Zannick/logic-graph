@@ -479,7 +479,11 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
-    pub fn retrieve(&self, start_priority: i32, count: usize) -> Result<Vec<ContextWrapper<T>>, Error> {
+    pub fn retrieve(
+        &self,
+        start_priority: i32,
+        count: usize,
+    ) -> Result<Vec<ContextWrapper<T>>, Error> {
         let mut res = Vec::with_capacity(count);
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -704,8 +708,7 @@ where
             Some(&[&self.db]),
             Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
         )?;
-        let seenstats =
-            perf::get_memory_usage_stats(Some(&[&self.seendb]), None)?;
+        let seenstats = perf::get_memory_usage_stats(Some(&[&self.seendb]), None)?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}\n\

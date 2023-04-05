@@ -376,7 +376,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
     /// Returns whether the underlying queue and db are actually empty.
     /// Even if this returns false, attempting to peek or pop may produce None.
     pub fn is_empty(&self) -> bool {
-        self.queue.lock().unwrap().is_empty() && self.db.len() == 0
+        self.db.len() == 0 && self.queue.lock().unwrap().is_empty()
     }
 
     pub fn max_time(&self) -> i32 {
@@ -617,6 +617,20 @@ impl<T: Ctx> RocksBackedQueue<T> {
         Ok(None)
     }
 
+    pub fn pop_min_elapsed(&self) -> Result<Option<ContextWrapper<T>>, String> {
+        let mut queue = self.queue.lock().unwrap();
+        let min = queue.iter().min_by_key(|(ctx, _)| ctx.elapsed());
+        if let Some(item) = min {
+            // We cannot move it out of the queue without remove() but we cannot
+            // provide a reference within queue to remove()
+            let item = item.0.clone();
+            queue.remove(&item).unwrap();
+            Ok(Some(item))
+        } else {
+            Ok(None)
+        }
+    }
+
     /// Adds all the given elements to the queue, except for any
     /// elements with elapsed time greater than the allowed maximum
     /// or having been seen before with a smaller elapsed time.
@@ -706,6 +720,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
 
     pub fn print_queue_histogram(&self) {
         let queue = self.queue.lock().unwrap();
+        if queue.is_empty() {
+            println!("Queue is empty, no graph to print");
+            return;
+        }
         let times: Vec<f64> = queue.iter().map(|c| c.0.elapsed().into()).collect();
         let mut time_scores = Vec::new();
         let mut time_progress = Vec::new();
