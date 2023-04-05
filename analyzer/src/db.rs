@@ -133,7 +133,11 @@ where
         // 4 write buffers at 256 MiB = 1 GiB
         opts.set_write_buffer_size(256 * MB);
         opts.set_max_write_buffer_number(4);
-        opts.increase_parallelism(2);
+        // use half the logical cores, clamp between 2 and 32
+        opts.increase_parallelism(std::cmp::max(
+            2,
+            std::cmp::min(num_cpus::get() / 2, 32).try_into().unwrap(),
+        ));
 
         let mut opts2 = opts.clone();
 
