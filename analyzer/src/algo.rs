@@ -406,11 +406,6 @@ where
         self.solutions.into_inner().unwrap().export()
     }
 
-    fn process_async_thread(&self, start: &Mutex<Instant>, mode: SearchMode) {
-        let sender = self.queue.input_sender();
-        let receiver = self.queue.output_receiver();
-    }
-
     fn process_one(
         &self,
         ctx: ContextWrapper<T>,
