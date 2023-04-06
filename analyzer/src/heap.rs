@@ -669,6 +669,9 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 }
             })
             .collect();
+        if vec.is_empty() {
+            return Ok(());
+        }
 
         let mut evicted = None;
         {

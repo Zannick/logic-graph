@@ -19,3 +19,4 @@ target/
 # Output
 **/data/*.txt
 .db/
+.vs/
