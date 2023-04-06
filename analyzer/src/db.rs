@@ -189,7 +189,7 @@ where
             },
             write_opts,
             max_time: initial_max_time.into(),
-            scale_factor: initial_max_time / 18000,
+            scale_factor: initial_max_time / 12000,
             seq: 0.into(),
             size: 0.into(),
             seen: 0.into(),

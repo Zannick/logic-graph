@@ -4,7 +4,9 @@ use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::sync::Arc;
 
-pub trait Ctx: Clone + Eq + Debug + Hash + Send + Sync + Serialize + for<'a> Deserialize<'a> {
+pub trait Ctx:
+    Clone + Eq + Debug + Hash + Send + Sync + Serialize + for<'a> Deserialize<'a>
+{
     type World: World;
     type ItemId: Id;
     type AreaId: Id;
@@ -242,14 +244,22 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 
     pub fn score(&self, scale_factor: i32) -> i32 {
-        // We want to sort by elapsed time, low to high: (X - elapsed)
+        // We want to sort by elapsed time, low to high:
         // with a bonus based on progress to prioritize states closer to the end:
         //   + 50 * progress * progress [progress in range 0..100]
         //   i.e. 0 to 500,000
         // (on the order of the real max time seems good)
+        // However, we want to make sure we get variety in the early-to-mid game,
+        // so we have to prioritize low-progress/low-elapsed times.
         // penalty is added to states that do really inefficient things
         // and to deprioritize actions
-        scale_factor * self.ctx.progress() * self.ctx.progress() - self.elapsed - self.penalty
+        let progress = self.ctx.progress();
+        -self.elapsed - self.penalty
+            + if progress > 25 {
+                scale_factor * progress * progress
+            } else {
+                scale_factor * 25 * 25
+            }
     }
 
     pub fn get(&self) -> &T {
