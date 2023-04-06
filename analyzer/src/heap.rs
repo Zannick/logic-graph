@@ -3,6 +3,7 @@ extern crate plotlib;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::CommonHasher;
+use async_channel::{Receiver, Sender};
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -16,7 +17,7 @@ use std::num::NonZeroUsize;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicI32, AtomicUsize, Ordering};
 use std::sync::{Mutex, MutexGuard};
-use std::time::Instant;
+use std::time::{Instant, Duration};
 
 #[derive(Debug, SortBy)]
 pub(crate) struct HeapElement<T: Ctx> {
@@ -318,6 +319,10 @@ pub struct RocksBackedQueue<T: Ctx> {
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
     retrieving: AtomicBool,
+    input_sender: Sender<Vec<ContextWrapper<T>>>,
+    input_receiver: Receiver<Vec<ContextWrapper<T>>>,
+    output_sender: Sender<ContextWrapper<T>>,
+    output_receiver: Receiver<ContextWrapper<T>>,
 }
 
 impl<T: Ctx> RocksBackedQueue<T> {
@@ -329,10 +334,13 @@ impl<T: Ctx> RocksBackedQueue<T> {
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
+        channel_capacity: usize,
     ) -> Result<RocksBackedQueue<T>, String>
     where
         P: AsRef<Path>,
     {
+        let (input_sender, input_receiver) = async_channel::bounded(channel_capacity);
+        let (output_sender, output_receiver) = async_channel::bounded(channel_capacity);
         Ok(RocksBackedQueue {
             queue: Mutex::new(DoublePriorityQueue::with_capacity_and_hasher(
                 max_capacity,
@@ -350,6 +358,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
             evictions: 0.into(),
             retrievals: 0.into(),
             retrieving: false.into(),
+            input_sender,
+            input_receiver,
+            output_sender,
+            output_receiver,
         })
     }
 
@@ -767,5 +779,40 @@ impl<T: Ctx> RocksBackedQueue<T> {
             "Heap progress by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
+    }
+}
+
+impl<T: Ctx> RocksBackedQueue<T> {
+    pub fn output_receiver(&self) -> Receiver<ContextWrapper<T>> {
+        self.output_receiver.clone()
+    }
+
+    pub fn input_sender(&self) -> Sender<Vec<ContextWrapper<T>>> {
+        self.input_sender.clone()
+    }
+
+    pub async fn send_input(
+        &self,
+        vec: Vec<ContextWrapper<T>>,
+    ) -> Result<(), async_channel::SendError<Vec<ContextWrapper<T>>>> {
+        self.input_sender.send(vec).await
+    }
+
+    pub async fn handle_input(&self) {
+        while let Ok(vec) = self.input_receiver.recv().await {
+            self.extend(vec).unwrap();
+        }
+    }
+
+    pub async fn handle_output(&self) {
+        loop {
+            while let Ok(Some(el)) = self.pop() {
+                self.output_sender.send(el).await.unwrap();
+            }
+            if self.input_receiver.is_closed() {
+                break;
+            }
+            std::thread::sleep(Duration::new(1, 0));
+        }
     }
 }

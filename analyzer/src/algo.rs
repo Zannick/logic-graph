@@ -5,6 +5,8 @@ use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
+use async_channel::Receiver;
+use futures::executor::block_on;
 use rayon::prelude::*;
 use std::fmt::Debug;
 use std::sync::atomic::{AtomicI32, AtomicU32, Ordering};
@@ -208,6 +210,7 @@ where
             131_072,
             1_024,
             8_096,
+            64,
         )
         .unwrap();
         queue.push(startctx.clone()).unwrap();
@@ -308,7 +311,12 @@ where
         result
     }
 
-    fn depth_step(&self, ctx: ContextWrapper<T>, mode: SearchMode, mut d: u8) -> Vec<ContextWrapper<T>> {
+    fn depth_step(
+        &self,
+        ctx: ContextWrapper<T>,
+        mode: SearchMode,
+        mut d: u8,
+    ) -> Vec<ContextWrapper<T>> {
         let mut next = Vec::new();
         let mut ret = Vec::new();
         for ctx in self.classic_step(ctx) {
@@ -364,29 +372,40 @@ where
             rayon::current_num_threads()
         );
 
-        struct Iter<'a, T: Ctx> {
-            q: &'a RocksBackedQueue<T>,
+        struct Iter<T: Ctx> {
+            r: Receiver<ContextWrapper<T>>,
         }
-        impl<'a, T: Ctx> Iterator for Iter<'a, T> {
+        impl<T: Ctx> Iterator for Iter<T> {
             type Item = ContextWrapper<T>;
 
             fn next(&mut self) -> Option<Self::Item> {
-                self.q.pop().unwrap()
+                block_on(self.r.recv()).ok()
             }
         }
 
         let mut res = Ok(());
         while res.is_ok() && !self.queue.is_empty() {
-            let iter = Iter { q: &self.queue };
-            res = iter.par_bridge().try_for_each(|item| {
-                self.queue
-                    .extend(self.process_one(
-                        item,
-                        &start,
-                        mode_by_index(rayon::current_thread_index().unwrap_or_default()),
-                    )?)
-                    .map(|_| ())
-            });
+            let iter = Iter {
+                r: self.queue.output_receiver(),
+            };
+            rayon::join(
+                || {
+                    rayon::join(
+                        || block_on(self.queue.handle_input()),
+                        || block_on(self.queue.handle_output()),
+                    )
+                },
+                || {
+                    res = iter.par_bridge().try_for_each(|item| {
+                        let vec = self.process_one(
+                            item,
+                            &start,
+                            mode_by_index(rayon::current_thread_index().unwrap_or_default()),
+                        )?;
+                        block_on(self.queue.send_input(vec)).map_err(|e| e.to_string())
+                    });
+                },
+            );
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         println!(
@@ -404,11 +423,6 @@ where
         );
         self.queue.print_queue_histogram();
         self.solutions.into_inner().unwrap().export()
-    }
-
-    fn process_async_thread(&self, start: &Mutex<Instant>, mode: SearchMode) {
-        let sender = self.queue.input_sender();
-        let receiver = self.queue.output_receiver();
     }
 
     fn process_one(
