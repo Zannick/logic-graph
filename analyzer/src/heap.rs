@@ -541,7 +541,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 // Only when we go a decent bit over
                 if !self.db.is_empty()
                     && prio < db_prio * 101 / 100
-                    && self.retrieving.fetch_or(true, Ordering::AcqRel)
+                    && !self.retrieving.fetch_or(true, Ordering::AcqRel)
                 {
                     let start = Instant::now();
                     let cap = self.capacity.load(Ordering::Acquire);
