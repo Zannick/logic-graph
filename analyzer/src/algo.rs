@@ -308,49 +308,41 @@ where
         result
     }
 
-    fn depth_step(&self, ctx: ContextWrapper<T>, mode: SearchMode, mut d: u8) -> Option<i32> {
+    fn depth_step(&self, ctx: ContextWrapper<T>, mode: SearchMode, mut d: u8) -> Vec<ContextWrapper<T>> {
         let mut next = Vec::new();
-        let mut min_score = Some(ctx.score(self.queue.scale_factor()));
+        let mut ret = Vec::new();
         for ctx in self.classic_step(ctx) {
             if self.world.won(ctx.get()) {
                 self.handle_solution(ctx, mode);
-                min_score = None;
             } else {
-                if let Some(c) = min_score {
-                    min_score = Some(std::cmp::max(c, ctx.score(self.queue.scale_factor())));
-                }
                 next.push(ctx);
             }
         }
         if next.is_empty() {
-            return min_score;
+            return ret;
         }
         d -= 1;
         // No need to sort, when we only want to pop the max element by (progress, elapsed).
         crate::swap_max_to_end(&mut next, |c| (c.get().progress(), -c.elapsed()));
         while let Some(ctx) = next.pop() {
-            self.queue.extend(next).unwrap();
+            ret.extend(next);
             next = Vec::new();
             for ctx in self.classic_step(ctx) {
                 if self.world.won(ctx.get()) {
                     self.handle_solution(ctx, mode);
-                    min_score = None;
                 } else {
-                    if let Some(c) = min_score {
-                        min_score = Some(std::cmp::max(c, ctx.score(self.queue.scale_factor())));
-                    }
                     next.push(ctx);
                 }
             }
             d -= 1;
             if d == 0 {
-                self.queue.extend(next).unwrap();
+                ret.extend(next);
                 break;
             }
 
             crate::swap_max_to_end(&mut next, |c| (c.get().progress(), -c.elapsed()));
         }
-        min_score
+        ret
     }
 
     fn choose_mode(&self, iters: i32, ctx: &ContextWrapper<T>) -> SearchMode {
@@ -382,153 +374,18 @@ where
                 self.q.pop().unwrap()
             }
         }
-        let process_one = |ctx: ContextWrapper<T>, mode: SearchMode| {
-            // cut off when penalties are high enough
-            // progressively raise the score threshold as the heap size increases
-            let heapsize_adjustment: i32 = (self.queue.len() / 1024).try_into().unwrap();
-            let solutions_adjustment: i32 =
-                self.solutions.lock().unwrap().len().try_into().unwrap();
-            let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-            let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
-                + solutions_adjustment
-                + if iters > 25_000_000 {
-                    (iters - 25_000_000) / 1_024
-                } else {
-                    0
-                };
-            if ctx.score(self.queue.scale_factor()) < score_cutoff {
-                println!(
-                    "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
-                    ctx.score(self.queue.scale_factor()),
-                    ctx.elapsed(),
-                    ctx.penalty(),
-                    self.queue.scale_factor(),
-                    self.queue.max_time(),
-                    ctx.info(self.queue.scale_factor())
-                );
-                let pc = rocksdb::perf::PerfContext::default();
-                println!("{}", pc.report(true));
-                return Err("done");
-            }
-            if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
-                self.deadends.fetch_add(1, Ordering::Release);
-                return Ok(());
-            }
-
-            if iters % 10000 == 0 {
-                let mut s = start.lock().unwrap();
-                println!("10000 iters took {:?}", s.elapsed());
-                *s = Instant::now();
-
-                let sols = self.solutions.lock().unwrap();
-                if iters > 10_000_000 && sols.unique() > 4 {
-                    self.queue.set_max_time(sols.best());
-                }
-                if iters % 1_000_000 == 0 {
-                    self.queue.print_queue_histogram();
-                }
-                let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
-                let max_time = self.queue.max_time();
-                println!(
-                    "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
-                    Queue stats: heap={}; db={}; total={}; seen={}; limit: {}ms; db best: {}\n\
-                    push_skips={} time + {} dups; pop_skips={} time + {} dups; evictions: {}; retrievals: {}\n\
-                    {}",
-                    iters,
-                    sols.len(),
-                    sols.unique(),
-                    self.deadends.load(Ordering::Acquire),
-                    heapsize_adjustment - max_time,
-                    self.queue.scale_factor(),
-                    self.queue.heap_len(),
-                    self.queue.db_len(),
-                    self.queue.len(),
-                    self.queue.seen(),
-                    max_time,
-                    self.queue.db_best(),
-                    iskips,
-                    dskips,
-                    pskips,
-                    dpskips,
-                    self.queue.evictions(),
-                    self.queue.retrievals(),
-                    ctx.info(self.queue.scale_factor())
-                );
-            }
-
-            let current_mode = if iters < 1_000_000 {
-                SearchMode::Classic
-            } else if mode == SearchMode::Dependent {
-                self.choose_mode(iters, &ctx)
-            } else {
-                mode
-            };
-            match current_mode {
-                SearchMode::Depth(d) if d > 1 => {
-                    self.depth_step(ctx, mode, d);
-                }
-                SearchMode::Greedy => {
-                    // Run a classic step on the given state and handle any solutions
-                    let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
-                    // Pick a state greedily: max progress, min elapsed, and do a greedy search.
-                    if let Some(ctx) = next
-                        .iter()
-                        .max_by_key(|ctx| (ctx.get().progress(), -ctx.elapsed()))
-                    {
-                        if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
-                            if win.elapsed() <= self.queue.max_time() {
-                                self.handle_solution(win, mode);
-                            }
-                        }
-                    }
-
-                    // All the classic states are still pushed to the queue, even the one we used
-                    self.queue.extend(next).unwrap();
-                }
-                SearchMode::PickDepth(d) if d > 1 => {
-                    let mut this_round = vec![ctx];
-                    while let Some(c) = self.queue.pop().unwrap() {
-                        this_round.push(c);
-                        if this_round.len() > 9 {
-                            break;
-                        }
-                    }
-                    crate::swap_min_to_end(&mut this_round, |c| (c.elapsed(), c.penalty()));
-                    self.depth_step(this_round.pop().unwrap(), mode, d);
-                    self.queue.extend(this_round).unwrap();
-                }
-                SearchMode::PickMin => {
-                    if let Some(minctx) = self.queue.pop_min_elapsed().unwrap() {
-                        if ctx.elapsed() < minctx.elapsed() {
-                            let mut next = self.extract_solutions(self.classic_step(ctx), mode);
-                            next.push(minctx);
-                            self.queue.extend(next).unwrap();
-                        } else {
-                            let mut next = self.extract_solutions(self.classic_step(minctx), mode);
-                            next.push(ctx);
-                            self.queue.extend(next).unwrap();
-                        }
-                    } else {
-                        let next = self.extract_solutions(self.classic_step(ctx), mode);
-                        self.queue.extend(next).unwrap();
-                    }
-                }
-                _ => {
-                    let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
-                    self.queue.extend(next).unwrap();
-                }
-            }
-            Ok(())
-        };
 
         let mut res = Ok(());
         while res.is_ok() && !self.queue.is_empty() {
             let iter = Iter { q: &self.queue };
             res = iter.par_bridge().try_for_each(|item| {
-                process_one(
-                    item,
-                    mode_by_index(rayon::current_thread_index().unwrap_or_default()),
-                )
+                self.queue
+                    .extend(self.process_one(
+                        item,
+                        &start,
+                        mode_by_index(rayon::current_thread_index().unwrap_or_default()),
+                    )?)
+                    .map(|_| ())
             });
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
@@ -541,11 +398,169 @@ where
             pskips,
             dpskips,
             match res {
-                Ok(_) => "emptied queue",
+                Ok(_) => String::from("emptied queue"),
                 Err(s) => s,
             }
         );
         self.queue.print_queue_histogram();
         self.solutions.into_inner().unwrap().export()
+    }
+
+    fn process_async_thread(&self, start: &Mutex<Instant>, mode: SearchMode) {
+        let sender = self.queue.input_sender();
+        let receiver = self.queue.output_receiver();
+    }
+
+    fn process_one(
+        &self,
+        ctx: ContextWrapper<T>,
+        start: &Mutex<Instant>,
+        mode: SearchMode,
+    ) -> Result<Vec<ContextWrapper<T>>, &str> {
+        // cut off when penalties are high enough
+        // progressively raise the score threshold as the heap size increases
+        let heapsize_adjustment: i32 = (self.queue.len() / 1024).try_into().unwrap();
+        let solutions_adjustment: i32 = self.solutions.lock().unwrap().len().try_into().unwrap();
+        let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+        let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
+            + solutions_adjustment
+            + if iters > 25_000_000 {
+                (iters - 25_000_000) / 1_024
+            } else {
+                0
+            };
+        if ctx.score(self.queue.scale_factor()) < score_cutoff {
+            println!(
+                "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
+                ctx.score(self.queue.scale_factor()),
+                ctx.elapsed(),
+                ctx.penalty(),
+                self.queue.scale_factor(),
+                self.queue.max_time(),
+                ctx.info(self.queue.scale_factor())
+            );
+            let pc = rocksdb::perf::PerfContext::default();
+            println!("{}", pc.report(true));
+            return Err("done");
+        }
+        if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
+            self.deadends.fetch_add(1, Ordering::Release);
+            return Ok(Vec::new());
+        }
+
+        if iters % 10000 == 0 {
+            self.print_status_update(&start, iters, heapsize_adjustment, &ctx);
+        }
+
+        let current_mode = if iters < 1_000_000 {
+            SearchMode::Classic
+        } else if mode == SearchMode::Dependent {
+            self.choose_mode(iters, &ctx)
+        } else {
+            mode
+        };
+        match current_mode {
+            SearchMode::Depth(d) if d > 1 => {
+                self.depth_step(ctx, mode, d);
+                Ok(Vec::new())
+            }
+            SearchMode::Greedy => {
+                // Run a classic step on the given state and handle any solutions
+                let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
+                // Pick a state greedily: max progress, min elapsed, and do a greedy search.
+                if let Some(ctx) = next
+                    .iter()
+                    .max_by_key(|ctx| (ctx.get().progress(), -ctx.elapsed()))
+                {
+                    if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
+                        if win.elapsed() <= self.queue.max_time() {
+                            self.handle_solution(win, mode);
+                        }
+                    }
+                }
+
+                // All the classic states are still pushed to the queue, even the one we used
+                Ok(next)
+            }
+            SearchMode::PickDepth(d) if d > 1 => {
+                let mut this_round = vec![ctx];
+                while let Some(c) = self.queue.pop().unwrap() {
+                    this_round.push(c);
+                    if this_round.len() > 9 {
+                        break;
+                    }
+                }
+                crate::swap_min_to_end(&mut this_round, |c| (c.elapsed(), c.penalty()));
+                self.depth_step(this_round.pop().unwrap(), mode, d);
+                Ok(this_round)
+            }
+            SearchMode::PickMin => {
+                if let Some(minctx) = self.queue.pop_min_elapsed().unwrap() {
+                    if ctx.elapsed() < minctx.elapsed() {
+                        let mut next = self.extract_solutions(self.classic_step(ctx), mode);
+                        next.push(minctx);
+                        Ok(next)
+                    } else {
+                        let mut next = self.extract_solutions(self.classic_step(minctx), mode);
+                        next.push(ctx);
+                        Ok(next)
+                    }
+                } else {
+                    let next = self.extract_solutions(self.classic_step(ctx), mode);
+                    Ok(next)
+                }
+            }
+            _ => {
+                let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
+                Ok(next)
+            }
+        }
+    }
+
+    fn print_status_update(
+        &self,
+        start: &Mutex<Instant>,
+        iters: i32,
+        heapsize_adjustment: i32,
+        ctx: &ContextWrapper<T>,
+    ) {
+        let mut s = start.lock().unwrap();
+        println!("10000 iters took {:?}", s.elapsed());
+        *s = Instant::now();
+
+        let sols = self.solutions.lock().unwrap();
+        if iters > 10_000_000 && sols.unique() > 4 {
+            self.queue.set_max_time(sols.best());
+        }
+        if iters % 1_000_000 == 0 {
+            self.queue.print_queue_histogram();
+        }
+        let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
+        let max_time = self.queue.max_time();
+        println!(
+            "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
+                    Queue stats: heap={}; db={}; total={}; seen={}; limit: {}ms; db best: {}\n\
+                    push_skips={} time + {} dups; pop_skips={} time + {} dups; evictions: {}; retrievals: {}\n\
+                    {}",
+            iters,
+            sols.len(),
+            sols.unique(),
+            self.deadends.load(Ordering::Acquire),
+            heapsize_adjustment - max_time,
+            self.queue.scale_factor(),
+            self.queue.heap_len(),
+            self.queue.db_len(),
+            self.queue.len(),
+            self.queue.seen(),
+            max_time,
+            self.queue.db_best(),
+            iskips,
+            dskips,
+            pskips,
+            dpskips,
+            self.queue.evictions(),
+            self.queue.retrievals(),
+            ctx.info(self.queue.scale_factor())
+        );
     }
 }
