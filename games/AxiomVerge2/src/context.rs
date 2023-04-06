@@ -872,6 +872,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Ruins_East => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Wasteland => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);

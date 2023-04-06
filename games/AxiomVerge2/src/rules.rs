@@ -115,6 +115,10 @@ pub fn access_can_deploy_and_slingshot_hook(ctx: &Context) -> bool {
     // $can_deploy and Slingshot_Hook
     (helper__can_deploy!(ctx) && ctx.has(Item::Slingshot_Hook))
 }
+pub fn access_can_recall(ctx: &Context) -> bool {
+    // $can_recall
+    helper__can_recall!(ctx)
+}
 pub fn access_climb(ctx: &Context) -> bool {
     // $climb
     helper__climb!(ctx)
@@ -841,10 +845,11 @@ pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
-pub fn action_save_mode__indra(ctx: &mut Context) {
-    // $save; ^mode = 'Indra';
+pub fn action_save_mode__indra_position__indra(ctx: &mut Context) {
+    // $save; ^mode = 'Indra'; ^position = ^indra
     helper__save!(ctx);
     ctx.set_mode(enums::Mode::Indra);
+    ctx.set_position(ctx.indra());
 }
 pub fn action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,

@@ -3212,6 +3212,62 @@ pub fn local_travel_time(
         ) => 900,
         (
             [false, false, false],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2927,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2927,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1126,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1576,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1351,
+        // [1.801802, 0.9]
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2701,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 225,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [false, false, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1576,
+        (
+            [false, false, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 2027,
@@ -7240,6 +7296,62 @@ pub fn local_travel_time(
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => 701,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2280,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2280,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 877,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1228,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1052,
+        // [1.403509, 0.9]
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2303,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 199,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [true, false, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1228,
         (
             [true, false, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -12060,6 +12172,67 @@ pub fn local_travel_time(
         ) => 900,
         (
             [false, true, false],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2927,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 5555,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2927,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1126,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1576,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1351,
+        // [1.801802, 0.9]
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2701,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 225,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [false, true, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1576,
+        (
+            [false, true, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 2000,
@@ -16611,6 +16784,62 @@ pub fn local_travel_time(
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => 701,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2280,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2280,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 877,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1000,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1228,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1052,
+        // [1.403509, 0.9]
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2303,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 199,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [false, false, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1228,
         (
             [false, false, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -21413,6 +21642,67 @@ pub fn local_travel_time(
         ) => 701,
         (
             [true, true, false],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2280,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 5555,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2280,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 877,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1228,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1052,
+        // [1.403509, 0.9]
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2303,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 199,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [true, true, false],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1228,
+        (
+            [true, true, false],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
@@ -25946,6 +26236,62 @@ pub fn local_travel_time(
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => 701,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2280,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2280,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 877,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1228,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1052,
+        // [1.403509, 0.9]
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2303,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 199,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [true, false, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1228,
         (
             [true, false, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -30744,6 +31090,67 @@ pub fn local_travel_time(
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => 701,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2280,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 5555,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2280,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 877,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1000,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1228,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1052,
+        // [1.403509, 0.9]
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2303,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 199,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [false, true, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1228,
         (
             [false, true, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -35813,6 +36220,67 @@ pub fn local_travel_time(
         ) => 701,
         (
             [true, true, true],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 2280,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 5555,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 2280,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__West_9,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 877,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 1228,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__Bottom_Rock,
+        ) => 1052,
+        // [1.403509, 0.9]
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Cliff,
+            SpotId::Giguna__Ruins_East__West_9,
+        ) => 2303,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 199,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__East_9,
+        ) => 3600,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Cliff,
+        ) => 2399,
+        (
+            [true, true, true],
+            SpotId::Giguna__Ruins_East__Way_Up_High,
+            SpotId::Giguna__Ruins_East__Pillar,
+        ) => 1228,
+        (
+            [true, true, true],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
@@ -38390,6 +38858,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => true,
+        (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => true,
+        (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Cliff) => true,
+        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__East_9) => true,
+        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__West_9) => true,
+        (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => true,
+        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__Bottom_Rock) => true,
+        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => true,
+        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => true,
+        (SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => true,
+        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => true,
+        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => true,
+        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }

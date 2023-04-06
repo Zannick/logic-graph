@@ -523,6 +523,20 @@ digraph AxiomVerge2 {
             label = "Building Interior";
             bgcolor = "white";
         }
+        subgraph cluster_Giguna__Ruins_East {
+            Giguna__Ruins_East__East_9 [label = "East 9"];
+            Giguna__Ruins_East__Bottom_Rock [label = "Bottom Rock"];
+            Giguna__Ruins_East__West_9 [label = "West 9"];
+            Giguna__Ruins_East__Cliff [label = "Cliff"];
+            Giguna__Ruins_East__Ledge [label = "Ledge"];
+            Giguna__Ruins_East__Small_Passage [label = "Small Passage"];
+            Giguna__Ruins_East__West_8 [label = "West 8"];
+            Giguna__Ruins_East__Pillar [label = "Pillar"];
+            Giguna__Ruins_East__West_7 [label = "West 7"];
+            Giguna__Ruins_East__Way_Up_High [label = "Way Up High"];
+            label = "Ruins East";
+            bgcolor = "white";
+        }
         label = "Giguna Steppes";
         bgcolor = "lightgrey";
     }
@@ -919,6 +933,7 @@ digraph AxiomVerge2 {
     Giguna__Giguna_Northeast__Step -> Giguna__Giguna_Northeast__West_9;
     Giguna__Giguna_Northeast__Step -> Giguna__Giguna_Northeast__West_9;
     Giguna__Giguna_Northeast__West_10 -> Giguna__Carnelian__East_10;
+    Giguna__Giguna_Northeast__West_9 -> Giguna__Ruins_East__East_9;
     Giguna__Giguna_Northeast__Gate_Left -> Giguna__Giguna_Northeast__Gate_Button;
     Giguna__Giguna_Northeast__Gate_Button -> Giguna__Giguna_Northeast__Gate_Left;
     Giguna__Giguna_Northeast__East_11 -> Ebih__Ebih_West__Alcove;
@@ -972,6 +987,9 @@ digraph AxiomVerge2 {
     Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
     Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
     Giguna__Building_Interior__Entry -> Giguna__Giguna_Base__Building_Entry;
+    Giguna__Ruins_East__Bottom_Rock -> Giguna__Ruins_East__Cliff;
+    Giguna__Ruins_East__Cliff -> Giguna__Ruins_East__Ledge;
+    Giguna__Ruins_East__Cliff -> Giguna__Ruins_East__Ledge;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;

@@ -44,10 +44,10 @@ areas:
           do: $save
           time: 1.3
         # Stopgap for greedy search not able to do a global Recall
-        - name: Save and Bring Indra
-          req: ^mode == 'drone'
-          do: $save; ^mode = 'Indra';
-          time: 18.5
+        - name: Save-Recall
+          req: $can_recall
+          do: $save; ^mode = 'Indra'; ^position = ^indra
+          time: 4.3
       exits:
         - to: Gate Vent
           req: $hover and $hook
@@ -79,6 +79,9 @@ areas:
       coord: [17.05, 8.8]
       local:
         - to: Step
+      exits:
+        - to: Ruins East > East 9
+          tags: [xshift]
     - name: Gate Left
       coord: [17.8, 9.6]
       local:
@@ -747,3 +750,61 @@ areas:
         - name: Note
           item: Letter_from_Trace
           tags: [standing]
+
+- name: Ruins East
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 9
+      coord: [16.95, 8.8]
+      local:
+        - to: Bottom Rock
+          jumps: 2
+        - to: Cliff
+    - name: Bottom Rock
+      coord: [16.3, 8.5]
+      local:
+        - to: East 9
+        - to: West 9
+      exits:
+        - to: Cliff
+          req: $hook
+          time: 3.45
+    - name: West 9
+      coord: [16.05, 8.6]
+      local:
+        - to: Bottom Rock
+          jumps: 1
+      #exits:
+      #  - to: Ruins Center > East 9
+      #    tags: [xshift]
+    - name: Cliff
+      coord: [16.6, 7.6]
+      local:
+        - to: Bottom Rock
+        - to: East 9
+        - to: West 9
+          thru: [16.2, 7.7]
+      exits:
+        - to: Ledge
+          req: $climb
+        - to: Ledge
+          req: $hook
+          time: 0.8
+    - name: Ledge
+      coord: [16.55, 7.4]
+      local:
+        - to: Cliff
+    - name: Small Passage
+      coord: [16.45, 7.4]
+    - name: West 8
+      coord: [16.05, 7.5]
+    - name: Pillar
+      coord: [16.25, 6.4]
+    - name: West 7
+      coord: [16.05, 6.8]
+    - name: Way Up High
+      coord: [16.6, 5.2]
+      local:
+        - to: Pillar
+        - to: Cliff
+        - to: East 9

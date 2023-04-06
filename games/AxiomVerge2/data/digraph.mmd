@@ -436,6 +436,18 @@ subgraph Giguna
         Giguna__Building_Interior__Entry(Entry);
         Giguna__Building_Interior__Bookshelf(Bookshelf);
     end
+    subgraph Giguna__Ruins_East[Ruins East]
+        Giguna__Ruins_East__East_9(East 9);
+        Giguna__Ruins_East__Bottom_Rock(Bottom Rock);
+        Giguna__Ruins_East__West_9(West 9);
+        Giguna__Ruins_East__Cliff(Cliff);
+        Giguna__Ruins_East__Ledge(Ledge);
+        Giguna__Ruins_East__Small_Passage(Small Passage);
+        Giguna__Ruins_East__West_8(West 8);
+        Giguna__Ruins_East__Pillar(Pillar);
+        Giguna__Ruins_East__West_7(West 7);
+        Giguna__Ruins_East__Way_Up_High(Way Up High);
+    end
 end
 subgraph Glacier
     subgraph Glacier__Dock_Elevator[Dock Elevator]
@@ -739,6 +751,9 @@ Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__West_9
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Right_Column
 Giguna__Giguna_Northeast__Vault --> Giguna__Giguna_Northeast__Door
+Giguna__Giguna_Northeast__West_9 --> Giguna__Ruins_East__East_9
+Giguna__Ruins_East__Bottom_Rock --> Giguna__Ruins_East__Cliff
+Giguna__Ruins_East__Cliff --> Giguna__Ruins_East__Ledge
 Giguna__Wasteland__Lower_Cliff --> Giguna__Wasteland__Middle_Cliff
 Giguna__Wasteland__Lower_Path_Right --> Giguna__Wasteland__Lower_Cliff
 Giguna__Wasteland__West_12 <--> Giguna__West_Caverns__East_12
