@@ -7,7 +7,7 @@ use crate::solutions::SolutionCollector;
 use crate::world::*;
 use rayon::prelude::*;
 use std::fmt::Debug;
-use std::sync::atomic::{AtomicI32, AtomicU32, Ordering};
+use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
 use std::sync::Mutex;
 use std::time::Instant;
 
@@ -155,7 +155,8 @@ where
     startctx: ContextWrapper<T>,
     solutions: Mutex<SolutionCollector<T>>,
     queue: RocksBackedQueue<T>,
-    iters: AtomicI32,
+    iters: AtomicU64,
+    extras: AtomicU64,
     deadends: AtomicU32,
 }
 
@@ -221,11 +222,17 @@ where
             solutions: Mutex::new(solutions),
             queue,
             iters: 0.into(),
+            extras: 0.into(),
             deadends: 0.into(),
         })
     }
 
-    fn handle_solution(&self, ctx: ContextWrapper<T>, forkctx: Option<&ContextWrapper<T>>, mode: SearchMode) -> bool {
+    fn handle_solution(
+        &self,
+        ctx: ContextWrapper<T>,
+        forkctx: Option<&ContextWrapper<T>>,
+        mode: SearchMode,
+    ) -> bool {
         let old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
         let mut sols = self.solutions.lock().unwrap();
@@ -325,7 +332,12 @@ where
         result
     }
 
-    fn depth_step(&self, ctx: ContextWrapper<T>, mode: SearchMode, mut d: u8) -> Vec<ContextWrapper<T>> {
+    fn depth_step(
+        &self,
+        ctx: ContextWrapper<T>,
+        mode: SearchMode,
+        mut d: u8,
+    ) -> Vec<ContextWrapper<T>> {
         let mut next = Vec::new();
         let mut ret = Vec::new();
         for ctx in self.classic_step(ctx) {
@@ -345,6 +357,7 @@ where
             ret.extend(next);
             next = Vec::new();
             for ctx in self.classic_step(ctx) {
+                self.extras.fetch_add(1, Ordering::Release);
                 if self.world.won(ctx.get()) {
                     self.handle_solution(ctx, None, mode);
                 } else {
@@ -362,7 +375,7 @@ where
         ret
     }
 
-    fn choose_mode(&self, iters: i32, ctx: &ContextWrapper<T>) -> SearchMode {
+    fn choose_mode(&self, iters: u64, ctx: &ContextWrapper<T>) -> SearchMode {
         if iters % 2048 != 0 {
             SearchMode::Classic
         } else if iters % 4096 == 0 {
@@ -431,17 +444,18 @@ where
     ) -> Result<Vec<ContextWrapper<T>>, &str> {
         // cut off when penalties are high enough
         // progressively raise the score threshold as the heap size increases
-        let heapsize_adjustment: i32 = (self.queue.len() / 1024).try_into().unwrap();
-        let solutions_adjustment: i32 = self.solutions.lock().unwrap().len().try_into().unwrap();
+        let heapsize_adjustment: i64 = (self.queue.len() / 1024).try_into().unwrap();
+        let solutions_adjustment: i64 = self.solutions.lock().unwrap().len().try_into().unwrap();
+        let mtime: i64 = self.queue.max_time().into();
         let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-        let score_cutoff: i32 = heapsize_adjustment - self.queue.max_time()
+        let score_cutoff: i64 = heapsize_adjustment - mtime
             + solutions_adjustment
             + if iters > 25_000_000 {
-                (iters - 25_000_000) / 1_024
+                ((iters - 25_000_000) / 1_024).try_into().unwrap()
             } else {
                 0
             };
-        if ctx.score(self.queue.scale_factor()) < score_cutoff {
+        if score_cutoff > ctx.score(self.queue.scale_factor()).into() {
             println!(
                 "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
                 ctx.score(self.queue.scale_factor()),
@@ -461,10 +475,10 @@ where
         }
 
         if iters % 10000 == 0 {
-            self.print_status_update(&start, iters, heapsize_adjustment, &ctx);
+            self.print_status_update(&start, iters, 10000, heapsize_adjustment, &ctx);
         }
 
-        let current_mode = if iters < 1_000_000 {
+        let current_mode = if iters < 500_000 {
             SearchMode::Classic
         } else if mode == SearchMode::Dependent {
             self.choose_mode(iters, &ctx)
@@ -492,6 +506,7 @@ where
                 }
 
                 // All the classic states are still pushed to the queue, even the one we used
+                self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
             }
             SearchMode::PickDepth(d) if d > 1 => {
@@ -509,8 +524,11 @@ where
             SearchMode::PickMinScore => {
                 let mut next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
                 if let Some(ctx2) = self.queue.pop_min_score().unwrap() {
-                    next.extend(self.extract_solutions(self.classic_step(ctx2), SearchMode::PickMinScore));
+                    next.extend(
+                        self.extract_solutions(self.classic_step(ctx2), SearchMode::PickMinScore),
+                    );
                 }
+                self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
             }
             SearchMode::PickMinElapsed => {
@@ -539,12 +557,13 @@ where
     fn print_status_update(
         &self,
         start: &Mutex<Instant>,
-        iters: i32,
-        heapsize_adjustment: i32,
+        iters: u64,
+        num_rounds: u32,
+        heapsize_adjustment: i64,
         ctx: &ContextWrapper<T>,
     ) {
         let mut s = start.lock().unwrap();
-        println!("10000 iters took {:?}", s.elapsed());
+        println!("{} iters took {:?}", num_rounds, s.elapsed());
         *s = Instant::now();
 
         let sols = self.solutions.lock().unwrap();
@@ -557,15 +576,16 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         println!(
-            "--- Round {} (solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
+            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
                     Queue stats: heap={}; db={}; total={}; seen={}; limit: {}ms; db best: {}\n\
                     push_skips={} time + {} dups; pop_skips={} time + {} dups; evictions: {}; retrievals: {}\n\
                     {}",
             iters,
+            self.extras.load(Ordering::Acquire),
             sols.len(),
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
-            heapsize_adjustment - max_time,
+            heapsize_adjustment - <i32 as Into<i64>>::into(max_time),
             self.queue.scale_factor(),
             self.queue.heap_len(),
             self.queue.db_len(),
