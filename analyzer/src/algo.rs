@@ -228,12 +228,7 @@ where
         })
     }
 
-    fn handle_solution(
-        &self,
-        ctx: ContextWrapper<T>,
-        forkctx: Option<&ContextWrapper<T>>,
-        mode: SearchMode,
-    ) -> bool {
+    fn handle_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) -> bool {
         let old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
         let mut sols = self.solutions.lock().unwrap();
@@ -260,22 +255,61 @@ where
             ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
         self.queue.push(newctx).unwrap();
 
-        if let Some(fork) = forkctx {
-            // Create intermediate states to add to the queue.
-            let mut winhist: Vec<_> = ctx.history_rev().collect();
-            let oldhistlen = fork.history_rev().count();
-            winhist.truncate(winhist.len() - oldhistlen);
+        sols.insert(ctx)
+    }
 
-            let mut newstates = Vec::new();
-            let mut stepping = fork.clone();
-            for step in winhist.into_iter().rev() {
-                stepping.replay(self.world, step);
+    fn handle_greedy_solution(
+        &self,
+        ctx: ContextWrapper<T>,
+        fork: &ContextWrapper<T>,
+        check_prior: bool,
+        mode: SearchMode,
+    ) {
+        // Create intermediate states to add to the queue.
+        let mut winhist: Vec<_> = ctx.history_rev().collect();
+        let oldhist: Vec<_> = fork.history_rev().collect();
+        let oldhistlen = oldhist.len();
+        winhist.truncate(winhist.len() - oldhistlen);
+
+        let mut newstates = Vec::new();
+        let mut stepping = fork.clone();
+        for step in winhist.into_iter().rev() {
+            stepping.replay(self.world, step);
+            if !matches!(step, History::Move(_) | History::MoveLocal(_)) {
                 newstates.push(stepping.clone());
             }
-            self.queue.extend(newstates).unwrap();
         }
 
-        sols.insert(ctx)
+        let wintime = ctx.elapsed();
+        self.handle_solution(ctx, mode);
+
+        if check_prior {
+            let mut first_back = 1;
+            let mut c = 0;
+            for (i, step) in oldhist.iter().enumerate() {
+                if !matches!(*step, History::Move(_) | History::MoveLocal(_)) {
+                    c += 1;
+                    first_back = oldhistlen - i;
+                    if c == 5 {
+                        break;
+                    }
+                }
+            }
+            println!("Checking for improvements starting at {:?}", oldhist[oldhistlen - first_back]);
+
+            let mut prior = self.startctx.clone();
+            for (i, step) in oldhist.iter().rev().enumerate() {
+                prior.replay(self.world, *step);
+                if i >= first_back && !matches!(step, History::Move(_) | History::MoveLocal(_)) {
+                    if let Ok(win) = greedy_search(self.world, &prior, wintime) {
+                        self.handle_greedy_solution(win, &prior, false, mode);
+                        newstates.push(prior.clone());
+                    }
+                }
+            }
+        }
+
+        self.queue.extend(newstates, false).unwrap();
     }
 
     fn extract_solutions(
@@ -287,7 +321,7 @@ where
             .into_iter()
             .filter_map(|ctx| {
                 if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, None, mode);
+                    self.handle_solution(ctx, mode);
                     None
                 } else {
                     Some(ctx)
@@ -352,7 +386,7 @@ where
         let mut ret = Vec::new();
         for ctx in self.classic_step(ctx) {
             if self.world.won(ctx.get()) {
-                self.handle_solution(ctx, None, mode);
+                self.handle_solution(ctx, mode);
             } else {
                 next.push(ctx);
             }
@@ -369,7 +403,7 @@ where
             self.extras.fetch_add(1, Ordering::Release);
             for ctx in self.classic_step(ctx) {
                 if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, None, mode);
+                    self.handle_solution(ctx, mode);
                 } else {
                     next.push(ctx);
                 }
@@ -420,11 +454,14 @@ where
             let iter = Iter { q: &self.queue };
             res = iter.par_bridge().try_for_each(|item| {
                 self.queue
-                    .extend(self.process_one(
-                        item,
-                        &start,
-                        mode_by_index(rayon::current_thread_index().unwrap_or_default()),
-                    )?)
+                    .extend(
+                        self.process_one(
+                            item,
+                            &start,
+                            mode_by_index(rayon::current_thread_index().unwrap_or_default()),
+                        )?,
+                        true,
+                    )
                     .map(|_| ())
             });
         }
@@ -510,7 +547,7 @@ where
                 {
                     if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
                         if win.elapsed() <= self.queue.max_time() {
-                            self.handle_solution(win, Some(&ctx), mode);
+                            self.handle_greedy_solution(win, &ctx, true, mode);
                         }
                     }
                 }

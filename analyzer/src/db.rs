@@ -622,7 +622,7 @@ where
     /// Stores the underlying Ctx entries in the seen db with the respective best known elapsed times,
     /// and returns whether each context had that best time.
     /// A `false` value for a context means the state should be skipped.
-    pub fn remember_which(&self, vec: &Vec<ContextWrapper<T>>) -> Result<Vec<bool>, Error> {
+    pub fn remember_which(&self, vec: &Vec<ContextWrapper<T>>, allow_exact_dups: bool) -> Result<Vec<bool>, Error> {
         let mut seen_batch = WriteBatchWithTransaction::<false>::default();
         let mut dups = 0;
 
@@ -639,7 +639,7 @@ where
         {
             let should_write = match seen_val {
                 Some(stored) => {
-                    if stored < el.elapsed() {
+                    if stored < el.elapsed() || (!allow_exact_dups && stored == el.elapsed()) {
                         dups += 1;
                         res.push(false);
                         continue;
