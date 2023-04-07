@@ -668,7 +668,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
     /// Adds all the given elements to the queue, except for any
     /// elements with elapsed time greater than the allowed maximum
     /// or having been seen before with a smaller elapsed time.
-    pub fn extend<I>(&self, iter: I, allow_exact_dups: bool) -> Result<(), String>
+    pub fn extend<I>(&self, iter: I) -> Result<(), String>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
@@ -689,7 +689,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             return Ok(());
         }
 
-        let keeps = self.db.remember_which(&vec, allow_exact_dups)?;
+        let keeps = self.db.remember_which(&vec)?;
         debug_assert!(vec.len() == keeps.len());
         let vec: Vec<(ContextWrapper<T>, i32)> = vec
             .into_iter()

@@ -20,6 +20,7 @@ enum SearchMode {
     PickMinElapsed,
     PickMinScore,
     Dependent,
+    Unknown,
 }
 
 fn mode_by_index(index: usize) -> SearchMode {
@@ -284,18 +285,7 @@ where
         self.handle_solution(ctx, mode);
 
         if check_prior {
-            let mut first_back = 1;
-            let mut c = 0;
-            for (i, step) in oldhist.iter().enumerate() {
-                if !matches!(*step, History::Move(_) | History::MoveLocal(_)) {
-                    c += 1;
-                    first_back = oldhistlen - i;
-                    if c == 5 {
-                        break;
-                    }
-                }
-            }
-            println!("Checking for improvements starting at {:?}", oldhist[oldhistlen - first_back]);
+            let first_back = oldhistlen / 2;
 
             let mut prior = self.startctx.clone();
             for (i, step) in oldhist.iter().rev().enumerate() {
@@ -309,7 +299,7 @@ where
             }
         }
 
-        self.queue.extend(newstates, false).unwrap();
+        self.queue.extend(newstates).unwrap();
     }
 
     fn extract_solutions(
@@ -453,16 +443,16 @@ where
         while res.is_ok() && !self.queue.is_empty() {
             let iter = Iter { q: &self.queue };
             res = iter.par_bridge().try_for_each(|item| {
-                self.queue
-                    .extend(
-                        self.process_one(
-                            item,
-                            &start,
-                            mode_by_index(rayon::current_thread_index().unwrap_or_default()),
-                        )?,
-                        true,
-                    )
-                    .map(|_| ())
+                let vec = self.process_one(
+                    item,
+                    &start,
+                    mode_by_index(rayon::current_thread_index().unwrap_or_default()),
+                )?;
+                if !vec.is_empty() {
+                    self.queue.extend(vec).map(|_| ())
+                } else {
+                    Ok(())
+                }
             });
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
@@ -517,7 +507,11 @@ where
             return Err("done");
         }
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
-            self.deadends.fetch_add(1, Ordering::Release);
+            if self.world.won(ctx.get()) {
+                self.handle_solution(ctx, SearchMode::Unknown);
+            } else {
+                self.deadends.fetch_add(1, Ordering::Release);
+            }
             return Ok(Vec::new());
         }
 
