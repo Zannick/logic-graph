@@ -356,8 +356,8 @@ where
         while let Some(ctx) = next.pop() {
             ret.extend(next);
             next = Vec::new();
+            self.extras.fetch_add(1, Ordering::Release);
             for ctx in self.classic_step(ctx) {
-                self.extras.fetch_add(1, Ordering::Release);
                 if self.world.won(ctx.get()) {
                     self.handle_solution(ctx, None, mode);
                 } else {
