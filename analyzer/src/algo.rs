@@ -223,7 +223,7 @@ where
         })
     }
 
-    fn handle_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) -> bool {
+    fn handle_solution(&self, ctx: ContextWrapper<T>, forkctx: Option<&ContextWrapper<T>>, mode: SearchMode) -> bool {
         let old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
         let mut sols = self.solutions.lock().unwrap();
@@ -250,6 +250,21 @@ where
             ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
         self.queue.push(newctx).unwrap();
 
+        if let Some(fork) = forkctx {
+            // Create intermediate states to add to the queue.
+            let mut winhist: Vec<_> = ctx.history_rev().collect();
+            let oldhistlen = fork.history_rev().count();
+            winhist.truncate(winhist.len() - oldhistlen);
+
+            let mut newstates = Vec::new();
+            let mut stepping = fork.clone();
+            for step in winhist.into_iter().rev() {
+                stepping.replay(self.world, step);
+                newstates.push(stepping.clone());
+            }
+            self.queue.extend(newstates).unwrap();
+        }
+
         sols.insert(ctx)
     }
 
@@ -262,7 +277,7 @@ where
             .into_iter()
             .filter_map(|ctx| {
                 if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, mode);
+                    self.handle_solution(ctx, None, mode);
                     None
                 } else {
                     Some(ctx)
@@ -313,7 +328,7 @@ where
         let mut ret = Vec::new();
         for ctx in self.classic_step(ctx) {
             if self.world.won(ctx.get()) {
-                self.handle_solution(ctx, mode);
+                self.handle_solution(ctx, None, mode);
             } else {
                 next.push(ctx);
             }
@@ -329,7 +344,7 @@ where
             next = Vec::new();
             for ctx in self.classic_step(ctx) {
                 if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, mode);
+                    self.handle_solution(ctx, None, mode);
                 } else {
                     next.push(ctx);
                 }
@@ -469,7 +484,7 @@ where
                 {
                     if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
                         if win.elapsed() <= self.queue.max_time() {
-                            self.handle_solution(win, mode);
+                            self.handle_solution(win, Some(&ctx), mode);
                         }
                     }
                 }

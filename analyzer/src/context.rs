@@ -363,6 +363,58 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::Activate(action.id()));
     }
 
+    pub fn replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        // We skip checking validity ahead of time, i.e. can_access.
+        // Some other times we should still assert some possibility.
+        match step {
+            History::Warp(wp, dest) => {
+                self.warp(world.get_warp(wp));
+                assert!(
+                    self.get().position() == dest,
+                    "Invalid replay: warp {:?}",
+                    wp
+                );
+            }
+            History::Get(item, loc_id) => {
+                let loc = world.get_location(loc_id);
+                self.visit(world, loc);
+                assert!(loc.item() == item, "Invalid replay: visit {:?}", loc_id);
+            }
+            History::Move(exit_id) => {
+                let exit = world.get_exit(exit_id);
+                self.exit(exit);
+            }
+            History::MoveGet(item, exit_id) => {
+                let exit = world.get_exit(exit_id);
+                let loc =
+                    world.get_location(exit.loc_id().expect("MoveGet requires a hybrid exit"));
+                self.visit_exit(world, loc, exit);
+                assert!(
+                    loc.item() == item,
+                    "Invalid replay: visit-exit {:?}",
+                    exit_id
+                )
+            }
+            History::MoveLocal(spot) => {
+                let movement_state = self.ctx.get_movement_state();
+                let time = self.ctx.local_travel_time(movement_state, spot);
+                assert!(time >= 0, "Invalid replay: move-local {:?}", spot);
+                self.move_local(spot, time);
+            }
+            History::Activate(act_id) => {
+                let action = world.get_action(act_id);
+                self.activate(action);
+            }
+        }
+    }
+
     pub fn info(&self, scale_factor: i32) -> String {
         format(format_args!(
             "At {}ms (score={}), visited={}, skipped={}, penalty={}\nNow: {} after {}",
