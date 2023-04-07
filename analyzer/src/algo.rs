@@ -281,7 +281,6 @@ where
             }
         }
 
-        let wintime = ctx.elapsed();
         self.handle_solution(ctx, mode);
 
         if check_prior {
@@ -291,7 +290,7 @@ where
             for (i, step) in oldhist.iter().rev().enumerate() {
                 prior.replay(self.world, *step);
                 if i >= first_back && !matches!(step, History::Move(_) | History::MoveLocal(_)) {
-                    if let Ok(win) = greedy_search(self.world, &prior, wintime) {
+                    if let Ok(win) = greedy_search(self.world, &prior, i32::MAX) {
                         self.handle_greedy_solution(win, &prior, false, mode);
                         newstates.push(prior.clone());
                     }
