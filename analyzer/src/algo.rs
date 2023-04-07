@@ -114,7 +114,8 @@ where
 pub fn activate_actions<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    penalty: i32,
+    local_penalty: i32,
+    global_penalty: i32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -128,7 +129,7 @@ where
             let mut c2 = ctx.clone();
             c2.activate(act);
             if c2.get() != ctx.get() {
-                c2.penalize(penalty * 4);
+                c2.penalize(global_penalty);
                 result.push(c2);
             }
         }
@@ -138,7 +139,7 @@ where
             let mut c2 = ctx.clone();
             c2.activate(act);
             if c2.get() != ctx.get() {
-                c2.penalize(penalty);
+                c2.penalize(local_penalty);
                 result.push(c2);
             }
         }
@@ -302,30 +303,39 @@ where
         // 3. (activate_actions) for each ctx, check for global actions and spot actions
         // 4. (visit_locations) for each ctx, get all available locations
         let spot_ctxs = explore(self.world, ctx, self.queue.max_time());
-        let mut with_locs = 0;
         let mut result = Vec::new();
 
         if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
             let max_diff = f.elapsed() - s.elapsed();
-            for ctx in spot_ctxs.iter() {
-                let has_locs = spot_has_locations(self.world, ctx.get());
+            let spots: Vec<_> = spot_ctxs
+                .into_iter()
+                .map(|ctx| (spot_has_locations(self.world, ctx.get()), ctx))
+                .collect();
+            let with_locs: i32 = (spots.iter().filter(|(l, _)| *l).count())
+                .try_into()
+                .unwrap();
+            let spot_count: i32 = spots.len().try_into().unwrap();
+            let mut locs_count = 0;
+            for (has_locs, ctx) in spots {
                 // somewhat quadratic penalties
-                let spot_penalty = with_locs * (with_locs - 1) * max_diff
-                    / <usize as TryInto<i32>>::try_into(spot_ctxs.len()).unwrap();
+                let loc_penalty = locs_count * (locs_count - 1) * max_diff / spot_count;
+                // Max penalty at any spot with no locations
+                let act_penalty = with_locs * (with_locs - 1) * max_diff / spot_count;
                 if spot_has_actions(self.world, ctx.get()) {
                     result.extend(activate_actions(
                         self.world,
-                        ctx,
+                        &ctx,
+                        loc_penalty + 500,
                         if !has_locs {
-                            6 * spot_penalty + 1000
+                            act_penalty + 1000
                         } else {
-                            3 * spot_penalty + 500
+                            2 * (loc_penalty + 500)
                         },
                     ));
                 }
                 if has_locs {
-                    result.extend(visit_locations(self.world, ctx.clone(), spot_penalty));
-                    with_locs += 1;
+                    result.extend(visit_locations(self.world, ctx, loc_penalty));
+                    locs_count += 1;
                 }
             }
         }
