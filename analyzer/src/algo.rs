@@ -17,7 +17,8 @@ enum SearchMode {
     Depth(u8),
     Greedy,
     PickDepth(u8),
-    PickMin,
+    PickMinElapsed,
+    PickMinScore,
     Dependent,
 }
 
@@ -28,6 +29,7 @@ fn mode_by_index(index: usize) -> SearchMode {
         4 => SearchMode::Depth(3),
         8 => SearchMode::PickDepth(3),
         12 => SearchMode::PickDepth(8),
+        5 => SearchMode::PickMinScore,
         _ => SearchMode::Classic,
     }
 }
@@ -364,7 +366,7 @@ where
         if iters % 2048 != 0 {
             SearchMode::Classic
         } else if iters % 4096 == 0 {
-            SearchMode::PickMin
+            SearchMode::PickMinElapsed
         } else if ctx.elapsed() * 3 < self.queue.max_time() {
             SearchMode::Depth(4)
         } else {
@@ -504,7 +506,14 @@ where
                 self.depth_step(this_round.pop().unwrap(), mode, d);
                 Ok(this_round)
             }
-            SearchMode::PickMin => {
+            SearchMode::PickMinScore => {
+                let mut next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
+                if let Some(ctx2) = self.queue.pop_min_score().unwrap() {
+                    next.extend(self.extract_solutions(self.classic_step(ctx2), SearchMode::PickMinScore));
+                }
+                Ok(next)
+            }
+            SearchMode::PickMinElapsed => {
                 if let Some(minctx) = self.queue.pop_min_elapsed().unwrap() {
                     if ctx.elapsed() < minctx.elapsed() {
                         let mut next = self.extract_solutions(self.classic_step(ctx), mode);

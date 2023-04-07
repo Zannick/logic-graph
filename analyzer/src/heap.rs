@@ -599,20 +599,54 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 return Ok(Some(ctx));
             }
             // Retrieve some from db
-            let start = Instant::now();
-            let num_to_restore = std::cmp::max(
-                self.min_reshuffle,
-                std::cmp::min(
-                    self.max_reshuffle,
-                    (self.capacity.load(Ordering::Acquire) - queue.len()) / 2,
-                ),
-            );
-            drop(queue);
-            let res = Self::retrieve(&self.db, &self.max_db_priority, num_to_restore)?;
-            queue = self.queue.lock().unwrap();
-            queue.extend(res);
-            self.retrievals.fetch_add(1, Ordering::Release);
-            println!("Retrieval took total {:?}", start.elapsed());
+            queue = self.do_retrieve_and_insert(queue)?;
+        }
+        Ok(None)
+    }
+
+    fn do_retrieve_and_insert<'a>(
+        &'a self,
+        mut queue: MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
+    ) -> Result<MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>, String>
+    {
+        let start = Instant::now();
+        let num_to_restore = std::cmp::max(
+            self.min_reshuffle,
+            std::cmp::min(
+                self.max_reshuffle,
+                (self.capacity.load(Ordering::Acquire) - queue.len()) / 2,
+            ),
+        );
+        drop(queue);
+        let res = Self::retrieve(&self.db, &self.max_db_priority, num_to_restore)?;
+        queue = self.queue.lock().unwrap();
+        queue.extend(res);
+        self.retrievals.fetch_add(1, Ordering::Release);
+        println!("Retrieval took total {:?}", start.elapsed());
+        Ok(queue)
+    }
+
+    pub fn pop_min_score(&self) -> Result<Option<ContextWrapper<T>>, String> {
+        let mut queue = self.queue.lock().unwrap();
+        while !queue.is_empty() || !self.db.is_empty() {
+            while let Some((ctx, prio)) = queue.pop_min() {
+                debug_assert!(
+                    prio == ctx.score(self.db.scale_factor()),
+                    "priority {} didn't match score {}",
+                    prio,
+                    ctx.score(self.db.scale_factor())
+                );
+                if ctx.elapsed() > self.db.max_time() {
+                    self.pskips.fetch_add(1, Ordering::Release);
+                    continue;
+                }
+                if !self.db.remember_pop(&ctx)? {
+                    continue;
+                }
+                return Ok(Some(ctx));
+            }
+            // Retrieve some from db
+            queue = self.do_retrieve_and_insert(queue)?;
         }
         Ok(None)
     }
