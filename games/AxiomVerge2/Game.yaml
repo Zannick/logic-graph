@@ -32,11 +32,11 @@ data:
 # otherwise it gets weird, thinking we can beat the final boss and escape and then go get
 # the last items? This way simulates requiring the Victory item be last.
 objectives:
-  Start: Remote_Drone
+  Start: "[Remote_Drone]"
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: Remote_Drone and Shockwave and Power_Matrix and Wall_Climb and Flask{5} and $all_notes
+  Progress%: "[Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Flask{5}, $all_notes]"
 
 movements:
   default:  # the slowest movement is in water
@@ -170,10 +170,10 @@ helpers:
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
 
-  $all_notes: >
-    Dear_Ernest and Researchers_Missing and Letter_from_Trace
-    and Heretics_Tablet and Terminal_Breakthrough_1 and Companies_Layoff and Record_Losses
-    and Under_Siege
+  $all_notes:itemList: >
+    [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
+     Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
+     Under_Siege]
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action(newpos:SpotId): >

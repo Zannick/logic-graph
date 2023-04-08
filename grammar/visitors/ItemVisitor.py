@@ -96,3 +96,6 @@ class ItemVisitor(RulesVisitor):
         self.item_uses[it] += 1
         self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
+
+    def visitItemList(self, ctx):
+        return self.visitChildren(ctx)

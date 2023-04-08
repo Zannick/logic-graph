@@ -97,3 +97,14 @@ class HelperVisitor(RulesVisitor):
             else:
                 for i, a in enumerate(args):
                     args[i] = a._replace(type=t)
+
+    def visitItemList(self, ctx):
+        for func in ctx.FUNC():
+            func = str(func)
+            if func in BUILTINS:
+                self.errors.append(f'Rule {self.name}: builtin {func!r} not supported in itemList')
+            elif func not in self.helpers:
+                self.errors.append(f'Unrecognized function {func} in rule {self.name}')
+            elif self.helpers[func]['rule'] != 'itemList':
+                self.errors.append(f'Rule {self.name}: itemList only supports itemList helpers, '
+                                   f'but {func!r} is of type {self.helpers[func]["rule"]!r}')

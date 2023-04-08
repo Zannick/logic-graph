@@ -271,19 +271,20 @@ macro_rules! helper__block_clip_escape {
 }
 
 /// $all_notes (  )
-/// Dear_Ernest and Researchers_Missing and Letter_from_Trace and Heretics_Tablet and Terminal_Breakthrough_1 and Companies_Layoff and Record_Losses and Under_Siege
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ((((((($ctx.has(Item::Dear_Ernest) && $ctx.has(Item::Researchers_Missing))
-            && $ctx.has(Item::Letter_from_Trace))
-            && $ctx.has(Item::Heretics_Tablet))
-            && $ctx.has(Item::Terminal_Breakthrough_1))
-            && $ctx.has(Item::Companies_Layoff))
-            && $ctx.has(Item::Record_Losses))
-            && $ctx.has(Item::Under_Siege))
+        $ctx.has(Item::Dear_Ernest)
+            && $ctx.has(Item::Researchers_Missing)
+            && $ctx.has(Item::Letter_from_Trace)
+            && $ctx.has(Item::Heretics_Tablet)
+            && $ctx.has(Item::Terminal_Breakthrough_1)
+            && $ctx.has(Item::Companies_Layoff)
+            && $ctx.has(Item::Record_Losses)
+            && $ctx.has(Item::Under_Siege)
     }};
 }
 

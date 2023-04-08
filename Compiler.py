@@ -77,8 +77,7 @@ def load_game_yaml(game_dir: str):
             for file in sorted(testfiles)))
     return game
 
-def _parseExpression(logic: str, name: str, category: str, sep:str=':') -> ParseResult:
-    rule = 'boolExpr'
+def _parseExpression(logic: str, name: str, category: str, sep:str=':', rule:str='boolExpr') -> ParseResult:
     # TODO: turn the whole thing into a regex
     if m := typed_name.match(name):
         rule = m.group('type') or rule
@@ -177,7 +176,7 @@ class GameLogic(object):
         self.action_funcs = {}
         self.objectives = {}
         for name, logic in self._info['objectives'].items():
-            pr = _parseExpression(logic, name, 'objectives')
+            pr = _parseExpression(logic, name, 'objectives', rule='itemList')
             self.objectives[name] = {'pr': pr}
             self.objectives[name]['access_id'] = self.make_funcid(self.objectives[name])
         self.default_objective = list(self._info['objectives'].keys())[0]

@@ -16,6 +16,21 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
+pub fn access___remote_drone(ctx: &Context) -> bool {
+    // [Remote_Drone]
+    ctx.has(Item::Remote_Drone)
+}
+pub fn access___remote_drone_shockwave_power_matrix_wall_climb_flask__5_all_notes(
+    ctx: &Context,
+) -> bool {
+    // [Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Flask{5}, $all_notes]
+    helper__all_notes!(ctx)
+        && ctx.has(Item::Remote_Drone)
+        && ctx.has(Item::Shockwave)
+        && ctx.has(Item::Power_Matrix)
+        && ctx.has(Item::Wall_Climb)
+        && ctx.count(Item::Flask) >= 5
+}
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(ctx: &Context) -> bool {
     // ^_combo and ($grab or $climb)
     (ctx.amagi__main_area__ctx__combo() && (helper__grab!(ctx) || helper__climb!(ctx)))
@@ -591,15 +606,6 @@ pub fn access_ranged_speed__2(ctx: &Context) -> bool {
 pub fn access_remote_drone(ctx: &Context) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
-}
-pub fn access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5_and_all_notes(
-    ctx: &Context,
-) -> bool {
-    // Remote_Drone and Shockwave and Power_Matrix and Wall_Climb and Flask{5} and $all_notes
-    (((((ctx.has(Item::Remote_Drone) && ctx.has(Item::Shockwave)) && ctx.has(Item::Power_Matrix))
-        && ctx.has(Item::Wall_Climb))
-        && ctx.count(Item::Flask) >= 5)
-        && helper__all_notes!(ctx))
 }
 pub fn access_shockwave(ctx: &Context) -> bool {
     // $shockwave

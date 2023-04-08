@@ -14,6 +14,7 @@ boolExpr
     | cmpStr
     | flagMatch
     | refEq
+    | itemList
     | item
     | NOT? value
     | somewhere
@@ -128,6 +129,8 @@ baseNum : INT | CONST | SETTING | REF | value | switchNum | funcNum | condNum ;
 value   : SETTING ('[' ( LIT | ITEM ) ']')?     # Setting
         | REF                                   # Argument
         ;
+
+itemList : '[' (FUNC | item) (',' (FUNC | item))* ']';
 
 item    : ( ITEM '{' ( INT | SETTING ) '}'
           | '(' ITEM ',' ( INT | SETTING ) ')'

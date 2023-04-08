@@ -117,3 +117,7 @@ class StringVisitor(RulesVisitor):
 
     def visitRefInList(self, ctx):
         return f'(Arg:{str(ctx.REF())[1:]} IN [{"|".join(map(str, ctx.ITEM()))}])'
+
+    def visitItemList(self, ctx):
+        els = list(map(str, ctx.FUNC())) + [self.visit(item) for item in ctx.item()]
+        return f'[{", ".join(els)}]'

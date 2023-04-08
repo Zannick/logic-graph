@@ -7281,8 +7281,12 @@ impl world::World for World {
 
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
-            Objective::Start => rules::access_remote_drone(ctx),
-            Objective::Progress => rules::access_remote_drone_and_shockwave_and_power_matrix_and_wall_climb_and_flask__5_and_all_notes(ctx),
+            Objective::Start => rules::access___remote_drone(ctx),
+            Objective::Progress => {
+                rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__5_all_notes(
+                    ctx,
+                )
+            }
         }
     }
 

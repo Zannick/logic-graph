@@ -169,6 +169,11 @@ class RulesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RulesParser#itemList.
+    def visitItemList(self, ctx:RulesParser.ItemListContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RulesParser#ItemCount.
     def visitItemCount(self, ctx:RulesParser.ItemCountContext):
         return self.visitChildren(ctx)

@@ -148,6 +148,11 @@ class RustVisitor(RulesVisitor):
         if ref.startswith('ctx'):
             return ref
         return f'ctx.has({ref})'
+    
+    def visitItemList(self, ctx):
+        helpers = [self._getFuncAndArgs(helper)[:-2] + ')' for helper in map(str, ctx.FUNC())]
+        items = [self.visit(item) for item in ctx.item()]
+        return f'{" && ".join(helpers + items)}'
 
     def visitBaseNum(self, ctx):
         if ctx.INT():

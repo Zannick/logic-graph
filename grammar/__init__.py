@@ -60,6 +60,14 @@ def parseAction(text, name='', verbose=False) -> ParseResult:
     tree = p.actions()
     return ParseResult(name, text, tree, p, errl.errors)
 
+def parseItemList(text, name='', verbose=False) -> ParseResult:
+    p = make_parser(text)
+    errl = CollectErrorListener(name, verbose)
+    p.removeErrorListeners()
+    p.addErrorListener(errl)
+    tree = p.itemList()
+    return ParseResult(name, text, tree, p, errl.errors)
+
 
 def parseRule(rule: str, text: str, name:str='', verbose:bool=False) -> ParseResult:
     if rule == 'boolExpr':
@@ -68,6 +76,8 @@ def parseRule(rule: str, text: str, name:str='', verbose:bool=False) -> ParseRes
         return parseNum(text, name=name, verbose=verbose)
     if rule == 'action':
         return parseAction(text, name=name, verbose=verbose)
+    if rule == 'itemList':
+        return parseItemList(text, name=name, verbose=verbose)
     raise Exception(f'Unrecognized parse rule {rule!r} on name {name!r}')
 
 

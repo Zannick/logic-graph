@@ -296,6 +296,15 @@ class RulesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RulesParser#itemList.
+    def enterItemList(self, ctx:RulesParser.ItemListContext):
+        pass
+
+    # Exit a parse tree produced by RulesParser#itemList.
+    def exitItemList(self, ctx:RulesParser.ItemListContext):
+        pass
+
+
     # Enter a parse tree produced by RulesParser#ItemCount.
     def enterItemCount(self, ctx:RulesParser.ItemCountContext):
         pass
