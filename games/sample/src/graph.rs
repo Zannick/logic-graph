@@ -1399,7 +1399,6 @@ pub enum Objective {
     Gohma,
     Ganon,
     Triforce_Hunt,
-    Deku_Full_Clear,
 }
 impl fmt::Display for Objective {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -1408,7 +1407,6 @@ impl fmt::Display for Objective {
 
             Objective::Ganon => write!(f, "{}", "Ganon"),
             Objective::Triforce_Hunt => write!(f, "{}", "Triforce Hunt"),
-            Objective::Deku_Full_Clear => write!(f, "{}", "Deku Full Clear"),
         }
     }
 }
@@ -1420,7 +1418,6 @@ impl std::str::FromStr for Objective {
             "Gohma" => Ok(Objective::Gohma),
             "Ganon" => Ok(Objective::Ganon),
             "Triforce Hunt" => Ok(Objective::Triforce_Hunt),
-            "Deku Full Clear" => Ok(Objective::Deku_Full_Clear),
             _ => Err(format!("Could not recognize as a Objective: {}", s)),
         }
     }
@@ -2085,7 +2082,9 @@ impl world::World for World {
 
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
-            if unused_item(world::Location::item(loc)) {
+            if unused_item(world::Location::item(loc))
+                || self.unused_by_objective(world::Location::item(loc))
+            {
                 ctx.skip(id);
             }
         }
@@ -2093,10 +2092,9 @@ impl world::World for World {
 
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
-            Objective::Gohma => rules::access_kokiri_emerald(ctx),
-            Objective::Ganon => rules::access_defeat_ganon(ctx),
-            Objective::Triforce_Hunt => rules::access_triforce_piece__triforce_count(ctx),
-            Objective::Deku_Full_Clear => rules::access_all_region_checks__deku_tree(ctx),
+            Objective::Gohma => rules::access___kokiri_emerald(ctx),
+            Objective::Ganon => rules::access___defeat_ganon(ctx),
+            Objective::Triforce_Hunt => rules::access___triforce_piece__triforce_count(ctx),
         }
     }
 
@@ -2172,6 +2170,102 @@ impl World {
                 start: ActionId::Global__Change_Time.into_usize(),
                 end: ActionId::Global__Change_Time.into_usize() + 1,
             },
+        }
+    }
+
+    fn unused_by_objective(&self, item: Item) -> bool {
+        match self.objective {
+            Objective::Gohma => matches!(
+                item,
+                Item::Arrows_10
+                    | Item::Blue_Fire_Arrows
+                    | Item::Buy_Arrows_10
+                    | Item::Buy_Arrows_30
+                    | Item::Buy_Deku_Seeds_30
+                    | Item::Buy_Heart
+                    | Item::Compass_Deku_Tree
+                    | Item::Defeat_Ganon
+                    | Item::Dins_Fire
+                    | Item::Farores_Wind
+                    | Item::Fire_Arrows
+                    | Item::Goron_Tunic
+                    | Item::Heart_Container
+                    | Item::Hookshot
+                    | Item::Hover_Boots
+                    | Item::Iron_Boots
+                    | Item::Lens_of_Truth
+                    | Item::Light_Arrows
+                    | Item::Map_Deku_Tree
+                    | Item::Megaton_Hammer
+                    | Item::Minuet_of_Forest
+                    | Item::Mirror_Shield
+                    | Item::Nayrus_Love
+                    | Item::Progressive_Wallet
+                    | Item::Recovery_Heart
+                    | Item::Triforce_Piece
+                    | Item::Zora_Tunic
+            ),
+            Objective::Ganon => matches!(
+                item,
+                Item::Arrows_10
+                    | Item::Blue_Fire_Arrows
+                    | Item::Buy_Arrows_10
+                    | Item::Buy_Arrows_30
+                    | Item::Buy_Deku_Seeds_30
+                    | Item::Buy_Heart
+                    | Item::Compass_Deku_Tree
+                    | Item::Dins_Fire
+                    | Item::Farores_Wind
+                    | Item::Fire_Arrows
+                    | Item::Goron_Tunic
+                    | Item::Heart_Container
+                    | Item::Hookshot
+                    | Item::Hover_Boots
+                    | Item::Iron_Boots
+                    | Item::Kokiri_Emerald
+                    | Item::Lens_of_Truth
+                    | Item::Light_Arrows
+                    | Item::Map_Deku_Tree
+                    | Item::Megaton_Hammer
+                    | Item::Minuet_of_Forest
+                    | Item::Mirror_Shield
+                    | Item::Nayrus_Love
+                    | Item::Progressive_Wallet
+                    | Item::Recovery_Heart
+                    | Item::Triforce_Piece
+                    | Item::Zora_Tunic
+            ),
+            Objective::Triforce_Hunt => matches!(
+                item,
+                Item::Arrows_10
+                    | Item::Blue_Fire_Arrows
+                    | Item::Buy_Arrows_10
+                    | Item::Buy_Arrows_30
+                    | Item::Buy_Deku_Seeds_30
+                    | Item::Buy_Heart
+                    | Item::Compass_Deku_Tree
+                    | Item::Defeat_Ganon
+                    | Item::Dins_Fire
+                    | Item::Farores_Wind
+                    | Item::Fire_Arrows
+                    | Item::Goron_Tunic
+                    | Item::Heart_Container
+                    | Item::Hookshot
+                    | Item::Hover_Boots
+                    | Item::Iron_Boots
+                    | Item::Kokiri_Emerald
+                    | Item::Lens_of_Truth
+                    | Item::Light_Arrows
+                    | Item::Map_Deku_Tree
+                    | Item::Megaton_Hammer
+                    | Item::Minuet_of_Forest
+                    | Item::Mirror_Shield
+                    | Item::Nayrus_Love
+                    | Item::Progressive_Wallet
+                    | Item::Recovery_Heart
+                    | Item::Zora_Tunic
+            ),
+            _ => false,
         }
     }
 }

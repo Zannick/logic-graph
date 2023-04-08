@@ -241,17 +241,17 @@ impl std::str::FromStr for Item {
 }
 
 pub fn unused_item(id: Item) -> bool {
-    match id {
-        Item::None => true,
-        Item::Amagi_Stronghold_Left_Wall
-        | Item::Bronze_Axe
-        | Item::Carnelian_Ring
-        | Item::Compass
-        | Item::Escape
-        | Item::Health
-        | Item::Health_Fragment
-        | Item::Melee_Charge
-        | Item::Notes_2053_02_27 => true,
-        _ => false,
-    }
+    matches!(
+        id,
+        Item::None
+            | Item::Amagi_Stronghold_Left_Wall
+            | Item::Bronze_Axe
+            | Item::Carnelian_Ring
+            | Item::Compass
+            | Item::Escape
+            | Item::Health
+            | Item::Health_Fragment
+            | Item::Melee_Charge
+            | Item::Notes_2053_02_27
+    )
 }

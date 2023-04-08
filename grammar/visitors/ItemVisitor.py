@@ -2,10 +2,9 @@ from collections import Counter, defaultdict
 import logging
 import re
 
-import Utils
 from Utils import construct_id
 
-from grammar import RulesVisitor
+from grammar import RulesParser, RulesVisitor
 
 
 class ItemVisitor(RulesVisitor):
@@ -13,6 +12,8 @@ class ItemVisitor(RulesVisitor):
     def __init__(self, settings, vanilla_items):
         self.item_uses = Counter()
         self.item_max_counts = defaultdict(int)
+        self.items_by_source = defaultdict(set)
+        self.source_refs = defaultdict(set)
         self.settings = settings
         self.vanilla_items = vanilla_items
         self.name = ''
@@ -25,6 +26,11 @@ class ItemVisitor(RulesVisitor):
         finally:
             self.name = ''
 
+    def _source(self):
+        if not self.name.startswith('objectives') and not self.name.startswith('helpers'):
+            return 'general'
+        return self.name
+
     def _count_items(self, ctx):
         if self.name.startswith('objectives'):
             for item in ctx.ITEM():
@@ -32,19 +38,26 @@ class ItemVisitor(RulesVisitor):
                 if it not in self.vanilla_items:
                     logging.warning("%s references undefined item %r and may be impossible", self.name, it)
                 self.item_uses[it] += 1
+                self.items_by_source[self.name].add(it)
                 self.item_max_counts[it] = max(1, self.item_max_counts[it])
-        else:
             for item in ctx.ITEM():
                 it = str(item)
                 self.item_uses[it] += 1
+                self.items_by_source[self._source()].add(it)
                 self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
-    visitInvoke = visitRefInList = visitMatchRefBool = _count_items
+    visitRefInList = visitMatchRefBool = _count_items
+
+    def visitInvoke(self, ctx: RulesParser.InvokeContext):
+        # Might not actually be a helper but that's ok
+        self.source_refs[self._source()].add(f'helpers:{ctx.FUNC()}')
+        return self._count_items(ctx)
 
     def _switch_count(self, ctx):
         it = str(ctx.ITEM())
         self.item_uses[it] += 1
+        self.items_by_source[self._source()].add(it)
         mc = max(int(str(x)) for x in ctx.INT())
         self.item_max_counts[it] = max(mc, self.item_max_counts[it])
         return self.visitChildren(ctx)
@@ -66,6 +79,7 @@ class ItemVisitor(RulesVisitor):
         if ctx.ITEM():
             it = str(ctx.ITEM())
             self.item_uses[it] += 1
+            self.items_by_source[self._source()].add(it)
             self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
@@ -74,6 +88,7 @@ class ItemVisitor(RulesVisitor):
     def visitItemCount(self, ctx):
         it = str(ctx.ITEM())
         self.item_uses[it] += 1
+        self.items_by_source[self._source()].add(it)
         if ctx.SETTING():
             s = str(ctx.SETTING())
             if sd := self.settings.get(s):
@@ -94,8 +109,11 @@ class ItemVisitor(RulesVisitor):
     def visitOneLitItem(self, ctx):
         it = construct_id(ctx.LIT())
         self.item_uses[it] += 1
+        self.items_by_source[self._source()].add(it)
         self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
     def visitItemList(self, ctx):
+        for func in ctx.FUNC():
+            self.source_refs[self._source()].add(f'helpers:{func}')
         return self.visitChildren(ctx)

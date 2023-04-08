@@ -38,7 +38,7 @@ TRIGGER_RULES = {'enter', 'load', 'reset'}
 
 ON_ENTRY_ARGS = {'newpos': 'SpotId'}
 
-typed_name = re.compile(r'(?P<name>\$?[\w\s]+)(?::(?P<type>\w+))?')
+typed_name = re.compile(r'(?P<name>\$?[^:()]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
 
 
@@ -209,6 +209,7 @@ class GameLogic(object):
 
         self.process_times()
         self.process_settings()
+        self.process_items()
         self.process_tests()
         self.process_bitflags()
 
@@ -392,7 +393,7 @@ class GameLogic(object):
         self._errors.extend(tp.process_tests(self.tests))
 
     def process_bitflags(self):
-        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts())
+        self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts)
         self.bfp.process()
 
     @cached_property
@@ -790,7 +791,6 @@ class GameLogic(object):
         self.context_values
         self.local_distances
         self.context_resetters
-        self.item_stats
 
         return self._errors
 
@@ -814,26 +814,36 @@ class GameLogic(object):
         return sorted(self.vanilla_items | self.rule_items)
 
 
-    @cached_property
-    def item_stats(self):
+    def process_items(self):
         visitor = ItemVisitor(self.settings, self.vanilla_items)
         for pr in self.all_parse_results():
             visitor.visit(pr.tree, name=pr.name)
         self._errors.extend(visitor.errors)
-        return visitor.item_uses, visitor.item_max_counts
-
-
-    def item_uses(self):
-        return self.item_stats[0]
-
-
-    def item_max_counts(self):
-        return self.item_stats[1]
+        self.item_uses = visitor.item_uses
+        self.item_max_counts = visitor.item_max_counts
+        self.items_by_source = visitor.items_by_source
+        self.unused_by_objective = {
+            objective: self.all_items
+                        - self.collect.keys()
+                        - self.items_by_source['general']
+                        - self.items_by_source['objectives:' + objective]
+            for objective in self.objectives
+        }
+        for objective in self.objectives:
+            refs = visitor.source_refs['objectives:' + objective] | visitor.source_refs['general']
+            checked = set()
+            while refs - checked:
+                next = (refs - checked).pop()
+                checked.add(next)
+                if next in visitor.source_refs:
+                    refs |= visitor.source_refs[next]
+            for ref in refs:
+                self.unused_by_objective[objective] -= self.items_by_source[ref]
 
 
     @cached_property
     def unused_items(self):
-        return self.all_items - self.item_max_counts().keys() - self.collect.keys()
+        return self.all_items - self.item_max_counts.keys() - self.collect.keys()
 
 
     def process_context(self):

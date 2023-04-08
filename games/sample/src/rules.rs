@@ -16,13 +16,21 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
+pub fn access___defeat_ganon(ctx: &Context) -> bool {
+    // [Defeat_Ganon]
+    ctx.has(Item::Defeat_Ganon)
+}
+pub fn access___kokiri_emerald(ctx: &Context) -> bool {
+    // [Kokiri_Emerald]
+    ctx.has(Item::Kokiri_Emerald)
+}
 pub fn access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx: &Context) -> bool {
     // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
     ((helper__Nuts!(ctx) || helper__can_use!(ctx, Item::Slingshot)) && helper__can_jumpslash!(ctx))
 }
-pub fn access_all_region_checks__deku_tree(ctx: &Context) -> bool {
-    // $all_region_checks(`Deku Tree`)
-    ctx.all_region_checks(RegionId::Deku_Tree)
+pub fn access___triforce_piece__triforce_count(ctx: &Context) -> bool {
+    // [Triforce_Piece{triforce_count}]
+    ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
 }
 pub fn access_can_play__minuet_of_forest(ctx: &Context) -> bool {
     // $can_play(Minuet_of_Forest)
@@ -35,10 +43,6 @@ pub fn access_can_use__boomerang_or_can_use__hookshot(ctx: &Context) -> bool {
 pub fn access_can_use__slingshot(ctx: &Context) -> bool {
     // $can_use(Slingshot)
     helper__can_use!(ctx, Item::Slingshot)
-}
-pub fn access_defeat_ganon(ctx: &Context) -> bool {
-    // Defeat_Ganon
-    ctx.has(Item::Defeat_Ganon)
 }
 pub fn access_defeat_gohma(ctx: &Context) -> bool {
     // Defeat_Gohma
@@ -153,10 +157,6 @@ pub fn access_is_child_and_sticks_and_nuts(ctx: &Context) -> bool {
     // $is_child and $Sticks and $Nuts
     ((helper__is_child!(ctx) && helper__Sticks!(ctx)) && helper__Nuts!(ctx))
 }
-pub fn access_kokiri_emerald(ctx: &Context) -> bool {
-    // Kokiri_Emerald
-    ctx.has(Item::Kokiri_Emerald)
-}
 pub fn access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_sword_(
     ctx: &Context,
 ) -> bool {
@@ -167,10 +167,6 @@ pub fn access_nuts_and_has_shield_and_if___is_child____sticks__else____biggoron_
         } else {
             ctx.has(Item::Biggoron_Sword)
         })
-}
-pub fn access_triforce_piece__triforce_count(ctx: &Context) -> bool {
-    // Triforce_Piece{triforce_count}
-    ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
 }
 pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context) {
     // ^_torch = True

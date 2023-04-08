@@ -8,11 +8,5 @@ use std::fmt;
 {{ enum('Item', all_items, True, id=True) }}
 
 pub fn unused_item(id: Item) -> bool {
-    match id {
-        Item::None => true,
-%% if unused_items
-        Item::{{ unused_items|sort|join(' | Item::') }} => true,
-%% endif
-        _ => false,
-    }
+    matches!(id, Item::None{% if unused_items %} | Item::{{ unused_items|sort|join(' | Item::') }}{% endif %})
 }

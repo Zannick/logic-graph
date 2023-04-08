@@ -216,18 +216,33 @@ impl std::str::FromStr for Item {
 }
 
 pub fn unused_item(id: Item) -> bool {
-    match id {
-        Item::None => true,
-        Item::Arrows_10
-        | Item::Buy_Arrows_10
-        | Item::Buy_Arrows_30
-        | Item::Buy_Deku_Seeds_30
-        | Item::Buy_Heart
-        | Item::Compass_Deku_Tree
-        | Item::Heart_Container
-        | Item::Map_Deku_Tree
-        | Item::Progressive_Wallet
-        | Item::Recovery_Heart => true,
-        _ => false,
-    }
+    matches!(
+        id,
+        Item::None
+            | Item::Arrows_10
+            | Item::Blue_Fire_Arrows
+            | Item::Buy_Arrows_10
+            | Item::Buy_Arrows_30
+            | Item::Buy_Deku_Seeds_30
+            | Item::Buy_Heart
+            | Item::Compass_Deku_Tree
+            | Item::Dins_Fire
+            | Item::Farores_Wind
+            | Item::Fire_Arrows
+            | Item::Goron_Tunic
+            | Item::Heart_Container
+            | Item::Hookshot
+            | Item::Hover_Boots
+            | Item::Iron_Boots
+            | Item::Lens_of_Truth
+            | Item::Light_Arrows
+            | Item::Map_Deku_Tree
+            | Item::Megaton_Hammer
+            | Item::Minuet_of_Forest
+            | Item::Mirror_Shield
+            | Item::Nayrus_Love
+            | Item::Progressive_Wallet
+            | Item::Recovery_Heart
+            | Item::Zora_Tunic
+    )
 }

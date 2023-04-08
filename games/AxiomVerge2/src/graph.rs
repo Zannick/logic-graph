@@ -7273,7 +7273,9 @@ impl world::World for World {
 
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
-            if unused_item(world::Location::item(loc)) {
+            if unused_item(world::Location::item(loc))
+                || self.unused_by_objective(world::Location::item(loc))
+            {
                 ctx.skip(id);
             }
         }
@@ -7767,6 +7769,44 @@ impl World {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
+        }
+    }
+
+    fn unused_by_objective(&self, item: Item) -> bool {
+        match self.objective {
+            Objective::Start => matches!(
+                item,
+                Item::Amagi_Stronghold_Left_Wall
+                    | Item::Bronze_Axe
+                    | Item::Carnelian_Ring
+                    | Item::Companies_Layoff
+                    | Item::Compass
+                    | Item::Dear_Ernest
+                    | Item::Escape
+                    | Item::Health
+                    | Item::Health_Fragment
+                    | Item::Heretics_Tablet
+                    | Item::Letter_from_Trace
+                    | Item::Melee_Charge
+                    | Item::Notes_2053_02_27
+                    | Item::Record_Losses
+                    | Item::Researchers_Missing
+                    | Item::Terminal_Breakthrough_1
+                    | Item::Under_Siege
+            ),
+            Objective::Progress => matches!(
+                item,
+                Item::Amagi_Stronghold_Left_Wall
+                    | Item::Bronze_Axe
+                    | Item::Carnelian_Ring
+                    | Item::Compass
+                    | Item::Escape
+                    | Item::Health
+                    | Item::Health_Fragment
+                    | Item::Melee_Charge
+                    | Item::Notes_2053_02_27
+            ),
+            _ => false,
         }
     }
 }

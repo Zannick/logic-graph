@@ -81,7 +81,7 @@ pub struct Context {
     pub {{ s }}: {{ info.rust_type }},
 %% endfor
     // items
-%% for item, ct in gl.item_max_counts().items()|sort if item not in bfp.varmap
+%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
     pub {{ item|lower }}: {{ ct|get_int_type_for_max }},
 %% endfor
     // bitflags
@@ -107,7 +107,7 @@ impl Default for Context {
             {{ s }}: Default::default(),
 %% endfor
             // items
-%% for item, ct in gl.item_max_counts().items()|sort if item not in bfp.varmap
+%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
             {{ item|lower }}: Default::default(),
 %% endfor
             // bitflags
@@ -128,12 +128,12 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = {{ gl.item_max_counts()|count }};
+    const NUM_ITEMS: i32 = {{ gl.item_max_counts|count }};
 
 %# we might not need has/count, if we reference the parameter directly in rules
     fn has(&self, item: Item) -> bool {
         match item {
-%% for item, ct in gl.item_max_counts().items()|sort
+%% for item, ct in gl.item_max_counts.items()|sort
 %% if item in bfp.varmap
             Item::{{ item }} => self.cbits{{ bfp.varmap[item] }}.contains(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }}),
 %% else
@@ -145,7 +145,7 @@ impl context::Ctx for Context {
     }
     fn count(&self, item: Item) -> i16 {
         match item {
-%% for item, ct in gl.item_max_counts().items()|sort
+%% for item, ct in gl.item_max_counts.items()|sort
 %% if item in bfp.varmap
             Item::{{ item }} => self.cbits{{ bfp.varmap[item] }}.contains(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }}).into(),
 %% else
@@ -157,7 +157,7 @@ impl context::Ctx for Context {
     }
     fn collect(&mut self, item: Item) {
         match item {
-%% for item, ct in gl.item_max_counts().items()|sort
+%% for item, ct in gl.item_max_counts.items()|sort
             Item::{{ item }} => {
 %% if item in bfp.varmap
                 self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
@@ -170,7 +170,7 @@ impl context::Ctx for Context {
             },
 %% endfor
 %% for item, info in collect.items()
-%% if item not in gl.item_max_counts()
+%% if item not in gl.item_max_counts
             Item::{{ item }} => rules::action_{{ info.action_id }}(self),
 %% endif
 %% endfor
@@ -400,7 +400,7 @@ impl Context {
     // test helper for items
     pub fn add_item(&mut self, item: Item) {
         match item {
-%% for item, ct in gl.item_max_counts().items()|sort
+%% for item, ct in gl.item_max_counts.items()|sort
             Item::{{ item }} => {
 %% if item in bfp.varmap
                 self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});

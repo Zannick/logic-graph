@@ -304,7 +304,7 @@ impl world::World for World {
 
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
-            if unused_item(world::Location::item(loc)) {
+            if unused_item(world::Location::item(loc)) || self.unused_by_objective(world::Location::item(loc)) {
                 ctx.skip(id);
             }
         }
@@ -339,6 +339,17 @@ impl World {
                 end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
             }
+        }
+    }
+
+    fn unused_by_objective(&self, item: Item) -> bool {
+        match self.objective {
+%% for o, items in unused_by_objective.items()
+%% if items
+            Objective::{{ o|construct_id }} => matches!(item, Item::{{ items|sort|join(' | Item::') }}),
+%% endif
+%% endfor
+            _ => false,
         }
     }
 }
