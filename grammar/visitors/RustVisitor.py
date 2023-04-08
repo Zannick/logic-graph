@@ -149,6 +149,7 @@ class RustVisitor(RulesVisitor):
             return ref
         return f'ctx.has({ref})'
     
+    # There's no need to optimize for bitflags here, as the compiler can handle that!
     def visitItemList(self, ctx):
         helpers = [self._getFuncAndArgs(helper)[:-2] + ')' for helper in map(str, ctx.FUNC())]
         items = [self.visit(item) for item in ctx.item()]
