@@ -463,11 +463,11 @@ where
         }
         let mut vec = vec![(
             state_key,
-            //Vec::new(),
+            Vec::new(),
+            0,
             ContextWrapper::estimate_progress(ctx, self.world),
         )];
-        /* This is exceptionally memory-hungry in the initial states.
-        'dfs: while let Some((key, results, nested)) = vec.last_mut() {
+        'dfs: while let Some((key, results, last, nested)) = vec.last_mut() {
             while let Some((t, newctx)) = nested.pop() {
                 if self.world.won(&newctx) {
                     results.push(t);
@@ -481,6 +481,7 @@ where
                     vec.push((
                         sk,
                         Vec::new(),
+                        t,
                         ContextWrapper::estimate_progress(&newctx, self.world),
                     ));
                     continue 'dfs;
@@ -495,11 +496,14 @@ where
                 &self.write_opts,
             )?;
             self.estimates.fetch_add(1, Ordering::Release);
+            let estimate = estimate + *last;
             vec.pop();
-            if vec.is_empty() {
+            if let Some((_, results, _, _)) = vec.last_mut() {
+                results.push(estimate);
+            } else {
                 return Ok(estimate);
             }
-        }*/
+        }
         Err(Error {
             message: String::from("Could not estimate any distance"),
         })

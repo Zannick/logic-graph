@@ -281,6 +281,7 @@ impl<T: Ctx> ContextWrapper<T> {
             let loc_time = world.get_location(loc_id).time();
             let mut ctx = ctx.clone();
             ctx.set_position(spot);
+            ctx.collect(world.get_location(loc_id).item());
             ctx.visit(loc_id);
             vec.push((spot_time + loc_time, ctx));
         }

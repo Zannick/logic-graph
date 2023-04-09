@@ -7352,7 +7352,7 @@ impl world::World for World {
         self.locations
             .iter()
             .filter_map(|(loc_id, loc)| {
-                if items.contains(&world::Location::item(loc)) {
+                if ctx.todo(loc_id) && items.contains(&world::Location::item(loc)) {
                     Some(loc_id)
                 } else {
                     None

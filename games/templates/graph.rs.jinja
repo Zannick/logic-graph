@@ -341,7 +341,7 @@ impl world::World for World {
     fn potential_next_locations(&self, ctx: &Context) -> Vec<LocationId> {
         let items = self.items_needed(ctx);
         self.locations.iter().filter_map(|(loc_id, loc)| {
-            if items.contains(&world::Location::item(loc)) {
+            if ctx.todo(loc_id) && items.contains(&world::Location::item(loc)) {
                 Some(loc_id)
             } else {
                 None
