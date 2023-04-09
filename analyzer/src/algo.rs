@@ -431,10 +431,13 @@ where
         struct Iter<'a, W, T: Ctx> {
             q: &'a RocksBackedQueue<'a, W, T>,
         }
-        impl<'a, W, T> Iterator for Iter<'a, W, T>
+        impl<'a, W, T, L, E> Iterator for Iter<'a, W, T>
         where
-            W: World,
+            W: World<Location = L, Exit = E>,
             T: Ctx<World = W>,
+            L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+            E: Exit<Context = T>,
+            W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
         {
             type Item = ContextWrapper<T>;
 
@@ -595,9 +598,10 @@ where
         let max_time = self.queue.max_time();
         println!(
             "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}) ---\n\
-                    Queue stats: heap={}; db={}; total={}; seen={}; limit: {}ms; db best: {}\n\
-                    push_skips={} time + {} dups; pop_skips={} time + {} dups; evictions: {}; retrievals: {}\n\
-                    {}",
+            Stats: heap={}; db={}; total={}; seen={}; est={}; cache_hits={};\n\
+            limit: {}ms; db best: {}; evictions: {}; retrievals: {}\n\
+            push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+            {}",
             iters,
             self.extras.load(Ordering::Acquire),
             sols.len(),
@@ -607,6 +611,8 @@ where
             self.queue.db_len(),
             self.queue.len(),
             self.queue.seen(),
+            self.queue.estimates(),
+            self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
             iskips,
@@ -615,7 +621,7 @@ where
             dpskips,
             self.queue.evictions(),
             self.queue.retrievals(),
-            ctx.info()
+            ctx.info(self.queue.score(&ctx))
         );
     }
 }

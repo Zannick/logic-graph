@@ -122,10 +122,13 @@ fn min_merge(
 const MB: usize = 1 << 20;
 const GB: usize = 1 << 30;
 
-impl<'w, W, T> HeapDB<'w, W, T>
+impl<'w, W, T, L, E> HeapDB<'w, W, T>
 where
-    W: World,
+    W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
 {
     pub fn open<P>(p: P, initial_max_time: i32, world: &'w W) -> Result<HeapDB<W, T>, String>
     where
@@ -232,6 +235,18 @@ where
         self.seen.load(Ordering::Acquire)
     }
 
+    /// Returns the number of unique states we've estimated remaining time for.
+    /// Winning states aren't counted in this.
+    pub fn estimates(&self) -> usize {
+        self.estimates.load(Ordering::Acquire)
+    }
+
+    /// Returns the number of cache hits for estimated remaining time.
+    /// Winning states aren't counted in this.
+    pub fn cached_estimates(&self) -> usize {
+        self.cached_estimates.load(Ordering::Acquire)
+    }
+
     /// Returns details about the number of states we've skipped (tracked separately from the db).
     /// Specifically:
     ///   1) states not added (on push) to the db due to exceeding max time,
@@ -277,7 +292,7 @@ where
     /// a sequence number (8 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        key[0..4].copy_from_slice(&Self::get_heap_prefix(el.score(self.scale_factor)));
+        key[0..4].copy_from_slice(&Self::get_heap_prefix(self.score(el).unwrap()));
         key[4..8].copy_from_slice(&el.elapsed().to_be_bytes());
         key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
@@ -328,7 +343,7 @@ where
     fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
         self.get_state_value(self.seen_cf(), state_key)
     }
-    fn get_score_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
+    fn get_estimation(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
         self.get_state_value(self.score_cf(), state_key)
     }
 
@@ -437,55 +452,63 @@ where
 
     /// Recursively estimates the remaining time to the goal.
     /// These estimates are stored in the db.
-    pub fn estimated_remaining_time<L, E>(&self, ctx: &T) -> Result<i32, Error>
-    where
-        W: World<Location = L, Exit = E>,
-        L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-        E: Exit<Context = T>,
-        W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
-    {
+    pub fn estimated_remaining_time(&self, ctx: &T) -> Result<i32, Error> {
         if self.world.won(ctx) {
             return Ok(0);
         }
         let state_key = Self::get_state_key(ctx);
-        if let Some(score) = self.get_score_value(&state_key)? {
+        if let Some(est) = self.get_estimation(&state_key)? {
             self.cached_estimates.fetch_add(1, Ordering::Release);
-            return Ok(score);
+            return Ok(est);
         }
-        if let Some(estimate) = ContextWrapper::estimate_progress(ctx, self.world)
-            .into_iter()
-            .map(|(t, newctx)| {
-                t + self
-                    .estimated_remaining_time(&newctx)
-                    .expect("failed to evalute distance")
-            })
-            .min()
-        {
+        let mut vec = vec![(
+            state_key,
+            //Vec::new(),
+            ContextWrapper::estimate_progress(ctx, self.world),
+        )];
+        /* This is exceptionally memory-hungry in the initial states.
+        'dfs: while let Some((key, results, nested)) = vec.last_mut() {
+            while let Some((t, newctx)) = nested.pop() {
+                if self.world.won(&newctx) {
+                    results.push(t);
+                    continue;
+                }
+                let sk = Self::get_state_key(&newctx);
+                if let Some(est) = self.get_estimation(&sk)? {
+                    self.cached_estimates.fetch_add(1, Ordering::Release);
+                    results.push(t + est);
+                } else {
+                    vec.push((
+                        sk,
+                        Vec::new(),
+                        ContextWrapper::estimate_progress(&newctx, self.world),
+                    ));
+                    continue 'dfs;
+                }
+            }
+            let &estimate = results.iter().min().expect("failed to evaluate distance");
+
             self.statedb.put_cf_opt(
                 self.score_cf(),
-                &state_key,
+                &key,
                 estimate.to_be_bytes(),
                 &self.write_opts,
             )?;
             self.estimates.fetch_add(1, Ordering::Release);
-            Ok(estimate)
-        } else {
-            Err(Error {
-                message: String::from("Could not estimate any distance"),
-            })
-        }
+            vec.pop();
+            if vec.is_empty() {
+                return Ok(estimate);
+            }
+        }*/
+        Err(Error {
+            message: String::from("Could not estimate any distance"),
+        })
     }
 
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the objective items remaining,
     /// and stores the information in the db.
-    pub fn score<L, E>(&self, el: &ContextWrapper<T>) -> Result<i32, Error>
-    where
-        W: World<Location = L, Exit = E>,
-        L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-        E: Exit<Context = T>,
-        W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
-    {
+    pub fn score(&self, el: &ContextWrapper<T>) -> Result<i32, Error> {
         // TODO: Do we still need penalty?
         Ok(-el.elapsed() - self.estimated_remaining_time(el.get())?)
     }
@@ -834,7 +857,7 @@ where
             let (_, value) = item?;
             let el = Self::get_obj_from_heap_value(&value)?;
             times.push(el.elapsed().into());
-            time_scores.push((el.elapsed().into(), el.score(self.scale_factor).into()));
+            time_scores.push((el.elapsed().into(), self.score(&el).unwrap().into()));
         }
 
         let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));

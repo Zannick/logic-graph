@@ -3,7 +3,7 @@ extern crate plotlib;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::CommonHasher;
-use crate::world::World;
+use crate::world::*;
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -222,7 +222,7 @@ impl<T: Ctx> LimitedHeap<T> {
         let factor = self.scale_factor;
         for el in self.drain() {
             theap.push(HeapElement {
-                score: el.score(factor),
+                score: Self::score(&el, factor),
                 el,
             });
         }
@@ -327,10 +327,13 @@ pub struct RocksBackedQueue<'w, W, T: Ctx> {
     retrieving: AtomicBool,
 }
 
-impl<'w, W, T> RocksBackedQueue<'w, W, T>
+impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
 where
-    W: World,
-    T: Ctx<World = W>
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
  {
     pub fn new<P>(
         world: &'w W,
@@ -381,8 +384,20 @@ where
         self.db.seen()
     }
 
+    pub fn estimates(&self) -> usize {
+        self.db.estimates()
+    }
+
+    pub fn cached_estimates(&self) -> usize {
+        self.db.cached_estimates()
+    }
+
     pub fn db_best(&self) -> i32 {
         self.max_db_priority.load(Ordering::Acquire)
+    }
+
+    pub fn score(&self, ctx: &ContextWrapper<T>) -> i32 {
+        self.db.score(ctx).unwrap()
     }
 
     /// Returns whether the underlying queue and db are actually empty.
@@ -428,7 +443,7 @@ where
             return Ok(());
         }
 
-        let priority = el.score(self.db.scale_factor());
+        let priority = self.db.score(&el)?;
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -451,19 +466,19 @@ where
                         max_evictions,
                     ));
                     debug_assert!(
-                        priority == el.score(self.db.scale_factor()),
+                        priority == self.db.score(&el)?,
                         "priority {} didn't match score {}",
                         priority,
-                        el.score(self.db.scale_factor())
+                        self.db.score(&el)?
                     );
                     queue.push(el, priority);
                 }
             } else {
                 debug_assert!(
-                    priority == el.score(self.db.scale_factor()),
+                    priority == self.db.score(&el)?,
                     "priority {} didn't match score {}",
                     priority,
-                    el.score(self.db.scale_factor())
+                    self.db.score(&el)?
                 );
                 queue.push(el, priority);
             }
@@ -475,7 +490,7 @@ where
             if !ev.is_empty() {
                 let best = ev
                     .iter()
-                    .map(|ctx| ctx.score(self.db.scale_factor()))
+                    .map(|ctx| self.db.score(ctx).unwrap())
                     .max()
                     .unwrap();
                 self.db.extend(ev, true)?;
@@ -529,7 +544,7 @@ where
             .retrieve(max_db_priority.load(Ordering::Acquire), num)?
             .into_iter()
             .map(|el| {
-                let score = el.score(db.scale_factor());
+                let score = db.score(&el).unwrap();
                 (el, score)
             })
             .collect();
@@ -576,7 +591,7 @@ where
 
                         let best = evicted
                             .iter()
-                            .map(|ctx| ctx.score(self.db.scale_factor()))
+                            .map(|ctx| self.db.score(ctx).unwrap())
                             .max()
                             .unwrap();
                         self.db.extend(evicted, true)?;
@@ -596,10 +611,10 @@ where
                 }
                 let (ctx, prio) = queue.pop_max().unwrap();
                 debug_assert!(
-                    prio == ctx.score(self.db.scale_factor()),
+                    prio == self.db.score(&ctx).unwrap(),
                     "priority {} didn't match score {}",
                     prio,
-                    ctx.score(self.db.scale_factor())
+                    self.db.score(&ctx).unwrap()
                 );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -643,10 +658,10 @@ where
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((ctx, prio)) = queue.pop_min() {
                 debug_assert!(
-                    prio == ctx.score(self.db.scale_factor()),
+                    prio == self.db.score(&ctx).unwrap(),
                     "priority {} didn't match score {}",
                     prio,
-                    ctx.score(self.db.scale_factor())
+                    self.db.score(&ctx).unwrap()
                 );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -708,7 +723,7 @@ where
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if keep {
-                    let priority = el.score(self.db.scale_factor());
+                    let priority = self.db.score(&el).unwrap();
                     Some((el, priority))
                 } else {
                     None
@@ -743,7 +758,7 @@ where
             if !ev.is_empty() {
                 let best = ev
                     .iter()
-                    .map(|ctx| ctx.score(self.db.scale_factor()))
+                    .map(|ctx| self.db.score(ctx).unwrap())
                     .max()
                     .unwrap();
                 self.db.extend(ev, true)?;
@@ -778,7 +793,7 @@ where
         let mut time_progress = Vec::new();
         for c in queue.iter() {
             let elapsed: f64 = c.0.elapsed().into();
-            let score: f64 = c.0.score(self.db.scale_factor()).into();
+            let score: f64 = self.db.score(&c.0).unwrap().into();
             let progress: f64 = c.0.get().progress().into();
             time_scores.push((elapsed, score));
             time_progress.push((elapsed, progress));
