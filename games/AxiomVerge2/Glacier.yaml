@@ -539,7 +539,7 @@ areas:
         - to: East 9
       exits:
         - to: Ledge Grab Room > Mid 35
-          time: 2.25s
+          time: 2.25
     - name: Gate Ledge
       coord: [35.0, 8.6]
       local:

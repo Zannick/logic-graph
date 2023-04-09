@@ -116,10 +116,12 @@ warps:
     req: NOT WITHIN `Menu` and ^flasks > 0
     to: Menu > Upgrade Menu > Physiology
     do: ^last = ^position
+    base_movement: true
   exit_menu:
     time: 0.2
     req: WITHIN `Menu`
     to: ^last
+    base_movement: true
   fast_travel_17_10:
     time: 12
     req: NOT WITHIN `Menu` and Map_17_10 and Fast_Travel
@@ -127,7 +129,7 @@ warps:
     do: ^energy = $max_energy
 
 # TODO: under some conditions, fast travel indra can appear standing up
-# 7s. I think it's immediately after savewarping.
+# 7s. I think it's immediately after savewarping though, so not very useful.
 
 actions:
   - name: Recall Drone

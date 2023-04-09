@@ -8,6 +8,7 @@ use crate::context::Context;
 use crate::graph::SpotId;
 use crate::rules;
 use analyzer::context::Ctx;
+use enum_map::{enum_map, EnumMap};
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
 enum Movement {
@@ -46,6 +47,22 @@ pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: Spot
 %% endfor
 %% endfor
         _ => -1,
+    }
+}
+
+pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, i32>> {
+    enum_map! {
+        SpotId::None => enum_map!{ _ => -1 },
+%% for s in gl.spots()|map(attribute='id')
+        SpotId::{{ s }} => enum_map! {
+%% for t in gl.spots()|map(attribute='id')
+%% if (s, t) in base_distances
+            SpotId::{{ t }} => {{ (base_distances[(s, t)] * 1000)|int }},
+%% endif
+%% endfor
+            _ => -1,
+        },
+%% endfor
     }
 }
 

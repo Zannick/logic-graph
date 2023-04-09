@@ -603,6 +603,36 @@ class GameLogic(object):
                 if all(t is not None for t in times):
                     local_time[k] = times
         return table
+    
+    @cached_property
+    def base_distances(self):
+        # initial conditions: (x,y) -> t according to the best movement
+        table = {k: sum(t)
+                 for k, t in self.movement_tables[tuple(True for _ in self.non_default_movements)].items()}
+        # every exit
+        # every warp with base_movement: true
+        warp_dests = []
+        for w in self.warps.values():
+            if w.get('base_movement') and w['to'][0] != '^':
+                warp_dests.append((construct_id(w['to']), w['time']))
+        for s in self.spots():
+            for ex in s.get('exits', []) + s.get('hybrid', []):
+                key = (s['id'], get_exit_target(ex))
+                if key in table:
+                    table[key] = min(table[key], float(ex['time']))
+                else:
+                    table[key] = float(ex['time'])
+            for w, t in warp_dests:
+                if s['id'] == w:
+                    continue
+                key = (s['id'], w)
+                if key in table:
+                    table[key] = min(table[key], t)
+                else:
+                    table[key] = t
+            table[(s['id'], s['id'])] = 0
+
+        return table
 
 
     def make_funcid(self, info, prkey:str='pr', extra_fields=None):
@@ -1167,6 +1197,7 @@ class GameLogic(object):
         self.default_price_type
         self.price_types
         self.movement_tables
+        self.base_distances
         self.context_trigger_rules
         self.context_position_watchers
         self.context_here_overrides

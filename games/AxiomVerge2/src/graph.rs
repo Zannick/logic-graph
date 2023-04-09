@@ -6845,6 +6845,8 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
+    // Minimum distances for time estimates
+    all_distances: EnumMap<SpotId, EnumMap<SpotId, i32>>,
 }
 
 impl world::World for World {
@@ -7299,7 +7301,8 @@ impl world::World for World {
 
 impl World {
     pub fn new() -> World {
-        World {
+        let start = std::time::Instant::now();
+        let mut w = World {
             objective: Objective::default(),
             locations: build_locations(),
             exits: build_exits(),
@@ -7769,7 +7772,42 @@ impl World {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
+            all_distances: movements::build_base_distances(),
+        };
+
+        // Floyd-Warshall
+        for mid in w.raw_spots {
+            for first in w.raw_spots {
+                for last in w.raw_spots {
+                    if w.all_distances[first][mid] > -1 && w.all_distances[mid][last] > -1 {
+                        if w.all_distances[first][last] > -1 {
+                            w.all_distances[first][last] = std::cmp::min(
+                                w.all_distances[first][last],
+                                w.all_distances[first][mid] + w.all_distances[mid][last],
+                            );
+                        } else {
+                            w.all_distances[first][last] =
+                                w.all_distances[first][mid] + w.all_distances[mid][last];
+                        }
+                    }
+                }
+            }
         }
+
+        let mut c = 0;
+        for first in w.raw_spots {
+            for last in w.raw_spots {
+                if w.all_distances[first][last] > -1 {
+                    c += 1;
+                }
+            }
+        }
+        println!(
+            "World built with {} nonnegative distances in {:?}.",
+            c,
+            start.elapsed()
+        );
+        w
     }
 
     fn unused_by_objective(&self, item: Item) -> bool {
@@ -10810,7 +10848,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => Exit {
             id: ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1,
-            time: 0,
+            time: 2250,
             dest: SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             price: Currency::Free,
             loc_id: None,
