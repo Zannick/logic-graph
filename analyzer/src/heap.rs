@@ -2,7 +2,6 @@ extern crate plotlib;
 
 use crate::context::*;
 use crate::db::HeapDB;
-use crate::world::*;
 use crate::CommonHasher;
 use lru::LruCache;
 use plotlib::page::Page;
@@ -314,9 +313,9 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 }
 
-pub struct RocksBackedQueue<'w, W, T: Ctx> {
+pub struct RocksBackedQueue<T: Ctx> {
     queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
-    db: HeapDB<'w, W, T>,
+    db: HeapDB<T>,
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
@@ -330,16 +329,8 @@ pub struct RocksBackedQueue<'w, W, T: Ctx> {
     retrieving: AtomicBool,
 }
 
-impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
-where
-    W: World<Location = L, Exit = E>,
-    T: Ctx<World = W>,
-    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
-{
+impl<T: Ctx> RocksBackedQueue<T> {
     pub fn new<P>(
-        world: &'w W,
         db_path: P,
         initial_max_time: i32,
         max_capacity: usize,
@@ -347,7 +338,7 @@ where
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
-    ) -> Result<RocksBackedQueue<'w, W, T>, String>
+    ) -> Result<RocksBackedQueue<T>, String>
     where
         P: AsRef<Path>,
     {
@@ -356,7 +347,7 @@ where
                 max_capacity,
                 CommonHasher::default(),
             )),
-            db: HeapDB::open(db_path, initial_max_time, world)?,
+            db: HeapDB::open(db_path, initial_max_time)?,
             capacity: max_capacity.into(),
             iskips: 0.into(),
             pskips: 0.into(),
@@ -387,20 +378,8 @@ where
         self.db.seen()
     }
 
-    pub fn estimates(&self) -> usize {
-        self.db.estimates()
-    }
-
-    pub fn cached_estimates(&self) -> usize {
-        self.db.cached_estimates()
-    }
-
     pub fn db_best(&self) -> i32 {
         self.max_db_priority.load(Ordering::Acquire)
-    }
-
-    pub fn score(&self, ctx: &ContextWrapper<T>) -> i32 {
-        self.db.score(ctx).unwrap()
     }
 
     /// Returns whether the underlying queue and db are actually empty.
@@ -446,12 +425,7 @@ where
             return Ok(());
         }
 
-        let priority = if let Some(p) = self.db.score(&el) {
-            p
-        } else {
-            self.iskips.fetch_add(1, Ordering::Release);
-            return Ok(());
-        };
+        let priority = el.score(self.db.scale_factor());
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -473,9 +447,21 @@ where
                         self.min_evictions,
                         max_evictions,
                     ));
+                    debug_assert!(
+                        priority == el.score(self.db.scale_factor()),
+                        "priority {} didn't match score {}",
+                        priority,
+                        el.score(self.db.scale_factor())
+                    );
                     queue.push(el, priority);
                 }
             } else {
+                debug_assert!(
+                    priority == el.score(self.db.scale_factor()),
+                    "priority {} didn't match score {}",
+                    priority,
+                    el.score(self.db.scale_factor())
+                );
                 queue.push(el, priority);
             }
         }
@@ -486,7 +472,7 @@ where
             if !ev.is_empty() {
                 let best = ev
                     .iter()
-                    .map(|ctx| self.db.score(ctx).unwrap())
+                    .map(|ctx| ctx.score(self.db.scale_factor()))
                     .max()
                     .unwrap();
                 self.db.extend(ev, true)?;
@@ -526,7 +512,7 @@ where
 
     /// Retrieves up to the given number of elements from the db.
     fn retrieve(
-        db: &HeapDB<W, T>,
+        db: &HeapDB<T>,
         max_db_priority: &AtomicI32,
         num: usize,
     ) -> Result<Vec<(ContextWrapper<T>, i32)>, String> {
@@ -540,7 +526,7 @@ where
             .retrieve(max_db_priority.load(Ordering::Acquire), num)?
             .into_iter()
             .map(|el| {
-                let score = db.score(&el).unwrap();
+                let score = el.score(db.scale_factor());
                 (el, score)
             })
             .collect();
@@ -587,7 +573,7 @@ where
 
                         let best = evicted
                             .iter()
-                            .map(|ctx| self.db.score(ctx).unwrap())
+                            .map(|ctx| ctx.score(self.db.scale_factor()))
                             .max()
                             .unwrap();
                         self.db.extend(evicted, true)?;
@@ -607,10 +593,10 @@ where
                 }
                 let (ctx, prio) = queue.pop_max().unwrap();
                 debug_assert!(
-                    prio == self.db.score(&ctx).unwrap(),
+                    prio == ctx.score(self.db.scale_factor()),
                     "priority {} didn't match score {}",
                     prio,
-                    self.db.score(&ctx).unwrap()
+                    ctx.score(self.db.scale_factor())
                 );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -656,10 +642,10 @@ where
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((ctx, prio)) = queue.pop_min() {
                 debug_assert!(
-                    prio == self.db.score(&ctx).unwrap(),
+                    prio == ctx.score(self.db.scale_factor()),
                     "priority {} didn't match score {}",
                     prio,
-                    self.db.score(&ctx).unwrap()
+                    ctx.score(self.db.scale_factor())
                 );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -704,7 +690,7 @@ where
         let vec: Vec<ContextWrapper<T>> = iter
             .into_iter()
             .filter(|el| {
-                if el.elapsed() > self.db.max_time() || self.db.score(&el).is_none() {
+                if el.elapsed() > self.db.max_time() {
                     iskips += 1;
                     false
                 } else {
@@ -724,7 +710,7 @@ where
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if keep {
-                    let priority = self.db.score(&el).unwrap();
+                    let priority = el.score(self.db.scale_factor());
                     Some((el, priority))
                 } else {
                     None
@@ -760,7 +746,7 @@ where
             if !ev.is_empty() {
                 let best = ev
                     .iter()
-                    .map(|ctx| self.db.score(ctx).unwrap())
+                    .map(|ctx| ctx.score(self.db.scale_factor()))
                     .max()
                     .unwrap();
                 self.db.extend(ev, true)?;
@@ -796,7 +782,7 @@ where
         let mut time_progress = Vec::new();
         for c in queue.iter() {
             let elapsed: f64 = c.0.elapsed().into();
-            let score: f64 = self.db.score(&c.0).unwrap().into();
+            let score: f64 = c.0.score(self.db.scale_factor()).into();
             let progress: f64 = c.0.get().progress().into();
             time_scores.push((elapsed, score));
             time_progress.push((elapsed, progress));

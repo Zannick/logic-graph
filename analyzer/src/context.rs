@@ -243,51 +243,23 @@ impl<T: Ctx> ContextWrapper<T> {
         self.penalty
     }
 
-    pub fn estimate_remaining_time<W, L, E>(ctx: &T, world: &W) -> i32
-    where
-        W: World<Location = L, Exit = E>,
-        T: Ctx<World = W>,
-        E: Exit<Context = T>,
-        L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-        W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
-    {
-        if world.won(ctx) {
-            return 0;
-        }
-        let mut accum = 0;
-        let items_left = world.items_needed(ctx);
-        for (item, ct) in items_left {
-            let mut loc_times: Vec<_> = world
-                .get_item_locations(item)
-                .into_iter()
-                .filter_map(|loc_id| {
-                    if ctx.todo(loc_id) {
-                        let dist = world
-                            .estimated_distance(ctx.position(), world.get_location_spot(loc_id));
-                        if dist >= 0 {
-                            Some((dist, world.get_location(loc_id).time()))
-                        } else {
-                            None
-                        }
-                    } else {
-                        None
-                    }
-                })
-                .collect();
-            let ct: usize = ct.try_into().unwrap();
-            if loc_times.len() < ct {
-                return -1;
+    pub fn score(&self, scale_factor: i32) -> i32 {
+        // We want to sort by elapsed time, low to high:
+        // with a bonus based on progress to prioritize states closer to the end:
+        //   + 50 * progress * progress [progress in range 0..100]
+        //   i.e. 0 to 500,000
+        // (on the order of the real max time seems good)
+        // However, we want to make sure we get variety in the early-to-mid game,
+        // so we have to prioritize low-progress/low-elapsed times.
+        // penalty is added to states that do really inefficient things
+        // and to deprioritize actions
+        let progress = self.ctx.progress();
+        -self.elapsed - self.penalty
+            + if progress > 25 {
+                scale_factor * progress * progress
+            } else {
+                scale_factor * 25 * 25
             }
-            loc_times.sort_unstable();
-            for (spot_time, loc_time) in loc_times.into_iter().take(ct) {
-                accum += spot_time + loc_time;
-            }
-        }
-        if accum > 0 {
-            accum
-        } else {
-            -1
-        }
     }
 
     pub fn get(&self) -> &T {
@@ -443,11 +415,11 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn info(&self, score: i32) -> String {
+    pub fn info(&self, scale_factor: i32) -> String {
         format(format_args!(
             "At {}ms (score={}), visited={}, skipped={}, penalty={}\nNow: {} after {}",
             self.elapsed,
-            score,
+            self.score(scale_factor),
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,

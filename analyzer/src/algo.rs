@@ -156,7 +156,7 @@ where
     world: &'a W,
     startctx: ContextWrapper<T>,
     solutions: Mutex<SolutionCollector<T>>,
-    queue: RocksBackedQueue<'a, W, T>,
+    queue: RocksBackedQueue<T>,
     iters: AtomicU64,
     extras: AtomicU64,
     deadends: AtomicU32,
@@ -206,7 +206,6 @@ where
         };
 
         let queue = RocksBackedQueue::new(
-            world,
             ".db",
             max_time + max_time / 10,
             1_048_576,
@@ -216,15 +215,8 @@ where
             8_096,
         )
         .unwrap();
-        let start = Instant::now();
         queue.push(startctx.clone()).unwrap();
         queue.push(clean_ctx).unwrap();
-        println!(
-            "Initial time estimates took {:?}, got {} entries, {} cache hits",
-            start.elapsed(),
-            queue.estimates(),
-            queue.cached_estimates()
-        );
         println!("Max time to consider is now: {}ms", queue.max_time());
         Ok(Search {
             world,
@@ -435,17 +427,10 @@ where
             rayon::current_num_threads()
         );
 
-        struct Iter<'a, W, T: Ctx> {
-            q: &'a RocksBackedQueue<'a, W, T>,
+        struct Iter<'a, T: Ctx> {
+            q: &'a RocksBackedQueue<T>,
         }
-        impl<'a, W, T, L, E> Iterator for Iter<'a, W, T>
-        where
-            W: World<Location = L, Exit = E>,
-            T: Ctx<World = W>,
-            L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
-            E: Exit<Context = T>,
-            W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
-        {
+        impl<'a, T: Ctx> Iterator for Iter<'a, T> {
             type Item = ContextWrapper<T>;
 
             fn next(&mut self) -> Option<Self::Item> {
@@ -604,8 +589,8 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         println!(
-            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}) ---\n\
-            Stats: heap={}; db={}; total={}; seen={}; est={}; cache_hits={};\n\
+            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}, scale factor: {}) ---\n\
+            Stats: heap={}; db={}; total={}; seen={};\n\
             limit: {}ms; db best: {}; evictions: {}; retrievals: {}\n\
             push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
             {}",
@@ -614,12 +599,11 @@ where
             sols.len(),
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
+            self.queue.scale_factor(),
             self.queue.heap_len(),
             self.queue.db_len(),
             self.queue.len(),
             self.queue.seen(),
-            self.queue.estimates(),
-            self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
             self.queue.evictions(),
@@ -628,7 +612,7 @@ where
             dskips,
             pskips,
             dpskips,
-            ctx.info(self.queue.score(&ctx))
+            ctx.info(self.queue.scale_factor())
         );
     }
 }
