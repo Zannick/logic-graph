@@ -461,17 +461,7 @@ where
             self.cached_estimates.fetch_add(1, Ordering::Release);
             return Ok(score);
         }
-        let mut vec = ContextWrapper::estimate_progress(ctx, self.world);
-        vec.sort_unstable_by_key(|(x,_)| *x);
-        let mut estimate = -1;
-        for (t, newctx) in vec
-        {
-            let est = self.estimated_remaining_time(&newctx)?;
-            if est >= 0 {
-                estimate = t + est;
-                break;
-            }
-        }
+        let estimate = ContextWrapper::estimate_remaining_time(ctx, self.world);
         self.statedb.put_cf_opt(
             self.score_cf(),
             &state_key,
@@ -489,9 +479,9 @@ where
         // TODO: Do we still need penalty?
         let est = self.estimated_remaining_time(el.get())?;
         if est < 0 {
-            Ok(-2 * self.max_time())
+            Ok(-10 * self.max_time())
         } else {
-            Ok(-el.elapsed() - est)
+            Ok(-el.elapsed() - el.penalty() - est)
         }
     }
 

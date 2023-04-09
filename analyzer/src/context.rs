@@ -243,7 +243,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.penalty
     }
 
-    pub fn estimate_progress<W, L, E>(ctx: &T, world: &W) -> Vec<(i32, T)>
+    pub fn estimate_remaining_time<W, L, E>(ctx: &T, world: &W) -> i32
     where
         W: World<Location = L, Exit = E>,
         T: Ctx<World = W>,
@@ -252,10 +252,10 @@ impl<T: Ctx> ContextWrapper<T> {
         W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
     {
         if world.won(ctx) {
-            return Vec::new();
+            return 0;
         }
         let mut spot_cache: Option<enum_map::EnumMap<E::SpotId, _>> = None;
-        let mut vec = Vec::new();
+        let mut accum = 0;
         let locs = world.potential_next_locations(ctx);
         for loc_id in locs {
             let spot = world.get_location_spot(loc_id);
@@ -281,13 +281,13 @@ impl<T: Ctx> ContextWrapper<T> {
                 }
             }
             let loc_time = world.get_location(loc_id).time();
-            let mut ctx = ctx.clone();
-            ctx.set_position(spot);
-            ctx.collect(world.get_location(loc_id).item());
-            ctx.visit(loc_id);
-            vec.push((spot_time + loc_time, ctx));
+            accum += loc_time + 2 * spot_time;
         }
-        vec
+        if accum > 0 {
+            accum
+        } else {
+            -1
+        }
     }
 
     pub fn get(&self) -> &T {

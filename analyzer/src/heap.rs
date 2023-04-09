@@ -447,10 +447,6 @@ where
         }
 
         let priority = self.db.score(&el)?;
-        if priority < -self.db.max_time() {
-            self.iskips.fetch_add(1, Ordering::Release);
-            return Ok(());
-        }
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -735,12 +731,7 @@ where
             .filter_map(|(el, keep)| {
                 if keep {
                     let priority = self.db.score(&el).unwrap();
-                    if priority < -self.db.max_time() {
-                        iskips += 1;
-                        None
-                    } else {
-                        Some((el, priority))
-                    }
+                    Some((el, priority))
                 } else {
                     None
                 }
