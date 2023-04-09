@@ -2,8 +2,8 @@ extern crate plotlib;
 
 use crate::context::*;
 use crate::db::HeapDB;
-use crate::CommonHasher;
 use crate::world::*;
+use crate::CommonHasher;
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -51,9 +51,7 @@ impl<T: Ctx> Default for LimitedHeap<T> {
 
 impl<T: Ctx> LimitedHeap<T> {
     fn score(ctx: &ContextWrapper<T>, scale_factor: i32) -> i32 {
-        scale_factor * ctx.get().progress() * ctx.get().progress()
-            - ctx.elapsed()
-            - ctx.penalty()
+        scale_factor * ctx.get().progress() * ctx.get().progress() - ctx.elapsed() - ctx.penalty()
     }
 
     pub fn new() -> LimitedHeap<T> {
@@ -296,7 +294,12 @@ impl<T: Ctx> LimitedHeap<T> {
         let times: Vec<(f64, f64)> = self
             .heap
             .iter()
-            .map(|c| (c.el.elapsed().into(), Self::score(&c.el, self.scale_factor).into()))
+            .map(|c| {
+                (
+                    c.el.elapsed().into(),
+                    Self::score(&c.el, self.scale_factor).into(),
+                )
+            })
             .collect();
         let p = Plot::new(times).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
@@ -334,7 +337,7 @@ where
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
- {
+{
     pub fn new<P>(
         world: &'w W,
         db_path: P,
@@ -444,6 +447,10 @@ where
         }
 
         let priority = self.db.score(&el)?;
+        if priority < -self.db.max_time() {
+            self.iskips.fetch_add(1, Ordering::Release);
+            return Ok(());
+        }
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -626,7 +633,9 @@ where
                 return Ok(Some(ctx));
             }
             // Retrieve some from db
-            queue = self.do_retrieve_and_insert(queue)?;
+            if !self.db.is_empty() {
+                queue = self.do_retrieve_and_insert(queue)?;
+            }
         }
         Ok(None)
     }
@@ -673,7 +682,9 @@ where
                 return Ok(Some(ctx));
             }
             // Retrieve some from db
-            queue = self.do_retrieve_and_insert(queue)?;
+            if !self.db.is_empty() {
+                queue = self.do_retrieve_and_insert(queue)?;
+            }
         }
         Ok(None)
     }
@@ -724,7 +735,12 @@ where
             .filter_map(|(el, keep)| {
                 if keep {
                     let priority = self.db.score(&el).unwrap();
-                    Some((el, priority))
+                    if priority < -self.db.max_time() {
+                        iskips += 1;
+                        None
+                    } else {
+                        Some((el, priority))
+                    }
                 } else {
                     None
                 }

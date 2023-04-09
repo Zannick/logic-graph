@@ -8,7 +8,6 @@ use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
-use rayon::prelude::*;
 use rmp_serde::Serializer;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions,
@@ -451,7 +450,7 @@ where
         self.get_state_values(self.score_cf(), state_keys)
     }
 
-    /// Recursively estimates the remaining time to the goal.
+    /// Recursively greedily estimates the remaining time to the goal.
     /// These estimates are stored in the db.
     pub fn estimated_remaining_time(&self, ctx: &T) -> Result<i32, Error> {
         if self.world.won(ctx) {
@@ -462,39 +461,38 @@ where
             self.cached_estimates.fetch_add(1, Ordering::Release);
             return Ok(score);
         }
-        if let Some(estimate) = ContextWrapper::estimate_progress(ctx, self.world)
-            .into_par_iter()
-            .filter_map(|(t, newctx)| {
-                let val = self
-                    .estimated_remaining_time(&newctx)
-                    .expect("failed to evaluate distance");
-                if val >= 0 {
-                    Some(t + val)
-                } else {
-                    None
-                }
-            })
-            .min_by_key(|&x| x)
+        let mut vec = ContextWrapper::estimate_progress(ctx, self.world);
+        vec.sort_unstable_by_key(|(x,_)| *x);
+        let mut estimate = -1;
+        for (t, newctx) in vec
         {
-            self.statedb.put_cf_opt(
-                self.score_cf(),
-                &state_key,
-                estimate.to_be_bytes(),
-                &self.write_opts,
-            )?;
-            self.estimates.fetch_add(1, Ordering::Release);
-            Ok(estimate)
-        } else {
-            Ok(-1)
+            let est = self.estimated_remaining_time(&newctx)?;
+            if est >= 0 {
+                estimate = t + est;
+                break;
+            }
         }
+        self.statedb.put_cf_opt(
+            self.score_cf(),
+            &state_key,
+            estimate.to_be_bytes(),
+            &self.write_opts,
+        )?;
+        self.estimates.fetch_add(1, Ordering::Release);
+        Ok(estimate)
     }
 
     /// Scores a state based on its elapsed time and its estimated time to the goal.
-    /// Recursively estimates time to the goal based on the objective items remaining,
+    /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
     pub fn score(&self, el: &ContextWrapper<T>) -> Result<i32, Error> {
         // TODO: Do we still need penalty?
-        Ok(-el.elapsed() - self.estimated_remaining_time(el.get())?)
+        let est = self.estimated_remaining_time(el.get())?;
+        if est < 0 {
+            Ok(-2 * self.max_time())
+        } else {
+            Ok(-el.elapsed() - est)
+        }
     }
 
     /// Pushes an element into the heap.
