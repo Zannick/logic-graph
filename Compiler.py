@@ -852,23 +852,41 @@ class GameLogic(object):
         self.item_uses = visitor.item_uses
         self.item_max_counts = visitor.item_max_counts
         self.items_by_source = visitor.items_by_source
-        self.unused_by_objective = {
-            objective: self.all_items
-                        - self.collect.keys()
-                        - self.items_by_source['general']
-                        - self.items_by_source['objectives:' + objective]
+        self.objective_items = {
+            objective: dict(self.items_by_source['objectives:' + objective])
             for objective in self.objectives
         }
-        for objective in self.objectives:
-            refs = visitor.source_refs['objectives:' + objective] | visitor.source_refs['general']
+
+        def _get_all_refs(sourcename):
+            refs = visitor.source_refs[sourcename]
             checked = set()
             while refs - checked:
                 next = (refs - checked).pop()
                 checked.add(next)
                 if next in visitor.source_refs:
                     refs |= visitor.source_refs[next]
-            for ref in refs:
-                self.unused_by_objective[objective] -= self.items_by_source[ref]
+            return refs
+        
+        general_items = set(self.items_by_source['general'].keys())
+        for ref in _get_all_refs('general'):
+            general_items |= self.items_by_source[ref].keys()
+
+        for objective in self.objectives:
+            for ref in _get_all_refs('objectives:' + objective):
+                for item, ct in self.items_by_source[ref].items():
+                    if item in self.objective_items:
+                        self.objective_items[objective][item] = max(self.objective_items[objective][item], ct)
+                    else:
+                        self.objective_items[objective][item] = ct
+        
+        self.unused_by_objective = {
+            objective: set(self.all_items)
+                        - general_items
+                        - self.collect.keys()
+                        - self.items_by_source['general'].keys()
+                        - self.objective_items[objective].keys()
+            for objective in self.objectives
+        }
 
 
     @cached_property

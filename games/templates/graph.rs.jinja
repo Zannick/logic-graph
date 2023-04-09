@@ -320,6 +320,39 @@ impl world::World for World {
         }
     }
 
+    fn items_needed(&self, ctx: &Context) -> Vec<Item> {
+        let mut vec = Vec::new();
+        match self.objective {
+%% for o, items in objective_items.items()
+            Objective::{{ o|construct_id }} => {
+%% for item, ct in items.items()|sort
+%% if ct == 1
+                if !ctx.has(Item::{{ item }}) { vec.push(Item::{{ item }}); }
+%% else
+                if ctx.count(Item::{{ item }}) < {{ ct }} { vec.push(Item::{{ item }}); }
+%% endif
+%% endfor
+            },
+%% endfor
+        };
+        vec
+    }
+
+    fn potential_next_locations(&self, ctx: &Context) -> Vec<LocationId> {
+        let items = self.items_needed(ctx);
+        self.locations.iter().filter_map(|(loc_id, loc)| {
+            if items.contains(&world::Location::item(loc)) {
+                Some(loc_id)
+            } else {
+                None
+            }
+        }).collect()
+    }
+
+    fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {
+        self.all_distances[sp1][sp2]
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }

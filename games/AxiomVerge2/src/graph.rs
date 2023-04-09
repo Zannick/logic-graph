@@ -7294,6 +7294,77 @@ impl world::World for World {
         }
     }
 
+    fn items_needed(&self, ctx: &Context) -> Vec<Item> {
+        let mut vec = Vec::new();
+        match self.objective {
+            Objective::Start => {
+                if !ctx.has(Item::Remote_Drone) {
+                    vec.push(Item::Remote_Drone);
+                }
+            }
+            Objective::Progress => {
+                if !ctx.has(Item::Companies_Layoff) {
+                    vec.push(Item::Companies_Layoff);
+                }
+                if !ctx.has(Item::Dear_Ernest) {
+                    vec.push(Item::Dear_Ernest);
+                }
+                if ctx.count(Item::Flask) < 5 {
+                    vec.push(Item::Flask);
+                }
+                if !ctx.has(Item::Heretics_Tablet) {
+                    vec.push(Item::Heretics_Tablet);
+                }
+                if !ctx.has(Item::Letter_from_Trace) {
+                    vec.push(Item::Letter_from_Trace);
+                }
+                if !ctx.has(Item::Power_Matrix) {
+                    vec.push(Item::Power_Matrix);
+                }
+                if !ctx.has(Item::Record_Losses) {
+                    vec.push(Item::Record_Losses);
+                }
+                if !ctx.has(Item::Remote_Drone) {
+                    vec.push(Item::Remote_Drone);
+                }
+                if !ctx.has(Item::Researchers_Missing) {
+                    vec.push(Item::Researchers_Missing);
+                }
+                if !ctx.has(Item::Shockwave) {
+                    vec.push(Item::Shockwave);
+                }
+                if !ctx.has(Item::Terminal_Breakthrough_1) {
+                    vec.push(Item::Terminal_Breakthrough_1);
+                }
+                if !ctx.has(Item::Under_Siege) {
+                    vec.push(Item::Under_Siege);
+                }
+                if !ctx.has(Item::Wall_Climb) {
+                    vec.push(Item::Wall_Climb);
+                }
+            }
+        };
+        vec
+    }
+
+    fn potential_next_locations(&self, ctx: &Context) -> Vec<LocationId> {
+        let items = self.items_needed(ctx);
+        self.locations
+            .iter()
+            .filter_map(|(loc_id, loc)| {
+                if items.contains(&world::Location::item(loc)) {
+                    Some(loc_id)
+                } else {
+                    None
+                }
+            })
+            .collect()
+    }
+
+    fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {
+        self.all_distances[sp1][sp2]
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }

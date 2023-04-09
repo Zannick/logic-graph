@@ -134,6 +134,20 @@ pub trait World: Sync {
 
     fn skip_unused_items(&self, ctx: &mut <Self::Location as Accessible>::Context);
     fn won(&self, ctx: &<Self::Location as Accessible>::Context) -> bool;
+    fn items_needed(
+        &self,
+        ctx: &<Self::Location as Accessible>::Context,
+    ) -> Vec<<<Self::Location as Accessible>::Context as Ctx>::ItemId>;
+    fn potential_next_locations(
+        &self,
+        ctx: &<Self::Location as Accessible>::Context,
+    ) -> Vec<<Self::Location as Location>::LocId>;
+
+    fn estimated_distance(
+        &self,
+        sp1: <Self::Exit as Exit>::SpotId,
+        sp2: <Self::Exit as Exit>::SpotId,
+    ) -> i32;
 
     fn are_spots_connected(
         &self,

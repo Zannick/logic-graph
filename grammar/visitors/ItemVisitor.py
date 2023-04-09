@@ -12,7 +12,7 @@ class ItemVisitor(RulesVisitor):
     def __init__(self, settings, vanilla_items):
         self.item_uses = Counter()
         self.item_max_counts = defaultdict(int)
-        self.items_by_source = defaultdict(set)
+        self.items_by_source = defaultdict(lambda: defaultdict(int))
         self.source_refs = defaultdict(set)
         self.settings = settings
         self.vanilla_items = vanilla_items
@@ -38,12 +38,12 @@ class ItemVisitor(RulesVisitor):
                 if it not in self.vanilla_items:
                     logging.warning("%s references undefined item %r and may be impossible", self.name, it)
                 self.item_uses[it] += 1
-                self.items_by_source[self.name].add(it)
+                self.items_by_source[self.name][it] = max(1, self.items_by_source[self.name][it])
                 self.item_max_counts[it] = max(1, self.item_max_counts[it])
             for item in ctx.ITEM():
                 it = str(item)
                 self.item_uses[it] += 1
-                self.items_by_source[self._source()].add(it)
+                self.items_by_source[self._source()][it] = max(1, self.items_by_source[self.name][it])
                 self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
@@ -57,8 +57,8 @@ class ItemVisitor(RulesVisitor):
     def _switch_count(self, ctx):
         it = str(ctx.ITEM())
         self.item_uses[it] += 1
-        self.items_by_source[self._source()].add(it)
         mc = max(int(str(x)) for x in ctx.INT())
+        self.items_by_source[self._source()][it] = max(mc, self.items_by_source[self.name][it])
         self.item_max_counts[it] = max(mc, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
@@ -79,7 +79,7 @@ class ItemVisitor(RulesVisitor):
         if ctx.ITEM():
             it = str(ctx.ITEM())
             self.item_uses[it] += 1
-            self.items_by_source[self._source()].add(it)
+            self.items_by_source[self._source()][it] = max(1, self.items_by_source[self.name][it])
             self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
@@ -88,7 +88,6 @@ class ItemVisitor(RulesVisitor):
     def visitItemCount(self, ctx):
         it = str(ctx.ITEM())
         self.item_uses[it] += 1
-        self.items_by_source[self._source()].add(it)
         if ctx.SETTING():
             s = str(ctx.SETTING())
             if sd := self.settings.get(s):
@@ -100,16 +99,18 @@ class ItemVisitor(RulesVisitor):
                 if 'max' not in sd:
                     logging.getLogger('').warning('Rule %r looks at a setting value of item %s, setting max to 1024', self.name, it)
                 self.item_max_counts[it] = max(m, self.item_max_counts[it])
+                self.items_by_source[self._source()][it] = max(m, self.items_by_source[self.name][it])
             # There would be an error added here but it is taken care of by SettingVisitor
         else:
             ct = int(str(ctx.INT()))
             self.item_max_counts[it] = max(ct, self.item_max_counts[it])
+            self.items_by_source[self._source()][it] = max(ct, self.items_by_source[self.name][it])
         return self.visitChildren(ctx)
 
     def visitOneLitItem(self, ctx):
         it = construct_id(ctx.LIT())
         self.item_uses[it] += 1
-        self.items_by_source[self._source()].add(it)
+        self.items_by_source[self._source()][it] = max(1, self.items_by_source[self.name][it])
         self.item_max_counts[it] = max(1, self.item_max_counts[it])
         return self.visitChildren(ctx)
 

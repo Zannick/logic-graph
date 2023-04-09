@@ -1908,6 +1908,8 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
+    // Minimum distances for time estimates
+    all_distances: EnumMap<SpotId, EnumMap<SpotId, i32>>,
 }
 
 impl world::World for World {
@@ -2098,6 +2100,167 @@ impl world::World for World {
         }
     }
 
+    fn items_needed(&self, ctx: &Context) -> Vec<Item> {
+        let mut vec = Vec::new();
+        match self.objective {
+            Objective::Gohma => {
+                if !ctx.has(Item::Kokiri_Emerald) {
+                    vec.push(Item::Kokiri_Emerald);
+                }
+                if !ctx.has(Item::Ocarina) {
+                    vec.push(Item::Ocarina);
+                }
+                if !ctx.has(Item::Bombs) {
+                    vec.push(Item::Bombs);
+                }
+                if !ctx.has(Item::Buy_Deku_Shield) {
+                    vec.push(Item::Buy_Deku_Shield);
+                }
+                if !ctx.has(Item::Deku_Shield_Drop) {
+                    vec.push(Item::Deku_Shield_Drop);
+                }
+                if !ctx.has(Item::Magic_Meter) {
+                    vec.push(Item::Magic_Meter);
+                }
+                if !ctx.has(Item::Bow) {
+                    vec.push(Item::Bow);
+                }
+                if !ctx.has(Item::Kokiri_Sword) {
+                    vec.push(Item::Kokiri_Sword);
+                }
+                if !ctx.has(Item::Buy_Deku_Stick_1) {
+                    vec.push(Item::Buy_Deku_Stick_1);
+                }
+                if !ctx.has(Item::Deku_Stick_Drop) {
+                    vec.push(Item::Deku_Stick_Drop);
+                }
+                if !ctx.has(Item::Hylian_Shield) {
+                    vec.push(Item::Hylian_Shield);
+                }
+                if !ctx.has(Item::Slingshot) {
+                    vec.push(Item::Slingshot);
+                }
+                if !ctx.has(Item::Boomerang) {
+                    vec.push(Item::Boomerang);
+                }
+                if !ctx.has(Item::Buy_Deku_Nut_5) {
+                    vec.push(Item::Buy_Deku_Nut_5);
+                }
+                if !ctx.has(Item::Buy_Deku_Nut_10) {
+                    vec.push(Item::Buy_Deku_Nut_10);
+                }
+                if !ctx.has(Item::Deku_Nut_Drop) {
+                    vec.push(Item::Deku_Nut_Drop);
+                }
+            }
+            Objective::Ganon => {
+                if !ctx.has(Item::Defeat_Ganon) {
+                    vec.push(Item::Defeat_Ganon);
+                }
+                if !ctx.has(Item::Ocarina) {
+                    vec.push(Item::Ocarina);
+                }
+                if !ctx.has(Item::Bombs) {
+                    vec.push(Item::Bombs);
+                }
+                if !ctx.has(Item::Buy_Deku_Shield) {
+                    vec.push(Item::Buy_Deku_Shield);
+                }
+                if !ctx.has(Item::Deku_Shield_Drop) {
+                    vec.push(Item::Deku_Shield_Drop);
+                }
+                if !ctx.has(Item::Magic_Meter) {
+                    vec.push(Item::Magic_Meter);
+                }
+                if !ctx.has(Item::Bow) {
+                    vec.push(Item::Bow);
+                }
+                if !ctx.has(Item::Kokiri_Sword) {
+                    vec.push(Item::Kokiri_Sword);
+                }
+                if !ctx.has(Item::Buy_Deku_Stick_1) {
+                    vec.push(Item::Buy_Deku_Stick_1);
+                }
+                if !ctx.has(Item::Deku_Stick_Drop) {
+                    vec.push(Item::Deku_Stick_Drop);
+                }
+                if !ctx.has(Item::Hylian_Shield) {
+                    vec.push(Item::Hylian_Shield);
+                }
+                if !ctx.has(Item::Slingshot) {
+                    vec.push(Item::Slingshot);
+                }
+                if !ctx.has(Item::Boomerang) {
+                    vec.push(Item::Boomerang);
+                }
+                if !ctx.has(Item::Buy_Deku_Nut_5) {
+                    vec.push(Item::Buy_Deku_Nut_5);
+                }
+                if !ctx.has(Item::Buy_Deku_Nut_10) {
+                    vec.push(Item::Buy_Deku_Nut_10);
+                }
+                if !ctx.has(Item::Deku_Nut_Drop) {
+                    vec.push(Item::Deku_Nut_Drop);
+                }
+            }
+            Objective::Triforce_Hunt => {
+                if ctx.count(Item::Triforce_Piece) < ct {
+                    vec.push(Item::Triforce_Piece);
+                }
+                if !ctx.has(Item::Ocarina) {
+                    vec.push(Item::Ocarina);
+                }
+                if !ctx.has(Item::Bombs) {
+                    vec.push(Item::Bombs);
+                }
+                if !ctx.has(Item::Buy_Deku_Shield) {
+                    vec.push(Item::Buy_Deku_Shield);
+                }
+                if !ctx.has(Item::Deku_Shield_Drop) {
+                    vec.push(Item::Deku_Shield_Drop);
+                }
+                if !ctx.has(Item::Magic_Meter) {
+                    vec.push(Item::Magic_Meter);
+                }
+                if !ctx.has(Item::Bow) {
+                    vec.push(Item::Bow);
+                }
+                if !ctx.has(Item::Kokiri_Sword) {
+                    vec.push(Item::Kokiri_Sword);
+                }
+                if !ctx.has(Item::Buy_Deku_Stick_1) {
+                    vec.push(Item::Buy_Deku_Stick_1);
+                }
+                if !ctx.has(Item::Deku_Stick_Drop) {
+                    vec.push(Item::Deku_Stick_Drop);
+                }
+                if !ctx.has(Item::Hylian_Shield) {
+                    vec.push(Item::Hylian_Shield);
+                }
+                if !ctx.has(Item::Slingshot) {
+                    vec.push(Item::Slingshot);
+                }
+                if !ctx.has(Item::Boomerang) {
+                    vec.push(Item::Boomerang);
+                }
+                if !ctx.has(Item::Buy_Deku_Nut_5) {
+                    vec.push(Item::Buy_Deku_Nut_5);
+                }
+                if !ctx.has(Item::Buy_Deku_Nut_10) {
+                    vec.push(Item::Buy_Deku_Nut_10);
+                }
+                if !ctx.has(Item::Deku_Nut_Drop) {
+                    vec.push(Item::Deku_Nut_Drop);
+                }
+            }
+        };
+        vec
+    }
+
+    fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {
+        self.all_distances[sp1][sp2]
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }
@@ -2105,7 +2268,8 @@ impl world::World for World {
 
 impl World {
     pub fn new() -> World {
-        World {
+        let start = std::time::Instant::now();
+        let mut w = World {
             objective: Objective::default(),
             locations: build_locations(),
             exits: build_exits(),
@@ -2170,7 +2334,42 @@ impl World {
                 start: ActionId::Global__Change_Time.into_usize(),
                 end: ActionId::Global__Change_Time.into_usize() + 1,
             },
+            all_distances: movements::build_base_distances(),
+        };
+
+        // Floyd-Warshall
+        for mid in w.raw_spots {
+            for first in w.raw_spots {
+                for last in w.raw_spots {
+                    if w.all_distances[first][mid] > -1 && w.all_distances[mid][last] > -1 {
+                        if w.all_distances[first][last] > -1 {
+                            w.all_distances[first][last] = std::cmp::min(
+                                w.all_distances[first][last],
+                                w.all_distances[first][mid] + w.all_distances[mid][last],
+                            );
+                        } else {
+                            w.all_distances[first][last] =
+                                w.all_distances[first][mid] + w.all_distances[mid][last];
+                        }
+                    }
+                }
+            }
         }
+
+        let mut c = 0;
+        for first in w.raw_spots {
+            for last in w.raw_spots {
+                if w.all_distances[first][last] > -1 {
+                    c += 1;
+                }
+            }
+        }
+        println!(
+            "World built with {} nonnegative distances in {:?}.",
+            c,
+            start.elapsed()
+        );
+        w
     }
 
     fn unused_by_objective(&self, item: Item) -> bool {
