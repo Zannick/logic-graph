@@ -622,12 +622,12 @@ where
             self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
+            self.queue.evictions(),
+            self.queue.retrievals(),
             iskips,
             dskips,
             pskips,
             dpskips,
-            self.queue.evictions(),
-            self.queue.retrievals(),
             ctx.info(self.queue.score(&ctx))
         );
     }
