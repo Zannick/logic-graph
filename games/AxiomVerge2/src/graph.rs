@@ -6964,6 +6964,185 @@ impl world::World for World {
         }
     }
 
+    // Hardcoded locations. To support a randomizer, this would be better as a cache.
+    fn get_item_locations(&self, item: Item) -> Vec<LocationId> {
+        match item {
+            Item::Flask => vec![
+                LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item,
+                LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask,
+                LocationId::Amagi__West_Lake__Cavern_Eye__Item,
+                LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward,
+                LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
+                LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
+                LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
+                LocationId::Ebih__Grid_25_2_6__Pit__Item,
+                LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
+                LocationId::Giguna__Giguna_Northeast__Vault__Item,
+                LocationId::Glacier__Vertical_Room__Peak__Flask,
+            ],
+            Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
+            Item::Amagi_Dragon_Eye_Passage => {
+                vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall]
+            }
+            Item::Defeat_MUS_A_M20 => {
+                vec![LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20]
+            }
+            Item::Shockwave => vec![
+                LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn,
+                LocationId::Amagi__West_Lake__Stronghold_Item__Item,
+            ],
+            Item::Amagi_Stronghold_Wall_And_Boulder_1 => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall]
+            }
+            Item::Amagi_Stronghold_Left_Wall => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall]
+            }
+            Item::Amagi_Stronghold_Wall_1 => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall]
+            }
+            Item::Amagi_Stronghold_Boulder_1 => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder]
+            }
+            Item::Amagi_Stronghold_Boulder_2 => vec![
+                LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
+            ],
+            Item::Amagi_Stronghold_Wall_2 => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall]
+            }
+            Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
+                vec![LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall]
+            }
+            Item::Amagi_West_Lake_Surface_Wall => vec![
+                LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall,
+                LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall,
+            ],
+            Item::Ice_Axe => vec![LocationId::Antarctica__Shed__Interior__Shelf],
+            Item::Notes_2053_02_27 => {
+                vec![LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note]
+            }
+            Item::Station_Power => vec![LocationId::Antarctica__Power_Room__Switch__Flip],
+            Item::Health_Fragment => vec![
+                LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
+                LocationId::Ebih__Base_Camp__Top_Platform__Item,
+                LocationId::Ebih__By_Garage__Crawlspace__Fragment,
+                LocationId::Ebih__Ebih_East__Dispenser__Vend,
+            ],
+            Item::Dear_Ernest => vec![LocationId::Ebih__Bunker_Interior__Desk__Note],
+            Item::Melee_Charge => vec![
+                LocationId::Ebih__Building_Interior__Entry__Remote_Urn,
+                LocationId::Ebih__Building_Interior__Corner__Urn,
+            ],
+            Item::Companies_Layoff => vec![LocationId::Ebih__Tent_Interior__Desk__Note],
+            Item::Record_Losses => vec![LocationId::Ebih__Garage__Boxes__Under_Boxes],
+            Item::Ebih_Waterfall_Block_Right => vec![
+                LocationId::Ebih__Waterfall__Alcove_Right__Block_Right,
+                LocationId::Ebih__Waterfall__Alcove__Block_Right,
+            ],
+            Item::Ebih_Waterfall_Both_Blocks => {
+                vec![LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks]
+            }
+            Item::Ebih_Waterfall_Block_Left => vec![
+                LocationId::Ebih__Waterfall__Alcove_Left__Block_Left,
+                LocationId::Ebih__Waterfall__Alcove__Block_Left,
+            ],
+            Item::Bronze_Axe => vec![LocationId::Ebih__Waterfall__Alcove__Pedestal],
+            Item::Heretics_Tablet => vec![LocationId::Ebih__Ebih_West__Alcove__Tablet],
+            Item::Health => vec![LocationId::Ebih__Cave__Entry__Health],
+            Item::Infect => vec![
+                LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
+                LocationId::Ebih__Ebih_East__Corner__Urn,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3,
+            ],
+            Item::Under_Siege => vec![LocationId::Ebih__Ebih_East__East_Ledge__Note],
+            Item::Defeat_Ebih_Alu => vec![
+                LocationId::Ebih__Boss_Room__Boss__Hack_Alu,
+                LocationId::Ebih__Boss_Room__Boss__Fight_Alu,
+            ],
+            Item::Health_Node => vec![LocationId::Ebih__Boss_Room__East_Ledge__Item],
+            Item::Remote_Drone => vec![
+                LocationId::Ebih__Drone_Room__Item__Urn,
+                LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
+            ],
+            Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
+            Item::Map_17_10 => vec![LocationId::Giguna__Giguna_Northeast__Save_Point__Seen],
+            Item::Giguna_Northeast_Gate => vec![
+                LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
+                LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
+            ],
+            Item::Carnelian_Ring => vec![LocationId::Giguna__Carnelian__Vault__Item],
+            Item::Power_Matrix => vec![LocationId::Giguna__West_Caverns__Cache__Item],
+            Item::Power_Core => vec![LocationId::Giguna__West_Caverns__Bush__Item],
+            Item::Wall_Climb => vec![LocationId::Giguna__Giguna_Base__Ruin__Item],
+            Item::Researchers_Missing => vec![LocationId::Giguna__Giguna_Base__Table__News],
+            Item::Letter_from_Trace => vec![LocationId::Giguna__Building_Interior__Bookshelf__Note],
+            Item::Compass => vec![LocationId::Glacier__Compass_Room__Center__Table],
+            Item::Amashilama => vec![LocationId::Glacier__The_Big_Drop__Water_Surface__Drown],
+            Item::Switch_36_11 => vec![LocationId::Glacier__Vertical_Room__Under_Switch__Switch],
+            Item::Boomerang => vec![LocationId::Glacier__Boomerang_Room__Pedestal__Item],
+            Item::Switch_40_12 => vec![LocationId::Glacier__Boomerang_Room__Pedestal__Switch],
+            Item::Ledge_Grab => vec![
+                LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
+                LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
+            ],
+            Item::Escape => vec![LocationId::Glacier__Apocalypse_Entry__Terminal__Escape],
+            Item::Health_Upgrade => vec![
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1,
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2,
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3,
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4,
+                LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5,
+            ],
+            Item::Mist_Upgrade => vec![LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade],
+            Item::Melee_Damage => vec![
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3,
+            ],
+            Item::Melee_Speed => vec![
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2,
+                LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3,
+            ],
+            Item::Ranged_Damage => vec![
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1,
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2,
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3,
+            ],
+            Item::Ranged_Speed => vec![
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1,
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2,
+                LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3,
+            ],
+            Item::Nano_Points => vec![
+                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1,
+                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2,
+                LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3,
+            ],
+            Item::Infection_Speed => vec![
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2,
+            ],
+            Item::Infection_Range => vec![
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2,
+                LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3,
+            ],
+            Item::Drone_Melee_Damage => vec![
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1,
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2,
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3,
+            ],
+            Item::Drone_Melee_Speed => vec![
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1,
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2,
+                LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3,
+            ],
+            _ => Vec::new(),
+        }
+    }
+
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
@@ -7294,71 +7473,57 @@ impl world::World for World {
         }
     }
 
-    fn items_needed(&self, ctx: &Context) -> Vec<Item> {
+    fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
         let mut vec = Vec::new();
         match self.objective {
             Objective::Start => {
                 if !ctx.has(Item::Remote_Drone) {
-                    vec.push(Item::Remote_Drone);
+                    vec.push((Item::Remote_Drone, 1));
                 }
             }
             Objective::Progress => {
                 if !ctx.has(Item::Companies_Layoff) {
-                    vec.push(Item::Companies_Layoff);
+                    vec.push((Item::Companies_Layoff, 1));
                 }
                 if !ctx.has(Item::Dear_Ernest) {
-                    vec.push(Item::Dear_Ernest);
+                    vec.push((Item::Dear_Ernest, 1));
                 }
                 if ctx.count(Item::Flask) < 5 {
-                    vec.push(Item::Flask);
+                    vec.push((Item::Flask, 5 - ctx.count(Item::Flask)));
                 }
                 if !ctx.has(Item::Heretics_Tablet) {
-                    vec.push(Item::Heretics_Tablet);
+                    vec.push((Item::Heretics_Tablet, 1));
                 }
                 if !ctx.has(Item::Letter_from_Trace) {
-                    vec.push(Item::Letter_from_Trace);
+                    vec.push((Item::Letter_from_Trace, 1));
                 }
                 if !ctx.has(Item::Power_Matrix) {
-                    vec.push(Item::Power_Matrix);
+                    vec.push((Item::Power_Matrix, 1));
                 }
                 if !ctx.has(Item::Record_Losses) {
-                    vec.push(Item::Record_Losses);
+                    vec.push((Item::Record_Losses, 1));
                 }
                 if !ctx.has(Item::Remote_Drone) {
-                    vec.push(Item::Remote_Drone);
+                    vec.push((Item::Remote_Drone, 1));
                 }
                 if !ctx.has(Item::Researchers_Missing) {
-                    vec.push(Item::Researchers_Missing);
+                    vec.push((Item::Researchers_Missing, 1));
                 }
                 if !ctx.has(Item::Shockwave) {
-                    vec.push(Item::Shockwave);
+                    vec.push((Item::Shockwave, 1));
                 }
                 if !ctx.has(Item::Terminal_Breakthrough_1) {
-                    vec.push(Item::Terminal_Breakthrough_1);
+                    vec.push((Item::Terminal_Breakthrough_1, 1));
                 }
                 if !ctx.has(Item::Under_Siege) {
-                    vec.push(Item::Under_Siege);
+                    vec.push((Item::Under_Siege, 1));
                 }
                 if !ctx.has(Item::Wall_Climb) {
-                    vec.push(Item::Wall_Climb);
+                    vec.push((Item::Wall_Climb, 1));
                 }
             }
         };
         vec
-    }
-
-    fn potential_next_locations(&self, ctx: &Context) -> Vec<LocationId> {
-        let items = self.items_needed(ctx);
-        self.locations
-            .iter()
-            .filter_map(|(loc_id, loc)| {
-                if ctx.todo(loc_id) && items.contains(&world::Location::item(loc)) {
-                    Some(loc_id)
-                } else {
-                    None
-                }
-            })
-            .collect()
     }
 
     fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {
@@ -8157,7 +8322,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => Location {
             id: LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush,
             canonical: CanonId::Ebih_Bush_Flask,
-            item: Item::None,
+            item: Item::Flask,
             price: Currency::Free,
             time: 6000,
             exit_id: None,

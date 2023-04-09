@@ -108,6 +108,10 @@ pub trait World: Sync {
         &self,
         loc_id: <Self::Location as Location>::LocId,
     ) -> Vec<<Self::Location as Location>::LocId>;
+    fn get_item_locations(
+        &self,
+        item_id: <<Self::Location as Accessible>::Context as Ctx>::ItemId,
+    ) -> Vec<<Self::Location as Location>::LocId>;
 
     fn get_spot_locations(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Location];
     fn get_spot_exits(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Exit];
@@ -137,11 +141,7 @@ pub trait World: Sync {
     fn items_needed(
         &self,
         ctx: &<Self::Location as Accessible>::Context,
-    ) -> Vec<<<Self::Location as Accessible>::Context as Ctx>::ItemId>;
-    fn potential_next_locations(
-        &self,
-        ctx: &<Self::Location as Accessible>::Context,
-    ) -> Vec<<Self::Location as Location>::LocId>;
+    ) -> Vec<(<<Self::Location as Accessible>::Context as Ctx>::ItemId, i16)>;
 
     fn estimated_distance(
         &self,

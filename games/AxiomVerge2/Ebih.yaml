@@ -502,6 +502,7 @@ areas:
       locations:
         - name: Remote Bush
           canon: Ebih Bush Flask
+          item: Flask
           req: $bs
           tags: [nearby_flask]
       exits:

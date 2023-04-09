@@ -267,8 +267,18 @@ impl world::World for World {
             CanonId::None => vec![],
 %% for c, locs in canon_places.items()
             CanonId::{{ c|construct_id }} =>
-                vec![LocationId::{{ locs|map(attribute='id')|join(', LocationId::')}}],
+                vec![LocationId::{{ locs|map(attribute='id')|join(', LocationId::') }}],
 %% endfor
+        }
+    }
+
+    // Hardcoded locations. To support a randomizer, this would be better as a cache.
+    fn get_item_locations(&self, item: Item) -> Vec<LocationId> {
+        match item {
+%% for item, locs in item_locations.items()
+            Item::{{ item }} => vec![LocationId::{{ locs|join(', LocationId::') }}],
+%% endfor
+            _ => Vec::new(),
         }
     }
 
@@ -320,33 +330,26 @@ impl world::World for World {
         }
     }
 
-    fn items_needed(&self, ctx: &Context) -> Vec<Item> {
+    fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
         let mut vec = Vec::new();
         match self.objective {
 %% for o, items in objective_items.items()
             Objective::{{ o|construct_id }} => {
 %% for item, ct in items.items()|sort
 %% if ct == 1
-                if !ctx.has(Item::{{ item }}) { vec.push(Item::{{ item }}); }
+                if !ctx.has(Item::{{ item }}) {
+                    vec.push((Item::{{ item }}, 1));
+                }
 %% else
-                if ctx.count(Item::{{ item }}) < {{ ct }} { vec.push(Item::{{ item }}); }
+                if ctx.count(Item::{{ item }}) < {{ ct }} {
+                    vec.push((Item::{{ item }}, {{ ct }} - ctx.count(Item::{{ item }})));
+                }
 %% endif
 %% endfor
             },
 %% endfor
         };
         vec
-    }
-
-    fn potential_next_locations(&self, ctx: &Context) -> Vec<LocationId> {
-        let items = self.items_needed(ctx);
-        self.locations.iter().filter_map(|(loc_id, loc)| {
-            if ctx.todo(loc_id) && items.contains(&world::Location::item(loc)) {
-                Some(loc_id)
-            } else {
-                None
-            }
-        }).collect()
     }
 
     fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {

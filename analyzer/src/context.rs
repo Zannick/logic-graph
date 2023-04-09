@@ -254,34 +254,35 @@ impl<T: Ctx> ContextWrapper<T> {
         if world.won(ctx) {
             return 0;
         }
-        let mut spot_cache: Option<enum_map::EnumMap<E::SpotId, _>> = None;
         let mut accum = 0;
-        let locs = world.potential_next_locations(ctx);
-        for loc_id in locs {
-            let spot = world.get_location_spot(loc_id);
-            let mut spot_time = world.estimated_distance(ctx.position(), spot);
-            if spot_time < 0 {
-                if let Some(cache) = &spot_cache {
-                    if let Some(c) = &cache[spot] {
-                        spot_time = c.elapsed();
-                    } else {
-                        continue;
-                    }
-                } else {
-                    let cache =
-                        crate::access::accessible_spots(world, Self::new(ctx.clone()), i32::MAX);
-
-                    if let Some(c) = &cache[spot] {
-                        spot_time = c.elapsed();
-                        spot_cache = Some(cache);
-                    } else {
-                        spot_cache = Some(cache);
-                        continue;
-                    }
-                }
+        let items_left = world.items_needed(ctx);
+        for (item, ct) in items_left {
+            let mut loc_times: Vec<_> =
+                world
+                    .get_item_locations(item)
+                    .into_iter()
+                    .filter_map(|loc_id| {
+                        if ctx.todo(loc_id) {
+                        let dist = world.estimated_distance(
+                            ctx.position(),
+                            world.get_location_spot(loc_id),
+                        );
+                        if dist >= 0
+                            {Some((dist, world.get_location(loc_id).time()))}
+                            else {None}
+                        } else {
+                            None
+                        }
+                    })
+                    .collect();
+            loc_times.sort_unstable();
+            let ct: usize = ct.try_into().unwrap();
+            if loc_times.len() < ct {
+                return -1;
             }
-            let loc_time = world.get_location(loc_id).time();
-            accum += loc_time + 2 * spot_time;
+            for (spot_time, loc_time) in loc_times.into_iter().take(ct) {
+                accum += spot_time + loc_time;
+            }
         }
         if accum > 0 {
             accum
