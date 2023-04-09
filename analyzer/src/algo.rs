@@ -499,7 +499,7 @@ where
                 ctx.penalty(),
                 self.queue.scale_factor(),
                 self.queue.max_time(),
-                ctx.info(self.queue.scale_factor())
+                ctx.info()
             );
             let pc = rocksdb::perf::PerfContext::default();
             println!("{}", pc.report(true));
@@ -639,7 +639,7 @@ where
             dpskips,
             self.queue.evictions(),
             self.queue.retrievals(),
-            ctx.info(self.queue.scale_factor())
+            ctx.info()
         );
     }
 }
