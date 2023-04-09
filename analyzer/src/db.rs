@@ -9,8 +9,8 @@ use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
-    perf, BlockBasedOptions, Cache, CuckooTableOptions, IteratorMode, MergeOperands, Options,
-    ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
+    perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions,
+    IteratorMode, MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::Serialize;
 use std::marker::PhantomData;
@@ -35,11 +35,11 @@ struct HeapDBOptions {
 
 pub struct HeapDB<T> {
     db: DB,
-    seendb: DB,
+    statedb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
     _opts: HeapDBOptions,
-    _seen_opts: HeapDBOptions,
+    _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
     max_time: AtomicI32,
@@ -153,8 +153,8 @@ where
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
-        path.push("states");
-        path2.push("seen");
+        path.push("queue");
+        path2.push("states");
 
         // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
@@ -168,22 +168,28 @@ where
         opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_allow_mmap_reads(true);
         opts2.set_allow_mmap_writes(true);
+
+        let cf_opts = opts2.clone();
         opts2.set_memtable_whole_key_filtering(true);
+        opts2.create_missing_column_families(true);
+
+        let seencf = ColumnFamilyDescriptor::new("seen", cf_opts.clone());
+        let scorecf = ColumnFamilyDescriptor::new("score", cf_opts);
 
         // 1 GiB write buffers + 4 GiB row cache = 5GiB for this one?
         let _ = DB::destroy(&opts2, &path2);
-        let seendb = DB::open(&opts2, &path2)?;
+        let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![seencf, scorecf])?;
 
         let mut write_opts = WriteOptions::default();
         write_opts.disable_wal(true);
 
         Ok(HeapDB {
             db,
-            seendb,
+            statedb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
             _opts: HeapDBOptions { opts, path },
-            _seen_opts: HeapDBOptions {
+            _state_opts: HeapDBOptions {
                 opts: opts2,
                 path: path2,
             },
@@ -248,6 +254,10 @@ where
         self.scale_factor
     }
 
+    fn seen_cf(&self) -> &ColumnFamily {
+        self.statedb.cf_handle("seen").unwrap()
+    }
+
     /// The key for a ContextWrapper<T> in the heap is:
     /// the score (4 bytes),
     /// elapsed time (4 bytes),
@@ -269,15 +279,15 @@ where
         (score ^ i32::MAX).to_be_bytes()
     }
 
-    /// The key for a T (Ctx) in the seendb is... itself!
-    fn get_seen_key(el: &T) -> Vec<u8> {
+    /// The key for a T (Ctx) in the statedb is... itself!
+    fn get_state_key(el: &T) -> Vec<u8> {
         let mut key = Vec::with_capacity(std::mem::size_of::<T>());
         el.serialize(&mut Serializer::new(&mut key)).unwrap();
         key
     }
 
     /// The value for a ContextWrapper<T> in the heap is... itself!
-    /// Unfortunately this is serializing the T (Ctx) a second time if we already got the seen key.
+    /// Unfortunately this is serializing the T (Ctx) a second time if we already got the state key.
     fn get_heap_value(el: &ContextWrapper<T>) -> Vec<u8> {
         let mut val = Vec::new();
         el.serialize(&mut Serializer::new(&mut val)).unwrap();
@@ -288,8 +298,8 @@ where
         Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
 
-    fn get_seen_value(&self, seen_key: &[u8]) -> Result<Option<i32>, Error> {
-        match self.seendb.get_pinned(seen_key)? {
+    fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
+        match self.statedb.get_pinned_cf(self.seen_cf(), state_key)? {
             Some(slice) => {
                 if slice.len() != 4 {
                     return Err(Error {
@@ -302,11 +312,13 @@ where
         }
     }
 
-    fn get_seen_values<'a, I>(&self, seen_keys: I) -> Result<Vec<Option<i32>>, Error>
+    fn get_seen_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<i32>>, Error>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
-        let results = self.seendb.multi_get(seen_keys);
+        let cf = self.seen_cf();
+        let results = self.statedb.multi_get_cf(
+            state_keys.into_iter().map(|k| (cf, k)));
 
         let parsed: Vec<Result<Option<i32>, String>> = results
             .into_iter()
@@ -397,7 +409,7 @@ where
                 continue;
             }
 
-            let seen_key = Self::get_seen_key(el.get());
+            let seen_key = Self::get_state_key(el.get());
             if let Some(stored) = self.get_seen_value(&seen_key)? {
                 if el.elapsed() > stored {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
@@ -421,13 +433,15 @@ where
         let mut skips = 0;
         let mut dups = 0;
 
+        let cf = self.seen_cf();
+
         let to_add: Vec<_> = iter
             .into_iter()
             .filter_map(|el| {
                 if el.elapsed() > max_time {
                     None
                 } else {
-                    let seen_key = Self::get_seen_key(el.get());
+                    let seen_key = Self::get_state_key(el.get());
                     Some((el, seen_key))
                 }
             })
@@ -454,7 +468,7 @@ where
             // If the value seen is also what we have, we still want to put it into the heap,
             // but we don't have to write the value again as it's a maximum.
             if should_write {
-                seen_batch.merge(&seen_key, el.elapsed().to_be_bytes());
+                seen_batch.merge_cf(cf, &seen_key, el.elapsed().to_be_bytes());
             }
             let key = self.get_heap_key(&el);
             let val = Self::get_heap_value(&el);
@@ -464,7 +478,7 @@ where
         let new = batch.len();
         let new_seen = seen_batch.len();
         self.db.write_opt(batch, &self.write_opts)?;
-        self.seendb.write_opt(seen_batch, &self.write_opts)?;
+        self.statedb.write_opt(seen_batch, &self.write_opts)?;
 
         self.iskips.fetch_add(skips, Ordering::Release);
         if as_pop {
@@ -511,7 +525,7 @@ where
         if el.elapsed() > self.max_time() {
             pskips += 1;
         } else {
-            let seen_key = Self::get_seen_key(el.get());
+            let seen_key = Self::get_state_key(el.get());
             tmp.push((el, seen_key));
         }
 
@@ -531,7 +545,7 @@ where
                         continue;
                     }
 
-                    let seen_key = Self::get_seen_key(el.get());
+                    let seen_key = Self::get_state_key(el.get());
                     tmp.push((el, seen_key));
                     if tmp.len() == count - res.len() {
                         break;
@@ -584,7 +598,7 @@ where
     }
 
     fn remember(&self, el: &ContextWrapper<T>, skip_count: &AtomicUsize) -> Result<bool, Error> {
-        let seen_key = Self::get_seen_key(el.get());
+        let seen_key = Self::get_state_key(el.get());
 
         let should_write = match self.get_seen_value(&seen_key)? {
             Some(stored) => {
@@ -599,8 +613,8 @@ where
         // If the value seen is also what we have, we still want to put it into the heap,
         // but we don't have to write the value again as it's a maximum.
         if should_write {
-            self.seendb
-                .merge_opt(&seen_key, el.elapsed().to_be_bytes(), &self.write_opts)?;
+            self.statedb
+                .merge_cf_opt(self.seen_cf(), &seen_key, el.elapsed().to_be_bytes(), &self.write_opts)?;
             self.seen.fetch_add(1, Ordering::Release);
         }
         Ok(true)
@@ -625,8 +639,9 @@ where
     pub fn remember_which(&self, vec: &Vec<ContextWrapper<T>>) -> Result<Vec<bool>, Error> {
         let mut seen_batch = WriteBatchWithTransaction::<false>::default();
         let mut dups = 0;
+        let cf = self.seen_cf();
 
-        let seeing: Vec<_> = vec.iter().map(|el| Self::get_seen_key(el.get())).collect();
+        let seeing: Vec<_> = vec.iter().map(|el| Self::get_state_key(el.get())).collect();
 
         let seen_values = self.get_seen_values(seeing.iter())?;
 
@@ -654,11 +669,11 @@ where
                 }
             };
             if should_write {
-                seen_batch.merge(&seen_key, el.elapsed().to_be_bytes());
+                seen_batch.merge_cf(cf, &seen_key, el.elapsed().to_be_bytes());
             }
         }
         let new_seen = seen_batch.len();
-        self.seendb.write_opt(seen_batch, &self.write_opts)?;
+        self.statedb.write_opt(seen_batch, &self.write_opts)?;
 
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
@@ -708,20 +723,20 @@ where
             Some(&[&self.db]),
             Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
         )?;
-        let seenstats = perf::get_memory_usage_stats(Some(&[&self.seendb]), None)?;
+        let statestats = perf::get_memory_usage_stats(Some(&[&self.statedb]), None)?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}\n\
-             seendb: total={}, unflushed={}, readers={}, caches={}\n\
+             statedb: total={}, unflushed={}, readers={}, caches={}\n\
              uncompressed={}, compressed={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
             SizeFormatter::new(dbstats.mem_table_readers_total, BINARY),
             SizeFormatter::new(dbstats.cache_total, BINARY),
-            SizeFormatter::new(seenstats.mem_table_total, BINARY),
-            SizeFormatter::new(seenstats.mem_table_unflushed, BINARY),
-            SizeFormatter::new(seenstats.mem_table_readers_total, BINARY),
-            SizeFormatter::new(seenstats.cache_total, BINARY),
+            SizeFormatter::new(statestats.mem_table_total, BINARY),
+            SizeFormatter::new(statestats.mem_table_unflushed, BINARY),
+            SizeFormatter::new(statestats.mem_table_readers_total, BINARY),
+            SizeFormatter::new(statestats.cache_total, BINARY),
             SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
             SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
         ))
