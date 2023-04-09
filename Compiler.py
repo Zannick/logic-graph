@@ -609,28 +609,34 @@ class GameLogic(object):
         # initial conditions: (x,y) -> t according to the best movement
         table = {k: sum(t)
                  for k, t in self.movement_tables[tuple(True for _ in self.non_default_movements)].items()}
+
+        def _update(key, val):
+            if key in table:
+                table[key] = min(table[key], val)
+            else:
+                table[key] = val
+
         # every exit
         # every warp with base_movement: true
+        # every action with a "to" field
         warp_dests = []
         for w in self.warps.values():
             if w.get('base_movement') and w['to'][0] != '^':
                 warp_dests.append((construct_id(w['to']), w['time']))
         for s in self.spots():
+            table[(s['id'], s['id'])] = 0
             for ex in s.get('exits', []) + s.get('hybrid', []):
                 key = (s['id'], get_exit_target(ex))
-                if key in table:
-                    table[key] = min(table[key], float(ex['time']))
-                else:
-                    table[key] = float(ex['time'])
+                _update(key, float(ex['time']))
+            for act in s.get('actions', []):
+                if 'to' in act:
+                    key = (s['id'], get_exit_target(act))
+                    _update(key, act['time'])
             for w, t in warp_dests:
                 if s['id'] == w:
                     continue
                 key = (s['id'], w)
-                if key in table:
-                    table[key] = min(table[key], t)
-                else:
-                    table[key] = t
-            table[(s['id'], s['id'])] = 0
+                _update(key, t)
 
         return table
 

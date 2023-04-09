@@ -95,6 +95,7 @@ areas:
         - name: Throw Drone
           req: $can_deploy and Slingshot_Hook
           do: $deploy_drone(`Giguna > Giguna Northeast > Gate Vent`)
+          to: Giguna > Giguna Northeast > Gate Vent
           time: 1.25
 
     - name: Gate Vent
@@ -365,6 +366,7 @@ areas:
         - name: Throw Drone Up
           req: $can_deploy
           do: $deploy_drone(`Giguna > West Caverns > Higher Ledge`)
+          to: Giguna > West Caverns > Higher Ledge
           time: 1.5
     - name: Higher Ledge
       coord: [14.1, 9.9]
@@ -524,6 +526,7 @@ areas:
         - name: Throw Drone
           req: $can_deploy and Slingshot_Hook
           do: $deploy_drone_and_move(`Giguna > Wasteland > West 12`, `Giguna > Wasteland > Middle Path`)
+          to: Giguna > Wasteland > West 12
           time: 3.5
     - name: Lower Path Right
       coord: [15.65, 13.3]
@@ -586,6 +589,7 @@ areas:
         - name: Throw Drone
           req: $can_deploy
           do: $deploy_drone_and_move(`Giguna > Giguna Base > Upper Cliff`, `Giguna > Giguna Base > Kari`)
+          to: Giguna > Giguna Base > Upper Cliff
     - name: Upper Cliff
       coord: [14.2, 13.6]
       local:
