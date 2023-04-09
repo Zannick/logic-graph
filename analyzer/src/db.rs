@@ -8,6 +8,7 @@ use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
+use rayon::prelude::*;
 use rmp_serde::Serializer;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions,
@@ -343,7 +344,7 @@ where
     fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
         self.get_state_value(self.seen_cf(), state_key)
     }
-    fn get_estimation(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
+    fn get_score_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
         self.get_state_value(self.score_cf(), state_key)
     }
 
@@ -457,63 +458,35 @@ where
             return Ok(0);
         }
         let state_key = Self::get_state_key(ctx);
-        if let Some(est) = self.get_estimation(&state_key)? {
+        if let Some(score) = self.get_score_value(&state_key)? {
             self.cached_estimates.fetch_add(1, Ordering::Release);
-            return Ok(est);
+            return Ok(score);
         }
-        let mut vec = vec![(
-            state_key,
-            Vec::new(),
-            0,
-            ContextWrapper::estimate_progress(ctx, self.world),
-        )];
-        'dfs: while let Some((key, results, last, nested)) = vec.last_mut() {
-            while let Some((t, newctx)) = nested.pop() {
-                if self.world.won(&newctx) {
-                    results.push(t);
-                    continue;
-                }
-                let sk = Self::get_state_key(&newctx);
-                if let Some(est) = self.get_estimation(&sk)? {
-                    self.cached_estimates.fetch_add(1, Ordering::Release);
-                    if est >= 0 {
-                        results.push(t + est);
-                    }
+        if let Some(estimate) = ContextWrapper::estimate_progress(ctx, self.world)
+            .into_par_iter()
+            .filter_map(|(t, newctx)| {
+                let val = self
+                    .estimated_remaining_time(&newctx)
+                    .expect("failed to evaluate distance");
+                if val >= 0 {
+                    Some(t + val)
                 } else {
-                    vec.push((
-                        sk,
-                        Vec::new(),
-                        t,
-                        ContextWrapper::estimate_progress(&newctx, self.world),
-                    ));
-                    continue 'dfs;
+                    None
                 }
-            }
-            let &estimate = results.iter().min().unwrap_or(&-1);
-
+            })
+            .min_by_key(|&x| x)
+        {
             self.statedb.put_cf_opt(
                 self.score_cf(),
-                &key,
+                &state_key,
                 estimate.to_be_bytes(),
                 &self.write_opts,
             )?;
             self.estimates.fetch_add(1, Ordering::Release);
-            let last = *last;
-            vec.pop();
-            if let Some((_, results, _, _)) = vec.last_mut() {
-                if estimate >= 0 {
-                    results.push(estimate + last);
-                }
-            } else if estimate < 0 {
-                return Ok(estimate);
-            } else {
-                return Ok(estimate + last);
-            }
+            Ok(estimate)
+        } else {
+            Ok(-1)
         }
-        // This should never happen because vec always has an element at first
-        Err(Error {
-            message: String::from("Could not estimate any distance"),
-        })
     }
 
     /// Scores a state based on its elapsed time and its estimated time to the goal.
