@@ -446,7 +446,12 @@ where
             return Ok(());
         }
 
-        let priority = self.db.score(&el)?;
+        let priority = if let Some(p) = self.db.score(&el) {
+            p
+        } else {
+            self.iskips.fetch_add(1, Ordering::Release);
+            return Ok(());
+        };
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -468,21 +473,9 @@ where
                         self.min_evictions,
                         max_evictions,
                     ));
-                    debug_assert!(
-                        priority == self.db.score(&el)?,
-                        "priority {} didn't match score {}",
-                        priority,
-                        self.db.score(&el)?
-                    );
                     queue.push(el, priority);
                 }
             } else {
-                debug_assert!(
-                    priority == self.db.score(&el)?,
-                    "priority {} didn't match score {}",
-                    priority,
-                    self.db.score(&el)?
-                );
                 queue.push(el, priority);
             }
         }
@@ -711,7 +704,7 @@ where
         let vec: Vec<ContextWrapper<T>> = iter
             .into_iter()
             .filter(|el| {
-                if el.elapsed() > self.db.max_time() {
+                if el.elapsed() > self.db.max_time() || self.db.score(&el).is_none() {
                     iskips += 1;
                     false
                 } else {
@@ -720,6 +713,7 @@ where
             })
             .collect();
         if vec.is_empty() {
+            self.iskips.fetch_add(iskips, Ordering::Release);
             return Ok(());
         }
 
@@ -738,6 +732,7 @@ where
             })
             .collect();
         if vec.is_empty() {
+            self.iskips.fetch_add(iskips, Ordering::Release);
             return Ok(());
         }
 
@@ -776,6 +771,7 @@ where
             }
         }
 
+        self.iskips.fetch_add(iskips, Ordering::Release);
         Ok(())
     }
 

@@ -257,29 +257,28 @@ impl<T: Ctx> ContextWrapper<T> {
         let mut accum = 0;
         let items_left = world.items_needed(ctx);
         for (item, ct) in items_left {
-            let mut loc_times: Vec<_> =
-                world
-                    .get_item_locations(item)
-                    .into_iter()
-                    .filter_map(|loc_id| {
-                        if ctx.todo(loc_id) {
-                        let dist = world.estimated_distance(
-                            ctx.position(),
-                            world.get_location_spot(loc_id),
-                        );
-                        if dist >= 0
-                            {Some((dist, world.get_location(loc_id).time()))}
-                            else {None}
+            let mut loc_times: Vec<_> = world
+                .get_item_locations(item)
+                .into_iter()
+                .filter_map(|loc_id| {
+                    if ctx.todo(loc_id) {
+                        let dist = world
+                            .estimated_distance(ctx.position(), world.get_location_spot(loc_id));
+                        if dist >= 0 {
+                            Some((dist, world.get_location(loc_id).time()))
                         } else {
                             None
                         }
-                    })
-                    .collect();
-            loc_times.sort_unstable();
+                    } else {
+                        None
+                    }
+                })
+                .collect();
             let ct: usize = ct.try_into().unwrap();
             if loc_times.len() < ct {
                 return -1;
             }
+            loc_times.sort_unstable();
             for (spot_time, loc_time) in loc_times.into_iter().take(ct) {
                 accum += spot_time + loc_time;
             }

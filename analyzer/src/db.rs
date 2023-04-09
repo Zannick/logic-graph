@@ -475,13 +475,13 @@ where
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
-    pub fn score(&self, el: &ContextWrapper<T>) -> Result<i32, Error> {
+    pub fn score(&self, el: &ContextWrapper<T>) -> Option<i32> {
         // TODO: Do we still need penalty?
-        let est = self.estimated_remaining_time(el.get())?;
+        let est = self.estimated_remaining_time(el.get()).unwrap();
         if est < 0 {
-            Ok(-10 * self.max_time())
+            None
         } else {
-            Ok(-el.elapsed() - el.penalty() - est)
+            Some(-el.elapsed() - el.penalty() - est)
         }
     }
 
