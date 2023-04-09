@@ -256,7 +256,8 @@ impl<T: Ctx> ContextWrapper<T> {
         }
         let mut spot_cache: Option<enum_map::EnumMap<E::SpotId, _>> = None;
         let mut vec = Vec::new();
-        for loc_id in world.potential_next_locations(ctx) {
+        let locs = world.potential_next_locations(ctx);
+        for loc_id in locs {
             let spot = world.get_location_spot(loc_id);
             let mut spot_time = world.estimated_distance(ctx.position(), spot);
             if spot_time < 0 {
@@ -267,7 +268,8 @@ impl<T: Ctx> ContextWrapper<T> {
                         continue;
                     }
                 } else {
-                    let cache = crate::access::accessible_spots(world, Self::new(ctx.clone()), i32::MAX);
+                    let cache =
+                        crate::access::accessible_spots(world, Self::new(ctx.clone()), i32::MAX);
 
                     if let Some(c) = &cache[spot] {
                         spot_time = c.elapsed();

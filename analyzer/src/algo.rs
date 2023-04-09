@@ -216,8 +216,10 @@ where
             8_096,
         )
         .unwrap();
+        let start = Instant::now();
         queue.push(startctx.clone()).unwrap();
         queue.push(clean_ctx).unwrap();
+        println!("Initial time estimates took {:?}", start.elapsed());
         println!("Max time to consider is now: {}ms", queue.max_time());
         Ok(Search {
             world,

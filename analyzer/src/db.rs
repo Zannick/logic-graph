@@ -476,7 +476,9 @@ where
                 let sk = Self::get_state_key(&newctx);
                 if let Some(est) = self.get_estimation(&sk)? {
                     self.cached_estimates.fetch_add(1, Ordering::Release);
-                    results.push(t + est);
+                    if est >= 0 {
+                        results.push(t + est);
+                    }
                 } else {
                     vec.push((
                         sk,
@@ -487,7 +489,7 @@ where
                     continue 'dfs;
                 }
             }
-            let &estimate = results.iter().min().expect("failed to evaluate distance");
+            let &estimate = results.iter().min().unwrap_or(&-1);
 
             self.statedb.put_cf_opt(
                 self.score_cf(),
@@ -496,14 +498,19 @@ where
                 &self.write_opts,
             )?;
             self.estimates.fetch_add(1, Ordering::Release);
-            let estimate = estimate + *last;
+            let last = *last;
             vec.pop();
             if let Some((_, results, _, _)) = vec.last_mut() {
-                results.push(estimate);
-            } else {
+                if estimate >= 0 {
+                    results.push(estimate + last);
+                }
+            } else if estimate < 0 {
                 return Ok(estimate);
+            } else {
+                return Ok(estimate + last);
             }
         }
+        // This should never happen because vec always has an element at first
         Err(Error {
             message: String::from("Could not estimate any distance"),
         })
