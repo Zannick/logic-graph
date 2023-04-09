@@ -156,7 +156,7 @@ where
     world: &'a W,
     startctx: ContextWrapper<T>,
     solutions: Mutex<SolutionCollector<T>>,
-    queue: RocksBackedQueue<T>,
+    queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicU64,
     extras: AtomicU64,
     deadends: AtomicU32,
@@ -206,6 +206,7 @@ where
         };
 
         let queue = RocksBackedQueue::new(
+            world,
             ".db",
             max_time + max_time / 10,
             1_048_576,
@@ -427,10 +428,14 @@ where
             rayon::current_num_threads()
         );
 
-        struct Iter<'a, T: Ctx> {
-            q: &'a RocksBackedQueue<T>,
+        struct Iter<'a, W, T: Ctx> {
+            q: &'a RocksBackedQueue<'a, W, T>,
         }
-        impl<'a, T: Ctx> Iterator for Iter<'a, T> {
+        impl<'a, W, T> Iterator for Iter<'a, W, T>
+        where
+            W: World,
+            T: Ctx<World = W>,
+        {
             type Item = ContextWrapper<T>;
 
             fn next(&mut self) -> Option<Self::Item> {
@@ -478,33 +483,7 @@ where
         start: &Mutex<Instant>,
         mode: SearchMode,
     ) -> Result<Vec<ContextWrapper<T>>, &str> {
-        // cut off when penalties are high enough
-        // progressively raise the score threshold as the heap size increases
-        let heapsize_adjustment: i64 = (self.queue.len() / 1024).try_into().unwrap();
-        let solutions_adjustment: i64 = self.solutions.lock().unwrap().len().try_into().unwrap();
-        let mtime: i64 = self.queue.max_time().into();
         let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-        let score_cutoff: i64 = heapsize_adjustment - mtime
-            + solutions_adjustment
-            + if iters > 25_000_000 {
-                ((iters - 25_000_000) / 1_024).try_into().unwrap()
-            } else {
-                0
-            };
-        if score_cutoff > ctx.score(self.queue.scale_factor()).into() {
-            println!(
-                "Remaining items have low score: score={} (elapsed={}, penalty={}, factor={}) vs max_time={}ms\n{}",
-                ctx.score(self.queue.scale_factor()),
-                ctx.elapsed(),
-                ctx.penalty(),
-                self.queue.scale_factor(),
-                self.queue.max_time(),
-                ctx.info()
-            );
-            let pc = rocksdb::perf::PerfContext::default();
-            println!("{}", pc.report(true));
-            return Err("done");
-        }
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
                 self.handle_solution(ctx, SearchMode::Unknown);
@@ -515,7 +494,7 @@ where
         }
 
         if iters % 10000 == 0 {
-            self.print_status_update(&start, iters, 10000, heapsize_adjustment, &ctx);
+            self.print_status_update(&start, iters, 10000, &ctx);
         }
 
         let current_mode = if iters < 500_000 {
@@ -599,7 +578,6 @@ where
         start: &Mutex<Instant>,
         iters: u64,
         num_rounds: u32,
-        heapsize_adjustment: i64,
         ctx: &ContextWrapper<T>,
     ) {
         let mut s = start.lock().unwrap();
@@ -616,7 +594,7 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         println!(
-            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}, score cutoff: {}, scale factor: {}) ---\n\
+            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}) ---\n\
                     Queue stats: heap={}; db={}; total={}; seen={}; limit: {}ms; db best: {}\n\
                     push_skips={} time + {} dups; pop_skips={} time + {} dups; evictions: {}; retrievals: {}\n\
                     {}",
@@ -625,8 +603,6 @@ where
             sols.len(),
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
-            heapsize_adjustment - <i32 as Into<i64>>::into(max_time),
-            self.queue.scale_factor(),
             self.queue.heap_len(),
             self.queue.db_len(),
             self.queue.len(),

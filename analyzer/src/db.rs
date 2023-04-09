@@ -2,6 +2,7 @@
 extern crate rocksdb;
 
 use crate::context::*;
+use crate::world::*;
 use humansize::{SizeFormatter, BINARY};
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -33,7 +34,8 @@ struct HeapDBOptions {
     path: PathBuf,
 }
 
-pub struct HeapDB<T> {
+pub struct HeapDB<'w, W, T> {
+    world: &'w W,
     db: DB,
     statedb: DB,
     _cache_uncompressed: Cache,
@@ -52,6 +54,9 @@ pub struct HeapDB<T> {
     pskips: AtomicUsize,
     dup_iskips: AtomicUsize,
     dup_pskips: AtomicUsize,
+
+    estimates: AtomicUsize,
+    cached_estimates: AtomicUsize,
 
     deletes: AtomicUsize,
     delete: AtomicU64,
@@ -117,11 +122,12 @@ fn min_merge(
 const MB: usize = 1 << 20;
 const GB: usize = 1 << 30;
 
-impl<T> HeapDB<T>
+impl<'w, W, T> HeapDB<'w, W, T>
 where
-    T: Ctx,
+    W: World,
+    T: Ctx<World = W>,
 {
-    pub fn open<P>(p: P, initial_max_time: i32) -> Result<HeapDB<T>, String>
+    pub fn open<P>(p: P, initial_max_time: i32, world: &'w W) -> Result<HeapDB<W, T>, String>
     where
         P: AsRef<Path>,
     {
@@ -184,6 +190,7 @@ where
         write_opts.disable_wal(true);
 
         Ok(HeapDB {
+            world,
             db,
             statedb,
             _cache_uncompressed: cache,
@@ -203,6 +210,8 @@ where
             pskips: 0.into(),
             dup_iskips: 0.into(),
             dup_pskips: 0.into(),
+            estimates: 0.into(),
+            cached_estimates: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
             phantom: PhantomData,
@@ -258,6 +267,10 @@ where
         self.statedb.cf_handle("seen").unwrap()
     }
 
+    fn score_cf(&self) -> &ColumnFamily {
+        self.statedb.cf_handle("score").unwrap()
+    }
+
     /// The key for a ContextWrapper<T> in the heap is:
     /// the score (4 bytes),
     /// elapsed time (4 bytes),
@@ -298,8 +311,8 @@ where
         Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
 
-    fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
-        match self.statedb.get_pinned_cf(self.seen_cf(), state_key)? {
+    fn get_state_value(&self, cf: &ColumnFamily, state_key: &[u8]) -> Result<Option<i32>, Error> {
+        match self.statedb.get_pinned_cf(cf, state_key)? {
             Some(slice) => {
                 if slice.len() != 4 {
                     return Err(Error {
@@ -312,13 +325,71 @@ where
         }
     }
 
-    fn get_seen_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<i32>>, Error>
+    fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
+        self.get_state_value(self.seen_cf(), state_key)
+    }
+    fn get_score_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
+        self.get_state_value(self.score_cf(), state_key)
+    }
+
+    fn get_seen_score_value(&self, state_key: &[u8]) -> Result<Option<(i32, i32)>, Error> {
+        let results = self.statedb.multi_get_cf(vec![
+            (self.seen_cf(), state_key),
+            (self.score_cf(), state_key),
+        ]);
+        if results.len() != 2 {
+            return Err(Error {
+                message: format!(
+                    "Incorrect number of results: expected 2, got {}",
+                    results.len()
+                ),
+            });
+        }
+
+        let parsed: Vec<Result<Option<i32>, String>> = results
+            .into_iter()
+            .map(|res| match res {
+                Err(e) => Err(e.to_string()),
+                Ok(None) => Ok(None),
+                Ok(Some(slice)) => {
+                    if slice.len() != 4 {
+                        Err(format!("Invalid i32 length: {}", slice.len()))
+                    } else {
+                        Ok(Some(i32::from_be_bytes(slice.try_into().unwrap())))
+                    }
+                }
+            })
+            .collect();
+
+        let error: Vec<String> = parsed
+            .iter()
+            .filter_map(|res| match res {
+                Err(s) => Some(s.to_string()),
+                Ok(_) => None,
+            })
+            .collect();
+        if !error.is_empty() {
+            Err(Error {
+                message: error.join("; "),
+            })
+        } else if let Ok(Some(t)) = parsed[1] {
+            Ok(Some((parsed[0].as_ref().unwrap().unwrap(), t)))
+        } else {
+            Ok(None)
+        }
+    }
+
+    fn get_state_values<'a, I>(
+        &self,
+        cf: &ColumnFamily,
+        state_keys: I,
+    ) -> Result<Vec<Option<i32>>, Error>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
-        let cf = self.seen_cf();
-        let results = self.statedb.multi_get_cf(
-            state_keys.into_iter().map(|k| (cf, k)));
+        let results = self
+            .statedb
+            .multi_get_cf(state_keys.into_iter().map(|k| (cf, k)));
 
         let parsed: Vec<Result<Option<i32>, String>> = results
             .into_iter()
@@ -351,6 +422,74 @@ where
         }
     }
 
+    fn get_seen_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<i32>>, Error>
+    where
+        I: Iterator<Item = &'a Vec<u8>>,
+    {
+        self.get_state_values(self.seen_cf(), state_keys)
+    }
+    fn get_score_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<i32>>, Error>
+    where
+        I: Iterator<Item = &'a Vec<u8>>,
+    {
+        self.get_state_values(self.score_cf(), state_keys)
+    }
+
+    /// Recursively estimates the remaining time to the goal.
+    /// These estimates are stored in the db.
+    pub fn estimated_remaining_time<L, E>(&self, ctx: &T) -> Result<i32, Error>
+    where
+        W: World<Location = L, Exit = E>,
+        L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+        E: Exit<Context = T>,
+        W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+    {
+        if self.world.won(ctx) {
+            return Ok(0);
+        }
+        let state_key = Self::get_state_key(ctx);
+        if let Some(score) = self.get_score_value(&state_key)? {
+            self.cached_estimates.fetch_add(1, Ordering::Release);
+            return Ok(score);
+        }
+        if let Some(estimate) = ContextWrapper::estimate_progress(ctx, self.world)
+            .into_iter()
+            .map(|(t, newctx)| {
+                t + self
+                    .estimated_remaining_time(&newctx)
+                    .expect("failed to evalute distance")
+            })
+            .min()
+        {
+            self.statedb.put_cf_opt(
+                self.score_cf(),
+                &state_key,
+                estimate.to_be_bytes(),
+                &self.write_opts,
+            )?;
+            self.estimates.fetch_add(1, Ordering::Release);
+            Ok(estimate)
+        } else {
+            Err(Error {
+                message: String::from("Could not estimate any distance"),
+            })
+        }
+    }
+
+    /// Scores a state based on its elapsed time and its estimated time to the goal.
+    /// Recursively estimates time to the goal based on the objective items remaining,
+    /// and stores the information in the db.
+    pub fn score<L, E>(&self, el: &ContextWrapper<T>) -> Result<i32, Error>
+    where
+        W: World<Location = L, Exit = E>,
+        L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+        E: Exit<Context = T>,
+        W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+    {
+        // TODO: Do we still need penalty?
+        Ok(-el.elapsed() - self.estimated_remaining_time(el.get())?)
+    }
+
     /// Pushes an element into the heap.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
@@ -364,7 +503,6 @@ where
         }
         let key = self.get_heap_key(&el);
         let val = Self::get_heap_value(&el);
-        //println!("Push {:?}: score={} elapsed={}", key, el.score(self.scale_factor), el.elapsed());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
@@ -613,8 +751,12 @@ where
         // If the value seen is also what we have, we still want to put it into the heap,
         // but we don't have to write the value again as it's a maximum.
         if should_write {
-            self.statedb
-                .merge_cf_opt(self.seen_cf(), &seen_key, el.elapsed().to_be_bytes(), &self.write_opts)?;
+            self.statedb.merge_cf_opt(
+                self.seen_cf(),
+                &seen_key,
+                el.elapsed().to_be_bytes(),
+                &self.write_opts,
+            )?;
             self.seen.fetch_add(1, Ordering::Release);
         }
         Ok(true)

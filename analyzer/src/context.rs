@@ -243,7 +243,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.penalty
     }
 
-    pub fn estimate_progress<W, L, E>(&self, world: &W) -> Vec<(i32, T)>
+    pub fn estimate_progress<W, L, E>(ctx: &T, world: &W) -> Vec<(i32, T)>
     where
         W: World<Location = L, Exit = E>,
         T: Ctx<World = W>,
@@ -251,26 +251,26 @@ impl<T: Ctx> ContextWrapper<T> {
         L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
         W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
     {
-        if world.won(&self.ctx) {
+        if world.won(ctx) {
             return Vec::new();
         }
         let mut spot_cache: Option<enum_map::EnumMap<E::SpotId, _>> = None;
         let mut vec = Vec::new();
-        for loc_id in world.potential_next_locations(&self.ctx) {
+        for loc_id in world.potential_next_locations(ctx) {
             let spot = world.get_location_spot(loc_id);
-            let mut spot_time = world.estimated_distance(self.ctx.position(), spot);
+            let mut spot_time = world.estimated_distance(ctx.position(), spot);
             if spot_time < 0 {
                 if let Some(cache) = &spot_cache {
                     if let Some(c) = &cache[spot] {
-                        spot_time = c.elapsed() - self.elapsed();
+                        spot_time = c.elapsed();
                     } else {
                         continue;
                     }
                 } else {
-                    let cache = crate::access::accessible_spots(world, self.clone(), i32::MAX);
+                    let cache = crate::access::accessible_spots(world, Self::new(ctx.clone()), i32::MAX);
 
                     if let Some(c) = &cache[spot] {
-                        spot_time = c.elapsed() - self.elapsed();
+                        spot_time = c.elapsed();
                         spot_cache = Some(cache);
                     } else {
                         spot_cache = Some(cache);
@@ -279,7 +279,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 }
             }
             let loc_time = world.get_location(loc_id).time();
-            let mut ctx = self.ctx.clone();
+            let mut ctx = ctx.clone();
             ctx.set_position(spot);
             ctx.visit(loc_id);
             vec.push((spot_time + loc_time, ctx));

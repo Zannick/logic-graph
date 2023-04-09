@@ -3,6 +3,7 @@ extern crate plotlib;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::CommonHasher;
+use crate::world::World;
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -49,6 +50,12 @@ impl<T: Ctx> Default for LimitedHeap<T> {
 }
 
 impl<T: Ctx> LimitedHeap<T> {
+    fn score(ctx: &ContextWrapper<T>, scale_factor: i32) -> i32 {
+        scale_factor * ctx.get().progress() * ctx.get().progress()
+            - ctx.elapsed()
+            - ctx.penalty()
+    }
+
     pub fn new() -> LimitedHeap<T> {
         LimitedHeap {
             max_time: i32::MAX,
@@ -126,7 +133,7 @@ impl<T: Ctx> LimitedHeap<T> {
                 self.states_seen.push(el.get().clone(), el.elapsed());
             }
             self.heap.push(HeapElement {
-                score: el.score(self.scale_factor),
+                score: Self::score(&el, self.scale_factor),
                 el,
             });
         } else {
@@ -243,7 +250,7 @@ impl<T: Ctx> LimitedHeap<T> {
             }
             if c.elapsed() <= self.max_time {
                 Some(HeapElement {
-                    score: c.score(self.scale_factor),
+                    score: Self::score(&c, self.scale_factor),
                     el: c,
                 })
             } else {
@@ -289,7 +296,7 @@ impl<T: Ctx> LimitedHeap<T> {
         let times: Vec<(f64, f64)> = self
             .heap
             .iter()
-            .map(|c| (c.el.elapsed().into(), c.el.score(self.scale_factor).into()))
+            .map(|c| (c.el.elapsed().into(), Self::score(&c.el, self.scale_factor).into()))
             .collect();
         let p = Plot::new(times).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
@@ -304,9 +311,9 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 }
 
-pub struct RocksBackedQueue<T: Ctx> {
+pub struct RocksBackedQueue<'w, W, T: Ctx> {
     queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
-    db: HeapDB<T>,
+    db: HeapDB<'w, W, T>,
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
@@ -320,8 +327,13 @@ pub struct RocksBackedQueue<T: Ctx> {
     retrieving: AtomicBool,
 }
 
-impl<T: Ctx> RocksBackedQueue<T> {
+impl<'w, W, T> RocksBackedQueue<'w, W, T>
+where
+    W: World,
+    T: Ctx<World = W>
+ {
     pub fn new<P>(
+        world: &'w W,
         db_path: P,
         initial_max_time: i32,
         max_capacity: usize,
@@ -329,7 +341,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
-    ) -> Result<RocksBackedQueue<T>, String>
+    ) -> Result<RocksBackedQueue<'w, W, T>, String>
     where
         P: AsRef<Path>,
     {
@@ -338,7 +350,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 max_capacity,
                 CommonHasher::default(),
             )),
-            db: HeapDB::open(db_path, initial_max_time)?,
+            db: HeapDB::open(db_path, initial_max_time, world)?,
             capacity: max_capacity.into(),
             iskips: 0.into(),
             pskips: 0.into(),
@@ -503,7 +515,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
 
     /// Retrieves up to the given number of elements from the db.
     fn retrieve(
-        db: &HeapDB<T>,
+        db: &HeapDB<W, T>,
         max_db_priority: &AtomicI32,
         num: usize,
     ) -> Result<Vec<(ContextWrapper<T>, i32)>, String> {
