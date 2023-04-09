@@ -274,6 +274,7 @@ where
 
         let mut newstates = Vec::new();
         let mut stepping = fork.clone();
+        stepping.reward(10000);
         for step in winhist.into_iter().rev() {
             stepping.replay(self.world, step);
             if !matches!(step, History::Move(_) | History::MoveLocal(_)) {
@@ -287,6 +288,7 @@ where
             let first_back = oldhistlen / 2;
 
             let mut prior = self.startctx.clone();
+            prior.reward(2500);
             for (i, step) in oldhist.iter().rev().enumerate() {
                 prior.replay(self.world, *step);
                 if i >= first_back && !matches!(step, History::Move(_) | History::MoveLocal(_)) {

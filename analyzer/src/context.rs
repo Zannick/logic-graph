@@ -184,6 +184,7 @@ pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: i32,
     penalty: i32,
+    bonus: i32,
     // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
     // or make a type for ContextWrapper to convert into
     #[allow(clippy::type_complexity)]
@@ -206,6 +207,7 @@ impl<T: Ctx> ContextWrapper<T> {
             ctx,
             elapsed: 0,
             penalty: 0,
+            bonus: 0,
             history: None,
         }
     }
@@ -243,6 +245,14 @@ impl<T: Ctx> ContextWrapper<T> {
         self.penalty
     }
 
+    pub fn reward(&mut self, bonus: i32) {
+        self.bonus += bonus;
+    }
+
+    pub fn bonus(&self) -> i32 {
+        self.bonus
+    }
+
     pub fn score(&self, scale_factor: i32) -> i32 {
         // We want to sort by elapsed time, low to high:
         // with a bonus based on progress to prioritize states closer to the end:
@@ -254,7 +264,7 @@ impl<T: Ctx> ContextWrapper<T> {
         // penalty is added to states that do really inefficient things
         // and to deprioritize actions
         let progress = self.ctx.progress();
-        -self.elapsed - self.penalty
+        -self.elapsed - self.penalty + self.bonus
             + if progress > 25 {
                 scale_factor * progress * progress
             } else {
@@ -417,12 +427,13 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self, scale_factor: i32) -> String {
         format(format_args!(
-            "At {}ms (score={}), visited={}, skipped={}, penalty={}\nNow: {} after {}",
+            "At {}ms (score={}), visited={}, skipped={}, penalty={}, bonus={}\nNow: {} after {}",
             self.elapsed,
             self.score(scale_factor),
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,
+            self.bonus,
             self.ctx.position(),
             if let Some(val) = &self.history {
                 val.entry.to_string()
