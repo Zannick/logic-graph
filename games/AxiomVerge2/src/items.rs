@@ -22,6 +22,7 @@ use std::fmt;
 pub enum Item {
     #[default]
     None,
+    Aansur,
     Amagi_Dragon_Eye_Passage,
     Amagi_Stronghold_Boulder_1,
     Amagi_Stronghold_Boulder_2,
@@ -92,6 +93,7 @@ impl fmt::Display for Item {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Item::None => write!(f, "{}", "None"),
+            Item::Aansur => write!(f, "{}", "Aansur"),
             Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
             Item::Amagi_Stronghold_Boulder_1 => write!(f, "{}", "Amagi_Stronghold_Boulder_1"),
             Item::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi_Stronghold_Boulder_2"),
@@ -170,6 +172,7 @@ impl std::str::FromStr for Item {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Aansur" => Ok(Item::Aansur),
             "Amagi_Dragon_Eye_Passage" => Ok(Item::Amagi_Dragon_Eye_Passage),
             "Amagi_Stronghold_Boulder_1" => Ok(Item::Amagi_Stronghold_Boulder_1),
             "Amagi_Stronghold_Boulder_2" => Ok(Item::Amagi_Stronghold_Boulder_2),
@@ -244,6 +247,7 @@ pub fn unused_item(id: Item) -> bool {
     matches!(
         id,
         Item::None
+            | Item::Aansur
             | Item::Amagi_Stronghold_Left_Wall
             | Item::Bronze_Axe
             | Item::Carnelian_Ring

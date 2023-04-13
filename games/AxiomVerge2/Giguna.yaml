@@ -778,9 +778,9 @@ areas:
       local:
         - to: Bottom Rock
           jumps: 1
-      #exits:
-      #  - to: Ruins Center > East 9
-      #    tags: [xshift]
+      exits:
+        - to: Ruins Center > East 9
+          tags: [xshift]
     - name: Cliff
       coord: [16.6, 7.6]
       local:
@@ -798,17 +798,108 @@ areas:
       coord: [16.55, 7.4]
       local:
         - to: Cliff
+      exits:
+        - to: Small Passage
+          req: ^mode == 'drone'
+          time: 0.35
+        # TODO: to: Pillar
     - name: Small Passage
       coord: [16.45, 7.4]
+      local:
+        - to: West 8
+      exits:
+        - to: Ledge
+          req: ^mode == 'drone'
+          time: 0.35
     - name: West 8
       coord: [16.05, 7.5]
+      local:
+        - to: Small Passage
+          jumps: 1
+      exits:
+        - to: Ruins Center > East 8
+          tags: [xshift]
     - name: Pillar
       coord: [16.25, 6.4]
+      local:
+        - to: West 7
+        - to: Way Up High
+        - to: Ledge
     - name: West 7
       coord: [16.05, 6.8]
+      #exits:
+      #  - to: Ruins Top > East 7
+      #    tags: [xshift]
+        # TODO: to: Pillar
     - name: Way Up High
       coord: [16.6, 5.2]
       local:
         - to: Pillar
         - to: Cliff
         - to: East 9
+      locations:
+        - name: Item
+          item: Flask
+      # TODO: exits toward Ruins Top?
+
+- name: Ruins Center
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 8
+      coord: [15.95, 7.5]
+      local:
+        - to: Tablet
+      exits:
+        - to: Ruins East > West 8
+          tags: [xshift]
+    - name: Tablet
+      coord: [15.8, 7.5]
+      local:
+        - to: East 8
+      locations:
+        - name: Item
+          item: Aansur
+          tags: [standing]
+    - name: East 9
+      coord: [15.95, 8.6]
+      local:
+        - to: Wall Bottom
+      exits:
+        - to: Ruins East > West 9
+          tags: [xshift]
+    - name: Wall Bottom
+      coord: [15.2, 8.4]
+      local:
+        - to: East 9
+          jumps: 1
+      exits:
+        - to: Wall Top
+          req: $climb
+    - name: Wall Top
+      coord: [15.2, 8.1]
+      local:
+        - to: Wall Bottom
+          jumps_down: 1
+        - to: East 9
+      exits:
+        - to: Center Top
+          req: $grab
+          time: 1.5
+    - name: Center Top
+      coord: [15.1, 7.7]
+      local:
+        - to: West Platform Right
+    - name: West Platform Right
+      coord: [14.8, 8.1]
+      local:
+        - to: West Platform Left
+        - to: Center Top
+      # exit?
+    - name: West Platform Left
+      coord: [14.4, 8.1]
+      local:
+        - to: West Platform Right
+        - to: West 9
+          jumps_down: 1
+    - name: West 9
+      coord: [14.05, 8.6]

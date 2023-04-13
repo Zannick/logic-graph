@@ -44,7 +44,7 @@ pub trait Id:
 
 pub trait Location: Accessible {
     type LocId: Id + enum_map::EnumArray<bool>;
-    type CanonId: Id;
+    type CanonId: Id + Default;
     type ExitId: Id;
 
     fn id(&self) -> Self::LocId;
@@ -117,6 +117,7 @@ pub trait World: Sync {
     fn get_spot_exits(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Exit];
     fn get_spot_actions(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Action];
     fn get_global_actions(&self) -> &[Self::Action];
+    fn get_all_spots(&self) -> &[<Self::Exit as Exit>::SpotId];
 
     fn get_area_spots(
         &self,
@@ -141,13 +142,23 @@ pub trait World: Sync {
     fn items_needed(
         &self,
         ctx: &<Self::Location as Accessible>::Context,
-    ) -> Vec<(<<Self::Location as Accessible>::Context as Ctx>::ItemId, i16)>;
+    ) -> Vec<(
+        <<Self::Location as Accessible>::Context as Ctx>::ItemId,
+        i16,
+    )>;
 
     fn estimated_distance(
         &self,
         sp1: <Self::Exit as Exit>::SpotId,
         sp2: <Self::Exit as Exit>::SpotId,
     ) -> i32;
+    fn base_edges(
+        &self,
+    ) -> Vec<(
+        <Self::Exit as Exit>::SpotId,
+        <Self::Exit as Exit>::SpotId,
+        u32,
+    )>;
 
     fn are_spots_connected(
         &self,

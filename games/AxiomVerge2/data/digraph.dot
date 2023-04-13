@@ -537,6 +537,19 @@ digraph AxiomVerge2 {
             label = "Ruins East";
             bgcolor = "white";
         }
+        subgraph cluster_Giguna__Ruins_Center {
+            Giguna__Ruins_Center__East_8 [label = "East 8"];
+            Giguna__Ruins_Center__Tablet [label = "Tablet"];
+            Giguna__Ruins_Center__East_9 [label = "East 9"];
+            Giguna__Ruins_Center__Wall_Bottom [label = "Wall Bottom"];
+            Giguna__Ruins_Center__Wall_Top [label = "Wall Top"];
+            Giguna__Ruins_Center__Center_Top [label = "Center Top"];
+            Giguna__Ruins_Center__West_Platform_Right [label = "West Platform Right"];
+            Giguna__Ruins_Center__West_Platform_Left [label = "West Platform Left"];
+            Giguna__Ruins_Center__West_9 [label = "West 9"];
+            label = "Ruins Center";
+            bgcolor = "white";
+        }
         label = "Giguna Steppes";
         bgcolor = "lightgrey";
     }
@@ -988,8 +1001,16 @@ digraph AxiomVerge2 {
     Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
     Giguna__Building_Interior__Entry -> Giguna__Giguna_Base__Building_Entry;
     Giguna__Ruins_East__Bottom_Rock -> Giguna__Ruins_East__Cliff;
+    Giguna__Ruins_East__West_9 -> Giguna__Ruins_Center__East_9;
     Giguna__Ruins_East__Cliff -> Giguna__Ruins_East__Ledge;
     Giguna__Ruins_East__Cliff -> Giguna__Ruins_East__Ledge;
+    Giguna__Ruins_East__Ledge -> Giguna__Ruins_East__Small_Passage;
+    Giguna__Ruins_East__Small_Passage -> Giguna__Ruins_East__Ledge;
+    Giguna__Ruins_East__West_8 -> Giguna__Ruins_Center__East_8;
+    Giguna__Ruins_Center__East_8 -> Giguna__Ruins_East__West_8;
+    Giguna__Ruins_Center__East_9 -> Giguna__Ruins_East__West_9;
+    Giguna__Ruins_Center__Wall_Bottom -> Giguna__Ruins_Center__Wall_Top;
+    Giguna__Ruins_Center__Wall_Top -> Giguna__Ruins_Center__Center_Top;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;
