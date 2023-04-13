@@ -17,6 +17,7 @@ pub mod heap;
 pub mod minimize;
 pub mod settings;
 pub mod solutions;
+pub mod steiner;
 pub mod world;
 
 pub(crate) type CommonHasher = std::hash::BuildHasherDefault<rustc_hash::FxHasher>;

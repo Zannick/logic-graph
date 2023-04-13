@@ -6,16 +6,20 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+disjoint-hash-set = "*"
+disjoint-sets = "*"
 enum-map = "*"
 humansize = { version = "2.1", features = ["no_alloc"] }
 lru = "*"
 num_cpus = "*"
+pheap = "*"
 plotlib = "0.5"
 priority-queue = "*"
 rayon = "*"
 rocksdb = { version = "*", default-features = false, features = ["snappy", "zstd"] }
 rmp-serde = "*"
 rustc-hash = "*"
+union-find = "*"
 serde = { version = "1.0", features = ["derive", "rc"] }
 sort_by_derive = "0.1.10"
 yaml-rust = "*"
