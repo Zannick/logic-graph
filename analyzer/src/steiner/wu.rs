@@ -13,7 +13,7 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 use union_find::*;
 
-struct Wu<V, E> {
+pub struct Wu<V, E> {
     // Stored for simple reconstruction from a different root
     graph: SimpleGraph<V, E>,
 
@@ -32,23 +32,24 @@ struct Wu<V, E> {
 
 impl<V, E> Wu<V, E>
 where
-    V: Copy + Clone,
+    V: Copy + Clone + Eq + PartialEq + std::hash::Hash,
     E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
 {
-    fn rebuild(&mut self, root: usize, targets: &HashSet<usize, CommonHasher>) {
+    fn rebuild(&mut self, root: V, targets: &HashSet<V, CommonHasher>) {
         self.edges.clear();
         self.cost = 0;
         self.trees = DisjointHashSet::new();
         for target in targets {
-            self.trees.insert(*target);
+            self.trees.insert(self.graph.node_index_map[target]);
         }
         self.tree_count = targets.len();
         self.edge_queues.clear();
         for (idx, _) in self.graph.nodes.iter().enumerate() {
             self.edge_queues.insert(idx, PairingHeap::new());
         }
+        let root_index = self.graph.node_index_map[&root];
         for edge in self.graph.edges.as_slice() {
-            if edge.dst != root {
+            if edge.dst != root_index {
                 self.edge_queues
                     .get_mut(&edge.dst)
                     .unwrap()
@@ -57,13 +58,18 @@ where
         }
     }
 
-    fn recompute(&mut self, root: usize, required: HashSet<usize, CommonHasher>) -> bool {
+    fn recompute(&mut self, root: V, required: HashSet<V, CommonHasher>) -> bool {
         self.rebuild(root, &required);
         let mut total_heap = PairingHeap::new();
         for t in required {
-            total_heap = total_heap.merge(self.edge_queues.remove(&t).unwrap());
+            total_heap = total_heap.merge(self.edge_queues.remove(&self.graph.node_index_map[&t]).unwrap());
         }
-        while self.tree_count > 1 && !self.trees.contains(root) {
+        let root_index = self.graph.node_index_map[&root];
+        while self.tree_count > 1 && !self.trees.contains(root_index) {
+            // Takes the minimum edge that connects two disjoint trees, or that adds a node
+            // not yet in a tree to a tree.
+            // This is not very good even greedy, since it will take a longer
+            // path made of short steps... and may not even produce a tree rooted at root
             if let Some((e, _)) = total_heap.delete_min() {
                 if self.trees.is_linked(e.src, e.dst) {
                     continue;
@@ -91,12 +97,12 @@ where
 
 impl<V, E> SteinerAlgo<V, E> for Wu<V, E>
 where
-    V: Copy + Clone,
+    V: Copy + Clone + Eq + PartialEq + std::hash::Hash,
     E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
 {
-    fn from_graph(graph: &SimpleGraph<V, E>) -> Self {
+    fn from_graph(graph: SimpleGraph<V, E>) -> Self {
         Self {
-            graph: graph.clone(),
+            graph,
             edge_queues: new_hashmap(),
             edges: new_hashset(),
             cost: 0,
@@ -107,8 +113,8 @@ where
 
     fn compute(
         &mut self,
-        root: usize,
-        required: HashSet<usize, CommonHasher>,
+        root: V,
+        required: HashSet<V, CommonHasher>,
     ) -> Option<ApproxSteiner<E>> {
         if self.recompute(root, required) {
             Some(ApproxSteiner {
@@ -120,7 +126,7 @@ where
         }
     }
 
-    fn compute_cost(&mut self, root: usize, required: HashSet<usize, CommonHasher>) -> Option<u64> {
+    fn compute_cost(&mut self, root: V, required: HashSet<V, CommonHasher>) -> Option<u64> {
         if self.recompute(root, required) {
             Some(self.cost)
         } else {
