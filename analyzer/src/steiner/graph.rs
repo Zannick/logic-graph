@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use std::collections::HashMap;
+use std::time::Instant;
 
 use pheap::PairingHeap;
 use union_find::*;
@@ -165,6 +166,7 @@ where
     W: World,
     T: Ctx<World = W>,
 {
+    let s = Instant::now();
     let mut nodes = Vec::new();
     // 3 types of nodes: spots, locations, canon locations
     nodes.extend(
@@ -230,7 +232,12 @@ where
             });
         }
     }
-
+    println!(
+        "Built simple graph of {} nodes and {} edges in {:?}",
+        nodes.len(),
+        edges.len(),
+        s.elapsed()
+    );
     SimpleGraph {
         nodes,
         node_index_map,

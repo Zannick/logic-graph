@@ -173,7 +173,7 @@ where
     pub fn new(world: &'a W, mut ctx: T) -> Result<Search<'a, W, T>, std::io::Error> {
         world.skip_unused_items(&mut ctx);
         let s = Instant::now();
-        let mut scorer = ContextScorer::shortest_paths(world, &ctx);
+        let scorer = ContextScorer::shortest_paths(world, &ctx);
         println!("Built scorer in {:?}", s.elapsed());
         let s = Instant::now();
         let c = scorer.estimate_remaining_time(&ctx);

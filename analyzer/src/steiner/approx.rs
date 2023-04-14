@@ -37,11 +37,17 @@ pub trait SteinerAlgo<V, E> {
     fn from_graph(graph: SimpleGraph<V, E>) -> Self;
     /// Attempts to construct a Steiner approximation arborescence on the given graph,
     /// from the given root (index) and with the given required node (indices).
-    fn compute(
-        &mut self,
-        root: V,
-        required: HashSet<V, CommonHasher>,
-    ) -> Option<ApproxSteiner<E>>;
+    fn compute(&self, root: V, required: HashSet<V, CommonHasher>) -> Option<ApproxSteiner<E>>;
     /// Same as compute but only returns the cost of the tree.
-    fn compute_cost(&mut self, root: V, required: HashSet<V, CommonHasher>) -> Option<u64>;
+    fn compute_cost(&self, root: V, required: HashSet<V, CommonHasher>) -> Option<u64> {
+        if let Some(ApproxSteiner {
+            arborescence: _,
+            cost,
+        }) = self.compute(root, required)
+        {
+            Some(cost)
+        } else {
+            None
+        }
+    }
 }

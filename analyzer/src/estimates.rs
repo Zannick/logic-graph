@@ -1,10 +1,11 @@
 use crate::context::*;
 use crate::steiner::graph::*;
-use crate::steiner::sp::ShortestPaths;
 use crate::steiner::*;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use std::collections::HashMap;
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Mutex;
 
 // What we basically need is a helper that contains the necessary cache elements
 // for scoring, that the DB can fall back to. Probably better than bloating the
@@ -15,7 +16,9 @@ pub struct ContextScorer<'w, W, S, LI, A> {
     world: &'w W,
     algo: A,
 
-    known_costs: HashMap<(S, Vec<LI>), u64, CommonHasher>,
+    known_costs: Mutex<HashMap<(S, Vec<LI>), u64, CommonHasher>>,
+
+    estimates: AtomicUsize,
 }
 
 impl<'w, W, S, L, E, A> ContextScorer<'w, W, S, L::LocId, A>
@@ -33,11 +36,16 @@ where
         Self {
             world,
             algo: A::from_graph(build_simple_graph(world, startctx)),
-            known_costs: new_hashmap(),
+            known_costs: Mutex::new(new_hashmap()),
+            estimates: 0.into(),
         }
     }
 
-    pub fn estimate_remaining_time<T>(&mut self, ctx: &T) -> u64
+    pub fn estimates(&self) -> usize {
+        self.estimates.load(Ordering::Acquire)
+    }
+
+    pub fn estimate_remaining_time<T>(&self, ctx: &T) -> u64
     where
         T: Ctx<World = W>,
         L: Location<Context = T>,
@@ -51,9 +59,11 @@ where
                 .flatten()
                 .collect(),
         );
-        if let Some(c) = self.known_costs.get(&key) {
+        let locked_map = self.known_costs.lock().unwrap();
+        if let Some(c) = locked_map.get(&key) {
             *c
         } else {
+            drop(locked_map);
             let nodes = key
                 .1
                 .iter()
@@ -62,7 +72,11 @@ where
                 .algo
                 .compute_cost(spot_to_graph_node::<W, E>(ctx.position()), nodes.collect())
                 .unwrap();
-            self.known_costs.insert(key, c);
+            {
+                let mut locked_map = self.known_costs.lock().unwrap();
+                locked_map.insert(key, c);
+            }
+            self.estimates.fetch_add(1, Ordering::Release);
             c
         }
     }

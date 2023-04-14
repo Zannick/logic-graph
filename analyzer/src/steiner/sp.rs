@@ -12,74 +12,6 @@ pub struct ShortestPaths<V, E> {
 
     // start vertex (index) -> end vertex (index) -> (list of edge indexes, total weight)
     paths: Vec<Vec<(Vec<usize>, Option<u64>)>>,
-
-    // collected nodes
-    nodes: Vec<usize>,
-    // collected edges
-    edges: HashSet<E, CommonHasher>,
-    // collected weight
-    cost: u64,
-}
-
-impl<V, E> ShortestPaths<V, E>
-where
-    V: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
-    E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
-{
-    fn reset(&mut self, root_index: usize) {
-        self.nodes.clear();
-        self.nodes.push(root_index);
-        self.edges.clear();
-        self.cost = 0;
-    }
-
-    fn recompute(&mut self, root: V, mut required: HashSet<V, CommonHasher>) -> bool {
-        let root_index = self.graph.node_index_map[&root];
-        self.reset(root_index);
-
-        while !required.is_empty() {
-            let r = required.iter().next().unwrap();
-            let ri = self.graph.node_index_map[r];
-
-            // Find the minimum path from any node we have to any required node
-            let mut min = if let Some(rt) = self.paths[root_index][ri].1 {
-                (&self.paths[root_index][ri].0, rt, *r, root_index)
-            } else {
-                println!(
-                    "No path from {:?} to {:?}",
-                    self.graph.nodes[root_index], self.graph.nodes[ri],
-                );
-                required.remove(&r.clone());
-                continue;
-            };
-            for &start in self.nodes.iter() {
-                for req in required.iter() {
-                    let ri = self.graph.node_index_map[req];
-                    if let Some(t) = self.paths[start][ri].1 {
-                        if t < min.1 {
-                            min = (&self.paths[start][ri].0, t, *req, start);
-                        }
-                    }
-                }
-            }
-            required.remove(&min.2);
-            // Because the graph has no negative edges,
-            // the minimum path must have no intermediate nodes or edges already in the tree
-            self.nodes
-                .extend(min.0.iter().map(|&ei| self.graph.edges[ei].dst));
-            self.edges
-                .extend(min.0.iter().map(|&ei| self.graph.edges[ei].id));
-            self.cost += min.1;
-            /*
-            println!(
-                "Adding path {:?} -> {:?} to arborescence (cost: {})",
-                self.graph.nodes[min.3], min.2, min.1
-            );
-            */
-        }
-
-        true
-    }
 }
 
 impl<V, E> SteinerAlgo<V, E> for ShortestPaths<V, E>
@@ -108,6 +40,7 @@ where
         }
 
         // Dijkstra's is better for sparse graphs
+        // |E| is about 4-5x |V|; in dense graphs |E| would be prop. to |V| ** 2
         for start in 0..graph.nodes.len() {
             let mut present = Vec::new();
             present.resize(graph.nodes.len(), false);
@@ -162,29 +95,62 @@ where
                 }
             }
         }
-        Self {
-            graph,
-            paths,
-            nodes: Vec::new(),
-            edges: new_hashset(),
-            cost: 0,
-        }
+        Self { graph, paths }
     }
 
-    fn compute(&mut self, root: V, required: HashSet<V, CommonHasher>) -> Option<ApproxSteiner<E>> {
-        if self.recompute(root, required) {
-            Some(ApproxSteiner {
-                arborescence: self.edges.clone(),
-                cost: self.cost,
-            })
-        } else {
-            None
+    fn compute(&self, root: V, mut required: HashSet<V, CommonHasher>) -> Option<ApproxSteiner<E>> {
+        let root_index = self.graph.node_index_map[&root];
+
+        let mut nodes = vec![root_index];
+        let mut edges = new_hashset();
+        let mut cost = 0;
+
+        while !required.is_empty() {
+            let r = required.iter().next().unwrap();
+            let ri = self.graph.node_index_map[r];
+
+            // Find the minimum path from any node we have to any required node
+            let mut min = if let Some(rt) = self.paths[root_index][ri].1 {
+                (&self.paths[root_index][ri].0, rt, *r, root_index)
+            } else {
+                // Ideally we don't have to do this,
+                // or we do it at a higher level so that we can try the cache afterward
+                required.remove(&r.clone());
+                continue;
+            };
+            for &start in nodes.iter() {
+                for req in required.iter() {
+                    let ri = self.graph.node_index_map[req];
+                    if let Some(t) = self.paths[start][ri].1 {
+                        if t < min.1 {
+                            min = (&self.paths[start][ri].0, t, *req, start);
+                        }
+                    }
+                }
+            }
+            required.remove(&min.2);
+            // Because the graph has no negative edges,
+            // the minimum path must have no intermediate nodes or edges already in the tree
+            nodes.extend(min.0.iter().map(|&ei| self.graph.edges[ei].dst));
+            edges.extend(min.0.iter().map(|&ei| self.graph.edges[ei].id));
+            cost += min.1;
+            /*
+            println!(
+                "Adding path {:?} -> {:?} to arborescence (cost: {})",
+                self.graph.nodes[min.3], min.2, min.1
+            );
+            */
         }
+
+        Some(ApproxSteiner {
+            arborescence: edges,
+            cost,
+        })
     }
 
-    fn compute_cost(&mut self, root: V, required: HashSet<V, CommonHasher>) -> Option<u64> {
-        if self.recompute(root, required) {
-            Some(self.cost)
+    fn compute_cost(&self, root: V, required: HashSet<V, CommonHasher>) -> Option<u64> {
+        if let Some(ApproxSteiner { arborescence: _, cost }) = self.compute(root, required) {
+            Some(cost)
         } else {
             None
         }

@@ -6,3 +6,4 @@ pub mod wu;
 
 pub use graph::{build_graph, build_simple_graph, loc_to_graph_node, spot_to_graph_node};
 pub use approx::SteinerAlgo;
+pub use sp::ShortestPaths;
