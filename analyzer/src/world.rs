@@ -166,12 +166,3 @@ pub trait World: Sync {
         sp2: <Self::Exit as Exit>::SpotId,
     ) -> bool;
 }
-
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum Move<E>
-where
-    E: Exit,
-{
-    Local(E::SpotId),
-    Exit(E::ExitId),
-}

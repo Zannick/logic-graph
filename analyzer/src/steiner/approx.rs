@@ -33,6 +33,7 @@ where
 }
 
 pub trait SteinerAlgo<V, E> {
+    const NAME: &'static str;
     fn from_graph(graph: SimpleGraph<V, E>) -> Self;
     /// Attempts to construct a Steiner approximation arborescence on the given graph,
     /// from the given root (index) and with the given required node (indices).

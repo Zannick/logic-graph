@@ -1,11 +1,10 @@
 use crate::access::*;
 use crate::context::*;
+use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
 use crate::solutions::SolutionCollector;
-use crate::steiner;
-use crate::steiner::SteinerAlgo;
 use crate::world::*;
 use rayon::prelude::*;
 use std::fmt::Debug;
@@ -173,19 +172,15 @@ where
 {
     pub fn new(world: &'a W, mut ctx: T) -> Result<Search<'a, W, T>, std::io::Error> {
         world.skip_unused_items(&mut ctx);
-        let g = steiner::build_simple_graph(world, &ctx);
         let s = Instant::now();
-        let mut sp = steiner::sp::ShortestPaths::from_graph(g);
-        println!("Shortest paths took: {:?}", s.elapsed());
+        let mut scorer = ContextScorer::shortest_paths(world, &ctx);
+        println!("Built scorer in {:?}", s.elapsed());
         let s = Instant::now();
-        let locs = world
-            .items_needed(&ctx)
-            .into_iter()
-            .map(|(item, _)| world.get_item_locations(item))
-            .flatten()
-            .map(|loc_id| steiner::loc_to_graph_node(world, loc_id));
-        let c = sp.compute_cost(steiner::spot_to_graph_node::<W, E>(ctx.position()), locs.collect());
-        println!("Computed tree cost {} in {:?}", c.unwrap(), s.elapsed());
+        let c = scorer.estimate_remaining_time(&ctx);
+        println!("Calculated estimate {} in {:?}", c, s.elapsed());
+        let s = Instant::now();
+        let c = scorer.estimate_remaining_time(&ctx);
+        println!("Calculated estimate again {} in {:?}", c, s.elapsed());
 
         let startctx = ContextWrapper::new(ctx);
         let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;

@@ -100,6 +100,8 @@ where
     V: Copy + Clone + Eq + PartialEq + std::hash::Hash,
     E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
 {
+    const NAME: &'static str = "Wu";
+
     fn from_graph(graph: SimpleGraph<V, E>) -> Self {
         Self {
             graph,

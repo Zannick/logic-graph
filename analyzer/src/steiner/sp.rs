@@ -1,24 +1,17 @@
-#![allow(unused)]
-
-//! Implements the algorithm based on shortest paths.
+//! Implements the Steiner tree search algorithm based on shortest paths.
 
 use super::approx::*;
 use super::graph::*;
-use crate::new_hashmap;
 use crate::{new_hashset, CommonHasher};
-use disjoint_hash_set::DisjointHashSet;
 use pheap::PairingHeap;
-use std::collections::HashMap;
 use std::collections::HashSet;
 use std::fmt::Debug;
-use union_find::*;
 
 pub struct ShortestPaths<V, E> {
     graph: SimpleGraph<V, E>,
 
     // start vertex (index) -> end vertex (index) -> (list of edge indexes, total weight)
     paths: Vec<Vec<(Vec<usize>, Option<u64>)>>,
-    edges_by_start: Vec<Vec<usize>>,
 
     // collected nodes
     nodes: Vec<usize>,
@@ -94,6 +87,8 @@ where
     V: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
     E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
 {
+    const NAME: &'static str = "ShortestPaths";
+
     fn from_graph(graph: SimpleGraph<V, E>) -> Self {
         let mut paths = Vec::new();
         paths.resize_with(graph.nodes.len(), || {
@@ -147,12 +142,12 @@ where
                     let w_new = *w + e.wt;
                     if let Some(w_old) = paths[start][e.dst].1 {
                         if w_new < w_old {
-                            let mut path = paths[start][e.src].0.clone();
+                            let mut path = v.clone();
                             path.push(ei);
                             paths[start][e.dst] = (path, Some(w_new));
                         }
                     } else {
-                        let mut path = paths[start][e.src].0.clone();
+                        let mut path = v.clone();
                         path.push(ei);
                         paths[start][e.dst] = (path, Some(w_new));
                     }
@@ -170,7 +165,6 @@ where
         Self {
             graph,
             paths,
-            edges_by_start,
             nodes: Vec::new(),
             edges: new_hashset(),
             cost: 0,

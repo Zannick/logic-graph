@@ -57,7 +57,7 @@ pub enum ExternalNodeId<S, L, C> {
     Location(L),
     Canon(C),
 }
-type NodeId<W> = ExternalNodeId<
+pub type NodeId<W> = ExternalNodeId<
     <<W as World>::Exit as Exit>::SpotId,
     <<W as World>::Location as Location>::LocId,
     <<W as World>::Location as Location>::CanonId,
@@ -69,7 +69,7 @@ pub enum ExternalEdgeId<S, L, C> {
     Loc(S, L),
     Canon(S, C),
 }
-type EdgeId<W> = ExternalEdgeId<
+pub type EdgeId<W> = ExternalEdgeId<
     <<W as World>::Exit as Exit>::SpotId,
     <<W as World>::Location as Location>::LocId,
     <<W as World>::Location as Location>::CanonId,
