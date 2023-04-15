@@ -28,7 +28,7 @@ where
     L: Location<ExitId = E::ExitId>,
     E: Exit<SpotId = S>,
     A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
-    S: Id,
+    S: Id + Default,
 {
     fn new<T>(world: &'w W, startctx: &T) -> Self
     where
@@ -59,8 +59,12 @@ where
         if self.world.won(ctx) {
             return 0;
         }
+        let mut pos = ctx.last();
+        if pos == S::default() {
+            pos = ctx.position();
+        }
         let key: (S, Vec<_>) = (
-            ctx.position(),
+            pos,
             self.world
                 .items_needed(ctx)
                 .into_iter()
@@ -98,7 +102,7 @@ where
     W: World<Location = L, Exit = E>,
     L: Location<ExitId = E::ExitId>,
     E: Exit<SpotId = S>,
-    S: Id,
+    S: Id + Default,
 {
     pub fn shortest_paths<T>(world: &'w W, startctx: &T) -> Self
     where

@@ -103,30 +103,31 @@ warps:
     time: 14.5
     req: NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
     to: ^save
-    do: ^energy = $max_energy
+    after: ^energy = $max_energy
     loads: true
   drone_save:
     time: 12
     req: NOT WITHIN `Menu` and ^mode == 'drone'
     to: ^save
-    do: ^energy = $max_energy
+    after: ^energy = $max_energy
     loads: true
   menu:
     time: 1
     req: NOT WITHIN `Menu` and ^flasks > 0
     to: Menu > Upgrade Menu > Physiology
-    do: ^last = ^position
+    before: ^last = ^position
     base_movement: true
   exit_menu:
     time: 0.2
     req: WITHIN `Menu`
     to: ^last
+    after: ^last = $default
     base_movement: true
   fast_travel_17_10:
     time: 12
     req: NOT WITHIN `Menu` and Map_17_10 and Fast_Travel
     to: Giguna > Giguna Northeast > Save Point
-    do: ^energy = $max_energy
+    after: ^energy = $max_energy
 
 # TODO: under some conditions, fast travel indra can appear standing up
 # 7s. I think it's immediately after savewarping though, so not very useful.

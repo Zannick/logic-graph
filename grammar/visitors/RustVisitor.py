@@ -1,5 +1,6 @@
 from collections import defaultdict
 from itertools import chain
+import logging
 
 from grammar import RulesParser, RulesVisitor
 from Utils import construct_id, getPlaceType, BUILTINS
@@ -47,6 +48,9 @@ class RustVisitor(RulesVisitor):
         self.rettype = rettype
         try:
             return super().visit(tree)
+        except:
+            logging.error(f'Encountered exception rendering {self.name}: {self.ctxdict}')
+            raise
         finally:
             self.rettype = last_rettype
 

@@ -19,6 +19,9 @@ pub trait Ctx:
     fn collect(&mut self, item: Self::ItemId);
 
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
+    fn last(&self) -> <<Self::World as World>::Exit as Exit>::SpotId {
+        Default::default()
+    }
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
     fn reload_game(&mut self);
     fn reset_all(&mut self);

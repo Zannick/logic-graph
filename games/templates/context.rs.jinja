@@ -340,6 +340,12 @@ impl context::Ctx for Context {
             self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
         }
     }
+
+%% if 'last' in context_types and context_types['last'] == 'SpotId'
+    fn last(&self) -> SpotId {
+        Context::last(self)
+    }
+%% endif
 }
 
 impl Context {

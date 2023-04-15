@@ -194,8 +194,18 @@ impl world::Warp for Warp {
     fn prewarp(&self, ctx: &mut Context) {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
-%% if 'action_id' in w:
-            WarpId::{{ w.id }} => rules::action_{{ w.action_id }}(ctx),
+%% if 'before_id' in w:
+            WarpId::{{ w.id }} => rules::action_{{ w.before_id }}(ctx),
+%% endif
+%% endfor
+            _ => (),
+        }
+    }
+    fn postwarp(&self, ctx: &mut Context) {
+        match self.id {
+%% for w in warps.values()|sort(attribute='id')
+%% if 'after_id' in w:
+            WarpId::{{ w.id }} => rules::action_{{ w.after_id }}(ctx),
 %% endif
 %% endfor
             _ => (),
@@ -388,7 +398,7 @@ impl World {
             },
             all_distances: movements::build_base_distances(),
         };
-        
+
         // Floyd-Warshall
         for mid in w.raw_spots {
             for first in w.raw_spots {

@@ -226,7 +226,7 @@ class GameLogic(object):
             if 'on_entry' in region:
                 region['act'] = parseAction(
                         region['on_entry'], name=f'{region["fullname"]}:on_entry')
-                region['action_id'] = self.make_funcid(region, 'act', ON_ENTRY_ARGS)
+                region['action_id'] = self.make_funcid(region, 'act', 'on_entry', ON_ENTRY_ARGS)
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
@@ -238,7 +238,7 @@ class GameLogic(object):
                 if 'on_entry' in area:
                     area['act'] = parseAction(
                             area['on_entry'], name=f'{area["fullname"]}:on_entry')
-                    area['action_id'] = self.make_funcid(area, 'act', ON_ENTRY_ARGS)
+                    area['action_id'] = self.make_funcid(area, 'act', 'on_entry', ON_ENTRY_ARGS)
 
                 for spot in area['spots']:
                     sname = spot['name']
@@ -298,7 +298,7 @@ class GameLogic(object):
                             act['access_id'] = self.make_funcid(act)
                         act['act'] = parseAction(
                                 act['do'], name=f'{act["fullname"]}:do')
-                        act['action_id'] = self.make_funcid(act, 'act')
+                        act['action_id'] = self.make_funcid(act, 'act', 'do')
 
 
     def process_times(self):
@@ -335,10 +335,14 @@ class GameLogic(object):
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'warps')
                 info['access_id'] = self.make_funcid(info)
-            if 'do' in info:
-                info['act'] = parseAction(
-                        info['do'], name=f'{info["name"]}:do')
-                info['action_id'] = self.make_funcid(info, 'act')
+            if 'before' in info:
+                info['act_pre'] = parseAction(
+                        info['before'], name=f'{info["name"]}:before')
+                info['before_id'] = self.make_funcid(info, 'act_pre', 'before')
+            if 'after' in info:
+                info['act_post'] = parseAction(
+                        info['after'], name=f'{info["name"]}:after')
+                info['after_id'] = self.make_funcid(info, 'act_post', 'after')
 
 
     def process_global_actions(self):
@@ -641,29 +645,31 @@ class GameLogic(object):
         return table
 
 
-    def make_funcid(self, info, prkey:str='pr', extra_fields=None):
+    def make_funcid(self, info, prkey:str='pr', field:str='req', extra_fields=None):
         pr = info[prkey]
         ruletype = pr.parser.ruleNames[pr.tree.getRuleIndex()]
         d = self.action_funcs if ruletype == 'actions' else self.access_funcs
         if '^_' in str(pr.text):
-            id = construct_id(info['id'].lower(), 'do' if ruletype == 'actions' else 'req')
+            id = construct_id(info['id'].lower(), field)
             assert id not in d, f"trying to generate multiple functions named {id}: {info}"
-            d[id] = info
+            d[id] = {ruletype: pr, 'region': info['region']}
+            if 'area' in info:
+                d[id]['area'] = info['area']
             if extra_fields:
                 d[id]['args'] = extra_fields
             return id
 
         id = construct_id(str(pr.name) if '^_' in str(pr.text) else str(pr.text)).lower()
         if id not in d:
-            d[id] = {prkey: info[prkey]}
+            d[id] = {ruletype: pr}
             if extra_fields:
                 d[id]['args'] = extra_fields
             return id
 
-        if d[id][prkey].text != pr.text:
+        if d[id][ruletype].text != pr.text:
             id = id + str(sum(1 for k in d if k.startswith(id)))
             assert id not in d
-            d[id] = {prkey: info[prkey]}
+            d[id] = {ruletype: pr}
             if extra_fields:
                 d[id]['args'] = extra_fields
         return id
@@ -713,6 +719,8 @@ class GameLogic(object):
         yield from (info['pr'] for info in self.warps.values() if 'pr' in info)
         yield from (info['pr'] for info in self.global_actions if 'pr' in info)
         yield from (info['act'] for info in self.global_actions)
+        yield from (info['act_pre'] for info in self.warps.values() if 'act_pre' in info)
+        yield from (info['act_post'] for info in self.warps.values() if 'act_post' in info)
 
 
     def all_parse_results(self):

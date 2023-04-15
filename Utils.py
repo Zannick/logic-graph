@@ -20,6 +20,7 @@ BUILTINS = {
     '$skip': 'ctx.skip',
     '$count': 'ctx.count',
     '$add_item': 'ctx.add_item',
+    '$default': 'Default::default()',
     # warning: be careful not to introduce infinite loops in collect rules!
     '$collect': 'ctx.collect',
 }

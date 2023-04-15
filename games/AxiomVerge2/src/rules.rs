@@ -813,6 +813,10 @@ pub fn action_giguna__west_caverns__east_susar__hack__do(ctx: &mut Context) {
     // ^_east_susar = true
     ctx.set_giguna__west_caverns__ctx__east_susar(true);
 }
+pub fn action_last__default(ctx: &mut Context) {
+    // ^last = $default
+    ctx.set_last(Default::default());
+}
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
     ctx.set_last(ctx.position());

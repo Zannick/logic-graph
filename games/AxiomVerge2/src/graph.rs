@@ -6917,10 +6917,16 @@ impl world::Warp for Warp {
     }
     fn prewarp(&self, ctx: &mut Context) {
         match self.id {
+            WarpId::Menu => rules::action_last__position(ctx),
+            _ => (),
+        }
+    }
+    fn postwarp(&self, ctx: &mut Context) {
+        match self.id {
             WarpId::DroneSave => rules::action_energy__max_energy(ctx),
+            WarpId::ExitMenu => rules::action_last__default(ctx),
             WarpId::FastTravel1710 => rules::action_energy__max_energy(ctx),
             WarpId::IndraSave => rules::action_energy__max_energy(ctx),
-            WarpId::Menu => rules::action_last__position(ctx),
             _ => (),
         }
     }
