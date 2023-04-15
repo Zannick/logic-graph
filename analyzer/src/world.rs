@@ -148,11 +148,6 @@ pub trait World: Sync {
         i16,
     )>;
 
-    fn estimated_distance(
-        &self,
-        sp1: <Self::Exit as Exit>::SpotId,
-        sp2: <Self::Exit as Exit>::SpotId,
-    ) -> i32;
     fn base_edges(
         &self,
     ) -> Vec<(

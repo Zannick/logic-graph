@@ -148,6 +148,61 @@ where
     result
 }
 
+pub fn classic_step<W, T, L>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    max_time: i32,
+) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+{
+    // The process will look more like this:
+    // 1. explore -> vec of spot ctxs with penalties applied
+    // 2. get largest dist
+    // 3. (activate_actions) for each ctx, check for global actions and spot actions
+    // 4. (visit_locations) for each ctx, get all available locations
+    let spot_ctxs = explore(world, ctx, max_time);
+    let mut result = Vec::new();
+
+    if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
+        let max_diff = f.elapsed() - s.elapsed();
+        let spots: Vec<_> = spot_ctxs
+            .into_iter()
+            .map(|ctx| (spot_has_locations(world, ctx.get()), ctx))
+            .collect();
+        let with_locs: i32 = (spots.iter().filter(|(l, _)| *l).count())
+            .try_into()
+            .unwrap();
+        let spot_count: i32 = spots.len().try_into().unwrap();
+        let mut locs_count = 0;
+        for (has_locs, ctx) in spots {
+            // somewhat quadratic penalties
+            let loc_penalty = locs_count * (locs_count - 1) * max_diff / spot_count;
+            // Max penalty at any spot with no locations
+            let act_penalty = with_locs * (with_locs - 1) * max_diff / spot_count;
+            if spot_has_actions(world, ctx.get()) {
+                result.extend(activate_actions(
+                    world,
+                    &ctx,
+                    loc_penalty + 500,
+                    if !has_locs {
+                        act_penalty + 1000
+                    } else {
+                        2 * (loc_penalty + 500)
+                    },
+                ));
+            }
+            if has_locs {
+                result.extend(visit_locations(world, ctx, loc_penalty));
+                locs_count += 1;
+            }
+        }
+    }
+    result
+}
+
 pub struct Search<'a, W, T>
 where
     W: World,
@@ -325,49 +380,7 @@ where
     }
 
     fn classic_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        // The process will look more like this:
-        // 1. explore -> vec of spot ctxs with penalties applied
-        // 2. get largest dist
-        // 3. (activate_actions) for each ctx, check for global actions and spot actions
-        // 4. (visit_locations) for each ctx, get all available locations
-        let spot_ctxs = explore(self.world, ctx, self.queue.max_time());
-        let mut result = Vec::new();
-
-        if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
-            let max_diff = f.elapsed() - s.elapsed();
-            let spots: Vec<_> = spot_ctxs
-                .into_iter()
-                .map(|ctx| (spot_has_locations(self.world, ctx.get()), ctx))
-                .collect();
-            let with_locs: i32 = (spots.iter().filter(|(l, _)| *l).count())
-                .try_into()
-                .unwrap();
-            let spot_count: i32 = spots.len().try_into().unwrap();
-            let mut locs_count = 0;
-            for (has_locs, ctx) in spots {
-                // somewhat quadratic penalties
-                let loc_penalty = locs_count * (locs_count - 1) * max_diff / spot_count;
-                // Max penalty at any spot with no locations
-                let act_penalty = with_locs * (with_locs - 1) * max_diff / spot_count;
-                if spot_has_actions(self.world, ctx.get()) {
-                    result.extend(activate_actions(
-                        self.world,
-                        &ctx,
-                        loc_penalty + 500,
-                        if !has_locs {
-                            act_penalty + 1000
-                        } else {
-                            2 * (loc_penalty + 500)
-                        },
-                    ));
-                }
-                if has_locs {
-                    result.extend(visit_locations(self.world, ctx, loc_penalty));
-                    locs_count += 1;
-                }
-            }
-        }
-        result
+        classic_step(self.world, ctx, self.queue.max_time())
     }
 
     fn depth_step(

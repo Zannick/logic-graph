@@ -6969,8 +6969,6 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
-    // Minimum distances for time estimates
-    all_distances: EnumMap<SpotId, EnumMap<SpotId, i32>>,
 }
 
 impl world::World for World {
@@ -7660,10 +7658,6 @@ impl world::World for World {
         vec
     }
 
-    fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {
-        self.all_distances[sp1][sp2]
-    }
-
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
         movements::base_edges()
     }
@@ -7675,8 +7669,7 @@ impl world::World for World {
 
 impl World {
     pub fn new() -> World {
-        let start = std::time::Instant::now();
-        let mut w = World {
+        World {
             objective: Objective::default(),
             locations: build_locations(),
             exits: build_exits(),
@@ -8155,42 +8148,7 @@ impl World {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
-            all_distances: movements::build_base_distances(),
-        };
-
-        // Floyd-Warshall
-        for mid in w.raw_spots {
-            for first in w.raw_spots {
-                for last in w.raw_spots {
-                    if w.all_distances[first][mid] > -1 && w.all_distances[mid][last] > -1 {
-                        if w.all_distances[first][last] > -1 {
-                            w.all_distances[first][last] = std::cmp::min(
-                                w.all_distances[first][last],
-                                w.all_distances[first][mid] + w.all_distances[mid][last],
-                            );
-                        } else {
-                            w.all_distances[first][last] =
-                                w.all_distances[first][mid] + w.all_distances[mid][last];
-                        }
-                    }
-                }
-            }
         }
-
-        let mut c = 0;
-        for first in w.raw_spots {
-            for last in w.raw_spots {
-                if w.all_distances[first][last] > -1 {
-                    c += 1;
-                }
-            }
-        }
-        println!(
-            "World built with {} nonnegative distances in {:?}.",
-            c,
-            start.elapsed()
-        );
-        w
     }
 
     fn unused_by_objective(&self, item: Item) -> bool {
