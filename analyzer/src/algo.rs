@@ -566,7 +566,7 @@ where {
             }
             SearchMode::PickMinScore => {
                 let mut next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
-                if let Some(ctx2) = self.queue.pop_min_score().unwrap() {
+                if let Some(ctx2) = self.queue.pop_max_estimate().unwrap() {
                     next.extend(
                         self.extract_solutions(self.classic_step(ctx2), SearchMode::PickMinScore),
                     );

@@ -53,7 +53,6 @@ pub struct HeapDB<'w, W: World, T> {
     write_opts: WriteOptions,
 
     max_time: AtomicI32,
-    scale_factor: i32,
 
     seq: AtomicU64,
     size: AtomicUsize,
@@ -219,7 +218,6 @@ where
             },
             write_opts,
             max_time: initial_max_time.into(),
-            scale_factor: initial_max_time / 16384,
             seq: 0.into(),
             size: 0.into(),
             seen: 0.into(),
@@ -286,10 +284,6 @@ where
         self.set_max_time(max_time + (max_time / 128))
     }
 
-    pub fn scale_factor(&self) -> i32 {
-        self.scale_factor
-    }
-
     fn seen_cf(&self) -> &ColumnFamily {
         self.statedb.cf_handle("seen").unwrap()
     }
@@ -300,19 +294,10 @@ where
     /// a sequence number (8 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        key[0..4].copy_from_slice(&Self::get_heap_prefix(self.score(el)));
+        key[0..4].copy_from_slice(&self.score(el).to_be_bytes());
         key[4..8].copy_from_slice(&el.elapsed().to_be_bytes());
         key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
-    }
-
-    fn get_heap_prefix(score: i32) -> [u8; 4] {
-        // Lexicographic ordering of signed ints looks like:
-        // 0 ... MAX MIN ... -1
-        // We want:
-        // MAX ... 0 -1 ... MIN
-        // which we get simply by XORing by MAX
-        (score ^ i32::MAX).to_be_bytes()
     }
 
     /// The key for a T (Ctx) in the statedb is... itself!
@@ -411,9 +396,7 @@ where
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
     pub fn score(&self, el: &ContextWrapper<T>) -> i32 {
-        // TODO: Do we still need penalty?
-        let est = self.estimated_remaining_time(el.get());
-        -el.elapsed() - est
+        el.elapsed() + self.estimated_remaining_time(el.get())
     }
 
     /// Pushes an element into the heap.
@@ -441,7 +424,7 @@ where
         let mode = match score_hint {
             None => IteratorMode::Start,
             Some(score) => {
-                prefix = Self::get_heap_prefix(score);
+                prefix = score.to_be_bytes();
                 IteratorMode::From(&prefix, rocksdb::Direction::Forward)
             }
         };
@@ -480,7 +463,6 @@ where
                     continue;
                 }
             }
-            //println!("Pop {:?}: score={} elapsed={}", k, el.score(self.scale_factor), el.elapsed());
             return Ok(Some(el));
         }
 
@@ -537,7 +519,6 @@ where
             let key = self.get_heap_key(&el);
             let val = Self::get_heap_value(&el);
             batch.put(key, val);
-            //println!("Push-batch {:?}: score={} elapsed={}", key, el.score(self.scale_factor), el.elapsed());
         }
         let new = batch.len();
         let new_seen = seen_batch.len();
@@ -566,7 +547,7 @@ where
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        tail_opts.set_iterate_lower_bound(Self::get_heap_prefix(start_priority));
+        tail_opts.set_iterate_lower_bound(start_priority.to_be_bytes());
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
         let mut batch = WriteBatchWithTransaction::<false>::default();

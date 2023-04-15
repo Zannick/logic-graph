@@ -320,7 +320,7 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
-    max_db_priority: AtomicI32,
+    min_db_estimate: AtomicI32,
     min_evictions: usize,
     max_evictions: usize,
     min_reshuffle: usize,
@@ -361,7 +361,7 @@ where
             capacity: max_capacity.into(),
             iskips: 0.into(),
             pskips: 0.into(),
-            max_db_priority: i32::MIN.into(),
+            min_db_estimate: i32::MAX.into(),
             min_evictions,
             max_evictions,
             min_reshuffle,
@@ -404,7 +404,7 @@ where
     }
 
     pub fn db_best(&self) -> i32 {
-        self.max_db_priority.load(Ordering::Acquire)
+        self.min_db_estimate.load(Ordering::Acquire)
     }
 
     pub fn score(&self, ctx: &ContextWrapper<T>) -> i32 {
@@ -433,10 +433,6 @@ where
         self.db.set_lenient_max_time(max_time);
     }
 
-    pub fn scale_factor(&self) -> i32 {
-        self.db.scale_factor()
-    }
-
     pub fn evictions(&self) -> usize {
         self.evictions.load(Ordering::Acquire)
     }
@@ -458,8 +454,8 @@ where
             return Ok(());
         }
 
-        let priority = self.db.score(&el);
-        if priority > self.db.max_time() {
+        let est_complete = self.db.score(&el);
+        if est_complete > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         };
@@ -468,26 +464,27 @@ where
             let mut queue = self.queue.lock().unwrap();
 
             if queue.len() == self.capacity.load(Ordering::Acquire) {
-                let (ctx, &p_min) = queue
-                    .peek_min()
+                // compare to the last element, aka the MAX
+                let (ctx, &p_max) = queue
+                    .peek_max()
                     .ok_or("queue at capacity with no elements")?;
-                if priority < p_min || (priority == p_min && el.elapsed() >= ctx.elapsed()) {
+                if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed()) {
                     // Lower priority (or equal but later), evict the new item immediately
                     self.db.push(el)?;
-                    self.max_db_priority.fetch_max(priority, Ordering::Release);
+                    self.min_db_estimate.fetch_min(est_complete, Ordering::Release);
                 } else {
                     let max_evictions = std::cmp::min(self.max_evictions, (queue.len() / 4) * 3);
                     // New item is better, evict some old_items.
                     evicted = Some(Self::evict_until(
                         &mut queue,
-                        priority,
+                        est_complete,
                         self.min_evictions,
                         max_evictions,
                     ));
-                    queue.push(el, priority);
+                    queue.push(el, est_complete);
                 }
             } else {
-                queue.push(el, priority);
+                queue.push(el, est_complete);
             }
         }
         // Without the lock (but still blocking the push op in this thread)
@@ -498,10 +495,10 @@ where
                 let best = ev
                     .iter()
                     .map(|ctx| self.db.score(ctx))
-                    .max()
+                    .min()
                     .unwrap();
                 self.db.extend(ev, true)?;
-                self.max_db_priority.fetch_max(best, Ordering::Release);
+                self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
                 println!("evict to db took {:?}", start.elapsed());
                 println!("{}", self.db.get_memory_usage_stats().unwrap());
@@ -511,22 +508,22 @@ where
         Ok(())
     }
 
-    /// Removes elements from the min end of the queue until we reach any of:
+    /// Removes elements from the max end of the queue until we reach any of:
     /// an element above the given priority (it is kept in the queue),
     /// the other end of the queue, or a total of `max_evictions` elements.
     /// You may also specify a `min_evictions` to ensure that a certain amount of space is
     /// always cleared.
     fn evict_until(
         queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
-        priority: i32,
+        el_estimate: i32,
         min_evictions: usize,
         max_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
         let mut evicted = Vec::new();
         while evicted.len() < max_evictions {
-            if let Some((_, &prio)) = queue.peek_min() {
-                if prio <= priority || evicted.len() < min_evictions {
-                    evicted.push(queue.pop_min().unwrap().0);
+            if let Some((_, &est_completion)) = queue.peek_max() {
+                if est_completion >= el_estimate || evicted.len() < min_evictions {
+                    evicted.push(queue.pop_max().unwrap().0);
                     continue;
                 }
             }
@@ -538,7 +535,7 @@ where
     /// Retrieves up to the given number of elements from the db.
     fn retrieve(
         db: &HeapDB<W, T>,
-        max_db_priority: &AtomicI32,
+        max_db_estimate: &AtomicI32,
         num: usize,
     ) -> Result<Vec<(ContextWrapper<T>, i32)>, String> {
         println!(
@@ -548,7 +545,7 @@ where
         );
         let start = Instant::now();
         let res: Vec<_> = db
-            .retrieve(max_db_priority.load(Ordering::Acquire), num)?
+            .retrieve(max_db_estimate.load(Ordering::Acquire), num)?
             .into_iter()
             .map(|el| {
                 let score = db.score(&el);
@@ -557,12 +554,12 @@ where
             .collect();
         println!("Retrieve from db took {:?}", start.elapsed());
         println!("{}", db.get_memory_usage_stats().unwrap());
-        // the max priority in the db is probably now the min of this result, or thereabouts
+        // the min priority in the db is probably now the max of this result, or thereabouts
         // which should be the last element
         if let Some(el) = res.last() {
-            max_db_priority.store(el.1, Ordering::Release);
+            max_db_estimate.store(el.1, Ordering::Release);
         } else {
-            max_db_priority.store(i32::MIN, Ordering::Release);
+            max_db_estimate.store(i32::MAX, Ordering::Release);
         }
         Ok(res)
     }
@@ -570,11 +567,11 @@ where
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
-            while let Some((_, &prio)) = queue.peek_max() {
-                let db_prio = self.max_db_priority.load(Ordering::Acquire);
+            while let Some((_, &est_completion)) = queue.peek_min() {
+                let db_best = self.min_db_estimate.load(Ordering::Acquire);
                 // Only when we go a decent bit over
                 if !self.db.is_empty()
-                    && prio < db_prio * 101 / 100
+                    && est_completion > db_best * 101 / 100
                     && !self.retrieving.fetch_or(true, Ordering::AcqRel)
                 {
                     let start = Instant::now();
@@ -588,7 +585,7 @@ where
                     if cap - len < num_to_restore {
                         let evicted = Self::evict_until(
                             &mut queue,
-                            prio,
+                            est_completion,
                             self.min_evictions,
                             len + 2 * num_to_restore - cap,
                         );
@@ -599,16 +596,16 @@ where
                         let best = evicted
                             .iter()
                             .map(|ctx| self.db.score(ctx))
-                            .max()
+                            .min()
                             .unwrap();
                         self.db.extend(evicted, true)?;
-                        self.max_db_priority.fetch_max(best, Ordering::Release);
+                        self.min_db_estimate.fetch_min(best, Ordering::Release);
                         self.evictions.fetch_add(1, Ordering::Release);
                         println!("reshuffle:evict to db took {:?}", s2.elapsed());
                     } else {
                         drop(queue);
                     }
-                    let res = Self::retrieve(&self.db, &self.max_db_priority, num_to_restore)?;
+                    let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
                     self.retrievals.fetch_add(1, Ordering::Release);
                     println!("Reshuffle took total {:?}", start.elapsed());
                     queue = self.queue.lock().unwrap();
@@ -616,11 +613,11 @@ where
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
                     self.retrieving.store(false, Ordering::Release);
                 }
-                let (ctx, prio) = queue.pop_max().unwrap();
+                let (ctx, el_estimate) = queue.pop_min().unwrap();
                 debug_assert!(
-                    prio == self.db.score(&ctx),
-                    "priority {} didn't match score {}",
-                    prio,
+                    el_estimate == self.db.score(&ctx),
+                    "stored estimate {} didn't match score {}",
+                    el_estimate,
                     self.db.score(&ctx)
                 );
                 if ctx.elapsed() > self.db.max_time() {
@@ -654,7 +651,7 @@ where
             ),
         );
         drop(queue);
-        let res = Self::retrieve(&self.db, &self.max_db_priority, num_to_restore)?;
+        let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
         queue = self.queue.lock().unwrap();
         queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);
@@ -662,14 +659,14 @@ where
         Ok(queue)
     }
 
-    pub fn pop_min_score(&self) -> Result<Option<ContextWrapper<T>>, String> {
+    pub fn pop_max_estimate(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
-            while let Some((ctx, prio)) = queue.pop_min() {
+            while let Some((ctx, el_estimate)) = queue.pop_min() {
                 debug_assert!(
-                    prio == self.db.score(&ctx),
-                    "priority {} didn't match score {}",
-                    prio,
+                    el_estimate == self.db.score(&ctx),
+                    "stored estimate {} didn't match score {}",
+                    el_estimate,
                     self.db.score(&ctx)
                 );
                 if ctx.elapsed() > self.db.max_time() {
@@ -754,10 +751,10 @@ where
             let len = queue.len();
             if len + vec.len() > cap {
                 let max_evictions = std::cmp::min(self.max_evictions, (len / 4) * 3);
-                let priority = vec.iter().max_by_key(|(_, p)| p).unwrap().1;
+                let el_estimate = vec.iter().min_by_key(|(_, p)| p).unwrap().1;
                 evicted = Some(Self::evict_until(
                     &mut queue,
-                    priority,
+                    el_estimate,
                     std::cmp::max(len + vec.len() - cap, self.min_evictions),
                     max_evictions,
                 ));
@@ -772,10 +769,10 @@ where
                 let best = ev
                     .iter()
                     .map(|ctx| self.db.score(ctx))
-                    .max()
+                    .min()
                     .unwrap();
                 self.db.extend(ev, true)?;
-                self.max_db_priority.fetch_max(best, Ordering::Release);
+                self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
                 println!("evict to db took {:?}", start.elapsed());
                 println!("{}", self.db.get_memory_usage_stats().unwrap());
