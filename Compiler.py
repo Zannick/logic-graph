@@ -904,7 +904,7 @@ class GameLogic(object):
         self.item_locations = defaultdict(list)
         for loc in self.locations():
             if 'item' not in loc:
-                self._errors.append('Expected item at location {}', loc['fullname'])
+                self._errors.append(f'Expected item at location {loc["fullname"]}')
                 continue
             self.item_locations[loc['item']].append(loc['id'])
 
