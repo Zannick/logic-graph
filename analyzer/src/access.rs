@@ -64,19 +64,17 @@ fn expand<W, T, E, Wp>(
     for spot in world.get_area_spots(ctx.get().position()) {
         if spot_map[*spot].is_none() {
             let local = ctx.get().local_travel_time(movement_state, *spot);
-            if local > max_time || local + ctx.elapsed() > max_time {
+            if local == u32::MAX || local > max_time || local + ctx.elapsed() >= max_time {
                 // Can't move this way, or it takes too long
                 continue;
             }
             let mut newctx = ctx.clone();
             newctx.move_local(*spot, local);
             let elapsed = newctx.elapsed();
-            if elapsed <= max_time {
-                spot_heap.push(Reverse(HeapElement {
-                    score: elapsed,
-                    el: newctx,
-                }));
-            }
+            spot_heap.push(Reverse(HeapElement {
+                score: elapsed,
+                el: newctx,
+            }));
         }
     }
 

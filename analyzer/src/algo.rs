@@ -232,7 +232,7 @@ where
         let start = Instant::now();
         let (clean_ctx, max_time) = match greedy_search(world, &startctx, u32::MAX) {
             Ok(wonctx) => {
-                println!("Finished greedy search in {:?}", start.elapsed());
+                println!("Finished greedy search in {:?} with a result of {}ms", start.elapsed(), wonctx.elapsed());
                 let start = Instant::now();
                 let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed());
                 println!("Minimized in {:?}", start.elapsed());

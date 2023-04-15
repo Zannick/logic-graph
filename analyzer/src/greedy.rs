@@ -56,7 +56,10 @@ where
     let mut depth = 0;
     while depth < max_depth && !to_process.is_empty() {
         let mut next_process = Vec::new();
-        for spot_ctx in to_process.iter().filter(|ctx| spot_has_actions(world, ctx.get())) {
+        for spot_ctx in to_process
+            .iter()
+            .filter(|ctx| spot_has_actions(world, ctx.get()))
+        {
             for action in world
                 .get_spot_actions(spot_ctx.get().position())
                 .iter()
