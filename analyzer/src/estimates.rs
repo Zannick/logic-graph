@@ -112,14 +112,16 @@ where
                     }
                 }))
                 .collect();
-            let c = self
-                .algo
-                .compute_cost(
-                    spot_to_graph_node::<W, E>(ctx.position()),
-                    nodes.collect(),
-                    extra_edges,
-                )
-                .unwrap();
+            let c = if let Some(c) = self.algo.compute_cost(
+                spot_to_graph_node::<W, E>(ctx.position()),
+                nodes.collect(),
+                extra_edges,
+            ) {
+                c
+            } else {
+                // A sufficiently large number.
+                1 << 30
+            };
             {
                 let mut locked_map = self.known_costs.lock().unwrap();
                 locked_map.insert(key, c);
