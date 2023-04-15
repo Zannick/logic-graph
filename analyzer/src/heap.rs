@@ -620,7 +620,8 @@ where
                     el_estimate,
                     self.db.score(&ctx)
                 );
-                if ctx.elapsed() > self.db.max_time() {
+                let max_time = self.db.max_time();
+                if ctx.elapsed() > max_time || self.db.score(&ctx) > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
@@ -669,7 +670,8 @@ where
                     el_estimate,
                     self.db.score(&ctx)
                 );
-                if ctx.elapsed() > self.db.max_time() {
+                let max_time = self.db.max_time();
+                if ctx.elapsed() > max_time || self.db.score(&ctx) > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
