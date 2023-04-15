@@ -144,7 +144,7 @@ areas:
       actions:
         - name: Move Left Platform
           req: $activate and not ^_left_platform_moved
-          do: ^_left_platform_moved = true; ^position = `Ebih > Base Camp > Left Platform Moved`;
+          do: ^_left_platform_moved = true
           to: Ebih > Base Camp > Left Platform Moved
     - name: Left Platform Moved
       coord: [29.4, 11.8]
@@ -162,7 +162,7 @@ areas:
       actions:
         - name: Reset Left Platform
           req: $activate and ^_left_platform_moved
-          do: ^_left_platform_moved = false; ^position = `Ebih > Base Camp > Left Platform`;
+          do: ^_left_platform_moved = false
           to: Ebih > Base Camp > Left Platform
     - name: Top Platform
       coord: [29.5, 11.5]
@@ -751,7 +751,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy
-          do: $deploy_drone(`Ebih > Waterfall > Below Left Switch`)
+          do: $deploy_drone
           to: Ebih > Waterfall > Below Left Switch
           time: 2
     - name: Below Left Switch
@@ -1021,7 +1021,7 @@ areas:
       actions:
         - name: Throw Drone Long
           req: $can_deploy
-          do: $deploy_drone_and_move(`Giguna > Giguna Northeast > Inner Wall`, `Ebih > Ebih West > Alcove Entrance`)
+          do: $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
           to: Giguna > Giguna Northeast > Inner Wall
           time: 5.3
     - name: High Platform
@@ -1132,7 +1132,7 @@ areas:
         # just to get to East Ledge first
         - name: Activate Ride
           req: Infect and $grab and not ^_platform1_moved
-          do: ^_platform1_moved = true; ^position = `Ebih > Ebih East > Middle Platform`
+          do: ^_platform1_moved = true
           to: Ebih > Ebih East > Middle Platform
           time: 3.7
     - name: Ledge End
@@ -1162,12 +1162,12 @@ areas:
       actions:
         - name: Activate Ride
           req: Infect and not ^_platform2_moved
-          do: ^_platform2_moved = true; ^position = `Ebih > Ebih East > Dispenser`
+          do: ^_platform2_moved = true
           to: Ebih > Ebih East > Dispenser
           time: 4.5
         - name: Activate Lift
           req: Infect and $grab and not ^_platform2_moved
-          do: ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
+          do: ^_platform2_moved = true
           to: Ebih > Ebih East > Ledge End
     - name: Corner
       coord: [26.4, 8.8]
@@ -1193,7 +1193,7 @@ areas:
       actions:
         - name: Activate Lift
           req: Infect and ^_platform2_moved
-          do: ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
+          do: ^_platform2_moved = false
           to: Ebih > Ebih East > Ledge End
           time: 5
     - name: East Ledge
@@ -1437,12 +1437,12 @@ areas:
       actions:
         - name: Activate Lift
           req: Infect and ^_platform_moved
-          do: ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
+          do: ^_platform_moved = false
           to: Ebih > Drone Room > Moving Platform
           time: 7
         - name: Activate Lift But Get Off Early
           req: Infect and ^_platform_moved
-          do: ^_platform_moved = false; ^position = `Ebih > Drone Room > West 6`
+          do: ^_platform_moved = false
           to: Ebih > Drone Room > West 6
           time: 1.4
     - name: Portal
@@ -1530,7 +1530,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy
-          do: $deploy_drone_and_move(`Ebih > Drone Room > East 4`, `Ebih > Drone Room > Tree`)
+          do: $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
           to: Ebih > Drone Room > East 4
           time: 1.5
     - name: Left Platform

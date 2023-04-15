@@ -66,8 +66,10 @@ pub trait Exit: Accessible {
 
 pub trait Action: Accessible {
     type ActionId: Id;
+    type SpotId: Id + Default;
     fn id(&self) -> Self::ActionId;
     fn perform(&self, ctx: &mut Self::Context);
+    fn dest(&self, ctx: &Self::Context) -> Self::SpotId;
 }
 
 pub trait Warp: Accessible {
@@ -92,6 +94,7 @@ pub trait World: Sync {
     >;
     type Action: Action<
         Context = <Self::Location as Accessible>::Context,
+        SpotId = <Self::Exit as Exit>::SpotId,
         Currency = <Self::Location as Accessible>::Currency,
     >;
     type Warp: Warp<

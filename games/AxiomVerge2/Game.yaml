@@ -135,7 +135,8 @@ warps:
 actions:
   - name: Recall Drone
     req: NOT WITHIN `Menu` and not ^breach and $can_recall
-    do: ^mode = 'Indra'; ^position = ^indra
+    do: ^mode = 'Indra'
+    to: ^indra
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
   - name: Deploy Drone
@@ -179,10 +180,10 @@ helpers:
      Under_Siege]
 
   $save:action: ^save = ^position; ^energy = $max_energy
-  $deploy_drone:action(newpos:SpotId): >
-    ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
-  $deploy_drone_and_move:action(dronepos:SpotId, indrapos:SpotId): >
-    ^mode = 'drone'; ^indra = ^indrapos; ^position = ^dronepos;
+  $deploy_drone:action: >
+    ^mode = 'drone'; ^indra = ^position;
+  $deploy_drone_and_move:action(indrapos:SpotId): >
+    ^mode = 'drone'; ^indra = ^indrapos;
 
   # entry rules
   # ^position is the old value

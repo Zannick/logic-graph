@@ -307,7 +307,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy
-          do: $deploy_drone(`Amagi > Cave Behind Waterfall > Top`)
+          do: $deploy_drone
           to: Amagi > Cave Behind Waterfall > Top
           time: 1.1
     - name: Top

@@ -46,7 +46,8 @@ areas:
         # Stopgap for greedy search not able to do a global Recall
         - name: Save-Recall
           req: $can_recall
-          do: $save; ^mode = 'Indra'; ^position = ^indra
+          do: $save; ^mode = 'Indra'
+          to: ^indra
           time: 4.3
       exits:
         - to: Gate Vent
@@ -94,7 +95,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy and Slingshot_Hook
-          do: $deploy_drone(`Giguna > Giguna Northeast > Gate Vent`)
+          do: $deploy_drone
           to: Giguna > Giguna Northeast > Gate Vent
           time: 1.25
 
@@ -365,7 +366,7 @@ areas:
       actions:
         - name: Throw Drone Up
           req: $can_deploy
-          do: $deploy_drone(`Giguna > West Caverns > Higher Ledge`)
+          do: $deploy_drone
           to: Giguna > West Caverns > Higher Ledge
           time: 1.5
     - name: Higher Ledge
@@ -525,7 +526,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy and Slingshot_Hook
-          do: $deploy_drone_and_move(`Giguna > Wasteland > West 12`, `Giguna > Wasteland > Middle Path`)
+          do: $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
           to: Giguna > Wasteland > West 12
           time: 3.5
     - name: Lower Path Right
@@ -588,7 +589,7 @@ areas:
       actions:
         - name: Throw Drone
           req: $can_deploy
-          do: $deploy_drone_and_move(`Giguna > Giguna Base > Upper Cliff`, `Giguna > Giguna Base > Kari`)
+          do: $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
           to: Giguna > Giguna Base > Upper Cliff
     - name: Upper Cliff
       coord: [14.2, 13.6]

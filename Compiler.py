@@ -1073,6 +1073,18 @@ class GameLogic(object):
                 d[local] = cname
         return d
 
+    def translate_ctx(self, ctx, info):
+        if 'region' not in info or ctx[0] != '_':
+            return ctx
+        area = info.get('area') or info['name']
+
+        poss = [construct_id(info['region'], 'ctx', ctx[1:]).lower(),
+                construct_id(info['region'], area, 'ctx', ctx[1:]).lower()]
+        for cname in poss:
+            if cname in self.context_values:
+                return cname
+        return ctx
+
     @cached_property
     def context_here_overrides(self):
         d = {c: {'region': defaultdict(dict), 'area': defaultdict(dict),
@@ -1225,6 +1237,7 @@ class GameLogic(object):
             'get_spot_reference': get_spot_reference,
             'prToRust': self.prToRust,
             'str_to_rusttype': str_to_rusttype,
+            'translate_ctx': self.translate_ctx,
             'treeToString': treeToString,
             'trim_type_prefix': trim_type_prefix,
         })

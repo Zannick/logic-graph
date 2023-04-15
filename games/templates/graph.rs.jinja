@@ -144,12 +144,32 @@ impl world::Accessible for Action {
 }
 impl world::Action for Action {
     type ActionId = ActionId;
+    type SpotId = SpotId;
     fn id(&self) -> ActionId { self.id }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
 %% for act in gl.actions()
             ActionId::{{ act.id }} => rules::action_{{ act.action_id }}(ctx),
 %% endfor
+        };
+        let dest = self.dest(ctx);
+        if dest != SpotId::None {
+            ctx.set_position(dest);
+        }
+    }
+    fn dest(&self, ctx: &Context) -> SpotId {
+        match self.id {
+%% for act in gl.actions()
+%% if act.to
+            ActionId::{{ act.id }} => {% if act.to.startswith('^') -%}
+            {% if act.to[1:] in data_defaults %}data::{{ act.to[1:] }}(ctx.position()){% endif -%}
+            ctx.{{ act.to[1:]|translate_ctx(act) }}()
+            {%- else -%}
+            SpotId::{{ act.to|construct_id }}
+            {%- endif -%},
+%% endif
+%% endfor
+            _ => SpotId::None,
         }
     }
 }

@@ -6809,51 +6809,173 @@ impl world::Accessible for Action {
 }
 impl world::Action for Action {
     type ActionId = ActionId;
+    type SpotId = SpotId;
     fn id(&self) -> ActionId {
         self.id
     }
     fn perform(&self, ctx: &mut Context) {
         match self.id {
-            ActionId::Global__Recall_Drone => rules::action_mode__indra_position__indra(ctx),
+            ActionId::Global__Recall_Drone => rules::action_mode__indra(ctx),
             ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => {
+                rules::action_amagi__main_area__carving__key_combo__do(ctx)
+            }
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_deploy_drone__amagi__cave_behind_waterfall__top(ctx),
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                rules::action_deploy_drone(ctx)
+            }
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx),
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx),
-            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx),
-            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx),
-            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_deploy_drone__ebih__waterfall__below_left_switch(ctx),
-            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx),
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx)
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx)
+            }
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
+                rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx)
+            }
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
+                rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx)
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                rules::action_deploy_drone(ctx)
+            }
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
+                rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx)
+            }
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx),
-            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__ebih_west__alcove_entrance(ctx),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__moving_platform__activate_ride__do(ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx),
-            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_deploy_drone_and_move__ebih__drone_room__east_4_ebih__drone_room__tree(ctx),
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
+                rules::action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(ctx)
+            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                rules::action_ebih__ebih_east__moving_platform__activate_ride__do(ctx)
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx)
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
+                rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx)
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx)
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx)
+            }
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
+                rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx)
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                rules::action_deploy_drone_and_move__ebih__drone_room__tree(ctx)
+            }
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_save(ctx),
-            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => rules::action_save_mode__indra_position__indra(ctx),
-            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::action_deploy_drone__giguna__giguna_northeast__gate_vent(ctx),
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx),
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::action_giguna__giguna_northeast__switch__open_door__do(ctx),
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::action_giguna__carnelian__upper_susar__caught__do(ctx),
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::action_giguna__carnelian__upper_susar__hack__do(ctx),
-            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::action_giguna__carnelian__switch__open_door__do(ctx),
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::action_giguna__carnelian__lower_susar__caught__do(ctx),
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::action_giguna__carnelian__lower_susar__hack__do(ctx),
-            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::action_deploy_drone__giguna__west_caverns__higher_ledge(ctx),
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::action_giguna__west_caverns__east_susar__caught__do(ctx),
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::action_giguna__west_caverns__east_susar__hack__do(ctx),
-            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::action_deploy_drone_and_move__giguna__wasteland__west_12_giguna__wasteland__middle_path(ctx),
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_deploy_drone_and_move__giguna__giguna_base__upper_cliff_giguna__giguna_base__kari(ctx),
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
+                rules::action_save_mode__indra(ctx)
+            }
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
+                rules::action_deploy_drone(ctx)
+            }
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
+                rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx)
+            }
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
+                rules::action_giguna__giguna_northeast__switch__open_door__do(ctx)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
+                rules::action_giguna__carnelian__upper_susar__caught__do(ctx)
+            }
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
+                rules::action_giguna__carnelian__upper_susar__hack__do(ctx)
+            }
+            ActionId::Giguna__Carnelian__Switch__Open_Door => {
+                rules::action_giguna__carnelian__switch__open_door__do(ctx)
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
+                rules::action_giguna__carnelian__lower_susar__caught__do(ctx)
+            }
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
+                rules::action_giguna__carnelian__lower_susar__hack__do(ctx)
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
+                rules::action_deploy_drone(ctx)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => {
+                rules::action_giguna__west_caverns__east_susar__caught__do(ctx)
+            }
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => {
+                rules::action_giguna__west_caverns__east_susar__hack__do(ctx)
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                rules::action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx)
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                rules::action_deploy_drone_and_move__giguna__giguna_base__kari(ctx)
+            }
             ActionId::Giguna__Giguna_Base__Save_Point__Save => rules::action_save(ctx),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
+        };
+        let dest = self.dest(ctx);
+        if dest != SpotId::None {
+            ctx.set_position(dest);
+        }
+    }
+    fn dest(&self, ctx: &Context) -> SpotId {
+        match self.id {
+            ActionId::Global__Recall_Drone => ctx.indra(),
+            ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => {
+                SpotId::Amagi__Cave_Behind_Waterfall__Top
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
+                SpotId::Ebih__Base_Camp__Left_Platform_Moved
+            }
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
+                SpotId::Ebih__Base_Camp__Left_Platform
+            }
+            ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
+                SpotId::Ebih__Waterfall__Below_Left_Switch
+            }
+            ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
+                SpotId::Giguna__Giguna_Northeast__Inner_Wall
+            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
+                SpotId::Ebih__Ebih_East__Middle_Platform
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
+                SpotId::Ebih__Ebih_East__Dispenser
+            }
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
+                SpotId::Ebih__Ebih_East__Ledge_End
+            }
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
+                SpotId::Ebih__Ebih_East__Ledge_End
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
+                SpotId::Ebih__Drone_Room__Moving_Platform
+            }
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
+                SpotId::Ebih__Drone_Room__West_6
+            }
+            ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
+                SpotId::Ebih__Drone_Room__East_4
+            }
+            ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => ctx.indra(),
+            ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
+                SpotId::Giguna__Giguna_Northeast__Gate_Vent
+            }
+            ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
+                SpotId::Giguna__West_Caverns__Higher_Ledge
+            }
+            ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
+                SpotId::Giguna__Wasteland__West_12
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                SpotId::Giguna__Giguna_Base__Upper_Cliff
+            }
+            _ => SpotId::None,
         }
     }
 }

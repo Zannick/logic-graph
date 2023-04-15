@@ -300,29 +300,27 @@ macro_rules! helper__save {
     }};
 }
 
-/// $deploy_drone ( TypedVar(name='newpos', type='SpotId') )
-/// ^mode = 'drone'; ^indra = ^position; ^position = ^newpos;
+/// $deploy_drone (  )
+/// ^mode = 'drone'; ^indra = ^position;
 #[macro_export]
 macro_rules! helper__deploy_drone {
-    ($ctx:expr, $newpos:expr) => {{
+    ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
         $ctx.set_mode(enums::Mode::Drone);
         $ctx.set_indra($ctx.position());
-        $ctx.set_position($newpos);
     }};
 }
 
-/// $deploy_drone_and_move ( TypedVar(name='dronepos', type='SpotId'),TypedVar(name='indrapos', type='SpotId') )
-/// ^mode = 'drone'; ^indra = ^indrapos; ^position = ^dronepos;
+/// $deploy_drone_and_move ( TypedVar(name='indrapos', type='SpotId') )
+/// ^mode = 'drone'; ^indra = ^indrapos;
 #[macro_export]
 macro_rules! helper__deploy_drone_and_move {
-    ($ctx:expr, $dronepos:expr, $indrapos:expr) => {{
+    ($ctx:expr, $indrapos:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
         $ctx.set_mode(enums::Mode::Drone);
         $ctx.set_indra($indrapos);
-        $ctx.set_position($dronepos);
     }};
 }
 

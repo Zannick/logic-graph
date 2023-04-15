@@ -657,105 +657,61 @@ pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
 }
-pub fn action_deploy_drone__amagi__cave_behind_waterfall__top(ctx: &mut Context) {
-    // $deploy_drone(`Amagi > Cave Behind Waterfall > Top`)
-    helper__deploy_drone!(ctx, SpotId::Amagi__Cave_Behind_Waterfall__Top);
+pub fn action_deploy_drone(ctx: &mut Context) {
+    // $deploy_drone
+    helper__deploy_drone!(ctx);
 }
-pub fn action_deploy_drone__ebih__waterfall__below_left_switch(ctx: &mut Context) {
-    // $deploy_drone(`Ebih > Waterfall > Below Left Switch`)
-    helper__deploy_drone!(ctx, SpotId::Ebih__Waterfall__Below_Left_Switch);
+pub fn action_deploy_drone_and_move__ebih__drone_room__tree(ctx: &mut Context) {
+    // $deploy_drone_and_move(`Ebih > Drone Room > Tree`)
+    helper__deploy_drone_and_move!(ctx, SpotId::Ebih__Drone_Room__Tree);
 }
-pub fn action_deploy_drone__giguna__giguna_northeast__gate_vent(ctx: &mut Context) {
-    // $deploy_drone(`Giguna > Giguna Northeast > Gate Vent`)
-    helper__deploy_drone!(ctx, SpotId::Giguna__Giguna_Northeast__Gate_Vent);
+pub fn action_deploy_drone_and_move__ebih__ebih_west__alcove_entrance(ctx: &mut Context) {
+    // $deploy_drone_and_move(`Ebih > Ebih West > Alcove Entrance`)
+    helper__deploy_drone_and_move!(ctx, SpotId::Ebih__Ebih_West__Alcove_Entrance);
 }
-pub fn action_deploy_drone__giguna__west_caverns__higher_ledge(ctx: &mut Context) {
-    // $deploy_drone(`Giguna > West Caverns > Higher Ledge`)
-    helper__deploy_drone!(ctx, SpotId::Giguna__West_Caverns__Higher_Ledge);
+pub fn action_deploy_drone_and_move__giguna__giguna_base__kari(ctx: &mut Context) {
+    // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
+    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Giguna_Base__Kari);
 }
-pub fn action_deploy_drone_and_move__ebih__drone_room__east_4_ebih__drone_room__tree(
-    ctx: &mut Context,
-) {
-    // $deploy_drone_and_move(`Ebih > Drone Room > East 4`, `Ebih > Drone Room > Tree`)
-    helper__deploy_drone_and_move!(
-        ctx,
-        SpotId::Ebih__Drone_Room__East_4,
-        SpotId::Ebih__Drone_Room__Tree
-    );
-}
-pub fn action_deploy_drone_and_move__giguna__giguna_base__upper_cliff_giguna__giguna_base__kari(
-    ctx: &mut Context,
-) {
-    // $deploy_drone_and_move(`Giguna > Giguna Base > Upper Cliff`, `Giguna > Giguna Base > Kari`)
-    helper__deploy_drone_and_move!(
-        ctx,
-        SpotId::Giguna__Giguna_Base__Upper_Cliff,
-        SpotId::Giguna__Giguna_Base__Kari
-    );
-}
-pub fn action_deploy_drone_and_move__giguna__giguna_northeast__inner_wall_ebih__ebih_west__alcove_entrance(
-    ctx: &mut Context,
-) {
-    // $deploy_drone_and_move(`Giguna > Giguna Northeast > Inner Wall`, `Ebih > Ebih West > Alcove Entrance`)
-    helper__deploy_drone_and_move!(
-        ctx,
-        SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-        SpotId::Ebih__Ebih_West__Alcove_Entrance
-    );
-}
-pub fn action_deploy_drone_and_move__giguna__wasteland__west_12_giguna__wasteland__middle_path(
-    ctx: &mut Context,
-) {
-    // $deploy_drone_and_move(`Giguna > Wasteland > West 12`, `Giguna > Wasteland > Middle Path`)
-    helper__deploy_drone_and_move!(
-        ctx,
-        SpotId::Giguna__Wasteland__West_12,
-        SpotId::Giguna__Wasteland__Middle_Path
-    );
+pub fn action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx: &mut Context) {
+    // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
+    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Wasteland__Middle_Path);
 }
 pub fn action_ebih__base_camp__left_platform__move_left_platform__do(ctx: &mut Context) {
-    // ^_left_platform_moved = true; ^position = `Ebih > Base Camp > Left Platform Moved`;
+    // ^_left_platform_moved = true
     ctx.set_ebih__base_camp__ctx__left_platform_moved(true);
-    ctx.set_position(SpotId::Ebih__Base_Camp__Left_Platform_Moved);
 }
 pub fn action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx: &mut Context) {
-    // ^_left_platform_moved = false; ^position = `Ebih > Base Camp > Left Platform`;
+    // ^_left_platform_moved = false
     ctx.set_ebih__base_camp__ctx__left_platform_moved(false);
-    ctx.set_position(SpotId::Ebih__Base_Camp__Left_Platform);
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift__do(ctx: &mut Context) {
-    // ^_platform_moved = false; ^position = `Ebih > Drone Room > Moving Platform`
+    // ^_platform_moved = false
     ctx.set_ebih__drone_room__ctx__platform_moved(false);
-    ctx.set_position(SpotId::Ebih__Drone_Room__Moving_Platform);
 }
 pub fn action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx: &mut Context) {
-    // ^_platform_moved = false; ^position = `Ebih > Drone Room > West 6`
+    // ^_platform_moved = false
     ctx.set_ebih__drone_room__ctx__platform_moved(false);
-    ctx.set_position(SpotId::Ebih__Drone_Room__West_6);
 }
 pub fn action_ebih__drone_room__portal_exit__activate_platform__do(ctx: &mut Context) {
     // ^_platform_moved = true
     ctx.set_ebih__drone_room__ctx__platform_moved(true);
 }
 pub fn action_ebih__ebih_east__dispenser__activate_lift__do(ctx: &mut Context) {
-    // ^_platform2_moved = false; ^position = `Ebih > Ebih East > Ledge End`
+    // ^_platform2_moved = false
     ctx.set_ebih__ebih_east__ctx__platform2_moved(false);
-    ctx.set_position(SpotId::Ebih__Ebih_East__Ledge_End);
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx: &mut Context) {
-    // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Ledge End`
+    // ^_platform2_moved = true
     ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
-    ctx.set_position(SpotId::Ebih__Ebih_East__Ledge_End);
 }
 pub fn action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx: &mut Context) {
-    // ^_platform2_moved = true; ^position = `Ebih > Ebih East > Dispenser`
+    // ^_platform2_moved = true
     ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
-    ctx.set_position(SpotId::Ebih__Ebih_East__Dispenser);
 }
 pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(ctx: &mut Context) {
-    // ^_platform1_moved = true; ^position = `Ebih > Ebih East > Middle Platform`
+    // ^_platform1_moved = true
     ctx.set_ebih__ebih_east__ctx__platform1_moved(true);
-    ctx.set_position(SpotId::Ebih__Ebih_East__Middle_Platform);
 }
 pub fn action_ebih__grid_25_10_12__door_left__open_door__do(ctx: &mut Context) {
     // ^_door_open = true
@@ -826,10 +782,9 @@ pub fn action_mode__drone_indra__position(ctx: &mut Context) {
     ctx.set_mode(enums::Mode::Drone);
     ctx.set_indra(ctx.position());
 }
-pub fn action_mode__indra_position__indra(ctx: &mut Context) {
-    // ^mode = 'Indra'; ^position = ^indra
+pub fn action_mode__indra(ctx: &mut Context) {
+    // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
-    ctx.set_position(ctx.indra());
 }
 pub fn action_refills__1(ctx: &mut Context) {
     // ^refills += 1
@@ -855,11 +810,10 @@ pub fn action_save__glacier__revival__save_point(ctx: &mut Context) {
     // ^save = `Glacier > Revival > Save Point`
     ctx.set_save(SpotId::Glacier__Revival__Save_Point);
 }
-pub fn action_save_mode__indra_position__indra(ctx: &mut Context) {
-    // $save; ^mode = 'Indra'; ^position = ^indra
+pub fn action_save_mode__indra(ctx: &mut Context) {
+    // $save; ^mode = 'Indra'
     helper__save!(ctx);
     ctx.set_mode(enums::Mode::Indra);
-    ctx.set_position(ctx.indra());
 }
 pub fn action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(
     ctx: &mut Context,
