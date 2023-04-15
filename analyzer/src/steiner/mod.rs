@@ -2,7 +2,6 @@ pub mod approx;
 pub mod gflac3;
 pub mod graph;
 pub mod sp;
-pub mod wu;
 
 pub use approx::SteinerAlgo;
 pub use graph::{
