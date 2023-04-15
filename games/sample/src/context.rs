@@ -136,8 +136,8 @@ pub struct Context {
     // other
     pub status: EnumMap<LocationId, Status>,
 
-    visits: i32,
-    skips: i32,
+    visits: u32,
+    skips: u32,
 }
 
 impl Default for Context {
@@ -168,7 +168,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: i32 = 30;
+    const NUM_ITEMS: u32 = 30;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -521,17 +521,17 @@ impl context::Ctx for Context {
         movements::get_movement_state(self)
     }
 
-    fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> i32 {
+    fn local_travel_time(&self, movement_state: movements::MovementState, dest: SpotId) -> u32 {
         movements::local_travel_time(self, movement_state, self.position, dest)
     }
 
-    fn count_visits(&self) -> i32 {
+    fn count_visits(&self) -> u32 {
         self.visits
     }
-    fn count_skips(&self) -> i32 {
+    fn count_skips(&self) -> u32 {
         self.skips
     }
-    fn progress(&self) -> i32 {
+    fn progress(&self) -> u32 {
         if self.visits <= 0 {
             0
         } else {

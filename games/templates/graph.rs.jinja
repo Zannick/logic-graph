@@ -54,7 +54,7 @@ pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
-    time: i32,
+    time: u32,
     exit_id: Option<ExitId>,
     price: Currency,
 }
@@ -71,7 +71,7 @@ impl world::Accessible for Location {
 %% endfor
         }
     }
-    fn time(&self) -> i32 { self.time }
+    fn time(&self) -> u32 { self.time }
     fn price(&self) -> &Currency { &self.price }
 }
 
@@ -89,7 +89,7 @@ impl world::Location for Location {
 #[derive(Copy, Clone, Debug)]
 pub struct Exit {
     id: ExitId,
-    time: i32,
+    time: u32,
     dest: SpotId,
     price: Currency,
     loc_id: Option<LocationId>,
@@ -106,7 +106,7 @@ impl world::Accessible for Exit {
 %% endfor
         }
     }
-    fn time(&self) -> i32 { self.time }
+    fn time(&self) -> u32 { self.time }
     fn price(&self) -> &Currency { &self.price }
 }
 
@@ -124,7 +124,7 @@ impl world::Exit for Exit {
 #[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
-    time: i32,
+    time: u32,
     price: Currency,
 }
 
@@ -139,7 +139,7 @@ impl world::Accessible for Action {
 %% endfor
         }
     }
-    fn time(&self) -> i32 { self.time }
+    fn time(&self) -> u32 { self.time }
     fn price(&self) -> &Currency { &self.price }
 }
 impl world::Action for Action {
@@ -178,7 +178,7 @@ impl world::Action for Action {
 pub struct Warp {
     id: WarpId,
     dest: SpotId,
-    time: i32,
+    time: u32,
     price: Currency,
 }
 impl world::Accessible for Warp {
@@ -193,7 +193,7 @@ impl world::Accessible for Warp {
 %% endfor
         }
     }
-    fn time(&self) -> i32 { self.time }
+    fn time(&self) -> u32 { self.time }
     fn price(&self) -> &Currency { &self.price }
 }
 impl world::Warp for Warp {
@@ -274,7 +274,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = {{ gl.locations()|list|count }};
+    const NUM_LOCATIONS: u32 = {{ gl.locations()|list|count }};
 
 %% for point in ['Location', 'Exit', 'Action']
     fn get_{{ point|lower }}(&self, id: {{ point }}Id)

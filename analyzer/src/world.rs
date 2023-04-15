@@ -18,7 +18,7 @@ pub trait Accessible: Sync {
     type Context: Ctx;
     type Currency: Id + Default;
     fn can_access(&self, ctx: &Self::Context) -> bool;
-    fn time(&self) -> i32;
+    fn time(&self) -> u32;
     fn price(&self) -> &Self::Currency;
     fn is_free(&self) -> bool {
         *self.price() == Self::Currency::default()
@@ -102,7 +102,7 @@ pub trait World: Sync {
         SpotId = <Self::Exit as Exit>::SpotId,
         Currency = <Self::Location as Accessible>::Currency,
     >;
-    const NUM_LOCATIONS: i32;
+    const NUM_LOCATIONS: u32;
 
     fn get_location(&self, loc_id: <Self::Location as Location>::LocId) -> &Self::Location;
     fn get_exit(&self, ex_id: <Self::Exit as Exit>::ExitId) -> &Self::Exit;

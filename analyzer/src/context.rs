@@ -12,7 +12,7 @@ pub trait Ctx:
     type AreaId: Id;
     type RegionId: Id;
     type MovementState: Copy + Clone + Eq + Debug + Hash;
-    const NUM_ITEMS: i32;
+    const NUM_ITEMS: u32;
 
     fn has(&self, item: Self::ItemId) -> bool;
     fn count(&self, item: Self::ItemId) -> i16;
@@ -48,11 +48,11 @@ pub trait Ctx:
         &self,
         movement_state: Self::MovementState,
         dest: <<Self::World as World>::Exit as Exit>::SpotId,
-    ) -> i32;
+    ) -> u32;
 
-    fn count_visits(&self) -> i32;
-    fn count_skips(&self) -> i32;
-    fn progress(&self) -> i32;
+    fn count_visits(&self) -> u32;
+    fn count_skips(&self) -> u32;
+    fn progress(&self) -> u32;
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -185,9 +185,9 @@ where
 #[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
-    elapsed: i32,
-    penalty: i32,
-    bonus: i32,
+    elapsed: u32,
+    penalty: u32,
+    bonus: u32,
     // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
     // or make a type for ContextWrapper to convert into
     #[allow(clippy::type_complexity)]
@@ -232,27 +232,27 @@ impl<T: Ctx> ContextWrapper<T> {
         self.history.as_ref().map(|node| node.entry)
     }
 
-    pub fn elapse(&mut self, t: i32) {
+    pub fn elapse(&mut self, t: u32) {
         self.elapsed += t;
     }
 
-    pub fn elapsed(&self) -> i32 {
+    pub fn elapsed(&self) -> u32 {
         self.elapsed
     }
 
-    pub fn penalize(&mut self, penalty: i32) {
+    pub fn penalize(&mut self, penalty: u32) {
         self.penalty += penalty;
     }
 
-    pub fn penalty(&self) -> i32 {
+    pub fn penalty(&self) -> u32 {
         self.penalty
     }
 
-    pub fn reward(&mut self, bonus: i32) {
+    pub fn reward(&mut self, bonus: u32) {
         self.bonus += bonus;
     }
 
-    pub fn bonus(&self) -> i32 {
+    pub fn bonus(&self) -> u32 {
         self.bonus
     }
 
@@ -292,7 +292,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::Move(exit.id()));
     }
 
-    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: i32)
+    pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: u32)
     where
         W: World<Exit = E>,
         T: Ctx<World = W>,
@@ -399,7 +399,7 @@ impl<T: Ctx> ContextWrapper<T> {
             History::MoveLocal(spot) => {
                 let movement_state = self.ctx.get_movement_state();
                 let time = self.ctx.local_travel_time(movement_state, spot);
-                assert!(time >= 0, "Invalid replay: move-local {:?}", spot);
+                assert!(time != u32::MAX, "Invalid replay: move-local {:?}", spot);
                 self.move_local(spot, time);
             }
             History::Activate(act_id) => {
@@ -409,7 +409,7 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn info(&self, est: i32) -> String {
+    pub fn info(&self, est: u32) -> String {
         format(format_args!(
             "At {}ms (est. left={}), visited={}, skipped={}, penalty={}, bonus={}\nNow: {} after {}",
             self.elapsed,

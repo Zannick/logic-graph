@@ -15,14 +15,14 @@ use std::collections::BinaryHeap;
 use std::fmt::Debug;
 use std::num::NonZeroUsize;
 use std::path::Path;
-use std::sync::atomic::{AtomicBool, AtomicI32, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
 pub(crate) struct HeapElement<T: Ctx> {
     #[sort_by]
-    pub(crate) score: i32,
+    pub(crate) score: u32,
     pub(crate) el: ContextWrapper<T>,
 }
 
@@ -32,15 +32,15 @@ pub(crate) struct HeapElement<T: Ctx> {
 /// * a threshold of elapsed time can be set to make the heap ignore
 ///   items that have surpassed the elapsed time.
 pub struct LimitedHeap<T: Ctx> {
-    max_time: i32,
+    max_time: u32,
     heap: BinaryHeap<HeapElement<T>>,
-    states_seen: LruCache<T, i32, CommonHasher>,
-    scale_factor: i32,
-    iskips: i32,
-    pskips: i32,
+    states_seen: LruCache<T, u32, CommonHasher>,
+    scale_factor: u32,
+    iskips: u32,
+    pskips: u32,
     dup_skips: u32,
-    dup_pskips: i32,
-    last_clean: i32,
+    dup_pskips: u32,
+    last_clean: u32,
 }
 
 impl<T: Ctx> Default for LimitedHeap<T> {
@@ -50,13 +50,13 @@ impl<T: Ctx> Default for LimitedHeap<T> {
 }
 
 impl<T: Ctx> LimitedHeap<T> {
-    fn score(ctx: &ContextWrapper<T>, scale_factor: i32) -> i32 {
+    fn score(ctx: &ContextWrapper<T>, scale_factor: u32) -> u32 {
         scale_factor * ctx.get().progress() * ctx.get().progress() - ctx.elapsed() - ctx.penalty()
     }
 
     pub fn new() -> LimitedHeap<T> {
         LimitedHeap {
-            max_time: i32::MAX,
+            max_time: u32::MAX,
             heap: {
                 let mut h = BinaryHeap::new();
                 h.reserve(2048);
@@ -85,11 +85,11 @@ impl<T: Ctx> LimitedHeap<T> {
         self.states_seen.len()
     }
 
-    pub fn scale_factor(&self) -> i32 {
+    pub fn scale_factor(&self) -> u32 {
         self.scale_factor
     }
 
-    pub fn set_scale_factor(&mut self, factor: i32) {
+    pub fn set_scale_factor(&mut self, factor: u32) {
         self.scale_factor = factor;
         if !self.heap.is_empty() {
             println!("Recalculating scores");
@@ -103,15 +103,15 @@ impl<T: Ctx> LimitedHeap<T> {
         self.heap.is_empty()
     }
 
-    pub fn max_time(&self) -> i32 {
+    pub fn max_time(&self) -> u32 {
         self.max_time
     }
 
-    pub fn set_max_time(&mut self, max_time: i32) {
+    pub fn set_max_time(&mut self, max_time: u32) {
         self.max_time = core::cmp::min(self.max_time, max_time);
     }
 
-    pub fn set_lenient_max_time(&mut self, max_time: i32) {
+    pub fn set_lenient_max_time(&mut self, max_time: u32) {
         self.set_max_time(max_time + (max_time / 128))
     }
 
@@ -276,7 +276,7 @@ impl<T: Ctx> LimitedHeap<T> {
         })
     }
 
-    pub fn stats(&self) -> (i32, i32, u32, i32) {
+    pub fn stats(&self) -> (u32, u32, u32, u32) {
         (self.iskips, self.pskips, self.dup_skips, self.dup_pskips)
     }
 
@@ -315,12 +315,12 @@ impl<T: Ctx> LimitedHeap<T> {
 }
 
 pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
-    queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
+    queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>,
     db: HeapDB<'w, W, T>,
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
-    min_db_estimate: AtomicI32,
+    min_db_estimate: AtomicU32,
     min_evictions: usize,
     max_evictions: usize,
     min_reshuffle: usize,
@@ -342,7 +342,7 @@ where
         db_path: P,
         world: &'w W,
         startctx: &ContextWrapper<T>,
-        initial_max_time: i32,
+        initial_max_time: u32,
         max_capacity: usize,
         min_evictions: usize,
         max_evictions: usize,
@@ -361,7 +361,7 @@ where
             capacity: max_capacity.into(),
             iskips: 0.into(),
             pskips: 0.into(),
-            min_db_estimate: i32::MAX.into(),
+            min_db_estimate: u32::MAX.into(),
             min_evictions,
             max_evictions,
             min_reshuffle,
@@ -403,15 +403,15 @@ where
         self.db.cached_estimates()
     }
 
-    pub fn db_best(&self) -> i32 {
+    pub fn db_best(&self) -> u32 {
         self.min_db_estimate.load(Ordering::Acquire)
     }
 
-    pub fn score(&self, ctx: &ContextWrapper<T>) -> i32 {
+    pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
         self.db.score(ctx)
     }
 
-    pub fn estimated_remaining_time(&self, ctx: &ContextWrapper<T>) -> i32 {
+    pub fn estimated_remaining_time(&self, ctx: &ContextWrapper<T>) -> u32 {
         self.db.estimated_remaining_time(ctx.get())
     }
 
@@ -421,15 +421,15 @@ where
         self.db.len() == 0 && self.queue.lock().unwrap().is_empty()
     }
 
-    pub fn max_time(&self) -> i32 {
+    pub fn max_time(&self) -> u32 {
         self.db.max_time()
     }
 
-    pub fn set_max_time(&self, max_time: i32) {
+    pub fn set_max_time(&self, max_time: u32) {
         self.db.set_max_time(max_time);
     }
 
-    pub fn set_lenient_max_time(&self, max_time: i32) {
+    pub fn set_lenient_max_time(&self, max_time: u32) {
         self.db.set_lenient_max_time(max_time);
     }
 
@@ -514,8 +514,8 @@ where
     /// You may also specify a `min_evictions` to ensure that a certain amount of space is
     /// always cleared.
     fn evict_until(
-        queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
-        el_estimate: i32,
+        queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>,
+        el_estimate: u32,
         min_evictions: usize,
         max_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
@@ -535,9 +535,9 @@ where
     /// Retrieves up to the given number of elements from the db.
     fn retrieve(
         db: &HeapDB<W, T>,
-        max_db_estimate: &AtomicI32,
+        max_db_estimate: &AtomicU32,
         num: usize,
-    ) -> Result<Vec<(ContextWrapper<T>, i32)>, String> {
+    ) -> Result<Vec<(ContextWrapper<T>, u32)>, String> {
         println!(
             "Beginning retrieve of {} entries, we have {} in the db",
             num,
@@ -559,7 +559,7 @@ where
         if let Some(el) = res.last() {
             max_db_estimate.store(el.1, Ordering::Release);
         } else {
-            max_db_estimate.store(i32::MAX, Ordering::Release);
+            max_db_estimate.store(u32::MAX, Ordering::Release);
         }
         Ok(res)
     }
@@ -639,8 +639,8 @@ where
 
     fn do_retrieve_and_insert<'a>(
         &'a self,
-        mut queue: MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
-    ) -> Result<MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>, String>
+        mut queue: MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>,
+    ) -> Result<MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>, String>
     {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
@@ -727,7 +727,7 @@ where
 
         let keeps = self.db.remember_which(&vec)?;
         debug_assert!(vec.len() == keeps.len());
-        let vec: Vec<(ContextWrapper<T>, i32)> = vec
+        let vec: Vec<(ContextWrapper<T>, u32)> = vec
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {

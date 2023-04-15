@@ -38,7 +38,7 @@ fn mode_by_index(index: usize) -> SearchMode {
 pub fn explore<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -57,7 +57,7 @@ where
 pub fn visit_locations<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-    penalty: i32,
+    penalty: u32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -115,8 +115,8 @@ where
 pub fn activate_actions<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    local_penalty: i32,
-    global_penalty: i32,
+    local_penalty: u32,
+    global_penalty: u32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -151,7 +151,7 @@ where
 pub fn classic_step<W, T, L>(
     world: &W,
     ctx: ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L>,
@@ -172,10 +172,10 @@ where
             .into_iter()
             .map(|ctx| (spot_has_locations(world, ctx.get()), ctx))
             .collect();
-        let with_locs: i32 = (spots.iter().filter(|(l, _)| *l).count())
+        let with_locs: u32 = (spots.iter().filter(|(l, _)| *l).count())
             .try_into()
             .unwrap();
-        let spot_count: i32 = spots.len().try_into().unwrap();
+        let spot_count: u32 = spots.len().try_into().unwrap();
         let mut locs_count = 0;
         for (has_locs, ctx) in spots {
             // somewhat quadratic penalties
@@ -230,7 +230,7 @@ where
         let startctx = ContextWrapper::new(ctx);
         let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
         let start = Instant::now();
-        let (clean_ctx, max_time) = match greedy_search(world, &startctx, i32::MAX) {
+        let (clean_ctx, max_time) = match greedy_search(world, &startctx, u32::MAX) {
             Ok(wonctx) => {
                 println!("Finished greedy search in {:?}", start.elapsed());
                 let start = Instant::now();
@@ -350,7 +350,7 @@ where
             for (i, step) in oldhist.iter().rev().enumerate() {
                 prior.replay(self.world, *step);
                 if i >= first_back && !matches!(step, History::Move(_) | History::MoveLocal(_)) {
-                    if let Ok(win) = greedy_search(self.world, &prior, i32::MAX) {
+                    if let Ok(win) = greedy_search(self.world, &prior, u32::MAX) {
                         self.handle_greedy_solution(win, &prior, false, mode);
                         newstates.push(prior.clone());
                     }
@@ -402,8 +402,8 @@ where
             return ret;
         }
         d -= 1;
-        // No need to sort, when we only want to pop the max element by (progress, elapsed).
-        crate::swap_max_to_end(&mut next, |c| (c.get().progress(), -c.elapsed()));
+        // No need to sort, when we only want to pop the min element by (progress, elapsed).
+        crate::swap_max_to_end(&mut next, |c| (c.get().progress(), !c.elapsed()));
         while let Some(ctx) = next.pop() {
             ret.extend(next);
             next = Vec::new();
@@ -421,7 +421,7 @@ where
                 break;
             }
 
-            crate::swap_max_to_end(&mut next, |c| (c.get().progress(), -c.elapsed()));
+            crate::swap_max_to_end(&mut next, |c| (c.get().progress(), !c.elapsed()));
         }
         ret
     }
@@ -539,7 +539,7 @@ where {
                 // Pick a state greedily: max progress, min elapsed, and do a greedy search.
                 if let Some(ctx) = next
                     .iter()
-                    .max_by_key(|ctx| (ctx.get().progress(), -ctx.elapsed()))
+                    .max_by_key(|ctx| (ctx.get().progress(), !ctx.elapsed()))
                 {
                     if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
                         if win.elapsed() <= self.queue.max_time() {

@@ -55,6 +55,8 @@ pub enum Item {
     Fire_Arrows,
     Gold_Skulltula_Token,
     Goron_Tunic,
+    Gossip_Stone_Deku_Left,
+    Gossip_Stone_Deku_Right,
     Heart_Container,
     Hookshot,
     Hover_Boots,
@@ -118,6 +120,8 @@ impl fmt::Display for Item {
             Item::Fire_Arrows => write!(f, "{}", "Fire_Arrows"),
             Item::Gold_Skulltula_Token => write!(f, "{}", "Gold_Skulltula_Token"),
             Item::Goron_Tunic => write!(f, "{}", "Goron_Tunic"),
+            Item::Gossip_Stone_Deku_Left => write!(f, "{}", "Gossip_Stone_Deku_Left"),
+            Item::Gossip_Stone_Deku_Right => write!(f, "{}", "Gossip_Stone_Deku_Right"),
             Item::Heart_Container => write!(f, "{}", "Heart_Container"),
             Item::Hookshot => write!(f, "{}", "Hookshot"),
             Item::Hover_Boots => write!(f, "{}", "Hover_Boots"),
@@ -185,6 +189,8 @@ impl std::str::FromStr for Item {
             "Fire_Arrows" => Ok(Item::Fire_Arrows),
             "Gold_Skulltula_Token" => Ok(Item::Gold_Skulltula_Token),
             "Goron_Tunic" => Ok(Item::Goron_Tunic),
+            "Gossip_Stone_Deku_Left" => Ok(Item::Gossip_Stone_Deku_Left),
+            "Gossip_Stone_Deku_Right" => Ok(Item::Gossip_Stone_Deku_Right),
             "Heart_Container" => Ok(Item::Heart_Container),
             "Hookshot" => Ok(Item::Hookshot),
             "Hover_Boots" => Ok(Item::Hover_Boots),
@@ -230,6 +236,8 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Farores_Wind
             | Item::Fire_Arrows
             | Item::Goron_Tunic
+            | Item::Gossip_Stone_Deku_Left
+            | Item::Gossip_Stone_Deku_Right
             | Item::Heart_Container
             | Item::Hookshot
             | Item::Hover_Boots

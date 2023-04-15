@@ -197,6 +197,7 @@ areas:
         - to: Mouth
       locations:
         - name: Gossip Stone
+          item: Gossip_Stone_Deku_Left
           tags: [hint]
     - name: Right
       coord: [42, 17]
@@ -206,6 +207,7 @@ areas:
         - to: Mouth
       locations:
         - name: Gossip Stone
+          item: Gossip_Stone_Deku_Right
           tags: [hint]
     - name: Mouth
       coord: [39, 14]

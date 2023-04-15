@@ -52,7 +52,7 @@ fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
     spot_map: &EnumMap<E::SpotId, Option<ContextWrapper<T>>>,
-    max_time: i32,
+    max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
     W: World<Exit = E, Warp = Wp>,
@@ -64,8 +64,8 @@ fn expand<W, T, E, Wp>(
     for spot in world.get_area_spots(ctx.get().position()) {
         if spot_map[*spot].is_none() {
             let local = ctx.get().local_travel_time(movement_state, *spot);
-            if local < 0 {
-                // Can't move this way
+            if local > max_time || local + ctx.elapsed() > max_time {
+                // Can't move this way, or it takes too long
                 continue;
             }
             let mut newctx = ctx.clone();
@@ -113,7 +113,7 @@ fn expand<W, T, E, Wp>(
 pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
 ) -> EnumMap<E::SpotId, Option<ContextWrapper<T>>>
 where
     W: World<Exit = E>,
@@ -203,7 +203,7 @@ where
     (locs, exit)
 }
 
-pub fn can_win<W, T, L, E>(world: &W, ctx: &T, max_time: i32) -> Result<(), ContextWrapper<T>>
+pub fn can_win<W, T, L, E>(world: &W, ctx: &T, max_time: u32) -> Result<(), ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,

@@ -37,7 +37,7 @@ pub fn get_movement_state(ctx: &Context) -> MovementState {
     ]
 }
 
-pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: SpotId, dest: SpotId) -> i32 {
+pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: SpotId, dest: SpotId) -> u32 {
     match (movement_state, src, dest) {
 %% for k, table in movement_tables.items()
 %% for (s, d), f in table.items()
@@ -46,13 +46,13 @@ pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: Spot
     ([{{ k|map('lower')|join(', ') }}], SpotId::{{ s }}, SpotId::{{ d }}) => {{ ((f|sum)*1000)|int }},
 %% endfor
 %% endfor
-        _ => -1,
+        _ => u32::MAX,
     }
 }
 
-pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, i32>> {
+pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
     enum_map! {
-        SpotId::None => enum_map!{ _ => -1 },
+        SpotId::None => enum_map!{ _ => u32::MAX },
 %% for s in gl.spots()|map(attribute='id')
         SpotId::{{ s }} => enum_map! {
 %% for t in gl.spots()|map(attribute='id')
@@ -60,7 +60,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, i32>> {
             SpotId::{{ t }} => {{ (base_distances[(s, t)] * 1000)|int }},
 %% endif
 %% endfor
-            _ => -1,
+            _ => u32::MAX,
         },
 %% endfor
     }

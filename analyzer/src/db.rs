@@ -18,7 +18,7 @@ use rocksdb::{
 use serde::Serialize;
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
-use std::sync::atomic::{AtomicI32, AtomicU64, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::time::Instant;
 
 // We need the following in this wrapper impl:
@@ -52,7 +52,7 @@ pub struct HeapDB<'w, W: World, T> {
     _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
-    max_time: AtomicI32,
+    max_time: AtomicU32,
 
     seq: AtomicU64,
     size: AtomicUsize,
@@ -136,7 +136,7 @@ where
 {
     pub fn open<P>(
         p: P,
-        initial_max_time: i32,
+        initial_max_time: u32,
         world: &'w W,
         startctx: &T,
     ) -> Result<HeapDB<'w, W, T>, String>
@@ -272,15 +272,15 @@ where
         )
     }
 
-    pub fn max_time(&self) -> i32 {
+    pub fn max_time(&self) -> u32 {
         self.max_time.load(Ordering::Acquire)
     }
 
-    pub fn set_max_time(&self, max_time: i32) {
+    pub fn set_max_time(&self, max_time: u32) {
         self.max_time.fetch_min(max_time, Ordering::Release);
     }
 
-    pub fn set_lenient_max_time(&self, max_time: i32) {
+    pub fn set_lenient_max_time(&self, max_time: u32) {
         self.set_max_time(max_time + (max_time / 128))
     }
 
@@ -319,7 +319,7 @@ where
         Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
 
-    fn get_state_value(&self, cf: &ColumnFamily, state_key: &[u8]) -> Result<Option<i32>, Error> {
+    fn get_state_value(&self, cf: &ColumnFamily, state_key: &[u8]) -> Result<Option<u32>, Error> {
         match self.statedb.get_pinned_cf(cf, state_key)? {
             Some(slice) => {
                 if slice.len() != 4 {
@@ -327,13 +327,13 @@ where
                         message: format!("Invalid seen elapsed time length: {}", slice.len()),
                     });
                 }
-                Ok(Some(i32::from_be_bytes(slice.as_ref().try_into().unwrap())))
+                Ok(Some(u32::from_be_bytes(slice.as_ref().try_into().unwrap())))
             }
             None => Ok(None),
         }
     }
 
-    fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<i32>, Error> {
+    fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<u32>, Error> {
         self.get_state_value(self.seen_cf(), state_key)
     }
 
@@ -341,7 +341,7 @@ where
         &self,
         cf: &ColumnFamily,
         state_keys: I,
-    ) -> Result<Vec<Option<i32>>, Error>
+    ) -> Result<Vec<Option<u32>>, Error>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
@@ -349,7 +349,7 @@ where
             .statedb
             .multi_get_cf(state_keys.into_iter().map(|k| (cf, k)));
 
-        let parsed: Vec<Result<Option<i32>, String>> = results
+        let parsed: Vec<Result<Option<u32>, String>> = results
             .into_iter()
             .map(|res| match res {
                 Err(e) => Err(e.to_string()),
@@ -358,7 +358,7 @@ where
                     if slice.len() != 4 {
                         Err(format!("Invalid seen elapsed time length: {}", slice.len()))
                     } else {
-                        Ok(Some(i32::from_be_bytes(slice.try_into().unwrap())))
+                        Ok(Some(u32::from_be_bytes(slice.try_into().unwrap())))
                     }
                 }
             })
@@ -380,7 +380,7 @@ where
         }
     }
 
-    fn get_seen_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<i32>>, Error>
+    fn get_seen_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<u32>>, Error>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
@@ -388,14 +388,14 @@ where
     }
 
     /// Estimates the remaining time to the goal.
-    pub fn estimated_remaining_time(&self, ctx: &T) -> i32 {
+    pub fn estimated_remaining_time(&self, ctx: &T) -> u32 {
         self.scorer.estimate_remaining_time(ctx).try_into().unwrap()
     }
 
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
-    pub fn score(&self, el: &ContextWrapper<T>) -> i32 {
+    pub fn score(&self, el: &ContextWrapper<T>) -> u32 {
         el.elapsed() + self.estimated_remaining_time(el.get())
     }
 
@@ -417,7 +417,7 @@ where
         Ok(())
     }
 
-    pub fn pop(&self, score_hint: Option<i32>) -> Result<Option<ContextWrapper<T>>, Error> {
+    pub fn pop(&self, score_hint: Option<u32>) -> Result<Option<ContextWrapper<T>>, Error> {
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         let prefix: [u8; 4];
@@ -540,7 +540,7 @@ where
     /// Retrieves up to `count` elements from the database, removing them.
     pub fn retrieve(
         &self,
-        start_priority: i32,
+        start_priority: u32,
         count: usize,
     ) -> Result<Vec<ContextWrapper<T>>, Error> {
         let mut res = Vec::with_capacity(count);

@@ -6035,7 +6035,7 @@ pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
-    time: i32,
+    time: u32,
     exit_id: Option<ExitId>,
     price: Currency,
 }
@@ -6252,7 +6252,7 @@ impl world::Accessible for Location {
             }
         }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -6282,7 +6282,7 @@ impl world::Location for Location {
 #[derive(Copy, Clone, Debug)]
 pub struct Exit {
     id: ExitId,
-    time: i32,
+    time: u32,
     dest: SpotId,
     price: Currency,
     loc_id: Option<LocationId>,
@@ -6652,7 +6652,7 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::access_infect(&ctx),
         }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -6682,7 +6682,7 @@ impl world::Exit for Exit {
 #[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
-    time: i32,
+    time: u32,
     price: Currency,
 }
 
@@ -6800,7 +6800,7 @@ impl world::Accessible for Action {
                 }
             }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -6984,7 +6984,7 @@ impl world::Action for Action {
 pub struct Warp {
     id: WarpId,
     dest: SpotId,
-    time: i32,
+    time: u32,
     price: Currency,
 }
 impl world::Accessible for Warp {
@@ -7006,7 +7006,7 @@ impl world::Accessible for Warp {
                 WarpId::Menu => rules::access_not_within_menu_and_flasks__0(&ctx),
             }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -7098,7 +7098,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 108;
+    const NUM_LOCATIONS: u32 = 108;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]

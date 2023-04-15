@@ -29,7 +29,7 @@ where
     previews: &'static str,
     file: File,
     count: usize,
-    best: i32,
+    best: u32,
 }
 
 impl<T> SolutionCollector<T>
@@ -62,7 +62,7 @@ where
         self.map.len()
     }
 
-    pub fn best(&self) -> i32 {
+    pub fn best(&self) -> u32 {
         self.best
     }
 
@@ -92,7 +92,7 @@ where
         num: usize,
         minor_num: usize,
         ctx: &ContextWrapper<T>,
-        comp: i32,
+        comp: u32,
     ) -> io::Result<()> {
         let diff = ctx.elapsed() - comp;
         writeln!(
@@ -115,7 +115,7 @@ where
         file: &mut File,
         num: usize,
         ctx: &ContextWrapper<T>,
-        comp: i32,
+        comp: u32,
     ) -> io::Result<()> {
         let diff = ctx.elapsed() - comp;
         writeln!(

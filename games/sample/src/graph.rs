@@ -1551,7 +1551,7 @@ pub struct Location {
     id: LocationId,
     item: Item,
     canonical: CanonId,
-    time: i32,
+    time: u32,
     exit_id: Option<ExitId>,
     price: Currency,
 }
@@ -1611,7 +1611,7 @@ impl world::Accessible for Location {
             LocationId::KF__Shop__Entry__Item_8 => true,
         }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -1641,7 +1641,7 @@ impl world::Location for Location {
 #[derive(Copy, Clone, Debug)]
 pub struct Exit {
     id: ExitId,
-    time: i32,
+    time: u32,
     dest: SpotId,
     price: Currency,
     loc_id: Option<LocationId>,
@@ -1747,7 +1747,7 @@ impl world::Accessible for Exit {
                 ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => true,
             }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -1777,7 +1777,7 @@ impl world::Exit for Exit {
 #[derive(Copy, Clone, Debug)]
 pub struct Action {
     id: ActionId,
-    time: i32,
+    time: u32,
     price: Currency,
 }
 
@@ -1795,7 +1795,7 @@ impl world::Accessible for Action {
                 ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
             }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -1804,6 +1804,7 @@ impl world::Accessible for Action {
 }
 impl world::Action for Action {
     type ActionId = ActionId;
+    type SpotId = SpotId;
     fn id(&self) -> ActionId {
         self.id
     }
@@ -1819,6 +1820,15 @@ impl world::Action for Action {
                 rules::action_rupees__max__rupees__20_wallet_max(ctx)
             }
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => rules::action_save__position(ctx),
+        };
+        let dest = self.dest(ctx);
+        if dest != SpotId::None {
+            ctx.set_position(dest);
+        }
+    }
+    fn dest(&self, ctx: &Context) -> SpotId {
+        match self.id {
+            _ => SpotId::None,
         }
     }
 }
@@ -1827,7 +1837,7 @@ impl world::Action for Action {
 pub struct Warp {
     id: WarpId,
     dest: SpotId,
-    time: i32,
+    time: u32,
     price: Currency,
 }
 impl world::Accessible for Warp {
@@ -1841,7 +1851,7 @@ impl world::Accessible for Warp {
                 WarpId::Save => true,
             }
     }
-    fn time(&self) -> i32 {
+    fn time(&self) -> u32 {
         self.time
     }
     fn price(&self) -> &Currency {
@@ -1869,6 +1879,11 @@ impl world::Warp for Warp {
         self.dest = dest;
     }
     fn prewarp(&self, ctx: &mut Context) {
+        match self.id {
+            _ => (),
+        }
+    }
+    fn postwarp(&self, ctx: &mut Context) {
         match self.id {
             _ => (),
         }
@@ -1908,8 +1923,6 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
-    // Minimum distances for time estimates
-    all_distances: EnumMap<SpotId, EnumMap<SpotId, i32>>,
 }
 
 impl world::World for World {
@@ -1917,7 +1930,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: i32 = 47;
+    const NUM_LOCATIONS: u32 = 47;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -1964,6 +1977,86 @@ impl world::World for World {
                 LocationId::Deku_Tree__Boss_Room__Arena__Gohma,
                 LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
             ],
+        }
+    }
+
+    // Hardcoded locations. To support a randomizer, this would be better as a cache.
+    fn get_item_locations(&self, item: Item) -> Vec<LocationId> {
+        match item {
+            Item::Deku_Stick_Drop => vec![
+                LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks,
+                LocationId::KF__Baba_Corridor__Deku_Babas__Sticks,
+            ],
+            Item::Deku_Nut_Drop => vec![
+                LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts,
+                LocationId::KF__Baba_Corridor__Deku_Babas__Nuts,
+            ],
+            Item::Deku_Lobby_Web => vec![
+                LocationId::Deku_Tree__Lobby__Center__Web,
+                LocationId::Deku_Tree__Floor_3__Door__Break_Web,
+                LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web,
+            ],
+            Item::Map_Deku_Tree => vec![LocationId::Deku_Tree__Floor_2__Vines__Map_Chest],
+            Item::Deku_Slingshot_Scrub => vec![LocationId::Deku_Tree__Scrub_Room__Entry__Scrub],
+            Item::Slingshot => vec![LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest],
+            Item::Recovery_Heart => vec![
+                LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest,
+                LocationId::Deku_Tree__Compass_Room__Ledge__Chest,
+                LocationId::Deku_Tree__Basement_1__Corner__Chest,
+                LocationId::KF__Midos_House__Entry__Bottom_Right_Chest,
+            ],
+            Item::Compass_Deku_Tree => vec![LocationId::Deku_Tree__Compass_Room__Compass__Chest],
+            Item::Gold_Skulltula_Token => vec![
+                LocationId::Deku_Tree__Compass_Room__Ledge__GS,
+                LocationId::Deku_Tree__Basement_1__Center__Vines_GS,
+                LocationId::Deku_Tree__Basement_1__Corner__Gate_GS,
+                LocationId::Deku_Tree__Skull_Room__Entry__GS,
+            ],
+            Item::Deku_Basement_Switch => vec![LocationId::Deku_Tree__Basement_1__Corner__Switch],
+            Item::Deku_Basement_Web => vec![
+                LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web,
+                LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web,
+            ],
+            Item::Deku_Back_Room_Web => vec![LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web],
+            Item::Deku_Back_Room_Wall => {
+                vec![LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall]
+            }
+            Item::Deku_Basement_Block => {
+                vec![LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block]
+            }
+            Item::Deku_Basement_Scrubs => {
+                vec![LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs]
+            }
+            Item::Defeat_Gohma => vec![
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma,
+                LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill,
+            ],
+            Item::Heart_Container => vec![LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart],
+            Item::Kokiri_Emerald => vec![LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp],
+            Item::Showed_Mido => vec![LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido],
+            Item::Kokiri_Sword => vec![LocationId::KF__Boulder_Maze__Reward__Chest],
+            Item::Gossip_Stone_Deku_Left => {
+                vec![LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone]
+            }
+            Item::Gossip_Stone_Deku_Right => {
+                vec![LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone]
+            }
+            Item::Rupees_5 => vec![
+                LocationId::KF__Midos_House__Entry__Top_Left_Chest,
+                LocationId::KF__Shop__Entry__Blue_Rupee,
+            ],
+            Item::Rupees_50 => vec![LocationId::KF__Midos_House__Entry__Top_Right_Chest],
+            Item::Rupee_1 => vec![LocationId::KF__Midos_House__Entry__Bottom_Left_Chest],
+            Item::Buy_Deku_Shield => vec![LocationId::KF__Shop__Entry__Item_1],
+            Item::Buy_Deku_Nut_5 => vec![LocationId::KF__Shop__Entry__Item_2],
+            Item::Buy_Deku_Nut_10 => vec![LocationId::KF__Shop__Entry__Item_3],
+            Item::Buy_Deku_Stick_1 => vec![LocationId::KF__Shop__Entry__Item_4],
+            Item::Buy_Deku_Seeds_30 => vec![LocationId::KF__Shop__Entry__Item_5],
+            Item::Buy_Arrows_10 => vec![LocationId::KF__Shop__Entry__Item_6],
+            Item::Buy_Arrows_30 => vec![LocationId::KF__Shop__Entry__Item_7],
+            Item::Buy_Heart => vec![LocationId::KF__Shop__Entry__Item_8],
+            Item::Arrows_10 => vec![LocationId::Kak__Spider_House__Entry__Skulls_10],
+            _ => Vec::new(),
         }
     }
 
@@ -2082,6 +2175,10 @@ impl world::World for World {
         }
     }
 
+    fn get_all_spots(&self) -> &[SpotId] {
+        self.raw_spots.as_slice()
+    }
+
     fn skip_unused_items(&self, ctx: &mut Context) {
         for (id, loc) in &self.locations {
             if unused_item(world::Location::item(loc))
@@ -2100,165 +2197,30 @@ impl world::World for World {
         }
     }
 
-    fn items_needed(&self, ctx: &Context) -> Vec<Item> {
+    fn items_needed(&self, ctx: &Context) -> Vec<(Item, i16)> {
         let mut vec = Vec::new();
         match self.objective {
             Objective::Gohma => {
                 if !ctx.has(Item::Kokiri_Emerald) {
-                    vec.push(Item::Kokiri_Emerald);
-                }
-                if !ctx.has(Item::Ocarina) {
-                    vec.push(Item::Ocarina);
-                }
-                if !ctx.has(Item::Bombs) {
-                    vec.push(Item::Bombs);
-                }
-                if !ctx.has(Item::Buy_Deku_Shield) {
-                    vec.push(Item::Buy_Deku_Shield);
-                }
-                if !ctx.has(Item::Deku_Shield_Drop) {
-                    vec.push(Item::Deku_Shield_Drop);
-                }
-                if !ctx.has(Item::Magic_Meter) {
-                    vec.push(Item::Magic_Meter);
-                }
-                if !ctx.has(Item::Bow) {
-                    vec.push(Item::Bow);
-                }
-                if !ctx.has(Item::Kokiri_Sword) {
-                    vec.push(Item::Kokiri_Sword);
-                }
-                if !ctx.has(Item::Buy_Deku_Stick_1) {
-                    vec.push(Item::Buy_Deku_Stick_1);
-                }
-                if !ctx.has(Item::Deku_Stick_Drop) {
-                    vec.push(Item::Deku_Stick_Drop);
-                }
-                if !ctx.has(Item::Hylian_Shield) {
-                    vec.push(Item::Hylian_Shield);
-                }
-                if !ctx.has(Item::Slingshot) {
-                    vec.push(Item::Slingshot);
-                }
-                if !ctx.has(Item::Boomerang) {
-                    vec.push(Item::Boomerang);
-                }
-                if !ctx.has(Item::Buy_Deku_Nut_5) {
-                    vec.push(Item::Buy_Deku_Nut_5);
-                }
-                if !ctx.has(Item::Buy_Deku_Nut_10) {
-                    vec.push(Item::Buy_Deku_Nut_10);
-                }
-                if !ctx.has(Item::Deku_Nut_Drop) {
-                    vec.push(Item::Deku_Nut_Drop);
+                    vec.push((Item::Kokiri_Emerald, 1));
                 }
             }
             Objective::Ganon => {
                 if !ctx.has(Item::Defeat_Ganon) {
-                    vec.push(Item::Defeat_Ganon);
-                }
-                if !ctx.has(Item::Ocarina) {
-                    vec.push(Item::Ocarina);
-                }
-                if !ctx.has(Item::Bombs) {
-                    vec.push(Item::Bombs);
-                }
-                if !ctx.has(Item::Buy_Deku_Shield) {
-                    vec.push(Item::Buy_Deku_Shield);
-                }
-                if !ctx.has(Item::Deku_Shield_Drop) {
-                    vec.push(Item::Deku_Shield_Drop);
-                }
-                if !ctx.has(Item::Magic_Meter) {
-                    vec.push(Item::Magic_Meter);
-                }
-                if !ctx.has(Item::Bow) {
-                    vec.push(Item::Bow);
-                }
-                if !ctx.has(Item::Kokiri_Sword) {
-                    vec.push(Item::Kokiri_Sword);
-                }
-                if !ctx.has(Item::Buy_Deku_Stick_1) {
-                    vec.push(Item::Buy_Deku_Stick_1);
-                }
-                if !ctx.has(Item::Deku_Stick_Drop) {
-                    vec.push(Item::Deku_Stick_Drop);
-                }
-                if !ctx.has(Item::Hylian_Shield) {
-                    vec.push(Item::Hylian_Shield);
-                }
-                if !ctx.has(Item::Slingshot) {
-                    vec.push(Item::Slingshot);
-                }
-                if !ctx.has(Item::Boomerang) {
-                    vec.push(Item::Boomerang);
-                }
-                if !ctx.has(Item::Buy_Deku_Nut_5) {
-                    vec.push(Item::Buy_Deku_Nut_5);
-                }
-                if !ctx.has(Item::Buy_Deku_Nut_10) {
-                    vec.push(Item::Buy_Deku_Nut_10);
-                }
-                if !ctx.has(Item::Deku_Nut_Drop) {
-                    vec.push(Item::Deku_Nut_Drop);
+                    vec.push((Item::Defeat_Ganon, 1));
                 }
             }
             Objective::Triforce_Hunt => {
-                if ctx.count(Item::Triforce_Piece) < ct {
-                    vec.push(Item::Triforce_Piece);
-                }
-                if !ctx.has(Item::Ocarina) {
-                    vec.push(Item::Ocarina);
-                }
-                if !ctx.has(Item::Bombs) {
-                    vec.push(Item::Bombs);
-                }
-                if !ctx.has(Item::Buy_Deku_Shield) {
-                    vec.push(Item::Buy_Deku_Shield);
-                }
-                if !ctx.has(Item::Deku_Shield_Drop) {
-                    vec.push(Item::Deku_Shield_Drop);
-                }
-                if !ctx.has(Item::Magic_Meter) {
-                    vec.push(Item::Magic_Meter);
-                }
-                if !ctx.has(Item::Bow) {
-                    vec.push(Item::Bow);
-                }
-                if !ctx.has(Item::Kokiri_Sword) {
-                    vec.push(Item::Kokiri_Sword);
-                }
-                if !ctx.has(Item::Buy_Deku_Stick_1) {
-                    vec.push(Item::Buy_Deku_Stick_1);
-                }
-                if !ctx.has(Item::Deku_Stick_Drop) {
-                    vec.push(Item::Deku_Stick_Drop);
-                }
-                if !ctx.has(Item::Hylian_Shield) {
-                    vec.push(Item::Hylian_Shield);
-                }
-                if !ctx.has(Item::Slingshot) {
-                    vec.push(Item::Slingshot);
-                }
-                if !ctx.has(Item::Boomerang) {
-                    vec.push(Item::Boomerang);
-                }
-                if !ctx.has(Item::Buy_Deku_Nut_5) {
-                    vec.push(Item::Buy_Deku_Nut_5);
-                }
-                if !ctx.has(Item::Buy_Deku_Nut_10) {
-                    vec.push(Item::Buy_Deku_Nut_10);
-                }
-                if !ctx.has(Item::Deku_Nut_Drop) {
-                    vec.push(Item::Deku_Nut_Drop);
+                if ctx.count(Item::Triforce_Piece) < 1024 {
+                    vec.push((Item::Triforce_Piece, 1024 - ctx.count(Item::Triforce_Piece)));
                 }
             }
         };
         vec
     }
 
-    fn estimated_distance(&self, sp1: SpotId, sp2: SpotId) -> i32 {
-        self.all_distances[sp1][sp2]
+    fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
+        movements::base_edges()
     }
 
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
@@ -2268,8 +2230,7 @@ impl world::World for World {
 
 impl World {
     pub fn new() -> World {
-        let start = std::time::Instant::now();
-        let mut w = World {
+        World {
             objective: Objective::default(),
             locations: build_locations(),
             exits: build_exits(),
@@ -2334,42 +2295,7 @@ impl World {
                 start: ActionId::Global__Change_Time.into_usize(),
                 end: ActionId::Global__Change_Time.into_usize() + 1,
             },
-            all_distances: movements::build_base_distances(),
-        };
-
-        // Floyd-Warshall
-        for mid in w.raw_spots {
-            for first in w.raw_spots {
-                for last in w.raw_spots {
-                    if w.all_distances[first][mid] > -1 && w.all_distances[mid][last] > -1 {
-                        if w.all_distances[first][last] > -1 {
-                            w.all_distances[first][last] = std::cmp::min(
-                                w.all_distances[first][last],
-                                w.all_distances[first][mid] + w.all_distances[mid][last],
-                            );
-                        } else {
-                            w.all_distances[first][last] =
-                                w.all_distances[first][mid] + w.all_distances[mid][last];
-                        }
-                    }
-                }
-            }
         }
-
-        let mut c = 0;
-        for first in w.raw_spots {
-            for last in w.raw_spots {
-                if w.all_distances[first][last] > -1 {
-                    c += 1;
-                }
-            }
-        }
-        println!(
-            "World built with {} nonnegative distances in {:?}.",
-            c,
-            start.elapsed()
-        );
-        w
     }
 
     fn unused_by_objective(&self, item: Item) -> bool {
@@ -2388,6 +2314,8 @@ impl World {
                     | Item::Farores_Wind
                     | Item::Fire_Arrows
                     | Item::Goron_Tunic
+                    | Item::Gossip_Stone_Deku_Left
+                    | Item::Gossip_Stone_Deku_Right
                     | Item::Heart_Container
                     | Item::Hookshot
                     | Item::Hover_Boots
@@ -2417,6 +2345,8 @@ impl World {
                     | Item::Farores_Wind
                     | Item::Fire_Arrows
                     | Item::Goron_Tunic
+                    | Item::Gossip_Stone_Deku_Left
+                    | Item::Gossip_Stone_Deku_Right
                     | Item::Heart_Container
                     | Item::Hookshot
                     | Item::Hover_Boots
@@ -2448,6 +2378,8 @@ impl World {
                     | Item::Farores_Wind
                     | Item::Fire_Arrows
                     | Item::Goron_Tunic
+                    | Item::Gossip_Stone_Deku_Left
+                    | Item::Gossip_Stone_Deku_Right
                     | Item::Heart_Container
                     | Item::Hookshot
                     | Item::Hover_Boots
@@ -2722,7 +2654,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => Location {
             id: LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone,
             canonical: CanonId::None,
-            item: Item::None,
+            item: Item::Gossip_Stone_Deku_Left,
             price: Currency::Free,
             time: 1000,
             exit_id: None,
@@ -2730,7 +2662,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => Location {
             id: LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone,
             canonical: CanonId::None,
-            item: Item::None,
+            item: Item::Gossip_Stone_Deku_Right,
             price: Currency::Free,
             time: 1000,
             exit_id: None,

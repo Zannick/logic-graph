@@ -8,7 +8,7 @@ pub fn first_spot_with_locations_after_actions<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_depth: i8,
-    max_time: i32,
+    max_time: u32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Exit = E, Location = L>,
@@ -141,7 +141,7 @@ where
 fn greedy_internal<W, T, L, E>(
     world: &W,
     mut ctx: ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
     max_depth: i8,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
@@ -169,7 +169,7 @@ where
 pub fn greedy_search<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -183,7 +183,7 @@ where
 pub fn greedy_search_from<W, T, L, E>(
     world: &W,
     ctx: &T,
-    max_time: i32,
+    max_time: u32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -198,7 +198,7 @@ pub fn minimize_greedy<W, T, L, E>(
     world: &W,
     startctx: &T,
     wonctx: &ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
 ) -> ContextWrapper<T>
 where
     W: World<Location = L, Exit = E>,
@@ -213,7 +213,7 @@ where
 pub fn minimal_greedy_playthrough<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    max_time: i32,
+    max_time: u32,
 ) -> ContextWrapper<T>
 where
     W: World<Location = L, Exit = E>,
