@@ -1,6 +1,5 @@
 use crate::access::*;
 use crate::context::*;
-use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
@@ -157,7 +156,7 @@ where
     world: &'a W,
     startctx: ContextWrapper<T>,
     solutions: Mutex<SolutionCollector<T>>,
-    queue: RocksBackedQueue<T>,
+    queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicU64,
     extras: AtomicU64,
     deadends: AtomicU32,
@@ -172,15 +171,6 @@ where
 {
     pub fn new(world: &'a W, mut ctx: T) -> Result<Search<'a, W, T>, std::io::Error> {
         world.skip_unused_items(&mut ctx);
-        let s = Instant::now();
-        let scorer = ContextScorer::shortest_paths(world, &ctx);
-        println!("Built scorer in {:?}", s.elapsed());
-        let s = Instant::now();
-        let c = scorer.estimate_remaining_time(&ctx);
-        println!("Calculated estimate {} in {:?}", c, s.elapsed());
-        let s = Instant::now();
-        let c = scorer.estimate_remaining_time(&ctx);
-        println!("Calculated estimate again {} in {:?}", c, s.elapsed());
 
         let startctx = ContextWrapper::new(ctx);
         let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
@@ -218,6 +208,8 @@ where
 
         let queue = RocksBackedQueue::new(
             ".db",
+            world,
+            &startctx,
             max_time + max_time / 10,
             1_048_576,
             1_024,
@@ -440,13 +432,24 @@ where
             rayon::current_num_threads()
         );
 
-        struct Iter<'a, T: Ctx> {
-            q: &'a RocksBackedQueue<T>,
+        struct Iter<'a, W, T>
+        where
+            W: World,
+            T: Ctx<World = W>,
+        {
+            q: &'a RocksBackedQueue<'a, W, T>,
         }
-        impl<'a, T: Ctx> Iterator for Iter<'a, T> {
+        impl<'a, W, T> Iterator for Iter<'a, W, T>
+        where
+            W: World,
+            T: Ctx<World = W>,
+            W::Location: Accessible<Context = T>,
+            W::Warp: Accessible<Context = T>,
+        {
             type Item = ContextWrapper<T>;
 
-            fn next(&mut self) -> Option<Self::Item> {
+            fn next(&mut self) -> Option<Self::Item>
+where {
                 self.q.pop().unwrap()
             }
         }
@@ -602,8 +605,8 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         println!(
-            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}, scale factor: {}) ---\n\
-            Stats: heap={}; db={}; total={}; seen={};\n\
+            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}) ---\n\
+            Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
             limit: {}ms; db best: {}; evictions: {}; retrievals: {}\n\
             push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
             {}",
@@ -612,11 +615,12 @@ where
             sols.len(),
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
-            self.queue.scale_factor(),
             self.queue.heap_len(),
             self.queue.db_len(),
             self.queue.len(),
             self.queue.seen(),
+            self.queue.estimates(),
+            self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
             self.queue.evictions(),
@@ -625,7 +629,7 @@ where
             dskips,
             pskips,
             dpskips,
-            ctx.info(self.queue.scale_factor())
+            ctx.info(self.queue.estimated_remaining_time(ctx))
         );
     }
 }

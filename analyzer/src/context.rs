@@ -253,25 +253,6 @@ impl<T: Ctx> ContextWrapper<T> {
         self.bonus
     }
 
-    pub fn score(&self, scale_factor: i32) -> i32 {
-        // We want to sort by elapsed time, low to high:
-        // with a bonus based on progress to prioritize states closer to the end:
-        //   + 50 * progress * progress [progress in range 0..100]
-        //   i.e. 0 to 500,000
-        // (on the order of the real max time seems good)
-        // However, we want to make sure we get variety in the early-to-mid game,
-        // so we have to prioritize low-progress/low-elapsed times.
-        // penalty is added to states that do really inefficient things
-        // and to deprioritize actions
-        let progress = self.ctx.progress();
-        -self.elapsed - self.penalty + self.bonus
-            + if progress > 25 {
-                scale_factor * progress * progress
-            } else {
-                scale_factor * 25 * 25
-            }
-    }
-
     pub fn get(&self) -> &T {
         &self.ctx
     }
@@ -425,11 +406,11 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn info(&self, scale_factor: i32) -> String {
+    pub fn info(&self, est: i32) -> String {
         format(format_args!(
-            "At {}ms (score={}), visited={}, skipped={}, penalty={}, bonus={}\nNow: {} after {}",
+            "At {}ms (est. left={}), visited={}, skipped={}, penalty={}, bonus={}\nNow: {} after {}",
             self.elapsed,
-            self.score(scale_factor),
+            est,
             self.get().count_visits(),
             self.get().count_skips(),
             self.penalty,

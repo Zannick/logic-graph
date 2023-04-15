@@ -19,6 +19,7 @@ pub struct ContextScorer<'w, W, S, LI, A> {
     known_costs: Mutex<HashMap<(S, Vec<LI>), u64, CommonHasher>>,
 
     estimates: AtomicUsize,
+    cached_estimates: AtomicUsize,
 }
 
 impl<'w, W, S, L, E, A> ContextScorer<'w, W, S, L::LocId, A>
@@ -38,6 +39,7 @@ where
             algo: A::from_graph(build_simple_graph(world, startctx)),
             known_costs: Mutex::new(new_hashmap()),
             estimates: 0.into(),
+            cached_estimates: 0.into(),
         }
     }
 
@@ -45,11 +47,18 @@ where
         self.estimates.load(Ordering::Acquire)
     }
 
+    pub fn cached_estimates(&self) -> usize {
+        self.cached_estimates.load(Ordering::Acquire)
+    }
+
     pub fn estimate_remaining_time<T>(&self, ctx: &T) -> u64
     where
         T: Ctx<World = W>,
         L: Location<Context = T>,
     {
+        if self.world.won(ctx) {
+            return 0;
+        }
         let key: (S, Vec<_>) = (
             ctx.position(),
             self.world
@@ -60,8 +69,10 @@ where
                 .collect(),
         );
         let locked_map = self.known_costs.lock().unwrap();
-        if let Some(c) = locked_map.get(&key) {
-            *c
+        if let Some(&c) = locked_map.get(&key) {
+            drop(locked_map);
+            self.cached_estimates.fetch_add(1, Ordering::Release);
+            c
         } else {
             drop(locked_map);
             let nodes = key

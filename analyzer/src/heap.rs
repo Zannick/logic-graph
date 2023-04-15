@@ -2,6 +2,7 @@ extern crate plotlib;
 
 use crate::context::*;
 use crate::db::HeapDB;
+use crate::world::*;
 use crate::CommonHasher;
 use lru::LruCache;
 use plotlib::page::Page;
@@ -313,9 +314,9 @@ impl<T: Ctx> LimitedHeap<T> {
     }
 }
 
-pub struct RocksBackedQueue<T: Ctx> {
+pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, i32, CommonHasher>>,
-    db: HeapDB<T>,
+    db: HeapDB<'w, W, T>,
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
@@ -329,25 +330,34 @@ pub struct RocksBackedQueue<T: Ctx> {
     retrieving: AtomicBool,
 }
 
-impl<T: Ctx> RocksBackedQueue<T> {
+impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+{
     pub fn new<P>(
         db_path: P,
+        world: &'w W,
+        startctx: &ContextWrapper<T>,
         initial_max_time: i32,
         max_capacity: usize,
         min_evictions: usize,
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
-    ) -> Result<RocksBackedQueue<T>, String>
+    ) -> Result<RocksBackedQueue<'w, W, T>, String>
     where
         P: AsRef<Path>,
     {
-        Ok(RocksBackedQueue {
+        let q = RocksBackedQueue {
             queue: Mutex::new(DoublePriorityQueue::with_capacity_and_hasher(
                 max_capacity,
                 CommonHasher::default(),
             )),
-            db: HeapDB::open(db_path, initial_max_time)?,
+            db: HeapDB::open(db_path, initial_max_time, world, startctx.get())?,
             capacity: max_capacity.into(),
             iskips: 0.into(),
             pskips: 0.into(),
@@ -359,7 +369,14 @@ impl<T: Ctx> RocksBackedQueue<T> {
             evictions: 0.into(),
             retrievals: 0.into(),
             retrieving: false.into(),
-        })
+        };
+        let s = Instant::now();
+        let c = q.score(startctx);
+        println!("Calculated estimate {} in {:?}", c, s.elapsed());
+        let s = Instant::now();
+        let c = q.score(startctx);
+        println!("Calculated estimate again {} in {:?}", c, s.elapsed());
+        Ok(q)
     }
 
     pub fn heap_len(&self) -> usize {
@@ -378,8 +395,24 @@ impl<T: Ctx> RocksBackedQueue<T> {
         self.db.seen()
     }
 
+    pub fn estimates(&self) -> usize {
+        self.db.estimates()
+    }
+
+    pub fn cached_estimates(&self) -> usize {
+        self.db.cached_estimates()
+    }
+
     pub fn db_best(&self) -> i32 {
         self.max_db_priority.load(Ordering::Acquire)
+    }
+
+    pub fn score(&self, ctx: &ContextWrapper<T>) -> i32 {
+        self.db.score(ctx)
+    }
+
+    pub fn estimated_remaining_time(&self, ctx: &ContextWrapper<T>) -> i32 {
+        self.db.estimated_remaining_time(ctx.get())
     }
 
     /// Returns whether the underlying queue and db are actually empty.
@@ -425,7 +458,11 @@ impl<T: Ctx> RocksBackedQueue<T> {
             return Ok(());
         }
 
-        let priority = el.score(self.db.scale_factor());
+        let priority = self.db.score(&el);
+        if priority > self.db.max_time() {
+            self.iskips.fetch_add(1, Ordering::Release);
+            return Ok(());
+        };
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -447,21 +484,9 @@ impl<T: Ctx> RocksBackedQueue<T> {
                         self.min_evictions,
                         max_evictions,
                     ));
-                    debug_assert!(
-                        priority == el.score(self.db.scale_factor()),
-                        "priority {} didn't match score {}",
-                        priority,
-                        el.score(self.db.scale_factor())
-                    );
                     queue.push(el, priority);
                 }
             } else {
-                debug_assert!(
-                    priority == el.score(self.db.scale_factor()),
-                    "priority {} didn't match score {}",
-                    priority,
-                    el.score(self.db.scale_factor())
-                );
                 queue.push(el, priority);
             }
         }
@@ -472,7 +497,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             if !ev.is_empty() {
                 let best = ev
                     .iter()
-                    .map(|ctx| ctx.score(self.db.scale_factor()))
+                    .map(|ctx| self.db.score(ctx))
                     .max()
                     .unwrap();
                 self.db.extend(ev, true)?;
@@ -512,7 +537,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
 
     /// Retrieves up to the given number of elements from the db.
     fn retrieve(
-        db: &HeapDB<T>,
+        db: &HeapDB<W, T>,
         max_db_priority: &AtomicI32,
         num: usize,
     ) -> Result<Vec<(ContextWrapper<T>, i32)>, String> {
@@ -526,7 +551,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             .retrieve(max_db_priority.load(Ordering::Acquire), num)?
             .into_iter()
             .map(|el| {
-                let score = el.score(db.scale_factor());
+                let score = db.score(&el);
                 (el, score)
             })
             .collect();
@@ -573,7 +598,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
 
                         let best = evicted
                             .iter()
-                            .map(|ctx| ctx.score(self.db.scale_factor()))
+                            .map(|ctx| self.db.score(ctx))
                             .max()
                             .unwrap();
                         self.db.extend(evicted, true)?;
@@ -593,10 +618,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
                 }
                 let (ctx, prio) = queue.pop_max().unwrap();
                 debug_assert!(
-                    prio == ctx.score(self.db.scale_factor()),
+                    prio == self.db.score(&ctx),
                     "priority {} didn't match score {}",
                     prio,
-                    ctx.score(self.db.scale_factor())
+                    self.db.score(&ctx)
                 );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -642,10 +667,10 @@ impl<T: Ctx> RocksBackedQueue<T> {
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((ctx, prio)) = queue.pop_min() {
                 debug_assert!(
-                    prio == ctx.score(self.db.scale_factor()),
+                    prio == self.db.score(&ctx),
                     "priority {} didn't match score {}",
                     prio,
-                    ctx.score(self.db.scale_factor())
+                    self.db.score(&ctx)
                 );
                 if ctx.elapsed() > self.db.max_time() {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -690,7 +715,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         let vec: Vec<ContextWrapper<T>> = iter
             .into_iter()
             .filter(|el| {
-                if el.elapsed() > self.db.max_time() {
+                if el.elapsed() > self.db.max_time() || self.db.score(&el) > self.db.max_time() {
                     iskips += 1;
                     false
                 } else {
@@ -710,7 +735,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if keep {
-                    let priority = el.score(self.db.scale_factor());
+                    let priority = self.db.score(&el);
                     Some((el, priority))
                 } else {
                     None
@@ -746,7 +771,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
             if !ev.is_empty() {
                 let best = ev
                     .iter()
-                    .map(|ctx| ctx.score(self.db.scale_factor()))
+                    .map(|ctx| self.db.score(ctx))
                     .max()
                     .unwrap();
                 self.db.extend(ev, true)?;
@@ -782,7 +807,7 @@ impl<T: Ctx> RocksBackedQueue<T> {
         let mut time_progress = Vec::new();
         for c in queue.iter() {
             let elapsed: f64 = c.0.elapsed().into();
-            let score: f64 = c.0.score(self.db.scale_factor()).into();
+            let score: f64 = self.db.score(&c.0).into();
             let progress: f64 = c.0.get().progress().into();
             time_scores.push((elapsed, score));
             time_progress.push((elapsed, progress));
