@@ -1,4 +1,4 @@
-use super::graph::SimpleGraph;
+use super::graph::{Edge, SimpleGraph};
 use crate::CommonHasher;
 use std::collections::HashSet;
 use std::fmt::Display;
@@ -35,15 +35,27 @@ where
 pub trait SteinerAlgo<V, E> {
     const NAME: &'static str;
     fn from_graph(graph: SimpleGraph<V, E>) -> Self;
+    fn graph(&self) -> &SimpleGraph<V, E>;
+
     /// Attempts to construct a Steiner approximation arborescence on the given graph,
     /// from the given root (index) and with the given required node (indices).
-    fn compute(&self, root: V, required: HashSet<V, CommonHasher>) -> Option<ApproxSteiner<E>>;
+    fn compute(
+        &self,
+        root: V,
+        required: HashSet<V, CommonHasher>,
+        extra_edges: Vec<Edge<E>>,
+    ) -> Option<ApproxSteiner<E>>;
     /// Same as compute but only returns the cost of the tree.
-    fn compute_cost(&self, root: V, required: HashSet<V, CommonHasher>) -> Option<u64> {
+    fn compute_cost(
+        &self,
+        root: V,
+        required: HashSet<V, CommonHasher>,
+        extra_edges: Vec<Edge<E>>,
+    ) -> Option<u64> {
         if let Some(ApproxSteiner {
             arborescence: _,
             cost,
-        }) = self.compute(root, required)
+        }) = self.compute(root, required, extra_edges)
         {
             Some(cost)
         } else {

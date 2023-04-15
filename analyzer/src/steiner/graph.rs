@@ -65,15 +65,19 @@ pub type NodeId<W> = ExternalNodeId<
 >;
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-pub enum ExternalEdgeId<S, L, C> {
+pub enum ExternalEdgeId<S, L, C, Wp, A> {
     Spots(S, S),
     Loc(S, L),
     Canon(S, C),
+    Warp(Wp),
+    Action(A),
 }
 pub type EdgeId<W> = ExternalEdgeId<
     <<W as World>::Exit as Exit>::SpotId,
     <<W as World>::Location as Location>::LocId,
     <<W as World>::Location as Location>::CanonId,
+    <<W as World>::Warp as Warp>::WarpId,
+    <<W as World>::Action as Action>::ActionId,
 >;
 
 pub fn build_graph<W, T>(world: &W, startctx: &T) -> Graph<NodeId<W>, EdgeId<W>>
@@ -242,6 +246,20 @@ where
         nodes,
         node_index_map,
         edges,
+    }
+}
+
+impl<V, E> SimpleGraph<V, E>
+where
+    V: Eq + std::hash::Hash,
+{
+    pub fn new_edge(&self, id: E, src: V, dst: V, wt: u64) -> Edge<E> {
+        Edge {
+            id,
+            src: self.node_index_map[&src],
+            dst: self.node_index_map[&dst],
+            wt,
+        }
     }
 }
 

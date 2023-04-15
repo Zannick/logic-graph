@@ -83,9 +83,42 @@ where
                 .1
                 .iter()
                 .map(|loc_id| loc_to_graph_node(self.world, *loc_id));
+            let extra_edges: Vec<_> = self
+                .world
+                .get_warps()
+                .iter()
+                .filter_map(|wp| {
+                    if wp.can_access(ctx) {
+                        Some(self.algo.graph().new_edge(
+                            ExternalEdgeId::Warp(wp.id()),
+                            ExternalNodeId::Spot(ctx.position()),
+                            ExternalNodeId::Spot(wp.dest(ctx)),
+                            wp.time().try_into().unwrap(),
+                        ))
+                    } else {
+                        None
+                    }
+                })
+                .chain(self.world.get_global_actions().iter().filter_map(|act| {
+                    if act.dest(ctx) != Default::default() && act.can_access(ctx) {
+                        Some(self.algo.graph().new_edge(
+                            ExternalEdgeId::Action(act.id()),
+                            ExternalNodeId::Spot(ctx.position()),
+                            ExternalNodeId::Spot(act.dest(ctx)),
+                            act.time().try_into().unwrap(),
+                        ))
+                    } else {
+                        None
+                    }
+                }))
+                .collect();
             let c = self
                 .algo
-                .compute_cost(spot_to_graph_node::<W, E>(ctx.position()), nodes.collect())
+                .compute_cost(
+                    spot_to_graph_node::<W, E>(ctx.position()),
+                    nodes.collect(),
+                    extra_edges,
+                )
                 .unwrap();
             {
                 let mut locked_map = self.known_costs.lock().unwrap();
