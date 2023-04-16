@@ -42,6 +42,7 @@ pub struct HeapDB<'w, W: World, T> {
         W,
         <<W as World>::Exit as Exit>::SpotId,
         <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
     db: DB,

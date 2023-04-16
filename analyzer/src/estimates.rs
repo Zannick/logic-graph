@@ -10,19 +10,19 @@ use std::sync::Mutex;
 // What we basically need is a helper that contains the necessary cache elements
 // for scoring, that the DB can fall back to. Probably better than bloating the
 // DB struct and functionality.
-pub struct ContextScorer<'w, W, S, LI, A> {
+pub struct ContextScorer<'w, W, S, LI, EI, A> {
     // the cache is a map from start point and remaining locations to u64
     // but we also hold the Algo which contains precalculations for generating
     world: &'w W,
     algo: A,
 
-    known_costs: Mutex<HashMap<(S, Vec<LI>), u64, CommonHasher>>,
+    known_costs: Mutex<HashMap<(S, Vec<LI>, Vec<Edge<EI>>), u64, CommonHasher>>,
 
     estimates: AtomicUsize,
     cached_estimates: AtomicUsize,
 }
 
-impl<'w, W, S, L, E, A> ContextScorer<'w, W, S, L::LocId, A>
+impl<'w, W, S, L, E, A> ContextScorer<'w, W, S, L::LocId, EdgeId<W>, A>
 where
     W: World<Location = L, Exit = E>,
     L: Location<ExitId = E::ExitId>,
@@ -63,7 +63,37 @@ where
         if pos == S::default() {
             pos = ctx.position();
         }
-        let key: (S, Vec<_>) = (
+        let extra_edges: Vec<_> = self
+            .world
+            .get_warps()
+            .iter()
+            .filter_map(|wp| {
+                if wp.can_access(ctx) {
+                    Some(self.algo.graph().new_edge(
+                        ExternalEdgeId::Warp(wp.id()),
+                        ExternalNodeId::Spot(ctx.position()),
+                        ExternalNodeId::Spot(wp.dest(ctx)),
+                        wp.time().try_into().unwrap(),
+                    ))
+                } else {
+                    None
+                }
+            })
+            .chain(self.world.get_global_actions().iter().filter_map(|act| {
+                if act.dest(ctx) != Default::default() && act.can_access(ctx) {
+                    Some(self.algo.graph().new_edge(
+                        ExternalEdgeId::Action(act.id()),
+                        ExternalNodeId::Spot(ctx.position()),
+                        ExternalNodeId::Spot(act.dest(ctx)),
+                        act.time().try_into().unwrap(),
+                    ))
+                } else {
+                    None
+                }
+            }))
+            .collect();
+
+        let key: (S, Vec<_>, Vec<_>) = (
             pos,
             self.world
                 .items_needed(ctx)
@@ -71,6 +101,7 @@ where
                 .map(|(item, _)| self.world.get_item_locations(item))
                 .flatten()
                 .collect(),
+            extra_edges.clone(),
         );
         let locked_map = self.known_costs.lock().unwrap();
         if let Some(&c) = locked_map.get(&key) {
@@ -83,35 +114,6 @@ where
                 .1
                 .iter()
                 .map(|loc_id| loc_to_graph_node(self.world, *loc_id));
-            let extra_edges: Vec<_> = self
-                .world
-                .get_warps()
-                .iter()
-                .filter_map(|wp| {
-                    if wp.can_access(ctx) {
-                        Some(self.algo.graph().new_edge(
-                            ExternalEdgeId::Warp(wp.id()),
-                            ExternalNodeId::Spot(ctx.position()),
-                            ExternalNodeId::Spot(wp.dest(ctx)),
-                            wp.time().try_into().unwrap(),
-                        ))
-                    } else {
-                        None
-                    }
-                })
-                .chain(self.world.get_global_actions().iter().filter_map(|act| {
-                    if act.dest(ctx) != Default::default() && act.can_access(ctx) {
-                        Some(self.algo.graph().new_edge(
-                            ExternalEdgeId::Action(act.id()),
-                            ExternalNodeId::Spot(ctx.position()),
-                            ExternalNodeId::Spot(act.dest(ctx)),
-                            act.time().try_into().unwrap(),
-                        ))
-                    } else {
-                        None
-                    }
-                }))
-                .collect();
             let c = if let Some(c) = self.algo.compute_cost(
                 spot_to_graph_node::<W, E>(ctx.position()),
                 nodes.collect(),
@@ -132,7 +134,7 @@ where
     }
 }
 
-impl<'w, W, S, L, E> ContextScorer<'w, W, S, L::LocId, ShortestPaths<NodeId<W>, EdgeId<W>>>
+impl<'w, W, S, L, E> ContextScorer<'w, W, S, L::LocId, EdgeId<W>, ShortestPaths<NodeId<W>, EdgeId<W>>>
 where
     W: World<Location = L, Exit = E>,
     L: Location<ExitId = E::ExitId>,

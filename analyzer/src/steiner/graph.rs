@@ -28,7 +28,7 @@ pub struct Node<V, E> {
     queue: PairingHeap<Edge<E>, u64>,
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub struct Edge<E> {
     // generally the external id
     pub id: E,
