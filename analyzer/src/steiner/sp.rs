@@ -161,7 +161,7 @@ where
         &self,
         root: V,
         mut required: HashSet<V, CommonHasher>,
-        extra_edges: Vec<Edge<E>>,
+        extra_edges: &Vec<Edge<E>>,
     ) -> Option<ApproxSteiner<E>> {
         let root_index = self.graph.node_index_map[&root];
 
@@ -177,7 +177,7 @@ where
                 true
             }
         }) {
-            _newpaths = Some(self.build_paths_table(&extra_edges));
+            _newpaths = Some(self.build_paths_table(extra_edges));
             &_newpaths.as_ref().unwrap()
         } else {
             &self.paths

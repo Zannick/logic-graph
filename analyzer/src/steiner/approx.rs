@@ -43,14 +43,14 @@ pub trait SteinerAlgo<V, E> {
         &self,
         root: V,
         required: HashSet<V, CommonHasher>,
-        extra_edges: Vec<Edge<E>>,
+        extra_edges: &Vec<Edge<E>>,
     ) -> Option<ApproxSteiner<E>>;
     /// Same as compute but only returns the cost of the tree.
     fn compute_cost(
         &self,
         root: V,
         required: HashSet<V, CommonHasher>,
-        extra_edges: Vec<Edge<E>>,
+        extra_edges: &Vec<Edge<E>>,
     ) -> Option<u64> {
         if let Some(ApproxSteiner {
             arborescence: _,

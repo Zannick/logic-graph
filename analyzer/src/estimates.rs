@@ -101,7 +101,7 @@ where
                 .map(|(item, _)| self.world.get_item_locations(item))
                 .flatten()
                 .collect(),
-            extra_edges.clone(),
+            extra_edges,
         );
         let locked_map = self.known_costs.lock().unwrap();
         if let Some(&c) = locked_map.get(&key) {
@@ -117,7 +117,7 @@ where
             let c = if let Some(c) = self.algo.compute_cost(
                 spot_to_graph_node::<W, E>(ctx.position()),
                 nodes.collect(),
-                extra_edges,
+                &key.2,
             ) {
                 c
             } else {
