@@ -630,7 +630,10 @@ where
                     queue = self.do_retrieve_and_insert(queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    rayon::yield_now();
+                    return self
+                        .db
+                        .pop(None)
+                        .map_err(|e| e.message);
                 }
             }
         }
@@ -685,7 +688,10 @@ where
                     queue = self.do_retrieve_and_insert(queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    rayon::yield_now();
+                    return self
+                        .db
+                        .pop(None)
+                        .map_err(|e| e.message);
                 }
             }
         }
