@@ -468,10 +468,12 @@ where
                 let (ctx, &p_max) = queue
                     .peek_max()
                     .ok_or("queue at capacity with no elements")?;
-                if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed()) {
+                if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed())
+                {
                     // Lower priority (or equal but later), evict the new item immediately
                     self.db.push(el)?;
-                    self.min_db_estimate.fetch_min(est_complete, Ordering::Release);
+                    self.min_db_estimate
+                        .fetch_min(est_complete, Ordering::Release);
                 } else {
                     let max_evictions = std::cmp::min(self.max_evictions, (queue.len() / 4) * 3);
                     // New item is better, evict some old_items.
@@ -492,11 +494,7 @@ where
             println!("push+evict took {:?} with the lock", start.elapsed());
             let start = Instant::now();
             if !ev.is_empty() {
-                let best = ev
-                    .iter()
-                    .map(|ctx| self.db.score(ctx))
-                    .min()
-                    .unwrap();
+                let best = ev.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
                 self.db.extend(ev, true)?;
                 self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
@@ -593,11 +591,7 @@ where
                         drop(queue);
                         let s2 = Instant::now();
 
-                        let best = evicted
-                            .iter()
-                            .map(|ctx| self.db.score(ctx))
-                            .min()
-                            .unwrap();
+                        let best = evicted.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
                         self.db.extend(evicted, true)?;
                         self.min_db_estimate.fetch_min(best, Ordering::Release);
                         self.evictions.fetch_add(1, Ordering::Release);
@@ -632,7 +626,12 @@ where
             }
             // Retrieve some from db
             if !self.db.is_empty() {
-                queue = self.do_retrieve_and_insert(queue)?;
+                if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
+                    queue = self.do_retrieve_and_insert(queue)?;
+                    self.retrieving.store(false, Ordering::Release);
+                } else {
+                    rayon::yield_now();
+                }
             }
         }
         Ok(None)
@@ -682,7 +681,12 @@ where
             }
             // Retrieve some from db
             if !self.db.is_empty() {
-                queue = self.do_retrieve_and_insert(queue)?;
+                if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
+                    queue = self.do_retrieve_and_insert(queue)?;
+                    self.retrieving.store(false, Ordering::Release);
+                } else {
+                    rayon::yield_now();
+                }
             }
         }
         Ok(None)
@@ -768,11 +772,7 @@ where
             println!("extend+evict took {:?} with the lock", start.elapsed());
             let start = Instant::now();
             if !ev.is_empty() {
-                let best = ev
-                    .iter()
-                    .map(|ctx| self.db.score(ctx))
-                    .min()
-                    .unwrap();
+                let best = ev.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
                 self.db.extend(ev, true)?;
                 self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);

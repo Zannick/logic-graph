@@ -18,6 +18,7 @@ use rocksdb::{
 use serde::Serialize;
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
+use std::sync::Mutex;
 use std::sync::atomic::{AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::time::Instant;
 
@@ -65,6 +66,8 @@ pub struct HeapDB<'w, W: World, T> {
 
     deletes: AtomicUsize,
     delete: AtomicU64,
+
+    retrieve_lock: Mutex<()>,
 
     phantom: PhantomData<T>,
 }
@@ -228,6 +231,7 @@ where
             dup_pskips: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
+            retrieve_lock: Mutex::new(()),
             phantom: PhantomData,
         })
     }
@@ -545,6 +549,7 @@ where
         start_priority: u32,
         count: usize,
     ) -> Result<Vec<ContextWrapper<T>>, Error> {
+        let _lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
