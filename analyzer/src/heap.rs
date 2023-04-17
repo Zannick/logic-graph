@@ -782,7 +782,7 @@ where
                 self.db.extend(ev, true)?;
                 self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
-                println!("evict to db took {:?}", start.elapsed());
+                println!("evict to db took {:?}, db now has {}", start.elapsed(), self.db.len());
                 println!("{}", self.db.get_memory_usage_stats().unwrap());
             }
         }
