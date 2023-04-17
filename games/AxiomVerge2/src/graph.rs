@@ -2682,13 +2682,10 @@ pub enum LocationId {
     Giguna__Carnelian__Vault__Item,
     Giguna__Giguna_Base__Ruin__Item,
     Giguna__Giguna_Base__Table__News,
-    Giguna__Giguna_Northeast__Door__Remote_Flask,
     Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
     Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
     Giguna__Giguna_Northeast__Save_Point__Seen,
-    Giguna__Giguna_Northeast__Vault__Item,
     Giguna__Ruins_Center__Tablet__Item,
-    Giguna__Ruins_East__Way_Up_High__Item,
     Giguna__West_Caverns__Bush__Item,
     Giguna__West_Caverns__Cache__Item,
     Glacier__Apocalypse_Entry__Terminal__Escape,
@@ -2938,9 +2935,6 @@ impl fmt::Display for LocationId {
             LocationId::Giguna__Giguna_Base__Table__News => {
                 write!(f, "{}", "Giguna > Giguna Base > Table: News")
             }
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Door: Remote Flask")
-            }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => write!(
                 f,
                 "{}",
@@ -2954,14 +2948,8 @@ impl fmt::Display for LocationId {
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Save Point: Seen")
             }
-            LocationId::Giguna__Giguna_Northeast__Vault__Item => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Vault: Item")
-            }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
                 write!(f, "{}", "Giguna > Ruins Center > Tablet: Item")
-            }
-            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
-                write!(f, "{}", "Giguna > Ruins East > Way Up High: Item")
             }
             LocationId::Giguna__West_Caverns__Bush__Item => {
                 write!(f, "{}", "Giguna > West Caverns > Bush: Item")
@@ -3283,9 +3271,6 @@ impl std::str::FromStr for LocationId {
             "Giguna > Giguna Base > Table: News" => {
                 Ok(LocationId::Giguna__Giguna_Base__Table__News)
             }
-            "Giguna > Giguna Northeast > Door: Remote Flask" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask)
-            }
             "Giguna > Giguna Northeast > Gate Button: Open Gate" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate)
             }
@@ -3295,14 +3280,8 @@ impl std::str::FromStr for LocationId {
             "Giguna > Giguna Northeast > Save Point: Seen" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Save_Point__Seen)
             }
-            "Giguna > Giguna Northeast > Vault: Item" => {
-                Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item)
-            }
             "Giguna > Ruins Center > Tablet: Item" => {
                 Ok(LocationId::Giguna__Ruins_Center__Tablet__Item)
-            }
-            "Giguna > Ruins East > Way Up High: Item" => {
-                Ok(LocationId::Giguna__Ruins_East__Way_Up_High__Item)
             }
             "Giguna > West Caverns > Bush: Item" => {
                 Ok(LocationId::Giguna__West_Caverns__Bush__Item)
@@ -4913,7 +4892,6 @@ pub enum CanonId {
     Defeat_Ebih_Alu,
     Remote_Drone,
     Giguna_Northeast_Gate,
-    Giguna_Northeast_Flask,
     Ledge_Grab,
 }
 impl fmt::Display for CanonId {
@@ -4939,7 +4917,6 @@ impl fmt::Display for CanonId {
             CanonId::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             CanonId::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
-            CanonId::Giguna_Northeast_Flask => write!(f, "{}", "Giguna_Northeast_Flask"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
         }
     }
@@ -4967,7 +4944,6 @@ impl std::str::FromStr for CanonId {
             "Defeat_Ebih_Alu" => Ok(CanonId::Defeat_Ebih_Alu),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
             "Giguna_Northeast_Gate" => Ok(CanonId::Giguna_Northeast_Gate),
-            "Giguna_Northeast_Flask" => Ok(CanonId::Giguna_Northeast_Flask),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
@@ -6137,17 +6113,12 @@ impl world::Accessible for Location {
             LocationId::Giguna__Carnelian__Vault__Item => true,
             LocationId::Giguna__Giguna_Base__Ruin__Item => true,
             LocationId::Giguna__Giguna_Base__Table__News => true,
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                rules::access_boomerang(&ctx)
-            }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => true,
             LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
                 rules::access_boomerang(&ctx)
             }
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => true,
-            LocationId::Giguna__Giguna_Northeast__Vault__Item => true,
             LocationId::Giguna__Ruins_Center__Tablet__Item => true,
-            LocationId::Giguna__Ruins_East__Way_Up_High__Item => true,
             LocationId::Giguna__West_Caverns__Bush__Item => rules::access_more_refills(&ctx),
             LocationId::Giguna__West_Caverns__Cache__Item => true,
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
@@ -7098,7 +7069,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 108;
+    const NUM_LOCATIONS: u32 = 105;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -7197,10 +7168,6 @@ impl world::World for World {
                 LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
                 LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
             ],
-            CanonId::Giguna_Northeast_Flask => vec![
-                LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
-                LocationId::Giguna__Giguna_Northeast__Vault__Item,
-            ],
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
@@ -7220,9 +7187,6 @@ impl world::World for World {
                 LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
                 LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
                 LocationId::Ebih__Grid_25_2_6__Pit__Item,
-                LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
-                LocationId::Giguna__Giguna_Northeast__Vault__Item,
-                LocationId::Giguna__Ruins_East__Way_Up_High__Item,
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
@@ -7521,12 +7485,6 @@ impl world::World for World {
             LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
                 SpotId::Giguna__Giguna_Northeast__Gate_Right
             }
-            LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
-                SpotId::Giguna__Giguna_Northeast__Door
-            }
-            LocationId::Giguna__Giguna_Northeast__Vault__Item => {
-                SpotId::Giguna__Giguna_Northeast__Vault
-            }
             LocationId::Giguna__Carnelian__Vault__Item => SpotId::Giguna__Carnelian__Vault,
             LocationId::Giguna__West_Caverns__Cache__Item => SpotId::Giguna__West_Caverns__Cache,
             LocationId::Giguna__West_Caverns__Bush__Item => SpotId::Giguna__West_Caverns__Bush,
@@ -7534,9 +7492,6 @@ impl world::World for World {
             LocationId::Giguna__Giguna_Base__Table__News => SpotId::Giguna__Giguna_Base__Table,
             LocationId::Giguna__Building_Interior__Bookshelf__Note => {
                 SpotId::Giguna__Building_Interior__Bookshelf
-            }
-            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
-                SpotId::Giguna__Ruins_East__Way_Up_High
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => SpotId::Giguna__Ruins_Center__Tablet,
             LocationId::Glacier__Compass_Room__Center__Table => {
@@ -7720,7 +7675,7 @@ impl world::World for World {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx),
             Objective::Progress => {
-                rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__5_all_notes(
+                rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__7_all_notes(
                     ctx,
                 )
             }
@@ -7742,8 +7697,8 @@ impl world::World for World {
                 if !ctx.has(Item::Dear_Ernest) {
                     vec.push((Item::Dear_Ernest, 1));
                 }
-                if ctx.count(Item::Flask) < 5 {
-                    vec.push((Item::Flask, 5 - ctx.count(Item::Flask)));
+                if ctx.count(Item::Flask) < 7 {
+                    vec.push((Item::Flask, 7 - ctx.count(Item::Flask)));
                 }
                 if !ctx.has(Item::Heretics_Tablet) {
                     vec.push((Item::Heretics_Tablet, 1));
@@ -8748,22 +8703,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 1000,
             exit_id: None,
         },
-        LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => Location {
-            id: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
-            canonical: CanonId::Giguna_Northeast_Flask,
-            item: Item::Flask,
-            price: Currency::Free,
-            time: 6500,
-            exit_id: None,
-        },
-        LocationId::Giguna__Giguna_Northeast__Vault__Item => Location {
-            id: LocationId::Giguna__Giguna_Northeast__Vault__Item,
-            canonical: CanonId::Giguna_Northeast_Flask,
-            item: Item::Flask,
-            price: Currency::Free,
-            time: 5500,
-            exit_id: None,
-        },
         LocationId::Giguna__Carnelian__Vault__Item => Location {
             id: LocationId::Giguna__Carnelian__Vault__Item,
             canonical: CanonId::None,
@@ -8810,14 +8749,6 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Letter_from_Trace,
             price: Currency::Free,
             time: 0,
-            exit_id: None,
-        },
-        LocationId::Giguna__Ruins_East__Way_Up_High__Item => Location {
-            id: LocationId::Giguna__Ruins_East__Way_Up_High__Item,
-            canonical: CanonId::None,
-            item: Item::Flask,
-            price: Currency::Free,
-            time: 1000,
             exit_id: None,
         },
         LocationId::Giguna__Ruins_Center__Tablet__Item => Location {
@@ -16772,8 +16703,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Giguna_Northeast__Door => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Door,
             locations: Range {
-                start: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize(),
-                end: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -16789,8 +16719,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Giguna_Northeast__Vault => Spot {
             id: SpotId::Giguna__Giguna_Northeast__Vault,
             locations: Range {
-                start: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize(),
-                end: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_1.into_usize(),
@@ -17864,8 +17793,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Ruins_East__Way_Up_High => Spot {
             id: SpotId::Giguna__Ruins_East__Way_Up_High,
             locations: Range {
-                start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
-                end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize() + 1,
+                start: 0, end: 0,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -20207,14 +20135,8 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Giguna_Northeast__East_11 => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Right_Column => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Switch => Range { start: 0, end: 0 },
-        SpotId::Giguna__Giguna_Northeast__Door => Range {
-            start: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize(),
-            end: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize() + 1,
-        },
-        SpotId::Giguna__Giguna_Northeast__Vault => Range {
-            start: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize(),
-            end: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize() + 1,
-        },
+        SpotId::Giguna__Giguna_Northeast__Door => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Northeast__Vault => Range { start: 0, end: 0 },
         SpotId::Giguna__Carnelian__East_10 => Range { start: 0, end: 0 },
         SpotId::Giguna__Carnelian__East_Cliff => Range { start: 0, end: 0 },
         SpotId::Giguna__Carnelian__Upper_Susar => Range { start: 0, end: 0 },
@@ -20296,10 +20218,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Ruins_East__West_8 => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_East__Pillar => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_East__West_7 => Range { start: 0, end: 0 },
-        SpotId::Giguna__Ruins_East__Way_Up_High => Range {
-            start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
-            end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize() + 1,
-        },
+        SpotId::Giguna__Ruins_East__Way_Up_High => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_Center__East_8 => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_Center__Tablet => Range {
             start: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),
@@ -20552,8 +20471,8 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Ebih__Observation_Tower_Room => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Peak => Range { start: 0, end: 0 },
         AreaId::Giguna__Giguna_Northeast => Range {
-            start: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize(),
-            end: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize(),
+            start: LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate.into_usize(),
+            end: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen.into_usize(),
         },
         AreaId::Giguna__Carnelian => Range {
             start: LocationId::Giguna__Carnelian__Vault__Item.into_usize(),
@@ -20572,10 +20491,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
             end: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
         },
-        AreaId::Giguna__Ruins_East => Range {
-            start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
-            end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
-        },
+        AreaId::Giguna__Ruins_East => Range { start: 0, end: 0 },
         AreaId::Giguna__Ruins_Center => Range {
             start: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),
             end: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),

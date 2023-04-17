@@ -176,19 +176,19 @@ areas:
       local:
         - to: Right Column
         - to: Vault
-      locations:
-        - name: Remote Flask
-          item: Flask
-          canon: Giguna_Northeast_Flask
-          req: $boomerang
-          tags: [remote_flask]
+      #locations:
+      #  - name: Remote Flask
+      #    item: Flask
+      #    canon: Giguna_Northeast_Flask
+      #    req: $boomerang
+      #    tags: [remote_flask]
     - name: Vault
       coord: [17.2, 10.8]
-      locations:
-        - name: Item
-          item: Flask
-          canon: Giguna_Northeast_Flask
-          tags: [flask]
+      #locations:
+      #  - name: Item
+      #    item: Flask
+      #    canon: Giguna_Northeast_Flask
+      #    tags: [flask]
       exits:
         - to: Door
           req: ^_door_opened
@@ -838,9 +838,10 @@ areas:
         - to: Pillar
         - to: Cliff
         - to: East 9
-      locations:
-        - name: Item
-          item: Flask
+      #locations:
+      #  - name: Item
+      #    item: Flask
+      #    tags: [flask]
       # TODO: exits toward Ruins Top?
 
 - name: Ruins Center

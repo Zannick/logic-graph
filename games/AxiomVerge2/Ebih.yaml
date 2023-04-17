@@ -501,8 +501,8 @@ areas:
         - to: Hidden Bush
       locations:
         - name: Remote Bush
-          canon: Ebih Bush Flask
           item: Flask
+          canon: Ebih Bush Flask
           req: $bs
           tags: [nearby_flask]
       exits:
@@ -515,8 +515,8 @@ areas:
           jumps: 2
       locations:
         - name: Behind Bush
-          canon: Ebih Bush Flask
           item: Flask
+          canon: Ebih Bush Flask
           tags: [flask]
       exits:
         - to: East 10

@@ -24,51 +24,6 @@ pub struct ShortestPaths<V, E> {
     paths: Vec<Vec<(Vec<usize>, Option<u64>)>>,
 }
 
-impl<V, E> ShortestPaths<V, E>
-where
-    V: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
-    E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
-{
-    fn build_paths_table(&self, extra_edges: &Vec<Edge<E>>) -> Vec<Vec<(Vec<usize>, Option<u64>)>> {
-        let mut paths = self.paths.clone();
-        for (newei, e) in extra_edges.iter().enumerate() {
-            if let Some(best) = paths[e.src][e.dst].1 {
-                if e.wt >= best {
-                    continue;
-                }
-            }
-            paths[e.src][e.dst] = (vec![newei], Some(e.wt));
-
-            for start in 0..self.graph.nodes.len() {
-                for end in 0..self.graph.nodes.len() {
-                    if let (Some(best_a), Some(best_b)) =
-                        (paths[e.src][start].1, paths[end][e.dst].1)
-                    {
-                        if let Some(best_total) = paths[start][end].1 {
-                            // Only update the route if this is a better path
-                            if best_a + e.wt + best_b < best_total {
-                                let mut newpath = paths[start][e.src].0.clone();
-                                newpath.push(newei);
-                                newpath.extend_from_slice(&paths[e.dst][end].0);
-                                paths[start][end] = (newpath, Some(best_a + e.wt + best_b));
-                            }
-                        } else {
-                            // The route didn't previously exist because of this gap.
-                            let mut newpath = paths[start][e.src].0.clone();
-                            newpath.push(newei);
-                            newpath.extend_from_slice(&paths[e.dst][end].0);
-                            paths[start][end] = (newpath, Some(best_a + e.wt + best_b));
-                        }
-                    }
-                    // Else: no path from start to src, or from dst to end
-                    // so no new path with this edge
-                }
-            }
-        }
-        paths
-    }
-}
-
 impl<V, E> SteinerAlgo<V, E> for ShortestPaths<V, E>
 where
     V: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
@@ -169,63 +124,74 @@ where
         let mut edges = new_hashset();
         let mut cost = 0;
 
-        let mut _newpaths = None;
-        let paths = if extra_edges.iter().any(|e| {
-            if let Some(best) = self.paths[e.src][e.dst].1 {
-                e.wt < best
-            } else {
-                true
-            }
-        }) {
-            _newpaths = Some(self.build_paths_table(extra_edges));
-            &_newpaths.as_ref().unwrap()
-        } else {
-            &self.paths
-        };
+        // We don't actually need a new paths table, since we require that all
+        // extra edges originate from the root. Therefore, we can just get the shortest
+        // path among: a) the original shortest paths, b) any new edge plus its shortest path
 
         while !required.is_empty() {
-            let r = required.iter().next().unwrap();
-            let ri = self.graph.node_index_map[r];
+            let mut min = None;
+            let mut newpath_holder = Vec::new();
 
             // Find the minimum path from any node we have to any required node
-            let mut min = if let Some(rt) = paths[root_index][ri].1 {
-                (&paths[root_index][ri].0, rt, *r, root_index)
-            } else {
-                // Ideally we don't have to do this,
-                // or we do it at a higher level so that we can try the cache afterward
-                required.remove(&r.clone());
-                continue;
-            };
-            for &start in nodes.iter() {
-                for req in required.iter() {
-                    let ri = self.graph.node_index_map[req];
-                    if let Some(t) = paths[start][ri].1 {
-                        if t < min.1 {
-                            min = (&paths[start][ri].0, t, *req, start);
+            // New edges can find a better route.
+            for (new_ei, e) in extra_edges.iter().enumerate() {
+                // But if we have already added that node, it's not the shortest path!
+                if !nodes.contains(&e.dst) {
+                    for req in required.iter() {
+                        let ri = self.graph.node_index_map[req];
+                        if let Some(t) = self.paths[e.dst][ri].1 {
+                            let time = e.wt + t;
+                            if let Some((_, old_best, _, _)) = min {
+                                if time < old_best {
+                                    // The "index" of the new edge is its real index plus |E|
+                                    let mut path = vec![self.graph.edges.len() + new_ei];
+                                    path.extend(&self.paths[e.dst][ri].0);
+                                    newpath_holder.push(path);
+                                    min = Some((newpath_holder.last().unwrap(), time, *req, root_index));
+                                }
+                            } else {
+                                let mut path = vec![self.graph.edges.len() + new_ei];
+                                path.extend(&self.paths[e.dst][ri].0);
+                                newpath_holder.push(path);
+                                min = Some((newpath_holder.last().unwrap(), time, *req, root_index));
+                            }
                         }
                     }
                 }
             }
-            required.remove(&min.2);
-            // Because the graph has no negative edges,
-            // the minimum path must have no intermediate nodes or edges already in the tree
-            nodes.extend(
-                min.0
-                    .iter()
-                    .map(|&ei| chain_index!(self.graph.edges, extra_edges, ei).dst),
-            );
-            edges.extend(
-                min.0
-                    .iter()
-                    .map(|&ei| chain_index!(self.graph.edges, extra_edges, ei).id),
-            );
-            cost += min.1;
-            /*
-            println!(
-                "Adding path {:?} -> {:?} to arborescence (cost: {})",
-                self.graph.nodes[min.3], min.2, min.1
-            );
-            */
+            for &start in nodes.iter() {
+                for req in required.iter() {
+                    let ri = self.graph.node_index_map[req];
+                    if let Some(t) = self.paths[start][ri].1 {
+                        if let Some((_, old_best, _, _)) = min {
+                            if t < old_best {
+                                min = Some((&self.paths[start][ri].0, t, *req, start));
+                            }
+                        } else {
+                            min = Some((&self.paths[start][ri].0, t, *req, start));
+                        }
+                    }
+                }
+            }
+            if let Some((path, best, req, _)) = min {
+                required.remove(&req);
+                // Because the graph has no negative edges,
+                // the minimum path must have no intermediate nodes or edges already in the tree
+                nodes.extend(
+                    path
+                        .iter()
+                        .map(|&ei| chain_index!(self.graph.edges, extra_edges, ei).dst),
+                );
+                edges.extend(
+                    path
+                        .iter()
+                        .map(|&ei| chain_index!(self.graph.edges, extra_edges, ei).id),
+                );
+                cost += best;
+            } else {
+                // There is a location we cannot access. This is a failure.
+                return None;
+            }
         }
 
         if edges.is_empty() {
