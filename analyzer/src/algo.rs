@@ -267,10 +267,10 @@ where
             &startctx,
             max_time + max_time / 10,
             1_048_576,
-            1_024,
+            8_192,
             131_072,
             1_024,
-            8_096,
+            32_768,
         )
         .unwrap();
         queue.push(startctx.clone()).unwrap();
