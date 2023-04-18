@@ -25,7 +25,7 @@ enum SearchMode {
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
-        2 | 7 | 11 | 15 => SearchMode::Greedy,
+        2 | 7 => SearchMode::Greedy,
         5 => SearchMode::PickMinScore,
         _ => SearchMode::Single,
     }
