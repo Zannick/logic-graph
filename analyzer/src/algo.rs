@@ -14,12 +14,11 @@ use std::time::Instant;
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
     Classic,
-    Depth(u8),
     Greedy,
-    PickDepth(u8),
     PickMinElapsed,
     PickMinScore,
     Dependent,
+    Single,
     Unknown,
 }
 
@@ -27,11 +26,8 @@ fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
         2 | 7 | 11 | 15 => SearchMode::Greedy,
-        4 => SearchMode::Depth(3),
-        8 => SearchMode::PickDepth(3),
-        12 => SearchMode::PickDepth(8),
         5 => SearchMode::PickMinScore,
-        _ => SearchMode::Classic,
+        _ => SearchMode::Single,
     }
 }
 
@@ -232,7 +228,11 @@ where
         let start = Instant::now();
         let (clean_ctx, max_time) = match greedy_search(world, &startctx, u32::MAX) {
             Ok(wonctx) => {
-                println!("Finished greedy search in {:?} with a result of {}ms", start.elapsed(), wonctx.elapsed());
+                println!(
+                    "Finished greedy search in {:?} with a result of {}ms",
+                    start.elapsed(),
+                    wonctx.elapsed()
+                );
                 let start = Instant::now();
                 let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed());
                 println!("Minimized in {:?}", start.elapsed());
@@ -383,58 +383,48 @@ where
         classic_step(self.world, ctx, self.queue.max_time())
     }
 
-    fn depth_step(
-        &self,
-        ctx: ContextWrapper<T>,
-        mode: SearchMode,
-        mut d: u8,
-    ) -> Vec<ContextWrapper<T>> {
-        let mut next = Vec::new();
-        let mut ret = Vec::new();
-        for ctx in self.classic_step(ctx) {
-            if self.world.won(ctx.get()) {
-                self.handle_solution(ctx, mode);
-            } else {
-                next.push(ctx);
+    fn single_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
+        // One movement total
+        let movement_state = ctx.get().get_movement_state();
+        let max_time = self.queue.max_time();
+        let mut results = Vec::new();
+        for spot in self.world.get_area_spots(ctx.get().position()) {
+            let local = ctx.get().local_travel_time(movement_state, *spot);
+            if local == u32::MAX || local > max_time || local + ctx.elapsed() >= max_time {
+                // Can't move this way, or it takes too long
+                continue;
+            }
+            let mut newctx = ctx.clone();
+            newctx.move_local(*spot, local);
+            results.push(newctx);
+        }
+        for exit in self.world.get_spot_exits(ctx.get().position()) {
+            if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get()) {
+                let mut newctx = ctx.clone();
+                newctx.exit(exit);
+                results.push(newctx);
             }
         }
-        if next.is_empty() {
-            return ret;
-        }
-        d -= 1;
-        // No need to sort, when we only want to pop the min element by (progress, elapsed).
-        crate::swap_max_to_end(&mut next, |c| (c.get().progress(), !c.elapsed()));
-        while let Some(ctx) = next.pop() {
-            ret.extend(next);
-            next = Vec::new();
-            self.extras.fetch_add(1, Ordering::Release);
-            for ctx in self.classic_step(ctx) {
-                if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, mode);
-                } else {
-                    next.push(ctx);
-                }
+        for warp in self.world.get_warps() {
+            if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get()) {
+                let mut newctx = ctx.clone();
+                newctx.warp(warp);
+                results.push(newctx);
             }
-            d -= 1;
-            if d == 0 {
-                ret.extend(next);
-                break;
-            }
-
-            crate::swap_max_to_end(&mut next, |c| (c.get().progress(), !c.elapsed()));
         }
-        ret
+        results.extend(activate_actions(self.world, &ctx, 0, 0));
+        // This can technically do more than one location at a time, but that's fine I guess
+        results.extend(visit_locations(self.world, ctx, 0));
+        results
     }
 
-    fn choose_mode(&self, iters: u64, ctx: &ContextWrapper<T>) -> SearchMode {
+    fn choose_mode(&self, iters: u64, _ctx: &ContextWrapper<T>) -> SearchMode {
         if iters % 2048 != 0 {
-            SearchMode::Classic
+            SearchMode::Single
         } else if iters % 4096 == 0 {
             SearchMode::PickMinElapsed
-        } else if ctx.elapsed() * 3 < self.queue.max_time() {
-            SearchMode::Depth(4)
         } else {
-            SearchMode::PickDepth(3)
+            SearchMode::Greedy
         }
     }
 
@@ -461,8 +451,7 @@ where
         {
             type Item = ContextWrapper<T>;
 
-            fn next(&mut self) -> Option<Self::Item>
-where {
+            fn next(&mut self) -> Option<Self::Item> {
                 self.q.pop().unwrap()
             }
         }
@@ -522,17 +511,14 @@ where {
         }
 
         let current_mode = if iters < 500_000 {
-            SearchMode::Classic
+            SearchMode::Single
         } else if mode == SearchMode::Dependent {
             self.choose_mode(iters, &ctx)
         } else {
             mode
         };
         match current_mode {
-            SearchMode::Depth(d) if d > 1 => {
-                self.depth_step(ctx, mode, d);
-                Ok(Vec::new())
-            }
+            SearchMode::Single => Ok(self.single_step(ctx)),
             SearchMode::Greedy => {
                 // Run a classic step on the given state and handle any solutions
                 let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
@@ -551,18 +537,6 @@ where {
                 // All the classic states are still pushed to the queue, even the one we used
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
-            }
-            SearchMode::PickDepth(d) if d > 1 => {
-                let mut this_round = vec![ctx];
-                while let Some(c) = self.queue.pop().unwrap() {
-                    this_round.push(c);
-                    if this_round.len() > 9 {
-                        break;
-                    }
-                }
-                crate::swap_min_to_end(&mut this_round, |c| (c.elapsed(), c.penalty()));
-                self.depth_step(this_round.pop().unwrap(), mode, d);
-                Ok(this_round)
             }
             SearchMode::PickMinScore => {
                 let mut next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
