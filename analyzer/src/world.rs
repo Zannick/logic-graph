@@ -164,4 +164,6 @@ pub trait World: Sync {
         sp1: <Self::Exit as Exit>::SpotId,
         sp2: <Self::Exit as Exit>::SpotId,
     ) -> bool;
+
+    fn min_warp_time(&self) -> u32;
 }

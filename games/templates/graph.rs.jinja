@@ -267,6 +267,7 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
+    min_warp_time: u32,
 }
 
 impl world::World for World {
@@ -391,6 +392,10 @@ impl world::World for World {
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }
+
+    fn min_warp_time(&self) -> u32 {
+        self.min_warp_time
+    }
 }
 
 impl World {
@@ -409,6 +414,14 @@ impl World {
                 end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
             },
+            min_warp_time: {% if (warps.values()|selectattr('base_movement', 'undefined')) and (global_actions|selectattr('to')) -%}
+                std::cmp::min({{ warps.values()|selectattr('base_movement', 'undefined')|map(attribute='time')|min }},
+                    {{ global_actions|selectattr('to')|map(attribute='time')|min }})
+                {%- elif warps -%}
+                    {{ warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min }}
+                {%- elif global_actions|selectattr('to') -%}
+                    {{ global_actions|selectattr('to')|map(attribute='time')|min }}
+                {% else %}0{% endif %},
         }
     }
 

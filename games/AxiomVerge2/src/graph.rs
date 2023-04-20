@@ -7062,6 +7062,7 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
+    min_warp_time: u32,
 }
 
 impl world::World for World {
@@ -7742,6 +7743,10 @@ impl world::World for World {
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }
+
+    fn min_warp_time(&self) -> u32 {
+        self.min_warp_time
+    }
 }
 
 impl World {
@@ -8225,6 +8230,7 @@ impl World {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
+            min_warp_time: std::cmp::min(5, 3),
         }
     }
 

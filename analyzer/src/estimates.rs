@@ -1,9 +1,11 @@
 use crate::context::*;
+use crate::steiner::approx::ApproxSteiner;
 use crate::steiner::graph::*;
 use crate::steiner::*;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use std::collections::HashMap;
+use std::collections::HashSet;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 
@@ -114,12 +116,28 @@ where
                 .1
                 .iter()
                 .map(|loc_id| loc_to_graph_node(self.world, *loc_id));
-            let c = if let Some(c) = self.algo.compute_cost(
+            let c = if let Some(ApproxSteiner { arborescence, cost }) = self.algo.compute(
                 spot_to_graph_node::<W, E>(ctx.position()),
                 nodes.collect(),
                 &key.2,
             ) {
-                c
+                // Extra warp cost is number of "branches" times min_warp_time
+                // Number of branches is number of edges minus number of unique starting nodes plus 1
+                // Only count the spot to spot edges
+                let mut edges = 0;
+                let unique_nodes: HashSet<_> = arborescence
+                    .into_iter()
+                    .filter_map(|e| match e {
+                        ExternalEdgeId::Spots(src, _) => {
+                            edges += 1;
+                            Some(src)
+                        }
+                        _ => None,
+                    })
+                    .collect();
+                let min_warp_time: u64 = self.world.min_warp_time().into();
+                cost + min_warp_time
+                    * <usize as TryInto<u64>>::try_into(edges - unique_nodes.len() + 1).unwrap()
             } else {
                 // A sufficiently large number.
                 1 << 30
@@ -134,7 +152,8 @@ where
     }
 }
 
-impl<'w, W, S, L, E> ContextScorer<'w, W, S, L::LocId, EdgeId<W>, ShortestPaths<NodeId<W>, EdgeId<W>>>
+impl<'w, W, S, L, E>
+    ContextScorer<'w, W, S, L::LocId, EdgeId<W>, ShortestPaths<NodeId<W>, EdgeId<W>>>
 where
     W: World<Location = L, Exit = E>,
     L: Location<ExitId = E::ExitId>,
