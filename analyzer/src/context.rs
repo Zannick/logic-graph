@@ -186,8 +186,6 @@ where
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
-    penalty: u32,
-    bonus: u32,
     // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
     // or make a type for ContextWrapper to convert into
     #[allow(clippy::type_complexity)]
@@ -209,8 +207,6 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed: 0,
-            penalty: 0,
-            bonus: 0,
             history: None,
         }
     }
@@ -238,22 +234,6 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn elapsed(&self) -> u32 {
         self.elapsed
-    }
-
-    pub fn penalize(&mut self, penalty: u32) {
-        self.penalty += penalty;
-    }
-
-    pub fn penalty(&self) -> u32 {
-        self.penalty
-    }
-
-    pub fn reward(&mut self, bonus: u32) {
-        self.bonus += bonus;
-    }
-
-    pub fn bonus(&self) -> u32 {
-        self.bonus
     }
 
     pub fn get(&self) -> &T {
@@ -411,13 +391,11 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self, est: u32) -> String {
         format(format_args!(
-            "At {}ms (est. left={}), visited={}, skipped={}, penalty={}, bonus={}\nNow: {} after {}",
+            "At {}ms (est. left={}), visited={}, skipped={}\nNow: {} after {}",
             self.elapsed,
             est,
             self.get().count_visits(),
             self.get().count_skips(),
-            self.penalty,
-            self.bonus,
             self.ctx.position(),
             if let Some(val) = &self.history {
                 val.entry.to_string()

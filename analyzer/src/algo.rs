@@ -54,7 +54,6 @@ where
 pub fn visit_locations<W, T, L, E>(
     world: &W,
     ctx: ContextWrapper<T>,
-    penalty: u32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -63,7 +62,6 @@ where
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
 {
     let mut ctx_list = vec![ctx];
-    ctx_list[0].penalize(penalty);
     let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
     if locs.is_empty() && exit.is_none() {
         return Vec::new();
@@ -112,8 +110,6 @@ where
 pub fn activate_actions<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    local_penalty: u32,
-    global_penalty: u32,
 ) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -127,7 +123,6 @@ where
             let mut c2 = ctx.clone();
             c2.activate(act);
             if c2.get() != ctx.get() {
-                c2.penalize(global_penalty);
                 result.push(c2);
             }
         }
@@ -137,7 +132,6 @@ where
             let mut c2 = ctx.clone();
             c2.activate(act);
             if c2.get() != ctx.get() {
-                c2.penalize(local_penalty);
                 result.push(c2);
             }
         }
@@ -163,37 +157,20 @@ where
     let spot_ctxs = explore(world, ctx, max_time);
     let mut result = Vec::new();
 
-    if let (Some(s), Some(f)) = (spot_ctxs.first(), spot_ctxs.last()) {
-        let max_diff = f.elapsed() - s.elapsed();
+    if !spot_ctxs.is_empty() {
         let spots: Vec<_> = spot_ctxs
             .into_iter()
             .map(|ctx| (spot_has_locations(world, ctx.get()), ctx))
             .collect();
-        let with_locs: u32 = (spots.iter().filter(|(l, _)| *l).count())
-            .try_into()
-            .unwrap();
-        let spot_count: u32 = spots.len().try_into().unwrap();
-        let mut locs_count = 0;
         for (has_locs, ctx) in spots {
-            // somewhat quadratic penalties
-            let loc_penalty = locs_count * (locs_count - 1) * max_diff / spot_count;
-            // Max penalty at any spot with no locations
-            let act_penalty = with_locs * (with_locs - 1) * max_diff / spot_count;
             if spot_has_actions(world, ctx.get()) {
                 result.extend(activate_actions(
                     world,
                     &ctx,
-                    loc_penalty + 500,
-                    if !has_locs {
-                        act_penalty + 1000
-                    } else {
-                        2 * (loc_penalty + 500)
-                    },
                 ));
             }
             if has_locs {
-                result.extend(visit_locations(world, ctx, loc_penalty));
-                locs_count += 1;
+                result.extend(visit_locations(world, ctx));
             }
         }
     }
@@ -333,7 +310,6 @@ where
 
         let mut newstates = Vec::new();
         let mut stepping = fork.clone();
-        stepping.reward(10000);
         for step in winhist.into_iter().rev() {
             stepping.replay(self.world, step);
             if !matches!(step, History::Move(_) | History::MoveLocal(_)) {
@@ -347,7 +323,6 @@ where
             let first_back = oldhistlen / 2;
 
             let mut prior = self.startctx.clone();
-            prior.reward(2500);
             for (i, step) in oldhist.iter().rev().enumerate() {
                 prior.replay(self.world, *step);
                 if i >= first_back && !matches!(step, History::Move(_) | History::MoveLocal(_)) {
@@ -413,9 +388,9 @@ where
                 results.push(newctx);
             }
         }
-        results.extend(activate_actions(self.world, &ctx, 0, 0));
+        results.extend(activate_actions(self.world, &ctx));
         // This can technically do more than one location at a time, but that's fine I guess
-        results.extend(visit_locations(self.world, ctx, 0));
+        results.extend(visit_locations(self.world, ctx));
         results
     }
 

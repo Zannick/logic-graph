@@ -51,7 +51,7 @@ impl<T: Ctx> Default for LimitedHeap<T> {
 
 impl<T: Ctx> LimitedHeap<T> {
     fn score(ctx: &ContextWrapper<T>, scale_factor: u32) -> u32 {
-        scale_factor * ctx.get().progress() * ctx.get().progress() - ctx.elapsed() - ctx.penalty()
+        scale_factor * ctx.get().progress() * ctx.get().progress() - ctx.elapsed()
     }
 
     pub fn new() -> LimitedHeap<T> {
