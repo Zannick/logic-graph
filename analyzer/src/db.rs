@@ -18,8 +18,8 @@ use rocksdb::{
 use serde::Serialize;
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
-use std::sync::Mutex;
 use std::sync::atomic::{AtomicU32, AtomicU64, AtomicUsize, Ordering};
+use std::sync::Mutex;
 use std::time::Instant;
 
 // We need the following in this wrapper impl:
@@ -68,6 +68,7 @@ pub struct HeapDB<'w, W: World, T> {
     delete: AtomicU64,
 
     retrieve_lock: Mutex<()>,
+    bg_deletes: AtomicUsize,
 
     phantom: PhantomData<T>,
 }
@@ -232,6 +233,7 @@ where
             deletes: 0.into(),
             delete: 0.into(),
             retrieve_lock: Mutex::new(()),
+            bg_deletes: 0.into(),
             phantom: PhantomData,
         })
     }
@@ -260,6 +262,10 @@ where
     /// Winning states aren't counted in this.
     pub fn cached_estimates(&self) -> usize {
         self.scorer.cached_estimates()
+    }
+
+    pub fn background_deletes(&self) -> usize {
+        self.bg_deletes.load(Ordering::Acquire)
     }
 
     /// Returns details about the number of states we've skipped (tracked separately from the db).
@@ -737,6 +743,56 @@ where
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
         Ok(res)
+    }
+
+    pub fn cleanup(&self, batch_size: usize) -> Result<(), Error> {
+        let mut iter = self.db.iterator(IteratorMode::End);
+
+        loop {
+            let mut batch = WriteBatchWithTransaction::<false>::default();
+            let mut pskips = 0;
+            let mut dup_pskips = 0;
+            let mut count = batch_size;
+            let _lock = self.retrieve_lock.lock().unwrap();
+
+            while count > 0 {
+                if let Some(item) = iter.next() {
+                    let (key, value) = item.unwrap();
+                    count -= 1;
+
+                    let el = Self::get_obj_from_heap_value(&value)?;
+                    let max_time = self.max_time();
+                    if el.elapsed() > max_time || self.score(&el) > max_time {
+                        batch.delete(key);
+                        pskips += 1;
+                        continue;
+                    }
+
+                    let seen_key = Self::get_state_key(el.get());
+                    if let Some(stored) = self.get_seen_value(&seen_key)? {
+                        if el.elapsed() > stored {
+                            batch.delete(key);
+                            dup_pskips += 1;
+                            continue;
+                        }
+                    }
+                } else {
+                    return Ok(());
+                }
+            }
+            self.db.write_opt(batch, &self.write_opts).unwrap();
+            drop(_lock);
+            self.pskips.fetch_add(pskips, Ordering::Release);
+            self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
+            self.bg_deletes
+                .fetch_add(pskips + dup_pskips, Ordering::Release);
+            if pskips > 0 || dup_pskips > 0 {
+                println!(
+                    "Background thread deleted {} expired and {} duplicate elements",
+                    pskips, dup_pskips
+                );
+            }
+        }
     }
 
     pub fn print_graphs(&self) -> Result<(), Error> {

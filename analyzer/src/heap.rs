@@ -441,6 +441,10 @@ where
         self.retrievals.load(Ordering::Acquire)
     }
 
+    pub fn background_deletes(&self) -> usize {
+        self.db.background_deletes()
+    }
+
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
@@ -789,6 +793,10 @@ where
 
         self.iskips.fetch_add(iskips, Ordering::Release);
         Ok(())
+    }
+
+    pub fn db_cleanup(&self, batch_size: usize) -> Result<(), String> {
+        Ok(self.db.cleanup(batch_size)?)
     }
 
     pub fn skip_stats(&self) -> (usize, usize, usize, usize) {

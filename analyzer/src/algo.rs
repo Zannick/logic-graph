@@ -7,9 +7,10 @@ use crate::solutions::SolutionCollector;
 use crate::world::*;
 use rayon::prelude::*;
 use std::fmt::Debug;
-use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, Ordering};
 use std::sync::Mutex;
-use std::time::Instant;
+use std::thread::sleep;
+use std::time::{Duration, Instant};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
@@ -429,6 +430,7 @@ where
     }
 
     pub fn search(self) -> Result<(), std::io::Error> {
+        let finished = AtomicBool::new(false);
         let start = Mutex::new(Instant::now());
         println!(
             "Starting search with {} threads",
@@ -456,22 +458,41 @@ where
             }
         }
 
-        let mut res = Ok(());
-        while res.is_ok() && !self.queue.is_empty() {
-            let iter = Iter { q: &self.queue };
-            res = iter.par_bridge().try_for_each(|item| {
-                let vec = self.process_one(
-                    item,
-                    &start,
-                    mode_by_index(rayon::current_thread_index().unwrap_or_default()),
-                )?;
-                if !vec.is_empty() {
-                    self.queue.extend(vec).map(|_| ())
-                } else {
-                    Ok(())
+        let res = rayon::scope(|scope| {
+            scope.spawn(|_| {
+                let sleep_time = Duration::from_secs(10);
+                while !finished.load(Ordering::Acquire) {
+                    let len = self.queue.db_len();
+                    if len < 1_000_000 {
+                        sleep(sleep_time);
+                        continue;
+                    }
+                    // Other things that might be useful: get the number cleaned
+                    // and the last one checked.
+                    self.queue.db_cleanup(65_536).unwrap();
+                    sleep(sleep_time / 2);
                 }
             });
-        }
+
+            let mut res = Ok(());
+            while res.is_ok() && !self.queue.is_empty() {
+                let iter = Iter { q: &self.queue };
+                res = iter.par_bridge().try_for_each(|item| {
+                    let vec = self.process_one(
+                        item,
+                        &start,
+                        mode_by_index(rayon::current_thread_index().unwrap_or_default()),
+                    )?;
+                    if !vec.is_empty() {
+                        self.queue.extend(vec).map(|_| ())
+                    } else {
+                        Ok(())
+                    }
+                });
+            }
+            finished.store(true, Ordering::Release);
+            res
+        });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         println!(
             "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops: {}",
@@ -594,7 +615,7 @@ where
         println!(
             "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit: {}ms; db best: {}; evictions: {}; retrievals: {}\n\
+            limit: {}ms; db best: {}; evictions: {}; retrievals: {}; bgdel={}\n\
             push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
             {}",
             iters,
@@ -612,6 +633,7 @@ where
             self.queue.db_best(),
             self.queue.evictions(),
             self.queue.retrievals(),
+            self.queue.background_deletes(),
             iskips,
             dskips,
             pskips,
