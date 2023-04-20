@@ -746,7 +746,9 @@ where
     }
 
     pub fn cleanup(&self, batch_size: usize) -> Result<(), Error> {
-        let mut iter = self.db.iterator(IteratorMode::End);
+        let mut tail_opts = ReadOptions::default();
+        tail_opts.set_tailing(true);
+        let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
         loop {
             let mut batch = WriteBatchWithTransaction::<false>::default();
@@ -777,6 +779,9 @@ where
                         }
                     }
                 } else {
+                    let start = Instant::now();
+                    self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
+                    println!("Bg thread compacting took {:?}", start.elapsed());
                     return Ok(());
                 }
             }

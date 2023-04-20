@@ -442,10 +442,7 @@ where
                         sleep(sleep_time);
                         continue;
                     }
-                    // Other things that might be useful: get the number cleaned
-                    // and the last one checked.
                     self.queue.db_cleanup(65_536).unwrap();
-                    sleep(sleep_time / 2);
                 }
             });
 
