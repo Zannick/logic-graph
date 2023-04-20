@@ -527,8 +527,8 @@ where
             return Ok(Vec::new());
         }
 
-        if iters % 10000 == 0 {
-            self.print_status_update(&start, iters, 10000, &ctx);
+        if iters % 100_000 == 0 {
+            self.print_status_update(&start, iters, 100_000, &ctx);
         }
 
         let current_mode = if iters < 500_000 {
