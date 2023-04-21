@@ -61,6 +61,28 @@ where
         if self.world.won(ctx) {
             return 0;
         }
+        self.estimate_time_to_get(
+            ctx,
+            self.world
+                .items_needed(ctx)
+                .into_iter()
+                .map(|(item, _)| self.world.get_item_locations(item))
+                .flatten()
+                .filter(|&loc_id| ctx.todo(loc_id))
+                .collect(),
+        )
+    }
+
+    /// Returns the estimate amount of time to get the specified locations from
+    /// the current state. Does not check whether these locations are todo.
+    pub fn estimate_time_to_get<T>(&self, ctx: &T, required: Vec<<L as Location>::LocId>) -> u64
+    where
+        T: Ctx<World = W>,
+        L: Location<Context = T>,
+    {
+        if self.world.won(ctx) {
+            return 0;
+        }
         let mut pos = ctx.last();
         if pos == S::default() {
             pos = ctx.position();
@@ -95,16 +117,7 @@ where
             }))
             .collect();
 
-        let key: (S, Vec<_>, Vec<_>) = (
-            pos,
-            self.world
-                .items_needed(ctx)
-                .into_iter()
-                .map(|(item, _)| self.world.get_item_locations(item))
-                .flatten()
-                .collect(),
-            extra_edges,
-        );
+        let key: (S, Vec<_>, Vec<_>) = (pos, required, extra_edges);
         let locked_map = self.known_costs.lock().unwrap();
         if let Some(&c) = locked_map.get(&key) {
             drop(locked_map);

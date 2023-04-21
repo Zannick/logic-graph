@@ -51,10 +51,7 @@ where
     vec
 }
 
-pub fn visit_locations<W, T, L, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-) -> Vec<ContextWrapper<T>>
+pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -107,10 +104,7 @@ where
     ctx_list
 }
 
-pub fn activate_actions<W, T, L, E>(
-    world: &W,
-    ctx: &ContextWrapper<T>,
-) -> Vec<ContextWrapper<T>>
+pub fn activate_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
@@ -164,10 +158,7 @@ where
             .collect();
         for (has_locs, ctx) in spots {
             if spot_has_actions(world, ctx.get()) {
-                result.extend(activate_actions(
-                    world,
-                    &ctx,
-                ));
+                result.extend(activate_actions(world, &ctx));
             }
             if has_locs {
                 result.extend(visit_locations(world, ctx));
@@ -175,6 +166,49 @@ where
         }
     }
     result
+}
+
+pub fn single_step<W, T, L>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    max_time: u32,
+) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+{
+    // One movement total
+    let movement_state = ctx.get().get_movement_state();
+    let mut results = Vec::new();
+    for spot in world.get_area_spots(ctx.get().position()) {
+        let local = ctx.get().local_travel_time(movement_state, *spot);
+        if local == u32::MAX || local > max_time || local + ctx.elapsed() >= max_time {
+            // Can't move this way, or it takes too long
+            continue;
+        }
+        let mut newctx = ctx.clone();
+        newctx.move_local(*spot, local);
+        results.push(newctx);
+    }
+    for exit in world.get_spot_exits(ctx.get().position()) {
+        if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get()) {
+            let mut newctx = ctx.clone();
+            newctx.exit(exit);
+            results.push(newctx);
+        }
+    }
+    for warp in world.get_warps() {
+        if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get()) {
+            let mut newctx = ctx.clone();
+            newctx.warp(warp);
+            results.push(newctx);
+        }
+    }
+    results.extend(activate_actions(world, &ctx));
+    // This can technically do more than one location at a time, but that's fine I guess
+    results.extend(visit_locations(world, ctx));
+    results
 }
 
 pub struct Search<'a, W, T>
@@ -360,38 +394,7 @@ where
     }
 
     fn single_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        // One movement total
-        let movement_state = ctx.get().get_movement_state();
-        let max_time = self.queue.max_time();
-        let mut results = Vec::new();
-        for spot in self.world.get_area_spots(ctx.get().position()) {
-            let local = ctx.get().local_travel_time(movement_state, *spot);
-            if local == u32::MAX || local > max_time || local + ctx.elapsed() >= max_time {
-                // Can't move this way, or it takes too long
-                continue;
-            }
-            let mut newctx = ctx.clone();
-            newctx.move_local(*spot, local);
-            results.push(newctx);
-        }
-        for exit in self.world.get_spot_exits(ctx.get().position()) {
-            if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get()) {
-                let mut newctx = ctx.clone();
-                newctx.exit(exit);
-                results.push(newctx);
-            }
-        }
-        for warp in self.world.get_warps() {
-            if warp.time() + ctx.elapsed() <= max_time && warp.can_access(ctx.get()) {
-                let mut newctx = ctx.clone();
-                newctx.warp(warp);
-                results.push(newctx);
-            }
-        }
-        results.extend(activate_actions(self.world, &ctx));
-        // This can technically do more than one location at a time, but that's fine I guess
-        results.extend(visit_locations(self.world, ctx));
-        results
+        single_step(self.world, ctx, self.queue.max_time())
     }
 
     fn choose_mode(&self, iters: u64, _ctx: &ContextWrapper<T>) -> SearchMode {
