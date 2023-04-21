@@ -68,7 +68,7 @@ where
 
     /// Inserts a solution into the collection and returns whether this solution
     /// is unique compared to the prior solutions.
-    pub fn insert(&mut self, ctx: ContextWrapper<T>) -> bool {
+    pub fn insert(&mut self, ctx: ContextWrapper<T>) -> Option<Vec<HistoryAlias<T>>> {
         let loc_history: Vec<HistoryAlias<T>> = ctx
             .history_rev()
             .filter(|h| matches!(h, History::Get(_, _) | History::MoveGet(_, _)))
@@ -79,11 +79,13 @@ where
         self.count += 1;
         if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(ctx);
-            false
+            None
         } else {
+            let mut locs = loc_history.clone();
+            locs.reverse();
             self.map.insert(loc_history, vec![ctx]);
             self.write_previews().unwrap();
-            true
+            Some(locs)
         }
     }
 

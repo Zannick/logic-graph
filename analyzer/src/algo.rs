@@ -3,6 +3,7 @@ use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
+use crate::optimize::optimize;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use rayon::prelude::*;
@@ -246,7 +247,8 @@ where
                     wonctx.elapsed()
                 );
                 let start = Instant::now();
-                let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed()).expect("Couldn't beat game after minimizing!");
+                let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed())
+                    .expect("Couldn't beat game after minimizing!");
                 println!("Minimized in {:?}", start.elapsed());
                 println!(
                     "Found greedy solution of {}ms, minimized to {}ms",
@@ -299,7 +301,7 @@ where
         })
     }
 
-    fn handle_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) -> bool {
+    fn handle_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) {
         let old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
         let mut sols = self.solutions.lock().unwrap();
@@ -326,7 +328,30 @@ where
             ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
         self.queue.push(newctx).unwrap();
 
-        sols.insert(ctx)
+        let max_time = ctx.elapsed();
+        if let Some(unique_history) = sols.insert(ctx) {
+            drop(sols);
+            println!("Found new unique solution");
+            let start = Instant::now();
+            let mut opt = optimize(
+                self.queue.scorer(),
+                self.world,
+                self.startctx.get(),
+                unique_history,
+            );
+            if let Some(best) = opt.pop() {
+                if best.elapsed() < max_time {
+                    println!(
+                        "Optimized this type of solution to {}ms in {:?}",
+                        best.elapsed(),
+                        start.elapsed()
+                    );
+
+                    self.handle_solution(best, mode);
+                }
+                self.queue.extend(opt).unwrap();
+            }
+        }
     }
 
     fn handle_greedy_solution(
@@ -350,9 +375,17 @@ where
             }
         }
 
-        if self.handle_solution(ctx, mode) {
-
+        let mstart = Instant::now();
+        if let Some(m) = minimize_greedy(self.world, self.startctx.get(), &ctx, ctx.elapsed()) {
+            println!(
+                "Minimized greedy solution from {}ms -> {}ms in {:?}",
+                ctx.elapsed(),
+                m.elapsed(),
+                mstart.elapsed()
+            );
+            self.handle_solution(m, mode);
         }
+        self.handle_solution(ctx, mode);
 
         self.queue.extend(newstates).unwrap();
     }
