@@ -238,6 +238,18 @@ where
         })
     }
 
+    pub fn scorer(
+        &self,
+    ) -> &ContextScorer<
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    > {
+        &self.scorer
+    }
+
     /// Returns the number of elements in the heap (tracked separately from the db).
     pub fn len(&self) -> usize {
         self.size.load(Ordering::Acquire)

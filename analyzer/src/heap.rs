@@ -2,6 +2,8 @@ extern crate plotlib;
 
 use crate::context::*;
 use crate::db::HeapDB;
+use crate::estimates::ContextScorer;
+use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
 use lru::LruCache;
@@ -379,6 +381,18 @@ where
         Ok(q)
     }
 
+    pub fn scorer(
+        &self,
+    ) -> &ContextScorer<
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    > {
+        self.db.scorer()
+    }
+
     pub fn heap_len(&self) -> usize {
         self.queue.lock().unwrap().len()
     }
@@ -634,10 +648,7 @@ where
                     queue = self.do_retrieve_and_insert(queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return self
-                        .db
-                        .pop(None)
-                        .map_err(|e| e.message);
+                    return self.db.pop(None).map_err(|e| e.message);
                 }
             }
         }
@@ -692,10 +703,7 @@ where
                     queue = self.do_retrieve_and_insert(queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return self
-                        .db
-                        .pop(None)
-                        .map_err(|e| e.message);
+                    return self.db.pop(None).map_err(|e| e.message);
                 }
             }
         }
@@ -786,7 +794,11 @@ where
                 self.db.extend(ev, true)?;
                 self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
-                println!("evict to db took {:?}, db now has {}", start.elapsed(), self.db.len());
+                println!(
+                    "evict to db took {:?}, db now has {}",
+                    start.elapsed(),
+                    self.db.len()
+                );
                 println!("{}", self.db.get_memory_usage_stats().unwrap());
             }
         }
