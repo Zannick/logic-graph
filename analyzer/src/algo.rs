@@ -246,7 +246,7 @@ where
                     wonctx.elapsed()
                 );
                 let start = Instant::now();
-                let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed());
+                let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed()).expect("Couldn't beat game after minimizing!");
                 println!("Minimized in {:?}", start.elapsed());
                 println!(
                     "Found greedy solution of {}ms, minimized to {}ms",
@@ -333,7 +333,6 @@ where
         &self,
         ctx: ContextWrapper<T>,
         fork: &ContextWrapper<T>,
-        check_prior: bool,
         mode: SearchMode,
     ) {
         // Create intermediate states to add to the queue.
@@ -351,21 +350,8 @@ where
             }
         }
 
-        self.handle_solution(ctx, mode);
+        if self.handle_solution(ctx, mode) {
 
-        if check_prior {
-            let first_back = oldhistlen / 2;
-
-            let mut prior = self.startctx.clone();
-            for (i, step) in oldhist.iter().rev().enumerate() {
-                prior.replay(self.world, *step);
-                if i >= first_back && !matches!(step, History::Move(_) | History::MoveLocal(_)) {
-                    if let Ok(win) = greedy_search(self.world, &prior, u32::MAX) {
-                        self.handle_greedy_solution(win, &prior, false, mode);
-                        newstates.push(prior.clone());
-                    }
-                }
-            }
         }
 
         self.queue.extend(newstates).unwrap();
@@ -525,7 +511,7 @@ where
                 {
                     if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
                         if win.elapsed() <= self.queue.max_time() {
-                            self.handle_greedy_solution(win, &ctx, true, mode);
+                            self.handle_greedy_solution(win, &ctx, mode);
                         }
                     }
                 }

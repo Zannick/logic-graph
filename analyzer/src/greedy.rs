@@ -202,7 +202,7 @@ pub fn minimize_greedy<W, T, L, E>(
     startctx: &T,
     wonctx: &ContextWrapper<T>,
     max_time: u32,
-) -> ContextWrapper<T>
+) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -210,7 +210,7 @@ where
     E: Exit<Context = T>,
 {
     let ctx = minimize(world, startctx, wonctx);
-    greedy_search(world, &ctx, max_time).expect("Couldn't beat game after minimizing!")
+    greedy_search(world, &ctx, max_time).ok()
 }
 
 pub fn minimal_greedy_playthrough<W, T, L, E>(
@@ -225,5 +225,5 @@ where
     E: Exit<Context = T>,
 {
     let wonctx = greedy_search(world, ctx, max_time).expect("Didn't win with greedy search");
-    minimize_greedy(world, ctx.get(), &wonctx, max_time)
+    minimize_greedy(world, ctx.get(), &wonctx, max_time).unwrap_or(wonctx)
 }
