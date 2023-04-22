@@ -27,7 +27,7 @@ pub struct ShortestPaths<V, E> {
 impl<V, E> SteinerAlgo<V, E> for ShortestPaths<V, E>
 where
     V: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
-    E: Copy + Clone + Eq + PartialEq + std::hash::Hash,
+    E: Copy + Clone + Debug + Eq + PartialEq + std::hash::Hash,
 {
     const NAME: &'static str = "ShortestPaths";
 
@@ -56,6 +56,8 @@ where
             present.resize(graph.nodes.len(), false);
             present[start] = true;
 
+            // Heap elements are the edge index and the minimum time to
+            // reach it plus the edge's weight
             let mut ph = PairingHeap::new();
             for &ei in &edges_by_start[start] {
                 let e = &graph.edges[ei];
@@ -78,7 +80,7 @@ where
                     }
                 }
             }
-            while let Some((ei, _)) = ph.delete_min() {
+            while let Some((ei, prio)) = ph.delete_min() {
                 let e = &graph.edges[ei];
                 // should always be true
                 if let (v, Some(w)) = &paths[start][e.src] {
@@ -99,7 +101,10 @@ where
                         present[e.dst] = true;
                         for &ei2 in &edges_by_start[e.dst] {
                             let e2 = &graph.edges[ei2];
-                            ph.insert(ei2, e2.wt);
+                            // Because prio is the minimum time to reach e and take it,
+                            // and we haven't yet visited e.dst
+                            // prio + e2.wt is the minimum time to reach e2 and take it
+                            ph.insert(ei2, prio + e2.wt);
                         }
                     }
                 }
