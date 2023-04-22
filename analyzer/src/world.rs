@@ -159,6 +159,12 @@ pub trait World: Sync {
         u32,
     )>;
 
+    fn base_distance(
+        &self,
+        s1: <Self::Exit as Exit>::SpotId,
+        s2: <Self::Exit as Exit>::SpotId,
+    ) -> u32;
+
     fn are_spots_connected(
         &self,
         sp1: <Self::Exit as Exit>::SpotId,

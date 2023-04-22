@@ -66,6 +66,19 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
     }
 }
 
+pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
+    match (s1, s2) {
+%% for s in gl.spots()|map(attribute='id')
+%% for t in gl.spots()|map(attribute='id')
+%% if (s, t) in base_distances
+        (SpotId::{{ s }}, SpotId::{{ t }}) => {{ (base_distances[(s, t)] * 1000)|int }},
+%% endif
+%% endfor
+%% endfor
+        _ => u32::MAX,
+    }
+}
+
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
 %% for s in gl.spots()

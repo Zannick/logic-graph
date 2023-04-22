@@ -80,7 +80,7 @@ where
         T: Ctx<World = W>,
         L: Location<Context = T>,
     {
-        if self.world.won(ctx) {
+        if required.is_empty() || self.world.won(ctx) {
             return 0;
         }
         let mut pos = ctx.last();
@@ -135,7 +135,7 @@ where
                 &key.2,
             ) {
                 // Extra warp cost is number of "branches" times min_warp_time
-                // Number of branches is number of edges minus number of unique starting nodes plus 1
+                // Number of branches is number of edges minus number of unique starting nodes
                 // Only count the spot to spot edges
                 let mut edges = 0;
                 let unique_nodes: HashSet<_> = arborescence
@@ -149,8 +149,9 @@ where
                     })
                     .collect();
                 let min_warp_time: u64 = self.world.min_warp_time().into();
-                cost + min_warp_time
-                    * <usize as TryInto<u64>>::try_into(edges - unique_nodes.len() + 1).unwrap()
+                let warp_cost = min_warp_time
+                    * <usize as TryInto<u64>>::try_into(edges - unique_nodes.len()).unwrap();
+                cost + warp_cost
             } else {
                 // A sufficiently large number.
                 1 << 30

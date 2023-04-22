@@ -389,6 +389,10 @@ impl world::World for World {
         movements::base_edges()
     }
 
+    fn base_distance(&self, s1: SpotId, s2: SpotId) -> u32 {
+        movements::base_distance(s1, s2)
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }
@@ -415,12 +419,12 @@ impl World {
                 {%- else %}start: 0, end: 0,{% endif %}
             },
             min_warp_time: {% if (warps.values()|selectattr('base_movement', 'undefined')) and (global_actions|selectattr('to')) -%}
-                std::cmp::min({{ warps.values()|selectattr('base_movement', 'undefined')|map(attribute='time')|min }},
-                    {{ global_actions|selectattr('to')|map(attribute='time')|min }})
+                std::cmp::min({{ (warps.values()|selectattr('base_movement', 'undefined')|map(attribute='time')|min * 1000)|int }},
+                    {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }})
                 {%- elif warps -%}
-                    {{ warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min }}
+                    {{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }}
                 {%- elif global_actions|selectattr('to') -%}
-                    {{ global_actions|selectattr('to')|map(attribute='time')|min }}
+                    {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }}
                 {% else %}0{% endif %},
         }
     }

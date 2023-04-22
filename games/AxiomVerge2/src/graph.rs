@@ -7740,6 +7740,10 @@ impl world::World for World {
         movements::base_edges()
     }
 
+    fn base_distance(&self, s1: SpotId, s2: SpotId) -> u32 {
+        movements::base_distance(s1, s2)
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }
@@ -8230,7 +8234,7 @@ impl World {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
-            min_warp_time: std::cmp::min(5, 3),
+            min_warp_time: std::cmp::min(5000, 3000),
         }
     }
 

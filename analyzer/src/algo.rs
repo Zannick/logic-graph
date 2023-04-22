@@ -184,7 +184,7 @@ where
     let mut results = Vec::new();
     for spot in world.get_area_spots(ctx.get().position()) {
         let local = ctx.get().local_travel_time(movement_state, *spot);
-        if local == u32::MAX || local > max_time || local + ctx.elapsed() >= max_time {
+        if local == u32::MAX || local > max_time || local + ctx.elapsed() > max_time {
             // Can't move this way, or it takes too long
             continue;
         }

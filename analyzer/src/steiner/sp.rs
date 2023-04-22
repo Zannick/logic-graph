@@ -74,7 +74,7 @@ where
                     // Immediately do the second-order edges, rather than insert the first edges
                     for &ei2 in &edges_by_start[e.dst] {
                         let e2 = &graph.edges[ei2];
-                        ph.insert(ei2, e2.wt);
+                        ph.insert(ei2, e2.wt + e.wt);
                     }
                 }
             }
