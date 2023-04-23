@@ -224,6 +224,7 @@ where
     iters: AtomicU64,
     extras: AtomicU64,
     deadends: AtomicU32,
+    optimizes: AtomicU32,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -298,6 +299,7 @@ where
             iters: 0.into(),
             extras: 0.into(),
             deadends: 0.into(),
+            optimizes: 0.into(),
         })
     }
 
@@ -347,7 +349,7 @@ where
                             best.elapsed(),
                             start.elapsed()
                         );
-
+                        self.optimizes.fetch_add(1, Ordering::Release);
                         self.handle_solution(best, mode);
                     }
                 } else {
@@ -611,7 +613,7 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         println!(
-            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}) ---\n\
+            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}; opt={}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
             limit: {}ms; db best: {}; evictions: {}; retrievals: {}; bgdel={}\n\
             push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
@@ -621,6 +623,7 @@ where
             sols.len(),
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
+            self.optimizes.load(Ordering::Acquire),
             self.queue.heap_len(),
             self.queue.db_len(),
             self.queue.len(),

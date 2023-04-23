@@ -177,18 +177,11 @@ where
                 }),
         );
     }
+    // Not sure why this happens sometimes for the very first location;
+    // for others it could be that the state is a stale duplicate
     match &greedy {
-        Some(c) => {
-            let est = get_estimate(c);
-            // Not sure why this happens.
-            println!(
-                "Didn't find a path with a* but greedy found this path in {}:\n{}",
-                c.elapsed(),
-                c.history_str()
-            );
-            if est > c.elapsed().into() {
-                println!("Overestimated!\n{}", c.history_str());
-            }
+        Some(_) => {
+            println!("Didn't find a path with a* but greedy found one");
         }
         _ => (),
     }
