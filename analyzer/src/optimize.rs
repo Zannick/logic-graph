@@ -102,7 +102,7 @@ where
         count += 1;
         if count % 1000000 == 0 {
             println!(
-                "a* is taking awhile: iter={} heap={} req={:?} expected={} est={} cur={}",
+                "a* is taking awhile: iter={} heap={} req={:?} limit={} est={} cur={}",
                 count,
                 heap.len(),
                 required,
