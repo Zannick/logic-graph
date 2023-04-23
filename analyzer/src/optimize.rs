@@ -7,6 +7,10 @@ use crate::greedy::*;
 use crate::steiner::{EdgeId, NodeId, SteinerAlgo};
 use crate::world::*;
 use crate::{context::*, new_hashmap};
+use plotlib::page::Page;
+use plotlib::repr::{Histogram, HistogramBins, Plot};
+use plotlib::style::{PointMarker, PointStyle};
+use plotlib::view::ContinuousView;
 use rayon::prelude::*;
 use sort_by_derive::SortBy;
 use std::cmp::Reverse;
@@ -102,11 +106,7 @@ where
                 count,
                 heap.len(),
                 required,
-                if let Some(c) = &greedy {
-                    c.elapsed()
-                } else {
-                    0
-                },
+                max_time,
                 estimate,
                 el.elapsed()
             );
