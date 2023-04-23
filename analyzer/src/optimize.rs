@@ -18,6 +18,7 @@ struct AStarHeapElement<T: Ctx> {
     #[sort_by]
     estimate: u32,
     index: usize,
+    global_actions: u8,
     el: ContextWrapper<T>,
 }
 
@@ -75,6 +76,7 @@ where
     } else {
         None
     };
+    let last = startctx.history_rev().next();
     let start = Instant::now();
     // TODO: don't use an a* search for this, use the greedy search
     // take the best of {no actions, 1 action, 2 actions, etc}
@@ -82,14 +84,33 @@ where
     heap.push(Reverse(AStarHeapElement {
         estimate: get_estimate(&startctx),
         el: startctx,
+        global_actions: 0,
         index: 0,
     }));
+    let mut count = 0;
     while let Some(Reverse(AStarHeapElement {
         estimate,
         index,
+        global_actions,
         el,
     })) = heap.pop()
     {
+        count += 1;
+        if count % 1000000 == 0 {
+            println!(
+                "a* is taking awhile: iter={} heap={} req={:?} expected={} est={} cur={}",
+                count,
+                heap.len(),
+                required,
+                if let Some(c) = &greedy {
+                    c.elapsed()
+                } else {
+                    0
+                },
+                estimate,
+                el.elapsed()
+            );
+        }
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
             return Some(el);
         }
@@ -114,10 +135,28 @@ where
                                 Some(Reverse(AStarHeapElement {
                                     estimate,
                                     index: index + 1,
+                                    global_actions: 0,
                                     el: ctx,
                                 }))
                             } else {
                                 None
+                            }
+                        }
+                        Some(History::Activate(a)) if world.is_global_action(a) => {
+                            if usize::from(global_actions + 1) >= world.get_global_actions().len() {
+                                None
+                            } else {
+                                let estimate = get_estimate(&ctx);
+                                if estimate <= max_time {
+                                    Some(Reverse(AStarHeapElement {
+                                        estimate,
+                                        index,
+                                        global_actions: global_actions + 1,
+                                        el: ctx,
+                                    }))
+                                } else {
+                                    None
+                                }
                             }
                         }
                         Some(_) => {
@@ -126,6 +165,7 @@ where
                                 Some(Reverse(AStarHeapElement {
                                     estimate,
                                     index,
+                                    global_actions,
                                     el: ctx,
                                 }))
                             } else {
