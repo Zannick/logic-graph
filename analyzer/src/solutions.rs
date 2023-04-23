@@ -89,6 +89,28 @@ where
         }
     }
 
+    pub fn get_best(&self) -> ContextWrapper<T> {
+        self.map
+            .values()
+            .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
+            .min_by_key(|c| c.elapsed())
+            .unwrap()
+            .clone()
+    }
+
+    pub fn get_best_unique(&self) -> Vec<HistoryAlias<T>> {
+        let mut u: Vec<_> = self.map
+            .values()
+            .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
+            .min_by_key(|c| c.elapsed())
+            .unwrap()
+            .history_rev()
+            .filter(|h| matches!(h, History::Get(_, _) | History::MoveGet(_, _)))
+            .collect();
+        u.reverse();
+        u
+    }
+
     fn write_one(
         file: &mut File,
         num: usize,

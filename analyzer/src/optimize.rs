@@ -2,6 +2,7 @@
 
 use crate::algo::single_step;
 use crate::estimates::ContextScorer;
+use crate::greedy::*;
 use crate::steiner::{EdgeId, NodeId, SteinerAlgo};
 use crate::world::*;
 use crate::{context::*, new_hashmap};
@@ -25,7 +26,7 @@ fn a_star<'w, W, T, L, E, A>(
     world: &W,
     mut startctx: ContextWrapper<T>,
     required: &[L::LocId],
-    max_time: u32,
+    mut max_time: u32,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -57,9 +58,40 @@ where
     };
     startctx.get_mut().reset(required[0]);
 
+    // TODO: use the seendb instead of a separate hashmap
     let mut state_map = new_hashmap();
     state_map.insert(startctx.get().clone(), startctx.elapsed());
+    let greedy = if required.len() == 1 {
+        match first_spot_with_locations_after_actions(world, startctx.clone(), 4, max_time) {
+            Ok(mut c) => {
+                grab_all(world, &mut c);
+                let est = get_estimate(&startctx);
+                println!(
+                    "Greedy reachability from {:?} in {}ms (from {}ms, so actual={}) vs estimate {}ms",
+                    startctx.get().position(),
+                    c.elapsed(),
+                    startctx.elapsed(),
+                    c.elapsed() - startctx.elapsed(),
+                    est,
+                );
+                if est > c.elapsed().into() {
+                    println!("Overestimated!\n{}", c.history_str());
+                }
+                max_time = c.elapsed();
+                Some(c)
+            }
+            Err(c) => panic!(
+                "Never found a path to {:?}!\n{}",
+                required[0],
+                c.history_summary()
+            ),
+        }
+    } else {
+        None
+    };
     let start = Instant::now();
+    // TODO: don't use an a* search for this, use the greedy search
+    // take the best of {no actions, 1 action, 2 actions, etc}
     heap.push(Reverse(AStarHeapElement {
         estimate: get_estimate(&startctx),
         el: startctx,
@@ -72,7 +104,6 @@ where
     })) = heap.pop()
     {
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
-            println!("Found shortest a* path for {:?} of {}ms in {:?}", required, el.elapsed(), start.elapsed());
             return Some(el);
         }
         heap.extend(
@@ -101,7 +132,8 @@ where
                                 el: ctx,
                             }))
                         }
-                        _ => {
+                        None => None,
+                        Some(h) => {
                             let estimate = get_estimate(&ctx);
                             if estimate > max_time.into() {
                                 return None;
@@ -122,6 +154,22 @@ where
                 }),
         );
     }
+    match greedy {
+        Some(mut c) => {
+            let est = get_estimate(&c);
+            println!(
+                    "But greedy found this path in {}:\n{}",
+                    c.elapsed(),
+                    c.history_str()
+                );
+            if est > c.elapsed().into() {
+                println!("Overestimated!\n{}", c.history_str());
+            }
+            max_time = c.elapsed();
+        }
+        _ => (),
+    }
+
     None
 }
 
@@ -163,6 +211,12 @@ where
     // 0 ------> 2 A* using the Steiner tree estimates for 1+2
     // With the best for 2, we can calc: 2 -> 3, 1 -> 3, 0 -> 3 similarly
     for next in 0..locs_required.len() {
+        println!(
+            "Optimizing route to loc {} of {}: {:?}",
+            next + 1,
+            locs_required.len(),
+            locs_required[next]
+        );
         let g = a_star(
             scorer,
             world,
