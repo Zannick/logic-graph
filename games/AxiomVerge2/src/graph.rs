@@ -8255,6 +8255,7 @@ impl World {
                     | Item::Heretics_Tablet
                     | Item::Letter_from_Trace
                     | Item::Melee_Charge
+                    | Item::Mist_Upgrade
                     | Item::Notes_2053_02_27
                     | Item::Record_Losses
                     | Item::Researchers_Missing
@@ -8272,6 +8273,7 @@ impl World {
                     | Item::Health
                     | Item::Health_Fragment
                     | Item::Melee_Charge
+                    | Item::Mist_Upgrade
                     | Item::Notes_2053_02_27
             ),
             _ => false,

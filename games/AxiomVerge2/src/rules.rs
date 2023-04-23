@@ -486,10 +486,6 @@ pub fn access_melee_speed__2(ctx: &Context) -> bool {
     // Melee_Speed{2}
     ctx.count(Item::Melee_Speed) >= 2
 }
-pub fn access_mist_upgrade(ctx: &Context) -> bool {
-    // Mist_Upgrade
-    ctx.has(Item::Mist_Upgrade)
-}
 pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone

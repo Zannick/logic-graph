@@ -256,6 +256,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Health
             | Item::Health_Fragment
             | Item::Melee_Charge
+            | Item::Mist_Upgrade
             | Item::Notes_2053_02_27
     )
 }

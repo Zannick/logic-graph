@@ -224,21 +224,20 @@ pub mod flags {
             const LEDGE_GRAB = 1 << 5;
             const LETTER_FROM_TRACE = 1 << 6;
             const MAP_17_10 = 1 << 7;
-            const MIST_UPGRADE = 1 << 8;
-            const NANITE_MIST = 1 << 9;
-            const POWER_MATRIX = 1 << 10;
-            const RECORD_LOSSES = 1 << 11;
-            const REMOTE_DRONE = 1 << 12;
-            const RESEARCHERS_MISSING = 1 << 13;
-            const SHOCKWAVE = 1 << 14;
-            const SLINGSHOT_HOOK = 1 << 15;
-            const STATION_POWER = 1 << 16;
-            const SWITCH_36_11 = 1 << 17;
-            const SWITCH_40_12 = 1 << 18;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 19;
-            const UNDER_SIEGE = 1 << 20;
-            const UNDERWATER_MOVEMENT = 1 << 21;
-            const WALL_CLIMB = 1 << 22;
+            const NANITE_MIST = 1 << 8;
+            const POWER_MATRIX = 1 << 9;
+            const RECORD_LOSSES = 1 << 10;
+            const REMOTE_DRONE = 1 << 11;
+            const RESEARCHERS_MISSING = 1 << 12;
+            const SHOCKWAVE = 1 << 13;
+            const SLINGSHOT_HOOK = 1 << 14;
+            const STATION_POWER = 1 << 15;
+            const SWITCH_36_11 = 1 << 16;
+            const SWITCH_40_12 = 1 << 17;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 18;
+            const UNDER_SIEGE = 1 << 19;
+            const UNDERWATER_MOVEMENT = 1 << 20;
+            const WALL_CLIMB = 1 << 21;
         }
     }
 }
@@ -329,7 +328,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
-    const NUM_ITEMS: u32 = 51;
+    const NUM_ITEMS: u32 = 50;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -384,7 +383,6 @@ impl context::Ctx for Context {
             Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10),
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
-            Item::Mist_Upgrade => self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE),
             Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
             Item::Power_Matrix => self.cbits2.contains(flags::ContextBits2::POWER_MATRIX),
@@ -503,10 +501,6 @@ impl context::Ctx for Context {
             Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10).into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
-            Item::Mist_Upgrade => self
-                .cbits2
-                .contains(flags::ContextBits2::MIST_UPGRADE)
-                .into(),
             Item::Nanite_Mist => self
                 .cbits2
                 .contains(flags::ContextBits2::NANITE_MIST)
@@ -667,9 +661,6 @@ impl context::Ctx for Context {
             },
             Item::Melee_Speed => {
                 self.melee_speed += 1;
-            },
-            Item::Mist_Upgrade => {
-                self.cbits2.insert(flags::ContextBits2::MIST_UPGRADE);
             },
             Item::Nanite_Mist => {
                 self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
@@ -1580,9 +1571,6 @@ impl Context {
             }
             Item::Melee_Speed => {
                 self.melee_speed += 1;
-            }
-            Item::Mist_Upgrade => {
-                self.cbits2.insert(flags::ContextBits2::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
                 self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
