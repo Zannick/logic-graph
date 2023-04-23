@@ -99,6 +99,9 @@ where
         el,
     })) = heap.pop()
     {
+        if !db.remember_pop(&el).unwrap() {
+            continue;
+        }
         count += 1;
         if count % 1000000 == 0 {
             println!(
