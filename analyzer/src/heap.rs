@@ -381,6 +381,10 @@ where
         Ok(q)
     }
 
+    pub fn db(&self) -> &HeapDB<W, T> {
+        &self.db
+    }
+
     pub fn scorer(
         &self,
     ) -> &ContextScorer<

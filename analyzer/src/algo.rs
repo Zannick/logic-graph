@@ -334,7 +334,7 @@ where
             println!("Found new unique solution");
             let start = Instant::now();
             let mut opt = optimize(
-                self.queue.scorer(),
+                self.queue.db(),
                 self.world,
                 self.startctx.get(),
                 unique_history,

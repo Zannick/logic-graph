@@ -415,6 +415,17 @@ where
         self.scorer.estimate_remaining_time(ctx).try_into().unwrap()
     }
 
+    pub fn estimate_time_to_get(
+        &self,
+        ctx: &T,
+        required: Vec<<<W as World>::Location as Location>::LocId>,
+    ) -> u32 {
+        self.scorer
+            .estimate_time_to_get(ctx, required)
+            .try_into()
+            .unwrap()
+    }
+
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.

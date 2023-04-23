@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use crate::algo::single_step;
+use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::steiner::{EdgeId, NodeId, SteinerAlgo};
@@ -15,15 +16,15 @@ use std::time::Instant;
 #[derive(SortBy)]
 struct AStarHeapElement<T: Ctx> {
     #[sort_by]
-    estimate: u64,
+    estimate: u32,
     index: usize,
     el: ContextWrapper<T>,
 }
 
 // TODO: This might be a lot of repeated work. Can we cache the fastest ctxs
 // to 1..n?
-fn a_star<'w, W, T, L, E, A>(
-    scorer: &ContextScorer<'w, W, E::SpotId, L::LocId, EdgeId<W>, A>,
+fn a_star<'w, W, T, L, E>(
+    db: &HeapDB<'w, W, T>,
     world: &W,
     mut startctx: ContextWrapper<T>,
     required: &[L::LocId],
@@ -34,12 +35,11 @@ where
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
-    A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
 {
     let mut heap = BinaryHeap::new();
     let mut v: Vec<_> = required.iter().collect();
     v.sort_unstable();
-    let get_estimate = |ctx: &ContextWrapper<T>| -> u64 {
+    let get_estimate = |ctx: &ContextWrapper<T>| -> u32 {
         let remaining: Vec<_> = v
             .iter()
             .filter_map(|&&loc_id| {
@@ -51,17 +51,13 @@ where
             })
             .collect();
         if remaining.is_empty() {
-            ctx.elapsed().into()
+            ctx.elapsed()
         } else {
-            <u32 as Into<u64>>::into(ctx.elapsed())
-                + scorer.estimate_time_to_get(ctx.get(), remaining)
+            ctx.elapsed() + db.estimate_time_to_get(ctx.get(), remaining)
         }
     };
     startctx.get_mut().reset(required[0]);
 
-    // TODO: use the seendb instead of a separate hashmap
-    let mut state_map = new_hashmap();
-    state_map.insert(startctx.get().clone(), startctx.elapsed());
     let greedy = if required.len() == 1 {
         match first_spot_with_locations_after_actions(world, startctx.clone(), 4, max_time) {
             Ok(mut c) => {
@@ -82,6 +78,7 @@ where
     let start = Instant::now();
     // TODO: don't use an a* search for this, use the greedy search
     // take the best of {no actions, 1 action, 2 actions, etc}
+    // Could we limit the number of global actions?
     heap.push(Reverse(AStarHeapElement {
         estimate: get_estimate(&startctx),
         el: startctx,
@@ -96,10 +93,16 @@ where
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
             return Some(el);
         }
+        let vec = single_step(world, el, max_time);
+        let keeps = db.remember_which(&vec).unwrap();
+
         heap.extend(
-            single_step(world, el, max_time)
-                .into_iter()
-                .filter_map(|mut ctx| {
+            vec.into_iter()
+                .zip(keeps.into_iter())
+                .filter_map(|(mut ctx, keep)| {
+                    if !keep {
+                        return None;
+                    }
                     match ctx.history_rev().next() {
                         Some(History::Get(_, loc_id)) => {
                             // Immediately after we visit a required location, unskip the next one
@@ -107,39 +110,29 @@ where
                                 ctx.get_mut().reset(required[index + 1]);
                             }
                             let estimate = get_estimate(&ctx);
-                            if estimate > max_time.into() {
-                                return None;
+                            if estimate <= max_time {
+                                Some(Reverse(AStarHeapElement {
+                                    estimate,
+                                    index: index + 1,
+                                    el: ctx,
+                                }))
+                            } else {
+                                None
                             }
-                            if let Some(time) = state_map.get(ctx.get()) {
-                                if ctx.elapsed() > *time {
-                                    return None;
-                                }
+                        }
+                        Some(_) => {
+                            let estimate = get_estimate(&ctx);
+                            if estimate <= max_time {
+                                Some(Reverse(AStarHeapElement {
+                                    estimate,
+                                    index,
+                                    el: ctx,
+                                }))
+                            } else {
+                                None
                             }
-                            state_map.insert(ctx.get().clone(), ctx.elapsed());
-                            Some(Reverse(AStarHeapElement {
-                                estimate,
-                                index: index + 1,
-                                el: ctx,
-                            }))
                         }
                         None => None,
-                        Some(h) => {
-                            let estimate = get_estimate(&ctx);
-                            if estimate > max_time.into() {
-                                return None;
-                            }
-                            if let Some(time) = state_map.get(ctx.get()) {
-                                if ctx.elapsed() > *time {
-                                    return None;
-                                }
-                            }
-                            state_map.insert(ctx.get().clone(), ctx.elapsed());
-                            Some(Reverse(AStarHeapElement {
-                                estimate,
-                                index,
-                                el: ctx,
-                            }))
-                        }
                     }
                 }),
         );
@@ -163,8 +156,8 @@ where
     None
 }
 
-pub fn optimize<'w, W, T, L, E, A>(
-    scorer: &ContextScorer<'w, W, E::SpotId, L::LocId, EdgeId<W>, A>,
+pub fn optimize<'w, W, T, L, E>(
+    db: &HeapDB<'w, W, T>,
     world: &W,
     startctx: &T,
     unique_history: Vec<HistoryAlias<T>>,
@@ -174,7 +167,6 @@ where
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
-    A: SteinerAlgo<NodeId<W>, EdgeId<W>> + Sync,
 {
     let mut locs_required: Vec<L::LocId> = unique_history
         .into_iter()
@@ -209,7 +201,7 @@ where
         );
         let start = Instant::now();
         let g = a_star(
-            scorer,
+            db,
             world,
             best[next].clone(),
             &locs_required[next..=next],
@@ -230,7 +222,7 @@ where
             .into_par_iter()
             .filter_map(|prev| {
                 a_star(
-                    scorer,
+                    db,
                     world,
                     best[prev].clone(),
                     &locs_required[prev..=next],
