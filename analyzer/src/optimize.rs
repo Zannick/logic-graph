@@ -6,6 +6,7 @@ use crate::greedy::*;
 use crate::steiner::{EdgeId, NodeId, SteinerAlgo};
 use crate::world::*;
 use crate::{context::*, new_hashmap};
+use rayon::prelude::*;
 use sort_by_derive::SortBy;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
@@ -66,17 +67,6 @@ where
             Ok(mut c) => {
                 grab_all(world, &mut c);
                 let est = get_estimate(&startctx);
-                println!(
-                    "Greedy reachability from {:?} in {}ms (from {}ms, so actual={}) vs estimate {}ms",
-                    startctx.get().position(),
-                    c.elapsed(),
-                    startctx.elapsed(),
-                    c.elapsed() - startctx.elapsed(),
-                    est,
-                );
-                if est > c.elapsed().into() {
-                    println!("Overestimated!\n{}", c.history_str());
-                }
                 max_time = c.elapsed();
                 Some(c)
             }
@@ -158,10 +148,10 @@ where
         Some(mut c) => {
             let est = get_estimate(&c);
             println!(
-                    "But greedy found this path in {}:\n{}",
-                    c.elapsed(),
-                    c.history_str()
-                );
+                "But greedy found this path in {}:\n{}",
+                c.elapsed(),
+                c.history_str()
+            );
             if est > c.elapsed().into() {
                 println!("Overestimated!\n{}", c.history_str());
             }
@@ -184,7 +174,7 @@ where
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
-    A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
+    A: SteinerAlgo<NodeId<W>, EdgeId<W>> + Sync,
 {
     let mut locs_required: Vec<L::LocId> = unique_history
         .into_iter()
@@ -217,6 +207,7 @@ where
             locs_required.len(),
             locs_required[next]
         );
+        let start = Instant::now();
         let g = a_star(
             scorer,
             world,
@@ -225,22 +216,35 @@ where
             u32::MAX,
         )
         .expect("Couldn't get to next destination");
+        // TODO: should max_time be an atomic? Threads would be able to update each other.
+        // We can be clever and hold off on updating the actual best entry
         let mut max_time = g.elapsed();
         best.push(g);
-        for prev in 2..std::cmp::min(best.len(), 3) {
-            if let Some(ctx) = a_star(
-                scorer,
-                world,
-                best[next + 1 - prev].clone(),
-                &locs_required[next + 1 - prev..=next],
-                max_time,
-            ) {
-                if ctx.elapsed() < max_time {
-                    max_time = ctx.elapsed();
-                    best[next + 1] = ctx;
-                }
+        // 0: we are measuring 0 -> 1, 0..0 means no iters
+        // 1: 1->2, so down here we want 0 -> 2, i.e. 0..1
+        // 2: 2->3, so we want 1 -> 3 and 0 -> 3 (if we do depth=3). i.e. 0..2
+        // 3: 3->4, we only want 1 -> 4, so prev is 1..3
+        // in other words, min(next - 2, 0)..next
+        let min_index = std::cmp::max(2, next) - 2;
+        if let Some(ctx) = (min_index..next)
+            .into_par_iter()
+            .filter_map(|prev| {
+                a_star(
+                    scorer,
+                    world,
+                    best[prev].clone(),
+                    &locs_required[prev..=next],
+                    max_time,
+                )
+            })
+            .min_by_key(|c| c.elapsed())
+        {
+            if ctx.elapsed() < max_time {
+                max_time = ctx.elapsed();
+                best[next + 1] = ctx;
             }
         }
+        println!("This optimize round took {:?}", start.elapsed());
     }
     best
 }
