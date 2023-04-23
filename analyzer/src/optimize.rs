@@ -103,6 +103,15 @@ where
             continue;
         }
         count += 1;
+        if (count >= 10_000_000 && required.len() > 2)
+            || (count >= 20_000_000 && required.len() > 1)
+        {
+            println!(
+                "a* took too long with {} locations, giving up",
+                required.len()
+            );
+            return None;
+        }
         if count % 1000000 == 0 {
             println!(
                 "a* is taking awhile: iter={} heap={} req={:?} limit={} est={} cur={}",
