@@ -340,14 +340,18 @@ where
                 unique_history,
             );
             if let Some(best) = opt.pop() {
-                if best.elapsed() < max_time {
-                    println!(
-                        "Optimized this type of solution to {}ms in {:?}",
-                        best.elapsed(),
-                        start.elapsed()
-                    );
+                if self.world.won(best.get()) {
+                    if best.elapsed() < max_time {
+                        println!(
+                            "Optimized this type of solution to {}ms in {:?}",
+                            best.elapsed(),
+                            start.elapsed()
+                        );
 
-                    self.handle_solution(best, mode);
+                        self.handle_solution(best, mode);
+                    }
+                } else {
+                    opt.push(best);
                 }
                 self.queue.extend(opt).unwrap();
             }

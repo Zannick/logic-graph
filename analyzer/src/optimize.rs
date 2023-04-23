@@ -177,23 +177,23 @@ where
                 }),
         );
     }
-    match greedy {
-        Some(mut c) => {
-            let est = get_estimate(&c);
+    match &greedy {
+        Some(c) => {
+            let est = get_estimate(c);
+            // Not sure why this happens.
             println!(
-                "But greedy found this path in {}:\n{}",
+                "Didn't find a path with a* but greedy found this path in {}:\n{}",
                 c.elapsed(),
                 c.history_str()
             );
             if est > c.elapsed().into() {
                 println!("Overestimated!\n{}", c.history_str());
             }
-            max_time = c.elapsed();
         }
         _ => (),
     }
 
-    None
+    greedy
 }
 
 pub fn optimize<'w, W, T, L, E>(
@@ -240,14 +240,23 @@ where
             locs_required[next]
         );
         let start = Instant::now();
-        let g = a_star(
+        let g = if let Some(g) = a_star(
             db,
             world,
             best[next].clone(),
             &locs_required[next..=next],
             u32::MAX,
-        )
-        .expect("Couldn't get to next destination");
+        ) {
+            g
+        } else {
+            println!(
+                "Couldn't get to next destination {} of {}: {:?}",
+                next + 1,
+                locs_required.len(),
+                locs_required[next]
+            );
+            return best;
+        };
         // TODO: should max_time be an atomic? Threads would be able to update each other.
         // We can be clever and hold off on updating the actual best entry
         let mut max_time = g.elapsed();
