@@ -4583,7 +4583,6 @@ pub enum ActionId {
     Giguna__West_Caverns__East_Susar__Hack,
     Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,
     Glacier__Revival__Save_Point__Save,
-    Global__Deploy_Drone,
     Global__Recall_Drone,
 }
 impl fmt::Display for ActionId {
@@ -4727,7 +4726,6 @@ impl fmt::Display for ActionId {
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point: Save")
             }
-            ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
         }
     }
@@ -4850,7 +4848,6 @@ impl std::str::FromStr for ActionId {
             "Glacier > Revival > Save Point: Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
             }
-            "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),
             "Recall Drone" => Ok(ActionId::Global__Recall_Drone),
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
@@ -6763,9 +6760,6 @@ impl world::Accessible for Action {
                     rules::access_can_deploy(&ctx)
                 }
                 ActionId::Glacier__Revival__Save_Point__Save => true,
-                ActionId::Global__Deploy_Drone => {
-                    rules::access_not_within_menu_and_can_deploy(&ctx)
-                }
                 ActionId::Global__Recall_Drone => {
                     rules::access_not_within_menu_and_not_breach_and_can_recall(&ctx)
                 }
@@ -6787,7 +6781,6 @@ impl world::Action for Action {
     fn perform(&self, ctx: &mut Context) {
         match self.id {
             ActionId::Global__Recall_Drone => rules::action_mode__indra(ctx),
-            ActionId::Global__Deploy_Drone => rules::action_mode__drone_indra__position(ctx),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 rules::action_amagi__main_area__carving__key_combo__do(ctx)
             }
@@ -8231,7 +8224,7 @@ impl World {
             ],
             spots: build_spots(),
             global_actions: Range {
-                start: ActionId::Global__Deploy_Drone.into_usize(),
+                start: ActionId::Global__Recall_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
             min_warp_time: std::cmp::min(5000, 3000),
@@ -11635,11 +11628,6 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Global__Recall_Drone => Action {
             id: ActionId::Global__Recall_Drone,
             time: 3000,
-            price: Currency::Free,
-        },
-        ActionId::Global__Deploy_Drone => Action {
-            id: ActionId::Global__Deploy_Drone,
-            time: 500,
             price: Currency::Free,
         },
         ActionId::Amagi__Main_Area__Carving__Key_Combo => Action {

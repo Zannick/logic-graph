@@ -530,13 +530,6 @@ pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> b
     }) && ctx.has(Item::Amashilama))
         && ctx.mode() != enums::Mode::Drone)
 }
-pub fn access_not_within_menu_and_can_deploy(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and $can_deploy
-    (!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && helper__can_deploy!(ctx))
-}
 pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and ^flasks > 0
     (!(match get_region(ctx.position()) {
@@ -772,11 +765,6 @@ pub fn action_last__default(ctx: &mut Context) {
 pub fn action_last__position(ctx: &mut Context) {
     // ^last = ^position
     ctx.set_last(ctx.position());
-}
-pub fn action_mode__drone_indra__position(ctx: &mut Context) {
-    // ^mode = 'drone'; ^indra = ^position
-    ctx.set_mode(enums::Mode::Drone);
-    ctx.set_indra(ctx.position());
 }
 pub fn action_mode__indra(ctx: &mut Context) {
     // ^mode = 'Indra'
