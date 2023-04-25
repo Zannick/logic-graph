@@ -1125,10 +1125,6 @@ impl context::Ctx for Context {
             self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
         }
     }
-
-    fn last(&self) -> SpotId {
-        Context::last(self)
-    }
 }
 
 impl Context {

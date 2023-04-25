@@ -83,10 +83,7 @@ where
         if required.is_empty() || self.world.won(ctx) {
             return 0;
         }
-        let mut pos = ctx.last();
-        if pos == S::default() {
-            pos = ctx.position();
-        }
+        let pos = ctx.position();
         let extra_edges: Vec<_> = self
             .world
             .get_warps()
