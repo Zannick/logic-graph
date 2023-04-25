@@ -393,7 +393,19 @@ where
         }
         self.handle_solution(ctx, mode);
 
-        self.queue.extend(newstates).unwrap();
+        if let Some(last) = newstates.last() {
+            let mut hist: Vec<_> = last.history_rev().collect();
+            hist.reverse();
+            let mut rebuilt = Vec::with_capacity(newstates.len());
+            let mut replay = self.startctx.clone();
+            for step in hist {
+                replay.replay(self.world, step);
+                if matches!(step, History::Get(..) | History::MoveGet(..)) {
+                    rebuilt.push(replay.clone());
+                }
+            }
+            self.queue.extend(rebuilt).unwrap();
+        }
     }
 
     fn extract_solutions(

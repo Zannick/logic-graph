@@ -103,25 +103,12 @@ where
             continue;
         }
         count += 1;
-        if (count >= 10_000_000 && required.len() > 2)
-            || (count >= 20_000_000 && required.len() > 1)
-        {
+        if count >= 1_000_000 {
             println!(
                 "a* took too long with {} locations, giving up",
                 required.len()
             );
-            return None;
-        }
-        if count % 1000000 == 0 {
-            println!(
-                "a* is taking awhile: iter={} heap={} req={:?} limit={} est={} cur={}",
-                count,
-                heap.len(),
-                required,
-                max_time,
-                estimate,
-                el.elapsed()
-            );
+            return greedy;
         }
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
             return Some(el);
