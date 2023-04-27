@@ -30,6 +30,71 @@ pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {
     rustc_hash::FxHashSet::default()
 }
 
+pub fn route_from_string<W, T, L>(
+    world: &W,
+    startctx: &T,
+    route: &str,
+) -> Result<context::ContextWrapper<T>, String>
+where
+    W: world::World<Location = L>,
+    T: context::Ctx<World = W>,
+    L: world::Location<Context = T>,
+{
+    use context::History;
+    use std::str::FromStr;
+    use world::Exit;
+    let mut hist: Vec<context::HistoryAlias<T>> = Vec::new();
+    for line in route.lines() {
+        let line = line.trim();
+        if !line.is_empty() {
+            hist.push(History::from_str(line)?);
+        }
+    }
+    let mut ctx = context::ContextWrapper::new(startctx.clone());
+    for (i, h) in hist.into_iter().enumerate() {
+        match h {
+            History::Get(item, loc_id) => {
+                if item == Default::default() {
+                    let item = world.get_location(loc_id).item();
+                    ctx.replay(world, History::Get(item, loc_id));
+                } else {
+                    ctx.replay(world, h);
+                }
+            }
+            History::MoveGet(item, exit_id) => {
+                if item == Default::default() {
+                    let exit = world.get_exit(exit_id);
+                    if let Some(loc_id) = exit.loc_id() {
+                        let item = world.get_location(*loc_id).item();
+                        ctx.replay(world, History::MoveGet(item, exit_id));
+                    } else {
+                        return Err(format!("Not a hybrid exit: {}", exit_id));
+                    }
+                } else {
+                    ctx.replay(world, h);
+                }
+            }
+            History::Move(exit_id) => {
+                let exit = world.get_exit(exit_id);
+                ctx = access::move_to(world, ctx, exit.dest()).expect(&format!(
+                    "Could not complete route step {}: couldn't reach {}",
+                    i,
+                    exit.dest()
+                ));
+            }
+            History::MoveLocal(spot_id) => {
+                ctx = access::move_to(world, ctx, spot_id).expect(&format!(
+                    "Could not complete route step {}: couldn't reach {}",
+                    i,
+                    spot_id
+                ));
+            },
+            _ => ctx.replay(world, h),
+        }
+    }
+    Ok(ctx)
+}
+
 pub mod testlib {
     #[macro_export]
     macro_rules! expect_no_route {

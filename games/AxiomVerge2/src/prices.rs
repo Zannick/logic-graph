@@ -28,3 +28,35 @@ impl fmt::Display for Currency {
         }
     }
 }
+
+impl std::str::FromStr for Currency {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if s == "Free" {
+            return Ok(Currency::Free);
+        } else if let Some(t) = s.strip_suffix(")") {
+            if let Some((price, val)) = t.split_once("(") {
+                match price {
+                    "Energy" => {
+                        return Ok(Currency::Energy(
+                            i16::from_str(val).map_err(|e| format!("{}", e))?,
+                        ))
+                    }
+                    "Flasks" => {
+                        return Ok(Currency::Flasks(
+                            i8::from_str(val).map_err(|e| format!("{}", e))?,
+                        ))
+                    }
+                    "Refills" => {
+                        return Ok(Currency::Refills(
+                            i8::from_str(val).map_err(|e| format!("{}", e))?,
+                        ))
+                    }
+                    _ => (),
+                }
+            }
+        }
+        Err(format!("Could not recognize as a Currency: {}", s))
+    }
+}

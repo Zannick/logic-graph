@@ -29,7 +29,9 @@ pub trait Id:
     Copy
     + Clone
     + Debug
+    + Display
     + Eq
+    + std::str::FromStr<Err = String>
     + Hash
     + Ord
     + PartialOrd

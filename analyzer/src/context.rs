@@ -11,7 +11,7 @@ pub trait Ctx:
     Clone + Eq + Debug + Hash + Send + Sync + Serialize + for<'a> Deserialize<'a>
 {
     type World: World;
-    type ItemId: Id;
+    type ItemId: Id + Default;
     type AreaId: Id;
     type RegionId: Id;
     type MovementState: Copy + Clone + Eq + Debug + Hash;
