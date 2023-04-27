@@ -265,13 +265,26 @@ where
 
         let startctx = ContextWrapper::new(ctx);
         let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
+
+        let mut intermediate = Vec::new();
+
         let mut wins = Vec::new();
-        let mut others = Vec::new();
+        let mut others = 0;
         for c in routes {
+            let hist: Vec<_> = c.history_rev().collect();
+            let mut newctx = startctx.clone();
+            for h in hist.iter().rev() {
+                newctx.replay(world, *h);
+                // We want to at least remember each intermediate state in the queue.
+                if !world.won(newctx.get()) {
+                    intermediate.push(newctx.clone());
+                }
+            }
             if world.won(c.get()) {
                 wins.push(c);
             } else {
-                others.push(c);
+                // We don't need to save the others, since we recreated them above.
+                others += 1;
             }
         }
 
@@ -279,12 +292,16 @@ where
 
         if !wins.is_empty() {
             println!(
-                "Provided extra routes: {} winners, {} not",
+                "Provided extra routes: {} winners, {} not\nwinning times: {:?}",
                 wins.len(),
-                others.len()
+                others,
+                wins.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
             );
-        } else if !others.is_empty() {
-            println!("Provided {} non-winning routes, performing greedy search...", others.len());
+        } else if others > 0 {
+            println!(
+                "Provided {} non-winning routes, performing greedy search...",
+                others
+            );
         } else {
             println!("No routes provided, performing greedy search...");
         }
@@ -293,19 +310,28 @@ where
             .unwrap_or_else(|| Self::find_greedy_win(world, &startctx));
 
         let start = Instant::now();
-        let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed())
-            .expect("Couldn't beat game after minimizing!");
-        println!("Minimized in {:?}", start.elapsed());
-        println!(
-            "Initial solution of {}ms was minimized to {}ms",
-            wonctx.elapsed(),
-            m.elapsed()
-        );
-        let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-        let clean_ctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m));
+        let (max_time, clean_ctx) = if let Some(m) =
+            minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed())
+        {
+            println!("Minimized in {:?}", start.elapsed());
+            println!(
+                "Initial solution of {}ms was minimized to {}ms",
+                wonctx.elapsed(),
+                m.elapsed()
+            );
+            let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
+            let clean_ctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m));
+            solutions.insert(m);
+            (max_time, clean_ctx)
+        } else {
+            println!("Minimized-greedy solution wasn't faster than original");
+            (
+                wonctx.elapsed(),
+                ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &wonctx)),
+            )
+        };
 
         solutions.insert(wonctx);
-        solutions.insert(m);
         for w in wins {
             solutions.insert(w);
         }
@@ -324,8 +350,9 @@ where
         .unwrap();
         queue.push(startctx.clone()).unwrap();
         queue.push(clean_ctx).unwrap();
-        queue.extend(others).unwrap();
+        queue.extend(intermediate).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
+        println!("Queue starts with {} elements", queue.len());
         Ok(Search {
             world,
             startctx,

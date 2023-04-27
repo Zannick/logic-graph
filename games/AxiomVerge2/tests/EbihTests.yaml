@@ -110,3 +110,8 @@ tests:
     with:
       - Remote_Drone
     eventually_reaches: Giguna > Giguna Northeast > Inner Wall
+
+  - start: Ebih > Waterfall > Ledge Below Hole
+    context:
+      ebih__waterfall__ctx__west_door_open: true
+    can_reach: Ebih > Ebih West > Medium High Platform

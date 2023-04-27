@@ -44,7 +44,7 @@ pub fn load_settings(filename: Option<&str>) -> (World, Context, Vec<ContextWrap
     let mut world = World::new();
     let mut ctx = Context::default();
     let mut vec = Vec::new();
-    let route_key = Yaml::String(String::from("route"));
+    let route_key = Yaml::String(String::from("routes"));
     if let Some(filename) = filename {
         let mut file = File::open(filename)
             .unwrap_or_else(|e| panic!("Couldn't open file \"{}\": {:?}", filename, e));
@@ -59,17 +59,21 @@ pub fn load_settings(filename: Option<&str>) -> (World, Context, Vec<ContextWrap
             .expect("YAML file should be a key-value map")
         {
             if key == &route_key {
-                route_strs.push(value);
+                if let Some(v) = value.as_vec() {
+                    route_strs.extend(v.iter());
+                } else {
+                    errs.push(format!(
+                        "routes must be list of strings, but was {:?}",
+                        value
+                    ));
+                }
             } else if let Err(e) = read_key_value(&mut world, &mut ctx, key, value) {
                 errs.push(e);
             }
         }
         for s in route_strs {
             match route_from_yaml_string(&world, &ctx, s) {
-                Ok(c) => {
-                    println!("Defined route:\n{}", c.history_str());
-                    vec.push(c);
-                }
+                Ok(c) => vec.push(c),
                 Err(e) => errs.push(e),
             }
         }

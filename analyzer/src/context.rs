@@ -171,7 +171,7 @@ where
             static ref MOVE_GET: Regex = Regex::new(
                 // MoveGet
                 // * Take hybrid exit Glacier > The Big Drop > Water Surface: Drown, collecting Amashilama
-                r"(?:\* )?Take hybrid exit (?P<loc>.*?)(?:, collecting (?P<item>.*$))").unwrap();
+                r"(?:\* )?Take hybrid exit (?P<exit>.*?)(?:, collecting (?P<item>.*$))").unwrap();
             static ref MOVE_LOCAL: Regex = Regex::new(
                 // MoveLocal
                 //   Move... to Antarctica > Power Room > Switch

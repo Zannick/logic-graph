@@ -46,7 +46,6 @@ where
     let mut hist: Vec<context::HistoryAlias<T>> = Vec::new();
     for line in route.lines() {
         let line = line.trim();
-        println!("Reading line: {}", line);
         if !line.is_empty() {
             hist.push(History::from_str(line)?);
         }

@@ -1638,6 +1638,11 @@ pub fn local_travel_time(
         ) => 700,
         (
             [false, false],
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Door_Right,
+        ) => 1000,
+        (
+            [false, false],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 1000,
@@ -5555,6 +5560,11 @@ pub fn local_travel_time(
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 700,
+        (
+            [true, false],
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Door_Right,
+        ) => 600,
         (
             [true, false],
             SpotId::Ebih__Waterfall__West_Main_Path,
@@ -9678,6 +9688,11 @@ pub fn local_travel_time(
         ) => 700,
         (
             [false, true],
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Door_Right,
+        ) => 1000,
+        (
+            [false, true],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 1000,
@@ -13763,6 +13778,11 @@ pub fn local_travel_time(
         ) => 700,
         (
             [true, true],
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Door_Right,
+        ) => 600,
+        (
+            [true, true],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 1000,
@@ -17473,6 +17493,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Ebih__Waterfall__Middle_West_Tree => enum_map! {
             SpotId::Ebih__Waterfall__West_Climb => 700,
+            SpotId::Ebih__Waterfall__West_Door_Right => 600,
             SpotId::Ebih__Waterfall__Middle_West_Tree => 0,
             SpotId::Ebih__Waterfall__West_Main_Path => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -21116,6 +21137,9 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Main_Path) => 701,
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Climb) => 700,
+        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Door_Right) => {
+            600
+        }
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__Middle_West_Tree) => 0,
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Main_Path) => {
             1000
@@ -24253,6 +24277,9 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Climb) => true,
+        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Door_Right) => {
+            true
+        }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
             true
         }
@@ -29935,6 +29962,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
             700,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Door_Right,
+            600,
         ),
         (
             SpotId::Ebih__Waterfall__Middle_West_Tree,

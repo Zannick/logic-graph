@@ -812,6 +812,8 @@ areas:
       local:
         - to: West Main Path
         - to: West Climb
+        - to: West Door Right
+          jumps: 1
       exits:
         - to: West Main Path
           req: $grab

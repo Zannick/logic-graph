@@ -263,3 +263,17 @@ fn start_Ebih__Ebih_West__Upper_Save_with_Remote_Drone_eventually_reaches_Giguna
         SpotId::Giguna__Giguna_Northeast__Inner_Wall
     );
 }
+#[test]
+fn start_Ebih__Waterfall__Ledge_Below_Hole_context_ebih__waterfall__ctx__west_door_open_True_can_reach_Ebih__Ebih_West__Medium_High_Platform(
+) {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.cbits1
+        .insert(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+
+    expect_any_route!(
+        &world,
+        ctx,
+        SpotId::Ebih__Waterfall__Ledge_Below_Hole,
+        SpotId::Ebih__Ebih_West__Medium_High_Platform
+    );
+}

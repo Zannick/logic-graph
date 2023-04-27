@@ -136,10 +136,10 @@ actions:
     to: ^indra
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
-  #- name: Deploy Drone
-  #  req: NOT WITHIN `Menu` and $can_deploy
-  #  do: ^mode = 'drone'; ^indra = ^position
-  #  time: 0.5
+  - name: Deploy Drone
+    req: NOT WITHIN `Menu` and $can_deploy
+    do: ^mode = 'drone'; ^indra = ^position
+    time: 0.5
 
 helpers:
   $melee: Ice_Axe or ^mode == 'drone'
