@@ -681,12 +681,21 @@ where
         Ok(res)
     }
 
-    fn remember(&self, el: &ContextWrapper<T>, skip_count: &AtomicUsize) -> Result<bool, Error> {
+    fn remember(
+        &self,
+        el: &ContextWrapper<T>,
+        skip_count: &AtomicUsize,
+        accept_eq: bool,
+    ) -> Result<bool, Error> {
         let seen_key = Self::get_state_key(el.get());
 
         let should_write = match self.get_seen_value(&seen_key)? {
             Some(stored) => {
-                if stored < el.elapsed() {
+                if if accept_eq {
+                    stored <= el.elapsed()
+                } else {
+                    stored < el.elapsed()
+                } {
                     skip_count.fetch_add(1, Ordering::Release);
                     return Ok(false);
                 }
@@ -707,18 +716,19 @@ where
         }
         Ok(true)
     }
+
     /// Stores the underlying Ctx in the seen db with the best known elapsed time,
     /// and returns whether this context had that best time.
     /// A `false` value means the state should be skipped.
     pub fn remember_push(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
-        self.remember(el, &self.dup_iskips)
+        self.remember(el, &self.dup_iskips, false)
     }
 
     /// Stores the underlying Ctx in the seen db with the best known elapsed time,
     /// and returns whether this context had that best time.
     /// A `false` value means the state should be skipped.
     pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
-        self.remember(el, &self.dup_pskips)
+        self.remember(el, &self.dup_pskips, true)
     }
 
     /// Stores the underlying Ctx entries in the seen db with the respective best known elapsed times,
