@@ -692,9 +692,9 @@ where
         let should_write = match self.get_seen_value(&seen_key)? {
             Some(stored) => {
                 if if accept_eq {
-                    stored <= el.elapsed()
-                } else {
                     stored < el.elapsed()
+                } else {
+                    stored <= el.elapsed()
                 } {
                     skip_count.fetch_add(1, Ordering::Release);
                     return Ok(false);
