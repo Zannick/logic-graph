@@ -2,6 +2,8 @@
 
 use crate::context::{flags, Context};
 use crate::graph::World;
+use analyzer::context::ContextWrapper;
+use analyzer::route_from_yaml_string;
 use analyzer::settings::*;
 use std::fs::File;
 use std::io::Read;
@@ -38,9 +40,11 @@ fn read_key_value(
     Ok(())
 }
 
-pub fn load_settings(filename: Option<&str>) -> (World, Context) {
+pub fn load_settings(filename: Option<&str>) -> (World, Context, Vec<ContextWrapper<Context>>) {
     let mut world = World::new();
     let mut ctx = Context::default();
+    let mut vec = Vec::new();
+    let route_key = Yaml::String(String::from("route"));
     if let Some(filename) = filename {
         let mut file = File::open(filename)
             .unwrap_or_else(|e| panic!("Couldn't open file \"{}\": {:?}", filename, e));
@@ -49,12 +53,24 @@ pub fn load_settings(filename: Option<&str>) -> (World, Context) {
             .unwrap_or_else(|e| panic!("Couldn't read from file \"{}\": {:?}", filename, e));
         let yaml = YamlLoader::load_from_str(&settings).expect("YAML parse error");
         let mut errs = Vec::new();
+        let mut route_strs = Vec::new();
         for (key, value) in yaml[0]
             .as_hash()
             .expect("YAML file should be a key-value map")
         {
-            if let Err(e) = read_key_value(&mut world, &mut ctx, key, value) {
+            if key == &route_key {
+                route_strs.push(value);
+            } else if let Err(e) = read_key_value(&mut world, &mut ctx, key, value) {
                 errs.push(e);
+            }
+        }
+        for s in route_strs {
+            match route_from_yaml_string(&world, &ctx, s) {
+                Ok(c) => {
+                    println!("Defined route:\n{}", c.history_str());
+                    vec.push(c);
+                }
+                Err(e) => errs.push(e),
             }
         }
         if !errs.is_empty() {
@@ -65,5 +81,5 @@ pub fn load_settings(filename: Option<&str>) -> (World, Context) {
             );
         }
     }
-    (world, ctx)
+    (world, ctx, vec)
 }

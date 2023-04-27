@@ -234,35 +234,16 @@ where
     L: Location<Context = T>,
     E: Exit<Context = T, ExitId = L::ExitId, LocId = L::LocId, Currency = L::Currency>,
 {
-    pub fn new(world: &'a W, mut ctx: T) -> Result<Search<'a, W, T>, std::io::Error> {
-        world.skip_unused_items(&mut ctx);
-
-        let startctx = ContextWrapper::new(ctx);
-        let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
+    fn find_greedy_win(world: &W, startctx: &ContextWrapper<T>) -> ContextWrapper<T> {
         let start = Instant::now();
-        let (clean_ctx, max_time) = match greedy_search(world, &startctx, u32::MAX) {
+        match greedy_search(world, &startctx, u32::MAX) {
             Ok(wonctx) => {
                 println!(
                     "Finished greedy search in {:?} with a result of {}ms",
                     start.elapsed(),
                     wonctx.elapsed()
                 );
-                let start = Instant::now();
-                let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed())
-                    .expect("Couldn't beat game after minimizing!");
-                println!("Minimized in {:?}", start.elapsed());
-                println!(
-                    "Found greedy solution of {}ms, minimized to {}ms",
-                    wonctx.elapsed(),
-                    m.elapsed()
-                );
-                let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-                let clean_ctx =
-                    ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m));
-
-                solutions.insert(wonctx);
-                solutions.insert(m);
-                (clean_ctx, max_time)
+                wonctx
             }
             Err(ctx) => {
                 panic!(
@@ -271,10 +252,63 @@ where
                     ctx.history_summary(),
                     ctx.get()
                 );
-                // Push it anyway, maybe it'll find something!
-                //heap.push(ctx);
             }
-        };
+        }
+    }
+
+    pub fn new(
+        world: &'a W,
+        mut ctx: T,
+        routes: Vec<ContextWrapper<T>>,
+    ) -> Result<Search<'a, W, T>, std::io::Error> {
+        world.skip_unused_items(&mut ctx);
+
+        let startctx = ContextWrapper::new(ctx);
+        let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
+        let mut wins = Vec::new();
+        let mut others = Vec::new();
+        for c in routes {
+            if world.won(c.get()) {
+                wins.push(c);
+            } else {
+                others.push(c);
+            }
+        }
+
+        wins.sort_unstable_by_key(|c| !c.elapsed());
+
+        if !wins.is_empty() {
+            println!(
+                "Provided extra routes: {} winners, {} not",
+                wins.len(),
+                others.len()
+            );
+        } else if !others.is_empty() {
+            println!("Provided {} non-winning routes, performing greedy search...", others.len());
+        } else {
+            println!("No routes provided, performing greedy search...");
+        }
+        let wonctx = wins
+            .pop()
+            .unwrap_or_else(|| Self::find_greedy_win(world, &startctx));
+
+        let start = Instant::now();
+        let m = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed())
+            .expect("Couldn't beat game after minimizing!");
+        println!("Minimized in {:?}", start.elapsed());
+        println!(
+            "Initial solution of {}ms was minimized to {}ms",
+            wonctx.elapsed(),
+            m.elapsed()
+        );
+        let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
+        let clean_ctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m));
+
+        solutions.insert(wonctx);
+        solutions.insert(m);
+        for w in wins {
+            solutions.insert(w);
+        }
 
         let queue = RocksBackedQueue::new(
             ".db",
@@ -290,6 +324,7 @@ where
         .unwrap();
         queue.push(startctx.clone()).unwrap();
         queue.push(clean_ctx).unwrap();
+        queue.extend(others).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
         Ok(Search {
             world,

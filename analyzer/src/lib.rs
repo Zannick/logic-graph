@@ -46,6 +46,7 @@ where
     let mut hist: Vec<context::HistoryAlias<T>> = Vec::new();
     for line in route.lines() {
         let line = line.trim();
+        println!("Reading line: {}", line);
         if !line.is_empty() {
             hist.push(History::from_str(line)?);
         }
@@ -85,14 +86,29 @@ where
             History::MoveLocal(spot_id) => {
                 ctx = access::move_to(world, ctx, spot_id).expect(&format!(
                     "Could not complete route step {}: couldn't reach {}",
-                    i,
-                    spot_id
+                    i, spot_id
                 ));
-            },
+            }
             _ => ctx.replay(world, h),
         }
     }
     Ok(ctx)
+}
+
+pub fn route_from_yaml_string<W, T, L>(
+    world: &W,
+    startctx: &T,
+    route: &yaml_rust::Yaml,
+) -> Result<context::ContextWrapper<T>, String>
+where
+    W: world::World<Location = L>,
+    T: context::Ctx<World = W>,
+    L: world::Location<Context = T>,
+{
+    match route {
+        yaml_rust::Yaml::String(s) => route_from_string(world, startctx, s),
+        _ => Err(format!("Value for route is not str: {:?}", route)),
+    }
 }
 
 pub mod testlib {

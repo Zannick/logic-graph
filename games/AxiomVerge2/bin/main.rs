@@ -7,7 +7,7 @@ use std::env;
 
 fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
-    let (world, context) =
+    let (world, context, routes) =
         settings::load_settings(if args.len() > 1 { Some(&args[1]) } else { None });
     assert!(
         can_win_just_items(&world, &context),
@@ -19,6 +19,6 @@ fn main() -> Result<(), std::io::Error> {
         "Unable to complete objective {} with only location checks",
         world.objective
     );
-    let search = Search::new(&world, context).unwrap();
+    let search = Search::new(&world, context, routes).unwrap();
     search.search()
 }

@@ -1,1 +1,6 @@
 objective: Progress%
+
+route: |
+    Move... to Antarctica > Shed > Interior
+    * Collect Ice_Axe from Antarctica > Shed > Interior: Shelf
+    EarthSavewarp to Antarctica > West > Helipad
