@@ -1,7 +1,10 @@
 use crate::world::*;
+use lazy_static::lazy_static;
+use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
+use std::str::FromStr;
 use std::sync::Arc;
 
 pub trait Ctx:
@@ -128,6 +131,88 @@ where
             History::Activate(action) => {
                 action.hash(state);
             }
+        }
+    }
+}
+
+fn extract_match<'c, 's>(c: &'c Captures<'s>, g: &'s str, s: &'s str) -> Result<&'s str, String> {
+    if let Some(m) = c.name(g) {
+        Ok(m.as_str())
+    } else {
+        Err(format!("Group '{}' not matched: {}", g, s))
+    }
+}
+
+impl<I, S, L, E, A, Wp> FromStr for History<I, S, L, E, A, Wp>
+where
+    I: FromStr<Err = String> + Default,
+    S: FromStr<Err = String>,
+    L: FromStr<Err = String>,
+    E: FromStr<Err = String>,
+    A: FromStr<Err = String>,
+    Wp: FromStr<Err = String>,
+{
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        lazy_static! {
+            static ref WARP: Regex = Regex::new(
+                // Warp
+                //   EarthSavewarp to Antarctica > West > Helipad
+                r"(?P<warp>[^:]+)[Ww]arp to (?P<spot>.*$)").unwrap();
+            static ref GET: Regex = Regex::new(
+                // Get
+                // * Collect Station_Power from Antarctica > Power Room > Switch: Flip
+                r"(?:\* )?(?:[Cc]ollect (?P<item>\w+) from|[Vv]isit) (?P<loc>.*$)").unwrap();
+            static ref MOVE: Regex = Regex::new(
+                // Move
+                //   Move... to Antarctica > West > Shed Entry ==> Shed > Interior (1)
+                r"[Mm]ove(?:\.\.\.)? to (?P<exit>.* ==> .*$)").unwrap();
+            static ref MOVE_GET: Regex = Regex::new(
+                // MoveGet
+                // * Take hybrid exit Glacier > The Big Drop > Water Surface: Drown, collecting Amashilama
+                r"(?:\* )?Take hybrid exit (?P<loc>.*?)(?:, collecting (?P<item>.*$))").unwrap();
+            static ref MOVE_LOCAL: Regex = Regex::new(
+                // MoveLocal
+                //   Move... to Antarctica > Power Room > Switch
+                r"[Mm]ove(?:\.\.\.)? to (?P<spot>.*$)").unwrap();
+            static ref ACTIVATE: Regex = Regex::new(
+                // Activate
+                // ! Do Amagi > Main Area > Carving: Key Combo
+                r"(?:! )? (?:[Dd]o|[Aa]ctivate) (?P<action>.*$)").unwrap();
+        }
+        if let Some(cap) = WARP.captures(s) {
+            let warp = extract_match(&cap, "warp", s)?;
+            let spot = extract_match(&cap, "spot", s)?;
+            Ok(History::Warp(
+                <Wp as FromStr>::from_str(warp)?,
+                <S as FromStr>::from_str(spot)?,
+            ))
+        } else if let Some(cap) = GET.captures(s) {
+            let item = extract_match(&cap, "item", s).unwrap_or_default();
+            let loc = extract_match(&cap, "loc", s)?;
+            Ok(History::Get(
+                <I as FromStr>::from_str(item).unwrap_or_default(),
+                <L as FromStr>::from_str(loc)?,
+            ))
+        } else if let Some(cap) = MOVE.captures(s) {
+            let exit = extract_match(&cap, "exit", s)?;
+            Ok(History::Move(<E as FromStr>::from_str(exit)?))
+        } else if let Some(cap) = MOVE_GET.captures(s) {
+            let exit = extract_match(&cap, "exit", s)?;
+            let item = extract_match(&cap, "item", s).unwrap_or_default();
+            Ok(History::MoveGet(
+                <I as FromStr>::from_str(item).unwrap_or_default(),
+                <E as FromStr>::from_str(exit)?,
+            ))
+        } else if let Some(cap) = MOVE_LOCAL.captures(s) {
+            let spot = extract_match(&cap, "spot", s)?;
+            Ok(History::MoveLocal(<S as FromStr>::from_str(spot)?))
+        } else if let Some(cap) = ACTIVATE.captures(s) {
+            let action = extract_match(&cap, "action", s)?;
+            Ok(History::Activate(<A as FromStr>::from_str(action)?))
+        } else {
+            Err(format!("History<T> did not find a match for: {}", s))
         }
     }
 }
