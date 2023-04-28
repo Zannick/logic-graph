@@ -1,3 +1,4 @@
+extern crate bucket_queue;
 extern crate enum_map;
 extern crate lru;
 extern crate priority_queue;
@@ -10,6 +11,7 @@ extern crate yaml_rust;
 
 pub mod access;
 pub mod algo;
+pub mod bucket;
 pub mod context;
 pub mod db;
 pub mod estimates;

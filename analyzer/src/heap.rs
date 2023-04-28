@@ -1,17 +1,18 @@
 extern crate plotlib;
 
+use crate::bucket::*;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
+use bucket_queue::BucketQueue;
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
-use priority_queue::DoublePriorityQueue;
 use sort_by_derive::SortBy;
 use std::collections::BinaryHeap;
 use std::fmt::Debug;
@@ -318,7 +319,7 @@ impl<T: Ctx> LimitedHeap<T> {
 }
 
 pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
-    queue: Mutex<DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>,
+    queue: Mutex<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
     db: HeapDB<'w, W, T>,
     capacity: AtomicUsize,
     iskips: AtomicUsize,
@@ -356,10 +357,7 @@ where
         P: AsRef<Path>,
     {
         let q = RocksBackedQueue {
-            queue: Mutex::new(DoublePriorityQueue::with_capacity_and_hasher(
-                max_capacity,
-                CommonHasher::default(),
-            )),
+            queue: Mutex::new(BucketQueue::new()),
             db: HeapDB::open(db_path, initial_max_time, world, startctx.get())?,
             capacity: max_capacity.into(),
             iskips: 0.into(),
@@ -506,10 +504,10 @@ where
                         self.min_evictions,
                         max_evictions,
                     ));
-                    queue.push(el, est_complete);
+                    queue.push(el, 0, est_complete);
                 }
             } else {
-                queue.push(el, est_complete);
+                queue.push(el, 0, est_complete);
             }
         }
         // Without the lock (but still blocking the push op in this thread)
@@ -535,7 +533,7 @@ where
     /// You may also specify a `min_evictions` to ensure that a certain amount of space is
     /// always cleared.
     fn evict_until(
-        queue: &mut MutexGuard<DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>,
+        queue: &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
         el_estimate: u32,
         min_evictions: usize,
         max_evictions: usize,
@@ -626,7 +624,7 @@ where
                     self.retrievals.fetch_add(1, Ordering::Release);
                     println!("Reshuffle took total {:?}", start.elapsed());
                     queue = self.queue.lock().unwrap();
-                    queue.extend(res);
+                    queue.extend(res.into_iter().map(|(b, p)| (b, 0, p)));
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
                     self.retrieving.store(false, Ordering::Release);
                 }
@@ -662,8 +660,8 @@ where
 
     fn do_retrieve_and_insert<'a>(
         &'a self,
-        mut queue: MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>,
-    ) -> Result<MutexGuard<'a, DoublePriorityQueue<ContextWrapper<T>, u32, CommonHasher>>, String>
+        mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>, String>
     {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
@@ -676,7 +674,7 @@ where
         drop(queue);
         let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
         queue = self.queue.lock().unwrap();
-        queue.extend(res);
+        queue.extend(res.into_iter().map(|(b, p)| (b, 0, p)));
         self.retrievals.fetch_add(1, Ordering::Release);
         println!("Retrieval took total {:?}", start.elapsed());
         Ok(queue)
@@ -685,7 +683,7 @@ where
     pub fn pop_max_estimate(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
-            while let Some((ctx, el_estimate)) = queue.pop_min() {
+            while let Some((ctx, el_estimate)) = queue.pop_max() {
                 debug_assert!(
                     el_estimate == self.db.score(&ctx),
                     "stored estimate {} didn't match score {}",
@@ -713,20 +711,6 @@ where
             }
         }
         Ok(None)
-    }
-
-    pub fn pop_min_elapsed(&self) -> Result<Option<ContextWrapper<T>>, String> {
-        let mut queue = self.queue.lock().unwrap();
-        let min = queue.iter().min_by_key(|(ctx, _)| ctx.elapsed());
-        if let Some(item) = min {
-            // We cannot move it out of the queue without remove() but we cannot
-            // provide a reference within queue to remove()
-            let item = item.0.clone();
-            queue.remove(&item).unwrap();
-            Ok(Some(item))
-        } else {
-            Ok(None)
-        }
     }
 
     /// Adds all the given elements to the queue, except for any
@@ -788,7 +772,7 @@ where
                     max_evictions,
                 ));
             }
-            queue.extend(vec);
+            queue.extend(vec.into_iter().map(|(b, p)| (b, 0, p)));
         }
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {

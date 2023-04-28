@@ -17,7 +17,6 @@ use std::time::{Duration, Instant};
 enum SearchMode {
     Classic,
     Greedy,
-    PickMinElapsed,
     PickMinScore,
     Dependent,
     Single,
@@ -499,8 +498,6 @@ where
     fn choose_mode(&self, iters: u64, _ctx: &ContextWrapper<T>) -> SearchMode {
         if iters % 2048 != 0 {
             SearchMode::Single
-        } else if iters % 4096 == 0 {
-            SearchMode::PickMinElapsed
         } else {
             SearchMode::Greedy
         }
@@ -642,22 +639,6 @@ where
                 }
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
-            }
-            SearchMode::PickMinElapsed => {
-                if let Some(minctx) = self.queue.pop_min_elapsed().unwrap() {
-                    if ctx.elapsed() < minctx.elapsed() {
-                        let mut next = self.extract_solutions(self.classic_step(ctx), mode);
-                        next.push(minctx);
-                        Ok(next)
-                    } else {
-                        let mut next = self.extract_solutions(self.classic_step(minctx), mode);
-                        next.push(ctx);
-                        Ok(next)
-                    }
-                } else {
-                    let next = self.extract_solutions(self.classic_step(ctx), mode);
-                    Ok(next)
-                }
             }
             _ => {
                 let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);

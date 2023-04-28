@@ -473,7 +473,8 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn info(&self, est: u32) -> String {
         format(format_args!(
-            "At {}ms (est. left={}), visited={}, skipped={}\nNow: {} after {}",
+            "At {}ms (elapsed={} est. left={}), visited={}, skipped={}\nNow: {} after {}",
+            self.elapsed + est,
             self.elapsed,
             est,
             self.get().count_visits(),
