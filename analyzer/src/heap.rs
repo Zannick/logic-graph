@@ -7,7 +7,7 @@ use crate::estimates::ContextScorer;
 use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
-use bucket_queue::BucketQueue;
+use bucket_queue::{BucketQueue, Queue};
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -54,8 +54,7 @@ impl<T: Ctx> Default for LimitedHeap<T> {
 
 impl<T: Ctx> LimitedHeap<T> {
     fn score(ctx: &ContextWrapper<T>, scale_factor: u32) -> u32 {
-        scale_factor * ctx.get().progress() * ctx.get().progress() 
-        + (1 << 28) - ctx.elapsed()
+        scale_factor * ctx.get().progress() * ctx.get().progress() + (1 << 28) - ctx.elapsed()
     }
 
     pub fn new() -> LimitedHeap<T> {
@@ -480,6 +479,7 @@ where
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         };
+        let progress = self.db.progress(el.get());
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
@@ -504,10 +504,10 @@ where
                         self.min_evictions,
                         max_evictions,
                     ));
-                    queue.push(el, 0, est_complete);
+                    queue.push(el, progress, est_complete);
                 }
             } else {
-                queue.push(el, 0, est_complete);
+                queue.push(el, progress, est_complete);
             }
         }
         // Without the lock (but still blocking the push op in this thread)
@@ -556,7 +556,7 @@ where
         db: &HeapDB<W, T>,
         max_db_estimate: &AtomicU32,
         num: usize,
-    ) -> Result<Vec<(ContextWrapper<T>, u32)>, String> {
+    ) -> Result<Vec<(ContextWrapper<T>, usize, u32)>, String> {
         println!(
             "Beginning retrieve of {} entries, we have {} in the db",
             num,
@@ -568,7 +568,8 @@ where
             .into_iter()
             .map(|el| {
                 let score = db.score(&el);
-                (el, score)
+                let progress = db.progress(el.get());
+                (el, progress, score)
             })
             .collect();
         println!("Retrieve from db took {:?}", start.elapsed());
@@ -576,7 +577,7 @@ where
         // the min priority in the db is probably now the max of this result, or thereabouts
         // which should be the last element
         if let Some(el) = res.last() {
-            max_db_estimate.store(el.1, Ordering::Release);
+            max_db_estimate.store(el.2, Ordering::Release);
         } else {
             max_db_estimate.store(u32::MAX, Ordering::Release);
         }
@@ -624,7 +625,7 @@ where
                     self.retrievals.fetch_add(1, Ordering::Release);
                     println!("Reshuffle took total {:?}", start.elapsed());
                     queue = self.queue.lock().unwrap();
-                    queue.extend(res.into_iter().map(|(b, p)| (b, 0, p)));
+                    queue.extend(res);
                     assert!(!queue.is_empty(), "Queue should have data after retrieve");
                     self.retrieving.store(false, Ordering::Release);
                 }
@@ -661,8 +662,7 @@ where
     fn do_retrieve_and_insert<'a>(
         &'a self,
         mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>, String>
-    {
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>, String> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
@@ -674,16 +674,21 @@ where
         drop(queue);
         let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
         queue = self.queue.lock().unwrap();
-        queue.extend(res.into_iter().map(|(b, p)| (b, 0, p)));
+        queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);
         println!("Retrieval took total {:?}", start.elapsed());
         Ok(queue)
     }
 
-    pub fn pop_max_estimate(&self) -> Result<Option<ContextWrapper<T>>, String> {
+    fn pop_special<F>(&self, pop_func: F) -> Result<Option<ContextWrapper<T>>, String>
+    where
+        F: Fn(
+            &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
+        ) -> Option<(ContextWrapper<T>, u32)>,
+    {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
-            while let Some((ctx, el_estimate)) = queue.pop_max() {
+            while let Some((ctx, el_estimate)) = (pop_func)(&mut queue) {
                 debug_assert!(
                     el_estimate == self.db.score(&ctx),
                     "stored estimate {} didn't match score {}",
@@ -713,6 +718,30 @@ where
         Ok(None)
     }
 
+    pub fn pop_max_estimate(&self) -> Result<Option<ContextWrapper<T>>, String> {
+        self.pop_special(|q| q.pop_max())
+    }
+
+    pub fn pop_min_progress(&self, progress: usize) -> Result<Option<ContextWrapper<T>>, String> {
+        self.pop_special(|q| {
+            let segment = progress + q.min_priority()?;
+            q.pop_min_segment_min(segment)
+                .or_else(|| q.pop_max_segment_min())
+        })
+    }
+
+    pub fn pop_max_progress(&self) -> Result<Option<ContextWrapper<T>>, String> {
+        self.pop_special(|q| q.pop_max_segment_min())
+    }
+
+    pub fn pop_half_progress(&self) -> Result<Option<ContextWrapper<T>>, String> {
+        self.pop_special(|q| {
+            let half = (q.min_priority()? + q.max_priority()?) / 2;
+            q.pop_min_segment_min(half)
+                .or_else(|| q.pop_max_segment_min())
+        })
+    }
+
     /// Adds all the given elements to the queue, except for any
     /// elements with elapsed time greater than the allowed maximum
     /// or having been seen before with a smaller elapsed time.
@@ -740,13 +769,14 @@ where
 
         let keeps = self.db.remember_which(&vec)?;
         debug_assert!(vec.len() == keeps.len());
-        let vec: Vec<(ContextWrapper<T>, u32)> = vec
+        let vec: Vec<(ContextWrapper<T>, usize, u32)> = vec
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if keep {
                     let priority = self.db.score(&el);
-                    Some((el, priority))
+                    let progress = self.db.progress(el.get());
+                    Some((el, progress, priority))
                 } else {
                     None
                 }
@@ -764,7 +794,7 @@ where
             let len = queue.len();
             if len + vec.len() > cap {
                 let max_evictions = std::cmp::min(self.max_evictions, (len / 4) * 3);
-                let el_estimate = vec.iter().min_by_key(|(_, p)| p).unwrap().1;
+                let el_estimate = vec.iter().min_by_key(|(_, _, p)| p).unwrap().2;
                 evicted = Some(Self::evict_until(
                     &mut queue,
                     el_estimate,
@@ -772,7 +802,7 @@ where
                     max_evictions,
                 ));
             }
-            queue.extend(vec.into_iter().map(|(b, p)| (b, 0, p)));
+            queue.extend(vec);
         }
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {
@@ -827,6 +857,7 @@ where
             time_progress.push((elapsed, progress));
         }
         // unlock
+        let queue_buckets = queue.bucket_sizes();
         drop(queue);
 
         let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));
@@ -835,9 +866,13 @@ where
             .x_label("elapsed time")
             .x_range(0., self.db.max_time().into());
         println!(
-            "Current heap contents:\n{}",
-            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+            "Current heap contents:\n{}\n{:?}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap(),
+            queue_buckets
         );
+
+        
+
         let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
             .add(p)

@@ -415,6 +415,13 @@ where
         self.scorer.estimate_remaining_time(ctx).try_into().unwrap()
     }
 
+    /// Returns a number usable as a relative measure of progress.
+    /// The number isn't normalized so don't rely on it as fully-ordered,
+    /// e.g. two different routes may win at different progress measures.
+    pub fn progress(&self, ctx: &T) -> usize {
+        self.scorer.required_visits(ctx)
+    }
+
     pub fn estimate_time_to_get(
         &self,
         ctx: &T,

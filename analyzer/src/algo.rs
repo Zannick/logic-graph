@@ -8,7 +8,7 @@ use crate::solutions::SolutionCollector;
 use crate::world::*;
 use rayon::prelude::*;
 use std::fmt::Debug;
-use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
@@ -17,7 +17,10 @@ use std::time::{Duration, Instant};
 enum SearchMode {
     Classic,
     Greedy,
-    PickMinScore,
+    MaxEstimate,
+    MaxProgress,
+    SomeProgress(usize),
+    HalfProgress,
     Dependent,
     Single,
     Unknown,
@@ -27,7 +30,13 @@ fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
         2 | 7 => SearchMode::Greedy,
-        5 => SearchMode::PickMinScore,
+        4 | 8 => SearchMode::MaxProgress,
+        5 => SearchMode::MaxEstimate,
+        9 => SearchMode::SomeProgress(1),
+        11 => SearchMode::SomeProgress(2),
+        13 => SearchMode::SomeProgress(4),
+        15 => SearchMode::HalfProgress,
+        // 0, 3, 12
         _ => SearchMode::Single,
     }
 }
@@ -220,7 +229,7 @@ where
     startctx: ContextWrapper<T>,
     solutions: Mutex<SolutionCollector<T>>,
     queue: RocksBackedQueue<'a, W, T>,
-    iters: AtomicU64,
+    iters: AtomicUsize,
     extras: AtomicU64,
     deadends: AtomicU32,
     optimizes: AtomicU32,
@@ -495,11 +504,13 @@ where
         single_step(self.world, ctx, self.queue.max_time())
     }
 
-    fn choose_mode(&self, iters: u64, _ctx: &ContextWrapper<T>) -> SearchMode {
-        if iters % 2048 != 0 {
+    fn choose_mode(&self, iters: usize, _ctx: &ContextWrapper<T>) -> SearchMode {
+        if iters % 1024 != 0 {
             SearchMode::Single
-        } else {
+        } else if iters % 2048 != 0 {
             SearchMode::Greedy
+        } else {
+            SearchMode::SomeProgress((iters / 4096) % 32)
         }
     }
 
@@ -610,7 +621,7 @@ where
             mode
         };
         match current_mode {
-            SearchMode::Single => Ok(self.single_step(ctx)),
+            SearchMode::Single => Ok(self.extract_solutions(self.single_step(ctx), current_mode)),
             SearchMode::Greedy => {
                 // Run a classic step on the given state and handle any solutions
                 let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
@@ -630,12 +641,36 @@ where
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
             }
-            SearchMode::PickMinScore => {
+            SearchMode::MaxEstimate => {
                 let mut next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
                 if let Some(ctx2) = self.queue.pop_max_estimate().unwrap() {
                     next.extend(
-                        self.extract_solutions(self.classic_step(ctx2), SearchMode::PickMinScore),
+                        self.extract_solutions(self.single_step(ctx2), SearchMode::MaxEstimate),
                     );
+                }
+                self.extras.fetch_add(1, Ordering::Release);
+                Ok(next)
+            }
+            SearchMode::MaxProgress => {
+                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
+                if let Some(ctx2) = self.queue.pop_max_progress().unwrap() {
+                    next.extend(self.extract_solutions(self.single_step(ctx2), current_mode));
+                }
+                self.extras.fetch_add(1, Ordering::Release);
+                Ok(next)
+            }
+            SearchMode::SomeProgress(p) => {
+                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
+                if let Some(ctx2) = self.queue.pop_min_progress(p).unwrap() {
+                    next.extend(self.extract_solutions(self.single_step(ctx2), current_mode));
+                }
+                self.extras.fetch_add(1, Ordering::Release);
+                Ok(next)
+            }
+            SearchMode::HalfProgress => {
+                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
+                if let Some(ctx2) = self.queue.pop_half_progress().unwrap() {
+                    next.extend(self.extract_solutions(self.single_step(ctx2), current_mode));
                 }
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
@@ -650,7 +685,7 @@ where
     fn print_status_update(
         &self,
         start: &Mutex<Instant>,
-        iters: u64,
+        iters: usize,
         num_rounds: u32,
         ctx: &ContextWrapper<T>,
     ) {

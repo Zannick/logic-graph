@@ -139,6 +139,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
+    // TODO: Should these check all the buckets?
     fn pop_min(&mut self) -> Option<(B::Item, P)> {
         let segment = self.min_priority()?;
         self.bucket_for_removing(segment)?.pop_min()
@@ -158,6 +159,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     }
 
     fn pop_min_segment_min(&'b mut self, min_segment: usize) -> Option<(B::Item, P)> {
+        let min_segment = std::cmp::min(min_segment, self.min_priority()?);
         for segment in min_segment..=self.max_priority()? {
             let x = if let Some(b) = self.bucket_for_replacing(segment) {
                 b.pop_min()
@@ -176,6 +178,16 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     fn pop_max_segment_min(&'b mut self) -> Option<(B::Item, P)> {
         let segment = self.max_priority()?;
         self.bucket_for_removing(segment)?.pop_min()
+    }
+
+    fn bucket_sizes(&self) -> Vec<usize> {
+        if let Some(max) = self.max_priority() {
+            (0..=max).into_iter().map(
+                |s| self.bucket_for_peeking(s).map(|b| b.len_bucket()).unwrap_or_default()
+            ).collect()
+        } else {
+            Vec::new()
+        }
     }
 
     fn iter(&'b self) -> Iter<'b, Self, B, P>
