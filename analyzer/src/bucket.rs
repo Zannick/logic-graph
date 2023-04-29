@@ -171,7 +171,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         self.bucket_for_peeking(segment)?.peek_max()
     }
 
-    fn pop_min_segment_min(&'b mut self, min_segment: usize) -> Option<(B::Item, P)> {
+    fn pop_segment_min(&mut self, min_segment: usize) -> Option<(B::Item, P)> {
         let min_segment = std::cmp::min(min_segment, self.min_priority()?);
         for segment in min_segment..=self.max_priority()? {
             let x = if let Some(b) = self.bucket_for_replacing(segment) {
@@ -188,9 +188,50 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         None
     }
 
-    fn pop_max_segment_min(&'b mut self) -> Option<(B::Item, P)> {
+    fn pop_max_segment_min(&mut self) -> Option<(B::Item, P)> {
         let segment = self.max_priority()?;
         self.bucket_for_removing(segment)?.pop_min()
+    }
+
+    fn pop_min_segment_max(&mut self) -> Option<(B::Item, P)> {
+        let segment = self.min_priority()?;
+        self.bucket_for_removing(segment)?.pop_max()
+    }
+
+    fn peek_min_segment_min_priority(&'b mut self) -> Option<&'b P> {
+        self.bucket_for_peeking(self.min_priority()?)?
+            .peek_min()
+            .map(|(_, p)| p)
+    }
+
+    fn peek_min_segment_max_priority(&'b mut self) -> Option<&'b P> {
+        self.bucket_for_peeking(self.min_priority()?)?
+            .peek_max()
+            .map(|(_, p)| p)
+    }
+
+    /// More efficiently extracts all the items from all buckets with
+    /// priorities above `keep_priority`.
+    fn pop_all_with_priority(&mut self, keep_priority: P, max_pops: usize) -> Vec<(B::Item, P)> {
+        if let Some(min) = self.min_priority() {
+            let max = self.max_priority().unwrap_or(min);
+            let mut vec = Vec::new();
+            for segment in min..=max {
+                while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
+                    if *p > keep_priority {
+                        vec.push(self.bucket_for_removing(segment).unwrap().pop_max().unwrap());
+                        if vec.len() >= max_pops {
+                            return vec;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            vec
+        } else {
+            Vec::new()
+        }
     }
 
     fn bucket_sizes(&self) -> Vec<usize> {
@@ -260,9 +301,9 @@ mod test {
         queue.push("second", 0, 2);
         queue.push("fourth", 2, 3);
 
-        assert_eq!(queue.pop_min_segment_min(1), Some(("third", 1)));
-        assert_eq!(queue.pop_min_segment_min(2), Some(("fourth", 3)));
-        assert_eq!(queue.pop_min_segment_min(1), None);
+        assert_eq!(queue.pop_segment_min(1), Some(("third", 1)));
+        assert_eq!(queue.pop_segment_min(2), Some(("fourth", 3)));
+        assert_eq!(queue.pop_segment_min(1), None);
         assert_eq!(queue.len_queue(), 2);
     }
 

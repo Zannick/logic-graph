@@ -538,15 +538,17 @@ where
         min_evictions: usize,
         max_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
-        let mut evicted = Vec::new();
-        while evicted.len() < max_evictions {
-            if let Some((_, &est_completion)) = queue.peek_max() {
-                if est_completion >= el_estimate || evicted.len() < min_evictions {
-                    evicted.push(queue.pop_max().unwrap().0);
-                    continue;
-                }
+        let mut evicted: Vec<_> = queue
+            .pop_all_with_priority(el_estimate, max_evictions)
+            .into_iter()
+            .map(|(c, _)| c)
+            .collect();
+        while evicted.len() < min_evictions {
+            if let Some((ctx, _)) = queue.pop_max() {
+                evicted.push(ctx);
+            } else {
+                break;
             }
-            break;
         }
         evicted
     }
@@ -725,7 +727,7 @@ where
     pub fn pop_min_progress(&self, progress: usize) -> Result<Option<ContextWrapper<T>>, String> {
         self.pop_special(|q| {
             let segment = progress + q.min_priority()?;
-            q.pop_min_segment_min(segment)
+            q.pop_segment_min(segment)
                 .or_else(|| q.pop_max_segment_min())
         })
     }
@@ -737,8 +739,7 @@ where
     pub fn pop_half_progress(&self) -> Result<Option<ContextWrapper<T>>, String> {
         self.pop_special(|q| {
             let half = (q.min_priority()? + q.max_priority()?) / 2;
-            q.pop_min_segment_min(half)
-                .or_else(|| q.pop_max_segment_min())
+            q.pop_segment_min(half).or_else(|| q.pop_max_segment_min())
         })
     }
 
@@ -870,8 +871,6 @@ where
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
             queue_buckets
         );
-
-        
 
         let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
