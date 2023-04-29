@@ -49,6 +49,8 @@ pub trait SegmentBucket<P: Ord>: Bucket {
 
     fn peek_min(&self) -> Option<(&Self::Item, &P)>;
     fn peek_max(&self) -> Option<(&Self::Item, &P)>;
+    fn min_priority(&self) -> Option<&P>;
+    fn max_priority(&self) -> Option<&P>;
 
     fn iter(&self) -> priority_queue::core_iterators::Iter<Self::Item, P>
     where
@@ -78,6 +80,14 @@ where
 
     fn peek_max(&self) -> Option<(&Self::Item, &P)> {
         self.pq.peek_max()
+    }
+
+    fn min_priority(&self) -> Option<&P> {
+        self.pq.peek_min().map(|(_, p)| p)
+    }
+
+    fn max_priority(&self) -> Option<&P> {
+        self.pq.peek_max().map(|(_, p)| p)
     }
 
     fn iter(&self) -> priority_queue::core_iterators::Iter<I, P>
@@ -139,22 +149,25 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
-    // TODO: Should these check all the buckets?
     fn pop_min(&mut self) -> Option<(B::Item, P)> {
-        let segment = self.min_priority()?;
+        let segment = (self.min_priority()?..=self.max_priority()?)
+            .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_removing(segment)?.pop_min()
     }
     fn pop_max(&mut self) -> Option<(B::Item, P)> {
-        let segment = self.max_priority()?;
+        let segment = (self.min_priority()?..=self.max_priority()?)
+            .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_removing(segment)?.pop_max()
     }
 
     fn peek_min(&'b mut self) -> Option<(&'b B::Item, &'b P)> {
-        let segment = self.min_priority()?;
+        let segment = (self.min_priority()?..=self.max_priority()?)
+            .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_peeking(segment)?.peek_min()
     }
     fn peek_max(&'b mut self) -> Option<(&'b B::Item, &'b P)> {
-        let segment = self.max_priority()?;
+        let segment = (self.min_priority()?..=self.max_priority()?)
+            .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_peeking(segment)?.peek_max()
     }
 
@@ -182,9 +195,14 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     fn bucket_sizes(&self) -> Vec<usize> {
         if let Some(max) = self.max_priority() {
-            (0..=max).into_iter().map(
-                |s| self.bucket_for_peeking(s).map(|b| b.len_bucket()).unwrap_or_default()
-            ).collect()
+            (0..=max)
+                .into_iter()
+                .map(|s| {
+                    self.bucket_for_peeking(s)
+                        .map(|b| b.len_bucket())
+                        .unwrap_or_default()
+                })
+                .collect()
         } else {
             Vec::new()
         }
