@@ -151,22 +151,26 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     fn pop_min(&mut self) -> Option<(B::Item, P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
+            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_removing(segment)?.pop_min()
     }
     fn pop_max(&mut self) -> Option<(B::Item, P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
+            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_removing(segment)?.pop_max()
     }
 
     fn peek_min(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
+            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_peeking(segment)?.peek_min()
     }
     fn peek_max(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
+            .filter(|&s| !self.bucket_for_peeking(s).unwrap().is_empty_bucket())
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_peeking(segment)?.peek_max()
     }
