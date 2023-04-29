@@ -160,12 +160,12 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         self.bucket_for_removing(segment)?.pop_max()
     }
 
-    fn peek_min(&'b mut self) -> Option<(&'b B::Item, &'b P)> {
+    fn peek_min(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
             .min_by_key(|&s| self.bucket_for_peeking(s).unwrap().min_priority())?;
         self.bucket_for_peeking(segment)?.peek_min()
     }
-    fn peek_max(&'b mut self) -> Option<(&'b B::Item, &'b P)> {
+    fn peek_max(&'b self) -> Option<(&'b B::Item, &'b P)> {
         let segment = (self.min_priority()?..=self.max_priority()?)
             .max_by_key(|&s| self.bucket_for_peeking(s).unwrap().max_priority())?;
         self.bucket_for_peeking(segment)?.peek_max()
@@ -198,13 +198,13 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         self.bucket_for_removing(segment)?.pop_max()
     }
 
-    fn peek_min_segment_min_priority(&'b mut self) -> Option<&'b P> {
+    fn peek_min_segment_min_priority(&'b self) -> Option<&'b P> {
         self.bucket_for_peeking(self.min_priority()?)?
             .peek_min()
             .map(|(_, p)| p)
     }
 
-    fn peek_min_segment_max_priority(&'b mut self) -> Option<&'b P> {
+    fn peek_min_segment_max_priority(&'b self) -> Option<&'b P> {
         self.bucket_for_peeking(self.min_priority()?)?
             .peek_max()
             .map(|(_, p)| p)
@@ -213,13 +213,20 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     /// More efficiently extracts all the items from all buckets with
     /// priorities above `keep_priority`.
     fn pop_all_with_priority(&mut self, keep_priority: P, max_pops: usize) -> Vec<(B::Item, P)> {
-        if let Some(min) = self.min_priority() {
+        if max_pops == 0 {
+            Vec::new()
+        } else if let Some(min) = self.min_priority() {
             let max = self.max_priority().unwrap_or(min);
             let mut vec = Vec::new();
             for segment in min..=max {
                 while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
                     if *p > keep_priority {
-                        vec.push(self.bucket_for_removing(segment).unwrap().pop_max().unwrap());
+                        vec.push(
+                            self.bucket_for_removing(segment)
+                                .unwrap()
+                                .pop_max()
+                                .unwrap(),
+                        );
                         if vec.len() >= max_pops {
                             return vec;
                         }

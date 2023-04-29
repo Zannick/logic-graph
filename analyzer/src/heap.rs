@@ -605,9 +605,14 @@ where
                     );
                     let len = queue.len();
                     if cap - len < num_to_restore {
+                        // est_completion is the min element, so we'd drain the queue
+                        // instead lets drain half of the earliest segment, and go from there
+                        let threshold = (queue.peek_min_segment_min_priority().unwrap()
+                            + queue.peek_min_segment_max_priority().unwrap())
+                            / 2;
                         let evicted = Self::evict_until(
                             &mut queue,
-                            est_completion,
+                            threshold,
                             self.min_evictions,
                             len + 2 * num_to_restore - cap,
                         );
