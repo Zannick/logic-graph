@@ -628,7 +628,7 @@ where
                 // Pick a state greedily: max progress, min elapsed, and do a greedy search.
                 if let Some(ctx) = next
                     .iter()
-                    .max_by_key(|ctx| (ctx.get().progress(), !ctx.elapsed()))
+                    .max_by_key(|ctx| (self.queue.db().progress(ctx.get()), !ctx.elapsed()))
                 {
                     if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
                         if win.elapsed() <= self.queue.max_time() {

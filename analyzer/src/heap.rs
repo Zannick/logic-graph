@@ -858,7 +858,8 @@ where
         for c in queue.iter() {
             let elapsed: f64 = c.0.elapsed().into();
             let score: f64 = self.db.score(&c.0).into();
-            let progress: f64 = c.0.get().progress().into();
+            let progress: u32 = self.db.progress(c.0.get()).try_into().unwrap();
+            let progress: f64 = progress.into();
             time_scores.push((elapsed, score));
             time_progress.push((elapsed, progress));
         }
@@ -892,8 +893,7 @@ where
             .add(p)
             .x_label("elapsed time")
             .y_label("progress")
-            .x_range(0., self.db.max_time().into())
-            .y_range(0., 100.);
+            .x_range(0., self.db.max_time().into());
         println!(
             "Heap progress by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
