@@ -812,7 +812,8 @@ where
         }
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {
-            println!("extend+evict took {:?} with the lock", start.elapsed());
+            let len = ev.len();
+            println!("extend+evict took {:?} with the lock, got {} elements", start.elapsed(), len);
             let start = Instant::now();
             if !ev.is_empty() {
                 let best = ev.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
@@ -820,7 +821,8 @@ where
                 self.min_db_estimate.fetch_min(best, Ordering::Release);
                 self.evictions.fetch_add(1, Ordering::Release);
                 println!(
-                    "evict to db took {:?}, db now has {}",
+                    "evicting {} to db took {:?}, db now has {}",
+                    len,
                     start.elapsed(),
                     self.db.len()
                 );
