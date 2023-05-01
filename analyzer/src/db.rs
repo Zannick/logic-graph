@@ -11,6 +11,7 @@ use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
+use rocksdb::Env;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions,
     IteratorMode, MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
@@ -171,8 +172,11 @@ where
         block_opts.set_block_cache(&cache);
         block_opts.set_block_cache_compressed(&cache2);
         block_opts.set_block_size(1024);
-        opts.set_max_background_jobs(4);
+        opts.set_max_background_jobs(16);
         opts.set_block_based_table_factory(&block_opts);
+        let mut env = Env::new().unwrap();
+        env.set_low_priority_background_threads(12);
+        opts.set_env(&env);
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();

@@ -895,7 +895,8 @@ where
             .add(p)
             .x_label("elapsed time")
             .y_label("progress")
-            .x_range(0., self.db.max_time().into());
+            .x_range(0., self.db.max_time().into())
+            .y_range(-1., <usize as TryInto<u32>>::try_into(queue_buckets.len()).unwrap().into());
         println!(
             "Heap progress by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
