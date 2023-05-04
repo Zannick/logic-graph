@@ -6,10 +6,11 @@ This directory contains the per-game graph definitions. The folder `sample` is c
 
 The world of the game is represented by these main components:
 *   **Item**: A permanent upgrade that can be collected or a permanent change to the world (sometimes called an "event"). Some speedrun categories require collecting specific ones before beating the game.
-*   **Location**: the Place that contains an **Item**, and a rule restricting when the player is allowed to acquire that item. Can also be given a **canonical** name in case there are multiple ways or places that can access the in-game item. Can only be visited once.
-*   **Spot**: the main graph node type, representing a place the player can be. Can contain **Locations**, **Exits** to other Spots, **Local** movement connections to other Spots, and **Actions** that the player can perform.
-*   **Area**: a collection of **Spots**, which share a relative coordinate system used for determining movement time (so that it's not required to time every possible pair of Spots).
-*   **Region**: a collection of **Areas**. This mostly serves an organizational purpose.
+*   **Places**: representations of pieces of the world
+    *   **Location**: the Place that contains an **Item**, and a rule restricting when the player is allowed to acquire that item. Can also be given a **canonical** name in case there are multiple ways or places that can access the in-game item. Can only be visited once.
+    *   **Spot**: the main graph node type, representing a place the player can be. Can contain **Locations**, **Exits** to other Spots, **Local** movement connections to other Spots, and **Actions** that the player can perform.
+    *   **Area**: a collection of **Spots**, which share a relative coordinate system used for determining movement time (so that it's not required to time every possible pair of Spots).
+    *   **Region**: a collection of **Areas**. This mostly serves an organizational purpose.
 *   **Exit**: a graph edge detailing what a player needs to move from one **Spot** to another and how long it takes to move in that way.
 *   **Hybrid**: an **Exit** that contains a **Location**, essentially an edge that can be traversed multiple times where the player collects an **Item** on the first traversal.
 *   **Local**: a graph edge between two **Spots** in the same area, detailing some info that can be used to calculate movement times.
@@ -18,6 +19,7 @@ The world of the game is represented by these main components:
 
 And finally,
 *   **context**: the temporary state of the game, such as whether doors are opened or closed, where the last save was, whether the player is young or old, small or big, etc. This gets combined with the permanent state (items collected, locations visited, etc) to form the full point-in-time state of a playthrough (which is called **Context** throughout the Rust code).
+*   **data**: miscellaneous information that can be used like **context** but is constant based on the player position (Place).
 
 ## Folder organization
 
@@ -42,6 +44,30 @@ The `data` directory will contain diagram files for your game, currently a graph
 Finally, if you created any test yaml files in `tests`, the same directory will contain the Rust files that run the tests you described.
 
 ## `Game.yaml` structure
+
+The file is considered a dictionary, where these are the allowed keys:
+
+* **name**: The name of the game. **Required**.
+* **context**: A dictionary of type definitions for context variables. You only need to define something here if you want to use a smaller integer type than 32-bit (smaller is recommended whenever possible), or you want to explicitly define all the options of an enum; the script will make its best guess otherwise based on usage. Each key is the name of the context variable, and its value is another dictionary with these keys:
+    * **type**: The name of the type. Valid values are "str", "int", "float", "bool", or any native Rust type. Can be omitted if **max** or **opts** is used. Bools can be defined instead by setting **default**.
+    * **max**: The maximum value of the variable. Helpful for using a smaller datatype. Usually means the type is `int`.
+    * **opts**: A list of enum names. The variable will always be one of these.
+    * **default**: An alternate form of putting the context variable in **start**. For enums this also helps keeps the initial value together with the definition. Can be omitted if your default is 0 or false.
+* **start**: A dictionary of initial values of context variables where the type is inferrable from the value (or the variable is defined in **context**). The key **position** is required, and must be set to a **Spot**.
+* **load**: A dictionary of values of context variables that will be set whenever the game is *loaded* (by using a warp that loads the game).
+* **data**: A dictionary of defaults for Place-based data. Entries are just `key: value`, and the type of the data is inferred from the value, e.g. `0` or `false`. **Spots** can have a value of None, but you have to write `SpotId::None`.
+* **objectives**: A dictionary of rules defining what constitutes a "win". **Required**. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **movements**: A dictionary of movement definitions. **Required** to have a **default** entry if you want to use movements.
+    * TODO
+* **time**: A dictionary of tags with default time measurements (as a float in seconds). These tags can be attached to anything that would have a time value (**Locations**, **Exits**, **Actions**, **Hybrids**, and **Warps**) and if it has no time value, the value defined here is used. The tag **default** represents the fallback if there is no tag and no time.
+* **warps**: A dictionary of the warps.
+    * TODO
+* **actions**: A list of the actions.
+    * TODO
+* **helpers**: A dictionary of logic helpers. The names of keys must start with `$`. If the helper is not meant to evaluate to a boolean, its type must be specified by adding a `:` followed by the Logic rule name. Helpers can accept arguments, which must be defined in parentheses after the type (if mentioned), with their own types included after a `:`. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **collect**: A dictionary of effects that trigger when collecting a specific item. The key is the name of the item, the value is a logic rule of type `action`. Useful when items are permanently collectible but provide currency that can be spent. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **settings**: A dictionary of settings that can be changed per-run without having to regenerate the code or recompile the generated code. Keys are the names of the settings, and the values are the same as the **context** fields.
+* **special**: A dictionary of special per-game behavior overrides. You can think of these as settings that tweak behavior of the graph analyzer for the game type as a whole, similar to how you provide a settings file when you run the program to tweak behavior of your own graph. There will be a fixed list of these; right now there aren't any.
 
 ## Region `.yaml` structure
 
