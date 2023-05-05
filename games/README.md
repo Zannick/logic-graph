@@ -13,7 +13,7 @@ The world of the game is represented by these main components:
     *   **Region**: a collection of **Areas**. This mostly serves an organizational purpose.
 *   **Exit**: a graph edge detailing what a player needs to move from one **Spot** to another and how long it takes to move in that way.
 *   **Hybrid**: an **Exit** that contains a **Location**, essentially an edge that can be traversed multiple times where the player collects an **Item** on the first traversal.
-*   **Local**: a graph edge between two **Spots** in the same area, detailing some info that can be used to calculate movement times.
+*   **Local connection**: a graph edge between two **Spots** in the same area, detailing some info that can be used to calculate movement times.
 *   **Action**: a thing the player can do that makes temporary changes to the player or the world, and can be done multiple times (resources and abilities permitting). Some of these can be done anywhere, but most will be defined inside a **Spot**.
 *   **Warp**: a travel option that can be initiated from anywhere under certain conditions to a fixed or changeable **Spot**.
 
@@ -76,7 +76,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 * **short**: Optionally, a short version of the name. If present, this is the version that will show in most places.
 * **data**: A dictionary of values for Place-based data. Format is the same as in `Game.yaml` but the values here override those values, and in turn can be overridden by **data** definitions in more specific places.
 * **here**: A dictionary of context variable overrides. The actual values of those variables are ignored and overridden with the given values when the player is in this **Region**.
-* **enter**, **load**, **reset**: A dictionary of context variable values to be set on a certain trigger: respectively, whenever the player *enters* the **Region** (i.e. the previous position was not in the **Region** and the new position is), whenever the game is *loaded* (by using a warp that loads the game), and whenever the area is *reset* (via a call to the [built-in function](#built-in-functions) `$reset`). Context variables may be defined here and omitted from `Game.yaml` fields as long as the type is inferrable from the value, and the name does not collide with any other context variable. You may prefix context variables used only in this Region (i.e. *local context variables*) with `_`; other Regions or Places may have a similarly named local context variable without collision.
+* **enter**, **load**, **reset**: A dictionary of context variable values to be set on a certain trigger: respectively, whenever the player *enters* the **Region** (i.e. the previous position was not in the **Region** and the new position is), whenever the game is *loaded* (by using a warp that loads the game), and whenever the area is *reset* (via a call to the [built-in function](#built-in-functions) `$reset` or whenever the game is *loaded*). Context variables may be defined here and omitted from `Game.yaml` fields as long as the type is inferrable from the value, and the name does not collide with any other context variable. You may prefix context variables used only in this Region (i.e. *local context variables*) with `_`; other Regions or Places may have a similarly named local context variable without collision.
 * **on_entry**: An effect that triggers whenever the player *enters* the Region, similar to **enter** except this field supports deeper customization. The effect is written as a logic rule of type `action`; during this effect's execution, `^position` is the player's previous position, and `^newpos` is the **Spot** the player is moving into. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **areas**: A list of [Areas](#areas).
 
@@ -84,7 +84,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 
 **Areas** are defined only within **Regions**. They may have the following fields:
 
-* **name**: The name of the area. Area names must be unique within a Region.
+* **name**: The name of the area. Area names must be unique within a Region. **Required**.
 * **data**: A dictionary of values for Place-based data. Format is the same everywhere. These values override the data at higher levels: the containing Region and the defaults defined in `Game.yaml`, and can in turn be overridden by the **data** fields in **Spots**.
 * **here**, **enter**, **load**, **reset**, **on_entry**: Same as in **Region** but applying to this **Area** instead.
 * **spots**: A list of [Spots](#spots).
@@ -93,7 +93,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 
 Spots are only defined within **Areas**. They may have the following fields:
 
-* **name**: The name of the spot. Spot names must be unique within an Area.
+* **name**: The name of the spot. Spot names must be unique within an Area. **Required**.
 * **data**, **here**: Same as in **Areas** but applying/overriding at this **Spot** instead.
 * **coord**: A list of coordinates, relative to other Spots in the same **Area**. Only two dimensions are presently supported. Floats are allowed.
 * **local**: A list of [Local connections](#local-connections) from this Spot.
@@ -123,7 +123,9 @@ Movements that only depend on **data** fields are considered *base movements* be
 Warps are always defined globally in `Game.yaml` and are available from any **Spot** (though they can be restricted using **requirements**). They are defined as a dictionary keyed on their **name** and may have the following fields:
 
 * **time**: The time it takes to execute the Warp, in seconds. **Required**; Warps don't presently support tags.
-* **req**: The **requirements** to execute the Warp, as a logic rule of type `boolExpr`. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **req**: The **requirements** to execute the Warp, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **price**: The numerical value of the **Currency** required to be spent. If unset, executing the Warp is considered free.
+* **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
 * **to**: The Warp's destination, either as a specific fixed **Spot** or as a context variable of type **SpotId**. In the former case, the full name of the Spot is required (the region's short name must be used if applicable), with `>` separating the **Region**, **Area**, and **Spot** names: `to: Amagi > Main Area > Save Point`. In the latter case, the context variable is named with a `^` preceding it: `to: ^save`. **Required**.
 * **before**: An optional effect that occurs before the player's position is changed (and can thus reference the old spot), as a logic rule of type `action`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **after**: An optional effect that occurs after the player's position is changed, as a logic rule of type `action`. See the [Logic grammar reference](#logic-grammar-reference) below.
@@ -142,13 +144,188 @@ Local connections are always defined in a **Spot**. They may have the following 
 
 ### Locations
 
+Locations are always defined in a **Spot**. They may have the following fields:
+
+* **name**: The name of the Location. Location names must be unique within a Spot. **Required**.
+* **item**: The id of the Item. This may only use alphanumeric characters and underscores and must start with a capital letter. **Required**.
+* **canon**: The canonical name of the Location. All Locations with the same canonical name are considered alternative ways to access the same logical item in the game; after visiting any of these, all the rest with the same canonical name will be skipped. All Locations with the same canonical name must have the same Item.
+* **req**: The **requirements** to visit the Location, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **price**: The numerical value of the **Currency** required to be spent. If unset, accessing the Location is considered free.
+* **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
+* **time**: The time it takes to access the Location.
+* **tags**: A list of string tags for the Location, which may be used to set a default time, or to mark certain groups of Locations. If multiple tags have times associated with them, the largest is chosen by default.
+
 ### Exits
+
+Exits are always defined in a **Spot**. They may have the following fields:
+
+* **to**: The destination **Spot**. If the Spot is in the same Region, the Region may be omitted, e.g. `to: Main Area > Save Point`. If the Spot is in the same Area, both the Region and Area may be omitted, e.g. `to: Ledge`.
+* **req**: The **requirements** to take the Exit, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **price**: The numerical value of the **Currency** required to be spent. If unset, taking the Exit is considered free.
+* **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
+* **time**: The time it takes to take the Exit.
+* **tags**: A list of string tags for the Exit, which may be used to set a default time, or to mark certain groups of Exits. If multiple tags have times associated with them, the largest is chosen by default.
 
 ### Hybrids
 
+Hybrids are always defined in a **Spot**. They have the same fields as both Locations and Exits with the following caveats:
+
+* **req** is used for both **Location** and **Exit**.
+* **price** and **costs** refer to the **Location**, and as such will only be paid once when the Location is accessed. To set a cost of taking the Exit separately, use **exit_price** and **exit_costs**. If those are left unset, the Exit is considered free (other than the Location visit).
+* **time** refers to the **Exit**. To set a time for the **Location** access, use **item_time**.
+* **tags** are used to set a default time for both **time** and **item_time**. You may override either or both.
+
 ### Actions
 
+Actions are always defined in a **Spot**. They may have the following fields:
+
+* **name**: The name of the Action. Action names must be unique within a Spot. **Required**.
+* **req**: The **requirements** to perform the Action, as a logic rule of type `boolExpr`. If omitted, functions the same as `True`. See the [Logic grammar reference](#logic-grammar-reference) below.
+* **do**: The **effect** of the Action, as a logic rule of type `action`. **Required** (else why have the action?). See the [Logic grammar reference](#logic-grammar-reference) below.
+* **price**: The numerical value of the **Currency** required to be spent. If unset, accessing the Location is considered free.
+* **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
+* **time**: The time it takes to execute the Action.
+* **tags**: A list of string tags for the Action, which may be used to set a default time, or to mark certain groups of Actions. If multiple tags have times associated with them, the largest is chosen by default.
 
 ## Logic grammar reference
 
-### Built-in functions
+For full and up-to-date details, please consult [the full ANTLRv4 grammar](../grammar/Rules.g4). This is meant as a quick summary.
+
+The logic rules are intended to read like a subset or variant of Python. Each field that expects a logic rule expects a particular **type** of rule, which is the same in general as its **return type**. And logic rules are built out of expressions that expect certain types of expressions and primitives and return their own types. (Note that this is not true typechecking!)
+
+### Main Rules
+
+* **boolExpr**: The type expected in **req** fields. You may wrap a boolExpr in parentheses (`( )`), and you may combine them with boolean logic operators `and` or `or`.
+* **actions**: The type expected in **do**, **before**, and **after** fields. These fields expect one or more statements of type **action**, separated by `;` (a semicolon after the last statement is optional).
+* **itemList**: The type expected for **objectives**. This is also a boolean expression that can be used in **req** fields. See [Testing Item Possession](#testing-item-possession).
+
+### Primitives
+
+* the values `True` or `False`
+* integers
+* floats
+* an **Item**, written the same as you would find it in [Locations](#locations). Must begin with a capital letter and contains only alphanumerics and underscores.
+* a **setting**. Must begin with a lowercase letter and contains only alphanumerics and underscores.
+* a **context variable** or helper **argument**. Indicated with a `^`, then must begin with a lowercase letter or underscore, and contains only alphanumerics and underscores.
+* a **Place**. Must be enclosed in backticks and fully specified, e.g. `` `Amagi > Main Area > Save Point` ``.
+
+### Expressions
+
+#### Testing Item Possession
+
+Anywhere that expects a **boolExpr** can check whether an item has been collected in any of these manners:
+
+* the Item id, to check for at least one of the item.
+* the Item id followed by a number in braces, e.g. `Infect{2}` to check that at least that number copies of that item have been collected. The number must either be a integer literal or a **setting** name.
+* 'NOT' followed by the Item id, to check that the item has not ever been collected.
+* a **context variable** or helper **argument** of type Item, to check for at least one of that referenced item.
+* **itemList**, which checks that all of the possessions in the list are true. Viable options for entries in the list include: any of the above 4 options, or a **helper** function of type **itemList** that takes no arguments.
+
+#### value
+
+A **value** expression is either a **setting**, a **context variable**, or a **helper argument**.
+
+#### num
+
+A **num** primitive is either a integer literal or a **value** expression.
+
+Two expressions of type **num** can be combined with a binary operation of `+`, `-`, `*`, or `/`. Division on integral types is always integer division.
+
+#### str
+
+The grammar does not support building or modifying strings. Instead, to save space, all string values are converted by the Compiler script into enum values for the respective **context variables** that represent some form of mode. Because of this, strings for different variables can't be compared to each other.
+
+The grammar does not presently support a way to reference a specific enum. Instead it accepts string literals, and the enum type is inferred from where the literal is assigned or what it is compared against.
+
+A **str** primitive is either a string literal or a **value** expression.
+
+#### action
+
+(These are usually called *statements* in some programming languages.)
+
+There are only two main **action** primitives:
+*  Assignment: You may overwrite the value saved in a **context variable** with `^var = expr`. The expression on the right side is allowed to use `^var` to read the value of the variable before the assignment.
+*  Alteration: For numerical types, you can adjust the value in a **context variable** with e.g. `^var += expr`. Allowed operations are `+`, `-`, `*`, and `/`. Division on integral types is always integer division.
+
+The other types of **action** expressions are **function invocations** and **conditionals**.
+
+#### Comparisons
+
+Comparisons are always **boolExpr**. You can compare:
+
+* a **value** expression of numerical type can be compared `==`, `!=`, `>=`, `>`, `<=`, or `<` with a **num** expression.
+* a **value** expression of numerical type can be tested as a bitflag containing all the set bits in a **num** expression, by writing `value & num`. This is a comparison rather than a binary operation.
+* a **value** expression of string type can be compared `==` or `!=` with a **str** expression.
+* a **context variable** or **helper argument** can be compared `==` with an **Item** primitive or a **setting** value (by name). The types should match.
+* a **context variable** or **helper argument** of type **Item** can be tested for inclusion in a literal list of **Item** names, by writing `^item_var in [Item1, Item2, ...]`. The list must contain at least two Items, otherwise you should use the `==` comparison.
+
+#### Conditionals
+
+Conditionals are written in the form `IF (boolExpr) { ... } ELSE IF (boolExpr) { ... } ELSE { ... }`. Parentheses and brackets are required. The `...` must all be the same rule (which is the return type of the conditional), and one of:
+* **boolExpr**
+* **num**
+* **str**
+* **actions**
+
+You may have as many `ELSE IF` blocks as you like. The `ELSE` block is optional for **boolExpr**, in which case the else case is considered `false`. The `ELSE` block is optional for **actions** as well, which does not need a default.
+
+#### Negation
+
+For these **boolExpr** expressions only can you use `NOT` to negate it:
+*  **Item** possessions of one item, e.g. `NOT Item`: tests that the Item has not been collected
+*  **value** expressions, e.g. `NOT value`: tests that the expression is false.
+*  **function invocations**, e.g. `NOT $func`: tests that the function returns false.
+*  **Place containment**, e.g. ``NOT WITHIN `Place` `` or ``^place_var NOT WITHIN `Place` ``: tests that the position or given **Place** variable is not within the other.
+
+#### Switch, Match, and Per
+
+Switch statements (despite the name) all begin with either `MATCH` or `PER`; it does not matter which, though you may prefer them differently for different kinds of statements. They are always written `MATCH thing { case => ..., case2 => ..., _ => ... }`. The final case must always be the catch-all case `_`, even if it's impossible to reach. The return type of the statement is the same type as the `...` expressions which must all be of the same type.
+
+* If `thing` is an **Item** name, the cases must all be integer literals; the case that will be chosen is the number of that Item that have been collected so far. These numbers will influence the upper bound on the number of this Item tracked, even if impossible to collect that many. The return type may be any of **boolExpr**, **num**, or **str**.
+* If `thing` is a **setting** name, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the setting. The return type may be any of **boolExpr**, **num**, or **str**.
+* If `thing` is a **context variable** or **helper argument**, *and* the return type is **boolExpr**, the cases must all be **Item**s, though each case may have multiple Items separated by `|` to indicate that any such Item matches that case.
+* If `thing` is a **context variable** or **helper argument**, and the return type is either **num** or **str**, the cases must all be either integer literals or string literals; the case that will be chosen is the one that matches the value of the variable or argument.
+
+These could be changed in the future to make settings and variables work the same way.
+
+#### Function invocations
+
+Function invocations are written `$func(arg1, arg2, ...)`. Function invocations with no arguments provided can be written as just `$func`. Available functions include **helpers** defined in `Game.yaml`, and the following built-in functions:
+* **max** and **min**: Type **num**. Returns the **max**imum or **min**imum of the two provided numerical arguments.
+* **count**: Type **num**. Accepts one **Item** argument and returns how many of that **Item** have been collected. Note that this may be capped based on the maximum value needed in any rule (if we never check for multiples, this may return 1 even if the item is collected multiple times; if we never check for the Item at all, this always returns 0).
+* **default**: Any type that has a Rust default (numbers, Spots, and enums). Returns the default value of that type. Useful mainly for setting a context variable to `SpotId::None` which is not otherwise recognized in this grammar.
+* **all_spot_checks**, **all_area_checks**, **all_region_checks**: Type **boolExpr**. Accepts one **Place** argument that must be a **Spot**, **Area**, or **Region**, respectively, and returns whether all **Locations** in that **Place** have been either visited or skipped.
+* **get_area**, **get_region**: Type **Place**. Accepts one **Spot** argument and returns the **Area** or **Region**, respectively, that contains the Spot.
+* **reset_area**, **reset_region**: Type **action**. Accepts one **Place** argument that must be an **Area** or **Region** respectively, and resets the given **Area** or **Region**. Note that resetting a Region does not reset all the Areas in that Region.
+* **skip**: Type **action**. Accepts one **Location** argument and skips it.
+* **add_item**: Type **action**. Adds one of the given **Item** to the context without triggering **collect** rules.
+* **collect**: Type **action**. Adds one of the given **Item** to the context *and* triggers **collect** rules for that item. *Be careful not to create an infinite loop!*
+
+Functions of type **boolExpr**, **action**, or **Place** may accept any one of these argument sets (no mixing and matching):
+* Any number of **Item**s.
+* Any number of **Place**s.
+* Any number of **value** expressions.
+* Any one integer, float, or string literal.
+* Any one **context variable** or **helper argument**.
+* Nothing.
+
+Function invocations of type **boolExpr** may additionally be negated.
+
+Functions of type **num** may currently accept any one of these argument sets (no mixing and matching):
+* A single **Item**.
+* Any number of **num** expressions.
+* Nothing.
+
+Functions of type **itemList** do not currently allow any arguments.
+
+These restrictions on arguments are possible to change if needed; this is just the current grammar.
+
+#### Place Containment
+
+You can whether a certain **Place** variable is inside of another **Place** via `p1 WITHIN p2` or `p1 NOT WITHIN p2`:
+
+* `p1` must be a **context variable** or **function argument**, or it may be omitted, in which case the current position is used.
+* If `p1` is omitted, `p2` may be either a **Place** literal in backticks, or a tuple (surrounded with `()`) of **Place** literals separated by commas.
+* If `p1` is a variable or argument, `p2` may be a **Place** literal, another variable or argument, or a **function invocation** of type **Place**.
+
+These cases could be changed in the future to supply the same behavior if needs arise.
