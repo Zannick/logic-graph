@@ -14,25 +14,20 @@ use enum_map::{enum_map, EnumMap};
 enum Movement {
     #[default]
     Default,
-    General,
     Water,
 }
 
 fn has_movement(ctx: &Context, m: Movement) -> bool {
     match m {
         Movement::Default => true,
-        Movement::General => rules::access_not_water(ctx),
         Movement::Water => rules::access_underwater_movement(ctx),
     }
 }
 
-pub type MovementState = [bool; 2];
+pub type MovementState = [bool; 1];
 
 pub fn get_movement_state(ctx: &Context) -> MovementState {
-    [
-        has_movement(ctx, Movement::General),
-        has_movement(ctx, Movement::Water),
-    ]
+    [has_movement(ctx, Movement::Water)]
 }
 
 pub fn local_travel_time(
@@ -42,15999 +37,6235 @@ pub fn local_travel_time(
     dest: SpotId,
 ) -> u32 {
     match (movement_state, src, dest) {
+        ([false], SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => 4035,
+        ([false], SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__East_15) => 4035,
+        ([false], SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Shallow_End) => {
+            701
+        }
+        ([false], SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => 5180,
+        ([false], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => 5180,
+        ([false], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Upper_Platform) => 900,
+        ([false], SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => {
+            1000
+        }
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__East_15,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-        ) => 5180,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__East_15,
-        ) => 5180,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Shallow_End,
-            SpotId::Amagi__Main_Area__Cliff,
-        ) => 5180,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Cliff,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 5180,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Cliff,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Cliff,
-        ) => 1000,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__West_Shelf,
         ) => 1576,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__Platform_2,
         ) => 900,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
         ) => 700,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__West_Shelf,
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => 2000,
+        ([false], SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Side) => {
+            1801
+        }
+        ([false], SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Platform_2) => {
+            675
+        }
+        ([false], SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__West_Shelf) => {
+            1801
+        }
+        ([false], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => {
+            900
+        }
+        ([false], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => {
+            600
+        }
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__West_Side,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__West_Side,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 600,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 1126,
+        ([false], SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => {
+            1000
+        }
+        ([false], SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_3) => {
+            1126
+        }
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 1126,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 899,
+        ([false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1403,
+        ([false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 175,
+        ([false], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => 600,
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Carving,
-            SpotId::Amagi__Main_Area__West_Side,
-        ) => 1801,
-        ([false, false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => {
-            225
-        }
-        ([false, false], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => {
-            1000
-        }
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 9234,
+        ) => 7192,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 3153,
+        ) => 2456,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__West_Shelf,
         ) => 1700,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Carving,
-        ) => 2027,
+        ) => 1578,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Platform_3,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 1351,
+        ([false], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Flat_Ruin) => {
+            2252
+        }
+        ([false], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__West_18) => 4279,
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__West_18,
-        ) => 4279,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Platform_3,
         ) => 3000,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
         ) => 3153,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 450,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
         ) => 699,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 3153,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
         ) => 2027,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Save_Point,
         ) => 2252,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
         ) => 2027,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Amagi__Main_Area__Save_Point,
         ) => 1500,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Amagi__Main_Area__Enemy_Side,
         ) => 1576,
+        ([false], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => {
+            1351
+        }
+        ([false], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => {
+            1351
+        }
+        ([false], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => {
+            2702
+        }
+        ([false], SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__Enemy_Side) => {
+            2702
+        }
+        ([false], SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__East_19) => 2477,
+        ([false], SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__Small_Cliff) => 2477,
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__East_19,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__East_19,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 2477,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 1000,
+        ([false], SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => {
+            4954
+        }
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 4954,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
         ) => 500,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 1000,
+        ([false], SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Broken_Wall) => {
+            2000
+        }
+        ([false], SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Flat_Ruin) => {
+            2252
+        }
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 2252,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Half_Pillar,
             SpotId::Amagi__Main_Area__West_Mini_Hill,
         ) => 900,
+        ([false], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__Half_Pillar) => {
+            2252
+        }
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 2252,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Flat_Ruin,
             SpotId::Amagi__Main_Area__West_Mini_Hill,
         ) => 1351,
+        ([false], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => 2027,
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__West_19,
-        ) => 2027,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__West_Mini_Hill,
             SpotId::Amagi__Main_Area__Half_Pillar,
         ) => 1000,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__West_Mini_Hill,
             SpotId::Amagi__Main_Area__Flat_Ruin,
         ) => 1351,
+        ([false], SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => 2027,
         (
-            [false, false],
-            SpotId::Amagi__Main_Area__West_18,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 2027,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Secret_Waterfall,
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-        ) => 13513,
+        ) => 10526,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
             SpotId::Amagi__Main_Area__Secret_Waterfall,
-        ) => 13513,
-        // [0.225225, 0.4]
+        ) => 10526,
+        // [0.175439, 0.4]
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 625,
-        // [0.900901, 0.4]
+        ) => 575,
+        // [0.701754, 0.4]
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1300,
+        ) => 1101,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 675,
-        ([false, false], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 4054,
-        ([false, false], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 4054,
+        ) => 526,
+        ([false], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 4054,
+        ([false], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 4054,
+        ([false], SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => {
+            1576
+        }
+        ([false], SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_19) => {
+            1576
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__West_19,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_19,
-        ) => 1576,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Hidden_Enemies,
             SpotId::Amagi__Liru_Room__Platform_1_Left,
         ) => 500,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Hidden_Enemies,
             SpotId::Amagi__Liru_Room__Platform_1_Right,
         ) => 1126,
+        ([false], SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_20) => {
+            1576
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1576,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_1_Left,
             SpotId::Amagi__Liru_Room__Platform_1_Right,
         ) => 1126,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_1_Left,
             SpotId::Amagi__Liru_Room__Platform_2_Left,
         ) => 500,
+        ([false], SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__West_20) => {
+            1576
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1576,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_1_Right,
             SpotId::Amagi__Liru_Room__Platform_1_Left,
         ) => 1126,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_1_Right,
             SpotId::Amagi__Liru_Room__Platform_2_Left,
         ) => 1126,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_1_Right,
             SpotId::Amagi__Liru_Room__Platform_2_Right,
         ) => 675,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_2_Left,
             SpotId::Amagi__Liru_Room__Platform_2_Right,
         ) => 1801,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_2_Left,
             SpotId::Amagi__Liru_Room__Platform_3_Left,
         ) => 499,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_2_Left,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
         ) => 1351,
+        ([false], SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__West_20) => {
+            1576
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1576,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_2_Right,
             SpotId::Amagi__Liru_Room__Platform_2_Left,
         ) => 1801,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_2_Right,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
         ) => 499,
+        ([false], SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__Bottom) => {
+            1299
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1299,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_2_Right,
             SpotId::Amagi__Liru_Room__East_Passage,
         ) => 900,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_3_Left,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
         ) => 1351,
+        ([false], SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__West_20) => {
+            1576
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1576,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_3_Left,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
         ) => 399,
+        ([false], SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Bottom) => {
+            1351
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1351,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_4_Left,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
         ) => 1126,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__Platform_4_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Left,
         ) => 1126,
-        (
-            [false, false],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1126,
-        ([false, false], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => {
-            2252
+        ([false], SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__Bottom) => {
+            1126
         }
-        ([false, false], SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => {
-            2252
+        ([false], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 2252,
+        ([false], SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 2252,
+        ([false], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            2000
         }
-        (
-            [false, false],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1576,
-        ([false, false], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => {
-            4279
+        ([false], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
+            1576
         }
+        ([false], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => 4279,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__East_Passage,
             SpotId::Amagi__Liru_Room__Platform_2_Right,
         ) => 1000,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__Liru_Room__East_Passage,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
         ) => 1351,
+        ([false], SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Bottom) => 1100,
+        ([false], SpotId::Amagi__West_Lake__East_15, SpotId::Amagi__West_Lake__East_Shore) => 526,
+        ([false], SpotId::Amagi__West_Lake__East_Shore, SpotId::Amagi__West_Lake__East_Bank) => {
+            1228
+        }
+        ([false], SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Shore) => {
+            3000
+        }
         (
-            [false, false],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1100,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__East_15,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__East_Shore,
-            SpotId::Amagi__West_Lake__East_Bank,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__East_Bank,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 3000,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northeast_Platform,
             SpotId::Amagi__West_Lake__Northwest_Platform,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northeast_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
         ) => 1200,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northeast_Platform,
             SpotId::Amagi__West_Lake__East_Platform,
         ) => 1801,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northeast_Platform,
             SpotId::Amagi__West_Lake__Pillar,
         ) => 2252,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
         ) => 900,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => 2027,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__West_Platform,
         ) => 3378,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
             SpotId::Amagi__West_Lake__East_Platform,
         ) => 2252,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
             SpotId::Amagi__West_Lake__Tentacle_Gap,
         ) => 1599,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__East_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
         ) => 2252,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__East_18,
-        ) => 2027,
-        ([false, false], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => {
-            1576
+        ([false], SpotId::Amagi__West_Lake__East_Platform, SpotId::Amagi__West_Lake__East_18) => {
+            2027
+        }
+        ([false], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => 1576,
+        ([false], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Pillar_Platform) => {
+            675
         }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-        ) => 675,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Pillar,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => 5630,
+        ([false], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1801,
+        ([false], SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__East_19) => {
+            900
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__East_19,
-        ) => 900,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
             SpotId::Amagi__West_Lake__Pillar,
         ) => 5630,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
             SpotId::Amagi__West_Lake__Some_Rock,
         ) => 1576,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_Platform,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_Platform,
             SpotId::Amagi__West_Lake__Cavern_Chin,
         ) => 2477,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
             SpotId::Amagi__West_Lake__West_Platform,
         ) => 1576,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
         ) => 2702,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
         ) => 1801,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Jaw,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
         ) => 1801,
+        ([false], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => {
+            900
+        }
+        ([false], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Chin) => {
+            3603
+        }
+        ([false], SpotId::Amagi__West_Lake__Cavern_Neck, SpotId::Amagi__West_Lake__Cavern_Chin) => {
+            4504
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 3603,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 4504,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Chin,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
         ) => 1500,
+        ([false], SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Some_Rock) => {
+            2252
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 2252,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
         ) => 1100,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
             SpotId::Amagi__West_Lake__Cavern_Eye,
         ) => 900,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Eye,
             SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
         ) => 1000,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
         ) => 1801,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 1126,
         // [2.477477, 0.7]
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
         ) => 3177,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 1576,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
         ) => 4054,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Stronghold_Item,
         ) => 699,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Stronghold_Item,
             SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
             SpotId::Amagi__West_Lake__Stronghold_Item,
         ) => 1351,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
         ) => 900,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
         ) => 900,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             SpotId::Amagi__West_Lake__Small_Hill,
         ) => 2927,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
         ) => 1351,
+        ([false], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => {
+            1576
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 1576,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
         ) => 2927,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
         ) => 3378,
+        ([false], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => {
+            5405
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 5405,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Tentacle_Gap,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
         ) => 1100,
+        ([false], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => {
+            3378
+        }
+        ([false], SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__East_20) => {
+            3828
+        }
+        ([false], SpotId::Amagi__West_Lake__East_20, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
+            3828
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 3828,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__East_20,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 3828,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_Cliff,
             SpotId::Amagi__West_Lake__Northeast_Platform,
         ) => 2252,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_Cliff,
             SpotId::Amagi__West_Lake__Northwest_Platform,
         ) => 900,
+        ([false], SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Bank) => {
+            2477
+        }
+        ([false], SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Cliff) => {
+            2477
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 2477,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__Water_Surface,
             SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 2477,
+        ) => 1929,
+        ([false], SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => {
+            500
+        }
+        ([false], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
+            1754
+        }
         (
-            [false, false],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 500,
-        (
-            [false, false],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 2252,
-        (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_Shore,
             SpotId::Amagi__West_Lake__Water_Surface,
-        ) => 2252,
+        ) => 1754,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_Shore,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 6531,
+        ) => 5087,
         (
-            [false, false],
+            [false],
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 3603,
+        ) => 2807,
+        ([false], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
+        ([false], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
+        ([false], SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
+        ([false], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
         (
-            [false, false],
-            SpotId::Antarctica__West__Helipad,
-            SpotId::Antarctica__West__Shed_Entry,
-        ) => 5630,
-        ([false, false], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => {
-            6756
-        }
-        (
-            [false, false],
-            SpotId::Antarctica__West__Shed_Entry,
-            SpotId::Antarctica__West__Helipad,
-        ) => 5630,
-        ([false, false], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => {
-            6756
-        }
-        (
-            [false, false],
+            [false],
             SpotId::Antarctica__Building_1W__West_Entry,
             SpotId::Antarctica__Building_1W__Connector,
-        ) => 3378,
+        ) => 2631,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Building_1W__Connector,
             SpotId::Antarctica__Building_1W__West_Entry,
-        ) => 3378,
+        ) => 2631,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Building_1E__Connector,
             SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 3378,
+        ) => 2631,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
-        ) => 3378,
+        ) => 2631,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Save_Point,
-        ) => 1126,
+        ) => 877,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_1_Entry,
-        ) => 1126,
+        ) => 877,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_2_Entry,
-        ) => 2252,
+        ) => 1754,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Save_Point,
-        ) => 2252,
+        ) => 1754,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_1_Entry,
-        ) => 2252,
+        ) => 1754,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Save_Point,
-        ) => 3378,
+        ) => 2631,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_2_Entry,
-        ) => 5630,
+        ) => 4385,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Building_2U__Stairs,
             SpotId::Antarctica__Building_2U__Door,
-        ) => 4504,
+        ) => 3508,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Building_2U__Door,
             SpotId::Antarctica__Building_2U__Stairs,
-        ) => 4504,
+        ) => 3508,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Power_Room__Entry,
             SpotId::Antarctica__Power_Room__Switch,
-        ) => 1801,
+        ) => 1403,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Power_Room__Switch,
             SpotId::Antarctica__Power_Room__Entry,
-        ) => 1801,
+        ) => 1403,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Freight_Elevator__Left,
             SpotId::Antarctica__Freight_Elevator__Controls,
-        ) => 2702,
+        ) => 2105,
         (
-            [false, false],
+            [false],
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
-        ) => 2702,
-        ([false, false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => {
-            1400
+        ) => 2105,
+        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
+        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => 1929,
+        // [1.4, 0.9]
+        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2299,
+        ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => 1929,
+        // [0.877193, 1.754386]
+        ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2631,
+        // [0.877193, 0.9]
+        ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => 1777,
+        ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => 1929,
+        ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => 3157,
+        ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 999,
+        ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => 1929,
+        ([false], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => 3599,
+        ([false], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
+            2456
         }
-        ([false, false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => {
-            2477
+        ([false], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
+            2456
         }
-        // [1.4, 1.126126]
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__East_11,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2526,
-        ([false, false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => {
-            2477
+        ([false], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => {
+            3599
         }
-        // [1.126126, 2.252252]
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__East_12,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 3378,
-        // [1.126126, 1.126126]
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__East_12,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2252,
-        ([false, false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => {
-            2477
+        ([false], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
+            2456
+        }
+        ([false], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => {
+            2631
+        }
+        ([false], SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
+            2631
+        }
+        ([false], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => {
+            2456
         }
         (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 999,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Lake_Access,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 3153,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__West_13,
-        ) => 4279,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 2252,
-        ([false, false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            1126
+        ) => 1200,
+        ([false], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            1754
         }
-        ([false, false], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            1126
+        ([false], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
+            1754
         }
         (
-            [false, false],
-            SpotId::Ebih__Base_Camp__West_11,
-            SpotId::Ebih__Base_Camp__West_Midair,
-        ) => 1351,
+            [false],
+            SpotId::Ebih__Base_Camp__Building_Entry,
+            SpotId::Ebih__Base_Camp__Behind_Vehicle,
+        ) => 701,
+        ([false], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            2456
+        }
+        ([false], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => {
+            3333
+        }
+        ([false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
+            1754
+        }
+        ([false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 877,
+        ([false], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 877,
+        ([false], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => 1052,
+        ([false], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => 2280,
         (
-            [false, false],
-            SpotId::Ebih__Base_Camp__West_11,
-            SpotId::Ebih__Base_Camp__Left_Platform,
-        ) => 2927,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Base_Camp__West_Midair,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2927,
+        ) => 2280,
+        ([false], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            1699
+        }
+        ([false], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => 1052,
+        ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => {
+            3157
+        }
+        ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => {
+            1099
+        }
+        ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
+            2456
+        }
         (
-            [false, false],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1699,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__West_12,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1099,
-        (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 3153,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2252,
+        ) => 1754,
+        ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            4210
+        }
+        ([false], SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => {
+            1403
+        }
+        ([false], SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => {
+            1403
+        }
         (
-            [false, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 5405,
-        (
-            [false, false],
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Bunker_Interior__Desk,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Ebih__Bunker_Interior__Entry,
-        ) => 1801,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Building_Interior__Entry,
             SpotId::Ebih__Building_Interior__Corner,
-        ) => 2252,
+        ) => 1754,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Building_Interior__Corner,
             SpotId::Ebih__Building_Interior__Entry,
-        ) => 2252,
-        ([false, false], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
-            450
-        }
-        ([false, false], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => {
-            450
-        }
+        ) => 1754,
+        ([false], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 350,
+        ([false], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 350,
+        ([false], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => 1578,
+        ([false], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2631,
+        ([false], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
         (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 2027,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__East_13,
-        ) => 2477,
+        ) => 1929,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__East_Platform,
-        ) => 450,
+        ) => 350,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Bush,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__West_Bush,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 6981,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 3603,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Ebih__By_Garage__East_Bush,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 450,
-        ([false, false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => {
-            2000
-        }
-        ([false, false], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => {
-            1126
+        ) => 600,
+        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2280,
+        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => {
+            701
         }
         (
-            [false, false],
-            SpotId::Ebih__By_Garage__West_13,
+            [false],
+            SpotId::Ebih__By_Garage__Outcropping,
+            SpotId::Ebih__By_Garage__Crawlspace_Opening,
+        ) => 350,
+        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1754,
+        ([false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1799,
+        ([false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
+            1403
+        }
+        ([false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => 1754,
+        ([false], SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => {
+            5438
+        }
+        (
+            [false],
             SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__West_13,
             SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 5180,
+        ) => 2807,
+        ([false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => 1754,
+        ([false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
+            400
+        }
+        ([false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => 1200,
+        ([false], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 877,
+        ([false], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => {
+            1799
+        }
+        ([false], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
+        ([false], SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => 4035,
+        ([false], SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => 1578,
+        ([false], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
+        ([false], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
+        ([false], SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => 1228,
+        ([false], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => 1228,
+        ([false], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
+            701
+        }
         (
-            [false, false],
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            SpotId::Ebih__By_Garage__West_13,
-        ) => 5180,
-        (
-            [false, false],
-            SpotId::Ebih__By_Garage__East_12,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2027,
-        ([false, false], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1801,
-        ([false, false], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__East_12,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__East_12,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 900,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__West_12,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1576,
+        ) => 1228,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
             SpotId::Ebih__Grid_25_10_12__West_12,
-        ) => 1576,
+        ) => 1228,
+        ([false], SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => {
+            1052
+        }
         (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1351,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 599,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 2000,
+        ) => 1200,
+        ([false], SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Bush) => 800,
         (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 800,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1000,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Bush,
         ) => 1200,
+        ([false], SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__West_11) => {
+            1929
+        }
+        ([false], SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => {
+            1200
+        }
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ) => 1399,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 900,
+        ) => 701,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1576,
+        ) => 1228,
+        ([false], SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => {
+            877
+        }
+        ([false], SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
+            1929
+        }
         (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 2477,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__West_11,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
+        ) => 1228,
+        ([false], SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
+            1929
+        }
         (
-            [false, false],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 2477,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__West_10,
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1576,
+        ) => 1228,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__East_10,
             SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-        ) => 450,
+        ) => 350,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
             SpotId::Ebih__Grid_25_10_12__East_10,
-        ) => 2000,
-        ([false, false], SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => {
-            900
+        ) => 1200,
+        ([false], SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => 701,
+        ([false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
+        ([false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
+        ([false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
+            1929
         }
-        ([false, false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => {
-            1000
+        ([false], SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => {
+            2631
         }
-        ([false, false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => {
-            900
+        ([false], SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => {
+            2631
         }
         (
-            [false, false],
-            SpotId::Ebih__Waterfall__East_Ledge,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__East_11,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__East_11,
-        ) => 3378,
-        (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Near_East_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1801,
+        ) => 1403,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
+        ) => 1799,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 2027,
+        ) => 1578,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2477,
+        ) => 1929,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 2027,
+        ) => 1578,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 2477,
+        ) => 1929,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
         ) => 500,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 1126,
+        ) => 877,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1126,
+        ) => 877,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2252,
+        ) => 1754,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 3000,
+        ) => 1799,
         (
-            [false, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Alcove_Left,
         ) => 300,
         (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Alcove_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Wall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__West_10,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_10,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 2927,
-        ([false, false], SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => {
-            2927
-        }
-        ([false, false], SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => {
-            2927
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 500,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 299,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-        ) => 400,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 225,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 700,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__West_Door_Right,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 4504,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 7207,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 5405,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2199,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 4504,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Big_Tree,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Big_Tree,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Big_Tree,
-            SpotId::Ebih__Waterfall__Below_Tree,
-        ) => 900,
-        ([false, false], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            1801
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Below_Tree,
-            SpotId::Ebih__Waterfall__Platform,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Platform,
-            SpotId::Ebih__Waterfall__Below_Tree,
-        ) => 900,
-        ([false, false], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => {
-            4279
-        }
-        ([false, false], SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => {
-            4279
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__East_7,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-        ) => 9909,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 8333,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 3828,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__East_7,
-        ) => 9909,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__West_7,
-        ) => 7657,
-        (
-            [false, false],
-            SpotId::Ebih__Waterfall__West_7,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-        ) => 7657,
-        ([false, false], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            2477
-        }
-        ([false, false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => {
-            2477
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 2252,
-        ([false, false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => {
-            4000
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 799,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Alcove,
-        ) => 3603,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3603,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 3603,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1351,
-        ([false, false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 999,
-        ([false, false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            2477
-        }
-        ([false, false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => {
-            675
-        }
-        ([false, false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1300,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__East_7,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1126,
-        ([false, false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => {
-            675
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 1351,
-        ([false, false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => {
-            1300
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1100,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3200,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Chute,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3500,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 699,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 799,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 900,
-        ([false, false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => {
-            2000
-        }
-        ([false, false], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
-            1576
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__East_8,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__East_8,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1800,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_West__Giguna_Pillar,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__West_8,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__West_8,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 699,
-        ([false, false], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => {
-            1801
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            SpotId::Ebih__Ebih_East__Corner,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 7882,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 4954,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 4279,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 6756,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 1576,
-        ([false, false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => {
-            6081
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 4729,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2027,
-        ([false, false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => {
-            1576
-        }
-        ([false, false], SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
-            1576
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2000,
-        ([false, false], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => {
-            2027
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Grid_21_1_5__West_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__West_6,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__East_6,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 2027,
-        ([false, false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 4000,
-        ([false, false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => {
-            4729
-        }
-        ([false, false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 3378,
-        ([false, false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1351,
-        ([false, false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => {
-            3153
-        }
-        ([false, false], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => {
-            4729
-        }
-        ([false, false], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 3000,
-        ([false, false], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => {
-            4000
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 900,
-        ([false, false], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => {
-            1126
-        }
-        ([false, false], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => {
-            1126
-        }
-        ([false, false], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => {
-            1801
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__East_4,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 3828,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-        ) => 500,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1126,
-        ([false, false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => {
-            3378
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__East_Ledge,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2027,
-        ([false, false], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => {
-            1351
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__West_5,
-        ) => 4729,
-        ([false, false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1500,
-        ([false, false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 3378,
-        (
-            [false, false],
-            SpotId::Ebih__Boss_Room__West_5,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 4729,
-        ([false, false], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            675
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__West_6,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1576,
-        // [1.0, 0.900901]
-        ([false, false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => {
-            1900
-        }
-        // [0.900901, 0.7]
-        ([false, false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            1600
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-        ) => 1126,
-        ([false, false], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => {
-            1351
-        }
-        ([false, false], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            2000
-        }
-        ([false, false], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 900,
-        ([false, false], SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Portal,
-        ) => 600,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Item,
-        ) => 1351,
-        // [1.126126, 0.900901]
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 2027,
-        // [1.126126, 0.675676]
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1801,
-        ([false, false], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => {
-            900
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1400,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Tree,
-        ) => 900,
-        // [0.8, 0.900901]
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1700,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_4,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1500,
-        // [0.8, 0.675676]
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1475,
-        ([false, false], SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => {
-            1000
-        }
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-        ) => 2027,
-        ([false, false], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 1126,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__West_11,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-        ) => 1126,
-        // [0.675676, 1.0]
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1675,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__East_10,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Grid_26_10_11__East_10,
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 2027,
-        // [1.576577, 1.576577]
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 6000,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__East_9,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 699,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Step,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Step,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Step,
-            SpotId::Giguna__Giguna_Northeast__West_10,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__West_10,
-            SpotId::Giguna__Giguna_Northeast__Step,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__West_9,
-            SpotId::Giguna__Giguna_Northeast__Step,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 2252,
-        // [1.576577, 0.7]
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 2276,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__East_11,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__East_11,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Switch,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Door,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Northeast__Door,
-            SpotId::Giguna__Giguna_Northeast__Vault,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__East_10,
-            SpotId::Giguna__Carnelian__East_Cliff,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__East_10,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Switch,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Switch,
-        ) => 699,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Rock,
-        ) => 450,
-        ([false, false], SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => {
-            1000
-        }
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 2000,
-        ([false, false], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__West_Ledge,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Carnelian__West_10,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__East_10,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__East_10,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 699,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-        ) => 599,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 299,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Cache,
-        ) => 500,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Bush,
-        ) => 2252,
-        // [2, 1]
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Cache,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Cache,
-            SpotId::Giguna__West_Caverns__Bush,
-        ) => 2702,
-        // [2, 1]
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Bush,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Bush,
-            SpotId::Giguna__West_Caverns__Cache,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__East_Susar,
-        ) => 450,
-        // [0.900901, 2.027027]
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__East_13,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Giguna__West_Caverns__East_12,
-            SpotId::Giguna__West_Caverns__East_Susar,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__West_12,
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_12,
-        ) => 1126,
-        // [0.45045, 1.576577]
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__West_13,
-            SpotId::Giguna__Wasteland__Middle_Path,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Middle_Path,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__West_14,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Wasteland__West_14,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__East_14,
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-        ) => 2027,
-        // [0.675676, 0.675676]
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1351,
-        // [0.675676, 1.4]
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 2075,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-        ) => 1126,
-        // [0.675676, 0.675676]
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1351,
-        // [0.675676, 1.4]
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 2075,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Left_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 800,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Kari,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 5000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Kari,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 1351,
-        ([false, false], SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => {
-            3153
-        }
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1099,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__West_Grate,
-        ) => 5000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__West_16,
-        ) => 675,
-        // [1.351351, 2]
-        ([false, false], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => {
-            3351
-        }
-        // [1.351351, 2]
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 3351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__West_16,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__East_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__West_9,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__West_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 1126,
-        ([false, false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => {
-            1576
-        }
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Cliff,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 1351,
-        // [1.801802, 0.9]
-        ([false, false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => {
-            2701
-        }
-        ([false, false], SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => {
-            225
-        }
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Small_Passage,
-            SpotId::Giguna__Ruins_East__West_8,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__West_8,
-            SpotId::Giguna__Ruins_East__Small_Passage,
-        ) => 1801,
-        ([false, false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => {
-            1351
-        }
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Pillar,
-            SpotId::Giguna__Ruins_East__West_7,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 3600,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Cliff,
-        ) => 2399,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Pillar,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__East_8,
-            SpotId::Giguna__Ruins_Center__Tablet,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__Tablet,
-            SpotId::Giguna__Ruins_Center__East_8,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__Wall_Bottom,
-            SpotId::Giguna__Ruins_Center__East_9,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__East_9,
-        ) => 3378,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__Wall_Bottom,
-        ) => 400,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__Center_Top,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_9,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Glacier__Dock_Elevator__Connector,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Interior__Entry,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Interior__Connector,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Dock_Outside__Entry,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-        ) => 6081,
-        (
-            [false, false],
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-            SpotId::Glacier__Dock_Outside__Entry,
-        ) => 6081,
-        ([false, false], SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => {
-            1576
-        }
-        ([false, false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => {
-            1576
-        }
-        ([false, false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => {
-            1351
-        }
-        (
-            [false, false],
-            SpotId::Glacier__Revival__Overhang,
-            SpotId::Glacier__Revival__Lower_East,
-        ) => 1576,
-        ([false, false], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => {
-            2000
-        }
-        ([false, false], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => {
-            2927
-        }
-        ([false, false], SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => {
-            8000
-        }
-        (
-            [false, false],
-            SpotId::Glacier__Revival__Save_Point,
-            SpotId::Glacier__Revival__West_8,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Revival__West_8,
-            SpotId::Glacier__Revival__Save_Point,
-        ) => 1576,
-        ([false, false], SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => {
-            4054
-        }
-        (
-            [false, false],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 4054,
-        // [1.126126, 1.126126]
-        (
-            [false, false],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 4054,
-        // [2, 3, 3, 1.126126]
-        (
-            [false, false],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 9126,
-        // [2, 4, 2.027027]
-        (
-            [false, false],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 8027,
-        (
-            [false, false],
-            SpotId::Glacier__Compass_Room__East,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__East,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__West,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Compass_Room__West,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Small_Path,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-            SpotId::Glacier__Grid_39_40_7_9__West,
-        ) => 8558,
-        // [4.279279, 1, 4.279279]
-        (
-            [false, false],
-            SpotId::Glacier__Grid_39_40_7_9__West,
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-        ) => 9558,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_37_38_9__East,
-            SpotId::Glacier__Grid_37_38_9__West,
-        ) => 8558,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_37_38_9__West,
-            SpotId::Glacier__Grid_37_38_9__East,
-        ) => 8558,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2600,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__East_13,
-        ) => 2027,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 14000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 14000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 500,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__West_8,
-            SpotId::Glacier__Vertical_Room__Peak,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 7000,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__East_13,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Glacier__Vertical_Room__East_13,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 9000,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 8558,
-        // [3.378378, 3.378378]
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 6756,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-        ) => 8558,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 8558,
-        // [1.126126, 1.126126]
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 2252,
-        // [4.279279, 4.279279]
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 8558,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 8558,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 8558,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room__West,
-            SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room__West,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 3153,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 2702,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__East_9,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-        ) => 500,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 4954,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 5405,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 800,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__West,
-        ) => 5405,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 599,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-        ) => 4279,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__East_8,
-        ) => 3828,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Top_Rock,
-            SpotId::Glacier__Peak__Top_Platform_East,
-        ) => 2252,
-        ([false, false], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => {
-            4054
-        }
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Top_Platform_East,
-        ) => 2252,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 300,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__West_Cliff,
-        ) => 4054,
-        ([false, false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => {
-            7000
-        }
-        (
-            [false, false],
-            SpotId::Glacier__Peak__West_Cliff,
-            SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 600,
-        ([false, false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2927,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__Under_West_Cliff,
-            SpotId::Glacier__Peak__West_8,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Peak__West_8,
-            SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 600,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__West_9,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 3000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-            SpotId::Glacier__Grid_32_7_10__West_9,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-            SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 700,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 600,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2927,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 4054,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 7000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-        ) => 1400,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__West_12,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 5000,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 2000,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 1126,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 675,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1300,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 900,
-        // [0.225225, 1.0]
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1225,
-        // [0.225225, 2.252252]
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 450,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1801,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 4000,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 199,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1351,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 900,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1000,
-        (
-            [false, false],
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1576,
-        (
-            [false, false],
-            SpotId::Glacier__Apocalypse_Entry__West,
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-        ) => 2477,
-        (
-            [false, false],
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-            SpotId::Glacier__Apocalypse_Entry__West,
-        ) => 2477,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__East_15,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-        ) => 4035,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__East_15,
-        ) => 4035,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 701,
-        ([true, false], SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => {
-            4035
-        }
-        ([true, false], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => {
-            4035
-        }
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Cliff,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Cliff,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__West_Side,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 526,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__West_Side,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1000,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 899,
-        ([true, false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => {
-            1403
-        }
-        ([true, false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => {
-            175
-        }
-        ([true, false], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => {
-            600
-        }
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 7192,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1700,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Carving,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__West_18,
-        ) => 3333,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 699,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1500,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1500,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__East_19,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__East_19,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 3859,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-        ) => 1052,
-        ([true, false], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => {
-            1578
-        }
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1052,
-        ([true, false], SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => {
-            1578
-        }
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-        ) => 10526,
-        (
-            [true, false],
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-        ) => 10526,
-        // [0.175439, 0.4]
-        (
-            [true, false],
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 575,
-        // [0.701754, 0.4]
-        (
-            [true, false],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1101,
-        (
-            [true, false],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 526,
-        ([true, false], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
-        ([true, false], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__West_19,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_19,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1300,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 400,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 526,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 399,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 399,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1199,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__East_Passage,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 399,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 877,
-        ([true, false], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 1754,
-        ([true, false], SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1228,
-        ([true, false], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => {
-            3333
-        }
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1000,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__East_15,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 526,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__East_Shore,
-            SpotId::Amagi__West_Lake__East_Bank,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__East_Bank,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1100,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 1899,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 900,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1699,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1599,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__East_18,
-        ) => 1578,
-        ([true, false], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => {
-            1228
-        }
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-        ) => 526,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 4385,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__East_19,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 4385,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-        ) => 899,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 2807,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 3508,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1500,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1100,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 877,
-        // [1.929825, 0.7]
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 2629,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 699,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 4210,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 1100,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 2982,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__East_20,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 2982,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__Water_Surface,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 5087,
-        (
-            [true, false],
-            SpotId::Amagi__West_Lake__West_15,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 2807,
-        (
-            [true, false],
-            SpotId::Antarctica__West__Helipad,
-            SpotId::Antarctica__West__Shed_Entry,
-        ) => 4385,
-        ([true, false], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
-        (
-            [true, false],
-            SpotId::Antarctica__West__Shed_Entry,
-            SpotId::Antarctica__West__Helipad,
-        ) => 4385,
-        ([true, false], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
-        (
-            [true, false],
-            SpotId::Antarctica__Building_1W__West_Entry,
-            SpotId::Antarctica__Building_1W__Connector,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1W__West_Entry,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__Building_1E__Connector,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Building_1_Entry,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Building_2_Entry,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 4385,
-        (
-            [true, false],
-            SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U__Door,
-        ) => 3508,
-        (
-            [true, false],
-            SpotId::Antarctica__Building_2U__Door,
-            SpotId::Antarctica__Building_2U__Stairs,
-        ) => 3508,
-        (
-            [true, false],
-            SpotId::Antarctica__Power_Room__Entry,
-            SpotId::Antarctica__Power_Room__Switch,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Antarctica__Power_Room__Switch,
-            SpotId::Antarctica__Power_Room__Entry,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Antarctica__Freight_Elevator__Left,
-            SpotId::Antarctica__Freight_Elevator__Controls,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Antarctica__Freight_Elevator__Left,
-        ) => 2105,
-        ([true, false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
-        ([true, false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => {
-            1929
-        }
-        // [1.4, 0.9]
-        ([true, false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            2299
-        }
-        ([true, false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => {
-            1929
-        }
-        // [0.877193, 1.754386]
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__East_12,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2631,
-        // [0.877193, 0.9]
-        ([true, false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            1777
-        }
-        ([true, false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => {
-            1929
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 799,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3599,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3599,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Lake_Access,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__West_13,
-        ) => 3333,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 1754,
-        ([true, false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            877
-        }
-        ([true, false], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            877
-        }
-        ([true, false], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => {
-            1052
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__West_11,
-            SpotId::Ebih__Base_Camp__Left_Platform,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1699,
-        ([true, false], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => {
-            1052
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1099,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 4210,
-        (
-            [true, false],
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Bunker_Interior__Desk,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Ebih__Bunker_Interior__Entry,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Corner,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Entry,
-        ) => 1754,
-        ([true, false], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
-            350
-        }
-        ([true, false], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => {
-            350
-        }
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__East_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 600,
-        ([true, false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => {
-            2280
-        }
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Bush,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 1403,
-        ([true, false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => {
-            1754
-        }
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 5438,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2807,
-        ([true, false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => {
-            1754
-        }
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 400,
-        ([true, false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => {
-            1200
-        }
-        ([true, false], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => {
-            877
-        }
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 4035,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            SpotId::Ebih__By_Garage__West_13,
-        ) => 4035,
-        (
-            [true, false],
-            SpotId::Ebih__By_Garage__East_12,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 1578,
-        ([true, false], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
-        ([true, false], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__East_12,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__East_12,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__West_12,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__West_12,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 599,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 800,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1000,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1000,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1199,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__East_10,
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-            SpotId::Ebih__Grid_25_10_12__East_10,
-        ) => 1200,
-        ([true, false], SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => {
-            701
-        }
-        ([true, false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => {
-            701
-        }
-        ([true, false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => {
-            701
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__East_Ledge,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__East_11,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__East_11,
-        ) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Alcove_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Alcove_Left,
-        ) => 300,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Left,
         ) => 1754,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
         ) => 2400,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => 1754,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
         ) => 877,
+        ([false], SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => {
+            2105
+        }
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 2105,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
         ) => 1799,
+        ([false], SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => {
+            2105
+        }
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__Wall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 2105,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Under_Waterfall,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 599,
+        ) => 799,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Wall_Right,
         ) => 1754,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Waterfall_Left,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Wall_Right,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
         ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__West_10,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_10,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 2280,
-        ([true, false], SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => {
+        ([false], SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__West_10) => {
             2280
         }
-        ([true, false], SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => {
+        ([false], SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => {
             2280
         }
+        ([false], SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => 2280,
+        ([false], SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => 2280,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 500,
+        ([false], SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => {
+            701
+        }
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 701,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Below_Left_Switch,
             SpotId::Ebih__Waterfall__West_Door_Left,
         ) => 600,
+        ([false], SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__Below_Left_Switch) => {
+            701
+        }
+        ([false], SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__West_Door_Left) => 877,
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 877,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
         ) => 299,
+        ([false], SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => 877,
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 877,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 900,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
         ) => 400,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
         ) => 199,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__West_Main_Path,
         ) => 701,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Climb,
         ) => 700,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Door_Right,
         ) => 600,
+        ([false], SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
+            1000
+        }
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 1000,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
         ) => 526,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
         ) => 2456,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Center_Main_Path,
         ) => 3508,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Near_East_Tree,
         ) => 5614,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Right,
         ) => 4210,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => 2199,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
         ) => 2456,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__West_Lower_Path,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Center_Main_Path,
             SpotId::Ebih__Waterfall__West_Main_Path,
         ) => 3508,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Center_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
         ) => 1052,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Big_Tree,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Big_Tree,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 2456,
-        ([true, false], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => {
-            701
+        ([false], SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => {
+            2456
         }
-        ([true, false], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            1403
+        ([false], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Center_Main_Path) => {
+            2456
         }
-        ([true, false], SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            701
-        }
-        ([true, false], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => {
-            701
-        }
-        ([true, false], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
-        ([true, false], SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
+        ([false], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => 701,
+        ([false], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => 1403,
+        ([false], SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => 701,
+        ([false], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => 701,
+        ([false], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
+        ([false], SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
+        ([false], SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 7719,
         (
-            [true, false],
-            SpotId::Ebih__Waterfall__East_7,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-        ) => 7719,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Top_Waterfall,
             SpotId::Ebih__Waterfall__West_Main_Path,
         ) => 6491,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Waterfall__Top_Waterfall,
             SpotId::Ebih__Waterfall__Center_Main_Path,
         ) => 2982,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__East_7,
-        ) => 7719,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__West_7,
-        ) => 5964,
-        (
-            [true, false],
-            SpotId::Ebih__Waterfall__West_7,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-        ) => 5964,
-        ([true, false], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            1929
+        ([false], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
+        ([false], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
+        ([false], SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
+        ([false], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
+        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1929,
+        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
+            1754
         }
-        ([true, false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => {
-            1929
+        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
+        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 799,
+        ([false], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => {
+            1754
+        }
+        ([false], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => {
+            2807
         }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1754,
-        ([true, false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
-        ([true, false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => {
-            599
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Alcove,
-        ) => 2807,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Block_Left,
         ) => 1578,
+        ([false], SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
+            2807
+        }
+        ([false], SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 2807,
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 2807,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2807,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Above_Alcove,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1052,
-        ([true, false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 899,
-        ([true, false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
-        ([true, false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => {
-            526
+        ([false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 999,
+        ([false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
+        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => 526,
+        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1300,
+        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1100,
+        ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => 526,
+        ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => {
+            1052
         }
-        ([true, false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1100,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__East_7,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1000,
-        ([true, false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => {
-            526
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 1052,
-        ([true, false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => {
+        ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1300,
+        ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => {
             1100
         }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1000,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 3200,
+        ([false], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            3157
+        }
+        ([false], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Chute) => {
+            1052
+        }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Chute,
-        ) => 1052,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
         ) => 1200,
+        ([false], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
+            1403
+        }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 1403,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 3500,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Above_Alcove,
         ) => 3100,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
         ) => 701,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__High_Platform,
         ) => 1200,
+        ([false], SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
+            699
+        }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 599,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
         ) => 350,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 799,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 701,
-        ([true, false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => {
-            1228
+        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 799,
+        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => {
+            701
         }
-        ([true, false], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
-            1228
-        }
+        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
+        ([false], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
+        ([false], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 877,
+        ([false], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 877,
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__East_8,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__East_8,
-        ) => 877,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Middle_Middle,
             SpotId::Ebih__Ebih_West__Middle_Cliff,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
         ) => 1800,
+        ([false], SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            1754
+        }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 1754,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Ebih__Ebih_West__Middle_Middle,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_West__Giguna_Pillar,
             SpotId::Ebih__Ebih_West__Above_Alcove,
         ) => 1228,
+        ([false], SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            1052
+        }
+        ([false], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => {
+            1052
+        }
+        ([false], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
+            2280
+        }
+        ([false], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            2280
+        }
         (
-            [true, false],
-            SpotId::Ebih__Ebih_East__West_8,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__West_8,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 2280,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
         ) => 699,
-        ([true, false], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => {
-            1403
-        }
+        ([false], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
             SpotId::Ebih__Ebih_East__Corner,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 6140,
+        ([false], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 3859,
         (
-            [true, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 3859,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
         ) => 3333,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
         ) => 1200,
+        ([false], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__East_Hill) => 2105,
         (
-            [true, false],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 2105,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 5263,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
         ) => 2456,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__East_Ledge,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Upper_Ledge,
         ) => 2400,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 1228,
-        ([true, false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => {
-            4736
+        ([false], SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Hill) => {
+            1228
         }
+        ([false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => 4736,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Upper_Ledge,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 3684,
+        ([false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 1403,
         (
-            [true, false],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 1403,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Ebih_East__Upper_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
         ) => 1578,
-        ([true, false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => {
+        ([false], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => 1228,
+        ([false], SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => 1228,
+        ([false], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_Ledge) => 2105,
+        ([false], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__Middle_Platform) => {
             1228
         }
-        ([true, false], SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
-            1228
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 1228,
-        ([true, false], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => {
+        ([false], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => 1578,
+        ([false], SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
             1578
         }
-        (
-            [true, false],
-            SpotId::Ebih__Grid_21_1_5__West_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__West_6,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__East_6,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 1578,
-        ([true, false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        ([true, false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => {
-            3684
+        ([false], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => {
+            1578
         }
-        ([true, false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 2631,
-        ([true, false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1052,
-        ([true, false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => 2456,
-        ([true, false], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => {
-            3684
+        ([false], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => {
+            1578
         }
-        ([true, false], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 1799,
-        ([true, false], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => 2456,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 701,
-        ([true, false], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => {
-            877
+        ([false], SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+            1578
         }
-        ([true, false], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => {
-            877
+        ([false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
+        ([false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => 3684,
+        ([false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 2631,
+        ([false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1052,
+        ([false], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => 2456,
+        ([false], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => 3684,
+        ([false], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 1799,
+        ([false], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => 2456,
+        ([false], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1403,
+        ([false], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__Lower_Tree) => 701,
+        ([false], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => 877,
+        ([false], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => 877,
+        ([false], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => 1403,
+        ([false], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => 2982,
+        ([false], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 500,
+        ([false], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 877,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1578,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 1000,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 877,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => {
+            1578
         }
-        ([true, false], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => {
-            1403
+        ([false], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => 1052,
+        ([false], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Upper_Tree) => {
+            1578
         }
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__East_4,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2982,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 877,
-        ([true, false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 900,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__East_Ledge,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 1578,
-        ([true, false], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => {
-            1052
+        ([false], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__West_5) => 3684,
+        ([false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1500,
+        ([false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
+        ([false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => 3684,
+        ([false], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => 526,
+        ([false], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1228
         }
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__West_5,
-        ) => 3684,
-        ([true, false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1400,
-        ([true, false], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (
-            [true, false],
-            SpotId::Ebih__Boss_Room__West_5,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 3684,
-        ([true, false], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            526
-        }
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__West_6,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1228,
-        // [0.9, 0.701754]
-        ([true, false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1601,
+        // [1.0, 0.701754]
+        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1701,
         // [0.9, 0.7]
-        ([true, false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            1600
+        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1600,
+        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1400
+        }
+        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
+        ([false], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
+        ([false], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => 1200,
+        ([false], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
+        ([false], SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
+        ([false], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1228
         }
         (
-            [true, false],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1299,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-        ) => 877,
-        ([true, false], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => {
-            1052
-        }
-        ([true, false], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            1200
-        }
-        ([true, false], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
-        ([true, false], SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1228,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
         ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Portal,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Item,
-        ) => 1052,
+        ([false], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal) => {
+            600
+        }
+        ([false], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Item) => {
+            1052
+        }
         // [0.877193, 0.701754]
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1578,
+        ([false], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => 1578,
         // [0.877193, 0.526316]
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Drone_Room__Portal_Exit,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1403,
-        ([true, false], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => {
-            701
+        ([false], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => 701,
+        ([false], SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1578
         }
         (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1578,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Pit_Left,
         ) => 1400,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Portal_Exit,
         ) => 450,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Left_Platform,
         ) => 701,
+        ([false], SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Tree) => 701,
+        // [0.8, 0.701754]
+        ([false], SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1501
+        }
+        ([false], SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_4) => 877,
+        ([false], SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            1500
+        }
+        // [0.8, 0.526316]
         (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Tree,
-        ) => 701,
-        // [0.7, 0.701754]
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1401,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_4,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1400,
-        // [0.7, 0.526316]
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1226,
-        ([true, false], SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => {
-            701
+        ) => 1326,
+        ([false], SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => 701,
+        ([false], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => 1578,
+        ([false], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => {
+            1578
+        }
+        ([false], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
+        (
+            [false],
+            SpotId::Ebih__Grid_26_10_11__West_11,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__West_11,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Grid_26_10_11__Ledge,
+            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
+        ) => 1052,
+        ([false], SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => {
+            350
         }
         (
-            [true, false],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-        ) => 1578,
-        ([true, false], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__West_11,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 350,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__Ledge,
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
             SpotId::Ebih__Grid_26_10_11__West_11,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         ) => 1200,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__West_11,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__Ledge,
         ) => 877,
         // [0.526316, 1.0]
+        ([false], SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => {
+            1526
+        }
         (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1526,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__West_10,
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Grid_26_10_11__Cliff,
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         ) => 526,
+        ([false], SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__East_10) => 1228,
+        ([false], SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Ebih__Grid_26_10_11__Cliff) => 1228,
         (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__East_10,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Ebih__Grid_26_10_11__East_10,
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-        ) => 1228,
-        (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
         ) => 1578,
         // [1.22807, 1.22807]
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 2456,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
         ) => 1799,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
         ) => 3599,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__East_11,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
         ) => 600,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__East_11,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__East_9,
         ) => 1200,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
         ) => 2807,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
         ) => 699,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             SpotId::Giguna__Giguna_Northeast__Step,
         ) => 701,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Step,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 701,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Step,
             SpotId::Giguna__Giguna_Northeast__West_10,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__West_10,
             SpotId::Giguna__Giguna_Northeast__Step,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__West_9,
             SpotId::Giguna__Giguna_Northeast__Step,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1754,
         // [1.22807, 0.7]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
         ) => 1928,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         ) => 1000,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             SpotId::Giguna__Giguna_Northeast__East_11,
         ) => 526,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__East_11,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         ) => 600,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Switch,
         ) => 701,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Vault,
         ) => 1052,
+        ([false], SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => {
+            2105
+        }
+        ([false], SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_10) => {
+            2105
+        }
         (
-            [true, false],
-            SpotId::Giguna__Carnelian__East_10,
-            SpotId::Giguna__Carnelian__East_Cliff,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__East_10,
-        ) => 2105,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Carnelian__East_Cliff,
             SpotId::Giguna__Carnelian__Upper_Susar,
         ) => 1754,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Carnelian__East_Cliff,
             SpotId::Giguna__Carnelian__Middle_Platforms,
         ) => 877,
+        ([false], SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Switch) => 1000,
         (
-            [true, false],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Switch,
-        ) => 1000,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Carnelian__Middle_Platforms,
             SpotId::Giguna__Carnelian__Switch,
         ) => 699,
+        ([false], SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Rock) => {
+            400
+        }
+        ([false], SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 701,
+        ([false], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Middle_Platforms) => {
+            1200
+        }
+        ([false], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 701,
+        ([false], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Lower_Susar) => 1403,
         (
-            [true, false],
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Rock,
-        ) => 400,
-        ([true, false], SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 701,
-        (
-            [true, false],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 1200,
-        ([true, false], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 701,
-        (
-            [true, false],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-        ) => 1403,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Carnelian__Upper_Path,
             SpotId::Giguna__Carnelian__Upper_Susar,
         ) => 877,
+        ([false], SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__West_Ledge) => {
+            1052
+        }
         (
-            [true, false],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 1052,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Carnelian__West_Ledge,
             SpotId::Giguna__Carnelian__Lower_Susar,
         ) => 1052,
+        ([false], SpotId::Giguna__Carnelian__West_10, SpotId::Giguna__Carnelian__West_Ledge) => 877,
         (
-            [true, false],
-            SpotId::Giguna__Carnelian__West_10,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 877,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__East_10,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__East_10,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__East_Platform,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 599,
+        ) => 699,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__East_Platform,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 1799,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 350,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Column_2_Top,
         ) => 2400,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1754,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__Higher_Ledge,
         ) => 599,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
         ) => 701,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
         ) => 600,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
         ) => 299,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Cache,
         ) => 500,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Bush,
         ) => 1754,
         // [1.2, 0.701754]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Cache,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         ) => 1901,
-        (
-            [true, false],
-            SpotId::Giguna__West_Caverns__Cache,
-            SpotId::Giguna__West_Caverns__Bush,
-        ) => 2105,
+        ([false], SpotId::Giguna__West_Caverns__Cache, SpotId::Giguna__West_Caverns__Bush) => 2105,
         // [1.2, 0.701754]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Bush,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         ) => 1901,
+        ([false], SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Cache) => 2105,
         (
-            [true, false],
-            SpotId::Giguna__West_Caverns__Bush,
-            SpotId::Giguna__West_Caverns__Cache,
-        ) => 2105,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
         ) => 350,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
             SpotId::Giguna__West_Caverns__East_Susar,
         ) => 350,
         // [0.701754, 1.578947]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
             SpotId::Giguna__West_Caverns__East_13,
         ) => 2280,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__West_Caverns__East_12,
             SpotId::Giguna__West_Caverns__East_Susar,
         ) => 526,
-        (
-            [true, false],
-            SpotId::Giguna__Wasteland__West_12,
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_12,
-        ) => 877,
+        ([false], SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => {
+            877
+        }
+        ([false], SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => {
+            877
+        }
         // [0.350877, 1.22807]
+        ([false], SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_13) => {
+            1578
+        }
         (
-            [true, false],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1578,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Upper_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
         ) => 1754,
+        ([false], SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__Middle_Path) => {
+            1228
+        }
+        ([false], SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__West_13) => {
+            1228
+        }
         (
-            [true, false],
-            SpotId::Giguna__Wasteland__West_13,
-            SpotId::Giguna__Wasteland__Middle_Path,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1228,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Middle_Path,
             SpotId::Giguna__Wasteland__Middle_Cliff,
         ) => 1200,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Middle_Path,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
         ) => 900,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
         ) => 400,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Lower_Path_Right,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Lower_Path_Left,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
         ) => 877,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Lower_Path_Left,
             SpotId::Giguna__Wasteland__West_14,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__Lower_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Wasteland__West_14,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__East_14,
             SpotId::Giguna__Giguna_Base__Stone_Knob,
         ) => 1578,
         // [0.526316, 0.6]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Stone_Knob,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
         ) => 1126,
         // [0.526316, 1.4]
+        ([false], SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Kari) => {
+            1926
+        }
         (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1926,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Stone_Knob,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Right_Pillar,
         ) => 877,
         // [0.526316, 0.6]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
         ) => 1126,
         // [0.526316, 1.4]
+        ([false], SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => {
+            1926
+        }
+        ([false], SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => {
+            701
+        }
+        ([false], SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => {
+            877
+        }
         (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1926,
-        (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__Left_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 877,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Kari,
         ) => 800,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Kari,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
         ) => 3000,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Kari,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 1052,
-        ([true, false], SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => {
-            2456
-        }
+        ([false], SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => 2456,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Kari,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Table,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Save_Point,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 899,
+        ) => 1099,
+        ([false], SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__Table) => {
+            1754
+        }
         (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 1754,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1052,
+        ) => 1300,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__West_Grate,
         ) => 3000,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__Save_Point,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__West_16,
         ) => 526,
         // [1.052632, 1.403509]
-        ([true, false], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => {
-            2456
-        }
+        ([false], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => 2456,
         // [1.052632, 1.2]
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Table,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 2252,
+        ([false], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Save_Point) => {
+            701
+        }
         (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 701,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 2105,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 1052,
+        ([false], SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__Table) => {
+            701
+        }
         (
-            [true, false],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 701,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Giguna__Giguna_Base__West_16,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 600,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__Save_Point,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Building_Interior__Bookshelf,
         ) => 1799,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => 701,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__East_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__West_9,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__West_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 877,
-        ([true, false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => {
-            1228
+        ([false], SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
+            2280
         }
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Cliff,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 1052,
-        // [1.403509, 0.9]
-        ([true, false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => {
-            2303
+        ([false], SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__East_9) => {
+            2280
         }
-        ([true, false], SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => {
-            199
+        ([false], SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__West_9) => {
+            877
         }
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Small_Passage,
-            SpotId::Giguna__Ruins_East__West_8,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__West_8,
-            SpotId::Giguna__Ruins_East__Small_Passage,
-        ) => 1403,
-        ([true, false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => {
+        ([false], SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
+            877
+        }
+        ([false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => 1228,
+        ([false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
             1052
         }
-        ([true, false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => {
-            701
+        // [1.403509, 0.9]
+        ([false], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => 2303,
+        ([false], SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => 199,
+        (
+            [false],
+            SpotId::Giguna__Ruins_East__Small_Passage,
+            SpotId::Giguna__Ruins_East__West_8,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Ruins_East__West_8,
+            SpotId::Giguna__Ruins_East__Small_Passage,
+        ) => 1403,
+        ([false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => 1052,
+        ([false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => 701,
+        ([false], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => {
+            3600
+        }
+        ([false], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => {
+            2399
+        }
+        ([false], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => {
+            1228
+        }
+        ([false], SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => {
+            526
+        }
+        ([false], SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => {
+            526
         }
         (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 3600,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Cliff,
-        ) => 2399,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Pillar,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_Center__East_8,
-            SpotId::Giguna__Ruins_Center__Tablet,
-        ) => 526,
-        (
-            [true, false],
-            SpotId::Giguna__Ruins_Center__Tablet,
-            SpotId::Giguna__Ruins_Center__East_8,
-        ) => 526,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
             SpotId::Giguna__Ruins_Center__East_9,
         ) => 2631,
+        ([false], SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__East_9) => {
+            2631
+        }
         (
-            [true, false],
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__East_9,
-        ) => 2631,
-        (
-            [true, false],
+            [false],
             SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
-        ) => 300,
+        ) => 400,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Ruins_Center__Center_Top,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
         ) => 1052,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
         ) => 1403,
         (
-            [true, false],
+            [false],
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
             SpotId::Giguna__Ruins_Center__West_9,
         ) => 1228,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Dock_Elevator__Connector,
             SpotId::Glacier__Dock_Elevator__Elevator,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Dock_Interior__Connector,
             SpotId::Glacier__Dock_Interior__Entry,
         ) => 1929,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Dock_Interior__Entry,
             SpotId::Glacier__Dock_Interior__Connector,
         ) => 1929,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 4736,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 4736,
-        ([true, false], SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => {
-            1228
-        }
-        ([true, false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => {
-            1228
-        }
-        ([true, false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => {
-            1052
-        }
-        (
-            [true, false],
-            SpotId::Glacier__Revival__Overhang,
-            SpotId::Glacier__Revival__Lower_East,
-        ) => 1228,
-        ([true, false], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => {
-            1200
-        }
-        ([true, false], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => {
-            2280
-        }
-        ([true, false], SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => {
-            4800
-        }
-        ([true, false], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => {
-            1228
-        }
-        ([true, false], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => {
-            1228
-        }
-        ([true, false], SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => {
+        ([false], SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => 1228,
+        ([false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => 1228,
+        ([false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => 1052,
+        ([false], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Lower_East) => 1228,
+        ([false], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => 1200,
+        ([false], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => 2280,
+        ([false], SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => 4800,
+        ([false], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => 1228,
+        ([false], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => 1228,
+        ([false], SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
+        ([false], SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => {
             3157
         }
-        (
-            [true, false],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 3157,
         // [0.877193, 0.877193]
-        (
-            [true, false],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 3157,
+        ([false], SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => {
+            1754
+        }
+        ([false], SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => {
+            3157
+        }
+        ([false], SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => {
+            3157
+        }
         // [1.2, 1.8, 1.8, 0.877193]
-        (
-            [true, false],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 5677,
+        ([false], SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => {
+            5677
+        }
         // [1.2, 2.4, 1.578947]
+        ([false], SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => {
+            5178
+        }
+        ([false], SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => {
+            1578
+        }
+        ([false], SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => {
+            1578
+        }
+        ([false], SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => {
+            1578
+        }
+        ([false], SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => {
+            1578
+        }
         (
-            [true, false],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 5178,
-        (
-            [true, false],
-            SpotId::Glacier__Compass_Room__East,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__East,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__West,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Glacier__Compass_Room__West,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 1578,
-        (
-            [true, false],
+            [false],
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__The_Big_Drop__Small_Path,
         ) => 2000,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
         ) => 6666,
         // [3.333333, 0.6, 3.333333]
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
         ) => 7266,
+        ([false], SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
+        ([false], SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
         (
-            [true, false],
-            SpotId::Glacier__Grid_37_38_9__East,
-            SpotId::Glacier__Grid_37_38_9__West,
-        ) => 6666,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_37_38_9__West,
-            SpotId::Glacier__Grid_37_38_9__East,
-        ) => 6666,
-        (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__West_9,
         ) => 3157,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_9,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
+        ) => 2600,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_9,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
+        ) => 2600,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 2000,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_9,
             SpotId::Glacier__Vertical_Room__East_9,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_9,
             SpotId::Glacier__Vertical_Room__West_9,
         ) => 1578,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 2500,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 2000,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 2400,
         (
-            [true, false],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1099,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1578,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 8400,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 8400,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__West_8,
-            SpotId::Glacier__Vertical_Room__Peak,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 4200,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__East_13,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Glacier__Vertical_Room__East_13,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 6666,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 6666,
-        // [2.631579, 2.631579]
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 5263,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-        ) => 6666,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 6666,
-        // [0.877193, 0.877193]
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 1754,
-        // [3.333333, 3.333333]
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 6666,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 6666,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 6666,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room__West,
-            SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room__West,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 2456,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 2105,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__East_9,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 400,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 799,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-        ) => 1000,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 3859,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 4210,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 800,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__West,
-        ) => 4210,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 599,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-        ) => 3333,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__East_8,
-        ) => 2982,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__Top_Rock,
-            SpotId::Glacier__Peak__Top_Platform_East,
-        ) => 1754,
-        ([true, false], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => 3157,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Top_Platform_East,
-        ) => 1754,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 200,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__West_Cliff,
-        ) => 3157,
-        ([true, false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => 4200,
-        (
-            [true, false],
-            SpotId::Glacier__Peak__West_Cliff,
-            SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 600,
-        ([true, false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2280,
-        ([true, false], SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => {
-            1929
-        }
-        ([true, false], SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => {
-            2400
-        }
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 500,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__West_9,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 1799,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-            SpotId::Glacier__Grid_32_7_10__West_9,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-            SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2280,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 3157,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 4200,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 400,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-        ) => 1400,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-        ) => 1000,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__West_12,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 3000,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 526,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 877,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 599,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1200,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 701,
-        // [0.175439, 1.0]
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1175,
-        // [0.175439, 1.754386]
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 350,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1403,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 2400,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 199,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1052,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 701,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 600,
-        (
-            [true, false],
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1228,
-        (
-            [true, false],
-            SpotId::Glacier__Apocalypse_Entry__West,
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-        ) => 1929,
-        (
-            [true, false],
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-            SpotId::Glacier__Apocalypse_Entry__West,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__East_15,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-        ) => 4035,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__East_15,
-        ) => 4035,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Shallow_End,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-        ) => 1000,
-        ([false, true], SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => {
-            4035
-        }
-        ([false, true], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => {
-            4035
-        }
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Cliff,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Cliff,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 600,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__West_Side,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__West_Side,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 899,
-        ([false, true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => {
-            1403
-        }
-        ([false, true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => {
-            175
-        }
-        ([false, true], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => {
-            1000
-        }
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 7192,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1700,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Carving,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 1500,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__West_18,
-        ) => 3333,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 699,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1500,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1500,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__East_19,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__East_19,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 3859,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-        ) => 1052,
-        ([false, true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => {
-            2000
-        }
-        ([false, true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => {
-            1578
-        }
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1052,
-        ([false, true], SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => {
-            1578
-        }
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-        ) => 10526,
-        (
-            [false, true],
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-        ) => 10526,
-        // [0.175439, 0.4]
-        (
-            [false, true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 575,
-        // [0.701754, 0.4]
-        (
-            [false, true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1101,
-        (
-            [false, true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 526,
-        ([false, true], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
-        ([false, true], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__West_19,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_19,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1300,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-        ) => 1200,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 400,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 399,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 399,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1199,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__East_Passage,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 399,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__East_Passage,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__Bottom,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 1000,
-        ([false, true], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 1754,
-        ([false, true], SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1228,
-        ([false, true], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => {
-            3333
-        }
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_15,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_Shore,
-            SpotId::Amagi__West_Lake__East_Bank,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_Bank,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__East_Bank,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1100,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 1899,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 900,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1699,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1599,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__East_18,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_18,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1578,
-        ([false, true], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => {
-            1228
-        }
-        ([false, true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__East_18) => {
-            1228
-        }
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 4385,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__East_19,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_19,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 4385,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-        ) => 899,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 2807,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 3508,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 5000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-        ) => 3508,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1500,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1100,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1000,
-        // [1.929825, 0.7]
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 2629,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 1228,
-        // [2, 3]
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 5000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 699,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 4210,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 4210,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 1100,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 2982,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__East_20,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 2982,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__Water_Surface,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Shore,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__Water_Surface,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 5087,
-        (
-            [false, true],
-            SpotId::Amagi__West_Lake__West_15,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 2807,
-        (
-            [false, true],
-            SpotId::Antarctica__West__Helipad,
-            SpotId::Antarctica__West__Shed_Entry,
-        ) => 4385,
-        ([false, true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
-        (
-            [false, true],
-            SpotId::Antarctica__West__Shed_Entry,
-            SpotId::Antarctica__West__Helipad,
-        ) => 4385,
-        ([false, true], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
-        (
-            [false, true],
-            SpotId::Antarctica__Building_1W__West_Entry,
-            SpotId::Antarctica__Building_1W__Connector,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1W__West_Entry,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__Building_1E__Connector,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Building_1_Entry,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Building_2_Entry,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 4385,
-        (
-            [false, true],
-            SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U__Door,
-        ) => 3508,
-        (
-            [false, true],
-            SpotId::Antarctica__Building_2U__Door,
-            SpotId::Antarctica__Building_2U__Stairs,
-        ) => 3508,
-        (
-            [false, true],
-            SpotId::Antarctica__Power_Room__Entry,
-            SpotId::Antarctica__Power_Room__Switch,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Antarctica__Power_Room__Switch,
-            SpotId::Antarctica__Power_Room__Entry,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Antarctica__Freight_Elevator__Left,
-            SpotId::Antarctica__Freight_Elevator__Controls,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Antarctica__Freight_Elevator__Left,
-        ) => 2105,
-        ([false, true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
-        ([false, true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => {
-            1929
-        }
-        // [1.4, 0.9]
-        ([false, true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            2299
-        }
-        ([false, true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => {
-            1929
-        }
-        // [0.877193, 1.754386]
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__East_12,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2631,
-        // [0.877193, 0.9]
-        ([false, true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            1777
-        }
-        ([false, true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => {
-            1929
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 799,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 6000,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Lake_Access,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__West_13,
-        ) => 3333,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 1754,
-        ([false, true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            1000
-        }
-        ([false, true], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            877
-        }
-        ([false, true], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => {
-            1052
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__West_11,
-            SpotId::Ebih__Base_Camp__Left_Platform,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1699,
-        ([false, true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => {
-            1052
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1099,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 4210,
-        (
-            [false, true],
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Bunker_Interior__Desk,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Ebih__Bunker_Interior__Entry,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Corner,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Entry,
-        ) => 1754,
-        ([false, true], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
-            350
-        }
-        ([false, true], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => {
-            350
-        }
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__East_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 1000,
-        ([false, true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => {
-            2280
-        }
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Bush,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 1403,
-        ([false, true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => {
-            1754
-        }
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 5438,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2807,
-        ([false, true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => {
-            1754
-        }
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 400,
-        ([false, true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => {
-            2000
-        }
-        ([false, true], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => {
-            877
-        }
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 4035,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            SpotId::Ebih__By_Garage__West_13,
-        ) => 4035,
-        (
-            [false, true],
-            SpotId::Ebih__By_Garage__East_12,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 1578,
-        ([false, true], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
-        ([false, true], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__East_12,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__East_12,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__West_12,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__West_12,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 599,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 800,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1199,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__East_10,
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-            SpotId::Ebih__Grid_25_10_12__East_10,
-        ) => 2000,
-        ([false, true], SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => {
-            701
-        }
-        ([false, true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => {
-            1000
-        }
-        ([false, true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => {
-            701
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__East_Ledge,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__East_11,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__East_11,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Alcove_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Alcove_Left,
-        ) => 300,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Alcove_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Wall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 599,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__West_10,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_10,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 2280,
-        ([false, true], SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => {
-            2280
-        }
-        ([false, true], SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => {
-            2280
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 299,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 900,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-        ) => 400,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 199,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 700,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__West_Door_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 3508,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 5614,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 4210,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2199,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 3508,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Big_Tree,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Big_Tree,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 2456,
-        ([false, true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => {
-            701
-        }
-        ([false, true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            1403
-        }
-        ([false, true], SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            701
-        }
-        ([false, true], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => {
-            701
-        }
-        ([false, true], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 4000,
-        ([false, true], SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__East_7,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-        ) => 7719,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 6491,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 2982,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__East_7,
-        ) => 7719,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__West_7,
-        ) => 5964,
-        (
-            [false, true],
-            SpotId::Ebih__Waterfall__West_7,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-        ) => 5964,
-        ([false, true], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            2000
-        }
-        ([false, true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => {
-            1929
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1754,
-        ([false, true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 4000,
-        ([false, true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => {
-            599
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Alcove,
-        ) => 2807,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 2807,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2807,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1052,
-        ([false, true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 899,
-        ([false, true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
-        ([false, true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => {
-            526
-        }
-        ([false, true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1100,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__East_7,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1000,
-        ([false, true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => {
-            526
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 1052,
-        ([false, true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => {
-            1100
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3200,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Chute,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3500,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3100,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 599,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 799,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 701,
-        ([false, true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => {
-            2000
-        }
-        ([false, true], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
-            1228
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__East_8,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__East_8,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1800,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_West__Giguna_Pillar,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__West_8,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__West_8,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 699,
-        ([false, true], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => {
-            1403
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            SpotId::Ebih__Ebih_East__Corner,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 6140,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 3859,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 3333,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 5263,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 1228,
-        ([false, true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => {
-            4736
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 3684,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 1578,
-        ([false, true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => {
-            1228
-        }
-        ([false, true], SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
-            1228
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 2000,
-        ([false, true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => {
-            1578
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Grid_21_1_5__West_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__West_6,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__East_6,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 1578,
-        ([false, true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 4000,
-        ([false, true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => {
-            3684
-        }
-        ([false, true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 2631,
-        ([false, true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1052,
-        ([false, true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => 2456,
-        ([false, true], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => {
-            3684
-        }
-        ([false, true], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 3000,
-        ([false, true], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => 4000,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 701,
-        ([false, true], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => {
-            877
-        }
-        ([false, true], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => {
-            877
-        }
-        ([false, true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => {
-            1403
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__East_4,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2982,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1000,
-        ([false, true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 900,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__East_Ledge,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 2000,
-        ([false, true], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => {
-            1052
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__West_5,
-        ) => 3684,
-        ([false, true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1400,
-        ([false, true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (
-            [false, true],
-            SpotId::Ebih__Boss_Room__West_5,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 3684,
-        ([false, true], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            526
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__West_6,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1228,
-        // [0.9, 0.701754]
-        ([false, true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1601,
-        // [0.9, 0.7]
-        ([false, true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            1600
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1299,
         (
-            [false, true],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-        ) => 877,
-        ([false, true], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => {
-            1052
-        }
-        ([false, true], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            2000
-        }
-        ([false, true], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
-        ([false, true], SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Portal,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Item,
-        ) => 1052,
-        // [0.877193, 0.701754]
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1578,
-        // [0.877193, 0.526316]
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1403,
-        ([false, true], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => {
-            701
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1400,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 450,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Tree,
-        ) => 701,
-        // [0.7, 0.701754]
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1401,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_4,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1400,
-        // [0.7, 0.526316]
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1226,
-        ([false, true], SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => {
-            1000
-        }
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-        ) => 1578,
-        ([false, true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__West_11,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-        ) => 877,
-        // [0.526316, 1.0]
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1526,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__East_10,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Grid_26_10_11__East_10,
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 1578,
-        // [1.22807, 1.22807]
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2456,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1799,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 6000,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__East_9,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 699,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Step,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Step,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Step,
-            SpotId::Giguna__Giguna_Northeast__West_10,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__West_10,
-            SpotId::Giguna__Giguna_Northeast__Step,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__West_9,
-            SpotId::Giguna__Giguna_Northeast__Step,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1754,
-        // [1.22807, 0.7]
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 1928,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__East_11,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__East_11,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Switch,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Door,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Northeast__Door,
-            SpotId::Giguna__Giguna_Northeast__Vault,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__East_10,
-            SpotId::Giguna__Carnelian__East_Cliff,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__East_10,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Switch,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Switch,
-        ) => 699,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Rock,
-        ) => 400,
-        ([false, true], SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 2000,
-        ([false, true], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__West_Ledge,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Carnelian__West_10,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__East_10,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__East_10,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 599,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-        ) => 599,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 299,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Cache,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Bush,
-        ) => 1754,
-        // [2, 1]
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Cache,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Cache,
-            SpotId::Giguna__West_Caverns__Bush,
-        ) => 2105,
-        // [2, 1]
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Bush,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Bush,
-            SpotId::Giguna__West_Caverns__Cache,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-        ) => 350,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__East_Susar,
-        ) => 350,
-        // [0.701754, 1.578947]
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__East_13,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Giguna__West_Caverns__East_12,
-            SpotId::Giguna__West_Caverns__East_Susar,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__West_12,
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_12,
-        ) => 1000,
-        // [0.350877, 1.22807]
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__West_13,
-            SpotId::Giguna__Wasteland__Middle_Path,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Middle_Path,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 900,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 400,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__West_14,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Wasteland__West_14,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__East_14,
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-        ) => 1578,
-        // [0.526316, 0.6]
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1126,
-        // [0.526316, 1.4]
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1926,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-        ) => 877,
-        // [0.526316, 0.6]
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1126,
-        // [0.526316, 1.4]
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1926,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Left_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 800,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Kari,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 5000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Kari,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 1052,
-        ([false, true], SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => {
-            2456
-        }
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 899,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__West_Grate,
-        ) => 5000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__West_16,
-        ) => 526,
-        // [1.052632, 2]
-        ([false, true], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => {
-            3052
-        }
-        // [1.052632, 2]
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 3052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 2105,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__West_16,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1000,
-        (
-            [false, true],
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => 3000,
-        (
-            [false, true],
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => 701,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__East_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 2280,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__West_9,
-        ) => 877,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__West_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 1000,
-        ([false, true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => {
-            1228
-        }
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Cliff,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 1052,
-        // [1.403509, 0.9]
-        ([false, true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => {
-            2303
-        }
-        ([false, true], SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => {
-            199
-        }
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Small_Passage,
-            SpotId::Giguna__Ruins_East__West_8,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__West_8,
-            SpotId::Giguna__Ruins_East__Small_Passage,
-        ) => 1403,
-        ([false, true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => {
-            1052
-        }
-        ([false, true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => {
-            701
-        }
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 3600,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Cliff,
-        ) => 2399,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Pillar,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__East_8,
-            SpotId::Giguna__Ruins_Center__Tablet,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__Tablet,
-            SpotId::Giguna__Ruins_Center__East_8,
-        ) => 526,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__Wall_Bottom,
-            SpotId::Giguna__Ruins_Center__East_9,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__East_9,
-        ) => 2631,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__Wall_Bottom,
-        ) => 300,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__Center_Top,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 1052,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 1403,
-        (
-            [false, true],
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_9,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Glacier__Dock_Elevator__Connector,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Interior__Entry,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Interior__Connector,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Glacier__Dock_Outside__Entry,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-        ) => 4736,
-        (
-            [false, true],
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-            SpotId::Glacier__Dock_Outside__Entry,
-        ) => 4736,
-        ([false, true], SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => {
-            1228
-        }
-        ([false, true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => {
-            1228
-        }
-        ([false, true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => {
-            1052
-        }
-        (
-            [false, true],
-            SpotId::Glacier__Revival__Overhang,
-            SpotId::Glacier__Revival__Lower_East,
-        ) => 1228,
-        ([false, true], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => {
-            2000
-        }
-        ([false, true], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => {
-            2280
-        }
-        ([false, true], SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => {
-            8000
-        }
-        ([false, true], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => {
-            1228
-        }
-        ([false, true], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => {
-            1228
-        }
-        ([false, true], SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => {
-            3157
-        }
-        (
-            [false, true],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 3157,
-        // [0.877193, 0.877193]
-        (
-            [false, true],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 3157,
-        // [2, 3, 3, 1]
-        (
-            [false, true],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 9000,
-        // [2, 4, 2]
-        (
-            [false, true],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 8000,
-        (
-            [false, true],
-            SpotId::Glacier__Compass_Room__East,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__East,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__West,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Compass_Room__West,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Small_Path,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-            SpotId::Glacier__Grid_39_40_7_9__West,
-        ) => 6666,
-        // [3.333333, 1, 3.333333]
-        (
-            [false, true],
-            SpotId::Glacier__Grid_39_40_7_9__West,
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-        ) => 7666,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_37_38_9__East,
-            SpotId::Glacier__Grid_37_38_9__West,
-        ) => 6666,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_37_38_9__West,
-            SpotId::Glacier__Grid_37_38_9__East,
-        ) => 6666,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 3157,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 1578,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 2000,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 4000,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1099,
-        (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1578,
+        ) => 1700,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
-        ) => 14000,
+        ) => 8400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 14000,
+        ) => 8400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 1052,
+        ([false], SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__East_9) => {
+            1929
+        }
+        ([false], SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__Mid_9) => {
+            500
+        }
+        ([false], SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => {
+            1228
+        }
         (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 1929,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 500,
-        (
-            [false, true],
-            SpotId::Glacier__Vertical_Room__West_8,
-            SpotId::Glacier__Vertical_Room__Peak,
-        ) => 1228,
-        (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2000,
+        ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 7000,
+        ) => 4200,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => 2280,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 3000,
+        ) => 2280,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 9000,
+        ) => 6666,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         // [2.631579, 2.631579]
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 5263,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         // [0.877193, 0.877193]
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 1754,
         // [3.333333, 3.333333]
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 6666,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 2000,
+        ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 2456,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 2456,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 2000,
+        ) => 1200,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 701,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 2105,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__East_9,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__Fork,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
             SpotId::Glacier__Ledge_Grab_Room__Fork,
         ) => 500,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 3157,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 3157,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
         ) => 400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ) => 1754,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
         ) => 1754,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
             SpotId::Glacier__Ledge_Grab_Room__Gate,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Gate,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ) => 799,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Gate,
         ) => 1000,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
         ) => 3859,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
         ) => 4210,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 350,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 800,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__West,
         ) => 4210,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
         ) => 599,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 3333,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 1754,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
         ) => 1754,
+        ([false], SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__East_8) => 2982,
+        ([false], SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__Top_Rock) => {
+            1754
+        }
+        ([false], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__Top_Platform_East) => {
+            1754
+        }
+        ([false], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => 3157,
         (
-            [false, true],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__East_8,
-        ) => 2982,
-        (
-            [false, true],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 1754,
-        (
-            [false, true],
-            SpotId::Glacier__Peak__Top_Rock,
-            SpotId::Glacier__Peak__Top_Platform_East,
-        ) => 1754,
-        ([false, true], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => 3157,
-        (
-            [false, true],
+            [false],
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Platform_East,
         ) => 1754,
+        ([false], SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Top_Rock) => 300,
+        ([false], SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__West_Cliff) => {
+            3157
+        }
+        ([false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => 4200,
+        ([false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Under_West_Cliff) => {
+            600
+        }
+        ([false], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2280,
+        ([false], SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => 1929,
+        ([false], SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => 2400,
         (
-            [false, true],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 200,
+            [false],
+            SpotId::Glacier__Grid_32_7_10__East_8,
+            SpotId::Glacier__Grid_32_7_10__Center_Platform,
+        ) => 1228,
+        ([false], SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__Column) => {
+            1228
+        }
         (
-            [false, true],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__West_Cliff,
-        ) => 3157,
-        ([false, true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => 7000,
+            [false],
+            SpotId::Glacier__Grid_32_7_10__Center_Platform,
+            SpotId::Glacier__Grid_32_7_10__East_8,
+        ) => 1228,
         (
-            [false, true],
-            SpotId::Glacier__Peak__West_Cliff,
-            SpotId::Glacier__Peak__Under_West_Cliff,
+            [false],
+            SpotId::Glacier__Grid_32_7_10__Center_Platform,
+            SpotId::Glacier__Grid_32_7_10__Column,
         ) => 600,
-        ([false, true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2280,
-        ([false, true], SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => {
-            1929
-        }
-        ([false, true], SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => {
-            4000
-        }
         (
-            [false, true],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 1228,
-        (
-            [false, true],
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 500,
-        (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__West_9,
         ) => 1929,
+        ([false], SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__East_8) => {
+            1799
+        }
         (
-            [false, true],
-            SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 3000,
-        (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 3000,
+        ) => 1799,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
             SpotId::Glacier__Grid_32_7_10__West_9,
         ) => 877,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
             SpotId::Glacier__Grid_32_7_10__West_10,
         ) => 877,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
         ) => 877,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 600,
+        ) => 700,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__East_10,
         ) => 600,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 2280,
+        ([false], SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__Midair) => {
+            3157
+        }
         (
-            [false, true],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 3157,
-        (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__East_10,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 2280,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__East_10,
             SpotId::Glacier__Grid_31_9_12__Midair,
         ) => 3157,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 7000,
+        ) => 4200,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
         ) => 400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__West_12,
         ) => 1400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__Midair,
         ) => 877,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2000,
+        ) => 1200,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__West_12,
         ) => 1000,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 5000,
+        ) => 3000,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Midair,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 877,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Grid_31_9_12__Midair,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
         ) => 526,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 2000,
+        ) => 1200,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
         ) => 877,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
         ) => 599,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
         ) => 350,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 350,
+        ) => 400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1200,
+        ) => 1300,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 1000,
+        ) => 600,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ) => 701,
         // [0.175439, 1.0]
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1175,
         // [0.175439, 1.754386]
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 350,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1000,
+        ) => 600,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1403,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Side,
         ) => 701,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 4000,
+        ) => 2400,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
         ) => 199,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ) => 1052,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 701,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1000,
+        ) => 600,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1228,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Apocalypse_Entry__West,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
         ) => 1929,
         (
-            [false, true],
+            [false],
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__East_15,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-        ) => 4035,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__East_15,
-        ) => 4035,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__Shallow_End,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Shallow_End,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-        ) => 1000,
-        ([true, true], SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => {
-            4035
+        ([true], SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => 4035,
+        ([true], SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__East_15) => 4035,
+        ([true], SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Shallow_End) => {
+            701
         }
-        ([true, true], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => {
-            4035
+        ([true], SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Waters_Edge) => {
+            1000
         }
+        ([true], SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => 4035,
+        ([true], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => 4035,
+        ([true], SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Upper_Platform) => 701,
+        ([true], SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => 1000,
         (
-            [true, true],
-            SpotId::Amagi__Main_Area__Cliff,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Cliff,
-        ) => 701,
-        (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__West_Shelf,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__Platform_2,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__West_Shelf,
             SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 1228,
+        ) => 2000,
+        ([true], SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Side) => 1403,
+        ([true], SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Platform_2) => 526,
+        ([true], SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__West_Shelf) => 1403,
         (
-            [true, true],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__West_Side,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 526,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__West_Side,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1403,
-        (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => 1000,
+        ([true], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__West_Shelf) => {
+            1000
+        }
+        ([true], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => 701,
+        ([true], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => 500,
         (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 500,
-        (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 1000,
+        ([true], SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => {
+            1000
+        }
+        ([true], SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_3) => 877,
         (
-            [true, true],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 877,
-        (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 899,
-        ([true, true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => {
-            1403
-        }
-        ([true, true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 175,
-        ([true, true], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => 600,
+        ([true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1403,
+        ([true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 175,
+        ([true], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Shallow_End,
         ) => 7192,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => 2456,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__West_Shelf,
         ) => 1700,
         (
-            [true, true],
+            [true],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Carving,
         ) => 1578,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Platform_2,
-        ) => 1500,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1754,
-        ([true, true], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__West_18) => {
-            3333
+        ([true], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_2) => {
+            1500
         }
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Platform_3,
-        ) => 1799,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 350,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 699,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1500,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1500,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 4000,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__East_19,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__East_19,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 600,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Save_Point,
-        ) => 3859,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 600,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-        ) => 1052,
-        ([true, true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => {
-            2000
-        }
-        ([true, true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => {
-            1578
-        }
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-        ) => 1052,
-        ([true, true], SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => {
-            1578
-        }
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-        ) => 10526,
-        (
-            [true, true],
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-        ) => 10526,
-        // [0.175439, 0.4]
-        (
-            [true, true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 575,
-        // [0.701754, 0.4]
-        (
-            [true, true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1101,
-        (
-            [true, true],
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 526,
-        ([true, true], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
-        ([true, true], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__West_19,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_19,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1300,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-        ) => 1200,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 400,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 526,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 399,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 399,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1199,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__East_Passage,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__West_20,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 399,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__East_Passage,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__Bottom,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 1000,
-        ([true, true], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 1754,
-        ([true, true], SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-        ) => 1228,
-        ([true, true], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => 3333,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__Bottom,
-        ) => 1000,
-        ([true, true], SpotId::Amagi__West_Lake__East_15, SpotId::Amagi__West_Lake__East_Shore) => {
-            526
-        }
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_Shore,
-            SpotId::Amagi__West_Lake__East_Bank,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_Bank,
-            SpotId::Amagi__West_Lake__East_Shore,
-        ) => 1799,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__East_Bank,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1100,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 1899,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 2000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 900,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1699,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1599,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 4000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__East_18,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_18,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1578,
-        ([true, true], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => 1228,
-        ([true, true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__East_18) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-        ) => 526,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 4385,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__East_19,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_19,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 4385,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-        ) => 899,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 2807,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 3508,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 5000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-        ) => 3508,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1500,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1100,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1000,
-        // [1.929825, 0.7]
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 2629,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 1228,
-        // [2, 3]
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 5000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => 3157,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 3157,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 699,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 2000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-        ) => 2000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 4210,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 2000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 3000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Pillar,
-        ) => 2000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 4210,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 1100,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__East_20,
-        ) => 2982,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__East_20,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 2982,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__Water_Surface,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Shore,
-        ) => 2000,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Cliff,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__West_Bank,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__Water_Surface,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 5087,
-        (
-            [true, true],
-            SpotId::Amagi__West_Lake__West_15,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 2807,
-        ([true, true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => {
-            4385
-        }
-        ([true, true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
-        ([true, true], SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => {
-            4385
-        }
-        ([true, true], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
-        (
-            [true, true],
-            SpotId::Antarctica__Building_1W__West_Entry,
-            SpotId::Antarctica__Building_1W__Connector,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1W__West_Entry,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__Building_1E__Connector,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Building_1_Entry,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Building_2_Entry,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Save_Point,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 4385,
-        (
-            [true, true],
-            SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U__Door,
-        ) => 3508,
-        (
-            [true, true],
-            SpotId::Antarctica__Building_2U__Door,
-            SpotId::Antarctica__Building_2U__Stairs,
-        ) => 3508,
-        (
-            [true, true],
-            SpotId::Antarctica__Power_Room__Entry,
-            SpotId::Antarctica__Power_Room__Switch,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Antarctica__Power_Room__Switch,
-            SpotId::Antarctica__Power_Room__Entry,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Antarctica__Freight_Elevator__Left,
-            SpotId::Antarctica__Freight_Elevator__Controls,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Antarctica__Freight_Elevator__Left,
-        ) => 2105,
-        ([true, true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
-        ([true, true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => {
-            1929
-        }
-        // [1.4, 0.9]
-        ([true, true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            2299
-        }
-        ([true, true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => {
-            1929
-        }
-        // [0.877193, 1.754386]
-        ([true, true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2631
-        }
-        // [0.877193, 0.9]
-        ([true, true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            1777
-        }
-        ([true, true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => {
-            1929
-        }
-        ([true, true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => {
-            3157
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 799,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 1929,
-        ([true, true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => {
-            3599
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3599,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Lake_Access,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1200,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__West_13,
-        ) => 3333,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 1754,
-        ([true, true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            877
-        }
-        ([true, true], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            877
-        }
-        ([true, true], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => {
-            1052
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__West_11,
-            SpotId::Ebih__Base_Camp__Left_Platform,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 1699,
-        ([true, true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => {
-            1052
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Staircase,
-        ) => 3157,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Save_Point,
-        ) => 1099,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-        ) => 4210,
-        (
-            [true, true],
-            SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Bunker_Interior__Desk,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Ebih__Bunker_Interior__Entry,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Corner,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Entry,
-        ) => 1754,
-        ([true, true], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
-            350
-        }
-        ([true, true], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => {
-            350
-        }
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 1578,
-        ([true, true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            2631
-        }
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__East_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 350,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 600,
-        ([true, true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => {
-            2280
-        }
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 350,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__East_Bush,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Outcropping,
-        ) => 1799,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 1403,
-        ([true, true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => {
-            1754
-        }
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__East_13,
-        ) => 5438,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2807,
-        ([true, true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => {
-            1754
-        }
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 400,
-        ([true, true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => {
-            1200
-        }
-        ([true, true], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-        ) => 1799,
-        ([true, true], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            4035
-        }
-        ([true, true], SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => {
-            4035
-        }
-        (
-            [true, true],
-            SpotId::Ebih__By_Garage__East_12,
-            SpotId::Ebih__By_Garage__East_Platform,
-        ) => 1578,
-        ([true, true], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
-        ([true, true], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
-        ([true, true], SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => {
-            1228
-        }
-        ([true, true], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => {
-            1228
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__West_12,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__West_12,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 599,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1200,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 800,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1200,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1199,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__East_10,
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-        ) => 350,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-            SpotId::Ebih__Grid_25_10_12__East_10,
-        ) => 1200,
-        ([true, true], SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => {
-            701
-        }
-        ([true, true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => {
-            701
-        }
-        ([true, true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => {
-            701
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__East_Ledge,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__East_11,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__East_11,
-        ) => 2631,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 1799,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Alcove_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 1799,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Alcove_Left,
-        ) => 300,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2400,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Alcove_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 1799,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Wall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 599,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__West_10,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_10,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 2280,
-        ([true, true], SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => {
-            2280
-        }
-        ([true, true], SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => {
-            2280
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 600,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 299,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__West_8,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 900,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-        ) => 400,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 199,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 700,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__West_Door_Right,
-        ) => 600,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__West_Climb,
-        ) => 1000,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 526,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 3508,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-        ) => 5614,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 4210,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2199,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 3157,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 3508,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Big_Tree,
-        ) => 2456,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Big_Tree,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 2456,
-        ([true, true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => {
-            701
-        }
-        ([true, true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            1403
-        }
-        ([true, true], SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => {
-            701
-        }
-        ([true, true], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => {
-            701
-        }
-        ([true, true], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
-        ([true, true], SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
-        ([true, true], SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => {
-            7719
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-        ) => 6491,
-        (
-            [true, true],
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 2982,
-        ([true, true], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => {
-            7719
-        }
-        ([true, true], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => {
-            5964
-        }
-        ([true, true], SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => {
-            5964
-        }
-        ([true, true], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
-        ([true, true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1929,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1754,
-        ([true, true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
-        ([true, true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => {
-            599
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Alcove,
-        ) => 2807,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 2807,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-        ) => 2807,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1052,
-        ([true, true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 899,
-        ([true, true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
-        ([true, true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => {
-            526
-        }
-        ([true, true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1100,
-        ([true, true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => {
+        ([true], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__East_Ledge) => {
             1000
         }
-        ([true, true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => {
-            526
-        }
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Upper_Save,
+            [true],
+            SpotId::Amagi__Main_Area__Platform_3,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
         ) => 1052,
-        ([true, true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => {
-            1100
-        }
+        ([true], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Flat_Ruin) => 1754,
+        ([true], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__West_18) => 3333,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 1000,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Platform_3,
+        ) => 3000,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3200,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 2456,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3157,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Above_Chute,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 1200,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3500,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 3100,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 1200,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 599,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Broken_Wall,
         ) => 350,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-        ) => 799,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 699,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__High_Platform,
-        ) => 701,
-        ([true, true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => {
-            1228
-        }
-        ([true, true], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
-            1228
-        }
-        ([true, true], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            877
-        }
-        ([true, true], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => {
-            877
-        }
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 2456,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-        ) => 2105,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+        ) => 1578,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1800,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+            SpotId::Amagi__Main_Area__Save_Point,
         ) => 1754,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-        ) => 2105,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
+        ) => 1578,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_West__Giguna_Pillar,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-        ) => 1228,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Save_Point,
+        ) => 1500,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_East__West_8,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 1052,
+            [true],
+            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
+            SpotId::Amagi__Main_Area__Enemy_Side,
+        ) => 1500,
+        ([true], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => {
+            1052
+        }
+        ([true], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Broken_Wall) => {
+            4000
+        }
+        ([true], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => {
+            1052
+        }
+        ([true], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => {
+            2105
+        }
+        ([true], SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__Enemy_Side) => {
+            2105
+        }
+        ([true], SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__East_19) => 1929,
+        ([true], SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__Small_Cliff) => 1929,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__West_8,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 699,
-        ([true, true], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => 1403,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            SpotId::Ebih__Ebih_East__Corner,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-        ) => 6140,
-        ([true, true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => {
+            [true],
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Catwalk_Center,
+        ) => 1000,
+        ([true], SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => {
             3859
         }
         (
-            [true, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 3333,
+            [true],
+            SpotId::Amagi__Main_Area__Broken_Wall,
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ) => 500,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
+            [true],
+            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+            SpotId::Amagi__Main_Area__Broken_Wall,
+        ) => 1000,
+        ([true], SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Broken_Wall) => {
+            2000
+        }
+        ([true], SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Flat_Ruin) => {
+            1754
+        }
+        (
+            [true],
+            SpotId::Amagi__Main_Area__Half_Pillar,
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+        ) => 701,
+        ([true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__Half_Pillar) => {
+            1754
+        }
+        ([true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_Mini_Hill) => {
+            1052
+        }
+        ([true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => 2000,
+        ([true], SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => 1578,
+        (
+            [true],
+            SpotId::Amagi__Main_Area__West_Mini_Hill,
+            SpotId::Amagi__Main_Area__Half_Pillar,
+        ) => 1000,
+        ([true], SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Flat_Ruin) => {
+            1052
+        }
+        ([true], SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => 1578,
+        (
+            [true],
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+        ) => 10526,
+        (
+            [true],
+            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
+            SpotId::Amagi__Main_Area__Secret_Waterfall,
+        ) => 10526,
+        // [0.175439, 0.4]
+        (
+            [true],
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 575,
+        // [0.701754, 0.4]
+        (
+            [true],
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
+        ) => 1101,
+        (
+            [true],
+            SpotId::Amagi__Cave_Behind_Waterfall__Top,
+            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
+        ) => 526,
+        ([true], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
+        ([true], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
+        ([true], SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => {
+            1228
+        }
+        ([true], SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_19) => {
+            1228
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 500,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        ([true], SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_20) => {
+            1300
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Hidden_Enemies,
         ) => 1200,
-        ([true, true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__East_Hill) => {
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 400,
+        ([true], SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__West_20) => {
+            1228
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 877,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 877,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 526,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_1_Left,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 399,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        ([true], SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__West_20) => {
+            1228
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_1_Right,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 399,
+        ([true], SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__Bottom) => {
+            1199
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 701,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        ([true], SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__West_20) => {
+            1228
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Left,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 399,
+        ([true], SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Bottom) => {
+            1052
+        }
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+            SpotId::Amagi__Liru_Room__East_Passage,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_3_Left,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__Platform_4_Right,
+            SpotId::Amagi__Liru_Room__Platform_4_Left,
+        ) => 877,
+        ([true], SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__Bottom) => {
+            877
+        }
+        ([true], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => {
+            1000
+        }
+        ([true], SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 1754,
+        ([true], SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 1754,
+        ([true], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
+            2000
+        }
+        ([true], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
+            1228
+        }
+        ([true], SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => 3333,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_2_Right,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__Liru_Room__East_Passage,
+            SpotId::Amagi__Liru_Room__Platform_3_Right,
+        ) => 1052,
+        ([true], SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Bottom) => 1000,
+        ([true], SpotId::Amagi__West_Lake__East_15, SpotId::Amagi__West_Lake__East_Shore) => 526,
+        ([true], SpotId::Amagi__West_Lake__East_Shore, SpotId::Amagi__West_Lake__East_Bank) => 1228,
+        ([true], SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Shore) => 3000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+            SpotId::Amagi__West_Lake__East_Bank,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+            SpotId::Amagi__West_Lake__East_Platform,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 1899,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+        ) => 900,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 1699,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+            SpotId::Amagi__West_Lake__West_Platform,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+            SpotId::Amagi__West_Lake__West_Cliff,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+            SpotId::Amagi__West_Lake__East_Platform,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+        ) => 1599,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__East_Platform,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 4000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__East_Platform,
+            SpotId::Amagi__West_Lake__Upper_Center_Platform,
+        ) => 1754,
+        ([true], SpotId::Amagi__West_Lake__East_Platform, SpotId::Amagi__West_Lake__East_18) => {
+            1578
+        }
+        ([true], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__East_Platform) => {
+            1578
+        }
+        ([true], SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => 1228,
+        ([true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__East_18) => 1228,
+        ([true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Pillar_Platform) => {
+            526
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Pillar,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 4385,
+        ([true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1403,
+        ([true], SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__Pillar) => {
+            1000
+        }
+        ([true], SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__East_19) => {
+            701
+        }
+        ([true], SpotId::Amagi__West_Lake__East_19, SpotId::Amagi__West_Lake__Pillar_Platform) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+            SpotId::Amagi__West_Lake__Pillar,
+        ) => 4385,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+            SpotId::Amagi__West_Lake__West_Platform,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_Platform,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_Platform,
+            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_Platform,
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
+            SpotId::Amagi__West_Lake__West_Platform,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
+            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
+            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
+        ) => 1403,
+        ([true], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => {
+            899
+        }
+        ([true], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Chin) => {
+            2807
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 3000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 3000,
+        ([true], SpotId::Amagi__West_Lake__Cavern_Neck, SpotId::Amagi__West_Lake__Cavern_Chin) => {
+            3508
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Neck,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 5000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 3000,
+        ([true], SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Cavern_Neck) => {
+            3508
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Chin,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1500,
+        ([true], SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Some_Rock) => {
+            1754
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1100,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+        ) => 701,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Eye,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Jaw,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 877,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
+        ) => 1000,
+        // [1.929825, 0.7]
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 2629,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 1228,
+        // [2, 3]
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
+        ) => 5000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+        ) => 3157,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
+        ) => 3157,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Top,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 699,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
+            SpotId::Amagi__West_Lake__Stronghold_Item,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+        ) => 701,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
+            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Some_Rock,
+        ) => 2000,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+            SpotId::Amagi__West_Lake__Small_Hill,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
+        ) => 3000,
+        ([true], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Cavern_Chin) => {
+            2000
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Some_Rock,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 1052,
+        ([true], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => 1228,
+        ([true], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
+            4210
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Small_Hill,
+            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
+        ) => 2280,
+        ([true], SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Some_Rock) => 2000,
+        ([true], SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
+            3000
+        }
+        ([true], SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
+            2631
+        }
+        ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Pillar) => 2000,
+        ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => {
+            4210
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Tentacle_Gap,
+            SpotId::Amagi__West_Lake__Left_of_Enemy,
+        ) => 1100,
+        ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => 2631,
+        ([true], SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__Small_Hill) => {
+            2631
+        }
+        ([true], SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__East_20) => {
+            2982
+        }
+        ([true], SpotId::Amagi__West_Lake__East_20, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
+            2982
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northeast_Platform,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_Cliff,
+            SpotId::Amagi__West_Lake__Northwest_Platform,
+        ) => 701,
+        ([true], SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Bank) => 2000,
+        ([true], SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Cliff) => 1929,
+        ([true], SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__Water_Surface) => {
+            1000
+        }
+        ([true], SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Shore) => 2000,
+        ([true], SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Cliff) => {
+            1929
+        }
+        ([true], SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => {
+            500
+        }
+        ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => 1754,
+        ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Water_Surface) => {
+            1754
+        }
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_Shore,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+        ) => 5087,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__West_15,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+        ) => 2807,
+        ([true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
+        ([true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
+        ([true], SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
+        ([true], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
+        (
+            [true],
+            SpotId::Antarctica__Building_1W__West_Entry,
+            SpotId::Antarctica__Building_1W__Connector,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Antarctica__Building_1W__Connector,
+            SpotId::Antarctica__Building_1W__West_Entry,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Antarctica__Building_1E__Connector,
+            SpotId::Antarctica__Building_1E__East_Entry,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Antarctica__Building_1E__East_Entry,
+            SpotId::Antarctica__Building_1E__Connector,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Antarctica__East__Building_1_Entry,
+            SpotId::Antarctica__East__Save_Point,
+        ) => 877,
+        (
+            [true],
+            SpotId::Antarctica__East__Save_Point,
+            SpotId::Antarctica__East__Building_1_Entry,
+        ) => 877,
+        (
+            [true],
+            SpotId::Antarctica__East__Save_Point,
+            SpotId::Antarctica__East__Building_2_Entry,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Antarctica__East__Building_2_Entry,
+            SpotId::Antarctica__East__Save_Point,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Building_1_Entry,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Save_Point,
+        ) => 2631,
+        (
+            [true],
+            SpotId::Antarctica__East__Building_2_Upper,
+            SpotId::Antarctica__East__Building_2_Entry,
+        ) => 4385,
+        (
+            [true],
+            SpotId::Antarctica__Building_2U__Stairs,
+            SpotId::Antarctica__Building_2U__Door,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Antarctica__Building_2U__Door,
+            SpotId::Antarctica__Building_2U__Stairs,
+        ) => 3508,
+        ([true], SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => {
+            1403
+        }
+        ([true], SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => {
+            1403
+        }
+        (
+            [true],
+            SpotId::Antarctica__Freight_Elevator__Left,
+            SpotId::Antarctica__Freight_Elevator__Controls,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Antarctica__Freight_Elevator__Controls,
+            SpotId::Antarctica__Freight_Elevator__Left,
+        ) => 2105,
+        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
+        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => 1929,
+        // [1.4, 0.9]
+        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2299,
+        ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => 1929,
+        // [0.877193, 1.754386]
+        ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2631,
+        // [0.877193, 0.9]
+        ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => 1777,
+        ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => 1929,
+        ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => 3157,
+        ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 799,
+        ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => 1929,
+        ([true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => 3599,
+        ([true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
+            2456
+        }
+        ([true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
+            2456
+        }
+        ([true], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => 3599,
+        ([true], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
+            2456
+        }
+        ([true], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => {
+            2631
+        }
+        ([true], SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
+            2631
+        }
+        ([true], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => {
+            2456
+        }
+        (
+            [true],
+            SpotId::Ebih__Base_Camp__Behind_Vehicle,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1200,
+        ([true], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            1754
+        }
+        ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
+            1754
+        }
+        (
+            [true],
+            SpotId::Ebih__Base_Camp__Building_Entry,
+            SpotId::Ebih__Base_Camp__Behind_Vehicle,
+        ) => 701,
+        ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            2456
+        }
+        ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => 3333,
+        ([true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
+            1754
+        }
+        ([true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 877,
+        ([true], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 877,
+        ([true], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => 1052,
+        ([true], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => 2280,
+        ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Building_Entry) => {
+            2280
+        }
+        ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => 1699,
+        ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => 1052,
+        ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => 3157,
+        ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => {
+            1099
+        }
+        ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
+            2456
+        }
+        (
+            [true],
+            SpotId::Ebih__Base_Camp__Top_Platform,
+            SpotId::Ebih__Base_Camp__Building_Entry,
+        ) => 1754,
+        ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => {
+            4210
+        }
+        ([true], SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => 1403,
+        ([true], SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => 1403,
+        (
+            [true],
+            SpotId::Ebih__Building_Interior__Entry,
+            SpotId::Ebih__Building_Interior__Corner,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Ebih__Building_Interior__Corner,
+            SpotId::Ebih__Building_Interior__Entry,
+        ) => 1754,
+        ([true], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 350,
+        ([true], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 350,
+        ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => 1578,
+        ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2631,
+        ([true], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
+        ([true], SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => {
+            1929
+        }
+        (
+            [true],
+            SpotId::Ebih__By_Garage__Crawlspace_Opening,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 350,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__Crawlspace_Opening,
+            SpotId::Ebih__By_Garage__Outcropping,
+        ) => 600,
+        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2280,
+        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Ebih__By_Garage__Outcropping,
+            SpotId::Ebih__By_Garage__Crawlspace_Opening,
+        ) => 350,
+        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1754,
+        ([true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1799,
+        ([true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
+            1403
+        }
+        ([true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => 1754,
+        ([true], SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => 5438,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__Lower_Platform,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+        ) => 2807,
+        ([true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => 1754,
+        ([true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
+            400
+        }
+        ([true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => 1200,
+        ([true], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 877,
+        ([true], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => 1799,
+        ([true], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
+        ([true], SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => 4035,
+        ([true], SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => 1578,
+        ([true], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
+        ([true], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
+        ([true], SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => 1228,
+        ([true], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => 1228,
+        ([true], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 701,
+        ([true], SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
+            1228
+        }
+        ([true], SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => {
+            1228
+        }
+        ([true], SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => 1052,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
+            SpotId::Ebih__Grid_25_10_12__Below_Bush,
+        ) => 599,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
+        ) => 1200,
+        ([true], SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Bush) => 800,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
+            SpotId::Ebih__Grid_25_10_12__Below_Bush,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
+            SpotId::Ebih__Grid_25_10_12__Top_Platform,
+        ) => 1200,
+        ([true], SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__West_11) => {
+            1929
+        }
+        ([true], SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Top_Platform,
+            SpotId::Ebih__Grid_25_10_12__Below_Bush,
+        ) => 1199,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Top_Platform,
+            SpotId::Ebih__Grid_25_10_12__Door_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Top_Platform,
+            SpotId::Ebih__Grid_25_10_12__West_11,
+        ) => 1228,
+        ([true], SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => {
+            877
+        }
+        ([true], SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
+            1929
+        }
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__West_11,
+            SpotId::Ebih__Grid_25_10_12__Top_Platform,
+        ) => 1228,
+        ([true], SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
+            1929
+        }
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__West_10,
+            SpotId::Ebih__Grid_25_10_12__Top_Platform,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__East_10,
+            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+        ) => 350,
+        (
+            [true],
+            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+            SpotId::Ebih__Grid_25_10_12__East_10,
+        ) => 1200,
+        ([true], SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => 701,
+        ([true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
+        ([true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
+        ([true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
+            1929
+        }
+        ([true], SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => 2631,
+        ([true], SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => 2631,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Near_East_Tree,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+            SpotId::Ebih__Waterfall__Near_East_Tree,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+            SpotId::Ebih__Waterfall__Alcove_Right,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Alcove_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Alcove_Right,
+        ) => 500,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 877,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Alcove_Left,
+        ) => 300,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Under_Waterfall,
+        ) => 877,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Alcove_Left,
+            SpotId::Ebih__Waterfall__Under_Waterfall,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+            SpotId::Ebih__Waterfall__Under_Waterfall,
+        ) => 877,
+        ([true], SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => {
             2105
         }
         (
-            [true, true],
+            [true],
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+        ) => 1799,
+        ([true], SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => {
+            2105
+        }
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+            SpotId::Ebih__Waterfall__Under_Waterfall,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+        ) => 599,
+        ([true], SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => {
+            1754
+        }
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Lower_Path,
+            SpotId::Ebih__Waterfall__Waterfall_Left,
+        ) => 1052,
+        ([true], SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => {
+            1052
+        }
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Lower_Path,
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+        ) => 701,
+        ([true], SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__West_10) => {
+            2280
+        }
+        ([true], SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => {
+            2280
+        }
+        ([true], SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => 2280,
+        ([true], SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => 2280,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
+            SpotId::Ebih__Waterfall__West_Climb,
+        ) => 500,
+        ([true], SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Below_Left_Switch,
+            SpotId::Ebih__Waterfall__West_Door_Left,
+        ) => 600,
+        ([true], SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__Below_Left_Switch) => {
+            701
+        }
+        ([true], SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__West_Door_Left) => 877,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Door_Left,
+            SpotId::Ebih__Waterfall__Below_Left_Switch,
+        ) => 299,
+        ([true], SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => 877,
+        ([true], SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Climb) => {
+            900
+        }
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Door_Right,
+            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
+        ) => 400,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Door_Right,
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+        ) => 199,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Door_Right,
+            SpotId::Ebih__Waterfall__West_Main_Path,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Climb,
+        ) => 700,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+            SpotId::Ebih__Waterfall__West_Door_Right,
+        ) => 600,
+        ([true], SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Main_Path,
+            SpotId::Ebih__Waterfall__Middle_West_Tree,
+        ) => 526,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Main_Path,
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__West_Main_Path,
+            SpotId::Ebih__Waterfall__Center_Main_Path,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__Near_East_Tree,
+        ) => 5614,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__Waterfall_Right,
+        ) => 4210,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
+        ) => 2199,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+            SpotId::Ebih__Waterfall__West_Lower_Path,
+        ) => 3157,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Center_Main_Path,
+            SpotId::Ebih__Waterfall__West_Main_Path,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Center_Main_Path,
+            SpotId::Ebih__Waterfall__Cave_Entrance,
+        ) => 1052,
+        ([true], SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => {
+            2456
+        }
+        ([true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Center_Main_Path) => {
+            2456
+        }
+        ([true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => 701,
+        ([true], SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => 1403,
+        ([true], SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => 701,
+        ([true], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => 701,
+        ([true], SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
+        ([true], SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
+        ([true], SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 7719,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Top_Waterfall,
+            SpotId::Ebih__Waterfall__West_Main_Path,
+        ) => 6491,
+        (
+            [true],
+            SpotId::Ebih__Waterfall__Top_Waterfall,
+            SpotId::Ebih__Waterfall__Center_Main_Path,
+        ) => 2982,
+        ([true], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
+        ([true], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
+        ([true], SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
+        ([true], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
+        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1929,
+        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
+            1754
+        }
+        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
+        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 599,
+        ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => {
+            1754
+        }
+        ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => 2807,
+        ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => {
+            1578
+        }
+        ([true], SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2807,
+        ([true], SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 2807,
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+            SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        ) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 899,
+        ([true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1929,
+        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => 526,
+        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1100,
+        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1000,
+        ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => 526,
+        ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1100,
+        ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => {
+            1000
+        }
+        ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
+            3200
+        }
+        ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            3157
+        }
+        ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Chute) => 1052,
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Upper_Save,
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+        ) => 1200,
+        ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
+            1403
+        }
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+            SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        ) => 3500,
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+        ) => 3100,
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+            SpotId::Ebih__Ebih_West__Upper_Save,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+            SpotId::Ebih__Ebih_West__High_Platform,
+        ) => 1200,
+        ([true], SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
+            599
+        }
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__High_Platform,
+            SpotId::Ebih__Ebih_West__Medium_High_Platform,
+        ) => 350,
+        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 799,
+        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => {
+            701
+        }
+        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
+        ([true], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
+        ([true], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 877,
+        ([true], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 877,
+        ([true], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
+            2105
+        }
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__Middle_Cliff,
+            SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        ) => 1800,
+        ([true], SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            1754
+        }
+        ([true], SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Middle) => {
+            2105
+        }
+        ([true], SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            1228
+        }
+        ([true], SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => 1052,
+        ([true], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => 1052,
+        ([true], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
+            2280
+        }
+        ([true], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            2280
+        }
+        (
+            [true],
+            SpotId::Ebih__Ebih_East__Ledge_End,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 699,
+        ([true], SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => 1403,
+        (
+            [true],
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+            SpotId::Ebih__Ebih_East__Corner,
+        ) => 877,
+        ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => {
+            6140
+        }
+        ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 3859,
+        (
+            [true],
+            SpotId::Ebih__Ebih_East__East_Ledge,
+            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
+        ) => 3333,
+        ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
+            1200
+        }
+        ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__East_Hill) => 2105,
+        (
+            [true],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 5263,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
         ) => 2456,
+        ([true], SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => {
+            877
+        }
         (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-        ) => 877,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__Upper_Ledge,
         ) => 2400,
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__East_Hill,
-        ) => 1228,
-        ([true, true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => {
-            4736
+        ([true], SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Hill) => {
+            1228
         }
+        ([true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => 4736,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Ebih_East__Upper_Ledge,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 3684,
+        ([true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 1403,
         (
-            [true, true],
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-        ) => 1403,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Ebih_East__Upper_Ledge,
             SpotId::Ebih__Ebih_East__Middle_Platform,
         ) => 1578,
-        ([true, true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => {
+        ([true], SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => 1228,
+        ([true], SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => 1228,
+        ([true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_Ledge) => 2105,
+        ([true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__Middle_Platform) => {
             1228
         }
-        ([true, true], SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => {
-            1228
-        }
-        ([true, true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_Ledge) => {
-            2105
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-        ) => 1228,
-        ([true, true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_21_1_5__West_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__West_6,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__East_6,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-        ) => 1578,
-        ([true, true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        ([true, true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => 3684,
-        ([true, true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 2631,
-        ([true, true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1052,
-        ([true, true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => 2456,
-        ([true, true], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => 3684,
-        ([true, true], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 1799,
-        ([true, true], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => 2456,
-        ([true, true], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => {
-            1403
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 701,
-        ([true, true], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => {
-            877
-        }
-        ([true, true], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => {
-            877
-        }
-        ([true, true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => {
-            1403
-        }
-        ([true, true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => {
-            2982
-        }
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 877,
-        ([true, true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        ([true, true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => {
+        ([true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => 1578,
+        ([true], SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
             1578
         }
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-        ) => 900,
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__East_Ledge,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__High_Platform,
-        ) => 1578,
-        ([true, true], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => {
-            1052
+        ([true], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => {
+            1578
         }
-        (
-            [true, true],
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-        ) => 1578,
-        ([true, true], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__West_5) => {
-            3684
+        ([true], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => {
+            1578
         }
-        ([true, true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1400,
-        ([true, true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        ([true, true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => {
-            3684
+        ([true], SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+            1578
         }
-        ([true, true], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => 526,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__West_6,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1228,
+        ([true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
+        ([true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => 3684,
+        ([true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 2631,
+        ([true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1052,
+        ([true], SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => 2456,
+        ([true], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => 3684,
+        ([true], SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 1799,
+        ([true], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => 2456,
+        ([true], SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1403,
+        ([true], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__Lower_Tree) => 701,
+        ([true], SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => 877,
+        ([true], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => 877,
+        ([true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => 1403,
+        ([true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => 2982,
+        ([true], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 500,
+        ([true], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 877,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1578,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 900,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 877,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => {
+            1578
+        }
+        ([true], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => 1052,
+        ([true], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Upper_Tree) => {
+            1578
+        }
+        ([true], SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__West_5) => 3684,
+        ([true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1400,
+        ([true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
+        ([true], SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => 3684,
+        ([true], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => 526,
+        ([true], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1228
+        }
         // [0.9, 0.701754]
-        ([true, true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1601,
+        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1601,
         // [0.9, 0.7]
-        ([true, true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            1600
+        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1600,
+        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => {
+            1299
         }
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-        ) => 1299,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-        ) => 877,
-        ([true, true], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => {
-            1052
+        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
+        ([true], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
+        ([true], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => 1200,
+        ([true], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
+        ([true], SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
+        ([true], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1228
         }
-        ([true, true], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            1200
+        ([true], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            701
         }
-        ([true, true], SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
-        ([true, true], SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Portal,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Item,
-        ) => 1052,
+        ([true], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal) => {
+            500
+        }
+        ([true], SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Item) => 1052,
         // [0.877193, 0.701754]
-        ([true, true], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => {
-            1578
-        }
+        ([true], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => 1578,
         // [0.877193, 0.526316]
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Drone_Room__Portal_Exit,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1403,
-        ([true, true], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => {
-            701
+        ([true], SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => 701,
+        ([true], SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__West_6) => {
+            1578
+        }
+        ([true], SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            1400
         }
         (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1400,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Portal_Exit,
         ) => 450,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Left_Platform,
         ) => 701,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Tree,
-        ) => 701,
+        ([true], SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Tree) => 701,
         // [0.7, 0.701754]
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_6,
-        ) => 1401,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__West_4,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-        ) => 1400,
+        ([true], SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_6) => 1401,
+        ([true], SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_4) => 877,
+        ([true], SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => {
+            1400
+        }
         // [0.7, 0.526316]
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Ebih__Drone_Room__Middle_Platform,
         ) => 1226,
-        ([true, true], SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => {
-            701
-        }
-        ([true, true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => {
+        ([true], SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => 701,
+        ([true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => 1578,
+        ([true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => {
             1578
         }
+        ([true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
         (
-            [true, true],
-            SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-        ) => 1578,
-        ([true, true], SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__West_11,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
             SpotId::Ebih__Grid_26_10_11__West_11,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
             SpotId::Ebih__Grid_26_10_11__Under_Ledge,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Under_Ledge,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Ledge,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
         ) => 1052,
+        ([true], SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => {
+            350
+        }
         (
-            [true, true],
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-        ) => 350,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Ledge,
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
             SpotId::Ebih__Grid_26_10_11__West_11,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__West_11,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__Ledge,
         ) => 877,
         // [0.526316, 1.0]
+        ([true], SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => {
+            1526
+        }
         (
-            [true, true],
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-        ) => 1526,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__West_10,
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Grid_26_10_11__Cliff,
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         ) => 526,
+        ([true], SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__East_10) => 1228,
+        ([true], SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Ebih__Grid_26_10_11__Cliff) => 1228,
         (
-            [true, true],
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__East_10,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Ebih__Grid_26_10_11__East_10,
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-        ) => 1228,
-        (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
         ) => 1578,
         // [1.22807, 1.22807]
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 2456,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
         ) => 1799,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
         ) => 3599,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__East_11,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => 2105,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__East_11,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__East_9,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
         ) => 2807,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
         ) => 699,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             SpotId::Giguna__Giguna_Northeast__Step,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Step,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Step,
             SpotId::Giguna__Giguna_Northeast__West_10,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__West_10,
             SpotId::Giguna__Giguna_Northeast__Step,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__West_9,
             SpotId::Giguna__Giguna_Northeast__Step,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1754,
         // [1.22807, 0.7]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
         ) => 1928,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         ) => 1000,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             SpotId::Giguna__Giguna_Northeast__East_11,
         ) => 526,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__East_11,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Switch,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Vault,
         ) => 1052,
+        ([true], SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => 2105,
+        ([true], SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_10) => 2105,
+        ([true], SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Upper_Susar) => {
+            1754
+        }
         (
-            [true, true],
-            SpotId::Giguna__Carnelian__East_10,
-            SpotId::Giguna__Carnelian__East_Cliff,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__East_10,
-        ) => 2105,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-        ) => 1754,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Carnelian__East_Cliff,
             SpotId::Giguna__Carnelian__Middle_Platforms,
         ) => 877,
+        ([true], SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Switch) => 1000,
         (
-            [true, true],
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__Switch,
-        ) => 1000,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Carnelian__Middle_Platforms,
             SpotId::Giguna__Carnelian__Switch,
         ) => 699,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Rock,
-        ) => 400,
-        ([true, true], SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 701,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 1200,
-        ([true, true], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 701,
-        ([true, true], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Lower_Susar) => {
-            1403
+        ([true], SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Rock) => {
+            400
         }
+        ([true], SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 701,
+        ([true], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Middle_Platforms) => {
+            1200
+        }
+        ([true], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 701,
+        ([true], SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Lower_Susar) => 1403,
+        ([true], SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__Upper_Susar) => {
+            877
+        }
+        ([true], SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__West_Ledge) => {
+            1052
+        }
+        ([true], SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
+            1052
+        }
+        ([true], SpotId::Giguna__Carnelian__West_10, SpotId::Giguna__Carnelian__West_Ledge) => 877,
         (
-            [true, true],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__West_Ledge,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-        ) => 1052,
-        (
-            [true, true],
-            SpotId::Giguna__Carnelian__West_10,
-            SpotId::Giguna__Carnelian__West_Ledge,
-        ) => 877,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__East_10,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__East_10,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__East_Platform,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => 599,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__East_Platform,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 1799,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 350,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Column_2_Top,
         ) => 2400,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1754,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__Higher_Ledge,
         ) => 599,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
         ) => 299,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Cache,
         ) => 500,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Bush,
         ) => 1754,
         // [1.2, 0.701754]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Cache,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         ) => 1901,
-        ([true, true], SpotId::Giguna__West_Caverns__Cache, SpotId::Giguna__West_Caverns__Bush) => {
-            2105
-        }
+        ([true], SpotId::Giguna__West_Caverns__Cache, SpotId::Giguna__West_Caverns__Bush) => 2105,
         // [1.2, 0.701754]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Bush,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
         ) => 1901,
-        ([true, true], SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Cache) => {
-            2105
-        }
+        ([true], SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Cache) => 2105,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
         ) => 350,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
             SpotId::Giguna__West_Caverns__East_Susar,
         ) => 350,
         // [0.701754, 1.578947]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
             SpotId::Giguna__West_Caverns__East_13,
         ) => 2280,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__West_Caverns__East_12,
             SpotId::Giguna__West_Caverns__East_Susar,
         ) => 526,
-        (
-            [true, true],
-            SpotId::Giguna__Wasteland__West_12,
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_12,
-        ) => 877,
+        ([true], SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => 877,
+        ([true], SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => 877,
         // [0.350877, 1.22807]
+        ([true], SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_13) => {
+            1578
+        }
         (
-            [true, true],
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1578,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Upper_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
         ) => 1754,
+        ([true], SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__Middle_Path) => {
+            1228
+        }
+        ([true], SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__West_13) => {
+            1228
+        }
         (
-            [true, true],
-            SpotId::Giguna__Wasteland__West_13,
-            SpotId::Giguna__Wasteland__Middle_Path,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__West_13,
-        ) => 1228,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Middle_Path,
             SpotId::Giguna__Wasteland__Middle_Cliff,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Middle_Path,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
         ) => 900,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
         ) => 400,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Lower_Path_Right,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Lower_Path_Left,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Lower_Path_Left,
             SpotId::Giguna__Wasteland__West_14,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__Lower_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Wasteland__West_14,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 1228,
-        (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__East_14,
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-        ) => 1578,
+        ([true], SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
+            1578
+        }
         // [0.526316, 0.6]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Stone_Knob,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
         ) => 1126,
         // [0.526316, 1.4]
+        ([true], SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Kari) => {
+            1926
+        }
         (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1926,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Stone_Knob,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Right_Pillar,
         ) => 877,
         // [0.526316, 0.6]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
         ) => 1126,
         // [0.526316, 1.4]
+        ([true], SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => {
+            1926
+        }
+        ([true], SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => {
+            701
+        }
+        ([true], SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => {
+            877
+        }
         (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Kari,
-        ) => 1926,
-        (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Left_Pillar,
-            SpotId::Giguna__Giguna_Base__Ruin,
-        ) => 877,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Kari,
         ) => 800,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Kari,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
         ) => 3000,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Kari,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 1052,
-        ([true, true], SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => {
-            2456
-        }
+        ([true], SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => 2456,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Kari,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Table,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Save_Point,
         ) => 2105,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 899,
+        ([true], SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__Table) => {
+            1754
+        }
         (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 1754,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Save_Point,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__West_Grate,
         ) => 3000,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__Save_Point,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__West_16,
         ) => 526,
         // [1.052632, 1.403509]
-        ([true, true], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => {
-            2456
-        }
+        ([true], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => 2456,
         // [1.052632, 1.2]
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Table,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 2252,
+        ([true], SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Save_Point) => {
+            701
+        }
         (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 701,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => 2105,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 1052,
+        ([true], SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__Table) => {
+            701
+        }
+        ([true], SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__West_16) => {
+            1578
+        }
         (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Table,
-        ) => 701,
-        (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__West_16,
-        ) => 1578,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 600,
+        ([true], SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => {
+            1578
+        }
         (
-            [true, true],
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1578,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Building_Interior__Bookshelf,
         ) => 1799,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => 701,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__East_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 2280,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__West_9,
-        ) => 877,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__West_9,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 877,
-        ([true, true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => {
-            1228
+        ([true], SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
+            2280
         }
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Cliff,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-        ) => 1052,
-        // [1.403509, 0.9]
-        ([true, true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => {
-            2303
+        ([true], SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__East_9) => {
+            2280
         }
-        ([true, true], SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => 199,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Small_Passage,
-            SpotId::Giguna__Ruins_East__West_8,
-        ) => 1403,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__West_8,
-            SpotId::Giguna__Ruins_East__Small_Passage,
-        ) => 1403,
-        ([true, true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => {
+        ([true], SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__West_9) => {
+            877
+        }
+        ([true], SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
+            877
+        }
+        ([true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => 1228,
+        ([true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
             1052
         }
-        ([true, true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => {
-            701
+        // [1.403509, 0.9]
+        ([true], SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => 2303,
+        ([true], SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => 199,
+        ([true], SpotId::Giguna__Ruins_East__Small_Passage, SpotId::Giguna__Ruins_East__West_8) => {
+            1403
         }
+        ([true], SpotId::Giguna__Ruins_East__West_8, SpotId::Giguna__Ruins_East__Small_Passage) => {
+            1403
+        }
+        ([true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => 1052,
+        ([true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => 701,
+        ([true], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => {
+            3600
+        }
+        ([true], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => {
+            2399
+        }
+        ([true], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => {
+            1228
+        }
+        ([true], SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => 526,
+        ([true], SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => 526,
         (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__East_9,
-        ) => 3600,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Cliff,
-        ) => 2399,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Pillar,
-        ) => 1228,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_Center__East_8,
-            SpotId::Giguna__Ruins_Center__Tablet,
-        ) => 526,
-        (
-            [true, true],
-            SpotId::Giguna__Ruins_Center__Tablet,
-            SpotId::Giguna__Ruins_Center__East_8,
-        ) => 526,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
             SpotId::Giguna__Ruins_Center__East_9,
         ) => 2631,
+        ([true], SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__East_9) => {
+            2631
+        }
         (
-            [true, true],
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__East_9,
-        ) => 2631,
-        (
-            [true, true],
+            [true],
             SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
         ) => 300,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Ruins_Center__Center_Top,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
             SpotId::Giguna__Ruins_Center__West_9,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Dock_Elevator__Connector,
             SpotId::Glacier__Dock_Elevator__Elevator,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Dock_Interior__Connector,
             SpotId::Glacier__Dock_Interior__Entry,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Dock_Interior__Entry,
             SpotId::Glacier__Dock_Interior__Connector,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ) => 4736,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Dock_Outside__Entry,
         ) => 4736,
-        ([true, true], SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => {
-            1228
+        ([true], SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => 1228,
+        ([true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => 1228,
+        ([true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => 1052,
+        ([true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Lower_East) => 1228,
+        ([true], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => 1200,
+        ([true], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => 2280,
+        ([true], SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => 4800,
+        ([true], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => 1228,
+        ([true], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => 1228,
+        ([true], SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
+        ([true], SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => 3157,
+        // [0.877193, 0.877193]
+        ([true], SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => {
+            1754
         }
-        ([true, true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => {
-            1228
-        }
-        ([true, true], SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => 1052,
-        (
-            [true, true],
-            SpotId::Glacier__Revival__Overhang,
-            SpotId::Glacier__Revival__Lower_East,
-        ) => 1228,
-        ([true, true], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => 1200,
-        ([true, true], SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => {
-            2280
-        }
-        ([true, true], SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => {
-            4800
-        }
-        ([true, true], SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => {
-            1228
-        }
-        ([true, true], SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => {
-            1228
-        }
-        ([true, true], SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => {
+        ([true], SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => 3157,
+        ([true], SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => {
             3157
         }
-        (
-            [true, true],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 3157,
-        // [0.877193, 0.877193]
-        (
-            [true, true],
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 3157,
-        (
-            [true, true],
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-        ) => 3157,
         // [1.2, 1.8, 1.8, 0.877193]
-        (
-            [true, true],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__Top,
-        ) => 5677,
+        ([true], SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => {
+            5677
+        }
         // [1.2, 2.4, 1.578947]
+        ([true], SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => {
+            5178
+        }
+        ([true], SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => {
+            1578
+        }
+        ([true], SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => {
+            1578
+        }
+        ([true], SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => {
+            1578
+        }
+        ([true], SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => {
+            1578
+        }
         (
-            [true, true],
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__East,
-        ) => 5178,
-        (
-            [true, true],
-            SpotId::Glacier__Compass_Room__East,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__East,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__West,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Glacier__Compass_Room__West,
-            SpotId::Glacier__Compass_Room__Center,
-        ) => 1578,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__The_Big_Drop__Small_Path,
         ) => 2000,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__The_Big_Drop__Water_Surface,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Grid_39_40_7_9__West,
         ) => 6666,
         // [3.333333, 0.6, 3.333333]
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
         ) => 7266,
+        ([true], SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
+        ([true], SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
         (
-            [true, true],
-            SpotId::Glacier__Grid_37_38_9__East,
-            SpotId::Glacier__Grid_37_38_9__West,
-        ) => 6666,
-        (
-            [true, true],
-            SpotId::Glacier__Grid_37_38_9__West,
-            SpotId::Glacier__Grid_37_38_9__East,
-        ) => 6666,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__West_9,
         ) => 3157,
+        ([true], SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_9) => {
+            1578
+        }
         (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 1578,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 2500,
+        ([true], SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Mid_9) => {
+            1578
+        }
         (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 1578,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 2500,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__West_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 2000,
+        ([true], SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__East_9) => {
+            1578
+        }
+        ([true], SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__West_9) => {
+            1578
+        }
+        ([true], SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__Mid_11) => {
+            2500
+        }
         (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__West_9,
-        ) => 1578,
-        (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 2500,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Mid_9,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 2000,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Under_Switch,
         ) => 2400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => 1099,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => 1578,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__West_9,
         ) => 8400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_9,
         ) => 8400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 1052,
+        ([true], SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__East_9) => {
+            1929
+        }
+        ([true], SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__Mid_9) => {
+            500
+        }
+        ([true], SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => {
+            1228
+        }
         (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__East_9,
-        ) => 1929,
-        (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-        ) => 500,
-        (
-            [true, true],
-            SpotId::Glacier__Vertical_Room__West_8,
-            SpotId::Glacier__Vertical_Room__Peak,
-        ) => 1228,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__Mid_11,
         ) => 4200,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
         ) => 2280,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
         ) => 2280,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         // [2.631579, 2.631579]
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 5263,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_12,
         ) => 6666,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         // [0.877193, 0.877193]
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 1754,
         // [3.333333, 3.333333]
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
         ) => 6666,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
         ) => 6666,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
         ) => 6666,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__West,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Platform,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Pedestal,
         ) => 2456,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room__Center_ish,
         ) => 2456,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 2105,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__East_9,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__Fork,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
             SpotId::Glacier__Ledge_Grab_Room__Fork,
         ) => 500,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
         ) => 3157,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
         ) => 400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ) => 1754,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
         ) => 1754,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
             SpotId::Glacier__Ledge_Grab_Room__Gate,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Gate,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ) => 799,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Gate,
         ) => 1000,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
         ) => 3859,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
         ) => 4210,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 350,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 800,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__West,
         ) => 4210,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
         ) => 599,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
         ) => 3333,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ) => 1754,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
         ) => 1754,
-        ([true, true], SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__East_8) => {
-            2982
-        }
+        ([true], SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__East_8) => 2982,
+        ([true], SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__Top_Rock) => 1754,
+        ([true], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__Top_Platform_East) => 1754,
+        ([true], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => 3157,
         (
-            [true, true],
-            SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 1754,
-        (
-            [true, true],
-            SpotId::Glacier__Peak__Top_Rock,
-            SpotId::Glacier__Peak__Top_Platform_East,
-        ) => 1754,
-        ([true, true], SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => 3157,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__Top_Platform_East,
         ) => 1754,
-        (
-            [true, true],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Top_Rock,
-        ) => 200,
-        (
-            [true, true],
-            SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__West_Cliff,
-        ) => 3157,
-        ([true, true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => 4200,
-        (
-            [true, true],
-            SpotId::Glacier__Peak__West_Cliff,
-            SpotId::Glacier__Peak__Under_West_Cliff,
-        ) => 600,
-        ([true, true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2280,
-        ([true, true], SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => {
-            1929
+        ([true], SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Top_Rock) => 200,
+        ([true], SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__West_Cliff) => {
+            3157
         }
-        ([true, true], SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => {
-            2400
-        }
+        ([true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => 4200,
+        ([true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Under_West_Cliff) => 600,
+        ([true], SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2280,
+        ([true], SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => 1929,
+        ([true], SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => 2400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__East_8,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
         ) => 1228,
+        ([true], SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__Column) => {
+            1228
+        }
         (
-            [true, true],
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__Column,
-        ) => 1228,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__East_8,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Column,
         ) => 500,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__West_9,
         ) => 1929,
+        ([true], SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__East_8) => {
+            1799
+        }
         (
-            [true, true],
-            SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-        ) => 1799,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
         ) => 1799,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
             SpotId::Glacier__Grid_32_7_10__West_9,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
             SpotId::Glacier__Grid_32_7_10__West_10,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
         ) => 877,
+        ([true], SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__West_10) => {
+            600
+        }
+        ([true], SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__East_10) => {
+            600
+        }
         (
-            [true, true],
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            SpotId::Glacier__Grid_32_7_10__West_10,
-        ) => 600,
-        (
-            [true, true],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 600,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 2280,
+        ([true], SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__Midair) => {
+            3157
+        }
         (
-            [true, true],
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 3157,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__East_10,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 2280,
+        ([true], SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => {
+            3157
+        }
         (
-            [true, true],
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 3157,
-        (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
         ) => 4200,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
         ) => 400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__West_12,
         ) => 1400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__Midair,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__West_12,
         ) => 1000,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
         ) => 3000,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Midair,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Grid_31_9_12__Midair,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
         ) => 526,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
         ) => 877,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
         ) => 599,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
         ) => 350,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ) => 350,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1200,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ) => 701,
         // [0.175439, 1.0]
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1175,
         // [0.175439, 1.754386]
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 350,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1403,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Side,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 2400,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
             SpotId::Glacier__Lake_Main_Entrance__Side,
         ) => 199,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ) => 1052,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
         ) => 701,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
         ) => 600,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
         ) => 1228,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Apocalypse_Entry__West,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
         ) => 1929,
         (
-            [true, true],
+            [true],
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Glacier__Apocalypse_Entry__West,
         ) => 1929,
@@ -16074,7 +6305,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__Upper_Platform => enum_map! {
-            SpotId::Amagi__Main_Area__Cliff => 701,
+            SpotId::Amagi__Main_Area__Cliff => 1000,
             SpotId::Amagi__Main_Area__Upper_Platform => 0,
             SpotId::Amagi__Main_Area__West_Shelf => 1228,
             SpotId::Amagi__Main_Area__Platform_2 => 701,
@@ -16083,7 +6314,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__West_Shelf => enum_map! {
-            SpotId::Amagi__Main_Area__Upper_Platform => 1228,
+            SpotId::Amagi__Main_Area__Upper_Platform => 2000,
             SpotId::Amagi__Main_Area__West_Shelf => 0,
             SpotId::Amagi__Main_Area__West_Side => 1403,
             SpotId::Amagi__Main_Area__Platform_2 => 526,
@@ -16108,7 +6339,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__East_Ledge => enum_map! {
-            SpotId::Amagi__Main_Area__Platform_2 => 701,
+            SpotId::Amagi__Main_Area__Platform_2 => 1000,
             SpotId::Amagi__Main_Area__East_Ledge => 0,
             SpotId::Amagi__Main_Area__Platform_3 => 877,
             SpotId::Amagi__Main_Area__Catwalk_Center => 899,
@@ -16205,7 +6436,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__Broken_Wall => enum_map! {
-            SpotId::Amagi__Main_Area__Catwalk_Center => 600,
+            SpotId::Amagi__Main_Area__Catwalk_Center => 1000,
             SpotId::Amagi__Main_Area__Save_Point => 3859,
             SpotId::Amagi__Main_Area__Broken_Wall => 0,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot => 500,
@@ -16213,13 +6444,13 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__Wall_Stuck_Spot => enum_map! {
-            SpotId::Amagi__Main_Area__Broken_Wall => 600,
+            SpotId::Amagi__Main_Area__Broken_Wall => 1000,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__Half_Pillar => enum_map! {
-            SpotId::Amagi__Main_Area__Broken_Wall => 1403,
+            SpotId::Amagi__Main_Area__Broken_Wall => 2000,
             SpotId::Amagi__Main_Area__Half_Pillar => 0,
             SpotId::Amagi__Main_Area__Flat_Ruin => 1754,
             SpotId::Amagi__Main_Area__West_Mini_Hill => 701,
@@ -16236,7 +6467,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Main_Area__West_Mini_Hill => enum_map! {
-            SpotId::Amagi__Main_Area__Half_Pillar => 701,
+            SpotId::Amagi__Main_Area__Half_Pillar => 1000,
             SpotId::Amagi__Main_Area__Flat_Ruin => 1052,
             SpotId::Amagi__Main_Area__West_Mini_Hill => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -16408,7 +6639,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Liru_Room__West_20 => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 1228,
+            SpotId::Amagi__Liru_Room__Platform_2_Left => 2000,
             SpotId::Amagi__Liru_Room__Platform_3_Left => 1228,
             SpotId::Amagi__Liru_Room__Platform_4_Left => 1000,
             SpotId::Amagi__Liru_Room__Platform_4_Right => 1000,
@@ -16419,7 +6650,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__Liru_Room__East_Passage => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_2_Right => 701,
+            SpotId::Amagi__Liru_Room__Platform_2_Right => 1000,
             SpotId::Amagi__Liru_Room__Platform_3_Right => 1052,
             SpotId::Amagi__Liru_Room__Bottom => 1000,
             SpotId::Amagi__Liru_Room__East_Passage => 0,
@@ -16445,7 +6676,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__West_Lake__East_Bank => enum_map! {
-            SpotId::Amagi__West_Lake__East_Shore => 1799,
+            SpotId::Amagi__West_Lake__East_Shore => 3000,
             SpotId::Amagi__West_Lake__East_Bank => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -16592,7 +6823,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Amagi__West_Lake__Cavern_Eye => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => 701,
+            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => 1000,
             SpotId::Amagi__West_Lake__Cavern_Eye => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -16726,7 +6957,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Amagi__West_Lake__Northeast_Platform => 1754,
             SpotId::Amagi__West_Lake__Northwest_Platform => 701,
             SpotId::Amagi__West_Lake__West_Cliff => 0,
-            SpotId::Amagi__West_Lake__West_Bank => 1929,
+            SpotId::Amagi__West_Lake__West_Bank => 2000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -19605,13 +9836,13 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Cliff) => 0,
         (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Upper_Platform) => 701,
         (SpotId::Amagi__Main_Area__Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => 701,
+        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => 1000,
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Upper_Platform) => 0,
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__West_Shelf) => 1228,
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Platform_2) => 701,
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__East_Ledge) => 600,
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Upper_Platform) => 1228,
+        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Upper_Platform) => 2000,
         (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Shelf) => 0,
         (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Side) => 1403,
         (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Platform_2) => 526,
@@ -19627,7 +9858,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => 500,
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Catwalk_Center) => 1000,
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => 701,
+        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => 1000,
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__East_Ledge) => 0,
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_3) => 877,
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Catwalk_Center) => 899,
@@ -19729,15 +9960,15 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__East_19) => 0,
         (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Grid_31_19__West) => 1350,
         (SpotId::Amagi__Main_Area__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Catwalk_Center) => 600,
+        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Catwalk_Center) => 1000,
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => 3859,
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Broken_Wall) => 0,
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => 500,
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Broken_Wall) => 600,
+        (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Broken_Wall) => 1000,
         (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => 0,
         (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Broken_Wall) => 1403,
+        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Broken_Wall) => 2000,
         (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Half_Pillar) => 0,
         (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Flat_Ruin) => 1754,
         (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__West_Mini_Hill) => 701,
@@ -19748,7 +9979,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => 2000,
         (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => 1578,
         (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Half_Pillar) => 701,
+        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Half_Pillar) => 1000,
         (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Flat_Ruin) => 1052,
         (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__West_Mini_Hill) => 0,
         (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -19985,7 +10216,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 1754,
         (SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Shrine) => 0,
         (SpotId::Amagi__Liru_Room__Shrine, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_2_Left) => 1228,
+        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_2_Left) => 2000,
         (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_3_Left) => 1228,
         (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_4_Left) => 1000,
         (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_4_Right) => 1000,
@@ -19993,7 +10224,9 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Shrine) => 3500,
         (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__West_20) => 0,
         (SpotId::Amagi__Liru_Room__West_20, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_2_Right) => 701,
+        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_2_Right) => {
+            1000
+        }
         (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
             1052
         }
@@ -20009,7 +10242,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__West_Lake__East_Shore, SpotId::Amagi__West_Lake__East_Shore) => 0,
         (SpotId::Amagi__West_Lake__East_Shore, SpotId::Amagi__West_Lake__East_Bank) => 1228,
         (SpotId::Amagi__West_Lake__East_Shore, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Shore) => 1799,
+        (SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Shore) => 3000,
         (SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Bank) => 0,
         (SpotId::Amagi__West_Lake__East_Bank, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Amagi__West_Lake__East_Bank) => 1228,
@@ -20234,7 +10467,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Amagi__West_Lake__Cavern_Tear_Duct, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
-        (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Amagi__West_Lake__Cavern_Tear_Duct) => 701,
+        (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Amagi__West_Lake__Cavern_Tear_Duct) => 1000,
         (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Amagi__West_Lake__Cavern_Eye) => 0,
         (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Amagi__West_Lake__Cavern_Front_Pillar, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
@@ -20449,7 +10682,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__Northwest_Platform) => 701,
         (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Cliff) => 0,
-        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Bank) => 1929,
+        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Bank) => 2000,
         (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Cliff) => 1929,
         (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Bank) => 0,
@@ -25654,7 +15887,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__Cliff,
-            701,
+            1000,
         ),
         (
             SpotId::Amagi__Main_Area__Upper_Platform,
@@ -25684,7 +15917,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__West_Shelf,
             SpotId::Amagi__Main_Area__Upper_Platform,
-            1228,
+            2000,
         ),
         (
             SpotId::Amagi__Main_Area__West_Shelf,
@@ -25764,7 +15997,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Platform_2,
-            701,
+            1000,
         ),
         (
             SpotId::Amagi__Main_Area__East_Ledge,
@@ -26069,7 +16302,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-            600,
+            1000,
         ),
         (
             SpotId::Amagi__Main_Area__Broken_Wall,
@@ -26094,7 +16327,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Amagi__Main_Area__Broken_Wall,
-            600,
+            1000,
         ),
         (
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
@@ -26109,7 +16342,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Half_Pillar,
             SpotId::Amagi__Main_Area__Broken_Wall,
-            1403,
+            2000,
         ),
         (
             SpotId::Amagi__Main_Area__Half_Pillar,
@@ -26164,7 +16397,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__West_Mini_Hill,
             SpotId::Amagi__Main_Area__Half_Pillar,
-            701,
+            1000,
         ),
         (
             SpotId::Amagi__Main_Area__West_Mini_Hill,
@@ -26694,7 +16927,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Liru_Room__West_20,
             SpotId::Amagi__Liru_Room__Platform_2_Left,
-            1228,
+            2000,
         ),
         (
             SpotId::Amagi__Liru_Room__West_20,
@@ -26734,7 +16967,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Liru_Room__East_Passage,
             SpotId::Amagi__Liru_Room__Platform_2_Right,
-            701,
+            1000,
         ),
         (
             SpotId::Amagi__Liru_Room__East_Passage,
@@ -26804,7 +17037,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__East_Bank,
             SpotId::Amagi__West_Lake__East_Shore,
-            1799,
+            3000,
         ),
         (
             SpotId::Amagi__West_Lake__East_Bank,
@@ -27269,7 +17502,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Cavern_Eye,
             SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            701,
+            1000,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Eye,
@@ -27669,7 +17902,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__West_Cliff,
             SpotId::Amagi__West_Lake__West_Bank,
-            1929,
+            2000,
         ),
         (
             SpotId::Amagi__West_Lake__West_Cliff,

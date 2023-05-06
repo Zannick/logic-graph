@@ -17,7 +17,7 @@ objectives:  # win conditions
   Triforce Hunt: "[Triforce_Piece{triforce_count}]"
   #Deku Full Clear: $all_region_checks(`Deku Tree`)
 
-movements:
+base_movements:
   # Movement types:
   #   free: move freely in 2d (3D games like OoT qualify)
   #   xy: move orthogonally (at the same speed)
@@ -29,8 +29,7 @@ movements:
   # In general, recommend using separate Areas instead of modeling jump.
   # Speed is based on the distance moveable in the unit time; even though you don't
   # need to use the same coordinate system in each Area, the distances must match.
-  default:
-    free: 1
+  - free: 1
   # Movement types other than default need to have a req: rule
   # Potentially something like areas: as well to limit it, until we can have a Place
   # type we can write in a req: rule

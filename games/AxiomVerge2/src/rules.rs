@@ -518,10 +518,6 @@ pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
 }
-pub fn access_not_water(ctx: &Context) -> bool {
-    // not ^water
-    !data::water(ctx.position())
-}
 pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
     ((!(match get_region(ctx.position()) {

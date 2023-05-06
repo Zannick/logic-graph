@@ -1923,6 +1923,7 @@ pub struct World {
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
+    min_warp_time: u32,
 }
 
 impl world::World for World {
@@ -2219,12 +2220,28 @@ impl world::World for World {
         vec
     }
 
+    fn objective_items(&self) -> Vec<(Item, i16)> {
+        match self.objective {
+            Objective::Gohma => vec![(Item::Kokiri_Emerald, 1)],
+            Objective::Ganon => vec![(Item::Defeat_Ganon, 1)],
+            Objective::Triforce_Hunt => vec![(Item::Triforce_Piece, 1024)],
+        }
+    }
+
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
         movements::base_edges()
     }
 
+    fn base_distance(&self, s1: SpotId, s2: SpotId) -> u32 {
+        movements::base_distance(s1, s2)
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
+    }
+
+    fn min_warp_time(&self) -> u32 {
+        self.min_warp_time
     }
 }
 
@@ -2295,6 +2312,7 @@ impl World {
                 start: ActionId::Global__Change_Time.into_usize(),
                 end: ActionId::Global__Change_Time.into_usize() + 1,
             },
+            min_warp_time: 0,
         }
     }
 

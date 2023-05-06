@@ -38,20 +38,20 @@ objectives:
   # necessary.
   Progress%: "[Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Flask{7}, $all_notes]"
 
-movements:
-  default:  # the slowest movement is in water
+base_movements:
+  - # the slowest movement is in water
     # a grid line = 1 unit. each minimap pixel is about .1 unit
     x: .222  # about 4.5s per grid x-unit underwater if we don't have liru
     fall: 1
     jump: 1  # can vary with jump height, so take a rough estimate of usual
     jump_down: .1
-  # There should probably be a way to encode this "water" movement penalty
-  # as a feature of the environment rather than use a movement type that relies
-  # on a context var we only use overrides for
-  general:
+  - data:
+      water: false
     x: .285  # about 3.5s per grid x-unit
     jump: .6  # can vary with jump height, so take a rough estimate of usual
-    req: not ^water
+    # other speeds apply
+
+movements:
   water:
     x: .285
     req: Underwater_Movement

@@ -26,7 +26,7 @@ from Utils import *
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
-GAME_FIELDS = {'name', 'objectives', 'movements', 'warps', 'actions', 'time', 'context',
+GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'warps', 'actions', 'time', 'context',
                'start', 'load', 'data', 'helpers', 'collect', 'settings', 'special', '_filename'}
 REGION_FIELDS = {'name', 'short', 'data', 'here'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here'}
@@ -188,19 +188,23 @@ class GameLogic(object):
             self.collect[name]['action_id'] = self.make_funcid(self.collect[name], 'act')
 
         # these are {name: {...}} dicts
-        self.movements = self._info['movements']
+        self.base_movements = self._info['base_movements']
+        self.movements = self._info.get('movements', {})
+        for md in self.base_movements[1:]:
+            if 'data' not in md:
+                self._errors.append(f'base movements beyond the first must have data restrictions')
+
         self.time = self._info['time']
-        if 'default' not in self.movements:
-            self._errors.append(f'No default movement defined')
         for name, info in self.movements.items():
             if 'req' in info:
                 info['pr'] = _parseExpression(info['req'], name, 'movements')
                 info['access_id'] = self.make_funcid(info)
-                if name == 'default':
-                    self._errors.append(f'Cannot define req for default movement')
+            else:
+                self._errors.append(f'movement {name} must have req or be in base_movements')
 
         self.id_lookup = {}
         self.special = self._info.get('special', {})
+        self.data = self._info.get('data', {})
         self.process_regions()
         self.process_context()
         self.process_warps()
@@ -223,6 +227,8 @@ class GameLogic(object):
             region['id'] = construct_id(rname)
             self.id_lookup[region['id']] = region
             region['loc_ids'] = []
+            region['all_data'] = dict(self.data)
+            region['all_data'].update(region.get('data', {}))
             if 'on_entry' in region:
                 region['act'] = parseAction(
                         region['on_entry'], name=f'{region["fullname"]}:on_entry')
@@ -235,6 +241,8 @@ class GameLogic(object):
                 area['fullname'] = f'{rname} > {aname}'
                 area['spot_ids'] = []
                 area['loc_ids'] = []
+                area['all_data'] = dict(region['all_data'])
+                area['all_data'].update(area.get('data', {}))
                 if 'on_entry' in area:
                     area['act'] = parseAction(
                             area['on_entry'], name=f'{area["fullname"]}:on_entry')
@@ -251,6 +259,9 @@ class GameLogic(object):
                     spot['loc_ids'] = []
                     spot['exit_ids'] = []
                     spot['action_ids'] = []
+                    spot['all_data'] = dict(area['all_data'])
+                    spot['all_data'].update(spot.get('data', {}))
+                    spot['base_movement'] = self.spot_base_movement(tuple(spot['all_data'].items()))
                     # hybrid spots are exits but have names
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         loc['spot'] = sname
@@ -400,6 +411,16 @@ class GameLogic(object):
         self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts)
         self.bfp.process()
 
+    @cache
+    def spot_base_movement(self, spot_data):
+        d = dict(self.base_movements[0])
+        for md in self.base_movements[1:]:
+            if 'data' in md and md['data'].items() <= set(spot_data):
+                d.update(md)
+        if 'data' in d:
+            del d['data']
+        return d
+
     @cached_property
     def movements_by_type(self):
         d = defaultdict(list)
@@ -412,40 +433,39 @@ class GameLogic(object):
                     found = True
             if not found:
                 self._errors.append(f'Movement {m} does not define a movement dimension: '
-                                         f'must be one of {", ".join(MOVEMENT_DIMS)}')
+                                    f'must be one of {", ".join(MOVEMENT_DIMS)}')
 
-            if m != 'default' and 'req' not in info:
-                self._errors.append(f'Movement {m} must have a req')
         return d
 
 
-    def movement_time(self, mset, a, b, jumps=0, jumps_down=0, jmvmt=None):
+    def movement_time(self, mset, base, a, b, jumps=0, jumps_down=0, jmvmt=None):
         times = []
         xtimes = []
         ytimes = []
-        defallt = self.movements['default'].get('fall')
-        dejumpt = self.movements['default'].get('jump')
-        for m in mset + ('default',):
+        defallt = base.get('fall')
+        dejumpt = base.get('jump')
+        mp = [(m, self.movements[m]) for m in mset]
+        for m, mvmt in mp + [('base', base)]:
             # TODO: This is all cacheable (per pair of spots, per movement type, per pair of points)
             # instead of calculating the times lists for a,b for m, once per powerset of movements
-            if s := self.movements[m].get('free'):
+            if s := mvmt.get('free'):
                 times.append(math.sqrt(a**2 + b**2) / s)
                 continue
-            if s := self.movements[m].get('xy'):
+            if s := mvmt.get('xy'):
                 times.append((abs(a) + abs(b)) / s)
                 continue
-            if sx := self.movements[m].get('x'):
+            if sx := mvmt.get('x'):
                 xtimes.append(abs(a) / sx)
             # x, y, fall: not mutually exclusive
-            if sy := self.movements[m].get('y'):
+            if sy := mvmt.get('y'):
                 ytimes.append(abs(b) / sy)
-            if sfall := self.movements[m].get('fall', defallt):
+            if sfall := mvmt.get('fall', defallt):
                 # fall speed must be the same direction as "down"
                 if (t := b / sfall) > 0:
-                    t += jumps_down * self.movements[m].get('jump_down', 0)
+                    t += jumps_down * mvmt.get('jump_down', 0)
                     ytimes.append(t)
                 elif (jumps and t < 0 and (jmvmt is None or m == jmvmt)
-                        and (sjump := self.movements[m].get('jump', dejumpt))):
+                        and (sjump := mvmt.get('jump', dejumpt))):
                     # Direction is negative but jumps is just time taken
                     ytimes.append(jumps * sjump)
         if xtimes and ytimes:
@@ -483,7 +503,7 @@ class GameLogic(object):
 
     @cached_property
     def non_default_movements(self):
-        return sorted(m for m in self.movements if m != 'default')
+        return sorted(m for m in self.movements)
 
 
     def spot_distance(self, sp1, sp2):
@@ -603,7 +623,8 @@ class GameLogic(object):
             key = tuple(m in mset for m in self.non_default_movements)
             table[key] = local_time = {}
             for k, dlist in self.local_distances.items():
-                times = [self.movement_time(mset, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
+                base = self.id_lookup[k[0]]['base_movement']
+                times = [self.movement_time(mset, base, a, b, j, jd, jmvmt) for a,b, j, jd, jmvmt in dlist]
                 if all(t is not None for t in times):
                     local_time[k] = times
         return table
@@ -931,14 +952,14 @@ class GameLogic(object):
 
         def _check_data(ctx, val, category, *names, data=False):
             if data:
-                if ctx in self._info.get('data', {}):
+                if ctx in self.data:
                     _check_types(self._info['data'][ctx], val, ctx, category, *names, local=True)
                 else:
                     self._errors.append(
                         f'context data field {ctx} used in {" > ".join(names)} in '
                         f'"{category}" section must have a global default value set')
             else:
-                if ctx in self._info.get('data', {}):
+                if ctx in self.data:
                     self._errors.append(
                         f'context category mismatch: {ctx} defined as data but used in '
                         f'{" > ".join(names)} in "{category}" section')
