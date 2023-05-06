@@ -211,7 +211,7 @@ where
         write_opts.disable_wal(true);
 
         let s = Instant::now();
-        let scorer = ContextScorer::shortest_paths(world, startctx);
+        let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
         println!("Built scorer in {:?}", s.elapsed());
 
         Ok(HeapDB {
@@ -347,7 +347,10 @@ where
         Ok(rmp_serde::from_slice::<ArchivedContextWrapper<T>>(buf)?)
     }
 
-    fn get_obj_from_heap_value(archiver: &mut HistoryArchiveAlias<T, W>, buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
+    fn get_obj_from_heap_value(
+        archiver: &mut HistoryArchiveAlias<T, W>,
+        buf: &[u8],
+    ) -> Result<ContextWrapper<T>, Error> {
         Ok(archiver.retrieve(rmp_serde::from_slice::<ArchivedContextWrapper<T>>(buf)?))
     }
 
@@ -445,7 +448,10 @@ where
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
-    pub fn score<R>(&self, el: &R) -> u32 where R: Wrapper<T> {
+    pub fn score<R>(&self, el: &R) -> u32
+    where
+        R: Wrapper<T>,
+    {
         el.elapsed() + self.estimated_remaining_time(el.get())
     }
 

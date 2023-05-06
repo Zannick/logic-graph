@@ -33,7 +33,7 @@ where
     A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
     S: Id + Default,
 {
-    fn new<T>(world: &'w W, startctx: &T) -> Self
+    fn new<T>(world: &'w W, startctx: &T, cache_size: usize) -> Self
     where
         T: Ctx<World = W>,
     {
@@ -41,7 +41,7 @@ where
             world,
             algo: A::from_graph(build_simple_graph(world, startctx)),
             known_costs: Mutex::new(LruCache::with_hasher(
-                NonZeroUsize::new(32_768).unwrap(),
+                NonZeroUsize::new(cache_size).unwrap(),
                 CommonHasher::default(),
             )),
             estimates: 0.into(),
@@ -189,10 +189,10 @@ where
     E: Exit<SpotId = S>,
     S: Id + Default,
 {
-    pub fn shortest_paths<T>(world: &'w W, startctx: &T) -> Self
+    pub fn shortest_paths<T>(world: &'w W, startctx: &T, cache_size: usize) -> Self
     where
         T: Ctx<World = W>,
     {
-        Self::new(world, startctx)
+        Self::new(world, startctx, cache_size)
     }
 }
