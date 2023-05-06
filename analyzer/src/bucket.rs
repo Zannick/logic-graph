@@ -216,22 +216,13 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     /// More efficiently extracts all the items from all buckets with
     /// priorities above `keep_priority`.
-    fn pop_all_with_priority(
-        &mut self,
-        mut keep_priority: P,
-        max_pops: usize,
-        segment_weight: P,
-    ) -> Vec<(B::Item, P)>
-    where
-        P: std::ops::Add<Output = P> + Copy,
-    {
+    fn pop_all_with_priority(&mut self, keep_priority: P, max_pops: usize) -> Vec<(B::Item, P)> {
         if max_pops == 0 {
             Vec::new()
         } else if let Some(min) = self.min_priority() {
             let max = self.max_priority().unwrap_or(min);
             let mut vec = Vec::new();
             for segment in min..=max {
-                keep_priority = std::cmp::max(keep_priority + segment_weight, keep_priority);
                 while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
                     if *p > keep_priority {
                         vec.push(
