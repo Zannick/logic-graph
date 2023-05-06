@@ -1,5 +1,5 @@
 use crate::world::*;
-use crate::{CommonHasher, new_hashmap};
+use crate::{new_hashmap, CommonHasher};
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
@@ -298,44 +298,89 @@ where
     E: Hash,
     A: Hash,
     Wp: Hash,
-     {
+{
     pub fn new() -> Self {
         Self {
-            next: 1,  // reserve 0 for the None
+            next: 1, // reserve 0 for the None
             archive: new_hashmap(),
         }
     }
 
-    pub fn archive<T>(&mut self, BaseContextWrapper {ctx, elapsed, history}: BaseContextWrapper<T, I, S, L, E, A, Wp>) -> ArchivedContextWrapper<T> {
+    pub fn len(&self) -> usize {
+        self.archive.len()
+    }
+
+    pub fn counted(&self) -> usize {
+        self.next
+    }
+
+    pub fn archive<T>(
+        &mut self,
+        BaseContextWrapper {
+            ctx,
+            elapsed,
+            history,
+        }: BaseContextWrapper<T, I, S, L, E, A, Wp>,
+    ) -> ArchivedContextWrapper<T> {
         if let Some(hist) = history {
             let hist_archive = self.next;
             self.next += 1;
             self.archive.insert(hist_archive, hist);
-            ArchivedContextWrapper { ctx, elapsed, hist_archive }
+            ArchivedContextWrapper {
+                ctx,
+                elapsed,
+                hist_archive,
+            }
         } else {
-            ArchivedContextWrapper { ctx, elapsed, hist_archive: 0 }
+            ArchivedContextWrapper {
+                ctx,
+                elapsed,
+                hist_archive: 0,
+            }
         }
     }
 
-    pub fn retrieve<T>(&mut self, ArchivedContextWrapper { ctx, elapsed, hist_archive }: ArchivedContextWrapper<T>) -> BaseContextWrapper<T, I, S, L, E, A, Wp> {
+    pub fn retrieve<T>(
+        &mut self,
+        ArchivedContextWrapper {
+            ctx,
+            elapsed,
+            hist_archive,
+        }: ArchivedContextWrapper<T>,
+    ) -> BaseContextWrapper<T, I, S, L, E, A, Wp> {
         let history = self.archive.remove(&hist_archive);
         if hist_archive > 0 {
-            assert!(history.is_some(), "Attempted to retrieve missing history entry {}", hist_archive);
+            assert!(
+                history.is_some(),
+                "Attempted to retrieve missing history entry {}",
+                hist_archive
+            );
         }
-        BaseContextWrapper { ctx, elapsed, history }
+        BaseContextWrapper {
+            ctx,
+            elapsed,
+            history,
+        }
     }
 
-    pub fn remove<T>(&mut self, ArchivedContextWrapper { ctx: _, elapsed: _, hist_archive }: ArchivedContextWrapper<T>) {
+    pub fn remove<T>(
+        &mut self,
+        ArchivedContextWrapper {
+            ctx: _,
+            elapsed: _,
+            hist_archive,
+        }: ArchivedContextWrapper<T>,
+    ) {
         self.archive.remove(&hist_archive);
     }
 }
 pub type HistoryArchiveAlias<T, W> = HistoryArchive<
-<T as Ctx>::ItemId,
-<<W as World>::Exit as Exit>::SpotId,
-<<W as World>::Location as Location>::LocId,
-<<W as World>::Exit as Exit>::ExitId,
-<<W as World>::Action as Action>::ActionId,
-<<W as World>::Warp as Warp>::WarpId,
+    <T as Ctx>::ItemId,
+    <<W as World>::Exit as Exit>::SpotId,
+    <<W as World>::Location as Location>::LocId,
+    <<W as World>::Exit as Exit>::ExitId,
+    <<W as World>::Action as Action>::ActionId,
+    <<W as World>::Warp as Warp>::WarpId,
 >;
 
 #[derive(Clone, Debug, Hash, PartialEq, Eq)]

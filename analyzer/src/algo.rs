@@ -702,11 +702,12 @@ where
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
+        let (arc, arccount) = self.queue.db().archive_stats();
         println!(
-            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends: {}; opt={}) ---\n\
+            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends={}; opt={}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit: {}ms; db best: {}; evictions: {}; retrievals: {}; bgdel={}\n\
-            push_skips={} time + {} dups; pop_skips={} time + {} dups\n\
+            limit={}ms; db best={}; archived={}/{}; evictions={}; retrievals={}\n\
+            skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             {}",
             iters,
             self.extras.load(Ordering::Acquire),
@@ -722,6 +723,8 @@ where
             self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
+            arc,
+            arccount,
             self.queue.evictions(),
             self.queue.retrievals(),
             self.queue.background_deletes(),

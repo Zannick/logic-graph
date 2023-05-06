@@ -284,6 +284,11 @@ where
         self.bg_deletes.load(Ordering::Acquire)
     }
 
+    pub fn archive_stats(&self) -> (usize, usize) {
+        let archiver = self.archiver.lock().unwrap();
+        (archiver.len(), archiver.counted())
+    }
+
     /// Returns details about the number of states we've skipped (tracked separately from the db).
     /// Specifically:
     ///   1) states not added (on push) to the db due to exceeding max time,
