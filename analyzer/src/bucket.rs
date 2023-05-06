@@ -223,7 +223,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         segment_weight: P,
     ) -> Vec<(B::Item, P)>
     where
-        P: std::ops::Sub<Output = P> + Copy,
+        P: std::ops::Add<Output = P> + Copy,
     {
         if max_pops == 0 {
             Vec::new()
@@ -231,7 +231,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
             let max = self.max_priority().unwrap_or(min);
             let mut vec = Vec::new();
             for segment in min..=max {
-                keep_priority = std::cmp::min(keep_priority - segment_weight, keep_priority);
+                keep_priority = std::cmp::max(keep_priority + segment_weight, keep_priority);
                 while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
                     if *p > keep_priority {
                         vec.push(
