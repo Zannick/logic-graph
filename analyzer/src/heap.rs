@@ -509,7 +509,7 @@ where
                     evicted = Some(Self::evict_until(
                         &mut queue,
                         est_complete,
-                        self.db.max_time() / self.max_progress,
+                        (self.db.max_time() - est_complete) / self.max_progress,
                         self.min_evictions,
                         max_evictions,
                     ));
@@ -623,7 +623,7 @@ where
                         let evicted = Self::evict_until(
                             &mut queue,
                             threshold,
-                            self.db.max_time() / self.max_progress,
+                            (self.db.max_time() - threshold) / self.max_progress,
                             self.min_evictions,
                             len + 2 * num_to_restore - cap,
                         );
@@ -815,7 +815,7 @@ where
                 evicted = Some(Self::evict_until(
                     &mut queue,
                     el_estimate,
-                    self.db.max_time() / self.max_progress,
+                    (self.db.max_time() - el_estimate) / self.max_progress,
                     std::cmp::max(len + vec.len() - cap, self.min_evictions),
                     max_evictions,
                 ));
