@@ -3,9 +3,10 @@ use crate::steiner::approx::ApproxSteiner;
 use crate::steiner::graph::*;
 use crate::steiner::*;
 use crate::world::*;
-use crate::{new_hashmap, CommonHasher};
-use std::collections::HashMap;
+use crate::CommonHasher;
+use lru::LruCache;
 use std::collections::HashSet;
+use std::num::NonZeroUsize;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 
@@ -18,7 +19,7 @@ pub struct ContextScorer<'w, W, S, LI, EI, A> {
     world: &'w W,
     algo: A,
 
-    known_costs: Mutex<HashMap<(S, Vec<LI>, Vec<Edge<EI>>), u64, CommonHasher>>,
+    known_costs: Mutex<LruCache<(S, Vec<LI>, Vec<Edge<EI>>), u64, CommonHasher>>,
 
     estimates: AtomicUsize,
     cached_estimates: AtomicUsize,
@@ -39,7 +40,10 @@ where
         Self {
             world,
             algo: A::from_graph(build_simple_graph(world, startctx)),
-            known_costs: Mutex::new(new_hashmap()),
+            known_costs: Mutex::new(LruCache::with_hasher(
+                NonZeroUsize::new(32_768).unwrap(),
+                CommonHasher::default(),
+            )),
             estimates: 0.into(),
             cached_estimates: 0.into(),
         }
@@ -129,7 +133,7 @@ where
             .collect();
 
         let key: (S, Vec<_>, Vec<_>) = (pos, required, extra_edges);
-        let locked_map = self.known_costs.lock().unwrap();
+        let mut locked_map = self.known_costs.lock().unwrap();
         if let Some(&c) = locked_map.get(&key) {
             drop(locked_map);
             self.cached_estimates.fetch_add(1, Ordering::Release);
@@ -169,7 +173,7 @@ where
             };
             {
                 let mut locked_map = self.known_costs.lock().unwrap();
-                locked_map.insert(key, c);
+                locked_map.push(key, c);
             }
             self.estimates.fetch_add(1, Ordering::Release);
             c
