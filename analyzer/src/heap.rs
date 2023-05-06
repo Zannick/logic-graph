@@ -883,6 +883,17 @@ where
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
             queue_buckets
         );
+        let bucket_min: f64 = <usize as TryInto<u32>>::try_into(
+            queue_buckets
+                .iter()
+                .enumerate()
+                .skip_while(|(_, x)| **x == 0)
+                .next()
+                .map(|x| x.0)
+                .unwrap_or_default(),
+        )
+        .unwrap()
+        .into();
 
         let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
@@ -901,7 +912,7 @@ where
             .y_label("progress")
             .x_range(0., self.db.max_time().into())
             .y_range(
-                -1.,
+                bucket_min - 1.,
                 <usize as TryInto<u32>>::try_into(queue_buckets.len())
                     .unwrap()
                     .into(),
