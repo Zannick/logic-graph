@@ -318,7 +318,11 @@ where
     }
 
     pub fn retrieve<T>(&mut self, ArchivedContextWrapper { ctx, elapsed, hist_archive }: ArchivedContextWrapper<T>) -> BaseContextWrapper<T, I, S, L, E, A, Wp> {
-        BaseContextWrapper { ctx, elapsed, history: self.archive.remove(&hist_archive) }
+        let history = self.archive.remove(&hist_archive);
+        if hist_archive > 0 {
+            assert!(history.is_some(), "Attempted to retrieve missing history entry {}", hist_archive);
+        }
+        BaseContextWrapper { ctx, elapsed, history }
     }
 
     pub fn remove<T>(&mut self, ArchivedContextWrapper { ctx: _, elapsed: _, hist_archive }: ArchivedContextWrapper<T>) {
