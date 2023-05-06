@@ -760,7 +760,7 @@ where
         let vec: Vec<ContextWrapper<T>> = iter
             .into_iter()
             .filter(|el| {
-                if el.elapsed() > self.db.max_time() || self.db.score(&el) > self.db.max_time() {
+                if el.elapsed() > self.db.max_time() || self.db.score(el) > self.db.max_time() {
                     iskips += 1;
                     false
                 } else {
@@ -859,7 +859,7 @@ where
         let mut time_progress = Vec::new();
         for c in queue.iter() {
             let elapsed: f64 = c.0.elapsed().into();
-            let score: f64 = self.db.score(&c.0).into();
+            let score: f64 = self.db.score(c.0).into();
             let progress: u32 = self.db.progress(c.0.get()).try_into().unwrap();
             let progress: f64 = progress.into();
             time_scores.push((elapsed, score));

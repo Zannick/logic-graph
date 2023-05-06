@@ -38,7 +38,7 @@ struct HeapDBOptions {
     path: PathBuf,
 }
 
-pub struct HeapDB<'w, W: World, T> {
+pub struct HeapDB<'w, W: World, T: Ctx> {
     scorer: ContextScorer<
         'w,
         W,
@@ -55,6 +55,7 @@ pub struct HeapDB<'w, W: World, T> {
     _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
+    archiver: Mutex<HistoryArchiveAlias<T, W>>,
     max_time: AtomicU32,
 
     seq: AtomicU64,
@@ -68,7 +69,6 @@ pub struct HeapDB<'w, W: World, T> {
     deletes: AtomicUsize,
     delete: AtomicU64,
 
-    retrieve_lock: Mutex<()>,
     bg_deletes: AtomicUsize,
 
     phantom: PhantomData<T>,
@@ -226,6 +226,7 @@ where
                 path: path2,
             },
             write_opts,
+            archiver: Mutex::new(HistoryArchive::new()),
             max_time: initial_max_time.into(),
             seq: 0.into(),
             size: 0.into(),
@@ -236,7 +237,6 @@ where
             dup_pskips: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
-            retrieve_lock: Mutex::new(()),
             bg_deletes: 0.into(),
             phantom: PhantomData,
         })
@@ -334,16 +334,21 @@ where
         key
     }
 
-    /// The value for a ContextWrapper<T> in the heap is... itself!
+    /// The value for a ContextWrapper<T> in the heap is... an archived version of itself!
     /// Unfortunately this is serializing the T (Ctx) a second time if we already got the state key.
-    fn get_heap_value(el: &ContextWrapper<T>) -> Vec<u8> {
+    fn get_heap_value(archiver: &mut HistoryArchiveAlias<T, W>, el: ContextWrapper<T>) -> Vec<u8> {
+        let el = archiver.archive(el);
         let mut val = Vec::new();
         el.serialize(&mut Serializer::new(&mut val)).unwrap();
         val
     }
 
-    fn get_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
-        Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
+    fn peek_obj_from_heap_value(buf: &[u8]) -> Result<ArchivedContextWrapper<T>, Error> {
+        Ok(rmp_serde::from_slice::<ArchivedContextWrapper<T>>(buf)?)
+    }
+
+    fn get_obj_from_heap_value(archiver: &mut HistoryArchiveAlias<T, W>, buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
+        Ok(archiver.retrieve(rmp_serde::from_slice::<ArchivedContextWrapper<T>>(buf)?))
     }
 
     fn get_state_value(&self, cf: &ColumnFamily, state_key: &[u8]) -> Result<Option<u32>, Error> {
@@ -440,7 +445,7 @@ where
     /// Scores a state based on its elapsed time and its estimated time to the goal.
     /// Recursively estimates time to the goal based on the closest objective item remaining,
     /// and stores the information in the db.
-    pub fn score(&self, el: &ContextWrapper<T>) -> u32 {
+    pub fn score<R>(&self, el: &R) -> u32 where R: Wrapper<T> {
         el.elapsed() + self.estimated_remaining_time(el.get())
     }
 
@@ -457,14 +462,17 @@ where
             return Ok(());
         }
         let key = self.get_heap_key(&el);
-        let val = Self::get_heap_value(&el);
+        let val = {
+            let mut archiver = self.archiver.lock().unwrap();
+            Self::get_heap_value(&mut archiver, el)
+        };
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
     }
 
     pub fn pop(&self, score_hint: Option<u32>) -> Result<Option<ContextWrapper<T>>, Error> {
-        let _lock = self.retrieve_lock.lock().unwrap();
+        let mut archiver = self.archiver.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         let prefix: [u8; 4];
@@ -497,7 +505,7 @@ where
                 println!("Compacting took {:?}", start.elapsed());
             }
 
-            let el = Self::get_obj_from_heap_value(&value)?;
+            let el = Self::get_obj_from_heap_value(&mut archiver, &value)?;
             if el.elapsed() > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
@@ -542,6 +550,7 @@ where
 
         let seen_values = self.get_seen_values(to_add.iter().map(|(_, k)| k))?;
 
+        let mut archiver = self.archiver.lock().unwrap();
         for ((el, seen_key), seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
             if el.elapsed() > max_time || self.score(&el) > max_time {
                 skips += 1;
@@ -564,9 +573,10 @@ where
                 seen_batch.merge_cf(cf, &seen_key, el.elapsed().to_be_bytes());
             }
             let key = self.get_heap_key(&el);
-            let val = Self::get_heap_value(&el);
+            let val = Self::get_heap_value(&mut archiver, el);
             batch.put(key, val);
         }
+        drop(archiver);
         let new = batch.len();
         let new_seen = seen_batch.len();
         self.db.write_opt(batch, &self.write_opts)?;
@@ -590,7 +600,7 @@ where
         start_priority: u32,
         count: usize,
     ) -> Result<Vec<ContextWrapper<T>>, Error> {
-        let _lock = self.retrieve_lock.lock().unwrap();
+        let mut archiver = self.archiver.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -614,7 +624,7 @@ where
         max.copy_from_slice(&key);
         batch.delete(key);
 
-        let el = Self::get_obj_from_heap_value(&value)?;
+        let el = Self::get_obj_from_heap_value(&mut archiver, &value)?;
         let max_time = self.max_time();
         if el.elapsed() > max_time || self.score(&el) > max_time {
             pskips += 1;
@@ -633,7 +643,7 @@ where
                     batch.delete(key);
                     pops += 1;
 
-                    let el = Self::get_obj_from_heap_value(&value)?;
+                    let el = Self::get_obj_from_heap_value(&mut archiver, &value)?;
                     let max_time = self.max_time();
                     if el.elapsed() > max_time || self.score(&el) > max_time {
                         pskips += 1;
@@ -799,17 +809,18 @@ where
             let mut pskips = 0;
             let mut dup_pskips = 0;
             let mut count = batch_size;
-            let _lock = self.retrieve_lock.lock().unwrap();
+            let mut archiver = self.archiver.lock().unwrap();
 
             while count > 0 {
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
                     count -= 1;
 
-                    let el = Self::get_obj_from_heap_value(&value)?;
+                    let el = Self::peek_obj_from_heap_value(&value)?;
                     let max_time = self.max_time();
                     if el.elapsed() > max_time || self.score(&el) > max_time {
                         batch.delete(key);
+                        archiver.remove(el);
                         pskips += 1;
                         continue;
                     }
@@ -818,12 +829,13 @@ where
                     if let Some(stored) = self.get_seen_value(&seen_key)? {
                         if el.elapsed() > stored {
                             batch.delete(key);
+                            archiver.remove(el);
                             dup_pskips += 1;
                             continue;
                         }
                     }
                 } else {
-                    drop(_lock);
+                    drop(archiver);
                     let start = Instant::now();
                     self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
                     println!("Bg thread compacting took {:?}", start.elapsed());
@@ -831,7 +843,7 @@ where
                 }
             }
             self.db.write_opt(batch, &self.write_opts).unwrap();
-            drop(_lock);
+            drop(archiver);
             self.pskips.fetch_add(pskips, Ordering::Release);
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
             self.bg_deletes
@@ -855,7 +867,7 @@ where
         let iter = self.db.iterator_opt(IteratorMode::Start, read_opts);
         for item in iter {
             let (_, value) = item?;
-            let el = Self::get_obj_from_heap_value(&value)?;
+            let el = Self::peek_obj_from_heap_value(&value)?;
             times.push(el.elapsed().into());
             time_scores.push((el.elapsed().into(), self.score(&el).into()));
         }

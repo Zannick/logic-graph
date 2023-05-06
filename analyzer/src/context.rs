@@ -1,7 +1,9 @@
 use crate::world::*;
+use crate::{CommonHasher, new_hashmap};
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::str::FromStr;
@@ -264,7 +266,75 @@ where
     }
 }
 
-#[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
+pub trait Wrapper<T> {
+    fn get(&self) -> &T;
+    fn elapsed(&self) -> u32;
+}
+pub struct HistoryArchive<I, S, L, E, A, Wp> {
+    next: usize,
+    archive: HashMap<usize, Arc<HistoryNode<I, S, L, E, A, Wp>>, CommonHasher>,
+}
+
+#[derive(Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ArchivedContextWrapper<T> {
+    ctx: T,
+    elapsed: u32,
+    hist_archive: usize,
+}
+impl<T> Wrapper<T> for ArchivedContextWrapper<T> {
+    fn get(&self) -> &T {
+        &self.ctx
+    }
+    fn elapsed(&self) -> u32 {
+        self.elapsed
+    }
+}
+
+impl<I, S, L, E, A, Wp> HistoryArchive<I, S, L, E, A, Wp>
+where
+    I: Hash,
+    S: Hash,
+    L: Hash,
+    E: Hash,
+    A: Hash,
+    Wp: Hash,
+     {
+    pub fn new() -> Self {
+        Self {
+            next: 1,  // reserve 0 for the None
+            archive: new_hashmap(),
+        }
+    }
+
+    pub fn archive<T>(&mut self, BaseContextWrapper {ctx, elapsed, history}: BaseContextWrapper<T, I, S, L, E, A, Wp>) -> ArchivedContextWrapper<T> {
+        if let Some(hist) = history {
+            let hist_archive = self.next;
+            self.next += 1;
+            self.archive.insert(hist_archive, hist);
+            ArchivedContextWrapper { ctx, elapsed, hist_archive }
+        } else {
+            ArchivedContextWrapper { ctx, elapsed, hist_archive: 0 }
+        }
+    }
+
+    pub fn retrieve<T>(&mut self, ArchivedContextWrapper { ctx, elapsed, hist_archive }: ArchivedContextWrapper<T>) -> BaseContextWrapper<T, I, S, L, E, A, Wp> {
+        BaseContextWrapper { ctx, elapsed, history: self.archive.remove(&hist_archive) }
+    }
+
+    pub fn remove<T>(&mut self, ArchivedContextWrapper { ctx: _, elapsed: _, hist_archive }: ArchivedContextWrapper<T>) {
+        self.archive.remove(&hist_archive);
+    }
+}
+pub type HistoryArchiveAlias<T, W> = HistoryArchive<
+<T as Ctx>::ItemId,
+<<W as World>::Exit as Exit>::SpotId,
+<<W as World>::Location as Location>::LocId,
+<<W as World>::Exit as Exit>::ExitId,
+<<W as World>::Action as Action>::ActionId,
+<<W as World>::Warp as Warp>::WarpId,
+>;
+
+#[derive(Clone, Debug, Hash, PartialEq, Eq)]
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
@@ -283,6 +353,15 @@ pub type ContextWrapper<T> = BaseContextWrapper<
     <<<T as Ctx>::World as World>::Action as Action>::ActionId,
     <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
 >;
+
+impl<T: Ctx> Wrapper<T> for ContextWrapper<T> {
+    fn get(&self) -> &T {
+        &self.ctx
+    }
+    fn elapsed(&self) -> u32 {
+        self.elapsed
+    }
+}
 
 impl<T: Ctx> ContextWrapper<T> {
     pub fn new(ctx: T) -> ContextWrapper<T> {
@@ -312,14 +391,6 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn elapse(&mut self, t: u32) {
         self.elapsed += t;
-    }
-
-    pub fn elapsed(&self) -> u32 {
-        self.elapsed
-    }
-
-    pub fn get(&self) -> &T {
-        &self.ctx
     }
 
     pub fn get_mut(&mut self) -> &mut T {
