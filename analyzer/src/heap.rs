@@ -539,7 +539,8 @@ where
         max_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
         let mut evicted: Vec<_> = queue
-            .pop_all_with_priority(el_estimate, max_evictions)
+        // TODO: segment weight should be more like max_time / max progress?
+            .pop_all_with_priority(el_estimate, max_evictions, 10000)
             .into_iter()
             .map(|(c, _)| c)
             .collect();
@@ -813,7 +814,11 @@ where
         // Without the lock (but still blocking the extend op in this thread)
         if let Some(ev) = evicted {
             let len = ev.len();
-            println!("extend+evict took {:?} with the lock, got {} elements", start.elapsed(), len);
+            println!(
+                "extend+evict took {:?} with the lock, got {} elements",
+                start.elapsed(),
+                len
+            );
             let start = Instant::now();
             if !ev.is_empty() {
                 let best = ev.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
@@ -896,7 +901,12 @@ where
             .x_label("elapsed time")
             .y_label("progress")
             .x_range(0., self.db.max_time().into())
-            .y_range(-1., <usize as TryInto<u32>>::try_into(queue_buckets.len()).unwrap().into());
+            .y_range(
+                -1.,
+                <usize as TryInto<u32>>::try_into(queue_buckets.len())
+                    .unwrap()
+                    .into(),
+            );
         println!(
             "Heap progress by time:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
