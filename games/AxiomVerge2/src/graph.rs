@@ -7736,6 +7736,27 @@ impl world::World for World {
         vec
     }
 
+    fn objective_items(&self) -> Vec<(Item, i16)> {
+        match self.objective {
+            Objective::Start => vec![(Item::Remote_Drone, 1)],
+            Objective::Progress => vec![
+                (Item::Companies_Layoff, 1),
+                (Item::Dear_Ernest, 1),
+                (Item::Flask, 7),
+                (Item::Heretics_Tablet, 1),
+                (Item::Letter_from_Trace, 1),
+                (Item::Power_Matrix, 1),
+                (Item::Record_Losses, 1),
+                (Item::Remote_Drone, 1),
+                (Item::Researchers_Missing, 1),
+                (Item::Shockwave, 1),
+                (Item::Terminal_Breakthrough_1, 1),
+                (Item::Under_Siege, 1),
+                (Item::Wall_Climb, 1),
+            ],
+        }
+    }
+
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
         movements::base_edges()
     }

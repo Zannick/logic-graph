@@ -385,6 +385,22 @@ impl world::World for World {
         vec
     }
 
+    fn objective_items(&self) -> Vec<(Item, i16)> {
+        match self.objective {
+%% for o, items in objective_items.items()
+            Objective::{{ o|construct_id }} => vec![
+%% for item, ct in items.items()|sort
+%% if ct == 1
+                    (Item::{{ item }}, 1),
+%% else
+                    (Item::{{ item }}, {{ ct }}),
+%% endif
+%% endfor
+            ],
+%% endfor
+        }
+    }
+
     fn base_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
         movements::base_edges()
     }

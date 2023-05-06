@@ -320,6 +320,7 @@ impl<T: Ctx> LimitedHeap<T> {
 pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     queue: Mutex<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
     db: HeapDB<'w, W, T>,
+    max_progress: u32,
     capacity: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
@@ -355,6 +356,12 @@ where
     where
         P: AsRef<Path>,
     {
+        let max_progress = world
+            .objective_items()
+            .into_iter()
+            .map(|(item, _)| world.get_item_locations(item))
+            .flatten()
+            .count();
         let q = RocksBackedQueue {
             queue: Mutex::new(BucketQueue::new()),
             db: HeapDB::open(db_path, initial_max_time, world, startctx.get())?,
@@ -362,6 +369,7 @@ where
             iskips: 0.into(),
             pskips: 0.into(),
             min_db_estimate: u32::MAX.into(),
+            max_progress: max_progress.try_into().unwrap(),
             min_evictions,
             max_evictions,
             min_reshuffle,
@@ -501,6 +509,7 @@ where
                     evicted = Some(Self::evict_until(
                         &mut queue,
                         est_complete,
+                        self.db.max_time() / self.max_progress,
                         self.min_evictions,
                         max_evictions,
                     ));
@@ -535,12 +544,12 @@ where
     fn evict_until(
         queue: &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
         el_estimate: u32,
+        segment_backoff: u32,
         min_evictions: usize,
         max_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
         let mut evicted: Vec<_> = queue
-        // TODO: segment weight should be more like max_time / max progress?
-            .pop_all_with_priority(el_estimate, max_evictions, 10000)
+            .pop_all_with_priority(el_estimate, max_evictions, segment_backoff)
             .into_iter()
             .map(|(c, _)| c)
             .collect();
@@ -614,6 +623,7 @@ where
                         let evicted = Self::evict_until(
                             &mut queue,
                             threshold,
+                            self.db.max_time() / self.max_progress,
                             self.min_evictions,
                             len + 2 * num_to_restore - cap,
                         );
@@ -805,6 +815,7 @@ where
                 evicted = Some(Self::evict_until(
                     &mut queue,
                     el_estimate,
+                    self.db.max_time() / self.max_progress,
                     std::cmp::max(len + vec.len() - cap, self.min_evictions),
                     max_evictions,
                 ));

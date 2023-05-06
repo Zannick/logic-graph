@@ -152,6 +152,12 @@ pub trait World: Sync {
         <<Self::Location as Accessible>::Context as Ctx>::ItemId,
         i16,
     )>;
+    fn objective_items(
+        &self,
+    ) -> Vec<(
+        <<Self::Location as Accessible>::Context as Ctx>::ItemId,
+        i16,
+    )>;
 
     fn base_edges(
         &self,

@@ -83,7 +83,7 @@ where
         L: Location<Context = T>,
     {
         self.world
-            .items_needed(ctx)
+            .objective_items()
             .into_iter()
             .map(|(item, _)| self.world.get_item_locations(item))
             .flatten()
