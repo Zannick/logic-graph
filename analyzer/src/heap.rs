@@ -550,6 +550,7 @@ where
                 break;
             }
         }
+        queue.shrink_to_fit();
         evicted
     }
 

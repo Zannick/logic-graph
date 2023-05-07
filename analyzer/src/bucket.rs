@@ -52,6 +52,7 @@ pub trait SegmentBucket<P: Ord>: Bucket {
     fn min_priority(&self) -> Option<&P>;
     fn max_priority(&self) -> Option<&P>;
 
+    fn shrink_to_fit(&mut self);
     fn iter(&self) -> priority_queue::core_iterators::Iter<Self::Item, P>
     where
         Self::Item: Hash + Eq;
@@ -88,6 +89,10 @@ where
 
     fn max_priority(&self) -> Option<&P> {
         self.pq.peek_max().map(|(_, p)| p)
+    }
+
+    fn shrink_to_fit(&mut self) {
+        self.pq.shrink_to_fit();
     }
 
     fn iter(&self) -> priority_queue::core_iterators::Iter<I, P>
@@ -242,6 +247,14 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
             vec
         } else {
             Vec::new()
+        }
+    }
+
+    fn shrink_to_fit(&mut self) {
+        let mut segment = 0;
+        while let Some(b) = self.bucket_for_replacing(segment) {
+            b.shrink_to_fit();
+            segment += 1;
         }
     }
 
