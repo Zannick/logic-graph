@@ -1,5 +1,6 @@
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
+use as_slice::AsSlice;
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
@@ -16,8 +17,15 @@ pub trait Ctx:
     type ItemId: Id + Default;
     type AreaId: Id;
     type RegionId: Id;
-    type MovementState: Copy + Clone + Eq + Debug + Hash;
+    type MovementState: Copy + Clone + Eq + Debug + Hash + AsSlice<Element = bool>;
     const NUM_ITEMS: u32;
+
+    fn is_subset(sub: Self::MovementState, sup: Self::MovementState) -> bool {
+        let s1 = AsSlice::as_slice(&sub);
+        let s2 = AsSlice::as_slice(&sup);
+        // sup <= sup if for all (a,b), a is false or b is true
+        s1.len() == s2.len() && s1.iter().zip(s2.iter()).all(|(a, b)| *b || !*a )
+    }
 
     fn has(&self, item: Self::ItemId) -> bool;
     fn count(&self, item: Self::ItemId) -> i16;
