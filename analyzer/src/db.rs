@@ -859,6 +859,7 @@ where
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
             self.bg_deletes
                 .fetch_add(pskips + dup_pskips, Ordering::Release);
+            self.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
             if pskips > 0 || dup_pskips > 0 {
                 println!(
                     "Background thread deleted {} expired and {} duplicate elements",
