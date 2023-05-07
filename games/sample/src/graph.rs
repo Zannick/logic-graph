@@ -2243,6 +2243,58 @@ impl world::World for World {
     fn min_warp_time(&self) -> u32 {
         self.min_warp_time
     }
+
+    fn spot_of_interest(&self, sp: SpotId) -> bool {
+        match sp {
+            SpotId::Deku_Tree__Back_Room__East
+            | SpotId::Deku_Tree__Back_Room__Northwest
+            | SpotId::Deku_Tree__Basement_1__Center
+            | SpotId::Deku_Tree__Basement_1__Corner
+            | SpotId::Deku_Tree__Basement_1__South_Door
+            | SpotId::Deku_Tree__Basement_2__Boss_Door
+            | SpotId::Deku_Tree__Basement_2__Pool
+            | SpotId::Deku_Tree__Basement_Ledge__Block
+            | SpotId::Deku_Tree__Basement_Ledge__Web
+            | SpotId::Deku_Tree__Boss_Room__Arena
+            | SpotId::Deku_Tree__Compass_Room__Compass
+            | SpotId::Deku_Tree__Compass_Room__Entry
+            | SpotId::Deku_Tree__Compass_Room__Ledge
+            | SpotId::Deku_Tree__Floor_2__Lower
+            | SpotId::Deku_Tree__Floor_2__Slingshot_Door
+            | SpotId::Deku_Tree__Floor_2__Vines
+            | SpotId::Deku_Tree__Floor_3__Door
+            | SpotId::Deku_Tree__Lobby__Center
+            | SpotId::Deku_Tree__Lobby__Vines
+            | SpotId::Deku_Tree__Scrub_Room__Entry
+            | SpotId::Deku_Tree__Scrub_Room__Rear
+            | SpotId::Deku_Tree__Skull_Room__Entry
+            | SpotId::Deku_Tree__Slingshot_Room__Entry
+            | SpotId::Deku_Tree__Slingshot_Room__Slingshot
+            | SpotId::Deku_Tree__Slingshot_Upper__Ledge
+            | SpotId::Kak__Spider_House__Entry
+            | SpotId::KF__Baba_Corridor__Deku_Babas
+            | SpotId::KF__Baba_Corridor__Tree_Side
+            | SpotId::KF__Baba_Corridor__Village_Side
+            | SpotId::KF__Boulder_Maze__Entry
+            | SpotId::KF__Boulder_Maze__Reward
+            | SpotId::KF__Know_it_all_House__Entry
+            | SpotId::KF__Kokiri_Village__Know_it_all_Porch
+            | SpotId::KF__Kokiri_Village__Links_Porch
+            | SpotId::KF__Kokiri_Village__Midos_Guardpost
+            | SpotId::KF__Kokiri_Village__Midos_Porch
+            | SpotId::KF__Kokiri_Village__Sarias_Porch
+            | SpotId::KF__Kokiri_Village__Shop_Porch
+            | SpotId::KF__Kokiri_Village__Training_Center
+            | SpotId::KF__Links_House__Entry
+            | SpotId::KF__Midos_House__Entry
+            | SpotId::KF__Outside_Deku_Tree__Entry
+            | SpotId::KF__Outside_Deku_Tree__Left
+            | SpotId::KF__Outside_Deku_Tree__Mouth
+            | SpotId::KF__Outside_Deku_Tree__Right
+            | SpotId::KF__Shop__Entry => true,
+            _ => false,
+        }
+    }
 }
 
 impl World {

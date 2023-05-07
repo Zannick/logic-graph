@@ -441,9 +441,9 @@ impl World {
                 end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
             },
-            min_warp_time: {% if warps.values()|selectattr('base_movement', 'undefined')|first -%}
+            min_warp_time: {% if warps.values()|selectattr('base_movement', 'false')|first -%}
                 {%- if global_actions|selectattr('to')|first -%}
-                std::cmp::min({{ (warps.values()|selectattr('base_movement', 'undefined')|map(attribute='time')|min * 1000)|int }},
+                std::cmp::min({{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }},
                     {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }})
                 {%- else -%}
                     {{ (warps.values()|selectattr('base_movement', 'false')|map(attribute='time')|min * 1000)|int }}

@@ -7778,21 +7778,31 @@ impl world::World for World {
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom
             | SpotId::Amagi__Cave_Behind_Waterfall__Middle
             | SpotId::Amagi__Cave_Behind_Waterfall__Top
+            | SpotId::Amagi__Grid_31_19__East
+            | SpotId::Amagi__Grid_31_19__West
             | SpotId::Amagi__Liru_Room__Shrine
+            | SpotId::Amagi__Liru_Room__West_19
             | SpotId::Amagi__Main_Area__Broken_Wall
             | SpotId::Amagi__Main_Area__Carving
             | SpotId::Amagi__Main_Area__East_15
+            | SpotId::Amagi__Main_Area__East_19
             | SpotId::Amagi__Main_Area__East_Ledge
             | SpotId::Amagi__Main_Area__Platform_2
             | SpotId::Amagi__Main_Area__Save_Point
             | SpotId::Amagi__Main_Area__Secret_Outcropping
             | SpotId::Amagi__Main_Area__Secret_Waterfall
             | SpotId::Amagi__Main_Area__Way_Off_To_The_Side
+            | SpotId::Amagi__Main_Area__West_15
+            | SpotId::Amagi__Main_Area__West_18
+            | SpotId::Amagi__Main_Area__West_19
             | SpotId::Amagi__Main_Area__West_Side
             | SpotId::Amagi__West_Lake__Cavern_Eye
             | SpotId::Amagi__West_Lake__Cavern_Rear_Pillar
             | SpotId::Amagi__West_Lake__Cavern_Refill_Station
             | SpotId::Amagi__West_Lake__Cavern_Tear_Duct
+            | SpotId::Amagi__West_Lake__East_15
+            | SpotId::Amagi__West_Lake__East_18
+            | SpotId::Amagi__West_Lake__East_19
             | SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left
             | SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right
             | SpotId::Amagi__West_Lake__Stronghold_Front_Door
@@ -7803,15 +7813,19 @@ impl world::World for World {
             | SpotId::Amagi__West_Lake__Stronghold_Top
             | SpotId::Amagi__West_Lake__Surface_Wall_Left
             | SpotId::Amagi__West_Lake__Surface_Wall_Right
+            | SpotId::Antarctica__Building_1E__Connector
             | SpotId::Antarctica__Building_1E__East_Entry
+            | SpotId::Antarctica__Building_1W__Connector
             | SpotId::Antarctica__Building_1W__West_Entry
             | SpotId::Antarctica__Building_2L__Entry
             | SpotId::Antarctica__Building_2U__Door
+            | SpotId::Antarctica__Building_2U__Stairs
             | SpotId::Antarctica__Building_2U_Corner__Behind_Boxes
             | SpotId::Antarctica__East__Building_1_Entry
             | SpotId::Antarctica__East__Building_2_Entry
             | SpotId::Antarctica__East__Building_2_Upper
             | SpotId::Antarctica__Freight_Elevator__Controls
+            | SpotId::Antarctica__Freight_Elevator__Left
             | SpotId::Antarctica__Power_Room__Entry
             | SpotId::Antarctica__Power_Room__Switch
             | SpotId::Antarctica__Shed__Interior
@@ -7828,26 +7842,44 @@ impl world::World for World {
             | SpotId::Ebih__Base_Camp__Save_Point
             | SpotId::Ebih__Base_Camp__Tent_Entry
             | SpotId::Ebih__Base_Camp__Top_Platform
+            | SpotId::Ebih__Base_Camp__West_12
+            | SpotId::Ebih__Base_Camp__West_13
             | SpotId::Ebih__Boss_Room__Boss
+            | SpotId::Ebih__Boss_Room__East_4
+            | SpotId::Ebih__Boss_Room__East_6
             | SpotId::Ebih__Boss_Room__East_Ledge
+            | SpotId::Ebih__Boss_Room__West_6
             | SpotId::Ebih__Building_Interior__Corner
             | SpotId::Ebih__Building_Interior__Entry
             | SpotId::Ebih__Bunker_Interior__Desk
             | SpotId::Ebih__Bunker_Interior__Entry
             | SpotId::Ebih__By_Garage__Crawlspace
+            | SpotId::Ebih__By_Garage__East_13
             | SpotId::Ebih__By_Garage__Garage_Entry
+            | SpotId::Ebih__By_Garage__West_12
             | SpotId::Ebih__Cave__Entry
+            | SpotId::Ebih__Drone_Room__East_4
             | SpotId::Ebih__Drone_Room__Item
             | SpotId::Ebih__Drone_Room__Middle_Platform
             | SpotId::Ebih__Drone_Room__Moving_Platform
             | SpotId::Ebih__Drone_Room__Pit_Left
             | SpotId::Ebih__Drone_Room__Portal_Exit
+            | SpotId::Ebih__Drone_Room__West_4
+            | SpotId::Ebih__Drone_Room__West_6
             | SpotId::Ebih__Ebih_East__Corner
             | SpotId::Ebih__Ebih_East__Dispenser
+            | SpotId::Ebih__Ebih_East__East_9
             | SpotId::Ebih__Ebih_East__East_Ledge
             | SpotId::Ebih__Ebih_East__Lower_Moving_Platform
             | SpotId::Ebih__Ebih_East__Moving_Platform
+            | SpotId::Ebih__Ebih_East__West_7
+            | SpotId::Ebih__Ebih_East__West_8
             | SpotId::Ebih__Ebih_West__Alcove
+            | SpotId::Ebih__Ebih_West__East_10
+            | SpotId::Ebih__Ebih_West__East_6
+            | SpotId::Ebih__Ebih_West__East_7
+            | SpotId::Ebih__Ebih_West__East_8
+            | SpotId::Ebih__Ebih_West__East_9
             | SpotId::Ebih__Ebih_West__Giguna_Pillar
             | SpotId::Ebih__Ebih_West__Medium_High_Platform
             | SpotId::Ebih__Ebih_West__Mid_Save
@@ -7855,27 +7887,51 @@ impl world::World for World {
             | SpotId::Ebih__Ebih_West__West_9
             | SpotId::Ebih__Garage__Boxes
             | SpotId::Ebih__Garage__Entry
+            | SpotId::Ebih__Grid_21_1_5__East_6
+            | SpotId::Ebih__Grid_21_1_5__West_6
             | SpotId::Ebih__Grid_25_10_12__Door_Left
             | SpotId::Ebih__Grid_25_10_12__East_10
             | SpotId::Ebih__Grid_25_10_12__East_11
+            | SpotId::Ebih__Grid_25_10_12__East_12
             | SpotId::Ebih__Grid_25_10_12__Hidden_Bush
+            | SpotId::Ebih__Grid_25_10_12__West_10
+            | SpotId::Ebih__Grid_25_10_12__West_11
             | SpotId::Ebih__Grid_25_2_6__Pit
+            | SpotId::Ebih__Grid_25_2_6__West_4
+            | SpotId::Ebih__Grid_26_10_11__East_10
             | SpotId::Ebih__Grid_26_10_11__Ledge
+            | SpotId::Ebih__Grid_26_10_11__West_10
+            | SpotId::Ebih__Grid_26_10_11__West_11
+            | SpotId::Ebih__Observation_Tower_Room__East_11
+            | SpotId::Ebih__Observation_Tower_Room__West_10
+            | SpotId::Ebih__Observation_Tower_Room__West_9
             | SpotId::Ebih__Tent_Interior__Desk
             | SpotId::Ebih__Tent_Interior__Entry
             | SpotId::Ebih__Waterfall__Alcove
             | SpotId::Ebih__Waterfall__Alcove_Left
             | SpotId::Ebih__Waterfall__Alcove_Right
             | SpotId::Ebih__Waterfall__Below_Left_Switch
+            | SpotId::Ebih__Waterfall__Cave_Entrance
+            | SpotId::Ebih__Waterfall__East_10
+            | SpotId::Ebih__Waterfall__East_11
+            | SpotId::Ebih__Waterfall__East_7
+            | SpotId::Ebih__Waterfall__East_8
             | SpotId::Ebih__Waterfall__Ledge_Below_Hole
             | SpotId::Ebih__Waterfall__Waterfall_Center_Center
+            | SpotId::Ebih__Waterfall__West_10
+            | SpotId::Ebih__Waterfall__West_7
+            | SpotId::Ebih__Waterfall__West_8
+            | SpotId::Ebih__Waterfall__West_9
             | SpotId::Giguna__Building_Interior__Bookshelf
             | SpotId::Giguna__Building_Interior__Entry
+            | SpotId::Giguna__Carnelian__East_10
             | SpotId::Giguna__Carnelian__Lower_Susar
             | SpotId::Giguna__Carnelian__Switch
             | SpotId::Giguna__Carnelian__Upper_Susar
             | SpotId::Giguna__Carnelian__Vault
+            | SpotId::Giguna__Carnelian__West_10
             | SpotId::Giguna__Giguna_Base__Building_Entry
+            | SpotId::Giguna__Giguna_Base__East_14
             | SpotId::Giguna__Giguna_Base__Ruin
             | SpotId::Giguna__Giguna_Base__Save_Point
             | SpotId::Giguna__Giguna_Base__Stone_Knob
@@ -7888,27 +7944,82 @@ impl world::World for World {
             | SpotId::Giguna__Giguna_Northeast__Right_Column
             | SpotId::Giguna__Giguna_Northeast__Save_Point
             | SpotId::Giguna__Giguna_Northeast__Switch
+            | SpotId::Giguna__Giguna_Northeast__West_10
+            | SpotId::Giguna__Giguna_Northeast__West_9
+            | SpotId::Giguna__Ruins_Center__East_8
+            | SpotId::Giguna__Ruins_Center__East_9
             | SpotId::Giguna__Ruins_Center__Tablet
+            | SpotId::Giguna__Ruins_East__West_8
+            | SpotId::Giguna__Ruins_East__West_9
             | SpotId::Giguna__Wasteland__Middle_Cliff
+            | SpotId::Giguna__Wasteland__West_12
+            | SpotId::Giguna__Wasteland__West_13
+            | SpotId::Giguna__Wasteland__West_14
             | SpotId::Giguna__West_Caverns__Bush
             | SpotId::Giguna__West_Caverns__Cache
+            | SpotId::Giguna__West_Caverns__East_10
+            | SpotId::Giguna__West_Caverns__East_12
+            | SpotId::Giguna__West_Caverns__East_13
             | SpotId::Giguna__West_Caverns__East_Susar
             | SpotId::Giguna__West_Caverns__Small_Platform
             | SpotId::Glacier__Apocalypse_Entry__Terminal
+            | SpotId::Glacier__Apocalypse_Entry__West
+            | SpotId::Glacier__Boomerang_Antechamber__East_12
+            | SpotId::Glacier__Boomerang_Antechamber__Upper_East
+            | SpotId::Glacier__Boomerang_Antechamber__West_12
+            | SpotId::Glacier__Boomerang_Antechamber__West_13
+            | SpotId::Glacier__Boomerang_Room__Center_ish
             | SpotId::Glacier__Boomerang_Room__Pedestal
+            | SpotId::Glacier__Boomerang_Room__Platform
+            | SpotId::Glacier__Boomerang_Room__West
+            | SpotId::Glacier__Boomerang_Room_Switched__Pedestal
+            | SpotId::Glacier__Boomerang_Room_Switched__Platform
+            | SpotId::Glacier__Boomerang_Room_Switched__Upper_West
             | SpotId::Glacier__Compass_Room__Center
+            | SpotId::Glacier__Compass_Room__East
+            | SpotId::Glacier__Compass_Room__West
+            | SpotId::Glacier__Dock_Elevator__Connector
+            | SpotId::Glacier__Dock_Interior__Connector
             | SpotId::Glacier__Dock_Interior__Entry
+            | SpotId::Glacier__Dock_Outside__Do_Not_Enter
             | SpotId::Glacier__Dock_Outside__Entry
+            | SpotId::Glacier__Grid_31_9_12__East_10
+            | SpotId::Glacier__Grid_31_9_12__East_9
             | SpotId::Glacier__Grid_31_9_12__Midair
             | SpotId::Glacier__Grid_31_9_12__West_12
+            | SpotId::Glacier__Grid_32_7_10__East_8
+            | SpotId::Glacier__Grid_32_7_10__West_9
+            | SpotId::Glacier__Grid_37_38_9__East
+            | SpotId::Glacier__Grid_37_38_9__West
+            | SpotId::Glacier__Grid_39_40_7_9__Upper_East
+            | SpotId::Glacier__Grid_39_40_7_9__West
+            | SpotId::Glacier__Grid_42_10__East
+            | SpotId::Glacier__Grid_42_10__West
+            | SpotId::Glacier__Grid_43_10_11__East
+            | SpotId::Glacier__Grid_43_10_11__Lower
+            | SpotId::Glacier__Grid_43_10_11__Top
             | SpotId::Glacier__Lake_Main_Entrance__Ebih_Access
             | SpotId::Glacier__Lake_Main_Entrance__Lake_Access
             | SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom
+            | SpotId::Glacier__Ledge_Grab_Room__Column
+            | SpotId::Glacier__Ledge_Grab_Room__East_11
+            | SpotId::Glacier__Ledge_Grab_Room__East_9
             | SpotId::Glacier__Ledge_Grab_Room__Pedestal
+            | SpotId::Glacier__Peak__West_8
+            | SpotId::Glacier__Revival__East_9
+            | SpotId::Glacier__Revival__Lower_East
             | SpotId::Glacier__Revival__Save_Point
+            | SpotId::Glacier__Revival__West_8
+            | SpotId::Glacier__The_Big_Drop__East
             | SpotId::Glacier__The_Big_Drop__Water_Surface
+            | SpotId::Glacier__Vertical_Room__East_12
+            | SpotId::Glacier__Vertical_Room__East_13
+            | SpotId::Glacier__Vertical_Room__East_9
+            | SpotId::Glacier__Vertical_Room__Past_Gate
             | SpotId::Glacier__Vertical_Room__Peak
             | SpotId::Glacier__Vertical_Room__Under_Switch
+            | SpotId::Glacier__Vertical_Room__West_8
+            | SpotId::Glacier__Vertical_Room__West_9
             | SpotId::Menu__Upgrade_Menu__Combat
             | SpotId::Menu__Upgrade_Menu__Drone
             | SpotId::Menu__Upgrade_Menu__Infection
@@ -8399,7 +8510,7 @@ impl World {
                 start: ActionId::Global__Deploy_Drone.into_usize(),
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
-            min_warp_time: std::cmp::min(5000, 3000),
+            min_warp_time: 3000,
         }
     }
 

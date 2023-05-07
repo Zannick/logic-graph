@@ -101,3 +101,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
 %% endfor
     ]
 }
+
+pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementState, u32)>) {
+    match (sp1, sp2) {
+%% for (s, t), (time, mvmts) in movements_rev_lookup.items()|sort
+        (SpotId::{{ s }}, SpotId::{{ t }}) => (
+            {% if time < 0 %}None{% else %}Some({{ (time*1000)|int }}){% endif %},
+            vec![
+%% for m, mt in mvmts
+                ([{{ m|map('lower')|join(', ') }}], {{ (mt*1000)|int }}),
+%% endfor
+            ]),
+%% endfor
+        _ => (None, Vec::new()),
+    }
+}

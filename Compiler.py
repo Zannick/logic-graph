@@ -293,7 +293,9 @@ class GameLogic(object):
                         self.id_lookup[eh['id']] = eh
                         spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
-                        eh['keep'] = eh['to'].count('>') > 1 or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
+                        # Limit to in-Area by marking exits across Areas as keep
+                        # Maybe later we can try changing to in-Region or global
+                        eh['keep'] = '>' in eh['to'] or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
                                     eh['req'], eh['to'], spot['fullname'], ' ==> ')
@@ -631,6 +633,30 @@ class GameLogic(object):
                 if all(t is not None for t in times):
                     local_time[k] = times
         return table
+
+    def iter_movement_set_keys(self):
+        for mset in itertools.chain.from_iterable(
+                itertools.combinations(self.non_default_movements, r)
+                for r in range(0, len(self.non_default_movements) + 1)):
+            yield tuple(m in mset for m in self.non_default_movements)
+
+    @cached_property
+    def movements_rev_lookup(self):
+        # Precalculating which movement types we need available for what movement times
+        # so this will look like (sp1, sp2) -> (base movement time, [(mkey, time)])
+        base, *mkeys = list(self.iter_movement_set_keys())
+        table = {k: (sum(times), []) for k, times in self.movement_tables[base].items()}
+        def is_subset(x, y):
+            return all(b or not a for a, b in zip(x, y))
+        for mkey in mkeys:
+            for k, times in self.movement_tables[mkey].items():
+                t = sum(times)
+                if k not in table:
+                    table[k] = (-1, [])
+                if table[k][0] < 0 or (t < table[k][0] and not any(st < t for v, st in table[k][1] if is_subset(v, mkey))):
+                    table[k][1].append((mkey, t))
+        return table
+
     
     @cached_property
     def base_distances(self):
@@ -1278,6 +1304,7 @@ class GameLogic(object):
         self.default_price_type
         self.price_types
         self.movement_tables
+        self.movements_rev_lookup
         self.base_distances
         self.context_trigger_rules
         self.context_position_watchers
