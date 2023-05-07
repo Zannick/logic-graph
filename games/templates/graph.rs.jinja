@@ -416,6 +416,13 @@ impl world::World for World {
     fn min_warp_time(&self) -> u32 {
         self.min_warp_time
     }
+
+    fn spot_of_interest(&self, sp: SpotId) -> bool {
+        match sp {
+            SpotId::{{ gl.interesting_spots()|map(attribute='id')|sort|join(' | SpotId::') }} => true,
+            _ => false,
+        }
+    }
 }
 
 impl World {
@@ -434,7 +441,7 @@ impl World {
                 end: ActionId::{{ global_actions|map(attribute='id')|max }}.into_usize() + 1,
                 {%- else %}start: 0, end: 0,{% endif %}
             },
-            min_warp_time: {% if warps.values()|selectattr('base_movement', 'false')|first -%}
+            min_warp_time: {% if warps.values()|selectattr('base_movement', 'undefined')|first -%}
                 {%- if global_actions|selectattr('to')|first -%}
                 std::cmp::min({{ (warps.values()|selectattr('base_movement', 'undefined')|map(attribute='time')|min * 1000)|int }},
                     {{ (global_actions|selectattr('to')|map(attribute='time')|min * 1000)|int }})

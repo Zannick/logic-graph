@@ -219,6 +219,8 @@ class GameLogic(object):
 
 
     def process_regions(self):
+        # TODO: move to Game.yaml for customization
+        interesting_tags = ['interior', 'exterior']
         self.canon_places = defaultdict(list)
         # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
         self.regions = self._info['regions']
@@ -291,6 +293,7 @@ class GameLogic(object):
                         self.id_lookup[eh['id']] = eh
                         spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
+                        eh['keep'] = eh['to'].count('>') > 1 or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
                                     eh['req'], eh['to'], spot['fullname'], ' ==> ')
@@ -703,6 +706,12 @@ class GameLogic(object):
     def spots(self):
         return itertools.chain.from_iterable(a['spots'] for a in self.areas())
 
+
+    def interesting_spots(self):
+        return filter(
+            lambda s: s.get('keep') or 'locations' in s or 'actions' in s or 'hybrid' in s
+                or any(e['keep'] for e in s.get('exits', ())),
+            self.spots())
 
     # Hybrids are both locations and exits, so they have to be returned here
     # for both in order to create the appropriate ids.

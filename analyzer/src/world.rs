@@ -180,4 +180,5 @@ pub trait World: Sync {
     ) -> bool;
 
     fn min_warp_time(&self) -> u32;
+    fn spot_of_interest(&self, sp: <Self::Exit as Exit>::SpotId) -> bool;
 }

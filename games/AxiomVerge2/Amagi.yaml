@@ -72,6 +72,7 @@ areas:
         - to: Carving
           req: Underwater_Movement and $hook
           time: 2.3
+      keep: true
     - name: Platform 2
       coord: [28.05, 16.2]
       local:
@@ -88,6 +89,7 @@ areas:
       exits:
         - to: West Shelf
           req: $grab or $climb or $hook
+      keep: true
     - name: East Ledge
       coord: [28.25, 16.3]
       local:
@@ -95,6 +97,7 @@ areas:
           jumps: 1
         - to: Platform 3
         - to: Catwalk Center
+      keep: true
 
     - name: Carving
       coord: [27.1, 14.7]
@@ -215,6 +218,7 @@ areas:
           jumps: 1
         - to: Wall Stuck Spot
         - to: Save Point
+      keep: true
     - name: Wall Stuck Spot
       coord: [28.35, 17.9]
       local:
