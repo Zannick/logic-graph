@@ -727,11 +727,11 @@ where
             arccount,
             self.queue.evictions(),
             self.queue.retrievals(),
-            self.queue.background_deletes(),
             iskips,
             dskips,
             pskips,
             dpskips,
+            self.queue.background_deletes(),
             ctx.info(self.queue.estimated_remaining_time(ctx))
         );
     }
