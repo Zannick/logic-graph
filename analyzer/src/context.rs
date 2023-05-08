@@ -1,6 +1,7 @@
+use crate::condense::CondensedEdge;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
-use as_slice::{AsSlice, AsMutSlice};
+use as_slice::{AsMutSlice, AsSlice};
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
@@ -17,14 +18,20 @@ pub trait Ctx:
     type ItemId: Id + Default;
     type AreaId: Id;
     type RegionId: Id;
-    type MovementState: Copy + Clone + Eq + Debug + Hash + AsSlice<Element = bool> + AsMutSlice<Element = bool>;
+    type MovementState: Copy
+        + Clone
+        + Eq
+        + Debug
+        + Hash
+        + AsSlice<Element = bool>
+        + AsMutSlice<Element = bool>;
     const NUM_ITEMS: u32;
 
     fn is_subset(sub: Self::MovementState, sup: Self::MovementState) -> bool {
         let s1 = AsSlice::as_slice(&sub);
         let s2 = AsSlice::as_slice(&sup);
-        // sup <= sup if for all (a,b), a is false or b is true
-        s1.len() == s2.len() && s1.iter().zip(s2.iter()).all(|(a, b)| *b || !*a )
+        // sub <= sup if for all (a,b), a is false or b is true
+        s1.len() == s2.len() && s1.iter().zip(s2.iter()).all(|(a, b)| *b || !*a)
     }
 
     fn combine(mut ms1: Self::MovementState, ms2: Self::MovementState) -> Self::MovementState {
@@ -80,6 +87,7 @@ pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
     MoveGet(ItemId, ExitId),
     MoveLocal(SpotId),
     Activate(ActionId),
+    MoveCondensed(SpotId),
 }
 
 impl<I, S, L, E, A, Wp> Copy for History<I, S, L, E, A, Wp>
@@ -112,6 +120,7 @@ where
             }
             History::MoveLocal(spot) => write!(f, "  Move to {}", spot),
             History::Activate(action) => write!(f, "! Do {}", action),
+            History::MoveCondensed(spot) => write!(f, "  Move... to {}", spot),
         }
     }
 }
@@ -142,7 +151,7 @@ where
                 item.hash(state);
                 exit.hash(state);
             }
-            History::MoveLocal(spot) => {
+            History::MoveLocal(spot) | History::MoveCondensed(spot) => {
                 spot.hash(state);
             }
             History::Activate(action) => {
@@ -500,6 +509,17 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::MoveLocal(spot))
     }
 
+    pub fn move_condensed_edge<W, E>(&mut self, edge: &CondensedEdge<T, E::SpotId, E::ExitId>)
+    where
+        W: World<Exit = E>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T>,
+    {
+        self.ctx.set_position(edge.dst);
+        self.elapse(edge.time);
+        self.append_history(History::MoveCondensed(edge.dst));
+    }
+
     pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
     where
         W: World<Exit = E, Warp = Wp>,
@@ -603,6 +623,20 @@ impl<T: Ctx> ContextWrapper<T> {
                 let action = world.get_action(act_id);
                 self.activate(action);
             }
+            History::MoveCondensed(spot) => {
+                let vce = world.get_condensed_edges_from(self.ctx.position());
+                // Find the minimum of these edges that goes to spot that we can take
+                let ce = vce
+                    .iter()
+                    .filter(|&c| {
+                        c.dst == spot
+                            && c.can_access(world, self.get(), self.ctx.get_movement_state())
+                    })
+                    .min_by_key(|c| c.time);
+                self.move_condensed_edge(
+                    ce.expect(&format!("Invalid replay: move-condensed {:?}", spot)),
+                );
+            }
         }
     }
 
@@ -665,7 +699,7 @@ impl<T: Ctx> ContextWrapper<T> {
             .map(|h| match h {
                 History::Get(..) | History::MoveGet(..) | History::Activate(..) => h.to_string(),
                 History::Move(e) => format!("  Move... to {}", e),
-                History::MoveLocal(s) => {
+                History::MoveLocal(s) | History::MoveCondensed(s) => {
                     format!("  Move... to {}", s)
                 }
                 History::Warp(w, s) => {

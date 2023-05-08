@@ -37,6 +37,21 @@ where
             false
         }
     }
+
+    pub fn can_access<W>(&self, world: &W, ctx: &T, movements: T::MovementState) -> bool
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        if let Some(m) = &self.movement {
+            if !T::is_subset(*m, movements) {
+                return false;
+            }
+        }
+        self.reqs.iter().all(|&e| world.get_exit(e).can_access(ctx))
+    }
 }
 
 #[derive(Copy, Clone, Hash, Eq, PartialEq)]
