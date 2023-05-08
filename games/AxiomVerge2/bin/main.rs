@@ -2,13 +2,18 @@
 
 use analyzer::access::*;
 use analyzer::algo::Search;
+use analyzer::world::World;
 use libaxiom_verge2::*;
 use std::env;
+use std::time::Instant;
 
 fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
-    let (world, context, routes) =
+    let (mut world, context, routes) =
         settings::load_settings(if args.len() > 1 { Some(&args[1]) } else { None });
+    let start = Instant::now();
+    world.condense_graph();
+    println!("Condensing took {:?}", start.elapsed());
     assert!(
         can_win_just_items(&world, &context),
         "Available items not enough to complete objective {}",

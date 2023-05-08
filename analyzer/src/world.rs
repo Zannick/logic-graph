@@ -1,3 +1,4 @@
+use crate::condense::CondensedEdge;
 use crate::context::{ContextWrapper, Ctx};
 use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display};
@@ -194,4 +195,14 @@ pub trait World: Sync {
 
     fn min_warp_time(&self) -> u32;
     fn spot_of_interest(&self, sp: <Self::Exit as Exit>::SpotId) -> bool;
+
+    fn condense_graph(&mut self);
+    fn get_condensed_edges_from(
+        &self,
+        spot_id: <Self::Exit as Exit>::SpotId,
+    ) -> &[CondensedEdge<
+        <Self::Location as Accessible>::Context,
+        <Self::Exit as Exit>::SpotId,
+        <Self::Exit as Exit>::ExitId,
+    >];
 }

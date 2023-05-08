@@ -9,6 +9,7 @@ use crate::items::*;
 use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
+use analyzer::condense::{condense_graph, CondensedEdge};
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
@@ -7229,6 +7230,8 @@ pub struct World {
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
     min_warp_time: u32,
+    // Condensed edges
+    condensed: Option<EnumMap<SpotId, Vec<CondensedEdge<Context, SpotId, ExitId>>>>,
 }
 
 impl world::World for World {
@@ -8206,6 +8209,22 @@ impl world::World for World {
             _ => false,
         }
     }
+
+    fn condense_graph(&mut self) {
+        let mut emap = EnumMap::default();
+        emap.extend(condense_graph(self));
+        self.condensed = Some(emap);
+    }
+
+    fn get_condensed_edges_from(
+        &self,
+        spot_id: SpotId,
+    ) -> &[CondensedEdge<Context, SpotId, ExitId>] {
+        &self
+            .condensed
+            .as_ref()
+            .expect("Graph must be condensed first!")[spot_id]
+    }
 }
 
 impl World {
@@ -8690,6 +8709,7 @@ impl World {
                 end: ActionId::Global__Recall_Drone.into_usize() + 1,
             },
             min_warp_time: 3000,
+            condensed: None,
         }
     }
 

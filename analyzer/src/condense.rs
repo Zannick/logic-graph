@@ -5,7 +5,7 @@ use pheap::PairingHeap;
 use std::collections::HashMap;
 use std::fmt::Debug;
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct CondensedEdge<T: Ctx, S, E> {
     pub dst: S,
     pub time: u32,
