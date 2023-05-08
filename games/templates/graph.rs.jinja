@@ -119,6 +119,17 @@ impl world::Exit for Exit {
     fn dest(&self) -> SpotId { self.dest }
     fn connect(&mut self, dest: SpotId) { self.dest = dest; }
     fn loc_id(&self) -> &Option<LocationId> { &self.loc_id }
+
+    fn always(id: ExitId) -> bool {
+        match id {
+%% for ex in gl.exits()|sort(attribute='id')
+%% if not ex.price and not ex.item_price and not ex.access_id
+            ExitId::{{ ex.id }} => true,
+%% endif
+%% endfor
+            _ => false,
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -311,6 +322,12 @@ impl world::World for World {
         }
     }
 
+    fn same_region(sp1: SpotId, sp2: SpotId) -> bool {
+        get_region(sp1) == get_region(sp2)
+    }
+    fn same_area(sp1: SpotId, sp2: SpotId) -> bool {
+        get_area(sp1) == get_area(sp2)
+    }
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
@@ -411,6 +428,10 @@ impl world::World for World {
 
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
+    }
+
+    fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(movements::MovementState, u32)>) {
+        movements::best_movements(sp1, sp2)
     }
 
     fn min_warp_time(&self) -> u32 {

@@ -1772,6 +1772,46 @@ impl world::Exit for Exit {
     fn loc_id(&self) -> &Option<LocationId> {
         &self.loc_id
     }
+
+    fn always(id: ExitId) -> bool {
+        match id {
+            ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1 => true,
+            ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1 => true,
+            ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1 => true,
+            ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1 => true,
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1 => true,
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1 => true,
+            ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1 => true,
+            ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => true,
+            ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => true,
+            ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1 => true,
+            ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1 => true,
+            ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1 => true,
+            ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1 => true,
+            ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1 => true,
+            ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1 => true,
+            ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1 => true,
+            ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => true,
+            ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1 => true,
+            ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1 => true,
+            ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => true,
+            ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1 => true,
+            ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1 => true,
+            ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1 => true,
+            ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => true,
+            _ => false,
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -2061,6 +2101,12 @@ impl world::World for World {
         }
     }
 
+    fn same_region(sp1: SpotId, sp2: SpotId) -> bool {
+        get_region(sp1) == get_region(sp2)
+    }
+    fn same_area(sp1: SpotId, sp2: SpotId) -> bool {
+        get_area(sp1) == get_area(sp2)
+    }
     fn get_area_spots(&self, spot_id: SpotId) -> &[SpotId] {
         let r = &self.spots[spot_id].area_spots;
         &self.raw_spots[r.start..r.end]
@@ -2238,6 +2284,13 @@ impl world::World for World {
 
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
+    }
+
+    fn best_movements(
+        sp1: SpotId,
+        sp2: SpotId,
+    ) -> (Option<u32>, Vec<(movements::MovementState, u32)>) {
+        movements::best_movements(sp1, sp2)
     }
 
     fn min_warp_time(&self) -> u32 {

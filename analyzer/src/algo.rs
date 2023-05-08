@@ -269,6 +269,7 @@ where
         mut ctx: T,
         routes: Vec<ContextWrapper<T>>,
     ) -> Result<Search<'a, W, T>, std::io::Error> {
+        crate::condense::condense_graph(world);
         world.skip_unused_items(&mut ctx);
 
         let startctx = ContextWrapper::new(ctx);

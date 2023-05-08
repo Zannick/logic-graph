@@ -64,6 +64,7 @@ pub trait Exit: Accessible {
     fn dest(&self) -> Self::SpotId;
     fn connect(&mut self, dest: Self::SpotId);
     fn loc_id(&self) -> &Option<Self::LocId>;
+    fn always(id: Self::ExitId) -> bool;
 }
 
 pub trait Action: Accessible {
@@ -124,6 +125,8 @@ pub trait World: Sync {
     fn get_spot_actions(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Action];
     fn get_global_actions(&self) -> &[Self::Action];
     fn get_all_spots(&self) -> &[<Self::Exit as Exit>::SpotId];
+    fn same_region(sp1: <Self::Exit as Exit>::SpotId, sp2: <Self::Exit as Exit>::SpotId) -> bool;
+    fn same_area(sp1: <Self::Exit as Exit>::SpotId, sp2: <Self::Exit as Exit>::SpotId) -> bool;
 
     fn get_area_spots(
         &self,
@@ -178,6 +181,16 @@ pub trait World: Sync {
         sp1: <Self::Exit as Exit>::SpotId,
         sp2: <Self::Exit as Exit>::SpotId,
     ) -> bool;
+    fn best_movements(
+        sp1: <Self::Exit as Exit>::SpotId,
+        sp2: <Self::Exit as Exit>::SpotId,
+    ) -> (
+        Option<u32>,
+        Vec<(
+            <<Self::Location as Accessible>::Context as Ctx>::MovementState,
+            u32,
+        )>,
+    );
 
     fn min_warp_time(&self) -> u32;
     fn spot_of_interest(&self, sp: <Self::Exit as Exit>::SpotId) -> bool;

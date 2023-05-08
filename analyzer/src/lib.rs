@@ -12,6 +12,7 @@ extern crate yaml_rust;
 pub mod access;
 pub mod algo;
 pub mod bucket;
+pub mod condense;
 pub mod context;
 pub mod db;
 pub mod estimates;
