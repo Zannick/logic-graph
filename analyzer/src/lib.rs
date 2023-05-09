@@ -86,9 +86,10 @@ where
                 ));
             }
             History::MoveLocal(spot_id) => {
+                let pos = context::Wrapper::get(&ctx).position();
                 ctx = access::move_to(world, ctx, spot_id).expect(&format!(
-                    "Could not complete route step {}: couldn't reach {}",
-                    i, spot_id
+                    "Could not complete route step {}: couldn't reach {} from {}",
+                    i, spot_id, pos
                 ));
             }
             _ => ctx.replay(world, h),

@@ -190,15 +190,12 @@ where
     // One movement total
     let movement_state = ctx.get().get_movement_state();
     let mut results = Vec::new();
-    for spot in world.get_area_spots(ctx.get().position()) {
-        let local = ctx.get().local_travel_time(movement_state, *spot);
-        if local == u32::MAX || local > max_time || local + ctx.elapsed() > max_time {
-            // Can't move this way, or it takes too long
-            continue;
+    for ce in world.get_condensed_edges_from(ctx.get().position()) {
+        if ce.time + ctx.elapsed() <= max_time && ce.can_access(world, ctx.get(), movement_state) {
+            let mut newctx = ctx.clone();
+            newctx.move_condensed_edge(ce);
+            results.push(newctx);
         }
-        let mut newctx = ctx.clone();
-        newctx.move_local(*spot, local);
-        results.push(newctx);
     }
     for exit in world.get_spot_exits(ctx.get().position()) {
         if exit.time() + ctx.elapsed() <= max_time && exit.can_access(ctx.get()) {

@@ -54,7 +54,7 @@ where
     }
 }
 
-#[derive(Copy, Clone, Hash, Eq, PartialEq)]
+#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
 enum HeapEdge<M, S, E> {
     Base(S, u32),
     Move(M, S, u32),
@@ -72,7 +72,7 @@ where
     S: Id,
     E: Id,
 {
-    let mut condensed = new_hashmap();
+    let mut condensed: HashMap<S, Vec<CondensedEdge<T, S, E>>, CommonHasher> = new_hashmap();
 
     for &start in world.get_all_spots() {
         // we should first do base movement so we are sure we only have one per pair
@@ -83,9 +83,12 @@ where
         while let Some(((cur, path), t)) = heap.delete_min() {
             if !best.contains_key(&cur) {
                 best.insert(cur, (path.clone(), t));
+                if world.spot_of_interest(cur) && !path.is_empty() {
+                    // don't travel through spots of interest
+                    continue;
+                }
                 for &local_dst in world.get_area_spots(cur) {
-                    let dist = world.base_distance(cur, local_dst);
-                    if dist < u32::MAX {
+                    if let Some(dist) = W::free_movement(cur, local_dst) {
                         let mut p2 = path.clone();
                         p2.push(local_dst);
                         heap.insert((local_dst, p2), t + dist);
@@ -102,7 +105,13 @@ where
                     movement: None,
                     reqs: Vec::new(),
                 };
-                condensed.insert(start, vec![ce]);
+                println!("found path {:?} to {:?}: {:?}", start, dst, path);
+
+                if let Some(v) = condensed.get_mut(&start) {
+                    v.push(ce);
+                } else {
+                    condensed.insert(start, vec![ce]);
+                }
             }
         }
 
@@ -110,7 +119,7 @@ where
         // for convenience, also add the current spot
         let mut heap = PairingHeap::new();
         heap.insert((start, Vec::<HeapEdge<T::MovementState, S, E>>::new()), 0);
-        // each edge can only be used once.
+        // each edge can only be used once
         let mut base_edges_seen = new_hashset();
         let mut mvmts_edges_seen = new_hashset();
         let mut exits_seen = new_hashset();
@@ -118,7 +127,7 @@ where
         while let Some(((cur, path), t)) = heap.delete_min() {
             // 1. is this nonempty path to an interesting node?
             //    if so, generate its requirements and store it if no other stored
-            //    edge to that node has a superset of the requirements and less time
+            //    edge to that node has a subset of the requirements and less time
             if world.spot_of_interest(cur) && !path.is_empty() {
                 let mut moves = path.iter().filter_map(|he| {
                     if let HeapEdge::Move(m, ..) = he {
@@ -135,12 +144,14 @@ where
                 } else {
                     None
                 };
+                println!("found path {:?} to {:?}: {:?}", start, cur, path);
+
                 let has_exit = path.iter().any(|he| matches!(he, HeapEdge::Exit(_)));
                 let exits: Vec<_> = path
                     .into_iter()
                     .filter_map(|he| {
                         if let HeapEdge::Exit(e) = he {
-                            if W::Exit::always(e) {
+                            if !W::Exit::always(e) {
                                 Some(e)
                             } else {
                                 None
@@ -159,7 +170,7 @@ where
                 };
                 if let Some(vec) = condensed.get_mut(&start) {
                     if movement.is_some() || !ce.reqs.is_empty() {
-                        if vec.iter().all(|c| c.dst != cur || !ce.is_subset_of(c)) {
+                        if vec.iter().any(|c| c.dst == cur && !c.is_subset_of(&ce)) {
                             vec.push(ce);
                         }
                     } else if has_exit {
@@ -184,7 +195,10 @@ where
             //
             // 2. Insert movements to area spots.
             for &local_dst in world.get_area_spots(cur) {
-                let best = W::best_movements(start, local_dst);
+                if local_dst == start {
+                    continue;
+                }
+                let best = W::best_movements(cur, local_dst);
                 if let Some(free) = best.0 {
                     if !base_edges_seen.contains(&(cur, local_dst)) {
                         let mut p2 = path.clone();
@@ -194,25 +208,31 @@ where
                     }
                 }
                 for (m, mt) in best.1 {
-                    if !mvmts_edges_seen.contains(&(cur, local_dst)) {
+                    if !mvmts_edges_seen.contains(&(m, cur, local_dst)) {
                         let mut p2 = path.clone();
                         p2.push(HeapEdge::Move(m, local_dst, mt));
                         heap.insert((local_dst, p2), t + mt);
-                        mvmts_edges_seen.insert((cur, local_dst));
+                        mvmts_edges_seen.insert((m, cur, local_dst));
                     }
                 }
             }
             // 3. Insert exits to area spots.
             for e in world.get_spot_exits(cur) {
+                if e.dest() == start {
+                    continue;
+                }
                 if W::same_area(start, e.dest()) && !exits_seen.contains(&e.id()) {
                     let mut p2 = path.clone();
                     p2.push(HeapEdge::Exit(e.id()));
                     heap.insert((e.dest(), p2), t + e.time());
-                    mvmts_edges_seen.insert((cur, e.dest()));
                     exits_seen.insert(e.id());
                 }
             }
         }
+    }
+
+    for (s, v) in &condensed {
+        println!("Total {} edges from {:?}", v.len(), s);
     }
 
     println!(

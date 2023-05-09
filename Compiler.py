@@ -447,8 +447,9 @@ class GameLogic(object):
         times = []
         xtimes = []
         ytimes = []
-        defallt = base.get('fall')
-        dejumpt = base.get('jump')
+        defallt = base.get('fall', 0)
+        dejumpt = base.get('jump', 0)
+        dejumpdownt = base.get('jump_down', 0)
         mp = [(m, self.movements[m]) for m in mset]
         for m, mvmt in mp + [('base', base)]:
             # TODO: This is all cacheable (per pair of spots, per movement type, per pair of points)
@@ -467,7 +468,7 @@ class GameLogic(object):
             if sfall := mvmt.get('fall', defallt):
                 # fall speed must be the same direction as "down"
                 if (t := b / sfall) > 0:
-                    t += jumps_down * mvmt.get('jump_down', 0)
+                    t += jumps_down * mvmt.get('jump_down', dejumpdownt)
                     ytimes.append(t)
                 elif (jumps and t < 0 and (jmvmt is None or m == jmvmt)
                         and (sjump := mvmt.get('jump', dejumpt))):

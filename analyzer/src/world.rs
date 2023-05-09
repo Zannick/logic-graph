@@ -163,6 +163,7 @@ pub trait World: Sync {
         i16,
     )>;
 
+    /// Edge connections for the purpose of Steiner graph.
     fn base_edges(
         &self,
     ) -> Vec<(
@@ -171,6 +172,7 @@ pub trait World: Sync {
         u32,
     )>;
 
+    /// Edge distances for the purpose of Steiner graph.
     fn base_distance(
         &self,
         s1: <Self::Exit as Exit>::SpotId,
@@ -182,6 +184,10 @@ pub trait World: Sync {
         sp1: <Self::Exit as Exit>::SpotId,
         sp2: <Self::Exit as Exit>::SpotId,
     ) -> bool;
+    fn free_movement(
+        sp1: <Self::Exit as Exit>::SpotId,
+        sp2: <Self::Exit as Exit>::SpotId,
+    ) -> Option<u32>;
     fn best_movements(
         sp1: <Self::Exit as Exit>::SpotId,
         sp2: <Self::Exit as Exit>::SpotId,

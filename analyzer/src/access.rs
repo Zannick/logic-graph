@@ -58,23 +58,29 @@ fn expand<W, T, E, Wp>(
     W: World<Exit = E, Warp = Wp>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     let movement_state = ctx.get().get_movement_state();
-    for spot in world.get_area_spots(ctx.get().position()) {
-        if spot_map[*spot].is_none() {
-            let local = ctx.get().local_travel_time(movement_state, *spot);
-            if local == u32::MAX || local > max_time || local + ctx.elapsed() >= max_time {
-                // Can't move this way, or it takes too long
-                continue;
-            }
+    println!("From {:?}", ctx.get().position());
+    for ce in world.get_condensed_edges_from(ctx.get().position()) {
+        if spot_map[ce.dst].is_none() && ce.can_access(world, ctx.get(), movement_state) {
             let mut newctx = ctx.clone();
-            newctx.move_local(*spot, local);
+            newctx.move_condensed_edge(ce);
             let elapsed = newctx.elapsed();
-            spot_heap.push(Reverse(HeapElement {
-                score: elapsed,
-                el: newctx,
-            }));
+            if elapsed <= max_time {
+                spot_heap.push(Reverse(HeapElement {
+                    score: elapsed,
+                    el: newctx,
+                }));
+                println!("Can take edge {:?} => {:?}", ctx.get().position(), ce);
+            } else {
+                println!("Max time exceeded on edge {:?} => {:?}", ctx.get().position(), ce);
+            }
+        } else if !ce.can_access(world, ctx.get(), movement_state) {
+            println!("Could not access edge {:?} => {:?}", ctx.get().position(), ce);
+        } else {
+            println!("Already visited, skipping edge {:?}", ce);
         }
     }
 
@@ -117,6 +123,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
@@ -161,6 +168,7 @@ where
     W: World<Exit = E>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
     W::Warp:
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {

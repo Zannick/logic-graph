@@ -433,6 +433,10 @@ impl world::World for World {
         movements::are_spots_connected(sp1, sp2)
     }
 
+    fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
+        movements::free_movement(sp1, sp2)
+    }
+
     fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(movements::MovementState, u32)>) {
         movements::best_movements(sp1, sp2)
     }
