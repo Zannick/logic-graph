@@ -685,8 +685,8 @@ impl<T: Ctx> ContextWrapper<T> {
                 if let Some(lh) = v.last() {
                     match (*lh, h) {
                         (
-                            History::Move(..) | History::MoveLocal(..),
-                            History::Move(..) | History::MoveLocal(..),
+                            History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
+                            History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
                         ) => (),
                         _ => v.push(h),
                     }

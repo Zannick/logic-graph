@@ -418,7 +418,7 @@ where
         let mut stepping = fork.clone();
         for step in winhist.into_iter().rev() {
             stepping.replay(self.world, step);
-            if !matches!(step, History::Move(_) | History::MoveLocal(_)) {
+            if !matches!(step, History::Move(_) | History::MoveLocal(_) | History::MoveCondensed(_)) {
                 newstates.push(stepping.clone());
             }
         }

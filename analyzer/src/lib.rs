@@ -85,7 +85,7 @@ where
                     exit.dest()
                 ));
             }
-            History::MoveLocal(spot_id) => {
+            History::MoveLocal(spot_id) | History::MoveCondensed(spot_id) => {
                 let pos = context::Wrapper::get(&ctx).position();
                 ctx = access::move_to(world, ctx, spot_id).expect(&format!(
                     "Could not complete route step {}: couldn't reach {} from {}",

@@ -99,7 +99,8 @@ where
     }
 
     pub fn get_best_unique(&self) -> Vec<HistoryAlias<T>> {
-        let mut u: Vec<_> = self.map
+        let mut u: Vec<_> = self
+            .map
             .values()
             .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
             .min_by_key(|c| c.elapsed())
