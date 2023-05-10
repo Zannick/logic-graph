@@ -900,6 +900,11 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
         (
             [false],
+            SpotId::Ebih__By_Garage__East_Platform,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+        ) => 1052,
+        (
+            [false],
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__East_13,
         ) => 1929,
@@ -4140,6 +4145,9 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => 1578,
         ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2631,
         ([true], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
+        ([true], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
+            1052
+        }
         ([true], SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => {
             1929
         }
@@ -7335,6 +7343,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__By_Garage__East_Platform => 0,
             SpotId::Ebih__By_Garage__Crawlspace_Opening => 750,
             SpotId::Ebih__By_Garage__Outcropping => 1300,
+            SpotId::Ebih__By_Garage__Garage_Entry => 1052,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -11044,6 +11053,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             750
         }
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Outcropping) => 1300,
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => 1052,
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => 1929,
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_Platform) => {
@@ -14323,6 +14333,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => true,
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__Outcropping) => true,
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_Platform) => {
             true
@@ -19023,6 +19034,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__East_Platform,
             SpotId::Ebih__By_Garage__Outcropping,
             1300,
+        ),
+        (
+            SpotId::Ebih__By_Garage__East_Platform,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            1052,
         ),
         (
             SpotId::Ebih__By_Garage__East_Platform,
@@ -27216,6 +27232,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => Some(1799),
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => Some(1754),
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => Some(1578),
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
+            Some(1052)
+        }
         (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => Some(4035),
         (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => Some(5438),
         (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
@@ -29670,6 +29689,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => {
             (Some(1578), vec![])
+        }
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => {
             (Some(4035), vec![])

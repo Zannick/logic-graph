@@ -62,7 +62,6 @@ fn expand<W, T, E, Wp>(
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     let movement_state = ctx.get().get_movement_state();
-    println!("From {:?}", ctx.get().position());
     for ce in world.get_condensed_edges_from(ctx.get().position()) {
         if spot_map[ce.dst].is_none() && ce.can_access(world, ctx.get(), movement_state) {
             let mut newctx = ctx.clone();
@@ -73,14 +72,7 @@ fn expand<W, T, E, Wp>(
                     score: elapsed,
                     el: newctx,
                 }));
-                println!("Can take edge {:?} => {:?}", ctx.get().position(), ce);
-            } else {
-                println!("Max time exceeded on edge {:?} => {:?}", ctx.get().position(), ce);
             }
-        } else if !ce.can_access(world, ctx.get(), movement_state) {
-            println!("Could not access edge {:?} => {:?}", ctx.get().position(), ce);
-        } else {
-            println!("Already visited, skipping edge {:?}", ce);
         }
     }
 

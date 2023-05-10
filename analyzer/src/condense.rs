@@ -1,24 +1,48 @@
 use crate::context::Ctx;
 use crate::world::*;
-use crate::{new_hashmap, new_hashset, CommonHasher};
+use crate::{new_hashmap, CommonHasher};
 use pheap::PairingHeap;
 use std::collections::HashMap;
 use std::fmt::Debug;
+use std::time::Instant;
 
 #[derive(Clone, Debug)]
-pub struct CondensedEdge<T: Ctx, S, E> {
-    pub dst: S,
-    pub time: u32,
-    pub movement: Option<T::MovementState>,
-    pub reqs: Vec<E>,
+struct Requirements<T: Ctx, E> {
+    movement: Option<T::MovementState>,
+    reqs: Vec<E>,
 }
 
-impl<T, S, E> CondensedEdge<T, S, E>
+impl<T, E> Default for Requirements<T, E>
 where
     T: Ctx,
-    S: Id,
+{
+    fn default() -> Self {
+        Self {
+            movement: None,
+            reqs: Vec::new(),
+        }
+    }
+}
+
+impl<T, E> Requirements<T, E>
+where
+    T: Ctx,
     E: Id,
 {
+    fn add_movement(&mut self, mvmt: T::MovementState) {
+        self.movement = Some(if let Some(m) = self.movement {
+            T::combine(m, mvmt)
+        } else {
+            mvmt
+        });
+    }
+
+    fn add_exit(&mut self, exit: E) {
+        if !self.reqs.contains(&exit) {
+            self.reqs.push(exit);
+        }
+    }
+
     fn is_subset_of(&self, ce: &Self) -> bool {
         // reqs is a subset of ce if all of reqs are in ce.reqs
         if self.reqs.iter().all(|e| ce.reqs.contains(e)) {
@@ -52,6 +76,33 @@ where
         }
         self.reqs.iter().all(|&e| world.get_exit(e).can_access(ctx))
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.movement.is_none() && self.reqs.is_empty()
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct CondensedEdge<T: Ctx, S, E> {
+    pub dst: S,
+    pub time: u32,
+    reqs: Requirements<T, E>,
+}
+
+impl<T, S, E> CondensedEdge<T, S, E>
+where
+    T: Ctx,
+    E: Id,
+{
+    pub fn can_access<W>(&self, world: &W, ctx: &T, movements: T::MovementState) -> bool
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        self.reqs.can_access(world, ctx, movements)
+    }
 }
 
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
@@ -72,6 +123,7 @@ where
     S: Id,
     E: Id,
 {
+    let start = Instant::now();
     let mut condensed: HashMap<S, Vec<CondensedEdge<T, S, E>>, CommonHasher> = new_hashmap();
 
     for &start in world.get_all_spots() {
@@ -102,11 +154,8 @@ where
                 let ce = CondensedEdge {
                     dst,
                     time,
-                    movement: None,
-                    reqs: Vec::new(),
+                    reqs: Requirements::default(),
                 };
-                println!("found path {:?} to {:?}: {:?}", start, dst, path);
-
                 if let Some(v) = condensed.get_mut(&start) {
                     v.push(ce);
                 } else {
@@ -118,66 +167,61 @@ where
         // each el in the heap is a path with priority equal to the time cost
         // for convenience, also add the current spot
         let mut heap = PairingHeap::new();
-        heap.insert((start, Vec::<HeapEdge<T::MovementState, S, E>>::new()), 0);
-        // each edge can only be used once
-        let mut base_edges_seen = new_hashset();
-        let mut mvmts_edges_seen = new_hashset();
-        let mut exits_seen = new_hashset();
+        heap.insert(
+            (
+                start,
+                Vec::<HeapEdge<T::MovementState, S, E>>::new(),
+                Requirements::<T, E>::default(),
+            ),
+            0,
+        );
+        // We keep the DAG from infinite iteration by checking the requirements
+        // used in each path at each step; if any previous path reached that point
+        // with a subset of the requirements, we don't move it forward.
+        let mut known_paths: HashMap<S, Vec<Requirements<T, E>>, CommonHasher> = new_hashmap();
 
-        while let Some(((cur, path), t)) = heap.delete_min() {
+        while let Some(((cur, path, reqs), t)) = heap.delete_min() {
+            // 0. Have we already seen a path to this point with compatible reqs?
+            if let Some(r2_list) = known_paths.get_mut(&cur) {
+                if r2_list.iter().any(|r2| r2.is_subset_of(&reqs)) {
+                    // Implicit guarantee from the heap that we have only seen better paths,
+                    // so we don't actually need to check the time.
+                    continue;
+                } else {
+                    r2_list.push(reqs.clone());
+                }
+            } else {
+                known_paths.insert(cur, vec![reqs.clone()]);
+            }
+
             // 1. is this nonempty path to an interesting node?
             //    if so, generate its requirements and store it if no other stored
             //    edge to that node has a subset of the requirements and less time
             if world.spot_of_interest(cur) && !path.is_empty() {
-                let mut moves = path.iter().filter_map(|he| {
-                    if let HeapEdge::Move(m, ..) = he {
-                        Some(*m)
-                    } else {
-                        None
-                    }
-                });
-                let movement = if let Some(mut m) = moves.next() {
-                    for m2 in moves {
-                        m = T::combine(m, m2);
-                    }
-                    Some(m)
-                } else {
-                    None
-                };
-                println!("found path {:?} to {:?}: {:?}", start, cur, path);
-
                 let has_exit = path.iter().any(|he| matches!(he, HeapEdge::Exit(_)));
-                let exits: Vec<_> = path
-                    .into_iter()
-                    .filter_map(|he| {
-                        if let HeapEdge::Exit(e) = he {
-                            if !W::Exit::always(e) {
-                                Some(e)
-                            } else {
-                                None
-                            }
-                        } else {
-                            None
-                        }
-                    })
-                    .collect();
 
                 let ce = CondensedEdge {
                     dst: cur,
                     time: t,
-                    movement,
-                    reqs: exits,
+                    reqs,
                 };
                 if let Some(vec) = condensed.get_mut(&start) {
-                    if movement.is_some() || !ce.reqs.is_empty() {
-                        if vec.iter().any(|c| c.dst == cur && !c.is_subset_of(&ce)) {
+                    if !ce.reqs.is_empty() {
+                        // If none of the existing edges for this connection are both:
+                        // a. a subset of this connection's reqs
+                        // b. a better time
+                        // then we can save the edge
+                        if !vec
+                            .iter()
+                            .filter(|c| c.dst == cur)
+                            .any(|c| c.reqs.is_subset_of(&ce.reqs) && ce.time < t)
+                        {
                             vec.push(ce);
                         }
                     } else if has_exit {
                         // We have found another edge with no requirements, we can potentially shorten it
-                        if let Some(first) = vec
-                            .iter_mut()
-                            .find(|c| c.dst == cur && c.movement.is_none() && c.reqs.is_empty())
+                        if let Some(first) =
+                            vec.iter_mut().find(|c| c.dst == cur && c.reqs.is_empty())
                         {
                             if t < first.time {
                                 first.time = t;
@@ -192,7 +236,6 @@ where
 
                 continue;
             }
-            //
             // 2. Insert movements to area spots.
             for &local_dst in world.get_area_spots(cur) {
                 if local_dst == start {
@@ -200,20 +243,19 @@ where
                 }
                 let best = W::best_movements(cur, local_dst);
                 if let Some(free) = best.0 {
-                    if !base_edges_seen.contains(&(cur, local_dst)) {
-                        let mut p2 = path.clone();
-                        p2.push(HeapEdge::Base(local_dst, free));
-                        heap.insert((local_dst, p2), t + free);
-                        base_edges_seen.insert((cur, local_dst));
-                    }
+                    // Path continues with new base edge. No change to reqs
+                    let mut p2 = path.clone();
+                    p2.push(HeapEdge::Base(local_dst, free));
+                    let r2 = reqs.clone();
+                    heap.insert((local_dst, p2, r2), t + free);
                 }
                 for (m, mt) in best.1 {
-                    if !mvmts_edges_seen.contains(&(m, cur, local_dst)) {
-                        let mut p2 = path.clone();
-                        p2.push(HeapEdge::Move(m, local_dst, mt));
-                        heap.insert((local_dst, p2), t + mt);
-                        mvmts_edges_seen.insert((m, cur, local_dst));
-                    }
+                    // Path continues with new movement edge. Reqs update with movement
+                    let mut p2 = path.clone();
+                    p2.push(HeapEdge::Move(m, local_dst, mt));
+                    let mut r2 = reqs.clone();
+                    r2.add_movement(m);
+                    heap.insert((local_dst, p2, r2), t + mt);
                 }
             }
             // 3. Insert exits to area spots.
@@ -221,22 +263,20 @@ where
                 if e.dest() == start {
                     continue;
                 }
-                if W::same_area(start, e.dest()) && !exits_seen.contains(&e.id()) {
+                if W::same_area(start, e.dest()) {
+                    // Path continues with new exit edge. Reqs update with exit.
                     let mut p2 = path.clone();
                     p2.push(HeapEdge::Exit(e.id()));
-                    heap.insert((e.dest(), p2), t + e.time());
-                    exits_seen.insert(e.id());
+                    let mut r2 = reqs.clone();
+                    r2.add_exit(e.id());
+                    heap.insert((e.dest(), p2, r2), t + e.time());
                 }
             }
         }
     }
 
-    for (s, v) in &condensed {
-        println!("Total {} edges from {:?}", v.len(), s);
-    }
-
     println!(
-        "Condensed into {} total sources, {} total edges, {} interesting spots (from {}), {} interesting edges",
+        "Condensed into {} total sources, {} total edges, {} interesting spots (from {}), {} interesting edges, in {:?}",
         condensed.len(),
         condensed.values().map(|v| v.len()).sum::<usize>(),
         world
@@ -252,7 +292,8 @@ where
             } else {
                 None
             })
-            .sum::<usize>()
+            .sum::<usize>(),
+        start.elapsed(),
     );
 
     condensed

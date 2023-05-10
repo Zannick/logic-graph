@@ -265,6 +265,7 @@ areas:
       local:
         - to: Outcropping
         - to: Crawlspace Opening
+        - to: Garage Entry
         - to: East 13
       exits:
         - to: Crawlspace Opening
