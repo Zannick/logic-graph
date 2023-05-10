@@ -3,7 +3,6 @@ use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::minimize::*;
-use crate::optimize::optimize;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use rayon::prelude::*;
@@ -397,33 +396,9 @@ where
             ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
         self.queue.push(newctx).unwrap();
 
-        let max_time = ctx.elapsed();
-        if let Some(unique_history) = sols.insert(ctx) {
+        if let Some(_) = sols.insert(ctx) {
             drop(sols);
             println!("Found new unique solution");
-            let start = Instant::now();
-            let mut opt = optimize(
-                self.queue.db(),
-                self.world,
-                self.startctx.get(),
-                unique_history,
-            );
-            if let Some(best) = opt.pop() {
-                if self.world.won(best.get()) {
-                    if best.elapsed() < max_time {
-                        println!(
-                            "Optimized this type of solution to {}ms in {:?}",
-                            best.elapsed(),
-                            start.elapsed()
-                        );
-                        self.optimizes.fetch_add(1, Ordering::Release);
-                        self.handle_solution(best, mode);
-                    }
-                } else {
-                    opt.push(best);
-                }
-                self.queue.extend(opt).unwrap();
-            }
         }
     }
 
