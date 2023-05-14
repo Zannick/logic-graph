@@ -3,7 +3,7 @@
 #![allow(unused)]
 #![allow(non_snake_case)]
 
-use analyzer::context::Ctx;
+use analyzer::context::{Ctx, Wrapper};
 use analyzer::world::*;
 use analyzer::*;
 use libaxiom_verge2::context::{enums, flags, Context, Status};
@@ -12,6 +12,7 @@ use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
     ctx.cbits2.insert(flags::ContextBits2::ICE_AXE);
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);

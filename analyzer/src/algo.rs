@@ -253,7 +253,7 @@ where
                 panic!(
                     "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}",
                     ctx.elapsed(),
-                    ctx.history_summary(),
+                    history_summary::<T>(ctx.recent_history().1),
                     ctx.get()
                 );
             }
@@ -275,9 +275,9 @@ where
         let mut wins = Vec::new();
         let mut others = 0;
         for c in routes {
-            let hist: Vec<_> = c.history_rev().collect();
+            let hist = c.recent_history().1;
             let mut newctx = startctx.clone();
-            for h in hist.iter().rev() {
+            for h in hist.iter() {
                 newctx.replay(world, *h);
                 // We want to at least remember each intermediate state in the queue.
                 if !world.won(newctx.get()) {
@@ -325,7 +325,10 @@ where
             );
             let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
             let clean_ctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m));
-            solutions.insert(m);
+            solutions.insert(
+                m.elapsed(),
+                m.recent_history().1.into_iter().copied().collect(),
+            );
             (max_time, clean_ctx)
         } else {
             println!("Minimized-greedy solution wasn't faster than original");
@@ -335,9 +338,15 @@ where
             )
         };
 
-        solutions.insert(wonctx);
+        solutions.insert(
+            wonctx.elapsed(),
+            wonctx.recent_history().1.into_iter().copied().collect(),
+        );
         for w in wins {
-            solutions.insert(w);
+            solutions.insert(
+                w.elapsed(),
+                w.recent_history().1.into_iter().copied().collect(),
+            );
         }
 
         let queue = RocksBackedQueue::new(
@@ -396,7 +405,10 @@ where
             ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
         self.queue.push(newctx).unwrap();
 
-        if let Some(_) = sols.insert(ctx) {
+        if let Some(_) = sols.insert(
+            ctx.elapsed(),
+            self.queue.db().get_history_ctx(&ctx).unwrap(),
+        ) {
             drop(sols);
             println!("Found new unique solution");
         }
@@ -408,17 +420,19 @@ where
         fork: &ContextWrapper<T>,
         mode: SearchMode,
     ) {
+        let (fork_point, other) = fork.recent_history();
+        assert!(other.is_empty());
         // Create intermediate states to add to the queue.
-        let mut winhist: Vec<_> = ctx.history_rev().collect();
-        let oldhist: Vec<_> = fork.history_rev().collect();
-        let oldhistlen = oldhist.len();
-        winhist.truncate(winhist.len() - oldhistlen);
+        let winhist = self.queue.db().get_history_until(&ctx, fork_point).unwrap();
 
         let mut newstates = Vec::new();
         let mut stepping = fork.clone();
         for step in winhist.into_iter().rev() {
             stepping.replay(self.world, step);
-            if !matches!(step, History::Move(_) | History::MoveLocal(_) | History::MoveCondensed(_)) {
+            if !matches!(
+                step,
+                History::Move(_) | History::MoveLocal(_) | History::MoveCondensed(_)
+            ) {
                 newstates.push(stepping.clone());
             }
         }
@@ -436,8 +450,9 @@ where
         self.handle_solution(ctx, mode);
 
         if let Some(last) = newstates.last() {
-            let mut hist: Vec<_> = last.history_rev().collect();
-            hist.reverse();
+            // TODO This should only push the states on top of the fork
+            // which we should have in last's recent history because we never put it in db.
+            let hist = self.queue.db().get_history_ctx(last).unwrap();
             let mut rebuilt = Vec::with_capacity(newstates.len());
             let mut replay = self.startctx.clone();
             for step in hist {
@@ -674,11 +689,10 @@ where
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
-        let (arc, arccount) = self.queue.db().archive_stats();
         println!(
             "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends={}; opt={}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit={}ms; db best={}; archived={}/{}; evictions={}; retrievals={}\n\
+            limit={}ms; db best={}; history={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             {}",
             iters,
@@ -695,8 +709,7 @@ where
             self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
-            arc,
-            arccount,
+            self.queue.db().history_count(),
             self.queue.evictions(),
             self.queue.retrievals(),
             iskips,
@@ -704,7 +717,10 @@ where
             pskips,
             dpskips,
             self.queue.background_deletes(),
-            ctx.info(self.queue.estimated_remaining_time(ctx))
+            ctx.info(
+                self.queue.estimated_remaining_time(ctx),
+                self.queue.db().get_last_history_step(ctx).unwrap()
+            )
         );
     }
 }

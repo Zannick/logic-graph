@@ -37,6 +37,7 @@ fn read_key_value(
 
 pub fn load_settings(filename: Option<&str>) -> (World, Context, Vec<ContextWrapper<Context>>) {
     let mut world = World::new();
+    analyzer::world::World::condense_graph(&mut world);
     let mut ctx = Context::default();
     let mut vec = Vec::new();
     let route_key = Yaml::String(String::from("routes"));

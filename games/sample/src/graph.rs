@@ -9,6 +9,7 @@ use crate::items::*;
 use crate::movements;
 use crate::prices::Currency;
 use crate::rules;
+use analyzer::condense::{condense_graph, CondensedEdge};
 use analyzer::context::Ctx;
 use analyzer::world;
 use enum_map::{enum_map, Enum, EnumMap};
@@ -1964,6 +1965,8 @@ pub struct World {
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
     min_warp_time: u32,
+    // Condensed edges
+    condensed: Option<EnumMap<SpotId, Vec<CondensedEdge<Context, SpotId, ExitId>>>>,
 }
 
 impl world::World for World {
@@ -2286,6 +2289,10 @@ impl world::World for World {
         movements::are_spots_connected(sp1, sp2)
     }
 
+    fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
+        movements::free_movement(sp1, sp2)
+    }
+
     fn best_movements(
         sp1: SpotId,
         sp2: SpotId,
@@ -2347,6 +2354,22 @@ impl world::World for World {
             | SpotId::KF__Shop__Entry => true,
             _ => false,
         }
+    }
+
+    fn condense_graph(&mut self) {
+        let mut emap = EnumMap::default();
+        emap.extend(condense_graph(self));
+        self.condensed = Some(emap);
+    }
+
+    fn get_condensed_edges_from(
+        &self,
+        spot_id: SpotId,
+    ) -> &[CondensedEdge<Context, SpotId, ExitId>] {
+        &self
+            .condensed
+            .as_ref()
+            .expect("Graph must be condensed first!")[spot_id]
     }
 }
 
@@ -2418,6 +2441,7 @@ impl World {
                 end: ActionId::Global__Change_Time.into_usize() + 1,
             },
             min_warp_time: 0,
+            condensed: None,
         }
     }
 

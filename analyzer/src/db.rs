@@ -11,12 +11,12 @@ use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
-use rocksdb::Env;
 use rocksdb::{
-    perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions,
-    IteratorMode, MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
+    perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions, Env,
+    IteratorMode, MergeOperands, Options, ReadOptions, WriteBatch, WriteBatchWithTransaction,
+    WriteOptions, DB,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU32, AtomicU64, AtomicUsize, Ordering};
@@ -38,6 +38,31 @@ struct HeapDBOptions {
     path: PathBuf,
 }
 
+const BEST: &str = "best";
+const HIST: &str = "hist";
+
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
+struct StateData {
+    // Ordering is important here, since min_merge will sort by serialized bytes.
+    elapsed: u32,
+    hist_index: usize,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
+struct HistData<I, S, L, E, A, Wp> {
+    prev: usize,
+    hist: History<I, S, L, E, A, Wp>,
+}
+
+type HistAlias<T> = HistData<
+    <T as Ctx>::ItemId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    <<<T as Ctx>::World as World>::Location as Location>::LocId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
+    <<<T as Ctx>::World as World>::Action as Action>::ActionId,
+    <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
+>;
+
 pub struct HeapDB<'w, W: World, T: Ctx> {
     scorer: ContextScorer<
         'w,
@@ -49,16 +74,18 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     >,
     db: DB,
     statedb: DB,
+    histdb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
     _opts: HeapDBOptions,
     _state_opts: HeapDBOptions,
+    _hist_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
-    archiver: Mutex<HistoryArchiveAlias<T, W>>,
     max_time: AtomicU32,
 
     seq: AtomicU64,
+    hist_seq: AtomicUsize,
     size: AtomicUsize,
     seen: AtomicUsize,
     iskips: AtomicUsize,
@@ -72,6 +99,7 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     bg_deletes: AtomicUsize,
 
     phantom: PhantomData<T>,
+    retrieve_lock: Mutex<()>,
 }
 
 // Final cleanup, done in a separate struct here to ensure it's done
@@ -180,8 +208,10 @@ where
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
+        let mut path3 = path.clone();
         path.push("queue");
         path2.push("states");
+        path3.push("hist");
 
         // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
@@ -191,21 +221,27 @@ where
         cuckoo_opts.set_hash_ratio(0.75);
         cuckoo_opts.set_use_module_hash(false);
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
-        opts2.set_merge_operator_associative("min", min_merge);
         opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_allow_mmap_reads(true);
         opts2.set_allow_mmap_writes(true);
+        let mut opts3 = opts2.clone();
+        opts2.set_merge_operator_associative("min", min_merge);
 
         let cf_opts = opts2.clone();
         opts2.set_memtable_whole_key_filtering(true);
         opts2.create_missing_column_families(true);
 
-        let seencf = ColumnFamilyDescriptor::new("seen", cf_opts.clone());
-        let scorecf = ColumnFamilyDescriptor::new("score", cf_opts);
+        opts3.set_memtable_whole_key_filtering(true);
+        opts3.create_missing_column_families(true);
 
-        // 1 GiB write buffers + 4 GiB row cache = 5GiB for this one?
+        let histcf = ColumnFamilyDescriptor::new(HIST, cf_opts.clone());
+        let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts);
+
+        // 1 GiB write buffers + 4 GiB row cache = 5GiB for each of these?
         let _ = DB::destroy(&opts2, &path2);
-        let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![seencf, scorecf])?;
+        let _ = DB::destroy(&opts2, &path3);
+        let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![bestcf])?;
+        let histdb = DB::open_cf_descriptors(&opts3, &path3, vec![histcf])?;
 
         let mut write_opts = WriteOptions::default();
         write_opts.disable_wal(true);
@@ -218,6 +254,7 @@ where
             scorer,
             db,
             statedb,
+            histdb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
             _opts: HeapDBOptions { opts, path },
@@ -225,10 +262,14 @@ where
                 opts: opts2,
                 path: path2,
             },
+            _hist_opts: HeapDBOptions {
+                opts: opts3,
+                path: path3,
+            },
             write_opts,
-            archiver: Mutex::new(HistoryArchive::new()),
             max_time: initial_max_time.into(),
             seq: 0.into(),
+            hist_seq: 1.into(),
             size: 0.into(),
             seen: 0.into(),
             iskips: 0.into(),
@@ -239,6 +280,7 @@ where
             delete: 0.into(),
             bg_deletes: 0.into(),
             phantom: PhantomData,
+            retrieve_lock: Mutex::new(()),
         })
     }
 
@@ -268,6 +310,11 @@ where
         self.seen.load(Ordering::Acquire)
     }
 
+    /// Returns the number of history entries we've recorded so far.
+    pub fn history_count(&self) -> usize {
+        self.hist_seq.load(Ordering::Acquire) - 1
+    }
+
     /// Returns the number of unique states we've estimated remaining time for.
     /// Winning states aren't counted in this.
     pub fn estimates(&self) -> usize {
@@ -282,11 +329,6 @@ where
 
     pub fn background_deletes(&self) -> usize {
         self.bg_deletes.load(Ordering::Acquire)
-    }
-
-    pub fn archive_stats(&self) -> (usize, usize) {
-        let archiver = self.archiver.lock().unwrap();
-        (archiver.len(), archiver.counted())
     }
 
     /// Returns details about the number of states we've skipped (tracked separately from the db).
@@ -316,8 +358,12 @@ where
         self.set_max_time(max_time + (max_time / 128))
     }
 
-    fn seen_cf(&self) -> &ColumnFamily {
-        self.statedb.cf_handle("seen").unwrap()
+    fn best_cf(&self) -> &ColumnFamily {
+        self.statedb.cf_handle(BEST).unwrap()
+    }
+
+    fn hist_cf(&self) -> &ColumnFamily {
+        self.histdb.cf_handle(HIST).unwrap()
     }
 
     /// The key for a ContextWrapper<T> in the heap is:
@@ -339,49 +385,71 @@ where
         key
     }
 
-    /// The value for a ContextWrapper<T> in the heap is... an archived version of itself!
+    /// The value for a ContextWrapper<T> in the heap is... itself!
     /// Unfortunately this is serializing the T (Ctx) a second time if we already got the state key.
-    fn get_heap_value(archiver: &mut HistoryArchiveAlias<T, W>, el: ContextWrapper<T>) -> Vec<u8> {
-        let el = archiver.archive(el);
+    fn get_heap_value(el: ContextWrapper<T>) -> Vec<u8> {
         let mut val = Vec::new();
         el.serialize(&mut Serializer::new(&mut val)).unwrap();
         val
     }
 
-    fn peek_obj_from_heap_value(buf: &[u8]) -> Result<ArchivedContextWrapper<T>, Error> {
-        Ok(rmp_serde::from_slice::<ArchivedContextWrapper<T>>(buf)?)
+    fn peek_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
+        Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
 
-    fn get_obj_from_heap_value(
-        archiver: &mut HistoryArchiveAlias<T, W>,
-        buf: &[u8],
-    ) -> Result<ContextWrapper<T>, Error> {
-        Ok(archiver.retrieve(rmp_serde::from_slice::<ArchivedContextWrapper<T>>(buf)?))
+    fn get_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
+        Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
 
-    fn get_state_value(&self, cf: &ColumnFamily, state_key: &[u8]) -> Result<Option<u32>, Error> {
-        match self.statedb.get_pinned_cf(cf, state_key)? {
-            Some(slice) => {
-                if slice.len() != 4 {
-                    return Err(Error {
-                        message: format!("Invalid seen elapsed time length: {}", slice.len()),
-                    });
-                }
-                Ok(Some(u32::from_be_bytes(slice.as_ref().try_into().unwrap())))
-            }
+    fn serialize_data<V>(v: V) -> Vec<u8>
+    where
+        V: Serialize,
+    {
+        let mut val = Vec::with_capacity(std::mem::size_of::<V>());
+        v.serialize(&mut Serializer::new(&mut val)).unwrap();
+        val
+    }
+
+    fn get_obj_from_data<V>(buf: &[u8]) -> Result<V, Error>
+    where
+        V: for<'de> Deserialize<'de>,
+    {
+        Ok(rmp_serde::from_slice::<V>(buf)?)
+    }
+
+    fn get_deserialize_state_data<V>(
+        &self,
+        cf: &ColumnFamily,
+        key: &[u8],
+    ) -> Result<Option<V>, Error>
+    where
+        V: for<'de> Deserialize<'de>,
+    {
+        match self.statedb.get_pinned_cf(cf, key)? {
+            Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
             None => Ok(None),
         }
     }
 
-    fn get_seen_value(&self, state_key: &[u8]) -> Result<Option<u32>, Error> {
-        self.get_state_value(self.seen_cf(), state_key)
+    fn get_deserialize_hist_data<V>(
+        &self,
+        cf: &ColumnFamily,
+        key: &[u8],
+    ) -> Result<Option<V>, Error>
+    where
+        V: for<'de> Deserialize<'de>,
+    {
+        match self.histdb.get_pinned_cf(cf, key)? {
+            Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
+            None => Ok(None),
+        }
     }
 
     fn get_state_values<'a, I>(
         &self,
         cf: &ColumnFamily,
         state_keys: I,
-    ) -> Result<Vec<Option<u32>>, Error>
+    ) -> Result<Vec<Option<StateData>>, Error>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
@@ -389,18 +457,12 @@ where
             .statedb
             .multi_get_cf(state_keys.into_iter().map(|k| (cf, k)));
 
-        let parsed: Vec<Result<Option<u32>, String>> = results
+        let parsed: Vec<_> = results
             .into_iter()
             .map(|res| match res {
                 Err(e) => Err(e.to_string()),
                 Ok(None) => Ok(None),
-                Ok(Some(slice)) => {
-                    if slice.len() != 4 {
-                        Err(format!("Invalid seen elapsed time length: {}", slice.len()))
-                    } else {
-                        Ok(Some(u32::from_be_bytes(slice.try_into().unwrap())))
-                    }
-                }
+                Ok(Some(slice)) => Ok(Some(Self::get_obj_from_data(&slice).unwrap())),
             })
             .collect();
 
@@ -418,13 +480,6 @@ where
         } else {
             Ok(parsed.into_iter().map(|res| res.unwrap()).collect())
         }
-    }
-
-    fn get_seen_values<'a, I>(&self, state_keys: I) -> Result<Vec<Option<u32>>, Error>
-    where
-        I: Iterator<Item = &'a Vec<u8>>,
-    {
-        self.get_state_values(self.seen_cf(), state_keys)
     }
 
     /// Estimates the remaining time to the goal.
@@ -463,27 +518,25 @@ where
     /// Pushes an element into the heap.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, el: ContextWrapper<T>) -> Result<(), Error> {
+    pub fn push(&self, mut el: ContextWrapper<T>) -> Result<(), Error> {
         let max_time = self.max_time();
         if el.elapsed() > max_time || self.score(&el) > max_time {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        if !self.remember_push(&el)? {
+        // Records the history in the statedb.
+        if !self.record_one(&mut el)? {
             return Ok(());
         }
         let key = self.get_heap_key(&el);
-        let val = {
-            let mut archiver = self.archiver.lock().unwrap();
-            Self::get_heap_value(&mut archiver, el)
-        };
+        let val = Self::get_heap_value(el);
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
     }
 
     pub fn pop(&self, score_hint: Option<u32>) -> Result<Option<ContextWrapper<T>>, Error> {
-        let mut archiver = self.archiver.lock().unwrap();
+        let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         let prefix: [u8; 4];
@@ -516,14 +569,14 @@ where
                 println!("Compacting took {:?}", start.elapsed());
             }
 
-            let el = Self::get_obj_from_heap_value(&mut archiver, &value)?;
+            let el = Self::get_obj_from_heap_value(&value)?;
             if el.elapsed() > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
             }
 
-            let seen_key = Self::get_state_key(el.get());
-            if let Some(stored) = self.get_seen_value(&seen_key)? {
+            let state_key = Self::get_state_key(el.get());
+            if let Some(stored) = self.get_deserialize_state_data(self.best_cf(), &state_key)? {
                 if el.elapsed() > stored {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
                     continue;
@@ -540,12 +593,11 @@ where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
         let mut batch = WriteBatchWithTransaction::<false>::default();
-        let mut seen_batch = WriteBatchWithTransaction::<false>::default();
+        let mut hist_batch = WriteBatchWithTransaction::<false>::default();
+        let mut state_batch = WriteBatchWithTransaction::<false>::default();
         let max_time = self.max_time();
         let mut skips = 0;
         let mut dups = 0;
-
-        let cf = self.seen_cf();
 
         let to_add: Vec<_> = iter
             .into_iter()
@@ -559,39 +611,59 @@ where
             })
             .collect();
 
-        let seen_values = self.get_seen_values(to_add.iter().map(|(_, k)| k))?;
+        let seen_values = self.get_state_values(self.best_cf(), to_add.iter().map(|(_, k)| k))?;
+        let mut new_seen = 0;
 
-        let mut archiver = self.archiver.lock().unwrap();
-        for ((el, seen_key), seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
+        for ((mut el, state_key), seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
             if el.elapsed() > max_time || self.score(&el) > max_time {
                 skips += 1;
                 continue;
             }
 
-            let should_write = match seen_val {
-                Some(stored) => {
-                    if stored < el.elapsed() {
+            match seen_val {
+                Some(StateData { elapsed, .. }) => {
+                    // since this is used for evictions, we can't drop equal states
+                    if elapsed < el.elapsed() {
                         dups += 1;
                         continue;
                     }
-                    stored > el.elapsed()
+                    if !el.recent_history().1.is_empty() {
+                        let write_state_data = elapsed > el.elapsed();
+                        self.record_one_batch(
+                            state_key,
+                            &mut el,
+                            &mut hist_batch,
+                            &mut state_batch,
+                            write_state_data,
+                        );
+                    }
                 }
-                None => true,
+                None => {
+                    new_seen += 1;
+                    self.record_one_batch(
+                        state_key,
+                        &mut el,
+                        &mut hist_batch,
+                        &mut state_batch,
+                        true,
+                    );
+                }
             };
             // If the value seen is also what we have, we still want to put it into the heap,
-            // but we don't have to write the value again as it's a maximum.
-            if should_write {
-                seen_batch.merge_cf(cf, &seen_key, el.elapsed().to_be_bytes());
-            }
+            // but we don't have to write the state data again (which would replace the history).
+            // The history needs to be written either way.
             let key = self.get_heap_key(&el);
-            let val = Self::get_heap_value(&mut archiver, el);
+            let val = Self::get_heap_value(el);
             batch.put(key, val);
         }
-        drop(archiver);
         let new = batch.len();
-        let new_seen = seen_batch.len();
+        // The hist data needs to be pushed first, since the state and queue data reference it.
+        self.histdb.write_opt(hist_batch, &self.write_opts)?;
+        println!("extend {:?} wrote to hist", rayon::current_thread_index());
+        self.statedb.write_opt(state_batch, &self.write_opts)?;
+        println!("extend {:?} wrote to state", rayon::current_thread_index());
         self.db.write_opt(batch, &self.write_opts)?;
-        self.statedb.write_opt(seen_batch, &self.write_opts)?;
+        println!("extend {:?} wrote to db", rayon::current_thread_index());
 
         self.iskips.fetch_add(skips, Ordering::Release);
         if as_pop {
@@ -611,7 +683,7 @@ where
         start_priority: u32,
         count: usize,
     ) -> Result<Vec<ContextWrapper<T>>, Error> {
-        let mut archiver = self.archiver.lock().unwrap();
+        let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -635,7 +707,7 @@ where
         max.copy_from_slice(&key);
         batch.delete(key);
 
-        let el = Self::get_obj_from_heap_value(&mut archiver, &value)?;
+        let el = Self::get_obj_from_heap_value(&value)?;
         let max_time = self.max_time();
         if el.elapsed() > max_time || self.score(&el) > max_time {
             pskips += 1;
@@ -654,7 +726,7 @@ where
                     batch.delete(key);
                     pops += 1;
 
-                    let el = Self::get_obj_from_heap_value(&mut archiver, &value)?;
+                    let el = Self::get_obj_from_heap_value(&value)?;
                     let max_time = self.max_time();
                     if el.elapsed() > max_time || self.score(&el) > max_time {
                         pskips += 1;
@@ -673,11 +745,11 @@ where
             }
 
             // Grab all the seen values in one request.
-            let seen_values = self.get_seen_values(tmp.iter().map(|(_, k)| k))?;
+            let seen_values = self.get_state_values(self.best_cf(), tmp.iter().map(|(_, k)| k))?;
             res.extend(tmp.into_iter().zip(seen_values.into_iter()).filter_map(
                 |((el, _), seen_val)| match seen_val {
-                    Some(stored) => {
-                        if stored < el.elapsed() {
+                    Some(StateData { elapsed, .. }) => {
+                        if elapsed < el.elapsed() {
                             dup_pskips += 1;
                             None
                         } else {
@@ -713,101 +785,153 @@ where
         Ok(res)
     }
 
-    fn remember(
-        &self,
-        el: &ContextWrapper<T>,
-        skip_count: &AtomicUsize,
-        accept_eq: bool,
-    ) -> Result<bool, Error> {
+    /// Checks whether the underlying Ctx is in the state db with a strictly better time.
+    /// A `false` return value means the state should be skipped.
+    pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
         let seen_key = Self::get_state_key(el.get());
 
-        let should_write = match self.get_seen_value(&seen_key)? {
-            Some(stored) => {
-                if if accept_eq {
-                    stored < el.elapsed()
+        match self.get_deserialize_state_data::<StateData>(self.best_cf(), &seen_key)? {
+            Some(StateData { elapsed, .. }) => {
+                if elapsed < el.elapsed() {
+                    self.dup_pskips.fetch_add(1, Ordering::Release);
+                    Ok(false)
                 } else {
-                    stored <= el.elapsed()
-                } {
-                    skip_count.fetch_add(1, Ordering::Release);
-                    return Ok(false);
+                    Ok(true)
                 }
-                stored > el.elapsed()
             }
-            None => true,
+            // This shouldn't happen, but if it does, we should indeed keep the element...
+            None => Ok(true),
+        }
+    }
+
+    fn record_one_batch<const TR: bool, const TR2: bool>(
+        &self,
+        state_key: Vec<u8>,
+        el: &mut ContextWrapper<T>,
+        hist_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
+        state_batch: &mut rocksdb::WriteBatchWithTransaction<TR2>,
+        write_state_data: bool,
+    ) {
+        let (mut prev, hist) = el.recent_history();
+        for h in hist {
+            let data = HistData { prev, hist: *h };
+            prev = self.hist_seq.fetch_add(1, Ordering::AcqRel);
+            println!("{}: {:?}", prev, rayon::current_thread_index());
+            hist_batch.put_cf(
+                self.hist_cf(),
+                prev.to_be_bytes(),
+                Self::serialize_data(data),
+            );
+        }
+        el.update_history(prev);
+        if write_state_data {
+            state_batch.merge_cf(
+                self.best_cf(),
+                state_key,
+                Self::serialize_data(StateData {
+                    elapsed: el.elapsed(),
+                    hist_index: prev,
+                }),
+            );
+        }
+    }
+
+    /// Stores the underlying Ctx in the seen db with the best known elapsed time and
+    /// its related history is also stored in the db,
+    /// and returns whether this context had that best time.
+    /// The Wrapper object is modified to reference the stored history.
+    /// A `false` value means the state should be skipped.
+    pub fn record_one(&self, el: &mut ContextWrapper<T>) -> Result<bool, Error> {
+        let state_key = Self::get_state_key(el.get());
+        let is_new = if let Some(StateData { elapsed, .. }) =
+            self.get_deserialize_state_data::<StateData>(self.best_cf(), &state_key)?
+        {
+            // This is a new state being pushed, as it has new history, hence we skip if equal.
+            if elapsed <= el.elapsed() {
+                self.dup_iskips.fetch_add(1, Ordering::Release);
+                return Ok(false);
+            }
+            false
+        } else {
+            true
         };
-        // If the value seen is also what we have, we still want to put it into the heap,
-        // but we don't have to write the value again as it's a maximum.
-        if should_write {
-            self.statedb.merge_cf_opt(
-                self.seen_cf(),
-                &seen_key,
-                el.elapsed().to_be_bytes(),
-                &self.write_opts,
-            )?;
+        // In every other case (no such state, or we do better than that state),
+        // we will rewrite the data.
+
+        // We should also check the StateData for whether we even need to do this
+        let mut hist_batch = WriteBatch::default();
+        let mut state_batch = WriteBatch::default();
+        self.record_one_batch(state_key, el, &mut hist_batch, &mut state_batch, true);
+        self.histdb.write_opt(hist_batch, &self.write_opts).unwrap();
+        println!(
+            "record_one {:?} wrote to hist",
+            rayon::current_thread_index()
+        );
+        self.statedb
+            .write_opt(state_batch, &self.write_opts)
+            .unwrap();
+        println!(
+            "record_one {:?} wrote to state",
+            rayon::current_thread_index()
+        );
+        if is_new {
             self.seen.fetch_add(1, Ordering::Release);
         }
         Ok(true)
     }
 
-    /// Stores the underlying Ctx in the seen db with the best known elapsed time,
-    /// and returns whether this context had that best time.
-    /// A `false` value means the state should be skipped.
-    pub fn remember_push(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
-        self.remember(el, &self.dup_iskips, false)
-    }
-
-    /// Stores the underlying Ctx in the seen db with the best known elapsed time,
-    /// and returns whether this context had that best time.
-    /// A `false` value means the state should be skipped.
-    pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
-        self.remember(el, &self.dup_pskips, true)
-    }
-
-    /// Stores the underlying Ctx entries in the seen db with the respective best known elapsed times,
+    /// Stores the underlying Ctx entries in the state db with their respective
+    /// best known elapsed times and related histories,
     /// and returns whether each context had that best time.
+    /// Wrapper objects are modified to reference the stored history.
     /// A `false` value for a context means the state should be skipped.
-    pub fn remember_which(&self, vec: &Vec<ContextWrapper<T>>) -> Result<Vec<bool>, Error> {
-        let mut seen_batch = WriteBatchWithTransaction::<false>::default();
+    pub fn record_many(&self, vec: &mut Vec<ContextWrapper<T>>) -> Result<Vec<bool>, Error> {
+        let mut hist_batch = WriteBatchWithTransaction::<false>::default();
+        let mut state_batch = WriteBatchWithTransaction::<false>::default();
+        let mut results = Vec::with_capacity(vec.len());
         let mut dups = 0;
-        let cf = self.seen_cf();
+        let mut new_seen = 0;
+        let cf = self.best_cf();
 
         let seeing: Vec<_> = vec.iter().map(|el| Self::get_state_key(el.get())).collect();
 
-        let seen_values = self.get_seen_values(seeing.iter())?;
+        let seen_values = self.get_state_values(cf, seeing.iter())?;
 
-        let mut res = Vec::with_capacity(vec.len());
-
-        for ((el, seen_key), seen_val) in vec
-            .iter()
+        for ((el, state_key), seen_val) in vec
+            .iter_mut()
             .zip(seeing.into_iter())
             .zip(seen_values.into_iter())
         {
-            let should_write = match seen_val {
-                Some(stored) => {
-                    if stored <= el.elapsed() {
-                        dups += 1;
-                        res.push(false);
-                        continue;
-                    } else {
-                        res.push(true);
-                    }
-                    stored > el.elapsed()
+            if let Some(StateData { elapsed, .. }) = seen_val {
+                // This is a new state being pushed, as it has new history, hence we skip if equal.
+                if elapsed <= el.elapsed() {
+                    results.push(false);
+                    dups += 1;
+                    continue;
                 }
-                None => {
-                    res.push(true);
-                    true
-                }
-            };
-            if should_write {
-                seen_batch.merge_cf(cf, &seen_key, el.elapsed().to_be_bytes());
+            } else {
+                new_seen += 1;
             }
+            // In every other case (no such state, or we do better than that state),
+            // we will rewrite the data.
+            self.record_one_batch(state_key, el, &mut hist_batch, &mut state_batch, true);
+            results.push(true);
         }
-        let new_seen = seen_batch.len();
-        self.statedb.write_opt(seen_batch, &self.write_opts)?;
-
+        self.histdb.write_opt(hist_batch, &self.write_opts).unwrap();
+        println!(
+            "record_many {:?} wrote to hist",
+            rayon::current_thread_index()
+        );
+        self.statedb
+            .write_opt(state_batch, &self.write_opts)
+            .unwrap();
+        println!(
+            "record_many {:?} wrote to state",
+            rayon::current_thread_index()
+        );
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
-        Ok(res)
+        Ok(results)
     }
 
     pub fn cleanup(&self, batch_size: usize) -> Result<(), Error> {
@@ -820,7 +944,7 @@ where
             let mut pskips = 0;
             let mut dup_pskips = 0;
             let mut count = batch_size;
-            let mut archiver = self.archiver.lock().unwrap();
+            let _retrieve_lock = self.retrieve_lock.lock().unwrap();
 
             while count > 0 {
                 if let Some(item) = iter.next() {
@@ -831,22 +955,22 @@ where
                     let max_time = self.max_time();
                     if el.elapsed() > max_time || self.score(&el) > max_time {
                         batch.delete(key);
-                        archiver.remove(el);
                         pskips += 1;
                         continue;
                     }
 
-                    let seen_key = Self::get_state_key(el.get());
-                    if let Some(stored) = self.get_seen_value(&seen_key)? {
-                        if el.elapsed() > stored {
+                    let state_key = Self::get_state_key(el.get());
+                    if let Some(StateData { elapsed, .. }) =
+                        self.get_deserialize_state_data::<StateData>(self.best_cf(), &state_key)?
+                    {
+                        if el.elapsed() > elapsed {
                             batch.delete(key);
-                            archiver.remove(el);
                             dup_pskips += 1;
                             continue;
                         }
                     }
                 } else {
-                    drop(archiver);
+                    drop(_retrieve_lock);
                     let start = Instant::now();
                     self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
                     println!("Bg thread compacting took {:?}", start.elapsed());
@@ -854,7 +978,7 @@ where
                 }
             }
             self.db.write_opt(batch, &self.write_opts).unwrap();
-            drop(archiver);
+            drop(_retrieve_lock);
             self.pskips.fetch_add(pskips, Ordering::Release);
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
             self.bg_deletes
@@ -866,6 +990,87 @@ where
                     pskips, dup_pskips
                 );
             }
+        }
+    }
+
+    pub fn get_history(&self, mut last_index: usize) -> Result<Vec<HistoryAlias<T>>, Error> {
+        let cf = self.hist_cf();
+        let mut vec = Vec::new();
+        while last_index != 0 {
+            let hd = self
+                .get_deserialize_hist_data::<HistAlias<T>>(cf, &last_index.to_be_bytes())
+                .unwrap()
+                .unwrap();
+            vec.push(hd.hist);
+            last_index = hd.prev;
+        }
+        vec.reverse();
+        Ok(vec)
+    }
+
+    pub fn get_history_ctx(&self, ctx: &ContextWrapper<T>) -> Result<Vec<HistoryAlias<T>>, Error> {
+        let (last_index, recent) = ctx.recent_history();
+        match self.get_history(last_index) {
+            Ok(mut vec) => {
+                vec.extend(recent);
+                Ok(vec)
+            }
+            Err(e) => Err(e),
+        }
+    }
+
+    pub fn get_history_until(
+        &self,
+        ctx: &ContextWrapper<T>,
+        index: usize,
+    ) -> Result<Vec<HistoryAlias<T>>, Error> {
+        let cf = self.hist_cf();
+        let mut vec = Vec::new();
+        let (mut last_index, recent) = ctx.recent_history();
+        while last_index != 0 && last_index != index {
+            let hd = self
+                .get_deserialize_hist_data::<HistAlias<T>>(cf, &last_index.to_be_bytes())
+                .unwrap()
+                .unwrap();
+            vec.push(hd.hist);
+            last_index = hd.prev;
+        }
+        vec.reverse();
+        vec.extend(recent);
+        Ok(vec)
+    }
+
+    pub fn get_last_history_step(
+        &self,
+        ctx: &ContextWrapper<T>,
+    ) -> Result<Option<HistoryAlias<T>>, Error> {
+        let (last_index, recent) = ctx.recent_history();
+        if let Some(h) = recent.last() {
+            Ok(Some(*h))
+        } else if last_index == 0 {
+            Ok(None)
+        } else {
+            let ret = Ok(Some(
+                self.get_deserialize_hist_data::<HistAlias<T>>(
+                    self.hist_cf(),
+                    &last_index.to_be_bytes(),
+                )?
+                .unwrap_or_else(|| {
+                    panic!(
+                        "{:?} Did not find history at {} ({:?})",
+                        rayon::current_thread_index(),
+                        last_index,
+                        last_index.to_be_bytes()
+                    )
+                })
+                .hist,
+            ));
+            println!(
+                "{:?} Read history at {}",
+                rayon::current_thread_index(),
+                last_index,
+            );
+            ret
         }
     }
 

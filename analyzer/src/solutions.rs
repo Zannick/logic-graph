@@ -4,12 +4,13 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
 
-fn is_subset<T, Iter>(subset: &mut Iter, superset: &mut Iter) -> bool
+fn is_subset<T, Iter>(mut subset: Iter, mut superset: Iter) -> bool
 where
     T: Eq,
     Iter: Iterator<Item = T>,
 {
     'eq: for n in subset.by_ref() {
+        // This only iterates forward once
         for v in superset.by_ref() {
             if n == v {
                 continue 'eq;
@@ -20,11 +21,17 @@ where
     true
 }
 
+#[derive(Clone, Debug)]
+pub struct Solution<T: Ctx> {
+    pub elapsed: u32,
+    pub history: Vec<HistoryAlias<T>>,
+}
+
 pub struct SolutionCollector<T>
 where
     T: Ctx,
 {
-    map: HashMap<Vec<HistoryAlias<T>>, Vec<ContextWrapper<T>>, CommonHasher>,
+    map: HashMap<Vec<HistoryAlias<T>>, Vec<Solution<T>>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
     file: File,
@@ -68,105 +75,120 @@ where
 
     /// Inserts a solution into the collection and returns whether this solution
     /// is unique compared to the prior solutions.
-    pub fn insert(&mut self, ctx: ContextWrapper<T>) -> Option<Vec<HistoryAlias<T>>> {
-        let loc_history: Vec<HistoryAlias<T>> = ctx
-            .history_rev()
-            .filter(|h| matches!(h, History::Get(_, _) | History::MoveGet(_, _)))
+    pub fn insert(
+        &mut self,
+        elapsed: u32,
+        history: Vec<HistoryAlias<T>>,
+    ) -> Option<Vec<HistoryAlias<T>>> {
+        let loc_history: Vec<HistoryAlias<T>> = history
+            .iter()
+            .filter_map(|h| {
+                if matches!(h, History::Get(_, _) | History::MoveGet(_, _)) {
+                    Some(*h)
+                } else {
+                    None
+                }
+            })
             .collect();
-        if self.count == 0 || ctx.elapsed() < self.best {
-            self.best = ctx.elapsed();
+        if self.count == 0 || elapsed < self.best {
+            self.best = elapsed;
         }
         self.count += 1;
         if let Some(vec) = self.map.get_mut(&loc_history) {
-            vec.push(ctx);
+            vec.push(Solution { elapsed, history });
             None
         } else {
             let mut locs = loc_history.clone();
             locs.reverse();
-            self.map.insert(loc_history, vec![ctx]);
+            self.map
+                .insert(loc_history, vec![Solution { elapsed, history }]);
             self.write_previews().unwrap();
             Some(locs)
         }
     }
 
-    pub fn get_best(&self) -> ContextWrapper<T> {
+    pub fn get_best(&self) -> Solution<T> {
         self.map
             .values()
-            .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
-            .min_by_key(|c| c.elapsed())
+            .map(|v| v.iter().min_by_key(|c| c.elapsed).unwrap())
+            .min_by_key(|c| c.elapsed)
             .unwrap()
             .clone()
     }
 
     pub fn get_best_unique(&self) -> Vec<HistoryAlias<T>> {
-        let mut u: Vec<_> = self
-            .map
+        self.map
             .values()
-            .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
-            .min_by_key(|c| c.elapsed())
+            .map(|v| v.iter().min_by_key(|c| c.elapsed).unwrap())
+            .min_by_key(|c| c.elapsed)
             .unwrap()
-            .history_rev()
-            .filter(|h| matches!(h, History::Get(_, _) | History::MoveGet(_, _)))
-            .collect();
-        u.reverse();
-        u
+            .history
+            .iter()
+            .filter_map(|h| {
+                if matches!(h, History::Get(_, _) | History::MoveGet(_, _)) {
+                    Some(*h)
+                } else {
+                    None
+                }
+            })
+            .collect()
     }
 
     fn write_one(
         file: &mut File,
         num: usize,
         minor_num: usize,
-        ctx: &ContextWrapper<T>,
+        sol: &Solution<T>,
         comp: u32,
     ) -> io::Result<()> {
-        let diff = ctx.elapsed() - comp;
+        let diff = sol.elapsed - comp;
         writeln!(
             file,
             "Solution #{}-{}, est. {}ms{}:",
             num,
             minor_num,
-            ctx.elapsed(),
+            sol.elapsed,
             if diff > 0 {
                 format!(" (+{}ms)", diff)
             } else {
                 "".to_string()
             }
         )?;
-        writeln!(file, "in short:\n{}", ctx.history_summary())?;
-        writeln!(file, "in full:\n{}\n\n", ctx.history_str())
+        writeln!(file, "in short:\n{}", history_summary::<T>(&sol.history))?;
+        writeln!(file, "in full:\n{}\n\n", history_str::<T>(&sol.history))
     }
 
     fn write_one_preview(
         file: &mut File,
         num: usize,
-        ctx: &ContextWrapper<T>,
+        sol: &Solution<T>,
         comp: u32,
     ) -> io::Result<()> {
-        let diff = ctx.elapsed() - comp;
+        let diff = sol.elapsed - comp;
         writeln!(
             file,
             "Solution #{}, est. {}ms{}:",
             num,
-            ctx.elapsed(),
+            sol.elapsed,
             if diff > 0 {
                 format!(" (+{}ms)", diff)
             } else {
                 "".to_string()
             }
         )?;
-        writeln!(file, "{}\n\n", ctx.history_summary())
+        writeln!(file, "{}\n\n", history_summary::<T>(&sol.history))
     }
 
     pub fn write_previews(&self) -> io::Result<()> {
         let mut file = File::create(self.previews)?;
-        let mut vec: Vec<&ContextWrapper<T>> = self
+        let mut vec: Vec<&Solution<T>> = self
             .map
             .values()
-            .map(|v| v.iter().min_by_key(|c| c.elapsed()).unwrap())
+            .map(|v| v.iter().min_by_key(|c| c.elapsed).unwrap())
             .collect();
-        vec.sort_by_key(|c| c.elapsed());
+        vec.sort_by_key(|c| c.elapsed);
         for (i, c) in vec.iter().enumerate() {
-            if c.elapsed() - self.best > self.best / 10 {
+            if c.elapsed - self.best > self.best / 10 {
                 break;
             }
             Self::write_one_preview(&mut file, i, c, self.best)?
@@ -179,19 +201,19 @@ where
             println!("No solutions");
             return Ok(());
         }
-        let mut vecs: Vec<Vec<ContextWrapper<T>>> = self.map.into_values().collect();
+        let mut vecs: Vec<Vec<Solution<T>>> = self.map.into_values().collect();
         let mut file = self.file;
         for vec in vecs.iter_mut() {
-            vec.sort_unstable_by_key(|el| el.elapsed());
+            vec.sort_unstable_by_key(|el| el.elapsed);
         }
-        vecs.sort_by_key(|v| v[0].elapsed());
+        vecs.sort_by_key(|v| v[0].elapsed);
         let mut total = 0;
         let mut types = 0;
         // TODO: add a cutoff of some percentage of the fastest?
         for (i, vec) in vecs.iter().enumerate() {
             let mut minor = 0;
             let first = vec.first().unwrap();
-            if first.elapsed() - self.best > self.best / 10 {
+            if first.elapsed - self.best > self.best / 10 {
                 break;
             }
             Self::write_one(&mut file, i, minor, first, self.best)?;
@@ -200,7 +222,7 @@ where
             for (j, similar) in vec.iter().enumerate().skip(1) {
                 if vec[..j]
                     .iter()
-                    .any(|ctx| is_subset(&mut ctx.history_rev(), &mut similar.history_rev()))
+                    .any(|sol| is_subset(sol.history.iter(), similar.history.iter()))
                 {
                     continue;
                 }

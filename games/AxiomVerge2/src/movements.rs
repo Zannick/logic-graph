@@ -14332,8 +14332,8 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
             true
         }
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => true,
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => true,
+        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => true,
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__Outcropping) => true,
         (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_Platform) => {
             true

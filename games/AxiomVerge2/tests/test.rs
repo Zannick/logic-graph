@@ -1,6 +1,6 @@
 #![allow(unused)]
 
-use analyzer::context::{ContextWrapper, Ctx, History};
+use analyzer::context::{ContextWrapper, Ctx, History, Wrapper};
 use analyzer::world::*;
 use analyzer::*;
 use libaxiom_verge2::context::Context;
@@ -16,6 +16,7 @@ use zstd::stream::write::Encoder;
 #[test]
 fn test_name() {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
 
     ctx.energy = 30;
@@ -26,6 +27,7 @@ fn test_name() {
     expect_no_route!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         SpotId::Glacier__Vertical_Room__Peak
     );
@@ -34,6 +36,7 @@ fn test_name() {
 #[test]
 fn test_route() {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
 
     ctx.energy = 30;
@@ -57,6 +60,7 @@ fn test_route() {
 #[test]
 fn test_obtain() {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
 
     ctx.energy = 30;
@@ -77,6 +81,7 @@ fn test_obtain() {
 #[test]
 fn test_require() {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 30;
     ctx.flasks = 1;
@@ -89,6 +94,7 @@ fn test_require() {
     expect_not_obtainable!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
@@ -103,6 +109,7 @@ fn test_require() {
 #[test]
 fn search() {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
     ctx.flasks = 1;
@@ -122,6 +129,7 @@ fn search() {
     expect_eventually_requires_to_obtain!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab,
         verify,
@@ -138,6 +146,7 @@ fn serde_pass<T: Ctx>(ctx: &ContextWrapper<T>) -> Vec<u8> {
 #[test]
 fn asserde_true() {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
     ctx.flasks = 1;

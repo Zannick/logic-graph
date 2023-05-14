@@ -3,7 +3,7 @@
 #![allow(unused)]
 #![allow(non_snake_case)]
 
-use analyzer::context::Ctx;
+use analyzer::context::{Ctx, Wrapper};
 use analyzer::world::*;
 use analyzer::*;
 use lib{{ package }}::context::{enums, flags, Context, Status};
@@ -94,6 +94,7 @@ SpotId::{{ (test_case.start or shared.start)|construct_id }}
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
 %% if test_file.all
 {{ setup(test_file.all) }}
@@ -111,15 +112,15 @@ fn {{ test_case|construct_test_name }}() {
 %% if test_case.can_obtain
     expect_obtainable!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.can_obtain }});
 %% elif test_case.cannot_obtain
-    expect_not_obtainable!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.cannot_obtain }});
+    expect_not_obtainable!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, Item::{{ test_case.cannot_obtain }});
 %% elif test_case.can_reach
     expect_any_route!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.can_reach|construct_id }});
 %% elif test_case.cannot_reach
-    expect_no_route!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.cannot_reach|construct_id }});
+    expect_no_route!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.cannot_reach|construct_id }});
 %% elif test_case.can_access
     expect_accessible!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.can_access|construct_id }});
 %% elif test_case.cannot_access
-    expect_inaccessible!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.cannot_access|construct_id }});
+    expect_inaccessible!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.cannot_access|construct_id }});
 %% elif test_case.can_activate
     expect_action_accessible!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.can_activate|construct_id }});
 %% elif test_case.cannot_activate
@@ -137,7 +138,7 @@ fn {{ test_case|construct_test_name }}() {
     expect_not_obtainable!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.requires.to_obtain }});
     expect_obtainable!(&world, ctx2, {{ start(test_case, test_file.all) }}, Item::{{ test_case.requires.to_obtain }});
     {%- elif test_case.requires.to_reach -%}
-    expect_no_route!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.requires.to_reach|construct_id }});
+    expect_no_route!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.requires.to_reach|construct_id }});
     expect_any_route!(&world, ctx2, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.requires.to_reach|construct_id }});
     {%- elif test_case.requires.to_access -%}
     expect_inaccessible!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.requires.to_access|construct_id }});
@@ -157,13 +158,13 @@ fn {{ test_case|construct_test_name }}() {
 %% elif test_case.eventually_requires
     let verify = {{ verify_func(test_case.eventually_requires) }};
     {% if test_case.eventually_requires.to_obtain -%}
-    expect_eventually_requires_to_obtain!(&world, ctx, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_requires.to_obtain|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    expect_eventually_requires_to_obtain!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, Item::{{ test_case.eventually_requires.to_obtain|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
     {%- elif test_case.eventually_requires.to_reach -%}
-    expect_eventually_requires_to_reach!(&world, ctx, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.eventually_requires.to_reach|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    expect_eventually_requires_to_reach!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, SpotId::{{ test_case.eventually_requires.to_reach|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
     {%- elif test_case.eventually_requires.to_access -%}
-    expect_eventually_requires_to_access!(&world, ctx, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.eventually_requires.to_access|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    expect_eventually_requires_to_access!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, LocationId::{{ test_case.eventually_requires.to_access|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
     {%- elif test_case.eventually_requires.to_activate -%}
-    expect_eventually_requires_to_activate!(&world, ctx, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.eventually_requires.to_activate|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
+    expect_eventually_requires_to_activate!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.eventually_requires.to_activate|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
     {%- endif %}
 %% endif
 }

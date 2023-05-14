@@ -1,12 +1,13 @@
 #![allow(unused)]
 
 use crate::algo::single_step;
+use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
+use crate::new_hashmap;
 use crate::steiner::{EdgeId, NodeId, SteinerAlgo};
 use crate::world::*;
-use crate::{context::*, new_hashmap};
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
@@ -71,16 +72,17 @@ where
                 max_time = c.elapsed();
                 Some(c)
             }
-            Err(c) => panic!(
-                "Never found a path to {:?}!\n{}",
-                required[0],
-                c.history_summary()
-            ),
+            Err(c) => {
+                panic!(
+                    "Never found a path to {:?}!\n{}",
+                    required[0],
+                    history_summary::<T>(&db.get_history_ctx(&c).unwrap())
+                )
+            }
         }
     } else {
         None
     };
-    let last = startctx.history_rev().next();
     let start = Instant::now();
     // TODO: don't use an a* search for this, use the greedy search
     // take the best of {no actions, 1 action, 2 actions, etc}
@@ -113,8 +115,8 @@ where
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
             return Some(el);
         }
-        let vec = single_step(world, el, max_time);
-        let keeps = db.remember_which(&vec).unwrap();
+        let mut vec = single_step(world, el, max_time);
+        let keeps = db.record_many(&mut vec).unwrap();
 
         heap.extend(
             vec.into_iter()
@@ -123,7 +125,7 @@ where
                     if !keep {
                         return None;
                     }
-                    match ctx.history_rev().next() {
+                    match db.get_last_history_step(&ctx).unwrap() {
                         Some(History::Get(_, loc_id)) => {
                             // Immediately after we visit a required location, unskip the next one
                             if index + 1 < required.len() {

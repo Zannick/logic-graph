@@ -117,7 +117,7 @@ where
 pub mod testlib {
     #[macro_export]
     macro_rules! expect_no_route {
-        ($world:expr, $ctx:expr, $start:expr, $end:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $end:expr) => {{
             $ctx.set_position($start);
 
             let spot_map = $crate::access::accessible_spots(
@@ -130,7 +130,7 @@ pub mod testlib {
                     "Found unexpected route from {} to {}:\n{}\n",
                     $start,
                     $end,
-                    ctx.history_str()
+                    $crate::context::history_str::<$T>(ctx.recent_history().1)
                 );
             }
         }};
@@ -251,7 +251,7 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_not_obtainable {
-        ($world:expr, $ctx:expr, $start:expr, $item:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $item:expr) => {{
             $ctx.set_position($start);
 
             let locations: Vec<_> = $world
@@ -282,7 +282,7 @@ pub mod testlib {
                         !$world.get_location(loc).can_access(ctx.get()),
                         "Able to access location {}:\n{}\n",
                         loc,
-                        ctx.history_str()
+                        $crate::context::history_str::<$T>(ctx.recent_history().1)
                     );
                 }
             }
@@ -314,7 +314,7 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_inaccessible {
-        ($world:expr, $ctx:expr, $start:expr, $loc_id:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $loc_id:expr) => {{
             $ctx.set_position($start);
 
             let spot_map = $crate::access::accessible_spots(
@@ -328,7 +328,7 @@ pub mod testlib {
                     !$world.get_location($loc_id).can_access(ctx.get()),
                     "Expected location {} to be inaccessible:\n{}",
                     $loc_id,
-                    ctx.history_str()
+                    $crate::context::history_str::<$T>(ctx.recent_history().1)
                 );
             }
         }};
@@ -512,7 +512,7 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_eventually_requires {
-        ($world:expr, $ctx:expr, $start:expr, $test_req:expr, $verify_req:expr, $limit:expr, $desc:expr, $cont:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $test_req:expr, $verify_req:expr, $limit:expr, $desc:expr, $cont:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
@@ -527,7 +527,7 @@ pub mod testlib {
                         "Unexpectedly able to {} without requirements:\n{}\n{}\n",
                         $desc,
                         result.unwrap_err(),
-                        ctx.history_str(),
+                        $crate::context::history_str::<$T>(ctx.recent_history().1),
                     );
                     success = true;
                 }
@@ -550,7 +550,7 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_eventually_requires_to_obtain {
-        ($world:expr, $ctx:expr, $start:expr, $item:expr, $verify_req:expr, $limit:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $item:expr, $verify_req:expr, $limit:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
@@ -565,7 +565,7 @@ pub mod testlib {
                         "Unexpectedly able to find {} without requirements:\n{}\n{}\n",
                         $item,
                         result.unwrap_err(),
-                        ctx.history_str(),
+                        $crate::context::history_str::<$T>(ctx.recent_history().1),
                     );
                     success = true;
                 }
@@ -586,7 +586,7 @@ pub mod testlib {
 
     #[macro_export]
     macro_rules! expect_eventually_requires_to_reach {
-        ($world:expr, $ctx:expr, $start:expr, $spot:expr, $verify_req:expr, $limit:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $spot:expr, $verify_req:expr, $limit:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
@@ -601,7 +601,7 @@ pub mod testlib {
                         "Unexpectedly able to reach {} without requirements:\n{}\n{}\n",
                         $spot,
                         result.unwrap_err(),
-                        ctx.history_str(),
+                        $crate::context::history_str::<$T>(ctx.recent_history().1),
                     );
                     success = true;
                 }
@@ -621,7 +621,7 @@ pub mod testlib {
     }
     #[macro_export]
     macro_rules! expect_eventually_requires_to_access {
-        ($world:expr, $ctx:expr, $start:expr, $loc_id:expr, $verify_req:expr, $limit:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $loc_id:expr, $verify_req:expr, $limit:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
@@ -636,7 +636,7 @@ pub mod testlib {
                         "Unexpectedly able to visit {} without requirements:\n{}\n{}\n",
                         $loc_id,
                         result.unwrap_err(),
-                        ctx.history_str(),
+                        $crate::context::history_str::<$T>(ctx.recent_history().1),
                     );
                     success = true;
                 }
@@ -658,7 +658,7 @@ pub mod testlib {
     }
     #[macro_export]
     macro_rules! expect_eventually_requires_to_activate {
-        ($world:expr, $ctx:expr, $start:expr, $act_id:expr, $verify_req:expr, $limit:expr) => {{
+        ($world:expr, $ctx:expr, $T:ty, $start:expr, $act_id:expr, $verify_req:expr, $limit:expr) => {{
             $ctx.set_position($start);
 
             let mut heap = $crate::heap::LimitedHeap::new();
@@ -674,7 +674,7 @@ pub mod testlib {
                             "Unexpectedly able to activate {} without requirements:\n{}\n{}\n",
                             $act_id,
                             result.unwrap_err(),
-                            ctx.history_str(),
+                            $crate::context::history_str::<$T>(ctx.recent_history().1),
                         );
                         success = true;
                     }

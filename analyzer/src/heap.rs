@@ -464,13 +464,13 @@ where
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, el: ContextWrapper<T>) -> Result<(), String> {
+    pub fn push(&self, mut el: ContextWrapper<T>) -> Result<(), String> {
         let start = Instant::now();
         if el.elapsed() > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        if !self.db.remember_push(&el)? {
+        if !self.db.record_one(&mut el)? {
             return Ok(());
         }
 
@@ -758,7 +758,7 @@ where
     {
         let mut iskips = 0;
         let start = Instant::now();
-        let vec: Vec<ContextWrapper<T>> = iter
+        let mut vec: Vec<ContextWrapper<T>> = iter
             .into_iter()
             .filter(|el| {
                 if el.elapsed() > self.db.max_time() || self.db.score(el) > self.db.max_time() {
@@ -774,7 +774,7 @@ where
             return Ok(());
         }
 
-        let keeps = self.db.remember_which(&vec)?;
+        let keeps = self.db.record_many(&mut vec)?;
         debug_assert!(vec.len() == keeps.len());
         let vec: Vec<(ContextWrapper<T>, usize, u32)> = vec
             .into_iter()

@@ -1,11 +1,9 @@
 use crate::condense::CondensedEdge;
 use crate::world::*;
-use crate::{new_hashmap, CommonHasher};
 use as_slice::{AsMutSlice, AsSlice};
 use lazy_static::lazy_static;
 use regex::{Captures, Regex};
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::str::FromStr;
@@ -294,127 +292,13 @@ pub trait Wrapper<T> {
     fn get(&self) -> &T;
     fn elapsed(&self) -> u32;
 }
-pub struct HistoryArchive<I, S, L, E, A, Wp> {
-    next: usize,
-    archive: HashMap<usize, Arc<HistoryNode<I, S, L, E, A, Wp>>, CommonHasher>,
-}
 
-#[derive(Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
-pub struct ArchivedContextWrapper<T> {
-    ctx: T,
-    elapsed: u32,
-    hist_archive: usize,
-}
-impl<T> Wrapper<T> for ArchivedContextWrapper<T> {
-    fn get(&self) -> &T {
-        &self.ctx
-    }
-    fn elapsed(&self) -> u32 {
-        self.elapsed
-    }
-}
-
-impl<I, S, L, E, A, Wp> HistoryArchive<I, S, L, E, A, Wp>
-where
-    I: Hash,
-    S: Hash,
-    L: Hash,
-    E: Hash,
-    A: Hash,
-    Wp: Hash,
-{
-    pub fn new() -> Self {
-        Self {
-            next: 1, // reserve 0 for the None
-            archive: new_hashmap(),
-        }
-    }
-
-    pub fn len(&self) -> usize {
-        self.archive.len()
-    }
-
-    pub fn counted(&self) -> usize {
-        self.next
-    }
-
-    pub fn archive<T>(
-        &mut self,
-        BaseContextWrapper {
-            ctx,
-            elapsed,
-            history,
-        }: BaseContextWrapper<T, I, S, L, E, A, Wp>,
-    ) -> ArchivedContextWrapper<T> {
-        if let Some(hist) = history {
-            let hist_archive = self.next;
-            self.next += 1;
-            self.archive.insert(hist_archive, hist);
-            ArchivedContextWrapper {
-                ctx,
-                elapsed,
-                hist_archive,
-            }
-        } else {
-            ArchivedContextWrapper {
-                ctx,
-                elapsed,
-                hist_archive: 0,
-            }
-        }
-    }
-
-    pub fn retrieve<T>(
-        &mut self,
-        ArchivedContextWrapper {
-            ctx,
-            elapsed,
-            hist_archive,
-        }: ArchivedContextWrapper<T>,
-    ) -> BaseContextWrapper<T, I, S, L, E, A, Wp> {
-        let history = self.archive.remove(&hist_archive);
-        if hist_archive > 0 {
-            assert!(
-                history.is_some(),
-                "Attempted to retrieve missing history entry {}",
-                hist_archive
-            );
-        }
-        BaseContextWrapper {
-            ctx,
-            elapsed,
-            history,
-        }
-    }
-
-    pub fn remove<T>(
-        &mut self,
-        ArchivedContextWrapper {
-            ctx: _,
-            elapsed: _,
-            hist_archive,
-        }: ArchivedContextWrapper<T>,
-    ) {
-        self.archive.remove(&hist_archive);
-    }
-}
-pub type HistoryArchiveAlias<T, W> = HistoryArchive<
-    <T as Ctx>::ItemId,
-    <<W as World>::Exit as Exit>::SpotId,
-    <<W as World>::Location as Location>::LocId,
-    <<W as World>::Exit as Exit>::ExitId,
-    <<W as World>::Action as Action>::ActionId,
-    <<W as World>::Warp as Warp>::WarpId,
->;
-
-#[derive(Clone, Debug, Hash, PartialEq, Eq)]
+#[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
-    // Rc is not Sync; if this poses a problem for HeapDB we'll have to change it to Arc
-    // or make a type for ContextWrapper to convert into
-    #[allow(clippy::type_complexity)]
-    history: Option<Arc<HistoryNode<I, S, L, E, A, Wp>>>,
+    hist_index: usize,
+    hist: Vec<History<I, S, L, E, A, Wp>>,
 }
 
 pub type ContextWrapper<T> = BaseContextWrapper<
@@ -441,25 +325,22 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed: 0,
-            history: None,
+            hist_index: 0,
+            hist: Vec::new(),
         }
     }
 
     pub fn append_history(&mut self, step: HistoryAlias<T>) {
-        self.history = Some(Arc::new(HistoryNode {
-            entry: step,
-            prev: self.history.clone(),
-        }))
+        self.hist.push(step);
     }
 
-    pub fn history_rev(&self) -> impl Iterator<Item = HistoryAlias<T>> {
-        HistoryIterator::<T> {
-            next: self.history.clone(),
-        }
+    pub fn recent_history(&self) -> (usize, &[HistoryAlias<T>]) {
+        (self.hist_index, &self.hist)
     }
 
-    pub fn last_step(&self) -> Option<HistoryAlias<T>> {
-        self.history.as_ref().map(|node| node.entry)
+    pub fn update_history(&mut self, new_hist_index: usize) {
+        self.hist_index = new_hist_index;
+        self.hist.clear();
     }
 
     pub fn elapse(&mut self, t: u32) {
@@ -640,7 +521,7 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn info(&self, est: u32) -> String {
+    pub fn info(&self, est: u32, last: Option<HistoryAlias<T>>) -> String {
         format(format_args!(
             "At {}ms (elapsed={} est. left={}), visited={}, skipped={}\nNow: {} after {}",
             self.elapsed + est,
@@ -649,65 +530,68 @@ impl<T: Ctx> ContextWrapper<T> {
             self.get().count_visits(),
             self.get().count_skips(),
             self.ctx.position(),
-            if let Some(val) = &self.history {
-                val.entry.to_string()
+            if let Some(val) = last {
+                val.to_string()
             } else {
                 String::from("None")
             },
         ))
     }
+}
 
-    pub fn history_str(&self) -> String {
-        let mut vec: Vec<String> = self
-            .history_rev()
-            .map(|h| h.to_string())
-            .collect::<Vec<String>>();
-        vec.reverse();
-        vec.join("\n")
-    }
+pub fn history_str<T>(history: &[HistoryAlias<T>]) -> String
+where
+    T: Ctx,
+{
+    let vec: Vec<String> = history.iter().map(|h| h.to_string()).collect::<Vec<String>>();
+    vec.join("\n")
+}
 
-    pub fn history_preview(&self) -> String {
-        let mut vec: Vec<String> = self
-            .history_rev()
-            .filter_map(|h| match h {
-                History::Get(..) | History::MoveGet(..) => Some(h.to_string()),
-                _ => None,
-            })
-            .collect::<Vec<String>>();
-        vec.reverse();
-        vec.join("\n")
-    }
+pub fn history_preview<T>(history: &[HistoryAlias<T>]) -> String
+where
+    T: Ctx,
+{
+    let vec: Vec<String> = history
+        .iter()
+        .filter_map(|h| match h {
+            History::Get(..) | History::MoveGet(..) => Some(h.to_string()),
+            _ => None,
+        })
+        .collect::<Vec<String>>();
+    vec.join("\n")
+}
 
-    pub fn history_summary(&self) -> String {
-        let mut vec: Vec<String> = self
-            .history_rev()
-            .fold(Vec::new(), |mut v, h| {
-                if let Some(lh) = v.last() {
-                    match (*lh, h) {
-                        (
-                            History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
-                            History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
-                        ) => (),
-                        _ => v.push(h),
-                    }
-                } else {
-                    v.push(h);
-                };
-                v
-            })
-            .into_iter()
-            .map(|h| match h {
-                History::Get(..) | History::MoveGet(..) | History::Activate(..) => h.to_string(),
-                History::Move(e) => format!("  Move... to {}", e),
-                History::MoveLocal(s) | History::MoveCondensed(s) => {
-                    format!("  Move... to {}", s)
+pub fn history_summary<T>(history: &[HistoryAlias<T>]) -> String
+where
+    T: Ctx,
+{
+    let vec: Vec<String> = history
+        .iter()
+        .fold(Vec::new(), |mut v, h| {
+            if let Some(lh) = v.last_mut() {
+                match (*lh, *h) {
+                    (
+                        History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
+                        History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
+                    ) => *lh = *h,
+                    _ => v.push(*h),
                 }
-                History::Warp(w, s) => {
-                    format!("  {}warp to {}", w, s)
-                }
-            })
-            .collect();
-        vec.reverse();
-        vec.join("\n")
-    }
+            } else {
+                v.push(*h);
+            };
+            v
+        })
+        .into_iter()
+        .map(|h| match h {
+            History::Get(..) | History::MoveGet(..) | History::Activate(..) => h.to_string(),
+            History::Move(e) => format!("  Move... to {}", e),
+            History::MoveLocal(s) | History::MoveCondensed(s) => {
+                format!("  Move... to {}", s)
+            }
+            History::Warp(w, s) => {
+                format!("  {}warp to {}", w, s)
+            }
+        })
+        .collect();
+    vec.join("\n")
 }

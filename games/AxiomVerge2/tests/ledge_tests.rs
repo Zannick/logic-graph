@@ -3,7 +3,7 @@
 #![allow(unused)]
 #![allow(non_snake_case)]
 
-use analyzer::context::Ctx;
+use analyzer::context::{Ctx, Wrapper};
 use analyzer::world::*;
 use analyzer::*;
 use libaxiom_verge2::context::{enums, flags, Context, Status};
@@ -12,6 +12,7 @@ use libaxiom_verge2::items::Item;
 
 fn shared_setup() -> (graph::World, Context) {
     let mut world = graph::World::new();
+    world.condense_graph();
     let mut ctx = Context::default();
     ctx.cbits2.insert(flags::ContextBits2::ICE_AXE);
     ctx.cbits1.insert(flags::ContextBits1::AMASHILAMA);
@@ -29,6 +30,7 @@ fn cannot_obtain_Ledge_Grab() {
     expect_not_obtainable!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
@@ -63,6 +65,7 @@ fn cannot_reach_Glacier__Vertical_Room__Peak() {
     expect_no_route!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         SpotId::Glacier__Vertical_Room__Peak
     );
@@ -180,6 +183,7 @@ fn requires_with_Ledge_Grab_to_reach_Glacier__Vertical_Room__Peak() {
     expect_no_route!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         SpotId::Glacier__Vertical_Room__Peak
     );
@@ -211,6 +215,7 @@ fn eventually_requires_with_Boomerang_to_obtain_Ledge_Grab_iteration_limit_500()
     expect_eventually_requires_to_obtain!(
         &world,
         ctx,
+        Context,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab,
         verify,
