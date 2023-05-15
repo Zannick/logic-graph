@@ -220,10 +220,10 @@ where
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
         cuckoo_opts.set_use_module_hash(false);
-        opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_allow_mmap_reads(true);
         opts2.set_allow_mmap_writes(true);
         let mut opts3 = opts2.clone();
+        opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_merge_operator_associative("min", min_merge);
 
