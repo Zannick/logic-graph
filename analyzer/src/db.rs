@@ -13,8 +13,8 @@ use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions, Env,
-    IteratorMode, MergeOperands, Options, ReadOptions, WriteBatch, WriteBatchWithTransaction,
-    WriteOptions, DB,
+    IteratorMode, MergeOperands, Options, PlainTableFactoryOptions, ReadOptions, SliceTransform,
+    WriteBatch, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
@@ -220,21 +220,30 @@ where
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
         cuckoo_opts.set_use_module_hash(false);
-        opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_allow_mmap_reads(true);
         opts2.set_allow_mmap_writes(true);
         let mut opts3 = opts2.clone();
+        opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_merge_operator_associative("min", min_merge);
 
         let cf_opts = opts2.clone();
         opts2.set_memtable_whole_key_filtering(true);
         opts2.create_missing_column_families(true);
 
+        opts3.set_plain_table_factory(&PlainTableFactoryOptions {
+            user_key_length: 8,
+            bloom_bits_per_key: 10,
+            hash_table_ratio: 0.75,
+            index_sparseness: 16,
+        });
+        opts3.set_prefix_extractor(SliceTransform::create_fixed_prefix(4));
+
+        let cf2_opts = opts3.clone();
         opts3.set_memtable_whole_key_filtering(true);
         opts3.create_missing_column_families(true);
 
-        let histcf = ColumnFamilyDescriptor::new(HIST, cf_opts.clone());
+        let histcf = ColumnFamilyDescriptor::new(HIST, cf2_opts);
         let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts);
 
         // 1 GiB write buffers + 4 GiB row cache = 5GiB for each of these?
@@ -659,11 +668,8 @@ where
         let new = batch.len();
         // The hist data needs to be pushed first, since the state and queue data reference it.
         self.histdb.write_opt(hist_batch, &self.write_opts)?;
-        println!("extend {:?} wrote to hist", rayon::current_thread_index());
         self.statedb.write_opt(state_batch, &self.write_opts)?;
-        println!("extend {:?} wrote to state", rayon::current_thread_index());
         self.db.write_opt(batch, &self.write_opts)?;
-        println!("extend {:?} wrote to db", rayon::current_thread_index());
 
         self.iskips.fetch_add(skips, Ordering::Release);
         if as_pop {
@@ -816,7 +822,6 @@ where
         for h in hist {
             let data = HistData { prev, hist: *h };
             prev = self.hist_seq.fetch_add(1, Ordering::AcqRel);
-            println!("{}: {:?}", prev, rayon::current_thread_index());
             hist_batch.put_cf(
                 self.hist_cf(),
                 prev.to_be_bytes(),
@@ -863,17 +868,9 @@ where
         let mut state_batch = WriteBatch::default();
         self.record_one_batch(state_key, el, &mut hist_batch, &mut state_batch, true);
         self.histdb.write_opt(hist_batch, &self.write_opts).unwrap();
-        println!(
-            "record_one {:?} wrote to hist",
-            rayon::current_thread_index()
-        );
         self.statedb
             .write_opt(state_batch, &self.write_opts)
             .unwrap();
-        println!(
-            "record_one {:?} wrote to state",
-            rayon::current_thread_index()
-        );
         if is_new {
             self.seen.fetch_add(1, Ordering::Release);
         }
@@ -918,17 +915,9 @@ where
             results.push(true);
         }
         self.histdb.write_opt(hist_batch, &self.write_opts).unwrap();
-        println!(
-            "record_many {:?} wrote to hist",
-            rayon::current_thread_index()
-        );
         self.statedb
             .write_opt(state_batch, &self.write_opts)
             .unwrap();
-        println!(
-            "record_many {:?} wrote to state",
-            rayon::current_thread_index()
-        );
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
         Ok(results)
@@ -1050,7 +1039,7 @@ where
         } else if last_index == 0 {
             Ok(None)
         } else {
-            let ret = Ok(Some(
+            Ok(Some(
                 self.get_deserialize_hist_data::<HistAlias<T>>(
                     self.hist_cf(),
                     &last_index.to_be_bytes(),
@@ -1064,13 +1053,7 @@ where
                     )
                 })
                 .hist,
-            ));
-            println!(
-                "{:?} Read history at {}",
-                rayon::current_thread_index(),
-                last_index,
-            );
-            ret
+            ))
         }
     }
 
