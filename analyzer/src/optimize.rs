@@ -126,7 +126,7 @@ where
                         return None;
                     }
                     match db.get_last_history_step(&ctx).unwrap() {
-                        Some(History::Get(_, loc_id)) => {
+                        Some(History::G(_, loc_id)) => {
                             // Immediately after we visit a required location, unskip the next one
                             if index + 1 < required.len() {
                                 ctx.get_mut().reset(required[index + 1]);
@@ -143,7 +143,7 @@ where
                                 None
                             }
                         }
-                        Some(History::Activate(a)) if world.is_global_action(a) => {
+                        Some(History::A(a)) if world.is_global_action(a) => {
                             if usize::from(global_actions + 1) >= world.get_global_actions().len() {
                                 None
                             } else {
@@ -205,8 +205,8 @@ where
     let mut locs_required: Vec<L::LocId> = unique_history
         .into_iter()
         .filter_map(|h| match h {
-            History::Get(_, loc_id) => Some(loc_id),
-            History::MoveGet(_, exit_id) => Some(world.get_exit(exit_id).loc_id().unwrap()),
+            History::G(_, loc_id) => Some(loc_id),
+            History::H(_, exit_id) => Some(world.get_exit(exit_id).loc_id().unwrap()),
             _ => None,
         })
         .collect();

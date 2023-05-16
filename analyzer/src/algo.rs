@@ -431,7 +431,7 @@ where
             stepping.replay(self.world, step);
             if !matches!(
                 step,
-                History::Move(_) | History::MoveLocal(_) | History::MoveCondensed(_)
+                History::E(_) | History::L(_) | History::C(_)
             ) {
                 newstates.push(stepping.clone());
             }
@@ -458,7 +458,7 @@ where
             let mut replay = self.startctx.clone();
             for step in hist {
                 replay.replay(self.world, step);
-                if matches!(step, History::Get(..) | History::MoveGet(..)) {
+                if matches!(step, History::G(..) | History::H(..)) {
                     rebuilt.push(replay.clone());
                 }
             }

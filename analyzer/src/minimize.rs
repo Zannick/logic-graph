@@ -16,10 +16,10 @@ where
     // Gather locations from the playthrough
     for hist in wonctx.recent_history().1 {
         match hist {
-            History::Get(_, loc_id) => {
+            History::G(_, loc_id) => {
                 set[*loc_id] = true;
             }
-            History::MoveGet(_, exit_id) => {
+            History::H(_, exit_id) => {
                 let ex = world.get_exit(*exit_id);
                 if let Some(loc_id) = ex.loc_id() {
                     set[*loc_id] = true;
@@ -56,7 +56,7 @@ where
     // skip remaining visited locations from last to first
     for hist in wonctx.recent_history().1 {
         match hist {
-            History::Get(_, loc_id) => {
+            History::G(_, loc_id) => {
                 ctx.skip(*loc_id);
                 // TODO: If this location can be replaced by an action, e.g. collect rupees,
                 // then it will be dropped, and if the action is slower, we fail to minimize
@@ -65,7 +65,7 @@ where
                     ctx.reset(*loc_id);
                 }
             }
-            History::MoveGet(_, exit_id) => {
+            History::H(_, exit_id) => {
                 let ex = world.get_exit(*exit_id);
                 if let Some(loc_id) = ex.loc_id() {
                     ctx.skip(*loc_id);

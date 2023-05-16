@@ -83,7 +83,7 @@ where
         let loc_history: Vec<HistoryAlias<T>> = history
             .iter()
             .filter_map(|h| {
-                if matches!(h, History::Get(_, _) | History::MoveGet(_, _)) {
+                if matches!(h, History::G(_, _) | History::H(_, _)) {
                     Some(*h)
                 } else {
                     None
@@ -125,7 +125,7 @@ where
             .history
             .iter()
             .filter_map(|h| {
-                if matches!(h, History::Get(_, _) | History::MoveGet(_, _)) {
+                if matches!(h, History::G(_, _) | History::H(_, _)) {
                     Some(*h)
                 } else {
                     None

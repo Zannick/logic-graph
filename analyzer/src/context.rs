@@ -79,13 +79,13 @@ pub trait Ctx:
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
-    Warp(WarpId, SpotId),
-    Get(ItemId, LocId),
-    Move(ExitId),
-    MoveGet(ItemId, ExitId),
-    MoveLocal(SpotId),
-    Activate(ActionId),
-    MoveCondensed(SpotId),
+    W(WarpId, SpotId),
+    G(ItemId, LocId),
+    E(ExitId),
+    H(ItemId, ExitId),
+    L(SpotId),
+    A(ActionId),
+    C(SpotId),
 }
 
 impl<I, S, L, E, A, Wp> Copy for History<I, S, L, E, A, Wp>
@@ -110,15 +110,15 @@ where
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            History::Warp(warp, dest) => write!(f, "  {}warp to {}", warp, dest),
-            History::Get(item, loc) => write!(f, "* Collect {} from {}", item, loc),
-            History::Move(exit) => write!(f, "  Take exit {}", exit),
-            History::MoveGet(item, exit) => {
+            History::W(warp, dest) => write!(f, "  {}warp to {}", warp, dest),
+            History::G(item, loc) => write!(f, "* Collect {} from {}", item, loc),
+            History::E(exit) => write!(f, "  Take exit {}", exit),
+            History::H(item, exit) => {
                 write!(f, "* Take hybrid exit {}, collecting {}", exit, item)
             }
-            History::MoveLocal(spot) => write!(f, "  Move to {}", spot),
-            History::Activate(action) => write!(f, "! Do {}", action),
-            History::MoveCondensed(spot) => write!(f, "  Move... to {}", spot),
+            History::L(spot) => write!(f, "  Move to {}", spot),
+            History::A(action) => write!(f, "! Do {}", action),
+            History::C(spot) => write!(f, "  Move... to {}", spot),
         }
     }
 }
@@ -134,25 +134,25 @@ where
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         core::mem::discriminant(self).hash(state);
         match self {
-            History::Warp(warp, dest) => {
+            History::W(warp, dest) => {
                 warp.hash(state);
                 dest.hash(state);
             }
-            History::Get(item, loc) => {
+            History::G(item, loc) => {
                 item.hash(state);
                 loc.hash(state);
             }
-            History::Move(exit) => {
+            History::E(exit) => {
                 exit.hash(state);
             }
-            History::MoveGet(item, exit) => {
+            History::H(item, exit) => {
                 item.hash(state);
                 exit.hash(state);
             }
-            History::MoveLocal(spot) | History::MoveCondensed(spot) => {
+            History::L(spot) | History::C(spot) => {
                 spot.hash(state);
             }
-            History::Activate(action) => {
+            History::A(action) => {
                 action.hash(state);
             }
         }
@@ -208,33 +208,33 @@ where
         if let Some(cap) = WARP.captures(s) {
             let warp = extract_match(&cap, "warp", s)?;
             let spot = extract_match(&cap, "spot", s)?;
-            Ok(History::Warp(
+            Ok(History::W(
                 <Wp as FromStr>::from_str(warp)?,
                 <S as FromStr>::from_str(spot)?,
             ))
         } else if let Some(cap) = GET.captures(s) {
             let item = extract_match(&cap, "item", s).unwrap_or_default();
             let loc = extract_match(&cap, "loc", s)?;
-            Ok(History::Get(
+            Ok(History::G(
                 <I as FromStr>::from_str(item).unwrap_or_default(),
                 <L as FromStr>::from_str(loc)?,
             ))
         } else if let Some(cap) = MOVE.captures(s) {
             let exit = extract_match(&cap, "exit", s)?;
-            Ok(History::Move(<E as FromStr>::from_str(exit)?))
+            Ok(History::E(<E as FromStr>::from_str(exit)?))
         } else if let Some(cap) = MOVE_GET.captures(s) {
             let exit = extract_match(&cap, "exit", s)?;
             let item = extract_match(&cap, "item", s).unwrap_or_default();
-            Ok(History::MoveGet(
+            Ok(History::H(
                 <I as FromStr>::from_str(item).unwrap_or_default(),
                 <E as FromStr>::from_str(exit)?,
             ))
         } else if let Some(cap) = MOVE_LOCAL.captures(s) {
             let spot = extract_match(&cap, "spot", s)?;
-            Ok(History::MoveLocal(<S as FromStr>::from_str(spot)?))
+            Ok(History::L(<S as FromStr>::from_str(spot)?))
         } else if let Some(cap) = ACTIVATE.captures(s) {
             let action = extract_match(&cap, "action", s)?;
-            Ok(History::Activate(<A as FromStr>::from_str(action)?))
+            Ok(History::A(<A as FromStr>::from_str(action)?))
         } else {
             Err(format!("History<T> did not find a match for: {}", s))
         }
@@ -364,7 +364,7 @@ impl<T: Ctx> ContextWrapper<T> {
             self.ctx.skip(canon_loc_id);
         }
         self.elapse(loc.time());
-        self.append_history(History::Get(loc.item(), loc.id()));
+        self.append_history(History::G(loc.item(), loc.id()));
     }
 
     pub fn exit<W, E>(&mut self, exit: &E)
@@ -376,7 +376,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
         self.ctx.spend(exit.price());
-        self.append_history(History::Move(exit.id()));
+        self.append_history(History::E(exit.id()));
     }
 
     pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: u32)
@@ -387,7 +387,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.set_position(spot);
         self.elapse(time);
-        self.append_history(History::MoveLocal(spot))
+        self.append_history(History::L(spot))
     }
 
     pub fn move_condensed_edge<W, E>(&mut self, edge: &CondensedEdge<T, E::SpotId, E::ExitId>)
@@ -398,7 +398,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.set_position(edge.dst);
         self.elapse(edge.time);
-        self.append_history(History::MoveCondensed(edge.dst));
+        self.append_history(History::C(edge.dst));
     }
 
     pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
@@ -419,7 +419,7 @@ impl<T: Ctx> ContextWrapper<T> {
         if warp.should_reload() {
             self.ctx.reload_game();
         }
-        self.append_history(History::Warp(warp.id(), warp.dest(&self.ctx)));
+        self.append_history(History::W(warp.id(), warp.dest(&self.ctx)));
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
@@ -440,7 +440,7 @@ impl<T: Ctx> ContextWrapper<T> {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
         }
-        self.append_history(History::MoveGet(loc.item(), exit.id()));
+        self.append_history(History::H(loc.item(), exit.id()));
     }
 
     pub fn activate<W, A>(&mut self, action: &A)
@@ -452,7 +452,7 @@ impl<T: Ctx> ContextWrapper<T> {
         action.perform(&mut self.ctx);
         self.elapse(action.time());
         self.ctx.spend(action.price());
-        self.append_history(History::Activate(action.id()));
+        self.append_history(History::A(action.id()));
     }
 
     pub fn replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
@@ -466,7 +466,7 @@ impl<T: Ctx> ContextWrapper<T> {
         // We skip checking validity ahead of time, i.e. can_access.
         // Some other times we should still assert some possibility.
         match step {
-            History::Warp(wp, dest) => {
+            History::W(wp, dest) => {
                 self.warp(world.get_warp(wp));
                 assert!(
                     self.get().position() == dest,
@@ -474,16 +474,16 @@ impl<T: Ctx> ContextWrapper<T> {
                     wp
                 );
             }
-            History::Get(item, loc_id) => {
+            History::G(item, loc_id) => {
                 let loc = world.get_location(loc_id);
                 self.visit(world, loc);
                 assert!(loc.item() == item, "Invalid replay: visit {:?}", loc_id);
             }
-            History::Move(exit_id) => {
+            History::E(exit_id) => {
                 let exit = world.get_exit(exit_id);
                 self.exit(exit);
             }
-            History::MoveGet(item, exit_id) => {
+            History::H(item, exit_id) => {
                 let exit = world.get_exit(exit_id);
                 let loc =
                     world.get_location(exit.loc_id().expect("MoveGet requires a hybrid exit"));
@@ -494,17 +494,17 @@ impl<T: Ctx> ContextWrapper<T> {
                     exit_id
                 )
             }
-            History::MoveLocal(spot) => {
+            History::L(spot) => {
                 let movement_state = self.ctx.get_movement_state();
                 let time = self.ctx.local_travel_time(movement_state, spot);
                 assert!(time != u32::MAX, "Invalid replay: move-local {:?}", spot);
                 self.move_local(spot, time);
             }
-            History::Activate(act_id) => {
+            History::A(act_id) => {
                 let action = world.get_action(act_id);
                 self.activate(action);
             }
-            History::MoveCondensed(spot) => {
+            History::C(spot) => {
                 let vce = world.get_condensed_edges_from(self.ctx.position());
                 // Find the minimum of these edges that goes to spot that we can take
                 let ce = vce
@@ -554,7 +554,7 @@ where
     let vec: Vec<String> = history
         .iter()
         .filter_map(|h| match h {
-            History::Get(..) | History::MoveGet(..) => Some(h.to_string()),
+            History::G(..) | History::H(..) => Some(h.to_string()),
             _ => None,
         })
         .collect::<Vec<String>>();
@@ -571,8 +571,8 @@ where
             if let Some(lh) = v.last_mut() {
                 match (*lh, *h) {
                     (
-                        History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
-                        History::Move(..) | History::MoveLocal(..) | History::MoveCondensed(_),
+                        History::E(..) | History::L(..) | History::C(_),
+                        History::E(..) | History::L(..) | History::C(_),
                     ) => *lh = *h,
                     _ => v.push(*h),
                 }
@@ -583,12 +583,12 @@ where
         })
         .into_iter()
         .map(|h| match h {
-            History::Get(..) | History::MoveGet(..) | History::Activate(..) => h.to_string(),
-            History::Move(e) => format!("  Move... to {}", e),
-            History::MoveLocal(s) | History::MoveCondensed(s) => {
+            History::G(..) | History::H(..) | History::A(..) => h.to_string(),
+            History::E(e) => format!("  Move... to {}", e),
+            History::L(s) | History::C(s) => {
                 format!("  Move... to {}", s)
             }
-            History::Warp(w, s) => {
+            History::W(w, s) => {
                 format!("  {}warp to {}", w, s)
             }
         })

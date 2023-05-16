@@ -56,20 +56,20 @@ where
     let mut ctx = context::ContextWrapper::new(startctx.clone());
     for (i, h) in hist.into_iter().enumerate() {
         match h {
-            History::Get(item, loc_id) => {
+            History::G(item, loc_id) => {
                 if item == Default::default() {
                     let item = world.get_location(loc_id).item();
-                    ctx.replay(world, History::Get(item, loc_id));
+                    ctx.replay(world, History::G(item, loc_id));
                 } else {
                     ctx.replay(world, h);
                 }
             }
-            History::MoveGet(item, exit_id) => {
+            History::H(item, exit_id) => {
                 if item == Default::default() {
                     let exit = world.get_exit(exit_id);
                     if let Some(loc_id) = exit.loc_id() {
                         let item = world.get_location(*loc_id).item();
-                        ctx.replay(world, History::MoveGet(item, exit_id));
+                        ctx.replay(world, History::H(item, exit_id));
                     } else {
                         return Err(format!("Not a hybrid exit: {}", exit_id));
                     }
@@ -77,7 +77,7 @@ where
                     ctx.replay(world, h);
                 }
             }
-            History::Move(exit_id) => {
+            History::E(exit_id) => {
                 let exit = world.get_exit(exit_id);
                 ctx = access::move_to(world, ctx, exit.dest()).expect(&format!(
                     "Could not complete route step {}: couldn't reach {}",
@@ -85,7 +85,7 @@ where
                     exit.dest()
                 ));
             }
-            History::MoveLocal(spot_id) | History::MoveCondensed(spot_id) => {
+            History::L(spot_id) | History::C(spot_id) => {
                 let pos = context::Wrapper::get(&ctx).position();
                 ctx = access::move_to(world, ctx, spot_id).expect(&format!(
                     "Could not complete route step {}: couldn't reach {} from {}",
