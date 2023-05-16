@@ -452,6 +452,7 @@ where
         if let Some(last) = newstates.last() {
             // TODO This should only push the states on top of the fork
             // which we should have in last's recent history because we never put it in db.
+            // Although the rest should be considered duplicates...
             let hist = self.queue.db().get_history_ctx(last).unwrap();
             let mut rebuilt = Vec::with_capacity(newstates.len());
             let mut replay = self.startctx.clone();
