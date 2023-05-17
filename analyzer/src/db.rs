@@ -364,7 +364,7 @@ where
     }
 
     pub fn set_lenient_max_time(&self, max_time: u32) {
-        self.set_max_time(max_time + (max_time / 128))
+        self.set_max_time(max_time + (max_time / 1024))
     }
 
     fn best_cf(&self) -> &ColumnFamily {
