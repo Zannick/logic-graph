@@ -1101,10 +1101,12 @@ where
             Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
         )?;
         let statestats = perf::get_memory_usage_stats(Some(&[&self.statedb]), None)?;
+        let histstats = perf::get_memory_usage_stats(Some(&[&self.histdb]), None)?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}\n\
              statedb: total={}, unflushed={}, readers={}, caches={}\n\
+             histdb: total={}, unflushed={}, readers={}, caches={}\n\
              uncompressed={}, compressed={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
@@ -1114,6 +1116,10 @@ where
             SizeFormatter::new(statestats.mem_table_unflushed, BINARY),
             SizeFormatter::new(statestats.mem_table_readers_total, BINARY),
             SizeFormatter::new(statestats.cache_total, BINARY),
+            SizeFormatter::new(histstats.mem_table_total, BINARY),
+            SizeFormatter::new(histstats.mem_table_unflushed, BINARY),
+            SizeFormatter::new(histstats.mem_table_readers_total, BINARY),
+            SizeFormatter::new(histstats.cache_total, BINARY),
             SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
             SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
         ))
