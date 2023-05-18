@@ -250,6 +250,61 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
+    /// Round-robin eviction of `min_pops` elements across all segments.
+    /// Will not completely empty any segment. Requires that the queue has at least
+    /// `min_pops` elements, plus one for each non-empty segment.
+    fn pop_round_robin(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
+        if let Some(min) = self.min_priority() {
+            let max = self.max_priority().unwrap();
+            let mut vec = Vec::with_capacity(min_pops);
+            let mut segment = min;
+            assert!(self.len_queue() >= min_pops + max - min + 1);
+            while vec.len() < min_pops {
+                if let Some(bucket) = self.bucket_for_replacing(segment) {
+                    if bucket.len_bucket() > 1 {
+                        vec.push(bucket.pop_max().unwrap());
+                        self.items_replaced(segment, 1, 0);
+                    }
+                }
+                segment = if segment == max { min } else { segment + 1 };
+            }
+            vec
+        } else {
+            Vec::new()
+        }
+    }
+
+    fn pop_proportionally(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
+        if let Some(min) = self.min_priority() {
+            let max = self.max_priority().unwrap();
+            let mut vec = Vec::with_capacity(min_pops + max - min + 1);
+            let factor = (self.len_queue() + min_pops - 1) / min_pops;
+            assert!(factor > 1);
+            for segment in min..=max {
+                // pop 1/factor of each segment with at least that many elements.
+                // and round up.
+                if let Some(bucket) = self.bucket_for_replacing(segment) {
+                    // This actually guarantees that we don't clear the list.
+                    // min factor = 2, min len = 3, so we pop (3+1) / 2 = 2 elements
+                    // higher factors leave even more.
+                    if bucket.len_bucket() > factor {
+                        let pops = (bucket.len_bucket() + factor - 1) / factor;
+                        for _i in 0..pops {
+                            vec.push(bucket.pop_max().unwrap());
+                        }
+                        self.items_replaced(segment, pops, 0);
+                    }
+                }
+            }
+            if vec.len() < min_pops {
+                vec.extend(self.pop_round_robin(min_pops - vec.len()));
+            }
+            vec
+        } else {
+            Vec::new()
+        }
+    }
+
     fn shrink_to_fit(&mut self) {
         let mut segment = 0;
         while let Some(b) = self.bucket_for_replacing(segment) {

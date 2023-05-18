@@ -320,7 +320,7 @@ impl<T: Ctx> LimitedHeap<T> {
 pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     queue: Mutex<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
     db: HeapDB<'w, W, T>,
-    capacity: AtomicUsize,
+    capacity: usize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
     min_db_estimate: AtomicU32,
@@ -358,7 +358,7 @@ where
         let q = RocksBackedQueue {
             queue: Mutex::new(BucketQueue::new()),
             db: HeapDB::open(db_path, initial_max_time, world, startctx.get())?,
-            capacity: max_capacity.into(),
+            capacity: max_capacity,
             iskips: 0.into(),
             pskips: 0.into(),
             min_db_estimate: u32::MAX.into(),
@@ -484,7 +484,7 @@ where
         {
             let mut queue = self.queue.lock().unwrap();
 
-            if queue.len() == self.capacity.load(Ordering::Acquire) {
+            if queue.len() == self.capacity {
                 // compare to the last element, aka the MAX
                 let (ctx, &p_max) = queue
                     .peek_max()
@@ -496,14 +496,12 @@ where
                     self.min_db_estimate
                         .fetch_min(est_complete, Ordering::Release);
                 } else {
-                    let max_evictions = std::cmp::min(self.max_evictions, (queue.len() / 4) * 3);
+                    let evictions = std::cmp::min(
+                        self.max_evictions,
+                        std::cmp::max(self.min_evictions, queue.len() / 2),
+                    );
                     // New item is better, evict some old_items.
-                    evicted = Some(Self::evict_until(
-                        &mut queue,
-                        est_complete,
-                        self.min_evictions,
-                        max_evictions,
-                    ));
+                    evicted = Some(Self::evict_until(&mut queue, evictions));
                     queue.push(el, progress, est_complete);
                 }
             } else {
@@ -527,29 +525,17 @@ where
         Ok(())
     }
 
-    /// Removes elements from the max end of the queue until we reach any of:
-    /// an element above the given priority (it is kept in the queue),
-    /// the other end of the queue, or a total of `max_evictions` elements.
-    /// You may also specify a `min_evictions` to ensure that a certain amount of space is
-    /// always cleared.
+    /// Removes elements from the max end of each segment in the queue until we reach
+    /// the minimum desired evictions.
     fn evict_until(
         queue: &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-        el_estimate: u32,
         min_evictions: usize,
-        max_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
-        let mut evicted: Vec<_> = queue
-            .pop_all_with_priority(el_estimate, max_evictions)
+        let evicted: Vec<_> = queue
+            .pop_proportionally(min_evictions)
             .into_iter()
             .map(|(c, _)| c)
             .collect();
-        while evicted.len() < min_evictions {
-            if let Some((ctx, _)) = queue.pop_max() {
-                evicted.push(ctx);
-            } else {
-                break;
-            }
-        }
         queue.shrink_to_fit();
         evicted
     }
@@ -598,24 +584,20 @@ where
                     && !self.retrieving.fetch_or(true, Ordering::AcqRel)
                 {
                     let start = Instant::now();
-                    let cap = self.capacity.load(Ordering::Acquire);
                     // Get a decent amount to refill
                     let num_to_restore = std::cmp::max(
                         self.min_reshuffle,
-                        std::cmp::min(self.max_reshuffle, (cap - queue.len()) / 2),
+                        std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / 2),
                     );
                     let len = queue.len();
-                    if cap - len < num_to_restore {
-                        // est_completion is the min element, so we'd drain the queue
-                        // instead lets drain half of the earliest segment, and go from there
-                        let threshold = (queue.peek_min_segment_min_priority().unwrap()
-                            + queue.peek_min_segment_max_priority().unwrap())
-                            / 2;
+                    if self.capacity - len < num_to_restore {
+                        // evict at least twice that much.
                         let evicted = Self::evict_until(
                             &mut queue,
-                            threshold,
-                            self.min_evictions,
-                            len + 2 * num_to_restore - cap,
+                            std::cmp::min(
+                                self.max_evictions,
+                                std::cmp::max(self.min_evictions, 2 * num_to_restore),
+                            ),
                         );
                         println!("reshuffle:evict took {:?}", start.elapsed());
                         drop(queue);
@@ -674,10 +656,7 @@ where
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
-            std::cmp::min(
-                self.max_reshuffle,
-                (self.capacity.load(Ordering::Acquire) - queue.len()) / 2,
-            ),
+            std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / 2),
         );
         drop(queue);
         let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
@@ -797,16 +776,14 @@ where
         let mut evicted = None;
         {
             let mut queue = self.queue.lock().unwrap();
-            let cap = self.capacity.load(Ordering::Acquire);
             let len = queue.len();
-            if len + vec.len() > cap {
-                let max_evictions = std::cmp::min(self.max_evictions, (len / 4) * 3);
-                let el_estimate = vec.iter().min_by_key(|(_, _, p)| p).unwrap().2;
+            if len + vec.len() > self.capacity {
                 evicted = Some(Self::evict_until(
                     &mut queue,
-                    el_estimate,
-                    std::cmp::max(len + vec.len() - cap, self.min_evictions),
-                    max_evictions,
+                    std::cmp::min(
+                        std::cmp::max(len + vec.len() - self.capacity, self.min_evictions),
+                        std::cmp::min(self.max_evictions, (len / 4) * 3),
+                    ),
                 ));
             }
             queue.extend(vec);
