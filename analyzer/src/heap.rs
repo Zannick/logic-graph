@@ -532,7 +532,7 @@ where
         min_evictions: usize,
     ) -> Vec<ContextWrapper<T>> {
         let evicted: Vec<_> = queue
-            .pop_proportionally(min_evictions)
+            .pop_max_proportionally(min_evictions)
             .into_iter()
             .map(|(c, _)| c)
             .collect();
@@ -726,6 +726,52 @@ where
             let half = (q.min_priority()? + q.max_priority()?) / 2;
             q.pop_segment_min(half).or_else(|| q.pop_max_segment_min())
         })
+    }
+
+    pub fn pop_round_robin(&self) -> Result<Vec<ContextWrapper<T>>, String> {
+        let mut queue = self.queue.lock().unwrap();
+        while !queue.is_empty() || !self.db.is_empty() {
+            if let Some(min) = queue.min_priority() {
+                let max = queue.max_priority().unwrap();
+                let mut vec = Vec::with_capacity(max - min + 1);
+                for segment in min..=max {
+                    if let Some(bucket) = queue.bucket_for_removing(segment) {
+                        while let Some((ctx, el_estimate)) = bucket.pop_min() {
+                            debug_assert!(
+                                el_estimate == self.db.score(&ctx),
+                                "stored estimate {} didn't match score {}",
+                                el_estimate,
+                                self.db.score(&ctx)
+                            );
+                            let max_time = self.db.max_time();
+                            if ctx.elapsed() > max_time || self.db.score(&ctx) > max_time {
+                                self.pskips.fetch_add(1, Ordering::Release);
+                                continue;
+                            }
+                            if !self.db.remember_pop(&ctx)? {
+                                continue;
+                            }
+
+                            vec.push(ctx);
+                            break;
+                        }
+                    }
+                }
+                vec.shrink_to_fit();
+                return Ok(vec);
+            } else {
+                // Retrieve some from db
+                if !self.db.is_empty() {
+                    if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
+                        queue = self.do_retrieve_and_insert(queue)?;
+                        self.retrieving.store(false, Ordering::Release);
+                    } else if let Some(el) = self.db.pop(None)? {
+                        return Ok(vec![el]);
+                    }
+                }
+            }
+        }
+        Ok(Vec::new())
     }
 
     /// Adds all the given elements to the queue, except for any

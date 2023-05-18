@@ -253,7 +253,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     /// Round-robin eviction of `min_pops` elements across all segments.
     /// Will not completely empty any segment. Requires that the queue has at least
     /// `min_pops` elements, plus one for each non-empty segment.
-    fn pop_round_robin(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
+    fn pop_max_round_robin(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
         if let Some(min) = self.min_priority() {
             let max = self.max_priority().unwrap();
             let mut vec = Vec::with_capacity(min_pops);
@@ -274,7 +274,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         }
     }
 
-    fn pop_proportionally(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
+    fn pop_max_proportionally(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
         if let Some(min) = self.min_priority() {
             let max = self.max_priority().unwrap();
             let mut vec = Vec::with_capacity(min_pops + max - min + 1);
@@ -297,7 +297,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                 }
             }
             if vec.len() < min_pops {
-                vec.extend(self.pop_round_robin(min_pops - vec.len()));
+                vec.extend(self.pop_max_round_robin(min_pops - vec.len()));
             }
             vec
         } else {

@@ -421,18 +421,14 @@ where
         mode: SearchMode,
     ) {
         let (fork_point, other) = fork.recent_history();
-        assert!(other.is_empty());
         // Create intermediate states to add to the queue.
         let winhist = self.queue.db().get_history_until(&ctx, fork_point).unwrap();
 
         let mut newstates = Vec::new();
         let mut stepping = fork.clone();
-        for step in winhist.into_iter().rev() {
+        for step in winhist.into_iter().skip(other.len()) {
             stepping.replay(self.world, step);
-            if !matches!(
-                step,
-                History::E(_) | History::L(_) | History::C(_)
-            ) {
+            if !matches!(step, History::E(_) | History::L(_) | History::C(_)) {
                 newstates.push(stepping.clone());
             }
         }
@@ -524,10 +520,15 @@ where
             W::Location: Accessible<Context = T>,
             W::Warp: Accessible<Context = T>,
         {
-            type Item = ContextWrapper<T>;
+            type Item = Vec<ContextWrapper<T>>;
 
             fn next(&mut self) -> Option<Self::Item> {
-                self.q.pop().unwrap()
+                let vec = self.q.pop_round_robin().unwrap();
+                if vec.is_empty() {
+                    None
+                } else {
+                    Some(vec)
+                }
             }
         }
 
@@ -547,12 +548,12 @@ where
             let mut res = Ok(());
             while res.is_ok() && !self.queue.is_empty() {
                 let iter = Iter { q: &self.queue };
-                res = iter.par_bridge().try_for_each(|item| {
-                    let vec = self.process_one(
-                        item,
-                        &start,
-                        mode_by_index(rayon::current_thread_index().unwrap_or_default()),
-                    )?;
+                res = iter.par_bridge().try_for_each(|items| {
+                    let mut vec = Vec::new();
+                    let mode = mode_by_index(rayon::current_thread_index().unwrap_or_default());
+                    for item in items {
+                        vec.extend(self.process_one(item, &start, mode)?);
+                    }
                     if !vec.is_empty() {
                         self.queue.extend(vec).map(|_| ())
                     } else {
