@@ -721,6 +721,7 @@ where
             self.queue.background_deletes(),
             ctx.info(
                 self.queue.estimated_remaining_time(ctx),
+                self.queue.db().progress(ctx.get()),
                 self.queue.db().get_last_history_step(ctx).unwrap()
             )
         );

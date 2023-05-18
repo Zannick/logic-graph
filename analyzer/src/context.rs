@@ -521,12 +521,13 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn info(&self, est: u32, last: Option<HistoryAlias<T>>) -> String {
+    pub fn info(&self, est: u32, progress: usize, last: Option<HistoryAlias<T>>) -> String {
         format(format_args!(
-            "At {}ms (elapsed={} est. left={}), visited={}, skipped={}\nNow: {} after {}",
+            "At {}ms (elapsed={} est. left={}), progress={}, visited={}, skipped={}\nNow: {} after {}",
             self.elapsed + est,
             self.elapsed,
             est,
+            progress,
             self.get().count_visits(),
             self.get().count_skips(),
             self.ctx.position(),
