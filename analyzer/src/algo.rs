@@ -268,24 +268,14 @@ where
         let startctx = ContextWrapper::new(ctx);
         let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
 
-        let mut intermediate = Vec::new();
-
         let mut wins = Vec::new();
         let mut others = 0;
         for c in routes {
-            let hist = c.recent_history().1;
-            let mut newctx = startctx.clone();
-            for h in hist.iter() {
-                newctx.replay(world, *h);
-                // We want to at least remember each intermediate state in the queue.
-                if !world.won(newctx.get()) {
-                    intermediate.push(newctx.clone());
-                }
-            }
             if world.won(c.get()) {
                 wins.push(c);
             } else {
-                // We don't need to save the others, since we recreated them above.
+                // We don't save the others at all.
+                // (No intermediate states are created to avoid history duplication.)
                 others += 1;
             }
         }
@@ -355,7 +345,6 @@ where
         )
         .unwrap();
         queue.push(startctx.clone()).unwrap();
-        queue.extend(intermediate).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
         println!("Queue starts with {} elements", queue.len());
         Ok(Search {
