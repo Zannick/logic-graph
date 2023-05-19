@@ -15,7 +15,6 @@ use std::time::{Duration, Instant};
 enum SearchMode {
     Single,
     Greedy,
-    MaxEstimate,
     MaxProgress,
     SomeProgress(usize),
     HalfProgress,
@@ -27,8 +26,7 @@ fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
         2 => SearchMode::Greedy,
-        4 => SearchMode::MaxProgress,
-        5 => SearchMode::MaxEstimate,
+        4 | 5 => SearchMode::MaxProgress,
         9 => SearchMode::SomeProgress(1),
         11 => SearchMode::SomeProgress(2),
         13 => SearchMode::SomeProgress(4),
@@ -572,16 +570,6 @@ where
                 }
 
                 // All the single-step states are still pushed to the queue, even the one we used
-                self.extras.fetch_add(1, Ordering::Release);
-                Ok(next)
-            }
-            SearchMode::MaxEstimate => {
-                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
-                if let Some(ctx2) = self.queue.pop_max_estimate().unwrap() {
-                    next.extend(
-                        self.extract_solutions(self.single_step(ctx2), SearchMode::MaxEstimate),
-                    );
-                }
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
             }
