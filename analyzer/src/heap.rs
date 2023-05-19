@@ -823,7 +823,7 @@ where
             if len + vec.len() > self.capacity {
                 evicted = Some(Self::evict_until(
                     &mut queue,
-                    std::cmp::max(
+                    std::cmp::min(
                         std::cmp::max(len + vec.len() - self.capacity, self.min_evictions),
                         std::cmp::min(self.max_evictions, (len / 4) * 3),
                     ),
