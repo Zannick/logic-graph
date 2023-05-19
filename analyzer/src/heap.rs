@@ -594,10 +594,7 @@ where
                         // evict at least twice that much.
                         let evicted = Self::evict_until(
                             &mut queue,
-                            std::cmp::min(
-                                self.max_evictions,
-                                std::cmp::max(self.min_evictions, 2 * num_to_restore),
-                            ),
+                            std::cmp::max(self.min_evictions, 2 * num_to_restore),
                         );
                         println!("reshuffle:evict took {:?}", start.elapsed());
                         drop(queue);
@@ -826,7 +823,7 @@ where
             if len + vec.len() > self.capacity {
                 evicted = Some(Self::evict_until(
                     &mut queue,
-                    std::cmp::min(
+                    std::cmp::max(
                         std::cmp::max(len + vec.len() - self.capacity, self.min_evictions),
                         std::cmp::min(self.max_evictions, (len / 4) * 3),
                     ),
