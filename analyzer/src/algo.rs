@@ -2,7 +2,6 @@ use crate::access::*;
 use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
-use crate::minimize::*;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use rayon::prelude::*;
@@ -14,28 +13,27 @@ use std::time::{Duration, Instant};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
-    Classic,
+    Single,
     Greedy,
     MaxEstimate,
     MaxProgress,
     SomeProgress(usize),
     HalfProgress,
     Dependent,
-    Single,
     Unknown,
 }
 
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
-        2 | 7 => SearchMode::Greedy,
-        4 | 8 => SearchMode::MaxProgress,
+        2 => SearchMode::Greedy,
+        4 => SearchMode::MaxProgress,
         5 => SearchMode::MaxEstimate,
         9 => SearchMode::SomeProgress(1),
         11 => SearchMode::SomeProgress(2),
         13 => SearchMode::SomeProgress(4),
         15 => SearchMode::HalfProgress,
-        // 0, 3, 12
+        // 0, 3, 7, 8, 12
         _ => SearchMode::Single,
     }
 }
@@ -314,29 +312,24 @@ where
             .unwrap_or_else(|| Self::find_greedy_win(world, &startctx));
 
         let start = Instant::now();
-        let (max_time, clean_ctx) = if let Some(m) =
-            minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed())
-        {
-            println!("Minimized in {:?}", start.elapsed());
-            println!(
-                "Initial solution of {}ms was minimized to {}ms",
-                wonctx.elapsed(),
-                m.elapsed()
-            );
-            let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-            let clean_ctx = ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &m));
-            solutions.insert(
-                m.elapsed(),
-                m.recent_history().1.into_iter().copied().collect(),
-            );
-            (max_time, clean_ctx)
-        } else {
-            println!("Minimized-greedy solution wasn't faster than original");
-            (
-                wonctx.elapsed(),
-                ContextWrapper::new(remove_all_unvisited(world, startctx.get(), &wonctx)),
-            )
-        };
+        let max_time =
+            if let Some(m) = minimize_greedy(world, startctx.get(), &wonctx, wonctx.elapsed()) {
+                println!("Minimized in {:?}", start.elapsed());
+                println!(
+                    "Initial solution of {}ms was minimized to {}ms",
+                    wonctx.elapsed(),
+                    m.elapsed()
+                );
+                let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
+                solutions.insert(
+                    m.elapsed(),
+                    m.recent_history().1.into_iter().copied().collect(),
+                );
+                max_time
+            } else {
+                println!("Minimized-greedy solution wasn't faster than original");
+                wonctx.elapsed()
+            };
 
         solutions.insert(
             wonctx.elapsed(),
@@ -353,7 +346,7 @@ where
             ".db",
             world,
             &startctx,
-            max_time + max_time / 10,
+            max_time + max_time / 128,
             1_048_576,
             131_072,
             262_144,
@@ -362,7 +355,6 @@ where
         )
         .unwrap();
         queue.push(startctx.clone()).unwrap();
-        queue.push(clean_ctx).unwrap();
         queue.extend(intermediate).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
         println!("Queue starts with {} elements", queue.len());
@@ -399,12 +391,6 @@ where
             println!("Max time to consider is now: {}ms", self.queue.max_time());
         }
 
-        // If there were locations we skipped mid-route, skip them from the start,
-        // in case that changes the routing.
-        let newctx =
-            ContextWrapper::new(remove_all_unvisited(self.world, self.startctx.get(), &ctx));
-        self.queue.push(newctx).unwrap();
-
         if let Some(_) = sols.insert(
             ctx.elapsed(),
             self.queue.db().get_history_ctx(&ctx).unwrap(),
@@ -414,25 +400,7 @@ where
         }
     }
 
-    fn handle_greedy_solution(
-        &self,
-        ctx: ContextWrapper<T>,
-        fork: &ContextWrapper<T>,
-        mode: SearchMode,
-    ) {
-        let (fork_point, other) = fork.recent_history();
-        // Create intermediate states to add to the queue.
-        let winhist = self.queue.db().get_history_until(&ctx, fork_point).unwrap();
-
-        let mut newstates = Vec::new();
-        let mut stepping = fork.clone();
-        for step in winhist.into_iter().skip(other.len()) {
-            stepping.replay(self.world, step);
-            if !matches!(step, History::E(_) | History::L(_) | History::C(_)) {
-                newstates.push(stepping.clone());
-            }
-        }
-
+    fn handle_greedy_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) {
         let mstart = Instant::now();
         if let Some(m) = minimize_greedy(self.world, self.startctx.get(), &ctx, ctx.elapsed()) {
             println!(
@@ -444,22 +412,6 @@ where
             self.handle_solution(m, mode);
         }
         self.handle_solution(ctx, mode);
-
-        if let Some(last) = newstates.last() {
-            // TODO This should only push the states on top of the fork
-            // which we should have in last's recent history because we never put it in db.
-            // Although the rest should be considered duplicates...
-            let hist = self.queue.db().get_history_ctx(last).unwrap();
-            let mut rebuilt = Vec::with_capacity(newstates.len());
-            let mut replay = self.startctx.clone();
-            for step in hist {
-                replay.replay(self.world, step);
-                if matches!(step, History::G(..) | History::H(..)) {
-                    rebuilt.push(replay.clone());
-                }
-            }
-            self.queue.extend(rebuilt).unwrap();
-        }
     }
 
     fn extract_solutions(
@@ -478,10 +430,6 @@ where
                 }
             })
             .collect()
-    }
-
-    fn classic_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        classic_step(self.world, ctx, self.queue.max_time())
     }
 
     fn single_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
@@ -544,6 +492,19 @@ where
                     self.queue.db_cleanup(65_536).unwrap();
                 }
             });
+
+            while self.queue.len() < 4 * rayon::current_num_threads() {
+                if let Some(item) = self.queue.pop()? {
+                    self.queue
+                        .extend(self.process_one(item, &start, SearchMode::Single)?)?;
+                } else {
+                    break;
+                }
+            }
+            println!(
+                "Using multiple threads now that we have: {}",
+                self.queue.len()
+            );
 
             let mut res = Ok(());
             while res.is_ok() && !self.queue.is_empty() {
@@ -610,10 +571,9 @@ where
             mode
         };
         match current_mode {
-            SearchMode::Single => Ok(self.extract_solutions(self.single_step(ctx), current_mode)),
             SearchMode::Greedy => {
-                // Run a classic step on the given state and handle any solutions
-                let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
+                // Run a single step on the given state and handle any solutions
+                let next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
                 // Pick a state greedily: max progress, min elapsed, and do a greedy search.
                 if let Some(ctx) = next
                     .iter()
@@ -621,17 +581,17 @@ where
                 {
                     if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
                         if win.elapsed() <= self.queue.max_time() {
-                            self.handle_greedy_solution(win, &ctx, mode);
+                            self.handle_greedy_solution(win, mode);
                         }
                     }
                 }
 
-                // All the classic states are still pushed to the queue, even the one we used
+                // All the single-step states are still pushed to the queue, even the one we used
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
             }
             SearchMode::MaxEstimate => {
-                let mut next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
+                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
                 if let Some(ctx2) = self.queue.pop_max_estimate().unwrap() {
                     next.extend(
                         self.extract_solutions(self.single_step(ctx2), SearchMode::MaxEstimate),
@@ -664,10 +624,7 @@ where
                 self.extras.fetch_add(1, Ordering::Release);
                 Ok(next)
             }
-            _ => {
-                let next = self.extract_solutions(self.classic_step(ctx), SearchMode::Classic);
-                Ok(next)
-            }
+            _ => Ok(self.extract_solutions(self.single_step(ctx), current_mode)),
         }
     }
 
