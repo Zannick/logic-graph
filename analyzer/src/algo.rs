@@ -448,39 +448,59 @@ where
 
     pub fn search(self) -> Result<(), std::io::Error> {
         let finished = AtomicBool::new(false);
+        let threads_done = AtomicUsize::new(0);
         let start = Mutex::new(Instant::now());
-        println!(
-            "Starting search with {} threads",
-            rayon::current_num_threads()
-        );
+        let num_threads = rayon::current_num_threads();
+        let res = Mutex::new(Ok(()));
+        println!("Starting search with {} threads", num_threads);
 
-        struct Iter<'a, W, T>
-        where
-            W: World,
-            T: Ctx<World = W>,
-        {
-            q: &'a RocksBackedQueue<'a, W, T>,
-        }
-        impl<'a, W, T> Iterator for Iter<'a, W, T>
-        where
-            W: World,
-            T: Ctx<World = W>,
-            W::Location: Accessible<Context = T>,
-            W::Warp: Accessible<Context = T>,
-        {
-            type Item = Vec<ContextWrapper<T>>;
-
-            fn next(&mut self) -> Option<Self::Item> {
-                let vec = self.q.pop_round_robin().unwrap();
-                if vec.is_empty() {
-                    None
+        let run_thread = |i| {
+            let mode = mode_by_index(i);
+            let mut done = false;
+            while !finished.load(Ordering::Acquire)
+                && threads_done.load(Ordering::Acquire) < num_threads
+            {
+                let items = self.queue.pop_round_robin().unwrap();
+                if items.is_empty() {
+                    if !done {
+                        done = true;
+                        threads_done.fetch_add(1, Ordering::Release);
+                    }
+                    sleep(Duration::from_secs(1));
                 } else {
-                    Some(vec)
+                    if done {
+                        threads_done.fetch_sub(1, Ordering::Acquire);
+                        done = false;
+                    }
+                    let mut vec = Vec::new();
+                    for item in items {
+                        match self.process_one(item, &start, mode) {
+                            Ok(v) => vec.extend(v),
+                            Err(e) => {
+                                let mut r = res.lock().unwrap();
+                                if r.is_ok() {
+                                    *r = Err(e);
+                                    finished.store(true, Ordering::Release);
+                                }
+                                return;
+                            }
+                        }
+                    }
+                    if !vec.is_empty() {
+                        if let Err(e) = self.queue.extend(vec).map(|_| ()) {
+                            let mut r = res.lock().unwrap();
+                            if r.is_ok() {
+                                *r = Err(e);
+                                finished.store(true, Ordering::Release);
+                            }
+                            return;
+                        }
+                    }
                 }
             }
-        }
+        };
 
-        let res = rayon::scope(|scope| {
+        rayon::scope(|scope| {
             scope.spawn(|_| {
                 let sleep_time = Duration::from_secs(10);
                 while !finished.load(Ordering::Acquire) {
@@ -493,37 +513,13 @@ where
                 }
             });
 
-            while self.queue.len() < 4 * rayon::current_num_threads() {
-                if let Some(item) = self.queue.pop()? {
-                    self.queue
-                        .extend(self.process_one(item, &start, SearchMode::Single)?)?;
-                } else {
-                    break;
+            rayon::scope(|sc2| {
+                for i in 0..num_threads {
+                    sc2.spawn(move |_| run_thread(i));
                 }
-            }
-            println!(
-                "Using multiple threads now that we have: {}",
-                self.queue.len()
-            );
+            });
 
-            let mut res = Ok(());
-            while res.is_ok() && !self.queue.is_empty() {
-                let iter = Iter { q: &self.queue };
-                res = iter.par_bridge().try_for_each(|items| {
-                    let mut vec = Vec::new();
-                    let mode = mode_by_index(rayon::current_thread_index().unwrap_or_default());
-                    for item in items {
-                        vec.extend(self.process_one(item, &start, mode)?);
-                    }
-                    if !vec.is_empty() {
-                        self.queue.extend(vec).map(|_| ())
-                    } else {
-                        Ok(())
-                    }
-                });
-            }
             finished.store(true, Ordering::Release);
-            res
         });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         println!(
@@ -534,7 +530,7 @@ where
             dskips,
             pskips,
             dpskips,
-            match res {
+            match res.into_inner().unwrap() {
                 Ok(_) => String::from("emptied queue"),
                 Err(s) => s,
             }
@@ -548,7 +544,7 @@ where
         ctx: ContextWrapper<T>,
         start: &Mutex<Instant>,
         mode: SearchMode,
-    ) -> Result<Vec<ContextWrapper<T>>, &str> {
+    ) -> Result<Vec<ContextWrapper<T>>, String> {
         let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
