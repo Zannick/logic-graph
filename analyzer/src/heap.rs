@@ -732,8 +732,8 @@ where
                 let max = queue.max_priority().unwrap();
                 let mut vec = Vec::with_capacity(max - min + 1);
                 for segment in min..=max {
-                    if let Some(bucket) = queue.bucket_for_removing(segment) {
-                        while let Some((ctx, el_estimate)) = bucket.pop_min() {
+                    if queue.bucket_for_peeking(segment).is_some() {
+                        while let Some((ctx, el_estimate)) = queue.bucket_for_removing(segment).unwrap().pop_min() {
                             debug_assert!(
                                 el_estimate == self.db.score(&ctx),
                                 "stored estimate {} didn't match score {}",
