@@ -934,6 +934,7 @@ where
             let mut pskips = 0;
             let mut dup_pskips = 0;
             let mut count = batch_size;
+            let mut compact = false;
             let _retrieve_lock = self.retrieve_lock.lock().unwrap();
 
             while count > 0 {
@@ -960,11 +961,8 @@ where
                         }
                     }
                 } else {
-                    drop(_retrieve_lock);
-                    let start = Instant::now();
-                    self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
-                    println!("Bg thread compacting took {:?}", start.elapsed());
-                    return Ok(());
+                    compact = true;
+                    break;
                 }
             }
             self.db.write_opt(batch, &self.write_opts).unwrap();
@@ -979,6 +977,11 @@ where
                     "Background thread deleted {} expired and {} duplicate elements",
                     pskips, dup_pskips
                 );
+            }
+            if compact {
+                let start = Instant::now();
+                self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
+                println!("Bg thread compacting took {:?}", start.elapsed());
             }
         }
     }
