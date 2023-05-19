@@ -982,6 +982,7 @@ where
                 let start = Instant::now();
                 self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
                 println!("Bg thread compacting took {:?}", start.elapsed());
+                return Ok(());
             }
         }
     }
