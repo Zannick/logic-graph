@@ -238,6 +238,7 @@ where
             index_sparseness: 16,
         });
         opts3.set_prefix_extractor(SliceTransform::create_fixed_prefix(4));
+        opts3.set_compression_type(rocksdb::DBCompressionType::Zstd);
 
         let cf2_opts = opts3.clone();
         opts3.set_memtable_whole_key_filtering(true);
