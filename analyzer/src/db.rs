@@ -377,13 +377,14 @@ where
     }
 
     /// The key for a ContextWrapper<T> in the heap is:
+    /// the progress (4 bytes)
     /// the score (4 bytes),
-    /// elapsed time (4 bytes),
     /// a sequence number (8 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        key[0..4].copy_from_slice(&self.score(el).to_be_bytes());
-        key[4..8].copy_from_slice(&el.elapsed().to_be_bytes());
+        let progress: u32 = self.progress(el.get()).try_into().unwrap();
+        key[0..4].copy_from_slice(&progress.to_be_bytes());
+        key[4..8].copy_from_slice(&self.score(el).to_be_bytes());
         key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
@@ -545,19 +546,12 @@ where
         Ok(())
     }
 
-    pub fn pop(&self, score_hint: Option<u32>) -> Result<Option<ContextWrapper<T>>, Error> {
+    pub fn pop(&self, start_progress: usize) -> Result<Option<ContextWrapper<T>>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        let prefix: [u8; 4];
-        let mode = match score_hint {
-            None => IteratorMode::Start,
-            Some(score) => {
-                prefix = score.to_be_bytes();
-                IteratorMode::From(&prefix, rocksdb::Direction::Forward)
-            }
-        };
-        let iter = self.db.iterator_opt(mode, tail_opts);
+        tail_opts.set_iterate_lower_bound(start_progress.to_be_bytes());
+        let iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
         for item in iter {
             let (key, value) = item?;
             let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
@@ -687,7 +681,7 @@ where
     /// Retrieves up to `count` elements from the database, removing them.
     pub fn retrieve(
         &self,
-        start_priority: u32,
+        start_progress: usize,
         count: usize,
     ) -> Result<Vec<ContextWrapper<T>>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
@@ -695,7 +689,7 @@ where
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        tail_opts.set_iterate_lower_bound(start_priority.to_be_bytes());
+        tail_opts.set_iterate_lower_bound(start_progress.to_be_bytes());
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
         let mut batch = WriteBatchWithTransaction::<false>::default();

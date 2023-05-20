@@ -568,35 +568,45 @@ where
         evicted
     }
 
-    /// Retrieves up to the given number of elements from the db.
+    /// Retrieves up to the given number of elements for the given segment from the db.
     fn retrieve(
-        db: &HeapDB<W, T>,
-        db_estimate: &AtomicU32,
+        &self,
+        segment: usize,
         num: usize,
     ) -> Result<Vec<(ContextWrapper<T>, usize, u32)>, String> {
         println!(
-            "Beginning retrieve of {} entries, we have {} in the db",
+            "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
-            db.len()
+            segment,
+            self.db.len()
         );
         let start = Instant::now();
-        let res: Vec<_> = db
-            .retrieve(db_estimate.load(Ordering::Acquire), num)?
+        let res: Vec<_> = self.db
+            .retrieve(segment, num)?
             .into_iter()
             .map(|el| {
-                let score = db.score(&el);
-                let progress = db.progress(el.get());
+                let score = self.db.score(&el);
+                let progress = self.db.progress(el.get());
                 (el, progress, score)
             })
             .collect();
         println!("Retrieve from db took {:?}", start.elapsed());
-        println!("{}", db.get_memory_usage_stats().unwrap());
+        println!("{}", self.db.get_memory_usage_stats().unwrap());
         // the min priority in the db is probably now the max of this result, or thereabouts
         // which should be the last element
-        if let Some(el) = res.last() {
-            db_estimate.store(el.2, Ordering::Release);
+        if let Some((_, progress, score)) = res.last() {
+            // This could technically result in a race between adding new values at this level.
+            // But it's just meant to be an estimate and so retrieves should be rare.
+            // On the other hand, maybe we should always peek into the db?
+            self.min_db_estimates[*progress].store(*score, Ordering::SeqCst);
+            // If we went far enough that we got another progress level, the other ones have nothing left.
+            for p in segment..*progress {
+                self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
+            }
         } else {
-            db_estimate.store(u32::MAX, Ordering::Release);
+            for p in segment..=self.max_possible_progress {
+                self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
+            }
         }
         Ok(res)
     }
@@ -604,8 +614,9 @@ where
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
-            while let Some((_, &est_completion)) = queue.peek_min() {
-                let db_best = self.min_db_estimate.load(Ordering::Acquire);
+            while let Some((el, &est_completion)) = queue.peek_min() {
+                let progress = self.db.progress(el.get());
+                let db_best = self.min_db_estimates[progress].load(Ordering::Acquire);
                 // Only when we go a decent bit over
                 if !self.db.is_empty()
                     && est_completion > db_best * 101 / 100
@@ -630,7 +641,7 @@ where
                     } else {
                         drop(queue);
                     }
-                    let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
+                    let res = self.retrieve(progress, num_to_restore)?;
                     self.retrievals.fetch_add(1, Ordering::Release);
                     println!("Reshuffle took total {:?}", start.elapsed());
                     queue = self.queue.lock().unwrap();
@@ -658,10 +669,10 @@ where
             // Retrieve some from db
             if !self.db.is_empty() {
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
-                    queue = self.do_retrieve_and_insert(queue)?;
+                    queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return self.db.pop(None).map_err(|e| e.message);
+                    return self.db.pop(0).map_err(|e| e.message);
                 }
             }
         }
@@ -670,15 +681,16 @@ where
 
     fn do_retrieve_and_insert<'a>(
         &'a self,
+        segment: usize,
         mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
     ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>, String> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
-            std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / 2),
+            std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / self.max_possible_progress),
         );
         drop(queue);
-        let res = Self::retrieve(&self.db, &self.min_db_estimate, num_to_restore)?;
+        let res = self.retrieve(segment, num_to_restore)?;
         queue = self.queue.lock().unwrap();
         queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);
@@ -714,10 +726,10 @@ where
             // Retrieve some from db
             if !self.db.is_empty() {
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
-                    queue = self.do_retrieve_and_insert(queue)?;
+                    queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return self.db.pop(None).map_err(|e| e.message);
+                    return self.db.pop(0).map_err(|e| e.message);
                 }
             }
         }
@@ -784,9 +796,9 @@ where
                 // Retrieve some from db
                 if !self.db.is_empty() {
                     if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
-                        queue = self.do_retrieve_and_insert(queue)?;
+                        queue = self.do_retrieve_and_insert(0, queue)?;
                         self.retrieving.store(false, Ordering::Release);
-                    } else if let Some(el) = self.db.pop(None)? {
+                    } else if let Some(el) = self.db.pop(0)? {
                         return Ok(vec![el]);
                     }
                 }
