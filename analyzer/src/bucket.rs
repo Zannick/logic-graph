@@ -180,6 +180,17 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         self.bucket_for_peeking(segment)?.peek_max()
     }
 
+    fn peek_segment_max(&'b self, min_segment: usize) -> Option<(&'b B::Item, &'b P)> {
+        for segment in min_segment..=self.max_priority()? {
+            if let Some(b) = self.bucket_for_peeking(segment) {
+                if let Some(x) = b.peek_max() {
+                    return Some(x);
+                }
+            }
+        }
+        None
+    }
+
     fn pop_segment_min(&mut self, min_segment: usize) -> Option<(B::Item, P)> {
         let min_segment = std::cmp::min(min_segment, self.min_priority()?);
         for segment in min_segment..=self.max_priority()? {

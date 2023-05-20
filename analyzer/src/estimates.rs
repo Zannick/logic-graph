@@ -91,6 +91,22 @@ where
             .count()
     }
 
+    /// Number of objective locations left todo.
+    /// aka the maximum additional progress count from this state.
+    pub fn remaining_visits<T>(&self, ctx: &T) -> usize
+    where
+        T: Ctx<World = W>,
+        L: Location<Context = T>,
+    {
+        self.world
+            .objective_items()
+            .into_iter()
+            .map(|(item, _)| self.world.get_item_locations(item))
+            .flatten()
+            .filter(|&loc_id| ctx.todo(loc_id))
+            .count()
+    }
+
     /// Returns the estimate amount of time to get the specified locations from
     /// the current state. Does not check whether these locations are todo.
     pub fn estimate_time_to_get<T>(&self, ctx: &T, required: Vec<<L as Location>::LocId>) -> u64

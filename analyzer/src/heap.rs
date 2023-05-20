@@ -324,10 +324,12 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     iskips: AtomicUsize,
     pskips: AtomicUsize,
     min_db_estimate: AtomicU32,
+    min_db_estimates: Vec<AtomicU32>,
     min_evictions: usize,
     max_evictions: usize,
     min_reshuffle: usize,
     max_reshuffle: usize,
+    max_possible_progress: usize,
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
     retrieving: AtomicBool,
@@ -355,17 +357,23 @@ where
     where
         P: AsRef<Path>,
     {
+        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get())?;
+        let max_possible_progress = db.scorer().remaining_visits(startctx.get());
+        let mut min_db_estimates = Vec::new();
+        min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
         let q = RocksBackedQueue {
             queue: Mutex::new(BucketQueue::new()),
-            db: HeapDB::open(db_path, initial_max_time, world, startctx.get())?,
+            db,
             capacity: max_capacity,
             iskips: 0.into(),
             pskips: 0.into(),
             min_db_estimate: u32::MAX.into(),
+            min_db_estimates,
             min_evictions,
             max_evictions,
             min_reshuffle,
             max_reshuffle,
+            max_possible_progress,
             evictions: 0.into(),
             retrievals: 0.into(),
             retrieving: false.into(),
@@ -421,6 +429,10 @@ where
 
     pub fn db_best(&self) -> u32 {
         self.min_db_estimate.load(Ordering::Acquire)
+    }
+
+    pub fn db_bests(&self) -> Vec<u32> {
+        self.min_db_estimates.iter().map(|a| a.load(Ordering::Acquire)).collect()
     }
 
     pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
@@ -487,7 +499,7 @@ where
             if queue.len() == self.capacity {
                 // compare to the last element, aka the MAX
                 let (ctx, &p_max) = queue
-                    .peek_max()
+                    .peek_segment_max(progress)
                     .ok_or("queue at capacity with no elements")?;
                 if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed())
                 {
@@ -495,6 +507,7 @@ where
                     self.db.push(el)?;
                     self.min_db_estimate
                         .fetch_min(est_complete, Ordering::Release);
+                    self.min_db_estimates[progress].fetch_min(est_complete, Ordering::Release);
                 } else {
                     let evictions = std::cmp::min(
                         self.max_evictions,
@@ -511,17 +524,32 @@ where
         // Without the lock (but still blocking the push op in this thread)
         if let Some(ev) = evicted {
             println!("push+evict took {:?} with the lock", start.elapsed());
-            let start = Instant::now();
             if !ev.is_empty() {
-                let best = ev.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
-                self.db.extend(ev, true)?;
-                self.min_db_estimate.fetch_min(best, Ordering::Release);
-                self.evictions.fetch_add(1, Ordering::Release);
-                println!("evict to db took {:?}", start.elapsed());
-                println!("{}", self.db.get_memory_usage_stats().unwrap());
+                self.evict_to_db(ev, "push")?;
             }
         }
 
+        Ok(())
+    }
+
+    fn evict_to_db(&self, ev: Vec<ContextWrapper<T>>, category: &str) -> Result<(), String> {
+        let start = Instant::now();
+        let mut mins = Vec::new();
+        mins.resize(self.max_possible_progress, u32::MAX);
+        for ctx in &ev {
+            let progress = self.db.progress(ctx.get());
+            let score = self.db.score(ctx);
+            mins[progress] = std::cmp::min(mins[progress], score);
+        }
+        let best = mins.iter().min().unwrap();
+        self.db.extend(ev, true)?;
+        self.min_db_estimate.fetch_min(*best, Ordering::Release);
+        for (est, min) in self.min_db_estimates.iter().zip(mins.into_iter()) {
+            est.fetch_min(min, Ordering::Release);
+        }
+        self.evictions.fetch_add(1, Ordering::Release);
+        println!("{}:evict to db took {:?}", category, start.elapsed());
+        println!("{}", self.db.get_memory_usage_stats().unwrap());
         Ok(())
     }
 
@@ -543,7 +571,7 @@ where
     /// Retrieves up to the given number of elements from the db.
     fn retrieve(
         db: &HeapDB<W, T>,
-        max_db_estimate: &AtomicU32,
+        db_estimate: &AtomicU32,
         num: usize,
     ) -> Result<Vec<(ContextWrapper<T>, usize, u32)>, String> {
         println!(
@@ -553,7 +581,7 @@ where
         );
         let start = Instant::now();
         let res: Vec<_> = db
-            .retrieve(max_db_estimate.load(Ordering::Acquire), num)?
+            .retrieve(db_estimate.load(Ordering::Acquire), num)?
             .into_iter()
             .map(|el| {
                 let score = db.score(&el);
@@ -566,9 +594,9 @@ where
         // the min priority in the db is probably now the max of this result, or thereabouts
         // which should be the last element
         if let Some(el) = res.last() {
-            max_db_estimate.store(el.2, Ordering::Release);
+            db_estimate.store(el.2, Ordering::Release);
         } else {
-            max_db_estimate.store(u32::MAX, Ordering::Release);
+            db_estimate.store(u32::MAX, Ordering::Release);
         }
         Ok(res)
     }
@@ -598,13 +626,7 @@ where
                         );
                         println!("reshuffle:evict took {:?}", start.elapsed());
                         drop(queue);
-                        let s2 = Instant::now();
-
-                        let best = evicted.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
-                        self.db.extend(evicted, true)?;
-                        self.min_db_estimate.fetch_min(best, Ordering::Release);
-                        self.evictions.fetch_add(1, Ordering::Release);
-                        println!("reshuffle:evict to db took {:?}", s2.elapsed());
+                        self.evict_to_db(evicted, "reshuffle")?;
                     } else {
                         drop(queue);
                     }
@@ -733,7 +755,9 @@ where
                 let mut vec = Vec::with_capacity(max - min + 1);
                 for segment in min..=max {
                     if queue.bucket_for_peeking(segment).is_some() {
-                        while let Some((ctx, el_estimate)) = queue.bucket_for_removing(segment).unwrap().pop_min() {
+                        while let Some((ctx, el_estimate)) =
+                            queue.bucket_for_removing(segment).unwrap().pop_min()
+                        {
                             debug_assert!(
                                 el_estimate == self.db.score(&ctx),
                                 "stored estimate {} didn't match score {}",
@@ -839,19 +863,8 @@ where
                 start.elapsed(),
                 len
             );
-            let start = Instant::now();
             if !ev.is_empty() {
-                let best = ev.iter().map(|ctx| self.db.score(ctx)).min().unwrap();
-                self.db.extend(ev, true)?;
-                self.min_db_estimate.fetch_min(best, Ordering::Release);
-                self.evictions.fetch_add(1, Ordering::Release);
-                println!(
-                    "evicting {} to db took {:?}, db now has {}",
-                    len,
-                    start.elapsed(),
-                    self.db.len()
-                );
-                println!("{}", self.db.get_memory_usage_stats().unwrap());
+                self.evict_to_db(ev, "extend")?;
             }
         }
 
