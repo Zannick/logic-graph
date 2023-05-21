@@ -450,7 +450,18 @@ where
             while !finished.load(Ordering::Acquire)
                 && threads_done.load(Ordering::Acquire) < num_threads
             {
-                let items = self.queue.pop_round_robin().unwrap();
+                let items = match self.queue.pop_round_robin() {
+                    Ok(items) => items,
+                    Err(e) => {
+                        println!("Thread {} exiting due to error: {:?}", i, e);
+                        let mut r = res.lock().unwrap();
+                        if r.is_ok() {
+                            *r = Err(e);
+                            finished.store(true, Ordering::Release);
+                        }
+                        return;
+                    }
+                };
                 if items.is_empty() {
                     if !done {
                         done = true;
