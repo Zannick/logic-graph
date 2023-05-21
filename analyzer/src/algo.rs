@@ -465,6 +465,7 @@ where
                             Ok(v) => vec.extend(v),
                             Err(e) => {
                                 let mut r = res.lock().unwrap();
+                                println!("Thread {} exiting due to error: {:?}", i, e);
                                 if r.is_ok() {
                                     *r = Err(e);
                                     finished.store(true, Ordering::Release);
@@ -476,6 +477,7 @@ where
                     if !vec.is_empty() {
                         if let Err(e) = self.queue.extend(vec).map(|_| ()) {
                             let mut r = res.lock().unwrap();
+                            println!("Thread {} exiting due to error: {:?}", i, e);
                             if r.is_ok() {
                                 *r = Err(e);
                                 finished.store(true, Ordering::Release);
@@ -485,6 +487,12 @@ where
                     }
                 }
             }
+            println!(
+                "Thread {} exiting: fin={} done={}",
+                i,
+                finished.load(Ordering::Acquire),
+                threads_done.load(Ordering::Acquire)
+            );
         };
 
         rayon::scope(|scope| {
@@ -496,7 +504,7 @@ where
                         sleep(sleep_time);
                         continue;
                     }
-                    self.queue.db_cleanup(65_536).unwrap();
+                    self.queue.db_cleanup(65_536, &finished).unwrap();
                 }
             });
 
@@ -506,6 +514,7 @@ where
                 }
             });
 
+            println!("Workers all exited, marking finished");
             finished.store(true, Ordering::Release);
         });
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();

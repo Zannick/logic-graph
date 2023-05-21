@@ -19,7 +19,7 @@ use rocksdb::{
 use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
-use std::sync::atomic::{AtomicU32, AtomicU64, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::time::Instant;
 
@@ -918,12 +918,12 @@ where
         Ok(results)
     }
 
-    pub fn cleanup(&self, batch_size: usize) -> Result<(), Error> {
+    pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), Error> {
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
-        loop {
+        while !exit_signal.load(Ordering::Acquire) {
             let mut batch = WriteBatchWithTransaction::<false>::default();
             let mut pskips = 0;
             let mut dup_pskips = 0;
@@ -979,6 +979,7 @@ where
                 return Ok(());
             }
         }
+        Ok(())
     }
 
     pub fn get_history(&self, mut last_index: usize) -> Result<Vec<HistoryAlias<T>>, Error> {

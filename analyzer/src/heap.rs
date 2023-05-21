@@ -884,8 +884,8 @@ where
         Ok(())
     }
 
-    pub fn db_cleanup(&self, batch_size: usize) -> Result<(), String> {
-        Ok(self.db.cleanup(batch_size)?)
+    pub fn db_cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), String> {
+        Ok(self.db.cleanup(batch_size, exit_signal)?)
     }
 
     pub fn skip_stats(&self) -> (usize, usize, usize, usize) {
