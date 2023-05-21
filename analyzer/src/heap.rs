@@ -432,7 +432,10 @@ where
     }
 
     pub fn db_bests(&self) -> Vec<u32> {
-        self.min_db_estimates.iter().map(|a| a.load(Ordering::Acquire)).collect()
+        self.min_db_estimates
+            .iter()
+            .map(|a| a.load(Ordering::Acquire))
+            .collect()
     }
 
     pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
@@ -581,7 +584,8 @@ where
             self.db.len()
         );
         let start = Instant::now();
-        let res: Vec<_> = self.db
+        let res: Vec<_> = self
+            .db
             .retrieve(segment, num)?
             .into_iter()
             .map(|el| {
@@ -618,37 +622,7 @@ where
                 let progress = self.db.progress(el.get());
                 let db_best = self.min_db_estimates[progress].load(Ordering::Acquire);
                 // Only when we go a decent bit over
-                if !self.db.is_empty()
-                    && est_completion > db_best * 101 / 100
-                    && !self.retrieving.fetch_or(true, Ordering::AcqRel)
-                {
-                    let start = Instant::now();
-                    // Get a decent amount to refill
-                    let num_to_restore = std::cmp::max(
-                        self.min_reshuffle,
-                        std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / 2),
-                    );
-                    let len = queue.len();
-                    if self.capacity - len < num_to_restore {
-                        // evict at least twice that much.
-                        let evicted = Self::evict_until(
-                            &mut queue,
-                            std::cmp::max(self.min_evictions, 2 * num_to_restore),
-                        );
-                        println!("reshuffle:evict took {:?}", start.elapsed());
-                        drop(queue);
-                        self.evict_to_db(evicted, "reshuffle")?;
-                    } else {
-                        drop(queue);
-                    }
-                    let res = self.retrieve(progress, num_to_restore)?;
-                    self.retrievals.fetch_add(1, Ordering::Release);
-                    println!("Reshuffle took total {:?}", start.elapsed());
-                    queue = self.queue.lock().unwrap();
-                    queue.extend(res);
-                    assert!(!queue.is_empty(), "Queue should have data after retrieve");
-                    self.retrieving.store(false, Ordering::Release);
-                }
+                queue = self.maybe_reshuffle(progress, est_completion, db_best, queue)?;
                 let (ctx, el_estimate) = queue.pop_min().unwrap();
                 debug_assert!(
                     el_estimate == self.db.score(&ctx),
@@ -679,6 +653,47 @@ where
         Ok(None)
     }
 
+    fn maybe_reshuffle<'a>(
+        &'a self,
+        progress: usize,
+        est_completion: u32,
+        db_best: u32,
+        mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>, String> {
+        if !self.db.is_empty()
+            && est_completion > db_best * 101 / 100
+            && !self.retrieving.fetch_or(true, Ordering::AcqRel)
+        {
+            let start = Instant::now();
+            // Get a decent amount to refill
+            let num_to_restore = std::cmp::max(
+                self.min_reshuffle,
+                std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / 2),
+            );
+            let len = queue.len();
+            if self.capacity - len < num_to_restore {
+                // evict at least twice that much.
+                let evicted = Self::evict_until(
+                    &mut queue,
+                    std::cmp::max(self.min_evictions, 2 * num_to_restore),
+                );
+                println!("reshuffle:evict took {:?}", start.elapsed());
+                drop(queue);
+                self.evict_to_db(evicted, "reshuffle")?;
+            } else {
+                drop(queue);
+            }
+            let res = self.retrieve(progress, num_to_restore)?;
+            self.retrievals.fetch_add(1, Ordering::Release);
+            println!("Reshuffle took total {:?}", start.elapsed());
+            queue = self.queue.lock().unwrap();
+            queue.extend(res);
+            assert!(!queue.is_empty(), "Queue should have data after retrieve");
+            self.retrieving.store(false, Ordering::Release);
+        }
+        Ok(queue)
+    }
+
     fn do_retrieve_and_insert<'a>(
         &'a self,
         segment: usize,
@@ -687,7 +702,10 @@ where
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
-            std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / self.max_possible_progress),
+            std::cmp::min(
+                self.max_reshuffle,
+                (self.capacity - queue.len()) / self.max_possible_progress,
+            ),
         );
         drop(queue);
         let res = self.retrieve(segment, num_to_restore)?;
@@ -761,15 +779,24 @@ where
 
     pub fn pop_round_robin(&self) -> Result<Vec<ContextWrapper<T>>, String> {
         let mut queue = self.queue.lock().unwrap();
+        let mut did_retrieve = false;
         while !queue.is_empty() || !self.db.is_empty() {
             if let Some(min) = queue.min_priority() {
                 let max = queue.max_priority().unwrap();
                 let mut vec = Vec::with_capacity(max - min + 1);
-                for segment in min..=max {
+                'next: for segment in min..=max {
                     if queue.bucket_for_peeking(segment).is_some() {
+                        let db_best = self.min_db_estimates[segment].load(Ordering::Acquire);
                         while let Some((ctx, el_estimate)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
+                            // We won't actually use what is added here right away, unless we drop the element we just popped.
+                            if !did_retrieve {
+                                queue =
+                                    self.maybe_reshuffle(segment, el_estimate, db_best, queue)?;
+                                did_retrieve = true;
+                            }
+
                             debug_assert!(
                                 el_estimate == self.db.score(&ctx),
                                 "stored estimate {} didn't match score {}",
@@ -786,7 +813,36 @@ where
                             }
 
                             vec.push(ctx);
-                            break;
+                            continue 'next;
+                        }
+                        if db_best < u32::MAX {
+                            if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
+                                queue = self.do_retrieve_and_insert(segment, queue)?;
+                                self.retrieving.store(false, Ordering::Release);
+                            } else {
+                                continue 'next;
+                            }
+                            did_retrieve = true;
+                            // Just grab the next one
+                            while let Some((ctx, el_estimate)) = queue.pop_segment_min(segment) {
+                                debug_assert!(
+                                    el_estimate == self.db.score(&ctx),
+                                    "stored estimate {} didn't match score {}",
+                                    el_estimate,
+                                    self.db.score(&ctx)
+                                );
+                                let max_time = self.db.max_time();
+                                if ctx.elapsed() > max_time || self.db.score(&ctx) > max_time {
+                                    self.pskips.fetch_add(1, Ordering::Release);
+                                    continue;
+                                }
+                                if !self.db.remember_pop(&ctx)? {
+                                    continue;
+                                }
+
+                                vec.push(ctx);
+                                continue 'next;
+                            }
                         }
                     }
                 }
