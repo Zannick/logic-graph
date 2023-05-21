@@ -404,10 +404,6 @@ where
         val
     }
 
-    fn peek_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
-        Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
-    }
-
     fn get_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
         Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
     }
@@ -555,9 +551,6 @@ where
         for item in iter {
             let (key, value) = item?;
             let ndeletes = self.deletes.fetch_add(1, Ordering::Acquire) + 1;
-            let mut k = Vec::with_capacity(17);
-            (*key).clone_into(&mut k);
-            k.push(u8::MAX);
 
             let raw = u64::from_be_bytes(key[0..8].as_ref().try_into().unwrap()) + 1;
             // Ignore error
@@ -702,10 +695,6 @@ where
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
-        let mut min = vec![0; 16];
-        let mut max = vec![0; 16];
-        min.copy_from_slice(&key);
-        max.copy_from_slice(&key);
         batch.delete(key);
 
         let el = Self::get_obj_from_heap_value(&value)?;
@@ -723,7 +712,6 @@ where
             loop {
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
-                    max.copy_from_slice(&key);
                     batch.delete(key);
                     pops += 1;
 
@@ -766,7 +754,6 @@ where
             }
             tmp = Vec::with_capacity(count - res.len());
         }
-        max.push(u8::MAX);
         println!(
             "We got {} results in {:?}, having iterated through {} elements",
             res.len(),
@@ -936,7 +923,7 @@ where
                     let (key, value) = item.unwrap();
                     count -= 1;
 
-                    let el = Self::peek_obj_from_heap_value(&value)?;
+                    let el = Self::get_obj_from_heap_value(&value)?;
                     let max_time = self.max_time();
                     if el.elapsed() > max_time || self.score(&el) > max_time {
                         batch.delete(key);
@@ -1067,7 +1054,7 @@ where
         let iter = self.db.iterator_opt(IteratorMode::Start, read_opts);
         for item in iter {
             let (_, value) = item?;
-            let el = Self::peek_obj_from_heap_value(&value)?;
+            let el = Self::get_obj_from_heap_value(&value)?;
             times.push(el.elapsed().into());
             time_scores.push((el.elapsed().into(), self.score(&el).into()));
         }
