@@ -406,10 +406,13 @@ where
         states: Vec<ContextWrapper<T>>,
         mode: SearchMode,
     ) -> Vec<ContextWrapper<T>> {
+        let max_time = self.queue.max_time();
         states
             .into_iter()
             .filter_map(|ctx| {
-                if self.world.won(ctx.get()) {
+                if ctx.elapsed() > max_time {
+                    None
+                } else if self.world.won(ctx.get()) {
                     self.handle_solution(ctx, mode);
                     None
                 } else {
