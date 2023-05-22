@@ -546,7 +546,11 @@ where
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        tail_opts.set_iterate_lower_bound(start_progress.to_be_bytes());
+        tail_opts.set_iterate_lower_bound(
+            <usize as TryInto<u32>>::try_into(start_progress)
+                .unwrap()
+                .to_be_bytes(),
+        );
         let iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
         for item in iter {
             let (key, value) = item?;
@@ -682,7 +686,11 @@ where
         let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        tail_opts.set_iterate_lower_bound(start_progress.to_be_bytes());
+        tail_opts.set_iterate_lower_bound(
+            <usize as TryInto<u32>>::try_into(start_progress)
+                .unwrap()
+                .to_be_bytes(),
+        );
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
         let mut batch = WriteBatchWithTransaction::<false>::default();
