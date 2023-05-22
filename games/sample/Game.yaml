@@ -12,7 +12,7 @@ start:  # default initial context, global context values
   rupees: 0  # the first numerical context item is the default currency
 
 objectives:  # win conditions
-  Gohma: "[Kokiri_Emerald]"
+  Gohma: "[Deku_Lobby_Web, Kokiri_Emerald]"
   Ganon: "[Defeat_Ganon]"
   Triforce Hunt: "[Triforce_Piece{triforce_count}]"
   #Deku Full Clear: $all_region_checks(`Deku Tree`)

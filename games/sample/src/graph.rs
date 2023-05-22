@@ -2241,7 +2241,7 @@ impl world::World for World {
 
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
-            Objective::Gohma => rules::access___kokiri_emerald(ctx),
+            Objective::Gohma => rules::access___deku_lobby_web_kokiri_emerald(ctx),
             Objective::Ganon => rules::access___defeat_ganon(ctx),
             Objective::Triforce_Hunt => rules::access___triforce_piece__triforce_count(ctx),
         }
@@ -2251,6 +2251,9 @@ impl world::World for World {
         let mut vec = Vec::new();
         match self.objective {
             Objective::Gohma => {
+                if !ctx.has(Item::Deku_Lobby_Web) {
+                    vec.push((Item::Deku_Lobby_Web, 1));
+                }
                 if !ctx.has(Item::Kokiri_Emerald) {
                     vec.push((Item::Kokiri_Emerald, 1));
                 }
@@ -2271,7 +2274,7 @@ impl world::World for World {
 
     fn objective_items(&self) -> Vec<(Item, i16)> {
         match self.objective {
-            Objective::Gohma => vec![(Item::Kokiri_Emerald, 1)],
+            Objective::Gohma => vec![(Item::Deku_Lobby_Web, 1), (Item::Kokiri_Emerald, 1)],
             Objective::Ganon => vec![(Item::Defeat_Ganon, 1)],
             Objective::Triforce_Hunt => vec![(Item::Triforce_Piece, 1024)],
         }

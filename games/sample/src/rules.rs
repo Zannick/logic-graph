@@ -20,9 +20,9 @@ pub fn access___defeat_ganon(ctx: &Context) -> bool {
     // [Defeat_Ganon]
     ctx.has(Item::Defeat_Ganon)
 }
-pub fn access___kokiri_emerald(ctx: &Context) -> bool {
-    // [Kokiri_Emerald]
-    ctx.has(Item::Kokiri_Emerald)
+pub fn access___deku_lobby_web_kokiri_emerald(ctx: &Context) -> bool {
+    // [Deku_Lobby_Web, Kokiri_Emerald]
+    ctx.has(Item::Deku_Lobby_Web) && ctx.has(Item::Kokiri_Emerald)
 }
 pub fn access___nuts_or_can_use__slingshot_and_can_jumpslash(ctx: &Context) -> bool {
     // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
