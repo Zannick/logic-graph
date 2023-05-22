@@ -622,7 +622,10 @@ where
                 let progress = self.db.progress(el.get());
                 let db_best = self.min_db_estimates[progress].load(Ordering::Acquire);
                 // Only when we go a decent bit over
-                queue = self.maybe_reshuffle(progress, est_completion, db_best, queue)?;
+                if !self.db.is_empty() && db_best < u32::MAX && est_completion > db_best * 101 / 100
+                {
+                    queue = self.maybe_reshuffle(progress, queue)?;
+                }
                 let (ctx, el_estimate) = queue.pop_min().unwrap();
                 debug_assert!(
                     el_estimate == self.db.score(&ctx),
@@ -656,14 +659,9 @@ where
     fn maybe_reshuffle<'a>(
         &'a self,
         progress: usize,
-        est_completion: u32,
-        db_best: u32,
         mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
     ) -> Result<MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>, String> {
-        if !self.db.is_empty()
-            && est_completion > db_best * 101 / 100
-            && !self.retrieving.fetch_or(true, Ordering::AcqRel)
-        {
+        if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let start = Instant::now();
             // Get a decent amount to refill
             let num_to_restore = std::cmp::max(
@@ -791,9 +789,12 @@ where
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
-                            if !did_retrieve {
-                                queue =
-                                    self.maybe_reshuffle(segment, el_estimate, db_best, queue)?;
+                            if !self.db.is_empty()
+                                && db_best < u32::MAX
+                                && el_estimate > db_best * 101 / 100
+                                && !did_retrieve
+                            {
+                                queue = self.maybe_reshuffle(segment, queue)?;
                                 did_retrieve = true;
                             }
 
