@@ -649,6 +649,7 @@ where
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
             limit={}ms; db best={}; history={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
+            db bests: {}\n\
             {}",
             iters,
             self.extras.load(Ordering::Acquire),
@@ -672,6 +673,9 @@ where
             pskips,
             dpskips,
             self.queue.background_deletes(),
+            self.queue.db_bests().into_iter().map(
+                |n| if n < u32::MAX { n.to_string() } else { String::from("-") }
+            ).collect::<Vec<_>>().join(", "),
             ctx.info(
                 self.queue.estimated_remaining_time(ctx),
                 self.queue.db().progress(ctx.get()),
