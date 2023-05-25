@@ -463,21 +463,22 @@ where
                             threads_done.fetch_sub(1, Ordering::Acquire);
                             done = false;
                         }
-                        let new_items = items
-                            .into_iter()
-                            .map(|ctx| {
-                                let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-                                self.process_one(ctx, iters, &start, mode)
-                            })
-                            .flatten();
-                        if let Err(e) = self.queue.extend(new_items) {
-                            let mut r = res.lock().unwrap();
-                            println!("Thread {} exiting due to error: {:?}", i, e);
-                            if r.is_ok() {
-                                *r = Err(e);
-                                finished.store(true, Ordering::Release);
+
+                        for ctx in items {
+                            let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+
+                            if let Err(e) = self
+                                .queue
+                                .extend(self.process_one(ctx, iters, &start, mode))
+                            {
+                                let mut r = res.lock().unwrap();
+                                println!("Thread {} exiting due to error: {:?}", i, e);
+                                if r.is_ok() {
+                                    *r = Err(e);
+                                    finished.store(true, Ordering::Release);
+                                }
+                                return;
                             }
-                            return;
                         }
                     }
                     Err(e) => {
