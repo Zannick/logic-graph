@@ -433,7 +433,7 @@ where
             while !finished.load(Ordering::Acquire)
                 && threads_done.load(Ordering::Acquire) < num_threads
             {
-                let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                let iters = self.iters.load(Ordering::Acquire);
                 let current_mode = if iters < 500_000 {
                     SearchMode::Standard
                 } else if mode == SearchMode::Dependent {
@@ -443,9 +443,9 @@ where
                 };
 
                 let items = match current_mode {
-                    SearchMode::MaxProgress => self.queue.pop_max_progress(8),
-                    SearchMode::HalfProgress => self.queue.pop_half_progress(8),
-                    SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 8),
+                    SearchMode::MaxProgress => self.queue.pop_max_progress(2),
+                    SearchMode::HalfProgress => self.queue.pop_half_progress(2),
+                    SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
                     _ => self.queue.pop_round_robin(),
                 };
                 match items {
@@ -465,7 +465,10 @@ where
                         }
                         let new_items = items
                             .into_iter()
-                            .map(|ctx| self.process_one(ctx, iters, &start, mode))
+                            .map(|ctx| {
+                                let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                                self.process_one(ctx, iters, &start, mode)
+                            })
                             .flatten();
                         if let Err(e) = self.queue.extend(new_items) {
                             let mut r = res.lock().unwrap();
