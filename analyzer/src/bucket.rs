@@ -227,11 +227,16 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
 
     /// More efficiently extracts all the items from all buckets with
     /// priorities above `keep_priority`.
-    fn pop_all_with_priority(&mut self, keep_priority: P, max_pops: usize) -> Vec<(B::Item, P)> {
+    fn pop_all_with_priority(
+        &mut self,
+        keep_priority: P,
+        max_segment: usize,
+        max_pops: usize,
+    ) -> Vec<(B::Item, P)> {
         if max_pops == 0 {
             Vec::new()
         } else if let Some(min) = self.min_priority() {
-            let max = self.max_priority().unwrap_or(min);
+            let max = std::cmp::min(max_segment, self.max_priority().unwrap_or(min));
             let mut vec = Vec::new();
             for segment in min..=max {
                 while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
@@ -309,6 +314,47 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         } else {
             Vec::new()
         }
+    }
+
+    /// Finds the lowest segment S and the highest corresponding segment S'
+    /// where S-min > S'-max, and evicts all elements below S' with priority > S-max.
+    fn pop_likely_useless(&mut self) -> Vec<(B::Item, P)>
+    where
+        P: Copy + std::fmt::Debug,
+    {
+        let vec = Vec::new();
+        if let Some(min) = self.min_priority() {
+            let max = self.max_priority().unwrap();
+            for segment in (min + 2)..=max {
+                let bucket = self.bucket_for_peeking(segment).unwrap();
+                if bucket.len_bucket() < 2 {
+                    continue;
+                }
+                let min_prio = bucket.min_priority().unwrap();
+                let max_prio = bucket.max_priority().unwrap();
+
+                for below in (min..segment).rev() {
+                    let blbucket = self.bucket_for_peeking(below).unwrap();
+                    if blbucket.len_bucket() < 2 {
+                        continue;
+                    }
+                    if blbucket.max_priority().unwrap() < min_prio {
+                        let keep_priority = *max_prio;
+                        println!(
+                            "Segment {}: {:?}..={:?} vs Segment {}: {:?}..={:?}",
+                            below,
+                            blbucket.min_priority().unwrap(),
+                            blbucket.max_priority().unwrap(),
+                            segment,
+                            min_prio,
+                            max_prio
+                        );
+                        return self.pop_all_with_priority(keep_priority, below, usize::MAX);
+                    }
+                }
+            }
+        }
+        vec
     }
 
     fn shrink_to_fit(&mut self) {

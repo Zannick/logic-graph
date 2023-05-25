@@ -517,7 +517,7 @@ where
                         std::cmp::max(self.min_evictions, queue.len() / 2),
                     );
                     // New item is better, evict some old_items.
-                    evicted = Some(Self::evict_until(&mut queue, evictions));
+                    evicted = Some(Self::evict_internal(&mut queue, evictions));
                     queue.push(el, progress, est_complete);
                 }
             } else {
@@ -535,17 +535,16 @@ where
         Ok(())
     }
 
-    fn evict_to_db(&self, ev: Vec<ContextWrapper<T>>, category: &str) -> Result<(), String> {
+    fn evict_to_db(&self, ev: Vec<(ContextWrapper<T>, u32)>, category: &str) -> Result<(), String> {
         let start = Instant::now();
         let mut mins = Vec::new();
         mins.resize(self.max_possible_progress, u32::MAX);
-        for ctx in &ev {
+        for (ctx, score) in &ev {
             let progress = self.db.progress(ctx.get());
-            let score = self.db.score(ctx);
-            mins[progress] = std::cmp::min(mins[progress], score);
+            mins[progress] = std::cmp::min(mins[progress], *score);
         }
         let best = mins.iter().min().unwrap();
-        self.db.extend(ev, true)?;
+        self.db.extend(ev.into_iter().map(|(c, _)| c), true)?;
         self.min_db_estimate.fetch_min(*best, Ordering::Release);
         for (est, min) in self.min_db_estimates.iter().zip(mins.into_iter()) {
             est.fetch_min(min, Ordering::Release);
@@ -558,15 +557,18 @@ where
 
     /// Removes elements from the max end of each segment in the queue until we reach
     /// the minimum desired evictions.
-    fn evict_until(
+    fn evict_internal(
         queue: &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
         min_evictions: usize,
-    ) -> Vec<ContextWrapper<T>> {
-        let evicted: Vec<_> = queue
-            .pop_max_proportionally(min_evictions)
-            .into_iter()
-            .map(|(c, _)| c)
-            .collect();
+    ) -> Vec<(ContextWrapper<T>, u32)> {
+        let mut evicted = queue.pop_likely_useless();
+        if !evicted.is_empty() {
+            println!("Evicted {} useless states", evicted.len());
+        }
+        let more = min_evictions.saturating_sub(evicted.len());
+        if more > 0 {
+            evicted.extend(queue.pop_max_proportionally(more));
+        }
         queue.shrink_to_fit();
         evicted
     }
@@ -671,7 +673,7 @@ where
             let len = queue.len();
             if self.capacity - len < num_to_restore {
                 // evict at least twice that much.
-                let evicted = Self::evict_until(
+                let evicted = Self::evict_internal(
                     &mut queue,
                     std::cmp::max(self.min_evictions, 2 * num_to_restore),
                 );
@@ -759,7 +761,11 @@ where
         self.pop_special(n, |q| q.pop_max())
     }
 
-    pub fn pop_min_progress(&self, progress: usize, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+    pub fn pop_min_progress(
+        &self,
+        progress: usize,
+        n: usize,
+    ) -> Result<Vec<ContextWrapper<T>>, String> {
         self.pop_special(n, |q| {
             let segment = progress + q.min_priority()?;
             q.pop_segment_min(segment)
@@ -917,7 +923,7 @@ where
             let mut queue = self.queue.lock().unwrap();
             let len = queue.len();
             if len + vec.len() > self.capacity {
-                evicted = Some(Self::evict_until(
+                evicted = Some(Self::evict_internal(
                     &mut queue,
                     std::cmp::min(
                         std::cmp::max(len + vec.len() - self.capacity, self.min_evictions),
