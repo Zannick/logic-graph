@@ -13,8 +13,7 @@ use std::time::{Duration, Instant};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
-    Single,
-    Greedy,
+    Standard,
     MaxProgress,
     SomeProgress(usize),
     HalfProgress,
@@ -25,14 +24,13 @@ enum SearchMode {
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
-        2 => SearchMode::Greedy,
-        4 | 5 => SearchMode::MaxProgress,
+        2 | 4 | 5 => SearchMode::MaxProgress,
         9 => SearchMode::SomeProgress(1),
         11 => SearchMode::SomeProgress(2),
         13 => SearchMode::SomeProgress(4),
         15 => SearchMode::HalfProgress,
         // 0, 3, 7, 8, 12
-        _ => SearchMode::Single,
+        _ => SearchMode::Standard,
     }
 }
 
@@ -218,7 +216,6 @@ where
     T: Ctx<World = W> + Debug,
 {
     world: &'a W,
-    startctx: ContextWrapper<T>,
     solutions: Mutex<SolutionCollector<T>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -347,7 +344,6 @@ where
         println!("Queue starts with {} elements", queue.len());
         Ok(Search {
             world,
-            startctx,
             solutions: Mutex::new(solutions),
             queue,
             iters: 0.into(),
@@ -387,20 +383,6 @@ where
         }
     }
 
-    fn handle_greedy_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) {
-        let mstart = Instant::now();
-        if let Some(m) = minimize_greedy(self.world, self.startctx.get(), &ctx, ctx.elapsed()) {
-            println!(
-                "Minimized greedy solution from {}ms -> {}ms in {:?}",
-                ctx.elapsed(),
-                m.elapsed(),
-                mstart.elapsed()
-            );
-            self.handle_solution(m, mode);
-        }
-        self.handle_solution(ctx, mode);
-    }
-
     fn extract_solutions(
         &self,
         states: Vec<ContextWrapper<T>>,
@@ -426,13 +408,14 @@ where
         single_step(self.world, ctx, self.queue.max_time())
     }
 
-    fn choose_mode(&self, iters: usize, _ctx: &ContextWrapper<T>) -> SearchMode {
-        if iters % 1024 != 0 {
-            SearchMode::Single
-        } else if iters % 2048 != 0 {
-            SearchMode::Greedy
-        } else {
-            SearchMode::SomeProgress((iters / 4096) % 32)
+    fn choose_mode(&self, iters: usize) -> SearchMode {
+        match iters % 8 {
+            0 => SearchMode::SomeProgress((iters / 8) % 32),
+            1 => SearchMode::MaxProgress,
+            2 => SearchMode::HalfProgress,
+            3 => SearchMode::SomeProgress(5),
+
+            _ => SearchMode::Standard,
         }
     }
 
@@ -450,8 +433,50 @@ where
             while !finished.load(Ordering::Acquire)
                 && threads_done.load(Ordering::Acquire) < num_threads
             {
-                let items = match self.queue.pop_round_robin() {
-                    Ok(items) => items,
+                let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                let current_mode = if iters < 500_000 {
+                    SearchMode::Standard
+                } else if mode == SearchMode::Dependent {
+                    self.choose_mode(iters)
+                } else {
+                    mode
+                };
+
+                let items = match current_mode {
+                    SearchMode::MaxProgress => self.queue.pop_max_progress(8),
+                    SearchMode::HalfProgress => self.queue.pop_half_progress(8),
+                    SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 8),
+                    _ => self.queue.pop_round_robin(),
+                };
+                match items {
+                    Ok(items) => {
+                        if items.is_empty() {
+                            if !done {
+                                done = true;
+                                threads_done.fetch_add(1, Ordering::Release);
+                            }
+                            sleep(Duration::from_secs(1));
+                            continue;
+                        }
+
+                        if done {
+                            threads_done.fetch_sub(1, Ordering::Acquire);
+                            done = false;
+                        }
+                        let new_items = items
+                            .into_iter()
+                            .map(|ctx| self.process_one(ctx, iters, &start, mode))
+                            .flatten();
+                        if let Err(e) = self.queue.extend(new_items) {
+                            let mut r = res.lock().unwrap();
+                            println!("Thread {} exiting due to error: {:?}", i, e);
+                            if r.is_ok() {
+                                *r = Err(e);
+                                finished.store(true, Ordering::Release);
+                            }
+                            return;
+                        }
+                    }
                     Err(e) => {
                         println!("Thread {} exiting due to error: {:?}", i, e);
                         let mut r = res.lock().unwrap();
@@ -462,44 +487,6 @@ where
                         return;
                     }
                 };
-                if items.is_empty() {
-                    if !done {
-                        done = true;
-                        threads_done.fetch_add(1, Ordering::Release);
-                    }
-                    sleep(Duration::from_secs(1));
-                } else {
-                    if done {
-                        threads_done.fetch_sub(1, Ordering::Acquire);
-                        done = false;
-                    }
-                    let mut vec = Vec::new();
-                    for item in items {
-                        match self.process_one(item, &start, mode) {
-                            Ok(v) => vec.extend(v),
-                            Err(e) => {
-                                let mut r = res.lock().unwrap();
-                                println!("Thread {} exiting due to error: {:?}", i, e);
-                                if r.is_ok() {
-                                    *r = Err(e);
-                                    finished.store(true, Ordering::Release);
-                                }
-                                return;
-                            }
-                        }
-                    }
-                    if !vec.is_empty() {
-                        if let Err(e) = self.queue.extend(vec).map(|_| ()) {
-                            let mut r = res.lock().unwrap();
-                            println!("Thread {} exiting due to error: {:?}", i, e);
-                            if r.is_ok() {
-                                *r = Err(e);
-                                finished.store(true, Ordering::Release);
-                            }
-                            return;
-                        }
-                    }
-                }
             }
             println!(
                 "Thread {} exiting: fin={} done={}",
@@ -552,76 +539,24 @@ where
     fn process_one(
         &self,
         ctx: ContextWrapper<T>,
+        iters: usize,
         start: &Mutex<Instant>,
         mode: SearchMode,
-    ) -> Result<Vec<ContextWrapper<T>>, String> {
-        let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+    ) -> Vec<ContextWrapper<T>> {
+        if iters % 100_000 == 0 {
+            self.print_status_update(&start, iters, 100_000, &ctx);
+        }
+
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
                 self.handle_solution(ctx, SearchMode::Unknown);
             } else {
                 self.deadends.fetch_add(1, Ordering::Release);
             }
-            return Ok(Vec::new());
+            return Vec::new();
         }
 
-        if iters % 100_000 == 0 {
-            self.print_status_update(&start, iters, 100_000, &ctx);
-        }
-
-        let current_mode = if iters < 500_000 {
-            SearchMode::Single
-        } else if mode == SearchMode::Dependent {
-            self.choose_mode(iters, &ctx)
-        } else {
-            mode
-        };
-        match current_mode {
-            SearchMode::Greedy => {
-                // Run a single step on the given state and handle any solutions
-                let next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
-                // Pick a state greedily: max progress, min elapsed, and do a greedy search.
-                if let Some(ctx) = next
-                    .iter()
-                    .max_by_key(|ctx| (self.queue.db().progress(ctx.get()), !ctx.elapsed()))
-                {
-                    if let Ok(win) = greedy_search(self.world, &ctx, self.queue.max_time()) {
-                        if win.elapsed() <= self.queue.max_time() {
-                            self.handle_greedy_solution(win, mode);
-                        }
-                    }
-                }
-
-                // All the single-step states are still pushed to the queue, even the one we used
-                self.extras.fetch_add(1, Ordering::Release);
-                Ok(next)
-            }
-            SearchMode::MaxProgress => {
-                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
-                if let Some(ctx2) = self.queue.pop_max_progress().unwrap() {
-                    next.extend(self.extract_solutions(self.single_step(ctx2), current_mode));
-                }
-                self.extras.fetch_add(1, Ordering::Release);
-                Ok(next)
-            }
-            SearchMode::SomeProgress(p) => {
-                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
-                if let Some(ctx2) = self.queue.pop_min_progress(p).unwrap() {
-                    next.extend(self.extract_solutions(self.single_step(ctx2), current_mode));
-                }
-                self.extras.fetch_add(1, Ordering::Release);
-                Ok(next)
-            }
-            SearchMode::HalfProgress => {
-                let mut next = self.extract_solutions(self.single_step(ctx), SearchMode::Single);
-                if let Some(ctx2) = self.queue.pop_half_progress().unwrap() {
-                    next.extend(self.extract_solutions(self.single_step(ctx2), current_mode));
-                }
-                self.extras.fetch_add(1, Ordering::Release);
-                Ok(next)
-            }
-            _ => Ok(self.extract_solutions(self.single_step(ctx), current_mode)),
-        }
+        self.extract_solutions(self.single_step(ctx), mode)
     }
 
     fn print_status_update(
@@ -673,9 +608,16 @@ where
             pskips,
             dpskips,
             self.queue.background_deletes(),
-            self.queue.db_bests().into_iter().map(
-                |n| if n < u32::MAX { n.to_string() } else { String::from("-") }
-            ).collect::<Vec<_>>().join(", "),
+            self.queue
+                .db_bests()
+                .into_iter()
+                .map(|n| if n < u32::MAX {
+                    n.to_string()
+                } else {
+                    String::from("-")
+                })
+                .collect::<Vec<_>>()
+                .join(", "),
             ctx.info(
                 self.queue.estimated_remaining_time(ctx),
                 self.queue.db().progress(ctx.get()),

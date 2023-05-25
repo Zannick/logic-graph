@@ -714,14 +714,15 @@ where
         Ok(queue)
     }
 
-    fn pop_special<F>(&self, pop_func: F) -> Result<Option<ContextWrapper<T>>, String>
+    fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>, String>
     where
         F: Fn(
             &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
         ) -> Option<(ContextWrapper<T>, u32)>,
     {
+        let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
-        while !queue.is_empty() || !self.db.is_empty() {
+        while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             while let Some((ctx, el_estimate)) = (pop_func)(&mut queue) {
                 debug_assert!(
                     el_estimate == self.db.score(&ctx),
@@ -737,39 +738,41 @@ where
                 if !self.db.remember_pop(&ctx)? {
                     continue;
                 }
-                return Ok(Some(ctx));
+                vec.push(ctx);
             }
             // Retrieve some from db
             if !self.db.is_empty() {
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
+                } else if let Some(ctx) = self.db.pop(0)? {
+                    vec.push(ctx);
                 } else {
-                    return self.db.pop(0).map_err(|e| e.message);
+                    return Ok(vec);
                 }
             }
         }
-        Ok(None)
+        Ok(vec)
     }
 
-    pub fn pop_max_estimate(&self) -> Result<Option<ContextWrapper<T>>, String> {
-        self.pop_special(|q| q.pop_max())
+    pub fn pop_max_estimate(&self, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+        self.pop_special(n, |q| q.pop_max())
     }
 
-    pub fn pop_min_progress(&self, progress: usize) -> Result<Option<ContextWrapper<T>>, String> {
-        self.pop_special(|q| {
+    pub fn pop_min_progress(&self, progress: usize, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+        self.pop_special(n, |q| {
             let segment = progress + q.min_priority()?;
             q.pop_segment_min(segment)
                 .or_else(|| q.pop_max_segment_min())
         })
     }
 
-    pub fn pop_max_progress(&self) -> Result<Option<ContextWrapper<T>>, String> {
-        self.pop_special(|q| q.pop_max_segment_min())
+    pub fn pop_max_progress(&self, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+        self.pop_special(n, |q| q.pop_max_segment_min())
     }
 
-    pub fn pop_half_progress(&self) -> Result<Option<ContextWrapper<T>>, String> {
-        self.pop_special(|q| {
+    pub fn pop_half_progress(&self, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+        self.pop_special(n, |q| {
             let half = (q.min_priority()? + q.max_priority()?) / 2;
             q.pop_segment_min(half).or_else(|| q.pop_max_segment_min())
         })
