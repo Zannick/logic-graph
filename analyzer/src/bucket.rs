@@ -269,7 +269,14 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
             let max = self.max_priority().unwrap();
             let mut vec = Vec::with_capacity(min_pops);
             let mut segment = min;
-            assert!(self.len_queue() >= min_pops + max - min + 1);
+            assert!(
+                self.len_queue() >= min_pops + max - min + 1,
+                "Not enough in queue for {} pops: have min={} max={} len={}",
+                min_pops,
+                min,
+                max,
+                self.len_queue()
+            );
             while vec.len() < min_pops {
                 if let Some(bucket) = self.bucket_for_replacing(segment) {
                     if bucket.len_bucket() > 1 {
