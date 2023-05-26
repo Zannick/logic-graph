@@ -551,7 +551,7 @@ where
         Ok(())
     }
 
-    pub fn pop(&self, start_progress: usize) -> Result<Option<ContextWrapper<T>>, Error> {
+    pub fn pop(&self, start_progress: usize) -> anyhow::Result<Option<ContextWrapper<T>>> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
