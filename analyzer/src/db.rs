@@ -433,15 +433,8 @@ where
         Ok(rmp_serde::from_slice::<V>(buf)?)
     }
 
-    fn get_deserialize_state_data<V>(
-        &self,
-        cf: &ColumnFamily,
-        key: &[u8],
-    ) -> Result<Option<V>, Error>
-    where
-        V: for<'de> Deserialize<'de>,
-    {
-        match self.statedb.get_pinned_cf(cf, key)? {
+    fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateData>, Error> {
+        match self.statedb.get_pinned_cf(self.best_cf(), key)? {
             Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
             None => Ok(None),
         }
@@ -586,8 +579,8 @@ where
             }
 
             let state_key = Self::get_state_key(el.get());
-            if let Some(stored) = self.get_deserialize_state_data(self.best_cf(), &state_key)? {
-                if el.elapsed() > stored {
+            if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
+                if el.elapsed() > elapsed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
@@ -795,7 +788,7 @@ where
     pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
         let seen_key = Self::get_state_key(el.get());
 
-        match self.get_deserialize_state_data::<StateData>(self.best_cf(), &seen_key)? {
+        match self.get_deserialize_state_data(&seen_key)? {
             Some(StateData { elapsed, .. }) => {
                 if elapsed < el.elapsed() {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
@@ -847,18 +840,17 @@ where
     /// A `false` value means the state should be skipped.
     pub fn record_one(&self, el: &mut ContextWrapper<T>) -> Result<bool, Error> {
         let state_key = Self::get_state_key(el.get());
-        let is_new = if let Some(StateData { elapsed, .. }) =
-            self.get_deserialize_state_data::<StateData>(self.best_cf(), &state_key)?
-        {
-            // This is a new state being pushed, as it has new history, hence we skip if equal.
-            if elapsed <= el.elapsed() {
-                self.dup_iskips.fetch_add(1, Ordering::Release);
-                return Ok(false);
-            }
-            false
-        } else {
-            true
-        };
+        let is_new =
+            if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
+                // This is a new state being pushed, as it has new history, hence we skip if equal.
+                if elapsed <= el.elapsed() {
+                    self.dup_iskips.fetch_add(1, Ordering::Release);
+                    return Ok(false);
+                }
+                false
+            } else {
+                true
+            };
         // In every other case (no such state, or we do better than that state),
         // we will rewrite the data.
 
@@ -950,7 +942,7 @@ where
 
                     let state_key = Self::get_state_key(el.get());
                     if let Some(StateData { elapsed, .. }) =
-                        self.get_deserialize_state_data::<StateData>(self.best_cf(), &state_key)?
+                        self.get_deserialize_state_data(&state_key)?
                     {
                         if el.elapsed() > elapsed {
                             batch.delete(key);
