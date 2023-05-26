@@ -4,6 +4,7 @@ use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
+use anyhow::Result;
 use rayon::prelude::*;
 use std::fmt::Debug;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
@@ -533,7 +534,7 @@ where
             dpskips,
             match res.into_inner().unwrap() {
                 Ok(_) => String::from("emptied queue"),
-                Err(s) => s,
+                Err(s) => s.to_string(),
             }
         );
         self.queue.print_queue_histogram();

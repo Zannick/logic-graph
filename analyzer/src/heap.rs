@@ -7,6 +7,7 @@ use crate::estimates::ContextScorer;
 use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
+use anyhow::{anyhow, Result};
 use bucket_queue::{BucketQueue, Queue};
 use lru::LruCache;
 use plotlib::page::Page;
@@ -479,7 +480,7 @@ where
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, mut el: ContextWrapper<T>) -> Result<(), String> {
+    pub fn push(&self, mut el: ContextWrapper<T>) -> Result<()> {
         let start = Instant::now();
         if el.elapsed() > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
@@ -503,7 +504,7 @@ where
                 // compare to the last element, aka the MAX
                 let (ctx, &p_max) = queue
                     .peek_segment_max(progress)
-                    .ok_or("queue at capacity with no elements")?;
+                    .ok_or(anyhow!("queue at capacity with no elements"))?;
                 if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed())
                 {
                     // Lower priority (or equal but later), evict the new item immediately
@@ -535,7 +536,7 @@ where
         Ok(())
     }
 
-    fn evict_to_db(&self, ev: Vec<(ContextWrapper<T>, u32)>, category: &str) -> Result<(), String> {
+    fn evict_to_db(&self, ev: Vec<(ContextWrapper<T>, u32)>, category: &str) -> Result<()> {
         let start = Instant::now();
         let mut mins = Vec::new();
         mins.resize(self.max_possible_progress, u32::MAX);
@@ -578,7 +579,7 @@ where
         &self,
         segment: usize,
         num: usize,
-    ) -> Result<Vec<(ContextWrapper<T>, usize, u32)>, String> {
+    ) -> Result<Vec<(ContextWrapper<T>, usize, u32)>> {
         println!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -617,7 +618,7 @@ where
         Ok(res)
     }
 
-    pub fn pop(&self) -> Result<Option<ContextWrapper<T>>, String> {
+    pub fn pop(&self) -> Result<Option<ContextWrapper<T>>> {
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((el, &est_completion)) = queue.peek_min() {
@@ -651,7 +652,7 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return self.db.pop(0).map_err(|e| e.message);
+                    return Ok(self.db.pop(0)?);
                 }
             }
         }
@@ -662,7 +663,7 @@ where
         &'a self,
         progress: usize,
         mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>, String> {
+    ) -> Result<MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let start = Instant::now();
             // Get a decent amount to refill
@@ -698,7 +699,7 @@ where
         &'a self,
         segment: usize,
         mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>, String> {
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
@@ -716,7 +717,7 @@ where
         Ok(queue)
     }
 
-    fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>, String>
+    fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
         F: Fn(
             &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
@@ -757,7 +758,7 @@ where
         Ok(vec)
     }
 
-    pub fn pop_max_estimate(&self, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+    pub fn pop_max_estimate(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
         self.pop_special(n, |q| q.pop_max())
     }
 
@@ -765,7 +766,7 @@ where
         &self,
         progress: usize,
         n: usize,
-    ) -> Result<Vec<ContextWrapper<T>>, String> {
+    ) -> Result<Vec<ContextWrapper<T>>> {
         self.pop_special(n, |q| {
             let segment = progress + q.min_priority()?;
             q.pop_segment_min(segment)
@@ -773,18 +774,18 @@ where
         })
     }
 
-    pub fn pop_max_progress(&self, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+    pub fn pop_max_progress(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
         self.pop_special(n, |q| q.pop_max_segment_min())
     }
 
-    pub fn pop_half_progress(&self, n: usize) -> Result<Vec<ContextWrapper<T>>, String> {
+    pub fn pop_half_progress(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
         self.pop_special(n, |q| {
             let half = (q.min_priority()? + q.max_priority()?) / 2;
             q.pop_segment_min(half).or_else(|| q.pop_max_segment_min())
         })
     }
 
-    pub fn pop_round_robin(&self) -> Result<Vec<ContextWrapper<T>>, String> {
+    pub fn pop_round_robin(&self) -> Result<Vec<ContextWrapper<T>>> {
         let mut queue = self.queue.lock().unwrap();
         let mut did_retrieve = false;
         while !queue.is_empty() || !self.db.is_empty() {
@@ -876,7 +877,7 @@ where
     /// Adds all the given elements to the queue, except for any
     /// elements with elapsed time greater than the allowed maximum
     /// or having been seen before with a smaller elapsed time.
-    pub fn extend<I>(&self, iter: I) -> Result<(), String>
+    pub fn extend<I>(&self, iter: I) -> Result<()>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {

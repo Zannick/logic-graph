@@ -5,6 +5,7 @@ use crate::context::*;
 use crate::estimates::ContextScorer;
 use crate::steiner::*;
 use crate::world::*;
+use anyhow::Result;
 use humansize::{SizeFormatter, BINARY};
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -114,6 +115,14 @@ impl Drop for HeapDBOptions {
 pub struct Error {
     pub message: String,
 }
+
+impl std::fmt::Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> Result<(), std::fmt::Error> {
+        write!(f, "{:?}", self)
+    }
+}
+
+impl std::error::Error for Error {}
 
 impl From<rocksdb::Error> for Error {
     fn from(value: rocksdb::Error) -> Self {
