@@ -575,11 +575,7 @@ where
     }
 
     /// Retrieves up to the given number of elements for the given segment from the db.
-    fn retrieve(
-        &self,
-        segment: usize,
-        num: usize,
-    ) -> Result<Vec<(ContextWrapper<T>, usize, u32)>> {
+    fn retrieve(&self, segment: usize, num: usize) -> Result<Vec<(ContextWrapper<T>, usize, u32)>> {
         println!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -762,11 +758,7 @@ where
         self.pop_special(n, |q| q.pop_max())
     }
 
-    pub fn pop_min_progress(
-        &self,
-        progress: usize,
-        n: usize,
-    ) -> Result<Vec<ContextWrapper<T>>> {
+    pub fn pop_min_progress(&self, progress: usize, n: usize) -> Result<Vec<ContextWrapper<T>>> {
         self.pop_special(n, |q| {
             let segment = progress + q.min_priority()?;
             q.pop_segment_min(segment)
@@ -972,15 +964,15 @@ where
             return;
         }
         let times: Vec<f64> = queue.iter().map(|c| c.0.elapsed().into()).collect();
-        let mut time_scores = Vec::new();
-        let mut time_progress = Vec::new();
+        let mut prog_score = Vec::new();
+        let mut progress_time = Vec::new();
         for c in queue.iter() {
             let elapsed: f64 = c.0.elapsed().into();
             let score: f64 = self.db.score(c.0).into();
             let progress: u32 = self.db.progress(c.0.get()).try_into().unwrap();
             let progress: f64 = progress.into();
-            time_scores.push((elapsed, score));
-            time_progress.push((elapsed, progress));
+            prog_score.push((progress, score));
+            progress_time.push((progress, elapsed));
         }
         // unlock
         let queue_buckets = queue.bucket_sizes();
@@ -996,42 +988,36 @@ where
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
             queue_buckets
         );
-        let bucket_min: f64 = <usize as TryInto<u32>>::try_into(
-            queue_buckets
-                .iter()
-                .enumerate()
-                .skip_while(|(_, x)| **x == 0)
-                .next()
-                .map(|x| x.0)
-                .unwrap_or_default(),
-        )
-        .unwrap()
-        .into();
 
-        let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
+        let p = Plot::new(prog_score).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
             .add(p)
-            .x_label("elapsed time")
+            .x_label("progress")
             .y_label("score")
-            .x_range(0., self.db.max_time().into());
-        println!(
-            "Heap scores by time:\n{}",
-            Page::single(&v).dimensions(90, 10).to_text().unwrap()
-        );
-        let p = Plot::new(time_progress).point_style(PointStyle::new().marker(PointMarker::Square));
-        let v = ContinuousView::new()
-            .add(p)
-            .x_label("elapsed time")
-            .y_label("progress")
-            .x_range(0., self.db.max_time().into())
-            .y_range(
-                bucket_min - 1.,
-                <usize as TryInto<u32>>::try_into(queue_buckets.len())
+            .x_range(
+                -1.,
+                <usize as TryInto<u32>>::try_into(self.max_possible_progress + 1)
                     .unwrap()
                     .into(),
             );
         println!(
-            "Heap progress by time:\n{}",
+            "Heap scores by progress level:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+        let p = Plot::new(progress_time).point_style(PointStyle::new().marker(PointMarker::Square));
+        let v = ContinuousView::new()
+            .add(p)
+            .x_label("progress")
+            .y_label("elapsed")
+            .y_range(0., self.db.max_time().into())
+            .x_range(
+                -1.,
+                <usize as TryInto<u32>>::try_into(self.max_possible_progress + 1)
+                    .unwrap()
+                    .into(),
+            );
+        println!(
+            "Heap elapsed times by progress:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
     }
