@@ -14,8 +14,8 @@ use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions, Env,
-    IteratorMode, MergeOperands, Options, PlainTableFactoryOptions, ReadOptions, SliceTransform,
-    WriteBatch, WriteBatchWithTransaction, WriteOptions, DB,
+    IteratorMode, MergeOperands, Options, ReadOptions, WriteBatch, WriteBatchWithTransaction,
+    WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
@@ -40,22 +40,17 @@ struct HeapDBOptions {
 }
 
 const BEST: &str = "best";
-const HIST: &str = "hist";
-
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
-struct StateData {
-    // Ordering is important here, since min_merge will sort by serialized bytes.
-    elapsed: u32,
-    hist_index: usize,
-}
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
-struct HistData<I, S, L, E, A, Wp> {
-    prev: usize,
-    hist: History<I, S, L, E, A, Wp>,
+struct StateData<T, I, S, L, E, A, Wp> {
+    // Ordering is important here, since min_merge will sort by serialized bytes.
+    elapsed: u32,
+    hist: Option<History<I, S, L, E, A, Wp>>,
+    prev: Option<T>,
 }
 
-type HistAlias<T> = HistData<
+type StateDataAlias<T> = StateData<
+    T,
     <T as Ctx>::ItemId,
     <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
     <<<T as Ctx>::World as World>::Location as Location>::LocId,
@@ -75,18 +70,15 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     >,
     db: DB,
     statedb: DB,
-    histdb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
     _opts: HeapDBOptions,
     _state_opts: HeapDBOptions,
-    _hist_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
     max_time: AtomicU32,
 
     seq: AtomicU64,
-    hist_seq: AtomicUsize,
     size: AtomicUsize,
     seen: AtomicUsize,
     iskips: AtomicUsize,
@@ -231,7 +223,6 @@ where
         cuckoo_opts.set_use_module_hash(false);
         opts2.set_allow_mmap_reads(true);
         opts2.set_allow_mmap_writes(true);
-        let mut opts3 = opts2.clone();
         opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
         opts2.set_merge_operator_associative("min", min_merge);
@@ -240,27 +231,11 @@ where
         opts2.set_memtable_whole_key_filtering(true);
         opts2.create_missing_column_families(true);
 
-        opts3.set_plain_table_factory(&PlainTableFactoryOptions {
-            user_key_length: 8,
-            bloom_bits_per_key: 10,
-            hash_table_ratio: 0.75,
-            index_sparseness: 16,
-        });
-        opts3.set_prefix_extractor(SliceTransform::create_fixed_prefix(4));
-        opts3.set_compression_type(rocksdb::DBCompressionType::Zstd);
-
-        let cf2_opts = opts3.clone();
-        opts3.set_memtable_whole_key_filtering(true);
-        opts3.create_missing_column_families(true);
-
-        let histcf = ColumnFamilyDescriptor::new(HIST, cf2_opts);
         let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts);
 
-        // 1 GiB write buffers + 4 GiB row cache = 5GiB for each of these?
+        // 1 GiB write buffers + 4 GiB row cache = 5GiB ?
         let _ = DB::destroy(&opts2, &path2);
-        let _ = DB::destroy(&opts2, &path3);
         let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![bestcf])?;
-        let histdb = DB::open_cf_descriptors(&opts3, &path3, vec![histcf])?;
 
         let mut write_opts = WriteOptions::default();
         write_opts.disable_wal(true);
@@ -273,7 +248,6 @@ where
             scorer,
             db,
             statedb,
-            histdb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
             _opts: HeapDBOptions { opts, path },
@@ -281,14 +255,9 @@ where
                 opts: opts2,
                 path: path2,
             },
-            _hist_opts: HeapDBOptions {
-                opts: opts3,
-                path: path3,
-            },
             write_opts,
             max_time: initial_max_time.into(),
             seq: 0.into(),
-            hist_seq: 1.into(),
             size: 0.into(),
             seen: 0.into(),
             iskips: 0.into(),
@@ -327,11 +296,6 @@ where
     /// Returns the number of unique states we've seen so far (tracked separately from the db).
     pub fn seen(&self) -> usize {
         self.seen.load(Ordering::Acquire)
-    }
-
-    /// Returns the number of history entries we've recorded so far.
-    pub fn history_count(&self) -> usize {
-        self.hist_seq.load(Ordering::Acquire) - 1
     }
 
     /// Returns the number of unique states we've estimated remaining time for.
@@ -379,10 +343,6 @@ where
 
     fn best_cf(&self) -> &ColumnFamily {
         self.statedb.cf_handle(BEST).unwrap()
-    }
-
-    fn hist_cf(&self) -> &ColumnFamily {
-        self.histdb.cf_handle(HIST).unwrap()
     }
 
     /// The key for a ContextWrapper<T> in the heap is:
@@ -433,22 +393,8 @@ where
         Ok(rmp_serde::from_slice::<V>(buf)?)
     }
 
-    fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateData>, Error> {
+    fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>, Error> {
         match self.statedb.get_pinned_cf(self.best_cf(), key)? {
-            Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
-            None => Ok(None),
-        }
-    }
-
-    fn get_deserialize_hist_data<V>(
-        &self,
-        cf: &ColumnFamily,
-        key: &[u8],
-    ) -> Result<Option<V>, Error>
-    where
-        V: for<'de> Deserialize<'de>,
-    {
-        match self.histdb.get_pinned_cf(cf, key)? {
             Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
             None => Ok(None),
         }
@@ -458,7 +404,7 @@ where
         &self,
         cf: &ColumnFamily,
         state_keys: I,
-    ) -> Result<Vec<Option<StateData>>, Error>
+    ) -> Result<Vec<Option<StateDataAlias<T>>>, Error>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
@@ -524,17 +470,17 @@ where
         el.elapsed() + self.estimated_remaining_time(el.get())
     }
 
-    /// Pushes an element into the heap.
+    /// Pushes an element into the db.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, mut el: ContextWrapper<T>) -> Result<(), Error> {
+    pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<(), Error> {
         let max_time = self.max_time();
         if el.elapsed() > max_time || self.score(&el) > max_time {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
         // Records the history in the statedb.
-        if !self.record_one(&mut el)? {
+        if !self.record_one(&mut el, prev)? {
             return Ok(());
         }
         let key = self.get_heap_key(&el);
@@ -591,38 +537,34 @@ where
         Ok(None)
     }
 
-    pub fn extend<I>(&self, iter: I, as_pop: bool) -> Result<(), Error>
+    pub fn extend_from_queue<I>(&self, iter: I) -> Result<(), Error>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
         let mut batch = WriteBatchWithTransaction::<false>::default();
-        let mut hist_batch = WriteBatchWithTransaction::<false>::default();
-        let mut state_batch = WriteBatchWithTransaction::<false>::default();
         let max_time = self.max_time();
         let mut skips = 0;
         let mut dups = 0;
 
         let to_add: Vec<_> = iter
             .into_iter()
-            .filter_map(|el| {
-                if el.elapsed() > max_time {
-                    None
+            .filter(|el| {
+                if el.elapsed() > max_time || self.score(el) > max_time {
+                    skips += 1;
+                    false
                 } else {
-                    let seen_key = Self::get_state_key(el.get());
-                    Some((el, seen_key))
+                    true
                 }
             })
             .collect();
 
-        let seen_values = self.get_state_values(self.best_cf(), to_add.iter().map(|(_, k)| k))?;
-        let mut new_seen = 0;
+        let state_keys: Vec<_> = to_add
+            .iter()
+            .map(|el| Self::get_state_key(el.get()))
+            .collect();
+        let seen_values = self.get_state_values(self.best_cf(), state_keys.iter())?;
 
-        for ((mut el, state_key), seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
-            if el.elapsed() > max_time || self.score(&el) > max_time {
-                skips += 1;
-                continue;
-            }
-
+        for (el, seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
             match seen_val {
                 Some(StateData { elapsed, .. }) => {
                     // since this is used for evictions, we can't drop equal states
@@ -630,26 +572,9 @@ where
                         dups += 1;
                         continue;
                     }
-                    if !el.recent_history().1.is_empty() {
-                        let write_state_data = elapsed > el.elapsed();
-                        self.record_one_batch(
-                            state_key,
-                            &mut el,
-                            &mut hist_batch,
-                            &mut state_batch,
-                            write_state_data,
-                        );
-                    }
                 }
                 None => {
-                    new_seen += 1;
-                    self.record_one_batch(
-                        state_key,
-                        &mut el,
-                        &mut hist_batch,
-                        &mut state_batch,
-                        true,
-                    );
+                    panic!("Adding unrecorded state to db from queue");
                 }
             };
             // If the value seen is also what we have, we still want to put it into the heap,
@@ -660,19 +585,11 @@ where
             batch.put(key, val);
         }
         let new = batch.len();
-        // The hist data needs to be pushed first, since the state and queue data reference it.
-        self.histdb.write_opt(hist_batch, &self.write_opts)?;
-        self.statedb.write_opt(state_batch, &self.write_opts)?;
         self.db.write_opt(batch, &self.write_opts)?;
 
-        self.iskips.fetch_add(skips, Ordering::Release);
-        if as_pop {
-            self.dup_pskips.fetch_add(dups, Ordering::Release);
-        } else {
-            self.dup_iskips.fetch_add(dups, Ordering::Release);
-        }
+        self.pskips.fetch_add(skips, Ordering::Release);
+        self.dup_pskips.fetch_add(dups, Ordering::Release);
         self.size.fetch_add(new, Ordering::Release);
-        self.seen.fetch_add(new_seen, Ordering::Release);
 
         Ok(())
     }
@@ -802,35 +719,24 @@ where
         }
     }
 
-    fn record_one_batch<const TR: bool, const TR2: bool>(
+    fn record_one_batch<const TR: bool>(
         &self,
         state_key: Vec<u8>,
         el: &mut ContextWrapper<T>,
-        hist_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
-        state_batch: &mut rocksdb::WriteBatchWithTransaction<TR2>,
-        write_state_data: bool,
+        prev: &Option<T>,
+        state_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
     ) {
-        let (mut prev, hist) = el.recent_history();
-        for h in hist {
-            let data = HistData { prev, hist: *h };
-            prev = self.hist_seq.fetch_add(1, Ordering::AcqRel);
-            hist_batch.put_cf(
-                self.hist_cf(),
-                prev.to_be_bytes(),
-                Self::serialize_data(data),
-            );
-        }
-        el.update_history(prev);
-        if write_state_data {
-            state_batch.merge_cf(
-                self.best_cf(),
-                state_key,
-                Self::serialize_data(StateData {
-                    elapsed: el.elapsed(),
-                    hist_index: prev,
-                }),
-            );
-        }
+        let hist = el.remove_history();
+        assert!(hist.len() == 1);
+        state_batch.merge_cf(
+            self.best_cf(),
+            state_key,
+            Self::serialize_data(StateData {
+                elapsed: el.elapsed(),
+                hist: hist.last().copied(),
+                prev: prev.clone(),
+            }),
+        );
     }
 
     /// Stores the underlying Ctx in the seen db with the best known elapsed time and
@@ -838,9 +744,10 @@ where
     /// and returns whether this context had that best time.
     /// The Wrapper object is modified to reference the stored history.
     /// A `false` value means the state should be skipped.
-    pub fn record_one(&self, el: &mut ContextWrapper<T>) -> Result<bool, Error> {
+    pub fn record_one(&self, el: &mut ContextWrapper<T>, prev: &Option<T>) -> Result<bool, Error> {
         let state_key = Self::get_state_key(el.get());
         let is_new =
+            // TODO: Maybe we can make this deserialization cheaper as we only need one field?
             if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
                 // This is a new state being pushed, as it has new history, hence we skip if equal.
                 if elapsed <= el.elapsed() {
@@ -855,10 +762,8 @@ where
         // we will rewrite the data.
 
         // We should also check the StateData for whether we even need to do this
-        let mut hist_batch = WriteBatch::default();
         let mut state_batch = WriteBatch::default();
-        self.record_one_batch(state_key, el, &mut hist_batch, &mut state_batch, true);
-        self.histdb.write_opt(hist_batch, &self.write_opts).unwrap();
+        self.record_one_batch(state_key, el, prev, &mut state_batch);
         self.statedb
             .write_opt(state_batch, &self.write_opts)
             .unwrap();
@@ -869,12 +774,15 @@ where
     }
 
     /// Stores the underlying Ctx entries in the state db with their respective
-    /// best known elapsed times and related histories,
+    /// best known elapsed times and preceding states,
     /// and returns whether each context had that best time.
     /// Wrapper objects are modified to reference the stored history.
     /// A `false` value for a context means the state should be skipped.
-    pub fn record_many(&self, vec: &mut Vec<ContextWrapper<T>>) -> Result<Vec<bool>, Error> {
-        let mut hist_batch = WriteBatchWithTransaction::<false>::default();
+    pub fn record_many(
+        &self,
+        vec: &mut Vec<ContextWrapper<T>>,
+        prev: &Option<T>,
+    ) -> Result<Vec<bool>, Error> {
         let mut state_batch = WriteBatchWithTransaction::<false>::default();
         let mut results = Vec::with_capacity(vec.len());
         let mut dups = 0;
@@ -902,10 +810,9 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_batch(state_key, el, &mut hist_batch, &mut state_batch, true);
+            self.record_one_batch(state_key, el, prev, &mut state_batch);
             results.push(true);
         }
-        self.histdb.write_opt(hist_batch, &self.write_opts).unwrap();
         self.statedb
             .write_opt(state_batch, &self.write_opts)
             .unwrap();
@@ -978,78 +885,50 @@ where
         Ok(())
     }
 
-    pub fn get_history(&self, mut last_index: usize) -> Result<Vec<HistoryAlias<T>>, Error> {
-        let cf = self.hist_cf();
+    pub fn get_history(&self, ctx: &T) -> Result<Vec<HistoryAlias<T>>, Error> {
         let mut vec = Vec::new();
-        while last_index != 0 {
-            let hd = self
-                .get_deserialize_hist_data::<HistAlias<T>>(cf, &last_index.to_be_bytes())
-                .unwrap()
-                .unwrap();
-            vec.push(hd.hist);
-            last_index = hd.prev;
+        let mut state_key = Self::get_state_key(ctx);
+        loop {
+            if let Some(StateData { hist, prev, .. }) =
+                self.get_deserialize_state_data(&state_key)?
+            {
+                if let Some(ctx) = prev {
+                    state_key = Self::get_state_key(&ctx);
+                    vec.push(hist.unwrap());
+                } else {
+                    break;
+                }
+            } else {
+                return Err(Error {
+                    message: format!("Could not find state entry for {:?}", ctx),
+                });
+            }
         }
         vec.reverse();
         Ok(vec)
     }
 
     pub fn get_history_ctx(&self, ctx: &ContextWrapper<T>) -> Result<Vec<HistoryAlias<T>>, Error> {
-        let (last_index, recent) = ctx.recent_history();
-        match self.get_history(last_index) {
+        match self.get_history(ctx.get()) {
             Ok(mut vec) => {
-                vec.extend(recent);
+                vec.extend(ctx.recent_history());
                 Ok(vec)
             }
             Err(e) => Err(e),
         }
     }
 
-    pub fn get_history_until(
-        &self,
-        ctx: &ContextWrapper<T>,
-        index: usize,
-    ) -> Result<Vec<HistoryAlias<T>>, Error> {
-        let cf = self.hist_cf();
-        let mut vec = Vec::new();
-        let (mut last_index, recent) = ctx.recent_history();
-        while last_index != 0 && last_index != index {
-            let hd = self
-                .get_deserialize_hist_data::<HistAlias<T>>(cf, &last_index.to_be_bytes())
-                .unwrap()
-                .unwrap();
-            vec.push(hd.hist);
-            last_index = hd.prev;
-        }
-        vec.reverse();
-        vec.extend(recent);
-        Ok(vec)
-    }
-
     pub fn get_last_history_step(
         &self,
         ctx: &ContextWrapper<T>,
     ) -> Result<Option<HistoryAlias<T>>, Error> {
-        let (last_index, recent) = ctx.recent_history();
-        if let Some(h) = recent.last() {
+        if let Some(h) = ctx.recent_history().last() {
             Ok(Some(*h))
-        } else if last_index == 0 {
-            Ok(None)
         } else {
-            Ok(Some(
-                self.get_deserialize_hist_data::<HistAlias<T>>(
-                    self.hist_cf(),
-                    &last_index.to_be_bytes(),
-                )?
-                .unwrap_or_else(|| {
-                    panic!(
-                        "{:?} Did not find history at {} ({:?})",
-                        rayon::current_thread_index(),
-                        last_index,
-                        last_index.to_be_bytes()
-                    )
-                })
-                .hist,
-            ))
+            Ok(self
+                .get_deserialize_state_data(&Self::get_state_key(ctx.get()))?
+                .map(|sd| sd.hist)
+                .flatten())
         }
     }
 
@@ -1097,12 +976,10 @@ where
             Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
         )?;
         let statestats = perf::get_memory_usage_stats(Some(&[&self.statedb]), None)?;
-        let histstats = perf::get_memory_usage_stats(Some(&[&self.histdb]), None)?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}\n\
              statedb: total={}, unflushed={}, readers={}, caches={}\n\
-             histdb: total={}, unflushed={}, readers={}, caches={}\n\
              uncompressed={}, compressed={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
@@ -1112,10 +989,6 @@ where
             SizeFormatter::new(statestats.mem_table_unflushed, BINARY),
             SizeFormatter::new(statestats.mem_table_readers_total, BINARY),
             SizeFormatter::new(statestats.cache_total, BINARY),
-            SizeFormatter::new(histstats.mem_table_total, BINARY),
-            SizeFormatter::new(histstats.mem_table_unflushed, BINARY),
-            SizeFormatter::new(histstats.mem_table_readers_total, BINARY),
-            SizeFormatter::new(histstats.cache_total, BINARY),
             SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
             SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
         ))

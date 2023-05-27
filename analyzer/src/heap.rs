@@ -480,13 +480,13 @@ where
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, mut el: ContextWrapper<T>) -> Result<()> {
+    pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
         let start = Instant::now();
         if el.elapsed() > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        if !self.db.record_one(&mut el)? {
+        if !self.db.record_one(&mut el, prev)? {
             return Ok(());
         }
 
@@ -508,7 +508,7 @@ where
                 if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed())
                 {
                     // Lower priority (or equal but later), evict the new item immediately
-                    self.db.push(el)?;
+                    self.db.push(el, prev)?;
                     self.min_db_estimate
                         .fetch_min(est_complete, Ordering::Release);
                     self.min_db_estimates[progress].fetch_min(est_complete, Ordering::Release);
@@ -545,7 +545,7 @@ where
             mins[progress] = std::cmp::min(mins[progress], *score);
         }
         let best = mins.iter().min().unwrap();
-        self.db.extend(ev.into_iter().map(|(c, _)| c), true)?;
+        self.db.extend_from_queue(ev.into_iter().map(|(c, _)| c))?;
         self.min_db_estimate.fetch_min(*best, Ordering::Release);
         for (est, min) in self.min_db_estimates.iter().zip(mins.into_iter()) {
             est.fetch_min(min, Ordering::Release);
@@ -869,7 +869,8 @@ where
     /// Adds all the given elements to the queue, except for any
     /// elements with elapsed time greater than the allowed maximum
     /// or having been seen before with a smaller elapsed time.
-    pub fn extend<I>(&self, iter: I) -> Result<()>
+    /// All elements must have the same prior state (supplied in prev).
+    pub fn extend<I>(&self, iter: I, prev: &Option<T>) -> Result<()>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
@@ -891,7 +892,7 @@ where
             return Ok(());
         }
 
-        let keeps = self.db.record_many(&mut vec)?;
+        let keeps = self.db.record_many(&mut vec, prev)?;
         debug_assert!(vec.len() == keeps.len());
         let vec: Vec<(ContextWrapper<T>, usize, u32)> = vec
             .into_iter()

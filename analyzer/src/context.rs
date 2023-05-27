@@ -297,7 +297,6 @@ pub trait Wrapper<T> {
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
-    hist_index: usize,
     hist: Vec<History<I, S, L, E, A, Wp>>,
 }
 
@@ -325,7 +324,6 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed: 0,
-            hist_index: 0,
             hist: Vec::new(),
         }
     }
@@ -334,13 +332,14 @@ impl<T: Ctx> ContextWrapper<T> {
         self.hist.push(step);
     }
 
-    pub fn recent_history(&self) -> (usize, &[HistoryAlias<T>]) {
-        (self.hist_index, &self.hist)
+    pub fn recent_history(&self) -> &[HistoryAlias<T>] {
+        &self.hist
     }
 
-    pub fn update_history(&mut self, new_hist_index: usize) {
-        self.hist_index = new_hist_index;
-        self.hist.clear();
+    pub fn remove_history(&mut self) -> Vec<HistoryAlias<T>> {
+        let r = self.hist.clone();
+        self.hist = Vec::new();
+        r
     }
 
     pub fn elapse(&mut self, t: u32) {
@@ -544,7 +543,10 @@ pub fn history_str<T>(history: &[HistoryAlias<T>]) -> String
 where
     T: Ctx,
 {
-    let vec: Vec<String> = history.iter().map(|h| h.to_string()).collect::<Vec<String>>();
+    let vec: Vec<String> = history
+        .iter()
+        .map(|h| h.to_string())
+        .collect::<Vec<String>>();
     vec.join("\n")
 }
 

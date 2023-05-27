@@ -130,7 +130,7 @@ pub mod testlib {
                     "Found unexpected route from {} to {}:\n{}\n",
                     $start,
                     $end,
-                    $crate::context::history_str::<$T>(ctx.recent_history().1)
+                    $crate::context::history_str::<$T>(ctx.recent_history())
                 );
             }
         }};
@@ -282,7 +282,7 @@ pub mod testlib {
                         !$world.get_location(loc).can_access(ctx.get()),
                         "Able to access location {}:\n{}\n",
                         loc,
-                        $crate::context::history_str::<$T>(ctx.recent_history().1)
+                        $crate::context::history_str::<$T>(ctx.recent_history())
                     );
                 }
             }
@@ -328,7 +328,7 @@ pub mod testlib {
                     !$world.get_location($loc_id).can_access(ctx.get()),
                     "Expected location {} to be inaccessible:\n{}",
                     $loc_id,
-                    $crate::context::history_str::<$T>(ctx.recent_history().1)
+                    $crate::context::history_str::<$T>(ctx.recent_history())
                 );
             }
         }};
@@ -527,7 +527,7 @@ pub mod testlib {
                         "Unexpectedly able to {} without requirements:\n{}\n{}\n",
                         $desc,
                         result.unwrap_err(),
-                        $crate::context::history_str::<$T>(ctx.recent_history().1),
+                        $crate::context::history_str::<$T>(ctx.recent_history()),
                     );
                     success = true;
                 }
@@ -565,7 +565,7 @@ pub mod testlib {
                         "Unexpectedly able to find {} without requirements:\n{}\n{}\n",
                         $item,
                         result.unwrap_err(),
-                        $crate::context::history_str::<$T>(ctx.recent_history().1),
+                        $crate::context::history_str::<$T>(ctx.recent_history()),
                     );
                     success = true;
                 }
@@ -601,7 +601,7 @@ pub mod testlib {
                         "Unexpectedly able to reach {} without requirements:\n{}\n{}\n",
                         $spot,
                         result.unwrap_err(),
-                        $crate::context::history_str::<$T>(ctx.recent_history().1),
+                        $crate::context::history_str::<$T>(ctx.recent_history()),
                     );
                     success = true;
                 }
@@ -636,7 +636,7 @@ pub mod testlib {
                         "Unexpectedly able to visit {} without requirements:\n{}\n{}\n",
                         $loc_id,
                         result.unwrap_err(),
-                        $crate::context::history_str::<$T>(ctx.recent_history().1),
+                        $crate::context::history_str::<$T>(ctx.recent_history()),
                     );
                     success = true;
                 }
@@ -674,7 +674,7 @@ pub mod testlib {
                             "Unexpectedly able to activate {} without requirements:\n{}\n{}\n",
                             $act_id,
                             result.unwrap_err(),
-                            $crate::context::history_str::<$T>(ctx.recent_history().1),
+                            $crate::context::history_str::<$T>(ctx.recent_history()),
                         );
                         success = true;
                     }

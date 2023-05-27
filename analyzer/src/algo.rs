@@ -247,7 +247,7 @@ where
                 panic!(
                     "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}",
                     ctx.elapsed(),
-                    history_summary::<T>(ctx.recent_history().1),
+                    history_summary::<T>(ctx.recent_history()),
                     ctx.get()
                 );
             }
@@ -309,7 +309,7 @@ where
                 let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
                 solutions.insert(
                     m.elapsed(),
-                    m.recent_history().1.into_iter().copied().collect(),
+                    m.recent_history().into_iter().copied().collect(),
                 );
                 max_time
             } else {
@@ -319,12 +319,12 @@ where
 
         solutions.insert(
             wonctx.elapsed(),
-            wonctx.recent_history().1.into_iter().copied().collect(),
+            wonctx.recent_history().into_iter().copied().collect(),
         );
         for w in wins {
             solutions.insert(
                 w.elapsed(),
-                w.recent_history().1.into_iter().copied().collect(),
+                w.recent_history().into_iter().copied().collect(),
             );
         }
 
@@ -340,7 +340,7 @@ where
             32_768,
         )
         .unwrap();
-        queue.push(startctx.clone()).unwrap();
+        queue.push(startctx.clone(), &None).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
         println!("Queue starts with {} elements", queue.len());
         Ok(Search {
@@ -467,10 +467,10 @@ where
 
                         for ctx in items {
                             let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-
+                            let prev = ctx.get().clone();
                             if let Err(e) = self
                                 .queue
-                                .extend(self.process_one(ctx, iters, &start, mode))
+                                .extend(self.process_one(ctx, iters, &start, mode), &Some(prev))
                             {
                                 let mut r = res.lock().unwrap();
                                 println!("Thread {} exiting due to error: {:?}", i, e);
@@ -587,7 +587,7 @@ where
         println!(
             "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends={}; opt={}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit={}ms; db best={}; history={}; evictions={}; retrievals={}\n\
+            limit={}ms; db best={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             db bests: {}\n\
             {}",
@@ -605,7 +605,6 @@ where
             self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
-            self.queue.db().history_count(),
             self.queue.evictions(),
             self.queue.retrievals(),
             iskips,

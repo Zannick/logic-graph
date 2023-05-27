@@ -115,8 +115,9 @@ where
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
             return Some(el);
         }
+        let prev = el.get().clone();
         let mut vec = single_step(world, el, max_time);
-        let keeps = db.record_many(&mut vec).unwrap();
+        let keeps = db.record_many(&mut vec, &Some(prev)).unwrap();
 
         heap.extend(
             vec.into_iter()
