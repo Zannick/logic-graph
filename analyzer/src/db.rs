@@ -43,13 +43,13 @@ struct HeapDBOptions {
 
 const BEST: &str = "best";
 
-type NextData<T> = (u32, HistoryAlias<T>, T);
+type NextData<T> = (u32, T);
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 struct StateData<T, I, S, L, E, A, Wp> {
     // Ordering is important here, since min_merge will sort by serialized bytes.
     elapsed: u32,
-    hist: Option<History<I, S, L, E, A, Wp>>,
+    hist: Vec<History<I, S, L, E, A, Wp>>,
     prev: Option<T>,
 }
 
@@ -214,7 +214,6 @@ where
         env.set_low_priority_background_threads(6);
         opts.set_env(&env);
 
-        let next_opts = opts.clone();
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
@@ -226,8 +225,6 @@ where
         // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
         let db = DB::open(&opts, &path)?;
-        let _ = DB::destroy(&opts, &path3);
-        let nextdb = DB::open(&opts, &path3)?;
 
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
@@ -236,6 +233,12 @@ where
         opts2.set_allow_mmap_writes(true);
         opts2.set_compression_type(rocksdb::DBCompressionType::None);
         opts2.set_cuckoo_table_factory(&cuckoo_opts);
+
+        let mut next_opts = opts2.clone();
+        next_opts.set_memtable_whole_key_filtering(true);
+        let _ = DB::destroy(&next_opts, &path3);
+        let nextdb = DB::open(&next_opts, &path3)?;
+
         opts2.set_merge_operator_associative("min", min_merge);
 
         let cf_opts = opts2.clone();
@@ -726,7 +729,9 @@ where
 
     pub fn get_best_elapsed(&self, el: &T) -> Result<u32, Error> {
         let state_key = Self::serialize_state(el);
-        let sd = self.get_deserialize_state_data(&state_key)?.unwrap();
+        let sd = self
+            .get_deserialize_state_data(&state_key)?
+            .expect("Didn't find state data!");
         Ok(sd.elapsed)
     }
 
@@ -738,18 +743,14 @@ where
         next_entries: &mut Vec<NextData<T>>,
         state_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
     ) {
-        let hist = el.remove_history();
-        assert!(hist.len() == 1);
-        let hist = hist.last().copied();
-        if let Some((h, dur)) = hist {
-            next_entries.push((dur, h, el.get().clone()));
-        }
+        let (hist, dur) = el.remove_history();
+        next_entries.push((dur, el.get().clone()));
         state_batch.merge_cf(
             self.best_cf(),
             state_key,
             Self::serialize_data(StateData {
                 elapsed: el.elapsed(),
-                hist: hist.map(|p| p.0),
+                hist,
                 prev: prev.clone(),
             }),
         );
@@ -946,7 +947,7 @@ where
             {
                 if let Some(ctx) = prev {
                     state_key = Self::serialize_state(&ctx);
-                    vec.push(hist.unwrap());
+                    vec.push(hist);
                 } else {
                     break;
                 }
@@ -957,13 +958,13 @@ where
             }
         }
         vec.reverse();
-        Ok(vec)
+        Ok(vec.into_iter().flatten().collect())
     }
 
     pub fn get_history_ctx(&self, ctx: &ContextWrapper<T>) -> Result<Vec<HistoryAlias<T>>, Error> {
         match self.get_history(ctx.get()) {
             Ok(mut vec) => {
-                vec.extend(ctx.recent_history().iter().map(|p| p.0));
+                vec.extend(ctx.recent_history());
                 Ok(vec)
             }
             Err(e) => Err(e),
@@ -975,11 +976,11 @@ where
         ctx: &ContextWrapper<T>,
     ) -> Result<Option<HistoryAlias<T>>, Error> {
         if let Some(h) = ctx.recent_history().last() {
-            Ok(Some(h.0))
+            Ok(Some(*h))
         } else {
             Ok(self
                 .get_deserialize_state_data(&Self::serialize_state(ctx.get()))?
-                .map(|sd| sd.hist)
+                .map(|sd| sd.hist.last().copied())
                 .flatten())
         }
     }

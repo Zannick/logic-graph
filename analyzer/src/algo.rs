@@ -247,7 +247,7 @@ where
                 panic!(
                     "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}",
                     ctx.elapsed(),
-                    history_summary::<T, _>(ctx.recent_history().iter().map(|p| p.0)),
+                    history_summary::<T, _>(ctx.recent_history().iter().copied()),
                     ctx.get()
                 );
             }
@@ -309,7 +309,7 @@ where
                 let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
                 solutions.insert(
                     m.elapsed(),
-                    m.recent_history().into_iter().map(|p| p.0).collect(),
+                    m.recent_history().into_iter().copied().collect(),
                 );
                 max_time
             } else {
@@ -319,12 +319,12 @@ where
 
         solutions.insert(
             wonctx.elapsed(),
-            wonctx.recent_history().into_iter().map(|p| p.0).collect(),
+            wonctx.recent_history().into_iter().copied().collect(),
         );
         for w in wins {
             solutions.insert(
                 w.elapsed(),
-                w.recent_history().into_iter().map(|p| p.0).collect(),
+                w.recent_history().into_iter().copied().collect(),
             );
         }
 

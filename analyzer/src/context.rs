@@ -297,7 +297,8 @@ pub trait Wrapper<T> {
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
-    hist: Vec<(History<I, S, L, E, A, Wp>, u32)>,
+    hist_dur: u32,
+    hist: Vec<History<I, S, L, E, A, Wp>>,
 }
 
 pub type ContextWrapper<T> = BaseContextWrapper<
@@ -324,6 +325,7 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed: 0,
+            hist_dur: 0,
             hist: Vec::new(),
         }
     }
@@ -332,22 +334,30 @@ impl<T: Ctx> ContextWrapper<T> {
         ContextWrapper {
             ctx,
             elapsed,
+            hist_dur: 0,
             hist: Vec::new(),
         }
     }
 
     pub fn append_history(&mut self, step: HistoryAlias<T>, dur: u32) {
-        self.hist.push((step, dur));
+        self.hist.push(step);
+        self.hist_dur += dur;
     }
 
-    pub fn recent_history(&self) -> &[(HistoryAlias<T>, u32)] {
+    pub fn recent_history(&self) -> &[HistoryAlias<T>] {
         &self.hist
     }
 
-    pub fn remove_history(&mut self) -> Vec<(HistoryAlias<T>, u32)> {
+    pub fn recent_dur(&self) -> u32 {
+        self.hist_dur
+    }
+
+    pub fn remove_history(&mut self) -> (Vec<HistoryAlias<T>>, u32) {
         let r = self.hist.clone();
         self.hist = Vec::new();
-        r
+        let hist_dur = self.hist_dur;
+        self.hist_dur = 0;
+        (r, hist_dur)
     }
 
     pub fn elapse(&mut self, t: u32) {

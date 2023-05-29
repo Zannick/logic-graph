@@ -872,17 +872,7 @@ where
     {
         let mut iskips = 0;
         let start = Instant::now();
-        let mut vec: Vec<ContextWrapper<T>> = iter
-            .into_iter()
-            .filter(|el| {
-                if el.elapsed() > self.db.max_time() || self.db.score(el) > self.db.max_time() {
-                    iskips += 1;
-                    false
-                } else {
-                    true
-                }
-            })
-            .collect();
+        let mut vec: Vec<ContextWrapper<T>> = iter.into_iter().collect();
         if vec.is_empty() {
             self.iskips.fetch_add(iskips, Ordering::Release);
             return Ok(());
@@ -894,7 +884,10 @@ where
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
-                if keep {
+                if el.elapsed() > self.db.max_time() || self.db.score(&el) > self.db.max_time() {
+                    iskips += 1;
+                    None
+                } else if keep {
                     let priority = self.db.score(&el);
                     let progress = self.db.progress(el.get());
                     Some((el, progress, priority))
