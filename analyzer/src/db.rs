@@ -25,14 +25,16 @@ use std::sync::Mutex;
 use std::time::Instant;
 
 // We need the following in this wrapper impl:
-// 1. The contextwrapper db is mainly iterated over, via either
+// 1. The queue db is mainly iterated over, via either
 //    getting the minimum-score element (i.e. iterating from start)
 //    or running over the whole db (e.g. for statistics). BlockDB is best for this.
 // 2. We'll add two LRU cache layers that must outlive the BlockDB,
 //    one for uncompressed blocks and the other for compressed blocks.
-// 3. The best-seen version of a context is mainly point lookups,
-//    which is better served by CuckooTable. This will be a Ctx -> u32
-//    map, which fulfills the fixed-length key and value limitations.
+
+// We will have the following DBs:
+// 1. the queue: (progress, elapsed, seq) -> Ctx
+// 2. next: (Ctx, history step) -> (elapsed, Ctx)
+// 3. best: Ctx -> (elapsed, history step, prev Ctx)
 
 struct HeapDBOptions {
     opts: Options,
@@ -40,6 +42,8 @@ struct HeapDBOptions {
 }
 
 const BEST: &str = "best";
+
+type NextData<T> = (u32, HistoryAlias<T>, T);
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 struct StateData<T, I, S, L, E, A, Wp> {
@@ -69,18 +73,21 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
     db: DB,
+    nextdb: DB,
     statedb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
     _opts: HeapDBOptions,
+    _next_opts: HeapDBOptions,
     _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
     max_time: AtomicU32,
 
-    seq: AtomicU64,
+    seq: AtomicU32,
     size: AtomicUsize,
     seen: AtomicUsize,
+    next: AtomicUsize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
     dup_iskips: AtomicUsize,
@@ -163,7 +170,7 @@ const GB: usize = 1 << 30;
 
 impl<'w, W, T, L, E> HeapDB<'w, W, T>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L, Exit = E> + 'w,
     T: Ctx<World = W>,
     L: Location<ExitId = E::ExitId, Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
@@ -201,22 +208,26 @@ where
         block_opts.set_block_cache(&cache);
         block_opts.set_block_cache_compressed(&cache2);
         block_opts.set_block_size(1024);
-        opts.set_max_background_jobs(16);
+        opts.set_max_background_jobs(8);
         opts.set_block_based_table_factory(&block_opts);
         let mut env = Env::new().unwrap();
-        env.set_low_priority_background_threads(12);
+        env.set_low_priority_background_threads(6);
         opts.set_env(&env);
+
+        let next_opts = opts.clone();
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
         let mut path3 = path.clone();
         path.push("queue");
         path2.push("states");
-        path3.push("hist");
+        path3.push("next");
 
         // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
         let db = DB::open(&opts, &path)?;
+        let _ = DB::destroy(&opts, &path3);
+        let nextdb = DB::open(&opts, &path3)?;
 
         let mut cuckoo_opts = CuckooTableOptions::default();
         cuckoo_opts.set_hash_ratio(0.75);
@@ -247,10 +258,15 @@ where
         Ok(HeapDB {
             scorer,
             db,
+            nextdb,
             statedb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
             _opts: HeapDBOptions { opts, path },
+            _next_opts: HeapDBOptions {
+                opts: next_opts,
+                path: path3,
+            },
             _state_opts: HeapDBOptions {
                 opts: opts2,
                 path: path2,
@@ -260,6 +276,7 @@ where
             seq: 0.into(),
             size: 0.into(),
             seen: 0.into(),
+            next: 0.into(),
             iskips: 0.into(),
             pskips: 0.into(),
             dup_iskips: 0.into(),
@@ -296,6 +313,11 @@ where
     /// Returns the number of unique states we've seen so far (tracked separately from the db).
     pub fn seen(&self) -> usize {
         self.seen.load(Ordering::Acquire)
+    }
+
+    /// Returns the number of processed states (with children) (tracked separately from the db).
+    pub fn processed(&self) -> usize {
+        self.next.load(Ordering::Acquire)
     }
 
     /// Returns the number of unique states we've estimated remaining time for.
@@ -345,36 +367,44 @@ where
         self.statedb.cf_handle(BEST).unwrap()
     }
 
-    /// The key for a ContextWrapper<T> in the heap is:
+    /// The key for a ContextWrapper<T> in the queue is:
     /// the progress (4 bytes)
     /// the score (4 bytes),
-    /// a sequence number (8 bytes)
+    /// the elapsed time (4 bytes),
+    /// a sequence number (4 bytes)
     fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
         let progress: u32 = self.progress(el.get()).try_into().unwrap();
         key[0..4].copy_from_slice(&progress.to_be_bytes());
         key[4..8].copy_from_slice(&self.score(el).to_be_bytes());
-        key[8..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
+        key[8..12].copy_from_slice(&el.elapsed().to_be_bytes());
+        key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
 
-    /// The key for a T (Ctx) in the statedb is... itself!
-    fn get_state_key(el: &T) -> Vec<u8> {
+    fn new_heap_key(&self, old_key: &[u8], old_elapsed: u32, new_elapsed: u32) -> [u8; 16] {
+        let old_score = u32::from_be_bytes(old_key[4..8].try_into().unwrap());
+        let new_score = old_score - old_elapsed + new_elapsed;
+        let mut key: [u8; 16] = [0; 16];
+        key[0..4].copy_from_slice(&old_key[0..4]);
+        // This works because score is an estimated time (requiring deserialization)
+        // plus the actual elapsed time
+        key[4..8].copy_from_slice(&new_score.to_be_bytes());
+        key[8..12].copy_from_slice(&new_elapsed.to_be_bytes());
+        key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
+        key
+    }
+
+    /// The key for a T (Ctx) in the statedb/nextdb, and the value in the queue db
+    /// are all T itself.
+    fn serialize_state(el: &T) -> Vec<u8> {
         let mut key = Vec::with_capacity(std::mem::size_of::<T>());
         el.serialize(&mut Serializer::new(&mut key)).unwrap();
         key
     }
 
-    /// The value for a ContextWrapper<T> in the heap is... itself!
-    /// Unfortunately this is serializing the T (Ctx) a second time if we already got the state key.
-    fn get_heap_value(el: ContextWrapper<T>) -> Vec<u8> {
-        let mut val = Vec::new();
-        el.serialize(&mut Serializer::new(&mut val)).unwrap();
-        val
-    }
-
-    fn get_obj_from_heap_value(buf: &[u8]) -> Result<ContextWrapper<T>, Error> {
-        Ok(rmp_serde::from_slice::<ContextWrapper<T>>(buf)?)
+    fn get_obj_from_heap_value(buf: &[u8]) -> Result<T, Error> {
+        Ok(rmp_serde::from_slice::<T>(buf)?)
     }
 
     fn serialize_data<V>(v: V) -> Vec<u8>
@@ -391,6 +421,14 @@ where
         V: for<'de> Deserialize<'de>,
     {
         Ok(rmp_serde::from_slice::<V>(buf)?)
+    }
+
+    fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>, Error> {
+        let ctx = Self::get_obj_from_heap_value(value)?;
+        let sd = self
+            .get_deserialize_state_data(value)?
+            .expect("Got unrecognized state from db!");
+        Ok(ContextWrapper::with_elapsed(ctx, sd.elapsed))
     }
 
     fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>, Error> {
@@ -437,6 +475,14 @@ where
         }
     }
 
+    fn serialize_next_data(next_entries: Vec<NextData<T>>) -> Vec<u8> {
+        Self::serialize_data(next_entries)
+    }
+
+    fn deserialize_next_data(value: &[u8]) -> Result<Vec<NextData<T>>, Error> {
+        Self::get_obj_from_data(value)
+    }
+
     /// Estimates the remaining time to the goal.
     pub fn estimated_remaining_time(&self, ctx: &T) -> u32 {
         self.scorer.estimate_remaining_time(ctx).try_into().unwrap()
@@ -472,19 +518,28 @@ where
 
     /// Pushes an element into the db.
     /// If the element's elapsed time is greater than the allowed maximum,
-    /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
+    /// or, if the state has been previously processed or previously seen
+    /// with an equal or lower elapsed time, does nothing.
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<(), Error> {
         let max_time = self.max_time();
+        // Records the history in the statedb, even if over time.
+        if !self.record_one(&mut el, prev)? {
+            return Ok(());
+        }
         if el.elapsed() > max_time || self.score(&el) > max_time {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        // Records the history in the statedb.
-        if !self.record_one(&mut el, prev)? {
-            return Ok(());
-        }
         let key = self.get_heap_key(&el);
-        let val = Self::get_heap_value(el);
+        let val = Self::serialize_state(el.get());
+        self.db.put_opt(key, val, &self.write_opts)?;
+        self.size.fetch_add(1, Ordering::Release);
+        Ok(())
+    }
+
+    pub fn push_from_queue(&self, el: ContextWrapper<T>) -> Result<(), Error> {
+        let key = self.get_heap_key(&el);
+        let val = Self::serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
@@ -518,19 +573,18 @@ where
                 println!("Compacting took {:?}", start.elapsed());
             }
 
-            let el = Self::get_obj_from_heap_value(&value)?;
+            let el = self.get_queue_entry_wrapper(&value)?;
             if el.elapsed() > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
             }
 
-            let state_key = Self::get_state_key(el.get());
-            if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
-                if el.elapsed() > elapsed {
-                    self.dup_pskips.fetch_add(1, Ordering::Release);
-                    continue;
-                }
+            if self.remember_processed_raw(&value)? {
+                self.dup_pskips.fetch_add(1, Ordering::Release);
+                continue;
             }
+            // We don't need to check the elapsed time against statedb,
+            // because that's where the elapsed time came from
             return Ok(Some(el));
         }
 
@@ -546,42 +600,20 @@ where
         let mut skips = 0;
         let mut dups = 0;
 
-        let to_add: Vec<_> = iter
-            .into_iter()
-            .filter(|el| {
-                if el.elapsed() > max_time || self.score(el) > max_time {
-                    skips += 1;
-                    false
-                } else {
-                    true
-                }
-            })
-            .collect();
+        for el in iter {
+            if el.elapsed() > max_time || self.score(&el) > max_time {
+                skips += 1;
+                continue;
+            }
 
-        let state_keys: Vec<_> = to_add
-            .iter()
-            .map(|el| Self::get_state_key(el.get()))
-            .collect();
-        let seen_values = self.get_state_values(self.best_cf(), state_keys.iter())?;
+            let val = Self::serialize_state(el.get());
 
-        for (el, seen_val) in to_add.into_iter().zip(seen_values.into_iter()) {
-            match seen_val {
-                Some(StateData { elapsed, .. }) => {
-                    // since this is used for evictions, we can't drop equal states
-                    if elapsed < el.elapsed() {
-                        dups += 1;
-                        continue;
-                    }
-                }
-                None => {
-                    panic!("Adding unrecorded state to db from queue");
-                }
-            };
-            // If the value seen is also what we have, we still want to put it into the heap,
-            // but we don't have to write the state data again (which would replace the history).
-            // The history needs to be written either way.
+            if self.remember_processed_raw(&val).unwrap() {
+                dups += 1;
+                continue;
+            }
+
             let key = self.get_heap_key(&el);
-            let val = Self::get_heap_value(el);
             batch.put(key, val);
         }
         let new = batch.len();
@@ -602,7 +634,6 @@ where
     ) -> Result<Vec<ContextWrapper<T>>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
-        let mut tmp = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         tail_opts.set_iterate_lower_bound(
@@ -624,62 +655,41 @@ where
         };
         batch.delete(key);
 
-        let el = Self::get_obj_from_heap_value(&value)?;
+        let el = self.get_queue_entry_wrapper(&value)?;
         let max_time = self.max_time();
         if el.elapsed() > max_time || self.score(&el) > max_time {
             pskips += 1;
         } else {
-            let seen_key = Self::get_state_key(el.get());
-            tmp.push((el, seen_key));
+            res.push(el);
         }
 
         let start = Instant::now();
-        let mut done = false;
-        while res.len() < count {
+        'outer: while res.len() < count {
             loop {
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
                     batch.delete(key);
                     pops += 1;
 
-                    let el = Self::get_obj_from_heap_value(&value)?;
+                    let el = self.get_queue_entry_wrapper(&value)?;
                     let max_time = self.max_time();
                     if el.elapsed() > max_time || self.score(&el) > max_time {
                         pskips += 1;
                         continue;
                     }
+                    if self.remember_processed_raw(&value)? {
+                        dup_pskips += 1;
+                        continue;
+                    }
 
-                    let seen_key = Self::get_state_key(el.get());
-                    tmp.push((el, seen_key));
-                    if tmp.len() == count - res.len() {
-                        break;
+                    res.push(el);
+                    if res.len() == count {
+                        break 'outer;
                     }
                 } else {
-                    done = true;
-                    break;
+                    break 'outer;
                 }
             }
-
-            // Grab all the seen values in one request.
-            let seen_values = self.get_state_values(self.best_cf(), tmp.iter().map(|(_, k)| k))?;
-            res.extend(tmp.into_iter().zip(seen_values.into_iter()).filter_map(
-                |((el, _), seen_val)| match seen_val {
-                    Some(StateData { elapsed, .. }) => {
-                        if elapsed < el.elapsed() {
-                            dup_pskips += 1;
-                            None
-                        } else {
-                            Some(el)
-                        }
-                    }
-                    // There should always be a value, but if somehow there isn't, return it for sure.
-                    None => Some(el),
-                },
-            ));
-            if done {
-                break;
-            }
-            tmp = Vec::with_capacity(count - res.len());
         }
         println!(
             "We got {} results in {:?}, having iterated through {} elements",
@@ -700,23 +710,24 @@ where
         Ok(res)
     }
 
-    /// Checks whether the underlying Ctx is in the state db with a strictly better time.
-    /// A `false` return value means the state should be skipped.
-    pub fn remember_pop(&self, el: &ContextWrapper<T>) -> Result<bool, Error> {
-        let seen_key = Self::get_state_key(el.get());
+    fn remember_processed_raw(&self, key: &[u8]) -> Result<bool, Error> {
+        Ok(self.nextdb.key_may_exist(key) && self.nextdb.get_pinned(key)?.is_some())
+    }
 
-        match self.get_deserialize_state_data(&seen_key)? {
-            Some(StateData { elapsed, .. }) => {
-                if elapsed < el.elapsed() {
-                    self.dup_pskips.fetch_add(1, Ordering::Release);
-                    Ok(false)
-                } else {
-                    Ok(true)
-                }
-            }
-            // This shouldn't happen, but if it does, we should indeed keep the element...
-            None => Ok(true),
-        }
+    /// Checks whether the given Ctx was already processed into its next states.
+    pub fn remember_processed(&self, el: &T) -> Result<bool, Error> {
+        let next_key = Self::serialize_state(el);
+        self.remember_processed_raw(&next_key)
+    }
+
+    pub fn count_duplicate(&self) {
+        self.dup_pskips.fetch_add(1, Ordering::Release);
+    }
+
+    pub fn get_best_elapsed(&self, el: &T) -> Result<u32, Error> {
+        let state_key = Self::serialize_state(el);
+        let sd = self.get_deserialize_state_data(&state_key)?.unwrap();
+        Ok(sd.elapsed)
     }
 
     fn record_one_batch<const TR: bool>(
@@ -724,16 +735,21 @@ where
         state_key: Vec<u8>,
         el: &mut ContextWrapper<T>,
         prev: &Option<T>,
+        next_entries: &mut Vec<NextData<T>>,
         state_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
     ) {
         let hist = el.remove_history();
         assert!(hist.len() == 1);
+        let hist = hist.last().copied();
+        if let Some((h, dur)) = hist {
+            next_entries.push((dur, h, el.get().clone()));
+        }
         state_batch.merge_cf(
             self.best_cf(),
             state_key,
             Self::serialize_data(StateData {
                 elapsed: el.elapsed(),
-                hist: hist.last().copied(),
+                hist: hist.map(|p| p.0),
                 prev: prev.clone(),
             }),
         );
@@ -745,7 +761,7 @@ where
     /// The Wrapper object is modified to reference the stored history.
     /// A `false` value means the state should be skipped.
     pub fn record_one(&self, el: &mut ContextWrapper<T>, prev: &Option<T>) -> Result<bool, Error> {
-        let state_key = Self::get_state_key(el.get());
+        let state_key = Self::serialize_state(el.get());
         let is_new =
             // TODO: Maybe we can make this deserialization cheaper as we only need one field?
             if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
@@ -762,8 +778,19 @@ where
         // we will rewrite the data.
 
         // We should also check the StateData for whether we even need to do this
+        let mut next_entries = Vec::new();
         let mut state_batch = WriteBatch::default();
-        self.record_one_batch(state_key, el, prev, &mut state_batch);
+        self.record_one_batch(state_key, el, prev, &mut next_entries, &mut state_batch);
+        if let Some(p) = prev {
+            self.nextdb
+                .put_opt(
+                    Self::serialize_state(p),
+                    Self::serialize_next_data(next_entries),
+                    &self.write_opts,
+                )
+                .unwrap();
+            self.next.fetch_add(1, Ordering::Release);
+        }
         self.statedb
             .write_opt(state_batch, &self.write_opts)
             .unwrap();
@@ -783,13 +810,17 @@ where
         vec: &mut Vec<ContextWrapper<T>>,
         prev: &Option<T>,
     ) -> Result<Vec<bool>, Error> {
+        let mut next_entries = Vec::new();
         let mut state_batch = WriteBatchWithTransaction::<false>::default();
         let mut results = Vec::with_capacity(vec.len());
         let mut dups = 0;
         let mut new_seen = 0;
         let cf = self.best_cf();
 
-        let seeing: Vec<_> = vec.iter().map(|el| Self::get_state_key(el.get())).collect();
+        let seeing: Vec<_> = vec
+            .iter()
+            .map(|el| Self::serialize_state(el.get()))
+            .collect();
 
         let seen_values = self.get_state_values(cf, seeing.iter())?;
 
@@ -810,14 +841,29 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_batch(state_key, el, prev, &mut state_batch);
+            self.record_one_batch(state_key, el, prev, &mut next_entries, &mut state_batch);
             results.push(true);
         }
+
+        if let Some(p) = prev {
+            self.nextdb
+                .put_opt(
+                    Self::serialize_state(p),
+                    Self::serialize_next_data(next_entries),
+                    &self.write_opts,
+                )
+                .unwrap();
+            self.next.fetch_add(1, Ordering::Release);
+        }
+
         self.statedb
             .write_opt(state_batch, &self.write_opts)
             .unwrap();
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
+        if prev.is_some() {
+            self.next.fetch_add(1, Ordering::Release);
+        }
         Ok(results)
     }
 
@@ -830,6 +876,7 @@ where
             let mut batch = WriteBatchWithTransaction::<false>::default();
             let mut pskips = 0;
             let mut dup_pskips = 0;
+            let mut rescores = 0;
             let mut count = batch_size;
             let mut compact = false;
             let _retrieve_lock = self.retrieve_lock.lock().unwrap();
@@ -839,23 +886,28 @@ where
                     let (key, value) = item.unwrap();
                     count -= 1;
 
-                    let el = Self::get_obj_from_heap_value(&value)?;
+                    if self.remember_processed_raw(&value)? {
+                        batch.delete(key);
+                        dup_pskips += 1;
+                        continue;
+                    }
+
+                    let StateData { elapsed, .. } = self
+                        .get_deserialize_state_data(&value)?
+                        .expect("Bg thread found unrecognized state in the db!");
                     let max_time = self.max_time();
-                    if el.elapsed() > max_time || self.score(&el) > max_time {
+                    if elapsed > max_time {
                         batch.delete(key);
                         pskips += 1;
                         continue;
                     }
 
-                    let state_key = Self::get_state_key(el.get());
-                    if let Some(StateData { elapsed, .. }) =
-                        self.get_deserialize_state_data(&state_key)?
-                    {
-                        if el.elapsed() > elapsed {
-                            batch.delete(key);
-                            dup_pskips += 1;
-                            continue;
-                        }
+                    let known = u32::from_be_bytes(key[4..8].as_ref().try_into().unwrap());
+                    if known > elapsed {
+                        batch.delete(&key);
+                        let new_key = self.new_heap_key(&key, known, elapsed);
+                        batch.put(new_key, value);
+                        rescores += 1;
                     }
                 } else {
                     compact = true;
@@ -869,10 +921,10 @@ where
             self.bg_deletes
                 .fetch_add(pskips + dup_pskips, Ordering::Release);
             self.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
-            if pskips > 0 || dup_pskips > 0 {
+            if pskips > 0 || dup_pskips > 0 || rescores > 0 {
                 println!(
-                    "Background thread deleted {} expired and {} duplicate elements",
-                    pskips, dup_pskips
+                    "Background thread: {} expired, {} duplicate, {} rescored",
+                    pskips, dup_pskips, rescores
                 );
             }
             if compact {
@@ -887,13 +939,13 @@ where
 
     pub fn get_history(&self, ctx: &T) -> Result<Vec<HistoryAlias<T>>, Error> {
         let mut vec = Vec::new();
-        let mut state_key = Self::get_state_key(ctx);
+        let mut state_key = Self::serialize_state(ctx);
         loop {
             if let Some(StateData { hist, prev, .. }) =
                 self.get_deserialize_state_data(&state_key)?
             {
                 if let Some(ctx) = prev {
-                    state_key = Self::get_state_key(&ctx);
+                    state_key = Self::serialize_state(&ctx);
                     vec.push(hist.unwrap());
                 } else {
                     break;
@@ -911,7 +963,7 @@ where
     pub fn get_history_ctx(&self, ctx: &ContextWrapper<T>) -> Result<Vec<HistoryAlias<T>>, Error> {
         match self.get_history(ctx.get()) {
             Ok(mut vec) => {
-                vec.extend(ctx.recent_history());
+                vec.extend(ctx.recent_history().iter().map(|p| p.0));
                 Ok(vec)
             }
             Err(e) => Err(e),
@@ -923,10 +975,10 @@ where
         ctx: &ContextWrapper<T>,
     ) -> Result<Option<HistoryAlias<T>>, Error> {
         if let Some(h) = ctx.recent_history().last() {
-            Ok(Some(*h))
+            Ok(Some(h.0))
         } else {
             Ok(self
-                .get_deserialize_state_data(&Self::get_state_key(ctx.get()))?
+                .get_deserialize_state_data(&Self::serialize_state(ctx.get()))?
                 .map(|sd| sd.hist)
                 .flatten())
         }
@@ -942,7 +994,7 @@ where
         let iter = self.db.iterator_opt(IteratorMode::Start, read_opts);
         for item in iter {
             let (_, value) = item?;
-            let el = Self::get_obj_from_heap_value(&value)?;
+            let el = self.get_queue_entry_wrapper(&value)?;
             times.push(el.elapsed().into());
             time_scores.push((el.elapsed().into(), self.score(&el).into()));
         }

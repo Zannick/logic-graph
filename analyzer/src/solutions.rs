@@ -154,8 +154,8 @@ where
                 "".to_string()
             }
         )?;
-        writeln!(file, "in short:\n{}", history_summary::<T>(&sol.history))?;
-        writeln!(file, "in full:\n{}\n\n", history_str::<T>(&sol.history))
+        writeln!(file, "in short:\n{}", history_summary::<T, _>(sol.history.iter().copied()))?;
+        writeln!(file, "in full:\n{}\n\n", history_str::<T, _>(sol.history.iter().copied()))
     }
 
     fn write_one_preview(
@@ -176,7 +176,7 @@ where
                 "".to_string()
             }
         )?;
-        writeln!(file, "{}\n\n", history_summary::<T>(&sol.history))
+        writeln!(file, "{}\n\n", history_summary::<T, _>(sol.history.iter().copied()))
     }
 
     pub fn write_previews(&self) -> io::Result<()> {

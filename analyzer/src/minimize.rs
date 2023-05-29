@@ -14,7 +14,7 @@ where
     let mut ctx = startctx.clone();
     let mut set: EnumMap<E::LocId, bool> = EnumMap::default();
     // Gather locations from the playthrough
-    for hist in wonctx.recent_history() {
+    for (hist, _) in wonctx.recent_history() {
         match hist {
             History::G(_, loc_id) => {
                 set[*loc_id] = true;
@@ -54,7 +54,7 @@ where
     let mut ctx = remove_all_unvisited(world, startctx, wonctx);
 
     // skip remaining visited locations from last to first
-    for hist in wonctx.recent_history() {
+    for (hist, _) in wonctx.recent_history() {
         match hist {
             History::G(_, loc_id) => {
                 ctx.skip(*loc_id);

@@ -297,7 +297,7 @@ pub trait Wrapper<T> {
 pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     ctx: T,
     elapsed: u32,
-    hist: Vec<History<I, S, L, E, A, Wp>>,
+    hist: Vec<(History<I, S, L, E, A, Wp>, u32)>,
 }
 
 pub type ContextWrapper<T> = BaseContextWrapper<
@@ -328,15 +328,23 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn append_history(&mut self, step: HistoryAlias<T>) {
-        self.hist.push(step);
+    pub fn with_elapsed(ctx: T, elapsed: u32) -> ContextWrapper<T> {
+        ContextWrapper {
+            ctx,
+            elapsed,
+            hist: Vec::new(),
+        }
     }
 
-    pub fn recent_history(&self) -> &[HistoryAlias<T>] {
+    pub fn append_history(&mut self, step: HistoryAlias<T>, dur: u32) {
+        self.hist.push((step, dur));
+    }
+
+    pub fn recent_history(&self) -> &[(HistoryAlias<T>, u32)] {
         &self.hist
     }
 
-    pub fn remove_history(&mut self) -> Vec<HistoryAlias<T>> {
+    pub fn remove_history(&mut self) -> Vec<(HistoryAlias<T>, u32)> {
         let r = self.hist.clone();
         self.hist = Vec::new();
         r
@@ -344,6 +352,9 @@ impl<T: Ctx> ContextWrapper<T> {
 
     pub fn elapse(&mut self, t: u32) {
         self.elapsed += t;
+    }
+    pub fn set_elapsed(&mut self, t: u32) {
+        self.elapsed = t;
     }
 
     pub fn get_mut(&mut self) -> &mut T {
@@ -363,7 +374,7 @@ impl<T: Ctx> ContextWrapper<T> {
             self.ctx.skip(canon_loc_id);
         }
         self.elapse(loc.time());
-        self.append_history(History::G(loc.item(), loc.id()));
+        self.append_history(History::G(loc.item(), loc.id()), loc.time());
     }
 
     pub fn exit<W, E>(&mut self, exit: &E)
@@ -375,7 +386,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(exit.dest());
         self.elapse(exit.time());
         self.ctx.spend(exit.price());
-        self.append_history(History::E(exit.id()));
+        self.append_history(History::E(exit.id()), exit.time());
     }
 
     pub fn move_local<W, E>(&mut self, spot: E::SpotId, time: u32)
@@ -386,7 +397,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.set_position(spot);
         self.elapse(time);
-        self.append_history(History::L(spot))
+        self.append_history(History::L(spot), time);
     }
 
     pub fn move_condensed_edge<W, E>(&mut self, edge: &CondensedEdge<T, E::SpotId, E::ExitId>)
@@ -397,7 +408,7 @@ impl<T: Ctx> ContextWrapper<T> {
     {
         self.ctx.set_position(edge.dst);
         self.elapse(edge.time);
-        self.append_history(History::C(edge.dst));
+        self.append_history(History::C(edge.dst), edge.time);
     }
 
     pub fn warp<W, E, Wp>(&mut self, warp: &Wp)
@@ -418,7 +429,7 @@ impl<T: Ctx> ContextWrapper<T> {
         if warp.should_reload() {
             self.ctx.reload_game();
         }
-        self.append_history(History::W(warp.id(), warp.dest(&self.ctx)));
+        self.append_history(History::W(warp.id(), warp.dest(&self.ctx)), warp.time());
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
@@ -439,7 +450,7 @@ impl<T: Ctx> ContextWrapper<T> {
         for canon_loc_id in world.get_canon_locations(loc.id()) {
             self.ctx.skip(canon_loc_id);
         }
-        self.append_history(History::H(loc.item(), exit.id()));
+        self.append_history(History::H(loc.item(), exit.id()), loc.time() + exit.time());
     }
 
     pub fn activate<W, A>(&mut self, action: &A)
@@ -451,7 +462,7 @@ impl<T: Ctx> ContextWrapper<T> {
         action.perform(&mut self.ctx);
         self.elapse(action.time());
         self.ctx.spend(action.price());
-        self.append_history(History::A(action.id()));
+        self.append_history(History::A(action.id()), action.time());
     }
 
     pub fn replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
@@ -539,23 +550,23 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 }
 
-pub fn history_str<T>(history: &[HistoryAlias<T>]) -> String
+pub fn history_str<T, I>(history: I) -> String
 where
     T: Ctx,
+    I: Iterator<Item = HistoryAlias<T>>,
 {
     let vec: Vec<String> = history
-        .iter()
         .map(|h| h.to_string())
         .collect::<Vec<String>>();
     vec.join("\n")
 }
 
-pub fn history_preview<T>(history: &[HistoryAlias<T>]) -> String
+pub fn history_preview<T, I>(history: I) -> String
 where
     T: Ctx,
+    I: Iterator<Item = HistoryAlias<T>>,
 {
     let vec: Vec<String> = history
-        .iter()
         .filter_map(|h| match h {
             History::G(..) | History::H(..) => Some(h.to_string()),
             _ => None,
@@ -564,23 +575,23 @@ where
     vec.join("\n")
 }
 
-pub fn history_summary<T>(history: &[HistoryAlias<T>]) -> String
+pub fn history_summary<T, I>(history: I) -> String
 where
     T: Ctx,
+    I: Iterator<Item = HistoryAlias<T>>,
 {
     let vec: Vec<String> = history
-        .iter()
         .fold(Vec::new(), |mut v, h| {
             if let Some(lh) = v.last_mut() {
-                match (*lh, *h) {
+                match (*lh, h) {
                     (
                         History::E(..) | History::L(..) | History::C(_),
                         History::E(..) | History::L(..) | History::C(_),
-                    ) => *lh = *h,
-                    _ => v.push(*h),
+                    ) => *lh = h,
+                    _ => v.push(h),
                 }
             } else {
-                v.push(*h);
+                v.push(h);
             };
             v
         })

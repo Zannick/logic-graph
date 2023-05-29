@@ -160,7 +160,7 @@ fn asserde_true() {
     ctx.append_history(History::G(
         Item::Amashilama,
         LocationId::Glacier__The_Big_Drop__Water_Surface__Drown,
-    ));
+    ), 20);
 
     let buf = serde_pass(&ctx);
     let json = serde_json::to_string(&ctx).unwrap();
