@@ -751,36 +751,39 @@ where
             }),
         );
 
-        // Get all the children of el
-        // these are (dur, state) pairs that indicate states you get after el
-        // and how long the transition to that state takes
-        let mut to_adjust: Vec<_> = self.get_deserialize_next_data(&state_key).unwrap();
+        let mut to_adjust: Vec<_> = vec![state_key];
 
-        while let Some((new_dur, new_ctx_key)) = to_adjust.pop() {
-            // new_dur = time after el
-            let new_elapsed = el.elapsed() + new_dur;
-            // each child points back at the prev and includes the hist step(s)
-            if let Some(StateData {
-                elapsed,
-                hist,
-                prev,
-            }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
-            {
-                if new_elapsed < elapsed {
-                    state_batch.merge_cf(
-                        self.best_cf(),
-                        &new_ctx_key,
-                        Self::serialize_data(StateData {
-                            elapsed: new_elapsed,
-                            // hist and prev don't change
-                            hist,
-                            prev,
-                        }),
-                    );
-                    // It doesn't really matter the order in which we update,
-                    // so this will just add all of them to be processed first.
-                    to_adjust.extend(self.get_deserialize_next_data(&new_ctx_key).unwrap());
+        while let Some(state_key) = to_adjust.pop() {
+            // Get all the children of state_key
+            // these are (dur, state) pairs that indicate states you get after el
+            // and how long the transition to that state takes
+            for (new_dur, new_ctx_key) in self.get_deserialize_next_data(&state_key).unwrap() {
+                // new_dur = time after el
+                let new_elapsed = el.elapsed() + new_dur;
+                // each child points back at the prev and includes the hist step(s)
+                if let Some(StateData {
+                    elapsed,
+                    hist,
+                    prev,
+                }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
+                {
+                    if new_elapsed < elapsed {
+                        state_batch.merge_cf(
+                            self.best_cf(),
+                            &new_ctx_key,
+                            Self::serialize_data(StateData {
+                                elapsed: new_elapsed,
+                                // hist and prev don't change
+                                hist,
+                                prev,
+                            }),
+                        );
+                        // It doesn't really matter the order in which we update,
+                        // but we shouldn't load everything all at once.
+                        to_adjust.push(new_ctx_key);
+                    }
                 }
+                // We don't know what to write in the else case...
             }
         }
     }
@@ -821,6 +824,10 @@ where
             &mut next_entries,
             &mut state_batch,
         );
+
+        self.statedb
+            .write_opt(state_batch, &self.write_opts)
+            .unwrap();
         if let Some(p) = prev {
             self.nextdb
                 .put_opt(
@@ -831,9 +838,7 @@ where
                 .unwrap();
             self.next.fetch_add(1, Ordering::Release);
         }
-        self.statedb
-            .write_opt(state_batch, &self.write_opts)
-            .unwrap();
+
         if is_new {
             self.seen.fetch_add(1, Ordering::Release);
         }
@@ -896,6 +901,9 @@ where
             results.push(true);
         }
 
+        self.statedb
+            .write_opt(state_batch, &self.write_opts)
+            .unwrap();
         if let Some(p) = prev {
             self.nextdb
                 .put_opt(
@@ -907,9 +915,6 @@ where
             self.next.fetch_add(1, Ordering::Release);
         }
 
-        self.statedb
-            .write_opt(state_batch, &self.write_opts)
-            .unwrap();
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
         if prev.is_some() {
