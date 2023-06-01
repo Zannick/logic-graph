@@ -14,7 +14,7 @@ use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, Env, IteratorMode,
-    MergeOperands, Options, ReadOptions, WriteBatch, WriteBatchWithTransaction, WriteOptions, DB,
+    MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
@@ -729,19 +729,18 @@ where
         Ok(sd.elapsed)
     }
 
-    fn record_one_batch<const TR: bool>(
+    fn record_one_internal(
         &self,
         state_key: Vec<u8>,
         el: &mut ContextWrapper<T>,
         prev: &Vec<u8>,
         next_entries: &mut Vec<NextData>,
-        state_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
     ) {
         let (hist, dur) = el.remove_history();
         next_entries.push((dur, state_key.clone()));
 
         // This is the only part of the chain where the hist and prev are changed
-        state_batch.merge_cf(
+        self.statedb.merge_cf(
             self.best_cf(),
             &state_key,
             Self::serialize_data(StateData {
@@ -749,17 +748,17 @@ where
                 hist,
                 prev: prev.clone(),
             }),
-        );
+        ).unwrap();
 
-        let mut to_adjust: Vec<_> = vec![state_key];
+        let mut to_adjust: Vec<_> = vec![(el.elapsed(), state_key)];
 
-        while let Some(state_key) = to_adjust.pop() {
+        while let Some((prev_elapsed, state_key)) = to_adjust.pop() {
             // Get all the children of state_key
             // these are (dur, state) pairs that indicate states you get after el
             // and how long the transition to that state takes
             for (new_dur, new_ctx_key) in self.get_deserialize_next_data(&state_key).unwrap() {
                 // new_dur = time after el
-                let new_elapsed = el.elapsed() + new_dur;
+                let new_elapsed = prev_elapsed + new_dur;
                 // each child points back at the prev and includes the hist step(s)
                 if let Some(StateData {
                     elapsed,
@@ -768,7 +767,7 @@ where
                 }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
                 {
                     if new_elapsed < elapsed {
-                        state_batch.merge_cf(
+                        self.statedb.merge_cf_opt(
                             self.best_cf(),
                             &new_ctx_key,
                             Self::serialize_data(StateData {
@@ -777,13 +776,15 @@ where
                                 hist,
                                 prev,
                             }),
-                        );
+                            &self.write_opts,
+                        ).unwrap();
                         // It doesn't really matter the order in which we update,
                         // but we shouldn't load everything all at once.
-                        to_adjust.push(new_ctx_key);
+                        to_adjust.push((new_elapsed, new_ctx_key));
                     }
                 }
-                // We don't know what to write in the else case...
+                // We don't know what to write in the else case
+                // since we haven't captured hist and prev...
             }
         }
     }
@@ -816,18 +817,13 @@ where
         };
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
-        let mut state_batch = WriteBatch::default();
-        self.record_one_batch(
+        self.record_one_internal(
             state_key,
             el,
             &prev_key,
             &mut next_entries,
-            &mut state_batch,
         );
 
-        self.statedb
-            .write_opt(state_batch, &self.write_opts)
-            .unwrap();
         if let Some(p) = prev {
             self.nextdb
                 .put_opt(
@@ -856,7 +852,6 @@ where
         prev: &Option<T>,
     ) -> Result<Vec<bool>, Error> {
         let mut next_entries = Vec::new();
-        let mut state_batch = WriteBatchWithTransaction::<false>::default();
         let mut results = Vec::with_capacity(vec.len());
         let mut dups = 0;
         let mut new_seen = 0;
@@ -891,19 +886,15 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_batch(
+            self.record_one_internal(
                 state_key,
                 el,
                 &prev_key,
                 &mut next_entries,
-                &mut state_batch,
             );
             results.push(true);
         }
 
-        self.statedb
-            .write_opt(state_batch, &self.write_opts)
-            .unwrap();
         if let Some(p) = prev {
             self.nextdb
                 .put_opt(
