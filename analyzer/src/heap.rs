@@ -8,7 +8,7 @@ use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
 use anyhow::{anyhow, Result};
-use bucket_queue::{BucketQueue, Queue};
+use bucket_queue::{Bucket, BucketQueue, Queue};
 use lru::LruCache;
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -784,7 +784,10 @@ where
                 let max = queue.max_priority().unwrap();
                 let mut vec = Vec::with_capacity(max - min + 1);
                 'next: for segment in min..=max {
-                    if queue.bucket_for_peeking(segment).is_some() {
+                    if let Some(b) = queue.bucket_for_peeking(segment) {
+                        if b.is_empty_bucket() {
+                            continue;
+                        }
                         let db_best = self.min_db_estimates[segment].load(Ordering::Acquire);
                         while let Some((mut ctx, _)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()

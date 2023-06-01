@@ -43,7 +43,7 @@ where
 }
 
 pub trait SegmentBucket<P: Ord>: Bucket {
-    fn push(&mut self, item: Self::Item, priority: P);
+    fn push(&mut self, item: Self::Item, priority: P) -> Option<P>;
     fn pop_min(&mut self) -> Option<(Self::Item, P)>;
     fn pop_max(&mut self) -> Option<(Self::Item, P)>;
 
@@ -63,8 +63,8 @@ where
     I: Hash + Eq,
     P: Ord,
 {
-    fn push(&mut self, item: I, priority: P) {
-        self.pq.push(item, priority);
+    fn push(&mut self, item: I, priority: P) -> Option<P> {
+        self.pq.push(item, priority)
     }
 
     fn pop_min(&mut self) -> Option<(Self::Item, P)> {
@@ -142,7 +142,11 @@ where
 
 pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     fn push(&mut self, item: B::Item, segment: usize, priority: P) {
-        self.bucket_for_adding(segment).push(item, priority);
+        if self.bucket_for_adding(segment).push(item, priority).is_some() {
+            // We just updated a state's priority without adding 1
+            // so we'd better reverse the index update.
+            self.items_replaced(segment, 1, 0);
+        }
     }
 
     fn extend<I>(&mut self, items: I)
