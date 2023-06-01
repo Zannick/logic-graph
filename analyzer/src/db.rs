@@ -13,9 +13,8 @@ use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 use rmp_serde::Serializer;
 use rocksdb::{
-    perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, CuckooTableOptions, Env,
-    IteratorMode, MergeOperands, Options, ReadOptions, WriteBatch, WriteBatchWithTransaction,
-    WriteOptions, DB,
+    perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, Env, IteratorMode,
+    MergeOperands, Options, ReadOptions, WriteBatch, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
@@ -43,18 +42,19 @@ struct HeapDBOptions {
 
 const BEST: &str = "best";
 
-type NextData<T> = (u32, T);
+type NextData = (u32, Vec<u8>);
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
-struct StateData<T, I, S, L, E, A, Wp> {
+struct StateData<I, S, L, E, A, Wp> {
     // Ordering is important here, since min_merge will sort by serialized bytes.
     elapsed: u32,
     hist: Vec<History<I, S, L, E, A, Wp>>,
-    prev: Option<T>,
+    // This is mainly going to be used for performing another lookup, no point
+    // in deserializing just to reserialize
+    prev: Vec<u8>,
 }
 
 type StateDataAlias<T> = StateData<
-    T,
     <T as Ctx>::ItemId,
     <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
     <<<T as Ctx>::World as World>::Location as Location>::LocId,
@@ -469,12 +469,15 @@ where
         }
     }
 
-    fn serialize_next_data(next_entries: Vec<NextData<T>>) -> Vec<u8> {
+    fn serialize_next_data(next_entries: Vec<NextData>) -> Vec<u8> {
         Self::serialize_data(next_entries)
     }
 
-    fn deserialize_next_data(value: &[u8]) -> Result<Vec<NextData<T>>, Error> {
-        Self::get_obj_from_data(value)
+    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData>, Error> {
+        match self.nextdb.get_pinned(key)? {
+            Some(slice) => Ok(Self::get_obj_from_data(&slice)?),
+            None => Ok(Vec::new()),
+        }
     }
 
     /// Estimates the remaining time to the goal.
@@ -730,21 +733,56 @@ where
         &self,
         state_key: Vec<u8>,
         el: &mut ContextWrapper<T>,
-        prev: &Option<T>,
-        next_entries: &mut Vec<NextData<T>>,
+        prev: &Vec<u8>,
+        next_entries: &mut Vec<NextData>,
         state_batch: &mut rocksdb::WriteBatchWithTransaction<TR>,
     ) {
         let (hist, dur) = el.remove_history();
-        next_entries.push((dur, el.get().clone()));
+        next_entries.push((dur, state_key.clone()));
+
+        // This is the only part of the chain where the hist and prev are changed
         state_batch.merge_cf(
             self.best_cf(),
-            state_key,
+            &state_key,
             Self::serialize_data(StateData {
-                elapsed: el.elapsed(),
+                elapsed: el.elapsed(), // should be equal to prev_elapsed + dur
                 hist,
                 prev: prev.clone(),
             }),
         );
+
+        // Get all the children of el
+        // these are (dur, state) pairs that indicate states you get after el
+        // and how long the transition to that state takes
+        let mut to_adjust: Vec<_> = self.get_deserialize_next_data(&state_key).unwrap();
+
+        while let Some((new_dur, new_ctx_key)) = to_adjust.pop() {
+            // new_dur = time after el
+            let new_elapsed = el.elapsed() + new_dur;
+            // each child points back at the prev and includes the hist step(s)
+            if let Some(StateData {
+                elapsed,
+                hist,
+                prev,
+            }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
+            {
+                if new_elapsed < elapsed {
+                    state_batch.merge_cf(
+                        self.best_cf(),
+                        &new_ctx_key,
+                        Self::serialize_data(StateData {
+                            elapsed: new_elapsed,
+                            // hist and prev don't change
+                            hist,
+                            prev,
+                        }),
+                    );
+                    // It doesn't really matter the order in which we update,
+                    // so this will just add all of them to be processed first.
+                    to_adjust.extend(self.get_deserialize_next_data(&new_ctx_key).unwrap());
+                }
+            }
+        }
     }
 
     /// Stores the underlying Ctx in the seen db with the best known elapsed time and
@@ -768,11 +806,21 @@ where
             };
         // In every other case (no such state, or we do better than that state),
         // we will rewrite the data.
-
+        let prev_key = if let Some(c) = prev {
+            Self::serialize_state(c)
+        } else {
+            Vec::new()
+        };
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
         let mut state_batch = WriteBatch::default();
-        self.record_one_batch(state_key, el, prev, &mut next_entries, &mut state_batch);
+        self.record_one_batch(
+            state_key,
+            el,
+            &prev_key,
+            &mut next_entries,
+            &mut state_batch,
+        );
         if let Some(p) = prev {
             self.nextdb
                 .put_opt(
@@ -809,6 +857,11 @@ where
         let mut new_seen = 0;
         let cf = self.best_cf();
 
+        let prev_key = if let Some(c) = prev {
+            Self::serialize_state(c)
+        } else {
+            Vec::new()
+        };
         let seeing: Vec<_> = vec
             .iter()
             .map(|el| Self::serialize_state(el.get()))
@@ -833,7 +886,13 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_batch(state_key, el, prev, &mut next_entries, &mut state_batch);
+            self.record_one_batch(
+                state_key,
+                el,
+                &prev_key,
+                &mut next_entries,
+                &mut state_batch,
+            );
             results.push(true);
         }
 
@@ -936,8 +995,8 @@ where
             if let Some(StateData { hist, prev, .. }) =
                 self.get_deserialize_state_data(&state_key)?
             {
-                if let Some(ctx) = prev {
-                    state_key = Self::serialize_state(&ctx);
+                if !prev.is_empty() {
+                    state_key = prev;
                     vec.push(hist);
                 } else {
                     break;
