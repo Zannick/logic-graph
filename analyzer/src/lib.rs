@@ -19,7 +19,6 @@ pub mod estimates;
 pub mod greedy;
 pub mod heap;
 pub mod minimize;
-pub mod optimize;
 pub mod settings;
 pub mod solutions;
 pub mod steiner;

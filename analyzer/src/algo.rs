@@ -7,8 +7,8 @@ use crate::world::*;
 use anyhow::Result;
 use rayon::prelude::*;
 use std::fmt::Debug;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
+use std::sync::Arc;
 use std::sync::Mutex;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
@@ -358,7 +358,13 @@ where
         })
     }
 
-    fn handle_solution(&self, ctx: ContextWrapper<T>, mode: SearchMode) {
+    fn handle_solution(&self, mut ctx: ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
+        // If prev is None we don't know the prev state
+        // but also we should have no recent history in ctx.
+        if prev.is_some() {
+            self.queue.db().record_one(&mut ctx, prev).unwrap();
+        }
+
         let old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
         let mut sols = self.solutions.lock().unwrap();
@@ -381,7 +387,7 @@ where
 
         if let Some(_) = sols.insert(
             ctx.elapsed(),
-            self.queue.db().get_history_ctx(&ctx).unwrap(),
+            self.queue.db().get_history(ctx.get()).unwrap(),
         ) {
             drop(sols);
             println!("Found new unique solution");
@@ -391,6 +397,7 @@ where
     fn extract_solutions(
         &self,
         states: Vec<ContextWrapper<T>>,
+        prev: &Option<T>,
         mode: SearchMode,
     ) -> Vec<ContextWrapper<T>> {
         let max_time = self.queue.max_time();
@@ -400,7 +407,7 @@ where
                 if ctx.elapsed() > max_time {
                     None
                 } else if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, mode);
+                    self.handle_solution(ctx, prev, mode);
                     None
                 } else {
                     Some(ctx)
@@ -471,11 +478,13 @@ where
 
                         for ctx in items {
                             let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-                            let prev = ctx.get().clone();
-                            if let Err(e) = self
-                                .queue
-                                .extend(self.process_one(ctx, iters, &start, mode), &Some(prev))
-                            {
+                            let prev = Some(ctx.get().clone());
+                            let nexts = self.process_one(ctx, iters, &start);
+                            if nexts.is_empty() {
+                                continue;
+                            }
+                            let nexts = self.extract_solutions(nexts, &prev, mode);
+                            if let Err(e) = self.queue.extend(nexts, &prev) {
                                 let mut r = res.lock().unwrap();
                                 println!("Thread {} exiting due to error: {:?}", i, e);
                                 if r.is_ok() {
@@ -550,7 +559,6 @@ where
         ctx: ContextWrapper<T>,
         iters: usize,
         start: &Mutex<Instant>,
-        mode: SearchMode,
     ) -> Vec<ContextWrapper<T>> {
         if iters % 100_000 == 0 {
             self.print_status_update(&start, iters, 100_000, &ctx);
@@ -558,14 +566,14 @@ where
 
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
-                self.handle_solution(ctx, SearchMode::Unknown);
+                self.handle_solution(ctx, &None, SearchMode::Unknown);
             } else {
                 self.deadends.fetch_add(1, Ordering::Release);
             }
             return Vec::new();
         }
 
-        self.extract_solutions(self.single_step(ctx), mode)
+        self.single_step(ctx)
     }
 
     fn print_status_update(

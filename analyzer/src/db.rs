@@ -1024,16 +1024,6 @@ where
         self.get_history_raw(state_key)
     }
 
-    pub fn get_history_ctx(&self, ctx: &ContextWrapper<T>) -> Result<Vec<HistoryAlias<T>>, Error> {
-        match self.get_history(ctx.get()) {
-            Ok(mut vec) => {
-                vec.extend(ctx.recent_history());
-                Ok(vec)
-            }
-            Err(e) => Err(e),
-        }
-    }
-
     pub fn get_last_history_step(
         &self,
         ctx: &ContextWrapper<T>,
