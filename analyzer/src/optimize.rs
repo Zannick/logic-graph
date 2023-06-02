@@ -76,7 +76,7 @@ where
                 panic!(
                     "Never found a path to {:?}!\n{}",
                     required[0],
-                    history_summary::<T>(&db.get_history_ctx(&c).unwrap())
+                    history_summary::<T, _>(db.get_history_ctx(&c).unwrap().iter().copied())
                 )
             }
         }
@@ -101,7 +101,7 @@ where
         el,
     })) = heap.pop()
     {
-        if !db.remember_pop(&el).unwrap() {
+        if db.remember_processed(el.get()).unwrap() {
             continue;
         }
         count += 1;
@@ -115,8 +115,9 @@ where
         if required.iter().all(|&loc_id| el.get().visited(loc_id)) {
             return Some(el);
         }
+        let prev = el.get().clone();
         let mut vec = single_step(world, el, max_time);
-        let keeps = db.record_many(&mut vec).unwrap();
+        let keeps = db.record_many(&mut vec, &Some(prev)).unwrap();
 
         heap.extend(
             vec.into_iter()

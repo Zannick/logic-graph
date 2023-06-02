@@ -92,7 +92,10 @@ where
             .collect();
         if self.count == 0 || elapsed < self.best {
             self.best = elapsed;
+        } else if elapsed - self.best > self.best / 10 {
+            return None;
         }
+
         self.count += 1;
         if let Some(vec) = self.map.get_mut(&loc_history) {
             vec.push(Solution { elapsed, history });
@@ -154,8 +157,16 @@ where
                 "".to_string()
             }
         )?;
-        writeln!(file, "in short:\n{}", history_summary::<T>(&sol.history))?;
-        writeln!(file, "in full:\n{}\n\n", history_str::<T>(&sol.history))
+        writeln!(
+            file,
+            "in short:\n{}",
+            history_summary::<T, _>(sol.history.iter().copied())
+        )?;
+        writeln!(
+            file,
+            "in full:\n{}\n\n",
+            history_str::<T, _>(sol.history.iter().copied())
+        )
     }
 
     fn write_one_preview(
@@ -176,36 +187,46 @@ where
                 "".to_string()
             }
         )?;
-        writeln!(file, "{}\n\n", history_summary::<T>(&sol.history))
+        writeln!(
+            file,
+            "{}\n\n",
+            history_summary::<T, _>(sol.history.iter().copied())
+        )
     }
 
-    pub fn write_previews(&self) -> io::Result<()> {
+    pub fn write_previews(&mut self) -> io::Result<()> {
         let mut file = File::create(self.previews)?;
-        let mut vec: Vec<&Solution<T>> = self
-            .map
-            .values()
-            .map(|v| v.iter().min_by_key(|c| c.elapsed).unwrap())
-            .collect();
+        for vec in self.map.values_mut() {
+            vec.sort_unstable_by_key(|el| el.elapsed);
+        }
+        let mut vec: Vec<&Solution<T>> = self.map.values().filter_map(|v| v.first()).collect();
         vec.sort_by_key(|c| c.elapsed);
         for (i, c) in vec.iter().enumerate() {
-            if c.elapsed - self.best > self.best / 10 {
-                break;
-            }
             Self::write_one_preview(&mut file, i, c, self.best)?
         }
         Ok(())
     }
 
-    pub fn export(self) -> io::Result<()> {
+    pub fn sort_and_clean(&mut self) {
+        for vec in self.map.values_mut() {
+            vec.sort_unstable_by_key(|el| el.elapsed);
+            while let Some(last) = vec.last() {
+                if last.elapsed - self.best > self.best / 10 {
+                    vec.pop();
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    pub fn export(&mut self) -> io::Result<()> {
         if self.count == 0 {
             println!("No solutions");
             return Ok(());
         }
-        let mut vecs: Vec<Vec<Solution<T>>> = self.map.into_values().collect();
-        let mut file = self.file;
-        for vec in vecs.iter_mut() {
-            vec.sort_unstable_by_key(|el| el.elapsed);
-        }
+        self.sort_and_clean();
+        let mut vecs: Vec<Vec<Solution<T>>> = self.map.values().cloned().collect();
         vecs.sort_by_key(|v| v[0].elapsed);
         let mut total = 0;
         let mut types = 0;
@@ -213,10 +234,7 @@ where
         for (i, vec) in vecs.iter().enumerate() {
             let mut minor = 0;
             let first = vec.first().unwrap();
-            if first.elapsed - self.best > self.best / 10 {
-                break;
-            }
-            Self::write_one(&mut file, i, minor, first, self.best)?;
+            Self::write_one(&mut self.file, i, minor, first, self.best)?;
             total += 1;
             types += 1;
             for (j, similar) in vec.iter().enumerate().skip(1) {
@@ -228,7 +246,7 @@ where
                 }
                 minor += 1;
                 total += 1;
-                Self::write_one(&mut file, i, minor, similar, self.best)?;
+                Self::write_one(&mut self.file, i, minor, similar, self.best)?;
             }
         }
         println!(

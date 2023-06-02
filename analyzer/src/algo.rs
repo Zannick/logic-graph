@@ -7,6 +7,7 @@ use crate::world::*;
 use anyhow::Result;
 use rayon::prelude::*;
 use std::fmt::Debug;
+use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::thread::sleep;
@@ -217,7 +218,7 @@ where
     T: Ctx<World = W> + Debug,
 {
     world: &'a W,
-    solutions: Mutex<SolutionCollector<T>>,
+    solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
     extras: AtomicU64,
@@ -247,7 +248,7 @@ where
                 panic!(
                     "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}",
                     ctx.elapsed(),
-                    history_summary::<T>(ctx.recent_history().1),
+                    history_summary::<T, _>(ctx.recent_history().iter().copied()),
                     ctx.get()
                 );
             }
@@ -309,7 +310,7 @@ where
                 let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
                 solutions.insert(
                     m.elapsed(),
-                    m.recent_history().1.into_iter().copied().collect(),
+                    m.recent_history().into_iter().copied().collect(),
                 );
                 max_time
             } else {
@@ -319,14 +320,16 @@ where
 
         solutions.insert(
             wonctx.elapsed(),
-            wonctx.recent_history().1.into_iter().copied().collect(),
+            wonctx.recent_history().into_iter().copied().collect(),
         );
         for w in wins {
             solutions.insert(
                 w.elapsed(),
-                w.recent_history().1.into_iter().copied().collect(),
+                w.recent_history().into_iter().copied().collect(),
             );
         }
+
+        let solutions = Arc::new(Mutex::new(solutions));
 
         let queue = RocksBackedQueue::new(
             ".db",
@@ -338,14 +341,15 @@ where
             262_144,
             1_024,
             32_768,
+            solutions.clone(),
         )
         .unwrap();
-        queue.push(startctx.clone()).unwrap();
+        queue.push(startctx.clone(), &None).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
         println!("Queue starts with {} elements", queue.len());
         Ok(Search {
             world,
-            solutions: Mutex::new(solutions),
+            solutions,
             queue,
             iters: 0.into(),
             extras: 0.into(),
@@ -467,10 +471,10 @@ where
 
                         for ctx in items {
                             let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-
+                            let prev = ctx.get().clone();
                             if let Err(e) = self
                                 .queue
-                                .extend(self.process_one(ctx, iters, &start, mode))
+                                .extend(self.process_one(ctx, iters, &start, mode), &Some(prev))
                             {
                                 let mut r = res.lock().unwrap();
                                 println!("Thread {} exiting due to error: {:?}", i, e);
@@ -538,7 +542,7 @@ where
             }
         );
         self.queue.print_queue_histogram();
-        self.solutions.into_inner().unwrap().export()
+        self.solutions.lock().unwrap().export()
     }
 
     fn process_one(
@@ -587,7 +591,7 @@ where
         println!(
             "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends={}; opt={}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit={}ms; db best={}; history={}; evictions={}; retrievals={}\n\
+            limit={}ms; db best={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             db bests: {}\n\
             {}",
@@ -605,7 +609,6 @@ where
             self.queue.cached_estimates(),
             max_time,
             self.queue.db_best(),
-            self.queue.db().history_count(),
             self.queue.evictions(),
             self.queue.retrievals(),
             iskips,

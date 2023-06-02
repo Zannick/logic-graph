@@ -157,10 +157,10 @@ fn asserde_true() {
     ctx.skip(LocationId::Glacier__Compass_Room__Center__Table);
 
     let mut ctx = ContextWrapper::new(ctx);
-    ctx.append_history(History::Get(
+    ctx.append_history(History::G(
         Item::Amashilama,
         LocationId::Glacier__The_Big_Drop__Water_Surface__Drown,
-    ));
+    ), 20);
 
     let buf = serde_pass(&ctx);
     let json = serde_json::to_string(&ctx).unwrap();
