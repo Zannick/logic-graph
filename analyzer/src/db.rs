@@ -3,6 +3,7 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
+use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
 use anyhow::Result;
@@ -20,7 +21,7 @@ use serde::{Deserialize, Serialize};
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use std::time::Instant;
 
 // We need the following in this wrapper impl:
@@ -100,6 +101,8 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
 
     phantom: PhantomData<T>,
     retrieve_lock: Mutex<()>,
+    solutions: Arc<Mutex<SolutionCollector<T>>>,
+    world: &'w W,
 }
 
 // Final cleanup, done in a separate struct here to ensure it's done
@@ -181,6 +184,7 @@ where
         initial_max_time: u32,
         world: &'w W,
         startctx: &T,
+        solutions: Arc<Mutex<SolutionCollector<T>>>,
     ) -> Result<HeapDB<'w, W, T>, String>
     where
         P: AsRef<Path>,
@@ -280,6 +284,8 @@ where
             bg_deletes: 0.into(),
             phantom: PhantomData,
             retrieve_lock: Mutex::new(()),
+            solutions,
+            world,
         })
     }
 
@@ -397,7 +403,7 @@ where
         key
     }
 
-    fn get_obj_from_heap_value(buf: &[u8]) -> Result<T, Error> {
+    fn deserialize_state(buf: &[u8]) -> Result<T, Error> {
         Ok(rmp_serde::from_slice::<T>(buf)?)
     }
 
@@ -418,7 +424,7 @@ where
     }
 
     fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>, Error> {
-        let ctx = Self::get_obj_from_heap_value(value)?;
+        let ctx = Self::deserialize_state(value)?;
         let sd = self
             .get_deserialize_state_data(value)?
             .expect("Got unrecognized state from db!");
@@ -740,15 +746,17 @@ where
         next_entries.push((dur, state_key.clone()));
 
         // This is the only part of the chain where the hist and prev are changed
-        self.statedb.merge_cf(
-            self.best_cf(),
-            &state_key,
-            Self::serialize_data(StateData {
-                elapsed: el.elapsed(), // should be equal to prev_elapsed + dur
-                hist,
-                prev: prev.clone(),
-            }),
-        ).unwrap();
+        self.statedb
+            .merge_cf(
+                self.best_cf(),
+                &state_key,
+                Self::serialize_data(StateData {
+                    elapsed: el.elapsed(), // should be equal to prev_elapsed + dur
+                    hist,
+                    prev: prev.clone(),
+                }),
+            )
+            .unwrap();
 
         let mut to_adjust: Vec<_> = vec![(el.elapsed(), state_key)];
 
@@ -767,17 +775,28 @@ where
                 }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
                 {
                     if new_elapsed < elapsed {
-                        self.statedb.merge_cf_opt(
-                            self.best_cf(),
-                            &new_ctx_key,
-                            Self::serialize_data(StateData {
-                                elapsed: new_elapsed,
-                                // hist and prev don't change
-                                hist,
-                                prev,
-                            }),
-                            &self.write_opts,
-                        ).unwrap();
+                        self.statedb
+                            .merge_cf_opt(
+                                self.best_cf(),
+                                &new_ctx_key,
+                                Self::serialize_data(StateData {
+                                    elapsed: new_elapsed,
+                                    // hist and prev don't change
+                                    hist,
+                                    prev,
+                                }),
+                                &self.write_opts,
+                            )
+                            .unwrap();
+                        // handle solution by just inserting a new one
+                        let ctx = Self::deserialize_state(&new_ctx_key).unwrap();
+                        if self.world.won(&ctx) {
+                            self.solutions.lock().unwrap().insert(
+                                new_elapsed,
+                                self.get_history_raw(new_ctx_key.clone()).unwrap(),
+                            );
+                        }
+
                         // It doesn't really matter the order in which we update,
                         // but we shouldn't load everything all at once.
                         to_adjust.push((new_elapsed, new_ctx_key));
@@ -817,12 +836,7 @@ where
         };
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
-        self.record_one_internal(
-            state_key,
-            el,
-            &prev_key,
-            &mut next_entries,
-        );
+        self.record_one_internal(state_key, el, &prev_key, &mut next_entries);
 
         if let Some(p) = prev {
             self.nextdb
@@ -886,12 +900,7 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_internal(
-                state_key,
-                el,
-                &prev_key,
-                &mut next_entries,
-            );
+            self.record_one_internal(state_key, el, &prev_key, &mut next_entries);
             results.push(true);
         }
 
@@ -984,9 +993,8 @@ where
         Ok(())
     }
 
-    pub fn get_history(&self, ctx: &T) -> Result<Vec<HistoryAlias<T>>, Error> {
+    fn get_history_raw(&self, mut state_key: Vec<u8>) -> Result<Vec<HistoryAlias<T>>, Error> {
         let mut vec = Vec::new();
-        let mut state_key = Self::serialize_state(ctx);
         loop {
             if let Some(StateData { hist, prev, .. }) =
                 self.get_deserialize_state_data(&state_key)?
@@ -999,12 +1007,21 @@ where
                 }
             } else {
                 return Err(Error {
-                    message: format!("Could not find state entry for {:?}", ctx),
+                    message: format!(
+                        "Could not find state entry for {:?}",
+                        Self::deserialize_state(&state_key)
+                            .expect("Failed to deserialize while reporting an error")
+                    ),
                 });
             }
         }
         vec.reverse();
         Ok(vec.into_iter().flatten().collect())
+    }
+
+    pub fn get_history(&self, ctx: &T) -> Result<Vec<HistoryAlias<T>>, Error> {
+        let state_key = Self::serialize_state(ctx);
+        self.get_history_raw(state_key)
     }
 
     pub fn get_history_ctx(&self, ctx: &ContextWrapper<T>) -> Result<Vec<HistoryAlias<T>>, Error> {

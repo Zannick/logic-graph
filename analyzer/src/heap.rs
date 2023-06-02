@@ -4,6 +4,7 @@ use crate::bucket::*;
 use crate::context::*;
 use crate::db::HeapDB;
 use crate::estimates::ContextScorer;
+use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
@@ -20,7 +21,7 @@ use std::fmt::Debug;
 use std::num::NonZeroUsize;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
-use std::sync::{Mutex, MutexGuard};
+use std::sync::{Arc, Mutex, MutexGuard};
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
@@ -355,11 +356,12 @@ where
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
+        solutions: Arc<Mutex<SolutionCollector<T>>>,
     ) -> Result<RocksBackedQueue<'w, W, T>, String>
     where
         P: AsRef<Path>,
     {
-        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get())?;
+        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), solutions)?;
         let max_possible_progress = db.scorer().remaining_visits(startctx.get());
         let mut min_db_estimates = Vec::new();
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());

@@ -7,6 +7,7 @@ use crate::world::*;
 use anyhow::Result;
 use rayon::prelude::*;
 use std::fmt::Debug;
+use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Mutex;
 use std::thread::sleep;
@@ -217,7 +218,7 @@ where
     T: Ctx<World = W> + Debug,
 {
     world: &'a W,
-    solutions: Mutex<SolutionCollector<T>>,
+    solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
     extras: AtomicU64,
@@ -328,6 +329,8 @@ where
             );
         }
 
+        let solutions = Arc::new(Mutex::new(solutions));
+
         let queue = RocksBackedQueue::new(
             ".db",
             world,
@@ -338,6 +341,7 @@ where
             262_144,
             1_024,
             32_768,
+            solutions.clone(),
         )
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();
@@ -345,7 +349,7 @@ where
         println!("Queue starts with {} elements", queue.len());
         Ok(Search {
             world,
-            solutions: Mutex::new(solutions),
+            solutions,
             queue,
             iters: 0.into(),
             extras: 0.into(),
@@ -538,7 +542,7 @@ where
             }
         );
         self.queue.print_queue_histogram();
-        self.solutions.into_inner().unwrap().export()
+        self.solutions.lock().unwrap().export()
     }
 
     fn process_one(
