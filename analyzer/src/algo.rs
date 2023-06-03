@@ -473,6 +473,9 @@ where
                         }
 
                         for ctx in items {
+                            if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                                continue;
+                            }
                             let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
                             let prev = Some(ctx.get().clone());
                             let nexts = self.process_one(ctx, iters, &start);
@@ -587,7 +590,7 @@ where
         if iters > 10_000_000 && sols.unique() > 4 {
             self.queue.set_max_time(sols.best());
         }
-        if iters % 1_000_000 == 0 {
+        if iters == 100_000 || iters % 1_000_000 == 0 {
             self.queue.print_queue_histogram();
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();

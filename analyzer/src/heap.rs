@@ -321,7 +321,7 @@ impl<T: Ctx> LimitedHeap<T> {
 
 pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     // TODO: Make the bucket element just T.
-    queue: Mutex<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
+    queue: Mutex<BucketQueue<Segment<T, u32>>>,
     db: HeapDB<'w, W, T>,
     capacity: usize,
     iskips: AtomicUsize,
@@ -501,8 +501,8 @@ where
                 let (ctx, &p_max) = queue
                     .peek_segment_max(progress)
                     .ok_or(anyhow!("queue at capacity with no elements"))?;
-                if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed())
-                {
+                let elapsed = self.db.get_best_elapsed(ctx)?;
+                if est_complete > p_max || (est_complete == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
                     self.db.push_from_queue(el, est_complete)?;
                 } else {
@@ -512,10 +512,10 @@ where
                     );
                     // New item is better, evict some old_items.
                     evicted = Some(Self::evict_internal(&mut queue, evictions));
-                    queue.push(el, progress, est_complete);
+                    queue.push(el.into_inner(), progress, est_complete);
                 }
             } else {
-                queue.push(el, progress, est_complete);
+                queue.push(el.into_inner(), progress, est_complete);
             }
         }
         // Without the lock (but still blocking the push op in this thread)
@@ -529,7 +529,7 @@ where
         Ok(())
     }
 
-    fn evict_to_db(&self, ev: Vec<(ContextWrapper<T>, u32)>, category: &str) -> Result<()> {
+    fn evict_to_db(&self, ev: Vec<(T, u32)>, category: &str) -> Result<()> {
         let start = Instant::now();
         self.db.extend_from_queue(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
@@ -541,9 +541,9 @@ where
     /// Removes elements from the max end of each segment in the queue until we reach
     /// the minimum desired evictions.
     fn evict_internal(
-        queue: &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
+        queue: &mut MutexGuard<BucketQueue<Segment<T, u32>>>,
         min_evictions: usize,
-    ) -> Vec<(ContextWrapper<T>, u32)> {
+    ) -> Vec<(T, u32)> {
         let mut evicted = queue.pop_likely_useless();
         if !evicted.is_empty() {
             println!("Evicted {} useless states", evicted.len());
@@ -557,7 +557,7 @@ where
     }
 
     /// Retrieves up to the given number of elements for the given segment from the db.
-    fn retrieve(&self, segment: usize, num: usize) -> Result<Vec<(ContextWrapper<T>, usize, u32)>> {
+    fn retrieve(&self, segment: usize, num: usize) -> Result<Vec<(T, usize, u32)>> {
         println!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -569,10 +569,9 @@ where
             .db
             .retrieve(segment, num)?
             .into_iter()
-            .map(|el| {
-                let score = self.db.score(&el);
-                let progress = self.db.progress(el.get());
-                (el, progress, score)
+            .map(|(el, elapsed, est)| {
+                let progress = self.db.progress(&el);
+                (el, progress, elapsed + est)
             })
             .collect();
 
@@ -586,28 +585,29 @@ where
         let mut queue = self.queue.lock().unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((el, &est_completion)) = queue.peek_min() {
-                let progress = self.db.progress(el.get());
+                let progress = self.db.progress(el);
                 let db_best = self.db.db_best(progress);
                 // Only when we go a decent bit over
                 if !self.db.is_empty() && db_best < u32::MAX && est_completion > db_best * 101 / 100
                 {
                     queue = self.maybe_reshuffle(progress, queue)?;
                 }
-                let (mut ctx, _) = queue.pop_min().unwrap();
+                let (ctx, _) = queue.pop_min().unwrap();
 
                 // Retrieve the best elapsed time.
-                ctx.set_elapsed(self.db.get_best_elapsed(ctx.get())?);
+                let elapsed = self.db.get_best_elapsed(&ctx)?;
+                let est = self.db.estimated_remaining_time(&ctx);
 
                 let max_time = self.db.max_time();
-                if ctx.elapsed() > max_time || self.db.score(&ctx) > max_time {
+                if elapsed > max_time || elapsed + est > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
-                if self.db.remember_processed(ctx.get())? {
+                if self.db.remember_processed(&ctx)? {
                     self.db.count_duplicate();
                     continue;
                 }
-                return Ok(Some(ctx));
+                return Ok(Some(ContextWrapper::with_elapsed(ctx, elapsed)));
             }
             // Retrieve some from db
             if !self.db.is_empty() {
@@ -615,7 +615,10 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return Ok(self.db.pop(0)?);
+                    return Ok(self
+                        .db
+                        .pop(0)?
+                        .map(|(el, elapsed)| ContextWrapper::with_elapsed(el, elapsed)));
                 }
             }
         }
@@ -625,8 +628,8 @@ where
     fn maybe_reshuffle<'a>(
         &'a self,
         progress: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, u32>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let start = Instant::now();
             // Get a decent amount to refill
@@ -661,8 +664,8 @@ where
     fn do_retrieve_and_insert<'a>(
         &'a self,
         segment: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<ContextWrapper<T>, u32>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, u32>>>> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
@@ -682,35 +685,33 @@ where
 
     fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
-        F: Fn(
-            &mut MutexGuard<BucketQueue<Segment<ContextWrapper<T>, u32>>>,
-        ) -> Option<(ContextWrapper<T>, u32)>,
+        F: Fn(&mut MutexGuard<BucketQueue<Segment<T, u32>>>) -> Option<(T, u32)>,
     {
         let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
-            while let Some((mut ctx, _)) = (pop_func)(&mut queue) {
+            while let Some((ctx, _)) = (pop_func)(&mut queue) {
                 // Retrieve the best elapsed time.
-                ctx.set_elapsed(self.db.get_best_elapsed(ctx.get())?);
-
+                let elapsed = self.db.get_best_elapsed(&ctx)?;
+                let est = self.db.estimated_remaining_time(&ctx);
                 let max_time = self.db.max_time();
-                if ctx.elapsed() > max_time || self.db.score(&ctx) > max_time {
+                if elapsed > max_time || elapsed + est > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
-                if self.db.remember_processed(ctx.get())? {
+                if self.db.remember_processed(&ctx)? {
                     self.db.count_duplicate();
                     continue;
                 }
-                vec.push(ctx);
+                vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
             }
             // Retrieve some from db
             if !self.db.is_empty() {
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
-                } else if let Some(ctx) = self.db.pop(0)? {
-                    vec.push(ctx);
+                } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
+                    vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                 } else {
                     return Ok(vec);
                 }
@@ -755,17 +756,17 @@ where
                             continue;
                         }
                         let db_best = self.db.db_best(segment);
-                        while let Some((mut ctx, _)) =
+                        while let Some((ctx, _)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
                             // Retrieve the best elapsed time.
-                            ctx.set_elapsed(self.db.get_best_elapsed(ctx.get())?);
-                            let score = self.db.score(&ctx);
+                            let elapsed = self.db.get_best_elapsed(&ctx)?;
+                            let est = self.db.estimated_remaining_time(&ctx);
 
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
                             if !self.db.is_empty()
                                 && db_best < u32::MAX
-                                && score > db_best * 101 / 100
+                                && elapsed + est > db_best * 101 / 100
                                 && !did_retrieve
                             {
                                 queue = self.maybe_reshuffle(segment, queue)?;
@@ -773,16 +774,16 @@ where
                             }
 
                             let max_time = self.db.max_time();
-                            if ctx.elapsed() > max_time || score > max_time {
+                            if elapsed > max_time || elapsed + est > max_time {
                                 self.pskips.fetch_add(1, Ordering::Release);
                                 continue;
                             }
-                            if self.db.remember_processed(ctx.get())? {
+                            if self.db.remember_processed(&ctx)? {
                                 self.db.count_duplicate();
                                 continue;
                             }
 
-                            vec.push(ctx);
+                            vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                             continue 'next;
                         }
                         if db_best < u32::MAX {
@@ -794,21 +795,20 @@ where
                             }
                             did_retrieve = true;
                             // Just grab the next one
-                            while let Some((mut ctx, _)) = queue.pop_segment_min(segment) {
+                            while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                                 // Retrieve the best elapsed time.
-                                ctx.set_elapsed(self.db.get_best_elapsed(ctx.get())?);
-                                let score = self.db.score(&ctx);
-
+                                let elapsed = self.db.get_best_elapsed(&ctx)?;
+                                let est = self.db.estimated_remaining_time(&ctx);
                                 let max_time = self.db.max_time();
-                                if ctx.elapsed() > max_time || score > max_time {
+                                if elapsed > max_time || elapsed + est > max_time {
                                     self.pskips.fetch_add(1, Ordering::Release);
                                     continue;
                                 }
-                                if self.db.remember_processed(ctx.get())? {
+                                if self.db.remember_processed(&ctx)? {
                                     self.db.count_duplicate();
                                     continue;
                                 }
-                                vec.push(ctx);
+                                vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                                 continue 'next;
                             }
                         }
@@ -822,8 +822,8 @@ where
                     if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                         queue = self.do_retrieve_and_insert(0, queue)?;
                         self.retrieving.store(false, Ordering::Release);
-                    } else if let Some(el) = self.db.pop(0)? {
-                        return Ok(vec![el]);
+                    } else if let Some((el, elapsed)) = self.db.pop(0)? {
+                        return Ok(vec![ContextWrapper::with_elapsed(el, elapsed)]);
                     }
                 }
             }
@@ -849,7 +849,7 @@ where
 
         let keeps = self.db.record_many(&mut vec, prev)?;
         debug_assert!(vec.len() == keeps.len());
-        let vec: Vec<(ContextWrapper<T>, usize, u32)> = vec
+        let vec: Vec<(T, usize, u32)> = vec
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
@@ -859,7 +859,7 @@ where
                 } else if keep {
                     let priority = self.db.score(&el);
                     let progress = self.db.progress(el.get());
-                    Some((el, progress, priority))
+                    Some((el.into_inner(), progress, priority))
                 } else {
                     None
                 }
@@ -917,31 +917,31 @@ where
     }
 
     pub fn print_queue_histogram(&self) {
+        let max_progress = <usize as TryInto<u32>>::try_into(self.max_possible_progress + 1)
+            .unwrap()
+            .into();
         let queue = self.queue.lock().unwrap();
         if queue.is_empty() {
             println!("Queue is empty, no graph to print");
             return;
         }
-        let times: Vec<f64> = queue.iter().map(|c| c.0.elapsed().into()).collect();
+        let mut progresses = Vec::new();
         let mut prog_score = Vec::new();
-        let mut progress_time = Vec::new();
-        for c in queue.iter() {
-            let elapsed: f64 = c.0.elapsed().into();
-            let score: f64 = self.db.score(c.0).into();
-            let progress: u32 = self.db.progress(c.0.get()).try_into().unwrap();
+        for (progress, _, score) in queue.iter() {
+            let score: f64 = (*score).into();
+            let progress: u32 = progress.try_into().unwrap();
             let progress: f64 = progress.into();
+            progresses.push(progress);
             prog_score.push((progress, score));
-            progress_time.push((progress, elapsed));
         }
         // unlock
         let queue_buckets = queue.bucket_sizes();
         drop(queue);
 
-        let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));
+        let h = Histogram::from_slice(progresses.as_slice(), HistogramBins::Count(self.max_possible_progress));
         let v = ContinuousView::new()
             .add(h)
-            .x_label("elapsed time")
-            .x_range(0., self.db.max_time().into());
+            .x_label("progress");
         println!(
             "Current heap contents:\n{}\n{:?}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
@@ -953,30 +953,9 @@ where
             .add(p)
             .x_label("progress")
             .y_label("score")
-            .x_range(
-                -1.,
-                <usize as TryInto<u32>>::try_into(self.max_possible_progress + 1)
-                    .unwrap()
-                    .into(),
-            );
+            .x_range(-1., max_progress);
         println!(
             "Heap scores by progress level:\n{}",
-            Page::single(&v).dimensions(90, 10).to_text().unwrap()
-        );
-        let p = Plot::new(progress_time).point_style(PointStyle::new().marker(PointMarker::Square));
-        let v = ContinuousView::new()
-            .add(p)
-            .x_label("progress")
-            .y_label("elapsed")
-            .y_range(0., self.db.max_time().into())
-            .x_range(
-                -1.,
-                <usize as TryInto<u32>>::try_into(self.max_possible_progress + 1)
-                    .unwrap()
-                    .into(),
-            );
-        println!(
-            "Heap elapsed times by progress:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
     }

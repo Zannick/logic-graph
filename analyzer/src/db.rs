@@ -384,12 +384,17 @@ where
     /// the score (4 bytes),
     /// the elapsed time (4 bytes),
     /// a sequence number (4 bytes)
-    fn get_heap_key(&self, el: &ContextWrapper<T>) -> [u8; 16] {
+    fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; 16] {
+        self.get_heap_key(el.get(), el.elapsed())
+    }
+
+    fn get_heap_key(&self, el: &T, elapsed: u32) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        let progress: u32 = self.progress(el.get()).try_into().unwrap();
+        let progress: u32 = self.progress(&el).try_into().unwrap();
+        let est = self.estimated_remaining_time(&el);
         key[0..4].copy_from_slice(&progress.to_be_bytes());
-        key[4..8].copy_from_slice(&self.score(el).to_be_bytes());
-        key[8..12].copy_from_slice(&el.elapsed().to_be_bytes());
+        key[4..8].copy_from_slice(&(elapsed + est).to_be_bytes());
+        key[8..12].copy_from_slice(&elapsed.to_be_bytes());
         key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
@@ -545,7 +550,7 @@ where
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        let key = self.get_heap_key(&el);
+        let key = self.get_heap_key_from_wrapper(&el);
         let val = Self::serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
@@ -554,7 +559,7 @@ where
 
     pub fn push_from_queue(&self, el: ContextWrapper<T>, score: u32) -> Result<(), Error> {
         let progress = self.progress(el.get());
-        let key = self.get_heap_key(&el);
+        let key = self.get_heap_key_from_wrapper(&el);
         let val = Self::serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
@@ -562,7 +567,7 @@ where
         Ok(())
     }
 
-    pub fn pop(&self, start_progress: usize) -> anyhow::Result<Option<ContextWrapper<T>>> {
+    pub fn pop(&self, start_progress: usize) -> anyhow::Result<Option<(T, u32)>> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
@@ -590,8 +595,9 @@ where
                 println!("Compacting took {:?}", start.elapsed());
             }
 
-            let el = self.get_queue_entry_wrapper(&value)?;
-            if el.elapsed() > self.max_time() {
+            let el = Self::deserialize_state(&value)?;
+            let elapsed = self.get_best_elapsed_raw(&value)?;
+            if elapsed > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
             }
@@ -606,13 +612,15 @@ where
             let to_progress: usize = u32::from_be_bytes(key[0..4].try_into().unwrap())
                 .try_into()
                 .unwrap();
+            // We use the key's cached version of score since our estimates
+            // are based on the keys.
             let score = u32::from_be_bytes(key[4..8].try_into().unwrap());
 
             self.reset_estimates_in_range(start_progress, to_progress, score);
 
             // We don't need to check the elapsed time against statedb,
             // because that's where the elapsed time came from
-            return Ok(Some(el));
+            return Ok(Some((el, elapsed)));
         }
 
         self.reset_estimates_in_range_unbounded(start_progress);
@@ -622,7 +630,7 @@ where
 
     pub fn extend_from_queue<I>(&self, iter: I) -> Result<(), Error>
     where
-        I: IntoIterator<Item = (ContextWrapper<T>, u32)>,
+        I: IntoIterator<Item = (T, u32)>,
     {
         let mut batch = WriteBatchWithTransaction::<false>::default();
         let max_time = self.max_time();
@@ -633,21 +641,22 @@ where
         mins.resize(self.max_possible_progress, u32::MAX);
 
         for (el, score) in iter {
-            if el.elapsed() > max_time || score > max_time {
+            let elapsed = self.get_best_elapsed(&el)?;
+            if elapsed > max_time || score > max_time {
                 skips += 1;
                 continue;
             }
 
-            let val = Self::serialize_state(el.get());
+            let val = Self::serialize_state(&el);
 
             if self.remember_processed_raw(&val).unwrap() {
                 dups += 1;
                 continue;
             }
 
-            let progress = self.progress(el.get());
+            let progress = self.progress(&el);
             mins[progress] = std::cmp::min(mins[progress], score);
-            let key = self.get_heap_key(&el);
+            let key = self.get_heap_key(&el, elapsed);
             batch.put(key, val);
         }
         let new = batch.len();
@@ -700,11 +709,7 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
-    pub fn retrieve(
-        &self,
-        start_progress: usize,
-        count: usize,
-    ) -> Result<Vec<ContextWrapper<T>>, Error> {
+    pub fn retrieve(&self, start_progress: usize, count: usize) -> Result<Vec<(T, u32, u32)>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -729,12 +734,14 @@ where
         };
         batch.delete(key);
 
-        let el = self.get_queue_entry_wrapper(&value)?;
+        let el = Self::deserialize_state(&value)?;
+        let elapsed = self.get_best_elapsed_raw(&value)?;
+        let est = self.estimated_remaining_time(&el);
         let max_time = self.max_time();
-        if el.elapsed() > max_time || self.score(&el) > max_time {
+        if elapsed > max_time || elapsed + est > max_time {
             pskips += 1;
         } else {
-            res.push(el);
+            res.push((el, elapsed, est));
         }
 
         let start = Instant::now();
@@ -745,9 +752,11 @@ where
                     batch.delete(key);
                     pops += 1;
 
-                    let el = self.get_queue_entry_wrapper(&value)?;
+                    let el = Self::deserialize_state(&value)?;
+                    let elapsed = self.get_best_elapsed_raw(&value)?;
+                    let est = self.estimated_remaining_time(&el);
                     let max_time = self.max_time();
-                    if el.elapsed() > max_time || self.score(&el) > max_time {
+                    if elapsed > max_time || elapsed + est > max_time {
                         pskips += 1;
                         continue;
                     }
@@ -756,7 +765,7 @@ where
                         continue;
                     }
 
-                    res.push(el);
+                    res.push((el, elapsed, est));
                     if res.len() == count {
                         break 'outer;
                     }
@@ -772,8 +781,8 @@ where
             pops
         );
 
-        if let Some(el) = res.last() {
-            self.reset_estimates_in_range(start_progress, self.progress(el.get()), self.score(el));
+        if let Some((el, elapsed, est)) = res.last() {
+            self.reset_estimates_in_range(start_progress, self.progress(el), elapsed + est);
         } else {
             self.reset_estimates_in_range_unbounded(start_progress);
         }
@@ -811,6 +820,10 @@ where
 
     pub fn get_best_elapsed(&self, el: &T) -> Result<u32, Error> {
         let state_key = Self::serialize_state(el);
+        self.get_best_elapsed_raw(&state_key)
+    }
+
+    fn get_best_elapsed_raw(&self, state_key: &[u8]) -> Result<u32, Error> {
         let sd = self
             .get_deserialize_state_data(&state_key)?
             .expect("Didn't find state data!");

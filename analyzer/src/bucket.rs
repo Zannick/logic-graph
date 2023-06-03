@@ -123,12 +123,12 @@ where
     B::Item: Hash + Eq + 'b,
     P: Ord,
 {
-    type Item = (&'b B::Item, &'b P);
+    type Item = (usize, &'b B::Item, &'b P);
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
-            if let Some(x) = self.iter.next() {
-                return Some(x);
+            if let Some((b, p)) = self.iter.next() {
+                return Some((self.bucket, b, p));
             }
             if self.bucket < self.max {
                 self.bucket += 1;
