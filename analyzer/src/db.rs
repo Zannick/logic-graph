@@ -1053,7 +1053,7 @@ where
                         continue;
                     }
 
-                    let known = u32::from_be_bytes(key[8..16].as_ref().try_into().unwrap());
+                    let known = u32::from_be_bytes(key[8..12].as_ref().try_into().unwrap());
                     if known > elapsed {
                         let new_key = self.new_heap_key(&key, known, elapsed);
                         batch.put(new_key, value);
