@@ -42,6 +42,7 @@ struct HeapDBOptions {
 }
 
 const BEST: &str = "best";
+const NEXT: &str = "next";
 
 type NextData = (u32, Vec<u8>);
 
@@ -74,12 +75,10 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
     db: DB,
-    nextdb: DB,
     statedb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
     _opts: HeapDBOptions,
-    _next_opts: HeapDBOptions,
     _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
@@ -223,19 +222,12 @@ where
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
-        let mut path3 = path.clone();
         path.push("queue");
         path2.push("states");
-        path3.push("next");
 
         // 1 + 2 = 3 GiB roughly for this db
         let _ = DB::destroy(&opts, &path);
         let db = DB::open(&opts, &path)?;
-
-        let mut next_opts = opts2.clone();
-        next_opts.set_memtable_whole_key_filtering(true);
-        let _ = DB::destroy(&next_opts, &path3);
-        let nextdb = DB::open(&next_opts, &path3)?;
 
         opts2.set_merge_operator_associative("min", min_merge);
 
@@ -243,11 +235,12 @@ where
         opts2.set_memtable_whole_key_filtering(true);
         opts2.create_missing_column_families(true);
 
-        let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts);
+        let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts.clone());
+        let nextcf = ColumnFamilyDescriptor::new(NEXT, cf_opts);
 
         // 1 GiB write buffers + 4 GiB row cache = 5GiB ?
         let _ = DB::destroy(&opts2, &path2);
-        let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![bestcf])?;
+        let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![bestcf, nextcf])?;
 
         let mut write_opts = WriteOptions::default();
         write_opts.disable_wal(true);
@@ -263,15 +256,10 @@ where
         Ok(HeapDB {
             scorer,
             db,
-            nextdb,
             statedb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
             _opts: HeapDBOptions { opts, path },
-            _next_opts: HeapDBOptions {
-                opts: next_opts,
-                path: path3,
-            },
             _state_opts: HeapDBOptions {
                 opts: opts2,
                 path: path2,
@@ -387,6 +375,10 @@ where
         self.statedb.cf_handle(BEST).unwrap()
     }
 
+    fn next_cf(&self) -> &ColumnFamily {
+        self.statedb.cf_handle(NEXT).unwrap()
+    }
+
     /// The key for a ContextWrapper<T> in the queue is:
     /// the progress (4 bytes)
     /// the score (4 bytes),
@@ -415,7 +407,7 @@ where
         key
     }
 
-    /// The key for a T (Ctx) in the statedb/nextdb, and the value in the queue db
+    /// The key for a T (Ctx) in the statedb, and the value in the queue db
     /// are all T itself.
     fn serialize_state(el: &T) -> Vec<u8> {
         let mut key = Vec::with_capacity(std::mem::size_of::<T>());
@@ -500,7 +492,7 @@ where
     }
 
     fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData>, Error> {
-        match self.nextdb.get_pinned(key)? {
+        match self.statedb.get_pinned_cf(self.next_cf(), key)? {
             Some(slice) => Ok(Self::get_obj_from_data(&slice)?),
             None => Ok(Vec::new()),
         }
@@ -800,7 +792,11 @@ where
     }
 
     fn remember_processed_raw(&self, key: &[u8]) -> Result<bool, Error> {
-        Ok(self.nextdb.key_may_exist(key) && self.nextdb.get_pinned(key)?.is_some())
+        let cf = self.next_cf();
+        Ok(
+            self.statedb.key_may_exist_cf(cf, key)
+                && self.statedb.get_pinned_cf(cf, key)?.is_some(),
+        )
     }
 
     /// Checks whether the given Ctx was already processed into its next states.
@@ -925,8 +921,9 @@ where
         self.record_one_internal(state_key, el, &prev_key, &mut next_entries);
 
         if let Some(p) = prev {
-            self.nextdb
-                .put_opt(
+            self.statedb
+                .put_cf_opt(
+                    self.next_cf(),
                     Self::serialize_state(p),
                     Self::serialize_next_data(next_entries),
                     &self.write_opts,
@@ -991,8 +988,9 @@ where
         }
 
         if let Some(p) = prev {
-            self.nextdb
-                .put_opt(
+            self.statedb
+                .put_cf_opt(
+                    self.next_cf(),
                     Self::serialize_state(p),
                     Self::serialize_next_data(next_entries),
                     &self.write_opts,
