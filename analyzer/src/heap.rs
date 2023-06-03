@@ -704,6 +704,9 @@ where
                     continue;
                 }
                 vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                if vec.len() == n {
+                    return Ok(vec);
+                }
             }
             // Retrieve some from db
             if !self.db.is_empty() {
