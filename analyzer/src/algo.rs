@@ -7,7 +7,7 @@ use crate::world::*;
 use anyhow::Result;
 use rayon::prelude::*;
 use std::fmt::Debug;
-use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::sync::Mutex;
 use std::thread::sleep;
@@ -221,9 +221,7 @@ where
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
-    extras: AtomicU64,
     deadends: AtomicU32,
-    optimizes: AtomicU32,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -352,9 +350,7 @@ where
             solutions,
             queue,
             iters: 0.into(),
-            extras: 0.into(),
             deadends: 0.into(),
-            optimizes: 0.into(),
         })
     }
 
@@ -597,25 +593,25 @@ where
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         println!(
-            "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends={}; opt={}) ---\n\
-            Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit={}ms; evictions={}; retrievals={}\n\
+            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms) ---\n\
+            Stats: heap={}; db={}; total={}; seen={}; proc={};\n\
+            estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
+            heap min: {}\n\
             db bests: {}\n\
             {}",
             iters,
-            self.extras.load(Ordering::Acquire),
             sols.len(),
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
-            self.optimizes.load(Ordering::Acquire),
+            max_time,
             self.queue.heap_len(),
             self.queue.db_len(),
             self.queue.len(),
             self.queue.seen(),
+            self.queue.db().processed(),
             self.queue.estimates(),
             self.queue.cached_estimates(),
-            max_time,
             self.queue.evictions(),
             self.queue.retrievals(),
             iskips,
@@ -623,6 +619,15 @@ where
             pskips,
             dpskips,
             self.queue.background_deletes(),
+            self.queue
+                .heap_bests()
+                .into_iter()
+                .map(|n| match n {
+                    Some(n) => n.to_string(),
+                    None => String::from("-"),
+                })
+                .collect::<Vec<_>>()
+                .join(", "),
             self.queue
                 .db()
                 .db_bests()

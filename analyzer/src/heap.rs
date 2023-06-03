@@ -429,6 +429,11 @@ where
         self.db.db_bests()
     }
 
+    pub fn heap_bests(&self) -> Vec<Option<u32>> {
+        let queue = self.queue.lock().unwrap();
+        queue.peek_all_buckets_min()
+    }
+
     pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
         self.db.score(ctx)
     }

@@ -142,7 +142,11 @@ where
 
 pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     fn push(&mut self, item: B::Item, segment: usize, priority: P) {
-        if self.bucket_for_adding(segment).push(item, priority).is_some() {
+        if self
+            .bucket_for_adding(segment)
+            .push(item, priority)
+            .is_some()
+        {
             // We just updated a state's priority without adding 1
             // so we'd better reverse the index update.
             self.items_replaced(segment, 1, 0);
@@ -384,6 +388,25 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                     self.bucket_for_peeking(s)
                         .map(|b| b.len_bucket())
                         .unwrap_or_default()
+                })
+                .collect()
+        } else {
+            Vec::new()
+        }
+    }
+
+    fn peek_all_buckets_min(&self) -> Vec<Option<P>>
+    where
+        P: Copy,
+    {
+        if let Some(max) = self.max_priority() {
+            (0..=max)
+                .into_iter()
+                .map(|s| {
+                    self.bucket_for_peeking(s)
+                        .map(|b| b.peek_min())
+                        .flatten()
+                        .map(|m| *m.1)
                 })
                 .collect()
         } else {
