@@ -1003,9 +1003,6 @@ where
 
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);
-        if prev.is_some() {
-            self.next.fetch_add(1, Ordering::Release);
-        }
         Ok(results)
     }
 
