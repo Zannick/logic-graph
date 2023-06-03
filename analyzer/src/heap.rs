@@ -20,7 +20,7 @@ use std::collections::BinaryHeap;
 use std::fmt::Debug;
 use std::num::NonZeroUsize;
 use std::path::Path;
-use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, MutexGuard};
 use std::time::Instant;
 
@@ -326,8 +326,6 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     capacity: usize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
-    min_db_estimate: AtomicU32,
-    min_db_estimates: Vec<AtomicU32>,
     min_evictions: usize,
     max_evictions: usize,
     min_reshuffle: usize,
@@ -363,16 +361,12 @@ where
     {
         let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), solutions)?;
         let max_possible_progress = db.scorer().remaining_visits(startctx.get());
-        let mut min_db_estimates = Vec::new();
-        min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
         let q = RocksBackedQueue {
             queue: Mutex::new(BucketQueue::new()),
             db,
             capacity: max_capacity,
             iskips: 0.into(),
             pskips: 0.into(),
-            min_db_estimate: u32::MAX.into(),
-            min_db_estimates,
             min_evictions,
             max_evictions,
             min_reshuffle,
@@ -431,15 +425,8 @@ where
         self.db.cached_estimates()
     }
 
-    pub fn db_best(&self) -> u32 {
-        self.min_db_estimate.load(Ordering::Acquire)
-    }
-
     pub fn db_bests(&self) -> Vec<u32> {
-        self.min_db_estimates
-            .iter()
-            .map(|a| a.load(Ordering::Acquire))
-            .collect()
+        self.db.db_bests()
     }
 
     pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
@@ -512,10 +499,7 @@ where
                 if est_complete > p_max || (est_complete == p_max && el.elapsed() >= ctx.elapsed())
                 {
                     // Lower priority (or equal but later), evict the new item immediately
-                    self.db.push_from_queue(el)?;
-                    self.min_db_estimate
-                        .fetch_min(est_complete, Ordering::Release);
-                    self.min_db_estimates[progress].fetch_min(est_complete, Ordering::Release);
+                    self.db.push_from_queue(el, est_complete)?;
                 } else {
                     let evictions = std::cmp::min(
                         self.max_evictions,
@@ -542,18 +526,7 @@ where
 
     fn evict_to_db(&self, ev: Vec<(ContextWrapper<T>, u32)>, category: &str) -> Result<()> {
         let start = Instant::now();
-        let mut mins = Vec::new();
-        mins.resize(self.max_possible_progress, u32::MAX);
-        for (ctx, score) in &ev {
-            let progress = self.db.progress(ctx.get());
-            mins[progress] = std::cmp::min(mins[progress], *score);
-        }
-        let best = mins.iter().min().unwrap();
-        self.db.extend_from_queue(ev.into_iter().map(|(c, _)| c))?;
-        self.min_db_estimate.fetch_min(*best, Ordering::Release);
-        for (est, min) in self.min_db_estimates.iter().zip(mins.into_iter()) {
-            est.fetch_min(min, Ordering::Release);
-        }
+        self.db.extend_from_queue(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
         println!("{}:evict to db took {:?}", category, start.elapsed());
         println!("{}", self.db.get_memory_usage_stats().unwrap());
@@ -597,24 +570,10 @@ where
                 (el, progress, score)
             })
             .collect();
+
         println!("Retrieve from db took {:?}", start.elapsed());
         println!("{}", self.db.get_memory_usage_stats().unwrap());
-        // the min priority in the db is probably now the max of this result, or thereabouts
-        // which should be the last element
-        if let Some((_, progress, score)) = res.last() {
-            // This could technically result in a race between adding new values at this level.
-            // But it's just meant to be an estimate and so retrieves should be rare.
-            // On the other hand, maybe we should always peek into the db?
-            self.min_db_estimates[*progress].store(*score, Ordering::SeqCst);
-            // If we went far enough that we got another progress level, the other ones have nothing left.
-            for p in segment..*progress {
-                self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
-            }
-        } else {
-            for p in segment..=self.max_possible_progress {
-                self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
-            }
-        }
+
         Ok(res)
     }
 
@@ -623,7 +582,7 @@ where
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((el, &est_completion)) = queue.peek_min() {
                 let progress = self.db.progress(el.get());
-                let db_best = self.min_db_estimates[progress].load(Ordering::Acquire);
+                let db_best = self.db.db_best(progress);
                 // Only when we go a decent bit over
                 if !self.db.is_empty() && db_best < u32::MAX && est_completion > db_best * 101 / 100
                 {
@@ -790,7 +749,7 @@ where
                         if b.is_empty_bucket() {
                             continue;
                         }
-                        let db_best = self.min_db_estimates[segment].load(Ordering::Acquire);
+                        let db_best = self.db.db_best(segment);
                         while let Some((mut ctx, _)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {

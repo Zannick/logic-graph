@@ -97,6 +97,9 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     deletes: AtomicUsize,
     delete: AtomicU64,
 
+    max_possible_progress: usize,
+    min_db_estimates: Vec<AtomicU32>,
+
     bg_deletes: AtomicUsize,
 
     phantom: PhantomData<T>,
@@ -253,6 +256,10 @@ where
         let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
         println!("Built scorer in {:?}", s.elapsed());
 
+        let max_possible_progress = scorer.remaining_visits(startctx);
+        let mut min_db_estimates = Vec::new();
+        min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
+
         Ok(HeapDB {
             scorer,
             db,
@@ -281,6 +288,8 @@ where
             dup_pskips: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
+            max_possible_progress,
+            min_db_estimates,
             bg_deletes: 0.into(),
             phantom: PhantomData,
             retrieve_lock: Mutex::new(()),
@@ -324,6 +333,17 @@ where
     /// Winning states aren't counted in this.
     pub fn estimates(&self) -> usize {
         self.scorer.estimates()
+    }
+
+    pub fn db_best(&self, progress: usize) -> u32 {
+        self.min_db_estimates[progress].load(Ordering::Acquire)
+    }
+
+    pub fn db_bests(&self) -> Vec<u32> {
+        self.min_db_estimates
+            .iter()
+            .map(|a| a.load(Ordering::Acquire))
+            .collect()
     }
 
     /// Returns the number of cache hits for estimated remaining time.
@@ -540,11 +560,13 @@ where
         Ok(())
     }
 
-    pub fn push_from_queue(&self, el: ContextWrapper<T>) -> Result<(), Error> {
+    pub fn push_from_queue(&self, el: ContextWrapper<T>, score: u32) -> Result<(), Error> {
+        let progress = self.progress(el.get());
         let key = self.get_heap_key(&el);
         let val = Self::serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
+        self.min_db_estimates[progress].fetch_min(score, Ordering::Release);
         Ok(())
     }
 
@@ -564,7 +586,7 @@ where
 
             let raw = u64::from_be_bytes(key[0..8].as_ref().try_into().unwrap()) + 1;
             // Ignore error
-            let _ = self.db.delete_opt(key, &self.write_opts);
+            let _ = self.db.delete_opt(&key, &self.write_opts);
             self.delete.fetch_max(raw, Ordering::Release);
             self.size.fetch_sub(1, Ordering::Release);
 
@@ -586,25 +608,40 @@ where
                 self.dup_pskips.fetch_add(1, Ordering::Release);
                 continue;
             }
+
+            // Set the min score of this progress to this element
+            // as an approximation
+            let to_progress: usize = u32::from_be_bytes(key[0..4].try_into().unwrap())
+                .try_into()
+                .unwrap();
+            let score = u32::from_be_bytes(key[4..8].try_into().unwrap());
+
+            self.reset_estimates_in_range(start_progress, to_progress, score);
+
             // We don't need to check the elapsed time against statedb,
             // because that's where the elapsed time came from
             return Ok(Some(el));
         }
+
+        self.reset_estimates_in_range_unbounded(start_progress);
 
         Ok(None)
     }
 
     pub fn extend_from_queue<I>(&self, iter: I) -> Result<(), Error>
     where
-        I: IntoIterator<Item = ContextWrapper<T>>,
+        I: IntoIterator<Item = (ContextWrapper<T>, u32)>,
     {
         let mut batch = WriteBatchWithTransaction::<false>::default();
         let max_time = self.max_time();
         let mut skips = 0;
         let mut dups = 0;
 
-        for el in iter {
-            if el.elapsed() > max_time || self.score(&el) > max_time {
+        let mut mins = Vec::new();
+        mins.resize(self.max_possible_progress, u32::MAX);
+
+        for (el, score) in iter {
+            if el.elapsed() > max_time || score > max_time {
                 skips += 1;
                 continue;
             }
@@ -616,17 +653,58 @@ where
                 continue;
             }
 
+            let progress = self.progress(el.get());
+            mins[progress] = std::cmp::min(mins[progress], score);
             let key = self.get_heap_key(&el);
             batch.put(key, val);
         }
         let new = batch.len();
         self.db.write_opt(batch, &self.write_opts)?;
+        for (est, min) in self.min_db_estimates.iter().zip(mins.into_iter()) {
+            est.fetch_min(min, Ordering::Release);
+        }
 
         self.pskips.fetch_add(skips, Ordering::Release);
         self.dup_pskips.fetch_add(dups, Ordering::Release);
         self.size.fetch_add(new, Ordering::Release);
 
         Ok(())
+    }
+
+    /// Resets some min_db_estimates based on removed elements in a range.
+    fn reset_estimates_in_range(&self, start_progress: usize, to_progress: usize, score: u32) {
+        self.min_db_estimates[to_progress].store(score, Ordering::SeqCst);
+        // If we went far enough that we got another progress level, the other ones have nothing left.
+        for p in start_progress..to_progress {
+            self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
+        }
+    }
+
+    /// Resets some min_db_estimates based on never finding more elements.
+    fn reset_estimates_in_range_unbounded(&self, start_progress: usize) {
+        for p in start_progress..=self.max_possible_progress {
+            self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
+        }
+    }
+
+    /// Peeks in the db to reset min_db_estimates
+    fn reset_estimates_actual(&self) {
+        for p in 0..=self.max_possible_progress {
+            let progress: u32 = p.try_into().unwrap();
+            let mut tail_opts = ReadOptions::default();
+            tail_opts.set_tailing(true);
+            tail_opts.set_pin_data(true);
+            tail_opts.set_iterate_lower_bound(progress.to_be_bytes());
+            tail_opts.set_iterate_upper_bound((progress + 1).to_be_bytes());
+            let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
+            if let Some(item) = iter.next() {
+                let (key, _) = item.unwrap();
+                let score = u32::from_be_bytes(key[4..8].try_into().unwrap());
+                self.min_db_estimates[p].store(score, Ordering::SeqCst);
+            } else {
+                self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
+            }
+        }
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
@@ -639,6 +717,7 @@ where
         let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
+        tail_opts.set_pin_data(true);
         tail_opts.set_iterate_lower_bound(
             <usize as TryInto<u32>>::try_into(start_progress)
                 .unwrap()
@@ -700,6 +779,13 @@ where
             start.elapsed(),
             pops
         );
+
+        if let Some(el) = res.last() {
+            self.reset_estimates_in_range(start_progress, self.progress(el.get()), self.score(el));
+        } else {
+            self.reset_estimates_in_range_unbounded(start_progress);
+        }
+
         // Ignore/assert errors once we start deleting.
         println!("Beginning point deletion of iterated elements...");
         let start = Instant::now();
@@ -926,6 +1012,7 @@ where
     pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), Error> {
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
+        tail_opts.set_pin_data(true);
         let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
 
         while !exit_signal.load(Ordering::Acquire) {
@@ -960,9 +1047,9 @@ where
 
                     let known = u32::from_be_bytes(key[4..8].as_ref().try_into().unwrap());
                     if known > elapsed {
-                        batch.delete(&key);
                         let new_key = self.new_heap_key(&key, known, elapsed);
                         batch.put(new_key, value);
+                        batch.delete(&key);
                         rescores += 1;
                     }
                 } else {
@@ -971,6 +1058,7 @@ where
                 }
             }
             self.db.write_opt(batch, &self.write_opts).unwrap();
+            self.reset_estimates_actual();
             drop(_retrieve_lock);
             self.pskips.fetch_add(pskips, Ordering::Release);
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);

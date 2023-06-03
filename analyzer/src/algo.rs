@@ -599,7 +599,7 @@ where
         println!(
             "--- Round {} (ex: {}, solutions: {}, unique: {}, dead-ends={}; opt={}) ---\n\
             Stats: heap={}; db={}; total={}; seen={}; estimates={}; cached={}\n\
-            limit={}ms; db best={}; evictions={}; retrievals={}\n\
+            limit={}ms; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             db bests: {}\n\
             {}",
@@ -616,7 +616,6 @@ where
             self.queue.estimates(),
             self.queue.cached_estimates(),
             max_time,
-            self.queue.db_best(),
             self.queue.evictions(),
             self.queue.retrievals(),
             iskips,
@@ -625,6 +624,7 @@ where
             dpskips,
             self.queue.background_deletes(),
             self.queue
+                .db()
                 .db_bests()
                 .into_iter()
                 .map(|n| if n < u32::MAX {
