@@ -222,6 +222,7 @@ where
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
     deadends: AtomicU32,
+    held: AtomicUsize,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -351,6 +352,7 @@ where
             queue,
             iters: 0.into(),
             deadends: 0.into(),
+            held: 0.into(),
         })
     }
 
@@ -472,7 +474,9 @@ where
                             done = false;
                         }
 
+                        self.held.fetch_add(items.len(), Ordering::Release);
                         for ctx in items {
+                            self.held.fetch_sub(1, Ordering::Release);
                             if self.queue.db().remember_processed(ctx.get()).unwrap() {
                                 continue;
                             }
@@ -595,9 +599,10 @@ where
         }
         let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
+        let pending = self.held.load(Ordering::Acquire);
         println!(
             "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms) ---\n\
-            Stats: heap={}; db={}; total={}; seen={}; proc={};\n\
+            Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
             estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
             heap min: {}\n\
@@ -609,8 +614,9 @@ where
             self.deadends.load(Ordering::Acquire),
             max_time,
             self.queue.heap_len(),
+            pending,
             self.queue.db_len(),
-            self.queue.len(),
+            pending + self.queue.len(),
             self.queue.seen(),
             self.queue.db().processed(),
             self.queue.estimates(),
