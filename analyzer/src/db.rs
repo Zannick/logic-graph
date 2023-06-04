@@ -1024,7 +1024,8 @@ where
         iter_opts.fill_cache(false);
         let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
 
-        while !exit_signal.load(Ordering::Acquire) {
+        let mut end = false;
+        while !end && !exit_signal.load(Ordering::Acquire) {
             let mut batch = WriteBatchWithTransaction::<false>::default();
             let mut pskips = 0;
             let mut dup_pskips = 0;
@@ -1061,8 +1062,12 @@ where
                         batch.delete(&key);
                         rescores += 1;
                     }
+                    if !compact && self._cache_uncompressed.get_usage() > 2 * GB {
+                        compact = true;
+                    }
                 } else {
                     compact = true;
+                    end = true;
                     break;
                 }
             }
@@ -1084,7 +1089,6 @@ where
                 let start = Instant::now();
                 self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
                 println!("Bg thread compacting took {:?}", start.elapsed());
-                return Ok(());
             }
         }
         Ok(())
