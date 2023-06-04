@@ -78,6 +78,8 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     statedb: DB,
     _cache_uncompressed: Cache,
     _cache_cmprsd: Cache,
+    _state_cache_uncompressed: Cache,
+    _state_cache_cmprsd: Cache,
     _opts: HeapDBOptions,
     _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
@@ -204,6 +206,11 @@ where
             2,
             std::cmp::min(num_cpus::get() / 2, 32).try_into().unwrap(),
         ));
+        opts.set_max_background_jobs(8);
+
+        let mut env = Env::new().unwrap();
+        env.set_low_priority_background_threads(6);
+        opts.set_env(&env);
 
         let mut opts2 = opts.clone();
 
@@ -214,11 +221,7 @@ where
         block_opts.set_block_cache(&cache);
         block_opts.set_block_cache_compressed(&cache2);
         block_opts.set_block_size(1024);
-        opts.set_max_background_jobs(8);
         opts.set_block_based_table_factory(&block_opts);
-        let mut env = Env::new().unwrap();
-        env.set_low_priority_background_threads(6);
-        opts.set_env(&env);
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
@@ -238,7 +241,16 @@ where
         let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts.clone());
         let nextcf = ColumnFamilyDescriptor::new(NEXT, cf_opts);
 
-        // 1 GiB write buffers + 4 GiB row cache = 5GiB ?
+        let mut block_opts2 = BlockBasedOptions::default();
+        // blockdb caches = 2 GiB
+        let cache3 = Cache::new_lru_cache(GB)?;
+        let cache4 = Cache::new_lru_cache(GB)?;
+        block_opts2.set_block_cache(&cache3);
+        block_opts2.set_block_cache_compressed(&cache4);
+        block_opts2.set_block_size(1024);
+        opts2.set_block_based_table_factory(&block_opts2);
+
+        // Same 1 + 2 = 3 GiB for this one
         let _ = DB::destroy(&opts2, &path2);
         let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![bestcf, nextcf])?;
 
@@ -259,6 +271,8 @@ where
             statedb,
             _cache_uncompressed: cache,
             _cache_cmprsd: cache2,
+            _state_cache_uncompressed: cache3,
+            _state_cache_cmprsd: cache4,
             _opts: HeapDBOptions { opts, path },
             _state_opts: HeapDBOptions {
                 opts: opts2,
@@ -709,7 +723,11 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
-    pub fn retrieve(&self, start_progress: usize, count: usize) -> Result<Vec<(T, u32, u32)>, Error> {
+    pub fn retrieve(
+        &self,
+        start_progress: usize,
+        count: usize,
+    ) -> Result<Vec<(T, u32, u32)>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -1182,22 +1200,28 @@ where
             Some(&[&self.db]),
             Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
         )?;
-        let statestats = perf::get_memory_usage_stats(Some(&[&self.statedb]), None)?;
+        let statestats = perf::get_memory_usage_stats(
+            Some(&[&self.statedb]),
+            Some(&[&self._state_cache_uncompressed, &self._state_cache_cmprsd]),
+        )?;
 
         Ok(format!(
-            "db: total={}, unflushed={}, readers={}, caches={}\n\
-             statedb: total={}, unflushed={}, readers={}, caches={}\n\
-             uncompressed={}, compressed={}",
+            "db: total={}, unflushed={}, readers={}, caches={}, \
+             unc={}, cmpr={}\n\
+             statedb: total={}, unflushed={}, readers={}, caches={}, \
+             unc={}, cmpr={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
             SizeFormatter::new(dbstats.mem_table_readers_total, BINARY),
             SizeFormatter::new(dbstats.cache_total, BINARY),
+            SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
+            SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
             SizeFormatter::new(statestats.mem_table_total, BINARY),
             SizeFormatter::new(statestats.mem_table_unflushed, BINARY),
             SizeFormatter::new(statestats.mem_table_readers_total, BINARY),
             SizeFormatter::new(statestats.cache_total, BINARY),
-            SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
-            SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
+            SizeFormatter::new(self._state_cache_uncompressed.get_usage(), BINARY),
+            SizeFormatter::new(self._state_cache_cmprsd.get_usage(), BINARY),
         ))
     }
 }
