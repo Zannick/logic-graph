@@ -1018,10 +1018,11 @@ where
     }
 
     pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), Error> {
-        let mut tail_opts = ReadOptions::default();
-        tail_opts.set_tailing(true);
-        tail_opts.set_pin_data(true);
-        let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
+        let mut iter_opts = ReadOptions::default();
+        iter_opts.set_tailing(true);
+        iter_opts.set_pin_data(true);
+        iter_opts.fill_cache(false);
+        let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
 
         while !exit_signal.load(Ordering::Acquire) {
             let mut batch = WriteBatchWithTransaction::<false>::default();
