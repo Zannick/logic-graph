@@ -732,7 +732,6 @@ where
         let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
-        tail_opts.set_pin_data(true);
         tail_opts.set_iterate_lower_bound(
             <usize as TryInto<u32>>::try_into(start_progress)
                 .unwrap()
