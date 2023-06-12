@@ -1119,7 +1119,7 @@ where
             {
                 if !prev.is_empty() {
                     state_key = prev;
-                    vec.push(hist);
+                    vec.push(hist.clone());
                 } else {
                     break;
                 }
