@@ -752,6 +752,8 @@ where
         while !queue.is_empty() || !self.db.is_empty() {
             if let Some(min) = queue.min_priority() {
                 let max = queue.max_priority().unwrap();
+                let mut diffs = Vec::with_capacity(max - min + 1);
+
                 let mut vec = Vec::with_capacity(max - min + 1);
                 'next: for segment in min..=max {
                     if let Some(b) = queue.bucket_for_peeking(segment) {
@@ -767,13 +769,12 @@ where
                             let est = self.db.estimated_remaining_time(&ctx);
 
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
-                            if !self.db.is_empty()
+                            if !did_retrieve
+                                && !self.db.is_empty()
                                 && db_best < u32::MAX
-                                && elapsed + est > db_best * 101 / 100
-                                && !did_retrieve
+                                && elapsed + est > db_best
                             {
-                                queue = self.maybe_reshuffle(segment, queue)?;
-                                did_retrieve = true;
+                                diffs.push((segment, elapsed + est - db_best));
                             }
 
                             let max_time = self.db.max_time();
@@ -790,13 +791,13 @@ where
                             continue 'next;
                         }
                         if db_best < u32::MAX {
-                            if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
-                                queue = self.do_retrieve_and_insert(segment, queue)?;
-                                self.retrieving.store(false, Ordering::Release);
-                            } else {
+                            if self.retrieving.fetch_or(true, Ordering::AcqRel) {
                                 continue 'next;
                             }
+                            queue = self.do_retrieve_and_insert(segment, queue)?;
+                            self.retrieving.store(false, Ordering::Release);
                             did_retrieve = true;
+
                             // Just grab the next one
                             while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                                 // Retrieve the best elapsed time.
@@ -815,6 +816,12 @@ where
                                 continue 'next;
                             }
                         }
+                    }
+                }
+                // Max one retrieve per pop_round_robin
+                if !did_retrieve {
+                    if let Some((segment, _)) = diffs.into_iter().max_by_key(|p| p.1) {
+                        let _queue = self.maybe_reshuffle(segment, queue)?;
                     }
                 }
                 vec.shrink_to_fit();
@@ -941,10 +948,11 @@ where
         let queue_buckets = queue.bucket_sizes();
         drop(queue);
 
-        let h = Histogram::from_slice(progresses.as_slice(), HistogramBins::Count(self.max_possible_progress));
-        let v = ContinuousView::new()
-            .add(h)
-            .x_label("progress");
+        let h = Histogram::from_slice(
+            progresses.as_slice(),
+            HistogramBins::Count(self.max_possible_progress),
+        );
+        let v = ContinuousView::new().add(h).x_label("progress");
         println!(
             "Current heap contents:\n{}\n{:?}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
