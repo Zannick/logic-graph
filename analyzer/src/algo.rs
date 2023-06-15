@@ -20,6 +20,7 @@ enum SearchMode {
     SomeProgress(usize),
     HalfProgress,
     Dependent,
+    LocalMinima,
     Unknown,
 }
 
@@ -28,10 +29,10 @@ fn mode_by_index(index: usize) -> SearchMode {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
         2 | 4 | 5 => SearchMode::MaxProgress(2),
         9 => SearchMode::SomeProgress(1),
-        11 => SearchMode::SomeProgress(2),
-        13 => SearchMode::SomeProgress(4),
+        11 => SearchMode::SomeProgress(3),
+        12 | 13 => SearchMode::LocalMinima,
         15 => SearchMode::HalfProgress,
-        // 0, 3, 7, 8, 12
+        // 0, 3, 7, 8
         _ => SearchMode::Standard,
     }
 }
@@ -429,7 +430,7 @@ where
         match iters % 8 {
             0 => SearchMode::SomeProgress((iters / 8) % 32),
             1 => SearchMode::MaxProgress(2),
-            2 => SearchMode::HalfProgress,
+            2 => SearchMode::LocalMinima,
             3 => SearchMode::SomeProgress(5),
 
             _ => SearchMode::Standard,
@@ -463,6 +464,7 @@ where
                     SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
                     SearchMode::HalfProgress => self.queue.pop_half_progress(2),
                     SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
+                    SearchMode::LocalMinima => self.queue.pop_local_minima(2),
                     _ => self.queue.pop_round_robin(),
                 };
                 match items {

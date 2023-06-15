@@ -746,6 +746,24 @@ where
         })
     }
 
+    pub fn pop_local_minima(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
+        self.pop_special(n, |q| {
+            let min = q.min_priority()?;
+            let max = q.max_priority()?;
+            let next = q.bucket_for_peeking(max).map(|b| b.min_priority().copied()).flatten();
+            for segment in (min..max).rev() {
+                let prev = q.bucket_for_peeking(segment).map(|b| b.min_priority().copied()).flatten();
+                if let (Some(lower), Some(higher)) = (prev, next) {
+                    if higher < lower {
+                        return q.pop_segment_min(segment + 1).or_else(|| q.pop_max_segment_min());
+                    }
+                }
+            }
+            // Assume min is the lowest segment
+            q.pop_segment_min(0)
+        })
+    }
+
     pub fn pop_round_robin(&self) -> Result<Vec<ContextWrapper<T>>> {
         let mut queue = self.queue.lock().unwrap();
         let mut did_retrieve = false;
