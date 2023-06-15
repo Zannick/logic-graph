@@ -27,11 +27,11 @@ enum SearchMode {
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
-        2 | 4 | 5 => SearchMode::MaxProgress(2),
+        2 | 4 => SearchMode::MaxProgress(2),
+        5 => SearchMode::MaxProgress(4),
         11 => SearchMode::SomeProgress(3),
-        12 | 13 => SearchMode::LocalMinima,
-        15 => SearchMode::HalfProgress,
-        // 0, 3, 7, 8, 9
+        3 | 13 | 15 => SearchMode::LocalMinima,
+        // 0, 7, 8, 9, 12
         _ => SearchMode::Standard,
     }
 }
@@ -431,6 +431,7 @@ where
             1 => SearchMode::MaxProgress(2),
             2 => SearchMode::LocalMinima,
             3 => SearchMode::SomeProgress(5),
+            4 => SearchMode::HalfProgress,
 
             _ => SearchMode::Standard,
         }
