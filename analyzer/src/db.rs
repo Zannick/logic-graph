@@ -234,21 +234,21 @@ where
 
         opts2.set_merge_operator_associative("min", min_merge);
 
-        let cf_opts = opts2.clone();
-        opts2.set_memtable_whole_key_filtering(true);
-        opts2.create_missing_column_families(true);
-
-        let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts.clone());
-        let nextcf = ColumnFamilyDescriptor::new(NEXT, cf_opts);
-
         let mut block_opts2 = BlockBasedOptions::default();
-        // blockdb caches = 2 GiB
-        let cache3 = Cache::new_lru_cache(GB)?;
+        // blockdb caches = 5 GiB
+        let cache3 = Cache::new_lru_cache(4 * GB)?;
         let cache4 = Cache::new_lru_cache(GB)?;
         block_opts2.set_block_cache(&cache3);
         block_opts2.set_block_cache_compressed(&cache4);
         block_opts2.set_block_size(1024);
         opts2.set_block_based_table_factory(&block_opts2);
+
+        let cf_opts = opts2.clone();
+        opts2.set_memtable_whole_key_filtering(true);
+        opts2.create_missing_column_families(true);
+        
+        let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts.clone());
+        let nextcf = ColumnFamilyDescriptor::new(NEXT, cf_opts);
 
         // Same 1 + 2 = 3 GiB for this one
         let _ = DB::destroy(&opts2, &path2);
