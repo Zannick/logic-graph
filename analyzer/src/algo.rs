@@ -16,7 +16,7 @@ use std::time::{Duration, Instant};
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
     Standard,
-    MaxProgress,
+    MaxProgress(usize),
     SomeProgress(usize),
     HalfProgress,
     Dependent,
@@ -26,7 +26,7 @@ enum SearchMode {
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
-        2 | 4 | 5 => SearchMode::MaxProgress,
+        2 | 4 | 5 => SearchMode::MaxProgress(2),
         9 => SearchMode::SomeProgress(1),
         11 => SearchMode::SomeProgress(2),
         13 => SearchMode::SomeProgress(4),
@@ -223,6 +223,7 @@ where
     iters: AtomicUsize,
     deadends: AtomicU32,
     held: AtomicUsize,
+    organic_solution: AtomicBool,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -353,6 +354,7 @@ where
             iters: 0.into(),
             deadends: 0.into(),
             held: 0.into(),
+            organic_solution: false.into(),
         })
     }
 
@@ -362,6 +364,8 @@ where
         if prev.is_some() {
             self.queue.db().record_one(&mut ctx, prev).unwrap();
         }
+
+        self.organic_solution.store(true, Ordering::Release);
 
         let old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
@@ -419,9 +423,12 @@ where
     }
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
+        if !self.organic_solution.load(Ordering::Acquire) {
+            return SearchMode::MaxProgress(1);
+        }
         match iters % 8 {
             0 => SearchMode::SomeProgress((iters / 8) % 32),
-            1 => SearchMode::MaxProgress,
+            1 => SearchMode::MaxProgress(2),
             2 => SearchMode::HalfProgress,
             3 => SearchMode::SomeProgress(5),
 
@@ -453,7 +460,7 @@ where
                 };
 
                 let items = match current_mode {
-                    SearchMode::MaxProgress => self.queue.pop_max_progress(2),
+                    SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
                     SearchMode::HalfProgress => self.queue.pop_half_progress(2),
                     SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
                     _ => self.queue.pop_round_robin(),
