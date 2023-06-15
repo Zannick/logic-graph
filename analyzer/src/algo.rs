@@ -28,11 +28,10 @@ fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
         2 | 4 | 5 => SearchMode::MaxProgress(2),
-        9 => SearchMode::SomeProgress(1),
         11 => SearchMode::SomeProgress(3),
         12 | 13 => SearchMode::LocalMinima,
         15 => SearchMode::HalfProgress,
-        // 0, 3, 7, 8
+        // 0, 3, 7, 8, 9
         _ => SearchMode::Standard,
     }
 }
