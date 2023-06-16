@@ -246,7 +246,7 @@ where
         let cf_opts = opts2.clone();
         opts2.set_memtable_whole_key_filtering(true);
         opts2.create_missing_column_families(true);
-        
+
         let bestcf = ColumnFamilyDescriptor::new(BEST, cf_opts.clone());
         let nextcf = ColumnFamilyDescriptor::new(NEXT, cf_opts);
 
@@ -1035,13 +1035,18 @@ where
     }
 
     pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), Error> {
-        let mut iter_opts = ReadOptions::default();
-        iter_opts.set_tailing(true);
-        iter_opts.fill_cache(false);
-        let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
+        let mut start_key = None;
 
         let mut end = false;
         while !end && !exit_signal.load(Ordering::Acquire) {
+            let mut iter_opts = ReadOptions::default();
+            iter_opts.set_tailing(true);
+            iter_opts.fill_cache(false);
+            if let Some(skey) = start_key {
+                iter_opts.set_iterate_lower_bound(skey);
+            }
+            let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
+
             let mut batch = WriteBatchWithTransaction::<false>::default();
             let mut pskips = 0;
             let mut dup_pskips = 0;
@@ -1087,6 +1092,7 @@ where
                     break;
                 }
             }
+            start_key = iter.next().map(|p| p.unwrap().0);
             self.db.write_opt(batch, &self.write_opts).unwrap();
             self.reset_estimates_actual();
             drop(_retrieve_lock);
