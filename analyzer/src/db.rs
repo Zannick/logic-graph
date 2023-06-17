@@ -863,7 +863,7 @@ where
 
         // This is the only part of the chain where the hist and prev are changed
         self.statedb
-            .merge_cf(
+            .merge_cf_opt(
                 self.best_cf(),
                 &state_key,
                 Self::serialize_data(StateData {
@@ -871,6 +871,7 @@ where
                     hist,
                     prev: prev.clone(),
                 }),
+                &self.write_opts,
             )
             .unwrap();
 
