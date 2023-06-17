@@ -27,11 +27,10 @@ enum SearchMode {
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
         1 | 6 | 10 | 14 => SearchMode::Dependent,
-        2 | 4 => SearchMode::MaxProgress(2),
         5 => SearchMode::MaxProgress(4),
         11 => SearchMode::SomeProgress(3),
-        3 | 13 | 15 => SearchMode::LocalMinima,
-        // 0, 7, 8, 9, 12
+        2 | 3 | 13 | 15 => SearchMode::LocalMinima,
+        // 0, 4, 7, 8, 9, 12
         _ => SearchMode::Standard,
     }
 }
@@ -424,7 +423,7 @@ where
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
         if !self.organic_solution.load(Ordering::Acquire) {
-            return SearchMode::MaxProgress(1);
+            return SearchMode::MaxProgress(2);
         }
         match iters % 8 {
             0 => SearchMode::SomeProgress((iters / 8) % 32),

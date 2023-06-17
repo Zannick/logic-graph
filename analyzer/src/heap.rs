@@ -334,6 +334,8 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
     retrieving: AtomicBool,
+    // Locked by queue!
+    processed_counts: Vec<AtomicUsize>,
 }
 
 impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
@@ -361,6 +363,8 @@ where
     {
         let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), solutions)?;
         let max_possible_progress = db.scorer().remaining_visits(startctx.get());
+        let mut processed_counts = Vec::new();
+        processed_counts.resize_with(max_possible_progress + 1, || 0.into());
         let q = RocksBackedQueue {
             queue: Mutex::new(BucketQueue::new()),
             db,
@@ -375,6 +379,7 @@ where
             evictions: 0.into(),
             retrievals: 0.into(),
             retrieving: false.into(),
+            processed_counts,
         };
         let s = Instant::now();
         let c = q.score(startctx);
@@ -607,6 +612,7 @@ where
                     self.db.count_duplicate();
                     continue;
                 }
+                self.processed_counts[progress].fetch_add(1, Ordering::Release);
                 return Ok(Some(ContextWrapper::with_elapsed(ctx, elapsed)));
             }
             // Retrieve some from db
@@ -615,10 +621,11 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return Ok(self
-                        .db
-                        .pop(0)?
-                        .map(|(el, elapsed)| ContextWrapper::with_elapsed(el, elapsed)));
+                    return Ok(self.db.pop(0)?.map(|(el, elapsed)| {
+                        let progress = self.db.progress(&el);
+                        self.processed_counts[progress].fetch_add(1, Ordering::Release);
+                        ContextWrapper::with_elapsed(el, elapsed)
+                    }));
                 }
             }
         }
@@ -703,6 +710,9 @@ where
                     self.db.count_duplicate();
                     continue;
                 }
+                let progress = self.db.progress(&ctx);
+                self.processed_counts[progress].fetch_add(1, Ordering::Release);
+
                 vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                 if vec.len() == n {
                     return Ok(vec);
@@ -714,6 +724,8 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else if let Some((ctx, elapsed)) = self.db.pop(0)? {
+                    let progress = self.db.progress(&ctx);
+                    self.processed_counts[progress].fetch_add(1, Ordering::Release);
                     vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                 } else {
                     return Ok(vec);
@@ -787,6 +799,8 @@ where
                     self.db.count_duplicate();
                     continue;
                 }
+                let progress = self.db.progress(&ctx);
+                self.processed_counts[progress].fetch_add(1, Ordering::Release);
                 vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                 if vec.len() == n {
                     return Ok(vec);
@@ -837,6 +851,8 @@ where
                                 continue;
                             }
 
+                            let progress = self.db.progress(&ctx);
+                            self.processed_counts[progress].fetch_add(1, Ordering::Release);
                             vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                             continue 'next;
                         }
@@ -862,6 +878,8 @@ where
                                     self.db.count_duplicate();
                                     continue;
                                 }
+                                let progress = self.db.progress(&ctx);
+                                self.processed_counts[progress].fetch_add(1, Ordering::Release);
                                 vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
                                 continue 'next;
                             }
@@ -883,6 +901,8 @@ where
                         queue = self.do_retrieve_and_insert(0, queue)?;
                         self.retrieving.store(false, Ordering::Release);
                     } else if let Some((el, elapsed)) = self.db.pop(0)? {
+                        let progress = self.db.progress(&el);
+                        self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         return Ok(vec![ContextWrapper::with_elapsed(el, elapsed)]);
                     }
                 }
@@ -1024,8 +1044,14 @@ where
             progresses.push(progress);
             prog_score.push((progress, score));
         }
-        // unlock
         let queue_buckets = queue.bucket_sizes();
+        let mut processed: Vec<f64> = Vec::new();
+        for (progress, x) in self.processed_counts.iter().enumerate() {
+            let progress: u32 = progress.try_into().unwrap();
+            let progress: f64 = progress.into();
+            processed.extend(std::iter::repeat(progress).take(x.swap(0, Ordering::AcqRel)));
+        }
+        // unlock
         drop(queue);
 
         let h = Histogram::from_slice(
@@ -1048,6 +1074,16 @@ where
         println!(
             "Heap scores by progress level:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
+        );
+
+        let h = Histogram::from_slice(
+            processed.as_slice(),
+            HistogramBins::Count(self.max_possible_progress),
+        );
+        let v = ContinuousView::new().add(h).x_label("progress");
+        println!(
+            "States checked since last time:\n{}",
+            Page::single(&v).dimensions(90, 10).to_text().unwrap(),
         );
     }
 }
