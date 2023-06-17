@@ -143,6 +143,10 @@ pub trait World: Sync {
         &self,
         act_id: <Self::Action as Action>::ActionId,
     ) -> <Self::Exit as Exit>::SpotId;
+    fn get_exit_spot(
+        &self,
+        exit_id: <Self::Exit as Exit>::ExitId,
+    ) -> <Self::Exit as Exit>::SpotId;
     fn is_global_action(&self, act_id: <Self::Action as Action>::ActionId) -> bool {
         self.get_action_spot(act_id) == <Self::Exit as Exit>::SpotId::default()
     }

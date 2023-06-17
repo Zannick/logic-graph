@@ -79,12 +79,19 @@ pub trait Ctx:
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum History<ItemId, SpotId, LocId, ExitId, ActionId, WarpId> {
+    // Warp
     W(WarpId, SpotId),
+    // Get
     G(ItemId, LocId),
+    // Exit
     E(ExitId),
+    // GetExit
     H(ItemId, ExitId),
+    // Local movement
     L(SpotId),
+    // Action
     A(ActionId),
+    // Condensed local movement
     C(SpotId),
 }
 

@@ -42,20 +42,28 @@ where
     T: context::Ctx<World = W>,
     L: world::Location<Context = T>,
 {
-    use context::History;
+    use context::{ContextWrapper, History, HistoryAlias, Wrapper};
     use std::str::FromStr;
     use world::Exit;
-    let mut hist: Vec<context::HistoryAlias<T>> = Vec::new();
+    let mut hist: Vec<HistoryAlias<T>> = Vec::new();
     for line in route.lines() {
         let line = line.trim();
         if !line.is_empty() {
             hist.push(History::from_str(line)?);
         }
     }
-    let mut ctx = context::ContextWrapper::new(startctx.clone());
+    let mut ctx = ContextWrapper::new(startctx.clone());
     for (i, h) in hist.into_iter().enumerate() {
+        let pos = Wrapper::get(&ctx).position();
         match h {
             History::G(item, loc_id) => {
+                let spot_id = world.get_location_spot(loc_id);
+                if pos != spot_id {
+                    ctx = access::move_to(world, ctx, spot_id).expect(&format!(
+                        "Could not complete route step {}: couldn't reach {} from {}",
+                        i, spot_id, pos
+                    ));
+                }
                 if item == Default::default() {
                     let item = world.get_location(loc_id).item();
                     ctx.replay(world, History::G(item, loc_id));
@@ -64,6 +72,14 @@ where
                 }
             }
             History::H(item, exit_id) => {
+                let spot_id = world.get_exit_spot(exit_id);
+                if pos != spot_id {
+                    ctx = access::move_to(world, ctx, spot_id).expect(&format!(
+                        "Could not complete route step {}: couldn't reach {} from {}",
+                        i, spot_id, pos
+                    ));
+                }
+
                 if item == Default::default() {
                     let exit = world.get_exit(exit_id);
                     if let Some(loc_id) = exit.loc_id() {
@@ -85,13 +101,22 @@ where
                 ));
             }
             History::L(spot_id) | History::C(spot_id) => {
-                let pos = context::Wrapper::get(&ctx).position();
                 ctx = access::move_to(world, ctx, spot_id).expect(&format!(
                     "Could not complete route step {}: couldn't reach {} from {}",
                     i, spot_id, pos
                 ));
             }
-            _ => ctx.replay(world, h),
+            History::W(..) => ctx.replay(world, h),
+            History::A(action_id) => {
+                let spot_id = world.get_action_spot(action_id);
+                if spot_id != Default::default() && pos != spot_id {
+                    ctx = access::move_to(world, ctx, spot_id).expect(&format!(
+                        "Could not complete route step {}: couldn't reach {} from {}",
+                        i, spot_id, pos
+                    ));
+                }
+                ctx.replay(world, h);
+            }
         }
     }
     Ok(ctx)

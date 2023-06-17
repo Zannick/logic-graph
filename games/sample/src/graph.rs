@@ -2225,6 +2225,144 @@ impl world::World for World {
         }
     }
 
+    fn get_exit_spot(&self, exit_id: ExitId) -> SpotId {
+        match exit_id {
+            ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1
+            | ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1 => {
+                SpotId::Deku_Tree__Lobby__Center
+            }
+            ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1 => {
+                SpotId::Deku_Tree__Lobby__Vines
+            }
+            ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1
+            | ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1 => {
+                SpotId::Deku_Tree__Floor_2__Lower
+            }
+            ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1
+            | ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2
+            | ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1
+            | ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1
+            | ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1 => {
+                SpotId::Deku_Tree__Floor_2__Vines
+            }
+            ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1
+            | ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1
+            | ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1 => {
+                SpotId::Deku_Tree__Floor_2__Slingshot_Door
+            }
+            ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1 => {
+                SpotId::Deku_Tree__Scrub_Room__Entry
+            }
+            ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1 => {
+                SpotId::Deku_Tree__Scrub_Room__Rear
+            }
+            ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1 => {
+                SpotId::Deku_Tree__Slingshot_Room__Entry
+            }
+            ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1 => {
+                SpotId::Deku_Tree__Slingshot_Room__Slingshot
+            }
+            ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1 => {
+                SpotId::Deku_Tree__Slingshot_Upper__Ledge
+            }
+            ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1
+            | ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1 => {
+                SpotId::Deku_Tree__Floor_3__Door
+            }
+            ExitId::Deku_Tree__Floor_3__Door__Break_Web => SpotId::Deku_Tree__Floor_3__Door,
+            ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => {
+                SpotId::Deku_Tree__Compass_Room__Entry
+            }
+            ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                SpotId::Deku_Tree__Compass_Room__Entry
+            }
+            ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1 => {
+                SpotId::Deku_Tree__Basement_1__Center
+            }
+            ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => {
+                SpotId::Deku_Tree__Basement_1__Corner
+            }
+            ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                SpotId::Deku_Tree__Basement_1__Corner
+            }
+            ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1 => {
+                SpotId::Deku_Tree__Basement_1__South_Door
+            }
+            ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => {
+                SpotId::Deku_Tree__Back_Room__Northwest
+            }
+            ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => {
+                SpotId::Deku_Tree__Back_Room__East
+            }
+            ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1 => {
+                SpotId::Deku_Tree__Skull_Room__Entry
+            }
+            ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1 => {
+                SpotId::Deku_Tree__Basement_Ledge__Block
+            }
+            ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1 => {
+                SpotId::Deku_Tree__Basement_Ledge__Web
+            }
+            ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1 => {
+                SpotId::Deku_Tree__Basement_2__Pool
+            }
+            ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1 => {
+                SpotId::Deku_Tree__Basement_2__Boss_Door
+            }
+            ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => SpotId::Deku_Tree__Boss_Room__Arena,
+            ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1 => {
+                SpotId::KF__Links_House__Entry
+            }
+            ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1 => {
+                SpotId::KF__Kokiri_Village__Links_Porch
+            }
+            ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1 => {
+                SpotId::KF__Kokiri_Village__Midos_Porch
+            }
+            ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1 => {
+                SpotId::KF__Kokiri_Village__Know_it_all_Porch
+            }
+            ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1 => {
+                SpotId::KF__Kokiri_Village__Training_Center
+            }
+            ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1 => {
+                SpotId::KF__Kokiri_Village__Shop_Porch
+            }
+            ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1 => {
+                SpotId::KF__Kokiri_Village__Sarias_Porch
+            }
+            ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1 => {
+                SpotId::KF__Kokiri_Village__Midos_Guardpost
+            }
+            ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1 => {
+                SpotId::KF__Boulder_Maze__Entry
+            }
+            ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1 => {
+                SpotId::KF__Baba_Corridor__Village_Side
+            }
+            ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1 => {
+                SpotId::KF__Baba_Corridor__Tree_Side
+            }
+            ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1 => {
+                SpotId::KF__Outside_Deku_Tree__Entry
+            }
+            ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1 => {
+                SpotId::KF__Outside_Deku_Tree__Mouth
+            }
+            ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1 => {
+                SpotId::KF__Midos_House__Entry
+            }
+            ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1 => {
+                SpotId::KF__Know_it_all_House__Entry
+            }
+            ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1 => SpotId::KF__Shop__Entry,
+            ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1 => {
+                SpotId::Kak__Spider_House__Entry
+            }
+            _ => SpotId::None,
+        }
+    }
+
     fn get_all_spots(&self) -> &[SpotId] {
         self.raw_spots.as_slice()
     }
