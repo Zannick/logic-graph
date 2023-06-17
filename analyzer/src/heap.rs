@@ -755,10 +755,16 @@ where
 
         let min = queue.min_priority().unwrap();
         let max = queue.max_priority().unwrap();
-        let next = queue.bucket_for_peeking(max).map(|b| b.min_priority().copied()).flatten();
+        let next = queue
+            .bucket_for_peeking(max)
+            .map(|b| b.min_priority().copied())
+            .flatten();
         let mut target = 0;
         for segment in (min..max).rev() {
-            let prev = queue.bucket_for_peeking(segment).map(|b| b.min_priority().copied()).flatten();
+            let prev = queue
+                .bucket_for_peeking(segment)
+                .map(|b| b.min_priority().copied())
+                .flatten();
             if let (Some(lower), Some(higher)) = (prev, next) {
                 if higher < lower {
                     target = segment + 1;
@@ -893,14 +899,39 @@ where
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
-        let mut iskips = 0;
-        let start = Instant::now();
-        let mut vec: Vec<ContextWrapper<T>> = iter.into_iter().collect();
+        let vec: Vec<ContextWrapper<T>> = iter.into_iter().collect();
         if vec.is_empty() {
-            self.iskips.fetch_add(iskips, Ordering::Release);
             return Ok(());
         }
 
+        let vec = self.handle_extend_group(vec, prev)?;
+
+        if vec.is_empty() {
+            return Ok(());
+        }
+
+        self.internal_extend(vec)
+    }
+
+    /// Like calling extend multiple times with different values for prev,
+    /// but only enters the critical section once.
+    pub fn extend_groups<I>(&self, iter: I) -> Result<()>
+    where
+        I: IntoIterator<Item = (Vec<ContextWrapper<T>>, Option<T>)>,
+    {
+        let mut vec = Vec::new();
+        for (v, prev) in iter {
+            vec.extend(self.handle_extend_group(v, &prev)?);
+        }
+        self.internal_extend(vec)
+    }
+
+    fn handle_extend_group(
+        &self,
+        mut vec: Vec<ContextWrapper<T>>,
+        prev: &Option<T>,
+    ) -> Result<Vec<(T, usize, u32)>> {
+        let mut iskips = 0;
         let keeps = self.db.record_many(&mut vec, prev)?;
         debug_assert!(vec.len() == keeps.len());
         let vec: Vec<(T, usize, u32)> = vec
@@ -919,14 +950,20 @@ where
                 }
             })
             .collect();
-        if vec.is_empty() {
-            self.iskips.fetch_add(iskips, Ordering::Release);
-            return Ok(());
-        }
 
+        self.iskips.fetch_add(iskips, Ordering::Release);
+        Ok(vec)
+    }
+
+    fn internal_extend(&self, vec: Vec<(T, usize, u32)>) -> Result<()>
+    where
+        T: Ctx<World = W>,
+    {
         let mut evicted = None;
+        let start: Instant;
         {
             let mut queue = self.queue.lock().unwrap();
+            start = Instant::now();
             let len = queue.len();
             if len + vec.len() > self.capacity {
                 evicted = Some(Self::evict_internal(
@@ -952,7 +989,6 @@ where
             }
         }
 
-        self.iskips.fetch_add(iskips, Ordering::Release);
         Ok(())
     }
 

@@ -439,92 +439,100 @@ where
 
     pub fn search(self) -> Result<(), std::io::Error> {
         let finished = AtomicBool::new(false);
-        let threads_done = AtomicUsize::new(0);
+        let workers_done = AtomicUsize::new(0);
         let start = Mutex::new(Instant::now());
         let num_threads = rayon::current_num_threads();
+        let num_workers = (num_cpus::get() * 2 + 1) / 3;
         let res = Mutex::new(Ok(()));
-        println!("Starting search with {} threads", num_threads);
+        println!(
+            "Starting search with {} workers ({} threads)",
+            num_workers, num_threads
+        );
 
-        let run_thread = |i| {
-            let mode = mode_by_index(i);
-            let mut done = false;
-            while !finished.load(Ordering::Acquire)
-                && threads_done.load(Ordering::Acquire) < num_threads
-            {
-                let iters = self.iters.load(Ordering::Acquire);
-                let current_mode = if iters < 500_000 {
-                    SearchMode::Standard
-                } else if mode == SearchMode::Dependent {
-                    self.choose_mode(iters)
-                } else {
-                    mode
-                };
+        let run_worker =
+            |i| {
+                let mode = mode_by_index(i);
+                let mut done = false;
+                while !finished.load(Ordering::Acquire)
+                    && workers_done.load(Ordering::Acquire) < num_workers
+                {
+                    let iters = self.iters.load(Ordering::Acquire);
+                    let current_mode = if iters < 500_000 {
+                        SearchMode::Standard
+                    } else if mode == SearchMode::Dependent {
+                        self.choose_mode(iters)
+                    } else {
+                        mode
+                    };
 
-                let items = match current_mode {
-                    SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
-                    SearchMode::HalfProgress => self.queue.pop_half_progress(2),
-                    SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
-                    SearchMode::LocalMinima => self.queue.pop_local_minima(2),
-                    _ => self.queue.pop_round_robin(),
-                };
-                match items {
-                    Ok(items) => {
-                        if items.is_empty() {
-                            if !done {
-                                done = true;
-                                threads_done.fetch_add(1, Ordering::Release);
-                            }
-                            sleep(Duration::from_secs(1));
-                            continue;
-                        }
-
-                        if done {
-                            threads_done.fetch_sub(1, Ordering::Acquire);
-                            done = false;
-                        }
-
-                        self.held.fetch_add(items.len(), Ordering::Release);
-                        for ctx in items {
-                            self.held.fetch_sub(1, Ordering::Release);
-                            if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                    let items = match current_mode {
+                        SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
+                        SearchMode::HalfProgress => self.queue.pop_half_progress(2),
+                        SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
+                        SearchMode::LocalMinima => self.queue.pop_local_minima(2),
+                        _ => self.queue.pop_round_robin(),
+                    };
+                    match items {
+                        Ok(items) => {
+                            if items.is_empty() {
+                                if !done {
+                                    done = true;
+                                    workers_done.fetch_add(1, Ordering::Release);
+                                }
+                                sleep(Duration::from_secs(1));
                                 continue;
                             }
-                            let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-                            let prev = Some(ctx.get().clone());
-                            let nexts = self.process_one(ctx, iters, &start);
-                            if nexts.is_empty() {
-                                continue;
+
+                            if done {
+                                workers_done.fetch_sub(1, Ordering::Acquire);
+                                done = false;
                             }
-                            let nexts = self.extract_solutions(nexts, &prev, mode);
-                            if let Err(e) = self.queue.extend(nexts, &prev) {
+
+                            self.held.fetch_add(items.len(), Ordering::Release);
+                            let results: Vec<_> = items
+                                .into_par_iter()
+                                .filter_map(|ctx| {
+                                    self.held.fetch_sub(1, Ordering::Release);
+                                    if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                                        return None;
+                                    }
+                                    let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                                    let prev = Some(ctx.get().clone());
+                                    Some((prev, self.process_one(ctx, iters, &start)))
+                                })
+                                .collect();
+                            if results.is_empty() {
+                                return;
+                            }
+                            if let Err(e) = self.queue.extend_groups(results.into_iter().map(
+                                |(prev, nexts)| (self.extract_solutions(nexts, &prev, mode), prev),
+                            )) {
                                 let mut r = res.lock().unwrap();
                                 println!("Thread {} exiting due to error: {:?}", i, e);
                                 if r.is_ok() {
                                     *r = Err(e);
                                     finished.store(true, Ordering::Release);
                                 }
-                                return;
                             }
                         }
-                    }
-                    Err(e) => {
-                        println!("Thread {} exiting due to error: {:?}", i, e);
-                        let mut r = res.lock().unwrap();
-                        if r.is_ok() {
-                            *r = Err(e);
-                            finished.store(true, Ordering::Release);
+                        Err(e) => {
+                            println!("Thread {} exiting due to error: {:?}", i, e);
+                            let mut r = res.lock().unwrap();
+                            if r.is_ok() {
+                                *r = Err(e);
+                                finished.store(true, Ordering::Release);
+                            }
+                            return;
                         }
-                        return;
-                    }
-                };
-            }
-            println!(
-                "Thread {} exiting: fin={} done={}",
-                i,
-                finished.load(Ordering::Acquire),
-                threads_done.load(Ordering::Acquire)
-            );
-        };
+                    };
+                }
+                println!(
+                    "Thread {} exiting: fin={} done={}",
+                    i,
+                    finished.load(Ordering::Acquire),
+                    workers_done.load(Ordering::Acquire)
+                );
+            };
 
         rayon::scope(|scope| {
             scope.spawn(|_| {
@@ -540,8 +548,8 @@ where
             });
 
             rayon::scope(|sc2| {
-                for i in 0..num_threads {
-                    sc2.spawn(move |_| run_thread(i));
+                for i in 0..num_workers {
+                    sc2.spawn(move |_| run_worker(i));
                 }
             });
 
