@@ -202,8 +202,9 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     fn pop_segment_min(&mut self, min_segment: usize) -> Option<(B::Item, P)> {
         let min_segment = std::cmp::max(min_segment, self.min_priority()?);
         for segment in min_segment..=self.max_priority()? {
-            if let Some(b) = self.bucket_for_removing(segment) {
+            if let Some(b) = self.bucket_for_replacing(segment) {
                 if let Some(x) = b.pop_min() {
+                    self.items_replaced(segment, 1, 0);
                     return Some(x);
                 }
             }
