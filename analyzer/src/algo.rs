@@ -61,50 +61,32 @@ where
     L: Location<Context = T>,
     E: Exit<ExitId = L::ExitId, Context = T, Currency = L::Currency>,
 {
-    let mut ctx_list = vec![ctx];
-    let (mut locs, exit) = visitable_locations(world, ctx_list[0].get());
+    let (mut locs, exit) = visitable_locations(world, ctx.get());
     if locs.is_empty() && exit.is_none() {
         return Vec::new();
     }
     locs.sort_unstable_by_key(|loc| loc.time());
+    let mut result = Vec::new();
     for loc in locs {
-        let last_ctxs = ctx_list;
-        ctx_list = Vec::new();
-        ctx_list.reserve(last_ctxs.len() * 2);
-        for mut ctx in last_ctxs {
-            if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
-                // Major branching factor: sometimes we can try skipping a location:
-                // 1. If location has a cost, we might not want it.
-                // 2. Otherwise, any location is potentially skippable.
-                //    But it's not worth skipping locations that are free in time and money;
-                //    they come along for free with other locations, or we route differently.
-                if loc.time() > 0 || !loc.is_free() {
-                    let mut newctx = ctx.clone();
-                    newctx.get_mut().skip(loc.id());
-                    // Check if this loc is required. If it is, we can't skip it.
-                    if can_win_just_locations(world, newctx.get()) {
-                        ctx_list.push(newctx);
-                    }
-                }
-
-                // Get the item and mark the location visited.
-                ctx.visit(world, loc);
-            }
-            ctx_list.push(ctx);
+        if ctx.get().todo(loc.id()) && loc.can_access(ctx.get()) {
+            // Get the item and mark the location visited.
+            let mut newctx = ctx.clone();
+            newctx.visit(world, loc);
+            result.push(newctx);
         }
     }
 
     if let Some(ExitWithLoc(l, e)) = exit {
         let exit = world.get_exit(e);
         let loc = world.get_location(l);
-        for ctx in ctx_list.iter_mut() {
-            if ctx.get().todo(l) && loc.can_access(ctx.get()) && exit.can_access(ctx.get()) {
-                // Get the item and move along the exit.
-                ctx.visit_exit(world, loc, exit);
-            }
+        if ctx.get().todo(l) && loc.can_access(ctx.get()) && exit.can_access(ctx.get()) {
+            // Get the item and move along the exit.
+            let mut newctx = ctx.clone();
+            newctx.visit_exit(world, loc, exit);
+            result.push(newctx);
         }
     }
-    ctx_list
+    result
 }
 
 pub fn activate_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Vec<ContextWrapper<T>>
