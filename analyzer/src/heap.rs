@@ -767,7 +767,7 @@ where
 
         let min = queue.min_priority().unwrap();
         let max = queue.max_priority().unwrap();
-        let next = queue
+        let mut next = queue
             .bucket_for_peeking(max)
             .map(|b| b.min_priority().copied())
             .flatten();
@@ -783,6 +783,7 @@ where
                     break;
                 }
             }
+            next = prev;
         }
 
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
