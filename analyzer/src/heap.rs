@@ -832,17 +832,17 @@ where
                             // Retrieve the best elapsed time.
                             let elapsed = self.db.get_best_elapsed(&ctx)?;
                             let est = self.db.estimated_remaining_time(&ctx);
+                            let max_time = self.db.max_time();
 
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
                             if !did_retrieve
                                 && !self.db.is_empty()
                                 && db_best < u32::MAX
-                                && elapsed + est > db_best
+                                && elapsed + est > db_best + max_time / 100
                             {
                                 diffs.push((segment, elapsed + est - db_best));
                             }
 
-                            let max_time = self.db.max_time();
                             if elapsed > max_time || elapsed + est > max_time {
                                 self.pskips.fetch_add(1, Ordering::Release);
                                 continue;
