@@ -928,10 +928,66 @@ where
         let vec = self.handle_extend_group(vec, prev)?;
 
         if vec.is_empty() {
-            return Ok(());
+            Ok(())
+        } else {
+            self.internal_extend(vec)
+        }
+    }
+
+    /// Adds all the given elements to the queue, except for any
+    /// elements with elapsed time greater than the allowed maximum
+    /// or having been processed before.
+    /// Records all the given elements *plus* the one to keep, as the children
+    /// of the prior state (prev). Note that the one kept may have elapsed time
+    /// greater than the allowed maximum, or may have been processed before.
+    pub fn extend_keep_one(
+        &self,
+        mut elements: Vec<ContextWrapper<T>>,
+        keep: &ContextWrapper<T>,
+        prev: &Option<T>,
+    ) -> Result<()> {
+        elements.push(keep.clone());
+        let mut vec = self.handle_extend_group(elements, prev)?;
+        if let Some((ctx, ..)) = vec.last() {
+            // It must always be the last element if present; handle_extend_group does not reorder.
+            if ctx == keep.get() {
+                vec.pop();
+            }
+            self.internal_extend(vec)
+        } else {
+            Ok(())
+        }
+    }
+
+    /// Adds all the given elements to the queue, except for any
+    /// elements with elapsed time greater than the allowed maximum
+    /// or having been processed before. Of the ones remaining, the one with
+    /// lowest priority is returned instead of being added to the queue.
+    ///
+    /// All elements must have the same prior state (supplied in prev).
+    pub fn extend_get_best<I>(&self, iter: I, prev: &Option<T>) -> Result<Option<ContextWrapper<T>>>
+    where
+        I: IntoIterator<Item = ContextWrapper<T>>,
+    {
+        let vec: Vec<ContextWrapper<T>> = iter.into_iter().collect();
+        if vec.is_empty() {
+            return Ok(None);
         }
 
-        self.internal_extend(vec)
+        let mut vec = self.handle_extend_group(vec, prev)?;
+
+        if let Some((mi, _)) = vec
+            .iter()
+            .enumerate()
+            .min_by_key(|(_, (_, p, priority))| (self.max_possible_progress - p, priority))
+        {
+            let (ctx, _, priority) = vec.swap_remove(mi);
+            let elapsed = priority - self.db.estimated_remaining_time(&ctx);
+            self.internal_extend(vec)?;
+            Ok(Some(ContextWrapper::with_elapsed(ctx, elapsed)))
+        } else {
+            Ok(None)
+        }
     }
 
     /// Like calling extend multiple times with different values for prev,
@@ -955,6 +1011,9 @@ where
         let mut iskips = 0;
         let keeps = self.db.record_many(&mut vec, prev)?;
         debug_assert!(vec.len() == keeps.len());
+        // TODO: Is it inefficient to deconstruct the wrapper here,
+        // and then reconstruct the wrapper for the one element we keep,
+        // or can we extract it first somehow?
         let vec: Vec<(T, usize, u32)> = vec
             .into_iter()
             .zip(keeps.into_iter())
