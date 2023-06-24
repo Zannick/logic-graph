@@ -247,14 +247,12 @@ where
         let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
 
         let mut wins = Vec::new();
-        let mut others = 0;
+        let mut others = Vec::new();
         for c in routes {
             if world.won(c.get()) {
                 wins.push(c);
             } else {
-                // We don't save the others at all.
-                // (No intermediate states are created to avoid history duplication.)
-                others += 1;
+                others.push(c)
             }
         }
 
@@ -264,13 +262,13 @@ where
             println!(
                 "Provided extra routes: {} winners, {} not\nwinning times: {:?}",
                 wins.len(),
-                others,
+                others.len(),
                 wins.iter().map(|c| c.elapsed()).collect::<Vec<_>>()
             );
-        } else if others > 0 {
+        } else if !others.is_empty() {
             println!(
                 "Provided {} non-winning routes, performing greedy search...",
-                others
+                others.len()
             );
         } else {
             println!("No routes provided, performing greedy search...");
@@ -303,7 +301,7 @@ where
             wonctx.elapsed(),
             wonctx.recent_history().into_iter().copied().collect(),
         );
-        for w in wins {
+        for w in &wins {
             solutions.insert(
                 w.elapsed(),
                 w.recent_history().into_iter().copied().collect(),
@@ -328,7 +326,7 @@ where
         queue.push(startctx.clone(), &None).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
         println!("Queue starts with {} elements", queue.len());
-        Ok(Search {
+        let s = Search {
             world,
             solutions,
             queue,
@@ -336,7 +334,15 @@ where
             deadends: 0.into(),
             held: 0.into(),
             organic_solution: false.into(),
-        })
+        };
+        s.recreate_store(&startctx, wonctx.recent_history().into_iter().copied().collect()).unwrap();
+        for mut w in wins {
+            s.recreate_store(&startctx, w.remove_history().0).unwrap();
+        }
+        for mut o in others {
+            s.recreate_store(&startctx, o.remove_history().0).unwrap();
+        }
+        Ok(s)
     }
 
     fn handle_solution(&self, mut ctx: ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
@@ -416,6 +422,41 @@ where
 
             _ => SearchMode::Standard,
         }
+    }
+
+    pub fn recreate_store(
+        &self,
+        startctx: &ContextWrapper<T>,
+        mut steps: Vec<HistoryAlias<T>>,
+    ) -> anyhow::Result<()> {
+        let mut ctx = startctx.clone();
+        // It doesn't actually matter what the last one is.
+        let _last = steps.pop().unwrap();
+        for hist in steps {
+            if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                ctx.replay(self.world, hist);
+                ctx.remove_history();
+            } else {
+                let prev = Some(ctx.get().clone());
+                let mut next = self.single_step(ctx);
+                if let Some((ci, _)) = next
+                    .iter()
+                    .enumerate()
+                    .find(|(_, c)| c.recent_history().last() == Some(&hist))
+                {
+                    // Assumption: no subsequent state leads to victory (aside from the last state?)
+                    ctx = next.swap_remove(ci);
+                    self.queue.extend_keep_one(next, &ctx, &prev)?;
+                    ctx.remove_history();
+                } else {
+                    // We didn't find the desired state. Probably it was skipped as past the deadline.
+                    return self.queue.extend(next, &prev);
+                }
+            }
+        }
+        let prev = Some(ctx.get().clone());
+        let next = self.single_step(ctx);
+        self.queue.extend(next, &prev)
     }
 
     pub fn search(self) -> Result<(), std::io::Error> {
