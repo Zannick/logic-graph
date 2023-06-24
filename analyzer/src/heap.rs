@@ -330,7 +330,7 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     max_evictions: usize,
     min_reshuffle: usize,
     max_reshuffle: usize,
-    max_possible_progress: usize,
+    pub max_possible_progress: usize,
     evictions: AtomicUsize,
     retrievals: AtomicUsize,
     retrieving: AtomicBool,

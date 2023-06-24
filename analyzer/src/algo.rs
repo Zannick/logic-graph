@@ -21,6 +21,8 @@ enum SearchMode {
     HalfProgress,
     Dependent,
     LocalMinima,
+    Greedy,
+    Start,
     Unknown,
 }
 
@@ -205,6 +207,7 @@ where
     deadends: AtomicU32,
     held: AtomicUsize,
     organic_solution: AtomicBool,
+    organic_level: AtomicUsize,
 }
 
 impl<'a, W, T, L, E> Search<'a, W, T>
@@ -216,7 +219,7 @@ where
 {
     fn find_greedy_win(world: &W, startctx: &ContextWrapper<T>) -> ContextWrapper<T> {
         let start = Instant::now();
-        match greedy_search(world, &startctx, u32::MAX) {
+        match greedy_search(world, &startctx, u32::MAX, 9) {
             Ok(wonctx) => {
                 println!(
                     "Finished greedy search in {:?} with a result of {}ms",
@@ -334,13 +337,21 @@ where
             deadends: 0.into(),
             held: 0.into(),
             organic_solution: false.into(),
+            organic_level: 0.into(),
         };
-        s.recreate_store(&startctx, wonctx.recent_history().into_iter().copied().collect()).unwrap();
+        s.recreate_store(
+            &startctx,
+            wonctx.recent_history().into_iter().copied().collect(),
+            SearchMode::Start,
+        )
+        .unwrap();
         for mut w in wins {
-            s.recreate_store(&startctx, w.remove_history().0).unwrap();
+            s.recreate_store(&startctx, w.remove_history().0, SearchMode::Start)
+                .unwrap();
         }
         for mut o in others {
-            s.recreate_store(&startctx, o.remove_history().0).unwrap();
+            s.recreate_store(&startctx, o.remove_history().0, SearchMode::Start)
+                .unwrap();
         }
         Ok(s)
     }
@@ -426,10 +437,11 @@ where
         }
     }
 
-    pub fn recreate_store(
+    fn recreate_store(
         &self,
         startctx: &ContextWrapper<T>,
         mut steps: Vec<HistoryAlias<T>>,
+        mode: SearchMode,
     ) -> anyhow::Result<()> {
         let mut ctx = startctx.clone();
         // It doesn't actually matter what the last one is.
@@ -458,6 +470,7 @@ where
         }
         let prev = Some(ctx.get().clone());
         let next = self.single_step(ctx);
+        let next = self.extract_solutions(next, &prev, mode);
         self.queue.extend(next, &prev)
     }
 
@@ -472,6 +485,98 @@ where
             "Starting search with {} workers ({} threads)",
             num_workers, num_threads
         );
+
+        let greedy = || {
+            let mut done = false;
+            while !finished.load(Ordering::Acquire)
+                && workers_done.load(Ordering::Acquire) < num_workers
+            {
+                let level = self.organic_level.load(Ordering::Acquire);
+                if level < self.queue.max_possible_progress / 2 {
+                    sleep(Duration::from_secs(1));
+                    continue;
+                }
+
+                match self.queue.pop_min_progress(level, 1) {
+                    Ok(mut items) => {
+                        let ctx = if let Some(item) = items.pop() {
+                            item
+                        } else {
+                            if !done {
+                                done = true;
+                                workers_done.fetch_add(1, Ordering::Release);
+                            }
+                            sleep(Duration::from_secs(1));
+                            continue;
+                        };
+
+                        if done {
+                            workers_done.fetch_sub(1, Ordering::Acquire);
+                            done = false;
+                        }
+
+                        if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                            continue;
+                        }
+                        let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                        self.check_status_update(&start, iters, &ctx);
+                        let max_time = self.queue.max_time();
+
+                        // get remaining locations
+                        let remaining = self.queue.db().scorer().remaining_locations(ctx.get());
+                        let results = if remaining.len() < 5 {
+                            let mut psearch = ctx.clone();
+
+                            for loc_id in &remaining {
+                                psearch.get_mut().skip(*loc_id);
+                            }
+
+                            remaining
+                                .into_par_iter()
+                                .map(|loc_id| {
+                                    let mut c = psearch.clone();
+                                    c.get_mut().reset(loc_id);
+                                    let res = match greedy_search(self.world, &c, max_time, 2) {
+                                        Ok(c) | Err(c) => c,
+                                    };
+                                    res
+                                })
+                                .collect()
+                        } else {
+                            vec![match greedy_search(self.world, &ctx, max_time, 2) {
+                                Ok(c) | Err(c) => c,
+                            }]
+                        };
+
+                        for mut c in results {
+                            let hist = c.remove_history().0;
+                            if hist.is_empty() {
+                                continue;
+                            }
+
+                            if let Err(e) = self.recreate_store(&ctx, hist, SearchMode::Greedy) {
+                                println!("Thread greedy exiting due to error: {:?}", e);
+                                let mut r = res.lock().unwrap();
+                                if r.is_ok() {
+                                    *r = Err(e);
+                                    finished.store(true, Ordering::Release);
+                                }
+                                return;
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        println!("Thread greedy exiting due to error: {:?}", e);
+                        let mut r = res.lock().unwrap();
+                        if r.is_ok() {
+                            *r = Err(e);
+                            finished.store(true, Ordering::Release);
+                        }
+                        return;
+                    }
+                }
+            }
+        };
 
         let run_worker =
             |i| {
@@ -521,8 +626,18 @@ where
                                         return None;
                                     }
                                     let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                                    let progress = self.queue.db().progress(ctx.get());
                                     let prev = Some(ctx.get().clone());
-                                    Some((prev, self.process_one(ctx, iters, &start)))
+                                    let vec = self.process_one(ctx, iters, &start);
+                                    if progress == self.organic_level.load(Ordering::Acquire) {
+                                        if vec.iter().any(|c| {
+                                            self.queue.db().progress(c.get()) == progress + 1
+                                        }) {
+                                            self.organic_level
+                                                .fetch_max(progress + 1, Ordering::Release);
+                                        }
+                                    }
+                                    Some((prev, vec))
                                 })
                                 .collect();
                             if results.is_empty() {
@@ -572,9 +687,10 @@ where
             });
 
             rayon::scope(|sc2| {
-                for i in 0..num_workers {
+                for i in 0..(num_workers - 1) {
                     sc2.spawn(move |_| run_worker(i));
                 }
+                sc2.spawn(|_| greedy());
             });
 
             println!("Workers all exited, marking finished");
@@ -604,9 +720,7 @@ where
         iters: usize,
         start: &Mutex<Instant>,
     ) -> Vec<ContextWrapper<T>> {
-        if iters % 100_000 == 0 {
-            self.print_status_update(&start, iters, 100_000, &ctx);
-        }
+        self.check_status_update(&start, iters, &ctx);
 
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
@@ -618,6 +732,12 @@ where
         }
 
         self.single_step(ctx)
+    }
+
+    fn check_status_update(&self, start: &Mutex<Instant>, iters: usize, ctx: &ContextWrapper<T>) {
+        if iters % 100_000 == 0 {
+            self.print_status_update(start, iters, 100_000, ctx);
+        }
     }
 
     fn print_status_update(
@@ -642,7 +762,7 @@ where
         let max_time = self.queue.max_time();
         let pending = self.held.load(Ordering::Acquire);
         println!(
-            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms) ---\n\
+            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
             estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
@@ -654,6 +774,7 @@ where
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
             max_time,
+            self.organic_level.load(Ordering::Acquire),
             self.queue.heap_len(),
             pending,
             self.queue.db_len(),
