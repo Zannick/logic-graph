@@ -561,7 +561,7 @@ where
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<(), Error> {
         let max_time = self.max_time();
         // Records the history in the statedb, even if over time.
-        if !self.record_one(&mut el, prev)? {
+        if !self.record_one(&mut el, prev, false)? {
             return Ok(());
         }
         if el.elapsed() > max_time || self.score(&el) > max_time {
@@ -930,7 +930,12 @@ where
     /// and returns whether this context had that best time.
     /// The Wrapper object is modified to reference the stored history.
     /// A `false` value means the state should be skipped.
-    pub fn record_one(&self, el: &mut ContextWrapper<T>, prev: &Option<T>) -> Result<bool, Error> {
+    pub fn record_one(
+        &self,
+        el: &mut ContextWrapper<T>,
+        prev: &Option<T>,
+        state_only: bool,
+    ) -> Result<bool, Error> {
         let state_key = Self::serialize_state(el.get());
         let is_new =
             // TODO: Maybe we can make this deserialization cheaper as we only need one field?
@@ -956,15 +961,17 @@ where
         self.record_one_internal(state_key, el, &prev_key, &mut next_entries);
 
         if let Some(p) = prev {
-            self.statedb
-                .put_cf_opt(
-                    self.next_cf(),
-                    Self::serialize_state(p),
-                    Self::serialize_next_data(next_entries),
-                    &self.write_opts,
-                )
-                .unwrap();
-            self.next.fetch_add(1, Ordering::Release);
+            if !state_only {
+                self.statedb
+                    .put_cf_opt(
+                        self.next_cf(),
+                        Self::serialize_state(p),
+                        Self::serialize_next_data(next_entries),
+                        &self.write_opts,
+                    )
+                    .unwrap();
+                self.next.fetch_add(1, Ordering::Release);
+            }
         }
 
         if is_new {

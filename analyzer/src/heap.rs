@@ -336,6 +336,7 @@ pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
     retrieving: AtomicBool,
     // Locked by queue!
     processed_counts: Vec<AtomicUsize>,
+    world: &'w W,
 }
 
 impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
@@ -380,6 +381,7 @@ where
             retrievals: 0.into(),
             retrieving: false.into(),
             processed_counts,
+            world,
         };
         let s = Instant::now();
         let c = q.score(startctx);
@@ -483,7 +485,11 @@ where
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
         let start = Instant::now();
         // Always record the state even if it is over time.
-        if !self.db.record_one(&mut el, prev)? {
+        if !self.db.record_one(&mut el, prev, false)? {
+            return Ok(());
+        }
+        // Don't bother pushing winning states.
+        if self.world.won(el.get()) {
             return Ok(());
         }
         if el.elapsed() > self.db.max_time() {
@@ -1018,7 +1024,11 @@ where
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
-                if el.elapsed() > self.db.max_time() || self.db.score(&el) > self.db.max_time() {
+                if self.world.won(el.get()) {
+                    None
+                } else if el.elapsed() > self.db.max_time()
+                    || self.db.score(&el) > self.db.max_time()
+                {
                     iskips += 1;
                     None
                 } else if keep {

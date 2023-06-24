@@ -345,11 +345,13 @@ where
         Ok(s)
     }
 
-    fn handle_solution(&self, mut ctx: ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
+    fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
         // If prev is None we don't know the prev state
         // but also we should have no recent history in ctx.
+        // But if prev is true, we must only record the state, since
+        // recording `next` requires all the states at once.
         if prev.is_some() {
-            self.queue.db().record_one(&mut ctx, prev).unwrap();
+            self.queue.db().record_one(ctx, prev, true).unwrap();
         }
 
         self.organic_solution.store(true, Ordering::Release);
@@ -392,12 +394,12 @@ where
         let max_time = self.queue.max_time();
         states
             .into_iter()
-            .filter_map(|ctx| {
+            .filter_map(|mut ctx| {
                 if ctx.elapsed() > max_time {
                     None
                 } else if self.world.won(ctx.get()) {
-                    self.handle_solution(ctx, prev, mode);
-                    None
+                    self.handle_solution(&mut ctx, prev, mode);
+                    Some(ctx)
                 } else {
                     Some(ctx)
                 }
@@ -598,7 +600,7 @@ where
 
     fn process_one(
         &self,
-        ctx: ContextWrapper<T>,
+        mut ctx: ContextWrapper<T>,
         iters: usize,
         start: &Mutex<Instant>,
     ) -> Vec<ContextWrapper<T>> {
@@ -608,7 +610,7 @@ where
 
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
-                self.handle_solution(ctx, &None, SearchMode::Unknown);
+                self.handle_solution(&mut ctx, &None, SearchMode::Unknown);
             } else {
                 self.deadends.fetch_add(1, Ordering::Release);
             }
