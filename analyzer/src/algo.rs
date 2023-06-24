@@ -28,7 +28,8 @@ enum SearchMode {
 
 fn mode_by_index(index: usize) -> SearchMode {
     match index % 16 {
-        1 | 6 | 10 | 14 => SearchMode::Dependent,
+        1 => SearchMode::Greedy,
+        6 | 10 | 14 => SearchMode::Dependent,
         5 => SearchMode::MaxProgress(4),
         11 => SearchMode::SomeProgress(3),
         2 | 3 | 13 | 15 => SearchMode::LocalMinima,
@@ -423,9 +424,6 @@ where
     }
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
-        if !self.organic_solution.load(Ordering::Acquire) {
-            return SearchMode::MaxProgress(2);
-        }
         match iters % 8 {
             0 => SearchMode::SomeProgress((iters / 8) % 32),
             1 => SearchMode::MaxProgress(2),
@@ -486,138 +484,103 @@ where
             num_workers, num_threads
         );
 
-        let greedy = || {
+        let run_worker = |i| {
+            let mode = mode_by_index(i);
             let mut done = false;
             while !finished.load(Ordering::Acquire)
                 && workers_done.load(Ordering::Acquire) < num_workers
             {
-                let level = self.organic_level.load(Ordering::Acquire);
-                if level < self.queue.max_possible_progress / 2 {
-                    sleep(Duration::from_secs(1));
-                    continue;
-                }
+                let iters = self.iters.load(Ordering::Acquire);
+                let current_mode = if iters < 500_000 {
+                    SearchMode::Standard
+                } else if mode == SearchMode::Dependent {
+                    self.choose_mode(iters)
+                } else {
+                    mode
+                };
 
-                match self.queue.pop_min_progress(level, 1) {
-                    Ok(mut items) => {
-                        let ctx = if let Some(item) = items.pop() {
-                            item
-                        } else {
+                let items = match current_mode {
+                    SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
+                    SearchMode::HalfProgress => self.queue.pop_half_progress(2),
+                    SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
+                    SearchMode::LocalMinima => self.queue.pop_local_minima(2),
+                    _ => self.queue.pop_round_robin(),
+                };
+                match items {
+                    Ok(items) => {
+                        if items.is_empty() {
                             if !done {
                                 done = true;
                                 workers_done.fetch_add(1, Ordering::Release);
                             }
                             sleep(Duration::from_secs(1));
                             continue;
-                        };
+                        }
 
                         if done {
                             workers_done.fetch_sub(1, Ordering::Acquire);
                             done = false;
                         }
 
-                        if self.queue.db().remember_processed(ctx.get()).unwrap() {
-                            continue;
-                        }
-                        let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
-                        self.check_status_update(&start, iters, &ctx);
-                        let max_time = self.queue.max_time();
+                        self.held.fetch_add(items.len(), Ordering::Release);
 
-                        // get remaining locations
-                        let remaining = self.queue.db().scorer().remaining_locations(ctx.get());
-                        let results = if remaining.len() < 5 {
-                            let mut psearch = ctx.clone();
+                        if mode == SearchMode::Greedy {
+                            for ctx in items {
+                                self.held.fetch_sub(1, Ordering::Release);
+                                if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                                    continue;
+                                }
+                                let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
+                                self.check_status_update(&start, iters, &ctx);
+                                let progress = self.queue.db().progress(ctx.get());
 
-                            for loc_id in &remaining {
-                                psearch.get_mut().skip(*loc_id);
+                                // get remaining locations
+                                let remaining =
+                                    self.queue.db().scorer().remaining_locations(ctx.get());
+
+                                let max_time = self.queue.max_time();
+                                let mut psearch = ctx.clone();
+
+                                for loc_id in &remaining {
+                                    psearch.get_mut().skip(*loc_id);
+                                }
+
+                                let results: Vec<_> = remaining
+                                    .into_par_iter()
+                                    .map(|loc_id| {
+                                        let mut c = psearch.clone();
+                                        c.get_mut().reset(loc_id);
+                                        let res = match greedy_search(self.world, &c, max_time, 2) {
+                                            Ok(c) | Err(c) => c,
+                                        };
+                                        res
+                                    })
+                                    .collect();
+
+                                if !results.is_empty() {
+                                    self.organic_level.fetch_max(progress + 1, Ordering::Release);
+                                }
+
+                                for mut c in results {
+                                    let hist = c.remove_history().0;
+                                    if hist.is_empty() {
+                                        continue;
+                                    }
+
+                                    if let Err(e) =
+                                        self.recreate_store(&ctx, hist, SearchMode::Greedy)
+                                    {
+                                        println!("Thread greedy exiting due to error: {:?}", e);
+                                        let mut r = res.lock().unwrap();
+                                        if r.is_ok() {
+                                            *r = Err(e);
+                                            finished.store(true, Ordering::Release);
+                                        }
+                                        return;
+                                    }
+                                }
                             }
-
-                            remaining
-                                .into_par_iter()
-                                .map(|loc_id| {
-                                    let mut c = psearch.clone();
-                                    c.get_mut().reset(loc_id);
-                                    let res = match greedy_search(self.world, &c, max_time, 2) {
-                                        Ok(c) | Err(c) => c,
-                                    };
-                                    res
-                                })
-                                .collect()
                         } else {
-                            vec![match greedy_search(self.world, &ctx, max_time, 2) {
-                                Ok(c) | Err(c) => c,
-                            }]
-                        };
-
-                        for mut c in results {
-                            let hist = c.remove_history().0;
-                            if hist.is_empty() {
-                                continue;
-                            }
-
-                            if let Err(e) = self.recreate_store(&ctx, hist, SearchMode::Greedy) {
-                                println!("Thread greedy exiting due to error: {:?}", e);
-                                let mut r = res.lock().unwrap();
-                                if r.is_ok() {
-                                    *r = Err(e);
-                                    finished.store(true, Ordering::Release);
-                                }
-                                return;
-                            }
-                        }
-                    }
-                    Err(e) => {
-                        println!("Thread greedy exiting due to error: {:?}", e);
-                        let mut r = res.lock().unwrap();
-                        if r.is_ok() {
-                            *r = Err(e);
-                            finished.store(true, Ordering::Release);
-                        }
-                        return;
-                    }
-                }
-            }
-        };
-
-        let run_worker =
-            |i| {
-                let mode = mode_by_index(i);
-                let mut done = false;
-                while !finished.load(Ordering::Acquire)
-                    && workers_done.load(Ordering::Acquire) < num_workers
-                {
-                    let iters = self.iters.load(Ordering::Acquire);
-                    let current_mode = if iters < 500_000 {
-                        SearchMode::Standard
-                    } else if mode == SearchMode::Dependent {
-                        self.choose_mode(iters)
-                    } else {
-                        mode
-                    };
-
-                    let items = match current_mode {
-                        SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
-                        SearchMode::HalfProgress => self.queue.pop_half_progress(2),
-                        SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
-                        SearchMode::LocalMinima => self.queue.pop_local_minima(2),
-                        _ => self.queue.pop_round_robin(),
-                    };
-                    match items {
-                        Ok(items) => {
-                            if items.is_empty() {
-                                if !done {
-                                    done = true;
-                                    workers_done.fetch_add(1, Ordering::Release);
-                                }
-                                sleep(Duration::from_secs(1));
-                                continue;
-                            }
-
-                            if done {
-                                workers_done.fetch_sub(1, Ordering::Acquire);
-                                done = false;
-                            }
-
-                            self.held.fetch_add(items.len(), Ordering::Release);
                             let results: Vec<_> = items
                                 .into_par_iter()
                                 .filter_map(|ctx| {
@@ -654,24 +617,25 @@ where
                                 }
                             }
                         }
-                        Err(e) => {
-                            println!("Thread {} exiting due to error: {:?}", i, e);
-                            let mut r = res.lock().unwrap();
-                            if r.is_ok() {
-                                *r = Err(e);
-                                finished.store(true, Ordering::Release);
-                            }
-                            return;
+                    }
+                    Err(e) => {
+                        println!("Thread {} exiting due to error: {:?}", i, e);
+                        let mut r = res.lock().unwrap();
+                        if r.is_ok() {
+                            *r = Err(e);
+                            finished.store(true, Ordering::Release);
                         }
-                    };
-                }
-                println!(
-                    "Thread {} exiting: fin={} done={}",
-                    i,
-                    finished.load(Ordering::Acquire),
-                    workers_done.load(Ordering::Acquire)
-                );
-            };
+                        return;
+                    }
+                };
+            }
+            println!(
+                "Thread {} exiting: fin={} done={}",
+                i,
+                finished.load(Ordering::Acquire),
+                workers_done.load(Ordering::Acquire)
+            );
+        };
 
         rayon::scope(|scope| {
             scope.spawn(|_| {
@@ -687,10 +651,9 @@ where
             });
 
             rayon::scope(|sc2| {
-                for i in 0..(num_workers - 1) {
+                for i in 0..num_workers {
                     sc2.spawn(move |_| run_worker(i));
                 }
-                sc2.spawn(|_| greedy());
             });
 
             println!("Workers all exited, marking finished");
@@ -720,7 +683,7 @@ where
         iters: usize,
         start: &Mutex<Instant>,
     ) -> Vec<ContextWrapper<T>> {
-        self.check_status_update(&start, iters, &ctx);
+        self.check_status_update(start, iters, &ctx);
 
         if ctx.get().count_visits() + ctx.get().count_skips() >= W::NUM_LOCATIONS {
             if self.world.won(ctx.get()) {
