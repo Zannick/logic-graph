@@ -20,6 +20,7 @@ pub struct ContextScorer<'w, W, S, LI, EI, A> {
     algo: A,
 
     known_costs: Mutex<LruCache<(S, Vec<LI>, Vec<Edge<EI>>), u64, CommonHasher>>,
+    required_locations: Vec<LI>,
 
     estimates: AtomicUsize,
     cached_estimates: AtomicUsize,
@@ -37,6 +38,12 @@ where
     where
         T: Ctx<World = W>,
     {
+        let required_locations: Vec<_> = world
+            .objective_items()
+            .into_iter()
+            .map(|(item, _)| world.get_item_locations(item))
+            .flatten()
+            .collect();
         Self {
             world,
             algo: A::from_graph(build_simple_graph(world, startctx)),
@@ -44,6 +51,7 @@ where
                 NonZeroUsize::new(cache_size).unwrap(),
                 CommonHasher::default(),
             )),
+            required_locations,
             estimates: 0.into(),
             cached_estimates: 0.into(),
         }
@@ -82,12 +90,9 @@ where
         T: Ctx<World = W>,
         L: Location<Context = T>,
     {
-        self.world
-            .objective_items()
-            .into_iter()
-            .map(|(item, _)| self.world.get_item_locations(item))
-            .flatten()
-            .filter(|&loc_id| ctx.visited(loc_id))
+        self.required_locations
+            .iter()
+            .filter(|&loc_id| ctx.visited(*loc_id))
             .count()
     }
 
@@ -98,12 +103,9 @@ where
         T: Ctx<World = W>,
         L: Location<Context = T>,
     {
-        self.world
-            .objective_items()
-            .into_iter()
-            .map(|(item, _)| self.world.get_item_locations(item))
-            .flatten()
-            .filter(|&loc_id| ctx.todo(loc_id))
+        self.required_locations
+            .iter()
+            .filter(|&loc_id| ctx.todo(*loc_id))
             .count()
     }
 
