@@ -260,16 +260,16 @@ where
             }
             // 3. Insert exits to area spots.
             for e in world.get_spot_exits(cur) {
-                if e.dest() == start {
+                if Exit::dest(e) == start {
                     continue;
                 }
-                if W::same_area(start, e.dest()) {
+                if W::same_area(start, Exit::dest(e)) {
                     // Path continues with new exit edge. Reqs update with exit.
                     let mut p2 = path.clone();
                     p2.push(HeapEdge::Exit(e.id()));
                     let mut r2 = reqs.clone();
                     r2.add_exit(e.id());
-                    heap.insert((e.dest(), p2, r2), t + e.time());
+                    heap.insert((Exit::dest(e), p2, r2), t + e.time());
                 }
             }
         }

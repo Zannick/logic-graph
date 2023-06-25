@@ -40,6 +40,8 @@ where
     ctx
 }
 
+/// Attempts to minimize a route by skipping item locations
+/// and returning a new start state.
 pub fn minimize<W, T, L, E>(
     world: &W,
     startctx: &T,
@@ -79,4 +81,45 @@ where
     }
 
     ContextWrapper::new(ctx)
+}
+
+/// Attempts to create better solutions by removing items collected from a route.
+/// Returns only one such possibility.
+pub fn pinpoint_minimize<W, T, L, E>(
+    world: &W,
+    startctx: &T,
+    history: &[HistoryAlias<T>],
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<ExitId = E::ExitId, LocId = E::LocId, Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    let mut ctx = ContextWrapper::new(startctx.clone());
+    let mut best = None;
+    'main: for i in 0..history.len() {
+        let step = history[i];
+        if matches!(step, History::G(_, _)) {
+            let mut sub = ctx.clone();
+            for j in (i + 1)..history.len() {
+                if sub.can_replay(world, history[j]) {
+                    sub.replay(world, history[j]);
+                } else {
+                    ctx.replay(world, step);
+                    continue 'main;
+                }
+            }
+            // successfully applied all, but we still have to check whether we won
+            if world.won(sub.get()) {
+                best = Some(sub);
+                // now we'll skip this step and continue with ctx
+                continue 'main;
+            }
+        } else {
+            ctx.replay(world, step);
+        }
+    }
+
+    best
 }

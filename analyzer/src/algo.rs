@@ -2,6 +2,7 @@ use crate::access::*;
 use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
+use crate::minimize::pinpoint_minimize;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use anyhow::Result;
@@ -202,6 +203,7 @@ where
     T: Ctx<World = W> + Debug,
 {
     world: &'a W,
+    startctx: ContextWrapper<T>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
@@ -332,6 +334,7 @@ where
         println!("Max time to consider is now: {}ms", queue.max_time());
         let s = Search {
             world,
+            startctx,
             solutions,
             queue,
             iters: 0.into(),
@@ -342,17 +345,17 @@ where
             organic_level: 0.into(),
         };
         s.recreate_store(
-            &startctx,
-            wonctx.recent_history().into_iter().copied().collect(),
+            &s.startctx,
+            wonctx.recent_history(),
             SearchMode::Start,
         )
         .unwrap();
-        for mut w in wins {
-            s.recreate_store(&startctx, w.remove_history().0, SearchMode::Start)
+        for w in wins {
+            s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
                 .unwrap();
         }
-        for mut o in others {
-            s.recreate_store(&startctx, o.remove_history().0, SearchMode::Start)
+        for o in others {
+            s.recreate_store(&s.startctx, o.recent_history(), SearchMode::Start)
                 .unwrap();
         }
         println!("Queue starts with {} elements", s.queue.len());
@@ -370,8 +373,12 @@ where
 
         self.organic_solution.store(true, Ordering::Release);
 
-        let old_time = self.queue.max_time();
+        let mut old_time = self.queue.max_time();
         let iters = self.iters.load(Ordering::Acquire);
+
+        let history = self.queue.db().get_history(ctx.get()).unwrap();
+        let min_ctx = pinpoint_minimize(self.world, self.startctx.get(), &history);
+
         let mut sols = self.solutions.lock().unwrap();
         if iters > 10_000_000 && sols.unique() > 4 {
             self.queue.set_max_time(ctx.elapsed());
@@ -387,15 +394,39 @@ where
                 ctx.elapsed(),
                 old_time
             );
-            println!("Max time to consider is now: {}ms", self.queue.max_time());
+            old_time = self.queue.max_time();
+            println!("Max time to consider is now: {}ms", old_time);
         }
 
-        if let Some(_) = sols.insert(
-            ctx.elapsed(),
-            self.queue.db().get_history(ctx.get()).unwrap(),
-        ) {
-            drop(sols);
+        if let Some(_) = sols.insert(ctx.elapsed(), history) {
             println!("Found new unique solution");
+        }
+
+        if let Some(ctx) = min_ctx {
+            if iters > 10_000_000 && sols.unique() > 4 {
+                self.queue.set_max_time(ctx.elapsed());
+            } else {
+                self.queue.set_lenient_max_time(ctx.elapsed());
+            }
+
+            if ctx.elapsed() < sols.best() {
+                println!(
+                    "{:?} minimized a better solution: estimated {}ms (heap max was: {}ms)",
+                    mode,
+                    ctx.elapsed(),
+                    old_time
+                );
+                println!("Max time to consider is now: {}ms", self.queue.max_time());
+            }
+
+            let history = ctx.recent_history();
+
+            if let Some(_) = sols.insert(ctx.elapsed(), history.iter().copied().collect()) {
+                println!("Minimized found new unique solution");
+            }
+
+            drop(sols);
+            self.recreate_store(&self.startctx, history, mode).unwrap();
         }
     }
 
@@ -440,15 +471,18 @@ where
     fn recreate_store(
         &self,
         startctx: &ContextWrapper<T>,
-        mut steps: Vec<HistoryAlias<T>>,
+        steps: &[HistoryAlias<T>],
         mode: SearchMode,
     ) -> anyhow::Result<()> {
         let mut ctx = startctx.clone();
         // It doesn't actually matter what the last one is.
-        let _last = steps.pop().unwrap();
-        for hist in steps {
+        let mut iter = steps.into_iter().peekable();
+        while let Some(hist) = iter.next() {
+            if iter.peek().is_none() {
+                break;
+            }
             if self.queue.db().remember_processed(ctx.get()).unwrap() {
-                ctx.replay(self.world, hist);
+                ctx.replay(self.world, *hist);
                 ctx.remove_history();
             } else {
                 let prev = Some(ctx.get().clone());
@@ -577,7 +611,7 @@ where
                                     }
 
                                     if let Err(e) =
-                                        self.recreate_store(&ctx, hist, SearchMode::Greedy)
+                                        self.recreate_store(&ctx, &hist, SearchMode::Greedy)
                                     {
                                         println!("Thread greedy exiting due to error: {:?}", e);
                                         let mut r = res.lock().unwrap();

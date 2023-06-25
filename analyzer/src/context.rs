@@ -486,6 +486,68 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::A(action.id()), action.time());
     }
 
+    pub fn can_replay<W, L, E, Wp>(&self, world: &W, step: HistoryAlias<T>) -> bool
+    where
+        W: World<Location = L, Exit = E, Warp = Wp>,
+        L: Location<Context = T>,
+        T: Ctx<World = W>,
+        E: Exit<Context = T, Currency = <L as Accessible>::Currency, LocId = L::LocId>,
+        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    {
+        match step {
+            History::W(wp, dest) => {
+                let warp = world.get_warp(wp);
+                warp.dest(&self.ctx) == dest && warp.can_access(&self.ctx)
+            }
+            History::G(item, loc_id) => {
+                let spot_id = world.get_location_spot(loc_id);
+                let loc = world.get_location(loc_id);
+                spot_id == self.ctx.position() && loc.item() == item && loc.can_access(&self.ctx)
+            }
+            History::E(exit_id) => {
+                let spot_id = world.get_exit_spot(exit_id);
+                let exit = world.get_exit(exit_id);
+                spot_id == self.ctx.position() && exit.can_access(&self.ctx)
+            }
+            History::H(item, exit_id) => {
+                let spot_id = world.get_exit_spot(exit_id);
+                let exit = world.get_exit(exit_id);
+                if let Some(loc_id) = exit.loc_id() {
+                    let loc = world.get_location(*loc_id);
+                    spot_id == self.ctx.position()
+                        && exit.can_access(&self.ctx)
+                        && loc.item() == item
+                        && loc.can_access(&self.ctx)
+                } else {
+                    false
+                }
+            }
+            History::L(spot_id) => {
+                let movement_state = self.ctx.get_movement_state();
+                let (best_free, best_mvmts) = W::best_movements(self.ctx.position(), spot_id);
+                self.ctx.position() != spot_id
+                    && W::same_area(self.ctx.position(), spot_id)
+                    && (best_free.is_some()
+                        || best_mvmts
+                            .into_iter()
+                            .any(|(m, _)| T::is_subset(m, movement_state)))
+            }
+            History::A(act_id) => {
+                let spot_id = world.get_action_spot(act_id);
+                let action = world.get_action(act_id);
+                (world.is_global_action(act_id) || self.ctx.position() == spot_id)
+                    && action.can_access(&self.ctx)
+            }
+            History::C(spot_id) => {
+                let movement_state = self.ctx.get_movement_state();
+                let edges = world.get_condensed_edges_from(self.ctx.position());
+                edges.iter().any(|edge| {
+                    edge.dst == spot_id && edge.can_access(world, &self.ctx, movement_state)
+                })
+            }
+        }
+    }
+
     pub fn replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
     where
         W: World<Location = L, Exit = E, Warp = Wp>,
@@ -576,9 +638,7 @@ where
     T: Ctx,
     I: Iterator<Item = HistoryAlias<T>>,
 {
-    let vec: Vec<String> = history
-        .map(|h| h.to_string())
-        .collect::<Vec<String>>();
+    let vec: Vec<String> = history.map(|h| h.to_string()).collect::<Vec<String>>();
     vec.join("\n")
 }
 
