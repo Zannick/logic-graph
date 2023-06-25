@@ -777,7 +777,7 @@ where
             .bucket_for_peeking(min)
             .map(|b| b.min_priority().copied())
             .flatten();
-        for segment in (min + 1)..=max {
+        'next: for segment in (min + 1)..=max {
             let next = queue
                 .bucket_for_peeking(segment)
                 .map(|b| b.min_priority().copied())
@@ -800,6 +800,7 @@ where
                         let progress = self.db.progress(&ctx);
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                        continue 'next;
                     }
                 }
             }
@@ -814,8 +815,11 @@ where
         let mut did_retrieve = false;
         while !queue.is_empty() || !self.db.is_empty() {
             if let Some(min) = queue.min_priority() {
-                let min = std::cmp::min(min, min_priority);
+                let min = std::cmp::max(min, min_priority);
                 let max = queue.max_priority().unwrap();
+                if max < min {
+                    break;
+                }
                 let mut diffs = Vec::with_capacity(max - min + 1);
 
                 let mut vec = Vec::with_capacity(max - min + 1);
