@@ -279,7 +279,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
             let mut vec = Vec::with_capacity(min_pops);
             let mut segment = min;
             assert!(
-                self.len_queue() >= min_pops + max - min + 1,
+                self.len_queue() > min_pops + max - min,
                 "Not enough in queue for {} pops: have min={} max={} len={}",
                 min_pops,
                 min,
@@ -384,7 +384,6 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     fn bucket_sizes(&self) -> Vec<usize> {
         if let Some(max) = self.max_priority() {
             (0..=max)
-                .into_iter()
                 .map(|s| {
                     self.bucket_for_peeking(s)
                         .map(|b| b.len_bucket())
@@ -402,11 +401,9 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     {
         if let Some(max) = self.max_priority() {
             (0..=max)
-                .into_iter()
                 .map(|s| {
                     self.bucket_for_peeking(s)
-                        .map(|b| b.peek_min())
-                        .flatten()
+                        .and_then(|b| b.peek_min())
                         .map(|m| *m.1)
                 })
                 .collect()
@@ -423,7 +420,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         let min = self.min_priority().unwrap_or_default();
         let max = self.max_priority().unwrap_or_default();
         Iter {
-            q: &self,
+            q: self,
             iter: self.bucket_for_peeking(min).unwrap().iter(),
             bucket: min,
             max,

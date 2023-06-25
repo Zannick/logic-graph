@@ -133,8 +133,8 @@ where
         let mut best = new_hashmap();
 
         while let Some(((cur, path), t)) = heap.delete_min() {
-            if !best.contains_key(&cur) {
-                best.insert(cur, (path.clone(), t));
+            if let std::collections::hash_map::Entry::Vacant(e) = best.entry(cur) {
+                e.insert((path.clone(), t));
                 if world.spot_of_interest(cur) && !path.is_empty() {
                     // don't travel through spots of interest
                     continue;

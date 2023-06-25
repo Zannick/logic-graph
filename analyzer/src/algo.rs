@@ -223,7 +223,7 @@ where
 {
     fn find_greedy_win(world: &W, startctx: &ContextWrapper<T>) -> ContextWrapper<T> {
         let start = Instant::now();
-        match greedy_search(world, &startctx, u32::MAX, 9) {
+        match greedy_search(world, startctx, u32::MAX, 9) {
             Ok(wonctx) => {
                 println!(
                     "Finished greedy search in {:?} with a result of {}ms",
@@ -294,25 +294,16 @@ where
                     m.elapsed()
                 );
                 let max_time = std::cmp::min(wonctx.elapsed(), m.elapsed());
-                solutions.insert(
-                    m.elapsed(),
-                    m.recent_history().into_iter().copied().collect(),
-                );
+                solutions.insert(m.elapsed(), m.recent_history().to_vec());
                 max_time
             } else {
                 println!("Minimized-greedy solution wasn't faster than original");
                 wonctx.elapsed()
             };
 
-        solutions.insert(
-            wonctx.elapsed(),
-            wonctx.recent_history().into_iter().copied().collect(),
-        );
+        solutions.insert(wonctx.elapsed(), wonctx.recent_history().to_vec());
         for w in &wins {
-            solutions.insert(
-                w.elapsed(),
-                w.recent_history().into_iter().copied().collect(),
-            );
+            solutions.insert(w.elapsed(), w.recent_history().to_vec());
         }
 
         let solutions = Arc::new(Mutex::new(solutions));
@@ -344,12 +335,8 @@ where
             organic_solution: false.into(),
             organic_level: 0.into(),
         };
-        s.recreate_store(
-            &s.startctx,
-            wonctx.recent_history(),
-            SearchMode::Start,
-        )
-        .unwrap();
+        s.recreate_store(&s.startctx, wonctx.recent_history(), SearchMode::Start)
+            .unwrap();
         for w in wins {
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
                 .unwrap();
@@ -398,7 +385,7 @@ where
             println!("Max time to consider is now: {}ms", old_time);
         }
 
-        if let Some(_) = sols.insert(ctx.elapsed(), history) {
+        if sols.insert(ctx.elapsed(), history).is_some() {
             println!("Found new unique solution");
         }
 
@@ -421,7 +408,7 @@ where
 
             let history = ctx.recent_history();
 
-            if let Some(_) = sols.insert(ctx.elapsed(), history.iter().copied().collect()) {
+            if sols.insert(ctx.elapsed(), history.to_vec()).is_some() {
                 println!("Minimized found new unique solution");
             }
 
@@ -476,7 +463,7 @@ where
     ) -> anyhow::Result<()> {
         let mut ctx = startctx.clone();
         // It doesn't actually matter what the last one is.
-        let mut iter = steps.into_iter().peekable();
+        let mut iter = steps.iter().peekable();
         while let Some(hist) = iter.next() {
             if iter.peek().is_none() {
                 break;
@@ -490,7 +477,7 @@ where
                 if let Some((ci, _)) = next
                     .iter()
                     .enumerate()
-                    .find(|(_, c)| c.recent_history().last() == Some(&hist))
+                    .find(|(_, c)| c.recent_history().last() == Some(hist))
                 {
                     // Assumption: no subsequent state leads to victory (aside from the last state?)
                     ctx = next.swap_remove(ci);
@@ -589,19 +576,19 @@ where
                                     .map(|loc_id| {
                                         let mut c = psearch.clone();
                                         c.get_mut().reset(loc_id);
-                                        let res = match greedy_search(self.world, &c, max_time, 2) {
+
+                                        match greedy_search(self.world, &c, max_time, 2) {
                                             Ok(c) | Err(c) => c,
-                                        };
-                                        res
+                                        }
                                     })
                                     .collect();
 
                                 self.greedies.fetch_add(1, Ordering::Release);
-                                if !results.is_empty() {
-                                    if self.organic_level.load(Ordering::Acquire) == progress {
-                                        self.organic_level
-                                            .fetch_max(progress + 1, Ordering::Release);
-                                    }
+                                if !results.is_empty()
+                                    && self.organic_level.load(Ordering::Acquire) == progress
+                                {
+                                    self.organic_level
+                                        .fetch_max(progress + 1, Ordering::Release);
                                 }
 
                                 for mut c in results {
@@ -635,13 +622,13 @@ where
                                     let progress = self.queue.db().progress(ctx.get());
                                     let prev = Some(ctx.get().clone());
                                     let vec = self.process_one(ctx, iters, &start);
-                                    if progress == self.organic_level.load(Ordering::Acquire) {
-                                        if vec.iter().any(|c| {
+                                    if progress == self.organic_level.load(Ordering::Acquire)
+                                        && vec.iter().any(|c| {
                                             self.queue.db().progress(c.get()) == progress + 1
-                                        }) {
-                                            self.organic_level
-                                                .fetch_max(progress + 1, Ordering::Release);
-                                        }
+                                        })
+                                    {
+                                        self.organic_level
+                                            .fetch_max(progress + 1, Ordering::Release);
                                     }
                                     Some((prev, vec))
                                 })

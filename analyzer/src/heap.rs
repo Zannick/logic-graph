@@ -775,13 +775,11 @@ where
         let max = queue.max_priority().unwrap();
         let mut prev = queue
             .bucket_for_peeking(min)
-            .map(|b| b.min_priority().copied())
-            .flatten();
+            .and_then(|b| b.min_priority().copied());
         'next: for segment in (min + 1)..=max {
             let next = queue
                 .bucket_for_peeking(segment)
-                .map(|b| b.min_priority().copied())
-                .flatten();
+                .and_then(|b| b.min_priority().copied());
             if let (Some(lower), Some(higher)) = (prev, next) {
                 if higher < lower {
                     while let Some((ctx, _)) = queue.pop_segment_min(segment) {

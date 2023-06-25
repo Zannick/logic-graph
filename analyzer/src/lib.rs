@@ -59,10 +59,8 @@ where
             History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
                 if pos != spot_id {
-                    ctx = access::move_to(world, ctx, spot_id).expect(&format!(
-                        "Could not complete route step {}: couldn't reach {} from {}",
-                        i, spot_id, pos
-                    ));
+                    ctx = access::move_to(world, ctx, spot_id).unwrap_or_else(|| panic!("Could not complete route step {}: couldn't reach {} from {}",
+                        i, spot_id, pos));
                 }
                 if item == Default::default() {
                     let item = world.get_location(loc_id).item();
@@ -74,10 +72,8 @@ where
             History::H(item, exit_id) => {
                 let spot_id = world.get_exit_spot(exit_id);
                 if pos != spot_id {
-                    ctx = access::move_to(world, ctx, spot_id).expect(&format!(
-                        "Could not complete route step {}: couldn't reach {} from {}",
-                        i, spot_id, pos
-                    ));
+                    ctx = access::move_to(world, ctx, spot_id).unwrap_or_else(|| panic!("Could not complete route step {}: couldn't reach {} from {}",
+                        i, spot_id, pos));
                 }
 
                 if item == Default::default() {
@@ -94,26 +90,20 @@ where
             }
             History::E(exit_id) => {
                 let exit = world.get_exit(exit_id);
-                ctx = access::move_to(world, ctx, exit.dest()).expect(&format!(
-                    "Could not complete route step {}: couldn't reach {}",
+                ctx = access::move_to(world, ctx, exit.dest()).unwrap_or_else(|| panic!("Could not complete route step {}: couldn't reach {}",
                     i,
-                    exit.dest()
-                ));
+                    exit.dest()));
             }
             History::L(spot_id) | History::C(spot_id) => {
-                ctx = access::move_to(world, ctx, spot_id).expect(&format!(
-                    "Could not complete route step {}: couldn't reach {} from {}",
-                    i, spot_id, pos
-                ));
+                ctx = access::move_to(world, ctx, spot_id).unwrap_or_else(|| panic!("Could not complete route step {}: couldn't reach {} from {}",
+                    i, spot_id, pos));
             }
             History::W(..) => ctx.replay(world, h),
             History::A(action_id) => {
                 let spot_id = world.get_action_spot(action_id);
                 if spot_id != Default::default() && pos != spot_id {
-                    ctx = access::move_to(world, ctx, spot_id).expect(&format!(
-                        "Could not complete route step {}: couldn't reach {} from {}",
-                        i, spot_id, pos
-                    ));
+                    ctx = access::move_to(world, ctx, spot_id).unwrap_or_else(|| panic!("Could not complete route step {}: couldn't reach {} from {}",
+                        i, spot_id, pos));
                 }
                 ctx.replay(world, h);
             }

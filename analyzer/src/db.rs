@@ -408,8 +408,8 @@ where
 
     fn get_heap_key(&self, el: &T, elapsed: u32) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
-        let progress: u32 = self.progress(&el).try_into().unwrap();
-        let est = self.estimated_remaining_time(&el);
+        let progress: u32 = self.progress(el).try_into().unwrap();
+        let est = self.estimated_remaining_time(el);
         key[0..4].copy_from_slice(&progress.to_be_bytes());
         key[4..8].copy_from_slice(&(elapsed + est).to_be_bytes());
         key[8..12].copy_from_slice(&elapsed.to_be_bytes());
@@ -846,7 +846,7 @@ where
 
     fn get_best_elapsed_raw(&self, state_key: &[u8]) -> Result<u32, Error> {
         let sd = self
-            .get_deserialize_state_data(&state_key)?
+            .get_deserialize_state_data(state_key)?
             .expect("Didn't find state data!");
         Ok(sd.elapsed)
     }
@@ -1172,8 +1172,7 @@ where
         } else {
             Ok(self
                 .get_deserialize_state_data(&Self::serialize_state(ctx.get()))?
-                .map(|sd| sd.hist.last().copied())
-                .flatten())
+                .and_then(|sd| sd.hist.last().copied()))
         }
     }
 

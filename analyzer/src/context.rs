@@ -608,7 +608,7 @@ impl<T: Ctx> ContextWrapper<T> {
                     })
                     .min_by_key(|c| c.time);
                 self.move_condensed_edge(
-                    ce.expect(&format!("Invalid replay: move-condensed {:?}", spot)),
+                    ce.unwrap_or_else(|| panic!("Invalid replay: move-condensed {:?}", spot)),
                 );
             }
         }

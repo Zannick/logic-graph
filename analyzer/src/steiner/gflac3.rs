@@ -50,7 +50,7 @@ where
         edge_costs.extend(extra_edges.iter().map(|e| e.wt));
         // pairing heap per node
         let mut in_edges = Vec::new();
-        in_edges.resize_with(self.graph.nodes.len(), || PairingHeap::new());
+        in_edges.resize_with(self.graph.nodes.len(), PairingHeap::new);
 
         for (ei, e) in self.graph.edges.iter().chain(extra_edges).enumerate() {
             in_edges[e.dst].insert(ei, e.wt);

@@ -41,8 +41,7 @@ where
         let required_locations: Vec<_> = world
             .objective_items()
             .into_iter()
-            .map(|(item, _)| world.get_item_locations(item))
-            .flatten()
+            .flat_map(|(item, _)| world.get_item_locations(item))
             .collect();
         Self {
             world,
@@ -78,8 +77,7 @@ where
             self.world
                 .items_needed(ctx)
                 .into_iter()
-                .map(|(item, _)| self.world.get_item_locations(item))
-                .flatten()
+                .flat_map(|(item, _)| self.world.get_item_locations(item))
                 .filter(|&loc_id| ctx.todo(loc_id))
                 .collect(),
         )
