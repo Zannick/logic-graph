@@ -764,7 +764,7 @@ where
         })
     }
 
-    pub fn pop_local_minima(&self, n: usize) -> Result<Vec<ContextWrapper<T>>> {
+    pub fn pop_local_minima(&self) -> Result<Vec<ContextWrapper<T>>> {
         let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
         if queue.is_empty() {
@@ -773,47 +773,39 @@ where
 
         let min = queue.min_priority().unwrap();
         let max = queue.max_priority().unwrap();
-        let mut next = queue
-            .bucket_for_peeking(max)
+        let mut prev = queue
+            .bucket_for_peeking(min)
             .map(|b| b.min_priority().copied())
             .flatten();
-        let mut target = 0;
-        for segment in (min..max).rev() {
-            let prev = queue
+        for segment in (min + 1)..=max {
+            let next = queue
                 .bucket_for_peeking(segment)
                 .map(|b| b.min_priority().copied())
                 .flatten();
             if let (Some(lower), Some(higher)) = (prev, next) {
                 if higher < lower {
-                    target = segment + 1;
-                    break;
+                    while let Some((ctx, _)) = queue.pop_segment_min(segment) {
+                        // Retrieve the best elapsed time.
+                        let elapsed = self.db.get_best_elapsed(&ctx)?;
+                        let est = self.db.estimated_remaining_time(&ctx);
+                        let max_time = self.db.max_time();
+                        if elapsed > max_time || elapsed + est > max_time {
+                            self.pskips.fetch_add(1, Ordering::Release);
+                            continue;
+                        }
+                        if self.db.remember_processed(&ctx)? {
+                            self.db.count_duplicate();
+                            continue;
+                        }
+                        let progress = self.db.progress(&ctx);
+                        self.processed_counts[progress].fetch_add(1, Ordering::Release);
+                        vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
+                    }
                 }
             }
-            next = prev;
+            prev = next;
         }
 
-        while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
-            while let Some((ctx, _)) = queue.pop_segment_min(target) {
-                // Retrieve the best elapsed time.
-                let elapsed = self.db.get_best_elapsed(&ctx)?;
-                let est = self.db.estimated_remaining_time(&ctx);
-                let max_time = self.db.max_time();
-                if elapsed > max_time || elapsed + est > max_time {
-                    self.pskips.fetch_add(1, Ordering::Release);
-                    continue;
-                }
-                if self.db.remember_processed(&ctx)? {
-                    self.db.count_duplicate();
-                    continue;
-                }
-                let progress = self.db.progress(&ctx);
-                self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                vec.push(ContextWrapper::with_elapsed(ctx, elapsed));
-                if vec.len() == n {
-                    return Ok(vec);
-                }
-            }
-        }
         Ok(vec)
     }
 

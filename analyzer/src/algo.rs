@@ -505,7 +505,7 @@ where
                     SearchMode::MaxProgress(n) => self.queue.pop_max_progress(n),
                     SearchMode::HalfProgress => self.queue.pop_half_progress(2),
                     SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
-                    SearchMode::LocalMinima => self.queue.pop_local_minima(2),
+                    SearchMode::LocalMinima => self.queue.pop_local_minima(),
                     _ => self.queue.pop_round_robin(),
                 };
                 match items {
@@ -561,7 +561,8 @@ where
 
                                 self.greedies.fetch_add(1, Ordering::Release);
                                 if !results.is_empty() {
-                                    self.organic_level.fetch_max(progress + 1, Ordering::Release);
+                                    self.organic_level
+                                        .fetch_max(progress + 1, Ordering::Release);
                                 }
 
                                 for mut c in results {
