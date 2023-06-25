@@ -206,6 +206,7 @@ where
     queue: RocksBackedQueue<'a, W, T>,
     iters: AtomicUsize,
     deadends: AtomicU32,
+    greedies: AtomicUsize,
     held: AtomicUsize,
     organic_solution: AtomicBool,
     organic_level: AtomicUsize,
@@ -337,6 +338,7 @@ where
             iters: 0.into(),
             deadends: 0.into(),
             held: 0.into(),
+            greedies: 0.into(),
             organic_solution: false.into(),
             organic_level: 0.into(),
         };
@@ -557,6 +559,7 @@ where
                                     })
                                     .collect();
 
+                                self.greedies.fetch_add(1, Ordering::Release);
                                 if !results.is_empty() {
                                     self.organic_level.fetch_max(progress + 1, Ordering::Release);
                                 }
@@ -725,7 +728,7 @@ where
         let max_time = self.queue.max_time();
         let pending = self.held.load(Ordering::Acquire);
         println!(
-            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, org={}) ---\n\
+            "--- Round {} (solutions={}, unique={}, dead-ends={}, limit={}ms, greedy={}, org={}) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={};\n\
             estimates={}; cached={}; evictions={}; retrievals={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
@@ -737,6 +740,7 @@ where
             sols.unique(),
             self.deadends.load(Ordering::Acquire),
             max_time,
+            self.greedies.load(Ordering::Acquire),
             self.organic_level.load(Ordering::Acquire),
             self.queue.heap_len(),
             pending,
