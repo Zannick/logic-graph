@@ -1047,16 +1047,20 @@ where
     }
 
     pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), Error> {
-        let mut start_key = None;
+        let mut start_key: Option<Box<[u8]>> = None;
 
         let mut end = false;
         while !end && !exit_signal.load(Ordering::Acquire) {
             let mut iter_opts = ReadOptions::default();
             iter_opts.set_tailing(true);
             iter_opts.fill_cache(false);
-            if let Some(skey) = start_key {
+            let start_progress = if let Some(skey) = start_key {
+                let p = u32::from_be_bytes(skey[0..4].as_ref().try_into().unwrap());
                 iter_opts.set_iterate_lower_bound(skey);
-            }
+                p
+            } else {
+                0
+            };
             let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
 
             let mut batch = WriteBatchWithTransaction::<false>::default();
@@ -1115,8 +1119,8 @@ where
             self.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
             if pskips > 0 || dup_pskips > 0 || rescores > 0 {
                 println!(
-                    "Background thread: {} expired, {} duplicate, {} rescored",
-                    pskips, dup_pskips, rescores
+                    "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",
+                    start_progress, pskips, dup_pskips, rescores
                 );
             }
             if compact {
