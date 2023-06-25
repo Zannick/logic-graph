@@ -809,11 +809,12 @@ where
         Ok(vec)
     }
 
-    pub fn pop_round_robin(&self) -> Result<Vec<ContextWrapper<T>>> {
+    pub fn pop_round_robin(&self, min_priority: usize) -> Result<Vec<ContextWrapper<T>>> {
         let mut queue = self.queue.lock().unwrap();
         let mut did_retrieve = false;
         while !queue.is_empty() || !self.db.is_empty() {
             if let Some(min) = queue.min_priority() {
+                let min = std::cmp::min(min, min_priority);
                 let max = queue.max_priority().unwrap();
                 let mut diffs = Vec::with_capacity(max - min + 1);
 

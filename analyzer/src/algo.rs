@@ -506,7 +506,10 @@ where
                     SearchMode::HalfProgress => self.queue.pop_half_progress(2),
                     SearchMode::SomeProgress(p) => self.queue.pop_min_progress(p, 2),
                     SearchMode::LocalMinima => self.queue.pop_local_minima(),
-                    _ => self.queue.pop_round_robin(),
+                    SearchMode::Greedy => self
+                        .queue
+                        .pop_round_robin(self.organic_level.load(Ordering::Acquire) / 2),
+                    _ => self.queue.pop_round_robin(0),
                 };
                 match items {
                     Ok(items) => {
