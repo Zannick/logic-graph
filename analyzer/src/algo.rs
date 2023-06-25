@@ -564,8 +564,10 @@ where
 
                                 self.greedies.fetch_add(1, Ordering::Release);
                                 if !results.is_empty() {
-                                    self.organic_level
-                                        .fetch_max(progress + 1, Ordering::Release);
+                                    if self.organic_level.load(Ordering::Acquire) == progress {
+                                        self.organic_level
+                                            .fetch_max(progress + 1, Ordering::Release);
+                                    }
                                 }
 
                                 for mut c in results {
