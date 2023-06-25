@@ -66,3 +66,61 @@ routes:
     ! Do Giguna > Carnelian > Upper Susar: Hack
     ! Do Giguna > West Caverns > Small Platform: Throw Drone Up
     * Collect Power_Matrix from Giguna > West Caverns > Cache: Item
+
+  - |
+    * Collect Ice_Axe from Antarctica > Shed > Interior: Shelf
+      EarthSavewarp to Antarctica > West > Helipad
+    * Collect Station_Power from Antarctica > Power Room > Switch: Flip
+      EarthSavewarp to Antarctica > East > Save Point
+    * Take hybrid exit Glacier > The Big Drop > Water Surface: Drown, collecting Amashilama
+    * Collect Boomerang from Glacier > Boomerang Room > Pedestal: Item
+    * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch: Switch
+    * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom: Quick Grab
+    * Collect Flask from Glacier > Vertical Room > Peak: Flask
+    * Collect Dear_Ernest from Ebih > Bunker Interior > Desk: Note
+    * Collect Companies_Layoff from Ebih > Tent Interior > Desk: Note
+    * Collect Record_Losses from Ebih > Garage > Boxes: Under Boxes
+
+    # No Heretics Tablet here
+    * Collect Infect from Ebih > Ebih East > Lower Moving Platform: Remote Urn
+    ! Do Ebih > Ebih East > Lower Moving Platform: Activate Lift
+    ! Do Ebih > Ebih East > Moving Platform: Activate Ride
+    * Collect Under_Siege from Ebih > Ebih East > East Ledge: Note
+    * Collect Terminal_Breakthrough_1 from Ebih > Grid 26,10-11 > Ledge: Note
+    * Collect Flask from Ebih > Grid 25,10-12 > Hidden Bush: Behind Bush
+    ! Do Ebih > Drone Room > Portal Exit: Activate Platform
+    * Take hybrid exit Ebih > Drone Room > Middle Platform: Urn Quick Grab, collecting Remote_Drone
+    ! Do Ebih > Drone Room > Pit Left: Activate Lift
+    ! Do Ebih > Drone Room > Moving Platform: Throw Drone
+    * Collect Flask from Ebih > Grid 25,2-6 > Pit: Item
+    ! Do Recall Drone
+    * Collect Health_Node from Ebih > Boss Room > East Ledge: Item
+    * Collect Defeat_Ebih_Alu from Ebih > Boss Room > Boss: Fight Alu
+    * Collect Flask from Ebih > Boss Room > Boss: Boss Reward
+
+      IndraSavewarp to Glacier > Revival > Save Point
+      Move... to Amagi > Main Area > Platform 2
+    ! Do Deploy Drone
+    * Collect Underwater_Movement from Amagi > Liru Room > Shrine: Item
+    ! Do Recall Drone
+    ! Do Amagi > Main Area > Carving: Key Combo
+    ! Do Amagi > Cave Behind Waterfall > Middle: Throw Drone
+    * Collect Flask from Amagi > Main Area > Way Off To The Side: Item
+    ! Do Recall Drone
+
+      Move... to Amagi > West Lake > Cavern Refill Station
+    ! Do Deploy Drone
+    * Collect Shockwave from Amagi > West Lake > Stronghold Item: Item
+    ! Do Recall Drone
+    * Take hybrid exit Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20, collecting Defeat_MUS_A_M20
+    * Collect Flask from Amagi > West Lake > Cavern Rear Pillar: Boss Reward
+    * Collect Flask from Amagi > West Lake > Cavern Tear Duct: Remote Flask
+
+      IndraSavewarp to Glacier > Revival > Save Point
+    ! Do Ebih > Waterfall > Ledge Below Hole: Throw Drone
+    ! Do Ebih > Waterfall > Below Left Switch: Open Door
+    ! Do Recall Drone
+
+    ! Do Ebih > Ebih West > Medium High Platform: Throw Drone Long
+    * Collect Map_17_10 from Giguna > Giguna Northeast > Save Point: Seen
+    ! Do Giguna > Giguna Northeast > Save Point: Save-Recall

@@ -48,7 +48,7 @@ where
     let mut hist: Vec<HistoryAlias<T>> = Vec::new();
     for line in route.lines() {
         let line = line.trim();
-        if !line.is_empty() {
+        if !line.is_empty() && !line.starts_with('#') {
             hist.push(History::from_str(line)?);
         }
     }
