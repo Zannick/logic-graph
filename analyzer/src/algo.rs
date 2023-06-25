@@ -330,7 +330,6 @@ where
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();
         println!("Max time to consider is now: {}ms", queue.max_time());
-        println!("Queue starts with {} elements", queue.len());
         let s = Search {
             world,
             solutions,
@@ -356,6 +355,7 @@ where
             s.recreate_store(&startctx, o.remove_history().0, SearchMode::Start)
                 .unwrap();
         }
+        println!("Queue starts with {} elements", s.queue.len());
         Ok(s)
     }
 
