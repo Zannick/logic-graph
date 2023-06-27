@@ -115,6 +115,9 @@ where
                 best = Some(sub);
                 // now we'll skip this step and continue with ctx
                 continue 'main;
+            } else {
+                ctx.replay(world, step);
+                continue 'main;
             }
         } else {
             ctx.replay(world, step);
