@@ -56,6 +56,8 @@ pub trait SegmentBucket<P: Ord>: Bucket {
     fn iter(&self) -> priority_queue::core_iterators::Iter<Self::Item, P>
     where
         Self::Item: Hash + Eq;
+
+    fn capacity(&self) -> usize;
 }
 
 impl<I, P> SegmentBucket<P> for Segment<I, P>
@@ -100,6 +102,10 @@ where
         Self::Item: Hash + Eq,
     {
         self.pq.iter()
+    }
+
+    fn capacity(&self) -> usize {
+        self.pq.capacity()
     }
 }
 
@@ -387,6 +393,20 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                 .map(|s| {
                     self.bucket_for_peeking(s)
                         .map(|b| b.len_bucket())
+                        .unwrap_or_default()
+                })
+                .collect()
+        } else {
+            Vec::new()
+        }
+    }
+
+    fn bucket_capacities(&self) -> Vec<usize> {
+        if let Some(max) = self.max_priority() {
+            (0..=max)
+                .map(|s| {
+                    self.bucket_for_peeking(s)
+                        .map(|b| b.capacity())
                         .unwrap_or_default()
                 })
                 .collect()

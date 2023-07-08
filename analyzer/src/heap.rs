@@ -1110,6 +1110,7 @@ where
             prog_score.push((progress, score));
         }
         let queue_buckets = queue.bucket_sizes();
+        let queue_caps = queue.bucket_capacities();
         let mut processed: Vec<f64> = Vec::new();
         for (progress, x) in self.processed_counts.iter().enumerate() {
             let progress: u32 = progress.try_into().unwrap();
@@ -1125,9 +1126,10 @@ where
         );
         let v = ContinuousView::new().add(h).x_label("progress");
         println!(
-            "Current heap contents:\n{}\n{:?}",
+            "Current heap contents:\n{}\nS: {:?}\nC: {:?}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
-            queue_buckets
+            queue_buckets,
+            queue_caps,
         );
 
         let p = Plot::new(prog_score).point_style(PointStyle::new().marker(PointMarker::Circle));
