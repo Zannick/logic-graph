@@ -1125,11 +1125,13 @@ where
             HistogramBins::Count(self.max_possible_progress),
         );
         let v = ContinuousView::new().add(h).x_label("progress");
+        let s: usize = queue_caps.iter().sum();
         println!(
-            "Current heap contents:\n{}\nS: {:?}\nC: {:?}",
+            "Current heap contents:\n{}\nS: {:?}\nC: {:?} = {:?}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap(),
             queue_buckets,
             queue_caps,
+            s
         );
 
         let p = Plot::new(prog_score).point_style(PointStyle::new().marker(PointMarker::Circle));
