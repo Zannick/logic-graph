@@ -201,6 +201,7 @@ where
         // 4 write buffers at 256 MiB = 1 GiB
         opts.set_write_buffer_size(256 * MB);
         opts.set_max_write_buffer_number(4);
+        opts.set_target_file_size_base(128 * 1024 * 1024);
         // use half the logical cores, clamp between 2 and 32
         opts.increase_parallelism(std::cmp::max(
             2,
@@ -211,6 +212,7 @@ where
         let mut env = Env::new().unwrap();
         env.set_low_priority_background_threads(6);
         opts.set_env(&env);
+        opts.set_max_open_files(1024);
 
         let mut opts2 = opts.clone();
 
@@ -223,6 +225,7 @@ where
         block_opts.set_block_size(16 * 1024);
         block_opts.set_cache_index_and_filter_blocks(true);
         block_opts.set_pin_l0_filter_and_index_blocks_in_cache(true);
+        block_opts.set_ribbon_filter(9.9);
         opts.set_block_based_table_factory(&block_opts);
 
         let mut path = p.as_ref().to_owned();
@@ -245,6 +248,7 @@ where
         block_opts2.set_block_size(16 * 1024);
         block_opts2.set_cache_index_and_filter_blocks(true);
         block_opts2.set_pin_l0_filter_and_index_blocks_in_cache(true);
+        block_opts2.set_ribbon_filter(9.9);
         opts2.set_block_based_table_factory(&block_opts2);
 
         let cf_opts = opts2.clone();
@@ -467,7 +471,7 @@ where
     }
 
     fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>, Error> {
-        match self.statedb.get_pinned_cf(self.best_cf(), key)? {
+        match self.statedb.get_cf(self.best_cf(), key)? {
             Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
             None => Ok(None),
         }
@@ -515,7 +519,7 @@ where
     }
 
     fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData>, Error> {
-        match self.statedb.get_pinned_cf(self.next_cf(), key)? {
+        match self.statedb.get_cf(self.next_cf(), key)? {
             Some(slice) => Ok(Self::get_obj_from_data(&slice)?),
             None => Ok(Vec::new()),
         }
