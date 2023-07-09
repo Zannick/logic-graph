@@ -1226,21 +1226,25 @@ where
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}, \
-             unc={}, cmpr={}\n\
+             unc={}, cmpr={}, unc_pinned={}, cmpr_pinned={}\n\
              statedb: total={}, unflushed={}, readers={}, caches={}, \
-             unc={}, cmpr={}",
+             unc={}, cmpr={}, unc_pinned={}, cmpr_pinned={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
             SizeFormatter::new(dbstats.mem_table_readers_total, BINARY),
             SizeFormatter::new(dbstats.cache_total, BINARY),
             SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
             SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
+            SizeFormatter::new(self._cache_uncompressed.get_pinned_usage(), BINARY),
+            SizeFormatter::new(self._cache_cmprsd.get_pinned_usage(), BINARY),
             SizeFormatter::new(statestats.mem_table_total, BINARY),
             SizeFormatter::new(statestats.mem_table_unflushed, BINARY),
             SizeFormatter::new(statestats.mem_table_readers_total, BINARY),
             SizeFormatter::new(statestats.cache_total, BINARY),
             SizeFormatter::new(self._state_cache_uncompressed.get_usage(), BINARY),
             SizeFormatter::new(self._state_cache_cmprsd.get_usage(), BINARY),
+            SizeFormatter::new(self._state_cache_uncompressed.get_pinned_usage(), BINARY),
+            SizeFormatter::new(self._state_cache_cmprsd.get_pinned_usage(), BINARY),
         ))
     }
 }
