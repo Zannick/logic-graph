@@ -550,7 +550,7 @@ where
 
                         self.held.fetch_add(items.len(), Ordering::Release);
 
-                        if mode == SearchMode::Greedy {
+                        if current_mode == SearchMode::Greedy {
                             for ctx in items {
                                 self.held.fetch_sub(1, Ordering::Release);
                                 if self.queue.db().remember_processed(ctx.get()).unwrap() {
