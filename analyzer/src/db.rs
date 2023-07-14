@@ -1143,8 +1143,18 @@ where
                 self.get_deserialize_state_data(&state_key)?
             {
                 if !prev.is_empty() {
+                    assert!(
+                        hist.len() < 1024,
+                        "History entry found in statedb way too long. Last 24:\n{:?}",
+                        hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
+                    );
+                    assert!(
+                        vec.len() < 1024,
+                        "Raw history found in statedb way too long, possible loop. Last 24:\n{:?}",
+                        vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
+                    );
                     state_key = prev;
-                    vec.push(hist.clone());
+                    vec.push(hist);
                 } else {
                     break;
                 }
