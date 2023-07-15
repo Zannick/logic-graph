@@ -510,6 +510,7 @@ where
         let run_worker = |i| {
             let mode = mode_by_index(i);
             let mut done = false;
+            let mut no_progress = 0;
             while !finished.load(Ordering::Acquire)
                 && workers_done.load(Ordering::Acquire) < num_workers
             {
@@ -634,7 +635,15 @@ where
                                 })
                                 .collect();
                             if results.is_empty() {
-                                return;
+                                no_progress += 1;
+                                if !done {
+                                    done = true;
+                                    workers_done.fetch_add(1, Ordering::Release);
+                                }
+                                sleep(Duration::from_secs(no_progress));
+                                continue;
+                            } else {
+                                no_progress = 0;
                             }
                             if let Err(e) = self.queue.extend_groups(results.into_iter().map(
                                 |(prev, nexts)| (self.extract_solutions(nexts, &prev, mode), prev),
