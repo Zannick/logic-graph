@@ -200,7 +200,13 @@ pub mod testlib {
                 for warp in $world.get_warps() {
                     if warp.dest(&$ctx) == next_spot {
                         if warp.can_access(&$ctx) {
-                            $ctx.set_position(next_spot);
+                            warp.prewarp(&mut $ctx);
+                            $ctx.set_position(warp.dest(&$ctx));
+                            $ctx.spend(warp.price());
+                            warp.postwarp(&mut $ctx);
+                            if warp.should_reload() {
+                                $ctx.reload_game();
+                            }
                             continue 'spots;
                         } else {
                             errors.push(format!("cannot use warp {}", warp.id()));

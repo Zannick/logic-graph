@@ -447,6 +447,7 @@ impl<T: Ctx> ContextWrapper<T> {
         self.ctx.set_position(warp.dest(&self.ctx));
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
+        warp.postwarp(&mut self.ctx);
         if warp.should_reload() {
             self.ctx.reload_game();
         }
