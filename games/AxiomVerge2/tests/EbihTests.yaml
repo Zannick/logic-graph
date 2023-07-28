@@ -85,7 +85,8 @@ tests:
       - Remote_Drone
     can_access: Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
 
-  - start: Ebih > Grid 25,10-12 > East 12
+  - name: PathTest1
+    start: Ebih > Grid 25,10-12 > East 12
     with:
       - Infect
       - Remote_Drone
@@ -105,6 +106,9 @@ tests:
       - Ebih > Grid 26,10-11 > West 10
       - Ebih > Grid 25,10-12 > East 10
       - Ebih > Grid 25,10-12 > Hidden Bush
+    expect:
+      context:
+        ebih__grid_25_10_12__ctx__door_open: true
 
   - start: Ebih > Ebih West > Upper Save
     with:
@@ -115,3 +119,28 @@ tests:
     context:
       ebih__waterfall__ctx__west_door_open: true
     can_reach: Ebih > Ebih West > Medium High Platform
+
+  - name: prev_area
+    start: Glacier > Grid 31,9-12 > West 12
+    context:
+      prev_area: Glacier > Vertical Room
+    path:
+      - Ebih > Base Camp > East 12
+    expect:
+      context:
+        prev_area: Glacier > Grid 31,9-12
+
+  - name: prev_area_after_pause
+    start: Glacier > Grid 31,9-12 > West 12
+    context:
+      flasks: 1
+      prev_area: Glacier > Vertical Room
+      last: SpotId::None
+    path:
+      - Ebih > Base Camp > East 12
+      - Menu > Upgrade Menu > Physiology
+      - Ebih > Base Camp > East 12
+    expect:
+      context:
+        prev_area: Glacier > Grid 31,9-12
+        last: SpotId::None

@@ -4,7 +4,7 @@ from Utils import *
 
 
 TEST_FILE_FIELDS = {'name', 'all', 'tests', '_filename'}
-TEST_SETUP_FIELDS = {'name', 'with', 'context', 'settings', 'visited', 'skipped', 'start'}
+TEST_SETUP_FIELDS = {'name', 'with', 'context', 'settings', 'visited', 'skipped', 'start', 'route'}
 TEST_TYPES = {'can_obtain', 'cannot_obtain', 'can_reach', 'cannot_reach',
               'can_access', 'cannot_access', 'can_activate', 'cannot_activate',
               'eventually_gets', 'eventually_reaches', 'eventually_accesses',
@@ -12,6 +12,7 @@ TEST_TYPES = {'can_obtain', 'cannot_obtain', 'can_reach', 'cannot_reach',
               'requires', 'eventually_requires'}
 TEST_REQUIRES_TYPES = {'to_reach', 'to_obtain', 'to_access', 'to_activate'}
 TEST_EV_REQUIRES_FIELDS = {'iteration_limit'}
+TEST_EXTRAS = {'expect'}
 
 class TestProcessor(object):
 
@@ -43,15 +44,19 @@ class TestProcessor(object):
                     src = f'{test_file["name"]}.{construct_test_name(test)}'
                     self._check_test_setup(test, src)
                     k = set(test.keys())
-                    if unrecog := k - (TEST_SETUP_FIELDS | TEST_TYPES):
+                    if unrecog := k - (TEST_SETUP_FIELDS | TEST_TYPES | TEST_EXTRAS):
                         self.errors.append(f'Unrecognized fields in {src}: {", ".join(sorted(unrecog))}')
                     types = k & TEST_TYPES
                     if not types or len(types) > 1:
                         self.errors.append(f'Test at {src} must have exactly one test type, but has: '
                                            f'{", ".join(sorted(types)) or None}')
-                    else:
-                        ttype = types.pop()
-                        self._check_test(ttype, test[ttype], src)
+                        continue
+
+                    ttype = types.pop()
+                    self._check_test(ttype, test[ttype], src)
+                    # extras
+                    if 'expect' in test:
+                        self._check_test_setup(test['expect'], f'{src}.expect')
         return self.errors
 
     def _check_test_setup(self, setup_dict, src):

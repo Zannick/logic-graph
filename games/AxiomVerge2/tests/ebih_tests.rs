@@ -223,8 +223,7 @@ fn start_Ebih__Ebih_East__Middle_Platform_with_Infect__Remote_Drone_can_access_E
     );
 }
 #[test]
-fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_context_ebih__grid_25_10_12__ctx__door_open_True_path_Ebih__Grid_25_10_12__Bush__Ebih__Grid_25_10_12__Mid_Ledge__Ebih__Grid_25_10_12__Door_Left__Ebih__Grid_25_10_12__Door__Ebih__Grid_25_10_12__East_11__Ebih__Grid_26_10_11__West_11__Ebih__Grid_26_10_11__Middle_Bottom__Ebih__Grid_26_10_11__Under_Ledge__Ebih__Grid_26_10_11__Ledge__Ebih__Grid_26_10_11__Middle_Platform__Ebih__Grid_26_10_11__West_10__Ebih__Grid_25_10_12__East_10__Ebih__Grid_25_10_12__Hidden_Bush(
-) {
+fn PathTest1() {
     let (mut world, mut ctx) = shared_setup();
     ctx.infect = 1;
     ctx.cbits2.insert(flags::ContextBits2::REMOTE_DRONE);
@@ -251,6 +250,21 @@ fn start_Ebih__Grid_25_10_12__East_12_with_Infect__Remote_Drone_context_ebih__gr
             SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
         ]
     );
+    let verify = |ctx: &Context| {
+        let mut vec = Vec::new();
+        if ctx.ebih__grid_25_10_12__ctx__door_open() != true {
+            vec.push(format!(
+                "did not match required context ebih__grid_25_10_12__ctx__door_open=True: {}",
+                ctx.ebih__grid_25_10_12__ctx__door_open()
+            ));
+        }
+        if vec.is_empty() {
+            Ok(())
+        } else {
+            Err(vec.join("\n"))
+        }
+    };
+    (verify)(&ctx).unwrap();
 }
 #[test]
 fn start_Ebih__Ebih_West__Upper_Save_with_Remote_Drone_eventually_reaches_Giguna__Giguna_Northeast__Inner_Wall(
@@ -278,4 +292,70 @@ fn start_Ebih__Waterfall__Ledge_Below_Hole_context_ebih__waterfall__ctx__west_do
         SpotId::Ebih__Waterfall__Ledge_Below_Hole,
         SpotId::Ebih__Ebih_West__Medium_High_Platform
     );
+}
+#[test]
+fn prev_area() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.prev_area = AreaId::Glacier__Vertical_Room;
+
+    expect_this_route!(
+        &world,
+        ctx,
+        SpotId::Glacier__Grid_31_9_12__West_12,
+        vec![SpotId::Ebih__Base_Camp__East_12,]
+    );
+    let verify = |ctx: &Context| {
+        let mut vec = Vec::new();
+        if ctx.prev_area() != AreaId::Glacier__Grid_31_9_12 {
+            vec.push(format!(
+                "did not match required context prev_area=Glacier > Grid 31,9-12: {}",
+                ctx.prev_area()
+            ));
+        }
+        if vec.is_empty() {
+            Ok(())
+        } else {
+            Err(vec.join("\n"))
+        }
+    };
+    (verify)(&ctx).unwrap();
+}
+#[test]
+fn prev_area_after_pause() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.flasks = 1;
+    ctx.prev_area = AreaId::Glacier__Vertical_Room;
+    ctx.last = SpotId::None;
+
+    expect_this_route!(
+        &world,
+        ctx,
+        SpotId::Glacier__Grid_31_9_12__West_12,
+        vec![
+            SpotId::Ebih__Base_Camp__East_12,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            SpotId::Ebih__Base_Camp__East_12,
+        ]
+    );
+    let verify = |ctx: &Context| {
+        let mut vec = Vec::new();
+        if ctx.prev_area() != AreaId::Glacier__Grid_31_9_12 {
+            vec.push(format!(
+                "did not match required context prev_area=Glacier > Grid 31,9-12: {}",
+                ctx.prev_area()
+            ));
+        }
+        if ctx.last() != SpotId::None {
+            vec.push(format!(
+                "did not match required context last=SpotId::None: {}",
+                ctx.last()
+            ));
+        }
+        if vec.is_empty() {
+            Ok(())
+        } else {
+            Err(vec.join("\n"))
+        }
+    };
+    (verify)(&ctx).unwrap();
 }

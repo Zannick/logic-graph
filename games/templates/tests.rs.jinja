@@ -167,5 +167,10 @@ fn {{ test_case|construct_test_name }}() {
     expect_eventually_requires_to_activate!(&world, ctx, Context, {{ start(test_case, test_file.all) }}, ActionId::{{ test_case.eventually_requires.to_activate|construct_id }}, verify, {{ test_case.iteration_limit or 1000 }});
     {%- endif %}
 %% endif
+
+%% if test_case.expect
+    let verify = {{ verify_func(test_case.expect) }};
+    (verify)(&ctx).unwrap();
+%% endif
 }
 %% endfor
