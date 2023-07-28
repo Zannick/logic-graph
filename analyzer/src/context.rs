@@ -444,14 +444,15 @@ impl<T: Ctx> ContextWrapper<T> {
         >,
     {
         warp.prewarp(&mut self.ctx);
-        self.ctx.set_position(warp.dest(&self.ctx));
+        let dest = warp.dest(&self.ctx);
+        self.ctx.set_position(dest);
         self.elapse(warp.time());
         self.ctx.spend(warp.price());
         warp.postwarp(&mut self.ctx);
         if warp.should_reload() {
             self.ctx.reload_game();
         }
-        self.append_history(History::W(warp.id(), warp.dest(&self.ctx)), warp.time());
+        self.append_history(History::W(warp.id(), dest), warp.time());
     }
 
     pub fn visit_exit<W, L, E>(&mut self, world: &W, loc: &L, exit: &E)
