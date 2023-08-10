@@ -9,6 +9,7 @@ edition = "2021"
 anyhow = { version = "*", features = ["backtrace"] }
 as-slice = "*"
 bucket_queue = "*"
+clap = { version = "4.*", features = ["derive"] }
 disjoint-hash-set = "*"
 disjoint-sets = "*"
 enum-map = "*"

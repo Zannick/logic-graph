@@ -3,7 +3,7 @@
 use crate::context::{flags, Context};
 use crate::graph::World;
 use analyzer::context::ContextWrapper;
-use analyzer::route_from_yaml_string;
+use analyzer::route::route_from_yaml_string;
 use analyzer::settings::*;
 use std::fs::File;
 use std::io::Read;
