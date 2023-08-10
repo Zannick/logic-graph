@@ -1,20 +1,19 @@
 %% include 'header.rs.jinja'
 
 use analyzer::access::*;
-use analyzer::algo::Search;
+use analyzer::cli::*;
+use clap::Parser;
 use lib{{ package }}::*;
-use std::env;
 
 fn main() -> Result<(), std::io::Error> {
-    let args: Vec<String> = env::args().collect();
+    let args = Cli::parse();
     let (world, context, routes) =
-        settings::load_settings(if args.len() > 1 { Some(&args[1]) } else { None });
+        settings::load_settings(args.settings_file());
     assert!(can_win_just_items(&world, &context),
             "Available items not enough to complete objective {}",
             world.objective);
     assert!(can_win_just_locations(&world, &context),
             "Unable to complete objective {} with only location checks",
             world.objective);
-    let search = Search::new(&world, context, routes).unwrap();
-    search.search()
+    run(&world, context, routes, &args)
 }

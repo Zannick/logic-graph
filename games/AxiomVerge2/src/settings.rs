@@ -7,6 +7,7 @@ use analyzer::route::route_from_yaml_string;
 use analyzer::settings::*;
 use std::fs::File;
 use std::io::Read;
+use std::path::PathBuf;
 use yaml_rust::{Yaml, YamlLoader};
 
 fn read_key_value(
@@ -40,7 +41,7 @@ fn read_key_value(
     Ok(())
 }
 
-pub fn load_settings(filename: Option<&str>) -> (World, Context, Vec<ContextWrapper<Context>>) {
+pub fn load_settings(filename: Option<&PathBuf>) -> (World, Context, Vec<ContextWrapper<Context>>) {
     let mut world = World::new();
     analyzer::world::World::condense_graph(&mut world);
     let mut ctx = Context::default();
@@ -48,10 +49,10 @@ pub fn load_settings(filename: Option<&str>) -> (World, Context, Vec<ContextWrap
     let route_key = Yaml::String(String::from("routes"));
     if let Some(filename) = filename {
         let mut file = File::open(filename)
-            .unwrap_or_else(|e| panic!("Couldn't open file \"{}\": {:?}", filename, e));
+            .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
         let mut settings = String::new();
         file.read_to_string(&mut settings)
-            .unwrap_or_else(|e| panic!("Couldn't read from file \"{}\": {:?}", filename, e));
+            .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", filename, e));
         let yaml = YamlLoader::load_from_str(&settings).expect("YAML parse error");
         let mut errs = Vec::new();
         let mut route_strs = Vec::new();
