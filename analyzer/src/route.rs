@@ -162,5 +162,6 @@ where
         output.push(next.get().diff(ctx.get()));
         ctx = next;
     }
+    output.push(format!("Elapsed: {}ms", ctx.elapsed()));
     Ok(output.join("\n"))
 }

@@ -60,10 +60,10 @@ where
         }
         Commands::Route { route, .. } => {
             let mut file = File::open(&route)
-                .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", route, e));
+                .unwrap_or_else(|e| panic!("Couldn't open file {:?}: {:?}", route, e));
             let mut rstr = String::new();
             file.read_to_string(&mut rstr)
-                .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", route, e));
+                .unwrap_or_else(|e| panic!("Couldn't read from file {:?}: {:?}", route, e));
             println!(
                 "{}",
                 match debug_route(world, &startctx, &rstr) {
