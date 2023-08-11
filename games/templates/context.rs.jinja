@@ -346,12 +346,12 @@ impl context::Ctx for Context {
 
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap
         if old.{{ ctx }} != self.{{ ctx }} {
-            list.push(format!("{{ ctx }}: {:?} ➡ {:?}", old.{{ ctx }}, self.{{ ctx }}));
+            list.push(format!("{{ ctx }}: {:?} → {:?}", old.{{ ctx }}, self.{{ ctx }}));
         }
 %% endfor
 %% for s, info in settings.items() if s not in bfp.varmap
         if old.{{ s }} != self.{{ s }} {
-            list.push(format!("{{ s }}: {:?} ➡ {:?}", old.{{ s }}, self.{{ s }}));
+            list.push(format!("{{ s }}: {:?} → {:?}", old.{{ s }}, self.{{ s }}));
         }
 %% endfor
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
