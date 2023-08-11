@@ -34,6 +34,7 @@ where
     map: HashMap<Vec<HistoryAlias<T>>, Vec<Solution<T>>, CommonHasher>,
     path: &'static str,
     previews: &'static str,
+    best_file: &'static str,
     file: File,
     count: usize,
     best: u32,
@@ -46,12 +47,14 @@ where
     pub fn new(
         sols_file: &'static str,
         previews_file: &'static str,
+        best_file: &'static str,
     ) -> io::Result<SolutionCollector<T>> {
         Ok(SolutionCollector {
             map: new_hashmap(),
             file: File::create(sols_file)?,
             path: sols_file,
             previews: previews_file,
+            best_file,
             count: 0,
             best: 0,
         })
@@ -106,6 +109,7 @@ where
             self.map
                 .insert(loc_history, vec![Solution { elapsed, history }]);
             self.write_previews().unwrap();
+            self.write_best().unwrap();
             Some(locs)
         }
     }
@@ -202,9 +206,15 @@ where
         let mut vec: Vec<&Solution<T>> = self.map.values().filter_map(|v| v.first()).collect();
         vec.sort_by_key(|c| c.elapsed);
         for (i, c) in vec.iter().enumerate() {
-            Self::write_one_preview(&mut file, i, c, self.best)?
+            Self::write_one_preview(&mut file, i, c, self.best)?;
         }
         Ok(())
+    }
+
+    pub fn write_best(&mut self) -> io::Result<()> {
+        let mut file = File::create(self.best_file)?;
+        let sol = self.get_best();
+        Self::write_one(&mut file, 0, 0, &sol, self.best)
     }
 
     pub fn sort_and_clean(&mut self) {

@@ -252,7 +252,11 @@ where
         world.skip_unused_items(&mut ctx);
 
         let startctx = ContextWrapper::new(ctx);
-        let mut solutions = SolutionCollector::<T>::new("data/solutions.txt", "data/previews.txt")?;
+        let mut solutions = SolutionCollector::<T>::new(
+            "data/solutions.txt",
+            "data/previews.txt",
+            "data/best.txt",
+        )?;
 
         let mut wins = Vec::new();
         let mut others = Vec::new();
@@ -414,7 +418,8 @@ where
             }
 
             drop(sols);
-            self.recreate_store(&self.startctx, history, SearchMode::Minimized).unwrap();
+            self.recreate_store(&self.startctx, history, SearchMode::Minimized)
+                .unwrap();
         }
     }
 
