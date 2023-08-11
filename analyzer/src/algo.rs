@@ -24,6 +24,7 @@ enum SearchMode {
     LocalMinima,
     Greedy,
     Start,
+    Minimized,
     Unknown,
 }
 
@@ -386,7 +387,7 @@ where
         }
 
         if sols.insert(ctx.elapsed(), history).is_some() {
-            println!("Found new unique solution");
+            println!("{:?} mode found new unique solution", mode);
         }
 
         if let Some(ctx) = min_ctx {
@@ -413,7 +414,7 @@ where
             }
 
             drop(sols);
-            self.recreate_store(&self.startctx, history, mode).unwrap();
+            self.recreate_store(&self.startctx, history, SearchMode::Minimized).unwrap();
         }
     }
 
@@ -443,6 +444,10 @@ where
         single_step(self.world, ctx, self.queue.max_time())
     }
 
+    fn recreate_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
+        single_step(self.world, ctx, u32::MAX)
+    }
+
     fn choose_mode(&self, iters: usize) -> SearchMode {
         match iters % 8 {
             0 => SearchMode::SomeProgress((iters / 8) % 32),
@@ -462,9 +467,9 @@ where
         mode: SearchMode,
     ) -> anyhow::Result<()> {
         let mut ctx = startctx.clone();
-        // It doesn't actually matter what the last one is.
         let mut iter = steps.iter().peekable();
         while let Some(hist) = iter.next() {
+            // It doesn't actually matter what the last one is, so we skip it.
             if iter.peek().is_none() {
                 break;
             }
@@ -473,7 +478,7 @@ where
                 ctx.remove_history();
             } else {
                 let prev = Some(ctx.get().clone());
-                let mut next = self.single_step(ctx);
+                let mut next = self.recreate_step(ctx);
                 if let Some((ci, _)) = next
                     .iter()
                     .enumerate()
@@ -485,7 +490,7 @@ where
                     ctx.remove_history();
                 } else {
                     // We didn't find the desired state. Probably it was skipped as past the deadline.
-                    return self.queue.extend(next, &prev);
+                    panic!("Failed to recreate {:?} at {:?}", hist, prev.unwrap());
                 }
             }
         }
