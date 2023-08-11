@@ -483,19 +483,32 @@ where
                 ctx.remove_history();
             } else {
                 let prev = Some(ctx.get().clone());
-                let mut next = self.recreate_step(ctx);
+                let elapsed = ctx.elapsed();
+                let next = self.recreate_step(ctx);
                 if let Some((ci, _)) = next
                     .iter()
                     .enumerate()
                     .find(|(_, c)| c.recent_history().last() == Some(hist))
                 {
                     // Assumption: no subsequent state leads to victory (aside from the last state?)
-                    ctx = next.swap_remove(ci);
+                    ctx = next[ci].clone();
                     self.queue.extend_keep_one(next, &ctx, &prev)?;
                     ctx.remove_history();
                 } else {
-                    // We didn't find the desired state. Probably it was skipped as past the deadline.
-                    panic!("Failed to recreate {:?} at {:?}", hist, prev.unwrap());
+                    // We didn't find the desired state.
+                    // Check whether this is a no-op. If so, we can skip pushing states into the queue,
+                    // since next iteration will regenerate them.
+                    ctx = ContextWrapper::with_elapsed(prev.unwrap(), elapsed);
+                    if ctx.can_replay(self.world, *hist) {
+                        let c = ctx.get().clone();
+                        ctx.replay(self.world, *hist);
+                        ctx.remove_history();
+                        if ctx.get() == &c {
+                            continue;
+                        }
+                    }
+                    // Otherwise, something went wrong.
+                    panic!("Failed to recreate \"{}\" at {:?}\n{:?}", hist, ctx, steps);
                 }
             }
         }
