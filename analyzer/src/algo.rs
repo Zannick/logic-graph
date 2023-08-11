@@ -512,10 +512,23 @@ where
             num_workers, num_threads
         );
 
+        struct AtExit<'a> {
+            flag: &'a AtomicBool,
+        }
+        impl<'a> Drop for AtExit<'a> {
+            fn drop(&mut self) {
+                self.flag.store(true, Ordering::Release);
+            }
+        }
+
         let run_worker = |i| {
             let mode = mode_by_index(i);
             let mut done = false;
             let mut no_progress = 0;
+
+            // Enforce all workers exiting immediately upon one worker exiting (e.g. panic/assert)
+            let _at_exit = AtExit { flag: &finished };
+
             while !finished.load(Ordering::Acquire)
                 && workers_done.load(Ordering::Acquire) < num_workers
             {
