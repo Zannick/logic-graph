@@ -538,6 +538,243 @@ impl context::Ctx for Context {
             self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
         }
     }
+
+    fn diff(&self, old: &Context) -> String {
+        let mut list: Vec<String> = Vec::new();
+
+        if old.position != self.position {
+            list.push(format!("{:?} ➡ {:?}", old.position, self.position));
+        }
+        if old.save != self.save {
+            list.push(format!("{:?} ➡ {:?}", old.save, self.save));
+        }
+        if old.tod != self.tod {
+            list.push(format!("{:?} ➡ {:?}", old.tod, self.tod));
+        }
+        if old.rupees != self.rupees {
+            list.push(format!("{:?} ➡ {:?}", old.rupees, self.rupees));
+        }
+        if old.triforce_count != self.triforce_count {
+            list.push(format!(
+                "{:?} ➡ {:?}",
+                old.triforce_count, self.triforce_count
+            ));
+        }
+        if old.gold_skulltula_token != self.gold_skulltula_token {
+            list.push(format!(
+                "Gold_Skulltula_Token: {:+}",
+                self.gold_skulltula_token - old.gold_skulltula_token
+            ));
+        }
+        if old.triforce_piece != self.triforce_piece {
+            list.push(format!(
+                "Triforce_Piece: {:+}",
+                self.triforce_piece - old.triforce_piece
+            ));
+        }
+        // bitflags
+        let n = self.cbits1.contains(flags::ContextBits1::CHILD);
+        let p = old.cbits1.contains(flags::ContextBits1::CHILD);
+        if n != p {
+            list.push(format!("{}CHILD", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
+        if n != p {
+            list.push(format!(
+                "{}DEKU_TREE__COMPASS_ROOM__CTX__TORCH",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::LOGIC_DEKU_B1_SKIP);
+        let p = old.cbits1.contains(flags::ContextBits1::LOGIC_DEKU_B1_SKIP);
+        if n != p {
+            list.push(format!("{}LOGIC_DEKU_B1_SKIP", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BIGGORON_SWORD);
+        let p = old.cbits1.contains(flags::ContextBits1::BIGGORON_SWORD);
+        if n != p {
+            list.push(format!("{}BIGGORON_SWORD", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BOMBS);
+        let p = old.cbits1.contains(flags::ContextBits1::BOMBS);
+        if n != p {
+            list.push(format!("{}BOMBS", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BOOMERANG);
+        let p = old.cbits1.contains(flags::ContextBits1::BOOMERANG);
+        if n != p {
+            list.push(format!("{}BOOMERANG", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BOW);
+        let p = old.cbits1.contains(flags::ContextBits1::BOW);
+        if n != p {
+            list.push(format!("{}BOW", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BUY_DEKU_NUT_10);
+        let p = old.cbits1.contains(flags::ContextBits1::BUY_DEKU_NUT_10);
+        if n != p {
+            list.push(format!("{}BUY_DEKU_NUT_10", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BUY_DEKU_NUT_5);
+        let p = old.cbits1.contains(flags::ContextBits1::BUY_DEKU_NUT_5);
+        if n != p {
+            list.push(format!("{}BUY_DEKU_NUT_5", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BUY_DEKU_SHIELD);
+        let p = old.cbits1.contains(flags::ContextBits1::BUY_DEKU_SHIELD);
+        if n != p {
+            list.push(format!("{}BUY_DEKU_SHIELD", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BUY_DEKU_STICK_1);
+        let p = old.cbits1.contains(flags::ContextBits1::BUY_DEKU_STICK_1);
+        if n != p {
+            list.push(format!("{}BUY_DEKU_STICK_1", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEFEAT_GANON);
+        let p = old.cbits1.contains(flags::ContextBits1::DEFEAT_GANON);
+        if n != p {
+            list.push(format!("{}DEFEAT_GANON", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEFEAT_GOHMA);
+        let p = old.cbits1.contains(flags::ContextBits1::DEFEAT_GOHMA);
+        if n != p {
+            list.push(format!("{}DEFEAT_GOHMA", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+        if n != p {
+            list.push(format!("{}DEKU_BACK_ROOM_WALL", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+        let p = old.cbits1.contains(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+        if n != p {
+            list.push(format!("{}DEKU_BACK_ROOM_WEB", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+        if n != p {
+            list.push(format!("{}DEKU_BASEMENT_BLOCK", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+        if n != p {
+            list.push(format!("{}DEKU_BASEMENT_SCRUBS", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+        if n != p {
+            list.push(format!("{}DEKU_BASEMENT_SWITCH", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEKU_BASEMENT_WEB);
+        let p = old.cbits1.contains(flags::ContextBits1::DEKU_BASEMENT_WEB);
+        if n != p {
+            list.push(format!("{}DEKU_BASEMENT_WEB", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEKU_LOBBY_WEB);
+        let p = old.cbits1.contains(flags::ContextBits1::DEKU_LOBBY_WEB);
+        if n != p {
+            list.push(format!("{}DEKU_LOBBY_WEB", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEKU_NUT_DROP);
+        let p = old.cbits1.contains(flags::ContextBits1::DEKU_NUT_DROP);
+        if n != p {
+            list.push(format!("{}DEKU_NUT_DROP", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEKU_SHIELD_DROP);
+        let p = old.cbits1.contains(flags::ContextBits1::DEKU_SHIELD_DROP);
+        if n != p {
+            list.push(format!("{}DEKU_SHIELD_DROP", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+        if n != p {
+            list.push(format!("{}DEKU_SLINGSHOT_SCRUB", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEKU_STICK_DROP);
+        let p = old.cbits1.contains(flags::ContextBits1::DEKU_STICK_DROP);
+        if n != p {
+            list.push(format!("{}DEKU_STICK_DROP", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::HYLIAN_SHIELD);
+        let p = old.cbits1.contains(flags::ContextBits1::HYLIAN_SHIELD);
+        if n != p {
+            list.push(format!("{}HYLIAN_SHIELD", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::KOKIRI_EMERALD);
+        let p = old.cbits1.contains(flags::ContextBits1::KOKIRI_EMERALD);
+        if n != p {
+            list.push(format!("{}KOKIRI_EMERALD", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::KOKIRI_SWORD);
+        let p = old.cbits1.contains(flags::ContextBits1::KOKIRI_SWORD);
+        if n != p {
+            list.push(format!("{}KOKIRI_SWORD", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::MAGIC_METER);
+        let p = old.cbits1.contains(flags::ContextBits1::MAGIC_METER);
+        if n != p {
+            list.push(format!("{}MAGIC_METER", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::OCARINA);
+        let p = old.cbits1.contains(flags::ContextBits1::OCARINA);
+        if n != p {
+            list.push(format!("{}OCARINA", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::SHOWED_MIDO);
+        let p = old.cbits1.contains(flags::ContextBits1::SHOWED_MIDO);
+        if n != p {
+            list.push(format!("{}SHOWED_MIDO", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::SLINGSHOT);
+        let p = old.cbits1.contains(flags::ContextBits1::SLINGSHOT);
+        if n != p {
+            list.push(format!("{}SLINGSHOT", if n { "+" } else { "-" }));
+        }
+        for (loc_id, status) in self.status.iter() {
+            if *status != old.status[loc_id] {
+                list.push(format!("{:?}: {}", status, loc_id));
+            }
+        }
+
+        if self.visits != old.visits {
+            list.push(format!("Visits: {:+}", self.visits - old.visits));
+        }
+
+        if self.skips != old.skips {
+            list.push(format!("Skips: {:+}", self.skips - old.skips));
+        }
+
+        list.join("\n")
+    }
 }
 
 impl Context {

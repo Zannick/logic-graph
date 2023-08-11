@@ -159,7 +159,7 @@ where
     for (i, h) in hist.into_iter().enumerate() {
         output.push(format!("== {}. {} ==", i, h));
         let next = step_from_route(ctx.clone(), i, h, world)?;
-        // diff here
+        output.push(next.get().diff(ctx.get()));
         ctx = next;
     }
     Ok(output.join("\n"))

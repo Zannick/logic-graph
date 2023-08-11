@@ -340,6 +340,57 @@ impl context::Ctx for Context {
             self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
         }
     }
+
+    fn diff(&self, old: &Context) -> String {
+        let mut list: Vec<String> = Vec::new();
+
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap
+        if old.{{ ctx }} != self.{{ ctx }} {
+            list.push(format!("{:?} ➡ {:?}", old.{{ ctx }}, self.{{ ctx }}));
+        }
+%% endfor
+%% for s, info in settings.items() if s not in bfp.varmap
+        if old.{{ s }} != self.{{ s }} {
+            list.push(format!("{:?} ➡ {:?}", old.{{ s }}, self.{{ s }}));
+        }
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
+        if old.{{ item|lower }} != self.{{ item|lower }} {
+%% if ct == 1
+            list.push(format!("{}{{ item }}", if self.{{ item|lower }} { "+" } else { "-" }));
+%% else
+            list.push(format!("{{ item }}: {:+}", self.{{ item|lower }} - old.{{ item|lower }}));
+%% endif
+        }
+%% endfor
+    // bitflags
+%% for _, vars, _ in bfp.flag_groups
+%% set ci = loop.index
+%% for v in vars
+        let n = self.cbits{{ ci }}.contains(flags::ContextBits{{ ci }}::{{ v|upper }});
+        let p = old.cbits{{ ci }}.contains(flags::ContextBits{{ ci }}::{{ v|upper }});
+        if n != p {
+            list.push(format!("{}{{ v|upper }}", if n { "+" } else { "-" }));
+        }
+%% endfor
+%% endfor
+
+        for (loc_id, status) in self.status.iter() {
+            if *status != old.status[loc_id] {
+                list.push(format!("{:?}: {}", status, loc_id));
+            }
+        }
+        
+        if self.visits != old.visits {
+            list.push(format!("Visits: {:+}", self.visits - old.visits));
+        }
+
+        if self.skips != old.skips {
+            list.push(format!("Skips: {:+}", self.skips - old.skips));
+        }
+
+        list.join("\n")
+    }
 }
 
 impl Context {

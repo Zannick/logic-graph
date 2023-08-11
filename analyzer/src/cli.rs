@@ -29,6 +29,9 @@ pub enum Commands {
     /// searches for a solution
     Search {
         // TODO: move routes here into their own file(s)
+        /// Text files with routes to start from
+        #[arg(long, value_name = "FILE")]
+        routes: Vec<PathBuf>,
     },
 
     /// evaluates a route and shows stepwise diffs

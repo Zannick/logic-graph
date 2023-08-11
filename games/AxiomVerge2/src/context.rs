@@ -1125,6 +1125,548 @@ impl context::Ctx for Context {
             self.visits * 100 / (Self::World::NUM_LOCATIONS - self.skips)
         }
     }
+
+    fn diff(&self, old: &Context) -> String {
+        let mut list: Vec<String> = Vec::new();
+
+        if old.position != self.position {
+            list.push(format!("{:?} ➡ {:?}", old.position, self.position));
+        }
+        if old.energy != self.energy {
+            list.push(format!("{:?} ➡ {:?}", old.energy, self.energy));
+        }
+        if old.flasks != self.flasks {
+            list.push(format!("{:?} ➡ {:?}", old.flasks, self.flasks));
+        }
+        if old.refills != self.refills {
+            list.push(format!("{:?} ➡ {:?}", old.refills, self.refills));
+        }
+        if old.mode != self.mode {
+            list.push(format!("{:?} ➡ {:?}", old.mode, self.mode));
+        }
+        if old.save != self.save {
+            list.push(format!("{:?} ➡ {:?}", old.save, self.save));
+        }
+        if old.indra != self.indra {
+            list.push(format!("{:?} ➡ {:?}", old.indra, self.indra));
+        }
+        if old.last != self.last {
+            list.push(format!("{:?} ➡ {:?}", old.last, self.last));
+        }
+        if old.prev_area != self.prev_area {
+            list.push(format!("{:?} ➡ {:?}", old.prev_area, self.prev_area));
+        }
+        if old.drone_melee_damage != self.drone_melee_damage {
+            list.push(format!(
+                "Drone_Melee_Damage: {:+}",
+                self.drone_melee_damage - old.drone_melee_damage
+            ));
+        }
+        if old.drone_melee_speed != self.drone_melee_speed {
+            list.push(format!(
+                "Drone_Melee_Speed: {:+}",
+                self.drone_melee_speed - old.drone_melee_speed
+            ));
+        }
+        if old.flask != self.flask {
+            list.push(format!("Flask: {:+}", self.flask - old.flask));
+        }
+        if old.health_upgrade != self.health_upgrade {
+            list.push(format!(
+                "Health_Upgrade: {:+}",
+                self.health_upgrade - old.health_upgrade
+            ));
+        }
+        if old.infect != self.infect {
+            list.push(format!("Infect: {:+}", self.infect - old.infect));
+        }
+        if old.infection_range != self.infection_range {
+            list.push(format!(
+                "Infection_Range: {:+}",
+                self.infection_range - old.infection_range
+            ));
+        }
+        if old.melee_damage != self.melee_damage {
+            list.push(format!(
+                "Melee_Damage: {:+}",
+                self.melee_damage - old.melee_damage
+            ));
+        }
+        if old.melee_speed != self.melee_speed {
+            list.push(format!(
+                "Melee_Speed: {:+}",
+                self.melee_speed - old.melee_speed
+            ));
+        }
+        if old.nano_points != self.nano_points {
+            list.push(format!(
+                "Nano_Points: {:+}",
+                self.nano_points - old.nano_points
+            ));
+        }
+        if old.ranged_damage != self.ranged_damage {
+            list.push(format!(
+                "Ranged_Damage: {:+}",
+                self.ranged_damage - old.ranged_damage
+            ));
+        }
+        if old.ranged_speed != self.ranged_speed {
+            list.push(format!(
+                "Ranged_Speed: {:+}",
+                self.ranged_speed - old.ranged_speed
+            ));
+        }
+        // bitflags
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI__MAIN_AREA__CTX__COMBO",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__GRID_25_10_12__CTX__DOOR_OPEN",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__WATERFALL__CTX__WEST_DOOR_OPEN",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__DOOR_OPENED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__CARNELIAN__CTX__DOOR_OPENED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__UPPER_SUSAR);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__CARNELIAN__CTX__UPPER_SUSAR",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__CARNELIAN__CTX__LOWER_SUSAR",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::BOOMERANG_STEERING);
+        let p = old.cbits1.contains(flags::ContextBits1::BOOMERANG_STEERING);
+        if n != p {
+            list.push(format!("{}BOOMERANG_STEERING", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::MAJOR_GLITCHES);
+        let p = old.cbits1.contains(flags::ContextBits1::MAJOR_GLITCHES);
+        if n != p {
+            list.push(format!("{}MAJOR_GLITCHES", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::MINOR_GLITCHES);
+        let p = old.cbits1.contains(flags::ContextBits1::MINOR_GLITCHES);
+        if n != p {
+            list.push(format!("{}MINOR_GLITCHES", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_DRAGON_EYE_PASSAGE);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI_DRAGON_EYE_PASSAGE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_1);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI_STRONGHOLD_BOULDER_1",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_BOULDER_2);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI_STRONGHOLD_BOULDER_2",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI_STRONGHOLD_WALL_1",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI_STRONGHOLD_WALL_2",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::AMAGI_WEST_LAKE_SURFACE_WALL);
+        if n != p {
+            list.push(format!(
+                "{}AMAGI_WEST_LAKE_SURFACE_WALL",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::AMASHILAMA);
+        let p = old.cbits1.contains(flags::ContextBits1::AMASHILAMA);
+        if n != p {
+            list.push(format!("{}AMASHILAMA", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::ANUMAN);
+        let p = old.cbits1.contains(flags::ContextBits1::ANUMAN);
+        if n != p {
+            list.push(format!("{}ANUMAN", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB);
+        let p = old.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB);
+        if n != p {
+            list.push(format!("{}APOCALYPSE_BOMB", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::BOOMERANG);
+        let p = old.cbits1.contains(flags::ContextBits1::BOOMERANG);
+        if n != p {
+            list.push(format!("{}BOOMERANG", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF);
+        let p = old.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF);
+        if n != p {
+            list.push(format!("{}COMPANIES_LAYOFF", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST);
+        let p = old.cbits1.contains(flags::ContextBits1::DEAR_ERNEST);
+        if n != p {
+            list.push(format!("{}DEAR_ERNEST", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU);
+        let p = old.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU);
+        if n != p {
+            list.push(format!("{}DEFEAT_EBIH_ALU", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20);
+        let p = old.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20);
+        if n != p {
+            list.push(format!("{}DEFEAT_MUS_A_M20", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::DRONE_HOVER);
+        let p = old.cbits1.contains(flags::ContextBits1::DRONE_HOVER);
+        if n != p {
+            list.push(format!("{}DRONE_HOVER", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+        if n != p {
+            list.push(format!(
+                "{}EBIH_WATERFALL_BLOCK_LEFT",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+        if n != p {
+            list.push(format!(
+                "{}EBIH_WATERFALL_BLOCK_RIGHT",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL);
+        let p = old.cbits2.contains(flags::ContextBits2::FAST_TRAVEL);
+        if n != p {
+            list.push(format!("{}FAST_TRAVEL", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA_NORTHEAST_GATE",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::HERETICS_TABLET);
+        let p = old.cbits2.contains(flags::ContextBits2::HERETICS_TABLET);
+        if n != p {
+            list.push(format!("{}HERETICS_TABLET", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::ICE_AXE);
+        let p = old.cbits2.contains(flags::ContextBits2::ICE_AXE);
+        if n != p {
+            list.push(format!("{}ICE_AXE", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::INFECTION_SPEED);
+        let p = old.cbits2.contains(flags::ContextBits2::INFECTION_SPEED);
+        if n != p {
+            list.push(format!("{}INFECTION_SPEED", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB);
+        let p = old.cbits2.contains(flags::ContextBits2::LEDGE_GRAB);
+        if n != p {
+            list.push(format!("{}LEDGE_GRAB", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::LETTER_FROM_TRACE);
+        let p = old.cbits2.contains(flags::ContextBits2::LETTER_FROM_TRACE);
+        if n != p {
+            list.push(format!("{}LETTER_FROM_TRACE", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::MAP_17_10);
+        let p = old.cbits2.contains(flags::ContextBits2::MAP_17_10);
+        if n != p {
+            list.push(format!("{}MAP_17_10", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::NANITE_MIST);
+        let p = old.cbits2.contains(flags::ContextBits2::NANITE_MIST);
+        if n != p {
+            list.push(format!("{}NANITE_MIST", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::POWER_MATRIX);
+        let p = old.cbits2.contains(flags::ContextBits2::POWER_MATRIX);
+        if n != p {
+            list.push(format!("{}POWER_MATRIX", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::RECORD_LOSSES);
+        let p = old.cbits2.contains(flags::ContextBits2::RECORD_LOSSES);
+        if n != p {
+            list.push(format!("{}RECORD_LOSSES", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::REMOTE_DRONE);
+        let p = old.cbits2.contains(flags::ContextBits2::REMOTE_DRONE);
+        if n != p {
+            list.push(format!("{}REMOTE_DRONE", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::RESEARCHERS_MISSING);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::RESEARCHERS_MISSING);
+        if n != p {
+            list.push(format!("{}RESEARCHERS_MISSING", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::SHOCKWAVE);
+        let p = old.cbits2.contains(flags::ContextBits2::SHOCKWAVE);
+        if n != p {
+            list.push(format!("{}SHOCKWAVE", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK);
+        let p = old.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK);
+        if n != p {
+            list.push(format!("{}SLINGSHOT_HOOK", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::STATION_POWER);
+        let p = old.cbits2.contains(flags::ContextBits2::STATION_POWER);
+        if n != p {
+            list.push(format!("{}STATION_POWER", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::SWITCH_36_11);
+        let p = old.cbits2.contains(flags::ContextBits2::SWITCH_36_11);
+        if n != p {
+            list.push(format!("{}SWITCH_36_11", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::SWITCH_40_12);
+        let p = old.cbits2.contains(flags::ContextBits2::SWITCH_40_12);
+        if n != p {
+            list.push(format!("{}SWITCH_40_12", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+        if n != p {
+            list.push(format!(
+                "{}TERMINAL_BREAKTHROUGH_1",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::UNDER_SIEGE);
+        let p = old.cbits2.contains(flags::ContextBits2::UNDER_SIEGE);
+        if n != p {
+            list.push(format!("{}UNDER_SIEGE", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::UNDERWATER_MOVEMENT);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::UNDERWATER_MOVEMENT);
+        if n != p {
+            list.push(format!("{}UNDERWATER_MOVEMENT", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::WALL_CLIMB);
+        let p = old.cbits2.contains(flags::ContextBits2::WALL_CLIMB);
+        if n != p {
+            list.push(format!("{}WALL_CLIMB", if n { "+" } else { "-" }));
+        }
+        for (loc_id, status) in self.status.iter() {
+            if *status != old.status[loc_id] {
+                list.push(format!("{:?}: {}", status, loc_id));
+            }
+        }
+
+        if self.visits != old.visits {
+            list.push(format!("Visits: {:+}", self.visits - old.visits));
+        }
+
+        if self.skips != old.skips {
+            list.push(format!("Skips: {:+}", self.skips - old.skips));
+        }
+
+        list.join("\n")
+    }
 }
 
 impl Context {

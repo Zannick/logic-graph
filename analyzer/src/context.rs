@@ -75,6 +75,8 @@ pub trait Ctx:
     fn count_visits(&self) -> u32;
     fn count_skips(&self) -> u32;
     fn progress(&self) -> u32;
+
+    fn diff(&self, old: &Self) -> String;
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
