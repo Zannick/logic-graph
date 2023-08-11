@@ -543,20 +543,23 @@ impl context::Ctx for Context {
         let mut list: Vec<String> = Vec::new();
 
         if old.position != self.position {
-            list.push(format!("{:?} ➡ {:?}", old.position, self.position));
+            list.push(format!(
+                "position: {:?} ➡ {:?}",
+                old.position, self.position
+            ));
         }
         if old.save != self.save {
-            list.push(format!("{:?} ➡ {:?}", old.save, self.save));
+            list.push(format!("save: {:?} ➡ {:?}", old.save, self.save));
         }
         if old.tod != self.tod {
-            list.push(format!("{:?} ➡ {:?}", old.tod, self.tod));
+            list.push(format!("tod: {:?} ➡ {:?}", old.tod, self.tod));
         }
         if old.rupees != self.rupees {
-            list.push(format!("{:?} ➡ {:?}", old.rupees, self.rupees));
+            list.push(format!("rupees: {:?} ➡ {:?}", old.rupees, self.rupees));
         }
         if old.triforce_count != self.triforce_count {
             list.push(format!(
-                "{:?} ➡ {:?}",
+                "triforce_count: {:?} ➡ {:?}",
                 old.triforce_count, self.triforce_count
             ));
         }

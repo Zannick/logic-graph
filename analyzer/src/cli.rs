@@ -37,7 +37,7 @@ pub enum Commands {
     /// evaluates a route and shows stepwise diffs
     Route {
         /// text file with route
-        #[arg(long, value_name = "FILE")]
+        #[arg(value_name = "FILE")]
         route: PathBuf,
     },
 }

@@ -1130,31 +1130,37 @@ impl context::Ctx for Context {
         let mut list: Vec<String> = Vec::new();
 
         if old.position != self.position {
-            list.push(format!("{:?} ➡ {:?}", old.position, self.position));
+            list.push(format!(
+                "position: {:?} ➡ {:?}",
+                old.position, self.position
+            ));
         }
         if old.energy != self.energy {
-            list.push(format!("{:?} ➡ {:?}", old.energy, self.energy));
+            list.push(format!("energy: {:?} ➡ {:?}", old.energy, self.energy));
         }
         if old.flasks != self.flasks {
-            list.push(format!("{:?} ➡ {:?}", old.flasks, self.flasks));
+            list.push(format!("flasks: {:?} ➡ {:?}", old.flasks, self.flasks));
         }
         if old.refills != self.refills {
-            list.push(format!("{:?} ➡ {:?}", old.refills, self.refills));
+            list.push(format!("refills: {:?} ➡ {:?}", old.refills, self.refills));
         }
         if old.mode != self.mode {
-            list.push(format!("{:?} ➡ {:?}", old.mode, self.mode));
+            list.push(format!("mode: {:?} ➡ {:?}", old.mode, self.mode));
         }
         if old.save != self.save {
-            list.push(format!("{:?} ➡ {:?}", old.save, self.save));
+            list.push(format!("save: {:?} ➡ {:?}", old.save, self.save));
         }
         if old.indra != self.indra {
-            list.push(format!("{:?} ➡ {:?}", old.indra, self.indra));
+            list.push(format!("indra: {:?} ➡ {:?}", old.indra, self.indra));
         }
         if old.last != self.last {
-            list.push(format!("{:?} ➡ {:?}", old.last, self.last));
+            list.push(format!("last: {:?} ➡ {:?}", old.last, self.last));
         }
         if old.prev_area != self.prev_area {
-            list.push(format!("{:?} ➡ {:?}", old.prev_area, self.prev_area));
+            list.push(format!(
+                "prev_area: {:?} ➡ {:?}",
+                old.prev_area, self.prev_area
+            ));
         }
         if old.drone_melee_damage != self.drone_melee_damage {
             list.push(format!(

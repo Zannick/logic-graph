@@ -157,7 +157,7 @@ where
     let mut output: Vec<String> = Vec::new();
 
     for (i, h) in hist.into_iter().enumerate() {
-        output.push(format!("== {}. {} ==", i, h));
+        output.push(format!("== {}. {} ==", i + 1, h));
         let next = step_from_route(ctx.clone(), i, h, world)?;
         output.push(next.get().diff(ctx.get()));
         ctx = next;
