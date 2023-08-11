@@ -513,7 +513,7 @@ where
             }
         }
         let prev = Some(ctx.get().clone());
-        let next = self.single_step(ctx);
+        let next = self.recreate_step(ctx);
         let next = self.extract_solutions(next, &prev, mode);
         self.queue.extend(next, &prev)
     }
