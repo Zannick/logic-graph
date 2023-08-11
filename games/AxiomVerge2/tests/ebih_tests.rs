@@ -359,3 +359,45 @@ fn prev_area_after_pause() {
     };
     (verify)(&ctx).unwrap();
 }
+#[test]
+fn prev_area_after_menu_hop() {
+    let (mut world, mut ctx) = shared_setup();
+    ctx.infect = 1;
+    ctx.flasks = 1;
+    ctx.prev_area = AreaId::Glacier__Vertical_Room;
+    ctx.last = SpotId::None;
+
+    expect_this_route!(
+        &world,
+        ctx,
+        SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
+        vec![
+            SpotId::Glacier__Grid_31_9_12__West_12,
+            SpotId::Ebih__Base_Camp__East_12,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            SpotId::Menu__Upgrade_Menu__Infection,
+            SpotId::Ebih__Base_Camp__East_12,
+        ]
+    );
+    let verify = |ctx: &Context| {
+        let mut vec = Vec::new();
+        if ctx.prev_area() != AreaId::Glacier__Grid_31_9_12 {
+            vec.push(format!(
+                "did not match required context prev_area=Glacier > Grid 31,9-12: {}",
+                ctx.prev_area()
+            ));
+        }
+        if ctx.last() != SpotId::None {
+            vec.push(format!(
+                "did not match required context last=SpotId::None: {}",
+                ctx.last()
+            ));
+        }
+        if vec.is_empty() {
+            Ok(())
+        } else {
+            Err(vec.join("\n"))
+        }
+    };
+    (verify)(&ctx).unwrap();
+}

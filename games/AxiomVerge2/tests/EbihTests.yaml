@@ -144,3 +144,22 @@ tests:
       context:
         prev_area: Glacier > Grid 31,9-12
         last: SpotId::None
+
+  - name: prev_area_after_menu_hop
+    start: Glacier > Grid 31,9-12 > Observation Tower L4
+    with:
+      - Infect
+    context:
+      flasks: 1
+      prev_area: Glacier > Vertical Room
+      last: SpotId::None
+    path:
+      - Glacier > Grid 31,9-12 > West 12
+      - Ebih > Base Camp > East 12
+      - Menu > Upgrade Menu > Physiology
+      - Menu > Upgrade Menu > Infection
+      - Ebih > Base Camp > East 12
+    expect:
+      context:
+        prev_area: Glacier > Grid 31,9-12
+        last: SpotId::None
