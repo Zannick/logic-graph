@@ -20,6 +20,22 @@ where
     Ok(hist)
 }
 
+pub(crate) fn histlines_from_string<W, T, L>(route: &str) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+{
+    let mut hist: Vec<(HistoryAlias<T>, &str)> = Vec::new();
+    for line in route.lines() {
+        let line = line.trim();
+        if !line.is_empty() && !line.starts_with('#') {
+            hist.push((History::from_str(line)?, line));
+        }
+    }
+    Ok(hist)
+}
+
 pub(crate) fn step_from_route<W, T, L>(
     mut ctx: ContextWrapper<T>,
     i: usize,
@@ -152,13 +168,14 @@ where
     T: Ctx<World = W>,
     L: Location<Context = T>,
 {
-    let hist = hist_from_string::<W, T, L>(route)?;
+    let histlines = histlines_from_string::<W, T, L>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
     let mut output: Vec<String> = Vec::new();
 
-    for (i, h) in hist.into_iter().enumerate() {
-        output.push(format!("== {}. {} ==", i + 1, h));
-        let next = step_from_route(ctx.clone(), i, h, world)?;
+    for (i, (h, line)) in histlines.into_iter().enumerate() {
+        output.push(format!("== {}. {} ==", i + 1, line));
+        let mut next = step_from_route(ctx.clone(), i, h, world)?;
+        output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
         output.push(next.get().diff(ctx.get()));
         ctx = next;
     }
