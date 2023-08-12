@@ -3,6 +3,7 @@ use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::minimize::pinpoint_minimize;
+use crate::route::step_from_route;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use anyhow::Result;
