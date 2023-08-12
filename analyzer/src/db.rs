@@ -865,13 +865,20 @@ where
         let (hist, dur) = el.remove_history();
         next_entries.push((dur, state_key.clone()));
 
+        // In case the route looped back on itself, we use the best previous time
+        let elapsed = if let Some(p) = self.get_deserialize_state_data(prev).unwrap() {
+            p.elapsed + dur
+        } else {
+            el.elapsed()
+        };
+
         // This is the only part of the chain where the hist and prev are changed
         self.statedb
             .merge_cf_opt(
                 self.best_cf(),
                 &state_key,
                 Self::serialize_data(StateData {
-                    elapsed: el.elapsed(), // should be equal to prev_elapsed + dur
+                    elapsed,
                     hist,
                     prev: prev.clone(),
                 }),
@@ -879,7 +886,7 @@ where
             )
             .unwrap();
 
-        let mut to_adjust: Vec<_> = vec![(el.elapsed(), state_key)];
+        let mut to_adjust: Vec<_> = vec![(elapsed, state_key)];
 
         while let Some((prev_elapsed, state_key)) = to_adjust.pop() {
             // Get all the children of state_key
