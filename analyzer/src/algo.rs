@@ -3,7 +3,6 @@ use crate::context::*;
 use crate::greedy::*;
 use crate::heap::RocksBackedQueue;
 use crate::minimize::pinpoint_minimize;
-use crate::route::step_from_route;
 use crate::solutions::SolutionCollector;
 use crate::world::*;
 use anyhow::Result;
@@ -372,30 +371,6 @@ where
         let history = self.queue.db().get_history(ctx.get()).unwrap();
         let elapsed = self.queue.db().get_best_elapsed(ctx.get()).unwrap();
         println!("Recording solution from {:?} mode: {}ms", mode, elapsed);
-        let mut rep = ContextWrapper::new(self.startctx.get().clone());
-        let mut elapses = Vec::new();
-        for (i, h) in history.iter().enumerate() {
-            rep = step_from_route(rep, i, *h, self.world).unwrap();
-            elapses.push((
-                *h,
-                rep.elapsed(),
-                self.queue.db().get_best_elapsed(rep.get()).unwrap(),
-            ));
-        }
-        println!("Actual elapsed time: {}ms", rep.elapsed());
-        let mut offset = 0;
-        if rep.elapsed() != elapsed {
-            let mut prev = 0;
-            for (i, (h, ex, a)) in elapses.into_iter().enumerate() {
-                if ex + offset != a || i / 4 == 46 || i / 4 == 48 || i / 4 == 61 {
-                    let d = a - ex - offset;
-                    println!("{}. {}; took={}, exp={}, actual={}, disc={}", i, h, ex - prev, ex, a, d);
-                    offset += d;
-                }
-                prev = ex;
-            }
-        }
-        //assert!(offset == 0, "total discrepancy: {}", offset);
 
         let min_ctx = pinpoint_minimize(self.world, self.startctx.get(), &history);
 
@@ -506,12 +481,12 @@ where
             if iter.peek().is_none() {
                 break;
             }
+            let elapsed = ctx.elapsed();
             if self.queue.db().remember_processed(ctx.get()).unwrap() {
                 ctx.replay(self.world, *hist);
                 ctx.remove_history();
             } else {
                 let prev = Some(ctx.get().clone());
-                let elapsed = ctx.elapsed();
                 let next = self.recreate_step(ctx);
                 if let Some((ci, _)) = next
                     .iter()

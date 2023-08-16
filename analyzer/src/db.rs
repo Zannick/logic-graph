@@ -860,17 +860,12 @@ where
         state_key: Vec<u8>,
         el: &mut ContextWrapper<T>,
         prev: &Vec<u8>,
+        // In case the route looped back on itself, we use the best previous time
+        best_elapsed: u32,
         next_entries: &mut Vec<NextData>,
     ) {
         let (hist, dur) = el.remove_history();
         next_entries.push((dur, state_key.clone()));
-
-        // In case the route looped back on itself, we use the best previous time
-        let elapsed = if let Some(p) = self.get_deserialize_state_data(prev).unwrap() {
-            p.elapsed + dur
-        } else {
-            el.elapsed()
-        };
 
         // This is the only part of the chain where the hist and prev are changed
         self.statedb
@@ -878,7 +873,7 @@ where
                 self.best_cf(),
                 &state_key,
                 Self::serialize_data(StateData {
-                    elapsed,
+                    elapsed: best_elapsed,
                     hist,
                     prev: prev.clone(),
                 }),
@@ -886,7 +881,7 @@ where
             )
             .unwrap();
 
-        let mut to_adjust: Vec<_> = vec![(elapsed, state_key)];
+        let mut to_adjust: Vec<_> = vec![(best_elapsed, state_key)];
 
         while let Some((prev_elapsed, state_key)) = to_adjust.pop() {
             // Get all the children of state_key
@@ -948,11 +943,23 @@ where
         state_only: bool,
     ) -> Result<bool, Error> {
         let state_key = Self::serialize_state(el.get());
+
+        let (prev_key, best_elapsed) = if let Some(c) = prev {
+            let prev_key = Self::serialize_state(c);
+            let elapsed = self
+                .get_deserialize_state_data(&prev_key)
+                .unwrap()
+                .map_or(el.elapsed(), |sd| sd.elapsed + el.recent_dur());
+            (prev_key, elapsed)
+        } else {
+            (Vec::new(), el.elapsed())
+        };
+
         let is_new =
             // TODO: Maybe we can make this deserialization cheaper as we only need one field?
             if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
                 // This is a new state being pushed, as it has new history, hence we skip if equal.
-                if elapsed <= el.elapsed() {
+                if elapsed <= best_elapsed {
                     self.dup_iskips.fetch_add(1, Ordering::Release);
                     return Ok(false);
                 }
@@ -962,14 +969,10 @@ where
             };
         // In every other case (no such state, or we do better than that state),
         // we will rewrite the data.
-        let prev_key = if let Some(c) = prev {
-            Self::serialize_state(c)
-        } else {
-            Vec::new()
-        };
+
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
-        self.record_one_internal(state_key, el, &prev_key, &mut next_entries);
+        self.record_one_internal(state_key, el, &prev_key, best_elapsed, &mut next_entries);
 
         if let Some(p) = prev {
             if !state_only {
@@ -1007,11 +1010,17 @@ where
         let mut new_seen = 0;
         let cf = self.best_cf();
 
-        let prev_key = if let Some(c) = prev {
-            Self::serialize_state(c)
+        let (prev_key, prev_elapsed) = if let Some(c) = prev {
+            let prev_key = Self::serialize_state(c);
+            let elapsed = self
+                .get_deserialize_state_data(&prev_key)
+                .unwrap()
+                .map(|sd| sd.elapsed);
+            (prev_key, elapsed)
         } else {
-            Vec::new()
+            (Vec::new(), None)
         };
+
         let seeing: Vec<_> = vec
             .iter()
             .map(|el| Self::serialize_state(el.get()))
@@ -1024,9 +1033,14 @@ where
             .zip(seeing.into_iter())
             .zip(seen_values.into_iter())
         {
+            let best_elapsed = if let Some(p_elapsed) = prev_elapsed {
+                p_elapsed + el.recent_dur()
+            } else {
+                el.elapsed()
+            };
             if let Some(StateData { elapsed, .. }) = seen_val {
                 // This is a new state being pushed, as it has new history, hence we skip if equal.
-                if elapsed <= el.elapsed() {
+                if elapsed <= best_elapsed {
                     results.push(false);
                     dups += 1;
                     continue;
@@ -1036,7 +1050,7 @@ where
             }
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
-            self.record_one_internal(state_key, el, &prev_key, &mut next_entries);
+            self.record_one_internal(state_key, el, &prev_key, best_elapsed, &mut next_entries);
             results.push(true);
         }
 
