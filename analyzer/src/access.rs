@@ -165,7 +165,7 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     if ctx.get().position() == spot {
-        return Some(ctx)
+        return Some(ctx);
     }
     let mut spot_enum_map: EnumMap<E::SpotId, Option<ContextWrapper<T>>> = EnumMap::default();
     let mut spot_heap = BinaryHeap::new();
@@ -180,25 +180,24 @@ where
         &mut spot_heap,
     );
 
-    while spot_enum_map[spot].is_none() {
-        if let Some(Reverse(el)) = spot_heap.pop() {
-            let spot_found = el.el;
-            let pos = spot_found.get().position();
-            if spot_enum_map[pos].is_none() {
-                spot_enum_map[pos] = Some(spot_found);
-                expand(
-                    world,
-                    spot_enum_map[pos].as_ref().unwrap(),
-                    &spot_enum_map,
-                    u32::MAX,
-                    &mut spot_heap,
-                );
-            }
-        } else {
-            break;
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let spot_found = el.el;
+        let pos = spot_found.get().position();
+        if pos == spot {
+            return Some(spot_found);
+        }
+        if spot_enum_map[pos].is_none() {
+            spot_enum_map[pos] = Some(spot_found);
+            expand(
+                world,
+                spot_enum_map[pos].as_ref().unwrap(),
+                &spot_enum_map,
+                u32::MAX,
+                &mut spot_heap,
+            );
         }
     }
-    spot_enum_map[spot].clone()
+    None
 }
 
 pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
