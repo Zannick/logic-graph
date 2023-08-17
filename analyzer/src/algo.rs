@@ -415,7 +415,6 @@ where
             }
 
             let history = ctx.recent_history();
-
             if sols.insert(ctx.elapsed(), history.to_vec()).is_some() {
                 println!("Minimized found new unique solution");
             }
@@ -440,7 +439,9 @@ where
                     None
                 } else if self.world.won(ctx.get()) {
                     self.handle_solution(&mut ctx, prev, mode);
-                    Some(ctx)
+                    // The state is added to the db in handle_solution
+                    // and the ctx no longer has history attached.
+                    None
                 } else {
                     Some(ctx)
                 }
@@ -481,12 +482,12 @@ where
             if iter.peek().is_none() {
                 break;
             }
-            let elapsed = ctx.elapsed();
             if self.queue.db().remember_processed(ctx.get()).unwrap() {
                 ctx.replay(self.world, *hist);
                 ctx.remove_history();
             } else {
                 let prev = Some(ctx.get().clone());
+                let elapsed = ctx.elapsed();
                 let next = self.recreate_step(ctx);
                 if let Some((ci, _)) = next
                     .iter()
