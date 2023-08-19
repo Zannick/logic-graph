@@ -168,6 +168,14 @@ impl world::Action for Action {
         if dest != SpotId::None {
             ctx.set_position(dest);
         }
+        match self.id {
+%% for act in gl.actions()
+%% if act.act_post
+            ActionId::{{ act.id }} => rules::action_{{ act.after_id }}(ctx),
+%% endif
+%% endfor
+            _ => (),
+        };
     }
     fn dest(&self, ctx: &Context) -> SpotId {
         match self.id {

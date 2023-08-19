@@ -315,6 +315,10 @@ class GameLogic(object):
                         act['act'] = parseAction(
                                 act['do'], name=f'{act["fullname"]}:do')
                         act['action_id'] = self.make_funcid(act, 'act', 'do')
+                        if 'after' in act:
+                            act['act_post'] = parseAction(
+                                    act['after'], name=f'{act["name"]}:after')
+                            act['after_id'] = self.make_funcid(act, 'act_post', 'after')
 
 
     def process_times(self):
@@ -375,6 +379,11 @@ class GameLogic(object):
             act['act'] = parseAction(
                     act['do'], name=f'{name}:do')
             act['action_id'] = self.make_funcid(act, 'act')
+
+            if 'after' in act:
+                act['act_post'] = parseAction(
+                        act['after'], name=f'{act["name"]}:after')
+                act['after_id'] = self.make_funcid(act, 'act_post', 'after')
 
 
     def process_settings(self):

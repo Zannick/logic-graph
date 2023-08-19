@@ -134,6 +134,7 @@ actions:
     req: NOT WITHIN `Menu` and not ^breach and $can_recall
     do: ^mode = 'Indra'
     to: ^indra
+    after: ^indra = $default
     # Can open the menu during this time
     time: 3  # it's slightly less in-area
   - name: Deploy Drone

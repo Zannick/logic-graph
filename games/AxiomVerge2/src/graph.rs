@@ -7060,6 +7060,10 @@ impl world::Action for Action {
         if dest != SpotId::None {
             ctx.set_position(dest);
         }
+        match self.id {
+            ActionId::Global__Recall_Drone => rules::action_indra__default(ctx),
+            _ => (),
+        };
     }
     fn dest(&self, ctx: &Context) -> SpotId {
         match self.id {
