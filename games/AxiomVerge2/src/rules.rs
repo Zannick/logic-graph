@@ -346,6 +346,18 @@ pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(ctx: &Context) ->
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
+pub fn access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx: &Context) -> bool {
+    // not ^_kishib_handled and $shockwave
+    (!ctx.giguna__ruins_west__ctx__kishib_handled() && helper__shockwave!(ctx))
+}
+pub fn access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(ctx: &Context) -> bool {
+    // $grab and ^_kishib_handled
+    (helper__grab!(ctx) && ctx.giguna__ruins_west__ctx__kishib_handled())
+}
+pub fn access_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx: &Context) -> bool {
+    // not ^_kishib_handled and $allegiance1
+    (!ctx.giguna__ruins_west__ctx__kishib_handled() && helper__allegiance1!(ctx))
+}
 pub fn access_giguna__west_caverns__east_susar__caught__req(ctx: &Context) -> bool {
     // not ^_east_susar
     !ctx.giguna__west_caverns__ctx__east_susar()
@@ -752,6 +764,14 @@ pub fn action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ct
 pub fn action_giguna__giguna_northeast__switch__open_door__do(ctx: &mut Context) {
     // ^_door_opened = true
     ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
+}
+pub fn action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx: &mut Context) {
+    // ^_kishib_handled = true
+    ctx.set_giguna__ruins_west__ctx__kishib_handled(true);
+}
+pub fn action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx: &mut Context) {
+    // ^_kishib_handled = true
+    ctx.set_giguna__ruins_west__ctx__kishib_handled(true);
 }
 pub fn action_giguna__west_caverns__east_susar__caught__do(ctx: &mut Context) {
     // ^_east_susar = true

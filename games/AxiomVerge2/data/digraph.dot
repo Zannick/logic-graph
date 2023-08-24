@@ -550,6 +550,22 @@ digraph AxiomVerge2 {
             label = "Ruins Center";
             bgcolor = "white";
         }
+        subgraph cluster_Giguna__Ruins_West {
+            Giguna__Ruins_West__East_9 [label = "East 9"];
+            Giguna__Ruins_West__Save_Point [label = "Save Point"];
+            Giguna__Ruins_West__Platform [label = "Platform"];
+            Giguna__Ruins_West__Nook [label = "Nook"];
+            Giguna__Ruins_West__Lower_Ledge [label = "Lower Ledge"];
+            Giguna__Ruins_West__Upper_Ledge [label = "Upper Ledge"];
+            Giguna__Ruins_West__East_7 [label = "East 7"];
+            label = "Ruins West";
+            bgcolor = "white";
+        }
+        subgraph cluster_Giguna__Ruins_Upper {
+            Giguna__Ruins_Upper__West_7 [label = "West 7"];
+            label = "Ruins Upper";
+            bgcolor = "white";
+        }
         label = "Giguna Steppes";
         bgcolor = "lightgrey";
     }
@@ -1011,6 +1027,13 @@ digraph AxiomVerge2 {
     Giguna__Ruins_Center__East_9 -> Giguna__Ruins_East__West_9;
     Giguna__Ruins_Center__Wall_Bottom -> Giguna__Ruins_Center__Wall_Top;
     Giguna__Ruins_Center__Wall_Top -> Giguna__Ruins_Center__Center_Top;
+    Giguna__Ruins_Center__West_9 -> Giguna__Ruins_West__East_9;
+    Giguna__Ruins_West__East_9 -> Giguna__Ruins_Center__West_9;
+    Giguna__Ruins_West__Nook -> Giguna__Ruins_West__Lower_Ledge;
+    Giguna__Ruins_West__Lower_Ledge -> Giguna__Ruins_West__Upper_Ledge;
+    Giguna__Ruins_West__East_7 -> Giguna__Ruins_Upper__West_7;
+    Giguna__Ruins_West__East_7 -> Giguna__Ruins_West__Upper_Ledge;
+    Giguna__Ruins_Upper__West_7 -> Giguna__Ruins_West__East_7;
     Glacier__Dock_Elevator__Connector -> Glacier__Dock_Interior__Connector;
     Glacier__Dock_Interior__Connector -> Glacier__Dock_Elevator__Connector;
     Glacier__Dock_Interior__Entry -> Glacier__Dock_Outside__Entry;

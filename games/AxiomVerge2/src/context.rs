@@ -191,53 +191,55 @@ pub mod flags {
             const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 9;
             const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 10;
             const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 11;
-            const BOOMERANG_STEERING = 1 << 12;
-            const MAJOR_GLITCHES = 1 << 13;
-            const MINOR_GLITCHES = 1 << 14;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 15;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 16;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 17;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 18;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 19;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 20;
-            const AMASHILAMA = 1 << 21;
-            const ANUMAN = 1 << 22;
-            const APOCALYPSE_BOMB = 1 << 23;
-            const BOOMERANG = 1 << 24;
-            const COMPANIES_LAYOFF = 1 << 25;
-            const DEAR_ERNEST = 1 << 26;
-            const DEFEAT_EBIH_ALU = 1 << 27;
-            const DEFEAT_MUS_A_M20 = 1 << 28;
-            const DRONE_HOVER = 1 << 29;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 30;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 31;
+            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 12;
+            const GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN = 1 << 13;
+            const BOOMERANG_STEERING = 1 << 14;
+            const MAJOR_GLITCHES = 1 << 15;
+            const MINOR_GLITCHES = 1 << 16;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 17;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 18;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 19;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 20;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 21;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 22;
+            const AMASHILAMA = 1 << 23;
+            const ANUMAN = 1 << 24;
+            const APOCALYPSE_BOMB = 1 << 25;
+            const BOOMERANG = 1 << 26;
+            const COMPANIES_LAYOFF = 1 << 27;
+            const DEAR_ERNEST = 1 << 28;
+            const DEFEAT_EBIH_ALU = 1 << 29;
+            const DEFEAT_MUS_A_M20 = 1 << 30;
+            const DRONE_HOVER = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const FAST_TRAVEL = 1 << 0;
-            const GIGUNA_NORTHEAST_GATE = 1 << 1;
-            const HERETICS_TABLET = 1 << 2;
-            const ICE_AXE = 1 << 3;
-            const INFECTION_SPEED = 1 << 4;
-            const LEDGE_GRAB = 1 << 5;
-            const LETTER_FROM_TRACE = 1 << 6;
-            const MAP_17_10 = 1 << 7;
-            const NANITE_MIST = 1 << 8;
-            const POWER_MATRIX = 1 << 9;
-            const RECORD_LOSSES = 1 << 10;
-            const REMOTE_DRONE = 1 << 11;
-            const RESEARCHERS_MISSING = 1 << 12;
-            const SHOCKWAVE = 1 << 13;
-            const SLINGSHOT_HOOK = 1 << 14;
-            const STATION_POWER = 1 << 15;
-            const SWITCH_36_11 = 1 << 16;
-            const SWITCH_40_12 = 1 << 17;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 18;
-            const UNDER_SIEGE = 1 << 19;
-            const UNDERWATER_MOVEMENT = 1 << 20;
-            const WALL_CLIMB = 1 << 21;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 0;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 1;
+            const FAST_TRAVEL = 1 << 2;
+            const GIGUNA_NORTHEAST_GATE = 1 << 3;
+            const HERETICS_TABLET = 1 << 4;
+            const ICE_AXE = 1 << 5;
+            const INFECTION_SPEED = 1 << 6;
+            const LEDGE_GRAB = 1 << 7;
+            const LETTER_FROM_TRACE = 1 << 8;
+            const MAP_17_10 = 1 << 9;
+            const NANITE_MIST = 1 << 10;
+            const POWER_MATRIX = 1 << 11;
+            const RECORD_LOSSES = 1 << 12;
+            const REMOTE_DRONE = 1 << 13;
+            const RESEARCHERS_MISSING = 1 << 14;
+            const SHOCKWAVE = 1 << 15;
+            const SLINGSHOT_HOOK = 1 << 16;
+            const STATION_POWER = 1 << 17;
+            const SWITCH_36_11 = 1 << 18;
+            const SWITCH_40_12 = 1 << 19;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 20;
+            const UNDER_SIEGE = 1 << 21;
+            const UNDERWATER_MOVEMENT = 1 << 22;
+            const WALL_CLIMB = 1 << 23;
         }
     }
 }
@@ -362,11 +364,11 @@ impl context::Ctx for Context {
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
             Item::Ebih_Waterfall_Block_Left => self
-                .cbits1
-                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT),
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT),
             Item::Ebih_Waterfall_Block_Right => self
-                .cbits1
-                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT),
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT),
             Item::Fast_Travel => self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
             Item::Giguna_Northeast_Gate => self
@@ -465,12 +467,12 @@ impl context::Ctx for Context {
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
             Item::Ebih_Waterfall_Block_Left => self
-                .cbits1
-                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT)
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT)
                 .into(),
             Item::Ebih_Waterfall_Block_Right => self
-                .cbits1
-                .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT)
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT)
                 .into(),
             Item::Fast_Travel => self
                 .cbits2
@@ -613,10 +615,10 @@ impl context::Ctx for Context {
                 self.drone_melee_speed += 1;
             },
             Item::Ebih_Waterfall_Block_Left => {
-                self.cbits1.insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+                self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
             },
             Item::Ebih_Waterfall_Block_Right => {
-                self.cbits1.insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+                self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
             },
             Item::Fast_Travel => {
                 self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
@@ -873,6 +875,16 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Ruins_Upper => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Ruins_West => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Wasteland => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -999,6 +1011,8 @@ impl context::Ctx for Context {
             .remove(flags::ContextBits1::GIGUNA__CARNELIAN__CTX__LOWER_SUSAR);
         self.cbits1
             .remove(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
     }
 
     fn reset_region(&mut self, region_id: RegionId) {}
@@ -1027,6 +1041,10 @@ impl context::Ctx for Context {
             AreaId::Giguna__West_Caverns => {
                 self.cbits1
                     .remove(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
+            }
+            AreaId::Giguna__Ruins_West => {
+                self.cbits1
+                    .remove(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
             }
             _ => (),
         }
@@ -1369,6 +1387,30 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::BOOMERANG_STEERING);
         let p = old.cbits1.contains(flags::ContextBits1::BOOMERANG_STEERING);
         if n != p {
@@ -1502,11 +1544,11 @@ impl context::Ctx for Context {
             list.push(format!("{}DRONE_HOVER", if n { "+" } else { "-" }));
         }
         let n = self
-            .cbits1
-            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
         let p = old
-            .cbits1
-            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
         if n != p {
             list.push(format!(
                 "{}EBIH_WATERFALL_BLOCK_LEFT",
@@ -1514,11 +1556,11 @@ impl context::Ctx for Context {
             ));
         }
         let n = self
-            .cbits1
-            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
         let p = old
-            .cbits1
-            .contains(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
         if n != p {
             list.push(format!(
                 "{}EBIH_WATERFALL_BLOCK_RIGHT",
@@ -2005,6 +2047,40 @@ impl Context {
             val,
         );
     }
+    pub fn giguna__ruins_west__ctx__kishib_handled(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__ruins_west__ctx__kishib_handled(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED,
+            val,
+        );
+    }
+    pub fn giguna__ruins_upper__ctx__doors_open(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__ruins_upper__ctx__doors_open(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN,
+            val,
+        );
+    }
     // test helper for items
     pub fn add_item(&mut self, item: Item) {
         match item {
@@ -2066,12 +2142,12 @@ impl Context {
                 self.drone_melee_speed += 1;
             }
             Item::Ebih_Waterfall_Block_Left => {
-                self.cbits1
-                    .insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_LEFT);
+                self.cbits2
+                    .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
             }
             Item::Ebih_Waterfall_Block_Right => {
-                self.cbits1
-                    .insert(flags::ContextBits1::EBIH_WATERFALL_BLOCK_RIGHT);
+                self.cbits2
+                    .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
             }
             Item::Fast_Travel => {
                 self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);

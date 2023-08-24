@@ -65,6 +65,7 @@ movements:
 
 time:
   default: 1
+  ## Pickups
   urn: 5.5
   flask: 5.5
   # when grabbing the urn/flask with the boomerang over x distance
@@ -75,7 +76,16 @@ time:
   # when grabbing the urn/flask with the boomerang while falling or otherwise closer
   nearby_urn: 6
   nearby_flask: 6
+  # item is freestanding -> can be picked up with no delay
+  standing: 0
+
+  ## common actions
+  save: 1.3
   shockwave: 3.5  # even when shockwaving flasks and urns? at least 1
+  hack: 0.5
+  susar: 3.0  # caught by susar
+  
+  ## Transitions
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # When areas use connecting doors
   xdoor: 1.6  # up to 2??
@@ -85,10 +95,8 @@ time:
   exterior: 0.75
   tent: 0.25
   cave: 0.25
-  # item is freestanding -> can be picked up with no delay
-  standing: 0
   # spots are technically the same, but in different areas to partition the area map
-  overlap: 0  
+  overlap: 0
 
 warps:
   earth_save:

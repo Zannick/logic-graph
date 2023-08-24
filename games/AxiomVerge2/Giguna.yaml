@@ -905,3 +905,94 @@ areas:
           jumps_down: 1
     - name: West 9
       coord: [14.05, 8.6]
+      # todo: connection to West Platform Left?
+      exits:
+        - to: Ruins West > East 9
+          tags: [xshift]
+
+- name: Ruins West
+  on_entry: $reset_old_area(^newpos)
+  reset:
+    _kishib_handled: false
+  spots:
+    - name: East 9
+      coord: [13.95, 8.6]
+      local:
+        - to: Save Point
+        - to: Platform
+          jumps: 1
+      exits:
+        - to: Ruins Center > West 9
+          tags: [xshift]
+    - name: Save Point
+      coord: [13.5, 8.7]
+      local:
+        - to: Platform
+          jumps: 2
+        - to: East 9
+          jumps: 1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Platform
+      coord: [13.5, 8.5]
+      local:
+        - to: Save Point
+          jumps_down: 2
+        - to: East 9
+        - to: Nook
+          jumps: 2
+    - name: Nook
+      coord: [13.4, 8.0]
+      local:
+        - to: Platform
+      exits:
+        - to: Lower Ledge
+          req: $climb and $grab
+          time: 2.35
+    - name: Lower Ledge
+      coord: [13.4, 7.4]
+      local:
+        - to: Nook
+        - to: Platform
+      exits:
+        - to: Upper Ledge
+          req: $grab and ^_kishib_handled
+          time: 4
+      actions:
+        - name: Hack Kishib
+          req: not ^_kishib_handled and $allegiance1
+          price: 100
+          do: ^_kishib_handled = true
+          tags: [hack]
+        - name: Destroy Kishib
+          req: not ^_kishib_handled and $shockwave
+          price: 100
+          do: ^_kishib_handled = true
+          tags: [shockwave]
+    - name: Upper Ledge
+      coord: [13.6, 6.4]
+      local:
+        - to: Lower Ledge
+        - to: Platform
+        - to: East 7
+    - name: East 7
+      coord: [13.95, 6.7]
+      exits:
+        - to: Upper Ledge
+          req: $grab
+          time: 1.2
+        - to: Ruins Upper > West 7
+          tags: [xshift]
+
+- name: Ruins Upper
+  on_entry: $reset_old_area(^newpos)
+  start:
+    _doors_open: false
+  spots:
+    - name: West 7
+      coord: [14.05, 6.7]
+      exits:
+        - to: Ruins West > East 7
+          tags: [xshift]
