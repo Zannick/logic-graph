@@ -88,7 +88,7 @@ pub trait Warp: Accessible {
     fn should_reload(&self) -> bool;
 }
 
-pub trait World: Sync {
+pub trait World: Sync + Default {
     type Location: Location;
     type Exit: Exit<
         ExitId = <Self::Location as Location>::ExitId,

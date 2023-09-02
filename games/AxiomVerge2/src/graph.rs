@@ -8663,6 +8663,12 @@ impl world::World for World {
     }
 }
 
+impl Default for World {
+    fn default() -> World {
+        World::new()
+    }
+}
+
 impl World {
     pub fn new() -> World {
         World {

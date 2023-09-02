@@ -179,6 +179,22 @@ impl context::Ctx for Context {
     }
 %# Uncollect just straight-up doesn't work in this model
 
+    // test helper for items
+    fn add_item(&mut self, item: Item) {
+        match item {
+%% for item, ct in gl.item_max_counts.items()|sort
+            Item::{{ item }} => {
+%% if item in bfp.varmap
+                self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+%% else
+                self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+%% endif
+            },
+%% endfor
+            _ => ()
+        }
+    }
+
     fn position(&self) -> SpotId {
         self.position
     }
@@ -447,21 +463,5 @@ impl Context {
     }
 %% endif
 %% endfor
-
-    // test helper for items
-    pub fn add_item(&mut self, item: Item) {
-        match item {
-%% for item, ct in gl.item_max_counts.items()|sort
-            Item::{{ item }} => {
-%% if item in bfp.varmap
-                self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
-%% else
-                self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
-%% endif
-            },
-%% endfor
-            _ => ()
-        }
-    }
 }
 

@@ -4,11 +4,13 @@ extern crate enum_map;
 extern crate lru;
 extern crate priority_queue;
 extern crate rayon;
+extern crate regex;
 extern crate rmp_serde;
 extern crate rustc_hash;
 extern crate serde;
 extern crate sort_by_derive;
 extern crate yaml_rust;
+extern crate libtest_mimic;
 
 pub mod access;
 pub mod algo;
@@ -26,6 +28,9 @@ pub mod settings;
 pub mod solutions;
 pub mod steiner;
 pub mod world;
+
+// test-only
+pub mod unittest;
 
 pub(crate) type CommonHasher = std::hash::BuildHasherDefault<rustc_hash::FxHasher>;
 pub(crate) fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHasher> {
