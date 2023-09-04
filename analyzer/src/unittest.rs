@@ -60,6 +60,17 @@ where
     }
 }
 
+fn obj_from_yaml<V>(yaml: &Yaml) -> anyhow::Result<V, String>
+where
+    V: FromStr<Err = String>,
+{
+    if let Some(s) = yaml.as_str() {
+        V::from_str(s)
+    } else {
+        Err(format!("Item value not a string: {:?}", yaml))
+    }
+}
+
 fn handle_with<T>(yaml: &Yaml, ctx: &mut T, name: &str, errs: &mut Vec<String>)
 where
     T: Ctx,
@@ -73,15 +84,12 @@ where
                     }
                 }
                 Err(e) => {
-                    errs.push(format!("{}.{}: {}", name, "with", e));
+                    errs.push(format!("{}: {}", name, e));
                 }
             }
         }
     } else {
-        errs.push(format!(
-            "{}.{}: Value is not list: {:?}",
-            name, "with", yaml
-        ));
+        errs.push(format!("{}: Value is not list: {:?}", name, yaml));
     }
 }
 
@@ -94,28 +102,58 @@ where
             let key = match key.as_str() {
                 Some(k) => k,
                 _ => {
-                    errs.push(format!(
-                        "{}.{}: Expected str key: {:?}",
-                        name, "context", key
-                    ));
+                    errs.push(format!("{}: Expected str key: {:?}", name, key));
                     continue;
                 }
             };
-           
+
             if let Err(e) = ctx.parse_set_context(key, value) {
-                errs.push(format!("{}.{}: {:?}: {}", name, "context", key, e));
+                errs.push(format!("{}: {:?}: {}", name, key, e));
             }
         }
     } else {
-        errs.push(format!(
-            "{}.{}: Value is not map: {:?}",
-            name, "context", yaml
-        ));
+        errs.push(format!("{}: Value is not map: {:?}", name, yaml));
     }
 }
 
-pub fn apply_context<W, T>(world: &W, ctx: &mut T, yaml: &Yaml, name: &str, errs: &mut Vec<String>)
+fn get_locations<LocId>(
+    loc_list: &Yaml,
+    name: &str,
+    errs: &mut Vec<String>,
+) -> Result<Vec<LocId>, ()>
 where
+    LocId: Id,
+{
+    let mut vec = Vec::new();
+    let mut errors = false;
+    if let Some(list) = loc_list.as_vec() {
+        for istr in list {
+            match obj_from_yaml::<LocId>(istr) {
+                Ok(loc) => vec.push(loc),
+                Err(e) => {
+                    errors = true;
+                    errs.push(format!("{}: {}", name, e))
+                }
+            }
+        }
+    } else {
+        errs.push(format!("{}: Value is not list: {:?}", name, loc_list));
+    }
+    if errors {
+        Err(())
+    } else {
+        Ok(vec)
+    }
+}
+
+pub fn apply_context<W, T>(
+    world: &W,
+    ctx: &mut T,
+    yaml: &Yaml,
+    name: &str,
+    errs: &mut Vec<String>,
+    ignore_unrecognized: bool,
+) where
     W: World,
     T: Ctx<World = W>,
 {
@@ -127,15 +165,43 @@ where
     };
 
     for (key, value) in map {
+        let name = format!("{}.{:?}", name, key);
         match key.as_str() {
             Some("with") => {
-                handle_with(value, ctx, name, errs);
+                handle_with(value, ctx, &name, errs);
             }
-            Some("context") => {
-                handle_context_values(ctx, yaml, name, errs);
+            // these should be separate, but eh
+            Some("context") | Some("settings") => {
+                handle_context_values(ctx, yaml, &name, errs);
             }
+            Some("visited") => {
+                if let Ok(locs) =
+                    get_locations::<<W::Location as Location>::LocId>(value, &name, errs)
+                {
+                    for loc in locs {
+                        ctx.reset(loc);
+                        ctx.visit(loc);
+                    }
+                }
+            }
+            Some("skipped") => {
+                if let Ok(locs) =
+                    get_locations::<<W::Location as Location>::LocId>(value, &name, errs)
+                {
+                    for loc in locs {
+                        ctx.reset(loc);
+                        ctx.skip(loc);
+                    }
+                }
+            }
+            Some("start") => match obj_from_yaml::<<W::Exit as Exit>::SpotId>(value) {
+                Ok(sp) => ctx.set_position_raw(sp),
+                Err(e) => errs.push(format!("{}: {}", name, e)),
+            },
             _ => {
-                errs.push(format!("{}: Unrecognized key {:?}", name, key));
+                if !ignore_unrecognized {
+                    errs.push(format!("{}: Unrecognized key {:?}", name, key));
+                }
             }
         }
     }
@@ -162,8 +228,10 @@ where
         .as_hash()
         .expect("YAML file should be a key-value map")
     {
-        if key.as_str() == Some("all") {
-            apply_context(&world, &mut ctx, &value, "all", &mut errs);
+        match key.as_str() {
+            Some("all") => apply_context(&world, &mut ctx, &value, "all", &mut errs, false),
+            Some(_) => errs.push(format!("Unrecognized top-level key: {:?}", key)),
+            None => errs.push(format!("Top-level keys must be string: {:?}", key)),
         }
     }
 }

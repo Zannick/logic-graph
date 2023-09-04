@@ -50,6 +50,9 @@ pub trait Ctx:
 
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
+    // for testing only, skips enter handlers
+    fn set_position_raw(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
+
     fn reload_game(&mut self);
     fn reset_all(&mut self);
     fn reset_region(&mut self, region_id: Self::RegionId);

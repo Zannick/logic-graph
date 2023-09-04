@@ -1134,6 +1134,9 @@ impl context::Ctx for Context {
     fn position(&self) -> SpotId {
         self.position
     }
+    fn set_position_raw(&mut self, pos: SpotId) {
+        self.position = pos;
+    }
     fn set_position(&mut self, pos: SpotId) {
         let area = get_area(pos);
         match area {
