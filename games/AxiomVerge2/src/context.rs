@@ -13,6 +13,8 @@ use analyzer::world::World;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use std::str::FromStr;
+use yaml_rust::Yaml;
 
 pub mod enums {
     use std::fmt;
@@ -889,6 +891,244 @@ impl context::Ctx for Context {
             }
             _ => (),
         }
+    }
+
+    // test helper for context vars
+    fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
+        match (ckey, cval) {
+            ("position", Yaml::String(s)) => {
+                self.set_position(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("position", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("energy", Yaml::String(s)) => {
+                self.set_energy(i16::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("energy", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("flasks", Yaml::String(s)) => {
+                self.set_flasks(i8::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("flasks", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("refills", Yaml::String(s)) => {
+                self.set_refills(i8::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("refills", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("mode", Yaml::String(s)) => {
+                self.set_mode(enums::Mode::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("mode", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("save", Yaml::String(s)) => {
+                self.set_save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("save", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("indra", Yaml::String(s)) => {
+                self.set_indra(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("indra", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("last", Yaml::String(s)) => {
+                self.set_last(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("last", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("prev_area", Yaml::String(s)) => {
+                self.set_prev_area(AreaId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("prev_area", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => {
+                self.set_amagi__main_area__ctx__combo(*b)
+            }
+            ("amagi__main_area__ctx__combo", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__base_camp__ctx__left_platform_moved", Yaml::Boolean(b)) => {
+                self.set_ebih__base_camp__ctx__left_platform_moved(*b)
+            }
+            ("ebih__base_camp__ctx__left_platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__grid_25_10_12__ctx__door_open", Yaml::Boolean(b)) => {
+                self.set_ebih__grid_25_10_12__ctx__door_open(*b)
+            }
+            ("ebih__grid_25_10_12__ctx__door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__waterfall__ctx__west_door_open", Yaml::Boolean(b)) => {
+                self.set_ebih__waterfall__ctx__west_door_open(*b)
+            }
+            ("ebih__waterfall__ctx__west_door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__ebih_east__ctx__platform1_moved", Yaml::Boolean(b)) => {
+                self.set_ebih__ebih_east__ctx__platform1_moved(*b)
+            }
+            ("ebih__ebih_east__ctx__platform1_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__ebih_east__ctx__platform2_moved", Yaml::Boolean(b)) => {
+                self.set_ebih__ebih_east__ctx__platform2_moved(*b)
+            }
+            ("ebih__ebih_east__ctx__platform2_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__drone_room__ctx__platform_moved", Yaml::Boolean(b)) => {
+                self.set_ebih__drone_room__ctx__platform_moved(*b)
+            }
+            ("ebih__drone_room__ctx__platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__giguna_northeast__ctx__door_opened", Yaml::Boolean(b)) => {
+                self.set_giguna__giguna_northeast__ctx__door_opened(*b)
+            }
+            ("giguna__giguna_northeast__ctx__door_opened", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__carnelian__ctx__door_opened", Yaml::Boolean(b)) => {
+                self.set_giguna__carnelian__ctx__door_opened(*b)
+            }
+            ("giguna__carnelian__ctx__door_opened", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__carnelian__ctx__upper_susar", Yaml::Boolean(b)) => {
+                self.set_giguna__carnelian__ctx__upper_susar(*b)
+            }
+            ("giguna__carnelian__ctx__upper_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__carnelian__ctx__lower_susar", Yaml::Boolean(b)) => {
+                self.set_giguna__carnelian__ctx__lower_susar(*b)
+            }
+            ("giguna__carnelian__ctx__lower_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__west_caverns__ctx__east_susar", Yaml::Boolean(b)) => {
+                self.set_giguna__west_caverns__ctx__east_susar(*b)
+            }
+            ("giguna__west_caverns__ctx__east_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__ruins_west__ctx__kishib_handled", Yaml::Boolean(b)) => {
+                self.set_giguna__ruins_west__ctx__kishib_handled(*b)
+            }
+            ("giguna__ruins_west__ctx__kishib_handled", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__ruins_upper__ctx__doors_open", Yaml::Boolean(b)) => {
+                self.set_giguna__ruins_upper__ctx__doors_open(*b)
+            }
+            ("giguna__ruins_upper__ctx__doors_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("boomerang_steering", Yaml::Boolean(b)) => self.set_boomerang_steering(*b),
+            ("boomerang_steering", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("major_glitches", Yaml::Boolean(b)) => self.set_major_glitches(*b),
+            ("major_glitches", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("minor_glitches", Yaml::Boolean(b)) => self.set_minor_glitches(*b),
+            ("minor_glitches", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            _ => {
+                return Err(format!("Unrecognized context key: {:?}", ckey));
+            }
+        }
+        Ok(())
     }
 
     fn position(&self) -> SpotId {

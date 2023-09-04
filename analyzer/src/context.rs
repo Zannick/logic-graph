@@ -8,6 +8,7 @@ use std::fmt::{self, format, Debug, Display};
 use std::hash::Hash;
 use std::str::FromStr;
 use std::sync::Arc;
+use yaml_rust::Yaml;
 
 pub trait Ctx:
     Clone + Eq + Debug + Default + Hash + Send + Sync + Serialize + for<'a> Deserialize<'a>
@@ -44,6 +45,8 @@ pub trait Ctx:
     fn collect(&mut self, item: Self::ItemId);
     // test helper for items
     fn add_item(&mut self, item: Self::ItemId);
+    // test helper for context vars
+    fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String>;
 
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);

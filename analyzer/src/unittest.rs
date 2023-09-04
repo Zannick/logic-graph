@@ -60,7 +60,7 @@ where
     }
 }
 
-fn handle_with<T>(yaml: &Yaml, ctx: &mut T, errs: &mut Vec<String>, name: &str)
+fn handle_with<T>(yaml: &Yaml, ctx: &mut T, name: &str, errs: &mut Vec<String>)
 where
     T: Ctx,
 {
@@ -85,6 +85,35 @@ where
     }
 }
 
+fn handle_context_values<T>(ctx: &mut T, yaml: &Yaml, name: &str, errs: &mut Vec<String>)
+where
+    T: Ctx,
+{
+    if let Some(map) = yaml.as_hash() {
+        for (key, value) in map {
+            let key = match key.as_str() {
+                Some(k) => k,
+                _ => {
+                    errs.push(format!(
+                        "{}.{}: Expected str key: {:?}",
+                        name, "context", key
+                    ));
+                    continue;
+                }
+            };
+           
+            if let Err(e) = ctx.parse_set_context(key, value) {
+                errs.push(format!("{}.{}: {:?}: {}", name, "context", key, e));
+            }
+        }
+    } else {
+        errs.push(format!(
+            "{}.{}: Value is not map: {:?}",
+            name, "context", yaml
+        ));
+    }
+}
+
 pub fn apply_context<W, T>(world: &W, ctx: &mut T, yaml: &Yaml, name: &str, errs: &mut Vec<String>)
 where
     W: World,
@@ -100,7 +129,10 @@ where
     for (key, value) in map {
         match key.as_str() {
             Some("with") => {
-                handle_with(value, ctx, errs, name);
+                handle_with(value, ctx, name, errs);
+            }
+            Some("context") => {
+                handle_context_values(ctx, yaml, name, errs);
             }
             _ => {
                 errs.push(format!("{}: Unrecognized key {:?}", name, key));
