@@ -146,8 +146,7 @@ where
     }
 }
 
-pub fn apply_context<W, T>(
-    world: &W,
+pub fn apply_test_setup<W, T>(
     ctx: &mut T,
     yaml: &Yaml,
     name: &str,
@@ -207,6 +206,111 @@ pub fn apply_context<W, T>(
     }
 }
 
+macro_rules! assign_mode_or_append_err {
+    ($mode:expr, $errs:expr, $val:expr) => {
+        match $val {
+            Ok(m) => $mode = Some(m),
+            Err(e) => $errs.push(e),
+        }
+    };
+}
+
+fn build_test<'a, W, T>(
+    yaml: &'a Yaml,
+    initial: &T,
+    name: &str,
+) -> Result<Unittest<'a, T>, Vec<String>>
+where
+    T: Ctx<World = W>,
+    W: World,
+{
+    let mut errs = Vec::new();
+    let mut ctx = initial.clone();
+    if let Some(tmap) = yaml.as_hash() {
+        let mut test_name = None;
+        let mut mode: Option<TestMode<T>> = None;
+        apply_test_setup::<W, T>(&mut ctx, yaml, name, &mut errs, true);
+
+        let obtainable = |can, value, name| match item_from_yaml::<T>(value) {
+            Ok((item, ct)) => {
+                if ct == 1 {
+                    Ok(TestMode::Obtainable(can, item))
+                } else {
+                    Err(format!(
+                        "{}: item count not accepted here: {:?}",
+                        name, value,
+                    ))
+                }
+            }
+            Err(e) => Err(e),
+        };
+
+        for (key, value) in tmap {
+            let tname = test_name.unwrap_or(name);
+            match key.as_str() {
+                Some("name") => {
+                    if let Some(n) = value.as_str() {
+                        test_name = Some(n);
+                    } else {
+                        errs.push(format!("{}: name must be string: {:?}", name, value));
+                    }
+                }
+                Some("can_obtain") => {
+                    assign_mode_or_append_err!(mode, errs, obtainable(true, value, tname))
+                }
+                Some("cannot_obtain") => {
+                    assign_mode_or_append_err!(mode, errs, obtainable(false, value, tname))
+                }
+
+                _ => errs.push(format!("{}: key must be string: {:?}", name, key)),
+            }
+        }
+
+        match (test_name, mode) {
+            (Some(tn), Some(m)) => {
+                return Ok(Unittest {
+                    name: String::from(tn),
+                    initial: ctx,
+                    mode: m,
+                });
+            }
+            (None, _) => errs.push(format!("{}: Please provide a name for this test", name)),
+            (Some(tn), None) => errs.push(format!("{}: No test declared", tn)),
+        }
+    } else {
+        errs.push(format!("{}: Expected key-value map", name));
+    }
+    Err(errs)
+}
+
+fn build_tests<'a, W, T>(
+    yaml: &'a Yaml,
+    initial: &T,
+    name: &str,
+) -> Result<Vec<Unittest<'a, T>>, Vec<String>>
+where
+    T: Ctx<World = W>,
+    W: World,
+{
+    let mut errs = Vec::new();
+    let mut unittests = Vec::new();
+    if let Some(tests) = yaml.as_vec() {
+        for (i, test) in tests.iter().enumerate() {
+            match build_test(test, initial, &format!("{} test {}", name, i)) {
+                Ok(unittest) => unittests.push(unittest),
+                Err(e) => errs.extend(e),
+            }
+        }
+    } else {
+        errs.push(format!("{}: Value is not list: {:?}", name, yaml));
+    }
+    if errs.is_empty() {
+        Ok(unittests)
+    } else {
+        Err(errs)
+    }
+}
+
 pub fn run_test_file<W, T>(filename: &PathBuf)
 where
     T: Ctx<World = W>,
@@ -229,7 +333,11 @@ where
         .expect("YAML file should be a key-value map")
     {
         match key.as_str() {
-            Some("all") => apply_context(&world, &mut ctx, &value, "all", &mut errs, false),
+            Some("all") => apply_test_setup(&mut ctx, &value, "all", &mut errs, false),
+            Some("tests") => match build_tests(value, &ctx, "tests") {
+                Ok(u) => tests.extend(u),
+                Err(e) => errs.extend(e),
+            },
             Some(_) => errs.push(format!("Unrecognized top-level key: {:?}", key)),
             None => errs.push(format!("Top-level keys must be string: {:?}", key)),
         }
