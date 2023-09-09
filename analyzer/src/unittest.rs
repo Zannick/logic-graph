@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use crate::context::*;
+use crate::route::*;
 use crate::world::*;
 use crate::*;
 use lazy_static::lazy_static;
@@ -12,6 +13,7 @@ use std::path::PathBuf;
 use std::str::FromStr;
 use yaml_rust::*;
 
+#[derive(Debug)]
 pub enum TestMode<'a, T>
 where
     T: Ctx,
@@ -30,13 +32,13 @@ pub struct Unittest<'a, T>
 where
     T: Ctx,
 {
-    name: String,
-    initial: T,
-    mode: TestMode<'a, T>,
+    pub name: String,
+    pub initial: T,
+    pub mode: TestMode<'a, T>,
 }
 
 lazy_static! {
-    static ref ITEM_RE: Regex = Regex::new(r"(\w+)\s*(?:\{(\d+\)})?").unwrap();
+    static ref ITEM_RE: Regex = Regex::new(r"(\w+)\s*(?:\{(\d+)})?").unwrap();
 }
 
 fn item_from_yaml<T>(yaml: &Yaml) -> anyhow::Result<(T::ItemId, u32), String>
@@ -46,12 +48,31 @@ where
     if let Some(s) = yaml.as_str() {
         if let Some(caps) = ITEM_RE.captures(s) {
             let item = T::ItemId::from_str(&caps[1])?;
-            let ct = if caps[2].is_empty() {
-                1
-            } else {
-                u32::from_str(&caps[2]).map_err(|e| format!("{:?}", e))?
+            let ct = match caps.get(2) {
+                Some(m) => u32::from_str(&m.as_str()).map_err(|e| format!("{:?}", e))?,
+                None => 1,
             };
             Ok((item, ct))
+        } else {
+            Err(format!("Value did not parse: {:?}", yaml))
+        }
+    } else {
+        Err(format!("Item value not a string: {:?}", yaml))
+    }
+}
+
+fn item_only_from_yaml<T>(yaml: &Yaml) -> anyhow::Result<T::ItemId, String>
+where
+    T: Ctx,
+{
+    if let Some(s) = yaml.as_str() {
+        if let Some(caps) = ITEM_RE.captures(s) {
+            let item = T::ItemId::from_str(&caps[1])?;
+            if caps.get(2).is_none() {
+                Ok(item)
+            } else {
+                Err(format!("item count not accepted here: {:?}", yaml))
+            }
         } else {
             Err(format!("Value did not parse: {:?}", yaml))
         }
@@ -207,15 +228,15 @@ pub fn apply_test_setup<W, T>(
 }
 
 macro_rules! assign_mode_or_append_err {
-    ($mode:expr, $errs:expr, $val:expr) => {
+    ($mode:expr, $errs:expr, $val:expr, $name:expr) => {
         match $val {
             Ok(m) => $mode = Some(m),
-            Err(e) => $errs.push(e),
+            Err(e) => $errs.push(format!("{}: {}", $name, e)),
         }
     };
 }
 
-fn build_test<'a, W, T>(
+pub fn build_test<'a, W, T>(
     yaml: &'a Yaml,
     initial: &T,
     name: &str,
@@ -223,6 +244,7 @@ fn build_test<'a, W, T>(
 where
     T: Ctx<World = W>,
     W: World,
+    W::Location: Location<Context = T>,
 {
     let mut errs = Vec::new();
     let mut ctx = initial.clone();
@@ -231,18 +253,12 @@ where
         let mut mode: Option<TestMode<T>> = None;
         apply_test_setup::<W, T>(&mut ctx, yaml, name, &mut errs, true);
 
-        let obtainable = |can, value, name| match item_from_yaml::<T>(value) {
-            Ok((item, ct)) => {
-                if ct == 1 {
-                    Ok(TestMode::Obtainable(can, item))
-                } else {
-                    Err(format!(
-                        "{}: item count not accepted here: {:?}",
-                        name, value,
-                    ))
-                }
-            }
-            Err(e) => Err(e),
+        let obtainable = |can, value| {
+            item_only_from_yaml::<T>(value).map(|item| TestMode::Obtainable(can, item))
+        };
+        let reachable = |can, yaml| {
+            obj_from_yaml::<<W::Exit as Exit>::SpotId>(yaml)
+                .map(|sp| TestMode::<T>::Reachable(can, sp))
         };
 
         for (key, value) in tmap {
@@ -256,11 +272,36 @@ where
                     }
                 }
                 Some("can_obtain") => {
-                    assign_mode_or_append_err!(mode, errs, obtainable(true, value, tname))
+                    assign_mode_or_append_err!(mode, errs, obtainable(true, value), tname)
                 }
                 Some("cannot_obtain") => {
-                    assign_mode_or_append_err!(mode, errs, obtainable(false, value, tname))
+                    assign_mode_or_append_err!(mode, errs, obtainable(false, value), tname)
                 }
+                Some("can_reach") => {
+                    assign_mode_or_append_err!(mode, errs, reachable(true, value), tname)
+                }
+                Some("cannot_reach") => {
+                    assign_mode_or_append_err!(mode, errs, reachable(false, value), tname)
+                }
+                Some("eventually_gets") => {
+                    assign_mode_or_append_err!(
+                        mode,
+                        errs,
+                        item_only_from_yaml::<T>(value).map(|item| TestMode::EventuallyGets(item)),
+                        tname
+                    )
+                }
+                Some("path") => assign_mode_or_append_err!(
+                    mode,
+                    errs,
+                    match value {
+                        Yaml::String(s) => histlines_from_string::<W, T, W::Location>(s),
+                        Yaml::Array(v) => histlines_from_yaml_vec::<W, T, W::Location>(v),
+                        _ => Err(String::from("Expected string or vec for path value")),
+                    }
+                    .map(|route| TestMode::Route(route)),
+                    tname
+                ),
 
                 _ => errs.push(format!("{}: key must be string: {:?}", name, key)),
             }
@@ -291,6 +332,7 @@ fn build_tests<'a, W, T>(
 where
     T: Ctx<World = W>,
     W: World,
+    W::Location: Location<Context = T>,
 {
     let mut errs = Vec::new();
     let mut unittests = Vec::new();
@@ -315,6 +357,7 @@ pub fn run_test_file<W, T>(filename: &PathBuf)
 where
     T: Ctx<World = W>,
     W: World,
+    W::Location: Location<Context = T>,
 {
     let mut file = File::open(filename)
         .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));

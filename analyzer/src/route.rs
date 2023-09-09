@@ -20,7 +20,9 @@ where
     Ok(hist)
 }
 
-pub(crate) fn histlines_from_string<W, T, L>(route: &str) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
+pub(crate) fn histlines_from_string<W, T, L>(
+    route: &str,
+) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
@@ -31,6 +33,28 @@ where
         let line = line.trim();
         if !line.is_empty() && !line.starts_with('#') {
             hist.push((History::from_str(line)?, line));
+        }
+    }
+    Ok(hist)
+}
+
+pub(crate) fn histlines_from_yaml_vec<W, T, L>(
+    route: &Vec<Yaml>,
+) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+{
+    let mut hist: Vec<(HistoryAlias<T>, &str)> = Vec::new();
+    for el in route {
+        if let Some(line) = el.as_str() {
+            let line = line.trim();
+            if !line.is_empty() && !line.starts_with('#') {
+                hist.push((History::from_str(line)?, line));
+            }
+        } else {
+            return Err(format!("Expected string but got: {:?}", el));
         }
     }
     Ok(hist)
@@ -158,11 +182,7 @@ where
     }
 }
 
-pub fn debug_route<W, T, L>(
-    world: &W,
-    startctx: &T,
-    route: &str,
-) -> Result<String, String>
+pub fn debug_route<W, T, L>(world: &W, startctx: &T, route: &str) -> Result<String, String>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
