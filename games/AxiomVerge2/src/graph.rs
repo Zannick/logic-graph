@@ -2776,385 +2776,395 @@ impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             LocationId::Amagi__Liru_Room__Shrine__Item => {
-                write!(f, "{}", "Amagi > Liru Room > Shrine: Item")
+                write!(f, "{}", "Amagi > Liru Room > Shrine > Item")
             }
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
-                write!(f, "{}", "Amagi > Main Area > Way Off To The Side: Item")
+                write!(f, "{}", "Amagi > Main Area > Way Off To The Side > Item")
             }
             LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
-                write!(f, "{}", "Amagi > West Lake > Cavern Eye: Item")
+                write!(f, "{}", "Amagi > West Lake > Cavern Eye > Item")
             }
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Cavern Rear Pillar: Boss Reward"
+                "Amagi > West Lake > Cavern Rear Pillar > Boss Reward"
             ),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Cavern Refill Station: Break Wall"
+                "Amagi > West Lake > Cavern Refill Station > Break Wall"
             ),
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20"
+                "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20"
             ),
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Cavern Tear Duct: Remote Flask"
+                "Amagi > West Lake > Cavern Tear Duct > Remote Flask"
             ),
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
                 write!(
                     f,
                     "{}",
-                    "Amagi > West Lake > Stronghold Ceiling Left: Knock Down Left Boulder"
+                    "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder"
                 )
             }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
                 write!(
                     f,
                     "{}",
-                    "Amagi > West Lake > Stronghold Ceiling Right: Knock Down Right Boulder"
+                    "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder"
                 )
             }
             LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Stronghold Front Door: Break Wall"
+                "Amagi > West Lake > Stronghold Front Door > Break Wall"
             ),
             LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Stronghold Front Room: Break Wall"
+                "Amagi > West Lake > Stronghold Front Room > Break Wall"
             ),
             LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall => {
-                write!(f, "{}", "Amagi > West Lake > Stronghold Item: Break Wall")
+                write!(f, "{}", "Amagi > West Lake > Stronghold Item > Break Wall")
             }
             LocationId::Amagi__West_Lake__Stronghold_Item__Item => {
-                write!(f, "{}", "Amagi > West Lake > Stronghold Item: Item")
+                write!(f, "{}", "Amagi > West Lake > Stronghold Item > Item")
             }
             LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Stronghold Middle Column: Break Wall"
+                "Amagi > West Lake > Stronghold Middle Column > Break Wall"
             ),
             LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Stronghold Rear Wall: Break Left Wall"
+                "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall"
             ),
             LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => {
-                write!(f, "{}", "Amagi > West Lake > Stronghold Top: Remote Urn")
+                write!(f, "{}", "Amagi > West Lake > Stronghold Top > Remote Urn")
             }
-            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => {
-                write!(f, "{}", "Amagi > West Lake > Surface Wall Left: Break Wall")
-            }
+            LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall => write!(
+                f,
+                "{}",
+                "Amagi > West Lake > Surface Wall Left > Break Wall"
+            ),
             LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall => write!(
                 f,
                 "{}",
-                "Amagi > West Lake > Surface Wall Right: Break Wall"
+                "Amagi > West Lake > Surface Wall Right > Break Wall"
             ),
             LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note => write!(
                 f,
                 "{}",
-                "Antarctica > Building 2U Corner > Behind Boxes: Note"
+                "Antarctica > Building 2U Corner > Behind Boxes > Note"
             ),
             LocationId::Antarctica__Power_Room__Switch__Flip => {
-                write!(f, "{}", "Antarctica > Power Room > Switch: Flip")
+                write!(f, "{}", "Antarctica > Power Room > Switch > Flip")
             }
             LocationId::Antarctica__Shed__Interior__Shelf => {
-                write!(f, "{}", "Antarctica > Shed > Interior: Shelf")
+                write!(f, "{}", "Antarctica > Shed > Interior > Shelf")
             }
             LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => write!(
                 f,
                 "{}",
-                "Ebih > Base Camp > Left Platform Moved: Item From The Side"
+                "Ebih > Base Camp > Left Platform Moved > Item From The Side"
             ),
             LocationId::Ebih__Base_Camp__Top_Platform__Item => {
-                write!(f, "{}", "Ebih > Base Camp > Top Platform: Item")
+                write!(f, "{}", "Ebih > Base Camp > Top Platform > Item")
             }
             LocationId::Ebih__Boss_Room__Boss__Boss_Reward => {
-                write!(f, "{}", "Ebih > Boss Room > Boss: Boss Reward")
+                write!(f, "{}", "Ebih > Boss Room > Boss > Boss Reward")
             }
             LocationId::Ebih__Boss_Room__Boss__Fight_Alu => {
-                write!(f, "{}", "Ebih > Boss Room > Boss: Fight Alu")
+                write!(f, "{}", "Ebih > Boss Room > Boss > Fight Alu")
             }
             LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                write!(f, "{}", "Ebih > Boss Room > Boss: Hack Alu")
+                write!(f, "{}", "Ebih > Boss Room > Boss > Hack Alu")
             }
             LocationId::Ebih__Boss_Room__East_Ledge__Item => {
-                write!(f, "{}", "Ebih > Boss Room > East Ledge: Item")
+                write!(f, "{}", "Ebih > Boss Room > East Ledge > Item")
             }
             LocationId::Ebih__Building_Interior__Corner__Urn => {
-                write!(f, "{}", "Ebih > Building Interior > Corner: Urn")
+                write!(f, "{}", "Ebih > Building Interior > Corner > Urn")
             }
             LocationId::Ebih__Building_Interior__Entry__Remote_Urn => {
-                write!(f, "{}", "Ebih > Building Interior > Entry: Remote Urn")
+                write!(f, "{}", "Ebih > Building Interior > Entry > Remote Urn")
             }
             LocationId::Ebih__Bunker_Interior__Desk__Note => {
-                write!(f, "{}", "Ebih > Bunker Interior > Desk: Note")
+                write!(f, "{}", "Ebih > Bunker Interior > Desk > Note")
             }
             LocationId::Ebih__By_Garage__Crawlspace__Fragment => {
-                write!(f, "{}", "Ebih > By Garage > Crawlspace: Fragment")
+                write!(f, "{}", "Ebih > By Garage > Crawlspace > Fragment")
             }
-            LocationId::Ebih__Cave__Entry__Health => write!(f, "{}", "Ebih > Cave > Entry: Health"),
+            LocationId::Ebih__Cave__Entry__Health => {
+                write!(f, "{}", "Ebih > Cave > Entry > Health")
+            }
             LocationId::Ebih__Drone_Room__Item__Urn => {
-                write!(f, "{}", "Ebih > Drone Room > Item: Urn")
+                write!(f, "{}", "Ebih > Drone Room > Item > Urn")
             }
             LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(
                 f,
                 "{}",
-                "Ebih > Drone Room > Middle Platform: Urn Quick Grab"
+                "Ebih > Drone Room > Middle Platform > Urn Quick Grab"
             ),
             LocationId::Ebih__Ebih_East__Corner__Urn => {
-                write!(f, "{}", "Ebih > Ebih East > Corner: Urn")
+                write!(f, "{}", "Ebih > Ebih East > Corner > Urn")
             }
             LocationId::Ebih__Ebih_East__Dispenser__Vend => {
-                write!(f, "{}", "Ebih > Ebih East > Dispenser: Vend")
+                write!(f, "{}", "Ebih > Ebih East > Dispenser > Vend")
             }
             LocationId::Ebih__Ebih_East__East_Ledge__Note => {
-                write!(f, "{}", "Ebih > Ebih East > East Ledge: Note")
+                write!(f, "{}", "Ebih > Ebih East > East Ledge > Note")
             }
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => write!(
                 f,
                 "{}",
-                "Ebih > Ebih East > Lower Moving Platform: Remote Urn"
+                "Ebih > Ebih East > Lower Moving Platform > Remote Urn"
             ),
             LocationId::Ebih__Ebih_West__Alcove__Tablet => {
-                write!(f, "{}", "Ebih > Ebih West > Alcove: Tablet")
+                write!(f, "{}", "Ebih > Ebih West > Alcove > Tablet")
             }
             LocationId::Ebih__Garage__Boxes__Under_Boxes => {
-                write!(f, "{}", "Ebih > Garage > Boxes: Under Boxes")
+                write!(f, "{}", "Ebih > Garage > Boxes > Under Boxes")
             }
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10: Remote Bush")
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 10 > Remote Bush")
             }
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush: Behind Bush")
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush")
             }
             LocationId::Ebih__Grid_25_2_6__Pit__Item => {
-                write!(f, "{}", "Ebih > Grid 25,2-6 > Pit: Item")
+                write!(f, "{}", "Ebih > Grid 25,2-6 > Pit > Item")
             }
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => {
-                write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge: Note")
+                write!(f, "{}", "Ebih > Grid 26,10-11 > Ledge > Note")
             }
             LocationId::Ebih__Tent_Interior__Desk__Note => {
-                write!(f, "{}", "Ebih > Tent Interior > Desk: Note")
+                write!(f, "{}", "Ebih > Tent Interior > Desk > Note")
             }
             LocationId::Ebih__Waterfall__Alcove__Block_Left => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove: Block Left")
+                write!(f, "{}", "Ebih > Waterfall > Alcove > Block Left")
             }
             LocationId::Ebih__Waterfall__Alcove__Block_Right => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove: Block Right")
+                write!(f, "{}", "Ebih > Waterfall > Alcove > Block Right")
             }
             LocationId::Ebih__Waterfall__Alcove__Pedestal => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove: Pedestal")
+                write!(f, "{}", "Ebih > Waterfall > Alcove > Pedestal")
             }
             LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove Left: Block Left")
+                write!(f, "{}", "Ebih > Waterfall > Alcove Left > Block Left")
             }
             LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
-                write!(f, "{}", "Ebih > Waterfall > Alcove Right: Block Right")
+                write!(f, "{}", "Ebih > Waterfall > Alcove Right > Block Right")
             }
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(
                 f,
                 "{}",
-                "Ebih > Waterfall > Waterfall Center Center: Both Blocks"
+                "Ebih > Waterfall > Waterfall Center Center > Both Blocks"
             ),
             LocationId::Giguna__Building_Interior__Bookshelf__Note => {
-                write!(f, "{}", "Giguna > Building Interior > Bookshelf: Note")
+                write!(f, "{}", "Giguna > Building Interior > Bookshelf > Note")
             }
             LocationId::Giguna__Carnelian__Vault__Item => {
-                write!(f, "{}", "Giguna > Carnelian > Vault: Item")
+                write!(f, "{}", "Giguna > Carnelian > Vault > Item")
             }
             LocationId::Giguna__Giguna_Base__Ruin__Item => {
-                write!(f, "{}", "Giguna > Giguna Base > Ruin: Item")
+                write!(f, "{}", "Giguna > Giguna Base > Ruin > Item")
             }
             LocationId::Giguna__Giguna_Base__Table__News => {
-                write!(f, "{}", "Giguna > Giguna Base > Table: News")
+                write!(f, "{}", "Giguna > Giguna Base > Table > News")
             }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => write!(
                 f,
                 "{}",
-                "Giguna > Giguna Northeast > Gate Button: Open Gate"
+                "Giguna > Giguna Northeast > Gate Button > Open Gate"
             ),
             LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => write!(
                 f,
                 "{}",
-                "Giguna > Giguna Northeast > Gate Right: Remote Button"
+                "Giguna > Giguna Northeast > Gate Right > Remote Button"
             ),
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Save Point: Seen")
+                write!(f, "{}", "Giguna > Giguna Northeast > Save Point > Seen")
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
-                write!(f, "{}", "Giguna > Ruins Center > Tablet: Item")
+                write!(f, "{}", "Giguna > Ruins Center > Tablet > Item")
             }
             LocationId::Giguna__West_Caverns__Bush__Item => {
-                write!(f, "{}", "Giguna > West Caverns > Bush: Item")
+                write!(f, "{}", "Giguna > West Caverns > Bush > Item")
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
-                write!(f, "{}", "Giguna > West Caverns > Cache: Item")
+                write!(f, "{}", "Giguna > West Caverns > Cache > Item")
             }
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
-                write!(f, "{}", "Glacier > Apocalypse Entry > Terminal: Escape")
+                write!(f, "{}", "Glacier > Apocalypse Entry > Terminal > Escape")
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Item => {
-                write!(f, "{}", "Glacier > Boomerang Room > Pedestal: Item")
+                write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Item")
             }
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => {
-                write!(f, "{}", "Glacier > Boomerang Room > Pedestal: Switch")
+                write!(f, "{}", "Glacier > Boomerang Room > Pedestal > Switch")
             }
             LocationId::Glacier__Compass_Room__Center__Table => {
-                write!(f, "{}", "Glacier > Compass Room > Center: Table")
+                write!(f, "{}", "Glacier > Compass Room > Center > Table")
             }
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab => write!(
                 f,
                 "{}",
-                "Glacier > Ledge Grab Room > Cliff Bottom: Quick Grab"
+                "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab"
             ),
             LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
-                write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal: Item")
+                write!(f, "{}", "Glacier > Ledge Grab Room > Pedestal > Item")
             }
             LocationId::Glacier__The_Big_Drop__Water_Surface__Drown => {
-                write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown")
+                write!(f, "{}", "Glacier > The Big Drop > Water Surface > Drown")
             }
             LocationId::Glacier__Vertical_Room__Peak__Flask => {
-                write!(f, "{}", "Glacier > Vertical Room > Peak: Flask")
+                write!(f, "{}", "Glacier > Vertical Room > Peak > Flask")
             }
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => {
-                write!(f, "{}", "Glacier > Vertical Room > Under Switch: Switch")
+                write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Damage_1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Damage_2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Damage_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Damage_3")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Speed_1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Speed_2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Melee_Speed_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Speed_3")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Damage_1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Damage_2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Damage_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Damage_3")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Speed_1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Speed_2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat: Ranged_Speed_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Speed_3")
             }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_1")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_2")
-            }
-            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_3")
-            }
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_1"
+            ),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_2"
+            ),
+            LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(
+                f,
+                "{}",
+                "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_3"
+            ),
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_1")
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_2")
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_3")
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Level_1"
+                "Menu > Upgrade Menu > Infection > Infection_Level_1"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Level_2"
+                "Menu > Upgrade Menu > Infection > Infection_Level_2"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Level_3"
+                "Menu > Upgrade Menu > Infection > Infection_Level_3"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Range_1"
+                "Menu > Upgrade Menu > Infection > Infection_Range_1"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Range_2"
+                "Menu > Upgrade Menu > Infection > Infection_Range_2"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Range_3"
+                "Menu > Upgrade Menu > Infection > Infection_Range_3"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Speed_1"
+                "Menu > Upgrade Menu > Infection > Infection_Speed_1"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection: Infection_Speed_2"
+                "Menu > Upgrade Menu > Infection > Infection_Speed_2"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano_Points_1")
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano_Points_2")
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection: Nano_Points_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano_Points_3")
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_1"
+                "Menu > Upgrade Menu > Physiology > Health_Upgrade_1"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_2"
+                "Menu > Upgrade Menu > Physiology > Health_Upgrade_2"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_3"
+                "Menu > Upgrade Menu > Physiology > Health_Upgrade_3"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_4"
+                "Menu > Upgrade Menu > Physiology > Health_Upgrade_4"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology: Health_Upgrade_5"
+                "Menu > Upgrade Menu > Physiology > Health_Upgrade_5"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                write!(f, "{}", "Menu > Upgrade Menu > Physiology: Mist_Upgrade")
+                write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist_Upgrade")
             }
         }
     }
@@ -3165,299 +3175,299 @@ impl std::str::FromStr for LocationId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Liru Room > Shrine: Item" => Ok(LocationId::Amagi__Liru_Room__Shrine__Item),
-            "Amagi > Main Area > Way Off To The Side: Item" => {
+            "Amagi > Liru Room > Shrine > Item" => Ok(LocationId::Amagi__Liru_Room__Shrine__Item),
+            "Amagi > Main Area > Way Off To The Side > Item" => {
                 Ok(LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item)
             }
-            "Amagi > West Lake > Cavern Eye: Item" => {
+            "Amagi > West Lake > Cavern Eye > Item" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Eye__Item)
             }
-            "Amagi > West Lake > Cavern Rear Pillar: Boss Reward" => {
+            "Amagi > West Lake > Cavern Rear Pillar > Boss Reward" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward)
             }
-            "Amagi > West Lake > Cavern Refill Station: Break Wall" => {
+            "Amagi > West Lake > Cavern Refill Station > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall)
             }
-            "Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20" => {
+            "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20)
             }
-            "Amagi > West Lake > Cavern Tear Duct: Remote Flask" => {
+            "Amagi > West Lake > Cavern Tear Duct > Remote Flask" => {
                 Ok(LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask)
             }
-            "Amagi > West Lake > Stronghold Ceiling Left: Knock Down Left Boulder" => {
+            "Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder)
             }
-            "Amagi > West Lake > Stronghold Ceiling Right: Knock Down Right Boulder" => Ok(
+            "Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder" => Ok(
                 LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
             ),
-            "Amagi > West Lake > Stronghold Front Door: Break Wall" => {
+            "Amagi > West Lake > Stronghold Front Door > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Door__Break_Wall)
             }
-            "Amagi > West Lake > Stronghold Front Room: Break Wall" => {
+            "Amagi > West Lake > Stronghold Front Room > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Front_Room__Break_Wall)
             }
-            "Amagi > West Lake > Stronghold Item: Break Wall" => {
+            "Amagi > West Lake > Stronghold Item > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall)
             }
-            "Amagi > West Lake > Stronghold Item: Item" => {
+            "Amagi > West Lake > Stronghold Item > Item" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Item__Item)
             }
-            "Amagi > West Lake > Stronghold Middle Column: Break Wall" => {
+            "Amagi > West Lake > Stronghold Middle Column > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall)
             }
-            "Amagi > West Lake > Stronghold Rear Wall: Break Left Wall" => {
+            "Amagi > West Lake > Stronghold Rear Wall > Break Left Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall)
             }
-            "Amagi > West Lake > Stronghold Top: Remote Urn" => {
+            "Amagi > West Lake > Stronghold Top > Remote Urn" => {
                 Ok(LocationId::Amagi__West_Lake__Stronghold_Top__Remote_Urn)
             }
-            "Amagi > West Lake > Surface Wall Left: Break Wall" => {
+            "Amagi > West Lake > Surface Wall Left > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Surface_Wall_Left__Break_Wall)
             }
-            "Amagi > West Lake > Surface Wall Right: Break Wall" => {
+            "Amagi > West Lake > Surface Wall Right > Break Wall" => {
                 Ok(LocationId::Amagi__West_Lake__Surface_Wall_Right__Break_Wall)
             }
-            "Antarctica > Building 2U Corner > Behind Boxes: Note" => {
+            "Antarctica > Building 2U Corner > Behind Boxes > Note" => {
                 Ok(LocationId::Antarctica__Building_2U_Corner__Behind_Boxes__Note)
             }
-            "Antarctica > Power Room > Switch: Flip" => {
+            "Antarctica > Power Room > Switch > Flip" => {
                 Ok(LocationId::Antarctica__Power_Room__Switch__Flip)
             }
-            "Antarctica > Shed > Interior: Shelf" => {
+            "Antarctica > Shed > Interior > Shelf" => {
                 Ok(LocationId::Antarctica__Shed__Interior__Shelf)
             }
-            "Ebih > Base Camp > Left Platform Moved: Item From The Side" => {
+            "Ebih > Base Camp > Left Platform Moved > Item From The Side" => {
                 Ok(LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side)
             }
-            "Ebih > Base Camp > Top Platform: Item" => {
+            "Ebih > Base Camp > Top Platform > Item" => {
                 Ok(LocationId::Ebih__Base_Camp__Top_Platform__Item)
             }
-            "Ebih > Boss Room > Boss: Boss Reward" => {
+            "Ebih > Boss Room > Boss > Boss Reward" => {
                 Ok(LocationId::Ebih__Boss_Room__Boss__Boss_Reward)
             }
-            "Ebih > Boss Room > Boss: Fight Alu" => {
+            "Ebih > Boss Room > Boss > Fight Alu" => {
                 Ok(LocationId::Ebih__Boss_Room__Boss__Fight_Alu)
             }
-            "Ebih > Boss Room > Boss: Hack Alu" => Ok(LocationId::Ebih__Boss_Room__Boss__Hack_Alu),
-            "Ebih > Boss Room > East Ledge: Item" => {
+            "Ebih > Boss Room > Boss > Hack Alu" => Ok(LocationId::Ebih__Boss_Room__Boss__Hack_Alu),
+            "Ebih > Boss Room > East Ledge > Item" => {
                 Ok(LocationId::Ebih__Boss_Room__East_Ledge__Item)
             }
-            "Ebih > Building Interior > Corner: Urn" => {
+            "Ebih > Building Interior > Corner > Urn" => {
                 Ok(LocationId::Ebih__Building_Interior__Corner__Urn)
             }
-            "Ebih > Building Interior > Entry: Remote Urn" => {
+            "Ebih > Building Interior > Entry > Remote Urn" => {
                 Ok(LocationId::Ebih__Building_Interior__Entry__Remote_Urn)
             }
-            "Ebih > Bunker Interior > Desk: Note" => {
+            "Ebih > Bunker Interior > Desk > Note" => {
                 Ok(LocationId::Ebih__Bunker_Interior__Desk__Note)
             }
-            "Ebih > By Garage > Crawlspace: Fragment" => {
+            "Ebih > By Garage > Crawlspace > Fragment" => {
                 Ok(LocationId::Ebih__By_Garage__Crawlspace__Fragment)
             }
-            "Ebih > Cave > Entry: Health" => Ok(LocationId::Ebih__Cave__Entry__Health),
-            "Ebih > Drone Room > Item: Urn" => Ok(LocationId::Ebih__Drone_Room__Item__Urn),
-            "Ebih > Drone Room > Middle Platform: Urn Quick Grab" => {
+            "Ebih > Cave > Entry > Health" => Ok(LocationId::Ebih__Cave__Entry__Health),
+            "Ebih > Drone Room > Item > Urn" => Ok(LocationId::Ebih__Drone_Room__Item__Urn),
+            "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => {
                 Ok(LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab)
             }
-            "Ebih > Ebih East > Corner: Urn" => Ok(LocationId::Ebih__Ebih_East__Corner__Urn),
-            "Ebih > Ebih East > Dispenser: Vend" => {
+            "Ebih > Ebih East > Corner > Urn" => Ok(LocationId::Ebih__Ebih_East__Corner__Urn),
+            "Ebih > Ebih East > Dispenser > Vend" => {
                 Ok(LocationId::Ebih__Ebih_East__Dispenser__Vend)
             }
-            "Ebih > Ebih East > East Ledge: Note" => {
+            "Ebih > Ebih East > East Ledge > Note" => {
                 Ok(LocationId::Ebih__Ebih_East__East_Ledge__Note)
             }
-            "Ebih > Ebih East > Lower Moving Platform: Remote Urn" => {
+            "Ebih > Ebih East > Lower Moving Platform > Remote Urn" => {
                 Ok(LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn)
             }
-            "Ebih > Ebih West > Alcove: Tablet" => Ok(LocationId::Ebih__Ebih_West__Alcove__Tablet),
-            "Ebih > Garage > Boxes: Under Boxes" => {
+            "Ebih > Ebih West > Alcove > Tablet" => Ok(LocationId::Ebih__Ebih_West__Alcove__Tablet),
+            "Ebih > Garage > Boxes > Under Boxes" => {
                 Ok(LocationId::Ebih__Garage__Boxes__Under_Boxes)
             }
-            "Ebih > Grid 25,10-12 > East 10: Remote Bush" => {
+            "Ebih > Grid 25,10-12 > East 10 > Remote Bush" => {
                 Ok(LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush)
             }
-            "Ebih > Grid 25,10-12 > Hidden Bush: Behind Bush" => {
+            "Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush" => {
                 Ok(LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush)
             }
-            "Ebih > Grid 25,2-6 > Pit: Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
-            "Ebih > Grid 26,10-11 > Ledge: Note" => {
+            "Ebih > Grid 25,2-6 > Pit > Item" => Ok(LocationId::Ebih__Grid_25_2_6__Pit__Item),
+            "Ebih > Grid 26,10-11 > Ledge > Note" => {
                 Ok(LocationId::Ebih__Grid_26_10_11__Ledge__Note)
             }
-            "Ebih > Tent Interior > Desk: Note" => Ok(LocationId::Ebih__Tent_Interior__Desk__Note),
-            "Ebih > Waterfall > Alcove: Block Left" => {
+            "Ebih > Tent Interior > Desk > Note" => Ok(LocationId::Ebih__Tent_Interior__Desk__Note),
+            "Ebih > Waterfall > Alcove > Block Left" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove__Block_Left)
             }
-            "Ebih > Waterfall > Alcove: Block Right" => {
+            "Ebih > Waterfall > Alcove > Block Right" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove__Block_Right)
             }
-            "Ebih > Waterfall > Alcove: Pedestal" => {
+            "Ebih > Waterfall > Alcove > Pedestal" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove__Pedestal)
             }
-            "Ebih > Waterfall > Alcove Left: Block Left" => {
+            "Ebih > Waterfall > Alcove Left > Block Left" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove_Left__Block_Left)
             }
-            "Ebih > Waterfall > Alcove Right: Block Right" => {
+            "Ebih > Waterfall > Alcove Right > Block Right" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right)
             }
-            "Ebih > Waterfall > Waterfall Center Center: Both Blocks" => {
+            "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => {
                 Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
             }
-            "Giguna > Building Interior > Bookshelf: Note" => {
+            "Giguna > Building Interior > Bookshelf > Note" => {
                 Ok(LocationId::Giguna__Building_Interior__Bookshelf__Note)
             }
-            "Giguna > Carnelian > Vault: Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
-            "Giguna > Giguna Base > Ruin: Item" => Ok(LocationId::Giguna__Giguna_Base__Ruin__Item),
-            "Giguna > Giguna Base > Table: News" => {
+            "Giguna > Carnelian > Vault > Item" => Ok(LocationId::Giguna__Carnelian__Vault__Item),
+            "Giguna > Giguna Base > Ruin > Item" => Ok(LocationId::Giguna__Giguna_Base__Ruin__Item),
+            "Giguna > Giguna Base > Table > News" => {
                 Ok(LocationId::Giguna__Giguna_Base__Table__News)
             }
-            "Giguna > Giguna Northeast > Gate Button: Open Gate" => {
+            "Giguna > Giguna Northeast > Gate Button > Open Gate" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate)
             }
-            "Giguna > Giguna Northeast > Gate Right: Remote Button" => {
+            "Giguna > Giguna Northeast > Gate Right > Remote Button" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button)
             }
-            "Giguna > Giguna Northeast > Save Point: Seen" => {
+            "Giguna > Giguna Northeast > Save Point > Seen" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Save_Point__Seen)
             }
-            "Giguna > Ruins Center > Tablet: Item" => {
+            "Giguna > Ruins Center > Tablet > Item" => {
                 Ok(LocationId::Giguna__Ruins_Center__Tablet__Item)
             }
-            "Giguna > West Caverns > Bush: Item" => {
+            "Giguna > West Caverns > Bush > Item" => {
                 Ok(LocationId::Giguna__West_Caverns__Bush__Item)
             }
-            "Giguna > West Caverns > Cache: Item" => {
+            "Giguna > West Caverns > Cache > Item" => {
                 Ok(LocationId::Giguna__West_Caverns__Cache__Item)
             }
-            "Glacier > Apocalypse Entry > Terminal: Escape" => {
+            "Glacier > Apocalypse Entry > Terminal > Escape" => {
                 Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape)
             }
-            "Glacier > Boomerang Room > Pedestal: Item" => {
+            "Glacier > Boomerang Room > Pedestal > Item" => {
                 Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Item)
             }
-            "Glacier > Boomerang Room > Pedestal: Switch" => {
+            "Glacier > Boomerang Room > Pedestal > Switch" => {
                 Ok(LocationId::Glacier__Boomerang_Room__Pedestal__Switch)
             }
-            "Glacier > Compass Room > Center: Table" => {
+            "Glacier > Compass Room > Center > Table" => {
                 Ok(LocationId::Glacier__Compass_Room__Center__Table)
             }
-            "Glacier > Ledge Grab Room > Cliff Bottom: Quick Grab" => {
+            "Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab" => {
                 Ok(LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab)
             }
-            "Glacier > Ledge Grab Room > Pedestal: Item" => {
+            "Glacier > Ledge Grab Room > Pedestal > Item" => {
                 Ok(LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item)
             }
-            "Glacier > The Big Drop > Water Surface: Drown" => {
+            "Glacier > The Big Drop > Water Surface > Drown" => {
                 Ok(LocationId::Glacier__The_Big_Drop__Water_Surface__Drown)
             }
-            "Glacier > Vertical Room > Peak: Flask" => {
+            "Glacier > Vertical Room > Peak > Flask" => {
                 Ok(LocationId::Glacier__Vertical_Room__Peak__Flask)
             }
-            "Glacier > Vertical Room > Under Switch: Switch" => {
+            "Glacier > Vertical Room > Under Switch > Switch" => {
                 Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Damage_1" => {
+            "Menu > Upgrade Menu > Combat > Melee_Damage_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Damage_2" => {
+            "Menu > Upgrade Menu > Combat > Melee_Damage_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Damage_3" => {
+            "Menu > Upgrade Menu > Combat > Melee_Damage_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Speed_1" => {
+            "Menu > Upgrade Menu > Combat > Melee_Speed_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Speed_2" => {
+            "Menu > Upgrade Menu > Combat > Melee_Speed_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2)
             }
-            "Menu > Upgrade Menu > Combat: Melee_Speed_3" => {
+            "Menu > Upgrade Menu > Combat > Melee_Speed_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3)
             }
-            "Menu > Upgrade Menu > Combat: Ranged_Damage_1" => {
+            "Menu > Upgrade Menu > Combat > Ranged_Damage_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
             }
-            "Menu > Upgrade Menu > Combat: Ranged_Damage_2" => {
+            "Menu > Upgrade Menu > Combat > Ranged_Damage_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
             }
-            "Menu > Upgrade Menu > Combat: Ranged_Damage_3" => {
+            "Menu > Upgrade Menu > Combat > Ranged_Damage_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
             }
-            "Menu > Upgrade Menu > Combat: Ranged_Speed_1" => {
+            "Menu > Upgrade Menu > Combat > Ranged_Speed_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
             }
-            "Menu > Upgrade Menu > Combat: Ranged_Speed_2" => {
+            "Menu > Upgrade Menu > Combat > Ranged_Speed_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
             }
-            "Menu > Upgrade Menu > Combat: Ranged_Speed_3" => {
+            "Menu > Upgrade Menu > Combat > Ranged_Speed_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
             }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_1" => {
+            "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
             }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_2" => {
+            "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
             }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Damage_3" => {
+            "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
             }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_1" => {
+            "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
             }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_2" => {
+            "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
             }
-            "Menu > Upgrade Menu > Drone: Drone_Melee_Speed_3" => {
+            "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Level_1" => {
+            "Menu > Upgrade Menu > Infection > Infection_Level_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Level_2" => {
+            "Menu > Upgrade Menu > Infection > Infection_Level_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Level_3" => {
+            "Menu > Upgrade Menu > Infection > Infection_Level_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Range_1" => {
+            "Menu > Upgrade Menu > Infection > Infection_Range_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Range_2" => {
+            "Menu > Upgrade Menu > Infection > Infection_Range_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Range_3" => {
+            "Menu > Upgrade Menu > Infection > Infection_Range_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Speed_1" => {
+            "Menu > Upgrade Menu > Infection > Infection_Speed_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1)
             }
-            "Menu > Upgrade Menu > Infection: Infection_Speed_2" => {
+            "Menu > Upgrade Menu > Infection > Infection_Speed_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2)
             }
-            "Menu > Upgrade Menu > Infection: Nano_Points_1" => {
+            "Menu > Upgrade Menu > Infection > Nano_Points_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1)
             }
-            "Menu > Upgrade Menu > Infection: Nano_Points_2" => {
+            "Menu > Upgrade Menu > Infection > Nano_Points_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2)
             }
-            "Menu > Upgrade Menu > Infection: Nano_Points_3" => {
+            "Menu > Upgrade Menu > Infection > Nano_Points_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3)
             }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_1" => {
+            "Menu > Upgrade Menu > Physiology > Health_Upgrade_1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
             }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_2" => {
+            "Menu > Upgrade Menu > Physiology > Health_Upgrade_2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
             }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_3" => {
+            "Menu > Upgrade Menu > Physiology > Health_Upgrade_3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
             }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_4" => {
+            "Menu > Upgrade Menu > Physiology > Health_Upgrade_4" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
             }
-            "Menu > Upgrade Menu > Physiology: Health_Upgrade_5" => {
+            "Menu > Upgrade Menu > Physiology > Health_Upgrade_5" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
             }
-            "Menu > Upgrade Menu > Physiology: Mist_Upgrade" => {
+            "Menu > Upgrade Menu > Physiology > Mist_Upgrade" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
             }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
@@ -3876,7 +3886,7 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1 => write!(f, "{}", "Amagi > Main Area > West 19 ==> West Lake > East 19 (1)"),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => write!(f, "{}", "Amagi > Main Area > West Side ==> Carving (1)"),
             ExitId::Amagi__Main_Area__West_Side__ex__Carving_2 => write!(f, "{}", "Amagi > Main Area > West Side ==> Carving (2)"),
-            ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20"),
+            ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20"),
             ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1 => write!(f, "{}", "Amagi > West Lake > Cavern Refill Station ==> Cavern Tear Duct (1)"),
             ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1 => write!(f, "{}", "Amagi > West Lake > Cavern Tear Duct ==> Cavern Refill Station (1)"),
             ExitId::Amagi__West_Lake__East_15__ex__Main_Area__West_15_1 => write!(f, "{}", "Amagi > West Lake > East 15 ==> Main Area > West 15 (1)"),
@@ -3891,7 +3901,7 @@ impl fmt::Display for ExitId {
             ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1 => write!(f, "{}", "Amagi > West Lake > Stronghold Item ==> Stronghold Middle Column (1)"),
             ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1 => write!(f, "{}", "Amagi > West Lake > Stronghold Middle Column ==> Stronghold Ceiling Left (1)"),
             ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 => write!(f, "{}", "Amagi > West Lake > Stronghold Middle Column ==> Stronghold Item (1)"),
-            ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => write!(f, "{}", "Amagi > West Lake > Stronghold Top: Remote Urn"),
+            ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn => write!(f, "{}", "Amagi > West Lake > Stronghold Top > Remote Urn"),
             ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => write!(f, "{}", "Amagi > West Lake > Surface Wall Left ==> Surface Wall Right (1)"),
             ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => write!(f, "{}", "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)"),
             ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => write!(f, "{}", "Amagi > West Lake > West Bank ==> West Shore (1)"),
@@ -3952,7 +3962,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => write!(f, "{}", "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)"),
             ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1 => write!(f, "{}", "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)"),
             ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)"),
-            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform: Urn Quick Grab"),
+            ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => write!(f, "{}", "Ebih > Drone Room > Middle Platform > Urn Quick Grab"),
             ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => write!(f, "{}", "Ebih > Drone Room > Pit Left ==> West 6 (1)"),
             ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1 => write!(f, "{}", "Ebih > Drone Room > Portal ==> Portal Exit (1)"),
             ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => write!(f, "{}", "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)"),
@@ -4186,7 +4196,7 @@ impl fmt::Display for ExitId {
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => write!(f, "{}", "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)"),
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => write!(f, "{}", "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)"),
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => write!(f, "{}", "Glacier > The Big Drop > East ==> Compass Room > West (1)"),
-            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface: Drown"),
+            ExitId::Glacier__The_Big_Drop__Water_Surface__Drown => write!(f, "{}", "Glacier > The Big Drop > Water Surface > Drown"),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => write!(f, "{}", "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)"),
             ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => write!(f, "{}", "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)"),
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => write!(f, "{}", "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)"),
@@ -4249,7 +4259,7 @@ impl std::str::FromStr for ExitId {
             "Amagi > Main Area > West 19 ==> West Lake > East 19 (1)" => Ok(ExitId::Amagi__Main_Area__West_19__ex__West_Lake__East_19_1),
             "Amagi > Main Area > West Side ==> Carving (1)" => Ok(ExitId::Amagi__Main_Area__West_Side__ex__Carving_1),
             "Amagi > Main Area > West Side ==> Carving (2)" => Ok(ExitId::Amagi__Main_Area__West_Side__ex__Carving_2),
-            "Amagi > West Lake > Cavern Refill Station: Defeat MUS A M20" => Ok(ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
+            "Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20" => Ok(ExitId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20),
             "Amagi > West Lake > Cavern Refill Station ==> Cavern Tear Duct (1)" => Ok(ExitId::Amagi__West_Lake__Cavern_Refill_Station__ex__Cavern_Tear_Duct_1),
             "Amagi > West Lake > Cavern Tear Duct ==> Cavern Refill Station (1)" => Ok(ExitId::Amagi__West_Lake__Cavern_Tear_Duct__ex__Cavern_Refill_Station_1),
             "Amagi > West Lake > East 15 ==> Main Area > West 15 (1)" => Ok(ExitId::Amagi__West_Lake__East_15__ex__Main_Area__West_15_1),
@@ -4264,7 +4274,7 @@ impl std::str::FromStr for ExitId {
             "Amagi > West Lake > Stronghold Item ==> Stronghold Middle Column (1)" => Ok(ExitId::Amagi__West_Lake__Stronghold_Item__ex__Stronghold_Middle_Column_1),
             "Amagi > West Lake > Stronghold Middle Column ==> Stronghold Ceiling Left (1)" => Ok(ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Ceiling_Left_1),
             "Amagi > West Lake > Stronghold Middle Column ==> Stronghold Item (1)" => Ok(ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1),
-            "Amagi > West Lake > Stronghold Top: Remote Urn" => Ok(ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn),
+            "Amagi > West Lake > Stronghold Top > Remote Urn" => Ok(ExitId::Amagi__West_Lake__Stronghold_Top__Remote_Urn),
             "Amagi > West Lake > Surface Wall Left ==> Surface Wall Right (1)" => Ok(ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1),
             "Amagi > West Lake > Surface Wall Right ==> Surface Wall Left (1)" => Ok(ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1),
             "Amagi > West Lake > West Bank ==> West Shore (1)" => Ok(ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1),
@@ -4325,7 +4335,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Cave > Entry ==> Waterfall > Cave Entrance (1)" => Ok(ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1),
             "Ebih > Drone Room > East 4 ==> Grid 25,2-6 > West 4 (1)" => Ok(ExitId::Ebih__Drone_Room__East_4__ex__Grid_25_2_6__West_4_1),
             "Ebih > Drone Room > Middle Platform ==> Portal Exit (1)" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__ex__Portal_Exit_1),
-            "Ebih > Drone Room > Middle Platform: Urn Quick Grab" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
+            "Ebih > Drone Room > Middle Platform > Urn Quick Grab" => Ok(ExitId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab),
             "Ebih > Drone Room > Pit Left ==> West 6 (1)" => Ok(ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1),
             "Ebih > Drone Room > Portal ==> Portal Exit (1)" => Ok(ExitId::Ebih__Drone_Room__Portal__ex__Portal_Exit_1),
             "Ebih > Drone Room > Portal Exit ==> Moving Platform (1)" => Ok(ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1),
@@ -4559,7 +4569,7 @@ impl std::str::FromStr for ExitId {
             "Glacier > Revival > Lower East ==> Grid 42,10 > West (1)" => Ok(ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1),
             "Glacier > Revival > West 8 ==> Grid 39-40,7-9 > Upper East (1)" => Ok(ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1),
             "Glacier > The Big Drop > East ==> Compass Room > West (1)" => Ok(ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1),
-            "Glacier > The Big Drop > Water Surface: Drown" => Ok(ExitId::Glacier__The_Big_Drop__Water_Surface__Drown),
+            "Glacier > The Big Drop > Water Surface > Drown" => Ok(ExitId::Glacier__The_Big_Drop__Water_Surface__Drown),
             "Glacier > Vertical Room > East 12 ==> Boomerang Antechamber > West 12 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1),
             "Glacier > Vertical Room > East 13 ==> Boomerang Antechamber > West 13 (1)" => Ok(ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1),
             "Glacier > Vertical Room > East 9 ==> Grid 37-38,9 > West (1)" => Ok(ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1),
@@ -4655,149 +4665,153 @@ impl fmt::Display for ActionId {
             ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone => write!(
                 f,
                 "{}",
-                "Amagi > Cave Behind Waterfall > Middle: Throw Drone"
+                "Amagi > Cave Behind Waterfall > Middle > Throw Drone"
             ),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
-                write!(f, "{}", "Amagi > Main Area > Carving: Key Combo")
+                write!(f, "{}", "Amagi > Main Area > Carving > Key Combo")
             }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
-                write!(f, "{}", "Amagi > Main Area > Save Point: Save")
+                write!(f, "{}", "Amagi > Main Area > Save Point > Save")
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => write!(
                 f,
                 "{}",
-                "Ebih > Base Camp > Left Platform: Move Left Platform"
+                "Ebih > Base Camp > Left Platform > Move Left Platform"
             ),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => write!(
                 f,
                 "{}",
-                "Ebih > Base Camp > Left Platform Moved: Reset Left Platform"
+                "Ebih > Base Camp > Left Platform Moved > Reset Left Platform"
             ),
             ActionId::Ebih__Base_Camp__Save_Point__Save => {
-                write!(f, "{}", "Ebih > Base Camp > Save Point: Save")
+                write!(f, "{}", "Ebih > Base Camp > Save Point > Save")
             }
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
-                write!(f, "{}", "Ebih > Drone Room > Moving Platform: Throw Drone")
+                write!(f, "{}", "Ebih > Drone Room > Moving Platform > Throw Drone")
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
-                write!(f, "{}", "Ebih > Drone Room > Pit Left: Activate Lift")
+                write!(f, "{}", "Ebih > Drone Room > Pit Left > Activate Lift")
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => write!(
                 f,
                 "{}",
-                "Ebih > Drone Room > Pit Left: Activate Lift But Get Off Early"
+                "Ebih > Drone Room > Pit Left > Activate Lift But Get Off Early"
             ),
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => write!(
                 f,
                 "{}",
-                "Ebih > Drone Room > Portal Exit: Activate Platform"
+                "Ebih > Drone Room > Portal Exit > Activate Platform"
             ),
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
-                write!(f, "{}", "Ebih > Ebih East > Dispenser: Activate Lift")
+                write!(f, "{}", "Ebih > Ebih East > Dispenser > Activate Lift")
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => write!(
                 f,
                 "{}",
-                "Ebih > Ebih East > Lower Moving Platform: Activate Lift"
+                "Ebih > Ebih East > Lower Moving Platform > Activate Lift"
             ),
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => write!(
                 f,
                 "{}",
-                "Ebih > Ebih East > Lower Moving Platform: Activate Ride"
+                "Ebih > Ebih East > Lower Moving Platform > Activate Ride"
             ),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
-                write!(f, "{}", "Ebih > Ebih East > Moving Platform: Activate Ride")
-            }
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => write!(
+                f,
+                "{}",
+                "Ebih > Ebih East > Moving Platform > Activate Ride"
+            ),
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => write!(
                 f,
                 "{}",
-                "Ebih > Ebih West > Medium High Platform: Throw Drone Long"
+                "Ebih > Ebih West > Medium High Platform > Throw Drone Long"
             ),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => {
-                write!(f, "{}", "Ebih > Ebih West > Mid Save: Save")
+                write!(f, "{}", "Ebih > Ebih West > Mid Save > Save")
             }
             ActionId::Ebih__Ebih_West__Upper_Save__Save => {
-                write!(f, "{}", "Ebih > Ebih West > Upper Save: Save")
+                write!(f, "{}", "Ebih > Ebih West > Upper Save > Save")
             }
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left: Open Door")
+                write!(f, "{}", "Ebih > Grid 25,10-12 > Door Left > Open Door")
             }
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
-                write!(f, "{}", "Ebih > Grid 25,10-12 > East 11: Open Door")
+                write!(f, "{}", "Ebih > Grid 25,10-12 > East 11 > Open Door")
             }
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
-                write!(f, "{}", "Ebih > Waterfall > Below Left Switch: Open Door")
+                write!(f, "{}", "Ebih > Waterfall > Below Left Switch > Open Door")
             }
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
-                write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole: Throw Drone")
+                write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole > Throw Drone")
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
-                write!(f, "{}", "Giguna > Carnelian > Lower Susar: Caught")
+                write!(f, "{}", "Giguna > Carnelian > Lower Susar > Caught")
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
-                write!(f, "{}", "Giguna > Carnelian > Lower Susar: Hack")
+                write!(f, "{}", "Giguna > Carnelian > Lower Susar > Hack")
             }
             ActionId::Giguna__Carnelian__Switch__Open_Door => {
-                write!(f, "{}", "Giguna > Carnelian > Switch: Open Door")
+                write!(f, "{}", "Giguna > Carnelian > Switch > Open Door")
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
-                write!(f, "{}", "Giguna > Carnelian > Upper Susar: Caught")
+                write!(f, "{}", "Giguna > Carnelian > Upper Susar > Caught")
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
-                write!(f, "{}", "Giguna > Carnelian > Upper Susar: Hack")
+                write!(f, "{}", "Giguna > Carnelian > Upper Susar > Hack")
             }
             ActionId::Giguna__Giguna_Base__Save_Point__Save => {
-                write!(f, "{}", "Giguna > Giguna Base > Save Point: Save")
+                write!(f, "{}", "Giguna > Giguna Base > Save Point > Save")
             }
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
-                write!(f, "{}", "Giguna > Giguna Base > Stone Knob: Throw Drone")
+                write!(f, "{}", "Giguna > Giguna Base > Stone Knob > Throw Drone")
             }
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => write!(
                 f,
                 "{}",
-                "Giguna > Giguna Northeast > Gate Left: Throw Drone"
+                "Giguna > Giguna Northeast > Gate Left > Throw Drone"
             ),
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => write!(
                 f,
                 "{}",
-                "Giguna > Giguna Northeast > Right Column: Open Door From Afar"
+                "Giguna > Giguna Northeast > Right Column > Open Door From Afar"
             ),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Save Point: Save")
+                write!(f, "{}", "Giguna > Giguna Northeast > Save Point > Save")
             }
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => write!(
                 f,
                 "{}",
-                "Giguna > Giguna Northeast > Save Point: Save-Recall"
+                "Giguna > Giguna Northeast > Save Point > Save-Recall"
             ),
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
-                write!(f, "{}", "Giguna > Giguna Northeast > Switch: Open Door")
+                write!(f, "{}", "Giguna > Giguna Northeast > Switch > Open Door")
             }
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
-                write!(f, "{}", "Giguna > Ruins West > Lower Ledge: Destroy Kishib")
-            }
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => write!(
+                f,
+                "{}",
+                "Giguna > Ruins West > Lower Ledge > Destroy Kishib"
+            ),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
-                write!(f, "{}", "Giguna > Ruins West > Lower Ledge: Hack Kishib")
+                write!(f, "{}", "Giguna > Ruins West > Lower Ledge > Hack Kishib")
             }
             ActionId::Giguna__Ruins_West__Save_Point__Save => {
-                write!(f, "{}", "Giguna > Ruins West > Save Point: Save")
+                write!(f, "{}", "Giguna > Ruins West > Save Point > Save")
             }
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
-                write!(f, "{}", "Giguna > Wasteland > Middle Cliff: Throw Drone")
+                write!(f, "{}", "Giguna > Wasteland > Middle Cliff > Throw Drone")
             }
             ActionId::Giguna__West_Caverns__East_Susar__Caught => {
-                write!(f, "{}", "Giguna > West Caverns > East Susar: Caught")
+                write!(f, "{}", "Giguna > West Caverns > East Susar > Caught")
             }
             ActionId::Giguna__West_Caverns__East_Susar__Hack => {
-                write!(f, "{}", "Giguna > West Caverns > East Susar: Hack")
+                write!(f, "{}", "Giguna > West Caverns > East Susar > Hack")
             }
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => write!(
                 f,
                 "{}",
-                "Giguna > West Caverns > Small Platform: Throw Drone Up"
+                "Giguna > West Caverns > Small Platform > Throw Drone Up"
             ),
             ActionId::Glacier__Revival__Save_Point__Save => {
-                write!(f, "{}", "Glacier > Revival > Save Point: Save")
+                write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
             ActionId::Global__Deploy_Drone => write!(f, "{}", "Deploy Drone"),
             ActionId::Global__Recall_Drone => write!(f, "{}", "Recall Drone"),
@@ -4810,125 +4824,125 @@ impl std::str::FromStr for ActionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Amagi > Cave Behind Waterfall > Middle: Throw Drone" => {
+            "Amagi > Cave Behind Waterfall > Middle > Throw Drone" => {
                 Ok(ActionId::Amagi__Cave_Behind_Waterfall__Middle__Throw_Drone)
             }
-            "Amagi > Main Area > Carving: Key Combo" => {
+            "Amagi > Main Area > Carving > Key Combo" => {
                 Ok(ActionId::Amagi__Main_Area__Carving__Key_Combo)
             }
-            "Amagi > Main Area > Save Point: Save" => {
+            "Amagi > Main Area > Save Point > Save" => {
                 Ok(ActionId::Amagi__Main_Area__Save_Point__Save)
             }
-            "Ebih > Base Camp > Left Platform: Move Left Platform" => {
+            "Ebih > Base Camp > Left Platform > Move Left Platform" => {
                 Ok(ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform)
             }
-            "Ebih > Base Camp > Left Platform Moved: Reset Left Platform" => {
+            "Ebih > Base Camp > Left Platform Moved > Reset Left Platform" => {
                 Ok(ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform)
             }
-            "Ebih > Base Camp > Save Point: Save" => {
+            "Ebih > Base Camp > Save Point > Save" => {
                 Ok(ActionId::Ebih__Base_Camp__Save_Point__Save)
             }
-            "Ebih > Drone Room > Moving Platform: Throw Drone" => {
+            "Ebih > Drone Room > Moving Platform > Throw Drone" => {
                 Ok(ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone)
             }
-            "Ebih > Drone Room > Pit Left: Activate Lift" => {
+            "Ebih > Drone Room > Pit Left > Activate Lift" => {
                 Ok(ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift)
             }
-            "Ebih > Drone Room > Pit Left: Activate Lift But Get Off Early" => {
+            "Ebih > Drone Room > Pit Left > Activate Lift But Get Off Early" => {
                 Ok(ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early)
             }
-            "Ebih > Drone Room > Portal Exit: Activate Platform" => {
+            "Ebih > Drone Room > Portal Exit > Activate Platform" => {
                 Ok(ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform)
             }
-            "Ebih > Ebih East > Dispenser: Activate Lift" => {
+            "Ebih > Ebih East > Dispenser > Activate Lift" => {
                 Ok(ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift)
             }
-            "Ebih > Ebih East > Lower Moving Platform: Activate Lift" => {
+            "Ebih > Ebih East > Lower Moving Platform > Activate Lift" => {
                 Ok(ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift)
             }
-            "Ebih > Ebih East > Lower Moving Platform: Activate Ride" => {
+            "Ebih > Ebih East > Lower Moving Platform > Activate Ride" => {
                 Ok(ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride)
             }
-            "Ebih > Ebih East > Moving Platform: Activate Ride" => {
+            "Ebih > Ebih East > Moving Platform > Activate Ride" => {
                 Ok(ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride)
             }
-            "Ebih > Ebih West > Medium High Platform: Throw Drone Long" => {
+            "Ebih > Ebih West > Medium High Platform > Throw Drone Long" => {
                 Ok(ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long)
             }
-            "Ebih > Ebih West > Mid Save: Save" => Ok(ActionId::Ebih__Ebih_West__Mid_Save__Save),
-            "Ebih > Ebih West > Upper Save: Save" => {
+            "Ebih > Ebih West > Mid Save > Save" => Ok(ActionId::Ebih__Ebih_West__Mid_Save__Save),
+            "Ebih > Ebih West > Upper Save > Save" => {
                 Ok(ActionId::Ebih__Ebih_West__Upper_Save__Save)
             }
-            "Ebih > Grid 25,10-12 > Door Left: Open Door" => {
+            "Ebih > Grid 25,10-12 > Door Left > Open Door" => {
                 Ok(ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door)
             }
-            "Ebih > Grid 25,10-12 > East 11: Open Door" => {
+            "Ebih > Grid 25,10-12 > East 11 > Open Door" => {
                 Ok(ActionId::Ebih__Grid_25_10_12__East_11__Open_Door)
             }
-            "Ebih > Waterfall > Below Left Switch: Open Door" => {
+            "Ebih > Waterfall > Below Left Switch > Open Door" => {
                 Ok(ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door)
             }
-            "Ebih > Waterfall > Ledge Below Hole: Throw Drone" => {
+            "Ebih > Waterfall > Ledge Below Hole > Throw Drone" => {
                 Ok(ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone)
             }
-            "Giguna > Carnelian > Lower Susar: Caught" => {
+            "Giguna > Carnelian > Lower Susar > Caught" => {
                 Ok(ActionId::Giguna__Carnelian__Lower_Susar__Caught)
             }
-            "Giguna > Carnelian > Lower Susar: Hack" => {
+            "Giguna > Carnelian > Lower Susar > Hack" => {
                 Ok(ActionId::Giguna__Carnelian__Lower_Susar__Hack)
             }
-            "Giguna > Carnelian > Switch: Open Door" => {
+            "Giguna > Carnelian > Switch > Open Door" => {
                 Ok(ActionId::Giguna__Carnelian__Switch__Open_Door)
             }
-            "Giguna > Carnelian > Upper Susar: Caught" => {
+            "Giguna > Carnelian > Upper Susar > Caught" => {
                 Ok(ActionId::Giguna__Carnelian__Upper_Susar__Caught)
             }
-            "Giguna > Carnelian > Upper Susar: Hack" => {
+            "Giguna > Carnelian > Upper Susar > Hack" => {
                 Ok(ActionId::Giguna__Carnelian__Upper_Susar__Hack)
             }
-            "Giguna > Giguna Base > Save Point: Save" => {
+            "Giguna > Giguna Base > Save Point > Save" => {
                 Ok(ActionId::Giguna__Giguna_Base__Save_Point__Save)
             }
-            "Giguna > Giguna Base > Stone Knob: Throw Drone" => {
+            "Giguna > Giguna Base > Stone Knob > Throw Drone" => {
                 Ok(ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone)
             }
-            "Giguna > Giguna Northeast > Gate Left: Throw Drone" => {
+            "Giguna > Giguna Northeast > Gate Left > Throw Drone" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone)
             }
-            "Giguna > Giguna Northeast > Right Column: Open Door From Afar" => {
+            "Giguna > Giguna Northeast > Right Column > Open Door From Afar" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar)
             }
-            "Giguna > Giguna Northeast > Save Point: Save" => {
+            "Giguna > Giguna Northeast > Save Point > Save" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Save_Point__Save)
             }
-            "Giguna > Giguna Northeast > Save Point: Save-Recall" => {
+            "Giguna > Giguna Northeast > Save Point > Save-Recall" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall)
             }
-            "Giguna > Giguna Northeast > Switch: Open Door" => {
+            "Giguna > Giguna Northeast > Switch > Open Door" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Switch__Open_Door)
             }
-            "Giguna > Ruins West > Lower Ledge: Destroy Kishib" => {
+            "Giguna > Ruins West > Lower Ledge > Destroy Kishib" => {
                 Ok(ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib)
             }
-            "Giguna > Ruins West > Lower Ledge: Hack Kishib" => {
+            "Giguna > Ruins West > Lower Ledge > Hack Kishib" => {
                 Ok(ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib)
             }
-            "Giguna > Ruins West > Save Point: Save" => {
+            "Giguna > Ruins West > Save Point > Save" => {
                 Ok(ActionId::Giguna__Ruins_West__Save_Point__Save)
             }
-            "Giguna > Wasteland > Middle Cliff: Throw Drone" => {
+            "Giguna > Wasteland > Middle Cliff > Throw Drone" => {
                 Ok(ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone)
             }
-            "Giguna > West Caverns > East Susar: Caught" => {
+            "Giguna > West Caverns > East Susar > Caught" => {
                 Ok(ActionId::Giguna__West_Caverns__East_Susar__Caught)
             }
-            "Giguna > West Caverns > East Susar: Hack" => {
+            "Giguna > West Caverns > East Susar > Hack" => {
                 Ok(ActionId::Giguna__West_Caverns__East_Susar__Hack)
             }
-            "Giguna > West Caverns > Small Platform: Throw Drone Up" => {
+            "Giguna > West Caverns > Small Platform > Throw Drone Up" => {
                 Ok(ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up)
             }
-            "Glacier > Revival > Save Point: Save" => {
+            "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
             }
             "Deploy Drone" => Ok(ActionId::Global__Deploy_Drone),

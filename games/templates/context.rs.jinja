@@ -20,7 +20,7 @@ pub mod enums {
 use std::fmt;
 %% from 'enum.rs.jinja' import enum
 %% for etype, evars in context_str_values.items()
-{{ enum(etype|camelize, evars|map('camelize')|list|sort, default=True, default_value=context_values[etype]|trim_type_prefix|camelize) }}
+{{ enum(etype|camelize, evars|map('camelize')|list|sort, default=True, default_value=context_values[etype]|trim_type_prefix|camelize, allow_lower=True) }}
 %% endfor
 }
 

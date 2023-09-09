@@ -274,7 +274,7 @@ class GameLogic(object):
                         spot['loc_ids'].append(loc['id'])
                         area['loc_ids'].append(loc['id'])
                         region['loc_ids'].append(loc['id'])
-                        loc['fullname'] = f'{spot["fullname"]}: {loc["name"]}'
+                        loc['fullname'] = f'{spot["fullname"]} > {loc["name"]}'
                         if 'canon' in loc:
                             self.canon_places[loc['canon']].append(loc)
                         if 'req' in loc:
@@ -307,7 +307,7 @@ class GameLogic(object):
                         act['id'] = construct_id(rname, aname, sname, act['name'])
                         self.id_lookup[act['id']] = act
                         spot['action_ids'].append(act['id'])
-                        act['fullname'] = f'{spot["fullname"]}: {act["name"]}'
+                        act['fullname'] = f'{spot["fullname"]} > {act["name"]}'
                         if 'req' in act:
                             act['pr'] = _parseExpression(
                                     act['req'], act['name'] + ' req', spot['fullname'], ': ')
@@ -1338,7 +1338,7 @@ class GameLogic(object):
                 if name.endswith('.rs'):
                     rustfiles.append(name)
                 with open(name, 'w') as f:
-                    f.write(template.render(gl=self, **self.__dict__))
+                    f.write(template.render(gl=self, int_types=int_types, **self.__dict__))
 
         test_template = env.get_template('tests.rs.jinja')
         for test in self.tests:

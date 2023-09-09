@@ -1,4 +1,4 @@
-%% macro enum(name, values, default=False, id=False, default_value=None)
+%% macro enum(name, values, default=False, id=False, default_value=None, allow_lower=false)
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, Ord, PartialOrd{% if id %}, enum_map::Enum{% endif %}{% if default or default_value %}, Default{% endif %}, serde_repr::Serialize_repr, serde_repr::Deserialize_repr)]
 #[repr(u{{ ((values|count).bit_length() / 8)|round(0, 'ceil')|int * 8 }})]
 pub enum {{ name }} {
@@ -30,7 +30,7 @@ impl std::str::FromStr for {{ name }} {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
 %% for v in values|sort(attribute='id')
-            "{{ v.fullname or v.name or v }}" => Ok({{ name }}::{{ v.id or v|construct_id }}),
+            "{{ v.fullname or v.name or v }}"{% if allow_lower %} | "{{ (v.fullname or v.name or v)|lower }}"{% endif %} => Ok({{ name }}::{{ v.id or v|construct_id }}),
 %% endfor
             _ => Err(format!("Could not recognize as a {{ name }}: {}", s)),
         }

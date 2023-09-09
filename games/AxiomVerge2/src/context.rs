@@ -50,8 +50,8 @@ pub mod enums {
 
         fn from_str(s: &str) -> Result<Self, Self::Err> {
             match s {
-                "Drone" => Ok(Mode::Drone),
-                "Indra" => Ok(Mode::Indra),
+                "Drone" | "drone" => Ok(Mode::Drone),
+                "Indra" | "indra" => Ok(Mode::Indra),
                 _ => Err(format!("Could not recognize as a Mode: {}", s)),
             }
         }
@@ -905,8 +905,8 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("energy", Yaml::String(s)) => {
-                self.set_energy(i16::from_str(s).map_err(|e| format!("{}", e))?)
+            ("energy", Yaml::Integer(i)) => {
+                self.set_energy(i16::try_from(*i).map_err(|e| format!("{}", e))?)
             }
             ("energy", _) => {
                 return Err(format!(
@@ -914,8 +914,8 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("flasks", Yaml::String(s)) => {
-                self.set_flasks(i8::from_str(s).map_err(|e| format!("{}", e))?)
+            ("flasks", Yaml::Integer(i)) => {
+                self.set_flasks(i8::try_from(*i).map_err(|e| format!("{}", e))?)
             }
             ("flasks", _) => {
                 return Err(format!(
@@ -923,8 +923,8 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("refills", Yaml::String(s)) => {
-                self.set_refills(i8::from_str(s).map_err(|e| format!("{}", e))?)
+            ("refills", Yaml::Integer(i)) => {
+                self.set_refills(i8::try_from(*i).map_err(|e| format!("{}", e))?)
             }
             ("refills", _) => {
                 return Err(format!(
