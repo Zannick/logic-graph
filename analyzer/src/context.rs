@@ -221,6 +221,7 @@ where
                 // Activate
                 // ! Do Amagi > Main Area > Carving: Key Combo
                 r"(?:! )? (?:[Dd]o|[Aa]ctivate) (?P<action>.*$)").unwrap();
+            static ref SPOT: Regex = Regex::new(r"(?P<spot>.*$)").unwrap();
         }
         if let Some(cap) = WARP.captures(s) {
             let warp = extract_match(&cap, "warp", s)?;
@@ -252,6 +253,8 @@ where
         } else if let Some(cap) = ACTIVATE.captures(s) {
             let action = extract_match(&cap, "action", s)?;
             Ok(History::A(<A as FromStr>::from_str(action)?))
+        } else if let Ok(spot) = <S as FromStr>::from_str(s) {
+            Ok(History::L(spot))
         } else {
             Err(format!("History<T> did not find a match for: {}", s))
         }

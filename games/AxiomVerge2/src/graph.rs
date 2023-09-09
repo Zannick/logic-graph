@@ -3030,141 +3030,141 @@ impl fmt::Display for LocationId {
                 write!(f, "{}", "Glacier > Vertical Room > Under Switch > Switch")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Damage_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Damage_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Damage_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Damage 3")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Speed_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Speed_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee_Speed_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Melee Speed 3")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Damage_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Damage_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Damage_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Damage 3")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Speed_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 1")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Speed_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 2")
             }
             LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged_Speed_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Combat > Ranged Speed 3")
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_1"
+                "Menu > Upgrade Menu > Drone > Drone Melee Damage 1"
             ),
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_2"
+                "Menu > Upgrade Menu > Drone > Drone Melee Damage 2"
             ),
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_3"
+                "Menu > Upgrade Menu > Drone > Drone Melee Damage 3"
             ),
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 1")
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 2")
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Drone > Drone Melee Speed 3")
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Level_1"
+                "Menu > Upgrade Menu > Infection > Infection Level 1"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Level_2"
+                "Menu > Upgrade Menu > Infection > Infection Level 2"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Level_3"
+                "Menu > Upgrade Menu > Infection > Infection Level 3"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Range_1"
+                "Menu > Upgrade Menu > Infection > Infection Range 1"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Range_2"
+                "Menu > Upgrade Menu > Infection > Infection Range 2"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Range_3"
+                "Menu > Upgrade Menu > Infection > Infection Range 3"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Speed_1"
+                "Menu > Upgrade Menu > Infection > Infection Speed 1"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Infection > Infection_Speed_2"
+                "Menu > Upgrade Menu > Infection > Infection Speed 2"
             ),
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano_Points_1")
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 1")
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano_Points_2")
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 2")
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3 => {
-                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano_Points_3")
+                write!(f, "{}", "Menu > Upgrade Menu > Infection > Nano Points 3")
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology > Health_Upgrade_1"
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 1"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology > Health_Upgrade_2"
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 2"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology > Health_Upgrade_3"
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 3"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology > Health_Upgrade_4"
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 4"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5 => write!(
                 f,
                 "{}",
-                "Menu > Upgrade Menu > Physiology > Health_Upgrade_5"
+                "Menu > Upgrade Menu > Physiology > Health Upgrade 5"
             ),
             LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade => {
-                write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist_Upgrade")
+                write!(f, "{}", "Menu > Upgrade Menu > Physiology > Mist Upgrade")
             }
         }
     }
@@ -3365,109 +3365,109 @@ impl std::str::FromStr for LocationId {
             "Glacier > Vertical Room > Under Switch > Switch" => {
                 Ok(LocationId::Glacier__Vertical_Room__Under_Switch__Switch)
             }
-            "Menu > Upgrade Menu > Combat > Melee_Damage_1" => {
+            "Menu > Upgrade Menu > Combat > Melee Damage 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1)
             }
-            "Menu > Upgrade Menu > Combat > Melee_Damage_2" => {
+            "Menu > Upgrade Menu > Combat > Melee Damage 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_2)
             }
-            "Menu > Upgrade Menu > Combat > Melee_Damage_3" => {
+            "Menu > Upgrade Menu > Combat > Melee Damage 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_3)
             }
-            "Menu > Upgrade Menu > Combat > Melee_Speed_1" => {
+            "Menu > Upgrade Menu > Combat > Melee Speed 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_1)
             }
-            "Menu > Upgrade Menu > Combat > Melee_Speed_2" => {
+            "Menu > Upgrade Menu > Combat > Melee Speed 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_2)
             }
-            "Menu > Upgrade Menu > Combat > Melee_Speed_3" => {
+            "Menu > Upgrade Menu > Combat > Melee Speed 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Melee_Speed_3)
             }
-            "Menu > Upgrade Menu > Combat > Ranged_Damage_1" => {
+            "Menu > Upgrade Menu > Combat > Ranged Damage 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_1)
             }
-            "Menu > Upgrade Menu > Combat > Ranged_Damage_2" => {
+            "Menu > Upgrade Menu > Combat > Ranged Damage 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_2)
             }
-            "Menu > Upgrade Menu > Combat > Ranged_Damage_3" => {
+            "Menu > Upgrade Menu > Combat > Ranged Damage 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Damage_3)
             }
-            "Menu > Upgrade Menu > Combat > Ranged_Speed_1" => {
+            "Menu > Upgrade Menu > Combat > Ranged Speed 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_1)
             }
-            "Menu > Upgrade Menu > Combat > Ranged_Speed_2" => {
+            "Menu > Upgrade Menu > Combat > Ranged Speed 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_2)
             }
-            "Menu > Upgrade Menu > Combat > Ranged_Speed_3" => {
+            "Menu > Upgrade Menu > Combat > Ranged Speed 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Combat__Ranged_Speed_3)
             }
-            "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_1" => {
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1)
             }
-            "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_2" => {
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_2)
             }
-            "Menu > Upgrade Menu > Drone > Drone_Melee_Damage_3" => {
+            "Menu > Upgrade Menu > Drone > Drone Melee Damage 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_3)
             }
-            "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_1" => {
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_1)
             }
-            "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_2" => {
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2)
             }
-            "Menu > Upgrade Menu > Drone > Drone_Melee_Speed_3" => {
+            "Menu > Upgrade Menu > Drone > Drone Melee Speed 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Level_1" => {
+            "Menu > Upgrade Menu > Infection > Infection Level 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Level_2" => {
+            "Menu > Upgrade Menu > Infection > Infection Level 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Level_3" => {
+            "Menu > Upgrade Menu > Infection > Infection Level 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Range_1" => {
+            "Menu > Upgrade Menu > Infection > Infection Range 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Range_2" => {
+            "Menu > Upgrade Menu > Infection > Infection Range 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Range_3" => {
+            "Menu > Upgrade Menu > Infection > Infection Range 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Speed_1" => {
+            "Menu > Upgrade Menu > Infection > Infection Speed 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_1)
             }
-            "Menu > Upgrade Menu > Infection > Infection_Speed_2" => {
+            "Menu > Upgrade Menu > Infection > Infection Speed 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Infection_Speed_2)
             }
-            "Menu > Upgrade Menu > Infection > Nano_Points_1" => {
+            "Menu > Upgrade Menu > Infection > Nano Points 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1)
             }
-            "Menu > Upgrade Menu > Infection > Nano_Points_2" => {
+            "Menu > Upgrade Menu > Infection > Nano Points 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_2)
             }
-            "Menu > Upgrade Menu > Infection > Nano_Points_3" => {
+            "Menu > Upgrade Menu > Infection > Nano Points 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_3)
             }
-            "Menu > Upgrade Menu > Physiology > Health_Upgrade_1" => {
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 1" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1)
             }
-            "Menu > Upgrade Menu > Physiology > Health_Upgrade_2" => {
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 2" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_2)
             }
-            "Menu > Upgrade Menu > Physiology > Health_Upgrade_3" => {
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 3" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_3)
             }
-            "Menu > Upgrade Menu > Physiology > Health_Upgrade_4" => {
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 4" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_4)
             }
-            "Menu > Upgrade Menu > Physiology > Health_Upgrade_5" => {
+            "Menu > Upgrade Menu > Physiology > Health Upgrade 5" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_5)
             }
-            "Menu > Upgrade Menu > Physiology > Mist_Upgrade" => {
+            "Menu > Upgrade Menu > Physiology > Mist Upgrade" => {
                 Ok(LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade)
             }
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),

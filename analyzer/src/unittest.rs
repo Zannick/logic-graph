@@ -103,10 +103,29 @@ where
     pub name: String,
     pub initial: T,
     pub mode: TestMode<'a, T>,
+    // TODO: Expect
 }
 
 lazy_static! {
     static ref ITEM_RE: Regex = Regex::new(r"(\w+)\s*(?:\{(\d+)})?").unwrap();
+    static ref DEFAULT_NAME_RE: Regex =
+        Regex::new(r"Hash\(|String\(|Boolean\(|Integer\(|\W+").unwrap();
+}
+
+fn default_name(yaml: &Yaml) -> String {
+    match yaml {
+        Yaml::Real(r) => r.clone(),
+        Yaml::Integer(i) => format!("{}", i),
+        Yaml::String(s) => s.clone(),
+        Yaml::Boolean(b) => format!("{}", b),
+        Yaml::Array(a) => a.iter().map(default_name).collect::<Vec<_>>().join(","),
+        Yaml::Hash(h) => h
+            .iter()
+            .map(|(k, v)| format!("{}:{}", default_name(k), default_name(v)))
+            .collect::<Vec<_>>()
+            .join(","),
+        _ => String::from("yamlerror"),
+    }
 }
 
 fn item_from_yaml<T>(yaml: &Yaml) -> anyhow::Result<(T::ItemId, u32), String>
@@ -556,6 +575,7 @@ where
                     errs,
                     handle_requires_test(value, &ctx, tname, true)
                 ),
+                Some("expect") => {}
 
                 Some(_) => {}
                 _ => errs.push(format!("{}: key must be string: {:?}", name, key)),
@@ -570,8 +590,18 @@ where
                     mode: m,
                 });
             }
-            (None, _) => errs.push(format!("{}: Please provide a name for this test", name)),
-            (Some(tn), None) => errs.push(format!("{}: No test declared", tn)),
+            (None, Some(m)) => {
+                return Ok(Unittest {
+                    name: default_name(yaml),
+                    initial: ctx,
+                    mode: m,
+                });
+            }
+            (_, None) => {
+                if errs.is_empty() {
+                    errs.push(format!("{}: No test declared", test_name.unwrap_or(name)));
+                }
+            }
         }
     } else {
         errs.push(format!("{}: Expected key-value map", name));
@@ -625,13 +655,18 @@ where
     world.condense_graph();
     let mut ctx = T::default();
     let mut tests: Vec<Unittest<'_, T>> = Vec::new();
+    let mut name = "tests";
 
     for (key, value) in yaml[0]
         .as_hash()
         .expect("YAML file should be a key-value map")
     {
         match key.as_str() {
-            Some("name") => {}
+            Some("name") => {
+                if let Some(v) = value.as_str() {
+                    name = v;
+                }
+            }
             Some("all") => apply_test_setup(&mut ctx, &value, "all", &mut errs, false),
             Some("tests") => match build_tests(value, &ctx, "tests") {
                 Ok(u) => tests.extend(u),
@@ -642,7 +677,12 @@ where
         }
     }
 
-    println!("Collected {} tests and {} errors for {:?}:", tests.len(), errs.len(), filename);
+    println!(
+        "Collected {} tests and {} errors for {:?}:",
+        tests.len(),
+        errs.len(),
+        filename
+    );
     for t in tests {
         println!("{}: {}", t.name, t.mode);
     }

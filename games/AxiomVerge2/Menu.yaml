@@ -5,32 +5,32 @@ areas:
   spots:
     - name: Physiology
       locations:
-        - name: Health_Upgrade_1
+        - name: Health Upgrade 1
           item: Health_Upgrade
           price: 1
           costs: flasks
-        - name: Health_Upgrade_2
+        - name: Health Upgrade 2
           item: Health_Upgrade
           req: Health_Upgrade
           price: 2
           costs: flasks
-        - name: Health_Upgrade_3
+        - name: Health Upgrade 3
           item: Health_Upgrade
           req: Health_Upgrade{2}
           price: 4
           costs: flasks
-        - name: Health_Upgrade_4
+        - name: Health Upgrade 4
           item: Health_Upgrade
           req: Health_Upgrade{3}
           price: 4
           costs: flasks
-        - name: Health_Upgrade_5
+        - name: Health Upgrade 5
           item: Health_Upgrade
           req: Health_Upgrade{4}
           price: 6
           costs: flasks
 
-        - name: Mist_Upgrade
+        - name: Mist Upgrade
           item: Mist_Upgrade
           req: Nanite_Mist
           price: 5
@@ -46,58 +46,58 @@ areas:
           time: 0.1
     - name: Combat
       locations:
-        - name: Melee_Damage_1
+        - name: Melee Damage 1
           item: Melee_Damage
           price: 1
           costs: flasks
-        - name: Melee_Damage_2
+        - name: Melee Damage 2
           item: Melee_Damage
           req: Melee_Damage
           price: 4
           costs: flasks
-        - name: Melee_Damage_3
+        - name: Melee Damage 3
           item: Melee_Damage
           req: Melee_Damage{2}
           price: 6
           costs: flasks
-        - name: Melee_Speed_1
+        - name: Melee Speed 1
           item: Melee_Speed
           price: 1
           costs: flasks
-        - name: Melee_Speed_2
+        - name: Melee Speed 2
           item: Melee_Speed
           req: Melee_Speed
           price: 4
           costs: flasks
-        - name: Melee_Speed_3
+        - name: Melee Speed 3
           item: Melee_Speed
           req: Melee_Speed{2}
           price: 6
           costs: flasks
-        - name: Ranged_Damage_1
+        - name: Ranged Damage 1
           item: Ranged_Damage
           price: 1
           costs: flasks
-        - name: Ranged_Damage_2
+        - name: Ranged Damage 2
           item: Ranged_Damage
           req: Ranged_Damage
           price: 4
           costs: flasks
-        - name: Ranged_Damage_3
+        - name: Ranged Damage 3
           item: Ranged_Damage
           req: Ranged_Damage{2}
           price: 6
           costs: flasks
-        - name: Ranged_Speed_1
+        - name: Ranged Speed 1
           item: Ranged_Speed
           price: 1
           costs: flasks
-        - name: Ranged_Speed_2
+        - name: Ranged Speed 2
           item: Ranged_Speed
           req: Ranged_Speed
           price: 3
           costs: flasks
-        - name: Ranged_Speed_3
+        - name: Ranged Speed 3
           item: Ranged_Speed
           req: Ranged_Speed{2}
           price: 5
@@ -113,53 +113,53 @@ areas:
           time: 0.1
     - name: Infection
       locations:
-        - name: Infection_Level_1
+        - name: Infection Level 1
           item: Infect
           price: 1
           costs: flasks
-        - name: Infection_Level_2
+        - name: Infection Level 2
           item: Infect
           req: Infect{2}
           price: 3
           costs: flasks
-        - name: Infection_Level_3
+        - name: Infection Level 3
           item: Infect
           req: Infect{3}
           price: 4
           costs: flasks
-        - name: Nano_Points_1
+        - name: Nano Points 1
           item: Nano_Points
           price: 1
           costs: flasks
-        - name: Nano_Points_2
+        - name: Nano Points 2
           item: Nano_Points
           req: Nano_Points
           price: 3
           costs: flasks
-        - name: Nano_Points_3
+        - name: Nano Points 3
           item: Nano_Points
           req: Nano_Points{2}
           price: 5
           costs: flasks
-        - name: Infection_Speed_1
+        - name: Infection Speed 1
           item: Infection_Speed
           price: 2
           costs: flasks
-        - name: Infection_Speed_2
+        - name: Infection Speed 2
           item: Infection_Speed
           req: Infection_Speed
           price: 5
           costs: flasks
-        - name: Infection_Range_1
+        - name: Infection Range 1
           item: Infection_Range
           price: 1
           costs: flasks
-        - name: Infection_Range_2
+        - name: Infection Range 2
           item: Infection_Range
           req: Infection_Range
           price: 3
           costs: flasks
-        - name: Infection_Range_3
+        - name: Infection Range 3
           item: Infection_Range
           req: Infection_Range{2}
           price: 5
@@ -174,30 +174,30 @@ areas:
           time: 0.1
     - name: Drone
       locations:
-        - name: Drone_Melee_Damage_1
+        - name: Drone Melee Damage 1
           item: Drone_Melee_Damage
           price: 1
           costs: flasks
-        - name: Drone_Melee_Damage_2
+        - name: Drone Melee Damage 2
           item: Drone_Melee_Damage
           req: Drone_Melee_Damage
           price: 3
           costs: flasks
-        - name: Drone_Melee_Damage_3
+        - name: Drone Melee Damage 3
           item: Drone_Melee_Damage
           req: Drone_Melee_Damage{2}
           price: 5
           costs: flasks
-        - name: Drone_Melee_Speed_1
+        - name: Drone Melee Speed 1
           item: Drone_Melee_Speed
           price: 1
           costs: flasks
-        - name: Drone_Melee_Speed_2
+        - name: Drone Melee Speed 2
           item: Drone_Melee_Speed
           req: Drone_Melee_Speed
           price: 3
           costs: flasks
-        - name: Drone_Melee_Speed_3
+        - name: Drone Melee Speed 3
           item: Drone_Melee_Speed
           req: Drone_Melee_Speed{2}
           price: 5
