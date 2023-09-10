@@ -695,7 +695,6 @@ where
             expect_eventually_activates!(world, initial, start, action);
         }
         TestMode::Route(route) => {
-            return Err(String::from("route not implemented"));
             let mut ctx = ContextWrapper::new(initial);
             for (i, (h, s)) in route.into_iter().enumerate() {
                 ctx = step_from_route(ctx, i, h, world)

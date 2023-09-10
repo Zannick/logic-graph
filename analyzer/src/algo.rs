@@ -53,7 +53,10 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx, max_time);
-    let mut vec: Vec<ContextWrapper<T>> = spot_map.values().filter_map(Clone::clone).collect();
+    let mut vec: Vec<ContextWrapper<T>> = spot_map
+        .into_values()
+        .filter_map(crate::unbox_option)
+        .collect();
 
     vec.par_sort_unstable_by_key(|el| el.elapsed());
     vec

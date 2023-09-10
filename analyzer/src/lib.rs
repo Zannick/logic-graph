@@ -1,6 +1,7 @@
 extern crate bucket_queue;
 extern crate clap;
 extern crate enum_map;
+extern crate libtest_mimic;
 extern crate lru;
 extern crate priority_queue;
 extern crate rayon;
@@ -10,7 +11,6 @@ extern crate rustc_hash;
 extern crate serde;
 extern crate sort_by_derive;
 extern crate yaml_rust;
-extern crate libtest_mimic;
 
 pub mod access;
 pub mod algo;
@@ -38,6 +38,10 @@ pub(crate) fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHashe
 }
 pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {
     rustc_hash::FxHashSet::default()
+}
+
+pub(crate) fn unbox_option<T>(boxed_option: Option<Box<T>>) -> Option<T> {
+    boxed_option.map(|bc| *bc)
 }
 
 pub mod testlib {

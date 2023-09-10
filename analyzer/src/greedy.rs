@@ -18,7 +18,10 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx, max_time);
-    let mut orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().flatten().collect();
+    let mut orig_vec: Vec<ContextWrapper<T>> = spot_map
+        .into_values()
+        .filter_map(crate::unbox_option)
+        .collect();
     orig_vec.sort_unstable_by_key(|ctx| ctx.elapsed());
     if let Some(ctx) = orig_vec
         .iter()
@@ -44,10 +47,10 @@ where
                 .flatten()
             {
                 if spot_has_locations(world, nextctx.get()) {
-                    useful_spots.push(nextctx);
+                    useful_spots.push(*nextctx);
                 } else if !seen.contains(nextctx.get()) {
                     seen.insert(nextctx.get().clone());
-                    to_process.push(nextctx);
+                    to_process.push(*nextctx);
                 }
             }
         }
@@ -73,13 +76,13 @@ where
                 {
                     if spot_has_locations(world, nextctx.get()) {
                         if depth > 0 {
-                            return Ok(nextctx);
+                            return Ok(*nextctx);
                         } else {
-                            useful_spots.push(nextctx);
+                            useful_spots.push(*nextctx);
                         }
                     } else if !seen.contains(nextctx.get()) {
                         seen.insert(nextctx.get().clone());
-                        next_process.push(nextctx);
+                        next_process.push(*nextctx);
                     }
                 }
             }
@@ -97,7 +100,7 @@ where
                     .flatten()
                 {
                     if spot_has_locations(world, nextctx.get()) {
-                        return Ok(nextctx);
+                        return Ok(*nextctx);
                     }
                 }
             }
