@@ -783,7 +783,7 @@ where
         })
         .collect();
     let args = Arguments::from_args();
-    let c = run(&args, tests);
+    run(&args, tests).exit_if_failed();
 }
 
 pub fn run_all_tests_in_dir<W, T>(dirname: &PathBuf)
