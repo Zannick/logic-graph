@@ -12,9 +12,10 @@ use std::fs::File;
 use std::io::Read;
 use std::path::PathBuf;
 use std::str::FromStr;
+use std::sync::Arc;
 use yaml_rust::*;
 
-pub enum TestMode<'a, T>
+pub enum TestMode<T>
 where
     T: Ctx,
 {
@@ -28,18 +29,20 @@ where
     EventuallyReaches(<<T::World as World>::Exit as Exit>::SpotId),
     EventuallyAccesses(<<T::World as World>::Location as Location>::LocId),
     EventuallyActivates(<<T::World as World>::Action as Action>::ActionId),
-    Route(Vec<(HistoryAlias<T>, &'a str)>),
+    Route(Vec<(HistoryAlias<T>, String)>),
     RequiresToObtain(T, T::ItemId),
     RequiresToReach(T, <<T::World as World>::Exit as Exit>::SpotId),
     RequiresToAccess(T, <<T::World as World>::Location as Location>::LocId),
     RequiresToActivate(T, <<T::World as World>::Action as Action>::ActionId),
+    // TODO: These don't quite work the same way, more like expect;
+    // we need a verify_req
     EventuallyRequiresToObtain(T, T::ItemId, u32),
     EventuallyRequiresToReach(T, <<T::World as World>::Exit as Exit>::SpotId, u32),
     EventuallyRequiresToAccess(T, <<T::World as World>::Location as Location>::LocId, u32),
     EventuallyRequiresToActivate(T, <<T::World as World>::Action as Action>::ActionId, u32),
 }
 
-impl<'a, T> fmt::Display for TestMode<'a, T>
+impl<T> fmt::Display for TestMode<T>
 where
     T: Ctx,
 {
@@ -96,13 +99,13 @@ where
     }
 }
 
-pub struct Unittest<'a, T>
+pub struct Unittest<T>
 where
     T: Ctx,
 {
     pub name: String,
     pub initial: T,
-    pub mode: TestMode<'a, T>,
+    pub mode: TestMode<T>,
     // TODO: Expect
 }
 
@@ -353,7 +356,7 @@ fn handle_requires_test<'a, W, T>(
     initial: &T,
     name: &str,
     eventually: bool,
-) -> Result<TestMode<'a, T>, String>
+) -> Result<TestMode<T>, String>
 where
     T: Ctx<World = W>,
     W: World,
@@ -456,7 +459,7 @@ pub fn build_test<'a, W, T>(
     yaml: &'a Yaml,
     initial: &T,
     name: &str,
-) -> Result<Unittest<'a, T>, Vec<String>>
+) -> Result<Unittest<T>, Vec<String>>
 where
     T: Ctx<World = W>,
     W: World,
@@ -562,7 +565,12 @@ where
                         Yaml::Array(v) => histlines_from_yaml_vec::<W, T, W::Location>(v),
                         _ => Err(String::from("Expected string or vec for path value")),
                     }
-                    .map(|route| TestMode::Route(route)),
+                    .map(|route| TestMode::Route(
+                        route
+                            .into_iter()
+                            .map(|(h, s)| (h, format!("{}", s)))
+                            .collect()
+                    )),
                     tname
                 ),
                 Some("requires") => assign_mode_or_append_err!(
@@ -613,7 +621,7 @@ fn build_tests<'a, W, T>(
     yaml: &'a Yaml,
     initial: &T,
     name: &str,
-) -> Result<Vec<Unittest<'a, T>>, Vec<String>>
+) -> Result<Vec<Unittest<T>>, Vec<String>>
 where
     T: Ctx<World = W>,
     W: World,
@@ -638,10 +646,90 @@ where
     }
 }
 
-pub fn run_test_file<W, T>(filename: &PathBuf)
+pub fn run_test<W, T>(world: &W, mut initial: T, mode: TestMode<T>) -> Result<(), String>
 where
     T: Ctx<World = W>,
     W: World,
+    W::Location: Location<Context = T>,
+{
+    let start = initial.position();
+    match mode {
+        TestMode::Obtainable(expected, item) => {
+            if expected {
+                expect_obtainable!(world, initial, start, item);
+            } else {
+                expect_not_obtainable!(world, initial, T, start, item);
+            }
+        }
+        TestMode::Reachable(expected, spot) => {
+            if expected {
+                expect_any_route!(world, initial, start, spot);
+            } else {
+                expect_no_route!(world, initial, T, start, spot);
+            }
+        }
+        TestMode::Accessible(expected, loc) => {
+            if expected {
+                expect_accessible!(world, initial, start, loc);
+            } else {
+                expect_inaccessible!(world, initial, T, start, loc);
+            }
+        }
+        TestMode::Activatable(expected, action) => {
+            if expected {
+                expect_action_accessible!(world, initial, start, action);
+            } else {
+                expect_action_inaccessible!(world, initial, start, action);
+            }
+        }
+        TestMode::EventuallyGets(item) => {
+            expect_eventually_gets!(world, initial, start, item);
+        }
+        TestMode::EventuallyReaches(spot) => {
+            expect_eventually_reaches!(world, initial, start, spot);
+        }
+        TestMode::EventuallyAccesses(loc) => {
+            expect_eventually_accesses!(world, initial, start, loc);
+        }
+        TestMode::EventuallyActivates(action) => {
+            expect_eventually_activates!(world, initial, start, action);
+        }
+        TestMode::Route(route) => {
+            return Err(String::from("route not implemented"));
+            let mut ctx = ContextWrapper::new(initial);
+            for (i, (h, s)) in route.into_iter().enumerate() {
+                ctx = step_from_route(ctx, i, h, world)
+                    .map_err(|e| format!("At \"{}\": {}", s, e))?;
+            }
+        }
+        TestMode::RequiresToObtain(mut ctx2, item) => {
+            expect_not_obtainable!(world, initial, T, start, item);
+            expect_obtainable!(world, ctx2, start, item);
+        }
+        TestMode::RequiresToReach(mut ctx2, spot) => {
+            expect_no_route!(world, initial, T, start, spot);
+            expect_any_route!(world, ctx2, start, spot);
+        }
+        TestMode::RequiresToAccess(mut ctx2, loc) => {
+            expect_inaccessible!(world, initial, T, start, loc);
+            expect_accessible!(world, ctx2, start, loc);
+        }
+        TestMode::RequiresToActivate(mut ctx2, action) => {
+            expect_action_inaccessible!(world, initial, start, action);
+            expect_action_accessible!(world, ctx2, start, action);
+        }
+        TestMode::EventuallyRequiresToObtain(mut ctx2, item, ilimit) => todo!(),
+        TestMode::EventuallyRequiresToReach(_, _, _) => todo!(),
+        TestMode::EventuallyRequiresToAccess(_, _, _) => todo!(),
+        TestMode::EventuallyRequiresToActivate(_, _, _) => todo!(),
+    }
+    Ok(())
+}
+
+pub fn run_test_file<W, T>(filename: &PathBuf)
+where
+    T: Ctx<World = W> + 'static,
+    W: World + Send + 'static,
     W::Location: Location<Context = T>,
 {
     let mut file = File::open(filename)
@@ -654,7 +742,7 @@ where
     let mut world = W::default();
     world.condense_graph();
     let mut ctx = T::default();
-    let mut tests: Vec<Unittest<'_, T>> = Vec::new();
+    let mut tests: Vec<Unittest<T>> = Vec::new();
     let mut name = "tests";
 
     for (key, value) in yaml[0]
@@ -667,7 +755,7 @@ where
                     name = v;
                 }
             }
-            Some("all") => apply_test_setup(&mut ctx, &value, "all", &mut errs, false),
+            Some("all") => apply_test_setup(&mut ctx, value, "all", &mut errs, false),
             Some("tests") => match build_tests(value, &ctx, "tests") {
                 Ok(u) => tests.extend(u),
                 Err(e) => errs.extend(e),
@@ -677,19 +765,39 @@ where
         }
     }
 
-    println!(
-        "Collected {} tests and {} errors for {:?}:",
-        tests.len(),
-        errs.len(),
-        filename
+    assert!(
+        errs.is_empty(),
+        "Errors while parsing {:?}:\n{}",
+        filename,
+        errs.join("\n")
     );
-    for t in tests {
-        println!("{}: {}", t.name, t.mode);
-    }
-    if !errs.is_empty() {
-        println!("\nErrors");
-        for e in errs {
-            println!("{}", e);
+    let wp = Arc::new(world);
+    //
+    let tests: Vec<_> = tests
+        .into_iter()
+        .map(|t| {
+            let wp = wp.clone();
+            Trial::test(t.name.clone(), move || {
+                println!("Running {}: {}", t.name, t.mode);
+                Ok(run_test(&*wp, t.initial, t.mode)?)
+            })
+        })
+        .collect();
+    let args = Arguments::from_args();
+    let c = run(&args, tests);
+}
+
+pub fn run_all_tests_in_dir<W, T>(dirname: &PathBuf)
+where
+    T: Ctx<World = W> + 'static,
+    W: World + Send + 'static,
+    W::Location: Location<Context = T>,
+{
+    for entry in std::fs::read_dir(dirname).unwrap() {
+        let path = entry.unwrap().path();
+        let ext = path.extension().map(|s| s.to_str()).flatten();
+        if matches!(ext, Some("yaml")) {
+            run_test_file::<W, T>(&path);
         }
     }
 }

@@ -48,6 +48,8 @@ pub trait Ctx:
     // test helper for context vars
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String>;
 
+    //fn build_verify_func(ckey: &str, cval: &Yaml) -> Result<impl Fn(&Self) -> bool, String>;
+
     fn position(&self) -> <<Self::World as World>::Exit as Exit>::SpotId;
     fn set_position(&mut self, pos: <<Self::World as World>::Exit as Exit>::SpotId);
     // for testing only, skips enter handlers

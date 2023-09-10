@@ -166,7 +166,7 @@ pub mod testlib {
                 let spot = $world.get_location_spot(loc);
                 if let Some(ctx) = &spot_map[spot] {
                     if $world.get_location(loc).can_access(ctx.get()) {
-                        return;
+                        return Ok(());
                     }
                     errors.push(format!("Unable to access location {}", loc));
                 } else {
@@ -351,7 +351,7 @@ pub mod testlib {
             let mut count = 1000;
             while let Some(ctx) = heap.pop() {
                 if item_locs.iter().any(|loc_id| ctx.get().visited(*loc_id)) {
-                    return;
+                    return Ok(());
                 }
                 if count == 0 {
                     panic!("Did not find {} in the iteration limit", $item);
@@ -373,7 +373,7 @@ pub mod testlib {
             let mut count = 1000;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().position() == $spot {
-                    return;
+                    return Ok(());
                 }
                 if count == 0 {
                     panic!("Did not reach {} in the iteration limit", $spot);
@@ -391,7 +391,7 @@ pub mod testlib {
             $ctx.set_position($start);
 
             if $ctx.visited($loc_id) {
-                return;
+                return Ok(());
             }
             assert!(
                 $ctx.todo($loc_id),
@@ -410,7 +410,7 @@ pub mod testlib {
                     heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                     count -= 1;
                 } else if ctx.get().visited($loc_id) {
-                    return;
+                    return Ok(());
                 }
                 // if we skipped the location, don't bother with expanding that line further
             }
@@ -427,9 +427,9 @@ pub mod testlib {
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = 1000;
             while let Some(ctx) = heap.pop() {
-                if let Some($crate::context::History::Activate(a)) = ctx.last_step() {
-                    if a == $act_id {
-                        return;
+                if let Some($crate::context::History::A(a)) = ctx.recent_history().last() {
+                    if *a == $act_id {
+                        return Ok(());
                     }
                 }
                 if count == 0 {
@@ -470,7 +470,7 @@ pub mod testlib {
                             "Did not {} in the iteration limit of {}",
                             $desc, $limit
                         );
-                        return;
+                        return Ok(());
                     }
                     heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                     count -= 1;
@@ -507,7 +507,7 @@ pub mod testlib {
                         "Did not find {} in the iteration limit of {}",
                         $item, $limit
                     );
-                    return;
+                    return Ok(());
                 }
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
@@ -543,7 +543,7 @@ pub mod testlib {
                         "Did not reach {} in the iteration limit of {}",
                         $spot, $limit
                     );
-                    return;
+                    return Ok(());
                 }
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
@@ -579,7 +579,7 @@ pub mod testlib {
                             "Did not visit {} in the iteration limit of {}",
                             $loc_id, $limit
                         );
-                        return;
+                        return Ok(());
                     }
                     heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                     count -= 1;
@@ -598,8 +598,8 @@ pub mod testlib {
             let mut count = $limit;
             let mut success = false;
             while let Some(ctx) = heap.pop() {
-                if let Some($crate::context::History::Activate(a)) = ctx.last_step() {
-                    if a == $act_id {
+                if let Some($crate::context::History::A(a)) = ctx.recent_history().last() {
+                    if *a == $act_id {
                         let result = ($verify_req)(ctx.get());
                         assert!(
                             result.is_ok(),
@@ -619,7 +619,7 @@ pub mod testlib {
                         "Did not activate {} in the iteration limit of {}",
                         $act_id, $limit
                     );
-                    return;
+                    return Ok(());
                 }
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
