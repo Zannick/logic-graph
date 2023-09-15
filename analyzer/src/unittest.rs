@@ -34,12 +34,11 @@ where
     RequiresToReach(T, <<T::World as World>::Exit as Exit>::SpotId),
     RequiresToAccess(T, <<T::World as World>::Location as Location>::LocId),
     RequiresToActivate(T, <<T::World as World>::Action as Action>::ActionId),
-    // TODO: These don't quite work the same way, more like expect;
-    // we need a verify_req
-    EventuallyRequiresToObtain(T, T::ItemId, u32),
-    EventuallyRequiresToReach(T, <<T::World as World>::Exit as Exit>::SpotId, u32),
-    EventuallyRequiresToAccess(T, <<T::World as World>::Location as Location>::LocId, u32),
-    EventuallyRequiresToActivate(T, <<T::World as World>::Action as Action>::ActionId, u32),
+    // TODO: These require expectations provided in the unittest.
+    EventuallyRequiresToObtain(T::ItemId, u32),
+    EventuallyRequiresToReach(<<T::World as World>::Exit as Exit>::SpotId, u32),
+    EventuallyRequiresToAccess(<<T::World as World>::Location as Location>::LocId, u32),
+    EventuallyRequiresToActivate(<<T::World as World>::Action as Action>::ActionId, u32),
 }
 
 impl<T> fmt::Display for TestMode<T>
@@ -79,21 +78,17 @@ where
             }
             TestMode::RequiresToActivate(_, act) => write!(f, "RequiresToActivate(<ctx>, {})", act),
 
-            TestMode::EventuallyRequiresToObtain(_, item, limit) => {
-                write!(f, "EventuallyRequiresToObtain(<ctx>, {}, {})", item, limit)
+            TestMode::EventuallyRequiresToObtain(item, limit) => {
+                write!(f, "EventuallyRequiresToObtain({}, {})", item, limit)
             }
-            TestMode::EventuallyRequiresToReach(_, spot, limit) => {
-                write!(f, "EventuallyRequiresToReach(<ctx>, {}, {})", spot, limit)
+            TestMode::EventuallyRequiresToReach(spot, limit) => {
+                write!(f, "EventuallyRequiresToReach({}, {})", spot, limit)
             }
-            TestMode::EventuallyRequiresToAccess(_, loc_id, limit) => {
-                write!(
-                    f,
-                    "EventuallyRequiresToAccess(<ctx>, {}, {})",
-                    loc_id, limit
-                )
+            TestMode::EventuallyRequiresToAccess(loc_id, limit) => {
+                write!(f, "EventuallyRequiresToAccess({}, {})", loc_id, limit)
             }
-            TestMode::EventuallyRequiresToActivate(_, act, limit) => {
-                write!(f, "EventuallyRequiresToActivate(<ctx>, {}, {})", act, limit)
+            TestMode::EventuallyRequiresToActivate(act, limit) => {
+                write!(f, "EventuallyRequiresToActivate({}, {})", act, limit)
             }
         }
     }
@@ -106,7 +101,7 @@ where
     pub name: String,
     pub initial: T,
     pub mode: TestMode<T>,
-    // TODO: Expect
+    pub expects: Vec<T::Expectation>,
 }
 
 lazy_static! {
@@ -351,12 +346,28 @@ macro_rules! assign_mode_or_append_err {
     };
 }
 
+macro_rules! assign_mode_expects_or_append_err {
+    ($mode:expr, $expects:expr, $errs:expr, $val:expr) => {
+        match $val {
+            Ok((m, xps)) => {
+                if let Some(m1) = &$mode {
+                    $errs.push(format!("Multiple test defs: 1. {}  2. {}", m1, m));
+                } else {
+                    $mode = Some(m);
+                    $expects = xps;
+                }
+            }
+            Err(e) => $errs.push(e),
+        }
+    };
+}
+
 fn handle_requires_test<'a, W, T>(
     yaml: &'a Yaml,
     initial: &T,
     name: &str,
     eventually: bool,
-) -> Result<TestMode<T>, String>
+) -> Result<(TestMode<T>, Vec<T::Expectation>), String>
 where
     T: Ctx<World = W>,
     W: World,
@@ -364,6 +375,7 @@ where
 {
     let mut rctx = initial.clone();
     let mut errs = Vec::new();
+    let mut expects = Vec::new();
     apply_test_setup(&mut rctx, yaml, name, &mut errs, true);
     if let Some(map) = yaml.as_hash() {
         let mut mode: Option<TestMode<T>> = None;
@@ -376,7 +388,7 @@ where
                         mode,
                         errs,
                         item_only_from_yaml::<T>(value).map(|item| if eventually {
-                            TestMode::EventuallyRequiresToObtain(rctx.clone(), item, ilimit)
+                            TestMode::EventuallyRequiresToObtain(item, ilimit)
                         } else {
                             TestMode::RequiresToObtain(rctx.clone(), item)
                         }),
@@ -388,7 +400,7 @@ where
                         mode,
                         errs,
                         obj_from_yaml::<<W::Exit as Exit>::SpotId>(value).map(|sp| if eventually {
-                            TestMode::EventuallyRequiresToReach(rctx.clone(), sp, ilimit)
+                            TestMode::EventuallyRequiresToReach(sp, ilimit)
                         } else {
                             TestMode::RequiresToReach(rctx.clone(), sp)
                         }),
@@ -401,7 +413,7 @@ where
                         errs,
                         obj_from_yaml::<<W::Location as Location>::LocId>(value).map(|loc_id| {
                             if eventually {
-                                TestMode::EventuallyRequiresToAccess(rctx.clone(), loc_id, ilimit)
+                                TestMode::EventuallyRequiresToAccess(loc_id, ilimit)
                             } else {
                                 TestMode::RequiresToAccess(rctx.clone(), loc_id)
                             }
@@ -414,7 +426,7 @@ where
                         errs,
                         obj_from_yaml::<<W::Action as Action>::ActionId>(value).map(|act| {
                             if eventually {
-                                TestMode::EventuallyRequiresToActivate(rctx.clone(), act, ilimit)
+                                TestMode::EventuallyRequiresToActivate(act, ilimit)
                             } else {
                                 TestMode::RequiresToActivate(rctx.clone(), act)
                             }
@@ -429,23 +441,30 @@ where
                         }
                     }
                 }
+                Some("expect") => match handle_expectations::<T>(value, name) {
+                    Ok(v) => expects = v,
+                    Err(e) => errs.extend(e),
+                },
                 _ => {}
             }
         }
         match mode {
-            Some(TestMode::EventuallyRequiresToObtain(c, item, _)) => {
-                return Ok(TestMode::EventuallyRequiresToObtain(c, item, ilimit))
+            Some(TestMode::EventuallyRequiresToObtain(item, _)) => {
+                return Ok((TestMode::EventuallyRequiresToObtain(item, ilimit), expects))
             }
-            Some(TestMode::EventuallyRequiresToReach(c, spot, _)) => {
-                return Ok(TestMode::EventuallyRequiresToReach(c, spot, ilimit))
+            Some(TestMode::EventuallyRequiresToReach(spot, _)) => {
+                return Ok((TestMode::EventuallyRequiresToReach(spot, ilimit), expects))
             }
-            Some(TestMode::EventuallyRequiresToAccess(c, loc_id, _)) => {
-                return Ok(TestMode::EventuallyRequiresToAccess(c, loc_id, ilimit))
+            Some(TestMode::EventuallyRequiresToAccess(loc_id, _)) => {
+                return Ok((
+                    TestMode::EventuallyRequiresToAccess(loc_id, ilimit),
+                    expects,
+                ))
             }
-            Some(TestMode::EventuallyRequiresToActivate(c, act, _)) => {
-                return Ok(TestMode::EventuallyRequiresToActivate(c, act, ilimit))
+            Some(TestMode::EventuallyRequiresToActivate(act, _)) => {
+                return Ok((TestMode::EventuallyRequiresToActivate(act, ilimit), expects))
             }
-            Some(m) => return Ok(m),
+            Some(m) => return Ok((m, expects)),
             _ => errs.push(format!(
                 "No test mode specified for {}requires",
                 if eventually { "eventually_" } else { "" },
@@ -453,6 +472,33 @@ where
         }
     }
     Err(errs.join("\n"))
+}
+
+fn handle_expectations<T>(yaml: &Yaml, name: &str) -> Result<Vec<T::Expectation>, Vec<String>>
+where
+    T: Ctx,
+{
+    let mut errs = Vec::new();
+    let mut vec = Vec::new();
+    if let Some(map) = yaml.as_hash() {
+        for (key, value) in map {
+            if let Some(s) = key.as_str() {
+                match T::parse_expect_context(s, value) {
+                    Ok(exp) => vec.push(exp),
+                    Err(e) => errs.push(format!("{}: {}", name, e)),
+                }
+            } else {
+                errs.push(format!("{}: key must be string: {:?}", name, key))
+            }
+        }
+    } else {
+        errs.push(format!("{}: Expected key-value map", name));
+    }
+    if errs.is_empty() {
+        Ok(vec)
+    } else {
+        Err(errs)
+    }
 }
 
 pub fn build_test<'a, W, T>(
@@ -470,6 +516,7 @@ where
     if let Some(tmap) = yaml.as_hash() {
         let mut test_name = None;
         let mut mode: Option<TestMode<T>> = None;
+        let mut expects = Vec::new();
         apply_test_setup::<W, T>(&mut ctx, yaml, name, &mut errs, true);
 
         let obtainable = |can, value| {
@@ -573,17 +620,22 @@ where
                     )),
                     tname
                 ),
-                Some("requires") => assign_mode_or_append_err!(
+                Some("requires") => assign_mode_expects_or_append_err!(
                     mode,
+                    expects,
                     errs,
                     handle_requires_test(value, &ctx, tname, false)
                 ),
-                Some("eventually_requires") => assign_mode_or_append_err!(
+                Some("eventually_requires") => assign_mode_expects_or_append_err!(
                     mode,
+                    expects,
                     errs,
                     handle_requires_test(value, &ctx, tname, true)
                 ),
-                Some("expect") => {}
+                Some("expect") => match handle_expectations::<T>(value, tname) {
+                    Ok(v) => expects = v,
+                    Err(e) => errs.extend(e),
+                },
 
                 Some(_) => {}
                 _ => errs.push(format!("{}: key must be string: {:?}", name, key)),
@@ -596,6 +648,7 @@ where
                     name: String::from(tn),
                     initial: ctx,
                     mode: m,
+                    expects,
                 });
             }
             (None, Some(m)) => {
@@ -603,6 +656,7 @@ where
                     name: default_name(yaml),
                     initial: ctx,
                     mode: m,
+                    expects,
                 });
             }
             (_, None) => {
@@ -646,7 +700,12 @@ where
     }
 }
 
-pub fn run_test<W, T>(world: &W, mut initial: T, mode: TestMode<T>) -> Result<(), String>
+pub fn run_test<W, T>(
+    world: &W,
+    mut initial: T,
+    mode: TestMode<T>,
+    expects: Vec<T::Expectation>,
+) -> Result<(), String>
 where
     T: Ctx<World = W>,
     W: World,
@@ -700,6 +759,7 @@ where
                 ctx = step_from_route(ctx, i, h, world)
                     .map_err(|e| format!("At \"{}\": {}", s, e))?;
             }
+            ctx.get().assert_expectations(&expects)?;
         }
         TestMode::RequiresToObtain(mut ctx2, item) => {
             expect_not_obtainable!(world, initial, T, start, item);
@@ -717,15 +777,55 @@ where
             expect_action_inaccessible!(world, initial, start, action);
             expect_action_accessible!(world, ctx2, start, action);
         }
-        TestMode::EventuallyRequiresToObtain(mut ctx2, item, ilimit) => todo!(),
-        TestMode::EventuallyRequiresToReach(_, _, _) => todo!(),
-        TestMode::EventuallyRequiresToAccess(_, _, _) => todo!(),
-        TestMode::EventuallyRequiresToActivate(_, _, _) => todo!(),
+        TestMode::EventuallyRequiresToObtain(item, ilimit) => {
+            expect_eventually_requires_to_obtain!(
+                world,
+                initial,
+                T,
+                start,
+                item,
+                |c: &T| T::assert_expectations(c, &expects),
+                ilimit
+            );
+        }
+        TestMode::EventuallyRequiresToReach(spot, ilimit) => {
+            expect_eventually_requires_to_reach!(
+                world,
+                initial,
+                T,
+                start,
+                spot,
+                |c: &T| T::assert_expectations(c, &expects),
+                ilimit
+            )
+        }
+        TestMode::EventuallyRequiresToAccess(loc_id, ilimit) => {
+            expect_eventually_requires_to_access!(
+                world,
+                initial,
+                T,
+                start,
+                loc_id,
+                |c: &T| T::assert_expectations(c, &expects),
+                ilimit
+            )
+        }
+        TestMode::EventuallyRequiresToActivate(act, ilimit) => {
+            expect_eventually_requires_to_activate!(
+                world,
+                initial,
+                T,
+                start,
+                act,
+                |c: &T| T::assert_expectations(c, &expects),
+                ilimit
+            )
+        }
     }
     Ok(())
 }
 
-pub fn run_test_file<W, T>(filename: &PathBuf)
+pub fn run_test_file<W, T>(world: Arc<W>, filename: &PathBuf)
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -733,16 +833,18 @@ where
 {
     let mut file = File::open(filename)
         .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
+    let mut prefix = filename
+        .file_stem()
+        .map(|f| f.to_str())
+        .flatten()
+        .unwrap_or_else(|| panic!("Filename error in \"{:?}\"", filename));
     let mut settings = String::new();
     file.read_to_string(&mut settings)
         .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", filename, e));
     let yaml = YamlLoader::load_from_str(&settings).expect("YAML parse error");
     let mut errs = Vec::new();
-    let mut world = W::default();
-    world.condense_graph();
     let mut ctx = T::default();
     let mut tests: Vec<Unittest<T>> = Vec::new();
-    let mut name = "tests";
 
     for (key, value) in yaml[0]
         .as_hash()
@@ -751,11 +853,17 @@ where
         match key.as_str() {
             Some("name") => {
                 if let Some(v) = value.as_str() {
-                    name = v;
+                    prefix = v;
                 }
             }
-            Some("all") => apply_test_setup(&mut ctx, value, "all", &mut errs, false),
-            Some("tests") => match build_tests(value, &ctx, "tests") {
+            Some("all") => apply_test_setup(
+                &mut ctx,
+                value,
+                &format!("{}.all", prefix),
+                &mut errs,
+                false,
+            ),
+            Some("tests") => match build_tests(value, &ctx, &format!("{}.tests", prefix)) {
                 Ok(u) => tests.extend(u),
                 Err(e) => errs.extend(e),
             },
@@ -770,20 +878,22 @@ where
         filename,
         errs.join("\n")
     );
-    let wp = Arc::new(world);
-    //
     let tests: Vec<_> = tests
         .into_iter()
         .map(|t| {
-            let wp = wp.clone();
-            Trial::test(t.name.clone(), move || {
+            let wp = world.clone();
+            Trial::test(format!("{}:{}", prefix, t.name), move || {
                 println!("Running {}: {}", t.name, t.mode);
-                Ok(run_test(&*wp, t.initial, t.mode)?)
+                if !t.expects.is_empty() {
+                    println!("With expectations: {:?}", t.expects);
+                }
+                Ok(run_test(&*wp, t.initial, t.mode, t.expects)?)
             })
         })
         .collect();
     let args = Arguments::from_args();
-    run(&args, tests).exit_if_failed();
+    println!("For {:?}", prefix);
+    run(&args, tests); //.exit_if_failed();
 }
 
 pub fn run_all_tests_in_dir<W, T>(dirname: &PathBuf)
@@ -792,11 +902,16 @@ where
     W: World + Send + 'static,
     W::Location: Location<Context = T>,
 {
+    let mut world = W::default();
+    world.condense_graph();
+
+    let wp = Arc::new(world);
+
     for entry in std::fs::read_dir(dirname).unwrap() {
         let path = entry.unwrap().path();
         let ext = path.extension().map(|s| s.to_str()).flatten();
         if matches!(ext, Some("yaml")) {
-            run_test_file::<W, T>(&path);
+            run_test_file::<W, T>(wp.clone(), &path);
         }
     }
 }

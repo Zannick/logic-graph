@@ -262,7 +262,7 @@ impl context::Ctx for Context {
         })
     }
 
-    fn assert_expectations<I>(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
+    fn assert_expectations(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
         let mut errs = Vec::new();
         for exp in exps {
             match exp {

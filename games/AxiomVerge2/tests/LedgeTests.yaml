@@ -86,8 +86,8 @@ tests:
   #    to_obtain -> cannot_obtain/can_obtain
   # Again, these tests perform no actions and visit no locations
   - requires:
-      with: 
-        - Ledge_Grab
+      expect: 
+        Ledge_Grab: 1
       to_reach: Glacier > Vertical Room > Peak
 
   # eventually_requires:
@@ -95,7 +95,7 @@ tests:
   #   to find the goal item, and fails if any route got the goal item but not the requirement(s).
   #   (Also fails if it never found the goal item.)
   - eventually_requires:
-      with: 
-        - Boomerang
+      expect: 
+        Boomerang: 1
       to_obtain: Ledge_Grab
       iteration_limit: 500

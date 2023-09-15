@@ -20,7 +20,6 @@ import jinja2
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
 from FlagProcessor import BitFlagProcessor
-from TestProcessor import TestProcessor
 from Utils import *
 
 templates_dir = os.path.join(base_dir, 'games', 'templates')
@@ -68,13 +67,6 @@ def load_game_yaml(game_dir: str):
     game['regions'] = list(itertools.chain.from_iterable(
         load_data_from_file(os.path.join(game_dir, file))
         for file in sorted(yfiles)))
-    test_dir = os.path.join(game_dir, 'tests')
-    if os.path.exists(test_dir):
-        testfiles = [file for file in os.listdir(test_dir)
-                     if file.endswith('.yaml')]
-        game['tests'] = list(itertools.chain.from_iterable(
-            load_data_from_file(os.path.join(test_dir, file))
-            for file in sorted(testfiles)))
     return game
 
 def _parseExpression(logic: str, name: str, category: str, sep:str=':', rule:str='boolExpr') -> ParseResult:
@@ -160,7 +152,6 @@ class GameLogic(object):
         self._errors = []
 
         self._info = load_game_yaml(self.game_dir)
-        self.tests = self._info.get('tests', [])
         self.game_name = self._info['name']
         self.helpers = {
             get_func_name(name): {
@@ -214,7 +205,6 @@ class GameLogic(object):
         self.process_times()
         self.process_settings()
         self.process_items()
-        self.process_tests()
         self.process_bitflags()
 
 
@@ -415,11 +405,6 @@ class GameLogic(object):
         cv = ContextVisitor(self.context_types, self.context_values, self.data_types, self.data_defaults)
         _visit(cv)
         self.context_str_values = cv.values
-
-    def process_tests(self):
-        tp = TestProcessor(self.all_items, self.context_types, self.context_str_values,
-                           self.settings, self.id_lookup)
-        self._errors.extend(tp.process_tests(self.tests))
 
     def process_bitflags(self):
         self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts)
@@ -1340,13 +1325,6 @@ class GameLogic(object):
                 with open(name, 'w') as f:
                     f.write(template.render(gl=self, int_types=int_types, **self.__dict__))
 
-        test_template = env.get_template('tests.rs.jinja')
-        for test in self.tests:
-            name = os.path.join(self.game_dir, 'tests', inflection.underscore(test['name']) + '.rs')
-            rustfiles.append(name)
-            with open(name, 'w') as f:
-                f.write(test_template.render(gl=self, test_file=test, **self.__dict__))
-
         cmd = ['rustfmt'] + rustfiles
         subprocess.run(cmd)
 
@@ -1366,5 +1344,4 @@ if __name__ == '__main__':
                  f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
                  f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
                  f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
-                 f'{len(gl.warps)} warps, {len(gl.objectives)} objectives, '
-                 f'{sum(len(t.get("tests", ())) for t in gl.tests)} test cases')
+                 f'{len(gl.warps)} warps, {len(gl.objectives)} objectives')

@@ -107,8 +107,7 @@ tests:
       - Ebih > Grid 25,10-12 > East 10
       - Ebih > Grid 25,10-12 > Hidden Bush
     expect:
-      context:
-        ebih__grid_25_10_12__ctx__door_open: true
+      ebih__grid_25_10_12__ctx__door_open: true
 
   - start: Ebih > Ebih West > Upper Save
     with:
@@ -127,8 +126,7 @@ tests:
     path:
       - Ebih > Base Camp > East 12
     expect:
-      context:
-        prev_area: Glacier > Grid 31,9-12
+      prev_area: Glacier > Grid 31,9-12
 
   - name: prev_area_after_pause
     start: Glacier > Grid 31,9-12 > West 12
@@ -141,9 +139,8 @@ tests:
       - Menu > Upgrade Menu > Physiology
       - Ebih > Base Camp > East 12
     expect:
-      context:
-        prev_area: Glacier > Grid 31,9-12
-        last: SpotId::None
+      prev_area: Glacier > Grid 31,9-12
+      last: SpotId::None
 
   - name: prev_area_after_menu_hop
     start: Glacier > Grid 31,9-12 > Observation Tower L4
@@ -160,6 +157,5 @@ tests:
       - Menu > Upgrade Menu > Infection
       - Ebih > Base Camp > East 12
     expect:
-      context:
-        prev_area: Glacier > Grid 31,9-12
-        last: SpotId::None
+      prev_area: Glacier > Grid 31,9-12
+      last: SpotId::None
