@@ -166,22 +166,26 @@ pub mod testlib {
                 u32::MAX,
             );
             let mut errors = Vec::new();
+            let mut done = false;
             for loc in locations {
                 let spot = $world.get_location_spot(loc);
                 if let Some(ctx) = &spot_map[spot] {
                     if $world.get_location(loc).can_access(ctx.get()) {
-                        return Ok(());
+                        done = true;
+                        break;
                     }
                     errors.push(format!("Unable to access location {}", loc));
                 } else {
                     errors.push(format!("Unable to reach spot {}", spot));
                 }
             }
-            panic!(
-                "Unable to reach any unvisited location with {}:\n{}\n",
-                $item,
-                errors.join("\n")
-            );
+            if !done {
+                panic!(
+                    "Unable to reach any unvisited location with {}:\n{}\n",
+                    $item,
+                    errors.join("\n")
+                );
+            }
         }};
     }
 
@@ -353,9 +357,11 @@ pub mod testlib {
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = 1000;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if item_locs.iter().any(|loc_id| ctx.get().visited(*loc_id)) {
-                    return Ok(());
+                    done = true;
+                    break;
                 }
                 if count == 0 {
                     panic!("Did not find {} in the iteration limit", $item);
@@ -363,7 +369,9 @@ pub mod testlib {
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
-            panic!("Dead-ended without finding {}", $item);
+            if !done {
+                panic!("Dead-ended without finding {}", $item);
+            }
         }};
     }
 
@@ -375,9 +383,11 @@ pub mod testlib {
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = 1000;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().position() == $spot {
-                    return Ok(());
+                    done = true;
+                    break;
                 }
                 if count == 0 {
                     panic!("Did not reach {} in the iteration limit", $spot);
@@ -385,7 +395,9 @@ pub mod testlib {
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
-            panic!("Dead-ended without reaching {}", $spot);
+            if !done {
+                panic!("Dead-ended without reaching {}", $spot);
+            }
         }};
     }
 
@@ -394,31 +406,34 @@ pub mod testlib {
         ($world:expr, $ctx:expr, $start:expr, $loc_id:expr) => {{
             $ctx.set_position($start);
 
-            if $ctx.visited($loc_id) {
-                return Ok(());
-            }
-            assert!(
-                $ctx.todo($loc_id),
-                "Expected {} to be unvisited and unskipped",
-                $loc_id
-            );
+            if !$ctx.visited($loc_id) {
+                assert!(
+                    $ctx.todo($loc_id),
+                    "Expected {} to be unvisited and unskipped",
+                    $loc_id
+                );
 
-            let mut heap = $crate::heap::LimitedHeap::new();
-            heap.push($crate::context::ContextWrapper::new($ctx));
-            let mut count = 1000;
-            while let Some(ctx) = heap.pop() {
-                if ctx.get().todo($loc_id) {
-                    if count == 0 {
-                        panic!("Did not visit {} in the iteration limit", $loc_id);
+                let mut heap = $crate::heap::LimitedHeap::new();
+                heap.push($crate::context::ContextWrapper::new($ctx));
+                let mut count = 1000;
+                let mut done = false;
+                while let Some(ctx) = heap.pop() {
+                    if ctx.get().todo($loc_id) {
+                        if count == 0 {
+                            panic!("Did not visit {} in the iteration limit", $loc_id);
+                        }
+                        heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
+                        count -= 1;
+                    } else if ctx.get().visited($loc_id) {
+                        done = true;
+                        break;
                     }
-                    heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
-                    count -= 1;
-                } else if ctx.get().visited($loc_id) {
-                    return Ok(());
+                    // if we skipped the location, don't bother with expanding that line further
                 }
-                // if we skipped the location, don't bother with expanding that line further
+                if !done {
+                    panic!("Dead-ended without visiting {}", $loc_id);
+                }
             }
-            panic!("Dead-ended without visiting {}", $loc_id);
         }};
     }
 
@@ -430,10 +445,12 @@ pub mod testlib {
             let mut heap = $crate::heap::LimitedHeap::new();
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = 1000;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if let Some($crate::context::History::A(a)) = ctx.recent_history().last() {
                     if *a == $act_id {
-                        return Ok(());
+                        done = true;
+                        break;
                     }
                 }
                 if count == 0 {
@@ -442,7 +459,9 @@ pub mod testlib {
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
-            panic!("Dead-ended without activating {}", $act_id);
+            if !done {
+                panic!("Dead-ended without activating {}", $act_id);
+            }
         }};
     }
 
@@ -455,6 +474,7 @@ pub mod testlib {
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = $limit;
             let mut success = false;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if ($test_req)(ctx.get()) {
                     let result = ($verify_req)(ctx.get());
@@ -474,13 +494,15 @@ pub mod testlib {
                             "Did not {} in the iteration limit of {}",
                             $desc, $limit
                         );
-                        return Ok(());
+                        done = true;
                     }
                     heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                     count -= 1;
                 }
             }
-            assert!(success, "Dead-ended: did not {}", $desc);
+            if !done {
+                assert!(success, "Dead-ended: did not {}", $desc);
+            }
         }};
     }
 
@@ -493,6 +515,7 @@ pub mod testlib {
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = $limit;
             let mut success = false;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().has($item) {
                     let result = ($verify_req)(ctx.get());
@@ -511,12 +534,15 @@ pub mod testlib {
                         "Did not find {} in the iteration limit of {}",
                         $item, $limit
                     );
-                    return Ok(());
+                    done = true;
+                    break;
                 }
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
-            assert!(success, "Dead-ended: did not find {}", $item);
+            if !done {
+                assert!(success, "Dead-ended: did not find {}", $item);
+            }
         }};
     }
 
@@ -529,6 +555,7 @@ pub mod testlib {
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = $limit;
             let mut success = false;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().position() == $spot {
                     let result = ($verify_req)(ctx.get());
@@ -547,12 +574,15 @@ pub mod testlib {
                         "Did not reach {} in the iteration limit of {}",
                         $spot, $limit
                     );
-                    return Ok(());
+                    done = true;
+                    break;
                 }
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
-            assert!(success, "Dead-ended: did not reach {}", $spot);
+            if !done {
+                assert!(success, "Dead-ended: did not reach {}", $spot);
+            }
         }};
     }
     #[macro_export]
@@ -564,6 +594,7 @@ pub mod testlib {
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = $limit;
             let mut success = false;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if ctx.get().visited($loc_id) {
                     let result = ($verify_req)(ctx.get());
@@ -583,13 +614,16 @@ pub mod testlib {
                             "Did not visit {} in the iteration limit of {}",
                             $loc_id, $limit
                         );
-                        return Ok(());
+                        done = true;
+                        break;
                     }
                     heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                     count -= 1;
                 }
             }
-            assert!(success, "Dead-ended: did not visit {}", $loc_id);
+            if !done {
+                assert!(success, "Dead-ended: did not visit {}", $loc_id);
+            }
         }};
     }
     #[macro_export]
@@ -601,6 +635,7 @@ pub mod testlib {
             heap.push($crate::context::ContextWrapper::new($ctx));
             let mut count = $limit;
             let mut success = false;
+            let mut done = false;
             while let Some(ctx) = heap.pop() {
                 if let Some($crate::context::History::A(a)) = ctx.recent_history().last() {
                     if *a == $act_id {
@@ -623,12 +658,15 @@ pub mod testlib {
                         "Did not activate {} in the iteration limit of {}",
                         $act_id, $limit
                     );
-                    return Ok(());
+                    done = true;
+                    break;
                 }
                 heap.extend($crate::algo::classic_step($world, ctx, u32::MAX));
                 count -= 1;
             }
-            assert!(success, "Dead-ended: did not activate {}", $act_id);
+            if !done {
+                assert!(success, "Dead-ended: did not activate {}", $act_id);
+            }
         }};
     }
 }

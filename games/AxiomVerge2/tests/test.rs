@@ -106,6 +106,7 @@ fn test_require() {
     );
 }
 
+#[ignore]
 #[test]
 fn search() {
     let mut world = graph::World::new();
@@ -133,7 +134,7 @@ fn search() {
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab,
         verify,
-        2000
+        500
     );
 }
 

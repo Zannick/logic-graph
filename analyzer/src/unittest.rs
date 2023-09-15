@@ -827,7 +827,7 @@ where
     Ok(())
 }
 
-pub fn run_test_file<W, T>(world: Arc<W>, filename: &PathBuf)
+pub fn parse_test_file<W, T>(world: Arc<W>, filename: &PathBuf) -> Vec<Trial>
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -880,18 +880,25 @@ where
         filename,
         errs.join("\n")
     );
-    let tests: Vec<_> = tests
+    tests
         .into_iter()
         .map(|t| {
             let wp = world.clone();
             Trial::test(format!("{}:{}", prefix, t.name), move || {
-                println!("Running {}", t.name);
                 Ok(run_test(&*wp, t.initial, t.mode, t.expects)?)
             })
         })
-        .collect();
+        .collect()
+}
+
+pub fn run_test_file<W, T>(world: Arc<W>, filename: &PathBuf)
+where
+    T: Ctx<World = W> + 'static,
+    W: World + Send + 'static,
+    W::Location: Location<Context = T>,
+{
+    let tests = parse_test_file(world, filename);
     let args = Arguments::from_args();
-    println!("For {:?}", prefix);
     run(&args, tests); //.exit_if_failed();
 }
 
@@ -905,12 +912,16 @@ where
     world.condense_graph();
 
     let wp = Arc::new(world);
+    let mut tests = Vec::new();
 
     for entry in std::fs::read_dir(dirname).unwrap() {
         let path = entry.unwrap().path();
         let ext = path.extension().map(|s| s.to_str()).flatten();
         if matches!(ext, Some("yaml")) {
-            run_test_file::<W, T>(wp.clone(), &path);
+            tests.extend(parse_test_file::<W, T>(wp.clone(), &path));
         }
     }
+
+    let args = Arguments::from_args();
+    run(&args, tests); //.exit_if_failed();
 }
