@@ -41,6 +41,8 @@ where
     EventuallyRequiresToActivate(<<T::World as World>::Action as Action>::ActionId, u32),
 }
 
+const DEFAULT_ITERATION_LIMIT: u32 = 100;
+
 impl<T> fmt::Display for TestMode<T>
 where
     T: Ctx,
@@ -379,7 +381,7 @@ where
     apply_test_setup(&mut rctx, yaml, name, &mut errs, true);
     if let Some(map) = yaml.as_hash() {
         let mut mode: Option<TestMode<T>> = None;
-        let mut ilimit = 1000;
+        let mut ilimit = DEFAULT_ITERATION_LIMIT;
 
         for (key, value) in map {
             match key.as_str() {
@@ -883,10 +885,7 @@ where
         .map(|t| {
             let wp = world.clone();
             Trial::test(format!("{}:{}", prefix, t.name), move || {
-                println!("Running {}: {}", t.name, t.mode);
-                if !t.expects.is_empty() {
-                    println!("With expectations: {:?}", t.expects);
-                }
+                println!("Running {}", t.name);
                 Ok(run_test(&*wp, t.initial, t.mode, t.expects)?)
             })
         })

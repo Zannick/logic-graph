@@ -105,6 +105,38 @@ fn expand<W, T, E, Wp>(
     }
 }
 
+// This is mainly for move_to which is used from tests.
+fn expand_with_local<W, T, E, Wp>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
+    max_time: u32,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+) where
+    W: World<Exit = E, Warp = Wp>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+{
+    expand(world, ctx, spot_map, max_time, spot_heap);
+    let movement_state = ctx.get().get_movement_state();
+    for &dest in world.get_area_spots(ctx.get().position()) {
+        let ltt = ctx.get().local_travel_time(movement_state, dest);
+        if spot_map[dest].is_none() && ltt < u32::MAX {
+            let mut newctx = ctx.clone();
+            newctx.move_local(dest, ltt);
+            let elapsed = newctx.elapsed();
+            if elapsed <= max_time {
+                spot_heap.push(Reverse(HeapElement {
+                    score: elapsed,
+                    el: newctx,
+                }));
+            }
+        }
+    }
+}
+
 /// Explores outward from the current position.
 pub fn accessible_spots<W, T, E>(
     world: &W,
@@ -172,7 +204,7 @@ where
     let pos = ctx.get().position();
     spot_enum_map[pos] = Some(Box::new(ctx));
 
-    expand(
+    expand_with_local(
         world,
         spot_enum_map[pos].as_ref().unwrap(),
         &spot_enum_map,
@@ -188,7 +220,7 @@ where
         }
         if spot_enum_map[pos].is_none() {
             spot_enum_map[pos] = Some(Box::new(spot_found));
-            expand(
+            expand_with_local(
                 world,
                 spot_enum_map[pos].as_ref().unwrap(),
                 &spot_enum_map,

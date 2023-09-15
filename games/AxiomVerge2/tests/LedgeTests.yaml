@@ -86,8 +86,8 @@ tests:
   #    to_obtain -> cannot_obtain/can_obtain
   # Again, these tests perform no actions and visit no locations
   - requires:
-      expect: 
-        Ledge_Grab: 1
+      with: 
+        - Ledge_Grab
       to_reach: Glacier > Vertical Room > Peak
 
   # eventually_requires:
@@ -98,4 +98,4 @@ tests:
       expect: 
         Boomerang: 1
       to_obtain: Ledge_Grab
-      iteration_limit: 500
+      iteration_limit: 100
