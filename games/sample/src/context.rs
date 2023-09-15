@@ -13,6 +13,8 @@ use analyzer::world::World;
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
+use std::str::FromStr;
+use yaml_rust::Yaml;
 
 pub mod enums {
     use std::fmt;
@@ -49,12 +51,53 @@ pub mod enums {
 
         fn from_str(s: &str) -> Result<Self, Self::Err> {
             match s {
-                "Day" => Ok(Tod::Day),
-                "Night" => Ok(Tod::Night),
+                "Day" | "day" => Ok(Tod::Day),
+                "Night" | "night" => Ok(Tod::Night),
                 _ => Err(format!("Could not recognize as a Tod: {}", s)),
             }
         }
     }
+}
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+pub enum Expectation {
+    Position(SpotId),
+    Save(SpotId),
+    Child(bool),
+    Tod(enums::Tod),
+    Rupees(i32),
+    DekuTreeCompassRoomCtxTorch(bool),
+    // items
+    BiggoronSword(bool),
+    Bombs(bool),
+    Boomerang(bool),
+    Bow(bool),
+    BuyDekuNut10(bool),
+    BuyDekuNut5(bool),
+    BuyDekuShield(bool),
+    BuyDekuStick1(bool),
+    DefeatGanon(bool),
+    DefeatGohma(bool),
+    DekuBackRoomWall(bool),
+    DekuBackRoomWeb(bool),
+    DekuBasementBlock(bool),
+    DekuBasementScrubs(bool),
+    DekuBasementSwitch(bool),
+    DekuBasementWeb(bool),
+    DekuLobbyWeb(bool),
+    DekuNutDrop(bool),
+    DekuShieldDrop(bool),
+    DekuSlingshotScrub(bool),
+    DekuStickDrop(bool),
+    GoldSkulltulaToken(i8),
+    HylianShield(bool),
+    KokiriEmerald(bool),
+    KokiriSword(bool),
+    MagicMeter(bool),
+    Ocarina(bool),
+    ShowedMido(bool),
+    Slingshot(bool),
+    TriforcePiece(i16),
 }
 
 pub mod data {
@@ -168,6 +211,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
+    type Expectation = Expectation;
     const NUM_ITEMS: u32 = 30;
 
     fn has(&self, item: Item) -> bool {
@@ -423,8 +467,765 @@ impl context::Ctx for Context {
         }
     }
 
+    // test helper for items
+    fn add_item(&mut self, item: Item) {
+        match item {
+            Item::Biggoron_Sword => {
+                self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
+            }
+            Item::Bombs => {
+                self.cbits1.insert(flags::ContextBits1::BOMBS);
+            }
+            Item::Boomerang => {
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+            }
+            Item::Bow => {
+                self.cbits1.insert(flags::ContextBits1::BOW);
+            }
+            Item::Buy_Deku_Nut_10 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
+            }
+            Item::Buy_Deku_Nut_5 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
+            }
+            Item::Buy_Deku_Shield => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
+            }
+            Item::Buy_Deku_Stick_1 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
+            }
+            Item::Defeat_Ganon => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
+            }
+            Item::Defeat_Gohma => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
+            }
+            Item::Deku_Back_Room_Wall => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+            }
+            Item::Deku_Back_Room_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+            }
+            Item::Deku_Basement_Block => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+            }
+            Item::Deku_Basement_Scrubs => {
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+            }
+            Item::Deku_Basement_Switch => {
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+            }
+            Item::Deku_Basement_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
+            }
+            Item::Deku_Lobby_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
+            }
+            Item::Deku_Nut_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
+            }
+            Item::Deku_Shield_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
+            }
+            Item::Deku_Slingshot_Scrub => {
+                self.cbits1
+                    .insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+            }
+            Item::Deku_Stick_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
+            }
+            Item::Gold_Skulltula_Token => {
+                self.gold_skulltula_token += 1;
+            }
+            Item::Hylian_Shield => {
+                self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
+            }
+            Item::Kokiri_Emerald => {
+                self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
+            }
+            Item::Kokiri_Sword => {
+                self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
+            }
+            Item::Magic_Meter => {
+                self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
+            }
+            Item::Ocarina => {
+                self.cbits1.insert(flags::ContextBits1::OCARINA);
+            }
+            Item::Showed_Mido => {
+                self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
+            }
+            Item::Slingshot => {
+                self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
+            }
+            Item::Triforce_Piece => {
+                self.triforce_piece += 1;
+            }
+            _ => (),
+        }
+    }
+
+    // test helper for context vars
+    fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
+        match (ckey, cval) {
+            ("position", Yaml::String(s)) => {
+                self.set_position(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("position", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("save", Yaml::String(s)) => {
+                self.set_save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("save", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("child", Yaml::Boolean(b)) => self.set_child(*b),
+            ("child", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("tod", Yaml::String(s)) => {
+                self.set_tod(enums::Tod::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("tod", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("rupees", Yaml::Integer(i)) => {
+                self.set_rupees(i32::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("rupees", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("deku_tree__compass_room__ctx__torch", Yaml::Boolean(b)) => {
+                self.set_deku_tree__compass_room__ctx__torch(*b)
+            }
+            ("deku_tree__compass_room__ctx__torch", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("triforce_count", Yaml::Integer(i)) => {
+                self.set_triforce_count(::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("triforce_count", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("logic_deku_b1_skip", Yaml::Boolean(b)) => self.set_logic_deku_b1_skip(*b),
+            ("logic_deku_b1_skip", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            _ => {
+                return Err(format!("Unrecognized context key: {:?}", ckey));
+            }
+        }
+        Ok(())
+    }
+
+    fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Expectation, String> {
+        Ok(match (ckey, cval) {
+            ("position", Yaml::String(s)) => {
+                Expectation::Position(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("position", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("save", Yaml::String(s)) => {
+                Expectation::Save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("save", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("child", Yaml::Boolean(b)) => Expectation::Child(*b),
+            ("child", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("tod", Yaml::String(s)) => {
+                Expectation::Tod(enums::Tod::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("tod", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("rupees", Yaml::Integer(i)) => {
+                Expectation::Rupees(i32::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("rupees", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("deku_tree__compass_room__ctx__torch", Yaml::Boolean(b)) => {
+                Expectation::DekuTreeCompassRoomCtxTorch(*b)
+            }
+            ("deku_tree__compass_room__ctx__torch", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Biggoron_Sword", Yaml::Boolean(b)) => Expectation::BiggoronSword(*b),
+            ("Biggoron_Sword", Yaml::Integer(i)) => Expectation::BiggoronSword(*i > 0),
+            ("Biggoron_Sword", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Bombs", Yaml::Boolean(b)) => Expectation::Bombs(*b),
+            ("Bombs", Yaml::Integer(i)) => Expectation::Bombs(*i > 0),
+            ("Bombs", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Boomerang", Yaml::Boolean(b)) => Expectation::Boomerang(*b),
+            ("Boomerang", Yaml::Integer(i)) => Expectation::Boomerang(*i > 0),
+            ("Boomerang", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Bow", Yaml::Boolean(b)) => Expectation::Bow(*b),
+            ("Bow", Yaml::Integer(i)) => Expectation::Bow(*i > 0),
+            ("Bow", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Buy_Deku_Nut_10", Yaml::Boolean(b)) => Expectation::BuyDekuNut10(*b),
+            ("Buy_Deku_Nut_10", Yaml::Integer(i)) => Expectation::BuyDekuNut10(*i > 0),
+            ("Buy_Deku_Nut_10", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Buy_Deku_Nut_5", Yaml::Boolean(b)) => Expectation::BuyDekuNut5(*b),
+            ("Buy_Deku_Nut_5", Yaml::Integer(i)) => Expectation::BuyDekuNut5(*i > 0),
+            ("Buy_Deku_Nut_5", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Buy_Deku_Shield", Yaml::Boolean(b)) => Expectation::BuyDekuShield(*b),
+            ("Buy_Deku_Shield", Yaml::Integer(i)) => Expectation::BuyDekuShield(*i > 0),
+            ("Buy_Deku_Shield", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Buy_Deku_Stick_1", Yaml::Boolean(b)) => Expectation::BuyDekuStick1(*b),
+            ("Buy_Deku_Stick_1", Yaml::Integer(i)) => Expectation::BuyDekuStick1(*i > 0),
+            ("Buy_Deku_Stick_1", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Defeat_Ganon", Yaml::Boolean(b)) => Expectation::DefeatGanon(*b),
+            ("Defeat_Ganon", Yaml::Integer(i)) => Expectation::DefeatGanon(*i > 0),
+            ("Defeat_Ganon", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Defeat_Gohma", Yaml::Boolean(b)) => Expectation::DefeatGohma(*b),
+            ("Defeat_Gohma", Yaml::Integer(i)) => Expectation::DefeatGohma(*i > 0),
+            ("Defeat_Gohma", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Back_Room_Wall", Yaml::Boolean(b)) => Expectation::DekuBackRoomWall(*b),
+            ("Deku_Back_Room_Wall", Yaml::Integer(i)) => Expectation::DekuBackRoomWall(*i > 0),
+            ("Deku_Back_Room_Wall", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Back_Room_Web", Yaml::Boolean(b)) => Expectation::DekuBackRoomWeb(*b),
+            ("Deku_Back_Room_Web", Yaml::Integer(i)) => Expectation::DekuBackRoomWeb(*i > 0),
+            ("Deku_Back_Room_Web", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Basement_Block", Yaml::Boolean(b)) => Expectation::DekuBasementBlock(*b),
+            ("Deku_Basement_Block", Yaml::Integer(i)) => Expectation::DekuBasementBlock(*i > 0),
+            ("Deku_Basement_Block", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Basement_Scrubs", Yaml::Boolean(b)) => Expectation::DekuBasementScrubs(*b),
+            ("Deku_Basement_Scrubs", Yaml::Integer(i)) => Expectation::DekuBasementScrubs(*i > 0),
+            ("Deku_Basement_Scrubs", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Basement_Switch", Yaml::Boolean(b)) => Expectation::DekuBasementSwitch(*b),
+            ("Deku_Basement_Switch", Yaml::Integer(i)) => Expectation::DekuBasementSwitch(*i > 0),
+            ("Deku_Basement_Switch", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Basement_Web", Yaml::Boolean(b)) => Expectation::DekuBasementWeb(*b),
+            ("Deku_Basement_Web", Yaml::Integer(i)) => Expectation::DekuBasementWeb(*i > 0),
+            ("Deku_Basement_Web", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Lobby_Web", Yaml::Boolean(b)) => Expectation::DekuLobbyWeb(*b),
+            ("Deku_Lobby_Web", Yaml::Integer(i)) => Expectation::DekuLobbyWeb(*i > 0),
+            ("Deku_Lobby_Web", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Nut_Drop", Yaml::Boolean(b)) => Expectation::DekuNutDrop(*b),
+            ("Deku_Nut_Drop", Yaml::Integer(i)) => Expectation::DekuNutDrop(*i > 0),
+            ("Deku_Nut_Drop", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Shield_Drop", Yaml::Boolean(b)) => Expectation::DekuShieldDrop(*b),
+            ("Deku_Shield_Drop", Yaml::Integer(i)) => Expectation::DekuShieldDrop(*i > 0),
+            ("Deku_Shield_Drop", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Slingshot_Scrub", Yaml::Boolean(b)) => Expectation::DekuSlingshotScrub(*b),
+            ("Deku_Slingshot_Scrub", Yaml::Integer(i)) => Expectation::DekuSlingshotScrub(*i > 0),
+            ("Deku_Slingshot_Scrub", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Deku_Stick_Drop", Yaml::Boolean(b)) => Expectation::DekuStickDrop(*b),
+            ("Deku_Stick_Drop", Yaml::Integer(i)) => Expectation::DekuStickDrop(*i > 0),
+            ("Deku_Stick_Drop", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Gold_Skulltula_Token", Yaml::Integer(i)) => {
+                Expectation::GoldSkulltulaToken(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Gold_Skulltula_Token", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Hylian_Shield", Yaml::Boolean(b)) => Expectation::HylianShield(*b),
+            ("Hylian_Shield", Yaml::Integer(i)) => Expectation::HylianShield(*i > 0),
+            ("Hylian_Shield", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Kokiri_Emerald", Yaml::Boolean(b)) => Expectation::KokiriEmerald(*b),
+            ("Kokiri_Emerald", Yaml::Integer(i)) => Expectation::KokiriEmerald(*i > 0),
+            ("Kokiri_Emerald", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Kokiri_Sword", Yaml::Boolean(b)) => Expectation::KokiriSword(*b),
+            ("Kokiri_Sword", Yaml::Integer(i)) => Expectation::KokiriSword(*i > 0),
+            ("Kokiri_Sword", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Magic_Meter", Yaml::Boolean(b)) => Expectation::MagicMeter(*b),
+            ("Magic_Meter", Yaml::Integer(i)) => Expectation::MagicMeter(*i > 0),
+            ("Magic_Meter", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ocarina", Yaml::Boolean(b)) => Expectation::Ocarina(*b),
+            ("Ocarina", Yaml::Integer(i)) => Expectation::Ocarina(*i > 0),
+            ("Ocarina", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Showed_Mido", Yaml::Boolean(b)) => Expectation::ShowedMido(*b),
+            ("Showed_Mido", Yaml::Integer(i)) => Expectation::ShowedMido(*i > 0),
+            ("Showed_Mido", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Slingshot", Yaml::Boolean(b)) => Expectation::Slingshot(*b),
+            ("Slingshot", Yaml::Integer(i)) => Expectation::Slingshot(*i > 0),
+            ("Slingshot", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Triforce_Piece", Yaml::Integer(i)) => {
+                Expectation::TriforcePiece(i16::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Triforce_Piece", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            _ => {
+                return Err(format!(
+                    "Unrecognized/disallowed expect context key: {:?}",
+                    ckey
+                ));
+            }
+        })
+    }
+
+    fn assert_expectations(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
+        let mut errs = Vec::new();
+        for exp in exps {
+            match exp {
+                Expectation::Position(e) => {
+                    let v = self.position();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "position", e, v));
+                    }
+                }
+                Expectation::Save(e) => {
+                    let v = self.save();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "save", e, v));
+                    }
+                }
+                Expectation::Child(e) => {
+                    let v = self.child();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "child", e, v));
+                    }
+                }
+                Expectation::Tod(e) => {
+                    let v = self.tod();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "tod", e, v));
+                    }
+                }
+                Expectation::Rupees(e) => {
+                    let v = self.rupees();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "rupees", e, v));
+                    }
+                }
+                Expectation::DekuTreeCompassRoomCtxTorch(e) => {
+                    let v = self.deku_tree__compass_room__ctx__torch();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "deku_tree__compass_room__ctx__torch", e, v
+                        ));
+                    }
+                }
+                Expectation::BiggoronSword(e) => {
+                    let v = self.has(Item::Biggoron_Sword);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Biggoron_Sword", e, v));
+                    }
+                }
+                Expectation::Bombs(e) => {
+                    let v = self.has(Item::Bombs);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Bombs", e, v));
+                    }
+                }
+                Expectation::Boomerang(e) => {
+                    let v = self.has(Item::Boomerang);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Boomerang", e, v));
+                    }
+                }
+                Expectation::Bow(e) => {
+                    let v = self.has(Item::Bow);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Bow", e, v));
+                    }
+                }
+                Expectation::BuyDekuNut10(e) => {
+                    let v = self.has(Item::Buy_Deku_Nut_10);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Buy_Deku_Nut_10", e, v
+                        ));
+                    }
+                }
+                Expectation::BuyDekuNut5(e) => {
+                    let v = self.has(Item::Buy_Deku_Nut_5);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Buy_Deku_Nut_5", e, v));
+                    }
+                }
+                Expectation::BuyDekuShield(e) => {
+                    let v = self.has(Item::Buy_Deku_Shield);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Buy_Deku_Shield", e, v
+                        ));
+                    }
+                }
+                Expectation::BuyDekuStick1(e) => {
+                    let v = self.has(Item::Buy_Deku_Stick_1);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Buy_Deku_Stick_1", e, v
+                        ));
+                    }
+                }
+                Expectation::DefeatGanon(e) => {
+                    let v = self.has(Item::Defeat_Ganon);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Defeat_Ganon", e, v));
+                    }
+                }
+                Expectation::DefeatGohma(e) => {
+                    let v = self.has(Item::Defeat_Gohma);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Defeat_Gohma", e, v));
+                    }
+                }
+                Expectation::DekuBackRoomWall(e) => {
+                    let v = self.has(Item::Deku_Back_Room_Wall);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Back_Room_Wall", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuBackRoomWeb(e) => {
+                    let v = self.has(Item::Deku_Back_Room_Web);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Back_Room_Web", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuBasementBlock(e) => {
+                    let v = self.has(Item::Deku_Basement_Block);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Basement_Block", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuBasementScrubs(e) => {
+                    let v = self.has(Item::Deku_Basement_Scrubs);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Basement_Scrubs", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuBasementSwitch(e) => {
+                    let v = self.has(Item::Deku_Basement_Switch);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Basement_Switch", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuBasementWeb(e) => {
+                    let v = self.has(Item::Deku_Basement_Web);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Basement_Web", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuLobbyWeb(e) => {
+                    let v = self.has(Item::Deku_Lobby_Web);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Deku_Lobby_Web", e, v));
+                    }
+                }
+                Expectation::DekuNutDrop(e) => {
+                    let v = self.has(Item::Deku_Nut_Drop);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Deku_Nut_Drop", e, v));
+                    }
+                }
+                Expectation::DekuShieldDrop(e) => {
+                    let v = self.has(Item::Deku_Shield_Drop);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Shield_Drop", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuSlingshotScrub(e) => {
+                    let v = self.has(Item::Deku_Slingshot_Scrub);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Slingshot_Scrub", e, v
+                        ));
+                    }
+                }
+                Expectation::DekuStickDrop(e) => {
+                    let v = self.has(Item::Deku_Stick_Drop);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Deku_Stick_Drop", e, v
+                        ));
+                    }
+                }
+                Expectation::GoldSkulltulaToken(e) => {
+                    let v = self.count(Item::Gold_Skulltula_Token);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Gold_Skulltula_Token", e, v
+                        ));
+                    }
+                }
+                Expectation::HylianShield(e) => {
+                    let v = self.has(Item::Hylian_Shield);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Hylian_Shield", e, v));
+                    }
+                }
+                Expectation::KokiriEmerald(e) => {
+                    let v = self.has(Item::Kokiri_Emerald);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Kokiri_Emerald", e, v));
+                    }
+                }
+                Expectation::KokiriSword(e) => {
+                    let v = self.has(Item::Kokiri_Sword);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Kokiri_Sword", e, v));
+                    }
+                }
+                Expectation::MagicMeter(e) => {
+                    let v = self.has(Item::Magic_Meter);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Magic_Meter", e, v));
+                    }
+                }
+                Expectation::Ocarina(e) => {
+                    let v = self.has(Item::Ocarina);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Ocarina", e, v));
+                    }
+                }
+                Expectation::ShowedMido(e) => {
+                    let v = self.has(Item::Showed_Mido);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Showed_Mido", e, v));
+                    }
+                }
+                Expectation::Slingshot(e) => {
+                    let v = self.has(Item::Slingshot);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Slingshot", e, v));
+                    }
+                }
+                Expectation::TriforcePiece(e) => {
+                    let v = self.count(Item::Triforce_Piece);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Triforce_Piece", e, v));
+                    }
+                }
+            }
+        }
+        if errs.is_empty() {
+            Ok(())
+        } else {
+            Err(errs.join("\n"))
+        }
+    }
+
     fn position(&self) -> SpotId {
         self.position
+    }
+    fn set_position_raw(&mut self, pos: SpotId) {
+        self.position = pos;
     }
     fn set_position(&mut self, pos: SpotId) {
         let area = get_area(pos);
@@ -544,22 +1345,22 @@ impl context::Ctx for Context {
 
         if old.position != self.position {
             list.push(format!(
-                "position: {:?} ➡ {:?}",
+                "position: {:?} → {:?}",
                 old.position, self.position
             ));
         }
         if old.save != self.save {
-            list.push(format!("save: {:?} ➡ {:?}", old.save, self.save));
+            list.push(format!("save: {:?} → {:?}", old.save, self.save));
         }
         if old.tod != self.tod {
-            list.push(format!("tod: {:?} ➡ {:?}", old.tod, self.tod));
+            list.push(format!("tod: {:?} → {:?}", old.tod, self.tod));
         }
         if old.rupees != self.rupees {
-            list.push(format!("rupees: {:?} ➡ {:?}", old.rupees, self.rupees));
+            list.push(format!("rupees: {:?} → {:?}", old.rupees, self.rupees));
         }
         if old.triforce_count != self.triforce_count {
             list.push(format!(
-                "triforce_count: {:?} ➡ {:?}",
+                "triforce_count: {:?} → {:?}",
                 old.triforce_count, self.triforce_count
             ));
         }
@@ -871,104 +1672,5 @@ impl Context {
             flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH,
             val,
         );
-    }
-    // test helper for items
-    pub fn add_item(&mut self, item: Item) {
-        match item {
-            Item::Biggoron_Sword => {
-                self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
-            }
-            Item::Bombs => {
-                self.cbits1.insert(flags::ContextBits1::BOMBS);
-            }
-            Item::Boomerang => {
-                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
-            }
-            Item::Bow => {
-                self.cbits1.insert(flags::ContextBits1::BOW);
-            }
-            Item::Buy_Deku_Nut_10 => {
-                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
-            }
-            Item::Buy_Deku_Nut_5 => {
-                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
-            }
-            Item::Buy_Deku_Shield => {
-                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
-            }
-            Item::Buy_Deku_Stick_1 => {
-                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
-            }
-            Item::Defeat_Ganon => {
-                self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
-            }
-            Item::Defeat_Gohma => {
-                self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
-            }
-            Item::Deku_Back_Room_Wall => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
-            }
-            Item::Deku_Back_Room_Web => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
-            }
-            Item::Deku_Basement_Block => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
-            }
-            Item::Deku_Basement_Scrubs => {
-                self.cbits1
-                    .insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
-            }
-            Item::Deku_Basement_Switch => {
-                self.cbits1
-                    .insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
-            }
-            Item::Deku_Basement_Web => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
-            }
-            Item::Deku_Lobby_Web => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
-            }
-            Item::Deku_Nut_Drop => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
-            }
-            Item::Deku_Shield_Drop => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
-            }
-            Item::Deku_Slingshot_Scrub => {
-                self.cbits1
-                    .insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
-            }
-            Item::Deku_Stick_Drop => {
-                self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
-            }
-            Item::Gold_Skulltula_Token => {
-                self.gold_skulltula_token += 1;
-            }
-            Item::Hylian_Shield => {
-                self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
-            }
-            Item::Kokiri_Emerald => {
-                self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
-            }
-            Item::Kokiri_Sword => {
-                self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
-            }
-            Item::Magic_Meter => {
-                self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
-            }
-            Item::Ocarina => {
-                self.cbits1.insert(flags::ContextBits1::OCARINA);
-            }
-            Item::Showed_Mido => {
-                self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
-            }
-            Item::Slingshot => {
-                self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
-            }
-            Item::Triforce_Piece => {
-                self.triforce_piece += 1;
-            }
-            _ => (),
-        }
     }
 }

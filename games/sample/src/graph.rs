@@ -487,132 +487,134 @@ impl fmt::Display for LocationId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
-                write!(f, "{}", "Deku Tree > Back Room > Northwest: Break Wall")
+                write!(f, "{}", "Deku Tree > Back Room > Northwest > Break Wall")
             }
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
-                write!(f, "{}", "Deku Tree > Back Room > Northwest: Burn Web")
+                write!(f, "{}", "Deku Tree > Back Room > Northwest > Burn Web")
             }
             LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
-                write!(f, "{}", "Deku Tree > Basement 1 > Center: Vines GS")
+                write!(f, "{}", "Deku Tree > Basement 1 > Center > Vines GS")
             }
             LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => write!(
                 f,
                 "{}",
-                "Deku Tree > Basement 1 > Corner: Burn Basement Web"
+                "Deku Tree > Basement 1 > Corner > Burn Basement Web"
             ),
             LocationId::Deku_Tree__Basement_1__Corner__Chest => {
-                write!(f, "{}", "Deku Tree > Basement 1 > Corner: Chest")
+                write!(f, "{}", "Deku Tree > Basement 1 > Corner > Chest")
             }
             LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
-                write!(f, "{}", "Deku Tree > Basement 1 > Corner: Gate GS")
+                write!(f, "{}", "Deku Tree > Basement 1 > Corner > Gate GS")
             }
             LocationId::Deku_Tree__Basement_1__Corner__Switch => {
-                write!(f, "{}", "Deku Tree > Basement 1 > Corner: Switch")
+                write!(f, "{}", "Deku Tree > Basement 1 > Corner > Switch")
             }
             LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
-                write!(f, "{}", "Deku Tree > Basement 2 > Boss Door: Scrubs")
+                write!(f, "{}", "Deku Tree > Basement 2 > Boss Door > Scrubs")
             }
             LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
-                write!(f, "{}", "Deku Tree > Basement Ledge > Block: Push Block")
+                write!(f, "{}", "Deku Tree > Basement Ledge > Block > Push Block")
             }
             LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
-                write!(f, "{}", "Deku Tree > Basement Ledge > Web: Burn Web")
+                write!(f, "{}", "Deku Tree > Basement Ledge > Web > Burn Web")
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
-                write!(f, "{}", "Deku Tree > Boss Room > Arena: Blue Warp")
+                write!(f, "{}", "Deku Tree > Boss Room > Arena > Blue Warp")
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
-                write!(f, "{}", "Deku Tree > Boss Room > Arena: Gohma")
+                write!(f, "{}", "Deku Tree > Boss Room > Arena > Gohma")
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
-                write!(f, "{}", "Deku Tree > Boss Room > Arena: Gohma Heart")
+                write!(f, "{}", "Deku Tree > Boss Room > Arena > Gohma Heart")
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
-                write!(f, "{}", "Deku Tree > Boss Room > Arena: Gohma Quick Kill")
+                write!(f, "{}", "Deku Tree > Boss Room > Arena > Gohma Quick Kill")
             }
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
-                write!(f, "{}", "Deku Tree > Compass Room > Compass: Chest")
+                write!(f, "{}", "Deku Tree > Compass Room > Compass > Chest")
             }
             LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                write!(f, "{}", "Deku Tree > Compass Room > Entry: Burn Web")
+                write!(f, "{}", "Deku Tree > Compass Room > Entry > Burn Web")
             }
             LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
-                write!(f, "{}", "Deku Tree > Compass Room > Ledge: Chest")
+                write!(f, "{}", "Deku Tree > Compass Room > Ledge > Chest")
             }
             LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
-                write!(f, "{}", "Deku Tree > Compass Room > Ledge: GS")
+                write!(f, "{}", "Deku Tree > Compass Room > Ledge > GS")
             }
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
-                write!(f, "{}", "Deku Tree > Floor 2 > Vines: Map Chest")
+                write!(f, "{}", "Deku Tree > Floor 2 > Vines > Map Chest")
             }
             LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
-                write!(f, "{}", "Deku Tree > Floor 3 > Door: Break Web")
+                write!(f, "{}", "Deku Tree > Floor 3 > Door > Break Web")
             }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
-                write!(f, "{}", "Deku Tree > Lobby > Center: Deku Baba Nuts")
+                write!(f, "{}", "Deku Tree > Lobby > Center > Deku Baba Nuts")
             }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
-                write!(f, "{}", "Deku Tree > Lobby > Center: Deku Baba Sticks")
+                write!(f, "{}", "Deku Tree > Lobby > Center > Deku Baba Sticks")
             }
             LocationId::Deku_Tree__Lobby__Center__Web => {
-                write!(f, "{}", "Deku Tree > Lobby > Center: Web")
+                write!(f, "{}", "Deku Tree > Lobby > Center > Web")
             }
             LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
-                write!(f, "{}", "Deku Tree > Scrub Room > Entry: Scrub")
+                write!(f, "{}", "Deku Tree > Scrub Room > Entry > Scrub")
             }
             LocationId::Deku_Tree__Skull_Room__Entry__GS => {
-                write!(f, "{}", "Deku Tree > Skull Room > Entry: GS")
+                write!(f, "{}", "Deku Tree > Skull Room > Entry > GS")
             }
             LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
-                write!(f, "{}", "Deku Tree > Slingshot Room > Slingshot: Chest")
+                write!(f, "{}", "Deku Tree > Slingshot Room > Slingshot > Chest")
             }
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
-                write!(f, "{}", "Deku Tree > Slingshot Upper > Ledge: Chest")
+                write!(f, "{}", "Deku Tree > Slingshot Upper > Ledge > Chest")
             }
             LocationId::Kak__Spider_House__Entry__Skulls_10 => {
-                write!(f, "{}", "Kak > Spider House > Entry: Skulls 10")
+                write!(f, "{}", "Kak > Spider House > Entry > Skulls 10")
             }
             LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
-                write!(f, "{}", "KF > Baba Corridor > Deku Babas: Nuts")
+                write!(f, "{}", "KF > Baba Corridor > Deku Babas > Nuts")
             }
             LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
-                write!(f, "{}", "KF > Baba Corridor > Deku Babas: Sticks")
+                write!(f, "{}", "KF > Baba Corridor > Deku Babas > Sticks")
             }
             LocationId::KF__Boulder_Maze__Reward__Chest => {
-                write!(f, "{}", "KF > Boulder Maze > Reward: Chest")
+                write!(f, "{}", "KF > Boulder Maze > Reward > Chest")
             }
-            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
-                write!(f, "{}", "KF > Kokiri Village > Mido's Guardpost: Show Mido")
-            }
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => write!(
+                f,
+                "{}",
+                "KF > Kokiri Village > Mido's Guardpost > Show Mido"
+            ),
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
-                write!(f, "{}", "KF > Mido's House > Entry: Bottom Left Chest")
+                write!(f, "{}", "KF > Mido's House > Entry > Bottom Left Chest")
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                write!(f, "{}", "KF > Mido's House > Entry: Bottom Right Chest")
+                write!(f, "{}", "KF > Mido's House > Entry > Bottom Right Chest")
             }
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
-                write!(f, "{}", "KF > Mido's House > Entry: Top Left Chest")
+                write!(f, "{}", "KF > Mido's House > Entry > Top Left Chest")
             }
             LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
-                write!(f, "{}", "KF > Mido's House > Entry: Top Right Chest")
+                write!(f, "{}", "KF > Mido's House > Entry > Top Right Chest")
             }
             LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
-                write!(f, "{}", "KF > Outside Deku Tree > Left: Gossip Stone")
+                write!(f, "{}", "KF > Outside Deku Tree > Left > Gossip Stone")
             }
             LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
-                write!(f, "{}", "KF > Outside Deku Tree > Right: Gossip Stone")
+                write!(f, "{}", "KF > Outside Deku Tree > Right > Gossip Stone")
             }
             LocationId::KF__Shop__Entry__Blue_Rupee => {
-                write!(f, "{}", "KF > Shop > Entry: Blue Rupee")
+                write!(f, "{}", "KF > Shop > Entry > Blue Rupee")
             }
-            LocationId::KF__Shop__Entry__Item_1 => write!(f, "{}", "KF > Shop > Entry: Item 1"),
-            LocationId::KF__Shop__Entry__Item_2 => write!(f, "{}", "KF > Shop > Entry: Item 2"),
-            LocationId::KF__Shop__Entry__Item_3 => write!(f, "{}", "KF > Shop > Entry: Item 3"),
-            LocationId::KF__Shop__Entry__Item_4 => write!(f, "{}", "KF > Shop > Entry: Item 4"),
-            LocationId::KF__Shop__Entry__Item_5 => write!(f, "{}", "KF > Shop > Entry: Item 5"),
-            LocationId::KF__Shop__Entry__Item_6 => write!(f, "{}", "KF > Shop > Entry: Item 6"),
-            LocationId::KF__Shop__Entry__Item_7 => write!(f, "{}", "KF > Shop > Entry: Item 7"),
-            LocationId::KF__Shop__Entry__Item_8 => write!(f, "{}", "KF > Shop > Entry: Item 8"),
+            LocationId::KF__Shop__Entry__Item_1 => write!(f, "{}", "KF > Shop > Entry > Item 1"),
+            LocationId::KF__Shop__Entry__Item_2 => write!(f, "{}", "KF > Shop > Entry > Item 2"),
+            LocationId::KF__Shop__Entry__Item_3 => write!(f, "{}", "KF > Shop > Entry > Item 3"),
+            LocationId::KF__Shop__Entry__Item_4 => write!(f, "{}", "KF > Shop > Entry > Item 4"),
+            LocationId::KF__Shop__Entry__Item_5 => write!(f, "{}", "KF > Shop > Entry > Item 5"),
+            LocationId::KF__Shop__Entry__Item_6 => write!(f, "{}", "KF > Shop > Entry > Item 6"),
+            LocationId::KF__Shop__Entry__Item_7 => write!(f, "{}", "KF > Shop > Entry > Item 7"),
+            LocationId::KF__Shop__Entry__Item_8 => write!(f, "{}", "KF > Shop > Entry > Item 8"),
         }
     }
 }
@@ -622,125 +624,125 @@ impl std::str::FromStr for LocationId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Deku Tree > Back Room > Northwest: Break Wall" => {
+            "Deku Tree > Back Room > Northwest > Break Wall" => {
                 Ok(LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall)
             }
-            "Deku Tree > Back Room > Northwest: Burn Web" => {
+            "Deku Tree > Back Room > Northwest > Burn Web" => {
                 Ok(LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web)
             }
-            "Deku Tree > Basement 1 > Center: Vines GS" => {
+            "Deku Tree > Basement 1 > Center > Vines GS" => {
                 Ok(LocationId::Deku_Tree__Basement_1__Center__Vines_GS)
             }
-            "Deku Tree > Basement 1 > Corner: Burn Basement Web" => {
+            "Deku Tree > Basement 1 > Corner > Burn Basement Web" => {
                 Ok(LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web)
             }
-            "Deku Tree > Basement 1 > Corner: Chest" => {
+            "Deku Tree > Basement 1 > Corner > Chest" => {
                 Ok(LocationId::Deku_Tree__Basement_1__Corner__Chest)
             }
-            "Deku Tree > Basement 1 > Corner: Gate GS" => {
+            "Deku Tree > Basement 1 > Corner > Gate GS" => {
                 Ok(LocationId::Deku_Tree__Basement_1__Corner__Gate_GS)
             }
-            "Deku Tree > Basement 1 > Corner: Switch" => {
+            "Deku Tree > Basement 1 > Corner > Switch" => {
                 Ok(LocationId::Deku_Tree__Basement_1__Corner__Switch)
             }
-            "Deku Tree > Basement 2 > Boss Door: Scrubs" => {
+            "Deku Tree > Basement 2 > Boss Door > Scrubs" => {
                 Ok(LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs)
             }
-            "Deku Tree > Basement Ledge > Block: Push Block" => {
+            "Deku Tree > Basement Ledge > Block > Push Block" => {
                 Ok(LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block)
             }
-            "Deku Tree > Basement Ledge > Web: Burn Web" => {
+            "Deku Tree > Basement Ledge > Web > Burn Web" => {
                 Ok(LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web)
             }
-            "Deku Tree > Boss Room > Arena: Blue Warp" => {
+            "Deku Tree > Boss Room > Arena > Blue Warp" => {
                 Ok(LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp)
             }
-            "Deku Tree > Boss Room > Arena: Gohma" => {
+            "Deku Tree > Boss Room > Arena > Gohma" => {
                 Ok(LocationId::Deku_Tree__Boss_Room__Arena__Gohma)
             }
-            "Deku Tree > Boss Room > Arena: Gohma Heart" => {
+            "Deku Tree > Boss Room > Arena > Gohma Heart" => {
                 Ok(LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart)
             }
-            "Deku Tree > Boss Room > Arena: Gohma Quick Kill" => {
+            "Deku Tree > Boss Room > Arena > Gohma Quick Kill" => {
                 Ok(LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill)
             }
-            "Deku Tree > Compass Room > Compass: Chest" => {
+            "Deku Tree > Compass Room > Compass > Chest" => {
                 Ok(LocationId::Deku_Tree__Compass_Room__Compass__Chest)
             }
-            "Deku Tree > Compass Room > Entry: Burn Web" => {
+            "Deku Tree > Compass Room > Entry > Burn Web" => {
                 Ok(LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web)
             }
-            "Deku Tree > Compass Room > Ledge: Chest" => {
+            "Deku Tree > Compass Room > Ledge > Chest" => {
                 Ok(LocationId::Deku_Tree__Compass_Room__Ledge__Chest)
             }
-            "Deku Tree > Compass Room > Ledge: GS" => {
+            "Deku Tree > Compass Room > Ledge > GS" => {
                 Ok(LocationId::Deku_Tree__Compass_Room__Ledge__GS)
             }
-            "Deku Tree > Floor 2 > Vines: Map Chest" => {
+            "Deku Tree > Floor 2 > Vines > Map Chest" => {
                 Ok(LocationId::Deku_Tree__Floor_2__Vines__Map_Chest)
             }
-            "Deku Tree > Floor 3 > Door: Break Web" => {
+            "Deku Tree > Floor 3 > Door > Break Web" => {
                 Ok(LocationId::Deku_Tree__Floor_3__Door__Break_Web)
             }
-            "Deku Tree > Lobby > Center: Deku Baba Nuts" => {
+            "Deku Tree > Lobby > Center > Deku Baba Nuts" => {
                 Ok(LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts)
             }
-            "Deku Tree > Lobby > Center: Deku Baba Sticks" => {
+            "Deku Tree > Lobby > Center > Deku Baba Sticks" => {
                 Ok(LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks)
             }
-            "Deku Tree > Lobby > Center: Web" => Ok(LocationId::Deku_Tree__Lobby__Center__Web),
-            "Deku Tree > Scrub Room > Entry: Scrub" => {
+            "Deku Tree > Lobby > Center > Web" => Ok(LocationId::Deku_Tree__Lobby__Center__Web),
+            "Deku Tree > Scrub Room > Entry > Scrub" => {
                 Ok(LocationId::Deku_Tree__Scrub_Room__Entry__Scrub)
             }
-            "Deku Tree > Skull Room > Entry: GS" => {
+            "Deku Tree > Skull Room > Entry > GS" => {
                 Ok(LocationId::Deku_Tree__Skull_Room__Entry__GS)
             }
-            "Deku Tree > Slingshot Room > Slingshot: Chest" => {
+            "Deku Tree > Slingshot Room > Slingshot > Chest" => {
                 Ok(LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest)
             }
-            "Deku Tree > Slingshot Upper > Ledge: Chest" => {
+            "Deku Tree > Slingshot Upper > Ledge > Chest" => {
                 Ok(LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest)
             }
-            "Kak > Spider House > Entry: Skulls 10" => {
+            "Kak > Spider House > Entry > Skulls 10" => {
                 Ok(LocationId::Kak__Spider_House__Entry__Skulls_10)
             }
-            "KF > Baba Corridor > Deku Babas: Nuts" => {
+            "KF > Baba Corridor > Deku Babas > Nuts" => {
                 Ok(LocationId::KF__Baba_Corridor__Deku_Babas__Nuts)
             }
-            "KF > Baba Corridor > Deku Babas: Sticks" => {
+            "KF > Baba Corridor > Deku Babas > Sticks" => {
                 Ok(LocationId::KF__Baba_Corridor__Deku_Babas__Sticks)
             }
-            "KF > Boulder Maze > Reward: Chest" => Ok(LocationId::KF__Boulder_Maze__Reward__Chest),
-            "KF > Kokiri Village > Mido's Guardpost: Show Mido" => {
+            "KF > Boulder Maze > Reward > Chest" => Ok(LocationId::KF__Boulder_Maze__Reward__Chest),
+            "KF > Kokiri Village > Mido's Guardpost > Show Mido" => {
                 Ok(LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido)
             }
-            "KF > Mido's House > Entry: Bottom Left Chest" => {
+            "KF > Mido's House > Entry > Bottom Left Chest" => {
                 Ok(LocationId::KF__Midos_House__Entry__Bottom_Left_Chest)
             }
-            "KF > Mido's House > Entry: Bottom Right Chest" => {
+            "KF > Mido's House > Entry > Bottom Right Chest" => {
                 Ok(LocationId::KF__Midos_House__Entry__Bottom_Right_Chest)
             }
-            "KF > Mido's House > Entry: Top Left Chest" => {
+            "KF > Mido's House > Entry > Top Left Chest" => {
                 Ok(LocationId::KF__Midos_House__Entry__Top_Left_Chest)
             }
-            "KF > Mido's House > Entry: Top Right Chest" => {
+            "KF > Mido's House > Entry > Top Right Chest" => {
                 Ok(LocationId::KF__Midos_House__Entry__Top_Right_Chest)
             }
-            "KF > Outside Deku Tree > Left: Gossip Stone" => {
+            "KF > Outside Deku Tree > Left > Gossip Stone" => {
                 Ok(LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone)
             }
-            "KF > Outside Deku Tree > Right: Gossip Stone" => {
+            "KF > Outside Deku Tree > Right > Gossip Stone" => {
                 Ok(LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone)
             }
-            "KF > Shop > Entry: Blue Rupee" => Ok(LocationId::KF__Shop__Entry__Blue_Rupee),
-            "KF > Shop > Entry: Item 1" => Ok(LocationId::KF__Shop__Entry__Item_1),
-            "KF > Shop > Entry: Item 2" => Ok(LocationId::KF__Shop__Entry__Item_2),
-            "KF > Shop > Entry: Item 3" => Ok(LocationId::KF__Shop__Entry__Item_3),
-            "KF > Shop > Entry: Item 4" => Ok(LocationId::KF__Shop__Entry__Item_4),
-            "KF > Shop > Entry: Item 5" => Ok(LocationId::KF__Shop__Entry__Item_5),
-            "KF > Shop > Entry: Item 6" => Ok(LocationId::KF__Shop__Entry__Item_6),
-            "KF > Shop > Entry: Item 7" => Ok(LocationId::KF__Shop__Entry__Item_7),
-            "KF > Shop > Entry: Item 8" => Ok(LocationId::KF__Shop__Entry__Item_8),
+            "KF > Shop > Entry > Blue Rupee" => Ok(LocationId::KF__Shop__Entry__Blue_Rupee),
+            "KF > Shop > Entry > Item 1" => Ok(LocationId::KF__Shop__Entry__Item_1),
+            "KF > Shop > Entry > Item 2" => Ok(LocationId::KF__Shop__Entry__Item_2),
+            "KF > Shop > Entry > Item 3" => Ok(LocationId::KF__Shop__Entry__Item_3),
+            "KF > Shop > Entry > Item 4" => Ok(LocationId::KF__Shop__Entry__Item_4),
+            "KF > Shop > Entry > Item 5" => Ok(LocationId::KF__Shop__Entry__Item_5),
+            "KF > Shop > Entry > Item 6" => Ok(LocationId::KF__Shop__Entry__Item_6),
+            "KF > Shop > Entry > Item 7" => Ok(LocationId::KF__Shop__Entry__Item_7),
+            "KF > Shop > Entry > Item 8" => Ok(LocationId::KF__Shop__Entry__Item_8),
             _ => Err(format!("Could not recognize as a LocationId: {}", s)),
         }
     }
@@ -835,7 +837,7 @@ impl fmt::Display for ExitId {
             ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => write!(
                 f,
                 "{}",
-                "Deku Tree > Basement 1 > Corner: Burn Basement Web"
+                "Deku Tree > Basement 1 > Corner > Burn Basement Web"
             ),
             ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1 => write!(
                 f,
@@ -868,10 +870,10 @@ impl fmt::Display for ExitId {
                 "Deku Tree > Basement Ledge > Web ==> Basement 2 > Pool (1)"
             ),
             ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
-                write!(f, "{}", "Deku Tree > Boss Room > Arena: Blue Warp")
+                write!(f, "{}", "Deku Tree > Boss Room > Arena > Blue Warp")
             }
             ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                write!(f, "{}", "Deku Tree > Compass Room > Entry: Burn Web")
+                write!(f, "{}", "Deku Tree > Compass Room > Entry > Burn Web")
             }
             ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1 => write!(
                 f,
@@ -923,7 +925,7 @@ impl fmt::Display for ExitId {
                 write!(f, "{}", "Deku Tree > Floor 2 > Vines ==> Lobby > Vines (1)")
             }
             ExitId::Deku_Tree__Floor_3__Door__Break_Web => {
-                write!(f, "{}", "Deku Tree > Floor 3 > Door: Break Web")
+                write!(f, "{}", "Deku Tree > Floor 3 > Door > Break Web")
             }
             ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1 => write!(
                 f,
@@ -1087,7 +1089,7 @@ impl std::str::FromStr for ExitId {
             "Deku Tree > Basement 1 > Center ==> Lobby > Center (1)" => {
                 Ok(ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1)
             }
-            "Deku Tree > Basement 1 > Corner: Burn Basement Web" => {
+            "Deku Tree > Basement 1 > Corner > Burn Basement Web" => {
                 Ok(ExitId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web)
             }
             "Deku Tree > Basement 1 > Corner ==> Basement Ledge > Block (1)" => {
@@ -1108,10 +1110,10 @@ impl std::str::FromStr for ExitId {
             "Deku Tree > Basement Ledge > Web ==> Basement 2 > Pool (1)" => {
                 Ok(ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1)
             }
-            "Deku Tree > Boss Room > Arena: Blue Warp" => {
+            "Deku Tree > Boss Room > Arena > Blue Warp" => {
                 Ok(ExitId::Deku_Tree__Boss_Room__Arena__Blue_Warp)
             }
-            "Deku Tree > Compass Room > Entry: Burn Web" => {
+            "Deku Tree > Compass Room > Entry > Burn Web" => {
                 Ok(ExitId::Deku_Tree__Compass_Room__Entry__Burn_Web)
             }
             "Deku Tree > Compass Room > Entry ==> Floor 3 > Door (1)" => {
@@ -1147,7 +1149,7 @@ impl std::str::FromStr for ExitId {
             "Deku Tree > Floor 2 > Vines ==> Lobby > Vines (1)" => {
                 Ok(ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1)
             }
-            "Deku Tree > Floor 3 > Door: Break Web" => {
+            "Deku Tree > Floor 3 > Door > Break Web" => {
                 Ok(ExitId::Deku_Tree__Floor_3__Door__Break_Web)
             }
             "Deku Tree > Floor 3 > Door ==> Compass Room > Entry (1)" => {
@@ -1263,14 +1265,16 @@ impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                write!(f, "{}", "Deku Tree > Compass Room > Entry: Light Torch")
+                write!(f, "{}", "Deku Tree > Compass Room > Entry > Light Torch")
             }
             ActionId::Global__Change_Time => write!(f, "{}", "Change Time"),
-            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                write!(f, "{}", "KF > Kokiri Village > Mido's Porch: Gather Rupees")
-            }
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => write!(
+                f,
+                "{}",
+                "KF > Kokiri Village > Mido's Porch > Gather Rupees"
+            ),
             ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
-                write!(f, "{}", "KF > Kokiri Village > Saria's Porch: Save")
+                write!(f, "{}", "KF > Kokiri Village > Saria's Porch > Save")
             }
         }
     }
@@ -1281,14 +1285,14 @@ impl std::str::FromStr for ActionId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Deku Tree > Compass Room > Entry: Light Torch" => {
+            "Deku Tree > Compass Room > Entry > Light Torch" => {
                 Ok(ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch)
             }
             "Change Time" => Ok(ActionId::Global__Change_Time),
-            "KF > Kokiri Village > Mido's Porch: Gather Rupees" => {
+            "KF > Kokiri Village > Mido's Porch > Gather Rupees" => {
                 Ok(ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees)
             }
-            "KF > Kokiri Village > Saria's Porch: Save" => {
+            "KF > Kokiri Village > Saria's Porch > Save" => {
                 Ok(ActionId::KF__Kokiri_Village__Sarias_Porch__Save)
             }
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
@@ -1866,6 +1870,9 @@ impl world::Action for Action {
         if dest != SpotId::None {
             ctx.set_position(dest);
         }
+        match self.id {
+            _ => (),
+        };
     }
     fn dest(&self, ctx: &Context) -> SpotId {
         match self.id {
@@ -2511,6 +2518,12 @@ impl world::World for World {
             .condensed
             .as_ref()
             .expect("Graph must be condensed first!")[spot_id]
+    }
+}
+
+impl Default for World {
+    fn default() -> World {
+        World::new()
     }
 }
 
