@@ -24,6 +24,7 @@ pub trait Ctx:
         + Hash
         + AsSlice<Element = bool>
         + AsMutSlice<Element = bool>;
+    type Expectation: Copy + Clone + Debug + Eq;
     const NUM_ITEMS: u32;
 
     fn is_subset(sub: Self::MovementState, sup: Self::MovementState) -> bool {
@@ -47,6 +48,8 @@ pub trait Ctx:
     fn add_item(&mut self, item: Self::ItemId);
     // test helper for context vars
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String>;
+    fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Self::Expectation, String>;
+    fn assert_expectations<I>(&self, exps: &Vec<Self::Expectation>) -> Result<(), String>;
 
     //fn build_verify_func(ckey: &str, cval: &Yaml) -> Result<impl Fn(&Self) -> bool, String>;
 

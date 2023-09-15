@@ -24,6 +24,17 @@ use std::fmt;
 %% endfor
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+pub enum Expectation {
+%% for ctx, t in context_types.items()
+    pub {{ ctx|camelize|camelize }}({{ t }}),
+%% endfor
+    // items
+%% for item, ct in gl.item_max_counts.items()|sort
+    {{ item|camelize }}({{ ct|get_int_type_for_max }}),
+%% endfor
+}
+
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
@@ -130,6 +141,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
+    type Expectation = Expectation;
     const NUM_ITEMS: u32 = {{ gl.item_max_counts|count }};
 
 %# we might not need has/count, if we reference the parameter directly in rules
@@ -223,6 +235,60 @@ impl context::Ctx for Context {
             _ => { return Err(format!("Unrecognized context key: {:?}", ckey)); }
         }
         Ok(())
+    }
+
+    fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Expectation, String> {
+        Ok(match (ckey, cval) {
+%% for ctx, t in context_types.items()
+%% if t in int_types
+            ("{{ ctx }}", Yaml::Integer(i)) => Expectation::{{ ctx|camelize|camelize }}({{ t }}::try_from(*i).map_err(|e| format!("{}", e))?),
+%% elif t == "bool"
+            ("{{ ctx }}", Yaml::Boolean(b)) => Expectation::{{ ctx|camelize|camelize }}(*b),
+%% else
+            ("{{ ctx }}", Yaml::String(s)) => Expectation::{{ ctx|camelize|camelize }}({{ t }}::from_str(s).map_err(|e| format!("{}", e))?),
+%% endif
+            ("{{ ctx }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort
+%% if ct == 1
+            ("{{ item }}", Yaml::Boolean(b)) => Expectation::{{ item|camelize }}(*b),
+            ("{{ item }}", Yaml::Integer(i)) => Expectation::{{ item|camelize }}(*i > 0),
+%% else
+            ("{{ item }}", Yaml::Integer(i)) => Expectation::{{ item|camelize }}({{ ct|get_int_type_for_max }}::try_from(*i).map_err(|e| format!("{}", e))?),
+%% endif
+            ("{{ item }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+%% endfor
+            _ => { return Err(format!("Unrecognized/disallowed expect context key: {:?}", ckey)); }
+        })
+    }
+
+    fn assert_expectations<I>(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
+        let mut errs = Vec::new();
+        for exp in exps {
+            match exp {
+%% for ctx in context_types
+                Expectation::{{ ctx|camelize|camelize }}(e) => {
+                    let v = self.{{ ctx }}();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "{{ ctx }}", e, v));
+                    }
+                }
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort
+            Expectation::{{ item|camelize }}(e) => {
+                let v = self.{% if ct == 1 %}has{% else %}count{% endif %}(Item::{{ item }});
+                if v != (*e).into() {
+                    errs.push(format!("Expected {} = {}, got: {}", "{{ item }}", e, v));
+                }
+            }
+%% endfor
+            }
+        }
+        if errs.is_empty() {
+            Ok(())
+        } else {
+            Err(errs.join("\n"))
+        }
     }
 
     fn position(&self) -> SpotId {

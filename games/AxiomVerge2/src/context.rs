@@ -58,6 +58,84 @@ pub mod enums {
     }
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+pub enum Expectation {
+    Position(SpotId),
+    Energy(i16),
+    Flasks(i8),
+    Refills(i8),
+    Mode(enums::Mode),
+    Save(SpotId),
+    Indra(SpotId),
+    Last(SpotId),
+    PrevArea(AreaId),
+    AmagiMainAreaCtxCombo(bool),
+    EbihBaseCampCtxLeftPlatformMoved(bool),
+    EbihGrid251012CtxDoorOpen(bool),
+    EbihWaterfallCtxWestDoorOpen(bool),
+    EbihEbihEastCtxPlatform1Moved(bool),
+    EbihEbihEastCtxPlatform2Moved(bool),
+    EbihDroneRoomCtxPlatformMoved(bool),
+    GigunaGigunaNortheastCtxDoorOpened(bool),
+    GigunaCarnelianCtxDoorOpened(bool),
+    GigunaCarnelianCtxUpperSusar(bool),
+    GigunaCarnelianCtxLowerSusar(bool),
+    GigunaWestCavernsCtxEastSusar(bool),
+    GigunaRuinsWestCtxKishibHandled(bool),
+    GigunaRuinsUpperCtxDoorsOpen(bool),
+    // items
+    AmagiDragonEyePassage(bool),
+    AmagiStrongholdBoulder1(bool),
+    AmagiStrongholdBoulder2(bool),
+    AmagiStrongholdWall1(bool),
+    AmagiStrongholdWall2(bool),
+    AmagiWestLakeSurfaceWall(bool),
+    Amashilama(bool),
+    Anuman(bool),
+    ApocalypseBomb(bool),
+    Boomerang(bool),
+    CompaniesLayoff(bool),
+    DearErnest(bool),
+    DefeatEbihAlu(bool),
+    DefeatMUSAM20(bool),
+    DroneHover(bool),
+    DroneMeleeDamage(i8),
+    DroneMeleeSpeed(i8),
+    EbihWaterfallBlockLeft(bool),
+    EbihWaterfallBlockRight(bool),
+    FastTravel(bool),
+    Flask(i8),
+    GigunaNortheastGate(bool),
+    HealthUpgrade(i8),
+    HereticsTablet(bool),
+    IceAxe(bool),
+    Infect(i8),
+    InfectionRange(i8),
+    InfectionSpeed(bool),
+    LedgeGrab(bool),
+    LetterFromTrace(bool),
+    Map1710(bool),
+    MeleeDamage(i8),
+    MeleeSpeed(i8),
+    NaniteMist(bool),
+    NanoPoints(i8),
+    PowerMatrix(bool),
+    RangedDamage(i8),
+    RangedSpeed(i8),
+    RecordLosses(bool),
+    RemoteDrone(bool),
+    ResearchersMissing(bool),
+    Shockwave(bool),
+    SlingshotHook(bool),
+    StationPower(bool),
+    Switch3611(bool),
+    Switch4012(bool),
+    TerminalBreakthrough1(bool),
+    UnderSiege(bool),
+    UnderwaterMovement(bool),
+    WallClimb(bool),
+}
+
 pub mod data {
     #[allow(unused_imports)]
     use crate::context::enums;
@@ -332,6 +410,7 @@ impl context::Ctx for Context {
     type AreaId = AreaId;
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
+    type Expectation = Expectation;
     const NUM_ITEMS: u32 = 50;
 
     fn has(&self, item: Item) -> bool {
@@ -1129,6 +1208,1224 @@ impl context::Ctx for Context {
             }
         }
         Ok(())
+    }
+
+    fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Expectation, String> {
+        Ok(match (ckey, cval) {
+            ("position", Yaml::String(s)) => {
+                Expectation::Position(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("position", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("energy", Yaml::Integer(i)) => {
+                Expectation::Energy(i16::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("energy", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("flasks", Yaml::Integer(i)) => {
+                Expectation::Flasks(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("flasks", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("refills", Yaml::Integer(i)) => {
+                Expectation::Refills(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("refills", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("mode", Yaml::String(s)) => {
+                Expectation::Mode(enums::Mode::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("mode", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("save", Yaml::String(s)) => {
+                Expectation::Save(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("save", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("indra", Yaml::String(s)) => {
+                Expectation::Indra(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("indra", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("last", Yaml::String(s)) => {
+                Expectation::Last(SpotId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("last", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("prev_area", Yaml::String(s)) => {
+                Expectation::PrevArea(AreaId::from_str(s).map_err(|e| format!("{}", e))?)
+            }
+            ("prev_area", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => {
+                Expectation::AmagiMainAreaCtxCombo(*b)
+            }
+            ("amagi__main_area__ctx__combo", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__base_camp__ctx__left_platform_moved", Yaml::Boolean(b)) => {
+                Expectation::EbihBaseCampCtxLeftPlatformMoved(*b)
+            }
+            ("ebih__base_camp__ctx__left_platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__grid_25_10_12__ctx__door_open", Yaml::Boolean(b)) => {
+                Expectation::EbihGrid251012CtxDoorOpen(*b)
+            }
+            ("ebih__grid_25_10_12__ctx__door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__waterfall__ctx__west_door_open", Yaml::Boolean(b)) => {
+                Expectation::EbihWaterfallCtxWestDoorOpen(*b)
+            }
+            ("ebih__waterfall__ctx__west_door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__ebih_east__ctx__platform1_moved", Yaml::Boolean(b)) => {
+                Expectation::EbihEbihEastCtxPlatform1Moved(*b)
+            }
+            ("ebih__ebih_east__ctx__platform1_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__ebih_east__ctx__platform2_moved", Yaml::Boolean(b)) => {
+                Expectation::EbihEbihEastCtxPlatform2Moved(*b)
+            }
+            ("ebih__ebih_east__ctx__platform2_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__drone_room__ctx__platform_moved", Yaml::Boolean(b)) => {
+                Expectation::EbihDroneRoomCtxPlatformMoved(*b)
+            }
+            ("ebih__drone_room__ctx__platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__giguna_northeast__ctx__door_opened", Yaml::Boolean(b)) => {
+                Expectation::GigunaGigunaNortheastCtxDoorOpened(*b)
+            }
+            ("giguna__giguna_northeast__ctx__door_opened", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__carnelian__ctx__door_opened", Yaml::Boolean(b)) => {
+                Expectation::GigunaCarnelianCtxDoorOpened(*b)
+            }
+            ("giguna__carnelian__ctx__door_opened", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__carnelian__ctx__upper_susar", Yaml::Boolean(b)) => {
+                Expectation::GigunaCarnelianCtxUpperSusar(*b)
+            }
+            ("giguna__carnelian__ctx__upper_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__carnelian__ctx__lower_susar", Yaml::Boolean(b)) => {
+                Expectation::GigunaCarnelianCtxLowerSusar(*b)
+            }
+            ("giguna__carnelian__ctx__lower_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__west_caverns__ctx__east_susar", Yaml::Boolean(b)) => {
+                Expectation::GigunaWestCavernsCtxEastSusar(*b)
+            }
+            ("giguna__west_caverns__ctx__east_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__ruins_west__ctx__kishib_handled", Yaml::Boolean(b)) => {
+                Expectation::GigunaRuinsWestCtxKishibHandled(*b)
+            }
+            ("giguna__ruins_west__ctx__kishib_handled", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__ruins_upper__ctx__doors_open", Yaml::Boolean(b)) => {
+                Expectation::GigunaRuinsUpperCtxDoorsOpen(*b)
+            }
+            ("giguna__ruins_upper__ctx__doors_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amagi_Dragon_Eye_Passage", Yaml::Boolean(b)) => {
+                Expectation::AmagiDragonEyePassage(*b)
+            }
+            ("Amagi_Dragon_Eye_Passage", Yaml::Integer(i)) => {
+                Expectation::AmagiDragonEyePassage(*i > 0)
+            }
+            ("Amagi_Dragon_Eye_Passage", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amagi_Stronghold_Boulder_1", Yaml::Boolean(b)) => {
+                Expectation::AmagiStrongholdBoulder1(*b)
+            }
+            ("Amagi_Stronghold_Boulder_1", Yaml::Integer(i)) => {
+                Expectation::AmagiStrongholdBoulder1(*i > 0)
+            }
+            ("Amagi_Stronghold_Boulder_1", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amagi_Stronghold_Boulder_2", Yaml::Boolean(b)) => {
+                Expectation::AmagiStrongholdBoulder2(*b)
+            }
+            ("Amagi_Stronghold_Boulder_2", Yaml::Integer(i)) => {
+                Expectation::AmagiStrongholdBoulder2(*i > 0)
+            }
+            ("Amagi_Stronghold_Boulder_2", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amagi_Stronghold_Wall_1", Yaml::Boolean(b)) => Expectation::AmagiStrongholdWall1(*b),
+            ("Amagi_Stronghold_Wall_1", Yaml::Integer(i)) => {
+                Expectation::AmagiStrongholdWall1(*i > 0)
+            }
+            ("Amagi_Stronghold_Wall_1", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amagi_Stronghold_Wall_2", Yaml::Boolean(b)) => Expectation::AmagiStrongholdWall2(*b),
+            ("Amagi_Stronghold_Wall_2", Yaml::Integer(i)) => {
+                Expectation::AmagiStrongholdWall2(*i > 0)
+            }
+            ("Amagi_Stronghold_Wall_2", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amagi_West_Lake_Surface_Wall", Yaml::Boolean(b)) => {
+                Expectation::AmagiWestLakeSurfaceWall(*b)
+            }
+            ("Amagi_West_Lake_Surface_Wall", Yaml::Integer(i)) => {
+                Expectation::AmagiWestLakeSurfaceWall(*i > 0)
+            }
+            ("Amagi_West_Lake_Surface_Wall", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Amashilama", Yaml::Boolean(b)) => Expectation::Amashilama(*b),
+            ("Amashilama", Yaml::Integer(i)) => Expectation::Amashilama(*i > 0),
+            ("Amashilama", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Anuman", Yaml::Boolean(b)) => Expectation::Anuman(*b),
+            ("Anuman", Yaml::Integer(i)) => Expectation::Anuman(*i > 0),
+            ("Anuman", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Apocalypse_Bomb", Yaml::Boolean(b)) => Expectation::ApocalypseBomb(*b),
+            ("Apocalypse_Bomb", Yaml::Integer(i)) => Expectation::ApocalypseBomb(*i > 0),
+            ("Apocalypse_Bomb", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Boomerang", Yaml::Boolean(b)) => Expectation::Boomerang(*b),
+            ("Boomerang", Yaml::Integer(i)) => Expectation::Boomerang(*i > 0),
+            ("Boomerang", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Companies_Layoff", Yaml::Boolean(b)) => Expectation::CompaniesLayoff(*b),
+            ("Companies_Layoff", Yaml::Integer(i)) => Expectation::CompaniesLayoff(*i > 0),
+            ("Companies_Layoff", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Dear_Ernest", Yaml::Boolean(b)) => Expectation::DearErnest(*b),
+            ("Dear_Ernest", Yaml::Integer(i)) => Expectation::DearErnest(*i > 0),
+            ("Dear_Ernest", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Defeat_Ebih_Alu", Yaml::Boolean(b)) => Expectation::DefeatEbihAlu(*b),
+            ("Defeat_Ebih_Alu", Yaml::Integer(i)) => Expectation::DefeatEbihAlu(*i > 0),
+            ("Defeat_Ebih_Alu", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Defeat_MUS_A_M20", Yaml::Boolean(b)) => Expectation::DefeatMUSAM20(*b),
+            ("Defeat_MUS_A_M20", Yaml::Integer(i)) => Expectation::DefeatMUSAM20(*i > 0),
+            ("Defeat_MUS_A_M20", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Drone_Hover", Yaml::Boolean(b)) => Expectation::DroneHover(*b),
+            ("Drone_Hover", Yaml::Integer(i)) => Expectation::DroneHover(*i > 0),
+            ("Drone_Hover", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Drone_Melee_Damage", Yaml::Integer(i)) => {
+                Expectation::DroneMeleeDamage(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Drone_Melee_Damage", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Drone_Melee_Speed", Yaml::Integer(i)) => {
+                Expectation::DroneMeleeSpeed(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Drone_Melee_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Waterfall_Block_Left", Yaml::Boolean(b)) => {
+                Expectation::EbihWaterfallBlockLeft(*b)
+            }
+            ("Ebih_Waterfall_Block_Left", Yaml::Integer(i)) => {
+                Expectation::EbihWaterfallBlockLeft(*i > 0)
+            }
+            ("Ebih_Waterfall_Block_Left", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Waterfall_Block_Right", Yaml::Boolean(b)) => {
+                Expectation::EbihWaterfallBlockRight(*b)
+            }
+            ("Ebih_Waterfall_Block_Right", Yaml::Integer(i)) => {
+                Expectation::EbihWaterfallBlockRight(*i > 0)
+            }
+            ("Ebih_Waterfall_Block_Right", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Fast_Travel", Yaml::Boolean(b)) => Expectation::FastTravel(*b),
+            ("Fast_Travel", Yaml::Integer(i)) => Expectation::FastTravel(*i > 0),
+            ("Fast_Travel", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Flask", Yaml::Integer(i)) => {
+                Expectation::Flask(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Flask", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Giguna_Northeast_Gate", Yaml::Boolean(b)) => Expectation::GigunaNortheastGate(*b),
+            ("Giguna_Northeast_Gate", Yaml::Integer(i)) => Expectation::GigunaNortheastGate(*i > 0),
+            ("Giguna_Northeast_Gate", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Health_Upgrade", Yaml::Integer(i)) => {
+                Expectation::HealthUpgrade(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Health_Upgrade", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Heretics_Tablet", Yaml::Boolean(b)) => Expectation::HereticsTablet(*b),
+            ("Heretics_Tablet", Yaml::Integer(i)) => Expectation::HereticsTablet(*i > 0),
+            ("Heretics_Tablet", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ice_Axe", Yaml::Boolean(b)) => Expectation::IceAxe(*b),
+            ("Ice_Axe", Yaml::Integer(i)) => Expectation::IceAxe(*i > 0),
+            ("Ice_Axe", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Infect", Yaml::Integer(i)) => {
+                Expectation::Infect(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Infect", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Infection_Range", Yaml::Integer(i)) => {
+                Expectation::InfectionRange(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Infection_Range", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Infection_Speed", Yaml::Boolean(b)) => Expectation::InfectionSpeed(*b),
+            ("Infection_Speed", Yaml::Integer(i)) => Expectation::InfectionSpeed(*i > 0),
+            ("Infection_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ledge_Grab", Yaml::Boolean(b)) => Expectation::LedgeGrab(*b),
+            ("Ledge_Grab", Yaml::Integer(i)) => Expectation::LedgeGrab(*i > 0),
+            ("Ledge_Grab", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Letter_from_Trace", Yaml::Boolean(b)) => Expectation::LetterFromTrace(*b),
+            ("Letter_from_Trace", Yaml::Integer(i)) => Expectation::LetterFromTrace(*i > 0),
+            ("Letter_from_Trace", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Map_17_10", Yaml::Boolean(b)) => Expectation::Map1710(*b),
+            ("Map_17_10", Yaml::Integer(i)) => Expectation::Map1710(*i > 0),
+            ("Map_17_10", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Melee_Damage", Yaml::Integer(i)) => {
+                Expectation::MeleeDamage(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Melee_Damage", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Melee_Speed", Yaml::Integer(i)) => {
+                Expectation::MeleeSpeed(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Melee_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Nanite_Mist", Yaml::Boolean(b)) => Expectation::NaniteMist(*b),
+            ("Nanite_Mist", Yaml::Integer(i)) => Expectation::NaniteMist(*i > 0),
+            ("Nanite_Mist", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Nano_Points", Yaml::Integer(i)) => {
+                Expectation::NanoPoints(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Nano_Points", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Power_Matrix", Yaml::Boolean(b)) => Expectation::PowerMatrix(*b),
+            ("Power_Matrix", Yaml::Integer(i)) => Expectation::PowerMatrix(*i > 0),
+            ("Power_Matrix", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ranged_Damage", Yaml::Integer(i)) => {
+                Expectation::RangedDamage(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Ranged_Damage", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ranged_Speed", Yaml::Integer(i)) => {
+                Expectation::RangedSpeed(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Ranged_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Record_Losses", Yaml::Boolean(b)) => Expectation::RecordLosses(*b),
+            ("Record_Losses", Yaml::Integer(i)) => Expectation::RecordLosses(*i > 0),
+            ("Record_Losses", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Remote_Drone", Yaml::Boolean(b)) => Expectation::RemoteDrone(*b),
+            ("Remote_Drone", Yaml::Integer(i)) => Expectation::RemoteDrone(*i > 0),
+            ("Remote_Drone", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Researchers_Missing", Yaml::Boolean(b)) => Expectation::ResearchersMissing(*b),
+            ("Researchers_Missing", Yaml::Integer(i)) => Expectation::ResearchersMissing(*i > 0),
+            ("Researchers_Missing", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Shockwave", Yaml::Boolean(b)) => Expectation::Shockwave(*b),
+            ("Shockwave", Yaml::Integer(i)) => Expectation::Shockwave(*i > 0),
+            ("Shockwave", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Slingshot_Hook", Yaml::Boolean(b)) => Expectation::SlingshotHook(*b),
+            ("Slingshot_Hook", Yaml::Integer(i)) => Expectation::SlingshotHook(*i > 0),
+            ("Slingshot_Hook", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Station_Power", Yaml::Boolean(b)) => Expectation::StationPower(*b),
+            ("Station_Power", Yaml::Integer(i)) => Expectation::StationPower(*i > 0),
+            ("Station_Power", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Switch_36_11", Yaml::Boolean(b)) => Expectation::Switch3611(*b),
+            ("Switch_36_11", Yaml::Integer(i)) => Expectation::Switch3611(*i > 0),
+            ("Switch_36_11", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Switch_40_12", Yaml::Boolean(b)) => Expectation::Switch4012(*b),
+            ("Switch_40_12", Yaml::Integer(i)) => Expectation::Switch4012(*i > 0),
+            ("Switch_40_12", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Terminal_Breakthrough_1", Yaml::Boolean(b)) => Expectation::TerminalBreakthrough1(*b),
+            ("Terminal_Breakthrough_1", Yaml::Integer(i)) => {
+                Expectation::TerminalBreakthrough1(*i > 0)
+            }
+            ("Terminal_Breakthrough_1", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Under_Siege", Yaml::Boolean(b)) => Expectation::UnderSiege(*b),
+            ("Under_Siege", Yaml::Integer(i)) => Expectation::UnderSiege(*i > 0),
+            ("Under_Siege", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Underwater_Movement", Yaml::Boolean(b)) => Expectation::UnderwaterMovement(*b),
+            ("Underwater_Movement", Yaml::Integer(i)) => Expectation::UnderwaterMovement(*i > 0),
+            ("Underwater_Movement", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Wall_Climb", Yaml::Boolean(b)) => Expectation::WallClimb(*b),
+            ("Wall_Climb", Yaml::Integer(i)) => Expectation::WallClimb(*i > 0),
+            ("Wall_Climb", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            _ => {
+                return Err(format!(
+                    "Unrecognized/disallowed expect context key: {:?}",
+                    ckey
+                ));
+            }
+        })
+    }
+
+    fn assert_expectations<I>(&self, exps: &Vec<Self::Expectation>) -> Result<(), String> {
+        let mut errs = Vec::new();
+        for exp in exps {
+            match exp {
+                Expectation::Position(e) => {
+                    let v = self.position();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "position", e, v));
+                    }
+                }
+                Expectation::Energy(e) => {
+                    let v = self.energy();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "energy", e, v));
+                    }
+                }
+                Expectation::Flasks(e) => {
+                    let v = self.flasks();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "flasks", e, v));
+                    }
+                }
+                Expectation::Refills(e) => {
+                    let v = self.refills();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "refills", e, v));
+                    }
+                }
+                Expectation::Mode(e) => {
+                    let v = self.mode();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "mode", e, v));
+                    }
+                }
+                Expectation::Save(e) => {
+                    let v = self.save();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "save", e, v));
+                    }
+                }
+                Expectation::Indra(e) => {
+                    let v = self.indra();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "indra", e, v));
+                    }
+                }
+                Expectation::Last(e) => {
+                    let v = self.last();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "last", e, v));
+                    }
+                }
+                Expectation::PrevArea(e) => {
+                    let v = self.prev_area();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "prev_area", e, v));
+                    }
+                }
+                Expectation::AmagiMainAreaCtxCombo(e) => {
+                    let v = self.amagi__main_area__ctx__combo();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "amagi__main_area__ctx__combo", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihBaseCampCtxLeftPlatformMoved(e) => {
+                    let v = self.ebih__base_camp__ctx__left_platform_moved();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__base_camp__ctx__left_platform_moved", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihGrid251012CtxDoorOpen(e) => {
+                    let v = self.ebih__grid_25_10_12__ctx__door_open();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__grid_25_10_12__ctx__door_open", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWaterfallCtxWestDoorOpen(e) => {
+                    let v = self.ebih__waterfall__ctx__west_door_open();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__waterfall__ctx__west_door_open", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihEbihEastCtxPlatform1Moved(e) => {
+                    let v = self.ebih__ebih_east__ctx__platform1_moved();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__ebih_east__ctx__platform1_moved", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihEbihEastCtxPlatform2Moved(e) => {
+                    let v = self.ebih__ebih_east__ctx__platform2_moved();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__ebih_east__ctx__platform2_moved", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihDroneRoomCtxPlatformMoved(e) => {
+                    let v = self.ebih__drone_room__ctx__platform_moved();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__drone_room__ctx__platform_moved", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaGigunaNortheastCtxDoorOpened(e) => {
+                    let v = self.giguna__giguna_northeast__ctx__door_opened();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__giguna_northeast__ctx__door_opened", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaCarnelianCtxDoorOpened(e) => {
+                    let v = self.giguna__carnelian__ctx__door_opened();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__carnelian__ctx__door_opened", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaCarnelianCtxUpperSusar(e) => {
+                    let v = self.giguna__carnelian__ctx__upper_susar();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__carnelian__ctx__upper_susar", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaCarnelianCtxLowerSusar(e) => {
+                    let v = self.giguna__carnelian__ctx__lower_susar();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__carnelian__ctx__lower_susar", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaWestCavernsCtxEastSusar(e) => {
+                    let v = self.giguna__west_caverns__ctx__east_susar();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__west_caverns__ctx__east_susar", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaRuinsWestCtxKishibHandled(e) => {
+                    let v = self.giguna__ruins_west__ctx__kishib_handled();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__ruins_west__ctx__kishib_handled", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaRuinsUpperCtxDoorsOpen(e) => {
+                    let v = self.giguna__ruins_upper__ctx__doors_open();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__ruins_upper__ctx__doors_open", e, v
+                        ));
+                    }
+                }
+                Expectation::AmagiDragonEyePassage(e) => {
+                    let v = self.has(Item::Amagi_Dragon_Eye_Passage);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Amagi_Dragon_Eye_Passage", e, v
+                        ));
+                    }
+                }
+                Expectation::AmagiStrongholdBoulder1(e) => {
+                    let v = self.has(Item::Amagi_Stronghold_Boulder_1);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Amagi_Stronghold_Boulder_1", e, v
+                        ));
+                    }
+                }
+                Expectation::AmagiStrongholdBoulder2(e) => {
+                    let v = self.has(Item::Amagi_Stronghold_Boulder_2);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Amagi_Stronghold_Boulder_2", e, v
+                        ));
+                    }
+                }
+                Expectation::AmagiStrongholdWall1(e) => {
+                    let v = self.has(Item::Amagi_Stronghold_Wall_1);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Amagi_Stronghold_Wall_1", e, v
+                        ));
+                    }
+                }
+                Expectation::AmagiStrongholdWall2(e) => {
+                    let v = self.has(Item::Amagi_Stronghold_Wall_2);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Amagi_Stronghold_Wall_2", e, v
+                        ));
+                    }
+                }
+                Expectation::AmagiWestLakeSurfaceWall(e) => {
+                    let v = self.has(Item::Amagi_West_Lake_Surface_Wall);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Amagi_West_Lake_Surface_Wall", e, v
+                        ));
+                    }
+                }
+                Expectation::Amashilama(e) => {
+                    let v = self.has(Item::Amashilama);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Amashilama", e, v));
+                    }
+                }
+                Expectation::Anuman(e) => {
+                    let v = self.has(Item::Anuman);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Anuman", e, v));
+                    }
+                }
+                Expectation::ApocalypseBomb(e) => {
+                    let v = self.has(Item::Apocalypse_Bomb);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Apocalypse_Bomb", e, v
+                        ));
+                    }
+                }
+                Expectation::Boomerang(e) => {
+                    let v = self.has(Item::Boomerang);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Boomerang", e, v));
+                    }
+                }
+                Expectation::CompaniesLayoff(e) => {
+                    let v = self.has(Item::Companies_Layoff);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Companies_Layoff", e, v
+                        ));
+                    }
+                }
+                Expectation::DearErnest(e) => {
+                    let v = self.has(Item::Dear_Ernest);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Dear_Ernest", e, v));
+                    }
+                }
+                Expectation::DefeatEbihAlu(e) => {
+                    let v = self.has(Item::Defeat_Ebih_Alu);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Defeat_Ebih_Alu", e, v
+                        ));
+                    }
+                }
+                Expectation::DefeatMUSAM20(e) => {
+                    let v = self.has(Item::Defeat_MUS_A_M20);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Defeat_MUS_A_M20", e, v
+                        ));
+                    }
+                }
+                Expectation::DroneHover(e) => {
+                    let v = self.has(Item::Drone_Hover);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Drone_Hover", e, v));
+                    }
+                }
+                Expectation::DroneMeleeDamage(e) => {
+                    let v = self.count(Item::Drone_Melee_Damage);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Drone_Melee_Damage", e, v
+                        ));
+                    }
+                }
+                Expectation::DroneMeleeSpeed(e) => {
+                    let v = self.count(Item::Drone_Melee_Speed);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Drone_Melee_Speed", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWaterfallBlockLeft(e) => {
+                    let v = self.has(Item::Ebih_Waterfall_Block_Left);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Waterfall_Block_Left", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWaterfallBlockRight(e) => {
+                    let v = self.has(Item::Ebih_Waterfall_Block_Right);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Waterfall_Block_Right", e, v
+                        ));
+                    }
+                }
+                Expectation::FastTravel(e) => {
+                    let v = self.has(Item::Fast_Travel);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Fast_Travel", e, v));
+                    }
+                }
+                Expectation::Flask(e) => {
+                    let v = self.count(Item::Flask);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Flask", e, v));
+                    }
+                }
+                Expectation::GigunaNortheastGate(e) => {
+                    let v = self.has(Item::Giguna_Northeast_Gate);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Giguna_Northeast_Gate", e, v
+                        ));
+                    }
+                }
+                Expectation::HealthUpgrade(e) => {
+                    let v = self.count(Item::Health_Upgrade);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Health_Upgrade", e, v));
+                    }
+                }
+                Expectation::HereticsTablet(e) => {
+                    let v = self.has(Item::Heretics_Tablet);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Heretics_Tablet", e, v
+                        ));
+                    }
+                }
+                Expectation::IceAxe(e) => {
+                    let v = self.has(Item::Ice_Axe);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Ice_Axe", e, v));
+                    }
+                }
+                Expectation::Infect(e) => {
+                    let v = self.count(Item::Infect);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Infect", e, v));
+                    }
+                }
+                Expectation::InfectionRange(e) => {
+                    let v = self.count(Item::Infection_Range);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Infection_Range", e, v
+                        ));
+                    }
+                }
+                Expectation::InfectionSpeed(e) => {
+                    let v = self.has(Item::Infection_Speed);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Infection_Speed", e, v
+                        ));
+                    }
+                }
+                Expectation::LedgeGrab(e) => {
+                    let v = self.has(Item::Ledge_Grab);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Ledge_Grab", e, v));
+                    }
+                }
+                Expectation::LetterFromTrace(e) => {
+                    let v = self.has(Item::Letter_from_Trace);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Letter_from_Trace", e, v
+                        ));
+                    }
+                }
+                Expectation::Map1710(e) => {
+                    let v = self.has(Item::Map_17_10);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Map_17_10", e, v));
+                    }
+                }
+                Expectation::MeleeDamage(e) => {
+                    let v = self.count(Item::Melee_Damage);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Melee_Damage", e, v));
+                    }
+                }
+                Expectation::MeleeSpeed(e) => {
+                    let v = self.count(Item::Melee_Speed);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Melee_Speed", e, v));
+                    }
+                }
+                Expectation::NaniteMist(e) => {
+                    let v = self.has(Item::Nanite_Mist);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Nanite_Mist", e, v));
+                    }
+                }
+                Expectation::NanoPoints(e) => {
+                    let v = self.count(Item::Nano_Points);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Nano_Points", e, v));
+                    }
+                }
+                Expectation::PowerMatrix(e) => {
+                    let v = self.has(Item::Power_Matrix);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Power_Matrix", e, v));
+                    }
+                }
+                Expectation::RangedDamage(e) => {
+                    let v = self.count(Item::Ranged_Damage);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Ranged_Damage", e, v));
+                    }
+                }
+                Expectation::RangedSpeed(e) => {
+                    let v = self.count(Item::Ranged_Speed);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Ranged_Speed", e, v));
+                    }
+                }
+                Expectation::RecordLosses(e) => {
+                    let v = self.has(Item::Record_Losses);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Record_Losses", e, v));
+                    }
+                }
+                Expectation::RemoteDrone(e) => {
+                    let v = self.has(Item::Remote_Drone);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Remote_Drone", e, v));
+                    }
+                }
+                Expectation::ResearchersMissing(e) => {
+                    let v = self.has(Item::Researchers_Missing);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Researchers_Missing", e, v
+                        ));
+                    }
+                }
+                Expectation::Shockwave(e) => {
+                    let v = self.has(Item::Shockwave);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Shockwave", e, v));
+                    }
+                }
+                Expectation::SlingshotHook(e) => {
+                    let v = self.has(Item::Slingshot_Hook);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Slingshot_Hook", e, v));
+                    }
+                }
+                Expectation::StationPower(e) => {
+                    let v = self.has(Item::Station_Power);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Station_Power", e, v));
+                    }
+                }
+                Expectation::Switch3611(e) => {
+                    let v = self.has(Item::Switch_36_11);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Switch_36_11", e, v));
+                    }
+                }
+                Expectation::Switch4012(e) => {
+                    let v = self.has(Item::Switch_40_12);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Switch_40_12", e, v));
+                    }
+                }
+                Expectation::TerminalBreakthrough1(e) => {
+                    let v = self.has(Item::Terminal_Breakthrough_1);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Terminal_Breakthrough_1", e, v
+                        ));
+                    }
+                }
+                Expectation::UnderSiege(e) => {
+                    let v = self.has(Item::Under_Siege);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Under_Siege", e, v));
+                    }
+                }
+                Expectation::UnderwaterMovement(e) => {
+                    let v = self.has(Item::Underwater_Movement);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Underwater_Movement", e, v
+                        ));
+                    }
+                }
+                Expectation::WallClimb(e) => {
+                    let v = self.has(Item::Wall_Climb);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Wall_Climb", e, v));
+                    }
+                }
+            }
+        }
+        if errs.is_empty() {
+            Ok(())
+        } else {
+            Err(errs.join("\n"))
+        }
     }
 
     fn position(&self) -> SpotId {
