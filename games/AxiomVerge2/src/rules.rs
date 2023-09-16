@@ -346,6 +346,38 @@ pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(ctx: &Context) ->
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
+pub fn access_giguna__ruins_top__east_7__ex__east_door_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__east_door__ex__east_7_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__east_door__ex__portal_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__entryway__ex__west_door_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__portal__ex__east_door_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__west_7__ex__west_door_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__west_door__ex__entryway_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
+pub fn access_giguna__ruins_top__west_door__ex__west_7_1__req(ctx: &Context) -> bool {
+    // ^_doors_open
+    ctx.giguna__ruins_top__ctx__doors_open()
+}
 pub fn access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx: &Context) -> bool {
     // not ^_kishib_handled and $shockwave
     (!ctx.giguna__ruins_west__ctx__kishib_handled() && helper__shockwave!(ctx))

@@ -82,7 +82,7 @@ pub enum Expectation {
     GigunaCarnelianCtxLowerSusar(bool),
     GigunaWestCavernsCtxEastSusar(bool),
     GigunaRuinsWestCtxKishibHandled(bool),
-    GigunaRuinsUpperCtxDoorsOpen(bool),
+    GigunaRuinsTopCtxDoorsOpen(bool),
     // items
     AmagiDragonEyePassage(bool),
     AmagiStrongholdBoulder1(bool),
@@ -272,7 +272,7 @@ pub mod flags {
             const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 10;
             const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 11;
             const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 12;
-            const GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN = 1 << 13;
+            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 13;
             const BOOMERANG_STEERING = 1 << 14;
             const MAJOR_GLITCHES = 1 << 15;
             const MINOR_GLITCHES = 1 << 16;
@@ -1173,10 +1173,10 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("giguna__ruins_upper__ctx__doors_open", Yaml::Boolean(b)) => {
-                self.set_giguna__ruins_upper__ctx__doors_open(*b)
+            ("giguna__ruins_top__ctx__doors_open", Yaml::Boolean(b)) => {
+                self.set_giguna__ruins_top__ctx__doors_open(*b)
             }
-            ("giguna__ruins_upper__ctx__doors_open", _) => {
+            ("giguna__ruins_top__ctx__doors_open", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1410,10 +1410,10 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("giguna__ruins_upper__ctx__doors_open", Yaml::Boolean(b)) => {
-                Expectation::GigunaRuinsUpperCtxDoorsOpen(*b)
+            ("giguna__ruins_top__ctx__doors_open", Yaml::Boolean(b)) => {
+                Expectation::GigunaRuinsTopCtxDoorsOpen(*b)
             }
-            ("giguna__ruins_upper__ctx__doors_open", _) => {
+            ("giguna__ruins_top__ctx__doors_open", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2044,12 +2044,12 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
-                Expectation::GigunaRuinsUpperCtxDoorsOpen(e) => {
-                    let v = self.giguna__ruins_upper__ctx__doors_open();
+                Expectation::GigunaRuinsTopCtxDoorsOpen(e) => {
+                    let v = self.giguna__ruins_top__ctx__doors_open();
                     if v != *e {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
-                            "giguna__ruins_upper__ctx__doors_open", e, v
+                            "giguna__ruins_top__ctx__doors_open", e, v
                         ));
                     }
                 }
@@ -2582,7 +2582,7 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Giguna__Ruins_Upper => {
+            AreaId::Giguna__Ruins_Top => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -3106,13 +3106,13 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
-            .contains(flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN);
+            .contains(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
         let p = old
             .cbits1
-            .contains(flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN);
+            .contains(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN);
         if n != p {
             list.push(format!(
-                "{}GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN",
+                "{}GIGUNA__RUINS_TOP__CTX__DOORS_OPEN",
                 if n { "+" } else { "-" }
             ));
         }
@@ -3771,21 +3771,19 @@ impl Context {
             val,
         );
     }
-    pub fn giguna__ruins_upper__ctx__doors_open(&self) -> bool {
+    pub fn giguna__ruins_top__ctx__doors_open(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
                 _ => match get_region(self.position) {
                     _ => self
                         .cbits1
-                        .contains(flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN),
+                        .contains(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN),
                 },
             },
         }
     }
-    pub fn set_giguna__ruins_upper__ctx__doors_open(&mut self, val: bool) {
-        self.cbits1.set(
-            flags::ContextBits1::GIGUNA__RUINS_UPPER__CTX__DOORS_OPEN,
-            val,
-        );
+    pub fn set_giguna__ruins_top__ctx__doors_open(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN, val);
     }
 }

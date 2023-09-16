@@ -125,7 +125,7 @@ pub enum AreaId {
     Giguna__Giguna_Northeast,
     Giguna__Ruins_Center,
     Giguna__Ruins_East,
-    Giguna__Ruins_Upper,
+    Giguna__Ruins_Top,
     Giguna__Ruins_West,
     Giguna__Wasteland,
     Giguna__West_Caverns,
@@ -202,7 +202,7 @@ impl fmt::Display for AreaId {
             AreaId::Giguna__Giguna_Northeast => write!(f, "{}", "Giguna > Giguna Northeast"),
             AreaId::Giguna__Ruins_Center => write!(f, "{}", "Giguna > Ruins Center"),
             AreaId::Giguna__Ruins_East => write!(f, "{}", "Giguna > Ruins East"),
-            AreaId::Giguna__Ruins_Upper => write!(f, "{}", "Giguna > Ruins Upper"),
+            AreaId::Giguna__Ruins_Top => write!(f, "{}", "Giguna > Ruins Top"),
             AreaId::Giguna__Ruins_West => write!(f, "{}", "Giguna > Ruins West"),
             AreaId::Giguna__Wasteland => write!(f, "{}", "Giguna > Wasteland"),
             AreaId::Giguna__West_Caverns => write!(f, "{}", "Giguna > West Caverns"),
@@ -280,7 +280,7 @@ impl std::str::FromStr for AreaId {
             "Giguna > Giguna Northeast" => Ok(AreaId::Giguna__Giguna_Northeast),
             "Giguna > Ruins Center" => Ok(AreaId::Giguna__Ruins_Center),
             "Giguna > Ruins East" => Ok(AreaId::Giguna__Ruins_East),
-            "Giguna > Ruins Upper" => Ok(AreaId::Giguna__Ruins_Upper),
+            "Giguna > Ruins Top" => Ok(AreaId::Giguna__Ruins_Top),
             "Giguna > Ruins West" => Ok(AreaId::Giguna__Ruins_West),
             "Giguna > Wasteland" => Ok(AreaId::Giguna__Wasteland),
             "Giguna > West Caverns" => Ok(AreaId::Giguna__West_Caverns),
@@ -667,7 +667,18 @@ pub enum SpotId {
     Giguna__Ruins_East__West_7,
     Giguna__Ruins_East__West_8,
     Giguna__Ruins_East__West_9,
-    Giguna__Ruins_Upper__West_7,
+    Giguna__Ruins_Top__East_7,
+    Giguna__Ruins_Top__East_Door,
+    Giguna__Ruins_Top__Entryway,
+    Giguna__Ruins_Top__Flask,
+    Giguna__Ruins_Top__Interior_Ledge,
+    Giguna__Ruins_Top__Portal,
+    Giguna__Ruins_Top__Portal_Left,
+    Giguna__Ruins_Top__Small_Ledge,
+    Giguna__Ruins_Top__Upper_Tunnel,
+    Giguna__Ruins_Top__West_7,
+    Giguna__Ruins_Top__West_Door,
+    Giguna__Ruins_Top__West_Tower,
     Giguna__Ruins_West__East_7,
     Giguna__Ruins_West__East_9,
     Giguna__Ruins_West__Lower_Ledge,
@@ -1575,7 +1586,32 @@ impl fmt::Display for SpotId {
             SpotId::Giguna__Ruins_East__West_7 => write!(f, "{}", "Giguna > Ruins East > West 7"),
             SpotId::Giguna__Ruins_East__West_8 => write!(f, "{}", "Giguna > Ruins East > West 8"),
             SpotId::Giguna__Ruins_East__West_9 => write!(f, "{}", "Giguna > Ruins East > West 9"),
-            SpotId::Giguna__Ruins_Upper__West_7 => write!(f, "{}", "Giguna > Ruins Upper > West 7"),
+            SpotId::Giguna__Ruins_Top__East_7 => write!(f, "{}", "Giguna > Ruins Top > East 7"),
+            SpotId::Giguna__Ruins_Top__East_Door => {
+                write!(f, "{}", "Giguna > Ruins Top > East Door")
+            }
+            SpotId::Giguna__Ruins_Top__Entryway => write!(f, "{}", "Giguna > Ruins Top > Entryway"),
+            SpotId::Giguna__Ruins_Top__Flask => write!(f, "{}", "Giguna > Ruins Top > Flask"),
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => {
+                write!(f, "{}", "Giguna > Ruins Top > Interior Ledge")
+            }
+            SpotId::Giguna__Ruins_Top__Portal => write!(f, "{}", "Giguna > Ruins Top > Portal"),
+            SpotId::Giguna__Ruins_Top__Portal_Left => {
+                write!(f, "{}", "Giguna > Ruins Top > Portal Left")
+            }
+            SpotId::Giguna__Ruins_Top__Small_Ledge => {
+                write!(f, "{}", "Giguna > Ruins Top > Small Ledge")
+            }
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel => {
+                write!(f, "{}", "Giguna > Ruins Top > Upper Tunnel")
+            }
+            SpotId::Giguna__Ruins_Top__West_7 => write!(f, "{}", "Giguna > Ruins Top > West 7"),
+            SpotId::Giguna__Ruins_Top__West_Door => {
+                write!(f, "{}", "Giguna > Ruins Top > West Door")
+            }
+            SpotId::Giguna__Ruins_Top__West_Tower => {
+                write!(f, "{}", "Giguna > Ruins Top > West Tower")
+            }
             SpotId::Giguna__Ruins_West__East_7 => write!(f, "{}", "Giguna > Ruins West > East 7"),
             SpotId::Giguna__Ruins_West__East_9 => write!(f, "{}", "Giguna > Ruins West > East 9"),
             SpotId::Giguna__Ruins_West__Lower_Ledge => {
@@ -2423,7 +2459,18 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins East > West 7" => Ok(SpotId::Giguna__Ruins_East__West_7),
             "Giguna > Ruins East > West 8" => Ok(SpotId::Giguna__Ruins_East__West_8),
             "Giguna > Ruins East > West 9" => Ok(SpotId::Giguna__Ruins_East__West_9),
-            "Giguna > Ruins Upper > West 7" => Ok(SpotId::Giguna__Ruins_Upper__West_7),
+            "Giguna > Ruins Top > East 7" => Ok(SpotId::Giguna__Ruins_Top__East_7),
+            "Giguna > Ruins Top > East Door" => Ok(SpotId::Giguna__Ruins_Top__East_Door),
+            "Giguna > Ruins Top > Entryway" => Ok(SpotId::Giguna__Ruins_Top__Entryway),
+            "Giguna > Ruins Top > Flask" => Ok(SpotId::Giguna__Ruins_Top__Flask),
+            "Giguna > Ruins Top > Interior Ledge" => Ok(SpotId::Giguna__Ruins_Top__Interior_Ledge),
+            "Giguna > Ruins Top > Portal" => Ok(SpotId::Giguna__Ruins_Top__Portal),
+            "Giguna > Ruins Top > Portal Left" => Ok(SpotId::Giguna__Ruins_Top__Portal_Left),
+            "Giguna > Ruins Top > Small Ledge" => Ok(SpotId::Giguna__Ruins_Top__Small_Ledge),
+            "Giguna > Ruins Top > Upper Tunnel" => Ok(SpotId::Giguna__Ruins_Top__Upper_Tunnel),
+            "Giguna > Ruins Top > West 7" => Ok(SpotId::Giguna__Ruins_Top__West_7),
+            "Giguna > Ruins Top > West Door" => Ok(SpotId::Giguna__Ruins_Top__West_Door),
+            "Giguna > Ruins Top > West Tower" => Ok(SpotId::Giguna__Ruins_Top__West_Tower),
             "Giguna > Ruins West > East 7" => Ok(SpotId::Giguna__Ruins_West__East_7),
             "Giguna > Ruins West > East 9" => Ok(SpotId::Giguna__Ruins_West__East_9),
             "Giguna > Ruins West > Lower Ledge" => Ok(SpotId::Giguna__Ruins_West__Lower_Ledge),
@@ -2725,6 +2772,8 @@ pub enum LocationId {
     Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
     Giguna__Giguna_Northeast__Save_Point__Seen,
     Giguna__Ruins_Center__Tablet__Item,
+    Giguna__Ruins_Top__Flask__Flask,
+    Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
     Giguna__West_Caverns__Bush__Item,
     Giguna__West_Caverns__Cache__Item,
     Glacier__Apocalypse_Entry__Terminal__Escape,
@@ -2994,6 +3043,14 @@ impl fmt::Display for LocationId {
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
                 write!(f, "{}", "Giguna > Ruins Center > Tablet > Item")
             }
+            LocationId::Giguna__Ruins_Top__Flask__Flask => {
+                write!(f, "{}", "Giguna > Ruins Top > Flask > Flask")
+            }
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => write!(
+                f,
+                "{}",
+                "Giguna > Ruins Top > Small Ledge > Shockwave Flask"
+            ),
             LocationId::Giguna__West_Caverns__Bush__Item => {
                 write!(f, "{}", "Giguna > West Caverns > Bush > Item")
             }
@@ -3331,6 +3388,10 @@ impl std::str::FromStr for LocationId {
             }
             "Giguna > Ruins Center > Tablet > Item" => {
                 Ok(LocationId::Giguna__Ruins_Center__Tablet__Item)
+            }
+            "Giguna > Ruins Top > Flask > Flask" => Ok(LocationId::Giguna__Ruins_Top__Flask__Flask),
+            "Giguna > Ruins Top > Small Ledge > Shockwave Flask" => {
+                Ok(LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask)
             }
             "Giguna > West Caverns > Bush > Item" => {
                 Ok(LocationId::Giguna__West_Caverns__Bush__Item)
@@ -3742,8 +3803,23 @@ pub enum ExitId {
     Giguna__Ruins_East__Small_Passage__ex__Ledge_1,
     Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1,
     Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1,
-    Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1,
-    Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1,
+    Giguna__Ruins_Top__East_7__ex__East_Door_1,
+    Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1,
+    Giguna__Ruins_Top__East_Door__ex__East_7_1,
+    Giguna__Ruins_Top__East_Door__ex__Portal_1,
+    Giguna__Ruins_Top__Entryway__ex__West_Door_1,
+    Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1,
+    Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1,
+    Giguna__Ruins_Top__Portal__ex__East_Door_1,
+    Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1,
+    Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1,
+    Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1,
+    Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1,
+    Giguna__Ruins_Top__West_7__ex__West_Door_1,
+    Giguna__Ruins_Top__West_7__ex__West_Tower_1,
+    Giguna__Ruins_Top__West_Door__ex__Entryway_1,
+    Giguna__Ruins_Top__West_Door__ex__West_7_1,
+    Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1,
     Giguna__Ruins_West__East_7__ex__Upper_Ledge_1,
     Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1,
     Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1,
@@ -4110,8 +4186,23 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => write!(f, "{}", "Giguna > Ruins East > Small Passage ==> Ledge (1)"),
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => write!(f, "{}", "Giguna > Ruins East > West 8 ==> Ruins Center > East 8 (1)"),
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => write!(f, "{}", "Giguna > Ruins East > West 9 ==> Ruins Center > East 9 (1)"),
-            ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1 => write!(f, "{}", "Giguna > Ruins Upper > West 7 ==> Ruins West > East 7 (1)"),
-            ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1 => write!(f, "{}", "Giguna > Ruins West > East 7 ==> Ruins Upper > West 7 (1)"),
+            ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => write!(f, "{}", "Giguna > Ruins Top > East 7 ==> East Door (1)"),
+            ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => write!(f, "{}", "Giguna > Ruins Top > East 7 ==> Ruins East > West 7 (1)"),
+            ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => write!(f, "{}", "Giguna > Ruins Top > East Door ==> East 7 (1)"),
+            ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 => write!(f, "{}", "Giguna > Ruins Top > East Door ==> Portal (1)"),
+            ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => write!(f, "{}", "Giguna > Ruins Top > Entryway ==> West Door (1)"),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 => write!(f, "{}", "Giguna > Ruins Top > Interior Ledge ==> Portal (1)"),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => write!(f, "{}", "Giguna > Ruins Top > Interior Ledge ==> Upper Tunnel (1)"),
+            ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => write!(f, "{}", "Giguna > Ruins Top > Portal ==> East Door (1)"),
+            ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => write!(f, "{}", "Giguna > Ruins Top > Portal ==> Interior Ledge (1)"),
+            ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => write!(f, "{}", "Giguna > Ruins Top > Portal Left ==> Small Ledge (1)"),
+            ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => write!(f, "{}", "Giguna > Ruins Top > Small Ledge ==> Interior Ledge (1)"),
+            ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 => write!(f, "{}", "Giguna > Ruins Top > West 7 ==> Ruins West > East 7 (1)"),
+            ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => write!(f, "{}", "Giguna > Ruins Top > West 7 ==> West Door (1)"),
+            ExitId::Giguna__Ruins_Top__West_7__ex__West_Tower_1 => write!(f, "{}", "Giguna > Ruins Top > West 7 ==> West Tower (1)"),
+            ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => write!(f, "{}", "Giguna > Ruins Top > West Door ==> Entryway (1)"),
+            ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => write!(f, "{}", "Giguna > Ruins Top > West Door ==> West 7 (1)"),
+            ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => write!(f, "{}", "Giguna > Ruins West > East 7 ==> Ruins Top > West 7 (1)"),
             ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => write!(f, "{}", "Giguna > Ruins West > East 7 ==> Upper Ledge (1)"),
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => write!(f, "{}", "Giguna > Ruins West > East 9 ==> Ruins Center > West 9 (1)"),
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => write!(f, "{}", "Giguna > Ruins West > Lower Ledge ==> Upper Ledge (1)"),
@@ -4483,8 +4574,23 @@ impl std::str::FromStr for ExitId {
             "Giguna > Ruins East > Small Passage ==> Ledge (1)" => Ok(ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1),
             "Giguna > Ruins East > West 8 ==> Ruins Center > East 8 (1)" => Ok(ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1),
             "Giguna > Ruins East > West 9 ==> Ruins Center > East 9 (1)" => Ok(ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1),
-            "Giguna > Ruins Upper > West 7 ==> Ruins West > East 7 (1)" => Ok(ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1),
-            "Giguna > Ruins West > East 7 ==> Ruins Upper > West 7 (1)" => Ok(ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1),
+            "Giguna > Ruins Top > East 7 ==> East Door (1)" => Ok(ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1),
+            "Giguna > Ruins Top > East 7 ==> Ruins East > West 7 (1)" => Ok(ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1),
+            "Giguna > Ruins Top > East Door ==> East 7 (1)" => Ok(ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1),
+            "Giguna > Ruins Top > East Door ==> Portal (1)" => Ok(ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1),
+            "Giguna > Ruins Top > Entryway ==> West Door (1)" => Ok(ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1),
+            "Giguna > Ruins Top > Interior Ledge ==> Portal (1)" => Ok(ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1),
+            "Giguna > Ruins Top > Interior Ledge ==> Upper Tunnel (1)" => Ok(ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1),
+            "Giguna > Ruins Top > Portal ==> East Door (1)" => Ok(ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1),
+            "Giguna > Ruins Top > Portal ==> Interior Ledge (1)" => Ok(ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1),
+            "Giguna > Ruins Top > Portal Left ==> Small Ledge (1)" => Ok(ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1),
+            "Giguna > Ruins Top > Small Ledge ==> Interior Ledge (1)" => Ok(ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1),
+            "Giguna > Ruins Top > West 7 ==> Ruins West > East 7 (1)" => Ok(ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1),
+            "Giguna > Ruins Top > West 7 ==> West Door (1)" => Ok(ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1),
+            "Giguna > Ruins Top > West 7 ==> West Tower (1)" => Ok(ExitId::Giguna__Ruins_Top__West_7__ex__West_Tower_1),
+            "Giguna > Ruins Top > West Door ==> Entryway (1)" => Ok(ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1),
+            "Giguna > Ruins Top > West Door ==> West 7 (1)" => Ok(ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1),
+            "Giguna > Ruins West > East 7 ==> Ruins Top > West 7 (1)" => Ok(ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1),
             "Giguna > Ruins West > East 7 ==> Upper Ledge (1)" => Ok(ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1),
             "Giguna > Ruins West > East 9 ==> Ruins Center > West 9 (1)" => Ok(ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1),
             "Giguna > Ruins West > Lower Ledge ==> Upper Ledge (1)" => Ok(ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1),
@@ -4987,6 +5093,7 @@ pub enum CanonId {
     Defeat_Ebih_Alu,
     Remote_Drone,
     Giguna_Northeast_Gate,
+    Giguna_Top_Flask,
     Ledge_Grab,
 }
 impl fmt::Display for CanonId {
@@ -5012,6 +5119,7 @@ impl fmt::Display for CanonId {
             CanonId::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             CanonId::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
+            CanonId::Giguna_Top_Flask => write!(f, "{}", "Giguna_Top_Flask"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
         }
     }
@@ -5039,6 +5147,7 @@ impl std::str::FromStr for CanonId {
             "Defeat_Ebih_Alu" => Ok(CanonId::Defeat_Ebih_Alu),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
             "Giguna_Northeast_Gate" => Ok(CanonId::Giguna_Northeast_Gate),
+            "Giguna_Top_Flask" => Ok(CanonId::Giguna_Top_Flask),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
@@ -5520,7 +5629,18 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Ruins_West__Lower_Ledge
         | SpotId::Giguna__Ruins_West__Upper_Ledge
         | SpotId::Giguna__Ruins_West__East_7 => AreaId::Giguna__Ruins_West,
-        SpotId::Giguna__Ruins_Upper__West_7 => AreaId::Giguna__Ruins_Upper,
+        SpotId::Giguna__Ruins_Top__West_7
+        | SpotId::Giguna__Ruins_Top__West_Door
+        | SpotId::Giguna__Ruins_Top__West_Tower
+        | SpotId::Giguna__Ruins_Top__Entryway
+        | SpotId::Giguna__Ruins_Top__Portal_Left
+        | SpotId::Giguna__Ruins_Top__Small_Ledge
+        | SpotId::Giguna__Ruins_Top__Portal
+        | SpotId::Giguna__Ruins_Top__Interior_Ledge
+        | SpotId::Giguna__Ruins_Top__Upper_Tunnel
+        | SpotId::Giguna__Ruins_Top__Flask
+        | SpotId::Giguna__Ruins_Top__East_Door
+        | SpotId::Giguna__Ruins_Top__East_7 => AreaId::Giguna__Ruins_Top,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             AreaId::Glacier__Dock_Elevator
         }
@@ -6008,7 +6128,18 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Ruins_West__Lower_Ledge
         | SpotId::Giguna__Ruins_West__Upper_Ledge
         | SpotId::Giguna__Ruins_West__East_7 => RegionId::Giguna,
-        SpotId::Giguna__Ruins_Upper__West_7 => RegionId::Giguna,
+        SpotId::Giguna__Ruins_Top__West_7
+        | SpotId::Giguna__Ruins_Top__West_Door
+        | SpotId::Giguna__Ruins_Top__West_Tower
+        | SpotId::Giguna__Ruins_Top__Entryway
+        | SpotId::Giguna__Ruins_Top__Portal_Left
+        | SpotId::Giguna__Ruins_Top__Small_Ledge
+        | SpotId::Giguna__Ruins_Top__Portal
+        | SpotId::Giguna__Ruins_Top__Interior_Ledge
+        | SpotId::Giguna__Ruins_Top__Upper_Tunnel
+        | SpotId::Giguna__Ruins_Top__Flask
+        | SpotId::Giguna__Ruins_Top__East_Door
+        | SpotId::Giguna__Ruins_Top__East_7 => RegionId::Giguna,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             RegionId::Glacier
         }
@@ -6230,6 +6361,8 @@ impl world::Accessible for Location {
             }
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => true,
             LocationId::Giguna__Ruins_Center__Tablet__Item => true,
+            LocationId::Giguna__Ruins_Top__Flask__Flask => true,
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => true,
             LocationId::Giguna__West_Caverns__Bush__Item => rules::access_more_refills(&ctx),
             LocationId::Giguna__West_Caverns__Cache__Item => true,
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
@@ -6627,8 +6760,23 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::access_mode__drone(&ctx),
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => true,
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => true,
-            ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1 => true,
-            ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1 => true,
+            ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => rules::access_giguna__ruins_top__east_7__ex__east_door_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => true,
+            ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => rules::access_giguna__ruins_top__east_door__ex__east_7_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 => rules::access_giguna__ruins_top__east_door__ex__portal_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => rules::access_giguna__ruins_top__entryway__ex__west_door_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 => rules::access_mode__drone(&ctx),
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => rules::access_grab_or_hook(&ctx),
+            ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => rules::access_giguna__ruins_top__portal__ex__east_door_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => rules::access_grab_or_hook(&ctx),
+            ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 => true,
+            ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => rules::access_giguna__ruins_top__west_7__ex__west_door_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__West_7__ex__West_Tower_1 => rules::access_grab_or_climb(&ctx),
+            ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => rules::access_giguna__ruins_top__west_door__ex__entryway_1__req(&ctx),
+            ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => rules::access_giguna__ruins_top__west_door__ex__west_7_1__req(&ctx),
+            ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => true,
             ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => true,
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => rules::access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(&ctx),
@@ -6872,8 +7020,9 @@ impl world::Exit for Exit {
             ExitId::Giguna__Ruins_Center__West_9__ex__Ruins_West__East_9_1 => true,
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => true,
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => true,
-            ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1 => true,
-            ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1 => true,
+            ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => true,
+            ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 => true,
+            ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => true,
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => true,
             ExitId::Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1 => true,
             ExitId::Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1 => true,
@@ -7364,7 +7513,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 474],
+    raw_spots: [SpotId; 485],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -7378,7 +7527,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 105;
+    const NUM_LOCATIONS: u32 = 107;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -7477,6 +7626,10 @@ impl world::World for World {
                 LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
                 LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
             ],
+            CanonId::Giguna_Top_Flask => vec![
+                LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
+                LocationId::Giguna__Ruins_Top__Flask__Flask,
+            ],
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
@@ -7496,6 +7649,8 @@ impl world::World for World {
                 LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
                 LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
                 LocationId::Ebih__Grid_25_2_6__Pit__Item,
+                LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
+                LocationId::Giguna__Ruins_Top__Flask__Flask,
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
@@ -7809,6 +7964,10 @@ impl world::World for World {
                 SpotId::Giguna__Building_Interior__Bookshelf
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => SpotId::Giguna__Ruins_Center__Tablet,
+            LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => {
+                SpotId::Giguna__Ruins_Top__Small_Ledge
+            }
+            LocationId::Giguna__Ruins_Top__Flask__Flask => SpotId::Giguna__Ruins_Top__Flask,
             LocationId::Glacier__Compass_Room__Center__Table => {
                 SpotId::Glacier__Compass_Room__Center
             }
@@ -8191,8 +8350,16 @@ impl world::World for World {
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => SpotId::Giguna__Ruins_West__East_9,
             ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => SpotId::Giguna__Ruins_West__Nook,
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => SpotId::Giguna__Ruins_West__Lower_Ledge,
-            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 | ExitId:: Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1 => SpotId::Giguna__Ruins_West__East_7,
-            ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1 => SpotId::Giguna__Ruins_Upper__West_7,
+            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 | ExitId:: Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => SpotId::Giguna__Ruins_West__East_7,
+            ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 | ExitId:: Giguna__Ruins_Top__West_7__ex__West_Door_1 | ExitId:: Giguna__Ruins_Top__West_7__ex__West_Tower_1 => SpotId::Giguna__Ruins_Top__West_7,
+            ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 | ExitId:: Giguna__Ruins_Top__West_Door__ex__Entryway_1 => SpotId::Giguna__Ruins_Top__West_Door,
+            ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => SpotId::Giguna__Ruins_Top__Entryway,
+            ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => SpotId::Giguna__Ruins_Top__Portal_Left,
+            ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => SpotId::Giguna__Ruins_Top__Small_Ledge,
+            ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 | ExitId:: Giguna__Ruins_Top__Portal__ex__East_Door_1 => SpotId::Giguna__Ruins_Top__Portal,
+            ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 | ExitId:: Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 | ExitId:: Giguna__Ruins_Top__East_Door__ex__East_7_1 => SpotId::Giguna__Ruins_Top__East_Door,
+            ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 | ExitId:: Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => SpotId::Giguna__Ruins_Top__East_7,
             ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Glacier__Dock_Elevator__Connector,
             ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Glacier__Dock_Interior__Connector,
             ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => SpotId::Glacier__Dock_Interior__Entry,
@@ -8578,7 +8745,10 @@ impl world::World for World {
             | SpotId::Giguna__Ruins_Center__West_9
             | SpotId::Giguna__Ruins_East__West_8
             | SpotId::Giguna__Ruins_East__West_9
-            | SpotId::Giguna__Ruins_Upper__West_7
+            | SpotId::Giguna__Ruins_Top__East_7
+            | SpotId::Giguna__Ruins_Top__Flask
+            | SpotId::Giguna__Ruins_Top__Small_Ledge
+            | SpotId::Giguna__Ruins_Top__West_7
             | SpotId::Giguna__Ruins_West__East_7
             | SpotId::Giguna__Ruins_West__East_9
             | SpotId::Giguna__Ruins_West__Lower_Ledge
@@ -9031,7 +9201,18 @@ impl World {
                 SpotId::Giguna__Ruins_East__West_7,
                 SpotId::Giguna__Ruins_East__West_8,
                 SpotId::Giguna__Ruins_East__West_9,
-                SpotId::Giguna__Ruins_Upper__West_7,
+                SpotId::Giguna__Ruins_Top__East_7,
+                SpotId::Giguna__Ruins_Top__East_Door,
+                SpotId::Giguna__Ruins_Top__Entryway,
+                SpotId::Giguna__Ruins_Top__Flask,
+                SpotId::Giguna__Ruins_Top__Interior_Ledge,
+                SpotId::Giguna__Ruins_Top__Portal,
+                SpotId::Giguna__Ruins_Top__Portal_Left,
+                SpotId::Giguna__Ruins_Top__Small_Ledge,
+                SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+                SpotId::Giguna__Ruins_Top__West_7,
+                SpotId::Giguna__Ruins_Top__West_Door,
+                SpotId::Giguna__Ruins_Top__West_Tower,
                 SpotId::Giguna__Ruins_West__East_7,
                 SpotId::Giguna__Ruins_West__East_9,
                 SpotId::Giguna__Ruins_West__Lower_Ledge,
@@ -9708,6 +9889,22 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Aansur,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => Location {
+            id: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
+            canonical: CanonId::Giguna_Top_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 4000,
+            exit_id: None,
+        },
+        LocationId::Giguna__Ruins_Top__Flask__Flask => Location {
+            id: LocationId::Giguna__Ruins_Top__Flask__Flask,
+            canonical: CanonId::Giguna_Top_Flask,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
@@ -11964,17 +12161,122 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1 => Exit {
-            id: ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1,
+        ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => Exit {
+            id: ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1,
             time: 1350,
-            dest: SpotId::Giguna__Ruins_Upper__West_7,
+            dest: SpotId::Giguna__Ruins_Top__West_7,
             price: Currency::Free,
             loc_id: None,
         },
-        ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1 => Exit {
-            id: ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1,
+        ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1,
             time: 1350,
             dest: SpotId::Giguna__Ruins_West__East_7,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1,
+            time: 1000,
+            dest: SpotId::Giguna__Ruins_Top__West_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__West_7__ex__West_Tower_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__West_7__ex__West_Tower_1,
+            time: 2250,
+            dest: SpotId::Giguna__Ruins_Top__West_Tower,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1,
+            time: 1000,
+            dest: SpotId::Giguna__Ruins_Top__West_7,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1,
+            time: 750,
+            dest: SpotId::Giguna__Ruins_Top__Entryway,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1,
+            time: 750,
+            dest: SpotId::Giguna__Ruins_Top__West_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1,
+            time: 1000,
+            dest: SpotId::Giguna__Ruins_Top__Small_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1,
+            time: 1500,
+            dest: SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1,
+            time: 1500,
+            dest: SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1,
+            time: 700,
+            dest: SpotId::Giguna__Ruins_Top__East_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1,
+            time: 800,
+            dest: SpotId::Giguna__Ruins_Top__Portal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1,
+            time: 1000,
+            dest: SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1,
+            time: 700,
+            dest: SpotId::Giguna__Ruins_Top__Portal,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1,
+            time: 1000,
+            dest: SpotId::Giguna__Ruins_Top__East_7,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1,
+            time: 1000,
+            dest: SpotId::Giguna__Ruins_Top__East_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => Exit {
+            id: ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1,
+            time: 1350,
+            dest: SpotId::Giguna__Ruins_East__West_7,
             price: Currency::Free,
             loc_id: None,
         },
@@ -19078,7 +19380,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Upper__West_7_1.into_usize(),
+                start: ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1.into_usize(),
                 end: ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1.into_usize() + 1,
             },
             actions: Range {
@@ -19089,21 +19391,207 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Giguna__Ruins_West__Upper_Ledge.into_usize() + 1,
             },
         },
-        SpotId::Giguna__Ruins_Upper__West_7 => Spot {
-            id: SpotId::Giguna__Ruins_Upper__West_7,
+        SpotId::Giguna__Ruins_Top__West_7 => Spot {
+            id: SpotId::Giguna__Ruins_Top__West_7,
             locations: Range {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1.into_usize(),
-                end: ExitId::Giguna__Ruins_Upper__West_7__ex__Ruins_West__East_7_1.into_usize() + 1,
+                start: ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__West_7__ex__West_Tower_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Ruins_Upper__West_7.into_usize(),
-                end: SpotId::Giguna__Ruins_Upper__West_7.into_usize() + 1,
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__West_Door => Spot {
+            id: SpotId::Giguna__Ruins_Top__West_Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__West_Tower => Spot {
+            id: SpotId::Giguna__Ruins_Top__West_Tower,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Entryway => Spot {
+            id: SpotId::Giguna__Ruins_Top__Entryway,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Portal_Left => Spot {
+            id: SpotId::Giguna__Ruins_Top__Portal_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Small_Ledge => Spot {
+            id: SpotId::Giguna__Ruins_Top__Small_Ledge,
+            locations: Range {
+                start: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize(),
+                end: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Portal => Spot {
+            id: SpotId::Giguna__Ruins_Top__Portal,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Interior_Ledge => Spot {
+            id: SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Upper_Tunnel => Spot {
+            id: SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__Flask => Spot {
+            id: SpotId::Giguna__Ruins_Top__Flask,
+            locations: Range {
+                start: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize(),
+                end: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__East_Door => Spot {
+            id: SpotId::Giguna__Ruins_Top__East_Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Ruins_Top__East_7 => Spot {
+            id: SpotId::Giguna__Ruins_Top__East_7,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1.into_usize(),
+                end: ExitId::Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
+                end: SpotId::Giguna__Ruins_Top__West_Tower.into_usize() + 1,
             },
         },
         SpotId::Glacier__Dock_Elevator__Elevator => Spot {
@@ -21389,7 +21877,24 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Ruins_West__Lower_Ledge => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_West__Upper_Ledge => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_West__East_7 => Range { start: 0, end: 0 },
-        SpotId::Giguna__Ruins_Upper__West_7 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__West_7 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__West_Door => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__West_Tower => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__Entryway => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__Portal_Left => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__Small_Ledge => Range {
+            start: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize(),
+            end: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize() + 1,
+        },
+        SpotId::Giguna__Ruins_Top__Portal => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__Interior_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__Upper_Tunnel => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__Flask => Range {
+            start: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize(),
+            end: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize() + 1,
+        },
+        SpotId::Giguna__Ruins_Top__East_Door => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_Top__East_7 => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Elevator => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Connector => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Interior__Connector => Range { start: 0, end: 0 },
@@ -21656,7 +22161,10 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             end: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),
         },
         AreaId::Giguna__Ruins_West => Range { start: 0, end: 0 },
-        AreaId::Giguna__Ruins_Upper => Range { start: 0, end: 0 },
+        AreaId::Giguna__Ruins_Top => Range {
+            start: LocationId::Giguna__Ruins_Top__Flask__Flask.into_usize(),
+            end: LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask.into_usize(),
+        },
         AreaId::Glacier__Dock_Elevator => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Interior => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Outside => Range { start: 0, end: 0 },

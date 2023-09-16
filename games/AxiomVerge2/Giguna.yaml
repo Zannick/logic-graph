@@ -983,10 +983,10 @@ areas:
         - to: Upper Ledge
           req: $grab
           time: 1.2
-        - to: Ruins Upper > West 7
+        - to: Ruins Top > West 7
           tags: [xshift]
 
-- name: Ruins Upper
+- name: Ruins Top
   on_entry: $reset_old_area(^newpos)
   start:
     _doors_open: false
@@ -995,4 +995,112 @@ areas:
       coord: [14.05, 6.7]
       exits:
         - to: Ruins West > East 7
+          tags: [xshift]
+        - to: West Door
+          req: ^_doors_open
+          time: 1.0
+        - to: West Tower
+          req: $grab or $climb
+          time: 2.25
+    - name: West Door
+      coord: [14.3, 6.6]
+      exits:
+        - to: West 7
+          req: ^_doors_open
+          time: 1.0
+        - to: Entryway
+          req: ^_doors_open
+          time: 0.75
+    - name: West Tower
+      coord: [14.3, 6.0]
+      local:
+        - to: West 7
+        - to: Entryway
+    - name: Entryway
+      coord: [14.45, 6.8]
+      local:
+        - to: Portal Left
+      exits:
+        - to: West Door
+          req: ^_doors_open
+          time: 0.75
+    - name: Portal Left
+      coord: [15.3, 6.8]
+      local:
+        - to: Entryway
+        - to: Portal
+          jumps: 1
+      exits:
+        - to: Small Ledge
+          req: $grab or $hook
+          time: 1.0
+    - name: Small Ledge
+      coord: [15.25, 6.5]
+      local:
+        - to: Portal Left
+        - to: Portal
+      locations:
+        - name: Shockwave Flask
+          item: Flask
+          canon: Giguna_Top_Flask
+          tags: [shockwave]
+          time: 4.0
+      exits:
+        - to: Interior Ledge
+          req: $hook
+          time: 1.5  # ?
+    - name: Portal
+      coord: [15.5, 6.7]
+      local:
+        - to: Portal Left
+        - to: Small Ledge
+          jumps: 1
+      exits:
+        - to: Interior Ledge
+          req: $hook
+          time: 1.5  # ?
+        - to: East Door
+          req: ^_doors_open
+          time: 0.7
+    - name: Interior Ledge
+      coord: [15.65, 6.2]
+      exits:
+        - to: Portal
+          req: ^mode == 'drone'
+          time: 0.8
+        - to: Upper Tunnel
+          req: $grab or $hook
+          time: 1.0  # ?
+    - name: Upper Tunnel
+      coord: [15.5, 5.8]
+      local:
+        - to: Interior Ledge
+        - to: Flask
+      # boomerang remote flask?
+    - name: Flask
+      coord: [15.3, 6.0]
+      local:
+        - to: Upper Tunnel
+          jumps: 1
+      locations:
+        - name: Flask
+          item: Flask
+          canon: Giguna_Top_Flask
+          tags: [flask]
+    - name: East Door
+      coord: [15.7, 6.8]
+      exits:
+        - to: Portal
+          req: ^_doors_open
+          time: 0.7
+        - to: East 7
+          req: ^_doors_open
+          time: 1.0  # ?
+    - name: East 7
+      coord: [15.95, 6.8]
+      exits:
+        - to: East Door
+          req: ^_doors_open
+          time: 1.0  # ?
+        - to: Ruins East > West 7
           tags: [xshift]

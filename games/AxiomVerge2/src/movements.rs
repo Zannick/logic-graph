@@ -2433,6 +2433,32 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => {
             1228
         }
+        ([false], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
+        ([false], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => {
+            799
+        }
+        ([false], SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
+            2982
+        }
+        ([false], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => {
+            2982
+        }
+        ([false], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 701,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+        ) => 299,
+        ([false], SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
+        ([false], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+        ) => 526,
+        ([false], SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
         (
             [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -5621,6 +5647,30 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => {
             1228
         }
+        ([true], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
+        ([true], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => 799,
+        ([true], SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
+            2982
+        }
+        ([true], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => {
+            2982
+        }
+        ([true], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 701,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+        ) => 299,
+        ([true], SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
+        ([true], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+        ) => 526,
+        ([true], SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
         (
             [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -9181,13 +9231,95 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna__Ruins_West__East_7 => enum_map! {
             SpotId::Giguna__Ruins_West__Upper_Ledge => 1200,
             SpotId::Giguna__Ruins_West__East_7 => 0,
-            SpotId::Giguna__Ruins_Upper__West_7 => 1350,
+            SpotId::Giguna__Ruins_Top__West_7 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
-        SpotId::Giguna__Ruins_Upper__West_7 => enum_map! {
+        SpotId::Giguna__Ruins_Top__West_7 => enum_map! {
             SpotId::Giguna__Ruins_West__East_7 => 1350,
-            SpotId::Giguna__Ruins_Upper__West_7 => 0,
+            SpotId::Giguna__Ruins_Top__West_7 => 0,
+            SpotId::Giguna__Ruins_Top__West_Door => 1000,
+            SpotId::Giguna__Ruins_Top__West_Tower => 2250,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__West_Door => enum_map! {
+            SpotId::Giguna__Ruins_Top__West_7 => 1000,
+            SpotId::Giguna__Ruins_Top__West_Door => 0,
+            SpotId::Giguna__Ruins_Top__Entryway => 750,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__West_Tower => enum_map! {
+            SpotId::Giguna__Ruins_Top__West_7 => 877,
+            SpotId::Giguna__Ruins_Top__West_Tower => 0,
+            SpotId::Giguna__Ruins_Top__Entryway => 799,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Entryway => enum_map! {
+            SpotId::Giguna__Ruins_Top__West_Door => 750,
+            SpotId::Giguna__Ruins_Top__Entryway => 0,
+            SpotId::Giguna__Ruins_Top__Portal_Left => 2982,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Portal_Left => enum_map! {
+            SpotId::Giguna__Ruins_Top__Entryway => 2982,
+            SpotId::Giguna__Ruins_Top__Portal_Left => 0,
+            SpotId::Giguna__Ruins_Top__Small_Ledge => 1000,
+            SpotId::Giguna__Ruins_Top__Portal => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Small_Ledge => enum_map! {
+            SpotId::Giguna__Ruins_Top__Portal_Left => 299,
+            SpotId::Giguna__Ruins_Top__Small_Ledge => 0,
+            SpotId::Giguna__Ruins_Top__Portal => 877,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => 1500,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Portal => enum_map! {
+            SpotId::Giguna__Ruins_Top__Portal_Left => 701,
+            SpotId::Giguna__Ruins_Top__Small_Ledge => 877,
+            SpotId::Giguna__Ruins_Top__Portal => 0,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => 1500,
+            SpotId::Giguna__Ruins_Top__East_Door => 700,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Interior_Ledge => enum_map! {
+            SpotId::Giguna__Ruins_Top__Portal => 800,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => 0,
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Upper_Tunnel => enum_map! {
+            SpotId::Giguna__Ruins_Top__Interior_Ledge => 526,
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel => 0,
+            SpotId::Giguna__Ruins_Top__Flask => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Flask => enum_map! {
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel => 701,
+            SpotId::Giguna__Ruins_Top__Flask => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__East_Door => enum_map! {
+            SpotId::Giguna__Ruins_Top__Portal => 700,
+            SpotId::Giguna__Ruins_Top__East_Door => 0,
+            SpotId::Giguna__Ruins_Top__East_7 => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__East_7 => enum_map! {
+            SpotId::Giguna__Ruins_East__West_7 => 1350,
+            SpotId::Giguna__Ruins_Top__East_Door => 1000,
+            SpotId::Giguna__Ruins_Top__East_7 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12894,11 +13026,62 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_West__Upper_Ledge) => 1200,
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_West__East_7) => 0,
-        (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_Upper__West_7) => 1350,
+        (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_Top__West_7) => 1350,
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Upper__West_7, SpotId::Giguna__Ruins_West__East_7) => 1350,
-        (SpotId::Giguna__Ruins_Upper__West_7, SpotId::Giguna__Ruins_Upper__West_7) => 0,
-        (SpotId::Giguna__Ruins_Upper__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_West__East_7) => 1350,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_7) => 0,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Door) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Tower) => 2250,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_7) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_Door) => 0,
+        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__Entryway) => 750,
+        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_Tower) => 0,
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => 799,
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__West_Door) => 750,
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Entryway) => 0,
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => 2982,
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => 2982,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal_Left) => 0,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Small_Ledge) => 1000,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 701,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => 299,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Small_Ledge) => 0,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 1500,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal) => 0,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 1500,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__East_Door) => 700,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 800,
+        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 0,
+        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => {
+            1000
+        }
+        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 526,
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 0,
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
+        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Flask) => 0,
+        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__Portal) => 700,
+        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_Door) => 0,
+        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_7) => 1000,
+        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_East__West_7) => 1350,
+        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_Door) => 1000,
+        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_7) => 0,
+        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -15409,6 +15592,20 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Lower_Ledge) => true,
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => true,
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => true,
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => true,
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => true,
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => true,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => true,
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => true,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => true,
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => true,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => true,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => true,
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => {
+            true
+        }
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => true,
+        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -24565,7 +24762,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__East_7,
-            SpotId::Giguna__Ruins_Upper__West_7,
+            SpotId::Giguna__Ruins_Top__West_7,
             1350,
         ),
         (
@@ -24574,17 +24771,262 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Giguna__Ruins_Upper__West_7,
+            SpotId::Giguna__Ruins_Top__West_7,
             SpotId::Giguna__Ruins_West__East_7,
             1350,
         ),
         (
-            SpotId::Giguna__Ruins_Upper__West_7,
-            SpotId::Giguna__Ruins_Upper__West_7,
+            SpotId::Giguna__Ruins_Top__West_7,
+            SpotId::Giguna__Ruins_Top__West_7,
             0,
         ),
         (
-            SpotId::Giguna__Ruins_Upper__West_7,
+            SpotId::Giguna__Ruins_Top__West_7,
+            SpotId::Giguna__Ruins_Top__West_Door,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_7,
+            SpotId::Giguna__Ruins_Top__West_Tower,
+            2250,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_7,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Door,
+            SpotId::Giguna__Ruins_Top__West_7,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Door,
+            SpotId::Giguna__Ruins_Top__West_Door,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Door,
+            SpotId::Giguna__Ruins_Top__Entryway,
+            750,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_7,
+            877,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_Tower,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__Entryway,
+            799,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Entryway,
+            SpotId::Giguna__Ruins_Top__West_Door,
+            750,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Entryway,
+            SpotId::Giguna__Ruins_Top__Entryway,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Entryway,
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            2982,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Entryway,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            SpotId::Giguna__Ruins_Top__Entryway,
+            2982,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            SpotId::Giguna__Ruins_Top__Portal,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            299,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Giguna__Ruins_Top__Portal,
+            877,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            1500,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna__Ruins_Top__Portal_Left,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna__Ruins_Top__Small_Ledge,
+            877,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna__Ruins_Top__Portal,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            1500,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna__Ruins_Top__East_Door,
+            700,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            SpotId::Giguna__Ruins_Top__Portal,
+            800,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            SpotId::Giguna__Ruins_Top__Interior_Ledge,
+            526,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            SpotId::Giguna__Ruins_Top__Flask,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Flask,
+            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Flask,
+            SpotId::Giguna__Ruins_Top__Flask,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Flask,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_Door,
+            SpotId::Giguna__Ruins_Top__Portal,
+            700,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_Door,
+            SpotId::Giguna__Ruins_Top__East_Door,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_Door,
+            SpotId::Giguna__Ruins_Top__East_7,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_7,
+            SpotId::Giguna__Ruins_East__West_7,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_7,
+            SpotId::Giguna__Ruins_Top__East_Door,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_7,
+            SpotId::Giguna__Ruins_Top__East_7,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__East_7,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28392,6 +28834,22 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1403)
         }
         (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => Some(877),
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => Some(2982),
+        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => Some(877),
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => Some(2982),
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => Some(877),
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => {
+            Some(299)
+        }
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => {
+            Some(526)
+        }
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => Some(799),
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => Some(877),
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Platform) => Some(1578),
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Save_Point) => Some(1578),
         (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Nook) => Some(599),
@@ -31143,6 +31601,42 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1403), vec![])
         }
         (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
+            (Some(2982), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => {
+            (Some(2982), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => {
+            (Some(299), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => {
+            (Some(799), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => {
             (Some(877), vec![])
         }
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Platform) => {
