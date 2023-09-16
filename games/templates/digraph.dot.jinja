@@ -1,11 +1,13 @@
+// use neato to use the coordinates
 digraph {{ game }} {
-    ranksep=1.0;
+    node[shape=square,width=0.01,colorscheme=dark28,style=filled];
 %% for r in regions
     subgraph cluster_{{ r.id }} {
+        node[fillcolor="{{ loop.index % 7 }}"];
 %% for a in r.areas
-        subgraph cluster_{{ a. id }} {
+        subgraph cluster_{{ a.id }} {
 %% for s in a.spots
-            {{ s.id }} [label = "{{ s.name }}"];
+            {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (3.6*s.coord[0])|round(6) }},-{{ 2*s.coord[1]|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
 %% endfor
             label = "{{ a.name }}";
             bgcolor = "white";
@@ -22,5 +24,9 @@ digraph {{ game }} {
 %% for h in s.hybrid|sort(attribute='id')
     {{ s.id }} -> {{ h|get_exit_target }};
 %% endfor
+%% endfor
+    edge [arrowhead=none,style=dashed];
+%% for (k, l) in local_distances
+    {{ k }} -> {{ l }};
 %% endfor
 }

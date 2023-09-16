@@ -468,8 +468,19 @@ subgraph Giguna
         Giguna__Ruins_West__Upper_Ledge(Upper Ledge);
         Giguna__Ruins_West__East_7(East 7);
     end
-    subgraph Giguna__Ruins_Upper[Ruins Upper]
-        Giguna__Ruins_Upper__West_7(West 7);
+    subgraph Giguna__Ruins_Top[Ruins Top]
+        Giguna__Ruins_Top__West_7(West 7);
+        Giguna__Ruins_Top__West_Door(West Door);
+        Giguna__Ruins_Top__West_Tower(West Tower);
+        Giguna__Ruins_Top__Entryway(Entryway);
+        Giguna__Ruins_Top__Portal_Left(Portal Left);
+        Giguna__Ruins_Top__Small_Ledge(Small Ledge);
+        Giguna__Ruins_Top__Portal(Portal);
+        Giguna__Ruins_Top__Interior_Ledge(Interior Ledge);
+        Giguna__Ruins_Top__Upper_Tunnel(Upper Tunnel);
+        Giguna__Ruins_Top__Flask(Flask);
+        Giguna__Ruins_Top__East_Door(East Door);
+        Giguna__Ruins_Top__East_7(East 7);
     end
 end
 subgraph Glacier
@@ -783,7 +794,17 @@ Giguna__Ruins_Center__West_9 <--> Giguna__Ruins_West__East_9
 Giguna__Ruins_East__Bottom_Rock --> Giguna__Ruins_East__Cliff
 Giguna__Ruins_East__Cliff --> Giguna__Ruins_East__Ledge
 Giguna__Ruins_East__Ledge <--> Giguna__Ruins_East__Small_Passage
-Giguna__Ruins_Upper__West_7 <--> Giguna__Ruins_West__East_7
+Giguna__Ruins_Top__East_7 --> Giguna__Ruins_East__West_7
+Giguna__Ruins_Top__East_7 <--> Giguna__Ruins_Top__East_Door
+Giguna__Ruins_Top__East_Door <--> Giguna__Ruins_Top__Portal
+Giguna__Ruins_Top__Entryway <--> Giguna__Ruins_Top__West_Door
+Giguna__Ruins_Top__Interior_Ledge <--> Giguna__Ruins_Top__Portal
+Giguna__Ruins_Top__Interior_Ledge --> Giguna__Ruins_Top__Upper_Tunnel
+Giguna__Ruins_Top__Portal_Left --> Giguna__Ruins_Top__Small_Ledge
+Giguna__Ruins_Top__Small_Ledge --> Giguna__Ruins_Top__Interior_Ledge
+Giguna__Ruins_Top__West_7 <--> Giguna__Ruins_Top__West_Door
+Giguna__Ruins_Top__West_7 --> Giguna__Ruins_Top__West_Tower
+Giguna__Ruins_Top__West_7 <--> Giguna__Ruins_West__East_7
 Giguna__Ruins_West__East_7 --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Lower_Ledge --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Nook --> Giguna__Ruins_West__Lower_Ledge
