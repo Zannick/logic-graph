@@ -645,7 +645,7 @@ areas:
           req: $hover
           time: 4.2
     - name: Kari
-      coord: [14.4, 15.5]
+      coord: [14.4, 15.55]
       local:
         - to: Middle Platform
           jumps: 5

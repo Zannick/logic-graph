@@ -135,7 +135,7 @@ areas:
         - to: By Garage > East 12
           tags: [xshift]
     - name: Left Platform
-      coord: [28.7, 11.8]
+      coord: [28.7, 10.8]
       local:
         - to: Top Platform
       exits:
@@ -147,7 +147,7 @@ areas:
           do: ^_left_platform_moved = true
           to: Ebih > Base Camp > Left Platform Moved
     - name: Left Platform Moved
-      coord: [29.4, 11.8]
+      coord: [29.4, 10.8]
       local:
         - to: Top Platform
       locations:
@@ -165,7 +165,7 @@ areas:
           do: ^_left_platform_moved = false
           to: Ebih > Base Camp > Left Platform
     - name: Top Platform
-      coord: [29.5, 11.5]
+      coord: [29.5, 10.5]
       local:
         - to: Tent Entry
         - to: Building Entry
@@ -187,14 +187,14 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
-      coord: [30.1, 12.8]
+      coord: [30.2, 12.7]
       local:
         - to: Desk
       exits:
         - to: Base Camp > Bunker Entry
           tags: [exterior]
     - name: Desk
-      coord: [30.5, 12.8]
+      coord: [30.5, 12.7]
       local:
         - to: Entry
       locations:
@@ -232,7 +232,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
-      coord: [28.3, 12.8]
+      coord: [28.3, 12.7]
       local:
         - to: Desk
       exits:
@@ -240,7 +240,7 @@ areas:
           time: 0.5
           tags: [exterior, tent]
     - name: Desk
-      coord: [28.4, 12.8]
+      coord: [28.4, 12.7]
       local:
         - to: Entry
       locations:
@@ -286,6 +286,7 @@ areas:
           req: ^mode == 'drone'
           time: 0.8
     - name: Crawlspace
+      coord: [27.2, 12.0]
       locations:
         - name: Fragment
           item: Health_Fragment
@@ -882,14 +883,14 @@ areas:
           tags: [xshift]
     # Waterfall Upper
     - name: East 7
-      coord: [25.95, 6.8]
+      coord: [24.95, 6.8]
       local:
         - to: Top Waterfall
       exits:
         - to: Ebih East > West 7
           tags: [xshift]
     - name: Top Waterfall
-      coord: [23.75, 7.0]
+      coord: [22.75, 7.0]
       local:
         - to: East 7
           jumps: 2
@@ -898,7 +899,7 @@ areas:
         - to: West Main Path
         - to: Center Main Path
     - name: West 7
-      coord: [22.05, 6.8]
+      coord: [21.05, 6.8]
       local:
         - to: Top Waterfall
       exits:
@@ -1200,7 +1201,7 @@ areas:
           to: Ebih > Ebih East > Ledge End
           time: 5
     - name: East Ledge
-      coord: [27.1, 7.7]
+      coord: [26.1, 7.7]
       local:
         - to: Moving Platform
         - to: Middle Platform
@@ -1214,7 +1215,7 @@ areas:
           item: Under_Siege
           tags: [standing]
     - name: Middle Platform
-      coord: [26.85, 7.3]
+      coord: [25.85, 7.3]
       local:
         - to: Upper Ledge
           jumps: 4
@@ -1224,7 +1225,7 @@ areas:
         - to: Lower Moving Platform
         - to: East Hill
     - name: Upper Ledge
-      coord: [26.4, 6.8]
+      coord: [25.4, 6.8]
       local:
         - to: West 7
         - to: West 8
@@ -1232,7 +1233,7 @@ areas:
         - to: Ledge End
         - to: Middle Platform
     - name: West 7
-      coord: [26.05, 6.8]
+      coord: [25.05, 6.8]
       local:
         - to: Upper Ledge
       exits:

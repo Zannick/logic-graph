@@ -39,6 +39,7 @@ areas:
       coord: [43.4, 8.8]
       local:
         - to: Do Not Enter
+          jumps: 3
       exits:
         - to: Dock Interior > Entry
           tags: [interior]
@@ -48,7 +49,7 @@ areas:
     #- name: Save Point
     #  coord: [43.0, 9]
     - name: Do Not Enter
-      coord: [42.05, 8.8]
+      coord: [42.05, 8.5]
       local:
         - to: Entry
       exits:
@@ -59,28 +60,28 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 9
-      coord: [41.95, 8.8]
+      coord: [41.95, 8.5]
       local:
         - to: Overhang
       exits:
         - to: Dock Outside > Do Not Enter
           tags: [xshift]
     - name: Overhang
-      coord: [41.6, 8.8]
+      coord: [41.6, 8.5]
       local:
         - to: East 9
         - to: Ledge
         - to: Lower East
           jumps_down: 2
     - name: Ledge
-      coord: [41.3, 9.0]
+      coord: [41.3, 8.8]
       local:
         - to: Overhang
           jumps: 2
         - to: Lower East
           jumps_down: 3
     - name: Lower East
-      coord: [41.95, 9.8]
+      coord: [41.95, 9.7]
       local:
         - to: Ledge
           jumps: 8
@@ -110,14 +111,14 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West
-      coord: [42.05, 9.8]
+      coord: [42.05, 9.7]
       local:
         - to: East
       exits:
         - to: Revival > Lower East
           tags: [xshift]
     - name: East
-      coord: [42.95, 10]
+      coord: [42.95, 9.7]
       local:
         - to: West
       exits:
@@ -128,7 +129,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Top
-      coord: [43.05, 9.8]
+      coord: [43.05, 9.7]
       local:
         - to: Lower
           thru: [43.3, 9.95]
