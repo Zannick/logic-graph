@@ -29,9 +29,9 @@ You may also wish to create a folder to hold your settings files, since these ar
 
 ### Editable files
 
-In the top-level game directory, you will need to create `Game.yaml` and any other `.yaml` files you like. The first will contain the game-wide definitions you need, while the others define Regions for your game. Based on these, the Compiler script will generate Rust code that you can build, run, benchmark, and potentially test.
+In the top-level game directory, you will need to create `Game.yaml` and any other `.yaml` files you like. The first will contain the game-wide definitions you need, while the others define Regions for your game. Based on these, the Compiler script will generate Rust code that you can build, run, benchmark, and test.
 
-In the optional `tests` directory, you can create yaml files that describe graph traversal unittests to ensure that the graph data you've provided works as expected. You can also hand-write your own Rust test cases here, just be careful to avoid naming it `foo_tests.rs` when you have a test file using the name `FooTests`.
+In the `tests` directory, you can create yaml files that describe graph traversal unittests to ensure that the graph data you've provided works as expected, and run with `cargo test`. Modifying these test files will not require rerunning the build script or recompiling with Rust, since they are parsed directly from Rust. You can also hand-write your own Rust test cases here (obviously these will be recompiled when you run `cargo test`).
 
 ### Generated files
 
@@ -39,9 +39,9 @@ The script will create a `Cargo.toml` file at the top-level directory for your g
 
 The `src` directory will contain Rust files that implement the graph for your specific game. The `bin` directory contains the main program starting point used with `cargo run`. The `benches` directory contains the benchmark program used with `cargo bench` that will run some generic tests on your graph.
 
-The `data` directory will contain diagram files for your game, currently a graphviz (dot) file and a mermaid file. GitHub can automatically render the mermaid file, but the interface may be a little tough to use with the typical graph size.
+The `data` directory will contain diagram files for your game, currently a graphviz (dot) file and a mermaid file. GitHub can automatically render the mermaid file, but the interface may be a little tough to use with the typical graph size. The graphviz file can be rendered with `neato` to produce a 2D map of your spots based on their coordinates; you may have to adjust the Game's `graph_scale_factor` and some regions' `graph_offset` to make some spots visible. You can then re-scale and overlay the produced image onto a map image with [GraphicsMagick](http://graphicsmagick.org), e.g. `gm composite -geometry 5801x -geometry +241+168 digraph.png map.png digraph-map.png` (you'll have to calculate your sizes and offsets).
 
-Finally, if you created any test yaml files in `tests`, the same directory will contain the Rust files that run the tests you described.
+Finally, there will be a `tests` directory with a `unittest.rs` file. This test file will run any YAML test cases you put in that directory.
 
 ## YAML file structure
 
@@ -66,7 +66,8 @@ The file is considered a dictionary, where these are the allowed keys:
 * **helpers**: A dictionary of logic helpers. The names of keys must start with `$`. If the helper is not meant to evaluate to a boolean, its type must be specified by adding a `:` followed by the Logic rule name. Helpers can accept arguments, which must be defined in parentheses after the type (if mentioned), with their own types included after a `:`. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **collect**: A dictionary of effects that trigger when collecting a specific item. The key is the name of the item, the value is a logic rule of type `action`. Useful when items are permanently collectible but provide currency that can be spent. See the [Logic grammar reference](#logic-grammar-reference) below.
 * **settings**: A dictionary of settings that can be changed per-run without having to regenerate the code or recompile the generated code. Keys are the names of the settings, and the values are the same as the **context** fields.
-* **special**: A dictionary of special per-game behavior overrides. You can think of these as settings that tweak behavior of the graph analyzer for the game type as a whole, similar to how you provide a settings file when you run the program to tweak behavior of your own graph. There will be a fixed list of these; right now there aren't any.
+* **special**: A dictionary of special per-game behavior overrides. You can think of these as settings that tweak behavior of the graph analyzer or renderer for the game type as a whole, similar to how you provide a settings file when you run the program to tweak behavior of your own graph. There is a fixed list of these.
+    * **graph_scale**: A pair of float multipliers to apply to your coordinate system when rendering the graph in graphviz (via neato). Note that graphviz considers the origin (0,0) to be in the lower left. If your coordinate system puts the origin in a different corner, you will want a negative multiplier so that your graph is not mirrored, e.g. `[3.6, -2]` for an origin in the upper left. 0 is not a valid multiplier.
 
 ### Regions
 
@@ -74,6 +75,7 @@ Each other yaml file in the top-level game directory is considered a dictionary 
 
 * **name**: The name of the region.
 * **short**: Optionally, a short version of the name. If present, this is the version that will show in most places.
+* **graph_offset**: Optionally, a pair of floats used to offset where this region is placed in the graphviz generated graph. No effect on the game graph itself.
 * **data**: A dictionary of values for Place-based data. Format is the same as in `Game.yaml` but the values here override those values, and in turn can be overridden by **data** definitions in more specific places.
 * **here**: A dictionary of context variable overrides. The actual values of those variables are ignored and overridden with the given values when the player is in this **Region**.
 * **enter**, **load**, **reset**: A dictionary of context variable values to be set on a certain trigger: respectively, whenever the player *enters* the **Region** (i.e. the previous position was not in the **Region** and the new position is), whenever the game is *loaded* (by using a warp that loads the game), and whenever the area is *reset* (via a call to the [built-in function](#built-in-functions) `$reset` or whenever the game is *loaded*). Context variables may be defined here and omitted from `Game.yaml` fields as long as the type is inferrable from the value, and the name does not collide with any other context variable. You may prefix context variables used only in this Region (i.e. *local context variables*) with `_`; other Regions or Places may have a similarly named local context variable without collision.
@@ -322,7 +324,7 @@ These restrictions on arguments are possible to change if needed; this is just t
 
 #### Place Containment
 
-You can whether a certain **Place** variable is inside of another **Place** via `p1 WITHIN p2` or `p1 NOT WITHIN p2`:
+You can check whether a certain **Place** variable is inside of another **Place** via `p1 WITHIN p2` or `p1 NOT WITHIN p2`:
 
 * `p1` must be a **context variable** or **function argument**, or it may be omitted, in which case the current position is used.
 * If `p1` is omitted, `p2` may be either a **Place** literal in backticks, or a tuple (surrounded with `()`) of **Place** literals separated by commas.

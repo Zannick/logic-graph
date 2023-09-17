@@ -1,792 +1,498 @@
-// use neato to see the positions
+// use neato to use the coordinates
 digraph AxiomVerge2 {
     node[shape=square,width=0.01,colorscheme=dark28,style=filled];
-    subgraph cluster_Amagi {
-        clusterrank="local";
+    bgcolor = "transparent";
         node[fillcolor="1"];
-        subgraph cluster_Amagi__Main_Area {
-            Amagi__Main_Area__East_15 [label = " ", pos = "111.42,-29.6!"];
-            Amagi__Main_Area__Waters_Edge [label = " ", pos = "107.28,-29.6!"];
-            Amagi__Main_Area__Shallow_End [label = " ", pos = "106.56,-30.2!"];
-            Amagi__Main_Area__Cliff [label = " ", pos = "102.42,-30.8!"];
-            Amagi__Main_Area__Upper_Platform [label = " ", pos = "101.7,-31.4!"];
-            Amagi__Main_Area__West_Shelf [label = " ", pos = "100.44,-31.8!"];
-            Amagi__Main_Area__West_Side [label = " ", pos = "99.0,-31.6!"];
-            Amagi__Main_Area__Platform_2 [label = " ", pos = "100.98,-32.4!"];
-            Amagi__Main_Area__East_Ledge [label = " ", pos = "101.7,-32.6!"];
-            Amagi__Main_Area__Carving [label = " ", pos = "97.56,-29.4!"];
-            Amagi__Main_Area__West_15 [label = " ", pos = "97.38,-29.6!"];
-            Amagi__Main_Area__Secret_Outcropping [label = " ", pos = "99.18,-28.4!"];
-            Amagi__Main_Area__Platform_3 [label = " ", pos = "100.8,-33.4!"];
-            Amagi__Main_Area__Catwalk_Center [label = " ", pos = "101.88,-34.4!"];
-            Amagi__Main_Area__Catwalk_Broken_Part [label = " ", pos = "104.4,-34.4!"];
-            Amagi__Main_Area__Catwalk_East_Edge [label = " ", pos = "106.02,-34.4!"];
-            Amagi__Main_Area__Save_Point [label = " ", pos = "106.2,-37.4!"];
-            Amagi__Main_Area__Enemy_Side [label = " ", pos = "107.28,-37.4!"];
-            Amagi__Main_Area__Small_Cliff [label = " ", pos = "109.44,-37.2!"];
-            Amagi__Main_Area__East_19 [label = " ", pos = "111.42,-37.4!"];
-            Amagi__Main_Area__Broken_Wall [label = " ", pos = "102.24,-34.8!"];
-            Amagi__Main_Area__Wall_Stuck_Spot [label = " ", pos = "102.06,-35.8!"];
-            Amagi__Main_Area__Half_Pillar [label = " ", pos = "100.8,-36.4!"];
-            Amagi__Main_Area__Flat_Ruin [label = " ", pos = "99.0,-36.4!"];
-            Amagi__Main_Area__West_Mini_Hill [label = " ", pos = "100.08,-37.0!"];
-            Amagi__Main_Area__West_18 [label = " ", pos = "97.38,-34.8!"];
-            Amagi__Main_Area__West_19 [label = " ", pos = "97.38,-37.4!"];
-            Amagi__Main_Area__Secret_Waterfall [label = " ", pos = "98.64,-26.8!"];
-            Amagi__Main_Area__Way_Off_To_The_Side [label = " ", pos = "109.44,-26.6!"];
-            label = "Main Area";
-            bgcolor = "white";
-        }
-        subgraph cluster_Amagi__Cave_Behind_Waterfall {
-            Amagi__Cave_Behind_Waterfall__Bottom [label = " ", pos = "99.18,-28.4!"];
-            Amagi__Cave_Behind_Waterfall__Middle [label = " ", pos = "99.18,-27.4!"];
-            Amagi__Cave_Behind_Waterfall__Top [label = " ", pos = "98.64,-26.8!"];
-            label = "Cave Behind Waterfall";
-            bgcolor = "white";
-        }
-        subgraph cluster_Amagi__Grid_31_19 {
-            Amagi__Grid_31_19__West [label = " ", pos = "111.78,-37.4!"];
-            Amagi__Grid_31_19__East [label = " ", pos = "115.02,-37.4!"];
-            label = "Grid 31,19";
-            bgcolor = "white";
-        }
-        subgraph cluster_Amagi__Liru_Room {
-            Amagi__Liru_Room__West_19 [label = " ", pos = "115.38,-37.4!"];
-            Amagi__Liru_Room__Hidden_Enemies [label = " ", pos = "116.64,-37.4!"];
-            Amagi__Liru_Room__Platform_1_Left [label = " ", pos = "116.64,-38.4!"];
-            Amagi__Liru_Room__Platform_1_Right [label = " ", pos = "117.54,-38.4!"];
-            Amagi__Liru_Room__Platform_2_Left [label = " ", pos = "116.64,-39.2!"];
-            Amagi__Liru_Room__Platform_2_Right [label = " ", pos = "118.08,-39.2!"];
-            Amagi__Liru_Room__Platform_3_Left [label = " ", pos = "116.64,-40.0!"];
-            Amagi__Liru_Room__Platform_3_Right [label = " ", pos = "117.72,-40.0!"];
-            Amagi__Liru_Room__Platform_4_Left [label = " ", pos = "117.0,-40.8!"];
-            Amagi__Liru_Room__Platform_4_Right [label = " ", pos = "117.9,-40.8!"];
-            Amagi__Liru_Room__Bottom [label = " ", pos = "118.8,-41.6!"];
-            Amagi__Liru_Room__Shrine [label = " ", pos = "120.6,-40.8!"];
-            Amagi__Liru_Room__West_20 [label = " ", pos = "115.38,-40.0!"];
-            Amagi__Liru_Room__East_Passage [label = " ", pos = "118.8,-39.6!"];
-            Amagi__Liru_Room__Hidden_Exit [label = " ", fillcolor = "8"];
-            label = "Liru Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Amagi__West_Lake {
-            Amagi__West_Lake__East_15 [label = " ", pos = "97.02,-29.6!"];
-            Amagi__West_Lake__East_Shore [label = " ", pos = "96.48,-29.6!"];
-            Amagi__West_Lake__East_Bank [label = " ", pos = "95.22,-31.2!"];
-            Amagi__West_Lake__Northeast_Platform [label = " ", pos = "93.96,-32!"];
-            Amagi__West_Lake__Northwest_Platform [label = " ", pos = "92.88,-32.4!"];
-            Amagi__West_Lake__Upper_Center_Platform [label = " ", pos = "93.6,-34.2!"];
-            Amagi__West_Lake__East_Platform [label = " ", pos = "95.4,-34.2!"];
-            Amagi__West_Lake__East_18 [label = " ", pos = "97.02,-34.8!"];
-            Amagi__West_Lake__Pillar [label = " ", pos = "95.76,-35.8!"];
-            Amagi__West_Lake__Pillar_Platform [label = " ", pos = "96.3,-36.6!"];
-            Amagi__West_Lake__East_19 [label = " ", pos = "97.02,-37.4!"];
-            Amagi__West_Lake__Somewhat_Central_Platform [label = " ", pos = "91.26,-35.8!"];
-            Amagi__West_Lake__West_Platform [label = " ", pos = "90.18,-35.4!"];
-            Amagi__West_Lake__Cavern_Front_Teeth [label = " ", pos = "88.92,-35.0!"];
-            Amagi__West_Lake__Cavern_Back_Teeth [label = " ", pos = "86.76,-34.6!"];
-            Amagi__West_Lake__Cavern_Jaw [label = " ", pos = "85.32,-34.6!"];
-            Amagi__West_Lake__Cavern_Neck [label = " ", pos = "84.6,-36.4!"];
-            Amagi__West_Lake__Cavern_Chin [label = " ", pos = "88.2,-36.6!"];
-            Amagi__West_Lake__Cavern_Refill_Station [label = " ", pos = "84.96,-32.4!"];
-            Amagi__West_Lake__Cavern_Tear_Duct [label = " ", pos = "87.84,-32.4!"];
-            Amagi__West_Lake__Cavern_Eye [label = " ", pos = "88.56,-32.8!"];
-            Amagi__West_Lake__Cavern_Front_Pillar [label = " ", pos = "83.88,-32.4!"];
-            Amagi__West_Lake__Cavern_Middle_Pillar [label = " ", pos = "82.98,-33.0!"];
-            Amagi__West_Lake__Cavern_Rear_Pillar [label = " ", pos = "81.72,-31.8!"];
-            Amagi__West_Lake__Cavern_Lower_Trachea [label = " ", pos = "80.64,-36.4!"];
-            Amagi__West_Lake__Stronghold_Top [label = " ", pos = "83.88,-38.2!"];
-            Amagi__West_Lake__Stronghold_Item [label = " ", pos = "84.24,-39.6!"];
-            Amagi__West_Lake__Stronghold_Rear_Wall [label = " ", pos = "83.16,-39.2!"];
-            Amagi__West_Lake__Stronghold_Middle_Column [label = " ", pos = "85.32,-39.4!"];
-            Amagi__West_Lake__Stronghold_Ceiling_Left [label = " ", pos = "86.04,-38.2!"];
-            Amagi__West_Lake__Stronghold_Ceiling_Right [label = " ", pos = "86.76,-38.2!"];
-            Amagi__West_Lake__Stronghold_Front_Room [label = " ", pos = "87.84,-39.4!"];
-            Amagi__West_Lake__Stronghold_Front_Door [label = " ", pos = "88.92,-39.6!"];
-            Amagi__West_Lake__Some_Rock [label = " ", pos = "90.0,-38!"];
-            Amagi__West_Lake__Small_Hill [label = " ", pos = "91.26,-38.8!"];
-            Amagi__West_Lake__Tentacle_Gap [label = " ", pos = "94.32,-37.4!"];
-            Amagi__West_Lake__Left_of_Enemy [label = " ", pos = "93.96,-39.6!"];
-            Amagi__West_Lake__East_20 [label = " ", pos = "97.02,-39.6!"];
-            Amagi__West_Lake__West_Cliff [label = " ", pos = "92.16,-31.6!"];
-            Amagi__West_Lake__West_Bank [label = " ", pos = "90.18,-30.8!"];
-            Amagi__West_Lake__Water_Surface [label = " ", pos = "90.18,-29.8!"];
-            Amagi__West_Lake__West_Shore [label = " ", pos = "88.38,-29.6!"];
-            Amagi__West_Lake__Surface_Wall_Right [label = " ", pos = "83.16,-29.6!"];
-            Amagi__West_Lake__Surface_Wall_Left [label = " ", pos = "82.26,-29.6!"];
-            Amagi__West_Lake__West_15 [label = " ", pos = "79.38,-29.4!"];
-            label = "West Lake";
-            bgcolor = "white";
-        }
-        label = "Lake Amagi";
-        bgcolor = "lightgrey";
-    }
-    subgraph cluster_Antarctica {
-        clusterrank="local";
+        Amagi__Main_Area__East_15 [label = " ", pos = "111.42,-29.6!"];
+        Amagi__Main_Area__Waters_Edge [label = " ", pos = "107.28,-29.6!"];
+        Amagi__Main_Area__Shallow_End [label = " ", pos = "106.56,-30.2!"];
+        Amagi__Main_Area__Cliff [label = " ", pos = "102.42,-30.8!"];
+        Amagi__Main_Area__Upper_Platform [label = " ", pos = "101.7,-31.4!"];
+        Amagi__Main_Area__West_Shelf [label = " ", pos = "100.44,-31.8!"];
+        Amagi__Main_Area__West_Side [label = " ", pos = "99.0,-31.6!"];
+        Amagi__Main_Area__Platform_2 [label = " ", pos = "100.98,-32.4!"];
+        Amagi__Main_Area__East_Ledge [label = " ", pos = "101.7,-32.6!"];
+        Amagi__Main_Area__Carving [label = " ", pos = "97.56,-29.4!"];
+        Amagi__Main_Area__West_15 [label = " ", pos = "97.38,-29.6!"];
+        Amagi__Main_Area__Secret_Outcropping [label = " ", pos = "99.18,-28.4!"];
+        Amagi__Main_Area__Platform_3 [label = " ", pos = "100.8,-33.4!"];
+        Amagi__Main_Area__Catwalk_Center [label = " ", pos = "101.88,-34.4!"];
+        Amagi__Main_Area__Catwalk_Broken_Part [label = " ", pos = "104.4,-34.4!"];
+        Amagi__Main_Area__Catwalk_East_Edge [label = " ", pos = "106.02,-34.4!"];
+        Amagi__Main_Area__Save_Point [label = " ", pos = "106.2,-37.4!"];
+        Amagi__Main_Area__Enemy_Side [label = " ", pos = "107.28,-37.4!"];
+        Amagi__Main_Area__Small_Cliff [label = " ", pos = "109.44,-37.2!"];
+        Amagi__Main_Area__East_19 [label = " ", pos = "111.42,-37.4!"];
+        Amagi__Main_Area__Broken_Wall [label = " ", pos = "102.24,-34.8!"];
+        Amagi__Main_Area__Wall_Stuck_Spot [label = " ", pos = "102.06,-35.8!"];
+        Amagi__Main_Area__Half_Pillar [label = " ", pos = "100.8,-36.4!"];
+        Amagi__Main_Area__Flat_Ruin [label = " ", pos = "99.0,-36.4!"];
+        Amagi__Main_Area__West_Mini_Hill [label = " ", pos = "100.08,-37.0!"];
+        Amagi__Main_Area__West_18 [label = " ", pos = "97.38,-34.8!"];
+        Amagi__Main_Area__West_19 [label = " ", pos = "97.38,-37.4!"];
+        Amagi__Main_Area__Secret_Waterfall [label = " ", pos = "98.64,-26.8!"];
+        Amagi__Main_Area__Way_Off_To_The_Side [label = " ", pos = "109.44,-26.6!"];
+        Amagi__Cave_Behind_Waterfall__Bottom [label = " ", pos = "99.18,-28.4!"];
+        Amagi__Cave_Behind_Waterfall__Middle [label = " ", pos = "99.18,-27.4!"];
+        Amagi__Cave_Behind_Waterfall__Top [label = " ", pos = "98.64,-26.8!"];
+        Amagi__Grid_31_19__West [label = " ", pos = "111.78,-37.4!"];
+        Amagi__Grid_31_19__East [label = " ", pos = "115.02,-37.4!"];
+        Amagi__Liru_Room__West_19 [label = " ", pos = "115.38,-37.4!"];
+        Amagi__Liru_Room__Hidden_Enemies [label = " ", pos = "116.64,-37.4!"];
+        Amagi__Liru_Room__Platform_1_Left [label = " ", pos = "116.64,-38.4!"];
+        Amagi__Liru_Room__Platform_1_Right [label = " ", pos = "117.54,-38.4!"];
+        Amagi__Liru_Room__Platform_2_Left [label = " ", pos = "116.64,-39.2!"];
+        Amagi__Liru_Room__Platform_2_Right [label = " ", pos = "118.08,-39.2!"];
+        Amagi__Liru_Room__Platform_3_Left [label = " ", pos = "116.64,-40.0!"];
+        Amagi__Liru_Room__Platform_3_Right [label = " ", pos = "117.72,-40.0!"];
+        Amagi__Liru_Room__Platform_4_Left [label = " ", pos = "117.0,-40.8!"];
+        Amagi__Liru_Room__Platform_4_Right [label = " ", pos = "117.9,-40.8!"];
+        Amagi__Liru_Room__Bottom [label = " ", pos = "118.8,-41.6!"];
+        Amagi__Liru_Room__Shrine [label = " ", pos = "120.6,-40.8!"];
+        Amagi__Liru_Room__West_20 [label = " ", pos = "115.38,-40.0!"];
+        Amagi__Liru_Room__East_Passage [label = " ", pos = "118.8,-39.6!"];
+        Amagi__Liru_Room__Hidden_Exit [label = " ", fillcolor = "8"];
+        Amagi__West_Lake__East_15 [label = " ", pos = "97.02,-29.6!"];
+        Amagi__West_Lake__East_Shore [label = " ", pos = "96.48,-29.6!"];
+        Amagi__West_Lake__East_Bank [label = " ", pos = "95.22,-31.2!"];
+        Amagi__West_Lake__Northeast_Platform [label = " ", pos = "93.96,-32.0!"];
+        Amagi__West_Lake__Northwest_Platform [label = " ", pos = "92.88,-32.4!"];
+        Amagi__West_Lake__Upper_Center_Platform [label = " ", pos = "93.6,-34.2!"];
+        Amagi__West_Lake__East_Platform [label = " ", pos = "95.4,-34.2!"];
+        Amagi__West_Lake__East_18 [label = " ", pos = "97.02,-34.8!"];
+        Amagi__West_Lake__Pillar [label = " ", pos = "95.76,-35.8!"];
+        Amagi__West_Lake__Pillar_Platform [label = " ", pos = "96.3,-36.6!"];
+        Amagi__West_Lake__East_19 [label = " ", pos = "97.02,-37.4!"];
+        Amagi__West_Lake__Somewhat_Central_Platform [label = " ", pos = "91.26,-35.8!"];
+        Amagi__West_Lake__West_Platform [label = " ", pos = "90.18,-35.4!"];
+        Amagi__West_Lake__Cavern_Front_Teeth [label = " ", pos = "88.92,-35.0!"];
+        Amagi__West_Lake__Cavern_Back_Teeth [label = " ", pos = "86.76,-34.6!"];
+        Amagi__West_Lake__Cavern_Jaw [label = " ", pos = "85.32,-34.6!"];
+        Amagi__West_Lake__Cavern_Neck [label = " ", pos = "84.6,-36.4!"];
+        Amagi__West_Lake__Cavern_Chin [label = " ", pos = "88.2,-36.6!"];
+        Amagi__West_Lake__Cavern_Refill_Station [label = " ", pos = "84.96,-32.4!"];
+        Amagi__West_Lake__Cavern_Tear_Duct [label = " ", pos = "87.84,-32.4!"];
+        Amagi__West_Lake__Cavern_Eye [label = " ", pos = "88.56,-32.8!"];
+        Amagi__West_Lake__Cavern_Front_Pillar [label = " ", pos = "83.88,-32.4!"];
+        Amagi__West_Lake__Cavern_Middle_Pillar [label = " ", pos = "82.98,-33.0!"];
+        Amagi__West_Lake__Cavern_Rear_Pillar [label = " ", pos = "81.72,-31.8!"];
+        Amagi__West_Lake__Cavern_Lower_Trachea [label = " ", pos = "80.64,-36.4!"];
+        Amagi__West_Lake__Stronghold_Top [label = " ", pos = "83.88,-38.2!"];
+        Amagi__West_Lake__Stronghold_Item [label = " ", pos = "84.24,-39.6!"];
+        Amagi__West_Lake__Stronghold_Rear_Wall [label = " ", pos = "83.16,-39.2!"];
+        Amagi__West_Lake__Stronghold_Middle_Column [label = " ", pos = "85.32,-39.4!"];
+        Amagi__West_Lake__Stronghold_Ceiling_Left [label = " ", pos = "86.04,-38.2!"];
+        Amagi__West_Lake__Stronghold_Ceiling_Right [label = " ", pos = "86.76,-38.2!"];
+        Amagi__West_Lake__Stronghold_Front_Room [label = " ", pos = "87.84,-39.4!"];
+        Amagi__West_Lake__Stronghold_Front_Door [label = " ", pos = "88.92,-39.6!"];
+        Amagi__West_Lake__Some_Rock [label = " ", pos = "90.0,-38.0!"];
+        Amagi__West_Lake__Small_Hill [label = " ", pos = "91.26,-38.8!"];
+        Amagi__West_Lake__Tentacle_Gap [label = " ", pos = "94.32,-37.4!"];
+        Amagi__West_Lake__Left_of_Enemy [label = " ", pos = "93.96,-39.6!"];
+        Amagi__West_Lake__East_20 [label = " ", pos = "97.02,-39.6!"];
+        Amagi__West_Lake__West_Cliff [label = " ", pos = "92.16,-31.6!"];
+        Amagi__West_Lake__West_Bank [label = " ", pos = "90.18,-30.8!"];
+        Amagi__West_Lake__Water_Surface [label = " ", pos = "90.18,-29.8!"];
+        Amagi__West_Lake__West_Shore [label = " ", pos = "88.38,-29.6!"];
+        Amagi__West_Lake__Surface_Wall_Right [label = " ", pos = "83.16,-29.6!"];
+        Amagi__West_Lake__Surface_Wall_Left [label = " ", pos = "82.26,-29.6!"];
+        Amagi__West_Lake__West_15 [label = " ", pos = "79.38,-29.4!"];
         node[fillcolor="2"];
-        subgraph cluster_Antarctica__West {
-            Antarctica__West__Helipad [label = " ", pos = "138.6,-3.6!"];
-            Antarctica__West__Shed_Entry [label = " ", pos = "134.1,-3.6!"];
-            Antarctica__West__Boxes [label = " ", pos = "144.0,-3.6!"];
-            label = "West";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Shed {
-            Antarctica__Shed__Interior [label = " ", fillcolor = "8"];
-            label = "Shed";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Building_1W {
-            Antarctica__Building_1W__West_Entry [label = " ", pos = "144.9,-3.6!"];
-            Antarctica__Building_1W__Connector [label = " ", pos = "147.6,-3.6!"];
-            label = "Building 1W";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Building_1E {
-            Antarctica__Building_1E__Connector [label = " ", pos = "147.6,-3.6!"];
-            Antarctica__Building_1E__East_Entry [label = " ", pos = "150.3,-3.6!"];
-            label = "Building 1E";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__East {
-            Antarctica__East__Building_1_Entry [label = " ", pos = "150.3,-3.6!"];
-            Antarctica__East__Save_Point [label = " ", pos = "151.2,-3.6!"];
-            Antarctica__East__Building_2_Entry [label = " ", pos = "153.0,-3.6!"];
-            Antarctica__East__Building_2_Upper [label = " ", pos = "148.5,-1.6!"];
-            label = "East";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Building_2L {
-            Antarctica__Building_2L__Entry [label = " ", pos = "153.0,-3.6!"];
-            label = "Building 2L";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Building_2U {
-            Antarctica__Building_2U__Stairs [label = " ", pos = "152.1,-1.6!"];
-            Antarctica__Building_2U__Door [label = " ", pos = "148.5,-1.6!"];
-            label = "Building 2U";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Building_2U_Corner {
-            Antarctica__Building_2U_Corner__Behind_Boxes [label = " ", fillcolor = "8"];
-            label = "Building 2U Corner";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Top {
-            Antarctica__Top__Power_Entry [label = " ", pos = "146.52,-1.6!"];
-            label = "Top";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Power_Room {
-            Antarctica__Power_Room__Entry [label = " ", pos = "146.52,-1.6!"];
-            Antarctica__Power_Room__Switch [label = " ", pos = "145.08,-1.6!"];
-            label = "Power Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Antarctica__Freight_Elevator {
-            Antarctica__Freight_Elevator__Left [label = " ", pos = "154.8,-3.6!"];
-            Antarctica__Freight_Elevator__Controls [label = " ", pos = "156.96,-3.6!"];
-            label = "Freight Elevator";
-            bgcolor = "white";
-        }
-        label = "Antarctica";
-        bgcolor = "lightgrey";
-    }
-    subgraph cluster_Ebih {
-        clusterrank="local";
+        Antarctica__West__Helipad [label = " ", pos = "138.6,-3.6!"];
+        Antarctica__West__Shed_Entry [label = " ", pos = "134.1,-3.6!"];
+        Antarctica__West__Boxes [label = " ", pos = "144.0,-3.6!"];
+        Antarctica__Shed__Interior [label = " ", fillcolor = "8"];
+        Antarctica__Building_1W__West_Entry [label = " ", pos = "144.9,-3.6!"];
+        Antarctica__Building_1W__Connector [label = " ", pos = "147.6,-3.6!"];
+        Antarctica__Building_1E__Connector [label = " ", pos = "147.6,-3.6!"];
+        Antarctica__Building_1E__East_Entry [label = " ", pos = "150.3,-3.6!"];
+        Antarctica__East__Building_1_Entry [label = " ", pos = "150.3,-3.6!"];
+        Antarctica__East__Save_Point [label = " ", pos = "151.2,-3.6!"];
+        Antarctica__East__Building_2_Entry [label = " ", pos = "153.0,-3.6!"];
+        Antarctica__East__Building_2_Upper [label = " ", pos = "148.5,-1.6!"];
+        Antarctica__Building_2L__Entry [label = " ", pos = "153.0,-3.6!"];
+        Antarctica__Building_2U__Stairs [label = " ", pos = "152.1,-1.6!"];
+        Antarctica__Building_2U__Door [label = " ", pos = "148.5,-1.6!"];
+        Antarctica__Building_2U_Corner__Behind_Boxes [label = " ", fillcolor = "8"];
+        Antarctica__Top__Power_Entry [label = " ", pos = "146.52,-1.6!"];
+        Antarctica__Power_Room__Entry [label = " ", pos = "146.52,-1.6!"];
+        Antarctica__Power_Room__Switch [label = " ", pos = "145.08,-1.6!"];
+        Antarctica__Freight_Elevator__Left [label = " ", pos = "154.8,-3.6!"];
+        Antarctica__Freight_Elevator__Controls [label = " ", pos = "156.96,-3.6!"];
         node[fillcolor="3"];
-        subgraph cluster_Ebih__Base_Camp {
-            Ebih__Base_Camp__East_11 [label = " ", pos = "111.42,-20.8!"];
-            Ebih__Base_Camp__East_12 [label = " ", pos = "111.42,-23.6!"];
-            Ebih__Base_Camp__Staircase [label = " ", pos = "109.44,-23.8!"];
-            Ebih__Base_Camp__Save_Point [label = " ", pos = "106.2,-25.2!"];
-            Ebih__Base_Camp__Bunker_Entry [label = " ", pos = "108.72,-25.4!"];
-            Ebih__Base_Camp__Lake_Access [label = " ", pos = "111.42,-25.4!"];
-            Ebih__Base_Camp__Behind_Vehicle [label = " ", pos = "103.68,-25.4!"];
-            Ebih__Base_Camp__Building_Entry [label = " ", pos = "104.4,-24.4!"];
-            Ebih__Base_Camp__Tent_Entry [label = " ", pos = "101.88,-25.4!"];
-            Ebih__Base_Camp__West_13 [label = " ", pos = "100.98,-25.2!"];
-            Ebih__Base_Camp__West_11 [label = " ", pos = "100.98,-21.2!"];
-            Ebih__Base_Camp__West_Midair [label = " ", pos = "102.06,-22!"];
-            Ebih__Base_Camp__West_12 [label = " ", pos = "100.98,-23.0!"];
-            Ebih__Base_Camp__Left_Platform [label = " ", pos = "103.32,-23.6!"];
-            Ebih__Base_Camp__Left_Platform_Moved [label = " ", pos = "105.84,-23.6!"];
-            Ebih__Base_Camp__Top_Platform [label = " ", pos = "106.2,-23.0!"];
-            label = "Base Camp";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Bunker_Interior {
-            Ebih__Bunker_Interior__Entry [label = " ", pos = "108.36,-25.6!"];
-            Ebih__Bunker_Interior__Desk [label = " ", pos = "109.8,-25.6!"];
-            label = "Bunker Interior";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Building_Interior {
-            Ebih__Building_Interior__Entry [label = " ", pos = "104.4,-24.4!"];
-            Ebih__Building_Interior__Corner [label = " ", pos = "102.6,-24.4!"];
-            label = "Building Interior";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Tent_Interior {
-            Ebih__Tent_Interior__Entry [label = " ", pos = "101.88,-25.6!"];
-            Ebih__Tent_Interior__Desk [label = " ", pos = "102.24,-25.6!"];
-            label = "Tent Interior";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__By_Garage {
-            Ebih__By_Garage__East_13 [label = " ", pos = "100.62,-25.2!"];
-            Ebih__By_Garage__East_Platform [label = " ", pos = "99.0,-24.2!"];
-            Ebih__By_Garage__Crawlspace_Opening [label = " ", pos = "98.64,-24.0!"];
-            Ebih__By_Garage__Crawlspace [label = " ", fillcolor = "8"];
-            Ebih__By_Garage__Outcropping [label = " ", pos = "98.28,-23.6!"];
-            Ebih__By_Garage__East_Bush [label = " ", pos = "96.48,-23.8!"];
-            Ebih__By_Garage__Lower_Platform [label = " ", pos = "95.04,-24.6!"];
-            Ebih__By_Garage__West_Bush [label = " ", pos = "94.68,-23.8!"];
-            Ebih__By_Garage__West_12 [label = " ", pos = "93.78,-23.6!"];
-            Ebih__By_Garage__West_13 [label = " ", pos = "93.78,-25.6!"];
-            Ebih__By_Garage__Garage_Entry [label = " ", pos = "97.92,-25.6!"];
-            Ebih__By_Garage__East_12 [label = " ", pos = "100.62,-23.0!"];
-            label = "By Garage";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Garage {
-            Ebih__Garage__Entry [label = " ", pos = "97.92,-25.6!"];
-            Ebih__Garage__Boxes [label = " ", pos = "96.48,-25.6!"];
-            label = "Garage";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Grid_25_10_12 {
-            Ebih__Grid_25_10_12__East_12 [label = " ", pos = "93.42,-23.6!"];
-            Ebih__Grid_25_10_12__Bush [label = " ", pos = "92.16,-23.0!"];
-            Ebih__Grid_25_10_12__West_12 [label = " ", pos = "90.18,-23.4!"];
-            Ebih__Grid_25_10_12__Below_Bush [label = " ", pos = "91.44,-23.4!"];
-            Ebih__Grid_25_10_12__Mid_Ledge [label = " ", pos = "91.08,-22.2!"];
-            Ebih__Grid_25_10_12__Door_Left [label = " ", pos = "92.16,-21.4!"];
-            Ebih__Grid_25_10_12__Top_Platform [label = " ", pos = "91.44,-21.0!"];
-            Ebih__Grid_25_10_12__West_11 [label = " ", pos = "90.18,-21.4!"];
-            Ebih__Grid_25_10_12__West_10 [label = " ", pos = "90.18,-19.4!"];
-            Ebih__Grid_25_10_12__Door [label = " ", pos = "92.88,-21.4!"];
-            Ebih__Grid_25_10_12__East_11 [label = " ", pos = "93.42,-21.4!"];
-            Ebih__Grid_25_10_12__East_10 [label = " ", pos = "93.42,-19.4!"];
-            Ebih__Grid_25_10_12__Hidden_Bush [label = " ", pos = "93.06,-19.9!"];
-            label = "Grid 25,10-12";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Waterfall {
-            Ebih__Waterfall__East_10 [label = " ", pos = "89.82,-19.4!"];
-            Ebih__Waterfall__East_Ledge [label = " ", pos = "89.1,-20.0!"];
-            Ebih__Waterfall__East_11 [label = " ", pos = "89.82,-21.4!"];
-            Ebih__Waterfall__Near_East_Tree [label = " ", pos = "87.12,-20.4!"];
-            Ebih__Waterfall__Waterfall_Right [label = " ", pos = "85.68,-21.2!"];
-            Ebih__Waterfall__Alcove_Right [label = " ", pos = "84.06,-21.6!"];
-            Ebih__Waterfall__Waterfall_Center_Right [label = " ", pos = "83.7,-20.6!"];
-            Ebih__Waterfall__Waterfall_Center_Center [label = " ", pos = "82.8,-20.6!"];
-            Ebih__Waterfall__Waterfall_Center_Left [label = " ", pos = "81.0,-21.0!"];
-            Ebih__Waterfall__Alcove_Left [label = " ", pos = "81.18,-21.6!"];
-            Ebih__Waterfall__Alcove [label = " ", pos = "82.8,-21.4!"];
-            Ebih__Waterfall__Under_Waterfall [label = " ", pos = "80.1,-21.6!"];
-            Ebih__Waterfall__Waterfall_Left [label = " ", pos = "79.2,-21.0!"];
-            Ebih__Waterfall__Wall_Right [label = " ", pos = "77.04,-21.4!"];
-            Ebih__Waterfall__Lower_West_Tree [label = " ", pos = "78.84,-19.8!"];
-            Ebih__Waterfall__West_Lower_Path [label = " ", pos = "78.12,-19.4!"];
-            Ebih__Waterfall__West_10 [label = " ", pos = "75.78,-19.4!"];
-            Ebih__Waterfall__West_9 [label = " ", pos = "75.78,-17.6!"];
-            Ebih__Waterfall__West_Climb [label = " ", pos = "78.12,-17.6!"];
-            Ebih__Waterfall__Ledge_Below_Hole [label = " ", pos = "77.94,-16.6!"];
-            Ebih__Waterfall__Below_Left_Switch [label = " ", pos = "76.5,-16.4!"];
-            Ebih__Waterfall__West_8 [label = " ", pos = "75.78,-15.8!"];
-            Ebih__Waterfall__West_Door_Left [label = " ", pos = "76.68,-15.8!"];
-            Ebih__Waterfall__West_Door [label = " ", pos = "77.58,-15.8!"];
-            Ebih__Waterfall__West_Door_Right [label = " ", pos = "78.12,-15.8!"];
-            Ebih__Waterfall__Middle_West_Tree [label = " ", pos = "78.3,-16.2!"];
-            Ebih__Waterfall__West_Main_Path [label = " ", pos = "78.84,-15.6!"];
-            Ebih__Waterfall__Cave_Entrance [label = " ", pos = "81.36,-16.6!"];
-            Ebih__Waterfall__Center_Main_Path [label = " ", pos = "82.44,-15.6!"];
-            Ebih__Waterfall__Big_Tree [label = " ", pos = "84.96,-15.8!"];
-            Ebih__Waterfall__Below_Tree [label = " ", pos = "85.68,-16.6!"];
-            Ebih__Waterfall__Platform [label = " ", pos = "86.4,-16.6!"];
-            Ebih__Waterfall__East_8 [label = " ", pos = "89.82,-15.6!"];
-            Ebih__Waterfall__East_7 [label = " ", pos = "93.42,-13.6!"];
-            Ebih__Waterfall__Top_Waterfall [label = " ", pos = "85.5,-14.0!"];
-            Ebih__Waterfall__West_7 [label = " ", pos = "79.38,-13.6!"];
-            label = "Waterfall";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Ebih_West {
-            Ebih__Ebih_West__East_10 [label = " ", pos = "75.42,-19.4!"];
-            Ebih__Ebih_West__Mid_Save [label = " ", pos = "73.44,-19.0!"];
-            Ebih__Ebih_West__Alcove_Entrance [label = " ", pos = "71.64,-19.6!"];
-            Ebih__Ebih_West__Alcove [label = " ", pos = "68.76,-19.6!"];
-            Ebih__Ebih_West__Above_Alcove [label = " ", pos = "70.56,-18.8!"];
-            Ebih__Ebih_West__East_9 [label = " ", pos = "75.42,-17.6!"];
-            Ebih__Ebih_West__Block_Left [label = " ", pos = "73.26,-20.2!"];
-            Ebih__Ebih_West__East_7 [label = " ", pos = "75.42,-13.6!"];
-            Ebih__Ebih_West__Above_Chute [label = " ", pos = "74.88,-13.6!"];
-            Ebih__Ebih_West__Upper_Save [label = " ", pos = "73.8,-13.2!"];
-            Ebih__Ebih_West__Medium_High_Platform [label = " ", pos = "73.08,-12.6!"];
-            Ebih__Ebih_West__High_Platform [label = " ", pos = "73.44,-12.0!"];
-            Ebih__Ebih_West__High_Ledge [label = " ", pos = "74.16,-11.6!"];
-            Ebih__Ebih_West__East_6 [label = " ", pos = "75.42,-11.2!"];
-            Ebih__Ebih_West__East_8 [label = " ", pos = "75.42,-15.8!"];
-            Ebih__Ebih_West__Middle_Middle [label = " ", pos = "74.52,-15.6!"];
-            Ebih__Ebih_West__Middle_Cliff [label = " ", pos = "72.36,-16.0!"];
-            Ebih__Ebih_West__Giguna_Pillar [label = " ", pos = "69.3,-17.0!"];
-            Ebih__Ebih_West__West_9 [label = " ", pos = "68.58,-17.6!"];
-            label = "Ebih West";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Cave {
-            Ebih__Cave__Entry [label = " ", fillcolor = "8"];
-            label = "Cave";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Ebih_East {
-            Ebih__Ebih_East__West_8 [label = " ", pos = "90.18,-15.6!"];
-            Ebih__Ebih_East__Moving_Platform [label = " ", pos = "91.26,-15.6!"];
-            Ebih__Ebih_East__Ledge_End [label = " ", pos = "93.6,-16.0!"];
-            Ebih__Ebih_East__Lower_Moving_Platform [label = " ", pos = "94.14,-17.4!"];
-            Ebih__Ebih_East__Corner [label = " ", pos = "95.04,-17.6!"];
-            Ebih__Ebih_East__Dispenser [label = " ", pos = "95.4,-17.6!"];
-            Ebih__Ebih_East__East_Ledge [label = " ", pos = "97.56,-15.4!"];
-            Ebih__Ebih_East__Middle_Platform [label = " ", pos = "96.66,-14.6!"];
-            Ebih__Ebih_East__Upper_Ledge [label = " ", pos = "95.04,-13.6!"];
-            Ebih__Ebih_East__West_7 [label = " ", pos = "93.78,-13.6!"];
-            Ebih__Ebih_East__East_Hill [label = " ", pos = "95.4,-15.2!"];
-            Ebih__Ebih_East__East_9 [label = " ", pos = "97.02,-16.6!"];
-            label = "Ebih East";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Grid_21_1_5 {
-            Ebih__Grid_21_1_5__West_6 [label = " ", pos = "75.78,-11.2!"];
-            Ebih__Grid_21_1_5__Portal_Stand [label = " ", pos = "77.4,-11.4!"];
-            Ebih__Grid_21_1_5__East_6 [label = " ", pos = "79.02,-11.4!"];
-            label = "Grid 21,1-5";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Boss_Room {
-            Ebih__Boss_Room__West_6 [label = " ", pos = "79.38,-11.4!"];
-            Ebih__Boss_Room__Boss [label = " ", pos = "82.08,-9.8!"];
-            Ebih__Boss_Room__Past_Boss [label = " ", pos = "83.16,-11.4!"];
-            Ebih__Boss_Room__Lower_Tree [label = " ", pos = "84.6,-10.4!"];
-            Ebih__Boss_Room__Lower_Ledge [label = " ", pos = "85.32,-10.0!"];
-            Ebih__Boss_Room__East_6 [label = " ", pos = "86.22,-10.0!"];
-            Ebih__Boss_Room__East_4 [label = " ", pos = "86.22,-7.6!"];
-            Ebih__Boss_Room__East_Ledge [label = " ", pos = "85.68,-9.0!"];
-            Ebih__Boss_Room__Upper_Tree [label = " ", pos = "84.78,-8.6!"];
-            Ebih__Boss_Room__High_Platform [label = " ", pos = "83.16,-8.2!"];
-            Ebih__Boss_Room__West_5 [label = " ", pos = "79.38,-8.6!"];
-            label = "Boss Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Drone_Room {
-            Ebih__Drone_Room__West_6 [label = " ", pos = "86.58,-10.0!"];
-            Ebih__Drone_Room__West_4 [label = " ", pos = "86.58,-7.6!"];
-            Ebih__Drone_Room__Pit_Left [label = " ", pos = "87.12,-10.8!"];
-            Ebih__Drone_Room__Portal [label = " ", pos = "88.2,-11.2!"];
-            Ebih__Drone_Room__Item [label = " ", pos = "88.92,-11.4!"];
-            Ebih__Drone_Room__Middle_Platform [label = " ", pos = "87.84,-10.2!"];
-            Ebih__Drone_Room__Portal_Exit [label = " ", pos = "88.2,-8.9!"];
-            Ebih__Drone_Room__Moving_Platform [label = " ", pos = "88.2,-8.0!"];
-            Ebih__Drone_Room__Left_Platform [label = " ", pos = "87.48,-8.0!"];
-            Ebih__Drone_Room__Tree [label = " ", pos = "88.92,-9.2!"];
-            Ebih__Drone_Room__East_4 [label = " ", pos = "89.82,-7.6!"];
-            label = "Drone Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Grid_25_2_6 {
-            Ebih__Grid_25_2_6__West_4 [label = " ", pos = "90.18,-7.6!"];
-            Ebih__Grid_25_2_6__Pit [label = " ", pos = "91.08,-11.4!"];
-            label = "Grid 25,2-6";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Grid_26_10_11 {
-            Ebih__Grid_26_10_11__West_11 [label = " ", pos = "93.78,-21.4!"];
-            Ebih__Grid_26_10_11__Middle_Bottom [label = " ", pos = "95.04,-21.2!"];
-            Ebih__Grid_26_10_11__Under_Ledge [label = " ", pos = "95.76,-21.2!"];
-            Ebih__Grid_26_10_11__Ledge [label = " ", pos = "96.12,-20.8!"];
-            Ebih__Grid_26_10_11__Middle_Platform [label = " ", pos = "95.04,-20.8!"];
-            Ebih__Grid_26_10_11__Upper_Platform [label = " ", pos = "95.22,-20.2!"];
-            Ebih__Grid_26_10_11__West_10 [label = " ", pos = "93.78,-19.4!"];
-            Ebih__Grid_26_10_11__Cliff [label = " ", pos = "95.76,-19.6!"];
-            Ebih__Grid_26_10_11__East_10 [label = " ", pos = "97.02,-19.6!"];
-            label = "Grid 26,10-11";
-            bgcolor = "white";
-        }
-        subgraph cluster_Ebih__Observation_Tower_Room {
-            Ebih__Observation_Tower_Room__West_9 [label = " ", pos = "97.38,-16.6!"];
-            Ebih__Observation_Tower_Room__Tower_Top [label = " ", pos = "99.0,-17.8!"];
-            Ebih__Observation_Tower_Room__Tower_Bottom [label = " ", pos = "99.0,-19.8!"];
-            Ebih__Observation_Tower_Room__Cliff [label = " ", pos = "99.54,-20.2!"];
-            Ebih__Observation_Tower_Room__West_10 [label = " ", pos = "97.38,-19.6!"];
-            Ebih__Observation_Tower_Room__East_11 [label = " ", pos = "100.62,-21.4!"];
-            label = "Observation Tower Room";
-            bgcolor = "white";
-        }
-        label = "Mt Ebih";
-        bgcolor = "lightgrey";
-    }
-    subgraph cluster_Giguna_Breach {
-        clusterrank="local";
+        Ebih__Base_Camp__East_11 [label = " ", pos = "111.42,-20.8!"];
+        Ebih__Base_Camp__East_12 [label = " ", pos = "111.42,-23.6!"];
+        Ebih__Base_Camp__Staircase [label = " ", pos = "109.44,-23.8!"];
+        Ebih__Base_Camp__Save_Point [label = " ", pos = "106.2,-25.2!"];
+        Ebih__Base_Camp__Bunker_Entry [label = " ", pos = "108.72,-25.4!"];
+        Ebih__Base_Camp__Lake_Access [label = " ", pos = "111.42,-25.4!"];
+        Ebih__Base_Camp__Behind_Vehicle [label = " ", pos = "103.68,-25.4!"];
+        Ebih__Base_Camp__Building_Entry [label = " ", pos = "104.4,-24.4!"];
+        Ebih__Base_Camp__Tent_Entry [label = " ", pos = "101.88,-25.4!"];
+        Ebih__Base_Camp__West_13 [label = " ", pos = "100.98,-25.2!"];
+        Ebih__Base_Camp__West_11 [label = " ", pos = "100.98,-21.2!"];
+        Ebih__Base_Camp__West_Midair [label = " ", pos = "102.06,-22.0!"];
+        Ebih__Base_Camp__West_12 [label = " ", pos = "100.98,-23.0!"];
+        Ebih__Base_Camp__Left_Platform [label = " ", pos = "103.32,-23.6!"];
+        Ebih__Base_Camp__Left_Platform_Moved [label = " ", pos = "105.84,-23.6!"];
+        Ebih__Base_Camp__Top_Platform [label = " ", pos = "106.2,-23.0!"];
+        Ebih__Bunker_Interior__Entry [label = " ", pos = "108.36,-25.6!"];
+        Ebih__Bunker_Interior__Desk [label = " ", pos = "109.8,-25.6!"];
+        Ebih__Building_Interior__Entry [label = " ", pos = "104.4,-24.4!"];
+        Ebih__Building_Interior__Corner [label = " ", pos = "102.6,-24.4!"];
+        Ebih__Tent_Interior__Entry [label = " ", pos = "101.88,-25.6!"];
+        Ebih__Tent_Interior__Desk [label = " ", pos = "102.24,-25.6!"];
+        Ebih__By_Garage__East_13 [label = " ", pos = "100.62,-25.2!"];
+        Ebih__By_Garage__East_Platform [label = " ", pos = "99.0,-24.2!"];
+        Ebih__By_Garage__Crawlspace_Opening [label = " ", pos = "98.64,-24.0!"];
+        Ebih__By_Garage__Crawlspace [label = " ", fillcolor = "8"];
+        Ebih__By_Garage__Outcropping [label = " ", pos = "98.28,-23.6!"];
+        Ebih__By_Garage__East_Bush [label = " ", pos = "96.48,-23.8!"];
+        Ebih__By_Garage__Lower_Platform [label = " ", pos = "95.04,-24.6!"];
+        Ebih__By_Garage__West_Bush [label = " ", pos = "94.68,-23.8!"];
+        Ebih__By_Garage__West_12 [label = " ", pos = "93.78,-23.6!"];
+        Ebih__By_Garage__West_13 [label = " ", pos = "93.78,-25.6!"];
+        Ebih__By_Garage__Garage_Entry [label = " ", pos = "97.92,-25.6!"];
+        Ebih__By_Garage__East_12 [label = " ", pos = "100.62,-23.0!"];
+        Ebih__Garage__Entry [label = " ", pos = "97.92,-25.6!"];
+        Ebih__Garage__Boxes [label = " ", pos = "96.48,-25.6!"];
+        Ebih__Grid_25_10_12__East_12 [label = " ", pos = "93.42,-23.6!"];
+        Ebih__Grid_25_10_12__Bush [label = " ", pos = "92.16,-23.0!"];
+        Ebih__Grid_25_10_12__West_12 [label = " ", pos = "90.18,-23.4!"];
+        Ebih__Grid_25_10_12__Below_Bush [label = " ", pos = "91.44,-23.4!"];
+        Ebih__Grid_25_10_12__Mid_Ledge [label = " ", pos = "91.08,-22.2!"];
+        Ebih__Grid_25_10_12__Door_Left [label = " ", pos = "92.16,-21.4!"];
+        Ebih__Grid_25_10_12__Top_Platform [label = " ", pos = "91.44,-21.0!"];
+        Ebih__Grid_25_10_12__West_11 [label = " ", pos = "90.18,-21.4!"];
+        Ebih__Grid_25_10_12__West_10 [label = " ", pos = "90.18,-19.4!"];
+        Ebih__Grid_25_10_12__Door [label = " ", pos = "92.88,-21.4!"];
+        Ebih__Grid_25_10_12__East_11 [label = " ", pos = "93.42,-21.4!"];
+        Ebih__Grid_25_10_12__East_10 [label = " ", pos = "93.42,-19.4!"];
+        Ebih__Grid_25_10_12__Hidden_Bush [label = " ", pos = "93.06,-19.9!"];
+        Ebih__Waterfall__East_10 [label = " ", pos = "89.82,-19.4!"];
+        Ebih__Waterfall__East_Ledge [label = " ", pos = "89.1,-20.0!"];
+        Ebih__Waterfall__East_11 [label = " ", pos = "89.82,-21.4!"];
+        Ebih__Waterfall__Near_East_Tree [label = " ", pos = "87.12,-20.4!"];
+        Ebih__Waterfall__Waterfall_Right [label = " ", pos = "85.68,-21.2!"];
+        Ebih__Waterfall__Alcove_Right [label = " ", pos = "84.06,-21.6!"];
+        Ebih__Waterfall__Waterfall_Center_Right [label = " ", pos = "83.7,-20.6!"];
+        Ebih__Waterfall__Waterfall_Center_Center [label = " ", pos = "82.8,-20.6!"];
+        Ebih__Waterfall__Waterfall_Center_Left [label = " ", pos = "81.0,-21.0!"];
+        Ebih__Waterfall__Alcove_Left [label = " ", pos = "81.18,-21.6!"];
+        Ebih__Waterfall__Alcove [label = " ", pos = "82.8,-21.4!"];
+        Ebih__Waterfall__Under_Waterfall [label = " ", pos = "80.1,-21.6!"];
+        Ebih__Waterfall__Waterfall_Left [label = " ", pos = "79.2,-21.0!"];
+        Ebih__Waterfall__Wall_Right [label = " ", pos = "77.04,-21.4!"];
+        Ebih__Waterfall__Lower_West_Tree [label = " ", pos = "78.84,-19.8!"];
+        Ebih__Waterfall__West_Lower_Path [label = " ", pos = "78.12,-19.4!"];
+        Ebih__Waterfall__West_10 [label = " ", pos = "75.78,-19.4!"];
+        Ebih__Waterfall__West_9 [label = " ", pos = "75.78,-17.6!"];
+        Ebih__Waterfall__West_Climb [label = " ", pos = "78.12,-17.6!"];
+        Ebih__Waterfall__Ledge_Below_Hole [label = " ", pos = "77.94,-16.6!"];
+        Ebih__Waterfall__Below_Left_Switch [label = " ", pos = "76.5,-16.4!"];
+        Ebih__Waterfall__West_8 [label = " ", pos = "75.78,-15.8!"];
+        Ebih__Waterfall__West_Door_Left [label = " ", pos = "76.68,-15.8!"];
+        Ebih__Waterfall__West_Door [label = " ", pos = "77.58,-15.8!"];
+        Ebih__Waterfall__West_Door_Right [label = " ", pos = "78.12,-15.8!"];
+        Ebih__Waterfall__Middle_West_Tree [label = " ", pos = "78.3,-16.2!"];
+        Ebih__Waterfall__West_Main_Path [label = " ", pos = "78.84,-15.6!"];
+        Ebih__Waterfall__Cave_Entrance [label = " ", pos = "81.36,-16.6!"];
+        Ebih__Waterfall__Center_Main_Path [label = " ", pos = "82.44,-15.6!"];
+        Ebih__Waterfall__Big_Tree [label = " ", pos = "84.96,-15.8!"];
+        Ebih__Waterfall__Below_Tree [label = " ", pos = "85.68,-16.6!"];
+        Ebih__Waterfall__Platform [label = " ", pos = "86.4,-16.6!"];
+        Ebih__Waterfall__East_8 [label = " ", pos = "89.82,-15.6!"];
+        Ebih__Waterfall__East_7 [label = " ", pos = "93.42,-13.6!"];
+        Ebih__Waterfall__Top_Waterfall [label = " ", pos = "85.5,-14.0!"];
+        Ebih__Waterfall__West_7 [label = " ", pos = "79.38,-13.6!"];
+        Ebih__Ebih_West__East_10 [label = " ", pos = "75.42,-19.4!"];
+        Ebih__Ebih_West__Mid_Save [label = " ", pos = "73.44,-19.0!"];
+        Ebih__Ebih_West__Alcove_Entrance [label = " ", pos = "71.64,-19.6!"];
+        Ebih__Ebih_West__Alcove [label = " ", pos = "68.76,-19.6!"];
+        Ebih__Ebih_West__Above_Alcove [label = " ", pos = "70.56,-18.8!"];
+        Ebih__Ebih_West__East_9 [label = " ", pos = "75.42,-17.6!"];
+        Ebih__Ebih_West__Block_Left [label = " ", pos = "73.26,-20.2!"];
+        Ebih__Ebih_West__East_7 [label = " ", pos = "75.42,-13.6!"];
+        Ebih__Ebih_West__Above_Chute [label = " ", pos = "74.88,-13.6!"];
+        Ebih__Ebih_West__Upper_Save [label = " ", pos = "73.8,-13.2!"];
+        Ebih__Ebih_West__Medium_High_Platform [label = " ", pos = "73.08,-12.6!"];
+        Ebih__Ebih_West__High_Platform [label = " ", pos = "73.44,-12.0!"];
+        Ebih__Ebih_West__High_Ledge [label = " ", pos = "74.16,-11.6!"];
+        Ebih__Ebih_West__East_6 [label = " ", pos = "75.42,-11.2!"];
+        Ebih__Ebih_West__East_8 [label = " ", pos = "75.42,-15.8!"];
+        Ebih__Ebih_West__Middle_Middle [label = " ", pos = "74.52,-15.6!"];
+        Ebih__Ebih_West__Middle_Cliff [label = " ", pos = "72.36,-16.0!"];
+        Ebih__Ebih_West__Giguna_Pillar [label = " ", pos = "69.3,-17.0!"];
+        Ebih__Ebih_West__West_9 [label = " ", pos = "68.58,-17.6!"];
+        Ebih__Cave__Entry [label = " ", fillcolor = "8"];
+        Ebih__Ebih_East__West_8 [label = " ", pos = "90.18,-15.6!"];
+        Ebih__Ebih_East__Moving_Platform [label = " ", pos = "91.26,-15.6!"];
+        Ebih__Ebih_East__Ledge_End [label = " ", pos = "93.6,-16.0!"];
+        Ebih__Ebih_East__Lower_Moving_Platform [label = " ", pos = "94.14,-17.4!"];
+        Ebih__Ebih_East__Corner [label = " ", pos = "95.04,-17.6!"];
+        Ebih__Ebih_East__Dispenser [label = " ", pos = "95.4,-17.6!"];
+        Ebih__Ebih_East__East_Ledge [label = " ", pos = "97.56,-15.4!"];
+        Ebih__Ebih_East__Middle_Platform [label = " ", pos = "96.66,-14.6!"];
+        Ebih__Ebih_East__Upper_Ledge [label = " ", pos = "95.04,-13.6!"];
+        Ebih__Ebih_East__West_7 [label = " ", pos = "93.78,-13.6!"];
+        Ebih__Ebih_East__East_Hill [label = " ", pos = "95.4,-15.2!"];
+        Ebih__Ebih_East__East_9 [label = " ", pos = "97.02,-16.6!"];
+        Ebih__Grid_21_1_5__West_6 [label = " ", pos = "75.78,-11.2!"];
+        Ebih__Grid_21_1_5__Portal_Stand [label = " ", pos = "77.4,-11.4!"];
+        Ebih__Grid_21_1_5__East_6 [label = " ", pos = "79.02,-11.4!"];
+        Ebih__Boss_Room__West_6 [label = " ", pos = "79.38,-11.4!"];
+        Ebih__Boss_Room__Boss [label = " ", pos = "82.08,-9.8!"];
+        Ebih__Boss_Room__Past_Boss [label = " ", pos = "83.16,-11.4!"];
+        Ebih__Boss_Room__Lower_Tree [label = " ", pos = "84.6,-10.4!"];
+        Ebih__Boss_Room__Lower_Ledge [label = " ", pos = "85.32,-10.0!"];
+        Ebih__Boss_Room__East_6 [label = " ", pos = "86.22,-10.0!"];
+        Ebih__Boss_Room__East_4 [label = " ", pos = "86.22,-7.6!"];
+        Ebih__Boss_Room__East_Ledge [label = " ", pos = "85.68,-9.0!"];
+        Ebih__Boss_Room__Upper_Tree [label = " ", pos = "84.78,-8.6!"];
+        Ebih__Boss_Room__High_Platform [label = " ", pos = "83.16,-8.2!"];
+        Ebih__Boss_Room__West_5 [label = " ", pos = "79.38,-8.6!"];
+        Ebih__Drone_Room__West_6 [label = " ", pos = "86.58,-10.0!"];
+        Ebih__Drone_Room__West_4 [label = " ", pos = "86.58,-7.6!"];
+        Ebih__Drone_Room__Pit_Left [label = " ", pos = "87.12,-10.8!"];
+        Ebih__Drone_Room__Portal [label = " ", pos = "88.2,-11.2!"];
+        Ebih__Drone_Room__Item [label = " ", pos = "88.92,-11.4!"];
+        Ebih__Drone_Room__Middle_Platform [label = " ", pos = "87.84,-10.2!"];
+        Ebih__Drone_Room__Portal_Exit [label = " ", pos = "88.2,-8.9!"];
+        Ebih__Drone_Room__Moving_Platform [label = " ", pos = "88.2,-8.0!"];
+        Ebih__Drone_Room__Left_Platform [label = " ", pos = "87.48,-8.0!"];
+        Ebih__Drone_Room__Tree [label = " ", pos = "88.92,-9.2!"];
+        Ebih__Drone_Room__East_4 [label = " ", pos = "89.82,-7.6!"];
+        Ebih__Grid_25_2_6__West_4 [label = " ", pos = "90.18,-7.6!"];
+        Ebih__Grid_25_2_6__Pit [label = " ", pos = "91.08,-11.4!"];
+        Ebih__Grid_26_10_11__West_11 [label = " ", pos = "93.78,-21.4!"];
+        Ebih__Grid_26_10_11__Middle_Bottom [label = " ", pos = "95.04,-21.2!"];
+        Ebih__Grid_26_10_11__Under_Ledge [label = " ", pos = "95.76,-21.2!"];
+        Ebih__Grid_26_10_11__Ledge [label = " ", pos = "96.12,-20.8!"];
+        Ebih__Grid_26_10_11__Middle_Platform [label = " ", pos = "95.04,-20.8!"];
+        Ebih__Grid_26_10_11__Upper_Platform [label = " ", pos = "95.22,-20.2!"];
+        Ebih__Grid_26_10_11__West_10 [label = " ", pos = "93.78,-19.4!"];
+        Ebih__Grid_26_10_11__Cliff [label = " ", pos = "95.76,-19.6!"];
+        Ebih__Grid_26_10_11__East_10 [label = " ", pos = "97.02,-19.6!"];
+        Ebih__Observation_Tower_Room__West_9 [label = " ", pos = "97.38,-16.6!"];
+        Ebih__Observation_Tower_Room__Tower_Top [label = " ", pos = "99.0,-17.8!"];
+        Ebih__Observation_Tower_Room__Tower_Bottom [label = " ", pos = "99.0,-19.8!"];
+        Ebih__Observation_Tower_Room__Cliff [label = " ", pos = "99.54,-20.2!"];
+        Ebih__Observation_Tower_Room__West_10 [label = " ", pos = "97.38,-19.6!"];
+        Ebih__Observation_Tower_Room__East_11 [label = " ", pos = "100.62,-21.4!"];
         node[fillcolor="4"];
-        subgraph cluster_Giguna_Breach__Peak {
-            Giguna_Breach__Peak__Save_Point [label = " ", pos = "55.8,-13.0!"];
-            label = "Peak";
-            bgcolor = "white";
-        }
-        label = "Giguna Breach";
-        bgcolor = "lightgrey";
-    }
-    subgraph cluster_Giguna {
-        clusterrank="local";
+        Giguna_Breach__Peak__Save_Point [label = " ", pos = "55.8,-71.4!"];
         node[fillcolor="5"];
-        subgraph cluster_Giguna__Giguna_Northeast {
-            Giguna__Giguna_Northeast__East_9 [label = " ", pos = "68.22,-17.6!"];
-            Giguna__Giguna_Northeast__Inner_Wall [label = " ", pos = "67.32,-18.0!"];
-            Giguna__Giguna_Northeast__Crow_Eating [label = " ", pos = "64.44,-17.8!"];
-            Giguna__Giguna_Northeast__Save_Point [label = " ", pos = "63.0,-19.0!"];
-            Giguna__Giguna_Northeast__Step [label = " ", pos = "62.28,-18.8!"];
-            Giguna__Giguna_Northeast__West_10 [label = " ", pos = "61.38,-19.0!"];
-            Giguna__Giguna_Northeast__West_9 [label = " ", pos = "61.38,-17.6!"];
-            Giguna__Giguna_Northeast__Gate_Left [label = " ", pos = "64.08,-19.2!"];
-            Giguna__Giguna_Northeast__Gate_Vent [label = " ", pos = "64.8,-18.2!"];
-            Giguna__Giguna_Northeast__Gate_Button [label = " ", pos = "66.6,-19.6!"];
-            Giguna__Giguna_Northeast__Gate_Right [label = " ", pos = "67.5,-19.2!"];
-            Giguna__Giguna_Northeast__Shaft_Bottom [label = " ", pos = "67.68,-21.2!"];
-            Giguna__Giguna_Northeast__East_11 [label = " ", pos = "68.22,-21.4!"];
-            Giguna__Giguna_Northeast__Right_Column [label = " ", pos = "64.44,-21.0!"];
-            Giguna__Giguna_Northeast__Switch [label = " ", pos = "63.72,-21.6!"];
-            Giguna__Giguna_Northeast__Door [label = " ", pos = "63.0,-21.0!"];
-            Giguna__Giguna_Northeast__Vault [label = " ", pos = "61.92,-21.6!"];
-            label = "Giguna Northeast";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Carnelian {
-            Giguna__Carnelian__East_10 [label = " ", pos = "61.02,-19.0!"];
-            Giguna__Carnelian__East_Cliff [label = " ", pos = "58.86,-19.4!"];
-            Giguna__Carnelian__Upper_Susar [label = " ", pos = "57.06,-19.2!"];
-            Giguna__Carnelian__Middle_Platforms [label = " ", pos = "57.96,-20!"];
-            Giguna__Carnelian__Switch [label = " ", pos = "58.32,-21.4!"];
-            Giguna__Carnelian__Door [label = " ", pos = "59.04,-21.4!"];
-            Giguna__Carnelian__Vault [label = " ", pos = "60.12,-21.2!"];
-            Giguna__Carnelian__Rock [label = " ", pos = "57.6,-20.8!"];
-            Giguna__Carnelian__Lower_Susar [label = " ", pos = "56.16,-21.0!"];
-            Giguna__Carnelian__Upper_Path [label = " ", pos = "56.16,-19.2!"];
-            Giguna__Carnelian__West_Ledge [label = " ", pos = "55.08,-20.2!"];
-            Giguna__Carnelian__West_10 [label = " ", pos = "54.18,-19.4!"];
-            label = "Carnelian";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__West_Caverns {
-            Giguna__West_Caverns__East_10 [label = " ", pos = "53.82,-19.4!"];
-            Giguna__West_Caverns__East_Platform [label = " ", pos = "52.2,-20.2!"];
-            Giguna__West_Caverns__Tunnel_Entrance [label = " ", pos = "52.38,-21.4!"];
-            Giguna__West_Caverns__Small_Platform [label = " ", pos = "51.12,-20.4!"];
-            Giguna__West_Caverns__Higher_Ledge [label = " ", pos = "50.76,-19.8!"];
-            Giguna__West_Caverns__Column_2_Top [label = " ", pos = "50.4,-18.6!"];
-            Giguna__West_Caverns__Top_Gap_Right [label = " ", pos = "48.96,-19.0!"];
-            Giguna__West_Caverns__Top_Gap_Left [label = " ", pos = "48.24,-19.2!"];
-            Giguna__West_Caverns__Column_1_Top_Right [label = " ", pos = "48.06,-18.6!"];
-            Giguna__West_Caverns__Column_1_Top_Left [label = " ", pos = "46.8,-18.6!"];
-            Giguna__West_Caverns__Cache [label = " ", pos = "47.16,-19.6!"];
-            Giguna__West_Caverns__Bush [label = " ", pos = "45.0,-19.6!"];
-            Giguna__West_Caverns__Tunnel_Bottom [label = " ", pos = "53.28,-22.8!"];
-            Giguna__West_Caverns__Tunnel_Fork [label = " ", pos = "52.92,-23.4!"];
-            Giguna__West_Caverns__East_Susar [label = " ", pos = "53.28,-23.4!"];
-            Giguna__West_Caverns__East_12 [label = " ", pos = "53.82,-23.4!"];
-            Giguna__West_Caverns__East_13 [label = " ", pos = "53.82,-25.4!"];
-            label = "West Caverns";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Wasteland {
-            Giguna__Wasteland__West_12 [label = " ", pos = "54.18,-23.4!"];
-            Giguna__Wasteland__Upper_Cliff [label = " ", pos = "55.08,-23.8!"];
-            Giguna__Wasteland__West_13 [label = " ", pos = "54.18,-25.4!"];
-            Giguna__Wasteland__Middle_Path [label = " ", pos = "55.44,-25.2!"];
-            Giguna__Wasteland__Middle_Cliff [label = " ", pos = "56.52,-24.8!"];
-            Giguna__Wasteland__Lower_Path_Right [label = " ", pos = "56.34,-26.6!"];
-            Giguna__Wasteland__Lower_Path_Left [label = " ", pos = "55.44,-26.6!"];
-            Giguna__Wasteland__Lower_Cliff [label = " ", pos = "56.88,-25.6!"];
-            Giguna__Wasteland__West_14 [label = " ", pos = "54.18,-27.4!"];
-            label = "Wasteland";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Giguna_Base {
-            Giguna__Giguna_Base__East_14 [label = " ", pos = "53.82,-27.4!"];
-            Giguna__Giguna_Base__Stone_Knob [label = " ", pos = "52.2,-27.8!"];
-            Giguna__Giguna_Base__Upper_Cliff [label = " ", pos = "51.12,-27.2!"];
-            Giguna__Giguna_Base__Right_Pillar [label = " ", pos = "50.22,-27.2!"];
-            Giguna__Giguna_Base__Left_Pillar [label = " ", pos = "48.6,-27.2!"];
-            Giguna__Giguna_Base__Ruin [label = " ", pos = "49.5,-28!"];
-            Giguna__Giguna_Base__Middle_Platform [label = " ", pos = "52.2,-29.4!"];
-            Giguna__Giguna_Base__Kari [label = " ", pos = "51.84,-31.0!"];
-            Giguna__Giguna_Base__Building_Entry [label = " ", pos = "50.76,-31.0!"];
-            Giguna__Giguna_Base__West_Grate [label = " ", pos = "47.52,-29.6!"];
-            Giguna__Giguna_Base__Staircase_Bottom [label = " ", pos = "47.52,-31.4!"];
-            Giguna__Giguna_Base__Table [label = " ", pos = "49.32,-32!"];
-            Giguna__Giguna_Base__Save_Point [label = " ", pos = "48.6,-31.6!"];
-            Giguna__Giguna_Base__West_16 [label = " ", pos = "46.98,-31.6!"];
-            label = "Giguna Base";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Building_Interior {
-            Giguna__Building_Interior__Entry [label = " ", pos = "50.76,-31.0!"];
-            Giguna__Building_Interior__Bookshelf [label = " ", pos = "50.04,-30.2!"];
-            label = "Building Interior";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Ruins_East {
-            Giguna__Ruins_East__East_9 [label = " ", pos = "61.02,-17.6!"];
-            Giguna__Ruins_East__Bottom_Rock [label = " ", pos = "58.68,-17.0!"];
-            Giguna__Ruins_East__West_9 [label = " ", pos = "57.78,-17.2!"];
-            Giguna__Ruins_East__Cliff [label = " ", pos = "59.76,-15.2!"];
-            Giguna__Ruins_East__Ledge [label = " ", pos = "59.58,-14.8!"];
-            Giguna__Ruins_East__Small_Passage [label = " ", pos = "59.22,-14.8!"];
-            Giguna__Ruins_East__West_8 [label = " ", pos = "57.78,-15.0!"];
-            Giguna__Ruins_East__Pillar [label = " ", pos = "58.5,-12.8!"];
-            Giguna__Ruins_East__West_7 [label = " ", pos = "57.78,-13.6!"];
-            Giguna__Ruins_East__Way_Up_High [label = " ", pos = "59.76,-10.4!"];
-            label = "Ruins East";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Ruins_Center {
-            Giguna__Ruins_Center__East_8 [label = " ", pos = "57.42,-15.0!"];
-            Giguna__Ruins_Center__Tablet [label = " ", pos = "56.88,-15.0!"];
-            Giguna__Ruins_Center__East_9 [label = " ", pos = "57.42,-17.2!"];
-            Giguna__Ruins_Center__Wall_Bottom [label = " ", pos = "54.72,-16.8!"];
-            Giguna__Ruins_Center__Wall_Top [label = " ", pos = "54.72,-16.2!"];
-            Giguna__Ruins_Center__Center_Top [label = " ", pos = "54.36,-15.4!"];
-            Giguna__Ruins_Center__West_Platform_Right [label = " ", pos = "53.28,-16.2!"];
-            Giguna__Ruins_Center__West_Platform_Left [label = " ", pos = "51.84,-16.2!"];
-            Giguna__Ruins_Center__West_9 [label = " ", pos = "50.58,-17.2!"];
-            label = "Ruins Center";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Ruins_West {
-            Giguna__Ruins_West__East_9 [label = " ", pos = "50.22,-17.2!"];
-            Giguna__Ruins_West__Save_Point [label = " ", pos = "48.6,-17.4!"];
-            Giguna__Ruins_West__Platform [label = " ", pos = "48.6,-17.0!"];
-            Giguna__Ruins_West__Nook [label = " ", pos = "48.24,-16.0!"];
-            Giguna__Ruins_West__Lower_Ledge [label = " ", pos = "48.24,-14.8!"];
-            Giguna__Ruins_West__Upper_Ledge [label = " ", pos = "48.96,-12.8!"];
-            Giguna__Ruins_West__East_7 [label = " ", pos = "50.22,-13.4!"];
-            label = "Ruins West";
-            bgcolor = "white";
-        }
-        subgraph cluster_Giguna__Ruins_Top {
-            Giguna__Ruins_Top__West_7 [label = " ", pos = "50.58,-13.4!"];
-            Giguna__Ruins_Top__West_Door [label = " ", pos = "51.48,-13.2!"];
-            Giguna__Ruins_Top__West_Tower [label = " ", pos = "51.48,-12.0!"];
-            Giguna__Ruins_Top__Entryway [label = " ", pos = "52.02,-13.6!"];
-            Giguna__Ruins_Top__Portal_Left [label = " ", pos = "55.08,-13.6!"];
-            Giguna__Ruins_Top__Small_Ledge [label = " ", pos = "54.9,-13.0!"];
-            Giguna__Ruins_Top__Portal [label = " ", pos = "55.8,-13.4!"];
-            Giguna__Ruins_Top__Interior_Ledge [label = " ", pos = "56.34,-12.4!"];
-            Giguna__Ruins_Top__Upper_Tunnel [label = " ", pos = "55.8,-11.6!"];
-            Giguna__Ruins_Top__Flask [label = " ", pos = "55.08,-12.0!"];
-            Giguna__Ruins_Top__East_Door [label = " ", pos = "56.52,-13.6!"];
-            Giguna__Ruins_Top__East_7 [label = " ", pos = "57.42,-13.6!"];
-            label = "Ruins Top";
-            bgcolor = "white";
-        }
-        label = "Giguna Steppes";
-        bgcolor = "lightgrey";
-    }
-    subgraph cluster_Glacier {
-        clusterrank="local";
+        Giguna__Giguna_Northeast__East_9 [label = " ", pos = "68.22,-17.6!"];
+        Giguna__Giguna_Northeast__Inner_Wall [label = " ", pos = "67.32,-18.0!"];
+        Giguna__Giguna_Northeast__Crow_Eating [label = " ", pos = "64.44,-17.8!"];
+        Giguna__Giguna_Northeast__Save_Point [label = " ", pos = "63.0,-19.0!"];
+        Giguna__Giguna_Northeast__Step [label = " ", pos = "62.28,-18.8!"];
+        Giguna__Giguna_Northeast__West_10 [label = " ", pos = "61.38,-19.0!"];
+        Giguna__Giguna_Northeast__West_9 [label = " ", pos = "61.38,-17.6!"];
+        Giguna__Giguna_Northeast__Gate_Left [label = " ", pos = "64.08,-19.2!"];
+        Giguna__Giguna_Northeast__Gate_Vent [label = " ", pos = "64.8,-18.2!"];
+        Giguna__Giguna_Northeast__Gate_Button [label = " ", pos = "66.6,-19.6!"];
+        Giguna__Giguna_Northeast__Gate_Right [label = " ", pos = "67.5,-19.2!"];
+        Giguna__Giguna_Northeast__Shaft_Bottom [label = " ", pos = "67.68,-21.2!"];
+        Giguna__Giguna_Northeast__East_11 [label = " ", pos = "68.22,-21.4!"];
+        Giguna__Giguna_Northeast__Right_Column [label = " ", pos = "64.44,-21.0!"];
+        Giguna__Giguna_Northeast__Switch [label = " ", pos = "63.72,-21.6!"];
+        Giguna__Giguna_Northeast__Door [label = " ", pos = "63.0,-21.0!"];
+        Giguna__Giguna_Northeast__Vault [label = " ", pos = "61.92,-21.6!"];
+        Giguna__Carnelian__East_10 [label = " ", pos = "61.02,-19.0!"];
+        Giguna__Carnelian__East_Cliff [label = " ", pos = "58.86,-19.4!"];
+        Giguna__Carnelian__Upper_Susar [label = " ", pos = "57.06,-19.2!"];
+        Giguna__Carnelian__Middle_Platforms [label = " ", pos = "57.96,-20.0!"];
+        Giguna__Carnelian__Switch [label = " ", pos = "58.32,-21.4!"];
+        Giguna__Carnelian__Door [label = " ", pos = "59.04,-21.4!"];
+        Giguna__Carnelian__Vault [label = " ", pos = "60.12,-21.2!"];
+        Giguna__Carnelian__Rock [label = " ", pos = "57.6,-20.8!"];
+        Giguna__Carnelian__Lower_Susar [label = " ", pos = "56.16,-21.0!"];
+        Giguna__Carnelian__Upper_Path [label = " ", pos = "56.16,-19.2!"];
+        Giguna__Carnelian__West_Ledge [label = " ", pos = "55.08,-20.2!"];
+        Giguna__Carnelian__West_10 [label = " ", pos = "54.18,-19.4!"];
+        Giguna__West_Caverns__East_10 [label = " ", pos = "53.82,-19.4!"];
+        Giguna__West_Caverns__East_Platform [label = " ", pos = "52.2,-20.2!"];
+        Giguna__West_Caverns__Tunnel_Entrance [label = " ", pos = "52.38,-21.4!"];
+        Giguna__West_Caverns__Small_Platform [label = " ", pos = "51.12,-20.4!"];
+        Giguna__West_Caverns__Higher_Ledge [label = " ", pos = "50.76,-19.8!"];
+        Giguna__West_Caverns__Column_2_Top [label = " ", pos = "50.4,-18.6!"];
+        Giguna__West_Caverns__Top_Gap_Right [label = " ", pos = "48.96,-19.0!"];
+        Giguna__West_Caverns__Top_Gap_Left [label = " ", pos = "48.24,-19.2!"];
+        Giguna__West_Caverns__Column_1_Top_Right [label = " ", pos = "48.06,-18.6!"];
+        Giguna__West_Caverns__Column_1_Top_Left [label = " ", pos = "46.8,-18.6!"];
+        Giguna__West_Caverns__Cache [label = " ", pos = "47.16,-19.6!"];
+        Giguna__West_Caverns__Bush [label = " ", pos = "45.0,-19.6!"];
+        Giguna__West_Caverns__Tunnel_Bottom [label = " ", pos = "53.28,-22.8!"];
+        Giguna__West_Caverns__Tunnel_Fork [label = " ", pos = "52.92,-23.4!"];
+        Giguna__West_Caverns__East_Susar [label = " ", pos = "53.28,-23.4!"];
+        Giguna__West_Caverns__East_12 [label = " ", pos = "53.82,-23.4!"];
+        Giguna__West_Caverns__East_13 [label = " ", pos = "53.82,-25.4!"];
+        Giguna__Wasteland__West_12 [label = " ", pos = "54.18,-23.4!"];
+        Giguna__Wasteland__Upper_Cliff [label = " ", pos = "55.08,-23.8!"];
+        Giguna__Wasteland__West_13 [label = " ", pos = "54.18,-25.4!"];
+        Giguna__Wasteland__Middle_Path [label = " ", pos = "55.44,-25.2!"];
+        Giguna__Wasteland__Middle_Cliff [label = " ", pos = "56.52,-24.8!"];
+        Giguna__Wasteland__Lower_Path_Right [label = " ", pos = "56.34,-26.6!"];
+        Giguna__Wasteland__Lower_Path_Left [label = " ", pos = "55.44,-26.6!"];
+        Giguna__Wasteland__Lower_Cliff [label = " ", pos = "56.88,-25.6!"];
+        Giguna__Wasteland__West_14 [label = " ", pos = "54.18,-27.4!"];
+        Giguna__Giguna_Base__East_14 [label = " ", pos = "53.82,-27.4!"];
+        Giguna__Giguna_Base__Stone_Knob [label = " ", pos = "52.2,-27.8!"];
+        Giguna__Giguna_Base__Upper_Cliff [label = " ", pos = "51.12,-27.2!"];
+        Giguna__Giguna_Base__Right_Pillar [label = " ", pos = "50.22,-27.2!"];
+        Giguna__Giguna_Base__Left_Pillar [label = " ", pos = "48.6,-27.2!"];
+        Giguna__Giguna_Base__Ruin [label = " ", pos = "49.5,-28.0!"];
+        Giguna__Giguna_Base__Middle_Platform [label = " ", pos = "52.2,-29.4!"];
+        Giguna__Giguna_Base__Kari [label = " ", pos = "51.84,-31.0!"];
+        Giguna__Giguna_Base__Building_Entry [label = " ", pos = "50.76,-31.0!"];
+        Giguna__Giguna_Base__West_Grate [label = " ", pos = "47.52,-29.6!"];
+        Giguna__Giguna_Base__Staircase_Bottom [label = " ", pos = "47.52,-31.4!"];
+        Giguna__Giguna_Base__Table [label = " ", pos = "49.32,-32.0!"];
+        Giguna__Giguna_Base__Save_Point [label = " ", pos = "48.6,-31.6!"];
+        Giguna__Giguna_Base__West_16 [label = " ", pos = "46.98,-31.6!"];
+        Giguna__Building_Interior__Entry [label = " ", pos = "50.76,-31.0!"];
+        Giguna__Building_Interior__Bookshelf [label = " ", pos = "50.04,-30.2!"];
+        Giguna__Ruins_East__East_9 [label = " ", pos = "61.02,-17.6!"];
+        Giguna__Ruins_East__Bottom_Rock [label = " ", pos = "58.68,-17.0!"];
+        Giguna__Ruins_East__West_9 [label = " ", pos = "57.78,-17.2!"];
+        Giguna__Ruins_East__Cliff [label = " ", pos = "59.76,-15.2!"];
+        Giguna__Ruins_East__Ledge [label = " ", pos = "59.58,-14.8!"];
+        Giguna__Ruins_East__Small_Passage [label = " ", pos = "59.22,-14.8!"];
+        Giguna__Ruins_East__West_8 [label = " ", pos = "57.78,-15.0!"];
+        Giguna__Ruins_East__Pillar [label = " ", pos = "58.5,-12.8!"];
+        Giguna__Ruins_East__West_7 [label = " ", pos = "57.78,-13.6!"];
+        Giguna__Ruins_East__Way_Up_High [label = " ", pos = "59.76,-10.4!"];
+        Giguna__Ruins_Center__East_8 [label = " ", pos = "57.42,-15.0!"];
+        Giguna__Ruins_Center__Tablet [label = " ", pos = "56.88,-15.0!"];
+        Giguna__Ruins_Center__East_9 [label = " ", pos = "57.42,-17.2!"];
+        Giguna__Ruins_Center__Wall_Bottom [label = " ", pos = "54.72,-16.8!"];
+        Giguna__Ruins_Center__Wall_Top [label = " ", pos = "54.72,-16.2!"];
+        Giguna__Ruins_Center__Center_Top [label = " ", pos = "54.36,-15.4!"];
+        Giguna__Ruins_Center__West_Platform_Right [label = " ", pos = "53.28,-16.2!"];
+        Giguna__Ruins_Center__West_Platform_Left [label = " ", pos = "51.84,-16.2!"];
+        Giguna__Ruins_Center__West_9 [label = " ", pos = "50.58,-17.2!"];
+        Giguna__Ruins_West__East_9 [label = " ", pos = "50.22,-17.2!"];
+        Giguna__Ruins_West__Save_Point [label = " ", pos = "48.6,-17.4!"];
+        Giguna__Ruins_West__Platform [label = " ", pos = "48.6,-17.0!"];
+        Giguna__Ruins_West__Nook [label = " ", pos = "48.24,-16.0!"];
+        Giguna__Ruins_West__Lower_Ledge [label = " ", pos = "48.24,-14.8!"];
+        Giguna__Ruins_West__Upper_Ledge [label = " ", pos = "48.96,-12.8!"];
+        Giguna__Ruins_West__East_7 [label = " ", pos = "50.22,-13.4!"];
+        Giguna__Ruins_Top__West_7 [label = " ", pos = "50.58,-13.4!"];
+        Giguna__Ruins_Top__West_Door [label = " ", pos = "51.48,-13.2!"];
+        Giguna__Ruins_Top__West_Tower [label = " ", pos = "51.48,-12.0!"];
+        Giguna__Ruins_Top__Entryway [label = " ", pos = "52.02,-13.6!"];
+        Giguna__Ruins_Top__Portal_Left [label = " ", pos = "55.08,-13.6!"];
+        Giguna__Ruins_Top__Small_Ledge [label = " ", pos = "54.9,-13.0!"];
+        Giguna__Ruins_Top__Portal [label = " ", pos = "55.8,-13.4!"];
+        Giguna__Ruins_Top__Interior_Ledge [label = " ", pos = "56.34,-12.4!"];
+        Giguna__Ruins_Top__Upper_Tunnel [label = " ", pos = "55.8,-11.6!"];
+        Giguna__Ruins_Top__Flask [label = " ", pos = "55.08,-12.0!"];
+        Giguna__Ruins_Top__East_Door [label = " ", pos = "56.52,-13.6!"];
+        Giguna__Ruins_Top__East_7 [label = " ", pos = "57.42,-13.6!"];
         node[fillcolor="6"];
-        subgraph cluster_Glacier__Dock_Elevator {
-            Glacier__Dock_Elevator__Elevator [label = " ", pos = "160.2,-17.6!"];
-            Glacier__Dock_Elevator__Connector [label = " ", pos = "158.58,-17.6!"];
-            label = "Dock Elevator";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Dock_Interior {
-            Glacier__Dock_Interior__Connector [label = " ", pos = "158.22,-17.6!"];
-            Glacier__Dock_Interior__Entry [label = " ", pos = "156.24,-17.6!"];
-            label = "Dock Interior";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Dock_Outside {
-            Glacier__Dock_Outside__Entry [label = " ", pos = "156.24,-17.6!"];
-            Glacier__Dock_Outside__Do_Not_Enter [label = " ", pos = "151.38,-17.6!"];
-            label = "Dock Outside";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Revival {
-            Glacier__Revival__East_9 [label = " ", pos = "151.02,-17.6!"];
-            Glacier__Revival__Overhang [label = " ", pos = "149.76,-17.6!"];
-            Glacier__Revival__Ledge [label = " ", pos = "148.68,-18.0!"];
-            Glacier__Revival__Lower_East [label = " ", pos = "151.02,-19.6!"];
-            Glacier__Revival__Save_Point [label = " ", pos = "149.04,-15.6!"];
-            Glacier__Revival__West_8 [label = " ", pos = "147.78,-15.6!"];
-            label = "Revival";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_42_10 {
-            Glacier__Grid_42_10__West [label = " ", pos = "151.38,-19.6!"];
-            Glacier__Grid_42_10__East [label = " ", pos = "154.62,-20!"];
-            label = "Grid 42,10";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_43_10_11 {
-            Glacier__Grid_43_10_11__Top [label = " ", pos = "154.98,-19.6!"];
-            Glacier__Grid_43_10_11__East [label = " ", pos = "158.22,-20.0!"];
-            Glacier__Grid_43_10_11__Lower [label = " ", pos = "154.98,-21.6!"];
-            label = "Grid 43,10-11";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Compass_Room {
-            Glacier__Compass_Room__East [label = " ", pos = "154.62,-21.6!"];
-            Glacier__Compass_Room__Center [label = " ", pos = "153.0,-21.6!"];
-            Glacier__Compass_Room__West [label = " ", pos = "151.38,-21.6!"];
-            label = "Compass Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__The_Big_Drop {
-            Glacier__The_Big_Drop__East [label = " ", pos = "151.02,-21.6!"];
-            Glacier__The_Big_Drop__Small_Path [label = " ", pos = "151.02,-25.6!"];
-            Glacier__The_Big_Drop__Water_Surface [label = " ", pos = "147.78,-25.6!"];
-            label = "The Big Drop";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_39_40_7_9 {
-            Glacier__Grid_39_40_7_9__Upper_East [label = " ", pos = "147.42,-15.6!"];
-            Glacier__Grid_39_40_7_9__West [label = " ", pos = "140.58,-17.6!"];
-            label = "Grid 39-40,7-9";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_37_38_9 {
-            Glacier__Grid_37_38_9__East [label = " ", pos = "140.22,-17.6!"];
-            Glacier__Grid_37_38_9__West [label = " ", pos = "133.38,-17.6!"];
-            label = "Grid 37-38,9";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Vertical_Room {
-            Glacier__Vertical_Room__East_9 [label = " ", pos = "133.02,-17.6!"];
-            Glacier__Vertical_Room__West_9 [label = " ", pos = "129.78,-17.6!"];
-            Glacier__Vertical_Room__Mid_9 [label = " ", pos = "131.4,-17.6!"];
-            Glacier__Vertical_Room__Mid_11 [label = " ", pos = "131.4,-22.6!"];
-            Glacier__Vertical_Room__Under_Switch [label = " ", pos = "130.32,-21.6!"];
-            Glacier__Vertical_Room__Past_Gate [label = " ", pos = "129.78,-21.6!"];
-            Glacier__Vertical_Room__Peak [label = " ", pos = "131.04,-16.6!"];
-            Glacier__Vertical_Room__West_8 [label = " ", pos = "129.78,-15.6!"];
-            Glacier__Vertical_Room__East_12 [label = " ", pos = "132.66,-23.0!"];
-            Glacier__Vertical_Room__Lower_West_Corner [label = " ", pos = "130.68,-24.8!"];
-            Glacier__Vertical_Room__East_13 [label = " ", pos = "133.02,-25.6!"];
-            label = "Vertical Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Boomerang_Antechamber {
-            Glacier__Boomerang_Antechamber__West_13 [label = " ", pos = "133.38,-25.6!"];
-            Glacier__Boomerang_Antechamber__East_12 [label = " ", pos = "140.22,-23.6!"];
-            Glacier__Boomerang_Antechamber__Upper_East [label = " ", pos = "140.22,-22.8!"];
-            Glacier__Boomerang_Antechamber__West_12 [label = " ", pos = "133.38,-22.6!"];
-            label = "Boomerang Antechamber";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Boomerang_Room {
-            Glacier__Boomerang_Room__West [label = " ", pos = "140.58,-23.6!"];
-            Glacier__Boomerang_Room__Platform [label = " ", pos = "141.84,-23.1!"];
-            Glacier__Boomerang_Room__Center_ish [label = " ", pos = "143.28,-23.1!"];
-            Glacier__Boomerang_Room__Pedestal [label = " ", pos = "145.8,-23.6!"];
-            label = "Boomerang Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Boomerang_Room_Switched {
-            Glacier__Boomerang_Room_Switched__Pedestal [label = " ", pos = "145.8,-23.6!"];
-            Glacier__Boomerang_Room_Switched__Upper_Gate_East [label = " ", pos = "145.08,-22.6!"];
-            Glacier__Boomerang_Room_Switched__Center_Ledge [label = " ", pos = "144.0,-22.6!"];
-            Glacier__Boomerang_Room_Switched__Platform [label = " ", pos = "141.84,-23.1!"];
-            Glacier__Boomerang_Room_Switched__Upper_West [label = " ", pos = "140.58,-22.8!"];
-            label = "Boomerang Room Switched";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Ledge_Grab_Room {
-            Glacier__Ledge_Grab_Room__East_9 [label = " ", pos = "129.42,-17.6!"];
-            Glacier__Ledge_Grab_Room__Column [label = " ", pos = "127.44,-17.0!"];
-            Glacier__Ledge_Grab_Room__Gate_Ledge [label = " ", pos = "126.0,-17.2!"];
-            Glacier__Ledge_Grab_Room__East_11 [label = " ", pos = "129.42,-21.6!"];
-            Glacier__Ledge_Grab_Room__Mid_35 [label = " ", pos = "127.44,-21.6!"];
-            Glacier__Ledge_Grab_Room__Mid_34 [label = " ", pos = "124.2,-20.6!"];
-            Glacier__Ledge_Grab_Room__Cliff [label = " ", pos = "122.76,-20.8!"];
-            Glacier__Ledge_Grab_Room__Cliff_Bottom [label = " ", pos = "122.4,-21.6!"];
-            Glacier__Ledge_Grab_Room__Pedestal [label = " ", pos = "120.6,-21.2!"];
-            Glacier__Ledge_Grab_Room__Gate [label = " ", pos = "119.16,-21.6!"];
-            Glacier__Ledge_Grab_Room__West [label = " ", pos = "119.88,-19.6!"];
-            Glacier__Ledge_Grab_Room__Lower_Platform [label = " ", pos = "123.84,-20.2!"];
-            Glacier__Ledge_Grab_Room__Upper_Platform [label = " ", pos = "124.2,-19.0!"];
-            Glacier__Ledge_Grab_Room__Fork [label = " ", pos = "126.0,-18.2!"];
-            label = "Ledge Grab Room";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Peak {
-            Glacier__Peak__East_8 [label = " ", pos = "129.42,-15.6!"];
-            Glacier__Peak__Top_Platform_East [label = " ", pos = "126.36,-12.2!"];
-            Glacier__Peak__Top_Rock [label = " ", pos = "124.56,-11.8!"];
-            Glacier__Peak__Highest_Platform [label = " ", pos = "124.56,-11.4!"];
-            Glacier__Peak__West_Cliff [label = " ", pos = "121.32,-13.2!"];
-            Glacier__Peak__Under_West_Cliff [label = " ", pos = "120.96,-14.4!"];
-            Glacier__Peak__West_8 [label = " ", pos = "118.98,-15.6!"];
-            label = "Peak";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_32_7_10 {
-            Glacier__Grid_32_7_10__East_8 [label = " ", pos = "118.62,-15.6!"];
-            Glacier__Grid_32_7_10__Center_Platform [label = " ", pos = "117.36,-15.6!"];
-            Glacier__Grid_32_7_10__Column [label = " ", pos = "117.36,-16.6!"];
-            Glacier__Grid_32_7_10__Left_Rock [label = " ", pos = "116.28,-17.4!"];
-            Glacier__Grid_32_7_10__West_9 [label = " ", pos = "115.38,-17.4!"];
-            Glacier__Grid_32_7_10__West_10 [label = " ", pos = "115.38,-18.6!"];
-            label = "Grid 32,7-10";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Grid_31_9_12 {
-            Glacier__Grid_31_9_12__East_9 [label = " ", pos = "115.02,-17.4!"];
-            Glacier__Grid_31_9_12__East_10 [label = " ", pos = "115.02,-18.6!"];
-            Glacier__Grid_31_9_12__Observation_Tower [label = " ", pos = "112.68,-20.8!"];
-            Glacier__Grid_31_9_12__Observation_Tower_L4 [label = " ", pos = "112.32,-21.6!"];
-            Glacier__Grid_31_9_12__West_12 [label = " ", pos = "111.78,-23.6!"];
-            Glacier__Grid_31_9_12__Midair [label = " ", pos = "111.78,-20.8!"];
-            label = "Grid 31,9-12";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Lake_Main_Entrance {
-            Glacier__Lake_Main_Entrance__Ebih_Access [label = " ", pos = "111.78,-25.4!"];
-            Glacier__Lake_Main_Entrance__Upper [label = " ", pos = "112.86,-26.2!"];
-            Glacier__Lake_Main_Entrance__Upper_Platform [label = " ", pos = "113.76,-27.2!"];
-            Glacier__Lake_Main_Entrance__Ledge [label = " ", pos = "113.4,-27.4!"];
-            Glacier__Lake_Main_Entrance__Lower_Platform [label = " ", pos = "114.12,-27.8!"];
-            Glacier__Lake_Main_Entrance__Hill [label = " ", pos = "114.48,-28.2!"];
-            Glacier__Lake_Main_Entrance__Bottom [label = " ", pos = "113.04,-29.6!"];
-            Glacier__Lake_Main_Entrance__Side_Jump [label = " ", pos = "115.2,-27.8!"];
-            Glacier__Lake_Main_Entrance__Side [label = " ", pos = "115.2,-28.2!"];
-            Glacier__Lake_Main_Entrance__Lake_Access [label = " ", pos = "111.78,-29.6!"];
-            label = "Lake Main Entrance";
-            bgcolor = "white";
-        }
-        subgraph cluster_Glacier__Apocalypse_Entry {
-            Glacier__Apocalypse_Entry__West [label = " ", pos = "158.58,-20.0!"];
-            Glacier__Apocalypse_Entry__Terminal [label = " ", pos = "160.56,-20.0!"];
-            label = "Apocalypse Entry";
-            bgcolor = "white";
-        }
-        label = "Glacier";
-        bgcolor = "lightgrey";
-    }
-    subgraph cluster_Menu {
-        clusterrank="local";
+        Glacier__Dock_Elevator__Elevator [label = " ", pos = "160.2,-17.6!"];
+        Glacier__Dock_Elevator__Connector [label = " ", pos = "158.58,-17.6!"];
+        Glacier__Dock_Interior__Connector [label = " ", pos = "158.22,-17.6!"];
+        Glacier__Dock_Interior__Entry [label = " ", pos = "156.24,-17.6!"];
+        Glacier__Dock_Outside__Entry [label = " ", pos = "156.24,-17.6!"];
+        Glacier__Dock_Outside__Do_Not_Enter [label = " ", pos = "151.38,-17.6!"];
+        Glacier__Revival__East_9 [label = " ", pos = "151.02,-17.6!"];
+        Glacier__Revival__Overhang [label = " ", pos = "149.76,-17.6!"];
+        Glacier__Revival__Ledge [label = " ", pos = "148.68,-18.0!"];
+        Glacier__Revival__Lower_East [label = " ", pos = "151.02,-19.6!"];
+        Glacier__Revival__Save_Point [label = " ", pos = "149.04,-15.6!"];
+        Glacier__Revival__West_8 [label = " ", pos = "147.78,-15.6!"];
+        Glacier__Grid_42_10__West [label = " ", pos = "151.38,-19.6!"];
+        Glacier__Grid_42_10__East [label = " ", pos = "154.62,-20.0!"];
+        Glacier__Grid_43_10_11__Top [label = " ", pos = "154.98,-19.6!"];
+        Glacier__Grid_43_10_11__East [label = " ", pos = "158.22,-20.0!"];
+        Glacier__Grid_43_10_11__Lower [label = " ", pos = "154.98,-21.6!"];
+        Glacier__Compass_Room__East [label = " ", pos = "154.62,-21.6!"];
+        Glacier__Compass_Room__Center [label = " ", pos = "153.0,-21.6!"];
+        Glacier__Compass_Room__West [label = " ", pos = "151.38,-21.6!"];
+        Glacier__The_Big_Drop__East [label = " ", pos = "151.02,-21.6!"];
+        Glacier__The_Big_Drop__Small_Path [label = " ", pos = "151.02,-25.6!"];
+        Glacier__The_Big_Drop__Water_Surface [label = " ", pos = "147.78,-25.6!"];
+        Glacier__Grid_39_40_7_9__Upper_East [label = " ", pos = "147.42,-15.6!"];
+        Glacier__Grid_39_40_7_9__West [label = " ", pos = "140.58,-17.6!"];
+        Glacier__Grid_37_38_9__East [label = " ", pos = "140.22,-17.6!"];
+        Glacier__Grid_37_38_9__West [label = " ", pos = "133.38,-17.6!"];
+        Glacier__Vertical_Room__East_9 [label = " ", pos = "133.02,-17.6!"];
+        Glacier__Vertical_Room__West_9 [label = " ", pos = "129.78,-17.6!"];
+        Glacier__Vertical_Room__Mid_9 [label = " ", pos = "131.4,-17.6!"];
+        Glacier__Vertical_Room__Mid_11 [label = " ", pos = "131.4,-22.6!"];
+        Glacier__Vertical_Room__Under_Switch [label = " ", pos = "130.32,-21.6!"];
+        Glacier__Vertical_Room__Past_Gate [label = " ", pos = "129.78,-21.6!"];
+        Glacier__Vertical_Room__Peak [label = " ", pos = "131.04,-16.6!"];
+        Glacier__Vertical_Room__West_8 [label = " ", pos = "129.78,-15.6!"];
+        Glacier__Vertical_Room__East_12 [label = " ", pos = "132.66,-23.0!"];
+        Glacier__Vertical_Room__Lower_West_Corner [label = " ", pos = "130.68,-24.8!"];
+        Glacier__Vertical_Room__East_13 [label = " ", pos = "133.02,-25.6!"];
+        Glacier__Boomerang_Antechamber__West_13 [label = " ", pos = "133.38,-25.6!"];
+        Glacier__Boomerang_Antechamber__East_12 [label = " ", pos = "140.22,-23.6!"];
+        Glacier__Boomerang_Antechamber__Upper_East [label = " ", pos = "140.22,-22.8!"];
+        Glacier__Boomerang_Antechamber__West_12 [label = " ", pos = "133.38,-22.6!"];
+        Glacier__Boomerang_Room__West [label = " ", pos = "140.58,-23.6!"];
+        Glacier__Boomerang_Room__Platform [label = " ", pos = "141.84,-23.1!"];
+        Glacier__Boomerang_Room__Center_ish [label = " ", pos = "143.28,-23.1!"];
+        Glacier__Boomerang_Room__Pedestal [label = " ", pos = "145.8,-23.6!"];
+        Glacier__Boomerang_Room_Switched__Pedestal [label = " ", pos = "145.8,-23.6!"];
+        Glacier__Boomerang_Room_Switched__Upper_Gate_East [label = " ", pos = "145.08,-22.6!"];
+        Glacier__Boomerang_Room_Switched__Center_Ledge [label = " ", pos = "144.0,-22.6!"];
+        Glacier__Boomerang_Room_Switched__Platform [label = " ", pos = "141.84,-23.1!"];
+        Glacier__Boomerang_Room_Switched__Upper_West [label = " ", pos = "140.58,-22.8!"];
+        Glacier__Ledge_Grab_Room__East_9 [label = " ", pos = "129.42,-17.6!"];
+        Glacier__Ledge_Grab_Room__Column [label = " ", pos = "127.44,-17.0!"];
+        Glacier__Ledge_Grab_Room__Gate_Ledge [label = " ", pos = "126.0,-17.2!"];
+        Glacier__Ledge_Grab_Room__East_11 [label = " ", pos = "129.42,-21.6!"];
+        Glacier__Ledge_Grab_Room__Mid_35 [label = " ", pos = "127.44,-21.6!"];
+        Glacier__Ledge_Grab_Room__Mid_34 [label = " ", pos = "124.2,-20.6!"];
+        Glacier__Ledge_Grab_Room__Cliff [label = " ", pos = "122.76,-20.8!"];
+        Glacier__Ledge_Grab_Room__Cliff_Bottom [label = " ", pos = "122.4,-21.6!"];
+        Glacier__Ledge_Grab_Room__Pedestal [label = " ", pos = "120.6,-21.2!"];
+        Glacier__Ledge_Grab_Room__Gate [label = " ", pos = "119.16,-21.6!"];
+        Glacier__Ledge_Grab_Room__West [label = " ", pos = "119.88,-19.6!"];
+        Glacier__Ledge_Grab_Room__Lower_Platform [label = " ", pos = "123.84,-20.2!"];
+        Glacier__Ledge_Grab_Room__Upper_Platform [label = " ", pos = "124.2,-19.0!"];
+        Glacier__Ledge_Grab_Room__Fork [label = " ", pos = "126.0,-18.2!"];
+        Glacier__Peak__East_8 [label = " ", pos = "129.42,-15.6!"];
+        Glacier__Peak__Top_Platform_East [label = " ", pos = "126.36,-12.2!"];
+        Glacier__Peak__Top_Rock [label = " ", pos = "124.56,-11.8!"];
+        Glacier__Peak__Highest_Platform [label = " ", pos = "124.56,-11.4!"];
+        Glacier__Peak__West_Cliff [label = " ", pos = "121.32,-13.2!"];
+        Glacier__Peak__Under_West_Cliff [label = " ", pos = "120.96,-14.4!"];
+        Glacier__Peak__West_8 [label = " ", pos = "118.98,-15.6!"];
+        Glacier__Grid_32_7_10__East_8 [label = " ", pos = "118.62,-15.6!"];
+        Glacier__Grid_32_7_10__Center_Platform [label = " ", pos = "117.36,-15.6!"];
+        Glacier__Grid_32_7_10__Column [label = " ", pos = "117.36,-16.6!"];
+        Glacier__Grid_32_7_10__Left_Rock [label = " ", pos = "116.28,-17.4!"];
+        Glacier__Grid_32_7_10__West_9 [label = " ", pos = "115.38,-17.4!"];
+        Glacier__Grid_32_7_10__West_10 [label = " ", pos = "115.38,-18.6!"];
+        Glacier__Grid_31_9_12__East_9 [label = " ", pos = "115.02,-17.4!"];
+        Glacier__Grid_31_9_12__East_10 [label = " ", pos = "115.02,-18.6!"];
+        Glacier__Grid_31_9_12__Observation_Tower [label = " ", pos = "112.68,-20.8!"];
+        Glacier__Grid_31_9_12__Observation_Tower_L4 [label = " ", pos = "112.32,-21.6!"];
+        Glacier__Grid_31_9_12__West_12 [label = " ", pos = "111.78,-23.6!"];
+        Glacier__Grid_31_9_12__Midair [label = " ", pos = "111.78,-20.8!"];
+        Glacier__Lake_Main_Entrance__Ebih_Access [label = " ", pos = "111.78,-25.4!"];
+        Glacier__Lake_Main_Entrance__Upper [label = " ", pos = "112.86,-26.2!"];
+        Glacier__Lake_Main_Entrance__Upper_Platform [label = " ", pos = "113.76,-27.2!"];
+        Glacier__Lake_Main_Entrance__Ledge [label = " ", pos = "113.4,-27.4!"];
+        Glacier__Lake_Main_Entrance__Lower_Platform [label = " ", pos = "114.12,-27.8!"];
+        Glacier__Lake_Main_Entrance__Hill [label = " ", pos = "114.48,-28.2!"];
+        Glacier__Lake_Main_Entrance__Bottom [label = " ", pos = "113.04,-29.6!"];
+        Glacier__Lake_Main_Entrance__Side_Jump [label = " ", pos = "115.2,-27.8!"];
+        Glacier__Lake_Main_Entrance__Side [label = " ", pos = "115.2,-28.2!"];
+        Glacier__Lake_Main_Entrance__Lake_Access [label = " ", pos = "111.78,-29.6!"];
+        Glacier__Apocalypse_Entry__West [label = " ", pos = "158.58,-20.0!"];
+        Glacier__Apocalypse_Entry__Terminal [label = " ", pos = "160.56,-20.0!"];
         node[fillcolor="0"];
-        subgraph cluster_Menu__Upgrade_Menu {
-            Menu__Upgrade_Menu__Physiology [label = " ", fillcolor = "8"];
-            Menu__Upgrade_Menu__Combat [label = " ", fillcolor = "8"];
-            Menu__Upgrade_Menu__Infection [label = " ", fillcolor = "8"];
-            Menu__Upgrade_Menu__Drone [label = " ", fillcolor = "8"];
-            label = "Upgrade Menu";
-            bgcolor = "white";
-        }
-        label = "Menu";
-        bgcolor = "lightgrey";
-    }
+        Menu__Upgrade_Menu__Physiology [label = " ", fillcolor = "8"];
+        Menu__Upgrade_Menu__Combat [label = " ", fillcolor = "8"];
+        Menu__Upgrade_Menu__Infection [label = " ", fillcolor = "8"];
+        Menu__Upgrade_Menu__Drone [label = " ", fillcolor = "8"];
     Amagi__Main_Area__East_15 -> Glacier__Lake_Main_Entrance__Lake_Access;
     Amagi__Main_Area__Shallow_End -> Amagi__Main_Area__Waters_Edge;
     Amagi__Main_Area__West_Side -> Amagi__Main_Area__Carving;

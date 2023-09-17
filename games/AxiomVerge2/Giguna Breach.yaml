@@ -1,4 +1,5 @@
 name: Giguna Breach
+graph_offset: [0, 29]
 data:
   breach: true
 
@@ -7,5 +8,5 @@ areas:
   on_entry: $reset_old_area(^newpos); $breach_entry(`Giguna Breach > Peak > Save Point`);
   spots:
     - name: Save Point
-      coord: [15.5, 6.5]
+      coord: [15.5, 6.7]
 

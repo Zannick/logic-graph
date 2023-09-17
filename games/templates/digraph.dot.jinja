@@ -1,21 +1,16 @@
 // use neato to use the coordinates
 digraph {{ game }} {
     node[shape=square,width=0.01,colorscheme=dark28,style=filled];
+    bgcolor = "transparent";
+%% set scalex, scaley = special.graph_scale or (0, 0)
 %% for r in regions
-    subgraph cluster_{{ r.id }} {
         node[fillcolor="{{ loop.index % 7 }}"];
+%% set offx, offy = r.graph_offset or (0, 0)
 %% for a in r.areas
-        subgraph cluster_{{ a.id }} {
 %% for s in a.spots
-            {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (3.6*s.coord[0])|round(6) }},-{{ 2*s.coord[1]|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
+        {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (scalex*(offx+s.coord[0]))|round(6) }},{{ scaley*(offy+s.coord[1])|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
 %% endfor
-            label = "{{ a.name }}";
-            bgcolor = "white";
-        }
 %% endfor
-        label = "{{ r.name }}";
-        bgcolor = "lightgrey";
-    }
 %% endfor
 %% for s in gl.spots()
 %% for e in s.exits|sort(attribute='id')

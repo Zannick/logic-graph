@@ -27,7 +27,7 @@ templates_dir = os.path.join(base_dir, 'games', 'templates')
 MAIN_FILENAME = 'Game.yaml'
 GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'warps', 'actions', 'time', 'context',
                'start', 'load', 'data', 'helpers', 'collect', 'settings', 'special', '_filename'}
-REGION_FIELDS = {'name', 'short', 'data', 'here'}
+REGION_FIELDS = {'name', 'short', 'data', 'here', 'graph_offset'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here'}
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
@@ -206,6 +206,7 @@ class GameLogic(object):
         self.process_settings()
         self.process_items()
         self.process_bitflags()
+        self.process_special()
 
 
     def process_regions(self):
@@ -225,6 +226,12 @@ class GameLogic(object):
                 region['act'] = parseAction(
                         region['on_entry'], name=f'{region["fullname"]}:on_entry')
                 region['action_id'] = self.make_funcid(region, 'act', 'on_entry', ON_ENTRY_ARGS)
+            if c := region.get('graph_offset'):
+                if isinstance(c, str):
+                    self.errors.append(f'Invalid graph offset for {region["fullname"]}: {c!r} '
+                                       f'(did you mean [{c}] ?)')
+                elif not isinstance(c, (list, tuple)) or len(c) != 2:
+                    self.errors.append(f'Invalid graph offset for {region["fullname"]}: {c}')
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
@@ -409,6 +416,16 @@ class GameLogic(object):
     def process_bitflags(self):
         self.bfp = BitFlagProcessor(self.context_values, self.settings, self.item_max_counts)
         self.bfp.process()
+
+    def process_special(self):
+        if sc := self.special.get('graph_scale'):
+            if isinstance(sc, str):
+                self.errors.append(f'Invalid graph scale: {sc!r} '
+                                    f'(did you mean [{sc}] ?)')
+            elif not isinstance(sc, (list, tuple)) or len(sc) != 2:
+                self.errors.append(f'Invalid graph scale: {sc}')
+            elif sc[0] == 0 or sc[1] == 0:
+                self.errors.append(f'Invalid graph scale: 0 not allowed: {sc}')
 
     @cache
     def spot_base_movement(self, spot_data):

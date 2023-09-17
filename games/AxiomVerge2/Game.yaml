@@ -84,7 +84,7 @@ time:
   shockwave: 3.5  # even when shockwaving flasks and urns? at least 1
   hack: 0.5
   susar: 3.0  # caught by susar
-  
+
   ## Transitions
   xshift: 1.35  # sometimes 1.2, sometimes 1.5?
   # When areas use connecting doors
@@ -239,3 +239,6 @@ settings:
     type: bool
   minor_glitches:
     type: bool
+
+special:
+  graph_scale: [3.6, -2.0]
