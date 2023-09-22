@@ -224,10 +224,10 @@ class GameLogic(object):
             region['all_data'].update(region.get('data', {}))
             if 'on_entry' in region:
                 region['act'] = parseAction(
-                        region['on_entry'], name=f'{region["fullname"]}:on_entry')
+                        region['on_entry'], name=f'{region["name"]}:on_entry')
                 region['action_id'] = self.make_funcid(region, 'act', 'on_entry', ON_ENTRY_ARGS)
             if c := region.get('graph_offset'):
-                self._validate_pair(c, f'graph offset for {region["fullname"]}')
+                self._validate_pair(c, f'graph offset for {region["name"]}')
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
