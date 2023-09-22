@@ -227,11 +227,7 @@ class GameLogic(object):
                         region['on_entry'], name=f'{region["fullname"]}:on_entry')
                 region['action_id'] = self.make_funcid(region, 'act', 'on_entry', ON_ENTRY_ARGS)
             if c := region.get('graph_offset'):
-                if isinstance(c, str):
-                    self.errors.append(f'Invalid graph offset for {region["fullname"]}: {c!r} '
-                                       f'(did you mean [{c}] ?)')
-                elif not isinstance(c, (list, tuple)) or len(c) != 2:
-                    self.errors.append(f'Invalid graph offset for {region["fullname"]}: {c}')
+                self._validate_pair(c, f'graph offset for {region["fullname"]}')
             for area in region['areas']:
                 aname = area['name']
                 area['region'] = rname
@@ -246,6 +242,8 @@ class GameLogic(object):
                     area['act'] = parseAction(
                             area['on_entry'], name=f'{area["fullname"]}:on_entry')
                     area['action_id'] = self.make_funcid(area, 'act', 'on_entry', ON_ENTRY_ARGS)
+                if c := area.get('graph_offset'):
+                    self._validate_pair(c, f'graph offset for {area["fullname"]}')
 
                 for spot in area['spots']:
                     sname = spot['name']
@@ -419,13 +417,30 @@ class GameLogic(object):
 
     def process_special(self):
         if sc := self.special.get('graph_scale'):
-            if isinstance(sc, str):
-                self.errors.append(f'Invalid graph scale: {sc!r} '
-                                    f'(did you mean [{sc}] ?)')
-            elif not isinstance(sc, (list, tuple)) or len(sc) != 2:
-                self.errors.append(f'Invalid graph scale: {sc}')
-            elif sc[0] == 0 or sc[1] == 0:
-                self.errors.append(f'Invalid graph scale: 0 not allowed: {sc}')
+            self._validate_scale(sc, 'graph_scale')
+        if sc := self.special.get('map_scale'):
+            self._validate_scale(sc, 'map_scale')
+        if p := self.special.get('map_min'):
+            self._validate_pair(p, 'map_min')
+
+    def _validate_scale(self, sc, name):
+        if not self._validate_pair(sc, name):
+            pass
+        elif sc[0] == 0 or sc[1] == 0:
+            self.errors.append(f'Invalid {name}: 0 not allowed: {sc}')
+        else:
+            return True
+        return False
+
+    def _validate_pair(self, p, name):
+        if isinstance(p, str):
+            self.errors.append(f'Invalid {name}: {p!r} '
+                                f'(did you mean [{p}] ?)')
+        elif not isinstance(p, (list, tuple)) or len(p) != 2:
+            self.errors.append(f'Invalid {name}: {p}')
+        else:
+            return True
+        return False
 
     @cache
     def spot_base_movement(self, spot_data):
@@ -598,11 +613,7 @@ class GameLogic(object):
             errors = []
             for sp in a['spots']:
                 if c := sp.get('coord'):
-                    if isinstance(c, str):
-                        errors.append(f'Invalid coord for {sp["fullname"]}: {c!r} '
-                                      f'(did you mean [{c}] ?)')
-                    elif not isinstance(c, (list, tuple)) or len(c) != 2:
-                        errors.append(f'Invalid coord for {sp["fullname"]}: {c}')
+                    self._validate_pair(c, f'coord for {sp["fullname"]}')
                 elif sp.get('local'):
                     errors.append(f'Expected coord for spot {sp["fullname"]} with local rules')
             if errors:

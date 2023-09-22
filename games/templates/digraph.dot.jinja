@@ -2,13 +2,14 @@
 digraph {{ game }} {
     node[shape=square,width=0.01,colorscheme=dark28,style=filled];
     bgcolor = "transparent";
-%% set scalex, scaley = special.graph_scale or (0, 0)
+%% set scalex, scaley = special.graph_scale or (1, 1)
 %% for r in regions
         node[fillcolor="{{ loop.index % 7 }}"];
-%% set offx, offy = r.graph_offset or (0, 0)
+%% set g_offx, g_offy = r.graph_offset or (0, 0)
 %% for a in r.areas
+%% set a_offx, a_offy = a.graph_offset or (0, 0)
 %% for s in a.spots
-        {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (scalex*(offx+s.coord[0]))|round(6) }},{{ scaley*(offy+s.coord[1])|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
+        {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (scalex*(g_offx + a_offx + s.coord[0]))|round(6) }},{{ scaley*(g_offy + a_offy + s.coord[1])|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
 %% endfor
 %% endfor
 %% endfor
