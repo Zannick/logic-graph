@@ -442,6 +442,7 @@ class GameLogic(object):
             return True
         return False
 
+
     @cache
     def spot_base_movement(self, spot_data):
         d = dict(self.base_movements[0])
@@ -1336,7 +1337,7 @@ class GameLogic(object):
         self.adjacent_regions
         files = {
             '.': ['Cargo.toml'],
-            'data': ['digraph.dot', 'digraph.mmd'],
+            'data': ['digraph.dot', 'digraph.mmd', 'graph_map.sh'],
             'src': ['lib.rs', 'items.rs', 'helpers.rs', 'graph.rs', 'context.rs',
                     'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs'],
             'benches': ['bench.rs'],

@@ -1,15 +1,23 @@
 // use neato to use the coordinates
 digraph {{ game }} {
-    node[shape=square,width=0.01,colorscheme=dark28,style=filled];
-    bgcolor = "transparent";
+    node[shape=square,width=0.125,colorscheme=dark28,style=filled,margin=0];
 %% set scalex, scaley = special.graph_scale or (1, 1)
+%% set ppi = special.map_ppi or 72
+%% if special.map_max_coord and special.map_min_coord
+%% set maxx, maxy = special.map_max_coord
+%% set minx, miny = special.map_min_coord
+    dpi = {{ ppi }};
+    viewport = "{{ (scalex * (maxx - minx))|abs }},{{ (scaley * (maxy - miny))|abs }},1,'Center'";
+    Center [label = "C", style="invis", pos="{{ (scalex * (maxx + minx) / 2 / ppi)|round(6) }},{{ (scaley * (maxy + miny) / 2 / ppi)|round(6) }}!"];
+%% endif
+    bgcolor = "transparent";
 %% for r in regions
         node[fillcolor="{{ loop.index % 7 }}"];
 %% set g_offx, g_offy = r.graph_offset or (0, 0)
 %% for a in r.areas
 %% set a_offx, a_offy = a.graph_offset or (0, 0)
 %% for s in a.spots
-        {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (scalex*(g_offx + a_offx + s.coord[0]))|round(6) }},{{ scaley*(g_offy + a_offy + s.coord[1])|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
+        {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (scalex*(g_offx + a_offx + s.coord[0])/ppi)|round(6) }},{{ (scaley*(g_offy + a_offy + s.coord[1])/ppi)|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
 %% endfor
 %% endfor
 %% endfor

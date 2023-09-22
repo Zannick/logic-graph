@@ -241,4 +241,8 @@ settings:
     type: bool
 
 special:
-  graph_scale: [3.6, -2.0]
+  graph_scale: [180, -100]
+  map_ppi: 72
+  map_file: v4—AxiomVerge2-FullMap.png  # https://drive.google.com/drive/folders/1BNT5UgPOB_1RaCPZSPtgvlpX9ibmlgx6
+  map_min_coord: [0, -1]
+  map_max_coord: [46, 60]
