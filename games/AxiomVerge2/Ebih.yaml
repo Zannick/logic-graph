@@ -1724,7 +1724,7 @@ areas:
         - to: Grid 26,10-11 > East 10
           tags: [xshift]
     - name: East 11
-      coord: [27.95, 10.7]
+      coord: [27.95, 10.6]
       local:
         - to: Cliff
       exits:
