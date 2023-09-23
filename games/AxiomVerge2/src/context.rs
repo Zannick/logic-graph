@@ -76,6 +76,7 @@ pub enum Expectation {
     EbihEbihEastCtxPlatform1Moved(bool),
     EbihEbihEastCtxPlatform2Moved(bool),
     EbihDroneRoomCtxPlatformMoved(bool),
+    GigunaBreachSwSaveCtxDoorOpened(bool),
     GigunaGigunaNortheastCtxDoorOpened(bool),
     GigunaCarnelianCtxDoorOpened(bool),
     GigunaCarnelianCtxUpperSusar(bool),
@@ -142,7 +143,58 @@ pub mod data {
     use crate::graph::*;
     pub fn breach(spot_id: SpotId) -> bool {
         match spot_id {
+            SpotId::Giguna_Breach__Antechamber__North => true,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => true,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => true,
+            SpotId::Giguna_Breach__Below_Chimney__North => true,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => true,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest => true,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage => true,
+            SpotId::Giguna_Breach__Central__South => true,
+            SpotId::Giguna_Breach__Central__Statuette => true,
+            SpotId::Giguna_Breach__Central__Tunnel => true,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => true,
+            SpotId::Giguna_Breach__Central__Wall => true,
+            SpotId::Giguna_Breach__Central__West_8 => true,
+            SpotId::Giguna_Breach__Central__West_9 => true,
+            SpotId::Giguna_Breach__Central__West_Statue => true,
+            SpotId::Giguna_Breach__Chimney__Cache => true,
+            SpotId::Giguna_Breach__Chimney__East_7 => true,
+            SpotId::Giguna_Breach__Chimney__East_8 => true,
+            SpotId::Giguna_Breach__Chimney__East_9 => true,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => true,
+            SpotId::Giguna_Breach__Chimney__South => true,
+            SpotId::Giguna_Breach__Chimney__Top => true,
+            SpotId::Giguna_Breach__Cubby__Entrance => true,
+            SpotId::Giguna_Breach__Cubby__Rocks => true,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => true,
+            SpotId::Giguna_Breach__Fire_Room__East_10 => true,
+            SpotId::Giguna_Breach__Fire_Room__East_11 => true,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => true,
+            SpotId::Giguna_Breach__Fire_Room__South => true,
+            SpotId::Giguna_Breach__Fire_Room__West_11 => true,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau => true,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => true,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => true,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => true,
+            SpotId::Giguna_Breach__Grid_14_10_11__North => true,
+            SpotId::Giguna_Breach__Grid_14_10_11__South => true,
+            SpotId::Giguna_Breach__Peak__Column => true,
+            SpotId::Giguna_Breach__Peak__East_Passage => true,
             SpotId::Giguna_Breach__Peak__Save_Point => true,
+            SpotId::Giguna_Breach__Peak__West_7 => true,
+            SpotId::Giguna_Breach__Robopede__Center => true,
+            SpotId::Giguna_Breach__Robopede__North => true,
+            SpotId::Giguna_Breach__Robopede__West => true,
+            SpotId::Giguna_Breach__SW_Save__East_12 => true,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => true,
+            SpotId::Giguna_Breach__SW_Save__North => true,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => true,
+            SpotId::Giguna_Breach__SW_Save__Side_Door => true,
+            SpotId::Giguna_Breach__SW_Save__West_11 => true,
+            SpotId::Giguna_Breach__Slingshot__Column => true,
+            SpotId::Giguna_Breach__Slingshot__Ravine => true,
+            SpotId::Giguna_Breach__Slingshot__West => true,
             _ => false,
         }
     }
@@ -266,60 +318,61 @@ pub mod flags {
             const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 4;
             const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 5;
             const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 6;
-            const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 1 << 7;
-            const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 8;
-            const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 9;
-            const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 10;
-            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 11;
-            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 12;
-            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 13;
-            const BOOMERANG_STEERING = 1 << 14;
-            const MAJOR_GLITCHES = 1 << 15;
-            const MINOR_GLITCHES = 1 << 16;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 17;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 18;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 19;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 20;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 21;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 22;
-            const AMASHILAMA = 1 << 23;
-            const ANUMAN = 1 << 24;
-            const APOCALYPSE_BOMB = 1 << 25;
-            const BOOMERANG = 1 << 26;
-            const COMPANIES_LAYOFF = 1 << 27;
-            const DEAR_ERNEST = 1 << 28;
-            const DEFEAT_EBIH_ALU = 1 << 29;
-            const DEFEAT_MUS_A_M20 = 1 << 30;
-            const DRONE_HOVER = 1 << 31;
+            const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 1 << 7;
+            const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 1 << 8;
+            const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 9;
+            const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 10;
+            const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 11;
+            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 12;
+            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 13;
+            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 14;
+            const BOOMERANG_STEERING = 1 << 15;
+            const MAJOR_GLITCHES = 1 << 16;
+            const MINOR_GLITCHES = 1 << 17;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 18;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 19;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 20;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 21;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 22;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 23;
+            const AMASHILAMA = 1 << 24;
+            const ANUMAN = 1 << 25;
+            const APOCALYPSE_BOMB = 1 << 26;
+            const BOOMERANG = 1 << 27;
+            const COMPANIES_LAYOFF = 1 << 28;
+            const DEAR_ERNEST = 1 << 29;
+            const DEFEAT_EBIH_ALU = 1 << 30;
+            const DEFEAT_MUS_A_M20 = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 0;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 1;
-            const FAST_TRAVEL = 1 << 2;
-            const GIGUNA_NORTHEAST_GATE = 1 << 3;
-            const HERETICS_TABLET = 1 << 4;
-            const ICE_AXE = 1 << 5;
-            const INFECTION_SPEED = 1 << 6;
-            const LEDGE_GRAB = 1 << 7;
-            const LETTER_FROM_TRACE = 1 << 8;
-            const MAP_17_10 = 1 << 9;
-            const NANITE_MIST = 1 << 10;
-            const POWER_MATRIX = 1 << 11;
-            const RECORD_LOSSES = 1 << 12;
-            const REMOTE_DRONE = 1 << 13;
-            const RESEARCHERS_MISSING = 1 << 14;
-            const SHOCKWAVE = 1 << 15;
-            const SLINGSHOT_HOOK = 1 << 16;
-            const STATION_POWER = 1 << 17;
-            const SWITCH_36_11 = 1 << 18;
-            const SWITCH_40_12 = 1 << 19;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 20;
-            const UNDER_SIEGE = 1 << 21;
-            const UNDERWATER_MOVEMENT = 1 << 22;
-            const WALL_CLIMB = 1 << 23;
+            const DRONE_HOVER = 1 << 0;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 1;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 2;
+            const FAST_TRAVEL = 1 << 3;
+            const GIGUNA_NORTHEAST_GATE = 1 << 4;
+            const HERETICS_TABLET = 1 << 5;
+            const ICE_AXE = 1 << 6;
+            const INFECTION_SPEED = 1 << 7;
+            const LEDGE_GRAB = 1 << 8;
+            const LETTER_FROM_TRACE = 1 << 9;
+            const MAP_17_10 = 1 << 10;
+            const NANITE_MIST = 1 << 11;
+            const POWER_MATRIX = 1 << 12;
+            const RECORD_LOSSES = 1 << 13;
+            const REMOTE_DRONE = 1 << 14;
+            const RESEARCHERS_MISSING = 1 << 15;
+            const SHOCKWAVE = 1 << 16;
+            const SLINGSHOT_HOOK = 1 << 17;
+            const STATION_POWER = 1 << 18;
+            const SWITCH_36_11 = 1 << 19;
+            const SWITCH_40_12 = 1 << 20;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 21;
+            const UNDER_SIEGE = 1 << 22;
+            const UNDERWATER_MOVEMENT = 1 << 23;
+            const WALL_CLIMB = 1 << 24;
         }
     }
 }
@@ -441,7 +494,7 @@ impl context::Ctx for Context {
             Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU),
             Item::Defeat_MUS_A_M20 => self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20),
-            Item::Drone_Hover => self.cbits1.contains(flags::ContextBits1::DRONE_HOVER),
+            Item::Drone_Hover => self.cbits2.contains(flags::ContextBits2::DRONE_HOVER),
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
             Item::Ebih_Waterfall_Block_Left => self
@@ -542,8 +595,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::DEFEAT_MUS_A_M20)
                 .into(),
             Item::Drone_Hover => self
-                .cbits1
-                .contains(flags::ContextBits1::DRONE_HOVER)
+                .cbits2
+                .contains(flags::ContextBits2::DRONE_HOVER)
                 .into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
@@ -687,7 +740,7 @@ impl context::Ctx for Context {
                 rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self);
             },
             Item::Drone_Hover => {
-                self.cbits1.insert(flags::ContextBits1::DRONE_HOVER);
+                self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
             },
             Item::Drone_Melee_Damage => {
                 self.drone_melee_damage += 1;
@@ -857,7 +910,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_MUS_A_M20);
             }
             Item::Drone_Hover => {
-                self.cbits1.insert(flags::ContextBits1::DRONE_HOVER);
+                self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
             }
             Item::Drone_Melee_Damage => {
                 self.drone_melee_damage += 1;
@@ -1119,6 +1172,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("giguna_breach__sw_save__ctx__door_opened", Yaml::Boolean(b)) => {
+                self.set_giguna_breach__sw_save__ctx__door_opened(*b)
+            }
+            ("giguna_breach__sw_save__ctx__door_opened", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna__giguna_northeast__ctx__door_opened", Yaml::Boolean(b)) => {
                 self.set_giguna__giguna_northeast__ctx__door_opened(*b)
             }
@@ -1351,6 +1413,15 @@ impl context::Ctx for Context {
                 Expectation::EbihDroneRoomCtxPlatformMoved(*b)
             }
             ("ebih__drone_room__ctx__platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna_breach__sw_save__ctx__door_opened", Yaml::Boolean(b)) => {
+                Expectation::GigunaBreachSwSaveCtxDoorOpened(*b)
+            }
+            ("giguna_breach__sw_save__ctx__door_opened", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1990,6 +2061,15 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::GigunaBreachSwSaveCtxDoorOpened(e) => {
+                    let v = self.giguna_breach__sw_save__ctx__door_opened();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna_breach__sw_save__ctx__door_opened", e, v
+                        ));
+                    }
+                }
                 Expectation::GigunaGigunaNortheastCtxDoorOpened(e) => {
                     let v = self.giguna__giguna_northeast__ctx__door_opened();
                     if v != *e {
@@ -2602,9 +2682,59 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna_Breach__Antechamber => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos10(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Below_Chimney => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos3(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Central => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos11(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Chimney => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos2(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Cubby => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos4(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Fire_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos8(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Grid_14_10_11 => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos7(self, pos);
+                }
+            }
             AreaId::Giguna_Breach__Peak => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos_breach_entry__giguna_breach__peak__save_point(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Robopede => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos6(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Slingshot => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos9(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__SW_Save => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos5(self, pos);
                 }
             }
             AreaId::Glacier__Apocalypse_Entry => {
@@ -3034,6 +3164,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED);
         let p = old
             .cbits1
@@ -3245,8 +3387,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}DEFEAT_MUS_A_M20", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::DRONE_HOVER);
-        let p = old.cbits1.contains(flags::ContextBits1::DRONE_HOVER);
+        let n = self.cbits2.contains(flags::ContextBits2::DRONE_HOVER);
+        let p = old.cbits2.contains(flags::ContextBits2::DRONE_HOVER);
         if n != p {
             list.push(format!("{}DRONE_HOVER", if n { "+" } else { "-" }));
         }
@@ -3666,6 +3808,23 @@ impl Context {
     pub fn set_ebih__drone_room__ctx__platform_moved(&mut self, val: bool) {
         self.cbits1.set(
             flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED,
+            val,
+        );
+    }
+    pub fn giguna_breach__sw_save__ctx__door_opened(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED),
+                },
+            },
+        }
+    }
+    pub fn set_giguna_breach__sw_save__ctx__door_opened(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED,
             val,
         );
     }

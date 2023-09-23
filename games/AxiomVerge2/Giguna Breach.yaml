@@ -9,4 +9,443 @@ areas:
   spots:
     - name: Save Point
       coord: [15.5, 6.7]
+      local:
+        - to: East Passage
+    - name: East Passage
+      coord: [14.5, 6.8]
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Column
+          jumps: 4
+    - name: Column
+      coord: [14.3, 6.0]
+      local:
+        - to: East Passage
+        - to: West 7
+    - name: West 7
+      coord: [14.1, 6.7]
+      exits:
+        - to: Chimney > East 7
+          tags: [xdoor]
+
+- name: Chimney
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: East 7
+      coord: [13.9, 6.7]
+      local:
+        - to: Top
+          jumps: 2
+      exits:
+        - to: Peak > West 7
+          tags: [xdoor]
+    - name: Top
+      coord: [13.6, 6.4]
+      local:
+        - to: East 7
+        - to: Middle Platform
+    - name: Middle Platform
+      coord: [13.5, 8.35]
+      local:
+        - to: Top
+          jumps: 12
+        - to: East 9
+        - to: South
+    - name: East 9
+      coord: [13.9, 8.7]
+      local:
+        - to: Middle Platform
+          jumps: 2
+        - to: South
+          jumps: 1
+      exits:
+        - to: Central > West 9
+          tags: [xdoor]
+    - name: South
+      coord: [13.5, 8.8]
+      local:
+        - to: Middle Platform
+          jumps: 2
+        - to: East 9
+          jumps: 1
+      exits:
+        - to: Below Chimney > North
+          tags: [ydoor]
+    - name: East 8
+      coord: [13.95, 7.7]
+      local:
+        - to: Cache
+      exits:
+        - to: Central > West 8
+          tags: [xshift]
+    - name: Cache
+      coord: [13.8, 7.7]
+      local:
+        - to: East 8
+      locations:
+        - name: Flask
+          item: Flask
+          tags: [flask]
+
+- name: Below Chimney
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: North
+      coord: [13.5, 9.2]
+      local:
+        - to: Passage Lip
+        - to: East Ledge
+        - to: Cubby Entrance
+    - name: Passage Lip
+      coord: [13.4, 9.3]
+      local:
+        - to: North
+          jumps: 1
+        - to: East Ledge
+        - to: Cubby Entrance
+        - to: West Passage
+    - name: East Ledge
+      coord: [13.6, 9.5]
+      local:
+        - to: Passage Lip
+          jumps: 1
+        - to: Cubby Entrance
+    - name: Cubby Entrance
+      coord: [13.5, 9.8]
+      local:
+        - to: East Ledge
+          jumps: 2
+      exits:
+        - to: Cubby > Entrance
+          tags: [ydoor]
+    - name: West Passage
+      coord: [13.0, 9.3]
+      local:
+        - to: Passage Lip
+        - to: Southwest
+    - name: Southwest
+      coord: [12.5, 9.8]
+      local:
+        - to: West Passage
+          jumps: 3
+      exits:
+        - to: SW Save > North
+          tags: [ydoor]
+
+- name: Cubby
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: Entrance
+      coord: [13.5, 10.2]
+      local:
+        - to: Rocks
+      exits:
+        - to: Below Chimney > Cubby Entrance
+          tags: [ydoor]
+    - name: Rocks
+      coord: [13.3, 10.6]
+      local:
+        - to: Entrance
+          jumps: 2
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+          time: 0.6
+
+- name: SW Save
+  on_entry: $reset_old_area(^newpos);
+  start:
+    _door_opened: false
+  spots:
+    - name: North
+      coord: [12.5, 10.2]
+      local:
+        - to: Save Point
+        - to: Lower Platform
+        - to: Side Door
+        - to: East 12
+      exits:
+        - to: Below Chimney > Southwest
+          tags: [ydoor]
+    - name: Lower Platform
+      coord: [12.6, 11.2]
+      local:
+        - to: Save Point
+        - to: East 12
+      exits:
+        - to: Side Door
+          req: $hook
+          time: 1  # ?
+    - name: Side Door
+      coord: [12.35, 10.8]
+      local:
+        - to: North
+          jumps: 2
+        - to: Save Point
+        - to: Lower Platform
+      exits:
+        - to: West 11
+          req: ^_door_opened
+          time: 1  # ?
+    - name: West 11
+      coord: [12.1, 10.8]
+      exits:
+        - to: Side Door
+          req: ^_door_opened
+          time: 1  # ?
+      actions:
+        - name: Open Door
+          req: not ^_door_opened
+          do: ^_door_opened = true
+          time: 0.25
+    - name: Save Point
+      coord: [12.5, 11.7]
+      local:
+        - to: East 12
+          jumps: 1
+      exits:
+        - to: Lower Platform
+          req: $hook
+          time: 1  # ?
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East 12
+      coord: [12.9, 11.6]
+      local:
+        - to: Save Point
+      exits:
+        - to: Lower Platform
+          req: $hook
+          time: 1  # ?
+        - to: Robopede > West
+          tags: [xdoor]
+
+- name: Robopede
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: West
+      coord: [13.1, 11.6]
+      local:
+        - to: Center
+      exits:
+        - to: SW Save > East 12
+      # TODO: Robopede may take different amounts of time with hook, hover, screw, etc.
+    - name: Center
+      coord: [14.1, 11.6]
+      local:
+        - to: West
+        - to: North
+          jumps: 2
+    - name: North
+      coord: [14.5, 11.2]
+      local:
+        - to: Center
+      exits:
+        - to: Grid 14,10-11 > South
+          tags: [ydoor]
+
+- name: Grid 14,10-11
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: South
+      coord: [14.5, 10.8]
+      local:
+        - to: East 11
+      exits:
+        - to: Robopede > North
+          tags: [ydoor]
+    - name: East 11
+      coord: [14.9, 10.8]
+      local:
+        - to: South
+      exits:
+        - to: Fire Room > West 11
+          tags: [xdoor]
+    - name: East 10
+      coord: [14.9, 9.8]
+      exits:
+        - to: High Ledge
+          req: $hook
+          time: 1.3
+    - name: High Ledge
+      coord: [14.65, 9.4]
+      local:
+        - to: North
+          jumps: 1
+        - to: East 10
+        - to: South
+    - name: North
+      coord: [14.5, 9.2]
+      local:
+        - to: High Ledge  # TODO: is this doable? or do we fall on the enemy without hook?
+        - to: South
+      exits:
+        - to: Central > South
+          tags: [ydoor]
+
+- name: Fire Room
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: West 11
+      coord: [15.1, 10.8]
+      local:
+        - to: First Fire
+          jumps: 1
+      exits:
+        - to: Grid 14,10-11 > East 11
+          tags: [xdoor]
+    - name: First Fire
+      coord: [15.6, 10.6]
+      local:
+        - to: West 11
+        - to: Cuesta
+          jumps: 2
+      exits:
+        - to: West Plateau
+          req: $hook
+          time: 1.3
+    - name: Cuesta
+      coord: [16.0, 10.5]
+      local:
+        - to: First Fire
+        - to: South
+    - name: South
+      coord: [16.5, 10.8]
+      local:
+        - to: Cuesta
+          jumps: 2
+        - to: East 11
+      exits:
+        - to: Cuesta
+          req: $hook
+          time: 1.5
+        - to: Antechamber > North
+          tags: [ydoor]
+    - name: East 11
+      coord: [16.9, 10.7]
+      local:
+        - to: South
+      exits:
+        - to: Slingshot > West
+          tags: [xdoor]
+    - name: West Plateau
+      coord: [15.4, 10.1]
+      local:
+        - to: First Fire
+        - to: Cuesta
+      exits:
+        - to: East 10
+          req: $hook
+          time: 0.7
+    - name: East 10
+      coord: [15.1, 9.8]
+      local:
+        - to: West Plateau
+      exits:
+        - to: Grid 14,10-11 > East 10
+          tags: [xdoor]
+
+- name: Slingshot
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: West
+      coord: [17.1, 10.7]
+      local:
+        - to: Column
+          jumps: 2
+      exits:
+        - to: Fire Room > East 11
+          tags: [xdoor]
+    - name: Column
+      coord: [17.5, 10.6]
+      local:
+        - to: West
+        - to: Ravine
+    - name: Ravine
+      coord: [17.7, 10.8]
+      locations:
+        - name: Item
+          item: Slingshot_Hook
+          tags: [urn]
+      exits:
+        - to: Column
+          req: $hook
+
+- name: Antechamber
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: North
+      coord: [16.5, 11.2]
+      exits:
+        - to: Fire Room > South
+          tags: [ydoor]
+    # TODO: Breach exit to Wasteland flask
+
+- name: Central
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: West 9
+      coord: [14.1, 8.7]
+      exits:
+        - to: Chimney > East 9
+          tags: [xdoor]
+        - to: Wall
+          req: $hook
+          time: 1  # ?
+    - name: Wall
+      coord: [14.3, 8.4]
+      local:
+        - to: West 9
+        - to: South
+      exits:
+        - to: Upper Floating Brick
+          req: $hook
+          time: 2  # ?
+    - name: South
+      coord: [14.5, 8.8]
+      exits:
+        - to: Grid 14,10-11 > North
+          tags: [ydoor]
+        - to: Upper Floating Brick
+          req: $hook
+          time: 1.6
+    - name: Upper Floating Brick
+      coord: [14.85, 8.0]
+      local:
+        - to: South
+        - to: East Statue
+          jumps: 2
+      exits:
+        - to: West Statue
+          req: $hook
+          time: 1
+    - name: West Statue
+      coord: [14.85, 7.7]
+      local:
+        - to: Upper Floating Brick
+        - to: East Statue
+        - to: Statuette
+    - name: Statuette
+      coord: [14.3, 7.7]
+      local:
+        - to: East Statue
+      exits:
+        - to: Tunnel
+          time: 0.5  # A simplification of destroying the rocks to get in and out
+    - name: Tunnel
+      coord: [14.2, 7.7]
+      local:
+        - to: Statuette
+        - to: West 8
+    - name: West 8
+      coord: [14.05, 7.7]
+      local:
+        - to: Tunnel
+      exits:
+        - to: Chimney > East 8
+          tags: [xshift]
 

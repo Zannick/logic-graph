@@ -1785,6 +1785,365 @@ pub fn local_travel_time(
         ) => 2105,
         (
             [false],
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__Save_Point,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__Column,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Giguna_Breach__Peak__Column,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+        ) => 799,
+        ([false], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        ([false], SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => {
+            1200
+        }
+        ([false], SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => {
+            1052
+        }
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__Top,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1949,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__Top,
+        ) => 7199,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => 450,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__East_8,
+            SpotId::Giguna_Breach__Chimney__Cache,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna_Breach__Chimney__Cache,
+            SpotId::Giguna_Breach__Chimney__East_8,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 500,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 1799,
+        ([false], SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => {
+            701
+        }
+        ([false], SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => {
+            1200
+        }
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 1000,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 500,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__North,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 899,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Robopede__West,
+            SpotId::Giguna_Breach__Robopede__Center,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__West,
+        ) => 3508,
+        (
+            [false],
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__North,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Robopede__North,
+            SpotId::Giguna_Breach__Robopede__Center,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1400,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1600,
+        (
+            [false],
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__South,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            SpotId::Giguna_Breach__Fire_Room__South,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Giguna_Breach__Slingshot__West,
+            SpotId::Giguna_Breach__Slingshot__Column,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__West,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+        ) => 701,
+        ([false], SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => {
+            701
+        }
+        ([false], SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => {
+            701
+        }
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 299,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__West_8,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__West_8,
+            SpotId::Giguna_Breach__Central__Tunnel,
+        ) => 526,
+        (
+            [false],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__East_9,
         ) => 1200,
@@ -5030,6 +5389,357 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
+        (
+            [true],
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__Save_Point,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__Column,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Giguna_Breach__Peak__Column,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+        ) => 799,
+        ([true], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        ([true], SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => {
+            1200
+        }
+        ([true], SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => {
+            1052
+        }
+        (
+            [true],
+            SpotId::Giguna_Breach__Chimney__Top,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1949,
+        (
+            [true],
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__Top,
+        ) => 7199,
+        (
+            [true],
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => 450,
+        (
+            [true],
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1403,
+        ([true], SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__South) => {
+            1403
+        }
+        (
+            [true],
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1200,
+        ([true], SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__East_9) => {
+            1403
+        }
+        ([true], SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__Cache) => {
+            526
+        }
+        ([true], SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__East_8) => {
+            526
+        }
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 350,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 350,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 500,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 350,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 1799,
+        ([true], SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => {
+            701
+        }
+        ([true], SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => {
+            1200
+        }
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 1000,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 500,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__North,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 899,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Robopede__West,
+            SpotId::Giguna_Breach__Robopede__Center,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__West,
+        ) => 3508,
+        (
+            [true],
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__North,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Robopede__North,
+            SpotId::Giguna_Breach__Robopede__Center,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1400,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1600,
+        (
+            [true],
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => 526,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__South,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            SpotId::Giguna_Breach__Fire_Room__South,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Giguna_Breach__Slingshot__West,
+            SpotId::Giguna_Breach__Slingshot__Column,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__West,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+        ) => 701,
+        ([true], SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => {
+            701
+        }
+        ([true], SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 299,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => 350,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__West_8,
+        ) => 526,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__West_8,
+            SpotId::Giguna_Breach__Central__Tunnel,
+        ) => 526,
         (
             [true],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
@@ -8521,6 +9231,374 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Giguna_Breach__Peak__Save_Point => enum_map! {
             SpotId::Giguna_Breach__Peak__Save_Point => 0,
+            SpotId::Giguna_Breach__Peak__East_Passage => 3508,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Peak__East_Passage => enum_map! {
+            SpotId::Giguna_Breach__Peak__Save_Point => 3508,
+            SpotId::Giguna_Breach__Peak__East_Passage => 0,
+            SpotId::Giguna_Breach__Peak__Column => 2400,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Peak__Column => enum_map! {
+            SpotId::Giguna_Breach__Peak__East_Passage => 799,
+            SpotId::Giguna_Breach__Peak__Column => 0,
+            SpotId::Giguna_Breach__Peak__West_7 => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Peak__West_7 => enum_map! {
+            SpotId::Giguna_Breach__Peak__West_7 => 0,
+            SpotId::Giguna_Breach__Chimney__East_7 => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__East_7 => enum_map! {
+            SpotId::Giguna_Breach__Peak__West_7 => 1600,
+            SpotId::Giguna_Breach__Chimney__East_7 => 0,
+            SpotId::Giguna_Breach__Chimney__Top => 1200,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__Top => enum_map! {
+            SpotId::Giguna_Breach__Chimney__East_7 => 1052,
+            SpotId::Giguna_Breach__Chimney__Top => 0,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => 1949,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__Middle_Platform => enum_map! {
+            SpotId::Giguna_Breach__Chimney__Top => 7199,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => 0,
+            SpotId::Giguna_Breach__Chimney__East_9 => 1403,
+            SpotId::Giguna_Breach__Chimney__South => 450,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__East_9 => enum_map! {
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => 1403,
+            SpotId::Giguna_Breach__Chimney__East_9 => 0,
+            SpotId::Giguna_Breach__Chimney__South => 1403,
+            SpotId::Giguna_Breach__Central__West_9 => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__South => enum_map! {
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => 1200,
+            SpotId::Giguna_Breach__Chimney__East_9 => 1403,
+            SpotId::Giguna_Breach__Chimney__South => 0,
+            SpotId::Giguna_Breach__Below_Chimney__North => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__East_8 => enum_map! {
+            SpotId::Giguna_Breach__Chimney__East_8 => 0,
+            SpotId::Giguna_Breach__Chimney__Cache => 526,
+            SpotId::Giguna_Breach__Central__West_8 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Chimney__Cache => enum_map! {
+            SpotId::Giguna_Breach__Chimney__East_8 => 526,
+            SpotId::Giguna_Breach__Chimney__Cache => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__North => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__North => 0,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 350,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 350,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__North => 600,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 0,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 701,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 500,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__East_Ledge => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 701,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 0,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 1200,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 0,
+            SpotId::Giguna_Breach__Cubby__Entrance => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__West_Passage => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 1403,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage => 0,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest => 1754,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__Southwest => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage => 1799,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest => 0,
+            SpotId::Giguna_Breach__SW_Save__North => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Cubby__Entrance => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 1600,
+            SpotId::Giguna_Breach__Cubby__Entrance => 0,
+            SpotId::Giguna_Breach__Cubby__Rocks => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Cubby__Rocks => enum_map! {
+            SpotId::Giguna_Breach__Cubby__Entrance => 1200,
+            SpotId::Giguna_Breach__Cubby__Rocks => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__SW_Save__North => enum_map! {
+            SpotId::Giguna_Breach__Below_Chimney__Southwest => 1600,
+            SpotId::Giguna_Breach__SW_Save__North => 0,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 1000,
+            SpotId::Giguna_Breach__SW_Save__Side_Door => 600,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => 1500,
+            SpotId::Giguna_Breach__SW_Save__East_12 => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__SW_Save__Lower_Platform => enum_map! {
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 0,
+            SpotId::Giguna_Breach__SW_Save__Side_Door => 1000,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => 500,
+            SpotId::Giguna_Breach__SW_Save__East_12 => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__SW_Save__Side_Door => enum_map! {
+            SpotId::Giguna_Breach__SW_Save__North => 1200,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 877,
+            SpotId::Giguna_Breach__SW_Save__Side_Door => 0,
+            SpotId::Giguna_Breach__SW_Save__West_11 => 1000,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => 899,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__SW_Save__West_11 => enum_map! {
+            SpotId::Giguna_Breach__SW_Save__Side_Door => 1000,
+            SpotId::Giguna_Breach__SW_Save__West_11 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__SW_Save__Save_Point => enum_map! {
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 1000,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => 0,
+            SpotId::Giguna_Breach__SW_Save__East_12 => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__SW_Save__East_12 => enum_map! {
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 1000,
+            SpotId::Giguna_Breach__SW_Save__Save_Point => 1403,
+            SpotId::Giguna_Breach__SW_Save__East_12 => 0,
+            SpotId::Giguna_Breach__Robopede__West => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Robopede__West => enum_map! {
+            SpotId::Giguna_Breach__SW_Save__East_12 => 1000,
+            SpotId::Giguna_Breach__Robopede__West => 0,
+            SpotId::Giguna_Breach__Robopede__Center => 3508,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Robopede__Center => enum_map! {
+            SpotId::Giguna_Breach__Robopede__West => 3508,
+            SpotId::Giguna_Breach__Robopede__Center => 0,
+            SpotId::Giguna_Breach__Robopede__North => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Robopede__North => enum_map! {
+            SpotId::Giguna_Breach__Robopede__Center => 1403,
+            SpotId::Giguna_Breach__Robopede__North => 0,
+            SpotId::Giguna_Breach__Grid_14_10_11__South => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__South => enum_map! {
+            SpotId::Giguna_Breach__Robopede__North => 1600,
+            SpotId::Giguna_Breach__Grid_14_10_11__South => 0,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__East_11 => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__South => 1403,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => 0,
+            SpotId::Giguna_Breach__Fire_Room__West_11 => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__East_10 => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => 0,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => 1300,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__South => 1400,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => 877,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => 0,
+            SpotId::Giguna_Breach__Grid_14_10_11__North => 600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__North => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__South => 1600,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => 526,
+            SpotId::Giguna_Breach__Grid_14_10_11__North => 0,
+            SpotId::Giguna_Breach__Central__South => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__West_11 => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => 1600,
+            SpotId::Giguna_Breach__Fire_Room__West_11 => 0,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => 1754,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__First_Fire => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__West_11 => 1754,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => 0,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => 1403,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau => 1300,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__Cuesta => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => 1403,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => 0,
+            SpotId::Giguna_Breach__Fire_Room__South => 1754,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__South => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => 1500,
+            SpotId::Giguna_Breach__Fire_Room__South => 0,
+            SpotId::Giguna_Breach__Antechamber__North => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__East_11 => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__South => 1403,
+            SpotId::Giguna_Breach__Fire_Room__East_11 => 0,
+            SpotId::Giguna_Breach__Slingshot__West => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__West_Plateau => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => 701,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => 2105,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau => 0,
+            SpotId::Giguna_Breach__Fire_Room__East_10 => 700,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Fire_Room__East_10 => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => 1600,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau => 1052,
+            SpotId::Giguna_Breach__Fire_Room__East_10 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Slingshot__West => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__East_11 => 1600,
+            SpotId::Giguna_Breach__Slingshot__West => 0,
+            SpotId::Giguna_Breach__Slingshot__Column => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Slingshot__Column => enum_map! {
+            SpotId::Giguna_Breach__Slingshot__West => 1403,
+            SpotId::Giguna_Breach__Slingshot__Column => 0,
+            SpotId::Giguna_Breach__Slingshot__Ravine => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Slingshot__Ravine => enum_map! {
+            SpotId::Giguna_Breach__Slingshot__Column => 1000,
+            SpotId::Giguna_Breach__Slingshot__Ravine => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Antechamber__North => enum_map! {
+            SpotId::Giguna_Breach__Fire_Room__South => 1600,
+            SpotId::Giguna_Breach__Antechamber__North => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__West_9 => enum_map! {
+            SpotId::Giguna_Breach__Chimney__East_9 => 1600,
+            SpotId::Giguna_Breach__Central__West_9 => 0,
+            SpotId::Giguna_Breach__Central__Wall => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__Wall => enum_map! {
+            SpotId::Giguna_Breach__Central__West_9 => 701,
+            SpotId::Giguna_Breach__Central__Wall => 0,
+            SpotId::Giguna_Breach__Central__South => 701,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 2000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__South => enum_map! {
+            SpotId::Giguna_Breach__Grid_14_10_11__North => 1600,
+            SpotId::Giguna_Breach__Central__South => 0,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__Upper_Floating_Brick => enum_map! {
+            SpotId::Giguna_Breach__Central__South => 1228,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 0,
+            SpotId::Giguna_Breach__Central__West_Statue => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__West_Statue => enum_map! {
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 299,
+            SpotId::Giguna_Breach__Central__West_Statue => 0,
+            SpotId::Giguna_Breach__Central__Statuette => 1929,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__Statuette => enum_map! {
+            SpotId::Giguna_Breach__Central__Statuette => 0,
+            SpotId::Giguna_Breach__Central__Tunnel => 500,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__Tunnel => enum_map! {
+            SpotId::Giguna_Breach__Central__Statuette => 350,
+            SpotId::Giguna_Breach__Central__Tunnel => 0,
+            SpotId::Giguna_Breach__Central__West_8 => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__West_8 => enum_map! {
+            SpotId::Giguna_Breach__Chimney__East_8 => 1350,
+            SpotId::Giguna_Breach__Central__Tunnel => 526,
+            SpotId::Giguna_Breach__Central__West_8 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12215,7 +13293,519 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             1000
         }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__Save_Point) => 0,
+        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
+            3508
+        }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
+            3508
+        }
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__East_Passage) => 0,
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => 2400,
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => 799,
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__Column) => 0,
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__West_7, SpotId::Giguna_Breach__Peak__West_7) => 0,
+        (SpotId::Giguna_Breach__Peak__West_7, SpotId::Giguna_Breach__Chimney__East_7) => 1600,
+        (SpotId::Giguna_Breach__Peak__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Peak__West_7) => 1600,
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__East_7) => 0,
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => 1200,
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => 1052,
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Top) => 0,
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
+            1949
+        }
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Chimney__Middle_Platform, SpotId::Giguna_Breach__Chimney__Top) => {
+            7199
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => 1403,
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => 450,
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1403,
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__East_9) => 0,
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__South) => 1403,
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Central__West_9) => 1600,
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => 1200,
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__East_9) => 1403,
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__South) => 0,
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Below_Chimney__North) => {
+            1600
+        }
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__East_8) => 0,
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__Cache) => 526,
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Central__West_8) => 1350,
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__East_8) => 526,
+        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__Cache) => 0,
+        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 350,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 350,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 600,
+        (SpotId::Giguna_Breach__Below_Chimney__North, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => 600,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 701,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 500,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 1403,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 701,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 350,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => 1200,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Cubby__Entrance,
+        ) => 1600,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => 1403,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => 1754,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => 1799,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__SW_Save__North,
+        ) => 1600,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => 1600,
+        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Entrance) => 0,
+        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => 701,
+        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => 1200,
+        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Rocks) => 0,
+        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => 1600,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__North) => 0,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Lower_Platform) => {
+            1000
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => 600,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => 1500,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => 1403,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 500,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => 1052,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__North) => 1200,
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 877,
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Side_Door) => 0,
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__West_11) => {
+            1000
+        }
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            899
+        }
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__Side_Door) => {
+            1000
+        }
+        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__West_11) => 0,
+        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => 0,
+        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
+            1403
+        }
+        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => 1000,
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            1403
+        }
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__East_12) => 0,
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__Robopede__West) => 1600,
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__SW_Save__East_12) => 1000,
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__West) => 0,
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__Center) => 3508,
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__West) => 3508,
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__Center) => 0,
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => 1403,
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__Center) => 1403,
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__North) => 0,
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Grid_14_10_11__South) => {
+            1600
+        }
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Grid_14_10_11__South, SpotId::Giguna_Breach__Robopede__North) => {
+            1600
+        }
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => 1403,
+        (SpotId::Giguna_Breach__Grid_14_10_11__South, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1403,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => 1600,
+        (SpotId::Giguna_Breach__Grid_14_10_11__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => 1300,
+        (SpotId::Giguna_Breach__Grid_14_10_11__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1400,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => 877,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => 600,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => 1600,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => 526,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => 0,
+        (SpotId::Giguna_Breach__Grid_14_10_11__North, SpotId::Giguna_Breach__Central__South) => {
+            1600
+        }
+        (SpotId::Giguna_Breach__Grid_14_10_11__North, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => 1600,
+        (SpotId::Giguna_Breach__Fire_Room__West_11, SpotId::Giguna_Breach__Fire_Room__West_11) => 0,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 1754,
+        (SpotId::Giguna_Breach__Fire_Room__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => 1754,
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 1403,
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => 1300,
+        (SpotId::Giguna_Breach__Fire_Room__First_Fire, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 1403,
+        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__Cuesta) => 0,
+        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => 1754,
+        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => 1500,
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__South) => 0,
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Antechamber__North) => {
+            1600
+        }
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
+            1403
+        }
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__East_11) => 0,
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Slingshot__West) => 1600,
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => 701,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => 2105,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+        ) => 700,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => 1600,
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => 1052,
+        (SpotId::Giguna_Breach__Fire_Room__East_10, SpotId::Giguna_Breach__Fire_Room__East_10) => 0,
+        (SpotId::Giguna_Breach__Fire_Room__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Fire_Room__East_11) => 1600,
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__West) => 0,
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => 1403,
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__West) => 1403,
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Column) => 0,
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => 701,
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Slingshot__Ravine, SpotId::Giguna_Breach__Slingshot__Column) => {
+            1000
+        }
+        (SpotId::Giguna_Breach__Slingshot__Ravine, SpotId::Giguna_Breach__Slingshot__Ravine) => 0,
+        (SpotId::Giguna_Breach__Slingshot__Ravine, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Antechamber__North, SpotId::Giguna_Breach__Fire_Room__South) => {
+            1600
+        }
+        (SpotId::Giguna_Breach__Antechamber__North, SpotId::Giguna_Breach__Antechamber__North) => 0,
+        (SpotId::Giguna_Breach__Antechamber__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Central__West_9, SpotId::Giguna_Breach__Chimney__East_9) => 1600,
+        (SpotId::Giguna_Breach__Central__West_9, SpotId::Giguna_Breach__Central__West_9) => 0,
+        (SpotId::Giguna_Breach__Central__West_9, SpotId::Giguna_Breach__Central__Wall) => 1000,
+        (SpotId::Giguna_Breach__Central__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => 701,
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__Wall) => 0,
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => 701,
+        (
+            SpotId::Giguna_Breach__Central__Wall,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 2000,
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Central__South, SpotId::Giguna_Breach__Grid_14_10_11__North) => {
+            1600
+        }
+        (SpotId::Giguna_Breach__Central__South, SpotId::Giguna_Breach__Central__South) => 0,
+        (
+            SpotId::Giguna_Breach__Central__South,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 1600,
+        (SpotId::Giguna_Breach__Central__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+        ) => 1228,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 299,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => 1929,
+        (SpotId::Giguna_Breach__Central__West_Statue, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (SpotId::Giguna_Breach__Central__Statuette, SpotId::Giguna_Breach__Central__Statuette) => 0,
+        (SpotId::Giguna_Breach__Central__Statuette, SpotId::Giguna_Breach__Central__Tunnel) => 500,
+        (SpotId::Giguna_Breach__Central__Statuette, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => 350,
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Tunnel) => 0,
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => 526,
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Chimney__East_8) => 1350,
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => 526,
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__West_8) => 0,
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Ebih__Ebih_West__West_9) => 1350,
         (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Giguna__Giguna_Northeast__East_9) => 0,
         (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -15217,6 +16807,227 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => true,
+        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => true,
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => true,
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => true,
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => true,
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => true,
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Chimney__Middle_Platform, SpotId::Giguna_Breach__Chimney__Top) => {
+            true
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => true,
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__South) => true,
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => true,
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__East_9) => true,
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__Cache) => true,
+        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__East_8) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => true,
+        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => true,
+        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => true,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => true,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Lower_Platform) => {
+            true
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => true,
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => true,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => true,
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__North) => true,
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            true
+        }
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => true,
+        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
+            true
+        }
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__Center) => true,
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__West) => true,
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => true,
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__Center) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => true,
+        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => true,
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => true,
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
+            true
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => true,
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => true,
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__West) => true,
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => true,
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => true,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__East_Statue,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__East_Statue,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__East_Statue,
+        ) => true,
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => true,
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => true,
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => true,
         (
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__East_9,
@@ -22660,6 +24471,1081 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            3508,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            3508,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Giguna_Breach__Peak__Column,
+            2400,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Column,
+            SpotId::Giguna_Breach__Peak__East_Passage,
+            799,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Column,
+            SpotId::Giguna_Breach__Peak__Column,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Column,
+            SpotId::Giguna_Breach__Peak__West_7,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Column,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__West_7,
+            SpotId::Giguna_Breach__Peak__West_7,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__West_7,
+            SpotId::Giguna_Breach__Chimney__East_7,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__West_7,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_7,
+            SpotId::Giguna_Breach__Peak__West_7,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_7,
+            SpotId::Giguna_Breach__Chimney__East_7,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_7,
+            SpotId::Giguna_Breach__Chimney__Top,
+            1200,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_7,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Top,
+            SpotId::Giguna_Breach__Chimney__East_7,
+            1052,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Top,
+            SpotId::Giguna_Breach__Chimney__Top,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Top,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            1949,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__Top,
+            7199,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+            450,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__East_9,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__South,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Central__West_9,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            1200,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__East_9,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__South,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_8,
+            SpotId::Giguna_Breach__Chimney__East_8,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_8,
+            SpotId::Giguna_Breach__Chimney__Cache,
+            526,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_8,
+            SpotId::Giguna_Breach__Central__West_8,
+            1350,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__East_8,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Cache,
+            SpotId::Giguna_Breach__Chimney__East_8,
+            526,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Cache,
+            SpotId::Giguna_Breach__Chimney__Cache,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Chimney__Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            350,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            350,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            600,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            600,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            500,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            350,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            1200,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            1754,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            1799,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__SW_Save__North,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            SpotId::Giguna_Breach__Cubby__Rocks,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Rocks,
+            SpotId::Giguna_Breach__Cubby__Entrance,
+            1200,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Rocks,
+            SpotId::Giguna_Breach__Cubby__Rocks,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Cubby__Rocks,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__North,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            600,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            1500,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            500,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            1052,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__North,
+            1200,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            877,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__West_11,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            899,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__West_11,
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__West_11,
+            SpotId::Giguna_Breach__SW_Save__West_11,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__West_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Giguna_Breach__Robopede__West,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__West,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__West,
+            SpotId::Giguna_Breach__Robopede__West,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__West,
+            SpotId::Giguna_Breach__Robopede__Center,
+            3508,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__West,
+            3508,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__Center,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Giguna_Breach__Robopede__North,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__North,
+            SpotId::Giguna_Breach__Robopede__Center,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__North,
+            SpotId::Giguna_Breach__Robopede__North,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Robopede__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Robopede__North,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            1300,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            1400,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            877,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            600,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            526,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Central__South,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            1754,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            1754,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            1300,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__South,
+            1754,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            1500,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__South,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Antechamber__North,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            SpotId::Giguna_Breach__Fire_Room__South,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            SpotId::Giguna_Breach__Slingshot__West,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            2105,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            700,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            1052,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__West,
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__West,
+            SpotId::Giguna_Breach__Slingshot__West,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__West,
+            SpotId::Giguna_Breach__Slingshot__Column,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__West,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__Column,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Column,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+            SpotId::Giguna_Breach__Slingshot__Column,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Slingshot__Ravine,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Antechamber__North,
+            SpotId::Giguna_Breach__Fire_Room__South,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Antechamber__North,
+            SpotId::Giguna_Breach__Antechamber__North,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Antechamber__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_9,
+            SpotId::Giguna_Breach__Chimney__East_9,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_9,
+            SpotId::Giguna_Breach__Central__West_9,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_9,
+            SpotId::Giguna_Breach__Central__Wall,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Wall,
+            SpotId::Giguna_Breach__Central__West_9,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Wall,
+            SpotId::Giguna_Breach__Central__Wall,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Wall,
+            SpotId::Giguna_Breach__Central__South,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Wall,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            2000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Wall,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__South,
+            SpotId::Giguna_Breach__Central__South,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__South,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+            1228,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__West_Statue,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            299,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+            1929,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Statuette,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Tunnel,
+            500,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__Statuette,
+            350,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__Tunnel,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Giguna_Breach__Central__West_8,
+            526,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Tunnel,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_8,
+            SpotId::Giguna_Breach__Chimney__East_8,
+            1350,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_8,
+            SpotId::Giguna_Breach__Central__Tunnel,
+            526,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_8,
+            SpotId::Giguna_Breach__Central__West_8,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_8,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28579,6 +31465,254 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1000)
         }
         (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => Some(1200),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => Some(350),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => Some(701),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => Some(600),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => Some(350),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => Some(350),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => Some(500),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => Some(701),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => Some(600),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => Some(1403),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => Some(1799),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => Some(1403),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => Some(1754),
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => {
+            Some(350)
+        }
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => {
+            Some(526)
+        }
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+        ) => Some(1228),
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => Some(701),
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => Some(701),
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => {
+            Some(526)
+        }
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => Some(1929),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => Some(299),
+        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__East_8) => {
+            Some(526)
+        }
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => Some(1200),
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__Cache) => {
+            Some(526)
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => Some(1403),
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__South) => {
+            Some(1403)
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => Some(1403),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => Some(450),
+        (SpotId::Giguna_Breach__Chimney__Middle_Platform, SpotId::Giguna_Breach__Chimney__Top) => {
+            Some(7199)
+        }
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__East_9) => {
+            Some(1403)
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => Some(1200),
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => Some(1052),
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
+            Some(1949)
+        }
+        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => Some(701),
+        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => Some(1200),
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => Some(1403),
+        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => {
+            Some(1754)
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => Some(1052),
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
+            Some(1403)
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => Some(1403),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => Some(1754),
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => {
+            Some(1754)
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => Some(1754),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => Some(2105),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => Some(701),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => Some(1403),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => Some(877),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => Some(600),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => Some(1400),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => Some(526),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => Some(1600),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => Some(1403),
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => {
+            Some(799)
+        }
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => Some(701),
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => {
+            Some(2400)
+        }
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
+            Some(3508)
+        }
+        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
+            Some(3508)
+        }
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => {
+            Some(1403)
+        }
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__West) => {
+            Some(3508)
+        }
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__Center) => {
+            Some(1403)
+        }
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__Center) => {
+            Some(3508)
+        }
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            Some(1403)
+        }
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => Some(1052),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => Some(500),
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => {
+            Some(1403)
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Lower_Platform) => {
+            Some(1000)
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            Some(1500)
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => {
+            Some(600)
+        }
+        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
+            Some(1403)
+        }
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => Some(877),
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__North) => {
+            Some(1200)
+        }
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            Some(899)
+        }
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => {
+            Some(701)
+        }
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__West) => {
+            Some(1403)
+        }
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => {
+            Some(1403)
+        }
+        (
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
         ) => Some(701),
@@ -31287,6 +34421,268 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             (Some(1000), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => (Some(1200), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__North,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__North,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+        ) => (Some(1799), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            SpotId::Giguna_Breach__Below_Chimney__Southwest,
+        ) => (Some(1754), vec![]),
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__South,
+        ) => (Some(1228), vec![]),
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Statuette,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => (Some(299), vec![]),
+        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__East_8) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__Cache) => {
+            (Some(526), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__East_9,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => (Some(1403), vec![]),
+        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__South) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__East_9,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            SpotId::Giguna_Breach__Chimney__South,
+        ) => (Some(450), vec![]),
+        (SpotId::Giguna_Breach__Chimney__Middle_Platform, SpotId::Giguna_Breach__Chimney__Top) => {
+            (Some(7199), vec![])
+        }
+        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__East_9) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Chimney__South,
+            SpotId::Giguna_Breach__Chimney__Middle_Platform,
+        ) => (Some(1200), vec![]),
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
+            (Some(1949), vec![])
+        }
+        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => (Some(1403), vec![]),
+        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__East_10,
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+        ) => (Some(1052), vec![]),
+        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+        ) => (Some(1754), vec![]),
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => {
+            (Some(1754), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_11,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => (Some(1754), vec![]),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__Cuesta,
+        ) => (Some(2105), vec![]),
+        (
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            SpotId::Giguna_Breach__Fire_Room__First_Fire,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => (Some(1400), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__North,
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+        ) => (Some(1600), vec![]),
+        (
+            SpotId::Giguna_Breach__Grid_14_10_11__South,
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+        ) => (Some(1403), vec![]),
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => {
+            (Some(799), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => {
+            (Some(2400), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
+            (Some(3508), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
+            (Some(3508), vec![])
+        }
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__West) => {
+            (Some(3508), vec![])
+        }
+        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__Center) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__Center) => {
+            (Some(3508), vec![])
+        }
+        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__East_12,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            SpotId::Giguna_Breach__SW_Save__Save_Point,
+        ) => (Some(500), vec![]),
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Lower_Platform) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
+            (Some(1403), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__SW_Save__Side_Door,
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+        ) => (Some(877), vec![]),
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__North) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
+            (Some(899), vec![])
+        }
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__West) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => {
+            (Some(1403), vec![])
         }
         (
             SpotId::Giguna__Building_Interior__Bookshelf,

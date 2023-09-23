@@ -406,6 +406,18 @@ pub fn access_giguna__west_caverns__east_susar__hack__req(ctx: &Context) -> bool
     // not ^_east_susar and $allegiance1
     (!ctx.giguna__west_caverns__ctx__east_susar() && helper__allegiance1!(ctx))
 }
+pub fn access_giguna_breach__sw_save__side_door__ex__west_11_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna_breach__sw_save__ctx__door_opened()
+}
+pub fn access_giguna_breach__sw_save__west_11__ex__side_door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna_breach__sw_save__ctx__door_opened()
+}
+pub fn access_giguna_breach__sw_save__west_11__open_door__req(ctx: &Context) -> bool {
+    // not ^_door_opened
+    !ctx.giguna_breach__sw_save__ctx__door_opened()
+}
 pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
@@ -813,6 +825,10 @@ pub fn action_giguna__west_caverns__east_susar__hack__do(ctx: &mut Context) {
     // ^_east_susar = true
     ctx.set_giguna__west_caverns__ctx__east_susar(true);
 }
+pub fn action_giguna_breach__sw_save__west_11__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna_breach__sw_save__ctx__door_opened(true);
+}
 pub fn action_indra__default(ctx: &mut Context) {
     // ^indra = $default
     ctx.set_indra(Default::default());
@@ -840,6 +856,46 @@ pub fn action_refills__1(ctx: &mut Context) {
 }
 pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos10(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos11(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos2(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos3(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos4(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos5(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos6(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos7(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos8(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos9(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
     helper__reset_old_area!(ctx, newpos);
 }
 pub fn action_reset_old_area__newpos_breach_entry__giguna_breach__peak__save_point(

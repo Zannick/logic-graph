@@ -128,7 +128,17 @@ pub enum AreaId {
     Giguna__Ruins_West,
     Giguna__Wasteland,
     Giguna__West_Caverns,
+    Giguna_Breach__Antechamber,
+    Giguna_Breach__Below_Chimney,
+    Giguna_Breach__Central,
+    Giguna_Breach__Chimney,
+    Giguna_Breach__Cubby,
+    Giguna_Breach__Fire_Room,
+    Giguna_Breach__Grid_14_10_11,
     Giguna_Breach__Peak,
+    Giguna_Breach__Robopede,
+    Giguna_Breach__Slingshot,
+    Giguna_Breach__SW_Save,
     Glacier__Apocalypse_Entry,
     Glacier__Boomerang_Antechamber,
     Glacier__Boomerang_Room,
@@ -202,7 +212,21 @@ impl fmt::Display for AreaId {
             AreaId::Giguna__Ruins_West => write!(f, "{}", "Giguna > Ruins West"),
             AreaId::Giguna__Wasteland => write!(f, "{}", "Giguna > Wasteland"),
             AreaId::Giguna__West_Caverns => write!(f, "{}", "Giguna > West Caverns"),
+            AreaId::Giguna_Breach__Antechamber => write!(f, "{}", "Giguna Breach > Antechamber"),
+            AreaId::Giguna_Breach__Below_Chimney => {
+                write!(f, "{}", "Giguna Breach > Below Chimney")
+            }
+            AreaId::Giguna_Breach__Central => write!(f, "{}", "Giguna Breach > Central"),
+            AreaId::Giguna_Breach__Chimney => write!(f, "{}", "Giguna Breach > Chimney"),
+            AreaId::Giguna_Breach__Cubby => write!(f, "{}", "Giguna Breach > Cubby"),
+            AreaId::Giguna_Breach__Fire_Room => write!(f, "{}", "Giguna Breach > Fire Room"),
+            AreaId::Giguna_Breach__Grid_14_10_11 => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11")
+            }
             AreaId::Giguna_Breach__Peak => write!(f, "{}", "Giguna Breach > Peak"),
+            AreaId::Giguna_Breach__Robopede => write!(f, "{}", "Giguna Breach > Robopede"),
+            AreaId::Giguna_Breach__Slingshot => write!(f, "{}", "Giguna Breach > Slingshot"),
+            AreaId::Giguna_Breach__SW_Save => write!(f, "{}", "Giguna Breach > SW Save"),
             AreaId::Glacier__Apocalypse_Entry => write!(f, "{}", "Glacier > Apocalypse Entry"),
             AreaId::Glacier__Boomerang_Antechamber => {
                 write!(f, "{}", "Glacier > Boomerang Antechamber")
@@ -279,7 +303,17 @@ impl std::str::FromStr for AreaId {
             "Giguna > Ruins West" => Ok(AreaId::Giguna__Ruins_West),
             "Giguna > Wasteland" => Ok(AreaId::Giguna__Wasteland),
             "Giguna > West Caverns" => Ok(AreaId::Giguna__West_Caverns),
+            "Giguna Breach > Antechamber" => Ok(AreaId::Giguna_Breach__Antechamber),
+            "Giguna Breach > Below Chimney" => Ok(AreaId::Giguna_Breach__Below_Chimney),
+            "Giguna Breach > Central" => Ok(AreaId::Giguna_Breach__Central),
+            "Giguna Breach > Chimney" => Ok(AreaId::Giguna_Breach__Chimney),
+            "Giguna Breach > Cubby" => Ok(AreaId::Giguna_Breach__Cubby),
+            "Giguna Breach > Fire Room" => Ok(AreaId::Giguna_Breach__Fire_Room),
+            "Giguna Breach > Grid 14,10-11" => Ok(AreaId::Giguna_Breach__Grid_14_10_11),
             "Giguna Breach > Peak" => Ok(AreaId::Giguna_Breach__Peak),
+            "Giguna Breach > Robopede" => Ok(AreaId::Giguna_Breach__Robopede),
+            "Giguna Breach > Slingshot" => Ok(AreaId::Giguna_Breach__Slingshot),
+            "Giguna Breach > SW Save" => Ok(AreaId::Giguna_Breach__SW_Save),
             "Glacier > Apocalypse Entry" => Ok(AreaId::Glacier__Apocalypse_Entry),
             "Glacier > Boomerang Antechamber" => Ok(AreaId::Glacier__Boomerang_Antechamber),
             "Glacier > Boomerang Room" => Ok(AreaId::Glacier__Boomerang_Room),
@@ -707,7 +741,58 @@ pub enum SpotId {
     Giguna__West_Caverns__Tunnel_Bottom,
     Giguna__West_Caverns__Tunnel_Entrance,
     Giguna__West_Caverns__Tunnel_Fork,
+    Giguna_Breach__Antechamber__North,
+    Giguna_Breach__Below_Chimney__Cubby_Entrance,
+    Giguna_Breach__Below_Chimney__East_Ledge,
+    Giguna_Breach__Below_Chimney__North,
+    Giguna_Breach__Below_Chimney__Passage_Lip,
+    Giguna_Breach__Below_Chimney__Southwest,
+    Giguna_Breach__Below_Chimney__West_Passage,
+    Giguna_Breach__Central__South,
+    Giguna_Breach__Central__Statuette,
+    Giguna_Breach__Central__Tunnel,
+    Giguna_Breach__Central__Upper_Floating_Brick,
+    Giguna_Breach__Central__Wall,
+    Giguna_Breach__Central__West_8,
+    Giguna_Breach__Central__West_9,
+    Giguna_Breach__Central__West_Statue,
+    Giguna_Breach__Chimney__Cache,
+    Giguna_Breach__Chimney__East_7,
+    Giguna_Breach__Chimney__East_8,
+    Giguna_Breach__Chimney__East_9,
+    Giguna_Breach__Chimney__Middle_Platform,
+    Giguna_Breach__Chimney__South,
+    Giguna_Breach__Chimney__Top,
+    Giguna_Breach__Cubby__Entrance,
+    Giguna_Breach__Cubby__Rocks,
+    Giguna_Breach__Fire_Room__Cuesta,
+    Giguna_Breach__Fire_Room__East_10,
+    Giguna_Breach__Fire_Room__East_11,
+    Giguna_Breach__Fire_Room__First_Fire,
+    Giguna_Breach__Fire_Room__South,
+    Giguna_Breach__Fire_Room__West_11,
+    Giguna_Breach__Fire_Room__West_Plateau,
+    Giguna_Breach__Grid_14_10_11__East_10,
+    Giguna_Breach__Grid_14_10_11__East_11,
+    Giguna_Breach__Grid_14_10_11__High_Ledge,
+    Giguna_Breach__Grid_14_10_11__North,
+    Giguna_Breach__Grid_14_10_11__South,
+    Giguna_Breach__Peak__Column,
+    Giguna_Breach__Peak__East_Passage,
     Giguna_Breach__Peak__Save_Point,
+    Giguna_Breach__Peak__West_7,
+    Giguna_Breach__Robopede__Center,
+    Giguna_Breach__Robopede__North,
+    Giguna_Breach__Robopede__West,
+    Giguna_Breach__Slingshot__Column,
+    Giguna_Breach__Slingshot__Ravine,
+    Giguna_Breach__Slingshot__West,
+    Giguna_Breach__SW_Save__East_12,
+    Giguna_Breach__SW_Save__Lower_Platform,
+    Giguna_Breach__SW_Save__North,
+    Giguna_Breach__SW_Save__Save_Point,
+    Giguna_Breach__SW_Save__Side_Door,
+    Giguna_Breach__SW_Save__West_11,
     Glacier__Apocalypse_Entry__Terminal,
     Glacier__Apocalypse_Entry__West,
     Glacier__Boomerang_Antechamber__East_12,
@@ -1690,8 +1775,153 @@ impl fmt::Display for SpotId {
             SpotId::Giguna__West_Caverns__Tunnel_Fork => {
                 write!(f, "{}", "Giguna > West Caverns > Tunnel Fork")
             }
+            SpotId::Giguna_Breach__Antechamber__North => {
+                write!(f, "{}", "Giguna Breach > Antechamber > North")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > Cubby Entrance")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > East Ledge")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__North => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > North")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > Passage Lip")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__Southwest => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > Southwest")
+            }
+            SpotId::Giguna_Breach__Below_Chimney__West_Passage => {
+                write!(f, "{}", "Giguna Breach > Below Chimney > West Passage")
+            }
+            SpotId::Giguna_Breach__Central__South => {
+                write!(f, "{}", "Giguna Breach > Central > South")
+            }
+            SpotId::Giguna_Breach__Central__Statuette => {
+                write!(f, "{}", "Giguna Breach > Central > Statuette")
+            }
+            SpotId::Giguna_Breach__Central__Tunnel => {
+                write!(f, "{}", "Giguna Breach > Central > Tunnel")
+            }
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => {
+                write!(f, "{}", "Giguna Breach > Central > Upper Floating Brick")
+            }
+            SpotId::Giguna_Breach__Central__Wall => {
+                write!(f, "{}", "Giguna Breach > Central > Wall")
+            }
+            SpotId::Giguna_Breach__Central__West_8 => {
+                write!(f, "{}", "Giguna Breach > Central > West 8")
+            }
+            SpotId::Giguna_Breach__Central__West_9 => {
+                write!(f, "{}", "Giguna Breach > Central > West 9")
+            }
+            SpotId::Giguna_Breach__Central__West_Statue => {
+                write!(f, "{}", "Giguna Breach > Central > West Statue")
+            }
+            SpotId::Giguna_Breach__Chimney__Cache => {
+                write!(f, "{}", "Giguna Breach > Chimney > Cache")
+            }
+            SpotId::Giguna_Breach__Chimney__East_7 => {
+                write!(f, "{}", "Giguna Breach > Chimney > East 7")
+            }
+            SpotId::Giguna_Breach__Chimney__East_8 => {
+                write!(f, "{}", "Giguna Breach > Chimney > East 8")
+            }
+            SpotId::Giguna_Breach__Chimney__East_9 => {
+                write!(f, "{}", "Giguna Breach > Chimney > East 9")
+            }
+            SpotId::Giguna_Breach__Chimney__Middle_Platform => {
+                write!(f, "{}", "Giguna Breach > Chimney > Middle Platform")
+            }
+            SpotId::Giguna_Breach__Chimney__South => {
+                write!(f, "{}", "Giguna Breach > Chimney > South")
+            }
+            SpotId::Giguna_Breach__Chimney__Top => write!(f, "{}", "Giguna Breach > Chimney > Top"),
+            SpotId::Giguna_Breach__Cubby__Entrance => {
+                write!(f, "{}", "Giguna Breach > Cubby > Entrance")
+            }
+            SpotId::Giguna_Breach__Cubby__Rocks => write!(f, "{}", "Giguna Breach > Cubby > Rocks"),
+            SpotId::Giguna_Breach__Fire_Room__Cuesta => {
+                write!(f, "{}", "Giguna Breach > Fire Room > Cuesta")
+            }
+            SpotId::Giguna_Breach__Fire_Room__East_10 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > East 10")
+            }
+            SpotId::Giguna_Breach__Fire_Room__East_11 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > East 11")
+            }
+            SpotId::Giguna_Breach__Fire_Room__First_Fire => {
+                write!(f, "{}", "Giguna Breach > Fire Room > First Fire")
+            }
+            SpotId::Giguna_Breach__Fire_Room__South => {
+                write!(f, "{}", "Giguna Breach > Fire Room > South")
+            }
+            SpotId::Giguna_Breach__Fire_Room__West_11 => {
+                write!(f, "{}", "Giguna Breach > Fire Room > West 11")
+            }
+            SpotId::Giguna_Breach__Fire_Room__West_Plateau => {
+                write!(f, "{}", "Giguna Breach > Fire Room > West Plateau")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 10")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 11")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > High Ledge")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__North => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > North")
+            }
+            SpotId::Giguna_Breach__Grid_14_10_11__South => {
+                write!(f, "{}", "Giguna Breach > Grid 14,10-11 > South")
+            }
+            SpotId::Giguna_Breach__Peak__Column => write!(f, "{}", "Giguna Breach > Peak > Column"),
+            SpotId::Giguna_Breach__Peak__East_Passage => {
+                write!(f, "{}", "Giguna Breach > Peak > East Passage")
+            }
             SpotId::Giguna_Breach__Peak__Save_Point => {
                 write!(f, "{}", "Giguna Breach > Peak > Save Point")
+            }
+            SpotId::Giguna_Breach__Peak__West_7 => write!(f, "{}", "Giguna Breach > Peak > West 7"),
+            SpotId::Giguna_Breach__Robopede__Center => {
+                write!(f, "{}", "Giguna Breach > Robopede > Center")
+            }
+            SpotId::Giguna_Breach__Robopede__North => {
+                write!(f, "{}", "Giguna Breach > Robopede > North")
+            }
+            SpotId::Giguna_Breach__Robopede__West => {
+                write!(f, "{}", "Giguna Breach > Robopede > West")
+            }
+            SpotId::Giguna_Breach__Slingshot__Column => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Column")
+            }
+            SpotId::Giguna_Breach__Slingshot__Ravine => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Ravine")
+            }
+            SpotId::Giguna_Breach__Slingshot__West => {
+                write!(f, "{}", "Giguna Breach > Slingshot > West")
+            }
+            SpotId::Giguna_Breach__SW_Save__East_12 => {
+                write!(f, "{}", "Giguna Breach > SW Save > East 12")
+            }
+            SpotId::Giguna_Breach__SW_Save__Lower_Platform => {
+                write!(f, "{}", "Giguna Breach > SW Save > Lower Platform")
+            }
+            SpotId::Giguna_Breach__SW_Save__North => {
+                write!(f, "{}", "Giguna Breach > SW Save > North")
+            }
+            SpotId::Giguna_Breach__SW_Save__Save_Point => {
+                write!(f, "{}", "Giguna Breach > SW Save > Save Point")
+            }
+            SpotId::Giguna_Breach__SW_Save__Side_Door => {
+                write!(f, "{}", "Giguna Breach > SW Save > Side Door")
+            }
+            SpotId::Giguna_Breach__SW_Save__West_11 => {
+                write!(f, "{}", "Giguna Breach > SW Save > West 11")
             }
             SpotId::Glacier__Apocalypse_Entry__Terminal => {
                 write!(f, "{}", "Glacier > Apocalypse Entry > Terminal")
@@ -2523,7 +2753,94 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Giguna__West_Caverns__Tunnel_Entrance)
             }
             "Giguna > West Caverns > Tunnel Fork" => Ok(SpotId::Giguna__West_Caverns__Tunnel_Fork),
+            "Giguna Breach > Antechamber > North" => Ok(SpotId::Giguna_Breach__Antechamber__North),
+            "Giguna Breach > Below Chimney > Cubby Entrance" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance)
+            }
+            "Giguna Breach > Below Chimney > East Ledge" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__East_Ledge)
+            }
+            "Giguna Breach > Below Chimney > North" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__North)
+            }
+            "Giguna Breach > Below Chimney > Passage Lip" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__Passage_Lip)
+            }
+            "Giguna Breach > Below Chimney > Southwest" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__Southwest)
+            }
+            "Giguna Breach > Below Chimney > West Passage" => {
+                Ok(SpotId::Giguna_Breach__Below_Chimney__West_Passage)
+            }
+            "Giguna Breach > Central > South" => Ok(SpotId::Giguna_Breach__Central__South),
+            "Giguna Breach > Central > Statuette" => Ok(SpotId::Giguna_Breach__Central__Statuette),
+            "Giguna Breach > Central > Tunnel" => Ok(SpotId::Giguna_Breach__Central__Tunnel),
+            "Giguna Breach > Central > Upper Floating Brick" => {
+                Ok(SpotId::Giguna_Breach__Central__Upper_Floating_Brick)
+            }
+            "Giguna Breach > Central > Wall" => Ok(SpotId::Giguna_Breach__Central__Wall),
+            "Giguna Breach > Central > West 8" => Ok(SpotId::Giguna_Breach__Central__West_8),
+            "Giguna Breach > Central > West 9" => Ok(SpotId::Giguna_Breach__Central__West_9),
+            "Giguna Breach > Central > West Statue" => {
+                Ok(SpotId::Giguna_Breach__Central__West_Statue)
+            }
+            "Giguna Breach > Chimney > Cache" => Ok(SpotId::Giguna_Breach__Chimney__Cache),
+            "Giguna Breach > Chimney > East 7" => Ok(SpotId::Giguna_Breach__Chimney__East_7),
+            "Giguna Breach > Chimney > East 8" => Ok(SpotId::Giguna_Breach__Chimney__East_8),
+            "Giguna Breach > Chimney > East 9" => Ok(SpotId::Giguna_Breach__Chimney__East_9),
+            "Giguna Breach > Chimney > Middle Platform" => {
+                Ok(SpotId::Giguna_Breach__Chimney__Middle_Platform)
+            }
+            "Giguna Breach > Chimney > South" => Ok(SpotId::Giguna_Breach__Chimney__South),
+            "Giguna Breach > Chimney > Top" => Ok(SpotId::Giguna_Breach__Chimney__Top),
+            "Giguna Breach > Cubby > Entrance" => Ok(SpotId::Giguna_Breach__Cubby__Entrance),
+            "Giguna Breach > Cubby > Rocks" => Ok(SpotId::Giguna_Breach__Cubby__Rocks),
+            "Giguna Breach > Fire Room > Cuesta" => Ok(SpotId::Giguna_Breach__Fire_Room__Cuesta),
+            "Giguna Breach > Fire Room > East 10" => Ok(SpotId::Giguna_Breach__Fire_Room__East_10),
+            "Giguna Breach > Fire Room > East 11" => Ok(SpotId::Giguna_Breach__Fire_Room__East_11),
+            "Giguna Breach > Fire Room > First Fire" => {
+                Ok(SpotId::Giguna_Breach__Fire_Room__First_Fire)
+            }
+            "Giguna Breach > Fire Room > South" => Ok(SpotId::Giguna_Breach__Fire_Room__South),
+            "Giguna Breach > Fire Room > West 11" => Ok(SpotId::Giguna_Breach__Fire_Room__West_11),
+            "Giguna Breach > Fire Room > West Plateau" => {
+                Ok(SpotId::Giguna_Breach__Fire_Room__West_Plateau)
+            }
+            "Giguna Breach > Grid 14,10-11 > East 10" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__East_10)
+            }
+            "Giguna Breach > Grid 14,10-11 > East 11" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__East_11)
+            }
+            "Giguna Breach > Grid 14,10-11 > High Ledge" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge)
+            }
+            "Giguna Breach > Grid 14,10-11 > North" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__North)
+            }
+            "Giguna Breach > Grid 14,10-11 > South" => {
+                Ok(SpotId::Giguna_Breach__Grid_14_10_11__South)
+            }
+            "Giguna Breach > Peak > Column" => Ok(SpotId::Giguna_Breach__Peak__Column),
+            "Giguna Breach > Peak > East Passage" => Ok(SpotId::Giguna_Breach__Peak__East_Passage),
             "Giguna Breach > Peak > Save Point" => Ok(SpotId::Giguna_Breach__Peak__Save_Point),
+            "Giguna Breach > Peak > West 7" => Ok(SpotId::Giguna_Breach__Peak__West_7),
+            "Giguna Breach > Robopede > Center" => Ok(SpotId::Giguna_Breach__Robopede__Center),
+            "Giguna Breach > Robopede > North" => Ok(SpotId::Giguna_Breach__Robopede__North),
+            "Giguna Breach > Robopede > West" => Ok(SpotId::Giguna_Breach__Robopede__West),
+            "Giguna Breach > Slingshot > Column" => Ok(SpotId::Giguna_Breach__Slingshot__Column),
+            "Giguna Breach > Slingshot > Ravine" => Ok(SpotId::Giguna_Breach__Slingshot__Ravine),
+            "Giguna Breach > Slingshot > West" => Ok(SpotId::Giguna_Breach__Slingshot__West),
+            "Giguna Breach > SW Save > East 12" => Ok(SpotId::Giguna_Breach__SW_Save__East_12),
+            "Giguna Breach > SW Save > Lower Platform" => {
+                Ok(SpotId::Giguna_Breach__SW_Save__Lower_Platform)
+            }
+            "Giguna Breach > SW Save > North" => Ok(SpotId::Giguna_Breach__SW_Save__North),
+            "Giguna Breach > SW Save > Save Point" => {
+                Ok(SpotId::Giguna_Breach__SW_Save__Save_Point)
+            }
+            "Giguna Breach > SW Save > Side Door" => Ok(SpotId::Giguna_Breach__SW_Save__Side_Door),
+            "Giguna Breach > SW Save > West 11" => Ok(SpotId::Giguna_Breach__SW_Save__West_11),
             "Glacier > Apocalypse Entry > Terminal" => {
                 Ok(SpotId::Glacier__Apocalypse_Entry__Terminal)
             }
@@ -2771,6 +3088,9 @@ pub enum LocationId {
     Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
     Giguna__West_Caverns__Bush__Item,
     Giguna__West_Caverns__Cache__Item,
+    Giguna_Breach__Chimney__Cache__Flask,
+    Giguna_Breach__Cubby__Rocks__Health,
+    Giguna_Breach__Slingshot__Ravine__Item,
     Glacier__Apocalypse_Entry__Terminal__Escape,
     Glacier__Boomerang_Room__Pedestal__Item,
     Glacier__Boomerang_Room__Pedestal__Switch,
@@ -3049,6 +3369,15 @@ impl fmt::Display for LocationId {
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
                 write!(f, "{}", "Giguna > West Caverns > Cache > Item")
+            }
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => {
+                write!(f, "{}", "Giguna Breach > Chimney > Cache > Flask")
+            }
+            LocationId::Giguna_Breach__Cubby__Rocks__Health => {
+                write!(f, "{}", "Giguna Breach > Cubby > Rocks > Health")
+            }
+            LocationId::Giguna_Breach__Slingshot__Ravine__Item => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Item")
             }
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 write!(f, "{}", "Glacier > Apocalypse Entry > Terminal > Escape")
@@ -3391,6 +3720,15 @@ impl std::str::FromStr for LocationId {
             }
             "Giguna > West Caverns > Cache > Item" => {
                 Ok(LocationId::Giguna__West_Caverns__Cache__Item)
+            }
+            "Giguna Breach > Chimney > Cache > Flask" => {
+                Ok(LocationId::Giguna_Breach__Chimney__Cache__Flask)
+            }
+            "Giguna Breach > Cubby > Rocks > Health" => {
+                Ok(LocationId::Giguna_Breach__Cubby__Rocks__Health)
+            }
+            "Giguna Breach > Slingshot > Ravine > Item" => {
+                Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Item)
             }
             "Glacier > Apocalypse Entry > Terminal > Escape" => {
                 Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape)
@@ -3832,6 +4170,45 @@ pub enum ExitId {
     Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1,
     Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1,
     Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1,
+    Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1,
+    Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1,
+    Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1,
+    Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1,
+    Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1,
+    Giguna_Breach__Central__Statuette__ex__Tunnel_1,
+    Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1,
+    Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1,
+    Giguna_Breach__Central__West_8__ex__Chimney__East_8_1,
+    Giguna_Breach__Central__West_9__ex__Chimney__East_9_1,
+    Giguna_Breach__Central__West_9__ex__Wall_1,
+    Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1,
+    Giguna_Breach__Chimney__East_8__ex__Central__West_8_1,
+    Giguna_Breach__Chimney__East_9__ex__Central__West_9_1,
+    Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1,
+    Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1,
+    Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1,
+    Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1,
+    Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1,
+    Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1,
+    Giguna_Breach__Fire_Room__South__ex__Cuesta_1,
+    Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1,
+    Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1,
+    Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1,
+    Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1,
+    Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1,
+    Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1,
+    Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1,
+    Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1,
+    Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1,
+    Giguna_Breach__Slingshot__Ravine__ex__Column_1,
+    Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1,
+    Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1,
+    Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1,
+    Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1,
+    Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1,
+    Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1,
+    Giguna_Breach__SW_Save__Side_Door__ex__West_11_1,
+    Giguna_Breach__SW_Save__West_11__ex__Side_Door_1,
     Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1,
     Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1,
     Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1,
@@ -4215,6 +4592,45 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => write!(f, "{}", "Giguna > West Caverns > Tunnel Bottom ==> Tunnel Entrance (1)"),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 => write!(f, "{}", "Giguna > West Caverns > Tunnel Fork ==> Tunnel Bottom (1)"),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => write!(f, "{}", "Giguna > West Caverns > Tunnel Fork ==> Tunnel Entrance (1)"),
+            ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => write!(f, "{}", "Giguna Breach > Antechamber > North ==> Fire Room > South (1)"),
+            ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => write!(f, "{}", "Giguna Breach > Below Chimney > Cubby Entrance ==> Cubby > Entrance (1)"),
+            ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => write!(f, "{}", "Giguna Breach > Below Chimney > Southwest ==> SW Save > North (1)"),
+            ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1 => write!(f, "{}", "Giguna Breach > Central > South ==> Grid 14,10-11 > North (1)"),
+            ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1 => write!(f, "{}", "Giguna Breach > Central > South ==> Upper Floating Brick (1)"),
+            ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1 => write!(f, "{}", "Giguna Breach > Central > Statuette ==> Tunnel (1)"),
+            ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1 => write!(f, "{}", "Giguna Breach > Central > Upper Floating Brick ==> West Statue (1)"),
+            ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1 => write!(f, "{}", "Giguna Breach > Central > Wall ==> Upper Floating Brick (1)"),
+            ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1 => write!(f, "{}", "Giguna Breach > Central > West 8 ==> Chimney > East 8 (1)"),
+            ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1 => write!(f, "{}", "Giguna Breach > Central > West 9 ==> Chimney > East 9 (1)"),
+            ExitId::Giguna_Breach__Central__West_9__ex__Wall_1 => write!(f, "{}", "Giguna Breach > Central > West 9 ==> Wall (1)"),
+            ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1 => write!(f, "{}", "Giguna Breach > Chimney > East 7 ==> Peak > West 7 (1)"),
+            ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1 => write!(f, "{}", "Giguna Breach > Chimney > East 8 ==> Central > West 8 (1)"),
+            ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => write!(f, "{}", "Giguna Breach > Chimney > East 9 ==> Central > West 9 (1)"),
+            ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => write!(f, "{}", "Giguna Breach > Chimney > South ==> Below Chimney > North (1)"),
+            ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => write!(f, "{}", "Giguna Breach > Cubby > Entrance ==> Below Chimney > Cubby Entrance (1)"),
+            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => write!(f, "{}", "Giguna Breach > Fire Room > East 10 ==> Grid 14,10-11 > East 10 (1)"),
+            ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => write!(f, "{}", "Giguna Breach > Fire Room > East 11 ==> Slingshot > West (1)"),
+            ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => write!(f, "{}", "Giguna Breach > Fire Room > First Fire ==> West Plateau (1)"),
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => write!(f, "{}", "Giguna Breach > Fire Room > South ==> Antechamber > North (1)"),
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => write!(f, "{}", "Giguna Breach > Fire Room > South ==> Cuesta (1)"),
+            ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => write!(f, "{}", "Giguna Breach > Fire Room > West 11 ==> Grid 14,10-11 > East 11 (1)"),
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => write!(f, "{}", "Giguna Breach > Fire Room > West Plateau ==> East 10 (1)"),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 10 ==> High Ledge (1)"),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > East 11 ==> Fire Room > West 11 (1)"),
+            ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > North ==> Central > South (1)"),
+            ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => write!(f, "{}", "Giguna Breach > Grid 14,10-11 > South ==> Robopede > North (1)"),
+            ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => write!(f, "{}", "Giguna Breach > Peak > West 7 ==> Chimney > East 7 (1)"),
+            ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => write!(f, "{}", "Giguna Breach > Robopede > North ==> Grid 14,10-11 > South (1)"),
+            ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1 => write!(f, "{}", "Giguna Breach > Robopede > West ==> SW Save > East 12 (1)"),
+            ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1 => write!(f, "{}", "Giguna Breach > Slingshot > Ravine ==> Column (1)"),
+            ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => write!(f, "{}", "Giguna Breach > Slingshot > West ==> Fire Room > East 11 (1)"),
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1 => write!(f, "{}", "Giguna Breach > SW Save > East 12 ==> Lower Platform (1)"),
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1 => write!(f, "{}", "Giguna Breach > SW Save > East 12 ==> Robopede > West (1)"),
+            ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1 => write!(f, "{}", "Giguna Breach > SW Save > Lower Platform ==> Side Door (1)"),
+            ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1 => write!(f, "{}", "Giguna Breach > SW Save > North ==> Below Chimney > Southwest (1)"),
+            ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => write!(f, "{}", "Giguna Breach > SW Save > Save Point ==> Lower Platform (1)"),
+            ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => write!(f, "{}", "Giguna Breach > SW Save > Side Door ==> West 11 (1)"),
+            ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => write!(f, "{}", "Giguna Breach > SW Save > West 11 ==> Side Door (1)"),
             ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => write!(f, "{}", "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)"),
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)"),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => write!(f, "{}", "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)"),
@@ -4603,6 +5019,45 @@ impl std::str::FromStr for ExitId {
             "Giguna > West Caverns > Tunnel Bottom ==> Tunnel Entrance (1)" => Ok(ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1),
             "Giguna > West Caverns > Tunnel Fork ==> Tunnel Bottom (1)" => Ok(ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1),
             "Giguna > West Caverns > Tunnel Fork ==> Tunnel Entrance (1)" => Ok(ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1),
+            "Giguna Breach > Antechamber > North ==> Fire Room > South (1)" => Ok(ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1),
+            "Giguna Breach > Below Chimney > Cubby Entrance ==> Cubby > Entrance (1)" => Ok(ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1),
+            "Giguna Breach > Below Chimney > Southwest ==> SW Save > North (1)" => Ok(ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1),
+            "Giguna Breach > Central > South ==> Grid 14,10-11 > North (1)" => Ok(ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1),
+            "Giguna Breach > Central > South ==> Upper Floating Brick (1)" => Ok(ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1),
+            "Giguna Breach > Central > Statuette ==> Tunnel (1)" => Ok(ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1),
+            "Giguna Breach > Central > Upper Floating Brick ==> West Statue (1)" => Ok(ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1),
+            "Giguna Breach > Central > Wall ==> Upper Floating Brick (1)" => Ok(ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1),
+            "Giguna Breach > Central > West 8 ==> Chimney > East 8 (1)" => Ok(ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1),
+            "Giguna Breach > Central > West 9 ==> Chimney > East 9 (1)" => Ok(ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1),
+            "Giguna Breach > Central > West 9 ==> Wall (1)" => Ok(ExitId::Giguna_Breach__Central__West_9__ex__Wall_1),
+            "Giguna Breach > Chimney > East 7 ==> Peak > West 7 (1)" => Ok(ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1),
+            "Giguna Breach > Chimney > East 8 ==> Central > West 8 (1)" => Ok(ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1),
+            "Giguna Breach > Chimney > East 9 ==> Central > West 9 (1)" => Ok(ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1),
+            "Giguna Breach > Chimney > South ==> Below Chimney > North (1)" => Ok(ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1),
+            "Giguna Breach > Cubby > Entrance ==> Below Chimney > Cubby Entrance (1)" => Ok(ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1),
+            "Giguna Breach > Fire Room > East 10 ==> Grid 14,10-11 > East 10 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1),
+            "Giguna Breach > Fire Room > East 11 ==> Slingshot > West (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1),
+            "Giguna Breach > Fire Room > First Fire ==> West Plateau (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1),
+            "Giguna Breach > Fire Room > South ==> Antechamber > North (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1),
+            "Giguna Breach > Fire Room > South ==> Cuesta (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1),
+            "Giguna Breach > Fire Room > West 11 ==> Grid 14,10-11 > East 11 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1),
+            "Giguna Breach > Fire Room > West Plateau ==> East 10 (1)" => Ok(ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1),
+            "Giguna Breach > Grid 14,10-11 > East 10 ==> High Ledge (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1),
+            "Giguna Breach > Grid 14,10-11 > East 11 ==> Fire Room > West 11 (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1),
+            "Giguna Breach > Grid 14,10-11 > North ==> Central > South (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1),
+            "Giguna Breach > Grid 14,10-11 > South ==> Robopede > North (1)" => Ok(ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1),
+            "Giguna Breach > Peak > West 7 ==> Chimney > East 7 (1)" => Ok(ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1),
+            "Giguna Breach > Robopede > North ==> Grid 14,10-11 > South (1)" => Ok(ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1),
+            "Giguna Breach > Robopede > West ==> SW Save > East 12 (1)" => Ok(ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1),
+            "Giguna Breach > Slingshot > Ravine ==> Column (1)" => Ok(ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1),
+            "Giguna Breach > Slingshot > West ==> Fire Room > East 11 (1)" => Ok(ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1),
+            "Giguna Breach > SW Save > East 12 ==> Lower Platform (1)" => Ok(ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1),
+            "Giguna Breach > SW Save > East 12 ==> Robopede > West (1)" => Ok(ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1),
+            "Giguna Breach > SW Save > Lower Platform ==> Side Door (1)" => Ok(ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1),
+            "Giguna Breach > SW Save > North ==> Below Chimney > Southwest (1)" => Ok(ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1),
+            "Giguna Breach > SW Save > Save Point ==> Lower Platform (1)" => Ok(ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1),
+            "Giguna Breach > SW Save > Side Door ==> West 11 (1)" => Ok(ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1),
+            "Giguna Breach > SW Save > West 11 ==> Side Door (1)" => Ok(ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1),
             "Glacier > Apocalypse Entry > West ==> Grid 43,10-11 > East (1)" => Ok(ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1),
             "Glacier > Boomerang Antechamber > East 12 ==> Boomerang Room > West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1),
             "Glacier > Boomerang Antechamber > Upper East ==> Boomerang Room Switched > Upper West (1)" => Ok(ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1),
@@ -4754,6 +5209,8 @@ pub enum ActionId {
     Giguna__West_Caverns__East_Susar__Caught,
     Giguna__West_Caverns__East_Susar__Hack,
     Giguna__West_Caverns__Small_Platform__Throw_Drone_Up,
+    Giguna_Breach__SW_Save__Save_Point__Save,
+    Giguna_Breach__SW_Save__West_11__Open_Door,
     Glacier__Revival__Save_Point__Save,
     Global__Deploy_Drone,
     Global__Recall_Drone,
@@ -4909,6 +5366,12 @@ impl fmt::Display for ActionId {
                 "{}",
                 "Giguna > West Caverns > Small Platform > Throw Drone Up"
             ),
+            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
+                write!(f, "{}", "Giguna Breach > SW Save > Save Point > Save")
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                write!(f, "{}", "Giguna Breach > SW Save > West 11 > Open Door")
+            }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 write!(f, "{}", "Glacier > Revival > Save Point > Save")
             }
@@ -5040,6 +5503,12 @@ impl std::str::FromStr for ActionId {
             }
             "Giguna > West Caverns > Small Platform > Throw Drone Up" => {
                 Ok(ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up)
+            }
+            "Giguna Breach > SW Save > Save Point > Save" => {
+                Ok(ActionId::Giguna_Breach__SW_Save__Save_Point__Save)
+            }
+            "Giguna Breach > SW Save > West 11 > Open Door" => {
+                Ok(ActionId::Giguna_Breach__SW_Save__West_11__Open_Door)
             }
             "Glacier > Revival > Save Point > Save" => {
                 Ok(ActionId::Glacier__Revival__Save_Point__Save)
@@ -5520,7 +5989,59 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Observation_Tower_Room__Cliff
         | SpotId::Ebih__Observation_Tower_Room__West_10
         | SpotId::Ebih__Observation_Tower_Room__East_11 => AreaId::Ebih__Observation_Tower_Room,
-        SpotId::Giguna_Breach__Peak__Save_Point => AreaId::Giguna_Breach__Peak,
+        SpotId::Giguna_Breach__Peak__Save_Point
+        | SpotId::Giguna_Breach__Peak__East_Passage
+        | SpotId::Giguna_Breach__Peak__Column
+        | SpotId::Giguna_Breach__Peak__West_7 => AreaId::Giguna_Breach__Peak,
+        SpotId::Giguna_Breach__Chimney__East_7
+        | SpotId::Giguna_Breach__Chimney__Top
+        | SpotId::Giguna_Breach__Chimney__Middle_Platform
+        | SpotId::Giguna_Breach__Chimney__East_9
+        | SpotId::Giguna_Breach__Chimney__South
+        | SpotId::Giguna_Breach__Chimney__East_8
+        | SpotId::Giguna_Breach__Chimney__Cache => AreaId::Giguna_Breach__Chimney,
+        SpotId::Giguna_Breach__Below_Chimney__North
+        | SpotId::Giguna_Breach__Below_Chimney__Passage_Lip
+        | SpotId::Giguna_Breach__Below_Chimney__East_Ledge
+        | SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance
+        | SpotId::Giguna_Breach__Below_Chimney__West_Passage
+        | SpotId::Giguna_Breach__Below_Chimney__Southwest => AreaId::Giguna_Breach__Below_Chimney,
+        SpotId::Giguna_Breach__Cubby__Entrance | SpotId::Giguna_Breach__Cubby__Rocks => {
+            AreaId::Giguna_Breach__Cubby
+        }
+        SpotId::Giguna_Breach__SW_Save__North
+        | SpotId::Giguna_Breach__SW_Save__Lower_Platform
+        | SpotId::Giguna_Breach__SW_Save__Side_Door
+        | SpotId::Giguna_Breach__SW_Save__West_11
+        | SpotId::Giguna_Breach__SW_Save__Save_Point
+        | SpotId::Giguna_Breach__SW_Save__East_12 => AreaId::Giguna_Breach__SW_Save,
+        SpotId::Giguna_Breach__Robopede__West
+        | SpotId::Giguna_Breach__Robopede__Center
+        | SpotId::Giguna_Breach__Robopede__North => AreaId::Giguna_Breach__Robopede,
+        SpotId::Giguna_Breach__Grid_14_10_11__South
+        | SpotId::Giguna_Breach__Grid_14_10_11__East_11
+        | SpotId::Giguna_Breach__Grid_14_10_11__East_10
+        | SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge
+        | SpotId::Giguna_Breach__Grid_14_10_11__North => AreaId::Giguna_Breach__Grid_14_10_11,
+        SpotId::Giguna_Breach__Fire_Room__West_11
+        | SpotId::Giguna_Breach__Fire_Room__First_Fire
+        | SpotId::Giguna_Breach__Fire_Room__Cuesta
+        | SpotId::Giguna_Breach__Fire_Room__South
+        | SpotId::Giguna_Breach__Fire_Room__East_11
+        | SpotId::Giguna_Breach__Fire_Room__West_Plateau
+        | SpotId::Giguna_Breach__Fire_Room__East_10 => AreaId::Giguna_Breach__Fire_Room,
+        SpotId::Giguna_Breach__Slingshot__West
+        | SpotId::Giguna_Breach__Slingshot__Column
+        | SpotId::Giguna_Breach__Slingshot__Ravine => AreaId::Giguna_Breach__Slingshot,
+        SpotId::Giguna_Breach__Antechamber__North => AreaId::Giguna_Breach__Antechamber,
+        SpotId::Giguna_Breach__Central__West_9
+        | SpotId::Giguna_Breach__Central__Wall
+        | SpotId::Giguna_Breach__Central__South
+        | SpotId::Giguna_Breach__Central__Upper_Floating_Brick
+        | SpotId::Giguna_Breach__Central__West_Statue
+        | SpotId::Giguna_Breach__Central__Statuette
+        | SpotId::Giguna_Breach__Central__Tunnel
+        | SpotId::Giguna_Breach__Central__West_8 => AreaId::Giguna_Breach__Central,
         SpotId::Giguna__Giguna_Northeast__East_9
         | SpotId::Giguna__Giguna_Northeast__Inner_Wall
         | SpotId::Giguna__Giguna_Northeast__Crow_Eating
@@ -6018,7 +6539,59 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Observation_Tower_Room__Cliff
         | SpotId::Ebih__Observation_Tower_Room__West_10
         | SpotId::Ebih__Observation_Tower_Room__East_11 => RegionId::Ebih,
-        SpotId::Giguna_Breach__Peak__Save_Point => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Peak__Save_Point
+        | SpotId::Giguna_Breach__Peak__East_Passage
+        | SpotId::Giguna_Breach__Peak__Column
+        | SpotId::Giguna_Breach__Peak__West_7 => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Chimney__East_7
+        | SpotId::Giguna_Breach__Chimney__Top
+        | SpotId::Giguna_Breach__Chimney__Middle_Platform
+        | SpotId::Giguna_Breach__Chimney__East_9
+        | SpotId::Giguna_Breach__Chimney__South
+        | SpotId::Giguna_Breach__Chimney__East_8
+        | SpotId::Giguna_Breach__Chimney__Cache => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Below_Chimney__North
+        | SpotId::Giguna_Breach__Below_Chimney__Passage_Lip
+        | SpotId::Giguna_Breach__Below_Chimney__East_Ledge
+        | SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance
+        | SpotId::Giguna_Breach__Below_Chimney__West_Passage
+        | SpotId::Giguna_Breach__Below_Chimney__Southwest => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Cubby__Entrance | SpotId::Giguna_Breach__Cubby__Rocks => {
+            RegionId::Giguna_Breach
+        }
+        SpotId::Giguna_Breach__SW_Save__North
+        | SpotId::Giguna_Breach__SW_Save__Lower_Platform
+        | SpotId::Giguna_Breach__SW_Save__Side_Door
+        | SpotId::Giguna_Breach__SW_Save__West_11
+        | SpotId::Giguna_Breach__SW_Save__Save_Point
+        | SpotId::Giguna_Breach__SW_Save__East_12 => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Robopede__West
+        | SpotId::Giguna_Breach__Robopede__Center
+        | SpotId::Giguna_Breach__Robopede__North => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Grid_14_10_11__South
+        | SpotId::Giguna_Breach__Grid_14_10_11__East_11
+        | SpotId::Giguna_Breach__Grid_14_10_11__East_10
+        | SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge
+        | SpotId::Giguna_Breach__Grid_14_10_11__North => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Fire_Room__West_11
+        | SpotId::Giguna_Breach__Fire_Room__First_Fire
+        | SpotId::Giguna_Breach__Fire_Room__Cuesta
+        | SpotId::Giguna_Breach__Fire_Room__South
+        | SpotId::Giguna_Breach__Fire_Room__East_11
+        | SpotId::Giguna_Breach__Fire_Room__West_Plateau
+        | SpotId::Giguna_Breach__Fire_Room__East_10 => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Slingshot__West
+        | SpotId::Giguna_Breach__Slingshot__Column
+        | SpotId::Giguna_Breach__Slingshot__Ravine => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Antechamber__North => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Central__West_9
+        | SpotId::Giguna_Breach__Central__Wall
+        | SpotId::Giguna_Breach__Central__South
+        | SpotId::Giguna_Breach__Central__Upper_Floating_Brick
+        | SpotId::Giguna_Breach__Central__West_Statue
+        | SpotId::Giguna_Breach__Central__Statuette
+        | SpotId::Giguna_Breach__Central__Tunnel
+        | SpotId::Giguna_Breach__Central__West_8 => RegionId::Giguna_Breach,
         SpotId::Giguna__Giguna_Northeast__East_9
         | SpotId::Giguna__Giguna_Northeast__Inner_Wall
         | SpotId::Giguna__Giguna_Northeast__Crow_Eating
@@ -6354,6 +6927,9 @@ impl world::Accessible for Location {
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => true,
             LocationId::Giguna__West_Caverns__Bush__Item => rules::access_more_refills(&ctx),
             LocationId::Giguna__West_Caverns__Cache__Item => true,
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
+            LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
+            LocationId::Giguna_Breach__Slingshot__Ravine__Item => true,
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 rules::access_apocalypse_bomb(&ctx)
             }
@@ -6785,6 +7361,45 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::access_grab(&ctx),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 => rules::access_grab(&ctx),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => true,
+            ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => true,
+            ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => true,
+            ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1 => true,
+            ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1 => true,
+            ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1 => true,
+            ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1 => true,
+            ExitId::Giguna_Breach__Central__West_9__ex__Wall_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1 => true,
+            ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1 => true,
+            ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => true,
+            ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => true,
+            ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
+            ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
+            ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
+            ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => true,
+            ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => true,
+            ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1 => true,
+            ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => true,
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1 => true,
+            ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1 => true,
+            ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => rules::access_giguna_breach__sw_save__side_door__ex__west_11_1__req(&ctx),
+            ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => rules::access_giguna_breach__sw_save__west_11__ex__side_door_1__req(&ctx),
             ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room_Switched__Upper_West_1 => rules::access_switch_40_12(&ctx),
@@ -7019,6 +7634,31 @@ impl world::Exit for Exit {
             ExitId::Giguna__West_Caverns__East_10__ex__Carnelian__West_10_1 => true,
             ExitId::Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1 => true,
             ExitId::Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1 => true,
+            ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => true,
+            ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => true,
+            ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => true,
+            ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1 => true,
+            ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1 => true,
+            ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1 => true,
+            ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1 => true,
+            ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1 => true,
+            ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1 => true,
+            ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => true,
+            ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => true,
+            ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => true,
+            ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => true,
+            ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => true,
+            ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => true,
+            ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => true,
+            ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => true,
+            ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => true,
+            ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1 => true,
+            ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => true,
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1 => true,
+            ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West__ex__Grid_43_10_11__East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__West_12__ex__Vertical_Room__East_12_1 => true,
@@ -7195,6 +7835,10 @@ impl world::Accessible for Action {
                 ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
                     rules::access_can_deploy(&ctx)
                 }
+                ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
+                ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                    rules::access_giguna_breach__sw_save__west_11__open_door__req(&ctx)
+                }
                 ActionId::Glacier__Revival__Save_Point__Save => true,
                 ActionId::Global__Deploy_Drone => {
                     rules::access_not_within_menu_and_can_deploy(&ctx)
@@ -7276,6 +7920,10 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 rules::action_deploy_drone_and_move__ebih__drone_room__tree(ctx)
             }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx)
+            }
+            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
                 rules::action_save_mode__indra(ctx)
@@ -7502,7 +8150,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 485],
+    raw_spots: [SpotId; 536],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -7516,7 +8164,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 107;
+    const NUM_LOCATIONS: u32 = 110;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -7638,6 +8286,7 @@ impl world::World for World {
                 LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush,
                 LocationId::Ebih__Boss_Room__Boss__Boss_Reward,
                 LocationId::Ebih__Grid_25_2_6__Pit__Item,
+                LocationId::Giguna_Breach__Chimney__Cache__Flask,
                 LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
                 LocationId::Giguna__Ruins_Top__Flask__Flask,
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
@@ -7686,6 +8335,7 @@ impl world::World for World {
                 LocationId::Ebih__Base_Camp__Top_Platform__Item,
                 LocationId::Ebih__By_Garage__Crawlspace__Fragment,
                 LocationId::Ebih__Ebih_East__Dispenser__Vend,
+                LocationId::Giguna_Breach__Cubby__Rocks__Health,
             ],
             Item::Dear_Ernest => vec![LocationId::Ebih__Bunker_Interior__Desk__Note],
             Item::Melee_Charge => vec![
@@ -7726,6 +8376,7 @@ impl world::World for World {
                 LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab,
             ],
             Item::Terminal_Breakthrough_1 => vec![LocationId::Ebih__Grid_26_10_11__Ledge__Note],
+            Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Item],
             Item::Map_17_10 => vec![LocationId::Giguna__Giguna_Northeast__Save_Point__Seen],
             Item::Giguna_Northeast_Gate => vec![
                 LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
@@ -7933,6 +8584,13 @@ impl world::World for World {
             }
             LocationId::Ebih__Grid_25_2_6__Pit__Item => SpotId::Ebih__Grid_25_2_6__Pit,
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => SpotId::Ebih__Grid_26_10_11__Ledge,
+            LocationId::Giguna_Breach__Chimney__Cache__Flask => {
+                SpotId::Giguna_Breach__Chimney__Cache
+            }
+            LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
+            LocationId::Giguna_Breach__Slingshot__Ravine__Item => {
+                SpotId::Giguna_Breach__Slingshot__Ravine
+            }
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
                 SpotId::Giguna__Giguna_Northeast__Save_Point
             }
@@ -8074,6 +8732,12 @@ impl world::World for World {
             }
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 SpotId::Ebih__Drone_Room__Moving_Platform
+            }
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
+                SpotId::Giguna_Breach__SW_Save__West_11
+            }
+            ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
+                SpotId::Giguna_Breach__SW_Save__Save_Point
             }
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save
             | ActionId::Giguna__Giguna_Northeast__Save_Point__Save_Recall => {
@@ -8282,6 +8946,41 @@ impl world::World for World {
             ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => SpotId::Ebih__Observation_Tower_Room__West_10,
             ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 | ExitId:: Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1 => SpotId::Ebih__Observation_Tower_Room__East_11,
+            ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => SpotId::Giguna_Breach__Peak__West_7,
+            ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1 => SpotId::Giguna_Breach__Chimney__East_7,
+            ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => SpotId::Giguna_Breach__Chimney__East_9,
+            ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => SpotId::Giguna_Breach__Chimney__South,
+            ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1 => SpotId::Giguna_Breach__Chimney__East_8,
+            ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => SpotId::Giguna_Breach__Cubby__Entrance,
+            ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1 => SpotId::Giguna_Breach__SW_Save__North,
+            ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1 => SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => SpotId::Giguna_Breach__SW_Save__Side_Door,
+            ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => SpotId::Giguna_Breach__SW_Save__West_11,
+            ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => SpotId::Giguna_Breach__SW_Save__Save_Point,
+            ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1 | ExitId:: Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1 => SpotId::Giguna_Breach__SW_Save__East_12,
+            ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1 => SpotId::Giguna_Breach__Robopede__West,
+            ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => SpotId::Giguna_Breach__Robopede__North,
+            ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => SpotId::Giguna_Breach__Grid_14_10_11__South,
+            ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => SpotId::Giguna_Breach__Grid_14_10_11__North,
+            ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => SpotId::Giguna_Breach__Fire_Room__West_11,
+            ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 | ExitId:: Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => SpotId::Giguna_Breach__Fire_Room__South,
+            ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => SpotId::Giguna_Breach__Fire_Room__East_11,
+            ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => SpotId::Giguna_Breach__Fire_Room__East_10,
+            ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => SpotId::Giguna_Breach__Slingshot__West,
+            ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1 => SpotId::Giguna_Breach__Slingshot__Ravine,
+            ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => SpotId::Giguna_Breach__Antechamber__North,
+            ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1 | ExitId:: Giguna_Breach__Central__West_9__ex__Wall_1 => SpotId::Giguna_Breach__Central__West_9,
+            ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1 => SpotId::Giguna_Breach__Central__Wall,
+            ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1 | ExitId:: Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1 => SpotId::Giguna_Breach__Central__South,
+            ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1 => SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1 => SpotId::Giguna_Breach__Central__Statuette,
+            ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1 => SpotId::Giguna_Breach__Central__West_8,
             ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1 => SpotId::Giguna__Giguna_Northeast__East_9,
             ExitId::Giguna__Giguna_Northeast__Crow_Eating__ex__Gate_Vent_1 => SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             ExitId::Giguna__Giguna_Northeast__Save_Point__ex__Gate_Vent_1 => SpotId::Giguna__Giguna_Northeast__Save_Point,
@@ -8751,6 +9450,35 @@ impl world::World for World {
             | SpotId::Giguna__West_Caverns__East_13
             | SpotId::Giguna__West_Caverns__East_Susar
             | SpotId::Giguna__West_Caverns__Small_Platform
+            | SpotId::Giguna_Breach__Antechamber__North
+            | SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance
+            | SpotId::Giguna_Breach__Below_Chimney__Southwest
+            | SpotId::Giguna_Breach__Central__South
+            | SpotId::Giguna_Breach__Central__West_8
+            | SpotId::Giguna_Breach__Central__West_9
+            | SpotId::Giguna_Breach__Chimney__Cache
+            | SpotId::Giguna_Breach__Chimney__East_7
+            | SpotId::Giguna_Breach__Chimney__East_8
+            | SpotId::Giguna_Breach__Chimney__East_9
+            | SpotId::Giguna_Breach__Chimney__South
+            | SpotId::Giguna_Breach__Cubby__Entrance
+            | SpotId::Giguna_Breach__Cubby__Rocks
+            | SpotId::Giguna_Breach__Fire_Room__East_10
+            | SpotId::Giguna_Breach__Fire_Room__East_11
+            | SpotId::Giguna_Breach__Fire_Room__South
+            | SpotId::Giguna_Breach__Fire_Room__West_11
+            | SpotId::Giguna_Breach__Grid_14_10_11__East_11
+            | SpotId::Giguna_Breach__Grid_14_10_11__North
+            | SpotId::Giguna_Breach__Grid_14_10_11__South
+            | SpotId::Giguna_Breach__Peak__West_7
+            | SpotId::Giguna_Breach__Robopede__North
+            | SpotId::Giguna_Breach__Robopede__West
+            | SpotId::Giguna_Breach__Slingshot__Ravine
+            | SpotId::Giguna_Breach__Slingshot__West
+            | SpotId::Giguna_Breach__SW_Save__East_12
+            | SpotId::Giguna_Breach__SW_Save__North
+            | SpotId::Giguna_Breach__SW_Save__Save_Point
+            | SpotId::Giguna_Breach__SW_Save__West_11
             | SpotId::Glacier__Apocalypse_Entry__Terminal
             | SpotId::Glacier__Apocalypse_Entry__West
             | SpotId::Glacier__Boomerang_Antechamber__East_12
@@ -9233,7 +9961,58 @@ impl World {
                 SpotId::Giguna__West_Caverns__Tunnel_Bottom,
                 SpotId::Giguna__West_Caverns__Tunnel_Entrance,
                 SpotId::Giguna__West_Caverns__Tunnel_Fork,
+                SpotId::Giguna_Breach__Antechamber__North,
+                SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+                SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+                SpotId::Giguna_Breach__Below_Chimney__North,
+                SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+                SpotId::Giguna_Breach__Below_Chimney__Southwest,
+                SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+                SpotId::Giguna_Breach__Central__South,
+                SpotId::Giguna_Breach__Central__Statuette,
+                SpotId::Giguna_Breach__Central__Tunnel,
+                SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+                SpotId::Giguna_Breach__Central__Wall,
+                SpotId::Giguna_Breach__Central__West_8,
+                SpotId::Giguna_Breach__Central__West_9,
+                SpotId::Giguna_Breach__Central__West_Statue,
+                SpotId::Giguna_Breach__Chimney__Cache,
+                SpotId::Giguna_Breach__Chimney__East_7,
+                SpotId::Giguna_Breach__Chimney__East_8,
+                SpotId::Giguna_Breach__Chimney__East_9,
+                SpotId::Giguna_Breach__Chimney__Middle_Platform,
+                SpotId::Giguna_Breach__Chimney__South,
+                SpotId::Giguna_Breach__Chimney__Top,
+                SpotId::Giguna_Breach__Cubby__Entrance,
+                SpotId::Giguna_Breach__Cubby__Rocks,
+                SpotId::Giguna_Breach__Fire_Room__Cuesta,
+                SpotId::Giguna_Breach__Fire_Room__East_10,
+                SpotId::Giguna_Breach__Fire_Room__East_11,
+                SpotId::Giguna_Breach__Fire_Room__First_Fire,
+                SpotId::Giguna_Breach__Fire_Room__South,
+                SpotId::Giguna_Breach__Fire_Room__West_11,
+                SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+                SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+                SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+                SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+                SpotId::Giguna_Breach__Grid_14_10_11__North,
+                SpotId::Giguna_Breach__Grid_14_10_11__South,
+                SpotId::Giguna_Breach__Peak__Column,
+                SpotId::Giguna_Breach__Peak__East_Passage,
                 SpotId::Giguna_Breach__Peak__Save_Point,
+                SpotId::Giguna_Breach__Peak__West_7,
+                SpotId::Giguna_Breach__Robopede__Center,
+                SpotId::Giguna_Breach__Robopede__North,
+                SpotId::Giguna_Breach__Robopede__West,
+                SpotId::Giguna_Breach__Slingshot__Column,
+                SpotId::Giguna_Breach__Slingshot__Ravine,
+                SpotId::Giguna_Breach__Slingshot__West,
+                SpotId::Giguna_Breach__SW_Save__East_12,
+                SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+                SpotId::Giguna_Breach__SW_Save__North,
+                SpotId::Giguna_Breach__SW_Save__Save_Point,
+                SpotId::Giguna_Breach__SW_Save__Side_Door,
+                SpotId::Giguna_Breach__SW_Save__West_11,
                 SpotId::Glacier__Apocalypse_Entry__Terminal,
                 SpotId::Glacier__Apocalypse_Entry__West,
                 SpotId::Glacier__Boomerang_Antechamber__East_12,
@@ -9796,6 +10575,30 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Terminal_Breakthrough_1,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Giguna_Breach__Chimney__Cache__Flask => Location {
+            id: LocationId::Giguna_Breach__Chimney__Cache__Flask,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Giguna_Breach__Cubby__Rocks__Health => Location {
+            id: LocationId::Giguna_Breach__Cubby__Rocks__Health,
+            canonical: CanonId::None,
+            item: Item::Health_Fragment,
+            price: Currency::Free,
+            time: 600,
+            exit_id: None,
+        },
+        LocationId::Giguna_Breach__Slingshot__Ravine__Item => Location {
+            id: LocationId::Giguna_Breach__Slingshot__Ravine__Item,
+            canonical: CanonId::None,
+            item: Item::Slingshot_Hook,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => Location {
@@ -11609,6 +12412,279 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => Exit {
+            id: ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Chimney__East_7,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1 => Exit {
+            id: ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Peak__West_7,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1 => Exit {
+            id: ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Central__West_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1 => Exit {
+            id: ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Below_Chimney__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1 => Exit {
+            id: ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1,
+            time: 1350,
+            dest: SpotId::Giguna_Breach__Central__West_8,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1 => Exit {
+            id: ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Cubby__Entrance,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1 => Exit {
+            id: ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__SW_Save__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1 => Exit {
+            id: ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__SW_Save__Side_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__SW_Save__West_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__SW_Save__Side_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1 => Exit {
+            id: ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Robopede__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1 => Exit {
+            id: ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__SW_Save__East_12,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1 => Exit {
+            id: ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Grid_14_10_11__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1 => Exit {
+            id: ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Robopede__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1 => Exit {
+            id: ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Fire_Room__West_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1 => Exit {
+            id: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1,
+            time: 1300,
+            dest: SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1 => Exit {
+            id: ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Central__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1,
+            time: 1300,
+            dest: SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1,
+            time: 1500,
+            dest: SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Antechamber__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Slingshot__West,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1,
+            time: 700,
+            dest: SpotId::Giguna_Breach__Fire_Room__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1 => Exit {
+            id: ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1 => Exit {
+            id: ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Fire_Room__East_11,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1 => Exit {
+            id: ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__Slingshot__Column,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => Exit {
+            id: ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Fire_Room__South,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Chimney__East_9,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__West_9__ex__Wall_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__West_9__ex__Wall_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__Central__Wall,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1,
+            time: 2000,
+            dest: SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Grid_14_10_11__North,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1,
+            time: 1600,
+            dest: SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1,
+            time: 1000,
+            dest: SpotId::Giguna_Breach__Central__West_Statue,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1,
+            time: 500,
+            dest: SpotId::Giguna_Breach__Central__Tunnel,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1 => Exit {
+            id: ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1,
+            time: 1350,
+            dest: SpotId::Giguna_Breach__Chimney__East_8,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1 => Exit {
             id: ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1,
             time: 1350,
@@ -13022,6 +14098,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => Action {
             id: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone,
             time: 1500,
+            price: Currency::Free,
+        },
+        ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => Action {
+            id: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door,
+            time: 250,
+            price: Currency::Free,
+        },
+        ActionId::Giguna_Breach__SW_Save__Save_Point__Save => Action {
+            id: ActionId::Giguna_Breach__SW_Save__Save_Point__Save,
+            time: 1300,
             price: Currency::Free,
         },
         ActionId::Giguna__Giguna_Northeast__Save_Point__Save => Action {
@@ -17742,8 +18828,864 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna_Breach__Peak__Save_Point.into_usize(),
-                end: SpotId::Giguna_Breach__Peak__Save_Point.into_usize() + 1,
+                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Peak__East_Passage => Spot {
+            id: SpotId::Giguna_Breach__Peak__East_Passage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Peak__Column => Spot {
+            id: SpotId::Giguna_Breach__Peak__Column,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Peak__West_7 => Spot {
+            id: SpotId::Giguna_Breach__Peak__West_7,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1.into_usize(),
+                end: ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Peak__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Peak__West_7.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__East_7 => Spot {
+            id: SpotId::Giguna_Breach__Chimney__East_7,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__East_7__ex__Peak__West_7_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__Top => Spot {
+            id: SpotId::Giguna_Breach__Chimney__Top,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__Middle_Platform => Spot {
+            id: SpotId::Giguna_Breach__Chimney__Middle_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__East_9 => Spot {
+            id: SpotId::Giguna_Breach__Chimney__East_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__East_9__ex__Central__West_9_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__South => Spot {
+            id: SpotId::Giguna_Breach__Chimney__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__South__ex__Below_Chimney__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__East_8 => Spot {
+            id: SpotId::Giguna_Breach__Chimney__East_8,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1.into_usize(),
+                end: ExitId::Giguna_Breach__Chimney__East_8__ex__Central__West_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Chimney__Cache => Spot {
+            id: SpotId::Giguna_Breach__Chimney__Cache,
+            locations: Range {
+                start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
+                end: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Chimney__Cache.into_usize(),
+                end: SpotId::Giguna_Breach__Chimney__Top.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Below_Chimney__North => Spot {
+            id: SpotId::Giguna_Breach__Below_Chimney__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => Spot {
+            id: SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Below_Chimney__East_Ledge => Spot {
+            id: SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => Spot {
+            id: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1.into_usize(),
+                end: ExitId::Giguna_Breach__Below_Chimney__Cubby_Entrance__ex__Cubby__Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Below_Chimney__West_Passage => Spot {
+            id: SpotId::Giguna_Breach__Below_Chimney__West_Passage,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Below_Chimney__Southwest => Spot {
+            id: SpotId::Giguna_Breach__Below_Chimney__Southwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Below_Chimney__Southwest__ex__SW_Save__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Below_Chimney__West_Passage.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Cubby__Entrance => Spot {
+            id: SpotId::Giguna_Breach__Cubby__Entrance,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1.into_usize(),
+                end: ExitId::Giguna_Breach__Cubby__Entrance__ex__Below_Chimney__Cubby_Entrance_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Cubby__Rocks => Spot {
+            id: SpotId::Giguna_Breach__Cubby__Rocks,
+            locations: Range {
+                start: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize(),
+                end: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Cubby__Entrance.into_usize(),
+                end: SpotId::Giguna_Breach__Cubby__Rocks.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__SW_Save__North => Spot {
+            id: SpotId::Giguna_Breach__SW_Save__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__North__ex__Below_Chimney__Southwest_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__SW_Save__Lower_Platform => Spot {
+            id: SpotId::Giguna_Breach__SW_Save__Lower_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__Lower_Platform__ex__Side_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__SW_Save__Side_Door => Spot {
+            id: SpotId::Giguna_Breach__SW_Save__Side_Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__Side_Door__ex__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__SW_Save__West_11 => Spot {
+            id: SpotId::Giguna_Breach__SW_Save__West_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__West_11__ex__Side_Door_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door.into_usize(),
+                end: ActionId::Giguna_Breach__SW_Save__West_11__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__SW_Save__Save_Point => Spot {
+            id: SpotId::Giguna_Breach__SW_Save__Save_Point,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__Save_Point__ex__Lower_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: ActionId::Giguna_Breach__SW_Save__Save_Point__Save.into_usize(),
+                end: ActionId::Giguna_Breach__SW_Save__Save_Point__Save.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__SW_Save__East_12 => Spot {
+            id: SpotId::Giguna_Breach__SW_Save__East_12,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__SW_Save__East_12__ex__Lower_Platform_1.into_usize(),
+                end: ExitId::Giguna_Breach__SW_Save__East_12__ex__Robopede__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__SW_Save__East_12.into_usize(),
+                end: SpotId::Giguna_Breach__SW_Save__West_11.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Robopede__West => Spot {
+            id: SpotId::Giguna_Breach__Robopede__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1.into_usize(),
+                end: ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
+                end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Robopede__Center => Spot {
+            id: SpotId::Giguna_Breach__Robopede__Center,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
+                end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Robopede__North => Spot {
+            id: SpotId::Giguna_Breach__Robopede__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Robopede__North__ex__Grid_14_10_11__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Robopede__Center.into_usize(),
+                end: SpotId::Giguna_Breach__Robopede__West.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__South => Spot {
+            id: SpotId::Giguna_Breach__Grid_14_10_11__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__South__ex__Robopede__North_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__East_11 => Spot {
+            id: SpotId::Giguna_Breach__Grid_14_10_11__East_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__East_11__ex__Fire_Room__West_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__East_10 => Spot {
+            id: SpotId::Giguna_Breach__Grid_14_10_11__East_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__East_10__ex__High_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => Spot {
+            id: SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Grid_14_10_11__North => Spot {
+            id: SpotId::Giguna_Breach__Grid_14_10_11__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Grid_14_10_11__North__ex__Central__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Grid_14_10_11__East_10.into_usize(),
+                end: SpotId::Giguna_Breach__Grid_14_10_11__South.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__West_11 => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__West_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_11__ex__Grid_14_10_11__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__First_Fire => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__First_Fire,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__First_Fire__ex__West_Plateau_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__Cuesta => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__Cuesta,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__South => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__South__ex__Antechamber__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__East_11 => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__East_11,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__East_11__ex__Slingshot__West_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__West_Plateau => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__West_Plateau,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__West_Plateau__ex__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Fire_Room__East_10 => Spot {
+            id: SpotId::Giguna_Breach__Fire_Room__East_10,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1.into_usize(),
+                end: ExitId::Giguna_Breach__Fire_Room__East_10__ex__Grid_14_10_11__East_10_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Fire_Room__Cuesta.into_usize(),
+                end: SpotId::Giguna_Breach__Fire_Room__West_Plateau.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Slingshot__West => Spot {
+            id: SpotId::Giguna_Breach__Slingshot__West,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1.into_usize(),
+                end: ExitId::Giguna_Breach__Slingshot__West__ex__Fire_Room__East_11_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Slingshot__Column => Spot {
+            id: SpotId::Giguna_Breach__Slingshot__Column,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Slingshot__Ravine => Spot {
+            id: SpotId::Giguna_Breach__Slingshot__Ravine,
+            locations: Range {
+                start: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+                end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1.into_usize(),
+                end: ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Slingshot__Column.into_usize(),
+                end: SpotId::Giguna_Breach__Slingshot__West.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Antechamber__North => Spot {
+            id: SpotId::Giguna_Breach__Antechamber__North,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1.into_usize(),
+                end: ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Antechamber__North.into_usize(),
+                end: SpotId::Giguna_Breach__Antechamber__North.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__West_9 => Spot {
+            id: SpotId::Giguna_Breach__Central__West_9,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__West_9__ex__Chimney__East_9_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__West_9__ex__Wall_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__Wall => Spot {
+            id: SpotId::Giguna_Breach__Central__Wall,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__Wall__ex__Upper_Floating_Brick_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__South => Spot {
+            id: SpotId::Giguna_Breach__Central__South,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__South__ex__Grid_14_10_11__North_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__South__ex__Upper_Floating_Brick_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__Upper_Floating_Brick => Spot {
+            id: SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__Upper_Floating_Brick__ex__West_Statue_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__West_Statue => Spot {
+            id: SpotId::Giguna_Breach__Central__West_Statue,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__Statuette => Spot {
+            id: SpotId::Giguna_Breach__Central__Statuette,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__Statuette__ex__Tunnel_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__Tunnel => Spot {
+            id: SpotId::Giguna_Breach__Central__Tunnel,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Central__West_8 => Spot {
+            id: SpotId::Giguna_Breach__Central__West_8,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1.into_usize(),
+                end: ExitId::Giguna_Breach__Central__West_8__ex__Chimney__East_8_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Central__South.into_usize(),
+                end: SpotId::Giguna_Breach__Central__West_Statue.into_usize() + 1,
             },
         },
         SpotId::Giguna__Giguna_Northeast__East_9 => Spot {
@@ -21737,6 +23679,66 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__Observation_Tower_Room__West_10 => Range { start: 0, end: 0 },
         SpotId::Ebih__Observation_Tower_Room__East_11 => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Peak__Save_Point => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Peak__East_Passage => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Peak__Column => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Peak__West_7 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__East_7 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__Top => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__Middle_Platform => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__East_9 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__South => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__East_8 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Chimney__Cache => Range {
+            start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
+            end: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize() + 1,
+        },
+        SpotId::Giguna_Breach__Below_Chimney__North => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Below_Chimney__East_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Below_Chimney__West_Passage => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Below_Chimney__Southwest => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Cubby__Entrance => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Cubby__Rocks => Range {
+            start: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize(),
+            end: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize() + 1,
+        },
+        SpotId::Giguna_Breach__SW_Save__North => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__SW_Save__Lower_Platform => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__SW_Save__Side_Door => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__SW_Save__West_11 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__SW_Save__Save_Point => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__SW_Save__East_12 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Robopede__West => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Robopede__Center => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Robopede__North => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Grid_14_10_11__South => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Grid_14_10_11__East_11 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Grid_14_10_11__East_10 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Grid_14_10_11__North => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__West_11 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__First_Fire => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__Cuesta => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__South => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__East_11 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__West_Plateau => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Fire_Room__East_10 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Slingshot__West => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Slingshot__Column => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Slingshot__Ravine => Range {
+            start: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+            end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize() + 1,
+        },
+        SpotId::Giguna_Breach__Antechamber__North => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__West_9 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__Wall => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__South => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__Upper_Floating_Brick => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__West_Statue => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__Statuette => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__Tunnel => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Central__West_8 => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__East_9 => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Crow_Eating => Range { start: 0, end: 0 },
@@ -22120,6 +24122,25 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         },
         AreaId::Ebih__Observation_Tower_Room => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Peak => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Chimney => Range {
+            start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
+            end: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
+        },
+        AreaId::Giguna_Breach__Below_Chimney => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Cubby => Range {
+            start: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize(),
+            end: LocationId::Giguna_Breach__Cubby__Rocks__Health.into_usize(),
+        },
+        AreaId::Giguna_Breach__SW_Save => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Robopede => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Grid_14_10_11 => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Fire_Room => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Slingshot => Range {
+            start: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+            end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+        },
+        AreaId::Giguna_Breach__Antechamber => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Central => Range { start: 0, end: 0 },
         AreaId::Giguna__Giguna_Northeast => Range {
             start: LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate.into_usize(),
             end: LocationId::Giguna__Giguna_Northeast__Save_Point__Seen.into_usize(),
@@ -22211,7 +24232,10 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
                 .into_usize(),
             end: LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks.into_usize(),
         },
-        RegionId::Giguna_Breach => Range { start: 0, end: 0 },
+        RegionId::Giguna_Breach => Range {
+            start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
+            end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+        },
         RegionId::Giguna => Range {
             start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
             end: LocationId::Giguna__West_Caverns__Cache__Item.into_usize(),

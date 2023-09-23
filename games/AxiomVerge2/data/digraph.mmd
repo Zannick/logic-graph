@@ -348,6 +348,77 @@ end
 subgraph Giguna_Breach
     subgraph Giguna_Breach__Peak[Peak]
         Giguna_Breach__Peak__Save_Point(Save Point);
+        Giguna_Breach__Peak__East_Passage(East Passage);
+        Giguna_Breach__Peak__Column(Column);
+        Giguna_Breach__Peak__West_7(West 7);
+    end
+    subgraph Giguna_Breach__Chimney[Chimney]
+        Giguna_Breach__Chimney__East_7(East 7);
+        Giguna_Breach__Chimney__Top(Top);
+        Giguna_Breach__Chimney__Middle_Platform(Middle Platform);
+        Giguna_Breach__Chimney__East_9(East 9);
+        Giguna_Breach__Chimney__South(South);
+        Giguna_Breach__Chimney__East_8(East 8);
+        Giguna_Breach__Chimney__Cache(Cache);
+    end
+    subgraph Giguna_Breach__Below_Chimney[Below Chimney]
+        Giguna_Breach__Below_Chimney__North(North);
+        Giguna_Breach__Below_Chimney__Passage_Lip(Passage Lip);
+        Giguna_Breach__Below_Chimney__East_Ledge(East Ledge);
+        Giguna_Breach__Below_Chimney__Cubby_Entrance(Cubby Entrance);
+        Giguna_Breach__Below_Chimney__West_Passage(West Passage);
+        Giguna_Breach__Below_Chimney__Southwest(Southwest);
+    end
+    subgraph Giguna_Breach__Cubby[Cubby]
+        Giguna_Breach__Cubby__Entrance(Entrance);
+        Giguna_Breach__Cubby__Rocks(Rocks);
+    end
+    subgraph Giguna_Breach__SW_Save[SW Save]
+        Giguna_Breach__SW_Save__North(North);
+        Giguna_Breach__SW_Save__Lower_Platform(Lower Platform);
+        Giguna_Breach__SW_Save__Side_Door(Side Door);
+        Giguna_Breach__SW_Save__West_11(West 11);
+        Giguna_Breach__SW_Save__Save_Point(Save Point);
+        Giguna_Breach__SW_Save__East_12(East 12);
+    end
+    subgraph Giguna_Breach__Robopede[Robopede]
+        Giguna_Breach__Robopede__West(West);
+        Giguna_Breach__Robopede__Center(Center);
+        Giguna_Breach__Robopede__North(North);
+    end
+    subgraph Giguna_Breach__Grid_14_10_11[Grid 14,10-11]
+        Giguna_Breach__Grid_14_10_11__South(South);
+        Giguna_Breach__Grid_14_10_11__East_11(East 11);
+        Giguna_Breach__Grid_14_10_11__East_10(East 10);
+        Giguna_Breach__Grid_14_10_11__High_Ledge(High Ledge);
+        Giguna_Breach__Grid_14_10_11__North(North);
+    end
+    subgraph Giguna_Breach__Fire_Room[Fire Room]
+        Giguna_Breach__Fire_Room__West_11(West 11);
+        Giguna_Breach__Fire_Room__First_Fire(First Fire);
+        Giguna_Breach__Fire_Room__Cuesta(Cuesta);
+        Giguna_Breach__Fire_Room__South(South);
+        Giguna_Breach__Fire_Room__East_11(East 11);
+        Giguna_Breach__Fire_Room__West_Plateau(West Plateau);
+        Giguna_Breach__Fire_Room__East_10(East 10);
+    end
+    subgraph Giguna_Breach__Slingshot[Slingshot]
+        Giguna_Breach__Slingshot__West(West);
+        Giguna_Breach__Slingshot__Column(Column);
+        Giguna_Breach__Slingshot__Ravine(Ravine);
+    end
+    subgraph Giguna_Breach__Antechamber[Antechamber]
+        Giguna_Breach__Antechamber__North(North);
+    end
+    subgraph Giguna_Breach__Central[Central]
+        Giguna_Breach__Central__West_9(West 9);
+        Giguna_Breach__Central__Wall(Wall);
+        Giguna_Breach__Central__South(South);
+        Giguna_Breach__Central__Upper_Floating_Brick(Upper Floating Brick);
+        Giguna_Breach__Central__West_Statue(West Statue);
+        Giguna_Breach__Central__Statuette(Statuette);
+        Giguna_Breach__Central__Tunnel(Tunnel);
+        Giguna_Breach__Central__West_8(West 8);
     end
 end
 subgraph Giguna
@@ -752,6 +823,33 @@ Ebih__Waterfall__Under_Waterfall --> Ebih__Waterfall__Waterfall_Left
 Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
+Giguna_Breach__Antechamber__North <--> Giguna_Breach__Fire_Room__South
+Giguna_Breach__Below_Chimney__Cubby_Entrance <--> Giguna_Breach__Cubby__Entrance
+Giguna_Breach__Below_Chimney__Southwest <--> Giguna_Breach__SW_Save__North
+Giguna_Breach__Central__South --> Giguna_Breach__Central__Upper_Floating_Brick
+Giguna_Breach__Central__South <--> Giguna_Breach__Grid_14_10_11__North
+Giguna_Breach__Central__Statuette --> Giguna_Breach__Central__Tunnel
+Giguna_Breach__Central__Upper_Floating_Brick --> Giguna_Breach__Central__West_Statue
+Giguna_Breach__Central__Wall --> Giguna_Breach__Central__Upper_Floating_Brick
+Giguna_Breach__Central__West_8 <--> Giguna_Breach__Chimney__East_8
+Giguna_Breach__Central__West_9 --> Giguna_Breach__Central__Wall
+Giguna_Breach__Central__West_9 <--> Giguna_Breach__Chimney__East_9
+Giguna_Breach__Chimney__East_7 <--> Giguna_Breach__Peak__West_7
+Giguna_Breach__Chimney__South --> Giguna_Breach__Below_Chimney__North
+Giguna_Breach__Fire_Room__East_10 --> Giguna_Breach__Grid_14_10_11__East_10
+Giguna_Breach__Fire_Room__East_11 <--> Giguna_Breach__Slingshot__West
+Giguna_Breach__Fire_Room__First_Fire --> Giguna_Breach__Fire_Room__West_Plateau
+Giguna_Breach__Fire_Room__South --> Giguna_Breach__Fire_Room__Cuesta
+Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
+Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__East_10
+Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
+Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
+Giguna_Breach__Robopede__West <--> Giguna_Breach__SW_Save__East_12
+Giguna_Breach__SW_Save__East_12 --> Giguna_Breach__SW_Save__Lower_Platform
+Giguna_Breach__SW_Save__Lower_Platform --> Giguna_Breach__SW_Save__Side_Door
+Giguna_Breach__SW_Save__Save_Point --> Giguna_Breach__SW_Save__Lower_Platform
+Giguna_Breach__SW_Save__Side_Door <--> Giguna_Breach__SW_Save__West_11
+Giguna_Breach__Slingshot__Ravine --> Giguna_Breach__Slingshot__Column
 Giguna__Building_Interior__Entry --> Giguna__Building_Interior__Bookshelf
 Giguna__Building_Interior__Entry <--> Giguna__Giguna_Base__Building_Entry
 Giguna__Carnelian__Door <--> Giguna__Carnelian__Switch
