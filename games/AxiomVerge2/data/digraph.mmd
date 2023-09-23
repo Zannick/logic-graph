@@ -136,9 +136,7 @@ subgraph Antarctica
     subgraph Antarctica__Building_2U[Building 2U]
         Antarctica__Building_2U__Stairs(Stairs);
         Antarctica__Building_2U__Door(Door);
-    end
-    subgraph Antarctica__Building_2U_Corner[Building 2U Corner]
-        Antarctica__Building_2U_Corner__Behind_Boxes(Behind Boxes);
+        Antarctica__Building_2U__Behind_Boxes(Behind Boxes);
     end
     subgraph Antarctica__Top[Top]
         Antarctica__Top__Power_Entry(Power Entry);
@@ -666,7 +664,7 @@ Antarctica__Building_1W__West_Entry <--> Antarctica__West__Boxes
 Antarctica__Building_2L__Entry <--> Antarctica__Building_2U__Stairs
 Antarctica__Building_2L__Entry <--> Antarctica__East__Building_2_Entry
 Antarctica__Building_2L__Entry <--> Antarctica__Freight_Elevator__Left
-Antarctica__Building_2U_Corner__Behind_Boxes <--> Antarctica__Building_2U__Stairs
+Antarctica__Building_2U__Behind_Boxes <--> Antarctica__Building_2U__Stairs
 Antarctica__Building_2U__Door <--> Antarctica__East__Building_2_Upper
 Antarctica__East__Building_2_Upper <--> Antarctica__Top__Power_Entry
 Antarctica__Freight_Elevator__Controls --> Glacier__Dock_Elevator__Elevator

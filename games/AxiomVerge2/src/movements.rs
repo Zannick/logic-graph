@@ -1742,7 +1742,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1799,
+        ) => 1699,
         (
             [false],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
@@ -4989,7 +4989,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1799,
+        ) => 1699,
         (
             [true],
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
@@ -7226,7 +7226,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Antarctica__Building_2L__Entry => 2000,
             SpotId::Antarctica__Building_2U__Stairs => 0,
             SpotId::Antarctica__Building_2U__Door => 3508,
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes => 3000,
+            SpotId::Antarctica__Building_2U__Behind_Boxes => 3000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -7237,9 +7237,9 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
-        SpotId::Antarctica__Building_2U_Corner__Behind_Boxes => enum_map! {
+        SpotId::Antarctica__Building_2U__Behind_Boxes => enum_map! {
             SpotId::Antarctica__Building_2U__Stairs => 1000,
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes => 0,
+            SpotId::Antarctica__Building_2U__Behind_Boxes => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -8484,7 +8484,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Observation_Tower_Room__West_9 => 3000,
             SpotId::Ebih__Observation_Tower_Room__Tower_Top => 0,
             SpotId::Ebih__Observation_Tower_Room__West_10 => 1578,
-            SpotId::Ebih__Observation_Tower_Room__East_11 => 1799,
+            SpotId::Ebih__Observation_Tower_Room__East_11 => 1699,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -11122,7 +11122,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => 3508,
         (
             SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
         ) => 3000,
         (SpotId::Antarctica__Building_2U__Stairs, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__East__Building_2_Upper) => 750,
@@ -11130,17 +11130,16 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Door) => 0,
         (SpotId::Antarctica__Building_2U__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
             SpotId::Antarctica__Building_2U__Stairs,
         ) => 1000,
         (
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
         ) => 0,
-        (
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
+        (SpotId::Antarctica__Building_2U__Behind_Boxes, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
         (SpotId::Antarctica__Top__Power_Entry, SpotId::Antarctica__East__Building_2_Upper) => 3500,
         (SpotId::Antarctica__Top__Power_Entry, SpotId::Antarctica__Top__Power_Entry) => 0,
         (SpotId::Antarctica__Top__Power_Entry, SpotId::Antarctica__Power_Room__Entry) => 750,
@@ -12141,7 +12140,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1799,
+        ) => 1699,
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Menu__Upgrade_Menu__Physiology,
@@ -18703,7 +18702,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
             3000,
         ),
         (
@@ -18732,17 +18731,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
             SpotId::Antarctica__Building_2U__Stairs,
             1000,
         ),
         (
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
             0,
         ),
         (
-            SpotId::Antarctica__Building_2U_Corner__Behind_Boxes,
+            SpotId::Antarctica__Building_2U__Behind_Boxes,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -22552,7 +22551,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
-            1799,
+            1699,
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
@@ -28361,7 +28360,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => Some(1799),
+        ) => Some(1699),
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__West_10,
@@ -31021,7 +31020,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => (Some(1799), vec![]),
+        ) => (Some(1699), vec![]),
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__West_10,

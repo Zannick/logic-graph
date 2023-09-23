@@ -1,6 +1,6 @@
 // use neato to use the coordinates
 digraph {{ game }} {
-    node[shape=square,width=0.125,colorscheme=dark28,style=filled,margin=0];
+    node[shape=square,width=0.225,height=0.225,colorscheme=dark28,style=filled,margin=0];
 %% set scalex, scaley = special.graph_scale or (1, 1)
 %% set ppi = special.map_ppi or 72
 %% if special.map_max_coord and special.map_min_coord
@@ -13,14 +13,24 @@ digraph {{ game }} {
     bgcolor = "transparent";
 %% for r in regions
         node[fillcolor="{{ loop.index % 7 }}"];
-%% set g_offx, g_offy = r.graph_offset or (0, 0)
+%% set r_offx, r_offy = r.graph_offset or (0, 0)
+%% set r_attr = r.graph_attrs or ""
 %% for a in r.areas
 %% set a_offx, a_offy = a.graph_offset or (0, 0)
+%% set a_attr = a.graph_attrs or ""
 %% for s in a.spots
-        {{ s.id }} [label = " "{% if s.coord %}, pos = "{{ (scalex*(g_offx + a_offx + s.coord[0])/ppi)|round(6) }},{{ (scaley*(g_offy + a_offy + s.coord[1])/ppi)|round(6) }}!"{% else %}, fillcolor = "8"{% endif %}];
+%% set s_offx, s_offy = s.graph_offset or (0, 0)
+%% set s_attr = s.graph_attrs or ""
+        {{ s.id }} [label = ""
+        {%- if s.coord %}, pos = "{{ (scalex*(r_offx + a_offx + s_offx + s.coord[0])/ppi)|round(6) }},{{ (scaley*(r_offy + a_offy + s_offy + s.coord[1])/ppi)|round(6) }}!"
+        {%- else %}, fillcolor = "8"{% endif %}
+        {%- if r_attr %}, {{ r_attr }}{% endif %}
+        {%- if a_attr %}, {{ a_attr }}{% endif %}
+        {%- if s_attr %}, {{ s_attr }}{% endif %}];
 %% endfor
 %% endfor
 %% endfor
+    edge[arrowsize=0.5];
 %% for s in gl.spots()
 %% for e in s.exits|sort(attribute='id')
     {{ s.id }} -> {{ e|get_exit_target }};

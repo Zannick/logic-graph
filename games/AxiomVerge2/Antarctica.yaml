@@ -30,8 +30,11 @@ areas:
           time: 2 # or 3
 
 - name: Shed
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Interior
+      coord: [37.25, 1.8]
       locations:
         - name: Shelf
           item: Ice_Axe
@@ -42,6 +45,8 @@ areas:
           tags: [exterior]
 
 - name: Building 1W
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: West Entry
       coord: [40.25, 1.8]
@@ -60,6 +65,8 @@ areas:
           tags: [xshift]
 
 - name: Building 1E
+  graph_offset: [0, 0.25]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Connector
       coord: [41, 1.8]
@@ -118,6 +125,8 @@ areas:
           tags: [xshift]
 
 - name: Building 2L
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Entry
       coord: [42.5, 1.8]
@@ -134,13 +143,15 @@ areas:
 
 # TODO: give Indra a jump up to the next level movement speed?
 - name: Building 2U
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Stairs
       coord: [42.25, 0.8]
       local:
         - to: Door
       exits:
-        - to: Building 2U Corner > Behind Boxes
+        - to: Behind Boxes
           req: $can_damage
           time: 3
         - to: Building 2L > Entry
@@ -152,17 +163,15 @@ areas:
       exits:
         - to: East > Building 2 Upper
           tags: [exterior]
-
-- name: Building 2U Corner
-  spots:
     - name: Behind Boxes
+      coord: [42.5, 0.8]
       locations:
         - name: Note
           item: Notes_2053_02_27
           canon: Notes_2053_02_27
           tags: [standing]  # Tag is on the item, not the location necessarily
       exits:
-        - to: Building 2U > Stairs
+        - to: Stairs
 
 - name: Top
   spots:
@@ -176,6 +185,8 @@ areas:
           tags: [xshift]
 
 - name: Power Room
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Entry
       coord: [40.70, 0.8]
@@ -195,6 +206,8 @@ areas:
           tags: [event]
 
 - name: Freight Elevator
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Left
       coord: [43, 1.8]

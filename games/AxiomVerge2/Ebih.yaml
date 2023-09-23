@@ -184,6 +184,8 @@ areas:
           req: ^_left_platform_moved
 
 - name: Bunker Interior
+  graph_offset: [0, 0.25]
+  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -203,6 +205,8 @@ areas:
           tags: [standing]
 
 - name: Building Interior
+  graph_offset: [0, -0.2]
+  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -229,6 +233,8 @@ areas:
           tags: [urn]
 
 - name: Tent Interior
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -360,6 +366,8 @@ areas:
         - to: East Platform
 
 - name: Garage
+  graph_offset: [0, 0.15]
+  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -1098,9 +1106,12 @@ areas:
           req: $grab or $climb
 
 - name: Cave
+  graph_offset: [0, 0.25]
+  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
+      coord: [22.6, 8.3]
       locations:
         - name: Health
           item: Health

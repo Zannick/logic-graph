@@ -730,6 +730,8 @@ areas:
       # todo: next area
 
 - name: Building Interior
+  graph_offset: [0, -0.2]
+  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
