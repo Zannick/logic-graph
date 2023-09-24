@@ -343,15 +343,13 @@ macro_rules! helper__reset_old_area {
     }};
 }
 
-/// $breach_entry ( TypedVar(name='newsave', type='SpotId') )
-/// IF (NOT ^breach) { ^save = ^newsave; }
+/// $portal ( TypedVar(name='newsave', type='SpotId') )
+/// ^save = ^newsave
 #[macro_export]
-macro_rules! helper__breach_entry {
+macro_rules! helper__portal {
     ($ctx:expr, $newsave:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        if !data::breach($ctx.position()) {
-            $ctx.set_save($newsave);
-        }
+        $ctx.set_save($newsave);
     }};
 }

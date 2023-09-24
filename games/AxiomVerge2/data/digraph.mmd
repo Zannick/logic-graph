@@ -351,6 +351,10 @@ subgraph Giguna_Breach
         Giguna_Breach__Peak__East_Passage(East Passage);
         Giguna_Breach__Peak__Column(Column);
         Giguna_Breach__Peak__West_7(West 7);
+        Giguna_Breach__Peak__East_6(East 6);
+        Giguna_Breach__Peak__Upper_East(Upper East);
+        Giguna_Breach__Peak__Upper_West(Upper West);
+        Giguna_Breach__Peak__Portal(Portal);
     end
     subgraph Giguna_Breach__Chimney[Chimney]
         Giguna_Breach__Chimney__East_7(East 7);
@@ -419,6 +423,15 @@ subgraph Giguna_Breach
         Giguna_Breach__Central__Statuette(Statuette);
         Giguna_Breach__Central__Tunnel(Tunnel);
         Giguna_Breach__Central__West_8(West 8);
+        Giguna_Breach__Central__Middle_Statue(Middle Statue);
+        Giguna_Breach__Central__East_Brick(East Brick);
+        Giguna_Breach__Central__East_9(East 9);
+    end
+    subgraph Giguna_Breach__Ascent[Ascent]
+        Giguna_Breach__Ascent__West_9(West 9);
+        Giguna_Breach__Ascent__Bottom(Bottom);
+        Giguna_Breach__Ascent__Top(Top);
+        Giguna_Breach__Ascent__West_6(West 6);
     end
 end
 subgraph Giguna
@@ -824,8 +837,13 @@ Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Right
 Giguna_Breach__Antechamber__North <--> Giguna_Breach__Fire_Room__South
+Giguna_Breach__Ascent__Bottom --> Giguna_Breach__Ascent__Top
+Giguna_Breach__Ascent__West_6 <--> Giguna_Breach__Peak__East_6
+Giguna_Breach__Ascent__West_9 <--> Giguna_Breach__Central__East_9
 Giguna_Breach__Below_Chimney__Cubby_Entrance <--> Giguna_Breach__Cubby__Entrance
 Giguna_Breach__Below_Chimney__Southwest <--> Giguna_Breach__SW_Save__North
+Giguna_Breach__Central__East_9 --> Giguna_Breach__Central__East_Brick
+Giguna_Breach__Central__East_Brick --> Giguna_Breach__Central__Middle_Statue
 Giguna_Breach__Central__South --> Giguna_Breach__Central__Upper_Floating_Brick
 Giguna_Breach__Central__South <--> Giguna_Breach__Grid_14_10_11__North
 Giguna_Breach__Central__Statuette --> Giguna_Breach__Central__Tunnel
@@ -844,6 +862,8 @@ Giguna_Breach__Fire_Room__West_11 <--> Giguna_Breach__Grid_14_10_11__East_11
 Giguna_Breach__Fire_Room__West_Plateau --> Giguna_Breach__Fire_Room__East_10
 Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Ledge
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
+Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
+Giguna_Breach__Peak__Portal --> Giguna_Breach__Peak__Upper_West
 Giguna_Breach__Robopede__West <--> Giguna_Breach__SW_Save__East_12
 Giguna_Breach__SW_Save__East_12 --> Giguna_Breach__SW_Save__Lower_Platform
 Giguna_Breach__SW_Save__Lower_Platform --> Giguna_Breach__SW_Save__Side_Door

@@ -5,12 +5,16 @@ data:
 
 areas:
 - name: Peak
-  on_entry: $reset_old_area(^newpos); $breach_entry(`Giguna Breach > Peak > Save Point`);
+  on_entry: $reset_old_area(^newpos);
   spots:
     - name: Save Point
       coord: [15.5, 6.7]
       local:
         - to: East Passage
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: East Passage
       coord: [14.5, 6.8]
       local:
@@ -28,6 +32,41 @@ areas:
       exits:
         - to: Chimney > East 7
           tags: [xdoor]
+    - name: East 6
+      coord: [15.9, 5.6]
+      local:
+        - to: Upper East
+          jumps: 2
+      exits:
+        - to: Upper East
+          req: $hook
+          time: 0.7
+        - to: Ascent > West 6
+          tags: [xdoor]
+    - name: Upper East
+      coord: [15.7, 5.3]
+      local:
+        - to: Upper West
+        - to: East 6
+    - name: Upper West
+      coord: [15.1, 5.3]
+      local:
+        - to: Upper East
+        - to: Portal
+    - name: Portal
+      coord: [14.8, 5.8]
+      local:
+        - to: Upper West
+          jumps: 3
+      exits:
+        - to: Upper West
+          req: $hook
+          time: 1  # ?
+      actions:
+        - name: Portal
+          to: Giguna > Ruins Top > Save Point
+          do: $portal(`Giguna > Ruins Top > Save Point`)
+          tags: [portal]
 
 - name: Chimney
   on_entry: $reset_old_area(^newpos);
@@ -417,7 +456,7 @@ areas:
       coord: [14.85, 8.0]
       local:
         - to: South
-        - to: East Statue
+        - to: Middle Statue
           jumps: 2
       exits:
         - to: West Statue
@@ -427,12 +466,12 @@ areas:
       coord: [14.85, 7.7]
       local:
         - to: Upper Floating Brick
-        - to: East Statue
+        - to: Middle Statue
         - to: Statuette
     - name: Statuette
       coord: [14.3, 7.7]
       local:
-        - to: East Statue
+        - to: Middle Statue
       exits:
         - to: Tunnel
           time: 0.5  # A simplification of destroying the rocks to get in and out
@@ -448,4 +487,57 @@ areas:
       exits:
         - to: Chimney > East 8
           tags: [xshift]
+    - name: Middle Statue
+      coord: [15.2, 7.7]
+      local:
+        - to: Upper Floating Brick
+        - to: West Statue
+        - to: East Brick
+    - name: East Brick
+      coord: [15.3, 8.2]
+      local:
+        - to: East 9
+      exits:
+        - to: Middle Statue
+          req: $hook
+          time: 1  # ?
+    - name: East 9
+      coord: [15.9, 8.5]
+      exits:
+        - to: East Brick
+          req: $hook
+          time: 2  # ?
+        - to: Ascent > West 9
+          tags: [xdoor]
 
+- name: Ascent
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: West 9
+      coord: [16.1, 8.5]
+      local:
+        - to: Bottom
+      exits:
+        - to: Central > East 9
+          tags: [xdoor]
+    - name: Bottom
+      coord: [16.3, 8.5]
+      local:
+        - to: West 9
+      exits:
+        - to: Top
+          req: $hook
+          time: 9
+    - name: Top
+      coord: [16.5, 5.6]
+      local:
+        - to: West 6
+        - to: Bottom
+          thru: [[16.2, 6.0], [16.65, 7.6], [16.6, 8.5]]
+    - name: West 6
+      coord: [16.1, 5.6]
+      local:
+        - to: Top
+      exits:
+        - to: Peak > East 6
+          tags: [xdoor]

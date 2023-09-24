@@ -95,6 +95,9 @@ time:
   exterior: 0.75
   tent: 0.25
   cave: 0.25
+  # Portals
+  portal: 3.6
+  exit: 3
   # spots are technically the same, but in different areas to partition the area map
   overlap: 0
 
@@ -202,8 +205,8 @@ helpers:
             };
             ^prev_area = $get_area(^position);
     }
-  $breach_entry:action(newsave:SpotId): >
-    IF (NOT ^breach) { ^save = ^newsave; }
+  # Save is updated when you traverse a portal 
+  $portal:action(newsave:SpotId): ^save = ^newsave
 
 
 collect:

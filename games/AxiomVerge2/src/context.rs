@@ -144,12 +144,19 @@ pub mod data {
     pub fn breach(spot_id: SpotId) -> bool {
         match spot_id {
             SpotId::Giguna_Breach__Antechamber__North => true,
+            SpotId::Giguna_Breach__Ascent__Bottom => true,
+            SpotId::Giguna_Breach__Ascent__Top => true,
+            SpotId::Giguna_Breach__Ascent__West_6 => true,
+            SpotId::Giguna_Breach__Ascent__West_9 => true,
             SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => true,
             SpotId::Giguna_Breach__Below_Chimney__East_Ledge => true,
             SpotId::Giguna_Breach__Below_Chimney__North => true,
             SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => true,
             SpotId::Giguna_Breach__Below_Chimney__Southwest => true,
             SpotId::Giguna_Breach__Below_Chimney__West_Passage => true,
+            SpotId::Giguna_Breach__Central__East_9 => true,
+            SpotId::Giguna_Breach__Central__East_Brick => true,
+            SpotId::Giguna_Breach__Central__Middle_Statue => true,
             SpotId::Giguna_Breach__Central__South => true,
             SpotId::Giguna_Breach__Central__Statuette => true,
             SpotId::Giguna_Breach__Central__Tunnel => true,
@@ -180,8 +187,12 @@ pub mod data {
             SpotId::Giguna_Breach__Grid_14_10_11__North => true,
             SpotId::Giguna_Breach__Grid_14_10_11__South => true,
             SpotId::Giguna_Breach__Peak__Column => true,
+            SpotId::Giguna_Breach__Peak__East_6 => true,
             SpotId::Giguna_Breach__Peak__East_Passage => true,
+            SpotId::Giguna_Breach__Peak__Portal => true,
             SpotId::Giguna_Breach__Peak__Save_Point => true,
+            SpotId::Giguna_Breach__Peak__Upper_East => true,
+            SpotId::Giguna_Breach__Peak__Upper_West => true,
             SpotId::Giguna_Breach__Peak__West_7 => true,
             SpotId::Giguna_Breach__Robopede__Center => true,
             SpotId::Giguna_Breach__Robopede__North => true,
@@ -2687,6 +2698,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos10(self, pos);
                 }
             }
+            AreaId::Giguna_Breach__Ascent => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos12(self, pos);
+                }
+            }
             AreaId::Giguna_Breach__Below_Chimney => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos3(self, pos);
@@ -2719,7 +2735,7 @@ impl context::Ctx for Context {
             }
             AreaId::Giguna_Breach__Peak => {
                 if get_area(self.position) != area {
-                    rules::action_reset_old_area__newpos_breach_entry__giguna_breach__peak__save_point(self, pos);
+                    rules::action_reset_old_area__newpos1(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Robopede => {

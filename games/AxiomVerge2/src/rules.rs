@@ -850,6 +850,14 @@ pub fn action_mode__indra(ctx: &mut Context) {
     // ^mode = 'Indra'
     ctx.set_mode(enums::Mode::Indra);
 }
+pub fn action_portal__giguna__ruins_top__save_point(ctx: &mut Context) {
+    // $portal(`Giguna > Ruins Top > Save Point`)
+    helper__portal!(ctx, SpotId::Giguna__Ruins_Top__Save_Point);
+}
+pub fn action_portal__giguna_breach__peak__save_point(ctx: &mut Context) {
+    // $portal(`Giguna Breach > Peak > Save Point`)
+    helper__portal!(ctx, SpotId::Giguna_Breach__Peak__Save_Point);
+}
 pub fn action_refills__1(ctx: &mut Context) {
     // ^refills += 1
     ctx.refills += 1;
@@ -858,11 +866,19 @@ pub fn action_reset_old_area__newpos(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos)
     helper__reset_old_area!(ctx, newpos);
 }
+pub fn action_reset_old_area__newpos1(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
 pub fn action_reset_old_area__newpos10(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos);
     helper__reset_old_area!(ctx, newpos);
 }
 pub fn action_reset_old_area__newpos11(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos12(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos);
     helper__reset_old_area!(ctx, newpos);
 }
@@ -897,14 +913,6 @@ pub fn action_reset_old_area__newpos8(ctx: &mut Context, newpos: SpotId) {
 pub fn action_reset_old_area__newpos9(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos);
     helper__reset_old_area!(ctx, newpos);
-}
-pub fn action_reset_old_area__newpos_breach_entry__giguna_breach__peak__save_point(
-    ctx: &mut Context,
-    newpos: SpotId,
-) {
-    // $reset_old_area(^newpos); $breach_entry(`Giguna Breach > Peak > Save Point`);
-    helper__reset_old_area!(ctx, newpos);
-    helper__breach_entry!(ctx, SpotId::Giguna_Breach__Peak__Save_Point);
 }
 pub fn action_save(ctx: &mut Context) {
     // $save

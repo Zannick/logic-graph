@@ -1804,6 +1804,28 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Peak__East_Passage,
         ) => 799,
         ([false], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        ([false], SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
+            1200
+        }
+        ([false], SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => {
+            701
+        }
+        (
+            [false],
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            SpotId::Giguna_Breach__Peak__Upper_West,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            SpotId::Giguna_Breach__Peak__Upper_East,
+        ) => 2105,
+        ([false], SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => {
+            1052
+        }
+        ([false], SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => {
+            1799
+        }
         ([false], SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => {
             1200
         }
@@ -2119,6 +2141,11 @@ pub fn local_travel_time(
         ) => 1228,
         (
             [false],
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1228,
+        (
+            [false],
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
         ) => 299,
@@ -2127,6 +2154,16 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Statuette,
         ) => 1929,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 3157,
         (
             [false],
             SpotId::Giguna_Breach__Central__Tunnel,
@@ -2142,6 +2179,42 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Central__West_8,
             SpotId::Giguna_Breach__Central__Tunnel,
         ) => 526,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => 499,
+        (
+            [false],
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__East_9,
+        ) => 2105,
+        ([false], SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => {
+            701
+        }
+        ([false], SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => {
+            701
+        }
+        // [1.052632, 1.6, 0.9, 1.052632]
+        ([false], SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => {
+            4605
+        }
+        ([false], SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => {
+            1403
+        }
+        ([false], SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => {
+            1403
+        }
         (
             [false],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
@@ -5410,6 +5483,28 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Peak__East_Passage,
         ) => 799,
         ([true], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        ([true], SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
+            1200
+        }
+        ([true], SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            SpotId::Giguna_Breach__Peak__Upper_West,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            SpotId::Giguna_Breach__Peak__Upper_East,
+        ) => 2105,
+        ([true], SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => {
+            1052
+        }
+        ([true], SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => {
+            1799
+        }
         ([true], SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => {
             1200
         }
@@ -5717,6 +5812,11 @@ pub fn local_travel_time(
         ) => 1228,
         (
             [true],
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1228,
+        (
+            [true],
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
         ) => 299,
@@ -5725,6 +5825,16 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Statuette,
         ) => 1929,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 3157,
         (
             [true],
             SpotId::Giguna_Breach__Central__Tunnel,
@@ -5740,6 +5850,36 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Central__West_8,
             SpotId::Giguna_Breach__Central__Tunnel,
         ) => 526,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => 499,
+        (
+            [true],
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__East_9,
+        ) => 2105,
+        ([true], SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => {
+            701
+        }
+        ([true], SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => {
+            701
+        }
+        // [1.052632, 1.6, 0.9, 1.052632]
+        ([true], SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => 4605,
+        ([true], SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => 1403,
+        ([true], SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => 1403,
         (
             [true],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
@@ -9255,6 +9395,33 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
+        SpotId::Giguna_Breach__Peak__East_6 => enum_map! {
+            SpotId::Giguna_Breach__Peak__East_6 => 0,
+            SpotId::Giguna_Breach__Peak__Upper_East => 700,
+            SpotId::Giguna_Breach__Ascent__West_6 => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Peak__Upper_East => enum_map! {
+            SpotId::Giguna_Breach__Peak__East_6 => 701,
+            SpotId::Giguna_Breach__Peak__Upper_East => 0,
+            SpotId::Giguna_Breach__Peak__Upper_West => 2105,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Peak__Upper_West => enum_map! {
+            SpotId::Giguna_Breach__Peak__Upper_East => 2105,
+            SpotId::Giguna_Breach__Peak__Upper_West => 0,
+            SpotId::Giguna_Breach__Peak__Portal => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Peak__Portal => enum_map! {
+            SpotId::Giguna_Breach__Peak__Upper_West => 1000,
+            SpotId::Giguna_Breach__Peak__Portal => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
         SpotId::Giguna_Breach__Chimney__East_7 => enum_map! {
             SpotId::Giguna_Breach__Peak__West_7 => 1600,
             SpotId::Giguna_Breach__Chimney__East_7 => 0,
@@ -9572,6 +9739,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna_Breach__Central__South => 1228,
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 0,
             SpotId::Giguna_Breach__Central__West_Statue => 1000,
+            SpotId::Giguna_Breach__Central__Middle_Statue => 1228,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9579,12 +9747,14 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 299,
             SpotId::Giguna_Breach__Central__West_Statue => 0,
             SpotId::Giguna_Breach__Central__Statuette => 1929,
+            SpotId::Giguna_Breach__Central__Middle_Statue => 1228,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna_Breach__Central__Statuette => enum_map! {
             SpotId::Giguna_Breach__Central__Statuette => 0,
             SpotId::Giguna_Breach__Central__Tunnel => 500,
+            SpotId::Giguna_Breach__Central__Middle_Statue => 3157,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9599,6 +9769,56 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna_Breach__Chimney__East_8 => 1350,
             SpotId::Giguna_Breach__Central__Tunnel => 526,
             SpotId::Giguna_Breach__Central__West_8 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__Middle_Statue => enum_map! {
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 1228,
+            SpotId::Giguna_Breach__Central__West_Statue => 1228,
+            SpotId::Giguna_Breach__Central__Middle_Statue => 0,
+            SpotId::Giguna_Breach__Central__East_Brick => 499,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__East_Brick => enum_map! {
+            SpotId::Giguna_Breach__Central__Middle_Statue => 1000,
+            SpotId::Giguna_Breach__Central__East_Brick => 0,
+            SpotId::Giguna_Breach__Central__East_9 => 2105,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Central__East_9 => enum_map! {
+            SpotId::Giguna_Breach__Central__East_Brick => 2000,
+            SpotId::Giguna_Breach__Central__East_9 => 0,
+            SpotId::Giguna_Breach__Ascent__West_9 => 1600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Ascent__West_9 => enum_map! {
+            SpotId::Giguna_Breach__Central__East_9 => 1600,
+            SpotId::Giguna_Breach__Ascent__West_9 => 0,
+            SpotId::Giguna_Breach__Ascent__Bottom => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Ascent__Bottom => enum_map! {
+            SpotId::Giguna_Breach__Ascent__West_9 => 701,
+            SpotId::Giguna_Breach__Ascent__Bottom => 0,
+            SpotId::Giguna_Breach__Ascent__Top => 9000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Ascent__Top => enum_map! {
+            SpotId::Giguna_Breach__Ascent__Bottom => 4605,
+            SpotId::Giguna_Breach__Ascent__Top => 0,
+            SpotId::Giguna_Breach__Ascent__West_6 => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna_Breach__Ascent__West_6 => enum_map! {
+            SpotId::Giguna_Breach__Peak__East_6 => 1600,
+            SpotId::Giguna_Breach__Ascent__Top => 1403,
+            SpotId::Giguna_Breach__Ascent__West_6 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10361,6 +10581,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_Top__Portal => enum_map! {
+            SpotId::Giguna_Breach__Peak__Save_Point => 3600,
             SpotId::Giguna__Ruins_Top__Portal_Left => 701,
             SpotId::Giguna__Ruins_Top__Small_Ledge => 877,
             SpotId::Giguna__Ruins_Top__Portal => 0,
@@ -13310,6 +13531,21 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna_Breach__Peak__West_7, SpotId::Giguna_Breach__Peak__West_7) => 0,
         (SpotId::Giguna_Breach__Peak__West_7, SpotId::Giguna_Breach__Chimney__East_7) => 1600,
         (SpotId::Giguna_Breach__Peak__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__East_6) => 0,
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => 700,
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Ascent__West_6) => 1600,
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => 701,
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_East) => 0,
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_West) => 2105,
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => 2105,
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_West) => 0,
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => 1052,
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => 1000,
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Portal) => 0,
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Peak__West_7) => 1600,
         (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__East_7) => 0,
         (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => 1200,
@@ -13778,6 +14014,10 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         ) => 1000,
         (
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1228,
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
             SpotId::Menu__Upgrade_Menu__Physiology,
         ) => 1000,
         (
@@ -13792,11 +14032,19 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Statuette,
         ) => 1929,
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1228,
         (SpotId::Giguna_Breach__Central__West_Statue, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
         (SpotId::Giguna_Breach__Central__Statuette, SpotId::Giguna_Breach__Central__Statuette) => 0,
         (SpotId::Giguna_Breach__Central__Statuette, SpotId::Giguna_Breach__Central__Tunnel) => 500,
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 3157,
         (SpotId::Giguna_Breach__Central__Statuette, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => 350,
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Tunnel) => 0,
@@ -13806,6 +14054,61 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => 526,
         (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__West_8) => 0,
         (SpotId::Giguna_Breach__Central__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => 1228,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => 1228,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 0,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => 499,
+        (SpotId::Giguna_Breach__Central__Middle_Statue, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => 1000,
+        (
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => 0,
+        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Giguna_Breach__Central__East_9) => {
+            2105
+        }
+        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (SpotId::Giguna_Breach__Central__East_9, SpotId::Giguna_Breach__Central__East_Brick) => {
+            2000
+        }
+        (SpotId::Giguna_Breach__Central__East_9, SpotId::Giguna_Breach__Central__East_9) => 0,
+        (SpotId::Giguna_Breach__Central__East_9, SpotId::Giguna_Breach__Ascent__West_9) => 1600,
+        (SpotId::Giguna_Breach__Central__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Central__East_9) => 1600,
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__West_9) => 0,
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => 701,
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => 701,
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__Bottom) => 0,
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__Top) => 9000,
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => 4605,
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Top) => 0,
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => 1403,
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Peak__East_6) => 1600,
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => 1403,
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__West_6) => 0,
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Ebih__Ebih_West__West_9) => 1350,
         (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Giguna__Giguna_Northeast__East_9) => 0,
         (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -14647,6 +14950,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 1500,
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna_Breach__Peak__Save_Point) => 3600,
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal) => 0,
@@ -16816,6 +17120,12 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => true,
         (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => true,
         (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => true,
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => true,
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_West) => true,
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => true,
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => true,
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => true,
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => true,
         (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => true,
         (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => true,
         (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
@@ -17007,7 +17317,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Giguna_Breach__Central__East_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
         ) => true,
         (
             SpotId::Giguna_Breach__Central__West_Statue,
@@ -17015,7 +17325,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Giguna_Breach__Central__West_Statue,
-            SpotId::Giguna_Breach__Central__East_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
         ) => true,
         (
             SpotId::Giguna_Breach__Central__West_Statue,
@@ -17023,11 +17333,31 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Giguna_Breach__Central__Statuette,
-            SpotId::Giguna_Breach__Central__East_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
         ) => true,
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => true,
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => true,
         (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => true,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => true,
+        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Giguna_Breach__Central__East_9) => {
+            true
+        }
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => true,
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => true,
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => true,
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => true,
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => true,
         (
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__East_9,
@@ -24535,6 +24865,81 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Giguna_Breach__Peak__East_6,
+            SpotId::Giguna_Breach__Peak__East_6,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_6,
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            700,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_6,
+            SpotId::Giguna_Breach__Ascent__West_6,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__East_6,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            SpotId::Giguna_Breach__Peak__East_6,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            2105,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            SpotId::Giguna_Breach__Peak__Upper_East,
+            2105,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            SpotId::Giguna_Breach__Peak__Portal,
+            1052,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Portal,
+            SpotId::Giguna_Breach__Peak__Upper_West,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Portal,
+            SpotId::Giguna_Breach__Peak__Portal,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Portal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Giguna_Breach__Chimney__East_7,
             SpotId::Giguna_Breach__Peak__West_7,
             1600,
@@ -25471,6 +25876,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            1228,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25491,6 +25901,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            1228,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25503,6 +25918,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Central__Statuette,
             SpotId::Giguna_Breach__Central__Tunnel,
             500,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            3157,
         ),
         (
             SpotId::Giguna_Breach__Central__Statuette,
@@ -25546,6 +25966,151 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__West_8,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            1228,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+            1228,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+            499,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__East_Brick,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Giguna_Breach__Central__East_9,
+            2105,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_Brick,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_9,
+            SpotId::Giguna_Breach__Central__East_Brick,
+            2000,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_9,
+            SpotId::Giguna_Breach__Central__East_9,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_9,
+            SpotId::Giguna_Breach__Ascent__West_9,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Central__East_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_9,
+            SpotId::Giguna_Breach__Central__East_9,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_9,
+            SpotId::Giguna_Breach__Ascent__West_9,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_9,
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            SpotId::Giguna_Breach__Ascent__West_9,
+            701,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            SpotId::Giguna_Breach__Ascent__Top,
+            9000,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Top,
+            SpotId::Giguna_Breach__Ascent__Bottom,
+            4605,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Top,
+            SpotId::Giguna_Breach__Ascent__Top,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Top,
+            SpotId::Giguna_Breach__Ascent__West_6,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_6,
+            SpotId::Giguna_Breach__Peak__East_6,
+            1600,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_6,
+            SpotId::Giguna_Breach__Ascent__Top,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_6,
+            SpotId::Giguna_Breach__Ascent__West_6,
+            0,
+        ),
+        (
+            SpotId::Giguna_Breach__Ascent__West_6,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27793,6 +28358,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Portal,
+            SpotId::Giguna_Breach__Peak__Save_Point,
+            3600,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
@@ -31464,6 +32034,11 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             Some(1000)
         }
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => Some(701),
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => Some(4605),
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => Some(1403),
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => Some(1403),
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => Some(701),
         (
             SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
             SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
@@ -31516,12 +32091,35 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna_Breach__Below_Chimney__West_Passage,
             SpotId::Giguna_Breach__Below_Chimney__Southwest,
         ) => Some(1754),
+        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Giguna_Breach__Central__East_9) => {
+            Some(2105)
+        }
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => Some(499),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => Some(1228),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => Some(1228),
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => Some(3157),
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => {
             Some(350)
         }
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => {
             Some(526)
         }
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => Some(1228),
         (
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
             SpotId::Giguna_Breach__Central__South,
@@ -31531,6 +32129,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => {
             Some(526)
         }
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => Some(1228),
         (
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Statuette,
@@ -31646,14 +32248,30 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(799)
         }
         (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => Some(701),
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
+            Some(1200)
+        }
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => {
             Some(2400)
         }
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
             Some(3508)
         }
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => {
+            Some(1799)
+        }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
             Some(3508)
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => Some(701),
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_West) => {
+            Some(2105)
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => {
+            Some(1052)
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => {
+            Some(2105)
         }
         (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => {
             Some(1403)
@@ -34422,6 +35040,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => {
             (Some(1000), vec![])
         }
+        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => {
+            (Some(4605), vec![])
+        }
+        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => {
+            (Some(701), vec![])
+        }
         (
             SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
             SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
@@ -34474,12 +35107,35 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna_Breach__Below_Chimney__West_Passage,
             SpotId::Giguna_Breach__Below_Chimney__Southwest,
         ) => (Some(1754), vec![]),
+        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Giguna_Breach__Central__East_9) => {
+            (Some(2105), vec![])
+        }
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__East_Brick,
+        ) => (Some(499), vec![]),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+            SpotId::Giguna_Breach__Central__West_Statue,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna_Breach__Central__Statuette,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => (Some(3157), vec![]),
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => {
             (Some(350), vec![])
         }
         (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => {
             (Some(526), vec![])
         }
+        (
+            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => (Some(1228), vec![]),
         (
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
             SpotId::Giguna_Breach__Central__South,
@@ -34493,6 +35149,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => {
             (Some(526), vec![])
         }
+        (
+            SpotId::Giguna_Breach__Central__West_Statue,
+            SpotId::Giguna_Breach__Central__Middle_Statue,
+        ) => (Some(1228), vec![]),
         (
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Statuette,
@@ -34618,14 +35278,32 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => {
             (Some(701), vec![])
         }
+        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
+            (Some(1200), vec![])
+        }
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => {
             (Some(2400), vec![])
         }
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
             (Some(3508), vec![])
         }
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => {
+            (Some(1799), vec![])
+        }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
             (Some(3508), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_West) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => {
+            (Some(2105), vec![])
         }
         (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => {
             (Some(1403), vec![])

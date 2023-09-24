@@ -1064,6 +1064,12 @@ areas:
         - to: East Door
           req: ^_doors_open
           time: 0.7
+      actions:
+        - name: Portal
+          to: Giguna Breach > Peak > Save Point
+          req: ^mode == 'drone'
+          do: $portal(`Giguna Breach > Peak > Save Point`)
+          tags: [portal]
     - name: Interior Ledge
       coord: [15.65, 6.2]
       exits:
