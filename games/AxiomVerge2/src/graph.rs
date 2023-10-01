@@ -4130,6 +4130,7 @@ pub enum ExitId {
     Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1,
     Ebih__Waterfall__Platform__ex__Big_Tree_1,
     Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1,
+    Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1,
     Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1,
     Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1,
     Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1,
@@ -4562,6 +4563,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => write!(f, "{}", "Ebih > Waterfall > Middle West Tree ==> West Main Path (1)"),
             ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Platform ==> Big Tree (1)"),
             ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => write!(f, "{}", "Ebih > Waterfall > Under Waterfall ==> Waterfall Left (1)"),
+            ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => write!(f, "{}", "Ebih > Waterfall > Wall Right ==> Lower West Tree (1)"),
             ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => write!(f, "{}", "Ebih > Waterfall > West 10 ==> Ebih West > East 10 (1)"),
             ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => write!(f, "{}", "Ebih > Waterfall > West 7 ==> Ebih West > East 7 (1)"),
             ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1 => write!(f, "{}", "Ebih > Waterfall > West 8 ==> Ebih West > East 8 (1)"),
@@ -4999,6 +5001,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Waterfall > Middle West Tree ==> West Main Path (1)" => Ok(ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1),
             "Ebih > Waterfall > Platform ==> Big Tree (1)" => Ok(ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1),
             "Ebih > Waterfall > Under Waterfall ==> Waterfall Left (1)" => Ok(ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1),
+            "Ebih > Waterfall > Wall Right ==> Lower West Tree (1)" => Ok(ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1),
             "Ebih > Waterfall > West 10 ==> Ebih West > East 10 (1)" => Ok(ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1),
             "Ebih > Waterfall > West 7 ==> Ebih West > East 7 (1)" => Ok(ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1),
             "Ebih > Waterfall > West 8 ==> Ebih West > East 8 (1)" => Ok(ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1),
@@ -7398,6 +7401,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => rules::access_grab(&ctx),
             ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => rules::access_grab(&ctx),
+            ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => rules::access_nanite_mist_and_mist_upgrade(&ctx),
             ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => true,
             ExitId::Ebih__Waterfall__West_7__ex__Ebih_West__East_7_1 => true,
             ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1 => true,
@@ -9062,6 +9066,7 @@ impl world::World for World {
             ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 | ExitId:: Ebih__Waterfall__Alcove_Left__ex__Alcove_1 | ExitId:: Ebih__Waterfall__Alcove_Left__ex__Alcove_2 => SpotId::Ebih__Waterfall__Alcove_Left,
             ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 | ExitId:: Ebih__Waterfall__Alcove__ex__Alcove_Right_1 | ExitId:: Ebih__Waterfall__Alcove__ex__Alcove_Right_2 | ExitId:: Ebih__Waterfall__Alcove__ex__Alcove_Left_2 => SpotId::Ebih__Waterfall__Alcove,
             ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => SpotId::Ebih__Waterfall__Under_Waterfall,
+            ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => SpotId::Ebih__Waterfall__Wall_Right,
             ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => SpotId::Ebih__Waterfall__Lower_West_Tree,
             ExitId::Ebih__Waterfall__West_10__ex__Ebih_West__East_10_1 => SpotId::Ebih__Waterfall__West_10,
             ExitId::Ebih__Waterfall__West_9__ex__Ebih_West__East_9_1 => SpotId::Ebih__Waterfall__West_9,
@@ -10342,7 +10347,6 @@ impl World {
                     | Item::Heretics_Tablet
                     | Item::Letter_from_Trace
                     | Item::Melee_Charge
-                    | Item::Mist_Upgrade
                     | Item::Notes_2053_02_27
                     | Item::Record_Losses
                     | Item::Researchers_Missing
@@ -10361,7 +10365,6 @@ impl World {
                     | Item::Health
                     | Item::Health_Fragment
                     | Item::Melee_Charge
-                    | Item::Mist_Upgrade
                     | Item::Notes_2053_02_27
             ),
             _ => false,
@@ -12143,6 +12146,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1,
             time: 1100,
             dest: SpotId::Ebih__Waterfall__Waterfall_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => Exit {
+            id: ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1,
+            time: 1754,
+            dest: SpotId::Ebih__Waterfall__Lower_West_Tree,
             price: Currency::Free,
             loc_id: None,
         },
@@ -17486,7 +17496,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: LocationId::Ebih__Waterfall__Wall_Right__Wall.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1.into_usize(),
+                end: ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,

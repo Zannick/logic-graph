@@ -566,6 +566,10 @@ pub fn access_nanite_mist(ctx: &Context) -> bool {
     // Nanite_Mist
     ctx.has(Item::Nanite_Mist)
 }
+pub fn access_nanite_mist_and_mist_upgrade(ctx: &Context) -> bool {
+    // Nanite_Mist and Mist_Upgrade
+    (ctx.has(Item::Nanite_Mist) && ctx.has(Item::Mist_Upgrade))
+}
 pub fn access_nano_points(ctx: &Context) -> bool {
     // Nano_Points
     ctx.has(Item::Nano_Points)

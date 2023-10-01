@@ -685,6 +685,7 @@ digraph AxiomVerge2 {
     Ebih__Waterfall__Alcove -> Ebih__Waterfall__Alcove_Right;
     Ebih__Waterfall__Alcove -> Ebih__Waterfall__Alcove_Right;
     Ebih__Waterfall__Under_Waterfall -> Ebih__Waterfall__Waterfall_Left;
+    Ebih__Waterfall__Wall_Right -> Ebih__Waterfall__Lower_West_Tree;
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__West_Lower_Path;
     Ebih__Waterfall__West_10 -> Ebih__Ebih_West__East_10;
     Ebih__Waterfall__West_9 -> Ebih__Ebih_West__East_9;
@@ -1380,7 +1381,6 @@ digraph AxiomVerge2 {
     Ebih__Waterfall__Waterfall_Left -> Ebih__Waterfall__Wall_Right;
     Ebih__Waterfall__Waterfall_Left -> Ebih__Waterfall__Lower_West_Tree;
     Ebih__Waterfall__Wall_Right -> Ebih__Waterfall__Waterfall_Left;
-    Ebih__Waterfall__Wall_Right -> Ebih__Waterfall__Lower_West_Tree;
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__Waterfall_Center_Left;
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__Under_Waterfall;
     Ebih__Waterfall__Lower_West_Tree -> Ebih__Waterfall__Waterfall_Left;

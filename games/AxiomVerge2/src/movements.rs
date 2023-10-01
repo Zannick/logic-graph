@@ -8607,6 +8607,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Ebih__Waterfall__Wall_Right => enum_map! {
             SpotId::Ebih__Waterfall__Waterfall_Left => 2105,
             SpotId::Ebih__Waterfall__Wall_Right => 0,
+            SpotId::Ebih__Waterfall__Lower_West_Tree => 1754,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12855,6 +12856,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => 2105,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Wall_Right) => 0,
+        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Lower_West_Tree) => 1754,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -16711,7 +16713,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
-        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__West_Lower_Path) => {
             true
         }
@@ -22433,6 +22434,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Wall_Right,
             0,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Wall_Right,
+            SpotId::Ebih__Waterfall__Lower_West_Tree,
+            1754,
         ),
         (
             SpotId::Ebih__Waterfall__Wall_Right,

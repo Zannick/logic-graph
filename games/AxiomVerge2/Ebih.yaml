@@ -705,7 +705,6 @@ areas:
       local:
         - to: Waterfall Left
           jumps: 3
-        - to: Lower West Tree
       locations:
         - name: Wall
           item: Ebih_Waterfall_Wall
@@ -713,6 +712,10 @@ areas:
           req: $shockwave
           price: 100
           tags: [shockwave, event]
+      exits:
+        - to: Lower West Tree
+          req: Nanite_Mist and Mist_Upgrade
+          movement: mist2
     - name: Lower West Tree
       coord: [21.9, 9.9]
       local:

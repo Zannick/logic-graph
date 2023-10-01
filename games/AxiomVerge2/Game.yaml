@@ -55,13 +55,21 @@ movements:
   water:
     x: .285
     req: Underwater_Movement
-  # TODO: mist movement costs 30 energy/s
   # TODO: drone slingshot+hover is faster x movement but is pretty circumstantial
   # *and* limited
   # But with just throw + hover, can cover about 2.5 in ~6s / 1 in 2.5s
   # aka ~.4-.416 speed in one direction for around 6s max
   # TODO: anuman "movement" of constantly changing form?
 
+exit_movements:
+  throw_hover:
+    x: .4
+  mist2:
+    x: .285
+    y: .5
+    # roughly .4 at a diagonal...
+    # TODO: mist movement costs 30 energy/s
+    # and takes ~.6 seconds to exit form
 
 time:
   default: 1

@@ -118,6 +118,7 @@ pub enum Expectation {
     Map1710(bool),
     MeleeDamage(i8),
     MeleeSpeed(i8),
+    MistUpgrade(bool),
     NaniteMist(bool),
     NanoPoints(i8),
     PowerMatrix(bool),
@@ -370,20 +371,21 @@ pub mod flags {
             const LEDGE_GRAB = 1 << 8;
             const LETTER_FROM_TRACE = 1 << 9;
             const MAP_17_10 = 1 << 10;
-            const NANITE_MIST = 1 << 11;
-            const POWER_MATRIX = 1 << 12;
-            const RECORD_LOSSES = 1 << 13;
-            const REMOTE_DRONE = 1 << 14;
-            const RESEARCHERS_MISSING = 1 << 15;
-            const SHOCKWAVE = 1 << 16;
-            const SLINGSHOT_HOOK = 1 << 17;
-            const STATION_POWER = 1 << 18;
-            const SWITCH_36_11 = 1 << 19;
-            const SWITCH_40_12 = 1 << 20;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 21;
-            const UNDER_SIEGE = 1 << 22;
-            const UNDERWATER_MOVEMENT = 1 << 23;
-            const WALL_CLIMB = 1 << 24;
+            const MIST_UPGRADE = 1 << 11;
+            const NANITE_MIST = 1 << 12;
+            const POWER_MATRIX = 1 << 13;
+            const RECORD_LOSSES = 1 << 14;
+            const REMOTE_DRONE = 1 << 15;
+            const RESEARCHERS_MISSING = 1 << 16;
+            const SHOCKWAVE = 1 << 17;
+            const SLINGSHOT_HOOK = 1 << 18;
+            const STATION_POWER = 1 << 19;
+            const SWITCH_36_11 = 1 << 20;
+            const SWITCH_40_12 = 1 << 21;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 22;
+            const UNDER_SIEGE = 1 << 23;
+            const UNDERWATER_MOVEMENT = 1 << 24;
+            const WALL_CLIMB = 1 << 25;
         }
     }
 }
@@ -475,7 +477,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 50;
+    const NUM_ITEMS: u32 = 51;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -530,6 +532,7 @@ impl context::Ctx for Context {
             Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10),
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
+            Item::Mist_Upgrade => self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE),
             Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
             Item::Power_Matrix => self.cbits2.contains(flags::ContextBits2::POWER_MATRIX),
@@ -648,6 +651,10 @@ impl context::Ctx for Context {
             Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10).into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
+            Item::Mist_Upgrade => self
+                .cbits2
+                .contains(flags::ContextBits2::MIST_UPGRADE)
+                .into(),
             Item::Nanite_Mist => self
                 .cbits2
                 .contains(flags::ContextBits2::NANITE_MIST)
@@ -808,6 +815,9 @@ impl context::Ctx for Context {
             },
             Item::Melee_Speed => {
                 self.melee_speed += 1;
+            },
+            Item::Mist_Upgrade => {
+                self.cbits2.insert(flags::ContextBits2::MIST_UPGRADE);
             },
             Item::Nanite_Mist => {
                 self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
@@ -979,6 +989,9 @@ impl context::Ctx for Context {
             }
             Item::Melee_Speed => {
                 self.melee_speed += 1;
+            }
+            Item::Mist_Upgrade => {
+                self.cbits2.insert(flags::ContextBits2::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
                 self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
@@ -1801,6 +1814,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Mist_Upgrade", Yaml::Boolean(b)) => Expectation::MistUpgrade(*b),
+            ("Mist_Upgrade", Yaml::Integer(i)) => Expectation::MistUpgrade(*i > 0),
+            ("Mist_Upgrade", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Nanite_Mist", Yaml::Boolean(b)) => Expectation::NaniteMist(*b),
             ("Nanite_Mist", Yaml::Integer(i)) => Expectation::NaniteMist(*i > 0),
             ("Nanite_Mist", _) => {
@@ -2397,6 +2418,12 @@ impl context::Ctx for Context {
                     let v = self.count(Item::Melee_Speed);
                     if v != (*e).into() {
                         errs.push(format!("Expected {} = {}, got: {}", "Melee_Speed", e, v));
+                    }
+                }
+                Expectation::MistUpgrade(e) => {
+                    let v = self.has(Item::Mist_Upgrade);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Mist_Upgrade", e, v));
                     }
                 }
                 Expectation::NaniteMist(e) => {
@@ -3478,6 +3505,11 @@ impl context::Ctx for Context {
         let p = old.cbits2.contains(flags::ContextBits2::MAP_17_10);
         if n != p {
             list.push(format!("{}MAP_17_10", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE);
+        let p = old.cbits2.contains(flags::ContextBits2::MIST_UPGRADE);
+        if n != p {
+            list.push(format!("{}MIST_UPGRADE", if n { "+" } else { "-" }));
         }
         let n = self.cbits2.contains(flags::ContextBits2::NANITE_MIST);
         let p = old.cbits2.contains(flags::ContextBits2::NANITE_MIST);
