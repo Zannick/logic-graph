@@ -11885,14 +11885,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1 => Exit {
             id: ExitId::Ebih__By_Garage__Crawlspace_Opening__ex__Crawlspace_1,
-            time: 800,
+            time: 701,
             dest: SpotId::Ebih__By_Garage__Crawlspace,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1 => Exit {
             id: ExitId::Ebih__By_Garage__Crawlspace__ex__Crawlspace_Opening_1,
-            time: 800,
+            time: 701,
             dest: SpotId::Ebih__By_Garage__Crawlspace_Opening,
             price: Currency::Free,
             loc_id: None,
@@ -12053,7 +12053,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1,
-            time: 1000,
+            time: 1228,
             dest: SpotId::Ebih__Waterfall__Alcove,
             price: Currency::Free,
             loc_id: None,
@@ -12074,7 +12074,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1,
-            time: 1000,
+            time: 1578,
             dest: SpotId::Ebih__Waterfall__Alcove,
             price: Currency::Free,
             loc_id: None,
@@ -12088,14 +12088,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1,
-            time: 1250,
+            time: 1578,
             dest: SpotId::Ebih__Waterfall__Alcove_Left,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1,
-            time: 1250,
+            time: 1228,
             dest: SpotId::Ebih__Waterfall__Alcove_Right,
             price: Currency::Free,
             loc_id: None,
@@ -12158,14 +12158,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1 => Exit {
             id: ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Below_Left_Switch_1,
-            time: 1500,
+            time: 1403,
             dest: SpotId::Ebih__Waterfall__Below_Left_Switch,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1 => Exit {
             id: ExitId::Ebih__Waterfall__Below_Left_Switch__ex__Ledge_Below_Hole_1,
-            time: 1400,
+            time: 1403,
             dest: SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             price: Currency::Free,
             loc_id: None,
