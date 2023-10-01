@@ -25,8 +25,9 @@ from Utils import *
 templates_dir = os.path.join(base_dir, 'games', 'templates')
 
 MAIN_FILENAME = 'Game.yaml'
-GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'warps', 'actions', 'time', 'context',
-               'start', 'load', 'data', 'helpers', 'collect', 'settings', 'special', '_filename'}
+GAME_FIELDS = {'name', 'objectives', 'base_movements', 'movements', 'exit_movements',
+               'warps', 'actions', 'time', 'context', 'start', 'load', 'data',
+               'helpers', 'collect', 'settings', 'special', '_filename'}
 REGION_FIELDS = {'name', 'short', 'data', 'here', 'graph_offset'}
 AREA_FIELDS = {'name', 'enter', 'exits', 'spots', 'data', 'here'}
 SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'local', 'data', 'here'}
@@ -181,9 +182,14 @@ class GameLogic(object):
         # these are {name: {...}} dicts
         self.base_movements = self._info['base_movements']
         self.movements = self._info.get('movements', {})
+        self.exit_movements = self._info.get('exit_movements', {})
         for md in self.base_movements[1:]:
             if 'data' not in md:
                 self._errors.append(f'base movements beyond the first must have data restrictions')
+        if overlap := self.movements.keys() & self.exit_movements.keys():
+            self._errors.append(f'Movement/exit_movement names cannot overlap: {overlap.join(", ")}')
+        self.all_movements = dict(self.exit_movements)
+        self.all_movements.update(self.movements)
 
         self.time = self._info['time']
         for name, info in self.movements.items():
@@ -191,7 +197,7 @@ class GameLogic(object):
                 info['pr'] = _parseExpression(info['req'], name, 'movements')
                 info['access_id'] = self.make_funcid(info)
             else:
-                self._errors.append(f'movement {name} must have req or be in base_movements')
+                self._errors.append(f'movement {name} must have req or be in base_movements/exit_movements')
 
         self.id_lookup = {}
         self.special = self._info.get('special', {})
@@ -336,7 +342,7 @@ class GameLogic(object):
                     jumps_down = exit.get('jumps_down', 0)
                     if exit['movement'] == 'base':
                         exit['time'] = self.movement_time([], base, abs(tx - sx), ty - sy, jumps, jumps_down)
-                    elif (m := exit['movement']) in self.movements:
+                    elif (m := exit['movement']) in self.all_movements:
                         exit['time'] = self.movement_time([m], base, abs(tx - sx), ty - sy, jumps, jumps_down)
                     else:
                         self._errors.append(f'Unrecognized movement type in exit {exit["fullname"]}: {m!r}')
@@ -484,6 +490,7 @@ class GameLogic(object):
 
     @cached_property
     def movements_by_type(self):
+        """Returns a mapping of movement type to movement names (excluding exit-movements)."""
         d = defaultdict(list)
         for m, info in self.movements.items():
             found = False
@@ -506,7 +513,7 @@ class GameLogic(object):
         defallt = base.get('fall', 0)
         dejumpt = base.get('jump', 0)
         dejumpdownt = base.get('jump_down', 0)
-        mp = [(m, self.movements[m]) for m in mset]
+        mp = [(m, self.all_movements[m]) for m in mset]
         for m, mvmt in mp + [('base', base)]:
             # TODO: This is all cacheable (per pair of spots, per movement type, per pair of points)
             # instead of calculating the times lists for a,b for m, once per powerset of movements
@@ -541,9 +548,14 @@ class GameLogic(object):
 
     @cached_property
     def movement_sets(self):
-        # Possible relevant movement sets:
-        # 1. any movement on its own
-        # 2. any 'x' or 'x+y' with any 'y' or 'x+y'
+        """Returns a set of movement tuples that might be considered at the same time.
+
+        Possible relevant movement sets:
+          1. any movement on its own
+          2. any 'x' or 'x+y' with any 'y' or 'x+y'
+
+        Exit-only movements are not considered at all here.
+        """
         # -- free and xy are not compatible with x and y alone (could they be?)
         # All movement sets:
         # - any combination of available movements (2^n) only needs to consider these subsets
@@ -622,7 +634,7 @@ class GameLogic(object):
                     jumps_down *= len(coords) - 1
                 # TODO: It might be more reasonable to just have a list of allowed movement types?
                 if m := lcl.get('jump_movement'):
-                    if m not in self.movements:
+                    if m not in self.all_movements:
                         self._errors.append(f'Unrecognized movement type from {sp1["fullname"]} to {sp2["name"]}: {m}')
                         break
                     jump_mvmt = m
