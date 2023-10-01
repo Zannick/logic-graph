@@ -549,11 +549,11 @@ class GameLogic(object):
                 # We could have more overrides here, like dist
                 if thru := lcl.get('thru'):
                     if isinstance(thru, str):
-                        self._errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru!r} '
-                                                    f'(Did you mean [{thru}] ?)')
+                        self._errors.append(f'Invalid thru from {sp1["fullname"]} to {sp2["name"]}: {thru!r} '
+                                            f'(Did you mean [{thru}] ?)')
                         break
                     if not isinstance(thru, list) or not thru:
-                        self._errors.append(f'Invalid thru from {sp1["name"]} to {sp2["name"]}: {thru}')
+                        self._errors.append(f'Invalid thru from {sp1["fullname"]} to {sp2["name"]}: {thru}')
                         break
                     if all(isinstance(t, list) for t in thru):
                         coords[1:1] = thru
@@ -561,32 +561,32 @@ class GameLogic(object):
                         coords[1:1] = [thru]
                     else:
                         self._errors.append(f'Mismatched length or types in thru '
-                                                    f'from {sp1["name"]} to {sp2["name"]}: {thru}')
+                                            f'from {sp1["fullname"]} to {sp2["name"]}: {thru}')
                         break
                 if j := lcl.get('jumps'):
                     if isinstance(j, str):
-                        self._errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
-                                                    f'(Did you mean [{j}] ?)')
+                        self._errors.append(f'Invalid jumps from {sp1["fullname"]} to {sp2["name"]}: {j!r} '
+                                            f'(Did you mean [{j}] ?)')
                         break
                     if not isinstance(j, list):
                         j = [j]
                     if len(j) != len(coords) - 1:
-                        self._errors.append(f'Jumps list from {sp1["name"]} to {sp2["name"]} '
-                                                    f'must match path length 1+thru = {len(coords) - 1} but was {len(j)}')
+                        self._errors.append(f'Jumps list from {sp1["fullname"]} to {sp2["name"]} '
+                                            f'must match path length 1+thru = {len(coords) - 1} but was {len(j)}')
                         break
                     jumps[:] = j
                 else:
                     jumps *= len(coords) - 1
                 if j := lcl.get('jumps_down'):
                     if isinstance(j, str):
-                        self._errors.append(f'Invalid jumps from {sp1["name"]} to {sp2["name"]}: {j!r} '
-                                                    f'(Did you mean [{j}] ?)')
+                        self._errors.append(f'Invalid jumps from {sp1["fullname"]} to {sp2["name"]}: {j!r} '
+                                            f'(Did you mean [{j}] ?)')
                         break
                     if not isinstance(j, list):
                         j = [j]
                     if len(j) != len(coords) - 1:
-                        self._errors.append(f'Jumps_down list from {sp1["name"]} to {sp2["name"]} '
-                                                    f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
+                        self._errors.append(f'Jumps_down list from {sp1["fullname"]} to {sp2["name"]} '
+                                            f'must match path length 1+thru={len(coords) - 1}: {len(j)}')
                         break
                     jumps_down[:] = j
                 else:
@@ -594,7 +594,7 @@ class GameLogic(object):
                 # TODO: It might be more reasonable to just have a list of allowed movement types?
                 if m := lcl.get('jump_movement'):
                     if m not in self.movements:
-                        self._errors.append(f'Unrecognized movement type from {sp1["name"]} to {sp2["name"]}: {m}')
+                        self._errors.append(f'Unrecognized movement type from {sp1["fullname"]} to {sp2["name"]}: {m}')
                         break
                     jump_mvmt = m
                 break
@@ -705,6 +705,8 @@ class GameLogic(object):
             table[(s['id'], s['id'])] = 0
             for ex in s.get('exits', []) + s.get('hybrid', []):
                 key = (s['id'], get_exit_target(ex))
+                if 'time' not in ex:
+                    raise Exception(f'"time" not defined for exit {ex["fullname"]}')
                 _update(key, float(ex['time']))
             for act in s.get('actions', []):
                 if 'to' in act:
@@ -1368,9 +1370,11 @@ if __name__ == '__main__':
         print('\n'.join(gl.errors))
         print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
-    gl.render()
-    logging.info(f'Rendered {args.game} graph: {len(list(gl.spots()))} spots, '
+
+    logging.info(f'Rendering {args.game} graph: {len(list(gl.spots()))} spots, '
                  f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
                  f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
                  f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
                  f'{len(gl.warps)} warps, {len(gl.objectives)} objectives')
+    gl.render()
+    logging.info(f'Render complete.')
