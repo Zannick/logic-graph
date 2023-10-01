@@ -346,6 +346,10 @@ pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(ctx: &Context) ->
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
+pub fn access_giguna__giguna_northeast__vault__ex__door_2__req(ctx: &Context) -> bool {
+    // ^_door_opened and $hook
+    (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hook!(ctx))
+}
 pub fn access_giguna__ruins_top__east_7__ex__east_door_1__req(ctx: &Context) -> bool {
     // ^_doors_open
     ctx.giguna__ruins_top__ctx__doors_open()

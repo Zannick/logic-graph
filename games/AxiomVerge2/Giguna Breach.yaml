@@ -227,13 +227,13 @@ areas:
       exits:
         - to: West 11
           req: ^_door_opened
-          time: 1  # ?
+          movement: base
     - name: West 11
       coord: [12.1, 10.8]
       exits:
         - to: Side Door
           req: ^_door_opened
-          time: 1  # ?
+          movement: base
       actions:
         - name: Open Door
           req: not ^_door_opened

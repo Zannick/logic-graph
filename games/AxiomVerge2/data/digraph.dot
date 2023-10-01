@@ -816,6 +816,7 @@ digraph AxiomVerge2 {
     Giguna__Giguna_Northeast__Switch -> Giguna__Giguna_Northeast__Door;
     Giguna__Giguna_Northeast__Switch -> Giguna__Giguna_Northeast__Right_Column;
     Giguna__Giguna_Northeast__Vault -> Giguna__Giguna_Northeast__Door;
+    Giguna__Giguna_Northeast__Vault -> Giguna__Giguna_Northeast__Door;
     Giguna__Carnelian__East_10 -> Giguna__Giguna_Northeast__West_10;
     Giguna__Carnelian__Upper_Susar -> Giguna__Carnelian__East_Cliff;
     Giguna__Carnelian__Upper_Susar -> Giguna__Carnelian__Middle_Platforms;

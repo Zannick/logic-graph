@@ -449,7 +449,7 @@ areas:
       exits:
         - to: Door
           req: ^_door_open
-          time: 0.7
+          movement: base
       actions:
         - name: Open Door
           req: $open
@@ -490,15 +490,16 @@ areas:
       exits:
         - to: Door Left
           req: ^_door_open
-          time: 0.7
+          movement: base
         - to: East 11
           req: ^_door_open
-          time: 0.5
+          movement: base
     - name: East 11
       coord: [25.95, 10.7]
       exits:
         - to: Door
           req: ^_door_open
+          movement: base
         - to: Grid 26,10-11 > West 11
           tags: [xshift]
       actions:
@@ -795,16 +796,16 @@ areas:
       exits:
         - to: West Door
           req: ^_west_door_open
-          time: 0.5
+          movement: base
     - name: West Door
       coord: [21.55, 7.9]
       exits:
         - to: West Door Left
           req: ^_west_door_open
-          time: 0.5
+          movement: base
         - to: West Door Right
           req: ^_west_door_open
-          time: 0.5
+          movement: base
     - name: West Door Right
       coord: [21.7, 7.9]
       local:
@@ -816,7 +817,7 @@ areas:
       exits:
         - to: West Door
           req: ^_west_door_open
-          time: 0.5
+          movement: base
     - name: Middle West Tree
       coord: [21.75, 8.1]
       local:

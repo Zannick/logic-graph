@@ -327,13 +327,13 @@ areas:
           time: 7.5
         - to: Past Gate
           req: Switch_36_11
-          time: 0.1
+          movement: base
     - name: Past Gate
       coord: [36.05, 10.8]
       exits:
         - to: Under Switch
           req: Switch_36_11
-          time: 0.1
+          movement: base
         - to: Ledge Grab Room > East 11
           tags: [xshift]
     - name: Peak

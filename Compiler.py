@@ -202,6 +202,7 @@ class GameLogic(object):
         self.process_global_actions()
         self._errors.extend(itertools.chain.from_iterable(pr.errors for pr in self.all_parse_results()))
 
+        self.process_exit_movements()
         self.process_times()
         self.process_settings()
         self.process_items()
@@ -314,6 +315,34 @@ class GameLogic(object):
                             act['act_post'] = parseAction(
                                     act['after'], name=f'{act["name"]}:after')
                             act['after_id'] = self.make_funcid(act, 'act_post', 'after')
+
+
+    def process_exit_movements(self):
+        for spot in self.spots():
+            for exit in spot.get('exits', []):
+                if 'time' not in exit and 'movement' in exit:
+                    dest = self.id_lookup[get_exit_target(exit)]
+                    if 'coord' not in spot:
+                        self._errors.append(f'Expected coord for spot {spot["fullname"]} used in exit with movement: {exit["fullname"]}')
+                        continue
+                    elif 'coord' not in dest:
+                        self._errors.append(f'Expected coord for dest {dest["fullname"]} used in exit with movement: {exit["fullname"]}')
+                        continue
+
+                    base = spot['base_movement']
+                    sx, sy = spot['coord']
+                    tx, ty = dest['coord']
+                    jumps = exit.get('jumps', 0)
+                    jumps_down = exit.get('jumps_down', 0)
+                    if exit['movement'] == 'base':
+                        exit['time'] = self.movement_time([], base, abs(tx - sx), ty - sy, jumps, jumps_down)
+                    elif (m := exit['movement']) in self.movements:
+                        exit['time'] = self.movement_time([m], base, abs(tx - sx), ty - sy, jumps, jumps_down)
+                    else:
+                        self._errors.append(f'Unrecognized movement type in exit {exit["fullname"]}: {m!r}')
+                        continue
+                    if exit['time'] is None:
+                        self._errors.append(f'Unable to determine movement time for exit {exit["fullname"]}: missing jumps?')
 
 
     def process_times(self):

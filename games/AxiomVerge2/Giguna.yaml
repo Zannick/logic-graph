@@ -159,7 +159,7 @@ areas:
       exits:
         - to: Door
           req: ^_door_opened
-          time: 1.25
+          movement: base
     - name: Switch
       coord: [17.7, 10.8]
       exits:
@@ -192,6 +192,11 @@ areas:
       exits:
         - to: Door
           req: ^_door_opened
+          movement: base
+          jumps: 2
+        - to: Door
+          req: ^_door_opened and $hook
+          time: 0.7
 
 - name: Carnelian
   on_entry: $reset_old_area(^newpos)
@@ -222,11 +227,13 @@ areas:
       exits:
         - to: Upper Path
           req: ^_upper_susar
+          movement: base
         - to: Middle Platforms
           req: ^_upper_susar
+          movement: base
         - to: East Cliff
           req: ^_upper_susar
-          time: 2
+          movement: base
       actions:
         - name: Caught
           req: not ^_upper_susar
@@ -257,7 +264,7 @@ areas:
       exits:
         - to: Door
           req: ^_door_opened
-          time: 0.75
+          movement: base
       actions:
         - name: Open Door
           req: $unlock3 and not ^_door_opened
@@ -268,9 +275,11 @@ areas:
       exits:
         - to: Switch
           req: ^_door_opened
-          time: 0.75
+          movement: base
         - to: Vault
           req: ^_door_opened
+          movement: base
+          jumps: 1
     - name: Vault
       coord: [16.7, 10.6]
       locations:
@@ -280,6 +289,7 @@ areas:
       exits:
         - to: Door
           req: ^_door_opened
+          movement: base
     - name: Rock
       coord: [16, 10.4]
       local:
@@ -297,7 +307,8 @@ areas:
           req: ^_lower_susar and $hook
         - to: Rock
           req: ^_lower_susar
-          time: 1.3
+          movement: base
+          jumps: 1
       actions:
         - name: Caught
           req: not ^_lower_susar
@@ -457,10 +468,10 @@ areas:
       exits:
         - to: Tunnel Fork
           req: ^_east_susar
-          time: 0.35
+          movement: base
         - to: East 12
           req: ^_east_susar
-          time: 0.5
+          movement: base
       actions:
         - name: Caught
           req: not ^_east_susar
@@ -1000,7 +1011,8 @@ areas:
           tags: [xshift]
         - to: West Door
           req: ^_doors_open
-          time: 1.0
+          movement: base
+          jumps: 1
         - to: West Tower
           req: $grab or $climb
           time: 2.25
@@ -1009,10 +1021,10 @@ areas:
       exits:
         - to: West 7
           req: ^_doors_open
-          time: 1.0
+          movement: base
         - to: Entryway
           req: ^_doors_open
-          time: 0.75
+          movement: base
     - name: West Tower
       coord: [14.3, 6.0]
       local:
@@ -1025,7 +1037,8 @@ areas:
       exits:
         - to: West Door
           req: ^_doors_open
-          time: 0.75
+          movement: base
+          jumps: 2
     - name: Portal Left
       coord: [15.3, 6.8]
       local:
@@ -1063,7 +1076,7 @@ areas:
           time: 1.5  # ?
         - to: East Door
           req: ^_doors_open
-          time: 0.7
+          movement: base
       actions:
         - name: Portal
           to: Giguna Breach > Peak > Save Point
@@ -1100,15 +1113,16 @@ areas:
       exits:
         - to: Portal
           req: ^_doors_open
-          time: 0.7
+          movement: base
+          jumps: 1
         - to: East 7
           req: ^_doors_open
-          time: 1.0  # ?
+          movement: base
     - name: East 7
       coord: [15.95, 6.8]
       exits:
         - to: East Door
           req: ^_doors_open
-          time: 1.0  # ?
+          movement: base
         - to: Ruins East > West 7
           tags: [xshift]

@@ -145,7 +145,7 @@ Local connections are always defined in a **Spot**. They may have the following 
 
 * **to**: The destination, which must be a **Spot** in the same area. The region name and area name are not required here.
 * **thru**: A list of coordinates through which this connection passes. (Note that a single coord is `[x, y]` while a list of a single coord is `[[x, y]]`; the outer `[]` are required for proper YAML parsing.) Effectively this makes this connection a compound connection of multiple lines; the player must be capable of moving through each connection (even if using different movements) in order for the full connection to be usable. (This is handy to avoid creating extra Spots just for moving around an obstacle.)
-* **jumps**: A list of the numbers of jumps needed for each individual connection. Must either be unspecified or must have 1 number more than the length of **thru** (note that a single jump may be `1` but multiple jumps must be `[1, 1]`; YAML parses `1, 1` as a string rather than a list). If a connection has **jumps** greater than 0, then the connection's **y** distance is considered feasible with jump movement even if **y** is not defined in an available movement, and regardless of the actual distance.
+* **jumps**: A list of the numbers of jumps needed for each individual connection. Must either be unspecified or must have 1 number more than the length of **thru** (note that a single jump may be `1` but multiple jumps must be `[1, 1]`; YAML parses `1, 1` as a string rather than a list). If a connection has **jumps** greater than 0, then the connection's **y** distance is considered feasible with jump movement even if **y** is not defined in an available movement, and regardless of the actual distance (unless the distance is considered a fall).
 * **jumps_down**: A list of the numbers of jumps down needed for each individual connection. Must be either unspecified or must have 1 number more than the length of **thru** (similar to **jumps**). This is only used as a delay factor, multiplying by the relevant movement's **jump_down** time.
 * **jump_movement**: The name of the movement type required for the **jump** connections. This may eventually be replaced by a list of allowed movement types.
 
@@ -172,6 +172,9 @@ Exits are always defined in a **Spot**. They may have the following fields:
 * **costs**: The name of the **Currency** required to be spent. Any global context variable with an integer value is considered eligible Currency for this. If omitted and **price** is set, the first one defined in `Game.yaml` **context** is used.
 * **time**: The time it takes to take the Exit.
 * **tags**: A list of string tags for the Exit, which may be used to set a default time, or to mark certain groups of Exits. If multiple tags have times associated with them, the largest is chosen by default.
+* **movement**: A single movement type (or `base`), which is used to calculate the time as though the exit is a local movement between the two spots. Does not currently support **thru**. If **time** is set, this has no effect.
+* **jumps**: Similar to **jumps** for [local connections](#local-connections), a single number used to calculate as the number of jumps necessary to traverse the **y** distance. Only considered when using **movement** to set time.
+* **jumps**: Similar to **jumps_down** for [local connections](#local-connections), a single number used as a delay factor for falling down the **y** distance. Only considered when using **movement** to set time.
 
 ### Hybrids
 

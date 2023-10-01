@@ -8447,7 +8447,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Grid_25_10_12__Door_Left => 0,
             SpotId::Ebih__Grid_25_10_12__Top_Platform => 1200,
             SpotId::Ebih__Grid_25_10_12__West_11 => 1929,
-            SpotId::Ebih__Grid_25_10_12__Door => 700,
+            SpotId::Ebih__Grid_25_10_12__Door => 701,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -8479,14 +8479,14 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Ebih__Grid_25_10_12__Door => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 700,
+            SpotId::Ebih__Grid_25_10_12__Door_Left => 701,
             SpotId::Ebih__Grid_25_10_12__Door => 0,
-            SpotId::Ebih__Grid_25_10_12__East_11 => 500,
+            SpotId::Ebih__Grid_25_10_12__East_11 => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Ebih__Grid_25_10_12__East_11 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Door => 1000,
+            SpotId::Ebih__Grid_25_10_12__Door => 526,
             SpotId::Ebih__Grid_25_10_12__East_11 => 0,
             SpotId::Ebih__Grid_26_10_11__West_11 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -8678,21 +8678,21 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Waterfall__Below_Left_Switch => 299,
             SpotId::Ebih__Waterfall__West_8 => 877,
             SpotId::Ebih__Waterfall__West_Door_Left => 0,
-            SpotId::Ebih__Waterfall__West_Door => 500,
+            SpotId::Ebih__Waterfall__West_Door => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Ebih__Waterfall__West_Door => enum_map! {
-            SpotId::Ebih__Waterfall__West_Door_Left => 500,
+            SpotId::Ebih__Waterfall__West_Door_Left => 877,
             SpotId::Ebih__Waterfall__West_Door => 0,
-            SpotId::Ebih__Waterfall__West_Door_Right => 500,
+            SpotId::Ebih__Waterfall__West_Door_Right => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Ebih__Waterfall__West_Door_Right => enum_map! {
             SpotId::Ebih__Waterfall__West_Climb => 900,
             SpotId::Ebih__Waterfall__Ledge_Below_Hole => 400,
-            SpotId::Ebih__Waterfall__West_Door => 500,
+            SpotId::Ebih__Waterfall__West_Door => 526,
             SpotId::Ebih__Waterfall__West_Door_Right => 0,
             SpotId::Ebih__Waterfall__Middle_West_Tree => 199,
             SpotId::Ebih__Waterfall__West_Main_Path => 701,
@@ -9553,13 +9553,13 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna_Breach__SW_Save__North => 1200,
             SpotId::Giguna_Breach__SW_Save__Lower_Platform => 877,
             SpotId::Giguna_Breach__SW_Save__Side_Door => 0,
-            SpotId::Giguna_Breach__SW_Save__West_11 => 1000,
+            SpotId::Giguna_Breach__SW_Save__West_11 => 877,
             SpotId::Giguna_Breach__SW_Save__Save_Point => 899,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna_Breach__SW_Save__West_11 => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__Side_Door => 1000,
+            SpotId::Giguna_Breach__SW_Save__Side_Door => 877,
             SpotId::Giguna_Breach__SW_Save__West_11 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -9921,7 +9921,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => 3157,
             SpotId::Giguna__Giguna_Northeast__Right_Column => 0,
             SpotId::Giguna__Giguna_Northeast__Switch => 701,
-            SpotId::Giguna__Giguna_Northeast__Door => 1250,
+            SpotId::Giguna__Giguna_Northeast__Door => 1403,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9940,7 +9940,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Giguna_Northeast__Vault => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Door => 1000,
+            SpotId::Giguna__Giguna_Northeast__Door => 700,
             SpotId::Giguna__Giguna_Northeast__Vault => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -9962,10 +9962,10 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Carnelian__Upper_Susar => enum_map! {
-            SpotId::Giguna__Carnelian__East_Cliff => 2000,
+            SpotId::Giguna__Carnelian__East_Cliff => 1754,
             SpotId::Giguna__Carnelian__Upper_Susar => 0,
-            SpotId::Giguna__Carnelian__Middle_Platforms => 1000,
-            SpotId::Giguna__Carnelian__Upper_Path => 1000,
+            SpotId::Giguna__Carnelian__Middle_Platforms => 877,
+            SpotId::Giguna__Carnelian__Upper_Path => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9980,20 +9980,20 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Giguna__Carnelian__Switch => enum_map! {
             SpotId::Giguna__Carnelian__Switch => 0,
-            SpotId::Giguna__Carnelian__Door => 750,
+            SpotId::Giguna__Carnelian__Door => 701,
             SpotId::Giguna__Carnelian__Rock => 701,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Carnelian__Door => enum_map! {
-            SpotId::Giguna__Carnelian__Switch => 750,
+            SpotId::Giguna__Carnelian__Switch => 701,
             SpotId::Giguna__Carnelian__Door => 0,
-            SpotId::Giguna__Carnelian__Vault => 1000,
+            SpotId::Giguna__Carnelian__Vault => 1052,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Carnelian__Vault => enum_map! {
-            SpotId::Giguna__Carnelian__Door => 1000,
+            SpotId::Giguna__Carnelian__Door => 1052,
             SpotId::Giguna__Carnelian__Vault => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -10007,7 +10007,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Carnelian__Lower_Susar => enum_map! {
-            SpotId::Giguna__Carnelian__Rock => 1300,
+            SpotId::Giguna__Carnelian__Rock => 1403,
             SpotId::Giguna__Carnelian__Lower_Susar => 0,
             SpotId::Giguna__Carnelian__West_Ledge => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -10141,7 +10141,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna__West_Caverns__East_Susar => enum_map! {
             SpotId::Giguna__West_Caverns__Tunnel_Fork => 350,
             SpotId::Giguna__West_Caverns__East_Susar => 0,
-            SpotId::Giguna__West_Caverns__East_12 => 500,
+            SpotId::Giguna__West_Caverns__East_12 => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10538,15 +10538,15 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna__Ruins_Top__West_7 => enum_map! {
             SpotId::Giguna__Ruins_West__East_7 => 1350,
             SpotId::Giguna__Ruins_Top__West_7 => 0,
-            SpotId::Giguna__Ruins_Top__West_Door => 1000,
+            SpotId::Giguna__Ruins_Top__West_Door => 877,
             SpotId::Giguna__Ruins_Top__West_Tower => 2250,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_Top__West_Door => enum_map! {
-            SpotId::Giguna__Ruins_Top__West_7 => 1000,
+            SpotId::Giguna__Ruins_Top__West_7 => 877,
             SpotId::Giguna__Ruins_Top__West_Door => 0,
-            SpotId::Giguna__Ruins_Top__Entryway => 750,
+            SpotId::Giguna__Ruins_Top__Entryway => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10558,7 +10558,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_Top__Entryway => enum_map! {
-            SpotId::Giguna__Ruins_Top__West_Door => 750,
+            SpotId::Giguna__Ruins_Top__West_Door => 1200,
             SpotId::Giguna__Ruins_Top__Entryway => 0,
             SpotId::Giguna__Ruins_Top__Portal_Left => 2982,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -10586,7 +10586,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Ruins_Top__Small_Ledge => 877,
             SpotId::Giguna__Ruins_Top__Portal => 0,
             SpotId::Giguna__Ruins_Top__Interior_Ledge => 1500,
-            SpotId::Giguna__Ruins_Top__East_Door => 700,
+            SpotId::Giguna__Ruins_Top__East_Door => 701,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10611,15 +10611,15 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_Top__East_Door => enum_map! {
-            SpotId::Giguna__Ruins_Top__Portal => 700,
+            SpotId::Giguna__Ruins_Top__Portal => 701,
             SpotId::Giguna__Ruins_Top__East_Door => 0,
-            SpotId::Giguna__Ruins_Top__East_7 => 1000,
+            SpotId::Giguna__Ruins_Top__East_7 => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_Top__East_7 => enum_map! {
             SpotId::Giguna__Ruins_East__West_7 => 1350,
-            SpotId::Giguna__Ruins_Top__East_Door => 1000,
+            SpotId::Giguna__Ruins_Top__East_Door => 877,
             SpotId::Giguna__Ruins_Top__East_7 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -10856,12 +10856,12 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Glacier__Vertical_Room__Mid_9 => 7500,
             SpotId::Glacier__Vertical_Room__Mid_11 => 1052,
             SpotId::Glacier__Vertical_Room__Under_Switch => 0,
-            SpotId::Glacier__Vertical_Room__Past_Gate => 100,
+            SpotId::Glacier__Vertical_Room__Past_Gate => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Glacier__Vertical_Room__Past_Gate => enum_map! {
-            SpotId::Glacier__Vertical_Room__Under_Switch => 100,
+            SpotId::Glacier__Vertical_Room__Under_Switch => 526,
             SpotId::Glacier__Vertical_Room__Past_Gate => 0,
             SpotId::Glacier__Ledge_Grab_Room__East_11 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -12701,7 +12701,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Door_Left) => 0,
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Top_Platform) => 1200,
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__West_11) => 1929,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Door) => 700,
+        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Door) => 701,
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => 1200,
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
@@ -12723,11 +12723,11 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__West_10) => 0,
         (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Waterfall__East_10) => 1350,
         (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__Door_Left) => 700,
+        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__Door_Left) => 701,
         (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__Door) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__East_11) => 500,
+        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__East_11) => 526,
         (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_25_10_12__Door) => 1000,
+        (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_25_10_12__Door) => 526,
         (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_25_10_12__East_11) => 0,
         (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_26_10_11__West_11) => 1350,
         (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -12921,17 +12921,17 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => 877,
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_Door_Left) => 0,
-        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_Door) => 500,
+        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_Door) => 877,
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door_Left) => 500,
+        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door_Left) => 877,
         (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door) => 0,
-        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door_Right) => 500,
+        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door_Right) => 526,
         (SpotId::Ebih__Waterfall__West_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Climb) => 900,
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => {
             400
         }
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Door) => 500,
+        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Door) => 526,
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Door_Right) => 0,
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
             199
@@ -13755,16 +13755,12 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
         ) => 877,
         (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Side_Door) => 0,
-        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__West_11) => {
-            1000
-        }
+        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__West_11) => 877,
         (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
             899
         }
         (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__Side_Door) => {
-            1000
-        }
+        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__Side_Door) => 877,
         (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__West_11) => 0,
         (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
@@ -14284,7 +14280,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Door,
-        ) => 1250,
+        ) => 1403,
         (
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Menu__Upgrade_Menu__Physiology,
@@ -14303,7 +14299,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Giguna__Giguna_Northeast__Door) => 0,
         (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Giguna__Giguna_Northeast__Vault) => 1052,
         (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Giguna__Giguna_Northeast__Door) => 1000,
+        (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Giguna__Giguna_Northeast__Door) => 700,
         (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Giguna__Giguna_Northeast__Vault) => 0,
         (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Giguna_Northeast__West_10) => 1350,
@@ -14316,12 +14312,12 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Middle_Platforms) => 877,
         (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Switch) => 1000,
         (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__East_Cliff) => 2000,
+        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__East_Cliff) => 1754,
         (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Upper_Susar) => 0,
         (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Middle_Platforms) => {
-            1000
+            877
         }
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Upper_Path) => 1000,
+        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Upper_Path) => 877,
         (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__East_Cliff) => {
             1500
@@ -14339,14 +14335,14 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             1000
         }
         (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Switch) => 0,
-        (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Door) => 750,
+        (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Door) => 701,
         (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 701,
         (SpotId::Giguna__Carnelian__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Switch) => 750,
+        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Switch) => 701,
         (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Door) => 0,
-        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Vault) => 1000,
+        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Vault) => 1052,
         (SpotId::Giguna__Carnelian__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Vault, SpotId::Giguna__Carnelian__Door) => 1000,
+        (SpotId::Giguna__Carnelian__Vault, SpotId::Giguna__Carnelian__Door) => 1052,
         (SpotId::Giguna__Carnelian__Vault, SpotId::Giguna__Carnelian__Vault) => 0,
         (SpotId::Giguna__Carnelian__Vault, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Middle_Platforms) => 1200,
@@ -14354,7 +14350,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Rock) => 0,
         (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Lower_Susar) => 1403,
         (SpotId::Giguna__Carnelian__Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__Rock) => 1300,
+        (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__Rock) => 1403,
         (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__Lower_Susar) => 0,
         (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__West_Ledge) => 1000,
         (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -14568,7 +14564,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             350
         }
         (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Giguna__West_Caverns__East_Susar) => 0,
-        (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Giguna__West_Caverns__East_12) => 500,
+        (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Giguna__West_Caverns__East_12) => 526,
         (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__West_Caverns__East_12, SpotId::Giguna__West_Caverns__East_Susar) => 526,
         (SpotId::Giguna__West_Caverns__East_12, SpotId::Giguna__West_Caverns__East_12) => 0,
@@ -14925,18 +14921,18 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_West__East_7) => 1350,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_7) => 0,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Door) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Door) => 877,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Tower) => 2250,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_7) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_7) => 877,
         (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_Door) => 0,
-        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__Entryway) => 750,
+        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__Entryway) => 526,
         (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
         (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_Tower) => 0,
         (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => 799,
         (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__West_Door) => 750,
+        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__West_Door) => 1200,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Entryway) => 0,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => 2982,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -14955,7 +14951,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal) => 0,
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 1500,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__East_Door) => 700,
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__East_Door) => 701,
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 800,
         (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 0,
@@ -14970,12 +14966,12 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
         (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Flask) => 0,
         (SpotId::Giguna__Ruins_Top__Flask, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__Portal) => 700,
+        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__Portal) => 701,
         (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_Door) => 0,
-        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_7) => 1000,
+        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_7) => 877,
         (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_East__West_7) => 1350,
-        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_Door) => 1000,
+        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_Door) => 877,
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_7) => 0,
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
@@ -15166,14 +15162,14 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Past_Gate,
-        ) => 100,
+        ) => 526,
         (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
         (
             SpotId::Glacier__Vertical_Room__Past_Gate,
             SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 100,
+        ) => 526,
         (SpotId::Glacier__Vertical_Room__Past_Gate, SpotId::Glacier__Vertical_Room__Past_Gate) => 0,
         (SpotId::Glacier__Vertical_Room__Past_Gate, SpotId::Glacier__Ledge_Grab_Room__East_11) => {
             1350
@@ -21956,7 +21952,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Door,
-            700,
+            701,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Door_Left,
@@ -22056,7 +22052,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__Door,
             SpotId::Ebih__Grid_25_10_12__Door_Left,
-            700,
+            701,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Door,
@@ -22066,7 +22062,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__Door,
             SpotId::Ebih__Grid_25_10_12__East_11,
-            500,
+            526,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Door,
@@ -22076,7 +22072,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__East_11,
             SpotId::Ebih__Grid_25_10_12__Door,
-            1000,
+            526,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__East_11,
@@ -22661,7 +22657,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__West_Door,
-            500,
+            877,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Left,
@@ -22671,7 +22667,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door,
             SpotId::Ebih__Waterfall__West_Door_Left,
-            500,
+            877,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door,
@@ -22681,7 +22677,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door,
             SpotId::Ebih__Waterfall__West_Door_Right,
-            500,
+            526,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door,
@@ -22701,7 +22697,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__West_Door,
-            500,
+            526,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
@@ -25337,7 +25333,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__SW_Save__Side_Door,
             SpotId::Giguna_Breach__SW_Save__West_11,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Side_Door,
@@ -25352,7 +25348,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__SW_Save__West_11,
             SpotId::Giguna_Breach__SW_Save__Side_Door,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__West_11,
@@ -26412,7 +26408,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Door,
-            1250,
+            1403,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Right_Column,
@@ -26462,7 +26458,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Northeast__Vault,
             SpotId::Giguna__Giguna_Northeast__Door,
-            1000,
+            700,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Vault,
@@ -26527,7 +26523,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Upper_Susar,
             SpotId::Giguna__Carnelian__East_Cliff,
-            2000,
+            1754,
         ),
         (
             SpotId::Giguna__Carnelian__Upper_Susar,
@@ -26537,12 +26533,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Upper_Susar,
             SpotId::Giguna__Carnelian__Middle_Platforms,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna__Carnelian__Upper_Susar,
             SpotId::Giguna__Carnelian__Upper_Path,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna__Carnelian__Upper_Susar,
@@ -26587,7 +26583,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Switch,
             SpotId::Giguna__Carnelian__Door,
-            750,
+            701,
         ),
         (
             SpotId::Giguna__Carnelian__Switch,
@@ -26602,7 +26598,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Door,
             SpotId::Giguna__Carnelian__Switch,
-            750,
+            701,
         ),
         (
             SpotId::Giguna__Carnelian__Door,
@@ -26612,7 +26608,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Door,
             SpotId::Giguna__Carnelian__Vault,
-            1000,
+            1052,
         ),
         (
             SpotId::Giguna__Carnelian__Door,
@@ -26622,7 +26618,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Vault,
             SpotId::Giguna__Carnelian__Door,
-            1000,
+            1052,
         ),
         (
             SpotId::Giguna__Carnelian__Vault,
@@ -26662,7 +26658,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Carnelian__Lower_Susar,
             SpotId::Giguna__Carnelian__Rock,
-            1300,
+            1403,
         ),
         (
             SpotId::Giguna__Carnelian__Lower_Susar,
@@ -27062,7 +27058,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__West_Caverns__East_Susar,
             SpotId::Giguna__West_Caverns__East_12,
-            500,
+            526,
         ),
         (
             SpotId::Giguna__West_Caverns__East_Susar,
@@ -28237,7 +28233,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__West_7,
             SpotId::Giguna__Ruins_Top__West_Door,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_7,
@@ -28252,7 +28248,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__West_Door,
             SpotId::Giguna__Ruins_Top__West_7,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Door,
@@ -28262,7 +28258,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__West_Door,
             SpotId::Giguna__Ruins_Top__Entryway,
-            750,
+            526,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Door,
@@ -28292,7 +28288,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Entryway,
             SpotId::Giguna__Ruins_Top__West_Door,
-            750,
+            1200,
         ),
         (
             SpotId::Giguna__Ruins_Top__Entryway,
@@ -28387,7 +28383,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__East_Door,
-            700,
+            701,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
@@ -28452,7 +28448,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__East_Door,
             SpotId::Giguna__Ruins_Top__Portal,
-            700,
+            701,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_Door,
@@ -28462,7 +28458,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__East_Door,
             SpotId::Giguna__Ruins_Top__East_7,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_Door,
@@ -28477,7 +28473,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__East_7,
             SpotId::Giguna__Ruins_Top__East_Door,
-            1000,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_7,
@@ -29182,7 +29178,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Past_Gate,
-            100,
+            526,
         ),
         (
             SpotId::Glacier__Vertical_Room__Under_Switch,
@@ -29192,7 +29188,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Vertical_Room__Past_Gate,
             SpotId::Glacier__Vertical_Room__Under_Switch,
-            100,
+            526,
         ),
         (
             SpotId::Glacier__Vertical_Room__Past_Gate,
