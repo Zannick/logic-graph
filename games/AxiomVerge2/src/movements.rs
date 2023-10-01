@@ -2530,7 +2530,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Wasteland__Upper_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 1754,
+        ) => 1929,
         ([false], SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__Middle_Path) => {
             1228
         }
@@ -2551,12 +2551,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 900,
+        ) => 850,
         (
             [false],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 400,
+        ) => 526,
         (
             [false],
             SpotId::Giguna__Wasteland__Lower_Path_Right,
@@ -2576,7 +2576,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Wasteland__Lower_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 1403,
+        ) => 1578,
         (
             [false],
             SpotId::Giguna__Wasteland__West_14,
@@ -6181,7 +6181,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Wasteland__Upper_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 1754,
+        ) => 1929,
         ([true], SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__Middle_Path) => {
             1228
         }
@@ -6202,12 +6202,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 900,
+        ) => 850,
         (
             [true],
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
-        ) => 400,
+        ) => 526,
         (
             [true],
             SpotId::Giguna__Wasteland__Lower_Path_Right,
@@ -6227,7 +6227,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Wasteland__Lower_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 1403,
+        ) => 1578,
         (
             [true],
             SpotId::Giguna__Wasteland__West_14,
@@ -7962,12 +7962,12 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Amagi__West_Lake__Surface_Wall_Right => enum_map! {
             SpotId::Amagi__West_Lake__Surface_Wall_Right => 0,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => 1000,
+            SpotId::Amagi__West_Lake__Surface_Wall_Left => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Amagi__West_Lake__Surface_Wall_Left => enum_map! {
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => 1000,
+            SpotId::Amagi__West_Lake__Surface_Wall_Right => 877,
             SpotId::Amagi__West_Lake__Surface_Wall_Left => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -10169,7 +10169,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Wasteland__West_12 => 877,
             SpotId::Giguna__Wasteland__Upper_Cliff => 0,
             SpotId::Giguna__Wasteland__West_13 => 1578,
-            SpotId::Giguna__Wasteland__Lower_Cliff => 1754,
+            SpotId::Giguna__Wasteland__Lower_Cliff => 1929,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10191,8 +10191,8 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Wasteland__West_12 => 3500,
             SpotId::Giguna__Wasteland__Middle_Path => 1052,
             SpotId::Giguna__Wasteland__Middle_Cliff => 0,
-            SpotId::Giguna__Wasteland__Lower_Path_Right => 900,
-            SpotId::Giguna__Wasteland__Lower_Cliff => 400,
+            SpotId::Giguna__Wasteland__Lower_Path_Right => 850,
+            SpotId::Giguna__Wasteland__Lower_Cliff => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10212,7 +10212,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Giguna__Wasteland__Lower_Cliff => enum_map! {
             SpotId::Giguna__Wasteland__Middle_Cliff => 850,
-            SpotId::Giguna__Wasteland__Lower_Path_Left => 1403,
+            SpotId::Giguna__Wasteland__Lower_Path_Left => 1578,
             SpotId::Giguna__Wasteland__Lower_Cliff => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -12276,14 +12276,14 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 1000,
+        ) => 877,
         (SpotId::Amagi__West_Lake__Surface_Wall_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 1000,
+        ) => 877,
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
@@ -14580,7 +14580,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => 877,
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Upper_Cliff) => 0,
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_13) => 1578,
-        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 1754,
+        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 1929,
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__West_Caverns__East_13) => 1350,
         (SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__West_13) => 0,
@@ -14594,9 +14594,9 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Middle_Path) => 1052,
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Middle_Cliff) => 0,
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Right) => {
-            900
+            850
         }
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 400,
+        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 526,
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
             SpotId::Giguna__Wasteland__Lower_Path_Right,
@@ -14626,7 +14626,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Middle_Cliff) => 850,
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
-            1403
+            1578
         }
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 0,
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -20510,7 +20510,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            1000,
+            877,
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
@@ -20520,7 +20520,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            1000,
+            877,
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
@@ -27138,7 +27138,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Wasteland__Upper_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
-            1754,
+            1929,
         ),
         (
             SpotId::Giguna__Wasteland__Upper_Cliff,
@@ -27203,12 +27203,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
-            900,
+            850,
         ),
         (
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Cliff,
-            400,
+            526,
         ),
         (
             SpotId::Giguna__Wasteland__Middle_Cliff,
@@ -27263,7 +27263,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Wasteland__Lower_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
-            1403,
+            1578,
         ),
         (
             SpotId::Giguna__Wasteland__Lower_Cliff,
@@ -32628,7 +32628,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(2099)
         }
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
-            Some(1403)
+            Some(1578)
         }
         (
             SpotId::Giguna__Wasteland__Lower_Path_Left,
@@ -32642,10 +32642,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => Some(877),
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => {
-            Some(400)
+            Some(526)
         }
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Right) => {
-            Some(900)
+            Some(850)
         }
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Middle_Path) => {
             Some(1052)
@@ -32655,7 +32655,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__West_13) => Some(1228),
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => {
-            Some(1754)
+            Some(1929)
         }
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => Some(877),
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_13) => Some(1578),
@@ -35758,7 +35758,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2099), vec![])
         }
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
-            (Some(1403), vec![])
+            (Some(1578), vec![])
         }
         (
             SpotId::Giguna__Wasteland__Lower_Path_Left,
@@ -35772,10 +35772,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => (Some(877), vec![]),
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => {
-            (Some(400), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Right) => {
-            (Some(900), vec![])
+            (Some(850), vec![])
         }
         (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Middle_Path) => {
             (Some(1052), vec![])
@@ -35787,7 +35787,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1228), vec![])
         }
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => {
-            (Some(1754), vec![])
+            (Some(1929), vec![])
         }
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => {
             (Some(877), vec![])

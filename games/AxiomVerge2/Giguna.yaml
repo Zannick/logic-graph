@@ -138,7 +138,7 @@ areas:
           jumps: 1
       # TODO: measure time going back up
     - name: East 11
-      coord: [18.95, 10.7]
+      coord: [18.95, 10.75]
       local:
         - to: Shaft Bottom
           jumps: 1
@@ -499,14 +499,14 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 12
-      coord: [15.05, 11.7]
+      coord: [15.05, 11.75]
       local:
         - to: Upper Cliff
       exits:
         - to: West Caverns > East 12
           tags: [xshift]
     - name: Upper Cliff
-      coord: [15.3, 11.9]
+      coord: [15.3, 11.95]
       local:
         - to: West 12
           jumps: 1
@@ -514,7 +514,7 @@ areas:
           thru: [15.4, 12.2]
         - to: Lower Cliff
     - name: West 13
-      coord: [15.05, 12.7]
+      coord: [15.05, 12.75]
       local:
         - to: Middle Path
           jumps: 1
@@ -522,13 +522,13 @@ areas:
         - to: West Caverns > East 13
           tags: [xshift]
     - name: Middle Path
-      coord: [15.4, 12.6]
+      coord: [15.4, 12.65]
       local:
         - to: West 13
         - to: Middle Cliff
           jumps: 2
     - name: Middle Cliff
-      coord: [15.7, 12.4]
+      coord: [15.7, 12.45]
       local:
         - to: Upper Cliff
         - to: Middle Path
@@ -554,7 +554,7 @@ areas:
         - to: Lower Path Right
         - to: West 14
     - name: Lower Cliff
-      coord: [15.8, 12.8]
+      coord: [15.85, 12.85]
       local:
         - to: Lower Path Left
       exits:

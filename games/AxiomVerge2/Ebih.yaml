@@ -706,6 +706,13 @@ areas:
         - to: Waterfall Left
           jumps: 3
         - to: Lower West Tree
+      locations:
+        - name: Wall
+          item: Ebih_Waterfall_Wall
+          canon: Ebih_Waterfall_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
     - name: Lower West Tree
       coord: [21.9, 9.9]
       local:

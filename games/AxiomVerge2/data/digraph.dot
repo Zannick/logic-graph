@@ -99,7 +99,7 @@ digraph AxiomVerge2 {
         Amagi__West_Lake__West_Shore [label = "", pos = "61.375,-20.555556!"];
         Amagi__West_Lake__Surface_Wall_Right [label = "", pos = "57.75,-20.555556!"];
         Amagi__West_Lake__Surface_Wall_Left [label = "", pos = "57.125,-20.555556!"];
-        Amagi__West_Lake__West_15 [label = "", pos = "55.125,-20.416667!"];
+        Amagi__West_Lake__West_15 [label = "", pos = "55.125,-20.486111!"];
         node[fillcolor="2"];
         Antarctica__West__Helipad [label = "", pos = "96.25,-2.5!"];
         Antarctica__West__Shed_Entry [label = "", pos = "93.125,-2.5!"];
@@ -359,7 +359,7 @@ digraph AxiomVerge2 {
         Giguna__Giguna_Northeast__Gate_Button [label = "", pos = "46.25,-13.611111!"];
         Giguna__Giguna_Northeast__Gate_Right [label = "", pos = "46.875,-13.333333!"];
         Giguna__Giguna_Northeast__Shaft_Bottom [label = "", pos = "47.0,-14.722222!"];
-        Giguna__Giguna_Northeast__East_11 [label = "", pos = "47.375,-14.861111!"];
+        Giguna__Giguna_Northeast__East_11 [label = "", pos = "47.375,-14.930556!"];
         Giguna__Giguna_Northeast__Right_Column [label = "", pos = "44.75,-14.583333!"];
         Giguna__Giguna_Northeast__Switch [label = "", pos = "44.25,-15.0!"];
         Giguna__Giguna_Northeast__Door [label = "", pos = "43.75,-14.583333!"];
@@ -393,14 +393,14 @@ digraph AxiomVerge2 {
         Giguna__West_Caverns__East_Susar [label = "", pos = "37.0,-16.25!"];
         Giguna__West_Caverns__East_12 [label = "", pos = "37.375,-16.25!"];
         Giguna__West_Caverns__East_13 [label = "", pos = "37.375,-17.638889!"];
-        Giguna__Wasteland__West_12 [label = "", pos = "37.625,-16.25!"];
-        Giguna__Wasteland__Upper_Cliff [label = "", pos = "38.25,-16.527778!"];
-        Giguna__Wasteland__West_13 [label = "", pos = "37.625,-17.638889!"];
-        Giguna__Wasteland__Middle_Path [label = "", pos = "38.5,-17.5!"];
-        Giguna__Wasteland__Middle_Cliff [label = "", pos = "39.25,-17.222222!"];
+        Giguna__Wasteland__West_12 [label = "", pos = "37.625,-16.319444!"];
+        Giguna__Wasteland__Upper_Cliff [label = "", pos = "38.25,-16.597222!"];
+        Giguna__Wasteland__West_13 [label = "", pos = "37.625,-17.708333!"];
+        Giguna__Wasteland__Middle_Path [label = "", pos = "38.5,-17.569444!"];
+        Giguna__Wasteland__Middle_Cliff [label = "", pos = "39.25,-17.291667!"];
         Giguna__Wasteland__Lower_Path_Right [label = "", pos = "39.125,-18.472222!"];
         Giguna__Wasteland__Lower_Path_Left [label = "", pos = "38.5,-18.472222!"];
-        Giguna__Wasteland__Lower_Cliff [label = "", pos = "39.5,-17.777778!"];
+        Giguna__Wasteland__Lower_Cliff [label = "", pos = "39.625,-17.847222!"];
         Giguna__Wasteland__West_14 [label = "", pos = "37.625,-19.027778!"];
         Giguna__Giguna_Base__East_14 [label = "", pos = "37.375,-19.027778!"];
         Giguna__Giguna_Base__Stone_Knob [label = "", pos = "36.25,-19.305556!"];

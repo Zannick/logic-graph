@@ -3131,6 +3131,7 @@ pub enum LocationId {
     Ebih__Waterfall__Alcove__Pedestal,
     Ebih__Waterfall__Alcove_Left__Block_Left,
     Ebih__Waterfall__Alcove_Right__Block_Right,
+    Ebih__Waterfall__Wall_Right__Wall,
     Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks,
     Giguna__Building_Interior__Bookshelf__Note,
     Giguna__Carnelian__Vault__Item,
@@ -3378,6 +3379,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => {
                 write!(f, "{}", "Ebih > Waterfall > Alcove Right > Block Right")
+            }
+            LocationId::Ebih__Waterfall__Wall_Right__Wall => {
+                write!(f, "{}", "Ebih > Waterfall > Wall Right > Wall")
             }
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => write!(
                 f,
@@ -3743,6 +3747,9 @@ impl std::str::FromStr for LocationId {
             }
             "Ebih > Waterfall > Alcove Right > Block Right" => {
                 Ok(LocationId::Ebih__Waterfall__Alcove_Right__Block_Right)
+            }
+            "Ebih > Waterfall > Wall Right > Wall" => {
+                Ok(LocationId::Ebih__Waterfall__Wall_Right__Wall)
             }
             "Ebih > Waterfall > Waterfall Center Center > Both Blocks" => {
                 Ok(LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks)
@@ -5658,6 +5665,7 @@ pub enum CanonId {
     Ebih_Bush_Flask,
     Ebih_Waterfall_Block_Right,
     Ebih_Waterfall_Block_Left,
+    Ebih_Waterfall_Wall,
     Infect,
     Defeat_Ebih_Alu,
     Remote_Drone,
@@ -5684,6 +5692,7 @@ impl fmt::Display for CanonId {
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
             CanonId::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
             CanonId::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
+            CanonId::Ebih_Waterfall_Wall => write!(f, "{}", "Ebih_Waterfall_Wall"),
             CanonId::Infect => write!(f, "{}", "Infect"),
             CanonId::Defeat_Ebih_Alu => write!(f, "{}", "Defeat_Ebih_Alu"),
             CanonId::Remote_Drone => write!(f, "{}", "Remote_Drone"),
@@ -5712,6 +5721,7 @@ impl std::str::FromStr for CanonId {
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Ebih_Waterfall_Block_Right" => Ok(CanonId::Ebih_Waterfall_Block_Right),
             "Ebih_Waterfall_Block_Left" => Ok(CanonId::Ebih_Waterfall_Block_Left),
+            "Ebih_Waterfall_Wall" => Ok(CanonId::Ebih_Waterfall_Wall),
             "Infect" => Ok(CanonId::Infect),
             "Defeat_Ebih_Alu" => Ok(CanonId::Defeat_Ebih_Alu),
             "Remote_Drone" => Ok(CanonId::Remote_Drone),
@@ -7039,6 +7049,7 @@ impl world::Accessible for Location {
             LocationId::Ebih__Waterfall__Alcove__Pedestal => true,
             LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => rules::access_shockwave(&ctx),
             LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => rules::access_shockwave(&ctx),
+            LocationId::Ebih__Waterfall__Wall_Right__Wall => rules::access_shockwave(&ctx),
             LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => {
                 rules::access_shockwave(&ctx)
             }
@@ -8319,7 +8330,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 110;
+    const NUM_LOCATIONS: u32 = 111;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -8402,6 +8413,7 @@ impl world::World for World {
                 LocationId::Ebih__Waterfall__Alcove_Left__Block_Left,
                 LocationId::Ebih__Waterfall__Alcove__Block_Left,
             ],
+            CanonId::Ebih_Waterfall_Wall => vec![LocationId::Ebih__Waterfall__Wall_Right__Wall],
             CanonId::Infect => vec![
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
                 LocationId::Ebih__Ebih_East__Corner__Urn,
@@ -8511,6 +8523,7 @@ impl world::World for World {
                 LocationId::Ebih__Waterfall__Alcove__Block_Left,
             ],
             Item::Bronze_Axe => vec![LocationId::Ebih__Waterfall__Alcove__Pedestal],
+            Item::Ebih_Waterfall_Wall => vec![LocationId::Ebih__Waterfall__Wall_Right__Wall],
             Item::Heretics_Tablet => vec![LocationId::Ebih__Ebih_West__Alcove__Tablet],
             Item::Health => vec![LocationId::Ebih__Cave__Entry__Health],
             Item::Infect => vec![
@@ -8721,6 +8734,7 @@ impl world::World for World {
             LocationId::Ebih__Waterfall__Alcove__Block_Left
             | LocationId::Ebih__Waterfall__Alcove__Block_Right
             | LocationId::Ebih__Waterfall__Alcove__Pedestal => SpotId::Ebih__Waterfall__Alcove,
+            LocationId::Ebih__Waterfall__Wall_Right__Wall => SpotId::Ebih__Waterfall__Wall_Right,
             LocationId::Ebih__Ebih_West__Alcove__Tablet => SpotId::Ebih__Ebih_West__Alcove,
             LocationId::Ebih__Cave__Entry__Health => SpotId::Ebih__Cave__Entry,
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn => {
@@ -9563,6 +9577,7 @@ impl world::World for World {
             | SpotId::Ebih__Waterfall__East_7
             | SpotId::Ebih__Waterfall__East_8
             | SpotId::Ebih__Waterfall__Ledge_Below_Hole
+            | SpotId::Ebih__Waterfall__Wall_Right
             | SpotId::Ebih__Waterfall__Waterfall_Center_Center
             | SpotId::Ebih__Waterfall__West_10
             | SpotId::Ebih__Waterfall__West_7
@@ -10320,6 +10335,7 @@ impl World {
                     | Item::Companies_Layoff
                     | Item::Compass
                     | Item::Dear_Ernest
+                    | Item::Ebih_Waterfall_Wall
                     | Item::Escape
                     | Item::Health
                     | Item::Health_Fragment
@@ -10340,6 +10356,7 @@ impl World {
                     | Item::Bronze_Axe
                     | Item::Carnelian_Ring
                     | Item::Compass
+                    | Item::Ebih_Waterfall_Wall
                     | Item::Escape
                     | Item::Health
                     | Item::Health_Fragment
@@ -10646,6 +10663,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             id: LocationId::Ebih__Waterfall__Alcove__Block_Left,
             canonical: CanonId::Ebih_Waterfall_Block_Left,
             item: Item::Ebih_Waterfall_Block_Left,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Ebih__Waterfall__Wall_Right__Wall => Location {
+            id: LocationId::Ebih__Waterfall__Wall_Right__Wall,
+            canonical: CanonId::Ebih_Waterfall_Wall,
+            item: Item::Ebih_Waterfall_Wall,
             price: Currency::Energy(100),
             time: 3500,
             exit_id: None,
@@ -11556,14 +11581,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => Exit {
             id: ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
-            time: 1000,
+            time: 877,
             dest: SpotId::Amagi__West_Lake__Surface_Wall_Left,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => Exit {
             id: ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1,
-            time: 1000,
+            time: 877,
             dest: SpotId::Amagi__West_Lake__Surface_Wall_Right,
             price: Currency::Free,
             loc_id: None,
@@ -17457,7 +17482,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Ebih__Waterfall__Wall_Right => Spot {
             id: SpotId::Ebih__Waterfall__Wall_Right,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Ebih__Waterfall__Wall_Right__Wall.into_usize(),
+                end: LocationId::Ebih__Waterfall__Wall_Right__Wall.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -24001,7 +24027,10 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         },
         SpotId::Ebih__Waterfall__Under_Waterfall => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__Waterfall_Left => Range { start: 0, end: 0 },
-        SpotId::Ebih__Waterfall__Wall_Right => Range { start: 0, end: 0 },
+        SpotId::Ebih__Waterfall__Wall_Right => Range {
+            start: LocationId::Ebih__Waterfall__Wall_Right__Wall.into_usize(),
+            end: LocationId::Ebih__Waterfall__Wall_Right__Wall.into_usize() + 1,
+        },
         SpotId::Ebih__Waterfall__Lower_West_Tree => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__West_Lower_Path => Range { start: 0, end: 0 },
         SpotId::Ebih__Waterfall__West_10 => Range { start: 0, end: 0 },

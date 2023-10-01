@@ -49,6 +49,7 @@ pub enum Item {
     Ebih_Waterfall_Block_Left,
     Ebih_Waterfall_Block_Right,
     Ebih_Waterfall_Both_Blocks,
+    Ebih_Waterfall_Wall,
     Escape,
     Fast_Travel,
     Flask,
@@ -124,6 +125,7 @@ impl fmt::Display for Item {
             Item::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
             Item::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
             Item::Ebih_Waterfall_Both_Blocks => write!(f, "{}", "Ebih_Waterfall_Both_Blocks"),
+            Item::Ebih_Waterfall_Wall => write!(f, "{}", "Ebih_Waterfall_Wall"),
             Item::Escape => write!(f, "{}", "Escape"),
             Item::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             Item::Flask => write!(f, "{}", "Flask"),
@@ -199,6 +201,7 @@ impl std::str::FromStr for Item {
             "Ebih_Waterfall_Block_Left" => Ok(Item::Ebih_Waterfall_Block_Left),
             "Ebih_Waterfall_Block_Right" => Ok(Item::Ebih_Waterfall_Block_Right),
             "Ebih_Waterfall_Both_Blocks" => Ok(Item::Ebih_Waterfall_Both_Blocks),
+            "Ebih_Waterfall_Wall" => Ok(Item::Ebih_Waterfall_Wall),
             "Escape" => Ok(Item::Escape),
             "Fast_Travel" => Ok(Item::Fast_Travel),
             "Flask" => Ok(Item::Flask),
@@ -252,6 +255,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Bronze_Axe
             | Item::Carnelian_Ring
             | Item::Compass
+            | Item::Ebih_Waterfall_Wall
             | Item::Escape
             | Item::Health
             | Item::Health_Fragment
