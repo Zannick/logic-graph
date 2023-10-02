@@ -1271,7 +1271,24 @@ areas:
       exits:
         - to: Left of Gap
           req: $hook
-
+    - name: Lower Cliff
+      coord: [19.7, 11.6]
+    - name: Lower Platform
+      coord: [19.6, 12.4]
+    - name: Lower Save
+      coord: [19.5, 12.65]
+    - name: West High Cliff
+      coord: [19.6, 10.85]
+    - name: West Fork
+      coord: [19.35, 11.0]
+    - name: West 11
+      coord: [19.05, 10.75]
+    - name: West 12
+      coord: [19.05, 11.8]
+    - name: West 13
+      coord: [19.05, 12.7]
+    - name: East 13
+      coord: [20.95, 12.8]
 
 - name: Cave
   graph_offset: [0, 0.25]
@@ -1911,3 +1928,47 @@ areas:
           req: $grab or $climb
           time: 2  # ?
         - to: Base Camp > West 11
+
+- name: Vertical Interchange
+  on_entry: $reset_old_area(^newpos)
+  start:
+    _door_open: false
+  spots:
+    - name: West 13
+      coord: [21.05, 12.8]
+    - name: Passage West
+      coord: [21.25, 12.9]
+    - name: Door West
+      coord: [21.35, 12.65]
+    - name: Door
+      coord: [21.5, 12.65]
+    - name: Door East
+      coord: [21.65, 12.65]
+    - name: Passage East
+      coord: [21.8, 12.9]
+    - name: East 13
+      coord: [21.95, 12.8]
+    - name: Middle Descent
+      coord: [21.85, 13.3]
+    - name: Middle Drop
+      coord: [21.2, 13.45]
+    - name: Cliff by Refill
+      coord: [21.3, 14.4]
+    - name: Refill Station
+      coord: [21.45, 14.8]
+    - name: Blocked Refill Station
+      coord: [21.45, 14.7]
+    - name: Block Cubby
+      coord: [21.75, 13.8]
+    - name: East Tunnel
+      coord: [21.75, 14.7]
+    - name: East 15
+      coord: [21.95, 14.8]
+    - name: Below Door
+      coord: [21.55, 15.2]
+    - name: Lower West Cliff
+      coord: [21.4, 15.4]
+    - name: Switch
+      coord: [21.6, 15.7]
+    - name: South
+      coord: [21.5, 15.8]

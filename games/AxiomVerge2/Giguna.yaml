@@ -495,6 +495,13 @@ areas:
         - to: Wasteland > West 13
           tags: [xshift]
 
+    - name: Northwest
+      coord: [12.2, 9.1]
+      local:
+        - to: West 13
+    - name: West 13
+      coord: [12.05, 12.3]
+
 - name: Wasteland
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -571,6 +578,66 @@ areas:
       exits:
         - to: Giguna Base > East 14
           tags: [xshift]
+
+    # East half, er, three-quarters
+    - name: East 12
+      coord: [18.95, 11.8]
+    - name: East 13
+      coord: [18.95, 12.7]
+    - name: East 14
+      coord: [18.95, 13.6]
+    - name: East Ledge
+      coord: [18.7, 12.2]
+    - name: Door Left
+      coord: [18.5, 13.2]
+    - name: Door Right
+      coord: [18.65, 13.2]
+    - name: Bluff by Door
+      coord: [18.4, 13.6]
+    - name: Tiny Hill
+      coord: [18.0, 13.5]
+    - name: Steeper Hill
+      coord: [17.2, 13.3]
+    - name: Center Plains
+      coord: [17.4, 13.6]
+    - name: West Plains
+      coord: [17.0, 13.6]
+    - name: Passage East
+      coord: [16.6, 13.6]
+    - name: Passage Cache
+      coord: [15.4, 13.6]
+    - name: Westward Hill
+      coord: [16.45, 13.4]
+
+    # Upper portion
+    - name: Upper Cache
+      coord: [16.4, 11.5]
+    - name: Cache Ledge
+      coord: [16.5, 11.8]
+    - name: Left Platform West
+      coord: [16.75, 11.9]
+    - name: Left Platform East
+      coord: [17.0, 12.0]
+    - name: Center Platform West
+      coord: [17.25, 11.7]
+    - name: Center Platform East
+      coord: [17.5, 11.8]
+    - name: Right Platform West
+      coord: [17.75, 12.05]
+    - name: Right Platform East
+      coord: [17.95, 12.1]
+    - name: Lower Platform West
+      coord: [17.9, 13.0]
+    - name: Lower Platform East
+      coord: [18.15, 13.0]
+    - name: Ladder Ledge
+      coord: [18.15, 12.4]
+    - name: Switch Ledge
+      coord: [18.05, 11.6]
+    - name: Switch Approach
+      coord: [18.3, 11.5]
+    - name: Switch
+      coord: [18.5, 11.5]
 
 - name: Giguna Base
   on_entry: $reset_old_area(^newpos)
@@ -998,6 +1065,13 @@ areas:
           time: 1.2
         - to: Ruins Top > West 7
           tags: [xshift]
+    
+    - name: Rooftop East Edge
+      coord: [13.6, 5.7]
+    - name: Rooftop West Edge
+      coord: [13.3, 5.4]
+    - name: West 7
+      coord: [13.05, 6.3]
 
 - name: Ruins Top
   on_entry: $reset_old_area(^newpos)
@@ -1130,4 +1204,35 @@ areas:
     # post-breach
     - name: Save Point
       coord: [14.8, 5.7]
-      
+    - name: Switch
+      coord: [15.0, 5.5]
+    - name: Rooftop West
+      coord: [15.1, 5.2]
+    - name: Rooftop East
+      coord: [15.6, 5.2]
+    - name: Rooftop Gutter
+      coord: [15.8, 5.6]
+    - name: Turret Balcony East
+      coord: [14.8, 5.2]
+    - name: Turret Balcony West
+      coord: [14.3, 5.2]
+    
+- name: West Tower
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 7
+      coord: [12.95, 6.3]
+    - name: Top
+      coord: [12.5, 7.1]
+    - name: Southwest
+      coord: [12.3, 8.9]
+
+- name: Far Corner
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 13
+      coord: [11.95, 12.3]
+    - name: Grass
+      coord: [11.5, 12.8]
+    - name: South
+      coord: [11.4, 12.9]

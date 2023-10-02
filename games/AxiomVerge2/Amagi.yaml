@@ -991,7 +991,7 @@ areas:
           req: Amagi_West_Lake_Surface_Wall
           movement: base
     - name: West 15
-      coord: [22.05, 14.75]
+      coord: [22.05, 14.8]
       data:
         water: false
       local:
