@@ -73,6 +73,7 @@ pub enum Expectation {
     EbihBaseCampCtxLeftPlatformMoved(bool),
     EbihGrid251012CtxDoorOpen(bool),
     EbihWaterfallCtxWestDoorOpen(bool),
+    EbihEbihWestCtxDoorOpen(bool),
     EbihEbihEastCtxPlatform1Moved(bool),
     EbihEbihEastCtxPlatform2Moved(bool),
     EbihDroneRoomCtxPlatformMoved(bool),
@@ -104,6 +105,8 @@ pub enum Expectation {
     DroneMeleeSpeed(i8),
     EbihWaterfallBlockLeft(bool),
     EbihWaterfallBlockRight(bool),
+    EbihWaterfallWall(bool),
+    EbihWestBlock(bool),
     FastTravel(bool),
     Flask(i8),
     GigunaNortheastGate(bool),
@@ -327,65 +330,68 @@ pub mod flags {
             const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 1 << 1;
             const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 1 << 2;
             const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 1 << 3;
-            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 4;
-            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 5;
-            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 6;
-            const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 1 << 7;
-            const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 1 << 8;
-            const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 9;
-            const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 10;
-            const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 11;
-            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 12;
-            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 13;
-            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 14;
-            const BOOMERANG_STEERING = 1 << 15;
-            const MAJOR_GLITCHES = 1 << 16;
-            const MINOR_GLITCHES = 1 << 17;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 18;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 19;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 20;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 21;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 22;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 23;
-            const AMASHILAMA = 1 << 24;
-            const ANUMAN = 1 << 25;
-            const APOCALYPSE_BOMB = 1 << 26;
-            const BOOMERANG = 1 << 27;
-            const COMPANIES_LAYOFF = 1 << 28;
-            const DEAR_ERNEST = 1 << 29;
-            const DEFEAT_EBIH_ALU = 1 << 30;
-            const DEFEAT_MUS_A_M20 = 1 << 31;
+            const EBIH__EBIH_WEST__CTX__DOOR_OPEN = 1 << 4;
+            const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 5;
+            const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 6;
+            const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 7;
+            const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 1 << 8;
+            const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 1 << 9;
+            const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 10;
+            const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 11;
+            const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 12;
+            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 13;
+            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 14;
+            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 15;
+            const BOOMERANG_STEERING = 1 << 16;
+            const MAJOR_GLITCHES = 1 << 17;
+            const MINOR_GLITCHES = 1 << 18;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 19;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 20;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 21;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 22;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 23;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 24;
+            const AMASHILAMA = 1 << 25;
+            const ANUMAN = 1 << 26;
+            const APOCALYPSE_BOMB = 1 << 27;
+            const BOOMERANG = 1 << 28;
+            const COMPANIES_LAYOFF = 1 << 29;
+            const DEAR_ERNEST = 1 << 30;
+            const DEFEAT_EBIH_ALU = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const DRONE_HOVER = 1 << 0;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 1;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 2;
-            const FAST_TRAVEL = 1 << 3;
-            const GIGUNA_NORTHEAST_GATE = 1 << 4;
-            const HERETICS_TABLET = 1 << 5;
-            const ICE_AXE = 1 << 6;
-            const INFECTION_SPEED = 1 << 7;
-            const LEDGE_GRAB = 1 << 8;
-            const LETTER_FROM_TRACE = 1 << 9;
-            const MAP_17_10 = 1 << 10;
-            const MIST_UPGRADE = 1 << 11;
-            const NANITE_MIST = 1 << 12;
-            const POWER_MATRIX = 1 << 13;
-            const RECORD_LOSSES = 1 << 14;
-            const REMOTE_DRONE = 1 << 15;
-            const RESEARCHERS_MISSING = 1 << 16;
-            const SHOCKWAVE = 1 << 17;
-            const SLINGSHOT_HOOK = 1 << 18;
-            const STATION_POWER = 1 << 19;
-            const SWITCH_36_11 = 1 << 20;
-            const SWITCH_40_12 = 1 << 21;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 22;
-            const UNDER_SIEGE = 1 << 23;
-            const UNDERWATER_MOVEMENT = 1 << 24;
-            const WALL_CLIMB = 1 << 25;
+            const DEFEAT_MUS_A_M20 = 1 << 0;
+            const DRONE_HOVER = 1 << 1;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 2;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 3;
+            const EBIH_WATERFALL_WALL = 1 << 4;
+            const EBIH_WEST_BLOCK = 1 << 5;
+            const FAST_TRAVEL = 1 << 6;
+            const GIGUNA_NORTHEAST_GATE = 1 << 7;
+            const HERETICS_TABLET = 1 << 8;
+            const ICE_AXE = 1 << 9;
+            const INFECTION_SPEED = 1 << 10;
+            const LEDGE_GRAB = 1 << 11;
+            const LETTER_FROM_TRACE = 1 << 12;
+            const MAP_17_10 = 1 << 13;
+            const MIST_UPGRADE = 1 << 14;
+            const NANITE_MIST = 1 << 15;
+            const POWER_MATRIX = 1 << 16;
+            const RECORD_LOSSES = 1 << 17;
+            const REMOTE_DRONE = 1 << 18;
+            const RESEARCHERS_MISSING = 1 << 19;
+            const SHOCKWAVE = 1 << 20;
+            const SLINGSHOT_HOOK = 1 << 21;
+            const STATION_POWER = 1 << 22;
+            const SWITCH_36_11 = 1 << 23;
+            const SWITCH_40_12 = 1 << 24;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 25;
+            const UNDER_SIEGE = 1 << 26;
+            const UNDERWATER_MOVEMENT = 1 << 27;
+            const WALL_CLIMB = 1 << 28;
         }
     }
 }
@@ -477,7 +483,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 51;
+    const NUM_ITEMS: u32 = 53;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -506,7 +512,7 @@ impl context::Ctx for Context {
             Item::Companies_Layoff => self.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF),
             Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU),
-            Item::Defeat_MUS_A_M20 => self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20),
+            Item::Defeat_MUS_A_M20 => self.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20),
             Item::Drone_Hover => self.cbits2.contains(flags::ContextBits2::DRONE_HOVER),
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
@@ -516,6 +522,10 @@ impl context::Ctx for Context {
             Item::Ebih_Waterfall_Block_Right => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT),
+            Item::Ebih_Waterfall_Wall => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WATERFALL_WALL),
+            Item::Ebih_West_Block => self.cbits2.contains(flags::ContextBits2::EBIH_WEST_BLOCK),
             Item::Fast_Travel => self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
             Item::Giguna_Northeast_Gate => self
@@ -605,8 +615,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::DEFEAT_EBIH_ALU)
                 .into(),
             Item::Defeat_MUS_A_M20 => self
-                .cbits1
-                .contains(flags::ContextBits1::DEFEAT_MUS_A_M20)
+                .cbits2
+                .contains(flags::ContextBits2::DEFEAT_MUS_A_M20)
                 .into(),
             Item::Drone_Hover => self
                 .cbits2
@@ -621,6 +631,14 @@ impl context::Ctx for Context {
             Item::Ebih_Waterfall_Block_Right => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT)
+                .into(),
+            Item::Ebih_Waterfall_Wall => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WATERFALL_WALL)
+                .into(),
+            Item::Ebih_West_Block => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WEST_BLOCK)
                 .into(),
             Item::Fast_Travel => self
                 .cbits2
@@ -754,7 +772,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             },
             Item::Defeat_MUS_A_M20 => {
-                self.cbits1.insert(flags::ContextBits1::DEFEAT_MUS_A_M20);
+                self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
                 rules::action_skip__amagi__west_lake__cavern_refill_station__break_wall_add_item__amagi_dragon_eye_passage(self);
             },
             Item::Drone_Hover => {
@@ -771,6 +789,12 @@ impl context::Ctx for Context {
             },
             Item::Ebih_Waterfall_Block_Right => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
+            },
+            Item::Ebih_Waterfall_Wall => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_WALL);
+            },
+            Item::Ebih_West_Block => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
             },
             Item::Fast_Travel => {
                 self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
@@ -928,7 +952,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
             }
             Item::Defeat_MUS_A_M20 => {
-                self.cbits1.insert(flags::ContextBits1::DEFEAT_MUS_A_M20);
+                self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
             }
             Item::Drone_Hover => {
                 self.cbits2.insert(flags::ContextBits2::DRONE_HOVER);
@@ -946,6 +970,12 @@ impl context::Ctx for Context {
             Item::Ebih_Waterfall_Block_Right => {
                 self.cbits2
                     .insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_RIGHT);
+            }
+            Item::Ebih_Waterfall_Wall => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_WALL);
+            }
+            Item::Ebih_West_Block => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
             }
             Item::Fast_Travel => {
                 self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
@@ -1164,6 +1194,15 @@ impl context::Ctx for Context {
                 self.set_ebih__waterfall__ctx__west_door_open(*b)
             }
             ("ebih__waterfall__ctx__west_door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__ebih_west__ctx__door_open", Yaml::Boolean(b)) => {
+                self.set_ebih__ebih_west__ctx__door_open(*b)
+            }
+            ("ebih__ebih_west__ctx__door_open", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1410,6 +1449,15 @@ impl context::Ctx for Context {
                 Expectation::EbihWaterfallCtxWestDoorOpen(*b)
             }
             ("ebih__waterfall__ctx__west_door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("ebih__ebih_west__ctx__door_open", Yaml::Boolean(b)) => {
+                Expectation::EbihEbihWestCtxDoorOpen(*b)
+            }
+            ("ebih__ebih_west__ctx__door_open", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1691,6 +1739,22 @@ impl context::Ctx for Context {
                 Expectation::EbihWaterfallBlockRight(*i > 0)
             }
             ("Ebih_Waterfall_Block_Right", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Waterfall_Wall", Yaml::Boolean(b)) => Expectation::EbihWaterfallWall(*b),
+            ("Ebih_Waterfall_Wall", Yaml::Integer(i)) => Expectation::EbihWaterfallWall(*i > 0),
+            ("Ebih_Waterfall_Wall", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_West_Block", Yaml::Boolean(b)) => Expectation::EbihWestBlock(*b),
+            ("Ebih_West_Block", Yaml::Integer(i)) => Expectation::EbihWestBlock(*i > 0),
+            ("Ebih_West_Block", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2066,6 +2130,15 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::EbihEbihWestCtxDoorOpen(e) => {
+                    let v = self.ebih__ebih_west__ctx__door_open();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__ebih_west__ctx__door_open", e, v
+                        ));
+                    }
+                }
                 Expectation::EbihEbihEastCtxPlatform1Moved(e) => {
                     let v = self.ebih__ebih_east__ctx__platform1_moved();
                     if v != *e {
@@ -2318,6 +2391,24 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Waterfall_Block_Right", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWaterfallWall(e) => {
+                    let v = self.has(Item::Ebih_Waterfall_Wall);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Waterfall_Wall", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWestBlock(e) => {
+                    let v = self.has(Item::Ebih_West_Block);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_West_Block", e, v
                         ));
                     }
                 }
@@ -3171,6 +3262,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__EBIH_WEST__CTX__DOOR_OPEN",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
         let p = old
             .cbits1
@@ -3425,8 +3528,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}DEFEAT_EBIH_ALU", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20);
-        let p = old.cbits1.contains(flags::ContextBits1::DEFEAT_MUS_A_M20);
+        let n = self.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20);
+        let p = old.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20);
         if n != p {
             list.push(format!("{}DEFEAT_MUS_A_M20", if n { "+" } else { "-" }));
         }
@@ -3458,6 +3561,20 @@ impl context::Ctx for Context {
                 "{}EBIH_WATERFALL_BLOCK_RIGHT",
                 if n { "+" } else { "-" }
             ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WATERFALL_WALL);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WATERFALL_WALL);
+        if n != p {
+            list.push(format!("{}EBIH_WATERFALL_WALL", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits2.contains(flags::ContextBits2::EBIH_WEST_BLOCK);
+        let p = old.cbits2.contains(flags::ContextBits2::EBIH_WEST_BLOCK);
+        if n != p {
+            list.push(format!("{}EBIH_WEST_BLOCK", if n { "+" } else { "-" }));
         }
         let n = self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL);
         let p = old.cbits2.contains(flags::ContextBits2::FAST_TRAVEL);
@@ -3807,6 +3924,21 @@ impl Context {
             flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN,
             val,
         );
+    }
+    pub fn ebih__ebih_west__ctx__door_open(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN),
+                },
+            },
+        }
+    }
+    pub fn set_ebih__ebih_west__ctx__door_open(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::EBIH__EBIH_WEST__CTX__DOOR_OPEN, val);
     }
     pub fn ebih__ebih_east__ctx__platform1_moved(&self) -> bool {
         match self.position {

@@ -229,6 +229,8 @@ subgraph Ebih
         Ebih__Waterfall__Under_Waterfall(Under Waterfall);
         Ebih__Waterfall__Waterfall_Left(Waterfall Left);
         Ebih__Waterfall__Wall_Right(Wall Right);
+        Ebih__Waterfall__Wall_Left(Wall Left);
+        Ebih__Waterfall__West_11(West 11);
         Ebih__Waterfall__Lower_West_Tree(Lower West Tree);
         Ebih__Waterfall__West_Lower_Path(West Lower Path);
         Ebih__Waterfall__West_10(West 10);
@@ -272,6 +274,15 @@ subgraph Ebih
         Ebih__Ebih_West__Middle_Cliff(Middle Cliff);
         Ebih__Ebih_West__Giguna_Pillar(Giguna Pillar);
         Ebih__Ebih_West__West_9(West 9);
+        Ebih__Ebih_West__Block_Right(Block Right);
+        Ebih__Ebih_West__Refill_Station(Refill Station);
+        Ebih__Ebih_West__East_11(East 11);
+        Ebih__Ebih_West__Above_Door(Above Door);
+        Ebih__Ebih_West__Below_Door(Below Door);
+        Ebih__Ebih_West__Small_Gap(Small Gap);
+        Ebih__Ebih_West__Left_of_Gap(Left of Gap);
+        Ebih__Ebih_West__Left_of_Switch(Left of Switch);
+        Ebih__Ebih_West__Lower_Hill(Lower Hill);
     end
     subgraph Ebih__Cave[Cave]
         Ebih__Cave__Entry(Entry);
@@ -563,6 +574,7 @@ subgraph Giguna
         Giguna__Ruins_Top__Flask(Flask);
         Giguna__Ruins_Top__East_Door(East Door);
         Giguna__Ruins_Top__East_7(East 7);
+        Giguna__Ruins_Top__Save_Point(Save Point);
     end
 end
 subgraph Glacier
@@ -788,16 +800,24 @@ Ebih__Ebih_East__East_9 --> Ebih__Ebih_East__East_Hill
 Ebih__Ebih_East__East_9 <--> Ebih__Observation_Tower_Room__West_9
 Ebih__Ebih_East__West_7 <--> Ebih__Waterfall__East_7
 Ebih__Ebih_East__West_8 <--> Ebih__Waterfall__East_8
+Ebih__Ebih_West__Above_Door <--> Ebih__Ebih_West__Below_Door
+Ebih__Ebih_West__Above_Door --> Ebih__Ebih_West__Refill_Station
+Ebih__Ebih_West__Above_Door --> Ebih__Ebih_West__Small_Gap
 Ebih__Ebih_West__Alcove_Entrance --> Ebih__Ebih_West__Above_Alcove
+Ebih__Ebih_West__Below_Door --> Ebih__Ebih_West__Refill_Station
 Ebih__Ebih_West__Block_Left --> Ebih__Ebih_West__Alcove_Entrance
+Ebih__Ebih_West__Block_Left <--> Ebih__Ebih_West__Block_Right
 Ebih__Ebih_West__Block_Left --> Ebih__Ebih_West__Mid_Save
 Ebih__Ebih_West__East_10 <--> Ebih__Waterfall__West_10
+Ebih__Ebih_West__East_11 --> Ebih__Waterfall__West_11
 Ebih__Ebih_West__East_6 <--> Ebih__Grid_21_1_5__West_6
 Ebih__Ebih_West__East_7 <--> Ebih__Waterfall__West_7
 Ebih__Ebih_West__East_8 <--> Ebih__Waterfall__West_8
 Ebih__Ebih_West__East_9 <--> Ebih__Waterfall__West_9
 Ebih__Ebih_West__Giguna_Pillar --> Giguna__Giguna_Northeast__Inner_Wall
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__High_Ledge
+Ebih__Ebih_West__Left_of_Gap <--> Ebih__Ebih_West__Small_Gap
+Ebih__Ebih_West__Lower_Hill --> Ebih__Ebih_West__Left_of_Gap
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__Above_Chute
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__East_7
 Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
@@ -833,6 +853,7 @@ Ebih__Waterfall__Lower_West_Tree --> Ebih__Waterfall__West_Lower_Path
 Ebih__Waterfall__Middle_West_Tree --> Ebih__Waterfall__West_Main_Path
 Ebih__Waterfall__Platform --> Ebih__Waterfall__Big_Tree
 Ebih__Waterfall__Under_Waterfall --> Ebih__Waterfall__Waterfall_Left
+Ebih__Waterfall__Wall_Left <--> Ebih__Waterfall__Wall_Right
 Ebih__Waterfall__Wall_Right --> Ebih__Waterfall__Lower_West_Tree
 Ebih__Waterfall__West_Climb --> Ebih__Waterfall__Ledge_Below_Hole
 Ebih__Waterfall__West_Door <--> Ebih__Waterfall__West_Door_Left

@@ -706,7 +706,7 @@ areas:
         - to: Waterfall Left
           jumps: 3
       locations:
-        - name: Wall
+        - name: Break Wall
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
           req: $shockwave
@@ -716,6 +716,45 @@ areas:
         - to: Lower West Tree
           req: Nanite_Mist and Mist_Upgrade
           movement: mist2
+        - to: Wall Left
+          req: Ebih_Waterfall_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall
+          to: Wall Left
+          req: not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
+          item: Ebih_Waterfall_Wall
+          canon: Ebih_Waterfall_Wall
+          item_time: 0
+          movement: mist2
+    - name: Wall Left
+      coord: [21.2, 10.7]
+      local:
+        - to: West 11
+      locations:
+        - name: Break Wall
+          item: Ebih_Waterfall_Wall
+          canon: Ebih_Waterfall_Wall
+          req: $shockwave
+          price: 100
+          tags: [shockwave, event]
+      exits:
+        - to: Wall Right
+          req: Ebih_Waterfall_Wall
+          movement: base
+      hybrid:
+        - name: Break Through Wall
+          to: Wall Right
+          req: not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
+          item: Ebih_Waterfall_Wall
+          canon: Ebih_Waterfall_Wall
+          item_time: 0
+          movement: mist2
+    - name: West 11
+      coord: [21.05, 10.8]
+      local:
+        - to: Wall Left
+          jumps: 1
     - name: Lower West Tree
       coord: [21.9, 9.9]
       local:
@@ -932,6 +971,8 @@ areas:
 
 - name: Ebih West
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door_open: false
   spots:
     - name: East 10
       coord: [20.95, 9.7]
@@ -994,12 +1035,21 @@ areas:
       local:
         - to: Mid Save
         - to: Alcove Entrance
+      locations:
+        - name: Break Block
+          item: Ebih_West_Block
+          canon: Ebih_West_Block
+          req: $shockwave
+          tags: [shockwave, event]
       exits:
         - to: Mid Save
           req: $grab
           time: 2
         - to: Alcove Entrance
           time: 2.3
+        - to: Block Right
+          req: Ebih_West_Block
+          movement: base
     # Upper half
     - name: East 7
       coord: [20.95, 6.8]
@@ -1120,6 +1170,108 @@ areas:
           tags: [xshift]
         - to: Giguna Pillar
           req: $grab or $climb
+
+    # Below block
+    - name: Block Right
+      coord: [20.65, 10.1]
+      local:
+        - to: Refill Station
+        - to: East 11
+      locations:
+        - name: Break Block
+          item: Ebih_West_Block
+          canon: Ebih_West_Block
+          req: $shockwave
+          tags: [shockwave]
+      exits:
+        - to: Block Left
+          req: Ebih_West_Block
+          movement: base
+    - name: Refill Station
+      coord: [20.7, 10.8]
+      local:
+        - to: Above Door
+        - to: East 11
+        - to: Small Gap
+      # TODO: energy refills? advanced drone deploy
+      keep: true
+    - name: East 11
+      coord: [20.95, 10.8]
+      local:
+        - to: Refill Station
+      exits:
+        - to: Waterfall > West 11
+          tags: [xshift]
+    - name: Above Door
+      coord: [20.55, 10.9]
+      exits:
+        - to: Small Gap
+          req: not ^_door_open
+          movement: base
+          jumps: 1
+        - to: Refill Station
+          req: not ^_door_open or $grab
+          movement: base
+          jumps: 1
+        - to: Below Door
+          req: ^_door_open
+          movement: base
+    - name: Below Door
+      coord: [20.55, 11.4]
+      local:
+        - to: Left of Switch
+      actions:
+        - name: Open Door
+          req: Infect
+          do: ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
+          tags: [hack]
+      exits:
+        - to: Above Door
+          req: $grab and ^_door_open
+          movement: base
+          jumps: 3
+        - to: Refill Station
+          req: $hook and ^_door_open
+          time: 1  # ?
+    - name: Small Gap
+      coord: [20.45, 10.8]
+      local:
+        - to: Above Door
+        - to: Refill Station
+      exits:
+        - to: Left of Gap
+          req: ^mode == 'drone'
+          movement: base
+    - name: Left of Gap
+      coord: [20.1, 10.8]
+      local:
+        - to: Left of Switch
+          thru: [20.05, 11.1]
+        - to: Lower Hill
+      exits:
+        - to: Small Gap
+          req: ^mode == 'drone'
+          movement: base
+    - name: Left of Switch
+      coord: [20.2, 11.6]
+      local:
+        - to: Lower Hill
+          jumps: 2
+        - to: Below Door
+          jumps: 1
+      actions:
+        - name: Open Door
+          req: Infect
+          do: ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
+          tags: [hack]
+    - name: Lower Hill
+      coord: [20.0, 11.3]
+      local:
+        - to: Left of Switch
+      exits:
+        - to: Left of Gap
+          req: $hook
+
 
 - name: Cave
   graph_offset: [0, 0.25]

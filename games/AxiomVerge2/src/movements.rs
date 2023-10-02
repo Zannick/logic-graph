@@ -1157,6 +1157,8 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => {
             2105
         }
+        ([false], SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => 526,
+        ([false], SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => 600,
         (
             [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -1450,6 +1452,43 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_West__Giguna_Pillar,
             SpotId::Ebih__Ebih_West__Above_Alcove,
         ) => 1052,
+        (
+            [false],
+            SpotId::Ebih__Ebih_West__Block_Right,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+        ) => 700,
+        ([false], SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => 1052,
+        ([false], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => 877,
+        ([false], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => {
+            526
+        }
+        ([false], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => {
+            877
+        }
+        ([false], SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => 877,
+        ([false], SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            1228
+        }
+        ([false], SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            877
+        }
+        ([false], SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => 350,
+        // [0.3, 0.526316]
+        (
+            [false],
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+        ) => 826,
+        ([false], SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => 500,
+        ([false], SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => {
+            1228
+        }
+        ([false], SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            1200
+        }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            701
+        }
         ([false], SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => {
             1052
         }
@@ -4878,6 +4917,8 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => {
             2105
         }
+        ([true], SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => 526,
+        ([true], SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => 600,
         (
             [true],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -5146,6 +5187,39 @@ pub fn local_travel_time(
         }
         ([true], SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             1052
+        }
+        ([true], SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            700
+        }
+        ([true], SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => 877,
+        ([true], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => {
+            526
+        }
+        ([true], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => {
+            877
+        }
+        ([true], SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => 877,
+        ([true], SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            1228
+        }
+        ([true], SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            877
+        }
+        ([true], SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => 350,
+        // [0.3, 0.526316]
+        ([true], SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            826
+        }
+        ([true], SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => 500,
+        ([true], SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => {
+            1228
+        }
+        ([true], SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            1200
+        }
+        ([true], SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            701
         }
         ([true], SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => 1052,
         ([true], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => 1052,
@@ -8607,7 +8681,21 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Ebih__Waterfall__Wall_Right => enum_map! {
             SpotId::Ebih__Waterfall__Waterfall_Left => 2105,
             SpotId::Ebih__Waterfall__Wall_Right => 0,
+            SpotId::Ebih__Waterfall__Wall_Left => 701,
             SpotId::Ebih__Waterfall__Lower_West_Tree => 1754,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Waterfall__Wall_Left => enum_map! {
+            SpotId::Ebih__Waterfall__Wall_Right => 701,
+            SpotId::Ebih__Waterfall__Wall_Left => 0,
+            SpotId::Ebih__Waterfall__West_11 => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Waterfall__West_11 => enum_map! {
+            SpotId::Ebih__Waterfall__Wall_Left => 600,
+            SpotId::Ebih__Waterfall__West_11 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -8839,6 +8927,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Ebih_West__Mid_Save => 2000,
             SpotId::Ebih__Ebih_West__Alcove_Entrance => 2300,
             SpotId::Ebih__Ebih_West__Block_Left => 0,
+            SpotId::Ebih__Ebih_West__Block_Right => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -8938,6 +9027,75 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Ebih_West__Giguna_Pillar => 1000,
             SpotId::Ebih__Ebih_West__West_9 => 0,
             SpotId::Giguna__Giguna_Northeast__East_9 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Block_Right => enum_map! {
+            SpotId::Ebih__Ebih_West__Block_Left => 877,
+            SpotId::Ebih__Ebih_West__Block_Right => 0,
+            SpotId::Ebih__Ebih_West__Refill_Station => 700,
+            SpotId::Ebih__Ebih_West__East_11 => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Refill_Station => enum_map! {
+            SpotId::Ebih__Ebih_West__Refill_Station => 0,
+            SpotId::Ebih__Ebih_West__East_11 => 877,
+            SpotId::Ebih__Ebih_West__Above_Door => 526,
+            SpotId::Ebih__Ebih_West__Small_Gap => 877,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__East_11 => enum_map! {
+            SpotId::Ebih__Waterfall__West_11 => 1350,
+            SpotId::Ebih__Ebih_West__Refill_Station => 877,
+            SpotId::Ebih__Ebih_West__East_11 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Above_Door => enum_map! {
+            SpotId::Ebih__Ebih_West__Refill_Station => 600,
+            SpotId::Ebih__Ebih_West__Above_Door => 0,
+            SpotId::Ebih__Ebih_West__Below_Door => 500,
+            SpotId::Ebih__Ebih_West__Small_Gap => 600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Below_Door => enum_map! {
+            SpotId::Ebih__Ebih_West__Refill_Station => 1000,
+            SpotId::Ebih__Ebih_West__Above_Door => 1799,
+            SpotId::Ebih__Ebih_West__Below_Door => 0,
+            SpotId::Ebih__Ebih_West__Left_of_Switch => 1228,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Small_Gap => enum_map! {
+            SpotId::Ebih__Ebih_West__Refill_Station => 877,
+            SpotId::Ebih__Ebih_West__Above_Door => 350,
+            SpotId::Ebih__Ebih_West__Small_Gap => 0,
+            SpotId::Ebih__Ebih_West__Left_of_Gap => 1228,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Left_of_Gap => enum_map! {
+            SpotId::Ebih__Ebih_West__Small_Gap => 1228,
+            SpotId::Ebih__Ebih_West__Left_of_Gap => 0,
+            SpotId::Ebih__Ebih_West__Left_of_Switch => 826,
+            SpotId::Ebih__Ebih_West__Lower_Hill => 500,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Left_of_Switch => enum_map! {
+            SpotId::Ebih__Ebih_West__Below_Door => 1228,
+            SpotId::Ebih__Ebih_West__Left_of_Switch => 0,
+            SpotId::Ebih__Ebih_West__Lower_Hill => 1200,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Lower_Hill => enum_map! {
+            SpotId::Ebih__Ebih_West__Left_of_Gap => 1000,
+            SpotId::Ebih__Ebih_West__Left_of_Switch => 701,
+            SpotId::Ebih__Ebih_West__Lower_Hill => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9420,6 +9578,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna_Breach__Peak__Portal => enum_map! {
             SpotId::Giguna_Breach__Peak__Upper_West => 1000,
             SpotId::Giguna_Breach__Peak__Portal => 0,
+            SpotId::Giguna__Ruins_Top__Save_Point => 3600,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10622,6 +10781,11 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Ruins_East__West_7 => 1350,
             SpotId::Giguna__Ruins_Top__East_Door => 877,
             SpotId::Giguna__Ruins_Top__East_7 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Save_Point => enum_map! {
+            SpotId::Giguna__Ruins_Top__Save_Point => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12856,8 +13020,16 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => 2105,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Wall_Right) => 0,
+        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Wall_Left) => 701,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Lower_West_Tree) => 1754,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__Wall_Right) => 701,
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__Wall_Left) => 0,
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => 526,
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => 600,
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__West_11) => 0,
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -13038,6 +13210,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Mid_Save) => 2000,
         (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2300,
         (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Block_Left) => 0,
+        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Block_Right) => 877,
         (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Waterfall__West_7) => 1350,
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_7) => 0,
@@ -13123,6 +13296,48 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Ebih_West__West_9, SpotId::Ebih__Ebih_West__West_9) => 0,
         (SpotId::Ebih__Ebih_West__West_9, SpotId::Giguna__Giguna_Northeast__East_9) => 1350,
         (SpotId::Ebih__Ebih_West__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Block_Left) => 877,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Block_Right) => 0,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Refill_Station) => 700,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => 1052,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Refill_Station) => 0,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => 877,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => 526,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => 877,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Waterfall__West_11) => 1350,
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => 877,
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__East_11) => 0,
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Refill_Station) => 600,
+        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Above_Door) => 0,
+        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Below_Door) => 500,
+        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Small_Gap) => 600,
+        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Refill_Station) => 1000,
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Above_Door) => 1799,
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Below_Door) => 0,
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => 1228,
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => 877,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => 350,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Small_Gap) => 0,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Left_of_Gap) => 1228,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Small_Gap) => 1228,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Gap) => 0,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => 826,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => 500,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => 1228,
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Left_of_Switch) => 0,
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => 1200,
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Gap) => 1000,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => 701,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Hill) => 0,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Waterfall__Cave_Entrance) => 250,
         (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Cave__Entry) => 0,
         (SpotId::Ebih__Cave__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -13547,6 +13762,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => 1000,
         (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Portal) => 0,
+        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna__Ruins_Top__Save_Point) => 3600,
         (SpotId::Giguna_Breach__Peak__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Peak__West_7) => 1600,
         (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__East_7) => 0,
@@ -14976,6 +15192,8 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_Door) => 877,
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_7) => 0,
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Save_Point) => 0,
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -16713,6 +16931,8 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => true,
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => true,
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__West_Lower_Path) => {
             true
         }
@@ -16864,6 +17084,20 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Alcove_Entrance) => true,
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
         (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Above_Alcove) => true,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Refill_Station) => true,
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => true,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => true,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => true,
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => true,
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => true,
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => true,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => true,
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => true,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => true,
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => true,
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => true,
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => true,
         (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
         (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => true,
         (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
@@ -22437,11 +22671,51 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Wall_Right,
+            SpotId::Ebih__Waterfall__Wall_Left,
+            701,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             1754,
         ),
         (
             SpotId::Ebih__Waterfall__Wall_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Wall_Left,
+            SpotId::Ebih__Waterfall__Wall_Right,
+            701,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Wall_Left,
+            SpotId::Ebih__Waterfall__Wall_Left,
+            0,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Wall_Left,
+            SpotId::Ebih__Waterfall__West_11,
+            526,
+        ),
+        (
+            SpotId::Ebih__Waterfall__Wall_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Waterfall__West_11,
+            SpotId::Ebih__Waterfall__Wall_Left,
+            600,
+        ),
+        (
+            SpotId::Ebih__Waterfall__West_11,
+            SpotId::Ebih__Waterfall__West_11,
+            0,
+        ),
+        (
+            SpotId::Ebih__Waterfall__West_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -23162,6 +23436,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Block_Left,
+            SpotId::Ebih__Ebih_West__Block_Right,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Block_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -23477,6 +23756,216 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_9,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Block_Right,
+            SpotId::Ebih__Ebih_West__Block_Left,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Block_Right,
+            SpotId::Ebih__Ebih_West__Block_Right,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Block_Right,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            700,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Block_Right,
+            SpotId::Ebih__Ebih_West__East_11,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Block_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            SpotId::Ebih__Ebih_West__East_11,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            SpotId::Ebih__Ebih_West__Above_Door,
+            526,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_11,
+            SpotId::Ebih__Waterfall__West_11,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_11,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_11,
+            SpotId::Ebih__Ebih_West__East_11,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Above_Door,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            600,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Above_Door,
+            SpotId::Ebih__Ebih_West__Above_Door,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Above_Door,
+            SpotId::Ebih__Ebih_West__Below_Door,
+            500,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Above_Door,
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            600,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Above_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Below_Door,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Below_Door,
+            SpotId::Ebih__Ebih_West__Above_Door,
+            1799,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Below_Door,
+            SpotId::Ebih__Ebih_West__Below_Door,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Below_Door,
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            1228,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Below_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            SpotId::Ebih__Ebih_West__Refill_Station,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            SpotId::Ebih__Ebih_West__Above_Door,
+            350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            1228,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            SpotId::Ebih__Ebih_West__Small_Gap,
+            1228,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            826,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            500,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            SpotId::Ebih__Ebih_West__Below_Door,
+            1228,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            1200,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            SpotId::Ebih__Ebih_West__Left_of_Gap,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            SpotId::Ebih__Ebih_West__Left_of_Switch,
+            701,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -24935,6 +25424,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Peak__Portal,
             SpotId::Giguna_Breach__Peak__Portal,
             0,
+        ),
+        (
+            SpotId::Giguna_Breach__Peak__Portal,
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            3600,
         ),
         (
             SpotId::Giguna_Breach__Peak__Portal,
@@ -28492,6 +28986,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Elevator,
             0,
@@ -31630,7 +32134,15 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1754)
         }
         (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => Some(2105),
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            Some(1228)
+        }
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => Some(1052),
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            Some(700)
+        }
         (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => Some(1578),
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => Some(877),
         (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => Some(1228),
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => Some(526),
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => Some(1300),
@@ -31648,6 +32160,17 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(350)
         }
         (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => Some(649),
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            Some(826)
+        }
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => Some(500),
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => {
+            Some(1228)
+        }
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            Some(1200)
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => Some(701),
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             Some(3050)
         }
@@ -31678,6 +32201,11 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
             Some(2105)
         }
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => Some(526),
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => Some(877),
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => Some(877),
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => Some(350),
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => Some(877),
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => Some(3157),
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Chute) => Some(1052),
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
@@ -31927,6 +32455,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_Main_Path) => {
             Some(2982)
         }
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => Some(526),
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => {
             Some(2105)
         }
@@ -31993,6 +32522,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
         ) => Some(1929),
         (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => Some(2280),
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => Some(600),
         (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => Some(5964),
         (SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__Below_Left_Switch) => Some(701),
         (SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__West_Door_Left) => Some(877),
@@ -34522,8 +35052,20 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => {
             (Some(2105), vec![])
         }
+        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            (Some(700), vec![])
+        }
         (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => {
             (Some(1578), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            (Some(877), vec![])
         }
         (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
             (Some(1228), vec![])
@@ -34559,6 +35101,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
             (Some(649), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            (Some(826), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
+            (Some(701), vec![])
         }
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             (Some(3050), vec![])
@@ -34599,6 +35156,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
             (Some(2105), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => {
+            (Some(877), vec![])
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             (Some(3157), vec![])
@@ -34917,6 +35489,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_Main_Path) => {
             (Some(2982), vec![])
         }
+        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => {
+            (Some(526), vec![])
+        }
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => {
             (Some(2105), vec![])
         }
@@ -34984,6 +35559,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(1929), vec![]),
         (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => {
             (Some(2280), vec![])
+        }
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => {
+            (Some(600), vec![])
         }
         (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => {
             (Some(5964), vec![])

@@ -1126,3 +1126,8 @@ areas:
           movement: base
         - to: Ruins East > West 7
           tags: [xshift]
+    
+    # post-breach
+    - name: Save Point
+      coord: [14.8, 5.7]
+      

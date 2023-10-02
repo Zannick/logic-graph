@@ -231,6 +231,26 @@ pub fn access_ebih__ebih_east__moving_platform__activate_ride__req(ctx: &Context
     // Infect and $grab and not ^_platform1_moved
     ((ctx.has(Item::Infect) && helper__grab!(ctx)) && !ctx.ebih__ebih_east__ctx__platform1_moved())
 }
+pub fn access_ebih__ebih_west__above_door__ex__below_door_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__ebih_west__ctx__door_open()
+}
+pub fn access_ebih__ebih_west__above_door__ex__refill_station_1__req(ctx: &Context) -> bool {
+    // not ^_door_open or $grab
+    (!ctx.ebih__ebih_west__ctx__door_open() || helper__grab!(ctx))
+}
+pub fn access_ebih__ebih_west__above_door__ex__small_gap_1__req(ctx: &Context) -> bool {
+    // not ^_door_open
+    !ctx.ebih__ebih_west__ctx__door_open()
+}
+pub fn access_ebih__ebih_west__below_door__ex__above_door_1__req(ctx: &Context) -> bool {
+    // $grab and ^_door_open
+    (helper__grab!(ctx) && ctx.ebih__ebih_west__ctx__door_open())
+}
+pub fn access_ebih__ebih_west__below_door__ex__refill_station_1__req(ctx: &Context) -> bool {
+    // $hook and ^_door_open
+    (helper__hook!(ctx) && ctx.ebih__ebih_west__ctx__door_open())
+}
 pub fn access_ebih__grid_25_10_12__door__ex__door_left_1__req(ctx: &Context) -> bool {
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
@@ -262,6 +282,14 @@ pub fn access_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx: &Contex
 pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx: &Context) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
+}
+pub fn access_ebih_waterfall_wall(ctx: &Context) -> bool {
+    // Ebih_Waterfall_Wall
+    ctx.has(Item::Ebih_Waterfall_Wall)
+}
+pub fn access_ebih_west_block(ctx: &Context) -> bool {
+    // Ebih_West_Block
+    ctx.has(Item::Ebih_West_Block)
 }
 pub fn access_giguna__carnelian__door__ex__switch_1__req(ctx: &Context) -> bool {
     // ^_door_opened
@@ -582,6 +610,11 @@ pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
 }
+pub fn access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx: &Context) -> bool {
+    // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
+    ((!ctx.has(Item::Ebih_Waterfall_Wall) && ctx.has(Item::Nanite_Mist))
+        && ctx.has(Item::Mist_Upgrade))
+}
 pub fn access_not_within_menu_and_amashilama_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and Amashilama and ^mode != 'drone'
     ((!(match get_region(ctx.position()) {
@@ -768,6 +801,20 @@ pub fn action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx: &mu
 pub fn action_ebih__ebih_east__moving_platform__activate_ride__do(ctx: &mut Context) {
     // ^_platform1_moved = true
     ctx.set_ebih__ebih_east__ctx__platform1_moved(true);
+}
+pub fn action_ebih__ebih_west__below_door__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
+    ctx.set_ebih__ebih_west__ctx__door_open(true);
+    if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {
+        ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
+    }
+}
+pub fn action_ebih__ebih_west__left_of_switch__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
+    ctx.set_ebih__ebih_west__ctx__door_open(true);
+    if ctx.indra() == SpotId::Ebih__Ebih_West__Above_Door {
+        ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
+    }
 }
 pub fn action_ebih__grid_25_10_12__door_left__open_door__do(ctx: &mut Context) {
     // ^_door_open = true
