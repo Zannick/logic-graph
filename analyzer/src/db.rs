@@ -28,8 +28,7 @@ use std::time::Instant;
 // 1. The queue db is mainly iterated over, via either
 //    getting the minimum-score element (i.e. iterating from start)
 //    or running over the whole db (e.g. for statistics). BlockDB is best for this.
-// 2. We'll add two LRU cache layers that must outlive the BlockDB,
-//    one for uncompressed blocks and the other for compressed blocks.
+// 2. We'll add an LRU cache layer that must outlive the BlockDB.
 
 // We will have the following DBs:
 // 1. the queue: (progress, elapsed, seq) -> Ctx
@@ -76,10 +75,8 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
     >,
     db: DB,
     statedb: DB,
-    _cache_uncompressed: Cache,
-    _cache_cmprsd: Cache,
-    _state_cache_uncompressed: Cache,
-    _state_cache_cmprsd: Cache,
+    _cache: Cache,
+    _state_cache: Cache,
     _opts: HeapDBOptions,
     _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
@@ -218,10 +215,8 @@ where
 
         let mut block_opts = BlockBasedOptions::default();
         // blockdb caches = 2 GiB
-        let cache = Cache::new_lru_cache(GB)?;
-        let cache2 = Cache::new_lru_cache(GB)?;
+        let cache = Cache::new_lru_cache(2 * GB);
         block_opts.set_block_cache(&cache);
-        block_opts.set_block_cache_compressed(&cache2);
         block_opts.set_block_size(16 * 1024);
         block_opts.set_cache_index_and_filter_blocks(true);
         block_opts.set_pin_l0_filter_and_index_blocks_in_cache(true);
@@ -241,10 +236,8 @@ where
 
         let mut block_opts2 = BlockBasedOptions::default();
         // blockdb caches = 5 GiB
-        let cache3 = Cache::new_lru_cache(4 * GB)?;
-        let cache4 = Cache::new_lru_cache(GB)?;
-        block_opts2.set_block_cache(&cache3);
-        block_opts2.set_block_cache_compressed(&cache4);
+        let blockdb_cache = Cache::new_lru_cache(5 * GB);
+        block_opts2.set_block_cache(&blockdb_cache);
         block_opts2.set_block_size(16 * 1024);
         block_opts2.set_cache_index_and_filter_blocks(true);
         block_opts2.set_pin_l0_filter_and_index_blocks_in_cache(true);
@@ -277,10 +270,8 @@ where
             scorer,
             db,
             statedb,
-            _cache_uncompressed: cache,
-            _cache_cmprsd: cache2,
-            _state_cache_uncompressed: cache3,
-            _state_cache_cmprsd: cache4,
+            _cache: cache,
+            _state_cache: blockdb_cache,
             _opts: HeapDBOptions { opts, path },
             _state_opts: HeapDBOptions {
                 opts: opts2,
@@ -1124,7 +1115,7 @@ where
                         batch.delete(&key);
                         rescores += 1;
                     }
-                    if !compact && self._cache_uncompressed.get_usage() > 2 * GB {
+                    if !compact && self._cache.get_usage() > 2 * GB {
                         compact = true;
                     }
                 } else {
@@ -1252,34 +1243,30 @@ where
     pub fn get_memory_usage_stats(&self) -> Result<String, Error> {
         let dbstats = perf::get_memory_usage_stats(
             Some(&[&self.db]),
-            Some(&[&self._cache_cmprsd, &self._cache_uncompressed]),
+            Some(&[&self._cache]),
         )?;
         let statestats = perf::get_memory_usage_stats(
             Some(&[&self.statedb]),
-            Some(&[&self._state_cache_uncompressed, &self._state_cache_cmprsd]),
+            Some(&[&self._state_cache]),
         )?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}, \
-             unc={}, cmpr={}, unc_pinned={}, cmpr_pinned={}\n\
+             cache={}, pinned={}\n\
              statedb: total={}, unflushed={}, readers={}, caches={}, \
-             unc={}, cmpr={}, unc_pinned={}, cmpr_pinned={}",
+             cache={}, pinned={}",
             SizeFormatter::new(dbstats.mem_table_total, BINARY),
             SizeFormatter::new(dbstats.mem_table_unflushed, BINARY),
             SizeFormatter::new(dbstats.mem_table_readers_total, BINARY),
             SizeFormatter::new(dbstats.cache_total, BINARY),
-            SizeFormatter::new(self._cache_uncompressed.get_usage(), BINARY),
-            SizeFormatter::new(self._cache_cmprsd.get_usage(), BINARY),
-            SizeFormatter::new(self._cache_uncompressed.get_pinned_usage(), BINARY),
-            SizeFormatter::new(self._cache_cmprsd.get_pinned_usage(), BINARY),
+            SizeFormatter::new(self._cache.get_usage(), BINARY),
+            SizeFormatter::new(self._cache.get_pinned_usage(), BINARY),
             SizeFormatter::new(statestats.mem_table_total, BINARY),
             SizeFormatter::new(statestats.mem_table_unflushed, BINARY),
             SizeFormatter::new(statestats.mem_table_readers_total, BINARY),
             SizeFormatter::new(statestats.cache_total, BINARY),
-            SizeFormatter::new(self._state_cache_uncompressed.get_usage(), BINARY),
-            SizeFormatter::new(self._state_cache_cmprsd.get_usage(), BINARY),
-            SizeFormatter::new(self._state_cache_uncompressed.get_pinned_usage(), BINARY),
-            SizeFormatter::new(self._state_cache_cmprsd.get_pinned_usage(), BINARY),
+            SizeFormatter::new(self._state_cache.get_usage(), BINARY),
+            SizeFormatter::new(self._state_cache.get_pinned_usage(), BINARY),
         ))
     }
 }
