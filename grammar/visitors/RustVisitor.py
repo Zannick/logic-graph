@@ -205,7 +205,8 @@ class RustVisitor(RulesVisitor):
         for pl in ctx.PLACE():
             pl = str(pl)[1:-1]
             places[getPlaceType(pl)].append(pl)
-        per_type = [f'(match get_{pt.lower()[:-2]}(ctx.position()) {{'
+        per_type = [('(match ctx.position()' if pt == 'SpotId' else f'(match get_{pt.lower()[:-2]}(ctx.position())')
+                    + ' {'
                     + ' | '.join(f'{pt}::{construct_id(pl)}' for pl in plist)
                     + ' => true, _ => false })'
                     for pt, plist in places.items()
@@ -254,15 +255,19 @@ class RustVisitor(RulesVisitor):
     def visitRefInPlaceRef(self, ctx):
         ptype = self.context_types[str(ctx.REF(1))[1:]]
         eq = '!' if ctx.NOT() else '='
-        return (f'get_{ptype[:-2].lower()}({self._getRefGetter(str(ctx.REF(0))[1:])}) '
-                f'{eq}= {self._getRefGetter(str(ctx.REF(1))[1:])}')
+        get = f'{self._getRefGetter(str(ctx.REF(0))[1:])}'
+        if ptype != 'SpotId':
+            get = f'get_{ptype[:-2].lower()}({get})'
+        return f'{get} {eq}= {self._getRefGetter(str(ctx.REF(1))[1:])}'
     
     def visitRefInPlaceName(self, ctx):
         pl = str(ctx.PLACE())[1:-1]
         ptype = getPlaceType(pl)
         eq = '!' if ctx.NOT() else '='
-        return (f'get_{ptype[:-2].lower()}({self._getRefGetter(str(ctx.REF())[1:])}) '
-                f'{eq}= {ptype}::{construct_id(pl)}')
+        get = f'{self._getRefGetter(str(ctx.REF())[1:])}'
+        if ptype != 'SpotId':
+            get = f'get_{ptype[:-2].lower()}({get})'
+        return f'{get} {eq}= {ptype}::{construct_id(pl)}'
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]

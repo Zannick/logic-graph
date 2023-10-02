@@ -325,7 +325,7 @@ class GameLogic(object):
 
     def process_exit_movements(self):
         for spot in self.spots():
-            for exit in spot.get('exits', []):
+            for exit in spot.get('exits', []) + spot.get('hybrid', []):
                 if 'time' not in exit and 'movement' in exit:
                     dest = self.id_lookup[get_exit_target(exit)]
                     if 'coord' not in spot:
