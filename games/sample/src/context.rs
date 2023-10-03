@@ -623,7 +623,7 @@ impl context::Ctx for Context {
                 ));
             }
             ("triforce_count", Yaml::Integer(i)) => {
-                self.set_triforce_count(::try_from(*i).map_err(|e| format!("{}", e))?)
+                self.set_triforce_count(i16::try_from(*i).map_err(|e| format!("{}", e))?)
             }
             ("triforce_count", _) => {
                 return Err(format!(

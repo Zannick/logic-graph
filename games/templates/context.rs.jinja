@@ -224,11 +224,11 @@ impl context::Ctx for Context {
 %% endfor
 %% for s, info in settings.items()
 %% if info.rust_type in int_types
-            ("{{ s }}", Yaml::Integer(i)) => self.set_{{ s }}({{ t }}::try_from(*i).map_err(|e| format!("{}", e))?),
+            ("{{ s }}", Yaml::Integer(i)) => self.set_{{ s }}({{ info.rust_type }}::try_from(*i).map_err(|e| format!("{}", e))?),
 %% elif info.rust_type == "bool"
             ("{{ s }}", Yaml::Boolean(b)) => self.set_{{ s }}(*b),
 %% else
-            ("{{ s }}", Yaml::String(s)) => self.set_{{ s }}({{ t }}::from_str(s).map_err(|e| format!("{}", e))?),
+            ("{{ s }}", Yaml::String(s)) => self.set_{{ s }}({{ info.rust_type }}::from_str(s).map_err(|e| format!("{}", e))?),
 %% endif
             ("{{ s }}", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
 %% endfor
