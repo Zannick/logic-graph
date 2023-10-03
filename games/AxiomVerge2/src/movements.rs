@@ -1489,6 +1489,52 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             701
         }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => {
+            1052
+        }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            1200
+        }
+        (
+            [false],
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+        ) => 800,
+        ([false], SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => {
+            350
+        }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => {
+            1929
+        }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => {
+            4736
+        }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            1200
+        }
+        ([false], SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => 1578,
+        ([false], SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => 5087,
+        (
+            [false],
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+        ) => 750,
+        ([false], SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
+            877
+        }
+        ([false], SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => {
+            877
+        }
+        ([false], SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => 1200,
+        ([false], SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => 1052,
+        ([false], SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => 1052,
+        ([false], SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => 1578,
+        ([false], SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => 5087,
         ([false], SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => {
             1052
         }
@@ -1822,6 +1868,136 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 350,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 526,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => 600,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 400,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 526,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 500,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => 950,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => 350,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 799,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => 526,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 500,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 600,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 600,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 701,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 400,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 350,
+        (
+            [false],
+            SpotId::Ebih__Vertical_Interchange__South,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 600,
         (
             [false],
             SpotId::Giguna_Breach__Peak__Save_Point,
@@ -2555,6 +2731,11 @@ pub fn local_travel_time(
             SpotId::Giguna__West_Caverns__East_12,
             SpotId::Giguna__West_Caverns__East_Susar,
         ) => 526,
+        (
+            [false],
+            SpotId::Giguna__West_Caverns__Northwest,
+            SpotId::Giguna__West_Caverns__West_13,
+        ) => 3200,
         ([false], SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => {
             877
         }
@@ -2904,8 +3085,18 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => {
             1228
         }
-        ([false], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
-        ([false], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => {
+        (
+            [false],
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            SpotId::Giguna__Ruins_West__West_7,
+        ) => 899,
+        ([false], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => 877,
+        ([false], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => {
             799
         }
         ([false], SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
@@ -2930,6 +3121,60 @@ pub fn local_travel_time(
         ) => 526,
         ([false], SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
         ([false], SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => {
+            350
+        }
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Switch,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_7,
+        ) => 1500,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+        ) => 799,
+        (
+            [false],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__Entryway,
+        ) => 1599,
+        ([false], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1578,
+        ([false], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
+        ([false], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
+        ([false], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
         (
             [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -5221,6 +5466,40 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             701
         }
+        ([true], SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => 1200,
+        ([true], SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            800
+        }
+        ([true], SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => {
+            350
+        }
+        ([true], SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => 1929,
+        ([true], SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => 4736,
+        ([true], SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            1200
+        }
+        ([true], SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => 1578,
+        ([true], SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => 5087,
+        ([true], SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            1403
+        }
+        (
+            [true],
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+        ) => 750,
+        ([true], SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
+            877
+        }
+        ([true], SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => {
+            877
+        }
+        ([true], SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => 1200,
+        ([true], SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => 1578,
+        ([true], SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => 5087,
         ([true], SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => 1052,
         ([true], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => 1052,
         ([true], SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
@@ -5536,6 +5815,136 @@ pub fn local_travel_time(
             SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => 2105,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 350,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 526,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => 600,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 400,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 526,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 500,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => 950,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => 350,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 799,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => 526,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 500,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 600,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 600,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 701,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 400,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 350,
+        (
+            [true],
+            SpotId::Ebih__Vertical_Interchange__South,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 600,
         (
             [true],
             SpotId::Giguna_Breach__Peak__Save_Point,
@@ -6245,6 +6654,11 @@ pub fn local_travel_time(
             SpotId::Giguna__West_Caverns__East_12,
             SpotId::Giguna__West_Caverns__East_Susar,
         ) => 526,
+        (
+            [true],
+            SpotId::Giguna__West_Caverns__Northwest,
+            SpotId::Giguna__West_Caverns__West_13,
+        ) => 3200,
         ([true], SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => 877,
         ([true], SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => 877,
         // [0.350877, 1.22807]
@@ -6572,8 +6986,20 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => {
             1228
         }
-        ([true], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
-        ([true], SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => 799,
+        (
+            [true],
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            SpotId::Giguna__Ruins_West__West_7,
+        ) => 899,
+        ([true], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => 877,
+        ([true], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => {
+            799
+        }
         ([true], SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             2982
         }
@@ -6596,6 +7022,58 @@ pub fn local_travel_time(
         ) => 526,
         ([true], SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
         ([true], SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => 350,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Switch,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_7,
+        ) => 1500,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+        ) => 799,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__Entryway,
+        ) => 1599,
+        ([true], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1578,
+        ([true], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
+        ([true], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
+        ([true], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
         (
             [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -8049,6 +8527,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Amagi__West_Lake__West_15 => enum_map! {
             SpotId::Amagi__West_Lake__Surface_Wall_Left => 2807,
             SpotId::Amagi__West_Lake__West_15 => 0,
+            SpotId::Ebih__Vertical_Interchange__East_15 => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -8696,6 +9175,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Ebih__Waterfall__West_11 => enum_map! {
             SpotId::Ebih__Waterfall__Wall_Left => 600,
             SpotId::Ebih__Waterfall__West_11 => 0,
+            SpotId::Ebih__Ebih_West__East_11 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9096,6 +9576,72 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Ebih_West__Left_of_Gap => 1000,
             SpotId::Ebih__Ebih_West__Left_of_Switch => 701,
             SpotId::Ebih__Ebih_West__Lower_Hill => 0,
+            SpotId::Ebih__Ebih_West__Lower_Cliff => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Lower_Cliff => enum_map! {
+            SpotId::Ebih__Ebih_West__Lower_Hill => 1200,
+            SpotId::Ebih__Ebih_West__Lower_Cliff => 0,
+            SpotId::Ebih__Ebih_West__Lower_Platform => 800,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Lower_Platform => enum_map! {
+            SpotId::Ebih__Ebih_West__Lower_Cliff => 3599,
+            SpotId::Ebih__Ebih_West__Lower_Platform => 0,
+            SpotId::Ebih__Ebih_West__Lower_Save => 350,
+            SpotId::Ebih__Ebih_West__West_13 => 1929,
+            SpotId::Ebih__Ebih_West__East_13 => 4736,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__Lower_Save => enum_map! {
+            SpotId::Ebih__Ebih_West__Lower_Platform => 1200,
+            SpotId::Ebih__Ebih_West__Lower_Save => 0,
+            SpotId::Ebih__Ebih_West__West_13 => 1578,
+            SpotId::Ebih__Ebih_West__East_13 => 5087,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__West_High_Cliff => enum_map! {
+            SpotId::Ebih__Ebih_West__Lower_Hill => 1403,
+            SpotId::Ebih__Ebih_West__Lower_Cliff => 750,
+            SpotId::Ebih__Ebih_West__West_High_Cliff => 0,
+            SpotId::Ebih__Ebih_West__West_Fork => 877,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__West_Fork => enum_map! {
+            SpotId::Ebih__Ebih_West__West_High_Cliff => 877,
+            SpotId::Ebih__Ebih_West__West_Fork => 0,
+            SpotId::Ebih__Ebih_West__West_11 => 1200,
+            SpotId::Ebih__Ebih_West__West_12 => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__West_11 => enum_map! {
+            SpotId::Ebih__Ebih_West__West_Fork => 1052,
+            SpotId::Ebih__Ebih_West__West_11 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__West_12 => enum_map! {
+            SpotId::Ebih__Ebih_West__West_Fork => 4800,
+            SpotId::Ebih__Ebih_West__West_12 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__West_13 => enum_map! {
+            SpotId::Ebih__Ebih_West__Lower_Save => 1578,
+            SpotId::Ebih__Ebih_West__West_13 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Ebih_West__East_13 => enum_map! {
+            SpotId::Ebih__Ebih_West__Lower_Save => 5087,
+            SpotId::Ebih__Ebih_West__East_13 => 0,
+            SpotId::Ebih__Vertical_Interchange__West_13 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9525,6 +10071,161 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Ebih__Base_Camp__West_11 => 1000,
             SpotId::Ebih__Observation_Tower_Room__Cliff => 2000,
             SpotId::Ebih__Observation_Tower_Room__East_11 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__West_13 => enum_map! {
+            SpotId::Ebih__Ebih_West__East_13 => 1350,
+            SpotId::Ebih__Vertical_Interchange__West_13 => 0,
+            SpotId::Ebih__Vertical_Interchange__Passage_West => 701,
+            SpotId::Ebih__Vertical_Interchange__Door_West => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Passage_West => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__West_13 => 701,
+            SpotId::Ebih__Vertical_Interchange__Passage_West => 0,
+            SpotId::Ebih__Vertical_Interchange__Door_West => 1200,
+            SpotId::Ebih__Vertical_Interchange__Passage_East => 1929,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Door_West => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__West_13 => 1052,
+            SpotId::Ebih__Vertical_Interchange__Passage_West => 350,
+            SpotId::Ebih__Vertical_Interchange__Door_West => 0,
+            SpotId::Ebih__Vertical_Interchange__Door => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Door => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Door_West => 526,
+            SpotId::Ebih__Vertical_Interchange__Door => 0,
+            SpotId::Ebih__Vertical_Interchange__Door_East => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Door_East => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Door => 526,
+            SpotId::Ebih__Vertical_Interchange__Door_East => 0,
+            SpotId::Ebih__Vertical_Interchange__Passage_East => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Passage_East => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Passage_West => 1929,
+            SpotId::Ebih__Vertical_Interchange__Door_West => 1000,
+            SpotId::Ebih__Vertical_Interchange__Passage_East => 0,
+            SpotId::Ebih__Vertical_Interchange__East_13 => 600,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 400,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__East_13 => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Passage_East => 526,
+            SpotId::Ebih__Vertical_Interchange__East_13 => 0,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 500,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Middle_Descent => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Passage_East => 3000,
+            SpotId::Ebih__Vertical_Interchange__East_13 => 3000,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 0,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop => 2280,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Middle_Drop => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 2280,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop => 0,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 950,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop => 5399,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 0,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station => 526,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Refill_Station => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 1799,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station => 0,
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 399,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 1200,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 0,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 1052,
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 500,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Block_Cubby => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby => 0,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit => 350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Cubby_Exit => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 1403,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit => 0,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 799,
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 1299,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__East_Tunnel => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Refill_Station => 1052,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 1052,
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby => 3599,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 0,
+            SpotId::Ebih__Vertical_Interchange__East_15 => 701,
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__East_15 => enum_map! {
+            SpotId::Amagi__West_Lake__West_15 => 1000,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 701,
+            SpotId::Ebih__Vertical_Interchange__East_15 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Below_Door => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Refill_Station => 1000,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 1000,
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 0,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => 526,
+            SpotId::Ebih__Vertical_Interchange__Switch => 500,
+            SpotId::Ebih__Vertical_Interchange__South => 600,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 600,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => 0,
+            SpotId::Ebih__Vertical_Interchange__Switch => 701,
+            SpotId::Ebih__Vertical_Interchange__South => 400,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__Switch => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 1000,
+            SpotId::Ebih__Vertical_Interchange__Switch => 0,
+            SpotId::Ebih__Vertical_Interchange__South => 350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Ebih__Vertical_Interchange__South => enum_map! {
+            SpotId::Ebih__Vertical_Interchange__Below_Door => 1000,
+            SpotId::Ebih__Vertical_Interchange__Switch => 600,
+            SpotId::Ebih__Vertical_Interchange__South => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10318,6 +11019,18 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
+        SpotId::Giguna__West_Caverns__Northwest => enum_map! {
+            SpotId::Giguna__West_Caverns__Northwest => 0,
+            SpotId::Giguna__West_Caverns__West_13 => 3200,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__West_Caverns__West_13 => enum_map! {
+            SpotId::Giguna__West_Caverns__West_13 => 0,
+            SpotId::Giguna__Far_Corner__East_13 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
         SpotId::Giguna__Wasteland__West_12 => enum_map! {
             SpotId::Giguna__West_Caverns__East_12 => 1350,
             SpotId::Giguna__Wasteland__West_12 => 0,
@@ -10381,6 +11094,146 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Wasteland__Lower_Path_Left => 1228,
             SpotId::Giguna__Wasteland__West_14 => 0,
             SpotId::Giguna__Giguna_Base__East_14 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__East_12 => enum_map! {
+            SpotId::Giguna__Wasteland__East_12 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__East_13 => enum_map! {
+            SpotId::Giguna__Wasteland__East_13 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__East_14 => enum_map! {
+            SpotId::Giguna__Wasteland__East_14 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__East_Ledge => enum_map! {
+            SpotId::Giguna__Wasteland__East_Ledge => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Door_Left => enum_map! {
+            SpotId::Giguna__Wasteland__Door_Left => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Door_Right => enum_map! {
+            SpotId::Giguna__Wasteland__Door_Right => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Bluff_by_Door => enum_map! {
+            SpotId::Giguna__Wasteland__Bluff_by_Door => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Tiny_Hill => enum_map! {
+            SpotId::Giguna__Wasteland__Tiny_Hill => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Steeper_Hill => enum_map! {
+            SpotId::Giguna__Wasteland__Steeper_Hill => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Center_Plains => enum_map! {
+            SpotId::Giguna__Wasteland__Center_Plains => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__West_Plains => enum_map! {
+            SpotId::Giguna__Wasteland__West_Plains => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Passage_East => enum_map! {
+            SpotId::Giguna__Wasteland__Passage_East => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Passage_Cache => enum_map! {
+            SpotId::Giguna__Wasteland__Passage_Cache => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Westward_Hill => enum_map! {
+            SpotId::Giguna__Wasteland__Westward_Hill => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Upper_Cache => enum_map! {
+            SpotId::Giguna__Wasteland__Upper_Cache => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Cache_Ledge => enum_map! {
+            SpotId::Giguna__Wasteland__Cache_Ledge => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Left_Platform_West => enum_map! {
+            SpotId::Giguna__Wasteland__Left_Platform_West => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Left_Platform_East => enum_map! {
+            SpotId::Giguna__Wasteland__Left_Platform_East => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Center_Platform_West => enum_map! {
+            SpotId::Giguna__Wasteland__Center_Platform_West => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Center_Platform_East => enum_map! {
+            SpotId::Giguna__Wasteland__Center_Platform_East => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Right_Platform_West => enum_map! {
+            SpotId::Giguna__Wasteland__Right_Platform_West => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Right_Platform_East => enum_map! {
+            SpotId::Giguna__Wasteland__Right_Platform_East => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Lower_Platform_West => enum_map! {
+            SpotId::Giguna__Wasteland__Lower_Platform_West => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Lower_Platform_East => enum_map! {
+            SpotId::Giguna__Wasteland__Lower_Platform_East => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Ladder_Ledge => enum_map! {
+            SpotId::Giguna__Wasteland__Ladder_Ledge => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Switch_Ledge => enum_map! {
+            SpotId::Giguna__Wasteland__Switch_Ledge => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Switch_Approach => enum_map! {
+            SpotId::Giguna__Wasteland__Switch_Approach => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Wasteland__Switch => enum_map! {
+            SpotId::Giguna__Wasteland__Switch => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10695,11 +11548,29 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
+        SpotId::Giguna__Ruins_West__Rooftop_East_Edge => enum_map! {
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge => 0,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_West__Rooftop_West_Edge => enum_map! {
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge => 0,
+            SpotId::Giguna__Ruins_West__West_7 => 899,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_West__West_7 => enum_map! {
+            SpotId::Giguna__Ruins_West__West_7 => 0,
+            SpotId::Giguna__West_Tower__East_7 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
         SpotId::Giguna__Ruins_Top__West_7 => enum_map! {
             SpotId::Giguna__Ruins_West__East_7 => 1350,
             SpotId::Giguna__Ruins_Top__West_7 => 0,
             SpotId::Giguna__Ruins_Top__West_Door => 877,
-            SpotId::Giguna__Ruins_Top__West_Tower => 2250,
+            SpotId::Giguna__Ruins_Top__West_Pillar => 2250,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10710,9 +11581,9 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
-        SpotId::Giguna__Ruins_Top__West_Tower => enum_map! {
+        SpotId::Giguna__Ruins_Top__West_Pillar => enum_map! {
             SpotId::Giguna__Ruins_Top__West_7 => 877,
-            SpotId::Giguna__Ruins_Top__West_Tower => 0,
+            SpotId::Giguna__Ruins_Top__West_Pillar => 0,
             SpotId::Giguna__Ruins_Top__Entryway => 799,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -10786,6 +11657,88 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Giguna__Ruins_Top__Save_Point => enum_map! {
             SpotId::Giguna__Ruins_Top__Save_Point => 0,
+            SpotId::Giguna__Ruins_Top__Switch => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Switch => enum_map! {
+            SpotId::Giguna__Ruins_Top__Save_Point => 701,
+            SpotId::Giguna__Ruins_Top__Switch => 0,
+            SpotId::Giguna__Ruins_Top__Rooftop_West => 1799,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => 2400,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Rooftop_West => enum_map! {
+            SpotId::Giguna__Ruins_Top__Switch => 350,
+            SpotId::Giguna__Ruins_Top__Rooftop_West => 0,
+            SpotId::Giguna__Ruins_Top__Rooftop_East => 1754,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Rooftop_East => enum_map! {
+            SpotId::Giguna__Ruins_Top__Rooftop_West => 1754,
+            SpotId::Giguna__Ruins_Top__Rooftop_East => 0,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => 701,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Rooftop_Gutter => enum_map! {
+            SpotId::Giguna__Ruins_Top__Rooftop_East => 1200,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Turret_Balcony_East => enum_map! {
+            SpotId::Giguna__Ruins_Top__Switch => 701,
+            SpotId::Giguna__Ruins_Top__Rooftop_West => 1052,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => 0,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => 1754,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Ruins_Top__Turret_Balcony_West => enum_map! {
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge => 3800,
+            SpotId::Giguna__Ruins_Top__West_7 => 1500,
+            SpotId::Giguna__Ruins_Top__West_Pillar => 799,
+            SpotId::Giguna__Ruins_Top__Entryway => 1599,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__West_Tower__East_7 => enum_map! {
+            SpotId::Giguna__West_Tower__East_7 => 0,
+            SpotId::Giguna__West_Tower__Top => 1578,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__West_Tower__Top => enum_map! {
+            SpotId::Giguna__West_Tower__Top => 0,
+            SpotId::Giguna__West_Tower__Southwest => 1800,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__West_Tower__Southwest => enum_map! {
+            SpotId::Giguna__West_Caverns__Northwest => 1000,
+            SpotId::Giguna__West_Tower__Southwest => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Far_Corner__East_13 => enum_map! {
+            SpotId::Giguna__Far_Corner__East_13 => 0,
+            SpotId::Giguna__Far_Corner__Grass => 1578,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Far_Corner__Grass => enum_map! {
+            SpotId::Giguna__Far_Corner__Grass => 0,
+            SpotId::Giguna__Far_Corner__South => 350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Far_Corner__South => enum_map! {
+            SpotId::Giguna__Far_Corner__South => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12458,6 +13411,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => 2807,
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__West_15) => 0,
+        (SpotId::Amagi__West_Lake__West_15, SpotId::Ebih__Vertical_Interchange__East_15) => 1000,
         (SpotId::Amagi__West_Lake__West_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Helipad) => 0,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
@@ -13029,6 +13983,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => 600,
         (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__West_11) => 0,
+        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Ebih_West__East_11) => 1350,
         (SpotId::Ebih__Waterfall__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -13337,7 +14292,46 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Gap) => 1000,
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => 701,
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Hill) => 0,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => 1052,
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => 1200,
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => 0,
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Platform) => 800,
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Cliff) => 3599,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Platform) => 0,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => 350,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => 1929,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => 4736,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => 1200,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Save) => 0,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => 1578,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => 5087,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => 1403,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => 750,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_High_Cliff) => 0,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => 877,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => 877,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_Fork) => 0,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => 1200,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => 1052,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => 1052,
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_11) => 0,
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__West_12, SpotId::Ebih__Ebih_West__West_Fork) => 4800,
+        (SpotId::Ebih__Ebih_West__West_12, SpotId::Ebih__Ebih_West__West_12) => 0,
+        (SpotId::Ebih__Ebih_West__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => 1578,
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__West_13) => 0,
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => 5087,
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__East_13) => 0,
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Vertical_Interchange__West_13) => 1350,
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Waterfall__Cave_Entrance) => 250,
         (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Cave__Entry) => 0,
         (SpotId::Ebih__Cave__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -13730,6 +14724,360 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Observation_Tower_Room__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Ebih__Vertical_Interchange__West_13, SpotId::Ebih__Ebih_West__East_13) => 1350,
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 701,
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 1052,
+        (SpotId::Ebih__Vertical_Interchange__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 701,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 1200,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 1929,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => 1052,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 350,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Door,
+        ) => 526,
+        (SpotId::Ebih__Vertical_Interchange__Door_West, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__Door,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 526,
+        (SpotId::Ebih__Vertical_Interchange__Door, SpotId::Ebih__Vertical_Interchange__Door) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door,
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+        ) => 526,
+        (SpotId::Ebih__Vertical_Interchange__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Door,
+        ) => 526,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 526,
+        (SpotId::Ebih__Vertical_Interchange__Door_East, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => 1929,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => 600,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 400,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 526,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 500,
+        (SpotId::Ebih__Vertical_Interchange__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => 3000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => 3000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => 2280,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => 2280,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => 950,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => 5399,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+        ) => 526,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+        ) => 526,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => 1799,
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 399,
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => 1200,
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 1052,
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 500,
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => 350,
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+        ) => 1403,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 799,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 1299,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+        ) => 1052,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+        ) => 1052,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+        ) => 3599,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => 701,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 701,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (SpotId::Ebih__Vertical_Interchange__East_15, SpotId::Amagi__West_Lake__West_15) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => 701,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => 0,
+        (SpotId::Ebih__Vertical_Interchange__East_15, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => 526,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 500,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 600,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 600,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => 0,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 701,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => 400,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 1000,
+        (
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => 0,
+        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Ebih__Vertical_Interchange__South) => {
+            350
+        }
+        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__South,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => 1000,
+        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__Switch) => {
+            600
+        }
+        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__South) => 0,
+        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__Save_Point) => 0,
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
             3508
@@ -14791,6 +16139,12 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__West_Caverns__East_13, SpotId::Giguna__West_Caverns__East_13) => 0,
         (SpotId::Giguna__West_Caverns__East_13, SpotId::Giguna__Wasteland__West_13) => 1350,
         (SpotId::Giguna__West_Caverns__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__Northwest) => 0,
+        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__West_13) => 3200,
+        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__West_Caverns__West_13, SpotId::Giguna__West_Caverns__West_13) => 0,
+        (SpotId::Giguna__West_Caverns__West_13, SpotId::Giguna__Far_Corner__East_13) => 1350,
+        (SpotId::Giguna__West_Caverns__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__West_Caverns__East_12) => 1350,
         (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__West_12) => 0,
         (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => 877,
@@ -14852,6 +16206,113 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__West_14) => 0,
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Giguna_Base__East_14) => 1350,
         (SpotId::Giguna__Wasteland__West_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_12) => 0,
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__East_13) => 0,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__East_14) => 0,
+        (SpotId::Giguna__Wasteland__East_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_Ledge) => 0,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Door_Left) => 0,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__Door_Right) => 0,
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Bluff_by_Door) => 0,
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Tiny_Hill) => 0,
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Steeper_Hill) => 0,
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Center_Plains) => 0,
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__West_Plains) => 0,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__Passage_East) => 0,
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Giguna__Wasteland__Passage_Cache) => 0,
+        (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Westward_Hill) => 0,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Upper_Cache, SpotId::Giguna__Wasteland__Upper_Cache) => 0,
+        (SpotId::Giguna__Wasteland__Upper_Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Cache_Ledge, SpotId::Giguna__Wasteland__Cache_Ledge) => 0,
+        (SpotId::Giguna__Wasteland__Cache_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Left_Platform_West,
+            SpotId::Giguna__Wasteland__Left_Platform_West,
+        ) => 0,
+        (SpotId::Giguna__Wasteland__Left_Platform_West, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna__Wasteland__Left_Platform_East,
+            SpotId::Giguna__Wasteland__Left_Platform_East,
+        ) => 0,
+        (SpotId::Giguna__Wasteland__Left_Platform_East, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_West,
+            SpotId::Giguna__Wasteland__Center_Platform_West,
+        ) => 0,
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_East,
+            SpotId::Giguna__Wasteland__Center_Platform_East,
+        ) => 0,
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_West,
+            SpotId::Giguna__Wasteland__Right_Platform_West,
+        ) => 0,
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_East,
+            SpotId::Giguna__Wasteland__Right_Platform_East,
+        ) => 0,
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_West,
+            SpotId::Giguna__Wasteland__Lower_Platform_West,
+        ) => 0,
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_East,
+            SpotId::Giguna__Wasteland__Lower_Platform_East,
+        ) => 0,
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (SpotId::Giguna__Wasteland__Ladder_Ledge, SpotId::Giguna__Wasteland__Ladder_Ledge) => 0,
+        (SpotId::Giguna__Wasteland__Ladder_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Switch_Ledge, SpotId::Giguna__Wasteland__Switch_Ledge) => 0,
+        (SpotId::Giguna__Wasteland__Switch_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Wasteland__Switch_Approach,
+            SpotId::Giguna__Wasteland__Switch_Approach,
+        ) => 0,
+        (SpotId::Giguna__Wasteland__Switch_Approach, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (SpotId::Giguna__Wasteland__Switch, SpotId::Giguna__Wasteland__Switch) => 0,
+        (SpotId::Giguna__Wasteland__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Wasteland__West_14) => 1350,
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__East_14) => 0,
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => 1578,
@@ -15137,19 +16598,41 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_West__East_7) => 0,
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_Top__West_7) => 1350,
         (SpotId::Giguna__Ruins_West__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+        ) => 0,
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => 1052,
+        (SpotId::Giguna__Ruins_West__Rooftop_East_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => 0,
+        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => 899,
+        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (SpotId::Giguna__Ruins_West__West_7, SpotId::Giguna__Ruins_West__West_7) => 0,
+        (SpotId::Giguna__Ruins_West__West_7, SpotId::Giguna__West_Tower__East_7) => 1350,
+        (SpotId::Giguna__Ruins_West__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_West__East_7) => 1350,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_7) => 0,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Door) => 877,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Tower) => 2250,
+        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Pillar) => 2250,
         (SpotId::Giguna__Ruins_Top__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_7) => 877,
         (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_Door) => 0,
         (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__Entryway) => 526,
         (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => 877,
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_Tower) => 0,
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => 799,
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => 877,
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_Pillar) => 0,
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => 799,
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__West_Door) => 1200,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Entryway) => 0,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => 2982,
@@ -15193,7 +16676,84 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_7) => 0,
         (SpotId::Giguna__Ruins_Top__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Save_Point) => 0,
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 701,
         (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 701,
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Switch) => 0,
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Rooftop_West) => 1799,
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Turret_Balcony_East) => 2400,
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => 350,
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_West) => 0,
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_East) => 1754,
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        ) => 1052,
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => 1754,
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_East) => 0,
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => 701,
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
+            1200
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => 0,
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => 701,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+        ) => 1052,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        ) => 0,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => 1754,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+        ) => 3800,
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => 1500,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+        ) => 799,
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
+            1599
+        }
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => 0,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__East_7) => 0,
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1578,
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Top) => 0,
+        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
+        (SpotId::Giguna__West_Tower__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__West_Tower__Southwest, SpotId::Giguna__West_Caverns__Northwest) => 1000,
+        (SpotId::Giguna__West_Tower__Southwest, SpotId::Giguna__West_Tower__Southwest) => 0,
+        (SpotId::Giguna__West_Tower__Southwest, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__East_13) => 0,
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__Grass) => 0,
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Far_Corner__South, SpotId::Giguna__Far_Corner__South) => 0,
+        (SpotId::Giguna__Far_Corner__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -17098,6 +18658,24 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => true,
         (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => true,
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Platform) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => true,
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => true,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => true,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => true,
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => true,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => true,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => true,
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => true,
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => true,
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => true,
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => true,
         (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => true,
         (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => true,
         (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => true,
@@ -17342,6 +18920,112 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Ebih__Observation_Tower_Room__Cliff,
         ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => true,
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => true,
+        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Ebih__Vertical_Interchange__South) => {
+            true
+        }
+        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__Switch) => {
+            true
+        }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
             true
         }
@@ -17803,6 +19487,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         }
         (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__East_13) => true,
         (SpotId::Giguna__West_Caverns__East_12, SpotId::Giguna__West_Caverns__East_Susar) => true,
+        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__West_13) => true,
         (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => true,
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => true,
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_13) => true,
@@ -17967,8 +19652,13 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Lower_Ledge) => true,
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => true,
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => true,
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => true,
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => true,
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => true,
+        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => true,
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => true,
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => true,
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => true,
         (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => true,
         (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => true,
@@ -17981,6 +19671,34 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         }
         (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => true,
         (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => true,
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => true,
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => true,
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => true,
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_East) => true,
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => true,
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => {
+            true
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
+            true
+        }
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => true,
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => true,
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+        ) => true,
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
+            true
+        }
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => true,
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => true,
+        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => true,
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => true,
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -20779,6 +22497,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__West_15,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            1000,
+        ),
+        (
+            SpotId::Amagi__West_Lake__West_15,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -22716,6 +24439,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__West_11,
+            SpotId::Ebih__Ebih_West__East_11,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Waterfall__West_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -23966,6 +25694,201 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Hill,
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            1200,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            800,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            3599,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Ebih__Ebih_West__West_13,
+            1929,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Ebih__Ebih_West__East_13,
+            4736,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            SpotId::Ebih__Ebih_West__Lower_Platform,
+            1200,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            SpotId::Ebih__Ebih_West__West_13,
+            1578,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            SpotId::Ebih__Ebih_West__East_13,
+            5087,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Hill,
+            1403,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__Lower_Cliff,
+            750,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Ebih__Ebih_West__West_Fork,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_Fork,
+            SpotId::Ebih__Ebih_West__West_High_Cliff,
+            877,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_Fork,
+            SpotId::Ebih__Ebih_West__West_Fork,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_Fork,
+            SpotId::Ebih__Ebih_West__West_11,
+            1200,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_Fork,
+            SpotId::Ebih__Ebih_West__West_12,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_Fork,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_11,
+            SpotId::Ebih__Ebih_West__West_Fork,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_11,
+            SpotId::Ebih__Ebih_West__West_11,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_12,
+            SpotId::Ebih__Ebih_West__West_Fork,
+            4800,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_12,
+            SpotId::Ebih__Ebih_West__West_12,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_12,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_13,
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            1578,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_13,
+            SpotId::Ebih__Ebih_West__West_13,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_13,
+            SpotId::Ebih__Ebih_West__Lower_Save,
+            5087,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_13,
+            SpotId::Ebih__Ebih_West__East_13,
+            0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_13,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__East_13,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25282,6 +27205,481 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__East_11,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Ebih_West__East_13,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            701,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            701,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            1200,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            1929,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            350,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Door,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door,
+            SpotId::Ebih__Vertical_Interchange__Door,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door,
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Door,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            1929,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            600,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            400,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            500,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            3000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            3000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            2280,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            2280,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            950,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            5399,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            1799,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            399,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+            1200,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            500,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            350,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            1403,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            799,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            1299,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            1052,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            3599,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            701,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            701,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Amagi__West_Lake__West_15,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            701,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Refill_Station,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            526,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            500,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+            600,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            600,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            701,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+            400,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Ebih__Vertical_Interchange__South,
+            350,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__South,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            1000,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__South,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+            600,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__South,
+            SpotId::Ebih__Vertical_Interchange__South,
+            0,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__South,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27601,6 +29999,36 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Giguna__West_Caverns__Northwest,
+            SpotId::Giguna__West_Caverns__Northwest,
+            0,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__Northwest,
+            SpotId::Giguna__West_Caverns__West_13,
+            3200,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__Northwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__West_13,
+            SpotId::Giguna__West_Caverns__West_13,
+            0,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__West_13,
+            SpotId::Giguna__Far_Corner__East_13,
+            1350,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__West_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Giguna__Wasteland__West_12,
             SpotId::Giguna__West_Caverns__East_12,
             1350,
@@ -27792,6 +30220,286 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__West_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_12,
+            SpotId::Giguna__Wasteland__East_12,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_12,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_13,
+            SpotId::Giguna__Wasteland__East_13,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_14,
+            SpotId::Giguna__Wasteland__East_14,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__East_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Giguna__Wasteland__Door_Left,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Right,
+            SpotId::Giguna__Wasteland__Door_Right,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Plains,
+            SpotId::Giguna__Wasteland__Center_Plains,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Plains,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__West_Plains,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_East,
+            SpotId::Giguna__Wasteland__Passage_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_Cache,
+            SpotId::Giguna__Wasteland__Passage_Cache,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Upper_Cache,
+            SpotId::Giguna__Wasteland__Upper_Cache,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Upper_Cache,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Cache_Ledge,
+            SpotId::Giguna__Wasteland__Cache_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Cache_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Left_Platform_West,
+            SpotId::Giguna__Wasteland__Left_Platform_West,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Left_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Left_Platform_East,
+            SpotId::Giguna__Wasteland__Left_Platform_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Left_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_West,
+            SpotId::Giguna__Wasteland__Center_Platform_West,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_East,
+            SpotId::Giguna__Wasteland__Center_Platform_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_West,
+            SpotId::Giguna__Wasteland__Right_Platform_West,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_East,
+            SpotId::Giguna__Wasteland__Right_Platform_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Right_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_West,
+            SpotId::Giguna__Wasteland__Lower_Platform_West,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_East,
+            SpotId::Giguna__Wasteland__Lower_Platform_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Lower_Platform_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Ladder_Ledge,
+            SpotId::Giguna__Wasteland__Ladder_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Ladder_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Switch_Ledge,
+            SpotId::Giguna__Wasteland__Switch_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Switch_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Switch_Approach,
+            SpotId::Giguna__Wasteland__Switch_Approach,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Switch_Approach,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Switch,
+            SpotId::Giguna__Wasteland__Switch,
+            0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Switch,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28721,6 +31429,51 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            SpotId::Giguna__Ruins_West__West_7,
+            899,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__West_7,
+            SpotId::Giguna__Ruins_West__West_7,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__West_7,
+            SpotId::Giguna__West_Tower__East_7,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Ruins_West__West_7,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Giguna__Ruins_Top__West_7,
             SpotId::Giguna__Ruins_West__East_7,
             1350,
@@ -28737,7 +31490,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__West_7,
-            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
             2250,
         ),
         (
@@ -28766,22 +31519,22 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
             SpotId::Giguna__Ruins_Top__West_7,
             877,
         ),
         (
-            SpotId::Giguna__Ruins_Top__West_Tower,
-            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
             0,
         ),
         (
-            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
             SpotId::Giguna__Ruins_Top__Entryway,
             799,
         ),
         (
-            SpotId::Giguna__Ruins_Top__West_Tower,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28992,6 +31745,236 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Giguna__Ruins_Top__Switch,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Switch,
+            SpotId::Giguna__Ruins_Top__Save_Point,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Switch,
+            SpotId::Giguna__Ruins_Top__Switch,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Switch,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Switch,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            2400,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Switch,
+            350,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            SpotId::Giguna__Ruins_Top__Rooftop_East,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Switch,
+            701,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Rooftop_West,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            3800,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_7,
+            1500,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+            799,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__Entryway,
+            1599,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            0,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__West_Tower__East_7,
+            SpotId::Giguna__West_Tower__East_7,
+            0,
+        ),
+        (
+            SpotId::Giguna__West_Tower__East_7,
+            SpotId::Giguna__West_Tower__Top,
+            1578,
+        ),
+        (
+            SpotId::Giguna__West_Tower__East_7,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__West_Tower__Top,
+            SpotId::Giguna__West_Tower__Top,
+            0,
+        ),
+        (
+            SpotId::Giguna__West_Tower__Top,
+            SpotId::Giguna__West_Tower__Southwest,
+            1800,
+        ),
+        (
+            SpotId::Giguna__West_Tower__Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__West_Tower__Southwest,
+            SpotId::Giguna__West_Caverns__Northwest,
+            1000,
+        ),
+        (
+            SpotId::Giguna__West_Tower__Southwest,
+            SpotId::Giguna__West_Tower__Southwest,
+            0,
+        ),
+        (
+            SpotId::Giguna__West_Tower__Southwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__East_13,
+            SpotId::Giguna__Far_Corner__East_13,
+            0,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__East_13,
+            SpotId::Giguna__Far_Corner__Grass,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__East_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__Grass,
+            SpotId::Giguna__Far_Corner__Grass,
+            0,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__Grass,
+            SpotId::Giguna__Far_Corner__South,
+            350,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__Grass,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__South,
+            SpotId::Giguna__Far_Corner__South,
+            0,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__South,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -32143,6 +35126,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => Some(1578),
         (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => Some(877),
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => Some(5087),
         (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => Some(1228),
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => Some(526),
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => Some(1300),
@@ -32170,7 +35154,20 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => {
             Some(1200)
         }
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => Some(1200),
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            Some(800)
+        }
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => Some(701),
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => Some(1052),
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => Some(4736),
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => Some(350),
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => Some(1929),
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => Some(5087),
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            Some(1200)
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => Some(1578),
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             Some(3050)
         }
@@ -32215,6 +35212,18 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1200)
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => Some(1450),
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => Some(1052),
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => Some(1578),
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => Some(1200),
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => Some(1052),
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => Some(877),
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => {
+            Some(750)
+        }
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            Some(1403)
+        }
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => Some(877),
         (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => Some(1403),
         (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => Some(1403),
         (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => Some(1578),
@@ -32369,6 +35378,108 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(2456),
         (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => Some(350),
         (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => Some(350),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => Some(526),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => Some(600),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => Some(500),
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => Some(350),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => Some(1052),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => Some(799),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => Some(526),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => Some(350),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => Some(1052),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => Some(500),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => Some(526),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => Some(701),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => Some(701),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => Some(600),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => Some(400),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => Some(701),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => Some(2280),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => Some(950),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => Some(2280),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => Some(600),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => Some(400),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => Some(701),
+        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__Switch) => {
+            Some(600)
+        }
+        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Ebih__Vertical_Interchange__South) => {
+            Some(350)
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => Some(1052),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => Some(701),
         (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => {
             Some(1052)
         }
@@ -32899,6 +36010,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
             Some(1052)
         }
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => Some(1578),
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => Some(350),
         (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => {
             Some(1052)
         }
@@ -33132,16 +36245,48 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => Some(877),
         (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => Some(2982),
         (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => {
+            Some(1754)
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
+            Some(1200)
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
+            Some(1754)
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => Some(350),
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => Some(701),
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => Some(877),
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             Some(299)
         }
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => {
+            Some(701)
+        }
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => Some(1754),
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
+            Some(1599)
+        }
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => {
+            Some(1500)
+        }
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+        ) => Some(799),
         (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => Some(701),
         (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => {
             Some(526)
         }
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => Some(799),
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => Some(877),
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => Some(799),
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => Some(877),
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Platform) => Some(1578),
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Save_Point) => Some(1578),
         (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Nook) => Some(599),
@@ -33152,6 +36297,13 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__East_9) => Some(1578),
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Nook) => Some(1200),
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => Some(399),
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => Some(1052),
+        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => {
+            Some(899)
+        }
         (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__East_9) => Some(1578),
         (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__Platform) => {
             Some(1200)
@@ -33275,6 +36427,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => Some(1578),
+        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__West_13) => {
+            Some(3200)
+        }
         (
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
@@ -33301,6 +36456,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__East_Susar) => {
             Some(350)
         }
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => Some(1578),
+        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => Some(1800),
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             Some(1929)
         }
@@ -35067,6 +38224,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => {
             (Some(877), vec![])
         }
+        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => {
+            (Some(5087), vec![])
+        }
         (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
             (Some(1228), vec![])
         }
@@ -35114,8 +38274,35 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => {
             (Some(1200), vec![])
         }
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            (Some(800), vec![])
+        }
         (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             (Some(701), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => {
+            (Some(4736), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => {
+            (Some(5087), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => {
+            (Some(1578), vec![])
         }
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             (Some(3050), vec![])
@@ -35186,6 +38373,30 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
             (Some(1450), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => {
+            (Some(750), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
+            (Some(877), vec![])
         }
         (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => (Some(1403), vec![]),
         (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => (Some(1403), vec![]),
@@ -35373,6 +38584,108 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
             (Some(350), vec![])
         }
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => (Some(799), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_East,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => (Some(350), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => (Some(500), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_15,
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
+            SpotId::Ebih__Vertical_Interchange__East_15,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Below_Door,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__South,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
+            SpotId::Ebih__Vertical_Interchange__Switch,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+        ) => (Some(2280), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
+        ) => (Some(950), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => (Some(2280), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_East,
+            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
+        ) => (Some(400), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+            SpotId::Ebih__Vertical_Interchange__West_13,
+        ) => (Some(701), vec![]),
+        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__Switch) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Ebih__Vertical_Interchange__South) => {
+            (Some(350), vec![])
+        }
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Door_West,
+        ) => (Some(1052), vec![]),
+        (
+            SpotId::Ebih__Vertical_Interchange__West_13,
+            SpotId::Ebih__Vertical_Interchange__Passage_West,
+        ) => (Some(701), vec![]),
         (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => {
             (Some(1052), vec![])
         }
@@ -35991,6 +39304,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
             (Some(1052), vec![])
         }
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => {
+            (Some(350), vec![])
+        }
         (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => {
             (Some(1052), vec![])
         }
@@ -36284,22 +39603,60 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => {
             (Some(701), vec![])
         }
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => {
+            (Some(701), vec![])
+        }
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => {
             (Some(877), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             (Some(299), vec![])
         }
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ) => (Some(1754), vec![]),
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
+            (Some(1599), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => {
+            (Some(1500), vec![])
+        }
+        (
+            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+            SpotId::Giguna__Ruins_Top__West_Pillar,
+        ) => (Some(799), vec![]),
         (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => {
             (Some(701), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => {
             (Some(526), vec![])
         }
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__Entryway) => {
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => {
             (Some(799), vec![])
         }
-        (SpotId::Giguna__Ruins_Top__West_Tower, SpotId::Giguna__Ruins_Top__West_7) => {
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => {
             (Some(877), vec![])
         }
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Platform) => {
@@ -36325,6 +39682,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => {
             (Some(399), vec![])
+        }
+        (
+            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        ) => (Some(1052), vec![]),
+        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => {
+            (Some(899), vec![])
         }
         (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__East_9) => {
             (Some(1578), vec![])
@@ -36467,6 +39831,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => (Some(1578), vec![]),
+        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__West_13) => {
+            (Some(3200), vec![])
+        }
         (
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
@@ -36492,6 +39859,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__East_Susar) => {
             (Some(350), vec![])
+        }
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => {
+            (Some(1800), vec![])
         }
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             (Some(1929), vec![])

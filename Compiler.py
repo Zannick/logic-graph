@@ -665,10 +665,14 @@ class GameLogic(object):
             for sp1, sp2 in itertools.permutations(a['spots'], 2):
                 if 'coord' not in sp1 or 'local' not in sp1:
                     continue
+                if sp1['name'] not in spot_errors and any(link.get('to') is None for link in sp1['local']):
+                    spot_errors.add(sp1['name'])
+                    self._errors.append(f'Expected "to:" in all local movement for spot {sp1["fullname"]}')
+                    continue
                 if 'coord' not in sp2:
                     if sp2['name'] not in spot_errors and any(link["to"] == sp2['name'] for link in sp1['local']):
                         spot_errors.add(sp2['name'])
-                        self._errors.append(f'Expected coord for spot {sp["fullname"]} used in local rules')
+                        self._errors.append(f'Expected coord for spot {sp2["fullname"]} used in local rules')
                     continue
                 coords, jumps, jumps_down, jmvmt = self.spot_distance(sp1, sp2)
                 if not coords:

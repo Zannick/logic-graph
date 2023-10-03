@@ -501,6 +501,9 @@ areas:
         - to: West 13
     - name: West 13
       coord: [12.05, 12.3]
+      exits:
+        - to: Far Corner > East 13
+          tags: [xshift]
 
 - name: Wasteland
   on_entry: $reset_old_area(^newpos)
@@ -1068,10 +1071,19 @@ areas:
     
     - name: Rooftop East Edge
       coord: [13.6, 5.7]
+      local:
+        - to: Rooftop West Edge
+          jumps: 1
+        # I mean... we *could* jump back down, but why?
     - name: Rooftop West Edge
       coord: [13.3, 5.4]
+      local:
+        - to: West 7
     - name: West 7
       coord: [13.05, 6.3]
+      exits:
+        - to: West Tower > East 7
+          tags: [xshift]
 
 - name: Ruins Top
   on_entry: $reset_old_area(^newpos)
@@ -1087,7 +1099,7 @@ areas:
           req: ^_doors_open
           movement: base
           jumps: 1
-        - to: West Tower
+        - to: West Pillar
           req: $grab or $climb
           time: 2.25
     - name: West Door
@@ -1099,7 +1111,7 @@ areas:
         - to: Entryway
           req: ^_doors_open
           movement: base
-    - name: West Tower
+    - name: West Pillar
       coord: [14.3, 6.0]
       local:
         - to: West 7
@@ -1204,35 +1216,113 @@ areas:
     # post-breach
     - name: Save Point
       coord: [14.8, 5.7]
+      local:
+        - to: Switch
+          jumps: 1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+      # TODO: move through the small passage with the drone
     - name: Switch
       coord: [15.0, 5.5]
+      local:
+        - to: Save Point
+      actions:
+        - name: Open Doors
+          req: $open
+          do: ^_doors_open = true
+          tags: [hack]
+      exits:
+        - to: Rooftop West
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Turret Balcony East
+          req: $grab
+          movement: base
+          jumps: 4
     - name: Rooftop West
       coord: [15.1, 5.2]
+      local:
+        - to: Switch
+        - to: Rooftop East
+      exits:
+        - to: Turret Balcony East
+          req: $grab
+          movement: base
+          jumps: 2
     - name: Rooftop East
       coord: [15.6, 5.2]
+      local:
+        - to: Rooftop West
+        - to: Rooftop Gutter
+      # TODO: Movement to the high flask
     - name: Rooftop Gutter
       coord: [15.8, 5.6]
+      local:
+        - to: Rooftop East
+          jumps: 2
+      # TODO: movement to the high flask and the pillar
     - name: Turret Balcony East
       coord: [14.8, 5.2]
+      local:
+        - to: Turret Balcony West
+        - to: Switch
+      exits:
+        - to: Rooftop West
+          req: $grab
+          movement: base
+          jumps: 2
     - name: Turret Balcony West
       coord: [14.3, 5.2]
+      local:
+        - to: West Pillar
+        - to: Entryway
+        - to: West 7
+      actions:
+        - name: Throw Drone onto Tower
+          req: $grab and $can_deploy
+          do: $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
+          to: Giguna > Ruins West > Rooftop East Edge
+          time: 3.8
+          tags: [xshift]
     
 - name: West Tower
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 7
       coord: [12.95, 6.3]
+      local:
+        - to: Top
     - name: Top
       coord: [12.5, 7.1]
+      local:
+        - to: Southwest
+      locations:
+        - name: Tablet
+          item: The_Ideal_Kiengir
+          tags: [standing]
     - name: Southwest
       coord: [12.3, 8.9]
+      exits:
+        - to: West Caverns > Northwest
+          tags: [yshift]
 
 - name: Far Corner
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 13
       coord: [11.95, 12.3]
+      local:
+        - to: Grass
     - name: Grass
       coord: [11.5, 12.8]
+      local:
+        - to: South
+      locations:
+        - name: Obscured Item
+          item: Flask
+          tags: [flask]
     - name: South
       coord: [11.4, 12.9]

@@ -77,6 +77,7 @@ pub enum Expectation {
     EbihEbihEastCtxPlatform1Moved(bool),
     EbihEbihEastCtxPlatform2Moved(bool),
     EbihDroneRoomCtxPlatformMoved(bool),
+    EbihVerticalInterchangeCtxDoorOpen(bool),
     GigunaBreachSwSaveCtxDoorOpened(bool),
     GigunaGigunaNortheastCtxDoorOpened(bool),
     GigunaCarnelianCtxDoorOpened(bool),
@@ -103,6 +104,8 @@ pub enum Expectation {
     DroneHover(bool),
     DroneMeleeDamage(i8),
     DroneMeleeSpeed(i8),
+    EbihInterchangeBlock(bool),
+    EbihInterchangeGate(bool),
     EbihWaterfallBlockLeft(bool),
     EbihWaterfallBlockRight(bool),
     EbihWaterfallWall(bool),
@@ -334,64 +337,67 @@ pub mod flags {
             const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 1 << 5;
             const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 1 << 6;
             const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 1 << 7;
-            const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 1 << 8;
-            const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 1 << 9;
-            const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 10;
-            const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 11;
-            const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 12;
-            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 13;
-            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 14;
-            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 15;
-            const BOOMERANG_STEERING = 1 << 16;
-            const MAJOR_GLITCHES = 1 << 17;
-            const MINOR_GLITCHES = 1 << 18;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 19;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 20;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 21;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 22;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 23;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 24;
-            const AMASHILAMA = 1 << 25;
-            const ANUMAN = 1 << 26;
-            const APOCALYPSE_BOMB = 1 << 27;
-            const BOOMERANG = 1 << 28;
-            const COMPANIES_LAYOFF = 1 << 29;
-            const DEAR_ERNEST = 1 << 30;
-            const DEFEAT_EBIH_ALU = 1 << 31;
+            const EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN = 1 << 8;
+            const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 1 << 9;
+            const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 1 << 10;
+            const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 1 << 11;
+            const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 12;
+            const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 13;
+            const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 14;
+            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 15;
+            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 16;
+            const BOOMERANG_STEERING = 1 << 17;
+            const MAJOR_GLITCHES = 1 << 18;
+            const MINOR_GLITCHES = 1 << 19;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 20;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 21;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 22;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 23;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 24;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 25;
+            const AMASHILAMA = 1 << 26;
+            const ANUMAN = 1 << 27;
+            const APOCALYPSE_BOMB = 1 << 28;
+            const BOOMERANG = 1 << 29;
+            const COMPANIES_LAYOFF = 1 << 30;
+            const DEAR_ERNEST = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const DEFEAT_MUS_A_M20 = 1 << 0;
-            const DRONE_HOVER = 1 << 1;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 2;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 3;
-            const EBIH_WATERFALL_WALL = 1 << 4;
-            const EBIH_WEST_BLOCK = 1 << 5;
-            const FAST_TRAVEL = 1 << 6;
-            const GIGUNA_NORTHEAST_GATE = 1 << 7;
-            const HERETICS_TABLET = 1 << 8;
-            const ICE_AXE = 1 << 9;
-            const INFECTION_SPEED = 1 << 10;
-            const LEDGE_GRAB = 1 << 11;
-            const LETTER_FROM_TRACE = 1 << 12;
-            const MAP_17_10 = 1 << 13;
-            const MIST_UPGRADE = 1 << 14;
-            const NANITE_MIST = 1 << 15;
-            const POWER_MATRIX = 1 << 16;
-            const RECORD_LOSSES = 1 << 17;
-            const REMOTE_DRONE = 1 << 18;
-            const RESEARCHERS_MISSING = 1 << 19;
-            const SHOCKWAVE = 1 << 20;
-            const SLINGSHOT_HOOK = 1 << 21;
-            const STATION_POWER = 1 << 22;
-            const SWITCH_36_11 = 1 << 23;
-            const SWITCH_40_12 = 1 << 24;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 25;
-            const UNDER_SIEGE = 1 << 26;
-            const UNDERWATER_MOVEMENT = 1 << 27;
-            const WALL_CLIMB = 1 << 28;
+            const DEFEAT_EBIH_ALU = 1 << 0;
+            const DEFEAT_MUS_A_M20 = 1 << 1;
+            const DRONE_HOVER = 1 << 2;
+            const EBIH_INTERCHANGE_BLOCK = 1 << 3;
+            const EBIH_INTERCHANGE_GATE = 1 << 4;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 5;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 6;
+            const EBIH_WATERFALL_WALL = 1 << 7;
+            const EBIH_WEST_BLOCK = 1 << 8;
+            const FAST_TRAVEL = 1 << 9;
+            const GIGUNA_NORTHEAST_GATE = 1 << 10;
+            const HERETICS_TABLET = 1 << 11;
+            const ICE_AXE = 1 << 12;
+            const INFECTION_SPEED = 1 << 13;
+            const LEDGE_GRAB = 1 << 14;
+            const LETTER_FROM_TRACE = 1 << 15;
+            const MAP_17_10 = 1 << 16;
+            const MIST_UPGRADE = 1 << 17;
+            const NANITE_MIST = 1 << 18;
+            const POWER_MATRIX = 1 << 19;
+            const RECORD_LOSSES = 1 << 20;
+            const REMOTE_DRONE = 1 << 21;
+            const RESEARCHERS_MISSING = 1 << 22;
+            const SHOCKWAVE = 1 << 23;
+            const SLINGSHOT_HOOK = 1 << 24;
+            const STATION_POWER = 1 << 25;
+            const SWITCH_36_11 = 1 << 26;
+            const SWITCH_40_12 = 1 << 27;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 28;
+            const UNDER_SIEGE = 1 << 29;
+            const UNDERWATER_MOVEMENT = 1 << 30;
+            const WALL_CLIMB = 1 << 31;
         }
     }
 }
@@ -483,7 +489,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 53;
+    const NUM_ITEMS: u32 = 55;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -511,11 +517,17 @@ impl context::Ctx for Context {
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
             Item::Companies_Layoff => self.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF),
             Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
-            Item::Defeat_Ebih_Alu => self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU),
+            Item::Defeat_Ebih_Alu => self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU),
             Item::Defeat_MUS_A_M20 => self.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20),
             Item::Drone_Hover => self.cbits2.contains(flags::ContextBits2::DRONE_HOVER),
             Item::Drone_Melee_Damage => self.drone_melee_damage >= 1,
             Item::Drone_Melee_Speed => self.drone_melee_speed >= 1,
+            Item::Ebih_Interchange_Block => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK),
+            Item::Ebih_Interchange_Gate => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_INTERCHANGE_GATE),
             Item::Ebih_Waterfall_Block_Left => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT),
@@ -611,8 +623,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::DEAR_ERNEST)
                 .into(),
             Item::Defeat_Ebih_Alu => self
-                .cbits1
-                .contains(flags::ContextBits1::DEFEAT_EBIH_ALU)
+                .cbits2
+                .contains(flags::ContextBits2::DEFEAT_EBIH_ALU)
                 .into(),
             Item::Defeat_MUS_A_M20 => self
                 .cbits2
@@ -624,6 +636,14 @@ impl context::Ctx for Context {
                 .into(),
             Item::Drone_Melee_Damage => self.drone_melee_damage.into(),
             Item::Drone_Melee_Speed => self.drone_melee_speed.into(),
+            Item::Ebih_Interchange_Block => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK)
+                .into(),
+            Item::Ebih_Interchange_Gate => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_INTERCHANGE_GATE)
+                .into(),
             Item::Ebih_Waterfall_Block_Left => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT)
@@ -769,7 +789,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
             },
             Item::Defeat_Ebih_Alu => {
-                self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
+                self.cbits2.insert(flags::ContextBits2::DEFEAT_EBIH_ALU);
             },
             Item::Defeat_MUS_A_M20 => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
@@ -783,6 +803,12 @@ impl context::Ctx for Context {
             },
             Item::Drone_Melee_Speed => {
                 self.drone_melee_speed += 1;
+            },
+            Item::Ebih_Interchange_Block => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
+            },
+            Item::Ebih_Interchange_Gate => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
             },
             Item::Ebih_Waterfall_Block_Left => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
@@ -949,7 +975,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
             }
             Item::Defeat_Ebih_Alu => {
-                self.cbits1.insert(flags::ContextBits1::DEFEAT_EBIH_ALU);
+                self.cbits2.insert(flags::ContextBits2::DEFEAT_EBIH_ALU);
             }
             Item::Defeat_MUS_A_M20 => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_MUS_A_M20);
@@ -962,6 +988,14 @@ impl context::Ctx for Context {
             }
             Item::Drone_Melee_Speed => {
                 self.drone_melee_speed += 1;
+            }
+            Item::Ebih_Interchange_Block => {
+                self.cbits2
+                    .insert(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
+            }
+            Item::Ebih_Interchange_Gate => {
+                self.cbits2
+                    .insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
             }
             Item::Ebih_Waterfall_Block_Left => {
                 self.cbits2
@@ -1235,6 +1269,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("ebih__vertical_interchange__ctx__door_open", Yaml::Boolean(b)) => {
+                self.set_ebih__vertical_interchange__ctx__door_open(*b)
+            }
+            ("ebih__vertical_interchange__ctx__door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna_breach__sw_save__ctx__door_opened", Yaml::Boolean(b)) => {
                 self.set_giguna_breach__sw_save__ctx__door_opened(*b)
             }
@@ -1490,6 +1533,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("ebih__vertical_interchange__ctx__door_open", Yaml::Boolean(b)) => {
+                Expectation::EbihVerticalInterchangeCtxDoorOpen(*b)
+            }
+            ("ebih__vertical_interchange__ctx__door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna_breach__sw_save__ctx__door_opened", Yaml::Boolean(b)) => {
                 Expectation::GigunaBreachSwSaveCtxDoorOpened(*b)
             }
@@ -1715,6 +1767,24 @@ impl context::Ctx for Context {
                 Expectation::DroneMeleeSpeed(i8::try_from(*i).map_err(|e| format!("{}", e))?)
             }
             ("Drone_Melee_Speed", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Interchange_Block", Yaml::Boolean(b)) => Expectation::EbihInterchangeBlock(*b),
+            ("Ebih_Interchange_Block", Yaml::Integer(i)) => {
+                Expectation::EbihInterchangeBlock(*i > 0)
+            }
+            ("Ebih_Interchange_Block", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Interchange_Gate", Yaml::Boolean(b)) => Expectation::EbihInterchangeGate(*b),
+            ("Ebih_Interchange_Gate", Yaml::Integer(i)) => Expectation::EbihInterchangeGate(*i > 0),
+            ("Ebih_Interchange_Gate", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2166,6 +2236,15 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::EbihVerticalInterchangeCtxDoorOpen(e) => {
+                    let v = self.ebih__vertical_interchange__ctx__door_open();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "ebih__vertical_interchange__ctx__door_open", e, v
+                        ));
+                    }
+                }
                 Expectation::GigunaBreachSwSaveCtxDoorOpened(e) => {
                     let v = self.giguna_breach__sw_save__ctx__door_opened();
                     if v != *e {
@@ -2373,6 +2452,24 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Drone_Melee_Speed", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihInterchangeBlock(e) => {
+                    let v = self.has(Item::Ebih_Interchange_Block);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Interchange_Block", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihInterchangeGate(e) => {
+                    let v = self.has(Item::Ebih_Interchange_Gate);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Interchange_Gate", e, v
                         ));
                     }
                 }
@@ -2756,6 +2853,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Ebih__Vertical_Interchange => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Ebih__Waterfall => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -2767,6 +2869,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Giguna__Carnelian => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Far_Corner => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -2807,6 +2914,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Giguna__West_Caverns => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__West_Tower => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -3310,6 +3422,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN);
+        if n != p {
+            list.push(format!(
+                "{}EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED);
         let p = old
             .cbits1
@@ -3523,8 +3647,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}DEAR_ERNEST", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU);
-        let p = old.cbits1.contains(flags::ContextBits1::DEFEAT_EBIH_ALU);
+        let n = self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU);
+        let p = old.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU);
         if n != p {
             list.push(format!("{}DEFEAT_EBIH_ALU", if n { "+" } else { "-" }));
         }
@@ -3537,6 +3661,30 @@ impl context::Ctx for Context {
         let p = old.cbits2.contains(flags::ContextBits2::DRONE_HOVER);
         if n != p {
             list.push(format!("{}DRONE_HOVER", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_INTERCHANGE_BLOCK);
+        if n != p {
+            list.push(format!(
+                "{}EBIH_INTERCHANGE_BLOCK",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
+        if n != p {
+            list.push(format!(
+                "{}EBIH_INTERCHANGE_GATE",
+                if n { "+" } else { "-" }
+            ));
         }
         let n = self
             .cbits2
@@ -3988,6 +4136,23 @@ impl Context {
     pub fn set_ebih__drone_room__ctx__platform_moved(&mut self, val: bool) {
         self.cbits1.set(
             flags::ContextBits1::EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED,
+            val,
+        );
+    }
+    pub fn ebih__vertical_interchange__ctx__door_open(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN),
+                },
+            },
+        }
+    }
+    pub fn set_ebih__vertical_interchange__ctx__door_open(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN,
             val,
         );
     }

@@ -53,7 +53,7 @@ areas:
       actions:
         - name: Save
           do: $save
-          time: 1.3
+          tags: [save]
     - name: Bunker Entry
       coord: [30.2, 12.7]
       local:
@@ -755,6 +755,9 @@ areas:
       local:
         - to: Wall Left
           jumps: 1
+      exits:
+        - to: Ebih West > East 11
+          tags: [xshift]
     - name: Lower West Tree
       coord: [21.9, 9.9]
       local:
@@ -995,7 +998,7 @@ areas:
       actions:
         - name: Save
           do: $save
-          time: 1.3
+          tags: [save]
     - name: Alcove Entrance
       coord: [19.9, 9.8]
       local:
@@ -1086,7 +1089,7 @@ areas:
       actions:
         - name: Save
           do: $save
-          time: 1.3
+          tags: [save]
     - name: Medium High Platform
       coord: [20.3, 6.35]
       local:
@@ -1222,7 +1225,7 @@ areas:
         - to: Left of Switch
       actions:
         - name: Open Door
-          req: Infect
+          req: $open
           do: ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
           tags: [hack]
       exits:
@@ -1268,27 +1271,76 @@ areas:
       coord: [20.0, 11.3]
       local:
         - to: Left of Switch
+        - to: Lower Cliff
       exits:
         - to: Left of Gap
           req: $hook
     - name: Lower Cliff
       coord: [19.7, 11.6]
+      local:
+        - to: Lower Hill
+          jumps: 2
+        - to: Lower Platform
     - name: Lower Platform
       coord: [19.6, 12.4]
+      local:
+        - to: Lower Save
+        - to: East 13
+        - to: West 13
+      exits:
+        - to: Lower Cliff
+          req: $grab
+          movement: base
+          jumps: 6  # ?
     - name: Lower Save
       coord: [19.5, 12.65]
+      local:
+        - to: Lower Platform
+          jumps: 2
+        - to: East 13
+        - to: West 13
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
     - name: West High Cliff
       coord: [19.6, 10.85]
+      local:
+        - to: Lower Hill
+        - to: Lower Cliff
+        - to: West Fork
     - name: West Fork
       coord: [19.35, 11.0]
+      local:
+        - to: West High Cliff
+          jumps: 1
+        - to: West 11
+          jumps: 2
+        - to: West 12
     - name: West 11
       coord: [19.05, 10.75]
+      local:
+        - to: West Fork
     - name: West 12
       coord: [19.05, 11.8]
+      exits:
+        - to: West Fork
+          req: $climb
+          movement: base
+          jumps: 8  # ?
     - name: West 13
       coord: [19.05, 12.7]
+      local:
+         - to: Lower Save
+           jumps: 1
     - name: East 13
       coord: [20.95, 12.8]
+      local:
+        - to: Lower Save
+          jumps: 1
+      exits:
+        - to: Vertical Interchange > West 13
+          tags: [xshift]
 
 - name: Cave
   graph_offset: [0, 0.25]
@@ -1936,39 +1988,217 @@ areas:
   spots:
     - name: West 13
       coord: [21.05, 12.8]
+      local:
+        - to: Passage West
+        - to: Door West
+          jumps: 1
+      exits:
+        - to: Ebih West > East 13
+          tags: [xshift]
+      actions:
+        - name: Open Door
+          req: $open and not ^_door_open
+          do: ^_door_open = true
+          tags: [hack]
     - name: Passage West
       coord: [21.25, 12.9]
+      local:
+        - to: West 13
+          jumps: 1
+      exits:
+        - to: Door West
+          req: $grab or $climb
+          movement: base
+          jumps: 2
+        - to: Passage East
+          req: ^mode == 'drone'
+          movement: base
     - name: Door West
       coord: [21.35, 12.65]
+      local:
+        - to: West 13
+        - to: Passage West
+      exits:
+        - to: Door
+          req: ^_door_open
+          movement: base
     - name: Door
       coord: [21.5, 12.65]
+      exits:
+        - to: Door West
+          req: ^_door_open
+          movement: base
+        - to: Door East
+          req: ^_door_open
+          movement: base
     - name: Door East
       coord: [21.65, 12.65]
+      local:
+        - to: Passage East
+      exits:
+        - to: Door
+          req: ^_door_open
+          movement: base
     - name: Passage East
       coord: [21.8, 12.9]
+      local:
+        - to: East 13
+          jumps: 1
+        - to: Middle Descent
+      exits:
+        - to: Passage West
+          req: ^mode == 'drone'
+          movement: base
+        - to: Door West
+          req: $climb
     - name: East 13
       coord: [21.95, 12.8]
+      local:
+        - to: Passage East
+        - to: Middle Descent
     - name: Middle Descent
       coord: [21.85, 13.3]
+      local:
+        - to: Middle Drop
+      exits:
+        - to: Passage East
+          req: $grab or $climb
+          movement: base
+          jumps: 5  # ?
+        - to: East 13
+          req: $grab or $climb
+          movement: base
+          jumps: 5  # ?
     - name: Middle Drop
       coord: [21.2, 13.45]
+      local:
+        - to: Middle Descent
+          jumps: 2
+        - to: Cliff by Refill
     - name: Cliff by Refill
       coord: [21.3, 14.4]
+      exits:
+        - to: Middle Drop
+          req: $grab or $climb
+          movement: base
+          jumps: 9  # ?
+        - to: Refill Station
+          req: not Ebih_Interchange_Block
+          movement: base
+        - to: Blocked Refill Station
+          req: Ebih_Interchange_Block
+          movement: base
     - name: Refill Station
       coord: [21.45, 14.8]
+      local:
+        - to: East Tunnel
+      exits:
+        - to: Cliff by Refill
+          req: $climb
+          movement: base
+          jumps: 3  # ?
+        - to: Below Door
+          req: Ebih_Interchange_Gate
+          movement: base
     - name: Blocked Refill Station
       coord: [21.45, 14.7]
+      local:
+        - to: East Tunnel
+      exits:
+        - to: Cliff by Refill
+          req: $grab
+          movement: base
+          jumps: 2  # ?
+        - to: Below Door
+          req: Ebih_Interchange_Gate
+          movement: base
     - name: Block Cubby
       coord: [21.75, 13.8]
+      local:
+        - to: Cubby Exit
+    - name: Cubby Exit
+      coord: [21.85, 13.9]
+      local:
+        - to: East Tunnel
+      exits:
+        - to: Below Door
+          req: Ebih_Interchange_Gate
+          movement: base
+        - to: Blocked Refill Station
+          req: Ebih_Interchange_Block
+          movement: base
     - name: East Tunnel
       coord: [21.75, 14.7]
+      local:
+        - to: East 15
+      exits:
+        - to: Block Cubby
+          req: $grab
+          movement: base
+          jumps: 6  # ?
+        - to: Refill Station
+          req: not Ebih_Interchange_Block
+          movement: base
+        - to: Blocked Refill Station
+          req: Ebih_Interchange_Block
+          movement: base
+        - to: Below Door
+          req: Ebih_Interchange_Gate
+          movement: base
     - name: East 15
       coord: [21.95, 14.8]
+      local:
+        - to: East Tunnel
+          jumps: 1
+      exits:
+        - to: Amagi > West Lake > West 15
     - name: Below Door
       coord: [21.55, 15.2]
+      local:
+        - to: Lower West Cliff
+        - to: Switch
+        - to: South
+      exits:
+        - to: Refill Station
+          req: Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
+          movement: base
+          jumps: 3
+        - to: Blocked Refill Station
+          req: Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
+          movement: base
+          jumps: 4
+        - to: Refill Station
+          req: Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
+          time: 1  # ?
+        - to: Blocked Refill Station
+          req: Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
+          time: 1  # ?
     - name: Lower West Cliff
       coord: [21.4, 15.4]
+      local:
+        - to: Switch
+        - to: South
+        - to: Below Door
+          jumps: 1  #  not ledge grab?
     - name: Switch
       coord: [21.6, 15.7]
+      local:
+        - to: South
+      locations:
+        - name: Activate Switch
+          item: Ebih_Interchange_Gate
+          req: $can_damage
+          time: 0.25
+      exits:
+        - to: Below Door
+          req: $hook
+          time: 1  # ?
     - name: South
       coord: [21.5, 15.8]
+      local:
+        - to: Switch
+          jumps: 1
+      exits:
+        - to: Below Door
+          req: $hook
+          time: 1  # ?

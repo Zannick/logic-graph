@@ -283,6 +283,15 @@ subgraph Ebih
         Ebih__Ebih_West__Left_of_Gap(Left of Gap);
         Ebih__Ebih_West__Left_of_Switch(Left of Switch);
         Ebih__Ebih_West__Lower_Hill(Lower Hill);
+        Ebih__Ebih_West__Lower_Cliff(Lower Cliff);
+        Ebih__Ebih_West__Lower_Platform(Lower Platform);
+        Ebih__Ebih_West__Lower_Save(Lower Save);
+        Ebih__Ebih_West__West_High_Cliff(West High Cliff);
+        Ebih__Ebih_West__West_Fork(West Fork);
+        Ebih__Ebih_West__West_11(West 11);
+        Ebih__Ebih_West__West_12(West 12);
+        Ebih__Ebih_West__West_13(West 13);
+        Ebih__Ebih_West__East_13(East 13);
     end
     subgraph Ebih__Cave[Cave]
         Ebih__Cave__Entry(Entry);
@@ -354,6 +363,28 @@ subgraph Ebih
         Ebih__Observation_Tower_Room__Cliff(Cliff);
         Ebih__Observation_Tower_Room__West_10(West 10);
         Ebih__Observation_Tower_Room__East_11(East 11);
+    end
+    subgraph Ebih__Vertical_Interchange[Vertical Interchange]
+        Ebih__Vertical_Interchange__West_13(West 13);
+        Ebih__Vertical_Interchange__Passage_West(Passage West);
+        Ebih__Vertical_Interchange__Door_West(Door West);
+        Ebih__Vertical_Interchange__Door(Door);
+        Ebih__Vertical_Interchange__Door_East(Door East);
+        Ebih__Vertical_Interchange__Passage_East(Passage East);
+        Ebih__Vertical_Interchange__East_13(East 13);
+        Ebih__Vertical_Interchange__Middle_Descent(Middle Descent);
+        Ebih__Vertical_Interchange__Middle_Drop(Middle Drop);
+        Ebih__Vertical_Interchange__Cliff_by_Refill(Cliff by Refill);
+        Ebih__Vertical_Interchange__Refill_Station(Refill Station);
+        Ebih__Vertical_Interchange__Blocked_Refill_Station(Blocked Refill Station);
+        Ebih__Vertical_Interchange__Block_Cubby(Block Cubby);
+        Ebih__Vertical_Interchange__Cubby_Exit(Cubby Exit);
+        Ebih__Vertical_Interchange__East_Tunnel(East Tunnel);
+        Ebih__Vertical_Interchange__East_15(East 15);
+        Ebih__Vertical_Interchange__Below_Door(Below Door);
+        Ebih__Vertical_Interchange__Lower_West_Cliff(Lower West Cliff);
+        Ebih__Vertical_Interchange__Switch(Switch);
+        Ebih__Vertical_Interchange__South(South);
     end
 end
 subgraph Giguna_Breach
@@ -497,6 +528,8 @@ subgraph Giguna
         Giguna__West_Caverns__East_Susar(East Susar);
         Giguna__West_Caverns__East_12(East 12);
         Giguna__West_Caverns__East_13(East 13);
+        Giguna__West_Caverns__Northwest(Northwest);
+        Giguna__West_Caverns__West_13(West 13);
     end
     subgraph Giguna__Wasteland[Wasteland]
         Giguna__Wasteland__West_12(West 12);
@@ -508,6 +541,34 @@ subgraph Giguna
         Giguna__Wasteland__Lower_Path_Left(Lower Path Left);
         Giguna__Wasteland__Lower_Cliff(Lower Cliff);
         Giguna__Wasteland__West_14(West 14);
+        Giguna__Wasteland__East_12(East 12);
+        Giguna__Wasteland__East_13(East 13);
+        Giguna__Wasteland__East_14(East 14);
+        Giguna__Wasteland__East_Ledge(East Ledge);
+        Giguna__Wasteland__Door_Left(Door Left);
+        Giguna__Wasteland__Door_Right(Door Right);
+        Giguna__Wasteland__Bluff_by_Door(Bluff by Door);
+        Giguna__Wasteland__Tiny_Hill(Tiny Hill);
+        Giguna__Wasteland__Steeper_Hill(Steeper Hill);
+        Giguna__Wasteland__Center_Plains(Center Plains);
+        Giguna__Wasteland__West_Plains(West Plains);
+        Giguna__Wasteland__Passage_East(Passage East);
+        Giguna__Wasteland__Passage_Cache(Passage Cache);
+        Giguna__Wasteland__Westward_Hill(Westward Hill);
+        Giguna__Wasteland__Upper_Cache(Upper Cache);
+        Giguna__Wasteland__Cache_Ledge(Cache Ledge);
+        Giguna__Wasteland__Left_Platform_West(Left Platform West);
+        Giguna__Wasteland__Left_Platform_East(Left Platform East);
+        Giguna__Wasteland__Center_Platform_West(Center Platform West);
+        Giguna__Wasteland__Center_Platform_East(Center Platform East);
+        Giguna__Wasteland__Right_Platform_West(Right Platform West);
+        Giguna__Wasteland__Right_Platform_East(Right Platform East);
+        Giguna__Wasteland__Lower_Platform_West(Lower Platform West);
+        Giguna__Wasteland__Lower_Platform_East(Lower Platform East);
+        Giguna__Wasteland__Ladder_Ledge(Ladder Ledge);
+        Giguna__Wasteland__Switch_Ledge(Switch Ledge);
+        Giguna__Wasteland__Switch_Approach(Switch Approach);
+        Giguna__Wasteland__Switch(Switch);
     end
     subgraph Giguna__Giguna_Base[Giguna Base]
         Giguna__Giguna_Base__East_14(East 14);
@@ -560,11 +621,14 @@ subgraph Giguna
         Giguna__Ruins_West__Lower_Ledge(Lower Ledge);
         Giguna__Ruins_West__Upper_Ledge(Upper Ledge);
         Giguna__Ruins_West__East_7(East 7);
+        Giguna__Ruins_West__Rooftop_East_Edge(Rooftop East Edge);
+        Giguna__Ruins_West__Rooftop_West_Edge(Rooftop West Edge);
+        Giguna__Ruins_West__West_7(West 7);
     end
     subgraph Giguna__Ruins_Top[Ruins Top]
         Giguna__Ruins_Top__West_7(West 7);
         Giguna__Ruins_Top__West_Door(West Door);
-        Giguna__Ruins_Top__West_Tower(West Tower);
+        Giguna__Ruins_Top__West_Pillar(West Pillar);
         Giguna__Ruins_Top__Entryway(Entryway);
         Giguna__Ruins_Top__Portal_Left(Portal Left);
         Giguna__Ruins_Top__Small_Ledge(Small Ledge);
@@ -575,6 +639,22 @@ subgraph Giguna
         Giguna__Ruins_Top__East_Door(East Door);
         Giguna__Ruins_Top__East_7(East 7);
         Giguna__Ruins_Top__Save_Point(Save Point);
+        Giguna__Ruins_Top__Switch(Switch);
+        Giguna__Ruins_Top__Rooftop_West(Rooftop West);
+        Giguna__Ruins_Top__Rooftop_East(Rooftop East);
+        Giguna__Ruins_Top__Rooftop_Gutter(Rooftop Gutter);
+        Giguna__Ruins_Top__Turret_Balcony_East(Turret Balcony East);
+        Giguna__Ruins_Top__Turret_Balcony_West(Turret Balcony West);
+    end
+    subgraph Giguna__West_Tower[West Tower]
+        Giguna__West_Tower__East_7(East 7);
+        Giguna__West_Tower__Top(Top);
+        Giguna__West_Tower__Southwest(Southwest);
+    end
+    subgraph Giguna__Far_Corner[Far Corner]
+        Giguna__Far_Corner__East_13(East 13);
+        Giguna__Far_Corner__Grass(Grass);
+        Giguna__Far_Corner__South(South);
     end
 end
 subgraph Glacier
@@ -753,6 +833,7 @@ Amagi__West_Lake__Stronghold_Front_Door <--> Amagi__West_Lake__Stronghold_Front_
 Amagi__West_Lake__Stronghold_Item <--> Amagi__West_Lake__Stronghold_Middle_Column
 Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
+Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
@@ -809,7 +890,8 @@ Ebih__Ebih_West__Block_Left --> Ebih__Ebih_West__Alcove_Entrance
 Ebih__Ebih_West__Block_Left <--> Ebih__Ebih_West__Block_Right
 Ebih__Ebih_West__Block_Left --> Ebih__Ebih_West__Mid_Save
 Ebih__Ebih_West__East_10 <--> Ebih__Waterfall__West_10
-Ebih__Ebih_West__East_11 --> Ebih__Waterfall__West_11
+Ebih__Ebih_West__East_11 <--> Ebih__Waterfall__West_11
+Ebih__Ebih_West__East_13 <--> Ebih__Vertical_Interchange__West_13
 Ebih__Ebih_West__East_6 <--> Ebih__Grid_21_1_5__West_6
 Ebih__Ebih_West__East_7 <--> Ebih__Waterfall__West_7
 Ebih__Ebih_West__East_8 <--> Ebih__Waterfall__West_8
@@ -818,8 +900,10 @@ Ebih__Ebih_West__Giguna_Pillar --> Giguna__Giguna_Northeast__Inner_Wall
 Ebih__Ebih_West__High_Platform --> Ebih__Ebih_West__High_Ledge
 Ebih__Ebih_West__Left_of_Gap <--> Ebih__Ebih_West__Small_Gap
 Ebih__Ebih_West__Lower_Hill --> Ebih__Ebih_West__Left_of_Gap
+Ebih__Ebih_West__Lower_Platform --> Ebih__Ebih_West__Lower_Cliff
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__Above_Chute
 Ebih__Ebih_West__Middle_Middle --> Ebih__Ebih_West__East_7
+Ebih__Ebih_West__West_12 --> Ebih__Ebih_West__West_Fork
 Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
 Ebih__Ebih_West__West_9 <--> Giguna__Giguna_Northeast__East_9
 Ebih__Grid_25_10_12__Below_Bush --> Ebih__Grid_25_10_12__Bush
@@ -843,6 +927,26 @@ Ebih__Grid_26_10_11__Upper_Platform --> Ebih__Grid_26_10_11__West_10
 Ebih__Observation_Tower_Room__East_11 --> Ebih__Base_Camp__West_11
 Ebih__Observation_Tower_Room__East_11 --> Ebih__Observation_Tower_Room__Cliff
 Ebih__Observation_Tower_Room__Tower_Top --> Ebih__Observation_Tower_Room__West_9
+Ebih__Vertical_Interchange__Below_Door <--> Ebih__Vertical_Interchange__Blocked_Refill_Station
+Ebih__Vertical_Interchange__Below_Door <--> Ebih__Vertical_Interchange__Refill_Station
+Ebih__Vertical_Interchange__Blocked_Refill_Station <--> Ebih__Vertical_Interchange__Cliff_by_Refill
+Ebih__Vertical_Interchange__Cliff_by_Refill --> Ebih__Vertical_Interchange__Middle_Drop
+Ebih__Vertical_Interchange__Cliff_by_Refill <--> Ebih__Vertical_Interchange__Refill_Station
+Ebih__Vertical_Interchange__Cubby_Exit --> Ebih__Vertical_Interchange__Below_Door
+Ebih__Vertical_Interchange__Cubby_Exit --> Ebih__Vertical_Interchange__Blocked_Refill_Station
+Ebih__Vertical_Interchange__Door <--> Ebih__Vertical_Interchange__Door_East
+Ebih__Vertical_Interchange__Door <--> Ebih__Vertical_Interchange__Door_West
+Ebih__Vertical_Interchange__East_Tunnel --> Ebih__Vertical_Interchange__Below_Door
+Ebih__Vertical_Interchange__East_Tunnel --> Ebih__Vertical_Interchange__Block_Cubby
+Ebih__Vertical_Interchange__East_Tunnel --> Ebih__Vertical_Interchange__Blocked_Refill_Station
+Ebih__Vertical_Interchange__East_Tunnel --> Ebih__Vertical_Interchange__Refill_Station
+Ebih__Vertical_Interchange__Middle_Descent --> Ebih__Vertical_Interchange__East_13
+Ebih__Vertical_Interchange__Middle_Descent --> Ebih__Vertical_Interchange__Passage_East
+Ebih__Vertical_Interchange__Passage_East --> Ebih__Vertical_Interchange__Door_West
+Ebih__Vertical_Interchange__Passage_East <--> Ebih__Vertical_Interchange__Passage_West
+Ebih__Vertical_Interchange__Passage_West --> Ebih__Vertical_Interchange__Door_West
+Ebih__Vertical_Interchange__South --> Ebih__Vertical_Interchange__Below_Door
+Ebih__Vertical_Interchange__Switch --> Ebih__Vertical_Interchange__Below_Door
 Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Left
 Ebih__Waterfall__Alcove <--> Ebih__Waterfall__Alcove_Right
 Ebih__Waterfall__Alcove_Left --> Ebih__Waterfall__Waterfall_Center_Left
@@ -939,13 +1043,17 @@ Giguna__Ruins_Top__Entryway <--> Giguna__Ruins_Top__West_Door
 Giguna__Ruins_Top__Interior_Ledge <--> Giguna__Ruins_Top__Portal
 Giguna__Ruins_Top__Interior_Ledge --> Giguna__Ruins_Top__Upper_Tunnel
 Giguna__Ruins_Top__Portal_Left --> Giguna__Ruins_Top__Small_Ledge
+Giguna__Ruins_Top__Rooftop_West <--> Giguna__Ruins_Top__Turret_Balcony_East
 Giguna__Ruins_Top__Small_Ledge --> Giguna__Ruins_Top__Interior_Ledge
+Giguna__Ruins_Top__Switch --> Giguna__Ruins_Top__Rooftop_West
+Giguna__Ruins_Top__Switch --> Giguna__Ruins_Top__Turret_Balcony_East
 Giguna__Ruins_Top__West_7 <--> Giguna__Ruins_Top__West_Door
-Giguna__Ruins_Top__West_7 --> Giguna__Ruins_Top__West_Tower
+Giguna__Ruins_Top__West_7 --> Giguna__Ruins_Top__West_Pillar
 Giguna__Ruins_Top__West_7 <--> Giguna__Ruins_West__East_7
 Giguna__Ruins_West__East_7 --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Lower_Ledge --> Giguna__Ruins_West__Upper_Ledge
 Giguna__Ruins_West__Nook --> Giguna__Ruins_West__Lower_Ledge
+Giguna__Ruins_West__West_7 --> Giguna__West_Tower__East_7
 Giguna__Wasteland__Lower_Cliff --> Giguna__Wasteland__Middle_Cliff
 Giguna__Wasteland__Lower_Path_Right --> Giguna__Wasteland__Lower_Cliff
 Giguna__Wasteland__West_12 <--> Giguna__West_Caverns__East_12
@@ -956,6 +1064,8 @@ Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__Tunnel_Fork
 Giguna__West_Caverns__Tunnel_Bottom --> Giguna__West_Caverns__Tunnel_Entrance
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Bottom
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Entrance
+Giguna__West_Caverns__West_13 --> Giguna__Far_Corner__East_13
+Giguna__West_Tower__Southwest --> Giguna__West_Caverns__Northwest
 Glacier__Apocalypse_Entry__West <--> Glacier__Grid_43_10_11__East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
 Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room_Switched__Upper_West

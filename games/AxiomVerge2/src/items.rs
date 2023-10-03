@@ -46,6 +46,8 @@ pub enum Item {
     Drone_Hover,
     Drone_Melee_Damage,
     Drone_Melee_Speed,
+    Ebih_Interchange_Block,
+    Ebih_Interchange_Gate,
     Ebih_Waterfall_Block_Left,
     Ebih_Waterfall_Block_Right,
     Ebih_Waterfall_Both_Blocks,
@@ -87,6 +89,7 @@ pub enum Item {
     Switch_36_11,
     Switch_40_12,
     Terminal_Breakthrough_1,
+    The_Ideal_Kiengir,
     Under_Siege,
     Underwater_Movement,
     Wall_Climb,
@@ -123,6 +126,8 @@ impl fmt::Display for Item {
             Item::Drone_Hover => write!(f, "{}", "Drone_Hover"),
             Item::Drone_Melee_Damage => write!(f, "{}", "Drone_Melee_Damage"),
             Item::Drone_Melee_Speed => write!(f, "{}", "Drone_Melee_Speed"),
+            Item::Ebih_Interchange_Block => write!(f, "{}", "Ebih_Interchange_Block"),
+            Item::Ebih_Interchange_Gate => write!(f, "{}", "Ebih_Interchange_Gate"),
             Item::Ebih_Waterfall_Block_Left => write!(f, "{}", "Ebih_Waterfall_Block_Left"),
             Item::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
             Item::Ebih_Waterfall_Both_Blocks => write!(f, "{}", "Ebih_Waterfall_Both_Blocks"),
@@ -164,6 +169,7 @@ impl fmt::Display for Item {
             Item::Switch_36_11 => write!(f, "{}", "Switch_36_11"),
             Item::Switch_40_12 => write!(f, "{}", "Switch_40_12"),
             Item::Terminal_Breakthrough_1 => write!(f, "{}", "Terminal_Breakthrough_1"),
+            Item::The_Ideal_Kiengir => write!(f, "{}", "The_Ideal_Kiengir"),
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
@@ -200,6 +206,8 @@ impl std::str::FromStr for Item {
             "Drone_Hover" => Ok(Item::Drone_Hover),
             "Drone_Melee_Damage" => Ok(Item::Drone_Melee_Damage),
             "Drone_Melee_Speed" => Ok(Item::Drone_Melee_Speed),
+            "Ebih_Interchange_Block" => Ok(Item::Ebih_Interchange_Block),
+            "Ebih_Interchange_Gate" => Ok(Item::Ebih_Interchange_Gate),
             "Ebih_Waterfall_Block_Left" => Ok(Item::Ebih_Waterfall_Block_Left),
             "Ebih_Waterfall_Block_Right" => Ok(Item::Ebih_Waterfall_Block_Right),
             "Ebih_Waterfall_Both_Blocks" => Ok(Item::Ebih_Waterfall_Both_Blocks),
@@ -241,6 +249,7 @@ impl std::str::FromStr for Item {
             "Switch_36_11" => Ok(Item::Switch_36_11),
             "Switch_40_12" => Ok(Item::Switch_40_12),
             "Terminal_Breakthrough_1" => Ok(Item::Terminal_Breakthrough_1),
+            "The_Ideal_Kiengir" => Ok(Item::The_Ideal_Kiengir),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
             "Wall_Climb" => Ok(Item::Wall_Climb),
@@ -263,5 +272,6 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Health_Fragment
             | Item::Melee_Charge
             | Item::Notes_2053_02_27
+            | Item::The_Ideal_Kiengir
     )
 }

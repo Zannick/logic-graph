@@ -267,6 +267,26 @@ pub fn access_ebih__grid_25_10_12__east_11__ex__door_1__req(ctx: &Context) -> bo
     // ^_door_open
     ctx.ebih__grid_25_10_12__ctx__door_open()
 }
+pub fn access_ebih__vertical_interchange__door__ex__door_east_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__vertical_interchange__ctx__door_open()
+}
+pub fn access_ebih__vertical_interchange__door__ex__door_west_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__vertical_interchange__ctx__door_open()
+}
+pub fn access_ebih__vertical_interchange__door_east__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__vertical_interchange__ctx__door_open()
+}
+pub fn access_ebih__vertical_interchange__door_west__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.ebih__vertical_interchange__ctx__door_open()
+}
+pub fn access_ebih__vertical_interchange__west_13__open_door__req(ctx: &Context) -> bool {
+    // $open and not ^_door_open
+    (helper__open!(ctx) && !ctx.ebih__vertical_interchange__ctx__door_open())
+}
 pub fn access_ebih__waterfall__west_door__ex__west_door_left_1__req(ctx: &Context) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
@@ -282,6 +302,34 @@ pub fn access_ebih__waterfall__west_door_left__ex__west_door_1__req(ctx: &Contex
 pub fn access_ebih__waterfall__west_door_right__ex__west_door_1__req(ctx: &Context) -> bool {
     // ^_west_door_open
     ctx.ebih__waterfall__ctx__west_door_open()
+}
+pub fn access_ebih_interchange_block(ctx: &Context) -> bool {
+    // Ebih_Interchange_Block
+    ctx.has(Item::Ebih_Interchange_Block)
+}
+pub fn access_ebih_interchange_gate(ctx: &Context) -> bool {
+    // Ebih_Interchange_Gate
+    ctx.has(Item::Ebih_Interchange_Gate)
+}
+pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_grab(ctx: &Context) -> bool {
+    // Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
+    ((ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block))
+        && helper__grab!(ctx))
+}
+pub fn access_ebih_interchange_gate_and_ebih_interchange_block_and_hook(ctx: &Context) -> bool {
+    // Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
+    ((ctx.has(Item::Ebih_Interchange_Gate) && ctx.has(Item::Ebih_Interchange_Block))
+        && helper__hook!(ctx))
+}
+pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_grab(ctx: &Context) -> bool {
+    // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
+    ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
+        && helper__grab!(ctx))
+}
+pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(ctx: &Context) -> bool {
+    // Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
+    ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
+        && helper__hook!(ctx))
 }
 pub fn access_ebih_waterfall_wall(ctx: &Context) -> bool {
     // Ebih_Waterfall_Wall
@@ -458,6 +506,10 @@ pub fn access_grab(ctx: &Context) -> bool {
     // $grab
     helper__grab!(ctx)
 }
+pub fn access_grab_and_can_deploy(ctx: &Context) -> bool {
+    // $grab and $can_deploy
+    (helper__grab!(ctx) && helper__can_deploy!(ctx))
+}
 pub fn access_grab_and_climb(ctx: &Context) -> bool {
     // $grab and $climb
     (helper__grab!(ctx) && helper__climb!(ctx))
@@ -609,6 +661,10 @@ pub fn access_nano_points__2(ctx: &Context) -> bool {
 pub fn access_not_amashilama(ctx: &Context) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
+}
+pub fn access_not_ebih_interchange_block(ctx: &Context) -> bool {
+    // not Ebih_Interchange_Block
+    !ctx.has(Item::Ebih_Interchange_Block)
 }
 pub fn access_not_ebih_waterfall_wall_and_nanite_mist_and_mist_upgrade(ctx: &Context) -> bool {
     // not Ebih_Waterfall_Wall and Nanite_Mist and Mist_Upgrade
@@ -762,6 +818,10 @@ pub fn action_deploy_drone_and_move__giguna__giguna_base__kari(ctx: &mut Context
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
     helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Giguna_Base__Kari);
 }
+pub fn action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx: &mut Context) {
+    // $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
+    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Ruins_Top__West_7);
+}
 pub fn action_deploy_drone_and_move__giguna__wasteland__middle_path(ctx: &mut Context) {
     // $deploy_drone_and_move(`Giguna > Wasteland > Middle Path`)
     helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Wasteland__Middle_Path);
@@ -824,6 +884,10 @@ pub fn action_ebih__grid_25_10_12__east_11__open_door__do(ctx: &mut Context) {
     // ^_door_open = true
     ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
 }
+pub fn action_ebih__vertical_interchange__west_13__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_ebih__vertical_interchange__ctx__door_open(true);
+}
 pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Context) {
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
@@ -863,6 +927,10 @@ pub fn action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ct
 pub fn action_giguna__giguna_northeast__switch__open_door__do(ctx: &mut Context) {
     // ^_door_opened = true
     ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
+}
+pub fn action_giguna__ruins_top__switch__open_doors__do(ctx: &mut Context) {
+    // ^_doors_open = true
+    ctx.set_giguna__ruins_top__ctx__doors_open(true);
 }
 pub fn action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx: &mut Context) {
     // ^_kishib_handled = true
