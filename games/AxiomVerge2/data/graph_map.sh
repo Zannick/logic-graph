@@ -2,7 +2,7 @@
 # Requires graphviz (for neato) and GraphicsMagick (for gm)
 
 (
-cd /home/bswolf/logic-graph/games/AxiomVerge2/data;
+cd "$( dirname -- "${BASH_SOURCE[0]}" )";
 echo "Generating graph..." &&
 neato -Tpng -o digraph.png digraph.dot &&
 echo "Merging graph with map..." &&
