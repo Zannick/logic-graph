@@ -33,6 +33,10 @@ harness = false
 
 [profile.release]
 debug = true
+lto = "fat"
+
+[build]
+rustflags = ["-C", "target-cpu=native"]
 
 [[test]]
 name = "unittest"
