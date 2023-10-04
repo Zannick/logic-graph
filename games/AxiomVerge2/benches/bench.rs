@@ -13,7 +13,8 @@ use libaxiom_verge2::graph;
 use libaxiom_verge2::items::Item;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-    let world = graph::World::new();
+    let mut world = graph::World::new();
+    analyzer::world::World::condense_graph(&mut world);
     let mut ctx = Context::default();
     world.skip_unused_items(&mut ctx);
     c.bench_function("can_win_from_scratch", |b| {
