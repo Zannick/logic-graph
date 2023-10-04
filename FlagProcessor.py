@@ -5,6 +5,8 @@ from Utils import typenameof
 
 BitFlagGroup = namedtuple("BitFlagGroup", ['size', 'vars', 'defaults'])
 
+MAX_GROUP_SIZE = 32
+
 class BitFlagProcessor(object):
 
     def __init__(self, context_values, settings, item_max_counts):
@@ -19,8 +21,8 @@ class BitFlagProcessor(object):
         settings = sorted(s for s, t in self.settings.items() if t['type'] == 'bool')
         items = sorted(i for i, n in self.item_max_counts.items() if n == 1)
         everything = context_vars + settings + items
-        while len(everything) > 32:
-            sl, everything = everything[:32], everything[32:]
+        while len(everything) > MAX_GROUP_SIZE:
+            sl, everything = everything[:MAX_GROUP_SIZE], everything[MAX_GROUP_SIZE:]
             self.flag_groups.append(BitFlagGroup(len(sl), sl, [
                 e for e in sl if e in context_vars and self.context_values[e]]))
         if everything:
