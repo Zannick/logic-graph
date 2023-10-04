@@ -22,7 +22,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
 
     let ctx = ContextWrapper::new(Context::default());
     c.bench_function("greedy search", |b| {
-        b.iter(|| greedy_search(&world, &ctx, u32::MAX))
+        b.iter(|| greedy_search(&world, &ctx, u32::MAX, 2))
     });
     c.bench_function("minimal playthrough", |b| {
         b.iter(|| minimal_greedy_playthrough(&world, &ctx, u32::MAX))
