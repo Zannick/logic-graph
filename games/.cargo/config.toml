@@ -1,0 +1,3 @@
+# These apply to all games.
+[build]
+rustflags = ["-C", "target-cpu=native"]

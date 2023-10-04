@@ -35,9 +35,6 @@ harness = false
 debug = true
 lto = "fat"
 
-[build]
-rustflags = ["-C", "target-cpu=native"]
-
 [[test]]
 name = "unittest"
 path = "tests/unittest.rs"
