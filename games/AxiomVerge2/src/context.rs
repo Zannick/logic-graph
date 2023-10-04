@@ -106,6 +106,8 @@ pub enum Expectation {
     DroneMeleeSpeed(i8),
     EbihInterchangeBlock(bool),
     EbihInterchangeGate(bool),
+    EbihWastelandDoor(bool),
+    EbihWastelandPassageH(bool),
     EbihWaterfallBlockLeft(bool),
     EbihWaterfallBlockRight(bool),
     EbihWaterfallWall(bool),
@@ -371,33 +373,40 @@ pub mod flags {
             const DRONE_HOVER = 1 << 2;
             const EBIH_INTERCHANGE_BLOCK = 1 << 3;
             const EBIH_INTERCHANGE_GATE = 1 << 4;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 5;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 6;
-            const EBIH_WATERFALL_WALL = 1 << 7;
-            const EBIH_WEST_BLOCK = 1 << 8;
-            const FAST_TRAVEL = 1 << 9;
-            const GIGUNA_NORTHEAST_GATE = 1 << 10;
-            const HERETICS_TABLET = 1 << 11;
-            const ICE_AXE = 1 << 12;
-            const INFECTION_SPEED = 1 << 13;
-            const LEDGE_GRAB = 1 << 14;
-            const LETTER_FROM_TRACE = 1 << 15;
-            const MAP_17_10 = 1 << 16;
-            const MIST_UPGRADE = 1 << 17;
-            const NANITE_MIST = 1 << 18;
-            const POWER_MATRIX = 1 << 19;
-            const RECORD_LOSSES = 1 << 20;
-            const REMOTE_DRONE = 1 << 21;
-            const RESEARCHERS_MISSING = 1 << 22;
-            const SHOCKWAVE = 1 << 23;
-            const SLINGSHOT_HOOK = 1 << 24;
-            const STATION_POWER = 1 << 25;
-            const SWITCH_36_11 = 1 << 26;
-            const SWITCH_40_12 = 1 << 27;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 28;
-            const UNDER_SIEGE = 1 << 29;
-            const UNDERWATER_MOVEMENT = 1 << 30;
-            const WALL_CLIMB = 1 << 31;
+            const EBIH_WASTELAND_DOOR = 1 << 5;
+            const EBIH_WASTELAND_PASSAGE_H = 1 << 6;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 7;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 8;
+            const EBIH_WATERFALL_WALL = 1 << 9;
+            const EBIH_WEST_BLOCK = 1 << 10;
+            const FAST_TRAVEL = 1 << 11;
+            const GIGUNA_NORTHEAST_GATE = 1 << 12;
+            const HERETICS_TABLET = 1 << 13;
+            const ICE_AXE = 1 << 14;
+            const INFECTION_SPEED = 1 << 15;
+            const LEDGE_GRAB = 1 << 16;
+            const LETTER_FROM_TRACE = 1 << 17;
+            const MAP_17_10 = 1 << 18;
+            const MIST_UPGRADE = 1 << 19;
+            const NANITE_MIST = 1 << 20;
+            const POWER_MATRIX = 1 << 21;
+            const RECORD_LOSSES = 1 << 22;
+            const REMOTE_DRONE = 1 << 23;
+            const RESEARCHERS_MISSING = 1 << 24;
+            const SHOCKWAVE = 1 << 25;
+            const SLINGSHOT_HOOK = 1 << 26;
+            const STATION_POWER = 1 << 27;
+            const SWITCH_36_11 = 1 << 28;
+            const SWITCH_40_12 = 1 << 29;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 30;
+            const UNDER_SIEGE = 1 << 31;
+        }
+    }
+    bitflags! {
+        #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
+        pub struct ContextBits3 : u8 {
+            const UNDERWATER_MOVEMENT = 1 << 0;
+            const WALL_CLIMB = 1 << 1;
         }
     }
 }
@@ -439,6 +448,7 @@ pub struct Context {
     // bitflags
     pub cbits1: flags::ContextBits1,
     pub cbits2: flags::ContextBits2,
+    pub cbits3: flags::ContextBits3,
     // other
     pub status: EnumMap<LocationId, Status>,
 
@@ -474,6 +484,7 @@ impl Default for Context {
             // bitflags
             cbits1: Default::default(),
             cbits2: Default::default(),
+            cbits3: Default::default(),
             // other
             status: Default::default(),
             visits: Default::default(),
@@ -489,7 +500,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 55;
+    const NUM_ITEMS: u32 = 57;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -528,6 +539,12 @@ impl context::Ctx for Context {
             Item::Ebih_Interchange_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_INTERCHANGE_GATE),
+            Item::Ebih_Wasteland_Door => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WASTELAND_DOOR),
+            Item::Ebih_Wasteland_Passage_H => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H),
             Item::Ebih_Waterfall_Block_Left => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT),
@@ -575,9 +592,9 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1),
             Item::Under_Siege => self.cbits2.contains(flags::ContextBits2::UNDER_SIEGE),
             Item::Underwater_Movement => self
-                .cbits2
-                .contains(flags::ContextBits2::UNDERWATER_MOVEMENT),
-            Item::Wall_Climb => self.cbits2.contains(flags::ContextBits2::WALL_CLIMB),
+                .cbits3
+                .contains(flags::ContextBits3::UNDERWATER_MOVEMENT),
+            Item::Wall_Climb => self.cbits3.contains(flags::ContextBits3::WALL_CLIMB),
             _ => false,
         }
     }
@@ -643,6 +660,14 @@ impl context::Ctx for Context {
             Item::Ebih_Interchange_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_INTERCHANGE_GATE)
+                .into(),
+            Item::Ebih_Wasteland_Door => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WASTELAND_DOOR)
+                .into(),
+            Item::Ebih_Wasteland_Passage_H => self
+                .cbits2
+                .contains(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H)
                 .into(),
             Item::Ebih_Waterfall_Block_Left => self
                 .cbits2
@@ -742,10 +767,10 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::UNDER_SIEGE)
                 .into(),
             Item::Underwater_Movement => self
-                .cbits2
-                .contains(flags::ContextBits2::UNDERWATER_MOVEMENT)
+                .cbits3
+                .contains(flags::ContextBits3::UNDERWATER_MOVEMENT)
                 .into(),
-            Item::Wall_Climb => self.cbits2.contains(flags::ContextBits2::WALL_CLIMB).into(),
+            Item::Wall_Climb => self.cbits3.contains(flags::ContextBits3::WALL_CLIMB).into(),
             _ => 0,
         }
     }
@@ -809,6 +834,12 @@ impl context::Ctx for Context {
             },
             Item::Ebih_Interchange_Gate => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
+            },
+            Item::Ebih_Wasteland_Door => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_DOOR);
+            },
+            Item::Ebih_Wasteland_Passage_H => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
             },
             Item::Ebih_Waterfall_Block_Left => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
@@ -915,10 +946,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::UNDER_SIEGE);
             },
             Item::Underwater_Movement => {
-                self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+                self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
             },
             Item::Wall_Climb => {
-                self.cbits2.insert(flags::ContextBits2::WALL_CLIMB);
+                self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
             },
             Item::Health_Node => rules::action_energy__max_energy(self),
             Item::Power_Core => rules::action_refills__1(self),
@@ -996,6 +1027,13 @@ impl context::Ctx for Context {
             Item::Ebih_Interchange_Gate => {
                 self.cbits2
                     .insert(flags::ContextBits2::EBIH_INTERCHANGE_GATE);
+            }
+            Item::Ebih_Wasteland_Door => {
+                self.cbits2.insert(flags::ContextBits2::EBIH_WASTELAND_DOOR);
+            }
+            Item::Ebih_Wasteland_Passage_H => {
+                self.cbits2
+                    .insert(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
             }
             Item::Ebih_Waterfall_Block_Left => {
                 self.cbits2
@@ -1104,10 +1142,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::UNDER_SIEGE);
             }
             Item::Underwater_Movement => {
-                self.cbits2.insert(flags::ContextBits2::UNDERWATER_MOVEMENT);
+                self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
             }
             Item::Wall_Climb => {
-                self.cbits2.insert(flags::ContextBits2::WALL_CLIMB);
+                self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
             }
             _ => (),
         }
@@ -1785,6 +1823,26 @@ impl context::Ctx for Context {
             ("Ebih_Interchange_Gate", Yaml::Boolean(b)) => Expectation::EbihInterchangeGate(*b),
             ("Ebih_Interchange_Gate", Yaml::Integer(i)) => Expectation::EbihInterchangeGate(*i > 0),
             ("Ebih_Interchange_Gate", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Wasteland_Door", Yaml::Boolean(b)) => Expectation::EbihWastelandDoor(*b),
+            ("Ebih_Wasteland_Door", Yaml::Integer(i)) => Expectation::EbihWastelandDoor(*i > 0),
+            ("Ebih_Wasteland_Door", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Ebih_Wasteland_Passage_H", Yaml::Boolean(b)) => {
+                Expectation::EbihWastelandPassageH(*b)
+            }
+            ("Ebih_Wasteland_Passage_H", Yaml::Integer(i)) => {
+                Expectation::EbihWastelandPassageH(*i > 0)
+            }
+            ("Ebih_Wasteland_Passage_H", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2470,6 +2528,24 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Ebih_Interchange_Gate", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWastelandDoor(e) => {
+                    let v = self.has(Item::Ebih_Wasteland_Door);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Wasteland_Door", e, v
+                        ));
+                    }
+                }
+                Expectation::EbihWastelandPassageH(e) => {
+                    let v = self.has(Item::Ebih_Wasteland_Passage_H);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Ebih_Wasteland_Passage_H", e, v
                         ));
                     }
                 }
@@ -3688,6 +3764,27 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits2
+            .contains(flags::ContextBits2::EBIH_WASTELAND_DOOR);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WASTELAND_DOOR);
+        if n != p {
+            list.push(format!("{}EBIH_WASTELAND_DOOR", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::EBIH_WASTELAND_PASSAGE_H);
+        if n != p {
+            list.push(format!(
+                "{}EBIH_WASTELAND_PASSAGE_H",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits2
             .contains(flags::ContextBits2::EBIH_WATERFALL_BLOCK_LEFT);
         let p = old
             .cbits2
@@ -3848,16 +3945,16 @@ impl context::Ctx for Context {
             list.push(format!("{}UNDER_SIEGE", if n { "+" } else { "-" }));
         }
         let n = self
-            .cbits2
-            .contains(flags::ContextBits2::UNDERWATER_MOVEMENT);
+            .cbits3
+            .contains(flags::ContextBits3::UNDERWATER_MOVEMENT);
         let p = old
-            .cbits2
-            .contains(flags::ContextBits2::UNDERWATER_MOVEMENT);
+            .cbits3
+            .contains(flags::ContextBits3::UNDERWATER_MOVEMENT);
         if n != p {
             list.push(format!("{}UNDERWATER_MOVEMENT", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::WALL_CLIMB);
-        let p = old.cbits2.contains(flags::ContextBits2::WALL_CLIMB);
+        let n = self.cbits3.contains(flags::ContextBits3::WALL_CLIMB);
+        let p = old.cbits3.contains(flags::ContextBits3::WALL_CLIMB);
         if n != p {
             list.push(format!("{}WALL_CLIMB", if n { "+" } else { "-" }));
         }

@@ -143,9 +143,8 @@ areas:
         - to: Shaft Bottom
           jumps: 1
       exits:
-        # TODO: replace fake way back with real way back
-        - to: Ebih > Ebih West > Alcove
-          time: 2
+        - to: Ebih > Ebih West > West 11
+          tags: [xshift]
     - name: Right Column
       coord: [17.9, 10.5]
       local:
@@ -176,19 +175,19 @@ areas:
       local:
         - to: Right Column
         - to: Vault
-      #locations:
-      #  - name: Remote Flask
-      #    item: Flask
-      #    canon: Giguna_Northeast_Flask
-      #    req: $boomerang
-      #    tags: [remote_flask]
+      locations:
+        - name: Remote Flask
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          req: $boomerang
+          tags: [remote_flask]
     - name: Vault
       coord: [17.2, 10.8]
-      #locations:
-      #  - name: Item
-      #    item: Flask
-      #    canon: Giguna_Northeast_Flask
-      #    tags: [flask]
+      locations:
+        - name: Item
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          tags: [flask]
       exits:
         - to: Door
           req: ^_door_opened
@@ -451,11 +450,11 @@ areas:
           req: $grab
           time: 2.25
     - name: Tunnel Fork
-      coord: [14.7, 11.7]
+      coord: [14.7, 11.75]
       local:
         - to: East Susar
         - to: East 13
-          thru: [14.5, 11.7]
+          thru: [14.5, 11.75]
       exits:
         - to: Tunnel Bottom
           req: $grab
@@ -464,7 +463,7 @@ areas:
           req: $hook
           time: 2.25
     - name: East Susar
-      coord: [14.8, 11.7]
+      coord: [14.8, 11.75]
       exits:
         - to: Tunnel Fork
           req: ^_east_susar
@@ -483,14 +482,14 @@ areas:
           price: 100
           time: 0.5
     - name: East 12
-      coord: [14.95, 11.7]
+      coord: [14.95, 11.75]
       local:
         - to: East Susar
       exits:
         - to: Wasteland > West 12
           tags: [xshift]
     - name: East 13
-      coord: [14.95, 12.7]
+      coord: [14.95, 12.75]
       exits:
         - to: Wasteland > West 13
           tags: [xshift]
@@ -585,32 +584,147 @@ areas:
     # East half, er, three-quarters
     - name: East 12
       coord: [18.95, 11.8]
+      local:
+        - to: East Ledge
+      exits:
+        - to: Ebih > Ebih West > West 12
+          tags: [xshift]
     - name: East 13
       coord: [18.95, 12.7]
+      local:
+        - to: Door Left
+        - to: Bluff by Door
+        - to: Tiny Hill
     - name: East 14
       coord: [18.95, 13.6]
+      local:
+        - to: Door Right
+          jumps: 2  # ?
     - name: East Ledge
       coord: [18.7, 12.2]
+      local:
+        - to: East 13
+        - to: Door Left
+        - to: Bluff by Door
+        - to: Tiny Hill
+      exits:
+        - to: East 12
+          req: $grab or $climb
+          movement: base
+          jumps: 3
+        - to: East 12
+          req: $hook
+          time: 1  # ?
     - name: Door Left
       coord: [18.5, 13.2]
+      local:
+        - to: Bluff by Door
+        - to: Tiny Hill
+      exits:
+        - to: Door Right
+          req: Ebih_Wasteland_Door
+          movement: base
     - name: Door Right
       coord: [18.65, 13.2]
+      local:
+        - to: East 14
+      exits:
+        - to: Door Left
+          req: Ebih_Wasteland_Door
+          movement: base
     - name: Bluff by Door
       coord: [18.4, 13.6]
+      local:
+        - to: Tiny Hill
+          jumps: 2
+      exits:
+        - to: Door Left
+          req: $climb and $grab
+          movement: base
+          jumps: 3
+        - to: Door Left
+          req: $hook
+          time: 1  # ?
     - name: Tiny Hill
       coord: [18.0, 13.5]
+      local:
+        - to: Bluff by Door
+        - to: Center Plains
     - name: Steeper Hill
       coord: [17.2, 13.3]
+      local:
+        - to: Center Plains
+        - to: West Plains
     - name: Center Plains
       coord: [17.4, 13.6]
+      local:
+        - to: Tiny Hill
+          jumps: 1
+      exits:
+        - to: Steeper Hill
+          req: $grab or $climb
+          movement: base
+          jumps: 2
     - name: West Plains
       coord: [17.0, 13.6]
+      local:
+        - to: Steeper Hill
+          jumps: 3
+        - to: Passage East
+        - to: Westward Hill
     - name: Passage East
       coord: [16.6, 13.6]
+      local:
+        - to: West Plains
+        - to: Westward Hill
+      exits:
+        - to: Passage Cache
+          req: ^mode == 'drone' and Ebih_Wasteland_Passage_H
+          movement: base
+      hybrid:
+        - name: Clear Horizontal Passage Manually
+          to: Passage Cache
+          item: Ebih_Wasteland_Passage_H
+          canon: Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone'
+          time: 15  # ?
+          item_time: 0
+        - name: Mist through Horizontal Passage
+          to: Passage Cache
+          item: Ebih_Wasteland_Passage_H
+          canon: Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone' and Mist_Upgrade
+          movement: mist2
+          item_time: 0
+
     - name: Passage Cache
       coord: [15.4, 13.6]
+      exits:
+        - to: Passage East
+          req: ^mode == 'drone' and Ebih_Wasteland_Passage_H
+          movement: base
+      hybrid:
+        - name: Clear Horizontal Passage Manually
+          to: Passage East
+          item: Ebih_Wasteland_Passage_H
+          canon: Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone'
+          time: 15  # ?
+          item_time: 0
+        - name: Mist through Horizontal Passage
+          to: Passage East
+          item: Ebih_Wasteland_Passage_H
+          canon: Ebih_Wasteland_Passage_H
+          req: ^mode == 'drone' and Mist_Upgrade
+          movement: mist2
+          item_time: 0
     - name: Westward Hill
       coord: [16.45, 13.4]
+      local:
+        - to: Lower Cliff
+          jumps: 4
+        - to: Passage East
+        - to: West Plains
 
     # Upper portion
     - name: Upper Cache
@@ -1304,7 +1418,7 @@ areas:
           item: The_Ideal_Kiengir
           tags: [standing]
     - name: Southwest
-      coord: [12.3, 8.9]
+      coord: [12.2, 8.9]
       exits:
         - to: West Caverns > Northwest
           tags: [yshift]

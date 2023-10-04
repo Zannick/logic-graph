@@ -1321,6 +1321,9 @@ areas:
       coord: [19.05, 10.75]
       local:
         - to: West Fork
+      exits:
+        - to: Giguna > Giguna Northeast > East 11
+          tags: [xshift]
     - name: West 12
       coord: [19.05, 11.8]
       exits:
@@ -1328,11 +1331,16 @@ areas:
           req: $climb
           movement: base
           jumps: 8  # ?
+        - to: Giguna > Wasteland > East 12
+          tags: [xshift]
     - name: West 13
       coord: [19.05, 12.7]
       local:
-         - to: Lower Save
-           jumps: 1
+        - to: Lower Save
+          jumps: 1
+      exits:
+        - to: Giguna > Wasteland > East 13
+          tags: [xshift]
     - name: East 13
       coord: [20.95, 12.8]
       local:
@@ -2152,6 +2160,7 @@ areas:
           jumps: 1
       exits:
         - to: Amagi > West Lake > West 15
+          tags: [xshift]
     - name: Below Door
       coord: [21.55, 15.2]
       local:

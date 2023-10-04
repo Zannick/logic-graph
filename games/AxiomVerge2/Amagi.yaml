@@ -998,6 +998,7 @@ areas:
         - to: Surface Wall Left
       exits:
         - to: Ebih > Vertical Interchange > East 15
+          tags: [xshift]
 
 # MUS A M20 : 56s
 # TODO: try defeating MUS without grabbing the flask in between

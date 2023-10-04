@@ -331,6 +331,10 @@ pub fn access_ebih_interchange_gate_and_not_ebih_interchange_block_and_hook(ctx:
     ((ctx.has(Item::Ebih_Interchange_Gate) && !ctx.has(Item::Ebih_Interchange_Block))
         && helper__hook!(ctx))
 }
+pub fn access_ebih_wasteland_door(ctx: &Context) -> bool {
+    // Ebih_Wasteland_Door
+    ctx.has(Item::Ebih_Wasteland_Door)
+}
 pub fn access_ebih_waterfall_wall(ctx: &Context) -> bool {
     // Ebih_Waterfall_Wall
     ctx.has(Item::Ebih_Waterfall_Wall)
@@ -630,6 +634,10 @@ pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
 }
+pub fn access_mode__drone_and_ebih_wasteland_passage_h(ctx: &Context) -> bool {
+    // ^mode == 'drone' and Ebih_Wasteland_Passage_H
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Wasteland_Passage_H))
+}
 pub fn access_mode__drone_and_ebih_waterfall_block_left(ctx: &Context) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Left))
@@ -637,6 +645,10 @@ pub fn access_mode__drone_and_ebih_waterfall_block_left(ctx: &Context) -> bool {
 pub fn access_mode__drone_and_ebih_waterfall_block_right(ctx: &Context) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Right
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Ebih_Waterfall_Block_Right))
+}
+pub fn access_mode__drone_and_mist_upgrade(ctx: &Context) -> bool {
+    // ^mode == 'drone' and Mist_Upgrade
+    (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
 }
 pub fn access_more_refills(ctx: &Context) -> bool {
     // $more_refills

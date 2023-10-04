@@ -2802,6 +2802,98 @@ pub fn local_travel_time(
             SpotId::Giguna__Wasteland__West_14,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 1228,
+        ([false], SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => 877,
+        ([false], SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => 1578,
+        ([false], SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            1929
+        }
+        ([false], SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => 3333,
+        ([false], SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => {
+            1200
+        }
+        ([false], SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => 877,
+        ([false], SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => {
+            1000
+        }
+        (
+            [false],
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+        ) => 1400,
+        ([false], SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            2456
+        }
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+        ) => 400,
+        ([false], SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            1754
+        }
+        ([false], SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => {
+            1052
+        }
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Center_Plains,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__Center_Plains,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__West_Plains,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Center_Plains,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+        ) => 2105,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__Passage_East,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Passage_East,
+            SpotId::Giguna__Wasteland__West_Plains,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Lower_Cliff,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__West_Plains,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Passage_East,
+        ) => 526,
         (
             [false],
             SpotId::Giguna__Giguna_Base__East_14,
@@ -6721,6 +6813,94 @@ pub fn local_travel_time(
             SpotId::Giguna__Wasteland__West_14,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
         ) => 1228,
+        ([true], SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => 877,
+        ([true], SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => 1578,
+        ([true], SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            1929
+        }
+        ([true], SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => 3333,
+        ([true], SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => 1200,
+        ([true], SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => 877,
+        ([true], SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => {
+            1000
+        }
+        (
+            [true],
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+        ) => 1400,
+        ([true], SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            2456
+        }
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+        ) => 400,
+        ([true], SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            1754
+        }
+        ([true], SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => 1052,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Center_Plains,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__Center_Plains,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__West_Plains,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Center_Plains,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+        ) => 2105,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__Passage_East,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Passage_East,
+            SpotId::Giguna__Wasteland__West_Plains,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Lower_Cliff,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__West_Plains,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Passage_East,
+        ) => 526,
         ([true], SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
             1578
         }
@@ -8527,7 +8707,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Amagi__West_Lake__West_15 => enum_map! {
             SpotId::Amagi__West_Lake__Surface_Wall_Left => 2807,
             SpotId::Amagi__West_Lake__West_15 => 0,
-            SpotId::Ebih__Vertical_Interchange__East_15 => 1000,
+            SpotId::Ebih__Vertical_Interchange__East_15 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -9623,18 +9803,21 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Ebih__Ebih_West__West_11 => enum_map! {
             SpotId::Ebih__Ebih_West__West_Fork => 1052,
             SpotId::Ebih__Ebih_West__West_11 => 0,
+            SpotId::Giguna__Giguna_Northeast__East_11 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Ebih__Ebih_West__West_12 => enum_map! {
             SpotId::Ebih__Ebih_West__West_Fork => 4800,
             SpotId::Ebih__Ebih_West__West_12 => 0,
+            SpotId::Giguna__Wasteland__East_12 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Ebih__Ebih_West__West_13 => enum_map! {
             SpotId::Ebih__Ebih_West__Lower_Save => 1578,
             SpotId::Ebih__Ebih_West__West_13 => 0,
+            SpotId::Giguna__Wasteland__East_13 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -10191,7 +10374,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Ebih__Vertical_Interchange__East_15 => enum_map! {
-            SpotId::Amagi__West_Lake__West_15 => 1000,
+            SpotId::Amagi__West_Lake__West_15 => 1350,
             SpotId::Ebih__Vertical_Interchange__East_Tunnel => 701,
             SpotId::Ebih__Vertical_Interchange__East_15 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -10772,7 +10955,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Giguna_Northeast__East_11 => enum_map! {
-            SpotId::Ebih__Ebih_West__Alcove => 2000,
+            SpotId::Ebih__Ebih_West__West_11 => 1350,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => 600,
             SpotId::Giguna__Giguna_Northeast__East_11 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -11098,71 +11281,103 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__East_12 => enum_map! {
+            SpotId::Ebih__Ebih_West__West_12 => 1350,
             SpotId::Giguna__Wasteland__East_12 => 0,
+            SpotId::Giguna__Wasteland__East_Ledge => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__East_13 => enum_map! {
             SpotId::Giguna__Wasteland__East_13 => 0,
+            SpotId::Giguna__Wasteland__Door_Left => 1578,
+            SpotId::Giguna__Wasteland__Bluff_by_Door => 1929,
+            SpotId::Giguna__Wasteland__Tiny_Hill => 3333,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__East_14 => enum_map! {
             SpotId::Giguna__Wasteland__East_14 => 0,
+            SpotId::Giguna__Wasteland__Door_Right => 1200,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__East_Ledge => enum_map! {
+            SpotId::Giguna__Wasteland__East_12 => 1000,
+            SpotId::Giguna__Wasteland__East_13 => 877,
             SpotId::Giguna__Wasteland__East_Ledge => 0,
+            SpotId::Giguna__Wasteland__Door_Left => 1000,
+            SpotId::Giguna__Wasteland__Bluff_by_Door => 1400,
+            SpotId::Giguna__Wasteland__Tiny_Hill => 2456,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Door_Left => enum_map! {
             SpotId::Giguna__Wasteland__Door_Left => 0,
+            SpotId::Giguna__Wasteland__Door_Right => 526,
+            SpotId::Giguna__Wasteland__Bluff_by_Door => 400,
+            SpotId::Giguna__Wasteland__Tiny_Hill => 1754,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Door_Right => enum_map! {
+            SpotId::Giguna__Wasteland__East_14 => 1052,
+            SpotId::Giguna__Wasteland__Door_Left => 526,
             SpotId::Giguna__Wasteland__Door_Right => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Bluff_by_Door => enum_map! {
+            SpotId::Giguna__Wasteland__Door_Left => 1000,
             SpotId::Giguna__Wasteland__Bluff_by_Door => 0,
+            SpotId::Giguna__Wasteland__Tiny_Hill => 1403,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Tiny_Hill => enum_map! {
+            SpotId::Giguna__Wasteland__Bluff_by_Door => 1403,
             SpotId::Giguna__Wasteland__Tiny_Hill => 0,
+            SpotId::Giguna__Wasteland__Center_Plains => 2105,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Steeper_Hill => enum_map! {
             SpotId::Giguna__Wasteland__Steeper_Hill => 0,
+            SpotId::Giguna__Wasteland__Center_Plains => 701,
+            SpotId::Giguna__Wasteland__West_Plains => 701,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Center_Plains => enum_map! {
+            SpotId::Giguna__Wasteland__Tiny_Hill => 2105,
+            SpotId::Giguna__Wasteland__Steeper_Hill => 1200,
             SpotId::Giguna__Wasteland__Center_Plains => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__West_Plains => enum_map! {
+            SpotId::Giguna__Wasteland__Steeper_Hill => 1799,
             SpotId::Giguna__Wasteland__West_Plains => 0,
+            SpotId::Giguna__Wasteland__Passage_East => 1403,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Passage_East => enum_map! {
+            SpotId::Giguna__Wasteland__West_Plains => 1403,
             SpotId::Giguna__Wasteland__Passage_East => 0,
+            SpotId::Giguna__Wasteland__Passage_Cache => 4210,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Passage_Cache => enum_map! {
+            SpotId::Giguna__Wasteland__Passage_East => 4210,
             SpotId::Giguna__Wasteland__Passage_Cache => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Wasteland__Westward_Hill => enum_map! {
+            SpotId::Giguna__Wasteland__Lower_Cliff => 2400,
+            SpotId::Giguna__Wasteland__West_Plains => 1929,
+            SpotId::Giguna__Wasteland__Passage_East => 526,
             SpotId::Giguna__Wasteland__Westward_Hill => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -13411,7 +13626,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => 2807,
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__West_15) => 0,
-        (SpotId::Amagi__West_Lake__West_15, SpotId::Ebih__Vertical_Interchange__East_15) => 1000,
+        (SpotId::Amagi__West_Lake__West_15, SpotId::Ebih__Vertical_Interchange__East_15) => 1350,
         (SpotId::Amagi__West_Lake__West_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Helipad) => 0,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
@@ -14321,12 +14536,15 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => 1052,
         (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_11) => 0,
+        (SpotId::Ebih__Ebih_West__West_11, SpotId::Giguna__Giguna_Northeast__East_11) => 1350,
         (SpotId::Ebih__Ebih_West__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Ebih_West__West_12, SpotId::Ebih__Ebih_West__West_Fork) => 4800,
         (SpotId::Ebih__Ebih_West__West_12, SpotId::Ebih__Ebih_West__West_12) => 0,
+        (SpotId::Ebih__Ebih_West__West_12, SpotId::Giguna__Wasteland__East_12) => 1350,
         (SpotId::Ebih__Ebih_West__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => 1578,
         (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__West_13) => 0,
+        (SpotId::Ebih__Ebih_West__West_13, SpotId::Giguna__Wasteland__East_13) => 1350,
         (SpotId::Ebih__Ebih_West__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => 5087,
         (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__East_13) => 0,
@@ -14995,7 +15213,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             SpotId::Ebih__Vertical_Interchange__East_Tunnel,
             SpotId::Menu__Upgrade_Menu__Physiology,
         ) => 1000,
-        (SpotId::Ebih__Vertical_Interchange__East_15, SpotId::Amagi__West_Lake__West_15) => 1000,
+        (SpotId::Ebih__Vertical_Interchange__East_15, SpotId::Amagi__West_Lake__West_15) => 1350,
         (
             SpotId::Ebih__Vertical_Interchange__East_15,
             SpotId::Ebih__Vertical_Interchange__East_Tunnel,
@@ -15824,7 +16042,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             SpotId::Menu__Upgrade_Menu__Physiology,
         ) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__East_11, SpotId::Ebih__Ebih_West__Alcove) => 2000,
+        (SpotId::Giguna__Giguna_Northeast__East_11, SpotId::Ebih__Ebih_West__West_11) => 1350,
         (
             SpotId::Giguna__Giguna_Northeast__East_11,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
@@ -16206,32 +16424,64 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__West_14) => 0,
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Giguna_Base__East_14) => 1350,
         (SpotId::Giguna__Wasteland__West_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Ebih__Ebih_West__West_12) => 1350,
         (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_12) => 0,
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => 877,
         (SpotId::Giguna__Wasteland__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__East_13) => 0,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => 1578,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => 1929,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => 3333,
         (SpotId::Giguna__Wasteland__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__East_14) => 0,
+        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => 1200,
         (SpotId::Giguna__Wasteland__East_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_12) => 1000,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => 877,
         (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_Ledge) => 0,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => 1000,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Bluff_by_Door) => 1400,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => 2456,
         (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Door_Left) => 0,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Door_Right) => 526,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Bluff_by_Door) => 400,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => 1754,
         (SpotId::Giguna__Wasteland__Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => 1052,
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__Door_Left) => 526,
         (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__Door_Right) => 0,
         (SpotId::Giguna__Wasteland__Door_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Door_Left) => 1000,
         (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Bluff_by_Door) => 0,
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => 1403,
         (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Bluff_by_Door) => 1403,
         (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Tiny_Hill) => 0,
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Center_Plains) => 2105,
         (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Steeper_Hill) => 0,
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Center_Plains) => 701,
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__West_Plains) => 701,
         (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Tiny_Hill) => 2105,
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => 1200,
         (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Center_Plains) => 0,
         (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => 1799,
         (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__West_Plains) => 0,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Passage_East) => 1403,
         (SpotId::Giguna__Wasteland__West_Plains, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__West_Plains) => 1403,
         (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__Passage_East) => 0,
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__Passage_Cache) => 4210,
         (SpotId::Giguna__Wasteland__Passage_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Giguna__Wasteland__Passage_East) => 4210,
         (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Giguna__Wasteland__Passage_Cache) => 0,
         (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Lower_Cliff) => 2400,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__West_Plains) => 1929,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Passage_East) => 526,
         (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Westward_Hill) => 0,
         (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Wasteland__Upper_Cache, SpotId::Giguna__Wasteland__Upper_Cache) => 0,
@@ -19514,6 +19764,32 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__Lower_Path_Left) => true,
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => true,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => true,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => true,
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => true,
+        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => true,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => true,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => true,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Bluff_by_Door) => true,
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => true,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Bluff_by_Door) => true,
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => true,
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => true,
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => true,
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Bluff_by_Door) => true,
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Center_Plains) => true,
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Center_Plains) => true,
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__West_Plains) => true,
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Tiny_Hill) => true,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => true,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Passage_East) => true,
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Westward_Hill) => true,
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__West_Plains) => true,
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__Westward_Hill) => true,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Lower_Cliff) => true,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Passage_East) => true,
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__West_Plains) => true,
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => true,
         (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Upper_Cliff) => true,
         (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Kari) => true,
@@ -22498,7 +22774,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Ebih__Vertical_Interchange__East_15,
-            1000,
+            1350,
         ),
         (
             SpotId::Amagi__West_Lake__West_15,
@@ -25839,6 +26115,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_11,
+            SpotId::Giguna__Giguna_Northeast__East_11,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25854,6 +26135,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_12,
+            SpotId::Giguna__Wasteland__East_12,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25866,6 +26152,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__West_13,
             SpotId::Ebih__Ebih_West__West_13,
             0,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__West_13,
+            SpotId::Giguna__Wasteland__East_13,
+            1350,
         ),
         (
             SpotId::Ebih__Ebih_West__West_13,
@@ -27566,7 +27857,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Vertical_Interchange__East_15,
             SpotId::Amagi__West_Lake__West_15,
-            1000,
+            1350,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__East_15,
@@ -29270,8 +29561,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__East_11,
-            SpotId::Ebih__Ebih_West__Alcove,
-            2000,
+            SpotId::Ebih__Ebih_West__West_11,
+            1350,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__East_11,
@@ -30225,11 +30516,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__East_12,
+            SpotId::Ebih__Ebih_West__West_12,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_12,
             SpotId::Giguna__Wasteland__East_12,
             0,
         ),
         (
             SpotId::Giguna__Wasteland__East_12,
+            SpotId::Giguna__Wasteland__East_Ledge,
+            877,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -30237,6 +30538,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__East_13,
             SpotId::Giguna__Wasteland__East_13,
             0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_13,
+            SpotId::Giguna__Wasteland__Door_Left,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_13,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_13,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            3333,
         ),
         (
             SpotId::Giguna__Wasteland__East_13,
@@ -30250,13 +30566,43 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__East_14,
+            SpotId::Giguna__Wasteland__Door_Right,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_14,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__East_12,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__East_13,
+            877,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
             SpotId::Giguna__Wasteland__East_Ledge,
             0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__Door_Left,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            1400,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_Ledge,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            2456,
         ),
         (
             SpotId::Giguna__Wasteland__East_Ledge,
@@ -30270,8 +30616,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Giguna__Wasteland__Door_Right,
+            526,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            400,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Left,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Right,
+            SpotId::Giguna__Wasteland__East_14,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Door_Right,
+            SpotId::Giguna__Wasteland__Door_Left,
+            526,
         ),
         (
             SpotId::Giguna__Wasteland__Door_Right,
@@ -30285,18 +30656,38 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Bluff_by_Door,
+            SpotId::Giguna__Wasteland__Door_Left,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
             SpotId::Giguna__Wasteland__Bluff_by_Door,
             0,
         ),
         (
             SpotId::Giguna__Wasteland__Bluff_by_Door,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Bluff_by_Door,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Tiny_Hill,
             SpotId::Giguna__Wasteland__Tiny_Hill,
             0,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            SpotId::Giguna__Wasteland__Center_Plains,
+            2105,
         ),
         (
             SpotId::Giguna__Wasteland__Tiny_Hill,
@@ -30310,8 +30701,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__Center_Plains,
+            701,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            SpotId::Giguna__Wasteland__West_Plains,
+            701,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Steeper_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Plains,
+            SpotId::Giguna__Wasteland__Tiny_Hill,
+            2105,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Center_Plains,
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            1200,
         ),
         (
             SpotId::Giguna__Wasteland__Center_Plains,
@@ -30325,13 +30736,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__Steeper_Hill,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Wasteland__West_Plains,
             SpotId::Giguna__Wasteland__West_Plains,
             0,
         ),
         (
             SpotId::Giguna__Wasteland__West_Plains,
+            SpotId::Giguna__Wasteland__Passage_East,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Wasteland__West_Plains,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_East,
+            SpotId::Giguna__Wasteland__West_Plains,
+            1403,
         ),
         (
             SpotId::Giguna__Wasteland__Passage_East,
@@ -30340,8 +30766,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Passage_East,
+            SpotId::Giguna__Wasteland__Passage_Cache,
+            4210,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Passage_Cache,
+            SpotId::Giguna__Wasteland__Passage_East,
+            4210,
         ),
         (
             SpotId::Giguna__Wasteland__Passage_Cache,
@@ -30352,6 +30788,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Passage_Cache,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Lower_Cliff,
+            2400,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__West_Plains,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Wasteland__Westward_Hill,
+            SpotId::Giguna__Wasteland__Passage_East,
+            526,
         ),
         (
             SpotId::Giguna__Wasteland__Westward_Hill,
@@ -36315,6 +36766,30 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
             Some(2099)
         }
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            Some(1403)
+        }
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            Some(2105)
+        }
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            Some(400)
+        }
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => Some(1754),
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => Some(1052),
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => Some(877),
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            Some(1929)
+        }
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => Some(1578),
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => Some(3333),
+        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => Some(1200),
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            Some(1400)
+        }
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => Some(1000),
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => Some(877),
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => Some(2456),
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
             Some(1578)
         }
@@ -36342,6 +36817,21 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1200)
         }
         (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__West_13) => Some(1228),
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__West_Plains) => {
+            Some(1403)
+        }
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Center_Plains) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__West_Plains) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            Some(1403)
+        }
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Center_Plains) => {
+            Some(2105)
+        }
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => {
             Some(1929)
         }
@@ -36351,6 +36841,21 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__Middle_Path) => Some(1228),
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
             Some(1228)
+        }
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Passage_East) => {
+            Some(1403)
+        }
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => {
+            Some(1799)
+        }
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Lower_Cliff) => {
+            Some(2400)
+        }
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Passage_East) => {
+            Some(526)
+        }
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__West_Plains) => {
+            Some(1929)
         }
         (SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Cache) => Some(2105),
         (SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Column_1_Top_Left) => {
@@ -39705,6 +40210,48 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
             (Some(2099), vec![])
         }
+        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            (Some(3333), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            (Some(1400), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => {
+            (Some(1000), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => {
+            (Some(2456), vec![])
+        }
         (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
             (Some(1578), vec![])
         }
@@ -39734,6 +40281,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__West_13) => {
             (Some(1228), vec![])
         }
+        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__West_Plains) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Center_Plains) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__West_Plains) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Bluff_by_Door) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Center_Plains) => {
+            (Some(2105), vec![])
+        }
         (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => {
             (Some(1929), vec![])
         }
@@ -39751,6 +40313,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
             (Some(1228), vec![])
+        }
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Passage_East) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Lower_Cliff) => {
+            (Some(2400), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Passage_East) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__West_Plains) => {
+            (Some(1929), vec![])
         }
         (SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Cache) => {
             (Some(2105), vec![])
