@@ -68,6 +68,7 @@ pub enum Item {
     Infect,
     Infection_Range,
     Infection_Speed,
+    Journal_2049_10_29,
     Ledge_Grab,
     Letter_from_Trace,
     Map_17_10,
@@ -150,6 +151,7 @@ impl fmt::Display for Item {
             Item::Infect => write!(f, "{}", "Infect"),
             Item::Infection_Range => write!(f, "{}", "Infection_Range"),
             Item::Infection_Speed => write!(f, "{}", "Infection_Speed"),
+            Item::Journal_2049_10_29 => write!(f, "{}", "Journal_2049_10_29"),
             Item::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
             Item::Letter_from_Trace => write!(f, "{}", "Letter_from_Trace"),
             Item::Map_17_10 => write!(f, "{}", "Map_17_10"),
@@ -232,6 +234,7 @@ impl std::str::FromStr for Item {
             "Infect" => Ok(Item::Infect),
             "Infection_Range" => Ok(Item::Infection_Range),
             "Infection_Speed" => Ok(Item::Infection_Speed),
+            "Journal_2049_10_29" => Ok(Item::Journal_2049_10_29),
             "Ledge_Grab" => Ok(Item::Ledge_Grab),
             "Letter_from_Trace" => Ok(Item::Letter_from_Trace),
             "Map_17_10" => Ok(Item::Map_17_10),
@@ -276,6 +279,7 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Escape
             | Item::Health
             | Item::Health_Fragment
+            | Item::Journal_2049_10_29
             | Item::Melee_Charge
             | Item::Notes_2053_02_27
             | Item::The_Ideal_Kiengir

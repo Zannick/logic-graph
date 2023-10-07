@@ -70,6 +70,8 @@ exit_movements:
     # roughly .4 at a diagonal...
     # TODO: mist movement costs 30 energy/s
     # and takes ~.6 seconds to exit form (though you might use that to keep moving)
+  platform:
+    x: .138
 
 time:
   default: 1

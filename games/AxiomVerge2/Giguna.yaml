@@ -346,10 +346,12 @@ areas:
     _east_susar: false
   spots:
     - name: East 10
-      coord: [14.95, 9.7]
+      coord: [14.95, 9.8]
       local:
         - to: East Platform
+        - to: Small Staircase
         - to: Tunnel Entrance
+          jumps_down: 1
       exits:
         - to: Carnelian > West 10
           tags: [xshift]
@@ -359,16 +361,32 @@ areas:
     - name: East Platform
       coord: [14.5, 10.1]
       local:
+        - to: Small Staircase
+          jumps_down: 1
         - to: Tunnel Entrance
           jumps_down: 1
         - to: Small Platform
+    - name: Small Staircase
+      coord: [14.55, 10.5]
+      local:
+        - to: Tunnel Entrance
+          jumps_down: 1
+        - to: Small Platform
+          jumps: 3
+      exits:
+        - to: East 10
+          req: $climb
+          movement: base
+          jumps: 4
     - name: Tunnel Entrance
       coord: [14.55, 10.7]
       local:
         - to: Small Platform
           jumps: 3
         - to: Tunnel Bottom
-      # TODO: exit to East 10 with wall climb?
+          jumps_down: 1
+        - to: Small Staircase
+          jumps: 2
     - name: Small Platform
       coord: [14.2, 10.2]
       local:
@@ -382,11 +400,19 @@ areas:
     - name: Higher Ledge
       coord: [14.1, 9.9]
       local:
-        - to: Column 2 Top
-          jumps: 4
+        - to: Floating Brick
+          jumps: 2
         - to: Small Platform
         - to: East Platform
+        - to: Small Staircase
         - to: Tunnel Entrance
+    - name: Floating Brick
+      coord: [14.25, 9.6]
+      local:
+        - to: Higher Ledge
+        - to: East Platform
+        - to: Column 2 Top
+          jumps: 2
     - name: Column 2 Top
       coord: [14, 9.3]
       local:
@@ -394,7 +420,7 @@ areas:
         - to: East Platform
         - to: Top Gap Right
     - name: Top Gap Right
-      coord: [13.6, 9.5]
+      coord: [13.65, 9.5]
       local:
         - to: Column 2 Top
         - to: Top Gap Left
@@ -421,7 +447,7 @@ areas:
       local:
         - to: Bush
         - to: Column 1 Top Left
-          thru: [12.8, 9.5]
+          thru: [12.875, 9.5]
           jumps: [2, 1]
       locations:
         - name: Item
@@ -432,7 +458,7 @@ areas:
       local:
         - to: Cache
         - to: Column 1 Top Left
-          thru: [12.8, 9.5]
+          thru: [12.875, 9.5]
           jumps: [2, 1]
       locations:
         - name: Item
@@ -441,7 +467,7 @@ areas:
           tags: [standing]
 
     - name: Tunnel Bottom
-      coord: [14.8, 11.4]
+      coord: [14.8, 11.45]
       local:
         - to: Tunnel Fork
         - to: Tunnel Entrance
@@ -450,7 +476,7 @@ areas:
           req: $grab
           time: 2.25
     - name: Tunnel Fork
-      coord: [14.7, 11.75]
+      coord: [14.7, 11.7]
       local:
         - to: East Susar
         - to: East 13
@@ -468,6 +494,7 @@ areas:
         - to: Tunnel Fork
           req: ^_east_susar
           movement: base
+          jumps: 1
         - to: East 12
           req: ^_east_susar
           movement: base
@@ -767,7 +794,7 @@ areas:
         - to: Wasteland > West 14
           tags: [xshift]
     - name: Stone Knob
-      coord: [14.5, 13.9]
+      coord: [14.55, 13.9]
       local:
         - to: Upper Cliff
         - to: Kari
@@ -787,7 +814,7 @@ areas:
           do: $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
           to: Giguna > Giguna Base > Upper Cliff
     - name: Upper Cliff
-      coord: [14.2, 13.6]
+      coord: [14.25, 13.6]
       local:
         - to: Stone Knob
         - to: Kari
@@ -796,9 +823,11 @@ areas:
           thru: [14.35, 14.1]
         - to: Right Pillar
     - name: Right Pillar
-      coord: [13.95, 13.6]
+      coord: [13.9, 13.65]
       local:
         - to: Ruin
+        - to: Upper Cliff
+          jumps: 1
       exits:
         - to: Left Pillar
           req: $grab
@@ -812,7 +841,7 @@ areas:
           req: $grab
           time: 1.5
     - name: Ruin
-      coord: [13.75, 14]
+      coord: [13.75, 14.1]
       locations:
         - name: Item
           item: Wall_Climb
@@ -825,7 +854,7 @@ areas:
           req: $grab and $climb
           time: 1.5
     - name: Middle Platform
-      coord: [14.5, 14.7]
+      coord: [14.45, 14.7]
       local:
         - to: Kari
         - to: Building Entry
@@ -836,7 +865,7 @@ areas:
         - to: Stone Knob
           req: $hook
           time: 1.5
-        - to: West Grate
+        - to: Staircase Top
           req: $hover
           time: 4.2
     - name: Kari
@@ -860,8 +889,8 @@ areas:
       exits:
         - to: Building Interior > Entry
           tags: [interior]
-    - name: West Grate
-      coord: [13.2, 14.8]
+    - name: Staircase Top
+      coord: [13.35, 14.8]
       local:
         - to: Staircase Bottom
           jumps_down: 2
@@ -870,6 +899,7 @@ areas:
         - to: Save Point
           jumps_down: 3
         - to: Building Entry
+        - to: West Grate
       exits:
         - to: Left Pillar
           req: $grab
@@ -877,6 +907,11 @@ areas:
         - to: Left Pillar
           req: $hook
           time: 3.5
+    - name: West Grate
+      coord: [13.15, 14.8]
+      local:
+        - to: Staircase Top
+      exits:
         - to: West 15
           req: Nanite_Mist
           price: 30
@@ -893,7 +928,7 @@ areas:
     - name: Staircase Bottom
       coord: [13.2, 15.7]
       local:
-        - to: West Grate
+        - to: Staircase Top
           jumps: 5
         - to: Save Point
           jumps_down: 1
@@ -916,7 +951,7 @@ areas:
           item: Researchers_Missing
           tags: [standing]
     - name: Save Point
-      coord: [13.5, 15.8]
+      coord: [13.5, 15.85]
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -929,7 +964,7 @@ areas:
           do: $save
           time: 1.3
     - name: West 16
-      coord: [13.05, 15.8]
+      coord: [13.05, 15.85]
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -1518,7 +1553,7 @@ areas:
         - to: Wall Top
           req: Nanite_Mist and Mist_Upgrade
           price: 70
-          movement: base
+          movement: mist2
     - name: Wall Bottom
       coord: [11.9, 16.7]
       local:

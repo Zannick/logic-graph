@@ -86,6 +86,8 @@ pub enum Expectation {
     GigunaWestCavernsCtxEastSusar(bool),
     GigunaRuinsWestCtxKishibHandled(bool),
     GigunaRuinsTopCtxDoorsOpen(bool),
+    GigunaCloudsCtxPlatformMoved(bool),
+    GigunaCloudsCtxPortalMoved(bool),
     // items
     AmagiDragonEyePassage(bool),
     AmagiStrongholdBoulder1(bool),
@@ -348,65 +350,67 @@ pub mod flags {
             const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 14;
             const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 15;
             const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 16;
-            const BOOMERANG_STEERING = 1 << 17;
-            const MAJOR_GLITCHES = 1 << 18;
-            const MINOR_GLITCHES = 1 << 19;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 20;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 21;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 22;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 23;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 24;
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 25;
-            const AMASHILAMA = 1 << 26;
-            const ANUMAN = 1 << 27;
-            const APOCALYPSE_BOMB = 1 << 28;
-            const BOOMERANG = 1 << 29;
-            const COMPANIES_LAYOFF = 1 << 30;
-            const DEAR_ERNEST = 1 << 31;
+            const GIGUNA__CLOUDS__CTX__PLATFORM_MOVED = 1 << 17;
+            const GIGUNA__CLOUDS__CTX__PORTAL_MOVED = 1 << 18;
+            const BOOMERANG_STEERING = 1 << 19;
+            const MAJOR_GLITCHES = 1 << 20;
+            const MINOR_GLITCHES = 1 << 21;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 22;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 23;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 24;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 25;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 26;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 27;
+            const AMASHILAMA = 1 << 28;
+            const ANUMAN = 1 << 29;
+            const APOCALYPSE_BOMB = 1 << 30;
+            const BOOMERANG = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const DEFEAT_EBIH_ALU = 1 << 0;
-            const DEFEAT_MUS_A_M20 = 1 << 1;
-            const DRONE_HOVER = 1 << 2;
-            const EBIH_INTERCHANGE_BLOCK = 1 << 3;
-            const EBIH_INTERCHANGE_GATE = 1 << 4;
-            const EBIH_WASTELAND_DOOR = 1 << 5;
-            const EBIH_WASTELAND_PASSAGE_H = 1 << 6;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 7;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 8;
-            const EBIH_WATERFALL_WALL = 1 << 9;
-            const EBIH_WEST_BLOCK = 1 << 10;
-            const FAST_TRAVEL = 1 << 11;
-            const GIGUNA_NORTHEAST_GATE = 1 << 12;
-            const HERETICS_TABLET = 1 << 13;
-            const ICE_AXE = 1 << 14;
-            const INFECTION_SPEED = 1 << 15;
-            const LEDGE_GRAB = 1 << 16;
-            const LETTER_FROM_TRACE = 1 << 17;
-            const MAP_17_10 = 1 << 18;
-            const MIST_UPGRADE = 1 << 19;
-            const NANITE_MIST = 1 << 20;
-            const POWER_MATRIX = 1 << 21;
-            const RECORD_LOSSES = 1 << 22;
-            const REMOTE_DRONE = 1 << 23;
-            const RESEARCHERS_MISSING = 1 << 24;
-            const SHOCKWAVE = 1 << 25;
-            const SLINGSHOT_HOOK = 1 << 26;
-            const STATION_POWER = 1 << 27;
-            const SWITCH_36_11 = 1 << 28;
-            const SWITCH_40_12 = 1 << 29;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 30;
-            const UNDER_SIEGE = 1 << 31;
+            const COMPANIES_LAYOFF = 1 << 0;
+            const DEAR_ERNEST = 1 << 1;
+            const DEFEAT_EBIH_ALU = 1 << 2;
+            const DEFEAT_MUS_A_M20 = 1 << 3;
+            const DRONE_HOVER = 1 << 4;
+            const EBIH_INTERCHANGE_BLOCK = 1 << 5;
+            const EBIH_INTERCHANGE_GATE = 1 << 6;
+            const EBIH_WASTELAND_DOOR = 1 << 7;
+            const EBIH_WASTELAND_PASSAGE_H = 1 << 8;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 9;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 10;
+            const EBIH_WATERFALL_WALL = 1 << 11;
+            const EBIH_WEST_BLOCK = 1 << 12;
+            const FAST_TRAVEL = 1 << 13;
+            const GIGUNA_NORTHEAST_GATE = 1 << 14;
+            const HERETICS_TABLET = 1 << 15;
+            const ICE_AXE = 1 << 16;
+            const INFECTION_SPEED = 1 << 17;
+            const LEDGE_GRAB = 1 << 18;
+            const LETTER_FROM_TRACE = 1 << 19;
+            const MAP_17_10 = 1 << 20;
+            const MIST_UPGRADE = 1 << 21;
+            const NANITE_MIST = 1 << 22;
+            const POWER_MATRIX = 1 << 23;
+            const RECORD_LOSSES = 1 << 24;
+            const REMOTE_DRONE = 1 << 25;
+            const RESEARCHERS_MISSING = 1 << 26;
+            const SHOCKWAVE = 1 << 27;
+            const SLINGSHOT_HOOK = 1 << 28;
+            const STATION_POWER = 1 << 29;
+            const SWITCH_36_11 = 1 << 30;
+            const SWITCH_40_12 = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u8 {
-            const UNDERWATER_MOVEMENT = 1 << 0;
-            const WALL_CLIMB = 1 << 1;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 0;
+            const UNDER_SIEGE = 1 << 1;
+            const UNDERWATER_MOVEMENT = 1 << 2;
+            const WALL_CLIMB = 1 << 3;
         }
     }
 }
@@ -526,8 +530,8 @@ impl context::Ctx for Context {
             Item::Anuman => self.cbits1.contains(flags::ContextBits1::ANUMAN),
             Item::Apocalypse_Bomb => self.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
-            Item::Companies_Layoff => self.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF),
-            Item::Dear_Ernest => self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST),
+            Item::Companies_Layoff => self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF),
+            Item::Dear_Ernest => self.cbits2.contains(flags::ContextBits2::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU),
             Item::Defeat_MUS_A_M20 => self.cbits2.contains(flags::ContextBits2::DEFEAT_MUS_A_M20),
             Item::Drone_Hover => self.cbits2.contains(flags::ContextBits2::DRONE_HOVER),
@@ -588,9 +592,9 @@ impl context::Ctx for Context {
             Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
             Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
             Item::Terminal_Breakthrough_1 => self
-                .cbits2
-                .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1),
-            Item::Under_Siege => self.cbits2.contains(flags::ContextBits2::UNDER_SIEGE),
+                .cbits3
+                .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1),
+            Item::Under_Siege => self.cbits3.contains(flags::ContextBits3::UNDER_SIEGE),
             Item::Underwater_Movement => self
                 .cbits3
                 .contains(flags::ContextBits3::UNDERWATER_MOVEMENT),
@@ -632,12 +636,12 @@ impl context::Ctx for Context {
                 .into(),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG).into(),
             Item::Companies_Layoff => self
-                .cbits1
-                .contains(flags::ContextBits1::COMPANIES_LAYOFF)
+                .cbits2
+                .contains(flags::ContextBits2::COMPANIES_LAYOFF)
                 .into(),
             Item::Dear_Ernest => self
-                .cbits1
-                .contains(flags::ContextBits1::DEAR_ERNEST)
+                .cbits2
+                .contains(flags::ContextBits2::DEAR_ERNEST)
                 .into(),
             Item::Defeat_Ebih_Alu => self
                 .cbits2
@@ -759,12 +763,12 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::SWITCH_40_12)
                 .into(),
             Item::Terminal_Breakthrough_1 => self
-                .cbits2
-                .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1)
+                .cbits3
+                .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1)
                 .into(),
             Item::Under_Siege => self
-                .cbits2
-                .contains(flags::ContextBits2::UNDER_SIEGE)
+                .cbits3
+                .contains(flags::ContextBits3::UNDER_SIEGE)
                 .into(),
             Item::Underwater_Movement => self
                 .cbits3
@@ -808,10 +812,10 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             },
             Item::Companies_Layoff => {
-                self.cbits1.insert(flags::ContextBits1::COMPANIES_LAYOFF);
+                self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
             },
             Item::Dear_Ernest => {
-                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
+                self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
             },
             Item::Defeat_Ebih_Alu => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_EBIH_ALU);
@@ -940,10 +944,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             },
             Item::Terminal_Breakthrough_1 => {
-                self.cbits2.insert(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+                self.cbits3.insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
             },
             Item::Under_Siege => {
-                self.cbits2.insert(flags::ContextBits2::UNDER_SIEGE);
+                self.cbits3.insert(flags::ContextBits3::UNDER_SIEGE);
             },
             Item::Underwater_Movement => {
                 self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
@@ -1000,10 +1004,10 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
             }
             Item::Companies_Layoff => {
-                self.cbits1.insert(flags::ContextBits1::COMPANIES_LAYOFF);
+                self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
             }
             Item::Dear_Ernest => {
-                self.cbits1.insert(flags::ContextBits1::DEAR_ERNEST);
+                self.cbits2.insert(flags::ContextBits2::DEAR_ERNEST);
             }
             Item::Defeat_Ebih_Alu => {
                 self.cbits2.insert(flags::ContextBits2::DEFEAT_EBIH_ALU);
@@ -1135,11 +1139,11 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             }
             Item::Terminal_Breakthrough_1 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+                self.cbits3
+                    .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
             }
             Item::Under_Siege => {
-                self.cbits2.insert(flags::ContextBits2::UNDER_SIEGE);
+                self.cbits3.insert(flags::ContextBits3::UNDER_SIEGE);
             }
             Item::Underwater_Movement => {
                 self.cbits3.insert(flags::ContextBits3::UNDERWATER_MOVEMENT);
@@ -1383,6 +1387,24 @@ impl context::Ctx for Context {
                 self.set_giguna__ruins_top__ctx__doors_open(*b)
             }
             ("giguna__ruins_top__ctx__doors_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__clouds__ctx__platform_moved", Yaml::Boolean(b)) => {
+                self.set_giguna__clouds__ctx__platform_moved(*b)
+            }
+            ("giguna__clouds__ctx__platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__clouds__ctx__portal_moved", Yaml::Boolean(b)) => {
+                self.set_giguna__clouds__ctx__portal_moved(*b)
+            }
+            ("giguna__clouds__ctx__portal_moved", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1647,6 +1669,24 @@ impl context::Ctx for Context {
                 Expectation::GigunaRuinsTopCtxDoorsOpen(*b)
             }
             ("giguna__ruins_top__ctx__doors_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__clouds__ctx__platform_moved", Yaml::Boolean(b)) => {
+                Expectation::GigunaCloudsCtxPlatformMoved(*b)
+            }
+            ("giguna__clouds__ctx__platform_moved", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__clouds__ctx__portal_moved", Yaml::Boolean(b)) => {
+                Expectation::GigunaCloudsCtxPortalMoved(*b)
+            }
+            ("giguna__clouds__ctx__portal_moved", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2375,6 +2415,24 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::GigunaCloudsCtxPlatformMoved(e) => {
+                    let v = self.giguna__clouds__ctx__platform_moved();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__clouds__ctx__platform_moved", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaCloudsCtxPortalMoved(e) => {
+                    let v = self.giguna__clouds__ctx__portal_moved();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__clouds__ctx__portal_moved", e, v
+                        ));
+                    }
+                }
                 Expectation::AmagiDragonEyePassage(e) => {
                     let v = self.has(Item::Amagi_Dragon_Eye_Passage);
                     if v != (*e).into() {
@@ -2949,6 +3007,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Clouds => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Far_Corner => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -2965,6 +3028,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Giguna__Helipad => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Lamassu => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -3177,6 +3245,10 @@ impl context::Ctx for Context {
             .remove(flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR);
         self.cbits1
             .remove(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_MOVED);
+        self.cbits1
+            .remove(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PORTAL_MOVED);
     }
 
     fn reset_region(&mut self, region_id: RegionId) {}
@@ -3209,6 +3281,12 @@ impl context::Ctx for Context {
             AreaId::Giguna__Ruins_West => {
                 self.cbits1
                     .remove(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
+            }
+            AreaId::Giguna__Clouds => {
+                self.cbits1
+                    .remove(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_MOVED);
+                self.cbits1
+                    .remove(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PORTAL_MOVED);
             }
             _ => (),
         }
@@ -3611,6 +3689,30 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_MOVED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_MOVED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__CLOUDS__CTX__PLATFORM_MOVED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PORTAL_MOVED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PORTAL_MOVED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__CLOUDS__CTX__PORTAL_MOVED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::BOOMERANG_STEERING);
         let p = old.cbits1.contains(flags::ContextBits1::BOOMERANG_STEERING);
         if n != p {
@@ -3718,13 +3820,13 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}BOOMERANG", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF);
-        let p = old.cbits1.contains(flags::ContextBits1::COMPANIES_LAYOFF);
+        let n = self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF);
+        let p = old.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF);
         if n != p {
             list.push(format!("{}COMPANIES_LAYOFF", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::DEAR_ERNEST);
-        let p = old.cbits1.contains(flags::ContextBits1::DEAR_ERNEST);
+        let n = self.cbits2.contains(flags::ContextBits2::DEAR_ERNEST);
+        let p = old.cbits2.contains(flags::ContextBits2::DEAR_ERNEST);
         if n != p {
             list.push(format!("{}DEAR_ERNEST", if n { "+" } else { "-" }));
         }
@@ -3933,19 +4035,19 @@ impl context::Ctx for Context {
             list.push(format!("{}SWITCH_40_12", if n { "+" } else { "-" }));
         }
         let n = self
-            .cbits2
-            .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+            .cbits3
+            .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
         let p = old
-            .cbits2
-            .contains(flags::ContextBits2::TERMINAL_BREAKTHROUGH_1);
+            .cbits3
+            .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
         if n != p {
             list.push(format!(
                 "{}TERMINAL_BREAKTHROUGH_1",
                 if n { "+" } else { "-" }
             ));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::UNDER_SIEGE);
-        let p = old.cbits2.contains(flags::ContextBits2::UNDER_SIEGE);
+        let n = self.cbits3.contains(flags::ContextBits3::UNDER_SIEGE);
+        let p = old.cbits3.contains(flags::ContextBits3::UNDER_SIEGE);
         if n != p {
             list.push(format!("{}UNDER_SIEGE", if n { "+" } else { "-" }));
         }
@@ -4391,5 +4493,37 @@ impl Context {
     pub fn set_giguna__ruins_top__ctx__doors_open(&mut self, val: bool) {
         self.cbits1
             .set(flags::ContextBits1::GIGUNA__RUINS_TOP__CTX__DOORS_OPEN, val);
+    }
+    pub fn giguna__clouds__ctx__platform_moved(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_MOVED),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__clouds__ctx__platform_moved(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__CLOUDS__CTX__PLATFORM_MOVED,
+            val,
+        );
+    }
+    pub fn giguna__clouds__ctx__portal_moved(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PORTAL_MOVED),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__clouds__ctx__portal_moved(&mut self, val: bool) {
+        self.cbits1
+            .set(flags::ContextBits1::GIGUNA__CLOUDS__CTX__PORTAL_MOVED, val);
     }
 }

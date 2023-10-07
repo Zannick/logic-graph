@@ -513,9 +513,11 @@ subgraph Giguna
     subgraph Giguna__West_Caverns[West Caverns]
         Giguna__West_Caverns__East_10(East 10);
         Giguna__West_Caverns__East_Platform(East Platform);
+        Giguna__West_Caverns__Small_Staircase(Small Staircase);
         Giguna__West_Caverns__Tunnel_Entrance(Tunnel Entrance);
         Giguna__West_Caverns__Small_Platform(Small Platform);
         Giguna__West_Caverns__Higher_Ledge(Higher Ledge);
+        Giguna__West_Caverns__Floating_Brick(Floating Brick);
         Giguna__West_Caverns__Column_2_Top(Column 2 Top);
         Giguna__West_Caverns__Top_Gap_Right(Top Gap Right);
         Giguna__West_Caverns__Top_Gap_Left(Top Gap Left);
@@ -580,6 +582,7 @@ subgraph Giguna
         Giguna__Giguna_Base__Middle_Platform(Middle Platform);
         Giguna__Giguna_Base__Kari(Kari);
         Giguna__Giguna_Base__Building_Entry(Building Entry);
+        Giguna__Giguna_Base__Staircase_Top(Staircase Top);
         Giguna__Giguna_Base__West_Grate(West Grate);
         Giguna__Giguna_Base__West_15(West 15);
         Giguna__Giguna_Base__Staircase_Bottom(Staircase Bottom);
@@ -674,6 +677,32 @@ subgraph Giguna
         Giguna__Helipad__South_Middle(South Middle);
         Giguna__Helipad__South_Right(South Right);
         Giguna__Helipad__Lowest_Ledge(Lowest Ledge);
+    end
+    subgraph Giguna__Clouds[Clouds]
+        Giguna__Clouds__North_Left(North Left);
+        Giguna__Clouds__North_Middle(North Middle);
+        Giguna__Clouds__North_Right(North Right);
+        Giguna__Clouds__North_Under_Ledge(North Under Ledge);
+        Giguna__Clouds__Platform_Start(Platform Start);
+        Giguna__Clouds__Platform_Stop(Platform Stop);
+        Giguna__Clouds__Cache(Cache);
+        Giguna__Clouds__Platform_Early_Portal(Platform Early Portal);
+    end
+    subgraph Giguna__Lamassu[Lamassu]
+        Giguna__Lamassu__West_18(West 18);
+        Giguna__Lamassu__Staircase_Top(Staircase Top);
+        Giguna__Lamassu__Staircase_Bottom(Staircase Bottom);
+        Giguna__Lamassu__Staircase_Landing(Staircase Landing);
+        Giguna__Lamassu__Broken_Pillar(Broken Pillar);
+        Giguna__Lamassu__Upper_Platform_Edge(Upper Platform Edge);
+        Giguna__Lamassu__Lower_Platform_Left(Lower Platform Left);
+        Giguna__Lamassu__Lower_Platform_Right(Lower Platform Right);
+        Giguna__Lamassu__Head(Head);
+        Giguna__Lamassu__Rear_Platform(Rear Platform);
+        Giguna__Lamassu__Wingtip(Wingtip);
+        Giguna__Lamassu__Rear_Gap(Rear Gap);
+        Giguna__Lamassu__Deposit(Deposit);
+        Giguna__Lamassu__East_18(East 18);
     end
 end
 subgraph Glacier
@@ -1034,15 +1063,15 @@ Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__West_10
 Giguna__Far_Corner__South --> Giguna__Helipad__North
 Giguna__Giguna_Base__East_14 <--> Giguna__Wasteland__West_14
 Giguna__Giguna_Base__Left_Pillar <--> Giguna__Giguna_Base__Right_Pillar
+Giguna__Giguna_Base__Middle_Platform --> Giguna__Giguna_Base__Staircase_Top
 Giguna__Giguna_Base__Middle_Platform --> Giguna__Giguna_Base__Stone_Knob
-Giguna__Giguna_Base__Middle_Platform --> Giguna__Giguna_Base__West_Grate
 Giguna__Giguna_Base__Ruin --> Giguna__Giguna_Base__Left_Pillar
 Giguna__Giguna_Base__Ruin --> Giguna__Giguna_Base__Right_Pillar
+Giguna__Giguna_Base__Staircase_Top --> Giguna__Giguna_Base__Left_Pillar
 Giguna__Giguna_Base__Stone_Knob --> Giguna__Giguna_Base__Upper_Cliff
 Giguna__Giguna_Base__West_15 <--> Giguna__Giguna_Base__West_Grate
 Giguna__Giguna_Base__West_15 <--> Giguna__Helipad__East_15
 Giguna__Giguna_Base__West_16 <--> Giguna__Helipad__East_16
-Giguna__Giguna_Base__West_Grate --> Giguna__Giguna_Base__Left_Pillar
 Giguna__Giguna_Northeast__Crow_Eating --> Giguna__Giguna_Northeast__Gate_Vent
 Giguna__Giguna_Northeast__Gate_Button <--> Giguna__Giguna_Northeast__Gate_Left
 Giguna__Giguna_Northeast__Right_Column --> Giguna__Giguna_Northeast__Door
@@ -1053,6 +1082,8 @@ Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Right_Column
 Giguna__Giguna_Northeast__Vault --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__West_9 --> Giguna__Ruins_East__East_9
+Giguna__Helipad__Railing <--> Giguna__Helipad__Wall_Top
+Giguna__Helipad__So_Close --> Giguna__Helipad__Tablet_Ledge
 Giguna__Ruins_Center__East_8 <--> Giguna__Ruins_East__West_8
 Giguna__Ruins_Center__East_9 <--> Giguna__Ruins_East__West_9
 Giguna__Ruins_Center__Wall_Bottom --> Giguna__Ruins_Center__Wall_Top
@@ -1091,6 +1122,7 @@ Giguna__Wasteland__West_13 <--> Giguna__West_Caverns__East_13
 Giguna__West_Caverns__East_10 --> Giguna__West_Caverns__Column_2_Top
 Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__East_12
 Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__Tunnel_Fork
+Giguna__West_Caverns__Small_Staircase --> Giguna__West_Caverns__East_10
 Giguna__West_Caverns__Tunnel_Bottom --> Giguna__West_Caverns__Tunnel_Entrance
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Bottom
 Giguna__West_Caverns__Tunnel_Fork --> Giguna__West_Caverns__Tunnel_Entrance
