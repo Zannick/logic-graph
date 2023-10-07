@@ -358,6 +358,7 @@ areas:
         - to: Cuesta
           jumps: 2
         - to: East 11
+          jumps: 1
       exits:
         - to: Cuesta
           req: $hook

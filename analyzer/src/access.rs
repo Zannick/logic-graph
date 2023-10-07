@@ -356,7 +356,7 @@ where
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if spot_map[*spot].is_none() && world.are_spots_connected(ctx.get().position(), *spot) {
+            if spot_map[*spot].is_none() && world.get_condensed_edges_from(ctx.get().position()).into_iter().any(|ce| ce.dst == *spot) {
                 vec.push(format!(
                     "{} -> {}: movement not available",
                     ctx.get().position(),
@@ -366,7 +366,7 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.get().position()) {
-            if spot_map[exit.dest()].is_none() {
+            if spot_map[exit.dest()].is_none() && (!W::same_area(ctx.get().position(), exit.dest()) || world.get_condensed_edges_from(ctx.get().position()).into_iter().any(|ce| ce.dst == exit.dest())) {
                 vec.push(format!("{}: exit not usable", exit.id()));
             }
         }

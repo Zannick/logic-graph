@@ -1,0 +1,28 @@
+name: BreachTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+    - Boomerang
+    - Ledge_Grab
+    - Wall_Climb
+    - Infect{2}
+    - Remote_Drone
+    - Shockwave
+    - Underwater_Movement
+  context:
+    energy: 300
+    save: Giguna Breach > Peak > Save Point
+    mode: drone
+  start: Giguna Breach > Peak > Save Point
+
+tests:
+  - name: Slingshot
+    can_obtain: Slingshot_Hook
+  - name: Move to ravine
+    can_reach: Giguna Breach > Slingshot > Ravine
+  - name: Exit GB
+    with:
+      - Slingshot_Hook
+    start: Giguna Breach > Slingshot > Ravine
+    can_activate: Giguna Breach > Peak > Portal > Portal
