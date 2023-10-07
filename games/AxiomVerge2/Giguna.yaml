@@ -877,7 +877,19 @@ areas:
         - to: Left Pillar
           req: $hook
           time: 3.5
-        # TODO: next area
+        - to: West 15
+          req: Nanite_Mist
+          price: 30
+          movement: mist2
+    - name: West 15
+      coord: [13.05, 14.8]
+      exits:
+        - to: West Grate
+          req: Nanite_Mist
+          price: 30
+          movement: mist2
+        - to: Helipad > East 15
+          tags: [xshift]
     - name: Staircase Bottom
       coord: [13.2, 15.7]
       local:
@@ -922,7 +934,9 @@ areas:
         - to: Staircase Bottom
           jumps: 1
         - to: Save Point
-      # todo: next area
+      exits:
+        - to: Helipad > East 16
+          tags: [xshift]
 
 - name: Building Interior
   graph_offset: [0, -0.2]
@@ -1440,3 +1454,169 @@ areas:
           tags: [flask]
     - name: South
       coord: [11.4, 12.9]
+      exits:
+        - to: Helipad > North
+          tags: [yshift]
+
+- name: Helipad
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 15
+      coord: [12.95, 14.8]
+      local:
+        - to: Helicopter
+          jumps: 2
+      exits:
+        - to: Giguna Base > West 15
+          tags: [xshift]
+    - name: North
+      coord: [11.4, 13.1]
+      local:
+        - to: Helicopter
+        - to: Wall Top
+        - to: Irikar Drop
+    - name: Helicopter
+      coord: [11.7, 14.65]
+      local:
+        - to: East 15
+        - to: Wall Top
+        - to: Irikar Drop
+    - name: East 16
+      coord: [12.95, 15.85]
+      local:
+        - to: Railing
+      exits:
+        - to: Giguna Base > West 16
+          tags: [xshift]
+    - name: Irikar Drop
+      coord: [11.1, 15.5]
+      local:
+        - to: So Close!
+        - to: South Left
+        - to: South Middle
+        - to: South Right
+    - name: Wall Top
+      coord: [11.8, 15.45]
+      local:
+        - to: Wall Bottom
+        - to: Staircase Top
+      exits:
+        - to: Railing
+          req: $hover
+          movement: base
+    - name: Railing
+      coord: [12.5, 15.85]
+      local:
+        - to: East 16
+        - to: Wall Bottom
+        - to: Staircase Top
+          jumps_down: 1
+        - to: East 18
+          thru: [12.55, 16.45]
+          jumps_down: [1, 0]
+      exits:
+        - to: Wall Top
+          req: Nanite_Mist and Mist_Upgrade
+          price: 70
+          movement: base
+    - name: Wall Bottom
+      coord: [11.9, 16.7]
+      local:
+        - to: Staircase Top
+        # TODO: balloon boost
+    - name: So Close!
+      coord: [11.4, 16.65]
+      local:
+        - to: South Right
+      exits:
+        - to: Tablet Ledge
+          req: $hover
+          movement: base
+        - to: Tablet Ledge
+          req: Nanite_Mist and Mist_Upgrade
+          price: 20
+          movement: base
+    - name: Tablet Ledge
+      coord: [11.5, 16.7]
+      local:
+        - to: South Middle
+        - to: South Right
+      locations:
+        - name: Tablet
+          item: Journal_2049_10_29
+          tags: [standing]
+    - name: Staircase Top
+      coord: [12.45, 16.7]
+      local:
+        - to: Wall Bottom
+        - to: East 18
+    - name: East 18
+      coord: [12.95, 17.4]
+      local:
+        - to: Staircase Top
+          jumps: 4
+    - name: South Left
+      coord: [11.1, 17.9]
+    - name: South Middle
+      coord: [11.3, 17.9]
+    - name: South Right
+      coord: [11.75, 17.9]
+    - name: Lowest Ledge
+      coord: [12.3, 17.9]
+
+- name: Clouds
+  on_entry: $reset_old_area(^newpos)
+  reset:
+    _platform_moved: false
+    _portal_moved: false
+  spots:
+    - name: North Left
+      coord: [11.1, 18.1]
+    - name: North Middle
+      coord: [11.3, 18.1]
+    - name: North Right
+      coord: [11.75, 18.1]
+    - name: North Under Ledge
+      coord: [12.3, 18.1]
+    - name: Platform Start
+      coord: [12.3, 19.5]
+      # TODO: early portal in a single action
+      # with hack, [deploy], attract, and sight
+    - name: Platform Stop
+      coord: [13.5, 18.7]
+    - name: Cache
+      coord: [13.9, 18.3]
+    - name: Platform Early Portal
+      coord: [13.5, 18.85]
+
+- name: Lamassu
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 18
+      coord: [13.05, 17.4]
+    - name: Staircase Top
+      coord: [13.45, 17.4]
+    - name: Staircase Bottom
+      coord: [13.7, 17.8]
+    - name: Staircase Landing
+      coord: [13.75, 18.05]
+    - name: Broken Pillar
+      coord: [13.8, 18.3]
+    - name: Upper Platform Edge
+      coord: [14.15, 18.45]
+    - name: Lower Platform Left
+      coord: [14.35, 18.7]
+    - name: Lower Platform Right
+      coord: [14.6, 18.7]
+    - name: Head
+      coord: [14.9, 18.2]
+    - name: Rear Platform
+      coord: [15.5, 17.8]
+    - name: Wingtip
+      coord: [15.7, 18.1]
+    - name: Rear Gap
+      coord: [15.8, 18.0]
+    - name: Deposit
+      coord: [15.65, 19.5]
+    - name: East 18
+      coord: [15.95, 17.5]

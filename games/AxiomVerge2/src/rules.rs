@@ -705,14 +705,6 @@ pub fn access_not_within_menu_and_flasks__0(ctx: &Context) -> bool {
         _ => false,
     }) && Into::<i32>::into(ctx.flasks()) > 0.into())
 }
-pub fn access_not_within_menu_and_map_17_10_and_fast_travel(ctx: &Context) -> bool {
-    // NOT WITHIN `Menu` and Map_17_10 and Fast_Travel
-    ((!(match get_region(ctx.position()) {
-        RegionId::Menu => true,
-        _ => false,
-    }) && ctx.has(Item::Map_17_10))
-        && ctx.has(Item::Fast_Travel))
-}
 pub fn access_not_within_menu_and_mode__drone(ctx: &Context) -> bool {
     // NOT WITHIN `Menu` and ^mode == 'drone'
     (!(match get_region(ctx.position()) {
@@ -727,6 +719,15 @@ pub fn access_not_within_menu_and_not_breach_and_can_recall(ctx: &Context) -> bo
         _ => false,
     }) && !data::breach(ctx.position()))
         && helper__can_recall!(ctx))
+}
+pub fn access_not_within_menu_and_not_breach_and_map_17_10_and_fast_travel(ctx: &Context) -> bool {
+    // NOT WITHIN `Menu` and NOT ^breach and Map_17_10 and Fast_Travel
+    (((!(match get_region(ctx.position()) {
+        RegionId::Menu => true,
+        _ => false,
+    }) && !data::breach(ctx.position()))
+        && ctx.has(Item::Map_17_10))
+        && ctx.has(Item::Fast_Travel))
 }
 pub fn access_offset(ctx: &Context) -> bool {
     // $offset

@@ -2310,6 +2310,11 @@ pub fn local_travel_time(
         ) => 1754,
         (
             [false],
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+        ) => 1403,
+        (
+            [false],
             SpotId::Giguna_Breach__Fire_Room__East_11,
             SpotId::Giguna_Breach__Fire_Room__South,
         ) => 1403,
@@ -3267,6 +3272,26 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
         ([false], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
         ([false], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
+        ([false], SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => 4385,
+        ([false], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => 1550,
+        ([false], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => 2400,
+        ([false], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => 2349,
+        ([false], SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => 4385,
+        ([false], SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => {
+            2105
+        }
+        ([false], SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => 799,
+        ([false], SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => 1578,
+        ([false], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => 1149,
+        ([false], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => {
+            2399
+        }
+        ([false], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => {
+            2399
+        }
+        ([false], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => {
+            2399
+        }
         (
             [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -6341,6 +6366,11 @@ pub fn local_travel_time(
         ) => 1754,
         (
             [true],
+            SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+        ) => 1403,
+        (
+            [true],
             SpotId::Giguna_Breach__Fire_Room__East_11,
             SpotId::Giguna_Breach__Fire_Room__South,
         ) => 1403,
@@ -7254,6 +7284,22 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
         ([true], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
         ([true], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
+        ([true], SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => 4385,
+        ([true], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => 1550,
+        ([true], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => 2400,
+        ([true], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => 2349,
+        ([true], SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => 4385,
+        ([true], SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => 2105,
+        ([true], SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => 799,
+        ([true], SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => 1578,
+        ([true], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => 1149,
+        ([true], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => 2399,
+        ([true], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => {
+            2399
+        }
+        ([true], SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => {
+            2399
+        }
         (
             [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -10705,6 +10751,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna_Breach__Fire_Room__South => enum_map! {
             SpotId::Giguna_Breach__Fire_Room__Cuesta => 1500,
             SpotId::Giguna_Breach__Fire_Room__South => 0,
+            SpotId::Giguna_Breach__Fire_Room__East_11 => 1403,
             SpotId::Giguna_Breach__Antechamber__North => 1600,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -11528,9 +11575,17 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Giguna_Base__Left_Pillar => 3500,
             SpotId::Giguna__Giguna_Base__Building_Entry => 3157,
             SpotId::Giguna__Giguna_Base__West_Grate => 0,
+            SpotId::Giguna__Giguna_Base__West_15 => 526,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom => 1099,
             SpotId::Giguna__Giguna_Base__Table => 1754,
             SpotId::Giguna__Giguna_Base__Save_Point => 1300,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__West_15 => enum_map! {
+            SpotId::Giguna__Giguna_Base__West_Grate => 526,
+            SpotId::Giguna__Giguna_Base__West_15 => 0,
+            SpotId::Giguna__Helipad__East_15 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -11564,6 +11619,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Giguna_Base__Staircase_Bottom => 600,
             SpotId::Giguna__Giguna_Base__Save_Point => 1578,
             SpotId::Giguna__Giguna_Base__West_16 => 0,
+            SpotId::Giguna__Helipad__East_16 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -11954,6 +12010,101 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Giguna__Far_Corner__South => enum_map! {
             SpotId::Giguna__Far_Corner__South => 0,
+            SpotId::Giguna__Helipad__North => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__East_15 => enum_map! {
+            SpotId::Giguna__Giguna_Base__West_15 => 1350,
+            SpotId::Giguna__Helipad__East_15 => 0,
+            SpotId::Giguna__Helipad__Helicopter => 4385,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__North => enum_map! {
+            SpotId::Giguna__Helipad__North => 0,
+            SpotId::Giguna__Helipad__Helicopter => 1550,
+            SpotId::Giguna__Helipad__Irikar_Drop => 2400,
+            SpotId::Giguna__Helipad__Wall_Top => 2349,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Helicopter => enum_map! {
+            SpotId::Giguna__Helipad__East_15 => 4385,
+            SpotId::Giguna__Helipad__Helicopter => 0,
+            SpotId::Giguna__Helipad__Irikar_Drop => 2105,
+            SpotId::Giguna__Helipad__Wall_Top => 799,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__East_16 => enum_map! {
+            SpotId::Giguna__Giguna_Base__West_16 => 1350,
+            SpotId::Giguna__Helipad__East_16 => 0,
+            SpotId::Giguna__Helipad__Railing => 1578,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Irikar_Drop => enum_map! {
+            SpotId::Giguna__Helipad__Irikar_Drop => 0,
+            SpotId::Giguna__Helipad__So_Close => 1149,
+            SpotId::Giguna__Helipad__South_Left => 2399,
+            SpotId::Giguna__Helipad__South_Middle => 2399,
+            SpotId::Giguna__Helipad__South_Right => 2399,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Wall_Top => enum_map! {
+            SpotId::Giguna__Helipad__Wall_Top => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Railing => enum_map! {
+            SpotId::Giguna__Helipad__Railing => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Wall_Bottom => enum_map! {
+            SpotId::Giguna__Helipad__Wall_Bottom => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__So_Close => enum_map! {
+            SpotId::Giguna__Helipad__So_Close => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Tablet_Ledge => enum_map! {
+            SpotId::Giguna__Helipad__Tablet_Ledge => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Staircase_Top => enum_map! {
+            SpotId::Giguna__Helipad__Staircase_Top => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__East_18 => enum_map! {
+            SpotId::Giguna__Helipad__East_18 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__South_Left => enum_map! {
+            SpotId::Giguna__Helipad__South_Left => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__South_Middle => enum_map! {
+            SpotId::Giguna__Helipad__South_Middle => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__South_Right => enum_map! {
+            SpotId::Giguna__Helipad__South_Right => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Helipad__Lowest_Ledge => enum_map! {
+            SpotId::Giguna__Helipad__Lowest_Ledge => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -15701,6 +15852,9 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => 1500,
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__South) => 0,
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
+            1403
+        }
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Antechamber__North) => {
             1600
         }
@@ -16648,6 +16802,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             3157
         }
         (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__West_Grate) => 0,
+        (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__West_15) => 526,
         (
             SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
@@ -16655,6 +16810,10 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__Table) => 1754,
         (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__Save_Point) => 1300,
         (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Giguna__Giguna_Base__West_Grate) => 526,
+        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Giguna__Giguna_Base__West_15) => 0,
+        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Giguna__Helipad__East_15) => 1350,
+        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__Building_Entry,
@@ -16698,6 +16857,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => 1578,
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__West_16) => 0,
+        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Helipad__East_16) => 1350,
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Building_Interior__Entry, SpotId::Giguna__Giguna_Base__Building_Entry) => {
             750
@@ -17003,7 +17163,54 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Far_Corner__South, SpotId::Giguna__Far_Corner__South) => 0,
+        (SpotId::Giguna__Far_Corner__South, SpotId::Giguna__Helipad__North) => 1000,
         (SpotId::Giguna__Far_Corner__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Giguna_Base__West_15) => 1350,
+        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__East_15) => 0,
+        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => 4385,
+        (SpotId::Giguna__Helipad__East_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__North) => 0,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => 1550,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => 2400,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => 2349,
+        (SpotId::Giguna__Helipad__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => 4385,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Helicopter) => 0,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => 2105,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => 799,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Giguna_Base__West_16) => 1350,
+        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__East_16) => 0,
+        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => 1578,
+        (SpotId::Giguna__Helipad__East_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__Irikar_Drop) => 0,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => 1149,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => 2399,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => 2399,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => 2399,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Top) => 0,
+        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__Railing) => 0,
+        (SpotId::Giguna__Helipad__Railing, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Wall_Bottom, SpotId::Giguna__Helipad__Wall_Bottom) => 0,
+        (SpotId::Giguna__Helipad__Wall_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__So_Close, SpotId::Giguna__Helipad__So_Close) => 0,
+        (SpotId::Giguna__Helipad__So_Close, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Tablet_Ledge, SpotId::Giguna__Helipad__Tablet_Ledge) => 0,
+        (SpotId::Giguna__Helipad__Tablet_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__Staircase_Top) => 0,
+        (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__East_18) => 0,
+        (SpotId::Giguna__Helipad__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__South_Left, SpotId::Giguna__Helipad__South_Left) => 0,
+        (SpotId::Giguna__Helipad__South_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__South_Middle, SpotId::Giguna__Helipad__South_Middle) => 0,
+        (SpotId::Giguna__Helipad__South_Middle, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__South_Right, SpotId::Giguna__Helipad__South_Right) => 0,
+        (SpotId::Giguna__Helipad__South_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Helipad__Lowest_Ledge, SpotId::Giguna__Helipad__Lowest_Ledge) => 0,
+        (SpotId::Giguna__Helipad__Lowest_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -19975,6 +20182,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => true,
         (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => true,
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => true,
+        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => true,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => true,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => true,
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => true,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => true,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => true,
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => true,
+        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => true,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => true,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => true,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => true,
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -28836,6 +29055,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__South,
+            SpotId::Giguna_Breach__Fire_Room__East_11,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Fire_Room__South,
             SpotId::Giguna_Breach__Antechamber__North,
             1600,
         ),
@@ -31196,6 +31420,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__West_Grate,
+            SpotId::Giguna__Giguna_Base__West_15,
+            526,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             1099,
         ),
@@ -31211,6 +31440,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__West_Grate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_15,
+            SpotId::Giguna__Giguna_Base__West_Grate,
+            526,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_15,
+            SpotId::Giguna__Giguna_Base__West_15,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_15,
+            SpotId::Giguna__Helipad__East_15,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_15,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -31313,6 +31562,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__West_16,
             0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__West_16,
+            SpotId::Giguna__Helipad__East_16,
+            1350,
         ),
         (
             SpotId::Giguna__Giguna_Base__West_16,
@@ -32426,6 +32680,241 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Far_Corner__South,
+            SpotId::Giguna__Helipad__North,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Far_Corner__South,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_15,
+            SpotId::Giguna__Giguna_Base__West_15,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_15,
+            SpotId::Giguna__Helipad__East_15,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_15,
+            SpotId::Giguna__Helipad__Helicopter,
+            4385,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_15,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__North,
+            SpotId::Giguna__Helipad__North,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__North,
+            SpotId::Giguna__Helipad__Helicopter,
+            1550,
+        ),
+        (
+            SpotId::Giguna__Helipad__North,
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            2400,
+        ),
+        (
+            SpotId::Giguna__Helipad__North,
+            SpotId::Giguna__Helipad__Wall_Top,
+            2349,
+        ),
+        (
+            SpotId::Giguna__Helipad__North,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Helicopter,
+            SpotId::Giguna__Helipad__East_15,
+            4385,
+        ),
+        (
+            SpotId::Giguna__Helipad__Helicopter,
+            SpotId::Giguna__Helipad__Helicopter,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Helicopter,
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            2105,
+        ),
+        (
+            SpotId::Giguna__Helipad__Helicopter,
+            SpotId::Giguna__Helipad__Wall_Top,
+            799,
+        ),
+        (
+            SpotId::Giguna__Helipad__Helicopter,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_16,
+            SpotId::Giguna__Giguna_Base__West_16,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_16,
+            SpotId::Giguna__Helipad__East_16,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_16,
+            SpotId::Giguna__Helipad__Railing,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_16,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            SpotId::Giguna__Helipad__So_Close,
+            1149,
+        ),
+        (
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            SpotId::Giguna__Helipad__South_Left,
+            2399,
+        ),
+        (
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            SpotId::Giguna__Helipad__South_Middle,
+            2399,
+        ),
+        (
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            SpotId::Giguna__Helipad__South_Right,
+            2399,
+        ),
+        (
+            SpotId::Giguna__Helipad__Irikar_Drop,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Wall_Top,
+            SpotId::Giguna__Helipad__Wall_Top,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Wall_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Railing,
+            SpotId::Giguna__Helipad__Railing,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Railing,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Wall_Bottom,
+            SpotId::Giguna__Helipad__Wall_Bottom,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Wall_Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__So_Close,
+            SpotId::Giguna__Helipad__So_Close,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__So_Close,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Tablet_Ledge,
+            SpotId::Giguna__Helipad__Tablet_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Tablet_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Staircase_Top,
+            SpotId::Giguna__Helipad__Staircase_Top,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Staircase_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_18,
+            SpotId::Giguna__Helipad__East_18,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_18,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Left,
+            SpotId::Giguna__Helipad__South_Left,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Middle,
+            SpotId::Giguna__Helipad__South_Middle,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Middle,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Right,
+            SpotId::Giguna__Helipad__South_Right,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__South_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Helipad__Lowest_Ledge,
+            SpotId::Giguna__Helipad__Lowest_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Helipad__Lowest_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -36298,6 +36787,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => {
             Some(1754)
         }
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
+            Some(1403)
+        }
         (
             SpotId::Giguna_Breach__Fire_Room__West_11,
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
@@ -36644,6 +37136,18 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => {
             Some(877)
         }
+        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => Some(4385),
+        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => Some(1578),
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => Some(4385),
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => Some(2105),
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => Some(799),
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => Some(1149),
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => Some(2399),
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => Some(2399),
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => Some(2399),
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => Some(1550),
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => Some(2400),
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => Some(2349),
         (
             SpotId::Giguna__Ruins_Center__Center_Top,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
@@ -39630,6 +40134,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => {
             (Some(1754), vec![])
         }
+        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
+            (Some(1403), vec![])
+        }
         (
             SpotId::Giguna_Breach__Fire_Room__West_11,
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
@@ -40014,6 +40521,40 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => {
             (Some(877), vec![])
         }
+        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => {
+            (Some(4385), vec![])
+        }
+        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => {
+            (Some(4385), vec![])
+        }
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => {
+            (Some(799), vec![])
+        }
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => {
+            (Some(1149), vec![])
+        }
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => {
+            (Some(2399), vec![])
+        }
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => {
+            (Some(2399), vec![])
+        }
+        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => {
+            (Some(2399), vec![])
+        }
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => {
+            (Some(1550), vec![])
+        }
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => {
+            (Some(2400), vec![])
+        }
+        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => (Some(2349), vec![]),
         (
             SpotId::Giguna__Ruins_Center__Center_Top,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,

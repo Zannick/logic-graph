@@ -2964,6 +2964,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Helipad => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Ruins_Center => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);

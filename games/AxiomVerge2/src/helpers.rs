@@ -90,13 +90,19 @@ macro_rules! helper__can_deploy {
 }
 
 /// $can_recall (  )
-/// ^mode == 'drone' and not Anuman
+/// not ^breach and NOT WITHIN `Menu` and ^mode == 'drone' and not Anuman
 #[macro_export]
 macro_rules! helper__can_recall {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        ($ctx.mode() == enums::Mode::Drone && !$ctx.has(Item::Anuman))
+        (((!data::breach($ctx.position())
+            && !(match get_region($ctx.position()) {
+                RegionId::Menu => true,
+                _ => false,
+            }))
+            && $ctx.mode() == enums::Mode::Drone)
+            && !$ctx.has(Item::Anuman))
     }};
 }
 

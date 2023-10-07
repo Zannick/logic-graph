@@ -69,7 +69,7 @@ exit_movements:
     y: .5
     # roughly .4 at a diagonal...
     # TODO: mist movement costs 30 energy/s
-    # and takes ~.6 seconds to exit form
+    # and takes ~.6 seconds to exit form (though you might use that to keep moving)
 
 time:
   default: 1
@@ -141,7 +141,7 @@ warps:
     base_movement: true
   fast_travel_17_10:
     time: 12
-    req: NOT WITHIN `Menu` and Map_17_10 and Fast_Travel
+    req: NOT WITHIN `Menu` and NOT ^breach and Map_17_10 and Fast_Travel
     to: Giguna > Giguna Northeast > Save Point
     after: ^energy = $max_energy
 
@@ -170,7 +170,7 @@ helpers:
   $hook: ^mode == 'drone' and Slingshot_Hook
   $hover: ^mode == 'drone' and Drone_Hover
   $can_deploy: Remote_Drone and ^mode != 'drone' and not Anuman
-  $can_recall: ^mode == 'drone' and not Anuman
+  $can_recall: not ^breach and NOT WITHIN `Menu` and ^mode == 'drone' and not Anuman
   $shockwave: ^mode != 'drone' and Shockwave
 
   $open: Infect

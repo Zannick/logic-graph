@@ -581,6 +581,7 @@ subgraph Giguna
         Giguna__Giguna_Base__Kari(Kari);
         Giguna__Giguna_Base__Building_Entry(Building Entry);
         Giguna__Giguna_Base__West_Grate(West Grate);
+        Giguna__Giguna_Base__West_15(West 15);
         Giguna__Giguna_Base__Staircase_Bottom(Staircase Bottom);
         Giguna__Giguna_Base__Table(Table);
         Giguna__Giguna_Base__Save_Point(Save Point);
@@ -655,6 +656,24 @@ subgraph Giguna
         Giguna__Far_Corner__East_13(East 13);
         Giguna__Far_Corner__Grass(Grass);
         Giguna__Far_Corner__South(South);
+    end
+    subgraph Giguna__Helipad[Helipad]
+        Giguna__Helipad__East_15(East 15);
+        Giguna__Helipad__North(North);
+        Giguna__Helipad__Helicopter(Helicopter);
+        Giguna__Helipad__East_16(East 16);
+        Giguna__Helipad__Irikar_Drop(Irikar Drop);
+        Giguna__Helipad__Wall_Top(Wall Top);
+        Giguna__Helipad__Railing(Railing);
+        Giguna__Helipad__Wall_Bottom(Wall Bottom);
+        Giguna__Helipad__So_Close(So Close!);
+        Giguna__Helipad__Tablet_Ledge(Tablet Ledge);
+        Giguna__Helipad__Staircase_Top(Staircase Top);
+        Giguna__Helipad__East_18(East 18);
+        Giguna__Helipad__South_Left(South Left);
+        Giguna__Helipad__South_Middle(South Middle);
+        Giguna__Helipad__South_Right(South Right);
+        Giguna__Helipad__Lowest_Ledge(Lowest Ledge);
     end
 end
 subgraph Glacier
@@ -1012,6 +1031,7 @@ Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__East_Cliff
 Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__Upper_Path
 Giguna__Carnelian__West_10 <--> Giguna__West_Caverns__East_10
 Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__West_10
+Giguna__Far_Corner__South --> Giguna__Helipad__North
 Giguna__Giguna_Base__East_14 <--> Giguna__Wasteland__West_14
 Giguna__Giguna_Base__Left_Pillar <--> Giguna__Giguna_Base__Right_Pillar
 Giguna__Giguna_Base__Middle_Platform --> Giguna__Giguna_Base__Stone_Knob
@@ -1019,6 +1039,9 @@ Giguna__Giguna_Base__Middle_Platform --> Giguna__Giguna_Base__West_Grate
 Giguna__Giguna_Base__Ruin --> Giguna__Giguna_Base__Left_Pillar
 Giguna__Giguna_Base__Ruin --> Giguna__Giguna_Base__Right_Pillar
 Giguna__Giguna_Base__Stone_Knob --> Giguna__Giguna_Base__Upper_Cliff
+Giguna__Giguna_Base__West_15 <--> Giguna__Giguna_Base__West_Grate
+Giguna__Giguna_Base__West_15 <--> Giguna__Helipad__East_15
+Giguna__Giguna_Base__West_16 <--> Giguna__Helipad__East_16
 Giguna__Giguna_Base__West_Grate --> Giguna__Giguna_Base__Left_Pillar
 Giguna__Giguna_Northeast__Crow_Eating --> Giguna__Giguna_Northeast__Gate_Vent
 Giguna__Giguna_Northeast__Gate_Button <--> Giguna__Giguna_Northeast__Gate_Left
