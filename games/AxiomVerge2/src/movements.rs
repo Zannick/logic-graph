@@ -3188,6 +3188,11 @@ pub fn local_travel_time(
         }
         (
             [false],
+            SpotId::Giguna__Ruins_Center__East_9,
+            SpotId::Giguna__Ruins_Center__Wall_Bottom,
+        ) => 2631,
+        (
+            [false],
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
             SpotId::Giguna__Ruins_Center__East_9,
         ) => 2631,
@@ -7384,6 +7389,11 @@ pub fn local_travel_time(
         }
         ([true], SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => 526,
         ([true], SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => 526,
+        (
+            [true],
+            SpotId::Giguna__Ruins_Center__East_9,
+            SpotId::Giguna__Ruins_Center__Wall_Bottom,
+        ) => 2631,
         (
             [true],
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
@@ -12111,6 +12121,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna__Ruins_Center__East_9 => enum_map! {
             SpotId::Giguna__Ruins_East__West_9 => 1350,
             SpotId::Giguna__Ruins_Center__East_9 => 0,
+            SpotId::Giguna__Ruins_Center__Wall_Bottom => 2631,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -17660,6 +17671,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Center__Tablet, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_East__West_9) => 1350,
         (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_Center__East_9) => 0,
+        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_Center__Wall_Bottom) => 2631,
         (SpotId::Giguna__Ruins_Center__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Giguna__Ruins_Center__East_9) => 2631,
         (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Giguna__Ruins_Center__Wall_Bottom) => 0,
@@ -33020,6 +33032,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Center__East_9,
+            SpotId::Giguna__Ruins_Center__Wall_Bottom,
+            2631,
+        ),
+        (
+            SpotId::Giguna__Ruins_Center__East_9,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39080,6 +39097,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
         ) => Some(1052),
         (SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => Some(526),
+        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_Center__Wall_Bottom) => {
+            Some(2631)
+        }
         (SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => Some(526),
         (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Giguna__Ruins_Center__East_9) => {
             Some(2631)
@@ -42667,6 +42687,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         ) => (Some(1052), vec![]),
         (SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => {
             (Some(526), vec![])
+        }
+        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_Center__Wall_Bottom) => {
+            (Some(2631), vec![])
         }
         (SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => {
             (Some(526), vec![])

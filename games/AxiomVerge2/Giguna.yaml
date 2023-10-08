@@ -1115,6 +1115,7 @@ areas:
       coord: [15.95, 8.6]
       local:
         - to: Wall Bottom
+          jumps: 1
       exits:
         - to: Ruins East > West 9
           tags: [xshift]
