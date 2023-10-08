@@ -3912,7 +3912,7 @@ pub enum LocationId {
     Giguna__West_Tower__Top__Tablet,
     Giguna_Breach__Chimney__Cache__Flask,
     Giguna_Breach__Cubby__Rocks__Health,
-    Giguna_Breach__Slingshot__Ravine__Item,
+    Giguna_Breach__Slingshot__Ravine__Urn,
     Glacier__Apocalypse_Entry__Terminal__Escape,
     Glacier__Boomerang_Room__Pedestal__Item,
     Glacier__Boomerang_Room__Pedestal__Switch,
@@ -4267,8 +4267,8 @@ impl fmt::Display for LocationId {
             LocationId::Giguna_Breach__Cubby__Rocks__Health => {
                 write!(f, "{}", "Giguna Breach > Cubby > Rocks > Health")
             }
-            LocationId::Giguna_Breach__Slingshot__Ravine__Item => {
-                write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Item")
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
+                write!(f, "{}", "Giguna Breach > Slingshot > Ravine > Urn")
             }
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 write!(f, "{}", "Glacier > Apocalypse Entry > Terminal > Escape")
@@ -4665,8 +4665,8 @@ impl std::str::FromStr for LocationId {
             "Giguna Breach > Cubby > Rocks > Health" => {
                 Ok(LocationId::Giguna_Breach__Cubby__Rocks__Health)
             }
-            "Giguna Breach > Slingshot > Ravine > Item" => {
-                Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Item)
+            "Giguna Breach > Slingshot > Ravine > Urn" => {
+                Ok(LocationId::Giguna_Breach__Slingshot__Ravine__Urn)
             }
             "Glacier > Apocalypse Entry > Terminal > Escape" => {
                 Ok(LocationId::Glacier__Apocalypse_Entry__Terminal__Escape)
@@ -6459,7 +6459,7 @@ pub enum ActionId {
     Giguna__Giguna_Northeast__Save_Point__Save,
     Giguna__Giguna_Northeast__Save_Point__Save_Recall,
     Giguna__Giguna_Northeast__Switch__Open_Door,
-    Giguna__Ruins_Top__Portal__Portal,
+    Giguna__Ruins_Top__Portal__Enter_Portal,
     Giguna__Ruins_Top__Save_Point__Save,
     Giguna__Ruins_Top__Switch__Open_Doors,
     Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
@@ -6616,8 +6616,8 @@ impl fmt::Display for ActionId {
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Switch > Open Door")
             }
-            ActionId::Giguna__Ruins_Top__Portal__Portal => {
-                write!(f, "{}", "Giguna > Ruins Top > Portal > Portal")
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                write!(f, "{}", "Giguna > Ruins Top > Portal > Enter Portal")
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => {
                 write!(f, "{}", "Giguna > Ruins Top > Save Point > Save")
@@ -6790,8 +6790,8 @@ impl std::str::FromStr for ActionId {
             "Giguna > Giguna Northeast > Switch > Open Door" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Switch__Open_Door)
             }
-            "Giguna > Ruins Top > Portal > Portal" => {
-                Ok(ActionId::Giguna__Ruins_Top__Portal__Portal)
+            "Giguna > Ruins Top > Portal > Enter Portal" => {
+                Ok(ActionId::Giguna__Ruins_Top__Portal__Enter_Portal)
             }
             "Giguna > Ruins Top > Save Point > Save" => {
                 Ok(ActionId::Giguna__Ruins_Top__Save_Point__Save)
@@ -8617,7 +8617,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__West_Tower__Top__Tablet => true,
             LocationId::Giguna_Breach__Chimney__Cache__Flask => true,
             LocationId::Giguna_Breach__Cubby__Rocks__Health => true,
-            LocationId::Giguna_Breach__Slingshot__Ravine__Item => true,
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
             LocationId::Glacier__Apocalypse_Entry__Terminal__Escape => {
                 rules::access_apocalypse_bomb(&ctx)
             }
@@ -9640,7 +9640,9 @@ impl world::Accessible for Action {
                 ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
                     rules::access_giguna__giguna_northeast__switch__open_door__req(&ctx)
                 }
-                ActionId::Giguna__Ruins_Top__Portal__Portal => rules::access_mode__drone(&ctx),
+                ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                    rules::access_mode__drone(&ctx)
+                }
                 ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
                 ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_open(&ctx),
                 ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
@@ -9821,7 +9823,7 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
                 rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx)
             }
-            ActionId::Giguna__Ruins_Top__Portal__Portal => {
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
                 rules::action_portal__giguna_breach__peak__save_point(ctx)
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_save(ctx),
@@ -9895,7 +9897,9 @@ impl world::Action for Action {
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                 SpotId::Giguna__Giguna_Base__Upper_Cliff
             }
-            ActionId::Giguna__Ruins_Top__Portal__Portal => SpotId::Giguna_Breach__Peak__Save_Point,
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => {
+                SpotId::Giguna_Breach__Peak__Save_Point
+            }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_West__Rooftop_East_Edge
             }
@@ -10274,7 +10278,7 @@ impl world::World for World {
             Item::Ebih_Interchange_Gate => {
                 vec![LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch]
             }
-            Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Item],
+            Item::Slingshot_Hook => vec![LocationId::Giguna_Breach__Slingshot__Ravine__Urn],
             Item::Map_17_10 => vec![LocationId::Giguna__Giguna_Northeast__Save_Point__Seen],
             Item::Giguna_Northeast_Gate => vec![
                 LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate,
@@ -10515,7 +10519,7 @@ impl world::World for World {
                 SpotId::Giguna_Breach__Chimney__Cache
             }
             LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
-            LocationId::Giguna_Breach__Slingshot__Ravine__Item => {
+            LocationId::Giguna_Breach__Slingshot__Ravine__Urn => {
                 SpotId::Giguna_Breach__Slingshot__Ravine
             }
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => {
@@ -10745,7 +10749,7 @@ impl world::World for World {
             | ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
                 SpotId::Giguna__Ruins_West__Lower_Ledge
             }
-            ActionId::Giguna__Ruins_Top__Portal__Portal => SpotId::Giguna__Ruins_Top__Portal,
+            ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => SpotId::Giguna__Ruins_Top__Portal,
             ActionId::Giguna__Ruins_Top__Save_Point__Save => SpotId::Giguna__Ruins_Top__Save_Point,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => SpotId::Giguna__Ruins_Top__Switch,
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
@@ -11184,11 +11188,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx),
-            Objective::Progress => {
-                rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__7_all_notes(
-                    ctx,
-                )
-            }
+            Objective::Progress => rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_all_notes(ctx),
         }
     }
 
@@ -11231,6 +11231,9 @@ impl world::World for World {
                 if !ctx.has(Item::Shockwave) {
                     vec.push((Item::Shockwave, 1));
                 }
+                if !ctx.has(Item::Slingshot) {
+                    vec.push((Item::Slingshot, 1));
+                }
                 if !ctx.has(Item::Terminal_Breakthrough_1) {
                     vec.push((Item::Terminal_Breakthrough_1, 1));
                 }
@@ -11259,6 +11262,7 @@ impl world::World for World {
                 (Item::Remote_Drone, 1),
                 (Item::Researchers_Missing, 1),
                 (Item::Shockwave, 1),
+                (Item::Slingshot, 1),
                 (Item::Terminal_Breakthrough_1, 1),
                 (Item::Under_Siege, 1),
                 (Item::Wall_Climb, 1),
@@ -12393,6 +12397,7 @@ impl World {
                     | Item::Notes_2053_02_27
                     | Item::Record_Losses
                     | Item::Researchers_Missing
+                    | Item::Slingshot
                     | Item::Terminal_Breakthrough_1
                     | Item::The_Ideal_Kiengir
                     | Item::Under_Siege
@@ -12899,8 +12904,8 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             time: 600,
             exit_id: None,
         },
-        LocationId::Giguna_Breach__Slingshot__Ravine__Item => Location {
-            id: LocationId::Giguna_Breach__Slingshot__Ravine__Item,
+        LocationId::Giguna_Breach__Slingshot__Ravine__Urn => Location {
+            id: LocationId::Giguna_Breach__Slingshot__Ravine__Urn,
             canonical: CanonId::None,
             item: Item::Slingshot_Hook,
             price: Currency::Free,
@@ -17356,8 +17361,8 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 3500,
             price: Currency::Energy(100),
         },
-        ActionId::Giguna__Ruins_Top__Portal__Portal => Action {
-            id: ActionId::Giguna__Ruins_Top__Portal__Portal,
+        ActionId::Giguna__Ruins_Top__Portal__Enter_Portal => Action {
+            id: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal,
             time: 3600,
             price: Currency::Free,
         },
@@ -23442,8 +23447,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna_Breach__Slingshot__Ravine => Spot {
             id: SpotId::Giguna_Breach__Slingshot__Ravine,
             locations: Range {
-                start: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
-                end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize() + 1,
+                start: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize(),
+                end: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize() + 1,
             },
             exits: Range {
                 start: ExitId::Giguna_Breach__Slingshot__Ravine__ex__Column_1.into_usize(),
@@ -26079,8 +26084,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Giguna__Ruins_Top__Portal__ex__Interior_Ledge_1.into_usize() + 1,
             },
             actions: Range {
-                start: ActionId::Giguna__Ruins_Top__Portal__Portal.into_usize(),
-                end: ActionId::Giguna__Ruins_Top__Portal__Portal.into_usize() + 1,
+                start: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize(),
+                end: ActionId::Giguna__Ruins_Top__Portal__Enter_Portal.into_usize() + 1,
             },
             area_spots: Range {
                 start: SpotId::Giguna__Ruins_Top__East_7.into_usize(),
@@ -29594,8 +29599,8 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna_Breach__Slingshot__West => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Slingshot__Column => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Slingshot__Ravine => Range {
-            start: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
-            end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize() + 1,
+            start: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize(),
+            end: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize() + 1,
         },
         SpotId::Giguna_Breach__Antechamber__North => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Central__West_9 => Range { start: 0, end: 0 },
@@ -30152,8 +30157,8 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Giguna_Breach__Grid_14_10_11 => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Fire_Room => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Slingshot => Range {
-            start: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
-            end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+            start: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize(),
+            end: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize(),
         },
         AreaId::Giguna_Breach__Antechamber => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Central => Range { start: 0, end: 0 },
@@ -30274,7 +30279,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
         },
         RegionId::Giguna_Breach => Range {
             start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
-            end: LocationId::Giguna_Breach__Slingshot__Ravine__Item.into_usize(),
+            end: LocationId::Giguna_Breach__Slingshot__Ravine__Urn.into_usize(),
         },
         RegionId::Giguna => Range {
             start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),

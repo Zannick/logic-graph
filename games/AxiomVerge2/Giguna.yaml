@@ -1327,7 +1327,7 @@ areas:
           req: ^_doors_open
           movement: base
       actions:
-        - name: Portal
+        - name: Enter Portal
           to: Giguna Breach > Peak > Save Point
           req: ^mode == 'drone'
           do: $portal(`Giguna Breach > Peak > Save Point`)

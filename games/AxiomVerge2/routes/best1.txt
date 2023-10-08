@@ -49,9 +49,6 @@
 * Collect Flask from Ebih > Grid 25,2-6 > Pit: Item
 ! Do Recall Drone
   IndraSavewarp to Ebih > Ebih West > Upper Save
-  Menuwarp to Menu > Upgrade Menu > Physiology
-  Move... to Menu > Upgrade Menu > Infection
-  ExitMenuwarp to Ebih > Ebih West > Upper Save
   Move... to Ebih > Ebih West > Medium High Platform
 ! Do Ebih > Ebih West > Medium High Platform: Throw Drone Long
   Move... to Giguna > Giguna Northeast > Save Point
@@ -82,11 +79,7 @@
 ! Do Giguna > Giguna Base > Save Point: Save
   Move... to Giguna > Building Interior > Bookshelf
 * Collect Letter_from_Trace from Giguna > Building Interior > Bookshelf: Note
-  Move... to Giguna > Building Interior > Entry ==> Giguna Base > Building Entry (1)
 ! Do Recall Drone
-  Menuwarp to Menu > Upgrade Menu > Physiology
-  Move... to Menu > Upgrade Menu > Combat
-  ExitMenuwarp to Giguna > West Caverns > East 10
   Move... to Giguna > West Caverns > Small Platform
 ! Do Giguna > West Caverns > Small Platform: Throw Drone Up
   Move... to Giguna > West Caverns > Cache
@@ -95,4 +88,3 @@
   IndraSavewarp to Giguna > Giguna Base > Save Point
   Move... to Giguna > Giguna Base > Ruin
 * Collect Wall_Climb from Giguna > Giguna Base > Ruin: Item
-
