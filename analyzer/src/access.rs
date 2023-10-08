@@ -296,7 +296,7 @@ where
     }
 }
 
-pub fn can_win_just_items<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn can_win_just_items<W, T, L, E>(world: &W, ctx: &T) -> Result<(), Vec<(T::ItemId, i16)>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -311,10 +311,14 @@ where
             ctx.collect(loc.item());
         }
     }
-    world.won(&ctx)
+    if world.won(&ctx) {
+        Ok(())
+    } else {
+        Err(world.items_needed(&ctx))
+    }
 }
 
-pub fn can_win_just_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn can_win_just_locations<W, T, L, E>(world: &W, ctx: &T) -> Result<(), Vec<(T::ItemId, i16)>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
@@ -334,10 +338,10 @@ where
             }
         }
         if world.won(&ctx) {
-            return true;
+            return Ok(());
         }
     }
-    false
+    Err(world.items_needed(&ctx))
 }
 
 pub fn find_unused_links<W, T, E, Wp>(

@@ -138,7 +138,6 @@ pub enum Expectation {
     RemoteDrone(bool),
     ResearchersMissing(bool),
     Shockwave(bool),
-    Slingshot(bool),
     SlingshotHook(bool),
     StationPower(bool),
     Switch3611(bool),
@@ -399,20 +398,19 @@ pub mod flags {
             const REMOTE_DRONE = 1 << 25;
             const RESEARCHERS_MISSING = 1 << 26;
             const SHOCKWAVE = 1 << 27;
-            const SLINGSHOT = 1 << 28;
-            const SLINGSHOT_HOOK = 1 << 29;
-            const STATION_POWER = 1 << 30;
-            const SWITCH_36_11 = 1 << 31;
+            const SLINGSHOT_HOOK = 1 << 28;
+            const STATION_POWER = 1 << 29;
+            const SWITCH_36_11 = 1 << 30;
+            const SWITCH_40_12 = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u8 {
-            const SWITCH_40_12 = 1 << 0;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 1;
-            const UNDER_SIEGE = 1 << 2;
-            const UNDERWATER_MOVEMENT = 1 << 3;
-            const WALL_CLIMB = 1 << 4;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 0;
+            const UNDER_SIEGE = 1 << 1;
+            const UNDERWATER_MOVEMENT = 1 << 2;
+            const WALL_CLIMB = 1 << 3;
         }
     }
 }
@@ -506,7 +504,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 58;
+    const NUM_ITEMS: u32 = 57;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -589,11 +587,10 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::RESEARCHERS_MISSING),
             Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE),
-            Item::Slingshot => self.cbits2.contains(flags::ContextBits2::SLINGSHOT),
             Item::Slingshot_Hook => self.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK),
             Item::Station_Power => self.cbits2.contains(flags::ContextBits2::STATION_POWER),
             Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
-            Item::Switch_40_12 => self.cbits3.contains(flags::ContextBits3::SWITCH_40_12),
+            Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
             Item::Terminal_Breakthrough_1 => self
                 .cbits3
                 .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1),
@@ -749,7 +746,6 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::RESEARCHERS_MISSING)
                 .into(),
             Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE).into(),
-            Item::Slingshot => self.cbits2.contains(flags::ContextBits2::SLINGSHOT).into(),
             Item::Slingshot_Hook => self
                 .cbits2
                 .contains(flags::ContextBits2::SLINGSHOT_HOOK)
@@ -763,8 +759,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::SWITCH_36_11)
                 .into(),
             Item::Switch_40_12 => self
-                .cbits3
-                .contains(flags::ContextBits3::SWITCH_40_12)
+                .cbits2
+                .contains(flags::ContextBits2::SWITCH_40_12)
                 .into(),
             Item::Terminal_Breakthrough_1 => self
                 .cbits3
@@ -935,9 +931,6 @@ impl context::Ctx for Context {
             Item::Shockwave => {
                 self.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
             },
-            Item::Slingshot => {
-                self.cbits2.insert(flags::ContextBits2::SLINGSHOT);
-            },
             Item::Slingshot_Hook => {
                 self.cbits2.insert(flags::ContextBits2::SLINGSHOT_HOOK);
             },
@@ -948,7 +941,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
             },
             Item::Switch_40_12 => {
-                self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
+                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             },
             Item::Terminal_Breakthrough_1 => {
                 self.cbits3.insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
@@ -1133,9 +1126,6 @@ impl context::Ctx for Context {
             Item::Shockwave => {
                 self.cbits2.insert(flags::ContextBits2::SHOCKWAVE);
             }
-            Item::Slingshot => {
-                self.cbits2.insert(flags::ContextBits2::SLINGSHOT);
-            }
             Item::Slingshot_Hook => {
                 self.cbits2.insert(flags::ContextBits2::SLINGSHOT_HOOK);
             }
@@ -1146,7 +1136,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
+                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
             }
             Item::Terminal_Breakthrough_1 => {
                 self.cbits3
@@ -2139,14 +2129,6 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
-            ("Slingshot", Yaml::Boolean(b)) => Expectation::Slingshot(*b),
-            ("Slingshot", Yaml::Integer(i)) => Expectation::Slingshot(*i > 0),
-            ("Slingshot", _) => {
-                return Err(format!(
-                    "Key {:?} has value of disallowed type: {:?}",
-                    ckey, cval
-                ));
-            }
             ("Slingshot_Hook", Yaml::Boolean(b)) => Expectation::SlingshotHook(*b),
             ("Slingshot_Hook", Yaml::Integer(i)) => Expectation::SlingshotHook(*i > 0),
             ("Slingshot_Hook", _) => {
@@ -2821,12 +2803,6 @@ impl context::Ctx for Context {
                     let v = self.has(Item::Shockwave);
                     if v != (*e).into() {
                         errs.push(format!("Expected {} = {}, got: {}", "Shockwave", e, v));
-                    }
-                }
-                Expectation::Slingshot(e) => {
-                    let v = self.has(Item::Slingshot);
-                    if v != (*e).into() {
-                        errs.push(format!("Expected {} = {}, got: {}", "Slingshot", e, v));
                     }
                 }
                 Expectation::SlingshotHook(e) => {
@@ -4043,11 +4019,6 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}SHOCKWAVE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::SLINGSHOT);
-        let p = old.cbits2.contains(flags::ContextBits2::SLINGSHOT);
-        if n != p {
-            list.push(format!("{}SLINGSHOT", if n { "+" } else { "-" }));
-        }
         let n = self.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK);
         let p = old.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK);
         if n != p {
@@ -4063,8 +4034,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}SWITCH_36_11", if n { "+" } else { "-" }));
         }
-        let n = self.cbits3.contains(flags::ContextBits3::SWITCH_40_12);
-        let p = old.cbits3.contains(flags::ContextBits3::SWITCH_40_12);
+        let n = self.cbits2.contains(flags::ContextBits2::SWITCH_40_12);
+        let p = old.cbits2.contains(flags::ContextBits2::SWITCH_40_12);
         if n != p {
             list.push(format!("{}SWITCH_40_12", if n { "+" } else { "-" }));
         }

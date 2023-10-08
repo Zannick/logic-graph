@@ -11188,7 +11188,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx),
-            Objective::Progress => rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_all_notes(ctx),
+            Objective::Progress => rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_hook_all_notes(ctx),
         }
     }
 
@@ -11231,8 +11231,8 @@ impl world::World for World {
                 if !ctx.has(Item::Shockwave) {
                     vec.push((Item::Shockwave, 1));
                 }
-                if !ctx.has(Item::Slingshot) {
-                    vec.push((Item::Slingshot, 1));
+                if !ctx.has(Item::Slingshot_Hook) {
+                    vec.push((Item::Slingshot_Hook, 1));
                 }
                 if !ctx.has(Item::Terminal_Breakthrough_1) {
                     vec.push((Item::Terminal_Breakthrough_1, 1));
@@ -11262,7 +11262,7 @@ impl world::World for World {
                 (Item::Remote_Drone, 1),
                 (Item::Researchers_Missing, 1),
                 (Item::Shockwave, 1),
-                (Item::Slingshot, 1),
+                (Item::Slingshot_Hook, 1),
                 (Item::Terminal_Breakthrough_1, 1),
                 (Item::Under_Siege, 1),
                 (Item::Wall_Climb, 1),
@@ -12397,7 +12397,6 @@ impl World {
                     | Item::Notes_2053_02_27
                     | Item::Record_Losses
                     | Item::Researchers_Missing
-                    | Item::Slingshot
                     | Item::Terminal_Breakthrough_1
                     | Item::The_Ideal_Kiengir
                     | Item::Under_Siege
