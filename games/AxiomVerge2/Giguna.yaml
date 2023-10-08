@@ -391,6 +391,9 @@ areas:
       coord: [14.2, 10.2]
       local:
         - to: Higher Ledge
+        - to: East Platform
+        - to: Small Staircase
+        - to: Tunnel Entrance
       actions:
         - name: Throw Drone Up
           req: $can_deploy

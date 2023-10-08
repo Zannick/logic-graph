@@ -2099,6 +2099,9 @@ digraph AxiomVerge2 {
     Giguna__West_Caverns__Tunnel_Entrance -> Giguna__West_Caverns__Small_Staircase;
     Giguna__West_Caverns__Tunnel_Entrance -> Giguna__West_Caverns__Small_Platform;
     Giguna__West_Caverns__Tunnel_Entrance -> Giguna__West_Caverns__Tunnel_Bottom;
+    Giguna__West_Caverns__Small_Platform -> Giguna__West_Caverns__East_Platform;
+    Giguna__West_Caverns__Small_Platform -> Giguna__West_Caverns__Small_Staircase;
+    Giguna__West_Caverns__Small_Platform -> Giguna__West_Caverns__Tunnel_Entrance;
     Giguna__West_Caverns__Small_Platform -> Giguna__West_Caverns__Higher_Ledge;
     Giguna__West_Caverns__Higher_Ledge -> Giguna__West_Caverns__East_Platform;
     Giguna__West_Caverns__Higher_Ledge -> Giguna__West_Caverns__Small_Staircase;

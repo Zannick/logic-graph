@@ -2653,6 +2653,16 @@ pub fn local_travel_time(
         ) => 877,
         (
             [false],
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
+        ) => 1228,
+        (
+            [false],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__East_Platform,
         ) => 1403,
@@ -6861,6 +6871,16 @@ pub fn local_travel_time(
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
         ) => 877,
+        (
+            [true],
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
+        ) => 1228,
         (
             [true],
             SpotId::Giguna__West_Caverns__Higher_Ledge,
@@ -11498,6 +11518,8 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__West_Caverns__Small_Platform => enum_map! {
+            SpotId::Giguna__West_Caverns__Small_Staircase => 1228,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 1228,
             SpotId::Giguna__West_Caverns__Small_Platform => 0,
             SpotId::Giguna__West_Caverns__Higher_Ledge => 1500,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -17002,6 +17024,14 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         }
         (
             SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+        ) => 1228,
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
+        ) => 1228,
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => 0,
         (
@@ -20774,6 +20804,18 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (
             SpotId::Giguna__West_Caverns__Small_Platform,
             SpotId::Giguna__West_Caverns__Higher_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__East_Platform,
+        ) => true,
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+        ) => true,
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
         ) => true,
         (
             SpotId::Giguna__West_Caverns__Higher_Ledge,
@@ -31273,6 +31315,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+            1228,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
+            1228,
+        ),
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
             SpotId::Giguna__West_Caverns__Small_Platform,
             0,
         ),
@@ -39338,6 +39390,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(3200)
         }
         (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+        ) => Some(1228),
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
+        ) => Some(1228),
+        (
             SpotId::Giguna__West_Caverns__Small_Staircase,
             SpotId::Giguna__West_Caverns__Small_Platform,
         ) => Some(1799),
@@ -43021,6 +43081,14 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__West_13) => {
             (Some(3200), vec![])
         }
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Small_Staircase,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna__West_Caverns__Small_Platform,
+            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
+        ) => (Some(1228), vec![]),
         (
             SpotId::Giguna__West_Caverns__Small_Staircase,
             SpotId::Giguna__West_Caverns__Small_Platform,
