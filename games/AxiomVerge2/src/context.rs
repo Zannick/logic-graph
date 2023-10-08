@@ -3012,6 +3012,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Dual_Path => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Far_Corner => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);

@@ -3378,6 +3378,90 @@ pub fn local_travel_time(
         }
         ([false], SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => 1754,
         ([false], SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => 2400,
+        ([false], SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => 1403,
+        ([false], SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Top,
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Staircase_Top,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+        ) => 250,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+        ) => 500,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+        ) => 250,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => 877,
+        ([false], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => {
+            1929
+        }
+        ([false], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
+            1052
+        }
+        ([false], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
+        ([false], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => 1578,
+        ([false], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => 2807,
+        ([false], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => 600,
+        ([false], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => 1399,
+        ([false], SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => 350,
+        ([false], SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => 1500,
+        ([false], SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => 4800,
+        ([false], SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => 5399,
+        ([false], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => 1578,
+        ([false], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => 526,
         (
             [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -7470,6 +7554,90 @@ pub fn local_travel_time(
         }
         ([true], SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => 1754,
         ([true], SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => 2400,
+        ([true], SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => 1403,
+        ([true], SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Top,
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Staircase_Top,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+        ) => 250,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+        ) => 500,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+        ) => 250,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => 877,
+        ([true], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => {
+            1929
+        }
+        ([true], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
+            1052
+        }
+        ([true], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
+        ([true], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => 1578,
+        ([true], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => 2807,
+        ([true], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => 600,
+        ([true], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => 1399,
+        ([true], SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => 350,
+        ([true], SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => 1500,
+        ([true], SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => 4800,
+        ([true], SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => 5399,
+        ([true], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => 1578,
+        ([true], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => 526,
         (
             [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -12299,6 +12467,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         SpotId::Giguna__Helipad__East_18 => enum_map! {
             SpotId::Giguna__Helipad__Staircase_Top => 2400,
             SpotId::Giguna__Helipad__East_18 => 0,
+            SpotId::Giguna__Lamassu__West_18 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12363,72 +12532,206 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__West_18 => enum_map! {
+            SpotId::Giguna__Helipad__East_18 => 1350,
             SpotId::Giguna__Lamassu__West_18 => 0,
+            SpotId::Giguna__Lamassu__Staircase_Top => 1403,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Staircase_Top => enum_map! {
+            SpotId::Giguna__Lamassu__West_18 => 1403,
             SpotId::Giguna__Lamassu__Staircase_Top => 0,
+            SpotId::Giguna__Lamassu__Staircase_Bottom => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Staircase_Bottom => enum_map! {
+            SpotId::Giguna__Lamassu__Staircase_Top => 1200,
             SpotId::Giguna__Lamassu__Staircase_Bottom => 0,
+            SpotId::Giguna__Lamassu__Staircase_Landing => 250,
+            SpotId::Giguna__Lamassu__Broken_Pillar => 500,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1578,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Staircase_Landing => enum_map! {
+            SpotId::Giguna__Lamassu__Staircase_Bottom => 1200,
             SpotId::Giguna__Lamassu__Staircase_Landing => 0,
+            SpotId::Giguna__Lamassu__Broken_Pillar => 250,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1403,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Broken_Pillar => enum_map! {
+            SpotId::Giguna__Lamassu__Staircase_Landing => 1200,
             SpotId::Giguna__Lamassu__Broken_Pillar => 0,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1228,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Upper_Platform_Edge => enum_map! {
+            SpotId::Giguna__Lamassu__Broken_Pillar => 1228,
             SpotId::Giguna__Lamassu__Upper_Platform_Edge => 0,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left => 701,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Lower_Platform_Left => enum_map! {
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1200,
             SpotId::Giguna__Lamassu__Lower_Platform_Left => 0,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Lower_Platform_Right => enum_map! {
+            SpotId::Giguna__Lamassu__Lower_Platform_Left => 877,
             SpotId::Giguna__Lamassu__Lower_Platform_Right => 0,
+            SpotId::Giguna__Lamassu__Head => 1799,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Head => enum_map! {
+            SpotId::Giguna__Lamassu__Lower_Platform_Left => 1929,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right => 1052,
             SpotId::Giguna__Lamassu__Head => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Rear_Platform => enum_map! {
+            SpotId::Giguna__Lamassu__Head => 2105,
             SpotId::Giguna__Lamassu__Rear_Platform => 0,
+            SpotId::Giguna__Lamassu__East_18 => 1578,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Wingtip => enum_map! {
+            SpotId::Giguna__Lamassu__Head => 2807,
             SpotId::Giguna__Lamassu__Wingtip => 0,
+            SpotId::Giguna__Lamassu__Rear_Gap => 600,
+            SpotId::Giguna__Lamassu__Deposit => 1399,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Rear_Gap => enum_map! {
+            SpotId::Giguna__Lamassu__Wingtip => 350,
             SpotId::Giguna__Lamassu__Rear_Gap => 0,
+            SpotId::Giguna__Lamassu__Deposit => 1500,
+            SpotId::Giguna__Lamassu__East_18 => 2400,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__Deposit => enum_map! {
+            SpotId::Giguna__Lamassu__Wingtip => 4800,
+            SpotId::Giguna__Lamassu__Rear_Gap => 5399,
             SpotId::Giguna__Lamassu__Deposit => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Lamassu__East_18 => enum_map! {
+            SpotId::Giguna__Lamassu__Rear_Platform => 1578,
+            SpotId::Giguna__Lamassu__Rear_Gap => 526,
             SpotId::Giguna__Lamassu__East_18 => 0,
+            SpotId::Giguna__Dual_Path__West_18 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__West_18 => enum_map! {
+            SpotId::Giguna__Dual_Path__West_18 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Below_Left_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Below_Left_Switch => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Left_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Left_Switch => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__West_Slope => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Slope => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Base_of_Wall => enum_map! {
+            SpotId::Giguna__Dual_Path__Base_of_Wall => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Wall_Secret => enum_map! {
+            SpotId::Giguna__Dual_Path__Wall_Secret => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Wall_Top => enum_map! {
+            SpotId::Giguna__Dual_Path__Wall_Top => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Right_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Right_Switch => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Below_Right_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Below_Right_Switch => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__East_Gate => enum_map! {
+            SpotId::Giguna__Dual_Path__East_Gate => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__East_18 => enum_map! {
+            SpotId::Giguna__Dual_Path__East_18 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__West_Gate => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__West_Gate_NW => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate_NW => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__West_Gate_NE => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate_NE => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__West_17 => enum_map! {
+            SpotId::Giguna__Dual_Path__West_17 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Midway => enum_map! {
+            SpotId::Giguna__Dual_Path__Midway => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__Midway_Plateau => enum_map! {
+            SpotId::Giguna__Dual_Path__Midway_Plateau => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__East_Gate_NW => enum_map! {
+            SpotId::Giguna__Dual_Path__East_Gate_NW => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__East_Gate_NE => enum_map! {
+            SpotId::Giguna__Dual_Path__East_Gate_NE => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__East_17 => enum_map! {
+            SpotId::Giguna__Dual_Path__East_17 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -17616,6 +17919,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => 2400,
         (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__East_18) => 0,
+        (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Lamassu__West_18) => 1350,
         (SpotId::Giguna__Helipad__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Helipad__South_Left, SpotId::Giguna__Helipad__South_Left) => 0,
         (SpotId::Giguna__Helipad__South_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -17646,54 +17950,166 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Clouds__Platform_Early_Portal, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Helipad__East_18) => 1350,
         (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__West_18) => 0,
+        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => 1403,
         (SpotId::Giguna__Lamassu__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => 1403,
         (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Top) => 0,
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Bottom) => 877,
         (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Top) => 1200,
         (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Bottom) => 0,
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Landing) => {
+            250
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Broken_Pillar) => 500,
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1578,
         (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
+            1200
+        }
         (
             SpotId::Giguna__Lamassu__Staircase_Landing,
             SpotId::Giguna__Lamassu__Staircase_Landing,
         ) => 0,
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Broken_Pillar) => 250,
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1403,
         (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Staircase_Landing) => {
+            1200
+        }
         (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Broken_Pillar) => 0,
+        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
+            1228
+        }
         (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            1228
+        }
         (
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
         ) => 0,
+        (
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => 701,
         (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => 1200,
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
         ) => 0,
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+        ) => 877,
         (SpotId::Giguna__Lamassu__Lower_Platform_Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => 877,
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
         ) => 0,
+        (SpotId::Giguna__Lamassu__Lower_Platform_Right, SpotId::Giguna__Lamassu__Head) => 1799,
         (SpotId::Giguna__Lamassu__Lower_Platform_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => 1929,
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => 1052,
         (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Head) => 0,
         (SpotId::Giguna__Lamassu__Head, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
         (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Rear_Platform) => 0,
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => 1578,
         (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => 2807,
         (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Wingtip) => 0,
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => 600,
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => 1399,
         (SpotId::Giguna__Lamassu__Wingtip, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => 350,
         (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Rear_Gap) => 0,
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => 1500,
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__East_18) => 2400,
         (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => 4800,
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => 5399,
         (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Deposit) => 0,
         (SpotId::Giguna__Lamassu__Deposit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => 1578,
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => 526,
         (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__East_18) => 0,
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Dual_Path__West_18) => 1350,
         (SpotId::Giguna__Lamassu__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__West_18) => 0,
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 0,
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => 0,
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__West_Slope) => 0,
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Base_of_Wall) => 0,
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Giguna__Dual_Path__Wall_Secret) => 0,
+        (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Wall_Top) => 0,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Right_Switch) => 0,
+        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 0,
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_Gate) => 0,
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_18) => 0,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate) => 0,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NW) => 0,
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NE) => 0,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_17) => 0,
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__Midway) => 0,
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway_Plateau) => 0,
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__East_Gate_NW) => 0,
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NE) => 0,
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_17) => 0,
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -20737,6 +21153,60 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__Wall_Bottom) => true,
         (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => true,
         (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => true,
+        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => true,
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => true,
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Bottom) => true,
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Top) => true,
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Landing) => {
+            true
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Broken_Pillar) => true,
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => true,
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
+            true
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            true
+        }
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => true,
+        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
+            true
+        }
+        (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            true
+        }
+        (
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => true,
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+        ) => true,
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => true,
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => true,
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => true,
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => true,
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => true,
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => true,
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => true,
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => true,
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => true,
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => true,
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => true,
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => true,
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => true,
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => true,
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -33593,6 +34063,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__East_18,
+            SpotId::Giguna__Lamassu__West_18,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Helipad__East_18,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33718,13 +34193,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__West_18,
+            SpotId::Giguna__Helipad__East_18,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Lamassu__West_18,
             SpotId::Giguna__Lamassu__West_18,
             0,
         ),
         (
             SpotId::Giguna__Lamassu__West_18,
+            SpotId::Giguna__Lamassu__Staircase_Top,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Lamassu__West_18,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Top,
+            SpotId::Giguna__Lamassu__West_18,
+            1403,
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Top,
@@ -33733,8 +34223,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Top,
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            877,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Top,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Staircase_Top,
+            1200,
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Bottom,
@@ -33743,8 +34243,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            250,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+            500,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            1200,
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Landing,
@@ -33753,8 +34273,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+            250,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            1200,
         ),
         (
             SpotId::Giguna__Lamassu__Broken_Pillar,
@@ -33763,8 +34298,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Broken_Pillar,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Broken_Pillar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Broken_Pillar,
+            1228,
         ),
         (
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
@@ -33773,8 +34318,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            701,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            1200,
         ),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
@@ -33783,8 +34338,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            877,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            877,
         ),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
@@ -33793,8 +34358,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Head,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Head,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Head,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            1052,
         ),
         (
             SpotId::Giguna__Lamassu__Head,
@@ -33808,13 +34388,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Rear_Platform,
+            SpotId::Giguna__Lamassu__Head,
+            2105,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Rear_Platform,
             SpotId::Giguna__Lamassu__Rear_Platform,
             0,
         ),
         (
             SpotId::Giguna__Lamassu__Rear_Platform,
+            SpotId::Giguna__Lamassu__East_18,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Rear_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Wingtip,
+            SpotId::Giguna__Lamassu__Head,
+            2807,
         ),
         (
             SpotId::Giguna__Lamassu__Wingtip,
@@ -33823,8 +34418,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Wingtip,
+            SpotId::Giguna__Lamassu__Rear_Gap,
+            600,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Wingtip,
+            SpotId::Giguna__Lamassu__Deposit,
+            1399,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Wingtip,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Rear_Gap,
+            SpotId::Giguna__Lamassu__Wingtip,
+            350,
         ),
         (
             SpotId::Giguna__Lamassu__Rear_Gap,
@@ -33833,8 +34443,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Rear_Gap,
+            SpotId::Giguna__Lamassu__Deposit,
+            1500,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Rear_Gap,
+            SpotId::Giguna__Lamassu__East_18,
+            2400,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Rear_Gap,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Deposit,
+            SpotId::Giguna__Lamassu__Wingtip,
+            4800,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Deposit,
+            SpotId::Giguna__Lamassu__Rear_Gap,
+            5399,
         ),
         (
             SpotId::Giguna__Lamassu__Deposit,
@@ -33848,11 +34478,226 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__East_18,
+            SpotId::Giguna__Lamassu__Rear_Platform,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Lamassu__East_18,
+            SpotId::Giguna__Lamassu__Rear_Gap,
+            526,
+        ),
+        (
+            SpotId::Giguna__Lamassu__East_18,
             SpotId::Giguna__Lamassu__East_18,
             0,
         ),
         (
             SpotId::Giguna__Lamassu__East_18,
+            SpotId::Giguna__Dual_Path__West_18,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Lamassu__East_18,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Giguna__Dual_Path__West_18,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__West_Slope,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Secret,
+            SpotId::Giguna__Dual_Path__Wall_Secret,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Secret,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Giguna__Dual_Path__East_Gate,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Giguna__Dual_Path__East_18,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__West_Gate,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_17,
+            SpotId::Giguna__Dual_Path__West_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway,
+            SpotId::Giguna__Dual_Path__Midway,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_17,
+            SpotId::Giguna__Dual_Path__East_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -38117,6 +38962,67 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Staircase_Top) => Some(2280),
         (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => Some(1250),
+        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
+            Some(1228)
+        }
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => Some(5399),
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => Some(4800),
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => Some(526),
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => Some(1578),
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => Some(1929),
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
+            Some(1052)
+        }
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+        ) => Some(877),
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => Some(877),
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => Some(1500),
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => Some(350),
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => Some(1578),
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => Some(2105),
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            Some(500)
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Landing) => {
+            Some(250)
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Top) => {
+            Some(1200)
+        }
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => Some(1578),
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            Some(250)
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
+            Some(1200)
+        }
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => Some(1403),
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
+            Some(877)
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => Some(1403),
+        (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            Some(1228)
+        }
+        (
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => Some(701),
+        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => Some(1403),
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => Some(1399),
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => Some(2807),
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => Some(600),
         (
             SpotId::Giguna__Ruins_Center__Center_Top,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
@@ -41607,6 +42513,93 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => {
             (Some(1250), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => {
+            (Some(5399), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => {
+            (Some(4800), vec![])
+        }
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
+            (Some(1052), vec![])
+        }
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Giguna__Lamassu__Lower_Platform_Right,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => (Some(877), vec![]),
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => {
+            (Some(1500), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Landing) => {
+            (Some(250), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Top) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Giguna__Lamassu__Staircase_Bottom,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => (Some(1578), vec![]),
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            (Some(250), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Giguna__Lamassu__Staircase_Landing,
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+        ) => (Some(1403), vec![]),
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Giguna__Lamassu__Broken_Pillar) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
+            SpotId::Giguna__Lamassu__Lower_Platform_Left,
+        ) => (Some(701), vec![]),
+        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => {
+            (Some(1399), vec![])
+        }
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => (Some(2807), vec![]),
+        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => {
+            (Some(600), vec![])
         }
         (
             SpotId::Giguna__Ruins_Center__Center_Top,

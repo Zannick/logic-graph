@@ -704,6 +704,28 @@ subgraph Giguna
         Giguna__Lamassu__Deposit(Deposit);
         Giguna__Lamassu__East_18(East 18);
     end
+    subgraph Giguna__Dual_Path[Dual Path]
+        Giguna__Dual_Path__West_18(West 18);
+        Giguna__Dual_Path__Below_Left_Switch(Below Left Switch);
+        Giguna__Dual_Path__Left_Switch(Left Switch);
+        Giguna__Dual_Path__West_Slope(West Slope);
+        Giguna__Dual_Path__Base_of_Wall(Base of Wall);
+        Giguna__Dual_Path__Wall_Secret(Wall Secret);
+        Giguna__Dual_Path__Wall_Top(Wall Top);
+        Giguna__Dual_Path__Right_Switch(Right Switch);
+        Giguna__Dual_Path__Below_Right_Switch(Below Right Switch);
+        Giguna__Dual_Path__East_Gate(East Gate);
+        Giguna__Dual_Path__East_18(East 18);
+        Giguna__Dual_Path__West_Gate(West Gate);
+        Giguna__Dual_Path__West_Gate_NW(West Gate NW);
+        Giguna__Dual_Path__West_Gate_NE(West Gate NE);
+        Giguna__Dual_Path__West_17(West 17);
+        Giguna__Dual_Path__Midway(Midway);
+        Giguna__Dual_Path__Midway_Plateau(Midway Plateau);
+        Giguna__Dual_Path__East_Gate_NW(East Gate NW);
+        Giguna__Dual_Path__East_Gate_NE(East Gate NE);
+        Giguna__Dual_Path__East_17(East 17);
+    end
 end
 subgraph Glacier
     subgraph Glacier__Dock_Elevator[Dock Elevator]
@@ -1082,8 +1104,14 @@ Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Right_Column
 Giguna__Giguna_Northeast__Vault --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__West_9 --> Giguna__Ruins_East__East_9
+Giguna__Helipad__East_18 <--> Giguna__Lamassu__West_18
 Giguna__Helipad__Railing <--> Giguna__Helipad__Wall_Top
 Giguna__Helipad__So_Close --> Giguna__Helipad__Tablet_Ledge
+Giguna__Lamassu__Broken_Pillar --> Giguna__Lamassu__Staircase_Landing
+Giguna__Lamassu__East_18 --> Giguna__Dual_Path__West_18
+Giguna__Lamassu__Lower_Platform_Left --> Giguna__Lamassu__Upper_Platform_Edge
+Giguna__Lamassu__Lower_Platform_Right --> Giguna__Lamassu__Head
+Giguna__Lamassu__Rear_Gap --> Giguna__Lamassu__East_18
 Giguna__Ruins_Center__East_8 <--> Giguna__Ruins_East__West_8
 Giguna__Ruins_Center__East_9 <--> Giguna__Ruins_East__West_9
 Giguna__Ruins_Center__Wall_Bottom --> Giguna__Ruins_Center__Wall_Top

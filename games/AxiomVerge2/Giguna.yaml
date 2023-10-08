@@ -1590,6 +1590,9 @@ areas:
       local:
         - to: Staircase Top
           jumps: 4
+      exits:
+        - to: Lamassu > West 18
+          tags: [xshift]
     - name: South Left
       coord: [11.1, 17.9]
     - name: South Middle
@@ -1629,29 +1632,156 @@ areas:
   spots:
     - name: West 18
       coord: [13.05, 17.4]
+      local:
+        - to: Staircase Top
+      exits:
+        - to: Helipad > East 18
+          tags: [xshift]
     - name: Staircase Top
       coord: [13.45, 17.4]
+      local:
+        - to: West 18
+        - to: Staircase Bottom
     - name: Staircase Bottom
       coord: [13.7, 17.8]
+      local:
+        - to: Staircase Top
+          jumps: 2
+        - to: Staircase Landing
+        - to: Broken Pillar
+        - to: Upper Platform Edge
     - name: Staircase Landing
       coord: [13.75, 18.05]
+      local:
+        - to: Staircase Bottom
+          jumps: 2
+        - to: Broken Pillar
+        - to: Upper Platform Edge
     - name: Broken Pillar
       coord: [13.8, 18.3]
+      local:
+        - to: Upper Platform Edge
+      exits:
+        - to: Staircase Landing
+          req: $grab
+          movement: base
+          jumps: 2
     - name: Upper Platform Edge
       coord: [14.15, 18.45]
+      local:
+        - to: Broken Pillar
+          jumps: 1
+        - to: Lower Platform Left
     - name: Lower Platform Left
       coord: [14.35, 18.7]
+      local:
+        - to: Lower Platform Right
+      exits:
+        - to: Upper Platform Edge
+          req: $grab  # ?
+          movement: base
+          jumps: 2
     - name: Lower Platform Right
       coord: [14.6, 18.7]
+      local:
+        - to: Lower Platform Left
+      exits:
+        - to: Head
+          req: $grab and $climb
+          movement: base
+          jumps: 3
     - name: Head
       coord: [14.9, 18.2]
+      local:
+        - to: Wingtip
+        - to: Lower Platform Right
+        - to: Lower Platform Left
     - name: Rear Platform
       coord: [15.5, 17.8]
+      local:
+        - to: Head
+        - to: East 18  # or requires grab?
+          jumps: 2
     - name: Wingtip
       coord: [15.7, 18.1]
+      local:
+        - to: Head
+        - to: Deposit
+        - to: Rear Gap
+          jumps: 1
     - name: Rear Gap
       coord: [15.8, 18.0]
+      local:
+        - to: Deposit
+        - to: Wingtip
+      exits:
+        - to: East 18
+          req: $grab
+          movement: base
+          jumps: 4
     - name: Deposit
       coord: [15.65, 19.5]
+      local:
+        - to: Wingtip
+          jumps: 8
+        - to: Rear Gap
+          jumps: 9
+      locations:
+        - name: Flask
+          item: Flask
+          tags: [flask]
     - name: East 18
       coord: [15.95, 17.5]
+      local:
+        - to: Rear Platform
+        - to: Rear Gap
+      exits:
+        - to: Dual Path > West 18
+          tags: [xshift]
+
+- name: Dual Path
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 18
+      coord: [16.05, 17.5]
+    - name: Below Left Switch
+      coord: [16.2, 17.7]
+    - name: Left Switch
+      coord: [16.3, 17.5]
+    - name: West Slope
+      coord: [16.85, 17.7]
+    - name: Base of Wall
+      coord: [17.85, 17.75]
+    - name: Wall Secret
+      coord: [17.95, 17.75]
+    - name: Wall Top
+      coord: [17.85, 17.25]
+    - name: Right Switch
+      coord: [18.1, 17.3]
+    - name: Below Right Switch
+      coord: [18.15, 17.45]
+    - name: East Gate
+      coord: [18.4, 17.3]
+    - name: East 18
+      coord: [18.95, 17.65]
+
+    # Upper path
+    - name: West Gate
+      coord: [16.3, 17.2]
+    - name: West Gate NW
+      coord: [16.2, 16.85]
+    - name: West Gate NE
+      coord: [16.4, 16.85]
+    - name: West 17
+      coord: [16.05, 16.85]
+    - name: Midway
+      coord: [17.35, 16.8]
+    - name: Midway Plateau
+      coord: [17.55, 16.5]
+    - name: East Gate NW
+      coord: [18.25, 16.8]
+    - name: East Gate NE
+      coord: [18.55, 16.45]
+    - name: East 17
+      coord: [18.95, 16.85]
+
