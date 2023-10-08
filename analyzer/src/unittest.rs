@@ -606,7 +606,7 @@ where
                         tname
                     )
                 }
-                Some("path") => assign_mode_or_append_err!(
+                Some("path")|Some("route") => assign_mode_or_append_err!(
                     mode,
                     errs,
                     match value {
@@ -889,6 +889,35 @@ where
             })
         })
         .collect()
+}
+
+pub fn parse_route_file<W, T>(world: Arc<W>, filename: &PathBuf) -> Result<Trial, String>
+where
+    T: Ctx<World = W> + 'static,
+    W: World + Send + 'static,
+    W::Location: Location<Context = T>,
+{
+    let mut file = File::open(filename)
+        .unwrap_or_else(|e| panic!("Couldn't open file \"{:?}\": {:?}", filename, e));
+    let mut prefix = filename
+        .file_stem()
+        .map(|f| f.to_str())
+        .flatten()
+        .unwrap_or_else(|| panic!("Filename error in \"{:?}\"", filename));
+    let mut route_str = String::new();
+    file.read_to_string(&mut route_str)
+        .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", filename, e));
+
+    let mode = histlines_from_string::<W, T, W::Location>(&route_str)
+        .map(|route| TestMode::Route(
+            route
+                .into_iter()
+                .map(|(h, s)| (h, format!("{}", s)))
+                .collect()
+        ))?;
+    Ok(Trial::test(format!("routes/{}", prefix), move || {
+        Ok(run_test(&*world, T::default(), mode, vec![])?)
+    }))
 }
 
 pub fn run_test_file<W, T>(world: Arc<W>, filename: &PathBuf)
