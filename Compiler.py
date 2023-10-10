@@ -147,6 +147,9 @@ def get_exit_target(ex):
 class GameLogic(object):
 
     def __init__(self, game: str):
+        if '/' in game or '\\' in game:
+            fields = os.path.split(game)
+            game = fields[1] if fields[0] == 'games' else fields[0]
         self.game = game
         self.package = inflection.underscore(game)
         self.game_dir = os.path.join(base_dir, 'games', game)
@@ -1416,7 +1419,7 @@ if __name__ == '__main__':
         print(f'Encountered {len(gl.errors)} error(s); exiting before codegen.')
         sys.exit(1)
 
-    logging.info(f'Rendering {args.game} graph: {len(list(gl.spots()))} spots, '
+    logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
                  f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations, '
                  f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
                  f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '

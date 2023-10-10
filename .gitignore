@@ -20,3 +20,4 @@ target/
 **/data/*.txt
 .db/
 .vs/
+.vscode/
