@@ -827,7 +827,7 @@ where
     Ok(())
 }
 
-pub fn parse_test_file<W, T>(world: Arc<W>, filename: &PathBuf) -> Vec<Trial>
+pub fn parse_test_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf) -> Vec<Trial>
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -885,7 +885,7 @@ where
         .map(|t| {
             let wp = world.clone();
             Trial::test(format!("{}:{}", prefix, t.name), move || {
-                Ok(run_test(&*wp, t.initial, t.mode, t.expects)?)
+                Ok(run_test(&**wp, t.initial, t.mode, t.expects)?)
             })
         })
         .collect()
@@ -920,7 +920,7 @@ where
     }))
 }
 
-pub fn run_test_file<W, T>(world: Arc<W>, filename: &PathBuf)
+pub fn run_test_file<W, T>(world: Arc<Box<W>>, filename: &PathBuf)
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -937,7 +937,7 @@ where
     W: World + Send + 'static,
     W::Location: Location<Context = T>,
 {
-    let mut world = W::default();
+    let mut world = Box::<W>::default();
     world.condense_graph();
 
     let wp = Arc::new(world);

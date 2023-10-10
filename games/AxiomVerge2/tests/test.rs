@@ -15,7 +15,7 @@ use zstd::stream::write::Encoder;
 
 #[test]
 fn test_name() {
-    let mut world = graph::World::new();
+    let mut world = Box::<graph::World>::default();
     world.condense_graph();
     let mut ctx = Context::default();
 
@@ -25,7 +25,7 @@ fn test_name() {
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_no_route!(
-        &world,
+        &*world,
         ctx,
         Context,
         SpotId::Glacier__Vertical_Room__East_9,
@@ -35,7 +35,7 @@ fn test_name() {
 
 #[test]
 fn test_route() {
-    let mut world = graph::World::new();
+    let mut world = Box::<graph::World>::default();
     world.condense_graph();
     let mut ctx = Context::default();
 
@@ -46,7 +46,7 @@ fn test_route() {
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_this_route!(
-        &world,
+        &*world,
         ctx,
         SpotId::Glacier__Vertical_Room__Mid_9,
         vec![
@@ -59,7 +59,7 @@ fn test_route() {
 
 #[test]
 fn test_obtain() {
-    let mut world = graph::World::new();
+    let mut world = Box::<graph::World>::default();
     world.condense_graph();
     let mut ctx = Context::default();
 
@@ -71,7 +71,7 @@ fn test_obtain() {
     ctx.save = SpotId::Glacier__Revival__Save_Point;
 
     expect_obtainable!(
-        &world,
+        &*world,
         ctx,
         SpotId::Glacier__Revival__Save_Point,
         Item::Ledge_Grab
@@ -80,7 +80,7 @@ fn test_obtain() {
 
 #[test]
 fn test_require() {
-    let mut world = graph::World::new();
+    let mut world = Box::<graph::World>::default();
     world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 30;
@@ -92,14 +92,14 @@ fn test_require() {
     let mut ctx2 = ctx.clone();
     ctx2.set_major_glitches(true);
     expect_not_obtainable!(
-        &world,
+        &*world,
         ctx,
         Context,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
     );
     expect_obtainable!(
-        &world,
+        &*world,
         ctx2,
         SpotId::Glacier__Vertical_Room__East_9,
         Item::Ledge_Grab
@@ -109,7 +109,7 @@ fn test_require() {
 #[ignore]
 #[test]
 fn search() {
-    let mut world = graph::World::new();
+    let mut world = Box::<graph::World>::default();
     world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
@@ -128,7 +128,7 @@ fn search() {
     };
 
     expect_eventually_requires_to_obtain!(
-        &world,
+        &*world,
         ctx,
         Context,
         SpotId::Glacier__Vertical_Room__East_9,
@@ -146,7 +146,7 @@ fn serde_pass<T: Ctx>(ctx: &ContextWrapper<T>) -> Vec<u8> {
 
 #[test]
 fn asserde_true() {
-    let mut world = graph::World::new();
+    let mut world = Box::<graph::World>::default();
     world.condense_graph();
     let mut ctx = Context::default();
     ctx.energy = 300;
