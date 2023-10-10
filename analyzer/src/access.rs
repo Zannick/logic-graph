@@ -51,7 +51,7 @@ where
 fn expand<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
+    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
@@ -101,7 +101,7 @@ fn expand<W, T, E, Wp>(
 fn expand_exits<W, T, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
+    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
@@ -130,7 +130,7 @@ fn expand_local<W, T, E, Wp>(
     world: &W,
     ctx: &ContextWrapper<T>,
     movement_state: T::MovementState,
-    spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
+    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
@@ -161,7 +161,7 @@ pub fn accessible_spots<W, T, E>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
-) -> EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>
+) -> Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>
 where
     W: World<Exit = E>,
     T: Ctx<World = W>,
@@ -171,10 +171,10 @@ where
         Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
-    let mut spot_enum_map: EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>> = EnumMap::default();
+    let mut spot_enum_map: Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>> = Box::default();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
-    spot_enum_map[pos] = Some(Box::new(ctx));
+    spot_enum_map[pos] = Some(ctx);
 
     expand(
         world,
@@ -187,7 +187,7 @@ where
         let spot_found = el.el;
         let pos = spot_found.get().position();
         if spot_enum_map[pos].is_none() {
-            spot_enum_map[pos] = Some(Box::new(spot_found));
+            spot_enum_map[pos] = Some(spot_found);
             expand(
                 world,
                 spot_enum_map[pos].as_ref().unwrap(),
@@ -218,10 +218,10 @@ where
     if ctx.get().position() == spot {
         return Some(ctx);
     }
-    let mut spot_enum_map: EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>> = EnumMap::default();
+    let mut spot_enum_map: Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>> = Box::default();
     let mut spot_heap = BinaryHeap::new();
     let pos = ctx.get().position();
-    spot_enum_map[pos] = Some(Box::new(ctx));
+    spot_enum_map[pos] = Some(ctx);
 
     expand(
         world,
@@ -238,7 +238,7 @@ where
             return Some(spot_found);
         }
         if spot_enum_map[pos].is_none() {
-            spot_enum_map[pos] = Some(Box::new(spot_found));
+            spot_enum_map[pos] = Some(spot_found);
             expand(
                 world,
                 spot_enum_map[pos].as_ref().unwrap(),
@@ -254,7 +254,7 @@ where
         if let Some(ctx) = &spot_enum_map[*pos] {
             spot_heap.push(Reverse(HeapElement {
                 score: ctx.elapsed(),
-                el: ctx.as_ref().clone(),
+                el: ctx.clone(),
             }));
             expand_local(
                 world,
@@ -279,7 +279,7 @@ where
                 continue;
             }
         }
-        spot_enum_map[pos] = Some(Box::new(spot_found));
+        spot_enum_map[pos] = Some(spot_found);
         let ctx = spot_enum_map[pos].as_ref().unwrap();
         let movement_state = ctx.get().get_movement_state();
         expand_local(
@@ -409,7 +409,7 @@ where
 
 pub fn find_unused_links<W, T, E, Wp>(
     world: &W,
-    spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
+    spot_map: &Box<EnumMap<E::SpotId, Option<ContextWrapper<T>>>>,
 ) -> String
 where
     W: World<Exit = E, Warp = Wp>,
@@ -417,7 +417,7 @@ where
     E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    let mut accessible: Vec<Box<ContextWrapper<T>>> =
+    let mut accessible: Vec<ContextWrapper<T>> =
         spot_map.values().filter_map(Clone::clone).collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
     let mut vec = Vec::new();

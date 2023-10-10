@@ -58,7 +58,7 @@ pub trait Location: Accessible {
 
 pub trait Exit: Accessible {
     type ExitId: Id;
-    type SpotId: Id + Default + enum_map::EnumArray<Option<Box<ContextWrapper<Self::Context>>>>;
+    type SpotId: Id + Default + enum_map::EnumArray<Option<ContextWrapper<Self::Context>>>;
     type LocId: Id + enum_map::EnumArray<bool>;
 
     fn id(&self) -> Self::ExitId;

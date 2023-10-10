@@ -40,10 +40,6 @@ pub(crate) fn new_hashset<T>() -> std::collections::HashSet<T, CommonHasher> {
     rustc_hash::FxHashSet::default()
 }
 
-pub(crate) fn unbox_option<T>(boxed_option: Option<Box<T>>) -> Option<T> {
-    boxed_option.map(|bc| *bc)
-}
-
 pub mod testlib {
     #[macro_export]
     macro_rules! expect_no_route {
