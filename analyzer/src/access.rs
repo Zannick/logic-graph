@@ -62,33 +62,26 @@ fn expand<W, T, E, Wp>(
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     let movement_state = ctx.get().get_movement_state();
-    for ce in world.get_condensed_edges_from(ctx.get().position()) {
-        if spot_map[ce.dst].is_none() && ce.can_access(world, ctx.get(), movement_state) {
-            let mut newctx = ctx.clone();
-            newctx.move_condensed_edge(ce);
-            let elapsed = newctx.elapsed();
-            if elapsed <= max_time {
-                spot_heap.push(Reverse(HeapElement {
-                    score: elapsed,
-                    el: newctx,
-                }));
+    let cedges = world.get_condensed_edges_from(ctx.get().position());
+    if !cedges.is_empty() {
+        for ce in cedges {
+            if spot_map[ce.dst].is_none() && ce.can_access(world, ctx.get(), movement_state) {
+                let mut newctx = ctx.clone();
+                newctx.move_condensed_edge(ce);
+                let elapsed = newctx.elapsed();
+                if elapsed <= max_time {
+                    spot_heap.push(Reverse(HeapElement {
+                        score: elapsed,
+                        el: newctx,
+                    }));
+                }
             }
         }
+    } else {
+        expand_local(world, ctx, movement_state, spot_map, max_time, spot_heap);
     }
 
-    for exit in world.get_spot_exits(ctx.get().position()) {
-        if spot_map[exit.dest()].is_none() && exit.can_access(ctx.get()) {
-            let mut newctx = ctx.clone();
-            newctx.exit(exit);
-            let elapsed = newctx.elapsed();
-            if elapsed <= max_time {
-                spot_heap.push(Reverse(HeapElement {
-                    score: elapsed,
-                    el: newctx,
-                }));
-            }
-        }
-    }
+    expand_exits(world, ctx, spot_map, max_time, spot_heap);
 
     for warp in world.get_warps() {
         if spot_map[warp.dest(ctx.get())].is_none() && warp.can_access(ctx.get()) {
@@ -105,10 +98,38 @@ fn expand<W, T, E, Wp>(
     }
 }
 
-// This is mainly for move_to which is used from tests.
-fn expand_with_local<W, T, E, Wp>(
+fn expand_exits<W, T, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
+    spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
+    max_time: u32,
+    spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
+) where
+    W: World<Exit = E>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
+{
+    for exit in world.get_spot_exits(ctx.get().position()) {
+        if spot_map[exit.dest()].is_none() && exit.can_access(ctx.get()) {
+            let mut newctx = ctx.clone();
+            newctx.exit(exit);
+            let elapsed = newctx.elapsed();
+            if elapsed <= max_time {
+                spot_heap.push(Reverse(HeapElement {
+                    score: elapsed,
+                    el: newctx,
+                }));
+            }
+        }
+    }
+}
+
+// This is mainly for move_to which is used from tests.
+fn expand_local<W, T, E, Wp>(
+    world: &W,
+    ctx: &ContextWrapper<T>,
+    movement_state: T::MovementState,
     spot_map: &EnumMap<E::SpotId, Option<Box<ContextWrapper<T>>>>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
@@ -119,8 +140,6 @@ fn expand_with_local<W, T, E, Wp>(
     W::Location: Location<Context = T>,
     Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
-    expand(world, ctx, spot_map, max_time, spot_heap);
-    let movement_state = ctx.get().get_movement_state();
     for &dest in world.get_area_spots(ctx.get().position()) {
         let ltt = ctx.get().local_travel_time(movement_state, dest);
         if spot_map[dest].is_none() && ltt < u32::MAX {
@@ -204,7 +223,7 @@ where
     let pos = ctx.get().position();
     spot_enum_map[pos] = Some(Box::new(ctx));
 
-    expand_with_local(
+    expand(
         world,
         spot_enum_map[pos].as_ref().unwrap(),
         &spot_enum_map,
@@ -220,7 +239,7 @@ where
         }
         if spot_enum_map[pos].is_none() {
             spot_enum_map[pos] = Some(Box::new(spot_found));
-            expand_with_local(
+            expand(
                 world,
                 spot_enum_map[pos].as_ref().unwrap(),
                 &spot_enum_map,
@@ -228,6 +247,50 @@ where
                 &mut spot_heap,
             );
         }
+    }
+
+    // Didn't find a condensed-edge-only route, so process all local edges
+    for pos in world.get_area_spots(spot) {
+        if let Some(ctx) = &spot_enum_map[*pos] {
+            spot_heap.push(Reverse(HeapElement {
+                score: ctx.elapsed(),
+                el: ctx.as_ref().clone(),
+            }));
+            expand_local(
+                world,
+                ctx,
+                ctx.get().get_movement_state(),
+                &spot_enum_map,
+                u32::MAX,
+                &mut spot_heap,
+            );
+            expand_exits(world, ctx, &spot_enum_map, u32::MAX, &mut spot_heap);
+        }
+    }
+    while let Some(Reverse(el)) = spot_heap.pop() {
+        let spot_found = el.el;
+        let pos = spot_found.get().position();
+        if pos == spot {
+            return Some(spot_found);
+        }
+        // Process this position if it's better than our best or not found.
+        if let Some(c) = &spot_enum_map[pos] {
+            if spot_found.elapsed() >= c.elapsed() {
+                continue;
+            }
+        }
+        spot_enum_map[pos] = Some(Box::new(spot_found));
+        let ctx = spot_enum_map[pos].as_ref().unwrap();
+        let movement_state = ctx.get().get_movement_state();
+        expand_local(
+            world,
+            ctx,
+            movement_state,
+            &spot_enum_map,
+            u32::MAX,
+            &mut spot_heap,
+        );
+        expand_exits(world, ctx, &spot_enum_map, u32::MAX, &mut spot_heap);
     }
     None
 }
@@ -360,7 +423,12 @@ where
     let mut vec = Vec::new();
     for ctx in accessible {
         for spot in world.get_area_spots(ctx.get().position()) {
-            if spot_map[*spot].is_none() && world.get_condensed_edges_from(ctx.get().position()).into_iter().any(|ce| ce.dst == *spot) {
+            if spot_map[*spot].is_none()
+                && world
+                    .get_condensed_edges_from(ctx.get().position())
+                    .into_iter()
+                    .any(|ce| ce.dst == *spot)
+            {
                 vec.push(format!(
                     "{} -> {}: movement not available",
                     ctx.get().position(),
@@ -370,7 +438,13 @@ where
         }
 
         for exit in world.get_spot_exits(ctx.get().position()) {
-            if spot_map[exit.dest()].is_none() && (!W::same_area(ctx.get().position(), exit.dest()) || world.get_condensed_edges_from(ctx.get().position()).into_iter().any(|ce| ce.dst == exit.dest())) {
+            if spot_map[exit.dest()].is_none()
+                && (!W::same_area(ctx.get().position(), exit.dest())
+                    || world
+                        .get_condensed_edges_from(ctx.get().position())
+                        .into_iter()
+                        .any(|ce| ce.dst == exit.dest()))
+            {
                 vec.push(format!("{}: exit not usable", exit.id()));
             }
         }

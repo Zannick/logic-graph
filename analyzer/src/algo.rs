@@ -201,6 +201,30 @@ where
     results
 }
 
+fn single_step_with_local<W, T, L>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    max_time: u32,
+) -> Vec<ContextWrapper<T>>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+{
+    let movement_state = ctx.get().get_movement_state();
+    let mut results = Vec::new();
+    for &dest in world.get_area_spots(ctx.get().position()) {
+        let ltt = ctx.get().local_travel_time(movement_state, dest);
+        if ltt < u32::MAX && ltt + ctx.elapsed() <= max_time {
+            let mut newctx = ctx.clone();
+            newctx.move_local(dest, ltt);
+            results.push(newctx);
+        }
+    }
+    results.extend(single_step(world, ctx, max_time));
+    results
+}
+
 pub struct Search<'a, W, T>
 where
     W: World,
@@ -457,7 +481,7 @@ where
     }
 
     fn recreate_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        single_step(self.world, ctx, u32::MAX)
+        single_step_with_local(self.world, ctx, u32::MAX)
     }
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
