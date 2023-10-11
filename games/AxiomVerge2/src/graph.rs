@@ -11188,7 +11188,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx),
-            Objective::Progress => rules::access___remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_hook_all_notes(ctx),
+            Objective::Progress => rules::access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_hook_all_notes(ctx),
         }
     }
 
@@ -11201,6 +11201,9 @@ impl world::World for World {
                 }
             }
             Objective::Progress => {
+                if !ctx.has(Item::Amashilama) {
+                    vec.push((Item::Amashilama, 1));
+                }
                 if !ctx.has(Item::Companies_Layoff) {
                     vec.push((Item::Companies_Layoff, 1));
                 }
@@ -11252,6 +11255,7 @@ impl world::World for World {
         match self.objective {
             Objective::Start => vec![(Item::Remote_Drone, 1)],
             Objective::Progress => vec![
+                (Item::Amashilama, 1),
                 (Item::Companies_Layoff, 1),
                 (Item::Dear_Ernest, 1),
                 (Item::Flask, 7),
