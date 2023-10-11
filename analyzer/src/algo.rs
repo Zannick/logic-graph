@@ -53,10 +53,7 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx, max_time);
-    let mut vec: Vec<ContextWrapper<T>> = spot_map
-        .into_values()
-        .filter_map(|x| x)
-        .collect();
+    let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().filter_map(|x| x).collect();
 
     vec.par_sort_unstable_by_key(|el| el.elapsed());
     vec
@@ -262,10 +259,11 @@ where
             }
             Err(ctx) => {
                 panic!(
-                    "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}",
+                    "Found no greedy solution, maximal attempt reached dead-end after {}ms:\n{}\n{:#?}\nMissing: {:?}",
                     ctx.elapsed(),
                     history_summary::<T, _>(ctx.recent_history().iter().copied()),
-                    ctx.get()
+                    ctx.get(),
+                    world.items_needed(ctx.get())
                 );
             }
         }
