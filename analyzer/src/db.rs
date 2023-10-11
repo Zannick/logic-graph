@@ -1066,6 +1066,7 @@ where
         let mut start_key: Option<Box<[u8]>> = None;
 
         let mut end = false;
+        let mut empty_passes = 0;
         while !end && !exit_signal.load(Ordering::Acquire) {
             let mut iter_opts = ReadOptions::default();
             iter_opts.set_tailing(true);
@@ -1128,6 +1129,14 @@ where
             self.db.write_opt(batch, &self.write_opts).unwrap();
             self.reset_estimates_actual();
             drop(_retrieve_lock);
+            if end && count == batch_size {
+                println!("Bg thread reached end at round start, left in db: {}", self.size.load(Ordering::Acquire));
+                empty_passes += 1;
+                assert!(empty_passes < 10, "Bg thread encountered too many empty passes in a row");
+                std::thread::sleep(std::time::Duration::from_secs(2));
+            } else {
+                empty_passes = 0;
+            }
             self.pskips.fetch_add(pskips, Ordering::Release);
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
             self.bg_deletes
