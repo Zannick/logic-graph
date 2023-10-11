@@ -1086,6 +1086,7 @@ digraph AxiomVerge2 {
     Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
     Giguna__Building_Interior__Entry -> Giguna__Building_Interior__Bookshelf;
     Giguna__Building_Interior__Entry -> Giguna__Giguna_Base__Building_Entry;
+    Giguna__Ruins_East__East_9 -> Giguna__Giguna_Northeast__West_9;
     Giguna__Ruins_East__Bottom_Rock -> Giguna__Ruins_East__Cliff;
     Giguna__Ruins_East__West_9 -> Giguna__Ruins_Center__East_9;
     Giguna__Ruins_East__Cliff -> Giguna__Ruins_East__Ledge;
@@ -1093,6 +1094,8 @@ digraph AxiomVerge2 {
     Giguna__Ruins_East__Ledge -> Giguna__Ruins_East__Small_Passage;
     Giguna__Ruins_East__Small_Passage -> Giguna__Ruins_East__Ledge;
     Giguna__Ruins_East__West_8 -> Giguna__Ruins_Center__East_8;
+    Giguna__Ruins_East__West_7 -> Giguna__Ruins_East__Pillar;
+    Giguna__Ruins_East__West_7 -> Giguna__Ruins_Top__East_7;
     Giguna__Ruins_Center__East_8 -> Giguna__Ruins_East__West_8;
     Giguna__Ruins_Center__East_9 -> Giguna__Ruins_East__West_9;
     Giguna__Ruins_Center__Wall_Bottom -> Giguna__Ruins_Center__Wall_Top;
@@ -2278,6 +2281,7 @@ digraph AxiomVerge2 {
     Giguna__Ruins_Top__Rooftop_West -> Giguna__Ruins_Top__Rooftop_East;
     Giguna__Ruins_Top__Rooftop_East -> Giguna__Ruins_Top__Rooftop_West;
     Giguna__Ruins_Top__Rooftop_East -> Giguna__Ruins_Top__Rooftop_Gutter;
+    Giguna__Ruins_Top__Rooftop_Gutter -> Giguna__Ruins_Top__East_7;
     Giguna__Ruins_Top__Rooftop_Gutter -> Giguna__Ruins_Top__Rooftop_East;
     Giguna__Ruins_Top__Turret_Balcony_East -> Giguna__Ruins_Top__Switch;
     Giguna__Ruins_Top__Turret_Balcony_East -> Giguna__Ruins_Top__Turret_Balcony_West;

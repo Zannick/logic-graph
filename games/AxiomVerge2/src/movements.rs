@@ -3315,6 +3315,9 @@ pub fn local_travel_time(
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
         ) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
+            1200
+        }
         (
             [false],
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
@@ -7512,6 +7515,9 @@ pub fn local_travel_time(
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
         ) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
+            1200
+        }
         (
             [true],
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
@@ -12035,6 +12041,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_East__East_9 => enum_map! {
+            SpotId::Giguna__Giguna_Northeast__West_9 => 1350,
             SpotId::Giguna__Ruins_East__East_9 => 0,
             SpotId::Giguna__Ruins_East__Bottom_Rock => 2280,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -12093,7 +12100,9 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_East__West_7 => enum_map! {
+            SpotId::Giguna__Ruins_East__Pillar => 1799,
             SpotId::Giguna__Ruins_East__West_7 => 0,
+            SpotId::Giguna__Ruins_Top__East_7 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12355,6 +12364,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Ruins_Top__Rooftop_Gutter => enum_map! {
+            SpotId::Giguna__Ruins_Top__East_7 => 1200,
             SpotId::Giguna__Ruins_Top__Rooftop_East => 1200,
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
@@ -17621,6 +17631,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Building_Interior__Bookshelf, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Giguna_Northeast__West_9) => 1350,
         (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__East_9) => 0,
         (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => 2280,
         (SpotId::Giguna__Ruins_East__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
@@ -17655,7 +17666,9 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Pillar) => 0,
         (SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => 701,
         (SpotId::Giguna__Ruins_East__Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_East__West_7, SpotId::Giguna__Ruins_East__Pillar) => 1799,
         (SpotId::Giguna__Ruins_East__West_7, SpotId::Giguna__Ruins_East__West_7) => 0,
+        (SpotId::Giguna__Ruins_East__West_7, SpotId::Giguna__Ruins_Top__East_7) => 1350,
         (SpotId::Giguna__Ruins_East__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => 3600,
         (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => 2399,
@@ -17848,6 +17861,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_East) => 0,
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => 701,
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => 1200,
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             1200
         }
@@ -21165,6 +21179,7 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             true
         }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => true,
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
@@ -32782,6 +32797,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__East_9,
+            SpotId::Giguna__Giguna_Northeast__West_9,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Ruins_East__East_9,
             SpotId::Giguna__Ruins_East__East_9,
             0,
         ),
@@ -32952,8 +32972,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__West_7,
+            SpotId::Giguna__Ruins_East__Pillar,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Ruins_East__West_7,
             SpotId::Giguna__Ruins_East__West_7,
             0,
+        ),
+        (
+            SpotId::Giguna__Ruins_East__West_7,
+            SpotId::Giguna__Ruins_Top__East_7,
+            1350,
         ),
         (
             SpotId::Giguna__Ruins_East__West_7,
@@ -33704,6 +33734,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
+            SpotId::Giguna__Ruins_Top__East_7,
+            1200,
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
@@ -39153,6 +39188,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => {
             Some(1754)
         }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
+            Some(1200)
+        }
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             Some(1200)
         }
@@ -42783,6 +42821,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => {
             (Some(1754), vec![])
+        }
+        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
+            (Some(1200), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             (Some(1200), vec![])

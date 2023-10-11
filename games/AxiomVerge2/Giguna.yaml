@@ -1014,6 +1014,9 @@ areas:
         - to: Bottom Rock
           jumps: 2
         - to: Cliff
+      exits:
+        - to: Giguna Northeast > West 9
+          tags: [xshift]
     - name: Bottom Rock
       coord: [16.3, 8.5]
       local:
@@ -1077,10 +1080,13 @@ areas:
         - to: Ledge
     - name: West 7
       coord: [16.05, 6.8]
-      #exits:
-      #  - to: Ruins Top > East 7
-      #    tags: [xshift]
-        # TODO: to: Pillar
+      exits:
+        - to: Ruins Top > East 7
+          tags: [xshift]
+        - to: Pillar
+          req: $climb and $grab
+          movement: base
+          jumps: 3
     - name: Way Up High
       coord: [16.6, 5.2]
       local:
@@ -1430,6 +1436,7 @@ areas:
       local:
         - to: Rooftop East
           jumps: 2
+        - to: East 7
       # TODO: movement to the high flask and the pillar
     - name: Turret Balcony East
       coord: [14.8, 5.2]

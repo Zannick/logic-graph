@@ -26,3 +26,15 @@ tests:
       - Slingshot_Hook
     start: Giguna Breach > Slingshot > Ravine
     can_activate: Giguna Breach > Peak > Portal > Portal
+
+  - name: Portal and go back for more stuff
+    start: Giguna Breach > Chimney > Cache
+    with:
+      - Slingshot_Hook
+    route: |
+      ! Do Giguna Breach > Peak > Portal > Portal
+      ! Do Recall Drone
+        IndraSaveWarp to Giguna > Ruins Top > Save Point
+      ! Do Giguna > Carnelian > Upper Susar > Caught
+      ! Do Giguna > West Caverns > Small Platform > Throw Drone Up
+      * Collect Power_Matrix from Giguna > West Caverns > Cache > Item
