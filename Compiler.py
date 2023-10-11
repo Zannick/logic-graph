@@ -5,6 +5,7 @@ import itertools
 import logging
 import math
 import os
+import pathlib
 import re
 import subprocess
 import sys
@@ -148,8 +149,8 @@ class GameLogic(object):
 
     def __init__(self, game: str):
         if '/' in game or '\\' in game:
-            fields = os.path.split(game)
-            game = fields[1] if fields[0] == 'games' else fields[0]
+            path = pathlib.PurePath(game)
+            game = path.parts[1] if path.parts[0] == 'games' else path.parts[0]
         self.game = game
         self.package = inflection.underscore(game)
         self.game_dir = os.path.join(base_dir, 'games', game)
