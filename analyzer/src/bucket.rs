@@ -138,7 +138,7 @@ where
             }
             if self.bucket < self.max {
                 self.bucket += 1;
-                self.iter = self.q.bucket_for_peeking(self.bucket).unwrap().iter();
+                self.iter = self.q.bucket_for_peeking(self.bucket)?.iter();
             } else {
                 return None;
             }
