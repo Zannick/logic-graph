@@ -222,6 +222,7 @@ where
             vec.sort_unstable_by_key(|el| el.elapsed);
             while let Some(last) = vec.last() {
                 if last.elapsed - self.best > self.best / 10 {
+                    assert!(vec.len() > 1, "Eliminated all solutions! best={} but first={}", self.best, last.elapsed);
                     vec.pop();
                 } else {
                     break;
