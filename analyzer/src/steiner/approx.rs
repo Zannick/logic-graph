@@ -41,6 +41,7 @@ pub trait SteinerAlgo<V, E> {
     /// from the given root (index) and with the given required node (indices).
     /// Optionally, a list of node subsets can be given, each with a nonzero number of necessary nodes
     /// in that set; once that many of those nodes are visited, the rest are no longer required.
+    /// Items in subsets that aren't in the full required list will be ignored.
     fn compute(
         &self,
         root: V,

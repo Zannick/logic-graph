@@ -72,6 +72,8 @@ where
         if self.world.won(ctx) {
             return 0;
         }
+        // items_needed gives us the remaining items, while get_item_locations gives us all locations,
+        // even ones already visited
         let item_sets: Vec<_> = self
             .world
             .items_needed(ctx)
@@ -81,8 +83,9 @@ where
         let subsets: Vec<_> = item_sets
             .iter()
             .filter_map(|(ilist, ct)| {
-                if *ct > 1 {
+                if ilist.len() > (*ct).try_into().unwrap() {
                     Some((
+                        // technically we should reduce this to todo locations but it doesn't matter
                         ilist.iter().copied().collect::<HashSet<_, CommonHasher>>(),
                         *ct,
                     ))
