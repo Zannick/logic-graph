@@ -3,6 +3,7 @@ use crate::context::*;
 use crate::minimize::*;
 use crate::new_hashset;
 use crate::world::*;
+use std::collections::HashSet;
 
 pub fn first_spot_with_locations_after_actions<W, T, L, E>(
     world: &W,
@@ -33,40 +34,22 @@ where
 
     let mut useful_spots = Vec::new();
     let mut seen = new_hashset();
-    let mut to_process = orig_vec.clone();
-    seen.extend(to_process.iter().map(|ctx| ctx.get().clone()));
+    let mut to_process: Vec<_> = orig_vec.iter().map(|c| (c.clone(), HashSet::new())).collect();
+    seen.extend(to_process.iter().map(|(ctx, _)| ctx.get().clone()));
 
-    // Only allow global actions as the first action (in the first available spot), or as the last action.
+    // Only allow global actions once each.
     // This avoids extreme fanout.
-    for action in world.get_global_actions() {
-        if let Some(spot) = orig_vec.iter().find(|s| action.can_access(s.get())) {
-            let mut newctx = spot.clone();
-            newctx.activate(action);
-            for nextctx in accessible_spots(world, newctx, max_time)
-                .into_values()
-                .flatten()
-            {
-                if spot_has_locations(world, nextctx.get()) {
-                    useful_spots.push(nextctx);
-                } else if !seen.contains(nextctx.get()) {
-                    seen.insert(nextctx.get().clone());
-                    to_process.push(nextctx);
-                }
-            }
-        }
-    }
-
     let mut depth = 0;
     while depth < max_depth && !to_process.is_empty() {
         let mut next_process = Vec::new();
-        for spot_ctx in to_process
+        for (spot_ctx, used_globals) in to_process
             .iter()
-            .filter(|ctx| spot_has_actions(world, ctx.get()))
+            .filter(|(ctx, _)| spot_has_actions(world, ctx.get()))
         {
             for action in world
                 .get_spot_actions(spot_ctx.get().position())
                 .iter()
-                .filter(|a| a.can_access(spot_ctx.get()))
+                .filter(|a| !used_globals.contains(&a.id()) && a.can_access(spot_ctx.get()))
             {
                 let mut newctx = spot_ctx.clone();
                 newctx.activate(action);
@@ -82,12 +65,12 @@ where
                         }
                     } else if !seen.contains(nextctx.get()) {
                         seen.insert(nextctx.get().clone());
-                        next_process.push(nextctx);
+                        next_process.push((nextctx, used_globals.clone()));
                     }
                 }
             }
 
-            // Only allow global actions at the start position, or as the last action.
+            // Only allow global actions once each.
             for action in world
                 .get_global_actions()
                 .iter()
@@ -101,6 +84,11 @@ where
                 {
                     if spot_has_locations(world, nextctx.get()) {
                         return Ok(nextctx);
+                    } else if !seen.contains(nextctx.get()) {
+                        let mut next_globals = used_globals.clone();
+                        next_globals.insert(action.id());
+                        seen.insert(nextctx.get().clone());
+                        next_process.push((nextctx, next_globals));
                     }
                 }
             }
@@ -109,7 +97,7 @@ where
             break;
         }
         to_process = next_process;
-        to_process.sort_unstable_by_key(|ctx| ctx.elapsed());
+        to_process.sort_unstable_by_key(|(ctx, _)| ctx.elapsed());
         depth += 1;
     }
 
