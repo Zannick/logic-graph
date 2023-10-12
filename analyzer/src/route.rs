@@ -201,7 +201,7 @@ where
         output.push(next.get().diff(ctx.get()));
         let est = scorer.estimate_remaining_time(next.get());
         let el: u64 = next.elapsed().into();
-        output.push(format!("est={}, elapsed={}, score={}", est, el, el + est));
+        output.push(format!("progress={}, est={}, elapsed={}, score={}", scorer.required_visits(next.get()), est, el, el + est));
         ctx = next;
     }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
