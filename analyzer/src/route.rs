@@ -199,7 +199,7 @@ where
         let mut next = step_from_route(ctx.clone(), i, h, world)?;
         output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
         output.push(next.get().diff(ctx.get()));
-        output.push(format!("est={}", scorer.estimate_remaining_time(ctx.get())));
+        output.push(format!("est={}", scorer.estimate_remaining_time(next.get())));
         ctx = next;
     }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
