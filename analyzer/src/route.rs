@@ -1,5 +1,6 @@
 use crate::access::move_to;
 use crate::context::*;
+use crate::estimates::ContextScorer;
 use crate::world::{Exit, Location, World};
 use std::str::FromStr;
 use yaml_rust::Yaml;
@@ -190,6 +191,7 @@ where
 {
     let histlines = histlines_from_string::<W, T, L>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
+    let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
     let mut output: Vec<String> = Vec::new();
 
     for (i, (h, line)) in histlines.into_iter().enumerate() {
@@ -197,6 +199,7 @@ where
         let mut next = step_from_route(ctx.clone(), i, h, world)?;
         output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
         output.push(next.get().diff(ctx.get()));
+        output.push(format!("est={}", scorer.estimate_remaining_time(ctx.get())));
         ctx = next;
     }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
