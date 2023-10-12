@@ -261,6 +261,9 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
             let max = std::cmp::min(max_segment, self.max_priority().unwrap_or(min));
             let mut vec = Vec::new();
             for segment in min..=max {
+                if self.bucket_for_peeking(segment).is_none() {
+                    continue;
+                }
                 while let Some(p) = self.bucket_for_peeking(segment).unwrap().max_priority() {
                     if *p > keep_priority {
                         vec.push(
@@ -355,7 +358,9 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         if let Some(min) = self.min_priority() {
             let max = self.max_priority().unwrap();
             for segment in (min + 2)..=max {
-                let bucket = self.bucket_for_peeking(segment).unwrap();
+                let Some(bucket) = self.bucket_for_peeking(segment) else {
+                    continue;
+                };
                 if bucket.len_bucket() < 2 {
                     continue;
                 }
@@ -363,7 +368,9 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                 let max_prio = bucket.max_priority().unwrap();
 
                 for below in (min..segment).rev() {
-                    let blbucket = self.bucket_for_peeking(below).unwrap();
+                    let Some(blbucket) = self.bucket_for_peeking(below) else {
+                        continue;
+                    };
                     if blbucket.len_bucket() < 2 {
                         continue;
                     }
@@ -387,10 +394,12 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     }
 
     fn shrink_to_fit(&mut self) {
-        let mut segment = 0;
-        while let Some(b) = self.bucket_for_replacing(segment) {
-            b.shrink_to_fit();
-            segment += 1;
+        if let Some(max) = self.max_priority() {
+            for i in 0..=max {
+                if let Some(b) = self.bucket_for_replacing(i) {
+                    b.shrink_to_fit();
+                }
+            }
         }
     }
 
