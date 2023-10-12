@@ -121,6 +121,7 @@ where
         &self,
         root: V,
         mut required: HashSet<V, CommonHasher>,
+        mut subsets: Vec<(HashSet<V, CommonHasher>, i16)>,
         extra_edges: &Vec<Edge<E>>,
     ) -> Option<ApproxSteiner<E>> {
         let root_index = self.graph.node_index_map[&root];
@@ -180,6 +181,17 @@ where
             }
             if let Some((path, best, req, _)) = min {
                 required.remove(&req);
+                // Remove req from its subset(s), and potentially the rest of the subsets
+                for (subset, ct) in &mut subsets {
+                    if *ct > 0 && subset.contains(&req) {
+                        subset.remove(&req);
+                        *ct -= 1;
+                        if *ct == 0 {
+                            required.retain(|x| !subset.contains(x));
+                        }
+                    }
+                }
+
                 // Because the graph has no negative edges,
                 // the minimum path must have no intermediate nodes or edges already in the tree
                 nodes.extend(

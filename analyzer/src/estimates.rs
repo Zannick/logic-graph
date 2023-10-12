@@ -72,14 +72,33 @@ where
         if self.world.won(ctx) {
             return 0;
         }
+        let item_sets: Vec<_> = self
+            .world
+            .items_needed(ctx)
+            .into_iter()
+            .map(|(item, ct)| (self.world.get_item_locations(item), ct))
+            .collect();
+        let subsets: Vec<_> = item_sets
+            .iter()
+            .filter_map(|(ilist, ct)| {
+                if *ct > 1 {
+                    Some((
+                        ilist.iter().copied().collect::<HashSet<_, CommonHasher>>(),
+                        *ct,
+                    ))
+                } else {
+                    None
+                }
+            })
+            .collect();
         self.estimate_time_to_get(
             ctx,
-            self.world
-                .items_needed(ctx)
+            item_sets
                 .into_iter()
-                .flat_map(|(item, _)| self.world.get_item_locations(item))
+                .flat_map(|(v, _)| v)
                 .filter(|&loc_id| ctx.todo(loc_id))
                 .collect(),
+            subsets,
         )
     }
 
@@ -121,7 +140,12 @@ where
 
     /// Returns the estimate amount of time to get the specified locations from
     /// the current state. Does not check whether these locations are todo.
-    pub fn estimate_time_to_get<T>(&self, ctx: &T, required: Vec<<L as Location>::LocId>) -> u64
+    pub fn estimate_time_to_get<T>(
+        &self,
+        ctx: &T,
+        required: Vec<<L as Location>::LocId>,
+        subsets: Vec<(HashSet<<L as Location>::LocId, CommonHasher>, i16)>,
+    ) -> u64
     where
         T: Ctx<World = W>,
         L: Location<Context = T>,
@@ -172,9 +196,18 @@ where
                 .1
                 .iter()
                 .map(|loc_id| loc_to_graph_node(self.world, *loc_id));
+            let node_subsets = subsets.iter().map(|(set, ct)| {
+                (
+                    set.iter()
+                        .map(|loc_id| loc_to_graph_node(self.world, *loc_id))
+                        .collect::<HashSet<_, CommonHasher>>(),
+                    *ct,
+                )
+            });
             let c = if let Some(ApproxSteiner { arborescence, cost }) = self.algo.compute(
                 spot_to_graph_node::<W, E>(ctx.position()),
                 nodes.collect(),
+                node_subsets.collect(),
                 &key.2,
             ) {
                 // Extra warp cost is number of "branches" times min_warp_time

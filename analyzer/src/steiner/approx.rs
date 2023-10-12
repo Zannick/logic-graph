@@ -39,10 +39,13 @@ pub trait SteinerAlgo<V, E> {
 
     /// Attempts to construct a Steiner approximation arborescence on the given graph,
     /// from the given root (index) and with the given required node (indices).
+    /// Optionally, a list of node subsets can be given, each with a nonzero number of necessary nodes
+    /// in that set; once that many of those nodes are visited, the rest are no longer required.
     fn compute(
         &self,
         root: V,
         required: HashSet<V, CommonHasher>,
+        subsets: Vec<(HashSet<V, CommonHasher>, i16)>,
         extra_edges: &Vec<Edge<E>>,
     ) -> Option<ApproxSteiner<E>>;
     /// Same as compute but only returns the cost of the tree.
@@ -50,12 +53,13 @@ pub trait SteinerAlgo<V, E> {
         &self,
         root: V,
         required: HashSet<V, CommonHasher>,
+        subsets: Vec<(HashSet<V, CommonHasher>, i16)>,
         extra_edges: &Vec<Edge<E>>,
     ) -> Option<u64> {
         if let Some(ApproxSteiner {
             arborescence: _,
             cost,
-        }) = self.compute(root, required, extra_edges)
+        }) = self.compute(root, required, subsets, extra_edges)
         {
             Some(cost)
         } else {

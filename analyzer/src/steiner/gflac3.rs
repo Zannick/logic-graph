@@ -41,6 +41,7 @@ where
         &self,
         root: V,
         required: HashSet<V, CommonHasher>,
+        subsets: Vec<(HashSet<V, CommonHasher>, i16)>,
         extra_edges: &Vec<Edge<E>>,
     ) -> Option<ApproxSteiner<E>> {
         // things we need now:

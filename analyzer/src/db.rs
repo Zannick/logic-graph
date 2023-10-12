@@ -6,6 +6,7 @@ use crate::estimates::ContextScorer;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
+use crate::CommonHasher;
 use anyhow::Result;
 use humansize::{SizeFormatter, BINARY};
 use plotlib::page::Page;
@@ -18,6 +19,7 @@ use rocksdb::{
     MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
@@ -532,9 +534,13 @@ where
         &self,
         ctx: &T,
         required: Vec<<<W as World>::Location as Location>::LocId>,
+        subsets: Vec<(
+            HashSet<<<W as World>::Location as Location>::LocId, CommonHasher>,
+            i16,
+        )>,
     ) -> u32 {
         self.scorer
-            .estimate_time_to_get(ctx, required)
+            .estimate_time_to_get(ctx, required, subsets)
             .try_into()
             .unwrap()
     }
@@ -1130,9 +1136,15 @@ where
             self.reset_estimates_actual();
             drop(_retrieve_lock);
             if end && count == batch_size {
-                println!("Bg thread reached end at round start, left in db: {}", self.size.load(Ordering::Acquire));
+                println!(
+                    "Bg thread reached end at round start, left in db: {}",
+                    self.size.load(Ordering::Acquire)
+                );
                 empty_passes += 1;
-                assert!(empty_passes < 10, "Bg thread encountered too many empty passes in a row");
+                assert!(
+                    empty_passes < 10,
+                    "Bg thread encountered too many empty passes in a row"
+                );
                 std::thread::sleep(std::time::Duration::from_secs(2));
             } else {
                 empty_passes = 0;
@@ -1250,14 +1262,9 @@ where
     }
 
     pub fn get_memory_usage_stats(&self) -> Result<String, Error> {
-        let dbstats = perf::get_memory_usage_stats(
-            Some(&[&self.db]),
-            Some(&[&self._cache]),
-        )?;
-        let statestats = perf::get_memory_usage_stats(
-            Some(&[&self.statedb]),
-            Some(&[&self._state_cache]),
-        )?;
+        let dbstats = perf::get_memory_usage_stats(Some(&[&self.db]), Some(&[&self._cache]))?;
+        let statestats =
+            perf::get_memory_usage_stats(Some(&[&self.statedb]), Some(&[&self._state_cache]))?;
 
         Ok(format!(
             "db: total={}, unflushed={}, readers={}, caches={}, \
