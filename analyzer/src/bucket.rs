@@ -133,14 +133,21 @@ where
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
+            if self.bucket > self.max {
+                return None;
+            }
             if let Some((b, p)) = self.iter.next() {
                 return Some((self.bucket, b, p));
             }
-            if self.bucket < self.max {
-                self.bucket += 1;
-                self.iter = self.q.bucket_for_peeking(self.bucket)?.iter();
-            } else {
+            if self.bucket == self.max {
                 return None;
+            }
+            while self.bucket < self.max {
+                self.bucket += 1;
+                if let Some(bucket) = self.q.bucket_for_peeking(self.bucket) {
+                    self.iter = bucket.iter();
+                    break;
+                }
             }
         }
     }
