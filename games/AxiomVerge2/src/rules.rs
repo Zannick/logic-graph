@@ -16,17 +16,19 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
-pub fn access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_hook_all_notes(
+pub fn access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_slingshot_hook_all_weapons_all_notes_all_health_all_flasks(
     ctx: &Context,
 ) -> bool {
-    // [Amashilama, Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Flask{7}, Slingshot_Hook, $all_notes]
-    helper__all_notes!(ctx)
+    // [Amashilama, Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Slingshot_Hook, $all_weapons, $all_notes, $all_health, $all_flasks]
+    helper__all_weapons!(ctx)
+        && helper__all_notes!(ctx)
+        && helper__all_health!(ctx)
+        && helper__all_flasks!(ctx)
         && ctx.has(Item::Amashilama)
         && ctx.has(Item::Remote_Drone)
         && ctx.has(Item::Shockwave)
         && ctx.has(Item::Power_Matrix)
         && ctx.has(Item::Wall_Climb)
-        && ctx.count(Item::Flask) >= 7
         && ctx.has(Item::Slingshot_Hook)
 }
 pub fn access___remote_drone(ctx: &Context) -> bool {

@@ -294,6 +294,39 @@ macro_rules! helper__all_notes {
     }};
 }
 
+/// $all_flasks (  )
+/// [Flask{11}]
+#[macro_export]
+macro_rules! helper__all_flasks {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.count(Item::Flask) >= 11
+    }};
+}
+
+/// $all_health (  )
+/// [Health_Node, Health_Fragment{4}]
+#[macro_export]
+macro_rules! helper__all_health {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Health_Node) && $ctx.count(Item::Health_Fragment) >= 4
+    }};
+}
+
+/// $all_weapons (  )
+/// [Bronze_Axe]
+#[macro_export]
+macro_rules! helper__all_weapons {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Bronze_Axe)
+    }};
+}
+
 /// $save (  )
 /// ^save = ^position; ^energy = $max_energy
 #[macro_export]

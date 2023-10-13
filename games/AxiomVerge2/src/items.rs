@@ -59,7 +59,6 @@ pub enum Item {
     Fast_Travel,
     Flask,
     Giguna_Northeast_Gate,
-    Health,
     Health_Fragment,
     Health_Node,
     Health_Upgrade,
@@ -142,7 +141,6 @@ impl fmt::Display for Item {
             Item::Fast_Travel => write!(f, "{}", "Fast_Travel"),
             Item::Flask => write!(f, "{}", "Flask"),
             Item::Giguna_Northeast_Gate => write!(f, "{}", "Giguna_Northeast_Gate"),
-            Item::Health => write!(f, "{}", "Health"),
             Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
             Item::Health_Node => write!(f, "{}", "Health_Node"),
             Item::Health_Upgrade => write!(f, "{}", "Health_Upgrade"),
@@ -225,7 +223,6 @@ impl std::str::FromStr for Item {
             "Fast_Travel" => Ok(Item::Fast_Travel),
             "Flask" => Ok(Item::Flask),
             "Giguna_Northeast_Gate" => Ok(Item::Giguna_Northeast_Gate),
-            "Health" => Ok(Item::Health),
             "Health_Fragment" => Ok(Item::Health_Fragment),
             "Health_Node" => Ok(Item::Health_Node),
             "Health_Upgrade" => Ok(Item::Health_Upgrade),
@@ -273,12 +270,9 @@ pub fn unused_item(id: Item) -> bool {
         Item::None
             | Item::Aansur
             | Item::Amagi_Stronghold_Left_Wall
-            | Item::Bronze_Axe
             | Item::Carnelian_Ring
             | Item::Compass
             | Item::Escape
-            | Item::Health
-            | Item::Health_Fragment
             | Item::Journal_2049_10_29
             | Item::Melee_Charge
             | Item::Notes_2053_02_27

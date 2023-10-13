@@ -36,7 +36,9 @@ objectives:
   # Greedy search will have a problem with purchases if there are insufficient funds;
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
-  Progress%: "[Amashilama, Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Flask{7}, Slingshot_Hook, $all_notes]"
+  Progress%: >
+    [Amashilama, Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Slingshot_Hook,
+    $all_weapons, $all_notes, $all_health, $all_flasks]
 
 base_movements:
   - # the slowest movement is in water
@@ -197,6 +199,12 @@ helpers:
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
      Under_Siege]
+  $all_flasks:itemList: >
+    [Flask{11}]
+  $all_health:itemList: >
+    [Health_Node, Health_Fragment{4}]
+  $all_weapons:itemList: >
+    [Bronze_Axe]
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action: >

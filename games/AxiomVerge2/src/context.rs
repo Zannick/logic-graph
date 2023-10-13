@@ -99,6 +99,7 @@ pub enum Expectation {
     Anuman(bool),
     ApocalypseBomb(bool),
     Boomerang(bool),
+    BronzeAxe(bool),
     CompaniesLayoff(bool),
     DearErnest(bool),
     DefeatEbihAlu(bool),
@@ -117,6 +118,8 @@ pub enum Expectation {
     FastTravel(bool),
     Flask(i8),
     GigunaNortheastGate(bool),
+    HealthFragment(i8),
+    HealthNode(bool),
     HealthUpgrade(i8),
     HereticsTablet(bool),
     IceAxe(bool),
@@ -370,47 +373,49 @@ pub mod flags {
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const COMPANIES_LAYOFF = 1 << 0;
-            const DEAR_ERNEST = 1 << 1;
-            const DEFEAT_EBIH_ALU = 1 << 2;
-            const DEFEAT_MUS_A_M20 = 1 << 3;
-            const DRONE_HOVER = 1 << 4;
-            const EBIH_INTERCHANGE_BLOCK = 1 << 5;
-            const EBIH_INTERCHANGE_GATE = 1 << 6;
-            const EBIH_WASTELAND_DOOR = 1 << 7;
-            const EBIH_WASTELAND_PASSAGE_H = 1 << 8;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 9;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 10;
-            const EBIH_WATERFALL_WALL = 1 << 11;
-            const EBIH_WEST_BLOCK = 1 << 12;
-            const FAST_TRAVEL = 1 << 13;
-            const GIGUNA_NORTHEAST_GATE = 1 << 14;
-            const HERETICS_TABLET = 1 << 15;
-            const ICE_AXE = 1 << 16;
-            const INFECTION_SPEED = 1 << 17;
-            const LEDGE_GRAB = 1 << 18;
-            const LETTER_FROM_TRACE = 1 << 19;
-            const MAP_17_10 = 1 << 20;
-            const MIST_UPGRADE = 1 << 21;
-            const NANITE_MIST = 1 << 22;
-            const POWER_MATRIX = 1 << 23;
-            const RECORD_LOSSES = 1 << 24;
-            const REMOTE_DRONE = 1 << 25;
-            const RESEARCHERS_MISSING = 1 << 26;
-            const SHOCKWAVE = 1 << 27;
-            const SLINGSHOT_HOOK = 1 << 28;
-            const STATION_POWER = 1 << 29;
-            const SWITCH_36_11 = 1 << 30;
-            const SWITCH_40_12 = 1 << 31;
+            const BRONZE_AXE = 1 << 0;
+            const COMPANIES_LAYOFF = 1 << 1;
+            const DEAR_ERNEST = 1 << 2;
+            const DEFEAT_EBIH_ALU = 1 << 3;
+            const DEFEAT_MUS_A_M20 = 1 << 4;
+            const DRONE_HOVER = 1 << 5;
+            const EBIH_INTERCHANGE_BLOCK = 1 << 6;
+            const EBIH_INTERCHANGE_GATE = 1 << 7;
+            const EBIH_WASTELAND_DOOR = 1 << 8;
+            const EBIH_WASTELAND_PASSAGE_H = 1 << 9;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 10;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 11;
+            const EBIH_WATERFALL_WALL = 1 << 12;
+            const EBIH_WEST_BLOCK = 1 << 13;
+            const FAST_TRAVEL = 1 << 14;
+            const GIGUNA_NORTHEAST_GATE = 1 << 15;
+            const HEALTH_NODE = 1 << 16;
+            const HERETICS_TABLET = 1 << 17;
+            const ICE_AXE = 1 << 18;
+            const INFECTION_SPEED = 1 << 19;
+            const LEDGE_GRAB = 1 << 20;
+            const LETTER_FROM_TRACE = 1 << 21;
+            const MAP_17_10 = 1 << 22;
+            const MIST_UPGRADE = 1 << 23;
+            const NANITE_MIST = 1 << 24;
+            const POWER_MATRIX = 1 << 25;
+            const RECORD_LOSSES = 1 << 26;
+            const REMOTE_DRONE = 1 << 27;
+            const RESEARCHERS_MISSING = 1 << 28;
+            const SHOCKWAVE = 1 << 29;
+            const SLINGSHOT_HOOK = 1 << 30;
+            const STATION_POWER = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u8 {
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 0;
-            const UNDER_SIEGE = 1 << 1;
-            const UNDERWATER_MOVEMENT = 1 << 2;
-            const WALL_CLIMB = 1 << 3;
+            const SWITCH_36_11 = 1 << 0;
+            const SWITCH_40_12 = 1 << 1;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 2;
+            const UNDER_SIEGE = 1 << 3;
+            const UNDERWATER_MOVEMENT = 1 << 4;
+            const WALL_CLIMB = 1 << 5;
         }
     }
 }
@@ -441,6 +446,7 @@ pub struct Context {
     pub drone_melee_damage: i8,
     pub drone_melee_speed: i8,
     pub flask: i8,
+    pub health_fragment: i8,
     pub health_upgrade: i8,
     pub infect: i8,
     pub infection_range: i8,
@@ -477,6 +483,7 @@ impl Default for Context {
             drone_melee_damage: Default::default(),
             drone_melee_speed: Default::default(),
             flask: Default::default(),
+            health_fragment: Default::default(),
             health_upgrade: Default::default(),
             infect: Default::default(),
             infection_range: Default::default(),
@@ -504,7 +511,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 57;
+    const NUM_ITEMS: u32 = 60;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -530,6 +537,7 @@ impl context::Ctx for Context {
             Item::Anuman => self.cbits1.contains(flags::ContextBits1::ANUMAN),
             Item::Apocalypse_Bomb => self.cbits1.contains(flags::ContextBits1::APOCALYPSE_BOMB),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG),
+            Item::Bronze_Axe => self.cbits2.contains(flags::ContextBits2::BRONZE_AXE),
             Item::Companies_Layoff => self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF),
             Item::Dear_Ernest => self.cbits2.contains(flags::ContextBits2::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU),
@@ -564,6 +572,8 @@ impl context::Ctx for Context {
             Item::Giguna_Northeast_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE),
+            Item::Health_Fragment => self.health_fragment >= 1,
+            Item::Health_Node => self.cbits2.contains(flags::ContextBits2::HEALTH_NODE),
             Item::Health_Upgrade => self.health_upgrade >= 1,
             Item::Heretics_Tablet => self.cbits2.contains(flags::ContextBits2::HERETICS_TABLET),
             Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE),
@@ -589,8 +599,8 @@ impl context::Ctx for Context {
             Item::Shockwave => self.cbits2.contains(flags::ContextBits2::SHOCKWAVE),
             Item::Slingshot_Hook => self.cbits2.contains(flags::ContextBits2::SLINGSHOT_HOOK),
             Item::Station_Power => self.cbits2.contains(flags::ContextBits2::STATION_POWER),
-            Item::Switch_36_11 => self.cbits2.contains(flags::ContextBits2::SWITCH_36_11),
-            Item::Switch_40_12 => self.cbits2.contains(flags::ContextBits2::SWITCH_40_12),
+            Item::Switch_36_11 => self.cbits3.contains(flags::ContextBits3::SWITCH_36_11),
+            Item::Switch_40_12 => self.cbits3.contains(flags::ContextBits3::SWITCH_40_12),
             Item::Terminal_Breakthrough_1 => self
                 .cbits3
                 .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1),
@@ -635,6 +645,7 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::APOCALYPSE_BOMB)
                 .into(),
             Item::Boomerang => self.cbits1.contains(flags::ContextBits1::BOOMERANG).into(),
+            Item::Bronze_Axe => self.cbits2.contains(flags::ContextBits2::BRONZE_AXE).into(),
             Item::Companies_Layoff => self
                 .cbits2
                 .contains(flags::ContextBits2::COMPANIES_LAYOFF)
@@ -698,6 +709,11 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE)
                 .into(),
+            Item::Health_Fragment => self.health_fragment.into(),
+            Item::Health_Node => self
+                .cbits2
+                .contains(flags::ContextBits2::HEALTH_NODE)
+                .into(),
             Item::Health_Upgrade => self.health_upgrade.into(),
             Item::Heretics_Tablet => self
                 .cbits2
@@ -755,12 +771,12 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::STATION_POWER)
                 .into(),
             Item::Switch_36_11 => self
-                .cbits2
-                .contains(flags::ContextBits2::SWITCH_36_11)
+                .cbits3
+                .contains(flags::ContextBits3::SWITCH_36_11)
                 .into(),
             Item::Switch_40_12 => self
-                .cbits2
-                .contains(flags::ContextBits2::SWITCH_40_12)
+                .cbits3
+                .contains(flags::ContextBits3::SWITCH_40_12)
                 .into(),
             Item::Terminal_Breakthrough_1 => self
                 .cbits3
@@ -810,6 +826,9 @@ impl context::Ctx for Context {
             },
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+            },
+            Item::Bronze_Axe => {
+                self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
             },
             Item::Companies_Layoff => {
                 self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
@@ -866,6 +885,13 @@ impl context::Ctx for Context {
             },
             Item::Giguna_Northeast_Gate => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+            },
+            Item::Health_Fragment => {
+                self.health_fragment += 1;
+            },
+            Item::Health_Node => {
+                self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
+                rules::action_energy__max_energy(self);
             },
             Item::Health_Upgrade => {
                 self.health_upgrade += 1;
@@ -938,10 +964,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::STATION_POWER);
             },
             Item::Switch_36_11 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+                self.cbits3.insert(flags::ContextBits3::SWITCH_36_11);
             },
             Item::Switch_40_12 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+                self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
             },
             Item::Terminal_Breakthrough_1 => {
                 self.cbits3.insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
@@ -955,7 +981,6 @@ impl context::Ctx for Context {
             Item::Wall_Climb => {
                 self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
             },
-            Item::Health_Node => rules::action_energy__max_energy(self),
             Item::Power_Core => rules::action_refills__1(self),
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self),
@@ -1002,6 +1027,9 @@ impl context::Ctx for Context {
             }
             Item::Boomerang => {
                 self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+            }
+            Item::Bronze_Axe => {
+                self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
             }
             Item::Companies_Layoff => {
                 self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
@@ -1062,6 +1090,12 @@ impl context::Ctx for Context {
             Item::Giguna_Northeast_Gate => {
                 self.cbits2
                     .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
+            }
+            Item::Health_Fragment => {
+                self.health_fragment += 1;
+            }
+            Item::Health_Node => {
+                self.cbits2.insert(flags::ContextBits2::HEALTH_NODE);
             }
             Item::Health_Upgrade => {
                 self.health_upgrade += 1;
@@ -1133,10 +1167,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::STATION_POWER);
             }
             Item::Switch_36_11 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_36_11);
+                self.cbits3.insert(flags::ContextBits3::SWITCH_36_11);
             }
             Item::Switch_40_12 => {
-                self.cbits2.insert(flags::ContextBits2::SWITCH_40_12);
+                self.cbits3.insert(flags::ContextBits3::SWITCH_40_12);
             }
             Item::Terminal_Breakthrough_1 => {
                 self.cbits3
@@ -1792,6 +1826,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Bronze_Axe", Yaml::Boolean(b)) => Expectation::BronzeAxe(*b),
+            ("Bronze_Axe", Yaml::Integer(i)) => Expectation::BronzeAxe(*i > 0),
+            ("Bronze_Axe", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Companies_Layoff", Yaml::Boolean(b)) => Expectation::CompaniesLayoff(*b),
             ("Companies_Layoff", Yaml::Integer(i)) => Expectation::CompaniesLayoff(*i > 0),
             ("Companies_Layoff", _) => {
@@ -1948,6 +1990,23 @@ impl context::Ctx for Context {
             ("Giguna_Northeast_Gate", Yaml::Boolean(b)) => Expectation::GigunaNortheastGate(*b),
             ("Giguna_Northeast_Gate", Yaml::Integer(i)) => Expectation::GigunaNortheastGate(*i > 0),
             ("Giguna_Northeast_Gate", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Health_Fragment", Yaml::Integer(i)) => {
+                Expectation::HealthFragment(i8::try_from(*i).map_err(|e| format!("{}", e))?)
+            }
+            ("Health_Fragment", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Health_Node", Yaml::Boolean(b)) => Expectation::HealthNode(*b),
+            ("Health_Node", Yaml::Integer(i)) => Expectation::HealthNode(*i > 0),
+            ("Health_Node", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2514,6 +2573,12 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "Boomerang", e, v));
                     }
                 }
+                Expectation::BronzeAxe(e) => {
+                    let v = self.has(Item::Bronze_Axe);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Bronze_Axe", e, v));
+                    }
+                }
                 Expectation::CompaniesLayoff(e) => {
                     let v = self.has(Item::Companies_Layoff);
                     if v != (*e).into() {
@@ -2662,6 +2727,21 @@ impl context::Ctx for Context {
                             "Expected {} = {}, got: {}",
                             "Giguna_Northeast_Gate", e, v
                         ));
+                    }
+                }
+                Expectation::HealthFragment(e) => {
+                    let v = self.count(Item::Health_Fragment);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Health_Fragment", e, v
+                        ));
+                    }
+                }
+                Expectation::HealthNode(e) => {
+                    let v = self.has(Item::Health_Node);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Health_Node", e, v));
                     }
                 }
                 Expectation::HealthUpgrade(e) => {
@@ -3442,6 +3522,12 @@ impl context::Ctx for Context {
         if old.flask != self.flask {
             list.push(format!("Flask: {:+}", self.flask - old.flask));
         }
+        if old.health_fragment != self.health_fragment {
+            list.push(format!(
+                "Health_Fragment: {:+}",
+                self.health_fragment - old.health_fragment
+            ));
+        }
         if old.health_upgrade != self.health_upgrade {
             list.push(format!(
                 "Health_Upgrade: {:+}",
@@ -3825,6 +3911,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}BOOMERANG", if n { "+" } else { "-" }));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::BRONZE_AXE);
+        let p = old.cbits2.contains(flags::ContextBits2::BRONZE_AXE);
+        if n != p {
+            list.push(format!("{}BRONZE_AXE", if n { "+" } else { "-" }));
+        }
         let n = self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF);
         let p = old.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF);
         if n != p {
@@ -3950,6 +4041,11 @@ impl context::Ctx for Context {
                 if n { "+" } else { "-" }
             ));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::HEALTH_NODE);
+        let p = old.cbits2.contains(flags::ContextBits2::HEALTH_NODE);
+        if n != p {
+            list.push(format!("{}HEALTH_NODE", if n { "+" } else { "-" }));
+        }
         let n = self.cbits2.contains(flags::ContextBits2::HERETICS_TABLET);
         let p = old.cbits2.contains(flags::ContextBits2::HERETICS_TABLET);
         if n != p {
@@ -4029,13 +4125,13 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}STATION_POWER", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::SWITCH_36_11);
-        let p = old.cbits2.contains(flags::ContextBits2::SWITCH_36_11);
+        let n = self.cbits3.contains(flags::ContextBits3::SWITCH_36_11);
+        let p = old.cbits3.contains(flags::ContextBits3::SWITCH_36_11);
         if n != p {
             list.push(format!("{}SWITCH_36_11", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::SWITCH_40_12);
-        let p = old.cbits2.contains(flags::ContextBits2::SWITCH_40_12);
+        let n = self.cbits3.contains(flags::ContextBits3::SWITCH_40_12);
+        let p = old.cbits3.contains(flags::ContextBits3::SWITCH_40_12);
         if n != p {
             list.push(format!("{}SWITCH_40_12", if n { "+" } else { "-" }));
         }

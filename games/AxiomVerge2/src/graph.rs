@@ -6880,7 +6880,7 @@ pub enum CanonId {
     Amagi_Stronghold_Wall_2,
     Amagi_West_Lake_Surface_Wall,
     Notes_2053_02_27,
-    Base_Camp_Node,
+    Ebih_Base_Camp_Fragment,
     Melee_Charge,
     Ebih_Bush_Flask,
     Ebih_Waterfall_Block_Right,
@@ -6910,7 +6910,7 @@ impl fmt::Display for CanonId {
                 write!(f, "{}", "Amagi_West_Lake_Surface_Wall")
             }
             CanonId::Notes_2053_02_27 => write!(f, "{}", "Notes_2053_02_27"),
-            CanonId::Base_Camp_Node => write!(f, "{}", "Base Camp Node"),
+            CanonId::Ebih_Base_Camp_Fragment => write!(f, "{}", "Ebih_Base_Camp_Fragment"),
             CanonId::Melee_Charge => write!(f, "{}", "Melee_Charge"),
             CanonId::Ebih_Bush_Flask => write!(f, "{}", "Ebih Bush Flask"),
             CanonId::Ebih_Waterfall_Block_Right => write!(f, "{}", "Ebih_Waterfall_Block_Right"),
@@ -6942,7 +6942,7 @@ impl std::str::FromStr for CanonId {
             "Amagi Stronghold Wall 2" => Ok(CanonId::Amagi_Stronghold_Wall_2),
             "Amagi_West_Lake_Surface_Wall" => Ok(CanonId::Amagi_West_Lake_Surface_Wall),
             "Notes_2053_02_27" => Ok(CanonId::Notes_2053_02_27),
-            "Base Camp Node" => Ok(CanonId::Base_Camp_Node),
+            "Ebih_Base_Camp_Fragment" => Ok(CanonId::Ebih_Base_Camp_Fragment),
             "Melee_Charge" => Ok(CanonId::Melee_Charge),
             "Ebih Bush Flask" => Ok(CanonId::Ebih_Bush_Flask),
             "Ebih_Waterfall_Block_Right" => Ok(CanonId::Ebih_Waterfall_Block_Right),
@@ -10106,7 +10106,7 @@ impl world::World for World {
             CanonId::Notes_2053_02_27 => {
                 vec![LocationId::Antarctica__Building_2U__Behind_Boxes__Note]
             }
-            CanonId::Base_Camp_Node => vec![
+            CanonId::Ebih_Base_Camp_Fragment => vec![
                 LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
                 LocationId::Ebih__Base_Camp__Top_Platform__Item,
             ],
@@ -10237,6 +10237,7 @@ impl world::World for World {
                 LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
                 LocationId::Ebih__Base_Camp__Top_Platform__Item,
                 LocationId::Ebih__By_Garage__Crawlspace__Fragment,
+                LocationId::Ebih__Cave__Entry__Health,
                 LocationId::Ebih__Ebih_East__Dispenser__Vend,
                 LocationId::Giguna_Breach__Cubby__Rocks__Health,
             ],
@@ -10270,7 +10271,6 @@ impl world::World for World {
                 LocationId::Ebih__Ebih_West__Block_Left__Break_Block,
                 LocationId::Ebih__Ebih_West__Block_Right__Break_Block,
             ],
-            Item::Health => vec![LocationId::Ebih__Cave__Entry__Health],
             Item::Infect => vec![
                 LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn,
                 LocationId::Ebih__Ebih_East__Corner__Urn,
@@ -11204,7 +11204,7 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx),
-            Objective::Progress => rules::access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_flask__7_slingshot_hook_all_notes(ctx),
+            Objective::Progress => rules::access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_slingshot_hook_all_weapons_all_notes_all_health_all_flasks(ctx),
         }
     }
 
@@ -11220,14 +11220,23 @@ impl world::World for World {
                 if !ctx.has(Item::Amashilama) {
                     vec.push((Item::Amashilama, 1));
                 }
+                if !ctx.has(Item::Bronze_Axe) {
+                    vec.push((Item::Bronze_Axe, 1));
+                }
                 if !ctx.has(Item::Companies_Layoff) {
                     vec.push((Item::Companies_Layoff, 1));
                 }
                 if !ctx.has(Item::Dear_Ernest) {
                     vec.push((Item::Dear_Ernest, 1));
                 }
-                if ctx.count(Item::Flask) < 7 {
-                    vec.push((Item::Flask, 7 - ctx.count(Item::Flask)));
+                if ctx.count(Item::Flask) < 11 {
+                    vec.push((Item::Flask, 11 - ctx.count(Item::Flask)));
+                }
+                if ctx.count(Item::Health_Fragment) < 4 {
+                    vec.push((Item::Health_Fragment, 4 - ctx.count(Item::Health_Fragment)));
+                }
+                if !ctx.has(Item::Health_Node) {
+                    vec.push((Item::Health_Node, 1));
                 }
                 if !ctx.has(Item::Heretics_Tablet) {
                     vec.push((Item::Heretics_Tablet, 1));
@@ -11272,9 +11281,12 @@ impl world::World for World {
             Objective::Start => vec![(Item::Remote_Drone, 1)],
             Objective::Progress => vec![
                 (Item::Amashilama, 1),
+                (Item::Bronze_Axe, 1),
                 (Item::Companies_Layoff, 1),
                 (Item::Dear_Ernest, 1),
-                (Item::Flask, 7),
+                (Item::Flask, 11),
+                (Item::Health_Fragment, 4),
+                (Item::Health_Node, 1),
                 (Item::Heretics_Tablet, 1),
                 (Item::Letter_from_Trace, 1),
                 (Item::Power_Matrix, 1),
@@ -12410,7 +12422,6 @@ impl World {
                     | Item::Compass
                     | Item::Dear_Ernest
                     | Item::Escape
-                    | Item::Health
                     | Item::Health_Fragment
                     | Item::Heretics_Tablet
                     | Item::Journal_2049_10_29
@@ -12427,12 +12438,9 @@ impl World {
                 item,
                 Item::Aansur
                     | Item::Amagi_Stronghold_Left_Wall
-                    | Item::Bronze_Axe
                     | Item::Carnelian_Ring
                     | Item::Compass
                     | Item::Escape
-                    | Item::Health
-                    | Item::Health_Fragment
                     | Item::Journal_2049_10_29
                     | Item::Melee_Charge
                     | Item::Notes_2053_02_27
@@ -12615,7 +12623,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => Location {
             id: LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side,
-            canonical: CanonId::Base_Camp_Node,
+            canonical: CanonId::Ebih_Base_Camp_Fragment,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 1000,
@@ -12623,7 +12631,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         },
         LocationId::Ebih__Base_Camp__Top_Platform__Item => Location {
             id: LocationId::Ebih__Base_Camp__Top_Platform__Item,
-            canonical: CanonId::Base_Camp_Node,
+            canonical: CanonId::Ebih_Base_Camp_Fragment,
             item: Item::Health_Fragment,
             price: Currency::Free,
             time: 0,
@@ -12800,7 +12808,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
         LocationId::Ebih__Cave__Entry__Health => Location {
             id: LocationId::Ebih__Cave__Entry__Health,
             canonical: CanonId::None,
-            item: Item::Health,
+            item: Item::Health_Fragment,
             price: Currency::Free,
             time: 500,
             exit_id: None,
