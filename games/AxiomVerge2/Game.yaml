@@ -200,7 +200,7 @@ helpers:
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
      Under_Siege]
   $all_flasks:itemList: >
-    [Flask{11}]
+    [Flask{10}]
   $all_health:itemList: >
     [Health_Node, Health_Fragment{4}]
   $all_weapons:itemList: >

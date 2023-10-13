@@ -295,13 +295,13 @@ macro_rules! helper__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{11}]
+/// [Flask{10}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Flask) >= 11
+        $ctx.count(Item::Flask) >= 10
     }};
 }
 
