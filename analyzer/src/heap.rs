@@ -601,7 +601,12 @@ where
                 // Only when we go a decent bit over
                 if !self.db.is_empty() && db_best < u32::MAX && est_completion > db_best * 101 / 100
                 {
-                    queue = self.maybe_reshuffle(progress, queue)?;
+                    queue = self.maybe_reshuffle(
+                        progress,
+                        self.min_reshuffle,
+                        self.max_reshuffle,
+                        queue,
+                    )?;
                 }
                 let (ctx, _) = queue.pop_min().unwrap();
 
@@ -641,14 +646,16 @@ where
     fn maybe_reshuffle<'a>(
         &'a self,
         progress: usize,
+        min_to_restore: usize,
+        max_to_restore: usize,
         mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
     ) -> Result<MutexGuard<BucketQueue<Segment<T, u32>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let start = Instant::now();
             // Get a decent amount to refill
             let num_to_restore = std::cmp::max(
-                self.min_reshuffle,
-                std::cmp::min(self.max_reshuffle, (self.capacity - queue.len()) / 2),
+                min_to_restore,
+                std::cmp::min(max_to_restore, (self.capacity - queue.len()) / 2),
             );
             let len = queue.len();
             if self.capacity - len < num_to_restore {
@@ -670,6 +677,52 @@ where
             queue.extend(res);
             assert!(!queue.is_empty(), "Queue should have data after retrieve");
             self.retrieving.store(false, Ordering::Release);
+        }
+        Ok(queue)
+    }
+
+    fn maybe_fetch_for_empty_buckets<'a>(
+        &'a self,
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, u32>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, u32>>>> {
+        // Runs over all the buckets
+        let Some(min_score) = queue.peek_min().map(|p| *p.1) else {
+            return Ok(queue);
+        };
+        // threshold is 1/8 the difference between min score and max score, plus a small buffer for when min gets really close
+        let threshold = (self.max_time() - min_score) / 8 + (min_score / 1024);
+        
+        // We retrieve if the difference between the db best and the min score is more than the threshold.
+        // An alternate way to look at this is min_score - threshold = ms * 9/8 - ms / 1024 - max_time
+        // or db_best < min_score * 1151 / 1024 - max_time
+        // Since this could underflow, we add a short-circuit
+        let db_threshold = if threshold < min_score {
+            min_score - threshold
+        } else {
+            return Ok(queue);
+        };
+        for (progress, db_best) in self.db_bests().iter().enumerate() {
+            // skip if bucket is not empty
+            if queue
+                .bucket_for_peeking(progress)
+                .map(|bucket| !bucket.is_empty_bucket())
+                .unwrap_or(false)
+            {
+                continue;
+            }
+            // skip if there's nothing in the db
+            if *db_best == u32::MAX {
+                continue;
+            }
+
+            if *db_best < db_threshold {
+                queue = self.maybe_reshuffle(
+                    progress,
+                    self.min_reshuffle / 2,
+                    self.max_reshuffle / 4,
+                    queue,
+                )?;
+            }
         }
         Ok(queue)
     }
@@ -811,6 +864,7 @@ where
     pub fn pop_round_robin(&self, min_priority: usize) -> Result<Vec<ContextWrapper<T>>> {
         let mut queue = self.queue.lock().unwrap();
         let mut did_retrieve = false;
+        queue = self.maybe_fetch_for_empty_buckets(queue)?;
         while !queue.is_empty() || !self.db.is_empty() {
             if let Some(min) = queue.min_priority() {
                 let min = std::cmp::max(min, min_priority);
@@ -891,7 +945,12 @@ where
                 // Max one retrieve per pop_round_robin
                 if !did_retrieve {
                     if let Some((segment, _)) = diffs.into_iter().max_by_key(|p| p.1) {
-                        let _queue = self.maybe_reshuffle(segment, queue)?;
+                        let _queue = self.maybe_reshuffle(
+                            segment,
+                            self.min_reshuffle,
+                            self.max_reshuffle,
+                            queue,
+                        )?;
                     }
                 }
                 vec.shrink_to_fit();
