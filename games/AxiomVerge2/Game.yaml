@@ -202,7 +202,7 @@ helpers:
   $all_flasks:itemList: >
     [Flask{10}]
   $all_health:itemList: >
-    [Health_Node, Health_Fragment{4}]
+    [Health_Node, Health_Fragment{5}]
   $all_weapons:itemList: >
     [Bronze_Axe]
 

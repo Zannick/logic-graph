@@ -306,13 +306,13 @@ macro_rules! helper__all_flasks {
 }
 
 /// $all_health (  )
-/// [Health_Node, Health_Fragment{4}]
+/// [Health_Node, Health_Fragment{5}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.has(Item::Health_Node) && $ctx.count(Item::Health_Fragment) >= 4
+        $ctx.has(Item::Health_Node) && $ctx.count(Item::Health_Fragment) >= 5
     }};
 }
 

@@ -11232,8 +11232,8 @@ impl world::World for World {
                 if ctx.count(Item::Flask) < 10 {
                     vec.push((Item::Flask, 10 - ctx.count(Item::Flask)));
                 }
-                if ctx.count(Item::Health_Fragment) < 4 {
-                    vec.push((Item::Health_Fragment, 4 - ctx.count(Item::Health_Fragment)));
+                if ctx.count(Item::Health_Fragment) < 5 {
+                    vec.push((Item::Health_Fragment, 5 - ctx.count(Item::Health_Fragment)));
                 }
                 if !ctx.has(Item::Health_Node) {
                     vec.push((Item::Health_Node, 1));
@@ -11285,7 +11285,7 @@ impl world::World for World {
                 (Item::Companies_Layoff, 1),
                 (Item::Dear_Ernest, 1),
                 (Item::Flask, 10),
-                (Item::Health_Fragment, 4),
+                (Item::Health_Fragment, 5),
                 (Item::Health_Node, 1),
                 (Item::Heretics_Tablet, 1),
                 (Item::Letter_from_Trace, 1),
