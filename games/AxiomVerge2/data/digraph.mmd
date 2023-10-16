@@ -709,6 +709,7 @@ subgraph Giguna
         Giguna__Dual_Path__Below_Left_Switch(Below Left Switch);
         Giguna__Dual_Path__Left_Switch(Left Switch);
         Giguna__Dual_Path__West_Slope(West Slope);
+        Giguna__Dual_Path__In_the_Grass(In the Grass);
         Giguna__Dual_Path__Base_of_Wall(Base of Wall);
         Giguna__Dual_Path__Wall_Secret(Wall Secret);
         Giguna__Dual_Path__Wall_Top(Wall Top);
@@ -725,6 +726,20 @@ subgraph Giguna
         Giguna__Dual_Path__East_Gate_NW(East Gate NW);
         Giguna__Dual_Path__East_Gate_NE(East Gate NE);
         Giguna__Dual_Path__East_17(East 17);
+    end
+    subgraph Giguna__Hard_Rock[Hard Rock]
+        Giguna__Hard_Rock__East_17(East 17);
+        Giguna__Hard_Rock__Rock_Right(Rock Right);
+        Giguna__Hard_Rock__Rock_Center(Rock Center);
+        Giguna__Hard_Rock__Rock_Left(Rock Left);
+        Giguna__Hard_Rock__West_17(West 17);
+    end
+    subgraph Giguna__East_Caverns[East Caverns]
+        Giguna__East_Caverns__West_14(West 14);
+        Giguna__East_Caverns__West_17(West 17);
+    end
+    subgraph Giguna__Gateway[Gateway]
+        Giguna__Gateway__West_18(West 18);
     end
 end
 subgraph Glacier
@@ -1082,6 +1097,20 @@ Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__East_Cliff
 Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__Upper_Path
 Giguna__Carnelian__West_10 <--> Giguna__West_Caverns__East_10
 Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__West_10
+Giguna__Dual_Path__Base_of_Wall <--> Giguna__Dual_Path__Wall_Secret
+Giguna__Dual_Path__Base_of_Wall --> Giguna__Dual_Path__Wall_Top
+Giguna__Dual_Path__East_17 --> Giguna__East_Caverns__West_17
+Giguna__Dual_Path__East_18 --> Giguna__Gateway__West_18
+Giguna__Dual_Path__East_Gate --> Giguna__Dual_Path__East_Gate_NW
+Giguna__Dual_Path__East_Gate_NE --> Giguna__Dual_Path__East_Gate
+Giguna__Dual_Path__East_Gate_NW --> Giguna__Dual_Path__East_Gate_NE
+Giguna__Dual_Path__In_the_Grass --> Giguna__Dual_Path__Wall_Top
+Giguna__Dual_Path__Midway --> Giguna__Dual_Path__Midway_Plateau
+Giguna__Dual_Path__West_17 --> Giguna__Hard_Rock__East_17
+Giguna__Dual_Path__West_18 --> Giguna__Dual_Path__West_Gate
+Giguna__Dual_Path__West_18 <--> Giguna__Lamassu__East_18
+Giguna__Dual_Path__West_Gate <--> Giguna__Dual_Path__West_Gate_NE
+Giguna__Dual_Path__West_Gate <--> Giguna__Dual_Path__West_Gate_NW
 Giguna__Far_Corner__South --> Giguna__Helipad__North
 Giguna__Giguna_Base__East_14 <--> Giguna__Wasteland__West_14
 Giguna__Giguna_Base__Left_Pillar <--> Giguna__Giguna_Base__Right_Pillar
@@ -1108,7 +1137,6 @@ Giguna__Helipad__East_18 <--> Giguna__Lamassu__West_18
 Giguna__Helipad__Railing <--> Giguna__Helipad__Wall_Top
 Giguna__Helipad__So_Close --> Giguna__Helipad__Tablet_Ledge
 Giguna__Lamassu__Broken_Pillar --> Giguna__Lamassu__Staircase_Landing
-Giguna__Lamassu__East_18 --> Giguna__Dual_Path__West_18
 Giguna__Lamassu__Lower_Platform_Left --> Giguna__Lamassu__Upper_Platform_Edge
 Giguna__Lamassu__Lower_Platform_Right --> Giguna__Lamassu__Head
 Giguna__Lamassu__Rear_Gap --> Giguna__Lamassu__East_18

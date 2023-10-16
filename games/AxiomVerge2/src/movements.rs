@@ -3482,6 +3482,167 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => 526,
         (
             [false],
+            SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__West_18,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__Left_Switch,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__West_Slope,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 350,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Giguna__Dual_Path__West_Slope,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 2280,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__West_Slope,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+        ) => 526,
+        ([false], SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => {
+            3508
+        }
+        ([false], SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            526
+        }
+        ([false], SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => {
+            500
+        }
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 1052,
+        ([false], SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            1200
+        }
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 175,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__East_Gate,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__East_18,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 877,
+        ([false], SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 2807,
+        ([false], SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => 1929,
+        ([false], SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => 877,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 500,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+        ) => 701,
+        ([false], SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => {
+            526
+        }
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+        ) => 701,
+        ([false], SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => {
+            3333
+        }
+        ([false], SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => {
+            526
+        }
+        ([false], SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => {
+            3333
+        }
+        ([false], SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => {
+            701
+        }
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+        ) => 1052,
+        ([false], SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => {
+            1403
+        }
+        ([false], SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => {
+            1799
+        }
+        (
+            [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
@@ -7674,6 +7835,165 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => 5399,
         ([true], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => 1578,
         ([true], SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => 526,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 526,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__West_18,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__Left_Switch,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__West_Slope,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 350,
+        ([true], SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            1929
+        }
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 2280,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__West_Slope,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+        ) => 526,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+        ) => 526,
+        ([true], SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => {
+            3508
+        }
+        ([true], SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            526
+        }
+        ([true], SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => {
+            500
+        }
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 1052,
+        ([true], SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            1200
+        }
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 175,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__East_Gate,
+        ) => 1200,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__East_18,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 877,
+        ([true], SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => 1929,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 2807,
+        ([true], SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => 1929,
+        ([true], SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => 877,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+        ) => 500,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+        ) => 701,
+        ([true], SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => {
+            526
+        }
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+        ) => 701,
+        ([true], SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => {
+            3333
+        }
+        ([true], SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => {
+            526
+        }
+        ([true], SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => {
+            3333
+        }
+        ([true], SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+        ) => 1052,
+        ([true], SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => {
+            1403
+        }
+        ([true], SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => {
+            1799
+        }
         (
             [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -12679,102 +12999,203 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__West_18 => enum_map! {
+            SpotId::Giguna__Lamassu__East_18 => 1350,
             SpotId::Giguna__Dual_Path__West_18 => 0,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch => 526,
+            SpotId::Giguna__Dual_Path__West_Gate => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Below_Left_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__West_18 => 600,
             SpotId::Giguna__Dual_Path__Below_Left_Switch => 0,
+            SpotId::Giguna__Dual_Path__Left_Switch => 600,
+            SpotId::Giguna__Dual_Path__West_Slope => 2280,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Left_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Below_Left_Switch => 350,
             SpotId::Giguna__Dual_Path__Left_Switch => 0,
+            SpotId::Giguna__Dual_Path__West_Slope => 1929,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__West_Slope => enum_map! {
+            SpotId::Giguna__Dual_Path__Below_Left_Switch => 2280,
             SpotId::Giguna__Dual_Path__West_Slope => 0,
+            SpotId::Giguna__Dual_Path__In_the_Grass => 2982,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Dual_Path__In_the_Grass => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Slope => 2982,
+            SpotId::Giguna__Dual_Path__In_the_Grass => 0,
+            SpotId::Giguna__Dual_Path__Base_of_Wall => 526,
+            SpotId::Giguna__Dual_Path__Wall_Top => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Base_of_Wall => enum_map! {
+            SpotId::Giguna__Dual_Path__In_the_Grass => 526,
             SpotId::Giguna__Dual_Path__Base_of_Wall => 0,
+            SpotId::Giguna__Dual_Path__Wall_Secret => 350,
+            SpotId::Giguna__Dual_Path__Wall_Top => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Wall_Secret => enum_map! {
+            SpotId::Giguna__Dual_Path__Base_of_Wall => 350,
             SpotId::Giguna__Dual_Path__Wall_Secret => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Wall_Top => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Slope => 3508,
+            SpotId::Giguna__Dual_Path__In_the_Grass => 526,
+            SpotId::Giguna__Dual_Path__Base_of_Wall => 500,
             SpotId::Giguna__Dual_Path__Wall_Top => 0,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch => 1052,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Right_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Wall_Top => 1200,
             SpotId::Giguna__Dual_Path__Right_Switch => 0,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch => 175,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Below_Right_Switch => enum_map! {
+            SpotId::Giguna__Dual_Path__Wall_Top => 1200,
+            SpotId::Giguna__Dual_Path__Right_Switch => 600,
             SpotId::Giguna__Dual_Path__Below_Right_Switch => 0,
+            SpotId::Giguna__Dual_Path__East_Gate => 1200,
+            SpotId::Giguna__Dual_Path__East_18 => 2807,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__East_Gate => enum_map! {
+            SpotId::Giguna__Dual_Path__Below_Right_Switch => 877,
             SpotId::Giguna__Dual_Path__East_Gate => 0,
+            SpotId::Giguna__Dual_Path__East_18 => 1929,
+            SpotId::Giguna__Dual_Path__East_Gate_NW => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__East_18 => enum_map! {
+            SpotId::Giguna__Dual_Path__Below_Right_Switch => 2807,
+            SpotId::Giguna__Dual_Path__East_Gate => 1929,
             SpotId::Giguna__Dual_Path__East_18 => 0,
+            SpotId::Giguna__Gateway__West_18 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__West_Gate => enum_map! {
+            SpotId::Giguna__Dual_Path__West_18 => 877,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch => 500,
             SpotId::Giguna__Dual_Path__West_Gate => 0,
+            SpotId::Giguna__Dual_Path__West_Gate_NW => 1000,
+            SpotId::Giguna__Dual_Path__West_Gate_NE => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__West_Gate_NW => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate => 350,
             SpotId::Giguna__Dual_Path__West_Gate_NW => 0,
+            SpotId::Giguna__Dual_Path__West_Gate_NE => 701,
+            SpotId::Giguna__Dual_Path__West_17 => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__West_Gate_NE => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate => 350,
+            SpotId::Giguna__Dual_Path__West_Gate_NW => 701,
             SpotId::Giguna__Dual_Path__West_Gate_NE => 0,
+            SpotId::Giguna__Dual_Path__Midway => 3333,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__West_17 => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate_NW => 526,
             SpotId::Giguna__Dual_Path__West_17 => 0,
+            SpotId::Giguna__Hard_Rock__East_17 => 1350,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Midway => enum_map! {
+            SpotId::Giguna__Dual_Path__West_Gate_NE => 3333,
             SpotId::Giguna__Dual_Path__Midway => 0,
+            SpotId::Giguna__Dual_Path__Midway_Plateau => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__Midway_Plateau => enum_map! {
+            SpotId::Giguna__Dual_Path__Midway => 701,
             SpotId::Giguna__Dual_Path__Midway_Plateau => 0,
+            SpotId::Giguna__Dual_Path__East_Gate_NW => 2456,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__East_Gate_NW => enum_map! {
+            SpotId::Giguna__Dual_Path__Midway_Plateau => 2456,
             SpotId::Giguna__Dual_Path__East_Gate_NW => 0,
+            SpotId::Giguna__Dual_Path__East_Gate_NE => 1000,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__East_Gate_NE => enum_map! {
+            SpotId::Giguna__Dual_Path__East_Gate => 850,
+            SpotId::Giguna__Dual_Path__East_Gate_NW => 1052,
             SpotId::Giguna__Dual_Path__East_Gate_NE => 0,
+            SpotId::Giguna__Dual_Path__East_17 => 1403,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Dual_Path__East_17 => enum_map! {
+            SpotId::Giguna__Dual_Path__East_Gate_NE => 1799,
             SpotId::Giguna__Dual_Path__East_17 => 0,
+            SpotId::Giguna__East_Caverns__West_17 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Hard_Rock__East_17 => enum_map! {
+            SpotId::Giguna__Hard_Rock__East_17 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Hard_Rock__Rock_Right => enum_map! {
+            SpotId::Giguna__Hard_Rock__Rock_Right => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Hard_Rock__Rock_Center => enum_map! {
+            SpotId::Giguna__Hard_Rock__Rock_Center => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Hard_Rock__Rock_Left => enum_map! {
+            SpotId::Giguna__Hard_Rock__Rock_Left => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Hard_Rock__West_17 => enum_map! {
+            SpotId::Giguna__Hard_Rock__West_17 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__East_Caverns__West_14 => enum_map! {
+            SpotId::Giguna__East_Caverns__West_14 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__East_Caverns__West_17 => enum_map! {
+            SpotId::Giguna__East_Caverns__West_17 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__West_18 => enum_map! {
+            SpotId::Giguna__Gateway__West_18 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -18116,56 +18537,156 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__East_18) => 0,
         (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Dual_Path__West_18) => 1350,
         (SpotId::Giguna__Lamassu__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Lamassu__East_18) => 1350,
         (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__West_18) => 0,
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__Below_Left_Switch) => 526,
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__West_Gate) => 1000,
         (SpotId::Giguna__Dual_Path__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_18) => 600,
         (
             SpotId::Giguna__Dual_Path__Below_Left_Switch,
             SpotId::Giguna__Dual_Path__Below_Left_Switch,
         ) => 0,
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => {
+            600
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            2280
+        }
         (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            350
+        }
         (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => 0,
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => 1929,
         (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            2280
+        }
         (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__West_Slope) => 0,
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__In_the_Grass) => 2982,
         (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__West_Slope) => 2982,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__In_the_Grass) => 0,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Base_of_Wall) => 526,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Wall_Top) => 1000,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => 526,
         (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Base_of_Wall) => 0,
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Wall_Secret) => 350,
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Wall_Top) => 1000,
         (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Giguna__Dual_Path__Base_of_Wall) => 350,
         (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Giguna__Dual_Path__Wall_Secret) => 0,
         (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => 3508,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => 526,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => 500,
         (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Wall_Top) => 0,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            1052
+        }
         (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => 1200,
         (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Right_Switch) => 0,
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => 175,
         (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            1200
+        }
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+        ) => 600,
         (
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
         ) => 0,
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_Gate) => {
+            1200
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_18) => 2807,
         (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            877
+        }
         (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_Gate) => 0,
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => 1929,
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_Gate_NW) => 1000,
         (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__Below_Right_Switch) => 2807,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => 1929,
         (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_18) => 0,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Gateway__West_18) => 1350,
         (SpotId::Giguna__Dual_Path__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => 877,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__Below_Left_Switch) => 500,
         (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate) => 0,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate_NW) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate_NE) => 1000,
         (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate) => 350,
         (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NW) => 0,
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NE) => 701,
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => 526,
         (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate) => 350,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NW) => 701,
         (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NE) => 0,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => 3333,
         (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => 526,
         (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_17) => 0,
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Hard_Rock__East_17) => 1350,
         (SpotId::Giguna__Dual_Path__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => 3333,
         (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__Midway) => 0,
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__Midway_Plateau) => 1000,
         (SpotId::Giguna__Dual_Path__Midway, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => 701,
         (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway_Plateau) => 0,
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
+            2456
+        }
         (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__Midway_Plateau) => {
+            2456
+        }
         (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__East_Gate_NW) => 0,
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__East_Gate_NE) => 1000,
         (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate) => 850,
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NW) => 1052,
         (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NE) => 0,
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => 1403,
         (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => 1799,
         (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_17) => 0,
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__East_Caverns__West_17) => 1350,
         (SpotId::Giguna__Dual_Path__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__East_17) => 0,
+        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__Rock_Right) => 0,
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Center) => 0,
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__Rock_Left) => 0,
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__West_17) => 0,
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__East_Caverns__West_14, SpotId::Giguna__East_Caverns__West_14) => 0,
+        (SpotId::Giguna__East_Caverns__West_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__East_Caverns__West_17, SpotId::Giguna__East_Caverns__West_17) => 0,
+        (SpotId::Giguna__East_Caverns__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__West_18) => 0,
+        (SpotId::Giguna__Gateway__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -21276,6 +21797,73 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => true,
         (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => true,
         (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => true,
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__Below_Left_Switch) => true,
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_18) => true,
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => true,
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__In_the_Grass) => true,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__West_Slope) => true,
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Base_of_Wall) => true,
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => true,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => true,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => true,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => true,
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => true,
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => true,
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+        ) => true,
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_Gate) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_18) => true,
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => true,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => true,
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__Below_Right_Switch) => true,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => true,
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => true,
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NE) => true,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NW) => true,
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => true,
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => true,
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => true,
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => true,
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__Midway_Plateau) => {
+            true
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NW) => true,
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => true,
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -34607,13 +35195,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Giguna__Lamassu__East_18,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_18,
             SpotId::Giguna__Dual_Path__West_18,
             0,
         ),
         (
             SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            526,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_18,
+            SpotId::Giguna__Dual_Path__West_Gate,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_18,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__West_18,
+            600,
         ),
         (
             SpotId::Giguna__Dual_Path__Below_Left_Switch,
@@ -34622,8 +35230,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            600,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            SpotId::Giguna__Dual_Path__West_Slope,
+            2280,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            350,
         ),
         (
             SpotId::Giguna__Dual_Path__Left_Switch,
@@ -34632,8 +35255,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Left_Switch,
+            SpotId::Giguna__Dual_Path__West_Slope,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Left_Switch,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            2280,
         ),
         (
             SpotId::Giguna__Dual_Path__West_Slope,
@@ -34642,8 +35275,43 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_Slope,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            2982,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Slope,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__West_Slope,
+            2982,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            0,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            526,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            526,
         ),
         (
             SpotId::Giguna__Dual_Path__Base_of_Wall,
@@ -34652,8 +35320,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Giguna__Dual_Path__Wall_Secret,
+            350,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Secret,
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            350,
         ),
         (
             SpotId::Giguna__Dual_Path__Wall_Secret,
@@ -34667,13 +35350,38 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__West_Slope,
+            3508,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__In_the_Grass,
+            526,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__Base_of_Wall,
+            500,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Top,
             SpotId::Giguna__Dual_Path__Wall_Top,
             0,
         ),
         (
             SpotId::Giguna__Dual_Path__Wall_Top,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Wall_Top,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            1200,
         ),
         (
             SpotId::Giguna__Dual_Path__Right_Switch,
@@ -34682,8 +35390,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            175,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Wall_Top,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            600,
         ),
         (
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
@@ -34692,8 +35415,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__East_Gate,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__East_18,
+            2807,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            877,
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate,
@@ -34702,8 +35440,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Giguna__Dual_Path__East_18,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            2807,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Giguna__Dual_Path__East_Gate,
+            1929,
         ),
         (
             SpotId::Giguna__Dual_Path__East_18,
@@ -34712,8 +35470,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_18,
+            SpotId::Giguna__Gateway__West_18,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_18,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__West_18,
+            877,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__Below_Left_Switch,
+            500,
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate,
@@ -34722,8 +35495,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate,
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Giguna__Dual_Path__West_Gate,
+            350,
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate_NW,
@@ -34732,8 +35520,28 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            701,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            SpotId::Giguna__Dual_Path__West_17,
+            526,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Giguna__Dual_Path__West_Gate,
+            350,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            701,
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate_NE,
@@ -34742,8 +35550,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate_NE,
+            SpotId::Giguna__Dual_Path__Midway,
+            3333,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_17,
+            SpotId::Giguna__Dual_Path__West_Gate_NW,
+            526,
         ),
         (
             SpotId::Giguna__Dual_Path__West_17,
@@ -34752,8 +35570,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_17,
+            SpotId::Giguna__Hard_Rock__East_17,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__West_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway,
+            SpotId::Giguna__Dual_Path__West_Gate_NE,
+            3333,
         ),
         (
             SpotId::Giguna__Dual_Path__Midway,
@@ -34762,8 +35590,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Midway,
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            SpotId::Giguna__Dual_Path__Midway,
+            701,
         ),
         (
             SpotId::Giguna__Dual_Path__Midway_Plateau,
@@ -34772,8 +35610,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Midway_Plateau,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            2456,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            SpotId::Giguna__Dual_Path__Midway_Plateau,
+            2456,
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate_NW,
@@ -34782,8 +35630,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate_NW,
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Giguna__Dual_Path__East_Gate,
+            850,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Giguna__Dual_Path__East_Gate_NW,
+            1052,
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate_NE,
@@ -34792,8 +35655,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate_NE,
+            SpotId::Giguna__Dual_Path__East_17,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_17,
+            SpotId::Giguna__Dual_Path__East_Gate_NE,
+            1799,
         ),
         (
             SpotId::Giguna__Dual_Path__East_17,
@@ -34802,6 +35675,91 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_17,
+            SpotId::Giguna__East_Caverns__West_17,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Dual_Path__East_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__East_17,
+            SpotId::Giguna__Hard_Rock__East_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__East_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+            0,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            0,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Left,
+            SpotId::Giguna__Hard_Rock__Rock_Left,
+            0,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__West_17,
+            SpotId::Giguna__Hard_Rock__West_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__West_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__West_14,
+            SpotId::Giguna__East_Caverns__West_14,
+            0,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__West_14,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__West_17,
+            SpotId::Giguna__East_Caverns__West_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__West_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_18,
+            SpotId::Giguna__Gateway__West_18,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_18,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -38840,6 +39798,99 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
             Some(1052)
         }
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            Some(526)
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => {
+            Some(600)
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_18) => {
+            Some(600)
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            Some(2280)
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_18) => {
+            Some(2807)
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_Gate) => {
+            Some(1200)
+        }
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+        ) => Some(600),
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            Some(1200)
+        }
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => Some(1799),
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            Some(2807)
+        }
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => Some(1929),
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            Some(877)
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => Some(1929),
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => Some(1403),
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
+            Some(1052)
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__Midway_Plateau) => {
+            Some(2456)
+        }
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Base_of_Wall) => {
+            Some(526)
+        }
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__West_Slope) => {
+            Some(2982)
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            Some(350)
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            Some(1929)
+        }
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => Some(3333),
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
+            Some(2456)
+        }
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => Some(701),
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => Some(175),
+        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            Some(1200)
+        }
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => Some(500),
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            Some(1052)
+        }
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => Some(526),
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => Some(3508),
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => Some(526),
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            Some(526)
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            Some(500)
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => Some(877),
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => Some(3333),
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NW) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => Some(526),
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NE) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            Some(2280)
+        }
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            Some(2982)
+        }
         (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => Some(1578),
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => Some(350),
         (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => {
@@ -42343,6 +43394,125 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
             (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_18) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            (Some(2280), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_18) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_Gate) => {
+            (Some(1200), vec![])
+        }
+        (
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+            SpotId::Giguna__Dual_Path__Right_Switch,
+        ) => (Some(600), vec![]),
+        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            (Some(2807), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__Midway_Plateau) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Base_of_Wall) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__West_Slope) => {
+            (Some(2982), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            (Some(350), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => {
+            (Some(3333), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Giguna__Dual_Path__Right_Switch,
+            SpotId::Giguna__Dual_Path__Below_Right_Switch,
+        ) => (Some(175), vec![]),
+        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
+            (Some(1200), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => {
+            (Some(3508), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => {
+            (Some(3333), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NW) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NE) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
+            (Some(2280), vec![])
+        }
+        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__In_the_Grass) => {
+            (Some(2982), vec![])
         }
         (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => {
             (Some(1578), vec![])

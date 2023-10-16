@@ -1755,44 +1755,275 @@ areas:
   spots:
     - name: West 18
       coord: [16.05, 17.5]
+      local:
+        - to: Below Left Switch
+      exits:
+        - to: West Gate
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: West Gate
+          req: $hook
+          time: 1  # ?
+        - to: Lamassu > East 18
+          tags: [xshift]
     - name: Below Left Switch
       coord: [16.2, 17.7]
+      local:
+        - to: West 18
+          jumps: 1
+        - to: West Slope
+        - to: Left Switch
+          jumps: 1
+      locations:
+        - name: Remote Switch
+          item: Giguna_Dual_Path_Switch
+          canon: Giguna_Dual_Path_Switch
+          req: $boomerang
+          time: 0.5  # ?
     - name: Left Switch
       coord: [16.3, 17.5]
+      local:
+        - to: Below Left Switch
+        - to: West Slope
+      locations:
+        - name: Hit Switch
+          item: Giguna_Dual_Path_Switch
+          canon: Giguna_Dual_Path_Switch
+          req: $can_damage
+          time: 0  # we don't exactly hang in the air
     - name: West Slope
       coord: [16.85, 17.7]
+      local:
+        - to: Below Left Switch
+        - to: In the Grass
+    - name: In the Grass
+      coord: [17.7, 17.75]
+      local:
+        - to: West Slope
+          jumps: 1
+        - to: Base of Wall
+      exits:
+        - to: Wall Top
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Wall Top
+          req: $hook
+          time: 1  # ?
     - name: Base of Wall
       coord: [17.85, 17.75]
+      local:
+        - to: In the Grass
+      exits:
+        - to: Wall Top
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Wall Top
+          req: $hook
+          time: 1  # ?
+        - to: Wall Secret
+          req: ^mode == 'drone'
+          time: 1  # ?
+        - to: Wall Secret
+          req: ^mode == 'drone' and Mist_Upgrade
+          movement: mist2
+          price: 20  # ?
     - name: Wall Secret
       coord: [17.95, 17.75]
+      locations:
+        - name: Health
+          item: Health_Fragment
+      exits:
+        - to: Base of Wall
+          req: ^mode == 'drone'
+          movement: base
     - name: Wall Top
       coord: [17.85, 17.25]
+      local:
+        - to: In the Grass
+        - to: West Slope
+        - to: Base of Wall
+        - to: Below Right Switch
     - name: Right Switch
       coord: [18.1, 17.3]
+      local:
+        - to: Wall Top
+          jumps: 2
+        - to: Below Right Switch
+      locations:
+        - name: Hit Switch
+          item: Giguna_Dual_Path_Switch
+          canon: Giguna_Dual_Path_Switch
+          req: $can_damage
+          time: 0  # we don't exactly hang in the air
     - name: Below Right Switch
       coord: [18.15, 17.45]
+      local:
+        - to: Right Switch
+          jumps: 1
+        - to: Wall Top
+          jumps: 2
+        - to: East Gate
+          jumps: 2
+        - to: East 18
+      locations:
+        - name: Remote Switch
+          item: Giguna_Dual_Path_Switch
+          canon: Giguna_Dual_Path_Switch
+          req: $boomerang
+          time: 0.5  # ?
     - name: East Gate
       coord: [18.4, 17.3]
+      local:
+        - to: Below Right Switch
+          jumps_down: 1
+        - to: East 18
+          jumps_down: 1
+      exits:
+        - to: East Gate NW
+          req: Giguna_Dual_Path_Switch and ($grab or $climb)
+          movement: base
+          jumps: 3
+        - to: East Gate NW
+          req: Giguna_Dual_Path_Switch and $hook
+          time: 1  # ?
     - name: East 18
       coord: [18.95, 17.65]
+      local:
+        - to: East Gate
+          jumps: 2
+        - to: Below Right Switch
+          jumps: 2
+      exits:
+        - to: Gateway > West 18
+          tags: [xshift]
 
     # Upper path
     - name: West Gate
       coord: [16.3, 17.2]
+      local:
+        - to: West 18
+        - to: Below Left Switch
+      exits:
+        - to: West Gate NW
+          req: Giguna_Dual_Path_Switch and $climb
+          movement: base
+          jumps: 3
+        - to: West Gate NE
+          req: Giguna_Dual_Path_Switch and $climb
+          movement: base
+          jumps: 2
+        - to: West Gate NW
+          req: Giguna_Dual_Path_Switch and $hook
+          time: 1  # ?
+        - to: West Gate NE
+          req: Giguna_Dual_Path_Switch and $hook
+          time: 1  # ?
     - name: West Gate NW
       coord: [16.2, 16.85]
+      local:
+        - to: West 17
+        - to: West Gate NE
+      exits:
+        - to: West Gate
+          req: Giguna_Dual_Path_Switch
+          movement: base
     - name: West Gate NE
       coord: [16.4, 16.85]
+      local:
+        - to: West Gate NW
+        - to: Midway
+          jumps: 1
+      exits:
+        - to: West Gate
+          req: Giguna_Dual_Path_Switch
+          movement: base
     - name: West 17
       coord: [16.05, 16.85]
+      local:
+        - to: West Gate NW
+      exits:
+        - to: Hard Rock > East 17
+          tags: [xshift]
     - name: Midway
       coord: [17.35, 16.8]
+      local:
+        - to: West Gate NE
+          jumps: 1
+      exits:
+        - to: Midway Plateau
+          req: $grab or $climb
+          movement: base
+          jumps: 2
+        - to: Midway Plateau
+          req: $hook
+          time: 1  # ?
     - name: Midway Plateau
       coord: [17.55, 16.5]
+      local:
+        - to: Midway
+        - to: East Gate NW
     - name: East Gate NW
       coord: [18.25, 16.8]
+      local:
+        - to: Midway Plateau
+          jumps: 2
+      exits:
+        - to: East Gate NE
+          req: $hook
+          time: 1  # ?
     - name: East Gate NE
       coord: [18.55, 16.45]
+      local:
+        - to: East Gate NW
+        - to: East 17
+      exits:
+        - to: East Gate
+          req: Giguna_Dual_Path_Switch
+          movement: base
     - name: East 17
       coord: [18.95, 16.85]
+      local:
+        - to: East Gate NE
+          jumps: 3
+      exits:
+        - to: East Caverns > West 17
+          tags: [xshift]
 
+- name: Hard Rock
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 17
+      coord: [15.95, 16.85]
+    - name: Rock Right
+      coord: [15.7, 16.85]
+    - name: Rock Center
+      coord: [15.55, 16.85]
+    - name: Rock Left
+      coord: [15.4, 16.85]
+    - name: West 17
+      coord: [15.05, 16.6]
+
+- name: East Caverns
+  on_entry: $reset_old_area(^newpos)
+  reset:
+    _upper_susar: false
+    _mid_susar: false
+    _code_entered: false
+    _door_opened: false
+  spots:
+    - name: West 14
+      coord: [19.05, 13.6]
+
+    - name: West 17
+      coord: [19.05, 16.85]
+
+- name: Gateway
+  on_entry: $reset_old_area(^newpos)
+  reset:
+    _door_opened: false
+  spots:
+    - name: West 18
+      coord: [19.05, 17.65]

@@ -506,6 +506,22 @@ pub fn access_giguna_breach__sw_save__west_11__open_door__req(ctx: &Context) -> 
     // not ^_door_opened
     !ctx.giguna_breach__sw_save__ctx__door_opened()
 }
+pub fn access_giguna_dual_path_switch(ctx: &Context) -> bool {
+    // Giguna_Dual_Path_Switch
+    ctx.has(Item::Giguna_Dual_Path_Switch)
+}
+pub fn access_giguna_dual_path_switch_and___grab_or_climb(ctx: &Context) -> bool {
+    // Giguna_Dual_Path_Switch and ($grab or $climb)
+    (ctx.has(Item::Giguna_Dual_Path_Switch) && (helper__grab!(ctx) || helper__climb!(ctx)))
+}
+pub fn access_giguna_dual_path_switch_and_climb(ctx: &Context) -> bool {
+    // Giguna_Dual_Path_Switch and $climb
+    (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__climb!(ctx))
+}
+pub fn access_giguna_dual_path_switch_and_hook(ctx: &Context) -> bool {
+    // Giguna_Dual_Path_Switch and $hook
+    (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__hook!(ctx))
+}
 pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
