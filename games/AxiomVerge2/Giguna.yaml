@@ -1797,6 +1797,7 @@ areas:
       coord: [14.9, 18.2]
       local:
         - to: Wingtip
+          jumps: 1
         - to: Lower Platform Right
         - to: Lower Platform Left
     - name: Rear Platform
@@ -2363,6 +2364,7 @@ areas:
         - name: Hit Switch
           item: Giguna_Gateway_Gate
           req: $can_damage
+          time: 0  # while moving to next spot
       exits:
         - to: East 19
           req: Giguna_Gateway_Gate

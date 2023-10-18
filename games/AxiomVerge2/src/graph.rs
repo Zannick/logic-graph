@@ -14195,7 +14195,7 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             canonical: CanonId::None,
             item: Item::Giguna_Gateway_Gate,
             price: Currency::Free,
-            time: 1000,
+            time: 0,
             exit_id: None,
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {

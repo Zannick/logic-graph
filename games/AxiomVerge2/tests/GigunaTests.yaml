@@ -42,3 +42,17 @@ tests:
 
   - start: Giguna > Giguna Base > Save Point
     can_access: Giguna > Building Interior > Bookshelf > Note
+
+  - name: Dual Path Switch
+    start: Giguna > Giguna Base > Save Point
+    with:
+      - Wall_Climb
+    can_obtain: Giguna_Dual_Path_Switch
+
+  - name: Gateway Flask
+    start: Giguna > Dual Path > West 18
+    context:
+      mode: drone
+    with:
+      - Slingshot_Hook
+    can_access: Giguna > Gateway > Flask Ledge > Item

@@ -3524,6 +3524,7 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
             1052
         }
+        ([false], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => 2807,
         ([false], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
         ([false], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => 1578,
         ([false], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => 2807,
@@ -8016,6 +8017,7 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
             1052
         }
+        ([true], SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => 2807,
         ([true], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
         ([true], SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => 1578,
         ([true], SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => 2807,
@@ -13273,6 +13275,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Lamassu__Lower_Platform_Left => 1929,
             SpotId::Giguna__Lamassu__Lower_Platform_Right => 1052,
             SpotId::Giguna__Lamassu__Head => 0,
+            SpotId::Giguna__Lamassu__Wingtip => 2807,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -19058,6 +19061,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => 1929,
         (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => 1052,
         (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Head) => 0,
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => 2807,
         (SpotId::Giguna__Lamassu__Head, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
         (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Rear_Platform) => 0,
@@ -35945,6 +35949,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Head,
+            SpotId::Giguna__Lamassu__Wingtip,
+            2807,
+        ),
+        (
+            SpotId::Giguna__Lamassu__Head,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41551,6 +41560,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
             Some(1052)
         }
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => Some(2807),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
@@ -45383,6 +45393,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => {
             (Some(1052), vec![])
         }
+        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => (Some(2807), vec![]),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
