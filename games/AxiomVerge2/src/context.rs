@@ -84,6 +84,7 @@ pub enum Expectation {
     GigunaCarnelianCtxUpperSusar(bool),
     GigunaCarnelianCtxLowerSusar(bool),
     GigunaWestCavernsCtxEastSusar(bool),
+    GigunaGigunaBaseCtxDoorOpen(bool),
     GigunaRuinsWestCtxKishibHandled(bool),
     GigunaRuinsTopCtxDoorsOpen(bool),
     GigunaCloudsCtxPlatformMoved(bool),
@@ -105,6 +106,7 @@ pub enum Expectation {
     ApocalypseBomb(bool),
     Boomerang(bool),
     BronzeAxe(bool),
+    BuildingOfTheSchool(bool),
     CompaniesLayoff(bool),
     DearErnest(bool),
     DefeatEbihAlu(bool),
@@ -122,7 +124,10 @@ pub enum Expectation {
     EbihWestBlock(bool),
     FastTravel(bool),
     Flask(i8),
+    GigunaBoulder(bool),
     GigunaDualPathSwitch(bool),
+    GigunaGatewayBlock(bool),
+    GigunaGatewayGate(bool),
     GigunaNortheastGate(bool),
     HealthFragment(i8),
     HealthNode(bool),
@@ -147,7 +152,9 @@ pub enum Expectation {
     RemoteDrone(bool),
     ResearchersMissing(bool),
     Shockwave(bool),
+    SlingshotCharge(bool),
     SlingshotHook(bool),
+    SlingshotWeapon(bool),
     StationPower(bool),
     Switch3611(bool),
     Switch4012(bool),
@@ -357,77 +364,84 @@ pub mod flags {
             const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 1 << 12;
             const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 1 << 13;
             const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 1 << 14;
-            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 15;
-            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 16;
-            const GIGUNA__CLOUDS__CTX__PLATFORM_MOVED = 1 << 17;
-            const GIGUNA__CLOUDS__CTX__PORTAL_MOVED = 1 << 18;
-            const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 1 << 19;
-            const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 1 << 20;
-            const GIGUNA__EAST_CAVERNS__CTX__CODE_ENTERED = 1 << 21;
-            const GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED = 1 << 22;
-            const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 1 << 23;
-            const BOOMERANG_STEERING = 1 << 24;
-            const MAJOR_GLITCHES = 1 << 25;
-            const MINOR_GLITCHES = 1 << 26;
-            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 27;
-            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 28;
-            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 29;
-            const AMAGI_STRONGHOLD_WALL_1 = 1 << 30;
-            const AMAGI_STRONGHOLD_WALL_2 = 1 << 31;
+            const GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN = 1 << 15;
+            const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 1 << 16;
+            const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 1 << 17;
+            const GIGUNA__CLOUDS__CTX__PLATFORM_MOVED = 1 << 18;
+            const GIGUNA__CLOUDS__CTX__PORTAL_MOVED = 1 << 19;
+            const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 1 << 20;
+            const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 1 << 21;
+            const GIGUNA__EAST_CAVERNS__CTX__CODE_ENTERED = 1 << 22;
+            const GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED = 1 << 23;
+            const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 1 << 24;
+            const BOOMERANG_STEERING = 1 << 25;
+            const MAJOR_GLITCHES = 1 << 26;
+            const MINOR_GLITCHES = 1 << 27;
+            const AMAGI_DRAGON_EYE_PASSAGE = 1 << 28;
+            const AMAGI_STRONGHOLD_BOULDER_1 = 1 << 29;
+            const AMAGI_STRONGHOLD_BOULDER_2 = 1 << 30;
+            const AMAGI_STRONGHOLD_WALL_1 = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits2 : u32 {
-            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 0;
-            const AMASHILAMA = 1 << 1;
-            const ANUMAN = 1 << 2;
-            const APOCALYPSE_BOMB = 1 << 3;
-            const BOOMERANG = 1 << 4;
-            const BRONZE_AXE = 1 << 5;
-            const COMPANIES_LAYOFF = 1 << 6;
-            const DEAR_ERNEST = 1 << 7;
-            const DEFEAT_EBIH_ALU = 1 << 8;
-            const DEFEAT_MUS_A_M20 = 1 << 9;
-            const DRONE_HOVER = 1 << 10;
-            const EBIH_INTERCHANGE_BLOCK = 1 << 11;
-            const EBIH_INTERCHANGE_GATE = 1 << 12;
-            const EBIH_WASTELAND_DOOR = 1 << 13;
-            const EBIH_WASTELAND_PASSAGE_H = 1 << 14;
-            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 15;
-            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 16;
-            const EBIH_WATERFALL_WALL = 1 << 17;
-            const EBIH_WEST_BLOCK = 1 << 18;
-            const FAST_TRAVEL = 1 << 19;
-            const GIGUNA_DUAL_PATH_SWITCH = 1 << 20;
-            const GIGUNA_NORTHEAST_GATE = 1 << 21;
-            const HEALTH_NODE = 1 << 22;
-            const HERETICS_TABLET = 1 << 23;
-            const ICE_AXE = 1 << 24;
-            const INFECTION_SPEED = 1 << 25;
-            const LEDGE_GRAB = 1 << 26;
-            const LETTER_FROM_TRACE = 1 << 27;
-            const MAP_17_10 = 1 << 28;
-            const MIST_UPGRADE = 1 << 29;
-            const NANITE_MIST = 1 << 30;
-            const POWER_MATRIX = 1 << 31;
+            const AMAGI_STRONGHOLD_WALL_2 = 1 << 0;
+            const AMAGI_WEST_LAKE_SURFACE_WALL = 1 << 1;
+            const AMASHILAMA = 1 << 2;
+            const ANUMAN = 1 << 3;
+            const APOCALYPSE_BOMB = 1 << 4;
+            const BOOMERANG = 1 << 5;
+            const BRONZE_AXE = 1 << 6;
+            const BUILDING_OF_THE_SCHOOL = 1 << 7;
+            const COMPANIES_LAYOFF = 1 << 8;
+            const DEAR_ERNEST = 1 << 9;
+            const DEFEAT_EBIH_ALU = 1 << 10;
+            const DEFEAT_MUS_A_M20 = 1 << 11;
+            const DRONE_HOVER = 1 << 12;
+            const EBIH_INTERCHANGE_BLOCK = 1 << 13;
+            const EBIH_INTERCHANGE_GATE = 1 << 14;
+            const EBIH_WASTELAND_DOOR = 1 << 15;
+            const EBIH_WASTELAND_PASSAGE_H = 1 << 16;
+            const EBIH_WATERFALL_BLOCK_LEFT = 1 << 17;
+            const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 18;
+            const EBIH_WATERFALL_WALL = 1 << 19;
+            const EBIH_WEST_BLOCK = 1 << 20;
+            const FAST_TRAVEL = 1 << 21;
+            const GIGUNA_BOULDER = 1 << 22;
+            const GIGUNA_DUAL_PATH_SWITCH = 1 << 23;
+            const GIGUNA_GATEWAY_BLOCK = 1 << 24;
+            const GIGUNA_GATEWAY_GATE = 1 << 25;
+            const GIGUNA_NORTHEAST_GATE = 1 << 26;
+            const HEALTH_NODE = 1 << 27;
+            const HERETICS_TABLET = 1 << 28;
+            const ICE_AXE = 1 << 29;
+            const INFECTION_SPEED = 1 << 30;
+            const LEDGE_GRAB = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-        pub struct ContextBits3 : u16 {
-            const RECORD_LOSSES = 1 << 0;
-            const REMOTE_DRONE = 1 << 1;
-            const RESEARCHERS_MISSING = 1 << 2;
-            const SHOCKWAVE = 1 << 3;
-            const SLINGSHOT_HOOK = 1 << 4;
-            const STATION_POWER = 1 << 5;
-            const SWITCH_36_11 = 1 << 6;
-            const SWITCH_40_12 = 1 << 7;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 8;
-            const UNDER_SIEGE = 1 << 9;
-            const UNDERWATER_MOVEMENT = 1 << 10;
-            const WALL_CLIMB = 1 << 11;
+        pub struct ContextBits3 : u32 {
+            const LETTER_FROM_TRACE = 1 << 0;
+            const MAP_17_10 = 1 << 1;
+            const MIST_UPGRADE = 1 << 2;
+            const NANITE_MIST = 1 << 3;
+            const POWER_MATRIX = 1 << 4;
+            const RECORD_LOSSES = 1 << 5;
+            const REMOTE_DRONE = 1 << 6;
+            const RESEARCHERS_MISSING = 1 << 7;
+            const SHOCKWAVE = 1 << 8;
+            const SLINGSHOT_CHARGE = 1 << 9;
+            const SLINGSHOT_HOOK = 1 << 10;
+            const SLINGSHOT_WEAPON = 1 << 11;
+            const STATION_POWER = 1 << 12;
+            const SWITCH_36_11 = 1 << 13;
+            const SWITCH_40_12 = 1 << 14;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 15;
+            const UNDER_SIEGE = 1 << 16;
+            const UNDERWATER_MOVEMENT = 1 << 17;
+            const WALL_CLIMB = 1 << 18;
         }
     }
 }
@@ -523,7 +537,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 61;
+    const NUM_ITEMS: u32 = 67;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -540,8 +554,8 @@ impl context::Ctx for Context {
                 .cbits1
                 .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1),
             Item::Amagi_Stronghold_Wall_2 => self
-                .cbits1
-                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2),
+                .cbits2
+                .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2),
             Item::Amagi_West_Lake_Surface_Wall => self
                 .cbits2
                 .contains(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL),
@@ -550,6 +564,9 @@ impl context::Ctx for Context {
             Item::Apocalypse_Bomb => self.cbits2.contains(flags::ContextBits2::APOCALYPSE_BOMB),
             Item::Boomerang => self.cbits2.contains(flags::ContextBits2::BOOMERANG),
             Item::Bronze_Axe => self.cbits2.contains(flags::ContextBits2::BRONZE_AXE),
+            Item::Building_of_the_School => self
+                .cbits2
+                .contains(flags::ContextBits2::BUILDING_OF_THE_SCHOOL),
             Item::Companies_Layoff => self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF),
             Item::Dear_Ernest => self.cbits2.contains(flags::ContextBits2::DEAR_ERNEST),
             Item::Defeat_Ebih_Alu => self.cbits2.contains(flags::ContextBits2::DEFEAT_EBIH_ALU),
@@ -581,9 +598,16 @@ impl context::Ctx for Context {
             Item::Ebih_West_Block => self.cbits2.contains(flags::ContextBits2::EBIH_WEST_BLOCK),
             Item::Fast_Travel => self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
+            Item::Giguna_Boulder => self.cbits2.contains(flags::ContextBits2::GIGUNA_BOULDER),
             Item::Giguna_Dual_Path_Switch => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH),
+            Item::Giguna_Gateway_Block => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK),
+            Item::Giguna_Gateway_Gate => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE),
             Item::Giguna_Northeast_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE),
@@ -596,14 +620,14 @@ impl context::Ctx for Context {
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.cbits2.contains(flags::ContextBits2::INFECTION_SPEED),
             Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB),
-            Item::Letter_from_Trace => self.cbits2.contains(flags::ContextBits2::LETTER_FROM_TRACE),
-            Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10),
+            Item::Letter_from_Trace => self.cbits3.contains(flags::ContextBits3::LETTER_FROM_TRACE),
+            Item::Map_17_10 => self.cbits3.contains(flags::ContextBits3::MAP_17_10),
             Item::Melee_Damage => self.melee_damage >= 1,
             Item::Melee_Speed => self.melee_speed >= 1,
-            Item::Mist_Upgrade => self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE),
-            Item::Nanite_Mist => self.cbits2.contains(flags::ContextBits2::NANITE_MIST),
+            Item::Mist_Upgrade => self.cbits3.contains(flags::ContextBits3::MIST_UPGRADE),
+            Item::Nanite_Mist => self.cbits3.contains(flags::ContextBits3::NANITE_MIST),
             Item::Nano_Points => self.nano_points >= 1,
-            Item::Power_Matrix => self.cbits2.contains(flags::ContextBits2::POWER_MATRIX),
+            Item::Power_Matrix => self.cbits3.contains(flags::ContextBits3::POWER_MATRIX),
             Item::Ranged_Damage => self.ranged_damage >= 1,
             Item::Ranged_Speed => self.ranged_speed >= 1,
             Item::Record_Losses => self.cbits3.contains(flags::ContextBits3::RECORD_LOSSES),
@@ -612,7 +636,9 @@ impl context::Ctx for Context {
                 .cbits3
                 .contains(flags::ContextBits3::RESEARCHERS_MISSING),
             Item::Shockwave => self.cbits3.contains(flags::ContextBits3::SHOCKWAVE),
+            Item::Slingshot_Charge => self.cbits3.contains(flags::ContextBits3::SLINGSHOT_CHARGE),
             Item::Slingshot_Hook => self.cbits3.contains(flags::ContextBits3::SLINGSHOT_HOOK),
+            Item::Slingshot_Weapon => self.cbits3.contains(flags::ContextBits3::SLINGSHOT_WEAPON),
             Item::Station_Power => self.cbits3.contains(flags::ContextBits3::STATION_POWER),
             Item::Switch_36_11 => self.cbits3.contains(flags::ContextBits3::SWITCH_36_11),
             Item::Switch_40_12 => self.cbits3.contains(flags::ContextBits3::SWITCH_40_12),
@@ -646,8 +672,8 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1)
                 .into(),
             Item::Amagi_Stronghold_Wall_2 => self
-                .cbits1
-                .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2)
+                .cbits2
+                .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2)
                 .into(),
             Item::Amagi_West_Lake_Surface_Wall => self
                 .cbits2
@@ -661,6 +687,10 @@ impl context::Ctx for Context {
                 .into(),
             Item::Boomerang => self.cbits2.contains(flags::ContextBits2::BOOMERANG).into(),
             Item::Bronze_Axe => self.cbits2.contains(flags::ContextBits2::BRONZE_AXE).into(),
+            Item::Building_of_the_School => self
+                .cbits2
+                .contains(flags::ContextBits2::BUILDING_OF_THE_SCHOOL)
+                .into(),
             Item::Companies_Layoff => self
                 .cbits2
                 .contains(flags::ContextBits2::COMPANIES_LAYOFF)
@@ -720,9 +750,21 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits2::FAST_TRAVEL)
                 .into(),
             Item::Flask => self.flask.into(),
+            Item::Giguna_Boulder => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_BOULDER)
+                .into(),
             Item::Giguna_Dual_Path_Switch => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH)
+                .into(),
+            Item::Giguna_Gateway_Block => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK)
+                .into(),
+            Item::Giguna_Gateway_Gate => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE)
                 .into(),
             Item::Giguna_Northeast_Gate => self
                 .cbits2
@@ -747,24 +789,24 @@ impl context::Ctx for Context {
                 .into(),
             Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB).into(),
             Item::Letter_from_Trace => self
-                .cbits2
-                .contains(flags::ContextBits2::LETTER_FROM_TRACE)
+                .cbits3
+                .contains(flags::ContextBits3::LETTER_FROM_TRACE)
                 .into(),
-            Item::Map_17_10 => self.cbits2.contains(flags::ContextBits2::MAP_17_10).into(),
+            Item::Map_17_10 => self.cbits3.contains(flags::ContextBits3::MAP_17_10).into(),
             Item::Melee_Damage => self.melee_damage.into(),
             Item::Melee_Speed => self.melee_speed.into(),
             Item::Mist_Upgrade => self
-                .cbits2
-                .contains(flags::ContextBits2::MIST_UPGRADE)
+                .cbits3
+                .contains(flags::ContextBits3::MIST_UPGRADE)
                 .into(),
             Item::Nanite_Mist => self
-                .cbits2
-                .contains(flags::ContextBits2::NANITE_MIST)
+                .cbits3
+                .contains(flags::ContextBits3::NANITE_MIST)
                 .into(),
             Item::Nano_Points => self.nano_points.into(),
             Item::Power_Matrix => self
-                .cbits2
-                .contains(flags::ContextBits2::POWER_MATRIX)
+                .cbits3
+                .contains(flags::ContextBits3::POWER_MATRIX)
                 .into(),
             Item::Ranged_Damage => self.ranged_damage.into(),
             Item::Ranged_Speed => self.ranged_speed.into(),
@@ -781,9 +823,17 @@ impl context::Ctx for Context {
                 .contains(flags::ContextBits3::RESEARCHERS_MISSING)
                 .into(),
             Item::Shockwave => self.cbits3.contains(flags::ContextBits3::SHOCKWAVE).into(),
+            Item::Slingshot_Charge => self
+                .cbits3
+                .contains(flags::ContextBits3::SLINGSHOT_CHARGE)
+                .into(),
             Item::Slingshot_Hook => self
                 .cbits3
                 .contains(flags::ContextBits3::SLINGSHOT_HOOK)
+                .into(),
+            Item::Slingshot_Weapon => self
+                .cbits3
+                .contains(flags::ContextBits3::SLINGSHOT_WEAPON)
                 .into(),
             Item::Station_Power => self
                 .cbits3
@@ -828,7 +878,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
             },
             Item::Amagi_Stronghold_Wall_2 => {
-                self.cbits1.insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+                self.cbits2.insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
             },
             Item::Amagi_West_Lake_Surface_Wall => {
                 self.cbits2.insert(flags::ContextBits2::AMAGI_WEST_LAKE_SURFACE_WALL);
@@ -848,6 +898,9 @@ impl context::Ctx for Context {
             },
             Item::Bronze_Axe => {
                 self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
+            },
+            Item::Building_of_the_School => {
+                self.cbits2.insert(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
             },
             Item::Companies_Layoff => {
                 self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
@@ -902,8 +955,17 @@ impl context::Ctx for Context {
                 self.flask += 1;
                 rules::action_flasks__1(self);
             },
+            Item::Giguna_Boulder => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
+            },
             Item::Giguna_Dual_Path_Switch => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
+            },
+            Item::Giguna_Gateway_Block => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+            },
+            Item::Giguna_Gateway_Gate => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
             },
             Item::Giguna_Northeast_Gate => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
@@ -938,10 +1000,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
             },
             Item::Letter_from_Trace => {
-                self.cbits2.insert(flags::ContextBits2::LETTER_FROM_TRACE);
+                self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
             },
             Item::Map_17_10 => {
-                self.cbits2.insert(flags::ContextBits2::MAP_17_10);
+                self.cbits3.insert(flags::ContextBits3::MAP_17_10);
             },
             Item::Melee_Damage => {
                 self.melee_damage += 1;
@@ -950,16 +1012,16 @@ impl context::Ctx for Context {
                 self.melee_speed += 1;
             },
             Item::Mist_Upgrade => {
-                self.cbits2.insert(flags::ContextBits2::MIST_UPGRADE);
+                self.cbits3.insert(flags::ContextBits3::MIST_UPGRADE);
             },
             Item::Nanite_Mist => {
-                self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
+                self.cbits3.insert(flags::ContextBits3::NANITE_MIST);
             },
             Item::Nano_Points => {
                 self.nano_points += 1;
             },
             Item::Power_Matrix => {
-                self.cbits2.insert(flags::ContextBits2::POWER_MATRIX);
+                self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
             },
             Item::Ranged_Damage => {
                 self.ranged_damage += 1;
@@ -979,8 +1041,14 @@ impl context::Ctx for Context {
             Item::Shockwave => {
                 self.cbits3.insert(flags::ContextBits3::SHOCKWAVE);
             },
+            Item::Slingshot_Charge => {
+                self.cbits3.insert(flags::ContextBits3::SLINGSHOT_CHARGE);
+            },
             Item::Slingshot_Hook => {
                 self.cbits3.insert(flags::ContextBits3::SLINGSHOT_HOOK);
+            },
+            Item::Slingshot_Weapon => {
+                self.cbits3.insert(flags::ContextBits3::SLINGSHOT_WEAPON);
             },
             Item::Station_Power => {
                 self.cbits3.insert(flags::ContextBits3::STATION_POWER);
@@ -1031,8 +1099,8 @@ impl context::Ctx for Context {
                     .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_1);
             }
             Item::Amagi_Stronghold_Wall_2 => {
-                self.cbits1
-                    .insert(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+                self.cbits2
+                    .insert(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
             }
             Item::Amagi_West_Lake_Surface_Wall => {
                 self.cbits2
@@ -1052,6 +1120,10 @@ impl context::Ctx for Context {
             }
             Item::Bronze_Axe => {
                 self.cbits2.insert(flags::ContextBits2::BRONZE_AXE);
+            }
+            Item::Building_of_the_School => {
+                self.cbits2
+                    .insert(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
             }
             Item::Companies_Layoff => {
                 self.cbits2.insert(flags::ContextBits2::COMPANIES_LAYOFF);
@@ -1109,9 +1181,19 @@ impl context::Ctx for Context {
             Item::Flask => {
                 self.flask += 1;
             }
+            Item::Giguna_Boulder => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_BOULDER);
+            }
             Item::Giguna_Dual_Path_Switch => {
                 self.cbits2
                     .insert(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
+            }
+            Item::Giguna_Gateway_Block => {
+                self.cbits2
+                    .insert(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+            }
+            Item::Giguna_Gateway_Gate => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
             }
             Item::Giguna_Northeast_Gate => {
                 self.cbits2
@@ -1145,10 +1227,10 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
             }
             Item::Letter_from_Trace => {
-                self.cbits2.insert(flags::ContextBits2::LETTER_FROM_TRACE);
+                self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
             }
             Item::Map_17_10 => {
-                self.cbits2.insert(flags::ContextBits2::MAP_17_10);
+                self.cbits3.insert(flags::ContextBits3::MAP_17_10);
             }
             Item::Melee_Damage => {
                 self.melee_damage += 1;
@@ -1157,16 +1239,16 @@ impl context::Ctx for Context {
                 self.melee_speed += 1;
             }
             Item::Mist_Upgrade => {
-                self.cbits2.insert(flags::ContextBits2::MIST_UPGRADE);
+                self.cbits3.insert(flags::ContextBits3::MIST_UPGRADE);
             }
             Item::Nanite_Mist => {
-                self.cbits2.insert(flags::ContextBits2::NANITE_MIST);
+                self.cbits3.insert(flags::ContextBits3::NANITE_MIST);
             }
             Item::Nano_Points => {
                 self.nano_points += 1;
             }
             Item::Power_Matrix => {
-                self.cbits2.insert(flags::ContextBits2::POWER_MATRIX);
+                self.cbits3.insert(flags::ContextBits3::POWER_MATRIX);
             }
             Item::Ranged_Damage => {
                 self.ranged_damage += 1;
@@ -1186,8 +1268,14 @@ impl context::Ctx for Context {
             Item::Shockwave => {
                 self.cbits3.insert(flags::ContextBits3::SHOCKWAVE);
             }
+            Item::Slingshot_Charge => {
+                self.cbits3.insert(flags::ContextBits3::SLINGSHOT_CHARGE);
+            }
             Item::Slingshot_Hook => {
                 self.cbits3.insert(flags::ContextBits3::SLINGSHOT_HOOK);
+            }
+            Item::Slingshot_Weapon => {
+                self.cbits3.insert(flags::ContextBits3::SLINGSHOT_WEAPON);
             }
             Item::Station_Power => {
                 self.cbits3.insert(flags::ContextBits3::STATION_POWER);
@@ -1429,6 +1517,15 @@ impl context::Ctx for Context {
                 self.set_giguna__west_caverns__ctx__east_susar(*b)
             }
             ("giguna__west_caverns__ctx__east_susar", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("giguna__giguna_base__ctx__door_open", Yaml::Boolean(b)) => {
+                self.set_giguna__giguna_base__ctx__door_open(*b)
+            }
+            ("giguna__giguna_base__ctx__door_open", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1761,6 +1858,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("giguna__giguna_base__ctx__door_open", Yaml::Boolean(b)) => {
+                Expectation::GigunaGigunaBaseCtxDoorOpen(*b)
+            }
+            ("giguna__giguna_base__ctx__door_open", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna__ruins_west__ctx__kishib_handled", Yaml::Boolean(b)) => {
                 Expectation::GigunaRuinsWestCtxKishibHandled(*b)
             }
@@ -1950,6 +2056,16 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Building_of_the_School", Yaml::Boolean(b)) => Expectation::BuildingOfTheSchool(*b),
+            ("Building_of_the_School", Yaml::Integer(i)) => {
+                Expectation::BuildingOfTheSchool(*i > 0)
+            }
+            ("Building_of_the_School", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Companies_Layoff", Yaml::Boolean(b)) => Expectation::CompaniesLayoff(*b),
             ("Companies_Layoff", Yaml::Integer(i)) => Expectation::CompaniesLayoff(*i > 0),
             ("Companies_Layoff", _) => {
@@ -2103,11 +2219,35 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Giguna_Boulder", Yaml::Boolean(b)) => Expectation::GigunaBoulder(*b),
+            ("Giguna_Boulder", Yaml::Integer(i)) => Expectation::GigunaBoulder(*i > 0),
+            ("Giguna_Boulder", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Giguna_Dual_Path_Switch", Yaml::Boolean(b)) => Expectation::GigunaDualPathSwitch(*b),
             ("Giguna_Dual_Path_Switch", Yaml::Integer(i)) => {
                 Expectation::GigunaDualPathSwitch(*i > 0)
             }
             ("Giguna_Dual_Path_Switch", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Giguna_Gateway_Block", Yaml::Boolean(b)) => Expectation::GigunaGatewayBlock(*b),
+            ("Giguna_Gateway_Block", Yaml::Integer(i)) => Expectation::GigunaGatewayBlock(*i > 0),
+            ("Giguna_Gateway_Block", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Giguna_Gateway_Gate", Yaml::Boolean(b)) => Expectation::GigunaGatewayGate(*b),
+            ("Giguna_Gateway_Gate", Yaml::Integer(i)) => Expectation::GigunaGatewayGate(*i > 0),
+            ("Giguna_Gateway_Gate", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2314,9 +2454,25 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Slingshot_Charge", Yaml::Boolean(b)) => Expectation::SlingshotCharge(*b),
+            ("Slingshot_Charge", Yaml::Integer(i)) => Expectation::SlingshotCharge(*i > 0),
+            ("Slingshot_Charge", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Slingshot_Hook", Yaml::Boolean(b)) => Expectation::SlingshotHook(*b),
             ("Slingshot_Hook", Yaml::Integer(i)) => Expectation::SlingshotHook(*i > 0),
             ("Slingshot_Hook", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
+            ("Slingshot_Weapon", Yaml::Boolean(b)) => Expectation::SlingshotWeapon(*b),
+            ("Slingshot_Weapon", Yaml::Integer(i)) => Expectation::SlingshotWeapon(*i > 0),
+            ("Slingshot_Weapon", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2582,6 +2738,15 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::GigunaGigunaBaseCtxDoorOpen(e) => {
+                    let v = self.giguna__giguna_base__ctx__door_open();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__giguna_base__ctx__door_open", e, v
+                        ));
+                    }
+                }
                 Expectation::GigunaRuinsWestCtxKishibHandled(e) => {
                     let v = self.giguna__ruins_west__ctx__kishib_handled();
                     if v != *e {
@@ -2750,6 +2915,15 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "Bronze_Axe", e, v));
                     }
                 }
+                Expectation::BuildingOfTheSchool(e) => {
+                    let v = self.has(Item::Building_of_the_School);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Building_of_the_School", e, v
+                        ));
+                    }
+                }
                 Expectation::CompaniesLayoff(e) => {
                     let v = self.has(Item::Companies_Layoff);
                     if v != (*e).into() {
@@ -2891,12 +3065,36 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "Flask", e, v));
                     }
                 }
+                Expectation::GigunaBoulder(e) => {
+                    let v = self.has(Item::Giguna_Boulder);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Giguna_Boulder", e, v));
+                    }
+                }
                 Expectation::GigunaDualPathSwitch(e) => {
                     let v = self.has(Item::Giguna_Dual_Path_Switch);
                     if v != (*e).into() {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Giguna_Dual_Path_Switch", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaGatewayBlock(e) => {
+                    let v = self.has(Item::Giguna_Gateway_Block);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Giguna_Gateway_Block", e, v
+                        ));
+                    }
+                }
+                Expectation::GigunaGatewayGate(e) => {
+                    let v = self.has(Item::Giguna_Gateway_Gate);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Giguna_Gateway_Gate", e, v
                         ));
                     }
                 }
@@ -3065,10 +3263,28 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "Shockwave", e, v));
                     }
                 }
+                Expectation::SlingshotCharge(e) => {
+                    let v = self.has(Item::Slingshot_Charge);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Slingshot_Charge", e, v
+                        ));
+                    }
+                }
                 Expectation::SlingshotHook(e) => {
                     let v = self.has(Item::Slingshot_Hook);
                     if v != (*e).into() {
                         errs.push(format!("Expected {} = {}, got: {}", "Slingshot_Hook", e, v));
+                    }
+                }
+                Expectation::SlingshotWeapon(e) => {
+                    let v = self.has(Item::Slingshot_Weapon);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "Slingshot_Weapon", e, v
+                        ));
                     }
                 }
                 Expectation::StationPower(e) => {
@@ -3312,6 +3528,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Giguna__Labyrinth_East => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Giguna__Lamassu => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
@@ -3333,6 +3554,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Giguna__Ruins_West => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Vertical_Interchange => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -3975,6 +4201,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED);
         let p = old
             .cbits1
@@ -4147,11 +4385,11 @@ impl context::Ctx for Context {
             ));
         }
         let n = self
-            .cbits1
-            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+            .cbits2
+            .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
         let p = old
-            .cbits1
-            .contains(flags::ContextBits1::AMAGI_STRONGHOLD_WALL_2);
+            .cbits2
+            .contains(flags::ContextBits2::AMAGI_STRONGHOLD_WALL_2);
         if n != p {
             list.push(format!(
                 "{}AMAGI_STRONGHOLD_WALL_2",
@@ -4194,6 +4432,18 @@ impl context::Ctx for Context {
         let p = old.cbits2.contains(flags::ContextBits2::BRONZE_AXE);
         if n != p {
             list.push(format!("{}BRONZE_AXE", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::BUILDING_OF_THE_SCHOOL);
+        if n != p {
+            list.push(format!(
+                "{}BUILDING_OF_THE_SCHOOL",
+                if n { "+" } else { "-" }
+            ));
         }
         let n = self.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF);
         let p = old.cbits2.contains(flags::ContextBits2::COMPANIES_LAYOFF);
@@ -4308,6 +4558,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}FAST_TRAVEL", if n { "+" } else { "-" }));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::GIGUNA_BOULDER);
+        let p = old.cbits2.contains(flags::ContextBits2::GIGUNA_BOULDER);
+        if n != p {
+            list.push(format!("{}GIGUNA_BOULDER", if n { "+" } else { "-" }));
+        }
         let n = self
             .cbits2
             .contains(flags::ContextBits2::GIGUNA_DUAL_PATH_SWITCH);
@@ -4319,6 +4574,24 @@ impl context::Ctx for Context {
                 "{}GIGUNA_DUAL_PATH_SWITCH",
                 if n { "+" } else { "-" }
             ));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_GATEWAY_BLOCK);
+        if n != p {
+            list.push(format!("{}GIGUNA_GATEWAY_BLOCK", if n { "+" } else { "-" }));
+        }
+        let n = self
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
+        let p = old
+            .cbits2
+            .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
+        if n != p {
+            list.push(format!("{}GIGUNA_GATEWAY_GATE", if n { "+" } else { "-" }));
         }
         let n = self
             .cbits2
@@ -4357,28 +4630,28 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}LEDGE_GRAB", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::LETTER_FROM_TRACE);
-        let p = old.cbits2.contains(flags::ContextBits2::LETTER_FROM_TRACE);
+        let n = self.cbits3.contains(flags::ContextBits3::LETTER_FROM_TRACE);
+        let p = old.cbits3.contains(flags::ContextBits3::LETTER_FROM_TRACE);
         if n != p {
             list.push(format!("{}LETTER_FROM_TRACE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::MAP_17_10);
-        let p = old.cbits2.contains(flags::ContextBits2::MAP_17_10);
+        let n = self.cbits3.contains(flags::ContextBits3::MAP_17_10);
+        let p = old.cbits3.contains(flags::ContextBits3::MAP_17_10);
         if n != p {
             list.push(format!("{}MAP_17_10", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::MIST_UPGRADE);
-        let p = old.cbits2.contains(flags::ContextBits2::MIST_UPGRADE);
+        let n = self.cbits3.contains(flags::ContextBits3::MIST_UPGRADE);
+        let p = old.cbits3.contains(flags::ContextBits3::MIST_UPGRADE);
         if n != p {
             list.push(format!("{}MIST_UPGRADE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::NANITE_MIST);
-        let p = old.cbits2.contains(flags::ContextBits2::NANITE_MIST);
+        let n = self.cbits3.contains(flags::ContextBits3::NANITE_MIST);
+        let p = old.cbits3.contains(flags::ContextBits3::NANITE_MIST);
         if n != p {
             list.push(format!("{}NANITE_MIST", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::POWER_MATRIX);
-        let p = old.cbits2.contains(flags::ContextBits2::POWER_MATRIX);
+        let n = self.cbits3.contains(flags::ContextBits3::POWER_MATRIX);
+        let p = old.cbits3.contains(flags::ContextBits3::POWER_MATRIX);
         if n != p {
             list.push(format!("{}POWER_MATRIX", if n { "+" } else { "-" }));
         }
@@ -4406,10 +4679,20 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}SHOCKWAVE", if n { "+" } else { "-" }));
         }
+        let n = self.cbits3.contains(flags::ContextBits3::SLINGSHOT_CHARGE);
+        let p = old.cbits3.contains(flags::ContextBits3::SLINGSHOT_CHARGE);
+        if n != p {
+            list.push(format!("{}SLINGSHOT_CHARGE", if n { "+" } else { "-" }));
+        }
         let n = self.cbits3.contains(flags::ContextBits3::SLINGSHOT_HOOK);
         let p = old.cbits3.contains(flags::ContextBits3::SLINGSHOT_HOOK);
         if n != p {
             list.push(format!("{}SLINGSHOT_HOOK", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits3.contains(flags::ContextBits3::SLINGSHOT_WEAPON);
+        let p = old.cbits3.contains(flags::ContextBits3::SLINGSHOT_WEAPON);
+        if n != p {
+            list.push(format!("{}SLINGSHOT_WEAPON", if n { "+" } else { "-" }));
         }
         let n = self.cbits3.contains(flags::ContextBits3::STATION_POWER);
         let p = old.cbits3.contains(flags::ContextBits3::STATION_POWER);
@@ -4851,6 +5134,23 @@ impl Context {
     pub fn set_giguna__west_caverns__ctx__east_susar(&mut self, val: bool) {
         self.cbits1.set(
             flags::ContextBits1::GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR,
+            val,
+        );
+    }
+    pub fn giguna__giguna_base__ctx__door_open(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__giguna_base__ctx__door_open(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN,
             val,
         );
     }

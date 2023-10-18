@@ -669,7 +669,7 @@ areas:
           jumps: 2
       exits:
         - to: Door Left
-          req: $climb and $grab
+          req: $grab and $climb
           movement: base
           jumps: 3
         - to: Door Left
@@ -788,6 +788,8 @@ areas:
 
 - name: Giguna Base
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door_open: false
   spots:
     - name: East 14
       coord: [14.95, 13.7]
@@ -871,6 +873,10 @@ areas:
         - to: Staircase Top
           req: $hover
           time: 4.2
+        - to: Below Gate
+          req: ^_door_open
+          movement: base
+          jumps_down: 2
     - name: Kari
       coord: [14.4, 15.55]
       local:
@@ -880,6 +886,10 @@ areas:
           jumps: 1
         - to: Table
           jumps_down: 1
+      exits:
+        - to: Below Gate
+          req: ^_door_open
+          movement: base
     - name: Building Entry
       coord: [14.1, 15.5]
       local:
@@ -975,6 +985,88 @@ areas:
       exits:
         - to: Helipad > East 16
           tags: [xshift]
+
+    - name: East 17
+      coord: [14.95, 16.6]
+      local:
+        - to: Lower Fork
+          jumps: 2
+      exits:
+        - to: Hard Rock > West 17
+          tags: [xshift]
+    - name: Lower Fork
+      coord: [14.75, 16.3]
+      local:
+        - to: East 17
+        - to: Switch Distance 4
+      exits:
+        - to: Below Gate
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Below Gate
+          req: $hook
+          time: 0.8  # ?
+    - name: Below Gate
+      coord: [14.55, 16.05]
+      local:
+        - to: Lower Fork
+      exits:
+        - to: Kari
+          req: ^_door_open and $grab and $climb
+          movement: base
+          jumps: 6
+        - to: Kari
+          req: ^_door_open and $hook
+          time: 1  # ?
+        - to: Middle Platform
+          req: ^_door_open and $grab and $climb
+          movement: base
+          jumps: 12
+        - to: Middle Platform
+          req: ^_door_open and $hook
+          time: 3  # ?
+    - name: Switch Distance 1
+      coord: [14.05, 16.65]
+      local:
+        - to: Switch Distance 2
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_door_open = true
+          tags: [hack]
+    - name: Switch Distance 2
+      coord: [14.1, 16.7]
+      local:
+        - to: Switch Distance 1
+          jumps: 1
+        - to: Switch Distance 3
+      actions:
+        - name: Open Door
+          req: $open and $range1
+          do: ^_door_open = true
+          tags: [hack]
+    - name: Switch Distance 3
+      coord: [14.15, 16.7]
+      local:
+        - to: Switch Distance 2
+        - to: Switch Distance 4
+      actions:
+        - name: Open Door
+          req: $open and $range2
+          do: ^_door_open = true
+          tags: [hack]
+    - name: Switch Distance 4
+      coord: [14.2, 16.7]
+      local:
+        - to: Switch Distance 3
+        - to: Lower Fork
+          jumps: 4
+      actions:
+        - name: Open Door
+          req: $open and $range3
+          do: ^_door_open = true
+          tags: [hack]
 
 - name: Building Interior
   graph_offset: [0, -0.2]
@@ -1084,7 +1176,7 @@ areas:
         - to: Ruins Top > East 7
           tags: [xshift]
         - to: Pillar
-          req: $climb and $grab
+          req: $grab and $climb
           movement: base
           jumps: 3
     - name: Way Up High
@@ -1205,7 +1297,7 @@ areas:
         - to: Platform
       exits:
         - to: Lower Ledge
-          req: $climb and $grab
+          req: $grab and $climb
           time: 2.35
     - name: Lower Ledge
       coord: [13.4, 7.4]
@@ -1997,14 +2089,71 @@ areas:
   spots:
     - name: East 17
       coord: [15.95, 16.85]
+      local:
+        - to: Rock Right
     - name: Rock Right
       coord: [15.7, 16.85]
+      local:
+        - to: East 17
+      locations:
+        - name: Shockwave Boulder
+          item: Giguna_Boulder
+          canon: Giguna_Boulder
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Rock Center
+          req: Giguna_Boulder
+          movement: base
+      hybrid:
+        - name: Enter Rock as Mist
+          item: Giguna_Boulder
+          canon: Giguna_Boulder
+          to: Rock Center
+          req: Nanite_Mist and Mist_Upgrade
+          price: 30
+          movement: mist2
     - name: Rock Center
       coord: [15.55, 16.85]
+      local:
+        - to: Rock Left
+        - to: Rock Right
+      locations:
+        - name: Tablet
+          item: Building_of_the_School
+          tags: [standing]
     - name: Rock Left
       coord: [15.4, 16.85]
+      local:
+        - to: West 17
+          jumps: 2
+      locations:
+        - name: Shockwave Boulder
+          item: Giguna_Boulder
+          canon: Giguna_Boulder
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Rock Center
+          req: Giguna_Boulder
+          movement: base
+      hybrid:
+        - name: Enter Rock as Mist
+          item: Giguna_Boulder
+          canon: Giguna_Boulder
+          to: Rock Center
+          req: Nanite_Mist and Mist_Upgrade
+          price: 30
+          movement: mist2
     - name: West 17
       coord: [15.05, 16.6]
+      local:
+        - to: Rock Left
+      exits:
+        - to: Giguna Base > East 17
+          tags: [xshift]
 
 - name: East Caverns
   on_entry: $reset_old_area(^newpos)
@@ -2027,3 +2176,217 @@ areas:
   spots:
     - name: West 18
       coord: [19.05, 17.65]
+      local:
+        - to: Passage Entry
+      exits:
+        - to: Dual Path > East 18
+    - name: Passage Entry
+      coord: [19.3, 17.8]
+      local:
+        - to: West 18
+          jumps: 1
+      exits:
+        - to: Passage Exit
+          req: ^mode == 'drone'
+          movement: base
+        - to: Door
+          req: ^_door_opened
+          movement: base
+          jumps: 2
+    - name: Passage Exit
+      coord: [19.75, 18.1]
+      local:
+        - to: Block Left
+      exits:
+        - to: Passage Entry
+          req: ^mode == 'drone'
+          movement: base
+          jumps: 3
+        - to: Left Platform
+          req: $hook
+          time: 1  # ?
+    - name: Door
+      coord: [19.6, 17.35]
+      exits:
+        - to: Passage Entry
+          req: ^_door_opened
+          movement: base
+        - to: Block Left
+          req: ^_door_opened
+          movement: base
+        - to: Left Platform
+          req: ^_door_opened
+          movement: base
+    - name: Left Platform
+      coord: [20.0, 17.7]
+      local:
+        - to: Passage Exit
+          thru: [19.9, 17.7]
+        - to: Block Left
+          thru: [19.9, 17.7]
+        - to: Block Right
+        - to: Right Platform
+          jumps: 1
+        - to: Refill Station
+      exits:
+        - to: Block Lowered
+          req: Giguna_Gateway_Block
+          movement: base
+        # TODO: slingshot+hover to the flask
+    - name: Right Platform
+      coord: [20.2, 17.65]
+      local:
+        - to: Left Platform
+        - to: Block Right
+        - to: Refill Station
+      exits:
+        - to: Far Ledge
+          req: $hover or $hook
+          movement: base
+    - name: Block Left
+      coord: [19.9, 18.2]
+      local:
+        - to: Passage Exit
+        - to: Block Right
+      locations:
+        - name: Shockwave
+          item: Giguna_Gateway_Block
+          canon: Giguna_Gateway_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Block Lowered
+          req: Giguna_Gateway_Block
+          movement: base
+    - name: Block Right
+      coord: [20.1, 18.2]
+      local:
+        - to: Block Left
+        - to: Refill Station
+      locations:
+        - name: Shockwave
+          item: Giguna_Gateway_Block
+          canon: Giguna_Gateway_Block
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Block Lowered
+          req: Giguna_Gateway_Block
+          movement: base
+    - name: Refill Station
+      coord: [20.4, 18.2]
+      local:
+        - to: Block Right
+      exits:
+        - to: Far Ledge
+          req: $hook
+          time: 1  # ?
+    - name: Far Ledge
+      coord: [20.6, 17.85]
+      local:
+        - to: Refill Station
+        - to: Block Right
+        - to: One Jump
+          jumps: 1
+      exits:
+        - to: Flask Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Flask Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Right Platform
+          req: $hook
+          time: 1.2  # ?
+    - name: One Jump
+      coord: [20.65, 17.7]
+      local:
+        - to: Far Ledge
+      actions:
+        - name: Open Door
+          req: $open and $range2
+          do: ^_door_opened = true
+          tags: [hack]
+    - name: Flask Ledge
+      coord: [20.7, 17.45]
+      local:
+        - to: Far Ledge
+        - to: Refill Station
+        - to: Block Right
+      locations:
+        - name: Item
+          item: Flask
+          tags: [flask]
+        # TODO: with boomerang?
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_door_opened = true
+          tags: [hack]
+    - name: Block Lowered
+      coord: [20.0, 18.5]
+      local:
+        - to: West 19
+        - to: Button
+      exits:
+        - to: Block Left
+          req: $grab and Giguna_Gateway_Block
+          movement: base
+          jumps: 2
+        - to: Block Right
+          req: $grab and Giguna_Gateway_Block
+          movement: base
+          jumps: 2
+        - to: Block Left
+          req: $hook and Giguna_Gateway_Block
+          time: 0.5  # ?
+        - to: Block Right
+          req: $hook and Giguna_Gateway_Block
+          time: 0.5  # ?
+    - name: West 19
+      coord: [19.05, 18.8]
+      local:
+        - to: Block Lowered
+          jumps: 2
+      exits:
+        - to: Labyrinth East > East 19
+          tags: [xshift]
+    - name: Button
+      coord: [20.55, 18.65]
+      local:
+        - to: Block Lowered
+          jumps: 2
+      locations:
+        - name: Hit Switch
+          item: Giguna_Gateway_Gate
+          req: $can_damage
+      exits:
+        - to: East 19
+          req: Giguna_Gateway_Gate
+          movement: base
+    - name: East 19
+      coord: [20.95, 18.8]
+      exits:
+        - to: Button
+          req: Giguna_Gateway_Gate
+          movement: base
+          jumps: 2
+        - to: Vertical Interchange > West 19
+          tags: [xshift]
+
+- name: Labyrinth East
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 19
+      coord: [18.95, 18.8]
+
+- name: Vertical Interchange
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 17
+      coord: [21.05, 16.3]
+    - name: West 19
+      coord: [21.05, 18.8]

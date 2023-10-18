@@ -205,6 +205,41 @@ macro_rules! helper__unlock3 {
     }};
 }
 
+/// $range1 (  )
+/// Infection_Range{2} or (Infection_Range and ^mode != 'drone')
+#[macro_export]
+macro_rules! helper__range1 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.count(Item::Infection_Range) >= 2
+            || ($ctx.has(Item::Infection_Range) && $ctx.mode() != enums::Mode::Drone))
+    }};
+}
+
+/// $range2 (  )
+/// Infection_Range{3} or (Infection_Range{2} and ^mode != 'drone')
+#[macro_export]
+macro_rules! helper__range2 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.count(Item::Infection_Range) >= 3
+            || ($ctx.count(Item::Infection_Range) >= 2 && $ctx.mode() != enums::Mode::Drone))
+    }};
+}
+
+/// $range3 (  )
+/// Infection_Range{3} and ^mode != 'drone'
+#[macro_export]
+macro_rules! helper__range3 {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.count(Item::Infection_Range) >= 3 && $ctx.mode() != enums::Mode::Drone)
+    }};
+}
+
 /// $more_refills (  )
 /// ^refills < $count(Power_Matrix)
 #[macro_export]
@@ -276,8 +311,30 @@ macro_rules! helper__block_clip_escape {
     }};
 }
 
+/// $charge (  )
+/// Slingshot_Charge and ^mode == 'drone'
+#[macro_export]
+macro_rules! helper__charge {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.has(Item::Slingshot_Charge) && $ctx.mode() == enums::Mode::Drone)
+    }};
+}
+
+/// $spin (  )
+/// Slingshot_Weapon and ^mode == 'drone'
+#[macro_export]
+macro_rules! helper__spin {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        ($ctx.has(Item::Slingshot_Weapon) && $ctx.mode() == enums::Mode::Drone)
+    }};
+}
+
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, Building_of_the_School]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr) => {{
@@ -291,17 +348,18 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Companies_Layoff)
             && $ctx.has(Item::Record_Losses)
             && $ctx.has(Item::Under_Siege)
+            && $ctx.has(Item::Building_of_the_School)
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{10}]
+/// [Flask{11}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr) => {{
         #[allow(unused_imports)]
         use $crate::items::Item;
-        $ctx.count(Item::Flask) >= 10
+        $ctx.count(Item::Flask) >= 11
     }};
 }
 
@@ -324,6 +382,34 @@ macro_rules! helper__all_weapons {
         #[allow(unused_imports)]
         use $crate::items::Item;
         $ctx.has(Item::Bronze_Axe)
+    }};
+}
+
+/// $other_items (  )
+/// [Boomerang, Power_Matrix]
+#[macro_export]
+macro_rules! helper__other_items {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Boomerang) && $ctx.has(Item::Power_Matrix)
+    }};
+}
+
+/// $all_urns (  )
+/// [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook]
+#[macro_export]
+macro_rules! helper__all_urns {
+    ($ctx:expr) => {{
+        #[allow(unused_imports)]
+        use $crate::items::Item;
+        $ctx.has(Item::Amashilama)
+            && $ctx.has(Item::Ledge_Grab)
+            && $ctx.has(Item::Infect)
+            && $ctx.has(Item::Remote_Drone)
+            && $ctx.has(Item::Shockwave)
+            && $ctx.has(Item::Wall_Climb)
+            && $ctx.has(Item::Slingshot_Hook)
     }};
 }
 

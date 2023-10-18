@@ -130,11 +130,13 @@ pub enum AreaId {
     Giguna__Giguna_Northeast,
     Giguna__Hard_Rock,
     Giguna__Helipad,
+    Giguna__Labyrinth_East,
     Giguna__Lamassu,
     Giguna__Ruins_Center,
     Giguna__Ruins_East,
     Giguna__Ruins_Top,
     Giguna__Ruins_West,
+    Giguna__Vertical_Interchange,
     Giguna__Wasteland,
     Giguna__West_Caverns,
     Giguna__West_Tower,
@@ -225,11 +227,15 @@ impl fmt::Display for AreaId {
             AreaId::Giguna__Giguna_Northeast => write!(f, "{}", "Giguna > Giguna Northeast"),
             AreaId::Giguna__Hard_Rock => write!(f, "{}", "Giguna > Hard Rock"),
             AreaId::Giguna__Helipad => write!(f, "{}", "Giguna > Helipad"),
+            AreaId::Giguna__Labyrinth_East => write!(f, "{}", "Giguna > Labyrinth East"),
             AreaId::Giguna__Lamassu => write!(f, "{}", "Giguna > Lamassu"),
             AreaId::Giguna__Ruins_Center => write!(f, "{}", "Giguna > Ruins Center"),
             AreaId::Giguna__Ruins_East => write!(f, "{}", "Giguna > Ruins East"),
             AreaId::Giguna__Ruins_Top => write!(f, "{}", "Giguna > Ruins Top"),
             AreaId::Giguna__Ruins_West => write!(f, "{}", "Giguna > Ruins West"),
+            AreaId::Giguna__Vertical_Interchange => {
+                write!(f, "{}", "Giguna > Vertical Interchange")
+            }
             AreaId::Giguna__Wasteland => write!(f, "{}", "Giguna > Wasteland"),
             AreaId::Giguna__West_Caverns => write!(f, "{}", "Giguna > West Caverns"),
             AreaId::Giguna__West_Tower => write!(f, "{}", "Giguna > West Tower"),
@@ -327,11 +333,13 @@ impl std::str::FromStr for AreaId {
             "Giguna > Giguna Northeast" => Ok(AreaId::Giguna__Giguna_Northeast),
             "Giguna > Hard Rock" => Ok(AreaId::Giguna__Hard_Rock),
             "Giguna > Helipad" => Ok(AreaId::Giguna__Helipad),
+            "Giguna > Labyrinth East" => Ok(AreaId::Giguna__Labyrinth_East),
             "Giguna > Lamassu" => Ok(AreaId::Giguna__Lamassu),
             "Giguna > Ruins Center" => Ok(AreaId::Giguna__Ruins_Center),
             "Giguna > Ruins East" => Ok(AreaId::Giguna__Ruins_East),
             "Giguna > Ruins Top" => Ok(AreaId::Giguna__Ruins_Top),
             "Giguna > Ruins West" => Ok(AreaId::Giguna__Ruins_West),
+            "Giguna > Vertical Interchange" => Ok(AreaId::Giguna__Vertical_Interchange),
             "Giguna > Wasteland" => Ok(AreaId::Giguna__Wasteland),
             "Giguna > West Caverns" => Ok(AreaId::Giguna__West_Caverns),
             "Giguna > West Tower" => Ok(AreaId::Giguna__West_Tower),
@@ -753,11 +761,29 @@ pub enum SpotId {
     Giguna__Far_Corner__East_13,
     Giguna__Far_Corner__Grass,
     Giguna__Far_Corner__South,
+    Giguna__Gateway__Block_Left,
+    Giguna__Gateway__Block_Lowered,
+    Giguna__Gateway__Block_Right,
+    Giguna__Gateway__Button,
+    Giguna__Gateway__Door,
+    Giguna__Gateway__East_19,
+    Giguna__Gateway__Far_Ledge,
+    Giguna__Gateway__Flask_Ledge,
+    Giguna__Gateway__Left_Platform,
+    Giguna__Gateway__One_Jump,
+    Giguna__Gateway__Passage_Entry,
+    Giguna__Gateway__Passage_Exit,
+    Giguna__Gateway__Refill_Station,
+    Giguna__Gateway__Right_Platform,
     Giguna__Gateway__West_18,
+    Giguna__Gateway__West_19,
+    Giguna__Giguna_Base__Below_Gate,
     Giguna__Giguna_Base__Building_Entry,
     Giguna__Giguna_Base__East_14,
+    Giguna__Giguna_Base__East_17,
     Giguna__Giguna_Base__Kari,
     Giguna__Giguna_Base__Left_Pillar,
+    Giguna__Giguna_Base__Lower_Fork,
     Giguna__Giguna_Base__Middle_Platform,
     Giguna__Giguna_Base__Right_Pillar,
     Giguna__Giguna_Base__Ruin,
@@ -765,6 +791,10 @@ pub enum SpotId {
     Giguna__Giguna_Base__Staircase_Bottom,
     Giguna__Giguna_Base__Staircase_Top,
     Giguna__Giguna_Base__Stone_Knob,
+    Giguna__Giguna_Base__Switch_Distance_1,
+    Giguna__Giguna_Base__Switch_Distance_2,
+    Giguna__Giguna_Base__Switch_Distance_3,
+    Giguna__Giguna_Base__Switch_Distance_4,
     Giguna__Giguna_Base__Table,
     Giguna__Giguna_Base__Upper_Cliff,
     Giguna__Giguna_Base__West_15,
@@ -808,6 +838,7 @@ pub enum SpotId {
     Giguna__Helipad__Tablet_Ledge,
     Giguna__Helipad__Wall_Bottom,
     Giguna__Helipad__Wall_Top,
+    Giguna__Labyrinth_East__East_19,
     Giguna__Lamassu__Broken_Pillar,
     Giguna__Lamassu__Deposit,
     Giguna__Lamassu__East_18,
@@ -870,6 +901,8 @@ pub enum SpotId {
     Giguna__Ruins_West__Save_Point,
     Giguna__Ruins_West__Upper_Ledge,
     Giguna__Ruins_West__West_7,
+    Giguna__Vertical_Interchange__West_17,
+    Giguna__Vertical_Interchange__West_19,
     Giguna__Wasteland__Bluff_by_Door,
     Giguna__Wasteland__Cache_Ledge,
     Giguna__Wasteland__Center_Plains,
@@ -1911,16 +1944,56 @@ impl fmt::Display for SpotId {
             SpotId::Giguna__Far_Corner__East_13 => write!(f, "{}", "Giguna > Far Corner > East 13"),
             SpotId::Giguna__Far_Corner__Grass => write!(f, "{}", "Giguna > Far Corner > Grass"),
             SpotId::Giguna__Far_Corner__South => write!(f, "{}", "Giguna > Far Corner > South"),
+            SpotId::Giguna__Gateway__Block_Left => write!(f, "{}", "Giguna > Gateway > Block Left"),
+            SpotId::Giguna__Gateway__Block_Lowered => {
+                write!(f, "{}", "Giguna > Gateway > Block Lowered")
+            }
+            SpotId::Giguna__Gateway__Block_Right => {
+                write!(f, "{}", "Giguna > Gateway > Block Right")
+            }
+            SpotId::Giguna__Gateway__Button => write!(f, "{}", "Giguna > Gateway > Button"),
+            SpotId::Giguna__Gateway__Door => write!(f, "{}", "Giguna > Gateway > Door"),
+            SpotId::Giguna__Gateway__East_19 => write!(f, "{}", "Giguna > Gateway > East 19"),
+            SpotId::Giguna__Gateway__Far_Ledge => write!(f, "{}", "Giguna > Gateway > Far Ledge"),
+            SpotId::Giguna__Gateway__Flask_Ledge => {
+                write!(f, "{}", "Giguna > Gateway > Flask Ledge")
+            }
+            SpotId::Giguna__Gateway__Left_Platform => {
+                write!(f, "{}", "Giguna > Gateway > Left Platform")
+            }
+            SpotId::Giguna__Gateway__One_Jump => write!(f, "{}", "Giguna > Gateway > One Jump"),
+            SpotId::Giguna__Gateway__Passage_Entry => {
+                write!(f, "{}", "Giguna > Gateway > Passage Entry")
+            }
+            SpotId::Giguna__Gateway__Passage_Exit => {
+                write!(f, "{}", "Giguna > Gateway > Passage Exit")
+            }
+            SpotId::Giguna__Gateway__Refill_Station => {
+                write!(f, "{}", "Giguna > Gateway > Refill Station")
+            }
+            SpotId::Giguna__Gateway__Right_Platform => {
+                write!(f, "{}", "Giguna > Gateway > Right Platform")
+            }
             SpotId::Giguna__Gateway__West_18 => write!(f, "{}", "Giguna > Gateway > West 18"),
+            SpotId::Giguna__Gateway__West_19 => write!(f, "{}", "Giguna > Gateway > West 19"),
+            SpotId::Giguna__Giguna_Base__Below_Gate => {
+                write!(f, "{}", "Giguna > Giguna Base > Below Gate")
+            }
             SpotId::Giguna__Giguna_Base__Building_Entry => {
                 write!(f, "{}", "Giguna > Giguna Base > Building Entry")
             }
             SpotId::Giguna__Giguna_Base__East_14 => {
                 write!(f, "{}", "Giguna > Giguna Base > East 14")
             }
+            SpotId::Giguna__Giguna_Base__East_17 => {
+                write!(f, "{}", "Giguna > Giguna Base > East 17")
+            }
             SpotId::Giguna__Giguna_Base__Kari => write!(f, "{}", "Giguna > Giguna Base > Kari"),
             SpotId::Giguna__Giguna_Base__Left_Pillar => {
                 write!(f, "{}", "Giguna > Giguna Base > Left Pillar")
+            }
+            SpotId::Giguna__Giguna_Base__Lower_Fork => {
+                write!(f, "{}", "Giguna > Giguna Base > Lower Fork")
             }
             SpotId::Giguna__Giguna_Base__Middle_Platform => {
                 write!(f, "{}", "Giguna > Giguna Base > Middle Platform")
@@ -1940,6 +2013,18 @@ impl fmt::Display for SpotId {
             }
             SpotId::Giguna__Giguna_Base__Stone_Knob => {
                 write!(f, "{}", "Giguna > Giguna Base > Stone Knob")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 1")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 2")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 3")
+            }
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => {
+                write!(f, "{}", "Giguna > Giguna Base > Switch Distance 4")
             }
             SpotId::Giguna__Giguna_Base__Table => write!(f, "{}", "Giguna > Giguna Base > Table"),
             SpotId::Giguna__Giguna_Base__Upper_Cliff => {
@@ -2046,6 +2131,9 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Giguna > Helipad > Wall Bottom")
             }
             SpotId::Giguna__Helipad__Wall_Top => write!(f, "{}", "Giguna > Helipad > Wall Top"),
+            SpotId::Giguna__Labyrinth_East__East_19 => {
+                write!(f, "{}", "Giguna > Labyrinth East > East 19")
+            }
             SpotId::Giguna__Lamassu__Broken_Pillar => {
                 write!(f, "{}", "Giguna > Lamassu > Broken Pillar")
             }
@@ -2186,6 +2274,12 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Giguna > Ruins West > Upper Ledge")
             }
             SpotId::Giguna__Ruins_West__West_7 => write!(f, "{}", "Giguna > Ruins West > West 7"),
+            SpotId::Giguna__Vertical_Interchange__West_17 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > West 17")
+            }
+            SpotId::Giguna__Vertical_Interchange__West_19 => {
+                write!(f, "{}", "Giguna > Vertical Interchange > West 19")
+            }
             SpotId::Giguna__Wasteland__Bluff_by_Door => {
                 write!(f, "{}", "Giguna > Wasteland > Bluff by Door")
             }
@@ -3321,13 +3415,31 @@ impl std::str::FromStr for SpotId {
             "Giguna > Far Corner > East 13" => Ok(SpotId::Giguna__Far_Corner__East_13),
             "Giguna > Far Corner > Grass" => Ok(SpotId::Giguna__Far_Corner__Grass),
             "Giguna > Far Corner > South" => Ok(SpotId::Giguna__Far_Corner__South),
+            "Giguna > Gateway > Block Left" => Ok(SpotId::Giguna__Gateway__Block_Left),
+            "Giguna > Gateway > Block Lowered" => Ok(SpotId::Giguna__Gateway__Block_Lowered),
+            "Giguna > Gateway > Block Right" => Ok(SpotId::Giguna__Gateway__Block_Right),
+            "Giguna > Gateway > Button" => Ok(SpotId::Giguna__Gateway__Button),
+            "Giguna > Gateway > Door" => Ok(SpotId::Giguna__Gateway__Door),
+            "Giguna > Gateway > East 19" => Ok(SpotId::Giguna__Gateway__East_19),
+            "Giguna > Gateway > Far Ledge" => Ok(SpotId::Giguna__Gateway__Far_Ledge),
+            "Giguna > Gateway > Flask Ledge" => Ok(SpotId::Giguna__Gateway__Flask_Ledge),
+            "Giguna > Gateway > Left Platform" => Ok(SpotId::Giguna__Gateway__Left_Platform),
+            "Giguna > Gateway > One Jump" => Ok(SpotId::Giguna__Gateway__One_Jump),
+            "Giguna > Gateway > Passage Entry" => Ok(SpotId::Giguna__Gateway__Passage_Entry),
+            "Giguna > Gateway > Passage Exit" => Ok(SpotId::Giguna__Gateway__Passage_Exit),
+            "Giguna > Gateway > Refill Station" => Ok(SpotId::Giguna__Gateway__Refill_Station),
+            "Giguna > Gateway > Right Platform" => Ok(SpotId::Giguna__Gateway__Right_Platform),
             "Giguna > Gateway > West 18" => Ok(SpotId::Giguna__Gateway__West_18),
+            "Giguna > Gateway > West 19" => Ok(SpotId::Giguna__Gateway__West_19),
+            "Giguna > Giguna Base > Below Gate" => Ok(SpotId::Giguna__Giguna_Base__Below_Gate),
             "Giguna > Giguna Base > Building Entry" => {
                 Ok(SpotId::Giguna__Giguna_Base__Building_Entry)
             }
             "Giguna > Giguna Base > East 14" => Ok(SpotId::Giguna__Giguna_Base__East_14),
+            "Giguna > Giguna Base > East 17" => Ok(SpotId::Giguna__Giguna_Base__East_17),
             "Giguna > Giguna Base > Kari" => Ok(SpotId::Giguna__Giguna_Base__Kari),
             "Giguna > Giguna Base > Left Pillar" => Ok(SpotId::Giguna__Giguna_Base__Left_Pillar),
+            "Giguna > Giguna Base > Lower Fork" => Ok(SpotId::Giguna__Giguna_Base__Lower_Fork),
             "Giguna > Giguna Base > Middle Platform" => {
                 Ok(SpotId::Giguna__Giguna_Base__Middle_Platform)
             }
@@ -3341,6 +3453,18 @@ impl std::str::FromStr for SpotId {
                 Ok(SpotId::Giguna__Giguna_Base__Staircase_Top)
             }
             "Giguna > Giguna Base > Stone Knob" => Ok(SpotId::Giguna__Giguna_Base__Stone_Knob),
+            "Giguna > Giguna Base > Switch Distance 1" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_1)
+            }
+            "Giguna > Giguna Base > Switch Distance 2" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_2)
+            }
+            "Giguna > Giguna Base > Switch Distance 3" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_3)
+            }
+            "Giguna > Giguna Base > Switch Distance 4" => {
+                Ok(SpotId::Giguna__Giguna_Base__Switch_Distance_4)
+            }
             "Giguna > Giguna Base > Table" => Ok(SpotId::Giguna__Giguna_Base__Table),
             "Giguna > Giguna Base > Upper Cliff" => Ok(SpotId::Giguna__Giguna_Base__Upper_Cliff),
             "Giguna > Giguna Base > West 15" => Ok(SpotId::Giguna__Giguna_Base__West_15),
@@ -3402,6 +3526,7 @@ impl std::str::FromStr for SpotId {
             "Giguna > Helipad > Tablet Ledge" => Ok(SpotId::Giguna__Helipad__Tablet_Ledge),
             "Giguna > Helipad > Wall Bottom" => Ok(SpotId::Giguna__Helipad__Wall_Bottom),
             "Giguna > Helipad > Wall Top" => Ok(SpotId::Giguna__Helipad__Wall_Top),
+            "Giguna > Labyrinth East > East 19" => Ok(SpotId::Giguna__Labyrinth_East__East_19),
             "Giguna > Lamassu > Broken Pillar" => Ok(SpotId::Giguna__Lamassu__Broken_Pillar),
             "Giguna > Lamassu > Deposit" => Ok(SpotId::Giguna__Lamassu__Deposit),
             "Giguna > Lamassu > East 18" => Ok(SpotId::Giguna__Lamassu__East_18),
@@ -3484,6 +3609,12 @@ impl std::str::FromStr for SpotId {
             "Giguna > Ruins West > Save Point" => Ok(SpotId::Giguna__Ruins_West__Save_Point),
             "Giguna > Ruins West > Upper Ledge" => Ok(SpotId::Giguna__Ruins_West__Upper_Ledge),
             "Giguna > Ruins West > West 7" => Ok(SpotId::Giguna__Ruins_West__West_7),
+            "Giguna > Vertical Interchange > West 17" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__West_17)
+            }
+            "Giguna > Vertical Interchange > West 19" => {
+                Ok(SpotId::Giguna__Vertical_Interchange__West_19)
+            }
             "Giguna > Wasteland > Bluff by Door" => Ok(SpotId::Giguna__Wasteland__Bluff_by_Door),
             "Giguna > Wasteland > Cache Ledge" => Ok(SpotId::Giguna__Wasteland__Cache_Ledge),
             "Giguna > Wasteland > Center Plains" => Ok(SpotId::Giguna__Wasteland__Center_Plains),
@@ -3944,6 +4075,10 @@ pub enum LocationId {
     Giguna__Dual_Path__Right_Switch__Hit_Switch,
     Giguna__Dual_Path__Wall_Secret__Health,
     Giguna__Far_Corner__Grass__Obscured_Item,
+    Giguna__Gateway__Block_Left__Shockwave,
+    Giguna__Gateway__Block_Right__Shockwave,
+    Giguna__Gateway__Button__Hit_Switch,
+    Giguna__Gateway__Flask_Ledge__Item,
     Giguna__Giguna_Base__Ruin__Item,
     Giguna__Giguna_Base__Table__News,
     Giguna__Giguna_Northeast__Door__Remote_Flask,
@@ -3951,6 +4086,11 @@ pub enum LocationId {
     Giguna__Giguna_Northeast__Gate_Right__Remote_Button,
     Giguna__Giguna_Northeast__Save_Point__Seen,
     Giguna__Giguna_Northeast__Vault__Item,
+    Giguna__Hard_Rock__Rock_Center__Tablet,
+    Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
+    Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
     Giguna__Helipad__Tablet_Ledge__Tablet,
     Giguna__Lamassu__Deposit__Flask,
     Giguna__Ruins_Center__Tablet__Item,
@@ -4256,6 +4396,18 @@ impl fmt::Display for LocationId {
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
                 write!(f, "{}", "Giguna > Far Corner > Grass > Obscured Item")
             }
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
+                write!(f, "{}", "Giguna > Gateway > Block Left > Shockwave")
+            }
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
+                write!(f, "{}", "Giguna > Gateway > Block Right > Shockwave")
+            }
+            LocationId::Giguna__Gateway__Button__Hit_Switch => {
+                write!(f, "{}", "Giguna > Gateway > Button > Hit Switch")
+            }
+            LocationId::Giguna__Gateway__Flask_Ledge__Item => {
+                write!(f, "{}", "Giguna > Gateway > Flask Ledge > Item")
+            }
             LocationId::Giguna__Giguna_Base__Ruin__Item => {
                 write!(f, "{}", "Giguna > Giguna Base > Ruin > Item")
             }
@@ -4281,6 +4433,29 @@ impl fmt::Display for LocationId {
             LocationId::Giguna__Giguna_Northeast__Vault__Item => {
                 write!(f, "{}", "Giguna > Giguna Northeast > Vault > Item")
             }
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
+                write!(f, "{}", "Giguna > Hard Rock > Rock Center > Tablet")
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"
+            ),
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Left > Shockwave Boulder"
+            ),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"
+            ),
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => write!(
+                f,
+                "{}",
+                "Giguna > Hard Rock > Rock Right > Shockwave Boulder"
+            ),
             LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
                 write!(f, "{}", "Giguna > Helipad > Tablet Ledge > Tablet")
             }
@@ -4697,6 +4872,18 @@ impl std::str::FromStr for LocationId {
             "Giguna > Far Corner > Grass > Obscured Item" => {
                 Ok(LocationId::Giguna__Far_Corner__Grass__Obscured_Item)
             }
+            "Giguna > Gateway > Block Left > Shockwave" => {
+                Ok(LocationId::Giguna__Gateway__Block_Left__Shockwave)
+            }
+            "Giguna > Gateway > Block Right > Shockwave" => {
+                Ok(LocationId::Giguna__Gateway__Block_Right__Shockwave)
+            }
+            "Giguna > Gateway > Button > Hit Switch" => {
+                Ok(LocationId::Giguna__Gateway__Button__Hit_Switch)
+            }
+            "Giguna > Gateway > Flask Ledge > Item" => {
+                Ok(LocationId::Giguna__Gateway__Flask_Ledge__Item)
+            }
             "Giguna > Giguna Base > Ruin > Item" => Ok(LocationId::Giguna__Giguna_Base__Ruin__Item),
             "Giguna > Giguna Base > Table > News" => {
                 Ok(LocationId::Giguna__Giguna_Base__Table__News)
@@ -4715,6 +4902,21 @@ impl std::str::FromStr for LocationId {
             }
             "Giguna > Giguna Northeast > Vault > Item" => {
                 Ok(LocationId::Giguna__Giguna_Northeast__Vault__Item)
+            }
+            "Giguna > Hard Rock > Rock Center > Tablet" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Center__Tablet)
+            }
+            "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist)
+            }
+            "Giguna > Hard Rock > Rock Left > Shockwave Boulder" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder)
+            }
+            "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist)
+            }
+            "Giguna > Hard Rock > Rock Right > Shockwave Boulder" => {
+                Ok(LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder)
             }
             "Giguna > Helipad > Tablet Ledge > Tablet" => {
                 Ok(LocationId::Giguna__Helipad__Tablet_Ledge__Tablet)
@@ -5200,9 +5402,42 @@ pub enum ExitId {
     Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1,
     Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1,
     Giguna__Far_Corner__South__ex__Helipad__North_1,
+    Giguna__Gateway__Block_Left__ex__Block_Lowered_1,
+    Giguna__Gateway__Block_Lowered__ex__Block_Left_1,
+    Giguna__Gateway__Block_Lowered__ex__Block_Left_2,
+    Giguna__Gateway__Block_Lowered__ex__Block_Right_1,
+    Giguna__Gateway__Block_Lowered__ex__Block_Right_2,
+    Giguna__Gateway__Block_Right__ex__Block_Lowered_1,
+    Giguna__Gateway__Button__ex__East_19_1,
+    Giguna__Gateway__Door__ex__Block_Left_1,
+    Giguna__Gateway__Door__ex__Left_Platform_1,
+    Giguna__Gateway__Door__ex__Passage_Entry_1,
+    Giguna__Gateway__East_19__ex__Button_1,
+    Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1,
+    Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1,
+    Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2,
+    Giguna__Gateway__Far_Ledge__ex__Right_Platform_1,
+    Giguna__Gateway__Left_Platform__ex__Block_Lowered_1,
+    Giguna__Gateway__Passage_Entry__ex__Door_1,
+    Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1,
+    Giguna__Gateway__Passage_Exit__ex__Left_Platform_1,
+    Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1,
+    Giguna__Gateway__Refill_Station__ex__Far_Ledge_1,
+    Giguna__Gateway__Right_Platform__ex__Far_Ledge_1,
+    Giguna__Gateway__West_18__ex__Dual_Path__East_18_1,
+    Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1,
+    Giguna__Giguna_Base__Below_Gate__ex__Kari_1,
+    Giguna__Giguna_Base__Below_Gate__ex__Kari_2,
+    Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1,
+    Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2,
     Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1,
     Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1,
+    Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1,
+    Giguna__Giguna_Base__Kari__ex__Below_Gate_1,
     Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1,
+    Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1,
+    Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2,
+    Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1,
     Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1,
     Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1,
     Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2,
@@ -5233,6 +5468,11 @@ pub enum ExitId {
     Giguna__Giguna_Northeast__Vault__ex__Door_2,
     Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1,
     Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1,
+    Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1,
+    Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+    Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1,
+    Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1,
     Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1,
     Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1,
     Giguna__Helipad__East_18__ex__Lamassu__West_18_1,
@@ -5755,9 +5995,42 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1 => write!(f, "{}", "Giguna > Dual Path > West Gate NE ==> West Gate (1)"),
             ExitId::Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1 => write!(f, "{}", "Giguna > Dual Path > West Gate NW ==> West Gate (1)"),
             ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1 => write!(f, "{}", "Giguna > Far Corner > South ==> Helipad > North (1)"),
+            ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => write!(f, "{}", "Giguna > Gateway > Block Left ==> Block Lowered (1)"),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => write!(f, "{}", "Giguna > Gateway > Block Lowered ==> Block Left (1)"),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_2 => write!(f, "{}", "Giguna > Gateway > Block Lowered ==> Block Left (2)"),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => write!(f, "{}", "Giguna > Gateway > Block Lowered ==> Block Right (1)"),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2 => write!(f, "{}", "Giguna > Gateway > Block Lowered ==> Block Right (2)"),
+            ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1 => write!(f, "{}", "Giguna > Gateway > Block Right ==> Block Lowered (1)"),
+            ExitId::Giguna__Gateway__Button__ex__East_19_1 => write!(f, "{}", "Giguna > Gateway > Button ==> East 19 (1)"),
+            ExitId::Giguna__Gateway__Door__ex__Block_Left_1 => write!(f, "{}", "Giguna > Gateway > Door ==> Block Left (1)"),
+            ExitId::Giguna__Gateway__Door__ex__Left_Platform_1 => write!(f, "{}", "Giguna > Gateway > Door ==> Left Platform (1)"),
+            ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1 => write!(f, "{}", "Giguna > Gateway > Door ==> Passage Entry (1)"),
+            ExitId::Giguna__Gateway__East_19__ex__Button_1 => write!(f, "{}", "Giguna > Gateway > East 19 ==> Button (1)"),
+            ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1 => write!(f, "{}", "Giguna > Gateway > East 19 ==> Vertical Interchange > West 19 (1)"),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 => write!(f, "{}", "Giguna > Gateway > Far Ledge ==> Flask Ledge (1)"),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2 => write!(f, "{}", "Giguna > Gateway > Far Ledge ==> Flask Ledge (2)"),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1 => write!(f, "{}", "Giguna > Gateway > Far Ledge ==> Right Platform (1)"),
+            ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1 => write!(f, "{}", "Giguna > Gateway > Left Platform ==> Block Lowered (1)"),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1 => write!(f, "{}", "Giguna > Gateway > Passage Entry ==> Door (1)"),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 => write!(f, "{}", "Giguna > Gateway > Passage Entry ==> Passage Exit (1)"),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1 => write!(f, "{}", "Giguna > Gateway > Passage Exit ==> Left Platform (1)"),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 => write!(f, "{}", "Giguna > Gateway > Passage Exit ==> Passage Entry (1)"),
+            ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1 => write!(f, "{}", "Giguna > Gateway > Refill Station ==> Far Ledge (1)"),
+            ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1 => write!(f, "{}", "Giguna > Gateway > Right Platform ==> Far Ledge (1)"),
+            ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => write!(f, "{}", "Giguna > Gateway > West 18 ==> Dual Path > East 18 (1)"),
+            ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1 => write!(f, "{}", "Giguna > Gateway > West 19 ==> Labyrinth East > East 19 (1)"),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Kari (1)"),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Kari (2)"),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Middle Platform (1)"),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => write!(f, "{}", "Giguna > Giguna Base > Below Gate ==> Middle Platform (2)"),
             ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => write!(f, "{}", "Giguna > Giguna Base > Building Entry ==> Building Interior > Entry (1)"),
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => write!(f, "{}", "Giguna > Giguna Base > East 14 ==> Wasteland > West 14 (1)"),
+            ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => write!(f, "{}", "Giguna > Giguna Base > East 17 ==> Hard Rock > West 17 (1)"),
+            ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => write!(f, "{}", "Giguna > Giguna Base > Kari ==> Below Gate (1)"),
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => write!(f, "{}", "Giguna > Giguna Base > Left Pillar ==> Right Pillar (1)"),
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => write!(f, "{}", "Giguna > Giguna Base > Lower Fork ==> Below Gate (1)"),
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2 => write!(f, "{}", "Giguna > Giguna Base > Lower Fork ==> Below Gate (2)"),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => write!(f, "{}", "Giguna > Giguna Base > Middle Platform ==> Below Gate (1)"),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => write!(f, "{}", "Giguna > Giguna Base > Middle Platform ==> Staircase Top (1)"),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => write!(f, "{}", "Giguna > Giguna Base > Middle Platform ==> Stone Knob (1)"),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2 => write!(f, "{}", "Giguna > Giguna Base > Middle Platform ==> Stone Knob (2)"),
@@ -5788,6 +6061,11 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2 => write!(f, "{}", "Giguna > Giguna Northeast > Vault ==> Door (2)"),
             ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1 => write!(f, "{}", "Giguna > Giguna Northeast > West 10 ==> Carnelian > East 10 (1)"),
             ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1 => write!(f, "{}", "Giguna > Giguna Northeast > West 9 ==> Ruins East > East 9 (1)"),
+            ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"),
+            ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => write!(f, "{}", "Giguna > Hard Rock > Rock Left ==> Rock Center (1)"),
+            ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"),
+            ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => write!(f, "{}", "Giguna > Hard Rock > Rock Right ==> Rock Center (1)"),
+            ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1 => write!(f, "{}", "Giguna > Hard Rock > West 17 ==> Giguna Base > East 17 (1)"),
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => write!(f, "{}", "Giguna > Helipad > East 15 ==> Giguna Base > West 15 (1)"),
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => write!(f, "{}", "Giguna > Helipad > East 16 ==> Giguna Base > West 16 (1)"),
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => write!(f, "{}", "Giguna > Helipad > East 18 ==> Lamassu > West 18 (1)"),
@@ -6315,9 +6593,42 @@ impl std::str::FromStr for ExitId {
             "Giguna > Dual Path > West Gate NE ==> West Gate (1)" => Ok(ExitId::Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1),
             "Giguna > Dual Path > West Gate NW ==> West Gate (1)" => Ok(ExitId::Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1),
             "Giguna > Far Corner > South ==> Helipad > North (1)" => Ok(ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1),
+            "Giguna > Gateway > Block Left ==> Block Lowered (1)" => Ok(ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1),
+            "Giguna > Gateway > Block Lowered ==> Block Left (1)" => Ok(ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1),
+            "Giguna > Gateway > Block Lowered ==> Block Left (2)" => Ok(ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_2),
+            "Giguna > Gateway > Block Lowered ==> Block Right (1)" => Ok(ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1),
+            "Giguna > Gateway > Block Lowered ==> Block Right (2)" => Ok(ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2),
+            "Giguna > Gateway > Block Right ==> Block Lowered (1)" => Ok(ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1),
+            "Giguna > Gateway > Button ==> East 19 (1)" => Ok(ExitId::Giguna__Gateway__Button__ex__East_19_1),
+            "Giguna > Gateway > Door ==> Block Left (1)" => Ok(ExitId::Giguna__Gateway__Door__ex__Block_Left_1),
+            "Giguna > Gateway > Door ==> Left Platform (1)" => Ok(ExitId::Giguna__Gateway__Door__ex__Left_Platform_1),
+            "Giguna > Gateway > Door ==> Passage Entry (1)" => Ok(ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1),
+            "Giguna > Gateway > East 19 ==> Button (1)" => Ok(ExitId::Giguna__Gateway__East_19__ex__Button_1),
+            "Giguna > Gateway > East 19 ==> Vertical Interchange > West 19 (1)" => Ok(ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1),
+            "Giguna > Gateway > Far Ledge ==> Flask Ledge (1)" => Ok(ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1),
+            "Giguna > Gateway > Far Ledge ==> Flask Ledge (2)" => Ok(ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2),
+            "Giguna > Gateway > Far Ledge ==> Right Platform (1)" => Ok(ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1),
+            "Giguna > Gateway > Left Platform ==> Block Lowered (1)" => Ok(ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1),
+            "Giguna > Gateway > Passage Entry ==> Door (1)" => Ok(ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1),
+            "Giguna > Gateway > Passage Entry ==> Passage Exit (1)" => Ok(ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1),
+            "Giguna > Gateway > Passage Exit ==> Left Platform (1)" => Ok(ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1),
+            "Giguna > Gateway > Passage Exit ==> Passage Entry (1)" => Ok(ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1),
+            "Giguna > Gateway > Refill Station ==> Far Ledge (1)" => Ok(ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1),
+            "Giguna > Gateway > Right Platform ==> Far Ledge (1)" => Ok(ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1),
+            "Giguna > Gateway > West 18 ==> Dual Path > East 18 (1)" => Ok(ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1),
+            "Giguna > Gateway > West 19 ==> Labyrinth East > East 19 (1)" => Ok(ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1),
+            "Giguna > Giguna Base > Below Gate ==> Kari (1)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1),
+            "Giguna > Giguna Base > Below Gate ==> Kari (2)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2),
+            "Giguna > Giguna Base > Below Gate ==> Middle Platform (1)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1),
+            "Giguna > Giguna Base > Below Gate ==> Middle Platform (2)" => Ok(ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2),
             "Giguna > Giguna Base > Building Entry ==> Building Interior > Entry (1)" => Ok(ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1),
             "Giguna > Giguna Base > East 14 ==> Wasteland > West 14 (1)" => Ok(ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1),
+            "Giguna > Giguna Base > East 17 ==> Hard Rock > West 17 (1)" => Ok(ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1),
+            "Giguna > Giguna Base > Kari ==> Below Gate (1)" => Ok(ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1),
             "Giguna > Giguna Base > Left Pillar ==> Right Pillar (1)" => Ok(ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1),
+            "Giguna > Giguna Base > Lower Fork ==> Below Gate (1)" => Ok(ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1),
+            "Giguna > Giguna Base > Lower Fork ==> Below Gate (2)" => Ok(ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2),
+            "Giguna > Giguna Base > Middle Platform ==> Below Gate (1)" => Ok(ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1),
             "Giguna > Giguna Base > Middle Platform ==> Staircase Top (1)" => Ok(ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1),
             "Giguna > Giguna Base > Middle Platform ==> Stone Knob (1)" => Ok(ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1),
             "Giguna > Giguna Base > Middle Platform ==> Stone Knob (2)" => Ok(ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2),
@@ -6348,6 +6659,11 @@ impl std::str::FromStr for ExitId {
             "Giguna > Giguna Northeast > Vault ==> Door (2)" => Ok(ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2),
             "Giguna > Giguna Northeast > West 10 ==> Carnelian > East 10 (1)" => Ok(ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1),
             "Giguna > Giguna Northeast > West 9 ==> Ruins East > East 9 (1)" => Ok(ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1),
+            "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => Ok(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
+            "Giguna > Hard Rock > Rock Left ==> Rock Center (1)" => Ok(ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1),
+            "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => Ok(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
+            "Giguna > Hard Rock > Rock Right ==> Rock Center (1)" => Ok(ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1),
+            "Giguna > Hard Rock > West 17 ==> Giguna Base > East 17 (1)" => Ok(ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1),
             "Giguna > Helipad > East 15 ==> Giguna Base > West 15 (1)" => Ok(ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1),
             "Giguna > Helipad > East 16 ==> Giguna Base > West 16 (1)" => Ok(ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1),
             "Giguna > Helipad > East 18 ==> Lamassu > West 18 (1)" => Ok(ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1),
@@ -6618,13 +6934,20 @@ pub enum ActionId {
     Ebih__Vertical_Interchange__West_13__Open_Door,
     Ebih__Waterfall__Below_Left_Switch__Open_Door,
     Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone,
+    Ebih__Waterfall__West_8__Open_Door,
     Giguna__Carnelian__Lower_Susar__Caught,
     Giguna__Carnelian__Lower_Susar__Hack,
     Giguna__Carnelian__Switch__Open_Door,
     Giguna__Carnelian__Upper_Susar__Caught,
     Giguna__Carnelian__Upper_Susar__Hack,
+    Giguna__Gateway__Flask_Ledge__Open_Door,
+    Giguna__Gateway__One_Jump__Open_Door,
     Giguna__Giguna_Base__Save_Point__Save,
     Giguna__Giguna_Base__Stone_Knob__Throw_Drone,
+    Giguna__Giguna_Base__Switch_Distance_1__Open_Door,
+    Giguna__Giguna_Base__Switch_Distance_2__Open_Door,
+    Giguna__Giguna_Base__Switch_Distance_3__Open_Door,
+    Giguna__Giguna_Base__Switch_Distance_4__Open_Door,
     Giguna__Giguna_Northeast__Gate_Left__Throw_Drone,
     Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar,
     Giguna__Giguna_Northeast__Save_Point__Save,
@@ -6745,6 +7068,9 @@ impl fmt::Display for ActionId {
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
                 write!(f, "{}", "Ebih > Waterfall > Ledge Below Hole > Throw Drone")
             }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => {
+                write!(f, "{}", "Ebih > Waterfall > West 8 > Open Door")
+            }
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
                 write!(f, "{}", "Giguna > Carnelian > Lower Susar > Caught")
             }
@@ -6760,12 +7086,38 @@ impl fmt::Display for ActionId {
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                 write!(f, "{}", "Giguna > Carnelian > Upper Susar > Hack")
             }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                write!(f, "{}", "Giguna > Gateway > Flask Ledge > Open Door")
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                write!(f, "{}", "Giguna > Gateway > One Jump > Open Door")
+            }
             ActionId::Giguna__Giguna_Base__Save_Point__Save => {
                 write!(f, "{}", "Giguna > Giguna Base > Save Point > Save")
             }
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                 write!(f, "{}", "Giguna > Giguna Base > Stone Knob > Throw Drone")
             }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 1 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 2 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 3 > Open Door"
+            ),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => write!(
+                f,
+                "{}",
+                "Giguna > Giguna Base > Switch Distance 4 > Open Door"
+            ),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => write!(
                 f,
                 "{}",
@@ -6925,6 +7277,9 @@ impl std::str::FromStr for ActionId {
             "Ebih > Waterfall > Ledge Below Hole > Throw Drone" => {
                 Ok(ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone)
             }
+            "Ebih > Waterfall > West 8 > Open Door" => {
+                Ok(ActionId::Ebih__Waterfall__West_8__Open_Door)
+            }
             "Giguna > Carnelian > Lower Susar > Caught" => {
                 Ok(ActionId::Giguna__Carnelian__Lower_Susar__Caught)
             }
@@ -6940,11 +7295,29 @@ impl std::str::FromStr for ActionId {
             "Giguna > Carnelian > Upper Susar > Hack" => {
                 Ok(ActionId::Giguna__Carnelian__Upper_Susar__Hack)
             }
+            "Giguna > Gateway > Flask Ledge > Open Door" => {
+                Ok(ActionId::Giguna__Gateway__Flask_Ledge__Open_Door)
+            }
+            "Giguna > Gateway > One Jump > Open Door" => {
+                Ok(ActionId::Giguna__Gateway__One_Jump__Open_Door)
+            }
             "Giguna > Giguna Base > Save Point > Save" => {
                 Ok(ActionId::Giguna__Giguna_Base__Save_Point__Save)
             }
             "Giguna > Giguna Base > Stone Knob > Throw Drone" => {
                 Ok(ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone)
+            }
+            "Giguna > Giguna Base > Switch Distance 1 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door)
+            }
+            "Giguna > Giguna Base > Switch Distance 2 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door)
+            }
+            "Giguna > Giguna Base > Switch Distance 3 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door)
+            }
+            "Giguna > Giguna Base > Switch Distance 4 > Open Door" => {
+                Ok(ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door)
             }
             "Giguna > Giguna Northeast > Gate Left > Throw Drone" => {
                 Ok(ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone)
@@ -7057,6 +7430,8 @@ pub enum CanonId {
     Ebih_Wasteland_Passage_H,
     Giguna_Top_Flask,
     Giguna_Dual_Path_Switch,
+    Giguna_Boulder,
+    Giguna_Gateway_Block,
     Ledge_Grab,
 }
 impl fmt::Display for CanonId {
@@ -7088,6 +7463,8 @@ impl fmt::Display for CanonId {
             CanonId::Ebih_Wasteland_Passage_H => write!(f, "{}", "Ebih_Wasteland_Passage_H"),
             CanonId::Giguna_Top_Flask => write!(f, "{}", "Giguna_Top_Flask"),
             CanonId::Giguna_Dual_Path_Switch => write!(f, "{}", "Giguna_Dual_Path_Switch"),
+            CanonId::Giguna_Boulder => write!(f, "{}", "Giguna_Boulder"),
+            CanonId::Giguna_Gateway_Block => write!(f, "{}", "Giguna_Gateway_Block"),
             CanonId::Ledge_Grab => write!(f, "{}", "Ledge_Grab"),
         }
     }
@@ -7121,6 +7498,8 @@ impl std::str::FromStr for CanonId {
             "Ebih_Wasteland_Passage_H" => Ok(CanonId::Ebih_Wasteland_Passage_H),
             "Giguna_Top_Flask" => Ok(CanonId::Giguna_Top_Flask),
             "Giguna_Dual_Path_Switch" => Ok(CanonId::Giguna_Dual_Path_Switch),
+            "Giguna_Boulder" => Ok(CanonId::Giguna_Boulder),
+            "Giguna_Gateway_Block" => Ok(CanonId::Giguna_Gateway_Block),
             "Ledge_Grab" => Ok(CanonId::Ledge_Grab),
             _ => Err(format!("Could not recognize as a CanonId: {}", s)),
         }
@@ -7706,7 +8085,14 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Giguna_Base__Staircase_Bottom
         | SpotId::Giguna__Giguna_Base__Table
         | SpotId::Giguna__Giguna_Base__Save_Point
-        | SpotId::Giguna__Giguna_Base__West_16 => AreaId::Giguna__Giguna_Base,
+        | SpotId::Giguna__Giguna_Base__West_16
+        | SpotId::Giguna__Giguna_Base__East_17
+        | SpotId::Giguna__Giguna_Base__Lower_Fork
+        | SpotId::Giguna__Giguna_Base__Below_Gate
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_1
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_2
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_3
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_4 => AreaId::Giguna__Giguna_Base,
         SpotId::Giguna__Building_Interior__Entry | SpotId::Giguna__Building_Interior__Bookshelf => {
             AreaId::Giguna__Building_Interior
         }
@@ -7831,7 +8217,25 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Giguna__East_Caverns__West_14 | SpotId::Giguna__East_Caverns__West_17 => {
             AreaId::Giguna__East_Caverns
         }
-        SpotId::Giguna__Gateway__West_18 => AreaId::Giguna__Gateway,
+        SpotId::Giguna__Gateway__West_18
+        | SpotId::Giguna__Gateway__Passage_Entry
+        | SpotId::Giguna__Gateway__Passage_Exit
+        | SpotId::Giguna__Gateway__Door
+        | SpotId::Giguna__Gateway__Left_Platform
+        | SpotId::Giguna__Gateway__Right_Platform
+        | SpotId::Giguna__Gateway__Block_Left
+        | SpotId::Giguna__Gateway__Block_Right
+        | SpotId::Giguna__Gateway__Refill_Station
+        | SpotId::Giguna__Gateway__Far_Ledge
+        | SpotId::Giguna__Gateway__One_Jump
+        | SpotId::Giguna__Gateway__Flask_Ledge
+        | SpotId::Giguna__Gateway__Block_Lowered
+        | SpotId::Giguna__Gateway__West_19
+        | SpotId::Giguna__Gateway__Button
+        | SpotId::Giguna__Gateway__East_19 => AreaId::Giguna__Gateway,
+        SpotId::Giguna__Labyrinth_East__East_19 => AreaId::Giguna__Labyrinth_East,
+        SpotId::Giguna__Vertical_Interchange__West_17
+        | SpotId::Giguna__Vertical_Interchange__West_19 => AreaId::Giguna__Vertical_Interchange,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             AreaId::Glacier__Dock_Elevator
         }
@@ -8425,7 +8829,14 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Giguna_Base__Staircase_Bottom
         | SpotId::Giguna__Giguna_Base__Table
         | SpotId::Giguna__Giguna_Base__Save_Point
-        | SpotId::Giguna__Giguna_Base__West_16 => RegionId::Giguna,
+        | SpotId::Giguna__Giguna_Base__West_16
+        | SpotId::Giguna__Giguna_Base__East_17
+        | SpotId::Giguna__Giguna_Base__Lower_Fork
+        | SpotId::Giguna__Giguna_Base__Below_Gate
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_1
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_2
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_3
+        | SpotId::Giguna__Giguna_Base__Switch_Distance_4 => RegionId::Giguna,
         SpotId::Giguna__Building_Interior__Entry | SpotId::Giguna__Building_Interior__Bookshelf => {
             RegionId::Giguna
         }
@@ -8550,7 +8961,25 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Giguna__East_Caverns__West_14 | SpotId::Giguna__East_Caverns__West_17 => {
             RegionId::Giguna
         }
-        SpotId::Giguna__Gateway__West_18 => RegionId::Giguna,
+        SpotId::Giguna__Gateway__West_18
+        | SpotId::Giguna__Gateway__Passage_Entry
+        | SpotId::Giguna__Gateway__Passage_Exit
+        | SpotId::Giguna__Gateway__Door
+        | SpotId::Giguna__Gateway__Left_Platform
+        | SpotId::Giguna__Gateway__Right_Platform
+        | SpotId::Giguna__Gateway__Block_Left
+        | SpotId::Giguna__Gateway__Block_Right
+        | SpotId::Giguna__Gateway__Refill_Station
+        | SpotId::Giguna__Gateway__Far_Ledge
+        | SpotId::Giguna__Gateway__One_Jump
+        | SpotId::Giguna__Gateway__Flask_Ledge
+        | SpotId::Giguna__Gateway__Block_Lowered
+        | SpotId::Giguna__Gateway__West_19
+        | SpotId::Giguna__Gateway__Button
+        | SpotId::Giguna__Gateway__East_19 => RegionId::Giguna,
+        SpotId::Giguna__Labyrinth_East__East_19 => RegionId::Giguna,
+        SpotId::Giguna__Vertical_Interchange__West_17
+        | SpotId::Giguna__Vertical_Interchange__West_19 => RegionId::Giguna,
         SpotId::Glacier__Dock_Elevator__Elevator | SpotId::Glacier__Dock_Elevator__Connector => {
             RegionId::Glacier
         }
@@ -8791,6 +9220,10 @@ impl world::Accessible for Location {
             }
             LocationId::Giguna__Dual_Path__Wall_Secret__Health => true,
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => true,
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => rules::access_shockwave(&ctx),
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => rules::access_shockwave(&ctx),
+            LocationId::Giguna__Gateway__Button__Hit_Switch => rules::access_can_damage(&ctx),
+            LocationId::Giguna__Gateway__Flask_Ledge__Item => true,
             LocationId::Giguna__Giguna_Base__Ruin__Item => true,
             LocationId::Giguna__Giguna_Base__Table__News => true,
             LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => {
@@ -8802,6 +9235,19 @@ impl world::Accessible for Location {
             }
             LocationId::Giguna__Giguna_Northeast__Save_Point__Seen => true,
             LocationId::Giguna__Giguna_Northeast__Vault__Item => true,
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => true,
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
+                rules::access_nanite_mist_and_mist_upgrade(&ctx)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
+                rules::access_shockwave(&ctx)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
+                rules::access_nanite_mist_and_mist_upgrade(&ctx)
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
+                rules::access_shockwave(&ctx)
+            }
             LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => true,
             LocationId::Giguna__Lamassu__Deposit__Flask => true,
             LocationId::Giguna__Ruins_Center__Tablet__Item => true,
@@ -9261,9 +9707,42 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Dual_Path__West_Gate_NE__ex__West_Gate_1 => rules::access_giguna_dual_path_switch(&ctx),
             ExitId::Giguna__Dual_Path__West_Gate_NW__ex__West_Gate_1 => rules::access_giguna_dual_path_switch(&ctx),
             ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1 => true,
+            ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => rules::access_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => rules::access_grab_and_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_2 => rules::access_hook_and_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => rules::access_grab_and_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2 => rules::access_hook_and_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1 => rules::access_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Button__ex__East_19_1 => rules::access_giguna_gateway_gate(&ctx),
+            ExitId::Giguna__Gateway__Door__ex__Block_Left_1 => rules::access_giguna__gateway__door__ex__block_left_1__req(&ctx),
+            ExitId::Giguna__Gateway__Door__ex__Left_Platform_1 => rules::access_giguna__gateway__door__ex__left_platform_1__req(&ctx),
+            ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1 => rules::access_giguna__gateway__door__ex__passage_entry_1__req(&ctx),
+            ExitId::Giguna__Gateway__East_19__ex__Button_1 => rules::access_giguna_gateway_gate(&ctx),
+            ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1 => true,
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2 => rules::access_grab_and_climb(&ctx),
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1 => rules::access_giguna_gateway_block(&ctx),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1 => rules::access_giguna__gateway__passage_entry__ex__door_1__req(&ctx),
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 => rules::access_mode__drone(&ctx),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 => rules::access_mode__drone(&ctx),
+            ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1 => rules::access_hook(&ctx),
+            ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1 => rules::access_hover_or_hook(&ctx),
+            ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => true,
+            ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1 => true,
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 => rules::access_giguna__giguna_base__below_gate__ex__kari_1__req(&ctx),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2 => rules::access_giguna__giguna_base__below_gate__ex__kari_2__req(&ctx),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => rules::access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(&ctx),
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => rules::access_giguna__giguna_base__below_gate__ex__middle_platform_2__req(&ctx),
             ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => true,
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => true,
+            ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => true,
+            ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => rules::access_giguna__giguna_base__kari__ex__below_gate_1__req(&ctx),
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => rules::access_grab(&ctx),
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => rules::access_grab(&ctx),
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2 => rules::access_hook(&ctx),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => rules::access_giguna__giguna_base__middle_platform__ex__below_gate_1__req(&ctx),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => rules::access_hover(&ctx),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => rules::access_grab(&ctx),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2 => rules::access_hook(&ctx),
@@ -9294,6 +9773,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2 => rules::access_giguna__giguna_northeast__vault__ex__door_2__req(&ctx),
             ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1 => true,
             ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1 => true,
+            ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::access_nanite_mist_and_mist_upgrade(&ctx),
+            ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::access_giguna_boulder(&ctx),
+            ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => rules::access_nanite_mist_and_mist_upgrade(&ctx),
+            ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => rules::access_giguna_boulder(&ctx),
+            ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1 => true,
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => true,
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
@@ -9318,7 +9802,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1 => true,
             ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => rules::access_mode__drone(&ctx),
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::access_mode__drone(&ctx),
-            ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::access_climb_and_grab(&ctx),
+            ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1 => true,
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => true,
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => true,
@@ -9346,9 +9830,9 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::access_grab(&ctx),
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => true,
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => rules::access_giguna__ruins_west__lower_ledge__ex__upper_ledge_1__req(&ctx),
-            ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => rules::access_climb_and_grab(&ctx),
+            ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1 => true,
-            ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1 => rules::access_climb_and_grab(&ctx),
+            ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_2 => rules::access_hook(&ctx),
             ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Giguna__Wasteland__Door_Left__ex__Door_Right_1 => rules::access_ebih_wasteland_door(&ctx),
@@ -9655,14 +10139,19 @@ impl world::Exit for Exit {
             ExitId::Giguna__Dual_Path__West_17__ex__Hard_Rock__East_17_1 => true,
             ExitId::Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1 => true,
             ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1 => true,
+            ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1 => true,
+            ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => true,
+            ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1 => true,
             ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => true,
             ExitId::Giguna__Giguna_Base__East_14__ex__Wasteland__West_14_1 => true,
+            ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => true,
             ExitId::Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1 => true,
             ExitId::Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1 => true,
             ExitId::Giguna__Giguna_Northeast__East_11__ex__Ebih__Ebih_West__West_11_1 => true,
             ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1 => true,
             ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1 => true,
             ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1 => true,
+            ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1 => true,
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => true,
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
@@ -9847,6 +10336,7 @@ impl world::Accessible for Action {
                 ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
                     rules::access_can_deploy(&ctx)
                 }
+                ActionId::Ebih__Waterfall__West_8__Open_Door => rules::access_open(&ctx),
                 ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
                     rules::access_giguna__carnelian__lower_susar__caught__req(&ctx)
                 }
@@ -9862,9 +10352,25 @@ impl world::Accessible for Action {
                 ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                     rules::access_giguna__carnelian__upper_susar__hack__req(&ctx)
                 }
+                ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::access_open(&ctx),
+                ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                    rules::access_open_and_range2(&ctx)
+                }
                 ActionId::Giguna__Giguna_Base__Save_Point__Save => true,
                 ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                     rules::access_can_deploy(&ctx)
+                }
+                ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                    rules::access_open(&ctx)
+                }
+                ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                    rules::access_open_and_range1(&ctx)
+                }
+                ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                    rules::access_open_and_range2(&ctx)
+                }
+                ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                    rules::access_open_and_range3(&ctx)
                 }
                 ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
                     rules::access_can_deploy_and_slingshot_hook(&ctx)
@@ -9966,6 +10472,9 @@ impl world::Action for Action {
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
                 rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx)
             }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => {
+                rules::action_ebih__waterfall__west_8__open_door__do(ctx)
+            }
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_save(ctx),
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
@@ -10057,6 +10566,18 @@ impl world::Action for Action {
                 rules::action_deploy_drone_and_move__giguna__giguna_base__kari(ctx)
             }
             ActionId::Giguna__Giguna_Base__Save_Point__Save => rules::action_save(ctx),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                rules::action_giguna__giguna_base__switch_distance_1__open_door__do(ctx)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                rules::action_giguna__giguna_base__switch_distance_2__open_door__do(ctx)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                rules::action_giguna__giguna_base__switch_distance_3__open_door__do(ctx)
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                rules::action_giguna__giguna_base__switch_distance_4__open_door__do(ctx)
+            }
             ActionId::Giguna__Ruins_West__Save_Point__Save => rules::action_save(ctx),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
                 rules::action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx)
@@ -10073,6 +10594,12 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 rules::action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx)
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => {
+                rules::action_giguna__gateway__one_jump__open_door__do(ctx)
+            }
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                rules::action_giguna__gateway__flask_ledge__open_door__do(ctx)
             }
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_save(ctx),
         };
@@ -10256,7 +10783,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 704],
+    raw_spots: [SpotId; 729],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -10270,7 +10797,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 132;
+    const NUM_LOCATIONS: u32 = 141;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -10399,6 +10926,16 @@ impl world::World for World {
                 LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch,
                 LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
             ],
+            CanonId::Giguna_Boulder => vec![
+                LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
+                LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+                LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
+                LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+            ],
+            CanonId::Giguna_Gateway_Block => vec![
+                LocationId::Giguna__Gateway__Block_Left__Shockwave,
+                LocationId::Giguna__Gateway__Block_Right__Shockwave,
+            ],
             CanonId::Ledge_Grab => vec![
                 LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab,
                 LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item,
@@ -10425,6 +10962,7 @@ impl world::World for World {
                 LocationId::Giguna__Ruins_Top__Flask__Flask,
                 LocationId::Giguna__Far_Corner__Grass__Obscured_Item,
                 LocationId::Giguna__Lamassu__Deposit__Flask,
+                LocationId::Giguna__Gateway__Flask_Ledge__Item,
                 LocationId::Glacier__Vertical_Room__Peak__Flask,
             ],
             Item::Underwater_Movement => vec![LocationId::Amagi__Liru_Room__Shrine__Item],
@@ -10553,6 +11091,20 @@ impl world::World for World {
                 LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch,
                 LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch,
             ],
+            Item::Giguna_Boulder => vec![
+                LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
+                LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+                LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
+                LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+            ],
+            Item::Building_of_the_School => {
+                vec![LocationId::Giguna__Hard_Rock__Rock_Center__Tablet]
+            }
+            Item::Giguna_Gateway_Block => vec![
+                LocationId::Giguna__Gateway__Block_Left__Shockwave,
+                LocationId::Giguna__Gateway__Block_Right__Shockwave,
+            ],
+            Item::Giguna_Gateway_Gate => vec![LocationId::Giguna__Gateway__Button__Hit_Switch],
             Item::Compass => vec![LocationId::Glacier__Compass_Room__Center__Table],
             Item::Amashilama => vec![LocationId::Glacier__The_Big_Drop__Water_Surface__Drown],
             Item::Switch_36_11 => vec![LocationId::Glacier__Vertical_Room__Under_Switch__Switch],
@@ -10835,6 +11387,29 @@ impl world::World for World {
             LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
                 SpotId::Giguna__Dual_Path__Below_Right_Switch
             }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => {
+                SpotId::Giguna__Hard_Rock__Rock_Right
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
+                SpotId::Giguna__Hard_Rock__Rock_Right
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
+                SpotId::Giguna__Hard_Rock__Rock_Center
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => {
+                SpotId::Giguna__Hard_Rock__Rock_Left
+            }
+            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
+                SpotId::Giguna__Hard_Rock__Rock_Left
+            }
+            LocationId::Giguna__Gateway__Block_Left__Shockwave => {
+                SpotId::Giguna__Gateway__Block_Left
+            }
+            LocationId::Giguna__Gateway__Block_Right__Shockwave => {
+                SpotId::Giguna__Gateway__Block_Right
+            }
+            LocationId::Giguna__Gateway__Flask_Ledge__Item => SpotId::Giguna__Gateway__Flask_Ledge,
+            LocationId::Giguna__Gateway__Button__Hit_Switch => SpotId::Giguna__Gateway__Button,
             LocationId::Glacier__Compass_Room__Center__Table => {
                 SpotId::Glacier__Compass_Room__Center
             }
@@ -10930,6 +11505,7 @@ impl world::World for World {
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
                 SpotId::Ebih__Waterfall__Below_Left_Switch
             }
+            ActionId::Ebih__Waterfall__West_8__Open_Door => SpotId::Ebih__Waterfall__West_8,
             ActionId::Ebih__Ebih_West__Mid_Save__Save => SpotId::Ebih__Ebih_West__Mid_Save,
             ActionId::Ebih__Ebih_West__Upper_Save__Save => SpotId::Ebih__Ebih_West__Upper_Save,
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
@@ -11011,6 +11587,18 @@ impl world::World for World {
             ActionId::Giguna__Giguna_Base__Save_Point__Save => {
                 SpotId::Giguna__Giguna_Base__Save_Point
             }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
+                SpotId::Giguna__Giguna_Base__Switch_Distance_1
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
+                SpotId::Giguna__Giguna_Base__Switch_Distance_2
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
+                SpotId::Giguna__Giguna_Base__Switch_Distance_3
+            }
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
+                SpotId::Giguna__Giguna_Base__Switch_Distance_4
+            }
             ActionId::Giguna__Ruins_West__Save_Point__Save => {
                 SpotId::Giguna__Ruins_West__Save_Point
             }
@@ -11023,6 +11611,10 @@ impl world::World for World {
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => SpotId::Giguna__Ruins_Top__Switch,
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_Top__Turret_Balcony_West
+            }
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => SpotId::Giguna__Gateway__One_Jump,
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
+                SpotId::Giguna__Gateway__Flask_Ledge
             }
             ActionId::Glacier__Revival__Save_Point__Save => SpotId::Glacier__Revival__Save_Point,
             _ => SpotId::None,
@@ -11311,12 +11903,16 @@ impl world::World for World {
             ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1 => SpotId::Giguna__Giguna_Base__Right_Pillar,
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => SpotId::Giguna__Giguna_Base__Left_Pillar,
             ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 | ExitId:: Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => SpotId::Giguna__Giguna_Base__Ruin,
-            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => SpotId::Giguna__Giguna_Base__Middle_Platform,
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Middle_Platform,
+            ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Kari,
             ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => SpotId::Giguna__Giguna_Base__Building_Entry,
             ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1 | ExitId:: Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2 => SpotId::Giguna__Giguna_Base__Staircase_Top,
             ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1 => SpotId::Giguna__Giguna_Base__West_Grate,
             ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 | ExitId:: Giguna__Giguna_Base__West_15__ex__Helipad__East_15_1 => SpotId::Giguna__Giguna_Base__West_15,
             ExitId::Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1 => SpotId::Giguna__Giguna_Base__West_16,
+            ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => SpotId::Giguna__Giguna_Base__East_17,
+            ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 | ExitId:: Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2 => SpotId::Giguna__Giguna_Base__Lower_Fork,
+            ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 | ExitId:: Giguna__Giguna_Base__Below_Gate__ex__Kari_2 | ExitId:: Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 | ExitId:: Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => SpotId::Giguna__Giguna_Base__Below_Gate,
             ExitId::Giguna__Building_Interior__Entry__ex__Bookshelf_1 | ExitId:: Giguna__Building_Interior__Entry__ex__Bookshelf_2 | ExitId:: Giguna__Building_Interior__Entry__ex__Giguna_Base__Building_Entry_1 => SpotId::Giguna__Building_Interior__Entry,
             ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1 => SpotId::Giguna__Ruins_East__East_9,
             ExitId::Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1 => SpotId::Giguna__Ruins_East__Bottom_Rock,
@@ -11376,6 +11972,25 @@ impl world::World for World {
             ExitId::Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1 => SpotId::Giguna__Dual_Path__East_Gate_NW,
             ExitId::Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1 => SpotId::Giguna__Dual_Path__East_Gate_NE,
             ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1 => SpotId::Giguna__Dual_Path__East_17,
+            ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => SpotId::Giguna__Hard_Rock__Rock_Right,
+            ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => SpotId::Giguna__Hard_Rock__Rock_Right,
+            ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => SpotId::Giguna__Hard_Rock__Rock_Left,
+            ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => SpotId::Giguna__Hard_Rock__Rock_Left,
+            ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1 => SpotId::Giguna__Hard_Rock__West_17,
+            ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => SpotId::Giguna__Gateway__West_18,
+            ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 | ExitId:: Giguna__Gateway__Passage_Entry__ex__Door_1 => SpotId::Giguna__Gateway__Passage_Entry,
+            ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 | ExitId:: Giguna__Gateway__Passage_Exit__ex__Left_Platform_1 => SpotId::Giguna__Gateway__Passage_Exit,
+            ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1 | ExitId:: Giguna__Gateway__Door__ex__Block_Left_1 | ExitId:: Giguna__Gateway__Door__ex__Left_Platform_1 => SpotId::Giguna__Gateway__Door,
+            ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1 => SpotId::Giguna__Gateway__Left_Platform,
+            ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1 => SpotId::Giguna__Gateway__Right_Platform,
+            ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => SpotId::Giguna__Gateway__Block_Left,
+            ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1 => SpotId::Giguna__Gateway__Block_Right,
+            ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1 => SpotId::Giguna__Gateway__Refill_Station,
+            ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 | ExitId:: Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2 | ExitId:: Giguna__Gateway__Far_Ledge__ex__Right_Platform_1 => SpotId::Giguna__Gateway__Far_Ledge,
+            ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 | ExitId:: Giguna__Gateway__Block_Lowered__ex__Block_Right_1 | ExitId:: Giguna__Gateway__Block_Lowered__ex__Block_Left_2 | ExitId:: Giguna__Gateway__Block_Lowered__ex__Block_Right_2 => SpotId::Giguna__Gateway__Block_Lowered,
+            ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1 => SpotId::Giguna__Gateway__West_19,
+            ExitId::Giguna__Gateway__Button__ex__East_19_1 => SpotId::Giguna__Gateway__Button,
+            ExitId::Giguna__Gateway__East_19__ex__Button_1 | ExitId:: Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1 => SpotId::Giguna__Gateway__East_19,
             ExitId::Glacier__Dock_Elevator__Connector__ex__Dock_Interior__Connector_1 => SpotId::Glacier__Dock_Elevator__Connector,
             ExitId::Glacier__Dock_Interior__Connector__ex__Dock_Elevator__Connector_1 => SpotId::Glacier__Dock_Interior__Connector,
             ExitId::Glacier__Dock_Interior__Entry__ex__Dock_Outside__Entry_1 => SpotId::Glacier__Dock_Interior__Entry,
@@ -11473,7 +12088,11 @@ impl world::World for World {
     fn won(&self, ctx: &Context) -> bool {
         match self.objective {
             Objective::Start => rules::access___remote_drone(ctx),
-            Objective::Progress => rules::access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_slingshot_hook_all_weapons_all_notes_all_health_all_flasks(ctx),
+            Objective::Progress => {
+                rules::access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
+                    ctx,
+                )
+            }
         }
     }
 
@@ -11489,8 +12108,14 @@ impl world::World for World {
                 if !ctx.has(Item::Amashilama) {
                     vec.push((Item::Amashilama, 1));
                 }
+                if !ctx.has(Item::Boomerang) {
+                    vec.push((Item::Boomerang, 1));
+                }
                 if !ctx.has(Item::Bronze_Axe) {
                     vec.push((Item::Bronze_Axe, 1));
+                }
+                if !ctx.has(Item::Building_of_the_School) {
+                    vec.push((Item::Building_of_the_School, 1));
                 }
                 if !ctx.has(Item::Companies_Layoff) {
                     vec.push((Item::Companies_Layoff, 1));
@@ -11498,8 +12123,8 @@ impl world::World for World {
                 if !ctx.has(Item::Dear_Ernest) {
                     vec.push((Item::Dear_Ernest, 1));
                 }
-                if ctx.count(Item::Flask) < 10 {
-                    vec.push((Item::Flask, 10 - ctx.count(Item::Flask)));
+                if ctx.count(Item::Flask) < 11 {
+                    vec.push((Item::Flask, 11 - ctx.count(Item::Flask)));
                 }
                 if ctx.count(Item::Health_Fragment) < 5 {
                     vec.push((Item::Health_Fragment, 5 - ctx.count(Item::Health_Fragment)));
@@ -11509,6 +12134,12 @@ impl world::World for World {
                 }
                 if !ctx.has(Item::Heretics_Tablet) {
                     vec.push((Item::Heretics_Tablet, 1));
+                }
+                if !ctx.has(Item::Infect) {
+                    vec.push((Item::Infect, 1));
+                }
+                if !ctx.has(Item::Ledge_Grab) {
+                    vec.push((Item::Ledge_Grab, 1));
                 }
                 if !ctx.has(Item::Letter_from_Trace) {
                     vec.push((Item::Letter_from_Trace, 1));
@@ -11550,13 +12181,17 @@ impl world::World for World {
             Objective::Start => vec![(Item::Remote_Drone, 1)],
             Objective::Progress => vec![
                 (Item::Amashilama, 1),
+                (Item::Boomerang, 1),
                 (Item::Bronze_Axe, 1),
+                (Item::Building_of_the_School, 1),
                 (Item::Companies_Layoff, 1),
                 (Item::Dear_Ernest, 1),
-                (Item::Flask, 10),
+                (Item::Flask, 11),
                 (Item::Health_Fragment, 5),
                 (Item::Health_Node, 1),
                 (Item::Heretics_Tablet, 1),
+                (Item::Infect, 1),
+                (Item::Ledge_Grab, 1),
                 (Item::Letter_from_Trace, 1),
                 (Item::Power_Matrix, 1),
                 (Item::Record_Losses, 1),
@@ -11784,11 +12419,24 @@ impl world::World for World {
             | SpotId::Giguna__Dual_Path__West_18
             | SpotId::Giguna__Far_Corner__Grass
             | SpotId::Giguna__Far_Corner__South
+            | SpotId::Giguna__Gateway__Block_Left
+            | SpotId::Giguna__Gateway__Block_Right
+            | SpotId::Giguna__Gateway__Button
+            | SpotId::Giguna__Gateway__East_19
+            | SpotId::Giguna__Gateway__Flask_Ledge
+            | SpotId::Giguna__Gateway__One_Jump
+            | SpotId::Giguna__Gateway__West_18
+            | SpotId::Giguna__Gateway__West_19
             | SpotId::Giguna__Giguna_Base__Building_Entry
             | SpotId::Giguna__Giguna_Base__East_14
+            | SpotId::Giguna__Giguna_Base__East_17
             | SpotId::Giguna__Giguna_Base__Ruin
             | SpotId::Giguna__Giguna_Base__Save_Point
             | SpotId::Giguna__Giguna_Base__Stone_Knob
+            | SpotId::Giguna__Giguna_Base__Switch_Distance_1
+            | SpotId::Giguna__Giguna_Base__Switch_Distance_2
+            | SpotId::Giguna__Giguna_Base__Switch_Distance_3
+            | SpotId::Giguna__Giguna_Base__Switch_Distance_4
             | SpotId::Giguna__Giguna_Base__Table
             | SpotId::Giguna__Giguna_Base__West_15
             | SpotId::Giguna__Giguna_Base__West_16
@@ -11804,6 +12452,10 @@ impl world::World for World {
             | SpotId::Giguna__Giguna_Northeast__Vault
             | SpotId::Giguna__Giguna_Northeast__West_10
             | SpotId::Giguna__Giguna_Northeast__West_9
+            | SpotId::Giguna__Hard_Rock__Rock_Center
+            | SpotId::Giguna__Hard_Rock__Rock_Left
+            | SpotId::Giguna__Hard_Rock__Rock_Right
+            | SpotId::Giguna__Hard_Rock__West_17
             | SpotId::Giguna__Helipad__East_15
             | SpotId::Giguna__Helipad__East_16
             | SpotId::Giguna__Helipad__East_18
@@ -12345,11 +12997,29 @@ impl World {
                 SpotId::Giguna__Far_Corner__East_13,
                 SpotId::Giguna__Far_Corner__Grass,
                 SpotId::Giguna__Far_Corner__South,
+                SpotId::Giguna__Gateway__Block_Left,
+                SpotId::Giguna__Gateway__Block_Lowered,
+                SpotId::Giguna__Gateway__Block_Right,
+                SpotId::Giguna__Gateway__Button,
+                SpotId::Giguna__Gateway__Door,
+                SpotId::Giguna__Gateway__East_19,
+                SpotId::Giguna__Gateway__Far_Ledge,
+                SpotId::Giguna__Gateway__Flask_Ledge,
+                SpotId::Giguna__Gateway__Left_Platform,
+                SpotId::Giguna__Gateway__One_Jump,
+                SpotId::Giguna__Gateway__Passage_Entry,
+                SpotId::Giguna__Gateway__Passage_Exit,
+                SpotId::Giguna__Gateway__Refill_Station,
+                SpotId::Giguna__Gateway__Right_Platform,
                 SpotId::Giguna__Gateway__West_18,
+                SpotId::Giguna__Gateway__West_19,
+                SpotId::Giguna__Giguna_Base__Below_Gate,
                 SpotId::Giguna__Giguna_Base__Building_Entry,
                 SpotId::Giguna__Giguna_Base__East_14,
+                SpotId::Giguna__Giguna_Base__East_17,
                 SpotId::Giguna__Giguna_Base__Kari,
                 SpotId::Giguna__Giguna_Base__Left_Pillar,
+                SpotId::Giguna__Giguna_Base__Lower_Fork,
                 SpotId::Giguna__Giguna_Base__Middle_Platform,
                 SpotId::Giguna__Giguna_Base__Right_Pillar,
                 SpotId::Giguna__Giguna_Base__Ruin,
@@ -12357,6 +13027,10 @@ impl World {
                 SpotId::Giguna__Giguna_Base__Staircase_Bottom,
                 SpotId::Giguna__Giguna_Base__Staircase_Top,
                 SpotId::Giguna__Giguna_Base__Stone_Knob,
+                SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+                SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+                SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+                SpotId::Giguna__Giguna_Base__Switch_Distance_4,
                 SpotId::Giguna__Giguna_Base__Table,
                 SpotId::Giguna__Giguna_Base__Upper_Cliff,
                 SpotId::Giguna__Giguna_Base__West_15,
@@ -12400,6 +13074,7 @@ impl World {
                 SpotId::Giguna__Helipad__Tablet_Ledge,
                 SpotId::Giguna__Helipad__Wall_Bottom,
                 SpotId::Giguna__Helipad__Wall_Top,
+                SpotId::Giguna__Labyrinth_East__East_19,
                 SpotId::Giguna__Lamassu__Broken_Pillar,
                 SpotId::Giguna__Lamassu__Deposit,
                 SpotId::Giguna__Lamassu__East_18,
@@ -12462,6 +13137,8 @@ impl World {
                 SpotId::Giguna__Ruins_West__Save_Point,
                 SpotId::Giguna__Ruins_West__Upper_Ledge,
                 SpotId::Giguna__Ruins_West__West_7,
+                SpotId::Giguna__Vertical_Interchange__West_17,
+                SpotId::Giguna__Vertical_Interchange__West_19,
                 SpotId::Giguna__Wasteland__Bluff_by_Door,
                 SpotId::Giguna__Wasteland__Cache_Ledge,
                 SpotId::Giguna__Wasteland__Center_Plains,
@@ -12704,6 +13381,7 @@ impl World {
                 Item::Aansur
                     | Item::Amagi_Stronghold_Left_Wall
                     | Item::Bronze_Axe
+                    | Item::Building_of_the_School
                     | Item::Carnelian_Ring
                     | Item::Companies_Layoff
                     | Item::Compass
@@ -12717,6 +13395,8 @@ impl World {
                     | Item::Notes_2053_02_27
                     | Item::Record_Losses
                     | Item::Researchers_Missing
+                    | Item::Slingshot_Charge
+                    | Item::Slingshot_Weapon
                     | Item::Terminal_Breakthrough_1
                     | Item::The_Ideal_Kiengir
                     | Item::Under_Siege
@@ -12731,6 +13411,8 @@ impl World {
                     | Item::Journal_2049_10_29
                     | Item::Melee_Charge
                     | Item::Notes_2053_02_27
+                    | Item::Slingshot_Charge
+                    | Item::Slingshot_Weapon
                     | Item::The_Ideal_Kiengir
             ),
             _ => false,
@@ -13442,6 +14124,78 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Giguna_Dual_Path_Switch,
             price: Currency::Free,
             time: 500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder => Location {
+            id: LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder,
+            canonical: CanonId::Giguna_Boulder,
+            item: Item::Giguna_Boulder,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => Location {
+            id: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+            canonical: CanonId::Giguna_Boulder,
+            item: Item::Giguna_Boulder,
+            price: Currency::Energy(30),
+            time: 1000,
+            exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
+        },
+        LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => Location {
+            id: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet,
+            canonical: CanonId::None,
+            item: Item::Building_of_the_School,
+            price: Currency::Free,
+            time: 0,
+            exit_id: None,
+        },
+        LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => Location {
+            id: LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder,
+            canonical: CanonId::Giguna_Boulder,
+            item: Item::Giguna_Boulder,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => Location {
+            id: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+            canonical: CanonId::Giguna_Boulder,
+            item: Item::Giguna_Boulder,
+            price: Currency::Energy(30),
+            time: 1000,
+            exit_id: Some(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
+        },
+        LocationId::Giguna__Gateway__Block_Left__Shockwave => Location {
+            id: LocationId::Giguna__Gateway__Block_Left__Shockwave,
+            canonical: CanonId::Giguna_Gateway_Block,
+            item: Item::Giguna_Gateway_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Gateway__Block_Right__Shockwave => Location {
+            id: LocationId::Giguna__Gateway__Block_Right__Shockwave,
+            canonical: CanonId::Giguna_Gateway_Block,
+            item: Item::Giguna_Gateway_Block,
+            price: Currency::Energy(100),
+            time: 3500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Gateway__Flask_Ledge__Item => Location {
+            id: LocationId::Giguna__Gateway__Flask_Ledge__Item,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
+            exit_id: None,
+        },
+        LocationId::Giguna__Gateway__Button__Hit_Switch => Location {
+            id: LocationId::Giguna__Gateway__Button__Hit_Switch,
+            canonical: CanonId::None,
+            item: Item::Giguna_Gateway_Gate,
+            price: Currency::Free,
+            time: 1000,
             exit_id: None,
         },
         LocationId::Glacier__Compass_Room__Center__Table => Location {
@@ -16384,6 +17138,20 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1,
+            time: 1550,
+            dest: SpotId::Giguna__Giguna_Base__Below_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1,
+            time: 526,
+            dest: SpotId::Giguna__Giguna_Base__Below_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1 => Exit {
             id: ExitId::Giguna__Giguna_Base__Building_Entry__ex__Building_Interior__Entry_1,
             time: 750,
@@ -16430,6 +17198,55 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Giguna__Giguna_Base__West_16__ex__Helipad__East_16_1,
             time: 1350,
             dest: SpotId::Giguna__Helipad__East_16,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1,
+            time: 1350,
+            dest: SpotId::Giguna__Hard_Rock__West_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1,
+            time: 1799,
+            dest: SpotId::Giguna__Giguna_Base__Below_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2,
+            time: 800,
+            dest: SpotId::Giguna__Giguna_Base__Below_Gate,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1,
+            time: 3599,
+            dest: SpotId::Giguna__Giguna_Base__Kari,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_2,
+            time: 1000,
+            dest: SpotId::Giguna__Giguna_Base__Kari,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1,
+            time: 7199,
+            dest: SpotId::Giguna__Giguna_Base__Middle_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2 => Exit {
+            id: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2,
+            time: 3000,
+            dest: SpotId::Giguna__Giguna_Base__Middle_Platform,
             price: Currency::Free,
             loc_id: None,
         },
@@ -17018,6 +17835,209 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1,
             time: 1350,
             dest: SpotId::Giguna__East_Caverns__West_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => Exit {
+            id: ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1,
+            time: 526,
+            dest: SpotId::Giguna__Hard_Rock__Rock_Center,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => Exit {
+            id: ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
+            time: 526,
+            dest: SpotId::Giguna__Hard_Rock__Rock_Center,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
+        },
+        ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => Exit {
+            id: ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1,
+            time: 526,
+            dest: SpotId::Giguna__Hard_Rock__Rock_Center,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => Exit {
+            id: ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
+            time: 526,
+            dest: SpotId::Giguna__Hard_Rock__Rock_Center,
+            price: Currency::Free,
+            loc_id: Some(LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
+        },
+        ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1 => Exit {
+            id: ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1,
+            time: 1350,
+            dest: SpotId::Giguna__Giguna_Base__East_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1 => Exit {
+            id: ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1,
+            time: 1000,
+            dest: SpotId::Giguna__Dual_Path__East_18,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1 => Exit {
+            id: ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1,
+            time: 1578,
+            dest: SpotId::Giguna__Gateway__Passage_Exit,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1 => Exit {
+            id: ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1,
+            time: 1200,
+            dest: SpotId::Giguna__Gateway__Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1 => Exit {
+            id: ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1,
+            time: 1799,
+            dest: SpotId::Giguna__Gateway__Passage_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1 => Exit {
+            id: ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1,
+            time: 1000,
+            dest: SpotId::Giguna__Gateway__Left_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1 => Exit {
+            id: ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1,
+            time: 1052,
+            dest: SpotId::Giguna__Gateway__Passage_Entry,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Door__ex__Block_Left_1 => Exit {
+            id: ExitId::Giguna__Gateway__Door__ex__Block_Left_1,
+            time: 1052,
+            dest: SpotId::Giguna__Gateway__Block_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Door__ex__Left_Platform_1 => Exit {
+            id: ExitId::Giguna__Gateway__Door__ex__Left_Platform_1,
+            time: 1403,
+            dest: SpotId::Giguna__Gateway__Left_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1 => Exit {
+            id: ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1,
+            time: 800,
+            dest: SpotId::Giguna__Gateway__Block_Lowered,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1 => Exit {
+            id: ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1,
+            time: 1403,
+            dest: SpotId::Giguna__Gateway__Far_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => Exit {
+            id: ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1,
+            time: 350,
+            dest: SpotId::Giguna__Gateway__Block_Lowered,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1 => Exit {
+            id: ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1,
+            time: 350,
+            dest: SpotId::Giguna__Gateway__Block_Lowered,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1 => Exit {
+            id: ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1,
+            time: 1000,
+            dest: SpotId::Giguna__Gateway__Far_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 => Exit {
+            id: ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1,
+            time: 1000,
+            dest: SpotId::Giguna__Gateway__Flask_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2 => Exit {
+            id: ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_2,
+            time: 1799,
+            dest: SpotId::Giguna__Gateway__Flask_Ledge,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1 => Exit {
+            id: ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1,
+            time: 1200,
+            dest: SpotId::Giguna__Gateway__Right_Platform,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => Exit {
+            id: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1,
+            time: 1200,
+            dest: SpotId::Giguna__Gateway__Block_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => Exit {
+            id: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1,
+            time: 1200,
+            dest: SpotId::Giguna__Gateway__Block_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_2 => Exit {
+            id: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_2,
+            time: 500,
+            dest: SpotId::Giguna__Gateway__Block_Left,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2 => Exit {
+            id: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2,
+            time: 500,
+            dest: SpotId::Giguna__Gateway__Block_Right,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1 => Exit {
+            id: ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1,
+            time: 1350,
+            dest: SpotId::Giguna__Labyrinth_East__East_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__Button__ex__East_19_1 => Exit {
+            id: ExitId::Giguna__Gateway__Button__ex__East_19_1,
+            time: 1403,
+            dest: SpotId::Giguna__Gateway__East_19,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__East_19__ex__Button_1 => Exit {
+            id: ExitId::Giguna__Gateway__East_19__ex__Button_1,
+            time: 1403,
+            dest: SpotId::Giguna__Gateway__Button,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1 => Exit {
+            id: ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1,
+            time: 1350,
+            dest: SpotId::Giguna__Vertical_Interchange__West_19,
             price: Currency::Free,
             loc_id: None,
         },
@@ -17720,7 +18740,12 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         },
         ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => Action {
             id: ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door,
-            time: 1000,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Ebih__Waterfall__West_8__Open_Door => Action {
+            id: ActionId::Ebih__Waterfall__West_8__Open_Door,
+            time: 500,
             price: Currency::Free,
         },
         ActionId::Ebih__Ebih_West__Mid_Save__Save => Action {
@@ -17898,6 +18923,26 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
             time: 1300,
             price: Currency::Free,
         },
+        ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => Action {
+            id: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => Action {
+            id: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => Action {
+            id: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => Action {
+            id: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
         ActionId::Giguna__Ruins_West__Save_Point__Save => Action {
             id: ActionId::Giguna__Ruins_West__Save_Point__Save,
             time: 1300,
@@ -17931,6 +18976,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => Action {
             id: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
             time: 3800,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Gateway__One_Jump__Open_Door => Action {
+            id: ActionId::Giguna__Gateway__One_Jump__Open_Door,
+            time: 500,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => Action {
+            id: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door,
+            time: 500,
             price: Currency::Free,
         },
         ActionId::Glacier__Revival__Save_Point__Save => Action {
@@ -21096,7 +22151,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ExitId::Ebih__Waterfall__West_8__ex__Ebih_West__East_8_1.into_usize() + 1,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Ebih__Waterfall__West_8__Open_Door.into_usize(),
+                end: ActionId::Ebih__Waterfall__West_8__Open_Door.into_usize() + 1,
             },
             area_spots: Range {
                 start: SpotId::Ebih__Waterfall__Alcove.into_usize(),
@@ -25749,7 +26805,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25767,7 +26823,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone.into_usize() + 1,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25783,7 +26839,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25800,7 +26856,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25817,7 +26873,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25835,7 +26891,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25845,14 +26901,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1.into_usize(),
+                start: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1.into_usize(),
                 end: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25862,13 +26918,14 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25885,7 +26942,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25902,7 +26959,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25919,7 +26976,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25936,7 +26993,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25952,7 +27009,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25969,7 +27026,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -25986,7 +27043,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: ActionId::Giguna__Giguna_Base__Save_Point__Save.into_usize() + 1,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -26003,7 +27060,126 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Giguna_Base__Building_Entry.into_usize(),
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__East_17 => Spot {
+            id: SpotId::Giguna__Giguna_Base__East_17,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__East_17__ex__Hard_Rock__West_17_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__Lower_Fork => Spot {
+            id: SpotId::Giguna__Giguna_Base__Lower_Fork,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__Below_Gate => Spot {
+            id: SpotId::Giguna__Giguna_Base__Below_Gate,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1.into_usize(),
+                end: ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_1 => Spot {
+            id: SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_2 => Spot {
+            id: SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_3 => Spot {
+            id: SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
+                end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_4 => Spot {
+            id: SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize(),
+                end: ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Giguna_Base__Below_Gate.into_usize(),
                 end: SpotId::Giguna__Giguna_Base__West_Grate.into_usize() + 1,
             },
         },
@@ -27944,10 +29120,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Hard_Rock__Rock_Right => Spot {
             id: SpotId::Giguna__Hard_Rock__Rock_Right,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist.into_usize(),
+                end: LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27960,7 +29138,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Hard_Rock__Rock_Center => Spot {
             id: SpotId::Giguna__Hard_Rock__Rock_Center,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize(),
+                end: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -27976,10 +29155,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Hard_Rock__Rock_Left => Spot {
             id: SpotId::Giguna__Hard_Rock__Rock_Left,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist.into_usize(),
+                end: LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder.into_usize() + 1,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -27995,7 +29176,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -28043,14 +29225,322 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
+                start: ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1.into_usize(),
+                end: ExitId::Giguna__Gateway__West_18__ex__Dual_Path__East_18_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Passage_Entry => Spot {
+            id: SpotId::Giguna__Gateway__Passage_Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Passage_Entry__ex__Door_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Passage_Entry__ex__Passage_Exit_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Passage_Exit => Spot {
+            id: SpotId::Giguna__Gateway__Passage_Exit,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Passage_Exit__ex__Left_Platform_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Passage_Exit__ex__Passage_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Door => Spot {
+            id: SpotId::Giguna__Gateway__Door,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Door__ex__Block_Left_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Door__ex__Passage_Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Left_Platform => Spot {
+            id: SpotId::Giguna__Gateway__Left_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Left_Platform__ex__Block_Lowered_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Right_Platform => Spot {
+            id: SpotId::Giguna__Gateway__Right_Platform,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Right_Platform__ex__Far_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Block_Left => Spot {
+            id: SpotId::Giguna__Gateway__Block_Left,
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize(),
+                end: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Block_Right => Spot {
+            id: SpotId::Giguna__Gateway__Block_Right,
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Block_Right__Shockwave.into_usize(),
+                end: LocationId::Giguna__Gateway__Block_Right__Shockwave.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Block_Right__ex__Block_Lowered_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Refill_Station => Spot {
+            id: SpotId::Giguna__Gateway__Refill_Station,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Refill_Station__ex__Far_Ledge_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Far_Ledge => Spot {
+            id: SpotId::Giguna__Gateway__Far_Ledge,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Far_Ledge__ex__Right_Platform_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__One_Jump => Spot {
+            id: SpotId::Giguna__Gateway__One_Jump,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Gateway__One_Jump__Open_Door.into_usize(),
+                end: ActionId::Giguna__Gateway__One_Jump__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Flask_Ledge => Spot {
+            id: SpotId::Giguna__Gateway__Flask_Ledge,
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize(),
+                end: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize() + 1,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door.into_usize(),
+                end: ActionId::Giguna__Gateway__Flask_Ledge__Open_Door.into_usize() + 1,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Block_Lowered => Spot {
+            id: SpotId::Giguna__Gateway__Block_Lowered,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__West_19 => Spot {
+            id: SpotId::Giguna__Gateway__West_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1.into_usize(),
+                end: ExitId::Giguna__Gateway__West_19__ex__Labyrinth_East__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__Button => Spot {
+            id: SpotId::Giguna__Gateway__Button,
+            locations: Range {
+                start: LocationId::Giguna__Gateway__Button__Hit_Switch.into_usize(),
+                end: LocationId::Giguna__Gateway__Button__Hit_Switch.into_usize() + 1,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__Button__ex__East_19_1.into_usize(),
+                end: ExitId::Giguna__Gateway__Button__ex__East_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Gateway__East_19 => Spot {
+            id: SpotId::Giguna__Gateway__East_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Giguna__Gateway__East_19__ex__Button_1.into_usize(),
+                end: ExitId::Giguna__Gateway__East_19__ex__Vertical_Interchange__West_19_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Gateway__Block_Left.into_usize(),
+                end: SpotId::Giguna__Gateway__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Labyrinth_East__East_19 => Spot {
+            id: SpotId::Giguna__Labyrinth_East__East_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
                 start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
             },
             area_spots: Range {
-                start: SpotId::Giguna__Gateway__West_18.into_usize(),
-                end: SpotId::Giguna__Gateway__West_18.into_usize() + 1,
+                start: SpotId::Giguna__Labyrinth_East__East_19.into_usize(),
+                end: SpotId::Giguna__Labyrinth_East__East_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__West_17 => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__West_17,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__West_17.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Vertical_Interchange__West_19 => Spot {
+            id: SpotId::Giguna__Vertical_Interchange__West_19,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Vertical_Interchange__West_17.into_usize(),
+                end: SpotId::Giguna__Vertical_Interchange__West_19.into_usize() + 1,
             },
         },
         SpotId::Glacier__Dock_Elevator__Elevator => Spot {
@@ -30480,6 +31970,13 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         },
         SpotId::Giguna__Giguna_Base__Save_Point => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Base__West_16 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__East_17 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__Lower_Fork => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__Below_Gate => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_1 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_2 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_3 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_4 => Range { start: 0, end: 0 },
         SpotId::Giguna__Building_Interior__Entry => Range { start: 0, end: 0 },
         SpotId::Giguna__Building_Interior__Bookshelf => Range {
             start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
@@ -30635,13 +32132,52 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Dual_Path__East_Gate_NE => Range { start: 0, end: 0 },
         SpotId::Giguna__Dual_Path__East_17 => Range { start: 0, end: 0 },
         SpotId::Giguna__Hard_Rock__East_17 => Range { start: 0, end: 0 },
-        SpotId::Giguna__Hard_Rock__Rock_Right => Range { start: 0, end: 0 },
-        SpotId::Giguna__Hard_Rock__Rock_Center => Range { start: 0, end: 0 },
-        SpotId::Giguna__Hard_Rock__Rock_Left => Range { start: 0, end: 0 },
+        SpotId::Giguna__Hard_Rock__Rock_Right => Range {
+            start: LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist.into_usize(),
+            end: LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder.into_usize() + 1,
+        },
+        SpotId::Giguna__Hard_Rock__Rock_Center => Range {
+            start: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize(),
+            end: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize() + 1,
+        },
+        SpotId::Giguna__Hard_Rock__Rock_Left => Range {
+            start: LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist.into_usize(),
+            end: LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder.into_usize() + 1,
+        },
         SpotId::Giguna__Hard_Rock__West_17 => Range { start: 0, end: 0 },
         SpotId::Giguna__East_Caverns__West_14 => Range { start: 0, end: 0 },
         SpotId::Giguna__East_Caverns__West_17 => Range { start: 0, end: 0 },
         SpotId::Giguna__Gateway__West_18 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Passage_Entry => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Passage_Exit => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Door => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Left_Platform => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Right_Platform => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Block_Left => Range {
+            start: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize(),
+            end: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize() + 1,
+        },
+        SpotId::Giguna__Gateway__Block_Right => Range {
+            start: LocationId::Giguna__Gateway__Block_Right__Shockwave.into_usize(),
+            end: LocationId::Giguna__Gateway__Block_Right__Shockwave.into_usize() + 1,
+        },
+        SpotId::Giguna__Gateway__Refill_Station => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Far_Ledge => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__One_Jump => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Flask_Ledge => Range {
+            start: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize(),
+            end: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize() + 1,
+        },
+        SpotId::Giguna__Gateway__Block_Lowered => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__West_19 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Gateway__Button => Range {
+            start: LocationId::Giguna__Gateway__Button__Hit_Switch.into_usize(),
+            end: LocationId::Giguna__Gateway__Button__Hit_Switch.into_usize() + 1,
+        },
+        SpotId::Giguna__Gateway__East_19 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Labyrinth_East__East_19 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__West_17 => Range { start: 0, end: 0 },
+        SpotId::Giguna__Vertical_Interchange__West_19 => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Elevator => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Elevator__Connector => Range { start: 0, end: 0 },
         SpotId::Glacier__Dock_Interior__Connector => Range { start: 0, end: 0 },
@@ -30961,9 +32497,17 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch.into_usize(),
             end: LocationId::Giguna__Dual_Path__Wall_Secret__Health.into_usize(),
         },
-        AreaId::Giguna__Hard_Rock => Range { start: 0, end: 0 },
+        AreaId::Giguna__Hard_Rock => Range {
+            start: LocationId::Giguna__Hard_Rock__Rock_Center__Tablet.into_usize(),
+            end: LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder.into_usize(),
+        },
         AreaId::Giguna__East_Caverns => Range { start: 0, end: 0 },
-        AreaId::Giguna__Gateway => Range { start: 0, end: 0 },
+        AreaId::Giguna__Gateway => Range {
+            start: LocationId::Giguna__Gateway__Block_Left__Shockwave.into_usize(),
+            end: LocationId::Giguna__Gateway__Flask_Ledge__Item.into_usize(),
+        },
+        AreaId::Giguna__Labyrinth_East => Range { start: 0, end: 0 },
+        AreaId::Giguna__Vertical_Interchange => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Elevator => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Interior => Range { start: 0, end: 0 },
         AreaId::Glacier__Dock_Outside => Range { start: 0, end: 0 },

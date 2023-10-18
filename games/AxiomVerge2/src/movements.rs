@@ -3132,6 +3132,61 @@ pub fn local_travel_time(
         ) => 1578,
         (
             [false],
+            SpotId::Giguna__Giguna_Base__East_17,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => 1200,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__East_17,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 175,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 175,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 175,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 175,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => 2400,
+        (
+            [false],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 175,
+        (
+            [false],
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Building_Interior__Bookshelf,
         ) => 1799,
@@ -3641,6 +3696,92 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => {
             1799
         }
+        ([false], SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => 877,
+        ([false], SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => 877,
+        (
+            [false],
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+        ) => 526,
+        ([false], SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => {
+            526
+        }
+        ([false], SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => 1228,
+        ([false], SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => 1228,
+        ([false], SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => 877,
+        ([false], SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => 877,
+        ([false], SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => {
+            526
+        }
+        // [0.350877, 0.526316]
+        (
+            [false],
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Passage_Exit,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Right_Platform,
+        ) => 701,
+        // [0.350877, 0.5]
+        ([false], SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => {
+            850
+        }
+        ([false], SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => {
+            500
+        }
+        (
+            [false],
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Refill_Station,
+        ) => 1403,
+        (
+            [false],
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Left_Platform,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Block_Right,
+        ) => 550,
+        (
+            [false],
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Refill_Station,
+        ) => 701,
+        ([false], SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => 701,
+        ([false], SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => 701,
+        (
+            [false],
+            SpotId::Giguna__Gateway__Block_Right,
+            SpotId::Giguna__Gateway__Refill_Station,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Giguna__Gateway__Refill_Station,
+            SpotId::Giguna__Gateway__Block_Right,
+        ) => 1052,
+        ([false], SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => 1754,
+        ([false], SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => {
+            701
+        }
+        ([false], SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => 600,
+        ([false], SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => 175,
+        ([false], SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => {
+            2105
+        }
+        (
+            [false],
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            SpotId::Giguna__Gateway__Refill_Station,
+        ) => 1052,
+        ([false], SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => 400,
+        ([false], SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => 3333,
+        ([false], SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => 1929,
+        ([false], SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => 3333,
+        ([false], SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => 1929,
         (
             [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -7505,6 +7646,57 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => {
             1578
         }
+        ([true], SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => {
+            1200
+        }
+        ([true], SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__East_17) => {
+            701
+        }
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 175,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 175,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 175,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 175,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => 2400,
+        (
+            [true],
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 175,
         (
             [true],
             SpotId::Giguna__Building_Interior__Entry,
@@ -7994,6 +8186,78 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => {
             1799
         }
+        ([true], SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => 877,
+        ([true], SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => 877,
+        ([true], SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Right) => {
+            526
+        }
+        ([true], SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => {
+            526
+        }
+        ([true], SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => 1228,
+        ([true], SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => 1228,
+        ([true], SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => 877,
+        ([true], SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => 877,
+        ([true], SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => 526,
+        // [0.350877, 0.526316]
+        ([true], SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Passage_Exit) => {
+            877
+        }
+        (
+            [true],
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Right_Platform,
+        ) => 701,
+        // [0.350877, 0.5]
+        ([true], SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => {
+            850
+        }
+        ([true], SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => {
+            500
+        }
+        (
+            [true],
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Refill_Station,
+        ) => 1403,
+        (
+            [true],
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Left_Platform,
+        ) => 701,
+        ([true], SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Block_Right) => {
+            550
+        }
+        (
+            [true],
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Refill_Station,
+        ) => 701,
+        ([true], SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => 701,
+        ([true], SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => 701,
+        ([true], SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Refill_Station) => {
+            1052
+        }
+        ([true], SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Block_Right) => {
+            1052
+        }
+        ([true], SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => 1754,
+        ([true], SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => {
+            701
+        }
+        ([true], SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => 600,
+        ([true], SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => 175,
+        ([true], SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => {
+            2105
+        }
+        ([true], SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Refill_Station) => {
+            1052
+        }
+        ([true], SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => 400,
+        ([true], SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => 3333,
+        ([true], SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => 1929,
+        ([true], SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => 3333,
+        ([true], SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => 1929,
         (
             [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -12267,6 +12531,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Giguna_Base__Kari => 850,
             SpotId::Giguna__Giguna_Base__Building_Entry => 1228,
             SpotId::Giguna__Giguna_Base__Staircase_Top => 4200,
+            SpotId::Giguna__Giguna_Base__Below_Gate => 1550,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12275,6 +12540,7 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Giguna_Base__Kari => 0,
             SpotId::Giguna__Giguna_Base__Building_Entry => 1052,
             SpotId::Giguna__Giguna_Base__Table => 2456,
+            SpotId::Giguna__Giguna_Base__Below_Gate => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -12344,6 +12610,56 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             SpotId::Giguna__Giguna_Base__Save_Point => 1578,
             SpotId::Giguna__Giguna_Base__West_16 => 0,
             SpotId::Giguna__Helipad__East_16 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__East_17 => enum_map! {
+            SpotId::Giguna__Giguna_Base__East_17 => 0,
+            SpotId::Giguna__Giguna_Base__Lower_Fork => 1200,
+            SpotId::Giguna__Hard_Rock__West_17 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__Lower_Fork => enum_map! {
+            SpotId::Giguna__Giguna_Base__East_17 => 701,
+            SpotId::Giguna__Giguna_Base__Lower_Fork => 0,
+            SpotId::Giguna__Giguna_Base__Below_Gate => 800,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => 1929,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__Below_Gate => enum_map! {
+            SpotId::Giguna__Giguna_Base__Middle_Platform => 3000,
+            SpotId::Giguna__Giguna_Base__Kari => 1000,
+            SpotId::Giguna__Giguna_Base__Lower_Fork => 701,
+            SpotId::Giguna__Giguna_Base__Below_Gate => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_1 => enum_map! {
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => 0,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => 175,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_2 => enum_map! {
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => 600,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => 0,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => 175,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_3 => enum_map! {
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => 175,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => 0,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => 175,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Giguna_Base__Switch_Distance_4 => enum_map! {
+            SpotId::Giguna__Giguna_Base__Lower_Fork => 2400,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => 175,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -13161,25 +13477,34 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
         },
         SpotId::Giguna__Hard_Rock__East_17 => enum_map! {
             SpotId::Giguna__Hard_Rock__East_17 => 0,
+            SpotId::Giguna__Hard_Rock__Rock_Right => 877,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Hard_Rock__Rock_Right => enum_map! {
+            SpotId::Giguna__Hard_Rock__East_17 => 877,
             SpotId::Giguna__Hard_Rock__Rock_Right => 0,
+            SpotId::Giguna__Hard_Rock__Rock_Center => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Hard_Rock__Rock_Center => enum_map! {
+            SpotId::Giguna__Hard_Rock__Rock_Right => 526,
             SpotId::Giguna__Hard_Rock__Rock_Center => 0,
+            SpotId::Giguna__Hard_Rock__Rock_Left => 526,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Hard_Rock__Rock_Left => enum_map! {
+            SpotId::Giguna__Hard_Rock__Rock_Center => 526,
             SpotId::Giguna__Hard_Rock__Rock_Left => 0,
+            SpotId::Giguna__Hard_Rock__West_17 => 1228,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
         SpotId::Giguna__Hard_Rock__West_17 => enum_map! {
+            SpotId::Giguna__Giguna_Base__East_17 => 1350,
+            SpotId::Giguna__Hard_Rock__Rock_Left => 1228,
             SpotId::Giguna__Hard_Rock__West_17 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
@@ -13195,7 +13520,144 @@ pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
             _ => u32::MAX,
         },
         SpotId::Giguna__Gateway__West_18 => enum_map! {
+            SpotId::Giguna__Dual_Path__East_18 => 1000,
             SpotId::Giguna__Gateway__West_18 => 0,
+            SpotId::Giguna__Gateway__Passage_Entry => 877,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Passage_Entry => enum_map! {
+            SpotId::Giguna__Gateway__West_18 => 877,
+            SpotId::Giguna__Gateway__Passage_Entry => 0,
+            SpotId::Giguna__Gateway__Passage_Exit => 1578,
+            SpotId::Giguna__Gateway__Door => 1200,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Passage_Exit => enum_map! {
+            SpotId::Giguna__Gateway__Passage_Entry => 1799,
+            SpotId::Giguna__Gateway__Passage_Exit => 0,
+            SpotId::Giguna__Gateway__Left_Platform => 1000,
+            SpotId::Giguna__Gateway__Block_Left => 526,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Door => enum_map! {
+            SpotId::Giguna__Gateway__Passage_Entry => 1052,
+            SpotId::Giguna__Gateway__Door => 0,
+            SpotId::Giguna__Gateway__Left_Platform => 1403,
+            SpotId::Giguna__Gateway__Block_Left => 1052,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Left_Platform => enum_map! {
+            SpotId::Giguna__Gateway__Passage_Exit => 877,
+            SpotId::Giguna__Gateway__Left_Platform => 0,
+            SpotId::Giguna__Gateway__Right_Platform => 701,
+            SpotId::Giguna__Gateway__Block_Left => 850,
+            SpotId::Giguna__Gateway__Block_Right => 500,
+            SpotId::Giguna__Gateway__Refill_Station => 1403,
+            SpotId::Giguna__Gateway__Block_Lowered => 800,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Right_Platform => enum_map! {
+            SpotId::Giguna__Gateway__Left_Platform => 701,
+            SpotId::Giguna__Gateway__Right_Platform => 0,
+            SpotId::Giguna__Gateway__Block_Right => 550,
+            SpotId::Giguna__Gateway__Refill_Station => 701,
+            SpotId::Giguna__Gateway__Far_Ledge => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Block_Left => enum_map! {
+            SpotId::Giguna__Gateway__Block_Left => 0,
+            SpotId::Giguna__Gateway__Block_Right => 701,
+            SpotId::Giguna__Gateway__Block_Lowered => 350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Block_Right => enum_map! {
+            SpotId::Giguna__Gateway__Block_Left => 701,
+            SpotId::Giguna__Gateway__Block_Right => 0,
+            SpotId::Giguna__Gateway__Refill_Station => 1052,
+            SpotId::Giguna__Gateway__Block_Lowered => 350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Refill_Station => enum_map! {
+            SpotId::Giguna__Gateway__Block_Right => 1052,
+            SpotId::Giguna__Gateway__Refill_Station => 0,
+            SpotId::Giguna__Gateway__Far_Ledge => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Far_Ledge => enum_map! {
+            SpotId::Giguna__Gateway__Right_Platform => 1200,
+            SpotId::Giguna__Gateway__Block_Right => 1754,
+            SpotId::Giguna__Gateway__Refill_Station => 701,
+            SpotId::Giguna__Gateway__Far_Ledge => 0,
+            SpotId::Giguna__Gateway__One_Jump => 600,
+            SpotId::Giguna__Gateway__Flask_Ledge => 1000,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__One_Jump => enum_map! {
+            SpotId::Giguna__Gateway__Far_Ledge => 175,
+            SpotId::Giguna__Gateway__One_Jump => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Flask_Ledge => enum_map! {
+            SpotId::Giguna__Gateway__Block_Right => 2105,
+            SpotId::Giguna__Gateway__Refill_Station => 1052,
+            SpotId::Giguna__Gateway__Far_Ledge => 400,
+            SpotId::Giguna__Gateway__Flask_Ledge => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Block_Lowered => enum_map! {
+            SpotId::Giguna__Gateway__Block_Left => 500,
+            SpotId::Giguna__Gateway__Block_Right => 500,
+            SpotId::Giguna__Gateway__Block_Lowered => 0,
+            SpotId::Giguna__Gateway__West_19 => 3333,
+            SpotId::Giguna__Gateway__Button => 1929,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__West_19 => enum_map! {
+            SpotId::Giguna__Gateway__Block_Lowered => 3333,
+            SpotId::Giguna__Gateway__West_19 => 0,
+            SpotId::Giguna__Labyrinth_East__East_19 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__Button => enum_map! {
+            SpotId::Giguna__Gateway__Block_Lowered => 1929,
+            SpotId::Giguna__Gateway__Button => 0,
+            SpotId::Giguna__Gateway__East_19 => 1403,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Gateway__East_19 => enum_map! {
+            SpotId::Giguna__Gateway__Button => 1403,
+            SpotId::Giguna__Gateway__East_19 => 0,
+            SpotId::Giguna__Vertical_Interchange__West_19 => 1350,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Labyrinth_East__East_19 => enum_map! {
+            SpotId::Giguna__Labyrinth_East__East_19 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Vertical_Interchange__West_17 => enum_map! {
+            SpotId::Giguna__Vertical_Interchange__West_17 => 0,
+            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
+            _ => u32::MAX,
+        },
+        SpotId::Giguna__Vertical_Interchange__West_19 => enum_map! {
+            SpotId::Giguna__Vertical_Interchange__West_19 => 0,
             SpotId::Menu__Upgrade_Menu__Physiology => 1000,
             _ => u32::MAX,
         },
@@ -17925,6 +18387,9 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Staircase_Top,
         ) => 4200,
+        (SpotId::Giguna__Giguna_Base__Middle_Platform, SpotId::Giguna__Giguna_Base__Below_Gate) => {
+            1550
+        }
         (SpotId::Giguna__Giguna_Base__Middle_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
             1000
         }
@@ -17932,6 +18397,7 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Kari) => 0,
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Building_Entry) => 1052,
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => 2456,
+        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Below_Gate) => 526,
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => 1052,
         (
@@ -18032,6 +18498,85 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__West_16) => 0,
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Helipad__East_16) => 1350,
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__East_17) => 0,
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => 1200,
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Hard_Rock__West_17) => 1350,
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__East_17) => 701,
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__Lower_Fork) => 0,
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__Below_Gate) => 800,
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 1929,
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Middle_Platform) => {
+            3000
+        }
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Kari) => 1000,
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Lower_Fork) => 701,
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Below_Gate) => 0,
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => 0,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 175,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => 600,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 0,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 175,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => 175,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 0,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 175,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => 2400,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => 175,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => 0,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+        ) => 1000,
         (SpotId::Giguna__Building_Interior__Entry, SpotId::Giguna__Giguna_Base__Building_Entry) => {
             750
         }
@@ -18672,21 +19217,123 @@ pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
         (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__East_Caverns__West_17) => 1350,
         (SpotId::Giguna__Dual_Path__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__East_17) => 0,
+        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => 877,
         (SpotId::Giguna__Hard_Rock__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => 877,
         (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__Rock_Right) => 0,
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__Rock_Center) => 526,
         (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Right) => 526,
         (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Center) => 0,
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => 526,
         (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__Rock_Center) => 526,
         (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__Rock_Left) => 0,
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => 1228,
         (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Giguna_Base__East_17) => 1350,
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => 1228,
         (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__West_17) => 0,
         (SpotId::Giguna__Hard_Rock__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__East_Caverns__West_14, SpotId::Giguna__East_Caverns__West_14) => 0,
         (SpotId::Giguna__East_Caverns__West_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
         (SpotId::Giguna__East_Caverns__West_17, SpotId::Giguna__East_Caverns__West_17) => 0,
         (SpotId::Giguna__East_Caverns__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Dual_Path__East_18) => 1000,
         (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__West_18) => 0,
+        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => 877,
         (SpotId::Giguna__Gateway__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => 877,
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__Passage_Entry) => 0,
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__Passage_Exit) => 1578,
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__Door) => 1200,
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Passage_Entry) => 1799,
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Passage_Exit) => 0,
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Left_Platform) => 1000,
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => 526,
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Passage_Entry) => 1052,
+        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Door) => 0,
+        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Left_Platform) => 1403,
+        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Block_Left) => 1052,
+        (SpotId::Giguna__Gateway__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Passage_Exit) => 877,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Left_Platform) => 0,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Right_Platform) => 701,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => 850,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => 500,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Refill_Station) => 1403,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Lowered) => 800,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Left_Platform) => 701,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Right_Platform) => 0,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Block_Right) => 550,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Refill_Station) => 701,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Far_Ledge) => 1403,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Left) => 0,
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => 701,
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Lowered) => 350,
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => 701,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Right) => 0,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Refill_Station) => 1052,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Lowered) => 350,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Block_Right) => 1052,
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Refill_Station) => 0,
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Far_Ledge) => 1000,
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Right_Platform) => 1200,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => 1754,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => 701,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => 0,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => 600,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Flask_Ledge) => 1000,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => 175,
+        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__One_Jump) => 0,
+        (SpotId::Giguna__Gateway__One_Jump, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => 2105,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Refill_Station) => 1052,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => 400,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Flask_Ledge) => 0,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Block_Left) => 500,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Block_Right) => 500,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Block_Lowered) => 0,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => 3333,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => 1929,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => 3333,
+        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__West_19) => 0,
+        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Labyrinth_East__East_19) => 1350,
+        (SpotId::Giguna__Gateway__West_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => 1929,
+        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Button) => 0,
+        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__East_19) => 1403,
+        (SpotId::Giguna__Gateway__Button, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Gateway__East_19, SpotId::Giguna__Gateway__Button) => 1403,
+        (SpotId::Giguna__Gateway__East_19, SpotId::Giguna__Gateway__East_19) => 0,
+        (SpotId::Giguna__Gateway__East_19, SpotId::Giguna__Vertical_Interchange__West_19) => 1350,
+        (SpotId::Giguna__Gateway__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Giguna__Labyrinth_East__East_19) => 0,
+        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
+        (
+            SpotId::Giguna__Vertical_Interchange__West_17,
+            SpotId::Giguna__Vertical_Interchange__West_17,
+        ) => 0,
+        (SpotId::Giguna__Vertical_Interchange__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
+        (
+            SpotId::Giguna__Vertical_Interchange__West_19,
+            SpotId::Giguna__Vertical_Interchange__West_19,
+        ) => 0,
+        (SpotId::Giguna__Vertical_Interchange__West_19, SpotId::Menu__Upgrade_Menu__Physiology) => {
+            1000
+        }
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             1578
@@ -21606,6 +22253,41 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => true,
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => true,
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__East_17) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => true,
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Lower_Fork) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => true,
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => true,
         (
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Building_Interior__Bookshelf,
@@ -21864,6 +22546,39 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NW) => true,
         (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => true,
         (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => true,
+        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => true,
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => true,
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => true,
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Right) => true,
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => true,
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => true,
+        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => true,
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => true,
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => true,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Passage_Exit) => true,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => true,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => true,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Right_Platform) => true,
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Refill_Station) => true,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Left_Platform) => true,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Block_Right) => true,
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Refill_Station) => true,
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Passage_Exit) => true,
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => true,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => true,
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Refill_Station) => true,
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Block_Right) => true,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => true,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => true,
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => true,
+        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => true,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => true,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Refill_Station) => true,
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => true,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => true,
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => true,
+        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => true,
+        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -33095,6 +33810,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Middle_Platform,
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            1550,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33117,6 +33837,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Kari,
             SpotId::Giguna__Giguna_Base__Table,
             2456,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Kari,
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            526,
         ),
         (
             SpotId::Giguna__Giguna_Base__Kari,
@@ -33345,6 +34070,151 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__West_16,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__East_17,
+            SpotId::Giguna__Giguna_Base__East_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__East_17,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__East_17,
+            SpotId::Giguna__Hard_Rock__West_17,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__East_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__East_17,
+            701,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            800,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Giguna__Giguna_Base__Middle_Platform,
+            3000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Giguna__Giguna_Base__Kari,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            701,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Below_Gate,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            175,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            600,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            175,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            175,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            175,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            2400,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            175,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            0,
+        ),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35690,8 +36560,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__East_17,
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+            877,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__East_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+            SpotId::Giguna__Hard_Rock__East_17,
+            877,
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Right,
@@ -35700,8 +36580,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Right,
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            526,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            SpotId::Giguna__Hard_Rock__Rock_Right,
+            526,
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Center,
@@ -35710,8 +36600,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Center,
+            SpotId::Giguna__Hard_Rock__Rock_Left,
+            526,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Center,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Left,
+            SpotId::Giguna__Hard_Rock__Rock_Center,
+            526,
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Left,
@@ -35720,8 +36620,23 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Left,
+            SpotId::Giguna__Hard_Rock__West_17,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__Rock_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__West_17,
+            SpotId::Giguna__Giguna_Base__East_17,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__West_17,
+            SpotId::Giguna__Hard_Rock__Rock_Left,
+            1228,
         ),
         (
             SpotId::Giguna__Hard_Rock__West_17,
@@ -35755,11 +36670,426 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__West_18,
+            SpotId::Giguna__Dual_Path__East_18,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_18,
             SpotId::Giguna__Gateway__West_18,
             0,
         ),
         (
             SpotId::Giguna__Gateway__West_18,
+            SpotId::Giguna__Gateway__Passage_Entry,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_18,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Entry,
+            SpotId::Giguna__Gateway__West_18,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Entry,
+            SpotId::Giguna__Gateway__Passage_Entry,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Entry,
+            SpotId::Giguna__Gateway__Passage_Exit,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Entry,
+            SpotId::Giguna__Gateway__Door,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Exit,
+            SpotId::Giguna__Gateway__Passage_Entry,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Exit,
+            SpotId::Giguna__Gateway__Passage_Exit,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Exit,
+            SpotId::Giguna__Gateway__Left_Platform,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Exit,
+            SpotId::Giguna__Gateway__Block_Left,
+            526,
+        ),
+        (
+            SpotId::Giguna__Gateway__Passage_Exit,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Door,
+            SpotId::Giguna__Gateway__Passage_Entry,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Gateway__Door,
+            SpotId::Giguna__Gateway__Door,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Door,
+            SpotId::Giguna__Gateway__Left_Platform,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Gateway__Door,
+            SpotId::Giguna__Gateway__Block_Left,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Gateway__Door,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Passage_Exit,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Left_Platform,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Right_Platform,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Block_Left,
+            850,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Block_Right,
+            500,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Refill_Station,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Giguna__Gateway__Block_Lowered,
+            800,
+        ),
+        (
+            SpotId::Giguna__Gateway__Left_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Left_Platform,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Right_Platform,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Block_Right,
+            550,
+        ),
+        (
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Refill_Station,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Giguna__Gateway__Far_Ledge,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Gateway__Right_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Left,
+            SpotId::Giguna__Gateway__Block_Left,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Left,
+            SpotId::Giguna__Gateway__Block_Right,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Left,
+            SpotId::Giguna__Gateway__Block_Lowered,
+            350,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Right,
+            SpotId::Giguna__Gateway__Block_Left,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Right,
+            SpotId::Giguna__Gateway__Block_Right,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Right,
+            SpotId::Giguna__Gateway__Refill_Station,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Right,
+            SpotId::Giguna__Gateway__Block_Lowered,
+            350,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Refill_Station,
+            SpotId::Giguna__Gateway__Block_Right,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Gateway__Refill_Station,
+            SpotId::Giguna__Gateway__Refill_Station,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Refill_Station,
+            SpotId::Giguna__Gateway__Far_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Refill_Station,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Giguna__Gateway__Right_Platform,
+            1200,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Giguna__Gateway__Block_Right,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Giguna__Gateway__Refill_Station,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Giguna__Gateway__Far_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Giguna__Gateway__One_Jump,
+            600,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Far_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__One_Jump,
+            SpotId::Giguna__Gateway__Far_Ledge,
+            175,
+        ),
+        (
+            SpotId::Giguna__Gateway__One_Jump,
+            SpotId::Giguna__Gateway__One_Jump,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__One_Jump,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            SpotId::Giguna__Gateway__Block_Right,
+            2105,
+        ),
+        (
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            SpotId::Giguna__Gateway__Refill_Station,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            SpotId::Giguna__Gateway__Far_Ledge,
+            400,
+        ),
+        (
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Flask_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Lowered,
+            SpotId::Giguna__Gateway__Block_Left,
+            500,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Lowered,
+            SpotId::Giguna__Gateway__Block_Right,
+            500,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Lowered,
+            SpotId::Giguna__Gateway__Block_Lowered,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Lowered,
+            SpotId::Giguna__Gateway__West_19,
+            3333,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Lowered,
+            SpotId::Giguna__Gateway__Button,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Gateway__Block_Lowered,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_19,
+            SpotId::Giguna__Gateway__Block_Lowered,
+            3333,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_19,
+            SpotId::Giguna__Gateway__West_19,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_19,
+            SpotId::Giguna__Labyrinth_East__East_19,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Gateway__West_19,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__Button,
+            SpotId::Giguna__Gateway__Block_Lowered,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Gateway__Button,
+            SpotId::Giguna__Gateway__Button,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__Button,
+            SpotId::Giguna__Gateway__East_19,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Gateway__Button,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gateway__East_19,
+            SpotId::Giguna__Gateway__Button,
+            1403,
+        ),
+        (
+            SpotId::Giguna__Gateway__East_19,
+            SpotId::Giguna__Gateway__East_19,
+            0,
+        ),
+        (
+            SpotId::Giguna__Gateway__East_19,
+            SpotId::Giguna__Vertical_Interchange__West_19,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Gateway__East_19,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__East_19,
+            SpotId::Giguna__Labyrinth_East__East_19,
+            0,
+        ),
+        (
+            SpotId::Giguna__Labyrinth_East__East_19,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Vertical_Interchange__West_17,
+            SpotId::Giguna__Vertical_Interchange__West_17,
+            0,
+        ),
+        (
+            SpotId::Giguna__Vertical_Interchange__West_17,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Vertical_Interchange__West_19,
+            SpotId::Giguna__Vertical_Interchange__West_19,
+            0,
+        ),
+        (
+            SpotId::Giguna__Vertical_Interchange__West_19,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39893,6 +41223,53 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => Some(1578),
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => Some(350),
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => Some(701),
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => Some(1929),
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => Some(3333),
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => Some(701),
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Refill_Station) => {
+            Some(1052)
+        }
+        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => Some(1929),
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => Some(1754),
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => Some(600),
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => Some(701),
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => Some(2105),
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => Some(400),
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Refill_Station) => {
+            Some(1052)
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => Some(850),
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => Some(500),
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Passage_Exit) => {
+            Some(877)
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Refill_Station) => {
+            Some(1403)
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Right_Platform) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => Some(175),
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => Some(877),
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => Some(526),
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Block_Right) => {
+            Some(1052)
+        }
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Block_Right) => {
+            Some(550)
+        }
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Left_Platform) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Refill_Station) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => Some(877),
+        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => Some(3333),
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Lower_Fork) => {
+            Some(701)
+        }
         (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => {
             Some(1052)
         }
@@ -39909,6 +41286,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
             Some(1403)
         }
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => {
+            Some(1200)
+        }
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Building_Entry) => {
             Some(1052)
         }
@@ -39917,6 +41297,13 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => Some(2456),
         (SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => Some(877),
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__East_17) => {
+            Some(701)
+        }
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => Some(1929),
         (
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Building_Entry,
@@ -39975,6 +41362,34 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Middle_Platform) => {
             Some(1301)
         }
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => Some(175),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => Some(600),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => Some(175),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => Some(175),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => Some(175),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => Some(2400),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => Some(175),
         (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Building_Entry) => {
             Some(2252)
         }
@@ -40086,6 +41501,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => {
             Some(877)
         }
+        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => Some(877),
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => Some(526),
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Right) => {
+            Some(526)
+        }
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => Some(1228),
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => Some(877),
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => Some(1228),
         (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => Some(4385),
         (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => Some(1578),
         (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => Some(2400),
@@ -43520,6 +44943,87 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => {
             (Some(350), vec![])
         }
+        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => {
+            (Some(3333), vec![])
+        }
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Refill_Station) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => {
+            (Some(1929), vec![])
+        }
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => {
+            (Some(600), vec![])
+        }
+        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => {
+            (Some(2105), vec![])
+        }
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => {
+            (Some(400), vec![])
+        }
+        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Refill_Station) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => {
+            (Some(850), vec![])
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => {
+            (Some(500), vec![])
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Passage_Exit) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Refill_Station) => {
+            (Some(1403), vec![])
+        }
+        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Right_Platform) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => {
+            (Some(175), vec![])
+        }
+        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Block_Right) => {
+            (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Block_Right) => {
+            (Some(550), vec![])
+        }
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Left_Platform) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Refill_Station) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => {
+            (Some(3333), vec![])
+        }
+        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Lower_Fork) => {
+            (Some(701), vec![])
+        }
         (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => {
             (Some(1052), vec![])
         }
@@ -43536,6 +45040,9 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
             (Some(1403), vec![])
         }
+        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => {
+            (Some(1200), vec![])
+        }
         (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Building_Entry) => {
             (Some(1052), vec![])
         }
@@ -43548,6 +45055,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => {
             (Some(877), vec![])
         }
+        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__East_17) => {
+            (Some(701), vec![])
+        }
+        (
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => (Some(1929), vec![]),
         (
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Building_Entry,
@@ -43612,6 +45126,34 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Middle_Platform) => {
             (Some(1301), vec![])
         }
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => (Some(175), vec![]),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => (Some(175), vec![]),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
+        ) => (Some(175), vec![]),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+        ) => (Some(175), vec![]),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Lower_Fork,
+        ) => (Some(2400), vec![]),
+        (
+            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
+            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
+        ) => (Some(175), vec![]),
         (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Building_Entry) => {
             (Some(2252), vec![])
         }
@@ -43728,6 +45270,24 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => {
             (Some(877), vec![])
+        }
+        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Right) => {
+            (Some(526), vec![])
+        }
+        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => {
+            (Some(1228), vec![])
         }
         (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => {
             (Some(4385), vec![])

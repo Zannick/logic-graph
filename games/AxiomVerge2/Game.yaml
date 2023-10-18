@@ -37,8 +37,7 @@ objectives:
   # it will never consider skipping what's available and may be unable to buy something
   # necessary.
   Progress%: >
-    [Amashilama, Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Slingshot_Hook,
-    $all_weapons, $all_notes, $all_health, $all_flasks]
+    [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
 
 base_movements:
   - # the slowest movement is in water
@@ -186,6 +185,15 @@ helpers:
   $unlock2: Infect{2}
   $unlock3: Infect{3}
 
+  # shockwave range: ~.2 in width (.35 height)
+  # boomerang range: ~.3 in width?
+  # infection ranges (approx)
+  # .185, .22, .26, .30
+  # drone has one "level" less, at 0 it's ~.15?
+  $range1: Infection_Range{2} or (Infection_Range and ^mode != 'drone')
+  $range2: Infection_Range{3} or (Infection_Range{2} and ^mode != 'drone')
+  $range3: Infection_Range{3} and ^mode != 'drone'
+
   $more_refills: ^refills < $count(Power_Matrix)
 
   $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
@@ -195,16 +203,23 @@ helpers:
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
 
+  $charge: Slingshot_Charge and ^mode == 'drone'
+  $spin: Slingshot_Weapon and ^mode == 'drone'
+
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
-     Under_Siege]
+     Under_Siege, Building_of_the_School]
   $all_flasks:itemList: >
-    [Flask{10}]
+    [Flask{11}]
   $all_health:itemList: >
     [Health_Node, Health_Fragment{5}]
   $all_weapons:itemList: >
     [Bronze_Axe]
+  $other_items:itemList: >
+    [Boomerang, Power_Matrix]
+  $all_urns:itemList: >
+    [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook]
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action: >

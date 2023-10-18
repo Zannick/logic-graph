@@ -837,6 +837,7 @@ areas:
         - name: Open Door
           req: $open
           do: ^_west_door_open = true
+          tags: [hack]
     - name: West 8
       coord: [21.05, 7.9]
       local:
@@ -845,6 +846,11 @@ areas:
       exits:
         - to: Ebih West > East 8
           tags: [xshift]
+      actions:
+        - name: Open Door
+          req: $open
+          do: ^_west_door_open = true
+          tags: [hack]
     - name: West Door Left
       coord: [21.3, 7.9]
       local:

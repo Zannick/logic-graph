@@ -16,20 +16,16 @@ pub fn access_default(_ctx: &Context) -> bool {
     true
 }
 
-pub fn access___amashilama_remote_drone_shockwave_power_matrix_wall_climb_slingshot_hook_all_weapons_all_notes_all_health_all_flasks(
+pub fn access___all_urns_all_weapons_other_items_all_notes_all_health_all_flasks(
     ctx: &Context,
 ) -> bool {
-    // [Amashilama, Remote_Drone, Shockwave, Power_Matrix, Wall_Climb, Slingshot_Hook, $all_weapons, $all_notes, $all_health, $all_flasks]
-    helper__all_weapons!(ctx)
+    // [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
+    helper__all_urns!(ctx)
+        && helper__all_weapons!(ctx)
+        && helper__other_items!(ctx)
         && helper__all_notes!(ctx)
         && helper__all_health!(ctx)
         && helper__all_flasks!(ctx)
-        && ctx.has(Item::Amashilama)
-        && ctx.has(Item::Remote_Drone)
-        && ctx.has(Item::Shockwave)
-        && ctx.has(Item::Power_Matrix)
-        && ctx.has(Item::Wall_Climb)
-        && ctx.has(Item::Slingshot_Hook)
 }
 pub fn access___remote_drone(ctx: &Context) -> bool {
     // [Remote_Drone]
@@ -407,6 +403,46 @@ pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
+pub fn access_giguna__gateway__door__ex__block_left_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__gateway__ctx__door_opened()
+}
+pub fn access_giguna__gateway__door__ex__left_platform_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__gateway__ctx__door_opened()
+}
+pub fn access_giguna__gateway__door__ex__passage_entry_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__gateway__ctx__door_opened()
+}
+pub fn access_giguna__gateway__passage_entry__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__gateway__ctx__door_opened()
+}
+pub fn access_giguna__giguna_base__below_gate__ex__kari_1__req(ctx: &Context) -> bool {
+    // ^_door_open and $grab and $climb
+    ((ctx.giguna__giguna_base__ctx__door_open() && helper__grab!(ctx)) && helper__climb!(ctx))
+}
+pub fn access_giguna__giguna_base__below_gate__ex__kari_2__req(ctx: &Context) -> bool {
+    // ^_door_open and $hook
+    (ctx.giguna__giguna_base__ctx__door_open() && helper__hook!(ctx))
+}
+pub fn access_giguna__giguna_base__below_gate__ex__middle_platform_1__req(ctx: &Context) -> bool {
+    // ^_door_open and $grab and $climb
+    ((ctx.giguna__giguna_base__ctx__door_open() && helper__grab!(ctx)) && helper__climb!(ctx))
+}
+pub fn access_giguna__giguna_base__below_gate__ex__middle_platform_2__req(ctx: &Context) -> bool {
+    // ^_door_open and $hook
+    (ctx.giguna__giguna_base__ctx__door_open() && helper__hook!(ctx))
+}
+pub fn access_giguna__giguna_base__kari__ex__below_gate_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.giguna__giguna_base__ctx__door_open()
+}
+pub fn access_giguna__giguna_base__middle_platform__ex__below_gate_1__req(ctx: &Context) -> bool {
+    // ^_door_open
+    ctx.giguna__giguna_base__ctx__door_open()
+}
 pub fn access_giguna__giguna_northeast__right_column__ex__door_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
@@ -494,6 +530,10 @@ pub fn access_giguna__west_caverns__east_susar__hack__req(ctx: &Context) -> bool
     // not ^_east_susar and $allegiance1
     (!ctx.giguna__west_caverns__ctx__east_susar() && helper__allegiance1!(ctx))
 }
+pub fn access_giguna_boulder(ctx: &Context) -> bool {
+    // Giguna_Boulder
+    ctx.has(Item::Giguna_Boulder)
+}
 pub fn access_giguna_breach__sw_save__side_door__ex__west_11_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna_breach__sw_save__ctx__door_opened()
@@ -522,6 +562,14 @@ pub fn access_giguna_dual_path_switch_and_hook(ctx: &Context) -> bool {
     // Giguna_Dual_Path_Switch and $hook
     (ctx.has(Item::Giguna_Dual_Path_Switch) && helper__hook!(ctx))
 }
+pub fn access_giguna_gateway_block(ctx: &Context) -> bool {
+    // Giguna_Gateway_Block
+    ctx.has(Item::Giguna_Gateway_Block)
+}
+pub fn access_giguna_gateway_gate(ctx: &Context) -> bool {
+    // Giguna_Gateway_Gate
+    ctx.has(Item::Giguna_Gateway_Gate)
+}
 pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
@@ -537,6 +585,10 @@ pub fn access_grab_and_can_deploy(ctx: &Context) -> bool {
 pub fn access_grab_and_climb(ctx: &Context) -> bool {
     // $grab and $climb
     (helper__grab!(ctx) && helper__climb!(ctx))
+}
+pub fn access_grab_and_giguna_gateway_block(ctx: &Context) -> bool {
+    // $grab and Giguna_Gateway_Block
+    (helper__grab!(ctx) && ctx.has(Item::Giguna_Gateway_Block))
 }
 pub fn access_grab_and_switch_40_12(ctx: &Context) -> bool {
     // $grab and Switch_40_12
@@ -578,6 +630,10 @@ pub fn access_hook(ctx: &Context) -> bool {
     // $hook
     helper__hook!(ctx)
 }
+pub fn access_hook_and_giguna_gateway_block(ctx: &Context) -> bool {
+    // $hook and Giguna_Gateway_Block
+    (helper__hook!(ctx) && ctx.has(Item::Giguna_Gateway_Block))
+}
 pub fn access_hook_and_hover(ctx: &Context) -> bool {
     // $hook and $hover
     (helper__hook!(ctx) && helper__hover!(ctx))
@@ -605,6 +661,10 @@ pub fn access_hover(ctx: &Context) -> bool {
 pub fn access_hover_and_hook(ctx: &Context) -> bool {
     // $hover and $hook
     (helper__hover!(ctx) && helper__hook!(ctx))
+}
+pub fn access_hover_or_hook(ctx: &Context) -> bool {
+    // $hover or $hook
+    (helper__hover!(ctx) || helper__hook!(ctx))
 }
 pub fn access_infect(ctx: &Context) -> bool {
     // Infect
@@ -756,6 +816,18 @@ pub fn access_offset(ctx: &Context) -> bool {
 pub fn access_open(ctx: &Context) -> bool {
     // $open
     helper__open!(ctx)
+}
+pub fn access_open_and_range1(ctx: &Context) -> bool {
+    // $open and $range1
+    (helper__open!(ctx) && helper__range1!(ctx))
+}
+pub fn access_open_and_range2(ctx: &Context) -> bool {
+    // $open and $range2
+    (helper__open!(ctx) && helper__range2!(ctx))
+}
+pub fn access_open_and_range3(ctx: &Context) -> bool {
+    // $open and $range3
+    (helper__open!(ctx) && helper__range3!(ctx))
 }
 pub fn access_overheat_and___melee_or_boomerang(ctx: &Context) -> bool {
     // $overheat and ($melee or $boomerang)
@@ -925,6 +997,10 @@ pub fn action_ebih__waterfall__below_left_switch__open_door__do(ctx: &mut Contex
     // ^_west_door_open = true
     ctx.set_ebih__waterfall__ctx__west_door_open(true);
 }
+pub fn action_ebih__waterfall__west_8__open_door__do(ctx: &mut Context) {
+    // ^_west_door_open = true
+    ctx.set_ebih__waterfall__ctx__west_door_open(true);
+}
 pub fn action_energy__max_energy(ctx: &mut Context) {
     // ^energy = $max_energy
     ctx.set_energy(helper__max_energy!(ctx));
@@ -952,6 +1028,30 @@ pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context) {
 pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context) {
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
+}
+pub fn action_giguna__gateway__flask_ledge__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__gateway__ctx__door_opened(true);
+}
+pub fn action_giguna__gateway__one_jump__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__gateway__ctx__door_opened(true);
+}
+pub fn action_giguna__giguna_base__switch_distance_1__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_giguna__giguna_base__ctx__door_open(true);
+}
+pub fn action_giguna__giguna_base__switch_distance_2__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_giguna__giguna_base__ctx__door_open(true);
+}
+pub fn action_giguna__giguna_base__switch_distance_3__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_giguna__giguna_base__ctx__door_open(true);
+}
+pub fn action_giguna__giguna_base__switch_distance_4__open_door__do(ctx: &mut Context) {
+    // ^_door_open = true
+    ctx.set_giguna__giguna_base__ctx__door_open(true);
 }
 pub fn action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx: &mut Context) {
     // ^_door_opened = true
