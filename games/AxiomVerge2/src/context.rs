@@ -159,6 +159,7 @@ pub enum Expectation {
     Switch3611(bool),
     Switch4012(bool),
     TerminalBreakthrough1(bool),
+    TheIdealKiengir(bool),
     UnderSiege(bool),
     UnderwaterMovement(bool),
     WallClimb(bool),
@@ -439,9 +440,10 @@ pub mod flags {
             const SWITCH_36_11 = 1 << 13;
             const SWITCH_40_12 = 1 << 14;
             const TERMINAL_BREAKTHROUGH_1 = 1 << 15;
-            const UNDER_SIEGE = 1 << 16;
-            const UNDERWATER_MOVEMENT = 1 << 17;
-            const WALL_CLIMB = 1 << 18;
+            const THE_IDEAL_KIENGIR = 1 << 16;
+            const UNDER_SIEGE = 1 << 17;
+            const UNDERWATER_MOVEMENT = 1 << 18;
+            const WALL_CLIMB = 1 << 19;
         }
     }
 }
@@ -537,7 +539,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 67;
+    const NUM_ITEMS: u32 = 68;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -645,6 +647,7 @@ impl context::Ctx for Context {
             Item::Terminal_Breakthrough_1 => self
                 .cbits3
                 .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1),
+            Item::The_Ideal_Kiengir => self.cbits3.contains(flags::ContextBits3::THE_IDEAL_KIENGIR),
             Item::Under_Siege => self.cbits3.contains(flags::ContextBits3::UNDER_SIEGE),
             Item::Underwater_Movement => self
                 .cbits3
@@ -850,6 +853,10 @@ impl context::Ctx for Context {
             Item::Terminal_Breakthrough_1 => self
                 .cbits3
                 .contains(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1)
+                .into(),
+            Item::The_Ideal_Kiengir => self
+                .cbits3
+                .contains(flags::ContextBits3::THE_IDEAL_KIENGIR)
                 .into(),
             Item::Under_Siege => self
                 .cbits3
@@ -1061,6 +1068,9 @@ impl context::Ctx for Context {
             },
             Item::Terminal_Breakthrough_1 => {
                 self.cbits3.insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
+            },
+            Item::The_Ideal_Kiengir => {
+                self.cbits3.insert(flags::ContextBits3::THE_IDEAL_KIENGIR);
             },
             Item::Under_Siege => {
                 self.cbits3.insert(flags::ContextBits3::UNDER_SIEGE);
@@ -1289,6 +1299,9 @@ impl context::Ctx for Context {
             Item::Terminal_Breakthrough_1 => {
                 self.cbits3
                     .insert(flags::ContextBits3::TERMINAL_BREAKTHROUGH_1);
+            }
+            Item::The_Ideal_Kiengir => {
+                self.cbits3.insert(flags::ContextBits3::THE_IDEAL_KIENGIR);
             }
             Item::Under_Siege => {
                 self.cbits3.insert(flags::ContextBits3::UNDER_SIEGE);
@@ -2512,6 +2525,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("The_Ideal_Kiengir", Yaml::Boolean(b)) => Expectation::TheIdealKiengir(*b),
+            ("The_Ideal_Kiengir", Yaml::Integer(i)) => Expectation::TheIdealKiengir(*i > 0),
+            ("The_Ideal_Kiengir", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Under_Siege", Yaml::Boolean(b)) => Expectation::UnderSiege(*b),
             ("Under_Siege", Yaml::Integer(i)) => Expectation::UnderSiege(*i > 0),
             ("Under_Siege", _) => {
@@ -3311,6 +3332,15 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "Terminal_Breakthrough_1", e, v
+                        ));
+                    }
+                }
+                Expectation::TheIdealKiengir(e) => {
+                    let v = self.has(Item::The_Ideal_Kiengir);
+                    if v != (*e).into() {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "The_Ideal_Kiengir", e, v
                         ));
                     }
                 }
@@ -4720,6 +4750,11 @@ impl context::Ctx for Context {
                 "{}TERMINAL_BREAKTHROUGH_1",
                 if n { "+" } else { "-" }
             ));
+        }
+        let n = self.cbits3.contains(flags::ContextBits3::THE_IDEAL_KIENGIR);
+        let p = old.cbits3.contains(flags::ContextBits3::THE_IDEAL_KIENGIR);
+        if n != p {
+            list.push(format!("{}THE_IDEAL_KIENGIR", if n { "+" } else { "-" }));
         }
         let n = self.cbits3.contains(flags::ContextBits3::UNDER_SIEGE);
         let p = old.cbits3.contains(flags::ContextBits3::UNDER_SIEGE);

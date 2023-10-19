@@ -297,6 +297,5 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Journal_2049_10_29
             | Item::Melee_Charge
             | Item::Notes_2053_02_27
-            | Item::The_Ideal_Kiengir
     )
 }

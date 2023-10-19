@@ -334,7 +334,7 @@ macro_rules! helper__spin {
 }
 
 /// $all_notes (  )
-/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, Building_of_the_School]
+/// [Dear_Ernest, Researchers_Missing, Letter_from_Trace,  Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,  Under_Siege, The_Ideal_Kiengir, Building_of_the_School]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr) => {{
@@ -348,6 +348,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::Companies_Layoff)
             && $ctx.has(Item::Record_Losses)
             && $ctx.has(Item::Under_Siege)
+            && $ctx.has(Item::The_Ideal_Kiengir)
             && $ctx.has(Item::Building_of_the_School)
     }};
 }

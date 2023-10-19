@@ -12165,6 +12165,9 @@ impl world::World for World {
                 if !ctx.has(Item::Terminal_Breakthrough_1) {
                     vec.push((Item::Terminal_Breakthrough_1, 1));
                 }
+                if !ctx.has(Item::The_Ideal_Kiengir) {
+                    vec.push((Item::The_Ideal_Kiengir, 1));
+                }
                 if !ctx.has(Item::Under_Siege) {
                     vec.push((Item::Under_Siege, 1));
                 }
@@ -12200,6 +12203,7 @@ impl world::World for World {
                 (Item::Shockwave, 1),
                 (Item::Slingshot_Hook, 1),
                 (Item::Terminal_Breakthrough_1, 1),
+                (Item::The_Ideal_Kiengir, 1),
                 (Item::Under_Siege, 1),
                 (Item::Wall_Climb, 1),
             ],
@@ -13413,7 +13417,6 @@ impl World {
                     | Item::Notes_2053_02_27
                     | Item::Slingshot_Charge
                     | Item::Slingshot_Weapon
-                    | Item::The_Ideal_Kiengir
             ),
             _ => false,
         }
