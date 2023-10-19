@@ -1191,7 +1191,8 @@ where
                     );
                     assert!(
                         vec.len() < 1024,
-                        "Raw history found in statedb way too long, possible loop. Last 24:\n{:?}",
+                        "Raw history found in statedb way too long ({}), possible loop. Last 24:\n{:?}",
+                        vec.len(),
                         vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
                     );
                     state_key = prev;
