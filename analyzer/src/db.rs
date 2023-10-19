@@ -864,6 +864,13 @@ where
         let (hist, dur) = el.remove_history();
         next_entries.push((dur, state_key.clone()));
 
+        assert!(
+            hist.len() < 1024,
+            "Generated a state with way too much history: {}. Last 24:\n{:?}",
+            hist.len(),
+            hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
+        );
+
         // This is the only part of the chain where the hist and prev are changed
         self.statedb
             .merge_cf_opt(
@@ -1178,7 +1185,8 @@ where
                 if !prev.is_empty() {
                     assert!(
                         hist.len() < 1024,
-                        "History entry found in statedb way too long. Last 24:\n{:?}",
+                        "History entry found in statedb way too long: {}. Last 24:\n{:?}",
+                        hist.len(),
                         hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
                     );
                     assert!(
