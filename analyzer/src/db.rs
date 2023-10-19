@@ -6,7 +6,7 @@ use crate::estimates::ContextScorer;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
-use crate::CommonHasher;
+use crate::{new_hashmap, CommonHasher};
 use anyhow::Result;
 use humansize::{SizeFormatter, BINARY};
 use plotlib::page::Page;
@@ -19,7 +19,7 @@ use rocksdb::{
     MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
@@ -1176,7 +1176,55 @@ where
         Ok(())
     }
 
+    fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<(), Error> {
+        if let Some(StateData { hist, prev, .. }) = self.get_deserialize_state_data(state_key)? {
+            if let Some(StateData {
+                hist: hist2,
+                prev: prev2,
+                ..
+            }) = self.get_deserialize_state_data(&prev)?
+            {
+                assert!(
+                    prev2 != *state_key,
+                    "2-cycle detected: last:{:?} prev:{:?}\nlast state: {:?}\nprev state: {:?}",
+                    hist,
+                    hist2,
+                    state_key,
+                    prev
+                );
+            }
+        }
+        Ok(())
+    }
+
+    fn detect_cycle(&self, mut state_key: Vec<u8>) -> Result<(), Error> {
+        let mut states_found: HashMap<Vec<u8>, i32, CommonHasher> = new_hashmap();
+        let mut depth = 0;
+        loop {
+            states_found.insert(state_key.clone(), depth);
+            if let Some(StateData { hist, prev, .. }) =
+                self.get_deserialize_state_data(&state_key)?
+            {
+                depth += 1;
+                if let Some(existing_depth) = states_found.get(&prev) {
+                    panic!(
+                        "Cycle of length {} found ending at depth {}: last:{:?}\nstate: {:?}",
+                        depth - existing_depth,
+                        existing_depth,
+                        hist,
+                        Self::deserialize_state(&state_key)
+                            .expect("Failed to deserialize while reporting an error")
+                    );
+                }
+                state_key = prev;
+            } else {
+                return Ok(());
+            }
+        }
+    }
+
     fn get_history_raw(&self, mut state_key: Vec<u8>) -> Result<Vec<HistoryAlias<T>>, Error> {
+        assert!(self.quick_detect_2cycle(&state_key).is_ok());
         let mut vec = Vec::new();
         loop {
             if let Some(StateData { hist, prev, .. }) =
@@ -1189,6 +1237,9 @@ where
                         hist.len(),
                         hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
                     );
+                    if vec.len() >= 1024 {
+                        assert!(self.detect_cycle(state_key).is_ok());
+                    }
                     assert!(
                         vec.len() < 1024,
                         "Raw history found in statedb way too long ({}), possible loop. Last 24:\n{:?}",
