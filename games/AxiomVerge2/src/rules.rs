@@ -403,6 +403,155 @@ pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
+pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+    ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
+        && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^mode == 'drone' and ^_combo_entered
+    (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__arc_passage__ex__hidden_passage_west_2__req(
+    ctx: &Context,
+) -> bool {
+    // $hook and ^_combo_entered
+    (helper__hook!(ctx) && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__mid_susar__caught__req(ctx: &Context) -> bool {
+    // not ^_mid_susar
+    !ctx.giguna__east_caverns__ctx__mid_susar()
+}
+pub fn access_giguna__east_caverns__mid_susar__ex__middle_ledge_1__req(ctx: &Context) -> bool {
+    // $grab and ^_mid_susar
+    (helper__grab!(ctx) && ctx.giguna__east_caverns__ctx__mid_susar())
+}
+pub fn access_giguna__east_caverns__mid_susar__ex__middle_ledge_2__req(ctx: &Context) -> bool {
+    // $hook and ^_mid_susar
+    (helper__hook!(ctx) && ctx.giguna__east_caverns__ctx__mid_susar())
+}
+pub fn access_giguna__east_caverns__mid_susar__ex__middle_rock_1__req(ctx: &Context) -> bool {
+    // ^_mid_susar
+    ctx.giguna__east_caverns__ctx__mid_susar()
+}
+pub fn access_giguna__east_caverns__mid_susar__hack__req(ctx: &Context) -> bool {
+    // not ^_mid_susar and $allegiance1
+    (!ctx.giguna__east_caverns__ctx__mid_susar() && helper__allegiance1!(ctx))
+}
+pub fn access_giguna__east_caverns__middle_rock__ex__hidden_passage_east_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^mode == 'drone' and ^_combo_entered
+    (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_east_1__req(
+    ctx: &Context,
+) -> bool {
+    // $hover and $hook and ^_combo_entered
+    ((helper__hover!(ctx) && helper__hook!(ctx)) && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__midwest_ledge__ex__hidden_passage_east_2__req(
+    ctx: &Context,
+) -> bool {
+    // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+    ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
+        && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_1__req(
+    ctx: &Context,
+) -> bool {
+    // $hover and $hook and ^_combo_entered
+    ((helper__hover!(ctx) && helper__hook!(ctx)) && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__req(
+    ctx: &Context,
+) -> bool {
+    // ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+    ((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Mist_Upgrade))
+        && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_giguna__east_caverns__statues_ledge__open_door__req(ctx: &Context) -> bool {
+    // not ^_door_opened and $open and $range1
+    ((!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx)) && helper__range1!(ctx))
+}
+pub fn access_giguna__east_caverns__switch__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__east_caverns__ctx__door_opened()
+}
+pub fn access_giguna__east_caverns__switch__open_door__req(ctx: &Context) -> bool {
+    // not ^_door_opened and $open
+    (!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx))
+}
+pub fn access_giguna__east_caverns__upper_susar__caught__req(ctx: &Context) -> bool {
+    // not ^_upper_susar
+    !ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar__ex__middle_ledge_1__req(ctx: &Context) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar__ex__top_past_susar_1__req(ctx: &Context) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar__ex__upper_floor_ledge_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar__ex__upper_platforms_right_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar_jump_from_east__caught__req(ctx: &Context) -> bool {
+    // not ^_upper_susar
+    !ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar_jump_from_east__ex__middle_ledge_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar_jump_from_east__ex__midwest_ledge_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar_jump_from_east__hack__req(ctx: &Context) -> bool {
+    // not ^_upper_susar and $allegiance1
+    (!ctx.giguna__east_caverns__ctx__upper_susar() && helper__allegiance1!(ctx))
+}
+pub fn access_giguna__east_caverns__upper_susar_mid_jump__ex__top_past_susar_1__req(
+    ctx: &Context,
+) -> bool {
+    // ^_upper_susar
+    ctx.giguna__east_caverns__ctx__upper_susar()
+}
+pub fn access_giguna__east_caverns__upper_susar_mid_jump__hack__req(ctx: &Context) -> bool {
+    // not ^_upper_susar and $allegiance1
+    (!ctx.giguna__east_caverns__ctx__upper_susar() && helper__allegiance1!(ctx))
+}
+pub fn access_giguna__east_caverns__west_14__enter_combo__req(ctx: &Context) -> bool {
+    // not ^_combo_entered
+    !ctx.giguna__east_caverns__ctx__combo_entered()
+}
+pub fn access_giguna__east_caverns__west_16__ex__door_1__req(ctx: &Context) -> bool {
+    // ^_door_opened
+    ctx.giguna__east_caverns__ctx__door_opened()
+}
+pub fn access_giguna__east_caverns__west_16__open_door__req(ctx: &Context) -> bool {
+    // not ^_door_opened and $open and $range2
+    ((!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx)) && helper__range2!(ctx))
+}
 pub fn access_giguna__gateway__door__ex__block_left_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__gateway__ctx__door_opened()
@@ -1028,6 +1177,46 @@ pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context) {
 pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context) {
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
+}
+pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context) {
+    // ^_mid_susar = true
+    ctx.set_giguna__east_caverns__ctx__mid_susar(true);
+}
+pub fn action_giguna__east_caverns__mid_susar__hack__do(ctx: &mut Context) {
+    // ^_mid_susar = true
+    ctx.set_giguna__east_caverns__ctx__mid_susar(true);
+}
+pub fn action_giguna__east_caverns__statues_ledge__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__east_caverns__ctx__door_opened(true);
+}
+pub fn action_giguna__east_caverns__switch__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__east_caverns__ctx__door_opened(true);
+}
+pub fn action_giguna__east_caverns__upper_susar__caught__do(ctx: &mut Context) {
+    // ^_upper_susar = true
+    ctx.set_giguna__east_caverns__ctx__upper_susar(true);
+}
+pub fn action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx: &mut Context) {
+    // ^_upper_susar = true
+    ctx.set_giguna__east_caverns__ctx__upper_susar(true);
+}
+pub fn action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(ctx: &mut Context) {
+    // ^_upper_susar = true
+    ctx.set_giguna__east_caverns__ctx__upper_susar(true);
+}
+pub fn action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx: &mut Context) {
+    // ^_upper_susar = true
+    ctx.set_giguna__east_caverns__ctx__upper_susar(true);
+}
+pub fn action_giguna__east_caverns__west_14__enter_combo__do(ctx: &mut Context) {
+    // ^_combo_entered = true
+    ctx.set_giguna__east_caverns__ctx__combo_entered(true);
+}
+pub fn action_giguna__east_caverns__west_16__open_door__do(ctx: &mut Context) {
+    // ^_door_opened = true
+    ctx.set_giguna__east_caverns__ctx__door_opened(true);
 }
 pub fn action_giguna__gateway__flask_ledge__open_door__do(ctx: &mut Context) {
     // ^_door_opened = true

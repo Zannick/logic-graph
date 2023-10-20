@@ -237,7 +237,7 @@ areas:
         - name: Caught
           req: not ^_upper_susar
           do: ^_upper_susar = true
-          time: 3
+          tags: [susar]
         - name: Hack
           req: not ^_upper_susar and $allegiance1
           price: 100
@@ -312,7 +312,7 @@ areas:
         - name: Caught
           req: not ^_lower_susar
           do: ^_lower_susar = true
-          time: 3
+          tags: [susar]
         - name: Hack
           req: not ^_lower_susar and $allegiance1
           do: ^_lower_susar = true
@@ -505,7 +505,7 @@ areas:
         - name: Caught
           req: not ^_east_susar
           do: ^_east_susar = true
-          time: 3
+          tags: [susar]
         - name: Hack
           req: not ^_east_susar and $allegiance1
           do: ^_east_susar = true
@@ -630,6 +630,9 @@ areas:
       local:
         - to: Door Right
           jumps: 2  # ?
+      exits:
+        - to: East Caverns > West 14
+          tags: [xshift]
     - name: East Ledge
       coord: [18.7, 12.2]
       local:
@@ -658,6 +661,10 @@ areas:
       coord: [18.65, 13.2]
       local:
         - to: East 14
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
       exits:
         - to: Door Left
           req: Ebih_Wasteland_Door
@@ -2158,17 +2165,457 @@ areas:
 
 - name: East Caverns
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door_opened: false
+  load:
+    _combo_entered: false
   reset:
     _upper_susar: false
     _mid_susar: false
-    _code_entered: false
-    _door_opened: false
   spots:
     - name: West 14
       coord: [19.05, 13.6]
+      local:
+        - to: Upper Platforms Left
+        - to: Upper Floor
+      exits:
+        - to: Wasteland > East 14
+          tags: [xshift]
+      actions:
+        - name: Enter Combo
+          req: not ^_combo_entered
+          do: ^_combo_entered = true
+          time: 1.75
+    - name: Upper Platforms Left
+      coord: [19.3, 13.65]
+      local:
+        - to: West 14
+          jumps: 1
+        - to: Upper Platforms Right
+        - to: Upper Floor
+    - name: Upper Platforms Right
+      coord: [19.65, 13.8]
+      local:
+        - to: Upper Floor Ledge
+        - to: Upper Susar
+          jumps: 1
+        - to: Upper Susar Mid-jump
+          jumps: 1
+        - to: Middle Ledge
+      exits:
+        - to: Upper Passage West
+          req: $hook and $hover
+          time: 1.5  # ?
+        # mist movement is also possible
+    - name: Upper Floor
+      coord: [19.55, 13.9]
+      local:
+        - to: Upper Platforms Right
+          jumps: 1
+        - to: Upper Platforms Left
+          jumps: 2
+        - to: Upper Floor Ledge
+      exits:
+        - to: West 14
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Upper Passage West
+          req: $hook and $hover
+          time: 1  # ?
+    - name: Upper Floor Ledge
+      coord: [19.7, 14.0]
+      local:
+        - to: Upper Floor
+        - to: Upper Platforms Right
+          jumps: 1
+        - to: Upper Susar
+          jumps: 1
+        - to: Middle Ledge
+        - to: Midwest Ledge
+    - name: Upper Susar
+      coord: [19.875, 13.75]
+      actions:
+        - name: Caught
+          req: not ^_upper_susar
+          do: ^_upper_susar = true
+          tags: [susar]
+      exits:
+        - to: Top Past Susar
+          req: ^_upper_susar
+          movement: base
+          jumps: 1
+        - to: Upper Floor Ledge
+          req: ^_upper_susar
+          movement: base
+        - to: Upper Platforms Right
+          req: ^_upper_susar
+          movement: base
+        - to: Middle Ledge
+          req: ^_upper_susar
+          movement: base
+    - name: Upper Susar Mid-jump
+      coord: [19.8, 13.6]
+      local:
+        - to: Upper Susar
+      exits:
+        - to: Top Past Susar
+          req: ^_upper_susar
+          movement: base
+      actions:
+        - name: Hack
+          req: not ^_upper_susar and $allegiance1
+          price: 100
+          do: ^_upper_susar = true
+          time: 0.5
+    - name: Upper Susar Jump from East
+      coord: [19.95, 13.5]
+      local:
+        - to: Upper Susar
+      actions:
+        - name: Hack
+          req: not ^_upper_susar and $allegiance1
+          price: 100
+          do: ^_upper_susar = true
+          tags: [hack]
+        - name: Caught
+          req: not ^_upper_susar
+          do: ^_upper_susar = true
+          tags: [susar]
+      exits:
+        - to: Middle Ledge
+          req: ^_upper_susar
+          movement: base
+        - to: Midwest Ledge
+          req: ^_upper_susar
+          movement: base
+    - name: Top Past Susar
+      coord: [20.1, 13.65]
+      local:
+        - to: Upper Susar
+        - to: Top Ledge
+        - to: Upper Susar Jump from East
+          jumps: 1
+    - name: Top Ledge
+      coord: [20.6, 13.65]
+      local:
+        - to: Top Past Susar
+        - to: Upper Passage East
+        - to: East Shaft
+
+    - name: Upper Passage West
+      coord: [20.0, 13.9]
+      local:
+        - to: Middle Ledge
+        - to: Mid Susar
+      exits:
+        - to: Upper Passage East
+          req: ^mode == 'drone'
+          movement: base
+    - name: Upper Passage East
+      coord: [20.6, 13.9]
+      local:
+        - to: East Shaft
+      exits:
+        - to: Top Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Top Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Upper Passage West
+          req: ^mode == 'drone'
+          movement: base
+    - name: East Shaft
+      coord: [20.8, 14.3]
+      local:
+        - to: Upper Passage East
+          jumps: 2
+        - to: East Side
+    - name: East Side
+      coord: [20.7, 14.7]
+      local:
+        - to: Carving
+        - to: East Shaft
+          jumps: 3
+      exits:
+        - to: East Shaft
+          req: $hook
+          time: 2  # ?
+        - to: Middle Rock
+          req: $hook
+          time: 1.5  # ?
+    - name: Carving
+      coord: [20.55, 15.0]
+      local:
+        - to: Arc Passage
+      exits:
+        - to: Middle Rock
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Middle Rock
+          req: $hook
+          time: 1  # ?
+        - to: East Side
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: East Side
+          req: $hook
+          movement: base
+          jumps: 1
+
+    - name: Middle Ledge
+      coord: [19.85, 14.25]
+      local:
+        - to: Mid Susar
+        - to: Midwest Ledge
+      exits:
+        - to: Upper Passage West
+          req: $hook
+          time: 0.5  # ?
+        - to: Upper Floor Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Upper Floor Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Mid Susar
+      coord: [20.1, 14.4]
+      exits:
+        - to: Middle Ledge
+          req: $grab and ^_mid_susar
+          movement: base
+          jumps: 2
+        - to: Middle Ledge
+          req: $hook and ^_mid_susar
+          movement: base
+          jumps: 1
+        - to: Middle Rock
+          req: ^_mid_susar
+          movement: base
+      actions:
+        - name: Hack
+          req: not ^_mid_susar and $allegiance1
+          price: 100
+          do: ^_mid_susar = true
+          tags: [hack]
+        - name: Caught
+          req: not ^_mid_susar
+          do: ^_mid_susar = true
+          tags: [susar]
+    - name: Middle Rock
+      coord: [20.35, 14.6]
+      local:
+        - to: Mid Susar
+          jumps: 1
+        - to: Carving
+        - to: Arc Passage
+      exits:
+        - to: Hidden Passage East
+          req: ^mode == 'drone' and ^_combo_entered
+          movement: base
+
+    - name: Hidden Passage East
+      coord: [20.35, 15.05]
+      local:
+        - to: Carving
+          jumps: 1
+        - to: Arc Passage
+      exits:
+        - to: Hidden Passage Center
+          req: ^mode == 'drone'
+          movement: base
+    - name: Hidden Passage Center
+      coord: [20.0, 15.05]
+      local:
+        - to: Hidden Passage West
+        - to: Hidden Passage East
+      locations:
+        - name: Hidden Flask
+          item: Flask
+          tags: [flask]
+    - name: Hidden Passage West
+      coord: [19.75, 15.05]
+      local:
+        - to: Midwest Ledge
+        - to: Arc Ledge
+      exits:
+        - to: Hidden Passage Center
+          req: ^mode == 'drone'
+          movement: base
+        - to: Statues Ledge
+          req: $hover
+          movement: base
+        - to: Statues Ledge
+          req: $hook
+          time: 1  # ?
+    - name: Midwest Ledge
+      coord: [19.65, 14.9]
+      local:
+        - to: Lower Ledge
+        - to: Arc Ledge
+        - to: Statues Ledge
+        - to: Middle Ledge
+          thru: [19.6, 20.3]
+          jumps: [4, 1]
+      exits:
+        - to: Middle Ledge
+          req: $grab
+          movement: base
+          jumps: 6
+        - to: Hidden Passage East
+          req: $hover and $hook and ^_combo_entered
+          time: 1.75  # ?
+        - to: Hidden Passage East
+          req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+          price: 20
+          time: 1.5  # ?
+
+    - name: Statues Ledge
+      coord: [19.5, 15.5]
+      local:
+        - to: Switch
+        - to: Lower Ledge
+      exits:
+        - to: Midwest Ledge
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Midwest Ledge
+          req: $hook
+          time: 1.5  # ?
+        - to: Hidden Passage West
+          req: $hover and $hook and ^_combo_entered
+          movement: base
+          jumps: 1
+        - to: Hidden Passage West
+          req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+          price: 20
+          time: 1.2  # ?
+      actions:
+        - name: Open Door
+          req: not ^_door_opened and $open and $range1
+          do: ^_door_opened = true
+          tags: [hack]
+
+    - name: Switch
+      coord: [19.3, 15.5]
+      local:
+        - to: Statues Ledge
+      exits:
+        - to: Door
+          req: ^_door_opened
+          movement: base
+      actions:
+        - name: Open Door
+          req: not ^_door_opened and $open
+          do: ^_door_opened = true
+          tags: [hack]
+    - name: Door
+      coord: [19.125, 15.5]
+      local:
+        - to: Switch
+        - to: West 16
+          jumps: 1
+    - name: West 16
+      coord: [19.05, 15.45]
+      exits:
+        - to: Door
+          req: ^_door_opened
+          movement: base
+        - to: Antechamber > East 16
+          tags: [xshift]
+      actions:
+        - name: Open Door
+          req: not ^_door_opened and $open and $range2
+          do: ^_door_opened = true
+          tags: [hack]
+
+    - name: Arc Ledge
+      coord: [19.8, 15.7]
+      local:
+        - to: Lower Ledge
+        - to: Arc Passage
+          jumps: 3
+      exits:
+        - to: Statues Ledge
+          req: $hook
+          time: 1  # ?
+        - to: Hidden Passage West
+          req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
+          movement: mist2
+          price: 30
+    - name: Arc Passage
+      coord: [20.4, 15.6]
+      local:
+        - to: Arc Ledge
+          jumps: 3
+        - to: Carving
+          jumps: 3
+      exits:
+        - to: Hidden Passage West
+          req: ^mode == 'drone' and ^_combo_entered
+          movement: base
+          jumps: 3
+        - to: Hidden Passage West
+          req: $hook and ^_combo_entered
+          time: 1.2  # ?
+    - name: Lower Ledge
+      coord: [19.55, 16.25]
+      local:
+        - to: West 17
+        - to: West Grass
+        - to: Under Lower Ledge
+          thru: [19.5, 16.5]
+      exits:
+        - to: Arc Ledge
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Arc Ledge
+          req: $hook
+          time: 1.2  # ?
 
     - name: West 17
       coord: [19.05, 16.85]
+      local:
+        - to: West Grass
+          jumps: 1
+      exits:
+        - to: Dual Path > East 17
+          tags: [xshift]
+    - name: West Grass
+      coord: [19.4, 16.8]
+      local:
+        - to: West 17
+        - to: Under Lower Ledge
+      exits:
+        - to: Lower Ledge
+          req: $hook and $hover
+          time: 2  # ?
+    - name: Under Lower Ledge
+      coord: [19.6, 16.8]
+      local:
+        - to: East Grass
+          jumps: 2
+    - name: East Grass
+      coord: [20.45, 16.7]
+      local:
+        - to: Under Lower Ledge
+      exits:
+        - to: East 17
+          req: $hook
+          time: 1.5  # ?
+    - name: East 17
+      coord: [20.95, 16.3]
+      local:
+        - to: East Grass
+      exits:
+        - to: Vertical Interchange > West 17
 
 - name: Gateway
   on_entry: $reset_old_area(^newpos)
@@ -2392,3 +2839,9 @@ areas:
       coord: [21.05, 16.3]
     - name: West 19
       coord: [21.05, 18.8]
+
+- name: Antechamber
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 16
+      coord: [18.95, 15.45]

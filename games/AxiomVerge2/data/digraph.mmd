@@ -743,7 +743,39 @@ subgraph Giguna
     end
     subgraph Giguna__East_Caverns[East Caverns]
         Giguna__East_Caverns__West_14(West 14);
+        Giguna__East_Caverns__Upper_Platforms_Left(Upper Platforms Left);
+        Giguna__East_Caverns__Upper_Platforms_Right(Upper Platforms Right);
+        Giguna__East_Caverns__Upper_Floor(Upper Floor);
+        Giguna__East_Caverns__Upper_Floor_Ledge(Upper Floor Ledge);
+        Giguna__East_Caverns__Upper_Susar(Upper Susar);
+        Giguna__East_Caverns__Upper_Susar_Mid_jump(Upper Susar Mid-jump);
+        Giguna__East_Caverns__Upper_Susar_Jump_from_East(Upper Susar Jump from East);
+        Giguna__East_Caverns__Top_Past_Susar(Top Past Susar);
+        Giguna__East_Caverns__Top_Ledge(Top Ledge);
+        Giguna__East_Caverns__Upper_Passage_West(Upper Passage West);
+        Giguna__East_Caverns__Upper_Passage_East(Upper Passage East);
+        Giguna__East_Caverns__East_Shaft(East Shaft);
+        Giguna__East_Caverns__East_Side(East Side);
+        Giguna__East_Caverns__Carving(Carving);
+        Giguna__East_Caverns__Middle_Ledge(Middle Ledge);
+        Giguna__East_Caverns__Mid_Susar(Mid Susar);
+        Giguna__East_Caverns__Middle_Rock(Middle Rock);
+        Giguna__East_Caverns__Hidden_Passage_East(Hidden Passage East);
+        Giguna__East_Caverns__Hidden_Passage_Center(Hidden Passage Center);
+        Giguna__East_Caverns__Hidden_Passage_West(Hidden Passage West);
+        Giguna__East_Caverns__Midwest_Ledge(Midwest Ledge);
+        Giguna__East_Caverns__Statues_Ledge(Statues Ledge);
+        Giguna__East_Caverns__Switch(Switch);
+        Giguna__East_Caverns__Door(Door);
+        Giguna__East_Caverns__West_16(West 16);
+        Giguna__East_Caverns__Arc_Ledge(Arc Ledge);
+        Giguna__East_Caverns__Arc_Passage(Arc Passage);
+        Giguna__East_Caverns__Lower_Ledge(Lower Ledge);
         Giguna__East_Caverns__West_17(West 17);
+        Giguna__East_Caverns__West_Grass(West Grass);
+        Giguna__East_Caverns__Under_Lower_Ledge(Under Lower Ledge);
+        Giguna__East_Caverns__East_Grass(East Grass);
+        Giguna__East_Caverns__East_17(East 17);
     end
     subgraph Giguna__Gateway[Gateway]
         Giguna__Gateway__West_18(West 18);
@@ -769,6 +801,9 @@ subgraph Giguna
     subgraph Giguna__Vertical_Interchange[Vertical Interchange]
         Giguna__Vertical_Interchange__West_17(West 17);
         Giguna__Vertical_Interchange__West_19(West 19);
+    end
+    subgraph Giguna__Antechamber[Antechamber]
+        Giguna__Antechamber__East_16(East 16);
     end
 end
 subgraph Glacier
@@ -1128,7 +1163,7 @@ Giguna__Carnelian__West_10 <--> Giguna__West_Caverns__East_10
 Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__West_10
 Giguna__Dual_Path__Base_of_Wall <--> Giguna__Dual_Path__Wall_Secret
 Giguna__Dual_Path__Base_of_Wall --> Giguna__Dual_Path__Wall_Top
-Giguna__Dual_Path__East_17 --> Giguna__East_Caverns__West_17
+Giguna__Dual_Path__East_17 <--> Giguna__East_Caverns__West_17
 Giguna__Dual_Path__East_18 <--> Giguna__Gateway__West_18
 Giguna__Dual_Path__East_Gate --> Giguna__Dual_Path__East_Gate_NW
 Giguna__Dual_Path__East_Gate_NE --> Giguna__Dual_Path__East_Gate
@@ -1140,6 +1175,44 @@ Giguna__Dual_Path__West_18 --> Giguna__Dual_Path__West_Gate
 Giguna__Dual_Path__West_18 <--> Giguna__Lamassu__East_18
 Giguna__Dual_Path__West_Gate <--> Giguna__Dual_Path__West_Gate_NE
 Giguna__Dual_Path__West_Gate <--> Giguna__Dual_Path__West_Gate_NW
+Giguna__East_Caverns__Arc_Ledge --> Giguna__East_Caverns__Hidden_Passage_West
+Giguna__East_Caverns__Arc_Ledge --> Giguna__East_Caverns__Statues_Ledge
+Giguna__East_Caverns__Arc_Passage --> Giguna__East_Caverns__Hidden_Passage_West
+Giguna__East_Caverns__Carving --> Giguna__East_Caverns__East_Side
+Giguna__East_Caverns__Carving --> Giguna__East_Caverns__Middle_Rock
+Giguna__East_Caverns__East_17 --> Giguna__Vertical_Interchange__West_17
+Giguna__East_Caverns__East_Grass --> Giguna__East_Caverns__East_17
+Giguna__East_Caverns__East_Side --> Giguna__East_Caverns__East_Shaft
+Giguna__East_Caverns__East_Side --> Giguna__East_Caverns__Middle_Rock
+Giguna__East_Caverns__Hidden_Passage_East --> Giguna__East_Caverns__Hidden_Passage_Center
+Giguna__East_Caverns__Hidden_Passage_West --> Giguna__East_Caverns__Hidden_Passage_Center
+Giguna__East_Caverns__Hidden_Passage_West <--> Giguna__East_Caverns__Statues_Ledge
+Giguna__East_Caverns__Lower_Ledge --> Giguna__East_Caverns__Arc_Ledge
+Giguna__East_Caverns__Mid_Susar --> Giguna__East_Caverns__Middle_Ledge
+Giguna__East_Caverns__Mid_Susar --> Giguna__East_Caverns__Middle_Rock
+Giguna__East_Caverns__Middle_Ledge --> Giguna__East_Caverns__Upper_Floor_Ledge
+Giguna__East_Caverns__Middle_Ledge --> Giguna__East_Caverns__Upper_Passage_West
+Giguna__East_Caverns__Middle_Rock --> Giguna__East_Caverns__Hidden_Passage_East
+Giguna__East_Caverns__Midwest_Ledge --> Giguna__East_Caverns__Hidden_Passage_East
+Giguna__East_Caverns__Midwest_Ledge --> Giguna__East_Caverns__Middle_Ledge
+Giguna__East_Caverns__Statues_Ledge --> Giguna__East_Caverns__Midwest_Ledge
+Giguna__East_Caverns__Switch --> Giguna__East_Caverns__Door
+Giguna__East_Caverns__Upper_Floor --> Giguna__East_Caverns__Upper_Passage_West
+Giguna__East_Caverns__Upper_Floor --> Giguna__East_Caverns__West_14
+Giguna__East_Caverns__Upper_Passage_East --> Giguna__East_Caverns__Top_Ledge
+Giguna__East_Caverns__Upper_Passage_East <--> Giguna__East_Caverns__Upper_Passage_West
+Giguna__East_Caverns__Upper_Platforms_Right --> Giguna__East_Caverns__Upper_Passage_West
+Giguna__East_Caverns__Upper_Susar --> Giguna__East_Caverns__Middle_Ledge
+Giguna__East_Caverns__Upper_Susar --> Giguna__East_Caverns__Top_Past_Susar
+Giguna__East_Caverns__Upper_Susar --> Giguna__East_Caverns__Upper_Floor_Ledge
+Giguna__East_Caverns__Upper_Susar --> Giguna__East_Caverns__Upper_Platforms_Right
+Giguna__East_Caverns__Upper_Susar_Jump_from_East --> Giguna__East_Caverns__Middle_Ledge
+Giguna__East_Caverns__Upper_Susar_Jump_from_East --> Giguna__East_Caverns__Midwest_Ledge
+Giguna__East_Caverns__Upper_Susar_Mid_jump --> Giguna__East_Caverns__Top_Past_Susar
+Giguna__East_Caverns__West_14 <--> Giguna__Wasteland__East_14
+Giguna__East_Caverns__West_16 --> Giguna__Antechamber__East_16
+Giguna__East_Caverns__West_16 --> Giguna__East_Caverns__Door
+Giguna__East_Caverns__West_Grass --> Giguna__East_Caverns__Lower_Ledge
 Giguna__Far_Corner__South --> Giguna__Helipad__North
 Giguna__Gateway__Block_Left <--> Giguna__Gateway__Block_Lowered
 Giguna__Gateway__Block_Lowered <--> Giguna__Gateway__Block_Right
