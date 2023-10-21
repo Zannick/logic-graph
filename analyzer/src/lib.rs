@@ -95,6 +95,8 @@ pub mod testlib {
                     if $ctx.local_travel_time(movement_state, next_spot) > 0 {
                         $ctx.set_position(next_spot);
                         continue;
+                    } else if $ctx.position() == next_spot {
+                        errors.push(format!("attempting to move to current position: {}", next_spot));
                     } else if $world.are_spots_connected($ctx.position(), next_spot) {
                         errors.push(String::from("local travel not available"));
                     }

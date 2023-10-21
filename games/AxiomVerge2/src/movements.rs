@@ -8,7 +8,6 @@ use crate::context::Context;
 use crate::graph::SpotId;
 use crate::rules;
 use analyzer::context::Ctx;
-use enum_map::{enum_map, EnumMap};
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
 enum Movement {
@@ -9615,12105 +9614,6 @@ pub fn local_travel_time(
     }
 }
 
-pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
-    enum_map! {
-        SpotId::None => enum_map!{ _ => u32::MAX },
-        SpotId::Amagi__Main_Area__East_15 => enum_map! {
-            SpotId::Amagi__Main_Area__East_15 => 0,
-            SpotId::Amagi__Main_Area__Waters_Edge => 4035,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Waters_Edge => enum_map! {
-            SpotId::Amagi__Main_Area__East_15 => 4035,
-            SpotId::Amagi__Main_Area__Waters_Edge => 0,
-            SpotId::Amagi__Main_Area__Shallow_End => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Shallow_End => enum_map! {
-            SpotId::Amagi__Main_Area__Waters_Edge => 1000,
-            SpotId::Amagi__Main_Area__Shallow_End => 0,
-            SpotId::Amagi__Main_Area__Cliff => 4035,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Cliff => enum_map! {
-            SpotId::Amagi__Main_Area__Shallow_End => 4035,
-            SpotId::Amagi__Main_Area__Cliff => 0,
-            SpotId::Amagi__Main_Area__Upper_Platform => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Upper_Platform => enum_map! {
-            SpotId::Amagi__Main_Area__Cliff => 1000,
-            SpotId::Amagi__Main_Area__Upper_Platform => 0,
-            SpotId::Amagi__Main_Area__West_Shelf => 1228,
-            SpotId::Amagi__Main_Area__Platform_2 => 701,
-            SpotId::Amagi__Main_Area__East_Ledge => 700,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__West_Shelf => enum_map! {
-            SpotId::Amagi__Main_Area__Upper_Platform => 2000,
-            SpotId::Amagi__Main_Area__West_Shelf => 0,
-            SpotId::Amagi__Main_Area__West_Side => 1403,
-            SpotId::Amagi__Main_Area__Platform_2 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__West_Side => enum_map! {
-            SpotId::Amagi__Main_Area__West_Shelf => 1403,
-            SpotId::Amagi__Main_Area__West_Side => 0,
-            SpotId::Amagi__Main_Area__Carving => 2300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Platform_2 => enum_map! {
-            SpotId::Amagi__Main_Area__Upper_Platform => 1000,
-            SpotId::Amagi__Main_Area__West_Shelf => 1000,
-            SpotId::Amagi__Main_Area__Platform_2 => 0,
-            SpotId::Amagi__Main_Area__East_Ledge => 701,
-            SpotId::Amagi__Main_Area__Platform_3 => 600,
-            SpotId::Amagi__Main_Area__Catwalk_Center => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__East_Ledge => enum_map! {
-            SpotId::Amagi__Main_Area__Platform_2 => 1000,
-            SpotId::Amagi__Main_Area__East_Ledge => 0,
-            SpotId::Amagi__Main_Area__Platform_3 => 877,
-            SpotId::Amagi__Main_Area__Catwalk_Center => 899,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Carving => enum_map! {
-            SpotId::Amagi__Main_Area__West_Side => 1403,
-            SpotId::Amagi__Main_Area__Carving => 0,
-            SpotId::Amagi__Main_Area__West_15 => 175,
-            SpotId::Amagi__Main_Area__Secret_Outcropping => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__West_15 => enum_map! {
-            SpotId::Amagi__Main_Area__Carving => 600,
-            SpotId::Amagi__Main_Area__West_15 => 0,
-            SpotId::Amagi__West_Lake__East_15 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Secret_Outcropping => enum_map! {
-            SpotId::Amagi__Main_Area__Shallow_End => 7192,
-            SpotId::Amagi__Main_Area__Upper_Platform => 2456,
-            SpotId::Amagi__Main_Area__West_Shelf => 1700,
-            SpotId::Amagi__Main_Area__Carving => 1578,
-            SpotId::Amagi__Main_Area__Secret_Outcropping => 0,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Platform_3 => enum_map! {
-            SpotId::Amagi__Main_Area__Platform_2 => 1500,
-            SpotId::Amagi__Main_Area__East_Ledge => 1000,
-            SpotId::Amagi__Main_Area__Platform_3 => 0,
-            SpotId::Amagi__Main_Area__Catwalk_Center => 1052,
-            SpotId::Amagi__Main_Area__Flat_Ruin => 1754,
-            SpotId::Amagi__Main_Area__West_18 => 3333,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Catwalk_Center => enum_map! {
-            SpotId::Amagi__Main_Area__East_Ledge => 2000,
-            SpotId::Amagi__Main_Area__Platform_3 => 1400,
-            SpotId::Amagi__Main_Area__Catwalk_Center => 0,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => 2456,
-            SpotId::Amagi__Main_Area__Broken_Wall => 350,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => 699,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Catwalk_Broken_Part => enum_map! {
-            SpotId::Amagi__Main_Area__Catwalk_Center => 2456,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => 0,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge => 1578,
-            SpotId::Amagi__Main_Area__Save_Point => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Catwalk_East_Edge => enum_map! {
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part => 1578,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge => 0,
-            SpotId::Amagi__Main_Area__Save_Point => 1500,
-            SpotId::Amagi__Main_Area__Enemy_Side => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Save_Point => enum_map! {
-            SpotId::Amagi__Main_Area__Save_Point => 0,
-            SpotId::Amagi__Main_Area__Enemy_Side => 1052,
-            SpotId::Amagi__Main_Area__Broken_Wall => 4000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Enemy_Side => enum_map! {
-            SpotId::Amagi__Main_Area__Save_Point => 1052,
-            SpotId::Amagi__Main_Area__Enemy_Side => 0,
-            SpotId::Amagi__Main_Area__Small_Cliff => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Small_Cliff => enum_map! {
-            SpotId::Amagi__Main_Area__Enemy_Side => 2105,
-            SpotId::Amagi__Main_Area__Small_Cliff => 0,
-            SpotId::Amagi__Main_Area__East_19 => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__East_19 => enum_map! {
-            SpotId::Amagi__Main_Area__Small_Cliff => 1929,
-            SpotId::Amagi__Main_Area__East_19 => 0,
-            SpotId::Amagi__Grid_31_19__West => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Broken_Wall => enum_map! {
-            SpotId::Amagi__Main_Area__Catwalk_Center => 1000,
-            SpotId::Amagi__Main_Area__Save_Point => 3859,
-            SpotId::Amagi__Main_Area__Broken_Wall => 0,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Wall_Stuck_Spot => enum_map! {
-            SpotId::Amagi__Main_Area__Broken_Wall => 1000,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Half_Pillar => enum_map! {
-            SpotId::Amagi__Main_Area__Broken_Wall => 2000,
-            SpotId::Amagi__Main_Area__Half_Pillar => 0,
-            SpotId::Amagi__Main_Area__Flat_Ruin => 1754,
-            SpotId::Amagi__Main_Area__West_Mini_Hill => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Flat_Ruin => enum_map! {
-            SpotId::Amagi__Main_Area__Half_Pillar => 1754,
-            SpotId::Amagi__Main_Area__Flat_Ruin => 0,
-            SpotId::Amagi__Main_Area__West_Mini_Hill => 1052,
-            SpotId::Amagi__Main_Area__West_18 => 2000,
-            SpotId::Amagi__Main_Area__West_19 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__West_Mini_Hill => enum_map! {
-            SpotId::Amagi__Main_Area__Half_Pillar => 1000,
-            SpotId::Amagi__Main_Area__Flat_Ruin => 1052,
-            SpotId::Amagi__Main_Area__West_Mini_Hill => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__West_18 => enum_map! {
-            SpotId::Amagi__Main_Area__Flat_Ruin => 1578,
-            SpotId::Amagi__Main_Area__West_18 => 0,
-            SpotId::Amagi__West_Lake__East_18 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__West_19 => enum_map! {
-            SpotId::Amagi__Main_Area__West_19 => 0,
-            SpotId::Amagi__West_Lake__East_19 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Secret_Waterfall => enum_map! {
-            SpotId::Amagi__Main_Area__Secret_Waterfall => 0,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => 10526,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Main_Area__Way_Off_To_The_Side => enum_map! {
-            SpotId::Amagi__Main_Area__Secret_Waterfall => 10526,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Cave_Behind_Waterfall__Bottom => enum_map! {
-            SpotId::Amagi__Main_Area__Secret_Outcropping => 750,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => 0,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle => 2000,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top => 1800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Cave_Behind_Waterfall__Middle => enum_map! {
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => 575,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle => 0,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Cave_Behind_Waterfall__Top => enum_map! {
-            SpotId::Amagi__Main_Area__Secret_Waterfall => 750,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom => 1101,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle => 526,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Grid_31_19__West => enum_map! {
-            SpotId::Amagi__Main_Area__East_19 => 1350,
-            SpotId::Amagi__Grid_31_19__West => 0,
-            SpotId::Amagi__Grid_31_19__East => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Grid_31_19__East => enum_map! {
-            SpotId::Amagi__Grid_31_19__West => 3157,
-            SpotId::Amagi__Grid_31_19__East => 0,
-            SpotId::Amagi__Liru_Room__West_19 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__West_19 => enum_map! {
-            SpotId::Amagi__Grid_31_19__East => 1350,
-            SpotId::Amagi__Liru_Room__West_19 => 0,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Hidden_Enemies => enum_map! {
-            SpotId::Amagi__Liru_Room__West_19 => 1228,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies => 0,
-            SpotId::Amagi__Liru_Room__Platform_1_Left => 500,
-            SpotId::Amagi__Liru_Room__Platform_1_Right => 877,
-            SpotId::Amagi__Liru_Room__West_20 => 1300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_1_Left => enum_map! {
-            SpotId::Amagi__Liru_Room__Hidden_Enemies => 1200,
-            SpotId::Amagi__Liru_Room__Platform_1_Left => 0,
-            SpotId::Amagi__Liru_Room__Platform_1_Right => 877,
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 500,
-            SpotId::Amagi__Liru_Room__West_20 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_1_Right => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_1_Left => 877,
-            SpotId::Amagi__Liru_Room__Platform_1_Right => 0,
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 877,
-            SpotId::Amagi__Liru_Room__Platform_2_Right => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_2_Left => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_1_Left => 1000,
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 0,
-            SpotId::Amagi__Liru_Room__Platform_2_Right => 1403,
-            SpotId::Amagi__Liru_Room__Platform_3_Left => 499,
-            SpotId::Amagi__Liru_Room__Platform_3_Right => 1052,
-            SpotId::Amagi__Liru_Room__West_20 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_2_Right => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_1_Right => 1000,
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 1403,
-            SpotId::Amagi__Liru_Room__Platform_2_Right => 0,
-            SpotId::Amagi__Liru_Room__Platform_3_Right => 499,
-            SpotId::Amagi__Liru_Room__Bottom => 1299,
-            SpotId::Amagi__Liru_Room__East_Passage => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_3_Left => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 1000,
-            SpotId::Amagi__Liru_Room__Platform_3_Left => 0,
-            SpotId::Amagi__Liru_Room__Platform_3_Right => 1052,
-            SpotId::Amagi__Liru_Room__West_20 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_3_Right => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 1052,
-            SpotId::Amagi__Liru_Room__Platform_2_Right => 1000,
-            SpotId::Amagi__Liru_Room__Platform_3_Left => 1052,
-            SpotId::Amagi__Liru_Room__Platform_3_Right => 0,
-            SpotId::Amagi__Liru_Room__Platform_4_Right => 399,
-            SpotId::Amagi__Liru_Room__Bottom => 1052,
-            SpotId::Amagi__Liru_Room__East_Passage => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_4_Left => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_3_Left => 1000,
-            SpotId::Amagi__Liru_Room__Platform_4_Left => 0,
-            SpotId::Amagi__Liru_Room__Platform_4_Right => 877,
-            SpotId::Amagi__Liru_Room__West_20 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Platform_4_Right => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_3_Right => 1000,
-            SpotId::Amagi__Liru_Room__Platform_4_Left => 877,
-            SpotId::Amagi__Liru_Room__Platform_4_Right => 0,
-            SpotId::Amagi__Liru_Room__Bottom => 877,
-            SpotId::Amagi__Liru_Room__East_Passage => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Bottom => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_4_Right => 1000,
-            SpotId::Amagi__Liru_Room__Bottom => 0,
-            SpotId::Amagi__Liru_Room__Shrine => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Shrine => enum_map! {
-            SpotId::Amagi__Liru_Room__Bottom => 1754,
-            SpotId::Amagi__Liru_Room__Shrine => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__West_20 => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_2_Left => 2000,
-            SpotId::Amagi__Liru_Room__Platform_3_Left => 1228,
-            SpotId::Amagi__Liru_Room__Platform_4_Left => 1000,
-            SpotId::Amagi__Liru_Room__Platform_4_Right => 1000,
-            SpotId::Amagi__Liru_Room__Bottom => 3333,
-            SpotId::Amagi__Liru_Room__Shrine => 3500,
-            SpotId::Amagi__Liru_Room__West_20 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__East_Passage => enum_map! {
-            SpotId::Amagi__Liru_Room__Platform_2_Right => 1000,
-            SpotId::Amagi__Liru_Room__Platform_3_Right => 1052,
-            SpotId::Amagi__Liru_Room__Bottom => 1100,
-            SpotId::Amagi__Liru_Room__East_Passage => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__Liru_Room__Hidden_Exit => enum_map! {
-            SpotId::Amagi__Liru_Room__Hidden_Exit => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_15 => enum_map! {
-            SpotId::Amagi__Main_Area__West_15 => 1350,
-            SpotId::Amagi__West_Lake__East_15 => 0,
-            SpotId::Amagi__West_Lake__East_Shore => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_Shore => enum_map! {
-            SpotId::Amagi__West_Lake__East_Shore => 0,
-            SpotId::Amagi__West_Lake__East_Bank => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_Bank => enum_map! {
-            SpotId::Amagi__West_Lake__East_Shore => 3000,
-            SpotId::Amagi__West_Lake__East_Bank => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Northeast_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__East_Bank => 1228,
-            SpotId::Amagi__West_Lake__Northeast_Platform => 0,
-            SpotId::Amagi__West_Lake__Northwest_Platform => 1052,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform => 1200,
-            SpotId::Amagi__West_Lake__East_Platform => 1403,
-            SpotId::Amagi__West_Lake__Pillar => 1899,
-            SpotId::Amagi__West_Lake__West_Cliff => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Northwest_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__Northeast_Platform => 1052,
-            SpotId::Amagi__West_Lake__Northwest_Platform => 0,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform => 900,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => 1699,
-            SpotId::Amagi__West_Lake__West_Platform => 2631,
-            SpotId::Amagi__West_Lake__West_Cliff => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Upper_Center_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__Northeast_Platform => 3000,
-            SpotId::Amagi__West_Lake__Northwest_Platform => 3000,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform => 0,
-            SpotId::Amagi__West_Lake__East_Platform => 1754,
-            SpotId::Amagi__West_Lake__Tentacle_Gap => 1599,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__Northeast_Platform => 4000,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform => 1754,
-            SpotId::Amagi__West_Lake__East_Platform => 0,
-            SpotId::Amagi__West_Lake__East_18 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_18 => enum_map! {
-            SpotId::Amagi__Main_Area__West_18 => 1350,
-            SpotId::Amagi__West_Lake__East_Platform => 1578,
-            SpotId::Amagi__West_Lake__East_18 => 0,
-            SpotId::Amagi__West_Lake__Pillar => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Pillar => enum_map! {
-            SpotId::Amagi__West_Lake__East_18 => 1228,
-            SpotId::Amagi__West_Lake__Pillar => 0,
-            SpotId::Amagi__West_Lake__Pillar_Platform => 526,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => 4385,
-            SpotId::Amagi__West_Lake__Tentacle_Gap => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Pillar_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__Pillar => 1000,
-            SpotId::Amagi__West_Lake__Pillar_Platform => 0,
-            SpotId::Amagi__West_Lake__East_19 => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_19 => enum_map! {
-            SpotId::Amagi__Main_Area__West_19 => 1350,
-            SpotId::Amagi__West_Lake__Pillar_Platform => 1000,
-            SpotId::Amagi__West_Lake__East_19 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Somewhat_Central_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__Pillar => 4385,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => 0,
-            SpotId::Amagi__West_Lake__West_Platform => 1052,
-            SpotId::Amagi__West_Lake__Some_Rock => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__West_Platform => enum_map! {
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => 1052,
-            SpotId::Amagi__West_Lake__West_Platform => 0,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => 1228,
-            SpotId::Amagi__West_Lake__Cavern_Chin => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Front_Teeth => enum_map! {
-            SpotId::Amagi__West_Lake__West_Platform => 1228,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => 0,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Back_Teeth => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth => 2105,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => 0,
-            SpotId::Amagi__West_Lake__Cavern_Jaw => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Jaw => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth => 1403,
-            SpotId::Amagi__West_Lake__Cavern_Jaw => 0,
-            SpotId::Amagi__West_Lake__Cavern_Neck => 899,
-            SpotId::Amagi__West_Lake__Cavern_Chin => 2807,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station => 3000,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => 3000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Neck => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Neck => 0,
-            SpotId::Amagi__West_Lake__Cavern_Chin => 3508,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => 5000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Chin => enum_map! {
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => 3000,
-            SpotId::Amagi__West_Lake__Cavern_Neck => 3508,
-            SpotId::Amagi__West_Lake__Cavern_Chin => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => 1500,
-            SpotId::Amagi__West_Lake__Some_Rock => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Refill_Station => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Jaw => 1100,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station => 0,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => 2800,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => 1052,
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => 56000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Tear_Duct => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station => 2800,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => 0,
-            SpotId::Amagi__West_Lake__Cavern_Eye => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Eye => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct => 1000,
-            SpotId::Amagi__West_Lake__Cavern_Eye => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Front_Pillar => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Jaw => 1403,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station => 1052,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => 0,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar => 1000,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => 0,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => 2629,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => 1228,
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => 5000,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Top => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Top => enum_map! {
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea => 3157,
-            SpotId::Amagi__West_Lake__Stronghold_Top => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Item => 699,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Item => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Item => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => 1052,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Item => 1052,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Middle_Column => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Item => 1000,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column => 800,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left => 701,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Front_Room => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right => 1000,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room => 0,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Stronghold_Front_Door => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room => 1000,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => 0,
-            SpotId::Amagi__West_Lake__Some_Rock => 2000,
-            SpotId::Amagi__West_Lake__Small_Hill => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Some_Rock => enum_map! {
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform => 3000,
-            SpotId::Amagi__West_Lake__Cavern_Chin => 2000,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => 1052,
-            SpotId::Amagi__West_Lake__Some_Rock => 0,
-            SpotId::Amagi__West_Lake__Small_Hill => 1228,
-            SpotId::Amagi__West_Lake__Tentacle_Gap => 4210,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Small_Hill => enum_map! {
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door => 2280,
-            SpotId::Amagi__West_Lake__Some_Rock => 2000,
-            SpotId::Amagi__West_Lake__Small_Hill => 0,
-            SpotId::Amagi__West_Lake__Tentacle_Gap => 3000,
-            SpotId::Amagi__West_Lake__Left_of_Enemy => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Tentacle_Gap => enum_map! {
-            SpotId::Amagi__West_Lake__Pillar => 2000,
-            SpotId::Amagi__West_Lake__Some_Rock => 4210,
-            SpotId::Amagi__West_Lake__Tentacle_Gap => 0,
-            SpotId::Amagi__West_Lake__Left_of_Enemy => 1100,
-            SpotId::Amagi__West_Lake__East_20 => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Left_of_Enemy => enum_map! {
-            SpotId::Amagi__West_Lake__Small_Hill => 2631,
-            SpotId::Amagi__West_Lake__Left_of_Enemy => 0,
-            SpotId::Amagi__West_Lake__East_20 => 2982,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__East_20 => enum_map! {
-            SpotId::Amagi__West_Lake__Left_of_Enemy => 2982,
-            SpotId::Amagi__West_Lake__East_20 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__West_Cliff => enum_map! {
-            SpotId::Amagi__West_Lake__Northeast_Platform => 1754,
-            SpotId::Amagi__West_Lake__Northwest_Platform => 701,
-            SpotId::Amagi__West_Lake__West_Cliff => 0,
-            SpotId::Amagi__West_Lake__West_Bank => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__West_Bank => enum_map! {
-            SpotId::Amagi__West_Lake__West_Cliff => 1929,
-            SpotId::Amagi__West_Lake__West_Bank => 0,
-            SpotId::Amagi__West_Lake__Water_Surface => 1000,
-            SpotId::Amagi__West_Lake__West_Shore => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Water_Surface => enum_map! {
-            SpotId::Amagi__West_Lake__West_Cliff => 1929,
-            SpotId::Amagi__West_Lake__West_Bank => 500,
-            SpotId::Amagi__West_Lake__Water_Surface => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__West_Shore => enum_map! {
-            SpotId::Amagi__West_Lake__West_Bank => 1754,
-            SpotId::Amagi__West_Lake__Water_Surface => 1754,
-            SpotId::Amagi__West_Lake__West_Shore => 0,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => 5087,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Surface_Wall_Right => enum_map! {
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => 0,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__Surface_Wall_Left => enum_map! {
-            SpotId::Amagi__West_Lake__Surface_Wall_Right => 877,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Amagi__West_Lake__West_15 => enum_map! {
-            SpotId::Amagi__West_Lake__Surface_Wall_Left => 2807,
-            SpotId::Amagi__West_Lake__West_15 => 0,
-            SpotId::Ebih__Vertical_Interchange__East_15 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__West__Helipad => enum_map! {
-            SpotId::Antarctica__West__Helipad => 0,
-            SpotId::Antarctica__West__Shed_Entry => 4385,
-            SpotId::Antarctica__West__Boxes => 5263,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__West__Shed_Entry => enum_map! {
-            SpotId::Antarctica__West__Helipad => 4385,
-            SpotId::Antarctica__West__Shed_Entry => 0,
-            SpotId::Antarctica__Shed__Interior => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__West__Boxes => enum_map! {
-            SpotId::Antarctica__West__Helipad => 5263,
-            SpotId::Antarctica__West__Boxes => 0,
-            SpotId::Antarctica__Building_1W__West_Entry => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Shed__Interior => enum_map! {
-            SpotId::Antarctica__West__Shed_Entry => 750,
-            SpotId::Antarctica__Shed__Interior => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_1W__West_Entry => enum_map! {
-            SpotId::Antarctica__West__Boxes => 750,
-            SpotId::Antarctica__Building_1W__West_Entry => 0,
-            SpotId::Antarctica__Building_1W__Connector => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_1W__Connector => enum_map! {
-            SpotId::Antarctica__Building_1W__West_Entry => 2631,
-            SpotId::Antarctica__Building_1W__Connector => 0,
-            SpotId::Antarctica__Building_1E__Connector => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_1E__Connector => enum_map! {
-            SpotId::Antarctica__Building_1W__Connector => 1350,
-            SpotId::Antarctica__Building_1E__Connector => 0,
-            SpotId::Antarctica__Building_1E__East_Entry => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_1E__East_Entry => enum_map! {
-            SpotId::Antarctica__Building_1E__Connector => 2631,
-            SpotId::Antarctica__Building_1E__East_Entry => 0,
-            SpotId::Antarctica__East__Building_1_Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__East__Building_1_Entry => enum_map! {
-            SpotId::Antarctica__Building_1E__East_Entry => 750,
-            SpotId::Antarctica__East__Building_1_Entry => 0,
-            SpotId::Antarctica__East__Save_Point => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__East__Save_Point => enum_map! {
-            SpotId::Antarctica__East__Building_1_Entry => 877,
-            SpotId::Antarctica__East__Save_Point => 0,
-            SpotId::Antarctica__East__Building_2_Entry => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__East__Building_2_Entry => enum_map! {
-            SpotId::Antarctica__East__Save_Point => 1754,
-            SpotId::Antarctica__East__Building_2_Entry => 0,
-            SpotId::Antarctica__Building_2L__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__East__Building_2_Upper => enum_map! {
-            SpotId::Antarctica__East__Building_1_Entry => 1754,
-            SpotId::Antarctica__East__Save_Point => 2631,
-            SpotId::Antarctica__East__Building_2_Entry => 4385,
-            SpotId::Antarctica__East__Building_2_Upper => 0,
-            SpotId::Antarctica__Building_2U__Door => 750,
-            SpotId::Antarctica__Top__Power_Entry => 3000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_2L__Entry => enum_map! {
-            SpotId::Antarctica__East__Building_2_Entry => 750,
-            SpotId::Antarctica__Building_2L__Entry => 0,
-            SpotId::Antarctica__Building_2U__Stairs => 4000,
-            SpotId::Antarctica__Freight_Elevator__Left => 3000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_2U__Stairs => enum_map! {
-            SpotId::Antarctica__Building_2L__Entry => 2000,
-            SpotId::Antarctica__Building_2U__Stairs => 0,
-            SpotId::Antarctica__Building_2U__Door => 3508,
-            SpotId::Antarctica__Building_2U__Behind_Boxes => 3000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_2U__Door => enum_map! {
-            SpotId::Antarctica__East__Building_2_Upper => 750,
-            SpotId::Antarctica__Building_2U__Stairs => 3508,
-            SpotId::Antarctica__Building_2U__Door => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Building_2U__Behind_Boxes => enum_map! {
-            SpotId::Antarctica__Building_2U__Stairs => 1000,
-            SpotId::Antarctica__Building_2U__Behind_Boxes => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Top__Power_Entry => enum_map! {
-            SpotId::Antarctica__East__Building_2_Upper => 3500,
-            SpotId::Antarctica__Top__Power_Entry => 0,
-            SpotId::Antarctica__Power_Room__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Power_Room__Entry => enum_map! {
-            SpotId::Antarctica__Top__Power_Entry => 750,
-            SpotId::Antarctica__Power_Room__Entry => 0,
-            SpotId::Antarctica__Power_Room__Switch => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Power_Room__Switch => enum_map! {
-            SpotId::Antarctica__Power_Room__Entry => 1403,
-            SpotId::Antarctica__Power_Room__Switch => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Freight_Elevator__Left => enum_map! {
-            SpotId::Antarctica__Building_2L__Entry => 3000,
-            SpotId::Antarctica__Freight_Elevator__Left => 0,
-            SpotId::Antarctica__Freight_Elevator__Controls => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Antarctica__Freight_Elevator__Controls => enum_map! {
-            SpotId::Antarctica__Freight_Elevator__Left => 2105,
-            SpotId::Antarctica__Freight_Elevator__Controls => 0,
-            SpotId::Glacier__Dock_Elevator__Elevator => 15000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__East_11 => enum_map! {
-            SpotId::Ebih__Base_Camp__East_11 => 0,
-            SpotId::Ebih__Base_Camp__East_12 => 1400,
-            SpotId::Ebih__Base_Camp__Staircase => 1929,
-            SpotId::Ebih__Base_Camp__Lake_Access => 2299,
-            SpotId::Ebih__Base_Camp__Top_Platform => 1000,
-            SpotId::Glacier__Grid_31_9_12__Midair => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__East_12 => enum_map! {
-            SpotId::Ebih__Base_Camp__East_12 => 0,
-            SpotId::Ebih__Base_Camp__Staircase => 1929,
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 2631,
-            SpotId::Ebih__Base_Camp__Lake_Access => 1777,
-            SpotId::Glacier__Grid_31_9_12__West_12 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Staircase => enum_map! {
-            SpotId::Ebih__Base_Camp__East_12 => 1929,
-            SpotId::Ebih__Base_Camp__Staircase => 0,
-            SpotId::Ebih__Base_Camp__Save_Point => 3157,
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 999,
-            SpotId::Ebih__Base_Camp__Lake_Access => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Save_Point => enum_map! {
-            SpotId::Ebih__Base_Camp__Staircase => 3599,
-            SpotId::Ebih__Base_Camp__Save_Point => 0,
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 2456,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle => 2456,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Bunker_Entry => enum_map! {
-            SpotId::Ebih__Base_Camp__Staircase => 3599,
-            SpotId::Ebih__Base_Camp__Save_Point => 2456,
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 0,
-            SpotId::Ebih__Base_Camp__Lake_Access => 2631,
-            SpotId::Ebih__Bunker_Interior__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Lake_Access => enum_map! {
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 2631,
-            SpotId::Ebih__Base_Camp__Lake_Access => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Behind_Vehicle => enum_map! {
-            SpotId::Ebih__Base_Camp__Save_Point => 2456,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle => 0,
-            SpotId::Ebih__Base_Camp__Building_Entry => 1200,
-            SpotId::Ebih__Base_Camp__Tent_Entry => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Building_Entry => enum_map! {
-            SpotId::Ebih__Base_Camp__Save_Point => 1754,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle => 701,
-            SpotId::Ebih__Base_Camp__Building_Entry => 0,
-            SpotId::Ebih__Base_Camp__Tent_Entry => 2456,
-            SpotId::Ebih__Base_Camp__West_13 => 3333,
-            SpotId::Ebih__Building_Interior__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Tent_Entry => enum_map! {
-            SpotId::Ebih__Base_Camp__Behind_Vehicle => 1754,
-            SpotId::Ebih__Base_Camp__Tent_Entry => 0,
-            SpotId::Ebih__Base_Camp__West_13 => 877,
-            SpotId::Ebih__Tent_Interior__Entry => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__West_13 => enum_map! {
-            SpotId::Ebih__Base_Camp__Tent_Entry => 877,
-            SpotId::Ebih__Base_Camp__West_13 => 0,
-            SpotId::Ebih__By_Garage__East_13 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__West_11 => enum_map! {
-            SpotId::Ebih__Base_Camp__West_11 => 0,
-            SpotId::Ebih__Base_Camp__West_Midair => 1052,
-            SpotId::Ebih__Base_Camp__Left_Platform => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__West_Midair => enum_map! {
-            SpotId::Ebih__Base_Camp__Building_Entry => 2280,
-            SpotId::Ebih__Base_Camp__Tent_Entry => 1699,
-            SpotId::Ebih__Base_Camp__West_Midair => 0,
-            SpotId::Ebih__Base_Camp__West_12 => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__West_12 => enum_map! {
-            SpotId::Ebih__Base_Camp__West_12 => 0,
-            SpotId::Ebih__By_Garage__East_12 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Left_Platform => enum_map! {
-            SpotId::Ebih__Base_Camp__Left_Platform => 0,
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved => 1000,
-            SpotId::Ebih__Base_Camp__Top_Platform => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Left_Platform_Moved => enum_map! {
-            SpotId::Ebih__Base_Camp__Left_Platform => 1000,
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved => 0,
-            SpotId::Ebih__Base_Camp__Top_Platform => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Base_Camp__Top_Platform => enum_map! {
-            SpotId::Ebih__Base_Camp__Staircase => 3157,
-            SpotId::Ebih__Base_Camp__Save_Point => 2099,
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 2456,
-            SpotId::Ebih__Base_Camp__Building_Entry => 1754,
-            SpotId::Ebih__Base_Camp__Tent_Entry => 4210,
-            SpotId::Ebih__Base_Camp__Left_Platform => 1000,
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved => 1000,
-            SpotId::Ebih__Base_Camp__Top_Platform => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Bunker_Interior__Entry => enum_map! {
-            SpotId::Ebih__Base_Camp__Bunker_Entry => 750,
-            SpotId::Ebih__Bunker_Interior__Entry => 0,
-            SpotId::Ebih__Bunker_Interior__Desk => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Bunker_Interior__Desk => enum_map! {
-            SpotId::Ebih__Bunker_Interior__Entry => 1052,
-            SpotId::Ebih__Bunker_Interior__Desk => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Building_Interior__Entry => enum_map! {
-            SpotId::Ebih__Base_Camp__Building_Entry => 750,
-            SpotId::Ebih__Building_Interior__Entry => 0,
-            SpotId::Ebih__Building_Interior__Corner => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Building_Interior__Corner => enum_map! {
-            SpotId::Ebih__Building_Interior__Entry => 1754,
-            SpotId::Ebih__Building_Interior__Corner => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Tent_Interior__Entry => enum_map! {
-            SpotId::Ebih__Base_Camp__Tent_Entry => 500,
-            SpotId::Ebih__Tent_Interior__Entry => 0,
-            SpotId::Ebih__Tent_Interior__Desk => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Tent_Interior__Desk => enum_map! {
-            SpotId::Ebih__Tent_Interior__Entry => 350,
-            SpotId::Ebih__Tent_Interior__Desk => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__East_13 => enum_map! {
-            SpotId::Ebih__Base_Camp__West_13 => 1350,
-            SpotId::Ebih__By_Garage__East_13 => 0,
-            SpotId::Ebih__By_Garage__East_Platform => 1578,
-            SpotId::Ebih__By_Garage__Garage_Entry => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__East_Platform => enum_map! {
-            SpotId::Ebih__By_Garage__East_13 => 1578,
-            SpotId::Ebih__By_Garage__East_Platform => 0,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening => 750,
-            SpotId::Ebih__By_Garage__Outcropping => 1300,
-            SpotId::Ebih__By_Garage__Garage_Entry => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__Crawlspace_Opening => enum_map! {
-            SpotId::Ebih__By_Garage__East_13 => 1929,
-            SpotId::Ebih__By_Garage__East_Platform => 350,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening => 0,
-            SpotId::Ebih__By_Garage__Crawlspace => 701,
-            SpotId::Ebih__By_Garage__Outcropping => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__Crawlspace => enum_map! {
-            SpotId::Ebih__By_Garage__Crawlspace_Opening => 701,
-            SpotId::Ebih__By_Garage__Crawlspace => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__Outcropping => enum_map! {
-            SpotId::Ebih__By_Garage__East_13 => 2280,
-            SpotId::Ebih__By_Garage__East_Platform => 701,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening => 350,
-            SpotId::Ebih__By_Garage__Outcropping => 0,
-            SpotId::Ebih__By_Garage__East_Bush => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__East_Bush => enum_map! {
-            SpotId::Ebih__By_Garage__Outcropping => 1799,
-            SpotId::Ebih__By_Garage__East_Bush => 0,
-            SpotId::Ebih__By_Garage__Lower_Platform => 1403,
-            SpotId::Ebih__By_Garage__West_Bush => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__Lower_Platform => enum_map! {
-            SpotId::Ebih__By_Garage__East_13 => 5438,
-            SpotId::Ebih__By_Garage__East_Bush => 1300,
-            SpotId::Ebih__By_Garage__Lower_Platform => 0,
-            SpotId::Ebih__By_Garage__West_Bush => 1800,
-            SpotId::Ebih__By_Garage__Garage_Entry => 2807,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__West_Bush => enum_map! {
-            SpotId::Ebih__By_Garage__East_Bush => 1754,
-            SpotId::Ebih__By_Garage__Lower_Platform => 400,
-            SpotId::Ebih__By_Garage__West_Bush => 0,
-            SpotId::Ebih__By_Garage__West_12 => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__West_12 => enum_map! {
-            SpotId::Ebih__By_Garage__West_Bush => 877,
-            SpotId::Ebih__By_Garage__West_12 => 0,
-            SpotId::Ebih__Grid_25_10_12__East_12 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__West_13 => enum_map! {
-            SpotId::Ebih__By_Garage__Lower_Platform => 1799,
-            SpotId::Ebih__By_Garage__West_13 => 0,
-            SpotId::Ebih__By_Garage__Garage_Entry => 4035,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__Garage_Entry => enum_map! {
-            SpotId::Ebih__By_Garage__West_13 => 4035,
-            SpotId::Ebih__By_Garage__Garage_Entry => 0,
-            SpotId::Ebih__Garage__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__By_Garage__East_12 => enum_map! {
-            SpotId::Ebih__By_Garage__East_Platform => 1578,
-            SpotId::Ebih__By_Garage__East_12 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Garage__Entry => enum_map! {
-            SpotId::Ebih__By_Garage__Garage_Entry => 750,
-            SpotId::Ebih__Garage__Entry => 0,
-            SpotId::Ebih__Garage__Boxes => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Garage__Boxes => enum_map! {
-            SpotId::Ebih__Garage__Entry => 1403,
-            SpotId::Ebih__Garage__Boxes => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__East_12 => enum_map! {
-            SpotId::Ebih__By_Garage__West_12 => 1350,
-            SpotId::Ebih__Grid_25_10_12__East_12 => 0,
-            SpotId::Ebih__Grid_25_10_12__Bush => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Bush => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__East_12 => 1228,
-            SpotId::Ebih__Grid_25_10_12__Bush => 0,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => 701,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__West_12 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__West_12 => 0,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Below_Bush => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Bush => 750,
-            SpotId::Ebih__Grid_25_10_12__West_12 => 1228,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Mid_Ledge => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Bush => 1052,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => 599,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge => 0,
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 1200,
-            SpotId::Ebih__Grid_25_10_12__West_11 => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Door_Left => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Bush => 800,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => 1000,
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 0,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform => 1200,
-            SpotId::Ebih__Grid_25_10_12__West_11 => 1929,
-            SpotId::Ebih__Grid_25_10_12__Door => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Top_Platform => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Bush => 1200,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush => 1399,
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 701,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform => 0,
-            SpotId::Ebih__Grid_25_10_12__West_11 => 1228,
-            SpotId::Ebih__Grid_25_10_12__West_10 => 3200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__West_11 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge => 877,
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 1929,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform => 1228,
-            SpotId::Ebih__Grid_25_10_12__West_11 => 0,
-            SpotId::Ebih__Waterfall__East_11 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__West_10 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 1929,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform => 1228,
-            SpotId::Ebih__Grid_25_10_12__West_10 => 0,
-            SpotId::Ebih__Waterfall__East_10 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Door => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Door_Left => 701,
-            SpotId::Ebih__Grid_25_10_12__Door => 0,
-            SpotId::Ebih__Grid_25_10_12__East_11 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__East_11 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__Door => 526,
-            SpotId::Ebih__Grid_25_10_12__East_11 => 0,
-            SpotId::Ebih__Grid_26_10_11__West_11 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__East_10 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__East_10 => 0,
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush => 350,
-            SpotId::Ebih__Grid_26_10_11__West_10 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_10_12__Hidden_Bush => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__East_10 => 900,
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__East_10 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__West_10 => 1350,
-            SpotId::Ebih__Waterfall__East_10 => 0,
-            SpotId::Ebih__Waterfall__East_Ledge => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__East_Ledge => enum_map! {
-            SpotId::Ebih__Waterfall__East_10 => 701,
-            SpotId::Ebih__Waterfall__East_Ledge => 0,
-            SpotId::Ebih__Waterfall__East_11 => 701,
-            SpotId::Ebih__Waterfall__Near_East_Tree => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__East_11 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__West_11 => 1350,
-            SpotId::Ebih__Waterfall__East_11 => 0,
-            SpotId::Ebih__Waterfall__Near_East_Tree => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Near_East_Tree => enum_map! {
-            SpotId::Ebih__Waterfall__East_11 => 2631,
-            SpotId::Ebih__Waterfall__Near_East_Tree => 0,
-            SpotId::Ebih__Waterfall__Waterfall_Right => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Waterfall_Right => enum_map! {
-            SpotId::Ebih__Waterfall__Near_East_Tree => 1799,
-            SpotId::Ebih__Waterfall__Waterfall_Right => 0,
-            SpotId::Ebih__Waterfall__Alcove_Right => 1578,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Alcove_Right => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Right => 1578,
-            SpotId::Ebih__Waterfall__Alcove_Right => 0,
-            SpotId::Ebih__Waterfall__Alcove => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Waterfall_Center_Right => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Right => 1929,
-            SpotId::Ebih__Waterfall__Alcove_Right => 500,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right => 0,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Waterfall_Center_Center => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right => 877,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center => 0,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Waterfall_Center_Left => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center => 1799,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => 0,
-            SpotId::Ebih__Waterfall__Alcove_Left => 300,
-            SpotId::Ebih__Waterfall__Under_Waterfall => 877,
-            SpotId::Ebih__Waterfall__Waterfall_Left => 1754,
-            SpotId::Ebih__Waterfall__Lower_West_Tree => 2400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Alcove_Left => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => 1250,
-            SpotId::Ebih__Waterfall__Alcove_Left => 0,
-            SpotId::Ebih__Waterfall__Alcove => 1578,
-            SpotId::Ebih__Waterfall__Under_Waterfall => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Alcove => enum_map! {
-            SpotId::Ebih__Waterfall__Alcove_Right => 1228,
-            SpotId::Ebih__Waterfall__Alcove_Left => 1578,
-            SpotId::Ebih__Waterfall__Alcove => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Under_Waterfall => enum_map! {
-            SpotId::Ebih__Waterfall__Under_Waterfall => 0,
-            SpotId::Ebih__Waterfall__Waterfall_Left => 1100,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Waterfall_Left => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => 1754,
-            SpotId::Ebih__Waterfall__Under_Waterfall => 877,
-            SpotId::Ebih__Waterfall__Waterfall_Left => 0,
-            SpotId::Ebih__Waterfall__Wall_Right => 2105,
-            SpotId::Ebih__Waterfall__Lower_West_Tree => 1799,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Wall_Right => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Left => 2105,
-            SpotId::Ebih__Waterfall__Wall_Right => 0,
-            SpotId::Ebih__Waterfall__Wall_Left => 701,
-            SpotId::Ebih__Waterfall__Lower_West_Tree => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Wall_Left => enum_map! {
-            SpotId::Ebih__Waterfall__Wall_Right => 701,
-            SpotId::Ebih__Waterfall__Wall_Left => 0,
-            SpotId::Ebih__Waterfall__West_11 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_11 => enum_map! {
-            SpotId::Ebih__Waterfall__Wall_Left => 600,
-            SpotId::Ebih__Waterfall__West_11 => 0,
-            SpotId::Ebih__Ebih_West__East_11 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Lower_West_Tree => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => 2105,
-            SpotId::Ebih__Waterfall__Under_Waterfall => 1228,
-            SpotId::Ebih__Waterfall__Waterfall_Left => 799,
-            SpotId::Ebih__Waterfall__Wall_Right => 1754,
-            SpotId::Ebih__Waterfall__Lower_West_Tree => 0,
-            SpotId::Ebih__Waterfall__West_Lower_Path => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_Lower_Path => enum_map! {
-            SpotId::Ebih__Waterfall__Waterfall_Left => 1052,
-            SpotId::Ebih__Waterfall__Wall_Right => 1052,
-            SpotId::Ebih__Waterfall__Lower_West_Tree => 701,
-            SpotId::Ebih__Waterfall__West_Lower_Path => 0,
-            SpotId::Ebih__Waterfall__West_10 => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_10 => enum_map! {
-            SpotId::Ebih__Waterfall__West_Lower_Path => 2280,
-            SpotId::Ebih__Waterfall__West_10 => 0,
-            SpotId::Ebih__Ebih_West__East_10 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_9 => enum_map! {
-            SpotId::Ebih__Waterfall__West_9 => 0,
-            SpotId::Ebih__Waterfall__West_Climb => 2280,
-            SpotId::Ebih__Ebih_West__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_Climb => enum_map! {
-            SpotId::Ebih__Waterfall__West_9 => 2280,
-            SpotId::Ebih__Waterfall__West_Climb => 0,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Ledge_Below_Hole => enum_map! {
-            SpotId::Ebih__Waterfall__West_Climb => 500,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole => 0,
-            SpotId::Ebih__Waterfall__Below_Left_Switch => 1403,
-            SpotId::Ebih__Waterfall__Middle_West_Tree => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Below_Left_Switch => enum_map! {
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole => 1403,
-            SpotId::Ebih__Waterfall__Below_Left_Switch => 0,
-            SpotId::Ebih__Waterfall__West_8 => 701,
-            SpotId::Ebih__Waterfall__West_Door_Left => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_8 => enum_map! {
-            SpotId::Ebih__Waterfall__Below_Left_Switch => 701,
-            SpotId::Ebih__Waterfall__West_8 => 0,
-            SpotId::Ebih__Waterfall__West_Door_Left => 877,
-            SpotId::Ebih__Ebih_West__East_8 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_Door_Left => enum_map! {
-            SpotId::Ebih__Waterfall__Below_Left_Switch => 299,
-            SpotId::Ebih__Waterfall__West_8 => 877,
-            SpotId::Ebih__Waterfall__West_Door_Left => 0,
-            SpotId::Ebih__Waterfall__West_Door => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_Door => enum_map! {
-            SpotId::Ebih__Waterfall__West_Door_Left => 877,
-            SpotId::Ebih__Waterfall__West_Door => 0,
-            SpotId::Ebih__Waterfall__West_Door_Right => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_Door_Right => enum_map! {
-            SpotId::Ebih__Waterfall__West_Climb => 900,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole => 400,
-            SpotId::Ebih__Waterfall__West_Door => 526,
-            SpotId::Ebih__Waterfall__West_Door_Right => 0,
-            SpotId::Ebih__Waterfall__Middle_West_Tree => 199,
-            SpotId::Ebih__Waterfall__West_Main_Path => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Middle_West_Tree => enum_map! {
-            SpotId::Ebih__Waterfall__West_Climb => 700,
-            SpotId::Ebih__Waterfall__West_Door_Right => 600,
-            SpotId::Ebih__Waterfall__Middle_West_Tree => 0,
-            SpotId::Ebih__Waterfall__West_Main_Path => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_Main_Path => enum_map! {
-            SpotId::Ebih__Waterfall__West_Climb => 1000,
-            SpotId::Ebih__Waterfall__Middle_West_Tree => 526,
-            SpotId::Ebih__Waterfall__West_Main_Path => 0,
-            SpotId::Ebih__Waterfall__Cave_Entrance => 2456,
-            SpotId::Ebih__Waterfall__Center_Main_Path => 3508,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Cave_Entrance => enum_map! {
-            SpotId::Ebih__Waterfall__Near_East_Tree => 5614,
-            SpotId::Ebih__Waterfall__Waterfall_Right => 4210,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left => 2199,
-            SpotId::Ebih__Waterfall__Lower_West_Tree => 2456,
-            SpotId::Ebih__Waterfall__West_Lower_Path => 3157,
-            SpotId::Ebih__Waterfall__Cave_Entrance => 0,
-            SpotId::Ebih__Cave__Entry => 250,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Center_Main_Path => enum_map! {
-            SpotId::Ebih__Waterfall__West_Main_Path => 3508,
-            SpotId::Ebih__Waterfall__Cave_Entrance => 1052,
-            SpotId::Ebih__Waterfall__Center_Main_Path => 0,
-            SpotId::Ebih__Waterfall__Big_Tree => 2456,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Big_Tree => enum_map! {
-            SpotId::Ebih__Waterfall__Center_Main_Path => 2456,
-            SpotId::Ebih__Waterfall__Big_Tree => 0,
-            SpotId::Ebih__Waterfall__Below_Tree => 701,
-            SpotId::Ebih__Waterfall__Platform => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Below_Tree => enum_map! {
-            SpotId::Ebih__Waterfall__Big_Tree => 1200,
-            SpotId::Ebih__Waterfall__Below_Tree => 0,
-            SpotId::Ebih__Waterfall__Platform => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Platform => enum_map! {
-            SpotId::Ebih__Waterfall__Big_Tree => 1500,
-            SpotId::Ebih__Waterfall__Below_Tree => 701,
-            SpotId::Ebih__Waterfall__Platform => 0,
-            SpotId::Ebih__Waterfall__East_8 => 3333,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__East_8 => enum_map! {
-            SpotId::Ebih__Waterfall__Platform => 3333,
-            SpotId::Ebih__Waterfall__East_8 => 0,
-            SpotId::Ebih__Ebih_East__West_8 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__East_7 => enum_map! {
-            SpotId::Ebih__Waterfall__East_7 => 0,
-            SpotId::Ebih__Waterfall__Top_Waterfall => 7719,
-            SpotId::Ebih__Ebih_East__West_7 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__Top_Waterfall => enum_map! {
-            SpotId::Ebih__Waterfall__West_Main_Path => 2982,
-            SpotId::Ebih__Waterfall__Center_Main_Path => 799,
-            SpotId::Ebih__Waterfall__East_7 => 7719,
-            SpotId::Ebih__Waterfall__Top_Waterfall => 0,
-            SpotId::Ebih__Waterfall__West_7 => 5964,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Waterfall__West_7 => enum_map! {
-            SpotId::Ebih__Waterfall__Top_Waterfall => 5964,
-            SpotId::Ebih__Waterfall__West_7 => 0,
-            SpotId::Ebih__Ebih_West__East_7 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_10 => enum_map! {
-            SpotId::Ebih__Waterfall__West_10 => 1350,
-            SpotId::Ebih__Ebih_West__East_10 => 0,
-            SpotId::Ebih__Ebih_West__Mid_Save => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Mid_Save => enum_map! {
-            SpotId::Ebih__Ebih_West__East_10 => 1578,
-            SpotId::Ebih__Ebih_West__Mid_Save => 0,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 2105,
-            SpotId::Ebih__Ebih_West__East_9 => 2400,
-            SpotId::Ebih__Ebih_West__Block_Left => 799,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Alcove_Entrance => enum_map! {
-            SpotId::Ebih__Ebih_West__Mid_Save => 2105,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 0,
-            SpotId::Ebih__Ebih_West__Alcove => 2807,
-            SpotId::Ebih__Ebih_West__Above_Alcove => 1000,
-            SpotId::Ebih__Ebih_West__Block_Left => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Alcove => enum_map! {
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 2807,
-            SpotId::Ebih__Ebih_West__Alcove => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Above_Alcove => enum_map! {
-            SpotId::Ebih__Ebih_West__Mid_Save => 3157,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 1052,
-            SpotId::Ebih__Ebih_West__Above_Alcove => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_9 => enum_map! {
-            SpotId::Ebih__Waterfall__West_9 => 1350,
-            SpotId::Ebih__Ebih_West__East_10 => 999,
-            SpotId::Ebih__Ebih_West__Mid_Save => 1578,
-            SpotId::Ebih__Ebih_West__East_9 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Block_Left => enum_map! {
-            SpotId::Ebih__Ebih_West__Mid_Save => 2000,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 2300,
-            SpotId::Ebih__Ebih_West__Block_Left => 0,
-            SpotId::Ebih__Ebih_West__Block_Right => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_7 => enum_map! {
-            SpotId::Ebih__Waterfall__West_7 => 1350,
-            SpotId::Ebih__Ebih_West__East_7 => 0,
-            SpotId::Ebih__Ebih_West__Above_Chute => 526,
-            SpotId::Ebih__Ebih_West__East_8 => 1300,
-            SpotId::Ebih__Ebih_West__Middle_Middle => 1100,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Above_Chute => enum_map! {
-            SpotId::Ebih__Ebih_West__East_7 => 526,
-            SpotId::Ebih__Ebih_West__Above_Chute => 0,
-            SpotId::Ebih__Ebih_West__Upper_Save => 1052,
-            SpotId::Ebih__Ebih_West__East_8 => 1300,
-            SpotId::Ebih__Ebih_West__Middle_Middle => 1100,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Upper_Save => enum_map! {
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 3250,
-            SpotId::Ebih__Ebih_West__Above_Alcove => 3157,
-            SpotId::Ebih__Ebih_West__Above_Chute => 1052,
-            SpotId::Ebih__Ebih_West__Upper_Save => 0,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform => 1200,
-            SpotId::Ebih__Ebih_West__Middle_Cliff => 1450,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Medium_High_Platform => enum_map! {
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 3450,
-            SpotId::Ebih__Ebih_West__Above_Alcove => 3050,
-            SpotId::Ebih__Ebih_West__Upper_Save => 701,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform => 0,
-            SpotId::Ebih__Ebih_West__High_Platform => 1200,
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall => 5300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__High_Platform => enum_map! {
-            SpotId::Ebih__Ebih_West__Upper_Save => 649,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform => 350,
-            SpotId::Ebih__Ebih_West__High_Platform => 0,
-            SpotId::Ebih__Ebih_West__High_Ledge => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__High_Ledge => enum_map! {
-            SpotId::Ebih__Ebih_West__Upper_Save => 750,
-            SpotId::Ebih__Ebih_West__High_Platform => 701,
-            SpotId::Ebih__Ebih_West__High_Ledge => 0,
-            SpotId::Ebih__Ebih_West__East_6 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_6 => enum_map! {
-            SpotId::Ebih__Ebih_West__High_Ledge => 1228,
-            SpotId::Ebih__Ebih_West__East_6 => 0,
-            SpotId::Ebih__Grid_21_1_5__West_6 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_8 => enum_map! {
-            SpotId::Ebih__Waterfall__West_8 => 1350,
-            SpotId::Ebih__Ebih_West__East_8 => 0,
-            SpotId::Ebih__Ebih_West__Middle_Middle => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Middle_Middle => enum_map! {
-            SpotId::Ebih__Ebih_West__East_7 => 3500,
-            SpotId::Ebih__Ebih_West__Above_Chute => 3500,
-            SpotId::Ebih__Ebih_West__East_8 => 877,
-            SpotId::Ebih__Ebih_West__Middle_Middle => 0,
-            SpotId::Ebih__Ebih_West__Middle_Cliff => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Middle_Cliff => enum_map! {
-            SpotId::Ebih__Ebih_West__Alcove_Entrance => 1800,
-            SpotId::Ebih__Ebih_West__Above_Alcove => 1754,
-            SpotId::Ebih__Ebih_West__Middle_Middle => 2105,
-            SpotId::Ebih__Ebih_West__Middle_Cliff => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Giguna_Pillar => enum_map! {
-            SpotId::Ebih__Ebih_West__Above_Alcove => 1052,
-            SpotId::Ebih__Ebih_West__Giguna_Pillar => 0,
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall => 3300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__West_9 => enum_map! {
-            SpotId::Ebih__Ebih_West__Giguna_Pillar => 1000,
-            SpotId::Ebih__Ebih_West__West_9 => 0,
-            SpotId::Giguna__Giguna_Northeast__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Block_Right => enum_map! {
-            SpotId::Ebih__Ebih_West__Block_Left => 877,
-            SpotId::Ebih__Ebih_West__Block_Right => 0,
-            SpotId::Ebih__Ebih_West__Refill_Station => 700,
-            SpotId::Ebih__Ebih_West__East_11 => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Refill_Station => enum_map! {
-            SpotId::Ebih__Ebih_West__Refill_Station => 0,
-            SpotId::Ebih__Ebih_West__East_11 => 877,
-            SpotId::Ebih__Ebih_West__Above_Door => 526,
-            SpotId::Ebih__Ebih_West__Small_Gap => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_11 => enum_map! {
-            SpotId::Ebih__Waterfall__West_11 => 1350,
-            SpotId::Ebih__Ebih_West__Refill_Station => 877,
-            SpotId::Ebih__Ebih_West__East_11 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Above_Door => enum_map! {
-            SpotId::Ebih__Ebih_West__Refill_Station => 600,
-            SpotId::Ebih__Ebih_West__Above_Door => 0,
-            SpotId::Ebih__Ebih_West__Below_Door => 500,
-            SpotId::Ebih__Ebih_West__Small_Gap => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Below_Door => enum_map! {
-            SpotId::Ebih__Ebih_West__Refill_Station => 1000,
-            SpotId::Ebih__Ebih_West__Above_Door => 1799,
-            SpotId::Ebih__Ebih_West__Below_Door => 0,
-            SpotId::Ebih__Ebih_West__Left_of_Switch => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Small_Gap => enum_map! {
-            SpotId::Ebih__Ebih_West__Refill_Station => 877,
-            SpotId::Ebih__Ebih_West__Above_Door => 350,
-            SpotId::Ebih__Ebih_West__Small_Gap => 0,
-            SpotId::Ebih__Ebih_West__Left_of_Gap => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Left_of_Gap => enum_map! {
-            SpotId::Ebih__Ebih_West__Small_Gap => 1228,
-            SpotId::Ebih__Ebih_West__Left_of_Gap => 0,
-            SpotId::Ebih__Ebih_West__Left_of_Switch => 826,
-            SpotId::Ebih__Ebih_West__Lower_Hill => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Left_of_Switch => enum_map! {
-            SpotId::Ebih__Ebih_West__Below_Door => 1228,
-            SpotId::Ebih__Ebih_West__Left_of_Switch => 0,
-            SpotId::Ebih__Ebih_West__Lower_Hill => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Lower_Hill => enum_map! {
-            SpotId::Ebih__Ebih_West__Left_of_Gap => 1000,
-            SpotId::Ebih__Ebih_West__Left_of_Switch => 701,
-            SpotId::Ebih__Ebih_West__Lower_Hill => 0,
-            SpotId::Ebih__Ebih_West__Lower_Cliff => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Lower_Cliff => enum_map! {
-            SpotId::Ebih__Ebih_West__Lower_Hill => 1200,
-            SpotId::Ebih__Ebih_West__Lower_Cliff => 0,
-            SpotId::Ebih__Ebih_West__Lower_Platform => 800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Lower_Platform => enum_map! {
-            SpotId::Ebih__Ebih_West__Lower_Cliff => 3599,
-            SpotId::Ebih__Ebih_West__Lower_Platform => 0,
-            SpotId::Ebih__Ebih_West__Lower_Save => 350,
-            SpotId::Ebih__Ebih_West__West_13 => 1929,
-            SpotId::Ebih__Ebih_West__East_13 => 4736,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__Lower_Save => enum_map! {
-            SpotId::Ebih__Ebih_West__Lower_Platform => 1200,
-            SpotId::Ebih__Ebih_West__Lower_Save => 0,
-            SpotId::Ebih__Ebih_West__West_13 => 1578,
-            SpotId::Ebih__Ebih_West__East_13 => 5087,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__West_High_Cliff => enum_map! {
-            SpotId::Ebih__Ebih_West__Lower_Hill => 1403,
-            SpotId::Ebih__Ebih_West__Lower_Cliff => 750,
-            SpotId::Ebih__Ebih_West__West_High_Cliff => 0,
-            SpotId::Ebih__Ebih_West__West_Fork => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__West_Fork => enum_map! {
-            SpotId::Ebih__Ebih_West__West_High_Cliff => 877,
-            SpotId::Ebih__Ebih_West__West_Fork => 0,
-            SpotId::Ebih__Ebih_West__West_11 => 1200,
-            SpotId::Ebih__Ebih_West__West_12 => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__West_11 => enum_map! {
-            SpotId::Ebih__Ebih_West__West_Fork => 1052,
-            SpotId::Ebih__Ebih_West__West_11 => 0,
-            SpotId::Giguna__Giguna_Northeast__East_11 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__West_12 => enum_map! {
-            SpotId::Ebih__Ebih_West__West_Fork => 4800,
-            SpotId::Ebih__Ebih_West__West_12 => 0,
-            SpotId::Giguna__Wasteland__East_12 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__West_13 => enum_map! {
-            SpotId::Ebih__Ebih_West__Lower_Save => 1578,
-            SpotId::Ebih__Ebih_West__West_13 => 0,
-            SpotId::Giguna__Wasteland__East_13 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_West__East_13 => enum_map! {
-            SpotId::Ebih__Ebih_West__Lower_Save => 5087,
-            SpotId::Ebih__Ebih_West__East_13 => 0,
-            SpotId::Ebih__Vertical_Interchange__West_13 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Cave__Entry => enum_map! {
-            SpotId::Ebih__Waterfall__Cave_Entrance => 250,
-            SpotId::Ebih__Cave__Entry => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__West_8 => enum_map! {
-            SpotId::Ebih__Waterfall__East_8 => 1350,
-            SpotId::Ebih__Ebih_East__West_8 => 0,
-            SpotId::Ebih__Ebih_East__Moving_Platform => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Moving_Platform => enum_map! {
-            SpotId::Ebih__Ebih_East__West_8 => 1052,
-            SpotId::Ebih__Ebih_East__Moving_Platform => 0,
-            SpotId::Ebih__Ebih_East__Ledge_End => 2280,
-            SpotId::Ebih__Ebih_East__Middle_Platform => 3700,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Ledge_End => enum_map! {
-            SpotId::Ebih__Ebih_East__Moving_Platform => 2280,
-            SpotId::Ebih__Ebih_East__Ledge_End => 0,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform => 699,
-            SpotId::Ebih__Ebih_East__Corner => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Lower_Moving_Platform => enum_map! {
-            SpotId::Ebih__Ebih_East__Ledge_End => 1000,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform => 0,
-            SpotId::Ebih__Ebih_East__Corner => 877,
-            SpotId::Ebih__Ebih_East__Dispenser => 4500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Corner => enum_map! {
-            SpotId::Ebih__Ebih_East__Corner => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Dispenser => enum_map! {
-            SpotId::Ebih__Ebih_East__Ledge_End => 5000,
-            SpotId::Ebih__Ebih_East__Dispenser => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__East_Ledge => enum_map! {
-            SpotId::Ebih__Ebih_East__Moving_Platform => 2631,
-            SpotId::Ebih__Ebih_East__Ledge_End => 350,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform => 999,
-            SpotId::Ebih__Ebih_East__East_Ledge => 0,
-            SpotId::Ebih__Ebih_East__Middle_Platform => 1200,
-            SpotId::Ebih__Ebih_East__East_Hill => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Middle_Platform => enum_map! {
-            SpotId::Ebih__Ebih_East__Moving_Platform => 1754,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform => 1399,
-            SpotId::Ebih__Ebih_East__East_Ledge => 877,
-            SpotId::Ebih__Ebih_East__Middle_Platform => 0,
-            SpotId::Ebih__Ebih_East__Upper_Ledge => 2400,
-            SpotId::Ebih__Ebih_East__East_Hill => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__Upper_Ledge => enum_map! {
-            SpotId::Ebih__Ebih_East__West_8 => 1228,
-            SpotId::Ebih__Ebih_East__Moving_Platform => 1000,
-            SpotId::Ebih__Ebih_East__Ledge_End => 2105,
-            SpotId::Ebih__Ebih_East__Middle_Platform => 1578,
-            SpotId::Ebih__Ebih_East__Upper_Ledge => 0,
-            SpotId::Ebih__Ebih_East__West_7 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__West_7 => enum_map! {
-            SpotId::Ebih__Waterfall__East_7 => 1350,
-            SpotId::Ebih__Ebih_East__Upper_Ledge => 1228,
-            SpotId::Ebih__Ebih_East__West_7 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__East_Hill => enum_map! {
-            SpotId::Ebih__Ebih_East__East_Ledge => 1403,
-            SpotId::Ebih__Ebih_East__Middle_Platform => 2280,
-            SpotId::Ebih__Ebih_East__East_Hill => 0,
-            SpotId::Ebih__Ebih_East__East_9 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Ebih_East__East_9 => enum_map! {
-            SpotId::Ebih__Ebih_East__East_Hill => 2000,
-            SpotId::Ebih__Ebih_East__East_9 => 0,
-            SpotId::Ebih__Observation_Tower_Room__West_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_21_1_5__West_6 => enum_map! {
-            SpotId::Ebih__Ebih_West__East_6 => 1350,
-            SpotId::Ebih__Grid_21_1_5__West_6 => 0,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_21_1_5__Portal_Stand => enum_map! {
-            SpotId::Ebih__Grid_21_1_5__West_6 => 1578,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand => 0,
-            SpotId::Ebih__Grid_21_1_5__East_6 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_21_1_5__East_6 => enum_map! {
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand => 1578,
-            SpotId::Ebih__Grid_21_1_5__East_6 => 0,
-            SpotId::Ebih__Boss_Room__West_6 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__West_6 => enum_map! {
-            SpotId::Ebih__Grid_21_1_5__East_6 => 1350,
-            SpotId::Ebih__Boss_Room__West_6 => 0,
-            SpotId::Ebih__Boss_Room__Boss => 2631,
-            SpotId::Ebih__Boss_Room__Past_Boss => 3684,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__Boss => enum_map! {
-            SpotId::Ebih__Boss_Room__West_6 => 2631,
-            SpotId::Ebih__Boss_Room__Boss => 0,
-            SpotId::Ebih__Boss_Room__Past_Boss => 1052,
-            SpotId::Ebih__Boss_Room__Lower_Tree => 2456,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__Past_Boss => enum_map! {
-            SpotId::Ebih__Boss_Room__West_6 => 3684,
-            SpotId::Ebih__Boss_Room__Boss => 1799,
-            SpotId::Ebih__Boss_Room__Past_Boss => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__Lower_Tree => enum_map! {
-            SpotId::Ebih__Boss_Room__Boss => 2456,
-            SpotId::Ebih__Boss_Room__Past_Boss => 1403,
-            SpotId::Ebih__Boss_Room__Lower_Tree => 0,
-            SpotId::Ebih__Boss_Room__Lower_Ledge => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__Lower_Ledge => enum_map! {
-            SpotId::Ebih__Boss_Room__Lower_Tree => 701,
-            SpotId::Ebih__Boss_Room__Lower_Ledge => 0,
-            SpotId::Ebih__Boss_Room__East_6 => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__East_6 => enum_map! {
-            SpotId::Ebih__Boss_Room__Lower_Ledge => 877,
-            SpotId::Ebih__Boss_Room__East_6 => 0,
-            SpotId::Ebih__Drone_Room__West_6 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__East_4 => enum_map! {
-            SpotId::Ebih__Boss_Room__East_4 => 0,
-            SpotId::Ebih__Boss_Room__Upper_Tree => 1403,
-            SpotId::Ebih__Boss_Room__High_Platform => 2982,
-            SpotId::Ebih__Drone_Room__West_4 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__East_Ledge => enum_map! {
-            SpotId::Ebih__Boss_Room__Lower_Ledge => 500,
-            SpotId::Ebih__Boss_Room__East_Ledge => 0,
-            SpotId::Ebih__Boss_Room__Upper_Tree => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__Upper_Tree => enum_map! {
-            SpotId::Ebih__Boss_Room__Boss => 2631,
-            SpotId::Ebih__Boss_Room__Past_Boss => 1578,
-            SpotId::Ebih__Boss_Room__Lower_Tree => 1000,
-            SpotId::Ebih__Boss_Room__East_Ledge => 877,
-            SpotId::Ebih__Boss_Room__Upper_Tree => 0,
-            SpotId::Ebih__Boss_Room__High_Platform => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__High_Platform => enum_map! {
-            SpotId::Ebih__Boss_Room__Boss => 1052,
-            SpotId::Ebih__Boss_Room__Upper_Tree => 1578,
-            SpotId::Ebih__Boss_Room__High_Platform => 0,
-            SpotId::Ebih__Boss_Room__West_5 => 3684,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Boss_Room__West_5 => enum_map! {
-            SpotId::Ebih__Boss_Room__West_6 => 1500,
-            SpotId::Ebih__Boss_Room__Boss => 2631,
-            SpotId::Ebih__Boss_Room__High_Platform => 3684,
-            SpotId::Ebih__Boss_Room__West_5 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__West_6 => enum_map! {
-            SpotId::Ebih__Boss_Room__East_6 => 1000,
-            SpotId::Ebih__Drone_Room__West_6 => 0,
-            SpotId::Ebih__Drone_Room__Pit_Left => 526,
-            SpotId::Ebih__Drone_Room__Middle_Platform => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__West_4 => enum_map! {
-            SpotId::Ebih__Boss_Room__East_4 => 1000,
-            SpotId::Ebih__Drone_Room__West_6 => 1701,
-            SpotId::Ebih__Drone_Room__West_4 => 0,
-            SpotId::Ebih__Drone_Room__Pit_Left => 1600,
-            SpotId::Ebih__Drone_Room__Middle_Platform => 1400,
-            SpotId::Ebih__Drone_Room__Left_Platform => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Pit_Left => enum_map! {
-            SpotId::Ebih__Drone_Room__West_6 => 1000,
-            SpotId::Ebih__Drone_Room__Pit_Left => 0,
-            SpotId::Ebih__Drone_Room__Portal => 1052,
-            SpotId::Ebih__Drone_Room__Moving_Platform => 7000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Portal => enum_map! {
-            SpotId::Ebih__Drone_Room__Pit_Left => 1200,
-            SpotId::Ebih__Drone_Room__Portal => 0,
-            SpotId::Ebih__Drone_Room__Item => 701,
-            SpotId::Ebih__Drone_Room__Portal_Exit => 300000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Item => enum_map! {
-            SpotId::Ebih__Drone_Room__Portal => 701,
-            SpotId::Ebih__Drone_Room__Item => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Middle_Platform => enum_map! {
-            SpotId::Ebih__Drone_Room__West_6 => 1228,
-            SpotId::Ebih__Drone_Room__Pit_Left => 701,
-            SpotId::Ebih__Drone_Room__Portal => 600,
-            SpotId::Ebih__Drone_Room__Item => 1052,
-            SpotId::Ebih__Drone_Room__Middle_Platform => 0,
-            SpotId::Ebih__Drone_Room__Portal_Exit => 2500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Portal_Exit => enum_map! {
-            SpotId::Ebih__Drone_Room__West_6 => 1578,
-            SpotId::Ebih__Drone_Room__Middle_Platform => 1403,
-            SpotId::Ebih__Drone_Room__Portal_Exit => 0,
-            SpotId::Ebih__Drone_Room__Moving_Platform => 5000,
-            SpotId::Ebih__Drone_Room__Tree => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Moving_Platform => enum_map! {
-            SpotId::Ebih__Drone_Room__West_6 => 1578,
-            SpotId::Ebih__Drone_Room__Pit_Left => 1400,
-            SpotId::Ebih__Drone_Room__Portal_Exit => 450,
-            SpotId::Ebih__Drone_Room__Moving_Platform => 0,
-            SpotId::Ebih__Drone_Room__Left_Platform => 701,
-            SpotId::Ebih__Drone_Room__Tree => 701,
-            SpotId::Ebih__Drone_Room__East_4 => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Left_Platform => enum_map! {
-            SpotId::Ebih__Drone_Room__West_6 => 1501,
-            SpotId::Ebih__Drone_Room__West_4 => 877,
-            SpotId::Ebih__Drone_Room__Pit_Left => 1500,
-            SpotId::Ebih__Drone_Room__Middle_Platform => 1326,
-            SpotId::Ebih__Drone_Room__Left_Platform => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__Tree => enum_map! {
-            SpotId::Ebih__Drone_Room__Portal_Exit => 701,
-            SpotId::Ebih__Drone_Room__Tree => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Drone_Room__East_4 => enum_map! {
-            SpotId::Ebih__Drone_Room__Portal_Exit => 1578,
-            SpotId::Ebih__Drone_Room__Moving_Platform => 1578,
-            SpotId::Ebih__Drone_Room__Tree => 877,
-            SpotId::Ebih__Drone_Room__East_4 => 0,
-            SpotId::Ebih__Grid_25_2_6__West_4 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_2_6__West_4 => enum_map! {
-            SpotId::Ebih__Drone_Room__East_4 => 1350,
-            SpotId::Ebih__Grid_25_2_6__West_4 => 0,
-            SpotId::Ebih__Grid_25_2_6__Pit => 6250,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_25_2_6__Pit => enum_map! {
-            SpotId::Ebih__Grid_25_2_6__Pit => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__West_11 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__East_11 => 1350,
-            SpotId::Ebih__Grid_26_10_11__West_11 => 0,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__Middle_Bottom => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__West_11 => 1228,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => 0,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge => 701,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__Under_Ledge => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => 701,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge => 0,
-            SpotId::Ebih__Grid_26_10_11__Ledge => 800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__Ledge => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom => 1052,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge => 350,
-            SpotId::Ebih__Grid_26_10_11__Ledge => 0,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__Middle_Platform => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__West_11 => 1228,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform => 0,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform => 1200,
-            SpotId::Ebih__Grid_26_10_11__West_10 => 2800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__Upper_Platform => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__West_11 => 1403,
-            SpotId::Ebih__Grid_26_10_11__Ledge => 877,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform => 0,
-            SpotId::Ebih__Grid_26_10_11__West_10 => 2000,
-            SpotId::Ebih__Grid_26_10_11__Cliff => 1150,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__West_10 => enum_map! {
-            SpotId::Ebih__Grid_25_10_12__East_10 => 1350,
-            SpotId::Ebih__Grid_26_10_11__West_11 => 1526,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform => 1403,
-            SpotId::Ebih__Grid_26_10_11__West_10 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__Cliff => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform => 526,
-            SpotId::Ebih__Grid_26_10_11__Cliff => 0,
-            SpotId::Ebih__Grid_26_10_11__East_10 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Grid_26_10_11__East_10 => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__Cliff => 1228,
-            SpotId::Ebih__Grid_26_10_11__East_10 => 0,
-            SpotId::Ebih__Observation_Tower_Room__West_10 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Observation_Tower_Room__West_9 => enum_map! {
-            SpotId::Ebih__Ebih_East__East_9 => 1350,
-            SpotId::Ebih__Observation_Tower_Room__West_9 => 0,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top => 1578,
-            SpotId::Ebih__Observation_Tower_Room__West_10 => 2456,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Observation_Tower_Room__Tower_Top => enum_map! {
-            SpotId::Ebih__Observation_Tower_Room__West_9 => 3000,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top => 0,
-            SpotId::Ebih__Observation_Tower_Room__West_10 => 1578,
-            SpotId::Ebih__Observation_Tower_Room__East_11 => 1699,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => enum_map! {
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top => 3599,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => 0,
-            SpotId::Ebih__Observation_Tower_Room__West_10 => 1578,
-            SpotId::Ebih__Observation_Tower_Room__East_11 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Observation_Tower_Room__Cliff => enum_map! {
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => 600,
-            SpotId::Ebih__Observation_Tower_Room__Cliff => 0,
-            SpotId::Ebih__Observation_Tower_Room__West_10 => 2105,
-            SpotId::Ebih__Observation_Tower_Room__East_11 => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Observation_Tower_Room__West_10 => enum_map! {
-            SpotId::Ebih__Grid_26_10_11__East_10 => 1350,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom => 1578,
-            SpotId::Ebih__Observation_Tower_Room__Cliff => 2105,
-            SpotId::Ebih__Observation_Tower_Room__West_10 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Observation_Tower_Room__East_11 => enum_map! {
-            SpotId::Ebih__Base_Camp__West_11 => 1000,
-            SpotId::Ebih__Observation_Tower_Room__Cliff => 2000,
-            SpotId::Ebih__Observation_Tower_Room__East_11 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__West_13 => enum_map! {
-            SpotId::Ebih__Ebih_West__East_13 => 1350,
-            SpotId::Ebih__Vertical_Interchange__West_13 => 0,
-            SpotId::Ebih__Vertical_Interchange__Passage_West => 701,
-            SpotId::Ebih__Vertical_Interchange__Door_West => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Passage_West => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__West_13 => 701,
-            SpotId::Ebih__Vertical_Interchange__Passage_West => 0,
-            SpotId::Ebih__Vertical_Interchange__Door_West => 1200,
-            SpotId::Ebih__Vertical_Interchange__Passage_East => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Door_West => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__West_13 => 1052,
-            SpotId::Ebih__Vertical_Interchange__Passage_West => 350,
-            SpotId::Ebih__Vertical_Interchange__Door_West => 0,
-            SpotId::Ebih__Vertical_Interchange__Door => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Door => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Door_West => 526,
-            SpotId::Ebih__Vertical_Interchange__Door => 0,
-            SpotId::Ebih__Vertical_Interchange__Door_East => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Door_East => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Door => 526,
-            SpotId::Ebih__Vertical_Interchange__Door_East => 0,
-            SpotId::Ebih__Vertical_Interchange__Passage_East => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Passage_East => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Passage_West => 1929,
-            SpotId::Ebih__Vertical_Interchange__Door_West => 1000,
-            SpotId::Ebih__Vertical_Interchange__Passage_East => 0,
-            SpotId::Ebih__Vertical_Interchange__East_13 => 600,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__East_13 => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Passage_East => 526,
-            SpotId::Ebih__Vertical_Interchange__East_13 => 0,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Middle_Descent => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Passage_East => 3000,
-            SpotId::Ebih__Vertical_Interchange__East_13 => 3000,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 0,
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Middle_Drop => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent => 2280,
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop => 0,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 950,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop => 5399,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 0,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station => 526,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Refill_Station => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 1799,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station => 0,
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 399,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill => 1200,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 0,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 1052,
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Block_Cubby => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby => 0,
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Cubby_Exit => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 1403,
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit => 0,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 799,
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 1299,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__East_Tunnel => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Refill_Station => 1052,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 1052,
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby => 3599,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 0,
-            SpotId::Ebih__Vertical_Interchange__East_15 => 701,
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__East_15 => enum_map! {
-            SpotId::Amagi__West_Lake__West_15 => 1350,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel => 701,
-            SpotId::Ebih__Vertical_Interchange__East_15 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Below_Door => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Refill_Station => 1000,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station => 1000,
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 0,
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => 526,
-            SpotId::Ebih__Vertical_Interchange__Switch => 500,
-            SpotId::Ebih__Vertical_Interchange__South => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 600,
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff => 0,
-            SpotId::Ebih__Vertical_Interchange__Switch => 701,
-            SpotId::Ebih__Vertical_Interchange__South => 400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__Switch => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 1000,
-            SpotId::Ebih__Vertical_Interchange__Switch => 0,
-            SpotId::Ebih__Vertical_Interchange__South => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Ebih__Vertical_Interchange__South => enum_map! {
-            SpotId::Ebih__Vertical_Interchange__Below_Door => 1000,
-            SpotId::Ebih__Vertical_Interchange__Switch => 600,
-            SpotId::Ebih__Vertical_Interchange__South => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__Save_Point => enum_map! {
-            SpotId::Giguna_Breach__Peak__Save_Point => 0,
-            SpotId::Giguna_Breach__Peak__East_Passage => 3508,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__East_Passage => enum_map! {
-            SpotId::Giguna_Breach__Peak__Save_Point => 3508,
-            SpotId::Giguna_Breach__Peak__East_Passage => 0,
-            SpotId::Giguna_Breach__Peak__Column => 2400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__Column => enum_map! {
-            SpotId::Giguna_Breach__Peak__East_Passage => 799,
-            SpotId::Giguna_Breach__Peak__Column => 0,
-            SpotId::Giguna_Breach__Peak__West_7 => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__West_7 => enum_map! {
-            SpotId::Giguna_Breach__Peak__West_7 => 0,
-            SpotId::Giguna_Breach__Chimney__East_7 => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__East_6 => enum_map! {
-            SpotId::Giguna_Breach__Peak__East_6 => 0,
-            SpotId::Giguna_Breach__Peak__Upper_East => 700,
-            SpotId::Giguna_Breach__Ascent__West_6 => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__Upper_East => enum_map! {
-            SpotId::Giguna_Breach__Peak__East_6 => 701,
-            SpotId::Giguna_Breach__Peak__Upper_East => 0,
-            SpotId::Giguna_Breach__Peak__Upper_West => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__Upper_West => enum_map! {
-            SpotId::Giguna_Breach__Peak__Upper_East => 2105,
-            SpotId::Giguna_Breach__Peak__Upper_West => 0,
-            SpotId::Giguna_Breach__Peak__Portal => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Peak__Portal => enum_map! {
-            SpotId::Giguna_Breach__Peak__Upper_West => 1000,
-            SpotId::Giguna_Breach__Peak__Portal => 0,
-            SpotId::Giguna__Ruins_Top__Save_Point => 3600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__East_7 => enum_map! {
-            SpotId::Giguna_Breach__Peak__West_7 => 1600,
-            SpotId::Giguna_Breach__Chimney__East_7 => 0,
-            SpotId::Giguna_Breach__Chimney__Top => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__Top => enum_map! {
-            SpotId::Giguna_Breach__Chimney__East_7 => 1052,
-            SpotId::Giguna_Breach__Chimney__Top => 0,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform => 1949,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__Middle_Platform => enum_map! {
-            SpotId::Giguna_Breach__Chimney__Top => 7199,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform => 0,
-            SpotId::Giguna_Breach__Chimney__East_9 => 1403,
-            SpotId::Giguna_Breach__Chimney__South => 450,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__East_9 => enum_map! {
-            SpotId::Giguna_Breach__Chimney__Middle_Platform => 1403,
-            SpotId::Giguna_Breach__Chimney__East_9 => 0,
-            SpotId::Giguna_Breach__Chimney__South => 1403,
-            SpotId::Giguna_Breach__Central__West_9 => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__South => enum_map! {
-            SpotId::Giguna_Breach__Chimney__Middle_Platform => 1200,
-            SpotId::Giguna_Breach__Chimney__East_9 => 1403,
-            SpotId::Giguna_Breach__Chimney__South => 0,
-            SpotId::Giguna_Breach__Below_Chimney__North => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__East_8 => enum_map! {
-            SpotId::Giguna_Breach__Chimney__East_8 => 0,
-            SpotId::Giguna_Breach__Chimney__Cache => 526,
-            SpotId::Giguna_Breach__Central__West_8 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Chimney__Cache => enum_map! {
-            SpotId::Giguna_Breach__Chimney__East_8 => 526,
-            SpotId::Giguna_Breach__Chimney__Cache => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Below_Chimney__North => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__North => 0,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 350,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 350,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__North => 600,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 0,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 701,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 500,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Below_Chimney__East_Ledge => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 701,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 0,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge => 1200,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 0,
-            SpotId::Giguna_Breach__Cubby__Entrance => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Below_Chimney__West_Passage => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip => 1403,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage => 0,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Below_Chimney__Southwest => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage => 1799,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest => 0,
-            SpotId::Giguna_Breach__SW_Save__North => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Cubby__Entrance => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance => 1600,
-            SpotId::Giguna_Breach__Cubby__Entrance => 0,
-            SpotId::Giguna_Breach__Cubby__Rocks => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Cubby__Rocks => enum_map! {
-            SpotId::Giguna_Breach__Cubby__Entrance => 1200,
-            SpotId::Giguna_Breach__Cubby__Rocks => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__SW_Save__North => enum_map! {
-            SpotId::Giguna_Breach__Below_Chimney__Southwest => 1600,
-            SpotId::Giguna_Breach__SW_Save__North => 0,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 1000,
-            SpotId::Giguna_Breach__SW_Save__Side_Door => 600,
-            SpotId::Giguna_Breach__SW_Save__Save_Point => 1500,
-            SpotId::Giguna_Breach__SW_Save__East_12 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__SW_Save__Lower_Platform => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 0,
-            SpotId::Giguna_Breach__SW_Save__Side_Door => 1000,
-            SpotId::Giguna_Breach__SW_Save__Save_Point => 500,
-            SpotId::Giguna_Breach__SW_Save__East_12 => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__SW_Save__Side_Door => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__North => 1200,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 877,
-            SpotId::Giguna_Breach__SW_Save__Side_Door => 0,
-            SpotId::Giguna_Breach__SW_Save__West_11 => 877,
-            SpotId::Giguna_Breach__SW_Save__Save_Point => 899,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__SW_Save__West_11 => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__Side_Door => 877,
-            SpotId::Giguna_Breach__SW_Save__West_11 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__SW_Save__Save_Point => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 1000,
-            SpotId::Giguna_Breach__SW_Save__Save_Point => 0,
-            SpotId::Giguna_Breach__SW_Save__East_12 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__SW_Save__East_12 => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform => 1000,
-            SpotId::Giguna_Breach__SW_Save__Save_Point => 1403,
-            SpotId::Giguna_Breach__SW_Save__East_12 => 0,
-            SpotId::Giguna_Breach__Robopede__West => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Robopede__West => enum_map! {
-            SpotId::Giguna_Breach__SW_Save__East_12 => 1000,
-            SpotId::Giguna_Breach__Robopede__West => 0,
-            SpotId::Giguna_Breach__Robopede__Center => 3508,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Robopede__Center => enum_map! {
-            SpotId::Giguna_Breach__Robopede__West => 3508,
-            SpotId::Giguna_Breach__Robopede__Center => 0,
-            SpotId::Giguna_Breach__Robopede__North => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Robopede__North => enum_map! {
-            SpotId::Giguna_Breach__Robopede__Center => 1403,
-            SpotId::Giguna_Breach__Robopede__North => 0,
-            SpotId::Giguna_Breach__Grid_14_10_11__South => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Grid_14_10_11__South => enum_map! {
-            SpotId::Giguna_Breach__Robopede__North => 1600,
-            SpotId::Giguna_Breach__Grid_14_10_11__South => 0,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Grid_14_10_11__East_11 => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__South => 1403,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => 0,
-            SpotId::Giguna_Breach__Fire_Room__West_11 => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Grid_14_10_11__East_10 => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => 0,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => 1300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__South => 1400,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => 877,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => 0,
-            SpotId::Giguna_Breach__Grid_14_10_11__North => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Grid_14_10_11__North => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__South => 1600,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge => 526,
-            SpotId::Giguna_Breach__Grid_14_10_11__North => 0,
-            SpotId::Giguna_Breach__Central__South => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__West_11 => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11 => 1600,
-            SpotId::Giguna_Breach__Fire_Room__West_11 => 0,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__First_Fire => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__West_11 => 1754,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire => 0,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta => 1403,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau => 1300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__Cuesta => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__First_Fire => 1403,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta => 0,
-            SpotId::Giguna_Breach__Fire_Room__South => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__South => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__Cuesta => 1500,
-            SpotId::Giguna_Breach__Fire_Room__South => 0,
-            SpotId::Giguna_Breach__Fire_Room__East_11 => 1403,
-            SpotId::Giguna_Breach__Antechamber__North => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__East_11 => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__South => 1403,
-            SpotId::Giguna_Breach__Fire_Room__East_11 => 0,
-            SpotId::Giguna_Breach__Slingshot__West => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__West_Plateau => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__First_Fire => 701,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta => 2105,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau => 0,
-            SpotId::Giguna_Breach__Fire_Room__East_10 => 700,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Fire_Room__East_10 => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10 => 1600,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau => 1052,
-            SpotId::Giguna_Breach__Fire_Room__East_10 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Slingshot__West => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__East_11 => 1600,
-            SpotId::Giguna_Breach__Slingshot__West => 0,
-            SpotId::Giguna_Breach__Slingshot__Column => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Slingshot__Column => enum_map! {
-            SpotId::Giguna_Breach__Slingshot__West => 1403,
-            SpotId::Giguna_Breach__Slingshot__Column => 0,
-            SpotId::Giguna_Breach__Slingshot__Ravine => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Slingshot__Ravine => enum_map! {
-            SpotId::Giguna_Breach__Slingshot__Column => 1000,
-            SpotId::Giguna_Breach__Slingshot__Ravine => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Antechamber__North => enum_map! {
-            SpotId::Giguna_Breach__Fire_Room__South => 1600,
-            SpotId::Giguna_Breach__Antechamber__North => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__West_9 => enum_map! {
-            SpotId::Giguna_Breach__Chimney__East_9 => 1600,
-            SpotId::Giguna_Breach__Central__West_9 => 0,
-            SpotId::Giguna_Breach__Central__Wall => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__Wall => enum_map! {
-            SpotId::Giguna_Breach__Central__West_9 => 701,
-            SpotId::Giguna_Breach__Central__Wall => 0,
-            SpotId::Giguna_Breach__Central__South => 701,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__South => enum_map! {
-            SpotId::Giguna_Breach__Grid_14_10_11__North => 1600,
-            SpotId::Giguna_Breach__Central__South => 0,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__Upper_Floating_Brick => enum_map! {
-            SpotId::Giguna_Breach__Central__South => 1228,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 0,
-            SpotId::Giguna_Breach__Central__West_Statue => 1000,
-            SpotId::Giguna_Breach__Central__Middle_Statue => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__West_Statue => enum_map! {
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 299,
-            SpotId::Giguna_Breach__Central__West_Statue => 0,
-            SpotId::Giguna_Breach__Central__Statuette => 1929,
-            SpotId::Giguna_Breach__Central__Middle_Statue => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__Statuette => enum_map! {
-            SpotId::Giguna_Breach__Central__Statuette => 0,
-            SpotId::Giguna_Breach__Central__Tunnel => 500,
-            SpotId::Giguna_Breach__Central__Middle_Statue => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__Tunnel => enum_map! {
-            SpotId::Giguna_Breach__Central__Statuette => 350,
-            SpotId::Giguna_Breach__Central__Tunnel => 0,
-            SpotId::Giguna_Breach__Central__West_8 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__West_8 => enum_map! {
-            SpotId::Giguna_Breach__Chimney__East_8 => 1350,
-            SpotId::Giguna_Breach__Central__Tunnel => 526,
-            SpotId::Giguna_Breach__Central__West_8 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__Middle_Statue => enum_map! {
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick => 1228,
-            SpotId::Giguna_Breach__Central__West_Statue => 1228,
-            SpotId::Giguna_Breach__Central__Middle_Statue => 0,
-            SpotId::Giguna_Breach__Central__East_Brick => 499,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__East_Brick => enum_map! {
-            SpotId::Giguna_Breach__Central__Middle_Statue => 1000,
-            SpotId::Giguna_Breach__Central__East_Brick => 0,
-            SpotId::Giguna_Breach__Central__East_9 => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Central__East_9 => enum_map! {
-            SpotId::Giguna_Breach__Central__East_Brick => 2000,
-            SpotId::Giguna_Breach__Central__East_9 => 0,
-            SpotId::Giguna_Breach__Ascent__West_9 => 1600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Ascent__West_9 => enum_map! {
-            SpotId::Giguna_Breach__Central__East_9 => 1600,
-            SpotId::Giguna_Breach__Ascent__West_9 => 0,
-            SpotId::Giguna_Breach__Ascent__Bottom => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Ascent__Bottom => enum_map! {
-            SpotId::Giguna_Breach__Ascent__West_9 => 701,
-            SpotId::Giguna_Breach__Ascent__Bottom => 0,
-            SpotId::Giguna_Breach__Ascent__Top => 9000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Ascent__Top => enum_map! {
-            SpotId::Giguna_Breach__Ascent__Bottom => 4605,
-            SpotId::Giguna_Breach__Ascent__Top => 0,
-            SpotId::Giguna_Breach__Ascent__West_6 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna_Breach__Ascent__West_6 => enum_map! {
-            SpotId::Giguna_Breach__Peak__East_6 => 1600,
-            SpotId::Giguna_Breach__Ascent__Top => 1403,
-            SpotId::Giguna_Breach__Ascent__West_6 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__East_9 => enum_map! {
-            SpotId::Ebih__Ebih_West__West_9 => 1350,
-            SpotId::Giguna__Giguna_Northeast__East_9 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Inner_Wall => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__East_9 => 1200,
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall => 0,
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating => 2807,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Crow_Eating => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating => 0,
-            SpotId::Giguna__Giguna_Northeast__Save_Point => 1403,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left => 699,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Save_Point => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Save_Point => 0,
-            SpotId::Giguna__Giguna_Northeast__Step => 701,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left => 1052,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Step => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Save_Point => 701,
-            SpotId::Giguna__Giguna_Northeast__Step => 0,
-            SpotId::Giguna__Giguna_Northeast__West_10 => 877,
-            SpotId::Giguna__Giguna_Northeast__West_9 => 1700,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent => 2300,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__West_10 => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Step => 877,
-            SpotId::Giguna__Giguna_Northeast__West_10 => 0,
-            SpotId::Giguna__Carnelian__East_10 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__West_9 => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Step => 877,
-            SpotId::Giguna__Giguna_Northeast__West_9 => 0,
-            SpotId::Giguna__Ruins_East__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Gate_Left => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Save_Point => 1052,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left => 0,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent => 1250,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button => 2500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Gate_Vent => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Save_Point => 1754,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent => 0,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button => 1928,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Gate_Button => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Gate_Left => 2500,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button => 0,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Gate_Right => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Gate_Button => 877,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right => 0,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => 0,
-            SpotId::Giguna__Giguna_Northeast__East_11 => 526,
-            SpotId::Giguna__Giguna_Northeast__Right_Column => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__East_11 => enum_map! {
-            SpotId::Ebih__Ebih_West__West_11 => 1350,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => 600,
-            SpotId::Giguna__Giguna_Northeast__East_11 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Right_Column => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom => 3157,
-            SpotId::Giguna__Giguna_Northeast__Right_Column => 0,
-            SpotId::Giguna__Giguna_Northeast__Switch => 701,
-            SpotId::Giguna__Giguna_Northeast__Door => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Switch => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Right_Column => 1000,
-            SpotId::Giguna__Giguna_Northeast__Switch => 0,
-            SpotId::Giguna__Giguna_Northeast__Door => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Door => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Right_Column => 1403,
-            SpotId::Giguna__Giguna_Northeast__Door => 0,
-            SpotId::Giguna__Giguna_Northeast__Vault => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Northeast__Vault => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__Door => 700,
-            SpotId::Giguna__Giguna_Northeast__Vault => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__East_10 => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__West_10 => 1350,
-            SpotId::Giguna__Carnelian__East_10 => 0,
-            SpotId::Giguna__Carnelian__East_Cliff => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__East_Cliff => enum_map! {
-            SpotId::Giguna__Carnelian__East_10 => 2105,
-            SpotId::Giguna__Carnelian__East_Cliff => 0,
-            SpotId::Giguna__Carnelian__Upper_Susar => 1754,
-            SpotId::Giguna__Carnelian__Middle_Platforms => 877,
-            SpotId::Giguna__Carnelian__Switch => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Upper_Susar => enum_map! {
-            SpotId::Giguna__Carnelian__East_Cliff => 1754,
-            SpotId::Giguna__Carnelian__Upper_Susar => 0,
-            SpotId::Giguna__Carnelian__Middle_Platforms => 877,
-            SpotId::Giguna__Carnelian__Upper_Path => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Middle_Platforms => enum_map! {
-            SpotId::Giguna__Carnelian__East_Cliff => 1500,
-            SpotId::Giguna__Carnelian__Upper_Susar => 1750,
-            SpotId::Giguna__Carnelian__Middle_Platforms => 0,
-            SpotId::Giguna__Carnelian__Switch => 699,
-            SpotId::Giguna__Carnelian__Rock => 400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Switch => enum_map! {
-            SpotId::Giguna__Carnelian__Switch => 0,
-            SpotId::Giguna__Carnelian__Door => 701,
-            SpotId::Giguna__Carnelian__Rock => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Door => enum_map! {
-            SpotId::Giguna__Carnelian__Switch => 701,
-            SpotId::Giguna__Carnelian__Door => 0,
-            SpotId::Giguna__Carnelian__Vault => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Vault => enum_map! {
-            SpotId::Giguna__Carnelian__Door => 1052,
-            SpotId::Giguna__Carnelian__Vault => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Rock => enum_map! {
-            SpotId::Giguna__Carnelian__Middle_Platforms => 1200,
-            SpotId::Giguna__Carnelian__Switch => 701,
-            SpotId::Giguna__Carnelian__Rock => 0,
-            SpotId::Giguna__Carnelian__Lower_Susar => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Lower_Susar => enum_map! {
-            SpotId::Giguna__Carnelian__Rock => 1403,
-            SpotId::Giguna__Carnelian__Lower_Susar => 0,
-            SpotId::Giguna__Carnelian__West_Ledge => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__Upper_Path => enum_map! {
-            SpotId::Giguna__Carnelian__Upper_Susar => 877,
-            SpotId::Giguna__Carnelian__Upper_Path => 0,
-            SpotId::Giguna__Carnelian__West_Ledge => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__West_Ledge => enum_map! {
-            SpotId::Giguna__Carnelian__Lower_Susar => 1052,
-            SpotId::Giguna__Carnelian__West_Ledge => 0,
-            SpotId::Giguna__Carnelian__West_10 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Carnelian__West_10 => enum_map! {
-            SpotId::Giguna__Carnelian__West_Ledge => 877,
-            SpotId::Giguna__Carnelian__West_10 => 0,
-            SpotId::Giguna__West_Caverns__East_10 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__East_10 => enum_map! {
-            SpotId::Giguna__Carnelian__West_10 => 1350,
-            SpotId::Giguna__West_Caverns__East_10 => 0,
-            SpotId::Giguna__West_Caverns__East_Platform => 1578,
-            SpotId::Giguna__West_Caverns__Small_Staircase => 1403,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 1403,
-            SpotId::Giguna__West_Caverns__Column_2_Top => 6000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__East_Platform => enum_map! {
-            SpotId::Giguna__West_Caverns__East_Platform => 0,
-            SpotId::Giguna__West_Caverns__Small_Staircase => 500,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 699,
-            SpotId::Giguna__West_Caverns__Small_Platform => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Small_Staircase => enum_map! {
-            SpotId::Giguna__West_Caverns__East_10 => 2400,
-            SpotId::Giguna__West_Caverns__Small_Staircase => 0,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 299,
-            SpotId::Giguna__West_Caverns__Small_Platform => 1799,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Tunnel_Entrance => enum_map! {
-            SpotId::Giguna__West_Caverns__Small_Staircase => 1200,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 0,
-            SpotId::Giguna__West_Caverns__Small_Platform => 1799,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Small_Platform => enum_map! {
-            SpotId::Giguna__West_Caverns__Small_Staircase => 1228,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 1228,
-            SpotId::Giguna__West_Caverns__Small_Platform => 0,
-            SpotId::Giguna__West_Caverns__Higher_Ledge => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Higher_Ledge => enum_map! {
-            SpotId::Giguna__West_Caverns__East_Platform => 1403,
-            SpotId::Giguna__West_Caverns__Small_Staircase => 1578,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 1578,
-            SpotId::Giguna__West_Caverns__Small_Platform => 350,
-            SpotId::Giguna__West_Caverns__Higher_Ledge => 0,
-            SpotId::Giguna__West_Caverns__Floating_Brick => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Floating_Brick => enum_map! {
-            SpotId::Giguna__West_Caverns__East_Platform => 877,
-            SpotId::Giguna__West_Caverns__Higher_Ledge => 526,
-            SpotId::Giguna__West_Caverns__Floating_Brick => 0,
-            SpotId::Giguna__West_Caverns__Column_2_Top => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Column_2_Top => enum_map! {
-            SpotId::Giguna__West_Caverns__East_Platform => 1754,
-            SpotId::Giguna__West_Caverns__Higher_Ledge => 599,
-            SpotId::Giguna__West_Caverns__Column_2_Top => 0,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Top_Gap_Right => enum_map! {
-            SpotId::Giguna__West_Caverns__Top_Gap_Right => 0,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Top_Gap_Left => enum_map! {
-            SpotId::Giguna__West_Caverns__Top_Gap_Left => 0,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Column_1_Top_Right => enum_map! {
-            SpotId::Giguna__West_Caverns__Top_Gap_Right => 1052,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left => 299,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right => 0,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Column_1_Top_Left => enum_map! {
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right => 1228,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left => 0,
-            SpotId::Giguna__West_Caverns__Cache => 500,
-            SpotId::Giguna__West_Caverns__Bush => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Cache => enum_map! {
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left => 1799,
-            SpotId::Giguna__West_Caverns__Cache => 0,
-            SpotId::Giguna__West_Caverns__Bush => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Bush => enum_map! {
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left => 1915,
-            SpotId::Giguna__West_Caverns__Cache => 2105,
-            SpotId::Giguna__West_Caverns__Bush => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Tunnel_Bottom => enum_map! {
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 2250,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom => 0,
-            SpotId::Giguna__West_Caverns__Tunnel_Fork => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Tunnel_Fork => enum_map! {
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance => 2250,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom => 850,
-            SpotId::Giguna__West_Caverns__Tunnel_Fork => 0,
-            SpotId::Giguna__West_Caverns__East_Susar => 350,
-            SpotId::Giguna__West_Caverns__East_13 => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__East_Susar => enum_map! {
-            SpotId::Giguna__West_Caverns__Tunnel_Fork => 600,
-            SpotId::Giguna__West_Caverns__East_Susar => 0,
-            SpotId::Giguna__West_Caverns__East_12 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__East_12 => enum_map! {
-            SpotId::Giguna__West_Caverns__East_Susar => 526,
-            SpotId::Giguna__West_Caverns__East_12 => 0,
-            SpotId::Giguna__Wasteland__West_12 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__East_13 => enum_map! {
-            SpotId::Giguna__West_Caverns__East_13 => 0,
-            SpotId::Giguna__Wasteland__West_13 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__Northwest => enum_map! {
-            SpotId::Giguna__West_Caverns__Northwest => 0,
-            SpotId::Giguna__West_Caverns__West_13 => 3200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Caverns__West_13 => enum_map! {
-            SpotId::Giguna__West_Caverns__West_13 => 0,
-            SpotId::Giguna__Far_Corner__East_13 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__West_12 => enum_map! {
-            SpotId::Giguna__West_Caverns__East_12 => 1350,
-            SpotId::Giguna__Wasteland__West_12 => 0,
-            SpotId::Giguna__Wasteland__Upper_Cliff => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Upper_Cliff => enum_map! {
-            SpotId::Giguna__Wasteland__West_12 => 877,
-            SpotId::Giguna__Wasteland__Upper_Cliff => 0,
-            SpotId::Giguna__Wasteland__West_13 => 1578,
-            SpotId::Giguna__Wasteland__Lower_Cliff => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__West_13 => enum_map! {
-            SpotId::Giguna__West_Caverns__East_13 => 1350,
-            SpotId::Giguna__Wasteland__West_13 => 0,
-            SpotId::Giguna__Wasteland__Middle_Path => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Middle_Path => enum_map! {
-            SpotId::Giguna__Wasteland__West_13 => 1228,
-            SpotId::Giguna__Wasteland__Middle_Path => 0,
-            SpotId::Giguna__Wasteland__Middle_Cliff => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Middle_Cliff => enum_map! {
-            SpotId::Giguna__Wasteland__West_12 => 3500,
-            SpotId::Giguna__Wasteland__Middle_Path => 1052,
-            SpotId::Giguna__Wasteland__Middle_Cliff => 0,
-            SpotId::Giguna__Wasteland__Lower_Path_Right => 850,
-            SpotId::Giguna__Wasteland__Lower_Cliff => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Lower_Path_Right => enum_map! {
-            SpotId::Giguna__Wasteland__Lower_Path_Right => 0,
-            SpotId::Giguna__Wasteland__Lower_Path_Left => 877,
-            SpotId::Giguna__Wasteland__Lower_Cliff => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Lower_Path_Left => enum_map! {
-            SpotId::Giguna__Wasteland__Lower_Path_Right => 877,
-            SpotId::Giguna__Wasteland__Lower_Path_Left => 0,
-            SpotId::Giguna__Wasteland__West_14 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Lower_Cliff => enum_map! {
-            SpotId::Giguna__Wasteland__Middle_Cliff => 850,
-            SpotId::Giguna__Wasteland__Lower_Path_Left => 1578,
-            SpotId::Giguna__Wasteland__Lower_Cliff => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__West_14 => enum_map! {
-            SpotId::Giguna__Wasteland__Lower_Path_Left => 1228,
-            SpotId::Giguna__Wasteland__West_14 => 0,
-            SpotId::Giguna__Giguna_Base__East_14 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__East_12 => enum_map! {
-            SpotId::Ebih__Ebih_West__West_12 => 1350,
-            SpotId::Giguna__Wasteland__East_12 => 0,
-            SpotId::Giguna__Wasteland__East_Ledge => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__East_13 => enum_map! {
-            SpotId::Giguna__Wasteland__East_13 => 0,
-            SpotId::Giguna__Wasteland__Door_Left => 1578,
-            SpotId::Giguna__Wasteland__Bluff_by_Door => 1929,
-            SpotId::Giguna__Wasteland__Tiny_Hill => 3333,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__East_14 => enum_map! {
-            SpotId::Giguna__Wasteland__East_14 => 0,
-            SpotId::Giguna__Wasteland__Door_Right => 1200,
-            SpotId::Giguna__East_Caverns__West_14 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__East_Ledge => enum_map! {
-            SpotId::Giguna__Wasteland__East_12 => 1000,
-            SpotId::Giguna__Wasteland__East_13 => 877,
-            SpotId::Giguna__Wasteland__East_Ledge => 0,
-            SpotId::Giguna__Wasteland__Door_Left => 1000,
-            SpotId::Giguna__Wasteland__Bluff_by_Door => 1400,
-            SpotId::Giguna__Wasteland__Tiny_Hill => 2456,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Door_Left => enum_map! {
-            SpotId::Giguna__Wasteland__Door_Left => 0,
-            SpotId::Giguna__Wasteland__Door_Right => 526,
-            SpotId::Giguna__Wasteland__Bluff_by_Door => 400,
-            SpotId::Giguna__Wasteland__Tiny_Hill => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Door_Right => enum_map! {
-            SpotId::Giguna__Wasteland__East_14 => 1052,
-            SpotId::Giguna__Wasteland__Door_Left => 526,
-            SpotId::Giguna__Wasteland__Door_Right => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Bluff_by_Door => enum_map! {
-            SpotId::Giguna__Wasteland__Door_Left => 1000,
-            SpotId::Giguna__Wasteland__Bluff_by_Door => 0,
-            SpotId::Giguna__Wasteland__Tiny_Hill => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Tiny_Hill => enum_map! {
-            SpotId::Giguna__Wasteland__Bluff_by_Door => 1403,
-            SpotId::Giguna__Wasteland__Tiny_Hill => 0,
-            SpotId::Giguna__Wasteland__Center_Plains => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Steeper_Hill => enum_map! {
-            SpotId::Giguna__Wasteland__Steeper_Hill => 0,
-            SpotId::Giguna__Wasteland__Center_Plains => 701,
-            SpotId::Giguna__Wasteland__West_Plains => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Center_Plains => enum_map! {
-            SpotId::Giguna__Wasteland__Tiny_Hill => 2105,
-            SpotId::Giguna__Wasteland__Steeper_Hill => 1200,
-            SpotId::Giguna__Wasteland__Center_Plains => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__West_Plains => enum_map! {
-            SpotId::Giguna__Wasteland__Steeper_Hill => 1799,
-            SpotId::Giguna__Wasteland__West_Plains => 0,
-            SpotId::Giguna__Wasteland__Passage_East => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Passage_East => enum_map! {
-            SpotId::Giguna__Wasteland__West_Plains => 1403,
-            SpotId::Giguna__Wasteland__Passage_East => 0,
-            SpotId::Giguna__Wasteland__Passage_Cache => 4210,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Passage_Cache => enum_map! {
-            SpotId::Giguna__Wasteland__Passage_East => 4210,
-            SpotId::Giguna__Wasteland__Passage_Cache => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Westward_Hill => enum_map! {
-            SpotId::Giguna__Wasteland__Lower_Cliff => 2400,
-            SpotId::Giguna__Wasteland__West_Plains => 1929,
-            SpotId::Giguna__Wasteland__Passage_East => 526,
-            SpotId::Giguna__Wasteland__Westward_Hill => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Upper_Cache => enum_map! {
-            SpotId::Giguna__Wasteland__Upper_Cache => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Cache_Ledge => enum_map! {
-            SpotId::Giguna__Wasteland__Cache_Ledge => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Left_Platform_West => enum_map! {
-            SpotId::Giguna__Wasteland__Left_Platform_West => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Left_Platform_East => enum_map! {
-            SpotId::Giguna__Wasteland__Left_Platform_East => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Center_Platform_West => enum_map! {
-            SpotId::Giguna__Wasteland__Center_Platform_West => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Center_Platform_East => enum_map! {
-            SpotId::Giguna__Wasteland__Center_Platform_East => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Right_Platform_West => enum_map! {
-            SpotId::Giguna__Wasteland__Right_Platform_West => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Right_Platform_East => enum_map! {
-            SpotId::Giguna__Wasteland__Right_Platform_East => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Lower_Platform_West => enum_map! {
-            SpotId::Giguna__Wasteland__Lower_Platform_West => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Lower_Platform_East => enum_map! {
-            SpotId::Giguna__Wasteland__Lower_Platform_East => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Ladder_Ledge => enum_map! {
-            SpotId::Giguna__Wasteland__Ladder_Ledge => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Switch_Ledge => enum_map! {
-            SpotId::Giguna__Wasteland__Switch_Ledge => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Switch_Approach => enum_map! {
-            SpotId::Giguna__Wasteland__Switch_Approach => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Wasteland__Switch => enum_map! {
-            SpotId::Giguna__Wasteland__Switch => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__East_14 => enum_map! {
-            SpotId::Giguna__Wasteland__West_14 => 1350,
-            SpotId::Giguna__Giguna_Base__East_14 => 0,
-            SpotId::Giguna__Giguna_Base__Stone_Knob => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Stone_Knob => enum_map! {
-            SpotId::Giguna__Giguna_Base__Stone_Knob => 0,
-            SpotId::Giguna__Giguna_Base__Upper_Cliff => 1000,
-            SpotId::Giguna__Giguna_Base__Middle_Platform => 1301,
-            SpotId::Giguna__Giguna_Base__Kari => 2151,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Upper_Cliff => enum_map! {
-            SpotId::Giguna__Giguna_Base__Stone_Knob => 1052,
-            SpotId::Giguna__Giguna_Base__Upper_Cliff => 0,
-            SpotId::Giguna__Giguna_Base__Right_Pillar => 1228,
-            SpotId::Giguna__Giguna_Base__Middle_Platform => 1099,
-            SpotId::Giguna__Giguna_Base__Kari => 1950,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Right_Pillar => enum_map! {
-            SpotId::Giguna__Giguna_Base__Upper_Cliff => 1228,
-            SpotId::Giguna__Giguna_Base__Right_Pillar => 0,
-            SpotId::Giguna__Giguna_Base__Left_Pillar => 1500,
-            SpotId::Giguna__Giguna_Base__Ruin => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Left_Pillar => enum_map! {
-            SpotId::Giguna__Giguna_Base__Right_Pillar => 1500,
-            SpotId::Giguna__Giguna_Base__Left_Pillar => 0,
-            SpotId::Giguna__Giguna_Base__Ruin => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Ruin => enum_map! {
-            SpotId::Giguna__Giguna_Base__Right_Pillar => 1500,
-            SpotId::Giguna__Giguna_Base__Left_Pillar => 1500,
-            SpotId::Giguna__Giguna_Base__Ruin => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Middle_Platform => enum_map! {
-            SpotId::Giguna__Giguna_Base__Stone_Knob => 1500,
-            SpotId::Giguna__Giguna_Base__Middle_Platform => 0,
-            SpotId::Giguna__Giguna_Base__Kari => 850,
-            SpotId::Giguna__Giguna_Base__Building_Entry => 1228,
-            SpotId::Giguna__Giguna_Base__Staircase_Top => 4200,
-            SpotId::Giguna__Giguna_Base__Below_Gate => 1550,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Kari => enum_map! {
-            SpotId::Giguna__Giguna_Base__Middle_Platform => 3000,
-            SpotId::Giguna__Giguna_Base__Kari => 0,
-            SpotId::Giguna__Giguna_Base__Building_Entry => 1052,
-            SpotId::Giguna__Giguna_Base__Table => 2456,
-            SpotId::Giguna__Giguna_Base__Below_Gate => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Building_Entry => enum_map! {
-            SpotId::Giguna__Giguna_Base__Kari => 1052,
-            SpotId::Giguna__Giguna_Base__Building_Entry => 0,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom => 3157,
-            SpotId::Giguna__Giguna_Base__Table => 1403,
-            SpotId::Giguna__Giguna_Base__Save_Point => 2105,
-            SpotId::Giguna__Building_Interior__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Staircase_Top => enum_map! {
-            SpotId::Giguna__Giguna_Base__Left_Pillar => 3500,
-            SpotId::Giguna__Giguna_Base__Building_Entry => 2631,
-            SpotId::Giguna__Giguna_Base__Staircase_Top => 0,
-            SpotId::Giguna__Giguna_Base__West_Grate => 701,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom => 1099,
-            SpotId::Giguna__Giguna_Base__Table => 1599,
-            SpotId::Giguna__Giguna_Base__Save_Point => 1349,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__West_Grate => enum_map! {
-            SpotId::Giguna__Giguna_Base__Staircase_Top => 701,
-            SpotId::Giguna__Giguna_Base__West_Grate => 0,
-            SpotId::Giguna__Giguna_Base__West_15 => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__West_15 => enum_map! {
-            SpotId::Giguna__Giguna_Base__West_Grate => 350,
-            SpotId::Giguna__Giguna_Base__West_15 => 0,
-            SpotId::Giguna__Helipad__East_15 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Staircase_Bottom => enum_map! {
-            SpotId::Giguna__Giguna_Base__Building_Entry => 3157,
-            SpotId::Giguna__Giguna_Base__Staircase_Top => 3000,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom => 0,
-            SpotId::Giguna__Giguna_Base__Save_Point => 1052,
-            SpotId::Giguna__Giguna_Base__West_16 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Table => enum_map! {
-            SpotId::Giguna__Giguna_Base__Kari => 2456,
-            SpotId::Giguna__Giguna_Base__Building_Entry => 2252,
-            SpotId::Giguna__Giguna_Base__Table => 0,
-            SpotId::Giguna__Giguna_Base__Save_Point => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Save_Point => enum_map! {
-            SpotId::Giguna__Giguna_Base__Building_Entry => 2105,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom => 1052,
-            SpotId::Giguna__Giguna_Base__Table => 701,
-            SpotId::Giguna__Giguna_Base__Save_Point => 0,
-            SpotId::Giguna__Giguna_Base__West_16 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__West_16 => enum_map! {
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom => 600,
-            SpotId::Giguna__Giguna_Base__Save_Point => 1578,
-            SpotId::Giguna__Giguna_Base__West_16 => 0,
-            SpotId::Giguna__Helipad__East_16 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__East_17 => enum_map! {
-            SpotId::Giguna__Giguna_Base__East_17 => 0,
-            SpotId::Giguna__Giguna_Base__Lower_Fork => 1200,
-            SpotId::Giguna__Hard_Rock__West_17 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Lower_Fork => enum_map! {
-            SpotId::Giguna__Giguna_Base__East_17 => 701,
-            SpotId::Giguna__Giguna_Base__Lower_Fork => 0,
-            SpotId::Giguna__Giguna_Base__Below_Gate => 800,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Below_Gate => enum_map! {
-            SpotId::Giguna__Giguna_Base__Middle_Platform => 3000,
-            SpotId::Giguna__Giguna_Base__Kari => 1000,
-            SpotId::Giguna__Giguna_Base__Lower_Fork => 701,
-            SpotId::Giguna__Giguna_Base__Below_Gate => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Switch_Distance_1 => enum_map! {
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => 0,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => 175,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Switch_Distance_2 => enum_map! {
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1 => 600,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => 0,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => 175,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Switch_Distance_3 => enum_map! {
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2 => 175,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => 0,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => 175,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Giguna_Base__Switch_Distance_4 => enum_map! {
-            SpotId::Giguna__Giguna_Base__Lower_Fork => 2400,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3 => 175,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Building_Interior__Entry => enum_map! {
-            SpotId::Giguna__Giguna_Base__Building_Entry => 750,
-            SpotId::Giguna__Building_Interior__Entry => 0,
-            SpotId::Giguna__Building_Interior__Bookshelf => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Building_Interior__Bookshelf => enum_map! {
-            SpotId::Giguna__Building_Interior__Entry => 701,
-            SpotId::Giguna__Building_Interior__Bookshelf => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__East_9 => enum_map! {
-            SpotId::Giguna__Giguna_Northeast__West_9 => 1350,
-            SpotId::Giguna__Ruins_East__East_9 => 0,
-            SpotId::Giguna__Ruins_East__Bottom_Rock => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__Bottom_Rock => enum_map! {
-            SpotId::Giguna__Ruins_East__East_9 => 2280,
-            SpotId::Giguna__Ruins_East__Bottom_Rock => 0,
-            SpotId::Giguna__Ruins_East__West_9 => 877,
-            SpotId::Giguna__Ruins_East__Cliff => 3450,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__West_9 => enum_map! {
-            SpotId::Giguna__Ruins_East__Bottom_Rock => 877,
-            SpotId::Giguna__Ruins_East__West_9 => 0,
-            SpotId::Giguna__Ruins_Center__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__Cliff => enum_map! {
-            SpotId::Giguna__Ruins_East__East_9 => 1228,
-            SpotId::Giguna__Ruins_East__Bottom_Rock => 1052,
-            SpotId::Giguna__Ruins_East__West_9 => 2303,
-            SpotId::Giguna__Ruins_East__Cliff => 0,
-            SpotId::Giguna__Ruins_East__Ledge => 800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__Ledge => enum_map! {
-            SpotId::Giguna__Ruins_East__Cliff => 199,
-            SpotId::Giguna__Ruins_East__Ledge => 0,
-            SpotId::Giguna__Ruins_East__Small_Passage => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__Small_Passage => enum_map! {
-            SpotId::Giguna__Ruins_East__Ledge => 350,
-            SpotId::Giguna__Ruins_East__Small_Passage => 0,
-            SpotId::Giguna__Ruins_East__West_8 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__West_8 => enum_map! {
-            SpotId::Giguna__Ruins_East__Small_Passage => 1403,
-            SpotId::Giguna__Ruins_East__West_8 => 0,
-            SpotId::Giguna__Ruins_Center__East_8 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__Pillar => enum_map! {
-            SpotId::Giguna__Ruins_East__Ledge => 1052,
-            SpotId::Giguna__Ruins_East__Pillar => 0,
-            SpotId::Giguna__Ruins_East__West_7 => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__West_7 => enum_map! {
-            SpotId::Giguna__Ruins_East__Pillar => 1799,
-            SpotId::Giguna__Ruins_East__West_7 => 0,
-            SpotId::Giguna__Ruins_Top__East_7 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_East__Way_Up_High => enum_map! {
-            SpotId::Giguna__Ruins_East__East_9 => 3600,
-            SpotId::Giguna__Ruins_East__Cliff => 2399,
-            SpotId::Giguna__Ruins_East__Pillar => 1228,
-            SpotId::Giguna__Ruins_East__Way_Up_High => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__East_8 => enum_map! {
-            SpotId::Giguna__Ruins_East__West_8 => 1350,
-            SpotId::Giguna__Ruins_Center__East_8 => 0,
-            SpotId::Giguna__Ruins_Center__Tablet => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__Tablet => enum_map! {
-            SpotId::Giguna__Ruins_Center__East_8 => 526,
-            SpotId::Giguna__Ruins_Center__Tablet => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__East_9 => enum_map! {
-            SpotId::Giguna__Ruins_East__West_9 => 1350,
-            SpotId::Giguna__Ruins_Center__East_9 => 0,
-            SpotId::Giguna__Ruins_Center__Wall_Bottom => 2631,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__Wall_Bottom => enum_map! {
-            SpotId::Giguna__Ruins_Center__East_9 => 2631,
-            SpotId::Giguna__Ruins_Center__Wall_Bottom => 0,
-            SpotId::Giguna__Ruins_Center__Wall_Top => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__Wall_Top => enum_map! {
-            SpotId::Giguna__Ruins_Center__East_9 => 2631,
-            SpotId::Giguna__Ruins_Center__Wall_Bottom => 400,
-            SpotId::Giguna__Ruins_Center__Wall_Top => 0,
-            SpotId::Giguna__Ruins_Center__Center_Top => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__Center_Top => enum_map! {
-            SpotId::Giguna__Ruins_Center__Center_Top => 0,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__West_Platform_Right => enum_map! {
-            SpotId::Giguna__Ruins_Center__West_Platform_Right => 0,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__West_Platform_Left => enum_map! {
-            SpotId::Giguna__Ruins_Center__West_Platform_Right => 1403,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left => 0,
-            SpotId::Giguna__Ruins_Center__West_9 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Center__West_9 => enum_map! {
-            SpotId::Giguna__Ruins_Center__West_9 => 0,
-            SpotId::Giguna__Ruins_West__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__East_9 => enum_map! {
-            SpotId::Giguna__Ruins_Center__West_9 => 1350,
-            SpotId::Giguna__Ruins_West__East_9 => 0,
-            SpotId::Giguna__Ruins_West__Save_Point => 1578,
-            SpotId::Giguna__Ruins_West__Platform => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Save_Point => enum_map! {
-            SpotId::Giguna__Ruins_West__East_9 => 1578,
-            SpotId::Giguna__Ruins_West__Save_Point => 0,
-            SpotId::Giguna__Ruins_West__Platform => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Platform => enum_map! {
-            SpotId::Giguna__Ruins_West__East_9 => 1578,
-            SpotId::Giguna__Ruins_West__Save_Point => 399,
-            SpotId::Giguna__Ruins_West__Platform => 0,
-            SpotId::Giguna__Ruins_West__Nook => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Nook => enum_map! {
-            SpotId::Giguna__Ruins_West__Platform => 500,
-            SpotId::Giguna__Ruins_West__Nook => 0,
-            SpotId::Giguna__Ruins_West__Lower_Ledge => 2350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Lower_Ledge => enum_map! {
-            SpotId::Giguna__Ruins_West__Platform => 1099,
-            SpotId::Giguna__Ruins_West__Nook => 599,
-            SpotId::Giguna__Ruins_West__Lower_Ledge => 0,
-            SpotId::Giguna__Ruins_West__Upper_Ledge => 4000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Upper_Ledge => enum_map! {
-            SpotId::Giguna__Ruins_West__Platform => 2099,
-            SpotId::Giguna__Ruins_West__Lower_Ledge => 1000,
-            SpotId::Giguna__Ruins_West__Upper_Ledge => 0,
-            SpotId::Giguna__Ruins_West__East_7 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__East_7 => enum_map! {
-            SpotId::Giguna__Ruins_West__Upper_Ledge => 1200,
-            SpotId::Giguna__Ruins_West__East_7 => 0,
-            SpotId::Giguna__Ruins_Top__West_7 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Rooftop_East_Edge => enum_map! {
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge => 0,
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__Rooftop_West_Edge => enum_map! {
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge => 0,
-            SpotId::Giguna__Ruins_West__West_7 => 899,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_West__West_7 => enum_map! {
-            SpotId::Giguna__Ruins_West__West_7 => 0,
-            SpotId::Giguna__West_Tower__East_7 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__West_7 => enum_map! {
-            SpotId::Giguna__Ruins_West__East_7 => 1350,
-            SpotId::Giguna__Ruins_Top__West_7 => 0,
-            SpotId::Giguna__Ruins_Top__West_Door => 877,
-            SpotId::Giguna__Ruins_Top__West_Pillar => 2250,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__West_Door => enum_map! {
-            SpotId::Giguna__Ruins_Top__West_7 => 877,
-            SpotId::Giguna__Ruins_Top__West_Door => 0,
-            SpotId::Giguna__Ruins_Top__Entryway => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__West_Pillar => enum_map! {
-            SpotId::Giguna__Ruins_Top__West_7 => 877,
-            SpotId::Giguna__Ruins_Top__West_Pillar => 0,
-            SpotId::Giguna__Ruins_Top__Entryway => 799,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Entryway => enum_map! {
-            SpotId::Giguna__Ruins_Top__West_Door => 1200,
-            SpotId::Giguna__Ruins_Top__Entryway => 0,
-            SpotId::Giguna__Ruins_Top__Portal_Left => 2982,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Portal_Left => enum_map! {
-            SpotId::Giguna__Ruins_Top__Entryway => 2982,
-            SpotId::Giguna__Ruins_Top__Portal_Left => 0,
-            SpotId::Giguna__Ruins_Top__Small_Ledge => 1000,
-            SpotId::Giguna__Ruins_Top__Portal => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Small_Ledge => enum_map! {
-            SpotId::Giguna__Ruins_Top__Portal_Left => 299,
-            SpotId::Giguna__Ruins_Top__Small_Ledge => 0,
-            SpotId::Giguna__Ruins_Top__Portal => 877,
-            SpotId::Giguna__Ruins_Top__Interior_Ledge => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Portal => enum_map! {
-            SpotId::Giguna_Breach__Peak__Save_Point => 3600,
-            SpotId::Giguna__Ruins_Top__Portal_Left => 701,
-            SpotId::Giguna__Ruins_Top__Small_Ledge => 877,
-            SpotId::Giguna__Ruins_Top__Portal => 0,
-            SpotId::Giguna__Ruins_Top__Interior_Ledge => 1500,
-            SpotId::Giguna__Ruins_Top__East_Door => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Interior_Ledge => enum_map! {
-            SpotId::Giguna__Ruins_Top__Portal => 800,
-            SpotId::Giguna__Ruins_Top__Interior_Ledge => 0,
-            SpotId::Giguna__Ruins_Top__Upper_Tunnel => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Upper_Tunnel => enum_map! {
-            SpotId::Giguna__Ruins_Top__Interior_Ledge => 526,
-            SpotId::Giguna__Ruins_Top__Upper_Tunnel => 0,
-            SpotId::Giguna__Ruins_Top__Flask => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Flask => enum_map! {
-            SpotId::Giguna__Ruins_Top__Upper_Tunnel => 701,
-            SpotId::Giguna__Ruins_Top__Flask => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__East_Door => enum_map! {
-            SpotId::Giguna__Ruins_Top__Portal => 701,
-            SpotId::Giguna__Ruins_Top__East_Door => 0,
-            SpotId::Giguna__Ruins_Top__East_7 => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__East_7 => enum_map! {
-            SpotId::Giguna__Ruins_East__West_7 => 1350,
-            SpotId::Giguna__Ruins_Top__East_Door => 877,
-            SpotId::Giguna__Ruins_Top__East_7 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Save_Point => enum_map! {
-            SpotId::Giguna__Ruins_Top__Save_Point => 0,
-            SpotId::Giguna__Ruins_Top__Switch => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Switch => enum_map! {
-            SpotId::Giguna__Ruins_Top__Save_Point => 701,
-            SpotId::Giguna__Ruins_Top__Switch => 0,
-            SpotId::Giguna__Ruins_Top__Rooftop_West => 1799,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => 2400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Rooftop_West => enum_map! {
-            SpotId::Giguna__Ruins_Top__Switch => 350,
-            SpotId::Giguna__Ruins_Top__Rooftop_West => 0,
-            SpotId::Giguna__Ruins_Top__Rooftop_East => 1754,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Rooftop_East => enum_map! {
-            SpotId::Giguna__Ruins_Top__Rooftop_West => 1754,
-            SpotId::Giguna__Ruins_Top__Rooftop_East => 0,
-            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Rooftop_Gutter => enum_map! {
-            SpotId::Giguna__Ruins_Top__East_7 => 1200,
-            SpotId::Giguna__Ruins_Top__Rooftop_East => 1200,
-            SpotId::Giguna__Ruins_Top__Rooftop_Gutter => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Turret_Balcony_East => enum_map! {
-            SpotId::Giguna__Ruins_Top__Switch => 701,
-            SpotId::Giguna__Ruins_Top__Rooftop_West => 1052,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East => 0,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Ruins_Top__Turret_Balcony_West => enum_map! {
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge => 3800,
-            SpotId::Giguna__Ruins_Top__West_7 => 1500,
-            SpotId::Giguna__Ruins_Top__West_Pillar => 799,
-            SpotId::Giguna__Ruins_Top__Entryway => 1599,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Tower__East_7 => enum_map! {
-            SpotId::Giguna__West_Tower__East_7 => 0,
-            SpotId::Giguna__West_Tower__Top => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Tower__Top => enum_map! {
-            SpotId::Giguna__West_Tower__Top => 0,
-            SpotId::Giguna__West_Tower__Southwest => 1800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__West_Tower__Southwest => enum_map! {
-            SpotId::Giguna__West_Caverns__Northwest => 1000,
-            SpotId::Giguna__West_Tower__Southwest => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Far_Corner__East_13 => enum_map! {
-            SpotId::Giguna__Far_Corner__East_13 => 0,
-            SpotId::Giguna__Far_Corner__Grass => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Far_Corner__Grass => enum_map! {
-            SpotId::Giguna__Far_Corner__Grass => 0,
-            SpotId::Giguna__Far_Corner__South => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Far_Corner__South => enum_map! {
-            SpotId::Giguna__Far_Corner__South => 0,
-            SpotId::Giguna__Helipad__North => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__East_15 => enum_map! {
-            SpotId::Giguna__Giguna_Base__West_15 => 1350,
-            SpotId::Giguna__Helipad__East_15 => 0,
-            SpotId::Giguna__Helipad__Helicopter => 4385,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__North => enum_map! {
-            SpotId::Giguna__Helipad__North => 0,
-            SpotId::Giguna__Helipad__Helicopter => 1550,
-            SpotId::Giguna__Helipad__Irikar_Drop => 2400,
-            SpotId::Giguna__Helipad__Wall_Top => 2349,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Helicopter => enum_map! {
-            SpotId::Giguna__Helipad__East_15 => 4385,
-            SpotId::Giguna__Helipad__Helicopter => 0,
-            SpotId::Giguna__Helipad__Irikar_Drop => 2105,
-            SpotId::Giguna__Helipad__Wall_Top => 799,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__East_16 => enum_map! {
-            SpotId::Giguna__Giguna_Base__West_16 => 1350,
-            SpotId::Giguna__Helipad__East_16 => 0,
-            SpotId::Giguna__Helipad__Railing => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Irikar_Drop => enum_map! {
-            SpotId::Giguna__Helipad__Irikar_Drop => 0,
-            SpotId::Giguna__Helipad__So_Close => 1149,
-            SpotId::Giguna__Helipad__South_Left => 2399,
-            SpotId::Giguna__Helipad__South_Middle => 2399,
-            SpotId::Giguna__Helipad__South_Right => 2399,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Wall_Top => enum_map! {
-            SpotId::Giguna__Helipad__Wall_Top => 0,
-            SpotId::Giguna__Helipad__Railing => 2456,
-            SpotId::Giguna__Helipad__Wall_Bottom => 1250,
-            SpotId::Giguna__Helipad__Staircase_Top => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Railing => enum_map! {
-            SpotId::Giguna__Helipad__East_16 => 1578,
-            SpotId::Giguna__Helipad__Wall_Top => 2456,
-            SpotId::Giguna__Helipad__Railing => 0,
-            SpotId::Giguna__Helipad__Wall_Bottom => 2105,
-            SpotId::Giguna__Helipad__Staircase_Top => 949,
-            SpotId::Giguna__Helipad__East_18 => 2103,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Wall_Bottom => enum_map! {
-            SpotId::Giguna__Helipad__Wall_Bottom => 0,
-            SpotId::Giguna__Helipad__Staircase_Top => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__So_Close => enum_map! {
-            SpotId::Giguna__Helipad__So_Close => 0,
-            SpotId::Giguna__Helipad__Tablet_Ledge => 350,
-            SpotId::Giguna__Helipad__South_Right => 1250,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Tablet_Ledge => enum_map! {
-            SpotId::Giguna__Helipad__Tablet_Ledge => 0,
-            SpotId::Giguna__Helipad__South_Middle => 1199,
-            SpotId::Giguna__Helipad__South_Right => 1199,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Staircase_Top => enum_map! {
-            SpotId::Giguna__Helipad__Wall_Bottom => 1929,
-            SpotId::Giguna__Helipad__Staircase_Top => 0,
-            SpotId::Giguna__Helipad__East_18 => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__East_18 => enum_map! {
-            SpotId::Giguna__Helipad__Staircase_Top => 2400,
-            SpotId::Giguna__Helipad__East_18 => 0,
-            SpotId::Giguna__Lamassu__West_18 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__South_Left => enum_map! {
-            SpotId::Giguna__Helipad__South_Left => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__South_Middle => enum_map! {
-            SpotId::Giguna__Helipad__South_Middle => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__South_Right => enum_map! {
-            SpotId::Giguna__Helipad__South_Right => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Helipad__Lowest_Ledge => enum_map! {
-            SpotId::Giguna__Helipad__Lowest_Ledge => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__North_Left => enum_map! {
-            SpotId::Giguna__Clouds__North_Left => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__North_Middle => enum_map! {
-            SpotId::Giguna__Clouds__North_Middle => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__North_Right => enum_map! {
-            SpotId::Giguna__Clouds__North_Right => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__North_Under_Ledge => enum_map! {
-            SpotId::Giguna__Clouds__North_Under_Ledge => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__Platform_Start => enum_map! {
-            SpotId::Giguna__Clouds__Platform_Start => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__Platform_Stop => enum_map! {
-            SpotId::Giguna__Clouds__Platform_Stop => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__Cache => enum_map! {
-            SpotId::Giguna__Clouds__Cache => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Clouds__Platform_Early_Portal => enum_map! {
-            SpotId::Giguna__Clouds__Platform_Early_Portal => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__West_18 => enum_map! {
-            SpotId::Giguna__Helipad__East_18 => 1350,
-            SpotId::Giguna__Lamassu__West_18 => 0,
-            SpotId::Giguna__Lamassu__Staircase_Top => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Staircase_Top => enum_map! {
-            SpotId::Giguna__Lamassu__West_18 => 1403,
-            SpotId::Giguna__Lamassu__Staircase_Top => 0,
-            SpotId::Giguna__Lamassu__Staircase_Bottom => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Staircase_Bottom => enum_map! {
-            SpotId::Giguna__Lamassu__Staircase_Top => 1200,
-            SpotId::Giguna__Lamassu__Staircase_Bottom => 0,
-            SpotId::Giguna__Lamassu__Staircase_Landing => 250,
-            SpotId::Giguna__Lamassu__Broken_Pillar => 500,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Staircase_Landing => enum_map! {
-            SpotId::Giguna__Lamassu__Staircase_Bottom => 1200,
-            SpotId::Giguna__Lamassu__Staircase_Landing => 0,
-            SpotId::Giguna__Lamassu__Broken_Pillar => 250,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Broken_Pillar => enum_map! {
-            SpotId::Giguna__Lamassu__Staircase_Landing => 1200,
-            SpotId::Giguna__Lamassu__Broken_Pillar => 0,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Upper_Platform_Edge => enum_map! {
-            SpotId::Giguna__Lamassu__Broken_Pillar => 1228,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 0,
-            SpotId::Giguna__Lamassu__Lower_Platform_Left => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Lower_Platform_Left => enum_map! {
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge => 1200,
-            SpotId::Giguna__Lamassu__Lower_Platform_Left => 0,
-            SpotId::Giguna__Lamassu__Lower_Platform_Right => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Lower_Platform_Right => enum_map! {
-            SpotId::Giguna__Lamassu__Lower_Platform_Left => 877,
-            SpotId::Giguna__Lamassu__Lower_Platform_Right => 0,
-            SpotId::Giguna__Lamassu__Head => 1799,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Head => enum_map! {
-            SpotId::Giguna__Lamassu__Lower_Platform_Left => 1929,
-            SpotId::Giguna__Lamassu__Lower_Platform_Right => 1052,
-            SpotId::Giguna__Lamassu__Head => 0,
-            SpotId::Giguna__Lamassu__Wingtip => 2807,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Rear_Platform => enum_map! {
-            SpotId::Giguna__Lamassu__Head => 2105,
-            SpotId::Giguna__Lamassu__Rear_Platform => 0,
-            SpotId::Giguna__Lamassu__East_18 => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Wingtip => enum_map! {
-            SpotId::Giguna__Lamassu__Head => 2807,
-            SpotId::Giguna__Lamassu__Wingtip => 0,
-            SpotId::Giguna__Lamassu__Rear_Gap => 600,
-            SpotId::Giguna__Lamassu__Deposit => 1399,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Rear_Gap => enum_map! {
-            SpotId::Giguna__Lamassu__Wingtip => 350,
-            SpotId::Giguna__Lamassu__Rear_Gap => 0,
-            SpotId::Giguna__Lamassu__Deposit => 1500,
-            SpotId::Giguna__Lamassu__East_18 => 2400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__Deposit => enum_map! {
-            SpotId::Giguna__Lamassu__Wingtip => 4800,
-            SpotId::Giguna__Lamassu__Rear_Gap => 5399,
-            SpotId::Giguna__Lamassu__Deposit => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Lamassu__East_18 => enum_map! {
-            SpotId::Giguna__Lamassu__Rear_Platform => 1578,
-            SpotId::Giguna__Lamassu__Rear_Gap => 526,
-            SpotId::Giguna__Lamassu__East_18 => 0,
-            SpotId::Giguna__Dual_Path__West_18 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__West_18 => enum_map! {
-            SpotId::Giguna__Lamassu__East_18 => 1350,
-            SpotId::Giguna__Dual_Path__West_18 => 0,
-            SpotId::Giguna__Dual_Path__Below_Left_Switch => 526,
-            SpotId::Giguna__Dual_Path__West_Gate => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Below_Left_Switch => enum_map! {
-            SpotId::Giguna__Dual_Path__West_18 => 600,
-            SpotId::Giguna__Dual_Path__Below_Left_Switch => 0,
-            SpotId::Giguna__Dual_Path__Left_Switch => 600,
-            SpotId::Giguna__Dual_Path__West_Slope => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Left_Switch => enum_map! {
-            SpotId::Giguna__Dual_Path__Below_Left_Switch => 350,
-            SpotId::Giguna__Dual_Path__Left_Switch => 0,
-            SpotId::Giguna__Dual_Path__West_Slope => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__West_Slope => enum_map! {
-            SpotId::Giguna__Dual_Path__Below_Left_Switch => 2280,
-            SpotId::Giguna__Dual_Path__West_Slope => 0,
-            SpotId::Giguna__Dual_Path__In_the_Grass => 2982,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__In_the_Grass => enum_map! {
-            SpotId::Giguna__Dual_Path__West_Slope => 2982,
-            SpotId::Giguna__Dual_Path__In_the_Grass => 0,
-            SpotId::Giguna__Dual_Path__Base_of_Wall => 526,
-            SpotId::Giguna__Dual_Path__Wall_Top => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Base_of_Wall => enum_map! {
-            SpotId::Giguna__Dual_Path__In_the_Grass => 526,
-            SpotId::Giguna__Dual_Path__Base_of_Wall => 0,
-            SpotId::Giguna__Dual_Path__Wall_Secret => 350,
-            SpotId::Giguna__Dual_Path__Wall_Top => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Wall_Secret => enum_map! {
-            SpotId::Giguna__Dual_Path__Base_of_Wall => 350,
-            SpotId::Giguna__Dual_Path__Wall_Secret => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Wall_Top => enum_map! {
-            SpotId::Giguna__Dual_Path__West_Slope => 3508,
-            SpotId::Giguna__Dual_Path__In_the_Grass => 526,
-            SpotId::Giguna__Dual_Path__Base_of_Wall => 500,
-            SpotId::Giguna__Dual_Path__Wall_Top => 0,
-            SpotId::Giguna__Dual_Path__Below_Right_Switch => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Right_Switch => enum_map! {
-            SpotId::Giguna__Dual_Path__Wall_Top => 1200,
-            SpotId::Giguna__Dual_Path__Right_Switch => 0,
-            SpotId::Giguna__Dual_Path__Below_Right_Switch => 175,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Below_Right_Switch => enum_map! {
-            SpotId::Giguna__Dual_Path__Wall_Top => 1200,
-            SpotId::Giguna__Dual_Path__Right_Switch => 600,
-            SpotId::Giguna__Dual_Path__Below_Right_Switch => 0,
-            SpotId::Giguna__Dual_Path__East_Gate => 1200,
-            SpotId::Giguna__Dual_Path__East_18 => 2807,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__East_Gate => enum_map! {
-            SpotId::Giguna__Dual_Path__Below_Right_Switch => 877,
-            SpotId::Giguna__Dual_Path__East_Gate => 0,
-            SpotId::Giguna__Dual_Path__East_18 => 1929,
-            SpotId::Giguna__Dual_Path__East_Gate_NW => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__East_18 => enum_map! {
-            SpotId::Giguna__Dual_Path__Below_Right_Switch => 2807,
-            SpotId::Giguna__Dual_Path__East_Gate => 1929,
-            SpotId::Giguna__Dual_Path__East_18 => 0,
-            SpotId::Giguna__Gateway__West_18 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__West_Gate => enum_map! {
-            SpotId::Giguna__Dual_Path__West_18 => 877,
-            SpotId::Giguna__Dual_Path__Below_Left_Switch => 500,
-            SpotId::Giguna__Dual_Path__West_Gate => 0,
-            SpotId::Giguna__Dual_Path__West_Gate_NW => 1000,
-            SpotId::Giguna__Dual_Path__West_Gate_NE => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__West_Gate_NW => enum_map! {
-            SpotId::Giguna__Dual_Path__West_Gate => 350,
-            SpotId::Giguna__Dual_Path__West_Gate_NW => 0,
-            SpotId::Giguna__Dual_Path__West_Gate_NE => 701,
-            SpotId::Giguna__Dual_Path__West_17 => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__West_Gate_NE => enum_map! {
-            SpotId::Giguna__Dual_Path__West_Gate => 350,
-            SpotId::Giguna__Dual_Path__West_Gate_NW => 701,
-            SpotId::Giguna__Dual_Path__West_Gate_NE => 0,
-            SpotId::Giguna__Dual_Path__Midway => 3333,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__West_17 => enum_map! {
-            SpotId::Giguna__Dual_Path__West_Gate_NW => 526,
-            SpotId::Giguna__Dual_Path__West_17 => 0,
-            SpotId::Giguna__Hard_Rock__East_17 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Midway => enum_map! {
-            SpotId::Giguna__Dual_Path__West_Gate_NE => 3333,
-            SpotId::Giguna__Dual_Path__Midway => 0,
-            SpotId::Giguna__Dual_Path__Midway_Plateau => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__Midway_Plateau => enum_map! {
-            SpotId::Giguna__Dual_Path__Midway => 701,
-            SpotId::Giguna__Dual_Path__Midway_Plateau => 0,
-            SpotId::Giguna__Dual_Path__East_Gate_NW => 2456,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__East_Gate_NW => enum_map! {
-            SpotId::Giguna__Dual_Path__Midway_Plateau => 2456,
-            SpotId::Giguna__Dual_Path__East_Gate_NW => 0,
-            SpotId::Giguna__Dual_Path__East_Gate_NE => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__East_Gate_NE => enum_map! {
-            SpotId::Giguna__Dual_Path__East_Gate => 850,
-            SpotId::Giguna__Dual_Path__East_Gate_NW => 1052,
-            SpotId::Giguna__Dual_Path__East_Gate_NE => 0,
-            SpotId::Giguna__Dual_Path__East_17 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Dual_Path__East_17 => enum_map! {
-            SpotId::Giguna__Dual_Path__East_Gate_NE => 1799,
-            SpotId::Giguna__Dual_Path__East_17 => 0,
-            SpotId::Giguna__East_Caverns__West_17 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Hard_Rock__East_17 => enum_map! {
-            SpotId::Giguna__Hard_Rock__East_17 => 0,
-            SpotId::Giguna__Hard_Rock__Rock_Right => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Hard_Rock__Rock_Right => enum_map! {
-            SpotId::Giguna__Hard_Rock__East_17 => 877,
-            SpotId::Giguna__Hard_Rock__Rock_Right => 0,
-            SpotId::Giguna__Hard_Rock__Rock_Center => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Hard_Rock__Rock_Center => enum_map! {
-            SpotId::Giguna__Hard_Rock__Rock_Right => 526,
-            SpotId::Giguna__Hard_Rock__Rock_Center => 0,
-            SpotId::Giguna__Hard_Rock__Rock_Left => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Hard_Rock__Rock_Left => enum_map! {
-            SpotId::Giguna__Hard_Rock__Rock_Center => 526,
-            SpotId::Giguna__Hard_Rock__Rock_Left => 0,
-            SpotId::Giguna__Hard_Rock__West_17 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Hard_Rock__West_17 => enum_map! {
-            SpotId::Giguna__Giguna_Base__East_17 => 1350,
-            SpotId::Giguna__Hard_Rock__Rock_Left => 1228,
-            SpotId::Giguna__Hard_Rock__West_17 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__West_14 => enum_map! {
-            SpotId::Giguna__Wasteland__East_14 => 1350,
-            SpotId::Giguna__East_Caverns__West_14 => 0,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left => 877,
-            SpotId::Giguna__East_Caverns__Upper_Floor => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Platforms_Left => enum_map! {
-            SpotId::Giguna__East_Caverns__West_14 => 877,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left => 0,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => 1228,
-            SpotId::Giguna__East_Caverns__Upper_Floor => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Platforms_Right => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => 0,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => 199,
-            SpotId::Giguna__East_Caverns__Upper_Susar => 789,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => 600,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West => 1500,
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Floor => enum_map! {
-            SpotId::Giguna__East_Caverns__West_14 => 1799,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left => 1200,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => 600,
-            SpotId::Giguna__East_Caverns__Upper_Floor => 0,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => 526,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => 600,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => 0,
-            SpotId::Giguna__East_Caverns__Upper_Susar => 614,
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 526,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge => 900,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Susar => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right => 789,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => 614,
-            SpotId::Giguna__East_Caverns__Upper_Susar => 0,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar => 789,
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Susar => 263,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump => 0,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Susar => 263,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => 0,
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 750,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge => 1400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Top_Past_Susar => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Susar => 789,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East => 600,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar => 0,
-            SpotId::Giguna__East_Caverns__Top_Ledge => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Top_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Top_Past_Susar => 1754,
-            SpotId::Giguna__East_Caverns__Top_Ledge => 0,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East => 250,
-            SpotId::Giguna__East_Caverns__East_Shaft => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Passage_West => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Passage_West => 0,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East => 2105,
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 526,
-            SpotId::Giguna__East_Caverns__Mid_Susar => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Upper_Passage_East => enum_map! {
-            SpotId::Giguna__East_Caverns__Top_Ledge => 1000,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West => 2105,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East => 0,
-            SpotId::Giguna__East_Caverns__East_Shaft => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__East_Shaft => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Passage_East => 1200,
-            SpotId::Giguna__East_Caverns__East_Shaft => 0,
-            SpotId::Giguna__East_Caverns__East_Side => 399,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__East_Side => enum_map! {
-            SpotId::Giguna__East_Caverns__East_Shaft => 1799,
-            SpotId::Giguna__East_Caverns__East_Side => 0,
-            SpotId::Giguna__East_Caverns__Carving => 526,
-            SpotId::Giguna__East_Caverns__Middle_Rock => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Carving => enum_map! {
-            SpotId::Giguna__East_Caverns__East_Side => 600,
-            SpotId::Giguna__East_Caverns__Carving => 0,
-            SpotId::Giguna__East_Caverns__Middle_Rock => 1000,
-            SpotId::Giguna__East_Caverns__Arc_Passage => 599,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Middle_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge => 1000,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West => 500,
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 0,
-            SpotId::Giguna__East_Caverns__Mid_Susar => 877,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Mid_Susar => enum_map! {
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 877,
-            SpotId::Giguna__East_Caverns__Mid_Susar => 0,
-            SpotId::Giguna__East_Caverns__Middle_Rock => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Middle_Rock => enum_map! {
-            SpotId::Giguna__East_Caverns__Carving => 701,
-            SpotId::Giguna__East_Caverns__Mid_Susar => 877,
-            SpotId::Giguna__East_Caverns__Middle_Rock => 0,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East => 450,
-            SpotId::Giguna__East_Caverns__Arc_Passage => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Hidden_Passage_East => enum_map! {
-            SpotId::Giguna__East_Caverns__Carving => 701,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East => 0,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center => 1228,
-            SpotId::Giguna__East_Caverns__Arc_Passage => 549,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Hidden_Passage_Center => enum_map! {
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East => 1228,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center => 0,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Hidden_Passage_West => enum_map! {
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center => 877,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West => 0,
-            SpotId::Giguna__East_Caverns__Statues_Ledge => 877,
-            SpotId::Giguna__East_Caverns__Arc_Ledge => 649,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Midwest_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Middle_Ledge => 3599,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East => 1500,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge => 0,
-            SpotId::Giguna__East_Caverns__Statues_Ledge => 599,
-            SpotId::Giguna__East_Caverns__Arc_Ledge => 799,
-            SpotId::Giguna__East_Caverns__Lower_Ledge => 1349,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Statues_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West => 877,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge => 1500,
-            SpotId::Giguna__East_Caverns__Statues_Ledge => 0,
-            SpotId::Giguna__East_Caverns__Switch => 701,
-            SpotId::Giguna__East_Caverns__Lower_Ledge => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Switch => enum_map! {
-            SpotId::Giguna__East_Caverns__Statues_Ledge => 701,
-            SpotId::Giguna__East_Caverns__Switch => 0,
-            SpotId::Giguna__East_Caverns__Door => 614,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Door => enum_map! {
-            SpotId::Giguna__East_Caverns__Switch => 614,
-            SpotId::Giguna__East_Caverns__Door => 0,
-            SpotId::Giguna__East_Caverns__West_16 => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__West_16 => enum_map! {
-            SpotId::Giguna__East_Caverns__Door => 263,
-            SpotId::Giguna__East_Caverns__West_16 => 0,
-            SpotId::Giguna__Antechamber__East_16 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Arc_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West => 1299,
-            SpotId::Giguna__East_Caverns__Statues_Ledge => 1000,
-            SpotId::Giguna__East_Caverns__Arc_Ledge => 0,
-            SpotId::Giguna__East_Caverns__Arc_Passage => 2105,
-            SpotId::Giguna__East_Caverns__Lower_Ledge => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Arc_Passage => enum_map! {
-            SpotId::Giguna__East_Caverns__Carving => 1799,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West => 1200,
-            SpotId::Giguna__East_Caverns__Arc_Ledge => 2105,
-            SpotId::Giguna__East_Caverns__Arc_Passage => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Lower_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Arc_Ledge => 1200,
-            SpotId::Giguna__East_Caverns__Lower_Ledge => 0,
-            SpotId::Giguna__East_Caverns__West_17 => 1754,
-            SpotId::Giguna__East_Caverns__West_Grass => 550,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge => 600,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__West_17 => enum_map! {
-            SpotId::Giguna__Dual_Path__East_17 => 1350,
-            SpotId::Giguna__East_Caverns__West_17 => 0,
-            SpotId::Giguna__East_Caverns__West_Grass => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__West_Grass => enum_map! {
-            SpotId::Giguna__East_Caverns__Lower_Ledge => 2000,
-            SpotId::Giguna__East_Caverns__West_17 => 1228,
-            SpotId::Giguna__East_Caverns__West_Grass => 0,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__Under_Lower_Ledge => enum_map! {
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge => 0,
-            SpotId::Giguna__East_Caverns__East_Grass => 2982,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__East_Grass => enum_map! {
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge => 2982,
-            SpotId::Giguna__East_Caverns__East_Grass => 0,
-            SpotId::Giguna__East_Caverns__East_17 => 1500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__East_Caverns__East_17 => enum_map! {
-            SpotId::Giguna__East_Caverns__East_Grass => 1754,
-            SpotId::Giguna__East_Caverns__East_17 => 0,
-            SpotId::Giguna__Vertical_Interchange__West_17 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__West_18 => enum_map! {
-            SpotId::Giguna__Dual_Path__East_18 => 1000,
-            SpotId::Giguna__Gateway__West_18 => 0,
-            SpotId::Giguna__Gateway__Passage_Entry => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Passage_Entry => enum_map! {
-            SpotId::Giguna__Gateway__West_18 => 877,
-            SpotId::Giguna__Gateway__Passage_Entry => 0,
-            SpotId::Giguna__Gateway__Passage_Exit => 1578,
-            SpotId::Giguna__Gateway__Door => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Passage_Exit => enum_map! {
-            SpotId::Giguna__Gateway__Passage_Entry => 1799,
-            SpotId::Giguna__Gateway__Passage_Exit => 0,
-            SpotId::Giguna__Gateway__Left_Platform => 1000,
-            SpotId::Giguna__Gateway__Block_Left => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Door => enum_map! {
-            SpotId::Giguna__Gateway__Passage_Entry => 1052,
-            SpotId::Giguna__Gateway__Door => 0,
-            SpotId::Giguna__Gateway__Left_Platform => 1403,
-            SpotId::Giguna__Gateway__Block_Left => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Left_Platform => enum_map! {
-            SpotId::Giguna__Gateway__Passage_Exit => 877,
-            SpotId::Giguna__Gateway__Left_Platform => 0,
-            SpotId::Giguna__Gateway__Right_Platform => 701,
-            SpotId::Giguna__Gateway__Block_Left => 850,
-            SpotId::Giguna__Gateway__Block_Right => 500,
-            SpotId::Giguna__Gateway__Refill_Station => 1403,
-            SpotId::Giguna__Gateway__Block_Lowered => 800,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Right_Platform => enum_map! {
-            SpotId::Giguna__Gateway__Left_Platform => 701,
-            SpotId::Giguna__Gateway__Right_Platform => 0,
-            SpotId::Giguna__Gateway__Block_Right => 550,
-            SpotId::Giguna__Gateway__Refill_Station => 701,
-            SpotId::Giguna__Gateway__Far_Ledge => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Block_Left => enum_map! {
-            SpotId::Giguna__Gateway__Block_Left => 0,
-            SpotId::Giguna__Gateway__Block_Right => 701,
-            SpotId::Giguna__Gateway__Block_Lowered => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Block_Right => enum_map! {
-            SpotId::Giguna__Gateway__Block_Left => 701,
-            SpotId::Giguna__Gateway__Block_Right => 0,
-            SpotId::Giguna__Gateway__Refill_Station => 1052,
-            SpotId::Giguna__Gateway__Block_Lowered => 350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Refill_Station => enum_map! {
-            SpotId::Giguna__Gateway__Block_Right => 1052,
-            SpotId::Giguna__Gateway__Refill_Station => 0,
-            SpotId::Giguna__Gateway__Far_Ledge => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Far_Ledge => enum_map! {
-            SpotId::Giguna__Gateway__Right_Platform => 1200,
-            SpotId::Giguna__Gateway__Block_Right => 1754,
-            SpotId::Giguna__Gateway__Refill_Station => 701,
-            SpotId::Giguna__Gateway__Far_Ledge => 0,
-            SpotId::Giguna__Gateway__One_Jump => 600,
-            SpotId::Giguna__Gateway__Flask_Ledge => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__One_Jump => enum_map! {
-            SpotId::Giguna__Gateway__Far_Ledge => 175,
-            SpotId::Giguna__Gateway__One_Jump => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Flask_Ledge => enum_map! {
-            SpotId::Giguna__Gateway__Block_Right => 2105,
-            SpotId::Giguna__Gateway__Refill_Station => 1052,
-            SpotId::Giguna__Gateway__Far_Ledge => 400,
-            SpotId::Giguna__Gateway__Flask_Ledge => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Block_Lowered => enum_map! {
-            SpotId::Giguna__Gateway__Block_Left => 500,
-            SpotId::Giguna__Gateway__Block_Right => 500,
-            SpotId::Giguna__Gateway__Block_Lowered => 0,
-            SpotId::Giguna__Gateway__West_19 => 3333,
-            SpotId::Giguna__Gateway__Button => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__West_19 => enum_map! {
-            SpotId::Giguna__Gateway__Block_Lowered => 3333,
-            SpotId::Giguna__Gateway__West_19 => 0,
-            SpotId::Giguna__Labyrinth_East__East_19 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__Button => enum_map! {
-            SpotId::Giguna__Gateway__Block_Lowered => 1929,
-            SpotId::Giguna__Gateway__Button => 0,
-            SpotId::Giguna__Gateway__East_19 => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Gateway__East_19 => enum_map! {
-            SpotId::Giguna__Gateway__Button => 1403,
-            SpotId::Giguna__Gateway__East_19 => 0,
-            SpotId::Giguna__Vertical_Interchange__West_19 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Labyrinth_East__East_19 => enum_map! {
-            SpotId::Giguna__Labyrinth_East__East_19 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Vertical_Interchange__West_17 => enum_map! {
-            SpotId::Giguna__Vertical_Interchange__West_17 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Vertical_Interchange__West_19 => enum_map! {
-            SpotId::Giguna__Vertical_Interchange__West_19 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Giguna__Antechamber__East_16 => enum_map! {
-            SpotId::Giguna__Antechamber__East_16 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Dock_Elevator__Elevator => enum_map! {
-            SpotId::Glacier__Dock_Elevator__Elevator => 0,
-            SpotId::Glacier__Dock_Elevator__Connector => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Dock_Elevator__Connector => enum_map! {
-            SpotId::Glacier__Dock_Elevator__Elevator => 1578,
-            SpotId::Glacier__Dock_Elevator__Connector => 0,
-            SpotId::Glacier__Dock_Interior__Connector => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Dock_Interior__Connector => enum_map! {
-            SpotId::Glacier__Dock_Elevator__Connector => 1350,
-            SpotId::Glacier__Dock_Interior__Connector => 0,
-            SpotId::Glacier__Dock_Interior__Entry => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Dock_Interior__Entry => enum_map! {
-            SpotId::Glacier__Dock_Interior__Connector => 1929,
-            SpotId::Glacier__Dock_Interior__Entry => 0,
-            SpotId::Glacier__Dock_Outside__Entry => 750,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Dock_Outside__Entry => enum_map! {
-            SpotId::Glacier__Dock_Interior__Entry => 750,
-            SpotId::Glacier__Dock_Outside__Entry => 0,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter => 4736,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Dock_Outside__Do_Not_Enter => enum_map! {
-            SpotId::Glacier__Dock_Outside__Entry => 4736,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter => 0,
-            SpotId::Glacier__Revival__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Revival__East_9 => enum_map! {
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter => 1350,
-            SpotId::Glacier__Revival__East_9 => 0,
-            SpotId::Glacier__Revival__Overhang => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Revival__Overhang => enum_map! {
-            SpotId::Glacier__Revival__East_9 => 1228,
-            SpotId::Glacier__Revival__Overhang => 0,
-            SpotId::Glacier__Revival__Ledge => 1052,
-            SpotId::Glacier__Revival__Lower_East => 1399,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Revival__Ledge => enum_map! {
-            SpotId::Glacier__Revival__Overhang => 1200,
-            SpotId::Glacier__Revival__Ledge => 0,
-            SpotId::Glacier__Revival__Lower_East => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Revival__Lower_East => enum_map! {
-            SpotId::Glacier__Revival__Ledge => 4800,
-            SpotId::Glacier__Revival__Lower_East => 0,
-            SpotId::Glacier__Grid_42_10__West => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Revival__Save_Point => enum_map! {
-            SpotId::Glacier__Revival__Save_Point => 0,
-            SpotId::Glacier__Revival__West_8 => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Revival__West_8 => enum_map! {
-            SpotId::Glacier__Revival__Save_Point => 1228,
-            SpotId::Glacier__Revival__West_8 => 0,
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_42_10__West => enum_map! {
-            SpotId::Glacier__Revival__Lower_East => 1350,
-            SpotId::Glacier__Grid_42_10__West => 0,
-            SpotId::Glacier__Grid_42_10__East => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_42_10__East => enum_map! {
-            SpotId::Glacier__Grid_42_10__West => 3157,
-            SpotId::Glacier__Grid_42_10__East => 0,
-            SpotId::Glacier__Grid_43_10_11__Top => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_43_10_11__Top => enum_map! {
-            SpotId::Glacier__Grid_42_10__East => 1350,
-            SpotId::Glacier__Grid_43_10_11__Top => 0,
-            SpotId::Glacier__Grid_43_10_11__East => 3157,
-            SpotId::Glacier__Grid_43_10_11__Lower => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_43_10_11__East => enum_map! {
-            SpotId::Glacier__Grid_43_10_11__Top => 3157,
-            SpotId::Glacier__Grid_43_10_11__East => 0,
-            SpotId::Glacier__Grid_43_10_11__Lower => 3157,
-            SpotId::Glacier__Apocalypse_Entry__West => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_43_10_11__Lower => enum_map! {
-            SpotId::Glacier__Grid_43_10_11__Top => 5677,
-            SpotId::Glacier__Grid_43_10_11__East => 5178,
-            SpotId::Glacier__Grid_43_10_11__Lower => 0,
-            SpotId::Glacier__Compass_Room__East => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Compass_Room__East => enum_map! {
-            SpotId::Glacier__Grid_43_10_11__Lower => 1350,
-            SpotId::Glacier__Compass_Room__East => 0,
-            SpotId::Glacier__Compass_Room__Center => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Compass_Room__Center => enum_map! {
-            SpotId::Glacier__Compass_Room__East => 1578,
-            SpotId::Glacier__Compass_Room__Center => 0,
-            SpotId::Glacier__Compass_Room__West => 1578,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Compass_Room__West => enum_map! {
-            SpotId::Glacier__Compass_Room__Center => 1578,
-            SpotId::Glacier__Compass_Room__West => 0,
-            SpotId::Glacier__The_Big_Drop__East => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__The_Big_Drop__East => enum_map! {
-            SpotId::Glacier__Compass_Room__West => 1350,
-            SpotId::Glacier__The_Big_Drop__East => 0,
-            SpotId::Glacier__The_Big_Drop__Small_Path => 2000,
-            SpotId::Glacier__The_Big_Drop__Water_Surface => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__The_Big_Drop__Small_Path => enum_map! {
-            SpotId::Glacier__The_Big_Drop__Small_Path => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__The_Big_Drop__Water_Surface => enum_map! {
-            SpotId::Glacier__Revival__Save_Point => 48500,
-            SpotId::Glacier__The_Big_Drop__Water_Surface => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_39_40_7_9__Upper_East => enum_map! {
-            SpotId::Glacier__Revival__West_8 => 1350,
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East => 0,
-            SpotId::Glacier__Grid_39_40_7_9__West => 6666,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_39_40_7_9__West => enum_map! {
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East => 7266,
-            SpotId::Glacier__Grid_39_40_7_9__West => 0,
-            SpotId::Glacier__Grid_37_38_9__East => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_37_38_9__East => enum_map! {
-            SpotId::Glacier__Grid_39_40_7_9__West => 1350,
-            SpotId::Glacier__Grid_37_38_9__East => 0,
-            SpotId::Glacier__Grid_37_38_9__West => 6666,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_37_38_9__West => enum_map! {
-            SpotId::Glacier__Grid_37_38_9__East => 6666,
-            SpotId::Glacier__Grid_37_38_9__West => 0,
-            SpotId::Glacier__Vertical_Room__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__East_9 => enum_map! {
-            SpotId::Glacier__Grid_37_38_9__West => 1350,
-            SpotId::Glacier__Vertical_Room__East_9 => 0,
-            SpotId::Glacier__Vertical_Room__West_9 => 3157,
-            SpotId::Glacier__Vertical_Room__Mid_9 => 1578,
-            SpotId::Glacier__Vertical_Room__Mid_11 => 2600,
-            SpotId::Glacier__Vertical_Room__Peak => 2400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__West_9 => enum_map! {
-            SpotId::Glacier__Vertical_Room__West_9 => 0,
-            SpotId::Glacier__Vertical_Room__Mid_9 => 1578,
-            SpotId::Glacier__Vertical_Room__Mid_11 => 2600,
-            SpotId::Glacier__Vertical_Room__Under_Switch => 2000,
-            SpotId::Glacier__Ledge_Grab_Room__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__Mid_9 => enum_map! {
-            SpotId::Glacier__Vertical_Room__East_9 => 1578,
-            SpotId::Glacier__Vertical_Room__West_9 => 1578,
-            SpotId::Glacier__Vertical_Room__Mid_9 => 0,
-            SpotId::Glacier__Vertical_Room__Mid_11 => 2500,
-            SpotId::Glacier__Vertical_Room__Under_Switch => 2000,
-            SpotId::Glacier__Vertical_Room__Peak => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__Mid_11 => enum_map! {
-            SpotId::Glacier__Vertical_Room__Mid_9 => 10000,
-            SpotId::Glacier__Vertical_Room__Mid_11 => 0,
-            SpotId::Glacier__Vertical_Room__Under_Switch => 2400,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner => 1299,
-            SpotId::Glacier__Vertical_Room__East_13 => 1700,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__Under_Switch => enum_map! {
-            SpotId::Glacier__Vertical_Room__West_9 => 8400,
-            SpotId::Glacier__Vertical_Room__Mid_9 => 7500,
-            SpotId::Glacier__Vertical_Room__Mid_11 => 1052,
-            SpotId::Glacier__Vertical_Room__Under_Switch => 0,
-            SpotId::Glacier__Vertical_Room__Past_Gate => 526,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__Past_Gate => enum_map! {
-            SpotId::Glacier__Vertical_Room__Under_Switch => 526,
-            SpotId::Glacier__Vertical_Room__Past_Gate => 0,
-            SpotId::Glacier__Ledge_Grab_Room__East_11 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__Peak => enum_map! {
-            SpotId::Glacier__Vertical_Room__East_9 => 1929,
-            SpotId::Glacier__Vertical_Room__Mid_9 => 500,
-            SpotId::Glacier__Vertical_Room__Peak => 0,
-            SpotId::Glacier__Vertical_Room__West_8 => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__West_8 => enum_map! {
-            SpotId::Glacier__Vertical_Room__Peak => 1228,
-            SpotId::Glacier__Vertical_Room__West_8 => 0,
-            SpotId::Glacier__Peak__East_8 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__East_12 => enum_map! {
-            SpotId::Glacier__Vertical_Room__Mid_11 => 1228,
-            SpotId::Glacier__Vertical_Room__East_12 => 0,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner => 1929,
-            SpotId::Glacier__Boomerang_Antechamber__West_12 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__Lower_West_Corner => enum_map! {
-            SpotId::Glacier__Vertical_Room__Mid_11 => 4200,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner => 0,
-            SpotId::Glacier__Vertical_Room__East_13 => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Vertical_Room__East_13 => enum_map! {
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner => 2280,
-            SpotId::Glacier__Vertical_Room__East_13 => 0,
-            SpotId::Glacier__Boomerang_Antechamber__West_13 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Antechamber__West_13 => enum_map! {
-            SpotId::Glacier__Vertical_Room__East_13 => 1350,
-            SpotId::Glacier__Boomerang_Antechamber__West_13 => 0,
-            SpotId::Glacier__Boomerang_Antechamber__East_12 => 6666,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Antechamber__East_12 => enum_map! {
-            SpotId::Glacier__Boomerang_Antechamber__West_13 => 6666,
-            SpotId::Glacier__Boomerang_Antechamber__East_12 => 0,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East => 5263,
-            SpotId::Glacier__Boomerang_Antechamber__West_12 => 6666,
-            SpotId::Glacier__Boomerang_Room__West => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Antechamber__Upper_East => enum_map! {
-            SpotId::Glacier__Boomerang_Antechamber__West_13 => 6666,
-            SpotId::Glacier__Boomerang_Antechamber__East_12 => 1754,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Antechamber__West_12 => enum_map! {
-            SpotId::Glacier__Vertical_Room__East_12 => 1350,
-            SpotId::Glacier__Boomerang_Antechamber__West_13 => 6666,
-            SpotId::Glacier__Boomerang_Antechamber__East_12 => 6666,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East => 6666,
-            SpotId::Glacier__Boomerang_Antechamber__West_12 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room__West => enum_map! {
-            SpotId::Glacier__Boomerang_Antechamber__East_12 => 1350,
-            SpotId::Glacier__Boomerang_Room__West => 0,
-            SpotId::Glacier__Boomerang_Room__Platform => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room__Platform => enum_map! {
-            SpotId::Glacier__Boomerang_Room__West => 1228,
-            SpotId::Glacier__Boomerang_Room__Platform => 0,
-            SpotId::Glacier__Boomerang_Room__Center_ish => 1403,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room__Center_ish => enum_map! {
-            SpotId::Glacier__Boomerang_Room__Platform => 1403,
-            SpotId::Glacier__Boomerang_Room__Center_ish => 0,
-            SpotId::Glacier__Boomerang_Room__Pedestal => 2456,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room__Pedestal => enum_map! {
-            SpotId::Glacier__Boomerang_Room__Center_ish => 2456,
-            SpotId::Glacier__Boomerang_Room__Pedestal => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room_Switched__Pedestal => enum_map! {
-            SpotId::Glacier__Boomerang_Room__Pedestal => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East => enum_map! {
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal => 701,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge => enum_map! {
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East => 1052,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform => 2105,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room_Switched__Platform => enum_map! {
-            SpotId::Glacier__Boomerang_Room__Platform => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform => 0,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Boomerang_Room_Switched__Upper_West => enum_map! {
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East => 1350,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform => 1228,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__East_9 => enum_map! {
-            SpotId::Glacier__Vertical_Room__West_9 => 1350,
-            SpotId::Glacier__Vertical_Room__Past_Gate => 20000,
-            SpotId::Glacier__Ledge_Grab_Room__East_9 => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Column => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Column => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__East_9 => 1929,
-            SpotId::Glacier__Ledge_Grab_Room__Column => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => 1403,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => 2250,
-            SpotId::Glacier__Ledge_Grab_Room__Fork => 1403,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Column => 2000,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Fork => 500,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__East_11 => enum_map! {
-            SpotId::Glacier__Vertical_Room__Past_Gate => 1350,
-            SpotId::Glacier__Ledge_Grab_Room__East_11 => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Mid_35 => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__East_11 => 1929,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => 3157,
-            SpotId::Glacier__Ledge_Grab_Room__Fork => 6100,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Mid_34 => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => 3157,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff => 1403,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Cliff => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => 1403,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => 400,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => 1200,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Cliff => 1000,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Pedestal => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom => 1754,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Gate => 1403,
-            SpotId::Glacier__Ledge_Grab_Room__West => 4000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Gate => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal => 1403,
-            SpotId::Glacier__Ledge_Grab_Room__Gate => 0,
-            SpotId::Glacier__Ledge_Grab_Room__West => 3100,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__West => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal => 799,
-            SpotId::Glacier__Ledge_Grab_Room__Gate => 1000,
-            SpotId::Glacier__Ledge_Grab_Room__West => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => 3859,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => 4210,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => 350,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff => 1052,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => 2000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => 800,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff => 1403,
-            SpotId::Glacier__Ledge_Grab_Room__West => 4210,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform => 599,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => 0,
-            SpotId::Glacier__Ledge_Grab_Room__Fork => 2400,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Ledge_Grab_Room__Fork => enum_map! {
-            SpotId::Glacier__Ledge_Grab_Room__Column => 2400,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge => 2000,
-            SpotId::Glacier__Ledge_Grab_Room__East_11 => 3333,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35 => 2500,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34 => 1754,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform => 1754,
-            SpotId::Glacier__Ledge_Grab_Room__Fork => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__East_8 => enum_map! {
-            SpotId::Glacier__Peak__East_8 => 0,
-            SpotId::Glacier__Peak__Top_Platform_East => 7000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__Top_Platform_East => enum_map! {
-            SpotId::Glacier__Peak__East_8 => 2982,
-            SpotId::Glacier__Peak__Top_Platform_East => 0,
-            SpotId::Glacier__Peak__Top_Rock => 1754,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__Top_Rock => enum_map! {
-            SpotId::Glacier__Peak__Top_Platform_East => 1754,
-            SpotId::Glacier__Peak__Top_Rock => 0,
-            SpotId::Glacier__Peak__West_Cliff => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__Highest_Platform => enum_map! {
-            SpotId::Glacier__Peak__Top_Platform_East => 1754,
-            SpotId::Glacier__Peak__Top_Rock => 300,
-            SpotId::Glacier__Peak__Highest_Platform => 0,
-            SpotId::Glacier__Peak__West_Cliff => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__West_Cliff => enum_map! {
-            SpotId::Glacier__Peak__Top_Rock => 4200,
-            SpotId::Glacier__Peak__West_Cliff => 0,
-            SpotId::Glacier__Peak__Under_West_Cliff => 600,
-            SpotId::Glacier__Peak__West_8 => 2280,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__Under_West_Cliff => enum_map! {
-            SpotId::Glacier__Peak__West_Cliff => 2000,
-            SpotId::Glacier__Peak__Under_West_Cliff => 0,
-            SpotId::Glacier__Peak__West_8 => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Peak__West_8 => enum_map! {
-            SpotId::Glacier__Peak__Under_West_Cliff => 2400,
-            SpotId::Glacier__Peak__West_8 => 0,
-            SpotId::Glacier__Grid_32_7_10__East_8 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_32_7_10__East_8 => enum_map! {
-            SpotId::Glacier__Peak__West_8 => 1350,
-            SpotId::Glacier__Grid_32_7_10__East_8 => 0,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform => 1228,
-            SpotId::Glacier__Grid_32_7_10__Column => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_32_7_10__Center_Platform => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__East_8 => 1228,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform => 0,
-            SpotId::Glacier__Grid_32_7_10__Column => 600,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock => 1052,
-            SpotId::Glacier__Grid_32_7_10__West_9 => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_32_7_10__Column => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__East_8 => 1799,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform => 1799,
-            SpotId::Glacier__Grid_32_7_10__Column => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_32_7_10__Left_Rock => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__Column => 1400,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock => 0,
-            SpotId::Glacier__Grid_32_7_10__West_9 => 877,
-            SpotId::Glacier__Grid_32_7_10__West_10 => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_32_7_10__West_9 => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__Left_Rock => 877,
-            SpotId::Glacier__Grid_32_7_10__West_9 => 0,
-            SpotId::Glacier__Grid_32_7_10__West_10 => 700,
-            SpotId::Glacier__Grid_31_9_12__East_9 => 1350,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_32_7_10__West_10 => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__Left_Rock => 1600,
-            SpotId::Glacier__Grid_32_7_10__West_10 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_31_9_12__East_9 => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__West_9 => 1350,
-            SpotId::Glacier__Grid_31_9_12__East_9 => 0,
-            SpotId::Glacier__Grid_31_9_12__East_10 => 600,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower => 2280,
-            SpotId::Glacier__Grid_31_9_12__Midair => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_31_9_12__East_10 => enum_map! {
-            SpotId::Glacier__Grid_32_7_10__West_10 => 1350,
-            SpotId::Glacier__Grid_31_9_12__East_10 => 0,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower => 2280,
-            SpotId::Glacier__Grid_31_9_12__Midair => 3157,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_31_9_12__Observation_Tower => enum_map! {
-            SpotId::Glacier__Grid_31_9_12__East_10 => 4200,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower => 0,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => 400,
-            SpotId::Glacier__Grid_31_9_12__West_12 => 1400,
-            SpotId::Glacier__Grid_31_9_12__Midair => 877,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => enum_map! {
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower => 1200,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => 0,
-            SpotId::Glacier__Grid_31_9_12__West_12 => 1000,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_31_9_12__West_12 => enum_map! {
-            SpotId::Ebih__Base_Camp__East_12 => 1350,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => 3000,
-            SpotId::Glacier__Grid_31_9_12__West_12 => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Grid_31_9_12__Midair => enum_map! {
-            SpotId::Ebih__Base_Camp__East_11 => 1350,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower => 877,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4 => 526,
-            SpotId::Glacier__Grid_31_9_12__Midair => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => enum_map! {
-            SpotId::Ebih__Base_Camp__Lake_Access => 1350,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Upper => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Upper => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access => 1200,
-            SpotId::Glacier__Lake_Main_Entrance__Upper => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => 877,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge => 599,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Upper => 1850,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge => 350,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => 400,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom => 1300,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => 1403,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Ledge => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Upper => 2000,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform => 600,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => 701,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom => 1175,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Ledge => 1000,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Hill => 350,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => 1052,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Hill => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => 600,
-            SpotId::Glacier__Lake_Main_Entrance__Hill => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom => 1403,
-            SpotId::Glacier__Lake_Main_Entrance__Side => 701,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Bottom => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Hill => 2400,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => 1228,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Side_Jump => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => 0,
-            SpotId::Glacier__Lake_Main_Entrance__Side => 199,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Side => enum_map! {
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform => 1052,
-            SpotId::Glacier__Lake_Main_Entrance__Hill => 701,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump => 600,
-            SpotId::Glacier__Lake_Main_Entrance__Side => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Lake_Main_Entrance__Lake_Access => enum_map! {
-            SpotId::Amagi__Main_Area__East_15 => 1000,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom => 1228,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Apocalypse_Entry__West => enum_map! {
-            SpotId::Glacier__Grid_43_10_11__East => 1350,
-            SpotId::Glacier__Apocalypse_Entry__West => 0,
-            SpotId::Glacier__Apocalypse_Entry__Terminal => 1929,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Glacier__Apocalypse_Entry__Terminal => enum_map! {
-            SpotId::Glacier__Apocalypse_Entry__West => 1929,
-            SpotId::Glacier__Apocalypse_Entry__Terminal => 0,
-            SpotId::Menu__Upgrade_Menu__Physiology => 1000,
-            _ => u32::MAX,
-        },
-        SpotId::Menu__Upgrade_Menu__Physiology => enum_map! {
-            SpotId::Menu__Upgrade_Menu__Physiology => 0,
-            SpotId::Menu__Upgrade_Menu__Combat => 100,
-            SpotId::Menu__Upgrade_Menu__Infection => 100,
-            SpotId::Menu__Upgrade_Menu__Drone => 100,
-            _ => u32::MAX,
-        },
-        SpotId::Menu__Upgrade_Menu__Combat => enum_map! {
-            SpotId::Menu__Upgrade_Menu__Physiology => 100,
-            SpotId::Menu__Upgrade_Menu__Combat => 0,
-            SpotId::Menu__Upgrade_Menu__Infection => 100,
-            SpotId::Menu__Upgrade_Menu__Drone => 100,
-            _ => u32::MAX,
-        },
-        SpotId::Menu__Upgrade_Menu__Infection => enum_map! {
-            SpotId::Menu__Upgrade_Menu__Physiology => 100,
-            SpotId::Menu__Upgrade_Menu__Combat => 100,
-            SpotId::Menu__Upgrade_Menu__Infection => 0,
-            SpotId::Menu__Upgrade_Menu__Drone => 100,
-            _ => u32::MAX,
-        },
-        SpotId::Menu__Upgrade_Menu__Drone => enum_map! {
-            SpotId::Menu__Upgrade_Menu__Physiology => 100,
-            SpotId::Menu__Upgrade_Menu__Combat => 100,
-            SpotId::Menu__Upgrade_Menu__Infection => 100,
-            SpotId::Menu__Upgrade_Menu__Drone => 0,
-            _ => u32::MAX,
-        },
-    }
-}
-
-pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
-    match (s1, s2) {
-        (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__East_15) => 0,
-        (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => 4035,
-        (SpotId::Amagi__Main_Area__East_15, SpotId::Glacier__Lake_Main_Entrance__Lake_Access) => {
-            1350
-        }
-        (SpotId::Amagi__Main_Area__East_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__East_15) => 4035,
-        (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Waters_Edge) => 0,
-        (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Amagi__Main_Area__Shallow_End) => 701,
-        (SpotId::Amagi__Main_Area__Waters_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Waters_Edge) => 1000,
-        (SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Shallow_End) => 0,
-        (SpotId::Amagi__Main_Area__Shallow_End, SpotId::Amagi__Main_Area__Cliff) => 4035,
-        (SpotId::Amagi__Main_Area__Shallow_End, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Shallow_End) => 4035,
-        (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Cliff) => 0,
-        (SpotId::Amagi__Main_Area__Cliff, SpotId::Amagi__Main_Area__Upper_Platform) => 701,
-        (SpotId::Amagi__Main_Area__Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => 1000,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Upper_Platform) => 0,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__West_Shelf) => 1228,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Platform_2) => 701,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__East_Ledge) => 700,
-        (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Upper_Platform) => 2000,
-        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Shelf) => 0,
-        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__West_Side) => 1403,
-        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Amagi__Main_Area__Platform_2) => 526,
-        (SpotId::Amagi__Main_Area__West_Shelf, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__West_Shelf) => 1403,
-        (SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__West_Side) => 0,
-        (SpotId::Amagi__Main_Area__West_Side, SpotId::Amagi__Main_Area__Carving) => 2300,
-        (SpotId::Amagi__Main_Area__West_Side, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Upper_Platform) => 1000,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__West_Shelf) => 1000,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_2) => 0,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => 701,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => 600,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Catwalk_Center) => 1000,
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => 1000,
-        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__East_Ledge) => 0,
-        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_3) => 877,
-        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Catwalk_Center) => 899,
-        (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1403,
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__Carving) => 0,
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 175,
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__Secret_Outcropping) => 1600,
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => 600,
-        (SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__West_15) => 0,
-        (SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__West_Lake__East_15) => 1350,
-        (SpotId::Amagi__Main_Area__West_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Shallow_End) => {
-            7192
-        }
-        (
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-        ) => 2456,
-        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__West_Shelf) => {
-            1700
-        }
-        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Carving) => 1578,
-        (
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-        ) => 0,
-        (
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 750,
-        (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_2) => 1500,
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__East_Ledge) => 1000,
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_3) => 0,
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Catwalk_Center) => 1052,
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Flat_Ruin) => 1754,
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__West_18) => 3333,
-        (SpotId::Amagi__Main_Area__Platform_3, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__East_Ledge) => 2000,
-        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Platform_3) => 1400,
-        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Catwalk_Center) => 0,
-        (
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 2456,
-        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Broken_Wall) => 350,
-        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => {
-            699
-        }
-        (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 2456,
-        (
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 0,
-        (
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-        ) => 1578,
-        (SpotId::Amagi__Main_Area__Catwalk_Broken_Part, SpotId::Amagi__Main_Area__Save_Point) => {
-            1754
-        }
-        (SpotId::Amagi__Main_Area__Catwalk_Broken_Part, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 1578,
-        (
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-        ) => 0,
-        (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Save_Point) => 1500,
-        (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Enemy_Side) => 1500,
-        (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Save_Point) => 0,
-        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => 1052,
-        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Broken_Wall) => 4000,
-        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => 1052,
-        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Enemy_Side) => 0,
-        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => 2105,
-        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__Enemy_Side) => 2105,
-        (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__Small_Cliff) => 0,
-        (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__East_19) => 1929,
-        (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__Small_Cliff) => 1929,
-        (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__East_19) => 0,
-        (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Grid_31_19__West) => 1350,
-        (SpotId::Amagi__Main_Area__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Catwalk_Center) => 1000,
-        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => 3859,
-        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Broken_Wall) => 0,
-        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => 500,
-        (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Broken_Wall) => 1000,
-        (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => 0,
-        (SpotId::Amagi__Main_Area__Wall_Stuck_Spot, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Broken_Wall) => 2000,
-        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Half_Pillar) => 0,
-        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__Flat_Ruin) => 1754,
-        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Amagi__Main_Area__West_Mini_Hill) => 701,
-        (SpotId::Amagi__Main_Area__Half_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__Half_Pillar) => 1754,
-        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__Flat_Ruin) => 0,
-        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_Mini_Hill) => 1052,
-        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => 2000,
-        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_19) => 1578,
-        (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Half_Pillar) => 1000,
-        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__Flat_Ruin) => 1052,
-        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Amagi__Main_Area__West_Mini_Hill) => 0,
-        (SpotId::Amagi__Main_Area__West_Mini_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__Flat_Ruin) => 1578,
-        (SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__Main_Area__West_18) => 0,
-        (SpotId::Amagi__Main_Area__West_18, SpotId::Amagi__West_Lake__East_18) => 1350,
-        (SpotId::Amagi__Main_Area__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Main_Area__West_19, SpotId::Amagi__Main_Area__West_19) => 0,
-        (SpotId::Amagi__Main_Area__West_19, SpotId::Amagi__West_Lake__East_19) => 1350,
-        (SpotId::Amagi__Main_Area__West_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-        ) => 0,
-        (
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-        ) => 10526,
-        (SpotId::Amagi__Main_Area__Secret_Waterfall, SpotId::Amagi__Cave_Behind_Waterfall__Top) => {
-            750
-        }
-        (SpotId::Amagi__Main_Area__Secret_Waterfall, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-        ) => 10526,
-        (
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-        ) => 0,
-        (SpotId::Amagi__Main_Area__Way_Off_To_The_Side, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-        ) => 750,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 0,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 2000,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-        ) => 1800,
-        (SpotId::Amagi__Cave_Behind_Waterfall__Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 575,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 0,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-        ) => 1000,
-        (SpotId::Amagi__Cave_Behind_Waterfall__Middle, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Cave_Behind_Waterfall__Top, SpotId::Amagi__Main_Area__Secret_Waterfall) => {
-            750
-        }
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1101,
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 526,
-        (SpotId::Amagi__Cave_Behind_Waterfall__Top, SpotId::Amagi__Cave_Behind_Waterfall__Top) => 0,
-        (SpotId::Amagi__Cave_Behind_Waterfall__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Main_Area__East_19) => 1350,
-        (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__West) => 0,
-        (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
-        (SpotId::Amagi__Grid_31_19__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
-        (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__East) => 0,
-        (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Liru_Room__West_19) => 1350,
-        (SpotId::Amagi__Grid_31_19__East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Grid_31_19__East) => 1350,
-        (SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__West_19) => 0,
-        (SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => 1228,
-        (SpotId::Amagi__Liru_Room__West_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_19) => 1228,
-        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__Hidden_Enemies) => 0,
-        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__Platform_1_Left) => {
-            500
-        }
-        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__Platform_1_Right) => {
-            877
-        }
-        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Amagi__Liru_Room__West_20) => 1300,
-        (SpotId::Amagi__Liru_Room__Hidden_Enemies, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Hidden_Enemies) => {
-            1200
-        }
-        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Platform_1_Left) => 0,
-        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Platform_1_Right) => {
-            877
-        }
-        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
-            500
-        }
-        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Amagi__Liru_Room__West_20) => 1228,
-        (SpotId::Amagi__Liru_Room__Platform_1_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_1_Right, SpotId::Amagi__Liru_Room__Platform_1_Left) => {
-            877
-        }
-        (
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 0,
-        (SpotId::Amagi__Liru_Room__Platform_1_Right, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
-            877
-        }
-        (
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 526,
-        (SpotId::Amagi__Liru_Room__Platform_1_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_1_Left) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_2_Left) => 0,
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_2_Right) => {
-            1403
-        }
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
-            499
-        }
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
-            1052
-        }
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Amagi__Liru_Room__West_20) => 1228,
-        (SpotId::Amagi__Liru_Room__Platform_2_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-        ) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
-            1403
-        }
-        (
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 0,
-        (
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 499,
-        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__Bottom) => 1299,
-        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Amagi__Liru_Room__East_Passage) => 701,
-        (SpotId::Amagi__Liru_Room__Platform_2_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__Platform_3_Left) => 0,
-        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
-            1052
-        }
-        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Amagi__Liru_Room__West_20) => 1228,
-        (SpotId::Amagi__Liru_Room__Platform_3_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Platform_2_Left) => {
-            1052
-        }
-        (
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-        ) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
-            1052
-        }
-        (
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 0,
-        (
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 399,
-        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__Bottom) => 1052,
-        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Amagi__Liru_Room__East_Passage) => {
-            1052
-        }
-        (SpotId::Amagi__Liru_Room__Platform_3_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Amagi__Liru_Room__Platform_3_Left) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Amagi__Liru_Room__Platform_4_Left) => 0,
-        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Amagi__Liru_Room__Platform_4_Right) => {
-            877
-        }
-        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Amagi__Liru_Room__West_20) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_4_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-        ) => 1000,
-        (SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__Platform_4_Left) => {
-            877
-        }
-        (
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-        ) => 0,
-        (SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__Bottom) => 877,
-        (SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Amagi__Liru_Room__East_Passage) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Platform_4_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => 1000,
-        (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Bottom) => 0,
-        (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Shrine) => 1754,
-        (SpotId::Amagi__Liru_Room__Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Bottom) => 1754,
-        (SpotId::Amagi__Liru_Room__Shrine, SpotId::Amagi__Liru_Room__Shrine) => 0,
-        (SpotId::Amagi__Liru_Room__Shrine, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_2_Left) => 2000,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_3_Left) => 1228,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_4_Left) => 1000,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Platform_4_Right) => 1000,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Bottom) => 3333,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__Shrine) => 3500,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Amagi__Liru_Room__West_20) => 0,
-        (SpotId::Amagi__Liru_Room__West_20, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_2_Right) => {
-            1000
-        }
-        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Platform_3_Right) => {
-            1052
-        }
-        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__Bottom) => 1100,
-        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Amagi__Liru_Room__East_Passage) => 0,
-        (SpotId::Amagi__Liru_Room__East_Passage, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__Liru_Room__Hidden_Exit, SpotId::Amagi__Liru_Room__Hidden_Exit) => 0,
-        (SpotId::Amagi__Liru_Room__Hidden_Exit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_15, SpotId::Amagi__Main_Area__West_15) => 1350,
-        (SpotId::Amagi__West_Lake__East_15, SpotId::Amagi__West_Lake__East_15) => 0,
-        (SpotId::Amagi__West_Lake__East_15, SpotId::Amagi__West_Lake__East_Shore) => 526,
-        (SpotId::Amagi__West_Lake__East_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_Shore, SpotId::Amagi__West_Lake__East_Shore) => 0,
-        (SpotId::Amagi__West_Lake__East_Shore, SpotId::Amagi__West_Lake__East_Bank) => 1228,
-        (SpotId::Amagi__West_Lake__East_Shore, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Shore) => 3000,
-        (SpotId::Amagi__West_Lake__East_Bank, SpotId::Amagi__West_Lake__East_Bank) => 0,
-        (SpotId::Amagi__West_Lake__East_Bank, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Amagi__West_Lake__East_Bank) => 1228,
-        (
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1200,
-        (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Amagi__West_Lake__East_Platform) => {
-            1403
-        }
-        (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Amagi__West_Lake__Pillar) => 1899,
-        (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Amagi__West_Lake__West_Cliff) => {
-            2000
-        }
-        (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 900,
-        (
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1699,
-        (SpotId::Amagi__West_Lake__Northwest_Platform, SpotId::Amagi__West_Lake__West_Platform) => {
-            2631
-        }
-        (SpotId::Amagi__West_Lake__Northwest_Platform, SpotId::Amagi__West_Lake__West_Cliff) => {
-            1000
-        }
-        (SpotId::Amagi__West_Lake__Northwest_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-        ) => 3000,
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-        ) => 3000,
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-        ) => 1754,
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-        ) => 1599,
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Amagi__West_Lake__East_Platform, SpotId::Amagi__West_Lake__Northeast_Platform) => {
-            4000
-        }
-        (
-            SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 1754,
-        (SpotId::Amagi__West_Lake__East_Platform, SpotId::Amagi__West_Lake__East_Platform) => 0,
-        (SpotId::Amagi__West_Lake__East_Platform, SpotId::Amagi__West_Lake__East_18) => 1578,
-        (SpotId::Amagi__West_Lake__East_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__Main_Area__West_18) => 1350,
-        (SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__East_Platform) => 1578,
-        (SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__East_18) => 0,
-        (SpotId::Amagi__West_Lake__East_18, SpotId::Amagi__West_Lake__Pillar) => 1228,
-        (SpotId::Amagi__West_Lake__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__East_18) => 1228,
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Pillar) => 0,
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Pillar_Platform) => 526,
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Somewhat_Central_Platform) => {
-            4385
-        }
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1403,
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__Pillar) => 1000,
-        (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__Pillar_Platform) => 0,
-        (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__East_19) => 701,
-        (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_19, SpotId::Amagi__Main_Area__West_19) => 1350,
-        (SpotId::Amagi__West_Lake__East_19, SpotId::Amagi__West_Lake__Pillar_Platform) => 1000,
-        (SpotId::Amagi__West_Lake__East_19, SpotId::Amagi__West_Lake__East_19) => 0,
-        (SpotId::Amagi__West_Lake__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Somewhat_Central_Platform, SpotId::Amagi__West_Lake__Pillar) => {
-            4385
-        }
-        (
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Some_Rock,
-        ) => 1228,
-        (
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1052,
-        (SpotId::Amagi__West_Lake__West_Platform, SpotId::Amagi__West_Lake__West_Platform) => 0,
-        (SpotId::Amagi__West_Lake__West_Platform, SpotId::Amagi__West_Lake__Cavern_Front_Teeth) => {
-            1228
-        }
-        (SpotId::Amagi__West_Lake__West_Platform, SpotId::Amagi__West_Lake__Cavern_Chin) => 1929,
-        (SpotId::Amagi__West_Lake__West_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Cavern_Front_Teeth, SpotId::Amagi__West_Lake__West_Platform) => {
-            1228
-        }
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 2105,
-        (SpotId::Amagi__West_Lake__Cavern_Front_Teeth, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-        ) => 2105,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-        ) => 0,
-        (SpotId::Amagi__West_Lake__Cavern_Back_Teeth, SpotId::Amagi__West_Lake__Cavern_Jaw) => 1403,
-        (SpotId::Amagi__West_Lake__Cavern_Back_Teeth, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Back_Teeth) => 1403,
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Jaw) => 0,
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => 899,
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Chin) => 2807,
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Refill_Station) => {
-            3000
-        }
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Front_Pillar) => {
-            3000
-        }
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Cavern_Neck, SpotId::Amagi__West_Lake__Cavern_Neck) => 0,
-        (SpotId::Amagi__West_Lake__Cavern_Neck, SpotId::Amagi__West_Lake__Cavern_Chin) => 3508,
-        (SpotId::Amagi__West_Lake__Cavern_Neck, SpotId::Amagi__West_Lake__Cavern_Middle_Pillar) => {
-            5000
-        }
-        (SpotId::Amagi__West_Lake__Cavern_Neck, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 3000,
-        (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Cavern_Neck) => 3508,
-        (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Cavern_Chin) => 0,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1500,
-        (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Some_Rock) => 1754,
-        (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Cavern_Refill_Station, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
-            1100
-        }
-        (
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-        ) => 2800,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-        ) => 56000,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 2800,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-        ) => 0,
-        (SpotId::Amagi__West_Lake__Cavern_Tear_Duct, SpotId::Amagi__West_Lake__Cavern_Eye) => 701,
-        (SpotId::Amagi__West_Lake__Cavern_Tear_Duct, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Amagi__West_Lake__Cavern_Tear_Duct) => 1000,
-        (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Amagi__West_Lake__Cavern_Eye) => 0,
-        (SpotId::Amagi__West_Lake__Cavern_Eye, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Cavern_Front_Pillar, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
-            1403
-        }
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 877,
-        (SpotId::Amagi__West_Lake__Cavern_Front_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 2629,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 1228,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-        ) => 0,
-        (SpotId::Amagi__West_Lake__Cavern_Rear_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-        ) => 5000,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => 3157,
-        (
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 3157,
-        (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Top) => 0,
-        (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Item) => {
-            699
-        }
-        (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Stronghold_Item, SpotId::Amagi__West_Lake__Stronghold_Item) => 0,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-        ) => 1000,
-        (SpotId::Amagi__West_Lake__Stronghold_Item, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 1052,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-        ) => 800,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-        ) => 701,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-        ) => 701,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 0,
-        (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Some_Rock) => {
-            2000
-        }
-        (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Small_Hill) => {
-            2280
-        }
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 3000,
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Cavern_Chin) => 2000,
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Stronghold_Front_Door) => {
-            1052
-        }
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Some_Rock) => 0,
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => 1228,
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Tentacle_Gap) => 4210,
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Stronghold_Front_Door) => {
-            2280
-        }
-        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Some_Rock) => 2000,
-        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Small_Hill) => 0,
-        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Tentacle_Gap) => 3000,
-        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Left_of_Enemy) => 2631,
-        (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Pillar) => 2000,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => 4210,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Tentacle_Gap) => 0,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Left_of_Enemy) => 1100,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => 2631,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__Small_Hill) => 2631,
-        (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__Left_of_Enemy) => 0,
-        (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__East_20) => 2982,
-        (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__East_20, SpotId::Amagi__West_Lake__Left_of_Enemy) => 2982,
-        (SpotId::Amagi__West_Lake__East_20, SpotId::Amagi__West_Lake__East_20) => 0,
-        (SpotId::Amagi__West_Lake__East_20, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__Northeast_Platform) => {
-            1754
-        }
-        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__Northwest_Platform) => 701,
-        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Cliff) => 0,
-        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Amagi__West_Lake__West_Bank) => 2000,
-        (SpotId::Amagi__West_Lake__West_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Cliff) => 1929,
-        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Bank) => 0,
-        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__Water_Surface) => 1000,
-        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Shore) => 2000,
-        (SpotId::Amagi__West_Lake__West_Bank, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Cliff) => 1929,
-        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => 500,
-        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__Water_Surface) => 0,
-        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => 1754,
-        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Water_Surface) => 1754,
-        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Shore) => 0,
-        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Surface_Wall_Right) => {
-            5087
-        }
-        (SpotId::Amagi__West_Lake__West_Shore, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 0,
-        (
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 877,
-        (SpotId::Amagi__West_Lake__Surface_Wall_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 877,
-        (
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 0,
-        (SpotId::Amagi__West_Lake__Surface_Wall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => 2807,
-        (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__West_15) => 0,
-        (SpotId::Amagi__West_Lake__West_15, SpotId::Ebih__Vertical_Interchange__East_15) => 1350,
-        (SpotId::Amagi__West_Lake__West_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Helipad) => 0,
-        (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4385,
-        (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5263,
-        (SpotId::Antarctica__West__Helipad, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Helipad) => 4385,
-        (SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__West__Shed_Entry) => 0,
-        (SpotId::Antarctica__West__Shed_Entry, SpotId::Antarctica__Shed__Interior) => 750,
-        (SpotId::Antarctica__West__Shed_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5263,
-        (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Boxes) => 0,
-        (SpotId::Antarctica__West__Boxes, SpotId::Antarctica__Building_1W__West_Entry) => 2000,
-        (SpotId::Antarctica__West__Boxes, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Shed__Interior, SpotId::Antarctica__West__Shed_Entry) => 750,
-        (SpotId::Antarctica__Shed__Interior, SpotId::Antarctica__Shed__Interior) => 0,
-        (SpotId::Antarctica__Shed__Interior, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Building_1W__West_Entry, SpotId::Antarctica__West__Boxes) => 750,
-        (
-            SpotId::Antarctica__Building_1W__West_Entry,
-            SpotId::Antarctica__Building_1W__West_Entry,
-        ) => 0,
-        (
-            SpotId::Antarctica__Building_1W__West_Entry,
-            SpotId::Antarctica__Building_1W__Connector,
-        ) => 2631,
-        (SpotId::Antarctica__Building_1W__West_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1W__West_Entry,
-        ) => 2631,
-        (
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1W__Connector,
-        ) => 0,
-        (
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1E__Connector,
-        ) => 1350,
-        (SpotId::Antarctica__Building_1W__Connector, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1W__Connector,
-        ) => 1350,
-        (
-            SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1E__Connector,
-        ) => 0,
-        (
-            SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 2631,
-        (SpotId::Antarctica__Building_1E__Connector, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__Building_1E__Connector,
-        ) => 2631,
-        (
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 0,
-        (
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 750,
-        (SpotId::Antarctica__Building_1E__East_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Antarctica__East__Building_1_Entry,
-            SpotId::Antarctica__Building_1E__East_Entry,
-        ) => 750,
-        (
-            SpotId::Antarctica__East__Building_1_Entry,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 0,
-        (SpotId::Antarctica__East__Building_1_Entry, SpotId::Antarctica__East__Save_Point) => 877,
-        (SpotId::Antarctica__East__Building_1_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Antarctica__East__Save_Point, SpotId::Antarctica__East__Building_1_Entry) => 877,
-        (SpotId::Antarctica__East__Save_Point, SpotId::Antarctica__East__Save_Point) => 0,
-        (SpotId::Antarctica__East__Save_Point, SpotId::Antarctica__East__Building_2_Entry) => 1754,
-        (SpotId::Antarctica__East__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__East__Building_2_Entry, SpotId::Antarctica__East__Save_Point) => 1754,
-        (
-            SpotId::Antarctica__East__Building_2_Entry,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 0,
-        (SpotId::Antarctica__East__Building_2_Entry, SpotId::Antarctica__Building_2L__Entry) => 750,
-        (SpotId::Antarctica__East__Building_2_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_1_Entry,
-        ) => 1754,
-        (SpotId::Antarctica__East__Building_2_Upper, SpotId::Antarctica__East__Save_Point) => 2631,
-        (
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_2_Entry,
-        ) => 4385,
-        (
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_2_Upper,
-        ) => 0,
-        (SpotId::Antarctica__East__Building_2_Upper, SpotId::Antarctica__Building_2U__Door) => 750,
-        (SpotId::Antarctica__East__Building_2_Upper, SpotId::Antarctica__Top__Power_Entry) => 3000,
-        (SpotId::Antarctica__East__Building_2_Upper, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Antarctica__Building_2L__Entry, SpotId::Antarctica__East__Building_2_Entry) => 750,
-        (SpotId::Antarctica__Building_2L__Entry, SpotId::Antarctica__Building_2L__Entry) => 0,
-        (SpotId::Antarctica__Building_2L__Entry, SpotId::Antarctica__Building_2U__Stairs) => 4000,
-        (SpotId::Antarctica__Building_2L__Entry, SpotId::Antarctica__Freight_Elevator__Left) => {
-            3000
-        }
-        (SpotId::Antarctica__Building_2L__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2L__Entry) => 2000,
-        (SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Stairs) => 0,
-        (SpotId::Antarctica__Building_2U__Stairs, SpotId::Antarctica__Building_2U__Door) => 3508,
-        (
-            SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U__Behind_Boxes,
-        ) => 3000,
-        (SpotId::Antarctica__Building_2U__Stairs, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__East__Building_2_Upper) => 750,
-        (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Stairs) => 3508,
-        (SpotId::Antarctica__Building_2U__Door, SpotId::Antarctica__Building_2U__Door) => 0,
-        (SpotId::Antarctica__Building_2U__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Antarctica__Building_2U__Behind_Boxes,
-            SpotId::Antarctica__Building_2U__Stairs,
-        ) => 1000,
-        (
-            SpotId::Antarctica__Building_2U__Behind_Boxes,
-            SpotId::Antarctica__Building_2U__Behind_Boxes,
-        ) => 0,
-        (SpotId::Antarctica__Building_2U__Behind_Boxes, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Antarctica__Top__Power_Entry, SpotId::Antarctica__East__Building_2_Upper) => 3500,
-        (SpotId::Antarctica__Top__Power_Entry, SpotId::Antarctica__Top__Power_Entry) => 0,
-        (SpotId::Antarctica__Top__Power_Entry, SpotId::Antarctica__Power_Room__Entry) => 750,
-        (SpotId::Antarctica__Top__Power_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Top__Power_Entry) => 750,
-        (SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Entry) => 0,
-        (SpotId::Antarctica__Power_Room__Entry, SpotId::Antarctica__Power_Room__Switch) => 1403,
-        (SpotId::Antarctica__Power_Room__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Entry) => 1403,
-        (SpotId::Antarctica__Power_Room__Switch, SpotId::Antarctica__Power_Room__Switch) => 0,
-        (SpotId::Antarctica__Power_Room__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Antarctica__Freight_Elevator__Left, SpotId::Antarctica__Building_2L__Entry) => {
-            3000
-        }
-        (
-            SpotId::Antarctica__Freight_Elevator__Left,
-            SpotId::Antarctica__Freight_Elevator__Left,
-        ) => 0,
-        (
-            SpotId::Antarctica__Freight_Elevator__Left,
-            SpotId::Antarctica__Freight_Elevator__Controls,
-        ) => 2105,
-        (SpotId::Antarctica__Freight_Elevator__Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Antarctica__Freight_Elevator__Left,
-        ) => 2105,
-        (
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Antarctica__Freight_Elevator__Controls,
-        ) => 0,
-        (
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-        ) => 15000,
-        (
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_11) => 0,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => 1929,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2299,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Top_Platform) => 1000,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Glacier__Grid_31_9_12__Midair) => 1350,
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__East_12) => 0,
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => 1929,
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2631,
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => 1777,
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Glacier__Grid_31_9_12__West_12) => 1350,
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => 1929,
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Staircase) => 0,
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => 3157,
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 999,
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => 1929,
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => 3599,
-        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Save_Point) => 0,
-        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2456,
-        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => 2456,
-        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => 3599,
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => 2456,
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Bunker_Entry) => 0,
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => 2631,
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Bunker_Interior__Entry) => 750,
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2631,
-        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Lake_Access) => 0,
-        (
-            SpotId::Ebih__Base_Camp__Lake_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 1350,
-        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => 2456,
-        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Behind_Vehicle) => 0,
-        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Building_Entry) => 1200,
-        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => 1754,
-        (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => 1754,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => 701,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Building_Entry) => 0,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => 2456,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => 3333,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Building_Interior__Entry) => 750,
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => 1754,
-        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => 0,
-        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 877,
-        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Tent_Interior__Entry) => 500,
-        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 877,
-        (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__West_13) => 0,
-        (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__By_Garage__East_13) => 1350,
-        (SpotId::Ebih__Base_Camp__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_11) => 0,
-        (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => 1052,
-        (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => 1000,
-        (SpotId::Ebih__Base_Camp__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Building_Entry) => 2280,
-        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => 1699,
-        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_Midair) => 0,
-        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => 1052,
-        (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__West_12, SpotId::Ebih__Base_Camp__West_12) => 0,
-        (SpotId::Ebih__Base_Camp__West_12, SpotId::Ebih__By_Garage__East_12) => 1350,
-        (SpotId::Ebih__Base_Camp__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Left_Platform, SpotId::Ebih__Base_Camp__Left_Platform) => 0,
-        (SpotId::Ebih__Base_Camp__Left_Platform, SpotId::Ebih__Base_Camp__Left_Platform_Moved) => {
-            1000
-        }
-        (SpotId::Ebih__Base_Camp__Left_Platform, SpotId::Ebih__Base_Camp__Top_Platform) => 1000,
-        (SpotId::Ebih__Base_Camp__Left_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Base_Camp__Left_Platform_Moved, SpotId::Ebih__Base_Camp__Left_Platform) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
-        ) => 0,
-        (SpotId::Ebih__Base_Camp__Left_Platform_Moved, SpotId::Ebih__Base_Camp__Top_Platform) => {
-            1000
-        }
-        (SpotId::Ebih__Base_Camp__Left_Platform_Moved, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => 3157,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => 2099,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2456,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Building_Entry) => 1754,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => 4210,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Left_Platform) => 1000,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Left_Platform_Moved) => {
-            1000
-        }
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Top_Platform) => 0,
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Base_Camp__Bunker_Entry) => 750,
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Entry) => 0,
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => 1052,
-        (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => 1052,
-        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Desk) => 0,
-        (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Base_Camp__Building_Entry) => 750,
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Entry) => 0,
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => 1754,
-        (SpotId::Ebih__Building_Interior__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => 1754,
-        (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Corner) => 0,
-        (SpotId::Ebih__Building_Interior__Corner, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => 500,
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Entry) => 0,
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 350,
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 350,
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Desk) => 0,
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__Base_Camp__West_13) => 1350,
-        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_13) => 0,
-        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => 1578,
-        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2631,
-        (SpotId::Ebih__By_Garage__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_Platform) => 0,
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
-            750
-        }
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Outcropping) => 1300,
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => 1052,
-        (SpotId::Ebih__By_Garage__East_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => 1929,
-        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_Platform) => {
-            350
-        }
-        (
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 0,
-        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__Crawlspace) => 701,
-        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__Outcropping) => 600,
-        (SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__By_Garage__Crawlspace, SpotId::Ebih__By_Garage__Crawlspace_Opening) => 701,
-        (SpotId::Ebih__By_Garage__Crawlspace, SpotId::Ebih__By_Garage__Crawlspace) => 0,
-        (SpotId::Ebih__By_Garage__Crawlspace, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2280,
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => 701,
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__Crawlspace_Opening) => 350,
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__Outcropping) => 0,
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1754,
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1799,
-        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__East_Bush) => 0,
-        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => 1403,
-        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => 1754,
-        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => 5438,
-        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_Bush) => 1300,
-        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Lower_Platform) => 0,
-        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__West_Bush) => 1800,
-        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => 2807,
-        (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => 1754,
-        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => 400,
-        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_Bush) => 0,
-        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => 1200,
-        (SpotId::Ebih__By_Garage__West_Bush, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 877,
-        (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_12) => 0,
-        (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__Grid_25_10_12__East_12) => 1350,
-        (SpotId::Ebih__By_Garage__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => 1799,
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__West_13) => 0,
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => 4035,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__Garage_Entry) => 0,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__Garage__Entry) => 750,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => 1578,
-        (SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_12) => 0,
-        (SpotId::Ebih__By_Garage__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__By_Garage__Garage_Entry) => 750,
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Entry) => 0,
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
-        (SpotId::Ebih__Garage__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Boxes) => 0,
-        (SpotId::Ebih__Garage__Boxes, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__By_Garage__West_12) => 1350,
-        (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__East_12) => 0,
-        (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Bush) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 701,
-        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => 1500,
-        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Ebih__Grid_25_10_12__West_12) => 0,
-        (SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Bush) => 750,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => 1052,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 599,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Door_Left) => 1200,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__West_11) => 1500,
-        (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Bush) => 800,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Door_Left) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Top_Platform) => 1200,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__West_11) => 1929,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Door) => 701,
-        (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => 1200,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            1399
-        }
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Door_Left) => 701,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Top_Platform) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__West_11) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__West_10) => 3200,
-        (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => 877,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Door_Left) => 1929,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__Top_Platform) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Grid_25_10_12__West_11) => 0,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Ebih__Waterfall__East_11) => 1350,
-        (SpotId::Ebih__Grid_25_10_12__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Door_Left) => 1929,
-        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__Top_Platform) => 1228,
-        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Grid_25_10_12__West_10) => 0,
-        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Ebih__Waterfall__East_10) => 1350,
-        (SpotId::Ebih__Grid_25_10_12__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__Door_Left) => 701,
-        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__Door) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Ebih__Grid_25_10_12__East_11) => 526,
-        (SpotId::Ebih__Grid_25_10_12__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_25_10_12__Door) => 526,
-        (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_25_10_12__East_11) => 0,
-        (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Ebih__Grid_26_10_11__West_11) => 1350,
-        (SpotId::Ebih__Grid_25_10_12__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__East_10, SpotId::Ebih__Grid_25_10_12__East_10) => 0,
-        (SpotId::Ebih__Grid_25_10_12__East_10, SpotId::Ebih__Grid_25_10_12__Hidden_Bush) => 350,
-        (SpotId::Ebih__Grid_25_10_12__East_10, SpotId::Ebih__Grid_26_10_11__West_10) => 1350,
-        (SpotId::Ebih__Grid_25_10_12__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_10_12__Hidden_Bush, SpotId::Ebih__Grid_25_10_12__East_10) => 900,
-        (SpotId::Ebih__Grid_25_10_12__Hidden_Bush, SpotId::Ebih__Grid_25_10_12__Hidden_Bush) => 0,
-        (SpotId::Ebih__Grid_25_10_12__Hidden_Bush, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Grid_25_10_12__West_10) => 1350,
-        (SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_10) => 0,
-        (SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => 701,
-        (SpotId::Ebih__Waterfall__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
-        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_Ledge) => 0,
-        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
-        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => 1929,
-        (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Grid_25_10_12__West_11) => 1350,
-        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__East_11) => 0,
-        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => 2631,
-        (SpotId::Ebih__Waterfall__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => 2631,
-        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__Near_East_Tree) => 0,
-        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__Waterfall_Right) => 1403,
-        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Near_East_Tree) => 1799,
-        (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => 0,
-        (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Alcove_Right) => 1578,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
-        (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => 1578,
-        (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Alcove_Right) => 0,
-        (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Alcove) => 1228,
-        (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1929,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 500,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 0,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 877,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 877,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 0,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-        ) => 1799,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 0,
-        (SpotId::Ebih__Waterfall__Waterfall_Center_Left, SpotId::Ebih__Waterfall__Alcove_Left) => {
-            300
-        }
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 1754,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2400,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Waterfall_Center_Left) => {
-            1250
-        }
-        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Alcove_Left) => 0,
-        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Alcove) => 1578,
-        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => 1052,
-        (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Alcove, SpotId::Ebih__Waterfall__Alcove_Right) => 1228,
-        (SpotId::Ebih__Waterfall__Alcove, SpotId::Ebih__Waterfall__Alcove_Left) => 1578,
-        (SpotId::Ebih__Waterfall__Alcove, SpotId::Ebih__Waterfall__Alcove) => 0,
-        (SpotId::Ebih__Waterfall__Alcove, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Under_Waterfall, SpotId::Ebih__Waterfall__Under_Waterfall) => 0,
-        (SpotId::Ebih__Waterfall__Under_Waterfall, SpotId::Ebih__Waterfall__Waterfall_Left) => 1100,
-        (SpotId::Ebih__Waterfall__Under_Waterfall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 1754,
-        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => 877,
-        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Waterfall_Left) => 0,
-        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => 2105,
-        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Lower_West_Tree) => 1799,
-        (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => 2105,
-        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Wall_Right) => 0,
-        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Wall_Left) => 701,
-        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Lower_West_Tree) => 1754,
-        (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__Wall_Right) => 701,
-        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__Wall_Left) => 0,
-        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => 526,
-        (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => 600,
-        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__West_11) => 0,
-        (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Ebih_West__East_11) => 1350,
-        (SpotId::Ebih__Waterfall__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2105,
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            1228
-        }
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Waterfall_Left) => 799,
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => 1754,
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Lower_West_Tree) => 0,
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__West_Lower_Path) => {
-            1000
-        }
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Waterfall_Left) => 1052,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => 1052,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Lower_West_Tree) => 701,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__West_Lower_Path) => 0,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__West_10) => 2280,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => 2280,
-        (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_10) => 0,
-        (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Ebih_West__East_10) => 1350,
-        (SpotId::Ebih__Waterfall__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_9) => 0,
-        (SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => 2280,
-        (SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Ebih_West__East_9) => 1350,
-        (SpotId::Ebih__Waterfall__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => 2280,
-        (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_Climb) => 0,
-        (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => 2000,
-        (SpotId::Ebih__Waterfall__West_Climb, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Ebih__Waterfall__West_Climb) => 500,
-        (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => 0,
-        (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Ebih__Waterfall__Below_Left_Switch) => {
-            1403
-        }
-        (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
-            1000
-        }
-        (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => {
-            1403
-        }
-        (
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 0,
-        (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => 701,
-        (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_Door_Left) => {
-            600
-        }
-        (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__Below_Left_Switch) => 701,
-        (SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__West_8) => 0,
-        (SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Waterfall__West_Door_Left) => 877,
-        (SpotId::Ebih__Waterfall__West_8, SpotId::Ebih__Ebih_West__East_8) => 1350,
-        (SpotId::Ebih__Waterfall__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__Below_Left_Switch) => {
-            299
-        }
-        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => 877,
-        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_Door_Left) => 0,
-        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_Door) => 877,
-        (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door_Left) => 877,
-        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door) => 0,
-        (SpotId::Ebih__Waterfall__West_Door, SpotId::Ebih__Waterfall__West_Door_Right) => 526,
-        (SpotId::Ebih__Waterfall__West_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Climb) => 900,
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => {
-            400
-        }
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Door) => 526,
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Door_Right) => 0,
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
-            199
-        }
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Main_Path) => 701,
-        (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Climb) => 700,
-        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Door_Right) => {
-            600
-        }
-        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__Middle_West_Tree) => 0,
-        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Main_Path) => {
-            1000
-        }
-        (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Climb) => 1000,
-        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Middle_West_Tree) => 526,
-        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__West_Main_Path) => 0,
-        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => 2456,
-        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Center_Main_Path) => {
-            3508
-        }
-        (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Near_East_Tree) => 5614,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Waterfall_Right) => 4210,
-        (
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2199,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Lower_West_Tree) => 2456,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Lower_Path) => 3157,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Cave_Entrance) => 0,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Cave__Entry) => 250,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__West_Main_Path) => {
-            3508
-        }
-        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => 1052,
-        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Center_Main_Path) => 0,
-        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => 2456,
-        (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Center_Main_Path) => 2456,
-        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Big_Tree) => 0,
-        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Below_Tree) => 701,
-        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => 1403,
-        (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Big_Tree) => 1200,
-        (SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Below_Tree) => 0,
-        (SpotId::Ebih__Waterfall__Below_Tree, SpotId::Ebih__Waterfall__Platform) => 701,
-        (SpotId::Ebih__Waterfall__Below_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Big_Tree) => 1500,
-        (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => 701,
-        (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Platform) => 0,
-        (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => 3333,
-        (SpotId::Ebih__Waterfall__Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => 3333,
-        (SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__East_8) => 0,
-        (SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Ebih_East__West_8) => 1350,
-        (SpotId::Ebih__Waterfall__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__East_7) => 0,
-        (SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 7719,
-        (SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Ebih_East__West_7) => 1350,
-        (SpotId::Ebih__Waterfall__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_Main_Path) => 2982,
-        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__Center_Main_Path) => 799,
-        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
-        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__Top_Waterfall) => 0,
-        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
-        (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
-        (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__West_7) => 0,
-        (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Ebih_West__East_7) => 1350,
-        (SpotId::Ebih__Waterfall__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Waterfall__West_10) => 1350,
-        (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__East_10) => 0,
-        (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1578,
-        (SpotId::Ebih__Ebih_West__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1578,
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Mid_Save) => 0,
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2105,
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 799,
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => 2105,
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 0,
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => 2807,
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Above_Alcove) => 1000,
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => 1754,
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2807,
-        (SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove) => 0,
-        (SpotId::Ebih__Ebih_West__Alcove, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 3157,
-        (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 1052,
-        (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Above_Alcove) => 0,
-        (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Waterfall__West_9) => 1350,
-        (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 999,
-        (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1578,
-        (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_9) => 0,
-        (SpotId::Ebih__Ebih_West__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Mid_Save) => 2000,
-        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2300,
-        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Block_Left) => 0,
-        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Ebih__Ebih_West__Block_Right) => 877,
-        (SpotId::Ebih__Ebih_West__Block_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Waterfall__West_7) => 1350,
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_7) => 0,
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => 526,
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1300,
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1100,
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => 526,
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Above_Chute) => 0,
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => 1052,
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1300,
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => 1100,
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 3250,
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => 3157,
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Chute) => 1052,
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Upper_Save) => 0,
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Medium_High_Platform) => {
-            1200
-        }
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => 1450,
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3450,
-        (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Above_Alcove) => {
-            3050
-        }
-        (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => 701,
-        (
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 0,
-        (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__High_Platform) => {
-            1200
-        }
-        (
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-        ) => 5300,
-        (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => 649,
-        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Medium_High_Platform) => {
-            350
-        }
-        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__High_Platform) => 0,
-        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__High_Ledge) => 1000,
-        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 750,
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => 701,
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Ledge) => 0,
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
-        (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__East_6) => 0,
-        (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Grid_21_1_5__West_6) => 1000,
-        (SpotId::Ebih__Ebih_West__East_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Waterfall__West_8) => 1350,
-        (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__East_8) => 0,
-        (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 877,
-        (SpotId::Ebih__Ebih_West__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_7) => 3500,
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Above_Chute) => 3500,
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 877,
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Middle) => 0,
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => 2105,
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 1800,
-        (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => 1754,
-        (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Middle) => 2105,
-        (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Cliff) => 0,
-        (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Above_Alcove) => 1052,
-        (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Giguna_Pillar) => 0,
-        (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Giguna__Giguna_Northeast__Inner_Wall) => {
-            3300
-        }
-        (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__West_9, SpotId::Ebih__Ebih_West__Giguna_Pillar) => 1000,
-        (SpotId::Ebih__Ebih_West__West_9, SpotId::Ebih__Ebih_West__West_9) => 0,
-        (SpotId::Ebih__Ebih_West__West_9, SpotId::Giguna__Giguna_Northeast__East_9) => 1350,
-        (SpotId::Ebih__Ebih_West__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Block_Left) => 877,
-        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Block_Right) => 0,
-        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__Refill_Station) => 700,
-        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => 1052,
-        (SpotId::Ebih__Ebih_West__Block_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Refill_Station) => 0,
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => 877,
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => 526,
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => 877,
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Waterfall__West_11) => 1350,
-        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => 877,
-        (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__East_11) => 0,
-        (SpotId::Ebih__Ebih_West__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Refill_Station) => 600,
-        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Above_Door) => 0,
-        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Below_Door) => 500,
-        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Ebih__Ebih_West__Small_Gap) => 600,
-        (SpotId::Ebih__Ebih_West__Above_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Refill_Station) => 1000,
-        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Above_Door) => 1799,
-        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Below_Door) => 0,
-        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => 1228,
-        (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => 877,
-        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => 350,
-        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Small_Gap) => 0,
-        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Left_of_Gap) => 1228,
-        (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Small_Gap) => 1228,
-        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Gap) => 0,
-        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => 826,
-        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Lower_Hill) => 500,
-        (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Below_Door) => 1228,
-        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Left_of_Switch) => 0,
-        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Ebih__Ebih_West__Lower_Hill) => 1200,
-        (SpotId::Ebih__Ebih_West__Left_of_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Gap) => 1000,
-        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Left_of_Switch) => 701,
-        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Hill) => 0,
-        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Ebih__Ebih_West__Lower_Cliff) => 1052,
-        (SpotId::Ebih__Ebih_West__Lower_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => 1200,
-        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => 0,
-        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Ebih__Ebih_West__Lower_Platform) => 800,
-        (SpotId::Ebih__Ebih_West__Lower_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Cliff) => 3599,
-        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Platform) => 0,
-        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__Lower_Save) => 350,
-        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__West_13) => 1929,
-        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Ebih__Ebih_West__East_13) => 4736,
-        (SpotId::Ebih__Ebih_West__Lower_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Platform) => 1200,
-        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__Lower_Save) => 0,
-        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__West_13) => 1578,
-        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Ebih__Ebih_West__East_13) => 5087,
-        (SpotId::Ebih__Ebih_West__Lower_Save, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Hill) => 1403,
-        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__Lower_Cliff) => 750,
-        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_High_Cliff) => 0,
-        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => 877,
-        (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_High_Cliff) => 877,
-        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_Fork) => 0,
-        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => 1200,
-        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_12) => 1052,
-        (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => 1052,
-        (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_11) => 0,
-        (SpotId::Ebih__Ebih_West__West_11, SpotId::Giguna__Giguna_Northeast__East_11) => 1350,
-        (SpotId::Ebih__Ebih_West__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__West_12, SpotId::Ebih__Ebih_West__West_Fork) => 4800,
-        (SpotId::Ebih__Ebih_West__West_12, SpotId::Ebih__Ebih_West__West_12) => 0,
-        (SpotId::Ebih__Ebih_West__West_12, SpotId::Giguna__Wasteland__East_12) => 1350,
-        (SpotId::Ebih__Ebih_West__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => 1578,
-        (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__West_13) => 0,
-        (SpotId::Ebih__Ebih_West__West_13, SpotId::Giguna__Wasteland__East_13) => 1350,
-        (SpotId::Ebih__Ebih_West__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => 5087,
-        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__East_13) => 0,
-        (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Vertical_Interchange__West_13) => 1350,
-        (SpotId::Ebih__Ebih_West__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Waterfall__Cave_Entrance) => 250,
-        (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Cave__Entry) => 0,
-        (SpotId::Ebih__Cave__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Waterfall__East_8) => 1350,
-        (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__West_8) => 0,
-        (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => 1052,
-        (SpotId::Ebih__Ebih_East__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__West_8) => 1052,
-        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Moving_Platform) => 0,
-        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => 2280,
-        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Ebih__Ebih_East__Middle_Platform) => {
-            3700
-        }
-        (SpotId::Ebih__Ebih_East__Moving_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Moving_Platform) => 2280,
-        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Ledge_End) => 0,
-        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => 699,
-        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Ebih__Ebih_East__Corner) => 1403,
-        (SpotId::Ebih__Ebih_East__Ledge_End, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Ledge_End) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 0,
-        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Corner) => 877,
-        (SpotId::Ebih__Ebih_East__Lower_Moving_Platform, SpotId::Ebih__Ebih_East__Dispenser) => {
-            4500
-        }
-        (
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Ebih__Ebih_East__Corner, SpotId::Ebih__Ebih_East__Corner) => 0,
-        (SpotId::Ebih__Ebih_East__Corner, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__Dispenser, SpotId::Ebih__Ebih_East__Ledge_End) => 5000,
-        (SpotId::Ebih__Ebih_East__Dispenser, SpotId::Ebih__Ebih_East__Dispenser) => 0,
-        (SpotId::Ebih__Ebih_East__Dispenser, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => 2631,
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 350,
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
-            999
-        }
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__East_Ledge) => 0,
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => 1200,
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__East_Hill) => 1403,
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Moving_Platform) => {
-            1754
-        }
-        (
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 1399,
-        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Ledge) => 877,
-        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Middle_Platform) => 0,
-        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__Upper_Ledge) => 2400,
-        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Ebih__Ebih_East__East_Hill) => 2280,
-        (SpotId::Ebih__Ebih_East__Middle_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_8) => 1228,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => 1000,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 2105,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => 1578,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__Upper_Ledge) => 0,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Ebih__Ebih_East__West_7) => 1228,
-        (SpotId::Ebih__Ebih_East__Upper_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Waterfall__East_7) => 1350,
-        (SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => 1228,
-        (SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__West_7) => 0,
-        (SpotId::Ebih__Ebih_East__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_Ledge) => 1403,
-        (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__Middle_Platform) => 2280,
-        (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_Hill) => 0,
-        (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => 1578,
-        (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Ebih_East__East_9, SpotId::Ebih__Ebih_East__East_Hill) => 2000,
-        (SpotId::Ebih__Ebih_East__East_9, SpotId::Ebih__Ebih_East__East_9) => 0,
-        (SpotId::Ebih__Ebih_East__East_9, SpotId::Ebih__Observation_Tower_Room__West_9) => 1350,
-        (SpotId::Ebih__Ebih_East__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Ebih_West__East_6) => 1350,
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__West_6) => 0,
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 1578,
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => 1578,
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 0,
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => 1578,
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => 1578,
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__East_6) => 0,
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Boss_Room__West_6) => 1350,
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Grid_21_1_5__East_6) => 1350,
-        (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__West_6) => 0,
-        (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => 3684,
-        (SpotId::Ebih__Boss_Room__West_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => 2631,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Boss) => 0,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 1052,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => 2456,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => 3684,
-        (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => 1799,
-        (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Past_Boss) => 0,
-        (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Boss) => 2456,
-        (SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1403,
-        (SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 0,
-        (SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Ebih__Boss_Room__Lower_Ledge) => 1000,
-        (SpotId::Ebih__Boss_Room__Lower_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__Lower_Tree) => 701,
-        (SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 0,
-        (SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Ebih__Boss_Room__East_6) => 877,
-        (SpotId::Ebih__Boss_Room__Lower_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => 877,
-        (SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__East_6) => 0,
-        (SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Drone_Room__West_6) => 1000,
-        (SpotId::Ebih__Boss_Room__East_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__East_4) => 0,
-        (SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => 1403,
-        (SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => 2982,
-        (SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Drone_Room__West_4) => 1000,
-        (SpotId::Ebih__Boss_Room__East_4, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 500,
-        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__East_Ledge) => 0,
-        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 877,
-        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1578,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 1000,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 877,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Upper_Tree) => 0,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => 1578,
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => 1052,
-        (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Upper_Tree) => 1578,
-        (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__High_Platform) => 0,
-        (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__West_5) => 3684,
-        (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_6) => 1500,
-        (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => 2631,
-        (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => 3684,
-        (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__West_5) => 0,
-        (SpotId::Ebih__Boss_Room__West_5, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Boss_Room__East_6) => 1000,
-        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__West_6) => 0,
-        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => 526,
-        (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => 1228,
-        (SpotId::Ebih__Drone_Room__West_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Boss_Room__East_4) => 1000,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1701,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_4) => 0,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1600,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => 1400,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__West_6) => 1000,
-        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Pit_Left) => 0,
-        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
-        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Moving_Platform) => 7000,
-        (SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Pit_Left) => 1200,
-        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Portal) => 0,
-        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Item) => 701,
-        (SpotId::Ebih__Drone_Room__Portal, SpotId::Ebih__Drone_Room__Portal_Exit) => 300000,
-        (SpotId::Ebih__Drone_Room__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Portal) => 701,
-        (SpotId::Ebih__Drone_Room__Item, SpotId::Ebih__Drone_Room__Item) => 0,
-        (SpotId::Ebih__Drone_Room__Item, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__West_6) => 1228,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => 701,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal) => 600,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Item) => 1052,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Middle_Platform) => 0,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Ebih__Drone_Room__Portal_Exit) => 2500,
-        (SpotId::Ebih__Drone_Room__Middle_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => 1578,
-        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Middle_Platform) => 1403,
-        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Portal_Exit) => 0,
-        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Moving_Platform) => 5000,
-        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__Tree) => 701,
-        (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__West_6) => 1578,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => 1400,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Portal_Exit) => 450,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Moving_Platform) => 0,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Left_Platform) => 701,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__Tree) => 701,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Ebih__Drone_Room__East_4) => 1500,
-        (SpotId::Ebih__Drone_Room__Moving_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_6) => 1501,
-        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__West_4) => 877,
-        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Pit_Left) => 1500,
-        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Middle_Platform) => {
-            1326
-        }
-        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Ebih__Drone_Room__Left_Platform) => 0,
-        (SpotId::Ebih__Drone_Room__Left_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => 701,
-        (SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Tree) => 0,
-        (SpotId::Ebih__Drone_Room__Tree, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Portal_Exit) => 1578,
-        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Moving_Platform) => 1578,
-        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__Tree) => 877,
-        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Drone_Room__East_4) => 0,
-        (SpotId::Ebih__Drone_Room__East_4, SpotId::Ebih__Grid_25_2_6__West_4) => 1350,
-        (SpotId::Ebih__Drone_Room__East_4, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_2_6__West_4, SpotId::Ebih__Drone_Room__East_4) => 1350,
-        (SpotId::Ebih__Grid_25_2_6__West_4, SpotId::Ebih__Grid_25_2_6__West_4) => 0,
-        (SpotId::Ebih__Grid_25_2_6__West_4, SpotId::Ebih__Grid_25_2_6__Pit) => 6250,
-        (SpotId::Ebih__Grid_25_2_6__West_4, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_25_2_6__Pit, SpotId::Ebih__Grid_25_2_6__Pit) => 0,
-        (SpotId::Ebih__Grid_25_2_6__Pit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_25_10_12__East_11) => 1350,
-        (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_26_10_11__West_11) => 0,
-        (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => 1228,
-        (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__Middle_Bottom, SpotId::Ebih__Grid_26_10_11__West_11) => 1228,
-        (
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-        ) => 0,
-        (SpotId::Ebih__Grid_26_10_11__Middle_Bottom, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => {
-            701
-        }
-        (
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-        ) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__Middle_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Grid_26_10_11__Under_Ledge, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => {
-            701
-        }
-        (SpotId::Ebih__Grid_26_10_11__Under_Ledge, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => 0,
-        (SpotId::Ebih__Grid_26_10_11__Under_Ledge, SpotId::Ebih__Grid_26_10_11__Ledge) => 800,
-        (SpotId::Ebih__Grid_26_10_11__Under_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => 1052,
-        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Under_Ledge) => 350,
-        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Ledge) => 0,
-        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Ebih__Grid_26_10_11__Middle_Platform) => 1052,
-        (SpotId::Ebih__Grid_26_10_11__Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__Middle_Platform, SpotId::Ebih__Grid_26_10_11__West_11) => {
-            1228
-        }
-        (
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-        ) => 0,
-        (
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 1200,
-        (SpotId::Ebih__Grid_26_10_11__Middle_Platform, SpotId::Ebih__Grid_26_10_11__West_10) => {
-            2800
-        }
-        (SpotId::Ebih__Grid_26_10_11__Middle_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__West_11) => 1403,
-        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__Ledge) => 877,
-        (
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-        ) => 0,
-        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__West_10) => 2000,
-        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Ebih__Grid_26_10_11__Cliff) => 1150,
-        (SpotId::Ebih__Grid_26_10_11__Upper_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_25_10_12__East_10) => 1350,
-        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => 1526,
-        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__Upper_Platform) => 1403,
-        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_10) => 0,
-        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__Upper_Platform) => 526,
-        (SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__Cliff) => 0,
-        (SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Ebih__Grid_26_10_11__East_10) => 1228,
-        (SpotId::Ebih__Grid_26_10_11__Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Ebih__Grid_26_10_11__Cliff) => 1228,
-        (SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Ebih__Grid_26_10_11__East_10) => 0,
-        (SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Ebih__Observation_Tower_Room__West_10) => {
-            1350
-        }
-        (SpotId::Ebih__Grid_26_10_11__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Ebih__Observation_Tower_Room__West_9, SpotId::Ebih__Ebih_East__East_9) => 1350,
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-        ) => 0,
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 1578,
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2456,
-        (SpotId::Ebih__Observation_Tower_Room__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-        ) => 3000,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 0,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 1578,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1699,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-        ) => 3599,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 0,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 1578,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1578,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 600,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-        ) => 0,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 2105,
-        (
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 1052,
-        (SpotId::Ebih__Observation_Tower_Room__Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Observation_Tower_Room__West_10, SpotId::Ebih__Grid_26_10_11__East_10) => {
-            1350
-        }
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-        ) => 1578,
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-        ) => 2105,
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-        ) => 0,
-        (SpotId::Ebih__Observation_Tower_Room__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Observation_Tower_Room__East_11, SpotId::Ebih__Base_Camp__West_11) => 1000,
-        (
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-        ) => 2000,
-        (
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-        ) => 0,
-        (SpotId::Ebih__Observation_Tower_Room__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Ebih__Vertical_Interchange__West_13, SpotId::Ebih__Ebih_West__East_13) => 1350,
-        (
-            SpotId::Ebih__Vertical_Interchange__West_13,
-            SpotId::Ebih__Vertical_Interchange__West_13,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__West_13,
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-        ) => 701,
-        (
-            SpotId::Ebih__Vertical_Interchange__West_13,
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-        ) => 1052,
-        (SpotId::Ebih__Vertical_Interchange__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            SpotId::Ebih__Vertical_Interchange__West_13,
-        ) => 701,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-        ) => 1200,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-        ) => 1929,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-            SpotId::Ebih__Vertical_Interchange__West_13,
-        ) => 1052,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-        ) => 350,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-            SpotId::Ebih__Vertical_Interchange__Door,
-        ) => 526,
-        (SpotId::Ebih__Vertical_Interchange__Door_West, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Vertical_Interchange__Door,
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-        ) => 526,
-        (SpotId::Ebih__Vertical_Interchange__Door, SpotId::Ebih__Vertical_Interchange__Door) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door,
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-        ) => 526,
-        (SpotId::Ebih__Vertical_Interchange__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-            SpotId::Ebih__Vertical_Interchange__Door,
-        ) => 526,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-        ) => 526,
-        (SpotId::Ebih__Vertical_Interchange__Door_East, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-        ) => 1929,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Ebih__Vertical_Interchange__East_13,
-        ) => 600,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => 400,
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_13,
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-        ) => 526,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_13,
-            SpotId::Ebih__Vertical_Interchange__East_13,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_13,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => 500,
-        (SpotId::Ebih__Vertical_Interchange__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-        ) => 3000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            SpotId::Ebih__Vertical_Interchange__East_13,
-        ) => 3000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-        ) => 2280,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => 2280,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-        ) => 950,
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-        ) => 5399,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-        ) => 526,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-        ) => 526,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-        ) => 1799,
-        (
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 399,
-        (
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-        ) => 1200,
-        (
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-        ) => 1052,
-        (
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 500,
-        (
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-        ) => 350,
-        (
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-        ) => 1403,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-        ) => 799,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 1299,
-        (
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-        ) => 1052,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-        ) => 1052,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-        ) => 3599,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__East_15,
-        ) => 701,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 701,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Ebih__Vertical_Interchange__East_15, SpotId::Amagi__West_Lake__West_15) => 1350,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_15,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-        ) => 701,
-        (
-            SpotId::Ebih__Vertical_Interchange__East_15,
-            SpotId::Ebih__Vertical_Interchange__East_15,
-        ) => 0,
-        (SpotId::Ebih__Vertical_Interchange__East_15, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-        ) => 526,
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__Switch,
-        ) => 500,
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__South,
-        ) => 600,
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 600,
-        (
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-        ) => 0,
-        (
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            SpotId::Ebih__Vertical_Interchange__Switch,
-        ) => 701,
-        (
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            SpotId::Ebih__Vertical_Interchange__South,
-        ) => 400,
-        (
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Switch,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 1000,
-        (
-            SpotId::Ebih__Vertical_Interchange__Switch,
-            SpotId::Ebih__Vertical_Interchange__Switch,
-        ) => 0,
-        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Ebih__Vertical_Interchange__South) => {
-            350
-        }
-        (SpotId::Ebih__Vertical_Interchange__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Ebih__Vertical_Interchange__South,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-        ) => 1000,
-        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__Switch) => {
-            600
-        }
-        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Ebih__Vertical_Interchange__South) => 0,
-        (SpotId::Ebih__Vertical_Interchange__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__Save_Point) => 0,
-        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
-            3508
-        }
-        (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
-            3508
-        }
-        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__East_Passage) => 0,
-        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Column) => 2400,
-        (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => 799,
-        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__Column) => 0,
-        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
-        (SpotId::Giguna_Breach__Peak__Column, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__West_7, SpotId::Giguna_Breach__Peak__West_7) => 0,
-        (SpotId::Giguna_Breach__Peak__West_7, SpotId::Giguna_Breach__Chimney__East_7) => 1600,
-        (SpotId::Giguna_Breach__Peak__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__East_6) => 0,
-        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => 700,
-        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Ascent__West_6) => 1600,
-        (SpotId::Giguna_Breach__Peak__East_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => 701,
-        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_East) => 0,
-        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_West) => 2105,
-        (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => 2105,
-        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_West) => 0,
-        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Portal) => 1052,
-        (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => 1000,
-        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Portal) => 0,
-        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna__Ruins_Top__Save_Point) => 3600,
-        (SpotId::Giguna_Breach__Peak__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Peak__West_7) => 1600,
-        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__East_7) => 0,
-        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Giguna_Breach__Chimney__Top) => 1200,
-        (SpotId::Giguna_Breach__Chimney__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => 1052,
-        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Top) => 0,
-        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
-            1949
-        }
-        (SpotId::Giguna_Breach__Chimney__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Chimney__Middle_Platform, SpotId::Giguna_Breach__Chimney__Top) => {
-            7199
-        }
-        (
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            SpotId::Giguna_Breach__Chimney__East_9,
-        ) => 1403,
-        (
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            SpotId::Giguna_Breach__Chimney__South,
-        ) => 450,
-        (
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Chimney__East_9,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-        ) => 1403,
-        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__East_9) => 0,
-        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Chimney__South) => 1403,
-        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Giguna_Breach__Central__West_9) => 1600,
-        (SpotId::Giguna_Breach__Chimney__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__Chimney__South,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-        ) => 1200,
-        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__East_9) => 1403,
-        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Chimney__South) => 0,
-        (SpotId::Giguna_Breach__Chimney__South, SpotId::Giguna_Breach__Below_Chimney__North) => {
-            1600
-        }
-        (SpotId::Giguna_Breach__Chimney__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__East_8) => 0,
-        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Chimney__Cache) => 526,
-        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Giguna_Breach__Central__West_8) => 1350,
-        (SpotId::Giguna_Breach__Chimney__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__East_8) => 526,
-        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Giguna_Breach__Chimney__Cache) => 0,
-        (SpotId::Giguna_Breach__Chimney__Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__North,
-            SpotId::Giguna_Breach__Below_Chimney__North,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__North,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-        ) => 350,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__North,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-        ) => 350,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__North,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-        ) => 600,
-        (SpotId::Giguna_Breach__Below_Chimney__North, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Giguna_Breach__Below_Chimney__North,
-        ) => 600,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-        ) => 701,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-        ) => 500,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-        ) => 1403,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-        ) => 701,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-        ) => 350,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-        ) => 1200,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-            SpotId::Giguna_Breach__Cubby__Entrance,
-        ) => 1600,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-        ) => 1403,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-        ) => 1754,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-        ) => 1799,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-            SpotId::Giguna_Breach__SW_Save__North,
-        ) => 1600,
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Cubby__Entrance,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-        ) => 1600,
-        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Entrance) => 0,
-        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => 701,
-        (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => 1200,
-        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Rocks) => 0,
-        (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__SW_Save__North,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-        ) => 1600,
-        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__North) => 0,
-        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Lower_Platform) => {
-            1000
-        }
-        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => 600,
-        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => 1500,
-        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => 1403,
-        (SpotId::Giguna_Breach__SW_Save__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            SpotId::Giguna_Breach__SW_Save__Side_Door,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 500,
-        (
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            SpotId::Giguna_Breach__SW_Save__East_12,
-        ) => 1052,
-        (
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__North) => 1200,
-        (
-            SpotId::Giguna_Breach__SW_Save__Side_Door,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-        ) => 877,
-        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Side_Door) => 0,
-        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__West_11) => 877,
-        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
-            899
-        }
-        (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__Side_Door) => 877,
-        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Giguna_Breach__SW_Save__West_11) => 0,
-        (SpotId::Giguna_Breach__SW_Save__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__SW_Save__Save_Point,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__SW_Save__Save_Point,
-            SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 0,
-        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
-            1403
-        }
-        (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__SW_Save__East_12,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-        ) => 1000,
-        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
-            1403
-        }
-        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__SW_Save__East_12) => 0,
-        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Giguna_Breach__Robopede__West) => 1600,
-        (SpotId::Giguna_Breach__SW_Save__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__SW_Save__East_12) => 1000,
-        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__West) => 0,
-        (SpotId::Giguna_Breach__Robopede__West, SpotId::Giguna_Breach__Robopede__Center) => 3508,
-        (SpotId::Giguna_Breach__Robopede__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__West) => 3508,
-        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__Center) => 0,
-        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => 1403,
-        (SpotId::Giguna_Breach__Robopede__Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__Center) => 1403,
-        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Robopede__North) => 0,
-        (SpotId::Giguna_Breach__Robopede__North, SpotId::Giguna_Breach__Grid_14_10_11__South) => {
-            1600
-        }
-        (SpotId::Giguna_Breach__Robopede__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Grid_14_10_11__South, SpotId::Giguna_Breach__Robopede__North) => {
-            1600
-        }
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-        ) => 1403,
-        (SpotId::Giguna_Breach__Grid_14_10_11__South, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-        ) => 1403,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-            SpotId::Giguna_Breach__Fire_Room__West_11,
-        ) => 1600,
-        (SpotId::Giguna_Breach__Grid_14_10_11__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-        ) => 1300,
-        (SpotId::Giguna_Breach__Grid_14_10_11__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-        ) => 1400,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-        ) => 877,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
-        ) => 600,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-        ) => 1600,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-        ) => 526,
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
-        ) => 0,
-        (SpotId::Giguna_Breach__Grid_14_10_11__North, SpotId::Giguna_Breach__Central__South) => {
-            1600
-        }
-        (SpotId::Giguna_Breach__Grid_14_10_11__North, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_11,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-        ) => 1600,
-        (SpotId::Giguna_Breach__Fire_Room__West_11, SpotId::Giguna_Breach__Fire_Room__West_11) => 0,
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_11,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-        ) => 1754,
-        (SpotId::Giguna_Breach__Fire_Room__West_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-            SpotId::Giguna_Breach__Fire_Room__West_11,
-        ) => 1754,
-        (
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta,
-        ) => 1403,
-        (
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-        ) => 1300,
-        (SpotId::Giguna_Breach__Fire_Room__First_Fire, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Fire_Room__Cuesta,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-        ) => 1403,
-        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__Cuesta) => 0,
-        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Giguna_Breach__Fire_Room__South) => 1754,
-        (SpotId::Giguna_Breach__Fire_Room__Cuesta, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__Cuesta) => 1500,
-        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__South) => 0,
-        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Fire_Room__East_11) => {
-            1403
-        }
-        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Giguna_Breach__Antechamber__North) => {
-            1600
-        }
-        (SpotId::Giguna_Breach__Fire_Room__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__South) => {
-            1403
-        }
-        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Fire_Room__East_11) => 0,
-        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Giguna_Breach__Slingshot__West) => 1600,
-        (SpotId::Giguna_Breach__Fire_Room__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-        ) => 701,
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta,
-        ) => 2105,
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Giguna_Breach__Fire_Room__East_10,
-        ) => 700,
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-        ) => 1600,
-        (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-        ) => 1052,
-        (SpotId::Giguna_Breach__Fire_Room__East_10, SpotId::Giguna_Breach__Fire_Room__East_10) => 0,
-        (SpotId::Giguna_Breach__Fire_Room__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Fire_Room__East_11) => 1600,
-        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__West) => 0,
-        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => 1403,
-        (SpotId::Giguna_Breach__Slingshot__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__West) => 1403,
-        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Column) => 0,
-        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => 701,
-        (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Slingshot__Ravine, SpotId::Giguna_Breach__Slingshot__Column) => {
-            1000
-        }
-        (SpotId::Giguna_Breach__Slingshot__Ravine, SpotId::Giguna_Breach__Slingshot__Ravine) => 0,
-        (SpotId::Giguna_Breach__Slingshot__Ravine, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Antechamber__North, SpotId::Giguna_Breach__Fire_Room__South) => {
-            1600
-        }
-        (SpotId::Giguna_Breach__Antechamber__North, SpotId::Giguna_Breach__Antechamber__North) => 0,
-        (SpotId::Giguna_Breach__Antechamber__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Central__West_9, SpotId::Giguna_Breach__Chimney__East_9) => 1600,
-        (SpotId::Giguna_Breach__Central__West_9, SpotId::Giguna_Breach__Central__West_9) => 0,
-        (SpotId::Giguna_Breach__Central__West_9, SpotId::Giguna_Breach__Central__Wall) => 1000,
-        (SpotId::Giguna_Breach__Central__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__West_9) => 701,
-        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__Wall) => 0,
-        (SpotId::Giguna_Breach__Central__Wall, SpotId::Giguna_Breach__Central__South) => 701,
-        (
-            SpotId::Giguna_Breach__Central__Wall,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-        ) => 2000,
-        (SpotId::Giguna_Breach__Central__Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Central__South, SpotId::Giguna_Breach__Grid_14_10_11__North) => {
-            1600
-        }
-        (SpotId::Giguna_Breach__Central__South, SpotId::Giguna_Breach__Central__South) => 0,
-        (
-            SpotId::Giguna_Breach__Central__South,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-        ) => 1600,
-        (SpotId::Giguna_Breach__Central__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Giguna_Breach__Central__South,
-        ) => 1228,
-        (
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Giguna_Breach__Central__West_Statue,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-        ) => 1228,
-        (
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Central__West_Statue,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-        ) => 299,
-        (
-            SpotId::Giguna_Breach__Central__West_Statue,
-            SpotId::Giguna_Breach__Central__West_Statue,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Central__West_Statue,
-            SpotId::Giguna_Breach__Central__Statuette,
-        ) => 1929,
-        (
-            SpotId::Giguna_Breach__Central__West_Statue,
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-        ) => 1228,
-        (SpotId::Giguna_Breach__Central__West_Statue, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna_Breach__Central__Statuette, SpotId::Giguna_Breach__Central__Statuette) => 0,
-        (SpotId::Giguna_Breach__Central__Statuette, SpotId::Giguna_Breach__Central__Tunnel) => 500,
-        (
-            SpotId::Giguna_Breach__Central__Statuette,
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-        ) => 3157,
-        (SpotId::Giguna_Breach__Central__Statuette, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Statuette) => 350,
-        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__Tunnel) => 0,
-        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Giguna_Breach__Central__West_8) => 526,
-        (SpotId::Giguna_Breach__Central__Tunnel, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Chimney__East_8) => 1350,
-        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__Tunnel) => 526,
-        (SpotId::Giguna_Breach__Central__West_8, SpotId::Giguna_Breach__Central__West_8) => 0,
-        (SpotId::Giguna_Breach__Central__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-        ) => 1228,
-        (
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-            SpotId::Giguna_Breach__Central__West_Statue,
-        ) => 1228,
-        (
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-        ) => 0,
-        (
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-            SpotId::Giguna_Breach__Central__East_Brick,
-        ) => 499,
-        (SpotId::Giguna_Breach__Central__Middle_Statue, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna_Breach__Central__East_Brick,
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-        ) => 1000,
-        (
-            SpotId::Giguna_Breach__Central__East_Brick,
-            SpotId::Giguna_Breach__Central__East_Brick,
-        ) => 0,
-        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Giguna_Breach__Central__East_9) => {
-            2105
-        }
-        (SpotId::Giguna_Breach__Central__East_Brick, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna_Breach__Central__East_9, SpotId::Giguna_Breach__Central__East_Brick) => {
-            2000
-        }
-        (SpotId::Giguna_Breach__Central__East_9, SpotId::Giguna_Breach__Central__East_9) => 0,
-        (SpotId::Giguna_Breach__Central__East_9, SpotId::Giguna_Breach__Ascent__West_9) => 1600,
-        (SpotId::Giguna_Breach__Central__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Central__East_9) => 1600,
-        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__West_9) => 0,
-        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Giguna_Breach__Ascent__Bottom) => 701,
-        (SpotId::Giguna_Breach__Ascent__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__West_9) => 701,
-        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__Bottom) => 0,
-        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Giguna_Breach__Ascent__Top) => 9000,
-        (SpotId::Giguna_Breach__Ascent__Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => 4605,
-        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Top) => 0,
-        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => 1403,
-        (SpotId::Giguna_Breach__Ascent__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Peak__East_6) => 1600,
-        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => 1403,
-        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__West_6) => 0,
-        (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Ebih__Ebih_West__West_9) => 1350,
-        (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Giguna__Giguna_Northeast__East_9) => 0,
-        (SpotId::Giguna__Giguna_Northeast__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__East_9,
-        ) => 1200,
-        (
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-        ) => 2807,
-        (SpotId::Giguna__Giguna_Northeast__Inner_Wall, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1403,
-        (
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 699,
-        (
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-        ) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__Crow_Eating, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 0,
-        (SpotId::Giguna__Giguna_Northeast__Save_Point, SpotId::Giguna__Giguna_Northeast__Step) => {
-            701
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 1052,
-        (
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-        ) => 2000,
-        (SpotId::Giguna__Giguna_Northeast__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__Save_Point) => {
-            701
-        }
-        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__Step) => 0,
-        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__West_10) => 877,
-        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__West_9) => 1700,
-        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Giguna__Giguna_Northeast__Gate_Vent) => {
-            2300
-        }
-        (SpotId::Giguna__Giguna_Northeast__Step, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__West_10, SpotId::Giguna__Giguna_Northeast__Step) => 877,
-        (SpotId::Giguna__Giguna_Northeast__West_10, SpotId::Giguna__Giguna_Northeast__West_10) => 0,
-        (SpotId::Giguna__Giguna_Northeast__West_10, SpotId::Giguna__Carnelian__East_10) => 1350,
-        (SpotId::Giguna__Giguna_Northeast__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => 877,
-        (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__West_9) => 0,
-        (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Ruins_East__East_9) => 1350,
-        (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1052,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-        ) => 1250,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 2500,
-        (SpotId::Giguna__Giguna_Northeast__Gate_Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1754,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 1928,
-        (SpotId::Giguna__Giguna_Northeast__Gate_Vent, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-        ) => 2500,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-        ) => 877,
-        (SpotId::Giguna__Giguna_Northeast__Gate_Button, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 877,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__Gate_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__East_11,
-        ) => 526,
-        (
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 3157,
-        (
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__East_11, SpotId::Ebih__Ebih_West__West_11) => 1350,
-        (
-            SpotId::Giguna__Giguna_Northeast__East_11,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 600,
-        (SpotId::Giguna__Giguna_Northeast__East_11, SpotId::Giguna__Giguna_Northeast__East_11) => 0,
-        (SpotId::Giguna__Giguna_Northeast__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-        ) => 3157,
-        (
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Switch,
-        ) => 701,
-        (
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Door,
-        ) => 1403,
-        (
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Giguna_Northeast__Switch,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__Switch, SpotId::Giguna__Giguna_Northeast__Switch) => 0,
-        (SpotId::Giguna__Giguna_Northeast__Switch, SpotId::Giguna__Giguna_Northeast__Door) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Giguna_Northeast__Door,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-        ) => 1403,
-        (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Giguna__Giguna_Northeast__Door) => 0,
-        (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Giguna__Giguna_Northeast__Vault) => 1052,
-        (SpotId::Giguna__Giguna_Northeast__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Giguna__Giguna_Northeast__Door) => 700,
-        (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Giguna__Giguna_Northeast__Vault) => 0,
-        (SpotId::Giguna__Giguna_Northeast__Vault, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Giguna_Northeast__West_10) => 1350,
-        (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_10) => 0,
-        (SpotId::Giguna__Carnelian__East_10, SpotId::Giguna__Carnelian__East_Cliff) => 2105,
-        (SpotId::Giguna__Carnelian__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_10) => 2105,
-        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__East_Cliff) => 0,
-        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Upper_Susar) => 1754,
-        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Middle_Platforms) => 877,
-        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Giguna__Carnelian__Switch) => 1000,
-        (SpotId::Giguna__Carnelian__East_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__East_Cliff) => 1754,
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Upper_Susar) => 0,
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Middle_Platforms) => {
-            877
-        }
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Giguna__Carnelian__Upper_Path) => 877,
-        (SpotId::Giguna__Carnelian__Upper_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__East_Cliff) => {
-            1500
-        }
-        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Upper_Susar) => {
-            1750
-        }
-        (
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-        ) => 0,
-        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Switch) => 699,
-        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Giguna__Carnelian__Rock) => 400,
-        (SpotId::Giguna__Carnelian__Middle_Platforms, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Switch) => 0,
-        (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Door) => 701,
-        (SpotId::Giguna__Carnelian__Switch, SpotId::Giguna__Carnelian__Rock) => 701,
-        (SpotId::Giguna__Carnelian__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Switch) => 701,
-        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Door) => 0,
-        (SpotId::Giguna__Carnelian__Door, SpotId::Giguna__Carnelian__Vault) => 1052,
-        (SpotId::Giguna__Carnelian__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Vault, SpotId::Giguna__Carnelian__Door) => 1052,
-        (SpotId::Giguna__Carnelian__Vault, SpotId::Giguna__Carnelian__Vault) => 0,
-        (SpotId::Giguna__Carnelian__Vault, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Middle_Platforms) => 1200,
-        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Switch) => 701,
-        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Rock) => 0,
-        (SpotId::Giguna__Carnelian__Rock, SpotId::Giguna__Carnelian__Lower_Susar) => 1403,
-        (SpotId::Giguna__Carnelian__Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__Rock) => 1403,
-        (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__Lower_Susar) => 0,
-        (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Giguna__Carnelian__West_Ledge) => 1000,
-        (SpotId::Giguna__Carnelian__Lower_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__Upper_Susar) => 877,
-        (SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__Upper_Path) => 0,
-        (SpotId::Giguna__Carnelian__Upper_Path, SpotId::Giguna__Carnelian__West_Ledge) => 1052,
-        (SpotId::Giguna__Carnelian__Upper_Path, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => 1052,
-        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__West_Ledge) => 0,
-        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__West_10) => 1000,
-        (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Carnelian__West_10, SpotId::Giguna__Carnelian__West_Ledge) => 877,
-        (SpotId::Giguna__Carnelian__West_10, SpotId::Giguna__Carnelian__West_10) => 0,
-        (SpotId::Giguna__Carnelian__West_10, SpotId::Giguna__West_Caverns__East_10) => 1350,
-        (SpotId::Giguna__Carnelian__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Giguna__Carnelian__West_10) => 1350,
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Giguna__West_Caverns__East_10) => 0,
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Giguna__West_Caverns__East_Platform) => {
-            1578
-        }
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Giguna__West_Caverns__Small_Staircase) => {
-            1403
-        }
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Giguna__West_Caverns__Tunnel_Entrance) => {
-            1403
-        }
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Giguna__West_Caverns__Column_2_Top) => 6000,
-        (SpotId::Giguna__West_Caverns__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-        ) => 500,
-        (
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 699,
-        (
-            SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 1052,
-        (SpotId::Giguna__West_Caverns__East_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__West_Caverns__Small_Staircase, SpotId::Giguna__West_Caverns__East_10) => {
-            2400
-        }
-        (
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 299,
-        (
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 1799,
-        (SpotId::Giguna__West_Caverns__Small_Staircase, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-        ) => 1200,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 1799,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-        ) => 877,
-        (SpotId::Giguna__West_Caverns__Tunnel_Entrance, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Small_Platform,
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-        ) => 1228,
-        (
-            SpotId::Giguna__West_Caverns__Small_Platform,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 1228,
-        (
-            SpotId::Giguna__West_Caverns__Small_Platform,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Small_Platform,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-        ) => 1500,
-        (SpotId::Giguna__West_Caverns__Small_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 1403,
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-        ) => 1578,
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 1578,
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-        ) => 350,
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-        ) => 1200,
-        (SpotId::Giguna__West_Caverns__Higher_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 877,
-        (
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-        ) => 526,
-        (
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-        ) => 1200,
-        (SpotId::Giguna__West_Caverns__Floating_Brick, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__East_Platform,
-        ) => 1754,
-        (
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-        ) => 599,
-        (
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 1228,
-        (SpotId::Giguna__West_Caverns__Column_2_Top, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 877,
-        (SpotId::Giguna__West_Caverns__Top_Gap_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 600,
-        (SpotId::Giguna__West_Caverns__Top_Gap_Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-        ) => 1052,
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-        ) => 299,
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 1228,
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-        ) => 1228,
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-        ) => 0,
-        (SpotId::Giguna__West_Caverns__Column_1_Top_Left, SpotId::Giguna__West_Caverns__Cache) => {
-            500
-        }
-        (SpotId::Giguna__West_Caverns__Column_1_Top_Left, SpotId::Giguna__West_Caverns__Bush) => {
-            1754
-        }
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__West_Caverns__Cache, SpotId::Giguna__West_Caverns__Column_1_Top_Left) => {
-            1799
-        }
-        (SpotId::Giguna__West_Caverns__Cache, SpotId::Giguna__West_Caverns__Cache) => 0,
-        (SpotId::Giguna__West_Caverns__Cache, SpotId::Giguna__West_Caverns__Bush) => 2105,
-        (SpotId::Giguna__West_Caverns__Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Column_1_Top_Left) => {
-            1915
-        }
-        (SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Cache) => 2105,
-        (SpotId::Giguna__West_Caverns__Bush, SpotId::Giguna__West_Caverns__Bush) => 0,
-        (SpotId::Giguna__West_Caverns__Bush, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 2250,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-        ) => 0,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-        ) => 350,
-        (SpotId::Giguna__West_Caverns__Tunnel_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-        ) => 2250,
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-        ) => 850,
-        (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__Tunnel_Fork) => 0,
-        (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__East_Susar) => {
-            350
-        }
-        (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__East_13) => 2280,
-        (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Giguna__West_Caverns__Tunnel_Fork) => {
-            600
-        }
-        (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Giguna__West_Caverns__East_Susar) => 0,
-        (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Giguna__West_Caverns__East_12) => 526,
-        (SpotId::Giguna__West_Caverns__East_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__East_12, SpotId::Giguna__West_Caverns__East_Susar) => 526,
-        (SpotId::Giguna__West_Caverns__East_12, SpotId::Giguna__West_Caverns__East_12) => 0,
-        (SpotId::Giguna__West_Caverns__East_12, SpotId::Giguna__Wasteland__West_12) => 1350,
-        (SpotId::Giguna__West_Caverns__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__East_13, SpotId::Giguna__West_Caverns__East_13) => 0,
-        (SpotId::Giguna__West_Caverns__East_13, SpotId::Giguna__Wasteland__West_13) => 1350,
-        (SpotId::Giguna__West_Caverns__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__Northwest) => 0,
-        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Giguna__West_Caverns__West_13) => 3200,
-        (SpotId::Giguna__West_Caverns__Northwest, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Caverns__West_13, SpotId::Giguna__West_Caverns__West_13) => 0,
-        (SpotId::Giguna__West_Caverns__West_13, SpotId::Giguna__Far_Corner__East_13) => 1350,
-        (SpotId::Giguna__West_Caverns__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__West_Caverns__East_12) => 1350,
-        (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__West_12) => 0,
-        (SpotId::Giguna__Wasteland__West_12, SpotId::Giguna__Wasteland__Upper_Cliff) => 877,
-        (SpotId::Giguna__Wasteland__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_12) => 877,
-        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Upper_Cliff) => 0,
-        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__West_13) => 1578,
-        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 1929,
-        (SpotId::Giguna__Wasteland__Upper_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__West_Caverns__East_13) => 1350,
-        (SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__West_13) => 0,
-        (SpotId::Giguna__Wasteland__West_13, SpotId::Giguna__Wasteland__Middle_Path) => 1228,
-        (SpotId::Giguna__Wasteland__West_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__West_13) => 1228,
-        (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__Middle_Path) => 0,
-        (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Giguna__Wasteland__Middle_Cliff) => 1200,
-        (SpotId::Giguna__Wasteland__Middle_Path, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__West_12) => 3500,
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Middle_Path) => 1052,
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Middle_Cliff) => 0,
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Right) => {
-            850
-        }
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 526,
-        (SpotId::Giguna__Wasteland__Middle_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 877,
-        (SpotId::Giguna__Wasteland__Lower_Path_Right, SpotId::Giguna__Wasteland__Lower_Cliff) => {
-            1500
-        }
-        (SpotId::Giguna__Wasteland__Lower_Path_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-        ) => 877,
-        (
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-        ) => 0,
-        (SpotId::Giguna__Wasteland__Lower_Path_Left, SpotId::Giguna__Wasteland__West_14) => 1228,
-        (SpotId::Giguna__Wasteland__Lower_Path_Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Middle_Cliff) => 850,
-        (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Path_Left) => {
-            1578
-        }
-        (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Giguna__Wasteland__Lower_Cliff) => 0,
-        (SpotId::Giguna__Wasteland__Lower_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__Lower_Path_Left) => 1228,
-        (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Wasteland__West_14) => 0,
-        (SpotId::Giguna__Wasteland__West_14, SpotId::Giguna__Giguna_Base__East_14) => 1350,
-        (SpotId::Giguna__Wasteland__West_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__East_12, SpotId::Ebih__Ebih_West__West_12) => 1350,
-        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_12) => 0,
-        (SpotId::Giguna__Wasteland__East_12, SpotId::Giguna__Wasteland__East_Ledge) => 877,
-        (SpotId::Giguna__Wasteland__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__East_13) => 0,
-        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Door_Left) => 1578,
-        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Bluff_by_Door) => 1929,
-        (SpotId::Giguna__Wasteland__East_13, SpotId::Giguna__Wasteland__Tiny_Hill) => 3333,
-        (SpotId::Giguna__Wasteland__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__East_14) => 0,
-        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__Wasteland__Door_Right) => 1200,
-        (SpotId::Giguna__Wasteland__East_14, SpotId::Giguna__East_Caverns__West_14) => 1350,
-        (SpotId::Giguna__Wasteland__East_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_12) => 1000,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_13) => 877,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__East_Ledge) => 0,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Door_Left) => 1000,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Bluff_by_Door) => 1400,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Giguna__Wasteland__Tiny_Hill) => 2456,
-        (SpotId::Giguna__Wasteland__East_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Door_Left) => 0,
-        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Door_Right) => 526,
-        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Bluff_by_Door) => 400,
-        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Giguna__Wasteland__Tiny_Hill) => 1754,
-        (SpotId::Giguna__Wasteland__Door_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__East_14) => 1052,
-        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__Door_Left) => 526,
-        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Giguna__Wasteland__Door_Right) => 0,
-        (SpotId::Giguna__Wasteland__Door_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Door_Left) => 1000,
-        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Bluff_by_Door) => 0,
-        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => 1403,
-        (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Bluff_by_Door) => 1403,
-        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Tiny_Hill) => 0,
-        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Giguna__Wasteland__Center_Plains) => 2105,
-        (SpotId::Giguna__Wasteland__Tiny_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Steeper_Hill) => 0,
-        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__Center_Plains) => 701,
-        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Giguna__Wasteland__West_Plains) => 701,
-        (SpotId::Giguna__Wasteland__Steeper_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Tiny_Hill) => 2105,
-        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => 1200,
-        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Giguna__Wasteland__Center_Plains) => 0,
-        (SpotId::Giguna__Wasteland__Center_Plains, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Steeper_Hill) => 1799,
-        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__West_Plains) => 0,
-        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Giguna__Wasteland__Passage_East) => 1403,
-        (SpotId::Giguna__Wasteland__West_Plains, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__West_Plains) => 1403,
-        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__Passage_East) => 0,
-        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Giguna__Wasteland__Passage_Cache) => 4210,
-        (SpotId::Giguna__Wasteland__Passage_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Giguna__Wasteland__Passage_East) => 4210,
-        (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Giguna__Wasteland__Passage_Cache) => 0,
-        (SpotId::Giguna__Wasteland__Passage_Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Lower_Cliff) => 2400,
-        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__West_Plains) => 1929,
-        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Passage_East) => 526,
-        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Westward_Hill) => 0,
-        (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Upper_Cache, SpotId::Giguna__Wasteland__Upper_Cache) => 0,
-        (SpotId::Giguna__Wasteland__Upper_Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Cache_Ledge, SpotId::Giguna__Wasteland__Cache_Ledge) => 0,
-        (SpotId::Giguna__Wasteland__Cache_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Left_Platform_West,
-            SpotId::Giguna__Wasteland__Left_Platform_West,
-        ) => 0,
-        (SpotId::Giguna__Wasteland__Left_Platform_West, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Wasteland__Left_Platform_East,
-            SpotId::Giguna__Wasteland__Left_Platform_East,
-        ) => 0,
-        (SpotId::Giguna__Wasteland__Left_Platform_East, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Wasteland__Center_Platform_West,
-            SpotId::Giguna__Wasteland__Center_Platform_West,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Center_Platform_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Center_Platform_East,
-            SpotId::Giguna__Wasteland__Center_Platform_East,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Center_Platform_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Right_Platform_West,
-            SpotId::Giguna__Wasteland__Right_Platform_West,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Right_Platform_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Right_Platform_East,
-            SpotId::Giguna__Wasteland__Right_Platform_East,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Right_Platform_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Lower_Platform_West,
-            SpotId::Giguna__Wasteland__Lower_Platform_West,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Lower_Platform_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Lower_Platform_East,
-            SpotId::Giguna__Wasteland__Lower_Platform_East,
-        ) => 0,
-        (
-            SpotId::Giguna__Wasteland__Lower_Platform_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__Wasteland__Ladder_Ledge, SpotId::Giguna__Wasteland__Ladder_Ledge) => 0,
-        (SpotId::Giguna__Wasteland__Ladder_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Wasteland__Switch_Ledge, SpotId::Giguna__Wasteland__Switch_Ledge) => 0,
-        (SpotId::Giguna__Wasteland__Switch_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Wasteland__Switch_Approach,
-            SpotId::Giguna__Wasteland__Switch_Approach,
-        ) => 0,
-        (SpotId::Giguna__Wasteland__Switch_Approach, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Wasteland__Switch, SpotId::Giguna__Wasteland__Switch) => 0,
-        (SpotId::Giguna__Wasteland__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Wasteland__West_14) => 1350,
-        (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__East_14) => 0,
-        (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => 1403,
-        (SpotId::Giguna__Giguna_Base__East_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Stone_Knob) => 0,
-        (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Upper_Cliff) => 1000,
-        (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Middle_Platform) => {
-            1301
-        }
-        (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Kari) => 2151,
-        (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Stone_Knob) => 1052,
-        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Upper_Cliff) => 0,
-        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Right_Pillar) => {
-            1228
-        }
-        (
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1099,
-        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => 1950,
-        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Giguna__Giguna_Base__Upper_Cliff) => {
-            1228
-        }
-        (SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Giguna__Giguna_Base__Right_Pillar) => 0,
-        (SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Giguna__Giguna_Base__Left_Pillar) => {
-            1500
-        }
-        (SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => 526,
-        (SpotId::Giguna__Giguna_Base__Right_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Right_Pillar) => {
-            1500
-        }
-        (SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Left_Pillar) => 0,
-        (SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Giguna__Giguna_Base__Ruin) => 877,
-        (SpotId::Giguna__Giguna_Base__Left_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Ruin, SpotId::Giguna__Giguna_Base__Right_Pillar) => 1500,
-        (SpotId::Giguna__Giguna_Base__Ruin, SpotId::Giguna__Giguna_Base__Left_Pillar) => 1500,
-        (SpotId::Giguna__Giguna_Base__Ruin, SpotId::Giguna__Giguna_Base__Ruin) => 0,
-        (SpotId::Giguna__Giguna_Base__Ruin, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Middle_Platform, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
-            1500
-        }
-        (
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 0,
-        (SpotId::Giguna__Giguna_Base__Middle_Platform, SpotId::Giguna__Giguna_Base__Kari) => 850,
-        (
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 1228,
-        (
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-        ) => 4200,
-        (SpotId::Giguna__Giguna_Base__Middle_Platform, SpotId::Giguna__Giguna_Base__Below_Gate) => {
-            1550
-        }
-        (SpotId::Giguna__Giguna_Base__Middle_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Middle_Platform) => 3000,
-        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Kari) => 0,
-        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Building_Entry) => 1052,
-        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Table) => 2456,
-        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Giguna__Giguna_Base__Below_Gate) => 526,
-        (SpotId::Giguna__Giguna_Base__Kari, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Kari) => 1052,
-        (
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 3157,
-        (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Table) => 1403,
-        (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            2105
-        }
-        (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Giguna__Building_Interior__Entry) => {
-            750
-        }
-        (SpotId::Giguna__Giguna_Base__Building_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Left_Pillar) => {
-            3500
-        }
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 2631,
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-        ) => 0,
-        (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__West_Grate) => {
-            701
-        }
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1099,
-        (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Table) => 1599,
-        (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            1349
-        }
-        (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__Staircase_Top) => {
-            701
-        }
-        (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__West_Grate) => 0,
-        (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Giguna__Giguna_Base__West_15) => 350,
-        (SpotId::Giguna__Giguna_Base__West_Grate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Giguna__Giguna_Base__West_Grate) => 350,
-        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Giguna__Giguna_Base__West_15) => 0,
-        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Giguna__Helipad__East_15) => 1350,
-        (SpotId::Giguna__Giguna_Base__West_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-        ) => 3157,
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-        ) => 3000,
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1052,
-        (SpotId::Giguna__Giguna_Base__Staircase_Bottom, SpotId::Giguna__Giguna_Base__West_16) => {
-            526
-        }
-        (SpotId::Giguna__Giguna_Base__Staircase_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => 2456,
-        (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Building_Entry) => 2252,
-        (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Table) => 0,
-        (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Save_Point) => 701,
-        (SpotId::Giguna__Giguna_Base__Table, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__Building_Entry) => {
-            2105
-        }
-        (
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1052,
-        (SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__Table) => 701,
-        (SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__Save_Point) => 0,
-        (SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Giguna__Giguna_Base__West_16) => 1578,
-        (SpotId::Giguna__Giguna_Base__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Staircase_Bottom) => {
-            600
-        }
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => 1578,
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__West_16) => 0,
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Helipad__East_16) => 1350,
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__East_17) => 0,
-        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => 1200,
-        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Hard_Rock__West_17) => 1350,
-        (SpotId::Giguna__Giguna_Base__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__East_17) => 701,
-        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__Lower_Fork) => 0,
-        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Giguna__Giguna_Base__Below_Gate) => 800,
-        (
-            SpotId::Giguna__Giguna_Base__Lower_Fork,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-        ) => 1929,
-        (SpotId::Giguna__Giguna_Base__Lower_Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Middle_Platform) => {
-            3000
-        }
-        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Kari) => 1000,
-        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Lower_Fork) => 701,
-        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Giguna__Giguna_Base__Below_Gate) => 0,
-        (SpotId::Giguna__Giguna_Base__Below_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-        ) => 175,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-        ) => 600,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-        ) => 175,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-        ) => 175,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-        ) => 175,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-            SpotId::Giguna__Giguna_Base__Lower_Fork,
-        ) => 2400,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-        ) => 175,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-        ) => 0,
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__Building_Interior__Entry, SpotId::Giguna__Giguna_Base__Building_Entry) => {
-            750
-        }
-        (SpotId::Giguna__Building_Interior__Entry, SpotId::Giguna__Building_Interior__Entry) => 0,
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => 1000,
-        (SpotId::Giguna__Building_Interior__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Entry,
-        ) => 701,
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-        ) => 0,
-        (SpotId::Giguna__Building_Interior__Bookshelf, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Giguna_Northeast__West_9) => 1350,
-        (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__East_9) => 0,
-        (SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => 2280,
-        (SpotId::Giguna__Ruins_East__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__East_9) => 2280,
-        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__Bottom_Rock) => 0,
-        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__West_9) => 877,
-        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Giguna__Ruins_East__Cliff) => 3450,
-        (SpotId::Giguna__Ruins_East__Bottom_Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => 877,
-        (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__West_9) => 0,
-        (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_Center__East_9) => 1350,
-        (SpotId::Giguna__Ruins_East__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__East_9) => 1228,
-        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__Bottom_Rock) => 1052,
-        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__West_9) => 2303,
-        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__Cliff) => 0,
-        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Giguna__Ruins_East__Ledge) => 800,
-        (SpotId::Giguna__Ruins_East__Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Cliff) => 199,
-        (SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Ledge) => 0,
-        (SpotId::Giguna__Ruins_East__Ledge, SpotId::Giguna__Ruins_East__Small_Passage) => 350,
-        (SpotId::Giguna__Ruins_East__Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__Small_Passage, SpotId::Giguna__Ruins_East__Ledge) => 350,
-        (SpotId::Giguna__Ruins_East__Small_Passage, SpotId::Giguna__Ruins_East__Small_Passage) => 0,
-        (SpotId::Giguna__Ruins_East__Small_Passage, SpotId::Giguna__Ruins_East__West_8) => 1403,
-        (SpotId::Giguna__Ruins_East__Small_Passage, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__West_8, SpotId::Giguna__Ruins_East__Small_Passage) => 1403,
-        (SpotId::Giguna__Ruins_East__West_8, SpotId::Giguna__Ruins_East__West_8) => 0,
-        (SpotId::Giguna__Ruins_East__West_8, SpotId::Giguna__Ruins_Center__East_8) => 1350,
-        (SpotId::Giguna__Ruins_East__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => 1052,
-        (SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Pillar) => 0,
-        (SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => 701,
-        (SpotId::Giguna__Ruins_East__Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__West_7, SpotId::Giguna__Ruins_East__Pillar) => 1799,
-        (SpotId::Giguna__Ruins_East__West_7, SpotId::Giguna__Ruins_East__West_7) => 0,
-        (SpotId::Giguna__Ruins_East__West_7, SpotId::Giguna__Ruins_Top__East_7) => 1350,
-        (SpotId::Giguna__Ruins_East__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => 3600,
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => 2399,
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => 1228,
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Way_Up_High) => 0,
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_East__West_8) => 1350,
-        (SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__East_8) => 0,
-        (SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => 526,
-        (SpotId::Giguna__Ruins_Center__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => 526,
-        (SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__Tablet) => 0,
-        (SpotId::Giguna__Ruins_Center__Tablet, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_East__West_9) => 1350,
-        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_Center__East_9) => 0,
-        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Giguna__Ruins_Center__Wall_Bottom) => 2631,
-        (SpotId::Giguna__Ruins_Center__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Giguna__Ruins_Center__East_9) => 2631,
-        (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Giguna__Ruins_Center__Wall_Bottom) => 0,
-        (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Giguna__Ruins_Center__Wall_Top) => 1000,
-        (SpotId::Giguna__Ruins_Center__Wall_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__East_9) => 2631,
-        (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__Wall_Bottom) => 400,
-        (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__Wall_Top) => 0,
-        (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__Center_Top) => 1500,
-        (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Center__Center_Top, SpotId::Giguna__Ruins_Center__Center_Top) => 0,
-        (
-            SpotId::Giguna__Ruins_Center__Center_Top,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 1052,
-        (SpotId::Giguna__Ruins_Center__Center_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 0,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-        ) => 1403,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-        ) => 1403,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-        ) => 0,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_9,
-        ) => 1228,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__Ruins_Center__West_9, SpotId::Giguna__Ruins_Center__West_9) => 0,
-        (SpotId::Giguna__Ruins_Center__West_9, SpotId::Giguna__Ruins_West__East_9) => 1350,
-        (SpotId::Giguna__Ruins_Center__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_Center__West_9) => 1350,
-        (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__East_9) => 0,
-        (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Save_Point) => 1578,
-        (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Platform) => 1578,
-        (SpotId::Giguna__Ruins_West__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__East_9) => 1578,
-        (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__Save_Point) => 0,
-        (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__Platform) => 1200,
-        (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__East_9) => 1578,
-        (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => 399,
-        (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Platform) => 0,
-        (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Nook) => 1200,
-        (SpotId::Giguna__Ruins_West__Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => 500,
-        (SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Nook) => 0,
-        (SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Lower_Ledge) => 2350,
-        (SpotId::Giguna__Ruins_West__Nook, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Platform) => 1099,
-        (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Nook) => 599,
-        (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Lower_Ledge) => 0,
-        (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Upper_Ledge) => 4000,
-        (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => 2099,
-        (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Lower_Ledge) => 1000,
-        (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Upper_Ledge) => 0,
-        (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => 1228,
-        (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_West__Upper_Ledge) => 1200,
-        (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_West__East_7) => 0,
-        (SpotId::Giguna__Ruins_West__East_7, SpotId::Giguna__Ruins_Top__West_7) => 1350,
-        (SpotId::Giguna__Ruins_West__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
-        ) => 0,
-        (
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
-        ) => 1052,
-        (SpotId::Giguna__Ruins_West__Rooftop_East_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
-        ) => 0,
-        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => 899,
-        (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Ruins_West__West_7, SpotId::Giguna__Ruins_West__West_7) => 0,
-        (SpotId::Giguna__Ruins_West__West_7, SpotId::Giguna__West_Tower__East_7) => 1350,
-        (SpotId::Giguna__Ruins_West__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_West__East_7) => 1350,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_7) => 0,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Door) => 877,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Giguna__Ruins_Top__West_Pillar) => 2250,
-        (SpotId::Giguna__Ruins_Top__West_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_7) => 877,
-        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__West_Door) => 0,
-        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Giguna__Ruins_Top__Entryway) => 526,
-        (SpotId::Giguna__Ruins_Top__West_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => 877,
-        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_Pillar) => 0,
-        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => 799,
-        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__West_Door) => 1200,
-        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Entryway) => 0,
-        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => 2982,
-        (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => 2982,
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal_Left) => 0,
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Small_Ledge) => 1000,
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 701,
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => 299,
-        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Small_Ledge) => 0,
-        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
-        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 1500,
-        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna_Breach__Peak__Save_Point) => 3600,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal) => 0,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 1500,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__East_Door) => 701,
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 800,
-        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 0,
-        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => {
-            1000
-        }
-        (SpotId::Giguna__Ruins_Top__Interior_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => 526,
-        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 0,
-        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
-        (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
-        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Flask) => 0,
-        (SpotId::Giguna__Ruins_Top__Flask, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__Portal) => 701,
-        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_Door) => 0,
-        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Giguna__Ruins_Top__East_7) => 877,
-        (SpotId::Giguna__Ruins_Top__East_Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_East__West_7) => 1350,
-        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_Door) => 877,
-        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Giguna__Ruins_Top__East_7) => 0,
-        (SpotId::Giguna__Ruins_Top__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Save_Point) => 0,
-        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 701,
-        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 701,
-        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Switch) => 0,
-        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Rooftop_West) => 1799,
-        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Turret_Balcony_East) => 2400,
-        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => 350,
-        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_West) => 0,
-        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_East) => 1754,
-        (
-            SpotId::Giguna__Ruins_Top__Rooftop_West,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-        ) => 1052,
-        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => 1754,
-        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_East) => 0,
-        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => 701,
-        (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => 1200,
-        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
-            1200
-        }
-        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => 0,
-        (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => 701,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-            SpotId::Giguna__Ruins_Top__Rooftop_West,
-        ) => 1052,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-        ) => 0,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-        ) => 1754,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
-        ) => 3800,
-        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => 1500,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            SpotId::Giguna__Ruins_Top__West_Pillar,
-        ) => 799,
-        (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
-            1599
-        }
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-        ) => 0,
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__East_7) => 0,
-        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1578,
-        (SpotId::Giguna__West_Tower__East_7, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Top) => 0,
-        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
-        (SpotId::Giguna__West_Tower__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__West_Tower__Southwest, SpotId::Giguna__West_Caverns__Northwest) => 1000,
-        (SpotId::Giguna__West_Tower__Southwest, SpotId::Giguna__West_Tower__Southwest) => 0,
-        (SpotId::Giguna__West_Tower__Southwest, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__East_13) => 0,
-        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
-        (SpotId::Giguna__Far_Corner__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__Grass) => 0,
-        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
-        (SpotId::Giguna__Far_Corner__Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Far_Corner__South, SpotId::Giguna__Far_Corner__South) => 0,
-        (SpotId::Giguna__Far_Corner__South, SpotId::Giguna__Helipad__North) => 1000,
-        (SpotId::Giguna__Far_Corner__South, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Giguna_Base__West_15) => 1350,
-        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__East_15) => 0,
-        (SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => 4385,
-        (SpotId::Giguna__Helipad__East_15, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__North) => 0,
-        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => 1550,
-        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => 2400,
-        (SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Wall_Top) => 2349,
-        (SpotId::Giguna__Helipad__North, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__East_15) => 4385,
-        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Helicopter) => 0,
-        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Irikar_Drop) => 2105,
-        (SpotId::Giguna__Helipad__Helicopter, SpotId::Giguna__Helipad__Wall_Top) => 799,
-        (SpotId::Giguna__Helipad__Helicopter, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Giguna_Base__West_16) => 1350,
-        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__East_16) => 0,
-        (SpotId::Giguna__Helipad__East_16, SpotId::Giguna__Helipad__Railing) => 1578,
-        (SpotId::Giguna__Helipad__East_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__Irikar_Drop) => 0,
-        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__So_Close) => 1149,
-        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Left) => 2399,
-        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Middle) => 2399,
-        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Giguna__Helipad__South_Right) => 2399,
-        (SpotId::Giguna__Helipad__Irikar_Drop, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Top) => 0,
-        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Railing) => 2456,
-        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Wall_Bottom) => 1250,
-        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Giguna__Helipad__Staircase_Top) => 2280,
-        (SpotId::Giguna__Helipad__Wall_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__East_16) => 1578,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__Wall_Top) => 2456,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__Railing) => 0,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__Wall_Bottom) => 2105,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__Staircase_Top) => 949,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Giguna__Helipad__East_18) => 2103,
-        (SpotId::Giguna__Helipad__Railing, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Wall_Bottom, SpotId::Giguna__Helipad__Wall_Bottom) => 0,
-        (SpotId::Giguna__Helipad__Wall_Bottom, SpotId::Giguna__Helipad__Staircase_Top) => 1929,
-        (SpotId::Giguna__Helipad__Wall_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__So_Close, SpotId::Giguna__Helipad__So_Close) => 0,
-        (SpotId::Giguna__Helipad__So_Close, SpotId::Giguna__Helipad__Tablet_Ledge) => 350,
-        (SpotId::Giguna__Helipad__So_Close, SpotId::Giguna__Helipad__South_Right) => 1250,
-        (SpotId::Giguna__Helipad__So_Close, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Tablet_Ledge, SpotId::Giguna__Helipad__Tablet_Ledge) => 0,
-        (SpotId::Giguna__Helipad__Tablet_Ledge, SpotId::Giguna__Helipad__South_Middle) => 1199,
-        (SpotId::Giguna__Helipad__Tablet_Ledge, SpotId::Giguna__Helipad__South_Right) => 1199,
-        (SpotId::Giguna__Helipad__Tablet_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__Wall_Bottom) => 1929,
-        (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__Staircase_Top) => 0,
-        (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => 1754,
-        (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => 2400,
-        (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__East_18) => 0,
-        (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Lamassu__West_18) => 1350,
-        (SpotId::Giguna__Helipad__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__South_Left, SpotId::Giguna__Helipad__South_Left) => 0,
-        (SpotId::Giguna__Helipad__South_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__South_Middle, SpotId::Giguna__Helipad__South_Middle) => 0,
-        (SpotId::Giguna__Helipad__South_Middle, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__South_Right, SpotId::Giguna__Helipad__South_Right) => 0,
-        (SpotId::Giguna__Helipad__South_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Helipad__Lowest_Ledge, SpotId::Giguna__Helipad__Lowest_Ledge) => 0,
-        (SpotId::Giguna__Helipad__Lowest_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__North_Left, SpotId::Giguna__Clouds__North_Left) => 0,
-        (SpotId::Giguna__Clouds__North_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__North_Middle) => 0,
-        (SpotId::Giguna__Clouds__North_Middle, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__North_Right, SpotId::Giguna__Clouds__North_Right) => 0,
-        (SpotId::Giguna__Clouds__North_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__North_Under_Ledge, SpotId::Giguna__Clouds__North_Under_Ledge) => 0,
-        (SpotId::Giguna__Clouds__North_Under_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__Platform_Start, SpotId::Giguna__Clouds__Platform_Start) => 0,
-        (SpotId::Giguna__Clouds__Platform_Start, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__Platform_Stop, SpotId::Giguna__Clouds__Platform_Stop) => 0,
-        (SpotId::Giguna__Clouds__Platform_Stop, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Clouds__Cache, SpotId::Giguna__Clouds__Cache) => 0,
-        (SpotId::Giguna__Clouds__Cache, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Clouds__Platform_Early_Portal,
-            SpotId::Giguna__Clouds__Platform_Early_Portal,
-        ) => 0,
-        (SpotId::Giguna__Clouds__Platform_Early_Portal, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Helipad__East_18) => 1350,
-        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__West_18) => 0,
-        (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => 1403,
-        (SpotId::Giguna__Lamassu__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => 1403,
-        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Top) => 0,
-        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Bottom) => 877,
-        (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Top) => 1200,
-        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Bottom) => 0,
-        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Staircase_Landing) => {
-            250
-        }
-        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Giguna__Lamassu__Broken_Pillar) => 500,
-        (
-            SpotId::Giguna__Lamassu__Staircase_Bottom,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-        ) => 1578,
-        (SpotId::Giguna__Lamassu__Staircase_Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Staircase_Bottom) => {
-            1200
-        }
-        (
-            SpotId::Giguna__Lamassu__Staircase_Landing,
-            SpotId::Giguna__Lamassu__Staircase_Landing,
-        ) => 0,
-        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Giguna__Lamassu__Broken_Pillar) => 250,
-        (
-            SpotId::Giguna__Lamassu__Staircase_Landing,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-        ) => 1403,
-        (SpotId::Giguna__Lamassu__Staircase_Landing, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Staircase_Landing) => {
-            1200
-        }
-        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Broken_Pillar) => 0,
-        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Giguna__Lamassu__Upper_Platform_Edge) => {
-            1228
-        }
-        (SpotId::Giguna__Lamassu__Broken_Pillar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Giguna__Lamassu__Broken_Pillar) => {
-            1228
-        }
-        (
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-        ) => 0,
-        (
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-        ) => 701,
-        (SpotId::Giguna__Lamassu__Upper_Platform_Edge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-        ) => 1200,
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-        ) => 0,
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-            SpotId::Giguna__Lamassu__Lower_Platform_Right,
-        ) => 877,
-        (SpotId::Giguna__Lamassu__Lower_Platform_Left, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Right,
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-        ) => 877,
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Right,
-            SpotId::Giguna__Lamassu__Lower_Platform_Right,
-        ) => 0,
-        (SpotId::Giguna__Lamassu__Lower_Platform_Right, SpotId::Giguna__Lamassu__Head) => 1799,
-        (SpotId::Giguna__Lamassu__Lower_Platform_Right, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Left) => 1929,
-        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Lower_Platform_Right) => 1052,
-        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Head) => 0,
-        (SpotId::Giguna__Lamassu__Head, SpotId::Giguna__Lamassu__Wingtip) => 2807,
-        (SpotId::Giguna__Lamassu__Head, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Head) => 2105,
-        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__Rear_Platform) => 0,
-        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Giguna__Lamassu__East_18) => 1578,
-        (SpotId::Giguna__Lamassu__Rear_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Head) => 2807,
-        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Wingtip) => 0,
-        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Rear_Gap) => 600,
-        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Giguna__Lamassu__Deposit) => 1399,
-        (SpotId::Giguna__Lamassu__Wingtip, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Wingtip) => 350,
-        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Rear_Gap) => 0,
-        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__Deposit) => 1500,
-        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Giguna__Lamassu__East_18) => 2400,
-        (SpotId::Giguna__Lamassu__Rear_Gap, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Wingtip) => 4800,
-        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Rear_Gap) => 5399,
-        (SpotId::Giguna__Lamassu__Deposit, SpotId::Giguna__Lamassu__Deposit) => 0,
-        (SpotId::Giguna__Lamassu__Deposit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Platform) => 1578,
-        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__Rear_Gap) => 526,
-        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Lamassu__East_18) => 0,
-        (SpotId::Giguna__Lamassu__East_18, SpotId::Giguna__Dual_Path__West_18) => 1350,
-        (SpotId::Giguna__Lamassu__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Lamassu__East_18) => 1350,
-        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__West_18) => 0,
-        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__Below_Left_Switch) => 526,
-        (SpotId::Giguna__Dual_Path__West_18, SpotId::Giguna__Dual_Path__West_Gate) => 1000,
-        (SpotId::Giguna__Dual_Path__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_18) => 600,
-        (
-            SpotId::Giguna__Dual_Path__Below_Left_Switch,
-            SpotId::Giguna__Dual_Path__Below_Left_Switch,
-        ) => 0,
-        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => {
-            600
-        }
-        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => {
-            2280
-        }
-        (SpotId::Giguna__Dual_Path__Below_Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
-            350
-        }
-        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__Left_Switch) => 0,
-        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Giguna__Dual_Path__West_Slope) => 1929,
-        (SpotId::Giguna__Dual_Path__Left_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__Below_Left_Switch) => {
-            2280
-        }
-        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__West_Slope) => 0,
-        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Giguna__Dual_Path__In_the_Grass) => 2982,
-        (SpotId::Giguna__Dual_Path__West_Slope, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__West_Slope) => 2982,
-        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__In_the_Grass) => 0,
-        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Base_of_Wall) => 526,
-        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Giguna__Dual_Path__Wall_Top) => 1000,
-        (SpotId::Giguna__Dual_Path__In_the_Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => 526,
-        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Base_of_Wall) => 0,
-        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Wall_Secret) => 350,
-        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__Wall_Top) => 1000,
-        (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Giguna__Dual_Path__Base_of_Wall) => 350,
-        (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Giguna__Dual_Path__Wall_Secret) => 0,
-        (SpotId::Giguna__Dual_Path__Wall_Secret, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__West_Slope) => 3508,
-        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__In_the_Grass) => 526,
-        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Base_of_Wall) => 500,
-        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Wall_Top) => 0,
-        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
-            1052
-        }
-        (SpotId::Giguna__Dual_Path__Wall_Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => 1200,
-        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Giguna__Dual_Path__Right_Switch) => 0,
-        (
-            SpotId::Giguna__Dual_Path__Right_Switch,
-            SpotId::Giguna__Dual_Path__Below_Right_Switch,
-        ) => 175,
-        (SpotId::Giguna__Dual_Path__Right_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__Wall_Top) => {
-            1200
-        }
-        (
-            SpotId::Giguna__Dual_Path__Below_Right_Switch,
-            SpotId::Giguna__Dual_Path__Right_Switch,
-        ) => 600,
-        (
-            SpotId::Giguna__Dual_Path__Below_Right_Switch,
-            SpotId::Giguna__Dual_Path__Below_Right_Switch,
-        ) => 0,
-        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_Gate) => {
-            1200
-        }
-        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Giguna__Dual_Path__East_18) => 2807,
-        (SpotId::Giguna__Dual_Path__Below_Right_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__Below_Right_Switch) => {
-            877
-        }
-        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_Gate) => 0,
-        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_18) => 1929,
-        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Giguna__Dual_Path__East_Gate_NW) => 1000,
-        (SpotId::Giguna__Dual_Path__East_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__Below_Right_Switch) => 2807,
-        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_Gate) => 1929,
-        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Dual_Path__East_18) => 0,
-        (SpotId::Giguna__Dual_Path__East_18, SpotId::Giguna__Gateway__West_18) => 1350,
-        (SpotId::Giguna__Dual_Path__East_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_18) => 877,
-        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__Below_Left_Switch) => 500,
-        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate) => 0,
-        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate_NW) => 1000,
-        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Giguna__Dual_Path__West_Gate_NE) => 1000,
-        (SpotId::Giguna__Dual_Path__West_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate) => 350,
-        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NW) => 0,
-        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_Gate_NE) => 701,
-        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Giguna__Dual_Path__West_17) => 526,
-        (SpotId::Giguna__Dual_Path__West_Gate_NW, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate) => 350,
-        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NW) => 701,
-        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__West_Gate_NE) => 0,
-        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Giguna__Dual_Path__Midway) => 3333,
-        (SpotId::Giguna__Dual_Path__West_Gate_NE, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_Gate_NW) => 526,
-        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Dual_Path__West_17) => 0,
-        (SpotId::Giguna__Dual_Path__West_17, SpotId::Giguna__Hard_Rock__East_17) => 1350,
-        (SpotId::Giguna__Dual_Path__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__West_Gate_NE) => 3333,
-        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__Midway) => 0,
-        (SpotId::Giguna__Dual_Path__Midway, SpotId::Giguna__Dual_Path__Midway_Plateau) => 1000,
-        (SpotId::Giguna__Dual_Path__Midway, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway) => 701,
-        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__Midway_Plateau) => 0,
-        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Giguna__Dual_Path__East_Gate_NW) => {
-            2456
-        }
-        (SpotId::Giguna__Dual_Path__Midway_Plateau, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__Midway_Plateau) => {
-            2456
-        }
-        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__East_Gate_NW) => 0,
-        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Giguna__Dual_Path__East_Gate_NE) => 1000,
-        (SpotId::Giguna__Dual_Path__East_Gate_NW, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate) => 850,
-        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NW) => 1052,
-        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_Gate_NE) => 0,
-        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Giguna__Dual_Path__East_17) => 1403,
-        (SpotId::Giguna__Dual_Path__East_Gate_NE, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_Gate_NE) => 1799,
-        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__Dual_Path__East_17) => 0,
-        (SpotId::Giguna__Dual_Path__East_17, SpotId::Giguna__East_Caverns__West_17) => 1350,
-        (SpotId::Giguna__Dual_Path__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__East_17) => 0,
-        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => 877,
-        (SpotId::Giguna__Hard_Rock__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__East_17) => 877,
-        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__Rock_Right) => 0,
-        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Giguna__Hard_Rock__Rock_Center) => 526,
-        (SpotId::Giguna__Hard_Rock__Rock_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Right) => 526,
-        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Center) => 0,
-        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => 526,
-        (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__Rock_Center) => 526,
-        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__Rock_Left) => 0,
-        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Giguna__Hard_Rock__West_17) => 1228,
-        (SpotId::Giguna__Hard_Rock__Rock_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Giguna_Base__East_17) => 1350,
-        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__Rock_Left) => 1228,
-        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Giguna__Hard_Rock__West_17) => 0,
-        (SpotId::Giguna__Hard_Rock__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__West_14, SpotId::Giguna__Wasteland__East_14) => 1350,
-        (SpotId::Giguna__East_Caverns__West_14, SpotId::Giguna__East_Caverns__West_14) => 0,
-        (
-            SpotId::Giguna__East_Caverns__West_14,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-        ) => 877,
-        (SpotId::Giguna__East_Caverns__West_14, SpotId::Giguna__East_Caverns__Upper_Floor) => 1754,
-        (SpotId::Giguna__East_Caverns__West_14, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            SpotId::Giguna__East_Caverns__West_14,
-        ) => 877,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-        ) => 1228,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            SpotId::Giguna__East_Caverns__Upper_Floor,
-        ) => 877,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-        ) => 199,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-        ) => 789,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-        ) => 600,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-        ) => 1500,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-        ) => 701,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Giguna__East_Caverns__Upper_Floor, SpotId::Giguna__East_Caverns__West_14) => 1799,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-        ) => 1200,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-        ) => 600,
-        (SpotId::Giguna__East_Caverns__Upper_Floor, SpotId::Giguna__East_Caverns__Upper_Floor) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-        ) => 526,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-        ) => 1000,
-        (SpotId::Giguna__East_Caverns__Upper_Floor, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-        ) => 600,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-        ) => 614,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-        ) => 526,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-        ) => 900,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-        ) => 789,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-        ) => 614,
-        (SpotId::Giguna__East_Caverns__Upper_Susar, SpotId::Giguna__East_Caverns__Upper_Susar) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-        ) => 789,
-        (SpotId::Giguna__East_Caverns__Upper_Susar, SpotId::Giguna__East_Caverns__Middle_Ledge) => {
-            500
-        }
-        (SpotId::Giguna__East_Caverns__Upper_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-        ) => 263,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-        ) => 1052,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-        ) => 263,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-        ) => 750,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-        ) => 1400,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-        ) => 789,
-        (
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-        ) => 600,
-        (
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-        ) => 0,
-        (SpotId::Giguna__East_Caverns__Top_Past_Susar, SpotId::Giguna__East_Caverns__Top_Ledge) => {
-            1754
-        }
-        (SpotId::Giguna__East_Caverns__Top_Past_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__East_Caverns__Top_Ledge, SpotId::Giguna__East_Caverns__Top_Past_Susar) => {
-            1754
-        }
-        (SpotId::Giguna__East_Caverns__Top_Ledge, SpotId::Giguna__East_Caverns__Top_Ledge) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Top_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-        ) => 250,
-        (SpotId::Giguna__East_Caverns__Top_Ledge, SpotId::Giguna__East_Caverns__East_Shaft) => 701,
-        (SpotId::Giguna__East_Caverns__Top_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-        ) => 2105,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-        ) => 526,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            SpotId::Giguna__East_Caverns__Mid_Susar,
-        ) => 500,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            SpotId::Giguna__East_Caverns__Top_Ledge,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-        ) => 2105,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            SpotId::Giguna__East_Caverns__East_Shaft,
-        ) => 701,
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__East_Shaft,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-        ) => 1200,
-        (SpotId::Giguna__East_Caverns__East_Shaft, SpotId::Giguna__East_Caverns__East_Shaft) => 0,
-        (SpotId::Giguna__East_Caverns__East_Shaft, SpotId::Giguna__East_Caverns__East_Side) => 399,
-        (SpotId::Giguna__East_Caverns__East_Shaft, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__East_Side, SpotId::Giguna__East_Caverns__East_Shaft) => 1799,
-        (SpotId::Giguna__East_Caverns__East_Side, SpotId::Giguna__East_Caverns__East_Side) => 0,
-        (SpotId::Giguna__East_Caverns__East_Side, SpotId::Giguna__East_Caverns__Carving) => 526,
-        (SpotId::Giguna__East_Caverns__East_Side, SpotId::Giguna__East_Caverns__Middle_Rock) => {
-            1500
-        }
-        (SpotId::Giguna__East_Caverns__East_Side, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__Carving, SpotId::Giguna__East_Caverns__East_Side) => 600,
-        (SpotId::Giguna__East_Caverns__Carving, SpotId::Giguna__East_Caverns__Carving) => 0,
-        (SpotId::Giguna__East_Caverns__Carving, SpotId::Giguna__East_Caverns__Middle_Rock) => 1000,
-        (SpotId::Giguna__East_Caverns__Carving, SpotId::Giguna__East_Caverns__Arc_Passage) => 599,
-        (SpotId::Giguna__East_Caverns__Carving, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-        ) => 500,
-        (
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-        ) => 0,
-        (SpotId::Giguna__East_Caverns__Middle_Ledge, SpotId::Giguna__East_Caverns__Mid_Susar) => {
-            877
-        }
-        (
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-        ) => 701,
-        (SpotId::Giguna__East_Caverns__Middle_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__East_Caverns__Mid_Susar, SpotId::Giguna__East_Caverns__Middle_Ledge) => {
-            877
-        }
-        (SpotId::Giguna__East_Caverns__Mid_Susar, SpotId::Giguna__East_Caverns__Mid_Susar) => 0,
-        (SpotId::Giguna__East_Caverns__Mid_Susar, SpotId::Giguna__East_Caverns__Middle_Rock) => 877,
-        (SpotId::Giguna__East_Caverns__Mid_Susar, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__Middle_Rock, SpotId::Giguna__East_Caverns__Carving) => 701,
-        (SpotId::Giguna__East_Caverns__Middle_Rock, SpotId::Giguna__East_Caverns__Mid_Susar) => 877,
-        (SpotId::Giguna__East_Caverns__Middle_Rock, SpotId::Giguna__East_Caverns__Middle_Rock) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Middle_Rock,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-        ) => 450,
-        (SpotId::Giguna__East_Caverns__Middle_Rock, SpotId::Giguna__East_Caverns__Arc_Passage) => {
-            1000
-        }
-        (SpotId::Giguna__East_Caverns__Middle_Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            SpotId::Giguna__East_Caverns__Carving,
-        ) => 701,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-        ) => 1228,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            SpotId::Giguna__East_Caverns__Arc_Passage,
-        ) => 549,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-        ) => 1228,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-        ) => 877,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-        ) => 877,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-        ) => 877,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            SpotId::Giguna__East_Caverns__Arc_Ledge,
-        ) => 649,
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-        ) => 3599,
-        (
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-        ) => 1500,
-        (
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-        ) => 599,
-        (SpotId::Giguna__East_Caverns__Midwest_Ledge, SpotId::Giguna__East_Caverns__Arc_Ledge) => {
-            799
-        }
-        (
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Lower_Ledge,
-        ) => 1349,
-        (SpotId::Giguna__East_Caverns__Midwest_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-        ) => 877,
-        (
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-        ) => 1500,
-        (
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-        ) => 0,
-        (SpotId::Giguna__East_Caverns__Statues_Ledge, SpotId::Giguna__East_Caverns__Switch) => 701,
-        (
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-            SpotId::Giguna__East_Caverns__Lower_Ledge,
-        ) => 750,
-        (SpotId::Giguna__East_Caverns__Statues_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__East_Caverns__Switch, SpotId::Giguna__East_Caverns__Statues_Ledge) => 701,
-        (SpotId::Giguna__East_Caverns__Switch, SpotId::Giguna__East_Caverns__Switch) => 0,
-        (SpotId::Giguna__East_Caverns__Switch, SpotId::Giguna__East_Caverns__Door) => 614,
-        (SpotId::Giguna__East_Caverns__Switch, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__Door, SpotId::Giguna__East_Caverns__Switch) => 614,
-        (SpotId::Giguna__East_Caverns__Door, SpotId::Giguna__East_Caverns__Door) => 0,
-        (SpotId::Giguna__East_Caverns__Door, SpotId::Giguna__East_Caverns__West_16) => 600,
-        (SpotId::Giguna__East_Caverns__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__West_16, SpotId::Giguna__East_Caverns__Door) => 263,
-        (SpotId::Giguna__East_Caverns__West_16, SpotId::Giguna__East_Caverns__West_16) => 0,
-        (SpotId::Giguna__East_Caverns__West_16, SpotId::Giguna__Antechamber__East_16) => 1350,
-        (SpotId::Giguna__East_Caverns__West_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Arc_Ledge,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-        ) => 1299,
-        (SpotId::Giguna__East_Caverns__Arc_Ledge, SpotId::Giguna__East_Caverns__Statues_Ledge) => {
-            1000
-        }
-        (SpotId::Giguna__East_Caverns__Arc_Ledge, SpotId::Giguna__East_Caverns__Arc_Ledge) => 0,
-        (SpotId::Giguna__East_Caverns__Arc_Ledge, SpotId::Giguna__East_Caverns__Arc_Passage) => {
-            2105
-        }
-        (SpotId::Giguna__East_Caverns__Arc_Ledge, SpotId::Giguna__East_Caverns__Lower_Ledge) => 877,
-        (SpotId::Giguna__East_Caverns__Arc_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__Arc_Passage, SpotId::Giguna__East_Caverns__Carving) => 1799,
-        (
-            SpotId::Giguna__East_Caverns__Arc_Passage,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-        ) => 1200,
-        (SpotId::Giguna__East_Caverns__Arc_Passage, SpotId::Giguna__East_Caverns__Arc_Ledge) => {
-            2105
-        }
-        (SpotId::Giguna__East_Caverns__Arc_Passage, SpotId::Giguna__East_Caverns__Arc_Passage) => 0,
-        (SpotId::Giguna__East_Caverns__Arc_Passage, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__Lower_Ledge, SpotId::Giguna__East_Caverns__Arc_Ledge) => {
-            1200
-        }
-        (SpotId::Giguna__East_Caverns__Lower_Ledge, SpotId::Giguna__East_Caverns__Lower_Ledge) => 0,
-        (SpotId::Giguna__East_Caverns__Lower_Ledge, SpotId::Giguna__East_Caverns__West_17) => 1754,
-        (SpotId::Giguna__East_Caverns__Lower_Ledge, SpotId::Giguna__East_Caverns__West_Grass) => {
-            550
-        }
-        (
-            SpotId::Giguna__East_Caverns__Lower_Ledge,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => 600,
-        (SpotId::Giguna__East_Caverns__Lower_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__West_17, SpotId::Giguna__Dual_Path__East_17) => 1350,
-        (SpotId::Giguna__East_Caverns__West_17, SpotId::Giguna__East_Caverns__West_17) => 0,
-        (SpotId::Giguna__East_Caverns__West_17, SpotId::Giguna__East_Caverns__West_Grass) => 1228,
-        (SpotId::Giguna__East_Caverns__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__West_Grass, SpotId::Giguna__East_Caverns__Lower_Ledge) => {
-            2000
-        }
-        (SpotId::Giguna__East_Caverns__West_Grass, SpotId::Giguna__East_Caverns__West_17) => 1228,
-        (SpotId::Giguna__East_Caverns__West_Grass, SpotId::Giguna__East_Caverns__West_Grass) => 0,
-        (
-            SpotId::Giguna__East_Caverns__West_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => 701,
-        (SpotId::Giguna__East_Caverns__West_Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => 0,
-        (
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__East_Grass,
-        ) => 2982,
-        (
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-        ) => 2982,
-        (SpotId::Giguna__East_Caverns__East_Grass, SpotId::Giguna__East_Caverns__East_Grass) => 0,
-        (SpotId::Giguna__East_Caverns__East_Grass, SpotId::Giguna__East_Caverns__East_17) => 1500,
-        (SpotId::Giguna__East_Caverns__East_Grass, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__East_Caverns__East_17, SpotId::Giguna__East_Caverns__East_Grass) => 1754,
-        (SpotId::Giguna__East_Caverns__East_17, SpotId::Giguna__East_Caverns__East_17) => 0,
-        (SpotId::Giguna__East_Caverns__East_17, SpotId::Giguna__Vertical_Interchange__West_17) => {
-            1000
-        }
-        (SpotId::Giguna__East_Caverns__East_17, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Dual_Path__East_18) => 1000,
-        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__West_18) => 0,
-        (SpotId::Giguna__Gateway__West_18, SpotId::Giguna__Gateway__Passage_Entry) => 877,
-        (SpotId::Giguna__Gateway__West_18, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__West_18) => 877,
-        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__Passage_Entry) => 0,
-        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__Passage_Exit) => 1578,
-        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Giguna__Gateway__Door) => 1200,
-        (SpotId::Giguna__Gateway__Passage_Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Passage_Entry) => 1799,
-        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Passage_Exit) => 0,
-        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Left_Platform) => 1000,
-        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Giguna__Gateway__Block_Left) => 526,
-        (SpotId::Giguna__Gateway__Passage_Exit, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Passage_Entry) => 1052,
-        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Door) => 0,
-        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Left_Platform) => 1403,
-        (SpotId::Giguna__Gateway__Door, SpotId::Giguna__Gateway__Block_Left) => 1052,
-        (SpotId::Giguna__Gateway__Door, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Passage_Exit) => 877,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Left_Platform) => 0,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Right_Platform) => 701,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Left) => 850,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Right) => 500,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Refill_Station) => 1403,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Giguna__Gateway__Block_Lowered) => 800,
-        (SpotId::Giguna__Gateway__Left_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Left_Platform) => 701,
-        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Right_Platform) => 0,
-        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Block_Right) => 550,
-        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Refill_Station) => 701,
-        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Giguna__Gateway__Far_Ledge) => 1403,
-        (SpotId::Giguna__Gateway__Right_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Left) => 0,
-        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => 701,
-        (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Lowered) => 350,
-        (SpotId::Giguna__Gateway__Block_Left, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Left) => 701,
-        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Right) => 0,
-        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Refill_Station) => 1052,
-        (SpotId::Giguna__Gateway__Block_Right, SpotId::Giguna__Gateway__Block_Lowered) => 350,
-        (SpotId::Giguna__Gateway__Block_Right, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Block_Right) => 1052,
-        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Refill_Station) => 0,
-        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Giguna__Gateway__Far_Ledge) => 1000,
-        (SpotId::Giguna__Gateway__Refill_Station, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Right_Platform) => 1200,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Block_Right) => 1754,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Refill_Station) => 701,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => 0,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__One_Jump) => 600,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Giguna__Gateway__Flask_Ledge) => 1000,
-        (SpotId::Giguna__Gateway__Far_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__Far_Ledge) => 175,
-        (SpotId::Giguna__Gateway__One_Jump, SpotId::Giguna__Gateway__One_Jump) => 0,
-        (SpotId::Giguna__Gateway__One_Jump, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Block_Right) => 2105,
-        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Refill_Station) => 1052,
-        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Far_Ledge) => 400,
-        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Giguna__Gateway__Flask_Ledge) => 0,
-        (SpotId::Giguna__Gateway__Flask_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Block_Left) => 500,
-        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Block_Right) => 500,
-        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Block_Lowered) => 0,
-        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => 3333,
-        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => 1929,
-        (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => 3333,
-        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__West_19) => 0,
-        (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Labyrinth_East__East_19) => 1350,
-        (SpotId::Giguna__Gateway__West_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => 1929,
-        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Button) => 0,
-        (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__East_19) => 1403,
-        (SpotId::Giguna__Gateway__Button, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Gateway__East_19, SpotId::Giguna__Gateway__Button) => 1403,
-        (SpotId::Giguna__Gateway__East_19, SpotId::Giguna__Gateway__East_19) => 0,
-        (SpotId::Giguna__Gateway__East_19, SpotId::Giguna__Vertical_Interchange__West_19) => 1350,
-        (SpotId::Giguna__Gateway__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Giguna__Labyrinth_East__East_19) => 0,
-        (SpotId::Giguna__Labyrinth_East__East_19, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Giguna__Vertical_Interchange__West_17,
-            SpotId::Giguna__Vertical_Interchange__West_17,
-        ) => 0,
-        (SpotId::Giguna__Vertical_Interchange__West_17, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Giguna__Vertical_Interchange__West_19,
-            SpotId::Giguna__Vertical_Interchange__West_19,
-        ) => 0,
-        (SpotId::Giguna__Vertical_Interchange__West_19, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Giguna__Antechamber__East_16, SpotId::Giguna__Antechamber__East_16) => 0,
-        (SpotId::Giguna__Antechamber__East_16, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Elevator) => 0,
-        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
-            1578
-        }
-        (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Elevator) => {
-            1578
-        }
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Elevator__Connector) => 0,
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Glacier__Dock_Interior__Connector) => {
-            1350
-        }
-        (SpotId::Glacier__Dock_Elevator__Connector, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Elevator__Connector) => {
-            1350
-        }
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Connector) => 0,
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Glacier__Dock_Interior__Entry) => 1929,
-        (SpotId::Glacier__Dock_Interior__Connector, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Connector) => 1929,
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Interior__Entry) => 0,
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Glacier__Dock_Outside__Entry) => 750,
-        (SpotId::Glacier__Dock_Interior__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Interior__Entry) => 750,
-        (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Entry) => 0,
-        (SpotId::Glacier__Dock_Outside__Entry, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => 4736,
-        (SpotId::Glacier__Dock_Outside__Entry, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Dock_Outside__Entry) => 4736,
-        (
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-        ) => 0,
-        (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Glacier__Revival__East_9) => 1350,
-        (SpotId::Glacier__Dock_Outside__Do_Not_Enter, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Dock_Outside__Do_Not_Enter) => 1350,
-        (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__East_9) => 0,
-        (SpotId::Glacier__Revival__East_9, SpotId::Glacier__Revival__Overhang) => 1228,
-        (SpotId::Glacier__Revival__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__East_9) => 1228,
-        (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Overhang) => 0,
-        (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Ledge) => 1052,
-        (SpotId::Glacier__Revival__Overhang, SpotId::Glacier__Revival__Lower_East) => 1399,
-        (SpotId::Glacier__Revival__Overhang, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Overhang) => 1200,
-        (SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Ledge) => 0,
-        (SpotId::Glacier__Revival__Ledge, SpotId::Glacier__Revival__Lower_East) => 2280,
-        (SpotId::Glacier__Revival__Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Ledge) => 4800,
-        (SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Revival__Lower_East) => 0,
-        (SpotId::Glacier__Revival__Lower_East, SpotId::Glacier__Grid_42_10__West) => 1350,
-        (SpotId::Glacier__Revival__Lower_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__Save_Point) => 0,
-        (SpotId::Glacier__Revival__Save_Point, SpotId::Glacier__Revival__West_8) => 1228,
-        (SpotId::Glacier__Revival__Save_Point, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__Save_Point) => 1228,
-        (SpotId::Glacier__Revival__West_8, SpotId::Glacier__Revival__West_8) => 0,
-        (SpotId::Glacier__Revival__West_8, SpotId::Glacier__Grid_39_40_7_9__Upper_East) => 1350,
-        (SpotId::Glacier__Revival__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Revival__Lower_East) => 1350,
-        (SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__West) => 0,
-        (SpotId::Glacier__Grid_42_10__West, SpotId::Glacier__Grid_42_10__East) => 3157,
-        (SpotId::Glacier__Grid_42_10__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__West) => 3157,
-        (SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_42_10__East) => 0,
-        (SpotId::Glacier__Grid_42_10__East, SpotId::Glacier__Grid_43_10_11__Top) => 1350,
-        (SpotId::Glacier__Grid_42_10__East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_42_10__East) => 1350,
-        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Top) => 0,
-        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__East) => 3157,
-        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Glacier__Grid_43_10_11__Lower) => 1754,
-        (SpotId::Glacier__Grid_43_10_11__Top, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Top) => 3157,
-        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__East) => 0,
-        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Grid_43_10_11__Lower) => 3157,
-        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Glacier__Apocalypse_Entry__West) => 1350,
-        (SpotId::Glacier__Grid_43_10_11__East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Top) => 5677,
-        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__East) => 5178,
-        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Grid_43_10_11__Lower) => 0,
-        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Glacier__Compass_Room__East) => 1350,
-        (SpotId::Glacier__Grid_43_10_11__Lower, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Grid_43_10_11__Lower) => 1350,
-        (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__East) => 0,
-        (SpotId::Glacier__Compass_Room__East, SpotId::Glacier__Compass_Room__Center) => 1578,
-        (SpotId::Glacier__Compass_Room__East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__East) => 1578,
-        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__Center) => 0,
-        (SpotId::Glacier__Compass_Room__Center, SpotId::Glacier__Compass_Room__West) => 1578,
-        (SpotId::Glacier__Compass_Room__Center, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__Center) => 1578,
-        (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__Compass_Room__West) => 0,
-        (SpotId::Glacier__Compass_Room__West, SpotId::Glacier__The_Big_Drop__East) => 1350,
-        (SpotId::Glacier__Compass_Room__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__Compass_Room__West) => 1350,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__East) => 0,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Small_Path) => 2000,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Glacier__The_Big_Drop__Water_Surface) => 3157,
-        (SpotId::Glacier__The_Big_Drop__East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__The_Big_Drop__Small_Path, SpotId::Glacier__The_Big_Drop__Small_Path) => 0,
-        (SpotId::Glacier__The_Big_Drop__Small_Path, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__The_Big_Drop__Water_Surface, SpotId::Glacier__Revival__Save_Point) => {
-            48500
-        }
-        (
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
-        ) => 0,
-        (SpotId::Glacier__The_Big_Drop__Water_Surface, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Glacier__Grid_39_40_7_9__Upper_East, SpotId::Glacier__Revival__West_8) => 1350,
-        (
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-        ) => 0,
-        (SpotId::Glacier__Grid_39_40_7_9__Upper_East, SpotId::Glacier__Grid_39_40_7_9__West) => {
-            6666
-        }
-        (SpotId::Glacier__Grid_39_40_7_9__Upper_East, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Glacier__Grid_39_40_7_9__West, SpotId::Glacier__Grid_39_40_7_9__Upper_East) => {
-            7266
-        }
-        (SpotId::Glacier__Grid_39_40_7_9__West, SpotId::Glacier__Grid_39_40_7_9__West) => 0,
-        (SpotId::Glacier__Grid_39_40_7_9__West, SpotId::Glacier__Grid_37_38_9__East) => 1350,
-        (SpotId::Glacier__Grid_39_40_7_9__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_39_40_7_9__West) => 1350,
-        (SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__East) => 0,
-        (SpotId::Glacier__Grid_37_38_9__East, SpotId::Glacier__Grid_37_38_9__West) => 6666,
-        (SpotId::Glacier__Grid_37_38_9__East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__East) => 6666,
-        (SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Grid_37_38_9__West) => 0,
-        (SpotId::Glacier__Grid_37_38_9__West, SpotId::Glacier__Vertical_Room__East_9) => 1350,
-        (SpotId::Glacier__Grid_37_38_9__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Grid_37_38_9__West) => 1350,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__East_9) => 0,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__West_9) => 3157,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_9) => 1578,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Mid_11) => 2600,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Glacier__Vertical_Room__Peak) => 2400,
-        (SpotId::Glacier__Vertical_Room__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__West_9) => 0,
-        (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Mid_9) => 1578,
-        (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Mid_11) => 2600,
-        (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
-            2000
-        }
-        (SpotId::Glacier__Vertical_Room__West_9, SpotId::Glacier__Ledge_Grab_Room__East_9) => 1350,
-        (SpotId::Glacier__Vertical_Room__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__East_9) => 1578,
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__West_9) => 1578,
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__Mid_9) => 0,
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__Mid_11) => 2500,
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__Under_Switch) => {
-            2000
-        }
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Glacier__Vertical_Room__Peak) => 2000,
-        (SpotId::Glacier__Vertical_Room__Mid_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Glacier__Vertical_Room__Mid_9) => 10000,
-        (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Glacier__Vertical_Room__Mid_11) => 0,
-        (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Glacier__Vertical_Room__Under_Switch) => {
-            2400
-        }
-        (
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1299,
-        (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Glacier__Vertical_Room__East_13) => 1700,
-        (SpotId::Glacier__Vertical_Room__Mid_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Glacier__Vertical_Room__West_9) => {
-            8400
-        }
-        (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Glacier__Vertical_Room__Mid_9) => {
-            7500
-        }
-        (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Glacier__Vertical_Room__Mid_11) => {
-            1052
-        }
-        (
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 0,
-        (
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Past_Gate,
-        ) => 526,
-        (SpotId::Glacier__Vertical_Room__Under_Switch, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Glacier__Vertical_Room__Past_Gate,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-        ) => 526,
-        (SpotId::Glacier__Vertical_Room__Past_Gate, SpotId::Glacier__Vertical_Room__Past_Gate) => 0,
-        (SpotId::Glacier__Vertical_Room__Past_Gate, SpotId::Glacier__Ledge_Grab_Room__East_11) => {
-            1350
-        }
-        (SpotId::Glacier__Vertical_Room__Past_Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__East_9) => 1929,
-        (SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__Mid_9) => 500,
-        (SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__Peak) => 0,
-        (SpotId::Glacier__Vertical_Room__Peak, SpotId::Glacier__Vertical_Room__West_8) => 2000,
-        (SpotId::Glacier__Vertical_Room__Peak, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__Peak) => 1228,
-        (SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Vertical_Room__West_8) => 0,
-        (SpotId::Glacier__Vertical_Room__West_8, SpotId::Glacier__Peak__East_8) => 1350,
-        (SpotId::Glacier__Vertical_Room__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Vertical_Room__East_12, SpotId::Glacier__Vertical_Room__Mid_11) => 1228,
-        (SpotId::Glacier__Vertical_Room__East_12, SpotId::Glacier__Vertical_Room__East_12) => 0,
-        (
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 1929,
-        (
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-        ) => 1350,
-        (SpotId::Glacier__Vertical_Room__East_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-        ) => 4200,
-        (
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 0,
-        (
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__East_13,
-        ) => 2280,
-        (
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Vertical_Room__East_13,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-        ) => 2280,
-        (SpotId::Glacier__Vertical_Room__East_13, SpotId::Glacier__Vertical_Room__East_13) => 0,
-        (
-            SpotId::Glacier__Vertical_Room__East_13,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 1350,
-        (SpotId::Glacier__Vertical_Room__East_13, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Glacier__Vertical_Room__East_13,
-        ) => 1350,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 5263,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Room__West,
-        ) => 1350,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 1754,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-        ) => 1350,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Vertical_Room__East_12,
-        ) => 1350,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 6666,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room__West,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-        ) => 1350,
-        (SpotId::Glacier__Boomerang_Room__West, SpotId::Glacier__Boomerang_Room__West) => 0,
-        (SpotId::Glacier__Boomerang_Room__West, SpotId::Glacier__Boomerang_Room__Platform) => 1228,
-        (SpotId::Glacier__Boomerang_Room__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Boomerang_Room__Platform, SpotId::Glacier__Boomerang_Room__West) => 1228,
-        (SpotId::Glacier__Boomerang_Room__Platform, SpotId::Glacier__Boomerang_Room__Platform) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 1403,
-        (
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 0,
-        (SpotId::Glacier__Boomerang_Room__Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 1403,
-        (
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-        ) => 2456,
-        (
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-        ) => 1000,
-        (SpotId::Glacier__Boomerang_Room__Center_ish, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-        ) => 2456,
-        (SpotId::Glacier__Boomerang_Room__Pedestal, SpotId::Glacier__Boomerang_Room__Pedestal) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-        ) => 0,
-        (SpotId::Glacier__Boomerang_Room__Pedestal, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 1200,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-        ) => 701,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-        ) => 1052,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-        ) => 1052,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 2105,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Glacier__Boomerang_Room__Platform,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-        ) => 1228,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-        ) => 1350,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-        ) => 1228,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-        ) => 0,
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__East_9, SpotId::Glacier__Vertical_Room__West_9) => 1350,
-        (SpotId::Glacier__Ledge_Grab_Room__East_9, SpotId::Glacier__Vertical_Room__Past_Gate) => {
-            20000
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__East_9, SpotId::Glacier__Ledge_Grab_Room__East_9) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__East_9, SpotId::Glacier__Ledge_Grab_Room__Column) => {
-            2000
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Glacier__Ledge_Grab_Room__East_9) => {
-            1929
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Glacier__Ledge_Grab_Room__Column) => 0,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-        ) => 1403,
-        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => {
-            2250
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Glacier__Ledge_Grab_Room__Fork) => 1403,
-        (SpotId::Glacier__Ledge_Grab_Room__Column, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-        ) => 2000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-        ) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge, SpotId::Glacier__Ledge_Grab_Room__Fork) => {
-            500
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__East_11, SpotId::Glacier__Vertical_Room__Past_Gate) => {
-            1350
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__East_11, SpotId::Glacier__Ledge_Grab_Room__East_11) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__East_11, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => {
-            1929
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__East_11, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__East_11) => {
-            1929
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => {
-            3157
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Glacier__Ledge_Grab_Room__Fork) => 6100,
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_35, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_34, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => {
-            3157
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_34, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_34, SpotId::Glacier__Ledge_Grab_Room__Cliff) => 1403,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__Mid_34, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__Cliff, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => 1403,
-        (SpotId::Glacier__Ledge_Grab_Room__Cliff, SpotId::Glacier__Ledge_Grab_Room__Cliff) => 0,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 400,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 1200,
-        (SpotId::Glacier__Ledge_Grab_Room__Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 0,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 1754,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-        ) => 1754,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-        ) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__Pedestal, SpotId::Glacier__Ledge_Grab_Room__Gate) => {
-            1403
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Pedestal, SpotId::Glacier__Ledge_Grab_Room__West) => {
-            4000
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Pedestal, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Gate, SpotId::Glacier__Ledge_Grab_Room__Pedestal) => {
-            1403
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Gate, SpotId::Glacier__Ledge_Grab_Room__Gate) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__Gate, SpotId::Glacier__Ledge_Grab_Room__West) => 3100,
-        (SpotId::Glacier__Ledge_Grab_Room__Gate, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__West, SpotId::Glacier__Ledge_Grab_Room__Pedestal) => 799,
-        (SpotId::Glacier__Ledge_Grab_Room__West, SpotId::Glacier__Ledge_Grab_Room__Gate) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__West, SpotId::Glacier__Ledge_Grab_Room__West) => 0,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 3859,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 4210,
-        (SpotId::Glacier__Ledge_Grab_Room__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 350,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1052,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 0,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 2000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-        ) => 800,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ) => 1403,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__West,
-        ) => 4210,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        ) => 599,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 0,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-        ) => 2400,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Column) => 2400,
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge) => {
-            2000
-        }
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__East_11) => 3333,
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Mid_35) => 2500,
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Mid_34) => 1754,
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ) => 1754,
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Glacier__Ledge_Grab_Room__Fork) => 0,
-        (SpotId::Glacier__Ledge_Grab_Room__Fork, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__East_8, SpotId::Glacier__Peak__East_8) => 0,
-        (SpotId::Glacier__Peak__East_8, SpotId::Glacier__Peak__Top_Platform_East) => 7000,
-        (SpotId::Glacier__Peak__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__East_8) => 2982,
-        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__Top_Platform_East) => 0,
-        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Glacier__Peak__Top_Rock) => 1754,
-        (SpotId::Glacier__Peak__Top_Platform_East, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__Top_Platform_East) => 1754,
-        (SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__Top_Rock) => 0,
-        (SpotId::Glacier__Peak__Top_Rock, SpotId::Glacier__Peak__West_Cliff) => 3157,
-        (SpotId::Glacier__Peak__Top_Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Top_Platform_East) => 1754,
-        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Top_Rock) => 300,
-        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__Highest_Platform) => 0,
-        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Glacier__Peak__West_Cliff) => 3157,
-        (SpotId::Glacier__Peak__Highest_Platform, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Top_Rock) => 4200,
-        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_Cliff) => 0,
-        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__Under_West_Cliff) => 600,
-        (SpotId::Glacier__Peak__West_Cliff, SpotId::Glacier__Peak__West_8) => 2280,
-        (SpotId::Glacier__Peak__West_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_Cliff) => 2000,
-        (SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__Under_West_Cliff) => 0,
-        (SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Glacier__Peak__West_8) => 1929,
-        (SpotId::Glacier__Peak__Under_West_Cliff, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__Under_West_Cliff) => 2400,
-        (SpotId::Glacier__Peak__West_8, SpotId::Glacier__Peak__West_8) => 0,
-        (SpotId::Glacier__Peak__West_8, SpotId::Glacier__Grid_32_7_10__East_8) => 1350,
-        (SpotId::Glacier__Peak__West_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Peak__West_8) => 1350,
-        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__East_8) => 0,
-        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__Center_Platform) => {
-            1228
-        }
-        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Glacier__Grid_32_7_10__Column) => 1228,
-        (SpotId::Glacier__Grid_32_7_10__East_8, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_32_7_10__Center_Platform, SpotId::Glacier__Grid_32_7_10__East_8) => {
-            1228
-        }
-        (
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-        ) => 0,
-        (SpotId::Glacier__Grid_32_7_10__Center_Platform, SpotId::Glacier__Grid_32_7_10__Column) => {
-            600
-        }
-        (
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-        ) => 1052,
-        (SpotId::Glacier__Grid_32_7_10__Center_Platform, SpotId::Glacier__Grid_32_7_10__West_9) => {
-            1929
-        }
-        (
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__East_8) => 1799,
-        (SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__Center_Platform) => {
-            1799
-        }
-        (SpotId::Glacier__Grid_32_7_10__Column, SpotId::Glacier__Grid_32_7_10__Column) => 0,
-        (SpotId::Glacier__Grid_32_7_10__Column, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__Column) => 1400,
-        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__Left_Rock) => 0,
-        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__West_9) => 877,
-        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Glacier__Grid_32_7_10__West_10) => 877,
-        (SpotId::Glacier__Grid_32_7_10__Left_Rock, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__Left_Rock) => 877,
-        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__West_9) => 0,
-        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_32_7_10__West_10) => 700,
-        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Glacier__Grid_31_9_12__East_9) => 1350,
-        (SpotId::Glacier__Grid_32_7_10__West_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_32_7_10__West_10, SpotId::Glacier__Grid_32_7_10__Left_Rock) => 1600,
-        (SpotId::Glacier__Grid_32_7_10__West_10, SpotId::Glacier__Grid_32_7_10__West_10) => 0,
-        (SpotId::Glacier__Grid_32_7_10__West_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_32_7_10__West_9) => 1350,
-        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__East_9) => 0,
-        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__East_10) => 600,
-        (
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2280,
-        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Glacier__Grid_31_9_12__Midair) => 3157,
-        (SpotId::Glacier__Grid_31_9_12__East_9, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_32_7_10__West_10) => 1350,
-        (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__East_10) => 0,
-        (
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 2280,
-        (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Glacier__Grid_31_9_12__Midair) => 3157,
-        (SpotId::Glacier__Grid_31_9_12__East_10, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-        ) => 4200,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 0,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 400,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-        ) => 1400,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-        ) => 877,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 1200,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 0,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-        ) => 1000,
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Glacier__Grid_31_9_12__West_12, SpotId::Ebih__Base_Camp__East_12) => 1350,
-        (
-            SpotId::Glacier__Grid_31_9_12__West_12,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 3000,
-        (SpotId::Glacier__Grid_31_9_12__West_12, SpotId::Glacier__Grid_31_9_12__West_12) => 0,
-        (SpotId::Glacier__Grid_31_9_12__West_12, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Grid_31_9_12__Midair, SpotId::Ebih__Base_Camp__East_11) => 1350,
-        (
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-        ) => 877,
-        (
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-        ) => 526,
-        (SpotId::Glacier__Grid_31_9_12__Midair, SpotId::Glacier__Grid_31_9_12__Midair) => 0,
-        (SpotId::Glacier__Grid_31_9_12__Midair, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-        ) => 1350,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-        ) => 1052,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ) => 1200,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 877,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 599,
-        (SpotId::Glacier__Lake_Main_Entrance__Upper, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-        ) => 1850,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 350,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 400,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1300,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1403,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1929,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-        ) => 2000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ) => 600,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 701,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1175,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1929,
-        (SpotId::Glacier__Lake_Main_Entrance__Ledge, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 350,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 1052,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 600,
-        (SpotId::Glacier__Lake_Main_Entrance__Hill, SpotId::Glacier__Lake_Main_Entrance__Hill) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1403,
-        (SpotId::Glacier__Lake_Main_Entrance__Hill, SpotId::Glacier__Lake_Main_Entrance__Side) => {
-            701
-        }
-        (SpotId::Glacier__Lake_Main_Entrance__Hill, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-        ) => 2400,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 1228,
-        (SpotId::Glacier__Lake_Main_Entrance__Bottom, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-        ) => 199,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-        ) => 1052,
-        (SpotId::Glacier__Lake_Main_Entrance__Side, SpotId::Glacier__Lake_Main_Entrance__Hill) => {
-            701
-        }
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-        ) => 600,
-        (SpotId::Glacier__Lake_Main_Entrance__Side, SpotId::Glacier__Lake_Main_Entrance__Side) => 0,
-        (SpotId::Glacier__Lake_Main_Entrance__Side, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Lake_Main_Entrance__Lake_Access, SpotId::Amagi__Main_Area__East_15) => {
-            1000
-        }
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-        ) => 1228,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-        ) => 0,
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-        ) => 1000,
-        (SpotId::Glacier__Apocalypse_Entry__West, SpotId::Glacier__Grid_43_10_11__East) => 1350,
-        (SpotId::Glacier__Apocalypse_Entry__West, SpotId::Glacier__Apocalypse_Entry__West) => 0,
-        (SpotId::Glacier__Apocalypse_Entry__West, SpotId::Glacier__Apocalypse_Entry__Terminal) => {
-            1929
-        }
-        (SpotId::Glacier__Apocalypse_Entry__West, SpotId::Menu__Upgrade_Menu__Physiology) => 1000,
-        (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
-            1929
-        }
-        (
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-        ) => 0,
-        (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Menu__Upgrade_Menu__Physiology) => {
-            1000
-        }
-        (SpotId::Menu__Upgrade_Menu__Physiology, SpotId::Menu__Upgrade_Menu__Physiology) => 0,
-        (SpotId::Menu__Upgrade_Menu__Physiology, SpotId::Menu__Upgrade_Menu__Combat) => 100,
-        (SpotId::Menu__Upgrade_Menu__Physiology, SpotId::Menu__Upgrade_Menu__Infection) => 100,
-        (SpotId::Menu__Upgrade_Menu__Physiology, SpotId::Menu__Upgrade_Menu__Drone) => 100,
-        (SpotId::Menu__Upgrade_Menu__Combat, SpotId::Menu__Upgrade_Menu__Physiology) => 100,
-        (SpotId::Menu__Upgrade_Menu__Combat, SpotId::Menu__Upgrade_Menu__Combat) => 0,
-        (SpotId::Menu__Upgrade_Menu__Combat, SpotId::Menu__Upgrade_Menu__Infection) => 100,
-        (SpotId::Menu__Upgrade_Menu__Combat, SpotId::Menu__Upgrade_Menu__Drone) => 100,
-        (SpotId::Menu__Upgrade_Menu__Infection, SpotId::Menu__Upgrade_Menu__Physiology) => 100,
-        (SpotId::Menu__Upgrade_Menu__Infection, SpotId::Menu__Upgrade_Menu__Combat) => 100,
-        (SpotId::Menu__Upgrade_Menu__Infection, SpotId::Menu__Upgrade_Menu__Infection) => 0,
-        (SpotId::Menu__Upgrade_Menu__Infection, SpotId::Menu__Upgrade_Menu__Drone) => 100,
-        (SpotId::Menu__Upgrade_Menu__Drone, SpotId::Menu__Upgrade_Menu__Physiology) => 100,
-        (SpotId::Menu__Upgrade_Menu__Drone, SpotId::Menu__Upgrade_Menu__Combat) => 100,
-        (SpotId::Menu__Upgrade_Menu__Drone, SpotId::Menu__Upgrade_Menu__Infection) => 100,
-        (SpotId::Menu__Upgrade_Menu__Drone, SpotId::Menu__Upgrade_Menu__Drone) => 0,
-        _ => u32::MAX,
-    }
-}
-
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
         (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => true,
@@ -24735,11 +12635,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
         (
             SpotId::Amagi__Main_Area__East_15,
-            SpotId::Amagi__Main_Area__East_15,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__East_15,
             SpotId::Amagi__Main_Area__Waters_Edge,
             4035,
         ),
@@ -24760,11 +12655,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Waters_Edge,
-            SpotId::Amagi__Main_Area__Waters_Edge,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Waters_Edge,
             SpotId::Amagi__Main_Area__Shallow_End,
             701,
         ),
@@ -24777,11 +12667,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Shallow_End,
             SpotId::Amagi__Main_Area__Waters_Edge,
             1000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Shallow_End,
-            SpotId::Amagi__Main_Area__Shallow_End,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Shallow_End,
@@ -24800,11 +12685,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Cliff,
-            SpotId::Amagi__Main_Area__Cliff,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Cliff,
             SpotId::Amagi__Main_Area__Upper_Platform,
             701,
         ),
@@ -24817,11 +12697,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__Cliff,
             1000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            SpotId::Amagi__Main_Area__Upper_Platform,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Upper_Platform,
@@ -24850,11 +12725,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__West_Shelf,
-            SpotId::Amagi__Main_Area__West_Shelf,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__West_Shelf,
             SpotId::Amagi__Main_Area__West_Side,
             1403,
         ),
@@ -24875,11 +12745,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__West_Side,
-            SpotId::Amagi__Main_Area__West_Side,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__West_Side,
             SpotId::Amagi__Main_Area__Carving,
             2300,
         ),
@@ -24897,11 +12762,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__West_Shelf,
             1000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Platform_2,
-            SpotId::Amagi__Main_Area__Platform_2,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Platform_2,
@@ -24930,11 +12790,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__East_Ledge,
-            SpotId::Amagi__Main_Area__East_Ledge,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Platform_3,
             877,
         ),
@@ -24955,11 +12810,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Carving,
-            SpotId::Amagi__Main_Area__Carving,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Carving,
             SpotId::Amagi__Main_Area__West_15,
             175,
         ),
@@ -24977,11 +12827,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__West_15,
             SpotId::Amagi__Main_Area__Carving,
             600,
-        ),
-        (
-            SpotId::Amagi__Main_Area__West_15,
-            SpotId::Amagi__Main_Area__West_15,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__West_15,
@@ -25015,11 +12860,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Outcropping,
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
             750,
         ),
@@ -25037,11 +12877,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Platform_3,
             SpotId::Amagi__Main_Area__East_Ledge,
             1000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Platform_3,
-            SpotId::Amagi__Main_Area__Platform_3,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Platform_3,
@@ -25075,11 +12910,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
-            SpotId::Amagi__Main_Area__Catwalk_Center,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             2456,
         ),
@@ -25105,11 +12935,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             1578,
         ),
@@ -25130,11 +12955,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Amagi__Main_Area__Save_Point,
             1500,
         ),
@@ -25147,11 +12967,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Save_Point,
-            SpotId::Amagi__Main_Area__Save_Point,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Save_Point,
@@ -25175,11 +12990,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Enemy_Side,
-            SpotId::Amagi__Main_Area__Enemy_Side,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Enemy_Side,
             SpotId::Amagi__Main_Area__Small_Cliff,
             2105,
         ),
@@ -25195,11 +13005,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Small_Cliff,
-            SpotId::Amagi__Main_Area__Small_Cliff,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Small_Cliff,
             SpotId::Amagi__Main_Area__East_19,
             1929,
         ),
@@ -25212,11 +13017,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__East_19,
             SpotId::Amagi__Main_Area__Small_Cliff,
             1929,
-        ),
-        (
-            SpotId::Amagi__Main_Area__East_19,
-            SpotId::Amagi__Main_Area__East_19,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__East_19,
@@ -25240,11 +13040,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Broken_Wall,
-            SpotId::Amagi__Main_Area__Broken_Wall,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             500,
         ),
@@ -25260,11 +13055,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25272,11 +13062,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__Half_Pillar,
             SpotId::Amagi__Main_Area__Broken_Wall,
             2000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            SpotId::Amagi__Main_Area__Half_Pillar,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Half_Pillar,
@@ -25300,11 +13085,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Flat_Ruin,
-            SpotId::Amagi__Main_Area__Flat_Ruin,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Flat_Ruin,
             SpotId::Amagi__Main_Area__West_Mini_Hill,
             1052,
         ),
@@ -25335,11 +13115,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__West_Mini_Hill,
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__West_Mini_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25347,11 +13122,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__West_18,
             SpotId::Amagi__Main_Area__Flat_Ruin,
             1578,
-        ),
-        (
-            SpotId::Amagi__Main_Area__West_18,
-            SpotId::Amagi__Main_Area__West_18,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__West_18,
@@ -25365,11 +13135,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__West_19,
-            SpotId::Amagi__Main_Area__West_19,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__West_19,
             SpotId::Amagi__West_Lake__East_19,
             1350,
         ),
@@ -25377,11 +13142,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Main_Area__West_19,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            SpotId::Amagi__Main_Area__Secret_Waterfall,
-            0,
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -25405,11 +13165,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
-            0,
-        ),
-        (
-            SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25417,11 +13172,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             750,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            0,
         ),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
@@ -25442,11 +13192,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
             575,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            0,
         ),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -25475,11 +13220,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
-            0,
-        ),
-        (
-            SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25490,11 +13230,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Grid_31_19__West,
-            SpotId::Amagi__Grid_31_19__West,
-            0,
-        ),
-        (
-            SpotId::Amagi__Grid_31_19__West,
             SpotId::Amagi__Grid_31_19__East,
             3157,
         ),
@@ -25507,11 +13242,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Grid_31_19__East,
             SpotId::Amagi__Grid_31_19__West,
             3157,
-        ),
-        (
-            SpotId::Amagi__Grid_31_19__East,
-            SpotId::Amagi__Grid_31_19__East,
-            0,
         ),
         (
             SpotId::Amagi__Grid_31_19__East,
@@ -25530,11 +13260,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__West_19,
-            SpotId::Amagi__Liru_Room__West_19,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__West_19,
             SpotId::Amagi__Liru_Room__Hidden_Enemies,
             1228,
         ),
@@ -25547,11 +13272,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Liru_Room__Hidden_Enemies,
             SpotId::Amagi__Liru_Room__West_19,
             1228,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            SpotId::Amagi__Liru_Room__Hidden_Enemies,
-            0,
         ),
         (
             SpotId::Amagi__Liru_Room__Hidden_Enemies,
@@ -25580,11 +13300,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_1_Left,
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_1_Left,
             SpotId::Amagi__Liru_Room__Platform_1_Right,
             877,
         ),
@@ -25610,11 +13325,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_1_Right,
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_1_Right,
             SpotId::Amagi__Liru_Room__Platform_2_Left,
             877,
         ),
@@ -25632,11 +13342,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Liru_Room__Platform_2_Left,
             SpotId::Amagi__Liru_Room__Platform_1_Left,
             1000,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            SpotId::Amagi__Liru_Room__Platform_2_Left,
-            0,
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_2_Left,
@@ -25672,11 +13377,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Liru_Room__Platform_2_Right,
             SpotId::Amagi__Liru_Room__Platform_2_Left,
             1403,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            SpotId::Amagi__Liru_Room__Platform_2_Right,
-            0,
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_2_Right,
@@ -25705,11 +13405,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_3_Left,
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_3_Left,
             SpotId::Amagi__Liru_Room__Platform_3_Right,
             1052,
         ),
@@ -25740,11 +13435,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_3_Right,
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_3_Right,
             SpotId::Amagi__Liru_Room__Platform_4_Right,
             399,
         ),
@@ -25767,11 +13457,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Liru_Room__Platform_4_Left,
             SpotId::Amagi__Liru_Room__Platform_3_Left,
             1000,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            SpotId::Amagi__Liru_Room__Platform_4_Left,
-            0,
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_4_Left,
@@ -25800,11 +13485,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__Platform_4_Right,
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Platform_4_Right,
             SpotId::Amagi__Liru_Room__Bottom,
             877,
         ),
@@ -25825,11 +13505,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__Bottom,
-            SpotId::Amagi__Liru_Room__Bottom,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Bottom,
             SpotId::Amagi__Liru_Room__Shrine,
             1754,
         ),
@@ -25842,11 +13517,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__Liru_Room__Shrine,
             SpotId::Amagi__Liru_Room__Bottom,
             1754,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Shrine,
-            SpotId::Amagi__Liru_Room__Shrine,
-            0,
         ),
         (
             SpotId::Amagi__Liru_Room__Shrine,
@@ -25885,11 +13555,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__West_20,
-            SpotId::Amagi__Liru_Room__West_20,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__West_20,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25910,18 +13575,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__Liru_Room__East_Passage,
-            SpotId::Amagi__Liru_Room__East_Passage,
-            0,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__East_Passage,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Amagi__Liru_Room__Hidden_Exit,
-            SpotId::Amagi__Liru_Room__Hidden_Exit,
-            0,
         ),
         (
             SpotId::Amagi__Liru_Room__Hidden_Exit,
@@ -25935,11 +13590,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__East_15,
-            SpotId::Amagi__West_Lake__East_15,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_15,
             SpotId::Amagi__West_Lake__East_Shore,
             526,
         ),
@@ -25947,11 +13597,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__East_15,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_Shore,
-            SpotId::Amagi__West_Lake__East_Shore,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__East_Shore,
@@ -25970,11 +13615,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__East_Bank,
-            SpotId::Amagi__West_Lake__East_Bank,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_Bank,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -25982,11 +13622,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Northeast_Platform,
             SpotId::Amagi__West_Lake__East_Bank,
             1228,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            SpotId::Amagi__West_Lake__Northeast_Platform,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Northeast_Platform,
@@ -26025,11 +13660,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
-            SpotId::Amagi__West_Lake__Northwest_Platform,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
             900,
         ),
@@ -26065,11 +13695,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Upper_Center_Platform,
             SpotId::Amagi__West_Lake__East_Platform,
             1754,
         ),
@@ -26095,11 +13720,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__East_Platform,
-            SpotId::Amagi__West_Lake__East_Platform,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_Platform,
             SpotId::Amagi__West_Lake__East_18,
             1578,
         ),
@@ -26120,11 +13740,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__East_18,
-            SpotId::Amagi__West_Lake__East_18,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_18,
             SpotId::Amagi__West_Lake__Pillar,
             1228,
         ),
@@ -26137,11 +13752,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Pillar,
             SpotId::Amagi__West_Lake__East_18,
             1228,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Pillar,
-            SpotId::Amagi__West_Lake__Pillar,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Pillar,
@@ -26170,11 +13780,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Pillar_Platform,
-            SpotId::Amagi__West_Lake__Pillar_Platform,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Pillar_Platform,
             SpotId::Amagi__West_Lake__East_19,
             701,
         ),
@@ -26195,11 +13800,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__East_19,
-            SpotId::Amagi__West_Lake__East_19,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_19,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26207,11 +13807,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
             SpotId::Amagi__West_Lake__Pillar,
             4385,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
@@ -26235,11 +13830,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__West_Platform,
-            SpotId::Amagi__West_Lake__West_Platform,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__West_Platform,
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
             1228,
         ),
@@ -26260,11 +13850,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
             2105,
         ),
@@ -26280,11 +13865,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
             1403,
         ),
@@ -26297,11 +13877,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Cavern_Jaw,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
             1403,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Jaw,
@@ -26330,11 +13905,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Neck,
-            SpotId::Amagi__West_Lake__Cavern_Neck,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Neck,
             SpotId::Amagi__West_Lake__Cavern_Chin,
             3508,
         ),
@@ -26360,11 +13930,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Chin,
-            SpotId::Amagi__West_Lake__Cavern_Chin,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Chin,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             1500,
         ),
@@ -26382,11 +13947,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
             1100,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
@@ -26415,11 +13975,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
             SpotId::Amagi__West_Lake__Cavern_Eye,
             701,
         ),
@@ -26432,11 +13987,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Cavern_Eye,
             SpotId::Amagi__West_Lake__Cavern_Tear_Duct,
             1000,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-            SpotId::Amagi__West_Lake__Cavern_Eye,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Eye,
@@ -26455,11 +14005,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
             877,
         ),
@@ -26472,11 +14017,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             1000,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
@@ -26495,11 +14035,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Rear_Pillar,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26510,11 +14045,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
             3157,
         ),
@@ -26527,11 +14057,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             3157,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            SpotId::Amagi__West_Lake__Stronghold_Top,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Top,
@@ -26545,11 +14070,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Item,
-            SpotId::Amagi__West_Lake__Stronghold_Item,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Item,
             SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
             1052,
         ),
@@ -26570,11 +14090,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Rear_Wall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26582,11 +14097,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
             SpotId::Amagi__West_Lake__Stronghold_Item,
             1000,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-            SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Middle_Column,
@@ -26605,11 +14115,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
             701,
         ),
@@ -26625,11 +14130,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Ceiling_Right,
             SpotId::Amagi__West_Lake__Stronghold_Front_Room,
             1000,
         ),
@@ -26645,11 +14145,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Room,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             1000,
         ),
@@ -26662,11 +14157,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             SpotId::Amagi__West_Lake__Stronghold_Front_Room,
             1000,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
@@ -26700,11 +14190,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Some_Rock,
-            SpotId::Amagi__West_Lake__Some_Rock,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Small_Hill,
             1228,
         ),
@@ -26727,11 +14212,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Some_Rock,
             2000,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Small_Hill,
-            SpotId::Amagi__West_Lake__Small_Hill,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Small_Hill,
@@ -26760,11 +14240,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Tentacle_Gap,
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Tentacle_Gap,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
             1100,
         ),
@@ -26785,11 +14260,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Left_of_Enemy,
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Left_of_Enemy,
             SpotId::Amagi__West_Lake__East_20,
             2982,
         ),
@@ -26802,11 +14272,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__East_20,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
             2982,
-        ),
-        (
-            SpotId::Amagi__West_Lake__East_20,
-            SpotId::Amagi__West_Lake__East_20,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__East_20,
@@ -26825,11 +14290,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__West_Cliff,
-            SpotId::Amagi__West_Lake__West_Cliff,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__West_Cliff,
             SpotId::Amagi__West_Lake__West_Bank,
             2000,
         ),
@@ -26842,11 +14302,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__West_Bank,
             SpotId::Amagi__West_Lake__West_Cliff,
             1929,
-        ),
-        (
-            SpotId::Amagi__West_Lake__West_Bank,
-            SpotId::Amagi__West_Lake__West_Bank,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__West_Bank,
@@ -26875,11 +14330,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Water_Surface,
-            SpotId::Amagi__West_Lake__Water_Surface,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Water_Surface,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26895,11 +14345,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__West_Shore,
-            SpotId::Amagi__West_Lake__West_Shore,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__West_Shore,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
             5087,
         ),
@@ -26910,11 +14355,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Surface_Wall_Right,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             877,
         ),
@@ -26927,11 +14367,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
             877,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            0,
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
@@ -26945,11 +14380,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__West_15,
-            SpotId::Amagi__West_Lake__West_15,
-            0,
-        ),
-        (
-            SpotId::Amagi__West_Lake__West_15,
             SpotId::Ebih__Vertical_Interchange__East_15,
             1350,
         ),
@@ -26957,11 +14387,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Antarctica__West__Helipad,
-            SpotId::Antarctica__West__Helipad,
-            0,
         ),
         (
             SpotId::Antarctica__West__Helipad,
@@ -26982,11 +14407,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__West__Shed_Entry,
             SpotId::Antarctica__West__Helipad,
             4385,
-        ),
-        (
-            SpotId::Antarctica__West__Shed_Entry,
-            SpotId::Antarctica__West__Shed_Entry,
-            0,
         ),
         (
             SpotId::Antarctica__West__Shed_Entry,
@@ -27002,11 +14422,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__West__Boxes,
             SpotId::Antarctica__West__Helipad,
             5263,
-        ),
-        (
-            SpotId::Antarctica__West__Boxes,
-            SpotId::Antarctica__West__Boxes,
-            0,
         ),
         (
             SpotId::Antarctica__West__Boxes,
@@ -27025,11 +14440,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Shed__Interior,
-            SpotId::Antarctica__Shed__Interior,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Shed__Interior,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27040,11 +14450,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Building_1W__West_Entry,
-            SpotId::Antarctica__Building_1W__West_Entry,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Building_1W__West_Entry,
             SpotId::Antarctica__Building_1W__Connector,
             2631,
         ),
@@ -27057,11 +14462,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Building_1W__Connector,
             SpotId::Antarctica__Building_1W__West_Entry,
             2631,
-        ),
-        (
-            SpotId::Antarctica__Building_1W__Connector,
-            SpotId::Antarctica__Building_1W__Connector,
-            0,
         ),
         (
             SpotId::Antarctica__Building_1W__Connector,
@@ -27080,11 +14480,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Building_1E__Connector,
-            SpotId::Antarctica__Building_1E__Connector,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Building_1E__Connector,
             SpotId::Antarctica__Building_1E__East_Entry,
             2631,
         ),
@@ -27097,11 +14492,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Building_1E__East_Entry,
             SpotId::Antarctica__Building_1E__Connector,
             2631,
-        ),
-        (
-            SpotId::Antarctica__Building_1E__East_Entry,
-            SpotId::Antarctica__Building_1E__East_Entry,
-            0,
         ),
         (
             SpotId::Antarctica__Building_1E__East_Entry,
@@ -27120,11 +14510,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__East__Building_1_Entry,
-            SpotId::Antarctica__East__Building_1_Entry,
-            0,
-        ),
-        (
-            SpotId::Antarctica__East__Building_1_Entry,
             SpotId::Antarctica__East__Save_Point,
             877,
         ),
@@ -27140,11 +14525,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__East__Save_Point,
-            SpotId::Antarctica__East__Save_Point,
-            0,
-        ),
-        (
-            SpotId::Antarctica__East__Save_Point,
             SpotId::Antarctica__East__Building_2_Entry,
             1754,
         ),
@@ -27157,11 +14537,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__East__Building_2_Entry,
             SpotId::Antarctica__East__Save_Point,
             1754,
-        ),
-        (
-            SpotId::Antarctica__East__Building_2_Entry,
-            SpotId::Antarctica__East__Building_2_Entry,
-            0,
         ),
         (
             SpotId::Antarctica__East__Building_2_Entry,
@@ -27187,11 +14562,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__East__Building_2_Upper,
             SpotId::Antarctica__East__Building_2_Entry,
             4385,
-        ),
-        (
-            SpotId::Antarctica__East__Building_2_Upper,
-            SpotId::Antarctica__East__Building_2_Upper,
-            0,
         ),
         (
             SpotId::Antarctica__East__Building_2_Upper,
@@ -27212,11 +14582,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Building_2L__Entry,
             SpotId::Antarctica__East__Building_2_Entry,
             750,
-        ),
-        (
-            SpotId::Antarctica__Building_2L__Entry,
-            SpotId::Antarctica__Building_2L__Entry,
-            0,
         ),
         (
             SpotId::Antarctica__Building_2L__Entry,
@@ -27240,11 +14605,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Building_2U__Stairs,
-            SpotId::Antarctica__Building_2U__Stairs,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Building_2U__Stairs,
             SpotId::Antarctica__Building_2U__Door,
             3508,
         ),
@@ -27270,11 +14630,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Building_2U__Door,
-            SpotId::Antarctica__Building_2U__Door,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Building_2U__Door,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27282,11 +14637,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Building_2U__Behind_Boxes,
             SpotId::Antarctica__Building_2U__Stairs,
             1000,
-        ),
-        (
-            SpotId::Antarctica__Building_2U__Behind_Boxes,
-            SpotId::Antarctica__Building_2U__Behind_Boxes,
-            0,
         ),
         (
             SpotId::Antarctica__Building_2U__Behind_Boxes,
@@ -27300,11 +14650,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Top__Power_Entry,
-            SpotId::Antarctica__Top__Power_Entry,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Top__Power_Entry,
             SpotId::Antarctica__Power_Room__Entry,
             750,
         ),
@@ -27320,11 +14665,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Power_Room__Entry,
-            SpotId::Antarctica__Power_Room__Entry,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Power_Room__Entry,
             SpotId::Antarctica__Power_Room__Switch,
             1403,
         ),
@@ -27337,11 +14677,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Power_Room__Switch,
             SpotId::Antarctica__Power_Room__Entry,
             1403,
-        ),
-        (
-            SpotId::Antarctica__Power_Room__Switch,
-            SpotId::Antarctica__Power_Room__Switch,
-            0,
         ),
         (
             SpotId::Antarctica__Power_Room__Switch,
@@ -27355,11 +14690,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Antarctica__Freight_Elevator__Left,
-            SpotId::Antarctica__Freight_Elevator__Left,
-            0,
-        ),
-        (
-            SpotId::Antarctica__Freight_Elevator__Left,
             SpotId::Antarctica__Freight_Elevator__Controls,
             2105,
         ),
@@ -27372,11 +14702,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
             2105,
-        ),
-        (
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            SpotId::Antarctica__Freight_Elevator__Controls,
-            0,
         ),
         (
             SpotId::Antarctica__Freight_Elevator__Controls,
@@ -27387,11 +14712,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__East_11,
-            SpotId::Ebih__Base_Camp__East_11,
-            0,
         ),
         (
             SpotId::Ebih__Base_Camp__East_11,
@@ -27425,11 +14745,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__East_12,
-            SpotId::Ebih__Base_Camp__East_12,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__East_12,
             SpotId::Ebih__Base_Camp__Staircase,
             1929,
         ),
@@ -27460,11 +14775,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Staircase,
-            SpotId::Ebih__Base_Camp__Staircase,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Save_Point,
             3157,
         ),
@@ -27490,11 +14800,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Save_Point,
-            SpotId::Ebih__Base_Camp__Save_Point,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             2456,
         ),
@@ -27520,11 +14825,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Lake_Access,
             2631,
         ),
@@ -27545,11 +14845,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Lake_Access,
-            SpotId::Ebih__Base_Camp__Lake_Access,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Lake_Access,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
             1350,
         ),
@@ -27562,11 +14857,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Save_Point,
             2456,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            0,
         ),
         (
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
@@ -27595,11 +14885,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
-            SpotId::Ebih__Base_Camp__Building_Entry,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__Tent_Entry,
             2456,
         ),
@@ -27625,11 +14910,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Tent_Entry,
-            SpotId::Ebih__Base_Camp__Tent_Entry,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__West_13,
             877,
         ),
@@ -27650,11 +14930,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__West_13,
-            SpotId::Ebih__Base_Camp__West_13,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__By_Garage__East_13,
             1350,
         ),
@@ -27662,11 +14937,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__West_11,
-            SpotId::Ebih__Base_Camp__West_11,
-            0,
         ),
         (
             SpotId::Ebih__Base_Camp__West_11,
@@ -27695,11 +14965,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__West_Midair,
-            SpotId::Ebih__Base_Camp__West_Midair,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__West_Midair,
             SpotId::Ebih__Base_Camp__West_12,
             1052,
         ),
@@ -27710,11 +14975,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__West_12,
-            SpotId::Ebih__Base_Camp__West_12,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__West_12,
             SpotId::Ebih__By_Garage__East_12,
             1350,
         ),
@@ -27722,11 +14982,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Base_Camp__West_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Left_Platform,
-            SpotId::Ebih__Base_Camp__Left_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Base_Camp__Left_Platform,
@@ -27747,11 +15002,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Base_Camp__Left_Platform_Moved,
             SpotId::Ebih__Base_Camp__Left_Platform,
             1000,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
-            SpotId::Ebih__Base_Camp__Left_Platform_Moved,
-            0,
         ),
         (
             SpotId::Ebih__Base_Camp__Left_Platform_Moved,
@@ -27800,11 +15050,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
-            SpotId::Ebih__Base_Camp__Top_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27815,11 +15060,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Bunker_Interior__Entry,
-            SpotId::Ebih__Bunker_Interior__Entry,
-            0,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Entry,
             SpotId::Ebih__Bunker_Interior__Desk,
             1052,
         ),
@@ -27832,11 +15072,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Bunker_Interior__Desk,
             SpotId::Ebih__Bunker_Interior__Entry,
             1052,
-        ),
-        (
-            SpotId::Ebih__Bunker_Interior__Desk,
-            SpotId::Ebih__Bunker_Interior__Desk,
-            0,
         ),
         (
             SpotId::Ebih__Bunker_Interior__Desk,
@@ -27850,11 +15085,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Building_Interior__Entry,
-            SpotId::Ebih__Building_Interior__Entry,
-            0,
-        ),
-        (
-            SpotId::Ebih__Building_Interior__Entry,
             SpotId::Ebih__Building_Interior__Corner,
             1754,
         ),
@@ -27867,11 +15097,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Building_Interior__Corner,
             SpotId::Ebih__Building_Interior__Entry,
             1754,
-        ),
-        (
-            SpotId::Ebih__Building_Interior__Corner,
-            SpotId::Ebih__Building_Interior__Corner,
-            0,
         ),
         (
             SpotId::Ebih__Building_Interior__Corner,
@@ -27885,11 +15110,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Tent_Interior__Entry,
-            SpotId::Ebih__Tent_Interior__Entry,
-            0,
-        ),
-        (
-            SpotId::Ebih__Tent_Interior__Entry,
             SpotId::Ebih__Tent_Interior__Desk,
             350,
         ),
@@ -27902,11 +15122,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Tent_Interior__Desk,
             SpotId::Ebih__Tent_Interior__Entry,
             350,
-        ),
-        (
-            SpotId::Ebih__Tent_Interior__Desk,
-            SpotId::Ebih__Tent_Interior__Desk,
-            0,
         ),
         (
             SpotId::Ebih__Tent_Interior__Desk,
@@ -27917,11 +15132,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__East_13,
             SpotId::Ebih__Base_Camp__West_13,
             1350,
-        ),
-        (
-            SpotId::Ebih__By_Garage__East_13,
-            SpotId::Ebih__By_Garage__East_13,
-            0,
         ),
         (
             SpotId::Ebih__By_Garage__East_13,
@@ -27942,11 +15152,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__East_Platform,
             SpotId::Ebih__By_Garage__East_13,
             1578,
-        ),
-        (
-            SpotId::Ebih__By_Garage__East_Platform,
-            SpotId::Ebih__By_Garage__East_Platform,
-            0,
         ),
         (
             SpotId::Ebih__By_Garage__East_Platform,
@@ -27980,11 +15185,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            0,
-        ),
-        (
-            SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Crawlspace,
             701,
         ),
@@ -28002,11 +15202,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__Crawlspace,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             701,
-        ),
-        (
-            SpotId::Ebih__By_Garage__Crawlspace,
-            SpotId::Ebih__By_Garage__Crawlspace,
-            0,
         ),
         (
             SpotId::Ebih__By_Garage__Crawlspace,
@@ -28030,11 +15225,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__Outcropping,
-            SpotId::Ebih__By_Garage__Outcropping,
-            0,
-        ),
-        (
-            SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__East_Bush,
             1754,
         ),
@@ -28047,11 +15237,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__East_Bush,
             SpotId::Ebih__By_Garage__Outcropping,
             1799,
-        ),
-        (
-            SpotId::Ebih__By_Garage__East_Bush,
-            SpotId::Ebih__By_Garage__East_Bush,
-            0,
         ),
         (
             SpotId::Ebih__By_Garage__East_Bush,
@@ -28080,11 +15265,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__Lower_Platform,
-            SpotId::Ebih__By_Garage__Lower_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__By_Garage__Lower_Platform,
             SpotId::Ebih__By_Garage__West_Bush,
             1800,
         ),
@@ -28110,11 +15290,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__West_Bush,
-            SpotId::Ebih__By_Garage__West_Bush,
-            0,
-        ),
-        (
-            SpotId::Ebih__By_Garage__West_Bush,
             SpotId::Ebih__By_Garage__West_12,
             1200,
         ),
@@ -28127,11 +15302,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__West_12,
             SpotId::Ebih__By_Garage__West_Bush,
             877,
-        ),
-        (
-            SpotId::Ebih__By_Garage__West_12,
-            SpotId::Ebih__By_Garage__West_12,
-            0,
         ),
         (
             SpotId::Ebih__By_Garage__West_12,
@@ -28150,11 +15320,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__West_13,
-            0,
-        ),
-        (
-            SpotId::Ebih__By_Garage__West_13,
             SpotId::Ebih__By_Garage__Garage_Entry,
             4035,
         ),
@@ -28167,11 +15332,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__Garage_Entry,
             SpotId::Ebih__By_Garage__West_13,
             4035,
-        ),
-        (
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            0,
         ),
         (
             SpotId::Ebih__By_Garage__Garage_Entry,
@@ -28190,11 +15350,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__East_12,
-            SpotId::Ebih__By_Garage__East_12,
-            0,
-        ),
-        (
-            SpotId::Ebih__By_Garage__East_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28203,7 +15358,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__By_Garage__Garage_Entry,
             750,
         ),
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Entry, 0),
         (
             SpotId::Ebih__Garage__Entry,
             SpotId::Ebih__Garage__Boxes,
@@ -28219,7 +15373,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Garage__Entry,
             1403,
         ),
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Boxes, 0),
         (
             SpotId::Ebih__Garage__Boxes,
             SpotId::Menu__Upgrade_Menu__Physiology,
@@ -28232,11 +15385,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__East_12,
-            SpotId::Ebih__Grid_25_10_12__East_12,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__East_12,
             SpotId::Ebih__Grid_25_10_12__Bush,
             1228,
         ),
@@ -28249,11 +15397,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_25_10_12__Bush,
             SpotId::Ebih__Grid_25_10_12__East_12,
             1228,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            SpotId::Ebih__Grid_25_10_12__Bush,
-            0,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Bush,
@@ -28272,11 +15415,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__West_12,
-            SpotId::Ebih__Grid_25_10_12__West_12,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__West_12,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
             1228,
         ),
@@ -28297,11 +15435,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Below_Bush,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28314,11 +15447,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
             599,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
-            0,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
@@ -28344,11 +15472,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
             1000,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            SpotId::Ebih__Grid_25_10_12__Door_Left,
-            0,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Door_Left,
@@ -28387,11 +15510,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__West_11,
             1228,
         ),
@@ -28422,11 +15540,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__West_11,
-            SpotId::Ebih__Grid_25_10_12__West_11,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__West_11,
             SpotId::Ebih__Waterfall__East_11,
             1350,
         ),
@@ -28447,11 +15560,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__West_10,
-            SpotId::Ebih__Grid_25_10_12__West_10,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__West_10,
             SpotId::Ebih__Waterfall__East_10,
             1350,
         ),
@@ -28467,11 +15575,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Door,
-            SpotId::Ebih__Grid_25_10_12__Door,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Door,
             SpotId::Ebih__Grid_25_10_12__East_11,
             526,
         ),
@@ -28484,11 +15587,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_25_10_12__East_11,
             SpotId::Ebih__Grid_25_10_12__Door,
             526,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__East_11,
-            SpotId::Ebih__Grid_25_10_12__East_11,
-            0,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__East_11,
@@ -28499,11 +15597,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_25_10_12__East_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__East_10,
-            SpotId::Ebih__Grid_25_10_12__East_10,
-            0,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__East_10,
@@ -28527,11 +15620,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -28542,11 +15630,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__East_10,
-            SpotId::Ebih__Waterfall__East_10,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__East_10,
             SpotId::Ebih__Waterfall__East_Ledge,
             701,
         ),
@@ -28559,11 +15642,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__East_Ledge,
             SpotId::Ebih__Waterfall__East_10,
             701,
-        ),
-        (
-            SpotId::Ebih__Waterfall__East_Ledge,
-            SpotId::Ebih__Waterfall__East_Ledge,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__East_Ledge,
@@ -28587,11 +15665,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__East_11,
-            SpotId::Ebih__Waterfall__East_11,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__East_11,
             SpotId::Ebih__Waterfall__Near_East_Tree,
             2631,
         ),
@@ -28604,11 +15677,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Near_East_Tree,
             SpotId::Ebih__Waterfall__East_11,
             2631,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            SpotId::Ebih__Waterfall__Near_East_Tree,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Near_East_Tree,
@@ -28624,11 +15692,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Near_East_Tree,
             1799,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Right,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Right,
@@ -28649,11 +15712,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
             1578,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Alcove_Right,
-            SpotId::Ebih__Waterfall__Alcove_Right,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Right,
@@ -28677,11 +15735,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             877,
         ),
@@ -28694,11 +15747,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             877,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Center,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
@@ -28714,11 +15762,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
             1799,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -28752,11 +15795,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Left,
-            SpotId::Ebih__Waterfall__Alcove_Left,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Alcove,
             1578,
         ),
@@ -28782,18 +15820,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Alcove,
-            SpotId::Ebih__Waterfall__Alcove,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Alcove,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Under_Waterfall,
@@ -28817,11 +15845,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Left,
-            SpotId::Ebih__Waterfall__Waterfall_Left,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Wall_Right,
             2105,
         ),
@@ -28839,11 +15862,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Wall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Left,
             2105,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Wall_Right,
-            SpotId::Ebih__Waterfall__Wall_Right,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Wall_Right,
@@ -28867,11 +15885,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Wall_Left,
-            SpotId::Ebih__Waterfall__Wall_Left,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Wall_Left,
             SpotId::Ebih__Waterfall__West_11,
             526,
         ),
@@ -28884,11 +15897,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_11,
             SpotId::Ebih__Waterfall__Wall_Left,
             600,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_11,
-            SpotId::Ebih__Waterfall__West_11,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_11,
@@ -28922,11 +15930,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__West_Lower_Path,
             1000,
         ),
@@ -28952,11 +15955,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__West_Lower_Path,
-            SpotId::Ebih__Waterfall__West_Lower_Path,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__West_10,
             2280,
         ),
@@ -28969,11 +15967,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_10,
             SpotId::Ebih__Waterfall__West_Lower_Path,
             2280,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_10,
-            SpotId::Ebih__Waterfall__West_10,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_10,
@@ -28984,11 +15977,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_9,
-            SpotId::Ebih__Waterfall__West_9,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_9,
@@ -29012,11 +16000,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__West_Climb,
-            SpotId::Ebih__Waterfall__West_Climb,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_Climb,
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             2000,
         ),
@@ -29029,11 +16012,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             SpotId::Ebih__Waterfall__West_Climb,
             500,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-            SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
@@ -29057,11 +16035,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Below_Left_Switch,
             SpotId::Ebih__Waterfall__West_8,
             701,
         ),
@@ -29079,11 +16052,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_8,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
             701,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_8,
-            SpotId::Ebih__Waterfall__West_8,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_8,
@@ -29112,11 +16080,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Left,
-            SpotId::Ebih__Waterfall__West_Door_Left,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__West_Door,
             877,
         ),
@@ -29129,11 +16092,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_Door,
             SpotId::Ebih__Waterfall__West_Door_Left,
             877,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_Door,
-            SpotId::Ebih__Waterfall__West_Door,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door,
@@ -29162,11 +16120,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
-            SpotId::Ebih__Waterfall__West_Door_Right,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             199,
         ),
@@ -29192,11 +16145,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Middle_West_Tree,
             SpotId::Ebih__Waterfall__West_Main_Path,
             1000,
         ),
@@ -29214,11 +16162,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
             526,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            SpotId::Ebih__Waterfall__West_Main_Path,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_Main_Path,
@@ -29262,11 +16205,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Cave__Entry,
             250,
         ),
@@ -29287,11 +16225,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Center_Main_Path,
-            SpotId::Ebih__Waterfall__Center_Main_Path,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Center_Main_Path,
             SpotId::Ebih__Waterfall__Big_Tree,
             2456,
         ),
@@ -29304,11 +16237,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Big_Tree,
             SpotId::Ebih__Waterfall__Center_Main_Path,
             2456,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Big_Tree,
-            SpotId::Ebih__Waterfall__Big_Tree,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__Big_Tree,
@@ -29332,11 +16260,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Below_Tree,
-            SpotId::Ebih__Waterfall__Below_Tree,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Below_Tree,
             SpotId::Ebih__Waterfall__Platform,
             701,
         ),
@@ -29357,11 +16280,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Platform,
-            SpotId::Ebih__Waterfall__Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Platform,
             SpotId::Ebih__Waterfall__East_8,
             3333,
         ),
@@ -29374,11 +16292,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__East_8,
             SpotId::Ebih__Waterfall__Platform,
             3333,
-        ),
-        (
-            SpotId::Ebih__Waterfall__East_8,
-            SpotId::Ebih__Waterfall__East_8,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__East_8,
@@ -29389,11 +16302,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__East_8,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Waterfall__East_7,
-            SpotId::Ebih__Waterfall__East_7,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__East_7,
@@ -29427,11 +16335,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Waterfall__Top_Waterfall,
-            SpotId::Ebih__Waterfall__Top_Waterfall,
-            0,
-        ),
-        (
-            SpotId::Ebih__Waterfall__Top_Waterfall,
             SpotId::Ebih__Waterfall__West_7,
             5964,
         ),
@@ -29444,11 +16347,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__West_7,
             SpotId::Ebih__Waterfall__Top_Waterfall,
             5964,
-        ),
-        (
-            SpotId::Ebih__Waterfall__West_7,
-            SpotId::Ebih__Waterfall__West_7,
-            0,
         ),
         (
             SpotId::Ebih__Waterfall__West_7,
@@ -29467,11 +16365,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__East_10,
-            SpotId::Ebih__Ebih_West__East_10,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_10,
             SpotId::Ebih__Ebih_West__Mid_Save,
             1578,
         ),
@@ -29484,11 +16377,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__East_10,
             1578,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            SpotId::Ebih__Ebih_West__Mid_Save,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Mid_Save,
@@ -29517,11 +16405,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Alcove,
             2807,
         ),
@@ -29547,11 +16430,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Alcove,
-            SpotId::Ebih__Ebih_West__Alcove,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Alcove,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -29564,11 +16442,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Above_Alcove,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             1052,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            SpotId::Ebih__Ebih_West__Above_Alcove,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Alcove,
@@ -29592,11 +16465,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__East_9,
-            SpotId::Ebih__Ebih_West__East_9,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_9,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -29612,11 +16480,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Block_Left,
-            SpotId::Ebih__Ebih_West__Block_Left,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Block_Left,
             SpotId::Ebih__Ebih_West__Block_Right,
             877,
         ),
@@ -29629,11 +16492,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__East_7,
             SpotId::Ebih__Waterfall__West_7,
             1350,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_7,
-            SpotId::Ebih__Ebih_West__East_7,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__East_7,
@@ -29659,11 +16517,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_7,
             526,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            SpotId::Ebih__Ebih_West__Above_Chute,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Chute,
@@ -29702,11 +16555,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Upper_Save,
-            SpotId::Ebih__Ebih_West__Upper_Save,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             1200,
         ),
@@ -29737,11 +16585,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__High_Platform,
             1200,
         ),
@@ -29767,11 +16610,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__High_Platform,
-            SpotId::Ebih__Ebih_West__High_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__High_Ledge,
             1000,
         ),
@@ -29792,11 +16630,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__High_Ledge,
-            SpotId::Ebih__Ebih_West__High_Ledge,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__East_6,
             1228,
         ),
@@ -29809,11 +16642,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__East_6,
             SpotId::Ebih__Ebih_West__High_Ledge,
             1228,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_6,
-            SpotId::Ebih__Ebih_West__East_6,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__East_6,
@@ -29829,11 +16657,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__East_8,
             SpotId::Ebih__Waterfall__West_8,
             1350,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_8,
-            SpotId::Ebih__Ebih_West__East_8,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__East_8,
@@ -29862,11 +16685,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Middle_Middle,
-            SpotId::Ebih__Ebih_West__Middle_Middle,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Middle_Middle,
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             2105,
         ),
@@ -29892,11 +16710,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Middle_Cliff,
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -29904,11 +16717,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Giguna_Pillar,
             SpotId::Ebih__Ebih_West__Above_Alcove,
             1052,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Giguna_Pillar,
-            SpotId::Ebih__Ebih_West__Giguna_Pillar,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Giguna_Pillar,
@@ -29927,11 +16735,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_9,
-            SpotId::Ebih__Ebih_West__West_9,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__West_9,
             SpotId::Giguna__Giguna_Northeast__East_9,
             1350,
         ),
@@ -29947,11 +16750,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Block_Right,
-            SpotId::Ebih__Ebih_West__Block_Right,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Block_Right,
             SpotId::Ebih__Ebih_West__Refill_Station,
             700,
         ),
@@ -29964,11 +16762,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Block_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Refill_Station,
-            SpotId::Ebih__Ebih_West__Refill_Station,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Refill_Station,
@@ -30002,11 +16795,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__East_11,
-            SpotId::Ebih__Ebih_West__East_11,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -30014,11 +16802,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Above_Door,
             SpotId::Ebih__Ebih_West__Refill_Station,
             600,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Above_Door,
-            SpotId::Ebih__Ebih_West__Above_Door,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Door,
@@ -30047,11 +16830,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Below_Door,
-            SpotId::Ebih__Ebih_West__Below_Door,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Below_Door,
             SpotId::Ebih__Ebih_West__Left_of_Switch,
             1228,
         ),
@@ -30072,11 +16850,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Small_Gap,
-            SpotId::Ebih__Ebih_West__Small_Gap,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Small_Gap,
             SpotId::Ebih__Ebih_West__Left_of_Gap,
             1228,
         ),
@@ -30089,11 +16862,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Left_of_Gap,
             SpotId::Ebih__Ebih_West__Small_Gap,
             1228,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Left_of_Gap,
-            SpotId::Ebih__Ebih_West__Left_of_Gap,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Left_of_Gap,
@@ -30117,11 +16885,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Left_of_Switch,
-            SpotId::Ebih__Ebih_West__Left_of_Switch,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Left_of_Switch,
             SpotId::Ebih__Ebih_West__Lower_Hill,
             1200,
         ),
@@ -30142,11 +16905,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Hill,
-            SpotId::Ebih__Ebih_West__Lower_Hill,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Lower_Hill,
             SpotId::Ebih__Ebih_West__Lower_Cliff,
             1052,
         ),
@@ -30162,11 +16920,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Cliff,
-            SpotId::Ebih__Ebih_West__Lower_Cliff,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Lower_Cliff,
             SpotId::Ebih__Ebih_West__Lower_Platform,
             800,
         ),
@@ -30179,11 +16932,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Lower_Platform,
             SpotId::Ebih__Ebih_West__Lower_Cliff,
             3599,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Lower_Platform,
-            SpotId::Ebih__Ebih_West__Lower_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Platform,
@@ -30212,11 +16960,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__Lower_Save,
-            SpotId::Ebih__Ebih_West__Lower_Save,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Lower_Save,
             SpotId::Ebih__Ebih_West__West_13,
             1578,
         ),
@@ -30242,11 +16985,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_High_Cliff,
-            SpotId::Ebih__Ebih_West__West_High_Cliff,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__West_High_Cliff,
             SpotId::Ebih__Ebih_West__West_Fork,
             877,
         ),
@@ -30259,11 +16997,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__West_Fork,
             SpotId::Ebih__Ebih_West__West_High_Cliff,
             877,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__West_Fork,
-            SpotId::Ebih__Ebih_West__West_Fork,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__West_Fork,
@@ -30287,11 +17020,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_11,
-            SpotId::Ebih__Ebih_West__West_11,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__West_11,
             SpotId::Giguna__Giguna_Northeast__East_11,
             1350,
         ),
@@ -30304,11 +17032,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__West_12,
             SpotId::Ebih__Ebih_West__West_Fork,
             4800,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__West_12,
-            SpotId::Ebih__Ebih_West__West_12,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__West_12,
@@ -30327,11 +17050,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__West_13,
-            SpotId::Ebih__Ebih_West__West_13,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__West_13,
             SpotId::Giguna__Wasteland__East_13,
             1350,
         ),
@@ -30344,11 +17062,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__East_13,
             SpotId::Ebih__Ebih_West__Lower_Save,
             5087,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__East_13,
-            SpotId::Ebih__Ebih_West__East_13,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_West__East_13,
@@ -30365,7 +17078,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Waterfall__Cave_Entrance,
             250,
         ),
-        (SpotId::Ebih__Cave__Entry, SpotId::Ebih__Cave__Entry, 0),
         (
             SpotId::Ebih__Cave__Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
@@ -30378,11 +17090,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__West_8,
-            SpotId::Ebih__Ebih_East__West_8,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__West_8,
             SpotId::Ebih__Ebih_East__Moving_Platform,
             1052,
         ),
@@ -30395,11 +17102,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_East__Moving_Platform,
             SpotId::Ebih__Ebih_East__West_8,
             1052,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            SpotId::Ebih__Ebih_East__Moving_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_East__Moving_Platform,
@@ -30423,11 +17125,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__Ledge_End,
-            SpotId::Ebih__Ebih_East__Ledge_End,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Ledge_End,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
             699,
         ),
@@ -30448,11 +17145,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
             SpotId::Ebih__Ebih_East__Corner,
             877,
         ),
@@ -30468,11 +17160,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__Corner,
-            SpotId::Ebih__Ebih_East__Corner,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Corner,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -30480,11 +17167,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_East__Dispenser,
             SpotId::Ebih__Ebih_East__Ledge_End,
             5000,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Dispenser,
-            SpotId::Ebih__Ebih_East__Dispenser,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_East__Dispenser,
@@ -30505,11 +17187,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
             999,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            SpotId::Ebih__Ebih_East__East_Ledge,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_East__East_Ledge,
@@ -30540,11 +17217,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_East__Middle_Platform,
             SpotId::Ebih__Ebih_East__East_Ledge,
             877,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            SpotId::Ebih__Ebih_East__Middle_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_East__Middle_Platform,
@@ -30583,11 +17255,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__Upper_Ledge,
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__Upper_Ledge,
             SpotId::Ebih__Ebih_East__West_7,
             1228,
         ),
@@ -30608,11 +17275,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__West_7,
-            SpotId::Ebih__Ebih_East__West_7,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__West_7,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -30625,11 +17287,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_East__East_Hill,
             SpotId::Ebih__Ebih_East__Middle_Platform,
             2280,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__East_Hill,
-            SpotId::Ebih__Ebih_East__East_Hill,
-            0,
         ),
         (
             SpotId::Ebih__Ebih_East__East_Hill,
@@ -30648,11 +17305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_East__East_9,
-            SpotId::Ebih__Ebih_East__East_9,
-            0,
-        ),
-        (
-            SpotId::Ebih__Ebih_East__East_9,
             SpotId::Ebih__Observation_Tower_Room__West_9,
             1350,
         ),
@@ -30668,11 +17320,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_21_1_5__West_6,
-            SpotId::Ebih__Grid_21_1_5__West_6,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_21_1_5__West_6,
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
             1578,
         ),
@@ -30688,11 +17335,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
             SpotId::Ebih__Grid_21_1_5__East_6,
             1578,
         ),
@@ -30705,11 +17347,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_21_1_5__East_6,
             SpotId::Ebih__Grid_21_1_5__Portal_Stand,
             1578,
-        ),
-        (
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            0,
         ),
         (
             SpotId::Ebih__Grid_21_1_5__East_6,
@@ -30725,11 +17362,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Boss_Room__West_6,
             SpotId::Ebih__Grid_21_1_5__East_6,
             1350,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__West_6,
-            SpotId::Ebih__Boss_Room__West_6,
-            0,
         ),
         (
             SpotId::Ebih__Boss_Room__West_6,
@@ -30750,11 +17382,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Boss_Room__Boss,
             SpotId::Ebih__Boss_Room__West_6,
             2631,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__Boss,
-            SpotId::Ebih__Boss_Room__Boss,
-            0,
         ),
         (
             SpotId::Ebih__Boss_Room__Boss,
@@ -30783,11 +17410,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Boss_Room__Past_Boss,
-            SpotId::Ebih__Boss_Room__Past_Boss,
-            0,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__Past_Boss,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -30800,11 +17422,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Boss_Room__Lower_Tree,
             SpotId::Ebih__Boss_Room__Past_Boss,
             1403,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-            SpotId::Ebih__Boss_Room__Lower_Tree,
-            0,
         ),
         (
             SpotId::Ebih__Boss_Room__Lower_Tree,
@@ -30823,11 +17440,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Boss_Room__Lower_Ledge,
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
-            0,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__Lower_Ledge,
             SpotId::Ebih__Boss_Room__East_6,
             877,
         ),
@@ -30840,11 +17452,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Boss_Room__East_6,
             SpotId::Ebih__Boss_Room__Lower_Ledge,
             877,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__East_6,
-            SpotId::Ebih__Boss_Room__East_6,
-            0,
         ),
         (
             SpotId::Ebih__Boss_Room__East_6,
@@ -30855,11 +17462,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Boss_Room__East_6,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__East_4,
-            SpotId::Ebih__Boss_Room__East_4,
-            0,
         ),
         (
             SpotId::Ebih__Boss_Room__East_4,
@@ -30888,11 +17490,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Boss_Room__East_Ledge,
-            SpotId::Ebih__Boss_Room__East_Ledge,
-            0,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             877,
         ),
@@ -30923,11 +17520,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Boss_Room__Upper_Tree,
-            SpotId::Ebih__Boss_Room__Upper_Tree,
-            0,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__High_Platform,
             1578,
         ),
@@ -30945,11 +17537,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Boss_Room__High_Platform,
             SpotId::Ebih__Boss_Room__Upper_Tree,
             1578,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__High_Platform,
-            SpotId::Ebih__Boss_Room__High_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Boss_Room__High_Platform,
@@ -30978,11 +17565,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Boss_Room__West_5,
-            SpotId::Ebih__Boss_Room__West_5,
-            0,
-        ),
-        (
-            SpotId::Ebih__Boss_Room__West_5,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -30990,11 +17572,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__West_6,
             SpotId::Ebih__Boss_Room__East_6,
             1000,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__West_6,
-            SpotId::Ebih__Drone_Room__West_6,
-            0,
         ),
         (
             SpotId::Ebih__Drone_Room__West_6,
@@ -31023,11 +17600,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__West_4,
-            SpotId::Ebih__Drone_Room__West_4,
-            0,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
             1600,
         ),
@@ -31053,11 +17625,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__Pit_Left,
-            SpotId::Ebih__Drone_Room__Pit_Left,
-            0,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Pit_Left,
             SpotId::Ebih__Drone_Room__Portal,
             1052,
         ),
@@ -31078,11 +17645,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__Portal,
-            SpotId::Ebih__Drone_Room__Portal,
-            0,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Portal,
             SpotId::Ebih__Drone_Room__Item,
             701,
         ),
@@ -31100,11 +17662,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__Item,
             SpotId::Ebih__Drone_Room__Portal,
             701,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Item,
-            SpotId::Ebih__Drone_Room__Item,
-            0,
         ),
         (
             SpotId::Ebih__Drone_Room__Item,
@@ -31133,11 +17690,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__Middle_Platform,
-            SpotId::Ebih__Drone_Room__Middle_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Middle_Platform,
             SpotId::Ebih__Drone_Room__Portal_Exit,
             2500,
         ),
@@ -31155,11 +17707,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__Portal_Exit,
             SpotId::Ebih__Drone_Room__Middle_Platform,
             1403,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            SpotId::Ebih__Drone_Room__Portal_Exit,
-            0,
         ),
         (
             SpotId::Ebih__Drone_Room__Portal_Exit,
@@ -31190,11 +17737,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__Moving_Platform,
             SpotId::Ebih__Drone_Room__Portal_Exit,
             450,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            SpotId::Ebih__Drone_Room__Moving_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Drone_Room__Moving_Platform,
@@ -31238,11 +17780,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__Left_Platform,
-            SpotId::Ebih__Drone_Room__Left_Platform,
-            0,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Left_Platform,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -31250,11 +17787,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Drone_Room__Tree,
             SpotId::Ebih__Drone_Room__Portal_Exit,
             701,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__Tree,
-            SpotId::Ebih__Drone_Room__Tree,
-            0,
         ),
         (
             SpotId::Ebih__Drone_Room__Tree,
@@ -31278,11 +17810,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Drone_Room__East_4,
-            SpotId::Ebih__Drone_Room__East_4,
-            0,
-        ),
-        (
-            SpotId::Ebih__Drone_Room__East_4,
             SpotId::Ebih__Grid_25_2_6__West_4,
             1350,
         ),
@@ -31295,11 +17822,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_25_2_6__West_4,
             SpotId::Ebih__Drone_Room__East_4,
             1350,
-        ),
-        (
-            SpotId::Ebih__Grid_25_2_6__West_4,
-            SpotId::Ebih__Grid_25_2_6__West_4,
-            0,
         ),
         (
             SpotId::Ebih__Grid_25_2_6__West_4,
@@ -31313,11 +17835,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_25_2_6__Pit,
-            SpotId::Ebih__Grid_25_2_6__Pit,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_25_2_6__Pit,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -31328,11 +17845,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_26_10_11__West_11,
-            SpotId::Ebih__Grid_26_10_11__West_11,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__West_11,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
             1228,
         ),
@@ -31345,11 +17857,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
             SpotId::Ebih__Grid_26_10_11__West_11,
             1228,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
-            0,
         ),
         (
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
@@ -31370,11 +17877,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_26_10_11__Under_Ledge,
             SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
             701,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-            SpotId::Ebih__Grid_26_10_11__Under_Ledge,
-            0,
         ),
         (
             SpotId::Ebih__Grid_26_10_11__Under_Ledge,
@@ -31398,11 +17900,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_26_10_11__Ledge,
-            SpotId::Ebih__Grid_26_10_11__Ledge,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__Ledge,
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
             1052,
         ),
@@ -31415,11 +17912,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
             SpotId::Ebih__Grid_26_10_11__West_11,
             1228,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            SpotId::Ebih__Grid_26_10_11__Middle_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Grid_26_10_11__Middle_Platform,
@@ -31445,11 +17937,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__Ledge,
             877,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            SpotId::Ebih__Grid_26_10_11__Upper_Platform,
-            0,
         ),
         (
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
@@ -31483,11 +17970,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_26_10_11__West_10,
-            SpotId::Ebih__Grid_26_10_11__West_10,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__West_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -31498,11 +17980,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Grid_26_10_11__Cliff,
-            SpotId::Ebih__Grid_26_10_11__Cliff,
-            0,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__Cliff,
             SpotId::Ebih__Grid_26_10_11__East_10,
             1228,
         ),
@@ -31515,11 +17992,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Grid_26_10_11__East_10,
             SpotId::Ebih__Grid_26_10_11__Cliff,
             1228,
-        ),
-        (
-            SpotId::Ebih__Grid_26_10_11__East_10,
-            SpotId::Ebih__Grid_26_10_11__East_10,
-            0,
         ),
         (
             SpotId::Ebih__Grid_26_10_11__East_10,
@@ -31535,11 +18007,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Ebih_East__East_9,
             1350,
-        ),
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            SpotId::Ebih__Observation_Tower_Room__West_9,
-            0,
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__West_9,
@@ -31563,11 +18030,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
-            0,
-        ),
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Top,
             SpotId::Ebih__Observation_Tower_Room__West_10,
             1578,
         ),
@@ -31588,11 +18050,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
-            0,
-        ),
-        (
-            SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             SpotId::Ebih__Observation_Tower_Room__West_10,
             1578,
         ),
@@ -31610,11 +18067,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Observation_Tower_Room__Cliff,
             SpotId::Ebih__Observation_Tower_Room__Tower_Bottom,
             600,
-        ),
-        (
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            SpotId::Ebih__Observation_Tower_Room__Cliff,
-            0,
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__Cliff,
@@ -31648,11 +18100,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__West_10,
-            SpotId::Ebih__Observation_Tower_Room__West_10,
-            0,
-        ),
-        (
-            SpotId::Ebih__Observation_Tower_Room__West_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -31668,11 +18115,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Observation_Tower_Room__East_11,
-            SpotId::Ebih__Observation_Tower_Room__East_11,
-            0,
-        ),
-        (
-            SpotId::Ebih__Observation_Tower_Room__East_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -31680,11 +18122,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__West_13,
             SpotId::Ebih__Ebih_West__East_13,
             1350,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__West_13,
-            SpotId::Ebih__Vertical_Interchange__West_13,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__West_13,
@@ -31705,11 +18142,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Passage_West,
             SpotId::Ebih__Vertical_Interchange__West_13,
             701,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            SpotId::Ebih__Vertical_Interchange__Passage_West,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Passage_West,
@@ -31738,11 +18170,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Door_West,
-            SpotId::Ebih__Vertical_Interchange__Door_West,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_West,
             SpotId::Ebih__Vertical_Interchange__Door,
             526,
         ),
@@ -31758,11 +18185,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Door,
-            SpotId::Ebih__Vertical_Interchange__Door,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Door,
             SpotId::Ebih__Vertical_Interchange__Door_East,
             526,
         ),
@@ -31775,11 +18197,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Door_East,
             SpotId::Ebih__Vertical_Interchange__Door,
             526,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-            SpotId::Ebih__Vertical_Interchange__Door_East,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Door_East,
@@ -31800,11 +18217,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Passage_East,
             SpotId::Ebih__Vertical_Interchange__Door_West,
             1000,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            SpotId::Ebih__Vertical_Interchange__Passage_East,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Passage_East,
@@ -31828,11 +18240,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
-            SpotId::Ebih__Vertical_Interchange__East_13,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
             500,
         ),
@@ -31853,11 +18260,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Descent,
             SpotId::Ebih__Vertical_Interchange__Middle_Drop,
             2280,
         ),
@@ -31870,11 +18272,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Middle_Drop,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
             2280,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-            SpotId::Ebih__Vertical_Interchange__Middle_Drop,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Middle_Drop,
@@ -31890,11 +18287,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
             SpotId::Ebih__Vertical_Interchange__Middle_Drop,
             5399,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
@@ -31918,11 +18310,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Refill_Station,
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             399,
         ),
@@ -31935,11 +18322,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
             SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
             1200,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
@@ -31958,11 +18340,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Block_Cubby,
             SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
             350,
         ),
@@ -31975,11 +18352,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
             SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
             1403,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Cubby_Exit,
@@ -32013,11 +18385,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__East_Tunnel,
             SpotId::Ebih__Vertical_Interchange__East_15,
             701,
         ),
@@ -32043,11 +18410,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__East_15,
-            SpotId::Ebih__Vertical_Interchange__East_15,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__East_15,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -32060,11 +18422,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             SpotId::Ebih__Vertical_Interchange__Blocked_Refill_Station,
             1000,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            SpotId::Ebih__Vertical_Interchange__Below_Door,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Below_Door,
@@ -32090,11 +18447,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             600,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
-            0,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
@@ -32118,11 +18470,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__Switch,
-            SpotId::Ebih__Vertical_Interchange__Switch,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__Switch,
             SpotId::Ebih__Vertical_Interchange__South,
             350,
         ),
@@ -32143,18 +18490,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Vertical_Interchange__South,
-            SpotId::Ebih__Vertical_Interchange__South,
-            0,
-        ),
-        (
-            SpotId::Ebih__Vertical_Interchange__South,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__Save_Point,
-            SpotId::Giguna_Breach__Peak__Save_Point,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Peak__Save_Point,
@@ -32170,11 +18507,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Peak__East_Passage,
             SpotId::Giguna_Breach__Peak__Save_Point,
             3508,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__East_Passage,
-            SpotId::Giguna_Breach__Peak__East_Passage,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Peak__East_Passage,
@@ -32193,11 +18525,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Peak__Column,
-            SpotId::Giguna_Breach__Peak__Column,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__Column,
             SpotId::Giguna_Breach__Peak__West_7,
             701,
         ),
@@ -32208,11 +18535,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Peak__West_7,
-            SpotId::Giguna_Breach__Peak__West_7,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__West_7,
             SpotId::Giguna_Breach__Chimney__East_7,
             1600,
         ),
@@ -32220,11 +18542,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Peak__West_7,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__East_6,
-            SpotId::Giguna_Breach__Peak__East_6,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Peak__East_6,
@@ -32248,11 +18565,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Peak__Upper_East,
-            SpotId::Giguna_Breach__Peak__Upper_East,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__Upper_East,
             SpotId::Giguna_Breach__Peak__Upper_West,
             2105,
         ),
@@ -32265,11 +18577,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Peak__Upper_West,
             SpotId::Giguna_Breach__Peak__Upper_East,
             2105,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__Upper_West,
-            SpotId::Giguna_Breach__Peak__Upper_West,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Peak__Upper_West,
@@ -32285,11 +18592,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Peak__Portal,
             SpotId::Giguna_Breach__Peak__Upper_West,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Peak__Portal,
-            SpotId::Giguna_Breach__Peak__Portal,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Peak__Portal,
@@ -32308,11 +18610,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Chimney__East_7,
-            SpotId::Giguna_Breach__Chimney__East_7,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__East_7,
             SpotId::Giguna_Breach__Chimney__Top,
             1200,
         ),
@@ -32328,11 +18625,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Chimney__Top,
-            SpotId::Giguna_Breach__Chimney__Top,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__Top,
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
             1949,
         ),
@@ -32345,11 +18637,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
             SpotId::Giguna_Breach__Chimney__Top,
             7199,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
@@ -32373,11 +18660,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Chimney__East_9,
-            SpotId::Giguna_Breach__Chimney__East_9,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__East_9,
             SpotId::Giguna_Breach__Chimney__South,
             1403,
         ),
@@ -32403,11 +18685,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Chimney__South,
-            SpotId::Giguna_Breach__Chimney__South,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__South,
             SpotId::Giguna_Breach__Below_Chimney__North,
             1600,
         ),
@@ -32415,11 +18692,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Chimney__South,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__East_8,
-            SpotId::Giguna_Breach__Chimney__East_8,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Chimney__East_8,
@@ -32443,18 +18715,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Chimney__Cache,
-            SpotId::Giguna_Breach__Chimney__Cache,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Chimney__Cache,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Below_Chimney__North,
-            SpotId::Giguna_Breach__Below_Chimney__North,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__North,
@@ -32480,11 +18742,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
             SpotId::Giguna_Breach__Below_Chimney__North,
             600,
-        ),
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__Passage_Lip,
@@ -32513,11 +18770,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
             SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
             350,
         ),
@@ -32530,11 +18782,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
             SpotId::Giguna_Breach__Below_Chimney__East_Ledge,
             1200,
-        ),
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-            SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__Cubby_Entrance,
@@ -32553,11 +18800,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Below_Chimney__West_Passage,
             SpotId::Giguna_Breach__Below_Chimney__Southwest,
             1754,
         ),
@@ -32570,11 +18812,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Below_Chimney__Southwest,
             SpotId::Giguna_Breach__Below_Chimney__West_Passage,
             1799,
-        ),
-        (
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-            SpotId::Giguna_Breach__Below_Chimney__Southwest,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Below_Chimney__Southwest,
@@ -32593,11 +18830,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Cubby__Entrance,
-            SpotId::Giguna_Breach__Cubby__Entrance,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Cubby__Entrance,
             SpotId::Giguna_Breach__Cubby__Rocks,
             701,
         ),
@@ -32613,11 +18845,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Cubby__Rocks,
-            SpotId::Giguna_Breach__Cubby__Rocks,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Cubby__Rocks,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -32625,11 +18852,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__Below_Chimney__Southwest,
             1600,
-        ),
-        (
-            SpotId::Giguna_Breach__SW_Save__North,
-            SpotId::Giguna_Breach__SW_Save__North,
-            0,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__North,
@@ -32655,11 +18877,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            SpotId::Giguna_Breach__SW_Save__Lower_Platform,
-            0,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
@@ -32690,11 +18907,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__SW_Save__Side_Door,
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             877,
-        ),
-        (
-            SpotId::Giguna_Breach__SW_Save__Side_Door,
-            SpotId::Giguna_Breach__SW_Save__Side_Door,
-            0,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Side_Door,
@@ -32718,11 +18930,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__SW_Save__West_11,
-            SpotId::Giguna_Breach__SW_Save__West_11,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__SW_Save__West_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -32730,11 +18937,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__SW_Save__Save_Point,
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__SW_Save__Save_Point,
-            SpotId::Giguna_Breach__SW_Save__Save_Point,
-            0,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -32758,11 +18960,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__SW_Save__East_12,
-            SpotId::Giguna_Breach__SW_Save__East_12,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__SW_Save__East_12,
             SpotId::Giguna_Breach__Robopede__West,
             1600,
         ),
@@ -32775,11 +18972,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Robopede__West,
             SpotId::Giguna_Breach__SW_Save__East_12,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Robopede__West,
-            SpotId::Giguna_Breach__Robopede__West,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Robopede__West,
@@ -32798,11 +18990,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Robopede__Center,
-            SpotId::Giguna_Breach__Robopede__Center,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Robopede__Center,
             SpotId::Giguna_Breach__Robopede__North,
             1403,
         ),
@@ -32815,11 +19002,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Robopede__North,
             SpotId::Giguna_Breach__Robopede__Center,
             1403,
-        ),
-        (
-            SpotId::Giguna_Breach__Robopede__North,
-            SpotId::Giguna_Breach__Robopede__North,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Robopede__North,
@@ -32838,11 +19020,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Grid_14_10_11__South,
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__South,
             SpotId::Giguna_Breach__Grid_14_10_11__East_11,
             1403,
         ),
@@ -32855,11 +19032,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Grid_14_10_11__East_11,
             SpotId::Giguna_Breach__Grid_14_10_11__South,
             1403,
-        ),
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_11,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Grid_14_10_11__East_11,
@@ -32870,11 +19042,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Grid_14_10_11__East_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-            SpotId::Giguna_Breach__Grid_14_10_11__East_10,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Grid_14_10_11__East_10,
@@ -32898,11 +19065,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__High_Ledge,
             SpotId::Giguna_Breach__Grid_14_10_11__North,
             600,
         ),
@@ -32923,11 +19085,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Grid_14_10_11__North,
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Grid_14_10_11__North,
             SpotId::Giguna_Breach__Central__South,
             1600,
         ),
@@ -32943,11 +19100,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__West_11,
-            SpotId::Giguna_Breach__Fire_Room__West_11,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_11,
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
             1754,
         ),
@@ -32960,11 +19112,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
             SpotId::Giguna_Breach__Fire_Room__West_11,
             1754,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-            SpotId::Giguna_Breach__Fire_Room__First_Fire,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__First_Fire,
@@ -32988,11 +19135,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__Cuesta,
-            SpotId::Giguna_Breach__Fire_Room__Cuesta,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__Cuesta,
             SpotId::Giguna_Breach__Fire_Room__South,
             1754,
         ),
@@ -33005,11 +19147,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Fire_Room__South,
             SpotId::Giguna_Breach__Fire_Room__Cuesta,
             1500,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__South,
-            SpotId::Giguna_Breach__Fire_Room__South,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__South,
@@ -33030,11 +19167,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Fire_Room__East_11,
             SpotId::Giguna_Breach__Fire_Room__South,
             1403,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__East_11,
-            SpotId::Giguna_Breach__Fire_Room__East_11,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__East_11,
@@ -33058,11 +19190,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__West_Plateau,
             SpotId::Giguna_Breach__Fire_Room__East_10,
             700,
         ),
@@ -33083,11 +19210,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Fire_Room__East_10,
-            SpotId::Giguna_Breach__Fire_Room__East_10,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Fire_Room__East_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33098,11 +19220,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Slingshot__West,
-            SpotId::Giguna_Breach__Slingshot__West,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Slingshot__West,
             SpotId::Giguna_Breach__Slingshot__Column,
             1403,
         ),
@@ -33115,11 +19232,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Slingshot__Column,
             SpotId::Giguna_Breach__Slingshot__West,
             1403,
-        ),
-        (
-            SpotId::Giguna_Breach__Slingshot__Column,
-            SpotId::Giguna_Breach__Slingshot__Column,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Slingshot__Column,
@@ -33135,11 +19247,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Slingshot__Ravine,
             SpotId::Giguna_Breach__Slingshot__Column,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Slingshot__Ravine,
-            SpotId::Giguna_Breach__Slingshot__Ravine,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Slingshot__Ravine,
@@ -33153,11 +19260,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Antechamber__North,
-            SpotId::Giguna_Breach__Antechamber__North,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Antechamber__North,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33165,11 +19267,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Central__West_9,
             SpotId::Giguna_Breach__Chimney__East_9,
             1600,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__West_9,
-            SpotId::Giguna_Breach__Central__West_9,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Central__West_9,
@@ -33185,11 +19282,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Central__Wall,
             SpotId::Giguna_Breach__Central__West_9,
             701,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__Wall,
-            SpotId::Giguna_Breach__Central__Wall,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Central__Wall,
@@ -33213,11 +19305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__South,
-            SpotId::Giguna_Breach__Central__South,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__South,
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
             1600,
         ),
@@ -33230,11 +19317,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
             SpotId::Giguna_Breach__Central__South,
             1228,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Central__Upper_Floating_Brick,
@@ -33258,11 +19340,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__West_Statue,
-            SpotId::Giguna_Breach__Central__West_Statue,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Giguna_Breach__Central__Statuette,
             1929,
         ),
@@ -33275,11 +19352,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Central__West_Statue,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__Statuette,
-            SpotId::Giguna_Breach__Central__Statuette,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Central__Statuette,
@@ -33303,11 +19375,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__Tunnel,
-            SpotId::Giguna_Breach__Central__Tunnel,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__Tunnel,
             SpotId::Giguna_Breach__Central__West_8,
             526,
         ),
@@ -33328,11 +19395,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__West_8,
-            SpotId::Giguna_Breach__Central__West_8,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__West_8,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33345,11 +19407,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Central__Middle_Statue,
             SpotId::Giguna_Breach__Central__West_Statue,
             1228,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-            SpotId::Giguna_Breach__Central__Middle_Statue,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Central__Middle_Statue,
@@ -33368,11 +19425,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__East_Brick,
-            SpotId::Giguna_Breach__Central__East_Brick,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__East_Brick,
             SpotId::Giguna_Breach__Central__East_9,
             2105,
         ),
@@ -33388,11 +19440,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Central__East_9,
-            SpotId::Giguna_Breach__Central__East_9,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Central__East_9,
             SpotId::Giguna_Breach__Ascent__West_9,
             1600,
         ),
@@ -33408,11 +19455,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Ascent__West_9,
-            SpotId::Giguna_Breach__Ascent__West_9,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Ascent__West_9,
             SpotId::Giguna_Breach__Ascent__Bottom,
             701,
         ),
@@ -33425,11 +19467,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Ascent__Bottom,
             SpotId::Giguna_Breach__Ascent__West_9,
             701,
-        ),
-        (
-            SpotId::Giguna_Breach__Ascent__Bottom,
-            SpotId::Giguna_Breach__Ascent__Bottom,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Ascent__Bottom,
@@ -33445,11 +19482,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Ascent__Top,
             SpotId::Giguna_Breach__Ascent__Bottom,
             4605,
-        ),
-        (
-            SpotId::Giguna_Breach__Ascent__Top,
-            SpotId::Giguna_Breach__Ascent__Top,
-            0,
         ),
         (
             SpotId::Giguna_Breach__Ascent__Top,
@@ -33473,11 +19505,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Ascent__West_6,
-            SpotId::Giguna_Breach__Ascent__West_6,
-            0,
-        ),
-        (
-            SpotId::Giguna_Breach__Ascent__West_6,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33485,11 +19512,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__East_9,
             SpotId::Ebih__Ebih_West__West_9,
             1350,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__East_9,
-            SpotId::Giguna__Giguna_Northeast__East_9,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__East_9,
@@ -33503,11 +19525,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             2807,
         ),
@@ -33515,11 +19532,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            SpotId::Giguna__Giguna_Northeast__Crow_Eating,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
@@ -33540,11 +19552,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            SpotId::Giguna__Giguna_Northeast__Save_Point,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Save_Point,
@@ -33570,11 +19577,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Step,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             701,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Step,
-            SpotId::Giguna__Giguna_Northeast__Step,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Step,
@@ -33603,11 +19605,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__West_10,
-            SpotId::Giguna__Giguna_Northeast__West_10,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__West_10,
             SpotId::Giguna__Carnelian__East_10,
             1350,
         ),
@@ -33623,11 +19620,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__West_9,
-            SpotId::Giguna__Giguna_Northeast__West_9,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__West_9,
             SpotId::Giguna__Ruins_East__East_9,
             1350,
         ),
@@ -33640,11 +19632,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
             1052,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            SpotId::Giguna__Giguna_Northeast__Gate_Left,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Left,
@@ -33668,11 +19655,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
             1928,
         ),
@@ -33688,11 +19670,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Button,
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
             877,
         ),
@@ -33708,11 +19685,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Gate_Right,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             1000,
         ),
@@ -33720,11 +19692,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Gate_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
@@ -33753,11 +19720,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__East_11,
-            SpotId::Giguna__Giguna_Northeast__East_11,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__East_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33765,11 +19727,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
             3157,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            SpotId::Giguna__Giguna_Northeast__Right_Column,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Right_Column,
@@ -33793,11 +19750,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Switch,
-            SpotId::Giguna__Giguna_Northeast__Switch,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Switch,
             SpotId::Giguna__Giguna_Northeast__Door,
             1000,
         ),
@@ -33810,11 +19762,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
             1403,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Door,
-            SpotId::Giguna__Giguna_Northeast__Door,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Door,
@@ -33833,11 +19780,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Vault,
-            SpotId::Giguna__Giguna_Northeast__Vault,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Northeast__Vault,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -33848,11 +19790,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__East_10,
-            SpotId::Giguna__Carnelian__East_10,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__East_10,
             SpotId::Giguna__Carnelian__East_Cliff,
             2105,
         ),
@@ -33865,11 +19802,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Carnelian__East_Cliff,
             SpotId::Giguna__Carnelian__East_10,
             2105,
-        ),
-        (
-            SpotId::Giguna__Carnelian__East_Cliff,
-            SpotId::Giguna__Carnelian__East_Cliff,
-            0,
         ),
         (
             SpotId::Giguna__Carnelian__East_Cliff,
@@ -33895,11 +19827,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Carnelian__Upper_Susar,
             SpotId::Giguna__Carnelian__East_Cliff,
             1754,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Upper_Susar,
-            SpotId::Giguna__Carnelian__Upper_Susar,
-            0,
         ),
         (
             SpotId::Giguna__Carnelian__Upper_Susar,
@@ -33928,11 +19855,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__Middle_Platforms,
-            SpotId::Giguna__Carnelian__Middle_Platforms,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Middle_Platforms,
             SpotId::Giguna__Carnelian__Switch,
             699,
         ),
@@ -33948,11 +19870,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__Switch,
-            SpotId::Giguna__Carnelian__Switch,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Switch,
             SpotId::Giguna__Carnelian__Door,
             701,
         ),
@@ -33973,11 +19890,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__Door,
-            SpotId::Giguna__Carnelian__Door,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Door,
             SpotId::Giguna__Carnelian__Vault,
             1052,
         ),
@@ -33990,11 +19902,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Carnelian__Vault,
             SpotId::Giguna__Carnelian__Door,
             1052,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Vault,
-            SpotId::Giguna__Carnelian__Vault,
-            0,
         ),
         (
             SpotId::Giguna__Carnelian__Vault,
@@ -34013,11 +19920,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__Rock,
-            SpotId::Giguna__Carnelian__Rock,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Rock,
             SpotId::Giguna__Carnelian__Lower_Susar,
             1403,
         ),
@@ -34030,11 +19932,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Carnelian__Lower_Susar,
             SpotId::Giguna__Carnelian__Rock,
             1403,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Lower_Susar,
-            SpotId::Giguna__Carnelian__Lower_Susar,
-            0,
         ),
         (
             SpotId::Giguna__Carnelian__Lower_Susar,
@@ -34053,11 +19950,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__Upper_Path,
-            SpotId::Giguna__Carnelian__Upper_Path,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__Upper_Path,
             SpotId::Giguna__Carnelian__West_Ledge,
             1052,
         ),
@@ -34070,11 +19962,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Carnelian__West_Ledge,
             SpotId::Giguna__Carnelian__Lower_Susar,
             1052,
-        ),
-        (
-            SpotId::Giguna__Carnelian__West_Ledge,
-            SpotId::Giguna__Carnelian__West_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__Carnelian__West_Ledge,
@@ -34093,11 +19980,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Carnelian__West_10,
-            SpotId::Giguna__Carnelian__West_10,
-            0,
-        ),
-        (
-            SpotId::Giguna__Carnelian__West_10,
             SpotId::Giguna__West_Caverns__East_10,
             1350,
         ),
@@ -34110,11 +19992,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__East_10,
             SpotId::Giguna__Carnelian__West_10,
             1350,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__East_10,
-            SpotId::Giguna__West_Caverns__East_10,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__East_10,
@@ -34143,11 +20020,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__East_Platform,
-            SpotId::Giguna__West_Caverns__East_Platform,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__East_Platform,
             SpotId::Giguna__West_Caverns__Small_Staircase,
             500,
         ),
@@ -34173,11 +20045,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Small_Staircase,
-            SpotId::Giguna__West_Caverns__Small_Staircase,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Small_Staircase,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             299,
         ),
@@ -34195,11 +20062,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             SpotId::Giguna__West_Caverns__Small_Staircase,
             1200,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            SpotId::Giguna__West_Caverns__Tunnel_Entrance,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
@@ -34225,11 +20087,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Small_Platform,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             1228,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Small_Platform,
-            SpotId::Giguna__West_Caverns__Small_Platform,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Small_Platform,
@@ -34263,11 +20120,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Higher_Ledge,
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Higher_Ledge,
             SpotId::Giguna__West_Caverns__Floating_Brick,
             1200,
         ),
@@ -34285,11 +20137,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Floating_Brick,
             SpotId::Giguna__West_Caverns__Higher_Ledge,
             526,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-            SpotId::Giguna__West_Caverns__Floating_Brick,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Floating_Brick,
@@ -34313,11 +20160,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Column_2_Top,
-            SpotId::Giguna__West_Caverns__Column_2_Top,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Column_2_Top,
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
             1228,
         ),
@@ -34328,11 +20170,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Top_Gap_Right,
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
             877,
         ),
@@ -34340,11 +20177,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Top_Gap_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-            SpotId::Giguna__West_Caverns__Top_Gap_Left,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Top_Gap_Left,
@@ -34368,11 +20200,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             1228,
         ),
@@ -34385,11 +20212,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
             SpotId::Giguna__West_Caverns__Column_1_Top_Right,
             1228,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            SpotId::Giguna__West_Caverns__Column_1_Top_Left,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Column_1_Top_Left,
@@ -34413,11 +20235,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Cache,
-            SpotId::Giguna__West_Caverns__Cache,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Cache,
             SpotId::Giguna__West_Caverns__Bush,
             2105,
         ),
@@ -34438,11 +20255,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Bush,
-            SpotId::Giguna__West_Caverns__Bush,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Bush,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -34450,11 +20262,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
             SpotId::Giguna__West_Caverns__Tunnel_Entrance,
             2250,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            SpotId::Giguna__West_Caverns__Tunnel_Bottom,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
@@ -34475,11 +20282,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
             SpotId::Giguna__West_Caverns__Tunnel_Bottom,
             850,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            SpotId::Giguna__West_Caverns__Tunnel_Fork,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__Tunnel_Fork,
@@ -34503,11 +20305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__East_Susar,
-            SpotId::Giguna__West_Caverns__East_Susar,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__East_Susar,
             SpotId::Giguna__West_Caverns__East_12,
             526,
         ),
@@ -34520,11 +20317,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__East_12,
             SpotId::Giguna__West_Caverns__East_Susar,
             526,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__East_12,
-            SpotId::Giguna__West_Caverns__East_12,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__East_12,
@@ -34538,11 +20330,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__East_13,
-            SpotId::Giguna__West_Caverns__East_13,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__East_13,
             SpotId::Giguna__Wasteland__West_13,
             1350,
         ),
@@ -34553,11 +20340,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Caverns__Northwest,
-            SpotId::Giguna__West_Caverns__Northwest,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__Northwest,
             SpotId::Giguna__West_Caverns__West_13,
             3200,
         ),
@@ -34565,11 +20347,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Caverns__Northwest,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__West_Caverns__West_13,
-            SpotId::Giguna__West_Caverns__West_13,
-            0,
         ),
         (
             SpotId::Giguna__West_Caverns__West_13,
@@ -34588,11 +20365,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__West_12,
-            SpotId::Giguna__Wasteland__West_12,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__West_12,
             SpotId::Giguna__Wasteland__Upper_Cliff,
             877,
         ),
@@ -34605,11 +20377,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Upper_Cliff,
             SpotId::Giguna__Wasteland__West_12,
             877,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            SpotId::Giguna__Wasteland__Upper_Cliff,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Upper_Cliff,
@@ -34633,11 +20400,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__West_13,
-            SpotId::Giguna__Wasteland__West_13,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__West_13,
             SpotId::Giguna__Wasteland__Middle_Path,
             1228,
         ),
@@ -34650,11 +20412,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Middle_Path,
             SpotId::Giguna__Wasteland__West_13,
             1228,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Middle_Path,
-            SpotId::Giguna__Wasteland__Middle_Path,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Middle_Path,
@@ -34678,11 +20435,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Middle_Cliff,
-            SpotId::Giguna__Wasteland__Middle_Cliff,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Giguna__Wasteland__Lower_Path_Right,
             850,
         ),
@@ -34695,11 +20447,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Middle_Cliff,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-            SpotId::Giguna__Wasteland__Lower_Path_Right,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Lower_Path_Right,
@@ -34723,11 +20470,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Lower_Path_Left,
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Lower_Path_Left,
             SpotId::Giguna__Wasteland__West_14,
             1228,
         ),
@@ -34748,11 +20490,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Lower_Cliff,
-            SpotId::Giguna__Wasteland__Lower_Cliff,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Lower_Cliff,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -34760,11 +20497,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__West_14,
             SpotId::Giguna__Wasteland__Lower_Path_Left,
             1228,
-        ),
-        (
-            SpotId::Giguna__Wasteland__West_14,
-            SpotId::Giguna__Wasteland__West_14,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__West_14,
@@ -34783,11 +20515,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__East_12,
-            SpotId::Giguna__Wasteland__East_12,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__East_12,
             SpotId::Giguna__Wasteland__East_Ledge,
             877,
         ),
@@ -34795,11 +20522,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__East_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__East_13,
-            SpotId::Giguna__Wasteland__East_13,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__East_13,
@@ -34820,11 +20542,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__East_13,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__East_14,
-            SpotId::Giguna__Wasteland__East_14,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__East_14,
@@ -34853,11 +20570,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__East_Ledge,
-            SpotId::Giguna__Wasteland__East_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__East_Ledge,
             SpotId::Giguna__Wasteland__Door_Left,
             1000,
         ),
@@ -34875,11 +20587,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__East_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Door_Left,
-            SpotId::Giguna__Wasteland__Door_Left,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Door_Left,
@@ -34913,11 +20620,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Door_Right,
-            SpotId::Giguna__Wasteland__Door_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Door_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -34928,11 +20630,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Bluff_by_Door,
-            SpotId::Giguna__Wasteland__Bluff_by_Door,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Bluff_by_Door,
             SpotId::Giguna__Wasteland__Tiny_Hill,
             1403,
         ),
@@ -34945,11 +20642,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Tiny_Hill,
             SpotId::Giguna__Wasteland__Bluff_by_Door,
             1403,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Tiny_Hill,
-            SpotId::Giguna__Wasteland__Tiny_Hill,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Tiny_Hill,
@@ -34960,11 +20652,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Tiny_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Steeper_Hill,
-            SpotId::Giguna__Wasteland__Steeper_Hill,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Steeper_Hill,
@@ -34993,11 +20680,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Center_Plains,
-            SpotId::Giguna__Wasteland__Center_Plains,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Center_Plains,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35008,11 +20690,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__West_Plains,
-            SpotId::Giguna__Wasteland__West_Plains,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__West_Plains,
             SpotId::Giguna__Wasteland__Passage_East,
             1403,
         ),
@@ -35028,11 +20705,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Passage_East,
-            SpotId::Giguna__Wasteland__Passage_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Passage_East,
             SpotId::Giguna__Wasteland__Passage_Cache,
             4210,
         ),
@@ -35045,11 +20717,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__Passage_Cache,
             SpotId::Giguna__Wasteland__Passage_East,
             4210,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Passage_Cache,
-            SpotId::Giguna__Wasteland__Passage_Cache,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Passage_Cache,
@@ -35073,18 +20740,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Westward_Hill,
-            SpotId::Giguna__Wasteland__Westward_Hill,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Westward_Hill,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Upper_Cache,
-            SpotId::Giguna__Wasteland__Upper_Cache,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Upper_Cache,
@@ -35093,18 +20750,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Cache_Ledge,
-            SpotId::Giguna__Wasteland__Cache_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Cache_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Left_Platform_West,
-            SpotId::Giguna__Wasteland__Left_Platform_West,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Left_Platform_West,
@@ -35113,18 +20760,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Left_Platform_East,
-            SpotId::Giguna__Wasteland__Left_Platform_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Left_Platform_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Center_Platform_West,
-            SpotId::Giguna__Wasteland__Center_Platform_West,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Center_Platform_West,
@@ -35133,18 +20770,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Center_Platform_East,
-            SpotId::Giguna__Wasteland__Center_Platform_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Center_Platform_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Right_Platform_West,
-            SpotId::Giguna__Wasteland__Right_Platform_West,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Right_Platform_West,
@@ -35153,18 +20780,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Right_Platform_East,
-            SpotId::Giguna__Wasteland__Right_Platform_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Right_Platform_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Lower_Platform_West,
-            SpotId::Giguna__Wasteland__Lower_Platform_West,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Lower_Platform_West,
@@ -35173,18 +20790,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Lower_Platform_East,
-            SpotId::Giguna__Wasteland__Lower_Platform_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Lower_Platform_East,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Ladder_Ledge,
-            SpotId::Giguna__Wasteland__Ladder_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Ladder_Ledge,
@@ -35193,28 +20800,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Wasteland__Switch_Ledge,
-            SpotId::Giguna__Wasteland__Switch_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Switch_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Giguna__Wasteland__Switch_Approach,
-            SpotId::Giguna__Wasteland__Switch_Approach,
-            0,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Switch_Approach,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Wasteland__Switch,
-            SpotId::Giguna__Wasteland__Switch,
-            0,
         ),
         (
             SpotId::Giguna__Wasteland__Switch,
@@ -35228,11 +20820,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__East_14,
-            SpotId::Giguna__Giguna_Base__East_14,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__East_14,
             SpotId::Giguna__Giguna_Base__Stone_Knob,
             1403,
         ),
@@ -35240,11 +20827,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__East_14,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            SpotId::Giguna__Giguna_Base__Stone_Knob,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Stone_Knob,
@@ -35273,11 +20855,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Right_Pillar,
             1228,
         ),
@@ -35303,11 +20880,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Right_Pillar,
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Right_Pillar,
             SpotId::Giguna__Giguna_Base__Left_Pillar,
             1500,
         ),
@@ -35325,11 +20897,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Left_Pillar,
             SpotId::Giguna__Giguna_Base__Right_Pillar,
             1500,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Left_Pillar,
-            SpotId::Giguna__Giguna_Base__Left_Pillar,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Left_Pillar,
@@ -35353,11 +20920,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Ruin,
-            SpotId::Giguna__Giguna_Base__Ruin,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Ruin,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35365,11 +20927,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Middle_Platform,
             SpotId::Giguna__Giguna_Base__Stone_Knob,
             1500,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            SpotId::Giguna__Giguna_Base__Middle_Platform,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Middle_Platform,
@@ -35403,11 +20960,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Kari,
-            SpotId::Giguna__Giguna_Base__Kari,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Kari,
             SpotId::Giguna__Giguna_Base__Building_Entry,
             1052,
         ),
@@ -35430,11 +20982,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Building_Entry,
             SpotId::Giguna__Giguna_Base__Kari,
             1052,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            SpotId::Giguna__Giguna_Base__Building_Entry,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Building_Entry,
@@ -35473,11 +21020,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__West_Grate,
             701,
         ),
@@ -35508,11 +21050,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__West_Grate,
-            SpotId::Giguna__Giguna_Base__West_Grate,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__West_Grate,
             SpotId::Giguna__Giguna_Base__West_15,
             350,
         ),
@@ -35525,11 +21062,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__West_15,
             SpotId::Giguna__Giguna_Base__West_Grate,
             350,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__West_15,
-            SpotId::Giguna__Giguna_Base__West_15,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__West_15,
@@ -35550,11 +21082,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             3000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
@@ -35583,11 +21110,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Table,
-            SpotId::Giguna__Giguna_Base__Table,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Table,
             SpotId::Giguna__Giguna_Base__Save_Point,
             701,
         ),
@@ -35613,11 +21135,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Save_Point,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Save_Point,
             SpotId::Giguna__Giguna_Base__West_16,
             1578,
         ),
@@ -35638,11 +21155,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__West_16,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Helipad__East_16,
             1350,
         ),
@@ -35650,11 +21162,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__East_17,
-            SpotId::Giguna__Giguna_Base__East_17,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__East_17,
@@ -35675,11 +21182,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Lower_Fork,
             SpotId::Giguna__Giguna_Base__East_17,
             701,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Lower_Fork,
-            SpotId::Giguna__Giguna_Base__Lower_Fork,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Lower_Fork,
@@ -35713,18 +21215,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Below_Gate,
-            SpotId::Giguna__Giguna_Base__Below_Gate,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Below_Gate,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_1,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Switch_Distance_1,
@@ -35743,11 +21235,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_2,
             SpotId::Giguna__Giguna_Base__Switch_Distance_3,
             175,
         ),
@@ -35760,11 +21247,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__Switch_Distance_3,
             SpotId::Giguna__Giguna_Base__Switch_Distance_2,
             175,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_3,
-            0,
         ),
         (
             SpotId::Giguna__Giguna_Base__Switch_Distance_3,
@@ -35788,11 +21270,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
-            0,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__Switch_Distance_4,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35800,11 +21277,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Giguna_Base__Building_Entry,
             750,
-        ),
-        (
-            SpotId::Giguna__Building_Interior__Entry,
-            SpotId::Giguna__Building_Interior__Entry,
-            0,
         ),
         (
             SpotId::Giguna__Building_Interior__Entry,
@@ -35823,11 +21295,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
-            SpotId::Giguna__Building_Interior__Bookshelf,
-            0,
-        ),
-        (
-            SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -35838,11 +21305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__East_9,
-            SpotId::Giguna__Ruins_East__East_9,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__East_9,
             SpotId::Giguna__Ruins_East__Bottom_Rock,
             2280,
         ),
@@ -35855,11 +21317,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_East__Bottom_Rock,
             SpotId::Giguna__Ruins_East__East_9,
             2280,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            SpotId::Giguna__Ruins_East__Bottom_Rock,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_East__Bottom_Rock,
@@ -35880,11 +21337,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_East__West_9,
             SpotId::Giguna__Ruins_East__Bottom_Rock,
             877,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__West_9,
-            SpotId::Giguna__Ruins_East__West_9,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_East__West_9,
@@ -35913,11 +21365,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__Cliff,
-            SpotId::Giguna__Ruins_East__Cliff,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__Cliff,
             SpotId::Giguna__Ruins_East__Ledge,
             800,
         ),
@@ -35933,11 +21380,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__Ledge,
-            SpotId::Giguna__Ruins_East__Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__Ledge,
             SpotId::Giguna__Ruins_East__Small_Passage,
             350,
         ),
@@ -35953,11 +21395,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__Small_Passage,
-            SpotId::Giguna__Ruins_East__Small_Passage,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__Small_Passage,
             SpotId::Giguna__Ruins_East__West_8,
             1403,
         ),
@@ -35970,11 +21407,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_East__West_8,
             SpotId::Giguna__Ruins_East__Small_Passage,
             1403,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__West_8,
-            SpotId::Giguna__Ruins_East__West_8,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_East__West_8,
@@ -35993,11 +21425,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__Pillar,
-            SpotId::Giguna__Ruins_East__Pillar,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__Pillar,
             SpotId::Giguna__Ruins_East__West_7,
             701,
         ),
@@ -36010,11 +21437,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_East__West_7,
             SpotId::Giguna__Ruins_East__Pillar,
             1799,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__West_7,
-            SpotId::Giguna__Ruins_East__West_7,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_East__West_7,
@@ -36043,11 +21465,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__Way_Up_High,
-            SpotId::Giguna__Ruins_East__Way_Up_High,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_East__Way_Up_High,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -36058,11 +21475,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Center__East_8,
-            SpotId::Giguna__Ruins_Center__East_8,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__East_8,
             SpotId::Giguna__Ruins_Center__Tablet,
             526,
         ),
@@ -36075,11 +21487,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Center__Tablet,
             SpotId::Giguna__Ruins_Center__East_8,
             526,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__Tablet,
-            SpotId::Giguna__Ruins_Center__Tablet,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Center__Tablet,
@@ -36093,11 +21500,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Center__East_9,
-            SpotId::Giguna__Ruins_Center__East_9,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__East_9,
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
             2631,
         ),
@@ -36110,11 +21512,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
             SpotId::Giguna__Ruins_Center__East_9,
             2631,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__Wall_Bottom,
-            SpotId::Giguna__Ruins_Center__Wall_Bottom,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
@@ -36138,11 +21535,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Center__Wall_Top,
-            SpotId::Giguna__Ruins_Center__Wall_Top,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Giguna__Ruins_Center__Center_Top,
             1500,
         ),
@@ -36150,11 +21542,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__Center_Top,
-            SpotId::Giguna__Ruins_Center__Center_Top,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Center__Center_Top,
@@ -36168,11 +21555,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
             1403,
         ),
@@ -36185,11 +21567,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
             1403,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            SpotId::Giguna__Ruins_Center__West_Platform_Left,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
@@ -36203,11 +21580,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Center__West_9,
-            SpotId::Giguna__Ruins_Center__West_9,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Center__West_9,
             SpotId::Giguna__Ruins_West__East_9,
             1350,
         ),
@@ -36220,11 +21592,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__East_9,
             SpotId::Giguna__Ruins_Center__West_9,
             1350,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__East_9,
-            SpotId::Giguna__Ruins_West__East_9,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_West__East_9,
@@ -36245,11 +21612,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__Save_Point,
             SpotId::Giguna__Ruins_West__East_9,
             1578,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Save_Point,
-            SpotId::Giguna__Ruins_West__Save_Point,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_West__Save_Point,
@@ -36273,11 +21635,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__Platform,
-            SpotId::Giguna__Ruins_West__Platform,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Platform,
             SpotId::Giguna__Ruins_West__Nook,
             1200,
         ),
@@ -36290,11 +21647,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__Nook,
             SpotId::Giguna__Ruins_West__Platform,
             500,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Nook,
-            SpotId::Giguna__Ruins_West__Nook,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_West__Nook,
@@ -36318,11 +21670,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__Lower_Ledge,
-            SpotId::Giguna__Ruins_West__Lower_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Lower_Ledge,
             SpotId::Giguna__Ruins_West__Upper_Ledge,
             4000,
         ),
@@ -36343,11 +21690,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__Upper_Ledge,
-            SpotId::Giguna__Ruins_West__Upper_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Upper_Ledge,
             SpotId::Giguna__Ruins_West__East_7,
             1228,
         ),
@@ -36363,11 +21705,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__East_7,
-            SpotId::Giguna__Ruins_West__East_7,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__East_7,
             SpotId::Giguna__Ruins_Top__West_7,
             1350,
         ),
@@ -36375,11 +21712,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__East_7,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
-            SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
@@ -36393,11 +21725,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
             SpotId::Giguna__Ruins_West__West_7,
             899,
         ),
@@ -36405,11 +21732,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Ruins_West__West_7,
-            SpotId::Giguna__Ruins_West__West_7,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_West__West_7,
@@ -36425,11 +21747,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__West_7,
             SpotId::Giguna__Ruins_West__East_7,
             1350,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__West_7,
-            SpotId::Giguna__Ruins_Top__West_7,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_7,
@@ -36453,11 +21770,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Door,
-            SpotId::Giguna__Ruins_Top__West_Door,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__West_Door,
             SpotId::Giguna__Ruins_Top__Entryway,
             526,
         ),
@@ -36470,11 +21782,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__West_Pillar,
             SpotId::Giguna__Ruins_Top__West_7,
             877,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__West_Pillar,
-            SpotId::Giguna__Ruins_Top__West_Pillar,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Pillar,
@@ -36493,11 +21800,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Entryway,
-            SpotId::Giguna__Ruins_Top__Entryway,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Entryway,
             SpotId::Giguna__Ruins_Top__Portal_Left,
             2982,
         ),
@@ -36510,11 +21812,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Portal_Left,
             SpotId::Giguna__Ruins_Top__Entryway,
             2982,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Portal_Left,
-            SpotId::Giguna__Ruins_Top__Portal_Left,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal_Left,
@@ -36535,11 +21832,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             SpotId::Giguna__Ruins_Top__Portal_Left,
             299,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Small_Ledge,
-            SpotId::Giguna__Ruins_Top__Small_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Small_Ledge,
@@ -36573,11 +21865,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
-            SpotId::Giguna__Ruins_Top__Portal,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__Interior_Ledge,
             1500,
         ),
@@ -36598,11 +21885,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Interior_Ledge,
-            SpotId::Giguna__Ruins_Top__Interior_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Interior_Ledge,
             SpotId::Giguna__Ruins_Top__Upper_Tunnel,
             1000,
         ),
@@ -36618,11 +21900,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Upper_Tunnel,
-            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Upper_Tunnel,
             SpotId::Giguna__Ruins_Top__Flask,
             701,
         ),
@@ -36635,11 +21912,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Flask,
             SpotId::Giguna__Ruins_Top__Upper_Tunnel,
             701,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Flask,
-            SpotId::Giguna__Ruins_Top__Flask,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Flask,
@@ -36650,11 +21922,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__East_Door,
             SpotId::Giguna__Ruins_Top__Portal,
             701,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__East_Door,
-            SpotId::Giguna__Ruins_Top__East_Door,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_Door,
@@ -36678,18 +21945,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__East_7,
-            SpotId::Giguna__Ruins_Top__East_7,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__East_7,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Save_Point,
-            SpotId::Giguna__Ruins_Top__Save_Point,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Save_Point,
@@ -36705,11 +21962,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Switch,
             SpotId::Giguna__Ruins_Top__Save_Point,
             701,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Switch,
-            SpotId::Giguna__Ruins_Top__Switch,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Switch,
@@ -36733,11 +21985,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_West,
-            SpotId::Giguna__Ruins_Top__Rooftop_West,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Rooftop_West,
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             1754,
         ),
@@ -36755,11 +22002,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Giguna__Ruins_Top__Rooftop_West,
             1754,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Rooftop_East,
-            SpotId::Giguna__Ruins_Top__Rooftop_East,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_East,
@@ -36783,11 +22025,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
-            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -36800,11 +22037,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Rooftop_West,
             1052,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-            0,
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
@@ -36838,18 +22070,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            0,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__West_Tower__East_7,
-            SpotId::Giguna__West_Tower__East_7,
-            0,
         ),
         (
             SpotId::Giguna__West_Tower__East_7,
@@ -36860,11 +22082,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__West_Tower__East_7,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__West_Tower__Top,
-            SpotId::Giguna__West_Tower__Top,
-            0,
         ),
         (
             SpotId::Giguna__West_Tower__Top,
@@ -36883,18 +22100,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__West_Tower__Southwest,
-            SpotId::Giguna__West_Tower__Southwest,
-            0,
-        ),
-        (
-            SpotId::Giguna__West_Tower__Southwest,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Far_Corner__East_13,
-            SpotId::Giguna__Far_Corner__East_13,
-            0,
         ),
         (
             SpotId::Giguna__Far_Corner__East_13,
@@ -36908,11 +22115,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Far_Corner__Grass,
-            SpotId::Giguna__Far_Corner__Grass,
-            0,
-        ),
-        (
-            SpotId::Giguna__Far_Corner__Grass,
             SpotId::Giguna__Far_Corner__South,
             350,
         ),
@@ -36920,11 +22122,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Far_Corner__Grass,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Far_Corner__South,
-            SpotId::Giguna__Far_Corner__South,
-            0,
         ),
         (
             SpotId::Giguna__Far_Corner__South,
@@ -36943,11 +22140,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__East_15,
-            SpotId::Giguna__Helipad__East_15,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__East_15,
             SpotId::Giguna__Helipad__Helicopter,
             4385,
         ),
@@ -36955,11 +22147,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Helipad__East_15,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Helipad__North,
-            SpotId::Giguna__Helipad__North,
-            0,
         ),
         (
             SpotId::Giguna__Helipad__North,
@@ -36988,11 +22175,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Helicopter,
-            SpotId::Giguna__Helipad__Helicopter,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__Helicopter,
             SpotId::Giguna__Helipad__Irikar_Drop,
             2105,
         ),
@@ -37013,11 +22195,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__East_16,
-            SpotId::Giguna__Helipad__East_16,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__East_16,
             SpotId::Giguna__Helipad__Railing,
             1578,
         ),
@@ -37025,11 +22202,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Helipad__East_16,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Helipad__Irikar_Drop,
-            SpotId::Giguna__Helipad__Irikar_Drop,
-            0,
         ),
         (
             SpotId::Giguna__Helipad__Irikar_Drop,
@@ -37058,11 +22230,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Wall_Top,
-            SpotId::Giguna__Helipad__Wall_Top,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__Wall_Top,
             SpotId::Giguna__Helipad__Railing,
             2456,
         ),
@@ -37093,11 +22260,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Railing,
-            SpotId::Giguna__Helipad__Railing,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__Railing,
             SpotId::Giguna__Helipad__Wall_Bottom,
             2105,
         ),
@@ -37118,11 +22280,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Wall_Bottom,
-            SpotId::Giguna__Helipad__Wall_Bottom,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__Wall_Bottom,
             SpotId::Giguna__Helipad__Staircase_Top,
             1929,
         ),
@@ -37130,11 +22287,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Helipad__Wall_Bottom,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Helipad__So_Close,
-            SpotId::Giguna__Helipad__So_Close,
-            0,
         ),
         (
             SpotId::Giguna__Helipad__So_Close,
@@ -37153,11 +22305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Tablet_Ledge,
-            SpotId::Giguna__Helipad__Tablet_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__Tablet_Ledge,
             SpotId::Giguna__Helipad__South_Middle,
             1199,
         ),
@@ -37178,11 +22325,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__Staircase_Top,
-            SpotId::Giguna__Helipad__Staircase_Top,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__Staircase_Top,
             SpotId::Giguna__Helipad__East_18,
             1754,
         ),
@@ -37198,11 +22340,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__East_18,
-            SpotId::Giguna__Helipad__East_18,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__East_18,
             SpotId::Giguna__Lamassu__West_18,
             1350,
         ),
@@ -37213,18 +22350,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__South_Left,
-            SpotId::Giguna__Helipad__South_Left,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__South_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Helipad__South_Middle,
-            SpotId::Giguna__Helipad__South_Middle,
-            0,
         ),
         (
             SpotId::Giguna__Helipad__South_Middle,
@@ -37233,18 +22360,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Helipad__South_Right,
-            SpotId::Giguna__Helipad__South_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Helipad__South_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Helipad__Lowest_Ledge,
-            SpotId::Giguna__Helipad__Lowest_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__Helipad__Lowest_Ledge,
@@ -37253,18 +22370,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__North_Left,
-            SpotId::Giguna__Clouds__North_Left,
-            0,
-        ),
-        (
-            SpotId::Giguna__Clouds__North_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Clouds__North_Middle,
-            SpotId::Giguna__Clouds__North_Middle,
-            0,
         ),
         (
             SpotId::Giguna__Clouds__North_Middle,
@@ -37273,18 +22380,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__North_Right,
-            SpotId::Giguna__Clouds__North_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Clouds__North_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Clouds__North_Under_Ledge,
-            SpotId::Giguna__Clouds__North_Under_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__Clouds__North_Under_Ledge,
@@ -37293,18 +22390,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__Platform_Start,
-            SpotId::Giguna__Clouds__Platform_Start,
-            0,
-        ),
-        (
-            SpotId::Giguna__Clouds__Platform_Start,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Clouds__Platform_Stop,
-            SpotId::Giguna__Clouds__Platform_Stop,
-            0,
         ),
         (
             SpotId::Giguna__Clouds__Platform_Stop,
@@ -37313,18 +22400,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__Cache,
-            SpotId::Giguna__Clouds__Cache,
-            0,
-        ),
-        (
-            SpotId::Giguna__Clouds__Cache,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Clouds__Platform_Early_Portal,
-            SpotId::Giguna__Clouds__Platform_Early_Portal,
-            0,
         ),
         (
             SpotId::Giguna__Clouds__Platform_Early_Portal,
@@ -37335,11 +22412,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__West_18,
             SpotId::Giguna__Helipad__East_18,
             1350,
-        ),
-        (
-            SpotId::Giguna__Lamassu__West_18,
-            SpotId::Giguna__Lamassu__West_18,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__West_18,
@@ -37355,11 +22427,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__Staircase_Top,
             SpotId::Giguna__Lamassu__West_18,
             1403,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Staircase_Top,
-            SpotId::Giguna__Lamassu__Staircase_Top,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Top,
@@ -37375,11 +22442,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__Staircase_Bottom,
             SpotId::Giguna__Lamassu__Staircase_Top,
             1200,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Staircase_Bottom,
-            SpotId::Giguna__Lamassu__Staircase_Bottom,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Bottom,
@@ -37408,11 +22470,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Staircase_Landing,
-            SpotId::Giguna__Lamassu__Staircase_Landing,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Staircase_Landing,
             SpotId::Giguna__Lamassu__Broken_Pillar,
             250,
         ),
@@ -37433,11 +22490,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Broken_Pillar,
-            SpotId::Giguna__Lamassu__Broken_Pillar,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Broken_Pillar,
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
             1228,
         ),
@@ -37450,11 +22502,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
             SpotId::Giguna__Lamassu__Broken_Pillar,
             1228,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-            SpotId::Giguna__Lamassu__Upper_Platform_Edge,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__Upper_Platform_Edge,
@@ -37473,11 +22520,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Left,
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
             877,
         ),
@@ -37490,11 +22532,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
             SpotId::Giguna__Lamassu__Lower_Platform_Left,
             877,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Lower_Platform_Right,
-            SpotId::Giguna__Lamassu__Lower_Platform_Right,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__Lower_Platform_Right,
@@ -37518,11 +22555,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Head,
-            SpotId::Giguna__Lamassu__Head,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Head,
             SpotId::Giguna__Lamassu__Wingtip,
             2807,
         ),
@@ -37538,11 +22570,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Rear_Platform,
-            SpotId::Giguna__Lamassu__Rear_Platform,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Rear_Platform,
             SpotId::Giguna__Lamassu__East_18,
             1578,
         ),
@@ -37555,11 +22582,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__Wingtip,
             SpotId::Giguna__Lamassu__Head,
             2807,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Wingtip,
-            SpotId::Giguna__Lamassu__Wingtip,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__Wingtip,
@@ -37580,11 +22602,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Lamassu__Rear_Gap,
             SpotId::Giguna__Lamassu__Wingtip,
             350,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Rear_Gap,
-            SpotId::Giguna__Lamassu__Rear_Gap,
-            0,
         ),
         (
             SpotId::Giguna__Lamassu__Rear_Gap,
@@ -37613,11 +22630,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__Deposit,
-            SpotId::Giguna__Lamassu__Deposit,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__Deposit,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -37633,11 +22645,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Lamassu__East_18,
-            SpotId::Giguna__Lamassu__East_18,
-            0,
-        ),
-        (
-            SpotId::Giguna__Lamassu__East_18,
             SpotId::Giguna__Dual_Path__West_18,
             1350,
         ),
@@ -37650,11 +22657,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__West_18,
             SpotId::Giguna__Lamassu__East_18,
             1350,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__West_18,
-            SpotId::Giguna__Dual_Path__West_18,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__West_18,
@@ -37678,11 +22680,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Below_Left_Switch,
-            SpotId::Giguna__Dual_Path__Below_Left_Switch,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Below_Left_Switch,
             SpotId::Giguna__Dual_Path__Left_Switch,
             600,
         ),
@@ -37703,11 +22700,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Left_Switch,
-            SpotId::Giguna__Dual_Path__Left_Switch,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Left_Switch,
             SpotId::Giguna__Dual_Path__West_Slope,
             1929,
         ),
@@ -37723,11 +22715,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_Slope,
-            SpotId::Giguna__Dual_Path__West_Slope,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__West_Slope,
             SpotId::Giguna__Dual_Path__In_the_Grass,
             2982,
         ),
@@ -37740,11 +22727,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__In_the_Grass,
             SpotId::Giguna__Dual_Path__West_Slope,
             2982,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__In_the_Grass,
-            SpotId::Giguna__Dual_Path__In_the_Grass,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__In_the_Grass,
@@ -37768,11 +22750,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Base_of_Wall,
-            SpotId::Giguna__Dual_Path__Base_of_Wall,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Base_of_Wall,
             SpotId::Giguna__Dual_Path__Wall_Secret,
             350,
         ),
@@ -37790,11 +22767,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__Wall_Secret,
             SpotId::Giguna__Dual_Path__Base_of_Wall,
             350,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Wall_Secret,
-            SpotId::Giguna__Dual_Path__Wall_Secret,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__Wall_Secret,
@@ -37818,11 +22790,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Wall_Top,
-            SpotId::Giguna__Dual_Path__Wall_Top,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Wall_Top,
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
             1052,
         ),
@@ -37835,11 +22802,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__Right_Switch,
             SpotId::Giguna__Dual_Path__Wall_Top,
             1200,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Right_Switch,
-            SpotId::Giguna__Dual_Path__Right_Switch,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__Right_Switch,
@@ -37863,11 +22825,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
-            SpotId::Giguna__Dual_Path__Below_Right_Switch,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Below_Right_Switch,
             SpotId::Giguna__Dual_Path__East_Gate,
             1200,
         ),
@@ -37885,11 +22842,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__East_Gate,
             SpotId::Giguna__Dual_Path__Below_Right_Switch,
             877,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__East_Gate,
-            SpotId::Giguna__Dual_Path__East_Gate,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate,
@@ -37915,11 +22867,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__East_18,
             SpotId::Giguna__Dual_Path__East_Gate,
             1929,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__East_18,
-            SpotId::Giguna__Dual_Path__East_18,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__East_18,
@@ -37943,11 +22890,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate,
-            SpotId::Giguna__Dual_Path__West_Gate,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__West_Gate,
             SpotId::Giguna__Dual_Path__West_Gate_NW,
             1000,
         ),
@@ -37965,11 +22907,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__West_Gate_NW,
             SpotId::Giguna__Dual_Path__West_Gate,
             350,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__West_Gate_NW,
-            SpotId::Giguna__Dual_Path__West_Gate_NW,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate_NW,
@@ -37995,11 +22932,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__West_Gate_NE,
             SpotId::Giguna__Dual_Path__West_Gate_NW,
             701,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__West_Gate_NE,
-            SpotId::Giguna__Dual_Path__West_Gate_NE,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__West_Gate_NE,
@@ -38015,11 +22947,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__West_17,
             SpotId::Giguna__Dual_Path__West_Gate_NW,
             526,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__West_17,
-            SpotId::Giguna__Dual_Path__West_17,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__West_17,
@@ -38038,11 +22965,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Midway,
-            SpotId::Giguna__Dual_Path__Midway,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Midway,
             SpotId::Giguna__Dual_Path__Midway_Plateau,
             1000,
         ),
@@ -38058,11 +22980,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__Midway_Plateau,
-            SpotId::Giguna__Dual_Path__Midway_Plateau,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__Midway_Plateau,
             SpotId::Giguna__Dual_Path__East_Gate_NW,
             2456,
         ),
@@ -38075,11 +22992,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Dual_Path__East_Gate_NW,
             SpotId::Giguna__Dual_Path__Midway_Plateau,
             2456,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__East_Gate_NW,
-            SpotId::Giguna__Dual_Path__East_Gate_NW,
-            0,
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate_NW,
@@ -38103,11 +23015,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_Gate_NE,
-            SpotId::Giguna__Dual_Path__East_Gate_NE,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__East_Gate_NE,
             SpotId::Giguna__Dual_Path__East_17,
             1403,
         ),
@@ -38123,11 +23030,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Dual_Path__East_17,
-            SpotId::Giguna__Dual_Path__East_17,
-            0,
-        ),
-        (
-            SpotId::Giguna__Dual_Path__East_17,
             SpotId::Giguna__East_Caverns__West_17,
             1350,
         ),
@@ -38138,11 +23040,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__East_17,
-            SpotId::Giguna__Hard_Rock__East_17,
-            0,
-        ),
-        (
-            SpotId::Giguna__Hard_Rock__East_17,
             SpotId::Giguna__Hard_Rock__Rock_Right,
             877,
         ),
@@ -38158,11 +23055,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Right,
-            SpotId::Giguna__Hard_Rock__Rock_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Hard_Rock__Rock_Right,
             SpotId::Giguna__Hard_Rock__Rock_Center,
             526,
         ),
@@ -38178,11 +23070,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Center,
-            SpotId::Giguna__Hard_Rock__Rock_Center,
-            0,
-        ),
-        (
-            SpotId::Giguna__Hard_Rock__Rock_Center,
             SpotId::Giguna__Hard_Rock__Rock_Left,
             526,
         ),
@@ -38195,11 +23082,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Hard_Rock__Rock_Left,
             SpotId::Giguna__Hard_Rock__Rock_Center,
             526,
-        ),
-        (
-            SpotId::Giguna__Hard_Rock__Rock_Left,
-            SpotId::Giguna__Hard_Rock__Rock_Left,
-            0,
         ),
         (
             SpotId::Giguna__Hard_Rock__Rock_Left,
@@ -38223,11 +23105,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__West_17,
-            SpotId::Giguna__Hard_Rock__West_17,
-            0,
-        ),
-        (
-            SpotId::Giguna__Hard_Rock__West_17,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -38235,11 +23112,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__West_14,
             SpotId::Giguna__Wasteland__East_14,
             1350,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__West_14,
-            SpotId::Giguna__East_Caverns__West_14,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__West_14,
@@ -38263,11 +23135,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
             SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
             1228,
         ),
@@ -38280,11 +23147,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Upper_Platforms_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
@@ -38333,11 +23195,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Floor,
-            SpotId::Giguna__East_Caverns__Upper_Floor,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor,
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             526,
         ),
@@ -38355,11 +23212,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
             SpotId::Giguna__East_Caverns__Upper_Platforms_Right,
             600,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
@@ -38393,11 +23245,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Susar,
-            SpotId::Giguna__East_Caverns__Upper_Susar,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar,
             SpotId::Giguna__East_Caverns__Top_Past_Susar,
             789,
         ),
@@ -38418,11 +23265,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Mid_jump,
             SpotId::Giguna__East_Caverns__Top_Past_Susar,
             1052,
         ),
@@ -38435,11 +23277,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
             SpotId::Giguna__East_Caverns__Upper_Susar,
             263,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Susar_Jump_from_East,
@@ -38468,11 +23305,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Top_Past_Susar,
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Top_Past_Susar,
             SpotId::Giguna__East_Caverns__Top_Ledge,
             1754,
         ),
@@ -38485,11 +23317,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Top_Ledge,
             SpotId::Giguna__East_Caverns__Top_Past_Susar,
             1754,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Top_Ledge,
-            SpotId::Giguna__East_Caverns__Top_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Top_Ledge,
@@ -38505,11 +23332,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Top_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            SpotId::Giguna__East_Caverns__Upper_Passage_West,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Passage_West,
@@ -38543,11 +23365,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Upper_Passage_East,
             SpotId::Giguna__East_Caverns__East_Shaft,
             701,
         ),
@@ -38563,11 +23380,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__East_Shaft,
-            SpotId::Giguna__East_Caverns__East_Shaft,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__East_Shaft,
             SpotId::Giguna__East_Caverns__East_Side,
             399,
         ),
@@ -38580,11 +23392,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__East_Side,
             SpotId::Giguna__East_Caverns__East_Shaft,
             1799,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__East_Side,
-            SpotId::Giguna__East_Caverns__East_Side,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__East_Side,
@@ -38605,11 +23412,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Carving,
             SpotId::Giguna__East_Caverns__East_Side,
             600,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Carving,
-            SpotId::Giguna__East_Caverns__Carving,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Carving,
@@ -38638,11 +23440,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Middle_Ledge,
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Middle_Ledge,
             SpotId::Giguna__East_Caverns__Mid_Susar,
             877,
         ),
@@ -38663,11 +23460,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Mid_Susar,
-            SpotId::Giguna__East_Caverns__Mid_Susar,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Mid_Susar,
             SpotId::Giguna__East_Caverns__Middle_Rock,
             877,
         ),
@@ -38685,11 +23477,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Middle_Rock,
             SpotId::Giguna__East_Caverns__Mid_Susar,
             877,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Middle_Rock,
-            SpotId::Giguna__East_Caverns__Middle_Rock,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Middle_Rock,
@@ -38713,11 +23500,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_East,
             SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
             1228,
         ),
@@ -38738,11 +23520,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
             SpotId::Giguna__East_Caverns__Hidden_Passage_West,
             877,
         ),
@@ -38755,11 +23532,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Hidden_Passage_West,
             SpotId::Giguna__East_Caverns__Hidden_Passage_Center,
             877,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            SpotId::Giguna__East_Caverns__Hidden_Passage_West,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Hidden_Passage_West,
@@ -38785,11 +23557,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Midwest_Ledge,
             SpotId::Giguna__East_Caverns__Hidden_Passage_East,
             1500,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            SpotId::Giguna__East_Caverns__Midwest_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Midwest_Ledge,
@@ -38823,11 +23590,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Statues_Ledge,
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Statues_Ledge,
             SpotId::Giguna__East_Caverns__Switch,
             701,
         ),
@@ -38848,11 +23610,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Switch,
-            SpotId::Giguna__East_Caverns__Switch,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Switch,
             SpotId::Giguna__East_Caverns__Door,
             614,
         ),
@@ -38865,11 +23622,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Door,
             SpotId::Giguna__East_Caverns__Switch,
             614,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Door,
-            SpotId::Giguna__East_Caverns__Door,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Door,
@@ -38885,11 +23637,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__West_16,
             SpotId::Giguna__East_Caverns__Door,
             263,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__West_16,
-            SpotId::Giguna__East_Caverns__West_16,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__West_16,
@@ -38910,11 +23657,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Arc_Ledge,
             SpotId::Giguna__East_Caverns__Statues_Ledge,
             1000,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Arc_Ledge,
-            SpotId::Giguna__East_Caverns__Arc_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Arc_Ledge,
@@ -38948,11 +23690,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Arc_Passage,
-            SpotId::Giguna__East_Caverns__Arc_Passage,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Arc_Passage,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -38960,11 +23697,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__Lower_Ledge,
             SpotId::Giguna__East_Caverns__Arc_Ledge,
             1200,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Lower_Ledge,
-            SpotId::Giguna__East_Caverns__Lower_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__Lower_Ledge,
@@ -38993,11 +23725,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__West_17,
-            SpotId::Giguna__East_Caverns__West_17,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__West_17,
             SpotId::Giguna__East_Caverns__West_Grass,
             1228,
         ),
@@ -39018,11 +23745,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__West_Grass,
-            SpotId::Giguna__East_Caverns__West_Grass,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__West_Grass,
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             701,
         ),
@@ -39033,11 +23755,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             SpotId::Giguna__East_Caverns__East_Grass,
             2982,
         ),
@@ -39050,11 +23767,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__East_Grass,
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             2982,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__East_Grass,
-            SpotId::Giguna__East_Caverns__East_Grass,
-            0,
         ),
         (
             SpotId::Giguna__East_Caverns__East_Grass,
@@ -39073,11 +23785,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__East_Caverns__East_17,
-            SpotId::Giguna__East_Caverns__East_17,
-            0,
-        ),
-        (
-            SpotId::Giguna__East_Caverns__East_17,
             SpotId::Giguna__Vertical_Interchange__West_17,
             1000,
         ),
@@ -39093,11 +23800,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__West_18,
-            SpotId::Giguna__Gateway__West_18,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__West_18,
             SpotId::Giguna__Gateway__Passage_Entry,
             877,
         ),
@@ -39110,11 +23812,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Gateway__Passage_Entry,
             SpotId::Giguna__Gateway__West_18,
             877,
-        ),
-        (
-            SpotId::Giguna__Gateway__Passage_Entry,
-            SpotId::Giguna__Gateway__Passage_Entry,
-            0,
         ),
         (
             SpotId::Giguna__Gateway__Passage_Entry,
@@ -39138,11 +23835,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Passage_Exit,
-            SpotId::Giguna__Gateway__Passage_Exit,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Passage_Exit,
             SpotId::Giguna__Gateway__Left_Platform,
             1000,
         ),
@@ -39163,11 +23855,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Door,
-            SpotId::Giguna__Gateway__Door,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Door,
             SpotId::Giguna__Gateway__Left_Platform,
             1403,
         ),
@@ -39185,11 +23872,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Gateway__Left_Platform,
             SpotId::Giguna__Gateway__Passage_Exit,
             877,
-        ),
-        (
-            SpotId::Giguna__Gateway__Left_Platform,
-            SpotId::Giguna__Gateway__Left_Platform,
-            0,
         ),
         (
             SpotId::Giguna__Gateway__Left_Platform,
@@ -39228,11 +23910,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Right_Platform,
-            SpotId::Giguna__Gateway__Right_Platform,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Right_Platform,
             SpotId::Giguna__Gateway__Block_Right,
             550,
         ),
@@ -39253,11 +23930,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Block_Left,
-            SpotId::Giguna__Gateway__Block_Left,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Block_Left,
             SpotId::Giguna__Gateway__Block_Right,
             701,
         ),
@@ -39278,11 +23950,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Block_Right,
-            SpotId::Giguna__Gateway__Block_Right,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Block_Right,
             SpotId::Giguna__Gateway__Refill_Station,
             1052,
         ),
@@ -39300,11 +23967,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Gateway__Refill_Station,
             SpotId::Giguna__Gateway__Block_Right,
             1052,
-        ),
-        (
-            SpotId::Giguna__Gateway__Refill_Station,
-            SpotId::Giguna__Gateway__Refill_Station,
-            0,
         ),
         (
             SpotId::Giguna__Gateway__Refill_Station,
@@ -39330,11 +23992,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Gateway__Far_Ledge,
             SpotId::Giguna__Gateway__Refill_Station,
             701,
-        ),
-        (
-            SpotId::Giguna__Gateway__Far_Ledge,
-            SpotId::Giguna__Gateway__Far_Ledge,
-            0,
         ),
         (
             SpotId::Giguna__Gateway__Far_Ledge,
@@ -39358,11 +24015,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__One_Jump,
-            SpotId::Giguna__Gateway__One_Jump,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__One_Jump,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39383,11 +24035,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Flask_Ledge,
-            SpotId::Giguna__Gateway__Flask_Ledge,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Flask_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39403,11 +24050,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Block_Lowered,
-            SpotId::Giguna__Gateway__Block_Lowered,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Block_Lowered,
             SpotId::Giguna__Gateway__West_19,
             3333,
         ),
@@ -39428,11 +24070,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__West_19,
-            SpotId::Giguna__Gateway__West_19,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__West_19,
             SpotId::Giguna__Labyrinth_East__East_19,
             1350,
         ),
@@ -39448,11 +24085,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Gateway__Button,
-            SpotId::Giguna__Gateway__Button,
-            0,
-        ),
-        (
-            SpotId::Giguna__Gateway__Button,
             SpotId::Giguna__Gateway__East_19,
             1403,
         ),
@@ -39465,11 +24097,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Gateway__East_19,
             SpotId::Giguna__Gateway__Button,
             1403,
-        ),
-        (
-            SpotId::Giguna__Gateway__East_19,
-            SpotId::Giguna__Gateway__East_19,
-            0,
         ),
         (
             SpotId::Giguna__Gateway__East_19,
@@ -39483,18 +24110,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Labyrinth_East__East_19,
-            SpotId::Giguna__Labyrinth_East__East_19,
-            0,
-        ),
-        (
-            SpotId::Giguna__Labyrinth_East__East_19,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Giguna__Vertical_Interchange__West_17,
-            SpotId::Giguna__Vertical_Interchange__West_17,
-            0,
         ),
         (
             SpotId::Giguna__Vertical_Interchange__West_17,
@@ -39503,28 +24120,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Vertical_Interchange__West_19,
-            SpotId::Giguna__Vertical_Interchange__West_19,
-            0,
-        ),
-        (
-            SpotId::Giguna__Vertical_Interchange__West_19,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Giguna__Antechamber__East_16,
-            SpotId::Giguna__Antechamber__East_16,
-            0,
-        ),
-        (
-            SpotId::Giguna__Antechamber__East_16,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            SpotId::Glacier__Dock_Elevator__Elevator,
-            0,
         ),
         (
             SpotId::Glacier__Dock_Elevator__Elevator,
@@ -39543,11 +24145,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Dock_Elevator__Connector,
-            SpotId::Glacier__Dock_Elevator__Connector,
-            0,
-        ),
-        (
-            SpotId::Glacier__Dock_Elevator__Connector,
             SpotId::Glacier__Dock_Interior__Connector,
             1350,
         ),
@@ -39560,11 +24157,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Dock_Interior__Connector,
             SpotId::Glacier__Dock_Elevator__Connector,
             1350,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Connector,
-            SpotId::Glacier__Dock_Interior__Connector,
-            0,
         ),
         (
             SpotId::Glacier__Dock_Interior__Connector,
@@ -39583,11 +24175,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Dock_Interior__Entry,
-            SpotId::Glacier__Dock_Interior__Entry,
-            0,
-        ),
-        (
-            SpotId::Glacier__Dock_Interior__Entry,
             SpotId::Glacier__Dock_Outside__Entry,
             750,
         ),
@@ -39600,11 +24187,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Dock_Outside__Entry,
             SpotId::Glacier__Dock_Interior__Entry,
             750,
-        ),
-        (
-            SpotId::Glacier__Dock_Outside__Entry,
-            SpotId::Glacier__Dock_Outside__Entry,
-            0,
         ),
         (
             SpotId::Glacier__Dock_Outside__Entry,
@@ -39623,11 +24205,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
-            0,
-        ),
-        (
-            SpotId::Glacier__Dock_Outside__Do_Not_Enter,
             SpotId::Glacier__Revival__East_9,
             1350,
         ),
@@ -39643,11 +24220,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__East_9,
-            SpotId::Glacier__Revival__East_9,
-            0,
-        ),
-        (
-            SpotId::Glacier__Revival__East_9,
             SpotId::Glacier__Revival__Overhang,
             1228,
         ),
@@ -39660,11 +24232,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Revival__Overhang,
             SpotId::Glacier__Revival__East_9,
             1228,
-        ),
-        (
-            SpotId::Glacier__Revival__Overhang,
-            SpotId::Glacier__Revival__Overhang,
-            0,
         ),
         (
             SpotId::Glacier__Revival__Overhang,
@@ -39688,11 +24255,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__Ledge,
-            SpotId::Glacier__Revival__Ledge,
-            0,
-        ),
-        (
-            SpotId::Glacier__Revival__Ledge,
             SpotId::Glacier__Revival__Lower_East,
             2280,
         ),
@@ -39708,11 +24270,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__Lower_East,
-            SpotId::Glacier__Revival__Lower_East,
-            0,
-        ),
-        (
-            SpotId::Glacier__Revival__Lower_East,
             SpotId::Glacier__Grid_42_10__West,
             1350,
         ),
@@ -39723,11 +24280,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Revival__Save_Point,
-            SpotId::Glacier__Revival__Save_Point,
-            0,
-        ),
-        (
-            SpotId::Glacier__Revival__Save_Point,
             SpotId::Glacier__Revival__West_8,
             1228,
         ),
@@ -39740,11 +24292,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Revival__West_8,
             SpotId::Glacier__Revival__Save_Point,
             1228,
-        ),
-        (
-            SpotId::Glacier__Revival__West_8,
-            SpotId::Glacier__Revival__West_8,
-            0,
         ),
         (
             SpotId::Glacier__Revival__West_8,
@@ -39763,11 +24310,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_42_10__West,
-            SpotId::Glacier__Grid_42_10__West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_42_10__West,
             SpotId::Glacier__Grid_42_10__East,
             3157,
         ),
@@ -39783,11 +24325,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_42_10__East,
-            SpotId::Glacier__Grid_42_10__East,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_42_10__East,
             SpotId::Glacier__Grid_43_10_11__Top,
             1350,
         ),
@@ -39800,11 +24337,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_43_10_11__Top,
             SpotId::Glacier__Grid_42_10__East,
             1350,
-        ),
-        (
-            SpotId::Glacier__Grid_43_10_11__Top,
-            SpotId::Glacier__Grid_43_10_11__Top,
-            0,
         ),
         (
             SpotId::Glacier__Grid_43_10_11__Top,
@@ -39825,11 +24357,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_43_10_11__East,
             SpotId::Glacier__Grid_43_10_11__Top,
             3157,
-        ),
-        (
-            SpotId::Glacier__Grid_43_10_11__East,
-            SpotId::Glacier__Grid_43_10_11__East,
-            0,
         ),
         (
             SpotId::Glacier__Grid_43_10_11__East,
@@ -39858,11 +24385,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_43_10_11__Lower,
-            SpotId::Glacier__Grid_43_10_11__Lower,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_43_10_11__Lower,
             SpotId::Glacier__Compass_Room__East,
             1350,
         ),
@@ -39875,11 +24397,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Compass_Room__East,
             SpotId::Glacier__Grid_43_10_11__Lower,
             1350,
-        ),
-        (
-            SpotId::Glacier__Compass_Room__East,
-            SpotId::Glacier__Compass_Room__East,
-            0,
         ),
         (
             SpotId::Glacier__Compass_Room__East,
@@ -39898,11 +24415,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Compass_Room__Center,
-            SpotId::Glacier__Compass_Room__Center,
-            0,
-        ),
-        (
-            SpotId::Glacier__Compass_Room__Center,
             SpotId::Glacier__Compass_Room__West,
             1578,
         ),
@@ -39918,11 +24430,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Compass_Room__West,
-            SpotId::Glacier__Compass_Room__West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Compass_Room__West,
             SpotId::Glacier__The_Big_Drop__East,
             1350,
         ),
@@ -39935,11 +24442,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__The_Big_Drop__East,
             SpotId::Glacier__Compass_Room__West,
             1350,
-        ),
-        (
-            SpotId::Glacier__The_Big_Drop__East,
-            SpotId::Glacier__The_Big_Drop__East,
-            0,
         ),
         (
             SpotId::Glacier__The_Big_Drop__East,
@@ -39958,11 +24460,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__The_Big_Drop__Small_Path,
-            SpotId::Glacier__The_Big_Drop__Small_Path,
-            0,
-        ),
-        (
-            SpotId::Glacier__The_Big_Drop__Small_Path,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39973,11 +24470,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__The_Big_Drop__Water_Surface,
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
-            0,
-        ),
-        (
-            SpotId::Glacier__The_Big_Drop__Water_Surface,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -39985,11 +24477,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
             SpotId::Glacier__Revival__West_8,
             1350,
-        ),
-        (
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-            SpotId::Glacier__Grid_39_40_7_9__Upper_East,
-            0,
         ),
         (
             SpotId::Glacier__Grid_39_40_7_9__Upper_East,
@@ -40008,11 +24495,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_39_40_7_9__West,
-            SpotId::Glacier__Grid_39_40_7_9__West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_39_40_7_9__West,
             SpotId::Glacier__Grid_37_38_9__East,
             1350,
         ),
@@ -40025,11 +24507,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_37_38_9__East,
             SpotId::Glacier__Grid_39_40_7_9__West,
             1350,
-        ),
-        (
-            SpotId::Glacier__Grid_37_38_9__East,
-            SpotId::Glacier__Grid_37_38_9__East,
-            0,
         ),
         (
             SpotId::Glacier__Grid_37_38_9__East,
@@ -40048,11 +24525,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_37_38_9__West,
-            SpotId::Glacier__Grid_37_38_9__West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_37_38_9__West,
             SpotId::Glacier__Vertical_Room__East_9,
             1350,
         ),
@@ -40065,11 +24537,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Glacier__Grid_37_38_9__West,
             1350,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__East_9,
-            SpotId::Glacier__Vertical_Room__East_9,
-            0,
         ),
         (
             SpotId::Glacier__Vertical_Room__East_9,
@@ -40095,11 +24562,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__East_9,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__West_9,
-            SpotId::Glacier__Vertical_Room__West_9,
-            0,
         ),
         (
             SpotId::Glacier__Vertical_Room__West_9,
@@ -40138,11 +24600,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__Mid_9,
-            SpotId::Glacier__Vertical_Room__Mid_9,
-            0,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__Mid_9,
             SpotId::Glacier__Vertical_Room__Mid_11,
             2500,
         ),
@@ -40165,11 +24622,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__Mid_11,
             SpotId::Glacier__Vertical_Room__Mid_9,
             10000,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            SpotId::Glacier__Vertical_Room__Mid_11,
-            0,
         ),
         (
             SpotId::Glacier__Vertical_Room__Mid_11,
@@ -40208,11 +24660,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__Under_Switch,
-            SpotId::Glacier__Vertical_Room__Under_Switch,
-            0,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__Under_Switch,
             SpotId::Glacier__Vertical_Room__Past_Gate,
             526,
         ),
@@ -40225,11 +24672,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__Past_Gate,
             SpotId::Glacier__Vertical_Room__Under_Switch,
             526,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__Past_Gate,
-            SpotId::Glacier__Vertical_Room__Past_Gate,
-            0,
         ),
         (
             SpotId::Glacier__Vertical_Room__Past_Gate,
@@ -40253,11 +24695,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__Peak,
-            SpotId::Glacier__Vertical_Room__Peak,
-            0,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__Peak,
             SpotId::Glacier__Vertical_Room__West_8,
             2000,
         ),
@@ -40273,11 +24710,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__West_8,
-            SpotId::Glacier__Vertical_Room__West_8,
-            0,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__West_8,
             SpotId::Glacier__Peak__East_8,
             1350,
         ),
@@ -40290,11 +24722,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__East_12,
             SpotId::Glacier__Vertical_Room__Mid_11,
             1228,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__East_12,
-            SpotId::Glacier__Vertical_Room__East_12,
-            0,
         ),
         (
             SpotId::Glacier__Vertical_Room__East_12,
@@ -40318,11 +24745,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
-            0,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             SpotId::Glacier__Vertical_Room__East_13,
             2280,
         ),
@@ -40335,11 +24757,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Vertical_Room__East_13,
             SpotId::Glacier__Vertical_Room__Lower_West_Corner,
             2280,
-        ),
-        (
-            SpotId::Glacier__Vertical_Room__East_13,
-            SpotId::Glacier__Vertical_Room__East_13,
-            0,
         ),
         (
             SpotId::Glacier__Vertical_Room__East_13,
@@ -40358,11 +24775,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__West_13,
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_13,
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             6666,
         ),
@@ -40375,11 +24787,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Boomerang_Antechamber__East_12,
             SpotId::Glacier__Boomerang_Antechamber__West_13,
             6666,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            SpotId::Glacier__Boomerang_Antechamber__East_12,
-            0,
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__East_12,
@@ -40413,11 +24820,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Antechamber__Upper_East,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             1350,
         ),
@@ -40448,11 +24850,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Antechamber__West_12,
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Antechamber__West_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40463,11 +24860,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Room__West,
-            SpotId::Glacier__Boomerang_Room__West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room__West,
             SpotId::Glacier__Boomerang_Room__Platform,
             1228,
         ),
@@ -40480,11 +24872,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Boomerang_Room__Platform,
             SpotId::Glacier__Boomerang_Room__West,
             1228,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room__Platform,
-            SpotId::Glacier__Boomerang_Room__Platform,
-            0,
         ),
         (
             SpotId::Glacier__Boomerang_Room__Platform,
@@ -40508,11 +24895,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Room__Center_ish,
-            SpotId::Glacier__Boomerang_Room__Center_ish,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room__Center_ish,
             SpotId::Glacier__Boomerang_Room__Pedestal,
             2456,
         ),
@@ -40533,11 +24915,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Room__Pedestal,
-            SpotId::Glacier__Boomerang_Room__Pedestal,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room__Pedestal,
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             0,
         ),
@@ -40549,11 +24926,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             SpotId::Glacier__Boomerang_Room__Pedestal,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
-            SpotId::Glacier__Boomerang_Room_Switched__Pedestal,
             0,
         ),
         (
@@ -40573,11 +24945,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             1052,
         ),
@@ -40590,11 +24957,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
             SpotId::Glacier__Boomerang_Room_Switched__Upper_Gate_East,
             1052,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
-            0,
         ),
         (
             SpotId::Glacier__Boomerang_Room_Switched__Center_Ledge,
@@ -40609,11 +24971,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Glacier__Boomerang_Room_Switched__Platform,
             SpotId::Glacier__Boomerang_Room__Platform,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
-            SpotId::Glacier__Boomerang_Room_Switched__Platform,
             0,
         ),
         (
@@ -40638,11 +24995,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Boomerang_Room_Switched__Upper_West,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -40658,11 +25010,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__East_9,
-            SpotId::Glacier__Ledge_Grab_Room__East_9,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__East_9,
             SpotId::Glacier__Ledge_Grab_Room__Column,
             2000,
         ),
@@ -40675,11 +25022,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__Column,
             SpotId::Glacier__Ledge_Grab_Room__East_9,
             1929,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            SpotId::Glacier__Ledge_Grab_Room__Column,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Column,
@@ -40708,11 +25050,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
             SpotId::Glacier__Ledge_Grab_Room__Fork,
             500,
         ),
@@ -40728,11 +25065,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__East_11,
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__East_11,
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             1929,
         ),
@@ -40745,11 +25077,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
             SpotId::Glacier__Ledge_Grab_Room__East_11,
             1929,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Mid_35,
@@ -40773,11 +25100,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             1403,
         ),
@@ -40795,11 +25117,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             SpotId::Glacier__Ledge_Grab_Room__Mid_34,
             1403,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
@@ -40823,11 +25140,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
             1754,
         ),
@@ -40840,11 +25152,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
             SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
             1754,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            SpotId::Glacier__Ledge_Grab_Room__Pedestal,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Pedestal,
@@ -40868,11 +25175,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Gate,
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Gate,
             SpotId::Glacier__Ledge_Grab_Room__West,
             3100,
         ),
@@ -40890,11 +25192,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__West,
             SpotId::Glacier__Ledge_Grab_Room__Gate,
             1000,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            SpotId::Glacier__Ledge_Grab_Room__West,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__West,
@@ -40920,11 +25217,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Cliff,
             1052,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
@@ -40955,11 +25247,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
             SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
             599,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-            0,
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
@@ -41003,18 +25290,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Ledge_Grab_Room__Fork,
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
-            0,
-        ),
-        (
-            SpotId::Glacier__Ledge_Grab_Room__Fork,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Glacier__Peak__East_8,
-            SpotId::Glacier__Peak__East_8,
-            0,
         ),
         (
             SpotId::Glacier__Peak__East_8,
@@ -41033,11 +25310,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Peak__Top_Platform_East,
-            SpotId::Glacier__Peak__Top_Platform_East,
-            0,
-        ),
-        (
-            SpotId::Glacier__Peak__Top_Platform_East,
             SpotId::Glacier__Peak__Top_Rock,
             1754,
         ),
@@ -41050,11 +25322,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Peak__Top_Rock,
             SpotId::Glacier__Peak__Top_Platform_East,
             1754,
-        ),
-        (
-            SpotId::Glacier__Peak__Top_Rock,
-            SpotId::Glacier__Peak__Top_Rock,
-            0,
         ),
         (
             SpotId::Glacier__Peak__Top_Rock,
@@ -41078,11 +25345,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Peak__Highest_Platform,
-            SpotId::Glacier__Peak__Highest_Platform,
-            0,
-        ),
-        (
-            SpotId::Glacier__Peak__Highest_Platform,
             SpotId::Glacier__Peak__West_Cliff,
             3157,
         ),
@@ -41095,11 +25357,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Peak__West_Cliff,
             SpotId::Glacier__Peak__Top_Rock,
             4200,
-        ),
-        (
-            SpotId::Glacier__Peak__West_Cliff,
-            SpotId::Glacier__Peak__West_Cliff,
-            0,
         ),
         (
             SpotId::Glacier__Peak__West_Cliff,
@@ -41123,11 +25380,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Peak__Under_West_Cliff,
-            SpotId::Glacier__Peak__Under_West_Cliff,
-            0,
-        ),
-        (
-            SpotId::Glacier__Peak__Under_West_Cliff,
             SpotId::Glacier__Peak__West_8,
             1929,
         ),
@@ -41143,11 +25395,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Peak__West_8,
-            SpotId::Glacier__Peak__West_8,
-            0,
-        ),
-        (
-            SpotId::Glacier__Peak__West_8,
             SpotId::Glacier__Grid_32_7_10__East_8,
             1350,
         ),
@@ -41160,11 +25407,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_32_7_10__East_8,
             SpotId::Glacier__Peak__West_8,
             1350,
-        ),
-        (
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            SpotId::Glacier__Grid_32_7_10__East_8,
-            0,
         ),
         (
             SpotId::Glacier__Grid_32_7_10__East_8,
@@ -41185,11 +25427,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
             SpotId::Glacier__Grid_32_7_10__East_8,
             1228,
-        ),
-        (
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            SpotId::Glacier__Grid_32_7_10__Center_Platform,
-            0,
         ),
         (
             SpotId::Glacier__Grid_32_7_10__Center_Platform,
@@ -41223,11 +25460,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_32_7_10__Column,
-            SpotId::Glacier__Grid_32_7_10__Column,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_32_7_10__Column,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41235,11 +25467,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
             SpotId::Glacier__Grid_32_7_10__Column,
             1400,
-        ),
-        (
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-            SpotId::Glacier__Grid_32_7_10__Left_Rock,
-            0,
         ),
         (
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
@@ -41260,11 +25487,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_32_7_10__West_9,
             SpotId::Glacier__Grid_32_7_10__Left_Rock,
             877,
-        ),
-        (
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            SpotId::Glacier__Grid_32_7_10__West_9,
-            0,
         ),
         (
             SpotId::Glacier__Grid_32_7_10__West_9,
@@ -41288,11 +25510,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_32_7_10__West_10,
-            SpotId::Glacier__Grid_32_7_10__West_10,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_32_7_10__West_10,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41300,11 +25517,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_31_9_12__East_9,
             SpotId::Glacier__Grid_32_7_10__West_9,
             1350,
-        ),
-        (
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            SpotId::Glacier__Grid_31_9_12__East_9,
-            0,
         ),
         (
             SpotId::Glacier__Grid_31_9_12__East_9,
@@ -41333,11 +25545,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_31_9_12__East_10,
-            SpotId::Glacier__Grid_31_9_12__East_10,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_31_9_12__East_10,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             2280,
         ),
@@ -41355,11 +25562,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
             SpotId::Glacier__Grid_31_9_12__East_10,
             4200,
-        ),
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower,
-            0,
         ),
         (
             SpotId::Glacier__Grid_31_9_12__Observation_Tower,
@@ -41388,11 +25590,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             SpotId::Glacier__Grid_31_9_12__West_12,
             1000,
         ),
@@ -41410,11 +25607,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Grid_31_9_12__West_12,
             SpotId::Glacier__Grid_31_9_12__Observation_Tower_L4,
             3000,
-        ),
-        (
-            SpotId::Glacier__Grid_31_9_12__West_12,
-            SpotId::Glacier__Grid_31_9_12__West_12,
-            0,
         ),
         (
             SpotId::Glacier__Grid_31_9_12__West_12,
@@ -41438,11 +25630,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Grid_31_9_12__Midair,
-            SpotId::Glacier__Grid_31_9_12__Midair,
-            0,
-        ),
-        (
-            SpotId::Glacier__Grid_31_9_12__Midair,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41450,11 +25637,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
             SpotId::Ebih__Base_Camp__Lake_Access,
             1350,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-            0,
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
@@ -41470,11 +25652,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
             1200,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            SpotId::Glacier__Lake_Main_Entrance__Upper,
-            0,
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Upper,
@@ -41495,11 +25672,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Upper,
             1850,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-            0,
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
@@ -41543,11 +25715,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
-            0,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Ledge,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             701,
         ),
@@ -41573,11 +25740,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
-            0,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             350,
         ),
@@ -41595,11 +25757,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Lake_Main_Entrance__Hill,
             SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
             600,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            SpotId::Glacier__Lake_Main_Entrance__Hill,
-            0,
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Hill,
@@ -41623,11 +25780,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
-            0,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             1228,
         ),
@@ -41635,11 +25787,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Glacier__Lake_Main_Entrance__Bottom,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
-            0,
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Side_Jump,
@@ -41668,11 +25815,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Side,
-            SpotId::Glacier__Lake_Main_Entrance__Side,
-            0,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Side,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41688,11 +25830,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
-            0,
-        ),
-        (
-            SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -41703,11 +25840,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__West,
-            SpotId::Glacier__Apocalypse_Entry__West,
-            0,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Entry__West,
             SpotId::Glacier__Apocalypse_Entry__Terminal,
             1929,
         ),
@@ -41723,21 +25855,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Glacier__Apocalypse_Entry__Terminal,
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
-            0,
-        ),
-        (
-            SpotId::Glacier__Apocalypse_Entry__Terminal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Menu__Upgrade_Menu__Physiology,
-            SpotId::Menu__Upgrade_Menu__Physiology,
-            0,
-        ),
-        (
-            SpotId::Menu__Upgrade_Menu__Physiology,
             SpotId::Menu__Upgrade_Menu__Combat,
             100,
         ),
@@ -41755,11 +25877,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Menu__Upgrade_Menu__Combat,
             SpotId::Menu__Upgrade_Menu__Physiology,
             100,
-        ),
-        (
-            SpotId::Menu__Upgrade_Menu__Combat,
-            SpotId::Menu__Upgrade_Menu__Combat,
-            0,
         ),
         (
             SpotId::Menu__Upgrade_Menu__Combat,
@@ -41783,11 +25900,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Menu__Upgrade_Menu__Infection,
-            SpotId::Menu__Upgrade_Menu__Infection,
-            0,
-        ),
-        (
-            SpotId::Menu__Upgrade_Menu__Infection,
             SpotId::Menu__Upgrade_Menu__Drone,
             100,
         ),
@@ -41805,11 +25917,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Menu__Upgrade_Menu__Drone,
             SpotId::Menu__Upgrade_Menu__Infection,
             100,
-        ),
-        (
-            SpotId::Menu__Upgrade_Menu__Drone,
-            SpotId::Menu__Upgrade_Menu__Drone,
-            0,
         ),
     ]
 }

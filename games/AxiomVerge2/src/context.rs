@@ -90,9 +90,9 @@ pub enum Expectation {
     GigunaCloudsCtxPlatformMoved(bool),
     GigunaCloudsCtxPortalMoved(bool),
     GigunaEastCavernsCtxDoorOpened(bool),
+    GigunaEastCavernsCtxComboEntered(bool),
     GigunaEastCavernsCtxUpperSusar(bool),
     GigunaEastCavernsCtxMidSusar(bool),
-    GigunaEastCavernsCtxComboEntered(bool),
     GigunaGatewayCtxDoorOpened(bool),
     // items
     AmagiDragonEyePassage(bool),
@@ -371,9 +371,9 @@ pub mod flags {
             const GIGUNA__CLOUDS__CTX__PLATFORM_MOVED = 1 << 18;
             const GIGUNA__CLOUDS__CTX__PORTAL_MOVED = 1 << 19;
             const GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED = 1 << 20;
-            const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 1 << 21;
-            const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 1 << 22;
-            const GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED = 1 << 23;
+            const GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED = 1 << 21;
+            const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 1 << 22;
+            const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 1 << 23;
             const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 1 << 24;
             const BOOMERANG_STEERING = 1 << 25;
             const MAJOR_GLITCHES = 1 << 26;
@@ -1589,6 +1589,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("giguna__east_caverns__ctx__combo_entered", Yaml::Boolean(b)) => {
+                self.set_giguna__east_caverns__ctx__combo_entered(*b)
+            }
+            ("giguna__east_caverns__ctx__combo_entered", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna__east_caverns__ctx__upper_susar", Yaml::Boolean(b)) => {
                 self.set_giguna__east_caverns__ctx__upper_susar(*b)
             }
@@ -1602,15 +1611,6 @@ impl context::Ctx for Context {
                 self.set_giguna__east_caverns__ctx__mid_susar(*b)
             }
             ("giguna__east_caverns__ctx__mid_susar", _) => {
-                return Err(format!(
-                    "Key {:?} has value of disallowed type: {:?}",
-                    ckey, cval
-                ));
-            }
-            ("giguna__east_caverns__ctx__combo_entered", Yaml::Boolean(b)) => {
-                self.set_giguna__east_caverns__ctx__combo_entered(*b)
-            }
-            ("giguna__east_caverns__ctx__combo_entered", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -1925,6 +1925,15 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("giguna__east_caverns__ctx__combo_entered", Yaml::Boolean(b)) => {
+                Expectation::GigunaEastCavernsCtxComboEntered(*b)
+            }
+            ("giguna__east_caverns__ctx__combo_entered", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("giguna__east_caverns__ctx__upper_susar", Yaml::Boolean(b)) => {
                 Expectation::GigunaEastCavernsCtxUpperSusar(*b)
             }
@@ -1938,15 +1947,6 @@ impl context::Ctx for Context {
                 Expectation::GigunaEastCavernsCtxMidSusar(*b)
             }
             ("giguna__east_caverns__ctx__mid_susar", _) => {
-                return Err(format!(
-                    "Key {:?} has value of disallowed type: {:?}",
-                    ckey, cval
-                ));
-            }
-            ("giguna__east_caverns__ctx__combo_entered", Yaml::Boolean(b)) => {
-                Expectation::GigunaEastCavernsCtxComboEntered(*b)
-            }
-            ("giguna__east_caverns__ctx__combo_entered", _) => {
                 return Err(format!(
                     "Key {:?} has value of disallowed type: {:?}",
                     ckey, cval
@@ -2813,6 +2813,15 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::GigunaEastCavernsCtxComboEntered(e) => {
+                    let v = self.giguna__east_caverns__ctx__combo_entered();
+                    if v != *e {
+                        errs.push(format!(
+                            "Expected {} = {}, got: {}",
+                            "giguna__east_caverns__ctx__combo_entered", e, v
+                        ));
+                    }
+                }
                 Expectation::GigunaEastCavernsCtxUpperSusar(e) => {
                     let v = self.giguna__east_caverns__ctx__upper_susar();
                     if v != *e {
@@ -2828,15 +2837,6 @@ impl context::Ctx for Context {
                         errs.push(format!(
                             "Expected {} = {}, got: {}",
                             "giguna__east_caverns__ctx__mid_susar", e, v
-                        ));
-                    }
-                }
-                Expectation::GigunaEastCavernsCtxComboEntered(e) => {
-                    let v = self.giguna__east_caverns__ctx__combo_entered();
-                    if v != *e {
-                        errs.push(format!(
-                            "Expected {} = {}, got: {}",
-                            "giguna__east_caverns__ctx__combo_entered", e, v
                         ));
                     }
                 }
@@ -4302,6 +4302,18 @@ impl context::Ctx for Context {
         }
         let n = self
             .cbits1
+            .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
+        let p = old
+            .cbits1
+            .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
+        if n != p {
+            list.push(format!(
+                "{}GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED",
+                if n { "+" } else { "-" }
+            ));
+        }
+        let n = self
+            .cbits1
             .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR);
         let p = old
             .cbits1
@@ -4321,18 +4333,6 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!(
                 "{}GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR",
-                if n { "+" } else { "-" }
-            ));
-        }
-        let n = self
-            .cbits1
-            .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
-        let p = old
-            .cbits1
-            .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
-        if n != p {
-            list.push(format!(
-                "{}GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED",
                 if n { "+" } else { "-" }
             ));
         }
@@ -5269,6 +5269,23 @@ impl Context {
             val,
         );
     }
+    pub fn giguna__east_caverns__ctx__combo_entered(&self) -> bool {
+        match self.position {
+            _ => match get_area(self.position) {
+                _ => match get_region(self.position) {
+                    _ => self
+                        .cbits1
+                        .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED),
+                },
+            },
+        }
+    }
+    pub fn set_giguna__east_caverns__ctx__combo_entered(&mut self, val: bool) {
+        self.cbits1.set(
+            flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED,
+            val,
+        );
+    }
     pub fn giguna__east_caverns__ctx__upper_susar(&self) -> bool {
         match self.position {
             _ => match get_area(self.position) {
@@ -5300,23 +5317,6 @@ impl Context {
     pub fn set_giguna__east_caverns__ctx__mid_susar(&mut self, val: bool) {
         self.cbits1.set(
             flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR,
-            val,
-        );
-    }
-    pub fn giguna__east_caverns__ctx__combo_entered(&self) -> bool {
-        match self.position {
-            _ => match get_area(self.position) {
-                _ => match get_region(self.position) {
-                    _ => self
-                        .cbits1
-                        .contains(flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED),
-                },
-            },
-        }
-    }
-    pub fn set_giguna__east_caverns__ctx__combo_entered(&mut self, val: bool) {
-        self.cbits1.set(
-            flags::ContextBits1::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED,
             val,
         );
     }

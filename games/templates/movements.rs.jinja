@@ -8,7 +8,6 @@ use crate::context::Context;
 use crate::graph::SpotId;
 use crate::rules;
 use analyzer::context::Ctx;
-use enum_map::{enum_map, EnumMap};
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default)]
 enum Movement {
@@ -50,40 +49,13 @@ pub fn local_travel_time(ctx: &Context, movement_state: MovementState, src: Spot
     }
 }
 
-pub fn build_base_distances() -> EnumMap<SpotId, EnumMap<SpotId, u32>> {
-    enum_map! {
-        SpotId::None => enum_map!{ _ => u32::MAX },
-%% for s in gl.spots()|map(attribute='id')
-        SpotId::{{ s }} => enum_map! {
-%% for t in gl.spots()|map(attribute='id')
-%% if (s, t) in base_distances
-            SpotId::{{ t }} => {{ (base_distances[(s, t)] * 1000)|int }},
-%% endif
-%% endfor
-            _ => u32::MAX,
-        },
-%% endfor
-    }
-}
-
-pub fn base_distance(s1: SpotId, s2: SpotId) -> u32 {
-    match (s1, s2) {
-%% for s in gl.spots()|map(attribute='id')
-%% for t in gl.spots()|map(attribute='id')
-%% if (s, t) in base_distances
-        (SpotId::{{ s }}, SpotId::{{ t }}) => {{ (base_distances[(s, t)] * 1000)|int }},
-%% endif
-%% endfor
-%% endfor
-        _ => u32::MAX,
-    }
-}
-
 pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
     match (src, dest) {
 %% for s in gl.spots()
 %% for t in (s.local or ())
+%% if s != t
         (SpotId::{{ s.id }}, SpotId::{{ t.to|get_spot_reference(s) }}) => true,
+%% endif
 %% endfor
 %% endfor
         _ => false,
@@ -94,7 +66,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     vec![
 %% for s in gl.spots()|map(attribute='id')
 %% for t in gl.spots()|map(attribute='id')
-%% if (s, t) in base_distances
+%% if (s, t) in base_distances and s != t
         (SpotId::{{ s }}, SpotId::{{ t }}, {{ (base_distances[(s, t)] * 1000)|int }}),
 %% endif
 %% endfor

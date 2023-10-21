@@ -8,15 +8,17 @@ use libsample::*;
 fn main() -> Result<(), std::io::Error> {
     let args = Cli::parse();
     let (world, context, routes) = settings::load_settings(args.settings_file());
-    assert!(
-        can_win_just_items(&world, &context),
-        "Available items not enough to complete objective {}",
-        world.objective
-    );
-    assert!(
-        can_win_just_locations(&world, &context),
-        "Unable to complete objective {} with only location checks",
-        world.objective
-    );
+    if let Err(items) = can_win_just_items(&world, &context) {
+        panic!(
+            "Available items not enough to complete objective {}: missing {:?}",
+            world.objective, items
+        );
+    }
+    if let Err(items) = can_win_just_locations(&world, &context) {
+        panic!(
+            "Unable to complete objective {} with only location checks: missing {:?}",
+            world.objective, items
+        );
+    }
     run(&world, context, routes, &args)
 }

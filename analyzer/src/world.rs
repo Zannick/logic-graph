@@ -176,13 +176,6 @@ pub trait World: Sync + Default {
         u32,
     )>;
 
-    /// Edge distances for the purpose of Steiner graph.
-    fn base_distance(
-        &self,
-        s1: <Self::Exit as Exit>::SpotId,
-        s2: <Self::Exit as Exit>::SpotId,
-    ) -> u32;
-
     fn are_spots_connected(
         &self,
         sp1: <Self::Exit as Exit>::SpotId,
