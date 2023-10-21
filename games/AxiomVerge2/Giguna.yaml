@@ -2501,7 +2501,7 @@ areas:
           time: 1.2  # ?
       actions:
         - name: Open Door
-          req: not ^_door_opened and $open and $range1
+          req: not ^_door_opened and $unlock2 and $range1
           do: ^_door_opened = true
           tags: [hack]
 
@@ -2515,7 +2515,7 @@ areas:
           movement: base
       actions:
         - name: Open Door
-          req: not ^_door_opened and $open
+          req: not ^_door_opened and $unlock2
           do: ^_door_opened = true
           tags: [hack]
     - name: Door

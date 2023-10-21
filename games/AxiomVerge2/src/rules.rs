@@ -475,16 +475,17 @@ pub fn access_giguna__east_caverns__statues_ledge__ex__hidden_passage_west_2__re
         && ctx.giguna__east_caverns__ctx__combo_entered())
 }
 pub fn access_giguna__east_caverns__statues_ledge__open_door__req(ctx: &Context) -> bool {
-    // not ^_door_opened and $open and $range1
-    ((!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx)) && helper__range1!(ctx))
+    // not ^_door_opened and $unlock2 and $range1
+    ((!ctx.giguna__east_caverns__ctx__door_opened() && helper__unlock2!(ctx))
+        && helper__range1!(ctx))
 }
 pub fn access_giguna__east_caverns__switch__ex__door_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__east_caverns__ctx__door_opened()
 }
 pub fn access_giguna__east_caverns__switch__open_door__req(ctx: &Context) -> bool {
-    // not ^_door_opened and $open
-    (!ctx.giguna__east_caverns__ctx__door_opened() && helper__open!(ctx))
+    // not ^_door_opened and $unlock2
+    (!ctx.giguna__east_caverns__ctx__door_opened() && helper__unlock2!(ctx))
 }
 pub fn access_giguna__east_caverns__upper_susar__caught__req(ctx: &Context) -> bool {
     // not ^_upper_susar
