@@ -35,7 +35,7 @@ SPOT_FIELDS = {'name', 'coord', 'actions', 'locations', 'exits', 'hybrid', 'loca
 LOCATION_FIELDS = {'name', 'item', 'req', 'canon'}
 TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
-TRIGGER_RULES = {'enter', 'load', 'reset'}
+TRIGGER_RULES = ['enter', 'load', 'reset']
 
 ON_ENTRY_ARGS = {'newpos': 'SpotId'}
 
