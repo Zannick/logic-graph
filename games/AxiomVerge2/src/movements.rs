@@ -4010,6 +4010,11 @@ pub fn local_travel_time(
         (
             [false],
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            SpotId::Giguna__East_Caverns__West_Grass,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             SpotId::Giguna__East_Caverns__East_Grass,
         ) => 2982,
         (
@@ -8813,6 +8818,11 @@ pub fn local_travel_time(
         (
             [true],
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            SpotId::Giguna__East_Caverns__West_Grass,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             SpotId::Giguna__East_Caverns__East_Grass,
         ) => 2982,
         (
@@ -12015,6 +12025,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (
             SpotId::Giguna__East_Caverns__West_Grass,
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            SpotId::Giguna__East_Caverns__West_Grass,
         ) => true,
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
@@ -23040,6 +23054,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Hard_Rock__East_17,
+            SpotId::Giguna__Dual_Path__West_17,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Hard_Rock__East_17,
             SpotId::Giguna__Hard_Rock__Rock_Right,
             877,
         ),
@@ -23752,6 +23771,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__East_Caverns__West_Grass,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            SpotId::Giguna__East_Caverns__West_Grass,
+            701,
         ),
         (
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
@@ -27890,6 +27914,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna__East_Caverns__East_Grass,
         ) => Some(2982),
         (
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            SpotId::Giguna__East_Caverns__West_Grass,
+        ) => Some(701),
+        (
             SpotId::Giguna__East_Caverns__Upper_Floor,
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,
         ) => Some(526),
@@ -31836,6 +31864,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
             SpotId::Giguna__East_Caverns__East_Grass,
         ) => (Some(2982), vec![]),
+        (
+            SpotId::Giguna__East_Caverns__Under_Lower_Ledge,
+            SpotId::Giguna__East_Caverns__West_Grass,
+        ) => (Some(701), vec![]),
         (
             SpotId::Giguna__East_Caverns__Upper_Floor,
             SpotId::Giguna__East_Caverns__Upper_Floor_Ledge,

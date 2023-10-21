@@ -573,10 +573,10 @@ digraph AxiomVerge2 {
         Giguna__Clouds__North_Middle [label = "", pos = "28.25,-25.138889!"];
         Giguna__Clouds__North_Right [label = "", pos = "29.375,-25.138889!"];
         Giguna__Clouds__North_Under_Ledge [label = "", pos = "30.75,-25.138889!"];
-        Giguna__Clouds__Platform_Start [label = "", pos = "30.75,-27.083333!"];
-        Giguna__Clouds__Platform_Stop [label = "", pos = "33.75,-25.972222!"];
-        Giguna__Clouds__Cache [label = "", pos = "34.75,-25.416667!"];
-        Giguna__Clouds__Platform_Early_Portal [label = "", pos = "33.75,-26.180556!"];
+        Giguna__Clouds__Platform_Start [label = "", pos = "28.25,-27.083333!"];
+        Giguna__Clouds__Platform_Stop [label = "", pos = "31.25,-25.972222!"];
+        Giguna__Clouds__Cache [label = "", pos = "32.25,-25.416667!"];
+        Giguna__Clouds__Platform_Early_Portal [label = "", pos = "31.25,-26.180556!"];
         Giguna__Lamassu__West_18 [label = "", pos = "32.625,-24.166667!"];
         Giguna__Lamassu__Staircase_Top [label = "", pos = "33.625,-24.166667!"];
         Giguna__Lamassu__Staircase_Bottom [label = "", pos = "34.25,-24.722222!"];
@@ -1244,6 +1244,7 @@ digraph AxiomVerge2 {
     Giguna__Dual_Path__East_Gate_NW -> Giguna__Dual_Path__East_Gate_NE;
     Giguna__Dual_Path__East_Gate_NE -> Giguna__Dual_Path__East_Gate;
     Giguna__Dual_Path__East_17 -> Giguna__East_Caverns__West_17;
+    Giguna__Hard_Rock__East_17 -> Giguna__Dual_Path__West_17;
     Giguna__Hard_Rock__Rock_Right -> Giguna__Hard_Rock__Rock_Center;
     Giguna__Hard_Rock__Rock_Right -> Giguna__Hard_Rock__Rock_Center;
     Giguna__Hard_Rock__Rock_Left -> Giguna__Hard_Rock__Rock_Center;
@@ -2648,6 +2649,7 @@ digraph AxiomVerge2 {
     Giguna__East_Caverns__West_17 -> Giguna__East_Caverns__West_Grass;
     Giguna__East_Caverns__West_Grass -> Giguna__East_Caverns__West_17;
     Giguna__East_Caverns__West_Grass -> Giguna__East_Caverns__Under_Lower_Ledge;
+    Giguna__East_Caverns__Under_Lower_Ledge -> Giguna__East_Caverns__West_Grass;
     Giguna__East_Caverns__Under_Lower_Ledge -> Giguna__East_Caverns__East_Grass;
     Giguna__East_Caverns__East_Grass -> Giguna__East_Caverns__Under_Lower_Ledge;
     Giguna__East_Caverns__East_17 -> Giguna__East_Caverns__East_Grass;

@@ -1727,15 +1727,15 @@ areas:
     - name: North Under Ledge
       coord: [12.3, 18.1]
     - name: Platform Start
-      coord: [12.3, 19.5]
+      coord: [11.3, 19.5]
       # TODO: early portal in a single action
       # with hack, [deploy], attract, and sight
     - name: Platform Stop
-      coord: [13.5, 18.7]
+      coord: [12.5, 18.7]
     - name: Cache
-      coord: [13.9, 18.3]
+      coord: [12.9, 18.3]
     - name: Platform Early Portal
-      coord: [13.5, 18.85]
+      coord: [12.5, 18.85]
 
 - name: Lamassu
   on_entry: $reset_old_area(^newpos)
@@ -2099,6 +2099,9 @@ areas:
       coord: [15.95, 16.85]
       local:
         - to: Rock Right
+      exits:
+        - to: Dual Path > West 17
+          tags: [xshift]
     - name: Rock Right
       coord: [15.7, 16.85]
       local:
@@ -2600,6 +2603,7 @@ areas:
     - name: Under Lower Ledge
       coord: [19.6, 16.8]
       local:
+        - to: West Grass
         - to: East Grass
           jumps: 2
     - name: East Grass

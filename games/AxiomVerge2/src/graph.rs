@@ -5734,6 +5734,7 @@ pub enum ExitId {
     Giguna__Giguna_Northeast__Vault__ex__Door_2,
     Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1,
     Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1,
+    Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1,
     Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist,
     Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1,
     Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist,
@@ -6380,6 +6381,7 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2 => write!(f, "{}", "Giguna > Giguna Northeast > Vault ==> Door (2)"),
             ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1 => write!(f, "{}", "Giguna > Giguna Northeast > West 10 ==> Carnelian > East 10 (1)"),
             ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1 => write!(f, "{}", "Giguna > Giguna Northeast > West 9 ==> Ruins East > East 9 (1)"),
+            ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1 => write!(f, "{}", "Giguna > Hard Rock > East 17 ==> Dual Path > West 17 (1)"),
             ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Left > Enter Rock as Mist"),
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => write!(f, "{}", "Giguna > Hard Rock > Rock Left ==> Rock Center (1)"),
             ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => write!(f, "{}", "Giguna > Hard Rock > Rock Right > Enter Rock as Mist"),
@@ -7031,6 +7033,7 @@ impl std::str::FromStr for ExitId {
             "Giguna > Giguna Northeast > Vault ==> Door (2)" => Ok(ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2),
             "Giguna > Giguna Northeast > West 10 ==> Carnelian > East 10 (1)" => Ok(ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1),
             "Giguna > Giguna Northeast > West 9 ==> Ruins East > East 9 (1)" => Ok(ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1),
+            "Giguna > Hard Rock > East 17 ==> Dual Path > West 17 (1)" => Ok(ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1),
             "Giguna > Hard Rock > Rock Left > Enter Rock as Mist" => Ok(ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist),
             "Giguna > Hard Rock > Rock Left ==> Rock Center (1)" => Ok(ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1),
             "Giguna > Hard Rock > Rock Right > Enter Rock as Mist" => Ok(ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist),
@@ -10340,6 +10343,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2 => rules::access_giguna__giguna_northeast__vault__ex__door_2__req(&ctx),
             ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1 => true,
             ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1 => true,
+            ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1 => true,
             ExitId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::access_nanite_mist_and_mist_upgrade(&ctx),
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::access_giguna_boulder(&ctx),
             ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => rules::access_nanite_mist_and_mist_upgrade(&ctx),
@@ -10723,6 +10727,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__Giguna_Northeast__East_9__ex__Ebih__Ebih_West__West_9_1 => true,
             ExitId::Giguna__Giguna_Northeast__West_10__ex__Carnelian__East_10_1 => true,
             ExitId::Giguna__Giguna_Northeast__West_9__ex__Ruins_East__East_9_1 => true,
+            ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1 => true,
             ExitId::Giguna__Hard_Rock__West_17__ex__Giguna_Base__East_17_1 => true,
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => true,
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
@@ -12642,6 +12647,7 @@ impl world::World for World {
             ExitId::Giguna__Dual_Path__East_Gate_NW__ex__East_Gate_NE_1 => SpotId::Giguna__Dual_Path__East_Gate_NW,
             ExitId::Giguna__Dual_Path__East_Gate_NE__ex__East_Gate_1 => SpotId::Giguna__Dual_Path__East_Gate_NE,
             ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1 => SpotId::Giguna__Dual_Path__East_17,
+            ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1 => SpotId::Giguna__Hard_Rock__East_17,
             ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => SpotId::Giguna__Hard_Rock__Rock_Right,
             ExitId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => SpotId::Giguna__Hard_Rock__Rock_Right,
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => SpotId::Giguna__Hard_Rock__Rock_Left,
@@ -13159,6 +13165,7 @@ impl world::World for World {
             | SpotId::Giguna__Giguna_Northeast__Vault
             | SpotId::Giguna__Giguna_Northeast__West_10
             | SpotId::Giguna__Giguna_Northeast__West_9
+            | SpotId::Giguna__Hard_Rock__East_17
             | SpotId::Giguna__Hard_Rock__Rock_Center
             | SpotId::Giguna__Hard_Rock__Rock_Left
             | SpotId::Giguna__Hard_Rock__Rock_Right
@@ -18599,6 +18606,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Giguna__Dual_Path__East_17__ex__East_Caverns__West_17_1,
             time: 1350,
             dest: SpotId::Giguna__East_Caverns__West_17,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1 => Exit {
+            id: ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1,
+            time: 1350,
+            dest: SpotId::Giguna__Dual_Path__West_17,
             price: Currency::Free,
             loc_id: None,
         },
@@ -30287,7 +30301,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1.into_usize(),
+                end: ExitId::Giguna__Hard_Rock__East_17__ex__Dual_Path__West_17_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
