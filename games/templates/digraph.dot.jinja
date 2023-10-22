@@ -12,7 +12,7 @@ digraph {{ game }} {
 %% endif
     bgcolor = "transparent";
 %% for r in regions
-        node[fillcolor="{{ loop.index % 7 }}"];
+        node[fillcolor="{{ (loop.index % 7) or 7 }}"];
 %% set r_offx, r_offy = r.graph_offset or (0, 0)
 %% set r_attr = r.graph_attrs or ""
 %% for a in r.areas

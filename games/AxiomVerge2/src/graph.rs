@@ -38,6 +38,7 @@ pub enum RegionId {
     Giguna,
     Giguna_Breach,
     Glacier,
+    Irikar,
     Menu,
 }
 impl fmt::Display for RegionId {
@@ -49,6 +50,7 @@ impl fmt::Display for RegionId {
             RegionId::Giguna => write!(f, "{}", "Giguna Steppes"),
             RegionId::Giguna_Breach => write!(f, "{}", "Giguna Breach"),
             RegionId::Glacier => write!(f, "{}", "Glacier"),
+            RegionId::Irikar => write!(f, "{}", "Irikar"),
             RegionId::Menu => write!(f, "{}", "Menu"),
         }
     }
@@ -65,6 +67,7 @@ impl std::str::FromStr for RegionId {
             "Giguna Steppes" => Ok(RegionId::Giguna),
             "Giguna Breach" => Ok(RegionId::Giguna_Breach),
             "Glacier" => Ok(RegionId::Glacier),
+            "Irikar" => Ok(RegionId::Irikar),
             "Menu" => Ok(RegionId::Menu),
             _ => Err(format!("Could not recognize as a RegionId: {}", s)),
         }
@@ -174,6 +177,7 @@ pub enum AreaId {
     Glacier__Revival,
     Glacier__The_Big_Drop,
     Glacier__Vertical_Room,
+    Irikar__Hub,
     Menu__Upgrade_Menu,
 }
 impl fmt::Display for AreaId {
@@ -283,6 +287,7 @@ impl fmt::Display for AreaId {
             AreaId::Glacier__Revival => write!(f, "{}", "Glacier > Revival"),
             AreaId::Glacier__The_Big_Drop => write!(f, "{}", "Glacier > The Big Drop"),
             AreaId::Glacier__Vertical_Room => write!(f, "{}", "Glacier > Vertical Room"),
+            AreaId::Irikar__Hub => write!(f, "{}", "Irikar > Hub"),
             AreaId::Menu__Upgrade_Menu => write!(f, "{}", "Menu > Upgrade Menu"),
         }
     }
@@ -381,6 +386,7 @@ impl std::str::FromStr for AreaId {
             "Glacier > Revival" => Ok(AreaId::Glacier__Revival),
             "Glacier > The Big Drop" => Ok(AreaId::Glacier__The_Big_Drop),
             "Glacier > Vertical Room" => Ok(AreaId::Glacier__Vertical_Room),
+            "Irikar > Hub" => Ok(AreaId::Irikar__Hub),
             "Menu > Upgrade Menu" => Ok(AreaId::Menu__Upgrade_Menu),
             _ => Err(format!("Could not recognize as a AreaId: {}", s)),
         }
@@ -751,6 +757,10 @@ pub enum SpotId {
     Giguna__Clouds__Platform_Early_Portal,
     Giguna__Clouds__Platform_Start,
     Giguna__Clouds__Platform_Stop,
+    Giguna__Clouds__Pull_Right,
+    Giguna__Clouds__Southeast,
+    Giguna__Clouds__Southwest,
+    Giguna__Clouds__Straight_Down,
     Giguna__Dual_Path__Base_of_Wall,
     Giguna__Dual_Path__Below_Left_Switch,
     Giguna__Dual_Path__Below_Right_Switch,
@@ -1183,6 +1193,7 @@ pub enum SpotId {
     Glacier__Vertical_Room__Under_Switch,
     Glacier__Vertical_Room__West_8,
     Glacier__Vertical_Room__West_9,
+    Irikar__Hub__North_Left,
     Menu__Upgrade_Menu__Combat,
     Menu__Upgrade_Menu__Drone,
     Menu__Upgrade_Menu__Infection,
@@ -1971,6 +1982,12 @@ impl fmt::Display for SpotId {
             }
             SpotId::Giguna__Clouds__Platform_Stop => {
                 write!(f, "{}", "Giguna > Clouds > Platform Stop")
+            }
+            SpotId::Giguna__Clouds__Pull_Right => write!(f, "{}", "Giguna > Clouds > Pull Right"),
+            SpotId::Giguna__Clouds__Southeast => write!(f, "{}", "Giguna > Clouds > Southeast"),
+            SpotId::Giguna__Clouds__Southwest => write!(f, "{}", "Giguna > Clouds > Southwest"),
+            SpotId::Giguna__Clouds__Straight_Down => {
+                write!(f, "{}", "Giguna > Clouds > Straight Down")
             }
             SpotId::Giguna__Dual_Path__Base_of_Wall => {
                 write!(f, "{}", "Giguna > Dual Path > Base of Wall")
@@ -3090,6 +3107,7 @@ impl fmt::Display for SpotId {
             SpotId::Glacier__Vertical_Room__West_9 => {
                 write!(f, "{}", "Glacier > Vertical Room > West 9")
             }
+            SpotId::Irikar__Hub__North_Left => write!(f, "{}", "Irikar > Hub > North Left"),
             SpotId::Menu__Upgrade_Menu__Combat => write!(f, "{}", "Menu > Upgrade Menu > Combat"),
             SpotId::Menu__Upgrade_Menu__Drone => write!(f, "{}", "Menu > Upgrade Menu > Drone"),
             SpotId::Menu__Upgrade_Menu__Infection => {
@@ -3621,6 +3639,10 @@ impl std::str::FromStr for SpotId {
             }
             "Giguna > Clouds > Platform Start" => Ok(SpotId::Giguna__Clouds__Platform_Start),
             "Giguna > Clouds > Platform Stop" => Ok(SpotId::Giguna__Clouds__Platform_Stop),
+            "Giguna > Clouds > Pull Right" => Ok(SpotId::Giguna__Clouds__Pull_Right),
+            "Giguna > Clouds > Southeast" => Ok(SpotId::Giguna__Clouds__Southeast),
+            "Giguna > Clouds > Southwest" => Ok(SpotId::Giguna__Clouds__Southwest),
+            "Giguna > Clouds > Straight Down" => Ok(SpotId::Giguna__Clouds__Straight_Down),
             "Giguna > Dual Path > Base of Wall" => Ok(SpotId::Giguna__Dual_Path__Base_of_Wall),
             "Giguna > Dual Path > Below Left Switch" => {
                 Ok(SpotId::Giguna__Dual_Path__Below_Left_Switch)
@@ -4305,6 +4327,7 @@ impl std::str::FromStr for SpotId {
             }
             "Glacier > Vertical Room > West 8" => Ok(SpotId::Glacier__Vertical_Room__West_8),
             "Glacier > Vertical Room > West 9" => Ok(SpotId::Glacier__Vertical_Room__West_9),
+            "Irikar > Hub > North Left" => Ok(SpotId::Irikar__Hub__North_Left),
             "Menu > Upgrade Menu > Combat" => Ok(SpotId::Menu__Upgrade_Menu__Combat),
             "Menu > Upgrade Menu > Drone" => Ok(SpotId::Menu__Upgrade_Menu__Drone),
             "Menu > Upgrade Menu > Infection" => Ok(SpotId::Menu__Upgrade_Menu__Infection),
@@ -7562,6 +7585,8 @@ pub enum ActionId {
     Giguna__Carnelian__Switch__Open_Door,
     Giguna__Carnelian__Upper_Susar__Caught,
     Giguna__Carnelian__Upper_Susar__Hack,
+    Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
+    Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
     Giguna__East_Caverns__Mid_Susar__Caught,
     Giguna__East_Caverns__Mid_Susar__Hack,
     Giguna__East_Caverns__Statues_Ledge__Open_Door,
@@ -7718,6 +7743,16 @@ impl fmt::Display for ActionId {
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                 write!(f, "{}", "Giguna > Carnelian > Upper Susar > Hack")
             }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => write!(
+                f,
+                "{}",
+                "Giguna > Clouds > Platform Start > Hack and Ride to Portal"
+            ),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => write!(
+                f,
+                "{}",
+                "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal"
+            ),
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
                 write!(f, "{}", "Giguna > East Caverns > Mid Susar > Caught")
             }
@@ -7962,6 +7997,12 @@ impl std::str::FromStr for ActionId {
             }
             "Giguna > Carnelian > Upper Susar > Hack" => {
                 Ok(ActionId::Giguna__Carnelian__Upper_Susar__Hack)
+            }
+            "Giguna > Clouds > Platform Start > Hack and Ride to Portal" => {
+                Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal)
+            }
+            "Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal" => {
+                Ok(ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal)
             }
             "Giguna > East Caverns > Mid Susar > Caught" => {
                 Ok(ActionId::Giguna__East_Caverns__Mid_Susar__Caught)
@@ -8874,7 +8915,11 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna__Clouds__Platform_Start
         | SpotId::Giguna__Clouds__Platform_Stop
         | SpotId::Giguna__Clouds__Cache
-        | SpotId::Giguna__Clouds__Platform_Early_Portal => AreaId::Giguna__Clouds,
+        | SpotId::Giguna__Clouds__Platform_Early_Portal
+        | SpotId::Giguna__Clouds__Southwest
+        | SpotId::Giguna__Clouds__Straight_Down
+        | SpotId::Giguna__Clouds__Pull_Right
+        | SpotId::Giguna__Clouds__Southeast => AreaId::Giguna__Clouds,
         SpotId::Giguna__Lamassu__West_18
         | SpotId::Giguna__Lamassu__Staircase_Top
         | SpotId::Giguna__Lamassu__Staircase_Bottom
@@ -9095,6 +9140,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             AreaId::Glacier__Apocalypse_Entry
         }
+        SpotId::Irikar__Hub__North_Left => AreaId::Irikar__Hub,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -9671,7 +9717,11 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna__Clouds__Platform_Start
         | SpotId::Giguna__Clouds__Platform_Stop
         | SpotId::Giguna__Clouds__Cache
-        | SpotId::Giguna__Clouds__Platform_Early_Portal => RegionId::Giguna,
+        | SpotId::Giguna__Clouds__Platform_Early_Portal
+        | SpotId::Giguna__Clouds__Southwest
+        | SpotId::Giguna__Clouds__Straight_Down
+        | SpotId::Giguna__Clouds__Pull_Right
+        | SpotId::Giguna__Clouds__Southeast => RegionId::Giguna,
         SpotId::Giguna__Lamassu__West_18
         | SpotId::Giguna__Lamassu__Staircase_Top
         | SpotId::Giguna__Lamassu__Staircase_Bottom
@@ -9888,6 +9938,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Glacier__Apocalypse_Entry__West | SpotId::Glacier__Apocalypse_Entry__Terminal => {
             RegionId::Glacier
         }
+        SpotId::Irikar__Hub__North_Left => RegionId::Irikar,
         SpotId::Menu__Upgrade_Menu__Physiology
         | SpotId::Menu__Upgrade_Menu__Combat
         | SpotId::Menu__Upgrade_Menu__Infection
@@ -11265,6 +11316,14 @@ impl world::Accessible for Action {
                 ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                     rules::access_giguna__carnelian__upper_susar__hack__req(&ctx)
                 }
+                ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
+                    rules::access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(&ctx)
+                }
+                ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                    rules::access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
+                        &ctx,
+                    )
+                }
                 ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
                     rules::access_giguna__east_caverns__mid_susar__caught__req(&ctx)
                 }
@@ -11540,6 +11599,12 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 rules::action_deploy_drone_and_move__giguna__ruins_top__west_7(ctx)
             }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
+                rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx)
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx)
+            }
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
                 rules::action_giguna__east_caverns__west_14__enter_combo__do(ctx)
             }
@@ -11645,6 +11710,12 @@ impl world::Action for Action {
             }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_West__Rooftop_East_Edge
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
+                SpotId::Platform_Stop
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                SpotId::Platform_Stop
             }
             _ => SpotId::None,
         }
@@ -11758,7 +11829,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 783],
+    raw_spots: [SpotId; 788],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -12614,6 +12685,10 @@ impl world::World for World {
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => SpotId::Giguna__Ruins_Top__Switch,
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 SpotId::Giguna__Ruins_Top__Turret_Balcony_West
+            }
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal
+            | ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
+                SpotId::Giguna__Clouds__Platform_Start
             }
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
                 SpotId::Giguna__East_Caverns__West_14
@@ -13485,6 +13560,7 @@ impl world::World for World {
             | SpotId::Giguna__Carnelian__Upper_Susar
             | SpotId::Giguna__Carnelian__Vault
             | SpotId::Giguna__Carnelian__West_10
+            | SpotId::Giguna__Clouds__Platform_Start
             | SpotId::Giguna__Dual_Path__Below_Left_Switch
             | SpotId::Giguna__Dual_Path__Below_Right_Switch
             | SpotId::Giguna__Dual_Path__East_17
@@ -14076,6 +14152,10 @@ impl World {
                 SpotId::Giguna__Clouds__Platform_Early_Portal,
                 SpotId::Giguna__Clouds__Platform_Start,
                 SpotId::Giguna__Clouds__Platform_Stop,
+                SpotId::Giguna__Clouds__Pull_Right,
+                SpotId::Giguna__Clouds__Southeast,
+                SpotId::Giguna__Clouds__Southwest,
+                SpotId::Giguna__Clouds__Straight_Down,
                 SpotId::Giguna__Dual_Path__Base_of_Wall,
                 SpotId::Giguna__Dual_Path__Below_Left_Switch,
                 SpotId::Giguna__Dual_Path__Below_Right_Switch,
@@ -14508,6 +14588,7 @@ impl World {
                 SpotId::Glacier__Vertical_Room__Under_Switch,
                 SpotId::Glacier__Vertical_Room__West_8,
                 SpotId::Glacier__Vertical_Room__West_9,
+                SpotId::Irikar__Hub__North_Left,
                 SpotId::Menu__Upgrade_Menu__Combat,
                 SpotId::Menu__Upgrade_Menu__Drone,
                 SpotId::Menu__Upgrade_Menu__Infection,
@@ -20765,6 +20846,16 @@ pub fn build_actions() -> EnumMap<ActionId, Action> {
         ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => Action {
             id: ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower,
             time: 3800,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => Action {
+            id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal,
+            time: 12000,
+            price: Currency::Free,
+        },
+        ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => Action {
+            id: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal,
+            time: 12000,
             price: Currency::Free,
         },
         ActionId::Giguna__East_Caverns__West_14__Enter_Combo => Action {
@@ -30242,7 +30333,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__North_Middle => Spot {
@@ -30258,7 +30349,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__North_Right => Spot {
@@ -30274,7 +30365,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__North_Under_Ledge => Spot {
@@ -30290,7 +30381,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Platform_Start => Spot {
@@ -30302,11 +30393,12 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             actions: Range {
-                start: 0, end: 0,
+                start: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal.into_usize(),
+                end: ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal.into_usize() + 1,
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Platform_Stop => Spot {
@@ -30322,7 +30414,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Cache => Spot {
@@ -30338,7 +30430,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Clouds__Platform_Early_Portal => Spot {
@@ -30354,7 +30446,71 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             },
             area_spots: Range {
                 start: SpotId::Giguna__Clouds__Cache.into_usize(),
-                end: SpotId::Giguna__Clouds__Platform_Stop.into_usize() + 1,
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Clouds__Southwest => Spot {
+            id: SpotId::Giguna__Clouds__Southwest,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Clouds__Cache.into_usize(),
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Clouds__Straight_Down => Spot {
+            id: SpotId::Giguna__Clouds__Straight_Down,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Clouds__Cache.into_usize(),
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Clouds__Pull_Right => Spot {
+            id: SpotId::Giguna__Clouds__Pull_Right,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Clouds__Cache.into_usize(),
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna__Clouds__Southeast => Spot {
+            id: SpotId::Giguna__Clouds__Southeast,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna__Clouds__Cache.into_usize(),
+                end: SpotId::Giguna__Clouds__Straight_Down.into_usize() + 1,
             },
         },
         SpotId::Giguna__Lamassu__West_18 => Spot {
@@ -33919,6 +34075,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Glacier__Apocalypse_Entry__West.into_usize() + 1,
             },
         },
+        SpotId::Irikar__Hub__North_Left => Spot {
+            id: SpotId::Irikar__Hub__North_Left,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Irikar__Hub__North_Left.into_usize(),
+                end: SpotId::Irikar__Hub__North_Left.into_usize() + 1,
+            },
+        },
         SpotId::Menu__Upgrade_Menu__Physiology => Spot {
             id: SpotId::Menu__Upgrade_Menu__Physiology,
             locations: Range {
@@ -34841,6 +35013,10 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Clouds__Platform_Stop => Range { start: 0, end: 0 },
         SpotId::Giguna__Clouds__Cache => Range { start: 0, end: 0 },
         SpotId::Giguna__Clouds__Platform_Early_Portal => Range { start: 0, end: 0 },
+        SpotId::Giguna__Clouds__Southwest => Range { start: 0, end: 0 },
+        SpotId::Giguna__Clouds__Straight_Down => Range { start: 0, end: 0 },
+        SpotId::Giguna__Clouds__Pull_Right => Range { start: 0, end: 0 },
+        SpotId::Giguna__Clouds__Southeast => Range { start: 0, end: 0 },
         SpotId::Giguna__Lamassu__West_18 => Range { start: 0, end: 0 },
         SpotId::Giguna__Lamassu__Staircase_Top => Range { start: 0, end: 0 },
         SpotId::Giguna__Lamassu__Staircase_Bottom => Range { start: 0, end: 0 },
@@ -35129,6 +35305,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize() + 1,
         },
+        SpotId::Irikar__Hub__North_Left => Range { start: 0, end: 0 },
         SpotId::Menu__Upgrade_Menu__Physiology => Range {
             start: LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize() + 1,
@@ -35388,6 +35565,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
         },
+        AreaId::Irikar__Hub => Range { start: 0, end: 0 },
         AreaId::Menu__Upgrade_Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),
@@ -35422,6 +35600,7 @@ pub fn region_locations(id: RegionId) -> Range<usize> {
             start: LocationId::Glacier__Apocalypse_Entry__Terminal__Escape.into_usize(),
             end: LocationId::Glacier__Vertical_Room__Under_Switch__Switch.into_usize(),
         },
+        RegionId::Irikar => Range { start: 0, end: 0 },
         RegionId::Menu => Range {
             start: LocationId::Menu__Upgrade_Menu__Combat__Melee_Damage_1.into_usize(),
             end: LocationId::Menu__Upgrade_Menu__Physiology__Mist_Upgrade.into_usize(),

@@ -1,0 +1,8 @@
+name: Irikar
+
+areas:
+- name: Hub
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North Left
+      coord: [11.0, 20.1]

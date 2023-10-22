@@ -73,6 +73,8 @@ exit_movements:
     # and takes ~.6 seconds to exit form (though you might use that to keep moving)
   platform:
     x: .138
+    # y: .3  ?  TODO: Re-measure more accurately
+    # technically uses xy (ortho) movement but x!=y
 
 time:
   default: 1
@@ -206,6 +208,9 @@ helpers:
   $charge: Slingshot_Charge and ^mode == 'drone'
   $spin: Slingshot_Weapon and ^mode == 'drone'
 
+  # TODO: this is a temporary hack around the attract issue #131
+  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
+
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,
      Heretics_Tablet, Terminal_Breakthrough_1, Companies_Layoff, Record_Losses,
@@ -242,7 +247,6 @@ helpers:
   # Save is updated when you traverse a portal 
   $portal:action(newsave:SpotId): ^save = ^newsave
 
-
 collect:
   Amashilama: ^save = `Glacier > Revival > Save Point`
   Flask: ^flasks += 1
@@ -278,8 +282,11 @@ settings:
     type: bool
 
 special:
-  graph_scale: [180, -100]
+  # For World.png,
+  # a tile is 432x240, and split into 27x15 16x16 squares
+  # scaled to 50%, it's 216x120. scaled to 10/24, it's 180x100
+  graph_scale: [216, -120]
   map_ppi: 72
-  map_file: AxiomVerge2-FullMap-screenshots.png  # contact me
+  map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
-  map_max_coord: [46, 60]
+  map_max_coord: [46, 90]

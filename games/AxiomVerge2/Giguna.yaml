@@ -1718,19 +1718,41 @@ areas:
 - name: Clouds
   on_entry: $reset_old_area(^newpos)
   reset:
-    _platform_moved: false
-    _portal_moved: false
+    # We'll only move these together
+    _platform_and_portal: false
   spots:
     - name: North Left
       coord: [11.1, 18.1]
+      local:
+        - to: Southwest
     - name: North Middle
       coord: [11.3, 18.1]
+      local:
+        - to: Southwest
+        - to: Platform Start
     - name: North Right
       coord: [11.75, 18.1]
+      local:
+        - to: Pull Right
     - name: North Under Ledge
       coord: [12.3, 18.1]
     - name: Platform Start
       coord: [11.3, 19.5]
+      local:
+        - to: Straight Down
+      actions:
+        - name: Hack and Ride to Portal
+          req: not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
+          do: ^_platform_and_portal = true; if (^indra == ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+          to: Platform Stop
+          time: 12  # estimate includes changing active item twice
+        - name: Hack, Deploy, Ride to Portal
+          req: not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
+          do: ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
+          to: Platform Stop
+          time: 12  # it's not really additional time
+        # Early portal gives us about .5s savings, is that worth modeling?
+
       # TODO: early portal in a single action
       # with hack, [deploy], attract, and sight
     - name: Platform Stop
@@ -1739,6 +1761,14 @@ areas:
       coord: [12.9, 18.3]
     - name: Platform Early Portal
       coord: [12.5, 18.85]
+    - name: Southwest
+      coord: [11.0, 19.9]
+    - name: Straight Down
+      coord: [11.3, 19.9]
+    - name: Pull Right
+      coord: [12.25, 19.9]
+    - name: Southeast
+      coord: [12.8, 19.9]
 
 - name: Lamassu
   on_entry: $reset_old_area(^newpos)

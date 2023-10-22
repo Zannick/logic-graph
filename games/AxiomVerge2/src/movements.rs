@@ -3450,6 +3450,17 @@ pub fn local_travel_time(
         }
         ([false], SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => 1754,
         ([false], SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => 2400,
+        ([false], SpotId::Giguna__Clouds__North_Left, SpotId::Giguna__Clouds__Southwest) => 1799,
+        ([false], SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Platform_Start) => {
+            1399
+        }
+        ([false], SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Southwest) => 1799,
+        ([false], SpotId::Giguna__Clouds__North_Right, SpotId::Giguna__Clouds__Pull_Right) => 1799,
+        (
+            [false],
+            SpotId::Giguna__Clouds__Platform_Start,
+            SpotId::Giguna__Clouds__Straight_Down,
+        ) => 399,
         ([false], SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => 1403,
         ([false], SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => 1403,
         (
@@ -8455,6 +8466,15 @@ pub fn local_travel_time(
         }
         ([true], SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => 1754,
         ([true], SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => 2400,
+        ([true], SpotId::Giguna__Clouds__North_Left, SpotId::Giguna__Clouds__Southwest) => 1799,
+        ([true], SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Platform_Start) => {
+            1399
+        }
+        ([true], SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Southwest) => 1799,
+        ([true], SpotId::Giguna__Clouds__North_Right, SpotId::Giguna__Clouds__Pull_Right) => 1799,
+        ([true], SpotId::Giguna__Clouds__Platform_Start, SpotId::Giguna__Clouds__Straight_Down) => {
+            399
+        }
         ([true], SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => 1403,
         ([true], SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => 1403,
         (
@@ -12086,6 +12106,11 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__Wall_Bottom) => true,
         (SpotId::Giguna__Helipad__Staircase_Top, SpotId::Giguna__Helipad__East_18) => true,
         (SpotId::Giguna__Helipad__East_18, SpotId::Giguna__Helipad__Staircase_Top) => true,
+        (SpotId::Giguna__Clouds__North_Left, SpotId::Giguna__Clouds__Southwest) => true,
+        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Southwest) => true,
+        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Platform_Start) => true,
+        (SpotId::Giguna__Clouds__North_Right, SpotId::Giguna__Clouds__Pull_Right) => true,
+        (SpotId::Giguna__Clouds__Platform_Start, SpotId::Giguna__Clouds__Straight_Down) => true,
         (SpotId::Giguna__Lamassu__West_18, SpotId::Giguna__Lamassu__Staircase_Top) => true,
         (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__West_18) => true,
         (SpotId::Giguna__Lamassu__Staircase_Top, SpotId::Giguna__Lamassu__Staircase_Bottom) => true,
@@ -22896,13 +22921,33 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__North_Left,
+            SpotId::Giguna__Clouds__Southwest,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Clouds__North_Left,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Giguna__Clouds__North_Middle,
+            SpotId::Giguna__Clouds__Platform_Start,
+            1399,
+        ),
+        (
+            SpotId::Giguna__Clouds__North_Middle,
+            SpotId::Giguna__Clouds__Southwest,
+            1799,
+        ),
+        (
+            SpotId::Giguna__Clouds__North_Middle,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__North_Right,
+            SpotId::Giguna__Clouds__Pull_Right,
+            1799,
         ),
         (
             SpotId::Giguna__Clouds__North_Right,
@@ -22913,6 +22958,16 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Clouds__North_Under_Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Platform_Start,
+            SpotId::Giguna__Clouds__Platform_Stop,
+            12000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Platform_Start,
+            SpotId::Giguna__Clouds__Straight_Down,
+            399,
         ),
         (
             SpotId::Giguna__Clouds__Platform_Start,
@@ -22931,6 +22986,26 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__Platform_Early_Portal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Southwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Straight_Down,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Pull_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Southeast,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26785,6 +26860,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Irikar__Hub__North_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Menu__Upgrade_Menu__Physiology,
             SpotId::Menu__Upgrade_Menu__Combat,
             100,
@@ -28641,6 +28721,15 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Carnelian__West_10, SpotId::Giguna__Carnelian__West_Ledge) => Some(877),
         (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
             Some(1052)
+        }
+        (SpotId::Giguna__Clouds__North_Left, SpotId::Giguna__Clouds__Southwest) => Some(1799),
+        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Platform_Start) => {
+            Some(1399)
+        }
+        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Southwest) => Some(1799),
+        (SpotId::Giguna__Clouds__North_Right, SpotId::Giguna__Clouds__Pull_Right) => Some(1799),
+        (SpotId::Giguna__Clouds__Platform_Start, SpotId::Giguna__Clouds__Straight_Down) => {
+            Some(399)
         }
         (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => {
             Some(526)
@@ -32698,6 +32787,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Carnelian__West_Ledge, SpotId::Giguna__Carnelian__Lower_Susar) => {
             (Some(1052), vec![])
+        }
+        (SpotId::Giguna__Clouds__North_Left, SpotId::Giguna__Clouds__Southwest) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Platform_Start) => {
+            (Some(1399), vec![])
+        }
+        (SpotId::Giguna__Clouds__North_Middle, SpotId::Giguna__Clouds__Southwest) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Giguna__Clouds__North_Right, SpotId::Giguna__Clouds__Pull_Right) => {
+            (Some(1799), vec![])
+        }
+        (SpotId::Giguna__Clouds__Platform_Start, SpotId::Giguna__Clouds__Straight_Down) => {
+            (Some(399), vec![])
         }
         (SpotId::Giguna__Dual_Path__Base_of_Wall, SpotId::Giguna__Dual_Path__In_the_Grass) => {
             (Some(526), vec![])

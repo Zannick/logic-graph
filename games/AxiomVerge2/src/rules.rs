@@ -403,6 +403,22 @@ pub fn access_giguna__carnelian__vault__ex__door_1__req(ctx: &Context) -> bool {
     // ^_door_opened
     ctx.giguna__carnelian__ctx__door_opened()
 }
+pub fn access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx: &Context) -> bool {
+    // not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
+    ((((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx))
+        && helper__attract!(ctx))
+        && ctx.has(Item::Breach_Sight))
+        && ctx.has(Item::Remote_Drone))
+}
+pub fn access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
+    ctx: &Context,
+) -> bool {
+    // not ^_platform_and_portal and $activate and $can_deploy and $attract and Breach_Sight
+    ((((!ctx.giguna__clouds__ctx__platform_and_portal() && helper__activate!(ctx))
+        && helper__can_deploy!(ctx))
+        && helper__attract!(ctx))
+        && ctx.has(Item::Breach_Sight))
+}
 pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
 ) -> bool {
@@ -1190,6 +1206,18 @@ pub fn action_giguna__carnelian__upper_susar__caught__do(ctx: &mut Context) {
 pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context) {
     // ^_upper_susar = true
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
+}
+pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx: &mut Context) {
+    // ^_platform_and_portal = true; if (^indra == ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+    ctx.set_giguna__clouds__ctx__platform_and_portal(true);
+    if Into::<i32>::into(ctx.indra()) == ctx.position().into() {
+        ctx.set_indra(SpotId::Giguna__Clouds__Platform_Stop);
+    }
+}
+pub fn action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx: &mut Context) {
+    // ^_platform_and_portal = true; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
+    ctx.set_giguna__clouds__ctx__platform_and_portal(true);
+    helper__deploy_drone_and_move!(ctx, SpotId::Giguna__Clouds__Platform_Stop);
 }
 pub fn action_giguna__east_caverns__mid_susar__caught__do(ctx: &mut Context) {
     // ^_mid_susar = true
