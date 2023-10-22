@@ -334,7 +334,7 @@ macro_rules! helper__spin {
 }
 
 /// $attract (  )
-/// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
+/// Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)
 #[macro_export]
 macro_rules! helper__attract {
     ($ctx:expr) => {{
@@ -342,7 +342,7 @@ macro_rules! helper__attract {
         use $crate::items::Item;
         ($ctx.has(Item::Breach_Attractor)
             && (($ctx.has(Item::Anuman) || $ctx.mode() != enums::Mode::Drone)
-                || Into::<i32>::into($ctx.indra()) == $ctx.position().into()))
+                || $ctx.indra() == $ctx.position()))
     }};
 }
 

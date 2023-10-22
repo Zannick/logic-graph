@@ -130,13 +130,11 @@ subgraph Antarctica
         Antarctica__East__Building_2_Entry(Building 2 Entry);
         Antarctica__East__Building_2_Upper(Building 2 Upper);
     end
-    subgraph Antarctica__Building_2L[Building 2L]
-        Antarctica__Building_2L__Entry(Entry);
-    end
-    subgraph Antarctica__Building_2U[Building 2U]
-        Antarctica__Building_2U__Stairs(Stairs);
-        Antarctica__Building_2U__Door(Door);
-        Antarctica__Building_2U__Behind_Boxes(Behind Boxes);
+    subgraph Antarctica__Building_2[Building 2]
+        Antarctica__Building_2__Entry(Entry);
+        Antarctica__Building_2__Stairs(Stairs);
+        Antarctica__Building_2__Upper_Door(Upper Door);
+        Antarctica__Building_2__Behind_Boxes(Behind Boxes);
     end
     subgraph Antarctica__Top[Top]
         Antarctica__Top__Power_Entry(Power Entry);
@@ -890,6 +888,7 @@ subgraph Glacier
         Glacier__Vertical_Room__Past_Gate(Past Gate);
         Glacier__Vertical_Room__Peak(Peak);
         Glacier__Vertical_Room__West_8(West 8);
+        Glacier__Vertical_Room__East_Corner(East Corner);
         Glacier__Vertical_Room__East_12(East 12);
         Glacier__Vertical_Room__Lower_West_Corner(Lower West Corner);
         Glacier__Vertical_Room__East_13(East 13);
@@ -905,13 +904,9 @@ subgraph Glacier
         Glacier__Boomerang_Room__Platform(Platform);
         Glacier__Boomerang_Room__Center_ish(Center-ish);
         Glacier__Boomerang_Room__Pedestal(Pedestal);
-    end
-    subgraph Glacier__Boomerang_Room_Switched[Boomerang Room Switched]
-        Glacier__Boomerang_Room_Switched__Pedestal(Pedestal);
-        Glacier__Boomerang_Room_Switched__Upper_Gate_East(Upper Gate East);
-        Glacier__Boomerang_Room_Switched__Center_Ledge(Center Ledge);
-        Glacier__Boomerang_Room_Switched__Platform(Platform);
-        Glacier__Boomerang_Room_Switched__Upper_West(Upper West);
+        Glacier__Boomerang_Room__Upper_Gate_East(Upper Gate East);
+        Glacier__Boomerang_Room__Center_Ledge(Center Ledge);
+        Glacier__Boomerang_Room__Upper_West(Upper West);
     end
     subgraph Glacier__Ledge_Grab_Room[Ledge Grab Room]
         Glacier__Ledge_Grab_Room__East_9(East 9);
@@ -1016,18 +1011,22 @@ Amagi__West_Lake__Stronghold_Top --> Amagi__West_Lake__Stronghold_Item
 Amagi__West_Lake__Surface_Wall_Left <--> Amagi__West_Lake__Surface_Wall_Right
 Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
+Antarctica__Building_1E__Connector --> Antarctica__Building_1E__East_Entry
 Antarctica__Building_1E__Connector <--> Antarctica__Building_1W__Connector
 Antarctica__Building_1E__East_Entry <--> Antarctica__East__Building_1_Entry
 Antarctica__Building_1W__West_Entry <--> Antarctica__West__Boxes
-Antarctica__Building_2L__Entry <--> Antarctica__Building_2U__Stairs
-Antarctica__Building_2L__Entry <--> Antarctica__East__Building_2_Entry
-Antarctica__Building_2L__Entry <--> Antarctica__Freight_Elevator__Left
-Antarctica__Building_2U__Behind_Boxes <--> Antarctica__Building_2U__Stairs
-Antarctica__Building_2U__Door <--> Antarctica__East__Building_2_Upper
+Antarctica__Building_2__Entry <--> Antarctica__Building_2__Stairs
+Antarctica__Building_2__Entry <--> Antarctica__East__Building_2_Entry
+Antarctica__Building_2__Entry <--> Antarctica__Freight_Elevator__Left
+Antarctica__Building_2__Stairs --> Antarctica__Building_2__Behind_Boxes
+Antarctica__Building_2__Upper_Door <--> Antarctica__East__Building_2_Upper
+Antarctica__East__Building_1_Entry --> Antarctica__East__Building_2_Upper
+Antarctica__East__Building_2_Entry --> Antarctica__East__Building_2_Upper
 Antarctica__East__Building_2_Upper <--> Antarctica__Top__Power_Entry
 Antarctica__Freight_Elevator__Controls --> Glacier__Dock_Elevator__Elevator
 Antarctica__Power_Room__Entry <--> Antarctica__Top__Power_Entry
 Antarctica__Shed__Interior <--> Antarctica__West__Shed_Entry
+Antarctica__West__Shed_Entry --> Antarctica__West__Helipad
 Ebih__Base_Camp__Building_Entry <--> Ebih__Building_Interior__Entry
 Ebih__Base_Camp__Bunker_Entry <--> Ebih__Bunker_Interior__Entry
 Ebih__Base_Camp__East_11 --> Ebih__Base_Camp__Top_Platform
@@ -1357,12 +1356,13 @@ Giguna__West_Caverns__West_13 --> Giguna__Far_Corner__East_13
 Giguna__West_Tower__Southwest --> Giguna__West_Caverns__Northwest
 Glacier__Apocalypse_Entry__West <--> Glacier__Grid_43_10_11__East
 Glacier__Boomerang_Antechamber__East_12 <--> Glacier__Boomerang_Room__West
-Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room_Switched__Upper_West
+Glacier__Boomerang_Antechamber__Upper_East <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Boomerang_Antechamber__West_12 <--> Glacier__Vertical_Room__East_12
 Glacier__Boomerang_Antechamber__West_13 <--> Glacier__Vertical_Room__East_13
-Glacier__Boomerang_Room_Switched__Pedestal <--> Glacier__Boomerang_Room__Pedestal
-Glacier__Boomerang_Room_Switched__Platform <--> Glacier__Boomerang_Room__Platform
-Glacier__Boomerang_Room__Center_ish --> Glacier__Boomerang_Room_Switched__Center_Ledge
+Glacier__Boomerang_Room__Center_Ledge <--> Glacier__Boomerang_Room__Upper_Gate_East
+Glacier__Boomerang_Room__Center_ish --> Glacier__Boomerang_Room__Center_Ledge
+Glacier__Boomerang_Room__Pedestal --> Glacier__Boomerang_Room__Upper_Gate_East
+Glacier__Boomerang_Room__Platform <--> Glacier__Boomerang_Room__Upper_West
 Glacier__Compass_Room__East <--> Glacier__Grid_43_10_11__Lower
 Glacier__Compass_Room__West <--> Glacier__The_Big_Drop__East
 Glacier__Dock_Elevator__Connector <--> Glacier__Dock_Interior__Connector
@@ -1390,23 +1390,24 @@ Glacier__Ledge_Grab_Room__East_9 --> Glacier__Vertical_Room__Past_Gate
 Glacier__Ledge_Grab_Room__East_9 <--> Glacier__Vertical_Room__West_9
 Glacier__Ledge_Grab_Room__Fork --> Glacier__Ledge_Grab_Room__Column
 Glacier__Ledge_Grab_Room__Fork --> Glacier__Ledge_Grab_Room__Gate_Ledge
-Glacier__Ledge_Grab_Room__Fork <--> Glacier__Ledge_Grab_Room__Mid_35
 Glacier__Ledge_Grab_Room__Gate --> Glacier__Ledge_Grab_Room__West
 Glacier__Ledge_Grab_Room__Gate_Ledge --> Glacier__Ledge_Grab_Room__Column
 Glacier__Ledge_Grab_Room__Lower_Platform --> Glacier__Ledge_Grab_Room__Upper_Platform
 Glacier__Ledge_Grab_Room__Mid_34 --> Glacier__Ledge_Grab_Room__Lower_Platform
+Glacier__Ledge_Grab_Room__Mid_35 --> Glacier__Ledge_Grab_Room__Fork
 Glacier__Ledge_Grab_Room__Pedestal --> Glacier__Ledge_Grab_Room__West
 Glacier__Ledge_Grab_Room__Upper_Platform --> Glacier__Ledge_Grab_Room__Fork
 Glacier__Peak__East_8 --> Glacier__Peak__Top_Platform_East
+Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
 Glacier__Peak__Under_West_Cliff --> Glacier__Peak__West_Cliff
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Revival__Save_Point
 Glacier__Vertical_Room__East_9 --> Glacier__Vertical_Room__Peak
+Glacier__Vertical_Room__East_Corner --> Glacier__Vertical_Room__East_12
 Glacier__Vertical_Room__Mid_11 --> Glacier__Vertical_Room__Mid_9
 Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
-Glacier__Vertical_Room__West_8 --> Glacier__Peak__East_8
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Drone
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology

@@ -880,6 +880,10 @@ pub fn access_melee_speed__2(ctx: &Context) -> bool {
     // Melee_Speed{2}
     ctx.count(Item::Melee_Speed) >= 2
 }
+pub fn access_mist_upgrade(ctx: &Context) -> bool {
+    // Mist_Upgrade
+    ctx.has(Item::Mist_Upgrade)
+}
 pub fn access_mode__drone(ctx: &Context) -> bool {
     // ^mode == 'drone'
     ctx.mode() == enums::Mode::Drone
@@ -1208,9 +1212,9 @@ pub fn action_giguna__carnelian__upper_susar__hack__do(ctx: &mut Context) {
     ctx.set_giguna__carnelian__ctx__upper_susar(true);
 }
 pub fn action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx: &mut Context) {
-    // ^_platform_and_portal = true; if (^indra == ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+    // ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
     ctx.set_giguna__clouds__ctx__platform_and_portal(true);
-    if Into::<i32>::into(ctx.indra()) == ctx.position().into() {
+    if ctx.indra() == ctx.position() {
         ctx.set_indra(SpotId::Giguna__Clouds__Platform_Stop);
     }
 }

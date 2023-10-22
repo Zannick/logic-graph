@@ -209,7 +209,7 @@ helpers:
   $spin: Slingshot_Weapon and ^mode == 'drone'
 
   # TODO: this is a temporary hack around the attract issue #131
-  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra == ^position)
+  $attract: Breach_Attractor and (Anuman or ^mode != 'drone' or ^indra WITHIN ^position)
 
   $all_notes:itemList: >
     [Dear_Ernest, Researchers_Missing, Letter_from_Trace,

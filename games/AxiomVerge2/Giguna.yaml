@@ -1743,7 +1743,7 @@ areas:
       actions:
         - name: Hack and Ride to Portal
           req: not ^_platform_and_portal and $activate and $attract and Breach_Sight and Remote_Drone
-          do: ^_platform_and_portal = true; if (^indra == ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
+          do: ^_platform_and_portal = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop` }
           to: Platform Stop
           time: 12  # estimate includes changing active item twice
         - name: Hack, Deploy, Ride to Portal
