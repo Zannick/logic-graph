@@ -6,5 +6,5 @@ cd "$( dirname -- "${BASH_SOURCE[0]}" )";
 echo "Generating graph..." &&
 neato -Tpng -o digraph.png digraph.dot &&
 echo "Merging graph with map..." &&
-gm composite digraph.png v4—AxiomVerge2-FullMap.png digraph-map.png;
+gm composite digraph.png AxiomVerge2-FullMap-screenshots.png digraph-map.png;
 )

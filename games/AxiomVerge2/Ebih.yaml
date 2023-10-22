@@ -122,6 +122,8 @@ areas:
           req: $platform and $hook and not ^_left_platform_moved
         - to: Left Platform
           req: $hover and not ^_left_platform_moved
+        - to: Observation Tower Room > East 11
+          tags: [xshift]
     - name: West Midair
       coord: [28.35, 11]
       local:
@@ -1133,7 +1135,7 @@ areas:
       local:
         - to: High Ledge
       exits:
-        - to: Grid 21,1-5 > West 6
+        - to: Grid 21,2-6 > West 6
     # Middle-ish
     - name: East 8
       coord: [20.95, 7.9]
@@ -1518,7 +1520,7 @@ areas:
         - to: Observation Tower Room > West 9
           tags: [xshift]
 
-- name: Grid 21,1-5
+- name: Grid 21,2-6
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: West 6
@@ -1553,7 +1555,7 @@ areas:
         - to: Past Boss
         - to: West 5
       exits:
-        - to: Grid 21,1-5 > East 6
+        - to: Grid 21,2-6 > East 6
           tags: [xshift]
     - name: Boss
       coord: [22.8, 4.9]

@@ -1616,16 +1616,16 @@ pub fn local_travel_time(
             2280
         }
         ([false], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => 1578,
-        ([false], SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+        ([false], SpotId::Ebih__Grid_21_2_6__West_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             1578
         }
-        ([false], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => {
+        ([false], SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => {
             1578
         }
-        ([false], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => {
+        ([false], SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => {
             1578
         }
-        ([false], SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+        ([false], SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             1578
         }
         ([false], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
@@ -4103,6 +4103,199 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => 1929,
         (
             [false],
+            SpotId::Giguna__Antechamber__East_16,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__East_16,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Bottom,
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 650,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 699,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 1052,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => 399,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__West_15,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Antechamber__Left_Wall_Mid,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 1228,
+        ([false], SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Bottom) => {
+            1578
+        }
+        (
+            [false],
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => 877,
+        ([false], SpotId::Giguna__Gubi_Lair__East_15, SpotId::Giguna__Gubi_Lair__East_Tree) => 701,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => 1929,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => 701,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => 600,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 3333,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => 877,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => 526,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 2807,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => 2456,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+        ) => 1754,
+        (
+            [false],
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 1754,
+        // [0.526316, 1.0]
+        ([false], SpotId::Giguna__Gubi_Lair__Pedestal, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            1526
+        }
+        (
+            [false],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
@@ -6498,16 +6691,16 @@ pub fn local_travel_time(
             2280
         }
         ([true], SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => 1578,
-        ([true], SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+        ([true], SpotId::Ebih__Grid_21_2_6__West_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             1578
         }
-        ([true], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => {
+        ([true], SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => {
             1578
         }
-        ([true], SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => {
+        ([true], SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => {
             1578
         }
-        ([true], SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+        ([true], SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             1578
         }
         ([true], SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => 2631,
@@ -8899,6 +9092,197 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => 1929,
         (
             [true],
+            SpotId::Giguna__Antechamber__East_16,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__East_16,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Bottom,
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 650,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 699,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => 1052,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => 399,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+        ) => 526,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__West_15,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__Left_Wall_Mid,
+            SpotId::Giguna__Antechamber__Bottom,
+        ) => 1228,
+        ([true], SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Bottom) => 1578,
+        (
+            [true],
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => 877,
+        ([true], SpotId::Giguna__Gubi_Lair__East_15, SpotId::Giguna__Gubi_Lair__East_Tree) => 701,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => 1929,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => 701,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => 600,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 3333,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => 877,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => 526,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 2807,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => 2456,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+        ) => 1754,
+        (
+            [true],
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => 1754,
+        // [0.526316, 1.0]
+        ([true], SpotId::Giguna__Gubi_Lair__Pedestal, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            1526
+        }
+        (
+            [true],
             SpotId::Glacier__Dock_Elevator__Elevator,
             SpotId::Glacier__Dock_Elevator__Connector,
         ) => 1578,
@@ -10591,10 +10975,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__Middle_Platform) => true,
         (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_Ledge) => true,
         (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => true,
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => true,
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => true,
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => true,
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => true,
+        (SpotId::Ebih__Grid_21_2_6__West_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => true,
+        (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => true,
+        (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => true,
+        (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => true,
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => true,
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => true,
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__West_5) => true,
@@ -12066,6 +12450,124 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => true,
         (SpotId::Giguna__Gateway__West_19, SpotId::Giguna__Gateway__Block_Lowered) => true,
         (SpotId::Giguna__Gateway__Button, SpotId::Giguna__Gateway__Block_Lowered) => true,
+        (SpotId::Giguna__Antechamber__East_16, SpotId::Giguna__Antechamber__Statues_Ledge) => true,
+        (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__East_16) => true,
+        (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__Bottom) => true,
+        (SpotId::Giguna__Antechamber__Bottom, SpotId::Giguna__Antechamber__Left_Wall_Lower) => true,
+        (SpotId::Giguna__Antechamber__Small_Bricks, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            true
+        }
+        (SpotId::Giguna__Antechamber__Small_Bricks, SpotId::Giguna__Antechamber__Bottom) => true,
+        (SpotId::Giguna__Antechamber__Statue_Head, SpotId::Giguna__Antechamber__Small_Bricks) => {
+            true
+        }
+        (SpotId::Giguna__Antechamber__Statue_Head, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            true
+        }
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => true,
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => true,
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => true,
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+        ) => true,
+        (SpotId::Giguna__Antechamber__Middle_Bricks_Left, SpotId::Giguna__Antechamber__West_15) => {
+            true
+        }
+        (SpotId::Giguna__Antechamber__Left_Wall_Lower, SpotId::Giguna__Antechamber__Bottom) => true,
+        (SpotId::Giguna__Antechamber__Left_Wall_Mid, SpotId::Giguna__Antechamber__Bottom) => true,
+        (SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Middle_Bricks_Left) => {
+            true
+        }
+        (SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Bottom) => true,
+        (SpotId::Giguna__Gubi_Lair__East_15, SpotId::Giguna__Gubi_Lair__East_Tree) => true,
+        (SpotId::Giguna__Gubi_Lair__East_Tree, SpotId::Giguna__Gubi_Lair__Rightmost_Platform) => {
+            true
+        }
+        (SpotId::Giguna__Gubi_Lair__Rightmost_Platform, SpotId::Giguna__Gubi_Lair__East_Tree) => {
+            true
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => true,
+        (SpotId::Giguna__Gubi_Lair__Center_Platform, SpotId::Giguna__Gubi_Lair__Lower_Platform) => {
+            true
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => true,
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+        ) => true,
+        (SpotId::Giguna__Gubi_Lair__Grass_by_Wall, SpotId::Giguna__Gubi_Lair__West_Brickwork) => {
+            true
+        }
+        (SpotId::Giguna__Gubi_Lair__West_Brickwork, SpotId::Giguna__Gubi_Lair__Grass_by_Wall) => {
+            true
+        }
+        (SpotId::Giguna__Gubi_Lair__West_Brickwork, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            true
+        }
+        (SpotId::Giguna__Gubi_Lair__Shaft_Bottom, SpotId::Giguna__Gubi_Lair__West_Brickwork) => {
+            true
+        }
+        (SpotId::Giguna__Gubi_Lair__Pedestal, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => true,
         (SpotId::Glacier__Dock_Elevator__Elevator, SpotId::Glacier__Dock_Elevator__Connector) => {
             true
         }
@@ -14964,6 +15466,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Base_Camp__West_11,
+            SpotId::Ebih__Observation_Tower_Room__East_11,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Base_Camp__West_11,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -16659,7 +17166,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__Ebih_West__East_6,
-            SpotId::Ebih__Grid_21_1_5__West_6,
+            SpotId::Ebih__Grid_21_2_6__West_6,
             1000,
         ),
         (
@@ -17328,53 +17835,53 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__West_6,
+            SpotId::Ebih__Grid_21_2_6__West_6,
             SpotId::Ebih__Ebih_West__East_6,
             1350,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__West_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
+            SpotId::Ebih__Grid_21_2_6__West_6,
+            SpotId::Ebih__Grid_21_2_6__Portal_Stand,
             1578,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__West_6,
+            SpotId::Ebih__Grid_21_2_6__West_6,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__West_6,
+            SpotId::Ebih__Grid_21_2_6__Portal_Stand,
+            SpotId::Ebih__Grid_21_2_6__West_6,
             1578,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
-            SpotId::Ebih__Grid_21_1_5__East_6,
+            SpotId::Ebih__Grid_21_2_6__Portal_Stand,
+            SpotId::Ebih__Grid_21_2_6__East_6,
             1578,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
+            SpotId::Ebih__Grid_21_2_6__Portal_Stand,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__East_6,
-            SpotId::Ebih__Grid_21_1_5__Portal_Stand,
+            SpotId::Ebih__Grid_21_2_6__East_6,
+            SpotId::Ebih__Grid_21_2_6__Portal_Stand,
             1578,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__East_6,
+            SpotId::Ebih__Grid_21_2_6__East_6,
             SpotId::Ebih__Boss_Room__West_6,
             1350,
         ),
         (
-            SpotId::Ebih__Grid_21_1_5__East_6,
+            SpotId::Ebih__Grid_21_2_6__East_6,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
         (
             SpotId::Ebih__Boss_Room__West_6,
-            SpotId::Ebih__Grid_21_1_5__East_6,
+            SpotId::Ebih__Grid_21_2_6__East_6,
             1350,
         ),
         (
@@ -20536,6 +21043,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Wasteland__East_12,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna__Wasteland__East_13,
+            SpotId::Ebih__Ebih_West__West_13,
+            1350,
         ),
         (
             SpotId::Giguna__Wasteland__East_13,
@@ -24149,6 +24661,396 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Antechamber__East_16,
+            SpotId::Giguna__East_Caverns__West_16,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Antechamber__East_16,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            701,
+        ),
+        (
+            SpotId::Giguna__Antechamber__East_16,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__East_16,
+            701,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__Bottom,
+            877,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            600,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Bottom,
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+            1100,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            701,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Bottom,
+            650,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Statue_Head,
+            800,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            600,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            699,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            877,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Statue_Head,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+            1052,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            399,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statue_Head,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            600,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            526,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__West_15,
+            750,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+            SpotId::Giguna__Antechamber__Bottom,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+            SpotId::Giguna__Antechamber__Left_Wall_Mid,
+            750,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Left_Wall_Lower,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Left_Wall_Mid,
+            SpotId::Giguna__Antechamber__Bottom,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Left_Wall_Mid,
+            SpotId::Giguna__Antechamber__West_15,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__Left_Wall_Mid,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Giguna__Antechamber__Bottom,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+            1500,
+        ),
+        (
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            877,
+        ),
+        (
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Giguna__Gubi_Lair__East_15,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Antechamber__West_15,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_15,
+            SpotId::Giguna__Antechamber__West_15,
+            1350,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_15,
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_15,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            3333,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_15,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            SpotId::Giguna__Gubi_Lair__East_15,
+            700,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            2631,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__East_Tree,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            1929,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            701,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            1228,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            600,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            3333,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            877,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            526,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            1578,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            2807,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            2456,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+            2456,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+            1754,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            SpotId::Giguna__Gubi_Lair__Pedestal,
+            2750,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Pedestal,
+            SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
+            1526,
+        ),
+        (
+            SpotId::Giguna__Gubi_Lair__Pedestal,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -26900,10 +27802,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => Some(877),
         (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => Some(1403),
         (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => Some(1403),
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => Some(1578),
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => Some(1578),
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => Some(1578),
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => Some(1578),
+        (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => Some(1578),
+        (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => Some(1578),
+        (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => Some(1578),
+        (SpotId::Ebih__Grid_21_2_6__West_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => Some(1578),
         (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => {
             Some(1228)
         }
@@ -27650,6 +28552,59 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => {
             Some(1403)
         }
+        (SpotId::Giguna__Antechamber__Bottom, SpotId::Giguna__Antechamber__Left_Wall_Lower) => {
+            Some(1228)
+        }
+        (SpotId::Giguna__Antechamber__East_16, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Antechamber__Left_Wall_Lower, SpotId::Giguna__Antechamber__Bottom) => {
+            Some(1228)
+        }
+        (SpotId::Giguna__Antechamber__Left_Wall_Mid, SpotId::Giguna__Antechamber__Bottom) => {
+            Some(1228)
+        }
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+        ) => Some(526),
+        (SpotId::Giguna__Antechamber__Middle_Bricks_Left, SpotId::Giguna__Antechamber__West_15) => {
+            Some(877)
+        }
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => Some(600),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => Some(399),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => Some(1052),
+        (SpotId::Giguna__Antechamber__Small_Bricks, SpotId::Giguna__Antechamber__Bottom) => {
+            Some(650)
+        }
+        (SpotId::Giguna__Antechamber__Small_Bricks, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Antechamber__Statue_Head, SpotId::Giguna__Antechamber__Small_Bricks) => {
+            Some(877)
+        }
+        (SpotId::Giguna__Antechamber__Statue_Head, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            Some(699)
+        }
+        (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__Bottom) => {
+            Some(877)
+        }
+        (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__East_16) => {
+            Some(701)
+        }
+        (SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Bottom) => Some(1578),
+        (SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Middle_Bricks_Left) => {
+            Some(877)
+        }
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
@@ -28289,6 +29244,87 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => {
             Some(877)
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => Some(1228),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => Some(701),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => Some(1578),
+        (SpotId::Giguna__Gubi_Lair__Center_Platform, SpotId::Giguna__Gubi_Lair__Lower_Platform) => {
+            Some(877)
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => Some(1228),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => Some(877),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => Some(600),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => Some(3333),
+        (SpotId::Giguna__Gubi_Lair__East_15, SpotId::Giguna__Gubi_Lair__East_Tree) => Some(701),
+        (SpotId::Giguna__Gubi_Lair__East_Tree, SpotId::Giguna__Gubi_Lair__Rightmost_Platform) => {
+            Some(877)
+        }
+        (SpotId::Giguna__Gubi_Lair__Grass_by_Wall, SpotId::Giguna__Gubi_Lair__West_Brickwork) => {
+            Some(2456)
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+        ) => Some(1578),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => Some(526),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => Some(2807),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => Some(701),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => Some(1929),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => Some(877),
+        (SpotId::Giguna__Gubi_Lair__Pedestal, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            Some(1526)
+        }
+        (SpotId::Giguna__Gubi_Lair__Rightmost_Platform, SpotId::Giguna__Gubi_Lair__East_Tree) => {
+            Some(877)
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => Some(877),
+        (SpotId::Giguna__Gubi_Lair__Shaft_Bottom, SpotId::Giguna__Gubi_Lair__West_Brickwork) => {
+            Some(1754)
+        }
+        (SpotId::Giguna__Gubi_Lair__West_Brickwork, SpotId::Giguna__Gubi_Lair__Grass_by_Wall) => {
+            Some(2456)
+        }
+        (SpotId::Giguna__Gubi_Lair__West_Brickwork, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            Some(1754)
         }
         (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => Some(877),
         (SpotId::Giguna__Hard_Rock__Rock_Center, SpotId::Giguna__Hard_Rock__Rock_Left) => Some(526),
@@ -30701,16 +31737,16 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => (Some(1403), vec![]),
         (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => (Some(1403), vec![]),
-        (SpotId::Ebih__Grid_21_1_5__East_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+        (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             (Some(1578), vec![])
         }
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__East_6) => {
+        (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => {
             (Some(1578), vec![])
         }
-        (SpotId::Ebih__Grid_21_1_5__Portal_Stand, SpotId::Ebih__Grid_21_1_5__West_6) => {
+        (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => {
             (Some(1578), vec![])
         }
-        (SpotId::Ebih__Grid_21_1_5__West_6, SpotId::Ebih__Grid_21_1_5__Portal_Stand) => {
+        (SpotId::Ebih__Grid_21_2_6__West_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             (Some(1578), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => {
@@ -31559,6 +32595,61 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Slingshot__West, SpotId::Giguna_Breach__Slingshot__Column) => {
             (Some(1403), vec![])
         }
+        (SpotId::Giguna__Antechamber__Bottom, SpotId::Giguna__Antechamber__Left_Wall_Lower) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Giguna__Antechamber__East_16, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Left_Wall_Lower, SpotId::Giguna__Antechamber__Bottom) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Left_Wall_Mid, SpotId::Giguna__Antechamber__Bottom) => {
+            (Some(1228), vec![])
+        }
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+        ) => (Some(526), vec![]),
+        (SpotId::Giguna__Antechamber__Middle_Bricks_Left, SpotId::Giguna__Antechamber__West_15) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Middle_Bricks_Left,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Small_Bricks,
+        ) => (Some(399), vec![]),
+        (
+            SpotId::Giguna__Antechamber__Middle_Bricks_Right,
+            SpotId::Giguna__Antechamber__Statues_Ledge,
+        ) => (Some(1052), vec![]),
+        (SpotId::Giguna__Antechamber__Small_Bricks, SpotId::Giguna__Antechamber__Bottom) => {
+            (Some(650), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Small_Bricks, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Statue_Head, SpotId::Giguna__Antechamber__Small_Bricks) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Statue_Head, SpotId::Giguna__Antechamber__Statues_Ledge) => {
+            (Some(699), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__Bottom) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Antechamber__Statues_Ledge, SpotId::Giguna__Antechamber__East_16) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Bottom) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Giguna__Antechamber__West_15, SpotId::Giguna__Antechamber__Middle_Bricks_Left) => {
+            (Some(877), vec![])
+        }
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
@@ -32294,6 +33385,89 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         }
         (SpotId::Giguna__Giguna_Northeast__West_9, SpotId::Giguna__Giguna_Northeast__Step) => {
             (Some(877), vec![])
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => (Some(1578), vec![]),
+        (SpotId::Giguna__Gubi_Lair__Center_Platform, SpotId::Giguna__Gubi_Lair__Lower_Platform) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => (Some(1228), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
+        ) => (Some(877), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+        ) => (Some(600), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => (Some(3333), vec![]),
+        (SpotId::Giguna__Gubi_Lair__East_15, SpotId::Giguna__Gubi_Lair__East_Tree) => {
+            (Some(701), vec![])
+        }
+        (SpotId::Giguna__Gubi_Lair__East_Tree, SpotId::Giguna__Gubi_Lair__Rightmost_Platform) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Giguna__Gubi_Lair__Grass_by_Wall, SpotId::Giguna__Gubi_Lair__West_Brickwork) => {
+            (Some(2456), vec![])
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_Platform,
+        ) => (Some(1578), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => (Some(526), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Leftmost_Platform,
+            SpotId::Giguna__Gubi_Lair__West_Brickwork,
+        ) => (Some(2807), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_East_Sapling,
+        ) => (Some(701), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Center_West_Sapling,
+        ) => (Some(1929), vec![]),
+        (
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+        ) => (Some(877), vec![]),
+        (SpotId::Giguna__Gubi_Lair__Pedestal, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            (Some(1526), vec![])
+        }
+        (SpotId::Giguna__Gubi_Lair__Rightmost_Platform, SpotId::Giguna__Gubi_Lair__East_Tree) => {
+            (Some(877), vec![])
+        }
+        (
+            SpotId::Giguna__Gubi_Lair__Rightmost_Platform,
+            SpotId::Giguna__Gubi_Lair__Lower_Platform,
+        ) => (Some(877), vec![]),
+        (SpotId::Giguna__Gubi_Lair__Shaft_Bottom, SpotId::Giguna__Gubi_Lair__West_Brickwork) => {
+            (Some(1754), vec![])
+        }
+        (SpotId::Giguna__Gubi_Lair__West_Brickwork, SpotId::Giguna__Gubi_Lair__Grass_by_Wall) => {
+            (Some(2456), vec![])
+        }
+        (SpotId::Giguna__Gubi_Lair__West_Brickwork, SpotId::Giguna__Gubi_Lair__Shaft_Bottom) => {
+            (Some(1754), vec![])
         }
         (SpotId::Giguna__Hard_Rock__East_17, SpotId::Giguna__Hard_Rock__Rock_Right) => {
             (Some(877), vec![])

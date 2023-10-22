@@ -625,6 +625,9 @@ areas:
         - to: Door Left
         - to: Bluff by Door
         - to: Tiny Hill
+      exits:
+        - to: Ebih > Ebih West > West 13
+          tags: [xshift]
     - name: East 14
       coord: [18.95, 13.6]
       local:
@@ -2849,3 +2852,246 @@ areas:
   spots:
     - name: East 16
       coord: [18.95, 15.45]
+      local:
+        - to: Statues Ledge
+      exits:
+        - to: East Caverns > West 16
+          tags: [xshift]
+    - name: Statues Ledge
+      coord: [18.75, 15.5]
+      local:
+        - to: East 16
+          jumps: 1
+        - to: Bottom
+      exits:
+        - to: Small Bricks
+          req: $hook
+          time: 0.6
+    - name: Bottom
+      coord: [18.5, 15.85]
+      local:
+        - to: Left Wall Lower
+          jumps: 2
+      exits:
+        - to: Left Wall Lower
+          req: $hook
+          time: 1.1  # ?
+    - name: Small Bricks
+      coord: [18.55, 15.2]
+      local:
+        - to: Statues Ledge
+        - to: Bottom
+      exits:
+        - to: Statue Head
+          req: $hook
+          time: 0.8
+        - to: Middle Bricks Right
+          req: $hook
+          time: 0.6  # ?
+    - name: Statue Head
+      coord: [18.8, 14.8]
+      local:
+        - to: Small Bricks
+        - to: Statues Ledge
+      locations:
+        - name: Tablet
+          item: Dangerous_Ideas
+          tags: [standing]
+      exits:
+        - to: Middle Bricks Right
+          req: $hover
+          movement: base
+        - to: Middle Bricks Right
+          req: $hook
+          time: 1  # ?
+    - name: Middle Bricks Right
+      coord: [18.45, 14.8]
+      local:
+        - to: Middle Bricks Left
+          jumps: 1
+        - to: Small Bricks
+        - to: Statues Ledge
+      exits:
+        - to: Statue Head
+          req: $hover
+          movement: base
+        - to: Statue Head
+          req: $hook
+          time: 1  # ?
+      # TODO: Throw Drone and mist
+    - name: Middle Bricks Left
+      coord: [18.3, 14.65]
+      local:
+        - to: Middle Bricks Right
+        - to: West 15
+          jumps: 1
+      exits:
+        - to: West 15
+          req: $hook
+          time: .75  # ?
+    - name: Left Wall Lower
+      coord: [18.15, 15.5]
+      local:
+        - to: Bottom
+      exits:
+        - to: Left Wall Mid
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Left Wall Mid
+          req: $hook
+          time: 0.75  # ?
+    - name: Left Wall Mid
+      coord: [18.15, 15.2]
+      local:
+        - to: Bottom
+      exits:
+        - to: West 15
+          req: $grab and $climb
+          movement: base
+          jumps: 4
+        - to: West 15
+          req: $hook
+          time: 1  # ?
+    - name: West 15
+      coord: [18.05, 14.65]
+      local:
+        - to: Middle Bricks Left
+        - to: Bottom
+      exits:
+        - to: Small Bricks
+          req: $hook
+          time: 1.5  # ?
+        - to: Gubi Lair > East 15
+          tags: [xshift]
+
+- name: Gubi Lair
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East 15
+      coord: [17.95, 14.65]
+      local:
+        - to: East Tree
+      exits:
+        - to: Antechamber > West 15
+          tags: [xshift]
+        - to: Center Platform
+          req: $hover
+          movement: base
+    - name: East Tree
+      coord: [17.75, 14.95]
+      local:
+        - to: Rightmost Platform
+      exits:
+        - to: East 15
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: East 15
+          req: $hook
+          time: .7  # ?
+        - to: Center Platform
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Rightmost Platform
+      coord: [17.5, 15.1]
+      local:
+        - to: East Tree
+          jumps: 1
+        - to: Lower Platform
+      exits:
+        - to: Center Platform
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Lower Platform
+      coord: [17.25, 15.3]
+      local:
+        - to: Center-East Sapling
+        - to: Center-West Sapling
+        - to: Rightmost Platform
+          jumps: 1
+    - name: Center-East Sapling
+      coord: [17.05, 15.5]
+      local:
+        - to: Lower Platform
+          jumps: 1
+        - to: Center-West Sapling
+          jumps: 2
+    - name: Center-West Sapling
+      coord: [16.7, 15.45]
+      local:
+        - to: Center-East Sapling
+        - to: Leftmost Platform
+          jumps: 1
+        - to: Grass by Wall
+        - to: West Brickwork
+    - name: Center Platform
+      coord: [17.0, 14.9]
+      local:
+        - to: Leftmost Platform
+        - to: Lower Platform
+      locations:
+        - name: Hack Gubi
+          item: Giguna_Gubi
+          canon: Giguna_Gubi
+          req: $overheat
+          price: 200
+          time: 9
+        - name: Fight Gubi
+          item: Giguna_Gubi
+          canon: Giguna_Gubi
+          time: 20  # ?
+        - name: Boss Reward
+          item: Big_Flask
+          req: Giguna_Gubi
+          tags: [flask]
+    - name: Leftmost Platform
+      coord: [16.55, 15.25]
+      local:
+        - to: Center-West Sapling
+        - to: West Brickwork
+        - to: Center Platform
+          jumps: 2
+    - name: Grass by Wall
+      coord: [16.45, 15.85]
+      local:
+        - to: West Brickwork
+          jumps: 1
+      exits:
+        - to: Center-West Sapling
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Center-West Sapling
+    - name: West Brickwork
+      coord: [15.75, 15.8]
+      local:
+        - to: Grass by Wall
+        - to: Shaft Bottom
+          jumps: 2
+    - name: Shaft Bottom
+      coord: [15.25, 15.7]
+      local:
+        - to: West Brickwork
+      exits:
+        - to: Pedestal
+          req: $hover and $hook
+          time: 2.75
+        - to: Pedestal
+          req: $hook
+          time: 4  # ?
+        - to: Pedestal
+          req: $grab and $climb
+          movement: base
+          jumps: 11
+    - name: Pedestal
+      coord: [15.4, 14.4]
+      local:
+        - to: Shaft Bottom
+          thru: [15.25, 14.7]
+      locations:
+        - name: Axe
+          item: Double_Axe
+          tags: [standing]

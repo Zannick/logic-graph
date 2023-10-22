@@ -128,6 +128,7 @@ pub enum Expectation {
     GigunaDualPathSwitch(bool),
     GigunaGatewayBlock(bool),
     GigunaGatewayGate(bool),
+    GigunaGubi(bool),
     GigunaNortheastGate(bool),
     HealthFragment(i8),
     HealthNode(bool),
@@ -413,37 +414,38 @@ pub mod flags {
             const GIGUNA_DUAL_PATH_SWITCH = 1 << 23;
             const GIGUNA_GATEWAY_BLOCK = 1 << 24;
             const GIGUNA_GATEWAY_GATE = 1 << 25;
-            const GIGUNA_NORTHEAST_GATE = 1 << 26;
-            const HEALTH_NODE = 1 << 27;
-            const HERETICS_TABLET = 1 << 28;
-            const ICE_AXE = 1 << 29;
-            const INFECTION_SPEED = 1 << 30;
-            const LEDGE_GRAB = 1 << 31;
+            const GIGUNA_GUBI = 1 << 26;
+            const GIGUNA_NORTHEAST_GATE = 1 << 27;
+            const HEALTH_NODE = 1 << 28;
+            const HERETICS_TABLET = 1 << 29;
+            const ICE_AXE = 1 << 30;
+            const INFECTION_SPEED = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u32 {
-            const LETTER_FROM_TRACE = 1 << 0;
-            const MAP_17_10 = 1 << 1;
-            const MIST_UPGRADE = 1 << 2;
-            const NANITE_MIST = 1 << 3;
-            const POWER_MATRIX = 1 << 4;
-            const RECORD_LOSSES = 1 << 5;
-            const REMOTE_DRONE = 1 << 6;
-            const RESEARCHERS_MISSING = 1 << 7;
-            const SHOCKWAVE = 1 << 8;
-            const SLINGSHOT_CHARGE = 1 << 9;
-            const SLINGSHOT_HOOK = 1 << 10;
-            const SLINGSHOT_WEAPON = 1 << 11;
-            const STATION_POWER = 1 << 12;
-            const SWITCH_36_11 = 1 << 13;
-            const SWITCH_40_12 = 1 << 14;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 15;
-            const THE_IDEAL_KIENGIR = 1 << 16;
-            const UNDER_SIEGE = 1 << 17;
-            const UNDERWATER_MOVEMENT = 1 << 18;
-            const WALL_CLIMB = 1 << 19;
+            const LEDGE_GRAB = 1 << 0;
+            const LETTER_FROM_TRACE = 1 << 1;
+            const MAP_17_10 = 1 << 2;
+            const MIST_UPGRADE = 1 << 3;
+            const NANITE_MIST = 1 << 4;
+            const POWER_MATRIX = 1 << 5;
+            const RECORD_LOSSES = 1 << 6;
+            const REMOTE_DRONE = 1 << 7;
+            const RESEARCHERS_MISSING = 1 << 8;
+            const SHOCKWAVE = 1 << 9;
+            const SLINGSHOT_CHARGE = 1 << 10;
+            const SLINGSHOT_HOOK = 1 << 11;
+            const SLINGSHOT_WEAPON = 1 << 12;
+            const STATION_POWER = 1 << 13;
+            const SWITCH_36_11 = 1 << 14;
+            const SWITCH_40_12 = 1 << 15;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 16;
+            const THE_IDEAL_KIENGIR = 1 << 17;
+            const UNDER_SIEGE = 1 << 18;
+            const UNDERWATER_MOVEMENT = 1 << 19;
+            const WALL_CLIMB = 1 << 20;
         }
     }
 }
@@ -539,7 +541,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 68;
+    const NUM_ITEMS: u32 = 69;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -610,6 +612,7 @@ impl context::Ctx for Context {
             Item::Giguna_Gateway_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE),
+            Item::Giguna_Gubi => self.cbits2.contains(flags::ContextBits2::GIGUNA_GUBI),
             Item::Giguna_Northeast_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE),
@@ -621,7 +624,7 @@ impl context::Ctx for Context {
             Item::Infect => self.infect >= 1,
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.cbits2.contains(flags::ContextBits2::INFECTION_SPEED),
-            Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB),
+            Item::Ledge_Grab => self.cbits3.contains(flags::ContextBits3::LEDGE_GRAB),
             Item::Letter_from_Trace => self.cbits3.contains(flags::ContextBits3::LETTER_FROM_TRACE),
             Item::Map_17_10 => self.cbits3.contains(flags::ContextBits3::MAP_17_10),
             Item::Melee_Damage => self.melee_damage >= 1,
@@ -769,6 +772,10 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_GATEWAY_GATE)
                 .into(),
+            Item::Giguna_Gubi => self
+                .cbits2
+                .contains(flags::ContextBits2::GIGUNA_GUBI)
+                .into(),
             Item::Giguna_Northeast_Gate => self
                 .cbits2
                 .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE)
@@ -790,7 +797,7 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::INFECTION_SPEED)
                 .into(),
-            Item::Ledge_Grab => self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB).into(),
+            Item::Ledge_Grab => self.cbits3.contains(flags::ContextBits3::LEDGE_GRAB).into(),
             Item::Letter_from_Trace => self
                 .cbits3
                 .contains(flags::ContextBits3::LETTER_FROM_TRACE)
@@ -974,6 +981,9 @@ impl context::Ctx for Context {
             Item::Giguna_Gateway_Gate => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
             },
+            Item::Giguna_Gubi => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
+            },
             Item::Giguna_Northeast_Gate => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
             },
@@ -1004,7 +1014,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::INFECTION_SPEED);
             },
             Item::Ledge_Grab => {
-                self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
+                self.cbits3.insert(flags::ContextBits3::LEDGE_GRAB);
             },
             Item::Letter_from_Trace => {
                 self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
@@ -1081,6 +1091,7 @@ impl context::Ctx for Context {
             Item::Wall_Climb => {
                 self.cbits3.insert(flags::ContextBits3::WALL_CLIMB);
             },
+            Item::Big_Flask => rules::action_flasks__2(self),
             Item::Power_Core => rules::action_refills__1(self),
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_skip__amagi__west_lake__stronghold_ceiling_left__knock_down_left_boulder_add_item__amagi_stronghold_wall_1_add_item__amagi_stronghold_boulder_1(self),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_skip__amagi__west_lake__stronghold_ceiling_right__knock_down_right_boulder_add_item__amagi_stronghold_wall_2_add_item__amagi_stronghold_boulder_2(self),
@@ -1205,6 +1216,9 @@ impl context::Ctx for Context {
             Item::Giguna_Gateway_Gate => {
                 self.cbits2.insert(flags::ContextBits2::GIGUNA_GATEWAY_GATE);
             }
+            Item::Giguna_Gubi => {
+                self.cbits2.insert(flags::ContextBits2::GIGUNA_GUBI);
+            }
             Item::Giguna_Northeast_Gate => {
                 self.cbits2
                     .insert(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
@@ -1234,7 +1248,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::INFECTION_SPEED);
             }
             Item::Ledge_Grab => {
-                self.cbits2.insert(flags::ContextBits2::LEDGE_GRAB);
+                self.cbits3.insert(flags::ContextBits3::LEDGE_GRAB);
             }
             Item::Letter_from_Trace => {
                 self.cbits3.insert(flags::ContextBits3::LETTER_FROM_TRACE);
@@ -2266,6 +2280,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Giguna_Gubi", Yaml::Boolean(b)) => Expectation::GigunaGubi(*b),
+            ("Giguna_Gubi", Yaml::Integer(i)) => Expectation::GigunaGubi(*i > 0),
+            ("Giguna_Gubi", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Giguna_Northeast_Gate", Yaml::Boolean(b)) => Expectation::GigunaNortheastGate(*b),
             ("Giguna_Northeast_Gate", Yaml::Integer(i)) => Expectation::GigunaNortheastGate(*i > 0),
             ("Giguna_Northeast_Gate", _) => {
@@ -3119,6 +3141,12 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::GigunaGubi(e) => {
+                    let v = self.has(Item::Giguna_Gubi);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Giguna_Gubi", e, v));
+                    }
+                }
                 Expectation::GigunaNortheastGate(e) => {
                     let v = self.has(Item::Giguna_Northeast_Gate);
                     if v != (*e).into() {
@@ -3463,7 +3491,7 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
-            AreaId::Ebih__Grid_21_1_5 => {
+            AreaId::Ebih__Grid_21_2_6 => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -3549,6 +3577,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Giguna__Giguna_Northeast => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
+            AreaId::Giguna__Gubi_Lair => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
@@ -4622,6 +4655,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}GIGUNA_GATEWAY_GATE", if n { "+" } else { "-" }));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::GIGUNA_GUBI);
+        let p = old.cbits2.contains(flags::ContextBits2::GIGUNA_GUBI);
+        if n != p {
+            list.push(format!("{}GIGUNA_GUBI", if n { "+" } else { "-" }));
+        }
         let n = self
             .cbits2
             .contains(flags::ContextBits2::GIGUNA_NORTHEAST_GATE);
@@ -4654,8 +4692,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}INFECTION_SPEED", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::LEDGE_GRAB);
-        let p = old.cbits2.contains(flags::ContextBits2::LEDGE_GRAB);
+        let n = self.cbits3.contains(flags::ContextBits3::LEDGE_GRAB);
+        let p = old.cbits3.contains(flags::ContextBits3::LEDGE_GRAB);
         if n != p {
             list.push(format!("{}LEDGE_GRAB", if n { "+" } else { "-" }));
         }

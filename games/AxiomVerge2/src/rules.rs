@@ -720,6 +720,10 @@ pub fn access_giguna_gateway_gate(ctx: &Context) -> bool {
     // Giguna_Gateway_Gate
     ctx.has(Item::Giguna_Gateway_Gate)
 }
+pub fn access_giguna_gubi(ctx: &Context) -> bool {
+    // Giguna_Gubi
+    ctx.has(Item::Giguna_Gubi)
+}
 pub fn access_giguna_northeast_gate(ctx: &Context) -> bool {
     // Giguna_Northeast_Gate
     ctx.has(Item::Giguna_Northeast_Gate)
@@ -979,6 +983,10 @@ pub fn access_open_and_range3(ctx: &Context) -> bool {
     // $open and $range3
     (helper__open!(ctx) && helper__range3!(ctx))
 }
+pub fn access_overheat(ctx: &Context) -> bool {
+    // $overheat
+    helper__overheat!(ctx)
+}
 pub fn access_overheat_and___melee_or_boomerang(ctx: &Context) -> bool {
     // $overheat and ($melee or $boomerang)
     (helper__overheat!(ctx) && (helper__melee!(ctx) || helper__boomerang!(ctx)))
@@ -1158,6 +1166,10 @@ pub fn action_energy__max_energy(ctx: &mut Context) {
 pub fn action_flasks__1(ctx: &mut Context) {
     // ^flasks += 1
     ctx.flasks += 1;
+}
+pub fn action_flasks__2(ctx: &mut Context) {
+    // ^flasks += 2
+    ctx.flasks += 2;
 }
 pub fn action_giguna__carnelian__lower_susar__caught__do(ctx: &mut Context) {
     // ^_lower_susar = true

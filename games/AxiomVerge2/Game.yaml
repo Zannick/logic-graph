@@ -220,6 +220,7 @@ helpers:
     [Boomerang, Power_Matrix]
   $all_urns:itemList: >
     [Amashilama, Ledge_Grab, Infect, Remote_Drone, Shockwave, Wall_Climb, Slingshot_Hook]
+  # To be added: 1 Flask, 1 Big_Flask, Dangerous_Ideas, Double_Axe
 
   $save:action: ^save = ^position; ^energy = $max_energy
   $deploy_drone:action: >
@@ -245,7 +246,7 @@ helpers:
 collect:
   Amashilama: ^save = `Glacier > Revival > Save Point`
   Flask: ^flasks += 1
-  #Big_Flask: ^flasks += 2
+  Big_Flask: ^flasks += 2
   Infect: ^energy = $max_energy
   Health_Node: ^energy = $max_energy
   Power_Core: ^refills += 1
@@ -279,6 +280,6 @@ settings:
 special:
   graph_scale: [180, -100]
   map_ppi: 72
-  map_file: v4—AxiomVerge2-FullMap.png  # https://drive.google.com/drive/folders/1BNT5UgPOB_1RaCPZSPtgvlpX9ibmlgx6
+  map_file: AxiomVerge2-FullMap-screenshots.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 60]
