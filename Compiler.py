@@ -275,6 +275,10 @@ class GameLogic(object):
                         loc['spot'] = sname
                         loc['area'] = aname
                         loc['region'] = rname
+                        if 'name' not in loc:
+                            self._errors.append(f'Location in {spot["fullname"]} requires name')
+                            loc["fullname"] = f'{spot["fullname"]} > Location without name'
+                            continue
                         loc['id'] = construct_id(rname, aname, sname, loc['name'])
                         self.id_lookup[loc['id']] = loc
                         spot['loc_ids'].append(loc['id'])
@@ -951,7 +955,11 @@ class GameLogic(object):
             if 'to' not in ex:
                 self._errors.append(f'No destination defined for {ex["fullname"]}')
             elif get_exit_target(ex) not in spot_ids:
-                self._errors.append(f'Unrecognized destination spot in exit {ex["fullname"]}')
+                self._errors.append(f'Unrecognized destination spot in exit {ex["fullname"]}: {ex["to"]}')
+        for spot in self.spots():
+            for act in spot.get('actions', []):
+                if 'to' in act and not act['to'].startswith('^') and get_exit_target(act) not in spot_ids:
+                    self._errors.append(f'Unrecognized destination spot in action {act["fullname"]}: {act["to"]}')
         for item in self.collect:
             if item != construct_id(item):
                 self._errors.append(f'Invalid item name {item!r} as collect rule; '

@@ -185,7 +185,7 @@ impl world::Action for Action {
             {% if act.to[1:] in data_defaults %}data::{{ act.to[1:] }}(ctx.position()){% endif -%}
             ctx.{{ act.to[1:]|translate_ctx(act) }}()
             {%- else -%}
-            SpotId::{{ act.to|construct_id }}
+            SpotId::{{ act|get_exit_target }}
             {%- endif -%},
 %% endif
 %% endfor
