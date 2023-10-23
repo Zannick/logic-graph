@@ -389,6 +389,9 @@ digraph AxiomVerge2 {
         Giguna_Breach__Ascent__Bottom [label = "", pos = "48.9,-64.166667!"];
         Giguna_Breach__Ascent__Top [label = "", pos = "49.5,-59.333333!"];
         Giguna_Breach__Ascent__West_6 [label = "", pos = "48.3,-59.333333!"];
+        Giguna_Breach__Pink_Clouds__Normal_Entry [label = "", pos = "37.5,-81.166667!"];
+        Giguna_Breach__Pink_Clouds__Quick_Entry [label = "", pos = "37.5,-81.416667!"];
+        Giguna_Breach__Pink_Clouds__Corner [label = "", pos = "38.7,-80.5!"];
         node[fillcolor="5"];
         Giguna__Giguna_Northeast__East_9 [label = "", pos = "56.85,-14.583333!"];
         Giguna__Giguna_Northeast__Inner_Wall [label = "", pos = "55.95,-14.916667!"];
@@ -2540,6 +2543,8 @@ digraph AxiomVerge2 {
     Giguna__Clouds__North_Middle -> Giguna__Clouds__Southwest;
     Giguna__Clouds__North_Right -> Giguna__Clouds__Pull_Right;
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Straight_Down;
+    Giguna__Clouds__Platform_Stop -> Giguna__Clouds__Pull_Right;
+    Giguna__Clouds__Platform_Stop -> Giguna__Clouds__Southeast;
     Giguna__Lamassu__West_18 -> Giguna__Lamassu__Staircase_Top;
     Giguna__Lamassu__Staircase_Top -> Giguna__Lamassu__West_18;
     Giguna__Lamassu__Staircase_Top -> Giguna__Lamassu__Staircase_Bottom;

@@ -154,6 +154,7 @@ pub enum AreaId {
     Giguna_Breach__Fire_Room,
     Giguna_Breach__Grid_14_10_11,
     Giguna_Breach__Peak,
+    Giguna_Breach__Pink_Clouds,
     Giguna_Breach__Robopede,
     Giguna_Breach__Slingshot,
     Giguna_Breach__SW_Save,
@@ -259,6 +260,7 @@ impl fmt::Display for AreaId {
                 write!(f, "{}", "Giguna Breach > Grid 14,10-11")
             }
             AreaId::Giguna_Breach__Peak => write!(f, "{}", "Giguna Breach > Peak"),
+            AreaId::Giguna_Breach__Pink_Clouds => write!(f, "{}", "Giguna Breach > Pink Clouds"),
             AreaId::Giguna_Breach__Robopede => write!(f, "{}", "Giguna Breach > Robopede"),
             AreaId::Giguna_Breach__Slingshot => write!(f, "{}", "Giguna Breach > Slingshot"),
             AreaId::Giguna_Breach__SW_Save => write!(f, "{}", "Giguna Breach > SW Save"),
@@ -359,6 +361,7 @@ impl std::str::FromStr for AreaId {
             "Giguna Breach > Fire Room" => Ok(AreaId::Giguna_Breach__Fire_Room),
             "Giguna Breach > Grid 14,10-11" => Ok(AreaId::Giguna_Breach__Grid_14_10_11),
             "Giguna Breach > Peak" => Ok(AreaId::Giguna_Breach__Peak),
+            "Giguna Breach > Pink Clouds" => Ok(AreaId::Giguna_Breach__Pink_Clouds),
             "Giguna Breach > Robopede" => Ok(AreaId::Giguna_Breach__Robopede),
             "Giguna Breach > Slingshot" => Ok(AreaId::Giguna_Breach__Slingshot),
             "Giguna Breach > SW Save" => Ok(AreaId::Giguna_Breach__SW_Save),
@@ -1083,6 +1086,9 @@ pub enum SpotId {
     Giguna_Breach__Peak__Upper_East,
     Giguna_Breach__Peak__Upper_West,
     Giguna_Breach__Peak__West_7,
+    Giguna_Breach__Pink_Clouds__Corner,
+    Giguna_Breach__Pink_Clouds__Normal_Entry,
+    Giguna_Breach__Pink_Clouds__Quick_Entry,
     Giguna_Breach__Robopede__Center,
     Giguna_Breach__Robopede__North,
     Giguna_Breach__Robopede__West,
@@ -2817,6 +2823,15 @@ impl fmt::Display for SpotId {
                 write!(f, "{}", "Giguna Breach > Peak > Upper West")
             }
             SpotId::Giguna_Breach__Peak__West_7 => write!(f, "{}", "Giguna Breach > Peak > West 7"),
+            SpotId::Giguna_Breach__Pink_Clouds__Corner => {
+                write!(f, "{}", "Giguna Breach > Pink Clouds > Corner")
+            }
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => {
+                write!(f, "{}", "Giguna Breach > Pink Clouds > Normal Entry")
+            }
+            SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => {
+                write!(f, "{}", "Giguna Breach > Pink Clouds > Quick Entry")
+            }
             SpotId::Giguna_Breach__Robopede__Center => {
                 write!(f, "{}", "Giguna Breach > Robopede > Center")
             }
@@ -4159,6 +4174,15 @@ impl std::str::FromStr for SpotId {
             "Giguna Breach > Peak > Upper East" => Ok(SpotId::Giguna_Breach__Peak__Upper_East),
             "Giguna Breach > Peak > Upper West" => Ok(SpotId::Giguna_Breach__Peak__Upper_West),
             "Giguna Breach > Peak > West 7" => Ok(SpotId::Giguna_Breach__Peak__West_7),
+            "Giguna Breach > Pink Clouds > Corner" => {
+                Ok(SpotId::Giguna_Breach__Pink_Clouds__Corner)
+            }
+            "Giguna Breach > Pink Clouds > Normal Entry" => {
+                Ok(SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry)
+            }
+            "Giguna Breach > Pink Clouds > Quick Entry" => {
+                Ok(SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry)
+            }
             "Giguna Breach > Robopede > Center" => Ok(SpotId::Giguna_Breach__Robopede__Center),
             "Giguna Breach > Robopede > North" => Ok(SpotId::Giguna_Breach__Robopede__North),
             "Giguna Breach > Robopede > West" => Ok(SpotId::Giguna_Breach__Robopede__West),
@@ -8301,6 +8325,7 @@ impl std::str::FromStr for CanonId {
 pub enum WarpId {
     DroneSave,
     EarthSave,
+    ExitBreach,
     ExitMenu,
     FastTravel1710,
     IndraSave,
@@ -8311,6 +8336,7 @@ impl fmt::Display for WarpId {
         match self {
             WarpId::DroneSave => write!(f, "{}", "DroneSave"),
             WarpId::EarthSave => write!(f, "{}", "EarthSave"),
+            WarpId::ExitBreach => write!(f, "{}", "ExitBreach"),
             WarpId::ExitMenu => write!(f, "{}", "ExitMenu"),
             WarpId::FastTravel1710 => write!(f, "{}", "FastTravel1710"),
             WarpId::IndraSave => write!(f, "{}", "IndraSave"),
@@ -8326,6 +8352,7 @@ impl std::str::FromStr for WarpId {
         match s {
             "DroneSave" => Ok(WarpId::DroneSave),
             "EarthSave" => Ok(WarpId::EarthSave),
+            "ExitBreach" => Ok(WarpId::ExitBreach),
             "ExitMenu" => Ok(WarpId::ExitMenu),
             "FastTravel1710" => Ok(WarpId::FastTravel1710),
             "IndraSave" => Ok(WarpId::IndraSave),
@@ -8764,6 +8791,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Giguna_Breach__Ascent__Bottom
         | SpotId::Giguna_Breach__Ascent__Top
         | SpotId::Giguna_Breach__Ascent__West_6 => AreaId::Giguna_Breach__Ascent,
+        SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry
+        | SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry
+        | SpotId::Giguna_Breach__Pink_Clouds__Corner => AreaId::Giguna_Breach__Pink_Clouds,
         SpotId::Giguna__Giguna_Northeast__East_9
         | SpotId::Giguna__Giguna_Northeast__Inner_Wall
         | SpotId::Giguna__Giguna_Northeast__Crow_Eating
@@ -9566,6 +9596,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Giguna_Breach__Ascent__Bottom
         | SpotId::Giguna_Breach__Ascent__Top
         | SpotId::Giguna_Breach__Ascent__West_6 => RegionId::Giguna_Breach,
+        SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry
+        | SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry
+        | SpotId::Giguna_Breach__Pink_Clouds__Corner => RegionId::Giguna_Breach,
         SpotId::Giguna__Giguna_Northeast__East_9
         | SpotId::Giguna__Giguna_Northeast__Inner_Wall
         | SpotId::Giguna__Giguna_Northeast__Crow_Eating
@@ -11784,6 +11817,9 @@ impl world::Accessible for Warp {
             && match self.id {
                 WarpId::DroneSave => rules::access_not_within_menu_and_mode__drone(&ctx),
                 WarpId::EarthSave => rules::access_within_antarctica(&ctx),
+                WarpId::ExitBreach => {
+                    rules::access_breach_and_exit_breach_and___flipside_not_within_default(&ctx)
+                }
                 WarpId::ExitMenu => rules::access_within_menu(&ctx),
                 WarpId::FastTravel1710 => {
                     rules::access_not_within_menu_and_not_breach_and_map_17_10_and_fast_travel(&ctx)
@@ -11813,6 +11849,7 @@ impl world::Warp for Warp {
             match self.id {
                 WarpId::DroneSave => ctx.save(),
                 WarpId::EarthSave => ctx.save(),
+                WarpId::ExitBreach => data::flipside(ctx.position()),
                 WarpId::ExitMenu => ctx.last(),
                 WarpId::FastTravel1710 => SpotId::Giguna__Giguna_Northeast__Save_Point,
                 WarpId::IndraSave => ctx.save(),
@@ -11844,6 +11881,7 @@ impl world::Warp for Warp {
         match self.id {
             WarpId::DroneSave => true,
             WarpId::EarthSave => true,
+            WarpId::ExitBreach => false,
             WarpId::ExitMenu => false,
             WarpId::FastTravel1710 => false,
             WarpId::IndraSave => true,
@@ -11875,7 +11913,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 790],
+    raw_spots: [SpotId; 793],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -14534,6 +14572,9 @@ impl World {
                 SpotId::Giguna_Breach__Peak__Upper_East,
                 SpotId::Giguna_Breach__Peak__Upper_West,
                 SpotId::Giguna_Breach__Peak__West_7,
+                SpotId::Giguna_Breach__Pink_Clouds__Corner,
+                SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+                SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry,
                 SpotId::Giguna_Breach__Robopede__Center,
                 SpotId::Giguna_Breach__Robopede__North,
                 SpotId::Giguna_Breach__Robopede__West,
@@ -27434,6 +27475,54 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Giguna_Breach__Ascent__West_9.into_usize() + 1,
             },
         },
+        SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => Spot {
+            id: SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+                end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => Spot {
+            id: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+                end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+            },
+        },
+        SpotId::Giguna_Breach__Pink_Clouds__Corner => Spot {
+            id: SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Giguna_Breach__Pink_Clouds__Corner.into_usize(),
+                end: SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry.into_usize() + 1,
+            },
+        },
         SpotId::Giguna__Giguna_Northeast__East_9 => Spot {
             id: SpotId::Giguna__Giguna_Northeast__East_9,
             locations: Range {
@@ -34332,6 +34421,12 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
             time: 5000,
             price: Currency::Free,
         },
+        WarpId::ExitBreach => Warp {
+            id: WarpId::ExitBreach,
+            dest: SpotId::None,
+            time: 3000,
+            price: Currency::Free,
+        },
         WarpId::ExitMenu => Warp {
             id: WarpId::ExitMenu,
             dest: SpotId::None,
@@ -34340,7 +34435,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::FastTravel1710 => Warp {
             id: WarpId::FastTravel1710,
-            dest: SpotId::Giguna__Giguna_Northeast__Save_Point,
+            dest: SpotId::None,
             time: 12000,
             price: Currency::Free,
         },
@@ -34352,7 +34447,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
         },
         WarpId::Menu => Warp {
             id: WarpId::Menu,
-            dest: SpotId::Menu__Upgrade_Menu__Physiology,
+            dest: SpotId::None,
             time: 1000,
             price: Currency::Free,
         },
@@ -34912,6 +35007,9 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna_Breach__Ascent__Bottom => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Ascent__Top => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Ascent__West_6 => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => Range { start: 0, end: 0 },
+        SpotId::Giguna_Breach__Pink_Clouds__Corner => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__East_9 => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Inner_Wall => Range { start: 0, end: 0 },
         SpotId::Giguna__Giguna_Northeast__Crow_Eating => Range { start: 0, end: 0 },
@@ -35605,6 +35703,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
         AreaId::Giguna_Breach__Antechamber => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Central => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Ascent => Range { start: 0, end: 0 },
+        AreaId::Giguna_Breach__Pink_Clouds => Range { start: 0, end: 0 },
         AreaId::Giguna__Giguna_Northeast => Range {
             start: LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask.into_usize(),
             end: LocationId::Giguna__Giguna_Northeast__Vault__Item.into_usize(),

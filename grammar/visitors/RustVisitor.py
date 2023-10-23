@@ -149,7 +149,7 @@ class RustVisitor(RulesVisitor):
 
     def visitOneArgument(self, ctx):
         ref = self._getRefGetter(str(ctx.REF())[1:])
-        if ref.startswith('ctx'):
+        if ref.startswith('ctx.') or ref.startswith('data::'):
             return ref
         return f'ctx.has({ref})'
     
@@ -271,7 +271,9 @@ class RustVisitor(RulesVisitor):
 
     def visitRefInFunc(self, ctx):
         func = str(ctx.invoke().FUNC())[1:]
-        assert func in ('get_area', 'get_region')
         eq = '!' if ctx.NOT() else '='
+        if func == 'default':
+            return f'{self._getRefGetter(str(ctx.REF())[1:])} {eq}= {self.visit(ctx.invoke())}'
+        assert func in ('get_area', 'get_region')
         return (f'{func}({self._getRefGetter(str(ctx.REF())[1:])}) '
                 f'{eq}= {self.visit(ctx.invoke())}')

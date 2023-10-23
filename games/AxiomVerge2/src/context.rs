@@ -123,6 +123,7 @@ pub enum Expectation {
     EbihWaterfallBlockRight(bool),
     EbihWaterfallWall(bool),
     EbihWestBlock(bool),
+    ExitBreach(bool),
     FastTravel(bool),
     Flask(i8),
     GigunaBoulder(bool),
@@ -224,6 +225,9 @@ pub mod data {
             SpotId::Giguna_Breach__Peak__Upper_East => true,
             SpotId::Giguna_Breach__Peak__Upper_West => true,
             SpotId::Giguna_Breach__Peak__West_7 => true,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner => true,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => true,
+            SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry => true,
             SpotId::Giguna_Breach__Robopede__Center => true,
             SpotId::Giguna_Breach__Robopede__North => true,
             SpotId::Giguna_Breach__Robopede__West => true,
@@ -411,43 +415,44 @@ pub mod flags {
             const EBIH_WATERFALL_BLOCK_RIGHT = 1 << 19;
             const EBIH_WATERFALL_WALL = 1 << 20;
             const EBIH_WEST_BLOCK = 1 << 21;
-            const FAST_TRAVEL = 1 << 22;
-            const GIGUNA_BOULDER = 1 << 23;
-            const GIGUNA_DUAL_PATH_SWITCH = 1 << 24;
-            const GIGUNA_GATEWAY_BLOCK = 1 << 25;
-            const GIGUNA_GATEWAY_GATE = 1 << 26;
-            const GIGUNA_GUBI = 1 << 27;
-            const GIGUNA_NORTHEAST_GATE = 1 << 28;
-            const HEALTH_NODE = 1 << 29;
-            const HERETICS_TABLET = 1 << 30;
-            const ICE_AXE = 1 << 31;
+            const EXIT_BREACH = 1 << 22;
+            const FAST_TRAVEL = 1 << 23;
+            const GIGUNA_BOULDER = 1 << 24;
+            const GIGUNA_DUAL_PATH_SWITCH = 1 << 25;
+            const GIGUNA_GATEWAY_BLOCK = 1 << 26;
+            const GIGUNA_GATEWAY_GATE = 1 << 27;
+            const GIGUNA_GUBI = 1 << 28;
+            const GIGUNA_NORTHEAST_GATE = 1 << 29;
+            const HEALTH_NODE = 1 << 30;
+            const HERETICS_TABLET = 1 << 31;
         }
     }
     bitflags! {
         #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
         pub struct ContextBits3 : u32 {
-            const INFECTION_SPEED = 1 << 0;
-            const LEDGE_GRAB = 1 << 1;
-            const LETTER_FROM_TRACE = 1 << 2;
-            const MAP_17_10 = 1 << 3;
-            const MIST_UPGRADE = 1 << 4;
-            const NANITE_MIST = 1 << 5;
-            const POWER_MATRIX = 1 << 6;
-            const RECORD_LOSSES = 1 << 7;
-            const REMOTE_DRONE = 1 << 8;
-            const RESEARCHERS_MISSING = 1 << 9;
-            const SHOCKWAVE = 1 << 10;
-            const SLINGSHOT_CHARGE = 1 << 11;
-            const SLINGSHOT_HOOK = 1 << 12;
-            const SLINGSHOT_WEAPON = 1 << 13;
-            const STATION_POWER = 1 << 14;
-            const SWITCH_36_11 = 1 << 15;
-            const SWITCH_40_12 = 1 << 16;
-            const TERMINAL_BREAKTHROUGH_1 = 1 << 17;
-            const THE_IDEAL_KIENGIR = 1 << 18;
-            const UNDER_SIEGE = 1 << 19;
-            const UNDERWATER_MOVEMENT = 1 << 20;
-            const WALL_CLIMB = 1 << 21;
+            const ICE_AXE = 1 << 0;
+            const INFECTION_SPEED = 1 << 1;
+            const LEDGE_GRAB = 1 << 2;
+            const LETTER_FROM_TRACE = 1 << 3;
+            const MAP_17_10 = 1 << 4;
+            const MIST_UPGRADE = 1 << 5;
+            const NANITE_MIST = 1 << 6;
+            const POWER_MATRIX = 1 << 7;
+            const RECORD_LOSSES = 1 << 8;
+            const REMOTE_DRONE = 1 << 9;
+            const RESEARCHERS_MISSING = 1 << 10;
+            const SHOCKWAVE = 1 << 11;
+            const SLINGSHOT_CHARGE = 1 << 12;
+            const SLINGSHOT_HOOK = 1 << 13;
+            const SLINGSHOT_WEAPON = 1 << 14;
+            const STATION_POWER = 1 << 15;
+            const SWITCH_36_11 = 1 << 16;
+            const SWITCH_40_12 = 1 << 17;
+            const TERMINAL_BREAKTHROUGH_1 = 1 << 18;
+            const THE_IDEAL_KIENGIR = 1 << 19;
+            const UNDER_SIEGE = 1 << 20;
+            const UNDERWATER_MOVEMENT = 1 << 21;
+            const WALL_CLIMB = 1 << 22;
         }
     }
 }
@@ -543,7 +548,7 @@ impl context::Ctx for Context {
     type RegionId = RegionId;
     type MovementState = movements::MovementState;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 71;
+    const NUM_ITEMS: u32 = 72;
 
     fn has(&self, item: Item) -> bool {
         match item {
@@ -604,6 +609,7 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WATERFALL_WALL),
             Item::Ebih_West_Block => self.cbits2.contains(flags::ContextBits2::EBIH_WEST_BLOCK),
+            Item::Exit_Breach => self.cbits2.contains(flags::ContextBits2::EXIT_BREACH),
             Item::Fast_Travel => self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL),
             Item::Flask => self.flask >= 1,
             Item::Giguna_Boulder => self.cbits2.contains(flags::ContextBits2::GIGUNA_BOULDER),
@@ -624,7 +630,7 @@ impl context::Ctx for Context {
             Item::Health_Node => self.cbits2.contains(flags::ContextBits2::HEALTH_NODE),
             Item::Health_Upgrade => self.health_upgrade >= 1,
             Item::Heretics_Tablet => self.cbits2.contains(flags::ContextBits2::HERETICS_TABLET),
-            Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE),
+            Item::Ice_Axe => self.cbits3.contains(flags::ContextBits3::ICE_AXE),
             Item::Infect => self.infect >= 1,
             Item::Infection_Range => self.infection_range >= 1,
             Item::Infection_Speed => self.cbits3.contains(flags::ContextBits3::INFECTION_SPEED),
@@ -763,6 +769,10 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::EBIH_WEST_BLOCK)
                 .into(),
+            Item::Exit_Breach => self
+                .cbits2
+                .contains(flags::ContextBits2::EXIT_BREACH)
+                .into(),
             Item::Fast_Travel => self
                 .cbits2
                 .contains(flags::ContextBits2::FAST_TRAVEL)
@@ -802,7 +812,7 @@ impl context::Ctx for Context {
                 .cbits2
                 .contains(flags::ContextBits2::HERETICS_TABLET)
                 .into(),
-            Item::Ice_Axe => self.cbits2.contains(flags::ContextBits2::ICE_AXE).into(),
+            Item::Ice_Axe => self.cbits3.contains(flags::ContextBits3::ICE_AXE).into(),
             Item::Infect => self.infect.into(),
             Item::Infection_Range => self.infection_range.into(),
             Item::Infection_Speed => self
@@ -980,6 +990,9 @@ impl context::Ctx for Context {
             Item::Ebih_West_Block => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
             },
+            Item::Exit_Breach => {
+                self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
+            },
             Item::Fast_Travel => {
                 self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
             },
@@ -1019,7 +1032,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
             },
             Item::Ice_Axe => {
-                self.cbits2.insert(flags::ContextBits2::ICE_AXE);
+                self.cbits3.insert(flags::ContextBits3::ICE_AXE);
             },
             Item::Infect => {
                 self.infect += 1;
@@ -1220,6 +1233,9 @@ impl context::Ctx for Context {
             Item::Ebih_West_Block => {
                 self.cbits2.insert(flags::ContextBits2::EBIH_WEST_BLOCK);
             }
+            Item::Exit_Breach => {
+                self.cbits2.insert(flags::ContextBits2::EXIT_BREACH);
+            }
             Item::Fast_Travel => {
                 self.cbits2.insert(flags::ContextBits2::FAST_TRAVEL);
             }
@@ -1260,7 +1276,7 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::HERETICS_TABLET);
             }
             Item::Ice_Axe => {
-                self.cbits2.insert(flags::ContextBits2::ICE_AXE);
+                self.cbits3.insert(flags::ContextBits3::ICE_AXE);
             }
             Item::Infect => {
                 self.infect += 1;
@@ -2251,6 +2267,14 @@ impl context::Ctx for Context {
                     ckey, cval
                 ));
             }
+            ("Exit_Breach", Yaml::Boolean(b)) => Expectation::ExitBreach(*b),
+            ("Exit_Breach", Yaml::Integer(i)) => Expectation::ExitBreach(*i > 0),
+            ("Exit_Breach", _) => {
+                return Err(format!(
+                    "Key {:?} has value of disallowed type: {:?}",
+                    ckey, cval
+                ));
+            }
             ("Fast_Travel", Yaml::Boolean(b)) => Expectation::FastTravel(*b),
             ("Fast_Travel", Yaml::Integer(i)) => Expectation::FastTravel(*i > 0),
             ("Fast_Travel", _) => {
@@ -3124,6 +3148,12 @@ impl context::Ctx for Context {
                         ));
                     }
                 }
+                Expectation::ExitBreach(e) => {
+                    let v = self.has(Item::Exit_Breach);
+                    if v != (*e).into() {
+                        errs.push(format!("Expected {} = {}, got: {}", "Exit_Breach", e, v));
+                    }
+                }
                 Expectation::FastTravel(e) => {
                     let v = self.has(Item::Fast_Travel);
                     if v != (*e).into() {
@@ -3722,6 +3752,11 @@ impl context::Ctx for Context {
             AreaId::Giguna_Breach__Peak => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos1(self, pos);
+                }
+            }
+            AreaId::Giguna_Breach__Pink_Clouds => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos13(self, pos);
                 }
             }
             AreaId::Giguna_Breach__Robopede => {
@@ -4647,6 +4682,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}EBIH_WEST_BLOCK", if n { "+" } else { "-" }));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::EXIT_BREACH);
+        let p = old.cbits2.contains(flags::ContextBits2::EXIT_BREACH);
+        if n != p {
+            list.push(format!("{}EXIT_BREACH", if n { "+" } else { "-" }));
+        }
         let n = self.cbits2.contains(flags::ContextBits2::FAST_TRAVEL);
         let p = old.cbits2.contains(flags::ContextBits2::FAST_TRAVEL);
         if n != p {
@@ -4714,8 +4754,8 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}HERETICS_TABLET", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::ICE_AXE);
-        let p = old.cbits2.contains(flags::ContextBits2::ICE_AXE);
+        let n = self.cbits3.contains(flags::ContextBits3::ICE_AXE);
+        let p = old.cbits3.contains(flags::ContextBits3::ICE_AXE);
         if n != p {
             list.push(format!("{}ICE_AXE", if n { "+" } else { "-" }));
         }

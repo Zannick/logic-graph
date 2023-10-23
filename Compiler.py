@@ -370,6 +370,12 @@ class GameLogic(object):
                         (v for k,v in self.time.items() if k in point.get('tags', [])),
                         default=self.time['default'])
 
+        for act in self.global_actions:
+            if 'time' not in act:
+                act['time'] = max(
+                        (v for k,v in self.time.items() if k in act.get('tags', [])),
+                        default=self.time['default'])
+
 
     def process_warps(self):
         self.warps = self._info['warps']
@@ -380,11 +386,16 @@ class GameLogic(object):
                 self._errors.append(f'Warp {name} requires explicit "time" setting')
             if info['to'].startswith('^'):
                 val = info['to'][1:]
-                if val not in self.context_types:
+                if vtype := self.context_types.get(val):
+                    if vtype != 'SpotId':
+                        self._errors.append(f'Warp {name} goes to invalid ctx dest: ^{val} (of type {vtype})')
+                    info['target_id'] = f'ctx.{val}()'
+                elif vtype := self.data_types.get(val):
+                    if vtype != 'SpotId':
+                        self._errors.append(f'Warp {name} goes to invalid data dest: ^{val} (of type {vtype})')
+                    info['target_id'] = f'data::{val}(ctx.position())'
+                else:
                     self._errors.append(f'Warp {name} goes to undefined ctx dest: ^{val}')
-                elif self.context_types[val] != 'SpotId':
-                    self._errors.append(f'Warp {name} goes to invalid ctx dest: ^{val} (of type {self.context_types[val]})')
-                info['target_id'] = f'ctx.{val}()'
             else:
                 id = construct_id(info['to'])
                 if not any(info['id'] == id for info in self.spots()):

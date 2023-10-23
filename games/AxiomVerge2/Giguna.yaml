@@ -1757,10 +1757,12 @@ areas:
           time: 12  # it's not really additional time
         # Early portal gives us about .5s savings, is that worth modeling?
 
-      # TODO: early portal in a single action
-      # with hack, [deploy], attract, and sight
     - name: Platform Stop
       coord: [12.5, 18.7]
+      local:
+        - to: Pull Right
+        - to: Southeast
+      
     - name: Cache
       coord: [12.9, 18.3]
     - name: Platform Early Portal

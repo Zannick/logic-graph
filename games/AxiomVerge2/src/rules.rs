@@ -114,6 +114,11 @@ pub fn access_boomerang5(ctx: &Context) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
 }
+pub fn access_breach_and_exit_breach_and___flipside_not_within_default(ctx: &Context) -> bool {
+    // ^breach and Exit_Breach and (^flipside NOT WITHIN $default)
+    ((data::breach(ctx.position()) && ctx.has(Item::Exit_Breach))
+        && (data::flipside(ctx.position()) != Default::default()))
+}
 pub fn access_bs(ctx: &Context) -> bool {
     // $bs
     helper__bs!(ctx)
@@ -1365,6 +1370,10 @@ pub fn action_reset_old_area__newpos11(ctx: &mut Context, newpos: SpotId) {
     helper__reset_old_area!(ctx, newpos);
 }
 pub fn action_reset_old_area__newpos12(ctx: &mut Context, newpos: SpotId) {
+    // $reset_old_area(^newpos);
+    helper__reset_old_area!(ctx, newpos);
+}
+pub fn action_reset_old_area__newpos13(ctx: &mut Context, newpos: SpotId) {
     // $reset_old_area(^newpos);
     helper__reset_old_area!(ctx, newpos);
 }

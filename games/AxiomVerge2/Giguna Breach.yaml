@@ -542,3 +542,13 @@ areas:
       exits:
         - to: Peak > East 6
           tags: [xdoor]
+
+- name: Pink Clouds
+  on_entry: $reset_old_area(^newpos);
+  spots:
+    - name: Normal Entry
+      coord: [12.5, 18.7]
+    - name: Quick Entry
+      coord: [12.5, 18.85]
+    - name: Corner
+      coord: [12.9, 18.3]

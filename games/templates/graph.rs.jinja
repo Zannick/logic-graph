@@ -182,8 +182,8 @@ impl world::Action for Action {
 %% for act in gl.actions()
 %% if act.to
             ActionId::{{ act.id }} => {% if act.to.startswith('^') -%}
-            {% if act.to[1:] in data_defaults %}data::{{ act.to[1:] }}(ctx.position()){% endif -%}
-            ctx.{{ act.to[1:]|translate_ctx(act) }}()
+            {% if act.to[1:] in data_defaults %}data::{{ act.to[1:] }}(ctx.position()){% else -%}
+            ctx.{{ act.to[1:]|translate_ctx(act) }}(){% endif -%}
             {%- else -%}
             SpotId::{{ act|get_exit_target }}
             {%- endif -%},
@@ -228,7 +228,9 @@ impl world::Warp for Warp {
                 WarpId::{{ w.id }} => {{ w.target_id }},
 %% endfor
             }
-        } else { self.dest }
+        } else {
+            self.dest
+        }
     }
     fn connect(&mut self, dest: SpotId) { self.dest = dest; }
     fn prewarp(&self, ctx: &mut Context) {
@@ -618,7 +620,7 @@ pub fn build_warps() -> EnumMap<WarpId, Warp> {
 %% for w in warps.values()|sort(attribute='id')
         WarpId::{{ w.id }} => Warp {
             id: WarpId::{{ w.id }},
-            dest: {% if w.target_id.startswith('ctx') %}SpotId::None{% else %}{{ w.target_id }}{% endif %},
+            dest: SpotId::None,
             time: {{ (w.time * 1000)|int }},
             price: Currency::{% if w.price and w.price > 0 -%}
                 {{ (w.costs or default_price_type)|camelize }}({{ w.price }})
