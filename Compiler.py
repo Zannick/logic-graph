@@ -465,6 +465,8 @@ class GameLogic(object):
             self._validate_scale(sc, 'map_scale')
         if p := self.special.get('map_min'):
             self._validate_pair(p, 'map_min')
+        if t := self.special.get('graph_exclude_tags'):
+            self._validate_list(t, 'graph_exclude_tags')
 
     def _validate_scale(self, sc, name):
         if not self._validate_pair(sc, name):
@@ -478,13 +480,28 @@ class GameLogic(object):
     def _validate_pair(self, p, name):
         if isinstance(p, str):
             self.errors.append(f'Invalid {name}: {p!r} '
-                                f'(did you mean [{p}] ?)')
+                               f'(did you mean [{p}] ?)')
         elif not isinstance(p, (list, tuple)) or len(p) != 2:
-            self.errors.append(f'Invalid {name}: {p}')
+            self.errors.append(f'Invalid {name}: {p!r}')
         else:
             return True
         return False
 
+    def _validate_list(self, t, name):
+        if isinstance(t, str):
+            self.errors.append(f'Invalid {name}: {t!r} '
+                               f'(did you mean [{t}] ?)')
+        elif not isinstance(t, (list, tuple)):
+            self.errors.append(f'Invalid {name}: {t!r}')
+        else:
+            return True
+        return False
+    
+    def exclude_edge(self, edge):
+        if exc := self.special.get('graph_exclude_tags'):
+            if tags := edge.get('tags'):
+                return any(x in exc for x in tags)
+        return False
 
     @cache
     def spot_base_movement(self, spot_data):
@@ -1379,6 +1396,9 @@ class GameLogic(object):
             'translate_ctx': self.translate_ctx,
             'treeToString': treeToString,
             'trim_type_prefix': trim_type_prefix,
+        })
+        env.tests.update({
+            'exclude_edge': self.exclude_edge,
         })
         # Access cached_properties to ensure they're in the template vars
         self.unused_items

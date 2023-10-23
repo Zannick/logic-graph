@@ -189,7 +189,6 @@ areas:
 
 - name: Bunker Interior
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -210,7 +209,6 @@ areas:
 
 - name: Building Interior
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -238,7 +236,6 @@ areas:
 
 - name: Tent Interior
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -385,7 +382,6 @@ areas:
 
 - name: Garage
   graph_offset: [0, 0.15]
-  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry
@@ -1376,7 +1372,6 @@ areas:
 
 - name: Cave
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: Entry

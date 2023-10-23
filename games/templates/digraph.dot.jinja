@@ -32,10 +32,10 @@ digraph {{ game }} {
 %% endfor
     edge[arrowsize=0.5];
 %% for s in gl.spots()
-%% for e in s.exits|sort(attribute='id')
+%% for e in s.exits|reject('exclude_edge')|sort(attribute='id')
     {{ s.id }} -> {{ e|get_exit_target }};
 %% endfor
-%% for h in s.hybrid|sort(attribute='id')
+%% for h in s.hybrid|reject('exclude_edge')|sort(attribute='id')
     {{ s.id }} -> {{ h|get_exit_target }};
 %% endfor
 %% endfor

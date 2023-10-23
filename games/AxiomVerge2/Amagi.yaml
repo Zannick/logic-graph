@@ -286,7 +286,6 @@ areas:
 
 - name: Cave Behind Waterfall
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   data:
     water: false

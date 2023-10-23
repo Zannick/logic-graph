@@ -34,7 +34,6 @@ areas:
 
 - name: Shed
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Interior
       coord: [37.35, 1.8]
@@ -49,7 +48,6 @@ areas:
 
 - name: Building 1W
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: West Entry
       coord: [40.25, 1.5]
@@ -70,7 +68,6 @@ areas:
 
 - name: Building 1E
   graph_offset: [0, 0.25]
-  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Connector
       coord: [41.05, 1.4]
@@ -138,7 +135,6 @@ areas:
 
 - name: Building 2
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Entry
       coord: [42.475, 1.5]
@@ -194,7 +190,6 @@ areas:
 
 - name: Power Room
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Entry
       coord: [40.70, 0.7]
@@ -215,7 +210,6 @@ areas:
 
 - name: Freight Elevator
   graph_offset: [0, 60]
-  graph_attrs: shape="house",fillcolor="8"
   spots:
     - name: Left
       coord: [43.05, 1.35]
