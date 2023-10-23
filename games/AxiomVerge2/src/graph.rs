@@ -113,6 +113,7 @@ pub enum AreaId {
     Ebih__Ebih_East,
     Ebih__Ebih_West,
     Ebih__Garage,
+    Ebih__Gem_Room,
     Ebih__Grid_21_2_6,
     Ebih__Grid_25_10_12,
     Ebih__Grid_25_2_6,
@@ -209,6 +210,7 @@ impl fmt::Display for AreaId {
             AreaId::Ebih__Ebih_East => write!(f, "{}", "Ebih > Ebih East"),
             AreaId::Ebih__Ebih_West => write!(f, "{}", "Ebih > Ebih West"),
             AreaId::Ebih__Garage => write!(f, "{}", "Ebih > Garage"),
+            AreaId::Ebih__Gem_Room => write!(f, "{}", "Ebih > Gem Room"),
             AreaId::Ebih__Grid_21_2_6 => write!(f, "{}", "Ebih > Grid 21,2-6"),
             AreaId::Ebih__Grid_25_10_12 => write!(f, "{}", "Ebih > Grid 25,10-12"),
             AreaId::Ebih__Grid_25_2_6 => write!(f, "{}", "Ebih > Grid 25,2-6"),
@@ -316,6 +318,7 @@ impl std::str::FromStr for AreaId {
             "Ebih > Ebih East" => Ok(AreaId::Ebih__Ebih_East),
             "Ebih > Ebih West" => Ok(AreaId::Ebih__Ebih_West),
             "Ebih > Garage" => Ok(AreaId::Ebih__Garage),
+            "Ebih > Gem Room" => Ok(AreaId::Ebih__Gem_Room),
             "Ebih > Grid 21,2-6" => Ok(AreaId::Ebih__Grid_21_2_6),
             "Ebih > Grid 25,10-12" => Ok(AreaId::Ebih__Grid_25_10_12),
             "Ebih > Grid 25,2-6" => Ok(AreaId::Ebih__Grid_25_2_6),
@@ -553,6 +556,7 @@ pub enum SpotId {
     Ebih__By_Garage__Crawlspace_Opening,
     Ebih__By_Garage__East_12,
     Ebih__By_Garage__East_13,
+    Ebih__By_Garage__East_Below_Platforms,
     Ebih__By_Garage__East_Bush,
     Ebih__By_Garage__East_Platform,
     Ebih__By_Garage__Garage_Entry,
@@ -560,6 +564,7 @@ pub enum SpotId {
     Ebih__By_Garage__Outcropping,
     Ebih__By_Garage__West_12,
     Ebih__By_Garage__West_13,
+    Ebih__By_Garage__West_Below_Platforms,
     Ebih__By_Garage__West_Bush,
     Ebih__Cave__Entry,
     Ebih__Drone_Room__East_4,
@@ -624,6 +629,7 @@ pub enum SpotId {
     Ebih__Ebih_West__West_High_Cliff,
     Ebih__Garage__Boxes,
     Ebih__Garage__Entry,
+    Ebih__Gem_Room__West_13,
     Ebih__Grid_21_2_6__East_6,
     Ebih__Grid_21_2_6__Portal_Stand,
     Ebih__Grid_21_2_6__West_6,
@@ -1548,6 +1554,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Ebih__By_Garage__East_12 => write!(f, "{}", "Ebih > By Garage > East 12"),
             SpotId::Ebih__By_Garage__East_13 => write!(f, "{}", "Ebih > By Garage > East 13"),
+            SpotId::Ebih__By_Garage__East_Below_Platforms => {
+                write!(f, "{}", "Ebih > By Garage > East Below Platforms")
+            }
             SpotId::Ebih__By_Garage__East_Bush => write!(f, "{}", "Ebih > By Garage > East Bush"),
             SpotId::Ebih__By_Garage__East_Platform => {
                 write!(f, "{}", "Ebih > By Garage > East Platform")
@@ -1563,6 +1572,9 @@ impl fmt::Display for SpotId {
             }
             SpotId::Ebih__By_Garage__West_12 => write!(f, "{}", "Ebih > By Garage > West 12"),
             SpotId::Ebih__By_Garage__West_13 => write!(f, "{}", "Ebih > By Garage > West 13"),
+            SpotId::Ebih__By_Garage__West_Below_Platforms => {
+                write!(f, "{}", "Ebih > By Garage > West Below Platforms")
+            }
             SpotId::Ebih__By_Garage__West_Bush => write!(f, "{}", "Ebih > By Garage > West Bush"),
             SpotId::Ebih__Cave__Entry => write!(f, "{}", "Ebih > Cave > Entry"),
             SpotId::Ebih__Drone_Room__East_4 => write!(f, "{}", "Ebih > Drone Room > East 4"),
@@ -1673,6 +1685,7 @@ impl fmt::Display for SpotId {
             }
             SpotId::Ebih__Garage__Boxes => write!(f, "{}", "Ebih > Garage > Boxes"),
             SpotId::Ebih__Garage__Entry => write!(f, "{}", "Ebih > Garage > Entry"),
+            SpotId::Ebih__Gem_Room__West_13 => write!(f, "{}", "Ebih > Gem Room > West 13"),
             SpotId::Ebih__Grid_21_2_6__East_6 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6"),
             SpotId::Ebih__Grid_21_2_6__Portal_Stand => {
                 write!(f, "{}", "Ebih > Grid 21,2-6 > Portal Stand")
@@ -3349,6 +3362,9 @@ impl std::str::FromStr for SpotId {
             }
             "Ebih > By Garage > East 12" => Ok(SpotId::Ebih__By_Garage__East_12),
             "Ebih > By Garage > East 13" => Ok(SpotId::Ebih__By_Garage__East_13),
+            "Ebih > By Garage > East Below Platforms" => {
+                Ok(SpotId::Ebih__By_Garage__East_Below_Platforms)
+            }
             "Ebih > By Garage > East Bush" => Ok(SpotId::Ebih__By_Garage__East_Bush),
             "Ebih > By Garage > East Platform" => Ok(SpotId::Ebih__By_Garage__East_Platform),
             "Ebih > By Garage > Garage Entry" => Ok(SpotId::Ebih__By_Garage__Garage_Entry),
@@ -3356,6 +3372,9 @@ impl std::str::FromStr for SpotId {
             "Ebih > By Garage > Outcropping" => Ok(SpotId::Ebih__By_Garage__Outcropping),
             "Ebih > By Garage > West 12" => Ok(SpotId::Ebih__By_Garage__West_12),
             "Ebih > By Garage > West 13" => Ok(SpotId::Ebih__By_Garage__West_13),
+            "Ebih > By Garage > West Below Platforms" => {
+                Ok(SpotId::Ebih__By_Garage__West_Below_Platforms)
+            }
             "Ebih > By Garage > West Bush" => Ok(SpotId::Ebih__By_Garage__West_Bush),
             "Ebih > Cave > Entry" => Ok(SpotId::Ebih__Cave__Entry),
             "Ebih > Drone Room > East 4" => Ok(SpotId::Ebih__Drone_Room__East_4),
@@ -3424,6 +3443,7 @@ impl std::str::FromStr for SpotId {
             "Ebih > Ebih West > West High Cliff" => Ok(SpotId::Ebih__Ebih_West__West_High_Cliff),
             "Ebih > Garage > Boxes" => Ok(SpotId::Ebih__Garage__Boxes),
             "Ebih > Garage > Entry" => Ok(SpotId::Ebih__Garage__Entry),
+            "Ebih > Gem Room > West 13" => Ok(SpotId::Ebih__Gem_Room__West_13),
             "Ebih > Grid 21,2-6 > East 6" => Ok(SpotId::Ebih__Grid_21_2_6__East_6),
             "Ebih > Grid 21,2-6 > Portal Stand" => Ok(SpotId::Ebih__Grid_21_2_6__Portal_Stand),
             "Ebih > Grid 21,2-6 > West 6" => Ok(SpotId::Ebih__Grid_21_2_6__West_6),
@@ -4428,6 +4448,7 @@ pub enum LocationId {
     Giguna__Helipad__Tablet_Ledge__Tablet,
     Giguna__Lamassu__Deposit__Flask,
     Giguna__Ruins_Center__Tablet__Item,
+    Giguna__Ruins_East__Way_Up_High__Item,
     Giguna__Ruins_Top__Flask__Flask,
     Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
     Giguna__Wasteland__Door_Right__Health,
@@ -4821,6 +4842,9 @@ impl fmt::Display for LocationId {
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
                 write!(f, "{}", "Giguna > Ruins Center > Tablet > Item")
+            }
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
+                write!(f, "{}", "Giguna > Ruins East > Way Up High > Item")
             }
             LocationId::Giguna__Ruins_Top__Flask__Flask => {
                 write!(f, "{}", "Giguna > Ruins Top > Flask > Flask")
@@ -5303,6 +5327,9 @@ impl std::str::FromStr for LocationId {
             "Giguna > Ruins Center > Tablet > Item" => {
                 Ok(LocationId::Giguna__Ruins_Center__Tablet__Item)
             }
+            "Giguna > Ruins East > Way Up High > Item" => {
+                Ok(LocationId::Giguna__Ruins_East__Way_Up_High__Item)
+            }
             "Giguna > Ruins Top > Flask > Flask" => Ok(LocationId::Giguna__Ruins_Top__Flask__Flask),
             "Giguna > Ruins Top > Small Ledge > Shockwave Flask" => {
                 Ok(LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask)
@@ -5641,6 +5668,7 @@ pub enum ExitId {
     Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1,
     Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1,
     Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1,
+    Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
     Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1,
     Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1,
     Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1,
@@ -5690,6 +5718,7 @@ pub enum ExitId {
     Ebih__Vertical_Interchange__Door__ex__Door_West_1,
     Ebih__Vertical_Interchange__Door_East__ex__Door_1,
     Ebih__Vertical_Interchange__Door_West__ex__Door_1,
+    Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1,
     Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1,
     Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1,
     Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1,
@@ -5960,6 +5989,7 @@ pub enum ExitId {
     Giguna__Ruins_East__Cliff__ex__Ledge_1,
     Giguna__Ruins_East__Cliff__ex__Ledge_2,
     Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1,
+    Giguna__Ruins_East__Ledge__ex__Pillar_1,
     Giguna__Ruins_East__Ledge__ex__Small_Passage_1,
     Giguna__Ruins_East__Small_Passage__ex__Ledge_1,
     Giguna__Ruins_East__West_7__ex__Pillar_1,
@@ -6322,6 +6352,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => write!(f, "{}", "Ebih > Ebih West > West 9 ==> Giguna > Giguna Northeast > East 9 (1)"),
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => write!(f, "{}", "Ebih > Ebih West > West 9 ==> Giguna Pillar (1)"),
             ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => write!(f, "{}", "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)"),
+            ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => write!(f, "{}", "Ebih > Gem Room > West 13 ==> Vertical Interchange > East 13 (1)"),
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => write!(f, "{}", "Ebih > Grid 21,2-6 > East 6 ==> Boss Room > West 6 (1)"),
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => write!(f, "{}", "Ebih > Grid 21,2-6 > West 6 ==> Ebih West > East 6 (1)"),
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => write!(f, "{}", "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)"),
@@ -6371,6 +6402,7 @@ impl fmt::Display for ExitId {
             ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1 => write!(f, "{}", "Ebih > Vertical Interchange > Door ==> Door West (1)"),
             ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1 => write!(f, "{}", "Ebih > Vertical Interchange > Door East ==> Door (1)"),
             ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1 => write!(f, "{}", "Ebih > Vertical Interchange > Door West ==> Door (1)"),
+            ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => write!(f, "{}", "Ebih > Vertical Interchange > East 13 ==> Gem Room > West 13 (1)"),
             ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1 => write!(f, "{}", "Ebih > Vertical Interchange > East 15 ==> Amagi > West Lake > West 15 (1)"),
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1 => write!(f, "{}", "Ebih > Vertical Interchange > East Tunnel ==> Below Door (1)"),
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1 => write!(f, "{}", "Ebih > Vertical Interchange > East Tunnel ==> Block Cubby (1)"),
@@ -6641,6 +6673,7 @@ impl fmt::Display for ExitId {
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1 => write!(f, "{}", "Giguna > Ruins East > Cliff ==> Ledge (1)"),
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2 => write!(f, "{}", "Giguna > Ruins East > Cliff ==> Ledge (2)"),
             ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1 => write!(f, "{}", "Giguna > Ruins East > East 9 ==> Giguna Northeast > West 9 (1)"),
+            ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1 => write!(f, "{}", "Giguna > Ruins East > Ledge ==> Pillar (1)"),
             ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => write!(f, "{}", "Giguna > Ruins East > Ledge ==> Small Passage (1)"),
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => write!(f, "{}", "Giguna > Ruins East > Small Passage ==> Ledge (1)"),
             ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => write!(f, "{}", "Giguna > Ruins East > West 7 ==> Pillar (1)"),
@@ -7008,6 +7041,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Ebih West > West 9 ==> Giguna > Giguna Northeast > East 9 (1)" => Ok(ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1),
             "Ebih > Ebih West > West 9 ==> Giguna Pillar (1)" => Ok(ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1),
             "Ebih > Garage > Entry ==> By Garage > Garage Entry (1)" => Ok(ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1),
+            "Ebih > Gem Room > West 13 ==> Vertical Interchange > East 13 (1)" => Ok(ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1),
             "Ebih > Grid 21,2-6 > East 6 ==> Boss Room > West 6 (1)" => Ok(ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1),
             "Ebih > Grid 21,2-6 > West 6 ==> Ebih West > East 6 (1)" => Ok(ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1),
             "Ebih > Grid 25,10-12 > Below Bush ==> Bush (1)" => Ok(ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1),
@@ -7057,6 +7091,7 @@ impl std::str::FromStr for ExitId {
             "Ebih > Vertical Interchange > Door ==> Door West (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1),
             "Ebih > Vertical Interchange > Door East ==> Door (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1),
             "Ebih > Vertical Interchange > Door West ==> Door (1)" => Ok(ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1),
+            "Ebih > Vertical Interchange > East 13 ==> Gem Room > West 13 (1)" => Ok(ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1),
             "Ebih > Vertical Interchange > East 15 ==> Amagi > West Lake > West 15 (1)" => Ok(ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1),
             "Ebih > Vertical Interchange > East Tunnel ==> Below Door (1)" => Ok(ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1),
             "Ebih > Vertical Interchange > East Tunnel ==> Block Cubby (1)" => Ok(ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1),
@@ -7327,6 +7362,7 @@ impl std::str::FromStr for ExitId {
             "Giguna > Ruins East > Cliff ==> Ledge (1)" => Ok(ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1),
             "Giguna > Ruins East > Cliff ==> Ledge (2)" => Ok(ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2),
             "Giguna > Ruins East > East 9 ==> Giguna Northeast > West 9 (1)" => Ok(ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1),
+            "Giguna > Ruins East > Ledge ==> Pillar (1)" => Ok(ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1),
             "Giguna > Ruins East > Ledge ==> Small Passage (1)" => Ok(ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1),
             "Giguna > Ruins East > Small Passage ==> Ledge (1)" => Ok(ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1),
             "Giguna > Ruins East > West 7 ==> Pillar (1)" => Ok(ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1),
@@ -8494,7 +8530,9 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__By_Garage__West_Bush
         | SpotId::Ebih__By_Garage__West_12
         | SpotId::Ebih__By_Garage__West_13
+        | SpotId::Ebih__By_Garage__West_Below_Platforms
         | SpotId::Ebih__By_Garage__Garage_Entry
+        | SpotId::Ebih__By_Garage__East_Below_Platforms
         | SpotId::Ebih__By_Garage__East_12 => AreaId::Ebih__By_Garage,
         SpotId::Ebih__Garage__Entry | SpotId::Ebih__Garage__Boxes => AreaId::Ebih__Garage,
         SpotId::Ebih__Grid_25_10_12__East_12
@@ -8661,6 +8699,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         | SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff
         | SpotId::Ebih__Vertical_Interchange__Switch
         | SpotId::Ebih__Vertical_Interchange__South => AreaId::Ebih__Vertical_Interchange,
+        SpotId::Ebih__Gem_Room__West_13 => AreaId::Ebih__Gem_Room,
         SpotId::Giguna_Breach__Peak__Save_Point
         | SpotId::Giguna_Breach__Peak__East_Passage
         | SpotId::Giguna_Breach__Peak__Column
@@ -9295,7 +9334,9 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__By_Garage__West_Bush
         | SpotId::Ebih__By_Garage__West_12
         | SpotId::Ebih__By_Garage__West_13
+        | SpotId::Ebih__By_Garage__West_Below_Platforms
         | SpotId::Ebih__By_Garage__Garage_Entry
+        | SpotId::Ebih__By_Garage__East_Below_Platforms
         | SpotId::Ebih__By_Garage__East_12 => RegionId::Ebih,
         SpotId::Ebih__Garage__Entry | SpotId::Ebih__Garage__Boxes => RegionId::Ebih,
         SpotId::Ebih__Grid_25_10_12__East_12
@@ -9460,6 +9501,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         | SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff
         | SpotId::Ebih__Vertical_Interchange__Switch
         | SpotId::Ebih__Vertical_Interchange__South => RegionId::Ebih,
+        SpotId::Ebih__Gem_Room__West_13 => RegionId::Ebih,
         SpotId::Giguna_Breach__Peak__Save_Point
         | SpotId::Giguna_Breach__Peak__East_Passage
         | SpotId::Giguna_Breach__Peak__Column
@@ -10010,9 +10052,9 @@ impl world::Accessible for Location {
             LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side => true,
             LocationId::Ebih__Base_Camp__Top_Platform__Item => true,
             LocationId::Ebih__Boss_Room__Boss__Boss_Reward => rules::access_defeat_ebih_alu(&ctx),
-            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => rules::access_melee_or_boomerang(&ctx),
+            LocationId::Ebih__Boss_Room__Boss__Fight_Alu => rules::access_can_damage(&ctx),
             LocationId::Ebih__Boss_Room__Boss__Hack_Alu => {
-                rules::access_overheat_and___melee_or_boomerang(&ctx)
+                rules::access_overheat_and_can_damage(&ctx)
             }
             LocationId::Ebih__Boss_Room__East_Ledge__Item => true,
             LocationId::Ebih__Building_Interior__Corner__Urn => true,
@@ -10115,6 +10157,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => true,
             LocationId::Giguna__Lamassu__Deposit__Flask => true,
             LocationId::Giguna__Ruins_Center__Tablet__Item => true,
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => true,
             LocationId::Giguna__Ruins_Top__Flask__Flask => true,
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => true,
             LocationId::Giguna__Wasteland__Door_Right__Health => true,
@@ -10430,6 +10473,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna_Pillar_1 => rules::access_grab_or_climb(&ctx),
             ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => true,
+            ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
             ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => rules::access_grab(&ctx),
@@ -10479,6 +10523,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1 => rules::access_ebih__vertical_interchange__door__ex__door_west_1__req(&ctx),
             ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1 => rules::access_ebih__vertical_interchange__door_east__ex__door_1__req(&ctx),
             ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1 => rules::access_ebih__vertical_interchange__door_west__ex__door_1__req(&ctx),
+            ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Below_Door_1 => rules::access_ebih_interchange_gate(&ctx),
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Block_Cubby_1 => rules::access_grab(&ctx),
@@ -10749,6 +10794,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1 => rules::access_climb(&ctx),
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2 => rules::access_hook(&ctx),
             ExitId::Giguna__Ruins_East__East_9__ex__Giguna_Northeast__West_9_1 => true,
+            ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1 => rules::access_grab_and_climb(&ctx),
             ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => rules::access_mode__drone(&ctx),
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => rules::access_mode__drone(&ctx),
             ExitId::Giguna__Ruins_East__West_7__ex__Pillar_1 => rules::access_grab_and_climb(&ctx),
@@ -11058,6 +11104,7 @@ impl world::Exit for Exit {
             ExitId::Ebih__Ebih_West__West_13__ex__Giguna__Wasteland__East_13_1 => true,
             ExitId::Ebih__Ebih_West__West_9__ex__Giguna__Giguna_Northeast__East_9_1 => true,
             ExitId::Ebih__Garage__Entry__ex__By_Garage__Garage_Entry_1 => true,
+            ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => true,
             ExitId::Ebih__Grid_21_2_6__East_6__ex__Boss_Room__West_6_1 => true,
             ExitId::Ebih__Grid_21_2_6__West_6__ex__Ebih_West__East_6_1 => true,
             ExitId::Ebih__Grid_25_10_12__East_10__ex__Grid_26_10_11__West_10_1 => true,
@@ -11072,6 +11119,7 @@ impl world::Exit for Exit {
             ExitId::Ebih__Observation_Tower_Room__West_10__ex__Grid_26_10_11__East_10_1 => true,
             ExitId::Ebih__Observation_Tower_Room__West_9__ex__Ebih_East__East_9_1 => true,
             ExitId::Ebih__Tent_Interior__Entry__ex__Base_Camp__Tent_Entry_1 => true,
+            ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => true,
             ExitId::Ebih__Vertical_Interchange__East_15__ex__Amagi__West_Lake__West_15_1 => true,
             ExitId::Ebih__Vertical_Interchange__West_13__ex__Ebih_West__East_13_1 => true,
             ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => true,
@@ -11827,7 +11875,7 @@ pub struct World {
     exits: EnumMap<ExitId, Exit>,
     actions: EnumMap<ActionId, Action>,
     warps: EnumMap<WarpId, Warp>,
-    raw_spots: [SpotId; 787],
+    raw_spots: [SpotId; 790],
     // Index ranges for slices into the above arrays
     spots: EnumMap<SpotId, Spot>,
     global_actions: Range<usize>,
@@ -11841,7 +11889,7 @@ impl world::World for World {
     type Exit = Exit;
     type Action = Action;
     type Warp = Warp;
-    const NUM_LOCATIONS: u32 = 148;
+    const NUM_LOCATIONS: u32 = 149;
 
     fn get_location(&self, id: LocationId) -> &Location {
         &self.locations[id]
@@ -12006,6 +12054,7 @@ impl world::World for World {
                 LocationId::Giguna_Breach__Chimney__Cache__Flask,
                 LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask,
                 LocationId::Giguna__Giguna_Northeast__Vault__Item,
+                LocationId::Giguna__Ruins_East__Way_Up_High__Item,
                 LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask,
                 LocationId::Giguna__Ruins_Top__Flask__Flask,
                 LocationId::Giguna__Far_Corner__Grass__Obscured_Item,
@@ -12418,6 +12467,9 @@ impl world::World for World {
             LocationId::Giguna__Giguna_Base__Table__News => SpotId::Giguna__Giguna_Base__Table,
             LocationId::Giguna__Building_Interior__Bookshelf__Note => {
                 SpotId::Giguna__Building_Interior__Bookshelf
+            }
+            LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
+                SpotId::Giguna__Ruins_East__Way_Up_High
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => SpotId::Giguna__Ruins_Center__Tablet,
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => {
@@ -12903,6 +12955,7 @@ impl world::World for World {
             ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1 | ExitId:: Ebih__Vertical_Interchange__Door__ex__Door_East_1 => SpotId::Ebih__Vertical_Interchange__Door,
             ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1 => SpotId::Ebih__Vertical_Interchange__Door_East,
             ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 | ExitId:: Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => SpotId::Ebih__Vertical_Interchange__Passage_East,
+            ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => SpotId::Ebih__Vertical_Interchange__East_13,
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 | ExitId:: Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => SpotId::Ebih__Vertical_Interchange__Middle_Descent,
             ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Middle_Drop_1 | ExitId:: Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Refill_Station_1 | ExitId:: Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Blocked_Refill_Station_1 => SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
             ExitId::Ebih__Vertical_Interchange__Refill_Station__ex__Cliff_by_Refill_1 | ExitId:: Ebih__Vertical_Interchange__Refill_Station__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__Refill_Station,
@@ -12913,6 +12966,7 @@ impl world::World for World {
             ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 | ExitId:: Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 | ExitId:: Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2 | ExitId:: Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_2 => SpotId::Ebih__Vertical_Interchange__Below_Door,
             ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__Switch,
             ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1 => SpotId::Ebih__Vertical_Interchange__South,
+            ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => SpotId::Ebih__Gem_Room__West_13,
             ExitId::Giguna_Breach__Peak__West_7__ex__Chimney__East_7_1 => SpotId::Giguna_Breach__Peak__West_7,
             ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 | ExitId:: Giguna_Breach__Peak__East_6__ex__Ascent__West_6_1 => SpotId::Giguna_Breach__Peak__East_6,
             ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => SpotId::Giguna_Breach__Peak__Portal,
@@ -13021,7 +13075,7 @@ impl world::World for World {
             ExitId::Giguna__Ruins_East__Bottom_Rock__ex__Cliff_1 => SpotId::Giguna__Ruins_East__Bottom_Rock,
             ExitId::Giguna__Ruins_East__West_9__ex__Ruins_Center__East_9_1 => SpotId::Giguna__Ruins_East__West_9,
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1 | ExitId:: Giguna__Ruins_East__Cliff__ex__Ledge_2 => SpotId::Giguna__Ruins_East__Cliff,
-            ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 => SpotId::Giguna__Ruins_East__Ledge,
+            ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1 | ExitId:: Giguna__Ruins_East__Ledge__ex__Pillar_1 => SpotId::Giguna__Ruins_East__Ledge,
             ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => SpotId::Giguna__Ruins_East__Small_Passage,
             ExitId::Giguna__Ruins_East__West_8__ex__Ruins_Center__East_8_1 => SpotId::Giguna__Ruins_East__West_8,
             ExitId::Giguna__Ruins_East__West_7__ex__Ruins_Top__East_7_1 | ExitId:: Giguna__Ruins_East__West_7__ex__Pillar_1 => SpotId::Giguna__Ruins_East__West_7,
@@ -13505,6 +13559,7 @@ impl world::World for World {
             | SpotId::Ebih__Ebih_West__West_9
             | SpotId::Ebih__Garage__Boxes
             | SpotId::Ebih__Garage__Entry
+            | SpotId::Ebih__Gem_Room__West_13
             | SpotId::Ebih__Grid_21_2_6__East_6
             | SpotId::Ebih__Grid_21_2_6__West_6
             | SpotId::Ebih__Grid_25_10_12__Door_Left
@@ -13525,6 +13580,7 @@ impl world::World for World {
             | SpotId::Ebih__Observation_Tower_Room__West_9
             | SpotId::Ebih__Tent_Interior__Desk
             | SpotId::Ebih__Tent_Interior__Entry
+            | SpotId::Ebih__Vertical_Interchange__East_13
             | SpotId::Ebih__Vertical_Interchange__East_15
             | SpotId::Ebih__Vertical_Interchange__Switch
             | SpotId::Ebih__Vertical_Interchange__West_13
@@ -13633,6 +13689,7 @@ impl world::World for World {
             | SpotId::Giguna__Ruins_Center__Tablet
             | SpotId::Giguna__Ruins_Center__West_9
             | SpotId::Giguna__Ruins_East__East_9
+            | SpotId::Giguna__Ruins_East__Way_Up_High
             | SpotId::Giguna__Ruins_East__West_7
             | SpotId::Giguna__Ruins_East__West_8
             | SpotId::Giguna__Ruins_East__West_9
@@ -13950,6 +14007,7 @@ impl World {
                 SpotId::Ebih__By_Garage__Crawlspace_Opening,
                 SpotId::Ebih__By_Garage__East_12,
                 SpotId::Ebih__By_Garage__East_13,
+                SpotId::Ebih__By_Garage__East_Below_Platforms,
                 SpotId::Ebih__By_Garage__East_Bush,
                 SpotId::Ebih__By_Garage__East_Platform,
                 SpotId::Ebih__By_Garage__Garage_Entry,
@@ -13957,6 +14015,7 @@ impl World {
                 SpotId::Ebih__By_Garage__Outcropping,
                 SpotId::Ebih__By_Garage__West_12,
                 SpotId::Ebih__By_Garage__West_13,
+                SpotId::Ebih__By_Garage__West_Below_Platforms,
                 SpotId::Ebih__By_Garage__West_Bush,
                 SpotId::Ebih__Cave__Entry,
                 SpotId::Ebih__Drone_Room__East_4,
@@ -14021,6 +14080,7 @@ impl World {
                 SpotId::Ebih__Ebih_West__West_High_Cliff,
                 SpotId::Ebih__Garage__Boxes,
                 SpotId::Ebih__Garage__Entry,
+                SpotId::Ebih__Gem_Room__West_13,
                 SpotId::Ebih__Grid_21_2_6__East_6,
                 SpotId::Ebih__Grid_21_2_6__Portal_Stand,
                 SpotId::Ebih__Grid_21_2_6__West_6,
@@ -15262,6 +15322,14 @@ pub fn build_locations() -> EnumMap<LocationId, Location> {
             item: Item::Letter_from_Trace,
             price: Currency::Free,
             time: 0,
+            exit_id: None,
+        },
+        LocationId::Giguna__Ruins_East__Way_Up_High__Item => Location {
+            id: LocationId::Giguna__Ruins_East__Way_Up_High__Item,
+            canonical: CanonId::None,
+            item: Item::Flask,
+            price: Currency::Free,
+            time: 5500,
             exit_id: None,
         },
         LocationId::Giguna__Ruins_Center__Tablet__Item => Location {
@@ -16686,7 +16754,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1,
-            time: 1228,
+            time: 1315,
             dest: SpotId::Ebih__Waterfall__Alcove,
             price: Currency::Free,
             loc_id: None,
@@ -16707,7 +16775,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1,
-            time: 1578,
+            time: 1491,
             dest: SpotId::Ebih__Waterfall__Alcove,
             price: Currency::Free,
             loc_id: None,
@@ -16721,14 +16789,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1,
-            time: 1578,
+            time: 1491,
             dest: SpotId::Ebih__Waterfall__Alcove_Left,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => Exit {
             id: ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1,
-            time: 1228,
+            time: 1315,
             dest: SpotId::Ebih__Waterfall__Alcove_Right,
             price: Currency::Free,
             loc_id: None,
@@ -16749,7 +16817,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1 => Exit {
             id: ExitId::Ebih__Waterfall__Under_Waterfall__ex__Waterfall_Left_1,
-            time: 1100,
+            time: 1799,
             dest: SpotId::Ebih__Waterfall__Waterfall_Left,
             price: Currency::Free,
             loc_id: None,
@@ -16798,7 +16866,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1 => Exit {
             id: ExitId::Ebih__Waterfall__Lower_West_Tree__ex__West_Lower_Path_1,
-            time: 1000,
+            time: 1200,
             dest: SpotId::Ebih__Waterfall__West_Lower_Path,
             price: Currency::Free,
             loc_id: None,
@@ -16980,14 +17048,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => Exit {
             id: ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1,
-            time: 1000,
+            time: 1200,
             dest: SpotId::Ebih__Ebih_West__High_Ledge,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1 => Exit {
             id: ExitId::Ebih__Ebih_West__East_6__ex__Grid_21_2_6__West_6_1,
-            time: 1000,
+            time: 1350,
             dest: SpotId::Ebih__Grid_21_2_6__West_6,
             price: Currency::Free,
             loc_id: None,
@@ -17454,6 +17522,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => Exit {
+            id: ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1,
+            time: 1350,
+            dest: SpotId::Ebih__Gem_Room__West_13,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => Exit {
             id: ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1,
             time: 3000,
@@ -17605,6 +17680,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             id: ExitId::Ebih__Vertical_Interchange__South__ex__Below_Door_1,
             time: 1000,
             dest: SpotId::Ebih__Vertical_Interchange__Below_Door,
+            price: Currency::Free,
+            loc_id: None,
+        },
+        ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1 => Exit {
+            id: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1,
+            time: 1350,
+            dest: SpotId::Ebih__Vertical_Interchange__East_13,
             price: Currency::Free,
             loc_id: None,
         },
@@ -18637,6 +18719,13 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
             price: Currency::Free,
             loc_id: None,
         },
+        ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1 => Exit {
+            id: ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1,
+            time: 4200,
+            dest: SpotId::Giguna__Ruins_East__Pillar,
+            price: Currency::Free,
+            loc_id: None,
+        },
         ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1 => Exit {
             id: ExitId::Giguna__Ruins_East__Small_Passage__ex__Ledge_1,
             time: 350,
@@ -18681,7 +18770,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1 => Exit {
             id: ExitId::Giguna__Ruins_Center__Wall_Bottom__ex__Wall_Top_1,
-            time: 1000,
+            time: 1200,
             dest: SpotId::Giguna__Ruins_Center__Wall_Top,
             price: Currency::Free,
             loc_id: None,
@@ -18751,7 +18840,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1,
-            time: 877,
+            time: 789,
             dest: SpotId::Giguna__Ruins_Top__West_Door,
             price: Currency::Free,
             loc_id: None,
@@ -18765,14 +18854,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1,
-            time: 877,
+            time: 789,
             dest: SpotId::Giguna__Ruins_Top__West_7,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1,
-            time: 526,
+            time: 614,
             dest: SpotId::Giguna__Ruins_Top__Entryway,
             price: Currency::Free,
             loc_id: None,
@@ -18807,7 +18896,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__Portal__ex__East_Door_1,
-            time: 701,
+            time: 877,
             dest: SpotId::Giguna__Ruins_Top__East_Door,
             price: Currency::Free,
             loc_id: None,
@@ -18828,21 +18917,21 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1,
-            time: 701,
+            time: 877,
             dest: SpotId::Giguna__Ruins_Top__Portal,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__East_Door__ex__East_7_1,
-            time: 877,
+            time: 789,
             dest: SpotId::Giguna__Ruins_Top__East_7,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 => Exit {
             id: ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1,
-            time: 877,
+            time: 789,
             dest: SpotId::Giguna__Ruins_Top__East_Door,
             price: Currency::Free,
             loc_id: None,
@@ -23416,6 +23505,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
             },
         },
+        SpotId::Ebih__By_Garage__West_Below_Platforms => Spot {
+            id: SpotId::Ebih__By_Garage__West_Below_Platforms,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
         SpotId::Ebih__By_Garage__Garage_Entry => Spot {
             id: SpotId::Ebih__By_Garage__Garage_Entry,
             locations: Range {
@@ -23424,6 +23529,22 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             exits: Range {
                 start: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1.into_usize(),
                 end: ExitId::Ebih__By_Garage__Garage_Entry__ex__Garage__Entry_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__By_Garage__Crawlspace.into_usize(),
+                end: SpotId::Ebih__By_Garage__West_Bush.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__By_Garage__East_Below_Platforms => Spot {
+            id: SpotId::Ebih__By_Garage__East_Below_Platforms,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: 0, end: 0,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -26009,7 +26130,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: 0, end: 0,
+                start: ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1.into_usize(),
+                end: ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1.into_usize() + 1,
             },
             actions: Range {
                 start: 0, end: 0,
@@ -26236,6 +26358,23 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
             area_spots: Range {
                 start: SpotId::Ebih__Vertical_Interchange__Below_Door.into_usize(),
                 end: SpotId::Ebih__Vertical_Interchange__West_13.into_usize() + 1,
+            },
+        },
+        SpotId::Ebih__Gem_Room__West_13 => Spot {
+            id: SpotId::Ebih__Gem_Room__West_13,
+            locations: Range {
+                start: 0, end: 0,
+            },
+            exits: Range {
+                start: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize(),
+                end: ExitId::Ebih__Gem_Room__West_13__ex__Vertical_Interchange__East_13_1.into_usize() + 1,
+            },
+            actions: Range {
+                start: 0, end: 0,
+            },
+            area_spots: Range {
+                start: SpotId::Ebih__Gem_Room__West_13.into_usize(),
+                end: SpotId::Ebih__Gem_Room__West_13.into_usize() + 1,
             },
         },
         SpotId::Giguna_Breach__Peak__Save_Point => Spot {
@@ -29251,7 +29390,7 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
                 start: 0, end: 0,
             },
             exits: Range {
-                start: ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1.into_usize(),
+                start: ExitId::Giguna__Ruins_East__Ledge__ex__Pillar_1.into_usize(),
                 end: ExitId::Giguna__Ruins_East__Ledge__ex__Small_Passage_1.into_usize() + 1,
             },
             actions: Range {
@@ -29332,7 +29471,8 @@ pub fn build_spots() -> EnumMap<SpotId, Spot> {
         SpotId::Giguna__Ruins_East__Way_Up_High => Spot {
             id: SpotId::Giguna__Ruins_East__Way_Up_High,
             locations: Range {
-                start: 0, end: 0,
+                start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
+                end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize() + 1,
             },
             exits: Range {
                 start: 0, end: 0,
@@ -34458,7 +34598,9 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Ebih__By_Garage__West_Bush => Range { start: 0, end: 0 },
         SpotId::Ebih__By_Garage__West_12 => Range { start: 0, end: 0 },
         SpotId::Ebih__By_Garage__West_13 => Range { start: 0, end: 0 },
+        SpotId::Ebih__By_Garage__West_Below_Platforms => Range { start: 0, end: 0 },
         SpotId::Ebih__By_Garage__Garage_Entry => Range { start: 0, end: 0 },
+        SpotId::Ebih__By_Garage__East_Below_Platforms => Range { start: 0, end: 0 },
         SpotId::Ebih__By_Garage__East_12 => Range { start: 0, end: 0 },
         SpotId::Ebih__Garage__Entry => Range { start: 0, end: 0 },
         SpotId::Ebih__Garage__Boxes => Range {
@@ -34697,6 +34839,7 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
             end: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch.into_usize() + 1,
         },
         SpotId::Ebih__Vertical_Interchange__South => Range { start: 0, end: 0 },
+        SpotId::Ebih__Gem_Room__West_13 => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Peak__Save_Point => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Peak__East_Passage => Range { start: 0, end: 0 },
         SpotId::Giguna_Breach__Peak__Column => Range { start: 0, end: 0 },
@@ -34938,7 +35081,10 @@ pub fn spot_locations(id: SpotId) -> Range<usize> {
         SpotId::Giguna__Ruins_East__West_8 => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_East__Pillar => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_East__West_7 => Range { start: 0, end: 0 },
-        SpotId::Giguna__Ruins_East__Way_Up_High => Range { start: 0, end: 0 },
+        SpotId::Giguna__Ruins_East__Way_Up_High => Range {
+            start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
+            end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize() + 1,
+        },
         SpotId::Giguna__Ruins_Center__East_8 => Range { start: 0, end: 0 },
         SpotId::Giguna__Ruins_Center__Tablet => Range {
             start: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),
@@ -35437,6 +35583,7 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch.into_usize(),
             end: LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch.into_usize(),
         },
+        AreaId::Ebih__Gem_Room => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Peak => Range { start: 0, end: 0 },
         AreaId::Giguna_Breach__Chimney => Range {
             start: LocationId::Giguna_Breach__Chimney__Cache__Flask.into_usize(),
@@ -35483,7 +35630,10 @@ pub fn area_locations(id: AreaId) -> Range<usize> {
             start: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
             end: LocationId::Giguna__Building_Interior__Bookshelf__Note.into_usize(),
         },
-        AreaId::Giguna__Ruins_East => Range { start: 0, end: 0 },
+        AreaId::Giguna__Ruins_East => Range {
+            start: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
+            end: LocationId::Giguna__Ruins_East__Way_Up_High__Item.into_usize(),
+        },
         AreaId::Giguna__Ruins_Center => Range {
             start: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),
             end: LocationId::Giguna__Ruins_Center__Tablet__Item.into_usize(),

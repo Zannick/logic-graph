@@ -8,19 +8,19 @@ areas:
     _door_opened: false
   spots:
     - name: East 9
-      coord: [18.95, 8.8]
+      coord: [18.95, 8.75]
       exits:
         - to: Ebih > Ebih West > West 9
           tags: [xshift]
     - name: Inner Wall
-      coord: [18.7, 9.0]
+      coord: [18.65, 8.95]
       local:
         - to: East 9
           jumps: 2
         - to: Crow Eating
           jumps: 4
     - name: Crow Eating
-      coord: [17.9, 8.9]
+      coord: [17.85, 8.9]
       local:
         - to: Save Point
         - to: Gate Left
@@ -106,7 +106,7 @@ areas:
           thru: [18.35, 9.1]
         - to: Save Point
     - name: Gate Button
-      coord: [18.5, 9.8]
+      coord: [18.5, 9.75]
       local:
         - to: Gate Right
           jumps: 1
@@ -333,7 +333,7 @@ areas:
         - to: West 10
           req: $grab
     - name: West 10
-      coord: [15.05, 9.7]
+      coord: [15.05, 9.8]
       local:
         - to: West Ledge
       exits:
@@ -811,7 +811,6 @@ areas:
     - name: Stone Knob
       coord: [14.55, 13.9]
       local:
-        - to: Upper Cliff
         - to: Kari
           thru: [14.35, 14.1]
         - to: Middle Platform
@@ -829,7 +828,7 @@ areas:
           do: $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
           to: Giguna > Giguna Base > Upper Cliff
     - name: Upper Cliff
-      coord: [14.25, 13.6]
+      coord: [14.25, 13.55]
       local:
         - to: Stone Knob
         - to: Kari
@@ -838,7 +837,7 @@ areas:
           thru: [14.35, 14.1]
         - to: Right Pillar
     - name: Right Pillar
-      coord: [13.9, 13.65]
+      coord: [13.9, 13.6]
       local:
         - to: Ruin
         - to: Upper Cliff
@@ -848,7 +847,7 @@ areas:
           req: $grab
           time: 1.5
     - name: Left Pillar
-      coord: [13.5, 13.6]
+      coord: [13.5, 13.55]
       local:
         - to: Ruin
       exits:
@@ -913,7 +912,7 @@ areas:
         - to: Building Interior > Entry
           tags: [interior]
     - name: Staircase Top
-      coord: [13.35, 14.8]
+      coord: [13.35, 14.75]
       local:
         - to: Staircase Bottom
           jumps_down: 2
@@ -931,7 +930,7 @@ areas:
           req: $hook
           time: 3.5
     - name: West Grate
-      coord: [13.15, 14.8]
+      coord: [13.15, 14.75]
       local:
         - to: Staircase Top
       exits:
@@ -940,7 +939,7 @@ areas:
           price: 30
           movement: mist2
     - name: West 15
-      coord: [13.05, 14.8]
+      coord: [13.05, 14.75]
       exits:
         - to: West Grate
           req: Nanite_Mist
@@ -959,7 +958,7 @@ areas:
         - to: Building Entry
           jumps: 1
     - name: Table
-      coord: [13.7, 16]
+      coord: [13.7, 15.95]
       local:
         - to: Kari
           thru: [14, 15.9]
@@ -974,7 +973,7 @@ areas:
           item: Researchers_Missing
           tags: [standing]
     - name: Save Point
-      coord: [13.5, 15.85]
+      coord: [13.5, 15.8]
       local:
         - to: Staircase Bottom
           jumps: 1
@@ -1079,7 +1078,7 @@ areas:
           tags: [hack]
 
 - name: Building Interior
-  graph_offset: [0, -0.2]
+  graph_offset: [0, 60]
   graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   spots:
@@ -1098,7 +1097,7 @@ areas:
         - to: Giguna Base > Building Entry
           tags: [exterior]
     - name: Bookshelf
-      coord: [13.9, 15.1]
+      coord: [13.85, 15.0]
       local:
         - to: Entry
           jumps_down: 2
@@ -1157,7 +1156,10 @@ areas:
         - to: Small Passage
           req: ^mode == 'drone'
           time: 0.35
-        # TODO: to: Pillar
+        - to: Pillar
+          req: $grab and $climb
+          movement: base
+          jumps: 7
     - name: Small Passage
       coord: [16.45, 7.4]
       local:
@@ -1190,15 +1192,15 @@ areas:
           movement: base
           jumps: 3
     - name: Way Up High
-      coord: [16.6, 5.2]
+      coord: [16.55, 5.45]
       local:
         - to: Pillar
         - to: Cliff
         - to: East 9
-      #locations:
-      #  - name: Item
-      #    item: Flask
-      #    tags: [flask]
+      locations:
+        - name: Item
+          item: Flask
+          tags: [flask]
       # TODO: exits toward Ruins Top?
 
 - name: Ruins Center
@@ -1235,8 +1237,10 @@ areas:
       exits:
         - to: Wall Top
           req: $climb
+          movement: base
+          jumps: 2
     - name: Wall Top
-      coord: [15.2, 8.1]
+      coord: [15.2, 8.15]
       local:
         - to: Wall Bottom
           jumps_down: 1
@@ -1250,13 +1254,12 @@ areas:
       local:
         - to: West Platform Right
     - name: West Platform Right
-      coord: [14.8, 8.1]
+      coord: [14.8, 8.15]
       local:
         - to: West Platform Left
-        - to: Center Top
       # exit?
     - name: West Platform Left
-      coord: [14.4, 8.1]
+      coord: [14.4, 8.15]
       local:
         - to: West Platform Right
         - to: West 9
@@ -1294,7 +1297,7 @@ areas:
           do: $save
           tags: [save]
     - name: Platform
-      coord: [13.5, 8.5]
+      coord: [13.5, 8.35]
       local:
         - to: Save Point
           jumps_down: 2
@@ -1330,7 +1333,7 @@ areas:
           do: ^_kishib_handled = true
           tags: [shockwave]
     - name: Upper Ledge
-      coord: [13.6, 6.4]
+      coord: [13.6, 6.35]
       local:
         - to: Lower Ledge
         - to: Platform
@@ -1345,13 +1348,13 @@ areas:
           tags: [xshift]
     
     - name: Rooftop East Edge
-      coord: [13.6, 5.7]
+      coord: [13.6, 5.65]
       local:
         - to: Rooftop West Edge
           jumps: 1
         # I mean... we *could* jump back down, but why?
     - name: Rooftop West Edge
-      coord: [13.3, 5.4]
+      coord: [13.3, 5.45]
       local:
         - to: West 7
     - name: West 7
@@ -1378,7 +1381,7 @@ areas:
           req: $grab or $climb
           time: 2.25
     - name: West Door
-      coord: [14.3, 6.6]
+      coord: [14.275, 6.55]
       exits:
         - to: West 7
           req: ^_doors_open
@@ -1392,7 +1395,7 @@ areas:
         - to: West 7
         - to: Entryway
     - name: Entryway
-      coord: [14.45, 6.8]
+      coord: [14.45, 6.75]
       local:
         - to: Portal Left
       exits:
@@ -1426,7 +1429,7 @@ areas:
           req: $hook
           time: 1.5  # ?
     - name: Portal
-      coord: [15.5, 6.7]
+      coord: [15.475, 6.6]
       local:
         - to: Portal Left
         - to: Small Ledge
@@ -1460,7 +1463,7 @@ areas:
         - to: Flask
       # boomerang remote flask?
     - name: Flask
-      coord: [15.3, 6.0]
+      coord: [15.3, 5.95]
       local:
         - to: Upper Tunnel
           jumps: 1
@@ -1470,7 +1473,7 @@ areas:
           canon: Giguna_Top_Flask
           tags: [flask]
     - name: East Door
-      coord: [15.7, 6.8]
+      coord: [15.725, 6.75]
       exits:
         - to: Portal
           req: ^_doors_open
@@ -1485,12 +1488,13 @@ areas:
         - to: East Door
           req: ^_doors_open
           movement: base
+          jumps: 1
         - to: Ruins East > West 7
           tags: [xshift]
     
     # post-breach
     - name: Save Point
-      coord: [14.8, 5.7]
+      coord: [14.8, 5.8]
       local:
         - to: Switch
           jumps: 1
@@ -1500,7 +1504,7 @@ areas:
           tags: [save]
       # TODO: move through the small passage with the drone
     - name: Switch
-      coord: [15.0, 5.5]
+      coord: [14.95, 5.6]
       local:
         - to: Save Point
       actions:
@@ -1534,7 +1538,7 @@ areas:
         - to: Rooftop Gutter
       # TODO: Movement to the high flask
     - name: Rooftop Gutter
-      coord: [15.8, 5.6]
+      coord: [15.825, 5.55]
       local:
         - to: Rooftop East
           jumps: 2
@@ -1551,7 +1555,7 @@ areas:
           movement: base
           jumps: 2
     - name: Turret Balcony West
-      coord: [14.3, 5.2]
+      coord: [14.35, 5.2]
       local:
         - to: West Pillar
         - to: Entryway
@@ -1572,9 +1576,10 @@ areas:
       local:
         - to: Top
     - name: Top
-      coord: [12.5, 7.1]
+      coord: [12.6, 7.2]
       local:
         - to: Southwest
+          thru: [12.4, 7.25]
       locations:
         - name: Tablet
           item: The_Ideal_Kiengir
@@ -1593,7 +1598,7 @@ areas:
       local:
         - to: Grass
     - name: Grass
-      coord: [11.5, 12.8]
+      coord: [11.55, 12.9]
       local:
         - to: South
       locations:
@@ -1601,7 +1606,7 @@ areas:
           item: Flask
           tags: [flask]
     - name: South
-      coord: [11.4, 12.9]
+      coord: [11.4, 12.9]  # TODO: yshifts should be at .95/.05 as well!
       exits:
         - to: Helipad > North
           tags: [yshift]
@@ -1610,7 +1615,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 15
-      coord: [12.95, 14.8]
+      coord: [12.95, 14.75]
       local:
         - to: Helicopter
           jumps: 2

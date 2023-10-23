@@ -868,10 +868,6 @@ pub fn access_melee_damage__2(ctx: &Context) -> bool {
     // Melee_Damage{2}
     ctx.count(Item::Melee_Damage) >= 2
 }
-pub fn access_melee_or_boomerang(ctx: &Context) -> bool {
-    // $melee or $boomerang
-    (helper__melee!(ctx) || helper__boomerang!(ctx))
-}
 pub fn access_melee_speed(ctx: &Context) -> bool {
     // Melee_Speed
     ctx.has(Item::Melee_Speed)
@@ -1007,9 +1003,9 @@ pub fn access_overheat(ctx: &Context) -> bool {
     // $overheat
     helper__overheat!(ctx)
 }
-pub fn access_overheat_and___melee_or_boomerang(ctx: &Context) -> bool {
-    // $overheat and ($melee or $boomerang)
-    (helper__overheat!(ctx) && (helper__melee!(ctx) || helper__boomerang!(ctx)))
+pub fn access_overheat_and_can_damage(ctx: &Context) -> bool {
+    // $overheat and $can_damage
+    (helper__overheat!(ctx) && helper__can_damage!(ctx))
 }
 pub fn access_platform_and_hook_and_hover(ctx: &Context) -> bool {
     // $platform and $hook and $hover

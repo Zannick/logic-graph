@@ -790,22 +790,22 @@ pub fn local_travel_time(
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
         ) => 1929,
-        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
+        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1349,
         ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => 1929,
-        // [1.4, 0.9]
-        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2299,
+        // [1.45, 0.9]
+        ([false], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2349,
         ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => 1929,
-        // [0.877193, 1.754386]
-        ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2631,
+        // [0.877193, 1.666667]
+        ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2543,
         // [0.877193, 0.9]
         ([false], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => 1777,
         ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => 1929,
         ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => 3157,
-        ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 999,
+        ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 899,
         ([false], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => 1929,
         ([false], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => 3599,
         ([false], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2456
+            2543
         }
         ([false], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
             2456
@@ -814,51 +814,52 @@ pub fn local_travel_time(
             3599
         }
         ([false], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            2456
+            2543
         }
         ([false], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            2631
+            2543
         }
         ([false], SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2631
+            2543
         }
         ([false], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => {
             2456
         }
+        // [1.2, 0.701754]
         (
             [false],
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1200,
+        ) => 1901,
         ([false], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            1754
+            1315
         }
         ([false], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            1754
+            1929
         }
         (
             [false],
             SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 701,
+        ) => 649,
         ([false], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            2456
+            1842
         }
         ([false], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            3333
+            3157
         }
         ([false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
-            1754
+            1315
         }
-        ([false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 877,
-        ([false], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 877,
+        ([false], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 1315,
+        ([false], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 1315,
         ([false], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => 1052,
         ([false], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => 2280,
         (
             [false],
             SpotId::Ebih__Base_Camp__West_Midair,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 2280,
+        ) => 2105,
         ([false], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => {
             1699
         }
@@ -870,15 +871,15 @@ pub fn local_travel_time(
             2099
         }
         ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2456
+            2543
         }
         (
             [false],
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1754,
+        ) => 1929,
         ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            4210
+            3771
         }
         ([false], SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => {
             1052
@@ -890,22 +891,22 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Building_Interior__Entry,
             SpotId::Ebih__Building_Interior__Corner,
-        ) => 1754,
+        ) => 1578,
         (
             [false],
             SpotId::Ebih__Building_Interior__Corner,
             SpotId::Ebih__Building_Interior__Entry,
-        ) => 1754,
-        ([false], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 350,
-        ([false], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 350,
+        ) => 1578,
+        ([false], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 263,
+        ([false], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 263,
         ([false], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => 1578,
-        ([false], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2631,
+        ([false], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2807,
         ([false], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
         (
             [false],
             SpotId::Ebih__By_Garage__East_Platform,
             SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 1052,
+        ) => 1228,
         (
             [false],
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
@@ -921,17 +922,17 @@ pub fn local_travel_time(
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
         ) => 600,
-        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2280,
+        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2105,
         ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => {
-            701
+            526
         }
         (
             [false],
             SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 350,
-        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1754,
-        ([false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1799,
+        ) => 200,
+        ([false], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1929,
+        ([false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1929,
         ([false], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
             1403
         }
@@ -943,7 +944,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__By_Garage__Lower_Platform,
             SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2807,
+        ) => 2631,
         ([false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => 1754,
         ([false], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
             400
@@ -953,11 +954,49 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => {
             1799
         }
-        ([false], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
-        ([false], SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => 4035,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__West_13,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+        ) => 877,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Lower_Platform,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__West_13,
+        ) => 877,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+        ) => 2982,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+        ) => 1578,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            SpotId::Ebih__By_Garage__East_13,
+        ) => 1228,
+        (
+            [false],
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 2400,
         ([false], SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => 1578,
-        ([false], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
-        ([false], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
+        ([false], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1228,
+        ([false], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1228,
         ([false], SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => 1228,
         ([false], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => 1228,
         ([false], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
@@ -980,7 +1019,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 599,
+        ) => 700,
         (
             [false],
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
@@ -991,7 +1030,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1000,
+        ) => 1050,
         (
             [false],
             SpotId::Ebih__Grid_25_10_12__Door_Left,
@@ -1001,13 +1040,13 @@ pub fn local_travel_time(
             1929
         }
         ([false], SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => {
-            1200
+            1250
         }
         (
             [false],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1399,
+        ) => 1500,
         (
             [false],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
@@ -1051,19 +1090,19 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
         ([false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
         ([false], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
-            1929
+            2105
         }
         ([false], SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => {
-            2631
+            2807
         }
         ([false], SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => {
-            2631
+            2807
         }
         (
             [false],
             SpotId::Ebih__Waterfall__Near_East_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1403,
+        ) => 1052,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Right,
@@ -1073,27 +1112,27 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 1578,
+        ) => 1754,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
+        ) => 2105,
         (
             [false],
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1578,
+        ) => 1754,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1929,
+        ) => 2105,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 500,
+        ) => 449,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
@@ -1118,12 +1157,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Alcove_Left,
-        ) => 300,
+        ) => 250,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
+        ) => 701,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -1138,7 +1177,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1052,
+        ) => 877,
         (
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Left,
@@ -1148,7 +1187,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
+        ) => 1052,
         ([false], SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => {
             2105
         }
@@ -1171,12 +1210,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1228,
+        ) => 1403,
         (
             [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 750,
         (
             [false],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -1187,11 +1226,12 @@ pub fn local_travel_time(
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Waterfall_Left,
         ) => 1052,
+        // [0.3, 1.140351]
         (
             [false],
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Wall_Right,
-        ) => 1052,
+        ) => 1440,
         (
             [false],
             SpotId::Ebih__Waterfall__West_Lower_Path,
@@ -1209,7 +1249,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 500,
+        ) => 450,
         ([false], SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => {
             701
         }
@@ -1226,23 +1266,23 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 299,
+        ) => 249,
         ([false], SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => 877,
         (
             [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 900,
+        ) => 850,
         (
             [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-        ) => 400,
+        ) => 399,
         (
             [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 199,
+        ) => 175,
         (
             [false],
             SpotId::Ebih__Waterfall__West_Door_Right,
@@ -1270,7 +1310,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 2456,
+        ) => 2280,
         (
             [false],
             SpotId::Ebih__Waterfall__West_Main_Path,
@@ -1285,22 +1325,22 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 4210,
+        ) => 4561,
         (
             [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2199,
+        ) => 2150,
         (
             [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2456,
+        ) => 2280,
         (
             [false],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 3157,
+        ) => 2982,
         (
             [false],
             SpotId::Ebih__Waterfall__Center_Main_Path,
@@ -1310,7 +1350,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Center_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 1052,
+        ) => 1228,
         ([false], SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => {
             2456
         }
@@ -1333,55 +1373,56 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Waterfall__Top_Waterfall,
             SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 799,
+        ) => 750,
         ([false], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
         ([false], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
         ([false], SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
         ([false], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1578,
         ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1578,
         ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            2105
+            2280
         }
+        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => 3157,
         ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
-        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 799,
+        ([false], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 899,
         ([false], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            2105
+            2280
         }
         ([false], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => {
-            2807
+            2368
         }
         (
             [false],
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Block_Left,
-        ) => 1754,
+        ) => 1929,
         ([false], SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            2807
+            2368
         }
         ([false], SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 3157,
         (
             [false],
             SpotId::Ebih__Ebih_West__Above_Alcove,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1052,
+        ) => 877,
         ([false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 999,
         ([false], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1578,
         ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => 526,
-        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1300,
-        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1100,
+        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1400,
+        ([false], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1150,
         ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => 526,
         ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => {
             1052
         }
-        ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1300,
+        ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1400,
         ([false], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            1100
+            1150
         }
         (
             [false],
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3250,
+        ) => 3150,
         ([false], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             3157
         }
@@ -1394,13 +1435,13 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
         ) => 1200,
         ([false], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
-            1450
+            1578
         }
         (
             [false],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3450,
+        ) => 3400,
         (
             [false],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
@@ -1417,21 +1458,21 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_West__High_Platform,
         ) => 1200,
         ([false], SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
-            649
+            725
         }
         (
             [false],
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 350,
-        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 750,
+        ) => 375,
+        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 799,
         ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => {
-            701
+            526
         }
-        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
-        ([false], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
-        ([false], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 877,
-        ([false], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 877,
+        ([false], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1403,
+        ([false], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1403,
+        ([false], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 1052,
+        ([false], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 1052,
         (
             [false],
             SpotId::Ebih__Ebih_West__Middle_Middle,
@@ -1441,9 +1482,9 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1800,
+        ) => 1750,
         ([false], SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => {
-            1754
+            1578
         }
         (
             [false],
@@ -1461,7 +1502,6 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_West__Refill_Station,
         ) => 700,
         ([false], SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => 1052,
-        ([false], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => 877,
         ([false], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => {
             526
         }
@@ -1566,12 +1606,12 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Moving_Platform,
         ) => 2631,
-        ([false], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 350,
+        ([false], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 400,
         (
             [false],
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 999,
+        ) => 1099,
         (
             [false],
             SpotId::Ebih__Ebih_East__East_Ledge,
@@ -1646,12 +1686,12 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => 877,
         ([false], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => 1403,
         ([false], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => 2982,
-        ([false], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 500,
-        ([false], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 877,
+        ([false], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 526,
+        ([false], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 1052,
         ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
         ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1578,
-        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 1000,
-        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 877,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 850,
+        ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 1052,
         ([false], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => {
             1578
         }
@@ -1667,12 +1707,12 @@ pub fn local_travel_time(
         ([false], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => {
             1228
         }
-        // [1.0, 0.701754]
-        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1701,
-        // [0.9, 0.7]
-        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1600,
+        // [1.05, 0.701754]
+        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1751,
+        // [0.95, 0.7]
+        ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1650,
         ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => {
-            1400
+            1449
         }
         ([false], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
         ([false], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
@@ -1794,9 +1834,9 @@ pub fn local_travel_time(
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__Ledge,
         ) => 877,
-        // [0.526316, 1.0]
+        // [0.526316, 1.05]
         ([false], SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => {
-            1526
+            1576
         }
         (
             [false],
@@ -1920,7 +1960,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => 500,
+        ) => 550,
         (
             [false],
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
@@ -2005,12 +2045,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna_Breach__Peak__East_Passage,
-        ) => 3508,
+        ) => 3421,
         (
             [false],
             SpotId::Giguna_Breach__Peak__East_Passage,
             SpotId::Giguna_Breach__Peak__Save_Point,
-        ) => 3508,
+        ) => 3421,
         (
             [false],
             SpotId::Giguna_Breach__Peak__East_Passage,
@@ -2021,7 +2061,7 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Peak__Column,
             SpotId::Giguna_Breach__Peak__East_Passage,
         ) => 799,
-        ([false], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        ([false], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 750,
         ([false], SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
             1200
         }
@@ -2054,7 +2094,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna_Breach__Chimney__Top,
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
-        ) => 1949,
+        ) => 2000,
         (
             [false],
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
@@ -2180,12 +2220,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__SW_Save__Side_Door,
-        ) => 600,
+        ) => 550,
         (
             [false],
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 1500,
+        ) => 1400,
         (
             [false],
             SpotId::Giguna_Breach__SW_Save__North,
@@ -2195,7 +2235,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 500,
+        ) => 400,
         (
             [false],
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
@@ -2215,7 +2255,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna_Breach__SW_Save__Side_Door,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 899,
+        ) => 849,
         (
             [false],
             SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -2452,7 +2492,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1403,
+        ) => 1228,
         (
             [false],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
@@ -2498,12 +2538,12 @@ pub fn local_travel_time(
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1754,
-        // [1.22807, 0.7]
+        // [1.22807, 0.65]
         (
             [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 1928,
+        ) => 1878,
         (
             [false],
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
@@ -2982,15 +3022,15 @@ pub fn local_travel_time(
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Right_Pillar,
         ) => 1228,
-        // [0.5, 0.6]
+        // [0.55, 0.6]
         (
             [false],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1099,
-        // [0.5, 1.45]
+        ) => 1149,
+        // [0.55, 1.45]
         ([false], SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => {
-            1950
+            2000
         }
         (
             [false],
@@ -3058,7 +3098,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1099,
+        ) => 1149,
         (
             [false],
             SpotId::Giguna__Giguna_Base__Staircase_Top,
@@ -3068,7 +3108,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1349,
+        ) => 1350,
         (
             [false],
             SpotId::Giguna__Giguna_Base__West_Grate,
@@ -3128,11 +3168,6 @@ pub fn local_travel_time(
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 600,
-        (
-            [false],
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1578,
         (
             [false],
             SpotId::Giguna__Giguna_Base__East_17,
@@ -3197,7 +3232,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
-        ) => 701,
+        ) => 877,
         ([false], SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
             2280
         }
@@ -3230,13 +3265,13 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => 1052,
         ([false], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => 701,
         ([false], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => {
-            3600
+            3350
         }
         ([false], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => {
-            2399
+            2149
         }
         ([false], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => {
-            1228
+            1052
         }
         ([false], SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => {
             526
@@ -3261,7 +3296,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
-        ) => 400,
+        ) => 350,
         (
             [false],
             SpotId::Giguna__Ruins_Center__Center_Top,
@@ -3294,26 +3329,26 @@ pub fn local_travel_time(
         }
         ([false], SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__East_9) => 1578,
         ([false], SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => {
-            399
+            549
         }
         ([false], SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Nook) => 1200,
-        ([false], SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => 500,
+        ([false], SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => 350,
         (
             [false],
             SpotId::Giguna__Ruins_West__Lower_Ledge,
             SpotId::Giguna__Ruins_West__Platform,
-        ) => 1099,
+        ) => 949,
         ([false], SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Nook) => 599,
         (
             [false],
             SpotId::Giguna__Ruins_West__Upper_Ledge,
             SpotId::Giguna__Ruins_West__Platform,
-        ) => 2099,
+        ) => 2000,
         (
             [false],
             SpotId::Giguna__Ruins_West__Upper_Ledge,
             SpotId::Giguna__Ruins_West__Lower_Ledge,
-        ) => 1000,
+        ) => 1050,
         ([false], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => {
             1228
         }
@@ -3326,26 +3361,23 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
             SpotId::Giguna__Ruins_West__West_7,
-        ) => 899,
+        ) => 877,
         ([false], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => 877,
         ([false], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => {
-            799
+            750
         }
         ([false], SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             2982
         }
-        ([false], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => {
-            2982
-        }
-        ([false], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 614,
         (
             [false],
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             SpotId::Giguna__Ruins_Top__Portal_Left,
         ) => 299,
-        ([false], SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
-        ([false], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
-        ([false], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
+        ([false], SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 789,
+        ([false], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 614,
+        ([false], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 789,
         (
             [false],
             SpotId::Giguna__Ruins_Top__Upper_Tunnel,
@@ -3353,10 +3385,10 @@ pub fn local_travel_time(
         ) => 526,
         ([false], SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
         ([false], SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
-        ([false], SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 701,
-        ([false], SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 701,
+        ([false], SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 600,
+        ([false], SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 526,
         ([false], SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => {
-            350
+            526
         }
         (
             [false],
@@ -3372,9 +3404,9 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
-        ) => 701,
+        ) => 789,
         ([false], SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
-            1200
+            1250
         }
         (
             [false],
@@ -3385,12 +3417,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Switch,
-        ) => 701,
+        ) => 526,
         (
             [false],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-        ) => 1754,
+        ) => 1578,
         (
             [false],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
@@ -3405,11 +3437,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
             SpotId::Giguna__Ruins_Top__Entryway,
-        ) => 1599,
-        ([false], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1578,
-        ([false], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
-        ([false], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
-        ([false], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
+        ) => 1549,
+        ([false], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1228,
+        // [0.701754, 1.65]
+        ([false], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 2351,
+        ([false], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1403,
+        ([false], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 526,
         ([false], SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => 4385,
         ([false], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => 1550,
         ([false], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => 2400,
@@ -5952,68 +5985,69 @@ pub fn local_travel_time(
             SpotId::Antarctica__Freight_Elevator__Controls,
             SpotId::Antarctica__Freight_Elevator__Left,
         ) => 1929,
-        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1400,
+        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => 1349,
         ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => 1929,
-        // [1.4, 0.9]
-        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2299,
+        // [1.45, 0.9]
+        ([true], SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => 2349,
         ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => 1929,
-        // [0.877193, 1.754386]
-        ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2631,
+        // [0.877193, 1.666667]
+        ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => 2543,
         // [0.877193, 0.9]
         ([true], SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => 1777,
         ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => 1929,
         ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => 3157,
-        ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 999,
+        ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => 899,
         ([true], SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => 1929,
         ([true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => 3599,
         ([true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2456
+            2543
         }
         ([true], SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
             2456
         }
         ([true], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => 3599,
         ([true], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            2456
+            2543
         }
         ([true], SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            2631
+            2543
         }
         ([true], SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2631
+            2543
         }
         ([true], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => {
             2456
         }
+        // [1.2, 0.701754]
         (
             [true],
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1200,
+        ) => 1901,
         ([true], SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            1754
+            1315
         }
         ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            1754
+            1929
         }
         (
             [true],
             SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
-        ) => 701,
+        ) => 649,
         ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            2456
+            1842
         }
-        ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => 3333,
+        ([true], SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => 3157,
         ([true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
-            1754
+            1315
         }
-        ([true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 877,
-        ([true], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 877,
+        ([true], SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => 1315,
+        ([true], SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => 1315,
         ([true], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => 1052,
         ([true], SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => 2280,
         ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            2280
+            2105
         }
         ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => 1699,
         ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => 1052,
@@ -6022,15 +6056,15 @@ pub fn local_travel_time(
             2099
         }
         ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            2456
+            2543
         }
         (
             [true],
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Building_Entry,
-        ) => 1754,
+        ) => 1929,
         ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            4210
+            3771
         }
         ([true], SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => 1052,
         ([true], SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => 1052,
@@ -6038,19 +6072,19 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Building_Interior__Entry,
             SpotId::Ebih__Building_Interior__Corner,
-        ) => 1754,
+        ) => 1578,
         (
             [true],
             SpotId::Ebih__Building_Interior__Corner,
             SpotId::Ebih__Building_Interior__Entry,
-        ) => 1754,
-        ([true], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 350,
-        ([true], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 350,
+        ) => 1578,
+        ([true], SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => 263,
+        ([true], SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => 263,
         ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => 1578,
-        ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2631,
+        ([true], SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => 2807,
         ([true], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => 1578,
         ([true], SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            1052
+            1228
         }
         ([true], SpotId::Ebih__By_Garage__Crawlspace_Opening, SpotId::Ebih__By_Garage__East_13) => {
             1929
@@ -6065,17 +6099,17 @@ pub fn local_travel_time(
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
             SpotId::Ebih__By_Garage__Outcropping,
         ) => 600,
-        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2280,
+        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => 2105,
         ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => {
-            701
+            526
         }
         (
             [true],
             SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
-        ) => 350,
-        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1754,
-        ([true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1799,
+        ) => 200,
+        ([true], SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => 1929,
+        ([true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => 1929,
         ([true], SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
             1403
         }
@@ -6085,7 +6119,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__By_Garage__Lower_Platform,
             SpotId::Ebih__By_Garage__Garage_Entry,
-        ) => 2807,
+        ) => 2631,
         ([true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => 1754,
         ([true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
             400
@@ -6093,11 +6127,49 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => 1200,
         ([true], SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => 877,
         ([true], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => 1799,
-        ([true], SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => 4035,
-        ([true], SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => 4035,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__West_13,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+        ) => 877,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Lower_Platform,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__West_13,
+        ) => 877,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+        ) => 2982,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+        ) => 1578,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            SpotId::Ebih__By_Garage__East_13,
+        ) => 1228,
+        (
+            [true],
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            SpotId::Ebih__By_Garage__East_Platform,
+        ) => 2400,
         ([true], SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => 1578,
-        ([true], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1403,
-        ([true], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1403,
+        ([true], SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => 1228,
+        ([true], SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => 1228,
         ([true], SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => 1228,
         ([true], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => 1228,
         ([true], SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => 701,
@@ -6112,7 +6184,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 599,
+        ) => 700,
         (
             [true],
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
@@ -6123,7 +6195,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1000,
+        ) => 1050,
         (
             [true],
             SpotId::Ebih__Grid_25_10_12__Door_Left,
@@ -6133,13 +6205,13 @@ pub fn local_travel_time(
             1929
         }
         ([true], SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => {
-            1200
+            1250
         }
         (
             [true],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-        ) => 1399,
+        ) => 1500,
         (
             [true],
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
@@ -6183,15 +6255,15 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => 701,
         ([true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => 701,
         ([true], SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
-            1929
+            2105
         }
-        ([true], SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => 2631,
-        ([true], SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => 2631,
+        ([true], SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => 2807,
+        ([true], SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => 2807,
         (
             [true],
             SpotId::Ebih__Waterfall__Near_East_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1403,
+        ) => 1052,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Right,
@@ -6201,27 +6273,27 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 1578,
+        ) => 1754,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => 1929,
+        ) => 2105,
         (
             [true],
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1578,
+        ) => 1754,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 1929,
+        ) => 2105,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => 500,
+        ) => 449,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
@@ -6246,12 +6318,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Alcove_Left,
-        ) => 300,
+        ) => 250,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
+        ) => 701,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -6266,7 +6338,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1052,
+        ) => 877,
         (
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Left,
@@ -6276,7 +6348,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 877,
+        ) => 1052,
         ([true], SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => {
             2105
         }
@@ -6299,12 +6371,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => 1228,
+        ) => 1403,
         (
             [true],
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-        ) => 799,
+        ) => 750,
         ([true], SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => {
             1754
         }
@@ -6313,8 +6385,9 @@ pub fn local_travel_time(
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Waterfall_Left,
         ) => 1052,
+        // [0.3, 1.140351]
         ([true], SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => {
-            1052
+            1440
         }
         (
             [true],
@@ -6333,7 +6406,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             SpotId::Ebih__Waterfall__West_Climb,
-        ) => 500,
+        ) => 450,
         ([true], SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => {
             701
         }
@@ -6350,21 +6423,21 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-        ) => 299,
+        ) => 249,
         ([true], SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => 877,
         ([true], SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Climb) => {
-            900
+            850
         }
         (
             [true],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-        ) => 400,
+        ) => 399,
         (
             [true],
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-        ) => 199,
+        ) => 175,
         (
             [true],
             SpotId::Ebih__Waterfall__West_Door_Right,
@@ -6392,7 +6465,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 2456,
+        ) => 2280,
         (
             [true],
             SpotId::Ebih__Waterfall__West_Main_Path,
@@ -6407,22 +6480,22 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => 4210,
+        ) => 4561,
         (
             [true],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => 2199,
+        ) => 2150,
         (
             [true],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-        ) => 2456,
+        ) => 2280,
         (
             [true],
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__West_Lower_Path,
-        ) => 3157,
+        ) => 2982,
         (
             [true],
             SpotId::Ebih__Waterfall__Center_Main_Path,
@@ -6432,7 +6505,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Center_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => 1052,
+        ) => 1228,
         ([true], SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => {
             2456
         }
@@ -6455,44 +6528,45 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Waterfall__Top_Waterfall,
             SpotId::Ebih__Waterfall__Center_Main_Path,
-        ) => 799,
+        ) => 750,
         ([true], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => 7719,
         ([true], SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => 5964,
         ([true], SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => 5964,
         ([true], SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => 1578,
         ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => 1578,
         ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            2105
+            2280
         }
+        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => 3157,
         ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => 2400,
-        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 799,
+        ([true], SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => 899,
         ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            2105
+            2280
         }
-        ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => 2807,
+        ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => 2368,
         ([true], SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => {
-            1754
+            1929
         }
-        ([true], SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2807,
+        ([true], SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => 2368,
         ([true], SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => 3157,
         (
             [true],
             SpotId::Ebih__Ebih_West__Above_Alcove,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1052,
+        ) => 877,
         ([true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => 999,
         ([true], SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => 1578,
         ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => 526,
-        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1300,
-        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1100,
+        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => 1400,
+        ([true], SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => 1150,
         ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => 526,
         ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => 1052,
-        ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1300,
+        ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => 1400,
         ([true], SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            1100
+            1150
         }
         ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            3250
+            3150
         }
         ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             3157
@@ -6504,13 +6578,13 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
         ) => 1200,
         ([true], SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
-            1450
+            1578
         }
         (
             [true],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 3450,
+        ) => 3400,
         (
             [true],
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
@@ -6527,21 +6601,21 @@ pub fn local_travel_time(
             SpotId::Ebih__Ebih_West__High_Platform,
         ) => 1200,
         ([true], SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
-            649
+            725
         }
         (
             [true],
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
-        ) => 350,
-        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 750,
+        ) => 375,
+        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => 799,
         ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => {
-            701
+            526
         }
-        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1228,
-        ([true], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1228,
-        ([true], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 877,
-        ([true], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 877,
+        ([true], SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => 1403,
+        ([true], SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => 1403,
+        ([true], SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => 1052,
+        ([true], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => 1052,
         ([true], SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
             2105
         }
@@ -6549,9 +6623,9 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => 1800,
+        ) => 1750,
         ([true], SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => {
-            1754
+            1578
         }
         ([true], SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Middle) => {
             2105
@@ -6563,7 +6637,6 @@ pub fn local_travel_time(
             700
         }
         ([true], SpotId::Ebih__Ebih_West__Block_Right, SpotId::Ebih__Ebih_West__East_11) => 1052,
-        ([true], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => 877,
         ([true], SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => {
             526
         }
@@ -6648,12 +6721,12 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Moving_Platform) => {
             2631
         }
-        ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 350,
+        ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => 400,
         (
             [true],
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-        ) => 999,
+        ) => 1099,
         ([true], SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
             1200
         }
@@ -6724,12 +6797,12 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => 877,
         ([true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => 1403,
         ([true], SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => 2982,
-        ([true], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 500,
-        ([true], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 877,
+        ([true], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => 526,
+        ([true], SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => 1052,
         ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => 2631,
         ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => 1578,
-        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 1000,
-        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 877,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => 850,
+        ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => 1052,
         ([true], SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => {
             1578
         }
@@ -6745,12 +6818,12 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => {
             1228
         }
-        // [1.0, 0.701754]
-        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1701,
-        // [0.9, 0.7]
-        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1600,
+        // [1.05, 0.701754]
+        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => 1751,
+        // [0.95, 0.7]
+        ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => 1650,
         ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => {
-            1400
+            1449
         }
         ([true], SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => 877,
         ([true], SpotId::Ebih__Drone_Room__Pit_Left, SpotId::Ebih__Drone_Room__Portal) => 1052,
@@ -6864,9 +6937,9 @@ pub fn local_travel_time(
             SpotId::Ebih__Grid_26_10_11__Upper_Platform,
             SpotId::Ebih__Grid_26_10_11__Ledge,
         ) => 877,
-        // [0.526316, 1.0]
+        // [0.526316, 1.05]
         ([true], SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => {
-            1526
+            1576
         }
         (
             [true],
@@ -6990,7 +7063,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => 500,
+        ) => 550,
         (
             [true],
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
@@ -7075,12 +7148,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna_Breach__Peak__East_Passage,
-        ) => 3508,
+        ) => 3421,
         (
             [true],
             SpotId::Giguna_Breach__Peak__East_Passage,
             SpotId::Giguna_Breach__Peak__Save_Point,
-        ) => 3508,
+        ) => 3421,
         (
             [true],
             SpotId::Giguna_Breach__Peak__East_Passage,
@@ -7091,7 +7164,7 @@ pub fn local_travel_time(
             SpotId::Giguna_Breach__Peak__Column,
             SpotId::Giguna_Breach__Peak__East_Passage,
         ) => 799,
-        ([true], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 701,
+        ([true], SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => 750,
         ([true], SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
             1200
         }
@@ -7124,7 +7197,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna_Breach__Chimney__Top,
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
-        ) => 1949,
+        ) => 2000,
         (
             [true],
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
@@ -7242,12 +7315,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__SW_Save__Side_Door,
-        ) => 600,
+        ) => 550,
         (
             [true],
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 1500,
+        ) => 1400,
         (
             [true],
             SpotId::Giguna_Breach__SW_Save__North,
@@ -7257,7 +7330,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 500,
+        ) => 400,
         (
             [true],
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
@@ -7277,7 +7350,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna_Breach__SW_Save__Side_Door,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => 899,
+        ) => 849,
         (
             [true],
             SpotId::Giguna_Breach__SW_Save__Save_Point,
@@ -7508,7 +7581,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => 1403,
+        ) => 1228,
         (
             [true],
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
@@ -7554,12 +7627,12 @@ pub fn local_travel_time(
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
         ) => 1754,
-        // [1.22807, 0.7]
+        // [1.22807, 0.65]
         (
             [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => 1928,
+        ) => 1878,
         (
             [true],
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
@@ -8018,15 +8091,15 @@ pub fn local_travel_time(
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Right_Pillar,
         ) => 1228,
-        // [0.5, 0.6]
+        // [0.55, 0.6]
         (
             [true],
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => 1099,
-        // [0.5, 1.45]
+        ) => 1149,
+        // [0.55, 1.45]
         ([true], SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => {
-            1950
+            2000
         }
         (
             [true],
@@ -8094,7 +8167,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => 1099,
+        ) => 1149,
         (
             [true],
             SpotId::Giguna__Giguna_Base__Staircase_Top,
@@ -8104,7 +8177,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Save_Point,
-        ) => 1349,
+        ) => 1350,
         (
             [true],
             SpotId::Giguna__Giguna_Base__West_Grate,
@@ -8162,9 +8235,6 @@ pub fn local_travel_time(
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
         ) => 600,
-        ([true], SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            1578
-        }
         ([true], SpotId::Giguna__Giguna_Base__East_17, SpotId::Giguna__Giguna_Base__Lower_Fork) => {
             1200
         }
@@ -8225,7 +8295,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
-        ) => 701,
+        ) => 877,
         ([true], SpotId::Giguna__Ruins_East__East_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => {
             2280
         }
@@ -8254,13 +8324,13 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__Ledge) => 1052,
         ([true], SpotId::Giguna__Ruins_East__Pillar, SpotId::Giguna__Ruins_East__West_7) => 701,
         ([true], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => {
-            3600
+            3350
         }
         ([true], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => {
-            2399
+            2149
         }
         ([true], SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => {
-            1228
+            1052
         }
         ([true], SpotId::Giguna__Ruins_Center__East_8, SpotId::Giguna__Ruins_Center__Tablet) => 526,
         ([true], SpotId::Giguna__Ruins_Center__Tablet, SpotId::Giguna__Ruins_Center__East_8) => 526,
@@ -8281,7 +8351,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
-        ) => 400,
+        ) => 350,
         (
             [true],
             SpotId::Giguna__Ruins_Center__Center_Top,
@@ -8314,22 +8384,22 @@ pub fn local_travel_time(
         }
         ([true], SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__East_9) => 1578,
         ([true], SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => {
-            399
+            549
         }
         ([true], SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Nook) => 1200,
-        ([true], SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => 500,
+        ([true], SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => 350,
         ([true], SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
-            1099
+            949
         }
         ([true], SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Nook) => 599,
         ([true], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
-            2099
+            2000
         }
         (
             [true],
             SpotId::Giguna__Ruins_West__Upper_Ledge,
             SpotId::Giguna__Ruins_West__Lower_Ledge,
-        ) => 1000,
+        ) => 1050,
         ([true], SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => {
             1228
         }
@@ -8342,26 +8412,23 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
             SpotId::Giguna__Ruins_West__West_7,
-        ) => 899,
+        ) => 877,
         ([true], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => 877,
         ([true], SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => {
-            799
+            750
         }
         ([true], SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             2982
         }
-        ([true], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => {
-            2982
-        }
-        ([true], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 701,
+        ([true], SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => 614,
         (
             [true],
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             SpotId::Giguna__Ruins_Top__Portal_Left,
         ) => 299,
-        ([true], SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 877,
-        ([true], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 701,
-        ([true], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 877,
+        ([true], SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => 789,
+        ([true], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => 614,
+        ([true], SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => 789,
         (
             [true],
             SpotId::Giguna__Ruins_Top__Upper_Tunnel,
@@ -8369,9 +8436,9 @@ pub fn local_travel_time(
         ) => 526,
         ([true], SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Flask) => 701,
         ([true], SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => 701,
-        ([true], SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 701,
-        ([true], SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 701,
-        ([true], SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => 350,
+        ([true], SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => 600,
+        ([true], SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => 526,
+        ([true], SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => 526,
         (
             [true],
             SpotId::Giguna__Ruins_Top__Rooftop_West,
@@ -8386,9 +8453,9 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
-        ) => 701,
+        ) => 789,
         ([true], SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
-            1200
+            1250
         }
         (
             [true],
@@ -8399,12 +8466,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Switch,
-        ) => 701,
+        ) => 526,
         (
             [true],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-        ) => 1754,
+        ) => 1578,
         (
             [true],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
@@ -8419,11 +8486,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
             SpotId::Giguna__Ruins_Top__Entryway,
-        ) => 1599,
-        ([true], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1578,
-        ([true], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 1800,
-        ([true], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1578,
-        ([true], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 350,
+        ) => 1549,
+        ([true], SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => 1228,
+        // [0.701754, 1.65]
+        ([true], SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => 2351,
+        ([true], SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => 1403,
+        ([true], SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => 526,
         ([true], SpotId::Giguna__Helipad__East_15, SpotId::Giguna__Helipad__Helicopter) => 4385,
         ([true], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Helicopter) => 1550,
         ([true], SpotId::Giguna__Helipad__North, SpotId::Giguna__Helipad__Irikar_Drop) => 2400,
@@ -10620,22 +10688,33 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => true,
         (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => true,
         (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => true,
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => true,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => true,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__Lower_Platform) => true,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_13) => true,
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Platform) => true,
+        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__West_Below_Platforms) => true,
+        (SpotId::Ebih__By_Garage__West_Below_Platforms, SpotId::Ebih__By_Garage__West_13) => true,
+        (SpotId::Ebih__By_Garage__West_Below_Platforms, SpotId::Ebih__By_Garage__Garage_Entry) => {
+            true
+        }
+        (
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Lower_Platform,
+        ) => true,
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_Below_Platforms) => {
+            true
+        }
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Below_Platforms) => {
+            true
+        }
+        (SpotId::Ebih__By_Garage__East_Below_Platforms, SpotId::Ebih__By_Garage__East_13) => true,
+        (SpotId::Ebih__By_Garage__East_Below_Platforms, SpotId::Ebih__By_Garage__East_Platform) => {
+            true
+        }
         (SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => true,
         (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => true,
         (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => true,
         (SpotId::Ebih__Grid_25_10_12__East_12, SpotId::Ebih__Grid_25_10_12__Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => true,
-        (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Mid_Ledge) => true,
         (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__West_12, SpotId::Ebih__Grid_25_10_12__Below_Bush) => true,
         (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__West_12) => true,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Bush) => true,
-        (SpotId::Ebih__Grid_25_10_12__Below_Bush, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__West_11) => true,
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Door_Left) => true,
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => true,
@@ -10715,21 +10794,12 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         ) => true,
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            SpotId::Ebih__Waterfall__Cave_Entrance,
-        ) => true,
-        (
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
         ) => true,
         (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Waterfall_Center_Left) => {
             true
         }
         (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => true,
-        (SpotId::Ebih__Waterfall__Under_Waterfall, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
-        (
-            SpotId::Ebih__Waterfall__Under_Waterfall,
-            SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => true,
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => true,
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => true,
         (
@@ -10740,9 +10810,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Waterfall__Wall_Right, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
         (SpotId::Ebih__Waterfall__Wall_Left, SpotId::Ebih__Waterfall__West_11) => true,
         (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => true,
-        (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__West_Lower_Path) => {
-            true
-        }
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => true,
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Under_Waterfall) => {
@@ -10759,7 +10826,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         }
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => true,
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Waterfall_Left) => true,
-        (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
         (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => true,
         (SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => true,
         (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => true,
@@ -10798,8 +10864,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
             true
         }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => true,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Main_Path) => true,
-        (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Center_Main_Path) => true,
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Lower_Path) => true,
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Lower_West_Tree) => true,
         (
@@ -10991,8 +11055,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_6) => true,
         (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Past_Boss) => true,
         (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Lower_Tree) => true,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__Upper_Tree) => true,
-        (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__High_Platform) => true,
         (SpotId::Ebih__Boss_Room__Boss, SpotId::Ebih__Boss_Room__West_5) => true,
         (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => true,
         (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => true,
@@ -11835,7 +11897,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__Passage_East) => true,
         (SpotId::Giguna__Wasteland__Westward_Hill, SpotId::Giguna__Wasteland__West_Plains) => true,
         (SpotId::Giguna__Giguna_Base__East_14, SpotId::Giguna__Giguna_Base__Stone_Knob) => true,
-        (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Upper_Cliff) => true,
         (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Kari) => true,
         (SpotId::Giguna__Giguna_Base__Stone_Knob, SpotId::Giguna__Giguna_Base__Middle_Platform) => {
             true
@@ -11993,10 +12054,6 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (
             SpotId::Giguna__Ruins_Center__West_Platform_Right,
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
-        ) => true,
-        (
-            SpotId::Giguna__Ruins_Center__West_Platform_Right,
-            SpotId::Giguna__Ruins_Center__Center_Top,
         ) => true,
         (
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
@@ -15249,7 +15306,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__East_12,
-            1400,
+            1349,
         ),
         (
             SpotId::Ebih__Base_Camp__East_11,
@@ -15259,7 +15316,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__East_11,
             SpotId::Ebih__Base_Camp__Lake_Access,
-            2299,
+            2349,
         ),
         (
             SpotId::Ebih__Base_Camp__East_11,
@@ -15284,7 +15341,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__East_12,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            2631,
+            2543,
         ),
         (
             SpotId::Ebih__Base_Camp__East_12,
@@ -15314,7 +15371,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Staircase,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            999,
+            899,
         ),
         (
             SpotId::Ebih__Base_Camp__Staircase,
@@ -15334,7 +15391,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Save_Point,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            2456,
+            2543,
         ),
         (
             SpotId::Ebih__Base_Camp__Save_Point,
@@ -15354,12 +15411,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Save_Point,
-            2456,
+            2543,
         ),
         (
             SpotId::Ebih__Base_Camp__Bunker_Entry,
             SpotId::Ebih__Base_Camp__Lake_Access,
-            2631,
+            2543,
         ),
         (
             SpotId::Ebih__Base_Camp__Bunker_Entry,
@@ -15374,7 +15431,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Lake_Access,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            2631,
+            2543,
         ),
         (
             SpotId::Ebih__Base_Camp__Lake_Access,
@@ -15394,12 +15451,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Building_Entry,
-            1200,
+            1901,
         ),
         (
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
             SpotId::Ebih__Base_Camp__Tent_Entry,
-            1754,
+            1315,
         ),
         (
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
@@ -15409,22 +15466,22 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__Save_Point,
-            1754,
+            1929,
         ),
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            701,
+            649,
         ),
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__Tent_Entry,
-            2456,
+            1842,
         ),
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
             SpotId::Ebih__Base_Camp__West_13,
-            3333,
+            3157,
         ),
         (
             SpotId::Ebih__Base_Camp__Building_Entry,
@@ -15439,12 +15496,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__Behind_Vehicle,
-            1754,
+            1315,
         ),
         (
             SpotId::Ebih__Base_Camp__Tent_Entry,
             SpotId::Ebih__Base_Camp__West_13,
-            877,
+            1315,
         ),
         (
             SpotId::Ebih__Base_Camp__Tent_Entry,
@@ -15459,7 +15516,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__West_13,
             SpotId::Ebih__Base_Camp__Tent_Entry,
-            877,
+            1315,
         ),
         (
             SpotId::Ebih__Base_Camp__West_13,
@@ -15494,7 +15551,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__West_Midair,
             SpotId::Ebih__Base_Camp__Building_Entry,
-            2280,
+            2105,
         ),
         (
             SpotId::Ebih__Base_Camp__West_Midair,
@@ -15564,17 +15621,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Bunker_Entry,
-            2456,
+            2543,
         ),
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Building_Entry,
-            1754,
+            1929,
         ),
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Tent_Entry,
-            4210,
+            3771,
         ),
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
@@ -15624,7 +15681,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Building_Interior__Entry,
             SpotId::Ebih__Building_Interior__Corner,
-            1754,
+            1578,
         ),
         (
             SpotId::Ebih__Building_Interior__Entry,
@@ -15634,7 +15691,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Building_Interior__Corner,
             SpotId::Ebih__Building_Interior__Entry,
-            1754,
+            1578,
         ),
         (
             SpotId::Ebih__Building_Interior__Corner,
@@ -15649,7 +15706,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Tent_Interior__Entry,
             SpotId::Ebih__Tent_Interior__Desk,
-            350,
+            263,
         ),
         (
             SpotId::Ebih__Tent_Interior__Entry,
@@ -15659,7 +15716,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Tent_Interior__Desk,
             SpotId::Ebih__Tent_Interior__Entry,
-            350,
+            263,
         ),
         (
             SpotId::Ebih__Tent_Interior__Desk,
@@ -15679,7 +15736,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__By_Garage__East_13,
             SpotId::Ebih__By_Garage__Garage_Entry,
-            2631,
+            2807,
         ),
         (
             SpotId::Ebih__By_Garage__East_13,
@@ -15704,7 +15761,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__By_Garage__East_Platform,
             SpotId::Ebih__By_Garage__Garage_Entry,
-            1052,
+            1228,
         ),
         (
             SpotId::Ebih__By_Garage__East_Platform,
@@ -15749,22 +15806,22 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__East_13,
-            2280,
+            2105,
         ),
         (
             SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__East_Platform,
-            701,
+            526,
         ),
         (
             SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__Crawlspace_Opening,
-            350,
+            200,
         ),
         (
             SpotId::Ebih__By_Garage__Outcropping,
             SpotId::Ebih__By_Garage__East_Bush,
-            1754,
+            1929,
         ),
         (
             SpotId::Ebih__By_Garage__Outcropping,
@@ -15774,7 +15831,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__By_Garage__East_Bush,
             SpotId::Ebih__By_Garage__Outcropping,
-            1799,
+            1929,
         ),
         (
             SpotId::Ebih__By_Garage__East_Bush,
@@ -15809,7 +15866,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__By_Garage__Lower_Platform,
             SpotId::Ebih__By_Garage__Garage_Entry,
-            2807,
+            2631,
         ),
         (
             SpotId::Ebih__By_Garage__Lower_Platform,
@@ -15858,8 +15915,8 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__West_13,
-            SpotId::Ebih__By_Garage__Garage_Entry,
-            4035,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            877,
         ),
         (
             SpotId::Ebih__By_Garage__West_13,
@@ -15867,9 +15924,34 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Lower_Platform,
+            1799,
+        ),
+        (
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
             SpotId::Ebih__By_Garage__West_13,
-            4035,
+            877,
+        ),
+        (
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            2982,
+        ),
+        (
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            2982,
+        ),
+        (
+            SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            1578,
         ),
         (
             SpotId::Ebih__By_Garage__Garage_Entry,
@@ -15878,6 +15960,21 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Ebih__By_Garage__Garage_Entry,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            SpotId::Ebih__By_Garage__East_13,
+            1228,
+        ),
+        (
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
+            SpotId::Ebih__By_Garage__East_Platform,
+            2400,
+        ),
+        (
+            SpotId::Ebih__By_Garage__East_Below_Platforms,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -15899,7 +15996,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Garage__Entry,
             SpotId::Ebih__Garage__Boxes,
-            1403,
+            1228,
         ),
         (
             SpotId::Ebih__Garage__Entry,
@@ -15909,7 +16006,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Garage__Boxes,
             SpotId::Ebih__Garage__Entry,
-            1403,
+            1228,
         ),
         (
             SpotId::Ebih__Garage__Boxes,
@@ -15984,7 +16081,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            599,
+            700,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
@@ -16009,7 +16106,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__Door_Left,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            1000,
+            1050,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Door_Left,
@@ -16034,12 +16131,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Bush,
-            1200,
+            1250,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
             SpotId::Ebih__Grid_25_10_12__Below_Bush,
-            1399,
+            1500,
         ),
         (
             SpotId::Ebih__Grid_25_10_12__Top_Platform,
@@ -16189,7 +16286,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__East_Ledge,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-            1929,
+            2105,
         ),
         (
             SpotId::Ebih__Waterfall__East_Ledge,
@@ -16204,7 +16301,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__East_11,
             SpotId::Ebih__Waterfall__Near_East_Tree,
-            2631,
+            2807,
         ),
         (
             SpotId::Ebih__Waterfall__East_11,
@@ -16214,12 +16311,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Near_East_Tree,
             SpotId::Ebih__Waterfall__East_11,
-            2631,
+            2807,
         ),
         (
             SpotId::Ebih__Waterfall__Near_East_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-            1403,
+            1052,
         ),
         (
             SpotId::Ebih__Waterfall__Near_East_Tree,
@@ -16234,12 +16331,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-            1578,
+            1754,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-            1929,
+            2105,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Right,
@@ -16249,12 +16346,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-            1578,
+            1754,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Right,
             SpotId::Ebih__Waterfall__Alcove,
-            1228,
+            1315,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Right,
@@ -16264,12 +16361,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-            1929,
+            2105,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-            500,
+            449,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
@@ -16304,12 +16401,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Alcove_Left,
-            300,
+            250,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-            877,
+            701,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -16334,12 +16431,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Alcove,
-            1578,
+            1491,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-            1052,
+            877,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove_Left,
@@ -16349,12 +16446,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Alcove,
             SpotId::Ebih__Waterfall__Alcove_Right,
-            1228,
+            1315,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove,
             SpotId::Ebih__Waterfall__Alcove_Left,
-            1578,
+            1491,
         ),
         (
             SpotId::Ebih__Waterfall__Alcove,
@@ -16364,7 +16461,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Under_Waterfall,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-            1100,
+            1799,
         ),
         (
             SpotId::Ebih__Waterfall__Under_Waterfall,
@@ -16379,7 +16476,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-            877,
+            1052,
         ),
         (
             SpotId::Ebih__Waterfall__Waterfall_Left,
@@ -16454,12 +16551,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-            1228,
+            1403,
         ),
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__Waterfall_Left,
-            799,
+            750,
         ),
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -16469,7 +16566,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
             SpotId::Ebih__Waterfall__West_Lower_Path,
-            1000,
+            1200,
         ),
         (
             SpotId::Ebih__Waterfall__Lower_West_Tree,
@@ -16484,7 +16581,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Lower_Path,
             SpotId::Ebih__Waterfall__Wall_Right,
-            1052,
+            1440,
         ),
         (
             SpotId::Ebih__Waterfall__West_Lower_Path,
@@ -16549,7 +16646,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
             SpotId::Ebih__Waterfall__West_Climb,
-            500,
+            450,
         ),
         (
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
@@ -16609,7 +16706,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door_Left,
             SpotId::Ebih__Waterfall__Below_Left_Switch,
-            299,
+            249,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Left,
@@ -16644,12 +16741,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__West_Climb,
-            900,
+            850,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Ledge_Below_Hole,
-            400,
+            399,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
@@ -16659,7 +16756,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
             SpotId::Ebih__Waterfall__Middle_West_Tree,
-            199,
+            175,
         ),
         (
             SpotId::Ebih__Waterfall__West_Door_Right,
@@ -16704,7 +16801,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__West_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-            2456,
+            2280,
         ),
         (
             SpotId::Ebih__Waterfall__West_Main_Path,
@@ -16724,22 +16821,22 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-            4210,
+            4561,
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-            2199,
+            2150,
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Lower_West_Tree,
-            2456,
+            2280,
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__West_Lower_Path,
-            3157,
+            2982,
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
@@ -16759,7 +16856,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Center_Main_Path,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-            1052,
+            1228,
         ),
         (
             SpotId::Ebih__Waterfall__Center_Main_Path,
@@ -16864,7 +16961,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Top_Waterfall,
             SpotId::Ebih__Waterfall__Center_Main_Path,
-            799,
+            750,
         ),
         (
             SpotId::Ebih__Waterfall__Top_Waterfall,
@@ -16919,7 +17016,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            2105,
+            2280,
+        ),
+        (
+            SpotId::Ebih__Ebih_West__Mid_Save,
+            SpotId::Ebih__Ebih_West__Above_Alcove,
+            3157,
         ),
         (
             SpotId::Ebih__Ebih_West__Mid_Save,
@@ -16929,7 +17031,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Mid_Save,
             SpotId::Ebih__Ebih_West__Block_Left,
-            799,
+            899,
         ),
         (
             SpotId::Ebih__Ebih_West__Mid_Save,
@@ -16939,12 +17041,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Mid_Save,
-            2105,
+            2280,
         ),
         (
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Alcove,
-            2807,
+            2368,
         ),
         (
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
@@ -16954,7 +17056,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
             SpotId::Ebih__Ebih_West__Block_Left,
-            1754,
+            1929,
         ),
         (
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
@@ -16964,7 +17066,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Alcove,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            2807,
+            2368,
         ),
         (
             SpotId::Ebih__Ebih_West__Alcove,
@@ -16979,7 +17081,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Above_Alcove,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            1052,
+            877,
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Alcove,
@@ -17039,12 +17141,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__East_7,
             SpotId::Ebih__Ebih_West__East_8,
-            1300,
+            1400,
         ),
         (
             SpotId::Ebih__Ebih_West__East_7,
             SpotId::Ebih__Ebih_West__Middle_Middle,
-            1100,
+            1150,
         ),
         (
             SpotId::Ebih__Ebih_West__East_7,
@@ -17064,12 +17166,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__East_8,
-            1300,
+            1400,
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Chute,
             SpotId::Ebih__Ebih_West__Middle_Middle,
-            1100,
+            1150,
         ),
         (
             SpotId::Ebih__Ebih_West__Above_Chute,
@@ -17079,7 +17181,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            3250,
+            3150,
         ),
         (
             SpotId::Ebih__Ebih_West__Upper_Save,
@@ -17099,7 +17201,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Upper_Save,
             SpotId::Ebih__Ebih_West__Middle_Cliff,
-            1450,
+            1578,
         ),
         (
             SpotId::Ebih__Ebih_West__Upper_Save,
@@ -17109,7 +17211,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            3450,
+            3400,
         ),
         (
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
@@ -17139,17 +17241,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Upper_Save,
-            649,
+            725,
         ),
         (
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
-            350,
+            375,
         ),
         (
             SpotId::Ebih__Ebih_West__High_Platform,
             SpotId::Ebih__Ebih_West__High_Ledge,
-            1000,
+            1200,
         ),
         (
             SpotId::Ebih__Ebih_West__High_Platform,
@@ -17159,17 +17261,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__Upper_Save,
-            750,
+            799,
         ),
         (
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__High_Platform,
-            701,
+            526,
         ),
         (
             SpotId::Ebih__Ebih_West__High_Ledge,
             SpotId::Ebih__Ebih_West__East_6,
-            1228,
+            1403,
         ),
         (
             SpotId::Ebih__Ebih_West__High_Ledge,
@@ -17179,12 +17281,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__East_6,
             SpotId::Ebih__Ebih_West__High_Ledge,
-            1228,
+            1403,
         ),
         (
             SpotId::Ebih__Ebih_West__East_6,
             SpotId::Ebih__Grid_21_2_6__West_6,
-            1000,
+            1350,
         ),
         (
             SpotId::Ebih__Ebih_West__East_6,
@@ -17199,7 +17301,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__East_8,
             SpotId::Ebih__Ebih_West__Middle_Middle,
-            877,
+            1052,
         ),
         (
             SpotId::Ebih__Ebih_West__East_8,
@@ -17219,7 +17321,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Middle_Middle,
             SpotId::Ebih__Ebih_West__East_8,
-            877,
+            1052,
         ),
         (
             SpotId::Ebih__Ebih_West__Middle_Middle,
@@ -17234,12 +17336,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-            1800,
+            1750,
         ),
         (
             SpotId::Ebih__Ebih_West__Middle_Cliff,
             SpotId::Ebih__Ebih_West__Above_Alcove,
-            1754,
+            1578,
         ),
         (
             SpotId::Ebih__Ebih_West__Middle_Cliff,
@@ -17300,11 +17402,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Ebih__Ebih_West__Block_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
-        ),
-        (
-            SpotId::Ebih__Ebih_West__Refill_Station,
-            SpotId::Ebih__Ebih_West__East_11,
-            877,
         ),
         (
             SpotId::Ebih__Ebih_West__Refill_Station,
@@ -17719,12 +17816,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Ledge_End,
-            350,
+            400,
         ),
         (
             SpotId::Ebih__Ebih_East__East_Ledge,
             SpotId::Ebih__Ebih_East__Lower_Moving_Platform,
-            999,
+            1099,
         ),
         (
             SpotId::Ebih__Ebih_East__East_Ledge,
@@ -18024,12 +18121,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Lower_Ledge,
-            500,
+            526,
         ),
         (
             SpotId::Ebih__Boss_Room__East_Ledge,
             SpotId::Ebih__Boss_Room__Upper_Tree,
-            877,
+            1052,
         ),
         (
             SpotId::Ebih__Boss_Room__East_Ledge,
@@ -18049,12 +18146,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__Lower_Tree,
-            1000,
+            850,
         ),
         (
             SpotId::Ebih__Boss_Room__Upper_Tree,
             SpotId::Ebih__Boss_Room__East_Ledge,
-            877,
+            1052,
         ),
         (
             SpotId::Ebih__Boss_Room__Upper_Tree,
@@ -18134,17 +18231,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__West_6,
-            1701,
+            1751,
         ),
         (
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Pit_Left,
-            1600,
+            1650,
         ),
         (
             SpotId::Ebih__Drone_Room__West_4,
             SpotId::Ebih__Drone_Room__Middle_Platform,
-            1400,
+            1449,
         ),
         (
             SpotId::Ebih__Drone_Room__West_4,
@@ -18499,7 +18596,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Grid_26_10_11__West_10,
             SpotId::Ebih__Grid_26_10_11__West_11,
-            1526,
+            1576,
         ),
         (
             SpotId::Ebih__Grid_26_10_11__West_10,
@@ -18779,7 +18876,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-            500,
+            550,
+        ),
+        (
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            SpotId::Ebih__Gem_Room__West_13,
+            1350,
         ),
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
@@ -19032,9 +19134,19 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
+            SpotId::Ebih__Gem_Room__West_13,
+            SpotId::Ebih__Vertical_Interchange__East_13,
+            1350,
+        ),
+        (
+            SpotId::Ebih__Gem_Room__West_13,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
             SpotId::Giguna_Breach__Peak__Save_Point,
             SpotId::Giguna_Breach__Peak__East_Passage,
-            3508,
+            3421,
         ),
         (
             SpotId::Giguna_Breach__Peak__Save_Point,
@@ -19044,7 +19156,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__Peak__East_Passage,
             SpotId::Giguna_Breach__Peak__Save_Point,
-            3508,
+            3421,
         ),
         (
             SpotId::Giguna_Breach__Peak__East_Passage,
@@ -19064,7 +19176,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__Peak__Column,
             SpotId::Giguna_Breach__Peak__West_7,
-            701,
+            750,
         ),
         (
             SpotId::Giguna_Breach__Peak__Column,
@@ -19164,7 +19276,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__Chimney__Top,
             SpotId::Giguna_Breach__Chimney__Middle_Platform,
-            1949,
+            2000,
         ),
         (
             SpotId::Giguna_Breach__Chimney__Top,
@@ -19399,12 +19511,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__SW_Save__Side_Door,
-            600,
+            550,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__North,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-            1500,
+            1400,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__North,
@@ -19424,7 +19536,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-            500,
+            400,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
@@ -19454,7 +19566,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna_Breach__SW_Save__Side_Door,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-            899,
+            849,
         ),
         (
             SpotId::Giguna_Breach__SW_Save__Side_Door,
@@ -20074,7 +20186,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
-            1403,
+            1228,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
@@ -20194,7 +20306,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
-            1928,
+            1878,
         ),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
@@ -21404,12 +21516,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
-            1099,
+            1149,
         ),
         (
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Kari,
-            1950,
+            2000,
         ),
         (
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
@@ -21569,7 +21681,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-            1099,
+            1149,
         ),
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
@@ -21579,7 +21691,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Save_Point,
-            1349,
+            1350,
         ),
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
@@ -21690,11 +21802,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna__Giguna_Base__West_16,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
             600,
-        ),
-        (
-            SpotId::Giguna__Giguna_Base__West_16,
-            SpotId::Giguna__Giguna_Base__Save_Point,
-            1578,
         ),
         (
             SpotId::Giguna__Giguna_Base__West_16,
@@ -21834,7 +21941,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
-            701,
+            877,
         ),
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
@@ -21928,6 +22035,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_East__Ledge,
+            SpotId::Giguna__Ruins_East__Pillar,
+            4200,
+        ),
+        (
+            SpotId::Giguna__Ruins_East__Ledge,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -21994,17 +22106,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_East__Way_Up_High,
             SpotId::Giguna__Ruins_East__East_9,
-            3600,
+            3350,
         ),
         (
             SpotId::Giguna__Ruins_East__Way_Up_High,
             SpotId::Giguna__Ruins_East__Cliff,
-            2399,
+            2149,
         ),
         (
             SpotId::Giguna__Ruins_East__Way_Up_High,
             SpotId::Giguna__Ruins_East__Pillar,
-            1228,
+            1052,
         ),
         (
             SpotId::Giguna__Ruins_East__Way_Up_High,
@@ -22059,7 +22171,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
             SpotId::Giguna__Ruins_Center__Wall_Top,
-            1000,
+            1200,
         ),
         (
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
@@ -22074,7 +22186,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Center__Wall_Top,
             SpotId::Giguna__Ruins_Center__Wall_Bottom,
-            400,
+            350,
         ),
         (
             SpotId::Giguna__Ruins_Center__Wall_Top,
@@ -22174,7 +22286,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_West__Platform,
             SpotId::Giguna__Ruins_West__Save_Point,
-            399,
+            549,
         ),
         (
             SpotId::Giguna__Ruins_West__Platform,
@@ -22189,7 +22301,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_West__Nook,
             SpotId::Giguna__Ruins_West__Platform,
-            500,
+            350,
         ),
         (
             SpotId::Giguna__Ruins_West__Nook,
@@ -22204,7 +22316,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_West__Lower_Ledge,
             SpotId::Giguna__Ruins_West__Platform,
-            1099,
+            949,
         ),
         (
             SpotId::Giguna__Ruins_West__Lower_Ledge,
@@ -22224,12 +22336,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_West__Upper_Ledge,
             SpotId::Giguna__Ruins_West__Platform,
-            2099,
+            2000,
         ),
         (
             SpotId::Giguna__Ruins_West__Upper_Ledge,
             SpotId::Giguna__Ruins_West__Lower_Ledge,
-            1000,
+            1050,
         ),
         (
             SpotId::Giguna__Ruins_West__Upper_Ledge,
@@ -22269,7 +22381,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
             SpotId::Giguna__Ruins_West__West_7,
-            899,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
@@ -22294,7 +22406,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__West_7,
             SpotId::Giguna__Ruins_Top__West_Door,
-            877,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_7,
@@ -22309,12 +22421,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__West_Door,
             SpotId::Giguna__Ruins_Top__West_7,
-            877,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Door,
             SpotId::Giguna__Ruins_Top__Entryway,
-            526,
+            614,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Door,
@@ -22329,7 +22441,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__West_Pillar,
             SpotId::Giguna__Ruins_Top__Entryway,
-            799,
+            750,
         ),
         (
             SpotId::Giguna__Ruins_Top__West_Pillar,
@@ -22353,18 +22465,13 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal_Left,
-            SpotId::Giguna__Ruins_Top__Entryway,
-            2982,
-        ),
-        (
-            SpotId::Giguna__Ruins_Top__Portal_Left,
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             1000,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal_Left,
             SpotId::Giguna__Ruins_Top__Portal,
-            701,
+            614,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal_Left,
@@ -22379,7 +22486,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Small_Ledge,
             SpotId::Giguna__Ruins_Top__Portal,
-            877,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__Small_Ledge,
@@ -22399,12 +22506,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__Portal_Left,
-            701,
+            614,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__Small_Ledge,
-            877,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
@@ -22414,7 +22521,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Portal,
             SpotId::Giguna__Ruins_Top__East_Door,
-            701,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_Top__Portal,
@@ -22464,12 +22571,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__East_Door,
             SpotId::Giguna__Ruins_Top__Portal,
-            701,
+            877,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_Door,
             SpotId::Giguna__Ruins_Top__East_7,
-            877,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_Door,
@@ -22484,7 +22591,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__East_7,
             SpotId::Giguna__Ruins_Top__East_Door,
-            877,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__East_7,
@@ -22494,7 +22601,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Save_Point,
             SpotId::Giguna__Ruins_Top__Switch,
-            701,
+            600,
         ),
         (
             SpotId::Giguna__Ruins_Top__Save_Point,
@@ -22504,7 +22611,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Switch,
             SpotId::Giguna__Ruins_Top__Save_Point,
-            701,
+            526,
         ),
         (
             SpotId::Giguna__Ruins_Top__Switch,
@@ -22524,7 +22631,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Rooftop_West,
             SpotId::Giguna__Ruins_Top__Switch,
-            350,
+            526,
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_West,
@@ -22549,7 +22656,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Rooftop_East,
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
-            701,
+            789,
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_East,
@@ -22559,7 +22666,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
             SpotId::Giguna__Ruins_Top__East_7,
-            1200,
+            1250,
         ),
         (
             SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
@@ -22574,7 +22681,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Switch,
-            701,
+            526,
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
@@ -22584,7 +22691,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-            1754,
+            1578,
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
@@ -22609,7 +22716,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
             SpotId::Giguna__Ruins_Top__Entryway,
-            1599,
+            1549,
         ),
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
@@ -22619,7 +22726,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__West_Tower__East_7,
             SpotId::Giguna__West_Tower__Top,
-            1578,
+            1228,
         ),
         (
             SpotId::Giguna__West_Tower__East_7,
@@ -22629,7 +22736,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__West_Tower__Top,
             SpotId::Giguna__West_Tower__Southwest,
-            1800,
+            2351,
         ),
         (
             SpotId::Giguna__West_Tower__Top,
@@ -22649,7 +22756,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Far_Corner__East_13,
             SpotId::Giguna__Far_Corner__Grass,
-            1578,
+            1403,
         ),
         (
             SpotId::Giguna__Far_Corner__East_13,
@@ -22659,7 +22766,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Giguna__Far_Corner__Grass,
             SpotId::Giguna__Far_Corner__South,
-            350,
+            526,
         ),
         (
             SpotId::Giguna__Far_Corner__Grass,
@@ -27507,61 +27614,61 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => Some(5614),
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => Some(4035),
         (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            Some(1200)
+            Some(1901)
         }
         (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => {
             Some(2456)
         }
         (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            Some(1754)
+            Some(1315)
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
-            Some(701)
+            Some(649)
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            Some(1754)
+            Some(1929)
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            Some(2456)
+            Some(1842)
         }
-        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => Some(3333),
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => Some(2631),
-        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => Some(2456),
+        (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => Some(3157),
+        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => Some(2543),
+        (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => Some(2543),
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => Some(3599),
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => Some(1400),
-        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => Some(2299),
+        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => Some(1349),
+        (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => Some(2349),
         (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => Some(1929),
-        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(2631),
+        (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(2543),
         (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => Some(1777),
         (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Staircase) => Some(1929),
-        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(2631),
+        (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(2543),
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
             Some(2456)
         }
-        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(2456),
+        (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(2543),
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => Some(3599),
-        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(999),
+        (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => Some(899),
         (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => Some(1929),
         (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Lake_Access) => Some(1929),
         (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Save_Point) => Some(3157),
         (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
-            Some(1754)
+            Some(1315)
         }
-        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => Some(877),
+        (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => Some(1315),
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            Some(1754)
+            Some(1929)
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            Some(2456)
+            Some(2543)
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => Some(2099),
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => Some(3157),
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => Some(4210),
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => Some(3771),
         (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => Some(2280),
         (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__West_Midair) => Some(1052),
-        (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => Some(877),
+        (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => Some(1315),
         (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            Some(2280)
+            Some(2105)
         }
         (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => Some(1699),
         (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => Some(1052),
@@ -27571,8 +27678,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__High_Platform) => Some(2982),
         (SpotId::Ebih__Boss_Room__East_4, SpotId::Ebih__Boss_Room__Upper_Tree) => Some(1403),
         (SpotId::Ebih__Boss_Room__East_6, SpotId::Ebih__Boss_Room__Lower_Ledge) => Some(877),
-        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => Some(500),
-        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => Some(877),
+        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => Some(526),
+        (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => Some(1052),
         (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => Some(1052),
         (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Upper_Tree) => Some(1578),
         (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__West_5) => Some(3684),
@@ -27583,9 +27690,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__Boss) => Some(1799),
         (SpotId::Ebih__Boss_Room__Past_Boss, SpotId::Ebih__Boss_Room__West_6) => Some(3684),
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Boss) => Some(2631),
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => Some(877),
+        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => Some(1052),
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => Some(1578),
-        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => Some(1000),
+        (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => Some(850),
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => Some(1578),
         (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__Boss) => Some(2631),
         (SpotId::Ebih__Boss_Room__West_5, SpotId::Ebih__Boss_Room__High_Platform) => Some(3684),
@@ -27593,10 +27700,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Boss) => Some(2631),
         (SpotId::Ebih__Boss_Room__West_6, SpotId::Ebih__Boss_Room__Past_Boss) => Some(3684),
         (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => {
-            Some(1754)
+            Some(1578)
         }
         (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => {
-            Some(1754)
+            Some(1578)
         }
         (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => Some(1052),
         (SpotId::Ebih__Bunker_Interior__Entry, SpotId::Ebih__Bunker_Interior__Desk) => Some(1052),
@@ -27611,28 +27718,51 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Ebih__By_Garage__East_12, SpotId::Ebih__By_Garage__East_Platform) => Some(1578),
         (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__East_Platform) => Some(1578),
-        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => Some(2631),
+        (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => Some(2807),
+        (SpotId::Ebih__By_Garage__East_Below_Platforms, SpotId::Ebih__By_Garage__East_13) => {
+            Some(1228)
+        }
+        (SpotId::Ebih__By_Garage__East_Below_Platforms, SpotId::Ebih__By_Garage__East_Platform) => {
+            Some(2400)
+        }
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => Some(1403),
-        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => Some(1799),
+        (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => Some(1929),
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => Some(1754),
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__East_13) => Some(1578),
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            Some(1052)
+            Some(1228)
         }
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => Some(4035),
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Below_Platforms) => {
+            Some(1578)
+        }
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_Below_Platforms) => {
+            Some(2982)
+        }
         (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => Some(5438),
         (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            Some(2807)
+            Some(2631)
         }
         (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
-            Some(350)
+            Some(200)
         }
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => Some(2280),
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => Some(1754),
-        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => Some(701),
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => Some(2105),
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => Some(1929),
+        (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => Some(526),
         (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => Some(877),
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => Some(4035),
         (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => Some(1799),
+        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__West_Below_Platforms) => {
+            Some(877)
+        }
+        (SpotId::Ebih__By_Garage__West_Below_Platforms, SpotId::Ebih__By_Garage__Garage_Entry) => {
+            Some(2982)
+        }
+        (
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Lower_Platform,
+        ) => Some(1799),
+        (SpotId::Ebih__By_Garage__West_Below_Platforms, SpotId::Ebih__By_Garage__West_13) => {
+            Some(877)
+        }
         (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => Some(1754),
         (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => Some(400),
         (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__West_12) => Some(1200),
@@ -27673,9 +27803,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Drone_Room__Portal_Exit, SpotId::Ebih__Drone_Room__West_6) => Some(1578),
         (SpotId::Ebih__Drone_Room__Tree, SpotId::Ebih__Drone_Room__Portal_Exit) => Some(701),
         (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Left_Platform) => Some(877),
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => Some(1400),
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => Some(1600),
-        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => Some(1701),
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => Some(1449),
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => Some(1650),
+        (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => Some(1751),
         (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => Some(1228),
         (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Pit_Left) => Some(526),
         (SpotId::Ebih__Ebih_East__East_Hill, SpotId::Ebih__Ebih_East__East_9) => Some(1578),
@@ -27684,9 +27814,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(2280)
         }
         (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__East_Hill) => Some(1403),
-        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => Some(350),
+        (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => Some(400),
         (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
-            Some(999)
+            Some(1099)
         }
         (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
             Some(1200)
@@ -27736,21 +27866,21 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Ebih_East__West_7, SpotId::Ebih__Ebih_East__Upper_Ledge) => Some(1228),
         (SpotId::Ebih__Ebih_East__West_8, SpotId::Ebih__Ebih_East__Moving_Platform) => Some(1052),
         (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            Some(1052)
+            Some(877)
         }
         (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => Some(3157),
         (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_7) => Some(526),
-        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => Some(1300),
+        (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => Some(1400),
         (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            Some(1100)
+            Some(1150)
         }
         (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => Some(1052),
-        (SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => Some(2807),
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => Some(2807),
+        (SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => Some(2368),
+        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => Some(2368),
         (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => {
-            Some(1754)
+            Some(1929)
         }
-        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => Some(2105),
+        (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => Some(2280),
         (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             Some(1228)
         }
@@ -27761,23 +27891,23 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Ebih_West__East_10, SpotId::Ebih__Ebih_West__Mid_Save) => Some(1578),
         (SpotId::Ebih__Ebih_West__East_11, SpotId::Ebih__Ebih_West__Refill_Station) => Some(877),
         (SpotId::Ebih__Ebih_West__East_13, SpotId::Ebih__Ebih_West__Lower_Save) => Some(5087),
-        (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => Some(1228),
+        (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => Some(1403),
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => Some(526),
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => Some(1300),
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => Some(1100),
-        (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => Some(877),
+        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => Some(1400),
+        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => Some(1150),
+        (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => Some(1052),
         (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => Some(999),
         (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => Some(1578),
         (SpotId::Ebih__Ebih_West__Giguna_Pillar, SpotId::Ebih__Ebih_West__Above_Alcove) => {
             Some(1052)
         }
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => Some(1228),
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => Some(701),
-        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => Some(750),
+        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => Some(1403),
+        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => Some(526),
+        (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => Some(799),
         (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Medium_High_Platform) => {
-            Some(350)
+            Some(375)
         }
-        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => Some(649),
+        (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => Some(725),
         (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             Some(826)
         }
@@ -27808,44 +27938,44 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => Some(3450),
+        ) => Some(3400),
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__High_Platform) => {
             Some(1200)
         }
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
             Some(701)
         }
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => Some(2105),
-        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => Some(799),
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => Some(3157),
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => Some(2280),
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => Some(899),
         (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => Some(1578),
         (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_9) => Some(2400),
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => {
-            Some(1754)
+            Some(1578)
         }
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            Some(1800)
+            Some(1750)
         }
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Middle) => {
             Some(2105)
         }
-        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => Some(877),
+        (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => Some(1052),
         (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
             Some(2105)
         }
         (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => Some(526),
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => Some(877),
         (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => Some(877),
         (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Above_Door) => Some(350),
         (SpotId::Ebih__Ebih_West__Small_Gap, SpotId::Ebih__Ebih_West__Refill_Station) => Some(877),
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => Some(3157),
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Above_Chute) => Some(1052),
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            Some(3250)
+            Some(3150)
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Medium_High_Platform) => {
             Some(1200)
         }
-        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => Some(1450),
+        (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => Some(1578),
         (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => Some(1052),
         (SpotId::Ebih__Ebih_West__West_13, SpotId::Ebih__Ebih_West__Lower_Save) => Some(1578),
         (SpotId::Ebih__Ebih_West__West_Fork, SpotId::Ebih__Ebih_West__West_11) => Some(1200),
@@ -27858,8 +27988,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1403)
         }
         (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => Some(877),
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => Some(1403),
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => Some(1403),
+        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => Some(1228),
+        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => Some(1228),
         (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => Some(1578),
         (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__East_6) => Some(1578),
         (SpotId::Ebih__Grid_21_2_6__Portal_Stand, SpotId::Ebih__Grid_21_2_6__West_6) => Some(1578),
@@ -27870,7 +28000,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__Below_Bush) => Some(701),
         (SpotId::Ebih__Grid_25_10_12__Bush, SpotId::Ebih__Grid_25_10_12__East_12) => Some(1228),
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            Some(1000)
+            Some(1050)
         }
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Bush) => Some(800),
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Top_Platform) => {
@@ -27887,17 +28017,17 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1200)
         }
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            Some(599)
+            Some(700)
         }
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => Some(1052),
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
             Some(1200)
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            Some(1399)
+            Some(1500)
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => {
-            Some(1200)
+            Some(1250)
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
             Some(701)
@@ -27958,7 +28088,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__Upper_Platform) => {
             Some(1403)
         }
-        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => Some(1526),
+        (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => Some(1576),
         (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => {
             Some(1228)
         }
@@ -28010,8 +28140,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Observation_Tower_Room__West_9,
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => Some(2456),
-        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => Some(350),
-        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => Some(350),
+        (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => Some(263),
+        (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => Some(263),
         (
             SpotId::Ebih__Vertical_Interchange__Below_Door,
             SpotId::Ebih__Vertical_Interchange__Lower_West_Cliff,
@@ -28051,7 +28181,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => Some(500),
+        ) => Some(550),
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Passage_East,
@@ -28115,10 +28245,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Vertical_Interchange__Passage_West,
         ) => Some(701),
         (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            Some(1052)
+            Some(877)
         }
         (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => {
-            Some(1578)
+            Some(1754)
         }
         (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => Some(701),
         (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_Door_Left) => {
@@ -28131,7 +28261,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Ebih__Waterfall__Big_Tree, SpotId::Ebih__Waterfall__Platform) => Some(1403),
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Lower_West_Tree) => {
-            Some(2456)
+            Some(2280)
         }
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Near_East_Tree) => {
             Some(5614)
@@ -28139,36 +28269,36 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => Some(2199),
+        ) => Some(2150),
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Waterfall_Right) => {
-            Some(4210)
+            Some(4561)
         }
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Lower_Path) => {
-            Some(3157)
+            Some(2982)
         }
         (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => {
             Some(2456)
         }
         (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => {
-            Some(1052)
+            Some(1228)
         }
         (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__West_Main_Path) => {
             Some(3508)
         }
         (SpotId::Ebih__Waterfall__East_10, SpotId::Ebih__Waterfall__East_Ledge) => Some(701),
-        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => Some(2631),
+        (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => Some(2807),
         (SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => Some(7719),
         (SpotId::Ebih__Waterfall__East_8, SpotId::Ebih__Waterfall__Platform) => Some(3333),
         (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_10) => Some(701),
         (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__East_11) => Some(701),
         (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
-            Some(1929)
+            Some(2105)
         }
         (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Ebih__Waterfall__West_Climb) => {
-            Some(500)
+            Some(450)
         }
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            Some(1228)
+            Some(1403)
         }
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => {
             Some(1754)
@@ -28178,7 +28308,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => Some(2105),
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Waterfall_Left) => {
-            Some(799)
+            Some(750)
         }
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Climb) => {
             Some(700)
@@ -28186,14 +28316,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Door_Right) => {
             Some(600)
         }
-        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => Some(2631),
+        (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => Some(2807),
         (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__Waterfall_Right) => {
-            Some(1403)
+            Some(1052)
         }
         (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => Some(701),
         (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__East_8) => Some(3333),
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__Center_Main_Path) => {
-            Some(799)
+            Some(750)
         }
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => Some(7719),
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__West_7) => Some(5964),
@@ -28213,7 +28343,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
         ) => Some(877),
         (SpotId::Ebih__Waterfall__Waterfall_Center_Left, SpotId::Ebih__Waterfall__Alcove_Left) => {
-            Some(300)
+            Some(250)
         }
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -28222,7 +28352,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => Some(877),
+        ) => Some(701),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
@@ -28234,7 +28364,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => Some(500),
+        ) => Some(449),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
@@ -28242,12 +28372,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => Some(1929),
+        ) => Some(2105),
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Lower_West_Tree) => {
             Some(1799)
         }
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            Some(877)
+            Some(1052)
         }
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => {
             Some(2105)
@@ -28257,7 +28387,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => Some(1754),
         (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Alcove_Right) => {
-            Some(1578)
+            Some(1754)
         }
         (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Near_East_Tree) => {
             Some(1799)
@@ -28265,7 +28395,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => Some(1929),
+        ) => Some(2105),
         (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => Some(2280),
         (SpotId::Ebih__Waterfall__West_11, SpotId::Ebih__Waterfall__Wall_Left) => Some(600),
         (SpotId::Ebih__Waterfall__West_7, SpotId::Ebih__Waterfall__Top_Waterfall) => Some(5964),
@@ -28274,17 +28404,17 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Waterfall__West_9, SpotId::Ebih__Waterfall__West_Climb) => Some(2280),
         (SpotId::Ebih__Waterfall__West_Climb, SpotId::Ebih__Waterfall__West_9) => Some(2280),
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__Below_Left_Switch) => {
-            Some(299)
+            Some(249)
         }
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => Some(877),
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => {
-            Some(400)
+            Some(399)
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
-            Some(199)
+            Some(175)
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Climb) => {
-            Some(900)
+            Some(850)
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Main_Path) => {
             Some(701)
@@ -28293,14 +28423,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(701)
         }
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => {
-            Some(1052)
+            Some(1440)
         }
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Waterfall_Left) => {
             Some(1052)
         }
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__West_10) => Some(2280),
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => {
-            Some(2456)
+            Some(2280)
         }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Center_Main_Path) => {
             Some(3508)
@@ -28452,7 +28582,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => Some(1200),
         (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__East_7) => Some(1052),
         (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
-            Some(1949)
+            Some(2000)
         }
         (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => Some(701),
         (SpotId::Giguna_Breach__Cubby__Rocks, SpotId::Giguna_Breach__Cubby__Entrance) => Some(1200),
@@ -28527,7 +28657,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__East_Passage) => {
             Some(799)
         }
-        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => Some(701),
+        (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => Some(750),
         (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
             Some(1200)
         }
@@ -28535,13 +28665,13 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(2400)
         }
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
-            Some(3508)
+            Some(3421)
         }
         (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => {
             Some(1799)
         }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
-            Some(3508)
+            Some(3421)
         }
         (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => Some(701),
         (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__Upper_West) => {
@@ -28575,7 +28705,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => Some(500),
+        ) => Some(400),
         (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => {
             Some(1403)
         }
@@ -28583,10 +28713,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1000)
         }
         (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
-            Some(1500)
+            Some(1400)
         }
         (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => {
-            Some(600)
+            Some(550)
         }
         (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
             Some(1403)
@@ -28599,7 +28729,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1200)
         }
         (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
-            Some(899)
+            Some(849)
         }
         (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => {
             Some(701)
@@ -28666,7 +28796,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
-        ) => Some(701),
+        ) => Some(877),
         (
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Building_Interior__Bookshelf,
@@ -29032,8 +29162,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__East_Caverns__West_Grass, SpotId::Giguna__East_Caverns__West_17) => {
             Some(1228)
         }
-        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => Some(1578),
-        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => Some(350),
+        (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => Some(1403),
+        (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => Some(526),
         (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => Some(701),
         (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__Button) => Some(1929),
         (SpotId::Giguna__Gateway__Block_Lowered, SpotId::Giguna__Gateway__West_19) => Some(3333),
@@ -29157,12 +29287,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => Some(2631),
         (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            Some(1349)
+            Some(1350)
         }
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => Some(1099),
+        ) => Some(1149),
         (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Table) => {
             Some(1599)
         }
@@ -29206,19 +29336,16 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Kari) => Some(2456),
         (SpotId::Giguna__Giguna_Base__Table, SpotId::Giguna__Giguna_Base__Save_Point) => Some(701),
-        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => Some(1950),
+        (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => Some(2000),
         (
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => Some(1099),
+        ) => Some(1149),
         (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Right_Pillar) => {
             Some(1228)
         }
         (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
             Some(1052)
-        }
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            Some(1578)
         }
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Staircase_Bottom) => {
             Some(600)
@@ -29233,7 +29360,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => Some(1403),
+        ) => Some(1228),
         (
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
@@ -29264,7 +29391,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => Some(1928),
+        ) => Some(1878),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
@@ -29510,7 +29637,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(2631)
         }
         (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__Wall_Bottom) => {
-            Some(400)
+            Some(350)
         }
         (
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
@@ -29536,27 +29663,26 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_East__Small_Passage, SpotId::Giguna__Ruins_East__West_8) => {
             Some(1403)
         }
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => Some(2399),
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => Some(3600),
-        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => Some(1228),
+        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => Some(2149),
+        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => Some(3350),
+        (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => Some(1052),
         (SpotId::Giguna__Ruins_East__West_8, SpotId::Giguna__Ruins_East__Small_Passage) => {
             Some(1403)
         }
         (SpotId::Giguna__Ruins_East__West_9, SpotId::Giguna__Ruins_East__Bottom_Rock) => Some(877),
         (SpotId::Giguna__Ruins_Top__Entryway, SpotId::Giguna__Ruins_Top__Portal_Left) => Some(2982),
         (SpotId::Giguna__Ruins_Top__Flask, SpotId::Giguna__Ruins_Top__Upper_Tunnel) => Some(701),
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => Some(701),
-        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => Some(877),
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => Some(2982),
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => Some(614),
+        (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => Some(789),
+        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => Some(614),
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => {
-            Some(701)
+            Some(789)
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => {
             Some(1754)
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
-            Some(1200)
+            Some(1250)
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             Some(1200)
@@ -29564,22 +29690,22 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             Some(1754)
         }
-        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => Some(350),
-        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => Some(701),
-        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => Some(877),
+        (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => Some(526),
+        (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => Some(600),
+        (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => Some(789),
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             Some(299)
         }
-        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => Some(701),
+        (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => Some(526),
         (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => {
-            Some(701)
+            Some(526)
         }
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-        ) => Some(1754),
+        ) => Some(1578),
         (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
-            Some(1599)
+            Some(1549)
         }
         (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => {
             Some(1500)
@@ -29592,24 +29718,24 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__Ruins_Top__Upper_Tunnel, SpotId::Giguna__Ruins_Top__Interior_Ledge) => {
             Some(526)
         }
-        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => Some(799),
+        (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => Some(750),
         (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => Some(877),
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Platform) => Some(1578),
         (SpotId::Giguna__Ruins_West__East_9, SpotId::Giguna__Ruins_West__Save_Point) => Some(1578),
         (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Nook) => Some(599),
         (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
-            Some(1099)
+            Some(949)
         }
-        (SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => Some(500),
+        (SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => Some(350),
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__East_9) => Some(1578),
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Nook) => Some(1200),
-        (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => Some(399),
+        (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => Some(549),
         (
             SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
         ) => Some(1052),
         (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => {
-            Some(899)
+            Some(877)
         }
         (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__East_9) => Some(1578),
         (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__Platform) => {
@@ -29617,10 +29743,10 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__East_7) => Some(1228),
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Lower_Ledge) => {
-            Some(1000)
+            Some(1050)
         }
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
-            Some(2099)
+            Some(2000)
         }
         (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => {
             Some(1403)
@@ -29860,8 +29986,8 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna__West_Caverns__Tunnel_Fork, SpotId::Giguna__West_Caverns__East_Susar) => {
             Some(350)
         }
-        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => Some(1578),
-        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => Some(1800),
+        (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => Some(1228),
+        (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => Some(2351),
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             Some(1929)
         }
@@ -31142,46 +31268,46 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(4035), vec![])
         }
         (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            (Some(1200), vec![])
+            (Some(1901), vec![])
         }
         (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Save_Point) => {
             (Some(2456), vec![])
         }
         (SpotId::Ebih__Base_Camp__Behind_Vehicle, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            (Some(1754), vec![])
+            (Some(1315), vec![])
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
-            (Some(701), vec![])
+            (Some(649), vec![])
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            (Some(1754), vec![])
+            (Some(1929), vec![])
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            (Some(2456), vec![])
+            (Some(1842), vec![])
         }
         (SpotId::Ebih__Base_Camp__Building_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            (Some(3333), vec![])
+            (Some(3157), vec![])
         }
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            (Some(2631), vec![])
+            (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Save_Point) => {
-            (Some(2456), vec![])
+            (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__Bunker_Entry, SpotId::Ebih__Base_Camp__Staircase) => {
             (Some(3599), vec![])
         }
         (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__East_12) => {
-            (Some(1400), vec![])
+            (Some(1349), vec![])
         }
         (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Lake_Access) => {
-            (Some(2299), vec![])
+            (Some(2349), vec![])
         }
         (SpotId::Ebih__Base_Camp__East_11, SpotId::Ebih__Base_Camp__Staircase) => {
             (Some(1929), vec![])
         }
         (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            (Some(2631), vec![])
+            (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__East_12, SpotId::Ebih__Base_Camp__Lake_Access) => {
             (Some(1777), vec![])
@@ -31190,19 +31316,19 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1929), vec![])
         }
         (SpotId::Ebih__Base_Camp__Lake_Access, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            (Some(2631), vec![])
+            (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
             (Some(2456), vec![])
         }
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            (Some(2456), vec![])
+            (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__Save_Point, SpotId::Ebih__Base_Camp__Staircase) => {
             (Some(3599), vec![])
         }
         (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            (Some(999), vec![])
+            (Some(899), vec![])
         }
         (SpotId::Ebih__Base_Camp__Staircase, SpotId::Ebih__Base_Camp__East_12) => {
             (Some(1929), vec![])
@@ -31214,16 +31340,16 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(3157), vec![])
         }
         (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__Behind_Vehicle) => {
-            (Some(1754), vec![])
+            (Some(1315), vec![])
         }
         (SpotId::Ebih__Base_Camp__Tent_Entry, SpotId::Ebih__Base_Camp__West_13) => {
-            (Some(877), vec![])
+            (Some(1315), vec![])
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            (Some(1754), vec![])
+            (Some(1929), vec![])
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
-            (Some(2456), vec![])
+            (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => {
             (Some(2099), vec![])
@@ -31232,7 +31358,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(3157), vec![])
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            (Some(4210), vec![])
+            (Some(3771), vec![])
         }
         (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => {
             (Some(2280), vec![])
@@ -31241,10 +31367,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1052), vec![])
         }
         (SpotId::Ebih__Base_Camp__West_13, SpotId::Ebih__Base_Camp__Tent_Entry) => {
-            (Some(877), vec![])
+            (Some(1315), vec![])
         }
         (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Building_Entry) => {
-            (Some(2280), vec![])
+            (Some(2105), vec![])
         }
         (SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__Tent_Entry) => {
             (Some(1699), vec![])
@@ -31267,10 +31393,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(877), vec![])
         }
         (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Lower_Ledge) => {
-            (Some(500), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Ebih__Boss_Room__East_Ledge, SpotId::Ebih__Boss_Room__Upper_Tree) => {
-            (Some(877), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__Boss_Room__High_Platform, SpotId::Ebih__Boss_Room__Boss) => {
             (Some(1052), vec![])
@@ -31301,13 +31427,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2631), vec![])
         }
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__East_Ledge) => {
-            (Some(877), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__High_Platform) => {
             (Some(1578), vec![])
         }
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Lower_Tree) => {
-            (Some(1000), vec![])
+            (Some(850), vec![])
         }
         (SpotId::Ebih__Boss_Room__Upper_Tree, SpotId::Ebih__Boss_Room__Past_Boss) => {
             (Some(1578), vec![])
@@ -31322,10 +31448,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(3684), vec![])
         }
         (SpotId::Ebih__Building_Interior__Corner, SpotId::Ebih__Building_Interior__Entry) => {
-            (Some(1754), vec![])
+            (Some(1578), vec![])
         }
         (SpotId::Ebih__Building_Interior__Entry, SpotId::Ebih__Building_Interior__Corner) => {
-            (Some(1754), vec![])
+            (Some(1578), vec![])
         }
         (SpotId::Ebih__Bunker_Interior__Desk, SpotId::Ebih__Bunker_Interior__Entry) => {
             (Some(1052), vec![])
@@ -31349,13 +31475,19 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1578), vec![])
         }
         (SpotId::Ebih__By_Garage__East_13, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            (Some(2631), vec![])
+            (Some(2807), vec![])
+        }
+        (SpotId::Ebih__By_Garage__East_Below_Platforms, SpotId::Ebih__By_Garage__East_13) => {
+            (Some(1228), vec![])
+        }
+        (SpotId::Ebih__By_Garage__East_Below_Platforms, SpotId::Ebih__By_Garage__East_Platform) => {
+            (Some(2400), vec![])
         }
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Lower_Platform) => {
             (Some(1403), vec![])
         }
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__Outcropping) => {
-            (Some(1799), vec![])
+            (Some(1929), vec![])
         }
         (SpotId::Ebih__By_Garage__East_Bush, SpotId::Ebih__By_Garage__West_Bush) => {
             (Some(1754), vec![])
@@ -31364,37 +31496,50 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1578), vec![])
         }
         (SpotId::Ebih__By_Garage__East_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            (Some(1052), vec![])
+            (Some(1228), vec![])
         }
-        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_13) => {
-            (Some(4035), vec![])
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__East_Below_Platforms) => {
+            (Some(1578), vec![])
+        }
+        (SpotId::Ebih__By_Garage__Garage_Entry, SpotId::Ebih__By_Garage__West_Below_Platforms) => {
+            (Some(2982), vec![])
         }
         (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__East_13) => {
             (Some(5438), vec![])
         }
         (SpotId::Ebih__By_Garage__Lower_Platform, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            (Some(2807), vec![])
+            (Some(2631), vec![])
         }
         (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__Crawlspace_Opening) => {
-            (Some(350), vec![])
+            (Some(200), vec![])
         }
         (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_13) => {
-            (Some(2280), vec![])
+            (Some(2105), vec![])
         }
         (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Bush) => {
-            (Some(1754), vec![])
+            (Some(1929), vec![])
         }
         (SpotId::Ebih__By_Garage__Outcropping, SpotId::Ebih__By_Garage__East_Platform) => {
-            (Some(701), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Ebih__By_Garage__West_12, SpotId::Ebih__By_Garage__West_Bush) => {
             (Some(877), vec![])
         }
-        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Garage_Entry) => {
-            (Some(4035), vec![])
-        }
         (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__Lower_Platform) => {
             (Some(1799), vec![])
+        }
+        (SpotId::Ebih__By_Garage__West_13, SpotId::Ebih__By_Garage__West_Below_Platforms) => {
+            (Some(877), vec![])
+        }
+        (SpotId::Ebih__By_Garage__West_Below_Platforms, SpotId::Ebih__By_Garage__Garage_Entry) => {
+            (Some(2982), vec![])
+        }
+        (
+            SpotId::Ebih__By_Garage__West_Below_Platforms,
+            SpotId::Ebih__By_Garage__Lower_Platform,
+        ) => (Some(1799), vec![]),
+        (SpotId::Ebih__By_Garage__West_Below_Platforms, SpotId::Ebih__By_Garage__West_13) => {
+            (Some(877), vec![])
         }
         (SpotId::Ebih__By_Garage__West_Bush, SpotId::Ebih__By_Garage__East_Bush) => {
             (Some(1754), vec![])
@@ -31475,13 +31620,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(877), vec![])
         }
         (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Middle_Platform) => {
-            (Some(1400), vec![])
+            (Some(1449), vec![])
         }
         (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__Pit_Left) => {
-            (Some(1600), vec![])
+            (Some(1650), vec![])
         }
         (SpotId::Ebih__Drone_Room__West_4, SpotId::Ebih__Drone_Room__West_6) => {
-            (Some(1701), vec![])
+            (Some(1751), vec![])
         }
         (SpotId::Ebih__Drone_Room__West_6, SpotId::Ebih__Drone_Room__Middle_Platform) => {
             (Some(1228), vec![])
@@ -31502,10 +31647,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1403), vec![])
         }
         (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Ledge_End) => {
-            (Some(350), vec![])
+            (Some(400), vec![])
         }
         (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Lower_Moving_Platform) => {
-            (Some(999), vec![])
+            (Some(1099), vec![])
         }
         (SpotId::Ebih__Ebih_East__East_Ledge, SpotId::Ebih__Ebih_East__Middle_Platform) => {
             (Some(1200), vec![])
@@ -31569,7 +31714,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1052), vec![])
         }
         (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            (Some(1052), vec![])
+            (Some(877), vec![])
         }
         (SpotId::Ebih__Ebih_West__Above_Alcove, SpotId::Ebih__Ebih_West__Mid_Save) => {
             (Some(3157), vec![])
@@ -31578,25 +31723,25 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(526), vec![])
         }
         (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__East_8) => {
-            (Some(1300), vec![])
+            (Some(1400), vec![])
         }
         (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            (Some(1100), vec![])
+            (Some(1150), vec![])
         }
         (SpotId::Ebih__Ebih_West__Above_Chute, SpotId::Ebih__Ebih_West__Upper_Save) => {
             (Some(1052), vec![])
         }
         (SpotId::Ebih__Ebih_West__Alcove, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            (Some(2807), vec![])
+            (Some(2368), vec![])
         }
         (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Alcove) => {
-            (Some(2807), vec![])
+            (Some(2368), vec![])
         }
         (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Block_Left) => {
-            (Some(1754), vec![])
+            (Some(1929), vec![])
         }
         (SpotId::Ebih__Ebih_West__Alcove_Entrance, SpotId::Ebih__Ebih_West__Mid_Save) => {
-            (Some(2105), vec![])
+            (Some(2280), vec![])
         }
         (SpotId::Ebih__Ebih_West__Below_Door, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             (Some(1228), vec![])
@@ -31617,17 +31762,17 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(5087), vec![])
         }
         (SpotId::Ebih__Ebih_West__East_6, SpotId::Ebih__Ebih_West__High_Ledge) => {
-            (Some(1228), vec![])
+            (Some(1403), vec![])
         }
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Above_Chute) => {
             (Some(526), vec![])
         }
-        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => (Some(1300), vec![]),
+        (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__East_8) => (Some(1400), vec![]),
         (SpotId::Ebih__Ebih_West__East_7, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            (Some(1100), vec![])
+            (Some(1150), vec![])
         }
         (SpotId::Ebih__Ebih_West__East_8, SpotId::Ebih__Ebih_West__Middle_Middle) => {
-            (Some(877), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__East_10) => (Some(999), vec![]),
         (SpotId::Ebih__Ebih_West__East_9, SpotId::Ebih__Ebih_West__Mid_Save) => {
@@ -31637,19 +31782,19 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1052), vec![])
         }
         (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__East_6) => {
-            (Some(1228), vec![])
+            (Some(1403), vec![])
         }
         (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__High_Platform) => {
-            (Some(701), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Ebih__Ebih_West__High_Ledge, SpotId::Ebih__Ebih_West__Upper_Save) => {
-            (Some(750), vec![])
+            (Some(799), vec![])
         }
         (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Medium_High_Platform) => {
-            (Some(350), vec![])
+            (Some(375), vec![])
         }
         (SpotId::Ebih__Ebih_West__High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
-            (Some(649), vec![])
+            (Some(725), vec![])
         }
         (SpotId::Ebih__Ebih_West__Left_of_Gap, SpotId::Ebih__Ebih_West__Left_of_Switch) => {
             (Some(826), vec![])
@@ -31699,18 +31844,21 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Ebih_West__Medium_High_Platform,
             SpotId::Ebih__Ebih_West__Alcove_Entrance,
-        ) => (Some(3450), vec![]),
+        ) => (Some(3400), vec![]),
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__High_Platform) => {
             (Some(1200), vec![])
         }
         (SpotId::Ebih__Ebih_West__Medium_High_Platform, SpotId::Ebih__Ebih_West__Upper_Save) => {
             (Some(701), vec![])
         }
+        (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Above_Alcove) => {
+            (Some(3157), vec![])
+        }
         (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            (Some(2105), vec![])
+            (Some(2280), vec![])
         }
         (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__Block_Left) => {
-            (Some(799), vec![])
+            (Some(899), vec![])
         }
         (SpotId::Ebih__Ebih_West__Mid_Save, SpotId::Ebih__Ebih_West__East_10) => {
             (Some(1578), vec![])
@@ -31719,25 +31867,22 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2400), vec![])
         }
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Above_Alcove) => {
-            (Some(1754), vec![])
+            (Some(1578), vec![])
         }
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            (Some(1800), vec![])
+            (Some(1750), vec![])
         }
         (SpotId::Ebih__Ebih_West__Middle_Cliff, SpotId::Ebih__Ebih_West__Middle_Middle) => {
             (Some(2105), vec![])
         }
         (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__East_8) => {
-            (Some(877), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__Ebih_West__Middle_Middle, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
             (Some(2105), vec![])
         }
         (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Above_Door) => {
             (Some(526), vec![])
-        }
-        (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__East_11) => {
-            (Some(877), vec![])
         }
         (SpotId::Ebih__Ebih_West__Refill_Station, SpotId::Ebih__Ebih_West__Small_Gap) => {
             (Some(877), vec![])
@@ -31755,13 +31900,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1052), vec![])
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Alcove_Entrance) => {
-            (Some(3250), vec![])
+            (Some(3150), vec![])
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Medium_High_Platform) => {
             (Some(1200), vec![])
         }
         (SpotId::Ebih__Ebih_West__Upper_Save, SpotId::Ebih__Ebih_West__Middle_Cliff) => {
-            (Some(1450), vec![])
+            (Some(1578), vec![])
         }
         (SpotId::Ebih__Ebih_West__West_11, SpotId::Ebih__Ebih_West__West_Fork) => {
             (Some(1052), vec![])
@@ -31787,8 +31932,8 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Ebih__Ebih_West__West_High_Cliff, SpotId::Ebih__Ebih_West__West_Fork) => {
             (Some(877), vec![])
         }
-        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => (Some(1403), vec![]),
-        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => (Some(1403), vec![]),
+        (SpotId::Ebih__Garage__Boxes, SpotId::Ebih__Garage__Entry) => (Some(1228), vec![]),
+        (SpotId::Ebih__Garage__Entry, SpotId::Ebih__Garage__Boxes) => (Some(1228), vec![]),
         (SpotId::Ebih__Grid_21_2_6__East_6, SpotId::Ebih__Grid_21_2_6__Portal_Stand) => {
             (Some(1578), vec![])
         }
@@ -31811,7 +31956,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1228), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            (Some(1000), vec![])
+            (Some(1050), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Door_Left, SpotId::Ebih__Grid_25_10_12__Bush) => {
             (Some(800), vec![])
@@ -31832,7 +31977,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1200), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            (Some(599), vec![])
+            (Some(700), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Mid_Ledge, SpotId::Ebih__Grid_25_10_12__Bush) => {
             (Some(1052), vec![])
@@ -31841,10 +31986,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1200), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Below_Bush) => {
-            (Some(1399), vec![])
+            (Some(1500), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Bush) => {
-            (Some(1200), vec![])
+            (Some(1250), vec![])
         }
         (SpotId::Ebih__Grid_25_10_12__Top_Platform, SpotId::Ebih__Grid_25_10_12__Door_Left) => {
             (Some(701), vec![])
@@ -31914,7 +32059,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1403), vec![])
         }
         (SpotId::Ebih__Grid_26_10_11__West_10, SpotId::Ebih__Grid_26_10_11__West_11) => {
-            (Some(1526), vec![])
+            (Some(1576), vec![])
         }
         (SpotId::Ebih__Grid_26_10_11__West_11, SpotId::Ebih__Grid_26_10_11__Middle_Bottom) => {
             (Some(1228), vec![])
@@ -31968,10 +32113,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Ebih__Observation_Tower_Room__West_10,
         ) => (Some(2456), vec![]),
         (SpotId::Ebih__Tent_Interior__Desk, SpotId::Ebih__Tent_Interior__Entry) => {
-            (Some(350), vec![])
+            (Some(263), vec![])
         }
         (SpotId::Ebih__Tent_Interior__Entry, SpotId::Ebih__Tent_Interior__Desk) => {
-            (Some(350), vec![])
+            (Some(263), vec![])
         }
         (
             SpotId::Ebih__Vertical_Interchange__Below_Door,
@@ -32012,7 +32157,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Middle_Descent,
-        ) => (Some(500), vec![]),
+        ) => (Some(550), vec![]),
         (
             SpotId::Ebih__Vertical_Interchange__East_13,
             SpotId::Ebih__Vertical_Interchange__Passage_East,
@@ -32076,10 +32221,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Ebih__Vertical_Interchange__Passage_West,
         ) => (Some(701), vec![]),
         (SpotId::Ebih__Waterfall__Alcove_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            (Some(1052), vec![])
+            (Some(877), vec![])
         }
         (SpotId::Ebih__Waterfall__Alcove_Right, SpotId::Ebih__Waterfall__Waterfall_Right) => {
-            (Some(1578), vec![])
+            (Some(1754), vec![])
         }
         (SpotId::Ebih__Waterfall__Below_Left_Switch, SpotId::Ebih__Waterfall__West_8) => {
             (Some(701), vec![])
@@ -32100,7 +32245,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1403), vec![])
         }
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Lower_West_Tree) => {
-            (Some(2456), vec![])
+            (Some(2280), vec![])
         }
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Near_East_Tree) => {
             (Some(5614), vec![])
@@ -32108,18 +32253,18 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
-        ) => (Some(2199), vec![]),
+        ) => (Some(2150), vec![]),
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__Waterfall_Right) => {
-            (Some(4210), vec![])
+            (Some(4561), vec![])
         }
         (SpotId::Ebih__Waterfall__Cave_Entrance, SpotId::Ebih__Waterfall__West_Lower_Path) => {
-            (Some(3157), vec![])
+            (Some(2982), vec![])
         }
         (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Big_Tree) => {
             (Some(2456), vec![])
         }
         (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => {
-            (Some(1052), vec![])
+            (Some(1228), vec![])
         }
         (SpotId::Ebih__Waterfall__Center_Main_Path, SpotId::Ebih__Waterfall__West_Main_Path) => {
             (Some(3508), vec![])
@@ -32128,7 +32273,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(701), vec![])
         }
         (SpotId::Ebih__Waterfall__East_11, SpotId::Ebih__Waterfall__Near_East_Tree) => {
-            (Some(2631), vec![])
+            (Some(2807), vec![])
         }
         (SpotId::Ebih__Waterfall__East_7, SpotId::Ebih__Waterfall__Top_Waterfall) => {
             (Some(7719), vec![])
@@ -32143,13 +32288,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(701), vec![])
         }
         (SpotId::Ebih__Waterfall__East_Ledge, SpotId::Ebih__Waterfall__Near_East_Tree) => {
-            (Some(1929), vec![])
+            (Some(2105), vec![])
         }
         (SpotId::Ebih__Waterfall__Ledge_Below_Hole, SpotId::Ebih__Waterfall__West_Climb) => {
-            (Some(500), vec![])
+            (Some(450), vec![])
         }
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            (Some(1228), vec![])
+            (Some(1403), vec![])
         }
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Wall_Right) => {
             (Some(1754), vec![])
@@ -32159,7 +32304,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => (Some(2105), vec![]),
         (SpotId::Ebih__Waterfall__Lower_West_Tree, SpotId::Ebih__Waterfall__Waterfall_Left) => {
-            (Some(799), vec![])
+            (Some(750), vec![])
         }
         (SpotId::Ebih__Waterfall__Middle_West_Tree, SpotId::Ebih__Waterfall__West_Climb) => {
             (Some(700), vec![])
@@ -32168,10 +32313,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(600), vec![])
         }
         (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__East_11) => {
-            (Some(2631), vec![])
+            (Some(2807), vec![])
         }
         (SpotId::Ebih__Waterfall__Near_East_Tree, SpotId::Ebih__Waterfall__Waterfall_Right) => {
-            (Some(1403), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__Waterfall__Platform, SpotId::Ebih__Waterfall__Below_Tree) => {
             (Some(701), vec![])
@@ -32180,7 +32325,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(3333), vec![])
         }
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__Center_Main_Path) => {
-            (Some(799), vec![])
+            (Some(750), vec![])
         }
         (SpotId::Ebih__Waterfall__Top_Waterfall, SpotId::Ebih__Waterfall__East_7) => {
             (Some(7719), vec![])
@@ -32206,7 +32351,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
         ) => (Some(877), vec![]),
         (SpotId::Ebih__Waterfall__Waterfall_Center_Left, SpotId::Ebih__Waterfall__Alcove_Left) => {
-            (Some(300), vec![])
+            (Some(250), vec![])
         }
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
@@ -32215,7 +32360,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Under_Waterfall,
-        ) => (Some(877), vec![]),
+        ) => (Some(701), vec![]),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
@@ -32227,7 +32372,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Alcove_Right,
-        ) => (Some(500), vec![]),
+        ) => (Some(449), vec![]),
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Center,
@@ -32235,12 +32380,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
             SpotId::Ebih__Waterfall__Waterfall_Right,
-        ) => (Some(1929), vec![]),
+        ) => (Some(2105), vec![]),
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Lower_West_Tree) => {
             (Some(1799), vec![])
         }
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Under_Waterfall) => {
-            (Some(877), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Ebih__Waterfall__Waterfall_Left, SpotId::Ebih__Waterfall__Wall_Right) => {
             (Some(2105), vec![])
@@ -32250,7 +32395,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Ebih__Waterfall__Waterfall_Center_Left,
         ) => (Some(1754), vec![]),
         (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Alcove_Right) => {
-            (Some(1578), vec![])
+            (Some(1754), vec![])
         }
         (SpotId::Ebih__Waterfall__Waterfall_Right, SpotId::Ebih__Waterfall__Near_East_Tree) => {
             (Some(1799), vec![])
@@ -32258,7 +32403,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Ebih__Waterfall__Waterfall_Right,
             SpotId::Ebih__Waterfall__Waterfall_Center_Right,
-        ) => (Some(1929), vec![]),
+        ) => (Some(2105), vec![]),
         (SpotId::Ebih__Waterfall__West_10, SpotId::Ebih__Waterfall__West_Lower_Path) => {
             (Some(2280), vec![])
         }
@@ -32281,19 +32426,19 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2280), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__Below_Left_Switch) => {
-            (Some(299), vec![])
+            (Some(249), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Door_Left, SpotId::Ebih__Waterfall__West_8) => {
             (Some(877), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Ledge_Below_Hole) => {
-            (Some(400), vec![])
+            (Some(399), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__Middle_West_Tree) => {
-            (Some(199), vec![])
+            (Some(175), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Climb) => {
-            (Some(900), vec![])
+            (Some(850), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Door_Right, SpotId::Ebih__Waterfall__West_Main_Path) => {
             (Some(701), vec![])
@@ -32302,7 +32447,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(701), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Wall_Right) => {
-            (Some(1052), vec![])
+            (Some(1440), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Lower_Path, SpotId::Ebih__Waterfall__Waterfall_Left) => {
             (Some(1052), vec![])
@@ -32311,7 +32456,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2280), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Cave_Entrance) => {
-            (Some(2456), vec![])
+            (Some(2280), vec![])
         }
         (SpotId::Ebih__Waterfall__West_Main_Path, SpotId::Ebih__Waterfall__Center_Main_Path) => {
             (Some(3508), vec![])
@@ -32481,7 +32626,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1052), vec![])
         }
         (SpotId::Giguna_Breach__Chimney__Top, SpotId::Giguna_Breach__Chimney__Middle_Platform) => {
-            (Some(1949), vec![])
+            (Some(2000), vec![])
         }
         (SpotId::Giguna_Breach__Cubby__Entrance, SpotId::Giguna_Breach__Cubby__Rocks) => {
             (Some(701), vec![])
@@ -32561,7 +32706,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(799), vec![])
         }
         (SpotId::Giguna_Breach__Peak__Column, SpotId::Giguna_Breach__Peak__West_7) => {
-            (Some(701), vec![])
+            (Some(750), vec![])
         }
         (SpotId::Giguna_Breach__Peak__East_6, SpotId::Giguna_Breach__Peak__Upper_East) => {
             (Some(1200), vec![])
@@ -32570,13 +32715,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2400), vec![])
         }
         (SpotId::Giguna_Breach__Peak__East_Passage, SpotId::Giguna_Breach__Peak__Save_Point) => {
-            (Some(3508), vec![])
+            (Some(3421), vec![])
         }
         (SpotId::Giguna_Breach__Peak__Portal, SpotId::Giguna_Breach__Peak__Upper_West) => {
             (Some(1799), vec![])
         }
         (SpotId::Giguna_Breach__Peak__Save_Point, SpotId::Giguna_Breach__Peak__East_Passage) => {
-            (Some(3508), vec![])
+            (Some(3421), vec![])
         }
         (SpotId::Giguna_Breach__Peak__Upper_East, SpotId::Giguna_Breach__Peak__East_6) => {
             (Some(701), vec![])
@@ -32612,7 +32757,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Giguna_Breach__SW_Save__Lower_Platform,
             SpotId::Giguna_Breach__SW_Save__Save_Point,
-        ) => (Some(500), vec![]),
+        ) => (Some(400), vec![]),
         (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__East_12) => {
             (Some(1403), vec![])
         }
@@ -32620,10 +32765,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1000), vec![])
         }
         (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
-            (Some(1500), vec![])
+            (Some(1400), vec![])
         }
         (SpotId::Giguna_Breach__SW_Save__North, SpotId::Giguna_Breach__SW_Save__Side_Door) => {
-            (Some(600), vec![])
+            (Some(550), vec![])
         }
         (SpotId::Giguna_Breach__SW_Save__Save_Point, SpotId::Giguna_Breach__SW_Save__East_12) => {
             (Some(1403), vec![])
@@ -32636,7 +32781,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1200), vec![])
         }
         (SpotId::Giguna_Breach__SW_Save__Side_Door, SpotId::Giguna_Breach__SW_Save__Save_Point) => {
-            (Some(899), vec![])
+            (Some(849), vec![])
         }
         (SpotId::Giguna_Breach__Slingshot__Column, SpotId::Giguna_Breach__Slingshot__Ravine) => {
             (Some(701), vec![])
@@ -32705,7 +32850,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Giguna__Building_Interior__Bookshelf,
             SpotId::Giguna__Building_Interior__Entry,
-        ) => (Some(701), vec![]),
+        ) => (Some(877), vec![]),
         (
             SpotId::Giguna__Building_Interior__Entry,
             SpotId::Giguna__Building_Interior__Bookshelf,
@@ -33120,10 +33265,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1228), vec![])
         }
         (SpotId::Giguna__Far_Corner__East_13, SpotId::Giguna__Far_Corner__Grass) => {
-            (Some(1578), vec![])
+            (Some(1403), vec![])
         }
         (SpotId::Giguna__Far_Corner__Grass, SpotId::Giguna__Far_Corner__South) => {
-            (Some(350), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Giguna__Gateway__Block_Left, SpotId::Giguna__Gateway__Block_Right) => {
             (Some(701), vec![])
@@ -33290,12 +33435,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Giguna__Giguna_Base__Building_Entry,
         ) => (Some(2631), vec![]),
         (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            (Some(1349), vec![])
+            (Some(1350), vec![])
         }
         (
             SpotId::Giguna__Giguna_Base__Staircase_Top,
             SpotId::Giguna__Giguna_Base__Staircase_Bottom,
-        ) => (Some(1099), vec![]),
+        ) => (Some(1149), vec![]),
         (SpotId::Giguna__Giguna_Base__Staircase_Top, SpotId::Giguna__Giguna_Base__Table) => {
             (Some(1599), vec![])
         }
@@ -33346,20 +33491,17 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(701), vec![])
         }
         (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Kari) => {
-            (Some(1950), vec![])
+            (Some(2000), vec![])
         }
         (
             SpotId::Giguna__Giguna_Base__Upper_Cliff,
             SpotId::Giguna__Giguna_Base__Middle_Platform,
-        ) => (Some(1099), vec![]),
+        ) => (Some(1149), vec![]),
         (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Right_Pillar) => {
             (Some(1228), vec![])
         }
         (SpotId::Giguna__Giguna_Base__Upper_Cliff, SpotId::Giguna__Giguna_Base__Stone_Knob) => {
             (Some(1052), vec![])
-        }
-        (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Save_Point) => {
-            (Some(1578), vec![])
         }
         (SpotId::Giguna__Giguna_Base__West_16, SpotId::Giguna__Giguna_Base__Staircase_Bottom) => {
             (Some(600), vec![])
@@ -33374,7 +33516,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Giguna__Giguna_Northeast__Crow_Eating,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
-        ) => (Some(1403), vec![]),
+        ) => (Some(1228), vec![]),
         (
             SpotId::Giguna__Giguna_Northeast__Door,
             SpotId::Giguna__Giguna_Northeast__Right_Column,
@@ -33405,7 +33547,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Gate_Button,
-        ) => (Some(1928), vec![]),
+        ) => (Some(1878), vec![]),
         (
             SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             SpotId::Giguna__Giguna_Northeast__Save_Point,
@@ -33735,7 +33877,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2631), vec![])
         }
         (SpotId::Giguna__Ruins_Center__Wall_Top, SpotId::Giguna__Ruins_Center__Wall_Bottom) => {
-            (Some(400), vec![])
+            (Some(350), vec![])
         }
         (
             SpotId::Giguna__Ruins_Center__West_Platform_Left,
@@ -33780,13 +33922,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1403), vec![])
         }
         (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Cliff) => {
-            (Some(2399), vec![])
+            (Some(2149), vec![])
         }
         (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__East_9) => {
-            (Some(3600), vec![])
+            (Some(3350), vec![])
         }
         (SpotId::Giguna__Ruins_East__Way_Up_High, SpotId::Giguna__Ruins_East__Pillar) => {
-            (Some(1228), vec![])
+            (Some(1052), vec![])
         }
         (SpotId::Giguna__Ruins_East__West_8, SpotId::Giguna__Ruins_East__Small_Passage) => {
             (Some(1403), vec![])
@@ -33801,25 +33943,22 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(701), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Portal_Left) => {
-            (Some(701), vec![])
+            (Some(614), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Portal, SpotId::Giguna__Ruins_Top__Small_Ledge) => {
-            (Some(877), vec![])
-        }
-        (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Entryway) => {
-            (Some(2982), vec![])
+            (Some(789), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Portal_Left, SpotId::Giguna__Ruins_Top__Portal) => {
-            (Some(701), vec![])
+            (Some(614), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_Gutter) => {
-            (Some(701), vec![])
+            (Some(789), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_East, SpotId::Giguna__Ruins_Top__Rooftop_West) => {
             (Some(1754), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__East_7) => {
-            (Some(1200), vec![])
+            (Some(1250), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_Gutter, SpotId::Giguna__Ruins_Top__Rooftop_East) => {
             (Some(1200), vec![])
@@ -33828,29 +33967,29 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1754), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Rooftop_West, SpotId::Giguna__Ruins_Top__Switch) => {
-            (Some(350), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Save_Point, SpotId::Giguna__Ruins_Top__Switch) => {
-            (Some(701), vec![])
+            (Some(600), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal) => {
-            (Some(877), vec![])
+            (Some(789), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Small_Ledge, SpotId::Giguna__Ruins_Top__Portal_Left) => {
             (Some(299), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Switch, SpotId::Giguna__Ruins_Top__Save_Point) => {
-            (Some(701), vec![])
+            (Some(526), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Turret_Balcony_East, SpotId::Giguna__Ruins_Top__Switch) => {
-            (Some(701), vec![])
+            (Some(526), vec![])
         }
         (
             SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
             SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
-        ) => (Some(1754), vec![]),
+        ) => (Some(1578), vec![]),
         (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__Entryway) => {
-            (Some(1599), vec![])
+            (Some(1549), vec![])
         }
         (SpotId::Giguna__Ruins_Top__Turret_Balcony_West, SpotId::Giguna__Ruins_Top__West_7) => {
             (Some(1500), vec![])
@@ -33866,7 +34005,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(526), vec![])
         }
         (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__Entryway) => {
-            (Some(799), vec![])
+            (Some(750), vec![])
         }
         (SpotId::Giguna__Ruins_Top__West_Pillar, SpotId::Giguna__Ruins_Top__West_7) => {
             (Some(877), vec![])
@@ -33881,10 +34020,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(599), vec![])
         }
         (SpotId::Giguna__Ruins_West__Lower_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
-            (Some(1099), vec![])
+            (Some(949), vec![])
         }
         (SpotId::Giguna__Ruins_West__Nook, SpotId::Giguna__Ruins_West__Platform) => {
-            (Some(500), vec![])
+            (Some(350), vec![])
         }
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__East_9) => {
             (Some(1578), vec![])
@@ -33893,14 +34032,14 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1200), vec![])
         }
         (SpotId::Giguna__Ruins_West__Platform, SpotId::Giguna__Ruins_West__Save_Point) => {
-            (Some(399), vec![])
+            (Some(549), vec![])
         }
         (
             SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
             SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
         ) => (Some(1052), vec![]),
         (SpotId::Giguna__Ruins_West__Rooftop_West_Edge, SpotId::Giguna__Ruins_West__West_7) => {
-            (Some(899), vec![])
+            (Some(877), vec![])
         }
         (SpotId::Giguna__Ruins_West__Save_Point, SpotId::Giguna__Ruins_West__East_9) => {
             (Some(1578), vec![])
@@ -33912,10 +34051,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1228), vec![])
         }
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Lower_Ledge) => {
-            (Some(1000), vec![])
+            (Some(1050), vec![])
         }
         (SpotId::Giguna__Ruins_West__Upper_Ledge, SpotId::Giguna__Ruins_West__Platform) => {
-            (Some(2099), vec![])
+            (Some(2000), vec![])
         }
         (SpotId::Giguna__Wasteland__Bluff_by_Door, SpotId::Giguna__Wasteland__Tiny_Hill) => {
             (Some(1403), vec![])
@@ -34188,10 +34327,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(350), vec![])
         }
         (SpotId::Giguna__West_Tower__East_7, SpotId::Giguna__West_Tower__Top) => {
-            (Some(1578), vec![])
+            (Some(1228), vec![])
         }
         (SpotId::Giguna__West_Tower__Top, SpotId::Giguna__West_Tower__Southwest) => {
-            (Some(1800), vec![])
+            (Some(2351), vec![])
         }
         (SpotId::Glacier__Apocalypse_Entry__Terminal, SpotId::Glacier__Apocalypse_Entry__West) => {
             (Some(1929), vec![])

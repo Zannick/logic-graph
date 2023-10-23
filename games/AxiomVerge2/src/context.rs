@@ -3519,6 +3519,11 @@ impl context::Ctx for Context {
                     rules::action_reset_old_area__newpos(self, pos);
                 }
             }
+            AreaId::Ebih__Gem_Room => {
+                if get_area(self.position) != area {
+                    rules::action_reset_old_area__newpos(self, pos);
+                }
+            }
             AreaId::Ebih__Grid_21_2_6 => {
                 if get_area(self.position) != area {
                     rules::action_reset_old_area__newpos(self, pos);

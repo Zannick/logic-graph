@@ -190,7 +190,9 @@ subgraph Ebih
         Ebih__By_Garage__West_Bush(West Bush);
         Ebih__By_Garage__West_12(West 12);
         Ebih__By_Garage__West_13(West 13);
+        Ebih__By_Garage__West_Below_Platforms(West Below Platforms);
         Ebih__By_Garage__Garage_Entry(Garage Entry);
+        Ebih__By_Garage__East_Below_Platforms(East Below Platforms);
         Ebih__By_Garage__East_12(East 12);
     end
     subgraph Ebih__Garage[Garage]
@@ -383,6 +385,9 @@ subgraph Ebih
         Ebih__Vertical_Interchange__Lower_West_Cliff(Lower West Cliff);
         Ebih__Vertical_Interchange__Switch(Switch);
         Ebih__Vertical_Interchange__South(South);
+    end
+    subgraph Ebih__Gem_Room[Gem Room]
+        Ebih__Gem_Room__West_13(West 13);
     end
 end
 subgraph Giguna_Breach
@@ -1090,6 +1095,7 @@ Ebih__Ebih_West__West_12 <--> Giguna__Wasteland__East_12
 Ebih__Ebih_West__West_13 <--> Giguna__Wasteland__East_13
 Ebih__Ebih_West__West_9 --> Ebih__Ebih_West__Giguna_Pillar
 Ebih__Ebih_West__West_9 <--> Giguna__Giguna_Northeast__East_9
+Ebih__Gem_Room__West_13 <--> Ebih__Vertical_Interchange__East_13
 Ebih__Grid_25_10_12__Below_Bush --> Ebih__Grid_25_10_12__Bush
 Ebih__Grid_25_10_12__Bush --> Ebih__Grid_25_10_12__Mid_Ledge
 Ebih__Grid_25_10_12__Door <--> Ebih__Grid_25_10_12__Door_Left
@@ -1316,6 +1322,7 @@ Giguna__Ruins_Center__Wall_Top --> Giguna__Ruins_Center__Center_Top
 Giguna__Ruins_Center__West_9 <--> Giguna__Ruins_West__East_9
 Giguna__Ruins_East__Bottom_Rock --> Giguna__Ruins_East__Cliff
 Giguna__Ruins_East__Cliff --> Giguna__Ruins_East__Ledge
+Giguna__Ruins_East__Ledge --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_East__Ledge <--> Giguna__Ruins_East__Small_Passage
 Giguna__Ruins_East__West_7 --> Giguna__Ruins_East__Pillar
 Giguna__Ruins_East__West_7 <--> Giguna__Ruins_Top__East_7
