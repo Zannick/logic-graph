@@ -2180,7 +2180,7 @@ areas:
           req: Ebih_Interchange_Gate
           movement: base
     - name: East 15
-      coord: [21.95, 14.8]
+      coord: [21.95, 14.75]
       local:
         - to: East Tunnel
           jumps: 1

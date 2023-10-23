@@ -16222,14 +16222,14 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1 => Exit {
             id: ExitId::Amagi__West_Lake__Surface_Wall_Right__ex__Surface_Wall_Left_1,
-            time: 877,
+            time: 526,
             dest: SpotId::Amagi__West_Lake__Surface_Wall_Left,
             price: Currency::Free,
             loc_id: None,
         },
         ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1 => Exit {
             id: ExitId::Amagi__West_Lake__Surface_Wall_Left__ex__Surface_Wall_Right_1,
-            time: 877,
+            time: 526,
             dest: SpotId::Amagi__West_Lake__Surface_Wall_Right,
             price: Currency::Free,
             loc_id: None,

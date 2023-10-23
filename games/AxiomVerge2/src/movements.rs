@@ -61,7 +61,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 700,
+        ) => 800,
         (
             [false],
             SpotId::Amagi__Main_Area__West_Shelf,
@@ -80,7 +80,7 @@ pub fn local_travel_time(
             900
         }
         ([false], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => {
-            600
+            650
         }
         (
             [false],
@@ -97,9 +97,9 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 899,
-        ([false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1403,
-        ([false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 175,
+        ) => 800,
+        ([false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1228,
+        ([false], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 350,
         ([false], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => 600,
         (
             [false],
@@ -115,12 +115,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1700,
+        ) => 1750,
         (
             [false],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Carving,
-        ) => 1578,
+        ) => 1403,
         (
             [false],
             SpotId::Amagi__Main_Area__Platform_3,
@@ -139,12 +139,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 3153,
+        ) => 3378,
         (
             [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 450,
+        ) => 563,
         (
             [false],
             SpotId::Amagi__Main_Area__Catwalk_Center,
@@ -154,7 +154,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 3153,
+        ) => 3378,
         (
             [false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -164,7 +164,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Save_Point,
-        ) => 2252,
+        ) => 2139,
         (
             [false],
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
@@ -179,12 +179,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Amagi__Main_Area__Enemy_Side,
-        ) => 1576,
+        ) => 1500,
         ([false], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => {
-            1351
+            1238
         }
         ([false], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => {
-            1351
+            1238
         }
         ([false], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => {
             2702
@@ -206,7 +206,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 449,
         (
             [false],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
@@ -253,23 +253,23 @@ pub fn local_travel_time(
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
             SpotId::Amagi__Main_Area__Secret_Waterfall,
         ) => 10526,
-        // [0.175439, 0.4]
+        // [0.2, 0.35]
         (
             [false],
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 575,
-        // [0.701754, 0.4]
+        ) => 550,
+        // [0.701754, 0.35]
         (
             [false],
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1101,
+        ) => 1051,
         (
             [false],
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 526,
+        ) => 614,
         ([false], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 4054,
         ([false], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 4054,
         ([false], SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => {
@@ -440,7 +440,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 900,
+        ) => 950,
         (
             [false],
             SpotId::Amagi__West_Lake__Northwest_Platform,
@@ -478,7 +478,7 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Pillar,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => 5630,
-        ([false], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1801,
+        ([false], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1576,
         ([false], SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__East_19) => {
             900
         }
@@ -514,16 +514,11 @@ pub fn local_travel_time(
         ) => 2702,
         (
             [false],
-            SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
-            SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1801,
-        (
-            [false],
             SpotId::Amagi__West_Lake__Cavern_Jaw,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
         ) => 1801,
         ([false], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => {
-            900
+            1050
         }
         ([false], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Chin) => {
             3603
@@ -543,7 +538,7 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1100,
+        ) => 1000,
         (
             [false],
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
@@ -567,11 +562,6 @@ pub fn local_travel_time(
         (
             [false],
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 1351,
-        (
-            [false],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => 1126,
         // [2.477477, 0.7]
@@ -589,12 +579,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => 4054,
+        ) => 3828,
         (
             [false],
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 699,
+        ) => 675,
         (
             [false],
             SpotId::Amagi__West_Lake__Stronghold_Item,
@@ -619,27 +609,27 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2927,
+        ) => 2702,
         (
             [false],
             SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
         ) => 1351,
         ([false], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => {
-            1576
+            1351
         }
         (
             [false],
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 2927,
+        ) => 2702,
         (
             [false],
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
-        ) => 3378,
+        ) => 3603,
         ([false], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => {
-            5405
+            5630
         }
         (
             [false],
@@ -647,7 +637,7 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Left_of_Enemy,
         ) => 1100,
         ([false], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => {
-            3378
+            3153
         }
         ([false], SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__East_20) => {
             3828
@@ -677,7 +667,7 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__West_Cliff,
         ) => 1929,
         ([false], SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => {
-            500
+            349
         }
         ([false], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => {
             1754
@@ -691,12 +681,12 @@ pub fn local_travel_time(
             [false],
             SpotId::Amagi__West_Lake__West_Shore,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 5087,
+        ) => 5263,
         (
             [false],
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 2807,
+        ) => 2982,
         ([false], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4035,
         ([false], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5614,
         ([false], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5614,
@@ -5105,7 +5095,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-        ) => 700,
+        ) => 800,
         (
             [true],
             SpotId::Amagi__Main_Area__West_Shelf,
@@ -5123,12 +5113,12 @@ pub fn local_travel_time(
             1000
         }
         ([true], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => 701,
-        ([true], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => 600,
+        ([true], SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => 650,
         (
             [true],
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 1000,
+        ) => 950,
         ([true], SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => {
             1000
         }
@@ -5137,9 +5127,9 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 899,
-        ([true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1403,
-        ([true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 175,
+        ) => 800,
+        ([true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => 1228,
+        ([true], SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => 350,
         ([true], SpotId::Amagi__Main_Area__West_15, SpotId::Amagi__Main_Area__Carving) => 600,
         (
             [true],
@@ -5155,12 +5145,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__West_Shelf,
-        ) => 1700,
+        ) => 1750,
         (
             [true],
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Carving,
-        ) => 1578,
+        ) => 1403,
         ([true], SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_2) => {
             1500
         }
@@ -5183,12 +5173,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => 2456,
+        ) => 2631,
         (
             [true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Broken_Wall,
-        ) => 350,
+        ) => 438,
         (
             [true],
             SpotId::Amagi__Main_Area__Catwalk_Center,
@@ -5198,7 +5188,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => 2456,
+        ) => 2631,
         (
             [true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -5208,7 +5198,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Save_Point,
-        ) => 1754,
+        ) => 1666,
         (
             [true],
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
@@ -5224,15 +5214,11 @@ pub fn local_travel_time(
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
             SpotId::Amagi__Main_Area__Enemy_Side,
         ) => 1500,
-        ([true], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => {
-            1052
-        }
+        ([true], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => 964,
         ([true], SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Broken_Wall) => {
             4000
         }
-        ([true], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => {
-            1052
-        }
+        ([true], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => 964,
         ([true], SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => {
             2105
         }
@@ -5253,7 +5239,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-        ) => 500,
+        ) => 449,
         (
             [true],
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
@@ -5297,23 +5283,23 @@ pub fn local_travel_time(
             SpotId::Amagi__Main_Area__Way_Off_To_The_Side,
             SpotId::Amagi__Main_Area__Secret_Waterfall,
         ) => 10526,
-        // [0.175439, 0.4]
+        // [0.2, 0.35]
         (
             [true],
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 575,
-        // [0.701754, 0.4]
+        ) => 550,
+        // [0.701754, 0.35]
         (
             [true],
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => 1101,
+        ) => 1051,
         (
             [true],
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => 526,
+        ) => 614,
         ([true], SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => 3157,
         ([true], SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => 3157,
         ([true], SpotId::Amagi__Liru_Room__West_19, SpotId::Amagi__Liru_Room__Hidden_Enemies) => {
@@ -5543,12 +5529,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => 900,
+        ) => 950,
         (
             [true],
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => 1699,
+        ) => 1750,
         (
             [true],
             SpotId::Amagi__West_Lake__Northwest_Platform,
@@ -5605,7 +5591,7 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Pillar,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => 4385,
-        ([true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1403,
+        ([true], SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => 1228,
         ([true], SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__Pillar) => {
             1000
         }
@@ -5671,7 +5657,7 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
         ) => 1403,
         ([true], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => {
-            899
+            1050
         }
         ([true], SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Chin) => {
             2807
@@ -5714,7 +5700,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
-        ) => 1100,
+        ) => 1000,
         (
             [true],
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
@@ -5735,11 +5721,6 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
         ) => 1403,
-        (
-            [true],
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => 1052,
         (
             [true],
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
@@ -5771,17 +5752,17 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => 3157,
+        ) => 2982,
         (
             [true],
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => 3157,
+        ) => 3000,
         (
             [true],
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Stronghold_Item,
-        ) => 699,
+        ) => 649,
         (
             [true],
             SpotId::Amagi__West_Lake__Stronghold_Item,
@@ -5811,7 +5792,7 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             SpotId::Amagi__West_Lake__Small_Hill,
-        ) => 2280,
+        ) => 2105,
         (
             [true],
             SpotId::Amagi__West_Lake__Some_Rock,
@@ -5825,34 +5806,34 @@ pub fn local_travel_time(
             SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
         ) => 1052,
-        ([true], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => 1228,
+        ([true], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => 1052,
         ([true], SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
-            4210
+            4385
         }
         (
             [true],
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-        ) => 2280,
+        ) => 2105,
         ([true], SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Some_Rock) => 2000,
         ([true], SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
-            3000
+            3333
         }
         ([true], SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
-            2631
+            2807
         }
         ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Pillar) => 2000,
         ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => {
-            4210
+            4385
         }
         (
             [true],
             SpotId::Amagi__West_Lake__Tentacle_Gap,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
         ) => 1100,
-        ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => 2631,
+        ([true], SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => 2456,
         ([true], SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__Small_Hill) => {
-            2631
+            2807
         }
         ([true], SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__East_20) => {
             2982
@@ -5880,7 +5861,7 @@ pub fn local_travel_time(
             1929
         }
         ([true], SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => {
-            500
+            349
         }
         ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__West_Bank) => 1754,
         ([true], SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Water_Surface) => {
@@ -5890,12 +5871,12 @@ pub fn local_travel_time(
             [true],
             SpotId::Amagi__West_Lake__West_Shore,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-        ) => 5087,
+        ) => 5263,
         (
             [true],
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-        ) => 2807,
+        ) => 2982,
         ([true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => 4035,
         ([true], SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => 5614,
         ([true], SpotId::Antarctica__West__Boxes, SpotId::Antarctica__West__Helipad) => 5614,
@@ -13286,7 +13267,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Upper_Platform,
             SpotId::Amagi__Main_Area__East_Ledge,
-            700,
+            800,
         ),
         (
             SpotId::Amagi__Main_Area__Upper_Platform,
@@ -13346,12 +13327,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__Platform_3,
-            600,
+            650,
         ),
         (
             SpotId::Amagi__Main_Area__Platform_2,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-            1000,
+            950,
         ),
         (
             SpotId::Amagi__Main_Area__Platform_2,
@@ -13371,7 +13352,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__East_Ledge,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-            899,
+            800,
         ),
         (
             SpotId::Amagi__Main_Area__East_Ledge,
@@ -13381,12 +13362,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Carving,
             SpotId::Amagi__Main_Area__West_Side,
-            1403,
+            1228,
         ),
         (
             SpotId::Amagi__Main_Area__Carving,
             SpotId::Amagi__Main_Area__West_15,
-            175,
+            350,
         ),
         (
             SpotId::Amagi__Main_Area__Carving,
@@ -13426,12 +13407,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__West_Shelf,
-            1700,
+            1750,
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Outcropping,
             SpotId::Amagi__Main_Area__Carving,
-            1578,
+            1403,
         ),
         (
             SpotId::Amagi__Main_Area__Secret_Outcropping,
@@ -13486,12 +13467,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-            2456,
+            2631,
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Broken_Wall,
-            350,
+            438,
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
@@ -13506,7 +13487,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-            2456,
+            2631,
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -13516,7 +13497,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Save_Point,
-            1754,
+            1666,
         ),
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
@@ -13546,7 +13527,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Save_Point,
             SpotId::Amagi__Main_Area__Enemy_Side,
-            1052,
+            964,
         ),
         (
             SpotId::Amagi__Main_Area__Save_Point,
@@ -13561,7 +13542,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Enemy_Side,
             SpotId::Amagi__Main_Area__Save_Point,
-            1052,
+            964,
         ),
         (
             SpotId::Amagi__Main_Area__Enemy_Side,
@@ -13616,7 +13597,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Main_Area__Broken_Wall,
             SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
-            500,
+            449,
         ),
         (
             SpotId::Amagi__Main_Area__Broken_Wall,
@@ -13766,7 +13747,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            575,
+            550,
         ),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
@@ -13786,12 +13767,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-            1101,
+            1051,
         ),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-            526,
+            614,
         ),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
@@ -14236,12 +14217,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
-            900,
+            950,
         ),
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-            1699,
+            1750,
         ),
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
@@ -14341,7 +14322,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Pillar,
             SpotId::Amagi__West_Lake__Tentacle_Gap,
-            1403,
+            1228,
         ),
         (
             SpotId::Amagi__West_Lake__Pillar,
@@ -14456,7 +14437,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Cavern_Jaw,
             SpotId::Amagi__West_Lake__Cavern_Neck,
-            899,
+            1050,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Jaw,
@@ -14521,7 +14502,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
             SpotId::Amagi__West_Lake__Cavern_Jaw,
-            1100,
+            1000,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Refill_Station,
@@ -14575,11 +14556,6 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-            1052,
-        ),
-        (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
             877,
         ),
@@ -14621,7 +14597,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
-            3157,
+            2982,
         ),
         (
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
@@ -14631,12 +14607,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-            3157,
+            3000,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Stronghold_Item,
-            699,
+            649,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Top,
@@ -14741,7 +14717,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
             SpotId::Amagi__West_Lake__Small_Hill,
-            2280,
+            2105,
         ),
         (
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
@@ -14766,12 +14742,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Small_Hill,
-            1228,
+            1052,
         ),
         (
             SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Tentacle_Gap,
-            4210,
+            4385,
         ),
         (
             SpotId::Amagi__West_Lake__Some_Rock,
@@ -14781,7 +14757,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Stronghold_Front_Door,
-            2280,
+            2105,
         ),
         (
             SpotId::Amagi__West_Lake__Small_Hill,
@@ -14791,12 +14767,12 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Tentacle_Gap,
-            3000,
+            3333,
         ),
         (
             SpotId::Amagi__West_Lake__Small_Hill,
             SpotId::Amagi__West_Lake__Left_of_Enemy,
-            2631,
+            2807,
         ),
         (
             SpotId::Amagi__West_Lake__Small_Hill,
@@ -14811,7 +14787,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Tentacle_Gap,
             SpotId::Amagi__West_Lake__Some_Rock,
-            4210,
+            4385,
         ),
         (
             SpotId::Amagi__West_Lake__Tentacle_Gap,
@@ -14821,7 +14797,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Tentacle_Gap,
             SpotId::Amagi__West_Lake__East_20,
-            2631,
+            2456,
         ),
         (
             SpotId::Amagi__West_Lake__Tentacle_Gap,
@@ -14831,7 +14807,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Left_of_Enemy,
             SpotId::Amagi__West_Lake__Small_Hill,
-            2631,
+            2807,
         ),
         (
             SpotId::Amagi__West_Lake__Left_of_Enemy,
@@ -14901,7 +14877,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Water_Surface,
             SpotId::Amagi__West_Lake__West_Bank,
-            500,
+            349,
         ),
         (
             SpotId::Amagi__West_Lake__Water_Surface,
@@ -14921,7 +14897,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__West_Shore,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            5087,
+            5263,
         ),
         (
             SpotId::Amagi__West_Lake__West_Shore,
@@ -14931,7 +14907,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            877,
+            526,
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
@@ -14941,7 +14917,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
-            877,
+            526,
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
@@ -14951,7 +14927,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
-            2807,
+            2982,
         ),
         (
             SpotId::Amagi__West_Lake__West_15,
@@ -27016,15 +26992,15 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => Some(575),
+        ) => Some(550),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => Some(1101),
+        ) => Some(1051),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => Some(526),
+        ) => Some(614),
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => Some(4054),
         (SpotId::Amagi__Grid_31_19__West, SpotId::Amagi__Grid_31_19__East) => Some(4054),
         (SpotId::Amagi__Liru_Room__Bottom, SpotId::Amagi__Liru_Room__Platform_4_Right) => None,
@@ -27157,28 +27133,28 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         }
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Save_Point) => Some(4954),
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => {
-            Some(500)
+            Some(449)
         }
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => Some(175),
-        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => Some(1403),
+        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => Some(350),
+        (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => Some(1228),
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => Some(3153),
+        ) => Some(3378),
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
         ) => Some(2027),
         (SpotId::Amagi__Main_Area__Catwalk_Broken_Part, SpotId::Amagi__Main_Area__Save_Point) => {
-            Some(2252)
+            Some(2139)
         }
         (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Broken_Wall) => {
-            Some(450)
+            Some(563)
         }
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => Some(3153),
+        ) => Some(3378),
         (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Platform_3) => {
             Some(3000)
         }
@@ -27190,7 +27166,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
         ) => Some(2027),
         (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Enemy_Side) => {
-            Some(1576)
+            Some(1500)
         }
         (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Save_Point) => {
             Some(1500)
@@ -27200,11 +27176,11 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Amagi__Main_Area__East_15, SpotId::Amagi__Main_Area__Waters_Edge) => Some(4035),
         (SpotId::Amagi__Main_Area__East_19, SpotId::Amagi__Main_Area__Small_Cliff) => Some(2477),
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Catwalk_Center) => {
-            Some(899)
+            Some(800)
         }
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => Some(1000),
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_3) => Some(1126),
-        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => Some(1351),
+        (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => Some(1238),
         (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => Some(2702),
         (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__Half_Pillar) => Some(2252),
         (SpotId::Amagi__Main_Area__Flat_Ruin, SpotId::Amagi__Main_Area__West_18) => None,
@@ -27223,7 +27199,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             Some(1126)
         }
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => Some(900),
-        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => Some(600),
+        (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => Some(650),
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Upper_Platform) => None,
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__West_Shelf) => None,
         (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Catwalk_Center) => {
@@ -27234,9 +27210,9 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__Platform_2) => None,
         (SpotId::Amagi__Main_Area__Platform_3, SpotId::Amagi__Main_Area__West_18) => Some(4279),
         (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Broken_Wall) => None,
-        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => Some(1351),
+        (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => Some(1238),
         (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Carving) => {
-            Some(1578)
+            Some(1403)
         }
         (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Shallow_End) => {
             Some(7192)
@@ -27246,7 +27222,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => Some(2456),
         (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__West_Shelf) => {
-            Some(1700)
+            Some(1750)
         }
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -27258,7 +27234,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Amagi__Main_Area__Small_Cliff, SpotId::Amagi__Main_Area__Enemy_Side) => Some(2702),
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Cliff) => Some(1000),
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__East_Ledge) => {
-            Some(700)
+            Some(800)
         }
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Platform_2) => {
             Some(900)
@@ -27293,9 +27269,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
         ) => Some(2702),
-        (SpotId::Amagi__West_Lake__Cavern_Back_Teeth, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
-            Some(1801)
-        }
+        (SpotId::Amagi__West_Lake__Cavern_Back_Teeth, SpotId::Amagi__West_Lake__Cavern_Jaw) => None,
         (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Cavern_Neck) => None,
         (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Some_Rock) => Some(2252),
         (
@@ -27317,10 +27291,6 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => Some(1126),
         (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => Some(1351),
-        (
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
         ) => None,
@@ -27334,7 +27304,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Front_Pillar) => {
             None
         }
-        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => Some(900),
+        (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => Some(1050),
         (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Refill_Station) => {
             None
         }
@@ -27345,7 +27315,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => Some(4054),
+        ) => Some(3828),
         (
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
@@ -27369,7 +27339,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
         ) => Some(1351),
         (SpotId::Amagi__West_Lake__Cavern_Refill_Station, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
-            Some(1100)
+            Some(1000)
         }
         (SpotId::Amagi__West_Lake__Cavern_Tear_Duct, SpotId::Amagi__West_Lake__Cavern_Eye) => {
             Some(900)
@@ -27420,7 +27390,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => Some(900),
+        ) => Some(950),
         (SpotId::Amagi__West_Lake__Northwest_Platform, SpotId::Amagi__West_Lake__West_Cliff) => {
             None
         }
@@ -27432,19 +27402,19 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Somewhat_Central_Platform) => {
             Some(5630)
         }
-        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => Some(1801),
+        (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => Some(1576),
         (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__East_19) => Some(900),
         (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__Pillar) => None,
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
-            Some(3378)
+            Some(3603)
         }
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Some_Rock) => None,
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Stronghold_Front_Door) => {
-            Some(2927)
+            Some(2702)
         }
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Tentacle_Gap) => None,
         (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Cavern_Chin) => None,
-        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => Some(1576),
+        (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => Some(1351),
         (
             SpotId::Amagi__West_Lake__Some_Rock,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
@@ -27473,7 +27443,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
         ) => Some(900),
         (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Small_Hill) => {
-            Some(2927)
+            Some(2702)
         }
         (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Some_Rock) => {
             None
@@ -27491,14 +27461,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
         ) => None,
         (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Item) => {
-            Some(699)
+            Some(675)
         }
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => Some(3378),
+        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => Some(3153),
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
             Some(1100)
         }
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Pillar) => None,
-        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => Some(5405),
+        (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => Some(5630),
         (
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
             SpotId::Amagi__West_Lake__East_Platform,
@@ -27515,12 +27485,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
             SpotId::Amagi__West_Lake__Tentacle_Gap,
         ) => Some(1599),
-        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => Some(500),
+        (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => Some(349),
         (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Cliff) => {
             Some(1929)
         }
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => {
-            Some(2807)
+            Some(2982)
         }
         (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__Water_Surface) => None,
         (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__West_Cliff) => Some(2477),
@@ -27543,7 +27513,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => Some(1351),
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Surface_Wall_Right) => {
-            Some(5087)
+            Some(5263)
         }
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Water_Surface) => {
             Some(1754)
@@ -30502,15 +30472,15 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => (Some(575), vec![]),
+        ) => (Some(550), vec![]),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Bottom,
-        ) => (Some(1101), vec![]),
+        ) => (Some(1051), vec![]),
         (
             SpotId::Amagi__Cave_Behind_Waterfall__Top,
             SpotId::Amagi__Cave_Behind_Waterfall__Middle,
-        ) => (Some(526), vec![]),
+        ) => (Some(614), vec![]),
         (SpotId::Amagi__Grid_31_19__East, SpotId::Amagi__Grid_31_19__West) => {
             (Some(4054), vec![([true], 3157)])
         }
@@ -30665,32 +30635,32 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(4954), vec![([true], 3859)])
         }
         (SpotId::Amagi__Main_Area__Broken_Wall, SpotId::Amagi__Main_Area__Wall_Stuck_Spot) => {
-            (Some(500), vec![])
+            (Some(449), vec![])
         }
         (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_15) => {
-            (Some(175), vec![])
+            (Some(350), vec![])
         }
         (SpotId::Amagi__Main_Area__Carving, SpotId::Amagi__Main_Area__West_Side) => {
-            (Some(1403), vec![])
+            (Some(1228), vec![])
         }
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_Center,
-        ) => (Some(3153), vec![([true], 2456)]),
+        ) => (Some(3378), vec![([true], 2631)]),
         (
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
             SpotId::Amagi__Main_Area__Catwalk_East_Edge,
         ) => (Some(2027), vec![([true], 1578)]),
         (SpotId::Amagi__Main_Area__Catwalk_Broken_Part, SpotId::Amagi__Main_Area__Save_Point) => {
-            (Some(2252), vec![([true], 1754)])
+            (Some(2139), vec![([true], 1666)])
         }
         (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Broken_Wall) => {
-            (Some(450), vec![([true], 350)])
+            (Some(563), vec![([true], 438)])
         }
         (
             SpotId::Amagi__Main_Area__Catwalk_Center,
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
-        ) => (Some(3153), vec![([true], 2456)]),
+        ) => (Some(3378), vec![([true], 2631)]),
         (SpotId::Amagi__Main_Area__Catwalk_Center, SpotId::Amagi__Main_Area__Platform_3) => {
             (Some(3000), vec![])
         }
@@ -30702,7 +30672,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__Main_Area__Catwalk_Broken_Part,
         ) => (Some(2027), vec![([true], 1578)]),
         (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Enemy_Side) => {
-            (Some(1576), vec![([true], 1500)])
+            (Some(1500), vec![])
         }
         (SpotId::Amagi__Main_Area__Catwalk_East_Edge, SpotId::Amagi__Main_Area__Save_Point) => {
             (Some(1500), vec![])
@@ -30720,7 +30690,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2477), vec![([true], 1929)])
         }
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Catwalk_Center) => {
-            (Some(899), vec![])
+            (Some(800), vec![])
         }
         (SpotId::Amagi__Main_Area__East_Ledge, SpotId::Amagi__Main_Area__Platform_2) => {
             (Some(1000), vec![])
@@ -30729,7 +30699,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1126), vec![([true], 877)])
         }
         (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Save_Point) => {
-            (Some(1351), vec![([true], 1052)])
+            (Some(1238), vec![([true], 964)])
         }
         (SpotId::Amagi__Main_Area__Enemy_Side, SpotId::Amagi__Main_Area__Small_Cliff) => {
             (Some(2702), vec![([true], 2105)])
@@ -30756,13 +30726,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(900), vec![([true], 701)])
         }
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Catwalk_Center) => {
-            (Some(1126), vec![([true], 1000)])
+            (Some(1126), vec![([true], 950)])
         }
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__East_Ledge) => {
             (Some(900), vec![([true], 701)])
         }
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Platform_3) => {
-            (Some(600), vec![])
+            (Some(650), vec![])
         }
         (SpotId::Amagi__Main_Area__Platform_2, SpotId::Amagi__Main_Area__Upper_Platform) => {
             (None, vec![([true], 1000)])
@@ -30789,10 +30759,10 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (None, vec![([true], 4000)])
         }
         (SpotId::Amagi__Main_Area__Save_Point, SpotId::Amagi__Main_Area__Enemy_Side) => {
-            (Some(1351), vec![([true], 1052)])
+            (Some(1238), vec![([true], 964)])
         }
         (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Carving) => {
-            (Some(1578), vec![])
+            (Some(1403), vec![])
         }
         (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__Shallow_End) => {
             (Some(7192), vec![])
@@ -30802,7 +30772,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__Main_Area__Upper_Platform,
         ) => (Some(2456), vec![]),
         (SpotId::Amagi__Main_Area__Secret_Outcropping, SpotId::Amagi__Main_Area__West_Shelf) => {
-            (Some(1700), vec![])
+            (Some(1750), vec![])
         }
         (
             SpotId::Amagi__Main_Area__Secret_Waterfall,
@@ -30824,7 +30794,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1000), vec![])
         }
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__East_Ledge) => {
-            (Some(700), vec![])
+            (Some(800), vec![])
         }
         (SpotId::Amagi__Main_Area__Upper_Platform, SpotId::Amagi__Main_Area__Platform_2) => {
             (Some(900), vec![([true], 701)])
@@ -30874,7 +30844,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
         ) => (Some(2702), vec![([true], 2105)]),
         (SpotId::Amagi__West_Lake__Cavern_Back_Teeth, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
-            (Some(1801), vec![([true], 1403)])
+            (None, vec![([true], 1403)])
         }
         (SpotId::Amagi__West_Lake__Cavern_Chin, SpotId::Amagi__West_Lake__Cavern_Neck) => {
             (None, vec![([true], 3508)])
@@ -30901,10 +30871,6 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
         ) => (Some(1126), vec![([true], 877)]),
         (
-            SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
-            SpotId::Amagi__West_Lake__Cavern_Refill_Station,
-        ) => (Some(1351), vec![([true], 1052)]),
-        (
             SpotId::Amagi__West_Lake__Cavern_Front_Teeth,
             SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
         ) => (None, vec![([true], 2105)]),
@@ -30921,7 +30887,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (None, vec![([true], 3000)])
         }
         (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Neck) => {
-            (Some(900), vec![([true], 899)])
+            (Some(1050), vec![])
         }
         (SpotId::Amagi__West_Lake__Cavern_Jaw, SpotId::Amagi__West_Lake__Cavern_Refill_Station) => {
             (None, vec![([true], 3000)])
@@ -30933,7 +30899,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
             SpotId::Amagi__West_Lake__Stronghold_Top,
-        ) => (Some(4054), vec![([true], 3157)]),
+        ) => (Some(3828), vec![([true], 2982)]),
         (
             SpotId::Amagi__West_Lake__Cavern_Middle_Pillar,
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
@@ -30957,7 +30923,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__West_Lake__Cavern_Front_Pillar,
         ) => (Some(1351), vec![([true], 1052)]),
         (SpotId::Amagi__West_Lake__Cavern_Refill_Station, SpotId::Amagi__West_Lake__Cavern_Jaw) => {
-            (Some(1100), vec![])
+            (Some(1000), vec![])
         }
         (SpotId::Amagi__West_Lake__Cavern_Tear_Duct, SpotId::Amagi__West_Lake__Cavern_Eye) => {
             (Some(900), vec![([true], 701)])
@@ -30997,7 +30963,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(3828), vec![([true], 2982)])
         }
         (SpotId::Amagi__West_Lake__Left_of_Enemy, SpotId::Amagi__West_Lake__Small_Hill) => {
-            (None, vec![([true], 2631)])
+            (None, vec![([true], 2807)])
         }
         (SpotId::Amagi__West_Lake__Northeast_Platform, SpotId::Amagi__West_Lake__East_Bank) => {
             (None, vec![([true], 1228)])
@@ -31026,11 +30992,11 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
-        ) => (Some(2027), vec![([true], 1699)]),
+        ) => (Some(2027), vec![([true], 1750)]),
         (
             SpotId::Amagi__West_Lake__Northwest_Platform,
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
-        ) => (Some(900), vec![([true], 900)]),
+        ) => (Some(950), vec![]),
         (SpotId::Amagi__West_Lake__Northwest_Platform, SpotId::Amagi__West_Lake__West_Cliff) => {
             (None, vec![([true], 1000)])
         }
@@ -31047,7 +31013,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(5630), vec![([true], 4385)])
         }
         (SpotId::Amagi__West_Lake__Pillar, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
-            (Some(1801), vec![([true], 1403)])
+            (Some(1576), vec![([true], 1228)])
         }
         (SpotId::Amagi__West_Lake__Pillar_Platform, SpotId::Amagi__West_Lake__East_19) => {
             (Some(900), vec![([true], 701)])
@@ -31056,22 +31022,22 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (None, vec![([true], 1000)])
         }
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
-            (Some(3378), vec![([true], 2631)])
+            (Some(3603), vec![([true], 2807)])
         }
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Some_Rock) => {
             (None, vec![([true], 2000)])
         }
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Stronghold_Front_Door) => {
-            (Some(2927), vec![([true], 2280)])
+            (Some(2702), vec![([true], 2105)])
         }
         (SpotId::Amagi__West_Lake__Small_Hill, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
-            (None, vec![([true], 3000)])
+            (None, vec![([true], 3333)])
         }
         (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Cavern_Chin) => {
             (None, vec![([true], 2000)])
         }
         (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Small_Hill) => {
-            (Some(1576), vec![([true], 1228)])
+            (Some(1351), vec![([true], 1052)])
         }
         (
             SpotId::Amagi__West_Lake__Some_Rock,
@@ -31081,7 +31047,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(1351), vec![([true], 1052)])
         }
         (SpotId::Amagi__West_Lake__Some_Rock, SpotId::Amagi__West_Lake__Tentacle_Gap) => {
-            (None, vec![([true], 4210)])
+            (None, vec![([true], 4385)])
         }
         (SpotId::Amagi__West_Lake__Somewhat_Central_Platform, SpotId::Amagi__West_Lake__Pillar) => {
             (Some(5630), vec![([true], 4385)])
@@ -31103,7 +31069,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__West_Lake__Stronghold_Ceiling_Left,
         ) => (Some(900), vec![([true], 701)]),
         (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Small_Hill) => {
-            (Some(2927), vec![([true], 2280)])
+            (Some(2702), vec![([true], 2105)])
         }
         (SpotId::Amagi__West_Lake__Stronghold_Front_Door, SpotId::Amagi__West_Lake__Some_Rock) => {
             (None, vec![([true], 2000)])
@@ -31119,12 +31085,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (
             SpotId::Amagi__West_Lake__Stronghold_Top,
             SpotId::Amagi__West_Lake__Cavern_Lower_Trachea,
-        ) => (None, vec![([true], 3157)]),
+        ) => (None, vec![([true], 3000)]),
         (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Item) => {
-            (Some(699), vec![])
+            (Some(675), vec![([true], 649)])
         }
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => {
-            (Some(3378), vec![([true], 2631)])
+            (Some(3153), vec![([true], 2456)])
         }
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
             (Some(1100), vec![])
@@ -31133,7 +31099,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (None, vec![([true], 2000)])
         }
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Some_Rock) => {
-            (Some(5405), vec![([true], 4210)])
+            (Some(5630), vec![([true], 4385)])
         }
         (
             SpotId::Amagi__West_Lake__Upper_Center_Platform,
@@ -31152,13 +31118,13 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__West_Lake__Tentacle_Gap,
         ) => (Some(1599), vec![]),
         (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Bank) => {
-            (Some(500), vec![])
+            (Some(349), vec![])
         }
         (SpotId::Amagi__West_Lake__Water_Surface, SpotId::Amagi__West_Lake__West_Cliff) => {
             (Some(1929), vec![])
         }
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => {
-            (Some(2807), vec![])
+            (Some(2982), vec![])
         }
         (SpotId::Amagi__West_Lake__West_Bank, SpotId::Amagi__West_Lake__Water_Surface) => {
             (None, vec![([true], 1000)])
@@ -31189,7 +31155,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             SpotId::Amagi__West_Lake__Somewhat_Central_Platform,
         ) => (Some(1351), vec![([true], 1052)]),
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Surface_Wall_Right) => {
-            (Some(5087), vec![])
+            (Some(5263), vec![])
         }
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Water_Surface) => {
             (Some(1754), vec![])

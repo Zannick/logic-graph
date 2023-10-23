@@ -11,7 +11,7 @@ areas:
     _combo: false
   spots:
     - name: East 15
-      coord: [30.95, 14.8]
+      coord: [30.95, 14.85]
       local:
         - to: Water's Edge
       data:
@@ -20,14 +20,14 @@ areas:
         - to: Glacier > Lake Main Entrance > Lake Access
           tags: [xshift]
     - name: Water's Edge
-      coord: [29.8, 14.8]
+      coord: [29.8, 14.85]
       local:
         - to: East 15
         - to: Shallow End
       data:
         water: false
     - name: Shallow End
-      coord: [29.6, 15.1]
+      coord: [29.6, 15.15]
       local:
         - to: Water's Edge
           jumps: 1
@@ -43,7 +43,7 @@ areas:
           jumps: 2
         - to: Upper Platform
     - name: Upper Platform
-      coord: [28.25, 15.7]
+      coord: [28.25, 15.6]
       local:
         - to: Cliff
           jumps: 1
@@ -61,7 +61,7 @@ areas:
         - to: Upper Platform
           jumps: 2
     - name: West Side
-      coord: [27.5, 15.8]
+      coord: [27.5, 15.75]
       local:
         - to: Carving
         - to: West Shelf
@@ -74,7 +74,7 @@ areas:
           time: 2.3
       keep: true
     - name: Platform 2
-      coord: [28.05, 16.2]
+      coord: [28.05, 16.15]
       local:
         - to: West Shelf
           jumps: 1
@@ -100,7 +100,7 @@ areas:
       keep: true
 
     - name: Carving
-      coord: [27.1, 14.7]
+      coord: [27.15, 14.6]
       data:
         water: false
       local:
@@ -119,7 +119,7 @@ areas:
           req: ^_combo and $hook
           time: 1.6
     - name: West 15
-      coord: [27.05, 14.8]
+      coord: [27.05, 14.85]
       data:
         water: false
       local:
@@ -129,7 +129,7 @@ areas:
         - to: West Lake > East 15
           tags: [xshift]
     - name: Secret Outcropping
-      coord: [27.55, 14.2]
+      coord: [27.55, 14.15]
       data:
         water: false
       local:
@@ -154,7 +154,7 @@ areas:
         - to: West 18
         - to: Flat Ruin
     - name: Catwalk Center
-      coord: [28.3, 17.2]
+      coord: [28.3, 17.1]
       local:
         - to: Platform 3
           jumps: 3  # but one with water movement!
@@ -169,19 +169,19 @@ areas:
           req: Underwater_Movement
           time: 1.4  
     - name: Catwalk Broken Part
-      coord: [29, 17.2]
+      coord: [29.05, 17.1]
       local:
         - to: Catwalk Center
         - to: Save Point
         - to: Catwalk East Edge
     - name: Catwalk East Edge
-      coord: [29.45, 17.2]
+      coord: [29.5, 17.1]
       local:
         - to: Catwalk Broken Part
         - to: Save Point
         - to: Enemy Side
     - name: Save Point
-      coord: [29.5, 18.7]
+      coord: [29.525, 18.6]
       local:
         - to: Broken Wall
           jumps: 4
@@ -192,13 +192,13 @@ areas:
           do: $save
           time: 1.2
     - name: Enemy Side
-      coord: [29.8, 18.7]
+      coord: [29.8, 18.6]
       local:
         - to: Save Point
         - to: Small Cliff
           jumps: 1
     - name: Small Cliff
-      coord: [30.4, 18.6]
+      coord: [30.4, 18.55]
       local:
         - to: Enemy Side
         - to: East 19
@@ -212,7 +212,7 @@ areas:
           tags: [xshift]
 
     - name: Broken Wall
-      coord: [28.4, 17.4]
+      coord: [28.425, 17.35]
       local:
         - to: Catwalk Center
           jumps: 1
@@ -220,19 +220,19 @@ areas:
         - to: Save Point
       keep: true
     - name: Wall Stuck Spot
-      coord: [28.35, 17.9]
+      coord: [28.4, 17.8]
       local:
         - to: Broken Wall
           jumps: 1
     - name: Half Pillar
-      coord: [28, 18.2]
+      coord: [28, 18.15]
       local:
         - to: Broken Wall
           jumps: 2
         - to: Flat Ruin
         - to: West Mini-Hill
     - name: Flat Ruin
-      coord: [27.5, 18.2]
+      coord: [27.5, 18.15]
       local:
         - to: West 18
           jumps: 2
@@ -249,7 +249,7 @@ areas:
         - to: Half Pillar
           jumps: 1
     - name: West 18
-      coord: [27.05, 17.4]
+      coord: [27.05, 17.35]
       local:
         - to: Flat Ruin
       exits:
@@ -264,7 +264,7 @@ areas:
           tags: [xshift]
 
     - name: Secret Waterfall
-      coord: [27.4, 13.4]
+      coord: [27.4, 13.35]
       data:
         water: false
       local:
@@ -285,14 +285,14 @@ areas:
           tags: [flask]
 
 - name: Cave Behind Waterfall
-  graph_offset: [-0.25, 0]
+  graph_offset: [0, 60]
   graph_attrs: shape="house",fillcolor="8"
   on_entry: $reset_old_area(^newpos)
   data:
     water: false
   spots:
     - name: Bottom
-      coord: [27.55, 14.2]
+      coord: [27.55, 14.15]
       exits:
         - to: Main Area > Secret Outcropping
           tags: [exterior]
@@ -303,7 +303,7 @@ areas:
           req: $hook
           time: 1.8
     - name: Middle
-      coord: [27.55, 13.7]
+      coord: [27.575, 13.6]
       local:
         - to: Bottom
           thru: [27.6, 13.8]
@@ -317,7 +317,7 @@ areas:
           to: Amagi > Cave Behind Waterfall > Top
           time: 1.1
     - name: Top
-      coord: [27.4, 13.4]
+      coord: [27.4, 13.35]
       local:
         - to: Middle
         - to: Bottom
@@ -495,7 +495,7 @@ areas:
   on_entry: $reset_old_area(^newpos)
   spots:
     - name: East 15
-      coord: [26.95, 14.8]
+      coord: [26.95, 14.85]
       data:
         water: false
       local:
@@ -504,7 +504,7 @@ areas:
         - to: Main Area > West 15
           tags: [xshift]
     - name: East Shore
-      coord: [26.8, 14.8]
+      coord: [26.8, 14.85]
       data:
         water: false
       local:
@@ -530,7 +530,7 @@ areas:
         - to: Pillar
         - to: East Platform
     - name: Northwest Platform
-      coord: [25.8, 16.2]
+      coord: [25.8, 16.15]
       local:
         - to: West Cliff
           jumps: 1
@@ -565,7 +565,7 @@ areas:
           jumps: 4
           jump_movement: water
     - name: East 18
-      coord: [26.95, 17.4]
+      coord: [26.95, 17.35]
       local:
         - to: East Platform
           jumps: 1
@@ -636,7 +636,7 @@ areas:
           jumps: 1
           jump_movement: water
     - name: Cavern Jaw
-      coord: [23.7, 17.3]
+      coord: [23.7, 17.15]
       local:
         - to: Cavern Neck
         - to: Cavern Back Teeth
@@ -673,7 +673,7 @@ areas:
         - to: Stronghold Front Door
 
     - name: Cavern Refill Station
-      coord: [23.6, 16.2]
+      coord: [23.6, 16.15]
       local:
         - to: Cavern Jaw
         - to: Cavern Front Pillar
@@ -712,7 +712,7 @@ areas:
           req: Amagi_Dragon_Eye_Passage
           time: 2.8
     - name: Cavern Eye
-      coord: [24.6, 16.4]
+      coord: [24.6, 16.35]
       local:
         - to: Cavern Tear Duct
           jumps: 1
@@ -757,7 +757,7 @@ areas:
         - to: Stronghold Top
 
     - name: Stronghold Top
-      coord: [23.3, 19.1]
+      coord: [23.25, 19.1]
       local:
         - to: Cavern Lower Trachea
           jumps: 3
@@ -773,7 +773,7 @@ areas:
           item_time: 5.5
           tags: [nearby_urn]
     - name: Stronghold Item
-      coord: [23.4, 19.8]
+      coord: [23.4, 19.75]
       local:
         - to: Stronghold Rear Wall
           jumps: 1
@@ -878,7 +878,7 @@ areas:
           req: Amagi_Stronghold_Wall_2
 
     - name: Some Rock
-      coord: [25, 19]
+      coord: [25, 18.9]
       local:
         - to: Cavern Chin
           jumps: 2
@@ -892,7 +892,7 @@ areas:
           jumps: 2
           jump_movement: water
     - name: Small Hill
-      coord: [25.35, 19.4]
+      coord: [25.3, 19.35]
       local:
         - to: Stronghold Front Door
         - to: Some Rock
@@ -903,7 +903,7 @@ areas:
           jump_movement: water
         - to: Left of Enemy
     - name: Tentacle Gap
-      coord: [26.2, 18.7]
+      coord: [26.25, 18.7]
       local:
         - to: Some Rock
         - to: Pillar
@@ -918,8 +918,9 @@ areas:
           jumps: 2
           jump_movement: water
         - to: East 20
+          jumps: 1
     - name: East 20
-      coord: [26.95, 19.8]
+      coord: [26.95, 19.75]
       local:
         - to: Left of Enemy
       # TODO: exits
@@ -932,7 +933,7 @@ areas:
         - to: West Bank
           jumps: 2
     - name: West Bank
-      coord: [25.05, 15.4]
+      coord: [25.05, 15.35]
       local:
         - to: Water Surface
           jumps: 1
@@ -946,22 +947,23 @@ areas:
           req: $grab or $climb
           time: 3
     - name: Water Surface
-      coord: [25.05, 14.9]
+      coord: [25.05, 15.0]
       data:
         water: false
       local:
         - to: West Bank
         - to: West Cliff
     - name: West Shore
-      coord: [24.55, 14.8]
+      coord: [24.55, 14.85]
       data:
         water: false
       local:
         - to: West Bank
         - to: Water Surface
         - to: Surface Wall Right
+          jumps: 2
     - name: Surface Wall Right
-      coord: [23.1, 14.8]
+      coord: [23.05, 14.65]
       data:
         water: false
       locations:
@@ -976,7 +978,7 @@ areas:
           req: Amagi_West_Lake_Surface_Wall
           movement: base
     - name: Surface Wall Left
-      coord: [22.85, 14.8]
+      coord: [22.9, 14.65]
       data:
         water: false
       locations:
@@ -991,11 +993,12 @@ areas:
           req: Amagi_West_Lake_Surface_Wall
           movement: base
     - name: West 15
-      coord: [22.05, 14.8]
+      coord: [22.05, 14.75]
       data:
         water: false
       local:
         - to: Surface Wall Left
+          jumps: 2
       exits:
         - to: Ebih > Vertical Interchange > East 15
           tags: [xshift]
