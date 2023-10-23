@@ -16957,7 +16957,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1 => Exit {
             id: ExitId::Ebih__Waterfall__Cave_Entrance__ex__Cave__Entry_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Cave__Entry,
             price: Currency::Free,
             loc_id: None,
@@ -17216,7 +17216,7 @@ pub fn build_exits() -> EnumMap<ExitId, Exit> {
         },
         ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1 => Exit {
             id: ExitId::Ebih__Cave__Entry__ex__Waterfall__Cave_Entrance_1,
-            time: 250,
+            time: 750,
             dest: SpotId::Ebih__Waterfall__Cave_Entrance,
             price: Currency::Free,
             loc_id: None,

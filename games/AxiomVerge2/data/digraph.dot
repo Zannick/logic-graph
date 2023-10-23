@@ -107,8 +107,8 @@ digraph AxiomVerge2 {
         Antarctica__Shed__Interior [label = "", pos = "112.05,-103.0!"];
         Antarctica__Building_1W__West_Entry [label = "", pos = "120.75,-102.5!"];
         Antarctica__Building_1W__Connector [label = "", pos = "122.85,-102.333333!"];
-        Antarctica__Building_1E__Connector [label = "", pos = "123.15,-2.75!"];
-        Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-2.916667!"];
+        Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
+        Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
         Antarctica__East__Building_1_Entry [label = "", pos = "125.1,-2.5!"];
         Antarctica__East__Save_Point [label = "", pos = "126.0,-3.0!"];
         Antarctica__East__Building_2_Entry [label = "", pos = "127.35,-2.5!"];
@@ -126,7 +126,7 @@ digraph AxiomVerge2 {
         Ebih__Base_Camp__East_11 [label = "", pos = "92.85,-17.25!"];
         Ebih__Base_Camp__East_12 [label = "", pos = "92.85,-19.5!"];
         Ebih__Base_Camp__Staircase [label = "", pos = "91.2,-19.833333!"];
-        Ebih__Base_Camp__Save_Point [label = "", pos = "88.5,-21.0!"];
+        Ebih__Base_Camp__Save_Point [label = "", pos = "88.5,-20.916667!"];
         Ebih__Base_Camp__Bunker_Entry [label = "", pos = "90.675,-21.0!"];
         Ebih__Base_Camp__Lake_Access [label = "", pos = "92.85,-21.166667!"];
         Ebih__Base_Camp__Behind_Vehicle [label = "", pos = "86.4,-21.166667!"];
@@ -929,7 +929,6 @@ digraph AxiomVerge2 {
     Ebih__Waterfall__West_Door -> Ebih__Waterfall__West_Door_Right;
     Ebih__Waterfall__West_Door_Right -> Ebih__Waterfall__West_Door;
     Ebih__Waterfall__Middle_West_Tree -> Ebih__Waterfall__West_Main_Path;
-    Ebih__Waterfall__Cave_Entrance -> Ebih__Cave__Entry;
     Ebih__Waterfall__Below_Tree -> Ebih__Waterfall__Big_Tree;
     Ebih__Waterfall__Platform -> Ebih__Waterfall__Big_Tree;
     Ebih__Waterfall__East_8 -> Ebih__Ebih_East__West_8;
@@ -966,7 +965,6 @@ digraph AxiomVerge2 {
     Ebih__Ebih_West__West_12 -> Ebih__Ebih_West__West_Fork;
     Ebih__Ebih_West__West_13 -> Giguna__Wasteland__East_13;
     Ebih__Ebih_West__East_13 -> Ebih__Vertical_Interchange__West_13;
-    Ebih__Cave__Entry -> Ebih__Waterfall__Cave_Entrance;
     Ebih__Ebih_East__West_8 -> Ebih__Waterfall__East_8;
     Ebih__Ebih_East__West_7 -> Ebih__Waterfall__East_7;
     Ebih__Ebih_East__East_9 -> Ebih__Ebih_East__East_Hill;

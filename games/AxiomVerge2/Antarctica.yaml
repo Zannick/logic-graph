@@ -67,7 +67,7 @@ areas:
           tags: [xshift]
 
 - name: Building 1E
-  graph_offset: [0, 0.25]
+  graph_offset: [0, 60]
   spots:
     - name: Connector
       coord: [41.05, 1.4]

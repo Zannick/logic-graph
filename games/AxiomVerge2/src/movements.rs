@@ -858,7 +858,7 @@ pub fn local_travel_time(
             3157
         }
         ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => {
-            2099
+            2050
         }
         ([false], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
             2543
@@ -6034,7 +6034,7 @@ pub fn local_travel_time(
         ([true], SpotId::Ebih__Base_Camp__West_Midair, SpotId::Ebih__Base_Camp__West_12) => 1052,
         ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => 3157,
         ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => {
-            2099
+            2050
         }
         ([true], SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
             2543
@@ -15592,7 +15592,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
             SpotId::Ebih__Base_Camp__Save_Point,
-            2099,
+            2050,
         ),
         (
             SpotId::Ebih__Base_Camp__Top_Platform,
@@ -16817,7 +16817,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
             SpotId::Ebih__Cave__Entry,
-            250,
+            750,
         ),
         (
             SpotId::Ebih__Waterfall__Cave_Entrance,
@@ -17687,7 +17687,7 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         (
             SpotId::Ebih__Cave__Entry,
             SpotId::Ebih__Waterfall__Cave_Entrance,
-            250,
+            750,
         ),
         (
             SpotId::Ebih__Cave__Entry,
@@ -27631,7 +27631,7 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Bunker_Entry) => {
             Some(2543)
         }
-        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => Some(2099),
+        (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => Some(2050),
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => Some(3157),
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Tent_Entry) => Some(3771),
         (SpotId::Ebih__Base_Camp__West_11, SpotId::Ebih__Base_Camp__Left_Platform) => Some(2280),
@@ -31318,7 +31318,7 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
             (Some(2543), vec![])
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Save_Point) => {
-            (Some(2099), vec![])
+            (Some(2050), vec![])
         }
         (SpotId::Ebih__Base_Camp__Top_Platform, SpotId::Ebih__Base_Camp__Staircase) => {
             (Some(3157), vec![])

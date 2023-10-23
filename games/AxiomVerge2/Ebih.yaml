@@ -42,7 +42,7 @@ areas:
         - to: Save Point
         - to: Lake Access
     - name: Save Point
-      coord: [29.5, 12.6]
+      coord: [29.5, 12.55]
       local:
         - to: Staircase
           jumps: 6
@@ -923,7 +923,7 @@ areas:
         - to: Near East Tree
       exits:
         - to: Cave > Entry
-          tags: [cave]
+          tags: [interior, cave]
     - name: Center Main Path
       coord: [22.9, 7.75]
       local:
@@ -1383,7 +1383,7 @@ areas:
           tags: [standing]
       exits:
         - to: Waterfall > Cave Entrance
-          tags: [cave]
+          tags: [exterior, cave]
 
 - name: Ebih East
   on_entry: $reset_old_area(^newpos)
