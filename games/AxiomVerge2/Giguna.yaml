@@ -1759,22 +1759,47 @@ areas:
 
     - name: Platform Stop
       coord: [12.5, 18.7]
+      data:
+        flipside: Giguna Breach > Pink Clouds > Normal Entry
       local:
         - to: Pull Right
         - to: Southeast
+      exits:
+        - name: Enter Portal
+          req: ^_platform_and_portal and ^mode == 'drone'
+          to: ^flipside
+          tags: [portal]
       
     - name: Cache
       coord: [12.9, 18.3]
+      data:
+        flipside: Giguna Breach > Pink Clouds > Corner
+      locations:
+        - name: Item
+          item: Big_Flask
+          tags: [flask]
     - name: Platform Early Portal
       coord: [12.5, 18.85]
     - name: Southwest
       coord: [11.0, 19.9]
+      exits:
+        - to: Irikar > Hub > Northwest
+          tags: [yshift]
     - name: Straight Down
       coord: [11.3, 19.9]
+      exits:
+        - to: Irikar > Hub > North Above Portal
+          tags: [yshift]
     - name: Pull Right
       coord: [12.25, 19.9]
+      exits:
+        - to: Irikar > Hub > Northwest Above Bowl
+          tags: [yshift]
     - name: Southeast
       coord: [12.8, 19.9]
+      exits:
+        - to: Irikar > Hub > Northeast Above Bowl
+          tags: [yshift]
 
 - name: Lamassu
   on_entry: $reset_old_area(^newpos)

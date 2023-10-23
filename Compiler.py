@@ -206,6 +206,7 @@ class GameLogic(object):
         self.id_lookup = {}
         self.special = self._info.get('special', {})
         self.data = self._info.get('data', {})
+        self.data_defaults = self._info.get("data", {})
         self.process_regions()
         self.process_context()
         self.process_warps()
@@ -303,13 +304,23 @@ class GameLogic(object):
                         self.id_lookup[eh['id']] = eh
                         spot['exit_ids'].append(eh['id'])
                         eh['fullname'] = f'{spot["fullname"]} ==> {eh["to"]} ({ec[eh["to"]]})'
+                        dest = eh['to']
+                        if dest.startswith('^'):
+                            if d := spot.get('data', {}).get(dest[1:]):
+                                if self.data_types[dest[1:]] != 'SpotId':
+                                    self._errors.append(f'Exit {eh["fullname"]} exits to non-spot data: {dest}')
+                                else:
+                                    dest = d
+                            else:
+                                self._errors.append(f'Exit {eh["fullname"]} attempts exit to ctx but only data is supported: {dest}')
                         # Limit to in-Area by marking exits across Areas as keep
                         # Maybe later we can try changing to in-Region or global
-                        eh['keep'] = '>' in eh['to'] or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
+                        eh['keep'] = '>' in dest or ('tags' in eh and any(t in interesting_tags for t in eh['tags']))
                         if 'req' in eh:
                             eh['pr'] = _parseExpression(
                                     eh['req'], eh['to'], spot['fullname'], ' ==> ')
                             eh['access_id'] = self.make_funcid(eh)
+                        eh['to'] = dest
                     for act in spot.get('actions', ()):
                         act['spot'] = sname
                         act['area'] = aname
@@ -1186,7 +1197,6 @@ class GameLogic(object):
                 _handle_here(ctx, val, 'here', area['region'], area['name'])
 
         self.context_values = gc
-        self.data_defaults = self._info.get("data", {})
 
 
     @cached_property

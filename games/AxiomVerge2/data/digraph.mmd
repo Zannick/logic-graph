@@ -978,7 +978,10 @@ subgraph Glacier
 end
 subgraph Irikar
     subgraph Irikar__Hub[Hub]
-        Irikar__Hub__North_Left(North Left);
+        Irikar__Hub__Northwest(Northwest);
+        Irikar__Hub__North_Above_Portal(North Above Portal);
+        Irikar__Hub__Northwest_Above_Bowl(Northwest Above Bowl);
+        Irikar__Hub__Northeast_Above_Bowl(Northeast Above Bowl);
     end
 end
 subgraph Menu
@@ -1184,6 +1187,7 @@ Giguna_Breach__Grid_14_10_11__East_10 --> Giguna_Breach__Grid_14_10_11__High_Led
 Giguna_Breach__Grid_14_10_11__South <--> Giguna_Breach__Robopede__North
 Giguna_Breach__Peak__East_6 --> Giguna_Breach__Peak__Upper_East
 Giguna_Breach__Peak__Portal --> Giguna_Breach__Peak__Upper_West
+Giguna_Breach__Pink_Clouds__Normal_Entry --> Giguna_Breach__Pink_Clouds__Corner
 Giguna_Breach__Robopede__West <--> Giguna_Breach__SW_Save__East_12
 Giguna_Breach__SW_Save__East_12 --> Giguna_Breach__SW_Save__Lower_Platform
 Giguna_Breach__SW_Save__Lower_Platform --> Giguna_Breach__SW_Save__Side_Door
@@ -1214,6 +1218,11 @@ Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__East_Cliff
 Giguna__Carnelian__Upper_Susar --> Giguna__Carnelian__Upper_Path
 Giguna__Carnelian__West_10 <--> Giguna__West_Caverns__East_10
 Giguna__Carnelian__West_Ledge --> Giguna__Carnelian__West_10
+Giguna__Clouds__Platform_Stop --> Giguna_Breach__Pink_Clouds__Normal_Entry
+Giguna__Clouds__Pull_Right --> Irikar__Hub__Northwest_Above_Bowl
+Giguna__Clouds__Southeast --> Irikar__Hub__Northeast_Above_Bowl
+Giguna__Clouds__Southwest --> Irikar__Hub__Northwest
+Giguna__Clouds__Straight_Down --> Irikar__Hub__North_Above_Portal
 Giguna__Dual_Path__Base_of_Wall <--> Giguna__Dual_Path__Wall_Secret
 Giguna__Dual_Path__Base_of_Wall --> Giguna__Dual_Path__Wall_Top
 Giguna__Dual_Path__East_17 <--> Giguna__East_Caverns__West_17

@@ -38,3 +38,17 @@ tests:
       ! Do Giguna > Carnelian > Upper Susar > Caught
       ! Do Giguna > West Caverns > Small Platform > Throw Drone Up
       * Collect Power_Matrix from Giguna > West Caverns > Cache > Item
+
+  - name: Cache in the Cloud
+    start: Giguna > Clouds > North Middle
+    with:
+      - Slingshot_Hook
+      - Drone_Hover
+      - Breach_Attractor
+      - Breach_Sight
+      - Exit_Breach
+    route: |
+      ! Do Giguna > Clouds > Platform Start > Hack, Deploy, Ride to Portal
+        Move... to Giguna Breach > Pink Clouds > Corner
+        ExitBreachWarp to Giguna > Clouds > Cache
+      * Collect Big_Flask from Giguna > Clouds > Cache > Item

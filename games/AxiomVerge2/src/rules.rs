@@ -424,6 +424,10 @@ pub fn access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(
         && helper__attract!(ctx))
         && ctx.has(Item::Breach_Sight))
 }
+pub fn access_giguna__clouds__platform_stop__ex__flipside_1__req(ctx: &Context) -> bool {
+    // ^_platform_and_portal and ^mode == 'drone'
+    (ctx.giguna__clouds__ctx__platform_and_portal() && ctx.mode() == enums::Mode::Drone)
+}
 pub fn access_giguna__east_caverns__arc_ledge__ex__hidden_passage_west_1__req(
     ctx: &Context,
 ) -> bool {

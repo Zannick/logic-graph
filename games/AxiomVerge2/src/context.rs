@@ -344,6 +344,14 @@ pub mod data {
     }
     pub fn flipside(spot_id: SpotId) -> SpotId {
         match spot_id {
+            SpotId::Giguna_Breach__Pink_Clouds__Corner => SpotId::Giguna__Clouds__Cache,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry => {
+                SpotId::Giguna__Clouds__Platform_Stop
+            }
+            SpotId::Giguna__Clouds__Cache => SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna__Clouds__Platform_Stop => {
+                SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry
+            }
             _ => SpotId::None,
         }
     }

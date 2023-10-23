@@ -965,6 +965,8 @@ areas:
       coord: [23.05, 14.65]
       data:
         water: false
+      local:
+        - to: West Shore
       locations:
         - name: Break Wall
           item: Amagi_West_Lake_Surface_Wall
@@ -980,6 +982,8 @@ areas:
       coord: [22.9, 14.65]
       data:
         water: false
+      local:
+        - to: West 15
       locations:
         - name: Break Wall
           item: Amagi_West_Lake_Surface_Wall

@@ -530,13 +530,13 @@ areas:
           req: $hook
           time: 9
     - name: Top
-      coord: [16.5, 5.6]
+      coord: [16.5, 5.55]
       local:
         - to: West 6
         - to: Bottom
           thru: [[16.2, 6.0], [16.65, 7.6], [16.6, 8.5]]
     - name: West 6
-      coord: [16.1, 5.6]
+      coord: [16.1, 5.55]
       local:
         - to: Top
       exits:
@@ -548,7 +548,21 @@ areas:
   spots:
     - name: Normal Entry
       coord: [12.5, 18.7]
+      data:
+        flipside: Giguna > Clouds > Platform Stop
+      local:
+        - to: Corner
+          jumps: 3
+      exits:
+        - to: Corner
+          req: $hover
+          movement: base
+          jumps: 2
     - name: Quick Entry
       coord: [12.5, 18.85]
     - name: Corner
       coord: [12.9, 18.3]
+      data:
+        flipside: Giguna > Clouds > Cache
+      local:
+        - to: Normal Entry

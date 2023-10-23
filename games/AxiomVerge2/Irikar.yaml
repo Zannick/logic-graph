@@ -4,5 +4,11 @@ areas:
 - name: Hub
   on_entry: $reset_old_area(^newpos)
   spots:
-    - name: North Left
+    - name: Northwest
       coord: [11.0, 20.1]
+    - name: North Above Portal
+      coord: [11.3, 20.1]
+    - name: Northwest Above Bowl
+      coord: [12.25, 20.1]
+    - name: Northeast Above Bowl
+      coord: [12.8, 20.1]

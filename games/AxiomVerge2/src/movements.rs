@@ -684,6 +684,16 @@ pub fn local_travel_time(
         ) => 5263,
         (
             [false],
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 5263,
+        (
+            [false],
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+            SpotId::Amagi__West_Lake__West_15,
+        ) => 2982,
+        (
+            [false],
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
         ) => 2982,
@@ -2468,6 +2478,16 @@ pub fn local_travel_time(
         ([false], SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => {
             1403
         }
+        (
+            [false],
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+        ) => 1799,
+        (
+            [false],
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+        ) => 1403,
         (
             [false],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
@@ -5878,6 +5898,16 @@ pub fn local_travel_time(
         ) => 5263,
         (
             [true],
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
+            SpotId::Amagi__West_Lake__West_Shore,
+        ) => 5263,
+        (
+            [true],
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+            SpotId::Amagi__West_Lake__West_15,
+        ) => 2982,
+        (
+            [true],
             SpotId::Amagi__West_Lake__West_15,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
         ) => 2982,
@@ -7552,6 +7582,16 @@ pub fn local_travel_time(
         ([true], SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => 4605,
         ([true], SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => 1403,
         ([true], SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => 1403,
+        (
+            [true],
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+        ) => 1799,
+        (
+            [true],
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+        ) => 1403,
         (
             [true],
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
@@ -10540,6 +10580,10 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Amagi__West_Lake__West_Shore, SpotId::Amagi__West_Lake__Surface_Wall_Right) => {
             true
         }
+        (SpotId::Amagi__West_Lake__Surface_Wall_Right, SpotId::Amagi__West_Lake__West_Shore) => {
+            true
+        }
+        (SpotId::Amagi__West_Lake__Surface_Wall_Left, SpotId::Amagi__West_Lake__West_15) => true,
         (SpotId::Amagi__West_Lake__West_15, SpotId::Amagi__West_Lake__Surface_Wall_Left) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Shed_Entry) => true,
         (SpotId::Antarctica__West__Helipad, SpotId::Antarctica__West__Boxes) => true,
@@ -11569,6 +11613,14 @@ pub fn are_spots_connected(src: SpotId, dest: SpotId) -> bool {
         (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__West_6) => true,
         (SpotId::Giguna_Breach__Ascent__Top, SpotId::Giguna_Breach__Ascent__Bottom) => true,
         (SpotId::Giguna_Breach__Ascent__West_6, SpotId::Giguna_Breach__Ascent__Top) => true,
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+        ) => true,
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+        ) => true,
         (
             SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             SpotId::Giguna__Giguna_Northeast__East_9,
@@ -14914,6 +14966,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
+            SpotId::Amagi__West_Lake__West_Shore,
+            5263,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Surface_Wall_Right,
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             526,
         ),
@@ -14926,6 +14983,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
             SpotId::Amagi__West_Lake__Surface_Wall_Right,
             526,
+        ),
+        (
+            SpotId::Amagi__West_Lake__Surface_Wall_Left,
+            SpotId::Amagi__West_Lake__West_15,
+            2982,
         ),
         (
             SpotId::Amagi__West_Lake__Surface_Wall_Left,
@@ -20144,6 +20206,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            1403,
+        ),
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -20151,6 +20218,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             SpotId::Giguna_Breach__Pink_Clouds__Quick_Entry,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
+        ),
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            1403,
         ),
         (
             SpotId::Giguna_Breach__Pink_Clouds__Corner,
@@ -23074,6 +23146,11 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__Platform_Stop,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            3600,
+        ),
+        (
+            SpotId::Giguna__Clouds__Platform_Stop,
             SpotId::Giguna__Clouds__Pull_Right,
             1199,
         ),
@@ -23099,7 +23176,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__Southwest,
+            SpotId::Irikar__Hub__Northwest,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Southwest,
             SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Straight_Down,
+            SpotId::Irikar__Hub__North_Above_Portal,
             1000,
         ),
         (
@@ -23109,7 +23196,17 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
         ),
         (
             SpotId::Giguna__Clouds__Pull_Right,
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Pull_Right,
             SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Giguna__Clouds__Southeast,
+            SpotId::Irikar__Hub__Northeast_Above_Bowl,
             1000,
         ),
         (
@@ -26953,7 +27050,22 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
             1000,
         ),
         (
-            SpotId::Irikar__Hub__North_Left,
+            SpotId::Irikar__Hub__Northwest,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__North_Above_Portal,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Northwest_Above_Bowl,
+            SpotId::Menu__Upgrade_Menu__Physiology,
+            1000,
+        ),
+        (
+            SpotId::Irikar__Hub__Northeast_Above_Bowl,
             SpotId::Menu__Upgrade_Menu__Physiology,
             1000,
         ),
@@ -27495,6 +27607,12 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         ) => None,
         (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Item) => {
             Some(675)
+        }
+        (SpotId::Amagi__West_Lake__Surface_Wall_Left, SpotId::Amagi__West_Lake__West_15) => {
+            Some(2982)
+        }
+        (SpotId::Amagi__West_Lake__Surface_Wall_Right, SpotId::Amagi__West_Lake__West_Shore) => {
+            Some(5263)
         }
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => Some(3153),
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__Left_of_Enemy) => {
@@ -28686,6 +28804,14 @@ pub fn free_movement(sp1: SpotId, sp2: SpotId) -> Option<u32> {
         (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => {
             Some(2105)
         }
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+        ) => Some(1403),
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+        ) => Some(1799),
         (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => {
             Some(1403)
         }
@@ -31124,6 +31250,12 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Amagi__West_Lake__Stronghold_Top, SpotId::Amagi__West_Lake__Stronghold_Item) => {
             (Some(675), vec![([true], 649)])
         }
+        (SpotId::Amagi__West_Lake__Surface_Wall_Left, SpotId::Amagi__West_Lake__West_15) => {
+            (Some(2982), vec![])
+        }
+        (SpotId::Amagi__West_Lake__Surface_Wall_Right, SpotId::Amagi__West_Lake__West_Shore) => {
+            (Some(5263), vec![])
+        }
         (SpotId::Amagi__West_Lake__Tentacle_Gap, SpotId::Amagi__West_Lake__East_20) => {
             (Some(3153), vec![([true], 2456)])
         }
@@ -32736,6 +32868,14 @@ pub fn best_movements(sp1: SpotId, sp2: SpotId) -> (Option<u32>, Vec<(MovementSt
         (SpotId::Giguna_Breach__Peak__Upper_West, SpotId::Giguna_Breach__Peak__Upper_East) => {
             (Some(2105), vec![])
         }
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+        ) => (Some(1403), vec![]),
+        (
+            SpotId::Giguna_Breach__Pink_Clouds__Normal_Entry,
+            SpotId::Giguna_Breach__Pink_Clouds__Corner,
+        ) => (Some(1799), vec![]),
         (SpotId::Giguna_Breach__Robopede__Center, SpotId::Giguna_Breach__Robopede__North) => {
             (Some(1403), vec![])
         }
